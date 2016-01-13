@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Abp.Zero.NHibernate</name>
+    </assembly>
+    <members>
+        <member name="T:Abp.Zero.FluentMigrator.AbpZeroFluentMigratorExtensions">
+            <summary>
+            This class is an extension for migration system to make easier to some common tasks.
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.FluentMigrator.AbpZeroFluentMigratorExtensions.WithFullAuditColumns(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds full auditing columns to a table. See <see cref="T:Abp.Domain.Entities.Auditing.IAudited"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.FluentMigrator.AbpZeroFluentMigratorExtensions.WithAuditColumns(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds auditing columns to a table. See <see cref="T:Abp.Domain.Entities.Auditing.IAudited"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.FluentMigrator.AbpZeroFluentMigratorExtensions.WithCreationAuditColumns(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds creation auditing columns to a table. See <see cref="T:Abp.Domain.Entities.Auditing.ICreationAudited"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.FluentMigrator.AbpZeroFluentMigratorExtensions.WithModificationAuditColumns(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds modification auditing columns to a table. See <see cref="T:Abp.Domain.Entities.Auditing.IModificationAudited"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.FluentMigrator.AbpZeroFluentMigratorExtensions.WithDeletionAuditColumns(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds deletion auditing columns to a table. See <see cref="T:Abp.Domain.Entities.Auditing.IModificationAudited"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.FluentMigrator.AbpZeroFluentMigratorExtensions.WithTenantIdAsRequired(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds TenantId column to a table as not nullable. See <see cref="T:Abp.MultiTenancy.AbpTenant`2"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.FluentMigrator.AbpZeroFluentMigratorExtensions.WithTenantIdAsNullable(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds TenantId column to a table as nullable. See <see cref="T:Abp.MultiTenancy.AbpTenant`2"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Zero.NHibernate.EntityMappings.RoleMap`3">
+            <summary>
+            Base class for role mapping.
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.NHibernate.EntityMappings.RoleMap`3.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="T:Abp.Zero.NHibernate.EntityMappings.TenantMap`2">
+            <summary>
+            Base class to map classes derived from <see cref="T:Abp.MultiTenancy.AbpTenant`2"/>
+            </summary>
+            <typeparam name="TTenant">Tenant type</typeparam>
+            <typeparam name="TUser">User type</typeparam>
+        </member>
+        <member name="M:Abp.Zero.NHibernate.EntityMappings.TenantMap`2.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="T:Abp.Zero.NHibernate.AbpZeroNHibernateModule">
+            <summary>
+            Startup class for ABP Zero NHibernate module.
+            </summary>
+        </member>
+    </members>
+</doc>

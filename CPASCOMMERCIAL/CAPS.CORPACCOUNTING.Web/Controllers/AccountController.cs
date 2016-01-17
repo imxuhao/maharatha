@@ -32,7 +32,6 @@ using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Security;
-using CAPS.CORPACCOUNTING.Web.Auth;
 using CAPS.CORPACCOUNTING.Web.Controllers.Results;
 using CAPS.CORPACCOUNTING.Web.Models.Account;
 using CAPS.CORPACCOUNTING.Web.MultiTenancy;

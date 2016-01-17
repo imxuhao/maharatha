@@ -1,8 +1,7 @@
 namespace CAPS.CORPACCOUNTING.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class ModuleZeroUpgrade_0_6_9 : DbMigration
     {
         public override void Up()

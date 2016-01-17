@@ -7,8 +7,6 @@ using Abp.Net.Mail;
 using Abp.Zero;
 using Abp.Zero.Configuration;
 using Abp.Zero.Ldap;
-using Abp.Zero.Ldap.Configuration;
-using CAPS.CORPACCOUNTING.Authorization.Ldap;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Features;

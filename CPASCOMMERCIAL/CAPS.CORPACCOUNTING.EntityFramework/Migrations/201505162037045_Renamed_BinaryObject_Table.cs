@@ -1,8 +1,7 @@
 namespace CAPS.CORPACCOUNTING.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Renamed_BinaryObject_Table : DbMigration
     {
         public override void Up()

@@ -187,6 +187,10 @@
     <Compile Include="Localization\LanguageAppService.cs" />
     <Compile Include="Localization\Dto\SetDefaultLanguageInput.cs" />
     <Compile Include="Localization\Dto\UpdateLanguageTextInput.cs" />
+    <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\Dto\CoaUnitDto.cs" />
+    <Compile Include="Masters\Dto\CreateCoaUnitInput.cs" />
+    <Compile Include="Masters\ICoaUnitAppService.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantsInput.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantFeaturesForEditOutput.cs" />

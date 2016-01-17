@@ -1,8 +1,7 @@
 namespace CAPS.CORPACCOUNTING.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Create_Indexes_For_OrganizationUnit_Tables : DbMigration
     {
         public override void Up()

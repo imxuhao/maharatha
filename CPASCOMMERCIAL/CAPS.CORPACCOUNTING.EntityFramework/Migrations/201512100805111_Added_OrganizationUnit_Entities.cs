@@ -1,10 +1,8 @@
 namespace CAPS.CORPACCOUNTING.Migrations
 {
-    using System;
     using System.Collections.Generic;
-    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Added_OrganizationUnit_Entities : DbMigration
     {
         public override void Up()

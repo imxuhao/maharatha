@@ -2,7 +2,7 @@
 
 namespace CAPS.CORPACCOUNTING
 {
-    static class ConnectionStrings
+    internal static class ConnectionStrings
     {
         static readonly Dictionary<int, string> Dict = new Dictionary<int, string>
     {

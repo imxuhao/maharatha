@@ -69,6 +69,43 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         }
 
+        public async Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input)
+        {
+
+            var coaUnit = await _coaUnitRepository.GetAsync(input.CoaId);
+
+            
+
+            #region Setting the values to be updated
+
+            coaUnit.Caption = input.Caption;
+            coaUnit.ChartofAccountsType = input.ChartofAccountsType;
+            coaUnit.Description = input.Description;
+            coaUnit.DisplaySequence = input.DisplaySequence;
+            coaUnit.IsActive = input.IsActive;
+            coaUnit.IsApproved = input.IsApproved;
+            coaUnit.IsPrivate = input.IsPrivate;
+
+            #endregion
+
+
+            await _coaunitManager.UpdateAsync(coaUnit);
+
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            _unitOfWorkManager.Current.Completed += (sender, args) => {/*Do Something when the Chart of Account is Added*/};
+
+            EventBus.Register<EntityChangedEventData<CoaUnit>>(
+                eventData =>
+                {
+                    // http://www.aspnetboilerplate.com/Pages/Documents/EventBus-Domain-Events#DocTriggerEvents
+                    //Do something when COA is added
+                });
+
+            return coaUnit.MapTo<CoaUnitDto>();
+
+        }
+
 
     }
 }

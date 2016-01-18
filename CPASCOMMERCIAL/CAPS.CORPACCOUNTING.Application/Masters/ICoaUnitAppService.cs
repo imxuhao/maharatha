@@ -10,5 +10,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input);
 
         Task<ListResultOutput<CoaUnitDto>> GetCoaUnits();
+
+        Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input);
     }
 }

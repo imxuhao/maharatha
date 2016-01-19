@@ -107,7 +107,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionStrings.cs" />
     <Compile Include="EntityFramework\CORPACCOUNTINGDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\CORPACCOUNTINGRepositoryBase.cs" />
     <Compile Include="Migrations\201501041229232_InitialCreate.cs" />

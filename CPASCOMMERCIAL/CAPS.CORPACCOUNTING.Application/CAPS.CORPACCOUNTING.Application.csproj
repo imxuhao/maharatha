@@ -190,6 +190,7 @@
     <Compile Include="Masters\CoaUnitAppService.cs" />
     <Compile Include="Masters\Dto\CoaUnitDto.cs" />
     <Compile Include="Masters\Dto\CreateCoaUnitInput.cs" />
+    <Compile Include="Masters\Dto\UpdateCoaUnitInput.cs" />
     <Compile Include="Masters\ICoaUnitAppService.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantsInput.cs" />

@@ -73,6 +73,17 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoaUnit"/> class  with no parameter.
+        /// </summary>
+        public CoaUnit()
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoaUnit"/> class.
+        /// </summary>
         public CoaUnit(string caption, ChartofAccountsType chartofaccounttype = ChartofAccountsType.CORPORATE, string desc = null, int? displaysequence = null, bool isactive = true, bool isapproved = false,
            bool isprivate = false)
         {

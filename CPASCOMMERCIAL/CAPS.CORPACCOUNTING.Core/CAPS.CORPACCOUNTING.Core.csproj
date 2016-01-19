@@ -123,6 +123,7 @@
     <Compile Include="Features\AppFeatures.cs" />
     <Compile Include="IAppFolders.cs" />
     <Compile Include="Localization\CultureHelper.cs" />
+    <Compile Include="Masters\AccountUnit.cs" />
     <Compile Include="Masters\CoaUnit.cs" />
     <Compile Include="Masters\CoaUnitManager.cs" />
     <Compile Include="MultiTenancy\Demo\MyRandomHelper.cs" />

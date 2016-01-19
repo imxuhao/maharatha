@@ -209,4 +209,4 @@ D:\SVN\Cha-Ching\Trunk\CPASCOMMERCIAL\CAPS.CORPACCOUNTING.EntityFramework\obj\De
 D:\SVN\Cha-Ching\Trunk\CPASCOMMERCIAL\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.dll
 D:\SVN\Cha-Ching\Trunk\CPASCOMMERCIAL\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.pdb
 D:\SVN\Cha-Ching\Trunk\CPASCOMMERCIAL\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_AbpAuditLogs.resources
-D:\SVN\Cha-Ching\Trunk\CPASCOMMERCIAL\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntitySpecificMigration.Add_COA_Table.resources
+D:\SVN\Cha-Ching\Trunk\CPASCOMMERCIAL\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_COA_Table.resources

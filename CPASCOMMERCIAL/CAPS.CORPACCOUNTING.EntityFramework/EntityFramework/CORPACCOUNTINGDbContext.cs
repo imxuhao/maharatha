@@ -5,6 +5,7 @@ using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Storage;
+using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -13,6 +14,10 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /* Define an IDbSet for each entity of the application */
 
         public virtual IDbSet<BinaryObject> BinaryObjects { get; set; }
+
+        public virtual IDbSet<CoaUnit> CoaUnit { get; set; }
+
+       // public virtual IDbSet<AccountUnit> AccountUnit { get; set; }
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 

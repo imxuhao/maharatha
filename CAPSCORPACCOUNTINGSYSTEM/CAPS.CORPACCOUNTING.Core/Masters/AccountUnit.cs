@@ -335,7 +335,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         }
 
         public AccountUnit(string accountNumber, string balanceSheetName, string caption, string cashFlowName,
-            int chartOfAccountId, string code, string description, int? displaySequence, long id, bool isActive,
+            int chartOfAccountId,  string description, int? displaySequence, bool isActive,
             bool isApproved, bool isBalanceSheet, bool isCashFlow, bool isDescriptionLocked, bool isDocControlled,
             bool isElimination, bool isEnterable, bool isProfitLoss, bool isRollupAccount, bool isRollupOverridable,
             bool isSummaryAccount, bool isUs1120BalanceSheet, bool isUs1120IncomeStmt, int? linkAccountId,

@@ -40,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         ///     Initializes a new instance of the <see cref="CoaUnit" /> class.
         /// </summary>
         public CoaUnit(string caption, ChartofAccountsType chartofaccounttype = ChartofAccountsType.Corporate,
-            string desc = null, int? displaysequence = null, bool isactive = true, bool isapproved = false,
+            string desc = null, int? displaysequence = null,long? organizationid=null, bool isactive = true, bool isapproved = false,
             bool isprivate = false)
         {
             Caption = caption;
@@ -49,6 +49,8 @@ namespace CAPS.CORPACCOUNTING.Masters
             IsActive = isactive;
             IsApproved = isapproved;
             IsPrivate = isprivate;
+            OrganizationUnitId = organizationid;
+            Description = desc;
         }
 
         #region Class Property Declarations

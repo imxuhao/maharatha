@@ -1,27 +1,29 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
-
+﻿using System.ComponentModel.DataAnnotations;
+using Abp.Application.Services.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
-    [AutoMapFrom(typeof(AccountUnit))]
-    public class AccountUnitDto :AuditedEntityDto<long>
+    public class UpdateAccountUnitInput : IInputDto
     {
-
+        public long Id { get; set; }
         public long? ParentId { get; set; }
 
+        [Required]
+        [StringLength(AccountUnit.MaxAccountSize)]
+        
         public string AccountNumber { get; set; }
 
-        public long AccountId { get; set; }
-
-        /// <summary>Gets or sets the Caption field. </summary>
+        [Required]
+        [MaxLength(AccountUnit.MaxDisplayNameLength)]
         public string Caption { get; set; }
         /// <summary>Gets or sets the ChartOfAccountId field. </summary>
 
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter valid ChartOfAccountId")]
         public int ChartOfAccountId { get; set; }
         /// <summary>Gets or sets the Description field. </summary>
 
 
+        [MaxLength(AccountUnit.MaxDesc)]
         public string Description { get; set; }
         /// <summary>Gets or sets the DisplaySequence field. </summary>
 
@@ -51,7 +53,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool IsRollupOverridable { get; set; }
         /// <summary>Gets or sets the LinkAccountId field. </summary>
 
-        public int? LinkAccountId { get; set; }
+        public int? LinkAccountId { get; set; } 
         /// <summary>Gets or sets the LinkJobId field. </summary>
 
         public int? LinkJobId { get; set; }
@@ -96,8 +98,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string ProfitLossName { get; set; }
         public virtual bool IsActive { get; set; } = true;
         /// <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
+        [MaxLength(AccountUnit.MaxDisplayNameLength)]
         public string Us1120IncomeStmtName { get; set; }
         /// <summary>Gets or sets the OrganizationId field. </summary>
         public long? OrganizationId { get; set; }
+
     }
 }

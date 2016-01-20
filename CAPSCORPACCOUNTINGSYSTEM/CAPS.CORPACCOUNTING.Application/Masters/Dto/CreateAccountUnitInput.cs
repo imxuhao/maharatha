@@ -16,8 +16,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [MaxLength(AccountUnit.MaxDisplayNameLength)]
         public string Caption { get; set; }
         /// <summary>Gets or sets the ChartOfAccountId field. </summary>
-
-        [Required]
+      
+        [Range(1,int.MaxValue,ErrorMessage = "Please enter valid ChartOfAccountId")]
         public int ChartOfAccountId { get; set; }
         /// <summary>Gets or sets the Description field. </summary>
 
@@ -26,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string Description { get; set; }
         /// <summary>Gets or sets the DisplaySequence field. </summary>
 
-        public virtual int DisplaySequence { get; set; }
+        public virtual int? DisplaySequence { get; set; }
         /// <summary>Gets or sets the IsAccountRevalued field. </summary>
 
 
@@ -67,10 +67,39 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int? TypeOfAccountId { get; set; }
         /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
 
+        public bool IsDocControlled { get; set; }
+        /// <summary>Gets or sets the IsDocControlled field. </summary>
+        public bool IsSummaryAccount { get; set; }
+        /// <summary>Gets or sets the IsSummaryAccount field. </summary>
 
+        public bool IsBalanceSheet { get; set; }
+        /// <summary>Gets or sets the IsBalanceSheet field. </summary>
+
+        public bool IsUs1120BalanceSheet { get; set; }
+        /// <summary>Gets or sets the IsUs1120BalanceSheet field. </summary>
+
+        public bool IsProfitLoss { get; set; }
+        /// <summary>Gets or sets the IsProfitLoss field. </summary>
+
+        public bool IsUs1120IncomeStmt { get; set; }
+        /// <summary>Gets or sets the IsUs1120IncomeStmt field. </summary>
+
+        public bool IsCashFlow { get; set; }
+        /// <summary>Gets or sets the CashFlowName field. </summary>
+        public string CashFlowName { get; set; }
+
+        /// <summary>Gets or sets the Us1120BalanceSheetName field. </summary>
+        public string Us1120BalanceSheetName { get; set; }
+
+        /// <summary>Gets or sets the BalanceSheetName field. </summary>
+        public string BalanceSheetName { get; set; }
+        /// <summary>Gets or sets the ProfitLossName field. </summary>
+        public string ProfitLossName { get; set; }
         public virtual bool IsActive { get; set; } = true;
-
-
-
+        /// <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
+        [MaxLength(AccountUnit.MaxDisplayNameLength)]
+        public string Us1120IncomeStmtName { get; set; }
+        /// <summary>Gets or sets the OrganizationId field. </summary>
+        public long? OrganizationId { get; set; }
     }
 }

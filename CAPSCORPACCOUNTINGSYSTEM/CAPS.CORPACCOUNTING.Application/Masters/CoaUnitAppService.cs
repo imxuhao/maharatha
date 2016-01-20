@@ -47,7 +47,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
         {
-            var coaUnit = new CoaUnit(input.Caption, input.ChartofAccountsType);
+            var coaUnit = new CoaUnit( caption:input.Caption,chartofaccounttype: input.ChartofAccountsType,organizationid:input.OrganizationId,desc:input.Description,
+                displaysequence:input.DisplaySequence,isactive:input.IsActive,isapproved:input.IsApproved,isprivate:input.IsPrivate);
             await _coaunitManager.CreateAsync(coaUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -83,7 +84,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             coaUnit.IsActive = input.IsActive;
             coaUnit.IsApproved = input.IsApproved;
             coaUnit.IsPrivate = input.IsPrivate;
-
+            coaUnit.OrganizationUnitId = input.OrganizationId;
             #endregion
 
             await _coaunitManager.UpdateAsync(coaUnit);
@@ -103,6 +104,10 @@ namespace CAPS.CORPACCOUNTING.Masters
                 });
 
             return coaUnit.MapTo<CoaUnitDto>();
+        }
+        public async Task DeleteOrganizationUnit(IdInput input)
+        {
+            await _coaunitManager.DeleteAsync(input.Id);
         }
     }
 }

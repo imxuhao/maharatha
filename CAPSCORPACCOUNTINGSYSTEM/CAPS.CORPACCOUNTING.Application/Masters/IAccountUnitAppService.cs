@@ -11,6 +11,8 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         Task<AccountUnitDto> CreateAccountUnit(CreateAccountUnitInput input);
 
-        
+        Task<AccountUnitDto> UpdateAccountUnit(UpdateAccountUnitInput input);
+        Task<ListResultOutput<AccountUnitDto>> GetAccountUnitsByCoaId(IdInput coaId);
+        Task DeleteAccountUnit(IdInput<long> input);
     }
 }

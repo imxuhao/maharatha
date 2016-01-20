@@ -7,5 +7,32 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     public class CoaUnitDto : AuditedEntityDto
     {
         public int CoaId { get; set; }
+
+        /// <summary>Gets or sets the Caption field. </summary>
+        public string Caption { get; set; }
+
+        /// <summary>Gets or sets the Description field. </summary>
+        public string Description { get; set; }
+
+        /// <summary>Gets or sets the COA Type. </summary>
+        public ChartofAccountsType ChartofAccountsType { get; set; }
+
+        /// <summary>Gets or sets the Display Sequence. </summary>
+        public int? DisplaySequence { get; set; }
+
+        /// <summary>Gets or sets the IsApproved field. </summary>
+        public bool IsApproved { get; set; }
+
+        /// <summary>Gets or sets the IsPrivate field. </summary>
+        public bool IsPrivate { get; set; }
+
+        /// <summary>Gets or sets the TenantId field. </summary>
+        public int TenantId { get; set; }
+
+        /// <summary>Gets or sets the CompanyId field. </summary>
+        public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the IsActive field. </summary>
+        public bool IsActive { get; set; }
     }
 }

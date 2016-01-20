@@ -1,0 +1,108 @@
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
+using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
+using Abp.Events.Bus;
+using Abp.Events.Bus.Entities;
+using CAPS.CORPACCOUNTING.Masters.Dto;
+
+namespace CAPS.CORPACCOUNTING.Masters
+{
+    public class CoaUnitAppService : CORPACCOUNTINGServiceBase, ICoaUnitAppService
+    {
+        private readonly CoaUnitManager _coaunitManager;
+        private readonly IRepository<CoaUnit> _coaUnitRepository;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
+
+        public CoaUnitAppService(CoaUnitManager coaunitManager, IRepository<CoaUnit> coaUnitRepository,
+            IUnitOfWorkManager unitOfWorkManager)
+        {
+            _coaunitManager = coaunitManager;
+            _coaUnitRepository = coaUnitRepository;
+            _unitOfWorkManager = unitOfWorkManager;
+        }
+
+        public IEventBus EventBus { get; set; }
+
+        public async Task<ListResultOutput<CoaUnitDto>> GetCoaUnits()
+        {
+            var query =
+                from au in _coaUnitRepository.GetAll()
+                select new {au, memberCount = au};
+
+            var items = await query.ToListAsync();
+
+            return new ListResultOutput<CoaUnitDto>(
+                items.Select(item =>
+                {
+                    var dto = item.au.MapTo<CoaUnitDto>();
+                    //dto.MemberCount = item.memberCount;
+                    return dto;
+                }).ToList());
+        }
+
+        [UnitOfWork]
+        public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
+        {
+            var coaUnit = new CoaUnit(input.Caption, input.ChartofAccountsType);
+            await _coaunitManager.CreateAsync(coaUnit);
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            #region Example to show the usage of Event Bus as well Unit of Work Completion
+
+            _unitOfWorkManager.Current.Completed += (sender, args) =>
+            {
+/*Do Something when the Chart of Account is Added*/
+            };
+
+            EventBus.Register<EntityChangedEventData<CoaUnit>>(
+                eventData =>
+                {
+                    // http://www.aspnetboilerplate.com/Pages/Documents/EventBus-Domain-Events#DocTriggerEvents
+                    //Do something when COA is added
+                });
+
+            #endregion
+
+            return coaUnit.MapTo<CoaUnitDto>();
+        }
+
+        public async Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input)
+        {
+            var coaUnit = await _coaUnitRepository.GetAsync(input.CoaId);
+
+            #region Setting the values to be updated
+
+            coaUnit.Caption = input.Caption;
+            coaUnit.ChartofAccountsType = input.ChartofAccountsType;
+            coaUnit.Description = input.Description;
+            coaUnit.DisplaySequence = input.DisplaySequence;
+            coaUnit.IsActive = input.IsActive;
+            coaUnit.IsApproved = input.IsApproved;
+            coaUnit.IsPrivate = input.IsPrivate;
+
+            #endregion
+
+            await _coaunitManager.UpdateAsync(coaUnit);
+
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            _unitOfWorkManager.Current.Completed += (sender, args) =>
+            {
+/*Do Something when the Chart of Account is Added*/
+            };
+
+            EventBus.Register<EntityChangedEventData<CoaUnit>>(
+                eventData =>
+                {
+                    // http://www.aspnetboilerplate.com/Pages/Documents/EventBus-Domain-Events#DocTriggerEvents
+                    //Do something when COA is added
+                });
+
+            return coaUnit.MapTo<CoaUnitDto>();
+        }
+    }
+}

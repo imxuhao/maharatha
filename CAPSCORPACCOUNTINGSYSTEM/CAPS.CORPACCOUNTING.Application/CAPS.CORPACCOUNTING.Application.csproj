@@ -192,6 +192,7 @@
     <Compile Include="Masters\CoaUnitAppService.cs" />
     <Compile Include="Masters\Dto\AccountUnitDto.cs" />
     <Compile Include="Masters\Dto\CoaUnitDto.cs" />
+    <Compile Include="Masters\Dto\UpdateAccountUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateAccountUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateCoaUnitInput.cs" />
     <Compile Include="Masters\Dto\UpdateCoaUnitInput.cs" />

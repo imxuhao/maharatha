@@ -127,6 +127,8 @@
     <Compile Include="Masters\AccountUnitManager.cs" />
     <Compile Include="Masters\COAUnit.cs" />
     <Compile Include="Masters\CoaUnitManager.cs" />
+    <Compile Include="Masters\VendorPaymentTermUnit.cs" />
+    <Compile Include="Masters\VendorPaymentTermUnitManager.cs" />
     <Compile Include="MultiTenancy\Demo\MyRandomHelper.cs" />
     <Compile Include="MultiTenancy\Demo\RandomUserGenerator.cs" />
     <Compile Include="MultiTenancy\Tenant.cs" />

@@ -105,7 +105,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             return coaUnit.MapTo<CoaUnitDto>();
         }
-        public async Task DeleteOrganizationUnit(IdInput input)
+        public async Task DeleteCoaUnit(IdInput input)
         {
             await _coaunitManager.DeleteAsync(input.Id);
         }

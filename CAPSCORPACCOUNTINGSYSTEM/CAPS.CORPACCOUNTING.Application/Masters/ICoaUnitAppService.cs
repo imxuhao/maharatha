@@ -12,6 +12,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         Task<ListResultOutput<CoaUnitDto>> GetCoaUnits();
 
         Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input);
-        Task DeleteOrganizationUnit(IdInput input);
+        Task DeleteCoaUnit(IdInput input);
     }
 }

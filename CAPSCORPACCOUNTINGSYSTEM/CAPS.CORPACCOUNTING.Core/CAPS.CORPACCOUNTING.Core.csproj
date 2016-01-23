@@ -125,9 +125,11 @@
     <Compile Include="Localization\CultureHelper.cs" />
     <Compile Include="Masters\AccountUnit.cs" />
     <Compile Include="Masters\AccountUnitManager.cs" />
+    <Compile Include="Masters\CustomerPaymentTermUnit.cs" />
     <Compile Include="Masters\COAUnit.cs" />
     <Compile Include="Masters\CoaUnitManager.cs" />
     <Compile Include="Masters\VendorPaymentTermUnit.cs" />
+    <Compile Include="Masters\CustomerPaymentTermUnitManager.cs" />
     <Compile Include="Masters\VendorPaymentTermUnitManager.cs" />
     <Compile Include="MultiTenancy\Demo\MyRandomHelper.cs" />
     <Compile Include="MultiTenancy\Demo\RandomUserGenerator.cs" />

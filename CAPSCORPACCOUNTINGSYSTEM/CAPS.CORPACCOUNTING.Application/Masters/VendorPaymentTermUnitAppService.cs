@@ -77,7 +77,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             #region Setting the values to be updated
 
-            vendorPaymentTermUnit.Description = input.Description.Replace(" ", "").Trim();
+            vendorPaymentTermUnit.Description = input.Description;
             vendorPaymentTermUnit.DueDays = input.DueDays;
             vendorPaymentTermUnit.DiscountDays = input.DiscountDays;
             vendorPaymentTermUnit.OrganizationUnitId = input.OrganizationUnitId;

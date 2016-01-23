@@ -16,7 +16,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         #region Class Property Declarations
 
         /// <summary>Overriding the ID column with PaymentTermsID</summary>
-        [Column("PaymentTermsID")]
+        [Column("PaymentTermsId")]
         public override int Id { get; set; }
 
         /// <summary>Gets or sets the Description</summary>

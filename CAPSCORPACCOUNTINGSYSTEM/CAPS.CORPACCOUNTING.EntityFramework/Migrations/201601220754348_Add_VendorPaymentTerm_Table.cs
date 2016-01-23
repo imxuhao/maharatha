@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
                 "dbo.Caps_VendorPaymentTerms",
                 c => new
                     {
-                        PaymentTermsID = c.Int(nullable: false, identity: true),
+                        PaymentTermsId = c.Int(nullable: false, identity: true),
                         Description = c.String(nullable: false, maxLength: 50),
                         DueDays = c.Int(nullable: false),
                         DiscountDays = c.Int(),
@@ -33,7 +33,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
                     { "DynamicFilter_VendorPaymentTermUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                     { "DynamicFilter_VendorPaymentTermUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                 })
-                .PrimaryKey(t => t.PaymentTermsID);
+                .PrimaryKey(t => t.PaymentTermsId);
             
         }
         

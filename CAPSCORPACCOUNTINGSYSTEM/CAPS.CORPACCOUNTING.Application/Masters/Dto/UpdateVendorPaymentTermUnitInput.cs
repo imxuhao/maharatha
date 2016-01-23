@@ -11,6 +11,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int VendorPaymentTermId { get; set; }
         /// <summary>Gets or sets the Description</summary>
         [Required]
+        [StringLength(VendorPaymentTermUnit.MaxDesc)]
         public string Description { get; set; }
         /// <summary>Gets or sets the DueDays. </summary>
         [Range(1, Int32.MaxValue, ErrorMessage = "Please enter valid DueDays")]

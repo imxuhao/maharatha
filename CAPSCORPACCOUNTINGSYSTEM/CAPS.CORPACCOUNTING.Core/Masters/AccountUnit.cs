@@ -375,18 +375,6 @@ namespace CAPS.CORPACCOUNTING.Masters
             Us1120IncomeStmtName = us1120IncomeStmtName;
             OrganizationUnitId = organizationunitid;
         }
-
-        public AccountUnit(string accountNumber, string caption, int chartOfAccountId, long? parentId, int organizationunitid)
-        {
-            AccountNumber = accountNumber;
-            Caption = caption;
-            ChartOfAccountId = chartOfAccountId;
-            ParentId = parentId;
-            OrganizationUnitId = organizationunitid;
-        }
-
-
-
         #endregion
     }
 }

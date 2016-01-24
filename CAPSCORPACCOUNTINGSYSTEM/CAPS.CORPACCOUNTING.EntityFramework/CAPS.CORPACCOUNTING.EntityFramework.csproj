@@ -241,6 +241,18 @@
     <Compile Include="Migrations\201601220754348_Add_VendorPaymentTerm_Table.Designer.cs">
       <DependentUpon>201601220754348_Add_VendorPaymentTerm_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601231451451_Add_CustomerPaymentTerm_Table.cs" />
+    <Compile Include="Migrations\201601231451451_Add_CustomerPaymentTerm_Table.Designer.cs">
+      <DependentUpon>201601231451451_Add_CustomerPaymentTerm_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601232008452_Add_SalesRep_Table.cs" />
+    <Compile Include="Migrations\201601232008452_Add_SalesRep_Table.Designer.cs">
+      <DependentUpon>201601232008452_Add_SalesRep_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601232010484_Add_Customer_Table.cs" />
+    <Compile Include="Migrations\201601232010484_Add_Customer_Table.Designer.cs">
+      <DependentUpon>201601232010484_Add_Customer_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -353,6 +365,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601220754348_Add_VendorPaymentTerm_Table.resx">
       <DependentUpon>201601220754348_Add_VendorPaymentTerm_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601231451451_Add_CustomerPaymentTerm_Table.resx">
+      <DependentUpon>201601231451451_Add_CustomerPaymentTerm_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601232008452_Add_SalesRep_Table.resx">
+      <DependentUpon>201601232008452_Add_SalesRep_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601232010484_Add_Customer_Table.resx">
+      <DependentUpon>201601232010484_Add_Customer_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

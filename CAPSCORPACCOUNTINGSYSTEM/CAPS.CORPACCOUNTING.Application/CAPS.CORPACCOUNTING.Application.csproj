@@ -190,8 +190,17 @@
     <Compile Include="Localization\Dto\UpdateLanguageTextInput.cs" />
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\Dto\UpdateCustomerUnitInput.cs" />
+    <Compile Include="Masters\Dto\CreateCustomerUnitInput.cs" />
+    <Compile Include="Masters\Dto\CustomerUnitDto.cs" />
+    <Compile Include="Masters\ICustomerUnitAppService.cs" />
+    <Compile Include="Masters\CustomerUnitAppService.cs" />
+    <Compile Include="Masters\SalesRepUnitAppService.cs" />
     <Compile Include="Masters\Dto\AccountUnitDto.cs" />
     <Compile Include="Masters\Dto\CoaUnitDto.cs" />
+    <Compile Include="Masters\Dto\SalesRepUnitDto.cs" />
+    <Compile Include="Masters\Dto\UpdateSalesRepUnitInput.cs" />
+    <Compile Include="Masters\Dto\CreateSalesRepUnitInput.cs" />
     <Compile Include="Masters\Dto\UpdateCustomerPaymentTermUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateCustomerPaymentTermUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateVendorPaymentTermUnitInput.cs" />
@@ -204,6 +213,7 @@
     <Compile Include="Masters\Dto\VendorPaymentTermUnitDto.cs" />
     <Compile Include="Masters\IAccountUnitAppService.cs" />
     <Compile Include="Masters\ICoaUnitAppService.cs" />
+    <Compile Include="Masters\ISalesRepUnitAppService.cs" />
     <Compile Include="Masters\ICustomerPaymentTermUnitAppService.cs" />
     <Compile Include="Masters\IVendorPaymentTermUnitAppService.cs" />
     <Compile Include="Masters\CustomerPaymentTermUnitAppService.cs" />

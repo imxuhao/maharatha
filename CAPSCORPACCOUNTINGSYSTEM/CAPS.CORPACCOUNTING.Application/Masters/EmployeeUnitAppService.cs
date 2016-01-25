@@ -27,12 +27,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<EmployeeUnitDto> CreateEmployeeUnit(
             CreateEmployeeUnitInput input)
         {
-            var customerUnit = new EmployeeUnit(lastname:input.LastName,firstname:input.FirstName,ssntaxid:input.SSNTaxId,employeeregion:input.EmployeeRegion,federaltaxid:input.FederalTaxId,is1099:input.Is1099,isw9Onfile:input.IsW9OnFile,
+            var employeeUnit = new EmployeeUnit(lastname:input.LastName,firstname:input.FirstName,ssntaxid:input.SSNTaxId,employeeregion:input.EmployeeRegion,federaltaxid:input.FederalTaxId,is1099:input.Is1099,isw9Onfile:input.IsW9OnFile,
                 isindependantcontractor:input.IsIndependantContractor,iscorporation:input.IsCorporation,isproducer:input.IsProducer,isdirector:input.IsDirector,isdirphoto:input.IsDirPhoto,issetdesigner:input.IsSetDesigner,
                 iseditor:input.IsEditor,isartdirector:input.IsArtDirector,isactive:input.IsActive,isapproved:input.IsApproved,organizationunitid:input.OrganizationUnitId);
-            await _employeeUnitManager.CreateAsync(customerUnit);
+            await _employeeUnitManager.CreateAsync(employeeUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
-            return customerUnit.MapTo<EmployeeUnitDto>();
+            return employeeUnit.MapTo<EmployeeUnitDto>();
         }
 
         public async Task DeleteEmployeeUnit(IdInput input)
@@ -87,7 +87,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
-                /*Do Something when the Chart of salesRep is Added*/
+                /*Do Something when the Chart of employee is Added*/
             };
 
             return employeeUnit.MapTo<EmployeeUnitDto>();

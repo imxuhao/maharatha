@@ -5,6 +5,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class UpdateCustomerUnitInput : IInputDto
     {
+        /// <summary>Gets or sets the CustomerId field. </summary>
         public int CustomerId { get; set; }
         [Required]
         [StringLength(CustomerUnit.MaxName)]
@@ -23,7 +24,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>
         /// Gets or Sets CustomerPaymentTerm
         /// </summary>
-        public CustomerUnit.TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
+        public TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
         public int? CustomerPayTermsId { get; set; }
@@ -35,9 +36,6 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Is IsActivet field. </summary>
         public bool IsActive { get; set; }
-
-        /// <summary>Gets or sets the TenantId field. </summary>
-        public int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

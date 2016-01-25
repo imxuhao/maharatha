@@ -6,7 +6,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     [AutoMapFrom(typeof(CustomerUnit))]  
     public class CustomerUnitDto : AuditedEntityDto
     {
-        /// <summary>Overriding the ID column with CustomerId</summary>
+        /// <summary>Gets or sets the CustomerId</summary>
         public int CustomerId { get; set; }
         /// <summary>Gets or sets the LastName field. </summary>
         public string LastName { get; set; }
@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>
         /// Gets or Sets CustomerPaymentTerm
         /// </summary>
-        public CustomerUnit.TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
+        public TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
         public int? CustomerPayTermsId { get; set; }

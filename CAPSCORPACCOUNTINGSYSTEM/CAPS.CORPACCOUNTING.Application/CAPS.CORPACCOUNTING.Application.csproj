@@ -190,6 +190,11 @@
     <Compile Include="Localization\Dto\UpdateLanguageTextInput.cs" />
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\Dto\AddressUnitDto.cs" />
+    <Compile Include="Masters\Dto\GetAddressUnitInput.cs" />
+    <Compile Include="Masters\Dto\CreateAddressUnitInput.cs" />
+    <Compile Include="Masters\Dto\UpdateAddressUnitInput.cs" />
+    <Compile Include="Masters\AddressUnitAppService.cs" />
     <Compile Include="Masters\EmployeeUnitAppService.cs" />
     <Compile Include="Masters\Dto\CreateEmployeeUnitInput.cs" />
     <Compile Include="Masters\Dto\EmployeeUnitDto.cs" />
@@ -200,6 +205,7 @@
     <Compile Include="Masters\IEmployeeUnitAppService.cs" />
     <Compile Include="Masters\ICustomerUnitAppService.cs" />
     <Compile Include="Masters\CustomerUnitAppService.cs" />
+    <Compile Include="Masters\IAddressUnitAppService.cs" />
     <Compile Include="Masters\SalesRepUnitAppService.cs" />
     <Compile Include="Masters\Dto\AccountUnitDto.cs" />
     <Compile Include="Masters\Dto\CoaUnitDto.cs" />

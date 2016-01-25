@@ -6,8 +6,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     [AutoMapFrom(typeof(EmployeeUnit))]  
     public class EmployeeUnitDto : AuditedEntityDto
     {
-        /// <summary>Gets or sets the  CustomerId</summary>
-        public int CustomerId { get; set; }
+        /// <summary>Gets or sets the  EmployeeId</summary>
+        public int EmployeeId { get; set; }
         /// <summary>Gets or sets the LastName field. </summary>
         public string LastName { get; set; }
 

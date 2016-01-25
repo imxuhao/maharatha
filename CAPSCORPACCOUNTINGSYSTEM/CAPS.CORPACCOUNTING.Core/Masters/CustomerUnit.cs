@@ -7,25 +7,25 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    public enum TypeofPaymentMethod
+    {
+        [Display(Name = "Check")]Check = 1,
+        [Display(Name = "Wire")]Wire = 2,
+        [Display(Name = "Credit Card")]CreditCard = 3,
+        [Display(Name = "Debit Card")]DebitCard = 4,
+        [Display(Name = "PayPal")]Paypal = 5,
+        [Display(Name = "Manual Check")]ManualCheck = 6,
+        [Display(Name = "Instant Check")]InstantCheck = 7,
+        [Display(Name = "Reversal")]Reversal = 8,
+        [Display(Name = "Reissue")]Reissue = 9,
+        [Display(Name = "Void")]Void = 10,
+        [Display(Name = "Cash Reserve")]CashReserve = 11,
+        [Display(Name = "Wire PPD-AMEX (Auto-Post CR Invoice)")]W1 = 12,
+        [Display(Name = "Wire PPD-AMEX")]W2 = 13
+    }
     [Table("Caps_Customers")]
     public sealed class CustomerUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
-        public enum TypeofPaymentMethod
-        {
-            [Display(Name = "Check")]Check = 1,
-            [Display(Name = "Wire")]Wire = 2,
-            [Display(Name = "Credit Card")]CreditCard = 3,
-            [Display(Name = "Debit Card")]DebitCard = 4,
-            [Display(Name = "PayPal")]Paypal = 5,
-            [Display(Name = "Manual Check")]ManualCheck = 6,
-            [Display(Name = "Instant Check")]InstantCheck = 7,
-            [Display(Name = "Reversal")]Reversal = 8,
-            [Display(Name = "Reissue")]Reissue = 9,
-            [Display(Name = "Void")]Void = 10,
-            [Display(Name = "Cash Reserve")]CashReserve = 11,
-            [Display(Name = "Wire PPD-AMEX (Auto-Post CR Invoice)")]W1 = 12,
-            [Display(Name = "Wire PPD-AMEX")]W2 = 13
-        }
         /// <summary>
         ///     Maximum size of Description.
         /// </summary>
@@ -42,7 +42,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         public CustomerUnit()
         {
         }
-
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="CustomerUnit" /> class  with no parameters.
+        /// </summary>
         public CustomerUnit(string lastname,string firstname=null,string customernumber=null,decimal? creditlimit=null, TypeofPaymentMethod typeofpaymentmethodid=TypeofPaymentMethod.Check,
          int? customerpaymenttermid=null,int? salesrepid=null,bool isapproved=true,bool isactive=true, long? organizationunitid=null)
         {

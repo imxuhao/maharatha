@@ -40,9 +40,6 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the IsDefault field. </summary>
         public bool IsDefault { get; set; }
 
-        /// <summary>Gets or sets the TenantId field. </summary>
-        public int TenantId { get; set; }
-
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
     }

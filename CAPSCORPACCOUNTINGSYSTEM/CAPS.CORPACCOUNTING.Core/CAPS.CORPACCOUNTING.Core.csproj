@@ -125,6 +125,8 @@
     <Compile Include="Localization\CultureHelper.cs" />
     <Compile Include="Masters\AccountUnit.cs" />
     <Compile Include="Masters\AccountUnitManager.cs" />
+    <Compile Include="Masters\AddressUnit.cs" />
+    <Compile Include="Masters\AddressUnitManager.cs" />
     <Compile Include="Masters\EmployeeUnitManager.cs" />
     <Compile Include="Masters\EmployeeUnit.cs" />
     <Compile Include="Masters\CustomerUnit.cs" />

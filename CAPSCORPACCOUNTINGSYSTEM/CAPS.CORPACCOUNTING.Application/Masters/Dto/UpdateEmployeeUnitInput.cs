@@ -5,6 +5,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class UpdateEmployeeUnitInput : IInputDto
     {
+        /// <summary>Gets or sets the EmployeeId field. </summary>
         public int EmployeeId { get; set; }
         [Required]
         [StringLength(EmployeeUnit.MaxName)]
@@ -48,8 +49,6 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the Is IsActivet field. </summary>
         public bool IsActive { get; set; }
         /// <summary>Gets or sets the TenantId field. </summary>
-        public int TenantId { get; set; }
-        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
     }
 

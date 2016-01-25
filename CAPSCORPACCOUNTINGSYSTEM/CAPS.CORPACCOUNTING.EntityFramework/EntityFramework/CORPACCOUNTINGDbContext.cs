@@ -40,9 +40,14 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// </summary>
         public virtual IDbSet<SalesRepUnit> SalesRepUnits { get; set; }
         /// <summary>
-        ///  Customerss Declaration
+        ///  Customers Declaration
         /// </summary>
         public virtual IDbSet<CustomerUnit> CustomersUnits { get; set; }
+
+        /// <summary>
+        ///  Employees Declaration
+        /// </summary>
+        public virtual IDbSet<EmployeeUnit> EmployeUnits { get; set; }
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

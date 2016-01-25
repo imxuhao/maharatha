@@ -37,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public const int MaxNumberLength = 50;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SalesRepUnit" /> class  with no parameter.
+        ///     Initializes a new instance of the <see cref="CustomerUnit" /> class  with no parameter.
         /// </summary>
         public CustomerUnit()
         {
@@ -57,11 +57,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             OrganizationUnitId = organizationunitid;
             CustomerPayTermsId = customerpaymenttermid;
         }
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="SalesRepUnit" /> class.
-        /// </summary>
-        public CustomerUnit(string x) { }
-
+       
         #region Class Property Declarations
 
         /// <summary>Overriding the ID column with CustomerId</summary>

@@ -190,9 +190,14 @@
     <Compile Include="Localization\Dto\UpdateLanguageTextInput.cs" />
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\EmployeeUnitAppService.cs" />
+    <Compile Include="Masters\Dto\CreateEmployeeUnitInput.cs" />
+    <Compile Include="Masters\Dto\EmployeeUnitDto.cs" />
+    <Compile Include="Masters\Dto\UpdateEmployeeUnitInput.cs" />
     <Compile Include="Masters\Dto\UpdateCustomerUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateCustomerUnitInput.cs" />
     <Compile Include="Masters\Dto\CustomerUnitDto.cs" />
+    <Compile Include="Masters\IEmployeeUnitAppService.cs" />
     <Compile Include="Masters\ICustomerUnitAppService.cs" />
     <Compile Include="Masters\CustomerUnitAppService.cs" />
     <Compile Include="Masters\SalesRepUnitAppService.cs" />

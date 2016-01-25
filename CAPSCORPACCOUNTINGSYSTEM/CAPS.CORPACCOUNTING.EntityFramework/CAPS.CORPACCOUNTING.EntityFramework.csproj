@@ -253,6 +253,10 @@
     <Compile Include="Migrations\201601232010484_Add_Customer_Table.Designer.cs">
       <DependentUpon>201601232010484_Add_Customer_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601250507372_Add_Employee_Table.cs" />
+    <Compile Include="Migrations\201601250507372_Add_Employee_Table.Designer.cs">
+      <DependentUpon>201601250507372_Add_Employee_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -374,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601232010484_Add_Customer_Table.resx">
       <DependentUpon>201601232010484_Add_Customer_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601250507372_Add_Employee_Table.resx">
+      <DependentUpon>201601250507372_Add_Employee_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

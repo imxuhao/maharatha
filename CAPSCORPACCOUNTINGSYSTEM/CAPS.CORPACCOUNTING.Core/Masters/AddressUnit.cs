@@ -57,17 +57,19 @@ namespace CAPS.CORPACCOUNTING.Masters
     }
 
     [Table("Caps_Address")]
-    public sealed class AddressUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
+    public  class AddressUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
         ///     Maximum size of Description.
         /// </summary>
-        public const int MaxStringNameLength = 4000;
+        public const int MaxStringNameLength = 1000;
+        public const int MaxLength = 100;
+        public const int MaxPhoneLength = 100;
 
         /// <summary>
         ///     Maximum size of RegionLength.
         /// </summary>
-        public const int MaxwebsiteLength = 1000;
+        public const int MaxwebsiteLength = 200;
         
 
         /// <summary>
@@ -80,10 +82,14 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         ///     Initializes a new instance of the <see cref="AddressUnit" /> class.
         /// </summary>
-        public AddressUnit(int objectid, TypeofObject typeofobjectid, TypeofAddress addresstypeid, string contactnumber=null, string line1 = null, string line2 = null, string line3 = null, string line4 = null, string city = null, string state = null,
-            string country = null, string postalcode = null, string email = null, string phone1 = null, string phone2 = null, string phone1Extension = null, string phone2Extension = null, string website = null, bool isprimary = true, long? organizationunitid=null)
+        public AddressUnit(int objectid, TypeofObject typeofobjectid, TypeofAddress addresstypeid,
+            string contactnumber = null, string line1 = null, string line2 = null, string line3 = null,
+            string line4 = null, string city = null, string state = null,
+            string country = null, string postalcode = null, string email = null, string phone1 = null,
+            string phone2 = null, string phone1Extension = null, string phone2Extension = null, string website = null,
+            bool isprimary = true, long? organizationunitid = null)
         {
-            ObjectId = objectid;
+            EmployeeId = objectid;
             TypeofObjectId = typeofobjectid;
             AddressTypeId = addresstypeid;
             ContactNumber = contactnumber;
@@ -104,89 +110,98 @@ namespace CAPS.CORPACCOUNTING.Masters
             OrganizationUnitId = organizationunitid;
 
         }
+
         #region Class Property Declarations
 
         /// <summary>Overriding the ID column with AddressId</summary>
         [Column("AddressId")]
         public override long Id { get; set; }
         /// <summary>Gets or sets the ObjectId field. </summary>
-        [Range(1,Int32.MaxValue)]
-        public int ObjectId { get; set; }
+
+
+        [ForeignKey("EmployeeId")]
+        public EmployeeUnit Employee { get; set; }
+
+
+        [Required]
+        public virtual int EmployeeId { get; set; }
+
+       
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         [Range(1, Int32.MaxValue)]
-        public TypeofObject TypeofObjectId { get; set; }
+        public virtual TypeofObject TypeofObjectId { get; set; }
 
         /// <summary>Gets or sets the AddressTypeId field. </summary>
         [Range(1, Int32.MaxValue)]
-        public TypeofAddress AddressTypeId { get; set; }
+        public virtual TypeofAddress AddressTypeId { get; set; }
 
         /// <summary>Gets or sets the ContactNumber field. </summary>
         [StringLength(MaxStringNameLength)]
-        public string ContactNumber { get; set; }
+        public virtual string ContactNumber { get; set; }
 
         /// <summary>Gets or sets the Line1 field. </summary>
         [StringLength(MaxStringNameLength)]
-        public string Line1 { get; set; }
+        public virtual string Line1 { get; set; }
 
         /// <summary>Gets or sets the Line2 field. </summary>
         [StringLength(MaxStringNameLength)]
-        public string Line2 { get; set; }
+        public virtual string Line2 { get; set; }
 
         /// <summary>Gets or sets the Line3 field. </summary>
         [StringLength(MaxStringNameLength)]
-        public string Line3 { get; set; }
+        public virtual string Line3 { get; set; }
 
         /// <summary>Gets or sets the Line4 field. </summary>
         [StringLength(MaxStringNameLength)]
-        public string Line4 { get; set; }
+        public virtual string Line4 { get; set; }
 
         /// <summary>Gets or sets the City field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string City { get; set; }
+        [StringLength(MaxLength)]
+        public virtual string City { get; set; }
 
         /// <summary>Gets or sets the State field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string State { get; set; }
+        [StringLength(MaxLength)]
+        public virtual string State { get; set; }
 
         /// <summary>Gets or sets the Country field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string Country { get; set; }
+        [StringLength(MaxLength)]
+        public virtual string Country { get; set; }
 
         /// <summary>Gets or sets the PostalCode field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string PostalCode { get; set; }
+        [StringLength(MaxLength)]
+        public virtual string PostalCode { get; set; }
 
         /// <summary>Gets or sets the Fax field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string Fax { get; set; }
+        [StringLength(MaxLength)]
+        public virtual string Fax { get; set; }
 
         /// <summary>Gets or sets the Email field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string Email { get; set; }
+        [StringLength(MaxLength)]
+        public virtual string Email { get; set; }
 
         /// <summary>Gets or sets the Phone1 field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string Phone1 { get; set; }
+        [StringLength(MaxPhoneLength)]
+        public virtual string Phone1 { get; set; }
 
         /// <summary>Gets or sets the Phone1Extension field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string Phone1Extension { get; set; }
+        [StringLength(MaxPhoneLength)]
+        public virtual string Phone1Extension { get; set; }
 
         /// <summary>Gets or sets the Phone2 field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string Phone2 { get; set; }
+        [StringLength(MaxPhoneLength)]
+        public virtual string Phone2 { get; set; }
 
         /// <summary>Gets or sets the Phone2Extension field. </summary>
-        [StringLength(MaxStringNameLength)]
-        public string Phone2Extension { get; set; }
+        [StringLength(MaxPhoneLength)]
+        public virtual string Phone2Extension { get; set; }
 
         /// <summary>Gets or sets the Website field. </summary>
-        [StringLength(MaxwebsiteLength)]
-        public string Website { get; set; }
+        [StringLength(MaxLength)]
+        public virtual string Website { get; set; }
 
         /// <summary>Gets or sets the IsPrimary field. </summary>
-        public bool IsPrimary { get; set; } 
+        public virtual bool IsPrimary { get; set; } 
 
         public int TenantId { get; set; }
         /// <summary>Gets or sets the CompanyId field. </summary>

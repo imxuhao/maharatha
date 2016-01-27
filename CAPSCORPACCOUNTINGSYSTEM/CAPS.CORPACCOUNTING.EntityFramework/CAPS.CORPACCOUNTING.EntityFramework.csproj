@@ -181,6 +181,10 @@
     <Compile Include="Migrations\201506141245516_AuditLog_Made_MayHaveTenant.Designer.cs">
       <DependentUpon>201506141245516_AuditLog_Made_MayHaveTenant.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509071631523_UpgradeToModuleZero_0_6_9.cs" />
+    <Compile Include="Migrations\201509071631523_UpgradeToModuleZero_0_6_9.Designer.cs">
+      <DependentUpon>201509071631523_UpgradeToModuleZero_0_6_9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201509080740102_ModuleZeroUpgrade_0_6_9.cs" />
     <Compile Include="Migrations\201509080740102_ModuleZeroUpgrade_0_6_9.Designer.cs">
       <DependentUpon>201509080740102_ModuleZeroUpgrade_0_6_9.cs</DependentUpon>
@@ -250,16 +254,20 @@
       <DependentUpon>201601232008452_Add_SalesRep_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201601232010484_Add_Customer_Table.cs" />
-    <Compile Include="Migrations\201601232010484_Add_Customer_Table.Designer.cs">
+    <Compile Include="Migrations\201601232010484_Add_Customer_Table.designer.cs">
       <DependentUpon>201601232010484_Add_Customer_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201601250507372_Add_Employee_Table.cs" />
     <Compile Include="Migrations\201601250507372_Add_Employee_Table.Designer.cs">
       <DependentUpon>201601250507372_Add_Employee_Table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601250617493_Add_Address_Table.cs" />
-    <Compile Include="Migrations\201601250617493_Add_Address_Table.Designer.cs">
-      <DependentUpon>201601250617493_Add_Address_Table.cs</DependentUpon>
+    <Compile Include="Migrations\201601271829516_Add_Address_Table.cs" />
+    <Compile Include="Migrations\201601271829516_Add_Address_Table.Designer.cs">
+      <DependentUpon>201601271829516_Add_Address_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601272012477_Add_Vendor_Table.cs" />
+    <Compile Include="Migrations\201601272012477_Add_Vendor_Table.Designer.cs">
+      <DependentUpon>201601272012477_Add_Vendor_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
@@ -329,6 +337,9 @@
     <EmbeddedResource Include="Migrations\201506141245516_AuditLog_Made_MayHaveTenant.resx">
       <DependentUpon>201506141245516_AuditLog_Made_MayHaveTenant.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509071631523_UpgradeToModuleZero_0_6_9.resx">
+      <DependentUpon>201509071631523_UpgradeToModuleZero_0_6_9.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509080740102_ModuleZeroUpgrade_0_6_9.resx">
       <DependentUpon>201509080740102_ModuleZeroUpgrade_0_6_9.cs</DependentUpon>
     </EmbeddedResource>
@@ -386,8 +397,11 @@
     <EmbeddedResource Include="Migrations\201601250507372_Add_Employee_Table.resx">
       <DependentUpon>201601250507372_Add_Employee_Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601250617493_Add_Address_Table.resx">
-      <DependentUpon>201601250617493_Add_Address_Table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601271829516_Add_Address_Table.resx">
+      <DependentUpon>201601271829516_Add_Address_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601272012477_Add_Vendor_Table.resx">
+      <DependentUpon>201601272012477_Add_Vendor_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

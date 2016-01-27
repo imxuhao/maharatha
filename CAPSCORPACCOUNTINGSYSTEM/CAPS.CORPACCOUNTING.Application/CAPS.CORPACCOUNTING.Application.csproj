@@ -191,6 +191,9 @@
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
     <Compile Include="Masters\Dto\AddressUnitDto.cs" />
+    <Compile Include="Masters\Dto\VendorUnitDto.cs" />
+    <Compile Include="Masters\Dto\UpdateVendorUnitInput.cs" />
+    <Compile Include="Masters\Dto\CreateVendorUnitInput.cs" />
     <Compile Include="Masters\Dto\GetAddressUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateAddressUnitInput.cs" />
     <Compile Include="Masters\Dto\UpdateAddressUnitInput.cs" />
@@ -206,6 +209,7 @@
     <Compile Include="Masters\ICustomerUnitAppService.cs" />
     <Compile Include="Masters\CustomerUnitAppService.cs" />
     <Compile Include="Masters\IAddressUnitAppService.cs" />
+    <Compile Include="Masters\IVendorUnitAppService.cs" />
     <Compile Include="Masters\SalesRepUnitAppService.cs" />
     <Compile Include="Masters\Dto\AccountUnitDto.cs" />
     <Compile Include="Masters\Dto\CoaUnitDto.cs" />
@@ -228,6 +232,7 @@
     <Compile Include="Masters\ICustomerPaymentTermUnitAppService.cs" />
     <Compile Include="Masters\IVendorPaymentTermUnitAppService.cs" />
     <Compile Include="Masters\CustomerPaymentTermUnitAppService.cs" />
+    <Compile Include="Masters\VendorUnitAppService.cs" />
     <Compile Include="Masters\VendorPaymentTermUnitAppService.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantsInput.cs" />

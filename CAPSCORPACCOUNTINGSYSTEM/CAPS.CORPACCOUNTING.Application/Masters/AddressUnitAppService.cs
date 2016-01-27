@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<AddressUnitDto> CreateAddressUnit(
             CreateAddressUnitInput input)
         {
-            var addressUnit = new AddressUnit(objectid: input.ObjectId, typeofobjectid: input.TypeofObjectId,
+            var addressUnit = new AddressUnit(objectid: input.EmployeeId, typeofobjectid: input.TypeofObjectId,
                 addresstypeid: input.AddressTypeId, contactnumber: input.ContactNumber, line1: input.Line1,
                 line2: input.Line2,
                 line3: input.Line3, line4: input.Line4, city: input.City, state: input.State, country: input.Country,
@@ -58,21 +58,6 @@ namespace CAPS.CORPACCOUNTING.Masters
                     return dto;
                 }).ToList());
         }
-        public async Task<ListResultOutput<AddressUnitDto>> GetAddressUnitsByObjId(GetAddressUnitInput input)
-        {
-            var query =
-                from au in _addressUnitRepository.GetAll() where (input.AddressTypeId==0? (au.ObjectId == input.ObjectId && au.TypeofObjectId==input.TypeofObjectId):
-                (au.ObjectId == input.ObjectId && au.TypeofObjectId == input.TypeofObjectId && au.AddressTypeId==input.AddressTypeId))
-                select new { au };
-            var items = await query.ToListAsync();
-
-            return new ListResultOutput<AddressUnitDto>(
-                items.Select(item =>
-                {
-                    var dto = item.au.MapTo<AddressUnitDto>();
-                    return dto;
-                }).ToList());
-        }
 
         public async Task<AddressUnitDto> UpdateAddressUnit(UpdateAddressUnitInput input)
         {
@@ -80,7 +65,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             #region Setting the values to be updated
 
-            addressUnit.ObjectId = input.ObjectId;
+            addressUnit.EmployeeId = input.EmployeeId;
             addressUnit.TypeofObjectId = input.TypeofObjectId;
             addressUnit.AddressTypeId = input.AddressTypeId;
             addressUnit.ContactNumber = input.ContactNumber;

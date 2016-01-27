@@ -139,6 +139,8 @@
     <Compile Include="Masters\VendorPaymentTermUnit.cs" />
     <Compile Include="Masters\CustomerPaymentTermUnitManager.cs" />
     <Compile Include="Masters\VendorPaymentTermUnitManager.cs" />
+    <Compile Include="Masters\VendorUnit.cs" />
+    <Compile Include="Masters\VendorUnitManager.cs" />
     <Compile Include="MultiTenancy\Demo\MyRandomHelper.cs" />
     <Compile Include="MultiTenancy\Demo\RandomUserGenerator.cs" />
     <Compile Include="MultiTenancy\Tenant.cs" />

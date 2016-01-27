@@ -50,6 +50,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool IsActive { get; set; }
         /// <summary>Gets or sets the TenantId field. </summary>
         public long? OrganizationUnitId { get; set; }
+        public UpdateAddressUnitInput InputAddress { get; set; }
     }
 
     

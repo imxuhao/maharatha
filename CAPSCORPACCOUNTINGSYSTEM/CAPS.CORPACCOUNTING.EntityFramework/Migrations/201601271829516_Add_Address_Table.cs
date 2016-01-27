@@ -14,26 +14,26 @@ namespace CAPS.CORPACCOUNTING.Migrations
                 c => new
                     {
                         AddressId = c.Long(nullable: false, identity: true),
-                        ObjectId = c.Int(nullable: false),
+                        EmployeeId = c.Int(nullable: false),
                         TypeofObjectId = c.Int(nullable: false),
                         AddressTypeId = c.Int(nullable: false),
-                        ContactNumber = c.String(maxLength: 4000),
-                        Line1 = c.String(maxLength: 4000),
-                        Line2 = c.String(maxLength: 4000),
-                        Line3 = c.String(maxLength: 4000),
-                        Line4 = c.String(maxLength: 4000),
-                        City = c.String(maxLength: 4000),
-                        State = c.String(maxLength: 4000),
-                        Country = c.String(maxLength: 4000),
-                        PostalCode = c.String(maxLength: 4000),
-                        Fax = c.String(maxLength: 4000),
-                        Email = c.String(maxLength: 4000),
-                        Phone1 = c.String(maxLength: 4000),
-                        Phone1Extension = c.String(maxLength: 4000),
-                        Phone2 = c.String(maxLength: 4000),
-                        Phone2Extension = c.String(maxLength: 4000),
-                        Website = c.String(maxLength: 1000),
-                        IsPrimary = c.Boolean(nullable: false,defaultValue:true),
+                        ContactNumber = c.String(maxLength: 1000),
+                        Line1 = c.String(maxLength: 1000),
+                        Line2 = c.String(maxLength: 1000),
+                        Line3 = c.String(maxLength: 1000),
+                        Line4 = c.String(maxLength: 1000),
+                        City = c.String(maxLength: 100),
+                        State = c.String(maxLength: 100),
+                        Country = c.String(maxLength: 100),
+                        PostalCode = c.String(maxLength: 100),
+                        Fax = c.String(maxLength: 100),
+                        Email = c.String(maxLength: 100),
+                        Phone1 = c.String(maxLength: 100),
+                        Phone1Extension = c.String(maxLength: 100),
+                        Phone2 = c.String(maxLength: 100),
+                        Phone2Extension = c.String(maxLength: 100),
+                        Website = c.String(maxLength: 100),
+                        IsPrimary = c.Boolean(nullable: false),
                         TenantId = c.Int(nullable: false),
                         OrganizationUnitId = c.Long(),
                         IsDeleted = c.Boolean(nullable: false),
@@ -49,12 +49,16 @@ namespace CAPS.CORPACCOUNTING.Migrations
                     { "DynamicFilter_AddressUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                     { "DynamicFilter_AddressUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                 })
-                .PrimaryKey(t => t.AddressId);
+                .PrimaryKey(t => t.AddressId)
+                .ForeignKey("dbo.Caps_Employee", t => t.EmployeeId, cascadeDelete: true)
+                .Index(t => t.EmployeeId);
             
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Caps_Address", "EmployeeId", "dbo.Caps_Employee");
+            DropIndex("dbo.Caps_Address", new[] { "EmployeeId" });
             DropTable("dbo.Caps_Address",
                 removedAnnotations: new Dictionary<string, object>
                 {

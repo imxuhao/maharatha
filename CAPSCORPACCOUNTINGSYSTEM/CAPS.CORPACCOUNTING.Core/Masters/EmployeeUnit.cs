@@ -3,11 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
     [Table("Caps_Employee")]
-    public sealed class EmployeeUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class EmployeeUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
         ///     Maximum size of Description.
@@ -104,6 +105,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         public int TenantId { get; set; }
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        public virtual ICollection<AddressUnit> Address { get; set; }
         #endregion
     }
 }

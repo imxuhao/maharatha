@@ -1,13 +1,14 @@
 ﻿using Abp.Application.Services.Dto;
-using System;
+using Abp.AutoMapper;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
+    [AutoMapTo(typeof(AddressUnit))]
     public class CreateAddressUnitInput : IInputDto
     {
-        [Range(1, Int32.MaxValue,ErrorMessage = "Please enter valid ObjectId")]
-        public int ObjectId { get; set; }
+      
+        public int EmployeeId { get; set; }
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         [EnumDataType(typeof(TypeofObject))]
@@ -83,6 +84,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the IsPrimary field. </summary>
         public bool IsPrimary { get; set; }
+       
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

@@ -1,10 +1,11 @@
 ﻿using Abp.Application.Services.Dto;
-using  Abp.AutoMapper;
+using Abp.AutoMapper;
+using System.Collections.ObjectModel;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapFrom(typeof(EmployeeUnit))]  
-    public class EmployeeUnitDto : AuditedEntityDto
+    public class EmployeeUnitDto : FullAuditedEntityDto
     {
         /// <summary>Gets or sets the  EmployeeId</summary>
         public int EmployeeId { get; set; }
@@ -47,5 +48,6 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int TenantId { get; set; }
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+        public Collection<AddressUnitDto> Address { get; set; }
     }
 }

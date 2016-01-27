@@ -7,7 +7,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 {
     public interface IAccountUnitAppService:IApplicationService
     {
-        Task<ListResultOutput<AccountUnitDto>> GetAccountUnits();
+        Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId);
 
         Task<AccountUnitDto> CreateAccountUnit(CreateAccountUnitInput input);
 

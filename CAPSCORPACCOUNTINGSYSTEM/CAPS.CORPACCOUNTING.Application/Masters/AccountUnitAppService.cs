@@ -26,15 +26,15 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _unitOfWorkManager = unitOfWorkManager;
 
         }
-        public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits()
+        public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId)
         {
            
-           
-            var query =
-                from au in _accountUnitRepository.GetAll()
-                select new { au, memberCount = au };
+    
+            var items =
+                  from au in await _accountUnitRepository.GetAllListAsync(p => p.OrganizationUnitId == organizationUnitId)
+                  select new { au, memberCount = au };
 
-            var items = await query.ToListAsync();
+           
             return new ListResultOutput<AccountUnitDto>(
                 items.Select(item =>
                 {

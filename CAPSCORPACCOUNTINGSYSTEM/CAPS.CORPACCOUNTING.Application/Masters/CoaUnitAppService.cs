@@ -27,13 +27,14 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public IEventBus EventBus { get; set; }
 
-        public async Task<ListResultOutput<CoaUnitDto>> GetCoaUnits()
+        public async Task<ListResultOutput<CoaUnitDto>> GetCoaUnits(long? organizationUnitId)
         {
-            var query =
-                from au in _coaUnitRepository.GetAll()
-                select new {au, memberCount = au};
 
-            var items = await query.ToListAsync();
+            var items =
+                     from au in await _coaUnitRepository.GetAllListAsync(p => p.OrganizationUnitId == organizationUnitId)
+                     select new { au, memberCount = au };
+
+            //  var items = await query.ToList();
 
             return new ListResultOutput<CoaUnitDto>(
                 items.Select(item =>
@@ -47,8 +48,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
         {
-            var coaUnit = new CoaUnit( caption:input.Caption,chartofaccounttype: input.ChartofAccountsType,organizationid:input.OrganizationId,desc:input.Description,
-                displaysequence:input.DisplaySequence,isactive:input.IsActive,isapproved:input.IsApproved,isprivate:input.IsPrivate);
+            var coaUnit = new CoaUnit(caption: input.Caption, chartofaccounttype: input.ChartofAccountsType, organizationid: input.OrganizationId, desc: input.Description,
+                displaysequence: input.DisplaySequence, isactive: input.IsActive, isapproved: input.IsApproved, isprivate: input.IsPrivate);
             await _coaunitManager.CreateAsync(coaUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -56,7 +57,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
-/*Do Something when the Chart of Account is Added*/
+                /*Do Something when the Chart of Account is Added*/
             };
 
             EventBus.Register<EntityChangedEventData<CoaUnit>>(
@@ -93,7 +94,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
-/*Do Something when the Chart of Account is Added*/
+                /*Do Something when the Chart of Account is Added*/
             };
 
             EventBus.Register<EntityChangedEventData<CoaUnit>>(

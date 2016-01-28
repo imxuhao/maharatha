@@ -220,3 +220,6 @@ D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramew
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.UpgradeToModuleZero_0_6_9.resources
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Vendor_Table.resources
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_TableNames.resources
+D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\bin\Debug\EfEnumToLookup.dll
+D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\bin\Debug\EfEnumToLookup.pdb
+D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\bin\Debug\EfEnumToLookup.xml

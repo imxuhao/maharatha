@@ -20,6 +20,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
             new DefaultLanguagesCreator(_context).Create();
             new DefaultTenantRoleAndUserCreator(_context).Create();
             new DefaultSettingsCreator(_context).Create();
+            new EnumGenerator(_context).Create();
 
             _context.SaveChanges();
         }

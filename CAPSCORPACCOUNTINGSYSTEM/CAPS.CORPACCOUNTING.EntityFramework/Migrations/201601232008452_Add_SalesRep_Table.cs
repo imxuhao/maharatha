@@ -10,7 +10,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Caps_SalesRep",
+                "dbo.CAPS_SalesRep",
                 c => new
                     {
                         SalesRepId = c.Int(nullable: false, identity: true),

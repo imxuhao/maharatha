@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [Table("Caps_VendorPaymentTerms")] 
+    [Table("CAPS_VendorPaymentTerms")] 
     public sealed class VendorPaymentTermUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary> Maximum size of Description. </summary>

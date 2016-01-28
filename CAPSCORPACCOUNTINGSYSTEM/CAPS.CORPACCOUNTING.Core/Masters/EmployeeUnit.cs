@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [Table("Caps_Employee")]
+    [Table("CAPS_Employee")]
     public class EmployeeUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

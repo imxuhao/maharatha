@@ -23,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Wire PPD-AMEX (Auto-Post CR Invoice)")]W1 = 12,
         [Display(Name = "Wire PPD-AMEX")]W2 = 13
     }
-    [Table("Caps_Customers")]
+    [Table("CAPS_Customers")]
     public sealed class CustomerUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

@@ -10,7 +10,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Caps_VendorPaymentTerms",
+                "dbo.CAPS_VendorPaymentTerms",
                 c => new
                     {
                         PaymentTermsId = c.Int(nullable: false, identity: true),

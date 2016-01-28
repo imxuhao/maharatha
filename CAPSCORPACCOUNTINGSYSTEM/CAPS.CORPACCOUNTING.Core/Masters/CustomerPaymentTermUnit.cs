@@ -7,7 +7,7 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [Table("Caps_CustomerPaymentTerms")]
+    [Table("CAPS_CustomerPaymentTerms")]
     public sealed class CustomerPaymentTermUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

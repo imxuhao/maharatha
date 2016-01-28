@@ -10,7 +10,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Caps_Address",
+                "dbo.CAPS_Address",
                 c => new
                     {
                         AddressId = c.Long(nullable: false, identity: true),

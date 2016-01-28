@@ -6,7 +6,7 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [Table("Caps_SalesRep")]
+    [Table("CAPS_SalesRep")]
     public sealed class SalesRepUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

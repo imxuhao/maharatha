@@ -217,6 +217,6 @@ D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramew
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Customer_Table.resources
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Employee_Table.resources
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Address_Table.resources
-D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_TableNames.resources
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.UpgradeToModuleZero_0_6_9.resources
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Vendor_Table.resources
+D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_TableNames.resources

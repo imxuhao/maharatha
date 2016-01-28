@@ -56,7 +56,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         User = 8,
     }
 
-    [Table("Caps_Address")]
+    [Table("CAPS_Address")]
     public  class AddressUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

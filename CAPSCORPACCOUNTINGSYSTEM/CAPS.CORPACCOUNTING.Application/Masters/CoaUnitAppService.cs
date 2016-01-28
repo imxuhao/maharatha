@@ -41,6 +41,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 {
                     var dto = item.au.MapTo<CoaUnitDto>();
                     //dto.MemberCount = item.memberCount;
+                    dto.CoaId = item.au.Id;
                     return dto;
                 }).ToList());
         }

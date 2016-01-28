@@ -265,10 +265,6 @@
     <Compile Include="Migrations\201601250507372_Add_Employee_Table.Designer.cs">
       <DependentUpon>201601250507372_Add_Employee_Table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601271829516_Add_Address_Table.cs" />
-    <Compile Include="Migrations\201601271829516_Add_Address_Table.Designer.cs">
-      <DependentUpon>201601271829516_Add_Address_Table.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201601272012477_Add_Vendor_Table.cs" />
     <Compile Include="Migrations\201601272012477_Add_Vendor_Table.Designer.cs">
       <DependentUpon>201601272012477_Add_Vendor_Table.cs</DependentUpon>
@@ -276,6 +272,10 @@
     <Compile Include="Migrations\201601280154021_Modify_TableNames.cs" />
     <Compile Include="Migrations\201601280154021_Modify_TableNames.Designer.cs">
       <DependentUpon>201601280154021_Modify_TableNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601281732387_Modify_Address_Table.cs" />
+    <Compile Include="Migrations\201601281732387_Modify_Address_Table.Designer.cs">
+      <DependentUpon>201601281732387_Modify_Address_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
@@ -406,14 +406,14 @@
     <EmbeddedResource Include="Migrations\201601250507372_Add_Employee_Table.resx">
       <DependentUpon>201601250507372_Add_Employee_Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601271829516_Add_Address_Table.resx">
-      <DependentUpon>201601271829516_Add_Address_Table.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601272012477_Add_Vendor_Table.resx">
       <DependentUpon>201601272012477_Add_Vendor_Table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601280154021_Modify_TableNames.resx">
       <DependentUpon>201601280154021_Modify_TableNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601281732387_Modify_Address_Table.resx">
+      <DependentUpon>201601281732387_Modify_Address_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -11,11 +11,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int EmployeeId { get; set; }
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
-        [EnumDataType(typeof(TypeofObject))]
+      //  [EnumDataType(typeof(TypeofObject))]
         public TypeofObject TypeofObjectId { get; set; }
 
         /// <summary>Gets or sets the AddressTypeId field. </summary>
-        [EnumDataType(typeof(TypeofAddress))]
+      //  [EnumDataType(typeof(TypeofAddress))]
         public TypeofAddress AddressTypeId { get; set; }
 
         /// <summary>Gets or sets the ContactNumber field. </summary>

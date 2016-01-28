@@ -106,7 +106,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        public virtual ICollection<AddressUnit> Address { get; set; }
+       // public virtual ICollection<AddressUnit> Address { get; set; }
         #endregion
     }
 }

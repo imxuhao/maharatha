@@ -8,6 +8,7 @@ using System.Linq;
 using System.Data.Entity;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -29,9 +30,14 @@ namespace CAPS.CORPACCOUNTING.Masters
             _addressAppService = addressAppService;
             _addressUnitRepository = addressRepository;
         }
+        [UnitOfWork]
         public async Task DeleteEmployeeUnit(IdInput input)
         {
             await _employeeUnitManager.DeleteAsync(input.Id);
+            GetAddressUnitInput dto=new GetAddressUnitInput();
+            dto.TypeofObjectId=TypeofObject.Emp;
+            dto.ObjectId = input.Id;
+            await _addressAppService.DeleteAddressUnit(dto);
         }
 
         [UnitOfWork]
@@ -60,14 +66,17 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<ListResultOutput<EmployeeUnitDto>> GetEmployeeUnits()
         {
             var query =
-                from er in _employeeUnitRepository.GetAll().Include(p=>p.Address)
-                select new {er};
+                from er in _employeeUnitRepository.GetAll()
+                join ar in _addressUnitRepository.GetAll() on er.Id equals  ar.EmployeeId
+                select new {er, Address=ar };
             var items = await query.ToListAsync();
 
             return new ListResultOutput<EmployeeUnitDto>(
                 items.Select(item =>
-                {
+                {  
                     var dto = item.er.MapTo<EmployeeUnitDto>();
+                    dto.Address=new Collection<AddressUnitDto>();
+                    dto.Address.Add(item.Address.MapTo<AddressUnitDto>());
                     return dto;
                 }).ToList());
         }

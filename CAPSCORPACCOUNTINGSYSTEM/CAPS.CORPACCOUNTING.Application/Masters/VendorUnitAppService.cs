@@ -16,13 +16,15 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly VendorUnitManager _vendorUnitManager;
         private readonly IRepository<VendorUnit> _vendorUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly IAddressUnitAppService _addressAppService;
 
         public VendorUnitAppService(VendorUnitManager vendorUnitManager, IRepository<VendorUnit> vendorUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager)
+            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService)
         {
             _vendorUnitManager = vendorUnitManager;
             _vendorUnitRepository = vendorUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
+            _addressAppService = addressAppService;
         }
         public IEventBus EventBus { get; set; }
         [UnitOfWork]
@@ -51,6 +53,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _vendorUnitManager.CreateAsync(vendorUnit);
             await   CurrentUnitOfWork.SaveChangesAsync();
 
+             
+            input.InputAddress.EmployeeId = vendorUnit.Id;
+            await _addressAppService.CreateAddressUnit(input.InputAddress);
+            await CurrentUnitOfWork.SaveChangesAsync();
+
             #region Example to show the usage of Event Bus as well Unit of Work Completion
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
@@ -73,6 +80,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task DeleteVendorUnit(IdInput input)
         {
             await _vendorUnitManager.DeleteAsync(input.Id);
+            GetAddressUnitInput dto = new GetAddressUnitInput();
+            dto.TypeofObjectId = TypeofObject.Vendor;
+            dto.ObjectId = input.Id;
+            await _addressAppService.DeleteAddressUnit(dto);
         }
 
         public async Task<ListResultOutput<VendorUnitDto>> GetVendorUnits()
@@ -93,6 +104,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<VendorUnitDto> UpdateVendorUnit(UpdateVendorUnitInput input)
         {
             var vendorUnit = await _vendorUnitRepository.GetAsync(input.VendorId);
+            await _addressAppService.UpdateAddressUnit(input.InputAddress);
+            await CurrentUnitOfWork.SaveChangesAsync();
 
             #region Setting the values to be updated
 

@@ -9,7 +9,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>>Gets or sets the AddressId</summary>
         public long AddressId { get; set; }
         /// <summary>Gets or sets the ObjectId field. </summary>
-        public int ObjectId { get; set; }
+        public int EmployeeId { get; set; }
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         public TypeofObject TypeofObjectId { get; set; }

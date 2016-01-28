@@ -119,8 +119,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the ObjectId field. </summary>
 
 
-        [ForeignKey("EmployeeId")]
-        public EmployeeUnit Employee { get; set; }
+        //[ForeignKey("EmployeeId")]
+        //public EmployeeUnit Employee { get; set; }
 
 
         [Required]
@@ -129,11 +129,11 @@ namespace CAPS.CORPACCOUNTING.Masters
        
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
-        [Range(1, Int32.MaxValue)]
+      
         public virtual TypeofObject TypeofObjectId { get; set; }
 
         /// <summary>Gets or sets the AddressTypeId field. </summary>
-        [Range(1, Int32.MaxValue)]
+       
         public virtual TypeofAddress AddressTypeId { get; set; }
 
         /// <summary>Gets or sets the ContactNumber field. </summary>

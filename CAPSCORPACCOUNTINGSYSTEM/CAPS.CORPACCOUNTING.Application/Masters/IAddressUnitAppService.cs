@@ -11,6 +11,6 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         Task<ListResultOutput<AddressUnitDto>> GetAddressUnits();
         Task<AddressUnitDto> UpdateAddressUnit(UpdateAddressUnitInput input);
-        Task DeleteAddressUnit(IdInput input);
+        Task DeleteAddressUnit(GetAddressUnitInput input);
     }
 }

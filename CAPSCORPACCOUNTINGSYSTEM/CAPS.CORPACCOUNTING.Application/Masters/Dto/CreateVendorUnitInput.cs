@@ -136,9 +136,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the IsApproved field. </summary>
         public bool IsApproved { get; set; } = true;
 
-
         
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        public CreateAddressUnitInput InputAddress { get; set; }
     }
 }

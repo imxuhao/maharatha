@@ -16,7 +16,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Other Projects")] OtherProjects = 6
     }
 
-    [Table("ChartOfAccounts")]
+    [Table("CAPS_COA")]
     public sealed class CoaUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

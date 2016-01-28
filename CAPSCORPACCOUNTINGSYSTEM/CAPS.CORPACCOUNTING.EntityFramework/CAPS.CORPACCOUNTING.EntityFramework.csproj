@@ -265,10 +265,17 @@
     <Compile Include="Migrations\201601271829516_Add_Address_Table.Designer.cs">
       <DependentUpon>201601271829516_Add_Address_Table.cs</DependentUpon>
     </Compile>
+
+    <Compile Include="Migrations\201601280059427_Modify_TableNames.cs" />
+    <Compile Include="Migrations\201601280059427_Modify_TableNames.Designer.cs">
+      <DependentUpon>201601280059427_Modify_TableNames.cs</DependentUpon>
+    </Compile>
+
     <Compile Include="Migrations\201601272012477_Add_Vendor_Table.cs" />
     <Compile Include="Migrations\201601272012477_Add_Vendor_Table.Designer.cs">
       <DependentUpon>201601272012477_Add_Vendor_Table.cs</DependentUpon>
     </Compile>
+
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -400,9 +407,15 @@
     <EmbeddedResource Include="Migrations\201601271829516_Add_Address_Table.resx">
       <DependentUpon>201601271829516_Add_Address_Table.cs</DependentUpon>
     </EmbeddedResource>
+
+    <EmbeddedResource Include="Migrations\201601280059427_Modify_TableNames.resx">
+      <DependentUpon>201601280059427_Modify_TableNames.cs</DependentUpon>
+    </EmbeddedResource>
+
     <EmbeddedResource Include="Migrations\201601272012477_Add_Vendor_Table.resx">
       <DependentUpon>201601272012477_Add_Vendor_Table.cs</DependentUpon>
     </EmbeddedResource>
+
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CAPS.CORPACCOUNTING.Core\CAPS.CORPACCOUNTING.Core.csproj">
@@ -410,6 +423,7 @@
       <Name>CAPS.CORPACCOUNTING.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

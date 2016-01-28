@@ -11,7 +11,7 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [Table("Accounts")]
+    [Table("CAPS_Accounts")]
     public sealed class AccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

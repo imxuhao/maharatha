@@ -1,21 +1,20 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using System.ComponentModel.DataAnnotations;
+using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapTo(typeof(AddressUnit))]
     public class CreateAddressUnitInput : IInputDto
     {
-      
-        public int EmployeeId { get; set; }
+        public int ObjectId { get; set; }
 
+      
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
-      //  [EnumDataType(typeof(TypeofObject))]
         public TypeofObject TypeofObjectId { get; set; }
 
         /// <summary>Gets or sets the AddressTypeId field. </summary>
-      //  [EnumDataType(typeof(TypeofAddress))]
         public TypeofAddress AddressTypeId { get; set; }
 
         /// <summary>Gets or sets the ContactNumber field. </summary>

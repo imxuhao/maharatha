@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
-using  Abp.AutoMapper;
+using Abp.AutoMapper;
+using System.Collections.ObjectModel;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
@@ -40,5 +41,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Address Collection
+        /// </summary>
+        public Collection<AddressUnitDto> Address { get; set; }
     }
 }

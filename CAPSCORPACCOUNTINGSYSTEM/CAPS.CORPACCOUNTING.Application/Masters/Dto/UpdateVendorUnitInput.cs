@@ -1,13 +1,17 @@
 ﻿using Abp.Application.Services.Dto;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Abp.AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
+    
     public class UpdateVendorUnitInput : IInputDto
     {
+        /// <summary>Gets or sets the VendorId field. </summary>
         public int VendorId { get; set; }
 
+        /// <summary>Gets or sets the LastName field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         [Required]
         public string LastName { get; set; }
@@ -28,6 +32,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the IsPrivate field. </summary>
         [StringLength(VendorUnit.MaxVendorLength)]
         public string VendorNumber { get; set; }
+
         /// <summary>Gets or sets the IsPrivate field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string VendorAccountInfo { get; set; }
@@ -44,9 +49,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public decimal? CreditLimit { get; set; }
 
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
-        public TypeofPaymentMethod TypeofPaymentMethod { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethod { get; set; }
 
-        /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
+        /// <summary>Gets or sets the PaymentTermsId field. </summary>
         public int? PaymentTermsId { get; set; }
 
         /// <summary>Gets or sets the TypeofCurrency field. </summary>
@@ -58,6 +63,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Is1099 field. </summary>
         public bool Is1099 { get; set; }
+
         /// <summary>Gets or sets the IsIndependentContractor field. </summary>
         public bool IsIndependentContractor { get; set; }
 
@@ -65,10 +71,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool Isw9OnFile { get; set; }
 
         /// <summary>Gets or sets the TypeOFvendorId field. </summary>
-        public TypeofVendor TypeOFvendorId { get; set; }
+        [EnumDataType(typeof(TypeofVendor))]
+        public TypeofVendor TypeofvendorId { get; set; }
 
         /// <summary>Gets or sets the Typeof1099T4 field. </summary>
-        public Typeof1099T4 TypeOF1099Box { get; set; }
+        public Typeof1099T4? Typeof1099Box { get; set; }
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
         public DateTime? EDDContractStartDate { get; set; }
@@ -85,14 +92,16 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the IsEDDContractOnGoing field. </summary>
         public bool IsEDDContractOnGoing { get; set; }
-        /// <summary>Gets or sets the ACHBankName field. </summary>
 
+        /// <summary>Gets or sets the ACHBankName field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string ACHBankName { get; set; }
+
         /// <summary>Gets or sets the ACHRoutingNumber field. </summary>
         [StringLength(VendorUnit.MaxAchLength)]
         public string ACHRoutingNumber { get; set; }
 
+        /// <summary>Gets or sets the ACHAccountNumber field. </summary>
         [StringLength(VendorUnit.MaxAchLength)]
         public string ACHAccountNumber { get; set; }
 
@@ -100,7 +109,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string ACHWireFromBankName { get; set; }
 
-        /// <summary>Gets or sets the ACHWireFromBankName field. </summary>
+        /// <summary>Gets or sets the ACHWireFromBankAddress field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string ACHWireFromBankAddress { get; set; }
 
@@ -142,7 +151,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public long? OrganizationUnitId { get; set; }
 
         /// <summary>
-        /// Get or Sets InputAddress
+        /// Gets or sets  AddressData of a Vendor
         /// </summary>
         public UpdateAddressUnitInput InputAddress { get; set; }
     }

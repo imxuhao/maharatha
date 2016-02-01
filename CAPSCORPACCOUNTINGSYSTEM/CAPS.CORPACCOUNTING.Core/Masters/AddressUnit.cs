@@ -8,7 +8,7 @@ using Abp.Organizations;
 namespace CAPS.CORPACCOUNTING.Masters
 {
     /// <summary>
-    /// TypeOfAddress Enum
+    ///Enum for TypeOfAddress 
     /// </summary>
     public enum TypeofAddress
     {
@@ -60,14 +60,14 @@ namespace CAPS.CORPACCOUNTING.Masters
     public  class AddressUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
-        ///     Maximum size of Description.
+        ///     Maximum size of MaxStringNameLength.
         /// </summary>
         public const int MaxStringNameLength = 1000;
         public const int MaxLength = 100;
         public const int MaxPhoneLength = 100;
 
         /// <summary>
-        ///     Maximum size of RegionLength.
+        ///     Maximum size of MaxwebsiteLength.
         /// </summary>
         public const int MaxwebsiteLength = 200;
         
@@ -89,7 +89,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             string phone2 = null, string phone1Extension = null, string phone2Extension = null, string website = null,
             bool isprimary = true, long? organizationunitid = null)
         {
-            EmployeeId = objectid;
+            ObjectId = objectid;
             TypeofObjectId = typeofobjectid;
             AddressTypeId = addresstypeid;
             ContactNumber = contactnumber;
@@ -116,24 +116,15 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Overriding the ID column with AddressId</summary>
         [Column("AddressId")]
         public override long Id { get; set; }
-        /// <summary>Gets or sets the ObjectId field. </summary>
-
-
-        //[ForeignKey("EmployeeId")]
-        //public EmployeeUnit Employee { get; set; }
-
-
-        [Required]
-        public virtual int EmployeeId { get; set; }
-
        
+        /// <summary>Gets or sets the ObjectId field. </summary>
+        [Required]
+        public virtual int ObjectId { get; set; }
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
-      
         public virtual TypeofObject TypeofObjectId { get; set; }
 
         /// <summary>Gets or sets the AddressTypeId field. </summary>
-       
         public virtual TypeofAddress AddressTypeId { get; set; }
 
         /// <summary>Gets or sets the ContactNumber field. </summary>
@@ -201,8 +192,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual string Website { get; set; }
 
         /// <summary>Gets or sets the IsPrimary field. </summary>
-        public virtual bool IsPrimary { get; set; } 
+        public virtual bool IsPrimary { get; set; }
 
+        /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set; }
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

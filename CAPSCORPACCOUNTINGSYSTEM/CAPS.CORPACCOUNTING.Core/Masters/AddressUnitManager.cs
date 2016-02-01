@@ -12,6 +12,10 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         protected IRepository<AddressUnit,long> AddressUnitRepository { get;  }
 
+        /// <summary>
+        /// AddressUnitManager Constructor to initializing the AddressUnit Repository
+        /// </summary>
+        /// <param name="addressUnitRepository"></param>
         public AddressUnitManager(IRepository<AddressUnit,long> addressUnitRepository)
         {
             AddressUnitRepository = addressUnitRepository;
@@ -19,17 +23,32 @@ namespace CAPS.CORPACCOUNTING.Masters
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
+        /// <summary>
+        /// Inserting Address Details
+        /// </summary>
+        /// <param name="addressunit"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task CreateAsync(AddressUnit addressunit)
         {
             await AddressUnitRepository.InsertAsync(addressunit);
         }
 
+        /// <summary>
+        /// Updating Address Details
+        /// </summary>
+        /// <param name="addressunit"></param>
+        /// <returns></returns>
         public virtual async Task UpdateAsync(AddressUnit addressunit)
         {
             await AddressUnitRepository.UpdateAsync(addressunit);
         }
 
+        /// <summary>
+        /// Deleting the Address
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task DeleteAsync(int id)
         {

@@ -23,6 +23,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Required]
         [StringLength(MaxDesc)]
         public string Description { get; set; }
+        
         /// <summary>Gets or sets the DueDays. </summary>
         [Range(1,Int32.MaxValue)]
         public int  DueDays { get; set; }
@@ -48,9 +49,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CoaUnit" /> class.
+        ///     Initializes a new instance of the <see cref="VendorPaymentTermUnit" /> class.
         /// </summary>
-        public VendorPaymentTermUnit(string description, int duedays, int? discountdays=null,bool isactive=true,long? organizationid = null)
+        public VendorPaymentTermUnit(string description, int duedays, int? discountdays,bool isactive,long? organizationid = null)
         {
             DueDays = duedays;
             DiscountDays = discountdays;

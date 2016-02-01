@@ -12,6 +12,10 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         protected IRepository<CustomerPaymentTermUnit> CustomerPaymentTermUnitRepository { get;  }
 
+        /// <summary>
+        /// CustomerPaymentTermUnitManager Constructor to initializing the CustomerPaymentTermUnit Repository
+        /// </summary>
+        /// <param name="customerPaymentTermunitrepository"></param>
         public CustomerPaymentTermUnitManager(IRepository<CustomerPaymentTermUnit> customerPaymentTermunitrepository)
         {
             CustomerPaymentTermUnitRepository = customerPaymentTermunitrepository;
@@ -19,6 +23,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
+        /// <summary>
+        /// Inserting CustomerPaymentTerm Details
+        /// </summary>
+        /// <param name="customerPaymentTermUnit"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task CreateAsync(CustomerPaymentTermUnit customerPaymentTermUnit)
         {
@@ -26,17 +35,34 @@ namespace CAPS.CORPACCOUNTING.Masters
             await CustomerPaymentTermUnitRepository.InsertAsync(customerPaymentTermUnit);
         }
 
+        /// <summary>
+        /// Updating CustomerPaymentTerm Details
+        /// </summary>
+        /// <param name="customerPaymentTermUnit"></param>
+        /// <returns></returns>
         public virtual async Task UpdateAsync(CustomerPaymentTermUnit customerPaymentTermUnit)
         {
             await ValidateCustomerPaymentTermUnitAsync(customerPaymentTermUnit);
             await CustomerPaymentTermUnitRepository.UpdateAsync(customerPaymentTermUnit);
         }
 
+
+
+        /// <summary>
+        /// Deleting CustomerPaymentTerm
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task DeleteAsync(int id)
         {
             await CustomerPaymentTermUnitRepository.DeleteAsync(id);
         }
+        /// <summary>
+        /// Validating CustomePaymentterms
+        /// </summary>
+        /// <param name="customePaymentUnit"></param>
+        /// <returns></returns>
         protected virtual async Task ValidateCustomerPaymentTermUnitAsync(CustomerPaymentTermUnit customePaymentUnit)
         {
             //Validating if Duplicate CustomerPaymentTem exists

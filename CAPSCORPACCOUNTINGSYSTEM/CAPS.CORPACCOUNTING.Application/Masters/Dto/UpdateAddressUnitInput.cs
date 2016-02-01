@@ -10,11 +10,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     {  
         /// <summary>Gets or sets the AddressId field. </summary>
         public int AddressId { get; set; }
-        [Range(1, Int32.MaxValue)]
-        public int EmployeeId { get; set; }
+       
+        public int ObjectId { get; set; }
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
-        [EnumDataType(typeof(TypeofObject))]
+       
         public TypeofObject TypeofObjectId { get; set; }
 
         /// <summary>Gets or sets the AddressTypeId field. </summary>

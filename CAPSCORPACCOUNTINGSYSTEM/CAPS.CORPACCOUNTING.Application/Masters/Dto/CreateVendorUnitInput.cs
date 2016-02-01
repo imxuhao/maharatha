@@ -1,11 +1,14 @@
 ﻿using Abp.Application.Services.Dto;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class CreateVendorUnitInput : IInputDto
     {
+        /// <summary>Gets or sets the LastName field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         [Required]
         public string LastName { get; set; }
@@ -23,10 +26,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string DbaName { get; set; }
 
-        /// <summary>Gets or sets the IsPrivate field. </summary>
+        /// <summary>Gets or sets the VendorNumber field. </summary>
         [StringLength(VendorUnit.MaxVendorLength)]
         public string VendorNumber { get; set; }
-        /// <summary>Gets or sets the IsPrivate field. </summary>
+
+        /// <summary>Gets or sets the VendorAccountInfo field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string VendorAccountInfo { get; set; }
 
@@ -42,9 +46,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public decimal? CreditLimit { get; set; }
 
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
-        public TypeofPaymentMethod TypeofPaymentMethod { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethod { get; set; }
 
-        /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
+        /// <summary>Gets or sets the PaymentTermsId field. </summary>
         public int? PaymentTermsId { get; set; }
 
         /// <summary>Gets or sets the TypeofCurrency field. </summary>
@@ -63,10 +67,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool Isw9OnFile { get; set; }
 
         /// <summary>Gets or sets the TypeOFvendorId field. </summary>
-        public TypeofVendor TypeOFvendorId { get; set; }
+        [EnumDataType(typeof(TypeofVendor))]
+        public TypeofVendor TypeOFvendorId { get; set; }=TypeofVendor.Standard;
 
-        /// <summary>Gets or sets the Typeof1099T4 field. </summary>
-        public Typeof1099T4 TypeOF1099Box { get; set; }
+        /// <summary>Gets or sets the TypeOF1099Box field. </summary>
+        public Typeof1099T4? TypeOF1099Box { get; set; } 
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
         public DateTime? EDDContractStartDate { get; set; }
@@ -74,7 +79,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the EDDContractStopDate field. </summary>
         public DateTime? EDDContractStopDate { get; set; }
 
-        /// <summary>Gets or sets the EDDContractStopDate field. </summary>
+        /// <summary>Gets or sets the EDDConctractAmount field. </summary>
         public decimal? EDDConctractAmount { get; set; }
 
         /// <summary>Gets or sets the WorkRegion field. </summary>
@@ -83,14 +88,16 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the IsEDDContractOnGoing field. </summary>
         public bool IsEDDContractOnGoing { get; set; }
+       
         /// <summary>Gets or sets the ACHBankName field. </summary>
-
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string ACHBankName { get; set; }
+
         /// <summary>Gets or sets the ACHRoutingNumber field. </summary>
         [StringLength(VendorUnit.MaxAchLength)]
         public string ACHRoutingNumber { get; set; }
 
+        /// <summary>Gets or sets the ACHAccountNumber field. </summary>
         [StringLength(VendorUnit.MaxAchLength)]
         public string ACHAccountNumber { get; set; }
 
@@ -98,7 +105,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string ACHWireFromBankName { get; set; }
 
-        /// <summary>Gets or sets the ACHWireFromBankName field. </summary>
+        /// <summary>Gets or sets the ACHWireFromBankAddress field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string ACHWireFromBankAddress { get; set; }
 
@@ -140,6 +147,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
+        /// <summary>
+        /// Gets or sets AddressData of a Vendor
+        /// </summary>
         public CreateAddressUnitInput InputAddress { get; set; }
     }
 }

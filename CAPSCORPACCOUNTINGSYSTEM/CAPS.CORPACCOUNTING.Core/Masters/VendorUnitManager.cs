@@ -19,25 +19,46 @@ namespace CAPS.CORPACCOUNTING.Masters
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
+        /// <summary>
+        /// Inserting Account Entity 
+        /// </summary>
+        /// <param name="vendorPaymentTermUnit"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task CreateAsync(VendorUnit vendorPaymentTermUnit)
         {
-            await ValidateVendorPaymentTermUnitAsync(vendorPaymentTermUnit);
+            await ValidateVendorUnitAsync(vendorPaymentTermUnit);
             await VendorUnitRepository.InsertAsync(vendorPaymentTermUnit);
         }
 
+        /// <summary>
+        /// Updating Vendor Details
+        /// </summary>
+        /// <param name="vendorPaymentTermUnit"></param>
+        /// <returns></returns>
         public virtual async Task UpdateAsync(VendorUnit vendorPaymentTermUnit)
         {
-            await ValidateVendorPaymentTermUnitAsync(vendorPaymentTermUnit);
+            await ValidateVendorUnitAsync(vendorPaymentTermUnit);
             await VendorUnitRepository.UpdateAsync(vendorPaymentTermUnit);
         }
 
+        /// <summary>
+        /// Deleting Account Entity 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task DeleteAsync(int id)
         {
             await VendorUnitRepository.DeleteAsync(id);
         }
-        protected virtual async Task ValidateVendorPaymentTermUnitAsync(VendorUnit vendorUnit)
+
+        /// <summary>
+        /// Validating the VendorData
+        /// </summary>
+        /// <param name="vendorUnit"></param>
+        /// <returns></returns>
+        protected virtual async Task ValidateVendorUnitAsync(VendorUnit vendorUnit)
         {
             //Validating if Duplicate VendorName exists
             if (VendorUnitRepository != null)

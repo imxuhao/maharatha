@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<AddressUnitDto> CreateAddressUnit(
             CreateAddressUnitInput input)
         {
-            var addressUnit = new AddressUnit(objectid: input.EmployeeId, typeofobjectid: input.TypeofObjectId,
+            var addressUnit = new AddressUnit(objectid: input.ObjectId, typeofobjectid: input.TypeofObjectId,
                 addresstypeid: input.AddressTypeId, contactnumber: input.ContactNumber, line1: input.Line1,
                 line2: input.Line2,
                 line3: input.Line3, line4: input.Line4, city: input.City, state: input.State, country: input.Country,
@@ -41,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task DeleteAddressUnit(GetAddressUnitInput input)
         {
-            await _addressUnitRepository.DeleteAsync(p => p.EmployeeId == input.ObjectId && p.TypeofObjectId == input.TypeofObjectId);
+            await _addressUnitRepository.DeleteAsync(p => p.ObjectId == input.ObjectId && p.TypeofObjectId == input.TypeofObjectId);
            // await _addressUnitManager.DeleteAsync(input.Id);
         }
 
@@ -66,7 +66,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             #region Setting the values to be updated
 
-            addressUnit.EmployeeId = input.EmployeeId;
+            addressUnit.ObjectId = input.ObjectId;
             addressUnit.TypeofObjectId = input.TypeofObjectId;
             addressUnit.AddressTypeId = input.AddressTypeId;
             addressUnit.ContactNumber = input.ContactNumber;

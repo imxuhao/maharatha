@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Domain.Repositories;
@@ -8,6 +9,7 @@ using Abp.Events.Bus;
 using Abp.Events.Bus.Entities;
 using System.Linq;
 using System.Data.Entity;
+using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -53,10 +55,16 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _vendorUnitManager.CreateAsync(vendorUnit);
             await   CurrentUnitOfWork.SaveChangesAsync();
 
-             
-            input.InputAddress.EmployeeId = vendorUnit.Id;
-            await _addressAppService.CreateAddressUnit(input.InputAddress);
-            await CurrentUnitOfWork.SaveChangesAsync();
+            if (input.InputAddress.Line1 != null || input.InputAddress.Line2 != null || input.InputAddress.Line4 != null ||
+                input.InputAddress.Line4 != null || input.InputAddress.State != null ||
+                input.InputAddress.Country != null || input.InputAddress.Email != null)
+            {
+
+                input.InputAddress.ObjectId = vendorUnit.Id;
+                input.InputAddress.TypeofObjectId = TypeofObject.Vendor;
+                await _addressAppService.CreateAddressUnit(input.InputAddress);
+                await CurrentUnitOfWork.SaveChangesAsync();
+            }
 
             #region Example to show the usage of Event Bus as well Unit of Work Completion
 
@@ -100,12 +108,31 @@ namespace CAPS.CORPACCOUNTING.Masters
                     return dto;
                 }).ToList());
         }
-
+        [UnitOfWork]
         public async Task<VendorUnitDto> UpdateVendorUnit(UpdateVendorUnitInput input)
         {
             var vendorUnit = await _vendorUnitRepository.GetAsync(input.VendorId);
-            await _addressAppService.UpdateAddressUnit(input.InputAddress);
-            await CurrentUnitOfWork.SaveChangesAsync();
+            if (input.InputAddress != null)
+            {
+                if (input.InputAddress.AddressId != 0)
+                    await _addressAppService.UpdateAddressUnit(input.InputAddress);
+                else
+                {
+                    if (input.InputAddress.Line1 != null || input.InputAddress.Line2 != null ||
+                        input.InputAddress.Line4 != null || input.InputAddress.Line4 != null ||
+                        input.InputAddress.State != null || input.InputAddress.Country != null ||
+                        input.InputAddress.Email != null)
+                    {
+                        input.InputAddress.TypeofObjectId = TypeofObject.Vendor;
+                        input.InputAddress.ObjectId = input.VendorId;
+                        AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                        await
+                            _addressAppService.CreateAddressUnit(
+                                AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(input.InputAddress));
+                    }
+                }
+                await CurrentUnitOfWork.SaveChangesAsync();
+            }
 
             #region Setting the values to be updated
 
@@ -117,7 +144,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             vendorUnit.IsCorporation = input.IsCorporation;
             vendorUnit.IsIndependentContractor = input.IsIndependentContractor;
             vendorUnit.Isw9OnFile = input.Isw9OnFile;
-            vendorUnit.TypeOFvendorId = input.TypeOFvendorId;
+            vendorUnit.TypeofVendorId = input.TypeofvendorId;
             vendorUnit.EDDContractStartDate = input.EDDContractStartDate;
             vendorUnit.EDDContractStopDate = input.EDDContractStopDate;
             vendorUnit.WorkRegion = input.WorkRegion;
@@ -138,7 +165,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             vendorUnit.TypeofCurrency = input.TypeofCurrency;
             vendorUnit.Is1099 = input.Is1099;
             vendorUnit.ACHRoutingNumber = input.ACHRoutingNumber;
-            vendorUnit.TypeOF1099Box = input.TypeOF1099Box;
+            vendorUnit.Typeof1099Box = input.Typeof1099Box;
             vendorUnit.EDDConctractAmount = input.EDDConctractAmount;
             vendorUnit.IsEDDContractOnGoing = input.IsEDDContractOnGoing;
             vendorUnit.ACHAccountNumber = input.ACHAccountNumber;

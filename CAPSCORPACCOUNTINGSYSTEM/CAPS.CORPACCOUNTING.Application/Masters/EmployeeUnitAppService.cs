@@ -55,7 +55,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             await CurrentUnitOfWork.SaveChangesAsync();
 
            
-            input.InputAddress.EmployeeId = employeeUnit.Id;
+            input.InputAddress.ObjectId = employeeUnit.Id;
             await _addressAppService.CreateAddressUnit(input.InputAddress);
             await CurrentUnitOfWork.SaveChangesAsync();
             return employeeUnit.MapTo<EmployeeUnitDto>();
@@ -67,7 +67,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             var query =
                 from er in _employeeUnitRepository.GetAll()
-                join ar in _addressUnitRepository.GetAll() on er.Id equals  ar.EmployeeId
+                join ar in _addressUnitRepository.GetAll() on er.Id equals  ar.ObjectId
                 select new {er, Address=ar };
             var items = await query.ToListAsync();
 

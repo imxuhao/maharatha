@@ -6,6 +6,9 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    /// <summary>
+    /// Enum for ChartofAccountsType
+    /// </summary>
     public enum ChartofAccountsType
     {
         [Display(Name = "Corporate/Divisions")] Corporate = 1,

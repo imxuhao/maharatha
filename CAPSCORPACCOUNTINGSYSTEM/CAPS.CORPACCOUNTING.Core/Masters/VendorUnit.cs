@@ -7,6 +7,9 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    /// <summary>
+    /// Enum for TypeofVendor
+    /// </summary>
     public enum TypeofVendor
     {
         [Display(Name = "Standard")]Standard = 1,
@@ -22,6 +25,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Car Service")]CarService = 11,
         [Display(Name = "Phones")]Phones = 12
     }
+    /// <summary>
+    /// Enum for Typeof1099T4
+    /// </summary>
     public enum Typeof1099T4
     {
         [Display(Name = "Box 1.Rents")]Rent = 1,
@@ -54,35 +60,35 @@ namespace CAPS.CORPACCOUNTING.Masters
         public const int MaxAchwireLength = 30;
 
         /// <summary>
-        ///     Maximum size of Description.
+        ///     Maximum size of VendorNumber.
         /// </summary>
         public const int MaxVendorLength = 50;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CoaUnit" /> class  with no parameter.
+        ///     Initializes a new instance of the <see cref="VendorUnit" /> class  with no parameter.
         /// </summary>
         public VendorUnit()
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="CoaUnit" /> class.
+        ///     Initializes a new instance of the <see cref="VendorUnit" /> class.
         /// </summary>
-        public VendorUnit(string lastname, string firstname = null, string paytoname = null, string dbaname = null,
-            string vendornumber = null, string vendoraccountinfo = null,
-            string fedraltaxid = null, string ssntaxid = null, decimal? creditlimit = null, int? paymenttermsid = null,
-            TypeofPaymentMethod typeofpaymentmethod = TypeofPaymentMethod.Check,
-            string typeofcurrency = null, bool iscorporation = false, bool is1099 = false,
-            bool isindependentcontractor = false, bool isw9Onfile = false, string achroutingnumber=null,
-            TypeofVendor typeofvendorid = TypeofVendor.CarService,
-            Typeof1099T4 typeof1099Box = Typeof1099T4.CanadaRent, DateTime? eddcontractstartdate = null,
-            DateTime? eddcontractstopdate = null, decimal? eddconctractamount = null,
-            string workregion = null, bool iseddcontractongoing = false, string achbankname = null,
-            string achaccountnumber = null,
-            string achwirefrombankname = null, string achwirefrombankaddress = null, string achwirefromswiftcode = null,
-            string achwirefromaccountnumber = null, string achwiretobankname = null,
-            string achwiretoswiftcode = null, string achwiretobeneficiary = null, string achwiretoaccountnumber = null,
-            string achwiretoiban = null, bool isactive = true, bool isapproved = true, long? organizationunitid = null)
+        public VendorUnit(string lastname, TypeofPaymentMethod? typeofpaymentmethod, Typeof1099T4? typeof1099Box,
+            string firstname, string paytoname, string dbaname,
+            string vendornumber, string vendoraccountinfo,
+            string fedraltaxid, string ssntaxid, decimal? creditlimit, int? paymenttermsid,
+            string typeofcurrency, bool iscorporation, bool is1099,
+            bool isindependentcontractor, bool isw9Onfile, string achroutingnumber,
+            TypeofVendor typeofvendorid,
+            DateTime? eddcontractstartdate,
+            DateTime? eddcontractstopdate, decimal? eddconctractamount,
+            string workregion, bool iseddcontractongoing, string achbankname,
+            string achaccountnumber,
+            string achwirefrombankname, string achwirefrombankaddress, string achwirefromswiftcode,
+            string achwirefromaccountnumber, string achwiretobankname,
+            string achwiretoswiftcode, string achwiretobeneficiary, string achwiretoaccountnumber,
+            string achwiretoiban, bool isactive, bool isapproved, long? organizationunitid)
         {
             LastName = lastname;
             FirstName = firstname;
@@ -99,11 +105,12 @@ namespace CAPS.CORPACCOUNTING.Masters
             Is1099 = is1099;
             IsIndependentContractor = isindependentcontractor;
             Isw9OnFile = isw9Onfile;
-            TypeOFvendorId = typeofvendorid;
-            TypeOF1099Box = typeof1099Box;
-            EDDContractStartDate= eddcontractstartdate;
+            TypeofVendorId = typeofvendorid;
+            Typeof1099Box = typeof1099Box;
+            EDDContractStartDate = eddcontractstartdate;
             EDDContractStopDate = eddcontractstopdate;
             EDDConctractAmount = eddconctractamount;
+            TypeofPaymentMethod = typeofpaymentmethod;
             WorkRegion = workregion;
             IsEDDContractOnGoing = iseddcontractongoing;
             ACHBankName = achbankname;
@@ -166,7 +173,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public decimal? CreditLimit { get; set; }
        
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
-        public TypeofPaymentMethod TypeofPaymentMethod { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethod { get; set; }
 
         [ForeignKey("PaymentTermsId")]
         public VendorPaymentTermUnit PaymentTerms { get; set; }
@@ -190,10 +197,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         public bool Isw9OnFile { get; set; }
 
         /// <summary>Gets or sets the TypeOFvendorId field. </summary>
-        public TypeofVendor TypeOFvendorId { get; set; }
+        public TypeofVendor TypeofVendorId { get; set; }
 
         /// <summary>Gets or sets the Typeof1099T4 field. </summary>
-        public Typeof1099T4 TypeOF1099Box { get; set; }
+        public Typeof1099T4? Typeof1099Box { get; set; }
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
         public DateTime? EDDContractStartDate { get; set; }

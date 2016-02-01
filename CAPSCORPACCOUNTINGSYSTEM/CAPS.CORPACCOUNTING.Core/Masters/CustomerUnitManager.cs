@@ -19,6 +19,12 @@ namespace CAPS.CORPACCOUNTING.Masters
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
+
+        /// <summary>
+        /// Inserting Customer Details in CustomerTable
+        /// </summary>
+        /// <param name="customerunit"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task CreateAsync(CustomerUnit customerunit)
         {
@@ -26,20 +32,34 @@ namespace CAPS.CORPACCOUNTING.Masters
             await CustomerUnitRepository.InsertAsync(customerunit);
         }
 
+        /// <summary>
+        ///  Updating Customer Details in CustomerTable
+        /// </summary>
+        /// <param name="customerunit"></param>
+        /// <returns></returns>
         public virtual async Task UpdateAsync(CustomerUnit customerunit)
         {
             await ValidateCustomerUnitAsync(customerunit);
             await CustomerUnitRepository.UpdateAsync(customerunit);
         }
 
+        /// <summary>
+        /// Deleting the Customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task DeleteAsync(int id)
         {
             await CustomerUnitRepository.DeleteAsync(id);
         }
+        /// <summary>
+        /// Validating the Customer
+        /// </summary>
+        /// <param name="customerunit"></param>
+        /// <returns></returns>
         protected virtual async Task ValidateCustomerUnitAsync(CustomerUnit customerunit)
         {
-            //Validating if Duplicate Customer exists
             if (CustomerUnitRepository != null)
             {
                 var customer = (await CustomerUnitRepository.GetAllListAsync(p => p.LastName == customerunit.LastName && p.OrganizationUnitId == customerunit.OrganizationUnitId));

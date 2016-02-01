@@ -14,9 +14,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(CoaUnit.MaxDesc)]
         public string Description { get; set; }
 
-        /// <summary>Gets or sets the DisplaySequence field. </summary>
+        /// <summary>Gets or sets the ChartofAccountsType field. </summary>
+        [EnumDataType(typeof(ChartofAccountsType))]
         public ChartofAccountsType ChartofAccountsType { get; set; }
-
+        
+        /// <summary>Gets or sets the DisplaySequence field. </summary>
         public int? DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>

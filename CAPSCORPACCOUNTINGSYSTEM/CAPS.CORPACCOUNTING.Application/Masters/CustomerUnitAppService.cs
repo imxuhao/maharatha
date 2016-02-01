@@ -14,43 +14,76 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly CustomerUnitManager _customerUnitManager;
         private readonly IRepository<CustomerUnit> _customerUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly AddressUnitAppService _addressUnitAppService;
+        private readonly IRepository<AddressUnit,long> _addresRepository;
+
+
 
         public CustomerUnitAppService(CustomerUnitManager customerUnitManager, IRepository<CustomerUnit> customerUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager)
+            IUnitOfWorkManager unitOfWorkManager,AddressUnitAppService addressUnitAppService)
         {
             _customerUnitManager = customerUnitManager;
             _customerUnitRepository = customerUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
+            _addressUnitAppService = addressUnitAppService;
         }
 
         [UnitOfWork]
         public async Task<CustomerUnitDto> CreateCustomerUnit(
             CreateCustomerUnitInput input)
         {
-            var salesRepUnit = new CustomerUnit(lastname:input.LastName,firstname:input.FirstName,customernumber:input.CustomerNumber,creditlimit:input.CreditLimit,
+            var customerRepUnit = new CustomerUnit(lastname:input.LastName,firstname:input.FirstName,customernumber:input.CustomerNumber,creditlimit:input.CreditLimit,
                 salesrepid:input.SalesRepId,isapproved:input.IsApproved,isactive:input.IsActive,organizationunitid:input.OrganizationUnitId,
                customerpaymenttermid:input.CustomerPayTermsId, typeofpaymentmethodid:input.TypeofPaymentMethodId);
-            await _customerUnitManager.CreateAsync(salesRepUnit);
+            await _customerUnitManager.CreateAsync(customerRepUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
-            return salesRepUnit.MapTo<CustomerUnitDto>();
+
+            input.InputAddress.ObjectId = customerRepUnit.Id;
+            input.InputAddress.TypeofObjectId=TypeofObject.Customer;
+            input.InputAddress.AddressTypeId=TypeofAddress.Home;
+            await _addressUnitAppService.CreateAddressUnit(input.InputAddress);
+            await CurrentUnitOfWork.SaveChangesAsync();
+            return customerRepUnit.MapTo<CustomerUnitDto>();
         }
 
         public async Task DeleteCustomerUnit(IdInput input)
         {
+
             await _customerUnitManager.DeleteAsync(input.Id);
+            GetAddressUnitInput dto = new GetAddressUnitInput();
+            dto.TypeofObjectId = TypeofObject.Customer;
+            dto.ObjectId = input.Id;
+            await _addressUnitAppService.DeleteAddressUnit(dto);
+           
         }
 
         public async Task<ListResultOutput<CustomerUnitDto>> GetCustomerUnits()
         {
+            //var query =
+            //   from er in _employeeUnitRepository.GetAll()
+            //   join ar in _addressUnitRepository.GetAll() on er.Id equals ar.ObjectId
+            //   select new { er, Address = ar };
+            //var items = await query.ToListAsync();
+
+            //return new ListResultOutput<EmployeeUnitDto>(
+            //    items.Select(item =>
+            //    {
+            //        var dto = item.er.MapTo<EmployeeUnitDto>();
+            //        dto.Address = new Collection<AddressUnitDto>();
+            //        dto.Address.Add(item.Address.MapTo<AddressUnitDto>());
+            //        return dto;
+            //    }).ToList());
+
             var query =
-                from sr in _customerUnitRepository.GetAll()
-                select new { sr };
+                from customer in _customerUnitRepository.GetAll()
+                join ar in _addresRepository.GetAll() on customer.Id equals ar.ObjectId
+                select new { customer };
             var items = await query.ToListAsync();
 
             return new ListResultOutput<CustomerUnitDto>(
                 items.Select(item =>
                 {
-                    var dto = item.sr.MapTo<CustomerUnitDto>();
+                    var dto = item.customer.MapTo<CustomerUnitDto>();
                     return dto;
                 }).ToList());
         }
@@ -58,6 +91,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<CustomerUnitDto> UpdateCustomerUnit(UpdateCustomerUnitInput input)
         {
             var customerUnit = await _customerUnitRepository.GetAsync(input.CustomerId);
+            input.InputAddress.ObjectId = input.CustomerId;
+            input.InputAddress.TypeofObjectId=TypeofObject.Customer;
+            await _addressUnitAppService.UpdateAddressUnit(input.InputAddress);
+            await CurrentUnitOfWork.SaveChangesAsync();
 
             #region Setting the values to be updated
 
@@ -81,7 +118,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
-                /*Do Something when the Chart of salesRep is Added*/
+                /*Do Something when the Chart of Customer is Added*/
             };
 
             return customerUnit.MapTo<CustomerUnitDto>();

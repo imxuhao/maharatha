@@ -10,7 +10,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     public sealed class SalesRepUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
-        ///     Maximum size of Description.
+        ///     Maximum size of Name fields.
         /// </summary>
         public const int MaxName = 100;
 

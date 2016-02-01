@@ -12,6 +12,10 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         protected IRepository<SalesRepUnit> SalesRepUnitRepository { get;  }
 
+        /// <summary>
+        ///  SalesRepUnitManager Constructor to initializing the SalesRepUnit Repository
+        /// </summary>
+        /// <param name="salesrepunitrepository"></param>
         public SalesRepUnitManager(IRepository<SalesRepUnit> salesrepunitrepository)
         {
             SalesRepUnitRepository = salesrepunitrepository;
@@ -19,6 +23,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
+        /// <summary>
+        /// Inserting SalesRepUnit Details
+        /// </summary>
+        /// <param name="salesrepunit"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task CreateAsync(SalesRepUnit salesrepunit)
         {
@@ -26,17 +35,32 @@ namespace CAPS.CORPACCOUNTING.Masters
             await SalesRepUnitRepository.InsertAsync(salesrepunit);
         }
 
+        /// <summary>
+        ///  Updating SalesRepUnit Details
+        /// </summary>
+        /// <param name="salesrepunit"></param>
+        /// <returns></returns>
         public virtual async Task UpdateAsync(SalesRepUnit salesrepunit)
         {
             await ValidateSalesRepUnitAsync(salesrepunit);
             await SalesRepUnitRepository.UpdateAsync(salesrepunit);
         }
 
+        /// <summary>
+        /// Deleting SalesRepUnit
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public virtual async Task DeleteAsync(int id)
         {
             await SalesRepUnitRepository.DeleteAsync(id);
         }
+        /// <summary>
+        /// Validating SalesRepUnit
+        /// </summary>
+        /// <param name="salesRepUnit"></param>
+        /// <returns></returns>
         protected virtual async Task ValidateSalesRepUnitAsync(SalesRepUnit salesRepUnit)
         {
             //Validating if Duplicate SalesRep exists

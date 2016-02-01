@@ -37,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public decimal? CreditLimit { get; set; }
 
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
-        public TypeofPaymentMethod TypeofPaymentMethod { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethod { get; set; }
 
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
         public int? PaymentTermsId { get; set; }
@@ -56,11 +56,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the Isw9OnFile field. </summary>
         public bool Isw9OnFile { get; set; }
 
-        /// <summary>Gets or sets the TypeOFvendorId field. </summary>
-        public TypeofVendor TypeOFvendorId { get; set; }
+        /// <summary>Gets or sets the TypeOfvendorId field. </summary>
+        public TypeofVendor? TypeofVendorId { get; set; }
 
         /// <summary>Gets or sets the Typeof1099T4 field. </summary>
-        public Typeof1099T4 TypeOF1099Box { get; set; }
+        public Typeof1099T4? Typeof1099Box { get; set; }
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
         public DateTime? EDDContractStartDate { get; set; }

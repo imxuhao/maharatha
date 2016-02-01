@@ -38,5 +38,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+        /// <summary>
+        ///Gets or Sets the Address
+        /// </summary>
+        public CreateAddressUnitInput InputAddress { get; set; }
     }
 }

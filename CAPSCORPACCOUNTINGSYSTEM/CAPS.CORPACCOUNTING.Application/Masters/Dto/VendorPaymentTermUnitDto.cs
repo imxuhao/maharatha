@@ -6,9 +6,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     [AutoMapFrom(typeof(VendorPaymentTermUnit))]  
     public class VendorPaymentTermUnitDto : AuditedEntityDto
     {
+        /// <summary>Gets or sets the VendorPaymentTermId</summary>
         public int VendorPaymentTermId { get; set; }
 
-        /// <summary>overriding the id column with Description</summary>
+        /// <summary>Gets or sets the Description</summary>
         public string Description { get; set; }
         /// <summary>Gets or sets the DueDays. </summary>
         public int DueDays { get; set; }

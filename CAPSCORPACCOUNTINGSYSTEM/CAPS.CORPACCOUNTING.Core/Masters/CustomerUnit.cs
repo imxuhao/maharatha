@@ -7,6 +7,9 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    /// <summary>
+    ///  Enum for Type of TypeofPaymentMethod
+    /// </summary>
     public enum TypeofPaymentMethod
     {
         [Display(Name = "Check")]Check = 1,
@@ -74,14 +77,14 @@ namespace CAPS.CORPACCOUNTING.Masters
         [StringLength(MaxName)]
         public string FirstName { get; set; }
 
-        /// <summary>Gets or sets the [CustomerNumber] field. </summary>
+        /// <summary>Gets or sets the CustomerNumber field. </summary>
         [StringLength(MaxNumberLength)]
         public string CustomerNumber { get; set; }
-        /// <summary>Gets or sets the [CustomerNumber] field. </summary>
+        /// <summary>Gets or sets the CreditLimit field. </summary>
         public decimal? CreditLimit { get; set; }
 
         /// <summary>
-        /// Gets or Sets CustomerPaymentTerm
+        /// Gets or Sets TypeofPaymentMethod
         /// </summary>
         public TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
 
@@ -93,7 +96,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the Is SalesRepId field. </summary>
         public int? SalesRepId { get; set; }
-        /// <summary>Gets or sets the Is SalesRep. </summary>
+        /// <summary>Gets or sets the  SalesRep. </summary>
         [ForeignKey("SalesRepId")]
         public SalesRepUnit SalesRep { get; set; }
         /// <summary>Gets or sets the Is IsApproved field. </summary>

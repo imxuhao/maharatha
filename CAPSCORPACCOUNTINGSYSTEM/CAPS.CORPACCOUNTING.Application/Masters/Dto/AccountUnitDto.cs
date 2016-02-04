@@ -5,7 +5,7 @@ using Castle.Core;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
-    [Interceptor(typeof(OutputDtoInterceptor))]
+   
     [AutoMapFrom(typeof(AccountUnit))]
     public class AccountUnitDto :IOutputDto
     {

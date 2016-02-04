@@ -50,7 +50,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
 
             await _customerUnitManager.DeleteAsync(input.Id);
-            GetAddressUnitInput dto = new GetAddressUnitInput();
+            DeleteAddressUnitInput dto = new DeleteAddressUnitInput();
             dto.TypeofObjectId = TypeofObject.Customer;
             dto.ObjectId = input.Id;
             await _addressUnitAppService.DeleteAddressUnit(dto);
@@ -59,20 +59,6 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task<ListResultOutput<CustomerUnitDto>> GetCustomerUnits()
         {
-            //var query =
-            //   from er in _employeeUnitRepository.GetAll()
-            //   join ar in _addressUnitRepository.GetAll() on er.Id equals ar.ObjectId
-            //   select new { er, Address = ar };
-            //var items = await query.ToListAsync();
-
-            //return new ListResultOutput<EmployeeUnitDto>(
-            //    items.Select(item =>
-            //    {
-            //        var dto = item.er.MapTo<EmployeeUnitDto>();
-            //        dto.Address = new Collection<AddressUnitDto>();
-            //        dto.Address.Add(item.Address.MapTo<AddressUnitDto>());
-            //        return dto;
-            //    }).ToList());
 
             var query =
                 from customer in _customerUnitRepository.GetAll()
@@ -84,6 +70,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 items.Select(item =>
                 {
                     var dto = item.customer.MapTo<CustomerUnitDto>();
+                    dto.CustomerPayTermsId = item.customer.Id;
                     return dto;
                 }).ToList());
         }

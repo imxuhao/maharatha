@@ -1,7 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using System;
 using System.ComponentModel.DataAnnotations;
-using Abp.AutoMapper;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
@@ -25,15 +25,14 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string PayToName { get; set; }
 
         /// <summary>Gets or sets the DBAName field. </summary>
-
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string DbaName { get; set; }
 
-        /// <summary>Gets or sets the IsPrivate field. </summary>
+        /// <summary>Gets or sets the VendorNumber field. </summary>
         [StringLength(VendorUnit.MaxVendorLength)]
         public string VendorNumber { get; set; }
 
-        /// <summary>Gets or sets the IsPrivate field. </summary>
+        /// <summary>Gets or sets the VendorAccountInfo field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string VendorAccountInfo { get; set; }
 
@@ -150,9 +149,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>
-        /// Gets or sets  AddressData of a Vendor
-        /// </summary>
-        public UpdateAddressUnitInput InputAddress { get; set; }
+        /// <summary> Gets or sets  AddressData of a Vendor </summary>
+        public List<UpdateAddressUnitInput> InputAddress { get; set; }
     }
 }

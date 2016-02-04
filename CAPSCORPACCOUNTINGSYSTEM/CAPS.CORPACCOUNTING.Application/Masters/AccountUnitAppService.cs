@@ -26,19 +26,18 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _unitOfWorkManager = unitOfWorkManager;
 
         }
-        public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId)
+        public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId=null)
         {
-           
-    
             var items =
-                  from au in await _accountUnitRepository.GetAllListAsync(p => p.OrganizationUnitId == organizationUnitId)
+                  from au in await _accountUnitRepository.GetAllListAsync()
+                  where organizationUnitId == null || au.OrganizationUnitId == organizationUnitId
                   select new { au, memberCount = au };
-
            
             return new ListResultOutput<AccountUnitDto>(
                 items.Select(item =>
                 {
                     var dto = item.au.MapTo<AccountUnitDto>();
+                    dto.AccountId = item.au.Id;
                     return dto;
                 }).ToList());
         }
@@ -55,6 +54,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 items.Select(item =>
                 {
                     var dto = item.au.MapTo<AccountUnitDto>();
+                    dto.AccountId = item.au.Id;
                     return dto;
                 }).ToList());
         }
@@ -86,7 +86,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
         }
         public async Task<AccountUnitDto> UpdateAccountUnit(UpdateAccountUnitInput input)
         {
-            var accountUnit = await _accountUnitRepository.GetAsync(input.Id);
+            var accountUnit = await _accountUnitRepository.GetAsync(input.AccountId);
 
             #region Setting the values to be updated
 

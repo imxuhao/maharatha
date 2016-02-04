@@ -31,16 +31,14 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
 
             var items =
-                     from au in await _coaUnitRepository.GetAllListAsync(p => p.OrganizationUnitId == organizationUnitId)
+                     from au in await _coaUnitRepository.GetAllListAsync()
+                     where organizationUnitId == null || au.OrganizationUnitId == organizationUnitId
                      select new { au, memberCount = au };
-
-            //  var items = await query.ToList();
 
             return new ListResultOutput<CoaUnitDto>(
                 items.Select(item =>
                 {
                     var dto = item.au.MapTo<CoaUnitDto>();
-                    //dto.MemberCount = item.memberCount;
                     dto.CoaId = item.au.Id;
                     return dto;
                 }).ToList());

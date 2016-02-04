@@ -8,6 +8,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the SalesRepId field.</summary>
         public int SalesRepId { get; set; }
 
+        /// <summary>Gets or sets the LastName field.</summary>
         [Required]
         [StringLength(SalesRepUnit.MaxName)]
         public string LastName { get; set; }

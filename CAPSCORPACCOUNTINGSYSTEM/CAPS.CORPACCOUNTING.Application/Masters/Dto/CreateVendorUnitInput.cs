@@ -22,7 +22,6 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string PayToName { get; set; }
 
         /// <summary>Gets or sets the DBAName field. </summary>
-
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string DbaName { get; set; }
 
@@ -60,6 +59,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Is1099 field. </summary>
         public bool Is1099 { get; set; }
+
         /// <summary>Gets or sets the IsIndependentContractor field. </summary>
         public bool IsIndependentContractor { get; set; }
 
@@ -147,9 +147,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>
-        /// Gets or sets AddressData of a Vendor
-        /// </summary>
-        public CreateAddressUnitInput InputAddress { get; set; }
+        /// <summary> Gets or sets AddressData of a Vendor </summary>
+        public List<CreateAddressUnitInput> InputAddress { get; set; }
     }
 }

@@ -39,10 +39,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _salesRepUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<SalesRepUnitDto>> GetSalesRepUnits()
+        public async Task<ListResultOutput<SalesRepUnitDto>> GetSalesRepUnits(long? organizationUnitId)
         {
             var query =
                 from sr in _salesRepUnitRepository.GetAll()
+                where organizationUnitId == null || sr.OrganizationUnitId == organizationUnitId
                 select new { sr };
             var items = await query.ToListAsync();
 
@@ -50,6 +51,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 items.Select(item =>
                 {
                     var dto = item.sr.MapTo<SalesRepUnitDto>();
+                    dto.SalesRepId = item.sr.Id;
                     return dto;
                 }).ToList());
         }

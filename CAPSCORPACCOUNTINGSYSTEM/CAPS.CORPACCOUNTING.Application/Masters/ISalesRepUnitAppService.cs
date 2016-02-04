@@ -9,7 +9,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         Task<SalesRepUnitDto> CreateSalesRepUnit(CreateSalesRepUnitInput input);
 
-        Task<ListResultOutput<SalesRepUnitDto>> GetSalesRepUnits();
+        Task<ListResultOutput<SalesRepUnitDto>> GetSalesRepUnits(long? organizationUnitId);
 
         Task<SalesRepUnitDto> UpdateSalesRepUnit(UpdateSalesRepUnitInput input);
         Task DeleteSalesRepUnit(IdInput input);

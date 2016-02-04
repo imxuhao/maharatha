@@ -34,7 +34,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task DeleteEmployeeUnit(IdInput input)
         {
             await _employeeUnitManager.DeleteAsync(input.Id);
-            GetAddressUnitInput dto=new GetAddressUnitInput();
+            DeleteAddressUnitInput dto =new DeleteAddressUnitInput();
             dto.TypeofObjectId=TypeofObject.Emp;
             dto.ObjectId = input.Id;
             await _addressAppService.DeleteAddressUnit(dto);
@@ -75,6 +75,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 items.Select(item =>
                 {  
                     var dto = item.er.MapTo<EmployeeUnitDto>();
+                    dto.EmployeeId = item.er.Id;
                     dto.Address=new Collection<AddressUnitDto>();
                     dto.Address.Add(item.Address.MapTo<AddressUnitDto>());
                     return dto;

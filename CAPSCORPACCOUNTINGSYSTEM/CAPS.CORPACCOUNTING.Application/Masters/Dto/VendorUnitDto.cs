@@ -1,15 +1,19 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapFrom(typeof(VendorUnit))]
-    public class VendorUnitDto : AuditedEntityDto
+    public class VendorUnitDto : IOutputDto
     {
+        /// <summary>Gets or sets the VendorId field. </summary>
         public int VendorId { get; set; }
 
+        /// <summary>Gets or sets the LastName field. </summary>
         public string LastName { get; set; }
 
         /// <summary>Gets or sets the FirstName field. </summary>
@@ -19,12 +23,12 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string PayToName { get; set; }
 
         /// <summary>Gets or sets the DBAName field. </summary>
-
         public string DbaName { get; set; }
 
-        /// <summary>Gets or sets the IsPrivate field. </summary>
+        /// <summary>Gets or sets the VendorNumber field. </summary>
         public string VendorNumber { get; set; }
-        /// <summary>Gets or sets the IsPrivate field. </summary>
+
+        /// <summary>Gets or sets the VendorAccountInfo field. </summary>
         public string VendorAccountInfo { get; set; }
 
         /// <summary>Gets or sets the FedralTaxId field. </summary>
@@ -39,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
         public TypeofPaymentMethod? TypeofPaymentMethod { get; set; }
 
-        /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
+        /// <summary>Gets or sets the PaymentTermsId field. </summary>
         public int? PaymentTermsId { get; set; }
 
         /// <summary>Gets or sets the TypeofCurrency field. </summary>
@@ -50,6 +54,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Is1099 field. </summary>
         public bool Is1099 { get; set; }
+
         /// <summary>Gets or sets the IsIndependentContractor field. </summary>
         public bool IsIndependentContractor { get; set; }
 
@@ -76,9 +81,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the IsEDDContractOnGoing field. </summary>
         public bool IsEDDContractOnGoing { get; set; }
-        /// <summary>Gets or sets the ACHBankName field. </summary>
 
+        /// <summary>Gets or sets the ACHBankName field. </summary>
         public string ACHBankName { get; set; }
+
         /// <summary>Gets or sets the ACHRoutingNumber field. </summary>
         public string ACHRoutingNumber { get; set; }
 
@@ -119,5 +125,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the Addresses of a vendor </summary>
+        public Collection<AddressUnitDto> Address { get; set; }
     }
 }

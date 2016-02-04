@@ -9,8 +9,10 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         Task<AddressUnitDto> CreateAddressUnit(CreateAddressUnitInput input);
 
-        Task<ListResultOutput<AddressUnitDto>> GetAddressUnits();
+        Task<ListResultOutput<AddressUnitDto>> GetAddressUnits(GetAddressUnitInput input);
         Task<AddressUnitDto> UpdateAddressUnit(UpdateAddressUnitInput input);
-        Task DeleteAddressUnit(GetAddressUnitInput input);
+        Task DeleteAddressUnit(DeleteAddressUnitInput input);
+
+        
     }
 }

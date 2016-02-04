@@ -15,6 +15,7 @@ namespace CAPS.CORPACCOUNTING
         {
             //Adding authorization providers
             Configuration.Authorization.Providers.Add<AppAuthorizationProvider>();
+
         }
 
         public override void Initialize()

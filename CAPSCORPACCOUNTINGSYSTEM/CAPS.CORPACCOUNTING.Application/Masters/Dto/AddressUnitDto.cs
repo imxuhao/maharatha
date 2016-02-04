@@ -4,12 +4,13 @@ using  Abp.AutoMapper;
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapFrom(typeof(AddressUnit))]  
-    public class AddressUnitDto : AuditedEntityDto
+    public class AddressUnitDto : IOutputDto
     {
         /// <summary>>Gets or sets the AddressId</summary>
         public long AddressId { get; set; }
+
         /// <summary>Gets or sets the ObjectId field. </summary>
-        public int EmployeeId { get; set; }
+        public int ObjectId { get; set; }
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         public TypeofObject TypeofObjectId { get; set; }
@@ -50,6 +51,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the Email field. </summary>
         public string Email { get; set; }
 
+
         /// <summary>Gets or sets the Phone1 field. </summary>
         public string Phone1 { get; set; }
 
@@ -69,6 +71,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool IsPrimary { get; set; }
 
         public int TenantId { get; set; }
+
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
     }

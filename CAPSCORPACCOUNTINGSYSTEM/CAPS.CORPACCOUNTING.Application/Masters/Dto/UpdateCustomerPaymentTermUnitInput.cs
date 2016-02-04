@@ -6,9 +6,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class UpdateCustomerPaymentTermUnitInput : IInputDto
     {
-        /// <summary>Gets or sets the VenorPaymentTermId field.</summary>
+        /// <summary>Gets or sets the CustomerPaymentTermId field.</summary>
         [Range(1, Int32.MaxValue, ErrorMessage = "Please enter valid CustomerPaymentTermId")]
         public int CustomerPaymentTermId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(CustomerPaymentTermUnit.MaxDesc)]
@@ -24,6 +25,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the DiscountPercent field. </summary>
         public decimal? DiscountPercent { get; set; }
+
         /// <summary>Gets or sets the DiscountDays. </summary>
         public int? DiscountDays { get; set; }
 
@@ -34,12 +36,15 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the WiringInstructions field. </summary>
         [StringLength(CustomerPaymentTermUnit.MaxStringLength)]
         public string WiringInstructions { get; set; }
+
         /// <summary>Gets or sets the FooterMessage field. </summary>
         [StringLength(CustomerPaymentTermUnit.MaxStringLength)]
         public string FooterMessage { get; set; }
+
         /// <summary>Gets or sets the LogoCaption field. </summary>
         [StringLength(CustomerPaymentTermUnit.MaxStringLength)]
         public string LogoCaption { get; set; }
+
         /// <summary>Gets or sets the IsDefault field. </summary>
         public bool IsDefault { get; set; }
         

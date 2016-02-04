@@ -10,11 +10,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     {  
         /// <summary>Gets or sets the AddressId field. </summary>
         public int AddressId { get; set; }
-       
+
+        /// <summary>Gets or sets the ObjectId field. </summary>
         public int ObjectId { get; set; }
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
-       
         public TypeofObject TypeofObjectId { get; set; }
 
         /// <summary>Gets or sets the AddressTypeId field. </summary>
@@ -63,6 +63,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Email field. </summary>
         [StringLength(AddressUnit.MaxStringNameLength)]
+        [EmailAddress]
         public string Email { get; set; }
 
         /// <summary>Gets or sets the Phone1 field. </summary>

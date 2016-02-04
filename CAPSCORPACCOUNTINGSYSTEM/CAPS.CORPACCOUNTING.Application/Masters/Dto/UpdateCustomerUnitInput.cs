@@ -7,6 +7,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     {
         /// <summary>Gets or sets the CustomerId field. </summary>
         public int CustomerId { get; set; }
+
+        /// <summary>Gets or sets the LastName field. </summary>
         [Required]
         [StringLength(CustomerUnit.MaxName)]
         public string LastName { get; set; }
@@ -18,12 +20,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the [CustomerNumber] field. </summary>
         [StringLength(CustomerUnit.MaxNumberLength)]
         public string CustomerNumber { get; set; }
+
         /// <summary>Gets or sets the CustomerNumber field. </summary>
         public decimal? CreditLimit { get; set; }
 
-        /// <summary>
-        /// Gets or Sets CustomerPaymentTerm
-        /// </summary>
+        /// <summary> Gets or Sets TypeofPaymentMethodId </summary>
         public TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
@@ -31,6 +32,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Is SalesRepId field. </summary>
         public int? SalesRepId { get; set; }
+
         /// <summary>Gets or sets the Is IsApproved field. </summary>
         public bool IsApproved { get; set; }
 
@@ -39,9 +41,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
-        /// <summary>
-        /// Gets or Sets Address Unit
-        /// </summary>
+        
+        /// <summary> Gets or Sets Address Unit </summary>
         public UpdateAddressUnitInput InputAddress { get; set; }
     }
 

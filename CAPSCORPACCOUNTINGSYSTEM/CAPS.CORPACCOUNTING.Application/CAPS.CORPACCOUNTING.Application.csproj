@@ -108,6 +108,7 @@
       <HintPath>..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -191,6 +192,7 @@
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
     <Compile Include="Masters\Dto\AddressUnitDto.cs" />
+    <Compile Include="Masters\Dto\DeleteAddressUnitInput.cs" />
     <Compile Include="Masters\Dto\VendorUnitDto.cs" />
     <Compile Include="Masters\Dto\UpdateVendorUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateVendorUnitInput.cs" />

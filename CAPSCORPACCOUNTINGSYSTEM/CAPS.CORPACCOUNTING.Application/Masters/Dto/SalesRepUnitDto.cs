@@ -4,11 +4,12 @@ using  Abp.AutoMapper;
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapFrom(typeof(SalesRepUnit))]  
-    public class SalesRepUnitDto : AuditedEntityDto
+    public class SalesRepUnitDto : IOutputDto
     {
         /// <summary>>Gets or sets the SalesRepId field. </summary>
         public int SalesRepId { get; set; }
 
+        /// <summary>Gets or sets the LastName field. </summary>
         public string LastName { get; set; }
 
         /// <summary>Gets or sets the FirstName field. </summary>

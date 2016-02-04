@@ -56,10 +56,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _vendorPaymentTermUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits()
+        public async Task<ListResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(long? organizationUnitId)
         {
             var query =
                 from vpt in _vendorPaymentTermUnitRepository.GetAll()
+                where organizationUnitId == null || vpt.OrganizationUnitId == organizationUnitId
                 select new {vpt};
             var items = await query.ToListAsync();
 
@@ -67,6 +68,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 items.Select(item =>
                 {
                     var dto = item.vpt.MapTo<VendorPaymentTermUnitDto>();
+                    dto.VendorPaymentTermId = item.vpt.Id;
                     return dto;
                 }).ToList());
         }

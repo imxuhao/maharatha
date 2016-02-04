@@ -4,9 +4,11 @@ using  Abp.AutoMapper;
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapFrom(typeof(CustomerPaymentTermUnit))]  
-    public class CustomerPaymentTermUnitDto : AuditedEntityDto
-    { /// <summary>Gets or sets the VenorPaymentTermId</summary>
+    public class CustomerPaymentTermUnitDto : IOutputDto
+    {
+        /// <summary>Gets or sets the CustomerPaymentTermId</summary>
         public int CustomerPaymentTermId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         public string Description { get; set; }
 
@@ -18,6 +20,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the DiscountPercent. </summary>
         public decimal? DiscountPercent { get; set; }
+
         /// <summary>Gets or sets the DiscountDays. </summary>
         public int? DiscountDays { get; set; }
 
@@ -26,11 +29,14 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the WiringInstructions Type. </summary>
         public string WiringInstructions { get; set; }
+
         /// <summary>Gets or sets the FooterMessage Type. </summary>
         public string FooterMessage { get; set; }
+
         /// <summary>Gets or sets the LogoCaption Type. </summary>
         public string LogoCaption { get; set; }
-        /// <summary>Gets or sets the IsPIsDefaultrivate field. </summary>
+
+        /// <summary>Gets or sets the IsDefault field. </summary>
         public bool IsDefault { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>

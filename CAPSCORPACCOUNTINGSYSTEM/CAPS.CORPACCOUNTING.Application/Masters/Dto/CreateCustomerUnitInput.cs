@@ -13,15 +13,14 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(CustomerUnit.MaxName)]
         public string FirstName { get; set; }
 
-        /// <summary>Gets or sets the [CustomerNumber] field. </summary>
+        /// <summary>Gets or sets the CustomerNumber field. </summary>
         [StringLength(CustomerUnit.MaxNumberLength)]
         public string CustomerNumber { get; set; }
+
         /// <summary>Gets or sets the CustomerNumber field. </summary>
         public decimal? CreditLimit { get; set; }
 
-        /// <summary>
-        /// Gets or Sets TypeofPaymentMethodId
-        /// </summary>
+        /// <summary> Gets or Sets TypeofPaymentMethodId </summary>
         public TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
@@ -38,9 +37,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
-        /// <summary>
-        ///Gets or Sets the Address
-        /// </summary>
+        
+        /// <summary>Gets or Sets the Address </summary>
         public CreateAddressUnitInput InputAddress { get; set; }
     }
 }

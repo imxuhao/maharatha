@@ -21,6 +21,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the DiscountPercent field. </summary>
         public decimal? DiscountPercent { get; set; }
+
         /// <summary>Gets or sets the DiscountDays field. </summary>
         public int? DiscountDays { get; set; }
 
@@ -31,12 +32,15 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the WiringInstructions field. </summary>
         [StringLength(CustomerPaymentTermUnit.MaxStringLength)]
         public string WiringInstructions { get; set; }
+
         /// <summary>Gets or sets the FooterMessage field. </summary>
         [StringLength(CustomerPaymentTermUnit.MaxStringLength)]
         public string FooterMessage { get; set; }
+
         /// <summary>Gets or sets the LogoCaption field. </summary>
         [StringLength(CustomerPaymentTermUnit.MaxStringLength)]
         public string LogoCaption { get; set; }
+
         /// <summary>Gets or sets the IsDefault field. </summary>
         public bool IsDefault { get; set; }
 

@@ -4,8 +4,9 @@ using  Abp.AutoMapper;
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapFrom(typeof(CoaUnit))]  
-    public class CoaUnitDto : AuditedEntityDto
+    public class CoaUnitDto : IOutputDto
     {
+        /// <summary>Gets or sets the CoaId field. </summary>
         public int CoaId { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>

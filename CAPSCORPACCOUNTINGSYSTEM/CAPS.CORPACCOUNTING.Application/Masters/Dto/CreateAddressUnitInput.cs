@@ -1,15 +1,14 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using System.ComponentModel.DataAnnotations;
-using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapTo(typeof(AddressUnit))]
     public class CreateAddressUnitInput : IInputDto
     {
+        /// <summary>Gets or sets the ObjectId field. </summary>
         public int ObjectId { get; set; }
-
       
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         public TypeofObject TypeofObjectId { get; set; }
@@ -59,6 +58,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Email field. </summary>
         [StringLength(AddressUnit.MaxStringNameLength)]
+        [EmailAddress]
         public string Email { get; set; }
 
         /// <summary>Gets or sets the Phone1 field. </summary>

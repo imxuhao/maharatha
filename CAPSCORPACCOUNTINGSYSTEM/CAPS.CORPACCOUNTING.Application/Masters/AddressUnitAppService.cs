@@ -39,23 +39,27 @@ namespace CAPS.CORPACCOUNTING.Masters
             return addressUnit.MapTo<AddressUnitDto>();
         }
 
-        public async Task DeleteAddressUnit(GetAddressUnitInput input)
+        public async Task DeleteAddressUnit(DeleteAddressUnitInput input)
         {
             await _addressUnitRepository.DeleteAsync(p => p.ObjectId == input.ObjectId && p.TypeofObjectId == input.TypeofObjectId);
-           // await _addressUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<AddressUnitDto>> GetAddressUnits()
+        public async Task<ListResultOutput<AddressUnitDto>> GetAddressUnits(GetAddressUnitInput input)
         {
             var query =
-                from au in _addressUnitRepository.GetAll()
-                select new { au };
+                _addressUnitRepository.GetAll()
+                    .Where(
+                        au =>
+                            au.TypeofObjectId == input.TypeofObjectId &&
+                            (input.OrganizationUnitId == null || au.OrganizationUnitId == input.OrganizationUnitId))
+                    .Select(au => new {au});
             var items = await query.ToListAsync();
 
             return new ListResultOutput<AddressUnitDto>(
                 items.Select(item =>
                 {
                     var dto = item.au.MapTo<AddressUnitDto>();
+                    dto.AddressId = item.au.Id;
                     return dto;
                 }).ToList());
         }

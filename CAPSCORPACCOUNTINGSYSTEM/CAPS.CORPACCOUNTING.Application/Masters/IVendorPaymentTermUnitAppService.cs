@@ -9,7 +9,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         Task<VendorPaymentTermUnitDto> CreateVendorPaymentTermUnit(CreateVendorPaymentTermUnitInput input);
 
-        Task<ListResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits();
+        Task<ListResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(long? organizationUnitId);
 
         Task<VendorPaymentTermUnitDto> UpdateVendorPaymentTermUnit(UpdateVendorPaymentTermUnitInput input);
         Task DeleteVendorPaymentTermUnit(IdInput input);

@@ -10,6 +10,7 @@ using Abp.Events.Bus.Entities;
 using System.Linq;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
+using System.Linq.Dynamic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -20,17 +21,20 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IAddressUnitAppService _addressAppService;
         private readonly IRepository<AddressUnit,long> _addresRepository;
+        private readonly IRepository<VendorPaymentTermUnit> _vendorPaytermRepository;
 
         public VendorUnitAppService(VendorUnitManager vendorUnitManager, IRepository<VendorUnit> vendorUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService, IRepository<AddressUnit, long> addresRepository)
+            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService,
+            IRepository<AddressUnit, long> addresRepository, IRepository<VendorPaymentTermUnit> vendorPaytermRepository)
         {
             _vendorUnitManager = vendorUnitManager;
             _vendorUnitRepository = vendorUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _addressAppService = addressAppService;
             _addresRepository = addresRepository;
-           
+            _vendorPaytermRepository = vendorPaytermRepository;
         }
+
         public IEventBus EventBus { get; set; }
 
         /// <summary>
@@ -85,6 +89,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             await UpdateVendorUnit(input);
         }
 
+        /// <summary>
+        /// Creating the Vendor with Addresses
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task<VendorUnitDto> CreateVendorUnit(CreateVendorUnitInput input)
         {
@@ -116,7 +125,8 @@ namespace CAPS.CORPACCOUNTING.Masters
                 {
                     if (address.Line1 != null || address.Line2 != null || address.Line4 != null ||
                         address.Line4 != null || address.State != null ||
-                        address.Country != null || address.Email != null)
+                        address.Country != null || address.Email != null || address.Phone1 != null ||
+                        address.Website != null)
                     {
                         address.ObjectId = vendorUnit.Id;
                         await _addressAppService.CreateAddressUnit(address);
@@ -144,66 +154,101 @@ namespace CAPS.CORPACCOUNTING.Masters
             return vendorUnit.MapTo<VendorUnitDto>();
         }
 
+        /// <summary>
+        /// Delete Vendor and its Addresses
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task DeleteVendorUnit(IdInput input)
         {
             await _vendorUnitManager.DeleteAsync(input.Id);
-            DeleteAddressUnitInput dto = new DeleteAddressUnitInput();
-            dto.TypeofObjectId = TypeofObject.Vendor;
-            dto.ObjectId = input.Id;
+            DeleteAddressUnitInput dto = new DeleteAddressUnitInput
+            {
+                TypeofObjectId = TypeofObject.Vendor,
+                ObjectId = input.Id
+            };
             await _addressAppService.DeleteAddressUnit(dto);
         }
 
-        public async Task<ListResultOutput<VendorUnitDto>> GetVendorUnitsById(IdInput input)
+        /// <summary>
+        /// Get the Vendor Details By VendorId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<VendorUnitDto> GetVendorUnitsById(IdInput input)
         {
             var vendorquery =
-                from er in _vendorUnitRepository.GetAll()
-                where er.Id == input.Id
-                select new { er };
-            var vendoritems = await vendorquery.ToListAsync();
-
+               from vendor in _vendorUnitRepository.GetAll()
+               where vendor.Id == input.Id
+               select new { vendor };
+            var vendorItems = await vendorquery.ToListAsync();
             var addressquery =
-               from er in _addresRepository.GetAll()
-               where er.ObjectId == input.Id && er.TypeofObjectId == TypeofObject.Vendor
-               select new { er };
-            var addressitems = await addressquery.ToListAsync();
-            return new ListResultOutput<VendorUnitDto>(
-                vendoritems.Select(item =>
-                {
-                    var dto = item.er.MapTo<VendorUnitDto>();
-                    dto.Address = new Collection<AddressUnitDto>();
-                    foreach (var addr in addressitems)
-                    {
-                        dto.Address.Add(addr.er.MapTo<AddressUnitDto>());
-                    }
-                    return dto;
-                }).ToList());
-        }
+                          from addr in _addresRepository.GetAll()
+                          where addr.ObjectId == input.Id && addr.TypeofObjectId == TypeofObject.Vendor
+                          select new { addr };
 
-        public async Task<ListResultOutput<VendorUnitDto>> GetVendorUnits(long? organizationUnitId=null)
+            var addressitems = await addressquery.ToListAsync();
+
+            var result = vendorItems[0].vendor.MapTo<VendorUnitDto>();
+            result.VendorId = vendorItems[0].vendor.Id;
+            result.Address = new Collection<AddressUnitDto>();
+            for (int i = 0; i < addressitems.Count; i++)
+            {
+                result.Address.Add(addressitems[i].addr.MapTo<AddressUnitDto>());
+                result.Address[i].AddressId = addressitems[i].addr.Id;
+            }
+            return result;
+        }
+        /// <summary>
+        /// This method is for retrieve the records for showing in the grid with filters and SortOrder
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<ListResultOutput<VendorUnitDto>> GetVendorUnits(GetVendorInput input)
         {
+            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
             var query =
-                from vendor in _vendorUnitRepository.GetAll()
+                from vendor in _vendorUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
+                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
+                        .Take(input.NumberofColumnsperPage)
                 join addr in _addresRepository.GetAll() on vendor.Id equals addr.ObjectId
                 into temp
                 from rt in temp.Where(p => p.IsPrimary == true).DefaultIfEmpty()
-               
-                where (organizationUnitId == null || vendor.OrganizationUnitId == organizationUnitId)
-                select new { vendor, Address = rt };
+                join payterms in _vendorPaytermRepository.GetAll() on vendor.Id equals payterms.Id
+                         into paymentperms
+                from pt in paymentperms.DefaultIfEmpty()
+                where (input.OrganizationUnitId == null || vendor.OrganizationUnitId == input.OrganizationUnitId)&&
+                (input.LastName == null || vendor.LastName.Contains(input.LastName)) &&
+                        (input.FirstName == null || vendor.FirstName.Contains(input.FirstName)) &&
+                        (input.PayToName == null || vendor.PayToName.Contains(input.PayToName))&&
+                        (input.FedralTaxId == null || vendor.PayToName.Contains(input.FedralTaxId))&&
+                        (input.SSNTaxId == null || vendor.PayToName.Contains(input.SSNTaxId))&&
+                        (input.VendorNumber == null || vendor.PayToName.Contains(input.VendorNumber))&&
+                        (input.VendorAccountInfo == null || vendor.PayToName.Contains(input.VendorAccountInfo))
+                select new { vendor, Address = rt ,Description=pt.Description};
             var items = await query.ToListAsync();
 
             return new ListResultOutput<VendorUnitDto>(
                 items.Select(item =>
                 {
                     var dto = item.vendor.MapTo<VendorUnitDto>();
+                    dto.VendorId= item.vendor.Id;
+                    dto.PaymentTermDescription = item.Description;
                     dto.Address = new Collection<AddressUnitDto>();
                     if (item.Address != null)
                     {
                         dto.Address.Add(item.Address.MapTo<AddressUnitDto>());
+                        dto.Address[0].AddressId = item.Address.Id;
                     }
                     return dto;
                 }).ToList());
         }
 
+        /// <summary>
+        /// Updating Vendor with Addresses
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task<VendorUnitDto> UpdateVendorUnit(UpdateVendorUnitInput input)
         {
@@ -217,7 +262,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                     if (address.Line1 != null || address.Line2 != null ||
                         address.Line4 != null || address.Line4 != null ||
                         address.State != null || address.Country != null ||
-                        address.Email != null)
+                        address.Email != null || address.Phone1 != null || address.Website != null)
                     {
                         address.TypeofObjectId = TypeofObject.Vendor;
                         address.ObjectId = input.VendorId;

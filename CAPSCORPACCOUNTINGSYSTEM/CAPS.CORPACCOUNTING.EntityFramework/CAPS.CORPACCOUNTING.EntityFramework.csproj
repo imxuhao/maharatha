@@ -281,6 +281,10 @@
     <Compile Include="Migrations\201602011840526_Modify_AddrssandVendorPaymentTerms_Table.Designer.cs">
       <DependentUpon>201602011840526_Modify_AddrssandVendorPaymentTerms_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602090554287_Modify_Customer_Table.cs" />
+    <Compile Include="Migrations\201602090554287_Modify_Customer_Table.Designer.cs">
+      <DependentUpon>201602090554287_Modify_Customer_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -421,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602011840526_Modify_AddrssandVendorPaymentTerms_Table.resx">
       <DependentUpon>201602011840526_Modify_AddrssandVendorPaymentTerms_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602090554287_Modify_Customer_Table.resx">
+      <DependentUpon>201602090554287_Modify_Customer_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

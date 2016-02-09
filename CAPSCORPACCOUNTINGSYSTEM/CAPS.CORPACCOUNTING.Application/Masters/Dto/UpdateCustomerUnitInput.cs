@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System.Collections.Generic;
+using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
@@ -25,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public decimal? CreditLimit { get; set; }
 
         /// <summary> Gets or Sets TypeofPaymentMethodId </summary>
-        public TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
         public int? CustomerPayTermsId { get; set; }
@@ -42,8 +43,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
         
-        /// <summary> Gets or Sets Address Unit </summary>
-        public UpdateAddressUnitInput InputAddress { get; set; }
+        /// <summary> Gets or Sets Address Units </summary>
+        public List<UpdateAddressUnitInput> InputAddresses { get; set; }
     }
 
     

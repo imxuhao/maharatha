@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
@@ -48,8 +47,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         ///     Initializes a new instance of the <see cref="CustomerUnit" /> class  with no parameters.
         /// </summary>
-        public CustomerUnit(string lastname,string firstname=null,string customernumber=null,decimal? creditlimit=null, TypeofPaymentMethod typeofpaymentmethodid=TypeofPaymentMethod.Check,
-         int? customerpaymenttermid=null,int? salesrepid=null,bool isapproved=true,bool isactive=true, long? organizationunitid=null)
+        public CustomerUnit(string lastname,string firstname,string customernumber,decimal? creditlimit, TypeofPaymentMethod? typeofpaymentmethodid,
+         int? customerpaymenttermid,int? salesrepid,bool isapproved,bool isactive, long? organizationunitid)
         {
             LastName = lastname;
             FirstName = firstname;
@@ -86,7 +85,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         /// Gets or Sets TypeofPaymentMethod
         /// </summary>
-        public TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
         public int? CustomerPayTermsId { get; set; }

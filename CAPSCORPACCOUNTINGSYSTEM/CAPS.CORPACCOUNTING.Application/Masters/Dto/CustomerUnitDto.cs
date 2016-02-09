@@ -23,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public decimal? CreditLimit { get; set; }
 
         /// <summary> Gets or Sets TypeofPaymentMethodId </summary>
-        public TypeofPaymentMethod TypeofPaymentMethodId { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
         public int? CustomerPayTermsId { get; set; }
@@ -46,6 +46,13 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>
         /// Gets or Sets Address Collection
         /// </summary>
-        public Collection<AddressUnitDto> Address { get; set; }
+        public Collection<AddressUnitDto> Addresses { get; set; }
+
+        /// <summary>Gets or sets the PaymentTermDescription field. </summary>
+        public string PaymentTermDescription { get; set; }
+
+        /// <summary>Gets or sets the SalesRepName field. </summary>
+        public string SalesRepName { get; set; }
+
     }
 }

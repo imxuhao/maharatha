@@ -2,7 +2,7 @@
 using Abp.AutoMapper;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
+
 
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
@@ -128,5 +128,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Addresses of a vendor </summary>
         public Collection<AddressUnitDto> Address { get; set; }
+
+        /// <summary>Gets or sets the PaymentTermDescription field. </summary>
+        public string PaymentTermDescription { get; set; }
     }
 }

@@ -30,9 +30,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         ///     Initializes a new instance of the <see cref="CustomerPaymentTermUnit" /> class.
         /// </summary>
-        public CustomerPaymentTermUnit(string description,int duedays,string paymentinstruction=null,decimal? discountpercent=null,int? discountdays=null,
-            string overnightinstructions=null,string wiringinstructions=null,string footermessage=null,string logocaption=null,bool isdefault=true,
-            long? organizationid=null)
+        public CustomerPaymentTermUnit(string description,int duedays,string paymentinstruction,decimal? discountpercent,int? discountdays,
+            string overnightinstructions,string wiringinstructions,string footermessage,string logocaption,bool isdefault,
+            long? organizationid)
         {
             Description = description;
             DueDays = duedays;
@@ -43,7 +43,8 @@ namespace CAPS.CORPACCOUNTING.Masters
             WiringInstructions = wiringinstructions;
             FooterMessage = footermessage;
             LogoCaption = logocaption;
-
+            IsDefault = isdefault;
+            OrganizationUnitId = organizationid;
         }
 
         #region Class Property Declarations

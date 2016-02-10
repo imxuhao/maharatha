@@ -27,6 +27,15 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the SSNTaxId to Search the VendorGrid with SSNTaxId. </summary>
         public string SSNTaxId { get; set; } = null;
+        
+        /// <summary>Gets or sets the PhoneorEmail to Search the VendorGrid with Phone1 or phone2 or Email. </summary>
+        public string PhoneorEmail { get; set; } = null;
+
+        /// <summary>Gets or sets the Typeof1099Box to Search the VendorGrid with Typeof1099Box. </summary>
+        public Typeof1099T4? Typeof1099Box { get; set; } = null;
+
+        /// <summary>Gets or sets the TypeofVendorId to Search the VendorGrid with TypeofVendorId. </summary>
+        public TypeofVendor? TypeofVendorId { get; set; } = null;
 
         /// <summary> Gets or Sets PageNumber. </summary>
         public int PageNumber { get; set; } = 1;

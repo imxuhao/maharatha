@@ -9,9 +9,10 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         Task<CustomerPaymentTermUnitDto> CreateCustomerPaymentTermUnit(CreateCustomerPaymentTermUnitInput input);
 
-        Task<ListResultOutput<CustomerPaymentTermUnitDto>> GetCustomerPaymentTermUnits(long? organizationUnitId);
+        Task<ListResultOutput<CustomerPaymentTermUnitDto>> GetCustomerPaymentTermUnits(GetCustomerPaymentTermInput input);
 
         Task<CustomerPaymentTermUnitDto> UpdateCustomerPaymentTermUnit(UpdateCustomerPaymentTermUnitInput input);
         Task DeleteCustomerPaymentTermUnit(IdInput input);
+        Task<CustomerPaymentTermUnitDto> GetCustomerPayTermUnitsById(IdInput input);
     }
 }

@@ -42,7 +42,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string LogoCaption { get; set; }
 
         /// <summary>Gets or sets the IsDefault field. </summary>
-        public bool IsDefault { get; set; }
+        public bool IsDefault { get; set; } = true;
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

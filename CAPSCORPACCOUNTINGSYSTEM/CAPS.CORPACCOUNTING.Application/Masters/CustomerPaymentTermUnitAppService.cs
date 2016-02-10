@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using System.Linq;
-using System.Data.Entity;
+using System.Linq.Dynamic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -43,11 +44,14 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _customerPaymentTermUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<CustomerPaymentTermUnitDto>> GetCustomerPaymentTermUnits(long? organizationUnitId)
+        public async Task<ListResultOutput<CustomerPaymentTermUnitDto>> GetCustomerPaymentTermUnits(GetCustomerPaymentTermInput input)
         {
+            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
             var query =
-                from cpt in _customerPaymentTermUnitRepository.GetAll()
-                where organizationUnitId == null || cpt.OrganizationUnitId == organizationUnitId
+                from cpt in _customerPaymentTermUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
+                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
+                        .Take(input.NumberofColumnsperPage)
+                where (input.OrganizationUnitId == null || cpt.OrganizationUnitId == input.OrganizationUnitId)
                 select new { cpt };
             var items = await query.ToListAsync();
 
@@ -89,6 +93,24 @@ namespace CAPS.CORPACCOUNTING.Masters
             };
 
             return customerPaymentTermUnit.MapTo<CustomerPaymentTermUnitDto>();
+        }
+
+        /// <summary>
+        /// Get the CustomerPaymentTerms Details By CustomerPaymentTermsId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<CustomerPaymentTermUnitDto> GetCustomerPayTermUnitsById(IdInput input)
+        {
+            var customerPaytermQuery =
+               from cpt in _customerPaymentTermUnitRepository.GetAll()
+               where cpt.Id == input.Id
+               select new { cpt };
+            var customerPaytermItems = await customerPaytermQuery.ToListAsync();
+
+            var result = customerPaytermItems[0].cpt.MapTo<CustomerPaymentTermUnitDto>();
+            result.CustomerPaymentTermId = customerPaytermItems[0].cpt.Id;
+            return result;
         }
     }
 }

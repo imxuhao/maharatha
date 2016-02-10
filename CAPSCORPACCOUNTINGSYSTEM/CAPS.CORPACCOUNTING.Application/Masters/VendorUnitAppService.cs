@@ -49,6 +49,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             CreateAddressUnitInput vendorAddr1 = new CreateAddressUnitInput();
             vendorAddr1.TypeofObjectId = TypeofObject.Vendor;
             vendorAddr1.AddressTypeId = TypeofAddress.PrimaryContact;
+            vendorAddr1.IsPrimary = true;
             vendorAddr1.Line1 = "Address1";
             CreateAddressUnitInput vendorAddr2 = new CreateAddressUnitInput();
             vendorAddr2.TypeofObjectId = TypeofObject.Vendor;
@@ -224,10 +225,15 @@ namespace CAPS.CORPACCOUNTING.Masters
                 (input.LastName == null || vendor.LastName.Contains(input.LastName)) &&
                         (input.FirstName == null || vendor.FirstName.Contains(input.FirstName)) &&
                         (input.PayToName == null || vendor.PayToName.Contains(input.PayToName))&&
-                        (input.FedralTaxId == null || vendor.PayToName.Contains(input.FedralTaxId))&&
-                        (input.SSNTaxId == null || vendor.PayToName.Contains(input.SSNTaxId))&&
-                        (input.VendorNumber == null || vendor.PayToName.Contains(input.VendorNumber))&&
-                        (input.VendorAccountInfo == null || vendor.PayToName.Contains(input.VendorAccountInfo))
+                        (input.FedralTaxId == null || vendor.FedralTaxId.Contains(input.FedralTaxId))&&
+                        (input.SSNTaxId == null || vendor.SSNTaxId.Contains(input.SSNTaxId))&&
+                        (input.VendorNumber == null || vendor.VendorNumber.Contains(input.VendorNumber))&&
+                        (input.VendorAccountInfo == null || vendor.VendorAccountInfo.Contains(input.VendorAccountInfo))&&
+                        (input.Typeof1099Box == null || vendor.Typeof1099Box==(input.Typeof1099Box))&&
+                        (input.TypeofVendorId == null || vendor.TypeofVendorId==input.TypeofVendorId)&&
+                        (input.PhoneorEmail == null || rt.Phone1.Contains(input.PhoneorEmail) || rt.Phone2.Contains(input.PhoneorEmail) || rt.Email.Contains(input.PhoneorEmail))
+
+
                 select new { vendor, Address = rt ,Description=pt.Description};
             var items = await query.ToListAsync();
 

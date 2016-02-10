@@ -6,6 +6,7 @@ using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using System.Linq;
 using System.Data.Entity;
+using System.Linq.Dynamic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -39,11 +40,15 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _salesRepUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<SalesRepUnitDto>> GetSalesRepUnits(long? organizationUnitId)
+        public async Task<ListResultOutput<SalesRepUnitDto>> GetSalesRepUnits(GetSalesRepInput input)
         {
+            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
             var query =
-                from sr in _salesRepUnitRepository.GetAll()
-                where organizationUnitId == null || sr.OrganizationUnitId == organizationUnitId
+                from sr in _salesRepUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
+                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
+                        .Take(input.NumberofColumnsperPage)
+                where (input.OrganizationUnitId == null || sr.OrganizationUnitId == input.OrganizationUnitId)&&
+                (input.LastName == null || sr.LastName .Contains(input.LastName))
                 select new { sr };
             var items = await query.ToListAsync();
 
@@ -79,6 +84,23 @@ namespace CAPS.CORPACCOUNTING.Masters
             };
 
             return salesRepUnit.MapTo<SalesRepUnitDto>();
+        }
+        /// <summary>
+        /// Get the SalesRep Details By CustomerPaymentTermsId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<SalesRepUnitDto> GetSalesRepUnitsById(IdInput input)
+        {
+            var salesRepQuery =
+               from cpt in _salesRepUnitRepository.GetAll()
+               where cpt.Id == input.Id
+               select new { cpt };
+            var salesRepItems = await salesRepQuery.ToListAsync();
+
+            var result = salesRepItems[0].cpt.MapTo<SalesRepUnitDto>();
+            result.SalesRepId = salesRepItems[0].cpt.Id;
+            return result;
         }
     }
 }

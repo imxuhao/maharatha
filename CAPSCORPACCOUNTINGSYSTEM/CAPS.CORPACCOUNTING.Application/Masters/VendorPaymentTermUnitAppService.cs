@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Domain.Repositories;
@@ -7,7 +8,7 @@ using Abp.AutoMapper;
 using Abp.Events.Bus;
 using Abp.Events.Bus.Entities;
 using System.Linq;
-using System.Data.Entity;
+using System.Linq.Dynamic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -56,11 +57,14 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _vendorPaymentTermUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(long? organizationUnitId)
+        public async Task<ListResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(GetVendorPayTermsInput input)
         {
+            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
             var query =
-                from vpt in _vendorPaymentTermUnitRepository.GetAll()
-                where organizationUnitId == null || vpt.OrganizationUnitId == organizationUnitId
+                from vpt in _vendorPaymentTermUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
+                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
+                        .Take(input.NumberofColumnsperPage)
+                where (input.OrganizationUnitId == null || vpt.OrganizationUnitId == input.OrganizationUnitId)
                 select new {vpt};
             var items = await query.ToListAsync();
 
@@ -103,6 +107,18 @@ namespace CAPS.CORPACCOUNTING.Masters
                 });
 
             return vendorPaymentTermUnit.MapTo<VendorPaymentTermUnitDto>();
+        }
+        public async Task<VendorPaymentTermUnitDto> GetVendorPayTermUnitsById(IdInput input)
+        {
+            var vendorPaytermQuery =
+               from vpt in _vendorPaymentTermUnitRepository.GetAll()
+               where vpt.Id == input.Id
+               select new { vpt };
+            var vendorPaytermItems = await vendorPaytermQuery.ToListAsync();
+
+            var result = vendorPaytermItems[0].vpt.MapTo<VendorPaymentTermUnitDto>();
+            result.VendorPaymentTermId  = vendorPaytermItems[0].vpt.Id;
+            return result;
         }
     }
 }

@@ -68,6 +68,6 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public long? OrganizationUnitId { get; set; }
         
         /// <summary> Gets or Sets Address Collection of a Employee </summary>
-        public Collection<AddressUnitDto> Address { get; set; }
+        public Collection<AddressUnitDto> Addresses { get; set; }
     }
 }

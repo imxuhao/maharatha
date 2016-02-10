@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System.Collections.Generic;
+using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
@@ -67,8 +68,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
-
-        public UpdateAddressUnitInput InputAddress { get; set; }
+       
+        /// <summary> Gets or Sets Address Units for Employee </summary>
+        public List<UpdateAddressUnitInput> InputAddresses { get; set; }
     }
 
     

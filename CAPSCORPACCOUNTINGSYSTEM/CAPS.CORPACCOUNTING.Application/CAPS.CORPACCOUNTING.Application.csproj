@@ -193,6 +193,7 @@
     <Compile Include="Masters\CoaUnitAppService.cs" />
     <Compile Include="Masters\Dto\AddressUnitDto.cs" />
     <Compile Include="Masters\Dto\DeleteAddressUnitInput.cs" />
+    <Compile Include="Masters\Dto\GetEmployeeInput.cs" />
     <Compile Include="Masters\Dto\GetVendorInput.cs" />
     <Compile Include="Masters\Dto\GetCustomerInput.cs" />
     <Compile Include="Masters\Dto\VendorUnitDto.cs" />

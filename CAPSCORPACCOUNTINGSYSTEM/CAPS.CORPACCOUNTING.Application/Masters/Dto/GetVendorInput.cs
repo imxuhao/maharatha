@@ -1,6 +1,8 @@
-﻿namespace CAPS.CORPACCOUNTING.Masters.Dto
+﻿using Abp.Application.Services.Dto;
+
+namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
-    public class GetVendorInput
+    public class GetVendorInput : IInputDto
     {
         /// <summary> Gets or Sets LastName to Search the VendorGrid with LastName </summary>
         public string LastName { get; set; } = null;

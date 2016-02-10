@@ -22,15 +22,15 @@ namespace CAPS.CORPACCOUNTING.Masters
         public const int MaxRegionLength = 10;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SalesRepUnit" /> class  with no parameter.
+        ///     Initializes a new instance of the <see cref="EmployeeUnit" /> class  with no parameter.
         /// </summary>
         public EmployeeUnit()
         {
         }
 
-        public EmployeeUnit(string lastname, string ssntaxid, string firstname=null,string employeeregion = null, string federaltaxid = null, bool is1099=false,
-            bool isw9Onfile = false,bool isindependantcontractor = false, bool iscorporation = false, bool isproducer = false, bool isdirector = false, bool isdirphoto = false,
-            bool issetdesigner = false, bool iseditor = false,bool isartdirector = false, bool isactive = true, bool isapproved = true, long? organizationunitid = null)
+        public EmployeeUnit(string lastname, string ssntaxid, string firstname,string employeeregion, string federaltaxid, bool is1099,
+            bool isw9Onfile ,bool isindependantcontractor, bool iscorporation , bool isproducer, bool isdirector , bool isdirphoto,
+            bool issetdesigner, bool iseditor,bool isartdirector , bool isactive , bool isapproved, long? organizationunitid = null)
         {
             LastName = lastname;
             SSNTaxId = ssntaxid;
@@ -49,10 +49,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             IsArtDirector = IsArtDirector;
             IsActive = isactive;
             IsApproved = isapproved;
+            IsArtDirector = isartdirector;
             OrganizationUnitId = organizationunitid;
         }
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SalesRepUnit" /> class.
+        ///     Initializes a new instance of the <see cref="EmployeeUnit" /> class.
         /// </summary>
         #region Class Property Declarations
 
@@ -106,7 +107,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-       // public virtual ICollection<AddressUnit> Address { get; set; }
         #endregion
     }
 }

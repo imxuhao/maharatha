@@ -204,7 +204,6 @@ namespace CAPS.CORPACCOUNTING.Masters
                     {
                         address.TypeofObjectId = TypeofObject.Customer;
                         address.ObjectId = input.CustomerId;
-                        AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                         await
                             _addressAppService.CreateAddressUnit(
                                 AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
@@ -213,7 +212,6 @@ namespace CAPS.CORPACCOUNTING.Masters
                 await CurrentUnitOfWork.SaveChangesAsync();
 
             }
-
 
             #region Setting the values to be updated
 

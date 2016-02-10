@@ -43,6 +43,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [UnitOfWork]
         public async Task InsertVendorData(CreateVendorUnitInput input)
         {
             CreateAddressUnitInput vendorAddr1 = new CreateAddressUnitInput();
@@ -64,6 +65,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [UnitOfWork]
         public async Task UpdatedVendorData(UpdateVendorUnitInput input)
         {
 
@@ -159,6 +161,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [UnitOfWork]
         public async Task DeleteVendorUnit(IdInput input)
         {
             await _vendorUnitManager.DeleteAsync(input.Id);

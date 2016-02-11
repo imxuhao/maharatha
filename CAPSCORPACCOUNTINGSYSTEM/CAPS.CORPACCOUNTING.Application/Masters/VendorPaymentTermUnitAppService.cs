@@ -9,6 +9,7 @@ using Abp.Events.Bus;
 using Abp.Events.Bus.Entities;
 using System.Linq;
 using System.Linq.Dynamic;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -57,22 +58,25 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _vendorPaymentTermUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(GetVendorPayTermsInput input)
+        public async Task<PagedResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(GetVendorPayTermsInput input)
         {
-            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
             var query =
-                from vpt in _vendorPaymentTermUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
-                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
-                        .Take(input.NumberofColumnsperPage)
-                where (input.OrganizationUnitId == null || vpt.OrganizationUnitId == input.OrganizationUnitId)
-                select new {vpt};
-            var items = await query.ToListAsync();
+                from vpt in _vendorPaymentTermUnitRepository.GetAll()
+                select new { VendorPayTerms=vpt };
+            query = query
+               .WhereIf(input.OrganizationUnitId != null,
+                   item => item.VendorPayTerms.OrganizationUnitId == input.OrganizationUnitId);
 
-            return new ListResultOutput<VendorPaymentTermUnitDto>(
-                items.Select(item =>
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(input.Sorting)
+                .PageBy(input)
+                .ToListAsync();
+            return new PagedResultOutput<VendorPaymentTermUnitDto>(resultCount, results.Select(item =>
                 {
-                    var dto = item.vpt.MapTo<VendorPaymentTermUnitDto>();
-                    dto.VendorPaymentTermId = item.vpt.Id;
+                    var dto = item.VendorPayTerms.MapTo<VendorPaymentTermUnitDto>();
+                    dto.VendorPaymentTermId = item.VendorPayTerms.Id;
                     return dto;
                 }).ToList());
         }

@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
@@ -8,6 +9,8 @@ using Abp.Domain.Uow;
 using Abp.Events.Bus;
 using Abp.Events.Bus.Entities;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using Abp.Extensions;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -27,21 +30,37 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public IEventBus EventBus { get; set; }
 
-        public async Task<ListResultOutput<CoaUnitDto>> GetCoaUnits(long? organizationUnitId)
+        /// <summary>
+        /// Get the Records for Grid with paging and  sorting
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(GetCoaInput input)
         {
 
-            var items =
-                     from au in await _coaUnitRepository.GetAllListAsync()
-                     where organizationUnitId == null || au.OrganizationUnitId == organizationUnitId
-                     select new { au, memberCount = au };
+            var query =
+                from au in _coaUnitRepository.GetAll()
+                select new {Coa = au};
+            query = query
+                .WhereIf(input.OrganizationUnitId != null,
+                    item => item.Coa.OrganizationUnitId == input.OrganizationUnitId)
+                .WhereIf(!input.Description.IsNullOrWhiteSpace(),
+                    item => item.Coa.Description.Contains(input.Description))
+                .WhereIf(input.ChartofAccountsType != null,
+                    item => item.Coa.ChartofAccountsType == input.ChartofAccountsType);
 
-            return new ListResultOutput<CoaUnitDto>(
-                items.Select(item =>
-                {
-                    var dto = item.au.MapTo<CoaUnitDto>();
-                    dto.CoaId = item.au.Id;
-                    return dto;
-                }).ToList());
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(input.Sorting)
+                .PageBy(input)
+                .ToListAsync();
+            return new PagedResultOutput<CoaUnitDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.Coa.MapTo<CoaUnitDto>();
+                dto.CoaId = item.Coa.Id;
+                return dto;
+            }).ToList());
         }
 
         [UnitOfWork]

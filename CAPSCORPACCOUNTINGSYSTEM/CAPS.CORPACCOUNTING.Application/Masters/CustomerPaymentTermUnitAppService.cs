@@ -7,6 +7,7 @@ using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using System.Linq;
 using System.Linq.Dynamic;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -44,24 +45,29 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _customerPaymentTermUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<CustomerPaymentTermUnitDto>> GetCustomerPaymentTermUnits(GetCustomerPaymentTermInput input)
+        public async Task<PagedResultOutput<CustomerPaymentTermUnitDto>> GetCustomerPaymentTermUnits(
+            GetCustomerPaymentTermInput input)
         {
-            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
             var query =
-                from cpt in _customerPaymentTermUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
-                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
-                        .Take(input.NumberofColumnsperPage)
-                where (input.OrganizationUnitId == null || cpt.OrganizationUnitId == input.OrganizationUnitId)
-                select new { cpt };
-            var items = await query.ToListAsync();
+                from cpt in _customerPaymentTermUnitRepository.GetAll()
+                select new {CustomerPayTerms = cpt};
 
-            return new ListResultOutput<CustomerPaymentTermUnitDto>(
-                items.Select(item =>
-                {
-                    var dto = item.cpt.MapTo<CustomerPaymentTermUnitDto>();
-                    dto.CustomerPaymentTermId = item.cpt.Id;
-                    return dto;
-                }).ToList());
+            query = query
+                .WhereIf(input.OrganizationUnitId != null,
+                    item => item.CustomerPayTerms.OrganizationUnitId == input.OrganizationUnitId);
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(input.Sorting)
+                .PageBy(input)
+                .ToListAsync();
+            return new PagedResultOutput<CustomerPaymentTermUnitDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.CustomerPayTerms.MapTo<CustomerPaymentTermUnitDto>();
+                dto.CustomerPaymentTermId = item.CustomerPayTerms.Id;
+                return dto;
+            }).ToList());
         }
 
         public async Task<CustomerPaymentTermUnitDto> UpdateCustomerPaymentTermUnit(UpdateCustomerPaymentTermUnitInput input)

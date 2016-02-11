@@ -1,8 +1,10 @@
-﻿using Abp.Application.Services.Dto;
-
+﻿using System;
+using Abp.Extensions;
+using Abp.Runtime.Validation;
+using CAPS.CORPACCOUNTING.Dto;
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
-    public class GetCustomerInput : IInputDto
+    public class GetCustomerInput : PagedAndSortedInputDto, IShouldNormalize
     {
         /// <summary> Gets or Sets LastName  to Search the CustomerGrid with  LastName </summary>
         public string LastName { get; set; } = null;
@@ -16,16 +18,29 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary> Gets or Sets LastName to Search the CustomerGrid with  OrganizationUnitId </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or Sets PageNumber for CustomerGrid. </summary>
-        public int PageNumber { get; set; } = 1;
+        public void Normalize()
+        {
+            if (Sorting.IsNullOrWhiteSpace())
+            {
+                Sorting = "LastName ASC";
+            }
 
-        /// <summary> Gets or Sets SortOrder to order the CustomerGrid by SearchOrder </summary>
-        public string SortOrder { get; set; } = "ASC";
-
-        /// <summary> Gets or Sets SortColumn to sort  the CustomerGrid with SortColumn </summary>
-        public string SortColumn { get; set; } = "LastName";
-     
-        /// <summary> Gets or Sets NumberofColumnsperPage for CustomerGrid. </summary>
-        public int NumberofColumnsperPage { get; set; } = 50;
+            if (Sorting.IndexOf("FirstName", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Customer." + Sorting;
+            }
+            else if (Sorting.IndexOf("LastName", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Customer." + Sorting;
+            }
+            else if (Sorting.IndexOf("CustomerNumber", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Customer." + Sorting;
+            }
+            else
+            {
+                Sorting = "Customer." + Sorting;
+            }
+        }
     }
 }

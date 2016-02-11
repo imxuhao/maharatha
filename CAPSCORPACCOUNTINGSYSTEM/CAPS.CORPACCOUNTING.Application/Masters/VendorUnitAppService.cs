@@ -11,6 +11,8 @@ using System.Linq;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
+using Abp.Extensions;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -20,8 +22,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<VendorUnit> _vendorUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IAddressUnitAppService _addressAppService;
-        private readonly IRepository<AddressUnit,long> _addresRepository;
+        private readonly IRepository<AddressUnit, long> _addresRepository;
         private readonly IRepository<VendorPaymentTermUnit> _vendorPaytermRepository;
+
+
 
         public VendorUnitAppService(VendorUnitManager vendorUnitManager, IRepository<VendorUnit> vendorUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService,
@@ -46,19 +50,21 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task InsertVendorData(CreateVendorUnitInput input)
         {
-            CreateAddressUnitInput vendorAddr1 = new CreateAddressUnitInput();
-            vendorAddr1.TypeofObjectId = TypeofObject.Vendor;
-            vendorAddr1.AddressTypeId = TypeofAddress.PrimaryContact;
-            vendorAddr1.IsPrimary = true;
-            vendorAddr1.Line1 = "Address1";
-            CreateAddressUnitInput vendorAddr2 = new CreateAddressUnitInput();
-            vendorAddr2.TypeofObjectId = TypeofObject.Vendor;
-            vendorAddr2.AddressTypeId = TypeofAddress.Home;
-            vendorAddr2.Line1 = "Address2";
+            CreateAddressUnitInput vendorAddr1 = new CreateAddressUnitInput
+            {
+                TypeofObjectId = TypeofObject.Vendor,
+                AddressTypeId = TypeofAddress.PrimaryContact,
+                IsPrimary = true,
+                Line1 = "Address1"
+            };
+            CreateAddressUnitInput vendorAddr2 = new CreateAddressUnitInput
+            {
+                TypeofObjectId = TypeofObject.Vendor,
+                AddressTypeId = TypeofAddress.Home,
+                Line1 = "Address2"
+            };
 
-            input.InputAddress = new List<CreateAddressUnitInput>();
-            input.InputAddress.Add(vendorAddr1);
-            input.InputAddress.Add(vendorAddr2);
+            input.InputAddress = new List<CreateAddressUnitInput> {vendorAddr1, vendorAddr2};
             await CreateVendorUnit(input);
         }
         /// <summary>
@@ -70,25 +76,27 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task UpdatedVendorData(UpdateVendorUnitInput input)
         {
 
-            UpdateAddressUnitInput vendorAddr1 = new UpdateAddressUnitInput();
-            vendorAddr1.TypeofObjectId = TypeofObject.Vendor;
-            vendorAddr1.AddressTypeId = TypeofAddress.PrimaryContact;
-            vendorAddr1.Email = "test@gmail.com";
-            vendorAddr1.Website = "https://www.google.co.in";
-            vendorAddr1.AddressId = 1;
-            vendorAddr1.ObjectId = input.VendorId;
-            vendorAddr1.IsPrimary = true;
+            UpdateAddressUnitInput vendorAddr1 = new UpdateAddressUnitInput
+            {
+                TypeofObjectId = TypeofObject.Vendor,
+                AddressTypeId = TypeofAddress.PrimaryContact,
+                Email = "test@gmail.com",
+                Website = "https://www.google.co.in",
+                AddressId = 1,
+                ObjectId = input.VendorId,
+                IsPrimary = true
+            };
 
-            UpdateAddressUnitInput vendorAddr2 = new UpdateAddressUnitInput();
-            vendorAddr2.TypeofObjectId = TypeofObject.Vendor;
-            vendorAddr2.AddressTypeId = TypeofAddress.Business;
-            vendorAddr2.Email = "test1@gmail.com";
-            vendorAddr2.AddressId = 2;
-            vendorAddr2.ObjectId = input.VendorId;
+            UpdateAddressUnitInput vendorAddr2 = new UpdateAddressUnitInput
+            {
+                TypeofObjectId = TypeofObject.Vendor,
+                AddressTypeId = TypeofAddress.Business,
+                Email = "test1@gmail.com",
+                AddressId = 2,
+                ObjectId = input.VendorId
+            };
 
-            input.InputAddress = new List<UpdateAddressUnitInput>();
-            input.InputAddress.Add(vendorAddr1);
-            input.InputAddress.Add(vendorAddr2);
+            input.InputAddress = new List<UpdateAddressUnitInput> {vendorAddr1, vendorAddr2};
             await UpdateVendorUnit(input);
         }
 
@@ -121,7 +129,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 achwiretoiban: input.ACHWireToIBAN, isactive: input.IsActive, isapproved: input.IsApproved,
                 organizationunitid: input.OrganizationUnitId);
             await _vendorUnitManager.CreateAsync(vendorUnit);
-            await   CurrentUnitOfWork.SaveChangesAsync();
+            await CurrentUnitOfWork.SaveChangesAsync();
             if (input.InputAddress != null)
             {
                 foreach (var address in input.InputAddress)
@@ -165,13 +173,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task DeleteVendorUnit(IdInput input)
         {
-            await _vendorUnitManager.DeleteAsync(input.Id);
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
                 TypeofObjectId = TypeofObject.Vendor,
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnit(dto);
+            await _vendorUnitManager.DeleteAsync(input.Id);
         }
 
         /// <summary>
@@ -208,49 +216,72 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ListResultOutput<VendorUnitDto>> GetVendorUnits(GetVendorInput input)
+        public async Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(GetVendorInput input)
         {
-            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
-            var query =
-                from vendor in _vendorUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
-                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
-                        .Take(input.NumberofColumnsperPage)
-                join addr in _addresRepository.GetAll() on vendor.Id equals addr.ObjectId
-                into temp
-                from rt in temp.Where(p => p.IsPrimary == true).DefaultIfEmpty()
-                join payterms in _vendorPaytermRepository.GetAll() on vendor.Id equals payterms.Id
-                         into paymentperms
-                from pt in paymentperms.DefaultIfEmpty()
-                where (input.OrganizationUnitId == null || vendor.OrganizationUnitId == input.OrganizationUnitId)&&
-                (input.LastName == null || vendor.LastName.Contains(input.LastName)) &&
-                        (input.FirstName == null || vendor.FirstName.Contains(input.FirstName)) &&
-                        (input.PayToName == null || vendor.PayToName.Contains(input.PayToName))&&
-                        (input.FedralTaxId == null || vendor.FedralTaxId.Contains(input.FedralTaxId))&&
-                        (input.SSNTaxId == null || vendor.SSNTaxId.Contains(input.SSNTaxId))&&
-                        (input.VendorNumber == null || vendor.VendorNumber.Contains(input.VendorNumber))&&
-                        (input.VendorAccountInfo == null || vendor.VendorAccountInfo.Contains(input.VendorAccountInfo))&&
-                        (input.Typeof1099Box == null || vendor.Typeof1099Box==(input.Typeof1099Box))&&
-                        (input.TypeofVendorId == null || vendor.TypeofVendorId==input.TypeofVendorId)&&
-                        (input.PhoneorEmail == null || rt.Phone1.Contains(input.PhoneorEmail) || rt.Phone2.Contains(input.PhoneorEmail) || rt.Email.Contains(input.PhoneorEmail))
+            var query = CreateVendorQuery(input);
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(input.Sorting)
+                .PageBy(input)
+                .ToListAsync();
+            var auditLogListDtos = ConvertToVendorDtos(results);
+            return new PagedResultOutput<VendorUnitDto>(resultCount, auditLogListDtos);
+        }
 
-
-                select new { vendor, Address = rt ,Description=pt.Description};
-            var items = await query.ToListAsync();
-
-            return new ListResultOutput<VendorUnitDto>(
-                items.Select(item =>
+        /// <summary>
+        /// Converting vendor to outputdto of a VendorList
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns></returns>
+        private List<VendorUnitDto> ConvertToVendorDtos(List<VendorAndAddressDto> results)
+        {
+            return results.Select(
+                result =>
                 {
-                    var dto = item.vendor.MapTo<VendorUnitDto>();
-                    dto.VendorId= item.vendor.Id;
-                    dto.PaymentTermDescription = item.Description;
+                    var dto = result.Vendor.MapTo<VendorUnitDto>();
+                    dto.VendorId = result.Vendor.Id;
+                    dto.PaymentTermDescription = result.PaymentTerms;
                     dto.Address = new Collection<AddressUnitDto>();
-                    if (item.Address != null)
+                    if (result.Address != null)
                     {
-                        dto.Address.Add(item.Address.MapTo<AddressUnitDto>());
-                        dto.Address[0].AddressId = item.Address.Id;
+                        dto.Address.Add(result.Address.MapTo<AddressUnitDto>());
+                        dto.Address[0].AddressId = result.Address.Id;
                     }
                     return dto;
-                }).ToList());
+                }).ToList();
+        }
+
+        private IQueryable<VendorAndAddressDto> CreateVendorQuery(GetVendorInput input)
+        {
+            var query = from vendor in _vendorUnitRepository.GetAll()
+                join addr in _addresRepository.GetAll() on vendor.Id equals addr.ObjectId
+                    into temp
+                from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId==TypeofObject.Vendor).DefaultIfEmpty()
+                join payterms in _vendorPaytermRepository.GetAll() on vendor.Id equals payterms.Id
+                    into paymentperms
+                from pt in paymentperms.DefaultIfEmpty()
+                select new VendorAndAddressDto {Vendor = vendor, Address = rt, PaymentTerms = pt.Description};
+
+            query = query
+                .WhereIf(input.OrganizationUnitId != null,
+                    item => item.Vendor.OrganizationUnitId == input.OrganizationUnitId)
+                .WhereIf(!input.FirstName.IsNullOrWhiteSpace(), item => item.Vendor.FirstName.Contains(input.FirstName))
+                .WhereIf(!input.LastName.IsNullOrWhiteSpace(), item => item.Vendor.LastName.Contains(input.LastName))
+                .WhereIf(!input.SSNTaxId.IsNullOrWhiteSpace(), item => item.Vendor.SSNTaxId.Contains(input.SSNTaxId))
+                .WhereIf(!input.PayToName.IsNullOrWhiteSpace(), item => item.Vendor.PayToName.Contains(input.PayToName))
+                .WhereIf(!input.VendorNumber.IsNullOrWhiteSpace(),
+                    item => item.Vendor.VendorNumber.Contains(input.VendorNumber))
+                .WhereIf(!input.VendorAccountInfo.IsNullOrWhiteSpace(),
+                    item => item.Vendor.VendorAccountInfo.Contains(input.VendorAccountInfo))
+                .WhereIf(!input.FedralTaxId.IsNullOrWhiteSpace(),
+                    item => item.Vendor.FedralTaxId.Contains(input.FedralTaxId))
+                .WhereIf(input.Typeof1099Box != null, item => item.Vendor.Typeof1099Box == input.Typeof1099Box)
+                .WhereIf(input.TypeofVendorId != null, item => item.Vendor.TypeofVendorId == input.TypeofVendorId)
+                .WhereIf(!input.PhoneorEmail.IsNullOrWhiteSpace(), item => item.Address.Phone1 == input.PhoneorEmail)
+                .WhereIf(!input.PhoneorEmail.IsNullOrWhiteSpace(), item => item.Address.Phone2 == input.PhoneorEmail)
+                .WhereIf(!input.PhoneorEmail.IsNullOrWhiteSpace(), item => item.Address.Email == input.PhoneorEmail);
+            return query;
         }
 
         /// <summary>
@@ -284,7 +315,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 await CurrentUnitOfWork.SaveChangesAsync();
 
             }
-           
+
 
             #region Setting the values to be updated
 
@@ -350,10 +381,9 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             return vendorUnit.MapTo<VendorUnitDto>();
         }
-       
+
     }
 }
 
 
-                                
-                                          
+

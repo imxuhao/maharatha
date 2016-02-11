@@ -9,7 +9,8 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
-
+using Abp.Extensions;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -138,46 +139,68 @@ namespace CAPS.CORPACCOUNTING.Masters
             }
             return employeeUnit.MapTo<EmployeeUnitDto>();
         }
-
-
-
+        
         /// <summary>
-        /// To get the records for showing in the grid with filters and SortOrder
+        /// This method is for retrieve the records for showing in the grid with filters and SortOrder
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ListResultOutput<EmployeeUnitDto>> GetEmployeeUnits(GetEmployeeInput input)
+        public async Task<PagedResultOutput<EmployeeUnitDto>> GetEmployeeUnits(GetEmployeeInput input)
         {
-            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
-            var query =
-                from emp in _employeeUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
-                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
-                        .Take(input.NumberofColumnsperPage)
-                join addr in _addressUnitRepository.GetAll() on emp.Id equals addr.ObjectId
-                         into temp
-                from adrs in temp.Where(p => p.IsPrimary == true).DefaultIfEmpty()
-                where (input.OrganizationUnitId == null || emp.OrganizationUnitId == input.OrganizationUnitId) &&
-                        (input.LastName == null || emp.LastName.Contains(input.LastName)) &&
-                        (input.FirstName == null || emp.FirstName.Contains(input.FirstName)) &&
-                        (input.SSNTaxId == null || emp.SSNTaxId.Contains(input.SSNTaxId)) &&
-                        (input.FedralTaxId == null || emp.FederalTaxId.Contains(input.FedralTaxId))
-                select new {emp, Address= adrs };
-            var items = await query.ToListAsync();
+            var query = CreateVendorQuery(input);
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(input.Sorting)
+                .PageBy(input)
+                .ToListAsync();
+            var employeeListDtos = ConvertToEmployeeDtos(results);
+            return new PagedResultOutput<EmployeeUnitDto>(resultCount, employeeListDtos);
+        }
 
-            return new ListResultOutput<EmployeeUnitDto>(
-                items.Select(item =>
-                {  
-                    var dto = item.emp.MapTo<EmployeeUnitDto>();
-                    dto.EmployeeId = item.emp.Id;
+        /// <summary>
+        /// Converting vendor to outputdto of a VendorList
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns></returns>
+        private List<EmployeeUnitDto> ConvertToEmployeeDtos(List<EmployeeAndAddressDto> results)
+        {
+            return results.Select(
+                result =>
+                {
+                    var dto = result.Employee.MapTo<EmployeeUnitDto>();
+                    dto.EmployeeId = result.Employee.Id;
                     dto.Addresses = new Collection<AddressUnitDto>();
-                    if (item.Address != null)
+                    if (result.Address != null)
                     {
-                        dto.Addresses.Add(item.Address.MapTo<AddressUnitDto>());
-                        dto.Addresses[0].AddressId = item.Address.Id;
+                        dto.Addresses.Add(result.Address.MapTo<AddressUnitDto>());
+                        dto.Addresses[0].AddressId = result.Address.Id;
                     }
                     return dto;
-                }).ToList());
+                }).ToList();
         }
+
+        private IQueryable<EmployeeAndAddressDto> CreateVendorQuery(GetEmployeeInput input)
+        {
+            var query = from emp in _employeeUnitRepository.GetAll()
+                        join addr in _addressUnitRepository.GetAll() on emp.Id equals addr.ObjectId
+                                 into temp
+                        from adrs in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Emp).DefaultIfEmpty()
+                        select new EmployeeAndAddressDto { Employee = emp, Address = adrs };
+
+            query = query
+                .WhereIf(input.OrganizationUnitId != null,
+                    item => item.Employee.OrganizationUnitId == input.OrganizationUnitId)
+                .WhereIf(!input.FirstName.IsNullOrWhiteSpace(),
+                    item => item.Employee.FirstName.Contains(input.FirstName))
+                .WhereIf(!input.LastName.IsNullOrWhiteSpace(), item => item.Employee.LastName.Contains(input.LastName))
+                .WhereIf(!input.SSNTaxId.IsNullOrWhiteSpace(), item => item.Employee.SSNTaxId.Contains(input.SSNTaxId))
+                .WhereIf(!input.FedralTaxId.IsNullOrWhiteSpace(),
+                    item => item.Employee.FederalTaxId.Contains(input.FedralTaxId));
+                
+            return query;
+        }
+
 
         /// <summary>
         /// Updates the employee with Addresses

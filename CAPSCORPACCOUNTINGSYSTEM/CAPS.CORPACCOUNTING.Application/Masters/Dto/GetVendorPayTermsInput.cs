@@ -1,22 +1,41 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using Abp.Extensions;
+using Abp.Runtime.Validation;
+using CAPS.CORPACCOUNTING.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
-    public class GetVendorPayTermsInput : IInputDto
+    public class GetVendorPayTermsInput :  PagedAndSortedInputDto, IShouldNormalize
     {
         /// <summary> Gets or Sets LastName to Search the CustomerPaymentTermGrid with  OrganizationUnitId </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or Sets PageNumber for CustomerPaymentTermGrid. </summary>
-        public int PageNumber { get; set; } = 1;
-
-        /// <summary> Gets or Sets SortOrder to order the CustomerPaymentTermGrid by SearchOrder </summary>
-        public string SortOrder { get; set; } = "ASC";
-
-        /// <summary> Gets or Sets SortColumn to sort  the CustomerPaymentTermGrid with SortColumn </summary>
-        public string SortColumn { get; set; } = "Description";
-
-        /// <summary> Gets or Sets NumberofColumnsperPage for CustomerPaymentTermGrid. </summary>
-        public int NumberofColumnsperPage { get; set; } = 50;
+        public void Normalize()
+        {
+            if (Sorting.IsNullOrWhiteSpace())
+            {
+                Sorting = "Description ASC";
+            }
+            if (Sorting.IndexOf("Description", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "VendorPayTerms." + Sorting;
+            }
+            else if (Sorting.IndexOf("DueDays", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "VendorPayTerms." + Sorting;
+            }
+            else if (Sorting.IndexOf("Discount", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "VendorPayTerms." + Sorting;
+            }
+            else if (Sorting.IndexOf("DiscountDays", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "VendorPayTerms." + Sorting;
+            }
+            else
+            {
+                Sorting = "VendorPayTerms." + Sorting;
+            }
+        }
     }
 }

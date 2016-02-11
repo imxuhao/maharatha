@@ -1,8 +1,11 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using Abp.Extensions;
+using Abp.Runtime.Validation;
+using CAPS.CORPACCOUNTING.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
-    public class GetEmployeeInput:IInputDto
+    public class GetEmployeeInput : PagedAndSortedInputDto, IShouldNormalize
     {
         /// <summary> Gets or Sets LastName  to Search the EmployeeGrid with  LastName </summary>
         public string LastName { get; set; } = null;
@@ -18,18 +21,33 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary> Gets or Sets LastName to Search the EmployeeGrid with  OrganizationUnitId </summary>
         public long? OrganizationUnitId { get; set; }
-
-        /// <summary> Gets or Sets PageNumber for EmployeeGrid. </summary>
-        public int PageNumber { get; set; } = 1;
-
-        /// <summary> Gets or Sets SortOrder to order the EmployeeGrid by SearchOrder </summary>
-        public string SortOrder { get; set; } = "ASC";
-
-        /// <summary> Gets or Sets SortColumn to sort  the EmployeeGrid with SortColumn </summary>
-        public string SortColumn { get; set; } = "LastName";
-
-        /// <summary> Gets or Sets NumberofColumnsperPage for EmployeeGrid. </summary>
-        public int NumberofColumnsperPage { get; set; } = 50;
-
+       
+        public void Normalize()
+        {
+            if (Sorting.IsNullOrWhiteSpace())
+            {
+                Sorting = "LastName ASC";
+            }
+            if (Sorting.IndexOf("FirstName", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Employee." + Sorting;
+            }
+            else if (Sorting.IndexOf("LastName", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Employee." + Sorting;
+            }
+            else if (Sorting.IndexOf("FedralTaxId", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Employee." + Sorting;
+            }
+            else if (Sorting.IndexOf("SSNTaxId", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Employee." + Sorting;
+            }
+            else
+            {
+                Sorting = "Employee." + Sorting;
+            }
+        }
     }
 }

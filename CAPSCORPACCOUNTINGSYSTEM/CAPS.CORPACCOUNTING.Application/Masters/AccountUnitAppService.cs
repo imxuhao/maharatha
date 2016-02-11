@@ -6,8 +6,11 @@ using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using Abp.Domain.Uow;
+using Abp.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using Abp.Linq.Extensions;
+using System.Linq.Dynamic;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -41,20 +44,37 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     return dto;
                 }).ToList());
         }
-        public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnitsByCoaId(IdInput coaId)
+        /// <summary>
+        /// Get the Records by CoaId with paging sorting
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<AccountUnitDto>> GetAccountUnitsByCoaId(GetAccountInput input)
         {
             var query =
-                _accountUnitRepository.GetAll()
-                    .Where(au => au.ChartOfAccountId == coaId.Id)
-                    .Select(au => new {au});
+                from au in _accountUnitRepository.GetAll()
+                    select new { Account = au };
 
-            var items = await query.ToListAsync();
+            query = query.Where(item => item.Account.ChartOfAccountId==input.CoaId)
+                .WhereIf(!input.Description.IsNullOrWhiteSpace(),
+                    item => item.Account.Description.Contains(input.Description))
+                .WhereIf(!input.Description.IsNullOrWhiteSpace(),
+                    item => item.Account.Description.Contains(input.Description))
+                      .WhereIf(!input.Caption.IsNullOrWhiteSpace(),
+                    item => item.Account.Caption.Contains(input.Caption));
 
-            return new ListResultOutput<AccountUnitDto>(
-                items.Select(item =>
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(input.Sorting)
+                .PageBy(input)
+                .ToListAsync();
+
+            return new PagedResultOutput<AccountUnitDto>(resultCount,results.Select(item =>
                 {
-                    var dto = item.au.MapTo<AccountUnitDto>();
-                    dto.AccountId = item.au.Id;
+                    var dto = item.Account.MapTo<AccountUnitDto>();
+                    dto.AccountId = item.Account.Id;
                     return dto;
                 }).ToList());
         }

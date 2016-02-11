@@ -1,8 +1,11 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using Abp.Extensions;
+using Abp.Runtime.Validation;
+using CAPS.CORPACCOUNTING.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
-    public class GetVendorInput : IInputDto
+    public class GetVendorInput :  PagedAndSortedInputDto, IShouldNormalize
     {
         /// <summary> Gets or Sets LastName to Search the VendorGrid with LastName </summary>
         public string LastName { get; set; } = null;
@@ -37,16 +40,45 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeofVendorId to Search the VendorGrid with TypeofVendorId. </summary>
         public TypeofVendor? TypeofVendorId { get; set; } = null;
 
-        /// <summary> Gets or Sets PageNumber. </summary>
-        public int PageNumber { get; set; } = 1;
+        public void Normalize()
+        {
+            if (Sorting.IsNullOrWhiteSpace())
+            {
+                Sorting = "LastName ASC";
+            }
 
-        /// <summary> Gets or Sets SortOrder  </summary>
-        public string SortOrder { get; set; } = "ASC";
-
-        /// <summary> Gets or Sets SortColumn to Sort VendorGrid By sortcolumn </summary>
-        public string SortColumn { get; set; } = "LastName";
-
-        /// <summary> Gets or Sets NumberofColumnsperPage. </summary>
-        public int NumberofColumnsperPage { get; set; } = 50;
+            if (Sorting.IndexOf("FirstName", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Vendor." + Sorting;
+            }
+            else if (Sorting.IndexOf("LastName", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Vendor." + Sorting;
+            }
+            else if (Sorting.IndexOf("PayToName", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Vendor." + Sorting;
+            }
+            else if (Sorting.IndexOf("VendorNumber", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Vendor." + Sorting;
+            }
+            else if (Sorting.IndexOf("VendorAccountInfo", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Vendor." + Sorting;
+            }
+            else if (Sorting.IndexOf("FedralTaxId", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Vendor." + Sorting;
+            }
+            else if (Sorting.IndexOf("SSNTaxId", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Vendor." + Sorting;
+            }
+            else
+            {
+                Sorting = "Vendor." + Sorting;
+            }
+        }
     }
 }

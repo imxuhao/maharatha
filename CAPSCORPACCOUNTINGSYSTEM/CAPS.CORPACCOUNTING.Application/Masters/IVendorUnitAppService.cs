@@ -8,14 +8,11 @@ namespace CAPS.CORPACCOUNTING.Masters
     public interface IVendorUnitAppService : IApplicationService
     {
         Task<VendorUnitDto> CreateVendorUnit(CreateVendorUnitInput input);
-
-        Task<ListResultOutput<VendorUnitDto>> GetVendorUnits(GetVendorInput input);
-
         Task<VendorUnitDto> UpdateVendorUnit(UpdateVendorUnitInput input);
         Task DeleteVendorUnit(IdInput input);
         Task InsertVendorData(CreateVendorUnitInput input);
         Task UpdatedVendorData(UpdateVendorUnitInput input);
         Task<VendorUnitDto> GetVendorUnitsById(IdInput input);
-
+        Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(GetVendorInput input);
     }
 }

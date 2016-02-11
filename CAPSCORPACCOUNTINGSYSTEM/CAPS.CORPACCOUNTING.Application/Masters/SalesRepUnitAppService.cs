@@ -7,6 +7,7 @@ using Abp.AutoMapper;
 using System.Linq;
 using System.Data.Entity;
 using System.Linq.Dynamic;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -40,25 +41,29 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _salesRepUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<ListResultOutput<SalesRepUnitDto>> GetSalesRepUnits(GetSalesRepInput input)
+        public async Task<PagedResultOutput<SalesRepUnitDto>> GetSalesRepUnits(GetSalesRepInput input)
         {
-            input.SortOrder = input.SortOrder == "ASC" ? " ascending" : " descending";
-            var query =
-                from sr in _salesRepUnitRepository.GetAll().OrderBy(input.SortColumn + input.SortOrder)
-                        .Skip((input.PageNumber - 1) * input.NumberofColumnsperPage)
-                        .Take(input.NumberofColumnsperPage)
-                where (input.OrganizationUnitId == null || sr.OrganizationUnitId == input.OrganizationUnitId)&&
-                (input.LastName == null || sr.LastName .Contains(input.LastName))
-                select new { sr };
-            var items = await query.ToListAsync();
 
-            return new ListResultOutput<SalesRepUnitDto>(
-                items.Select(item =>
-                {
-                    var dto = item.sr.MapTo<SalesRepUnitDto>();
-                    dto.SalesRepId = item.sr.Id;
-                    return dto;
-                }).ToList());
+            var query =
+                from sr in _salesRepUnitRepository.GetAll()
+                select new {SalesRep = sr};
+            query = query
+                .WhereIf(input.OrganizationUnitId != null,
+                    item => item.SalesRep.OrganizationUnitId == input.OrganizationUnitId);
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(input.Sorting)
+                .PageBy(input)
+                .ToListAsync();
+
+            return new PagedResultOutput<SalesRepUnitDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.SalesRep.MapTo<SalesRepUnitDto>();
+                dto.SalesRepId = item.SalesRep.Id;
+                return dto;
+            }).ToList());
         }
 
         public async Task<SalesRepUnitDto> UpdateSalesRepUnit(UpdateSalesRepUnitInput input)

@@ -22,24 +22,24 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         /// Inserting Account Entity 
         /// </summary>
-        /// <param name="vendorPaymentTermUnit"></param>
+        /// <param name="vendor"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public virtual async Task CreateAsync(VendorUnit vendorPaymentTermUnit)
+        public virtual async Task CreateAsync(VendorUnit vendor)
         {
-            await ValidateVendorUnitAsync(vendorPaymentTermUnit);
-            await VendorUnitRepository.InsertAsync(vendorPaymentTermUnit);
+            await ValidateVendorUnitAsync(vendor);
+            await VendorUnitRepository.InsertAsync(vendor);
         }
 
         /// <summary>
         /// Updating Vendor Details
         /// </summary>
-        /// <param name="vendorPaymentTermUnit"></param>
+        /// <param name="vendor"></param>
         /// <returns></returns>
-        public virtual async Task UpdateAsync(VendorUnit vendorPaymentTermUnit)
+        public virtual async Task UpdateAsync(VendorUnit vendor)
         {
-            await ValidateVendorUnitAsync(vendorPaymentTermUnit);
-            await VendorUnitRepository.UpdateAsync(vendorPaymentTermUnit);
+            await ValidateVendorUnitAsync(vendor);
+            await VendorUnitRepository.UpdateAsync(vendor);
         }
 
         /// <summary>

@@ -285,6 +285,30 @@
     <Compile Include="Migrations\201602090554287_Modify_Customer_Table.Designer.cs">
       <DependentUpon>201602090554287_Modify_Customer_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602151338506_Add_RollupCenter_Table.cs" />
+    <Compile Include="Migrations\201602151338506_Add_RollupCenter_Table.Designer.cs">
+      <DependentUpon>201602151338506_Add_RollupCenter_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151343484_Add_Job_Table.cs" />
+    <Compile Include="Migrations\201602151343484_Add_Job_Table.Designer.cs">
+      <DependentUpon>201602151343484_Add_Job_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151402219_Add_JobLocation_Table.cs" />
+    <Compile Include="Migrations\201602151402219_Add_JobLocation_Table.Designer.cs">
+      <DependentUpon>201602151402219_Add_JobLocation_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151403173_Add_JobCommercial_Table.cs" />
+    <Compile Include="Migrations\201602151403173_Add_JobCommercial_Table.Designer.cs">
+      <DependentUpon>201602151403173_Add_JobCommercial_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151404376_Add_ARBillingType_Table.cs" />
+    <Compile Include="Migrations\201602151404376_Add_ARBillingType_Table.Designer.cs">
+      <DependentUpon>201602151404376_Add_ARBillingType_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151405473_Add_LinkJobs_Table.cs" />
+    <Compile Include="Migrations\201602151405473_Add_LinkJobs_Table.Designer.cs">
+      <DependentUpon>201602151405473_Add_LinkJobs_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -428,6 +452,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602090554287_Modify_Customer_Table.resx">
       <DependentUpon>201602090554287_Modify_Customer_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151338506_Add_RollupCenter_Table.resx">
+      <DependentUpon>201602151338506_Add_RollupCenter_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151343484_Add_Job_Table.resx">
+      <DependentUpon>201602151343484_Add_Job_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151402219_Add_JobLocation_Table.resx">
+      <DependentUpon>201602151402219_Add_JobLocation_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151403173_Add_JobCommercial_Table.resx">
+      <DependentUpon>201602151403173_Add_JobCommercial_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151404376_Add_ARBillingType_Table.resx">
+      <DependentUpon>201602151404376_Add_ARBillingType_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151405473_Add_LinkJobs_Table.resx">
+      <DependentUpon>201602151405473_Add_LinkJobs_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

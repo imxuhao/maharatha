@@ -143,10 +143,16 @@
     <Compile Include="Masters\AccountUnitManager.cs" />
     <Compile Include="Masters\AddressUnit.cs" />
     <Compile Include="Masters\AddressUnitManager.cs" />
+    <Compile Include="Masters\ARBillingTypeUnit.cs" />
     <Compile Include="Masters\EmployeeUnitManager.cs" />
     <Compile Include="Masters\EmployeeUnit.cs" />
     <Compile Include="Masters\CustomerUnit.cs" />
     <Compile Include="Masters\CustomerUnitManager.cs" />
+    <Compile Include="Masters\JobCommercialUnit.cs" />
+    <Compile Include="Masters\JobLocationUnit.cs" />
+    <Compile Include="Masters\JobUnit.cs" />
+    <Compile Include="Masters\LinkJobsUnit.cs" />
+    <Compile Include="Masters\RollupCenterUnit.cs" />
     <Compile Include="Masters\SalesRepUnitManager.cs" />
     <Compile Include="Masters\SalesRepUnit.cs" />
     <Compile Include="Masters\CustomerPaymentTermUnit.cs" />

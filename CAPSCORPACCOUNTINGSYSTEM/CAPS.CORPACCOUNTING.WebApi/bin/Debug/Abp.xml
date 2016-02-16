@@ -100,6 +100,1693 @@
             Reference to the logger to write logs.
             </summary>
         </member>
+        <member name="T:Abp.Authorization.IPermissionDependencyContext">
+            <summary>
+            Permission dependency context.
+            </summary>
+        </member>
+        <member name="P:Abp.Authorization.IPermissionDependencyContext.UserId">
+            <summary>
+            The user which requires permission.
+            </summary>
+        </member>
+        <member name="P:Abp.Authorization.IPermissionDependencyContext.IocResolver">
+            <summary>
+            Gets the <see cref="T:Abp.Dependency.IIocResolver"/>.
+            </summary>
+            <value>
+            The ioc resolver.
+            </value>
+        </member>
+        <member name="P:Abp.Authorization.IPermissionDependencyContext.PermissionChecker">
+            <summary>
+            Gets the <see cref="T:Abp.Application.Features.IFeatureChecker"/>.
+            </summary>
+            <value>
+            The feature checker.
+            </value>
+        </member>
+        <member name="T:Abp.Dependency.ITransientDependency">
+            <summary>
+            All classes implement this interface are automatically registered to dependency injection as transient object.
+            </summary>
+        </member>
+        <member name="T:Abp.Authorization.PermissionDependencyExtensions">
+            <summary>
+            Extension methods for <see cref="T:Abp.Authorization.IPermissionDependency"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Authorization.PermissionDependencyExtensions.IsSatisfied(Abp.Authorization.IPermissionDependency,Abp.Authorization.IPermissionDependencyContext)">
+            <summary>
+            Checks if permission dependency is satisfied.
+            </summary>
+            <param name="permissionDependency">The permission dependency</param>
+            <param name="context">Context.</param>
+        </member>
+        <member name="T:Abp.BackgroundJobs.IBackgroundJobConfiguration">
+            <summary>
+            Used to configure background job system.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.IBackgroundJobConfiguration.IsJobExecutionEnabled">
+            <summary>
+            Used to enable/disable background job execution.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.IBackgroundJobConfiguration.AbpConfiguration">
+            <summary>
+            Gets the ABP configuration object.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.BackgroundJob`1">
+            <summary>
+            Base class that can be used to implement <see cref="T:Abp.BackgroundJobs.IBackgroundJob`1"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.IBackgroundJob`1">
+            <summary>
+            Defines interface of a background job.
+            </summary>
+        </member>
+        <member name="M:Abp.BackgroundJobs.IBackgroundJob`1.Execute(`0)">
+            <summary>
+            Executes the job with the <see cref="!:args"/>.
+            </summary>
+            <param name="args">Job arguments.</param>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJob`1.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJob`1.L(System.String)">
+            <summary>
+            Gets localized string for given key name and current language.
+            </summary>
+            <param name="name">Key name</param>
+            <returns>Localized string</returns>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJob`1.L(System.String,System.Object[])">
+            <summary>
+            Gets localized string for given key name and current language with formatting strings.
+            </summary>
+            <param name="name">Key name</param>
+            <param name="args">Format arguments</param>
+            <returns>Localized string</returns>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJob`1.L(System.String,System.Globalization.CultureInfo)">
+            <summary>
+            Gets localized string for given key name and specified culture information.
+            </summary>
+            <param name="name">Key name</param>
+            <param name="culture">culture information</param>
+            <returns>Localized string</returns>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJob`1.L(System.String,System.Globalization.CultureInfo,System.Object[])">
+            <summary>
+            Gets localized string for given key name and current language with formatting strings.
+            </summary>
+            <param name="name">Key name</param>
+            <param name="culture">culture information</param>
+            <param name="args">Format arguments</param>
+            <returns>Localized string</returns>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJob`1.SettingManager">
+            <summary>
+            Reference to the setting manager.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJob`1.UnitOfWorkManager">
+            <summary>
+            Reference to <see cref="T:Abp.Domain.Uow.IUnitOfWorkManager"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJob`1.CurrentUnitOfWork">
+            <summary>
+            Gets current unit of work.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJob`1.LocalizationManager">
+            <summary>
+            Reference to the localization manager.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJob`1.LocalizationSourceName">
+            <summary>
+            Gets/sets name of the localization source that is used in this application service.
+            It must be set in order to use <see cref="M:Abp.BackgroundJobs.BackgroundJob`1.L(System.String)"/> and <see cref="M:Abp.BackgroundJobs.BackgroundJob`1.L(System.String,System.Globalization.CultureInfo)"/> methods.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJob`1.LocalizationSource">
+            <summary>
+            Gets localization source.
+            It's valid if <see cref="P:Abp.BackgroundJobs.BackgroundJob`1.LocalizationSourceName"/> is set.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJob`1.Logger">
+            <summary>
+            Reference to the logger to write logs.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.BackgroundJobManagerExtensions">
+            <summary>
+            Some extension methods for <see cref="T:Abp.BackgroundJobs.IBackgroundJobManager"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJobManagerExtensions.Enqueue``2(Abp.BackgroundJobs.IBackgroundJobManager,``1,Abp.BackgroundJobs.BackgroundJobPriority,System.Nullable{System.TimeSpan})">
+            <summary>
+            Enqueues a job to be executed.
+            </summary>
+            <typeparam name="TJob">Type of the job.</typeparam>
+            <typeparam name="TArgs">Type of the arguments of job.</typeparam>
+            <param name="backgroundJobManager">Background job manager reference</param>
+            <param name="args">Job arguments.</param>
+            <param name="priority">Job priority.</param>
+            <param name="delay">Job delay (wait duration before first try).</param>
+        </member>
+        <member name="T:Abp.BackgroundJobs.BackgroundJobManager">
+            <summary>
+            Default implementation of <see cref="T:Abp.BackgroundJobs.IBackgroundJobManager"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.BackgroundWorkers.PeriodicBackgroundWorkerBase">
+            <summary>
+            Extends <see cref="T:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase"/> to add a periodic running Timer. 
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase">
+            <summary>
+            Base class that can be used to implement <see cref="T:Abp.Threading.BackgroundWorkers.IBackgroundWorker"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.RunnableBase">
+            <summary>
+            Base implementation of <see cref="T:Abp.Threading.IRunnable"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.IRunnable">
+            <summary>
+            Interface to start/stop self threaded services.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.IRunnable.Start">
+            <summary>
+            Starts the service.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.IRunnable.Stop">
+            <summary>
+            Sends stop command to the service.
+            Service may return immediately and stop asynchronously.
+            A client should then call <see cref="M:Abp.Threading.IRunnable.WaitToStop"/> method to ensure it's stopped.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.IRunnable.WaitToStop">
+            <summary>
+            Waits the service to stop.
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.RunnableBase.IsRunning">
+            <summary>
+            A boolean value to control the running.
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.BackgroundWorkers.IBackgroundWorker">
+            <summary>
+            Interface for a worker (thread) that runs on background to perform some tasks.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.L(System.String)">
+            <summary>
+            Gets localized string for given key name and current language.
+            </summary>
+            <param name="name">Key name</param>
+            <returns>Localized string</returns>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.L(System.String,System.Object[])">
+            <summary>
+            Gets localized string for given key name and current language with formatting strings.
+            </summary>
+            <param name="name">Key name</param>
+            <param name="args">Format arguments</param>
+            <returns>Localized string</returns>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.L(System.String,System.Globalization.CultureInfo)">
+            <summary>
+            Gets localized string for given key name and specified culture information.
+            </summary>
+            <param name="name">Key name</param>
+            <param name="culture">culture information</param>
+            <returns>Localized string</returns>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.L(System.String,System.Globalization.CultureInfo,System.Object[])">
+            <summary>
+            Gets localized string for given key name and current language with formatting strings.
+            </summary>
+            <param name="name">Key name</param>
+            <param name="culture">culture information</param>
+            <param name="args">Format arguments</param>
+            <returns>Localized string</returns>
+        </member>
+        <member name="P:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.SettingManager">
+            <summary>
+            Reference to the setting manager.
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.UnitOfWorkManager">
+            <summary>
+            Reference to <see cref="T:Abp.Domain.Uow.IUnitOfWorkManager"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.CurrentUnitOfWork">
+            <summary>
+            Gets current unit of work.
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.LocalizationManager">
+            <summary>
+            Reference to the localization manager.
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.LocalizationSourceName">
+            <summary>
+            Gets/sets name of the localization source that is used in this application service.
+            It must be set in order to use <see cref="M:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.L(System.String)"/> and <see cref="M:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.L(System.String,System.Globalization.CultureInfo)"/> methods.
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.LocalizationSource">
+            <summary>
+            Gets localization source.
+            It's valid if <see cref="P:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.LocalizationSourceName"/> is set.
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.BackgroundWorkers.BackgroundWorkerBase.Logger">
+            <summary>
+            Reference to the logger to write logs.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.PeriodicBackgroundWorkerBase.#ctor(Abp.Threading.Timers.AbpTimer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Threading.BackgroundWorkers.PeriodicBackgroundWorkerBase"/> class.
+            </summary>
+            <param name="timer">A timer.</param>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.PeriodicBackgroundWorkerBase.Timer_Elapsed(System.Object,System.EventArgs)">
+            <summary>
+            Handles the Elapsed event of the Timer.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.PeriodicBackgroundWorkerBase.DoWork">
+            <summary>
+            Periodic works should be done by implementing this method.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.IBackgroundJobManager">
+            <summary>
+            Defines interface of a job manager.
+            </summary>
+        </member>
+        <member name="M:Abp.BackgroundJobs.IBackgroundJobManager.EnqueueAsync``2(``1,Abp.BackgroundJobs.BackgroundJobPriority,System.Nullable{System.TimeSpan})">
+            <summary>
+            Enqueues a job to be executed.
+            </summary>
+            <typeparam name="TJob">Type of the job.</typeparam>
+            <typeparam name="TArgs">Type of the arguments of job.</typeparam>
+            <param name="args">Job arguments.</param>
+            <param name="priority">Job priority.</param>
+            <param name="delay">Job delay (wait duration before first try).</param>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJobManager.#ctor(Abp.Dependency.IIocResolver,Abp.BackgroundJobs.IBackgroundJobStore,Abp.Threading.Timers.AbpTimer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.BackgroundJobs.BackgroundJobManager"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobManager.JobPollPeriod">
+            <summary>
+            Interval between polling jobs from <see cref="T:Abp.BackgroundJobs.IBackgroundJobStore"/>.
+            Default value: 5000 (5 seconds).
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.BackgroundJobInfo">
+            <summary>
+            Represents a background job info that is used to persist jobs.
+            </summary>
+        </member>
+        <member name="T:Abp.Domain.Entities.Auditing.CreationAuditedEntity`1">
+            <summary>
+            This class can be used to simplify implementing <see cref="T:Abp.Domain.Entities.Auditing.ICreationAudited"/>.
+            </summary>
+            <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
+        </member>
+        <member name="T:Abp.Domain.Entities.Entity`1">
+            <summary>
+            Basic implementation of IEntity interface.
+            An entity can inherit this class of directly implement to IEntity interface.
+            </summary>
+            <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
+        </member>
+        <member name="T:Abp.Domain.Entities.IEntity`1">
+            <summary>
+            Defines interface for base entity type. All entities in the system must implement this interface.
+            </summary>
+            <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
+        </member>
+        <member name="M:Abp.Domain.Entities.IEntity`1.IsTransient">
+            <summary>
+            Checks if this entity is transient (not persisted to database and it has not an <see cref="P:Abp.Domain.Entities.IEntity`1.Id"/>).
+            </summary>
+            <returns>True, if this entity is transient</returns>
+        </member>
+        <member name="P:Abp.Domain.Entities.IEntity`1.Id">
+            <summary>
+            Unique identifier for this entity.
+            </summary>
+        </member>
+        <member name="M:Abp.Domain.Entities.Entity`1.IsTransient">
+            <summary>
+            Checks if this entity is transient (it has not an Id).
+            </summary>
+            <returns>True, if this entity is transient</returns>
+        </member>
+        <member name="M:Abp.Domain.Entities.Entity`1.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Abp.Domain.Entities.Entity`1.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Abp.Domain.Entities.Entity`1.op_Equality(Abp.Domain.Entities.Entity{`0},Abp.Domain.Entities.Entity{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Abp.Domain.Entities.Entity`1.op_Inequality(Abp.Domain.Entities.Entity{`0},Abp.Domain.Entities.Entity{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Abp.Domain.Entities.Entity`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:Abp.Domain.Entities.Entity`1.Id">
+            <summary>
+            Unique identifier for this entity.
+            </summary>
+        </member>
+        <member name="T:Abp.Domain.Entities.Auditing.ICreationAudited">
+            <summary>
+            This interface is implemented by entities that is wanted to store creation information (who and when created).
+            Creation time and creator user are automatically set when saving <see cref="T:Abp.Domain.Entities.Entity"/> to database.
+            </summary>
+        </member>
+        <member name="T:Abp.Domain.Entities.Auditing.IHasCreationTime">
+            <summary>
+            An entity can implement this interface if <see cref="P:Abp.Domain.Entities.Auditing.IHasCreationTime.CreationTime"/> of this entity must be stored.
+            <see cref="P:Abp.Domain.Entities.Auditing.IHasCreationTime.CreationTime"/> is automatically set when saving <see cref="T:Abp.Domain.Entities.Entity"/> to database.
+            </summary>
+        </member>
+        <member name="P:Abp.Domain.Entities.Auditing.IHasCreationTime.CreationTime">
+            <summary>
+            Creation time of this entity.
+            </summary>
+        </member>
+        <member name="P:Abp.Domain.Entities.Auditing.ICreationAudited.CreatorUserId">
+            <summary>
+            Id of the creator user of this entity.
+            </summary>
+        </member>
+        <member name="M:Abp.Domain.Entities.Auditing.CreationAuditedEntity`1.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Abp.Domain.Entities.Auditing.CreationAuditedEntity`1.CreationTime">
+            <summary>
+            Creation time of this entity.
+            </summary>
+        </member>
+        <member name="P:Abp.Domain.Entities.Auditing.CreationAuditedEntity`1.CreatorUserId">
+            <summary>
+            Creator of this entity.
+            </summary>
+        </member>
+        <member name="F:Abp.BackgroundJobs.BackgroundJobInfo.MaxJobTypeLength">
+            <summary>
+            Maximum length of <see cref="P:Abp.BackgroundJobs.BackgroundJobInfo.JobType"/>.
+            Value: 512.
+            </summary>
+        </member>
+        <member name="F:Abp.BackgroundJobs.BackgroundJobInfo.MaxJobArgsLength">
+            <summary>
+            Maximum length of <see cref="P:Abp.BackgroundJobs.BackgroundJobInfo.JobArgs"/>.
+            Value: 1 MB (1,048,576 bytes).
+            </summary>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJobInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.BackgroundJobs.BackgroundJobInfo"/> class.
+            </summary>
+        </member>
+        <member name="M:Abp.BackgroundJobs.BackgroundJobInfo.CalculateNextTryTime">
+            <summary>
+            Calculates next try time if a job fails.
+            Returns null if it will not wait anymore and job should be abandoned.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.DefaultFirstWaitDuration">
+            <summary>
+            Default duration (as seconds) for the first wait on a failure.
+            Default value: 60 (1 minutes).
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.DefaultTimeout">
+            <summary>
+            Default timeout value (as seconds) for a job before it's abandoned (<see cref="P:Abp.BackgroundJobs.BackgroundJobInfo.IsAbandoned"/>).
+            Default value: 172,800 (2 days).
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.DefaultWaitFactor">
+            <summary>
+            Default wait factor for execution failures.
+            This amount is multiplated by last wait time to calculate next wait time.
+            Default value: 2.0.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.JobType">
+            <summary>
+            Type of the job.
+            It's AssemblyQualifiedName of job type.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.JobArgs">
+            <summary>
+            Job arguments as JSON string.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.TryCount">
+            <summary>
+            Try count of this job.
+            A job is re-tried if it fails.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.NextTryTime">
+            <summary>
+            Next try time of this job.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.LastTryTime">
+            <summary>
+            Last try time of this job.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.IsAbandoned">
+            <summary>
+            This is true if this job is continously failed and will not be executed again.
+            </summary>
+        </member>
+        <member name="P:Abp.BackgroundJobs.BackgroundJobInfo.Priority">
+            <summary>
+            Priority of this job.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.BackgroundJobPriority">
+            <summary>
+            Priority of a background job.
+            </summary>
+        </member>
+        <member name="F:Abp.BackgroundJobs.BackgroundJobPriority.Low">
+            <summary>
+            Low.
+            </summary>
+        </member>
+        <member name="F:Abp.BackgroundJobs.BackgroundJobPriority.BelowNormal">
+            <summary>
+            Below normal.
+            </summary>
+        </member>
+        <member name="F:Abp.BackgroundJobs.BackgroundJobPriority.Normal">
+            <summary>
+            Normal (default).
+            </summary>
+        </member>
+        <member name="F:Abp.BackgroundJobs.BackgroundJobPriority.AboveNormal">
+            <summary>
+            Above normal.
+            </summary>
+        </member>
+        <member name="F:Abp.BackgroundJobs.BackgroundJobPriority.High">
+            <summary>
+            High.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.IBackgroundJobStore">
+            <summary>
+            Defines interface to store/get background jobs.
+            </summary>
+        </member>
+        <member name="M:Abp.BackgroundJobs.IBackgroundJobStore.InsertAsync(Abp.BackgroundJobs.BackgroundJobInfo)">
+            <summary>
+            Inserts a background job.
+            </summary>
+            <param name="jobInfo">Job information.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Abp.BackgroundJobs.IBackgroundJobStore.GetWaitingJobsAsync(System.Int32)" -->
+        <member name="M:Abp.BackgroundJobs.IBackgroundJobStore.DeleteAsync(Abp.BackgroundJobs.BackgroundJobInfo)">
+            <summary>
+            Deletes a job.
+            </summary>
+            <param name="jobInfo">Job information.</param>
+        </member>
+        <member name="M:Abp.BackgroundJobs.IBackgroundJobStore.UpdateAsync(Abp.BackgroundJobs.BackgroundJobInfo)">
+            <summary>
+            Updates a job.
+            </summary>
+            <param name="jobInfo">Job information.</param>
+        </member>
+        <member name="T:Abp.BackgroundJobs.InMemoryBackgroundJobStore">
+            <summary>
+            In memory implementation of <see cref="T:Abp.BackgroundJobs.IBackgroundJobStore"/>.
+            It's used if <see cref="T:Abp.BackgroundJobs.IBackgroundJobStore"/> is not implemented by actual persistent store
+            and job execution is enabled (<see cref="P:Abp.BackgroundJobs.IBackgroundJobConfiguration.IsJobExecutionEnabled"/>) for the application.
+            </summary>
+        </member>
+        <member name="M:Abp.BackgroundJobs.InMemoryBackgroundJobStore.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.BackgroundJobs.InMemoryBackgroundJobStore"/> class.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.NullBackgroundJobStore">
+            <summary>
+            Null pattern implementation of <see cref="T:Abp.BackgroundJobs.IBackgroundJobStore"/>.
+            It's used if <see cref="T:Abp.BackgroundJobs.IBackgroundJobStore"/> is not implemented by actual persistent store
+            and job execution is not enabled (<see cref="P:Abp.BackgroundJobs.IBackgroundJobConfiguration.IsJobExecutionEnabled"/>) for the application.
+            </summary>
+        </member>
+        <member name="T:Abp.Authorization.IPermissionDependency">
+            <summary>
+            Defines interface to check a dependency.
+            </summary>
+        </member>
+        <member name="M:Abp.Authorization.IPermissionDependency.IsSatisfiedAsync(Abp.Authorization.IPermissionDependencyContext)">
+            <summary>
+            Checks if permission dependency is satisfied.
+            </summary>
+            <param name="context">Context.</param>
+        </member>
+        <member name="T:Abp.Notifications.INotificationDefinitionContext">
+            <summary>
+            Used as a context while defining notifications.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.INotificationDefinitionContext.Manager">
+            <summary>
+            Gets the notification definition manager.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.INotificationDefinitionManager">
+            <summary>
+            Used to manage notification definitions.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationDefinitionManager.Add(Abp.Notifications.NotificationDefinition)">
+            <summary>
+            Adds the specified notification definition.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationDefinitionManager.Get(System.String)">
+            <summary>
+            Gets a notification definition by name.
+            Throws exception if there is no notification definition with given name.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationDefinitionManager.GetOrNull(System.String)">
+            <summary>
+            Gets a notification definition by name.
+            Returns null if there is no notification definition with given name.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationDefinitionManager.GetAll">
+            <summary>
+            Gets all notification definitions.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationDefinitionManager.IsAvailableAsync(System.String,System.Nullable{System.Int32},System.Int64)">
+            <summary>
+            Checks if given notification (<see cref="!:name"/>) is available for given user and given tenant.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationDefinitionManager.GetAllAvailableAsync(System.Nullable{System.Int32},System.Int64)">
+            <summary>
+            Gets all available notification definitions for given <see cref="!:tenantId"/> and <see cref="!:userId"/>.
+            </summary>
+            <param name="tenantId">Tenant id</param>
+            <param name="userId">User id</param>
+        </member>
+        <member name="T:Abp.Notifications.INotificationDistributer">
+            <summary>
+            Used to distribute notifications to users.
+            </summary>
+        </member>
+        <member name="T:Abp.Domain.Services.IDomainService">
+            <summary>
+            This interface must be implemented by all domain services to identify them by convention.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationDistributer.DistributeAsync(System.Guid)">
+            <summary>
+            Distributes given notification to users.
+            </summary>
+            <param name="notificationId">The notification id.</param>
+        </member>
+        <member name="T:Abp.Notifications.NotificationDefinition">
+            <summary>
+            Definition for a notification.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationDefinition.#ctor(System.String,System.Type,Abp.Localization.ILocalizableString,Abp.Localization.ILocalizableString,Abp.Authorization.IPermissionDependency,Abp.Application.Features.IFeatureDependency)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationDefinition"/> class.
+            </summary>
+            <param name="name">Unique name of the notification.</param>
+            <param name="entityType">Related entity type with this notification (optional).</param>
+            <param name="displayName">Display name of the notification.</param>
+            <param name="description">Description for the notification</param>
+            <param name="permissionDependency">A permission dependency. This notification will be available to a user if this dependency is satisfied.</param>
+            <param name="featureDependency">A feature dependency. This notification will be available to a tenant if this feature is enabled.</param>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDefinition.Name">
+            <summary>
+            Unique name of the notification.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDefinition.EntityType">
+            <summary>
+            Related entity type with this notification (optional).
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDefinition.DisplayName">
+            <summary>
+            Display name of the notification.
+            Optional.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDefinition.Description">
+            <summary>
+            Description for the notification.
+            Optional.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDefinition.PermissionDependency">
+            <summary>
+            A permission dependency. This notification will be available to a user if this dependency is satisfied.
+            Optional.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDefinition.FeatureDependency">
+            <summary>
+            A feature dependency. This notification will be available to a tenant if this feature is enabled.
+            Optional.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDefinition.Item(System.String)">
+            <summary>
+            Gets/sets arbitrary objects related to this object.
+            Gets null if given key does not exists.
+            This is a shortcut for <see cref="P:Abp.Notifications.NotificationDefinition.Attributes"/> dictionary.
+            </summary>
+            <param name="key">Key</param>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDefinition.Attributes">
+            <summary>
+            Arbitrary objects related to this object.
+            These objects must be serializable.
+            </summary>
+        </member>
+        <member name="T:Abp.Authorization.SimplePermissionDependency">
+            <summary>
+            Most simple implementation of <see cref="T:Abp.Authorization.IPermissionDependency"/>.
+            It checks one or more permissions if they are granted.
+            </summary>
+        </member>
+        <member name="M:Abp.Authorization.SimplePermissionDependency.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Authorization.SimplePermissionDependency"/> class.
+            </summary>
+            <param name="permissions">The features.</param>
+        </member>
+        <member name="M:Abp.Authorization.SimplePermissionDependency.#ctor(System.Boolean,System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Authorization.SimplePermissionDependency"/> class.
+            </summary>
+            <param name="requiresAll">
+            If this is set to true, all of the <see cref="P:Abp.Authorization.SimplePermissionDependency.Permissions"/> must be granted.
+            If it's false, at least one of the <see cref="P:Abp.Authorization.SimplePermissionDependency.Permissions"/> must be granted.
+            </param>
+            <param name="features">The features.</param>
+        </member>
+        <member name="M:Abp.Authorization.SimplePermissionDependency.IsSatisfiedAsync(Abp.Authorization.IPermissionDependencyContext)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Abp.Authorization.SimplePermissionDependency.Permissions">
+            <summary>
+            A list of permissions to be checked if they are granted.
+            </summary>
+        </member>
+        <member name="P:Abp.Authorization.SimplePermissionDependency.RequiresAll">
+            <summary>
+            If this property is set to true, all of the <see cref="P:Abp.Authorization.SimplePermissionDependency.Permissions"/> must be granted.
+            If it's false, at least one of the <see cref="P:Abp.Authorization.SimplePermissionDependency.Permissions"/> must be granted.
+            Default: false.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationDefinitionManager">
+            <summary>
+            Implements <see cref="T:Abp.Notifications.INotificationDefinitionManager"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Dependency.ISingletonDependency">
+            <summary>
+            All classes implement this interface are automatically registered to dependency injection as singleton object.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationDefinitionManagerExtensions">
+            <summary>
+            Extension methods for <see cref="T:Abp.Notifications.INotificationDefinitionManager"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationDefinitionManagerExtensions.GetAllAvailable(Abp.Notifications.INotificationDefinitionManager,System.Nullable{System.Int32},System.Int64)">
+            <summary>
+            Gets all available notification definitions for given <see cref="!:tenantId"/> and <see cref="!:userId"/>.
+            </summary>
+            <param name="notificationDefinitionManager">Notification definition manager</param>
+            <param name="tenantId">Tenant id</param>
+            <param name="userId">User id</param>
+        </member>
+        <member name="T:Abp.Notifications.NotificationDistributer">
+            <summary>
+            Used to distribute notifications to users.
+            </summary>
+        </member>
+        <member name="T:Abp.Domain.Services.DomainService">
+            <summary>
+            This class can be used as a base class for domain services. 
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationDistributer.#ctor(Abp.Notifications.INotificationDefinitionManager,Abp.Notifications.INotificationStore)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationDistributionJob"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDistributer.RealTimeNotifier">
+            <summary>
+            Referece to <see cref="T:Abp.Notifications.IRealTimeNotifier"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationProvider">
+            <summary>
+            This class should be implemented in order to define notifications.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationProvider.SetNotifications(Abp.Notifications.INotificationDefinitionContext)">
+            <summary>
+            Used to add/manipulate notification definitions.
+            </summary>
+            <param name="context">Context</param>
+        </member>
+        <member name="T:Abp.Notifications.NotificationSettingNames">
+            <summary>
+            Pre-defined setting names for notification system.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationSettingNames.ReceiveNotifications">
+            <summary>
+            A top-level switch to enable/disable receiving notifications for a user.
+            "Abp.Notifications.ReceiveNotifications".
+            </summary>
+        </member>
+        <member name="T:Abp.Configuration.SettingProvider">
+            <summary>
+            Inherit this class to define settings for a module/application.
+            </summary>
+        </member>
+        <member name="M:Abp.Configuration.SettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
+            <summary>
+            Gets all setting definitions provided by this provider.
+            </summary>
+            <returns>List of settings</returns>
+        </member>
+        <member name="T:Abp.Notifications.UserNotificationInfoWithNotificationInfoExtensions">
+            <summary>
+            Extension methods for <see cref="T:Abp.Notifications.UserNotificationInfoWithNotificationInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.UserNotificationInfoWithNotificationInfoExtensions.ToUserNotification(Abp.Notifications.UserNotificationInfoWithNotificationInfo)">
+            <summary>
+            Converts <see cref="T:Abp.Notifications.UserNotificationInfoWithNotificationInfo"/> to <see cref="T:Abp.Notifications.UserNotification"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.RealTime.OnlineClientManagerExtensions">
+            <summary>
+            Extension methods for <see cref="T:Abp.RealTime.IOnlineClientManager"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.RealTime.OnlineClientManagerExtensions.IsOnline(Abp.RealTime.IOnlineClientManager,System.Int64)">
+            <summary>
+            Determines whether the specified user is online or not.
+            </summary>
+            <param name="onlineClientManager">The online client manager.</param>
+            <param name="userId">User id.</param>
+        </member>
+        <member name="T:Abp.RegularGuidGenerator">
+            <summary>
+            Implements <see cref="T:Abp.IGuidGenerator"/> by using <see cref="M:System.Guid.NewGuid"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.IGuidGenerator">
+            <summary>
+            Used to generate Ids.
+            </summary>
+        </member>
+        <member name="M:Abp.IGuidGenerator.Create">
+            <summary>
+            Creates a GUID.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.LocalizableMessageNotificationData">
+            <summary>
+            Can be used to store a simple message as notification data.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationData">
+            <summary>
+            Used to store data for a notification.
+            It can be directly used or can be derived.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationData.#ctor">
+            <summary>
+            Createa a new NotificationData object.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationData.Type">
+            <summary>
+            Gets notification data type name.
+            It returns the full class name by default.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationData.Item(System.String)">
+            <summary>
+            Shortcut to set/get <see cref="P:Abp.Notifications.NotificationData.Properties"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationData.Properties">
+            <summary>
+            Can be used to add custom properties to this notification.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.LocalizableMessageNotificationData.#ctor">
+            <summary>
+            Needed for serialization.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.LocalizableMessageNotificationData.#ctor(Abp.Localization.LocalizableString)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.LocalizableMessageNotificationData"/> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="P:Abp.Notifications.LocalizableMessageNotificationData.Message">
+            <summary>
+            The message.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.MessageNotificationData">
+            <summary>
+            Can be used to store a simple message as notification data.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.MessageNotificationData.#ctor">
+            <summary>
+            Needed for serialization.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.MessageNotificationData.Message">
+            <summary>
+            The message.
+            </summary>
+        </member>
+        <member name="T:Abp.SequentialGuidGenerator">
+            <summary>
+            Implements <see cref="T:Abp.IGuidGenerator"/> by creating sequential Guids.
+            This code is taken from NHibernate's GuidCombGenerator class.
+            </summary>
+        </member>
+        <member name="P:Abp.SequentialGuidGenerator.Instance">
+            <summary>
+            Gets the singleton <see cref="T:Abp.SequentialGuidGenerator"/> instance.
+            </summary>
+        </member>
+        <member name="T:Abp.Domain.Entities.EntityHelper">
+            <summary>
+            Some helper methods for entities.
+            </summary>
+        </member>
+        <member name="M:Abp.Domain.Entities.EntityHelper.GetPrimaryKeyType(System.Type)">
+            <summary>
+            Gets primary key type of given entity type
+            </summary>
+        </member>
+        <member name="T:Abp.Domain.Entities.EntityIdentifier">
+            <summary>
+            Used to identify an entity.
+            Can be used to store an entity <see cref="P:Abp.Domain.Entities.EntityIdentifier.Type"/> and <see cref="P:Abp.Domain.Entities.EntityIdentifier.Id"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Domain.Entities.EntityIdentifier.#ctor">
+            <summary>
+            Added for serialization purposes.
+            </summary>
+        </member>
+        <member name="M:Abp.Domain.Entities.EntityIdentifier.#ctor(System.Type,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Domain.Entities.EntityIdentifier"/> class.
+            </summary>
+            <param name="type">Entity type.</param>
+            <param name="id">Id of the entity.</param>
+        </member>
+        <member name="P:Abp.Domain.Entities.EntityIdentifier.Type">
+            <summary>
+            Entity Type.
+            </summary>
+        </member>
+        <member name="P:Abp.Domain.Entities.EntityIdentifier.Id">
+            <summary>
+            Entity's Id.
+            </summary>
+        </member>
+        <member name="T:Abp.Localization.ILocalizationContext">
+            <summary>
+            Localization context.
+            </summary>
+        </member>
+        <member name="P:Abp.Localization.ILocalizationContext.LocalizationManager">
+            <summary>
+            Gets the localization manager.
+            </summary>
+        </member>
+        <member name="T:Abp.Localization.LocalizationContext">
+            <summary>
+            Implements <see cref="T:Abp.Localization.ILocalizationContext"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Localization.LocalizationContext.#ctor(Abp.Localization.ILocalizationManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Localization.LocalizationContext"/> class.
+            </summary>
+            <param name="localizationManager">The localization manager.</param>
+        </member>
+        <member name="T:Abp.Notifications.INotificationPublisher">
+            <summary>
+            Used to publish notifications.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationPublisher.PublishAsync(System.String,Abp.Notifications.NotificationData,Abp.Domain.Entities.EntityIdentifier,Abp.Notifications.NotificationSeverity,System.Int64[],System.Int64[],System.Nullable{System.Int32}[])">
+            <summary>
+            Publishes a new notification.
+            </summary>
+            <param name="notificationName">Unique notification name</param>
+            <param name="data">Notification data (optional)</param>
+            <param name="entityIdentifier">The entity identifier if this notification is related to an entity</param>
+            <param name="severity">Notification severity</param>
+            <param name="userIds">
+            Target user id(s). 
+            Used to send notification to specific user(s). 
+            If this is null/empty, the notification is sent to subscribed users.
+            </param>
+            <param name="excludedUserIds">
+            Excluded user id(s).
+            This can be set to exclude some users while publishing notifications to subscribed users.
+            It's normally not set if <see cref="!:userIds"/> is set.
+            </param>
+            <param name="tenantIds">
+            Target tenant id(s).
+            Used to send notification to subscribed users of specific tenant(s).
+            This should not be set if <see cref="!:userIds"/> is set.
+            <see cref="P:Abp.Notifications.NotificationPublisher.AllTenants"/> can be passed to indicate all tenants.
+            If this is null, then it's automatically set to the current tenant on <see cref="P:Abp.Runtime.Session.IAbpSession.TenantId"/>.
+            </param>
+        </member>
+        <member name="T:Abp.Notifications.IUserNotificationManager">
+            <summary>
+            Used to manage user notifications.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.IUserNotificationManager.GetUserNotificationsAsync(System.Int64,System.Nullable{Abp.Notifications.UserNotificationState},System.Int32,System.Int32)">
+            <summary>
+            Gets notifications for a user.
+            </summary>
+            <param name="userId">The user id.</param>
+            <param name="state">State</param>
+            <param name="skipCount">Skip count.</param>
+            <param name="maxResultCount">Maximum result count.</param>
+        </member>
+        <member name="M:Abp.Notifications.IUserNotificationManager.GetUserNotificationCountAsync(System.Int64,System.Nullable{Abp.Notifications.UserNotificationState})">
+            <summary>
+            Gets user notification count.
+            </summary>
+            <param name="userId">The user id.</param>
+            <param name="state">State.</param>
+        </member>
+        <member name="M:Abp.Notifications.IUserNotificationManager.GetUserNotificationAsync(System.Guid)">
+            <summary>
+            Gets a user notification by given id.
+            </summary>
+            <param name="userNotificationId">The user notification id.</param>
+        </member>
+        <member name="M:Abp.Notifications.IUserNotificationManager.UpdateUserNotificationStateAsync(System.Guid,Abp.Notifications.UserNotificationState)">
+            <summary>
+            Updates a user notification state.
+            </summary>
+            <param name="userNotificationId">The user notification id.</param>
+            <param name="state">New state.</param>
+        </member>
+        <member name="M:Abp.Notifications.IUserNotificationManager.UpdateAllUserNotificationStatesAsync(System.Int64,Abp.Notifications.UserNotificationState)">
+            <summary>
+            Updates all notification states for a user.
+            </summary>
+            <param name="userId">The user id.</param>
+            <param name="state">New state.</param>
+        </member>
+        <member name="M:Abp.Notifications.IUserNotificationManager.DeleteUserNotificationAsync(System.Guid)">
+            <summary>
+            Deletes a user notification.
+            </summary>
+            <param name="userNotificationId">The user notification id.</param>
+        </member>
+        <member name="M:Abp.Notifications.IUserNotificationManager.DeleteAllUserNotificationsAsync(System.Int64)">
+            <summary>
+            Deletes all notifications of a user.
+            </summary>
+            <param name="userId">The user id.</param>
+        </member>
+        <member name="T:Abp.Notifications.Notification">
+            <summary>
+            Represents a published notification.
+            </summary>
+        </member>
+        <member name="T:Abp.Application.Services.Dto.EntityDto`1">
+            <summary>
+            Implements common properties for entity based DTOs.
+            </summary>
+            <typeparam name="TPrimaryKey">Type of the primary key</typeparam>
+        </member>
+        <member name="T:Abp.Application.Services.Dto.IEntityDto`1">
+            <summary>
+            Defines common properties for entity based DTOs.
+            </summary>
+            <typeparam name="TPrimaryKey"></typeparam>
+        </member>
+        <member name="T:Abp.Application.Services.Dto.IDto">
+            <summary>
+            This interface must be implemented by all DTO classes to identify them by convention.
+            </summary>
+        </member>
+        <member name="P:Abp.Application.Services.Dto.IEntityDto`1.Id">
+            <summary>
+            Id of the entity.
+            </summary>
+        </member>
+        <member name="M:Abp.Application.Services.Dto.EntityDto`1.#ctor">
+            <summary>
+            Creates a new <see cref="T:Abp.Application.Services.Dto.EntityDto`1"/> object.
+            </summary>
+        </member>
+        <member name="M:Abp.Application.Services.Dto.EntityDto`1.#ctor(`0)">
+            <summary>
+            Creates a new <see cref="T:Abp.Application.Services.Dto.EntityDto`1"/> object.
+            </summary>
+            <param name="id">Id of the entity</param>
+        </member>
+        <member name="P:Abp.Application.Services.Dto.EntityDto`1.Id">
+            <summary>
+            Id of the entity.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.Notification.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.Notification"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.Notification.NotificationName">
+            <summary>
+            Unique notification name.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.Notification.Data">
+            <summary>
+            Notification data.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.Notification.EntityType">
+            <summary>
+            Gets or sets the type of the entity.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.Notification.EntityTypeName">
+            <summary>
+            Name of the entity type (including namespaces).
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.Notification.EntityId">
+            <summary>
+            Entity id.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.Notification.Severity">
+            <summary>
+            Severity.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.INotificationConfiguration">
+            <summary>
+            Used to configure notification system.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.INotificationConfiguration.Providers">
+            <summary>
+            Notification providers.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationDistributionJob">
+            <summary>
+            This background job distributes notifications to users.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationDistributionJob.#ctor(Abp.Notifications.INotificationDistributer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationDistributionJob"/> class.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationDistributionJobArgs">
+            <summary>
+            Arguments for <see cref="T:Abp.Notifications.NotificationDistributionJob"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationDistributionJobArgs.#ctor(System.Guid)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationDistributionJobArgs"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationDistributionJobArgs.NotificationId">
+            <summary>
+            Notification Id.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationInfoExtensions">
+            <summary>
+            Extension methods for <see cref="T:Abp.Notifications.NotificationInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationInfoExtensions.ToNotification(Abp.Notifications.NotificationInfo)">
+            <summary>
+            Converts <see cref="T:Abp.Notifications.NotificationInfo"/> to <see cref="T:Abp.Notifications.Notification"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationPublisher">
+            <summary>
+            Implements <see cref="T:Abp.Notifications.INotificationPublisher"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationPublisher.#ctor(Abp.Notifications.INotificationStore,Abp.BackgroundJobs.IBackgroundJobManager,Abp.Notifications.INotificationDistributer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationPublisher"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationPublisher.AllTenants">
+            <summary>
+            Indicates all tenants.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationPublisher.AbpSession">
+            <summary>
+            Reference to ABP session.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationSubscription">
+            <summary>
+            Represents a user subscription to a notification.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationSubscription.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationSubscription"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscription.UserId">
+            <summary>
+            User Id.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscription.NotificationName">
+            <summary>
+            Notification unique name.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscription.EntityType">
+            <summary>
+            Entity type.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscription.EntityTypeName">
+            <summary>
+            Name of the entity type (including namespaces).
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscription.EntityId">
+            <summary>
+            Entity Id.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationSubscriptionInfo">
+            <summary>
+            Used to store a notification subscription.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationSubscriptionInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationSubscriptionInfo"/> class.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationSubscriptionInfo.#ctor(System.Nullable{System.Int32},System.Int64,System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationSubscriptionInfo"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscriptionInfo.TenantId">
+            <summary>
+            Tenant id of the subscribed user.
+            Note: This class does not implement <see cref="T:Abp.Domain.Entities.IMayHaveTenant"/> filter.
+            So, it should be manually filtered if needed.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscriptionInfo.UserId">
+            <summary>
+            User Id.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscriptionInfo.NotificationName">
+            <summary>
+            Notification unique name.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscriptionInfo.EntityTypeName">
+            <summary>
+            Gets/sets entity type name, if this is an entity level notification.
+            It's FullName of the entity type.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscriptionInfo.EntityTypeAssemblyQualifiedName">
+            <summary>
+            AssemblyQualifiedName of the entity type.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationSubscriptionInfo.EntityId">
+            <summary>
+            Gets/sets primary key of the entity, if this is an entity level notification.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationSubscriptionInfoExtensions">
+            <summary>
+            Extension methods for <see cref="T:Abp.Notifications.NotificationSubscriptionInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationSubscriptionInfoExtensions.ToNotificationSubscription(Abp.Notifications.NotificationSubscriptionInfo)">
+            <summary>
+            Converts <see cref="T:Abp.Notifications.UserNotificationInfo"/> to <see cref="T:Abp.Notifications.UserNotification"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationSubscriptionManager">
+            <summary>
+            Implements <see cref="T:Abp.Notifications.INotificationSubscriptionManager"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.INotificationSubscriptionManager">
+            <summary>
+            Used to manage subscriptions for notifications.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationSubscriptionManager.SubscribeAsync(System.Nullable{System.Int32},System.Int64,System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Subscribes to a notification for given user and notification informations.
+            </summary>
+            <param name="tenantId">Tenant id of the user. Null for host users.</param>
+            <param name="userId">The user id (which belongs to given tenantId).</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.INotificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(System.Nullable{System.Int32},System.Int64)">
+            <summary>
+            Subscribes to all available notifications for given user.
+            It does not subscribe entity related notifications.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:Abp.Notifications.INotificationSubscriptionManager.UnsubscribeAsync(System.Int64,System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Unsubscribes from a notification.
+            </summary>
+            <param name="userId">The user id.</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.INotificationSubscriptionManager.GetSubscriptionsAsync(System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Gets all subscribtions for given notification (including all tenants).
+            </summary>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.INotificationSubscriptionManager.GetSubscriptionsAsync(System.Nullable{System.Int32},System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Gets all subscribtions for given notification.
+            </summary>
+            <param name="tenantId">Tenant id. Null for the host.</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.INotificationSubscriptionManager.GetSubscribedNotificationsAsync(System.Int64)">
+            <summary>
+            Gets subscribed notifications for a user.
+            </summary>
+            <param name="userId">The user id.</param>
+        </member>
+        <member name="M:Abp.Notifications.INotificationSubscriptionManager.IsSubscribedAsync(System.Int64,System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Checks if a user subscribed for a notification.
+            </summary>
+            <param name="userId">The user id.</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationSubscriptionManager.#ctor(Abp.Notifications.INotificationStore,Abp.Notifications.INotificationDefinitionManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationSubscriptionManager"/> class.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.UserNotification">
+            <summary>
+            Represents a notification sent to a user.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.UserNotification.UserId">
+            <summary>
+            User Id.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.UserNotification.State">
+            <summary>
+            Current state of the user notification.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.UserNotification.Notification">
+            <summary>
+            The notification.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.UserNotificationInfoExtensions">
+            <summary>
+            Extension methods for <see cref="T:Abp.Notifications.UserNotificationInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.UserNotificationInfoExtensions.ToUserNotification(Abp.Notifications.UserNotificationInfo,Abp.Notifications.Notification)">
+            <summary>
+            Converts <see cref="T:Abp.Notifications.UserNotificationInfo"/> to <see cref="T:Abp.Notifications.UserNotification"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.UserNotificationInfoWithNotificationInfo">
+            <summary>
+            A class contains a <see cref="T:Abp.Notifications.UserNotificationInfo"/> and related <see cref="T:Abp.Notifications.NotificationInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.UserNotificationInfoWithNotificationInfo.#ctor(Abp.Notifications.UserNotificationInfo,Abp.Notifications.NotificationInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.UserNotificationInfoWithNotificationInfo"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.UserNotificationInfoWithNotificationInfo.UserNotification">
+            <summary>
+            User notification.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.UserNotificationInfoWithNotificationInfo.Notification">
+            <summary>
+            Notification.
+            </summary>
+        </member>
+        <member name="T:Abp.RealTime.IOnlineClient">
+            <summary>
+            Represents an online client connected to the application.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.IOnlineClient.ConnectionId">
+            <summary>
+            Unique connection Id for this client.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.IOnlineClient.IpAddress">
+            <summary>
+            IP address of this client.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.IOnlineClient.TenantId">
+            <summary>
+            Tenant Id.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.IOnlineClient.UserId">
+            <summary>
+            User Id.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.IOnlineClient.ConnectTime">
+            <summary>
+            Connection establishment time for this client.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.IOnlineClient.Item(System.String)">
+            <summary>
+            Shortcut to set/get <see cref="P:Abp.RealTime.IOnlineClient.Properties"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.IOnlineClient.Properties">
+            <summary>
+            Can be used to add custom properties for this client.
+            </summary>
+        </member>
+        <member name="T:Abp.RealTime.IOnlineClientManager">
+            <summary>
+            Used to manage online clients those are connected to the application..
+            </summary>
+        </member>
+        <member name="M:Abp.RealTime.IOnlineClientManager.Add(Abp.RealTime.IOnlineClient)">
+            <summary>
+            Adds a client.
+            </summary>
+            <param name="client">The client.</param>
+        </member>
+        <member name="M:Abp.RealTime.IOnlineClientManager.Remove(Abp.RealTime.IOnlineClient)">
+            <summary>
+            Removes the specified client.
+            </summary>
+            <param name="client">The client.</param>
+            <returns>True, if a client is removed</returns>
+        </member>
+        <member name="M:Abp.RealTime.IOnlineClientManager.Remove(System.String)">
+            <summary>
+            Removes a client by connection id.
+            </summary>
+            <param name="connectionId">The connection id.</param>
+            <returns>True, if a client is removed</returns>
+        </member>
+        <member name="M:Abp.RealTime.IOnlineClientManager.GetByConnectionIdOrNull(System.String)">
+            <summary>
+            Tries to find a client by connection id.
+            Returns null if not found.
+            </summary>
+            <param name="connectionId">connection id</param>
+        </member>
+        <member name="M:Abp.RealTime.IOnlineClientManager.GetByUserIdOrNull(System.Int64)">
+            <summary>
+            Tries to find a client by userId.
+            Returns null if not found.
+            </summary>
+            <param name="userId">UserId.</param>
+        </member>
+        <member name="M:Abp.RealTime.IOnlineClientManager.GetAllClients">
+            <summary>
+            Gets all online clients.
+            </summary>
+        </member>
+        <member name="T:Abp.RealTime.OnlineClient">
+            <summary>
+            Implements <see cref="T:Abp.RealTime.IOnlineClient"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.RealTime.OnlineClient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.RealTime.OnlineClient"/> class.
+            </summary>
+        </member>
+        <member name="M:Abp.RealTime.OnlineClient.#ctor(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int64})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.RealTime.OnlineClient"/> class.
+            </summary>
+            <param name="connectionId">The connection identifier.</param>
+            <param name="ipAddress">The ip address.</param>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="P:Abp.RealTime.OnlineClient.ConnectionId">
+            <summary>
+            Unique connection Id for this client.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.OnlineClient.IpAddress">
+            <summary>
+            IP address of this client.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.OnlineClient.TenantId">
+            <summary>
+            Tenant Id.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.OnlineClient.UserId">
+            <summary>
+            User Id.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.OnlineClient.ConnectTime">
+            <summary>
+            Connection establishment time for this client.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.OnlineClient.Item(System.String)">
+            <summary>
+            Shortcut to set/get <see cref="P:Abp.RealTime.OnlineClient.Properties"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.RealTime.OnlineClient.Properties">
+            <summary>
+            Can be used to add custom properties for this client.
+            </summary>
+        </member>
+        <member name="T:Abp.RealTime.OnlineClientManager">
+            <summary>
+            Implements <see cref="T:Abp.RealTime.IOnlineClientManager"/>.
+            </summary>
+        </member>
+        <member name="F:Abp.RealTime.OnlineClientManager._clients">
+            <summary>
+            Online clients.
+            </summary>
+        </member>
+        <member name="M:Abp.RealTime.OnlineClientManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.RealTime.OnlineClientManager"/> class.
+            </summary>
+        </member>
+        <member name="T:Abp.Runtime.Serialization.BinarySerializationHelper">
+            <summary>
+            This class is used to simplify serialization/deserialization operations.
+            Uses .NET binary serialization.
+            </summary>
+        </member>
+        <member name="M:Abp.Runtime.Serialization.BinarySerializationHelper.Serialize(System.Object)">
+            <summary>
+            Serializes an object and returns as a byte array.
+            </summary>
+            <param name="obj">object to be serialized</param>
+            <returns>bytes of object</returns>
+        </member>
+        <member name="M:Abp.Runtime.Serialization.BinarySerializationHelper.Serialize(System.Object,System.IO.Stream)">
+            <summary>
+            Serializes an object into a stream.
+            </summary>
+            <param name="obj">object to be serialized</param>
+            <param name="stream">Stream to serialize in</param>
+            <returns>bytes of object</returns>
+        </member>
+        <member name="M:Abp.Runtime.Serialization.BinarySerializationHelper.Deserialize(System.Byte[])">
+            <summary>
+            Deserializes an object from given byte array.
+            </summary>
+            <param name="bytes">The byte array that contains object</param>
+            <returns>deserialized object</returns>
+        </member>
+        <member name="M:Abp.Runtime.Serialization.BinarySerializationHelper.Deserialize(System.IO.Stream)">
+            <summary>
+            Deserializes an object from given stream.
+            </summary>
+            <param name="stream">The stream that contains object</param>
+            <returns>deserialized object</returns> 
+        </member>
+        <member name="M:Abp.Runtime.Serialization.BinarySerializationHelper.DeserializeExtended(System.Byte[])">
+            <summary>
+            Deserializes an object from given byte array.
+            Difference from <see cref="M:Abp.Runtime.Serialization.BinarySerializationHelper.Deserialize(System.Byte[])"/> is that; this method can also deserialize
+            types that are defined in dynamically loaded assemblies (like PlugIns).
+            </summary>
+            <param name="bytes">The byte array that contains object</param>
+            <returns>deserialized object</returns>        
+        </member>
+        <member name="M:Abp.Runtime.Serialization.BinarySerializationHelper.DeserializeExtended(System.IO.Stream)">
+            <summary>
+            Deserializes an object from given stream.
+            Difference from <see cref="M:Abp.Runtime.Serialization.BinarySerializationHelper.Deserialize(System.IO.Stream)"/> is that; this method can also deserialize
+            types that are defined in dynamically loaded assemblies (like PlugIns).
+            </summary>
+            <param name="stream">The stream that contains object</param>
+            <returns>deserialized object</returns> 
+        </member>
+        <member name="T:Abp.Runtime.Serialization.BinarySerializationHelper.DeserializationAppDomainBinder">
+            <summary>
+            This class is used in deserializing to allow deserializing objects that are defined
+            in assemlies that are load in runtime (like PlugIns).
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.ThreadCultureSanitizer">
+            <summary>
+            This class is copied from here:
+            http://www.zpqrtbnk.net/posts/appdomains-threads-cultureinfos-and-paracetamol
+            It's a workaround for application startup problem.
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.BackgroundWorkers.BackgroundWorkerManager">
+            <summary>
+            Implements <see cref="T:Abp.Threading.BackgroundWorkers.IBackgroundWorkerManager"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.BackgroundWorkers.IBackgroundWorkerManager">
+            <summary>
+            Used to manage background workers.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.IBackgroundWorkerManager.Add(Abp.Threading.BackgroundWorkers.IBackgroundWorker)">
+            <summary>
+            Adds a new worker. Starts the worker immediately if <see cref="T:Abp.Threading.BackgroundWorkers.IBackgroundWorkerManager"/> has started.
+            </summary>
+            <param name="worker">
+            The worker. It should be resolved from IOC.
+            </param>
+        </member>
+        <member name="M:Abp.Threading.BackgroundWorkers.BackgroundWorkerManager.#ctor(Abp.Dependency.IIocResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Threading.BackgroundWorkers.BackgroundWorkerManager"/> class.
+            </summary>
+        </member>
         <member name="T:Abp.Dependency.SingletonDependency`1">
             <summary>
             Used to get a singleton of any class which can be resolved using <see cref="P:Abp.Dependency.IocManager.Instance"/>.
@@ -141,7 +1828,6 @@
         <member name="P:Abp.Application.Features.Feature.Item(System.String)">
             <summary>
             Gets/sets arbitrary objects related to this object.
-            These objects must be serializable.
             Gets null if given key does not exists.
             This is a shortcut for <see cref="P:Abp.Application.Features.Feature.Attributes"/> dictionary.
             </summary>
@@ -226,11 +1912,6 @@
             <param name="tenantId">Tenant's Id</param>
             <param name="name">Unique feature name</param>
             <returns>Feature's current value</returns>
-        </member>
-        <member name="T:Abp.Dependency.ITransientDependency">
-            <summary>
-            All classes implement this interface are automatically registered to dependency injection as transient object.
-            </summary>
         </member>
         <member name="M:Abp.Application.Features.FeatureChecker.#ctor(Abp.Application.Features.IFeatureManager)">
             <summary>
@@ -330,11 +2011,29 @@
             <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
             <param name="featureNames">Name of the features</param>
         </member>
+        <member name="M:Abp.Application.Features.FeatureCheckerExtensions.IsEnabledAsync(Abp.Application.Features.IFeatureChecker,System.Int32,System.Boolean,System.String[])">
+            <summary>
+            Used to check if one of all given features are enabled.
+            </summary>
+            <param name="featureChecker"><see cref="T:Abp.Application.Features.IFeatureChecker"/> instance</param>
+            <param name="tenantId">Tenant id</param>
+            <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
+            <param name="featureNames">Name of the features</param>
+        </member>
         <member name="M:Abp.Application.Features.FeatureCheckerExtensions.IsEnabled(Abp.Application.Features.IFeatureChecker,System.Boolean,System.String[])">
             <summary>
             Used to check if one of all given features are enabled.
             </summary>
             <param name="featureChecker"><see cref="T:Abp.Application.Features.IFeatureChecker"/> instance</param>
+            <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
+            <param name="featureNames">Name of the features</param>
+        </member>
+        <member name="M:Abp.Application.Features.FeatureCheckerExtensions.IsEnabled(Abp.Application.Features.IFeatureChecker,System.Int32,System.Boolean,System.String[])">
+            <summary>
+            Used to check if one of all given features are enabled.
+            </summary>
+            <param name="featureChecker"><see cref="T:Abp.Application.Features.IFeatureChecker"/> instance</param>
+            <param name="tenantId">Tenant id</param>
             <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
             <param name="featureNames">Name of the features</param>
         </member>
@@ -359,13 +2058,30 @@
             <param name="featureChecker"><see cref="T:Abp.Application.Features.IFeatureChecker"/> instance</param>
             <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
             <param name="featureNames">Name of the features</param>
-            <returns></returns>
+        </member>
+        <member name="M:Abp.Application.Features.FeatureCheckerExtensions.CheckEnabledAsync(Abp.Application.Features.IFeatureChecker,System.Int32,System.Boolean,System.String[])">
+            <summary>
+            Checks if one of all given features are enabled. Throws <see cref="T:Abp.Authorization.AbpAuthorizationException"/> if not.
+            </summary>
+            <param name="featureChecker"><see cref="T:Abp.Application.Features.IFeatureChecker"/> instance</param>
+            <param name="tenantId">Tenant id</param>
+            <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
+            <param name="featureNames">Name of the features</param>
         </member>
         <member name="M:Abp.Application.Features.FeatureCheckerExtensions.CheckEnabled(Abp.Application.Features.IFeatureChecker,System.Boolean,System.String[])">
             <summary>
             Checks if one of all given features are enabled. Throws <see cref="T:Abp.Authorization.AbpAuthorizationException"/> if not.
             </summary>
             <param name="featureChecker"><see cref="T:Abp.Application.Features.IFeatureChecker"/> instance</param>
+            <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
+            <param name="featureNames">Name of the features</param>
+        </member>
+        <member name="M:Abp.Application.Features.FeatureCheckerExtensions.CheckEnabled(Abp.Application.Features.IFeatureChecker,System.Int32,System.Boolean,System.String[])">
+            <summary>
+            Checks if one of all given features are enabled. Throws <see cref="T:Abp.Authorization.AbpAuthorizationException"/> if not.
+            </summary>
+            <param name="featureChecker"><see cref="T:Abp.Application.Features.IFeatureChecker"/> instance</param>
+            <param name="tenantId">Tenant id</param>
             <param name="requiresAll">True, to require all given features are enabled. False, to require one or more.</param>
             <param name="featureNames">Name of the features</param>
         </member>
@@ -442,6 +2158,12 @@
             Used in <see cref="M:Abp.Application.Features.IFeatureDependency.IsSatisfiedAsync(Abp.Application.Features.IFeatureDependencyContext)"/> method.
             </summary>
         </member>
+        <member name="P:Abp.Application.Features.IFeatureDependencyContext.TenantId">
+            <summary>
+            Tenant id which required the feature.
+            Null for current tenant.
+            </summary>
+        </member>
         <member name="P:Abp.Application.Features.IFeatureDependencyContext.IocResolver">
             <summary>
             Gets the <see cref="T:Abp.Dependency.IIocResolver"/>.
@@ -462,8 +2184,6 @@
             <summary>
             Initializes a new instance of the <see cref="T:Abp.Application.Features.FeatureDependencyContext"/> class.
             </summary>
-            <param name="iocResolver">The ioc resolver.</param>
-            <param name="featureChecker">The feature checker.</param>
         </member>
         <member name="P:Abp.Application.Features.FeatureDependencyContext.IocResolver">
             <inheritdoc/>
@@ -567,11 +2287,6 @@
             Gets all <see cref="T:Abp.Application.Features.Feature"/>s.
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:Abp.Dependency.ISingletonDependency">
-            <summary>
-            All classes implement this interface are automatically registered to dependency injection as singleton object.
-            </summary>
         </member>
         <member name="T:Abp.Application.Features.IFeatureValueStore">
             <summary>
@@ -909,16 +2624,466 @@
             <param name="culture">culture</param>
             <returns>Localized string</returns>
         </member>
-        <member name="T:Abp.Configuration.SettingProvider">
+        <member name="T:Abp.Notifications.INotificationStore">
             <summary>
-            Inherit this class to define settings for a module/application.
+            Used to store (persist) notifications.
             </summary>
         </member>
-        <member name="M:Abp.Configuration.SettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
+        <member name="M:Abp.Notifications.INotificationStore.InsertSubscriptionAsync(Abp.Notifications.NotificationSubscriptionInfo)">
             <summary>
-            Gets all setting definitions provided by this provider.
+            Inserts a notification subscription.
             </summary>
-            <returns>List of settings</returns>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.DeleteSubscriptionAsync(System.Int64,System.String,System.String,System.String)">
+            <summary>
+            Deletes a notification subscription.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.InsertNotificationAsync(Abp.Notifications.NotificationInfo)">
+            <summary>
+            Inserts a notification.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.GetNotificationOrNullAsync(System.Guid)">
+            <summary>
+            Gets a notification by Id, or returns null if not found.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.InsertUserNotificationAsync(Abp.Notifications.UserNotificationInfo)">
+            <summary>
+            Inserts a user notification.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.GetSubscriptionsAsync(System.String,System.String,System.String)">
+            <summary>
+            Gets subscriptions for a notification.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.GetSubscriptionsAsync(System.Nullable{System.Int32}[],System.String,System.String,System.String)">
+            <summary>
+            Gets subscriptions for a notification for specified tenant(s).
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.GetSubscriptionsAsync(System.Int64)">
+            <summary>
+            Gets subscriptions for a user.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.IsSubscribedAsync(System.Int64,System.String,System.String,System.String)">
+            <summary>
+            Checks if a user subscribed for a notification
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.UpdateUserNotificationStateAsync(System.Guid,Abp.Notifications.UserNotificationState)">
+            <summary>
+            Updates a user notification state.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.UpdateAllUserNotificationStatesAsync(System.Int64,Abp.Notifications.UserNotificationState)">
+            <summary>
+            Updates all notification states for a user.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.DeleteUserNotificationAsync(System.Guid)">
+            <summary>
+            Deletes a user notification.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.DeleteAllUserNotificationsAsync(System.Int64)">
+            <summary>
+            Deletes all notifications of a user.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.GetUserNotificationsWithNotificationsAsync(System.Int64,System.Nullable{Abp.Notifications.UserNotificationState},System.Int32,System.Int32)">
+            <summary>
+            Gets notifications of a user.
+            </summary>
+            <param name="userId">The user id.</param>
+            <param name="skipCount">Skip count.</param>
+            <param name="maxResultCount">Maximum result count.</param>
+            <param name="state">State</param>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.GetUserNotificationCountAsync(System.Int64,System.Nullable{Abp.Notifications.UserNotificationState})">
+            <summary>
+            Gets user notification count.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="state">The state.</param>
+        </member>
+        <member name="M:Abp.Notifications.INotificationStore.GetUserNotificationWithNotificationOrNullAsync(System.Guid)">
+            <summary>
+            Gets a user notification.
+            </summary>
+            <param name="userNotificationId">Skip count.</param>
+        </member>
+        <member name="T:Abp.Notifications.IRealTimeNotifier">
+            <summary>
+            Interface to send real time notifications to users.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.IRealTimeNotifier.SendNotificationsAsync(Abp.Notifications.UserNotification[])">
+            <summary>
+            This method tries to deliver real time notifications to specified users.
+            If a user is not online, it should ignore him.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationInfo">
+            <summary>
+            Used to store published/sent notification.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.AllTenantIds">
+            <summary>
+            Indicated all tenant ids for <see cref="P:Abp.Notifications.NotificationInfo.TenantIds"/> property.
+            Value: "0".
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.MaxNotificationNameLength">
+            <summary>
+            Maximum length of <see cref="P:Abp.Notifications.NotificationInfo.NotificationName"/> property.
+            Value: 128.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.MaxDataLength">
+            <summary>
+            Maximum length of <see cref="P:Abp.Notifications.NotificationInfo.Data"/> property.
+            Value: 1048576 (1 MB).
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.MaxDataTypeNameLength">
+            <summary>
+            Maximum lenght of <see cref="P:Abp.Notifications.NotificationInfo.DataTypeName"/> property.
+            Value: 512.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.MaxEntityTypeNameLength">
+            <summary>
+            Maximum lenght of <see cref="P:Abp.Notifications.NotificationInfo.EntityTypeName"/> property.
+            Value: 512.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.MaxEntityTypeAssemblyQualifiedNameLength">
+            <summary>
+            Maximum lenght of <see cref="P:Abp.Notifications.NotificationInfo.EntityTypeAssemblyQualifiedName"/> property.
+            Value: 512.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.MaxEntityIdLength">
+            <summary>
+            Maximum lenght of <see cref="P:Abp.Notifications.NotificationInfo.EntityId"/> property.
+            Value: 256.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.MaxUserIdsLength">
+            <summary>
+            Maximum lenght of <see cref="P:Abp.Notifications.NotificationInfo.UserIds"/> property.
+            Value: 131072 (128 KB).
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationInfo.MaxTenantIdsLength">
+            <summary>
+            Maximum lenght of <see cref="P:Abp.Notifications.NotificationInfo.TenantIds"/> property.
+            Value: 131072 (128 KB).
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationInfo"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.NotificationName">
+            <summary>
+            Unique notification name.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.Data">
+            <summary>
+            Notification data as JSON string.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.DataTypeName">
+            <summary>
+            Type of the JSON serialized <see cref="P:Abp.Notifications.NotificationInfo.Data"/>.
+            It's AssemblyQualifiedName of the type.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.EntityTypeName">
+            <summary>
+            Gets/sets entity type name, if this is an entity level notification.
+            It's FullName of the entity type.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.EntityTypeAssemblyQualifiedName">
+            <summary>
+            AssemblyQualifiedName of the entity type.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.EntityId">
+            <summary>
+            Gets/sets primary key of the entity, if this is an entity level notification.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.Severity">
+            <summary>
+            Notification severity.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.UserIds">
+            <summary>
+            Target users of the notification.
+            If this is set, it overrides subscribed users.
+            If this is null/empty, then notification is sent to all subscribed users.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.ExcludedUserIds">
+            <summary>
+            Excluded users.
+            This can be set to exclude some users while publishing notifications to subscribed users.
+            It's not normally used if <see cref="P:Abp.Notifications.NotificationInfo.UserIds"/> is not null.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NotificationInfo.TenantIds">
+            <summary>
+            Target tenants of the notification.
+            Used to send notification to subscribed users of specific tenant(s).
+            This is valid only if UserIds is null.
+            If it's "0", then indicates to all tenants.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.UserNotificationManager">
+            <summary>
+            Implements  <see cref="T:Abp.Notifications.IUserNotificationManager"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.UserNotificationManager.#ctor(Abp.Notifications.INotificationStore)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.UserNotificationManager"/> class.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationExtensions">
+            <summary>
+            Extension methods for
+            <see cref="T:Abp.Notifications.INotificationSubscriptionManager"/>, 
+            <see cref="T:Abp.Notifications.INotificationPublisher"/>, 
+            <see cref="T:Abp.Notifications.IUserNotificationManager"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.Subscribe(Abp.Notifications.INotificationSubscriptionManager,System.Nullable{System.Int32},System.Int64,System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Subscribes to a notification.
+            </summary>
+            <param name="notificationSubscriptionManager">Notification subscription manager</param>
+            <param name="userId">The user id.</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="tenantId"></param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.SubscribeToAllAvailableNotifications(Abp.Notifications.INotificationSubscriptionManager,System.Nullable{System.Int32},System.Int64)">
+            <summary>
+            Subscribes to all available notifications for given user.
+            It does not subscribe entity related notifications.
+            </summary>
+            <param name="notificationSubscriptionManager">Notification subscription manager</param>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="userId">The user identifier.</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.Unsubscribe(Abp.Notifications.INotificationSubscriptionManager,System.Int64,System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Unsubscribes from a notification.
+            </summary>
+            <param name="notificationSubscriptionManager">Notification subscription manager</param>
+            <param name="userId">The user id.</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.GetSubscriptions(Abp.Notifications.INotificationSubscriptionManager,System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Gets all subscribtions for given notification.
+            </summary>
+            <param name="notificationSubscriptionManager">Notification subscription manager</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.GetSubscriptions(Abp.Notifications.INotificationSubscriptionManager,System.Nullable{System.Int32},System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Gets all subscribtions for given notification.
+            </summary>
+            <param name="notificationSubscriptionManager">Notification subscription manager</param>
+            <param name="tenantId">Tenant id. Null for the host.</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.GetSubscribedNotifications(Abp.Notifications.INotificationSubscriptionManager,System.Int64)">
+            <summary>
+            Gets subscribed notifications for a user.
+            </summary>
+            <param name="notificationSubscriptionManager">Notification subscription manager</param>
+            <param name="userId">The user id.</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.IsSubscribed(Abp.Notifications.INotificationSubscriptionManager,System.Int64,System.String,Abp.Domain.Entities.EntityIdentifier)">
+            <summary>
+            Checks if a user subscribed for a notification.
+            </summary>
+            <param name="notificationSubscriptionManager">Notification subscription manager</param>
+            <param name="userId">The user id.</param>
+            <param name="notificationName">Name of the notification.</param>
+            <param name="entityIdentifier">entity identifier</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.Publish(Abp.Notifications.INotificationPublisher,System.String,Abp.Notifications.NotificationData,Abp.Domain.Entities.EntityIdentifier,Abp.Notifications.NotificationSeverity,System.Int64[])">
+            <summary>
+            Publishes a new notification.
+            </summary>
+            <param name="notificationPublisher">Notification publisher</param>
+            <param name="notificationName">Unique notification name</param>
+            <param name="data">Notification data (optional)</param>
+            <param name="entityIdentifier">The entity identifier if this notification is related to an entity</param>
+            <param name="severity">Notification severity</param>
+            <param name="userIds">Target user id(s). Used to send notification to specific user(s). If this is null/empty, the notification is sent to all subscribed users</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.GetUserNotifications(Abp.Notifications.IUserNotificationManager,System.Int64,System.Nullable{Abp.Notifications.UserNotificationState},System.Int32,System.Int32)">
+            <summary>
+            Gets notifications for a user.
+            </summary>
+            <param name="userNotificationManager">User notificaiton manager</param>
+            <param name="userId">The user id.</param>
+            <param name="state">State</param>
+            <param name="skipCount">Skip count.</param>
+            <param name="maxResultCount">Maximum result count.</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.GetUserNotificationCount(Abp.Notifications.IUserNotificationManager,System.Int64,System.Nullable{Abp.Notifications.UserNotificationState})">
+            <summary>
+            Gets user notification count.
+            </summary>
+            <param name="userNotificationManager">User notificaiton manager</param>
+            <param name="userId">The user id.</param>
+            <param name="state">State.</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.GetUserNotification(Abp.Notifications.IUserNotificationManager,System.Guid)">
+            <summary>
+            Gets a user notification by given id.
+            </summary>
+            <param name="userNotificationManager">User notificaiton manager</param>
+            <param name="userNotificationId">The user notification id.</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.UpdateUserNotificationState(Abp.Notifications.IUserNotificationManager,System.Guid,Abp.Notifications.UserNotificationState)">
+            <summary>
+            Updates a user notification state.
+            </summary>
+            <param name="userNotificationManager">User notificaiton manager</param>
+            <param name="userNotificationId">The user notification id.</param>
+            <param name="state">New state.</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.UpdateAllUserNotificationStates(Abp.Notifications.IUserNotificationManager,System.Int64,Abp.Notifications.UserNotificationState)">
+            <summary>
+            Updates all notification states for a user.
+            </summary>
+            <param name="userNotificationManager">User notificaiton manager</param>
+            <param name="userId">The user id.</param>
+            <param name="state">New state.</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.DeleteUserNotification(Abp.Notifications.IUserNotificationManager,System.Guid)">
+            <summary>
+            Deletes a user notification.
+            </summary>
+            <param name="userNotificationManager">User notificaiton manager</param>
+            <param name="userNotificationId">The user notification id.</param>
+        </member>
+        <member name="M:Abp.Notifications.NotificationExtensions.DeleteAllUserNotifications(Abp.Notifications.IUserNotificationManager,System.Int64)">
+            <summary>
+            Deletes all notifications of a user.
+            </summary>
+            <param name="userNotificationManager">User notificaiton manager</param>
+            <param name="userId">The user id.</param>
+        </member>
+        <member name="T:Abp.Notifications.NotificationSeverity">
+            <summary>
+            Notification severity.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationSeverity.Info">
+            <summary>
+            Info.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationSeverity.Success">
+            <summary>
+            Success.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationSeverity.Warn">
+            <summary>
+            Warn.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationSeverity.Error">
+            <summary>
+            Error.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.NotificationSeverity.Fatal">
+            <summary>
+            Fatal.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NullNotificationStore">
+            <summary>
+            Null pattern implementation of <see cref="T:Abp.Notifications.INotificationStore"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NullRealTimeNotifier">
+            <summary>
+            Null pattern implementation of <see cref="T:Abp.Notifications.IRealTimeNotifier"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.NullRealTimeNotifier.Instance">
+            <summary>
+            Gets single instance of <see cref="T:Abp.Notifications.NullRealTimeNotifier"/> class.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.UserNotificationInfo">
+            <summary>
+            Used to store a user notification.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.UserNotificationInfo.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.UserNotificationInfo"/> class.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.UserNotificationInfo.#ctor(System.Int64,System.Guid)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.UserNotificationInfo"/> class.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.UserNotificationInfo.UserId">
+            <summary>
+            User Id.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.UserNotificationInfo.NotificationId">
+            <summary>
+            Notification Id.
+            </summary>
+        </member>
+        <member name="P:Abp.Notifications.UserNotificationInfo.State">
+            <summary>
+            Current state of the user notification.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.UserNotificationState">
+            <summary>
+            Represents state of a <see cref="T:Abp.Notifications.UserNotification"/>.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.UserNotificationState.Unread">
+            <summary>
+            Notification is not read by user yet.
+            </summary>
+        </member>
+        <member name="F:Abp.Notifications.UserNotificationState.Read">
+            <summary>
+            Notification is read by user.
+            </summary>
         </member>
         <member name="T:Abp.Runtime.Caching.AbpCacheNames">
             <summary>
@@ -1019,6 +3184,86 @@
         <member name="P:Abp.Runtime.Validation.ValueValidatorBase.Attributes">
             <summary>
             Arbitrary objects related to this object.
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.Timers.AbpTimer">
+            <summary>
+            A roboust timer implementation that ensures no overlapping occurs. It waits exactly specified <see cref="P:Abp.Threading.Timers.AbpTimer.Period"/> between ticks.
+            </summary>
+        </member>
+        <member name="F:Abp.Threading.Timers.AbpTimer._taskTimer">
+            <summary>
+            This timer is used to perfom the task at spesified intervals.
+            </summary>
+        </member>
+        <member name="F:Abp.Threading.Timers.AbpTimer._running">
+            <summary>
+            Indicates that whether timer is running or stopped.
+            </summary>
+        </member>
+        <member name="F:Abp.Threading.Timers.AbpTimer._performingTasks">
+            <summary>
+            Indicates that whether performing the task or _taskTimer is in sleep mode.
+            This field is used to wait executing tasks when stopping Timer.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.Timers.AbpTimer.#ctor">
+            <summary>
+            Creates a new Timer.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.Timers.AbpTimer.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Creates a new Timer.
+            </summary>
+            <param name="period">Task period of timer (as milliseconds)</param>
+            <param name="runOnStart">Indicates whether timer raises Elapsed event on Start method of Timer for once</param>
+        </member>
+        <member name="M:Abp.Threading.Timers.AbpTimer.Start">
+            <summary>
+            Starts the timer.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.Timers.AbpTimer.Stop">
+            <summary>
+            Stops the timer.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.Timers.AbpTimer.WaitToStop">
+            <summary>
+            Waits the service to stop.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.Timers.AbpTimer.TimerCallBack(System.Object)">
+            <summary>
+            This method is called by _taskTimer.
+            </summary>
+            <param name="state">Not used argument</param>
+        </member>
+        <member name="E:Abp.Threading.Timers.AbpTimer.Elapsed">
+            <summary>
+            This event is raised periodically according to Period of Timer.
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.Timers.AbpTimer.Period">
+            <summary>
+            Task period of timer (as milliseconds).
+            </summary>
+        </member>
+        <member name="P:Abp.Threading.Timers.AbpTimer.RunOnStart">
+            <summary>
+            Indicates whether timer raises Elapsed event on Start method of Timer for once.
+            Default: False.
+            </summary>
+        </member>
+        <member name="T:Abp.Threading.RunnableExtensions">
+            <summary>
+            Some extension methods for <see cref="T:Abp.Threading.IRunnable"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Threading.RunnableExtensions.StopAndWaitToStop(Abp.Threading.IRunnable)">
+            <summary>
+            Calls <see cref="M:Abp.Threading.IRunnable.Stop"/> and then <see cref="M:Abp.Threading.IRunnable.WaitToStop"/>.
             </summary>
         </member>
         <member name="T:Abp.UI.Inputs.ComboboxInputType">
@@ -1129,18 +3374,20 @@
             Used to manage navigation for users.
             </summary>
         </member>
-        <member name="M:Abp.Application.Navigation.IUserNavigationManager.GetMenuAsync(System.String,System.Nullable{System.Int64})">
+        <member name="M:Abp.Application.Navigation.IUserNavigationManager.GetMenuAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int32})">
             <summary>
             Gets a menu specialized for given user.
             </summary>
             <param name="menuName">Unique name of the menu</param>
             <param name="userId">User id or null for anonymous users</param>
+            <param name="tenantId">Tenant id (optional). Uses current tenant if not provided.</param>
         </member>
-        <member name="M:Abp.Application.Navigation.IUserNavigationManager.GetMenusAsync(System.Nullable{System.Int64})">
+        <member name="M:Abp.Application.Navigation.IUserNavigationManager.GetMenusAsync(System.Nullable{System.Int64},System.Nullable{System.Int32})">
             <summary>
             Gets all menus specialized for given user.
             </summary>
             <param name="userId">User id or null for anonymous users</param>
+            <param name="tenantId">Tenant id (optional). Uses current tenant if not provided.</param>
         </member>
         <member name="T:Abp.Application.Navigation.MenuDefinition">
             <summary>
@@ -1233,7 +3480,7 @@
         </member>
         <member name="P:Abp.Application.Navigation.MenuItemDefinition.FeatureDependency">
             <summary>
-            A permission name. Only users that has this permission can see this menu item.
+            A feature dependency.
             Optional.
             </summary>
         </member>
@@ -1312,7 +3559,7 @@
             Creates a new <see cref="T:Abp.Application.Navigation.UserMenu"/> object.
             </summary>
         </member>
-        <member name="M:Abp.Application.Navigation.UserMenu.#ctor(Abp.Application.Navigation.MenuDefinition)">
+        <member name="M:Abp.Application.Navigation.UserMenu.#ctor(Abp.Application.Navigation.MenuDefinition,Abp.Localization.ILocalizationContext)">
             <summary>
             Creates a new <see cref="T:Abp.Application.Navigation.UserMenu"/> object from given <see cref="T:Abp.Application.Navigation.MenuDefinition"/>.
             </summary>
@@ -1347,7 +3594,7 @@
             Creates a new <see cref="T:Abp.Application.Navigation.UserMenuItem"/> object.
             </summary>
         </member>
-        <member name="M:Abp.Application.Navigation.UserMenuItem.#ctor(Abp.Application.Navigation.MenuItemDefinition)">
+        <member name="M:Abp.Application.Navigation.UserMenuItem.#ctor(Abp.Application.Navigation.MenuItemDefinition,Abp.Localization.ILocalizationContext)">
             <summary>
             Creates a new <see cref="T:Abp.Application.Navigation.UserMenuItem"/> object from given <see cref="T:Abp.Application.Navigation.MenuItemDefinition"/>.
             </summary>
@@ -1392,11 +3639,6 @@
             This DTO can be used as a simple item for a combobox/list.
             </summary>
         </member>
-        <member name="T:Abp.Application.Services.Dto.IDto">
-            <summary>
-            This interface must be implemented by all DTO classes to identify them by convention.
-            </summary>
-        </member>
         <member name="M:Abp.Application.Services.Dto.ComboboxItemDto.#ctor">
             <summary>
             Creates a new <see cref="T:Abp.Application.Services.Dto.ComboboxItemDto"/>.
@@ -1434,39 +3676,6 @@
             This <see cref="T:Abp.Application.Services.Dto.IInputDto"/> can be used to send Id of an entity to an <see cref="T:Abp.Application.Services.IApplicationService"/> method.
             </summary>
             <typeparam name="TPrimaryKey">Type of the primary key of entity</typeparam>
-        </member>
-        <member name="T:Abp.Application.Services.Dto.EntityDto`1">
-            <summary>
-            Implements common properties for entity based DTOs.
-            </summary>
-            <typeparam name="TPrimaryKey">Type of the primary key</typeparam>
-        </member>
-        <member name="T:Abp.Application.Services.Dto.IEntityDto`1">
-            <summary>
-            Defines common properties for entity based DTOs.
-            </summary>
-            <typeparam name="TPrimaryKey"></typeparam>
-        </member>
-        <member name="P:Abp.Application.Services.Dto.IEntityDto`1.Id">
-            <summary>
-            Id of the entity.
-            </summary>
-        </member>
-        <member name="M:Abp.Application.Services.Dto.EntityDto`1.#ctor">
-            <summary>
-            Creates a new <see cref="T:Abp.Application.Services.Dto.EntityDto`1"/> object.
-            </summary>
-        </member>
-        <member name="M:Abp.Application.Services.Dto.EntityDto`1.#ctor(`0)">
-            <summary>
-            Creates a new <see cref="T:Abp.Application.Services.Dto.EntityDto`1"/> object.
-            </summary>
-            <param name="id">Id of the entity</param>
-        </member>
-        <member name="P:Abp.Application.Services.Dto.EntityDto`1.Id">
-            <summary>
-            Id of the entity.
-            </summary>
         </member>
         <member name="T:Abp.Application.Services.Dto.IInputDto">
             <summary>
@@ -1565,28 +3774,6 @@
             This class can be inherited for simple Dto objects those are used for entities implement <see cref="T:Abp.Domain.Entities.Auditing.ICreationAudited"/> interface.
             </summary>
             <typeparam name="TPrimaryKey">Type of primary key</typeparam>
-        </member>
-        <member name="T:Abp.Domain.Entities.Auditing.ICreationAudited">
-            <summary>
-            This interface is implemented by entities that is wanted to store creation information (who and when created).
-            Creation time and creator user are automatically set when saving <see cref="T:Abp.Domain.Entities.Entity"/> to database.
-            </summary>
-        </member>
-        <member name="T:Abp.Domain.Entities.Auditing.IHasCreationTime">
-            <summary>
-            An entity can implement this interface if <see cref="P:Abp.Domain.Entities.Auditing.IHasCreationTime.CreationTime"/> of this entity must be stored.
-            <see cref="P:Abp.Domain.Entities.Auditing.IHasCreationTime.CreationTime"/> is automatically set when saving <see cref="T:Abp.Domain.Entities.Entity"/> to database.
-            </summary>
-        </member>
-        <member name="P:Abp.Domain.Entities.Auditing.IHasCreationTime.CreationTime">
-            <summary>
-            Creation time of this entity.
-            </summary>
-        </member>
-        <member name="P:Abp.Domain.Entities.Auditing.ICreationAudited.CreatorUserId">
-            <summary>
-            Id of the creator user of this entity.
-            </summary>
         </member>
         <member name="M:Abp.Application.Services.Dto.CreationAuditedEntityDto`1.#ctor">
             <summary>
@@ -1883,6 +4070,31 @@
             Can be used to store Name/Value (or Key/Value) pairs.
             </summary>
         </member>
+        <member name="T:Abp.NameValue`1">
+            <summary>
+            Can be used to store Name/Value (or Key/Value) pairs.
+            </summary>
+        </member>
+        <member name="M:Abp.NameValue`1.#ctor">
+            <summary>
+            Creates a new <see cref="T:Abp.NameValue"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.NameValue`1.#ctor(System.String,`0)">
+            <summary>
+            Creates a new <see cref="T:Abp.NameValue"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.NameValue`1.Name">
+            <summary>
+            Name.
+            </summary>
+        </member>
+        <member name="P:Abp.NameValue`1.Value">
+            <summary>
+            Value.
+            </summary>
+        </member>
         <member name="M:Abp.NameValue.#ctor">
             <summary>
             Creates a new <see cref="T:Abp.NameValue"/>.
@@ -1893,20 +4105,31 @@
             Creates a new <see cref="T:Abp.NameValue"/>.
             </summary>
         </member>
-        <member name="P:Abp.NameValue.Name">
-            <summary>
-            Name.
-            </summary>
-        </member>
-        <member name="P:Abp.NameValue.Value">
-            <summary>
-            Value.
-            </summary>
-        </member>
         <member name="T:Abp.Application.Services.Dto.NameValueDto">
             <summary>
             Can be used to send/receive Name/Value (or Key/Value) pairs.
             </summary>
+        </member>
+        <member name="T:Abp.Application.Services.Dto.NameValueDto`1">
+            <summary>
+            Can be used to send/receive Name/Value (or Key/Value) pairs.
+            </summary>
+        </member>
+        <member name="M:Abp.Application.Services.Dto.NameValueDto`1.#ctor">
+            <summary>
+            Creates a new <see cref="T:Abp.Application.Services.Dto.NameValueDto"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Application.Services.Dto.NameValueDto`1.#ctor(System.String,`0)">
+            <summary>
+            Creates a new <see cref="T:Abp.Application.Services.Dto.NameValueDto"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Application.Services.Dto.NameValueDto`1.#ctor(Abp.NameValue{`0})">
+            <summary>
+            Creates a new <see cref="T:Abp.Application.Services.Dto.NameValueDto"/>.
+            </summary>
+            <param name="nameValue">A <see cref="T:Abp.NameValue"/> object to get it's name and value</param>
         </member>
         <member name="M:Abp.Application.Services.Dto.NameValueDto.#ctor">
             <summary>
@@ -3107,6 +5330,7 @@
             <typeparam name="T">Type of the class</typeparam>
             <param name="iocRegistrar">Registrar</param>
             <param name="lifeStyle">Lifestyle of the objects of this type</param>
+            <returns>True, if registered for given implementation.</returns>
         </member>
         <member name="M:Abp.Dependency.IocRegistrarExtensions.RegisterIfNot(Abp.Dependency.IIocRegistrar,System.Type,Abp.Dependency.DependencyLifeStyle)">
             <summary>
@@ -3115,6 +5339,7 @@
             <param name="iocRegistrar">Registrar</param>
             <param name="type">Type of the class</param>
             <param name="lifeStyle">Lifestyle of the objects of this type</param>
+            <returns>True, if registered for given implementation.</returns>
         </member>
         <member name="M:Abp.Dependency.IocRegistrarExtensions.RegisterIfNot``2(Abp.Dependency.IIocRegistrar,Abp.Dependency.DependencyLifeStyle)">
             <summary>
@@ -3124,6 +5349,7 @@
             <typeparam name="TImpl">The type that implements <see cref="!:TType"/></typeparam>
             <param name="iocRegistrar">Registrar</param>
             <param name="lifeStyle">Lifestyle of the objects of this type</param>
+            <returns>True, if registered for given implementation.</returns>
         </member>
         <member name="M:Abp.Dependency.IocRegistrarExtensions.RegisterIfNot(Abp.Dependency.IIocRegistrar,System.Type,System.Type,Abp.Dependency.DependencyLifeStyle)">
             <summary>
@@ -3133,6 +5359,7 @@
             <param name="type">Type of the class</param>
             <param name="impl">The type that implements <paramref name="type"/></param>
             <param name="lifeStyle">Lifestyle of the objects of this type</param>
+            <returns>True, if registered for given implementation.</returns>
         </member>
         <member name="T:Abp.MultiTenancy.MultiTenancySides">
             <summary>
@@ -3186,6 +5413,40 @@
             <param name="permissionChecker">Permission checker</param>
             <param name="userId">Id of the user to check</param>
             <param name="permissionName">Name of the permission</param>
+        </member>
+        <member name="M:Abp.Authorization.PermissionCheckerExtensions.IsGranted(Abp.Authorization.IPermissionChecker,System.Int64,System.Boolean,System.String[])">
+            <summary>
+            Checks if given user is granted for given permission.
+            </summary>
+            <param name="permissionChecker">Permission checker</param>
+            <param name="userId">User id</param>
+            <param name="requiresAll">True, to require all given permissions are granted. False, to require one or more.</param>
+            <param name="permissionNames">Name of the permissions</param>
+        </member>
+        <member name="M:Abp.Authorization.PermissionCheckerExtensions.IsGrantedAsync(Abp.Authorization.IPermissionChecker,System.Int64,System.Boolean,System.String[])">
+            <summary>
+            Checks if given user is granted for given permission.
+            </summary>
+            <param name="permissionChecker">Permission checker</param>
+            <param name="userId">User id</param>
+            <param name="requiresAll">True, to require all given permissions are granted. False, to require one or more.</param>
+            <param name="permissionNames">Name of the permissions</param>
+        </member>
+        <member name="M:Abp.Authorization.PermissionCheckerExtensions.IsGranted(Abp.Authorization.IPermissionChecker,System.Boolean,System.String[])">
+            <summary>
+            Checks if current user is granted for given permission.
+            </summary>
+            <param name="permissionChecker">Permission checker</param>
+            <param name="requiresAll">True, to require all given permissions are granted. False, to require one or more.</param>
+            <param name="permissionNames">Name of the permissions</param>
+        </member>
+        <member name="M:Abp.Authorization.PermissionCheckerExtensions.IsGrantedAsync(Abp.Authorization.IPermissionChecker,System.Boolean,System.String[])">
+            <summary>
+            Checks if current user is granted for given permission.
+            </summary>
+            <param name="permissionChecker">Permission checker</param>
+            <param name="requiresAll">True, to require all given permissions are granted. False, to require one or more.</param>
+            <param name="permissionNames">Name of the permissions</param>
         </member>
         <member name="M:Abp.Authorization.PermissionCheckerExtensions.Authorize(Abp.Authorization.IPermissionChecker,System.String[])">
             <summary>
@@ -3366,7 +5627,7 @@
             Permission manager.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.PermissionManager.#ctor(Abp.Dependency.IIocManager,Abp.Configuration.Startup.IAuthorizationConfiguration,Abp.Application.Features.FeatureDependencyContext)">
+        <member name="M:Abp.Authorization.PermissionManager.#ctor(Abp.Dependency.IIocManager,Abp.Configuration.Startup.IAuthorizationConfiguration)">
             <summary>
             Constructor.
             </summary>
@@ -3599,7 +5860,7 @@
             <param name="tenantId">Tenant id</param>
             <returns>Current value of the setting</returns>
         </member>
-        <member name="M:Abp.Configuration.SettingManagerExtensions.GetSettingValueForUserAsync``1(Abp.Configuration.ISettingManager,System.String,System.Int32,System.Int64)">
+        <member name="M:Abp.Configuration.SettingManagerExtensions.GetSettingValueForUserAsync``1(Abp.Configuration.ISettingManager,System.String,System.Nullable{System.Int32},System.Int64)">
             <summary>
             Gets current value of a setting for a user level.
             It gets the setting value, overwritten by given tenant and user.
@@ -3677,7 +5938,7 @@
             <param name="tenantId">Tenant id</param>
             <returns>Current value of the setting</returns>
         </member>
-        <member name="M:Abp.Configuration.SettingManagerExtensions.GetSettingValueForUser``1(Abp.Configuration.ISettingManager,System.String,System.Int32,System.Int64)">
+        <member name="M:Abp.Configuration.SettingManagerExtensions.GetSettingValueForUser``1(Abp.Configuration.ISettingManager,System.String,System.Nullable{System.Int32},System.Int64)">
             <summary>
             Gets current value of a setting for a user level.
             It gets the setting value, overwritten by given tenant and user.
@@ -3971,77 +6232,6 @@
             This class can be used to simplify implementing <see cref="T:Abp.Domain.Entities.Auditing.IAudited"/>.
             </summary>
             <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
-        </member>
-        <member name="T:Abp.Domain.Entities.Auditing.CreationAuditedEntity`1">
-            <summary>
-            This class can be used to simplify implementing <see cref="T:Abp.Domain.Entities.Auditing.ICreationAudited"/>.
-            </summary>
-            <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
-        </member>
-        <member name="T:Abp.Domain.Entities.Entity`1">
-            <summary>
-            Basic implementation of IEntity interface.
-            An entity can inherit this class of directly implement to IEntity interface.
-            </summary>
-            <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
-        </member>
-        <member name="T:Abp.Domain.Entities.IEntity`1">
-            <summary>
-            Defines interface for base entity type. All entities in the system must implement this interface.
-            </summary>
-            <typeparam name="TPrimaryKey">Type of the primary key of the entity</typeparam>
-        </member>
-        <member name="M:Abp.Domain.Entities.IEntity`1.IsTransient">
-            <summary>
-            Checks if this entity is transient (not persisted to database and it has not an <see cref="P:Abp.Domain.Entities.IEntity`1.Id"/>).
-            </summary>
-            <returns>True, if this entity is transient</returns>
-        </member>
-        <member name="P:Abp.Domain.Entities.IEntity`1.Id">
-            <summary>
-            Unique identifier for this entity.
-            </summary>
-        </member>
-        <member name="M:Abp.Domain.Entities.Entity`1.IsTransient">
-            <summary>
-            Checks if this entity is transient (it has not an Id).
-            </summary>
-            <returns>True, if this entity is transient</returns>
-        </member>
-        <member name="M:Abp.Domain.Entities.Entity`1.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Abp.Domain.Entities.Entity`1.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:Abp.Domain.Entities.Entity`1.op_Equality(Abp.Domain.Entities.Entity{`0},Abp.Domain.Entities.Entity{`0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Abp.Domain.Entities.Entity`1.op_Inequality(Abp.Domain.Entities.Entity{`0},Abp.Domain.Entities.Entity{`0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Abp.Domain.Entities.Entity`1.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="P:Abp.Domain.Entities.Entity`1.Id">
-            <summary>
-            Unique identifier for this entity.
-            </summary>
-        </member>
-        <member name="M:Abp.Domain.Entities.Auditing.CreationAuditedEntity`1.#ctor">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="P:Abp.Domain.Entities.Auditing.CreationAuditedEntity`1.CreationTime">
-            <summary>
-            Creation time of this entity.
-            </summary>
-        </member>
-        <member name="P:Abp.Domain.Entities.Auditing.CreationAuditedEntity`1.CreatorUserId">
-            <summary>
-            Creator of this entity.
-            </summary>
         </member>
         <member name="P:Abp.Domain.Entities.Auditing.AuditedEntity`1.LastModificationTime">
             <summary>
@@ -5575,6 +7765,15 @@
             <typeparam name="T">Type of the object to get</typeparam>
             <returns>The object instance</returns>
         </member>
+        <member name="M:Abp.Dependency.IIocResolver.Resolve``1(System.Type)">
+            <summary>
+            Gets an object from IOC container.
+            Returning object must be Released (see <see cref="M:Abp.Dependency.IIocResolver.Release(System.Object)"/>) after usage.
+            </summary> 
+            <typeparam name="T">Type of the object to cast</typeparam>
+            <param name="type">Type of the object to resolve</param>
+            <returns>The object instance</returns>
+        </member>
         <member name="M:Abp.Dependency.IIocResolver.Resolve``1(System.Object)">
             <summary>
             Gets an object from IOC container.
@@ -5828,16 +8027,6 @@
             TenantId of this entity.
             </summary>
         </member>
-        <member name="T:Abp.Domain.Services.DomainService">
-            <summary>
-            This class can be used as a base class for domain services. 
-            </summary>
-        </member>
-        <member name="T:Abp.Domain.Services.IDomainService">
-            <summary>
-            This interface must be implemented by all domain services to identify them by convention.
-            </summary>
-        </member>
         <member name="T:Abp.Events.Bus.Exceptions.AbpHandledExceptionData">
             <summary>
             This type of events are used to notify for exceptions handled by ABP infrastructure.
@@ -6014,18 +8203,25 @@
             Represents a string that can be localized when needed.
             </summary>
         </member>
-        <member name="M:Abp.Localization.ILocalizableString.Localize">
+        <member name="M:Abp.Localization.ILocalizableString.Localize(Abp.Localization.ILocalizationContext)">
             <summary>
             Localizes the string in current culture.
             </summary>
+            <param name="context">Localization context</param>
             <returns>Localized string</returns>
         </member>
-        <member name="M:Abp.Localization.ILocalizableString.Localize(System.Globalization.CultureInfo)">
+        <member name="M:Abp.Localization.ILocalizableString.Localize(Abp.Localization.ILocalizationContext,System.Globalization.CultureInfo)">
             <summary>
             Localizes the string in given culture.
             </summary>
+            <param name="context">Localization context</param>
             <param name="culture">culture</param>
             <returns>Localized string</returns>
+        </member>
+        <member name="M:Abp.Localization.FixedLocalizableString.#ctor">
+            <summary>
+            Needed for serialization.
+            </summary>
         </member>
         <member name="M:Abp.Localization.FixedLocalizableString.#ctor(System.String)">
             <summary>
@@ -6035,16 +8231,6 @@
             The fixed string.
             Whenever Localize methods called, this string is returned.
             </param>
-        </member>
-        <member name="M:Abp.Localization.FixedLocalizableString.Localize">
-            <summary>
-            Gets the <see cref="P:Abp.Localization.FixedLocalizableString.FixedString"/> always.
-            </summary>
-        </member>
-        <member name="M:Abp.Localization.FixedLocalizableString.Localize(System.Globalization.CultureInfo)">
-            <summary>
-            Gets the <see cref="P:Abp.Localization.FixedLocalizableString.FixedString"/> always.
-            </summary>
         </member>
         <member name="P:Abp.Localization.FixedLocalizableString.FixedString">
             <summary>
@@ -6867,22 +9053,14 @@
             Represents a string that can be localized.
             </summary>
         </member>
+        <member name="M:Abp.Localization.LocalizableString.#ctor">
+            <summary>
+            Needed for serialization.
+            </summary>
+        </member>
         <member name="M:Abp.Localization.LocalizableString.#ctor(System.String,System.String)">
             <param name="name">Unique name of the localization source</param>
             <param name="sourceName">Unique Name of the string to be localized</param>
-        </member>
-        <member name="M:Abp.Localization.LocalizableString.Localize">
-            <summary>
-            Localizes the string in current language.
-            </summary>
-            <returns>Localized string</returns>
-        </member>
-        <member name="M:Abp.Localization.LocalizableString.Localize(System.Globalization.CultureInfo)">
-            <summary>
-            Localizes the string in current language.
-            </summary>
-            <param name="culture">culture</param>
-            <returns>Localized string</returns>
         </member>
         <member name="P:Abp.Localization.LocalizableString.SourceName">
             <summary>
@@ -7204,6 +9382,15 @@
             </summary> 
             <typeparam name="T">Type of the object to get</typeparam>
             <returns>The instance object</returns>
+        </member>
+        <member name="M:Abp.Dependency.IocManager.Resolve``1(System.Type)">
+            <summary>
+            Gets an object from IOC container.
+            Returning object must be Released (see <see cref="M:Abp.Dependency.IocManager.Release(System.Object)"/>) after usage.
+            </summary> 
+            <typeparam name="T">Type of the object to cast</typeparam>
+            <param name="type">Type of the object to resolve</param>
+            <returns>The object instance</returns>
         </member>
         <member name="M:Abp.Dependency.IocManager.Resolve``1(System.Object)">
             <summary>
@@ -8074,6 +10261,16 @@
             Used to configure features.
             </summary>
         </member>
+        <member name="P:Abp.Configuration.Startup.IAbpStartupConfiguration.BackgroundJobs">
+            <summary>
+            Used to configure background job system.
+            </summary>
+        </member>
+        <member name="P:Abp.Configuration.Startup.IAbpStartupConfiguration.Notifications">
+            <summary>
+            Used to configure notification system.
+            </summary>
+        </member>
         <member name="M:Abp.Configuration.Startup.AbpStartupConfiguration.#ctor(Abp.Dependency.IIocManager)">
             <summary>
             Private constructor for singleton pattern.
@@ -8114,6 +10311,16 @@
         <member name="P:Abp.Configuration.Startup.AbpStartupConfiguration.Features">
             <summary>
             Used to configure features.
+            </summary>
+        </member>
+        <member name="P:Abp.Configuration.Startup.AbpStartupConfiguration.BackgroundJobs">
+            <summary>
+            Used to configure background job system.
+            </summary>
+        </member>
+        <member name="P:Abp.Configuration.Startup.AbpStartupConfiguration.Notifications">
+            <summary>
+            Used to configure notification system.
             </summary>
         </member>
         <member name="P:Abp.Configuration.Startup.AbpStartupConfiguration.Navigation">
@@ -8374,10 +10581,25 @@
             </summary>
             <param name="message">Exception message</param>
         </member>
+        <member name="M:Abp.UI.UserFriendlyException.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="code">Error code</param>
+            <param name="message">Exception message</param>
+        </member>
         <member name="M:Abp.UI.UserFriendlyException.#ctor(System.String,System.String)">
             <summary>
             Constructor.
             </summary>
+            <param name="message">Exception message</param>
+            <param name="details">Additional information about the exception</param>
+        </member>
+        <member name="M:Abp.UI.UserFriendlyException.#ctor(System.Int32,System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="code">Error code</param>
             <param name="message">Exception message</param>
             <param name="details">Additional information about the exception</param>
         </member>
@@ -8399,6 +10621,11 @@
         <member name="P:Abp.UI.UserFriendlyException.Details">
             <summary>
             Additional information about the exception.
+            </summary>
+        </member>
+        <member name="P:Abp.UI.UserFriendlyException.Code">
+            <summary>
+            An arbitrary error code.
             </summary>
         </member>
         <member name="T:Abp.Localization.LocalizedString">

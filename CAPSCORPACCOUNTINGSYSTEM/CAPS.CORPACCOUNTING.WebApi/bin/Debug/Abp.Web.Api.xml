@@ -122,6 +122,16 @@
             Used to set cookies for requests.
             </summary>
         </member>
+        <member name="P:Abp.WebApi.Client.IAbpWebApiClient.RequestHeaders">
+            <summary>
+            Request headers.
+            </summary>
+        </member>
+        <member name="P:Abp.WebApi.Client.IAbpWebApiClient.ResponseHeaders">
+            <summary>
+            Response headers.
+            </summary>
+        </member>
         <member name="T:Abp.WebApi.Controllers.Dynamic.Builders.BatchApiControllerBuilder`1">
             <summary>
             This interface is used to define a dynamic api controllers.
@@ -484,6 +494,11 @@
         <member name="P:Abp.WebApi.Controllers.AbpApiController.AbpSession">
             <summary>
             Gets current session information.
+            </summary>
+        </member>
+        <member name="P:Abp.WebApi.Controllers.AbpApiController.EventBus">
+            <summary>
+            Gets the event bus.
             </summary>
         </member>
         <member name="P:Abp.WebApi.Controllers.AbpApiController.PermissionManager">

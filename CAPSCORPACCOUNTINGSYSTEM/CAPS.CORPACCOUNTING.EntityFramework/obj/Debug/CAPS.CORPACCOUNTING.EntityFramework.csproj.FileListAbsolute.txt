@@ -307,12 +307,13 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_TableNames.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_AddrssandVendorPaymentTerms_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_Customer_Table.resources
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.csproj.GenerateResource.Cache
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.dll
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_RollupCenter_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Job_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_JobLocation_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_JobCommercial_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_ARBillingType_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_LinkJobs_Table.resources
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Upgraded_AbpZero_V_1_8_0.resources
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.csproj.GenerateResource.Cache
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.pdb

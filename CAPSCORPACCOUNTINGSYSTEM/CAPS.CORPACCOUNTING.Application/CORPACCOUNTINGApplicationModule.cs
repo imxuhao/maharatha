@@ -16,7 +16,9 @@ namespace CAPS.CORPACCOUNTING
         {
             //Adding authorization providers
             Configuration.Authorization.Providers.Add<AppAuthorizationProvider>();
-            DTOInterceptorRegistrar.Initialize(IocManager);
+
+            ///TBD:This needs to be worked upon
+           // DTOInterceptorRegistrar.Initialize(IocManager);
 
         }
 

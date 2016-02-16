@@ -24,6 +24,11 @@
             Unique name of this role.
             </summary>
         </member>
+        <member name="T:Abp.Authorization.Roles.PermissionEqualityComparer">
+            <summary>
+            Equality comparer for <see cref="T:Abp.Authorization.Permission"/> objects.
+            </summary>
+        </member>
         <member name="T:Abp.Authorization.Users.AbpUserBase">
             <summary>
             Base class for user.
@@ -76,6 +81,11 @@
         <member name="P:Abp.Authorization.Users.UserOrganizationUnit.OrganizationUnitId">
             <summary>
             Id of the <see cref="T:Abp.Organizations.OrganizationUnit"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.BackgroundJobStore">
+            <summary>
+            Implements <see cref="T:Abp.BackgroundJobs.IBackgroundJobStore"/> using repositories.
             </summary>
         </member>
         <member name="T:Abp.Localization.ApplicationLanguage">
@@ -1254,6 +1264,16 @@
         <member name="P:Abp.MultiTenancy.TenantFeatureSetting.TenantId">
             <summary>
             Tenant's Id.
+            </summary>
+        </member>
+        <member name="T:Abp.Notifications.NotificationStore">
+            <summary>
+            Implements <see cref="T:Abp.Notifications.INotificationStore"/> using repositories.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationStore.#ctor(Abp.Domain.Repositories.IRepository{Abp.Notifications.NotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.UserNotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.NotificationSubscriptionInfo,System.Guid})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationStore"/> class.
             </summary>
         </member>
         <member name="T:Abp.Organizations.IMustHaveOrganizationUnit">

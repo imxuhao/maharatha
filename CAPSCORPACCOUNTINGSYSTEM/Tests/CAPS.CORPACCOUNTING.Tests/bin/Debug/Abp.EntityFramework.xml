@@ -60,6 +60,11 @@
             Reference to the logger.
             </summary>
         </member>
+        <member name="P:Abp.EntityFramework.AbpDbContext.GuidGenerator">
+            <summary>
+            Reference to GUID generator.
+            </summary>
+        </member>
         <member name="T:Abp.EntityFramework.Dependency.EntityFrameworkConventionalRegistrar">
             <summary>
             Registers classes derived from AbpDbContext with configurations.

@@ -10,12 +10,14 @@ using Abp.AutoMapper;
 using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.Notifications;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Editions.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy.Demo;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
+using CAPS.CORPACCOUNTING.Notifications;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
@@ -25,15 +27,20 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly RoleManager _roleManager;
         private readonly IUserEmailer _userEmailer;
         private readonly TenantDemoDataBuilder _demoDataBuilder;
+        private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
+        private readonly IAppNotifier _appNotifier;
 
         public TenantAppService(
             RoleManager roleManager, 
             IUserEmailer userEmailer,
-            TenantDemoDataBuilder demoDataBuilder)
+            TenantDemoDataBuilder demoDataBuilder, 
+            INotificationSubscriptionManager notificationSubscriptionManager, IAppNotifier appNotifier)
         {
             _roleManager = roleManager;
             _userEmailer = userEmailer;
             _demoDataBuilder = demoDataBuilder;
+            _notificationSubscriptionManager = notificationSubscriptionManager;
+            _appNotifier = appNotifier;
         }
 
         public async Task<PagedResultOutput<TenantListDto>> GetTenants(GetTenantsInput input)
@@ -95,6 +102,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
                 //Assign admin user to admin role!
                 CheckErrors(await UserManager.AddToRoleAsync(adminUser.Id, adminRole.Name));
+
+                //Notifications
+                await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(adminUser.TenantId, adminUser.Id);
+                await _appNotifier.WelcomeToTheApplicationAsync(adminUser);
 
                 //Send activation email
                 if (input.SendActivationEmail)

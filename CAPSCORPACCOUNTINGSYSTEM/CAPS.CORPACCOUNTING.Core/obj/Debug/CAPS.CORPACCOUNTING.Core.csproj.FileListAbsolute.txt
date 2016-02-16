@@ -123,6 +123,6 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Debug\Nito.AsyncEx.Concurrent.xml
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Debug\Nito.AsyncEx.Enlightenment.xml
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Debug\System.Collections.Immutable.xml
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.csprojResolveAssemblyReference.cache
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.csprojResolveAssemblyReference.cache

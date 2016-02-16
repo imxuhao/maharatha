@@ -116,6 +116,26 @@
             UserOrganizationUnits.
             </summary>
         </member>
+        <member name="P:Abp.Zero.EntityFramework.AbpZeroDbContext`3.BackgroundJobs">
+            <summary>
+            Background jobs.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.EntityFramework.AbpZeroDbContext`3.Notifications">
+            <summary>
+            Notifications.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.EntityFramework.AbpZeroDbContext`3.UserNotifications">
+            <summary>
+            User notifications.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.EntityFramework.AbpZeroDbContext`3.NotificationSubscriptions">
+            <summary>
+            Notification subscriptions.
+            </summary>
+        </member>
         <member name="T:Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule">
             <summary>
             Entity framework integration module for ASP.NET Boilerplate Zero.

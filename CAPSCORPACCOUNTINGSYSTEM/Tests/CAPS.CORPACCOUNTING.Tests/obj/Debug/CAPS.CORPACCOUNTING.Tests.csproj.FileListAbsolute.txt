@@ -199,10 +199,10 @@ D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\obj\Debug\CAPS.CORPACCOUNTING.Tests.csprojResolveAssemblyReference.cache
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\obj\Debug\CAPS.CORPACCOUNTING.Tests.dll
 D:\SVN\Cha-Ching\Trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\obj\Debug\CAPS.CORPACCOUNTING.Tests.pdb
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\xunit.runner.visualstudio.testadapter.dll
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\xunit.runner.utility.desktop.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\xunit.abstractions.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\xunit.execution.desktop.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\xunit.runner.visualstudio.testadapter.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\xunit.runner.utility.desktop.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\CAPS.CORPACCOUNTING.Tests.dll.config
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\CAPS.CORPACCOUNTING.Tests.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\CAPS.CORPACCOUNTING.Tests.pdb

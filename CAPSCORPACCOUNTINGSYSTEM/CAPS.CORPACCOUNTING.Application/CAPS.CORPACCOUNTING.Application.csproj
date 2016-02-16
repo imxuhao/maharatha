@@ -116,6 +116,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\AbpLoginResultTypeHelper.cs" />
+    <Compile Include="Authorization\Users\Dto\GetLinkedUsersInput.cs" />
+    <Compile Include="Authorization\Users\Dto\LinkToUserInput.cs" />
+    <Compile Include="Authorization\Users\Dto\UnlinkUserInput.cs" />
+    <Compile Include="Authorization\Users\IUserLinkAppService.cs" />
+    <Compile Include="Authorization\Users\LinkedUserDto.cs" />
+    <Compile Include="Authorization\Users\UserLinkAppService.cs" />
     <Compile Include="CORPACCOUNTINGApplicationModule.cs" />
     <Compile Include="CORPACCOUNTINGAppServiceBase.cs" />
     <Compile Include="AppConsts.cs" />
@@ -140,6 +147,7 @@
     <Compile Include="Configuration\Tenants\Dto\LdapSettingsEditDto.cs" />
     <Compile Include="DataExporting\Excel\EpPlus\EpPlusExcelExporterBase.cs" />
     <Compile Include="Dto\PagedAndFilteredInputDto.cs" />
+    <Compile Include="Dto\PagedInputDto.cs" />
     <Compile Include="Dto\PagedSortedAndFilteredInputDto.cs" />
     <Compile Include="Editions\Dto\CreateOrUpdateEditionDto.cs" />
     <Compile Include="Editions\Dto\EditionEditDto.cs" />
@@ -259,6 +267,14 @@
     <Compile Include="MultiTenancy\Dto\TenantEditDto.cs" />
     <Compile Include="MultiTenancy\Dto\UpdateTenantFeaturesInput.cs" />
     <Compile Include="Net\MimeTypes\MimeTypeNames.cs" />
+    <Compile Include="Notifications\Dto\GetNotificationSettingsOutput.cs" />
+    <Compile Include="Notifications\Dto\GetNotificationsOutput.cs" />
+    <Compile Include="Notifications\Dto\GetUserNotificationsInput.cs" />
+    <Compile Include="Notifications\Dto\NotificationSubscriptionDto.cs" />
+    <Compile Include="Notifications\Dto\NotificationSubscriptionWithDisplayNameDto.cs" />
+    <Compile Include="Notifications\Dto\UpdateNotificationSettingsInput.cs" />
+    <Compile Include="Notifications\INotificationAppService.cs" />
+    <Compile Include="Notifications\NotificationAppService.cs" />
     <Compile Include="Organizations\Dto\UserToOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\CreateOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\GetOrganizationUnitUsersInput.cs" />

@@ -2,6 +2,7 @@
 using Abp.AutoMapper;
 using Abp.Modules;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Interceptors;
 
 namespace CAPS.CORPACCOUNTING
 {
@@ -15,6 +16,7 @@ namespace CAPS.CORPACCOUNTING
         {
             //Adding authorization providers
             Configuration.Authorization.Providers.Add<AppAuthorizationProvider>();
+            DTOInterceptorRegistrar.Initialize(IocManager);
 
         }
 

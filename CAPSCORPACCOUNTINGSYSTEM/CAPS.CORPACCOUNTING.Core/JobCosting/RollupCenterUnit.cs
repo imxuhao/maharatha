@@ -3,13 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Masters;
 
-namespace CAPS.CORPACCOUNTING.Masters
+namespace CAPS.CORPACCOUNTING.JobCosting
 {
     [Table("CAPS_RollupCenter")]
     public class RollupCenterUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
-        public const int MaxCaptionLenth = 500;
+        public const int MaxCaptionLength = 500;
 
         /// <summary>Overriding the ID column with RollupCenterId</summary>
         #region Declaration of Properties
@@ -17,7 +18,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public override int Id { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>
-        [StringLength(MaxCaptionLenth)]
+        [StringLength(MaxCaptionLength)]
         [Required]
         public virtual string Caption { get; set; }
 

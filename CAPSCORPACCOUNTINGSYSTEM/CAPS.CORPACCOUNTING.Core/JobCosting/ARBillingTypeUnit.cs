@@ -2,12 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using Abp.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Cryptography.X509Certificates;
 using Abp.Domain.Entities;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Masters;
 
-namespace CAPS.CORPACCOUNTING.Masters
+namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    /// <summary>/// Enum for TypeofBilling/// </summary>
     public enum TypeofBilling
     {
         [Display(Name = "Job Billing")]
@@ -26,26 +27,32 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("ARBillingTypeId")]
         public override int Id { get; set; }
 
+        /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxDescLength)]
         public virtual string  Description { get; set; }
 
+        /// <summary>Gets or sets the JobId field. </summary>
         [Range(0, Int32.MaxValue)]
         public virtual int  JobId { get; set; }
-
+      
         [ForeignKey("JobId")]
         public JobUnit Job { get; set; }
 
+        /// <summary>Gets or sets the AccountId field. </summary>
         [Range(0, Int32.MaxValue)]
         public virtual long AccountId { get; set; }
 
         [ForeignKey("AccountId")]
         public  AccountUnit Account { get; set; }
 
+        /// <summary>Gets or sets the IsIctBillingType field. </summary>
         public virtual bool IsIctBillingType { get; set; }
 
+        /// <summary>Gets or sets the IsProjectBilling field. </summary>
         public virtual bool IsProjectBilling { get; set; }
 
+        /// <summary>Gets or sets the TypeofBillingId field. </summary>
         [EnumDataType(typeof(TypeofBilling))]
         public virtual TypeofBilling TypeofBillingId { get; set; }
 

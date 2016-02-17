@@ -6,6 +6,7 @@ using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Storage;
+using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -58,18 +59,38 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// </summary>
        public virtual IDbSet<VendorUnit> VendorUnits { get; set; }
 
+        /// <summary> RollupCenter Declaration </summary>
         public virtual IDbSet<RollupCenterUnit> RollupCenterUnits { get; set; }
 
-          public virtual IDbSet<JobUnit> JobUnits { get; set; }
+        /// <summary> Job Declaration </summary>
+        public virtual IDbSet<JobUnit> JobUnits { get; set; }
 
-         public virtual IDbSet<JobLocationUnit> JobLocationUnits { get; set; }
+        /// <summary> JobLocation Declaration </summary>
+        public virtual IDbSet<JobLocationUnit> JobLocationUnits { get; set; }
 
-         public virtual IDbSet<JobCommercialUnit> JobCommertialUnits { get; set; }
+        /// <summary> JobCommercial Declaration<JobCommercial </summary>
+        public virtual IDbSet<JobCommercialUnit> JobCommertialUnits { get; set; }
 
+        /// <summary> ARBillingType Declaration</summary>
         public virtual IDbSet<ARBillingTypeUnit> ARBillingTypeUnits { get; set; }
 
+        /// <summary> LinkJobs Declaration</summary>
         public virtual IDbSet<LinkJobsUnit> LinkJobsUnitUnits { get; set; }
 
+       /// <summary> JobBudget Declaration</summary>
+       public virtual IDbSet<JobBudgetUnit> JobBudgetUnits { get; set; }
+
+        /// <summary> JobPettyCashLog Declaration</summary>
+        public virtual IDbSet<JobPettyCashLogUnit> JobPettyCashLogUnits { get; set; }
+
+        /// <summary> JobPurchaseOrderLog Declaration</summary>
+        public virtual IDbSet<JobPurchaseOrderLogUnit> JobPurchaseOrderLogUnits { get; set; }
+
+        /// <summary> JobPONumbers Declaration</summary>
+        public virtual IDbSet<JobPONumbersUnit> JobPONumbersUnits { get; set; }
+
+        /// <summary> JobPCConfig Declaration</summary>
+        public virtual IDbSet<JobPCConfigUnit> JobPCConfigUnits { get; set; }
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

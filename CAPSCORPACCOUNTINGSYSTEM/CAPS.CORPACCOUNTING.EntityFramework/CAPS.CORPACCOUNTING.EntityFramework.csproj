@@ -313,6 +313,30 @@
     <Compile Include="Migrations\201602162215092_Upgraded_AbpZero_V_1_8_0.Designer.cs">
       <DependentUpon>201602162215092_Upgraded_AbpZero_V_1_8_0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602171152580_Modify_Job_JobCommercial_Table.cs" />
+    <Compile Include="Migrations\201602171152580_Modify_Job_JobCommercial_Table.Designer.cs">
+      <DependentUpon>201602171152580_Modify_Job_JobCommercial_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602171159402_Add_JobBudget_Table.cs" />
+    <Compile Include="Migrations\201602171159402_Add_JobBudget_Table.Designer.cs">
+      <DependentUpon>201602171159402_Add_JobBudget_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602171200195_Add_JobPettyCashLog_Table.cs" />
+    <Compile Include="Migrations\201602171200195_Add_JobPettyCashLog_Table.Designer.cs">
+      <DependentUpon>201602171200195_Add_JobPettyCashLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602171201201_Add_JobPurchaseOrderLog_Table.cs" />
+    <Compile Include="Migrations\201602171201201_Add_JobPurchaseOrderLog_Table.Designer.cs">
+      <DependentUpon>201602171201201_Add_JobPurchaseOrderLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602171202358_Add_JobPONumbersUnit_Table.cs" />
+    <Compile Include="Migrations\201602171202358_Add_JobPONumbersUnit_Table.Designer.cs">
+      <DependentUpon>201602171202358_Add_JobPONumbersUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602171203251_Add_JobPCConfigUnit_Table.cs" />
+    <Compile Include="Migrations\201602171203251_Add_JobPCConfigUnit_Table.Designer.cs">
+      <DependentUpon>201602171203251_Add_JobPCConfigUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -477,6 +501,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602162215092_Upgraded_AbpZero_V_1_8_0.resx">
       <DependentUpon>201602162215092_Upgraded_AbpZero_V_1_8_0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171152580_Modify_Job_JobCommercial_Table.resx">
+      <DependentUpon>201602171152580_Modify_Job_JobCommercial_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171159402_Add_JobBudget_Table.resx">
+      <DependentUpon>201602171159402_Add_JobBudget_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171200195_Add_JobPettyCashLog_Table.resx">
+      <DependentUpon>201602171200195_Add_JobPettyCashLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171201201_Add_JobPurchaseOrderLog_Table.resx">
+      <DependentUpon>201602171201201_Add_JobPurchaseOrderLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171202358_Add_JobPONumbersUnit_Table.resx">
+      <DependentUpon>201602171202358_Add_JobPONumbersUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171203251_Add_JobPCConfigUnit_Table.resx">
+      <DependentUpon>201602171203251_Add_JobPCConfigUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

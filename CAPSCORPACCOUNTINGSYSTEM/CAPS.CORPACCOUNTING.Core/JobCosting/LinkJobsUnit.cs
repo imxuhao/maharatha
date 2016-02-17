@@ -3,7 +3,7 @@ using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CAPS.CORPACCOUNTING.Masters
+namespace CAPS.CORPACCOUNTING.JobCosting
 {
     [Table("CAPS_JobLinks")]
     public class LinkJobsUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit

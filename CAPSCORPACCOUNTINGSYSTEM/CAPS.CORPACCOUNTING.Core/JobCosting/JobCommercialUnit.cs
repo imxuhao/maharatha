@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Masters;
 
-namespace CAPS.CORPACCOUNTING.Masters
+namespace CAPS.CORPACCOUNTING.JobCosting
 {
     [Table("CAPS_JobCommercial")]
     public class JobCommercialUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
@@ -14,12 +15,14 @@ namespace CAPS.CORPACCOUNTING.Masters
         public const int MaxJobnumberLength = 50;
         public const int MaxTitleLength = 200;
         public const int MaxInfoLength = 500;
+        public const int MaxEmailLength = 500;
 
         #region Class Property Declarations
-
-        [Column("JobCommertialId")]
+        /// <summary>Overriding the ID column with JobCommercialId</summary>
+        [Column("JobCommercialId")]
         public override int Id { get; set; }
 
+        /// <summary>Gets or Sets JobId Field.  </summary>
         [Range(0,Int32.MaxValue)]
         public virtual int JobId { get; set; }
 
@@ -283,8 +286,17 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or Sets IsFringeAccountSeparate Field.  </summary>
         public virtual bool IsFringeAccountSeparate { get; set; }
 
+        /// <summary>Gets or Sets IsOTon Field.  </summary>
+        public virtual bool IsOTon { get; set; }
+
+        /// <summary>Gets or Sets AgencyEmail Field.  </summary>
+        [StringLength(MaxEmailLength)]
+        public virtual string AgencyEmail { get; set; }
+
+        /// <summary>Gets or Sets Company Field.  </summary>
         public long? OrganizationUnitId { get; set; }
 
+        /// <summary>Gets or Sets Tenant Field.  </summary>
         public int TenantId { get; set; }
 
         #endregion
@@ -312,7 +324,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             string commerciallength, int? preproductiondays, int? strikedays, int? prelightdays, int? prelighthours,
             int? strikehours, int? studioshootdays, int? shoothours, int? locationdays, int? locationhours,
             bool iscostplus, bool iswrapupinsurance,
-            bool isfringeaccountseparate, long? organizationunitid)
+            bool isfringeaccountseparate, long? organizationunitid, string agencyemail, bool isoton)
         {
             JobId = jobid;
             BidDate = biddate;
@@ -380,6 +392,8 @@ namespace CAPS.CORPACCOUNTING.Masters
             IsWrapUpInsurance = iswrapupinsurance;
             IsFringeAccountSeparate = isfringeaccountseparate;
             OrganizationUnitId = organizationunitid;
+            AgencyEmail = agencyemail;
+            IsOTon = isoton;
         }
 
     }

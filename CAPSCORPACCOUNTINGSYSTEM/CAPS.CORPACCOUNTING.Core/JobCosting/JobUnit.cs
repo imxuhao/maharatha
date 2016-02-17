@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Masters;
 
-namespace CAPS.CORPACCOUNTING.Masters
+namespace CAPS.CORPACCOUNTING.JobCosting
 {
 
     /// <summary>
-    /// Enum for ChartofAccountsType
+    /// Enum for TypeofProject
     /// </summary>
     public enum TypeofProject
     {
@@ -25,6 +26,18 @@ namespace CAPS.CORPACCOUNTING.Masters
         Features = 3
     }
 
+    /// <summary>
+    /// Enum for TaxRecovery
+    /// </summary>
+    public enum TaxRecovery
+    {
+        [Display(Name = "OK")]
+        Ok = 1,
+        [Display(Name = "NO")]
+        No = 2,
+       
+    }
+    /// <summary> /// Enum for BudgetSoftware /// </summary>
     public enum BudgetSoftware
     {
         [Display(Name = "PointZero Version 2000")]
@@ -65,7 +78,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         CorpBudget1 = 18
 
     }
-
+    /// <summary> /// Enum for ProjectStatus /// </summary>
     public enum ProjectStatus
     {
         [Display(Name = "Awarded")]
@@ -151,6 +164,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the IsICTDivision field. </summary>
         public virtual bool IsICTDivision { get; set; }
 
+        /// <summary>Gets or sets the TypeofProject field. </summary>
+        public virtual TypeofProject? TypeofProjectId { get; set; }
+
+        /// <summary>Gets or sets the TaxRecovery field. </summary>
+        public virtual TaxRecovery? TaxRecoveryId { get; set; }        
+
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
@@ -166,8 +185,8 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public JobUnit(string jobnumber, string caption, bool iscorporatedefault, int? chartofaccountid,
             long? rollupaccountid, int? typeofcurrencyid, int rollupjobid, ProjectStatus? typeofjobstatusid,
-            BudgetSoftware? typeofbidsoftwareid,int rollupcenterid,
-            bool isapproved, bool isactive, bool isictdivision, long? organizationunitid)
+            BudgetSoftware? typeofbidsoftwareid, int rollupcenterid, bool isapproved, bool isactive, bool isictdivision,
+            long? organizationunitid, TypeofProject? typeofprojectid, TaxRecovery? taxrecoveryid)
         {
             JobNumber = jobnumber;
             Caption = caption;
@@ -181,6 +200,8 @@ namespace CAPS.CORPACCOUNTING.Masters
             IsICTDivision = isictdivision;
             OrganizationUnitId = organizationunitid;
             RollupCenterId = rollupcenterid;
+            TypeofProjectId = typeofprojectid;
+            TaxRecoveryId = taxrecoveryid;
         }
     }
 }

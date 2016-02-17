@@ -4,7 +4,7 @@ using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 
-namespace CAPS.CORPACCOUNTING.Masters
+namespace CAPS.CORPACCOUNTING.JobCosting
 {
     [Table("CAPS_JobLocation")]
     public class JobLocationUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit

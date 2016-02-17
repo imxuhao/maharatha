@@ -11,7 +11,9 @@ using Abp.Zero.Ldap.Configuration;
 using CAPS.CORPACCOUNTING.Authorization.Ldap;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Configuration;
+using CAPS.CORPACCOUNTING.Debugging;
 using CAPS.CORPACCOUNTING.Features;
+using CAPS.CORPACCOUNTING.Notifications;
 
 namespace CAPS.CORPACCOUNTING
 {
@@ -40,6 +42,9 @@ namespace CAPS.CORPACCOUNTING
             //Adding setting providers
             Configuration.Settings.Providers.Add<AppSettingProvider>();
 
+            //Adding notification providers
+            Configuration.Notifications.Providers.Add<AppNotificationProvider>();
+
             //Enable this line to create a multi-tenant application.
             Configuration.MultiTenancy.IsEnabled = true;
 
@@ -49,10 +54,11 @@ namespace CAPS.CORPACCOUNTING
             //Configure roles
             AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);
 
-#if DEBUG
-            //Disabling email sending in debug mode
-            IocManager.Register<IEmailSender, NullEmailSender>(DependencyLifeStyle.Transient);
-#endif
+            if (DebugHelper.IsDebug)
+            {
+                //Disabling email sending in debug mode
+                IocManager.Register<IEmailSender, NullEmailSender>(DependencyLifeStyle.Transient);
+            }
         }
 
         public override void Initialize()

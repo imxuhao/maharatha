@@ -176,7 +176,7 @@
       Bu grafik için REFRESH butonuna bastığınızda grafik verisi sunucu tarafında rastgele üretilir.
     </text>
     <text name="WelcomePage_Title" value="Hoşgeldiniz!" />
-    <text name="WelcomePage_Info" value="Uygulamaya hoşgeldiniz. Menüyü kullanarak uygulamayı kullanmaya başlayabilirsiniz. Eğer herhangi bir menü ögesi göremiyorsunuz muhtemelen herhangi bir sayfayı görme yetkiniz bulunmuyor demektir. Bu durumda yetki almak için sistem yöneticisine başvurabilirsiniz." />
+    <text name="WelcomePage_Info" value="Uygulamaya hoşgeldiniz. Menüyü kullanarak uygulamayı kullanmaya başlayabilirsiniz. Eğer herhangi bir menü ögesi göremiyorsanız muhtemelen herhangi bir sayfayı görme yetkiniz bulunmuyor demektir. Bu durumda yetki almak için sistem yöneticisine başvurabilirsiniz." />
     <text name="RequestedFileDoesNotExists" value="İstenilen dosya sistemde bulunamadı!" />
     <text name="MailSent" value="E-posta gönderildi" />
     <text name="PasswordResetMailSentMessage" value="E-posta adresinize bir şifre sıfırlama bağlantısı gönderilmiştir. Lütfen e-posta adresinizi kontrol ediniz." />
@@ -196,7 +196,7 @@
     <text name="Client" value="İstemci" />
     <text name="Browser" value="Tarayıcı" />
     <text name="Xms" value="{0} ms" />
-    <text name="Close" value="Close" />
+    <text name="Close" value="Kapat" />
     <text name="Refresh" value="Yenile" />
     <text name="ErrorState" value="Hata durumu" />
     <text name="All" value="Hepsi" />
@@ -320,5 +320,30 @@
     <text name="DifferentTenantImpersonationErrorMessage" value="Farklı bir müşterinin kullanıcısı adına giriş yapılamaz!" />
     <text name="ImpersonationTokenErrorMessage" value="Yetkilendirme kodu geçersiz ya da süresi dolmuş!" />
     <text name="NotImpersonatedLoginErrorMessage" value="Şu anda yetkilendirilmiş bir hesapta değilsiniz!" />
+    <text name="YouCannotLinkToSameAccount">Hesabı kendisine bağlayamazsınız!</text>
+    <text name="ChangePasswordBeforeLinkToAnAccount">Bu hesabı başka bir hesaba bağlamadan önce yeni bir şifre belirlemeniz gerkeiyor!</text>
+    <text name="LinkedAccounts">Bağlı hesaplar</text>
+    <text name="ManageAccounts">Hesapları yönet</text>
+    <text name="LinkNewAccount">Yeni hesap bağla</text>
+    <text name="SuccessfullyUnlinked">Bağlantı başarıyla kaldırıldı.</text>
+    <text name="LinkedUserDeleteWarningMessage">{0} kullanıcısına bağlantı silinecektir.</text>
+    <text name="SwitchToLinkedAccountTokenErrorMessage" value="Bağlı hesaba geçme kodu geçersiz ya da süresi dolmuş!" />
+    <text name="WelcomeToTheApplicationNotificationMessage" value="CORPACCOUNTING uygulamasına Hoşgeldiniz! Bilgilendirme sistemi sizi ilgilendiğiniz olaylar hakkında anın bilgilendirmek için geliştirilmiştir. Bildirim ayarları kısmından ne tür bilgilendirme almak istediğinizi ayarlayabilirsiniz." />
+    <text name="NewUserRegisteredNotificationDefinition" value="Yeni bir kullanıcı kaydolduğunda." />
+    <text name="NewUserRegisteredNotificationMessage" value="Yeni bir kullanıcı kaydoldu. Kullanıcı adı: {userName}, e-posta adresi: {emailAddress}." />
+    <text name="SeeAllNotifications" value="Tüm bildirimleri gör" />
+    <text name="SetAsRead" value="okundu olarak işaretle" />
+    <text name="SetAllAsRead" value="Tümünü okundu olarak işaretle" />
+    <text name="NotificationSettings" value="Bildirim ayarları" />
+    <text name="ReceiveNotifications" value="Bildirimleri Al" />
+    <text name="ReceiveNotifications_Definition" value="Bu seçenek bildirim almayı tamamen durdurmak için kullanılabilir." />
+    <text name="NotificationTypes" value="Bildirim Türleri" />
+    <text name="ReceiveNotifications_DisableInfo" value="Bildirim almayı tümüyle kapattınız. Bildirim almayı seçtikten sonra hangi bildirim türlerini almak istediğinizi tek tek belirleyebilirsiniz." />
+    <text name="Notifications" value="Bildirimler" />
+    <text name="ThereIsNoNotification" value="Bildirim yok." />
+    <text name="Unread" value="Okunmamış" />
+    <text name="YouCanNotDeleteOwnAccount" value="Kendi kullanıcı hesabınızı silemezsiniz!" />
+    <text name="On" value="Açık" />
+    <text name="Off" value="Kapalı" />
   </texts>
 </localizationDictionary>

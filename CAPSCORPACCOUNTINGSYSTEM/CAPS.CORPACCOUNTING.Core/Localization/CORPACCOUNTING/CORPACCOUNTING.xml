@@ -320,5 +320,30 @@
     <text name="DifferentTenantImpersonationErrorMessage" value="Can not impersonate a user of a different tenant!" />
     <text name="ImpersonationTokenErrorMessage" value="Impersonation token is invalid or expired!" />
     <text name="NotImpersonatedLoginErrorMessage" value="This is not an impersonated login!" />
+    <text name="YouCannotLinkToSameAccount">You can not link to same account!</text>
+    <text name="ChangePasswordBeforeLinkToAnAccount">You must change your password before linking this account!</text>
+    <text name="LinkedAccounts">Linked accounts</text>
+    <text name="ManageAccounts">Manage accounts</text>
+    <text name="LinkNewAccount">Link new account</text>
+    <text name="SuccessfullyUnlinked">Successfully unlinked</text>
+    <text name="LinkedUserDeleteWarningMessage">Link to user {0} will be deleted.</text>
+    <text name="SwitchToLinkedAccountTokenErrorMessage" value="Impersonation token is invalid or expired!" />
+    <text name="WelcomeToTheApplicationNotificationMessage" value="Welcome to CORPACCOUNTING! Notification system is used to inform you for intended events. You can select which type of notifications you want to receive from the notification settings." />
+    <text name="NewUserRegisteredNotificationDefinition" value="On a new user registered to the application." />
+    <text name="NewUserRegisteredNotificationMessage" value="A new user registered to the application. User name: {userName}, Email address: {emailAddress}." />
+    <text name="SeeAllNotifications" value="See all notifications" />
+    <text name="SetAsRead" value="set as read" />
+    <text name="SetAllAsRead" value="Set all as read" />
+    <text name="NotificationSettings" value="Notification settings" />
+    <text name="ReceiveNotifications" value="Receive Notifications" />
+    <text name="ReceiveNotifications_Definition" value="This option can be used to completely enable/disable receiving notifications." />
+    <text name="NotificationTypes" value="Notification Types" />
+    <text name="ReceiveNotifications_DisableInfo" value="You completely disabled receiving notifications. You can enabled it and select notification types you want to receive." />
+    <text name="Notifications" value="Notifications" />
+    <text name="ThereIsNoNotification" value="There is no notification." />
+    <text name="Unread" value="Unread" />
+    <text name="YouCanNotDeleteOwnAccount" value="You can not delete own user account!" />
+    <text name="On" value="On" />
+    <text name="Off" value="Off" />
   </texts>
 </localizationDictionary>

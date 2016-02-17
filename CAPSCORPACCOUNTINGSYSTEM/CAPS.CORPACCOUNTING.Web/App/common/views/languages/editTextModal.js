@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.languages.editTextModal', [
-        '$scope', '$modalInstance', 'abp.services.app.language', 'sourceName', 'baseLanguageName', 'languageName', 'allTexts', 'initialText',
-        function ($scope, $modalInstance, languageService, sourceName, baseLanguageName, languageName, allTexts, initialText) {
+        '$scope', '$uibModalInstance', 'abp.services.app.language', 'sourceName', 'baseLanguageName', 'languageName', 'allTexts', 'initialText',
+        function ($scope, $uibModalInstance, languageService, sourceName, baseLanguageName, languageName, allTexts, initialText) {
             var vm = this;
 
             vm.sourceName = sourceName;
@@ -43,12 +43,12 @@
             function save(close) {
                 function executeAfterAction() {
                     if (close) {
-                        $modalInstance.close();
+                        $uibModalInstance.close();
                     } else {
                         //Go to next
                         vm.currentIndex++;
                         if (vm.allTexts.length <= vm.currentIndex) {
-                            $modalInstance.close();
+                            $uibModalInstance.close();
                             return;
                         }
 
@@ -104,7 +104,7 @@
             }
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
         }
     ]);

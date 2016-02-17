@@ -33,5 +33,15 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
         {
             return PartialView("_ChangePasswordModal");
         }
+
+        public PartialViewResult LinkedAccountsModal()
+        {
+            return PartialView("_LinkedAccountsModal");
+        }
+
+        public PartialViewResult LinkAccountModal()
+        {
+            return PartialView("_LinkAccountModal");
+        }
     }
 }

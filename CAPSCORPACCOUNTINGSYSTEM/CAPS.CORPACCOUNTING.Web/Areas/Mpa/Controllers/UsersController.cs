@@ -23,13 +23,18 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var model = new UsersViewModel
+            {
+                FilterText = Request.QueryString["filterText"]
+            };
+
+            return View(model);
         }
 
         [AbpMvcAuthorize(AppPermissions.Pages_Administration_Users_Create, AppPermissions.Pages_Administration_Users_Edit)]
         public async Task<PartialViewResult> CreateOrEditModal(long? id)
         {
-            var output = await _userAppService.GetUserForEdit(new NullableIdInput<long> {Id = id});
+            var output = await _userAppService.GetUserForEdit(new NullableIdInput<long> { Id = id });
             var viewModel = new CreateOrEditUserModalViewModel(output);
 
             return PartialView("_CreateOrEditModal", viewModel);

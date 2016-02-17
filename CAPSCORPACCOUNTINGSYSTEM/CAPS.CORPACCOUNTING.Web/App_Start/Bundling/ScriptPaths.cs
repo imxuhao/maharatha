@@ -21,12 +21,15 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
         public const string JQuery_Sparkline = "~/libs/jquery-sparkline/jquery.sparkline.min.js";
         public const string JQuery_Validation = "~/libs/jquery-validation/js/jquery.validate.min.js";
         public const string JQuery_jTable = "~/libs/jquery-jtable/jquery.jtable.min.js";
+        public const string JQuery_Bootstrap_Switch = "~/libs/bootstrap-switch/js/bootstrap-switch.min.js";
 
         public const string Bootstrap = "~/libs/bootstrap/js/bootstrap.min.js";
         public const string Bootstrap_Hover_Dropdown = "~/libs/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js";
         public const string Bootstrap_DateRangePicker = "~/libs/bootstrap-daterangepicker/daterangepicker.js";
         public const string Bootstrap_Select = "~/libs/bootstrap-select/bootstrap-select.min.js";
         public const string Bootstrap_Switch = "~/libs/bootstrap-switch/js/bootstrap-switch.min.js";
+
+        public const string SignalR = "~/Scripts/jquery.signalR-2.2.0.min.js";
 
         public const string Morris = "~/libs/morris/morris.min.js";
         public const string Morris_Raphael = "~/libs/morris/raphael-min.js";
@@ -41,6 +44,8 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
         public const string MomentJs = "~/Scripts/moment-with-locales.min.js";
         public const string Underscore = "~/Scripts/underscore.min.js";
 
+        public const string MustacheJs = "~/libs/mustachejs/mustache.min.js";
+
         public const string Angular = "~/Scripts/angular.min.js";
         public const string Angular_Sanitize = "~/Scripts/angular-sanitize.min.js";
         public const string Angular_Touch = "~/Scripts/angular-touch.min.js";
@@ -51,6 +56,8 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
         public const string Angular_OcLazyLoad = "~/libs/angular-ocLazyLoad/ocLazyLoad.min.js";
         public const string Angular_File_Upload = "~/libs/angular-file-upload/angular-file-upload.min.js";
         public const string Angular_DateRangePicker = "~/libs/angular-daterangepicker/angular-daterangepicker.min.js";
+        public const string Angular_Moment = "~/libs/angular-moment/angular-moment.min.js";
+        public const string Angular_Bootstrap_Switch = "~/libs/angular-bootstrap-switch/angular-bootstrap-switch.min.js";
 
         public const string Abp = "~/Abp/Framework/scripts/abp.js";
         public const string Abp_JQuery = "~/Abp/Framework/scripts/libs/abp.jquery.js";

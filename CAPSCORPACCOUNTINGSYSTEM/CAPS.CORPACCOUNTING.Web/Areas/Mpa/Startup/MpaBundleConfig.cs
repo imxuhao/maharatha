@@ -28,6 +28,7 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Startup
                         ScriptPaths.JQuery_Uniform,
                         ScriptPaths.JQuery_Ajax_Form,
                         ScriptPaths.JQuery_jTable,
+                        ScriptPaths.SignalR,
                         ScriptPaths.Morris,
                         ScriptPaths.Morris_Raphael,
                         ScriptPaths.JQuery_Sparkline,
@@ -47,7 +48,8 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Startup
                         ScriptPaths.Abp_BlockUi,
                         ScriptPaths.Abp_SpinJs,
                         ScriptPaths.Abp_SweetAlert,
-                        ScriptPaths.Abp_jTable
+                        ScriptPaths.Abp_jTable,
+                        ScriptPaths.MustacheJs
                     ).ForceOrdered()
                 );
 

@@ -10,6 +10,9 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         [DisableAuditing]
         public ActionResult Index()
         {
+            /* Enable next line to redirect to Multi-Page Application */
+            /* return RedirectToAction("Index", "Home", new {area = "Mpa"}); */
+
             return View("~/App/common/views/layout/layout.cshtml"); //Layout of the angular application.
         }
     }

@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('host.views.tenants.index', [
-        '$scope', '$modal', 'uiGridConstants', 'abp.services.app.tenant', 'abp.services.app.commonLookup', 'lookupModal',
-        function ($scope, $modal, uiGridConstants, tenantService, commonLookupService, lookupModal) {
+        '$scope', '$uibModal', 'uiGridConstants', 'abp.services.app.tenant', 'abp.services.app.commonLookup', 'lookupModal',
+        function ($scope, $uibModal, uiGridConstants, tenantService, commonLookupService, lookupModal) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -41,9 +41,9 @@
                         width: 200,
                         cellTemplate:
                             '<div class=\"ui-grid-cell-contents\">' +
-                            '  <div class="btn-group dropdown" dropdown="">' +
-                            '    <button class="btn btn-xs btn-primary blue" dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
-                            '    <ul class="dropdown-menu">' +
+                            '  <div class="btn-group dropdown" uib-dropdown="">' +
+                            '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
+                            '    <ul class="uib-dropdown-menu">' +
                             '      <li><a ng-if="grid.appScope.permissions.impersonation" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisTenant') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editTenant(row.entity)">' + app.localize('Edit') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.changeFeatures" ng-click="grid.appScope.editFeatures(row.entity)">' + app.localize('Features') + '</a></li>' +
@@ -140,7 +140,7 @@
             };
 
             vm.editTenant = function (tenant) {
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                     templateUrl: '/App/host/views/tenants/editModal.cshtml',
                     controller: 'host.views.tenants.editModal as vm',
                     backdrop: 'static',
@@ -157,7 +157,7 @@
             };
 
             vm.createTenant = function () {
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                     templateUrl: '/App/host/views/tenants/createModal.cshtml',
                     controller: 'host.views.tenants.createModal as vm',
                     backdrop: 'static'
@@ -185,7 +185,7 @@
             };
 
             vm.editFeatures = function (tenant) {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: '~/App/host/views/tenants/featuresModal.cshtml',
                     controller: 'host.views.tenants.featuresModal as vm',
                     backdrop: 'static',

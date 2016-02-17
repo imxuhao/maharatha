@@ -5,8 +5,8 @@
      * Example: CommonLookupAppService.FindUsers
      */
     appModule.controller('common.views.common.lookupModal', [
-        '$scope', '$modalInstance', 'uiGridConstants', 'lookupOptions',
-        function ($scope, $modalInstance, uiGridConstants, lookupOptions) {
+        '$scope', '$uibModalInstance', 'uiGridConstants', 'lookupOptions',
+        function ($scope, $uibModalInstance, uiGridConstants, lookupOptions) {
             var vm = this;
 
             vm.loading = false;
@@ -33,12 +33,12 @@
 
             //Check required parameters
             if (!vm.options.serviceMethod) {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
                 return;
             }
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             vm.gridOptions = {
@@ -83,7 +83,7 @@
 
                 if (boolOrPromise === true) {
                     vm.options.callback(item);
-                    $modalInstance.close(item);
+                    $uibModalInstance.close(item);
                     return;
                 }
 
@@ -91,7 +91,7 @@
                 boolOrPromise.then(function(result) {
                     if (result) {
                         vm.options.callback(item);
-                        $modalInstance.close(item);
+                        $uibModalInstance.close(item);
                     }
                 });
             };
@@ -120,10 +120,10 @@
 
     //lookupModal service
     appModule.factory('lookupModal', [
-        '$modal',
-        function ($modal) {
+        '$uibModal',
+        function ($uibModal) {
             function open(lookupOptions) {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: '~/App/common/views/common/lookupModal.cshtml',
                     controller: 'common.views.common.lookupModal as vm',
                     backdrop: 'static',

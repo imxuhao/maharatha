@@ -8,8 +8,8 @@
             </h4>
         </div>
         <div class="modal-body">
-            <tabset class="tab-container tabbable-line">
-                <tab heading="@L("RoleProperties")">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("RoleProperties")">
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
                         <input class="form-control" type="text" name="RoleDisplayName" ng-class="{'edited':vm.role.displayName}" ng-model="vm.role.displayName" required maxlength="@Role.MaxDisplayNameLength">
                         <label>@L("RoleName")</label>
@@ -26,11 +26,11 @@
                             <span class="help-block">@L("DefaultRole_Description")</span>
                         </div>
                     </div>
-                </tab>
-                <tab heading="@L("Permissions")">
+                </uib-tab>
+                <uib-tab heading="@L("Permissions")">
                     <permission-tree edit-data="vm.permissionEditData"></permission-tree>
-                </tab>
-            </tabset>
+                </uib-tab>
+            </uib-tabset>
         </div>
         <div class="modal-footer">
             <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>

@@ -24,10 +24,12 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                         ScriptPaths.JQuery_BlockUi,
                         ScriptPaths.JQuery_Cookie,
                         ScriptPaths.JQuery_Uniform,
+                        ScriptPaths.SignalR,
                         ScriptPaths.Morris,
                         ScriptPaths.Morris_Raphael,
                         ScriptPaths.JQuery_Sparkline,
                         ScriptPaths.JsTree,
+                        ScriptPaths.Bootstrap_Switch,
                         ScriptPaths.SpinJs,
                         ScriptPaths.SpinJs_JQuery,
                         ScriptPaths.SweetAlert,
@@ -46,6 +48,8 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                         ScriptPaths.Angular_OcLazyLoad,
                         ScriptPaths.Angular_File_Upload,
                         ScriptPaths.Angular_DateRangePicker,
+                        ScriptPaths.Angular_Moment,
+                        ScriptPaths.Angular_Bootstrap_Switch,
                         ScriptPaths.Abp,
                         ScriptPaths.Abp_JQuery,
                         ScriptPaths.Abp_Toastr,
@@ -100,6 +104,7 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                     .Include(StylePaths.Angular_Ui_Grid, new CssRewriteUrlWithVirtualDirectoryTransform())
                     .Include(StylePaths.Bootstrap_DateRangePicker)
                     .Include(StylePaths.Bootstrap_Select)
+                    .Include(StylePaths.Bootstrap_Switch)
                     .ForceOrdered()
                 );
         }

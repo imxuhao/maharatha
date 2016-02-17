@@ -1,6 +1,7 @@
 ﻿@using Abp.Web.Mvc.Extensions
 @using CAPS.CORPACCOUNTING.Authorization
 @using CAPS.CORPACCOUNTING.Web.Navigation
+@model CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.UsersViewModel
 @{
     ViewBag.CurrentPageName = PageNames.App.Common.Users;
 }
@@ -40,7 +41,7 @@
             <div class="portlet-input">
                 <form>
                     <div class="input-group">
-                        <input id="UsersTableFilter" class="form-control" placeholder="@L("SearchWithThreeDot")" type="text">
+                        <input id="UsersTableFilter" class="form-control" placeholder="@L("SearchWithThreeDot")" type="text" value="@Model.FilterText">
                         <span class="input-group-btn">
                             <button id="GetUsersButton" class="btn default" type="submit"><i class="icon-magnifier"></i></button>
                         </span>

@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('host.views.tenants.editModal', [
-        '$scope', '$modalInstance', 'abp.services.app.tenant', 'abp.services.app.commonLookup', 'tenantId',
-        function ($scope, $modalInstance, tenantService, commonLookupService, tenantId) {
+        '$scope', '$uibModalInstance', 'abp.services.app.tenant', 'abp.services.app.commonLookup', 'tenantId',
+        function ($scope, $uibModalInstance, tenantService, commonLookupService, tenantId) {
             var vm = this;
 
             vm.saving = false;
@@ -17,14 +17,14 @@
                 tenantService.updateTenant(vm.tenant)
                     .success(function () {
                         abp.notify.info(app.localize('SavedSuccessfully'));
-                        $modalInstance.close();
+                        $uibModalInstance.close();
                     }).finally(function () {
                         vm.saving = false;
                     });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             vm.getEditionValue = function (item) {

@@ -49,9 +49,30 @@
                         @foreach (var childMenuItem in menuItem.Items)
                         {
                             <li class="@(Model.CurrentPageName == childMenuItem.Name ? "active" : "")">
-                                <a href="@calculateMenuUrl(childMenuItem.Url)">
-                                    <span><i class="sub-menu-icon @childMenuItem.Icon"></i> @childMenuItem.DisplayName</span>
-                                </a>
+                                @if (childMenuItem.Items.IsNullOrEmpty())
+                                {
+                                    <a href="@calculateMenuUrl(childMenuItem.Url)">
+                                        <span><i class="sub-menu-icon @childMenuItem.Icon"></i> @childMenuItem.DisplayName</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:;" class="auto">
+                                        <i class="@childMenuItem.Icon"></i>
+                                        <span class="title">@childMenuItem.DisplayName</span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        @foreach (var secondLevelChildMenuItem in childMenuItem.Items)
+                                        {
+                                            <li class="@(Model.CurrentPageName == secondLevelChildMenuItem.Name ? "active" : "")">
+                                                <a href="@calculateMenuUrl(secondLevelChildMenuItem.Url)">
+                                                    <span><i class="sub-menu-icon @secondLevelChildMenuItem.Icon"></i> @secondLevelChildMenuItem.DisplayName</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
                             </li>
                         }
                     </ul>

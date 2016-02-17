@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.users.permissionsModal', [
-        '$scope', '$modalInstance', 'abp.services.app.user', 'user',
-        function ($scope, $modalInstance, userService, user) {
+        '$scope', '$uibModalInstance', 'abp.services.app.user', 'user',
+        function ($scope, $uibModalInstance, userService, user) {
             var vm = this;
             
             vm.saving = false;
@@ -28,14 +28,14 @@
                     grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
                 }).success(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    $modalInstance.close();
+                    $uibModalInstance.close();
                 }).finally(function () {
                     vm.saving = false;
                 });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             function loadPermissions() {

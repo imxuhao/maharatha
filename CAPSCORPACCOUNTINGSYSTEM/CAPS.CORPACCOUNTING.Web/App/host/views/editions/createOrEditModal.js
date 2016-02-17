@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('host.views.editions.createOrEditModal', [
-        '$scope', '$modalInstance', 'abp.services.app.edition', 'editionId',
-        function ($scope, $modalInstance, editionService, editionId) {
+        '$scope', '$uibModalInstance', 'abp.services.app.edition', 'editionId',
+        function ($scope, $uibModalInstance, editionService, editionId) {
             var vm = this;
 
             vm.saving = false;
@@ -20,14 +20,14 @@
                     featureValues: vm.featureEditData.featureValues
                 }).success(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    $modalInstance.close();
+                    $uibModalInstance.close();
                 }).finally(function() {
                     vm.saving = false;
                 });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             function init() {

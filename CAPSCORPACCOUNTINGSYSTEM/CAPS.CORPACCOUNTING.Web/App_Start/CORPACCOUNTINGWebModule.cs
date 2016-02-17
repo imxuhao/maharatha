@@ -3,11 +3,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Abp.Hangfire;
+using Abp.Hangfire.Configuration;
 using Abp.IO;
 using Abp.Modules;
 using Abp.Web.Mvc;
+using Abp.Web.SignalR;
 using Abp.Zero.Configuration;
 using Castle.MicroKernel.Registration;
+using Hangfire;
 using Microsoft.Owin.Security;
 using CAPS.CORPACCOUNTING.Web.App.Startup;
 using CAPS.CORPACCOUNTING.Web.Areas.Mpa.Startup;
@@ -26,7 +30,9 @@ namespace CAPS.CORPACCOUNTING.Web
         typeof(AbpWebMvcModule),
         typeof(CORPACCOUNTINGDataModule),
         typeof(CORPACCOUNTINGApplicationModule),
-        typeof(CORPACCOUNTINGWebApiModule))]
+        typeof(CORPACCOUNTINGWebApiModule),
+        typeof(AbpWebSignalRModule),
+        typeof(AbpHangfireModule))] //AbpHangfireModule dependency can be removed if not using Hangfire
     public class CORPACCOUNTINGWebModule : AbpModule
     {
         public override void PreInitialize()
@@ -38,6 +44,12 @@ namespace CAPS.CORPACCOUNTING.Web
             Configuration.Navigation.Providers.Add<AppNavigationProvider>();
             Configuration.Navigation.Providers.Add<FrontEndNavigationProvider>();
             Configuration.Navigation.Providers.Add<MpaNavigationProvider>();
+
+            //Configure to use Hangfire as background job manager. Remove these lines to use default background job manager, instead of Hangfire.
+            Configuration.BackgroundJobs.UseHangfire(configuration =>
+            {
+                configuration.GlobalConfiguration.UseSqlServerStorage("Default");
+            });
         }
 
         public override void Initialize()

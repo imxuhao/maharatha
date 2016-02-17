@@ -8,17 +8,17 @@
             </h4>
         </div>
         <div class="modal-body">
-            <tabset class="tab-container tabbable-line">
-                <tab heading="@L("EditionProperties")">
+            <uib-tabset class="tab-container tabbable-line">
+                <uib-tab heading="@L("EditionProperties")">
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
                         <input class="form-control" type="text" name="EditionDisplayName" ng-class="{'edited':vm.edition.displayName}" ng-model="vm.edition.displayName" required maxlength="@Edition.MaxDisplayNameLength">
                         <label>@L("EditionName")</label>
                     </div>
-                </tab>
-                <tab heading="@L("Features")">
+                </uib-tab>
+                <uib-tab heading="@L("Features")">
                     <feature-tree edit-data="vm.featureEditData"></feature-tree>
-                </tab>
-            </tabset>
+                </uib-tab>
+            </uib-tabset>
         </div>
         <div class="modal-footer">
             <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>

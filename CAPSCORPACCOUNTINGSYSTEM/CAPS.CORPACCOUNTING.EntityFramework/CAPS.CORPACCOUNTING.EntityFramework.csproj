@@ -277,6 +277,7 @@
     <Compile Include="Migrations\201601280154021_Modify_TableNames.Designer.cs">
       <DependentUpon>201601280154021_Modify_TableNames.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601281732387_Modify_Address_Table.Designer.cs" />
     <Compile Include="Migrations\201602011840526_Modify_AddrssandVendorPaymentTerms_Table.cs" />
     <Compile Include="Migrations\201602011840526_Modify_AddrssandVendorPaymentTerms_Table.Designer.cs">
       <DependentUpon>201602011840526_Modify_AddrssandVendorPaymentTerms_Table.cs</DependentUpon>
@@ -336,6 +337,10 @@
     <Compile Include="Migrations\201602171203251_Add_JobPCConfigUnit_Table.cs" />
     <Compile Include="Migrations\201602171203251_Add_JobPCConfigUnit_Table.Designer.cs">
       <DependentUpon>201602171203251_Add_JobPCConfigUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602171657415_Add_Organization_Roles.cs" />
+    <Compile Include="Migrations\201602171657415_Add_Organization_Roles.Designer.cs">
+      <DependentUpon>201602171657415_Add_Organization_Roles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
@@ -475,6 +480,7 @@
     <EmbeddedResource Include="Migrations\201601280154021_Modify_TableNames.resx">
       <DependentUpon>201601280154021_Modify_TableNames.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601281732387_Modify_Address_Table.resx" />
     <EmbeddedResource Include="Migrations\201602011840526_Modify_AddrssandVendorPaymentTerms_Table.resx">
       <DependentUpon>201602011840526_Modify_AddrssandVendorPaymentTerms_Table.cs</DependentUpon>
     </EmbeddedResource>
@@ -519,6 +525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602171203251_Add_JobPCConfigUnit_Table.resx">
       <DependentUpon>201602171203251_Add_JobPCConfigUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171657415_Add_Organization_Roles.resx">
+      <DependentUpon>201602171657415_Add_Organization_Roles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

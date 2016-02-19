@@ -154,8 +154,11 @@
     <Compile Include="JobCosting\JobPONumbersUnit.cs" />
     <Compile Include="JobCosting\JobPurchaseOrderLogUnit.cs" />
     <Compile Include="JobCosting\JobUnit.cs" />
+    <Compile Include="JobCosting\JobDeatilUnitManager.cs" />
+    <Compile Include="JobCosting\RollupCenterUnitManager.cs" />
     <Compile Include="JobCosting\LinkJobsUnit.cs" />
     <Compile Include="JobCosting\RollupCenterUnit.cs" />
+    <Compile Include="JobCosting\JobUnitManager.cs" />
     <Compile Include="Localization\CultureHelper.cs" />
     <Compile Include="Masters\AccountUnit.cs" />
     <Compile Include="Masters\AccountUnitManager.cs" />

@@ -8,7 +8,7 @@ using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
-    [Table("CAPS_JobCommercial")]
+    [Table("CAPS_JobDetail")]
     public class JobCommercialUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxProductLength = 500;
@@ -18,8 +18,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public const int MaxEmailLength = 500;
 
         #region Class Property Declarations
-        /// <summary>Overriding the ID column with JobCommercialId</summary>
-        [Column("JobCommercialId")]
+        /// <summary>Overriding the ID column with JobDetailId</summary>
+        [Column("JobDetailId")]
         public override int Id { get; set; }
 
         /// <summary>Gets or Sets JobId Field.  </summary>

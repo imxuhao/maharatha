@@ -188,6 +188,23 @@
     <Compile Include="Interceptors\DTOInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\DTOInterceptors.cs" />
     <Compile Include="Interceptors\InternalAsyncHelper.cs" />
+    <Compile Include="JobCosting\Dto\GetJobInput.cs" />
+    <Compile Include="JobCosting\Dto\JobJobCommercialUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\UpdateJobCommercialnput.cs" />
+    <Compile Include="JobCosting\Dto\JobCommercialInput.cs" />
+    <Compile Include="JobCosting\Dto\GetRollupCenterInput.cs" />
+    <Compile Include="JobCosting\Dto\RollupCenterUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\UpdateRollupCenterUnitInput.cs" />
+    <Compile Include="JobCosting\Dto\CreateRollupCenterUnitInput.cs" />
+    <Compile Include="JobCosting\Dto\JobUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\UpdateJobUnitInput.cs" />
+    <Compile Include="JobCosting\Dto\CreateJobUnitInput.cs" />
+    <Compile Include="JobCosting\IJobCommercialAppService.cs" />
+    <Compile Include="JobCosting\IRollupCenterUnitAppService.cs" />
+    <Compile Include="JobCosting\IJobUnitAppService.cs" />
+    <Compile Include="JobCosting\JobCommercialAppService.cs" />
+    <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />
+    <Compile Include="JobCosting\JobUnitAppService.cs" />
     <Compile Include="Localization\Dto\CreateOrUpdateLanguageInput.cs" />
     <Compile Include="Localization\Dto\ApplicationLanguageEditDto.cs" />
     <Compile Include="Localization\Dto\ApplicationLanguageListDto.cs" />
@@ -306,6 +323,7 @@
       <Name>CAPS.CORPACCOUNTING.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

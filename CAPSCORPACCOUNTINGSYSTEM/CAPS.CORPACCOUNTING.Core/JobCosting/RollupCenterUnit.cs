@@ -7,6 +7,16 @@ using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    /// <summary>
+    /// Enum for RollupType
+    /// </summary>
+    public enum RollupType
+    {
+        [Display(Name = "Projects")]
+        Projects = 1,
+        [Display(Name = "Corporates")]
+        Corporates = 2
+    }
     [Table("CAPS_RollupCenter")]
     public class RollupCenterUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
@@ -42,13 +52,15 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set; }
+        /// <summary>Gets or sets the RollupTypeID field. </summary>
+        public virtual RollupType RollupTypeId { get; set; }
 
         #endregion
 
         public RollupCenterUnit()
         {
         }
-        public RollupCenterUnit(string caption, long? accountid, int? jobid, bool isactive, bool isapproved, long? organizationunitid)
+        public RollupCenterUnit(string caption, long? accountid, int? jobid, bool isactive, bool isapproved, long? organizationunitid, RollupType rolluptypeid)
         {
             Caption = caption;
             AccountId = accountid;
@@ -56,6 +68,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             IsActive = isactive;
             IsApproved = isapproved;
             OrganizationUnitId = organizationunitid;
+            RollupTypeId = rolluptypeid;
         }
     }
 }

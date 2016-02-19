@@ -120,7 +120,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual string Caption { get; set; }
 
         /// <summary>Gets or sets the RollupCenterId field. </summary>
-        public virtual int? RollupCenterId { get; set; }
+        public virtual int RollupCenterId { get; set; }
 
         [ForeignKey("RollupCenterId")]
         public RollupCenterUnit RollupCenter { get; set; }
@@ -129,10 +129,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual bool IsCorporateDefault { get; set; }
 
         /// <summary>Gets or sets the ChartOfAccountId field. </summary>
-        public virtual int? ChartOfAccountId { get; set; }
+        public virtual int ChartOfAccountId { get; set; }
 
         [ForeignKey("ChartOfAccountId")]
-        public CoaUnit ChartofAccoUnit { get; set; }
+        public CoaUnit ChartofAccontUnit { get; set; }
 
         /// <summary>Gets or sets the RollupAccountId field. </summary>
         public virtual long? RollupAccountId { get; set; }
@@ -183,8 +183,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
         }
 
-        public JobUnit(string jobnumber, string caption, bool iscorporatedefault, int? chartofaccountid,
-            long? rollupaccountid, int? typeofcurrencyid, int rollupjobid, ProjectStatus? typeofjobstatusid,
+        public JobUnit(string jobnumber, string caption, bool iscorporatedefault, int chartofaccountid,
+            long? rollupaccountid, int? typeofcurrencyid, int? rollupjobid, ProjectStatus? typeofjobstatusid,
             BudgetSoftware? typeofbidsoftwareid, int rollupcenterid, bool isapproved, bool isactive, bool isictdivision,
             long? organizationunitid, TypeofProject? typeofprojectid, TaxRecovery? taxrecoveryid)
         {
@@ -202,6 +202,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             RollupCenterId = rollupcenterid;
             TypeofProjectId = typeofprojectid;
             TaxRecoveryId = taxrecoveryid;
+            ChartOfAccountId = chartofaccountid;
         }
     }
 }

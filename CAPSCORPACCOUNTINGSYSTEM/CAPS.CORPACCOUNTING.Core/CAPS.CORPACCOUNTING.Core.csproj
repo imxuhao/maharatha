@@ -144,6 +144,8 @@
     <Compile Include="Features\AppFeatures.cs" />
     <Compile Include="IAppFolders.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnit.cs" />
+    <Compile Include="JobCosting\ARInvoiceScheduleUnit.cs" />
+    <Compile Include="JobCosting\JobAccountUnit.cs" />
     <Compile Include="JobCosting\JobBudgetUnit.cs" />
     <Compile Include="JobCosting\JobCommercialUnit.cs" />
     <Compile Include="JobCosting\JobLocationUnit.cs" />

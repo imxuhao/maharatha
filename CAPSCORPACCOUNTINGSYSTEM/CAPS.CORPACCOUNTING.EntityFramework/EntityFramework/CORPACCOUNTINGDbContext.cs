@@ -19,7 +19,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary>
         /// Chart of Accounts Declaration
         /// </summary>
-        public  virtual  IDbSet<CoaUnit> CoaUnits { get; set; }
+        public virtual IDbSet<CoaUnit> CoaUnits { get; set; }
 
         /// <summary>
         ///  Accounts Declaration
@@ -57,7 +57,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary>
         ///  Address Declaration
         /// </summary>
-       public virtual IDbSet<VendorUnit> VendorUnits { get; set; }
+        public virtual IDbSet<VendorUnit> VendorUnits { get; set; }
 
         /// <summary> RollupCenter Declaration </summary>
         public virtual IDbSet<RollupCenterUnit> RollupCenterUnits { get; set; }
@@ -77,8 +77,8 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> LinkJobs Declaration</summary>
         public virtual IDbSet<LinkJobsUnit> LinkJobsUnitUnits { get; set; }
 
-       /// <summary> JobBudget Declaration</summary>
-       public virtual IDbSet<JobBudgetUnit> JobBudgetUnits { get; set; }
+        /// <summary> JobBudget Declaration</summary>
+        public virtual IDbSet<JobBudgetUnit> JobBudgetUnits { get; set; }
 
         /// <summary> JobPettyCashLog Declaration</summary>
         public virtual IDbSet<JobPettyCashLogUnit> JobPettyCashLogUnits { get; set; }
@@ -91,6 +91,12 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> JobPCConfig Declaration</summary>
         public virtual IDbSet<JobPCConfigUnit> JobPCConfigUnits { get; set; }
+
+        /// <summary> ARInvoiceScheduleUnit Declaration</summary>
+        public virtual IDbSet<ARInvoiceScheduleUnit> ARInvoiceScheduleUnit { get; set; }
+
+        /// <summary> JobAccountUnit Declaration</summary>
+        public virtual IDbSet<JobAccountUnit> JobAccountUnit { get; set; }
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

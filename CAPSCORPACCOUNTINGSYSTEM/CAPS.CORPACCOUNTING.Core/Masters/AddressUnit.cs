@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
@@ -54,6 +53,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         Org = 7,
         [Display(Name = "User")]
         User = 8,
+        [Display(Name = "Director")]
+        Director = 9,
     }
 
     [Table("CAPS_Address")]

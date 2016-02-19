@@ -43,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [ForeignKey("RollupJobId")]
         public virtual JobUnit RollupJob { get; set; }
 
-        /// <summary>Gets or sets the RollupAcctId field. </summary>
+        /// <summary>Gets or sets the RollupAccountId field. </summary>
         public virtual long? RollupAccountId { get; set; }
 
         [ForeignKey("RollupAccountId")]
@@ -59,12 +59,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public JobAccountUnit()
         {
         }
-        public JobAccountUnit(int jobid, int accountid, string description, int? rollupjobid, long? rollupacctid, long? organizationunitid)
+        public JobAccountUnit(int jobid, int accountid, string description, int? rollupjobid, long? rollupaccountId, long? organizationunitid)
         {
             JobId = jobid;
             AccountId = accountid;
             Description = description;
             RollupJobId = rollupjobid;
+            RollupAccountId = rollupaccountId;
             OrganizationUnitId = organizationunitid;
         }
 

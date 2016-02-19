@@ -354,6 +354,18 @@
     <Compile Include="Migrations\201602190955589_Modify_JobandJobDetail_Table.Designer.cs">
       <DependentUpon>201602190955589_Modify_JobandJobDetail_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602191400131_Add_Director_Table.cs" />
+    <Compile Include="Migrations\201602191400131_Add_Director_Table.Designer.cs">
+      <DependentUpon>201602191400131_Add_Director_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602191401045_Add_DirectorAccount_Table.cs" />
+    <Compile Include="Migrations\201602191401045_Add_DirectorAccount_Table.Designer.cs">
+      <DependentUpon>201602191401045_Add_DirectorAccount_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602191401570_Add_LocationSet_Table.cs" />
+    <Compile Include="Migrations\201602191401570_Add_LocationSet_Table.Designer.cs">
+      <DependentUpon>201602191401570_Add_LocationSet_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -549,6 +561,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602190955589_Modify_JobandJobDetail_Table.resx">
       <DependentUpon>201602190955589_Modify_JobandJobDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602191400131_Add_Director_Table.resx">
+      <DependentUpon>201602191400131_Add_Director_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602191401045_Add_DirectorAccount_Table.resx">
+      <DependentUpon>201602191401045_Add_DirectorAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602191401570_Add_LocationSet_Table.resx">
+      <DependentUpon>201602191401570_Add_LocationSet_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

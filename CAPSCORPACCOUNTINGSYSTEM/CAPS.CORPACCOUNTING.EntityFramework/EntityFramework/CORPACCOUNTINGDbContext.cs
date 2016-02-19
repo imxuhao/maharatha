@@ -98,6 +98,15 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> JobAccountUnit Declaration</summary>
         public virtual IDbSet<JobAccountUnit> JobAccountUnit { get; set; }
 
+        /// <summary> DirectorUnit Declaration</summary>
+        public virtual IDbSet<DirectorUnit> DirectorUnit { get; set; }
+
+        /// <summary> DirectorAccountUnit Declaration</summary>
+       public virtual IDbSet<DirectorAccountUnit> DirectorAccountUnit { get; set; }
+
+        /// <summary> LocationSetUnit Declaration</summary>
+        public virtual IDbSet<LocationSetUnit> LocationSetUnit { get; set; }
+
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 

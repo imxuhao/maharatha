@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Add_ARInvoiceSchedule_Table : IMigrationMetadata
+    public sealed partial class Add_DirectorAccount_Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_ARInvoiceSchedule_Table));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_DirectorAccount_Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201602181104590_Add_ARInvoiceSchedule_Table"; }
+            get { return "201602191401045_Add_DirectorAccount_Table"; }
         }
         
         string IMigrationMetadata.Source

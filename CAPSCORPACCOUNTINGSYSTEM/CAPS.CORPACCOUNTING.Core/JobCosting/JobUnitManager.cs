@@ -19,9 +19,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         }
 
         /// <summary>
-        /// Inserting Job Entity 
+        /// Creating Job Entity 
         /// </summary>
-        /// <param name="job"></param>
+        /// <param name="jobUnit"></param>
         /// <returns></returns>
         [UnitOfWork]
         public virtual async Task CreateAsync(JobUnit jobUnit)

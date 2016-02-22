@@ -366,6 +366,18 @@
     <Compile Include="Migrations\201602191401570_Add_LocationSet_Table.Designer.cs">
       <DependentUpon>201602191401570_Add_LocationSet_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602220917201_Add_ICTRelation_Table.cs" />
+    <Compile Include="Migrations\201602220917201_Add_ICTRelation_Table.Designer.cs">
+      <DependentUpon>201602220917201_Add_ICTRelation_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602220918507_Add_JobBudgetDetails_Table.cs" />
+    <Compile Include="Migrations\201602220918507_Add_JobBudgetDetails_Table.Designer.cs">
+      <DependentUpon>201602220918507_Add_JobBudgetDetails_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602221328039_Modify_JobLocation_Tabel.cs" />
+    <Compile Include="Migrations\201602221328039_Modify_JobLocation_Tabel.Designer.cs">
+      <DependentUpon>201602221328039_Modify_JobLocation_Tabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -570,6 +582,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602191401570_Add_LocationSet_Table.resx">
       <DependentUpon>201602191401570_Add_LocationSet_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602220917201_Add_ICTRelation_Table.resx">
+      <DependentUpon>201602220917201_Add_ICTRelation_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602220918507_Add_JobBudgetDetails_Table.resx">
+      <DependentUpon>201602220918507_Add_JobBudgetDetails_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602221328039_Modify_JobLocation_Tabel.resx">
+      <DependentUpon>201602221328039_Modify_JobLocation_Tabel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

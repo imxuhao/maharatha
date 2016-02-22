@@ -97,15 +97,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<SalesRepUnitDto> GetSalesRepUnitsById(IdInput input)
         {
-            var salesRepQuery =
-               from cpt in _salesRepUnitRepository.GetAll()
-               where cpt.Id == input.Id
-               select new { cpt };
-            var salesRepItems = await salesRepQuery.ToListAsync();
-
-            var result = salesRepItems[0].cpt.MapTo<SalesRepUnitDto>();
-            result.SalesRepId = salesRepItems[0].cpt.Id;
-            return result;
+            var salesRepQuery = await _salesRepUnitRepository.GetAsync(input.Id);
+            return salesRepQuery.MapTo<SalesRepUnitDto>();
         }
     }
 }

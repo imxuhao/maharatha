@@ -7,9 +7,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 {
     public interface IJobCommercialAppService : IApplicationService
     {
-        Task<JobJobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input);
+        Task<JobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input);
 
-        Task<JobJobCommercialUnitDto> UpdateJobDetailUnit(UpdateJobCommercialnput input);
+        Task<JobCommercialUnitDto> UpdateJobDetailUnit(UpdateJobCommercialnput input);
         Task DeleteJobDetailUnit(IdInput input);
+        Task<JobCommercialUnitDto> GetJobDetailsByJobId(IdInput input);
     }
 }

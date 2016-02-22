@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Organizations;
 
-namespace CAPS.CORPACCOUNTING.JobCosting
+namespace CAPS.CORPACCOUNTING.Masters
 {
     public enum LocationSets
     {
@@ -46,11 +46,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public LocationSetUnit()
         { }
 
-        public LocationSetUnit(LocationSets typeoflocationsetid, string number, string description)
+        public LocationSetUnit(LocationSets typeoflocationsetid, string number, string description,long? organizationunitid)
         {
             TypeOfLocationSetId = typeoflocationsetid;
             Number = number;
             Description = description;
+            OrganizationUnitId = organizationunitid;
         }
 
 

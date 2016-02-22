@@ -3,9 +3,6 @@ using Abp.Domain.Repositories;
 using Abp.Domain.Services;
 using Abp.Domain.Uow;
 using Abp.Zero;
-using Abp.UI;
-using System.Linq;
-using System;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {

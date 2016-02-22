@@ -43,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             };
             await _addressAppService.DeleteAddressUnit(dto);
         }
-
+        #region TestMethods After UI development We need to Remove this Region
         /// <summary>
         /// This method is for testing to Insert data in Employee  with 2 addresses.After UI development we need to remove this method.
         /// using this method we are calling CreateEmployeeUnit to insert Employee and Addresss Data
@@ -102,6 +102,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             input.InputAddresses = new List<UpdateAddressUnitInput> { employeeAddr1, employeeAddr2};
             await UpdateEmployeeUnit(input);
         }
+        #endregion
 
         /// <summary>
         /// Creates Employee with Addresses

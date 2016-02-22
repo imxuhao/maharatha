@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -248,5 +249,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or Sets Company Field.  </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or Sets the JobLocations for Job </summary>
+        public List<UpdateJobLocationInput> JobLocations { get; set; }
     }
 }

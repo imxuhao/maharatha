@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -21,6 +22,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [ForeignKey("JobId")]
         public virtual JobUnit Job { get; set; }
 
+        /// <summary>Gets or sets the LocationId field. </summary>
+        public virtual int LocationId { get; set; }
+
+        [ForeignKey("LocationId")]
+        public virtual LocationSetUnit Location { get; set; }
+
         /// <summary>Gets or sets the LocationSite1Date field. </summary>
         public virtual DateTime? LocationSiteDate { get; set; }
 
@@ -34,11 +41,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public JobLocationUnit()
         {
         }
-        public JobLocationUnit(int jobid, DateTime? locationsitedate, long? organizationunitid)
+        public JobLocationUnit(int jobid, DateTime? locationsitedate, long? organizationunitid,int locationid)
         {
             JobId = jobid;
             LocationSiteDate = locationsitedate;
             OrganizationUnitId = organizationunitid;
+            LocationId = locationid;
         }
     }
 }

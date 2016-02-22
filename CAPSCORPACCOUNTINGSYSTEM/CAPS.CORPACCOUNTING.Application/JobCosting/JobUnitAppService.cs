@@ -97,7 +97,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task DeleteJobUnit(IdInput input)
         {
-            await _jobUnitRepository.DeleteAsync(input.Id);
+            await _jobUnitManager.DeleteAsync(input.Id);
         }
         /// <summary>
         /// To Get the Job with JobDetails to show in the Grid With searching and sorting
@@ -138,6 +138,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 dto.Agency = item.Agency;
                 return dto;
             }).ToList());
+        }
+
+        public async Task<JobUnitDto> GetJobUnitById(IdInput input) {
+
+            var jobitems = await _jobUnitRepository.GetAsync(input.Id);
+            var result = jobitems.MapTo<JobUnitDto>();
+            return result;
+
         }
 
     }

@@ -188,10 +188,14 @@
     <Compile Include="Interceptors\DTOInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\DTOInterceptors.cs" />
     <Compile Include="Interceptors\InternalAsyncHelper.cs" />
+    <Compile Include="JobCosting\IJobLocationAppService.cs" />
+    <Compile Include="JobCosting\Dto\JobLocationUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\UpdateJobLocationInput.cs" />
+    <Compile Include="JobCosting\Dto\CreateJobLocationInput.cs" />
     <Compile Include="JobCosting\Dto\GetJobInput.cs" />
-    <Compile Include="JobCosting\Dto\JobJobCommercialUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\JobCommercialUnitDto.cs" />
     <Compile Include="JobCosting\Dto\UpdateJobCommercialnput.cs" />
-    <Compile Include="JobCosting\Dto\JobCommercialInput.cs" />
+    <Compile Include="JobCosting\Dto\CreateJobCommercialInput.cs" />
     <Compile Include="JobCosting\Dto\GetRollupCenterInput.cs" />
     <Compile Include="JobCosting\Dto\RollupCenterUnitDto.cs" />
     <Compile Include="JobCosting\Dto\UpdateRollupCenterUnitInput.cs" />
@@ -203,6 +207,7 @@
     <Compile Include="JobCosting\IRollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\IJobUnitAppService.cs" />
     <Compile Include="JobCosting\JobCommercialAppService.cs" />
+    <Compile Include="JobCosting\JobLocationAppService.cs" />
     <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\JobUnitAppService.cs" />
     <Compile Include="Localization\Dto\CreateOrUpdateLanguageInput.cs" />
@@ -219,6 +224,9 @@
     <Compile Include="Localization\Dto\UpdateLanguageTextInput.cs" />
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\Dto\LocationSetUnitDto.cs" />
+    <Compile Include="Masters\Dto\UpdateLocationSetUnitInput.cs" />
+    <Compile Include="Masters\Dto\CreateLocationSetUnitInput.cs" />
     <Compile Include="Masters\Dto\AddressUnitDto.cs" />
     <Compile Include="Masters\Dto\CustomerAndAddressDto.cs" />
     <Compile Include="Masters\Dto\DeleteAddressUnitInput.cs" />
@@ -250,7 +258,9 @@
     <Compile Include="Masters\ICustomerUnitAppService.cs" />
     <Compile Include="Masters\CustomerUnitAppService.cs" />
     <Compile Include="Masters\IAddressUnitAppService.cs" />
+    <Compile Include="Masters\ILocationSetUnitAppService.cs" />
     <Compile Include="Masters\IVendorUnitAppService.cs" />
+    <Compile Include="Masters\LocationSetUnitAppService.cs" />
     <Compile Include="Masters\SalesRepUnitAppService.cs" />
     <Compile Include="Masters\Dto\AccountUnitDto.cs" />
     <Compile Include="Masters\Dto\CoaUnitDto.cs" />

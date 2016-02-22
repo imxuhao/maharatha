@@ -1,18 +1,21 @@
 ﻿using Abp.Application.Services.Dto;
-using CAPS.CORPACCOUNTING.Masters;
+using Abp.AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
-    public  class CreateJobCommercialInput : IInputDto
-    {       
+    [AutoMapFrom(typeof(JobCommercialUnit))]
+    public class JobCommercialUnitDto : IOutputDto
+    {
+        /// <summary>Gets or Sets JobId Field.  </summary>
+        [Range(0, Int32.MaxValue)]
+        public int JobCommercialId { get; set; }
 
         /// <summary>Gets or Sets JobId Field.  </summary>
         [Range(0, Int32.MaxValue)]
-        public int JobId { get; set; }       
+        public int JobId { get; set; }
 
         /// <summary>Gets or Sets BidDate Field.  </summary>
         public DateTime? BidDate { get; set; }
@@ -47,37 +50,37 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public string ProductName { get; set; }
 
         /// <summary>Gets or Sets ExecutiveProducerId Field.  </summary>
-        public int? ExecutiveProducerId { get; set; }       
+        public int? ExecutiveProducerId { get; set; }
 
         /// <summary>Gets or Sets DirectorEmployeeId Field.  </summary>
-        public int? DirectorEmployeeId { get; set; }       
+        public int? DirectorEmployeeId { get; set; }
 
         /// <summary>Gets or Sets ProducerEmployeeId Field.  </summary>
-        public int? ProducerEmployeeId { get; set; }       
+        public int? ProducerEmployeeId { get; set; }
 
         /// <summary>Gets or Sets DirOfPhotoEmployeeId Field.  </summary>
-        public int? DirOfPhotoEmployeeId { get; set; }       
+        public int? DirOfPhotoEmployeeId { get; set; }
 
         /// <summary>Gets or Sets SetDesignerEmployeeId Field.  </summary>
-        public int? SetDesignerEmployeeId { get; set; }       
+        public int? SetDesignerEmployeeId { get; set; }
 
         /// <summary>Gets or Sets EditorEmployeeId Field.  </summary>
-        public int? EditorEmployeeId { get; set; }       
+        public int? EditorEmployeeId { get; set; }
 
         /// <summary>Gets or Sets ArtDirectorEmployeeId Field.  </summary>
-        public int? ArtDirectorEmployeeId { get; set; }       
+        public int? ArtDirectorEmployeeId { get; set; }
 
         /// <summary>Gets or Sets SalesRepId Field.  </summary>
-        public int? SalesRepId { get; set; }        
+        public int? SalesRepId { get; set; }
 
         /// <summary>Gets or Sets AgencyId Field.  </summary>
-        public int? AgencyId { get; set; }        
+        public int? AgencyId { get; set; }
 
         /// <summary>Gets or Sets AgencyClientCustomerId Field.  </summary>
-        public int? AgencyClientCustomerId { get; set; }        
+        public int? AgencyClientCustomerId { get; set; }
 
         /// <summary>Gets or Sets ThirdPartyCustomerId Field.  </summary>
-        public int? ThirdPartyCustomerId { get; set; }        
+        public int? ThirdPartyCustomerId { get; set; }
 
         /// <summary>Gets or Sets AgencyProducer Field.  </summary>
 
@@ -245,5 +248,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or Sets Company Field.  </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or Sets the JobLocations for Employee </summary>
+        public List<JobLocationUnitDto> JobLocations { get; set; }
     }
 }

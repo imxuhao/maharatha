@@ -4,7 +4,8 @@ using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using Abp.Application.Services.Dto;
-
+using System.Collections.Generic;
+using System;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -12,16 +13,45 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     {
         private readonly JobCommercialUnitManager _jobDetailUnitManager;
         private readonly IRepository<JobCommercialUnit> _jobDetailUnitRepository;
+        private readonly IJobLocationAppService _jobLocationAppService;
+        private readonly IRepository<JobLocationUnit> _jobLocationRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public JobCommercialAppService(JobCommercialUnitManager jobDetailUnitManager, IRepository<JobCommercialUnit> jobDetailUnitRepository, IUnitOfWorkManager unitOfWorkManager)
+        public JobCommercialAppService(JobCommercialUnitManager jobDetailUnitManager, IRepository<JobCommercialUnit> jobDetailUnitRepository, IUnitOfWorkManager unitOfWorkManager,
+            IJobLocationAppService jobLocationAppService, IRepository<JobLocationUnit> jobLocationRepository)
         {
             _jobDetailUnitManager = jobDetailUnitManager;
             _jobDetailUnitRepository = jobDetailUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
+            _jobLocationAppService = jobLocationAppService;
+            _jobLocationRepository = jobLocationRepository;
+
         }
-        public async Task<JobJobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input)
+        /// <summary>
+        /// Creating JobDetails
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [UnitOfWork]
+        public async Task<JobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input)
         {
+            #region This is only for testing Purpose, once UI is Developed we need to Remove this Region
+            input.JobLocations = new List<CreateJobLocationInput> {
+                new CreateJobLocationInput
+            {
+                JobId=1,
+                LocationId=3,
+                LocationSiteDate=DateTime.Now
+            },
+             new CreateJobLocationInput{
+                JobId=1,
+                LocationId=2,
+                LocationSiteDate=DateTime.Now
+             }
+
+            };
+            #endregion
+
             var jobDetailUnit = new JobCommercialUnit(jobid: input.JobId, biddate: input.BidDate, awarddate: input.AwardDate, shootingdate: input.ShootingDate,
                 wrapdate: input.WrapDate, roughcutdate: input.RoughCutDate, airdate: input.AirDate, dateclosed: input.DateClosed,
                 finalshootdate: input.FinalShootDate, productowner: input.ProductOwner, productname: input.ProductName,
@@ -46,16 +76,37 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             await _jobDetailUnitManager.CreateAsync(jobDetailUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
-            return jobDetailUnit.MapTo<JobJobCommercialUnitDto>();
+
+            if (input.JobLocations != null)
+            {
+                foreach (var location in input.JobLocations)
+                {
+
+                    await _jobLocationAppService.CreateJobLocationUnit(location);
+                    await CurrentUnitOfWork.SaveChangesAsync();
+                }
+            }
+
+            return jobDetailUnit.MapTo<JobCommercialUnitDto>();
         }
 
+        /// <summary>
+        /// Delete the Jobdetails
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task DeleteJobDetailUnit(IdInput input)
         {
             await _jobDetailUnitRepository.DeleteAsync(input.Id);
-
         }
 
-        public async Task<JobJobCommercialUnitDto> UpdateJobDetailUnit(UpdateJobCommercialnput input)
+        /// <summary>
+        /// Update Job Details
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [UnitOfWork]
+        public async Task<JobCommercialUnitDto> UpdateJobDetailUnit(UpdateJobCommercialnput input)
         {
             var jobDetailUnit = await _jobDetailUnitRepository.GetAsync(input.JobCommercialId);
 
@@ -68,7 +119,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobDetailUnit.WrapDate = input.WrapDate;
             jobDetailUnit.RoughCutDate = input.RoughCutDate;
             jobDetailUnit.AirDate = input.AirDate;
-            jobDetailUnit.DateClosed= input.DateClosed;
+            jobDetailUnit.DateClosed = input.DateClosed;
             jobDetailUnit.FinalShootDate = input.FinalShootDate;
             jobDetailUnit.ProductName = input.ProductName;
             jobDetailUnit.ProductOwner = input.ProductOwner;
@@ -129,7 +180,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobDetailUnit.ShootHours = input.ShootHours;
             jobDetailUnit.StudioShootDays = input.StudioShootDays;
             jobDetailUnit.StorageHouse = input.StorageHouse;
-            jobDetailUnit.MarkupTotal = input.MarkupTotal;     
+            jobDetailUnit.MarkupTotal = input.MarkupTotal;
 
             #endregion
 
@@ -137,16 +188,68 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             await CurrentUnitOfWork.SaveChangesAsync();
 
+
+            #region This is only for testing Purpose, once UI is Developed we need to Remove this Region
+            input.JobLocations = new List<UpdateJobLocationInput> {
+                    new UpdateJobLocationInput
+                {
+                    JobId=1,
+                    LocationId=2,
+                    LocationSiteDate=DateTime.Now,
+                    JobLocationId=1
+                },
+                 new UpdateJobLocationInput{
+                    JobId=1,
+                    LocationId=1,
+                    LocationSiteDate=DateTime.Now,
+                    JobLocationId=2
+                 }
+
+                };
+            #endregion
+            if (input.JobLocations != null)
+            {
+                foreach (var location in input.JobLocations)
+                {
+                    if (location.JobLocationId != 0)
+                        await _jobLocationAppService.UpdateJobLocationUnit(location);
+                    else
+                    {
+                        await _jobLocationAppService.CreateJobLocationUnit(AutoMapper.Mapper.Map<UpdateJobLocationInput, CreateJobLocationInput>(location));
+                        await CurrentUnitOfWork.SaveChangesAsync();
+                    }
+                    await CurrentUnitOfWork.SaveChangesAsync();
+                }
+            }
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
                 /*Do Something when the Chart of Job is Added*/
             };
 
-            return jobDetailUnit.MapTo<JobJobCommercialUnitDto>();
+            return jobDetailUnit.MapTo<JobCommercialUnitDto>();
 
         }
 
-        
+        /// <summary>
+        /// Get JobDeatils By JobId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<JobCommercialUnitDto> GetJobDetailsByJobId(IdInput input)
+        {
+            var jobitems = await _jobDetailUnitRepository.SingleAsync(p => p.JobId == input.Id);
+            var jobLocations = await _jobLocationRepository.GetAllListAsync(p => p.JobId == input.Id);
 
+            var result = jobitems.MapTo<JobCommercialUnitDto>();
+            result.JobCommercialId = jobitems.Id;
+            result.JobLocations = new List<JobLocationUnitDto>();
+
+            for (int i = 0; i < jobLocations.Count; i++)
+            {
+                result.JobLocations.Add(jobLocations[i].MapTo<JobLocationUnitDto>());
+                result.JobLocations[i].JobLocationId = jobLocations[i].Id;
+            }
+            return result;          
+        }
     }
 }

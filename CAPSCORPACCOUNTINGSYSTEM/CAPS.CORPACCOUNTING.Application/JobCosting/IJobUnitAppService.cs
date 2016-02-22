@@ -12,5 +12,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         Task<JobUnitDto> UpdateJobUnit(UpdateJobUnitInput input);
         Task DeleteJobUnit(IdInput input);
         Task<PagedResultOutput<JobUnitDto>> GetJobUnits(GetJobInput input);
+        Task<JobUnitDto> GetJobUnitById(IdInput input);
     }
 }

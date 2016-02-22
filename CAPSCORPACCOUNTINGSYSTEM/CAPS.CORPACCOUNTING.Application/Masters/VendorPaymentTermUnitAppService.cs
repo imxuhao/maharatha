@@ -114,15 +114,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         }
         public async Task<VendorPaymentTermUnitDto> GetVendorPayTermUnitsById(IdInput input)
         {
-            var vendorPaytermQuery =
-               from vpt in _vendorPaymentTermUnitRepository.GetAll()
-               where vpt.Id == input.Id
-               select new { vpt };
-            var vendorPaytermItems = await vendorPaytermQuery.ToListAsync();
-
-            var result = vendorPaytermItems[0].vpt.MapTo<VendorPaymentTermUnitDto>();
-            result.VendorPaymentTermId  = vendorPaytermItems[0].vpt.Id;
-            return result;
+            var vendorPayTerms = await _vendorPaymentTermUnitRepository.GetAsync(input.Id);
+            return vendorPayTerms.MapTo<VendorPaymentTermUnitDto>();
         }
     }
 }

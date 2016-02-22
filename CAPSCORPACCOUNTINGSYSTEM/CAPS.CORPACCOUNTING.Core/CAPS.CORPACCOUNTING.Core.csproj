@@ -153,15 +153,16 @@
     <Compile Include="JobCosting\JobBudgetUnit.cs" />
     <Compile Include="JobCosting\JobCommercialUnit.cs" />
     <Compile Include="JobCosting\JobLocationUnit.cs" />
+    <Compile Include="JobCosting\JobLocationUnitManager.cs" />
     <Compile Include="JobCosting\JobPCConfigUnit.cs" />
     <Compile Include="JobCosting\JobPettyCashLogUnit.cs" />
     <Compile Include="JobCosting\JobPONumbersUnit.cs" />
     <Compile Include="JobCosting\JobPurchaseOrderLogUnit.cs" />
     <Compile Include="JobCosting\JobUnit.cs" />
-    <Compile Include="JobCosting\JobDeatilUnitManager.cs" />
+    <Compile Include="JobCosting\JobCommercialUnitManager.cs" />
     <Compile Include="JobCosting\RollupCenterUnitManager.cs" />
     <Compile Include="JobCosting\LinkJobsUnit.cs" />
-    <Compile Include="JobCosting\LocationSetUnit.cs" />
+    <Compile Include="Masters\LocationSetUnit.cs" />
     <Compile Include="JobCosting\RollupCenterUnit.cs" />
     <Compile Include="JobCosting\JobUnitManager.cs" />
     <Compile Include="Localization\CultureHelper.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Masters\EmployeeUnit.cs" />
     <Compile Include="Masters\CustomerUnit.cs" />
     <Compile Include="Masters\CustomerUnitManager.cs" />
+    <Compile Include="Masters\LocationSetUnitManager.cs" />
     <Compile Include="Masters\SalesRepUnitManager.cs" />
     <Compile Include="Masters\SalesRepUnit.cs" />
     <Compile Include="Masters\CustomerPaymentTermUnit.cs" />

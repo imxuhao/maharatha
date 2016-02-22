@@ -145,10 +145,11 @@
     <Compile Include="IAppFolders.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnit.cs" />
     <Compile Include="JobCosting\ARInvoiceScheduleUnit.cs" />
-    <Compile Include="JobCosting\contractTypes.cs" />
     <Compile Include="JobCosting\DirectorAccountUnit.cs" />
     <Compile Include="JobCosting\DirectorUnit.cs" />
+    <Compile Include="JobCosting\ICTRelationUnit.cs" />
     <Compile Include="JobCosting\JobAccountUnit.cs" />
+    <Compile Include="JobCosting\JobBudgetDetailsUnit.cs" />
     <Compile Include="JobCosting\JobBudgetUnit.cs" />
     <Compile Include="JobCosting\JobCommercialUnit.cs" />
     <Compile Include="JobCosting\JobLocationUnit.cs" />

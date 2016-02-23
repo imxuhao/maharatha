@@ -6,12 +6,12 @@
     <members>
         <member name="T:Abp.Configuration.Startup.AbpWebApiConfigurationExtensions">
             <summary>
-            Defines extension methods to <see cref="T:Abp.Configuration.Startup.IModuleConfigurations"/> to allow to configure ABP Web module.
+            Defines extension methods to <see cref="T:Abp.Configuration.Startup.IModuleConfigurations"/> to allow to configure Abp.Web.Api module.
             </summary>
         </member>
         <member name="M:Abp.Configuration.Startup.AbpWebApiConfigurationExtensions.AbpWebApi(Abp.Configuration.Startup.IModuleConfigurations)">
             <summary>
-            Used to configure ABP Web module.
+            Used to configure Abp.Web.Api module.
             </summary>
         </member>
         <member name="T:Abp.WebApi.Configuration.IAbpWebApiModuleConfiguration">
@@ -120,6 +120,16 @@
         <member name="P:Abp.WebApi.Client.IAbpWebApiClient.Cookies">
             <summary>
             Used to set cookies for requests.
+            </summary>
+        </member>
+        <member name="P:Abp.WebApi.Client.IAbpWebApiClient.RequestHeaders">
+            <summary>
+            Request headers.
+            </summary>
+        </member>
+        <member name="P:Abp.WebApi.Client.IAbpWebApiClient.ResponseHeaders">
+            <summary>
+            Response headers.
             </summary>
         </member>
         <member name="T:Abp.WebApi.Controllers.Dynamic.Builders.BatchApiControllerBuilder`1">
@@ -486,6 +496,11 @@
             Gets current session information.
             </summary>
         </member>
+        <member name="P:Abp.WebApi.Controllers.AbpApiController.EventBus">
+            <summary>
+            Gets the event bus.
+            </summary>
+        </member>
         <member name="P:Abp.WebApi.Controllers.AbpApiController.PermissionManager">
             <summary>
             Reference to the permission manager.
@@ -573,7 +588,7 @@
         </member>
         <member name="M:Abp.WebApi.Controllers.Dynamic.Selectors.DynamicHttpActionDescriptor.GetFilters">
             <summary>
-            The overrides the GetFilters for the action and adds the Dynamic Action filters.
+            Overrides the GetFilters for the action and adds the Dynamic Action filters.
             </summary>
             <returns> The Collection of filters.</returns>
         </member>
@@ -679,11 +694,26 @@
             Used to handle exceptions on web api controllers.
             </summary>
         </member>
+        <member name="M:Abp.WebApi.Controllers.Filters.AbpExceptionFilterAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.WebApi.Controllers.Filters.AbpExceptionFilterAttribute"/> class.
+            </summary>
+        </member>
         <member name="M:Abp.WebApi.Controllers.Filters.AbpExceptionFilterAttribute.OnException(System.Web.Http.Filters.HttpActionExecutedContext)">
             <summary>
             Raises the exception event.
             </summary>
             <param name="context">The context for the action.</param>
+        </member>
+        <member name="P:Abp.WebApi.Controllers.Filters.AbpExceptionFilterAttribute.Logger">
+            <summary>
+            Reference to the <see cref="T:Castle.Core.Logging.ILogger"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.WebApi.Controllers.Filters.AbpExceptionFilterAttribute.EventBus">
+            <summary>
+            Reference to the <see cref="T:Abp.Events.Bus.IEventBus"/>.
+            </summary>
         </member>
         <member name="T:Abp.WebApi.AbpWebApiModule">
             <summary>
@@ -855,6 +885,11 @@
             <summary>
             This class is used to use IOC system to create api controllers.
             It's used by ASP.NET system.
+            </summary>
+        </member>
+        <member name="T:Abp.WebApi.Controllers.ResultWrapperHandler">
+            <summary>
+            Wrapps Web API return values by <see cref="T:Abp.Web.Models.AjaxResponse"/>.
             </summary>
         </member>
         <member name="F:Abp.WebApi.Runtime.Caching.ClearCacheSettingNames.Password">

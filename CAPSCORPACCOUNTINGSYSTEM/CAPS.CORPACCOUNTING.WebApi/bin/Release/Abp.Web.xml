@@ -293,6 +293,21 @@
             DELETE
             </summary>
         </member>
+        <member name="F:Abp.Web.HttpVerb.Options">
+            <summary>
+            OPTIONS
+            </summary>
+        </member>
+        <member name="F:Abp.Web.HttpVerb.Trace">
+            <summary>
+            TRACE
+            </summary>
+        </member>
+        <member name="F:Abp.Web.HttpVerb.Head">
+            <summary>
+            HEAD
+            </summary>
+        </member>
         <member name="T:Abp.Web.Localization.AbpWebLocalizedMessages">
             <summary>
             This class is used to simplify getting localized messages in this assembly.

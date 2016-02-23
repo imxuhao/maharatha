@@ -24,6 +24,11 @@
             Unique name of this role.
             </summary>
         </member>
+        <member name="T:Abp.Authorization.Roles.PermissionEqualityComparer">
+            <summary>
+            Equality comparer for <see cref="T:Abp.Authorization.Permission"/> objects.
+            </summary>
+        </member>
         <member name="T:Abp.Authorization.Users.AbpUserBase">
             <summary>
             Base class for user.
@@ -76,6 +81,11 @@
         <member name="P:Abp.Authorization.Users.UserOrganizationUnit.OrganizationUnitId">
             <summary>
             Id of the <see cref="T:Abp.Organizations.OrganizationUnit"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.BackgroundJobs.BackgroundJobStore">
+            <summary>
+            Implements <see cref="T:Abp.BackgroundJobs.IBackgroundJobStore"/> using repositories.
             </summary>
         </member>
         <member name="T:Abp.Localization.ApplicationLanguage">
@@ -1256,6 +1266,16 @@
             Tenant's Id.
             </summary>
         </member>
+        <member name="T:Abp.Notifications.NotificationStore">
+            <summary>
+            Implements <see cref="T:Abp.Notifications.INotificationStore"/> using repositories.
+            </summary>
+        </member>
+        <member name="M:Abp.Notifications.NotificationStore.#ctor(Abp.Domain.Repositories.IRepository{Abp.Notifications.NotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.UserNotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.NotificationSubscriptionInfo,System.Guid})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationStore"/> class.
+            </summary>
+        </member>
         <member name="T:Abp.Organizations.IMustHaveOrganizationUnit">
             <summary>
             This interface is implemented entities those must have an <see cref="T:Abp.Organizations.OrganizationUnit"/>.
@@ -1411,13 +1431,22 @@
         </member>
         <member name="M:Abp.Organizations.IOrganizationUnitSettings.GetMaxUserMembershipCountAsync(System.Nullable{System.Int32})">
             <summary>
-            Maximum allowed organization unit membership count for a user.
+            Gets Maximum allowed organization unit membership count for a user.
             Returns value for given tenant.
             </summary>
+            <param name="tenantId">The tenant Id or null for the host.</param>
+        </member>
+        <member name="M:Abp.Organizations.IOrganizationUnitSettings.SetMaxUserMembershipCountAsync(System.Nullable{System.Int32},System.Int32)">
+            <summary>
+            Sets Maximum allowed organization unit membership count for a user.
+            </summary>
+            <param name="tenantId">The tenant Id or null for the host.</param>
+            <param name="value">Setting value.</param>
+            <returns></returns>
         </member>
         <member name="P:Abp.Organizations.IOrganizationUnitSettings.MaxUserMembershipCount">
             <summary>
-            Maximum allowed organization unit membership count for a user.
+            GetsMaximum allowed organization unit membership count for a user.
             Returns value for current tenant.
             </summary>
         </member>

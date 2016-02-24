@@ -7,6 +7,7 @@ using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Storage;
 using CAPS.CORPACCOUNTING.JobCosting;
+using CAPS.CORPACCOUNTING.Banking;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -93,25 +94,38 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public virtual IDbSet<JobPCConfigUnit> JobPCConfigUnits { get; set; }
 
         /// <summary> ARInvoiceScheduleUnit Declaration</summary>
-        public virtual IDbSet<ARInvoiceScheduleUnit> ARInvoiceScheduleUnit { get; set; }
+        public virtual IDbSet<ARInvoiceScheduleUnit> ARInvoiceScheduleUnits { get; set; }
 
         /// <summary> JobAccountUnit Declaration</summary>
-        public virtual IDbSet<JobAccountUnit> JobAccountUnit { get; set; }
+        public virtual IDbSet<JobAccountUnit> JobAccountUnits { get; set; }
 
         /// <summary> DirectorUnit Declaration</summary>
-        public virtual IDbSet<DirectorUnit> DirectorUnit { get; set; }
+        public virtual IDbSet<DirectorUnit> DirectorUnits { get; set; }
 
         /// <summary> DirectorAccountUnit Declaration</summary>
-       public virtual IDbSet<DirectorAccountUnit> DirectorAccountUnit { get; set; }
+       public virtual IDbSet<DirectorAccountUnit> DirectorAccountUnits { get; set; }
 
         /// <summary> LocationSetUnit Declaration</summary>
-        public virtual IDbSet<LocationSetUnit> LocationSetUnit { get; set; }
+        public virtual IDbSet<LocationSetUnit> LocationSetUnits { get; set; }
 
         /// <summary> ICTRelationUnit Declaration</summary>
-        public virtual IDbSet<ICTRelationUnit> ICTRelationUnit { get; set; }
+        public virtual IDbSet<ICTRelationUnit> ICTRelationUnits { get; set; }
 
         /// <summary> JobBudgetDetailsUnit Declaration</summary>
-        public virtual IDbSet<JobBudgetDetailsUnit> JobBudgetDetailsUnit { get; set; }
+        public virtual IDbSet<JobBudgetDetailsUnit> JobBudgetDetailsUnits { get; set; }
+
+        /// <summary> TypeOfCheckStockUnit Declaration</summary>
+        public virtual IDbSet<TypeOfCheckStockUnit> TypeOfCheckStockUnits { get; set; }
+
+        /// <summary> TypeOfUploadFileUnit Declaration</summary>
+        public virtual IDbSet<TypeOfUploadFileUnit> TypeOfUploadFileUnits { get; set; }
+
+        /// <summary> BatchUnit Declaration</summary>
+        public virtual IDbSet<BatchUnit> BatchUnits { get; set; }
+
+        /// <summary> BankAccountUnit Declaration</summary>
+        public virtual IDbSet<BankAccountUnit> BankAccountUnits { get; set; }
+
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

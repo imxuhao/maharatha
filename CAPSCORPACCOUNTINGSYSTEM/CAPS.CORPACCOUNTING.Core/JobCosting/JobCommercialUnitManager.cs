@@ -3,6 +3,7 @@ using Abp.Domain.Repositories;
 using Abp.Domain.Services;
 using Abp.Domain.Uow;
 using Abp.Zero;
+using Abp.Application.Services.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -45,9 +46,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="id"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public virtual async Task DeleteAsync(int id)
+        public virtual async Task DeleteAsync(IdInput input)
         {
-            await JobDetailUnitRepository.DeleteAsync(id);
+            await JobDetailUnitRepository.DeleteAsync(p=>p.JobId==input.Id);
         }
 
         /// <summary>

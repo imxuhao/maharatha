@@ -17,6 +17,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [Display(Name = "Corporates")]
         Corporates = 2
     }
+    /// <summary>
+    ///Lajit CostCenter Table Renamed as  CAPS_RollupCenter
+    /// </summary>
     [Table("CAPS_RollupCenter")]
     public class RollupCenterUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {

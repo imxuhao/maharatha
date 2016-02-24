@@ -378,6 +378,22 @@
     <Compile Include="Migrations\201602221328039_Modify_JobLocation_Tabel.Designer.cs">
       <DependentUpon>201602221328039_Modify_JobLocation_Tabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602241142559_Add_TypeOfCheckStock_Table.cs" />
+    <Compile Include="Migrations\201602241142559_Add_TypeOfCheckStock_Table.Designer.cs">
+      <DependentUpon>201602241142559_Add_TypeOfCheckStock_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602241144522_Add_TypeOfUploadFileUnit_Table.cs" />
+    <Compile Include="Migrations\201602241144522_Add_TypeOfUploadFileUnit_Table.Designer.cs">
+      <DependentUpon>201602241144522_Add_TypeOfUploadFileUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602241147523_Add_Batch_Table.cs" />
+    <Compile Include="Migrations\201602241147523_Add_Batch_Table.Designer.cs">
+      <DependentUpon>201602241147523_Add_Batch_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602241153419_Add_BankAccount_Table.cs" />
+    <Compile Include="Migrations\201602241153419_Add_BankAccount_Table.Designer.cs">
+      <DependentUpon>201602241153419_Add_BankAccount_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -591,6 +607,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602221328039_Modify_JobLocation_Tabel.resx">
       <DependentUpon>201602221328039_Modify_JobLocation_Tabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241142559_Add_TypeOfCheckStock_Table.resx">
+      <DependentUpon>201602241142559_Add_TypeOfCheckStock_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241144522_Add_TypeOfUploadFileUnit_Table.resx">
+      <DependentUpon>201602241144522_Add_TypeOfUploadFileUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241147523_Add_Batch_Table.resx">
+      <DependentUpon>201602241147523_Add_Batch_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241153419_Add_BankAccount_Table.resx">
+      <DependentUpon>201602241153419_Add_BankAccount_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

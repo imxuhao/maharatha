@@ -112,6 +112,9 @@
     <Compile Include="Authorization\Users\SwitchToLinkedAccountCacheItem.cs" />
     <Compile Include="Authorization\Users\SwitchToLinkedAccountCacheManagerExtensions.cs" />
     <Compile Include="Authorization\Users\UserLinkManager.cs" />
+    <Compile Include="Banking\BankAccountUnit.cs" />
+    <Compile Include="Banking\BatchUnit.cs" />
+    <Compile Include="Banking\TypeOfUploadFileUnit.cs" />
     <Compile Include="CORPACCOUNTINGConsts.cs" />
     <Compile Include="CORPACCOUNTINGCoreModule.cs" />
     <Compile Include="CORPACCOUNTINGDomainServiceBase.cs" />
@@ -149,6 +152,8 @@
     <Compile Include="JobCosting\DirectorUnit.cs" />
     <Compile Include="JobCosting\ICTRelationUnit.cs" />
     <Compile Include="JobCosting\JobAccountUnit.cs" />
+    <Compile Include="JobCosting\JobBudgetUnitManager.cs" />
+    <Compile Include="JobCosting\JobAccountUnitManager.cs" />
     <Compile Include="JobCosting\JobBudgetDetailsUnit.cs" />
     <Compile Include="JobCosting\JobBudgetUnit.cs" />
     <Compile Include="JobCosting\JobCommercialUnit.cs" />
@@ -162,6 +167,7 @@
     <Compile Include="JobCosting\JobCommercialUnitManager.cs" />
     <Compile Include="JobCosting\RollupCenterUnitManager.cs" />
     <Compile Include="JobCosting\LinkJobsUnit.cs" />
+    <Compile Include="Banking\TypeOfCheckStockUnit.cs" />
     <Compile Include="Masters\LocationSetUnit.cs" />
     <Compile Include="JobCosting\RollupCenterUnit.cs" />
     <Compile Include="JobCosting\JobUnitManager.cs" />

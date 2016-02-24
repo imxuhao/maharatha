@@ -3,7 +3,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class test : DbMigration
+    public partial class Modify_JobLocation_Tabel : DbMigration
     {
         public override void Up()
         {

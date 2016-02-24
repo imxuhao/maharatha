@@ -1,15 +1,16 @@
 ﻿using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
-using Abp.Domain.Uow;
 using Abp.Zero;
+using Abp.Application.Services.Dto;
+
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
     public class JobLocationUnitManager : DomainService
     {
         protected IRepository<JobLocationUnit> JobLocationUnitRepository { get; }
-
+          
         public JobLocationUnitManager(IRepository<JobLocationUnit> joblocationunitrepository)
         {
             JobLocationUnitRepository = joblocationunitrepository;
@@ -22,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="jobDetailUnit"></param>
         /// <returns></returns>       
         public virtual async Task CreateAsync(JobLocationUnit jobLocationUnit)
-        {           
+        {
             await JobLocationUnitRepository.InsertAsync(jobLocationUnit);
         }
 
@@ -35,7 +36,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {          
             await JobLocationUnitRepository.UpdateAsync(jobLocationUnit);
         }
-       
+        public virtual async Task DeleteAsync(IdInput input)
+        {
+            await JobLocationUnitRepository.DeleteAsync(p=>p.JobId==input.Id);
+        }
 
     }
 }

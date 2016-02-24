@@ -8,6 +8,9 @@ using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    /// <summary>
+    ///  Lajit JobCommercial Table Renamed as  CAPS_JobDetail
+    /// </summary>
     [Table("CAPS_JobDetail")]
     public class JobCommercialUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {

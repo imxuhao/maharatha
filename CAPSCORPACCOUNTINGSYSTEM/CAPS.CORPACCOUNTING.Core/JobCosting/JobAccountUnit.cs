@@ -59,7 +59,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public JobAccountUnit()
         {
         }
-        public JobAccountUnit(int jobid, int accountid, string description, int? rollupjobid, long? rollupaccountId, long? organizationunitid)
+        public JobAccountUnit(int jobid, long accountid, string description, int? rollupjobid, long? rollupaccountId, long? organizationunitid)
         {
             JobId = jobid;
             AccountId = accountid;

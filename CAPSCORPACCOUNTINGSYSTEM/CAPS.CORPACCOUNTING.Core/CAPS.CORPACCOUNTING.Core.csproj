@@ -112,7 +112,11 @@
     <Compile Include="Authorization\Users\SwitchToLinkedAccountCacheItem.cs" />
     <Compile Include="Authorization\Users\SwitchToLinkedAccountCacheManagerExtensions.cs" />
     <Compile Include="Authorization\Users\UserLinkManager.cs" />
+    <Compile Include="Banking\BankAccountPaymentRangeUnit.cs" />
     <Compile Include="Banking\BankAccountUnit.cs" />
+    <Compile Include="Banking\BankAccountUserUnit.cs" />
+    <Compile Include="Banking\BankRecControlUnit.cs" />
+    <Compile Include="Banking\BankStatementDetailUnit.cs" />
     <Compile Include="Banking\BatchUnit.cs" />
     <Compile Include="Banking\TypeOfUploadFileUnit.cs" />
     <Compile Include="CORPACCOUNTINGConsts.cs" />

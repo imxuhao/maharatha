@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         Task<JobLocationUnitDto> UpdateJobLocationUnit(UpdateJobLocationInput input);
         Task<ListResultOutput<JobLocationUnitDto>> GetJobLocationUnitsByJobId(IdInput input);
-
+        Task DeleteJobLocationUnit(IdInput input);
 
     }
 }

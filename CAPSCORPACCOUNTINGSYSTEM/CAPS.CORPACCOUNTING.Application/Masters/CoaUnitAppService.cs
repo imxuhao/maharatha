@@ -65,6 +65,11 @@ namespace CAPS.CORPACCOUNTING.Masters
                 return dto;
             }).ToList());
         }
+        /// <summary>
+        /// Creating COAUnit
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
 
         [UnitOfWork]
         public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
@@ -92,7 +97,11 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             return coaUnit.MapTo<CoaUnitDto>();
         }
-
+        /// <summary>
+        /// Updating COAUnit
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input)
         {
             var coaUnit = await _coaUnitRepository.GetAsync(input.CoaId);
@@ -127,9 +136,27 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             return coaUnit.MapTo<CoaUnitDto>();
         }
+        /// <summary>
+        /// Delete COAUnit by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task DeleteCoaUnit(IdInput input)
         {
             await _coaunitManager.DeleteAsync(input.Id);
+        }
+
+        /// <summary>
+        /// Get COAUnit by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<CoaUnitDto> GetCoaUnitById(IdInput input)
+        {
+            CoaUnit coaUnit = await _coaUnitRepository.GetAsync(input.Id);
+            CoaUnitDto result = coaUnit.MapTo<CoaUnitDto>();
+            result.CoaId = coaUnit.Id;
+            return result;
         }
     }
 }

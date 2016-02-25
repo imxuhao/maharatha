@@ -9,9 +9,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         Task<VendorUnitDto> CreateVendorUnit(CreateVendorUnitInput input);
         Task<VendorUnitDto> UpdateVendorUnit(UpdateVendorUnitInput input);
-        Task DeleteVendorUnit(IdInput input);
-        Task InsertVendorData(CreateVendorUnitInput input);
-        Task UpdatedVendorData(UpdateVendorUnitInput input);
+        Task DeleteVendorUnit(IdInput input);       
         Task<VendorUnitDto> GetVendorUnitsById(IdInput input);
         Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(GetVendorInput input);
     }

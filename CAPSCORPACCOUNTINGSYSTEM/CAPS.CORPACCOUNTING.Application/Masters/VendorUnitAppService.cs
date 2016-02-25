@@ -13,9 +13,11 @@ using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class VendorUnitAppService : CORPACCOUNTINGServiceBase, IVendorUnitAppService
     {
         private readonly VendorUnitManager _vendorUnitManager;
@@ -39,66 +41,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             _vendorPaytermRepository = vendorPaytermRepository;
         }
 
-        public IEventBus EventBus { get; set; }
-
-        /// <summary>
-        /// This method is for testing to Insert data in vendor  with 2 addresses.After UI development we need to remove this method.
-        /// using this method we are calling CreateVendorUnit to insert vendor and Addresss Data
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [UnitOfWork]
-        public async Task InsertVendorData(CreateVendorUnitInput input)
-        {
-            CreateAddressUnitInput vendorAddr1 = new CreateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Vendor,
-                AddressTypeId = TypeofAddress.PrimaryContact,
-                IsPrimary = true,
-                Line1 = "Address1"
-            };
-            CreateAddressUnitInput vendorAddr2 = new CreateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Vendor,
-                AddressTypeId = TypeofAddress.Home,
-                Line1 = "Address2"
-            };
-
-            input.InputAddress = new List<CreateAddressUnitInput> {vendorAddr1, vendorAddr2};
-            await CreateVendorUnit(input);
-        }
-        /// <summary>
-        /// This method is  for testing to update vendor data with addresses.After UI development we need to remove this method.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [UnitOfWork]
-        public async Task UpdatedVendorData(UpdateVendorUnitInput input)
-        {
-
-            UpdateAddressUnitInput vendorAddr1 = new UpdateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Vendor,
-                AddressTypeId = TypeofAddress.PrimaryContact,
-                Email = "test@gmail.com",
-                Website = "https://www.google.co.in",
-                AddressId = 1,
-                ObjectId = input.VendorId,
-                IsPrimary = true
-            };
-
-            UpdateAddressUnitInput vendorAddr2 = new UpdateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Vendor,
-                AddressTypeId = TypeofAddress.Business,
-                Email = "test1@gmail.com",
-                AddressId = 2,
-                ObjectId = input.VendorId
-            };
-
-            input.InputAddress = new List<UpdateAddressUnitInput> {vendorAddr1, vendorAddr2};
-            await UpdateVendorUnit(input);
-        }
+        public IEventBus EventBus { get; set; }        
 
         /// <summary>
         /// Creating the Vendor with Addresses
@@ -189,25 +132,15 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<VendorUnitDto> GetVendorUnitsById(IdInput input)
         {
-            var vendorquery =
-               from vendor in _vendorUnitRepository.GetAll()
-               where vendor.Id == input.Id
-               select new { vendor };
-            var vendorItems = await vendorquery.ToListAsync();
-            var addressquery =
-                          from addr in _addresRepository.GetAll()
-                          where addr.ObjectId == input.Id && addr.TypeofObjectId == TypeofObject.Vendor
-                          select new { addr };
-
-            var addressitems = await addressquery.ToListAsync();
-
-            var result = vendorItems[0].vendor.MapTo<VendorUnitDto>();
-            result.VendorId = vendorItems[0].vendor.Id;
+            var vendorItem = await _vendorUnitRepository.GetAsync(input.Id);
+            var addressitems = await  _addresRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Vendor);
+            var result = vendorItem.MapTo<VendorUnitDto>();
+            result.VendorId = vendorItem.Id;
             result.Address = new Collection<AddressUnitDto>();
             for (int i = 0; i < addressitems.Count; i++)
             {
-                result.Address.Add(addressitems[i].addr.MapTo<AddressUnitDto>());
-                result.Address[i].AddressId = addressitems[i].addr.Id;
+                result.Address.Add(addressitems[i].MapTo<AddressUnitDto>());
+                result.Address[i].AddressId = addressitems[i].Id;
             }
             return result;
         }
@@ -356,8 +289,6 @@ namespace CAPS.CORPACCOUNTING.Masters
             vendorUnit.ACHWireToBankName = input.ACHWireToBankName;
             vendorUnit.ACHWireToBeneficiary = input.ACHWireToBeneficiary;
             vendorUnit.IsApproved = input.IsApproved;
-
-
             vendorUnit.OrganizationUnitId = input.OrganizationUnitId;
             vendorUnit.IsActive = input.IsActive;
 

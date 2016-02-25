@@ -394,6 +394,22 @@
     <Compile Include="Migrations\201602241153419_Add_BankAccount_Table.Designer.cs">
       <DependentUpon>201602241153419_Add_BankAccount_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602250647314_Add_BankAccountPaymentRange_Table.cs" />
+    <Compile Include="Migrations\201602250647314_Add_BankAccountPaymentRange_Table.Designer.cs">
+      <DependentUpon>201602250647314_Add_BankAccountPaymentRange_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602250648457_Add_BankAccountUser_Table.cs" />
+    <Compile Include="Migrations\201602250648457_Add_BankAccountUser_Table.Designer.cs">
+      <DependentUpon>201602250648457_Add_BankAccountUser_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602250650042_Add_BankRecControl_Table.cs" />
+    <Compile Include="Migrations\201602250650042_Add_BankRecControl_Table.Designer.cs">
+      <DependentUpon>201602250650042_Add_BankRecControl_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602250651113_Add_BankStatementDetail_Table.cs" />
+    <Compile Include="Migrations\201602250651113_Add_BankStatementDetail_Table.Designer.cs">
+      <DependentUpon>201602250651113_Add_BankStatementDetail_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -619,6 +635,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602241153419_Add_BankAccount_Table.resx">
       <DependentUpon>201602241153419_Add_BankAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602250647314_Add_BankAccountPaymentRange_Table.resx">
+      <DependentUpon>201602250647314_Add_BankAccountPaymentRange_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602250648457_Add_BankAccountUser_Table.resx">
+      <DependentUpon>201602250648457_Add_BankAccountUser_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602250650042_Add_BankRecControl_Table.resx">
+      <DependentUpon>201602250650042_Add_BankRecControl_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602250651113_Add_BankStatementDetail_Table.resx">
+      <DependentUpon>201602250651113_Add_BankStatementDetail_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

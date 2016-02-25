@@ -1,9 +1,8 @@
 ﻿using Abp.Application.Services.Dto;
-using CAPS.CORPACCOUNTING.Masters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+
 
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto

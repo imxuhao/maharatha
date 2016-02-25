@@ -10,9 +10,11 @@ using System.Linq.Dynamic;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class JobUnitAppService : CORPACCOUNTINGServiceBase, IJobUnitAppService
     {
         private readonly JobUnitManager _jobUnitManager;
@@ -21,9 +23,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<JobCommercialUnit> _jobDetailUnitRepository;
         private readonly IRepository<EmployeeUnit> _employeeUnitRepository;
         private readonly IRepository<CustomerUnit> _customerUnitRepository;
+        private readonly IJobCommercialAppService _jobCommercialAppService;
 
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IUnitOfWorkManager unitOfWorkManager, IRepository<JobCommercialUnit> jobDetailUnitRepository,
-            IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository)
+            IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -31,6 +34,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _jobDetailUnitRepository = jobDetailUnitRepository;
             _employeeUnitRepository = employeeUnitRepository;
             _customerUnitRepository = customerUnitRepository;
+            _jobCommercialAppService = jobCommercialAppService;
         }
         /// <summary>
         /// To create the Job
@@ -95,8 +99,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [UnitOfWork]
         public async Task DeleteJobUnit(IdInput input)
         {
+            await _jobCommercialAppService.DeleteJobDetailUnit(input);
             await _jobUnitManager.DeleteAsync(input.Id);
         }
         /// <summary>
@@ -107,13 +113,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<PagedResultOutput<JobUnitDto>> GetJobUnits(GetJobInput input)
         {
             var query = from job in _jobUnitRepository.GetAll()
-                        join jobdetail in _jobDetailUnitRepository.GetAll() on job.Id equals jobdetail.JobId
-                             into temp from rt in temp.DefaultIfEmpty()
-                        join emp in _employeeUnitRepository.GetAll() on rt.DirectorEmployeeId equals emp.Id
+                        join jobdetail in _jobDetailUnitRepository.GetAll() on job.Id equals jobdetail.JobId                            
+                        join emp in _employeeUnitRepository.GetAll() on jobdetail.DirectorEmployeeId equals emp.Id
                                  into temp1 from em in temp1.DefaultIfEmpty()
-                        join cust in _customerUnitRepository.GetAll() on rt.AgencyId equals cust.Id
+                        join cust in _customerUnitRepository.GetAll() on jobdetail.AgencyId equals cust.Id
                                 into tempcust  from cs in tempcust.DefaultIfEmpty()
-                        select new {Job= rt.Jobs,Jobdetail=rt ,Director= em.LastName,Agency=cs.LastName};
+                        select new {Job= job,Jobdetail= jobdetail, Director= em.LastName,Agency=cs.LastName};
             query = query
                 .WhereIf(input.OrganizationUnitId != null, item => item.Job.OrganizationUnitId == input.OrganizationUnitId)
                 .WhereIf(!input.Caption.IsNullOrWhiteSpace(), item => item.Job.Caption.Contains(input.Caption))
@@ -133,17 +138,21 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             return new PagedResultOutput<JobUnitDto>(resultCount, results.Select(item =>
             {
                 var dto = item.Job.MapTo<JobUnitDto>();
-                dto.JobDetails = item.Jobdetail;
+                dto.JobId = item.Job.Id;
+                dto.JobDetails = item.Jobdetail.MapTo<JobCommercialUnitDto>();                
+                if(item.Director !=null)
                 dto.Director = item.Director;
-                dto.Agency = item.Agency;
+                if (item.Agency != null)
+                    dto.Agency = item.Agency;
                 return dto;
             }).ToList());
         }
 
         public async Task<JobUnitDto> GetJobUnitById(IdInput input) {
 
-            var jobitems = await _jobUnitRepository.GetAsync(input.Id);
-            var result = jobitems.MapTo<JobUnitDto>();
+            JobUnit jobitem = await _jobUnitRepository.GetAsync(input.Id);
+            JobUnitDto result = jobitem.MapTo<JobUnitDto>();
+            result.JobId = jobitem.Id;
             return result;
 
         }

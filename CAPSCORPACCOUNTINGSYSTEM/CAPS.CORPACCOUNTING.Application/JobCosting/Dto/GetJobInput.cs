@@ -19,9 +19,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public string Director { get; set; }
         public string Agency { get; set; }
         public ProjectStatus? TypeOfJobStatusId { get; set; } = null;
-        
 
-        public void Normalize()     
+
+        public void Normalize()
         {
             if (Sorting.IsNullOrWhiteSpace())
             {
@@ -31,14 +31,26 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
             {
                 Sorting = "Job." + Sorting;
             }
+            else
             if (Sorting.IndexOf("ProductName", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
                 Sorting = "Jobdetail." + Sorting;
             }
+            else
             if (Sorting.IndexOf("JobNumber", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
                 Sorting = "Job." + Sorting;
-            }           
+            }
+            else
+            if (Sorting.IndexOf("Director", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Director." + Sorting;
+            }
+            else
+            if (Sorting.IndexOf("Agency", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                Sorting = "Agency." + Sorting;
+            }
             else
             {
                 Sorting = "Job." + Sorting;

@@ -8,9 +8,11 @@ using Abp.AutoMapper;
 using System.Linq;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class CustomerPaymentTermUnitAppService : CORPACCOUNTINGServiceBase, ICustomerPaymentTermUnitAppService
     {
         private readonly CustomerPaymentTermUnitManager _customerPaymentTermUnitManager;
@@ -108,14 +110,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<CustomerPaymentTermUnitDto> GetCustomerPayTermUnitsById(IdInput input)
         {
-            var customerPaytermQuery =
-               from cpt in _customerPaymentTermUnitRepository.GetAll()
-               where cpt.Id == input.Id
-               select new { cpt };
-            var customerPaytermItems = await customerPaytermQuery.ToListAsync();
-
-            var result = customerPaytermItems[0].cpt.MapTo<CustomerPaymentTermUnitDto>();
-            result.CustomerPaymentTermId = customerPaytermItems[0].cpt.Id;
+            CustomerPaymentTermUnit customerPaytermUnit = await _customerPaymentTermUnitRepository.GetAsync(input.Id);
+            CustomerPaymentTermUnitDto result = customerPaytermUnit.MapTo<CustomerPaymentTermUnitDto>();
+            result.CustomerPaymentTermId = customerPaytermUnit.Id;
             return result;
         }
     }

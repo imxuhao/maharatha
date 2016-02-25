@@ -14,5 +14,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         Task<AccountUnitDto> UpdateAccountUnit(UpdateAccountUnitInput input);
         Task<PagedResultOutput<AccountUnitDto>> GetAccountUnitsByCoaId(GetAccountInput input);
         Task DeleteAccountUnit(IdInput<long> input);
+        Task<AccountUnitDto> GetAccountUnitsById(IdInput input);
     }
 }

@@ -83,7 +83,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         ///     Initializes a new instance of the <see cref="AddressUnit" /> class.
         /// </summary>
-        public AddressUnit(int objectid, TypeofObject typeofobjectid, TypeofAddress addresstypeid,
+        public AddressUnit(int objectid, TypeofObject typeofobjectid, TypeofAddress addresstypeid,string fax,
             string contactnumber = null, string line1 = null, string line2 = null, string line3 = null,
             string line4 = null, string city = null, string state = null,
             string country = null, string postalcode = null, string email = null, string phone1 = null,
@@ -108,7 +108,9 @@ namespace CAPS.CORPACCOUNTING.Masters
             Phone2Extension = phone2Extension;
             Website = website;
             IsPrimary = isprimary;
+            State = state;
             OrganizationUnitId = organizationunitid;
+            Fax = fax;
 
         }
 

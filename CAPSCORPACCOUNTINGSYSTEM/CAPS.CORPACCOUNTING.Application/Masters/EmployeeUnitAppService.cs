@@ -11,9 +11,11 @@ using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class EmployeeUnitAppService : CORPACCOUNTINGServiceBase, IEmployeeUnitAppService
     {
         private readonly EmployeeUnitManager _employeeUnitManager;
@@ -32,6 +34,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             _addressAppService = addressAppService;
             _addressUnitRepository = addressRepository;
         }
+        /// <summary>
+        /// Delete the Employee abd EmployeeAddresses
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task DeleteEmployeeUnit(IdInput input)
         {
@@ -42,70 +49,10 @@ namespace CAPS.CORPACCOUNTING.Masters
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnit(dto);
-        }
-        #region TestMethods After UI development We need to Remove this Region
-        /// <summary>
-        /// This method is for testing to Insert data in Employee  with 2 addresses.After UI development we need to remove this method.
-        /// using this method we are calling CreateEmployeeUnit to insert Employee and Addresss Data
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [UnitOfWork]
-        public async Task InsertEmployeeData(CreateEmployeeUnitInput input)
-        {
-            CreateAddressUnitInput empAddr1 = new CreateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Emp,
-                AddressTypeId = TypeofAddress.PrimaryContact,
-                IsPrimary = true,
-                Line1 = "Address1Employee"
-            };
-            CreateAddressUnitInput empAddr2 = new CreateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Emp,
-                AddressTypeId = TypeofAddress.Home,
-                Line1 = "Address2Employee"
-            };
-
-            input.InputAddresses = new List<CreateAddressUnitInput> { empAddr1, empAddr2};
-            await CreateEmployeeUnit(input);
-        }
-        /// <summary>
-        /// This method is  for testing to update Employee data with addresses.After UI development we need to remove this method.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-
-        [UnitOfWork]
-        public async Task UpdatedEmployeeData(UpdateEmployeeUnitInput input)
-        {
-
-            UpdateAddressUnitInput employeeAddr1 = new UpdateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Emp,
-                AddressTypeId = TypeofAddress.PrimaryContact,
-                Email = "test@gmail.com",
-                AddressId = 1,
-                ObjectId = input.EmployeeId,
-                IsPrimary = true
-            };
-
-            UpdateAddressUnitInput employeeAddr2 = new UpdateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Emp,
-                AddressTypeId = TypeofAddress.Business,
-                Email = "test1@gmail.com",
-                AddressId = 2,
-                ObjectId = input.EmployeeId
-            };
-
-            input.InputAddresses = new List<UpdateAddressUnitInput> { employeeAddr1, employeeAddr2};
-            await UpdateEmployeeUnit(input);
-        }
-        #endregion
+        }       
 
         /// <summary>
-        /// Creates Employee with Addresses
+        /// Creates the Employee with Addresses
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -148,7 +95,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<PagedResultOutput<EmployeeUnitDto>> GetEmployeeUnits(GetEmployeeInput input)
         {
-            var query = CreateVendorQuery(input);
+            var query = CreateEmployeeQuery(input);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
@@ -160,7 +107,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         }
 
         /// <summary>
-        /// Converting vendor to outputdto of a VendorList
+        /// Converting Employee to outputdto of a EmployeeList
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
@@ -181,7 +128,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 }).ToList();
         }
 
-        private IQueryable<EmployeeAndAddressDto> CreateVendorQuery(GetEmployeeInput input)
+        private IQueryable<EmployeeAndAddressDto> CreateEmployeeQuery(GetEmployeeInput input)
         {
             var query = from emp in _employeeUnitRepository.GetAll()
                         join addr in _addressUnitRepository.GetAll() on emp.Id equals addr.ObjectId
@@ -276,28 +223,16 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<EmployeeUnitDto> GetEmployeeUnitsById(IdInput input)
         {
-            var empquery =
-               from emp in _employeeUnitRepository.GetAll()
-               where emp.Id == input.Id
-               select new { emp };
-            var empitems = await empquery.ToListAsync();
-
-            var addressquery =
-               from addr in _addressUnitRepository.GetAll()
-               where addr.ObjectId == input.Id && addr.TypeofObjectId == TypeofObject.Emp
-               select new { addr };
-
-            var addressitems = await addressquery.ToListAsync();
-
-            var result = empitems[0].emp.MapTo<EmployeeUnitDto>();
-            result.EmployeeId = empitems[0].emp.Id;
-            result.Addresses = new Collection<AddressUnitDto>();
+            var empItem = await _employeeUnitRepository.GetAsync(input.Id);
+            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Emp);
+            var result = empItem.MapTo<EmployeeUnitDto>();
+            result.EmployeeId = empItem.Id;
+            result.Addresses = new Collection<AddressUnitDto>();            
             for (int i = 0; i < addressitems.Count; i++)
             {
-                result.Addresses.Add(addressitems[i].addr.MapTo<AddressUnitDto>());
-                result.Addresses[i].AddressId = addressitems[i].addr.Id;
+                result.Addresses.Add(addressitems[i].MapTo<AddressUnitDto>());
+                result.Addresses[i].AddressId = addressitems[i].Id;
             }
-
             return result;
         }
     }

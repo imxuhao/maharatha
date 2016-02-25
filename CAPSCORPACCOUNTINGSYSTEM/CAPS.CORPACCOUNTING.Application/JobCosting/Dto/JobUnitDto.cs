@@ -11,13 +11,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public int JobId { get; set; }
 
         /// <summary>Gets or sets the JobNumber field. </summary>
-        [Required]
-        [StringLength(JobUnit.MaxJobNumberLength)]
         public string JobNumber { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>
-        [StringLength(JobUnit.MaxCaptionLength)]
-        [Required]
         public string Caption { get; set; }
 
         /// <summary>Gets or sets the RollupCenterId field. </summary>
@@ -62,7 +58,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        public JobCommercialUnit JobDetails { get; set; }
+        public JobCommercialUnitDto JobDetails { get; set; }
         public string DetailReport { get; set; } = "Detail Report";
 
         public string Director { get; set; }

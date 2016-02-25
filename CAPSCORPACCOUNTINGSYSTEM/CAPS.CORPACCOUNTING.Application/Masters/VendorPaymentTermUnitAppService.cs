@@ -10,9 +10,11 @@ using Abp.Events.Bus.Entities;
 using System.Linq;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class VendorPaymentTermUnitAppService : CORPACCOUNTINGServiceBase, IVendorPaymentTermUnitAppService
     {
         private readonly VendorPaymentTermUnitManager _vendorPaymentTermUnitManager;
@@ -27,6 +29,12 @@ namespace CAPS.CORPACCOUNTING.Masters
             _unitOfWorkManager = unitOfWorkManager;
         }
         public IEventBus EventBus { get; set; }
+
+        /// <summary>
+        /// Creating the VendorPaymentTerm
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task<VendorPaymentTermUnitDto> CreateVendorPaymentTermUnit(CreateVendorPaymentTermUnitInput input)
         {
@@ -52,12 +60,20 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             return vendorPaymentTermUnit.MapTo<VendorPaymentTermUnitDto>();
         }
-
+        /// <summary>
+        /// Deleting the VendorPaymentTerm by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task DeleteVendorPaymentTermUnit(IdInput input)
         {
             await _vendorPaymentTermUnitManager.DeleteAsync(input.Id);
         }
-
+        /// <summary>
+        /// Get the VendorPaymentTerms for grid with filtering and sorting
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<PagedResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(GetVendorPayTermsInput input)
         {
             var query =
@@ -81,6 +97,11 @@ namespace CAPS.CORPACCOUNTING.Masters
                 }).ToList());
         }
 
+        /// <summary>
+        /// Updating the VendorPaymentTerms by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<VendorPaymentTermUnitDto> UpdateVendorPaymentTermUnit(UpdateVendorPaymentTermUnitInput input)
         {
             var vendorPaymentTermUnit = await _vendorPaymentTermUnitRepository.GetAsync(input.VendorPaymentTermId);
@@ -112,10 +133,18 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             return vendorPaymentTermUnit.MapTo<VendorPaymentTermUnitDto>();
         }
+
+        /// <summary>
+        /// Getting the VendorPaymentTerm by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<VendorPaymentTermUnitDto> GetVendorPayTermUnitsById(IdInput input)
         {
             var vendorPayTerms = await _vendorPaymentTermUnitRepository.GetAsync(input.Id);
-            return vendorPayTerms.MapTo<VendorPaymentTermUnitDto>();
+            VendorPaymentTermUnitDto result = vendorPayTerms.MapTo<VendorPaymentTermUnitDto>();
+            result.VendorPaymentTermId = vendorPayTerms.Id;
+            return result;
         }
     }
 }

@@ -12,5 +12,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         Task<RollupCenterUnitDto> UpdateRollupCenterUnit(UpdateRollupCenterUnitInput input);
         Task DeleteRollupCenterUnit(IdInput input);
         Task<PagedResultOutput<RollupCenterUnitDto>> GetRollupCenterUnits(GetRollupCenterInput input);
+        Task<RollupCenterUnitDto> GetRollupCenterUnitById(IdInput input);
     }
 }

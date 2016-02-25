@@ -78,7 +78,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     return dto;
                 }).ToList());
         }
-
+        /// <summary>
+        /// Crating the AccountUnit
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task<AccountUnitDto> CreateAccountUnit(CreateAccountUnitInput input)
         {
@@ -104,6 +108,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
 
             return accountUnit.MapTo<AccountUnitDto>();
         }
+        /// <summary>
+        /// Updating the AccountUnit
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<AccountUnitDto> UpdateAccountUnit(UpdateAccountUnitInput input)
         {
             var accountUnit = await _accountUnitRepository.GetAsync(input.AccountId);
@@ -149,10 +158,29 @@ namespace CAPS.CORPACCOUNTING.Accounts
 
             return accountUnit.MapTo<AccountUnitDto>();
         }
+        /// <summary>
+        /// Deleting the Account by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task DeleteAccountUnit(IdInput<long> input)
         {
             await _accountUnitManager.DeleteAsync(input.Id);
+        }
+
+        /// <summary>
+        /// Get the AccountDetails by AccountId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<AccountUnitDto> GetAccountUnitsById(IdInput input)
+        {
+            AccountUnit accountUnit = await _accountUnitRepository.GetAsync(input.Id);
+            AccountUnitDto result = accountUnit.MapTo<AccountUnitDto>();
+            result.AccountId = accountUnit.Id;
+            return result;
+                
         }
     }
 }

@@ -6,16 +6,18 @@ using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using System.Linq;
 using System.Data.Entity;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class AddressUnitAppService : CORPACCOUNTINGServiceBase, IAddressUnitAppService
     {
         private readonly AddressUnitManager _addressUnitManager;
-        private readonly IRepository<AddressUnit,long> _addressUnitRepository;
+        private readonly IRepository<AddressUnit, long> _addressUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public AddressUnitAppService(AddressUnitManager addressUnitManager, IRepository<AddressUnit,long> addressUnitRepository,
+        public AddressUnitAppService(AddressUnitManager addressUnitManager, IRepository<AddressUnit, long> addressUnitRepository,
             IUnitOfWorkManager unitOfWorkManager)
         {
             _addressUnitManager = addressUnitManager;
@@ -24,15 +26,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         }
 
         [UnitOfWork]
-        public async Task<AddressUnitDto> CreateAddressUnit(
-            CreateAddressUnitInput input)
+        public async Task<AddressUnitDto> CreateAddressUnit(CreateAddressUnitInput input)
         {
-            var addressUnit = new AddressUnit(objectid: input.ObjectId, typeofobjectid: input.TypeofObjectId,
-                addresstypeid: input.AddressTypeId, contactnumber: input.ContactNumber, line1: input.Line1,
-                line2: input.Line2,
-                line3: input.Line3, line4: input.Line4, city: input.City, state: input.State, country: input.Country,
-                postalcode: input.PostalCode, email: input.Email, phone1: input.Phone1, phone2: input.Phone2,
-                phone1Extension: input.Phone1Extension, phone2Extension: input.Phone2Extension, website: input.Website,
+            var addressUnit = new AddressUnit(objectid: input.ObjectId, typeofobjectid: input.TypeofObjectId, addresstypeid: input.AddressTypeId,
+                contactnumber: input.ContactNumber, line1: input.Line1, line2: input.Line2, fax: input.Fax, line3: input.Line3, line4: input.Line4,
+                city: input.City, state: input.State, country: input.Country, postalcode: input.PostalCode, email: input.Email, phone1: input.Phone1,
+                phone2: input.Phone2, phone1Extension: input.Phone1Extension, phone2Extension: input.Phone2Extension, website: input.Website,
                 isprimary: input.IsPrimary, organizationunitid: input.OrganizationUnitId);
             await _addressUnitManager.CreateAsync(addressUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -52,7 +51,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         au =>
                             au.TypeofObjectId == input.TypeofObjectId &&
                             (input.OrganizationUnitId == null || au.OrganizationUnitId == input.OrganizationUnitId))
-                    .Select(au => new {au});
+                    .Select(au => new { au });
             var items = await query.ToListAsync();
 
             return new ListResultOutput<AddressUnitDto>(
@@ -90,6 +89,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             addressUnit.Website = input.Website;
             addressUnit.OrganizationUnitId = input.OrganizationUnitId;
             addressUnit.IsPrimary = input.IsPrimary;
+            addressUnit.Fax = input.Fax;
             #endregion
 
             await _addressUnitManager.UpdateAsync(addressUnit);

@@ -4,9 +4,11 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.AutoMapper;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class LocationSetUnitAppService : CORPACCOUNTINGServiceBase, ILocationSetUnitAppService
     {
         private readonly LocationSetUnitManager _locationSetUnitManager;
@@ -35,7 +37,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<LocationSetUnitDto> GetLocationSetUnitsById(IdInput input)
         {
             var locationSet =await _locationSetUnitRepository.GetAsync(input.Id);
-            return locationSet.MapTo<LocationSetUnitDto>();
+            LocationSetUnitDto result = locationSet.MapTo<LocationSetUnitDto>();
+            result.LocationSetId = locationSet.Id;
+            return result;
         }
 
         public async Task<LocationSetUnitDto> UpdateLocationSetUnit(UpdateLocationSetUnitInput input)

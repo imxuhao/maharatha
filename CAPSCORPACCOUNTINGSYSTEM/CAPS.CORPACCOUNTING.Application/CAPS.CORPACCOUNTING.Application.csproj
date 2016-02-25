@@ -188,6 +188,14 @@
     <Compile Include="Interceptors\DTOInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\DTOInterceptors.cs" />
     <Compile Include="Interceptors\InternalAsyncHelper.cs" />
+    <Compile Include="JobCosting\Dto\CreateJobAccountUnitInput.cs" />
+    <Compile Include="JobCosting\Dto\CreateJobBudgetUnitInput.cs" />
+    <Compile Include="JobCosting\Dto\JobAccountUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\JobBudgetUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\UpdateJobAccountUnitInput.cs" />
+    <Compile Include="JobCosting\Dto\UpdateJobBudgetUnitInput.cs" />
+    <Compile Include="JobCosting\IJobAccountUnitAppService.cs" />
+    <Compile Include="JobCosting\IJobBudgetUnitAppService.cs" />
     <Compile Include="JobCosting\IJobLocationAppService.cs" />
     <Compile Include="JobCosting\Dto\JobLocationUnitDto.cs" />
     <Compile Include="JobCosting\Dto\UpdateJobLocationInput.cs" />
@@ -206,6 +214,8 @@
     <Compile Include="JobCosting\IJobCommercialAppService.cs" />
     <Compile Include="JobCosting\IRollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\IJobUnitAppService.cs" />
+    <Compile Include="JobCosting\JobAccountUnitAppService.cs" />
+    <Compile Include="JobCosting\JobBudgetUnitAppService.cs" />
     <Compile Include="JobCosting\JobCommercialAppService.cs" />
     <Compile Include="JobCosting\JobLocationAppService.cs" />
     <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />

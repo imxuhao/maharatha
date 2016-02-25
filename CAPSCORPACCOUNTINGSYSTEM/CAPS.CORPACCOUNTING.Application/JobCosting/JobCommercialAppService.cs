@@ -6,9 +6,11 @@ using Abp.AutoMapper;
 using Abp.Application.Services.Dto;
 using System.Collections.Generic;
 using System;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class JobCommercialAppService : CORPACCOUNTINGServiceBase, IJobCommercialAppService
     {
         private readonly JobCommercialUnitManager _jobDetailUnitManager;
@@ -34,23 +36,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         [UnitOfWork]
         public async Task<JobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input)
-        {
-            #region This is only for testing Purpose, once UI is Developed we need to Remove this Region
-            input.JobLocations = new List<CreateJobLocationInput> {
-                new CreateJobLocationInput
-            {
-                JobId=1,
-                LocationId=3,
-                LocationSiteDate=DateTime.Now
-            },
-             new CreateJobLocationInput{
-                JobId=1,
-                LocationId=2,
-                LocationSiteDate=DateTime.Now
-             }
-
-            };
-            #endregion
+        {          
 
             var jobDetailUnit = new JobCommercialUnit(jobid: input.JobId, biddate: input.BidDate, awarddate: input.AwardDate, shootingdate: input.ShootingDate,
                 wrapdate: input.WrapDate, roughcutdate: input.RoughCutDate, airdate: input.AirDate, dateclosed: input.DateClosed,
@@ -97,7 +83,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task DeleteJobDetailUnit(IdInput input)
         {
-            await _jobDetailUnitRepository.DeleteAsync(input.Id);
+            await _jobLocationAppService.DeleteJobLocationUnit(input);
+            await _jobDetailUnitManager.DeleteAsync(input);
         }
 
         /// <summary>
@@ -188,25 +175,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             await CurrentUnitOfWork.SaveChangesAsync();
 
-
-            #region This is only for testing Purpose, once UI is Developed we need to Remove this Region
-            input.JobLocations = new List<UpdateJobLocationInput> {
-                    new UpdateJobLocationInput
-                {
-                    JobId=1,
-                    LocationId=2,
-                    LocationSiteDate=DateTime.Now,
-                    JobLocationId=1
-                },
-                 new UpdateJobLocationInput{
-                    JobId=1,
-                    LocationId=1,
-                    LocationSiteDate=DateTime.Now,
-                    JobLocationId=2
-                 }
-
-                };
-            #endregion
             if (input.JobLocations != null)
             {
                 foreach (var location in input.JobLocations)
@@ -215,6 +183,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         await _jobLocationAppService.UpdateJobLocationUnit(location);
                     else
                     {
+                        AutoMapper.Mapper.CreateMap<UpdateJobLocationInput, CreateJobLocationInput>();
                         await _jobLocationAppService.CreateJobLocationUnit(AutoMapper.Mapper.Map<UpdateJobLocationInput, CreateJobLocationInput>(location));
                         await CurrentUnitOfWork.SaveChangesAsync();
                     }

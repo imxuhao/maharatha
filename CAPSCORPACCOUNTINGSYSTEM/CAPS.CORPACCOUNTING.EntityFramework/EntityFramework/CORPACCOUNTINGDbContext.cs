@@ -126,6 +126,18 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> BankAccountUnit Declaration</summary>
         public virtual IDbSet<BankAccountUnit> BankAccountUnits { get; set; }
 
+        /// <summary> BankAccountPaymentRangeUnit Declaration</summary>
+        public virtual IDbSet<BankAccountPaymentRangeUnit> BankAccountPaymentRanges { get; set; }
+
+        /// <summary> BankAccountUserUnit Declaration</summary>
+        public virtual IDbSet<BankAccountUserUnit> BankAccountUsers { get; set; }
+
+        /// <summary> BankRecControlUnit Declaration</summary>
+        public virtual IDbSet<BankRecControlUnit> BankRecControls { get; set; }
+
+        /// <summary> BankStatementDetailUnit Declaration</summary>
+        public virtual IDbSet<BankStatementDetailUnit> BankStatementDetails { get; set; }
+
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

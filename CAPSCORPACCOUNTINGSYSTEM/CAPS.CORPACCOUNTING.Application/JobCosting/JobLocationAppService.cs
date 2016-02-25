@@ -4,11 +4,12 @@ using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using Abp.Application.Services.Dto;
-using System;
 using System.Linq;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class JobLocationAppService : CORPACCOUNTINGServiceBase, IJobLocationAppService
     {
         private readonly JobLocationUnitManager _jobLocationUnitManager;
@@ -59,8 +60,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     dto.JobLocationId = item.Id;
                     return dto;
                 }).ToList());
+        }
 
-
+        public async Task DeleteJobLocationUnit(IdInput input)
+        {
+            await _jobLocationUnitManager.DeleteAsync(input);
         }
     }
 }

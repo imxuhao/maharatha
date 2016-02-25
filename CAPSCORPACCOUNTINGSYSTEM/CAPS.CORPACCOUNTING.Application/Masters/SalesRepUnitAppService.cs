@@ -8,9 +8,11 @@ using System.Linq;
 using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class SalesRepUnitAppService : CORPACCOUNTINGServiceBase, ISalesRepUnitAppService
     {
         private readonly SalesRepUnitManager _salesRepUnitManager;
@@ -24,7 +26,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             _salesRepUnitRepository = salesRepUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
         }
-
+        /// <summary>
+        /// Creating the SalesRepresentative 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task<SalesRepUnitDto> CreateSalesRepUnit(
             CreateSalesRepUnitInput input)
@@ -35,12 +41,20 @@ namespace CAPS.CORPACCOUNTING.Masters
             await CurrentUnitOfWork.SaveChangesAsync();
             return salesRepUnit.MapTo<SalesRepUnitDto>();
         }
-
+        /// <summary>
+        /// Deleting the SalesRepresentative By Id 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task DeleteSalesRepUnit(IdInput input)
         {
             await _salesRepUnitManager.DeleteAsync(input.Id);
         }
-
+        /// <summary>
+        /// Getting the SalesRep units for grid with sorting and filtering
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<PagedResultOutput<SalesRepUnitDto>> GetSalesRepUnits(GetSalesRepInput input)
         {
 
@@ -65,7 +79,11 @@ namespace CAPS.CORPACCOUNTING.Masters
                 return dto;
             }).ToList());
         }
-
+        /// <summary>
+        /// Updating the SalesRepUnit by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<SalesRepUnitDto> UpdateSalesRepUnit(UpdateSalesRepUnitInput input)
         {
             var salesRepUnit = await _salesRepUnitRepository.GetAsync(input.SalesRepId);
@@ -85,20 +103,22 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
-                /*Do Something when the Chart of salesRep is Added*/
+                /*Do Something when the salesRep is Added*/
             };
 
             return salesRepUnit.MapTo<SalesRepUnitDto>();
         }
         /// <summary>
-        /// Get the SalesRep Details By CustomerPaymentTermsId
+        /// Get the SalesRep Details By Id
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task<SalesRepUnitDto> GetSalesRepUnitsById(IdInput input)
         {
-            var salesRepQuery = await _salesRepUnitRepository.GetAsync(input.Id);
-            return salesRepQuery.MapTo<SalesRepUnitDto>();
+            SalesRepUnit salesRepItem = await _salesRepUnitRepository.GetAsync(input.Id);
+            SalesRepUnitDto result= salesRepItem.MapTo<SalesRepUnitDto>();
+            result.SalesRepId = salesRepItem.Id;
+            return result;
         }
     }
 }

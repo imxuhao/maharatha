@@ -8,15 +8,16 @@ using System.Linq;
 using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class RollupCenterUnitAppService : CORPACCOUNTINGServiceBase, IRollupCenterUnitAppService
     {
         private readonly RollupCenterUnitManager _rollupCenterUnitManager;
         private readonly IRepository<RollupCenterUnit> _rollupCenterUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-
         public RollupCenterUnitAppService(RollupCenterUnitManager rollupCenterUnitManager, IRepository<RollupCenterUnit> rollupCenterUnitRepository, IUnitOfWorkManager unitOfWorkManager)
         {
             _rollupCenterUnitManager = rollupCenterUnitManager;
@@ -110,6 +111,18 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 dto.RollupCenterId = item.RollupCenter.Id;
                 return dto;
             }).ToList());
+        }
+        /// <summary>
+        /// Get the RollupCenterDetails by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+       public async Task<RollupCenterUnitDto> GetRollupCenterUnitById(IdInput input)
+        {
+            RollupCenterUnit rollupCenteritem = await _rollupCenterUnitRepository.GetAsync(input.Id);
+            RollupCenterUnitDto result = rollupCenteritem.MapTo<RollupCenterUnitDto>();
+            result.RollupCenterId = rollupCenteritem.Id;
+            return result;
         }
     }
 }

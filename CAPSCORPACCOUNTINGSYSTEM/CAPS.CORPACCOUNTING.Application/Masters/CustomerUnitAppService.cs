@@ -11,9 +11,11 @@ using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class CustomerUnitAppService : CORPACCOUNTINGServiceBase, ICustomerUnitAppService
     {
         private readonly CustomerUnitManager _customerUnitManager;
@@ -39,68 +41,15 @@ namespace CAPS.CORPACCOUNTING.Masters
             _addressRepository = addressRepository;
             _customerPaymentTermRepository = customerPaymentTermRepository;
             _salesRepRepository = salesRepRepository;
-        }
+        }       
 
         /// <summary>
-        /// This method is for testing to Insert data in customer  with 2 addresses.After UI development we need to remove this method.
-        /// using this method we are calling CreatecustomerUnit to insert customer and Addresss Data
+        /// Creating the Customer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task InsertCustomerData(CreateCustomerUnitInput input)
-        {
-            CreateAddressUnitInput customerAddr1 = new CreateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Customer,
-                AddressTypeId = TypeofAddress.PrimaryContact,
-                IsPrimary = true,
-                Line1 = "Address1Customer"
-            };
-            CreateAddressUnitInput customerAddr2 = new CreateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Customer,
-                AddressTypeId = TypeofAddress.Home,
-                Line1 = "Address2Customer"
-            };
-
-            input.InputAddresses = new List<CreateAddressUnitInput> {customerAddr1, customerAddr2};
-            await CreateCustomerUnit(input);
-        }
-        /// <summary>
-        /// This method is  for testing to update customer data with addresses.After UI development we need to remove this method.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task UpdatedCustomerData(UpdateCustomerUnitInput input)
-        {
-
-            UpdateAddressUnitInput customerAddr1 = new UpdateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Customer,
-                AddressTypeId = TypeofAddress.PrimaryContact,
-                Email = "test@gmail.com",
-                Website = "https://www.google.co.in",
-                AddressId = 1,
-                ObjectId = input.CustomerId,
-                IsPrimary = true
-            };
-
-            UpdateAddressUnitInput customerAddr2 = new UpdateAddressUnitInput
-            {
-                TypeofObjectId = TypeofObject.Customer,
-                AddressTypeId = TypeofAddress.Business,
-                Email = "test1@gmail.com",
-                AddressId = 2,
-                ObjectId = input.CustomerId
-            };
-
-            input.InputAddresses = new List<UpdateAddressUnitInput> {customerAddr1, customerAddr2};
-            await UpdateCustomerUnit(input);
-        }
-
         [UnitOfWork]
-        public async Task<CustomerUnitDto> CreateCustomerUnit(
-            CreateCustomerUnitInput input)
+        public async Task<CustomerUnitDto> CreateCustomerUnit(CreateCustomerUnitInput input)
         {
             var customerUnit = new CustomerUnit(lastname:input.LastName,firstname:input.FirstName,customernumber:input.CustomerNumber,creditlimit:input.CreditLimit,
                 salesrepid:input.SalesRepId,isapproved:input.IsApproved,isactive:input.IsActive,organizationunitid:input.OrganizationUnitId,
@@ -124,7 +73,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             }
             return customerUnit.MapTo<CustomerUnitDto>();
         }
-
+        /// <summary>
+        /// Delete the Customer and CustomerAddresses
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task DeleteCustomerUnit(IdInput input)
         {
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
@@ -168,7 +121,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                     var dto = result.Customer.MapTo<CustomerUnitDto>();
                     dto.CustomerId = result.Customer.Id;
                     dto.PaymentTermDescription = result.PaymentTerms;
-                    dto.SalesRepName = result.PaymentTerms;
+                    dto.SalesRepName = result.SalesRepName;
                     dto.Addresses = new Collection<AddressUnitDto>();
                     if (result.Address != null)
                     {
@@ -278,28 +231,17 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<CustomerUnitDto> GetCustomerUnitsById(IdInput input)
         {
-            var customerquery =
-               from customer in _customerUnitRepository.GetAll()
-               where customer.Id == input.Id
-               select new { customer };
-            var customeritems = await customerquery.ToListAsync();
-
-            var addressquery =
-               from addr in _addressRepository.GetAll()
-               where addr.ObjectId == input.Id && addr.TypeofObjectId == TypeofObject.Customer
-               select new { addr };
-
-            var addressitems = await addressquery.ToListAsync();
-
-            var result= customeritems[0].customer.MapTo<CustomerUnitDto>();
-            result.CustomerId = customeritems[0].customer.Id;
+            var customerUnit = await _customerUnitRepository.GetAsync(input.Id);
+            var addressitems = await _addressRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Customer);
+            
+            var result= customerUnit.MapTo<CustomerUnitDto>();
+            result.CustomerId = customerUnit.Id;
             result.Addresses = new Collection<AddressUnitDto>();
-            for (int i=0;i<addressitems.Count;i++)
+            for (int i = 0; i < addressitems.Count; i++)
             {
-                result.Addresses.Add(addressitems[i].addr.MapTo<AddressUnitDto>());
-                result.Addresses[i].AddressId = addressitems[i].addr.Id;
+                result.Addresses.Add(addressitems[i].MapTo<AddressUnitDto>());
+                result.Addresses[i].AddressId = addressitems[i].Id;
             }
-
             return result;
         }
     }

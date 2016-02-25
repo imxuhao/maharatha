@@ -11,9 +11,12 @@ using Abp.Events.Bus.Entities;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+
+    [AbpAuthorize] ///This is to ensure only logged in user has access to this module. We will improvise accordingly
     public class CoaUnitAppService : CORPACCOUNTINGServiceBase, ICoaUnitAppService
     {
         private readonly CoaUnitManager _coaunitManager;

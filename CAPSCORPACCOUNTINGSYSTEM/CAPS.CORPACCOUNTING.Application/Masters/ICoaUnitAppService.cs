@@ -9,6 +9,11 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input);
 
+        /// <summary>
+        /// This will return the list of COA based on Company ID
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(GetCoaInput input);
 
         Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input);

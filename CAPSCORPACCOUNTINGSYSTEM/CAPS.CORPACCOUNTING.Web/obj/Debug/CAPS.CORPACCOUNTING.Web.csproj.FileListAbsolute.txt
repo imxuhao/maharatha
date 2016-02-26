@@ -157,9 +157,6 @@ C:\Users\pmaharatha\Downloads\CAPS.CORPACCOUNTING.Web\bin\zh-Hant\Microsoft.Spat
 C:\Users\pmaharatha\Downloads\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.csprojResolveAssemblyReference.cache
 C:\Users\pmaharatha\Downloads\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.dll
 C:\Users\pmaharatha\Downloads\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.pdb
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.csprojResolveAssemblyReference.cache
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.dll
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\CAPS.CORPACCOUNTING.Web.dll.config
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\CAPS.CORPACCOUNTING.Web.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\CAPS.CORPACCOUNTING.Web.pdb
@@ -230,8 +227,10 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\EPPlus.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\System.Linq.Dynamic.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\EfEnumToLookup.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\Swashbuckle.Core.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\System.Web.Http.Owin.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\CAPS.CORPACCOUNTING.Application.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\CAPS.CORPACCOUNTING.Application.xml
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\CAPS.CORPACCOUNTING.Core.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\CAPS.CORPACCOUNTING.EntityFramework.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\CAPS.CORPACCOUNTING.WebApi.pdb
@@ -319,3 +318,6 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\ru\Microsoft.Spatial.resources.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\zh-Hans\Microsoft.Spatial.resources.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\bin\zh-Hant\Microsoft.Spatial.resources.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.csprojResolveAssemblyReference.cache
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Web\obj\Debug\CAPS.CORPACCOUNTING.Web.pdb

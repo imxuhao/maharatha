@@ -9,6 +9,8 @@ using Swashbuckle.Application;
 using System.Linq;
 using System.IO;
 using System;
+using CAPS.CORPACCOUNTING.Masters;
+
 
 namespace CAPS.CORPACCOUNTING.WebApi
 {
@@ -22,10 +24,18 @@ namespace CAPS.CORPACCOUNTING.WebApi
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
-            //Automatically creates Web API controllers for all application services of the application
-            DynamicApiControllerBuilder
-                .ForAll<IApplicationService>(typeof(CORPACCOUNTINGApplicationModule).Assembly, "app")
-                .Build();
+            ///Automatically creates Web API controllers for all application services of the application
+
+            DynamicApiControllerBuilder.ForAll<IApplicationService>(typeof(CORPACCOUNTINGApplicationModule).Assembly, "app").Build();
+
+            ///Automatically create Web API controllers for a particular service
+
+            //DynamicApiControllerBuilder.For<IAccountUnitAppService>("app/accountUnit").Build();
+
+            ///Overriding the methods you don't want to expose as web API
+
+            //DynamicApiControllerBuilder.For<IAccountUnitAppService>("app/accountUnit").ForMethod("UpdateAccountUnit").DontCreateAction().Build();
+
 
             Configuration.Modules.AbpWebApi().HttpConfiguration.Filters.Add(new HostAuthenticationFilter("Bearer"));
 
@@ -34,16 +44,20 @@ namespace CAPS.CORPACCOUNTING.WebApi
 
         private void ConfigureSwaggerUi()
         {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var commentsFileName = "CAPS.CORPACCOUNTING.Application" + ".XML";
+            var commentsFile = Path.Combine(baseDirectory, commentsFileName);
+
             Configuration.Modules.AbpWebApi().HttpConfiguration
                 .EnableSwagger(c =>
                 {
                     c.SingleApiVersion("v1", "SUMIT WebApi");
                     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-                                             
-                   // c.IncludeXmlComments(@"C:\Source Code\Cha-Ching\XMLComments\Application Module\CAPS.CORPACCOUNTING.Application.XML");
+                    c.IncludeXmlComments(commentsFile);
+                    c.DocumentFilter<FilterRoutesDocumentFilter>();
                 })
                 .EnableSwaggerUi();
-            
+
         }
     }
 }

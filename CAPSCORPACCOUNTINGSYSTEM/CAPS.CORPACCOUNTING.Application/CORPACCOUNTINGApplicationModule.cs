@@ -28,6 +28,8 @@ namespace CAPS.CORPACCOUNTING
 
             //Custom DTO auto-mappings
             CustomDtoMapper.CreateMappings();
+
+
         }
     }
 }

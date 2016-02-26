@@ -238,6 +238,7 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\System.Linq.Dynamic.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\EfEnumToLookup.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\CAPS.CORPACCOUNTING.Application.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\CAPS.CORPACCOUNTING.Application.xml
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\CAPS.CORPACCOUNTING.Core.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\CAPS.CORPACCOUNTING.EntityFramework.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\Abp.xml

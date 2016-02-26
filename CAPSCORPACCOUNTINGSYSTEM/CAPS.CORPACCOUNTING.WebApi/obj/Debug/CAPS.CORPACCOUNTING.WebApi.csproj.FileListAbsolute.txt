@@ -204,6 +204,7 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\Nito.AsyncEx.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\Nito.AsyncEx.Enlightenment.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\Owin.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\Swashbuckle.Core.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\System.Collections.Immutable.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\System.Net.Http.Formatting.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\System.Web.Http.dll
@@ -214,6 +215,7 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\EntityFramework.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\System.Linq.Dynamic.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\CAPS.CORPACCOUNTING.Application.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\CAPS.CORPACCOUNTING.Application.xml
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\CAPS.CORPACCOUNTING.Core.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\Abp.xml
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\Abp.AutoMapper.xml
@@ -242,5 +244,3 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\obj\Debug\CAPS.CORPACCOUNTING.WebApi.csprojResolveAssemblyReference.cache
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\obj\Debug\CAPS.CORPACCOUNTING.WebApi.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\obj\Debug\CAPS.CORPACCOUNTING.WebApi.pdb
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\Swashbuckle.Core.dll
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Debug\CAPS.CORPACCOUNTING.Application.xml

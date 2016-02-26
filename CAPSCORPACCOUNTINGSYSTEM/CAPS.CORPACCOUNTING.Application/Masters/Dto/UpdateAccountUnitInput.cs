@@ -109,7 +109,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [MaxLength(AccountUnit.MaxDisplayNameLength)]
         public string Us1120IncomeStmtName { get; set; }
 
-        /// <summary>Gets or sets the OrganizationId field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationId { get; set; }
 
     }

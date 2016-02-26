@@ -5,12 +5,37 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    /// <summary>
+    /// This service will provide all CRUD operations on Address.
+    /// </summary>
     public interface IAddressUnitAppService : IApplicationService
     {
+        /// <summary>
+        ///  This is used to create the Address.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<AddressUnitDto> CreateAddressUnit(CreateAddressUnitInput input);
 
+        /// <summary>
+        /// This is used to get the list of all Addresses based on ObjectType.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<ListResultOutput<AddressUnitDto>> GetAddressUnits(GetAddressUnitInput input);
+
+        /// <summary>
+        /// This is used to update the Address based on AddressId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<AddressUnitDto> UpdateAddressUnit(UpdateAddressUnitInput input);
+
+        /// <summary>
+        /// This is used to delete the Address based on AddressId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task DeleteAddressUnit(DeleteAddressUnitInput input);
 
         

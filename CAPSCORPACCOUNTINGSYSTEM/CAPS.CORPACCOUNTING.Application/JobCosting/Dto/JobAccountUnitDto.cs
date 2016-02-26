@@ -24,7 +24,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the RollupAccountId field. </summary>
         public long? RollupAccountId { get; set; }
 
-        /// <summary>Gets or sets the Company field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
     }
 }

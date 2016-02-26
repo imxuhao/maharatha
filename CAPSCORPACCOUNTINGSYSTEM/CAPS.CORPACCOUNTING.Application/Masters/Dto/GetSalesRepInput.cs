@@ -7,10 +7,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class GetSalesRepInput : PagedAndSortedInputDto, IShouldNormalize
     {
-        /// <summary> Gets or Sets LastName to Search the SalesRepGrid with  OrganizationUnitId </summary>
+        /// <summary> Gets or Sets the LastName to Search the SalesRepresentatives based on CompanyId. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or Sets LastName to Search the SalesRepGrid with LastName </summary>
+        /// <summary> Gets or Sets the LastName to Search the SalesRepresentatives based on LastName. </summary>
         public string LastName { get; set; } = null;
 
         public void Normalize()

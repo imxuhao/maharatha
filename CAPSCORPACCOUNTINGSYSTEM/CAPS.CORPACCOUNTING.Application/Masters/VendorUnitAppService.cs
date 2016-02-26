@@ -73,9 +73,9 @@ namespace CAPS.CORPACCOUNTING.Masters
                 organizationunitid: input.OrganizationUnitId);
             await _vendorUnitManager.CreateAsync(vendorUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
-            if (input.InputAddress != null)
+            if (input.Addresses != null)
             {
-                foreach (var address in input.InputAddress)
+                foreach (var address in input.Addresses)
                 {
                     if (address.Line1 != null || address.Line2 != null || address.Line4 != null ||
                         address.Line4 != null || address.State != null ||
@@ -226,7 +226,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<VendorUnitDto> UpdateVendorUnit(UpdateVendorUnitInput input)
         {
             var vendorUnit = await _vendorUnitRepository.GetAsync(input.VendorId);
-            foreach (var address in input.InputAddress)
+            foreach (var address in input.Addresses)
             {
                 if (address.AddressId != 0)
                     await _addressAppService.UpdateAddressUnit(address);

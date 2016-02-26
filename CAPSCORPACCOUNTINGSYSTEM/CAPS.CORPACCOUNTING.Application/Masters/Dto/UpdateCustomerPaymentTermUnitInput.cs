@@ -26,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the DiscountPercent field. </summary>
         public decimal? DiscountPercent { get; set; }
 
-        /// <summary>Gets or sets the DiscountDays. </summary>
+        /// <summary>Gets or sets the DiscountDays field. </summary>
         public int? DiscountDays { get; set; }
 
         /// <summary>Gets or sets the OvernightInstructions field. </summary>

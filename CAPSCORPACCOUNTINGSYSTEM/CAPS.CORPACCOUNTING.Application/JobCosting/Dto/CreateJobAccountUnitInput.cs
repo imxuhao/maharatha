@@ -6,7 +6,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     public class CreateJobAccountUnitInput : IInputDto
     {
-        [Range(0, Int32.MaxValue)]
+        /// <summary>Gets or sets the JobId field. </summary>
+        [Range(1, Int32.MaxValue)]
         public int JobId { get; set; }     
 
         /// <summary>Gets or sets the AccountId field. </summary>
@@ -24,7 +25,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the RollupAccountId field. </summary>
         public long? RollupAccountId { get; set; }        
 
-        /// <summary>Gets or sets the Company field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
     }
 }

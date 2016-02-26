@@ -30,7 +30,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the IsPrivate field. </summary>
         public bool IsPrivate { get; set; } = false;
 
-        /// <summary>Gets or sets the OrganizationId field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationId { get; set; }
     }
 }

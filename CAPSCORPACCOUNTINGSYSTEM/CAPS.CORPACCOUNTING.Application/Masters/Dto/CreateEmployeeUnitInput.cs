@@ -27,46 +27,46 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(EmployeeUnit.MaxTaxIdLength)]
         public string FederalTaxId { get; set; }
 
-        /// <summary>Gets or sets the Is Is1099 field. </summary>
+        /// <summary>Gets or sets the Is1099 field. </summary>
         public bool Is1099 { get; set; }
 
-        /// <summary>Gets or sets the Is IsW9onFile field. </summary>
+        /// <summary>Gets or sets the IsW9onFile field. </summary>
         public bool IsW9OnFile { get; set; }
 
-        /// <summary>Gets or sets the Is IsIndependantContractor field. </summary>
+        /// <summary>Gets or sets the IsIndependantContractor field. </summary>
         public bool IsIndependantContractor { get; set; }
 
-        /// <summary>Gets or sets the Is IsCorporation field. </summary>
+        /// <summary>Gets or sets the IsCorporation field. </summary>
         public bool IsCorporation { get; set; }
 
-        /// <summary>Gets or sets the Is IsProducer field. </summary>
+        /// <summary>Gets or sets the IsProducer field. </summary>
         public bool IsProducer { get; set; }
 
-        /// <summary>Gets or sets the Is IsDirector field. </summary>
+        /// <summary>Gets or sets the IsDirector field. </summary>
         public bool IsDirector { get; set; }
 
-        /// <summary>Gets or sets the Is IsDirPhoto field. </summary>
+        /// <summary>Gets or sets the IsDirPhoto field. </summary>
         public bool IsDirPhoto { get; set; }
 
-        /// <summary>Gets or sets the Is IsSetDesigner field. </summary>
+        /// <summary>Gets or sets the IsSetDesigner field. </summary>
         public bool IsSetDesigner { get; set; }
 
-        /// <summary>Gets or sets the Is IsEditor field. </summary>
+        /// <summary>Gets or sets the IsEditor field. </summary>
         public bool IsEditor { get; set; }
 
-        /// <summary>Gets or sets the Is IsArtDirector field. </summary>
+        /// <summary>Gets or sets the IsArtDirector field. </summary>
         public bool IsArtDirector { get; set; }
 
-        /// <summary>Gets or sets the Is IsApproved field. </summary>
+        /// <summary>Gets or sets the IsApproved field. </summary>
         public bool IsApproved { get; set; } = true;
 
-        /// <summary>Gets or sets the Is IsActivet field. </summary>
+        /// <summary>Gets or sets the IsActivet field. </summary>
         public bool IsActive { get; set; } = true;
 
-        /// <summary>Gets or sets the OrganizationUnitId field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>Gets or Sets the Addresses for Employee </summary>
-        public List<CreateAddressUnitInput> InputAddresses { get; set; }
+        /// <summary>Gets or Sets Addresses of the Employee. </summary>
+        public List<CreateAddressUnitInput> Addresses { get; set; }
     }
 }

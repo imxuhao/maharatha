@@ -6,6 +6,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class CreateCustomerUnitInput : IInputDto
     {
+        /// <summary>Gets or sets the LastName field. </summary>
         [Required]
         [StringLength(CustomerUnit.MaxName)]
         public string LastName { get; set; }
@@ -18,10 +19,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(CustomerUnit.MaxNumberLength)]
         public string CustomerNumber { get; set; }
 
-        /// <summary>Gets or sets the CustomerNumber field. </summary>
+        /// <summary>Gets or sets the CreditLimit field. </summary>
         public decimal? CreditLimit { get; set; }
 
-        /// <summary> Gets or Sets TypeofPaymentMethodId </summary>
+        /// <summary> Gets or Sets TypeofPaymentMethodId field. </summary>
         public TypeofPaymentMethod? TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
@@ -33,13 +34,13 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the Is IsApproved field. </summary>
         public bool IsApproved { get; set; } = true;
 
-        /// <summary>Gets or sets the Is IsActivet field. </summary>
+        /// <summary>Gets or sets the Is IsActive field. </summary>
         public bool IsActive { get; set; } = true;
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
         
-        /// <summary>Gets or Sets the Addresses of Customer </summary>
-        public List<CreateAddressUnitInput> InputAddresses { get; set; }
+        /// <summary>Gets or Sets Addresses of the Customer. </summary>
+        public List<CreateAddressUnitInput> Addresses { get; set; }
     }
 }

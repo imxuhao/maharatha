@@ -7,12 +7,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     public class GetRollupCenterInput : PagedAndSortedInputDto, IShouldNormalize
     {
-        /// <summary> Gets or Sets LastName to Search the SalesRepGrid with  OrganizationUnitId </summary>
+        /// <summary> Gets or Sets the CompanyId to Search the RollupCenters based on  CompanyId </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or Sets LastName to Search the SalesRepGrid with LastName </summary>
+        /// <summary> Gets or Sets the LastName to Search the RollupCenters based on LastName </summary>
         public string Caption { get; set; } = null;
 
+        /// <summary> Gets or Sets the RollupTypeId to Search the RollupCenters based on RollupTypeId </summary>
         public RollupType? RollupTypeId { get; set; } = null;
 
         public void Normalize()

@@ -6,9 +6,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class UpdateLocationSetUnitInput : IInputDto
     {
-        /// <summary>>Gets or sets the Number field.</summary>    
+        /// <summary>>Gets or sets the LocationSetId field.</summary>    
         [Range(1,Int32.MaxValue)]
         public int LocationSetId { get; set; }
+       
         /// <summary>Gets or sets the TypeOfLocationSetId field. </summary>
         [EnumDataType(typeof(LocationSets))]
         public LocationSets TypeOfLocationSetId { get; set; }
@@ -22,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(LocationSetUnit.MaxDescriptionLength)]
         public string Description { get; set; }
 
-        /// <summary>Gets or sets the Company field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
     }
 }

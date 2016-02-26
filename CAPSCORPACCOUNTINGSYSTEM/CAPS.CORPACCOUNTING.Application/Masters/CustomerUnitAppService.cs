@@ -57,9 +57,9 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _customerUnitManager.CreateAsync(customerUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            if (input.InputAddresses != null)
+            if (input.Addresses != null)
             {
-                foreach (var address in input.InputAddresses)
+                foreach (var address in input.Addresses)
                 {
                     if (address.Line1 != null || address.Line2 != null || address.Line4 != null ||
                         address.Line4 != null || address.State != null ||

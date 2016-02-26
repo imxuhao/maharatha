@@ -71,9 +71,9 @@ namespace CAPS.CORPACCOUNTING.Masters
             await CurrentUnitOfWork.SaveChangesAsync();
 
 
-            if (input.InputAddresses != null)
+            if (input.Addresses != null)
             {
-                foreach (var address in input.InputAddresses)
+                foreach (var address in input.Addresses)
                 {
                     if (address.Line1 != null || address.Line2 != null || address.Line4 != null ||
                         address.Line4 != null || address.State != null ||
@@ -185,7 +185,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _employeeUnitManager.UpdateAsync(employeeUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            foreach (var address in input.InputAddresses)
+            foreach (var address in input.Addresses)
             {
                 if (address.AddressId != 0)
                     await _addressAppService.UpdateAddressUnit(address);

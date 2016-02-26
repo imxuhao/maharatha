@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
@@ -6,6 +7,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
     public class UpdateJobBudgetUnitInput : IInputDto
     {
         /// <summary>Gets or sets the JobBudgetId field. </summary>
+        [Range(1,Int32.MaxValue)]
         public int JobBudgetId { get; set; }
 
         /// <summary>Gets or sets the JobId field. </summary>

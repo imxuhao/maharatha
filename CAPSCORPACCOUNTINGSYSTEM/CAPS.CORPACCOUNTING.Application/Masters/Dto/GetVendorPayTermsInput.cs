@@ -7,7 +7,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class GetVendorPayTermsInput :  PagedAndSortedInputDto, IShouldNormalize
     {
-        /// <summary> Gets or Sets LastName to Search the CustomerPaymentTermGrid with  OrganizationUnitId </summary>
+        /// <summary> Gets or Sets the CompanyId to Search the CustomerPaymentTerms based on  CompanyId. </summary>
         public long? OrganizationUnitId { get; set; }
 
         public void Normalize()

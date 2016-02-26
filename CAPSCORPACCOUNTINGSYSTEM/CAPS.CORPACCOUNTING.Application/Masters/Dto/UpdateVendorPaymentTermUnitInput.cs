@@ -6,15 +6,15 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class UpdateVendorPaymentTermUnitInput : IInputDto
     {
-        /// <summary>Gets or sets the VenorPaymentTermId</summary>
+        /// <summary>Gets or sets the VenorPaymentTermId field.</summary>
         public int VendorPaymentTermId { get; set; }
-      
-        /// <summary>Gets or sets the Description</summary>
+
+        /// <summary>Gets or sets the Description field.</summary>
         [Required]
         [StringLength(VendorPaymentTermUnit.MaxDesc)]
         public string Description { get; set; }
-       
-        /// <summary>Gets or sets the DueDays. </summary>
+
+        /// <summary>Gets or sets the DueDays field. </summary>
         [Range(1, Int32.MaxValue, ErrorMessage = "Please enter valid DueDays")]
         public int DueDays { get; set; }
 

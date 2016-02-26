@@ -7,17 +7,25 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     public class GetJobInput : PagedAndSortedInputDto, IShouldNormalize
     {
-        /// <summary> Gets or Sets LastName to Search the SalesRepGrid with  OrganizationUnitId </summary>
+        /// <summary> Gets or Sets the ComapnyId to Search the Jobs based on  ComapnyId. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or Sets LastName to Search the SalesRepGrid with LastName </summary>
+        /// <summary> Gets or Sets the Caption to Search the Jobs based on Caption. </summary>
         public string Caption { get; set; }
 
+        /// <summary> Gets or Sets the ProductName to Search the Jobdetails based on ProductName. </summary>
         public string ProductName { get; set; }
 
+        /// <summary> Gets or Sets the JobNumber to Search the Jobs based on JobNumber. </summary>
         public string JobNumber { get; set; }
+
+        /// <summary> Gets or Sets the Director to Search the Employees based on EmployeeLastName. </summary>
         public string Director { get; set; }
+
+        /// <summary> Gets or Sets the Agency to Search the Customers based on CustomerId. </summary>
         public string Agency { get; set; }
+
+        /// <summary> Gets or Sets the TypeOfJobStatusId to Search the Jobs based on TypeOfJobStatusId. </summary>
         public ProjectStatus? TypeOfJobStatusId { get; set; } = null;
 
 

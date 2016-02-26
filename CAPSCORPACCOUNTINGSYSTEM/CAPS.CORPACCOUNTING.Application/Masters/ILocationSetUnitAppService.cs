@@ -5,12 +5,37 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+    /// <summary>
+    /// This service will provide all CRUD operations on LocationSet.
+    /// </summary>
     public interface ILocationSetUnitAppService : IApplicationService
     {
-        Task<LocationSetUnitDto> CreateLocationSetUnit(CreateLocationSetUnitInput input);   
+        /// <summary>
+        /// This is used to create the LocationSet.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<LocationSetUnitDto> CreateLocationSetUnit(CreateLocationSetUnitInput input);
 
+        /// <summary>
+        /// This is used to update the LocationSet based on LocationSetId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<LocationSetUnitDto> UpdateLocationSetUnit(UpdateLocationSetUnitInput input);
+
+        /// <summary>
+        /// This is used to delete the LocationSet based on LocationSetId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task DeleteLocationSetUnit(IdInput input);
+
+        /// <summary>
+        /// This is used to get the LocationSet based on LocationSetId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<LocationSetUnitDto> GetLocationSetUnitsById(IdInput input);
     }
 }

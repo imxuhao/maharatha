@@ -1,7 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
@@ -17,7 +16,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string FirstName { get; set; }
 
-        /// <summary>Gets or sets the PayToName. </summary>
+        /// <summary>Gets or sets the PayToName field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string PayToName { get; set; }
 
@@ -68,7 +67,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the TypeOFvendorId field. </summary>
         [EnumDataType(typeof(TypeofVendor))]
-        public TypeofVendor TypeOFvendorId { get; set; }=TypeofVendor.Standard;
+        public TypeofVendor TypeOFvendorId { get; set; }
 
         /// <summary>Gets or sets the TypeOF1099Box field. </summary>
         public Typeof1099T4? TypeOF1099Box { get; set; } 
@@ -147,7 +146,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or sets AddressData of a Vendor </summary>
-        public List<CreateAddressUnitInput> InputAddress { get; set; }
+        /// <summary> Gets or sets Addresses of the Vendor. </summary>
+        public List<CreateAddressUnitInput> Addresses { get; set; }
     }
 }

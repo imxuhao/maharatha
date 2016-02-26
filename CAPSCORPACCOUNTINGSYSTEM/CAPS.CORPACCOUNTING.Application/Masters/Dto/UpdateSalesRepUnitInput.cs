@@ -21,7 +21,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(SalesRepUnit.MaxRegionLength)]
         public string Region { get; set; }
 
-        /// <summary>Gets or sets the Is IsActivet field. </summary>
+        /// <summary>Gets or sets the Is IsActive field. </summary>
         public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>

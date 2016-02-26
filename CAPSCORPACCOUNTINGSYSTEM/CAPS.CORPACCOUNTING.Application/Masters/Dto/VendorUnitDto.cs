@@ -3,8 +3,6 @@ using Abp.AutoMapper;
 using System;
 using System.Collections.ObjectModel;
 
-
-
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapFrom(typeof(VendorUnit))]
@@ -19,7 +17,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the FirstName field. </summary>
         public string FirstName { get; set; }
 
-        /// <summary>Gets or sets the PayToName. </summary>
+        /// <summary>Gets or sets the PayToName field. </summary>
         public string PayToName { get; set; }
 
         /// <summary>Gets or sets the DBAName field. </summary>
@@ -64,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeOfvendorId field. </summary>
         public TypeofVendor? TypeofVendorId { get; set; }
 
-        /// <summary>Gets or sets the Typeof1099T4 field. </summary>
+        /// <summary>Gets or sets the Typeof1099Box field. </summary>
         public Typeof1099T4? Typeof1099Box { get; set; }
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
@@ -73,7 +71,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the EDDContractStopDate field. </summary>
         public DateTime? EDDContractStopDate { get; set; }
 
-        /// <summary>Gets or sets the EDDContractStopDate field. </summary>
+        /// <summary>Gets or sets the EDDConctractAmount field. </summary>
         public decimal? EDDConctractAmount { get; set; }
 
         /// <summary>Gets or sets the WorkRegion field. </summary>
@@ -88,12 +86,13 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the ACHRoutingNumber field. </summary>
         public string ACHRoutingNumber { get; set; }
 
+        /// <summary>Gets or sets the ACHAccountNumber field. </summary>
         public string ACHAccountNumber { get; set; }
 
         /// <summary>Gets or sets the ACHWireFromBankName field. </summary>
         public string ACHWireFromBankName { get; set; }
 
-        /// <summary>Gets or sets the ACHWireFromBankName field. </summary>
+        /// <summary>Gets or sets the ACHWireFromBankAddress field. </summary>
         public string ACHWireFromBankAddress { get; set; }
 
         /// <summary>Gets or sets the ACHWireFromSwiftCode field. </summary>
@@ -126,7 +125,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>Gets or sets the Addresses of a vendor </summary>
+        /// <summary>Gets or sets the Addresses of the vendor. </summary>
         public Collection<AddressUnitDto> Address { get; set; }
 
         /// <summary>Gets or sets the PaymentTermDescription field. </summary>

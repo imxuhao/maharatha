@@ -82,8 +82,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string Website { get; set; }
 
         /// <summary>Gets or sets the IsPrimary field. </summary>
-        public bool IsPrimary { get; set; }
-       
+        public bool IsPrimary { get; set; }       
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

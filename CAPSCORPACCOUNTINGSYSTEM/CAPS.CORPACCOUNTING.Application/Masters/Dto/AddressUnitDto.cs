@@ -6,7 +6,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     [AutoMapFrom(typeof(AddressUnit))]  
     public class AddressUnitDto : IOutputDto
     {
-        /// <summary>>Gets or sets the AddressId</summary>
+        /// <summary>>Gets or sets the AddressId field.</summary>
         public long AddressId { get; set; }
 
         /// <summary>Gets or sets the ObjectId field. </summary>
@@ -51,7 +51,6 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the Email field. </summary>
         public string Email { get; set; }
 
-
         /// <summary>Gets or sets the Phone1 field. </summary>
         public string Phone1 { get; set; }
 
@@ -70,6 +69,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the IsPrimary field. </summary>
         public bool IsPrimary { get; set; }
 
+        /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>

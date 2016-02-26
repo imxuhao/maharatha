@@ -6,16 +6,16 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class GetCustomerInput : PagedAndSortedInputDto, IShouldNormalize
     {
-        /// <summary> Gets or Sets LastName  to Search the CustomerGrid with  LastName </summary>
+        /// <summary> Gets or Sets the LastName  to Search the Customers based on LastName. </summary>
         public string LastName { get; set; } = null;
 
-        /// <summary> Gets or Sets FirstName to Search the CustomerGrid with  FirstName </summary>
+        /// <summary> Gets or Sets the FirstName to Search the Customers based on FirstName. </summary>
         public string FirstName { get; set; } = null;
 
-        /// <summary> Gets or Sets CustomerNumber to Search the CustomerGrid with  CustomerNumber </summary>
+        /// <summary> Gets or Sets the CustomerNumber to Search the Customers based on CustomerNumber. </summary>
         public string CustomerNumber { get; set; } = null;
 
-        /// <summary> Gets or Sets LastName to Search the CustomerGrid with  OrganizationUnitId </summary>
+        /// <summary> Gets or Sets the CompanyId to Search the Customers based on CompanyId. </summary>
         public long? OrganizationUnitId { get; set; }
 
         public void Normalize()

@@ -15,10 +15,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the Description field. </summary>
         public string Description { get; set; }
 
-        /// <summary>Gets or sets the COA Type. </summary>
+        /// <summary>Gets or sets the COA Type field. </summary>
         public ChartofAccountsType ChartofAccountsType { get; set; }
 
-        /// <summary>Gets or sets the Display Sequence. </summary>
+        /// <summary>Gets or sets the Display Sequence field. </summary>
         public int? DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the IsApproved field. </summary>

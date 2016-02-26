@@ -20,7 +20,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public string Caption { get; set; }
 
         /// <summary>Gets or sets the RollupCenterId field. </summary>
-        [Range(0, Int32.MaxValue)]
+        [Range(1, Int32.MaxValue)]
         public int RollupCenterId { get; set; }       
 
         /// <summary>Gets or sets the IsCorporateDefault field. </summary>

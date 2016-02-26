@@ -1,21 +1,18 @@
 ﻿using Abp.Application.Services.Dto;
-using CAPS.CORPACCOUNTING.Masters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     public class UpdateJobCommercialnput : IInputDto
     {
-        /// <summary>Gets or Sets JobId Field.  </summary>
-        [Range(0, Int32.MaxValue)]
+        /// <summary>Gets or Sets JobCommercialId Field.  </summary>
+        [Range(1, Int32.MaxValue)]
         public int JobCommercialId { get; set; }
 
         /// <summary>Gets or Sets JobId Field.  </summary>
-        [Range(0, Int32.MaxValue)]
+        [Range(1, Int32.MaxValue)]
         public int JobId { get; set; }
 
         /// <summary>Gets or Sets BidDate Field.  </summary>
@@ -245,12 +242,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or Sets AgencyEmail Field.  </summary>
         [StringLength(JobCommercialUnit.MaxEmailLength)]
+        [EmailAddress]
         public string AgencyEmail { get; set; }
 
         /// <summary>Gets or Sets Company Field.  </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>Gets or Sets the JobLocations for Job </summary>
+        /// <summary>Gets or Sets the JobLocations of the Job. </summary>
         public List<UpdateJobLocationInput> JobLocations { get; set; }
     }
 }

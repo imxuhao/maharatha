@@ -1,7 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using Castle.Core;
-
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
@@ -104,6 +102,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
         public string Us1120IncomeStmtName { get; set; }
+
+        /// <summary>Gets or sets the TenantId field. </summary>
+        public int TenantId { get; set; }
 
         /// <summary>Gets or sets the OrganizationId field. </summary>
         public long? OrganizationId { get; set; }

@@ -6,14 +6,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     public class UpdateJobAccountUnitInput : IInputDto
     {
-        /// <summary>
-        /// >Gets or sets the JobAccountId field.
-        /// </summary>
+        /// <summary>Gets or sets the JobAccountId field.</summary>
         public long JobAccountId { get; set; }
 
-        /// <summary>
-        /// >Gets or sets the JobId field.
-        /// </summary>
+        /// <summary>Gets or sets the JobId field. </summary>
         [Range(1, Int32.MaxValue)]
         public int JobId { get; set; }
 
@@ -32,7 +28,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the RollupAccountId field. </summary>
         public long? RollupAccountId { get; set; }
 
-        /// <summary>Gets or sets the Company field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
     }
 

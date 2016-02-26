@@ -5,12 +5,15 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class CreateAccountUnitInput : IInputDto
     {
+        /// <summary>Gets or sets the ParentId field. </summary>
         public long? ParentId { get; set; }
 
+        /// <summary>Gets or sets the AccountNumber field. </summary>
         [Required]
         [StringLength(AccountUnit.MaxAccountSize)]
         public string AccountNumber { get; set; }
 
+        /// <summary>Gets or sets the Caption field. </summary>
         [Required]
         [MaxLength(AccountUnit.MaxDisplayNameLength)]
         public string Caption { get; set; }
@@ -62,7 +65,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeOfAccountId field. </summary>
         public int? TypeOfAccountId { get; set; }
 
-        /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        /// <summary>Gets or sets the IsDocControlled field. </summary>
         public bool IsDocControlled { get; set; }
 
         /// <summary>Gets or sets the IsSummaryAccount field. </summary>
@@ -102,7 +105,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [MaxLength(AccountUnit.MaxDisplayNameLength)]
         public string Us1120IncomeStmtName { get; set; }
 
-        /// <summary>Gets or sets the OrganizationId field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationId { get; set; }
     }
 }

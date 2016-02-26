@@ -7,21 +7,21 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class GetEmployeeInput : PagedAndSortedInputDto, IShouldNormalize
     {
-        /// <summary> Gets or Sets LastName  to Search the EmployeeGrid with  LastName </summary>
+        /// <summary> Gets or Sets the LastName to Search the Employees based on LastName. </summary>
         public string LastName { get; set; } = null;
 
-        /// <summary> Gets or Sets FirstName to Search the EmployeeGrid with  FirstName </summary>
+        /// <summary> Gets or Sets the FirstName to Search the Employees based on FirstName. </summary>
         public string FirstName { get; set; } = null;
 
-        /// <summary>Gets or sets the FedralTaxId to Search the EmployeeGrid with FedralTaxId. </summary>
+        /// <summary>Gets or sets the FedralTaxId to Search the Employees based on FedralTaxId. </summary>
         public string FedralTaxId { get; set; } = null;
 
-        /// <summary>Gets or sets the SSNTaxId to Search the EmployeeGrid with SSNTaxId. </summary>
+        /// <summary>Gets or sets the SSNTaxId to Search the Employees based on SSNTaxId. </summary>
         public string SSNTaxId { get; set; } = null;
 
-        /// <summary> Gets or Sets LastName to Search the EmployeeGrid with  OrganizationUnitId </summary>
+        /// <summary> Gets or Sets the LastName to Search the Employees based on CompanyId </summary>
         public long? OrganizationUnitId { get; set; }
-       
+
         public void Normalize()
         {
             if (Sorting.IsNullOrWhiteSpace())

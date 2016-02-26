@@ -4,8 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
-{
-    
+{    
     public class UpdateVendorUnitInput : IInputDto
     {
         /// <summary>Gets or sets the VendorId field. </summary>
@@ -20,7 +19,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string FirstName { get; set; }
 
-        /// <summary>Gets or sets the PayToName. </summary>
+        /// <summary>Gets or sets the PayToName field. </summary>
         [StringLength(VendorUnit.MaxDisplayNameLength)]
         public string PayToName { get; set; }
 
@@ -82,7 +81,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the EDDContractStopDate field. </summary>
         public DateTime? EDDContractStopDate { get; set; }
 
-        /// <summary>Gets or sets the EDDContractStopDate field. </summary>
+        /// <summary>Gets or sets the EDDConctractAmount field. </summary>
         public decimal? EDDConctractAmount { get; set; }
 
         /// <summary>Gets or sets the WorkRegion field. </summary>
@@ -149,7 +148,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or sets  AddressData of a Vendor </summary>
-        public List<UpdateAddressUnitInput> InputAddress { get; set; }
+        /// <summary> Gets or sets the  Addresses of the Vendor </summary>
+        public List<UpdateAddressUnitInput> Addresses { get; set; }
     }
 }

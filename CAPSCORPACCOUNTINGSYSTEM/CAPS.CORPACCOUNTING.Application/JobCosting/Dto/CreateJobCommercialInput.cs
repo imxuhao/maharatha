@@ -3,15 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-
-
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     public  class CreateJobCommercialInput : IInputDto
-    {       
-
+    { 
         /// <summary>Gets or Sets JobId Field.  </summary>
-        [Range(0, Int32.MaxValue)]
+        [Range(1, Int32.MaxValue)]
         public int JobId { get; set; }       
 
         /// <summary>Gets or Sets BidDate Field.  </summary>
@@ -241,11 +238,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or Sets AgencyEmail Field.  </summary>
         [StringLength(JobCommercialUnit.MaxEmailLength)]
+        [EmailAddress]
         public string AgencyEmail { get; set; }
 
-        /// <summary>Gets or Sets Company Field.  </summary>
+        /// <summary>Gets or Sets CompanyId Field.  </summary>
         public long? OrganizationUnitId { get; set; }
-        /// <summary>Gets or Sets the JobLocations for Job </summary>
+        
+        /// <summary>Gets or Sets the JobLocations of the Job </summary>
         public List<CreateJobLocationInput> JobLocations { get; set; }
     }
 }

@@ -9,12 +9,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
     [AutoMapFrom(typeof(JobCommercialUnit))]
     public class JobCommercialUnitDto : IOutputDto
     {
-        /// <summary>Gets or Sets JobId Field.  </summary>
-        [Range(0, Int32.MaxValue)]
+        /// <summary>Gets or Sets JobId Field.  </summary>        
         public int JobCommercialId { get; set; }
 
-        /// <summary>Gets or Sets JobId Field.  </summary>
-        [Range(0, Int32.MaxValue)]
+        /// <summary>Gets or Sets JobId Field.  </summary>      
         public int JobId { get; set; }
 
         /// <summary>Gets or Sets BidDate Field.  </summary>
@@ -249,7 +247,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or Sets Company Field.  </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>Gets or Sets the JobLocations for Employee </summary>
+        /// <summary>Gets or Sets the JobLocations of the Employee. </summary>
         public List<JobLocationUnitDto> JobLocations { get; set; }
     }
 }

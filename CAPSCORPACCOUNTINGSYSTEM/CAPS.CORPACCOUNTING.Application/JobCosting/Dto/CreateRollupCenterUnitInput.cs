@@ -22,10 +22,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the IsApproved field. </summary>
         public bool IsApproved { get; set; }
 
-        /// <summary>Gets or sets the Company field. </summary>
+        /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary>Gets or sets the RollupTypeID field. </summary>
+        /// <summary>Gets or sets the RollupTypeId field. </summary>
         [EnumDataType(typeof(RollupType))]
         public RollupType RollupTypeId { get; set; }
 

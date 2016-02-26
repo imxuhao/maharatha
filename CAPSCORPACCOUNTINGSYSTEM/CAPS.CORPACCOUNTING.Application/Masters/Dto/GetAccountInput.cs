@@ -8,15 +8,17 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class GetAccountInput : PagedAndSortedInputDto, IShouldNormalize
     {
-        /// <summary> Gets or Sets LastName to Search the AccountGrid with  OrganizationUnitId </summary>
+        /// <summary> Gets or Sets the LastName to Search the Accounts with  OrganizationUnitId </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or Sets LastName to Search the AccountGrid with Description </summary>
+        /// <summary> Gets or Sets the LastName to Search the Accounts with Description </summary>
         public string Description { get; set; }
-        /// <summary> Gets or Sets Caption to Search the AccountGrid with Caption </summary>
+        /// <summary> Gets or Sets the Caption to Search the Accounts with Caption </summary>
         public string Caption { get; set; }
-        /// <summary> Gets or Sets AccountNumber to Search the AccountGrid with AccountNumber </summary>
+        /// <summary> Gets or Sets the AccountNumber to Search the Accounts with AccountNumber </summary>
         public string AccountNumber { get; set; }
+
+        /// <summary> Gets or Sets the ChartOfAccountId to Search the Accounts with ChartOfAccountId </summary>
         [Range(1, int.MaxValue, ErrorMessage = "Please enter valid ChartOfAccount")]
         public int CoaId { get; set; }
 

@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     public class GetCoaInput : PagedAndSortedInputDto, IShouldNormalize
     {
-        /// <summary> Gets or Sets LastName to Search the CoaGrid with  OrganizationUnitId </summary>
+        /// <summary> Gets or Sets the CompanyId to Search the ChartofAccounts with CompanyId. </summary>
         public long? OrganizationUnitId { get; set; }
 
-        /// <summary> Gets or Sets LastName to Search the CoaGrid with Description </summary>
-        public string Description { get; set; } 
+        /// <summary> Gets or Sets the Description to Search the ChartofAccounts with Description. </summary>
+        public string Description { get; set; }
 
-        /// <summary> Gets or Sets LastName to Search the CoaGrid with LastName </summary>
+        /// <summary> Gets or Sets the ChartofAccountsType to Search the ChartofAccounts with ChartofAccountsType. </summary>
         public ChartofAccountsType? ChartofAccountsType { get; set; } = null;
         public void Normalize()
         {

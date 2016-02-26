@@ -1,6 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {   
@@ -52,17 +51,20 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the TypeofProject field. </summary>
         public TypeofProject? TypeofProjectId { get; set; }
 
-        /// <summary>Gets or sets the TaxRecovery field. </summary>
+        /// <summary>Gets or sets the TaxRecoveryId field. </summary>
         public TaxRecovery? TaxRecoveryId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
+        /// <summary> Gets or sets the JobDetails.</summary>
         public JobCommercialUnitDto JobDetails { get; set; }
-        public string DetailReport { get; set; } = "Detail Report";
-
+        private string DetailReport { get; set; } = "Detail Report";
+       
+        /// <summary> Gets or sets the Director.</summary>
         public string Director { get; set; }
-
+       
+        /// <summary> Gets or sets the Agency.</summary>
         public string Agency { get; set; }
     }
 }

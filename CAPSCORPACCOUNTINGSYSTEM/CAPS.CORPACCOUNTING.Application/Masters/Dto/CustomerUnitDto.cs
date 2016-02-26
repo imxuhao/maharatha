@@ -7,7 +7,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     [AutoMapFrom(typeof(CustomerUnit))]  
     public class CustomerUnitDto : IOutputDto
     {
-        /// <summary>Gets or sets the CustomerId</summary>
+        /// <summary>Gets or sets the CustomerId field.</summary>
         public int CustomerId { get; set; }
        
         /// <summary>Gets or sets the LastName field. </summary>
@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CreditLimit field. </summary>
         public decimal? CreditLimit { get; set; }
 
-        /// <summary> Gets or Sets TypeofPaymentMethodId </summary>
+        /// <summary> Gets or Sets TypeofPaymentMethodId field.</summary>
         public TypeofPaymentMethod? TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
@@ -44,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public long? OrganizationUnitId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Address Collection
+        /// Gets or Sets the Address of the Customer.
         /// </summary>
         public Collection<AddressUnitDto> Addresses { get; set; }
 

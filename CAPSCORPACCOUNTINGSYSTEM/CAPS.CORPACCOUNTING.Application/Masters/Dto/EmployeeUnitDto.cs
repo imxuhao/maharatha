@@ -19,46 +19,46 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the EmployeeRegion field. </summary>
         public string EmployeeRegion { get; set; }
 
-        /// <summary>Gets or sets the SSNTaxID field. </summary>
+        /// <summary>Gets or sets the SSNTaxId field. </summary>
         public string SSNTaxId { get; set; }
 
-        /// <summary>Gets or sets the [FederalTaxID] field. </summary>
+        /// <summary>Gets or sets the FederalTaxID field. </summary>
         public string FederalTaxId { get; set; }
 
-        /// <summary>Gets or sets the Is Is1099 field. </summary>
+        /// <summary>Gets or sets the Is1099 field. </summary>
         public bool Is1099 { get; set; }
 
-        /// <summary>Gets or sets the Is IsW9onFile field. </summary>
+        /// <summary>Gets or sets the IsW9onFile field. </summary>
         public bool IsW9OnFile { get; set; }
 
-        /// <summary>Gets or sets the Is IsIndependantContractor field. </summary>
+        /// <summary>Gets or sets the IsIndependantContractor field. </summary>
         public bool IsIndependantContractor { get; set; }
 
-        /// <summary>Gets or sets the Is IsCorporation field. </summary>
+        /// <summary>Gets or sets the IsCorporation field. </summary>
         public bool IsCorporation { get; set; }
 
-        /// <summary>Gets or sets the Is IsProducer field. </summary>
+        /// <summary>Gets or sets the IsProducer field. </summary>
         public bool IsProducer { get; set; }
 
-        /// <summary>Gets or sets the Is IsDirector field. </summary>
+        /// <summary>Gets or sets the IsDirector field. </summary>
         public bool IsDirector { get; set; }
 
-        /// <summary>Gets or sets the Is IsDirPhoto field. </summary>
+        /// <summary>Gets or sets the IsDirPhoto field. </summary>
         public bool IsDirPhoto { get; set; }
 
-        /// <summary>Gets or sets the Is IsSetDesigner field. </summary>
+        /// <summary>Gets or sets the IsSetDesigner field. </summary>
         public bool IsSetDesigner { get; set; }
 
-        /// <summary>Gets or sets the Is IsEditor field. </summary>
+        /// <summary>Gets or sets the IsEditor field. </summary>
         public bool IsEditor { get; set; }
 
-        /// <summary>Gets or sets the Is IsArtDirector field. </summary>
+        /// <summary>Gets or sets the IsArtDirector field. </summary>
         public bool IsArtDirector { get; set; }
 
-        /// <summary>Gets or sets the Is IsApproved field. </summary>
+        /// <summary>Gets or sets the IsApproved field. </summary>
         public bool IsApproved { get; set; }
 
-        /// <summary>Gets or sets the Is IsActivet field. </summary>
+        /// <summary>Gets or sets the IsActivet field. </summary>
         public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
@@ -67,7 +67,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
         
-        /// <summary> Gets or Sets Address Collection of a Employee </summary>
+        /// <summary> Gets or Sets the Addresses of the Employee </summary>
         public Collection<AddressUnitDto> Addresses { get; set; }
     }
 }

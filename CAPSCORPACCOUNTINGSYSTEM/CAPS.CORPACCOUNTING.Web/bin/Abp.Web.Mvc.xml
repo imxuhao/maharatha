@@ -10,6 +10,12 @@
             to make that action usable only by authorized users. 
             </summary>
         </member>
+        <member name="P:Abp.Web.Mvc.Authorization.AbpMvcAuthorizeAttribute.Permissions">
+            <inheritdoc/>
+        </member>
+        <member name="P:Abp.Web.Mvc.Authorization.AbpMvcAuthorizeAttribute.RequireAllPermissions">
+            <inheritdoc/>
+        </member>
         <member name="M:Abp.Web.Mvc.Authorization.AbpMvcAuthorizeAttribute.#ctor(System.String[])">
             <summary>
             Creates a new instance of <see cref="T:Abp.Web.Mvc.Authorization.AbpMvcAuthorizeAttribute"/> class.
@@ -19,15 +25,81 @@
         <member name="M:Abp.Web.Mvc.Authorization.AbpMvcAuthorizeAttribute.AuthorizeCore(System.Web.HttpContextBase)">
             <inheritdoc/>
         </member>
-        <member name="P:Abp.Web.Mvc.Authorization.AbpMvcAuthorizeAttribute.Permissions">
-            <inheritdoc/>
-        </member>
-        <member name="P:Abp.Web.Mvc.Authorization.AbpMvcAuthorizeAttribute.RequireAllPermissions">
-            <inheritdoc/>
-        </member>
         <member name="T:Abp.Web.Mvc.Controllers.AbpController">
             <summary>
             Base class for all MVC Controllers in Abp system.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.AbpSession">
+            <summary>
+            Gets current session information.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.EventBus">
+            <summary>
+            Gets the event bus.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.PermissionManager">
+            <summary>
+            Reference to the permission manager.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.SettingManager">
+            <summary>
+            Reference to the setting manager.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.PermissionChecker">
+            <summary>
+            Reference to the permission checker.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.FeatureManager">
+            <summary>
+            Reference to the feature manager.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.FeatureChecker">
+            <summary>
+            Reference to the permission checker.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.LocalizationManager">
+            <summary>
+            Reference to the localization manager.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.LocalizationSourceName">
+            <summary>
+            Gets/sets name of the localization source that is used in this application service.
+            It must be set in order to use <see cref="M:Abp.Web.Mvc.Controllers.AbpController.L(System.String)"/> and <see cref="M:Abp.Web.Mvc.Controllers.AbpController.L(System.String,System.Globalization.CultureInfo)"/> methods.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.LocalizationSource">
+            <summary>
+            Gets localization source.
+            It's valid if <see cref="P:Abp.Web.Mvc.Controllers.AbpController.LocalizationSourceName"/> is set.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.Logger">
+            <summary>
+            Reference to the logger to write logs.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.CurrentSession">
+            <summary>
+            Gets current session information.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.UnitOfWorkManager">
+            <summary>
+            Reference to <see cref="T:Abp.Domain.Uow.IUnitOfWorkManager"/>.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Controllers.AbpController.CurrentUnitOfWork">
+            <summary>
+            Gets current unit of work.
             </summary>
         </member>
         <member name="F:Abp.Web.Mvc.Controllers.AbpController._actionStopwatch">
@@ -117,78 +189,6 @@
             <param name="contentEncoding">Content encoding.</param>
             <param name="behavior">Behavior.</param>
         </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.AbpSession">
-            <summary>
-            Gets current session information.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.EventBus">
-            <summary>
-            Gets the event bus.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.PermissionManager">
-            <summary>
-            Reference to the permission manager.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.SettingManager">
-            <summary>
-            Reference to the setting manager.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.PermissionChecker">
-            <summary>
-            Reference to the permission checker.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.FeatureManager">
-            <summary>
-            Reference to the feature manager.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.FeatureChecker">
-            <summary>
-            Reference to the permission checker.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.LocalizationManager">
-            <summary>
-            Reference to the localization manager.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.LocalizationSourceName">
-            <summary>
-            Gets/sets name of the localization source that is used in this application service.
-            It must be set in order to use <see cref="M:Abp.Web.Mvc.Controllers.AbpController.L(System.String)"/> and <see cref="M:Abp.Web.Mvc.Controllers.AbpController.L(System.String,System.Globalization.CultureInfo)"/> methods.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.LocalizationSource">
-            <summary>
-            Gets localization source.
-            It's valid if <see cref="P:Abp.Web.Mvc.Controllers.AbpController.LocalizationSourceName"/> is set.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.Logger">
-            <summary>
-            Reference to the logger to write logs.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.CurrentSession">
-            <summary>
-            Gets current session information.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.UnitOfWorkManager">
-            <summary>
-            Reference to <see cref="T:Abp.Domain.Uow.IUnitOfWorkManager"/>.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Controllers.AbpController.CurrentUnitOfWork">
-            <summary>
-            Gets current unit of work.
-            </summary>
-        </member>
         <member name="T:Abp.Web.Mvc.Controllers.AbpScriptsController">
             <summary>
             This controller is used to create client side scripts
@@ -254,6 +254,14 @@
             <param name="controllerType">Controller type</param>
             <returns></returns>
         </member>
+        <member name="T:Abp.Web.Mvc.Controllers.ControllerConventionalRegistrar">
+            <summary>
+            Registers all MVC Controllers derived from <see cref="T:System.Web.Mvc.Controller"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Web.Mvc.Controllers.ControllerConventionalRegistrar.RegisterAssembly(Abp.Dependency.IConventionalRegistrationContext)">
+            <inheritdoc/>
+        </member>
         <member name="T:Abp.Web.Mvc.Extensions.HtmlHelperResourceExtensions">
             <summary>
             TODO: What if resource changes? How to update cache?
@@ -283,9 +291,41 @@
             This class is used to create standard responses for ajax requests.
             </summary>
         </member>
+        <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse.#ctor">
+            <summary>
+            Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object.
+            <see cref="!:AjaxResponse.Success"/> is set as true.
+            </summary>
+        </member>
+        <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse.#ctor(System.Boolean)">
+            <summary>
+            Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object with <see cref="!:AjaxResponse.Success"/> specified.
+            </summary>
+            <param name="success">Indicates success status of the result</param>
+        </member>
+        <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse.#ctor(System.Object)">
+            <summary>
+            Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object with <see cref="!:AjaxResponse.Result"/> specified.
+            <see cref="!:AjaxResponse.Success"/> is set as true.
+            </summary>
+            <param name="result">The actual result object of ajax request</param>
+        </member>
+        <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse.#ctor(Abp.Web.Models.ErrorInfo,System.Boolean)">
+            <summary>
+            Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object with <see cref="!:AjaxResponse.Error"/> specified.
+            <see cref="!:AjaxResponse.Success"/> is set as false.
+            </summary>
+            <param name="error">Error details</param>
+            <param name="unAuthorizedRequest">Used to indicate that the current user has no privilege to perform this request</param>
+        </member>
         <member name="T:Abp.Web.Mvc.Models.MvcAjaxResponse`1">
             <summary>
             This class is used to create standard responses for ajax requests.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Models.MvcAjaxResponse`1.TargetUrl">
+            <summary>
+            This property can be used to redirect user to a specified URL.
             </summary>
         </member>
         <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse`1.#ctor">
@@ -308,38 +348,6 @@
             <param name="result">The actual result object of ajax request</param>
         </member>
         <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse`1.#ctor(Abp.Web.Models.ErrorInfo,System.Boolean)">
-            <summary>
-            Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object with <see cref="!:AjaxResponse.Error"/> specified.
-            <see cref="!:AjaxResponse.Success"/> is set as false.
-            </summary>
-            <param name="error">Error details</param>
-            <param name="unAuthorizedRequest">Used to indicate that the current user has no privilege to perform this request</param>
-        </member>
-        <member name="P:Abp.Web.Mvc.Models.MvcAjaxResponse`1.TargetUrl">
-            <summary>
-            This property can be used to redirect user to a specified URL.
-            </summary>
-        </member>
-        <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse.#ctor">
-            <summary>
-            Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object.
-            <see cref="!:AjaxResponse.Success"/> is set as true.
-            </summary>
-        </member>
-        <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse.#ctor(System.Boolean)">
-            <summary>
-            Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object with <see cref="!:AjaxResponse.Success"/> specified.
-            </summary>
-            <param name="success">Indicates success status of the result</param>
-        </member>
-        <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse.#ctor(System.Object)">
-            <summary>
-            Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object with <see cref="!:AjaxResponse.Result"/> specified.
-            <see cref="!:AjaxResponse.Success"/> is set as true.
-            </summary>
-            <param name="result">The actual result object of ajax request</param>
-        </member>
-        <member name="M:Abp.Web.Mvc.Models.MvcAjaxResponse.#ctor(Abp.Web.Models.ErrorInfo,System.Boolean)">
             <summary>
             Creates an <see cref="T:Abp.Web.Mvc.Models.MvcAjaxResponse"/> object with <see cref="!:AjaxResponse.Error"/> specified.
             <see cref="!:AjaxResponse.Success"/> is set as false.
@@ -381,14 +389,6 @@
         <member name="M:Abp.Web.Mvc.AbpWebMvcModule.Initialize">
             <inheritdoc/>
         </member>
-        <member name="T:Abp.Web.Mvc.Controllers.ControllerConventionalRegistrar">
-            <summary>
-            Registers all MVC Controllers derived from <see cref="T:System.Web.Mvc.Controller"/>.
-            </summary>
-        </member>
-        <member name="M:Abp.Web.Mvc.Controllers.ControllerConventionalRegistrar.RegisterAssembly(Abp.Dependency.IConventionalRegistrationContext)">
-            <inheritdoc/>
-        </member>
         <member name="T:Abp.Web.Mvc.Views.AbpWebViewPage">
             <summary>
             Base class for all views in Abp system.
@@ -399,6 +399,22 @@
             Base class for all views in Abp system.
             </summary>
             <typeparam name="TModel">Type of the View Model</typeparam>
+        </member>
+        <member name="P:Abp.Web.Mvc.Views.AbpWebViewPage`1.ApplicationPath">
+            <summary>
+            Gets the root path of the application.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Views.AbpWebViewPage`1.SettingManager">
+            <summary>
+            Reference to the setting manager.
+            </summary>
+        </member>
+        <member name="P:Abp.Web.Mvc.Views.AbpWebViewPage`1.LocalizationSourceName">
+            <summary>
+            Gets/sets name of the localization source that is used in this controller.
+            It must be set in order to use <see cref="M:Abp.Web.Mvc.Views.AbpWebViewPage`1.L(System.String)"/> and <see cref="M:Abp.Web.Mvc.Views.AbpWebViewPage`1.L(System.String,System.Globalization.CultureInfo)"/> methods.
+            </summary>
         </member>
         <member name="M:Abp.Web.Mvc.Views.AbpWebViewPage`1.#ctor">
             <summary>
@@ -492,22 +508,6 @@
             </summary>
             <param name="featureName">Feature name</param>
             <returns>Value of the feature</returns>
-        </member>
-        <member name="P:Abp.Web.Mvc.Views.AbpWebViewPage`1.ApplicationPath">
-            <summary>
-            Gets the root path of the application.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Views.AbpWebViewPage`1.SettingManager">
-            <summary>
-            Reference to the setting manager.
-            </summary>
-        </member>
-        <member name="P:Abp.Web.Mvc.Views.AbpWebViewPage`1.LocalizationSourceName">
-            <summary>
-            Gets/sets name of the localization source that is used in this controller.
-            It must be set in order to use <see cref="M:Abp.Web.Mvc.Views.AbpWebViewPage`1.L(System.String)"/> and <see cref="M:Abp.Web.Mvc.Views.AbpWebViewPage`1.L(System.String,System.Globalization.CultureInfo)"/> methods.
-            </summary>
         </member>
     </members>
 </doc>

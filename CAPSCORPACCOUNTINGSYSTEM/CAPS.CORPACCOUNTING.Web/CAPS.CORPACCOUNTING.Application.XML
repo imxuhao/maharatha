@@ -62,6 +62,9 @@
             Because, these settings can only be set by tenant in a single-tenant application.
             </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobAccountUnitInput.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobAccountUnitInput.AccountId">
             <summary>Gets or sets the AccountId field. </summary>
         </member>
@@ -75,7 +78,7 @@
             <summary>Gets or sets the RollupAccountId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobAccountUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobBudgetUnitInput.JobId">
             <summary>Gets or sets the JobId field. </summary>
@@ -111,7 +114,7 @@
             <summary>Gets or sets the RollupAccountId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobBudgetUnitDto.JobBudgetId">
             <summary>Gets or sets the JobBudgetId field. </summary>
@@ -132,14 +135,10 @@
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput.JobAccountId">
-            <summary>
-            >Gets or sets the JobAccountId field.
-            </summary>
+            <summary>Gets or sets the JobAccountId field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput.JobId">
-            <summary>
-            >Gets or sets the JobId field.
-            </summary>
+            <summary>Gets or sets the JobId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput.AccountId">
             <summary>Gets or sets the AccountId field. </summary>
@@ -154,7 +153,7 @@
             <summary>Gets or sets the RollupAccountId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobBudgetUnitInput.JobBudgetId">
             <summary>Gets or sets the JobBudgetId field. </summary>
@@ -184,10 +183,10 @@
             <summary>Gets or sets the LocationId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto.LocationSiteDate">
-            <summary>Gets or sets the LocationSite1Date field. </summary>
+            <summary>Gets or sets the LocationSiteDate field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput.JobLocationId">
             <summary>Gets or sets the JobLocationId field. </summary>
@@ -199,10 +198,10 @@
             <summary>Gets or sets the LocationId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput.LocationSiteDate">
-            <summary>Gets or sets the LocationSite1Date field. </summary>
+            <summary>Gets or sets the LocationSiteDate field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobLocationInput.JobId">
             <summary>Gets or sets the JobId field. </summary>
@@ -217,16 +216,31 @@
             <summary>Gets or sets the Company field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the SalesRepGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the ComapnyId to Search the Jobs based on  ComapnyId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.Caption">
-            <summary> Gets or Sets LastName to Search the SalesRepGrid with LastName </summary>
+            <summary> Gets or Sets the Caption to Search the Jobs based on Caption. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.ProductName">
+            <summary> Gets or Sets the ProductName to Search the Jobdetails based on ProductName. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.JobNumber">
+            <summary> Gets or Sets the JobNumber to Search the Jobs based on JobNumber. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.Director">
+            <summary> Gets or Sets the Director to Search the Employees based on EmployeeLastName. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.Agency">
+            <summary> Gets or Sets the Agency to Search the Customers based on CustomerId. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.TypeOfJobStatusId">
+            <summary> Gets or Sets the TypeOfJobStatusId to Search the Jobs based on TypeOfJobStatusId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.JobCommercialId">
-            <summary>Gets or Sets JobId Field.  </summary>
+            <summary>Gets or Sets JobId Field.  </summary>        
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.JobId">
-            <summary>Gets or Sets JobId Field.  </summary>
+            <summary>Gets or Sets JobId Field.  </summary>      
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.BidDate">
             <summary>Gets or Sets BidDate Field.  </summary>
@@ -433,10 +447,10 @@
             <summary>Gets or Sets Company Field.  </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.JobLocations">
-            <summary>Gets or Sets the JobLocations for Employee </summary>
+            <summary>Gets or Sets the JobLocations of the Employee. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.JobCommercialId">
-            <summary>Gets or Sets JobId Field.  </summary>
+            <summary>Gets or Sets JobCommercialId Field.  </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.JobId">
             <summary>Gets or Sets JobId Field.  </summary>
@@ -646,7 +660,7 @@
             <summary>Gets or Sets Company Field.  </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.JobLocations">
-            <summary>Gets or Sets the JobLocations for Job </summary>
+            <summary>Gets or Sets the JobLocations of the Job. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.JobId">
             <summary>Gets or Sets JobId Field.  </summary>
@@ -853,16 +867,19 @@
             <summary>Gets or Sets AgencyEmail Field.  </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.OrganizationUnitId">
-            <summary>Gets or Sets Company Field.  </summary>
+            <summary>Gets or Sets CompanyId Field.  </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.JobLocations">
-            <summary>Gets or Sets the JobLocations for Job </summary>
+            <summary>Gets or Sets the JobLocations of the Job </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetRollupCenterInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the SalesRepGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the CompanyId to Search the RollupCenters based on  CompanyId </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetRollupCenterInput.Caption">
-            <summary> Gets or Sets LastName to Search the SalesRepGrid with LastName </summary>
+            <summary> Gets or Sets the LastName to Search the RollupCenters based on LastName </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetRollupCenterInput.RollupTypeId">
+            <summary> Gets or Sets the RollupTypeId to Search the RollupCenters based on RollupTypeId </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto.RollupCenterId">
             <summary>Gets or sets the RollupCenterId field. </summary>
@@ -874,7 +891,7 @@
             <summary>Gets or sets the AccountId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto.JobId">
-            <summary>Gets or sets the Job field. </summary>
+            <summary>Gets or sets the JobId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto.IsActive">
             <summary>Gets or sets the IsActive field. </summary>
@@ -883,10 +900,10 @@
             <summary>Gets or sets the IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto.RollupTypeID">
-            <summary>Gets or sets the RollupTypeID field. </summary>
+            <summary>Gets or sets the RollupTypeId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateRollupCenterUnitInput.RollupCenterId">
             <summary>Gets or sets the RollupCenterId field. </summary>
@@ -907,10 +924,10 @@
             <summary>Gets or sets the IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateRollupCenterUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateRollupCenterUnitInput.RollupTypeId">
-            <summary>Gets or sets the RollupTypeID field. </summary>
+            <summary>Gets or sets the RollupTypeId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateRollupCenterUnitInput.Caption">
             <summary>Gets or sets the Caption field. </summary>
@@ -928,10 +945,10 @@
             <summary>Gets or sets the IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateRollupCenterUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateRollupCenterUnitInput.RollupTypeId">
-            <summary>Gets or sets the RollupTypeID field. </summary>
+            <summary>Gets or sets the RollupTypeId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.JobId">
             <summary>Gets or sets the JobId field. </summary>
@@ -979,10 +996,19 @@
             <summary>Gets or sets the TypeofProject field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TaxRecoveryId">
-            <summary>Gets or sets the TaxRecovery field. </summary>
+            <summary>Gets or sets the TaxRecoveryId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.JobDetails">
+            <summary> Gets or sets the JobDetails.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.Director">
+            <summary> Gets or sets the Director.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.Agency">
+            <summary> Gets or sets the Agency.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.JobId">
             <summary>Gets or sets the JobId field. </summary>
@@ -1082,6 +1108,218 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on JobAccount.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService.CreateJobAccountUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobAccountUnitInput)">
+            <summary>
+            This is used to create the JobAccount.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService.UpdateJobAccountUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput)">
+            <summary>
+             This is used to update the JobAccount based on JobAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService.DeleteJobAccountUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the JobAccount based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService.GetJobAccountUnits(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the list of all JobAccounts based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on JobBudget.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService.CreateJobBudgetUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobBudgetUnitInput)">
+            <summary>
+            This is used to create the JobBudget.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService.UpdateJobBudgetUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobBudgetUnitInput)">
+            <summary>
+             This is used to update the JobBudget based on JobBudgetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService.DeleteJobBudgetUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the JobBudget based on JobBudgetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService.GetJobBudgetUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the JobBudget based on JobBudgetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService">
+            <summary>
+            This service will provide all CRUD operations on JobLocation.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.CreateJobLocationUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobLocationInput)">
+            <summary>
+            This is used to create the JobLocation.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.UpdateJobLocationUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput)">
+            <summary>
+            This is used to update the JobLocation based on JobLocationId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.GetJobLocationUnitsByJobId(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the list of all JobLocations based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.DeleteJobLocationUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the JobLocation based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService">
+            <summary>
+            This service will provide all CRUD operations on JobDetail.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.CreateJobDetailUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput)">
+            <summary>
+            This is used to create the JobDetail. 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.UpdateJobDetailUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput)">
+            <summary>
+            This is used to update the JobDetail based on JobDetailId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.DeleteJobDetailUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the JobBudget based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.GetJobDetailsByJobId(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the JobBudget based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on RollupCenter.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService.CreateRollupCenterUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateRollupCenterUnitInput)">
+            <summary>
+            This is used to create the RollupCenter.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService.UpdateRollupCenterUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateRollupCenterUnitInput)">
+            <summary>
+            This is used to update the RollupCenter based on RollupCenterId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService.DeleteRollupCenterUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the RollupCenter based on RollupCenterId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService.GetRollupCenterUnits(CAPS.CORPACCOUNTING.JobCosting.Dto.GetRollupCenterInput)">
+            <summary>
+            This is used to get the list of all RollupCenters and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService.GetRollupCenterUnitById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the RollupCenter based on RollupCenterId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on Job.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.CreateJobUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput)">
+            <summary>
+             This is used to create the Job.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.UpdateJobUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput)">
+            <summary>
+            This is used to update the Job based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.DeleteJobUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the Job based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetJobUnits(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
+            <summary>
+            This is used to get the list of all Jobs and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetJobUnitById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the Job based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService.CreateJobDetailUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput)">
             <summary>
@@ -1245,7 +1483,7 @@
             <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto.LocationSetId">
-            <summary>>Gets or sets the Number field.</summary>       
+            <summary>>Gets or sets the LocationSetId field.</summary>       
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto.TypeOfLocationSetId">
             <summary>Gets or sets the TypeOfLocationSetId field. </summary>
@@ -1257,10 +1495,10 @@
             <summary>Gets or sets the Description field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput.LocationSetId">
-            <summary>>Gets or sets the Number field.</summary>    
+            <summary>>Gets or sets the LocationSetId field.</summary>    
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput.TypeOfLocationSetId">
             <summary>Gets or sets the TypeOfLocationSetId field. </summary>
@@ -1272,7 +1510,7 @@
             <summary>Gets or sets the Description field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateLocationSetUnitInput.TypeOfLocationSetId">
             <summary>Gets or sets the TypeOfLocationSetId field. </summary>
@@ -1284,10 +1522,10 @@
             <summary>Gets or sets the Description field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateLocationSetUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the Company field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.AddressId">
-            <summary>>Gets or sets the AddressId</summary>
+            <summary>>Gets or sets the AddressId field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.ObjectId">
             <summary>Gets or sets the ObjectId field. </summary>
@@ -1349,8 +1587,23 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.IsPrimary">
             <summary>Gets or sets the IsPrimary field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.TenantId">
+            <summary>Gets or sets the TenantId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerAndAddressDto.Customer">
+            <summary>Gets or sets the CustomerUnit. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerAndAddressDto.Address">
+            <summary>Gets or sets the AddressUnit. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerAndAddressDto.PaymentTerms">
+            <summary>Gets or sets the PaymentTerms field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerAndAddressDto.SalesRepName">
+            <summary>Gets or sets the SalesRepName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput.ObjectId">
             <summary>Gets or sets the ObjectId field. </summary>
@@ -1358,98 +1611,120 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput.TypeofObjectId">
             <summary>Gets or sets the TypeofObjectId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeAndAddressDto.Employee">
+            <summary>
+            Gets or sets the EmployeeUnit.
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeAndAddressDto.Address">
+            <summary>
+             Gets or sets the AddressUnit.
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the AccountGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the LastName to Search the Accounts with  OrganizationUnitId </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput.Description">
-            <summary> Gets or Sets LastName to Search the AccountGrid with Description </summary>
+            <summary> Gets or Sets the LastName to Search the Accounts with Description </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput.Caption">
-            <summary> Gets or Sets Caption to Search the AccountGrid with Caption </summary>
+            <summary> Gets or Sets the Caption to Search the Accounts with Caption </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput.AccountNumber">
-            <summary> Gets or Sets AccountNumber to Search the AccountGrid with AccountNumber </summary>
+            <summary> Gets or Sets the AccountNumber to Search the Accounts with AccountNumber </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput.CoaId">
+            <summary> Gets or Sets the ChartOfAccountId to Search the Accounts with ChartOfAccountId </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerPaymentTermInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the CustomerPaymentTermGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the CompanyId to Search the CustomerPaymentTermGrid with  CompanyId </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetEmployeeInput.LastName">
-            <summary> Gets or Sets LastName  to Search the EmployeeGrid with  LastName </summary>
+            <summary> Gets or Sets the LastName to Search the Employees based on LastName. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetEmployeeInput.FirstName">
-            <summary> Gets or Sets FirstName to Search the EmployeeGrid with  FirstName </summary>
+            <summary> Gets or Sets the FirstName to Search the Employees based on FirstName. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetEmployeeInput.FedralTaxId">
-            <summary>Gets or sets the FedralTaxId to Search the EmployeeGrid with FedralTaxId. </summary>
+            <summary>Gets or sets the FedralTaxId to Search the Employees based on FedralTaxId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetEmployeeInput.SSNTaxId">
-            <summary>Gets or sets the SSNTaxId to Search the EmployeeGrid with SSNTaxId. </summary>
+            <summary>Gets or sets the SSNTaxId to Search the Employees based on SSNTaxId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetEmployeeInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the EmployeeGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the LastName to Search the Employees based on CompanyId </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the CoaGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the CompanyId to Search the ChartofAccounts with CompanyId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.Description">
-            <summary> Gets or Sets LastName to Search the CoaGrid with Description </summary>
+            <summary> Gets or Sets the Description to Search the ChartofAccounts with Description. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.ChartofAccountsType">
-            <summary> Gets or Sets LastName to Search the CoaGrid with LastName </summary>
+            <summary> Gets or Sets the ChartofAccountsType to Search the ChartofAccounts with ChartofAccountsType. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetSalesRepInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the SalesRepGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the LastName to Search the SalesRepresentatives based on CompanyId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetSalesRepInput.LastName">
-            <summary> Gets or Sets LastName to Search the SalesRepGrid with LastName </summary>
+            <summary> Gets or Sets the LastName to Search the SalesRepresentatives based on LastName. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorAndAddressDto.Vendor">
+            <summary>Gets or sets the VendorUnit.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorAndAddressDto.Address">
+            <summary>Gets or sets the AddressUnit.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorAndAddressDto.PaymentTerms">
+            <summary>Gets or sets the PaymentTerms field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.LastName">
-            <summary> Gets or Sets LastName to Search the VendorGrid with LastName </summary>
+            <summary> Gets or Sets the LastName to Search the Vendors based on LastName. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.FirstName">
-            <summary> Gets or Sets FirstName to Search the VendorGrid with FirstName </summary>
+            <summary> Gets or Sets the FirstName to Search the Vendors based on FirstName. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.PayToName">
-            <summary> Gets or Sets PayToName to Search the VendorGrid with PayToName </summary>
+            <summary> Gets or Sets the PayToName to Search the Vendors based on PayToName. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.OrganizationUnitId">
-            <summary> Gets or Sets OrganizationUnitId to Search the VendorGrid with OrganizationUnitId </summary>
+            <summary> Gets or Sets the OrganizationUnitId to Search the Vendors based on CompanyId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.VendorNumber">
-            <summary>Gets or sets the VendorNumber  to Search the VendorGrid with VendorNumber. </summary>
+            <summary>Gets or sets the VendorNumber  to Search the Vendors based on VendorNumber. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.VendorAccountInfo">
-            <summary>Gets or sets the VendorAccountInfo  to Search the VendorGrid with VendorAccountInfo. </summary>
+            <summary>Gets or sets the VendorAccountInfo  to Search the Vendors based on VendorAccountInfo. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.FedralTaxId">
-            <summary>Gets or sets the FedralTaxId to Search the VendorGrid with FedralTaxId. </summary>
+            <summary>Gets or sets the FedralTaxId to Search the Vendors based on FedralTaxId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.SSNTaxId">
-            <summary>Gets or sets the SSNTaxId to Search the VendorGrid with SSNTaxId. </summary>
+            <summary>Gets or sets the SSNTaxId to Search the Vendors based on SSNTaxId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.PhoneorEmail">
-            <summary>Gets or sets the PhoneorEmail to Search the VendorGrid with Phone1 or phone2 or Email. </summary>
+            <summary>Gets or sets the PhoneorEmail to Search the Vendors based on Phone1 or phone2 or Email. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.Typeof1099Box">
-            <summary>Gets or sets the Typeof1099Box to Search the VendorGrid with Typeof1099Box. </summary>
+            <summary>Gets or sets the Typeof1099Box to Search the Vendors based on Typeof1099Box. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput.TypeofVendorId">
-            <summary>Gets or sets the TypeofVendorId to Search the VendorGrid with TypeofVendorId. </summary>
+            <summary>Gets or sets the TypeofVendorId to Search the Vendors based on TypeofVendorId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerInput.LastName">
-            <summary> Gets or Sets LastName  to Search the CustomerGrid with  LastName </summary>
+            <summary> Gets or Sets the LastName  to Search the Customers based on LastName. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerInput.FirstName">
-            <summary> Gets or Sets FirstName to Search the CustomerGrid with  FirstName </summary>
+            <summary> Gets or Sets the FirstName to Search the Customers based on FirstName. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerInput.CustomerNumber">
-            <summary> Gets or Sets CustomerNumber to Search the CustomerGrid with  CustomerNumber </summary>
+            <summary> Gets or Sets the CustomerNumber to Search the Customers based on CustomerNumber. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the CustomerGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the CompanyId to Search the Customers based on CompanyId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetVendorPayTermsInput.OrganizationUnitId">
-            <summary> Gets or Sets LastName to Search the CustomerPaymentTermGrid with  OrganizationUnitId </summary>
+            <summary> Gets or Sets the CompanyId to Search the CustomerPaymentTerms based on  CompanyId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.VendorId">
             <summary>Gets or sets the VendorId field. </summary>
@@ -1461,7 +1736,7 @@
             <summary>Gets or sets the FirstName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.PayToName">
-            <summary>Gets or sets the PayToName. </summary>
+            <summary>Gets or sets the PayToName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.DbaName">
             <summary>Gets or sets the DBAName field. </summary>
@@ -1506,7 +1781,7 @@
             <summary>Gets or sets the TypeOfvendorId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.Typeof1099Box">
-            <summary>Gets or sets the Typeof1099T4 field. </summary>
+            <summary>Gets or sets the Typeof1099Box field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.EDDContractStartDate">
             <summary>Gets or sets the EDDContractStartDate field. </summary>
@@ -1515,7 +1790,7 @@
             <summary>Gets or sets the EDDContractStopDate field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.EDDConctractAmount">
-            <summary>Gets or sets the EDDContractStopDate field. </summary>
+            <summary>Gets or sets the EDDConctractAmount field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.WorkRegion">
             <summary>Gets or sets the WorkRegion field. </summary>
@@ -1529,11 +1804,14 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.ACHRoutingNumber">
             <summary>Gets or sets the ACHRoutingNumber field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.ACHAccountNumber">
+            <summary>Gets or sets the ACHAccountNumber field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.ACHWireFromBankName">
             <summary>Gets or sets the ACHWireFromBankName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.ACHWireFromBankAddress">
-            <summary>Gets or sets the ACHWireFromBankName field. </summary>
+            <summary>Gets or sets the ACHWireFromBankAddress field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.ACHWireFromSwiftCode">
             <summary>Gets or sets the ACHWireFromSwiftCode field. </summary>
@@ -1566,7 +1844,7 @@
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.Address">
-            <summary>Gets or sets the Addresses of a vendor </summary>
+            <summary>Gets or sets the Addresses of the vendor. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.PaymentTermDescription">
             <summary>Gets or sets the PaymentTermDescription field. </summary>
@@ -1581,7 +1859,7 @@
             <summary>Gets or sets the FirstName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.PayToName">
-            <summary>Gets or sets the PayToName. </summary>
+            <summary>Gets or sets the PayToName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.DbaName">
             <summary>Gets or sets the DBAName field. </summary>
@@ -1635,7 +1913,7 @@
             <summary>Gets or sets the EDDContractStopDate field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.EDDConctractAmount">
-            <summary>Gets or sets the EDDContractStopDate field. </summary>
+            <summary>Gets or sets the EDDConctractAmount field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.WorkRegion">
             <summary>Gets or sets the WorkRegion field. </summary>
@@ -1688,8 +1966,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.InputAddress">
-            <summary> Gets or sets  AddressData of a Vendor </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.Addresses">
+            <summary> Gets or sets the  Addresses of the Vendor </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.LastName">
             <summary>Gets or sets the LastName field. </summary>
@@ -1698,7 +1976,7 @@
             <summary>Gets or sets the FirstName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.PayToName">
-            <summary>Gets or sets the PayToName. </summary>
+            <summary>Gets or sets the PayToName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.DbaName">
             <summary>Gets or sets the DBAName field. </summary>
@@ -1805,8 +2083,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.InputAddress">
-            <summary> Gets or sets AddressData of a Vendor </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.Addresses">
+            <summary> Gets or sets Addresses of the Vendor. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetAddressUnitInput.ObjectId">
             <summary>Gets or sets the ObjectId field. </summary>
@@ -1965,46 +2243,46 @@
             <summary>Gets or sets the FederalTaxID field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.Is1099">
-            <summary>Gets or sets the Is Is1099 field. </summary>
+            <summary>Gets or sets the Is1099 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsW9OnFile">
-            <summary>Gets or sets the Is IsW9onFile field. </summary>
+            <summary>Gets or sets the IsW9onFile field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsIndependantContractor">
-            <summary>Gets or sets the Is IsIndependantContractor field. </summary>
+            <summary>Gets or sets the IsIndependantContractor field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsCorporation">
-            <summary>Gets or sets the Is IsCorporation field. </summary>
+            <summary>Gets or sets the IsCorporation field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsProducer">
-            <summary>Gets or sets the Is IsProducer field. </summary>
+            <summary>Gets or sets the IsProducer field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsDirector">
-            <summary>Gets or sets the Is IsDirector field. </summary>
+            <summary>Gets or sets the IsDirector field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsDirPhoto">
-            <summary>Gets or sets the Is IsDirPhoto field. </summary>
+            <summary>Gets or sets the IsDirPhoto field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsSetDesigner">
-            <summary>Gets or sets the Is IsSetDesigner field. </summary>
+            <summary>Gets or sets the IsSetDesigner field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsEditor">
-            <summary>Gets or sets the Is IsEditor field. </summary>
+            <summary>Gets or sets the IsEditor field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsArtDirector">
-            <summary>Gets or sets the Is IsArtDirector field. </summary>
+            <summary>Gets or sets the IsArtDirector field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsApproved">
-            <summary>Gets or sets the Is IsApproved field. </summary>
+            <summary>Gets or sets the IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.IsActive">
-            <summary>Gets or sets the Is IsActivet field. </summary>
+            <summary>Gets or sets the IsActivet field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the OrganizationUnitId field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.InputAddresses">
-            <summary>Gets or Sets the Addresses for Employee </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.Addresses">
+            <summary>Gets or Sets Addresses of the Employee. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.EmployeeId">
             <summary>Gets or sets the  EmployeeId</summary>
@@ -2019,46 +2297,46 @@
             <summary>Gets or sets the EmployeeRegion field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.SSNTaxId">
-            <summary>Gets or sets the SSNTaxID field. </summary>
+            <summary>Gets or sets the SSNTaxId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.FederalTaxId">
-            <summary>Gets or sets the [FederalTaxID] field. </summary>
+            <summary>Gets or sets the FederalTaxID field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.Is1099">
-            <summary>Gets or sets the Is Is1099 field. </summary>
+            <summary>Gets or sets the Is1099 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsW9OnFile">
-            <summary>Gets or sets the Is IsW9onFile field. </summary>
+            <summary>Gets or sets the IsW9onFile field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsIndependantContractor">
-            <summary>Gets or sets the Is IsIndependantContractor field. </summary>
+            <summary>Gets or sets the IsIndependantContractor field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsCorporation">
-            <summary>Gets or sets the Is IsCorporation field. </summary>
+            <summary>Gets or sets the IsCorporation field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsProducer">
-            <summary>Gets or sets the Is IsProducer field. </summary>
+            <summary>Gets or sets the IsProducer field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsDirector">
-            <summary>Gets or sets the Is IsDirector field. </summary>
+            <summary>Gets or sets the IsDirector field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsDirPhoto">
-            <summary>Gets or sets the Is IsDirPhoto field. </summary>
+            <summary>Gets or sets the IsDirPhoto field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsSetDesigner">
-            <summary>Gets or sets the Is IsSetDesigner field. </summary>
+            <summary>Gets or sets the IsSetDesigner field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsEditor">
-            <summary>Gets or sets the Is IsEditor field. </summary>
+            <summary>Gets or sets the IsEditor field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsArtDirector">
-            <summary>Gets or sets the Is IsArtDirector field. </summary>
+            <summary>Gets or sets the IsArtDirector field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsApproved">
-            <summary>Gets or sets the Is IsApproved field. </summary>
+            <summary>Gets or sets the IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.IsActive">
-            <summary>Gets or sets the Is IsActivet field. </summary>
+            <summary>Gets or sets the IsActivet field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.TenantId">
             <summary>Gets or sets the TenantId field. </summary>
@@ -2067,7 +2345,7 @@
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto.Addresses">
-            <summary> Gets or Sets Address Collection of a Employee </summary>
+            <summary> Gets or Sets the Addresses of the Employee </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.EmployeeId">
             <summary>Gets or sets the EmployeeId field. </summary>
@@ -2088,46 +2366,46 @@
             <summary>Gets or sets the FederalTaxID field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.Is1099">
-            <summary>Gets or sets the Is Is1099 field. </summary>
+            <summary>Gets or sets the Is1099 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsW9OnFile">
-            <summary>Gets or sets the Is IsW9onFile field. </summary>
+            <summary>Gets or sets the IsW9onFile field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsIndependantContractor">
-            <summary>Gets or sets the Is IsIndependantContractor field. </summary>
+            <summary>Gets or sets the IsIndependantContractor field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsCorporation">
-            <summary>Gets or sets the Is IsCorporation field. </summary>
+            <summary>Gets or sets the IsCorporation field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsProducer">
-            <summary>Gets or sets the Is IsProducer field. </summary>
+            <summary>Gets or sets the IsProducer field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsDirector">
-            <summary>Gets or sets the Is IsDirector field. </summary>
+            <summary>Gets or sets the IsDirector field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsDirPhoto">
-            <summary>Gets or sets the Is IsDirPhoto field. </summary>
+            <summary>Gets or sets the IsDirPhoto field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsSetDesigner">
-            <summary>Gets or sets the Is IsSetDesigner field. </summary>
+            <summary>Gets or sets the IsSetDesigner field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsEditor">
-            <summary>Gets or sets the Is IsEditor field. </summary>
+            <summary>Gets or sets the IsEditor field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsArtDirector">
-            <summary>Gets or sets the Is IsArtDirector field. </summary>
+            <summary>Gets or sets the IsArtDirector field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsApproved">
-            <summary>Gets or sets the Is IsApproved field. </summary>
+            <summary>Gets or sets the IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.IsActive">
-            <summary>Gets or sets the Is IsActivet field. </summary>
+            <summary>Gets or sets the IsActivet field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.InputAddresses">
-            <summary> Gets or Sets Address Units for Employee </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput.Addresses">
+            <summary> Gets or Sets the Addresses of the Employee </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerUnitInput.CustomerId">
             <summary>Gets or sets the CustomerId field. </summary>
@@ -2165,6 +2443,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerUnitInput.InputAddresses">
             <summary> Gets or Sets Address Units </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.LastName">
+            <summary>Gets or sets the LastName field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.FirstName">
             <summary>Gets or sets the FirstName field. </summary>
         </member>
@@ -2172,10 +2453,10 @@
             <summary>Gets or sets the CustomerNumber field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.CreditLimit">
-            <summary>Gets or sets the CustomerNumber field. </summary>
+            <summary>Gets or sets the CreditLimit field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.TypeofPaymentMethodId">
-            <summary> Gets or Sets TypeofPaymentMethodId </summary>
+            <summary> Gets or Sets TypeofPaymentMethodId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.CustomerPayTermsId">
             <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
@@ -2187,16 +2468,16 @@
             <summary>Gets or sets the Is IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.IsActive">
-            <summary>Gets or sets the Is IsActivet field. </summary>
+            <summary>Gets or sets the Is IsActive field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.InputAddresses">
-            <summary>Gets or Sets the Addresses of Customer </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.Addresses">
+            <summary>Gets or Sets Addresses of the Customer. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.CustomerId">
-            <summary>Gets or sets the CustomerId</summary>
+            <summary>Gets or sets the CustomerId field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.LastName">
             <summary>Gets or sets the LastName field. </summary>
@@ -2211,7 +2492,7 @@
             <summary>Gets or sets the CreditLimit field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.TypeofPaymentMethodId">
-            <summary> Gets or Sets TypeofPaymentMethodId </summary>
+            <summary> Gets or Sets TypeofPaymentMethodId field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.CustomerPayTermsId">
             <summary>Gets or sets the Is CustomerPayTermsId field. </summary>
@@ -2233,7 +2514,7 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.Addresses">
             <summary>
-            Gets or Sets Address Collection
+            Gets or Sets the Address of the Customer.
             </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.PaymentTermDescription">
@@ -2338,6 +2619,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.Us1120IncomeStmtName">
             <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TenantId">
+            <summary>Gets or sets the TenantId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.OrganizationId">
             <summary>Gets or sets the OrganizationId field. </summary>
         </member>
@@ -2351,10 +2635,10 @@
             <summary>Gets or sets the Description field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.ChartofAccountsType">
-            <summary>Gets or sets the COA Type. </summary>
+            <summary>Gets or sets the COA Type field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.DisplaySequence">
-            <summary>Gets or sets the Display Sequence. </summary>
+            <summary>Gets or sets the Display Sequence field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.IsApproved">
             <summary>Gets or sets the IsApproved field. </summary>
@@ -2405,7 +2689,7 @@
             <summary>Gets or sets the Region field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateSalesRepUnitInput.IsActive">
-            <summary>Gets or sets the Is IsActivet field. </summary>
+            <summary>Gets or sets the Is IsActive field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateSalesRepUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
@@ -2438,7 +2722,7 @@
             <summary>Gets or sets the DiscountPercent field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerPaymentTermUnitInput.DiscountDays">
-            <summary>Gets or sets the DiscountDays. </summary>
+            <summary>Gets or sets the DiscountDays field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerPaymentTermUnitInput.OvernightInstructions">
             <summary>Gets or sets the OvernightInstructions field. </summary>
@@ -2492,10 +2776,10 @@
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorPaymentTermUnitInput.Description">
-            <summary>Gets or sets the Description</summary>
+            <summary>Gets or sets the Description field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorPaymentTermUnitInput.DueDays">
-            <summary>Gets or sets the DueDays. </summary>
+            <summary>Gets or sets the DueDays field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorPaymentTermUnitInput.DiscountDays">
             <summary>Gets or sets the DiscountDays field. </summary>
@@ -2603,7 +2887,16 @@
             <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.OrganizationId">
-            <summary>Gets or sets the OrganizationId field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.ParentId">
+            <summary>Gets or sets the ParentId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.AccountNumber">
+            <summary>Gets or sets the AccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.Caption">
+            <summary>Gets or sets the Caption field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.ChartOfAccountId">
             <summary>Gets or sets the ChartOfAccountId field. </summary>
@@ -2651,7 +2944,7 @@
             <summary>Gets or sets the TypeOfAccountId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.IsDocControlled">
-            <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+            <summary>Gets or sets the IsDocControlled field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.IsSummaryAccount">
             <summary>Gets or sets the IsSummaryAccount field. </summary>
@@ -2690,7 +2983,7 @@
             <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.OrganizationId">
-            <summary>Gets or sets the OrganizationId field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.Caption">
             <summary>Gets or sets the Caption field. </summary>
@@ -2714,7 +3007,7 @@
             <summary>Gets or sets the IsPrivate field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.OrganizationId">
-            <summary>Gets or sets the OrganizationId field. </summary>
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.Caption">
             <summary>Gets or sets the Caption field. </summary>
@@ -2741,13 +3034,13 @@
             <summary>Gets or sets the OrganizationId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorPaymentTermUnitInput.VendorPaymentTermId">
-            <summary>Gets or sets the VenorPaymentTermId</summary>
+            <summary>Gets or sets the VenorPaymentTermId field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorPaymentTermUnitInput.Description">
-            <summary>Gets or sets the Description</summary>
+            <summary>Gets or sets the Description field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorPaymentTermUnitInput.DueDays">
-            <summary>Gets or sets the DueDays. </summary>
+            <summary>Gets or sets the DueDays field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorPaymentTermUnitInput.DiscountDays">
             <summary>Gets or sets the DiscountDays field. </summary>
@@ -2759,7 +3052,7 @@
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.CustomerPaymentTermId">
-            <summary>Gets or sets the CustomerPaymentTermId</summary>
+            <summary>Gets or sets the CustomerPaymentTermId field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.Description">
             <summary>Gets or sets the Description field. </summary>
@@ -2768,25 +3061,25 @@
             <summary>Gets or sets the PaymentInstruction Type. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.DueDays">
-            <summary>Gets or sets the DueDays. </summary>
+            <summary>Gets or sets the DueDays field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.DiscountPercent">
-            <summary>Gets or sets the DiscountPercent. </summary>
+            <summary>Gets or sets the DiscountPercent field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.DiscountDays">
-            <summary>Gets or sets the DiscountDays. </summary>
+            <summary>Gets or sets the DiscountDays field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.OvernightInstructions">
-            <summary>Gets or sets the OvernightInstructions Type. </summary>
+            <summary>Gets or sets the OvernightInstructions field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.WiringInstructions">
-            <summary>Gets or sets the WiringInstructions Type. </summary>
+            <summary>Gets or sets the WiringInstructions field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.FooterMessage">
-            <summary>Gets or sets the FooterMessage Type. </summary>
+            <summary>Gets or sets the FooterMessage field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.LogoCaption">
-            <summary>Gets or sets the LogoCaption Type. </summary>
+            <summary>Gets or sets the LogoCaption field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto.IsDefault">
             <summary>Gets or sets the IsDefault field. </summary>
@@ -2798,13 +3091,13 @@
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto.VendorPaymentTermId">
-            <summary>Gets or sets the VendorPaymentTermId</summary>
+            <summary>Gets or sets the VendorPaymentTermId field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto.Description">
-            <summary>Gets or sets the Description</summary>
+            <summary>Gets or sets the Description field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto.DueDays">
-            <summary>Gets or sets the DueDays. </summary>
+            <summary>Gets or sets the DueDays field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto.DiscountDays">
             <summary>Gets or sets the DiscountDays field. </summary>
@@ -2860,6 +3153,86 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on Employee.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.CreateEmployeeUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput)">
+            <summary>
+             This is used to create the Employee.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.GetEmployeeUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetEmployeeInput)">
+            <summary>
+            This is used to get the list of all Employees and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.UpdateEmployeeUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput)">
+            <summary>
+            This is used to update the Employee based on EmployeeId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.DeleteEmployeeUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the Employee based on EmployeeId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.GetEmployeeUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the Employee based on EmployeeId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on Customer.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.CreateCustomerUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput)">
+            <summary>
+            This is used to create the Customer.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.GetCustomerUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerInput)">
+            <summary>
+            This is used to get the list of all Customers and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.UpdateCustomerUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerUnitInput)">
+            <summary>
+            This is used to update the Customer based on CustomerId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.DeleteCustomerUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the Customer based on CustomerId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.GetCustomerUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the Customer based on CustomerId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerUnitAppService.CreateCustomerUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput)">
             <summary>
             Creating the Customer
@@ -2902,6 +3275,112 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on Address.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.CreateAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput)">
+            <summary>
+             This is used to create the Address.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.GetAddressUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetAddressUnitInput)">
+            <summary>
+            This is used to get the list of all Addresses based on ObjectType.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.UpdateAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput)">
+            <summary>
+            This is used to update the Address based on AddressId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.DeleteAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput)">
+            <summary>
+            This is used to delete the Address based on AddressId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on LocationSet.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.CreateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateLocationSetUnitInput)">
+            <summary>
+            This is used to create the LocationSet.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.UpdateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput)">
+            <summary>
+            This is used to update the LocationSet based on LocationSetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.DeleteLocationSetUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the LocationSet based on LocationSetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.GetLocationSetUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the LocationSet based on LocationSetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on Vendor.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.CreateVendorUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput)">
+            <summary>
+            This is used to create the Vendor.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.UpdateVendorUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput)">
+            <summary>
+            This is used to update the Vendor based on VendorId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.DeleteVendorUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the Vendor based on VendorId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the Vendor based on VendorId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput)">
+            <summary>
+            This is used to get the list of all vendors and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.SalesRepUnitAppService.CreateSalesRepUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateSalesRepUnitInput)">
             <summary>
             Creating the SalesRepresentative 
@@ -2937,9 +3416,209 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on Account.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountUnits(System.Nullable{System.Int64})">
+            <summary>
+            This is used to get the list of all Accounts based on CompanyId.
+            </summary>
+            <param name="organizationUnitId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.CreateAccountUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput)">
+            <summary>
+            This is used to create the Account.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.UpdateAccountUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput)">
+            <summary>
+            This is used to update the Account based on AccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountUnitsByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput)">
+            <summary>
+            This is used to get the list of all Accounts based on CoaId and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.DeleteAccountUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            This is used to delete the Account based on AccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the Account based on AccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on COA.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.CreateCoaUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput)">
+            <summary>
+            This is used to create the ChartOfAccoout.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput)">
             <summary>
-            This will return the list of COA based on Company ID
+            This is used to get the list of all ChartOfAccoouts and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.UpdateCoaUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput)">
+            <summary>
+            This is used to update the ChartOfAccoout based on CoaId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.DeleteCoaUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the ChartOfAccoout based on CoaId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.GetCoaUnitById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the ChartOfAccoout based on CoaId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on SalesRepresentative.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.CreateSalesRepUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateSalesRepUnitInput)">
+            <summary>
+            This is used to create the SalesRepresentative.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.GetSalesRepUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetSalesRepInput)">
+            <summary>
+            This is used to get the list of all SalesRepresentatives and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.UpdateSalesRepUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateSalesRepUnitInput)">
+            <summary>
+            This is used to update the SalesRepresentative based on SalesRepId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.DeleteSalesRepUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the SalesRepresentative based on SalesRepId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.GetSalesRepUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the SalesRepresentative based on SalesRepId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on CustomerPaymentTerm.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.CreateCustomerPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerPaymentTermUnitInput)">
+            <summary>
+            This is used to create the CustomerPaymentTerm.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.GetCustomerPaymentTermUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerPaymentTermInput)">
+            <summary>
+            This is used to get the list of all CustomerPaymentTerms and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.UpdateCustomerPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerPaymentTermUnitInput)">
+            <summary>
+            This is used to update the CustomerPaymentTerm based on CustomerPaymentTermId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.DeleteCustomerPaymentTermUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the CustomerPaymentTerm based on CustomerPaymentTermId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.GetCustomerPayTermUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the CustomerPaymentTerm based on CustomerPaymentTermId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on VendorPaymentTerms.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.CreateVendorPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorPaymentTermUnitInput)">
+            <summary>
+            This is used to create the VendorPaymentTerm.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.GetVendorPaymentTermUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetVendorPayTermsInput)">
+            <summary>
+            This is used to get the list of all VendorPaymentTerms and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.UpdateVendorPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorPaymentTermUnitInput)">
+            <summary>
+            This is used to update the VendorPaymentTerm based on VendorPaymentTermId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.DeleteVendorPaymentTermUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to delete the VendorPaymentTerm based on VendorPaymentTermId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.GetVendorPayTermUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            This is used to get the VendorPaymentTerm based on VendorPaymentTermId.
             </summary>
             <param name="input"></param>
             <returns></returns>

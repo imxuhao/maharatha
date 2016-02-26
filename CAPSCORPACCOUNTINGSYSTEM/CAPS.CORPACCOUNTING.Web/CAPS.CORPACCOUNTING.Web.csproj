@@ -480,6 +480,7 @@
     <Content Include="Areas\Mpa\Views\Common\_PermissionTree.js" />
     <Content Include="Areas\Mpa\Views\Users\_PermissionsModal.js" />
     <Content Include="Areas\Mpa\Views\Users\_CreateOrEditModal.js" />
+    <Content Include="CAPS.CORPACCOUNTING.Application.XML" />
     <Content Include="Common\Images\app-logo-on-dark.png" />
     <Content Include="Common\Images\app-logo-on-light.png" />
     <Content Include="Common\Images\default-profile-picture.png" />

@@ -11,28 +11,28 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     public interface IJobLocationAppService : IApplicationService
     {
         /// <summary>
-        /// This is used to create the JobLocation.
+        /// Create the JobLocation.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<JobLocationUnitDto> CreateJobLocationUnit(CreateJobLocationInput input);
 
         /// <summary>
-        /// This is used to update the JobLocation based on JobLocationId.
+        /// Update the JobLocation based on JobLocationId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<JobLocationUnitDto> UpdateJobLocationUnit(UpdateJobLocationInput input);
 
         /// <summary>
-        /// This is used to get the list of all JobLocations based on JobId.
+        /// Get the list of all JobLocations based on JobId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<ListResultOutput<JobLocationUnitDto>> GetJobLocationUnitsByJobId(IdInput input);
 
         /// <summary>
-        /// This is used to delete the JobLocation based on JobId.
+        /// Delete the JobLocation based on JobId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

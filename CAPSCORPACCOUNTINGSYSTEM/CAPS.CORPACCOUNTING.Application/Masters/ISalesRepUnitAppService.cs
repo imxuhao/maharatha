@@ -11,35 +11,35 @@ namespace CAPS.CORPACCOUNTING.Masters
     public interface ISalesRepUnitAppService : IApplicationService
     {
         /// <summary>
-        /// This is used to create the SalesRepresentative.
+        /// Create the SalesRepresentative.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<SalesRepUnitDto> CreateSalesRepUnit(CreateSalesRepUnitInput input);
 
         /// <summary>
-        /// This is used to get the list of all SalesRepresentatives and also provided with Sorting,Paging and Searching functionality.
+        /// Get the list of all SalesRepresentatives and also provided with Sorting,Paging and Searching functionality.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<SalesRepUnitDto>> GetSalesRepUnits(GetSalesRepInput input);
 
         /// <summary>
-        /// This is used to update the SalesRepresentative based on SalesRepId.
+        /// Update the SalesRepresentative based on SalesRepId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<SalesRepUnitDto> UpdateSalesRepUnit(UpdateSalesRepUnitInput input);
 
         /// <summary>
-        /// This is used to delete the SalesRepresentative based on SalesRepId.
+        /// Delete the SalesRepresentative based on SalesRepId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteSalesRepUnit(IdInput input);
 
         /// <summary>
-        /// This is used to get the SalesRepresentative based on SalesRepId.
+        /// Get the SalesRepresentative based on SalesRepId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

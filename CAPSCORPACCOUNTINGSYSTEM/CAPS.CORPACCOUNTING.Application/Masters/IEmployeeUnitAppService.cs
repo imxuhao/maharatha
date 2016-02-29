@@ -11,35 +11,35 @@ namespace CAPS.CORPACCOUNTING.Masters
     public interface IEmployeeUnitAppService : IApplicationService
     {
         /// <summary>
-        ///  This is used to create the Employee.
+        /// Create the Employee.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<EmployeeUnitDto> CreateEmployeeUnit(CreateEmployeeUnitInput input);
 
         /// <summary>
-        /// This is used to get the list of all Employees and also provided with Sorting,Paging and Searching functionality.
+        /// Get the list of all Employees and also provided with Sorting,Paging and Searching functionality.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<EmployeeUnitDto>> GetEmployeeUnits(GetEmployeeInput input);
 
         /// <summary>
-        /// This is used to update the Employee based on EmployeeId.
+        /// Update the Employee based on EmployeeId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<EmployeeUnitDto> UpdateEmployeeUnit(UpdateEmployeeUnitInput input);
 
         /// <summary>
-        /// This is used to delete the Employee based on EmployeeId.
+        /// Delete the Employee based on EmployeeId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteEmployeeUnit(IdInput input);
 
         /// <summary>
-        /// This is used to get the Employee based on EmployeeId.
+        /// Get the Employee based on EmployeeId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

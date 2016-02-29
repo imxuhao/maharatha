@@ -11,35 +11,35 @@ namespace CAPS.CORPACCOUNTING.Masters
     public interface IVendorUnitAppService : IApplicationService
     {
         /// <summary>
-        /// This is used to create the Vendor.
+        /// Create the Vendor.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<VendorUnitDto> CreateVendorUnit(CreateVendorUnitInput input);
 
         /// <summary>
-        /// This is used to update the Vendor based on VendorId.
+        /// Update the Vendor based on VendorId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<VendorUnitDto> UpdateVendorUnit(UpdateVendorUnitInput input);
 
         /// <summary>
-        /// This is used to delete the Vendor based on VendorId.
+        /// Delete the Vendor based on VendorId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteVendorUnit(IdInput input);
 
         /// <summary>
-        /// This is used to get the Vendor based on VendorId.
+        /// Get the Vendor based on VendorId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<VendorUnitDto> GetVendorUnitsById(IdInput input);
 
         /// <summary>
-        /// This is used to get the list of all vendors and also provided with Sorting,Paging and Searching functionality.
+        /// Get the list of all vendors and also provided with Sorting,Paging and Searching functionality.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

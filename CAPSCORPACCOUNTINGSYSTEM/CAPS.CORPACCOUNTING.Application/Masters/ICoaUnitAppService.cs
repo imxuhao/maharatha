@@ -11,35 +11,35 @@ namespace CAPS.CORPACCOUNTING.Masters
     public interface ICoaUnitAppService : IApplicationService
     {
         /// <summary>
-        /// This is used to create the ChartOfAccoout.
+        /// Create the ChartOfAccoout.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input);
 
         /// <summary>
-        /// This is used to get the list of all ChartOfAccoouts and also provided with Sorting,Paging and Searching functionality.
+        /// Get the list of all ChartOfAccoouts and also provided with Sorting,Paging and Searching functionality.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(GetCoaInput input);
 
         /// <summary>
-        /// This is used to update the ChartOfAccoout based on CoaId.
+        /// Update the ChartOfAccoout based on CoaId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input);
 
         /// <summary>
-        /// This is used to delete the ChartOfAccoout based on CoaId.
+        /// Delete the ChartOfAccoout based on CoaId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteCoaUnit(IdInput input);
 
         /// <summary>
-        /// This is used to get the ChartOfAccoout based on CoaId.
+        /// Get the ChartOfAccoout based on CoaId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

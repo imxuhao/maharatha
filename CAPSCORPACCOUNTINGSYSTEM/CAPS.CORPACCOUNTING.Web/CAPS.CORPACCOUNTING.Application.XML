@@ -1116,28 +1116,28 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService.CreateJobAccountUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobAccountUnitInput)">
             <summary>
-            This is used to create the JobAccount.
+            Create the JobAccount.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService.UpdateJobAccountUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput)">
             <summary>
-             This is used to update the JobAccount based on JobAccountId.
+             Update the JobAccount based on JobAccountId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService.DeleteJobAccountUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the JobAccount based on JobId.
+            Delete the JobAccount based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService.GetJobAccountUnits(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the list of all JobAccounts based on JobId.
+            Get the list of all JobAccounts based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1149,28 +1149,28 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService.CreateJobBudgetUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobBudgetUnitInput)">
             <summary>
-            This is used to create the JobBudget.
+            Create the JobBudget.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService.UpdateJobBudgetUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobBudgetUnitInput)">
             <summary>
-             This is used to update the JobBudget based on JobBudgetId.
+             Update the JobBudget based on JobBudgetId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService.DeleteJobBudgetUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the JobBudget based on JobBudgetId.
+            Delete the JobBudget based on JobBudgetId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService.GetJobBudgetUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the JobBudget based on JobBudgetId.
+            Get the JobBudget based on JobBudgetId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1182,28 +1182,28 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.CreateJobLocationUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobLocationInput)">
             <summary>
-            This is used to create the JobLocation.
+            Create the JobLocation.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.UpdateJobLocationUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput)">
             <summary>
-            This is used to update the JobLocation based on JobLocationId.
+            Update the JobLocation based on JobLocationId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.GetJobLocationUnitsByJobId(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the list of all JobLocations based on JobId.
+            Get the list of all JobLocations based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.DeleteJobLocationUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the JobLocation based on JobId.
+            Delete the JobLocation based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1215,28 +1215,28 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.CreateJobDetailUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput)">
             <summary>
-            This is used to create the JobDetail. 
+            Create the JobDetail. 
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.UpdateJobDetailUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput)">
             <summary>
-            This is used to update the JobDetail based on JobDetailId.
+            Update the JobDetail based on JobDetailId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.DeleteJobDetailUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the JobBudget based on JobId.
+            Delete the JobBudget based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.GetJobDetailsByJobId(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the JobBudget based on JobId.
+            Get the JobBudget based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1288,35 +1288,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.CreateJobUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput)">
             <summary>
-             This is used to create the Job.
+             Create the Job.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.UpdateJobUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput)">
             <summary>
-            This is used to update the Job based on JobId.
+            Update the Job based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.DeleteJobUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the Job based on JobId.
+            Delete the Job based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetJobUnits(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
             <summary>
-            This is used to get the list of all Jobs and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all Jobs and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetJobUnitById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the Job based on JobId.
+            Get the Job based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3160,35 +3160,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.CreateEmployeeUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput)">
             <summary>
-             This is used to create the Employee.
+            Create the Employee.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.GetEmployeeUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetEmployeeInput)">
             <summary>
-            This is used to get the list of all Employees and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all Employees and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.UpdateEmployeeUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateEmployeeUnitInput)">
             <summary>
-            This is used to update the Employee based on EmployeeId.
+            Update the Employee based on EmployeeId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.DeleteEmployeeUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the Employee based on EmployeeId.
+            Delete the Employee based on EmployeeId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.GetEmployeeUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the Employee based on EmployeeId.
+            Get the Employee based on EmployeeId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3200,35 +3200,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.CreateCustomerUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput)">
             <summary>
-            This is used to create the Customer.
+            Create the Customer.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.GetCustomerUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerInput)">
             <summary>
-            This is used to get the list of all Customers and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all Customers and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.UpdateCustomerUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerUnitInput)">
             <summary>
-            This is used to update the Customer based on CustomerId.
+            Update the Customer based on CustomerId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.DeleteCustomerUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the Customer based on CustomerId.
+            Delete the Customer based on CustomerId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.GetCustomerUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the Customer based on CustomerId.
+            Get the Customer based on CustomerId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3282,28 +3282,28 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.CreateAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput)">
             <summary>
-             This is used to create the Address.
+             Create the Address.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.GetAddressUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetAddressUnitInput)">
             <summary>
-            This is used to get the list of all Addresses based on ObjectType.
+            Get the list of all Addresses based on ObjectType.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.UpdateAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput)">
             <summary>
-            This is used to update the Address based on AddressId.
+            Update the Address based on AddressId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.DeleteAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput)">
             <summary>
-            This is used to delete the Address based on AddressId.
+            Delete the Address based on AddressId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3315,28 +3315,28 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.CreateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateLocationSetUnitInput)">
             <summary>
-            This is used to create the LocationSet.
+            Create the LocationSet.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.UpdateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput)">
             <summary>
-            This is used to update the LocationSet based on LocationSetId.
+            Update the LocationSet based on LocationSetId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.DeleteLocationSetUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the LocationSet based on LocationSetId.
+            Delete the LocationSet based on LocationSetId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.GetLocationSetUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the LocationSet based on LocationSetId.
+            Get the LocationSet based on LocationSetId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3348,35 +3348,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.CreateVendorUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput)">
             <summary>
-            This is used to create the Vendor.
+            Create the Vendor.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.UpdateVendorUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput)">
             <summary>
-            This is used to update the Vendor based on VendorId.
+            Update the Vendor based on VendorId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.DeleteVendorUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the Vendor based on VendorId.
+            Delete the Vendor based on VendorId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the Vendor based on VendorId.
+            Get the Vendor based on VendorId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetVendorInput)">
             <summary>
-            This is used to get the list of all vendors and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all vendors and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3423,42 +3423,42 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountUnits(System.Nullable{System.Int64})">
             <summary>
-            This is used to get the list of all Accounts based on CompanyId.
+            Get the list of all Accounts based on CompanyId.
             </summary>
             <param name="organizationUnitId"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.CreateAccountUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput)">
             <summary>
-            This is used to create the Account.
+            Create the Account.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.UpdateAccountUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput)">
             <summary>
-            This is used to update the Account based on AccountId.
+            Update the Account based on AccountId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountUnitsByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput)">
             <summary>
-            This is used to get the list of all Accounts based on CoaId and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all Accounts based on CoaId and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.DeleteAccountUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
-            This is used to delete the Account based on AccountId.
+            Delete the Account based on AccountId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the Account based on AccountId.
+            Get the Account based on AccountId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3470,35 +3470,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.CreateCoaUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput)">
             <summary>
-            This is used to create the ChartOfAccoout.
+            Create the ChartOfAccoout.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput)">
             <summary>
-            This is used to get the list of all ChartOfAccoouts and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all ChartOfAccoouts and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.UpdateCoaUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput)">
             <summary>
-            This is used to update the ChartOfAccoout based on CoaId.
+            Update the ChartOfAccoout based on CoaId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.DeleteCoaUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the ChartOfAccoout based on CoaId.
+            Delete the ChartOfAccoout based on CoaId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.GetCoaUnitById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the ChartOfAccoout based on CoaId.
+            Get the ChartOfAccoout based on CoaId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3510,35 +3510,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.CreateSalesRepUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateSalesRepUnitInput)">
             <summary>
-            This is used to create the SalesRepresentative.
+            Create the SalesRepresentative.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.GetSalesRepUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetSalesRepInput)">
             <summary>
-            This is used to get the list of all SalesRepresentatives and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all SalesRepresentatives and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.UpdateSalesRepUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateSalesRepUnitInput)">
             <summary>
-            This is used to update the SalesRepresentative based on SalesRepId.
+            Update the SalesRepresentative based on SalesRepId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.DeleteSalesRepUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the SalesRepresentative based on SalesRepId.
+            Delete the SalesRepresentative based on SalesRepId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService.GetSalesRepUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the SalesRepresentative based on SalesRepId.
+            Get the SalesRepresentative based on SalesRepId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3550,35 +3550,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.CreateCustomerPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerPaymentTermUnitInput)">
             <summary>
-            This is used to create the CustomerPaymentTerm.
+            Create the CustomerPaymentTerm.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.GetCustomerPaymentTermUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetCustomerPaymentTermInput)">
             <summary>
-            This is used to get the list of all CustomerPaymentTerms and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all CustomerPaymentTerms and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.UpdateCustomerPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerPaymentTermUnitInput)">
             <summary>
-            This is used to update the CustomerPaymentTerm based on CustomerPaymentTermId.
+            Update the CustomerPaymentTerm based on CustomerPaymentTermId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.DeleteCustomerPaymentTermUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the CustomerPaymentTerm based on CustomerPaymentTermId.
+            Delete the CustomerPaymentTerm based on CustomerPaymentTermId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.GetCustomerPayTermUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the CustomerPaymentTerm based on CustomerPaymentTermId.
+            Get the CustomerPaymentTerm based on CustomerPaymentTermId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3590,35 +3590,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.CreateVendorPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorPaymentTermUnitInput)">
             <summary>
-            This is used to create the VendorPaymentTerm.
+            Create the VendorPaymentTerm.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.GetVendorPaymentTermUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetVendorPayTermsInput)">
             <summary>
-            This is used to get the list of all VendorPaymentTerms and also provided with Sorting,Paging and Searching functionality.
+            Get the list of all VendorPaymentTerms and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.UpdateVendorPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorPaymentTermUnitInput)">
             <summary>
-            This is used to update the VendorPaymentTerm based on VendorPaymentTermId.
+            Update the VendorPaymentTerm based on VendorPaymentTermId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.DeleteVendorPaymentTermUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to delete the VendorPaymentTerm based on VendorPaymentTermId.
+            Delete the VendorPaymentTerm based on VendorPaymentTermId.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.GetVendorPayTermUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            This is used to get the VendorPaymentTerm based on VendorPaymentTermId.
+            Get the VendorPaymentTerm based on VendorPaymentTermId.
             </summary>
             <param name="input"></param>
             <returns></returns>

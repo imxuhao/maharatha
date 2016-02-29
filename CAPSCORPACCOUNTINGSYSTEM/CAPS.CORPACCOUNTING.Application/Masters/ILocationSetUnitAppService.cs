@@ -11,28 +11,28 @@ namespace CAPS.CORPACCOUNTING.Masters
     public interface ILocationSetUnitAppService : IApplicationService
     {
         /// <summary>
-        /// This is used to create the LocationSet.
+        /// Create the LocationSet.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<LocationSetUnitDto> CreateLocationSetUnit(CreateLocationSetUnitInput input);
 
         /// <summary>
-        /// This is used to update the LocationSet based on LocationSetId.
+        /// Update the LocationSet based on LocationSetId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<LocationSetUnitDto> UpdateLocationSetUnit(UpdateLocationSetUnitInput input);
 
         /// <summary>
-        /// This is used to delete the LocationSet based on LocationSetId.
+        /// Delete the LocationSet based on LocationSetId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteLocationSetUnit(IdInput input);
 
         /// <summary>
-        /// This is used to get the LocationSet based on LocationSetId.
+        /// Get the LocationSet based on LocationSetId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

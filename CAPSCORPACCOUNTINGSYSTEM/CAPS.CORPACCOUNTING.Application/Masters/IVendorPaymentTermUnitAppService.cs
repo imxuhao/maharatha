@@ -11,35 +11,35 @@ namespace CAPS.CORPACCOUNTING.Masters
     public interface IVendorPaymentTermUnitAppService : IApplicationService
     {
         /// <summary>
-        /// This is used to create the VendorPaymentTerm.
+        /// Create the VendorPaymentTerm.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<VendorPaymentTermUnitDto> CreateVendorPaymentTermUnit(CreateVendorPaymentTermUnitInput input);
 
         /// <summary>
-        /// This is used to get the list of all VendorPaymentTerms and also provided with Sorting,Paging and Searching functionality.
+        /// Get the list of all VendorPaymentTerms and also provided with Sorting,Paging and Searching functionality.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(GetVendorPayTermsInput input);
 
         /// <summary>
-        /// This is used to update the VendorPaymentTerm based on VendorPaymentTermId.
+        /// Update the VendorPaymentTerm based on VendorPaymentTermId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<VendorPaymentTermUnitDto> UpdateVendorPaymentTermUnit(UpdateVendorPaymentTermUnitInput input);
 
         /// <summary>
-        /// This is used to delete the VendorPaymentTerm based on VendorPaymentTermId.
+        /// Delete the VendorPaymentTerm based on VendorPaymentTermId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteVendorPaymentTermUnit(IdInput input);
 
         /// <summary>
-        /// This is used to get the VendorPaymentTerm based on VendorPaymentTermId.
+        /// Get the VendorPaymentTerm based on VendorPaymentTermId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

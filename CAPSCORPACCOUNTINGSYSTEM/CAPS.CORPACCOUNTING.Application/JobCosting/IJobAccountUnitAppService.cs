@@ -11,28 +11,28 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     public interface IJobAccountUnitAppService : IApplicationService
     {
         /// <summary>
-        /// This is used to create the JobAccount.
+        /// Create the JobAccount.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<JobAccountUnitDto> CreateJobAccountUnit(CreateJobAccountUnitInput input);
 
         /// <summary>
-        ///  This is used to update the JobAccount based on JobAccountId.
+        ///  Update the JobAccount based on JobAccountId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<JobAccountUnitDto> UpdateJobAccountUnit(UpdateJobAccountUnitInput input);
 
         /// <summary>
-        /// This is used to delete the JobAccount based on JobId.
+        /// Delete the JobAccount based on JobId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task DeleteJobAccountUnit(IdInput input);
 
         /// <summary>
-        /// This is used to get the list of all JobAccounts based on JobId.
+        /// Get the list of all JobAccounts based on JobId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

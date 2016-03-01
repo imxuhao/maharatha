@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using System.Data.Entity;
 using Abp.Zero.EntityFramework;
+using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Masters;
@@ -8,6 +9,7 @@ using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Storage;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Banking;
+using CAPS.CORPACCOUNTING.Payables;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -137,6 +139,10 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> BankStatementDetailUnit Declaration</summary>
         public virtual IDbSet<BankStatementDetailUnit> BankStatementDetails { get; set; }
+
+        public  virtual  IDbSet<AccountingHeaderTransactionsUnit> AccountingHeaderTransactions { get; set; }
+
+        public virtual IDbSet<ApHeaderTransactions> ApHeaderTransactions { get; set; }
 
 
 

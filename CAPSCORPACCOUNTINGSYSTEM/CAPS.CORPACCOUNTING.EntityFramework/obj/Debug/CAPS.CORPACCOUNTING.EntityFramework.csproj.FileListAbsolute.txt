@@ -343,3 +343,4 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Update_Abp82.resources
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Accounting_AP_Tables.resources

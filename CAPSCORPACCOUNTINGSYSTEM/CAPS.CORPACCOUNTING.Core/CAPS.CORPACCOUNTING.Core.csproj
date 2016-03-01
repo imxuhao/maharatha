@@ -108,6 +108,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounting\AccountingHeaderTransactionsUnit.cs" />
     <Compile Include="Authorization\Users\IUserLinkManager.cs" />
     <Compile Include="Authorization\Users\SwitchToLinkedAccountCacheItem.cs" />
     <Compile Include="Authorization\Users\SwitchToLinkedAccountCacheManagerExtensions.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Notifications\AppNotificationProvider.cs" />
     <Compile Include="Notifications\AppNotifier.cs" />
     <Compile Include="Notifications\IAppNotifier.cs" />
+    <Compile Include="Payables\APHeaderTransactions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SimpleStringCipher.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />

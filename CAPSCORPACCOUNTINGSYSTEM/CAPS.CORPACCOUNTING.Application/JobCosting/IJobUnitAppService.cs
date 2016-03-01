@@ -44,5 +44,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         Task<JobUnitDto> GetJobUnitById(IdInput input);
+
+     
     }
 }

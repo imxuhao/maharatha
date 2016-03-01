@@ -18,6 +18,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         [Range(1, Int32.MaxValue)]
         public virtual int LocationId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the JobDetailId field.
+        /// </summary>
+        [Range(1, Int32.MaxValue)]
+        public int JobDetailId { get; set; }
+
         /// <summary>Gets or sets the LocationSiteDate field. </summary>
         public DateTime? LocationSiteDate { get; set; }
 

@@ -4,6 +4,7 @@ using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -171,6 +172,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set;}
+
+      
+        public virtual List<JobCommercialUnit> JobDetails { get; set; }
+
+        public List<JobLocationUnit> joblocations { get; set; }
 
         #endregion
 

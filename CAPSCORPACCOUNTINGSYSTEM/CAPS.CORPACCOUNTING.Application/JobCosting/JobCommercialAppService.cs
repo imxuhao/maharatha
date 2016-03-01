@@ -5,8 +5,9 @@ using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using Abp.Application.Services.Dto;
 using System.Collections.Generic;
-using System;
+using System.Data.Entity;
 using Abp.Authorization;
+using System.Linq;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -14,7 +15,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     public class JobCommercialAppService : CORPACCOUNTINGServiceBase, IJobCommercialAppService
     {
         private readonly JobCommercialUnitManager _jobDetailUnitManager;
-        private readonly IRepository<JobCommercialUnit> _jobDetailUnitRepository;
+        private readonly IRepository<JobCommercialUnit> _jobDetailUnitRepository;       
         private readonly IJobLocationAppService _jobLocationAppService;
         private readonly IRepository<JobLocationUnit> _jobLocationRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
@@ -26,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _jobDetailUnitRepository = jobDetailUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _jobLocationAppService = jobLocationAppService;
-            _jobLocationRepository = jobLocationRepository;
+            _jobLocationRepository = jobLocationRepository;           
 
         }
         /// <summary>
@@ -67,7 +68,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 foreach (var location in input.JobLocations)
                 {
-
+                    location.JobDetailId = jobDetailUnit.Id;
                     await _jobLocationAppService.CreateJobLocationUnit(location);
                     await CurrentUnitOfWork.SaveChangesAsync();
                 }
@@ -206,18 +207,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task<JobCommercialUnitDto> GetJobDetailsByJobId(IdInput input)
         {
-            var jobitems = await _jobDetailUnitRepository.SingleAsync(p => p.JobId == input.Id);
-            var jobLocations = await _jobLocationRepository.GetAllListAsync(p => p.JobId == input.Id);
+            var jobitems = _jobDetailUnitRepository.GetAll().Include(q => q.JobLocations).Where(job => job.JobId == input.Id).ToList();           
 
-            var result = jobitems.MapTo<JobCommercialUnitDto>();
-            result.JobCommercialId = jobitems.Id;
-            result.JobLocations = new List<JobLocationUnitDto>();
-
-            for (int i = 0; i < jobLocations.Count; i++)
-            {
-                result.JobLocations.Add(jobLocations[i].MapTo<JobLocationUnitDto>());
-                result.JobLocations[i].JobLocationId = jobLocations[i].Id;
-            }
+            var result = jobitems.FirstOrDefault().MapTo<JobCommercialUnitDto>();
+            result.JobCommercialId = jobitems.FirstOrDefault().Id;                                  
             return result;          
         }
     }

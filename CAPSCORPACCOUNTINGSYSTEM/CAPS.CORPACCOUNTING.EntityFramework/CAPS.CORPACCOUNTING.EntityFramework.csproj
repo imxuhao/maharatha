@@ -374,10 +374,6 @@
     <Compile Include="Migrations\201602220918507_Add_JobBudgetDetails_Table.Designer.cs">
       <DependentUpon>201602220918507_Add_JobBudgetDetails_Table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602221328039_Modify_JobLocation_Tabel.cs" />
-    <Compile Include="Migrations\201602221328039_Modify_JobLocation_Tabel.Designer.cs">
-      <DependentUpon>201602221328039_Modify_JobLocation_Tabel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201602241142559_Add_TypeOfCheckStock_Table.cs" />
     <Compile Include="Migrations\201602241142559_Add_TypeOfCheckStock_Table.Designer.cs">
       <DependentUpon>201602241142559_Add_TypeOfCheckStock_Table.cs</DependentUpon>
@@ -417,6 +413,14 @@
     <Compile Include="Migrations\201603010034366_Add_Accounting_AP_Tables.cs" />
     <Compile Include="Migrations\201603010034366_Add_Accounting_AP_Tables.Designer.cs">
       <DependentUpon>201603010034366_Add_Accounting_AP_Tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603010923438_Modify_JobLocation_Table.cs" />
+    <Compile Include="Migrations\201603010923438_Modify_JobLocation_Table.Designer.cs">
+      <DependentUpon>201603010923438_Modify_JobLocation_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603011012129_Modify_JobLocations_Table.cs" />
+    <Compile Include="Migrations\201603011012129_Modify_JobLocations_Table.Designer.cs">
+      <DependentUpon>201603011012129_Modify_JobLocations_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
@@ -629,9 +633,6 @@
     <EmbeddedResource Include="Migrations\201602220918507_Add_JobBudgetDetails_Table.resx">
       <DependentUpon>201602220918507_Add_JobBudgetDetails_Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602221328039_Modify_JobLocation_Tabel.resx">
-      <DependentUpon>201602221328039_Modify_JobLocation_Tabel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602241142559_Add_TypeOfCheckStock_Table.resx">
       <DependentUpon>201602241142559_Add_TypeOfCheckStock_Table.cs</DependentUpon>
     </EmbeddedResource>
@@ -661,6 +662,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603010034366_Add_Accounting_AP_Tables.resx">
       <DependentUpon>201603010034366_Add_Accounting_AP_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603010923438_Modify_JobLocation_Table.resx">
+      <DependentUpon>201603010923438_Modify_JobLocation_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603011012129_Modify_JobLocations_Table.resx">
+      <DependentUpon>201603011012129_Modify_JobLocations_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

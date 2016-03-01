@@ -1,6 +1,7 @@
 ﻿using System;
 using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
@@ -56,6 +57,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or sets the TaxRecovery field. </summary>
         public TaxRecovery? TaxRecoveryId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<CreateJobCommercialInput> JobDetails { get; set; }
 
 
         /// <summary>Gets or sets the CompanyId field. </summary>

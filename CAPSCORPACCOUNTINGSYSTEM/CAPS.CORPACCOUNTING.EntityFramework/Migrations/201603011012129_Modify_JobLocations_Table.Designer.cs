@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class test : IMigrationMetadata
+    public sealed partial class Modify_JobLocations_Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(test));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Modify_JobLocations_Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201602221328039_test"; }
+            get { return "201603011012129_Modify_JobLocations_Table"; }
         }
         
         string IMigrationMetadata.Source

@@ -11,6 +11,7 @@ using Abp.Extensions;
 using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
 using Abp.Authorization;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -112,17 +113,18 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task<PagedResultOutput<JobUnitDto>> GetJobUnits(GetJobInput input)
         {
-            var query = from job in _jobUnitRepository.GetAll()
-                        join jobdetail in _jobDetailUnitRepository.GetAll() on job.Id equals jobdetail.JobId                            
-                        join emp in _employeeUnitRepository.GetAll() on jobdetail.DirectorEmployeeId equals emp.Id
-                                 into temp1 from em in temp1.DefaultIfEmpty()
-                        join cust in _customerUnitRepository.GetAll() on jobdetail.AgencyId equals cust.Id
-                                into tempcust  from cs in tempcust.DefaultIfEmpty()
-                        select new {Job= job,Jobdetail= jobdetail, Director= em.LastName,Agency=cs.LastName};
+            var query = from job in _jobUnitRepository.GetAll().Include(p => p.JobDetails)
+                        join emp in _employeeUnitRepository.GetAll() on job.JobDetails.FirstOrDefault().DirectorEmployeeId equals emp.Id
+                                 into temp1
+                        from em in temp1.DefaultIfEmpty()
+                        join cust in _customerUnitRepository.GetAll() on job.JobDetails.FirstOrDefault().AgencyId equals cust.Id
+                                into tempcust
+                        from cs in tempcust.DefaultIfEmpty()
+                        select new { Job = job, Director = em.LastName, Agency = cs.LastName };
             query = query
                 .WhereIf(input.OrganizationUnitId != null, item => item.Job.OrganizationUnitId == input.OrganizationUnitId)
                 .WhereIf(!input.Caption.IsNullOrWhiteSpace(), item => item.Job.Caption.Contains(input.Caption))
-                .WhereIf(!input.ProductName.IsNullOrWhiteSpace(), item => item.Jobdetail.ProductName.Contains(input.ProductName))
+                .WhereIf(!input.ProductName.IsNullOrWhiteSpace(), item => item.Job.JobDetails.FirstOrDefault().ProductName.Contains(input.ProductName))
                 .WhereIf(!input.JobNumber.IsNullOrWhiteSpace(), item => item.Job.JobNumber.Contains(input.JobNumber))
                 .WhereIf(!input.Director.IsNullOrWhiteSpace(), item => item.Director.Contains(input.Director))
                 .WhereIf(!input.Agency.IsNullOrWhiteSpace(), item => item.Agency.Contains(input.Agency))
@@ -139,23 +141,22 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 var dto = item.Job.MapTo<JobUnitDto>();
                 dto.JobId = item.Job.Id;
-                dto.JobDetails = item.Jobdetail.MapTo<JobCommercialUnitDto>();                
-                if(item.Director !=null)
-                dto.Director = item.Director;
+                if (item.Director != null)
+                    dto.Director = item.Director;
                 if (item.Agency != null)
                     dto.Agency = item.Agency;
                 return dto;
             }).ToList());
         }
 
-        public async Task<JobUnitDto> GetJobUnitById(IdInput input) {
-
+        public async Task<JobUnitDto> GetJobUnitById(IdInput input)
+        {
             JobUnit jobitem = await _jobUnitRepository.GetAsync(input.Id);
             JobUnitDto result = jobitem.MapTo<JobUnitDto>();
             result.JobId = jobitem.Id;
             return result;
 
-        }
+        }        
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {   
@@ -58,7 +59,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public long? OrganizationUnitId { get; set; }
 
         /// <summary> Gets or sets the JobDetails.</summary>
-        public JobCommercialUnitDto JobDetails { get; set; }
+        public List<JobCommercialUnitDto> JobDetails { get; set; }
         private string DetailReport { get; set; } = "Detail Report";
        
         /// <summary> Gets or sets the Director.</summary>

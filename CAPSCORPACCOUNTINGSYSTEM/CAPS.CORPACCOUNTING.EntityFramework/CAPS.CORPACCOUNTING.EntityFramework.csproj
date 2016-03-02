@@ -111,6 +111,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityFramework\AbpZeroDbModelBuilderExtensions.cs" />
     <Compile Include="EntityFramework\CORPACCOUNTINGDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\CORPACCOUNTINGRepositoryBase.cs" />
     <Compile Include="Migrations\201501041229232_InitialCreate.cs" />
@@ -426,6 +427,10 @@
     <Compile Include="Migrations\201603021410056_Modify_Transactions_Tables.Designer.cs">
       <DependentUpon>201603021410056_Modify_Transactions_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603021453381_CHange_Table_Prefix_Abp.cs" />
+    <Compile Include="Migrations\201603021453381_CHange_Table_Prefix_Abp.Designer.cs">
+      <DependentUpon>201603021453381_CHange_Table_Prefix_Abp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -675,6 +680,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603021410056_Modify_Transactions_Tables.resx">
       <DependentUpon>201603021410056_Modify_Transactions_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021453381_CHange_Table_Prefix_Abp.resx">
+      <DependentUpon>201603021453381_CHange_Table_Prefix_Abp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

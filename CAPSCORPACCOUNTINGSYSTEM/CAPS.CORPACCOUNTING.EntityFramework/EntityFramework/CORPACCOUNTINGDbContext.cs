@@ -171,5 +171,16 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         {
 
         }
+
+        /// <summary>
+        /// Removing the Abp Prefix. You can use any Prefix. We are using CAPS_
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ChangeAbpTablePrefix<Tenant, Role, User>("CAPS_");
+        }
     }
 }

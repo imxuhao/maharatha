@@ -4,6 +4,116 @@
         <name>CAPS.CORPACCOUNTING.Application</name>
     </assembly>
     <members>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit">
+            <summary>
+            creates CreateAccountingHeaderTransactionputUnit
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.Description">
+            <summary>Get Sets the Description Date </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.TypeOfAccountingDocumentId">
+            <summary>Get Sets the TypeOfAccountingDocumentID Date </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.TypeOfObjectId">
+            <summary>Get Sets the TypeOfObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.RecurDocId">
+            <summary>Get Sets the RecurDocId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.ReverseDocId">
+            <summary>Get Sets the ReverseDocId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.DocumentDate">
+            <summary>Get Sets the DocumentDate field.</summary>        
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.TransactionDate">
+            <summary>Get Sets the TransactionDate field.</summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.DatePosted">
+            <summary>Get Sets the DatePosted field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.OriginalDocumentId">
+            <summary>Get Sets the OriginalDocumentId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.ControlTotal">
+            <summary>Get Sets the ControlTotal field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.DocumentReference">
+            <summary>Get Sets the DocumentReference field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.VoucherReference">
+            <summary>Get Sets the VoucherReference field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.TypeOfCurrencyId">
+            <summary>Get Sets the TypeOfCurrencyId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.CurrencyAdjustmentId">
+            <summary>Get Sets the CurrencyAdjustmentId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.PostBatchDescription">
+            <summary>Get Sets the PostBatchDescription field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.IsPosted">
+            <summary>Get Sets the IsPosted field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.IsAutoPosted">
+            <summary>Get Sets the IsAutoPosted field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.IsChanged">
+            <summary>Get Sets the IsChanged field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.PostedByUserId">
+            <summary>Get Sets the PostedByUserId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.IsBankRecOmitted">
+            <summary>Get Sets the IsBankRecOmitted field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.IsICTJournal">
+            <summary>Get Sets the IsICTJournal field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.ICTCompanyId">
+            <summary>Get Sets the ICTCompanyId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.ICTAccountingDocumentId">
+            <summary>Get Sets the ICTAccountingDocumentId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.CurrencyOverrideRate">
+            <summary>Get Sets the CurrencyOverrideRate field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.FunctionalCurrencyControlTotal">
+            <summary>Get Sets the FunctionalCurrencyControlTotal field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.TypeOfCurrencyRateId">
+            <summary>Get Sets the TypeOfCurrencyRateId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.MemoLine">
+            <summary>Get Sets the MemoLine field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.Is13Period">
+            <summary>Get Sets the Is13Period field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.HomeCurrencyAmount">
+            <summary>Get Sets the HomeCurrencyAmount field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.CustomForexRate">
+            <summary>Get Sets the CustomForexRate field.</summary>       
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.IsPOSubmitForApproval">
+            <summary>Get Sets the IsPOSubmitForApproval field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.IsCPASTran">
+            <summary>Get Sets the IsCPASTran field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.CPASProjCloseId">
+            <summary>Get Sets the CPASProjCloseId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.CPASProjId">
+            <summary>Get Sets the CPASProjId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionputUnit.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserEditDto.Id">
             <summary>
             Set null to create a new user. Set user's Id to update a user
@@ -182,6 +292,11 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto.LocationId">
             <summary>Gets or sets the LocationId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto.JobDetailId">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto.LocationSiteDate">
             <summary>Gets or sets the LocationSiteDate field. </summary>
         </member>
@@ -197,6 +312,11 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput.LocationId">
             <summary>Gets or sets the LocationId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput.JobDetailId">
+            <summary>
+            Gets or sets the JobDetailId field.
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput.LocationSiteDate">
             <summary>Gets or sets the LocationSiteDate field. </summary>
         </member>
@@ -208,6 +328,11 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobLocationInput.LocationId">
             <summary>Gets or sets the LocationId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobLocationInput.JobDetailId">
+            <summary>
+            Gets or sets the JobDetailId field.
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobLocationInput.LocationSiteDate">
             <summary>Gets or sets the LocationSite1Date field. </summary>
@@ -1105,6 +1230,16 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.TaxRecoveryId">
             <summary>Gets or sets the TaxRecovery field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.JobDetails">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.JobBudget">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
@@ -4004,6 +4139,72 @@
         </member>
         <member name="F:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames.ApplicationZip">
             <summary>ZIP archive files; Registered[7]</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.BatchId">
+            <summary>Get Sets the BatchI dfield.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.VendorId">
+            <summary>Get Sets the VendorId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.TypeOfInvoiceId">
+            <summary>Get Sets the TypeOfInvoiceId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.PettyCashAccountId">
+            <summary>Get Sets the PettyCashAccountId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.PaymentTermId">
+            <summary>Get Sets the PaymentTermId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.TypeOfCheckGroupId">
+            <summary>Get Sets the TypeOfCheckGroupId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.BankAccountId">
+            <summary>Get Sets the BankAccountId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.PaymentDate">
+            <summary>Get Sets the PaymentDate field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.PaymentNumber">
+            <summary>Get Sets the PaymentNumber field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.PurchaseOrderReference">
+            <summary>Get Sets the PurchaseOrderReference field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.ReversedByUserId">
+            <summary>Get Sets the ReversedByUserId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.ReversalDate">
+            <summary>Get Sets the ReversalDate field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.IsInvoiceHistory">
+            <summary>Get Sets the IsInvoiceHistory field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.IsEnterable">
+            <summary>Get Sets the IsEnterable field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.GeneratedAccountingDocumentId">
+            <summary>Get Sets the GeneratedAccountingDocumentId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.UploadDocumentLogID">
+            <summary>Get Sets the UploadDocumentLogID field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.BatchInfo">
+            <summary>Get Sets the BatchInfo field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit.PaymentSelectedByUserId">
+            <summary>Get Sets the PaymentSelectedByUserId field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService">
+            <summary>
+            This service will provide all CRUD operations on Vendor.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService.CreateAPHeaderTransactionUnit(CAPS.CORPACCOUNTING.Payables.Dto.CreateAPHeaderTransactionsInputUnit)">
+            <summary>
+            Create the APHeaderTransaction.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

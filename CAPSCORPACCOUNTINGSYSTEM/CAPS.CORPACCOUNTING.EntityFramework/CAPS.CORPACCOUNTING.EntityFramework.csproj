@@ -431,6 +431,10 @@
     <Compile Include="Migrations\201603021453381_CHange_Table_Prefix_Abp.Designer.cs">
       <DependentUpon>201603021453381_CHange_Table_Prefix_Abp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603021949446_Add_JournalEntryDocument_Table.cs" />
+    <Compile Include="Migrations\201603021949446_Add_JournalEntryDocument_Table.Designer.cs">
+      <DependentUpon>201603021949446_Add_JournalEntryDocument_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -683,6 +687,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603021453381_CHange_Table_Prefix_Abp.resx">
       <DependentUpon>201603021453381_CHange_Table_Prefix_Abp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021949446_Add_JournalEntryDocument_Table.resx">
+      <DependentUpon>201603021949446_Add_JournalEntryDocument_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

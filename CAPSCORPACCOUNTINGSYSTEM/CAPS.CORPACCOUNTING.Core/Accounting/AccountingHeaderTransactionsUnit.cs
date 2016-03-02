@@ -229,13 +229,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual long OrganizationUnitId { get; set; }
 
         #endregion
-        public AccountingHeaderTransactionsUnit() { }
-
-        public AccountingHeaderTransactionsUnit(string description, TypeOfAccountingDocument typeofaccountingdocumentid) {
-            Description = description;
-            TypeOfAccountingDocumentId = typeofaccountingdocumentid;
-
-        }
+        public AccountingHeaderTransactionsUnit() { }        
         public AccountingHeaderTransactionsUnit(string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid, long? recurdocid, long? reversedocid,
                  DateTime? documentdate, DateTime transactiondate, DateTime? dateposted, long? originaldocumentid, decimal? controltotal, string documentreference,
                  string voucherreference, short? typeofcurrencyid, int? currencyadjustmentid, string postbatchdescription, bool isposted, bool isautoposted, bool ischanged,

@@ -5,10 +5,9 @@ using Abp.Authorization;
 using CAPS.CORPACCOUNTING.Payables.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 
-
 namespace CAPS.CORPACCOUNTING.Payables
 {
-    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
+    [AbpAuthorize] //This is to ensure only logged in user has access to this module.
     public class APHeaderTransactionsAppService : CORPACCOUNTINGServiceBase, IAPHeaderTransactionsAppService
     {
         private readonly APHeaderTransactionsUnitManager _apHeaderTransactionsUnitManager;

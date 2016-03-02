@@ -10,6 +10,8 @@ using CAPS.CORPACCOUNTING.Storage;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Payables;
+using CAPS.CORPACCOUNTING.Journals;
+using CAPS.CORPACCOUNTING.Payroll;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -143,6 +145,12 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public  virtual  IDbSet<AccountingHeaderTransactionsUnit> AccountingHeaderTransactions { get; set; }
 
         public virtual IDbSet<ApHeaderTransactions> ApHeaderTransactions { get; set; }
+
+        public virtual IDbSet<PayrollEntryDocumentUnit> PayrollEntryDocuments { get; set; }
+        public virtual IDbSet<JournalEntryDocumentUnit> JournalEntryDocuments { get; set; }
+       
+
+
 
 
 

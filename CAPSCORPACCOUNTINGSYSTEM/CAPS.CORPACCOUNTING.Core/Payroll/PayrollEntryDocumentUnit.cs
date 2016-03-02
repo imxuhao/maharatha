@@ -5,7 +5,6 @@ using CAPS.CORPACCOUNTING.Payables;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
-
 namespace CAPS.CORPACCOUNTING.Payroll
 {
     [Table("CAPS_PayrollEntryDocument")]

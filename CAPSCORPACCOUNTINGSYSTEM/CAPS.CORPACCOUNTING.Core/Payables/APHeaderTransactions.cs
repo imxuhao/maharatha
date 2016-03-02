@@ -198,7 +198,18 @@ namespace CAPS.CORPACCOUNTING.Payables
                  int? postedbyuserid, int? bankreccontrolid, bool isselected, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
                  bool? isbankrecomitted, bool? isictjournal, int? ictcompanyid, long? ictaccountingdocumentid, double? currencyoverriderate,
                  decimal? functionalcurrencycontroltotal, short? typeofcurrencyrateid, string memoline, bool? is13period, decimal? homecurrencyamount, decimal? customforexrate,
-                 bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid, long organizationunitid) :base(description:description,typeofaccountingdocumentid:typeofaccountingdocumentid)
+                 bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid, long organizationunitid) :
+            base(description:description,typeofaccountingdocumentid:typeofaccountingdocumentid,typeofobjectid:typeofobjectid,recurdocid:recurdocid,
+                reversedocid:reversedocid,documentdate:documentdate,transactiondate:transactiondate,dateposted:dateposted,
+                originaldocumentid:organizationunitid,controltotal:controltotal,documentreference:documentreference,
+                voucherreference:voucherreference,typeofcurrencyid:typeofcurrencyid,currencyadjustmentid:currencyadjustmentid,
+                postbatchdescription:postbatchdescription,isposted:isposted,isautoposted:isautoposted,ischanged:ischanged,
+                postedbyuserid:postedbyuserid,bankreccontrolid:bankreccontrolid,isselected:isselected,isactive:isactive,isapproved:isapproved,
+                typeofinactivestatusid:typeofinactivestatusid,isbankrecomitted:isbankrecomitted,isictjournal:isictjournal,
+                ictcompanyid:ictcompanyid,ictaccountingdocumentid:ictaccountingdocumentid,currencyoverriderate:currencyoverriderate,
+                functionalcurrencycontroltotal:functionalcurrencycontroltotal,typeofcurrencyrateid:typeofcurrencyid,memoline:memoline,
+                is13period:is13period,homecurrencyamount:homecurrencyamount,customforexrate:customforexrate,isposubmitforapproval:isposubmitforapproval,
+                iscpastran:iscpastran, cpasprojcloseid:cpasprojcloseid, cpasprojid:cpasprojid,organizationunitid:organizationunitid)
         {
             BatchId = batchid;
             VendorId = vendorid;

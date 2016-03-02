@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Payables
     public interface IAPHeaderTransactionsAppService : IApplicationService
     {
         /// <summary>
-        /// Create the Vendor.
+        /// Create the APHeaderTransaction.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

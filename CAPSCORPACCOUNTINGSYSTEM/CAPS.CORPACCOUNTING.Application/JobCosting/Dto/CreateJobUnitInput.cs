@@ -63,6 +63,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// </summary>
         public List<CreateJobCommercialInput> JobDetails { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<CreateJobBudgetUnitInput> JobBudget { get; set; }
+
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

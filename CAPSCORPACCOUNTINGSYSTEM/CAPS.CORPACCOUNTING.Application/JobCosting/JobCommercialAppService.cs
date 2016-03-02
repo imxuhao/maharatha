@@ -15,7 +15,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     public class JobCommercialAppService : CORPACCOUNTINGServiceBase, IJobCommercialAppService
     {
         private readonly JobCommercialUnitManager _jobDetailUnitManager;
-        private readonly IRepository<JobCommercialUnit> _jobDetailUnitRepository;       
+        private readonly IRepository<JobCommercialUnit> _jobDetailUnitRepository;
         private readonly IJobLocationAppService _jobLocationAppService;
         private readonly IRepository<JobLocationUnit> _jobLocationRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _jobDetailUnitRepository = jobDetailUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _jobLocationAppService = jobLocationAppService;
-            _jobLocationRepository = jobLocationRepository;           
+            _jobLocationRepository = jobLocationRepository;
 
         }
         /// <summary>
@@ -37,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         [UnitOfWork]
         public async Task<JobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input)
-        {          
+        {
 
             var jobDetailUnit = new JobCommercialUnit(jobid: input.JobId, biddate: input.BidDate, awarddate: input.AwardDate, shootingdate: input.ShootingDate,
                 wrapdate: input.WrapDate, roughcutdate: input.RoughCutDate, airdate: input.AirDate, dateclosed: input.DateClosed,
@@ -64,16 +64,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             await _jobDetailUnitManager.CreateAsync(jobDetailUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            if (input.JobLocations != null)
+            // Create Job Locations
+            input.JobLocations.ForEach(a => { a.JobId = jobDetailUnit.JobId; a.JobDetailId = jobDetailUnit.Id;});
+            foreach (var location in input.JobLocations)
             {
-                foreach (var location in input.JobLocations)
-                {
-                    location.JobDetailId = jobDetailUnit.Id;
-                    await _jobLocationAppService.CreateJobLocationUnit(location);
-                    await CurrentUnitOfWork.SaveChangesAsync();
-                }
+                await _jobLocationAppService.CreateJobLocationUnit(location);
             }
-
             return jobDetailUnit.MapTo<JobCommercialUnitDto>();
         }
 
@@ -207,11 +203,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task<JobCommercialUnitDto> GetJobDetailsByJobId(IdInput input)
         {
-            var jobitems = _jobDetailUnitRepository.GetAll().Include(q => q.JobLocations).Where(job => job.JobId == input.Id).ToList();           
+            var jobitems = _jobDetailUnitRepository.GetAll().Include(q => q.JobLocations).Where(job => job.JobId == input.Id).ToList();
 
             var result = jobitems.FirstOrDefault().MapTo<JobCommercialUnitDto>();
-            result.JobCommercialId = jobitems.FirstOrDefault().Id;                                  
-            return result;          
+            result.JobCommercialId = jobitems.FirstOrDefault().Id;
+            return result;
         }
     }
 }

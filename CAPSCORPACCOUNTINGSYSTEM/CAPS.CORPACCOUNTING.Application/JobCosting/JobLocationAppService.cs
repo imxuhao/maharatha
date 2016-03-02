@@ -23,9 +23,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _unitOfWorkManager = unitOfWorkManager;
         }
 
+        [UnitOfWork]
         public async Task<JobLocationUnitDto> CreateJobLocationUnit(CreateJobLocationInput input)
         {
-            var jobLocationUnit = new JobLocationUnit(jobid: input.JobId, locationsitedate: input.LocationSiteDate, organizationunitid: input.OrganizationUnitId, locationid: input.LocationId);
+            var jobLocationUnit = new JobLocationUnit(jobid: input.JobId, locationsitedate: input.LocationSiteDate, organizationunitid: input.OrganizationUnitId, locationid: input.LocationId,jobDetailId:input.JobDetailId);
             await _jobLocationUnitManager.CreateAsync(jobLocationUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             return jobLocationUnit.MapTo<JobLocationUnitDto>();
@@ -41,6 +42,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobLocationUnit.LocationSiteDate = input.LocationSiteDate;
             jobLocationUnit.OrganizationUnitId = input.OrganizationUnitId;
             jobLocationUnit.LocationId = input.LocationId;
+            jobLocationUnit.JobDetailId = input.JobDetailId;
             #endregion
             await _jobLocationUnitManager.UpdateAsync(jobLocationUnit);
 

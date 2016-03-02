@@ -25,9 +25,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<EmployeeUnit> _employeeUnitRepository;
         private readonly IRepository<CustomerUnit> _customerUnitRepository;
         private readonly IJobCommercialAppService _jobCommercialAppService;
+        private readonly IJobBudgetUnitAppService _jobBudgetUnitAppService;
 
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IUnitOfWorkManager unitOfWorkManager, IRepository<JobCommercialUnit> jobDetailUnitRepository,
-            IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService)
+            IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService, IJobBudgetUnitAppService jobBudgetUnitAppService)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -36,20 +37,37 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _employeeUnitRepository = employeeUnitRepository;
             _customerUnitRepository = customerUnitRepository;
             _jobCommercialAppService = jobCommercialAppService;
+            _jobBudgetUnitAppService = jobBudgetUnitAppService;
         }
         /// <summary>
         /// To create the Job
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [UnitOfWork]
         public async Task<JobUnitDto> CreateJobUnit(CreateJobUnitInput input)
         {
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,
-                isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: input.OrganizationUnitId, typeofprojectid: input.TypeofProjectId, taxrecoveryid: input.TaxRecoveryId
-                , chartofaccountid: input.ChartOfAccountId, rollupcenterid: input.RollupCenterId);
+                isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: input.OrganizationUnitId, typeofprojectid: input.TypeofProjectId,
+                taxrecoveryid: input.TaxRecoveryId, chartofaccountid: input.ChartOfAccountId, rollupcenterid: input.RollupCenterId);
             await _jobUnitManager.CreateAsync(jobUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
+
+            //create job details
+            input.JobDetails.ForEach(u => { u.JobId = jobUnit.Id;});
+            foreach (var jobdetails in input.JobDetails)
+            {
+                await _jobCommercialAppService.CreateJobDetailUnit(jobdetails);
+            }
+
+            //create jobbudget
+            input.JobBudget.ForEach(u => { u.JobId = jobUnit.Id;});
+            foreach (var jobBudget in input.JobBudget)
+            {
+                await _jobBudgetUnitAppService.CreateJobBudgetUnit(jobBudget);
+            }
+
             return jobUnit.MapTo<JobUnitDto>();
         }
 
@@ -156,7 +174,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             result.JobId = jobitem.Id;
             return result;
 
-        }        
+        }
 
     }
 }

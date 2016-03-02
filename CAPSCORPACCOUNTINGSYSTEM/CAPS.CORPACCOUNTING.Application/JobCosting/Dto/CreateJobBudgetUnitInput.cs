@@ -7,7 +7,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
     public class CreateJobBudgetUnitInput : IInputDto
     {
         /// <summary>Gets or sets the JobId field. </summary>
-        [Range(1,Int32.MaxValue)]
+        [Range(0,Int32.MaxValue)]
         public int? JobId { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>

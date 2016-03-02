@@ -422,6 +422,10 @@
     <Compile Include="Migrations\201603011012129_Modify_JobLocations_Table.Designer.cs">
       <DependentUpon>201603011012129_Modify_JobLocations_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603021410056_Modify_Transactions_Tables.cs" />
+    <Compile Include="Migrations\201603021410056_Modify_Transactions_Tables.Designer.cs">
+      <DependentUpon>201603021410056_Modify_Transactions_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -668,6 +672,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603011012129_Modify_JobLocations_Table.resx">
       <DependentUpon>201603011012129_Modify_JobLocations_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021410056_Modify_Transactions_Tables.resx">
+      <DependentUpon>201603021410056_Modify_Transactions_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -109,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\AccountingHeaderTransactionsUnit.cs" />
+    <Compile Include="AccountReceivable\ArInvoiceEntryDocumentUnit.cs" />
+    <Compile Include="CashEntry\CashEntryDocumentUnit.cs" />
+    <Compile Include="ChargeEntry\ChargeEntryDocumentUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentUnitManager.cs" />
     <Compile Include="Payables\APHeaderTransactionsUnitManager.cs" />
     <Compile Include="Authorization\Users\IUserLinkManager.cs" />

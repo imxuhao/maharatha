@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
 using Abp.Domain.Uow;
-using Abp.UI;
 using Abp.Zero;
+using Abp.Application.Services.Dto;
 
 namespace CAPS.CORPACCOUNTING.Payables
 {
@@ -22,9 +19,18 @@ namespace CAPS.CORPACCOUNTING.Payables
 
         [UnitOfWork]
         public virtual async Task CreateAsync(ApHeaderTransactions accountUnit)
-        {           
+        {
             await ApHeaderTransactionsUnitRepository.InsertAsync(accountUnit);
         }
 
+        public virtual async Task UpdateAsync(ApHeaderTransactions accountUnit)
+        {
+            await ApHeaderTransactionsUnitRepository.UpdateAsync(accountUnit);
+        }
+
+        public virtual async Task DeleteAsync(IdInput input)
+        {
+            await ApHeaderTransactionsUnitRepository.DeleteAsync(input.Id);
+        }
     }
 }

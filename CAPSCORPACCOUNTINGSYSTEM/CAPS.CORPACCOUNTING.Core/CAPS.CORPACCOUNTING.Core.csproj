@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\AccountingHeaderTransactionsUnit.cs" />
+    <Compile Include="Journals\JournalEntryDocumentUnitManager.cs" />
     <Compile Include="Payables\APHeaderTransactionsUnitManager.cs" />
     <Compile Include="Authorization\Users\IUserLinkManager.cs" />
     <Compile Include="Authorization\Users\SwitchToLinkedAccountCacheItem.cs" />
@@ -206,9 +207,10 @@
     <Compile Include="Notifications\AppNotificationProvider.cs" />
     <Compile Include="Notifications\AppNotifier.cs" />
     <Compile Include="Notifications\IAppNotifier.cs" />
-    <Compile Include="Payables\APHeaderTransactions.cs" />
+    <Compile Include="Payables\APHeaderTransactionsUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentUnit.cs" />
     <Compile Include="Payroll\PayrollEntryDocumentUnit.cs" />
+    <Compile Include="Payroll\PayrollEntryDocumentUnitManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SimpleStringCipher.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />

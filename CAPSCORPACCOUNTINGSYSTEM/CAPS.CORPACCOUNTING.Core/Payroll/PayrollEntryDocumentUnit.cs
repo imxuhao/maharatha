@@ -2,6 +2,7 @@
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Payables;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
@@ -53,6 +54,43 @@ namespace CAPS.CORPACCOUNTING.Payroll
 
         /// <summary>Gets or sets the LinkedAccountingDocumentId field. </summary>
         public virtual long? LinkedAccountingDocumentId { get; set; }
+
+        public PayrollEntryDocumentUnit() { }
+
+        public PayrollEntryDocumentUnit(int? batchid, int? vendorid, TypeOfInvoice typeofinvoiceid, bool isenterable, long? apinvoiceaccountingdocid, int? uploaddocumentlogid,
+                                                bool? isreversed, int? reversedbyuserid, SqlDateTime? reversaldate, bool? isvoid, bool? isvoiddateoriginal, long? linkedaccountingdocumentid,
+                                                 string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid, long? recurdocid, long? reversedocid,
+                                                 DateTime? documentdate, DateTime transactiondate, DateTime? dateposted, long? originaldocumentid, decimal? controltotal, string documentreference,
+                                                 string voucherreference, short? typeofcurrencyid, int? currencyadjustmentid, string postbatchdescription, bool isposted, bool isautoposted, bool ischanged,
+                                                 int? postedbyuserid, int? bankreccontrolid, bool isselected, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
+                                                 bool? isbankrecomitted, bool? isictjournal, int? ictcompanyid, long? ictaccountingdocumentid, double? currencyoverriderate,
+                                                 decimal? functionalcurrencycontroltotal, short? typeofcurrencyrateid, string memoline, bool? is13period, decimal? homecurrencyamount, decimal? customforexrate,
+                                                 bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid, long organizationunitid) :
+                             base(description: description, typeofaccountingdocumentid: typeofaccountingdocumentid, typeofobjectid: typeofobjectid, recurdocid: recurdocid,
+                                                reversedocid: reversedocid, documentdate: documentdate, transactiondate: transactiondate, dateposted: dateposted,
+                                                originaldocumentid: organizationunitid, controltotal: controltotal, documentreference: documentreference,
+                                                voucherreference: voucherreference, typeofcurrencyid: typeofcurrencyid, currencyadjustmentid: currencyadjustmentid,
+                                                postbatchdescription: postbatchdescription, isposted: isposted, isautoposted: isautoposted, ischanged: ischanged,
+                                                postedbyuserid: postedbyuserid, bankreccontrolid: bankreccontrolid, isselected: isselected, isactive: isactive, isapproved: isapproved,
+                                                typeofinactivestatusid: typeofinactivestatusid, isbankrecomitted: isbankrecomitted, isictjournal: isictjournal,
+                                                ictcompanyid: ictcompanyid, ictaccountingdocumentid: ictaccountingdocumentid, currencyoverriderate: currencyoverriderate,
+                                                functionalcurrencycontroltotal: functionalcurrencycontroltotal, typeofcurrencyrateid: typeofcurrencyid, memoline: memoline,
+                                                is13period: is13period, homecurrencyamount: homecurrencyamount, customforexrate: customforexrate, isposubmitforapproval: isposubmitforapproval,
+                                                iscpastran: iscpastran, cpasprojcloseid: cpasprojcloseid, cpasprojid: cpasprojid, organizationunitid: organizationunitid)
+        {
+            BatchId = batchid;
+            VendorId = vendorid;
+            TypeOfInvoiceId = typeofinvoiceid;
+            IsEnterable = isenterable;
+            APInvoiceAccountingDocId = apinvoiceaccountingdocid;
+            UploadDocumentLogId = uploaddocumentlogid;
+            IsReversed = isreversed;
+            ReversedByUserId = reversedbyuserid;
+            ReversalDate = reversaldate;
+            IsVoid = isvoid;
+            IsVoidDateOriginal = isvoiddateoriginal;
+            LinkedAccountingDocumentId = linkedaccountingdocumentid;
+        }
 
     }
 }

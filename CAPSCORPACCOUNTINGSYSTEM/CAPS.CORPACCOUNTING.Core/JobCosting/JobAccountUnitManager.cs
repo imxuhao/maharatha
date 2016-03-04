@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
-using Abp.Domain.Uow;
 using Abp.Zero;
 using Abp.Application.Services.Dto;
 namespace CAPS.CORPACCOUNTING.JobCosting

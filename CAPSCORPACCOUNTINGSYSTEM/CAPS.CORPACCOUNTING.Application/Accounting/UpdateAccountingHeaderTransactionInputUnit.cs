@@ -7,10 +7,14 @@ using System.ComponentModel.DataAnnotations;
 namespace CAPS.CORPACCOUNTING.Accounting
 {
     /// <summary>
-    /// creates CreateAccountingHeaderTransactionputUnit
+    /// Updates UpdateAccountingHeaderTransactionInputUnit
     /// </summary>
-    public class CreateAccountingHeaderTransactionputUnit :IInputDto
+    public class UpdateAccountingHeaderTransactionInputUnit : IInputDto
     {
+
+        /// <summary>Gets or sets the AHTID field.</summary>
+        public int AHTID { get; set; }
+
         /// <summary>Get Sets the Description Date </summary>
         public virtual string Description { get; set; }
 
@@ -43,7 +47,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         //  public virtual DateTime? DateCreated { get; set; }
 
         /// <summary>Get Sets the DatePosted field.</summary>
-       
+
         public virtual DateTime? DatePosted { get; set; }
 
         //[Column(TypeName = "smalldatetime")]
@@ -76,17 +80,17 @@ namespace CAPS.CORPACCOUNTING.Accounting
         ////public virtual bool IsNewActivityPrinted { get; set; }
 
         /// <summary>Get Sets the IsPosted field.</summary>
-        public  bool IsPosted { get; set; }
+        public bool IsPosted { get; set; }
 
         /// <summary>Get Sets the IsAutoPosted field.</summary>
         public virtual bool IsAutoPosted { get; set; }
 
         /// <summary>Get Sets the IsChanged field.</summary>
-        public virtual bool IsChanged { get; set; }      
+        public virtual bool IsChanged { get; set; }
 
         /// <summary>Get Sets the PostedByUserId field.</summary>
         public virtual int? PostedByUserId { get; set; }
-      
+
 
         // <summary>Get Sets the BankRecControlId field.</summary>
         public virtual int? BankRecControlId { get; set; }
@@ -147,7 +151,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int? CPASProjCloseId { get; set; }
 
         /// <summary>Get Sets the CPASProjId field.</summary>
-        public virtual int? CPASProjId { get; set; }     
+        public virtual int? CPASProjId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long OrganizationUnitId { get; set; }

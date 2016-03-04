@@ -117,7 +117,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounting\CreateAccountingHeaderTransactionputUnit.cs" />
+    <Compile Include="Accounting\AccountingHeaderTransactionUnitDto.cs" />
+    <Compile Include="Accounting\CreateAccountingHeaderTransactionInputUnit.cs" />
+    <Compile Include="Accounting\UpdateAccountingHeaderTransactionInputUnit.cs" />
     <Compile Include="Authorization\AbpLoginResultTypeHelper.cs" />
     <Compile Include="Authorization\Users\Dto\GetLinkedUsersInput.cs" />
     <Compile Include="Authorization\Users\Dto\LinkToUserInput.cs" />
@@ -222,6 +224,11 @@
     <Compile Include="JobCosting\JobLocationAppService.cs" />
     <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\JobUnitAppService.cs" />
+    <Compile Include="Journals\Dto\CreateJournalEntryDocumentInputUnit.cs" />
+    <Compile Include="Journals\IJournalEntryDocumentAppService.cs" />
+    <Compile Include="Journals\JournalEntryDocumentAppService.cs" />
+    <Compile Include="Journals\Dto\JournalEntryDocumentUnitDto.cs" />
+    <Compile Include="Journals\Dto\UpdateJournalEntryDocumentInputUnit.cs" />
     <Compile Include="Localization\Dto\CreateOrUpdateLanguageInput.cs" />
     <Compile Include="Localization\Dto\ApplicationLanguageEditDto.cs" />
     <Compile Include="Localization\Dto\ApplicationLanguageListDto.cs" />
@@ -323,8 +330,10 @@
     <Compile Include="Organizations\Dto\MoveOrganizationUnitInput.cs" />
     <Compile Include="Organizations\OrganizationUnitAppService.cs" />
     <Compile Include="Organizations\Dto\OrganizationUnitUserListDto.cs" />
-    <Compile Include="Payables\APHeaderTransactions.cs" />
+    <Compile Include="Payables\APHeaderTransactionsAppService.cs" />
+    <Compile Include="Payables\Dto\APHeaderTransactionsUnitDto.cs" />
     <Compile Include="Payables\Dto\CreateAPHeaderTransactionsInputUnit.cs" />
+    <Compile Include="Payables\Dto\UpdateAPHeaderTransactionsInputUnit.cs" />
     <Compile Include="Payables\IAPHeaderTransactionsAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sessions\Dto\GetCurrentLoginInformationsOutput.cs" />
@@ -351,6 +360,7 @@
   <ItemGroup>
     <Content Include="CAPS.CORPACCOUNTING.Application.XML" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

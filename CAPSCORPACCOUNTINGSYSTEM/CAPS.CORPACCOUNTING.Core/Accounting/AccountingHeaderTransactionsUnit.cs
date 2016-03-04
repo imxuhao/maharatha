@@ -50,6 +50,101 @@ namespace CAPS.CORPACCOUNTING.Accounting
         CreditCardPersonalCharges = 18,
     }
 
+    public enum TypeOfInvoice
+    {
+        [Display(Name = "Invoice")]
+        Invoice = 1,
+        [Display(Name = "Credit Memo")]
+        CreditMemo = 2,
+        [Display(Name = "Void Payment Only")]
+        VoidPaymentOnly = 3,
+        [Display(Name = "Void Pay & All Invs")]
+        VoidPayandAllInvs = 4,
+        [Display(Name = "Reissue Only")]
+        ReissueOnly = 5,
+        [Display(Name = "Reissue Reversal")]
+        ReissueReversal = 6,
+        [Display(Name = "Petty Cash")]
+        PettyCash = 7,
+        [Display(Name = "Payroll")]
+        Payroll = 8,
+        [Display(Name = "Credit Card")]
+        CreditCard = 9,
+        [Display(Name = "Debit Card")]
+        DebitCard = 10,
+        [Display(Name = "Shipping")]
+        Shipping = 11,
+        [Display(Name = "Check Log")]
+        CheckLog = 12,
+        [Display(Name = "PO Log")]
+        POLog = 13,
+        [Display(Name = "Petty Cash Log")]
+        PettyCashLog = 14,
+        [Display(Name = "Payroll Log")]
+        PayrollLog = 15,
+        [Display(Name = "Sales Log")]
+        SalesLog = 16,
+        [Display(Name = "AMEX Log")]
+        AMEXLog = 17
+    }
+    public enum TypeOfCheckGroup
+    {
+        [Display(Name = "Group A")]
+        GroupA = 1,
+        [Display(Name = "Group B")]
+        GroupB = 2,
+        [Display(Name = "Group C")]
+        GroupC = 3,
+        [Display(Name = "Group D")]
+        GroupD = 4,
+        [Display(Name = "Group E")]
+        GroupE = 5,
+        [Display(Name = "Group F")]
+        GroupF = 6,
+        [Display(Name = "Separate Check")]
+        SeparateCheck = 7,
+        [Display(Name = "Group G")]
+        GroupG = 8,
+        [Display(Name = "Group H")]
+        GroupH = 9,
+        [Display(Name = "Group I")]
+        GroupI = 10,
+        [Display(Name = "Group J")]
+        GroupJ = 11,
+        [Display(Name = "Group K")]
+        GroupK = 12,
+        [Display(Name = "Group L")]
+        GroupL = 13,
+        [Display(Name = "Group M")]
+        GroupM = 14,
+        [Display(Name = "Group N")]
+        GroupN = 15,
+        [Display(Name = "Group O")]
+        GroupO = 16,
+        [Display(Name = "Group P")]
+        GroupP = 17,
+        [Display(Name = "Group Q")]
+        GroupQ = 18,
+        [Display(Name = "Group R")]
+        GroupR = 19,
+        [Display(Name = "Group S")]
+        GroupS = 20,
+        [Display(Name = "Group T")]
+        GroupT = 21,
+        [Display(Name = "Group U")]
+        GroupU = 22,
+        [Display(Name = "Group V")]
+        GroupV = 23,
+        [Display(Name = "Group W")]
+        GroupW = 24,
+        [Display(Name = "Group X")]
+        GroupX = 25,
+        [Display(Name = "Group Y")]
+        GroupY = 26,
+        [Display(Name = "Group Z")]
+        GroupZ = 27
+
+    }
 
     [Table("CAPS_AccountingHeaderTransactions")]
     public class AccountingHeaderTransactionsUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit

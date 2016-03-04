@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.languages.texts', [
-        '$scope', '$state', '$stateParams', '$modal', 'abp.services.app.language', 'uiGridConstants',
-        function ($scope, $state, $stateParams, $modal, languageService, uiGridConstants) {
+        '$scope', '$state', '$stateParams', '$uibModal', 'abp.services.app.language', 'uiGridConstants',
+        function ($scope, $state, $stateParams, $uibModal, languageService, uiGridConstants) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -90,7 +90,7 @@
             };
 
             vm.openTextEditModal = function(text) {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: '~/App/common/views/languages/editTextModal.cshtml',
                     controller: 'common.views.languages.editTextModal as vm',
                     resolve: {

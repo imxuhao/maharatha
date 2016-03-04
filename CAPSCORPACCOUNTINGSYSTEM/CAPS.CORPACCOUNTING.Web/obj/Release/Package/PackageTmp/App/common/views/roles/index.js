@@ -1,8 +1,8 @@
 ﻿(function () {
 
     appModule.controller('common.views.roles.index', [
-        '$scope', '$modal', '$templateCache', 'abp.services.app.role', 'uiGridConstants',
-        function ($scope, $modal, $templateCache, roleService, uiGridConstants) {
+        '$scope', '$uibModal', '$templateCache', 'abp.services.app.role', 'uiGridConstants',
+        function ($scope, $uibModal, $templateCache, roleService, uiGridConstants) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -28,9 +28,9 @@
                         width: 120,
                         cellTemplate:
                             '<div class=\"ui-grid-cell-contents\">' +
-                            '  <div class="btn-group dropdown" dropdown="">' +
-                            '    <button class="btn btn-xs btn-primary blue" dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
-                            '    <ul class="dropdown-menu">' +
+                            '  <div class="btn-group dropdown" uib-dropdown="">' +
+                            '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
+                            '    <ul class="uib-dropdown-menu">' +
                             '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editRole(row.entity)">' + app.localize('Edit') + '</a></li>' +
                             '      <li><a ng-if="!row.entity.isStatic && grid.appScope.permissions.delete" ng-click="grid.appScope.deleteRole(row.entity)">' + app.localize('Delete') + '</a></li>' +
                             '    </ul>' +
@@ -43,8 +43,8 @@
                         cellTemplate:
                             '<div class=\"ui-grid-cell-contents\">' +
                             '  {{COL_FIELD CUSTOM_FILTERS}} &nbsp;' +
-                            '  <span ng-show="row.entity.isStatic" class="label label-info" popover="' + app.localize('StaticRole_Tooltip') + '" popover-placement="bottom" popover-trigger="hover click">' + app.localize('Static') + '</span>&nbsp;' +
-                            '  <span ng-show="row.entity.isDefault" class="label label-default" popover="' + app.localize('DefaultRole_Description') + '" popover-placement="bottom" popover-trigger="hover click">' + app.localize('Default') + '</span>' +
+                            '  <span ng-show="row.entity.isStatic" class="label label-info" uib-popover="' + app.localize('StaticRole_Tooltip') + '" popover-placement="bottom" popover-trigger="mouseenter click">' + app.localize('Static') + '</span>&nbsp;' +
+                            '  <span ng-show="row.entity.isDefault" class="label label-default" uib-popover="' + app.localize('DefaultRole_Description') + '" popover-placement="bottom" popover-trigger="mouseenter click">' + app.localize('Default') + '</span>' +
                             '</div>'
                     },
                     {
@@ -94,7 +94,7 @@
             };
 
             function openCreateOrEditRoleModal(roleId) {
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                     templateUrl: '~/App/common/views/roles/createOrEditModal.cshtml',
                     controller: 'common.views.roles.createOrEditModal as vm',
                     backdrop: 'static',

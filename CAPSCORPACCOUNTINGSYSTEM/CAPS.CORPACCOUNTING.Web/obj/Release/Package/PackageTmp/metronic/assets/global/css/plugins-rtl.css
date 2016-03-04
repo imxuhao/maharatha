@@ -1011,6 +1011,9 @@ table.dataTable > tbody > tr.child ul li {
   margin: 0 auto;
   text-align: center; }
 
+.dz-hidden-input {
+  right: 0; }
+
 @media (max-width: 768px) {
   .dropzone-file-area {
     width: auto; } }

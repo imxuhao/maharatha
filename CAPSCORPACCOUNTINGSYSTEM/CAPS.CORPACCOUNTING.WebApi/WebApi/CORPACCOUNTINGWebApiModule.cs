@@ -9,17 +9,35 @@ using Swashbuckle.Application;
 using System.Linq;
 using System.IO;
 using System;
+using Abp.WebApi.OData;
+using Abp.WebApi.OData.Configuration;
 using CAPS.CORPACCOUNTING.Masters;
 
+#pragma warning disable 1587
 
 namespace CAPS.CORPACCOUNTING.WebApi
 {
     /// <summary>
     /// Web API layer of the application.
     /// </summary>
-    [DependsOn(typeof(AbpWebApiModule), typeof(CORPACCOUNTINGApplicationModule))]
+    [DependsOn(typeof(AbpWebApiModule), typeof(CORPACCOUNTINGApplicationModule),typeof(AbpWebApiODataModule))]
     public class CORPACCOUNTINGWebApiModule : AbpModule
     {
+        /// <summary>
+        /// This is the first event called on application startup. 
+        /// OData requires to declare entities which can be used as OData resources. We should do this in PreInitialize method of our module, as shown below:
+        /// </summary>
+        public override void PreInitialize()
+        {
+            var builder = Configuration.Modules.AbpWebApiOData().ODataModelBuilder;
+
+            //Configure your entities here...
+            builder.EntitySet<CoaUnit>("COA");
+        }
+
+        /// <summary>
+        /// This method is used to register dependencies for this module.
+        /// </summary>
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());

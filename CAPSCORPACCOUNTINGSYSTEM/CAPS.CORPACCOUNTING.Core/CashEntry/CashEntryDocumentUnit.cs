@@ -35,7 +35,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
         public virtual BankAccountUnit SendingBankAccount { get; set; }
 
         ///<summary>Get Sets the PettyCashAccountId field.</summary>
-        public virtual int? PettyCashAccountId { get; set; }
+        public virtual long PettyCashAccountId { get; set; }
 
         [ForeignKey("PettyCashAccountId")]
         public AccountUnit PettyCashAccount { get; set; }
@@ -78,7 +78,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
         }
 
 
-        public CashEntryDocumentUnit(int? batchid, int bankaccountid, int? reconciliationid, bool isenterable, int? sendingbankaccountid, int? pettycashaccountid,
+        public CashEntryDocumentUnit(int? batchid, int bankaccountid, int? reconciliationid, bool isenterable, int? sendingbankaccountid, long pettycashaccountid,
                                 string batchinfo, bool? isreversed, int? reversedbyuserid, SqlDateTime? reversaldate, bool? isvoid, bool? isvoiddateoriginal,
                                 long? linkedaccountingdocumentid, int? reissuebatchid, int? reissuevoiddate, int? deposittypeofcategoryid,
                                  string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid, long? recurdocid, long? reversedocid,

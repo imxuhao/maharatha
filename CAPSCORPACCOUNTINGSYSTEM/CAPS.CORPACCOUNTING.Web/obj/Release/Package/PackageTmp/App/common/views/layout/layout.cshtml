@@ -90,9 +90,13 @@
     @Html.IncludeScript(ScriptPaths.Bootstrap_Select_Localization)
 
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
-    <script src="~/api/AbpServiceProxies/GetAll?type=angular"></script>
-    <script src="~/api/AbpServiceProxies/GetAll"></script>
+    <script src="~/api/AbpServiceProxies/GetAll?type=angular&v=@(Clock.Now.Ticks)"></script>
+    <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
     <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+
+    <!-- SignalR scripts -->
+    <script src="~/signalr/hubs"></script>
+    @Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")
 
     @Scripts.Render("~/Bundles/App/metronic/js")
     @Scripts.Render("~/Bundles/Common/js")

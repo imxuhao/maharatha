@@ -15,18 +15,18 @@
     </div>
     <div class="portlet light">
         <div class="portlet-body">
-            <tabset class="tab-container tabbable-line">
+            <uib-tabset class="tab-container tabbable-line">
 
-                <tab heading="@L("General")" ng-if="!vm.isMultiTenancyEnabled">
+                <uib-tab heading="@L("General")" ng-if="!vm.isMultiTenancyEnabled">
                     <div class="form-group form-md-line-input form-md-floating-label">
                         <input class="form-control" type="text" name="WebSiteRootAddress" ng-class="{'edited':vm.settings.general.webSiteRootAddress}" ng-model="vm.settings.general.webSiteRootAddress" required maxlength="128">
                         <label>@L("ThisWebSiteRootAddress")</label>
                         <span class="help-block">@L("ThisWebSiteRootAddress_Hint")</span>
                     </div>
                     <div></div>
-                </tab>
+                </uib-tab>
 
-                <tab heading="@L("UserManagement")">
+                <uib-tab heading="@L("UserManagement")">
                     <div>
                         <h4>@L("FormBasedRegistration")</h4>
                         <div class="md-checkbox-list">
@@ -103,9 +103,9 @@
                             </label>
                         </div>
                     </div>
-                </tab>
+                </uib-tab>
 
-                <tab heading="@L("EmailSmtp")" ng-if="!vm.isMultiTenancyEnabled">
+                <uib-tab heading="@L("EmailSmtp")" ng-if="!vm.isMultiTenancyEnabled">
                     <div class="form-group form-md-line-input form-md-floating-label no-hint">
                         <input type="email" name="DefaultFromAddress" class="form-control" ng-class="{'edited':vm.settings.email.defaultFromAddress}" ng-model="vm.settings.email.defaultFromAddress" maxlength="@CAPS.CORPACCOUNTING.Authorization.Users.User.MaxEmailAddressLength">
                         <label>@L("DefaultFromAddress")</label>
@@ -161,9 +161,9 @@
                         <input type="password" name="SmtpPassword" class="form-control" ng-class="{'edited':vm.settings.email.smtpPassword}" ng-model="vm.settings.email.smtpPassword" maxlength="128">
                         <label>@L("Password")</label>
                     </div>
-                </tab>
+                </uib-tab>
 
-            </tabset>
+            </uib-tabset>
         </div>
     </div>
 </div>

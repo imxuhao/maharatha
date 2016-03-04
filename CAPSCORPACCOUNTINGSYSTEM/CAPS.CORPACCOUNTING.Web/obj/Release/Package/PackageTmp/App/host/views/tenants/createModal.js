@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('host.views.tenants.createModal', [
-        '$scope', '$modalInstance', 'abp.services.app.tenant', 'abp.services.app.commonLookup',
-        function ($scope, $modalInstance, tenantService, commonLookupService) {
+        '$scope', '$uibModalInstance', 'abp.services.app.tenant', 'abp.services.app.commonLookup',
+        function ($scope, $uibModalInstance, tenantService, commonLookupService) {
             var vm = this;
 
             vm.saving = false;
@@ -31,14 +31,14 @@
                 tenantService.createTenant(vm.tenant)
                     .success(function () {
                         abp.notify.info(app.localize('SavedSuccessfully'));
-                        $modalInstance.close();
+                        $uibModalInstance.close();
                     }).finally(function () {
                         vm.saving = false;
                     });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             commonLookupService.getEditionsForCombobox({}).success(function (result) {

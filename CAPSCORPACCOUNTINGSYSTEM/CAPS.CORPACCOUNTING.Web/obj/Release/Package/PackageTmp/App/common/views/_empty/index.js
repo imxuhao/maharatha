@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.EMPTY.index', [
-        '$scope', '$modal',
-        function ($scope, $modal) {
+        '$scope', '$uibModal',
+        function ($scope, $uibModal) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {

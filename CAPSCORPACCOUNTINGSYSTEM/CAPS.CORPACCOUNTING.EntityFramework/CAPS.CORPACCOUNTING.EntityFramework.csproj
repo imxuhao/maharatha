@@ -435,6 +435,10 @@
     <Compile Include="Migrations\201603021949446_Add_JournalEntryDocument_Table.Designer.cs">
       <DependentUpon>201603021949446_Add_JournalEntryDocument_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603041621347_Fix_PettyCashAccount_DataType.cs" />
+    <Compile Include="Migrations\201603041621347_Fix_PettyCashAccount_DataType.Designer.cs">
+      <DependentUpon>201603041621347_Fix_PettyCashAccount_DataType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -690,6 +694,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603021949446_Add_JournalEntryDocument_Table.resx">
       <DependentUpon>201603021949446_Add_JournalEntryDocument_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603041621347_Fix_PettyCashAccount_DataType.resx">
+      <DependentUpon>201603041621347_Fix_PettyCashAccount_DataType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.auditLogs.detailModal', [
-        '$scope', '$modalInstance', 'auditLog',
-        function ($scope, $modalInstance, auditLog) {
+        '$scope', '$uibModalInstance', 'auditLog',
+        function ($scope, $uibModalInstance, auditLog) {
             var vm = this;
 
             vm.auditLog = auditLog;
@@ -20,7 +20,7 @@
             }
 
             vm.close = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
         }
     ]);

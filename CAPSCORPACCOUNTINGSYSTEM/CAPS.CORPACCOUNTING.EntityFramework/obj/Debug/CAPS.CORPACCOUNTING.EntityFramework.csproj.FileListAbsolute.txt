@@ -330,7 +330,6 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_LocationSet_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_ICTRelation_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_JobBudgetDetails_Table.resources
-C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_JobLocation_Tabel.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_TypeOfCheckStock_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_TypeOfUploadFileUnit_Table.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Batch_Table.resources
@@ -344,3 +343,8 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.EntityFramework.pdb
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Update_Abp82.resources
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_Accounting_AP_Tables.resources
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_JobLocation_Table.resources
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_JobLocations_Table.resources
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Modify_Transactions_Tables.resources
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.CHange_Table_Prefix_Abp.resources
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.EntityFramework\obj\Debug\CAPS.CORPACCOUNTING.Migrations.Add_JournalEntryDocument_Table.resources

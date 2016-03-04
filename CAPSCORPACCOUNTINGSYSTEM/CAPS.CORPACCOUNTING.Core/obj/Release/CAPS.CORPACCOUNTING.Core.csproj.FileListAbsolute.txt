@@ -27,3 +27,39 @@ D:\SVN\CORPACCOUNTING\CAPS.CORPACCOUNTING.Core\bin\Release\System.Collections.Im
 D:\SVN\CORPACCOUNTING\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.csprojResolveAssemblyReference.cache
 D:\SVN\CORPACCOUNTING\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.dll
 D:\SVN\CORPACCOUNTING\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\CAPS.CORPACCOUNTING.Core.dll.config
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\CAPS.CORPACCOUNTING.Core.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\CAPS.CORPACCOUNTING.Core.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Abp.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Abp.EntityFramework.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Abp.Zero.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Abp.Zero.Ldap.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Castle.Core.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Castle.Facilities.Logging.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Castle.Windsor.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\EntityFramework.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\EntityFramework.DynamicFilters.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\EntityFramework.SqlServer.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Microsoft.AspNet.Identity.Core.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Newtonsoft.Json.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.Concurrent.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.Enlightenment.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\System.Collections.Immutable.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Abp.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Abp.EntityFramework.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Abp.Zero.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Castle.Core.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Castle.Facilities.Logging.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Castle.Windsor.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\EntityFramework.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\EntityFramework.SqlServer.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Microsoft.AspNet.Identity.Core.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Newtonsoft.Json.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.Concurrent.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.Enlightenment.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\bin\Release\System.Collections.Immutable.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.csprojResolveAssemblyReference.cache
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.pdb

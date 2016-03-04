@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.EMPTY.modal', [
-        '$scope', '$modalInstance', 
-        function ($scope, $modalInstance) {
+        '$scope', '$uibModalInstance', 
+        function ($scope, $uibModalInstance) {
             var vm = this;
 
             vm.saving = false;
@@ -10,7 +10,7 @@
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             function init() {

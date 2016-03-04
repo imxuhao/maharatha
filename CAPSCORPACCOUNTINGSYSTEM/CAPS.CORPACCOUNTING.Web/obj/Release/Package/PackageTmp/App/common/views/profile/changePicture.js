@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.profile.changePicture', [
-        '$scope', 'appSession', '$modalInstance', 'FileUploader',
-        function ($scope, appSession, $modalInstance, fileUploader) {
+        '$scope', 'appSession', '$uibModalInstance', 'FileUploader',
+        function ($scope, appSession, $uibModalInstance, fileUploader) {
             var vm = this;
 
             vm.uploader = new fileUploader({
@@ -34,11 +34,11 @@
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             vm.uploader.onSuccessItem = function (fileItem, response, status, headers) {
-                $modalInstance.close();
+                $uibModalInstance.close();
 
                 if (response.success) {
                     var profileFilePath = abp.appPath + 'Profile/GetProfilePicture?t=' + new Date().getTime();

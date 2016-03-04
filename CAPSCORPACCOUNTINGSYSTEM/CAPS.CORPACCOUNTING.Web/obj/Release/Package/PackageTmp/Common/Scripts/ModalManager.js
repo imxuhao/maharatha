@@ -51,6 +51,8 @@
             var _args = null;
             var _getResultCallback = null;
 
+            var _onCloseCallbacks = [];
+
             function _saveModal() {
                 if (_modalObject && _modalObject.save) {
                     _modalObject.save();
@@ -66,6 +68,10 @@
 
                 _$modal.on('hidden.bs.modal', function () {
                     _removeContainer(_modalId);
+
+                    for (var i = 0; i < _onCloseCallbacks.length; i++) {
+                        _onCloseCallbacks[i]();
+                    }
                 });
 
                 _$modal.on('shown.bs.modal', function () {
@@ -130,6 +136,10 @@
                 _$modal.modal('hide');
             };
 
+            var _onClose = function (onCloseCallback) {
+                _onCloseCallbacks.push(onCloseCallback);
+            }
+
             function _setBusy(isBusy) {
                 if (!_$modal) {
                     return;
@@ -168,7 +178,9 @@
 
                 setResult: function() {
                     _getResultCallback && _getResultCallback.apply(_publicApi, arguments);
-                }
+                },
+
+                onClose: _onClose
             }
 
             return _publicApi;

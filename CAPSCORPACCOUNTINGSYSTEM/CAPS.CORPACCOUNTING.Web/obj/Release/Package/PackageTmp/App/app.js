@@ -10,6 +10,8 @@ var appModule = angular.module("app", [
     "ngSanitize",
     'angularFileUpload',
     'daterangepicker',
+    'angularMoment',
+    'frapontillo.bootstrap-switch',
     'abp'
 ]);
 
@@ -77,7 +79,7 @@ appModule.config([
 
         if (abp.auth.hasPermission('Pages.Administration.Users')) {
             $stateProvider.state('users', {
-                url: '/users',
+                url: '/users?filterText',
                 templateUrl: '~/App/common/views/users/index.cshtml',
                 menu: 'Administration.Users'
             });
@@ -114,6 +116,11 @@ appModule.config([
                 menu: 'Administration.OrganizationUnits'
             });
         }
+
+        $stateProvider.state('notifications', {
+            url: '/notifications',
+            templateUrl: '~/App/common/views/notifications/index.cshtml'
+        });
 
         //HOST routes
 
@@ -157,7 +164,7 @@ appModule.config([
         });
 
         if (abp.auth.hasPermission('Pages.Tenant.Dashboard')) {
-            $urlRouterProvider.otherwise("/tenant/dashboard"); //Entrace page for a tenant
+            $urlRouterProvider.otherwise("/tenant/dashboard"); //Entrance page for a tenant
             $stateProvider.state('tenant.dashboard', {
                 url: '/dashboard',
                 templateUrl: '~/App/tenant/views/dashboard/index.cshtml',

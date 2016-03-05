@@ -43,6 +43,9 @@ namespace CAPS.CORPACCOUNTING.Banking
 
     }
 
+    /// <summary>
+    /// Batch is the table name in lajit
+    /// </summary>
     [Table("CAPS_Batch")]
     public class BatchUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
@@ -101,10 +104,10 @@ namespace CAPS.CORPACCOUNTING.Banking
         public virtual bool? IsUniversal { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
-        public int TenantId { get; set; }
+        public virtual int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long? OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
 
         #endregion
         public BatchUnit() { }

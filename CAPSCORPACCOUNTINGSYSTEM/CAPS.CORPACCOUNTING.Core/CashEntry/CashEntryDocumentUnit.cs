@@ -7,10 +7,13 @@ using System.Data.SqlTypes;
 
 namespace CAPS.CORPACCOUNTING.CashEntry
 {
+    /// <summary>
+    /// CashEntryDocument is the table name in Lajit
+    /// </summary>
     [Table("CAPS_CashEntryDocument")]
     public class CashEntryDocumentUnit : AccountingHeaderTransactionsUnit
     {
-
+        #region Class Property Declarations
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual int? BatchId { get; set; }
 
@@ -24,6 +27,9 @@ namespace CAPS.CORPACCOUNTING.CashEntry
 
         ///<summary>Get Sets the ReconciliationId field.</summary>
         public virtual int? ReconciliationId { get; set; }
+
+        [ForeignKey("ReconciliationId")]
+        public BankRecControlUnit Reconciliation { get; set; }
 
         ///<summary>Get Sets the IsEnterable field.</summary>
         public virtual bool IsEnterable { get; set; }
@@ -72,7 +78,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
 
         ///<summary>Get Sets the DepositTypeOfCategoryId field.</summary>
         public virtual int? DepositTypeOfCategoryId { get; set; }
-
+        #endregion
         public CashEntryDocumentUnit()
         {
         }

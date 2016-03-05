@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\AccountingHeaderTransactionsUnit.cs" />
+    <Compile Include="Accounting\UploadDocumentLogUnit.cs" />
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentUnit.cs" />
     <Compile Include="CashEntry\CashEntryDocumentUnit.cs" />
     <Compile Include="ChargeEntry\ChargeEntryDocumentUnit.cs" />
@@ -212,9 +213,14 @@
     <Compile Include="Notifications\IAppNotifier.cs" />
     <Compile Include="Payables\APHeaderTransactionsUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentUnit.cs" />
+    <Compile Include="Payments\PaymentEntryDocumentUnit.cs" />
+    <Compile Include="Payments\PaymentRequestHistotyUnit.cs" />
     <Compile Include="Payroll\PayrollEntryDocumentUnit.cs" />
     <Compile Include="Payroll\PayrollEntryDocumentUnitManager.cs" />
+    <Compile Include="PettyCash\PettyCashAccountUnit.cs" />
+    <Compile Include="PettyCash\PettyCashEntryDocumentUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentUnit.cs" />
     <Compile Include="Security\SimpleStringCipher.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />
     <Compile Include="Storage\IBinaryObjectManager.cs" />

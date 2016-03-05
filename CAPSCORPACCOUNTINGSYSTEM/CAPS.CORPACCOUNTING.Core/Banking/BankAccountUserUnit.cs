@@ -7,6 +7,9 @@ using System;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
+    /// <summary>
+    /// BankAccountUser is the table name in lajit
+    /// </summary>
     [Table("CAPS_BankAccountUser")]
     public class BankAccountUserUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {

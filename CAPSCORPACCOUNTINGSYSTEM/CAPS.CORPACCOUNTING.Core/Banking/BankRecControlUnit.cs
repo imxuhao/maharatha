@@ -9,6 +9,9 @@ using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
+    /// <summary>
+    /// BankRecControl is the table name in lajit
+    /// </summary>
     [Table("CAPS_BankRecControl")]
     public class BankRecControlUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {

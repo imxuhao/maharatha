@@ -5,6 +5,7 @@ using Abp.Domain.Entities;
 using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.JobCosting;
+using CAPS.CORPACCOUNTING.PettyCash;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
@@ -84,6 +85,10 @@ namespace CAPS.CORPACCOUNTING.Banking
         PayrollCompany = 24
 
     }
+
+    /// <summary>
+    /// BankAccount is the table name in Lajit
+    /// </summary>
 
     [Table("CAPS_BankAccount")]
     public class BankAccountUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
@@ -185,10 +190,10 @@ namespace CAPS.CORPACCOUNTING.Banking
         public VendorUnit Vendor { get; set; }
 
         /// <summary>Gets or sets the ControllingBankAccountId field. </summary>
-        public virtual long? ControllingBankAccountId { get; set; }
+        public virtual int? ControllingBankAccountId { get; set; }
 
         [ForeignKey("ControllingBankAccountId")]
-        public AccountUnit ControllingBankAccount { get; set; }
+        public BankAccountUnit ControllingBankAccounts { get; set; }
 
         /// <summary>Gets or sets the IsClosed field. </summary>
         public virtual bool IsClosed { get; set; }
@@ -213,10 +218,10 @@ namespace CAPS.CORPACCOUNTING.Banking
         public virtual string PositivePayTransmitterInfo { get; set; }
 
         /// <summary>Gets or sets the PettyCashAccountId field. </summary>
-        public virtual long? PettyCashAccountId { get; set; }
+        public virtual int? PettyCashAccountId { get; set; }
 
         [ForeignKey("PettyCashAccountId")]
-        public AccountUnit PettyCashAccount { get; set; }
+        public PettyCashAccountUnit PettyCashAccounts { get; set; }
 
         /// <summary>Gets or sets the IsACHEnabled field. </summary>
         public virtual bool? IsACHEnabled { get; set; }
@@ -261,8 +266,8 @@ namespace CAPS.CORPACCOUNTING.Banking
         public BankAccountUnit(string description, short? displaysequence, TypeOfBankAccount typeofbankaccountid, long? accountid, int? jobid,
                      string bankaccountname, string bankaccountnumber, string routingnumber, int? typeofcheckstockid, long? lastchecknumbergenerated,
                      string controlaccount, long? clearingaccountid, int? clearingjobid, string expirationmmyyyy, int? typeofuploadfileid, int? vendorid,
-                     long? controllingbankaccountid, bool isclosed, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
-                     int? positivepaytypeofuploadfileid, string positivepaytransmitterinfo, long? pettycashaccountid, bool? isachenabled,
+                     int? controllingbankaccountid, bool isclosed, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
+                     int? positivepaytypeofuploadfileid, string positivepaytransmitterinfo, int? pettycashaccountid, bool? isachenabled,
                      string achdestinationcode, string achdestinationname, string achorigincode, string achoriginname, int? batchid,
                      string ccfullaccountno, string ccfootnote, long? organizationunitid)
         {

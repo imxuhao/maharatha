@@ -12,11 +12,11 @@ namespace CAPS.CORPACCOUNTING.Payables
     public class APHeaderTransactionsAppService : CORPACCOUNTINGServiceBase, IAPHeaderTransactionsAppService
     {
         private readonly APHeaderTransactionsUnitManager _apHeaderTransactionsUnitManager;
-        private readonly IRepository<ApHeaderTransactions> _apHeaderTransactionsUnitRepository;
+        private readonly IRepository<ApHeaderTransactions,long> _apHeaderTransactionsUnitRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public APHeaderTransactionsAppService(APHeaderTransactionsUnitManager apHeaderTransactionsUnitManager, IRepository<ApHeaderTransactions> apHeaderTransactionsUnitRepository,
+        public APHeaderTransactionsAppService(APHeaderTransactionsUnitManager apHeaderTransactionsUnitManager, IRepository<ApHeaderTransactions,long> apHeaderTransactionsUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager)
         {
             _apHeaderTransactionsUnitManager = apHeaderTransactionsUnitManager;

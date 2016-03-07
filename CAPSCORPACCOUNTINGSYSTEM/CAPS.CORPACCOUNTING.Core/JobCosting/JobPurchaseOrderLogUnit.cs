@@ -26,7 +26,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [Display(Name = "CreditCard PO")]
         CreditCardPO = 6,
     }
-    [Table("CAPS_JobPurchaseOrderLog")]
+
+    /// <summary>
+    /// JobWrapPurchaseOrderLog is the table name in lajit
+    /// </summary>
+    [Table("CAPS_JobWrapPurchaseOrderLog")]
     public class JobPurchaseOrderLogUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxDescLength = 500;

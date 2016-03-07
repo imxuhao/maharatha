@@ -5,7 +5,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
-    public partial class Add_PettyCashEntryDocumentUnit_Table : DbMigration
+    public partial class Add_PettyCashEntryDocument_Table : DbMigration
     {
         public override void Up()
         {
@@ -15,8 +15,8 @@ namespace CAPS.CORPACCOUNTING.Migrations
                     {
                         AHTID = c.Int(nullable: false),
                         BatchId = c.Int(),
-                        PettyCashAccountId = c.Int(nullable: false),
-                        UploadDocumentLogId = c.Int(),
+                        PettyCashAccountId = c.Long(nullable: false),
+                        UploadDocumentLogId = c.Long(),
                         ReimbursementAmount = c.Decimal(precision: 18, scale: 2),
                         BatchInfo = c.String(),
                         AdvanceAmount = c.Decimal(precision: 18, scale: 2),

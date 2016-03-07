@@ -145,9 +145,12 @@ namespace CAPS.CORPACCOUNTING.Accounting
         GroupZ = 27
 
     }
-
+  
+    /// <summary>
+    /// AccountingDocument is the table name in lajit
+    /// </summary>
     [Table("CAPS_AccountingHeaderTransactions")]
-    public class AccountingHeaderTransactionsUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class AccountingHeaderTransactionsUnit : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
     {
 
         /// <summary> Maximum length of the  Description property.</summary>
@@ -157,7 +160,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Overriding the Id column with BatchId </summary>
         [Column("AHTID")]
-        public override int Id { get; set; }
+        public override long Id { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
         [Required]

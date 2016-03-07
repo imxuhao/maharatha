@@ -20,7 +20,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         public override int Id { get; set; }
 
         /// <summary>Gets or sets the BankAccountId field. </summary>
-        public virtual int BankAccountId { get; set; }
+        public virtual long BankAccountId { get; set; }
 
         [ForeignKey("BankAccountId")]
         public BankAccountUnit BankAccount { get; set; }
@@ -74,7 +74,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         public BankStatementDetailUnit() { }
 
         /// <summary>Parameterized constructor to initialize the properties  </summary>
-        public BankStatementDetailUnit(int bankaccountid, int bankreccontrolid, DateTime? closingperiod, decimal? startingbalance, decimal? endingbalance, decimal? openbalance,
+        public BankStatementDetailUnit(long bankaccountid, int bankreccontrolid, DateTime? closingperiod, decimal? startingbalance, decimal? endingbalance, decimal? openbalance,
             decimal? clearedchecks, decimal? cleareddeposits, decimal? clearedadjs, decimal? ledgerbalance, decimal? glendbal, decimal? bankcharges, long? organizationunitid)
         {
             BankAccountId = bankaccountid;

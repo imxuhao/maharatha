@@ -91,7 +91,7 @@ namespace CAPS.CORPACCOUNTING.Banking
     /// </summary>
 
     [Table("CAPS_BankAccount")]
-    public class BankAccountUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class BankAccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
 
         /// <summary> Maximum length for  Description,BankAccountName,ControlAccount properties.</summary>
@@ -110,7 +110,7 @@ namespace CAPS.CORPACCOUNTING.Banking
 
         /// <summary>Overriding the Id column with BankAccountId</summary>
         [Column("BankAccountId")]
-        public override int Id { get; set; }
+        public override long Id { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
@@ -190,7 +190,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         public VendorUnit Vendor { get; set; }
 
         /// <summary>Gets or sets the ControllingBankAccountId field. </summary>
-        public virtual int? ControllingBankAccountId { get; set; }
+        public virtual long? ControllingBankAccountId { get; set; }
 
         [ForeignKey("ControllingBankAccountId")]
         public BankAccountUnit ControllingBankAccounts { get; set; }
@@ -218,10 +218,10 @@ namespace CAPS.CORPACCOUNTING.Banking
         public virtual string PositivePayTransmitterInfo { get; set; }
 
         /// <summary>Gets or sets the PettyCashAccountId field. </summary>
-        public virtual int? PettyCashAccountId { get; set; }
+        public virtual long? PettyCashAccountId { get; set; }
 
-        [ForeignKey("PettyCashAccountId")]
-        public PettyCashAccountUnit PettyCashAccounts { get; set; }
+        //[ForeignKey("PettyCashAccountId")]
+        //public PettyCashAccountUnit PettyCashAccounts { get; set; }
 
         /// <summary>Gets or sets the IsACHEnabled field. </summary>
         public virtual bool? IsACHEnabled { get; set; }
@@ -266,8 +266,8 @@ namespace CAPS.CORPACCOUNTING.Banking
         public BankAccountUnit(string description, short? displaysequence, TypeOfBankAccount typeofbankaccountid, long? accountid, int? jobid,
                      string bankaccountname, string bankaccountnumber, string routingnumber, int? typeofcheckstockid, long? lastchecknumbergenerated,
                      string controlaccount, long? clearingaccountid, int? clearingjobid, string expirationmmyyyy, int? typeofuploadfileid, int? vendorid,
-                     int? controllingbankaccountid, bool isclosed, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
-                     int? positivepaytypeofuploadfileid, string positivepaytransmitterinfo, int? pettycashaccountid, bool? isachenabled,
+                     long? controllingbankaccountid, bool isclosed, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
+                     int? positivepaytypeofuploadfileid, string positivepaytransmitterinfo, long? pettycashaccountid, bool? isachenabled,
                      string achdestinationcode, string achdestinationname, string achorigincode, string achoriginname, int? batchid,
                      string ccfullaccountno, string ccfootnote, long? organizationunitid)
         {

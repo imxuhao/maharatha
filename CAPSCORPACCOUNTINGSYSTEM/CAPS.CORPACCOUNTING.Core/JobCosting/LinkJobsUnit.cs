@@ -5,7 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
-    [Table("CAPS_JobLinks")]
+    /// <summary>
+    /// JobLink is the table name in lajit
+    /// </summary>
+    [Table("CAPS_JobLink")]
     public class LinkJobsUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         #region Class Property Declarations

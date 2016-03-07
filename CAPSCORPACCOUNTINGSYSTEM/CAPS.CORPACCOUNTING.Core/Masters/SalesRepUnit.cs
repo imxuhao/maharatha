@@ -6,6 +6,10 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+
+    /// <summary>
+    /// SalesRep is the table name in lajit
+    /// </summary>
     [Table("CAPS_SalesRep")]
     public sealed class SalesRepUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {

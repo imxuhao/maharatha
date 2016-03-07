@@ -6,8 +6,11 @@ using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
-{
-    [Table("CAPS_CustomerPaymentTerms")]
+{   
+    /// <summary>
+    /// CustomerPaymentTerm is the table name in lajit
+    /// </summary>
+    [Table("CAPS_CustomerPaymentTerm")]    
     public sealed class CustomerPaymentTermUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
@@ -50,7 +53,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         #region Class Property Declarations
 
         /// <summary>Overriding the ID column with CustomerPayTermsId</summary>
-        [Column("CustomerPayTermsId")]
+        [Column("ARPaymentTermId")]
         public override int Id { get; set; }
         /// <summary>Gets or sets the Description field. </summary>
         [Required]

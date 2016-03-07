@@ -12,7 +12,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// UploadDocumentLog is the Table name in Lajit
     /// </summary>
     [Table("CAPS_UploadDocumentLog")]
-    public class UploadDocumentLogUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class UploadDocumentLogUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         // <summary>
         ///     Maximum length 
@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         #region Declaration of Properties
         /// <summary>Overriding the ID column with UploadDocumentLogId</summary>
         [Column("UploadDocumentLogId")]
-        public override int Id { get; set; }
+        public override long Id { get; set; }
 
         /// <summary>Gets or sets the Description field.</summary>
         public virtual string Description { get; set; }

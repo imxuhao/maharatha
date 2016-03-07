@@ -5,6 +5,9 @@ using System.Data.SqlTypes;
 
 namespace CAPS.CORPACCOUNTING.AccountReceivable
 {
+    /// <summary>
+    /// ArInvoiceEntryDocument is the table name in lajit
+    /// </summary>
     [Table("CAPS_ARInvoiceEntryDocument")]
     class ArInvoiceEntryDocumentUnit: AccountingHeaderTransactionsUnit
     {

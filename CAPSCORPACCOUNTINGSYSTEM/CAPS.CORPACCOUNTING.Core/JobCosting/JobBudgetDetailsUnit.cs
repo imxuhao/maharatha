@@ -7,6 +7,10 @@ using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+
+    /// <summary>
+    /// JobBudgetDetail is the table name in lajit
+    /// </summary>
     [Table("CAPS_JobBudgetDetails")]
     public class JobBudgetDetailsUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {

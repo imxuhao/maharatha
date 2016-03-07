@@ -7,7 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [Table("CAPS_VendorPaymentTerms")] 
+    /// <summary>
+    /// VendorPaymentTerm is the table name in lajit
+    /// </summary>
+    [Table("CAPS_VendorPaymentTerm")]
     public sealed class VendorPaymentTermUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary> Maximum size of Description. </summary>

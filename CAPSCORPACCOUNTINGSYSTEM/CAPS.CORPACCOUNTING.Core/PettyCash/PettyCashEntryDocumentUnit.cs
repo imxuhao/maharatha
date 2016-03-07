@@ -19,13 +19,13 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         public virtual BatchUnit Batch { get; set; }
         
         /// <summary>Gets or sets the PettyCashAccountId field. </summary>   
-        public virtual int PettyCashAccountId { get; set; }
+        public virtual long PettyCashAccountId { get; set; }
 
         [ForeignKey("PettyCashAccountId")]
         public virtual PettyCashAccountUnit PettyCashAccounts { get; set; }
 
         /// <summary>Gets or sets the UploadDocumentLogId field. </summary>   
-        public virtual int? UploadDocumentLogId { get; set; }
+        public virtual long? UploadDocumentLogId { get; set; }
 
         [ForeignKey("UploadDocumentLogId")]
         public virtual UploadDocumentLogUnit UploadDocumentLog { get; set; }
@@ -40,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         public virtual decimal? AdvanceAmount { get; set; }
 
         /// <summary>Gets or sets the BankAccountId field. </summary>   
-        public virtual int? BankAccountId { get; set; } 
+        public virtual long? BankAccountId { get; set; } 
 
         [ForeignKey("BankAccountId")]
         public virtual BankAccountUnit BankAccount { get; set; }

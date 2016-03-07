@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Add_PaymentRequestHistoty_Table : IMigrationMetadata
+    public sealed partial class Add_ChargeEntryDocument_Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_PaymentRequestHistoty_Table));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_ChargeEntryDocument_Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603051602407_Add_PaymentRequestHistoty_Table"; }
+            get { return "201603071035519_Add_ChargeEntryDocument_Table"; }
         }
         
         string IMigrationMetadata.Source

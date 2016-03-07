@@ -25,7 +25,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Wire PPD-AMEX (Auto-Post CR Invoice)")]W1 = 12,
         [Display(Name = "Wire PPD-AMEX")]W2 = 13
     }
-    [Table("CAPS_Customers")]
+    /// <summary>
+    /// Customer is the table name in lajit
+    /// </summary>
+    [Table("CAPS_Customer")]
     public sealed class CustomerUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

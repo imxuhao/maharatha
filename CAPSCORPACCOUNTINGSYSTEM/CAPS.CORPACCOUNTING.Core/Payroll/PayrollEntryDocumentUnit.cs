@@ -8,6 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 namespace CAPS.CORPACCOUNTING.Payroll
 {
+    /// <summary>
+    /// PayrollEntryDocument is the table name in lajit
+    /// </summary>
     [Table("CAPS_PayrollEntryDocument")]
     public class PayrollEntryDocumentUnit : AccountingHeaderTransactionsUnit
     {

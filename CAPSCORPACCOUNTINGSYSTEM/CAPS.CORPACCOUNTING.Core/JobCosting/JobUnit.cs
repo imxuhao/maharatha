@@ -93,6 +93,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         Cancelled = 7
     }
 
+    /// <summary>
+    /// Job is the table name in lajit
+    /// </summary>
     [Table("CAPS_Job")]
     public class JobUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {

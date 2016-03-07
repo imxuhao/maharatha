@@ -21,7 +21,7 @@ namespace CAPS.CORPACCOUNTING.Banking
 
         /// <summary>Gets or sets the BankAccountId field. </summary>
         [Range(0, Int32.MaxValue)]
-        public virtual int BankAccountId { get; set; }
+        public virtual long BankAccountId { get; set; }
 
         [ForeignKey("BankAccountId")]
         public BankAccountUnit BankAccount { get; set; }
@@ -41,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         public BankAccountUserUnit() { }
 
         /// <summary>Parameterized constructor to initialize the properties  </summary>
-        public BankAccountUserUnit(int bankaccountid, int userid, long? organizationunitid)
+        public BankAccountUserUnit(long bankaccountid, int userid, long? organizationunitid)
         {
             BankAccountId = bankaccountid;
             UserId = userid;

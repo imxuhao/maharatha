@@ -25,7 +25,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
                         IsRetired = c.Boolean(nullable: false),
                         SourcePoAccountingDocumentId = c.Long(),
                         InvoiceAccountingDocumentId = c.Long(),
-                        UploadDocumentLogId = c.Int(),
+                        UploadDocumentLogId = c.Long(),
                         IsWillBill = c.Boolean(),
                         IsAdditionalBill = c.Boolean(),
                         IsPettyCash = c.Boolean(),
@@ -52,11 +52,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
                 .ForeignKey("dbo.CAPS_Vendors", t => t.VendorId)
                 .ForeignKey("dbo.CAPS_VendorPaymentTerms", t => t.PaymentTermId)
                 .ForeignKey("dbo.CAPS_BankAccount", t => t.BankAccountId)
+                .ForeignKey("dbo.CAPS_UploadDocumentLog", t => t.UploadDocumentLogId)
                 .ForeignKey("dbo.CAPS_BankAccount", t => t.ControllingBankAccountId)
                 .Index(t => t.AHTID)
                 .Index(t => t.VendorId)
                 .Index(t => t.PaymentTermId)
                 .Index(t => t.BankAccountId)
+                .Index(t => t.UploadDocumentLogId)
                 .Index(t => t.ControllingBankAccountId);
             
         }
@@ -64,11 +66,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.CAPS_PurchaseOrderEntryDocument", "ControllingBankAccountId", "dbo.CAPS_BankAccount");
+            DropForeignKey("dbo.CAPS_PurchaseOrderEntryDocument", "UploadDocumentLogId", "dbo.CAPS_UploadDocumentLog");
             DropForeignKey("dbo.CAPS_PurchaseOrderEntryDocument", "BankAccountId", "dbo.CAPS_BankAccount");
             DropForeignKey("dbo.CAPS_PurchaseOrderEntryDocument", "PaymentTermId", "dbo.CAPS_VendorPaymentTerms");
             DropForeignKey("dbo.CAPS_PurchaseOrderEntryDocument", "VendorId", "dbo.CAPS_Vendors");
             DropForeignKey("dbo.CAPS_PurchaseOrderEntryDocument", "AHTID", "dbo.CAPS_AccountingHeaderTransactions");
             DropIndex("dbo.CAPS_PurchaseOrderEntryDocument", new[] { "ControllingBankAccountId" });
+            DropIndex("dbo.CAPS_PurchaseOrderEntryDocument", new[] { "UploadDocumentLogId" });
             DropIndex("dbo.CAPS_PurchaseOrderEntryDocument", new[] { "BankAccountId" });
             DropIndex("dbo.CAPS_PurchaseOrderEntryDocument", new[] { "PaymentTermId" });
             DropIndex("dbo.CAPS_PurchaseOrderEntryDocument", new[] { "VendorId" });

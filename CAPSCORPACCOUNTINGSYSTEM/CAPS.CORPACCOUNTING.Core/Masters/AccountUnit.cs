@@ -11,7 +11,10 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [Table("CAPS_Accounts")]
+    /// <summary>
+    /// Account is the table name in lajit
+    /// </summary>
+    [Table("CAPS_Account")]
     public sealed class AccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

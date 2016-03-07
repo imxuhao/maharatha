@@ -8,7 +8,10 @@ using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
-    [Table("CAPS_JobPettyCashLog")]
+    /// <summary>
+    /// JobWrapPettyCashLog is the table name in lajit
+    /// </summary>
+    [Table("CAPS_JobWrapPettyCashLog")]   
     public class JobPettyCashLogUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxDescLength = 500;

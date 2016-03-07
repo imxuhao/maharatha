@@ -9,8 +9,8 @@ namespace CAPS.CORPACCOUNTING.Payables
 {
     public class APHeaderTransactionsUnitManager : DomainService
     {
-        protected IRepository<ApHeaderTransactions> ApHeaderTransactionsUnitRepository { get; }
-        public APHeaderTransactionsUnitManager(IRepository<ApHeaderTransactions> apheadertransactionsunitrepository)
+        protected IRepository<ApHeaderTransactions,long> ApHeaderTransactionsUnitRepository { get; }
+        public APHeaderTransactionsUnitManager(IRepository<ApHeaderTransactions,long> apheadertransactionsunitrepository)
         {
             ApHeaderTransactionsUnitRepository = apheadertransactionsunitrepository;
 

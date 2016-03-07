@@ -23,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Banking
 
         /// <summary>Gets or sets the BankAccountId</summary>
         [Range(0, Int32.MaxValue)]
-        public virtual int BankAccountId { get; set; }
+        public virtual long BankAccountId { get; set; }
 
         [ForeignKey("BankAccountId")]
         public BankAccountUnit BankAccount { get; set; }
@@ -80,7 +80,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         public BankRecControlUnit() { }
 
         /// <summary>Parameterized constructor to initialize the properties  </summary>
-        public BankRecControlUnit(int bankaccountid, int? jobid, int? accountid, DateTime? closingperiod, decimal? startingbalance, decimal? endingbalance, DateTime? datereconciled,
+        public BankRecControlUnit(long bankaccountid, int? jobid, int? accountid, DateTime? closingperiod, decimal? startingbalance, decimal? endingbalance, DateTime? datereconciled,
             int? reconciledbyuserid, bool isreconciled, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid, long? organizationunitid)
         {
             BankAccountId = bankaccountid;

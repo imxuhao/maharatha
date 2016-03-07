@@ -18,16 +18,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         Corporates = 2
     }
     /// <summary>
-    ///Lajit CostCenter Table Renamed as  CAPS_RollupCenter
+    /// CostCenter is the Table name in lajit
     /// </summary>
-    [Table("CAPS_RollupCenter")]
+    [Table("CAPS_CostCenter")]
     public class RollupCenterUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxCaptionLength = 500;
 
         /// <summary>Overriding the ID column with RollupCenterId</summary>
         #region Declaration of Properties
-        [Column("RollupCenterId")]
+        [Column("CostCenterId")]
         public override int Id { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>

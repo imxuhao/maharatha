@@ -17,7 +17,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         NonJobBilling = 2
     }
 
-    [Table("CAPS_ARBillingTypes")]
+    /// <summary>
+    /// ARBillingType is the table name in lajit
+    /// </summary>
+    [Table("CAPS_ARBillingType")]
     public class ARBillingTypeUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxDescLength = 200;

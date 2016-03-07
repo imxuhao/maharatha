@@ -5,7 +5,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
-    public partial class Add_UploadDocumentLog_Table : DbMigration
+    public partial class Add_UploadDocument_Table : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
                 "dbo.CAPS_UploadDocumentLog",
                 c => new
                     {
-                        UploadDocumentLogId = c.Int(nullable: false, identity: true),
+                        UploadDocumentLogId = c.Long(nullable: false, identity: true),
                         Description = c.String(),
                         TypeOfAccountingDocumentId = c.Int(nullable: false),
                         TypeOfUploadFileId = c.Int(),

@@ -8,6 +8,9 @@ using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    /// <summary>
+    /// JobAccount is the table name in lajit
+    /// </summary>
     [Table("CAPS_JobAccount")]
     public class JobAccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {

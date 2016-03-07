@@ -45,7 +45,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "(Canada) Rent")] CanadaRent = 13,
         [Display(Name = "(Canada) NEC/Attorney")] NecAttorney = 14,
     }
-    [Table("CAPS_Vendors")]
+    /// <summary>
+    /// Vendor is the table name in lajit
+    /// </summary>
+    [Table("CAPS_Vendor")]
     public sealed class VendorUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>

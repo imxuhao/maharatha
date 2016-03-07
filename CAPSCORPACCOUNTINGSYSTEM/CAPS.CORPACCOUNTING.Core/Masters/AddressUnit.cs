@@ -57,6 +57,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         Director = 9,
     }
 
+    /// <summary>
+    /// Address is the table name in lajit
+    /// </summary>
+
     [Table("CAPS_Address")]
     public  class AddressUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {

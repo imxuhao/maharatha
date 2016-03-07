@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
     /// PettyCashAccount is the Table name in Lajit
     /// </summary>
     [Table("CAPS_PettyCashAccount")]
-    public class PettyCashAccountUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class PettyCashAccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
     {
         /// <summary>
         ///     Maximum length 
@@ -23,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         #region Declaration of Properties
         /// <summary>Overriding the ID column with PettyCashAccountId</summary>
         [Column("PettyCashAccountId")]
-        public override int Id { get; set; }
+        public override long Id { get; set; }
 
         /// <summary>Gets or sets the VendorID field. </summary>
         public virtual int VendorId { get; set; } 

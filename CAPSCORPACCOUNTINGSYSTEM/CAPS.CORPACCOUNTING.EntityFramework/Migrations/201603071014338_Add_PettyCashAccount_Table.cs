@@ -9,11 +9,15 @@ namespace CAPS.CORPACCOUNTING.Migrations
     {
         public override void Up()
         {
+            DropForeignKey("dbo.CAPS_BankAccount", "ControllingBankAccountId", "dbo.CAPS_Accounts");
+            DropForeignKey("dbo.CAPS_BankAccount", "PettyCashAccountId", "dbo.CAPS_Accounts");
+            DropIndex("dbo.CAPS_BankAccount", new[] { "ControllingBankAccountId" });
+            DropIndex("dbo.CAPS_BankAccount", new[] { "PettyCashAccountId" });
             CreateTable(
                 "dbo.CAPS_PettyCashAccount",
                 c => new
                     {
-                        PettyCashAccountId = c.Int(nullable: false, identity: true),
+                        PettyCashAccountId = c.Long(nullable: false, identity: true),
                         VendorId = c.Int(nullable: false),
                         AccountId = c.Long(nullable: false),
                         JobId = c.Int(nullable: false),
@@ -46,6 +50,9 @@ namespace CAPS.CORPACCOUNTING.Migrations
                 .Index(t => t.AccountId)
                 .Index(t => t.JobId);
             
+            AlterColumn("dbo.CAPS_BankAccount", "ControllingBankAccountId", c => c.Int());
+            CreateIndex("dbo.CAPS_BankAccount", "ControllingBankAccountId");
+            AddForeignKey("dbo.CAPS_BankAccount", "ControllingBankAccountId", "dbo.CAPS_BankAccount", "BankAccountId");
         }
         
         public override void Down()
@@ -53,15 +60,22 @@ namespace CAPS.CORPACCOUNTING.Migrations
             DropForeignKey("dbo.CAPS_PettyCashAccount", "VendorId", "dbo.CAPS_Vendors");
             DropForeignKey("dbo.CAPS_PettyCashAccount", "JobId", "dbo.CAPS_Job");
             DropForeignKey("dbo.CAPS_PettyCashAccount", "AccountId", "dbo.CAPS_Accounts");
+            DropForeignKey("dbo.CAPS_BankAccount", "ControllingBankAccountId", "dbo.CAPS_BankAccount");
             DropIndex("dbo.CAPS_PettyCashAccount", new[] { "JobId" });
             DropIndex("dbo.CAPS_PettyCashAccount", new[] { "AccountId" });
             DropIndex("dbo.CAPS_PettyCashAccount", new[] { "VendorId" });
+            DropIndex("dbo.CAPS_BankAccount", new[] { "ControllingBankAccountId" });
+            AlterColumn("dbo.CAPS_BankAccount", "ControllingBankAccountId", c => c.Long());
             DropTable("dbo.CAPS_PettyCashAccount",
                 removedAnnotations: new Dictionary<string, object>
                 {
                     { "DynamicFilter_PettyCashAccountUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                     { "DynamicFilter_PettyCashAccountUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
                 });
+            CreateIndex("dbo.CAPS_BankAccount", "PettyCashAccountId");
+            CreateIndex("dbo.CAPS_BankAccount", "ControllingBankAccountId");
+            AddForeignKey("dbo.CAPS_BankAccount", "PettyCashAccountId", "dbo.CAPS_Accounts", "AccountId");
+            AddForeignKey("dbo.CAPS_BankAccount", "ControllingBankAccountId", "dbo.CAPS_Accounts", "AccountId");
         }
     }
 }

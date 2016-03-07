@@ -19,7 +19,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Other Projects")] OtherProjects = 6
     }
 
-    [Table("CAPS_COA")]
+    /// <summary>
+    /// ChartOfAccount  is the table name in lajit
+    /// </summary>
+    [Table("CAPS_ChartOfAccount")]
     public sealed class CoaUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
@@ -59,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         #region Class Property Declarations
 
         /// <summary>Overriding the ID column with COAID</summary>
-        [Column("COAId")]
+        [Column("ChartOfAccountId")]
         public override int Id { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>

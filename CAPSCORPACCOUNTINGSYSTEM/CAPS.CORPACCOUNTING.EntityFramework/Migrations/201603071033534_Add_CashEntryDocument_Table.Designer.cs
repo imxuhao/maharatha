@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Modify_BankAccount_Table : IMigrationMetadata
+    public sealed partial class Add_CashEntryDocument_Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Modify_BankAccount_Table));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_CashEntryDocument_Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603051715362_Modify_BankAccount_Table"; }
+            get { return "201603071033534_Add_CashEntryDocument_Table"; }
         }
         
         string IMigrationMetadata.Source

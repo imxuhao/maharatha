@@ -43,7 +43,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         CorporateProjection = 16
     }
 
-
+    /// <summary>
+    /// JobBudget is the table name in lajit
+    /// </summary>
     [Table("CAPS_JobBudget")]
     public class JobBudgetUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {

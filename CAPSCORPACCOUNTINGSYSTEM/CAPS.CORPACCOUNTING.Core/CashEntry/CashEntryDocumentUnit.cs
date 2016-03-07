@@ -1,6 +1,7 @@
 ﻿using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.PettyCash;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
@@ -21,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
         public virtual BatchUnit Batch { get; set; }
 
         ///<summary>Get Sets the BankAccountId field.</summary>
-        public virtual int BankAccountId { get; set; }
+        public virtual long BankAccountId { get; set; }
         [ForeignKey("BankAccountId")]
         public virtual BankAccountUnit BankAccount { get; set; }
 
@@ -35,7 +36,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
         public virtual bool IsEnterable { get; set; }
 
         ///<summary>Get Sets the SendingBankAccountId field.</summary>
-        public virtual int? SendingBankAccountId { get; set; }
+        public virtual long? SendingBankAccountId { get; set; }
 
         [ForeignKey("SendingBankAccountId")]
         public virtual BankAccountUnit SendingBankAccount { get; set; }
@@ -44,7 +45,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
         public virtual long PettyCashAccountId { get; set; }
 
         [ForeignKey("PettyCashAccountId")]
-        public AccountUnit PettyCashAccount { get; set; }
+        public PettyCashAccountUnit PettyCashAccount { get; set; }
 
         ///<summary>Get Sets the BatchInfo field.</summary>
         public virtual string BatchInfo { get; set; }
@@ -84,7 +85,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
         }
 
 
-        public CashEntryDocumentUnit(int? batchid, int bankaccountid, int? reconciliationid, bool isenterable, int? sendingbankaccountid, long pettycashaccountid,
+        public CashEntryDocumentUnit(int? batchid, long bankaccountid, int? reconciliationid, bool isenterable, long? sendingbankaccountid, long pettycashaccountid,
                                 string batchinfo, bool? isreversed, int? reversedbyuserid, SqlDateTime? reversaldate, bool? isvoid, bool? isvoiddateoriginal,
                                 long? linkedaccountingdocumentid, int? reissuebatchid, int? reissuevoiddate, int? deposittypeofcategoryid,
                                  string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid, long? recurdocid, long? reversedocid,

@@ -10,8 +10,8 @@ namespace CAPS.CORPACCOUNTING.Journals
 {
     public class JournalEntryDocumentUnitManager : DomainService
     {
-        protected IRepository<JournalEntryDocumentUnit> JournalEntryDocumentUnitRepository { get; }
-        public JournalEntryDocumentUnitManager(IRepository<JournalEntryDocumentUnit> journalEntryDocumentUnitrepository)
+        protected IRepository<JournalEntryDocumentUnit,long> JournalEntryDocumentUnitRepository { get; }
+        public JournalEntryDocumentUnitManager(IRepository<JournalEntryDocumentUnit,long> journalEntryDocumentUnitrepository)
         {
             JournalEntryDocumentUnitRepository = journalEntryDocumentUnitrepository;
 

@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Add_PaymentEntryDocumentUnit_Table : IMigrationMetadata
+    public sealed partial class Add_PettyCashEntryDocument_Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_PaymentEntryDocumentUnit_Table));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_PettyCashEntryDocument_Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603051625238_Add_PaymentEntryDocumentUnit_Table"; }
+            get { return "201603071038140_Add_PettyCashEntryDocument_Table"; }
         }
         
         string IMigrationMetadata.Source

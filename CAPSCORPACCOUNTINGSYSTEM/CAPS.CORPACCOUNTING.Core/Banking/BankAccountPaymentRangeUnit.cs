@@ -20,7 +20,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         public override int Id { get; set; }
 
         /// <summary>Gets or sets the BankAccountId field. </summary>
-        public virtual int BankAccountId { get; set; }
+        public virtual long BankAccountId { get; set; }
 
         [ForeignKey("BankAccountId")]
         public virtual BankAccountUnit BankAccount { get; set; }
@@ -44,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         public BankAccountPaymentRangeUnit() { }
        
         /// <summary>Parameterized constructor to initialize the properties  </summary>
-        public BankAccountPaymentRangeUnit(int bankaccountid, int startingpaymentnumber, int endingpaymentnumber, long? organizationunitid)
+        public BankAccountPaymentRangeUnit(long bankaccountid, int startingpaymentnumber, int endingpaymentnumber, long? organizationunitid)
         {
             BankAccountId = bankaccountid;
             StartingPaymentNumber = startingpaymentnumber;

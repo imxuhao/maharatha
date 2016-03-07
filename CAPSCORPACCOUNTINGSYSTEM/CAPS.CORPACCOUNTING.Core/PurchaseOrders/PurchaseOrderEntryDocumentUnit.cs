@@ -26,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         public virtual VendorPaymentTermUnit VendorPaymentTerms { get; set; }
 
         /// <summary>Gets or sets the BankAccountID field. </summary>  
-        public virtual int? BankAccountId { get; set; }
+        public virtual long? BankAccountId { get; set; }
 
         [ForeignKey("BankAccountId")]
         public virtual BankAccountUnit BankAccount{ get; set; }
@@ -54,7 +54,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         public virtual long? InvoiceAccountingDocumentId { get; set; }
 
         /// <summary>Gets or sets the UploadDocumentLogID field. </summary> 
-        public virtual int? UploadDocumentLogId { get; set; }
+        public virtual long? UploadDocumentLogId { get; set; }
 
         public virtual UploadDocumentLogUnit UploadDocumentLog { get; set; }
 
@@ -94,7 +94,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         public virtual long? ReinstatedPoDocumentId { get; set; }
         
         /// <summary>Gets or sets the ControllingBankAccountID field. </summary> 
-        public virtual int? ControllingBankAccountId { get; set; }
+        public virtual long? ControllingBankAccountId { get; set; }
 
         [ForeignKey("ControllingBankAccountId")]
         public virtual BankAccountUnit ControllingBankAccount { get; set; }

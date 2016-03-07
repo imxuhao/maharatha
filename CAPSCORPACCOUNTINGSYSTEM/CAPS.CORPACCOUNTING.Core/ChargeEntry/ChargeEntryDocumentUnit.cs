@@ -1,17 +1,15 @@
 ﻿using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.ChargeEntry
 {
-    [Table("CAPS_ChargeEntryDocumentUnit")]
+    /// <summary>
+    /// ChargeEntryDocument is the table name in lajit
+    /// </summary>
+    [Table("CAPS_ChargeEntryDocument")]
     public class ChargeEntryDocumentUnit : AccountingHeaderTransactionsUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>
@@ -29,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.ChargeEntry
         public virtual TypeOfInvoice TypeOfInvoiceId { get; set; }
 
         ///<summary>Get Sets the BankAccountId field.</summary>
-        public virtual int? BankAccountId { get; set; }
+        public virtual long? BankAccountId { get; set; }
         [ForeignKey("BankAccountId")]
         public virtual BankAccountUnit BankAccount { get; set; }
         
@@ -41,6 +39,7 @@ namespace CAPS.CORPACCOUNTING.ChargeEntry
 
         ///<summary>Get Sets the UploadDocumentLogId field.</summary>}
         public virtual int? UploadDocumentLogId { get; set; }
+        public virtual UploadDocumentLogUnit UploadDocumentLog { get; set; }
 
         ///<summary>Get Sets the IsApInvoiceGenSelected field.</summary>
         public virtual bool? IsApInvoiceGenSelected { get; set; }

@@ -11,11 +11,11 @@ namespace CAPS.CORPACCOUNTING.Journals
     public class JournalEntryDocumentAppService : CORPACCOUNTINGServiceBase, IJournalEntryDocumentAppService
     {
         private readonly JournalEntryDocumentUnitManager _journalEntryDocumentUnitManager;
-        private readonly IRepository<JournalEntryDocumentUnit> _journalEntryDocumentUnitRepository;
+        private readonly IRepository<JournalEntryDocumentUnit,long> _journalEntryDocumentUnitRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public JournalEntryDocumentAppService(JournalEntryDocumentUnitManager journalEntryDocumentUnitManager, IRepository<JournalEntryDocumentUnit> journalEntryDocumentUnitRepository,
+        public JournalEntryDocumentAppService(JournalEntryDocumentUnitManager journalEntryDocumentUnitManager, IRepository<JournalEntryDocumentUnit,long> journalEntryDocumentUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager)
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;

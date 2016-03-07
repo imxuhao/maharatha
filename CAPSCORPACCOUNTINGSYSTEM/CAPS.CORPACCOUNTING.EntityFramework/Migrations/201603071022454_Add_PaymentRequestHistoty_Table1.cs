@@ -5,7 +5,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
-    public partial class Add_PaymentEntryDocumentUnit_Table : DbMigration
+    public partial class Add_PaymentRequestHistoty_Table1 : DbMigration
     {
         public override void Up()
         {
@@ -19,7 +19,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
                         PayToName = c.String(maxLength: 200),
                         VendorId = c.Int(),
                         BatchId = c.Int(),
-                        PettyCashAccountId = c.Int(),
+                        PettyCashAccountId = c.Long(),
                         BankAccountId = c.Int(),
                         TypeOfPaymentMethodId = c.Int(nullable: false),
                         PaymentNumber = c.String(maxLength: 200),
@@ -38,7 +38,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
                         ReissueBatchId = c.Int(),
                         ReissueVoidDate = c.DateTime(),
                         IsEnterable = c.Boolean(nullable: false),
-                        UploadDocumentLogId = c.Int(),
+                        UploadDocumentLogId = c.Long(),
                         ArAccountingDocId = c.Long(),
                     },
                 annotations: new Dictionary<string, object>

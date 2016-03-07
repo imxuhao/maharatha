@@ -3,10 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
-using System.Collections.Generic;
+
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+
+    /// <summary>
+    /// Employee is the table name in lajit
+    /// </summary>
     [Table("CAPS_Employee")]
     public class EmployeeUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {

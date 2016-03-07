@@ -47,13 +47,13 @@ namespace CAPS.CORPACCOUNTING.Payments
         public BatchUnit Batch { get; set; }
 
         /// <summary>Gets or sets the PettyCashAccountID field. </summary>   
-        public virtual int? PettyCashAccountId { get; set; }
+        public virtual long? PettyCashAccountId { get; set; }
 
         [ForeignKey("PettyCashAccountId")]
         public PettyCashAccountUnit PettyCashAccount { get; set; }
 
         /// <summary>Gets or sets the BankAccountID field. </summary>   
-        public virtual int? BankAccountId { get; set; }
+        public virtual long? BankAccountId { get; set; }
 
         [ForeignKey("BankAccountId")]
         public BankAccountUnit BankAccount { get; set; }
@@ -115,7 +115,7 @@ namespace CAPS.CORPACCOUNTING.Payments
         public virtual bool IsEnterable { get; set; }
 
         /// <summary>Gets or sets the UploadDocumentLogId field. </summary> 
-        public virtual int? UploadDocumentLogId { get; set; } 
+        public virtual long? UploadDocumentLogId { get; set; } 
 
         [ForeignKey("UploadDocumentLogId")]
         public UploadDocumentLogUnit UploadDocumentLog { get; set; }

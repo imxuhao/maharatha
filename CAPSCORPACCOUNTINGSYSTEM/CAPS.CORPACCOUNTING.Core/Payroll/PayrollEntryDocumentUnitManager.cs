@@ -8,8 +8,8 @@ namespace CAPS.CORPACCOUNTING.Payroll
 {
     public class PayrollEntryDocumentUnitManager : DomainService
     {
-        protected IRepository<PayrollEntryDocumentUnit> PayrollEntryDocumentUnitRepository { get; }
-        public PayrollEntryDocumentUnitManager(IRepository<PayrollEntryDocumentUnit> payrollEntryDocumentUnitrepository)
+        protected IRepository<PayrollEntryDocumentUnit,long> PayrollEntryDocumentUnitRepository { get; }
+        public PayrollEntryDocumentUnitManager(IRepository<PayrollEntryDocumentUnit,long> payrollEntryDocumentUnitrepository)
         {
             PayrollEntryDocumentUnitRepository = payrollEntryDocumentUnitrepository;
 

@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Modify_POEntryDocument_Table : IMigrationMetadata
+    public sealed partial class Add_ARInvoiceEntryDocument_Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Modify_POEntryDocument_Table));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_ARInvoiceEntryDocument_Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603051728225_Modify_POEntryDocument_Table"; }
+            get { return "201603071029160_Add_ARInvoiceEntryDocument_Table"; }
         }
         
         string IMigrationMetadata.Source

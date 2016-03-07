@@ -30,7 +30,7 @@ namespace CAPS.CORPACCOUNTING.Payments
         public virtual TypeOfAccountingDocument TypeOfAccountingDocumentId { get; set; }
 
         /// <summary>Gets or sets the BankAccountId field.</summary>
-        public virtual int? BankAccountId { get; set; } 
+        public virtual long? BankAccountId { get; set; } 
 
         [ForeignKey("BankAccountId")]
         public virtual BankAccountUnit Bank { get; set; }

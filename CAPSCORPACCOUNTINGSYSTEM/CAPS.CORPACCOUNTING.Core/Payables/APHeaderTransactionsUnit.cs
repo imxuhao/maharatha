@@ -5,11 +5,14 @@ using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters;
 using System.Data.SqlTypes;
+using CAPS.CORPACCOUNTING.PettyCash;
 
 namespace CAPS.CORPACCOUNTING.Payables
 {
 
-
+    /// <summary>
+    /// InvoiceEntryDocument is the table name in lajit
+    /// </summary>
     [Table("CAPS_APHeaderTransactions")]
     public class ApHeaderTransactions : AccountingHeaderTransactionsUnit
     {
@@ -38,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Payables
         public virtual long? PettyCashAccountId { get; set; }
 
         [ForeignKey("PettyCashAccountId")]
-        public virtual AccountUnit Account { get; set; }
+        public virtual PettyCashAccountUnit Account { get; set; }
 
 
         ///<summary>Get Sets the PaymentTermId field.</summary>
@@ -52,7 +55,7 @@ namespace CAPS.CORPACCOUNTING.Payables
         public virtual TypeOfCheckGroup? TypeOfCheckGroupId { get; set; }
 
         ///<summary>Get Sets the BankAccountId field.</summary>
-        public virtual int? BankAccountId { get; set; }
+        public virtual long? BankAccountId { get; set; }
 
         ///<summary>Get Sets the PaymentDate field.</summary>
         [Column(TypeName = "smalldatetime")]
@@ -95,7 +98,7 @@ namespace CAPS.CORPACCOUNTING.Payables
 
         public ApHeaderTransactions() { }
         public ApHeaderTransactions(int? batchid, int? vendorid, TypeOfInvoice typeofinvoiceid, long? pettycashaccountid, int? paymenttermid, TypeOfCheckGroup? typeofcheckgroupid, 
-            int? bankaccountid, DateTime? paymentdate, string paymentnumber, string purchaseorderreference, int? reversedbyuserid, DateTime? reversaldate, bool isinvoicehistory,
+            long? bankaccountid, DateTime? paymentdate, string paymentnumber, string purchaseorderreference, int? reversedbyuserid, DateTime? reversaldate, bool isinvoicehistory,
             bool isenterable, long? generatedaccountingdocumentid, int? uploaddocumentlogid, string batchinfo, int? paymentselectedbyuserid,
             string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid, long? recurdocid, long? reversedocid,
                  DateTime? documentdate, DateTime transactiondate, DateTime? dateposted, long? originaldocumentid, decimal? controltotal, string documentreference,

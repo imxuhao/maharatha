@@ -9,10 +9,10 @@ using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
-    /// <summary>
+    //// <summary>
     ///  Lajit JobCommercial Table Renamed as  CAPS_JobDetail
     /// </summary>
-    [Table("CAPS_JobDetail")]
+    [Table("CAPS_JobCommercial")]
     public class JobCommercialUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxProductLength = 500;
@@ -23,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         #region Class Property Declarations
         /// <summary>Overriding the ID column with JobDetailId</summary>
-        [Column("JobDetailId")]
+        [Column("JobCommercialId")]
         public override int Id { get; set; }
 
         /// <summary>Gets or Sets JobId Field.  </summary>

@@ -7,7 +7,11 @@ using System.Data.SqlTypes;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
-    [Table("CAPS_JournalEntryDocument")]
+
+    /// <summary>
+    /// JournalEntryDocument is the table name in lajit
+    /// </summary>
+    [Table("CAPS_JournalEntryDocument")]    
     public class JournalEntryDocumentUnit : AccountingHeaderTransactionsUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>

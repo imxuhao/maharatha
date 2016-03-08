@@ -114,6 +114,11 @@
     <Compile Include="CashEntry\CashEntryDocumentUnit.cs" />
     <Compile Include="ChargeEntry\ChargeEntryDocumentUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentUnitManager.cs" />
+    <Compile Include="Masters\ARStatementInfo.cs" />
+    <Compile Include="Masters\GroupItemRangeUnit.cs" />
+    <Compile Include="Masters\GroupItemUnit.cs" />
+    <Compile Include="Masters\GroupTotalUnit.cs" />
+    <Compile Include="Masters\TypeOfCategoryUnit.cs" />
     <Compile Include="Payables\APHeaderTransactionsUnitManager.cs" />
     <Compile Include="Authorization\Users\IUserLinkManager.cs" />
     <Compile Include="Authorization\Users\SwitchToLinkedAccountCacheItem.cs" />

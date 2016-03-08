@@ -479,6 +479,26 @@
     <Compile Include="Migrations\201603071135517_Rename_Tables.Designer.cs">
       <DependentUpon>201603071135517_Rename_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603071258218_Add_TypeOfCategoryUnit_Table.cs" />
+    <Compile Include="Migrations\201603071258218_Add_TypeOfCategoryUnit_Table.Designer.cs">
+      <DependentUpon>201603071258218_Add_TypeOfCategoryUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080505351_Add_GroupTotal_Table.cs" />
+    <Compile Include="Migrations\201603080505351_Add_GroupTotal_Table.Designer.cs">
+      <DependentUpon>201603080505351_Add_GroupTotal_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080549523_Add_GroupItem_Table.cs" />
+    <Compile Include="Migrations\201603080549523_Add_GroupItem_Table.Designer.cs">
+      <DependentUpon>201603080549523_Add_GroupItem_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080551464_Add_GroupItemRange_Table.cs" />
+    <Compile Include="Migrations\201603080551464_Add_GroupItemRange_Table.Designer.cs">
+      <DependentUpon>201603080551464_Add_GroupItemRange_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080552548_Add_ARStatementInfo_Table.cs" />
+    <Compile Include="Migrations\201603080552548_Add_ARStatementInfo_Table.Designer.cs">
+      <DependentUpon>201603080552548_Add_ARStatementInfo_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -767,6 +787,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603071135517_Rename_Tables.resx">
       <DependentUpon>201603071135517_Rename_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603071258218_Add_TypeOfCategoryUnit_Table.resx">
+      <DependentUpon>201603071258218_Add_TypeOfCategoryUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080505351_Add_GroupTotal_Table.resx">
+      <DependentUpon>201603080505351_Add_GroupTotal_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080549523_Add_GroupItem_Table.resx">
+      <DependentUpon>201603080549523_Add_GroupItem_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080551464_Add_GroupItemRange_Table.resx">
+      <DependentUpon>201603080551464_Add_GroupItemRange_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080552548_Add_ARStatementInfo_Table.resx">
+      <DependentUpon>201603080552548_Add_ARStatementInfo_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

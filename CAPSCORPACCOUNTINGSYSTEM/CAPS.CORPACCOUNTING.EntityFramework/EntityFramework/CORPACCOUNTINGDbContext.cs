@@ -174,10 +174,23 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> CashEntryDocumentUnit Declaration</summary>
         public virtual IDbSet<CashEntryDocumentUnit> CashEntryDocumentUnits { get; set; }
 
+        /// <summary> TypeOfCategoryUnit Declaration</summary>
+        public virtual IDbSet<TypeOfCategoryUnit> TypeOfCategoryUnits { get; set; }
+
+        /// <summary> GroupTotalUnit Declaration</summary>
+        public virtual IDbSet<GroupTotalUnit> GroupTotalUnit { get; set; }
+
+        /// <summary> GroupItemUnit Declaration</summary>
+        public virtual IDbSet<GroupItemUnit> GroupItemUnit { get; set; }
+
+        /// <summary> GroupItemRangeUnit Declaration</summary>
+        public virtual IDbSet<GroupItemRangeUnit> GroupItemRangeUnit { get; set; }
+
+        /// <summary> ARStatementInfo Declaration</summary>
+        public virtual IDbSet<ARStatementInfo> ARStatementInfo { get; set; }
 
 
 
-        
 
 
 

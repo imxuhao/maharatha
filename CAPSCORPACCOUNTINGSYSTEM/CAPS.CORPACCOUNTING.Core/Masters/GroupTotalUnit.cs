@@ -22,15 +22,15 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Insurance Totalling")]
         InsuranceTotalling = 5,
         [Display(Name = "Vendor Totalling")]
-        VendorTotalling = 12,
+        VendorTotalling = 6,
         [Display(Name = "Customer Totalling")]
-        CustomerTotalling = 13,
+        CustomerTotalling = 7,
         [Display(Name = "PC Totalling")]
-        PCTotalling = 14,
+        PCTotalling = 8,
         [Display(Name = "AICP Internal Use")]
-        AICPInternalUse = 1000,
+        AICPInternalUse = 9,
         [Display(Name = "Production Totals")]
-        ProductionTotals = 1001,
+        ProductionTotals = 10,
     }
 
 

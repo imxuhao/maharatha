@@ -16,6 +16,7 @@ using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.PettyCash;
 using CAPS.CORPACCOUNTING.Payments;
 using CAPS.CORPACCOUNTING.CashEntry;
+using CAPS.CORPACCOUNTING.BusinessProcess;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -204,8 +205,29 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> SubAccountUnit Declaration</summary>
         public virtual IDbSet<SubAccountUnit> SubAccountUnits { get; set; }
 
+        /// <summary> TypeOfCountryUnit Declaration</summary>
+        public virtual IDbSet<TypeOfCountryUnit> TypeOfCountryUnit { get; set; }
+
+        /// <summary> RegionUnit Declaration</summary>
+        public virtual IDbSet<RegionUnit> RegionUnit { get; set; }
 
 
+        /// <summary> UploadAddressUnit Declaration</summary>
+        public virtual IDbSet<UploadAddressUnit> UploadAddressUnit { get; set; }
+
+
+        /// <summary> BatchReportUnit Declaration</summary>
+        public virtual IDbSet<BatchReportUnit> BatchReportUnit { get; set; }
+
+        /// <summary> TypeOfBusinessProcessGroupUnit Declaration</summary>
+        public virtual IDbSet<TypeOfBusinessProcessGroupUnit> TypeOfBusinessProcessGroupUnit { get; set; }
+
+        /// <summary> TypeOfFinReportUnit Declaration</summary>
+        public virtual IDbSet<TypeOfFinReportUnit> TypeOfFinReportUnit { get; set; }
+
+        /// <summary> BatchExecutionResultUnit Declaration</summary>
+        public virtual IDbSet<BatchExecutionResultUnit> BatchExecutionResultUnit { get; set; }
+        
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 
          */

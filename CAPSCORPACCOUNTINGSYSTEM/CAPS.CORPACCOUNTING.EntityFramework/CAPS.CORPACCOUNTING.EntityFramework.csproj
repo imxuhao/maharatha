@@ -523,6 +523,34 @@
     <Compile Include="Migrations\201603080643259_Add_SubAccount_Table.Designer.cs">
       <DependentUpon>201603080643259_Add_SubAccount_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603081132351_Add_TypeOfCountry_Table.cs" />
+    <Compile Include="Migrations\201603081132351_Add_TypeOfCountry_Table.Designer.cs">
+      <DependentUpon>201603081132351_Add_TypeOfCountry_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603081141494_Add_Region_Table.cs" />
+    <Compile Include="Migrations\201603081141494_Add_Region_Table.Designer.cs">
+      <DependentUpon>201603081141494_Add_Region_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603081145193_Add_UploadAddress_Table.cs" />
+    <Compile Include="Migrations\201603081145193_Add_UploadAddress_Table.Designer.cs">
+      <DependentUpon>201603081145193_Add_UploadAddress_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603081200439_Add_BatchReport_Table.cs" />
+    <Compile Include="Migrations\201603081200439_Add_BatchReport_Table.Designer.cs">
+      <DependentUpon>201603081200439_Add_BatchReport_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603081210549_Add_TypeOfBusinessProcessGroup_Table.cs" />
+    <Compile Include="Migrations\201603081210549_Add_TypeOfBusinessProcessGroup_Table.Designer.cs">
+      <DependentUpon>201603081210549_Add_TypeOfBusinessProcessGroup_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603081232101_Add_TypeOfFinReport_Table.cs" />
+    <Compile Include="Migrations\201603081232101_Add_TypeOfFinReport_Table.Designer.cs">
+      <DependentUpon>201603081232101_Add_TypeOfFinReport_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603081236340_Add_BatchExecutionResult_Table.cs" />
+    <Compile Include="Migrations\201603081236340_Add_BatchExecutionResult_Table.Designer.cs">
+      <DependentUpon>201603081236340_Add_BatchExecutionResult_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -844,6 +872,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603080643259_Add_SubAccount_Table.resx">
       <DependentUpon>201603080643259_Add_SubAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603081132351_Add_TypeOfCountry_Table.resx">
+      <DependentUpon>201603081132351_Add_TypeOfCountry_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603081141494_Add_Region_Table.resx">
+      <DependentUpon>201603081141494_Add_Region_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603081145193_Add_UploadAddress_Table.resx">
+      <DependentUpon>201603081145193_Add_UploadAddress_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603081200439_Add_BatchReport_Table.resx">
+      <DependentUpon>201603081200439_Add_BatchReport_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603081210549_Add_TypeOfBusinessProcessGroup_Table.resx">
+      <DependentUpon>201603081210549_Add_TypeOfBusinessProcessGroup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603081232101_Add_TypeOfFinReport_Table.resx">
+      <DependentUpon>201603081232101_Add_TypeOfFinReport_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603081236340_Add_BatchExecutionResult_Table.resx">
+      <DependentUpon>201603081236340_Add_BatchExecutionResult_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

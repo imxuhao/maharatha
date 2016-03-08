@@ -109,11 +109,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\AccountingHeaderTransactionsUnit.cs" />
+    <Compile Include="Accounting\AccountingLayoutUnit.cs" />
+    <Compile Include="Accounting\AccountingLayoutItemUnit.cs" />
+    <Compile Include="Accounting\SubAccountUnit.cs" />
     <Compile Include="Accounting\UploadDocumentLogUnit.cs" />
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentUnit.cs" />
     <Compile Include="CashEntry\CashEntryDocumentUnit.cs" />
     <Compile Include="ChargeEntry\ChargeEntryDocumentUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentUnitManager.cs" />
+    <Compile Include="Masters\TypeOfAccountingLayoutUnit.cs" />
+    <Compile Include="Masters\TypeOfHeadingUnit.cs" />
     <Compile Include="Masters\ARStatementInfo.cs" />
     <Compile Include="Masters\GroupItemRangeUnit.cs" />
     <Compile Include="Masters\GroupItemUnit.cs" />

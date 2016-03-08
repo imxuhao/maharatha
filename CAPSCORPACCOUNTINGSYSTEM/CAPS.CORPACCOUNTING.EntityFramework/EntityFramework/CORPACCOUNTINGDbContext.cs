@@ -189,12 +189,20 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> ARStatementInfo Declaration</summary>
         public virtual IDbSet<ARStatementInfo> ARStatementInfo { get; set; }
 
+        /// <summary> TypeOfHeadingUnit Declaration</summary>
+        public virtual IDbSet<TypeOfHeadingUnit> TypeOfHeadingUnits { get; set; }
 
+        /// <summary> TypeOfAccountingLayoutUnit Declaration</summary>
+        public virtual IDbSet<TypeOfAccountingLayoutUnit> TypeOfAccountingLayoutUnits { get; set; }
 
+        /// <summary> AccountingLayoutUnit Declaration</summary>
+        public virtual IDbSet<AccountingLayoutUnit> AccountingLayoutUnits { get; set; }
 
-
-
-
+        /// <summary> AccountingLayoutItemUnit Declaration</summary>
+        public virtual IDbSet<AccountingLayoutItemUnit> AccountingLayoutItemUnits { get; set; }
+       
+        /// <summary> SubAccountUnit Declaration</summary>
+        public virtual IDbSet<SubAccountUnit> SubAccountUnits { get; set; }
 
 
 

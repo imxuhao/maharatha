@@ -499,6 +499,30 @@
     <Compile Include="Migrations\201603080552548_Add_ARStatementInfo_Table.Designer.cs">
       <DependentUpon>201603080552548_Add_ARStatementInfo_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603080618123_Modify_AcconttingHeaderDocument_APHeader_Table.cs" />
+    <Compile Include="Migrations\201603080618123_Modify_AcconttingHeaderDocument_APHeader_Table.Designer.cs">
+      <DependentUpon>201603080618123_Modify_AcconttingHeaderDocument_APHeader_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080625198_Add_TypeOfHeading_Table.cs" />
+    <Compile Include="Migrations\201603080625198_Add_TypeOfHeading_Table.Designer.cs">
+      <DependentUpon>201603080625198_Add_TypeOfHeading_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080626059_Add_TypeOfAccountingLayout_Table.cs" />
+    <Compile Include="Migrations\201603080626059_Add_TypeOfAccountingLayout_Table.Designer.cs">
+      <DependentUpon>201603080626059_Add_TypeOfAccountingLayout_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080632054_Add_AccountingLayout_Table.cs" />
+    <Compile Include="Migrations\201603080632054_Add_AccountingLayout_Table.Designer.cs">
+      <DependentUpon>201603080632054_Add_AccountingLayout_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080634061_Add_AccountingLayoutItem_Table.cs" />
+    <Compile Include="Migrations\201603080634061_Add_AccountingLayoutItem_Table.Designer.cs">
+      <DependentUpon>201603080634061_Add_AccountingLayoutItem_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603080643259_Add_SubAccount_Table.cs" />
+    <Compile Include="Migrations\201603080643259_Add_SubAccount_Table.Designer.cs">
+      <DependentUpon>201603080643259_Add_SubAccount_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -802,6 +826,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603080552548_Add_ARStatementInfo_Table.resx">
       <DependentUpon>201603080552548_Add_ARStatementInfo_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080618123_Modify_AcconttingHeaderDocument_APHeader_Table.resx">
+      <DependentUpon>201603080618123_Modify_AcconttingHeaderDocument_APHeader_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080625198_Add_TypeOfHeading_Table.resx">
+      <DependentUpon>201603080625198_Add_TypeOfHeading_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080626059_Add_TypeOfAccountingLayout_Table.resx">
+      <DependentUpon>201603080626059_Add_TypeOfAccountingLayout_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080632054_Add_AccountingLayout_Table.resx">
+      <DependentUpon>201603080632054_Add_AccountingLayout_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080634061_Add_AccountingLayoutItem_Table.resx">
+      <DependentUpon>201603080634061_Add_AccountingLayoutItem_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603080643259_Add_SubAccount_Table.resx">
+      <DependentUpon>201603080643259_Add_SubAccount_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

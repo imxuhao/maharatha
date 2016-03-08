@@ -13,13 +13,10 @@ namespace CAPS.CORPACCOUNTING.Payables
     /// <summary>
     /// InvoiceEntryDocument is the table name in lajit
     /// </summary>
-    [Table("CAPS_APHeaderTransactions")]
+    [Table("CAPS_InvoiceEntryDocument")]
     public class ApHeaderTransactions : AccountingHeaderTransactionsUnit
     {
-        #region Class Property Declarations
-
-        ///<summary>Get Sets the Posting Date</summary>
-        // public virtual DateTime  CheckDate { get; set; }
+        #region Class Property Declarations               
 
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual int? BatchId { get; set; }

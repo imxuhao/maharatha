@@ -149,7 +149,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// <summary>
     /// AccountingDocument is the table name in lajit
     /// </summary>
-    [Table("CAPS_AccountingHeaderTransactions")]
+    [Table("CAPS_AccountingDocument")]
     public class AccountingHeaderTransactionsUnit : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
     {
 
@@ -159,7 +159,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
 
         /// <summary>Overriding the Id column with BatchId </summary>
-        [Column("AHTID")]
+        [Column("AccountingDocumentId")]
         public override long Id { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>

@@ -109,18 +109,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\AccountingHeaderTransactionsUnit.cs" />
+    <Compile Include="Accounting\AccountingItemUnit.cs" />
     <Compile Include="Accounting\AccountingLayoutUnit.cs" />
     <Compile Include="Accounting\AccountingLayoutItemUnit.cs" />
     <Compile Include="Accounting\SubAccountUnit.cs" />
     <Compile Include="Accounting\UploadDocumentLogUnit.cs" />
+    <Compile Include="AccountReceivable\ArInvoiceEntryDocumentDetailUnit.cs" />
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentUnit.cs" />
+    <Compile Include="AccountReceivable\ReceiptHistoryDetailUnit.cs" />
     <Compile Include="BusinessProcess\BatchExecutionResultUnit.cs" />
     <Compile Include="BusinessProcess\BatchReportItemUnit.cs" />
     <Compile Include="BusinessProcess\BusinessProcessGroupUnit.cs" />
     <Compile Include="BusinessProcess\TypeOfBusinessProcessGroupUnit.cs" />
     <Compile Include="BusinessProcess\TypeOfFinReportUnit.cs" />
+    <Compile Include="CashEntry\CashEntryDocumentDetailUnit.cs" />
     <Compile Include="CashEntry\CashEntryDocumentUnit.cs" />
+    <Compile Include="ChargeEntry\ChargeEntryDocumentDetailUnit.cs" />
     <Compile Include="ChargeEntry\ChargeEntryDocumentUnit.cs" />
+    <Compile Include="Journals\JournalEntryDocumentDetailUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentUnitManager.cs" />
     <Compile Include="BusinessProcess\BatchReportUnit.cs" />
     <Compile Include="Masters\RegionUnit.cs" />
@@ -232,13 +238,18 @@
     <Compile Include="Notifications\IAppNotifier.cs" />
     <Compile Include="Payables\APHeaderTransactionsUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentUnit.cs" />
+    <Compile Include="Payables\InvoiceEntryDocumentDetailUnit.cs" />
+    <Compile Include="Payments\PaymentEntryDocumentDetailUnit.cs" />
     <Compile Include="Payments\PaymentEntryDocumentUnit.cs" />
     <Compile Include="Payments\PaymentRequestHistotyUnit.cs" />
+    <Compile Include="Payroll\PayrollEntryDocumentDetailUnit.cs" />
     <Compile Include="Payroll\PayrollEntryDocumentUnit.cs" />
     <Compile Include="Payroll\PayrollEntryDocumentUnitManager.cs" />
     <Compile Include="PettyCash\PettyCashAccountUnit.cs" />
+    <Compile Include="PettyCash\PettyCashEntryDocumentDetailUnit.cs" />
     <Compile Include="PettyCash\PettyCashEntryDocumentUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentDetailUnit.cs" />
     <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentUnit.cs" />
     <Compile Include="Security\SimpleStringCipher.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />

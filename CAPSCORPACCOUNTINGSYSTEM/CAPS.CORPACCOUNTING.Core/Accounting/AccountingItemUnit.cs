@@ -1,0 +1,319 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Abp.Domain.Entities;
+using Abp.Domain.Entities.Auditing;
+using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.Banking;
+using CAPS.CORPACCOUNTING.JobCosting;
+
+namespace CAPS.CORPACCOUNTING.Accounting
+{
+    /// <summary>
+    /// Enum for TypeOfAmount
+    /// </summary>
+    public enum TypeOfAmount
+    {
+
+        [Display(Name = "Standard Entry")]
+        StandardEntry = 1,
+        [Display(Name = "A/P Clearing")]
+        APClearing = 2,
+        [Display(Name = "A/P Discount")]
+        APDiscount = 3,
+        [Display(Name = "A/R Clearing")]
+        ARClearing = 4,
+        [Display(Name = "A/R Discount")]
+        ARDiscount = 5,
+        [Display(Name = "P/R Clearing")]
+        PRClearing = 6,
+        [Display(Name = "Autobalance")]
+        Autobalance = 7,
+        [Display(Name = "Credit Card Clearing")]
+        CreditCardClearing = 8,
+        [Display(Name = "P/R Straight Time")]
+        PRStraightTime = 9,
+        [Display(Name = "P/R Overtime")]
+        PROvertime = 10,
+        [Display(Name = "P/R Tax")]
+        PRTax = 11,
+        [Display(Name = "P/R Work Comp")]
+        PRWorkComp = 12,
+        [Display(Name = "Petty Cash Offset")]
+        PettyCashOffset = 13,
+        [Display(Name = "Cash Offset")]
+        CashOffset = 14,
+        [Display(Name = "Year End Closing")]
+        YearEndClosing = 15,
+        [Display(Name = "Use AICP Line Total")]
+        UseAICPLineTotal = 16,
+        [Display(Name = "Use AICP Group Total")]
+        UseAICPGroupTotal = 17,
+        [Display(Name = "Budget")]
+        Budget = 18,
+        [Display(Name = "Producer Actual")]
+        ProducerActual = 19,
+        [Display(Name = "Flat Amount")]
+        FlatAmount = 20,
+        [Display(Name = "YTD Total")]
+        YTDTotal = 21,
+        [Display(Name = "A to K Expense")]
+        AtoKExpense = 22,
+        [Display(Name = "A to K Overage")]
+        AtoKOverage = 23,
+        [Display(Name = "Production Expense")]
+        ProductionExpense = 24,
+        [Display(Name = "Production Fee Overage")]
+        ProductionFeeOverage = 25,
+        [Display(Name = "Production Fee")]
+        ProductionFee = 26,
+        [Display(Name = "Director Fee")]
+        DirectorFee = 27,
+        [Display(Name = "Other Expense")]
+        OtherExpense = 28,
+        [Display(Name = "Overhead Expense")]
+        OverheadExpense = 29,
+        [Display(Name = "Revenue")]
+        Revenue = 30,
+        [Display(Name = "Other Revenue")]
+        OtherRevenue = 31,
+        [Display(Name = "Include Values")]
+        IncludeValues = 32,
+        [Display(Name = "Exclude Values")]
+        ExcludeValues = 33,
+        [Display(Name = "Gross Profit")]
+        GrossProfit = 34,
+        [Display(Name = "Net Profit")]
+        NetProfit = 35
+    }
+
+    /// <summary>
+    /// AccountingItem is the table name in lajit
+    /// </summary>
+    [Table("CAPS_AccountingItem")]
+    public class AccountingItemUnit : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
+    {
+               
+        #region Class Property Declarations
+
+        /// <summary>Overriding the Id column with AccountingItemId </summary>
+        [Column("AccountingItemId")]
+        public override long Id { get; set; }
+
+        /// <summary>Gets or sets the AccountingDocumentID field. </summary>
+        public long? AccountingDocumentId { get; set; }
+
+        [ForeignKey("AccountingDocumentId")]
+        public AccountingHeaderTransactionsUnit AccountingHeaderTransaction { get; set; }
+
+        /// <summary>Gets or sets the TypeOfTransactionID field. </summary>
+        public TypeofTransaction TypeOfTransactionId { get; set; }
+
+        /// <summary>Gets or sets the TypeOfAmountID field. </summary>
+        public TypeOfAmount TypeOfAmountId { get; set; }
+
+        /// <summary>Gets or sets the ItemLinkID field. </summary>
+        public long? ItemLinkId { get; set; }
+
+        /// <summary>Gets or sets the LedgerReference field. </summary>       
+        public string LedgerReference { get; set; }
+
+        /// <summary>Gets or sets the LedgerDate field. </summary>
+        [Column(TypeName = "smalldatetime")]
+        public DateTime? LedgerDate { get; set; }
+
+        /// <summary>Gets or sets the LedgerYYYYMM field. </summary>
+        public int? LedgerYyyymm { get; set; }
+
+        /// <summary>Gets or sets the AccountID field. </summary>
+        public long AccountId { get; set; }
+
+        [ForeignKey("AccountId")]
+        public AccountUnit Account { get; set; }
+
+        /// <summary>Gets or sets the JobID field. </summary>
+        public int JobId { get; set; }
+
+        [ForeignKey("JobId")]
+        public JobUnit Job { get; set; }
+
+        /// <summary>Gets or sets the ItemMemo field. </summary>   
+        public string ItemMemo { get; set; }
+
+        /// <summary>Gets or sets the IsAsset field. </summary>
+        public bool IsAsset { get; set; }
+
+        /// <summary>Gets or sets the AccountRef1 field. </summary>        
+        public string AccountRef1 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef2 field. </summary>      
+        public string AccountRef2 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef3 field. </summary>
+        public string AccountRef3 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef4 field. </summary>       
+        public string AccountRef4 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef5 field. </summary>       
+        public string AccountRef5 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef6 field. </summary>      
+        public string AccountRef6 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef7 field. </summary>       
+        public string AccountRef7 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef8 field. </summary>      
+        public string AccountRef8 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef9 field. </summary>        
+        public string AccountRef9 { get; set; }
+
+        /// <summary>Gets or sets the AccountRef10 field. </summary>        
+        public string AccountRef10 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID1 field. </summary>
+        public long? SubAccountId1 { get; set; }
+
+        [ForeignKey("SubAccountId1")]
+        public SubAccountUnit SubAccount1 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID2 field. </summary>
+        public long? SubAccountId2 { get; set; }
+
+        [ForeignKey("SubAccountId2")]
+        public SubAccountUnit SubAccount2 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID3 field. </summary>
+        public long? SubAccountId3 { get; set; }
+
+        [ForeignKey("SubAccountId3")]
+        public SubAccountUnit SubAccount3 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID4 field. </summary>
+        public long? SubAccountId4 { get; set; }
+
+        [ForeignKey("SubAccountId4")]
+        public SubAccountUnit SubAccount4 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID5 field. </summary>
+        public long? SubAccountId5 { get; set; }
+
+        [ForeignKey("SubAccountId5")]
+        public SubAccountUnit SubAccount5 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID6 field. </summary>
+        public long? SubAccountId6 { get; set; }
+
+        [ForeignKey("SubAccountId6")]
+        public SubAccountUnit SubAccount6 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID7 field. </summary>
+        public long? SubAccountId7 { get; set; }
+
+        [ForeignKey("SubAccountId7")]
+        public SubAccountUnit SubAccount7 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID8 field. </summary>
+        public long? SubAccountId8 { get; set; }
+
+        [ForeignKey("SubAccountId8")]
+        public SubAccountUnit SubAccount8 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID9 field. </summary>
+        public long? SubAccountId9 { get; set; }
+
+        [ForeignKey("SubAccountId9")]
+        public SubAccountUnit SubAccount9 { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID10 field. </summary>
+        public long? SubAccountId10 { get; set; }
+
+        [ForeignKey("SubAccountId10")]
+        public SubAccountUnit SubAccount10 { get; set; }
+
+        /// <summary>Gets or sets the TypeOf1099T4ID field. </summary>
+        public Typeof1099T4? TypeOf1099T4Id { get; set; }
+
+        /// <summary>Gets or sets the Amount field. </summary>
+        public decimal? Amount { get; set; }
+
+        /// <summary>Gets or sets the CompanyCurrencyAmount field. </summary>
+        public decimal? CompanyCurrencyAmount { get; set; }
+
+        /// <summary>Gets or sets the CurrencyAdjustmentAmount field. </summary>
+        public decimal? CurrencyAdjustmentAmount { get; set; }
+
+        /// <summary>Gets or sets the OriginalItemID field. </summary>
+        public long? OriginalItemId { get; set; }
+
+        /// <summary>Gets or sets the AccountingItemIDLink field. </summary>
+        public long? AccountingItemIdLink { get; set; }
+
+        /// <summary>Gets or sets the IsChanged field. </summary>
+        public bool IsChanged { get; set; }
+
+        /// <summary>Gets or sets the IsActive field. </summary>
+        public bool IsActive { get; set; }
+
+        /// <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
+        public TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
+
+        /// <summary>Gets or sets the ReconciliationID field. </summary>
+        public int? ReconciliationId { get; set; }
+
+        [ForeignKey("ReconciliationId")]
+        public BankRecControlUnit BankRecControl { get; set; }
+
+        /// <summary>Gets or sets the IsEnterable field. </summary>
+        public bool IsEnterable { get; set; }
+
+        /// <summary>Gets or sets the AccountingItemOrigAmount field. </summary>
+        public decimal? AccountingItemOrigAmount { get; set; }
+
+        /// <summary>Gets or sets the AccountingItemTypeOfModificationID field. </summary>
+        public int? AccountingItemTypeOfModificationId { get; set; }
+
+        /// <summary>Gets or sets the AccountingItemOrigID field. </summary>
+        public long? AccountingItemOrigId { get; set; }    
+
+        /// <summary>Gets or sets the ICTJobID field. </summary>
+        public int? IctJobId { get; set; }
+
+        /// <summary>Gets or sets the ICTAccountingItemID field. </summary>
+        public long? IctAccountingItemId { get; set; }
+        
+
+        /// <summary>Gets or sets the TaxRebateID field. </summary>
+        public int? TaxRebateId { get; set; }
+
+        /// <summary>Gets or sets the CurrencyOverrideRate field. </summary>
+        public double? CurrencyOverrideRate { get; set; }
+
+        /// <summary>Gets or sets the FunctionalCurrencyAmount field. </summary>
+        public decimal? FunctionalCurrencyAmount { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrencyRateID field. </summary>
+        public short? TypeOfCurrencyRateId { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrencyID field. </summary>
+        public short? TypeOfCurrencyId { get; set; }
+
+        /// <summary>Gets or sets the HomeCurAmount field. </summary>
+        public decimal? HomeCurAmount { get; set; }
+
+        /// <summary>Gets or sets the CustomForexRate field. </summary>
+        public decimal? CustomForexRate { get; set; }
+
+        /// <summary>Gets or sets the TenantId field. </summary>
+        public virtual int TenantId { get; set; }
+
+        /// <summary>Gets or sets the CompanyId field. </summary>
+        public virtual long OrganizationUnitId { get; set; }
+
+        #endregion
+
+    }
+}

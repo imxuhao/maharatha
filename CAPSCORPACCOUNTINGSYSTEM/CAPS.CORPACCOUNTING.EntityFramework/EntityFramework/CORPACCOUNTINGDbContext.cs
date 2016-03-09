@@ -17,6 +17,8 @@ using CAPS.CORPACCOUNTING.PettyCash;
 using CAPS.CORPACCOUNTING.Payments;
 using CAPS.CORPACCOUNTING.CashEntry;
 using CAPS.CORPACCOUNTING.BusinessProcess;
+using CAPS.CORPACCOUNTING.ChargeEntry;
+using CAPS.CORPACCOUNTING.AccountReceivable;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -227,7 +229,43 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> BatchExecutionResultUnit Declaration</summary>
         public virtual IDbSet<BatchExecutionResultUnit> BatchExecutionResultUnit { get; set; }
+
+        /// <summary> AccountingItemUnit Declaration</summary>
+        public virtual IDbSet<AccountingItemUnit> AccountingItemUnits { get; set; }
+
+        /// <summary> PaymentEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<PaymentEntryDocumentDetailUnit> PaymentEntryDocumentDetailUnits { get; set; }
+
+        /// <summary> PayrollEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<PayrollEntryDocumentDetailUnit> PayrollEntryDocumentDetailUnits { get; set; }
+
+        /// <summary> PettyCashEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<PettyCashEntryDocumentDetailUnit> PettyCashEntryDocumentDetailUnits { get; set; }
+
+        /// <summary> InvoiceEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<InvoiceEntryDocumentDetailUnit> InvoiceEntryDocumentDetailUnits { get; set; }
+
+        /// <summary> ChargeEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<ChargeEntryDocumentDetailUnit> ChargeEntryDocumentDetailUnits { get; set; }
+
+        /// <summary> PurchaseOrderEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<PurchaseOrderEntryDocumentDetailUnit> PurchaseOrderEntryDocumentDetailUnits { get; set; }
+
+
+        /// <summary> CashEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<CashEntryDocumentDetailUnit> CashEntryDocumentDetailUnits { get; set; }
+
+        /// <summary> ReceiptHistoryDetailUnit Declaration</summary>
+        public virtual IDbSet<ReceiptHistoryDetailUnit> ReceiptHistoryDetailUnits { get; set; }
+
+        /// <summary> JournalEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<JournalEntryDocumentDetailUnit> JournalEntryDocumentDetailUnits { get; set; }
+
+        /// <summary> ArInvoiceEntryDocumentDetailUnit Declaration</summary>
+        public virtual IDbSet<ArInvoiceEntryDocumentDetailUnit> ArInvoiceEntryDocumentDetailUnits { get; set; }
         
+
+
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 
          */

@@ -551,6 +551,42 @@
     <Compile Include="Migrations\201603081236340_Add_BatchExecutionResult_Table.Designer.cs">
       <DependentUpon>201603081236340_Add_BatchExecutionResult_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603090508453_Add_AccountingItem_Table.cs" />
+    <Compile Include="Migrations\201603090508453_Add_AccountingItem_Table.Designer.cs">
+      <DependentUpon>201603090508453_Add_AccountingItem_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090511172_Add_PaymentEntryDocumentDetail_Table.cs" />
+    <Compile Include="Migrations\201603090511172_Add_PaymentEntryDocumentDetail_Table.Designer.cs">
+      <DependentUpon>201603090511172_Add_PaymentEntryDocumentDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090513067_Add_PayrollEntryDocumentDetail_Table.cs" />
+    <Compile Include="Migrations\201603090513067_Add_PayrollEntryDocumentDetail_Table.Designer.cs">
+      <DependentUpon>201603090513067_Add_PayrollEntryDocumentDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090514097_Add_PettyCashEntryDocumentDetail_Table.cs" />
+    <Compile Include="Migrations\201603090514097_Add_PettyCashEntryDocumentDetail_Table.Designer.cs">
+      <DependentUpon>201603090514097_Add_PettyCashEntryDocumentDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090518087_Add_InvoiceEntryDocumentDetail_Table.cs" />
+    <Compile Include="Migrations\201603090518087_Add_InvoiceEntryDocumentDetail_Table.Designer.cs">
+      <DependentUpon>201603090518087_Add_InvoiceEntryDocumentDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090519312_Add_ChargeEntryDocumentDetail_Table.cs" />
+    <Compile Include="Migrations\201603090519312_Add_ChargeEntryDocumentDetail_Table.Designer.cs">
+      <DependentUpon>201603090519312_Add_ChargeEntryDocumentDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090520343_Add_PurchaseOrderEntryDocumentDetail_Table.cs" />
+    <Compile Include="Migrations\201603090520343_Add_PurchaseOrderEntryDocumentDetail_Table.Designer.cs">
+      <DependentUpon>201603090520343_Add_PurchaseOrderEntryDocumentDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090521572_Add_CashEntryDocumentDetail_Table.cs" />
+    <Compile Include="Migrations\201603090521572_Add_CashEntryDocumentDetail_Table.Designer.cs">
+      <DependentUpon>201603090521572_Add_CashEntryDocumentDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090524439_Add_ReceiptHistoryDetail_Table.cs" />
+    <Compile Include="Migrations\201603090524439_Add_ReceiptHistoryDetail_Table.Designer.cs">
+      <DependentUpon>201603090524439_Add_ReceiptHistoryDetail_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -893,6 +929,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603081236340_Add_BatchExecutionResult_Table.resx">
       <DependentUpon>201603081236340_Add_BatchExecutionResult_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090508453_Add_AccountingItem_Table.resx">
+      <DependentUpon>201603090508453_Add_AccountingItem_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090511172_Add_PaymentEntryDocumentDetail_Table.resx">
+      <DependentUpon>201603090511172_Add_PaymentEntryDocumentDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090513067_Add_PayrollEntryDocumentDetail_Table.resx">
+      <DependentUpon>201603090513067_Add_PayrollEntryDocumentDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090514097_Add_PettyCashEntryDocumentDetail_Table.resx">
+      <DependentUpon>201603090514097_Add_PettyCashEntryDocumentDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090518087_Add_InvoiceEntryDocumentDetail_Table.resx">
+      <DependentUpon>201603090518087_Add_InvoiceEntryDocumentDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090519312_Add_ChargeEntryDocumentDetail_Table.resx">
+      <DependentUpon>201603090519312_Add_ChargeEntryDocumentDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090520343_Add_PurchaseOrderEntryDocumentDetail_Table.resx">
+      <DependentUpon>201603090520343_Add_PurchaseOrderEntryDocumentDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090521572_Add_CashEntryDocumentDetail_Table.resx">
+      <DependentUpon>201603090521572_Add_CashEntryDocumentDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090524439_Add_ReceiptHistoryDetail_Table.resx">
+      <DependentUpon>201603090524439_Add_ReceiptHistoryDetail_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

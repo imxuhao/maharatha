@@ -158,7 +158,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         #region Class Property Declarations
 
 
-        /// <summary>Overriding the Id column with BatchId </summary>
+        /// <summary>Overriding the Id column with AccountingDocumentId </summary>
         [Column("AccountingDocumentId")]
         public override long Id { get; set; }
 

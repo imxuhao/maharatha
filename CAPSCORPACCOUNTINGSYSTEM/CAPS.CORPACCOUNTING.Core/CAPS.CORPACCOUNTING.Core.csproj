@@ -120,8 +120,16 @@
     <Compile Include="BusinessProcess\BatchExecutionResultUnit.cs" />
     <Compile Include="BusinessProcess\BatchReportItemUnit.cs" />
     <Compile Include="BusinessProcess\BusinessProcessGroupUnit.cs" />
+    <Compile Include="BusinessProcess\BusinessProcessUnit.cs" />
+    <Compile Include="BusinessProcess\BusinessRuleCategoryUnit.cs" />
+    <Compile Include="BusinessProcess\BusinessRuleGroupUnit.cs" />
+    <Compile Include="BusinessProcess\BusinessRuleUnit.cs" />
+    <Compile Include="BusinessProcess\RoleBusinessProcessUnit.cs" />
+    <Compile Include="BusinessProcess\ServiceLevelAgreementUnit.cs" />
+    <Compile Include="BusinessProcess\TypeOfBusinessProcessControlUnit.cs" />
     <Compile Include="BusinessProcess\TypeOfBusinessProcessGroupUnit.cs" />
     <Compile Include="BusinessProcess\TypeOfFinReportUnit.cs" />
+    <Compile Include="BusinessProcess\UserRoleBusinessProcessUnit.cs" />
     <Compile Include="CashEntry\CashEntryDocumentDetailUnit.cs" />
     <Compile Include="CashEntry\CashEntryDocumentUnit.cs" />
     <Compile Include="ChargeEntry\ChargeEntryDocumentDetailUnit.cs" />

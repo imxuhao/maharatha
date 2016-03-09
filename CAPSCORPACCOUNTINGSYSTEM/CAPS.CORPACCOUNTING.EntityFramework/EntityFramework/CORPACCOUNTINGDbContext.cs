@@ -173,7 +173,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> PurchaseOrderEntryDocumentUnit Declaration</summary>
         public virtual IDbSet<PurchaseOrderEntryDocumentUnit> PurchaseOrderEntryDocuments { get; set; }
-        
+
         /// <summary> CashEntryDocumentUnit Declaration</summary>
         public virtual IDbSet<CashEntryDocumentUnit> CashEntryDocumentUnits { get; set; }
 
@@ -203,7 +203,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> AccountingLayoutItemUnit Declaration</summary>
         public virtual IDbSet<AccountingLayoutItemUnit> AccountingLayoutItemUnits { get; set; }
-       
+
         /// <summary> SubAccountUnit Declaration</summary>
         public virtual IDbSet<SubAccountUnit> SubAccountUnits { get; set; }
 
@@ -263,7 +263,38 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> ArInvoiceEntryDocumentDetailUnit Declaration</summary>
         public virtual IDbSet<ArInvoiceEntryDocumentDetailUnit> ArInvoiceEntryDocumentDetailUnits { get; set; }
-        
+
+        /// <summary> ServiceLevelAgreementUnit Declaration</summary>
+        public virtual IDbSet<ServiceLevelAgreementUnit> ServiceLevelAgreementUnit { get; set; }
+
+        /// <summary> BusinessProcessGroupUnit Declaration</summary>
+        public virtual IDbSet<BusinessProcessGroupUnit> BusinessProcessGroupUnit { get; set; }
+
+        /// <summary> BatchReportItemUnit Declaration</summary>
+        public virtual IDbSet<BatchReportItemUnit> BatchReportItemUnit { get; set; }
+
+        /// <summary> BusinessRuleCategoryUnit Declaration</summary>
+        public virtual IDbSet<BusinessRuleCategoryUnit> BusinessRuleCategoryUnit { get; set; }
+
+        /// <summary> BusinessRuleGroupUnit Declaration</summary>
+        public virtual IDbSet<BusinessRuleGroupUnit> BusinessRuleGroupUnit { get; set; }
+
+        /// <summary> BusinessProcessUnit Declaration</summary>
+        public virtual IDbSet<BusinessProcessUnit> BusinessProcessUnit { get; set; }
+
+        /// <summary> BusinessRuleUnit Declaration</summary>
+        public virtual IDbSet<BusinessRuleUnit> BusinessRuleUnit { get; set; }
+
+        /// <summary> RoleBusinessProcessUnit Declaration</summary>
+        public virtual IDbSet<RoleBusinessProcessUnit> RoleBusinessProcessUnit { get; set; }
+
+
+        /// <summary> TypeOfBusinessProcessControlUnit Declaration</summary>
+        public virtual IDbSet<TypeOfBusinessProcessControlUnit> TypeOfBusinessProcessControlUnit { get; set; }
+
+        /// <summary> UserRoleBusinessProcessUnit Declaration</summary>
+        public virtual IDbSet<UserRoleBusinessProcessUnit> UserRoleBusinessProcessUnit { get; set; }
+
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

@@ -587,6 +587,46 @@
     <Compile Include="Migrations\201603090524439_Add_ReceiptHistoryDetail_Table.Designer.cs">
       <DependentUpon>201603090524439_Add_ReceiptHistoryDetail_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603090841577_Add_ServiceLevelAgreement_Table.cs" />
+    <Compile Include="Migrations\201603090841577_Add_ServiceLevelAgreement_Table.Designer.cs">
+      <DependentUpon>201603090841577_Add_ServiceLevelAgreement_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090852066_Add_BusinessProcessGroup_Table.cs" />
+    <Compile Include="Migrations\201603090852066_Add_BusinessProcessGroup_Table.Designer.cs">
+      <DependentUpon>201603090852066_Add_BusinessProcessGroup_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090902432_Add_BatchReportItem_Table.cs" />
+    <Compile Include="Migrations\201603090902432_Add_BatchReportItem_Table.Designer.cs">
+      <DependentUpon>201603090902432_Add_BatchReportItem_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090916328_Add_BusinessRuleCategory_Table.cs" />
+    <Compile Include="Migrations\201603090916328_Add_BusinessRuleCategory_Table.Designer.cs">
+      <DependentUpon>201603090916328_Add_BusinessRuleCategory_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090919503_Add_BusinessRuleGroup_Table.cs" />
+    <Compile Include="Migrations\201603090919503_Add_BusinessRuleGroup_Table.Designer.cs">
+      <DependentUpon>201603090919503_Add_BusinessRuleGroup_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090923274_Add_BusinessProcess_Table.cs" />
+    <Compile Include="Migrations\201603090923274_Add_BusinessProcess_Table.Designer.cs">
+      <DependentUpon>201603090923274_Add_BusinessProcess_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090927538_Add_BusinessRule_Table.cs" />
+    <Compile Include="Migrations\201603090927538_Add_BusinessRule_Table.Designer.cs">
+      <DependentUpon>201603090927538_Add_BusinessRule_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090931481_Add_RoleBusinessProcess_Table.cs" />
+    <Compile Include="Migrations\201603090931481_Add_RoleBusinessProcess_Table.Designer.cs">
+      <DependentUpon>201603090931481_Add_RoleBusinessProcess_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090938311_Add_TypeOfBusinessProcessControl_Table.cs" />
+    <Compile Include="Migrations\201603090938311_Add_TypeOfBusinessProcessControl_Table.Designer.cs">
+      <DependentUpon>201603090938311_Add_TypeOfBusinessProcessControl_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090941112_Add_UserRoleBusinessProcess_Table.cs" />
+    <Compile Include="Migrations\201603090941112_Add_UserRoleBusinessProcess_Table.Designer.cs">
+      <DependentUpon>201603090941112_Add_UserRoleBusinessProcess_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -956,6 +996,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603090524439_Add_ReceiptHistoryDetail_Table.resx">
       <DependentUpon>201603090524439_Add_ReceiptHistoryDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090841577_Add_ServiceLevelAgreement_Table.resx">
+      <DependentUpon>201603090841577_Add_ServiceLevelAgreement_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090852066_Add_BusinessProcessGroup_Table.resx">
+      <DependentUpon>201603090852066_Add_BusinessProcessGroup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090902432_Add_BatchReportItem_Table.resx">
+      <DependentUpon>201603090902432_Add_BatchReportItem_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090916328_Add_BusinessRuleCategory_Table.resx">
+      <DependentUpon>201603090916328_Add_BusinessRuleCategory_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090919503_Add_BusinessRuleGroup_Table.resx">
+      <DependentUpon>201603090919503_Add_BusinessRuleGroup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090923274_Add_BusinessProcess_Table.resx">
+      <DependentUpon>201603090923274_Add_BusinessProcess_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090927538_Add_BusinessRule_Table.resx">
+      <DependentUpon>201603090927538_Add_BusinessRule_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090931481_Add_RoleBusinessProcess_Table.resx">
+      <DependentUpon>201603090931481_Add_RoleBusinessProcess_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090938311_Add_TypeOfBusinessProcessControl_Table.resx">
+      <DependentUpon>201603090938311_Add_TypeOfBusinessProcessControl_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090941112_Add_UserRoleBusinessProcess_Table.resx">
+      <DependentUpon>201603090941112_Add_UserRoleBusinessProcess_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

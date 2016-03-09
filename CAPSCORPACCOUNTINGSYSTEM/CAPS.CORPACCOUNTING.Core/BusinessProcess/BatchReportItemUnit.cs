@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
@@ -44,19 +45,19 @@ namespace CAPS.CORPACCOUNTING.BusinessProcess
 
         /// <summary>Gets or sets the StartDate field. </summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? StartDate { get; set; }
+        public virtual DateTime? StartDate { get; set; }
 
         /// <summary>Gets or sets the EndDate field. </summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? EndDate { get; set; }
+        public virtual DateTime? EndDate { get; set; }
 
         /// <summary>Gets or sets the CompareSDate field. </summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? CompareSDate { get; set; }
+        public virtual DateTime? CompareSDate { get; set; }
 
         /// <summary>Gets or sets the CompareEDate field. </summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? CompareEDate { get; set; }
+        public virtual DateTime? CompareEDate { get; set; }
 
         /// <summary>Gets or sets the ReportStyle field. </summary>
         public virtual int? ReportStyle { get; set; }

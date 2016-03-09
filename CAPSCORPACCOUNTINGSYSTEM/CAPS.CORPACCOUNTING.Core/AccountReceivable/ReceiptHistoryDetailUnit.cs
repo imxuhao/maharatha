@@ -10,6 +10,6 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
     public class ReceiptHistoryDetailUnit : AccountingItemUnit
     {
         /// <summary>Gets or sets the CustomerInvoiceId field. </summary>   
-        public int? CustomerInvoiceId { get; set; }
+        public virtual int? CustomerInvoiceId { get; set; }
     }
 }

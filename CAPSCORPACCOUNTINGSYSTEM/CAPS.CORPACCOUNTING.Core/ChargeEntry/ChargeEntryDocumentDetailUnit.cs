@@ -13,51 +13,51 @@ namespace CAPS.CORPACCOUNTING.ChargeEntry
     public class ChargeEntryDocumentDetailUnit : AccountingItemUnit
     {
         /// <summary>Gets or sets the PurchaseOrderItemId field. </summary>   
-        public long? PurchaseOrderItemId { get; set; }
+        public virtual long? PurchaseOrderItemId { get; set; }
 
         /// <summary>Gets or sets the POHistoryItemID field. </summary>   
-        public long? PoHistoryItemId { get; set; }
+        public virtual long? PoHistoryItemId { get; set; }
 
         /// <summary>Gets or sets the VendorID field. </summary>   
-        public int? VendorId { get; set; }
+        public virtual int? VendorId { get; set; }
 
         [ForeignKey("VendorId")]
-        public VendorUnit Vendor { get; set; }
+        public virtual VendorUnit Vendor { get; set; }
 
         /// <summary>Gets or sets the IsPrePaid field. </summary>   
-        public bool IsPrePaid { get; set; }
+        public virtual bool IsPrePaid { get; set; }
 
         /// <summary>Gets or sets the BankAccountID field. </summary>   
-        public long? BankAccountId { get; set; }
+        public virtual long? BankAccountId { get; set; }
 
         [ForeignKey("BankAccountId")]
-        public BankAccountUnit BankAccount { get; set; }
+        public virtual BankAccountUnit BankAccount { get; set; }
 
         /// <summary>Gets or sets the TypeOfChargeID field. </summary>   
-        public short? TypeOfChargeId { get; set; }
+        public virtual short? TypeOfChargeId { get; set; }
 
         /// <summary>Gets or sets the ChargeReferenceNumber field. </summary>   
-        public string ChargeReferenceNumber { get; set; }
+        public virtual string ChargeReferenceNumber { get; set; }
 
         /// <summary>Gets or sets the ChargeDate field. </summary>   
-        public DateTime? ChargeDate { get; set; }
+        public virtual DateTime? ChargeDate { get; set; }
 
         /// <summary>Gets or sets the ChargeSICCode field. </summary>   
-        public string ChargeSicCode { get; set; }
+        public virtual string ChargeSicCode { get; set; }
 
         /// <summary>Gets or sets the ChargeSENumber field. </summary>   
-        public string ChargeSeNumber { get; set; }
+        public virtual string ChargeSeNumber { get; set; }
 
         /// <summary>Gets or sets the ChargeOtherInfo field. </summary>   
-        public string ChargeOtherInfo { get; set; }
+        public virtual string ChargeOtherInfo { get; set; }
 
         /// <summary>Gets or sets the ChargeOriginalAmount field. </summary>   
-        public decimal? ChargeOriginalAmount { get; set; }
+        public virtual decimal? ChargeOriginalAmount { get; set; }
 
         /// <summary>Gets or sets the ChargeRetiredAmount field. </summary>   
-        public decimal? ChargeRetiredAmount { get; set; } 
+        public virtual decimal? ChargeRetiredAmount { get; set; } 
 
         /// <summary>Gets or sets the CustomerID field. </summary>   
-        public bool IsChargeDisputed { get; set; } // IsChargeDisputed
+        public virtual bool IsChargeDisputed { get; set; } // IsChargeDisputed
     }
 }

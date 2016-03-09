@@ -627,6 +627,54 @@
     <Compile Include="Migrations\201603090941112_Add_UserRoleBusinessProcess_Table.Designer.cs">
       <DependentUpon>201603090941112_Add_UserRoleBusinessProcess_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603091102586_Add_FiscalYear_Table.cs" />
+    <Compile Include="Migrations\201603091102586_Add_FiscalYear_Table.Designer.cs">
+      <DependentUpon>201603091102586_Add_FiscalYear_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091105434_Add_FiscalPeriodUnit_Table.cs" />
+    <Compile Include="Migrations\201603091105434_Add_FiscalPeriodUnit_Table.Designer.cs">
+      <DependentUpon>201603091105434_Add_FiscalPeriodUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091111273_Add_ProjectControlPeriod_Table.cs" />
+    <Compile Include="Migrations\201603091111273_Add_ProjectControlPeriod_Table.Designer.cs">
+      <DependentUpon>201603091111273_Add_ProjectControlPeriod_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091113057_Add_JobWrapEntryDocument_Table.cs" />
+    <Compile Include="Migrations\201603091113057_Add_JobWrapEntryDocument_Table.Designer.cs">
+      <DependentUpon>201603091113057_Add_JobWrapEntryDocument_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091116492_Add_JobWrapDocumentLog_Table.cs" />
+    <Compile Include="Migrations\201603091116492_Add_JobWrapDocumentLog_Table.Designer.cs">
+      <DependentUpon>201603091116492_Add_JobWrapDocumentLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091135205_Add_JobEFC_Table.cs" />
+    <Compile Include="Migrations\201603091135205_Add_JobEFC_Table.Designer.cs">
+      <DependentUpon>201603091135205_Add_JobEFC_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091136557_Add_JobWrapCheckLog_Table.cs" />
+    <Compile Include="Migrations\201603091136557_Add_JobWrapCheckLog_Table.Designer.cs">
+      <DependentUpon>201603091136557_Add_JobWrapCheckLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091139018_Add_JobWrapSalesLog_Table.cs" />
+    <Compile Include="Migrations\201603091139018_Add_JobWrapSalesLog_Table.Designer.cs">
+      <DependentUpon>201603091139018_Add_JobWrapSalesLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091141155_Add_JobWrapAmexLogUnit_Table.cs" />
+    <Compile Include="Migrations\201603091141155_Add_JobWrapAmexLogUnit_Table.Designer.cs">
+      <DependentUpon>201603091141155_Add_JobWrapAmexLogUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091144511_Add_JobWrapPayrollLog_Table.cs" />
+    <Compile Include="Migrations\201603091144511_Add_JobWrapPayrollLog_Table.Designer.cs">
+      <DependentUpon>201603091144511_Add_JobWrapPayrollLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091204339_Add_BankRecAdjustment_Table.cs" />
+    <Compile Include="Migrations\201603091204339_Add_BankRecAdjustment_Table.Designer.cs">
+      <DependentUpon>201603091204339_Add_BankRecAdjustment_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091205443_Add_BankRecClearedUnit_Table.cs" />
+    <Compile Include="Migrations\201603091205443_Add_BankRecClearedUnit_Table.Designer.cs">
+      <DependentUpon>201603091205443_Add_BankRecClearedUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1026,6 +1074,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603090941112_Add_UserRoleBusinessProcess_Table.resx">
       <DependentUpon>201603090941112_Add_UserRoleBusinessProcess_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091102586_Add_FiscalYear_Table.resx">
+      <DependentUpon>201603091102586_Add_FiscalYear_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091105434_Add_FiscalPeriodUnit_Table.resx">
+      <DependentUpon>201603091105434_Add_FiscalPeriodUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091111273_Add_ProjectControlPeriod_Table.resx">
+      <DependentUpon>201603091111273_Add_ProjectControlPeriod_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091113057_Add_JobWrapEntryDocument_Table.resx">
+      <DependentUpon>201603091113057_Add_JobWrapEntryDocument_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091116492_Add_JobWrapDocumentLog_Table.resx">
+      <DependentUpon>201603091116492_Add_JobWrapDocumentLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091135205_Add_JobEFC_Table.resx">
+      <DependentUpon>201603091135205_Add_JobEFC_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091136557_Add_JobWrapCheckLog_Table.resx">
+      <DependentUpon>201603091136557_Add_JobWrapCheckLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091139018_Add_JobWrapSalesLog_Table.resx">
+      <DependentUpon>201603091139018_Add_JobWrapSalesLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091141155_Add_JobWrapAmexLogUnit_Table.resx">
+      <DependentUpon>201603091141155_Add_JobWrapAmexLogUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091144511_Add_JobWrapPayrollLog_Table.resx">
+      <DependentUpon>201603091144511_Add_JobWrapPayrollLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091204339_Add_BankRecAdjustment_Table.resx">
+      <DependentUpon>201603091204339_Add_BankRecAdjustment_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091205443_Add_BankRecClearedUnit_Table.resx">
+      <DependentUpon>201603091205443_Add_BankRecClearedUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

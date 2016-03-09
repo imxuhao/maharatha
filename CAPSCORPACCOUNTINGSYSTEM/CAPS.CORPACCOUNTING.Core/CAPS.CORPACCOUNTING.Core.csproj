@@ -117,6 +117,8 @@
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentDetailUnit.cs" />
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentUnit.cs" />
     <Compile Include="AccountReceivable\ReceiptHistoryDetailUnit.cs" />
+    <Compile Include="Banking\BankRecAdjustmentUnit.cs" />
+    <Compile Include="Banking\BankRecClearedUnit.cs" />
     <Compile Include="BusinessProcess\BatchExecutionResultUnit.cs" />
     <Compile Include="BusinessProcess\BatchReportItemUnit.cs" />
     <Compile Include="BusinessProcess\BusinessProcessGroupUnit.cs" />
@@ -134,6 +136,17 @@
     <Compile Include="CashEntry\CashEntryDocumentUnit.cs" />
     <Compile Include="ChargeEntry\ChargeEntryDocumentDetailUnit.cs" />
     <Compile Include="ChargeEntry\ChargeEntryDocumentUnit.cs" />
+    <Compile Include="JobCosting\FiscalPeriodUnit.cs" />
+    <Compile Include="JobCosting\FiscalYearUnit.cs" />
+    <Compile Include="JobCosting\JobEFCUnit.cs" />
+    <Compile Include="JobCosting\JobTypeUnit.cs" />
+    <Compile Include="JobCosting\JobWrapAmexLogUnit.cs" />
+    <Compile Include="JobCosting\JobWrapCheckLogUnit.cs" />
+    <Compile Include="JobCosting\JobWrapDocumentLogUnit.cs" />
+    <Compile Include="JobCosting\JobWrapEntryDocumentUnit.cs" />
+    <Compile Include="JobCosting\JobWrapPayrollLogUnit.cs" />
+    <Compile Include="JobCosting\JobWrapSalesLogUnit.cs" />
+    <Compile Include="JobCosting\ProjectControlPeriodUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentDetailUnit.cs" />
     <Compile Include="Journals\JournalEntryDocumentUnitManager.cs" />
     <Compile Include="BusinessProcess\BatchReportUnit.cs" />

@@ -295,6 +295,44 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> UserRoleBusinessProcessUnit Declaration</summary>
         public virtual IDbSet<UserRoleBusinessProcessUnit> UserRoleBusinessProcessUnit { get; set; }
 
+        /// <summary> FiscalYearUnit Declaration</summary>
+        public virtual IDbSet<FiscalYearUnit> FiscalYearUnit { get; set; }
+        
+        /// <summary> FiscalPeriodUnit Declaration</summary>
+        public virtual IDbSet<FiscalPeriodUnit> FiscalPeriodUnit { get; set; }
+
+        /// <summary> ProjectControlPeriodUnit Declaration</summary>
+        public virtual IDbSet<ProjectControlPeriodUnit> ProjectControlPeriodUnit { get; set; }
+
+        /// <summary> JobWrapEntryDocumentUnit Declaration</summary>
+        public virtual IDbSet<JobWrapEntryDocumentUnit> JobWrapEntryDocumentUnit { get; set; }
+
+        /// <summary> JobWrapDocumentLogUnit Declaration</summary>
+        public virtual IDbSet<JobWrapDocumentLogUnit> JobWrapDocumentLogUnit { get; set; }
+
+        /// <summary> JobEFCUnit Declaration</summary>
+        public virtual IDbSet<JobEFCUnit> JobEFCUnit { get; set; }
+
+        /// <summary> JobWrapCheckLogUnit Declaration</summary>
+        public virtual IDbSet<JobWrapCheckLogUnit> JobWrapCheckLogUnit { get; set; }
+
+        /// <summary> JobWrapSalesLogUnit Declaration</summary>
+        public virtual IDbSet<JobWrapSalesLogUnit> JobWrapSalesLogUnit { get; set; }
+
+        /// <summary> JobWrapAmexLogUnit Declaration</summary>
+        public virtual IDbSet<JobWrapAmexLogUnit> JobWrapAmexLogUnit { get; set; }
+
+        /// <summary> JobWrapPayrollLogUnit Declaration</summary>
+        public virtual IDbSet<JobWrapPayrollLogUnit> JobWrapPayrollLogUnit { get; set; }
+
+        /// <summary> BankRecAdjustmentUnit Declaration</summary>
+        public virtual IDbSet<BankRecAdjustmentUnit> BankRecAdjustmentUnit { get; set; }
+
+        /// <summary> BankRecClearedUnit Declaration</summary>
+        public virtual IDbSet<BankRecClearedUnit> BankRecClearedUnit { get; set; }
+
+        
+
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

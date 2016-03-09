@@ -12,15 +12,15 @@ namespace CAPS.CORPACCOUNTING.CashEntry
     public class CashEntryDocumentDetailUnit : AccountingItemUnit
     {
         /// <summary>Gets or sets the VendorId field. </summary>   
-        public int? VendorId { get; set; }
+        public virtual int? VendorId { get; set; }
 
         [ForeignKey("VendorId")]
-        public VendorUnit Vendor { get; set; }
+        public virtual VendorUnit Vendor { get; set; }
 
         /// <summary>Gets or sets the BankAccountID field. </summary>   
-        public long? BankAccountId { get; set; }
+        public virtual long? BankAccountId { get; set; }
 
         [ForeignKey("BankAccountId")]
-        public BankAccountUnit BankAccount { get; set; }
+        public virtual BankAccountUnit BankAccount { get; set; }
     }
 }

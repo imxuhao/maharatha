@@ -11,12 +11,12 @@ namespace CAPS.CORPACCOUNTING.Journals
     public class JournalEntryDocumentDetailUnit : AccountingItemUnit
     {
         /// <summary>Gets or sets the VendorId field. </summary>   
-        public int? VendorId { get; set; }
+        public virtual int? VendorId { get; set; }
 
         [ForeignKey("VendorId")]
-        public VendorUnit Vendor { get; set; }
+        public virtual VendorUnit Vendor { get; set; }
 
         /// <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
-        public long? PurchaseOrderItemId { get; set; }
+        public virtual long? PurchaseOrderItemId { get; set; }
     }
 }

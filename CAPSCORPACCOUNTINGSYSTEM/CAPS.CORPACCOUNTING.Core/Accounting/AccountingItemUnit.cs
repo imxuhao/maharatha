@@ -102,210 +102,210 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public override long Id { get; set; }
 
         /// <summary>Gets or sets the AccountingDocumentID field. </summary>
-        public long? AccountingDocumentId { get; set; }
+        public virtual long? AccountingDocumentId { get; set; }
 
         [ForeignKey("AccountingDocumentId")]
-        public AccountingHeaderTransactionsUnit AccountingHeaderTransaction { get; set; }
+        public virtual AccountingHeaderTransactionsUnit AccountingHeaderTransaction { get; set; }
 
         /// <summary>Gets or sets the TypeOfTransactionID field. </summary>
-        public TypeofTransaction TypeOfTransactionId { get; set; }
+        public virtual TypeofTransaction TypeOfTransactionId { get; set; }
 
         /// <summary>Gets or sets the TypeOfAmountID field. </summary>
-        public TypeOfAmount TypeOfAmountId { get; set; }
+        public virtual TypeOfAmount TypeOfAmountId { get; set; }
 
         /// <summary>Gets or sets the ItemLinkID field. </summary>
-        public long? ItemLinkId { get; set; }
+        public virtual long? ItemLinkId { get; set; }
 
         /// <summary>Gets or sets the LedgerReference field. </summary>       
-        public string LedgerReference { get; set; }
+        public virtual string LedgerReference { get; set; }
 
         /// <summary>Gets or sets the LedgerDate field. </summary>
         [Column(TypeName = "smalldatetime")]
-        public DateTime? LedgerDate { get; set; }
+        public virtual DateTime? LedgerDate { get; set; }
 
         /// <summary>Gets or sets the LedgerYYYYMM field. </summary>
-        public int? LedgerYyyymm { get; set; }
+        public virtual int? LedgerYyyymm { get; set; }
 
         /// <summary>Gets or sets the AccountID field. </summary>
-        public long AccountId { get; set; }
+        public virtual long AccountId { get; set; }
 
         [ForeignKey("AccountId")]
-        public AccountUnit Account { get; set; }
+        public virtual AccountUnit Account { get; set; }
 
         /// <summary>Gets or sets the JobID field. </summary>
-        public int JobId { get; set; }
+        public virtual int JobId { get; set; }
 
         [ForeignKey("JobId")]
-        public JobUnit Job { get; set; }
+        public virtual JobUnit Job { get; set; }
 
         /// <summary>Gets or sets the ItemMemo field. </summary>   
-        public string ItemMemo { get; set; }
+        public virtual string ItemMemo { get; set; }
 
         /// <summary>Gets or sets the IsAsset field. </summary>
-        public bool IsAsset { get; set; }
+        public virtual bool IsAsset { get; set; }
 
         /// <summary>Gets or sets the AccountRef1 field. </summary>        
-        public string AccountRef1 { get; set; }
+        public virtual string AccountRef1 { get; set; }
 
         /// <summary>Gets or sets the AccountRef2 field. </summary>      
-        public string AccountRef2 { get; set; }
+        public virtual string AccountRef2 { get; set; }
 
         /// <summary>Gets or sets the AccountRef3 field. </summary>
-        public string AccountRef3 { get; set; }
+        public virtual string AccountRef3 { get; set; }
 
         /// <summary>Gets or sets the AccountRef4 field. </summary>       
-        public string AccountRef4 { get; set; }
+        public virtual string AccountRef4 { get; set; }
 
         /// <summary>Gets or sets the AccountRef5 field. </summary>       
-        public string AccountRef5 { get; set; }
+        public virtual string AccountRef5 { get; set; }
 
         /// <summary>Gets or sets the AccountRef6 field. </summary>      
-        public string AccountRef6 { get; set; }
+        public virtual string AccountRef6 { get; set; }
 
         /// <summary>Gets or sets the AccountRef7 field. </summary>       
-        public string AccountRef7 { get; set; }
+        public virtual string AccountRef7 { get; set; }
 
         /// <summary>Gets or sets the AccountRef8 field. </summary>      
-        public string AccountRef8 { get; set; }
+        public virtual string AccountRef8 { get; set; }
 
         /// <summary>Gets or sets the AccountRef9 field. </summary>        
-        public string AccountRef9 { get; set; }
+        public virtual string AccountRef9 { get; set; }
 
         /// <summary>Gets or sets the AccountRef10 field. </summary>        
-        public string AccountRef10 { get; set; }
+        public virtual string AccountRef10 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID1 field. </summary>
-        public long? SubAccountId1 { get; set; }
+        public virtual long? SubAccountId1 { get; set; }
 
         [ForeignKey("SubAccountId1")]
-        public SubAccountUnit SubAccount1 { get; set; }
+        public virtual SubAccountUnit SubAccount1 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID2 field. </summary>
-        public long? SubAccountId2 { get; set; }
+        public virtual long? SubAccountId2 { get; set; }
 
         [ForeignKey("SubAccountId2")]
-        public SubAccountUnit SubAccount2 { get; set; }
+        public virtual SubAccountUnit SubAccount2 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID3 field. </summary>
-        public long? SubAccountId3 { get; set; }
+        public virtual long? SubAccountId3 { get; set; }
 
         [ForeignKey("SubAccountId3")]
-        public SubAccountUnit SubAccount3 { get; set; }
+        public virtual SubAccountUnit SubAccount3 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID4 field. </summary>
-        public long? SubAccountId4 { get; set; }
+        public virtual long? SubAccountId4 { get; set; }
 
         [ForeignKey("SubAccountId4")]
-        public SubAccountUnit SubAccount4 { get; set; }
+        public virtual SubAccountUnit SubAccount4 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID5 field. </summary>
-        public long? SubAccountId5 { get; set; }
+        public virtual long? SubAccountId5 { get; set; }
 
         [ForeignKey("SubAccountId5")]
-        public SubAccountUnit SubAccount5 { get; set; }
+        public virtual SubAccountUnit SubAccount5 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID6 field. </summary>
-        public long? SubAccountId6 { get; set; }
+        public virtual long? SubAccountId6 { get; set; }
 
         [ForeignKey("SubAccountId6")]
-        public SubAccountUnit SubAccount6 { get; set; }
+        public virtual SubAccountUnit SubAccount6 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID7 field. </summary>
-        public long? SubAccountId7 { get; set; }
+        public virtual long? SubAccountId7 { get; set; }
 
         [ForeignKey("SubAccountId7")]
-        public SubAccountUnit SubAccount7 { get; set; }
+        public virtual SubAccountUnit SubAccount7 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID8 field. </summary>
-        public long? SubAccountId8 { get; set; }
+        public virtual long? SubAccountId8 { get; set; }
 
         [ForeignKey("SubAccountId8")]
-        public SubAccountUnit SubAccount8 { get; set; }
+        public virtual SubAccountUnit SubAccount8 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID9 field. </summary>
-        public long? SubAccountId9 { get; set; }
+        public virtual long? SubAccountId9 { get; set; }
 
         [ForeignKey("SubAccountId9")]
-        public SubAccountUnit SubAccount9 { get; set; }
+        public virtual SubAccountUnit SubAccount9 { get; set; }
 
         /// <summary>Gets or sets the SubAccountID10 field. </summary>
-        public long? SubAccountId10 { get; set; }
+        public virtual long? SubAccountId10 { get; set; }
 
         [ForeignKey("SubAccountId10")]
-        public SubAccountUnit SubAccount10 { get; set; }
+        public virtual SubAccountUnit SubAccount10 { get; set; }
 
         /// <summary>Gets or sets the TypeOf1099T4ID field. </summary>
-        public Typeof1099T4? TypeOf1099T4Id { get; set; }
+        public virtual Typeof1099T4? TypeOf1099T4Id { get; set; }
 
         /// <summary>Gets or sets the Amount field. </summary>
-        public decimal? Amount { get; set; }
+        public virtual decimal? Amount { get; set; }
 
         /// <summary>Gets or sets the CompanyCurrencyAmount field. </summary>
-        public decimal? CompanyCurrencyAmount { get; set; }
+        public virtual decimal? CompanyCurrencyAmount { get; set; }
 
         /// <summary>Gets or sets the CurrencyAdjustmentAmount field. </summary>
-        public decimal? CurrencyAdjustmentAmount { get; set; }
+        public virtual decimal? CurrencyAdjustmentAmount { get; set; }
 
         /// <summary>Gets or sets the OriginalItemID field. </summary>
-        public long? OriginalItemId { get; set; }
+        public virtual long? OriginalItemId { get; set; }
 
         /// <summary>Gets or sets the AccountingItemIDLink field. </summary>
-        public long? AccountingItemIdLink { get; set; }
+        public virtual long? AccountingItemIdLink { get; set; }
 
         /// <summary>Gets or sets the IsChanged field. </summary>
-        public bool IsChanged { get; set; }
+        public virtual bool IsChanged { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
-        public bool IsActive { get; set; }
+        public virtual bool IsActive { get; set; }
 
         /// <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
-        public TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
+        public virtual TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
 
         /// <summary>Gets or sets the ReconciliationID field. </summary>
-        public int? ReconciliationId { get; set; }
+        public virtual int? ReconciliationId { get; set; }
 
         [ForeignKey("ReconciliationId")]
-        public BankRecControlUnit BankRecControl { get; set; }
+        public virtual BankRecControlUnit BankRecControl { get; set; }
 
         /// <summary>Gets or sets the IsEnterable field. </summary>
-        public bool IsEnterable { get; set; }
+        public virtual bool IsEnterable { get; set; }
 
         /// <summary>Gets or sets the AccountingItemOrigAmount field. </summary>
-        public decimal? AccountingItemOrigAmount { get; set; }
+        public virtual decimal? AccountingItemOrigAmount { get; set; }
 
         /// <summary>Gets or sets the AccountingItemTypeOfModificationID field. </summary>
-        public int? AccountingItemTypeOfModificationId { get; set; }
+        public virtual int? AccountingItemTypeOfModificationId { get; set; }
 
         /// <summary>Gets or sets the AccountingItemOrigID field. </summary>
-        public long? AccountingItemOrigId { get; set; }    
+        public virtual long? AccountingItemOrigId { get; set; }    
 
         /// <summary>Gets or sets the ICTJobID field. </summary>
-        public int? IctJobId { get; set; }
+        public virtual int? IctJobId { get; set; }
 
         /// <summary>Gets or sets the ICTAccountingItemID field. </summary>
-        public long? IctAccountingItemId { get; set; }
+        public virtual long? IctAccountingItemId { get; set; }
         
 
         /// <summary>Gets or sets the TaxRebateID field. </summary>
-        public int? TaxRebateId { get; set; }
+        public virtual int? TaxRebateId { get; set; }
 
         /// <summary>Gets or sets the CurrencyOverrideRate field. </summary>
-        public double? CurrencyOverrideRate { get; set; }
+        public virtual double? CurrencyOverrideRate { get; set; }
 
         /// <summary>Gets or sets the FunctionalCurrencyAmount field. </summary>
-        public decimal? FunctionalCurrencyAmount { get; set; }
+        public virtual decimal? FunctionalCurrencyAmount { get; set; }
 
         /// <summary>Gets or sets the TypeOfCurrencyRateID field. </summary>
-        public short? TypeOfCurrencyRateId { get; set; }
+        public virtual short? TypeOfCurrencyRateId { get; set; }
 
         /// <summary>Gets or sets the TypeOfCurrencyID field. </summary>
-        public short? TypeOfCurrencyId { get; set; }
+        public virtual short? TypeOfCurrencyId { get; set; }
 
         /// <summary>Gets or sets the HomeCurAmount field. </summary>
-        public decimal? HomeCurAmount { get; set; }
+        public virtual decimal? HomeCurAmount { get; set; }
 
         /// <summary>Gets or sets the CustomForexRate field. </summary>
-        public decimal? CustomForexRate { get; set; }
+        public virtual decimal? CustomForexRate { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public virtual int TenantId { get; set; }

@@ -11,15 +11,15 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
     public class ArInvoiceEntryDocumentDetailUnit : AccountingItemUnit
     {
         /// <summary>Gets or sets the CustomerID field. </summary>   
-        public int? CustomerId { get; set; }
+        public virtual int? CustomerId { get; set; }
 
         [ForeignKey("CustomerId")]
-        public CustomerUnit Customer { get; set; }
+        public virtual CustomerUnit Customer { get; set; }
 
         /// <summary>Gets or sets the BillingTypeID field. </summary>   
-        public int? BillingTypeId { get; set; }
+        public virtual int? BillingTypeId { get; set; }
 
         /// <summary>Gets or sets the BillToCustomerJobID field. </summary>   
-        public int? BillToCustomerJobId { get; set; }
+        public virtual int? BillToCustomerJobId { get; set; }
     }
 }

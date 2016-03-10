@@ -16,7 +16,7 @@ using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.PettyCash;
 using CAPS.CORPACCOUNTING.Payments;
 using CAPS.CORPACCOUNTING.CashEntry;
-using CAPS.CORPACCOUNTING.BusinessProcess;
+using CAPS.CORPACCOUNTING.Reports;
 using CAPS.CORPACCOUNTING.ChargeEntry;
 using CAPS.CORPACCOUNTING.AccountReceivable;
 
@@ -331,9 +331,38 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> ARYTDInvoiceUnit Declaration</summary>
         public virtual IDbSet<ArytdInvoiceUnit> ARYTDInvoiceUnit { get; set; }
 
+        /// <summary> ValueAddedTaxTypeUnit Declaration</summary>
+        public virtual IDbSet<ValueAddedTaxTypeUnit> ValueAddedTaxTypeUnit { get; set; }
+
+        /// <summary> ValueAddedTaxRecoveryUnit Declaration</summary>
+        public virtual IDbSet<ValueAddedTaxRecoveryUnit> ValueAddedTaxRecoveryUnit { get; set; }
+
+        /// <summary> PhoneUnit Declaration</summary>
+        public virtual IDbSet<PhoneUnit> PhoneUnit { get; set; }
+
+        /// <summary> EntityUnit Declaration</summary>
+        public virtual IDbSet<EntityUnit> EntityUnit { get; set; }
+
+        /// <summary> SalesRegionUnit Declaration</summary>
+        public virtual IDbSet<SalesRegionUnit> SalesRegionUnit { get; set; }
+
+        /// <summary> ReportDistributionUnit Declaration</summary>
+        public virtual IDbSet<ReportDistributionUnit> ReportDistributionUnit { get; set; }
+
+
+        /// <summary> ReportDistributionListUnit Declaration</summary>
+        public virtual IDbSet<ReportDistributionListUnit> ReportDistributionListUnit { get; set; }
+
+        /// <summary> ReportUnit Declaration</summary>
+        public virtual IDbSet<ReportUnit> ReportUnit { get; set; }
+
+        /// <summary> UserReportUnit Declaration</summary>
+        public virtual IDbSet<UserReportUnit> UserReportUnit { get; set; }
 
 
         
+
+
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 

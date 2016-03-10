@@ -719,6 +719,42 @@
     <Compile Include="Migrations\201603101153080_Add_ARYTDInvoice_Table.Designer.cs">
       <DependentUpon>201603101153080_Add_ARYTDInvoice_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603101246300_Add_ValueAddedTaxType_Table.cs" />
+    <Compile Include="Migrations\201603101246300_Add_ValueAddedTaxType_Table.Designer.cs">
+      <DependentUpon>201603101246300_Add_ValueAddedTaxType_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101254247_Add_ValueAddedTaxRecovery_Table.cs" />
+    <Compile Include="Migrations\201603101254247_Add_ValueAddedTaxRecovery_Table.Designer.cs">
+      <DependentUpon>201603101254247_Add_ValueAddedTaxRecovery_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101312124_Add_Phone_Table.cs" />
+    <Compile Include="Migrations\201603101312124_Add_Phone_Table.Designer.cs">
+      <DependentUpon>201603101312124_Add_Phone_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101315226_Add_Entity_Table.cs" />
+    <Compile Include="Migrations\201603101315226_Add_Entity_Table.Designer.cs">
+      <DependentUpon>201603101315226_Add_Entity_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101320075_Add_SalesRegion_Table.cs" />
+    <Compile Include="Migrations\201603101320075_Add_SalesRegion_Table.Designer.cs">
+      <DependentUpon>201603101320075_Add_SalesRegion_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101324193_Add_ ReportDistribution_Table.cs" />
+    <Compile Include="Migrations\201603101324193_Add_ ReportDistribution_Table.Designer.cs">
+      <DependentUpon>201603101324193_Add_ ReportDistribution_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101328052_Add_ReportDistributionList_Table.cs" />
+    <Compile Include="Migrations\201603101328052_Add_ReportDistributionList_Table.Designer.cs">
+      <DependentUpon>201603101328052_Add_ReportDistributionList_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101333287_Add_Report_Table.cs" />
+    <Compile Include="Migrations\201603101333287_Add_Report_Table.Designer.cs">
+      <DependentUpon>201603101333287_Add_Report_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101336058_Add_UserReportUnit_Table.cs" />
+    <Compile Include="Migrations\201603101336058_Add_UserReportUnit_Table.Designer.cs">
+      <DependentUpon>201603101336058_Add_UserReportUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1187,6 +1223,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603101153080_Add_ARYTDInvoice_Table.resx">
       <DependentUpon>201603101153080_Add_ARYTDInvoice_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101246300_Add_ValueAddedTaxType_Table.resx">
+      <DependentUpon>201603101246300_Add_ValueAddedTaxType_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101254247_Add_ValueAddedTaxRecovery_Table.resx">
+      <DependentUpon>201603101254247_Add_ValueAddedTaxRecovery_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101312124_Add_Phone_Table.resx">
+      <DependentUpon>201603101312124_Add_Phone_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101315226_Add_Entity_Table.resx">
+      <DependentUpon>201603101315226_Add_Entity_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101320075_Add_SalesRegion_Table.resx">
+      <DependentUpon>201603101320075_Add_SalesRegion_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101324193_Add_ ReportDistribution_Table.resx">
+      <DependentUpon>201603101324193_Add_ ReportDistribution_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101328052_Add_ReportDistributionList_Table.resx">
+      <DependentUpon>201603101328052_Add_ReportDistributionList_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101333287_Add_Report_Table.resx">
+      <DependentUpon>201603101333287_Add_Report_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101336058_Add_UserReportUnit_Table.resx">
+      <DependentUpon>201603101336058_Add_UserReportUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

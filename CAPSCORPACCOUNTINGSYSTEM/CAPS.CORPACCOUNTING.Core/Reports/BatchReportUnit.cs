@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CAPS.CORPACCOUNTING.BusinessProcess
+namespace CAPS.CORPACCOUNTING.Reports
 {
 
     /// <summary>

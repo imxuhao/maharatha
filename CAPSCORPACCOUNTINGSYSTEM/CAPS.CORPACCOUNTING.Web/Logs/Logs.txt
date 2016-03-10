@@ -24699,3 +24699,848 @@ DEBUG 2016-03-04 08:27:05,541 [77baa] Hangfire.Server.Worker                   -
 DEBUG 2016-03-04 08:27:05,569 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' stopped.
 INFO  2016-03-04 08:27:05,569 [123  ] Hangfire.BackgroundJobServer             - Hangfire Server stopped.
 DEBUG 2016-03-04 08:27:05,569 [123  ] bp.Hangfire.HangfireBackgroundJobManager - WaitToStop background worker: Abp.Hangfire.HangfireBackgroundJobManager
+DEBUG 2016-03-10 22:28:32,716 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-03-10 22:28:34,337 [1    ] Abp.Modules.AbpModuleManager             - Found 18 ABP modules in total.
+DEBUG 2016-03-10 22:28:34,341 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Hangfire.AbpHangfireModule, Abp.HangFire, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Owin.AbpOwinModule, Abp.Owin, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.OData.AbpWebApiODataModule, Abp.Web.Api.OData, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,343 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.SignalR.AbpWebSignalRModule, Abp.Web.SignalR, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,344 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.Zero, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,344 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule, Abp.Zero.EntityFramework, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,344 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.Ldap.AbpZeroLdapModule, Abp.Zero.Ldap, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,344 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGApplicationModule, CAPS.CORPACCOUNTING.Application, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,344 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGCoreModule, CAPS.CORPACCOUNTING.Core, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,344 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGDataModule, CAPS.CORPACCOUNTING.EntityFramework, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,344 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.Web.CORPACCOUNTINGWebModule, CAPS.CORPACCOUNTING.Web, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,344 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.WebApi.CORPACCOUNTINGWebApiModule, CAPS.CORPACCOUNTING.WebApi, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:28:34,348 [1    ] Abp.Modules.AbpModuleManager             - 18 modules loaded.
+DEBUG 2016-03-10 22:28:34,401 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:28:34,401 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:28:34,401 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:28:34,401 [1    ] o.Configuration.LanguageManagementConfig - Converted CORPACCOUNTING (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+INFO  2016-03-10 22:28:37,500 [1    ] Hangfire.SqlServer.SqlServerStorage      - Start installing Hangfire SQL objects...
+INFO  2016-03-10 22:28:38,284 [1    ] Hangfire.SqlServer.SqlServerStorage      - Hangfire SQL objects installed.
+DEBUG 2016-03-10 22:28:40,457 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2016-03-10 22:28:40,465 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-03-10 22:28:40,466 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-03-10 22:28:40,483 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2016-03-10 22:28:40,492 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: CORPACCOUNTING
+DEBUG 2016-03-10 22:28:40,503 [1    ] bp.Hangfire.HangfireBackgroundJobManager - Start background worker: Abp.Hangfire.HangfireBackgroundJobManager
+INFO  2016-03-10 22:28:40,516 [1    ] Hangfire.BackgroundJobServer             - Starting Hangfire Server
+INFO  2016-03-10 22:28:40,518 [1    ] Hangfire.BackgroundJobServer             - Using job storage: 'SQL Server: .\SqlExpress@DEVCORPACCOUNTING1'.
+INFO  2016-03-10 22:28:40,519 [1    ] Hangfire.BackgroundJobServer             - Using the following options for SQL Server job storage:
+INFO  2016-03-10 22:28:40,519 [1    ] Hangfire.BackgroundJobServer             -     Queue poll interval: 00:00:15.
+INFO  2016-03-10 22:28:40,519 [1    ] Hangfire.BackgroundJobServer             - Using the following options for Hangfire Server:
+INFO  2016-03-10 22:28:40,519 [1    ] Hangfire.BackgroundJobServer             -     Worker count: 20.
+INFO  2016-03-10 22:28:40,519 [1    ] Hangfire.BackgroundJobServer             -     Listening queues: 'default'.
+INFO  2016-03-10 22:28:40,519 [1    ] Hangfire.BackgroundJobServer             -     Shutdown timeout: 00:00:15.
+INFO  2016-03-10 22:28:40,519 [1    ] Hangfire.BackgroundJobServer             -     Schedule polling interval: 00:00:15.
+DEBUG 2016-03-10 22:28:40,539 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' started.
+DEBUG 2016-03-10 22:28:40,754 [tbeat] Hangfire.Server.ServerHeartbeat          - Background process 'ServerHeartbeat' started.
+DEBUG 2016-03-10 22:28:40,757 [chdog] Hangfire.Server.ServerWatchdog           - Background process 'ServerWatchdog' started.
+DEBUG 2016-03-10 22:28:40,760 [nager] Hangfire.SqlServer.ExpirationManager     - Background process 'Hangfire.SqlServer.ExpirationManager' started.
+DEBUG 2016-03-10 22:28:40,775 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'AggregatedCounter'...
+DEBUG 2016-03-10 22:28:40,776 [gator] Hangfire.SqlServer.CountersAggregator    - Background process 'Hangfire.SqlServer.CountersAggregator' started.
+DEBUG 2016-03-10 22:28:40,779 [gator] Hangfire.SqlServer.CountersAggregator    - Aggregating records in 'Counter' table...
+DEBUG 2016-03-10 22:28:40,790 [899bb] Hangfire.Server.Worker                   - Background process 'Worker #67a899bb' started.
+DEBUG 2016-03-10 22:28:40,799 [6f4ea] Hangfire.Server.Worker                   - Background process 'Worker #bad6f4ea' started.
+DEBUG 2016-03-10 22:28:40,813 [c945f] Hangfire.Server.Worker                   - Background process 'Worker #eabc945f' started.
+DEBUG 2016-03-10 22:28:40,818 [72c26] Hangfire.Server.Worker                   - Background process 'Worker #5c972c26' started.
+DEBUG 2016-03-10 22:28:40,821 [315ab] Hangfire.Server.Worker                   - Background process 'Worker #fd2315ab' started.
+DEBUG 2016-03-10 22:28:40,857 [87660] Hangfire.Server.Worker                   - Background process 'Worker #48187660' started.
+DEBUG 2016-03-10 22:28:40,861 [82058] Hangfire.Server.Worker                   - Background process 'Worker #95882058' started.
+DEBUG 2016-03-10 22:28:40,867 [30c6f] Hangfire.Server.Worker                   - Background process 'Worker #d1730c6f' started.
+DEBUG 2016-03-10 22:28:40,867 [66aa6] Hangfire.Server.Worker                   - Background process 'Worker #bcb66aa6' started.
+DEBUG 2016-03-10 22:28:40,870 [db9eb] Hangfire.Server.Worker                   - Background process 'Worker #5bcdb9eb' started.
+DEBUG 2016-03-10 22:28:40,881 [f03b2] Hangfire.Server.Worker                   - Background process 'Worker #7c9f03b2' started.
+DEBUG 2016-03-10 22:28:40,925 [63931] Hangfire.Server.Worker                   - Background process 'Worker #eb763931' started.
+DEBUG 2016-03-10 22:28:40,947 [84dfe] Hangfire.Server.Worker                   - Background process 'Worker #cd884dfe' started.
+DEBUG 2016-03-10 22:28:41,005 [082f6] Hangfire.Server.Worker                   - Background process 'Worker #4b7082f6' started.
+DEBUG 2016-03-10 22:28:41,034 [5c83c] Hangfire.Server.Worker                   - Background process 'Worker #b2b5c83c' started.
+DEBUG 2016-03-10 22:28:41,051 [38c8a] Hangfire.Server.Worker                   - Background process 'Worker #ab038c8a' started.
+DEBUG 2016-03-10 22:28:41,115 [403e2] Hangfire.Server.Worker                   - Background process 'Worker #819403e2' started.
+DEBUG 2016-03-10 22:28:41,138 [899a0] Hangfire.Server.Worker                   - Background process 'Worker #f51899a0' started.
+DEBUG 2016-03-10 22:28:41,174 [93dc8] Hangfire.Server.Worker                   - Background process 'Worker #a6993dc8' started.
+DEBUG 2016-03-10 22:28:41,181 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Job'...
+DEBUG 2016-03-10 22:28:41,215 [41c98] Hangfire.Server.Worker                   - Background process 'Worker #65b41c98' started.
+DEBUG 2016-03-10 22:28:41,224 [duler] Hangfire.Server.DelayedJobScheduler      - Background process 'DelayedJobScheduler' started.
+DEBUG 2016-03-10 22:28:41,234 [duler] Hangfire.Server.RecurringJobScheduler    - Background process 'RecurringJobScheduler' started.
+DEBUG 2016-03-10 22:28:41,443 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'List'...
+DEBUG 2016-03-10 22:28:41,567 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Set'...
+DEBUG 2016-03-10 22:28:41,587 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Hash'...
+DEBUG 2016-03-10 22:28:41,869 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 49 classes defines auto mapping attributes
+DEBUG 2016-03-10 22:28:41,869 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2016-03-10 22:28:41,885 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Sessions.Dto.UserLoginInfoDto
+DEBUG 2016-03-10 22:28:41,886 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto
+DEBUG 2016-03-10 22:28:41,893 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto
+DEBUG 2016-03-10 22:28:41,896 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitUserListDto
+DEBUG 2016-03-10 22:28:41,898 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Notifications.Dto.NotificationSubscriptionWithDisplayNameDto
+DEBUG 2016-03-10 22:28:41,898 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantListDto
+DEBUG 2016-03-10 22:28:41,899 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantEditDto
+DEBUG 2016-03-10 22:28:41,902 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto
+DEBUG 2016-03-10 22:28:41,903 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto
+DEBUG 2016-03-10 22:28:41,905 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto
+DEBUG 2016-03-10 22:28:41,911 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput
+DEBUG 2016-03-10 22:28:41,916 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput
+DEBUG 2016-03-10 22:28:41,921 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto
+DEBUG 2016-03-10 22:28:41,924 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto
+DEBUG 2016-03-10 22:28:41,928 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto
+DEBUG 2016-03-10 22:28:41,932 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto
+DEBUG 2016-03-10 22:28:41,933 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.SalesRepUnitDto
+DEBUG 2016-03-10 22:28:41,934 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto
+DEBUG 2016-03-10 22:28:41,936 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto
+DEBUG 2016-03-10 22:28:41,938 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Localization.Dto.ApplicationLanguageEditDto
+DEBUG 2016-03-10 22:28:41,939 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Localization.Dto.ApplicationLanguageListDto
+DEBUG 2016-03-10 22:28:41,940 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto
+DEBUG 2016-03-10 22:28:41,944 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto
+DEBUG 2016-03-10 22:28:41,947 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobBudgetUnitDto
+DEBUG 2016-03-10 22:28:41,949 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto
+DEBUG 2016-03-10 22:28:41,950 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto
+DEBUG 2016-03-10 22:28:41,957 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto
+DEBUG 2016-03-10 22:28:41,960 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto
+DEBUG 2016-03-10 22:28:41,962 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.EditionEditDto
+DEBUG 2016-03-10 22:28:41,963 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.FlatFeatureDto
+DEBUG 2016-03-10 22:28:41,964 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.EditionListDto
+DEBUG 2016-03-10 22:28:41,965 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Auditing.Dto.AuditLogListDto
+DEBUG 2016-03-10 22:28:41,967 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Roles.Dto.RoleListDto
+DEBUG 2016-03-10 22:28:41,970 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Roles.Dto.RoleEditDto
+DEBUG 2016-03-10 22:28:41,971 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Dto.FlatPermissionDto
+DEBUG 2016-03-10 22:28:41,972 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.CurrentUserProfileEditDto
+DEBUG 2016-03-10 22:28:41,975 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserListDto
+DEBUG 2016-03-10 22:28:41,977 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto
+DEBUG 2016-03-10 22:28:41,979 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserListDto+UserListRoleDto
+DEBUG 2016-03-10 22:28:41,980 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.UserPermissionsEditViewModel
+DEBUG 2016-03-10 22:28:41,981 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.CreateOrEditUserModalViewModel
+DEBUG 2016-03-10 22:28:41,981 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Roles.CreateOrEditRoleModalViewModel
+DEBUG 2016-03-10 22:28:41,982 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Profile.MySettingsViewModel
+DEBUG 2016-03-10 22:28:41,985 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Editions.CreateOrEditEditionModalViewModel
+DEBUG 2016-03-10 22:28:41,986 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Tenants.TenantFeaturesEditViewModel
+DEBUG 2016-03-10 22:28:41,987 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.OrganizationUnits.EditOrganizationUnitModalViewModel
+DEBUG 2016-03-10 22:28:41,987 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Languages.CreateOrEditLanguageModalViewModel
+DEBUG 2016-03-10 22:28:41,988 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Models.Account.TenantSelectionViewModel+TenantInfo
+DEBUG 2016-03-10 22:28:41,996 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Tenants.Dashboard.ITenantDashboardAppService' with service name 'app/tenantDashboard'.
+DEBUG 2016-03-10 22:28:41,998 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Sessions.ISessionAppService' with service name 'app/session'.
+DEBUG 2016-03-10 22:28:41,999 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService' with service name 'app/aPHeaderTransactions'.
+DEBUG 2016-03-10 22:28:42,000 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService' with service name 'app/organizationUnit'.
+DEBUG 2016-03-10 22:28:42,001 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Notifications.INotificationAppService' with service name 'app/notification'.
+DEBUG 2016-03-10 22:28:42,002 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService' with service name 'app/tenant'.
+DEBUG 2016-03-10 22:28:42,003 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService' with service name 'app/employeeUnit'.
+DEBUG 2016-03-10 22:28:42,004 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService' with service name 'app/customerUnit'.
+DEBUG 2016-03-10 22:28:42,006 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService' with service name 'app/addressUnit'.
+DEBUG 2016-03-10 22:28:42,007 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService' with service name 'app/locationSetUnit'.
+DEBUG 2016-03-10 22:28:42,009 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService' with service name 'app/vendorUnit'.
+DEBUG 2016-03-10 22:28:42,010 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService' with service name 'app/accountUnit'.
+DEBUG 2016-03-10 22:28:42,011 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService' with service name 'app/coaUnit'.
+DEBUG 2016-03-10 22:28:42,012 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService' with service name 'app/salesRepUnit'.
+DEBUG 2016-03-10 22:28:42,014 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService' with service name 'app/customerPaymentTermUnit'.
+DEBUG 2016-03-10 22:28:42,015 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService' with service name 'app/vendorPaymentTermUnit'.
+DEBUG 2016-03-10 22:28:42,016 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Localization.ILanguageAppService' with service name 'app/language'.
+DEBUG 2016-03-10 22:28:42,018 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService' with service name 'app/journalEntryDocument'.
+DEBUG 2016-03-10 22:28:42,019 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService' with service name 'app/jobAccountUnit'.
+DEBUG 2016-03-10 22:28:42,020 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService' with service name 'app/jobBudgetUnit'.
+DEBUG 2016-03-10 22:28:42,022 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService' with service name 'app/jobLocation'.
+DEBUG 2016-03-10 22:28:42,023 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService' with service name 'app/jobCommercial'.
+DEBUG 2016-03-10 22:28:42,026 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService' with service name 'app/rollupCenterUnit'.
+DEBUG 2016-03-10 22:28:42,027 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService' with service name 'app/jobUnit'.
+DEBUG 2016-03-10 22:28:42,029 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Editions.IEditionAppService' with service name 'app/edition'.
+DEBUG 2016-03-10 22:28:42,030 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Configuration.Host.IHostSettingsAppService' with service name 'app/hostSettings'.
+DEBUG 2016-03-10 22:28:42,031 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Configuration.Tenants.ITenantSettingsAppService' with service name 'app/tenantSettings'.
+DEBUG 2016-03-10 22:28:42,032 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Common.ICommonLookupAppService' with service name 'app/commonLookup'.
+DEBUG 2016-03-10 22:28:42,033 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Auditing.IAuditLogAppService' with service name 'app/auditLog'.
+DEBUG 2016-03-10 22:28:42,035 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService' with service name 'app/role'.
+DEBUG 2016-03-10 22:28:42,036 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.IUserLinkAppService' with service name 'app/userLink'.
+DEBUG 2016-03-10 22:28:42,037 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.IUserAppService' with service name 'app/user'.
+DEBUG 2016-03-10 22:28:42,038 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.Profile.IProfileAppService' with service name 'app/profile'.
+ERROR 2016-03-10 22:28:49,067 [7    ] CCOUNTING.Web.Controllers.HomeController - The model backing the 'CORPACCOUNTINGDbContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+System.InvalidOperationException: The model backing the 'CORPACCOUNTINGDbContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+   at System.Data.Entity.CreateDatabaseIfNotExists`1.InitializeDatabase(TContext context)
+   at System.Data.Entity.Internal.InternalContext.<>c__DisplayClassf`1.<CreateInitializationAction>b__e()
+   at System.Data.Entity.Internal.InternalContext.PerformInitializationAction(Action action)
+   at System.Data.Entity.Internal.InternalContext.PerformDatabaseInitialization()
+   at System.Data.Entity.Internal.LazyInternalContext.<InitializeDatabase>b__4(InternalContext c)
+   at System.Data.Entity.Internal.RetryAction`1.PerformAction(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeDatabaseAction(Action`1 action)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeDatabase()
+   at System.Data.Entity.Database.Initialize(Boolean force)
+   at Abp.EntityFramework.AbpDbContext.Initialize()
+   at Castle.MicroKernel.LifecycleConcerns.InitializationConcern.Apply(ComponentModel model, Object component)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.ApplyConcerns(IEnumerable`1 steps, Object instance)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.ApplyCommissionConcerns(Object instance)
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context)
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context, Burden burden)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.CreateInstance(CreationContext context, Boolean trackedExternally)
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context, IReleasePolicy releasePolicy)
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired, Burden& burden)
+   at Castle.MicroKernel.Handlers.ExtendedHandler.InvokeResolvePipeline(Int32 extensionIndex, ResolveInvocation invocation)
+   at Castle.MicroKernel.Handlers.ExtendedHandler.<>c__DisplayClass6.<InvokeResolvePipeline>b__5()
+   at Castle.MicroKernel.Handlers.ResolveInvocation.Proceed()
+   at Castle.MicroKernel.Handlers.ComponentLifecycleExtension.Intercept(ResolveInvocation invocation)
+   at Castle.MicroKernel.Handlers.ExtendedHandler.InvokeResolvePipeline(Int32 extensionIndex, ResolveInvocation invocation)
+   at Castle.MicroKernel.Handlers.ExtendedHandler.Resolve(CreationContext context, Boolean instanceRequired)
+   at Castle.MicroKernel.Handlers.AbstractHandler.Resolve(CreationContext context)
+   at Castle.MicroKernel.DefaultKernel.ResolveComponent(IHandler handler, Type service, IDictionary additionalArguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Castle.MicroKernel.IKernelInternal.Resolve(Type service, IDictionary arguments, IReleasePolicy policy)
+   at Castle.MicroKernel.DefaultKernel.Resolve(Type service, IDictionary arguments)
+   at Castle.Windsor.WindsorContainer.Resolve[T]()
+   at Abp.Dependency.IocManager.Resolve[T]()
+   at Abp.EntityFramework.Uow.EfUnitOfWork.Resolve[TDbContext]()
+   at Abp.EntityFramework.Uow.EfUnitOfWork.GetOrCreateDbContext[TDbContext]()
+   at Abp.EntityFramework.Uow.UnitOfWorkExtensions.GetDbContext[TDbContext](IActiveUnitOfWork unitOfWork)
+   at Abp.EntityFramework.Uow.UnitOfWorkDbContextProvider`1.get_DbContext()
+   at Castle.Proxies.EfRepositoryBase`3Proxy_10.get_Context_callback()
+   at Castle.Proxies.Invocations.EfRepositoryBase`3_get_Context_14.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Abp.Domain.Uow.UnitOfWorkInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.EfRepositoryBase`3Proxy_10.get_Context()
+   at Abp.EntityFramework.Repositories.EfRepositoryBase`3.get_Table()
+   at Castle.Proxies.EfRepositoryBase`3Proxy_10.get_Table_callback()
+   at Castle.Proxies.Invocations.EfRepositoryBase`3_get_Table_14.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Abp.Domain.Uow.UnitOfWorkInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.EfRepositoryBase`3Proxy_10.get_Table()
+   at Abp.EntityFramework.Repositories.EfRepositoryBase`3.InsertAsync(TEntity entity)
+   at Castle.Proxies.EfRepositoryBase`3Proxy_10.InsertAsync_callback(AuditLog entity)
+   at Castle.Proxies.Invocations.EfRepositoryBase`3_InsertAsync_14.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Abp.Domain.Uow.UnitOfWorkInterceptor.PerformAsyncUow(IInvocation invocation, UnitOfWorkOptions options)
+   at Abp.Domain.Uow.UnitOfWorkInterceptor.PerformUow(IInvocation invocation, UnitOfWorkOptions options)
+   at Abp.Domain.Uow.UnitOfWorkInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.EfRepositoryBase`3Proxy_10.InsertAsync(AuditLog entity)
+   at Abp.Auditing.AuditingStore.SaveAsync(AuditInfo auditInfo)
+   at Abp.Auditing.AuditingStoreExtensions.<>c__DisplayClass0_0.<Save>b__0()
+   at System.Threading.Tasks.Task`1.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Nito.AsyncEx.Synchronous.TaskExtensions.WaitAndUnwrapException(Task task)
+   at Nito.AsyncEx.AsyncContext.<>c__DisplayClass3.<Run>b__1(Task t)
+   at System.Threading.Tasks.ContinuationTaskFromTask.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Nito.AsyncEx.Synchronous.TaskExtensions.WaitAndUnwrapException(Task task)
+   at Nito.AsyncEx.AsyncContext.Run(Func`1 action)
+   at Abp.Threading.AsyncHelper.RunSync(Func`1 action)
+   at Abp.Auditing.AuditingStoreExtensions.Save(IAuditingStore auditingStore, AuditInfo auditInfo)
+   at Abp.Web.Mvc.Controllers.AbpController.HandleAuditingAfterAction(ActionExecutedContext filterContext)
+   at Abp.Web.Mvc.Controllers.AbpController.OnActionExecuted(ActionExecutedContext filterContext)
+   at System.Web.Mvc.Controller.System.Web.Mvc.IActionFilter.OnActionExecuted(ActionExecutedContext filterContext)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+DEBUG 2016-03-10 22:29:51,053 [37   ] bp.Hangfire.HangfireBackgroundJobManager - Stop background worker: Abp.Hangfire.HangfireBackgroundJobManager
+DEBUG 2016-03-10 22:29:51,054 [tbeat] Hangfire.Server.ServerHeartbeat          - Background process 'ServerHeartbeat' stopped.
+DEBUG 2016-03-10 22:29:51,054 [duler] Hangfire.Server.RecurringJobScheduler    - Background process 'RecurringJobScheduler' stopped.
+DEBUG 2016-03-10 22:29:51,054 [403e2] Hangfire.Server.Worker                   - Background process 'Worker #819403e2' stopped.
+DEBUG 2016-03-10 22:29:51,054 [duler] Hangfire.Server.DelayedJobScheduler      - Background process 'DelayedJobScheduler' stopped.
+DEBUG 2016-03-10 22:29:51,054 [41c98] Hangfire.Server.Worker                   - Background process 'Worker #65b41c98' stopped.
+DEBUG 2016-03-10 22:29:51,054 [899a0] Hangfire.Server.Worker                   - Background process 'Worker #f51899a0' stopped.
+DEBUG 2016-03-10 22:29:51,054 [84dfe] Hangfire.Server.Worker                   - Background process 'Worker #cd884dfe' stopped.
+DEBUG 2016-03-10 22:29:51,054 [082f6] Hangfire.Server.Worker                   - Background process 'Worker #4b7082f6' stopped.
+DEBUG 2016-03-10 22:29:51,055 [38c8a] Hangfire.Server.Worker                   - Background process 'Worker #ab038c8a' stopped.
+DEBUG 2016-03-10 22:29:51,055 [87660] Hangfire.Server.Worker                   - Background process 'Worker #48187660' stopped.
+DEBUG 2016-03-10 22:29:51,055 [899bb] Hangfire.Server.Worker                   - Background process 'Worker #67a899bb' stopped.
+DEBUG 2016-03-10 22:29:51,055 [63931] Hangfire.Server.Worker                   - Background process 'Worker #eb763931' stopped.
+DEBUG 2016-03-10 22:29:51,056 [gator] Hangfire.SqlServer.CountersAggregator    - Background process 'Hangfire.SqlServer.CountersAggregator' stopped.
+DEBUG 2016-03-10 22:29:51,056 [db9eb] Hangfire.Server.Worker                   - Background process 'Worker #5bcdb9eb' stopped.
+DEBUG 2016-03-10 22:29:51,056 [72c26] Hangfire.Server.Worker                   - Background process 'Worker #5c972c26' stopped.
+DEBUG 2016-03-10 22:29:51,056 [chdog] Hangfire.Server.ServerWatchdog           - Background process 'ServerWatchdog' stopped.
+DEBUG 2016-03-10 22:29:51,056 [c945f] Hangfire.Server.Worker                   - Background process 'Worker #eabc945f' stopped.
+DEBUG 2016-03-10 22:29:51,057 [315ab] Hangfire.Server.Worker                   - Background process 'Worker #fd2315ab' stopped.
+DEBUG 2016-03-10 22:29:51,057 [30c6f] Hangfire.Server.Worker                   - Background process 'Worker #d1730c6f' stopped.
+DEBUG 2016-03-10 22:29:51,057 [66aa6] Hangfire.Server.Worker                   - Background process 'Worker #bcb66aa6' stopped.
+DEBUG 2016-03-10 22:29:51,057 [5c83c] Hangfire.Server.Worker                   - Background process 'Worker #b2b5c83c' stopped.
+DEBUG 2016-03-10 22:29:51,057 [f03b2] Hangfire.Server.Worker                   - Background process 'Worker #7c9f03b2' stopped.
+DEBUG 2016-03-10 22:29:51,057 [6f4ea] Hangfire.Server.Worker                   - Background process 'Worker #bad6f4ea' stopped.
+DEBUG 2016-03-10 22:29:51,057 [nager] Hangfire.SqlServer.ExpirationManager     - Background process 'Hangfire.SqlServer.ExpirationManager' stopped.
+DEBUG 2016-03-10 22:29:51,057 [82058] Hangfire.Server.Worker                   - Background process 'Worker #95882058' stopped.
+DEBUG 2016-03-10 22:29:51,057 [93dc8] Hangfire.Server.Worker                   - Background process 'Worker #a6993dc8' stopped.
+DEBUG 2016-03-10 22:29:51,060 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' stopped.
+INFO  2016-03-10 22:29:51,060 [37   ] Hangfire.BackgroundJobServer             - Hangfire Server stopped.
+DEBUG 2016-03-10 22:29:51,061 [37   ] bp.Hangfire.HangfireBackgroundJobManager - WaitToStop background worker: Abp.Hangfire.HangfireBackgroundJobManager
+DEBUG 2016-03-10 22:31:05,194 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-03-10 22:31:06,418 [1    ] Abp.Modules.AbpModuleManager             - Found 18 ABP modules in total.
+DEBUG 2016-03-10 22:31:06,421 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,422 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,423 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,423 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Hangfire.AbpHangfireModule, Abp.HangFire, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,423 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Owin.AbpOwinModule, Abp.Owin, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,423 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,423 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.OData.AbpWebApiODataModule, Abp.Web.Api.OData, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,423 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,423 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,423 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.SignalR.AbpWebSignalRModule, Abp.Web.SignalR, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,424 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.Zero, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,424 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule, Abp.Zero.EntityFramework, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,424 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.Ldap.AbpZeroLdapModule, Abp.Zero.Ldap, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,424 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGApplicationModule, CAPS.CORPACCOUNTING.Application, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,424 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGCoreModule, CAPS.CORPACCOUNTING.Core, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,424 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGDataModule, CAPS.CORPACCOUNTING.EntityFramework, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,424 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.Web.CORPACCOUNTINGWebModule, CAPS.CORPACCOUNTING.Web, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,424 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.WebApi.CORPACCOUNTINGWebApiModule, CAPS.CORPACCOUNTING.WebApi, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:31:06,430 [1    ] Abp.Modules.AbpModuleManager             - 18 modules loaded.
+DEBUG 2016-03-10 22:31:06,501 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:31:06,501 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:31:06,501 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:31:06,501 [1    ] o.Configuration.LanguageManagementConfig - Converted CORPACCOUNTING (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+INFO  2016-03-10 22:31:07,024 [1    ] Hangfire.SqlServer.SqlServerStorage      - Start installing Hangfire SQL objects...
+INFO  2016-03-10 22:31:07,581 [1    ] Hangfire.SqlServer.SqlServerStorage      - Hangfire SQL objects installed.
+DEBUG 2016-03-10 22:31:08,732 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2016-03-10 22:31:08,737 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-03-10 22:31:08,737 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-03-10 22:31:08,746 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2016-03-10 22:31:08,752 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: CORPACCOUNTING
+DEBUG 2016-03-10 22:31:08,760 [1    ] bp.Hangfire.HangfireBackgroundJobManager - Start background worker: Abp.Hangfire.HangfireBackgroundJobManager
+INFO  2016-03-10 22:31:08,770 [1    ] Hangfire.BackgroundJobServer             - Starting Hangfire Server
+INFO  2016-03-10 22:31:08,772 [1    ] Hangfire.BackgroundJobServer             - Using job storage: 'SQL Server: .\SqlExpress@DEVCORPACCOUNTING1'.
+INFO  2016-03-10 22:31:08,772 [1    ] Hangfire.BackgroundJobServer             - Using the following options for SQL Server job storage:
+INFO  2016-03-10 22:31:08,772 [1    ] Hangfire.BackgroundJobServer             -     Queue poll interval: 00:00:15.
+INFO  2016-03-10 22:31:08,772 [1    ] Hangfire.BackgroundJobServer             - Using the following options for Hangfire Server:
+INFO  2016-03-10 22:31:08,772 [1    ] Hangfire.BackgroundJobServer             -     Worker count: 20.
+INFO  2016-03-10 22:31:08,772 [1    ] Hangfire.BackgroundJobServer             -     Listening queues: 'default'.
+INFO  2016-03-10 22:31:08,772 [1    ] Hangfire.BackgroundJobServer             -     Shutdown timeout: 00:00:15.
+INFO  2016-03-10 22:31:08,772 [1    ] Hangfire.BackgroundJobServer             -     Schedule polling interval: 00:00:15.
+DEBUG 2016-03-10 22:31:08,789 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' started.
+DEBUG 2016-03-10 22:31:08,937 [tbeat] Hangfire.Server.ServerHeartbeat          - Background process 'ServerHeartbeat' started.
+DEBUG 2016-03-10 22:31:08,940 [chdog] Hangfire.Server.ServerWatchdog           - Background process 'ServerWatchdog' started.
+DEBUG 2016-03-10 22:31:08,950 [nager] Hangfire.SqlServer.ExpirationManager     - Background process 'Hangfire.SqlServer.ExpirationManager' started.
+DEBUG 2016-03-10 22:31:08,957 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'AggregatedCounter'...
+DEBUG 2016-03-10 22:31:08,962 [gator] Hangfire.SqlServer.CountersAggregator    - Background process 'Hangfire.SqlServer.CountersAggregator' started.
+DEBUG 2016-03-10 22:31:08,964 [gator] Hangfire.SqlServer.CountersAggregator    - Aggregating records in 'Counter' table...
+DEBUG 2016-03-10 22:31:08,967 [20d39] Hangfire.Server.Worker                   - Background process 'Worker #4ce20d39' started.
+DEBUG 2016-03-10 22:31:08,992 [ca420] Hangfire.Server.Worker                   - Background process 'Worker #516ca420' started.
+DEBUG 2016-03-10 22:31:08,994 [0b0ac] Hangfire.Server.Worker                   - Background process 'Worker #21f0b0ac' started.
+DEBUG 2016-03-10 22:31:09,007 [8aa36] Hangfire.Server.Worker                   - Background process 'Worker #7ba8aa36' started.
+DEBUG 2016-03-10 22:31:09,028 [05e82] Hangfire.Server.Worker                   - Background process 'Worker #3df05e82' started.
+DEBUG 2016-03-10 22:31:09,032 [e7656] Hangfire.Server.Worker                   - Background process 'Worker #b5ce7656' started.
+DEBUG 2016-03-10 22:31:09,067 [92d40] Hangfire.Server.Worker                   - Background process 'Worker #3e392d40' started.
+DEBUG 2016-03-10 22:31:09,083 [dc146] Hangfire.Server.Worker                   - Background process 'Worker #3e0dc146' started.
+DEBUG 2016-03-10 22:31:09,088 [a1c31] Hangfire.Server.Worker                   - Background process 'Worker #458a1c31' started.
+DEBUG 2016-03-10 22:31:09,136 [52e70] Hangfire.Server.Worker                   - Background process 'Worker #d1252e70' started.
+DEBUG 2016-03-10 22:31:09,140 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Job'...
+DEBUG 2016-03-10 22:31:09,164 [37ea0] Hangfire.Server.Worker                   - Background process 'Worker #d8c37ea0' started.
+DEBUG 2016-03-10 22:31:09,196 [fdbb7] Hangfire.Server.Worker                   - Background process 'Worker #d18fdbb7' started.
+DEBUG 2016-03-10 22:31:09,197 [85a71] Hangfire.Server.Worker                   - Background process 'Worker #7b385a71' started.
+DEBUG 2016-03-10 22:31:09,211 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'List'...
+DEBUG 2016-03-10 22:31:09,219 [323b2] Hangfire.Server.Worker                   - Background process 'Worker #758323b2' started.
+DEBUG 2016-03-10 22:31:09,247 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Set'...
+DEBUG 2016-03-10 22:31:09,248 [471f2] Hangfire.Server.Worker                   - Background process 'Worker #fec471f2' started.
+DEBUG 2016-03-10 22:31:09,268 [e7d7e] Hangfire.Server.Worker                   - Background process 'Worker #f1ae7d7e' started.
+DEBUG 2016-03-10 22:31:09,274 [0f261] Hangfire.Server.Worker                   - Background process 'Worker #6d20f261' started.
+DEBUG 2016-03-10 22:31:09,284 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Hash'...
+DEBUG 2016-03-10 22:31:09,311 [254c3] Hangfire.Server.Worker                   - Background process 'Worker #c50254c3' started.
+DEBUG 2016-03-10 22:31:09,321 [b2fe5] Hangfire.Server.Worker                   - Background process 'Worker #370b2fe5' started.
+DEBUG 2016-03-10 22:31:09,397 [b73e1] Hangfire.Server.Worker                   - Background process 'Worker #8dab73e1' started.
+DEBUG 2016-03-10 22:31:09,404 [duler] Hangfire.Server.DelayedJobScheduler      - Background process 'DelayedJobScheduler' started.
+DEBUG 2016-03-10 22:31:09,405 [duler] Hangfire.Server.RecurringJobScheduler    - Background process 'RecurringJobScheduler' started.
+DEBUG 2016-03-10 22:31:09,831 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 49 classes defines auto mapping attributes
+DEBUG 2016-03-10 22:31:09,831 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2016-03-10 22:31:09,839 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Sessions.Dto.UserLoginInfoDto
+DEBUG 2016-03-10 22:31:09,840 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto
+DEBUG 2016-03-10 22:31:09,848 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto
+DEBUG 2016-03-10 22:31:09,850 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitUserListDto
+DEBUG 2016-03-10 22:31:09,852 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Notifications.Dto.NotificationSubscriptionWithDisplayNameDto
+DEBUG 2016-03-10 22:31:09,852 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantListDto
+DEBUG 2016-03-10 22:31:09,853 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantEditDto
+DEBUG 2016-03-10 22:31:09,857 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto
+DEBUG 2016-03-10 22:31:09,858 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto
+DEBUG 2016-03-10 22:31:09,861 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto
+DEBUG 2016-03-10 22:31:09,865 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput
+DEBUG 2016-03-10 22:31:09,870 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput
+DEBUG 2016-03-10 22:31:09,874 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto
+DEBUG 2016-03-10 22:31:09,877 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto
+DEBUG 2016-03-10 22:31:09,882 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto
+DEBUG 2016-03-10 22:31:09,888 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto
+DEBUG 2016-03-10 22:31:09,889 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.SalesRepUnitDto
+DEBUG 2016-03-10 22:31:09,890 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto
+DEBUG 2016-03-10 22:31:09,891 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto
+DEBUG 2016-03-10 22:31:09,893 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Localization.Dto.ApplicationLanguageEditDto
+DEBUG 2016-03-10 22:31:09,894 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Localization.Dto.ApplicationLanguageListDto
+DEBUG 2016-03-10 22:31:09,895 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto
+DEBUG 2016-03-10 22:31:09,900 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto
+DEBUG 2016-03-10 22:31:09,903 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobBudgetUnitDto
+DEBUG 2016-03-10 22:31:09,906 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto
+DEBUG 2016-03-10 22:31:09,909 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto
+DEBUG 2016-03-10 22:31:09,920 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto
+DEBUG 2016-03-10 22:31:09,922 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto
+DEBUG 2016-03-10 22:31:09,924 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.EditionEditDto
+DEBUG 2016-03-10 22:31:09,924 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.FlatFeatureDto
+DEBUG 2016-03-10 22:31:09,926 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.EditionListDto
+DEBUG 2016-03-10 22:31:09,927 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Auditing.Dto.AuditLogListDto
+DEBUG 2016-03-10 22:31:09,928 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Roles.Dto.RoleListDto
+DEBUG 2016-03-10 22:31:09,931 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Roles.Dto.RoleEditDto
+DEBUG 2016-03-10 22:31:09,932 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Dto.FlatPermissionDto
+DEBUG 2016-03-10 22:31:09,933 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.CurrentUserProfileEditDto
+DEBUG 2016-03-10 22:31:09,935 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserListDto
+DEBUG 2016-03-10 22:31:09,936 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto
+DEBUG 2016-03-10 22:31:09,938 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserListDto+UserListRoleDto
+DEBUG 2016-03-10 22:31:09,939 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.UserPermissionsEditViewModel
+DEBUG 2016-03-10 22:31:09,940 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.CreateOrEditUserModalViewModel
+DEBUG 2016-03-10 22:31:09,940 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Roles.CreateOrEditRoleModalViewModel
+DEBUG 2016-03-10 22:31:09,941 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Profile.MySettingsViewModel
+DEBUG 2016-03-10 22:31:09,946 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Editions.CreateOrEditEditionModalViewModel
+DEBUG 2016-03-10 22:31:09,947 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Tenants.TenantFeaturesEditViewModel
+DEBUG 2016-03-10 22:31:09,947 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.OrganizationUnits.EditOrganizationUnitModalViewModel
+DEBUG 2016-03-10 22:31:09,947 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Languages.CreateOrEditLanguageModalViewModel
+DEBUG 2016-03-10 22:31:09,948 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Models.Account.TenantSelectionViewModel+TenantInfo
+DEBUG 2016-03-10 22:31:09,956 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Tenants.Dashboard.ITenantDashboardAppService' with service name 'app/tenantDashboard'.
+DEBUG 2016-03-10 22:31:09,957 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Sessions.ISessionAppService' with service name 'app/session'.
+DEBUG 2016-03-10 22:31:09,958 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService' with service name 'app/aPHeaderTransactions'.
+DEBUG 2016-03-10 22:31:09,959 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService' with service name 'app/organizationUnit'.
+DEBUG 2016-03-10 22:31:09,960 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Notifications.INotificationAppService' with service name 'app/notification'.
+DEBUG 2016-03-10 22:31:09,962 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService' with service name 'app/tenant'.
+DEBUG 2016-03-10 22:31:09,963 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService' with service name 'app/employeeUnit'.
+DEBUG 2016-03-10 22:31:09,964 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService' with service name 'app/customerUnit'.
+DEBUG 2016-03-10 22:31:09,965 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService' with service name 'app/addressUnit'.
+DEBUG 2016-03-10 22:31:09,966 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService' with service name 'app/locationSetUnit'.
+DEBUG 2016-03-10 22:31:09,967 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService' with service name 'app/vendorUnit'.
+DEBUG 2016-03-10 22:31:09,968 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService' with service name 'app/accountUnit'.
+DEBUG 2016-03-10 22:31:09,970 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService' with service name 'app/coaUnit'.
+DEBUG 2016-03-10 22:31:09,971 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService' with service name 'app/salesRepUnit'.
+DEBUG 2016-03-10 22:31:09,972 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService' with service name 'app/customerPaymentTermUnit'.
+DEBUG 2016-03-10 22:31:09,974 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService' with service name 'app/vendorPaymentTermUnit'.
+DEBUG 2016-03-10 22:31:09,975 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Localization.ILanguageAppService' with service name 'app/language'.
+DEBUG 2016-03-10 22:31:09,976 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService' with service name 'app/journalEntryDocument'.
+DEBUG 2016-03-10 22:31:09,978 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService' with service name 'app/jobAccountUnit'.
+DEBUG 2016-03-10 22:31:09,979 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService' with service name 'app/jobBudgetUnit'.
+DEBUG 2016-03-10 22:31:09,981 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService' with service name 'app/jobLocation'.
+DEBUG 2016-03-10 22:31:09,983 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService' with service name 'app/jobCommercial'.
+DEBUG 2016-03-10 22:31:09,984 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService' with service name 'app/rollupCenterUnit'.
+DEBUG 2016-03-10 22:31:09,987 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService' with service name 'app/jobUnit'.
+DEBUG 2016-03-10 22:31:09,990 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Editions.IEditionAppService' with service name 'app/edition'.
+DEBUG 2016-03-10 22:31:09,992 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Configuration.Host.IHostSettingsAppService' with service name 'app/hostSettings'.
+DEBUG 2016-03-10 22:31:09,993 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Configuration.Tenants.ITenantSettingsAppService' with service name 'app/tenantSettings'.
+DEBUG 2016-03-10 22:31:09,995 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Common.ICommonLookupAppService' with service name 'app/commonLookup'.
+DEBUG 2016-03-10 22:31:09,997 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Auditing.IAuditLogAppService' with service name 'app/auditLog'.
+DEBUG 2016-03-10 22:31:09,999 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService' with service name 'app/role'.
+DEBUG 2016-03-10 22:31:10,001 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.IUserLinkAppService' with service name 'app/userLink'.
+DEBUG 2016-03-10 22:31:10,002 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.IUserAppService' with service name 'app/user'.
+DEBUG 2016-03-10 22:31:10,004 [1    ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.Profile.IProfileAppService' with service name 'app/profile'.
+DEBUG 2016-03-10 22:31:37,048 [8    ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is connected: {"ConnectionId":"b7282fde-2f9c-4f7d-acd6-8307338ed9b0","IpAddress":"::1","TenantId":null,"UserId":1,"ConnectTime":"2016-03-10T22:31:37.0440227+05:30","Properties":{}}
+DEBUG 2016-03-10 22:31:37,092 [8    ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is registered: b7282fde-2f9c-4f7d-acd6-8307338ed9b0
+DEBUG 2016-03-10 22:32:11,799 [30   ] Abp.Web.SignalR.Hubs.AbpCommonHub        - A client is disconnected: b7282fde-2f9c-4f7d-acd6-8307338ed9b0
+DEBUG 2016-03-10 22:32:18,197 [34   ] bp.Hangfire.HangfireBackgroundJobManager - Stop background worker: Abp.Hangfire.HangfireBackgroundJobManager
+DEBUG 2016-03-10 22:32:18,213 [duler] Hangfire.Server.RecurringJobScheduler    - Background process 'RecurringJobScheduler' stopped.
+DEBUG 2016-03-10 22:32:18,213 [254c3] Hangfire.Server.Worker                   - Background process 'Worker #c50254c3' stopped.
+DEBUG 2016-03-10 22:32:18,213 [323b2] Hangfire.Server.Worker                   - Background process 'Worker #758323b2' stopped.
+DEBUG 2016-03-10 22:32:18,213 [52e70] Hangfire.Server.Worker                   - Background process 'Worker #d1252e70' stopped.
+DEBUG 2016-03-10 22:32:18,213 [e7656] Hangfire.Server.Worker                   - Background process 'Worker #b5ce7656' stopped.
+DEBUG 2016-03-10 22:32:18,213 [chdog] Hangfire.Server.ServerWatchdog           - Background process 'ServerWatchdog' stopped.
+DEBUG 2016-03-10 22:32:18,213 [b73e1] Hangfire.Server.Worker                   - Background process 'Worker #8dab73e1' stopped.
+DEBUG 2016-03-10 22:32:18,213 [b2fe5] Hangfire.Server.Worker                   - Background process 'Worker #370b2fe5' stopped.
+DEBUG 2016-03-10 22:32:18,228 [tbeat] Hangfire.Server.ServerHeartbeat          - Background process 'ServerHeartbeat' stopped.
+DEBUG 2016-03-10 22:32:18,228 [e7d7e] Hangfire.Server.Worker                   - Background process 'Worker #f1ae7d7e' stopped.
+DEBUG 2016-03-10 22:32:18,228 [471f2] Hangfire.Server.Worker                   - Background process 'Worker #fec471f2' stopped.
+DEBUG 2016-03-10 22:32:18,228 [fdbb7] Hangfire.Server.Worker                   - Background process 'Worker #d18fdbb7' stopped.
+DEBUG 2016-03-10 22:32:18,228 [a1c31] Hangfire.Server.Worker                   - Background process 'Worker #458a1c31' stopped.
+DEBUG 2016-03-10 22:32:18,228 [37ea0] Hangfire.Server.Worker                   - Background process 'Worker #d8c37ea0' stopped.
+DEBUG 2016-03-10 22:32:18,228 [8aa36] Hangfire.Server.Worker                   - Background process 'Worker #7ba8aa36' stopped.
+DEBUG 2016-03-10 22:32:18,228 [92d40] Hangfire.Server.Worker                   - Background process 'Worker #3e392d40' stopped.
+DEBUG 2016-03-10 22:32:18,228 [0b0ac] Hangfire.Server.Worker                   - Background process 'Worker #21f0b0ac' stopped.
+DEBUG 2016-03-10 22:32:18,228 [duler] Hangfire.Server.DelayedJobScheduler      - Background process 'DelayedJobScheduler' stopped.
+DEBUG 2016-03-10 22:32:18,228 [ca420] Hangfire.Server.Worker                   - Background process 'Worker #516ca420' stopped.
+DEBUG 2016-03-10 22:32:18,228 [nager] Hangfire.SqlServer.ExpirationManager     - Background process 'Hangfire.SqlServer.ExpirationManager' stopped.
+DEBUG 2016-03-10 22:32:18,228 [gator] Hangfire.SqlServer.CountersAggregator    - Background process 'Hangfire.SqlServer.CountersAggregator' stopped.
+DEBUG 2016-03-10 22:32:18,228 [0f261] Hangfire.Server.Worker                   - Background process 'Worker #6d20f261' stopped.
+DEBUG 2016-03-10 22:32:18,228 [85a71] Hangfire.Server.Worker                   - Background process 'Worker #7b385a71' stopped.
+DEBUG 2016-03-10 22:32:18,228 [dc146] Hangfire.Server.Worker                   - Background process 'Worker #3e0dc146' stopped.
+DEBUG 2016-03-10 22:32:18,228 [05e82] Hangfire.Server.Worker                   - Background process 'Worker #3df05e82' stopped.
+DEBUG 2016-03-10 22:32:18,228 [20d39] Hangfire.Server.Worker                   - Background process 'Worker #4ce20d39' stopped.
+DEBUG 2016-03-10 22:32:18,228 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' stopped.
+INFO  2016-03-10 22:32:18,228 [34   ] Hangfire.BackgroundJobServer             - Hangfire Server stopped.
+DEBUG 2016-03-10 22:32:18,228 [34   ] bp.Hangfire.HangfireBackgroundJobManager - WaitToStop background worker: Abp.Hangfire.HangfireBackgroundJobManager
+DEBUG 2016-03-10 22:35:35,936 [27   ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-03-10 22:35:36,944 [27   ] Abp.Modules.AbpModuleManager             - Found 18 ABP modules in total.
+DEBUG 2016-03-10 22:35:36,948 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,950 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,951 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,951 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Hangfire.AbpHangfireModule, Abp.HangFire, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,951 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Owin.AbpOwinModule, Abp.Owin, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,951 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,951 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.OData.AbpWebApiODataModule, Abp.Web.Api.OData, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,952 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,952 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,952 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.SignalR.AbpWebSignalRModule, Abp.Web.SignalR, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,952 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.Zero, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,952 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule, Abp.Zero.EntityFramework, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,952 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.Ldap.AbpZeroLdapModule, Abp.Zero.Ldap, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,952 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGApplicationModule, CAPS.CORPACCOUNTING.Application, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,953 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGCoreModule, CAPS.CORPACCOUNTING.Core, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,953 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGDataModule, CAPS.CORPACCOUNTING.EntityFramework, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,953 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.Web.CORPACCOUNTINGWebModule, CAPS.CORPACCOUNTING.Web, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,953 [27   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.WebApi.CORPACCOUNTINGWebApiModule, CAPS.CORPACCOUNTING.WebApi, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:35:36,958 [27   ] Abp.Modules.AbpModuleManager             - 18 modules loaded.
+DEBUG 2016-03-10 22:35:37,031 [27   ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:35:37,031 [27   ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:35:37,031 [27   ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:35:37,031 [27   ] o.Configuration.LanguageManagementConfig - Converted CORPACCOUNTING (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+INFO  2016-03-10 22:35:37,438 [27   ] Hangfire.SqlServer.SqlServerStorage      - Start installing Hangfire SQL objects...
+INFO  2016-03-10 22:35:37,947 [27   ] Hangfire.SqlServer.SqlServerStorage      - Hangfire SQL objects installed.
+DEBUG 2016-03-10 22:35:39,322 [27   ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2016-03-10 22:35:39,327 [27   ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-03-10 22:35:39,327 [27   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-03-10 22:35:39,336 [27   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2016-03-10 22:35:39,342 [27   ] Abp.Localization.LocalizationManager     - Initialized localization source: CORPACCOUNTING
+DEBUG 2016-03-10 22:35:39,350 [27   ] bp.Hangfire.HangfireBackgroundJobManager - Start background worker: Abp.Hangfire.HangfireBackgroundJobManager
+INFO  2016-03-10 22:35:39,362 [27   ] Hangfire.BackgroundJobServer             - Starting Hangfire Server
+INFO  2016-03-10 22:35:39,364 [27   ] Hangfire.BackgroundJobServer             - Using job storage: 'SQL Server: .\SqlExpress@DEVCORPACCOUNTING1'.
+INFO  2016-03-10 22:35:39,364 [27   ] Hangfire.BackgroundJobServer             - Using the following options for SQL Server job storage:
+INFO  2016-03-10 22:35:39,364 [27   ] Hangfire.BackgroundJobServer             -     Queue poll interval: 00:00:15.
+INFO  2016-03-10 22:35:39,364 [27   ] Hangfire.BackgroundJobServer             - Using the following options for Hangfire Server:
+INFO  2016-03-10 22:35:39,364 [27   ] Hangfire.BackgroundJobServer             -     Worker count: 20.
+INFO  2016-03-10 22:35:39,364 [27   ] Hangfire.BackgroundJobServer             -     Listening queues: 'default'.
+INFO  2016-03-10 22:35:39,364 [27   ] Hangfire.BackgroundJobServer             -     Shutdown timeout: 00:00:15.
+INFO  2016-03-10 22:35:39,364 [27   ] Hangfire.BackgroundJobServer             -     Schedule polling interval: 00:00:15.
+DEBUG 2016-03-10 22:35:39,402 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' started.
+DEBUG 2016-03-10 22:35:39,582 [tbeat] Hangfire.Server.ServerHeartbeat          - Background process 'ServerHeartbeat' started.
+DEBUG 2016-03-10 22:35:39,589 [chdog] Hangfire.Server.ServerWatchdog           - Background process 'ServerWatchdog' started.
+DEBUG 2016-03-10 22:35:39,600 [nager] Hangfire.SqlServer.ExpirationManager     - Background process 'Hangfire.SqlServer.ExpirationManager' started.
+DEBUG 2016-03-10 22:35:39,602 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'AggregatedCounter'...
+DEBUG 2016-03-10 22:35:39,624 [gator] Hangfire.SqlServer.CountersAggregator    - Background process 'Hangfire.SqlServer.CountersAggregator' started.
+DEBUG 2016-03-10 22:35:39,626 [gator] Hangfire.SqlServer.CountersAggregator    - Aggregating records in 'Counter' table...
+DEBUG 2016-03-10 22:35:39,635 [0b075] Hangfire.Server.Worker                   - Background process 'Worker #6710b075' started.
+DEBUG 2016-03-10 22:35:39,656 [eb6e9] Hangfire.Server.Worker                   - Background process 'Worker #183eb6e9' started.
+DEBUG 2016-03-10 22:35:39,672 [2f6af] Hangfire.Server.Worker                   - Background process 'Worker #dbc2f6af' started.
+DEBUG 2016-03-10 22:35:39,712 [e07fc] Hangfire.Server.Worker                   - Background process 'Worker #45be07fc' started.
+DEBUG 2016-03-10 22:35:39,748 [1a0d5] Hangfire.Server.Worker                   - Background process 'Worker #4331a0d5' started.
+DEBUG 2016-03-10 22:35:39,755 [d81ef] Hangfire.Server.Worker                   - Background process 'Worker #114d81ef' started.
+DEBUG 2016-03-10 22:35:39,798 [6de6c] Hangfire.Server.Worker                   - Background process 'Worker #a446de6c' started.
+DEBUG 2016-03-10 22:35:39,799 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Job'...
+DEBUG 2016-03-10 22:35:39,816 [54a65] Hangfire.Server.Worker                   - Background process 'Worker #59854a65' started.
+DEBUG 2016-03-10 22:35:39,833 [caf10] Hangfire.Server.Worker                   - Background process 'Worker #a2ccaf10' started.
+DEBUG 2016-03-10 22:35:39,878 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'List'...
+DEBUG 2016-03-10 22:35:39,882 [abc5b] Hangfire.Server.Worker                   - Background process 'Worker #822abc5b' started.
+DEBUG 2016-03-10 22:35:39,911 [8bf60] Hangfire.Server.Worker                   - Background process 'Worker #c228bf60' started.
+DEBUG 2016-03-10 22:35:39,959 [78972] Hangfire.Server.Worker                   - Background process 'Worker #e7e78972' started.
+DEBUG 2016-03-10 22:35:39,973 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Set'...
+DEBUG 2016-03-10 22:35:39,993 [e297a] Hangfire.Server.Worker                   - Background process 'Worker #0a0e297a' started.
+DEBUG 2016-03-10 22:35:40,029 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Hash'...
+DEBUG 2016-03-10 22:35:40,030 [ebd16] Hangfire.Server.Worker                   - Background process 'Worker #217ebd16' started.
+DEBUG 2016-03-10 22:35:40,032 [c3c8f] Hangfire.Server.Worker                   - Background process 'Worker #41bc3c8f' started.
+DEBUG 2016-03-10 22:35:40,054 [e35fa] Hangfire.Server.Worker                   - Background process 'Worker #bf2e35fa' started.
+DEBUG 2016-03-10 22:35:40,073 [0632e] Hangfire.Server.Worker                   - Background process 'Worker #8970632e' started.
+DEBUG 2016-03-10 22:35:40,088 [4a821] Hangfire.Server.Worker                   - Background process 'Worker #e434a821' started.
+DEBUG 2016-03-10 22:35:40,101 [e063d] Hangfire.Server.Worker                   - Background process 'Worker #adfe063d' started.
+DEBUG 2016-03-10 22:35:40,108 [84fff] Hangfire.Server.Worker                   - Background process 'Worker #fc684fff' started.
+DEBUG 2016-03-10 22:35:40,118 [duler] Hangfire.Server.DelayedJobScheduler      - Background process 'DelayedJobScheduler' started.
+DEBUG 2016-03-10 22:35:40,127 [duler] Hangfire.Server.RecurringJobScheduler    - Background process 'RecurringJobScheduler' started.
+DEBUG 2016-03-10 22:35:40,483 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - Found 49 classes defines auto mapping attributes
+DEBUG 2016-03-10 22:35:40,483 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2016-03-10 22:35:40,490 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Sessions.Dto.UserLoginInfoDto
+DEBUG 2016-03-10 22:35:40,490 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto
+DEBUG 2016-03-10 22:35:40,495 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto
+DEBUG 2016-03-10 22:35:40,497 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitUserListDto
+DEBUG 2016-03-10 22:35:40,498 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Notifications.Dto.NotificationSubscriptionWithDisplayNameDto
+DEBUG 2016-03-10 22:35:40,498 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantListDto
+DEBUG 2016-03-10 22:35:40,499 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantEditDto
+DEBUG 2016-03-10 22:35:40,502 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto
+DEBUG 2016-03-10 22:35:40,503 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto
+DEBUG 2016-03-10 22:35:40,505 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto
+DEBUG 2016-03-10 22:35:40,509 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput
+DEBUG 2016-03-10 22:35:40,513 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput
+DEBUG 2016-03-10 22:35:40,517 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto
+DEBUG 2016-03-10 22:35:40,520 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto
+DEBUG 2016-03-10 22:35:40,523 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto
+DEBUG 2016-03-10 22:35:40,526 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto
+DEBUG 2016-03-10 22:35:40,527 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.SalesRepUnitDto
+DEBUG 2016-03-10 22:35:40,528 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto
+DEBUG 2016-03-10 22:35:40,529 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto
+DEBUG 2016-03-10 22:35:40,531 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Localization.Dto.ApplicationLanguageEditDto
+DEBUG 2016-03-10 22:35:40,531 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Localization.Dto.ApplicationLanguageListDto
+DEBUG 2016-03-10 22:35:40,532 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto
+DEBUG 2016-03-10 22:35:40,536 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto
+DEBUG 2016-03-10 22:35:40,538 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobBudgetUnitDto
+DEBUG 2016-03-10 22:35:40,540 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto
+DEBUG 2016-03-10 22:35:40,541 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto
+DEBUG 2016-03-10 22:35:40,547 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto
+DEBUG 2016-03-10 22:35:40,549 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto
+DEBUG 2016-03-10 22:35:40,550 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.EditionEditDto
+DEBUG 2016-03-10 22:35:40,551 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.FlatFeatureDto
+DEBUG 2016-03-10 22:35:40,553 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.EditionListDto
+DEBUG 2016-03-10 22:35:40,553 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Auditing.Dto.AuditLogListDto
+DEBUG 2016-03-10 22:35:40,555 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Roles.Dto.RoleListDto
+DEBUG 2016-03-10 22:35:40,557 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Roles.Dto.RoleEditDto
+DEBUG 2016-03-10 22:35:40,559 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Dto.FlatPermissionDto
+DEBUG 2016-03-10 22:35:40,559 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.CurrentUserProfileEditDto
+DEBUG 2016-03-10 22:35:40,561 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserListDto
+DEBUG 2016-03-10 22:35:40,562 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto
+DEBUG 2016-03-10 22:35:40,565 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserListDto+UserListRoleDto
+DEBUG 2016-03-10 22:35:40,566 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.UserPermissionsEditViewModel
+DEBUG 2016-03-10 22:35:40,566 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.CreateOrEditUserModalViewModel
+DEBUG 2016-03-10 22:35:40,567 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Roles.CreateOrEditRoleModalViewModel
+DEBUG 2016-03-10 22:35:40,567 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Profile.MySettingsViewModel
+DEBUG 2016-03-10 22:35:40,570 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Editions.CreateOrEditEditionModalViewModel
+DEBUG 2016-03-10 22:35:40,571 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Tenants.TenantFeaturesEditViewModel
+DEBUG 2016-03-10 22:35:40,572 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.OrganizationUnits.EditOrganizationUnitModalViewModel
+DEBUG 2016-03-10 22:35:40,572 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Languages.CreateOrEditLanguageModalViewModel
+DEBUG 2016-03-10 22:35:40,573 [27   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Models.Account.TenantSelectionViewModel+TenantInfo
+DEBUG 2016-03-10 22:35:40,581 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Tenants.Dashboard.ITenantDashboardAppService' with service name 'app/tenantDashboard'.
+DEBUG 2016-03-10 22:35:40,582 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Sessions.ISessionAppService' with service name 'app/session'.
+DEBUG 2016-03-10 22:35:40,583 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService' with service name 'app/aPHeaderTransactions'.
+DEBUG 2016-03-10 22:35:40,584 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService' with service name 'app/organizationUnit'.
+DEBUG 2016-03-10 22:35:40,585 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Notifications.INotificationAppService' with service name 'app/notification'.
+DEBUG 2016-03-10 22:35:40,586 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService' with service name 'app/tenant'.
+DEBUG 2016-03-10 22:35:40,587 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService' with service name 'app/employeeUnit'.
+DEBUG 2016-03-10 22:35:40,588 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService' with service name 'app/customerUnit'.
+DEBUG 2016-03-10 22:35:40,589 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService' with service name 'app/addressUnit'.
+DEBUG 2016-03-10 22:35:40,591 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService' with service name 'app/locationSetUnit'.
+DEBUG 2016-03-10 22:35:40,592 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService' with service name 'app/vendorUnit'.
+DEBUG 2016-03-10 22:35:40,593 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService' with service name 'app/accountUnit'.
+DEBUG 2016-03-10 22:35:40,594 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService' with service name 'app/coaUnit'.
+DEBUG 2016-03-10 22:35:40,595 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService' with service name 'app/salesRepUnit'.
+DEBUG 2016-03-10 22:35:40,596 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService' with service name 'app/customerPaymentTermUnit'.
+DEBUG 2016-03-10 22:35:40,597 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService' with service name 'app/vendorPaymentTermUnit'.
+DEBUG 2016-03-10 22:35:40,598 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Localization.ILanguageAppService' with service name 'app/language'.
+DEBUG 2016-03-10 22:35:40,600 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService' with service name 'app/journalEntryDocument'.
+DEBUG 2016-03-10 22:35:40,601 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService' with service name 'app/jobAccountUnit'.
+DEBUG 2016-03-10 22:35:40,602 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService' with service name 'app/jobBudgetUnit'.
+DEBUG 2016-03-10 22:35:40,603 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService' with service name 'app/jobLocation'.
+DEBUG 2016-03-10 22:35:40,604 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService' with service name 'app/jobCommercial'.
+DEBUG 2016-03-10 22:35:40,606 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService' with service name 'app/rollupCenterUnit'.
+DEBUG 2016-03-10 22:35:40,607 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService' with service name 'app/jobUnit'.
+DEBUG 2016-03-10 22:35:40,609 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Editions.IEditionAppService' with service name 'app/edition'.
+DEBUG 2016-03-10 22:35:40,611 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Configuration.Host.IHostSettingsAppService' with service name 'app/hostSettings'.
+DEBUG 2016-03-10 22:35:40,613 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Configuration.Tenants.ITenantSettingsAppService' with service name 'app/tenantSettings'.
+DEBUG 2016-03-10 22:35:40,614 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Common.ICommonLookupAppService' with service name 'app/commonLookup'.
+DEBUG 2016-03-10 22:35:40,615 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Auditing.IAuditLogAppService' with service name 'app/auditLog'.
+DEBUG 2016-03-10 22:35:40,617 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService' with service name 'app/role'.
+DEBUG 2016-03-10 22:35:40,618 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.IUserLinkAppService' with service name 'app/userLink'.
+DEBUG 2016-03-10 22:35:40,619 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.IUserAppService' with service name 'app/user'.
+DEBUG 2016-03-10 22:35:40,621 [27   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.Profile.IProfileAppService' with service name 'app/profile'.
+DEBUG 2016-03-10 22:40:39,884 [gator] Hangfire.SqlServer.CountersAggregator    - Aggregating records in 'Counter' table...
+DEBUG 2016-03-10 22:42:29,478 [60   ] bp.Hangfire.HangfireBackgroundJobManager - Stop background worker: Abp.Hangfire.HangfireBackgroundJobManager
+DEBUG 2016-03-10 22:42:29,478 [e07fc] Hangfire.Server.Worker                   - Background process 'Worker #45be07fc' stopped.
+DEBUG 2016-03-10 22:42:29,478 [e063d] Hangfire.Server.Worker                   - Background process 'Worker #adfe063d' stopped.
+DEBUG 2016-03-10 22:42:29,478 [78972] Hangfire.Server.Worker                   - Background process 'Worker #e7e78972' stopped.
+DEBUG 2016-03-10 22:42:29,478 [54a65] Hangfire.Server.Worker                   - Background process 'Worker #59854a65' stopped.
+DEBUG 2016-03-10 22:42:29,478 [0b075] Hangfire.Server.Worker                   - Background process 'Worker #6710b075' stopped.
+DEBUG 2016-03-10 22:42:29,478 [abc5b] Hangfire.Server.Worker                   - Background process 'Worker #822abc5b' stopped.
+DEBUG 2016-03-10 22:42:29,478 [gator] Hangfire.SqlServer.CountersAggregator    - Background process 'Hangfire.SqlServer.CountersAggregator' stopped.
+DEBUG 2016-03-10 22:42:29,478 [nager] Hangfire.SqlServer.ExpirationManager     - Background process 'Hangfire.SqlServer.ExpirationManager' stopped.
+DEBUG 2016-03-10 22:42:29,478 [duler] Hangfire.Server.RecurringJobScheduler    - Background process 'RecurringJobScheduler' stopped.
+DEBUG 2016-03-10 22:42:29,478 [d81ef] Hangfire.Server.Worker                   - Background process 'Worker #114d81ef' stopped.
+DEBUG 2016-03-10 22:42:29,478 [tbeat] Hangfire.Server.ServerHeartbeat          - Background process 'ServerHeartbeat' stopped.
+DEBUG 2016-03-10 22:42:29,478 [4a821] Hangfire.Server.Worker                   - Background process 'Worker #e434a821' stopped.
+DEBUG 2016-03-10 22:42:29,478 [duler] Hangfire.Server.DelayedJobScheduler      - Background process 'DelayedJobScheduler' stopped.
+DEBUG 2016-03-10 22:42:29,478 [caf10] Hangfire.Server.Worker                   - Background process 'Worker #a2ccaf10' stopped.
+DEBUG 2016-03-10 22:42:29,478 [0632e] Hangfire.Server.Worker                   - Background process 'Worker #8970632e' stopped.
+DEBUG 2016-03-10 22:42:29,478 [ebd16] Hangfire.Server.Worker                   - Background process 'Worker #217ebd16' stopped.
+DEBUG 2016-03-10 22:42:29,478 [84fff] Hangfire.Server.Worker                   - Background process 'Worker #fc684fff' stopped.
+DEBUG 2016-03-10 22:42:29,478 [e35fa] Hangfire.Server.Worker                   - Background process 'Worker #bf2e35fa' stopped.
+DEBUG 2016-03-10 22:42:29,478 [c3c8f] Hangfire.Server.Worker                   - Background process 'Worker #41bc3c8f' stopped.
+DEBUG 2016-03-10 22:42:29,478 [e297a] Hangfire.Server.Worker                   - Background process 'Worker #0a0e297a' stopped.
+DEBUG 2016-03-10 22:42:29,478 [8bf60] Hangfire.Server.Worker                   - Background process 'Worker #c228bf60' stopped.
+DEBUG 2016-03-10 22:42:29,478 [6de6c] Hangfire.Server.Worker                   - Background process 'Worker #a446de6c' stopped.
+DEBUG 2016-03-10 22:42:29,478 [2f6af] Hangfire.Server.Worker                   - Background process 'Worker #dbc2f6af' stopped.
+DEBUG 2016-03-10 22:42:29,478 [1a0d5] Hangfire.Server.Worker                   - Background process 'Worker #4331a0d5' stopped.
+DEBUG 2016-03-10 22:42:29,478 [eb6e9] Hangfire.Server.Worker                   - Background process 'Worker #183eb6e9' stopped.
+DEBUG 2016-03-10 22:42:29,478 [chdog] Hangfire.Server.ServerWatchdog           - Background process 'ServerWatchdog' stopped.
+DEBUG 2016-03-10 22:42:29,493 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' stopped.
+INFO  2016-03-10 22:42:29,493 [60   ] Hangfire.BackgroundJobServer             - Hangfire Server stopped.
+DEBUG 2016-03-10 22:42:29,493 [60   ] bp.Hangfire.HangfireBackgroundJobManager - WaitToStop background worker: Abp.Hangfire.HangfireBackgroundJobManager
+DEBUG 2016-03-10 22:43:16,940 [29   ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-03-10 22:43:18,092 [29   ] Abp.Modules.AbpModuleManager             - Found 18 ABP modules in total.
+DEBUG 2016-03-10 22:43:18,096 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,097 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,097 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Hangfire.AbpHangfireModule, Abp.HangFire, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Owin.AbpOwinModule, Abp.Owin, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.OData.AbpWebApiODataModule, Abp.Web.Api.OData, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.SignalR.AbpWebSignalRModule, Abp.Web.SignalR, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.Zero, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule, Abp.Zero.EntityFramework, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.Ldap.AbpZeroLdapModule, Abp.Zero.Ldap, Version=0.8.2.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGApplicationModule, CAPS.CORPACCOUNTING.Application, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGCoreModule, CAPS.CORPACCOUNTING.Core, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.CORPACCOUNTINGDataModule, CAPS.CORPACCOUNTING.EntityFramework, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,098 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.Web.CORPACCOUNTINGWebModule, CAPS.CORPACCOUNTING.Web, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,099 [29   ] Abp.Modules.AbpModuleManager             - Loaded module: CAPS.CORPACCOUNTING.WebApi.CORPACCOUNTINGWebApiModule, CAPS.CORPACCOUNTING.WebApi, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-03-10 22:43:18,102 [29   ] Abp.Modules.AbpModuleManager             - 18 modules loaded.
+DEBUG 2016-03-10 22:43:18,144 [29   ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:43:18,144 [29   ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:43:18,144 [29   ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2016-03-10 22:43:18,144 [29   ] o.Configuration.LanguageManagementConfig - Converted CORPACCOUNTING (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+INFO  2016-03-10 22:43:18,492 [29   ] Hangfire.SqlServer.SqlServerStorage      - Start installing Hangfire SQL objects...
+INFO  2016-03-10 22:43:18,824 [29   ] Hangfire.SqlServer.SqlServerStorage      - Hangfire SQL objects installed.
+DEBUG 2016-03-10 22:43:19,747 [29   ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2016-03-10 22:43:19,752 [29   ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-03-10 22:43:19,753 [29   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-03-10 22:43:19,758 [29   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2016-03-10 22:43:19,764 [29   ] Abp.Localization.LocalizationManager     - Initialized localization source: CORPACCOUNTING
+DEBUG 2016-03-10 22:43:19,770 [29   ] bp.Hangfire.HangfireBackgroundJobManager - Start background worker: Abp.Hangfire.HangfireBackgroundJobManager
+INFO  2016-03-10 22:43:19,778 [29   ] Hangfire.BackgroundJobServer             - Starting Hangfire Server
+INFO  2016-03-10 22:43:19,780 [29   ] Hangfire.BackgroundJobServer             - Using job storage: 'SQL Server: .\SqlExpress@DEVCORPACCOUNTING1'.
+INFO  2016-03-10 22:43:19,780 [29   ] Hangfire.BackgroundJobServer             - Using the following options for SQL Server job storage:
+INFO  2016-03-10 22:43:19,780 [29   ] Hangfire.BackgroundJobServer             -     Queue poll interval: 00:00:15.
+INFO  2016-03-10 22:43:19,780 [29   ] Hangfire.BackgroundJobServer             - Using the following options for Hangfire Server:
+INFO  2016-03-10 22:43:19,780 [29   ] Hangfire.BackgroundJobServer             -     Worker count: 20.
+INFO  2016-03-10 22:43:19,780 [29   ] Hangfire.BackgroundJobServer             -     Listening queues: 'default'.
+INFO  2016-03-10 22:43:19,780 [29   ] Hangfire.BackgroundJobServer             -     Shutdown timeout: 00:00:15.
+INFO  2016-03-10 22:43:19,780 [29   ] Hangfire.BackgroundJobServer             -     Schedule polling interval: 00:00:15.
+DEBUG 2016-03-10 22:43:19,788 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' started.
+DEBUG 2016-03-10 22:43:19,894 [tbeat] Hangfire.Server.ServerHeartbeat          - Background process 'ServerHeartbeat' started.
+DEBUG 2016-03-10 22:43:19,898 [chdog] Hangfire.Server.ServerWatchdog           - Background process 'ServerWatchdog' started.
+DEBUG 2016-03-10 22:43:19,900 [nager] Hangfire.SqlServer.ExpirationManager     - Background process 'Hangfire.SqlServer.ExpirationManager' started.
+DEBUG 2016-03-10 22:43:19,901 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'AggregatedCounter'...
+DEBUG 2016-03-10 22:43:19,901 [gator] Hangfire.SqlServer.CountersAggregator    - Background process 'Hangfire.SqlServer.CountersAggregator' started.
+DEBUG 2016-03-10 22:43:19,903 [gator] Hangfire.SqlServer.CountersAggregator    - Aggregating records in 'Counter' table...
+DEBUG 2016-03-10 22:43:19,907 [c316c] Hangfire.Server.Worker                   - Background process 'Worker #231c316c' started.
+DEBUG 2016-03-10 22:43:19,911 [c39cf] Hangfire.Server.Worker                   - Background process 'Worker #139c39cf' started.
+DEBUG 2016-03-10 22:43:19,912 [ff2e3] Hangfire.Server.Worker                   - Background process 'Worker #f9bff2e3' started.
+DEBUG 2016-03-10 22:43:19,913 [d795a] Hangfire.Server.Worker                   - Background process 'Worker #f5dd795a' started.
+DEBUG 2016-03-10 22:43:19,914 [bafdc] Hangfire.Server.Worker                   - Background process 'Worker #0dabafdc' started.
+DEBUG 2016-03-10 22:43:19,915 [dd57e] Hangfire.Server.Worker                   - Background process 'Worker #f56dd57e' started.
+DEBUG 2016-03-10 22:43:19,915 [2d19c] Hangfire.Server.Worker                   - Background process 'Worker #5df2d19c' started.
+DEBUG 2016-03-10 22:43:19,917 [5e018] Hangfire.Server.Worker                   - Background process 'Worker #8135e018' started.
+DEBUG 2016-03-10 22:43:19,919 [249a3] Hangfire.Server.Worker                   - Background process 'Worker #3df249a3' started.
+DEBUG 2016-03-10 22:43:19,920 [8bbfc] Hangfire.Server.Worker                   - Background process 'Worker #b4f8bbfc' started.
+DEBUG 2016-03-10 22:43:19,921 [40a92] Hangfire.Server.Worker                   - Background process 'Worker #ef240a92' started.
+DEBUG 2016-03-10 22:43:19,921 [ac8c5] Hangfire.Server.Worker                   - Background process 'Worker #cc9ac8c5' started.
+DEBUG 2016-03-10 22:43:19,922 [e2ad1] Hangfire.Server.Worker                   - Background process 'Worker #abae2ad1' started.
+DEBUG 2016-03-10 22:43:19,923 [74f94] Hangfire.Server.Worker                   - Background process 'Worker #90474f94' started.
+DEBUG 2016-03-10 22:43:19,923 [85979] Hangfire.Server.Worker                   - Background process 'Worker #3f285979' started.
+DEBUG 2016-03-10 22:43:19,924 [807f2] Hangfire.Server.Worker                   - Background process 'Worker #d93807f2' started.
+DEBUG 2016-03-10 22:43:19,924 [406dd] Hangfire.Server.Worker                   - Background process 'Worker #2fd406dd' started.
+DEBUG 2016-03-10 22:43:19,925 [05118] Hangfire.Server.Worker                   - Background process 'Worker #4ad05118' started.
+DEBUG 2016-03-10 22:43:19,926 [0ad37] Hangfire.Server.Worker                   - Background process 'Worker #1420ad37' started.
+DEBUG 2016-03-10 22:43:19,926 [0e21c] Hangfire.Server.Worker                   - Background process 'Worker #79e0e21c' started.
+DEBUG 2016-03-10 22:43:19,927 [duler] Hangfire.Server.DelayedJobScheduler      - Background process 'DelayedJobScheduler' started.
+DEBUG 2016-03-10 22:43:19,929 [duler] Hangfire.Server.RecurringJobScheduler    - Background process 'RecurringJobScheduler' started.
+DEBUG 2016-03-10 22:43:20,009 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Job'...
+DEBUG 2016-03-10 22:43:20,015 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'List'...
+DEBUG 2016-03-10 22:43:20,017 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Set'...
+DEBUG 2016-03-10 22:43:20,019 [nager] Hangfire.SqlServer.ExpirationManager     - Removing outdated records from table 'Hash'...
+DEBUG 2016-03-10 22:43:20,255 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - Found 49 classes defines auto mapping attributes
+DEBUG 2016-03-10 22:43:20,255 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Sessions.Dto.TenantLoginInfoDto
+DEBUG 2016-03-10 22:43:20,260 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Sessions.Dto.UserLoginInfoDto
+DEBUG 2016-03-10 22:43:20,261 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto
+DEBUG 2016-03-10 22:43:20,266 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto
+DEBUG 2016-03-10 22:43:20,268 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitUserListDto
+DEBUG 2016-03-10 22:43:20,270 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Notifications.Dto.NotificationSubscriptionWithDisplayNameDto
+DEBUG 2016-03-10 22:43:20,270 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantListDto
+DEBUG 2016-03-10 22:43:20,271 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantEditDto
+DEBUG 2016-03-10 22:43:20,273 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto
+DEBUG 2016-03-10 22:43:20,274 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto
+DEBUG 2016-03-10 22:43:20,276 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto
+DEBUG 2016-03-10 22:43:20,281 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput
+DEBUG 2016-03-10 22:43:20,285 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput
+DEBUG 2016-03-10 22:43:20,289 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.EmployeeUnitDto
+DEBUG 2016-03-10 22:43:20,291 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto
+DEBUG 2016-03-10 22:43:20,294 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto
+DEBUG 2016-03-10 22:43:20,298 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto
+DEBUG 2016-03-10 22:43:20,299 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.SalesRepUnitDto
+DEBUG 2016-03-10 22:43:20,299 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.CustomerPaymentTermUnitDto
+DEBUG 2016-03-10 22:43:20,301 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto
+DEBUG 2016-03-10 22:43:20,303 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Localization.Dto.ApplicationLanguageEditDto
+DEBUG 2016-03-10 22:43:20,304 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Localization.Dto.ApplicationLanguageListDto
+DEBUG 2016-03-10 22:43:20,304 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto
+DEBUG 2016-03-10 22:43:20,308 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto
+DEBUG 2016-03-10 22:43:20,311 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobBudgetUnitDto
+DEBUG 2016-03-10 22:43:20,313 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobLocationUnitDto
+DEBUG 2016-03-10 22:43:20,315 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto
+DEBUG 2016-03-10 22:43:20,321 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.RollupCenterUnitDto
+DEBUG 2016-03-10 22:43:20,322 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto
+DEBUG 2016-03-10 22:43:20,324 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.EditionEditDto
+DEBUG 2016-03-10 22:43:20,324 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.FlatFeatureDto
+DEBUG 2016-03-10 22:43:20,326 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Editions.Dto.EditionListDto
+DEBUG 2016-03-10 22:43:20,326 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Auditing.Dto.AuditLogListDto
+DEBUG 2016-03-10 22:43:20,328 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Roles.Dto.RoleListDto
+DEBUG 2016-03-10 22:43:20,331 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Roles.Dto.RoleEditDto
+DEBUG 2016-03-10 22:43:20,332 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Dto.FlatPermissionDto
+DEBUG 2016-03-10 22:43:20,333 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.CurrentUserProfileEditDto
+DEBUG 2016-03-10 22:43:20,335 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserListDto
+DEBUG 2016-03-10 22:43:20,336 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto
+DEBUG 2016-03-10 22:43:20,338 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserListDto+UserListRoleDto
+DEBUG 2016-03-10 22:43:20,340 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.UserPermissionsEditViewModel
+DEBUG 2016-03-10 22:43:20,340 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Users.CreateOrEditUserModalViewModel
+DEBUG 2016-03-10 22:43:20,341 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Roles.CreateOrEditRoleModalViewModel
+DEBUG 2016-03-10 22:43:20,341 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Profile.MySettingsViewModel
+DEBUG 2016-03-10 22:43:20,345 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Editions.CreateOrEditEditionModalViewModel
+DEBUG 2016-03-10 22:43:20,346 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Tenants.TenantFeaturesEditViewModel
+DEBUG 2016-03-10 22:43:20,347 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.OrganizationUnits.EditOrganizationUnitModalViewModel
+DEBUG 2016-03-10 22:43:20,347 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Languages.CreateOrEditLanguageModalViewModel
+DEBUG 2016-03-10 22:43:20,347 [29   ] Abp.AutoMapper.AbpAutoMapperModule       - CAPS.CORPACCOUNTING.Web.Models.Account.TenantSelectionViewModel+TenantInfo
+DEBUG 2016-03-10 22:43:20,354 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Tenants.Dashboard.ITenantDashboardAppService' with service name 'app/tenantDashboard'.
+DEBUG 2016-03-10 22:43:20,356 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Sessions.ISessionAppService' with service name 'app/session'.
+DEBUG 2016-03-10 22:43:20,357 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService' with service name 'app/aPHeaderTransactions'.
+DEBUG 2016-03-10 22:43:20,358 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService' with service name 'app/organizationUnit'.
+DEBUG 2016-03-10 22:43:20,359 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Notifications.INotificationAppService' with service name 'app/notification'.
+DEBUG 2016-03-10 22:43:20,360 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService' with service name 'app/tenant'.
+DEBUG 2016-03-10 22:43:20,362 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService' with service name 'app/employeeUnit'.
+DEBUG 2016-03-10 22:43:20,363 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService' with service name 'app/customerUnit'.
+DEBUG 2016-03-10 22:43:20,364 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService' with service name 'app/addressUnit'.
+DEBUG 2016-03-10 22:43:20,365 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService' with service name 'app/locationSetUnit'.
+DEBUG 2016-03-10 22:43:20,366 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService' with service name 'app/vendorUnit'.
+DEBUG 2016-03-10 22:43:20,368 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService' with service name 'app/accountUnit'.
+DEBUG 2016-03-10 22:43:20,369 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService' with service name 'app/coaUnit'.
+DEBUG 2016-03-10 22:43:20,371 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService' with service name 'app/salesRepUnit'.
+DEBUG 2016-03-10 22:43:20,372 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService' with service name 'app/customerPaymentTermUnit'.
+DEBUG 2016-03-10 22:43:20,373 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService' with service name 'app/vendorPaymentTermUnit'.
+DEBUG 2016-03-10 22:43:20,375 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Localization.ILanguageAppService' with service name 'app/language'.
+DEBUG 2016-03-10 22:43:20,376 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService' with service name 'app/journalEntryDocument'.
+DEBUG 2016-03-10 22:43:20,378 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobAccountUnitAppService' with service name 'app/jobAccountUnit'.
+DEBUG 2016-03-10 22:43:20,379 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobBudgetUnitAppService' with service name 'app/jobBudgetUnit'.
+DEBUG 2016-03-10 22:43:20,381 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService' with service name 'app/jobLocation'.
+DEBUG 2016-03-10 22:43:20,382 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService' with service name 'app/jobCommercial'.
+DEBUG 2016-03-10 22:43:20,383 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService' with service name 'app/rollupCenterUnit'.
+DEBUG 2016-03-10 22:43:20,384 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService' with service name 'app/jobUnit'.
+DEBUG 2016-03-10 22:43:20,386 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Editions.IEditionAppService' with service name 'app/edition'.
+DEBUG 2016-03-10 22:43:20,387 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Configuration.Host.IHostSettingsAppService' with service name 'app/hostSettings'.
+DEBUG 2016-03-10 22:43:20,388 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Configuration.Tenants.ITenantSettingsAppService' with service name 'app/tenantSettings'.
+DEBUG 2016-03-10 22:43:20,390 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Common.ICommonLookupAppService' with service name 'app/commonLookup'.
+DEBUG 2016-03-10 22:43:20,391 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Auditing.IAuditLogAppService' with service name 'app/auditLog'.
+DEBUG 2016-03-10 22:43:20,392 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService' with service name 'app/role'.
+DEBUG 2016-03-10 22:43:20,393 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.IUserLinkAppService' with service name 'app/userLink'.
+DEBUG 2016-03-10 22:43:20,395 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.IUserAppService' with service name 'app/user'.
+DEBUG 2016-03-10 22:43:20,396 [29   ] Abp.Logging.LogHelper                    - Dynamic web api controller is created for type 'CAPS.CORPACCOUNTING.Authorization.Users.Profile.IProfileAppService' with service name 'app/profile'.
+DEBUG 2016-03-10 22:45:43,730 [78   ] bp.Hangfire.HangfireBackgroundJobManager - Stop background worker: Abp.Hangfire.HangfireBackgroundJobManager
+DEBUG 2016-03-10 22:45:43,731 [tbeat] Hangfire.Server.ServerHeartbeat          - Background process 'ServerHeartbeat' stopped.
+DEBUG 2016-03-10 22:45:43,731 [duler] Hangfire.Server.RecurringJobScheduler    - Background process 'RecurringJobScheduler' stopped.
+DEBUG 2016-03-10 22:45:43,731 [duler] Hangfire.Server.DelayedJobScheduler      - Background process 'DelayedJobScheduler' stopped.
+DEBUG 2016-03-10 22:45:43,731 [406dd] Hangfire.Server.Worker                   - Background process 'Worker #2fd406dd' stopped.
+DEBUG 2016-03-10 22:45:43,731 [c39cf] Hangfire.Server.Worker                   - Background process 'Worker #139c39cf' stopped.
+DEBUG 2016-03-10 22:45:43,731 [c316c] Hangfire.Server.Worker                   - Background process 'Worker #231c316c' stopped.
+DEBUG 2016-03-10 22:45:43,731 [249a3] Hangfire.Server.Worker                   - Background process 'Worker #3df249a3' stopped.
+DEBUG 2016-03-10 22:45:43,732 [05118] Hangfire.Server.Worker                   - Background process 'Worker #4ad05118' stopped.
+DEBUG 2016-03-10 22:45:43,732 [bafdc] Hangfire.Server.Worker                   - Background process 'Worker #0dabafdc' stopped.
+DEBUG 2016-03-10 22:45:43,732 [e2ad1] Hangfire.Server.Worker                   - Background process 'Worker #abae2ad1' stopped.
+DEBUG 2016-03-10 22:45:43,732 [nager] Hangfire.SqlServer.ExpirationManager     - Background process 'Hangfire.SqlServer.ExpirationManager' stopped.
+DEBUG 2016-03-10 22:45:43,732 [dd57e] Hangfire.Server.Worker                   - Background process 'Worker #f56dd57e' stopped.
+DEBUG 2016-03-10 22:45:43,732 [8bbfc] Hangfire.Server.Worker                   - Background process 'Worker #b4f8bbfc' stopped.
+DEBUG 2016-03-10 22:45:43,732 [chdog] Hangfire.Server.ServerWatchdog           - Background process 'ServerWatchdog' stopped.
+DEBUG 2016-03-10 22:45:43,732 [74f94] Hangfire.Server.Worker                   - Background process 'Worker #90474f94' stopped.
+DEBUG 2016-03-10 22:45:43,733 [2d19c] Hangfire.Server.Worker                   - Background process 'Worker #5df2d19c' stopped.
+DEBUG 2016-03-10 22:45:43,733 [0e21c] Hangfire.Server.Worker                   - Background process 'Worker #79e0e21c' stopped.
+DEBUG 2016-03-10 22:45:43,734 [0ad37] Hangfire.Server.Worker                   - Background process 'Worker #1420ad37' stopped.
+DEBUG 2016-03-10 22:45:43,734 [85979] Hangfire.Server.Worker                   - Background process 'Worker #3f285979' stopped.
+DEBUG 2016-03-10 22:45:43,734 [ac8c5] Hangfire.Server.Worker                   - Background process 'Worker #cc9ac8c5' stopped.
+DEBUG 2016-03-10 22:45:43,735 [5e018] Hangfire.Server.Worker                   - Background process 'Worker #8135e018' stopped.
+DEBUG 2016-03-10 22:45:43,735 [807f2] Hangfire.Server.Worker                   - Background process 'Worker #d93807f2' stopped.
+DEBUG 2016-03-10 22:45:43,735 [40a92] Hangfire.Server.Worker                   - Background process 'Worker #ef240a92' stopped.
+DEBUG 2016-03-10 22:45:43,736 [d795a] Hangfire.Server.Worker                   - Background process 'Worker #f5dd795a' stopped.
+DEBUG 2016-03-10 22:45:43,736 [gator] Hangfire.SqlServer.CountersAggregator    - Background process 'Hangfire.SqlServer.CountersAggregator' stopped.
+DEBUG 2016-03-10 22:45:43,736 [ff2e3] Hangfire.Server.Worker                   - Background process 'Worker #f9bff2e3' stopped.
+DEBUG 2016-03-10 22:45:43,739 [erver] ngfire.Server.BackgroundProcessingServer - Background process 'BackgroundProcessingServer' stopped.
+INFO  2016-03-10 22:45:43,739 [78   ] Hangfire.BackgroundJobServer             - Hangfire Server stopped.
+DEBUG 2016-03-10 22:45:43,740 [78   ] bp.Hangfire.HangfireBackgroundJobManager - WaitToStop background worker: Abp.Hangfire.HangfireBackgroundJobManager

@@ -12,7 +12,7 @@
     /**
      * The relative path to the application's markup file (html, jsp, asp, etc.).
      */
-    "indexHtmlPath": "../../Views/LoginApp.html",
+    "indexHtmlPath": "../../Views/Account/LoginExt.cshtml",
 
     /**
      * Comma-separated string with the paths of directories or files to search. Any classes
@@ -554,15 +554,15 @@
      */
     
     "builds": {
-        "classic": {
-            "toolkit": "classic",
-            
-            "theme": "theme-triton",
-            
-            "sass": {
-                // "save": "classic/sass/save.scss"
-            }
-        },
+      "classic": {
+        "toolkit": "classic",
+
+        "theme": "theme-triton",
+
+        "sass": {
+          // "save": "classic/sass/save.scss"
+        }
+      },
 
         "modern": {
             "toolkit": "modern",

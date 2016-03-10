@@ -679,6 +679,46 @@
     <Compile Include="Migrations\201603100716240_Remove_BusinessProcess_Related_Tables.Designer.cs">
       <DependentUpon>201603100716240_Remove_BusinessProcess_Related_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603100942550_Add_ChartOfAccountRollup_Table.cs" />
+    <Compile Include="Migrations\201603100942550_Add_ChartOfAccountRollup_Table.Designer.cs">
+      <DependentUpon>201603100942550_Add_ChartOfAccountRollup_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603100949253_Add_AccountRollup_Table.cs" />
+    <Compile Include="Migrations\201603100949253_Add_AccountRollup_Table.Designer.cs">
+      <DependentUpon>201603100949253_Add_AccountRollup_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603100952511_Add_TypeOfArInvoiceBuild_Table.cs" />
+    <Compile Include="Migrations\201603100952511_Add_TypeOfArInvoiceBuild_Table.Designer.cs">
+      <DependentUpon>201603100952511_Add_TypeOfArInvoiceBuild_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603100955246_Add_ARInvoiceBuildUnit_Table.cs" />
+    <Compile Include="Migrations\201603100955246_Add_ARInvoiceBuildUnit_Table.Designer.cs">
+      <DependentUpon>201603100955246_Add_ARInvoiceBuildUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603100956578_Add_InvoicePaymentUnit_Table.cs" />
+    <Compile Include="Migrations\201603100956578_Add_InvoicePaymentUnit_Table.Designer.cs">
+      <DependentUpon>201603100956578_Add_InvoicePaymentUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101029153_Add_AccountTotal_Table.cs" />
+    <Compile Include="Migrations\201603101029153_Add_AccountTotal_Table.Designer.cs">
+      <DependentUpon>201603101029153_Add_AccountTotal_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101037578_Add_TypeOfFormatMask_Table.cs" />
+    <Compile Include="Migrations\201603101037578_Add_TypeOfFormatMask_Table.Designer.cs">
+      <DependentUpon>201603101037578_Add_TypeOfFormatMask_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101147177_Add_PayrollControl_Table.cs" />
+    <Compile Include="Migrations\201603101147177_Add_PayrollControl_Table.Designer.cs">
+      <DependentUpon>201603101147177_Add_PayrollControl_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101149095_Add_PayrollControlFringe_Table.cs" />
+    <Compile Include="Migrations\201603101149095_Add_PayrollControlFringe_Table.Designer.cs">
+      <DependentUpon>201603101149095_Add_PayrollControlFringe_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603101153080_Add_ARYTDInvoice_Table.cs" />
+    <Compile Include="Migrations\201603101153080_Add_ARYTDInvoice_Table.Designer.cs">
+      <DependentUpon>201603101153080_Add_ARYTDInvoice_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1117,6 +1157,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603100716240_Remove_BusinessProcess_Related_Tables.resx">
       <DependentUpon>201603100716240_Remove_BusinessProcess_Related_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603100942550_Add_ChartOfAccountRollup_Table.resx">
+      <DependentUpon>201603100942550_Add_ChartOfAccountRollup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603100949253_Add_AccountRollup_Table.resx">
+      <DependentUpon>201603100949253_Add_AccountRollup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603100952511_Add_TypeOfArInvoiceBuild_Table.resx">
+      <DependentUpon>201603100952511_Add_TypeOfArInvoiceBuild_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603100955246_Add_ARInvoiceBuildUnit_Table.resx">
+      <DependentUpon>201603100955246_Add_ARInvoiceBuildUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603100956578_Add_InvoicePaymentUnit_Table.resx">
+      <DependentUpon>201603100956578_Add_InvoicePaymentUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101029153_Add_AccountTotal_Table.resx">
+      <DependentUpon>201603101029153_Add_AccountTotal_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101037578_Add_TypeOfFormatMask_Table.resx">
+      <DependentUpon>201603101037578_Add_TypeOfFormatMask_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101147177_Add_PayrollControl_Table.resx">
+      <DependentUpon>201603101147177_Add_PayrollControl_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101149095_Add_PayrollControlFringe_Table.resx">
+      <DependentUpon>201603101149095_Add_PayrollControlFringe_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603101153080_Add_ARYTDInvoice_Table.resx">
+      <DependentUpon>201603101153080_Add_ARYTDInvoice_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -300,9 +300,40 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> BankRecClearedUnit Declaration</summary>
         public virtual IDbSet<BankRecClearedUnit> BankRecClearedUnit { get; set; }
 
+        /// <summary> ChartOfAccountRollupUnit Declaration</summary>
+        public virtual IDbSet<ChartOfAccountRollupUnit> ChartOfAccountRollupUnit { get; set; }
+
+        /// <summary> AccountRollupUnit Declaration</summary>
+        public virtual IDbSet<AccountRollupUnit> AccountRollupUnit { get; set; }
+
+        /// <summary> TypeOfArInvoiceBuildUnit Declaration</summary>
+        public virtual IDbSet<TypeOfArInvoiceBuildUnit> TypeOfArInvoiceBuildUnit { get; set; }
+
+        /// <summary> ARInvoiceBuildUnit Declaration</summary>
+        public virtual IDbSet<ArInvoiceBuildUnit> ARInvoiceBuildUnit { get; set; }
+
+        /// <summary> InvoicePaymentUnit Declaration</summary>
+        public virtual IDbSet<InvoicePaymentUnit> InvoicePaymentUnit { get; set; }
+
+        /// <summary> AccountTotalUnit Declaration</summary>
+        public virtual IDbSet<AccountTotalUnit> AccountTotalUnit { get; set; }
+
+        /// <summary> TypeOfFormatMaskUnit Declaration</summary>
+        public virtual IDbSet<TypeOfFormatMaskUnit> TypeOfFormatMaskUnit { get; set; }
+
+        /// <summary> PayrollControlUnit Declaration</summary>
+        public virtual IDbSet<PayrollControlUnit> PayrollControlUnit { get; set; }
+
+
+        /// <summary> PayrollControlFringeUnit Declaration</summary>
+        public virtual IDbSet<PayrollControlFringeUnit> PayrollControlFringeUnit { get; set; }
+
+        /// <summary> ARYTDInvoiceUnit Declaration</summary>
+        public virtual IDbSet<ArytdInvoiceUnit> ARYTDInvoiceUnit { get; set; }
+
+
+
         
-
-
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 

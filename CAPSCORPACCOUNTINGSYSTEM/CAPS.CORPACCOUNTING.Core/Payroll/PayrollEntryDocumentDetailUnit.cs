@@ -1,9 +1,20 @@
 ﻿using CAPS.CORPACCOUNTING.Accounting;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.Payroll
 {
+    public enum TypeOfPayroll
+    {
+        [Display(Name = "Earning")]
+        Earning = 1,
+        [Display(Name = "Fringe")]
+        Fringe = 2,
+        [Display(Name = "Offset")]
+        Offset = 3
+    }
+
     /// <summary>
     /// CAPS_PayrollEntryDocumentDetail is the new table 
     /// </summary>

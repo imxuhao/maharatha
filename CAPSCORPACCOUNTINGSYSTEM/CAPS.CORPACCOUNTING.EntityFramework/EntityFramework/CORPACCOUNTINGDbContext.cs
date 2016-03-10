@@ -221,9 +221,6 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> BatchReportUnit Declaration</summary>
         public virtual IDbSet<BatchReportUnit> BatchReportUnit { get; set; }
 
-        /// <summary> TypeOfBusinessProcessGroupUnit Declaration</summary>
-        public virtual IDbSet<TypeOfBusinessProcessGroupUnit> TypeOfBusinessProcessGroupUnit { get; set; }
-
         /// <summary> TypeOfFinReportUnit Declaration</summary>
         public virtual IDbSet<TypeOfFinReportUnit> TypeOfFinReportUnit { get; set; }
 
@@ -264,36 +261,8 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> ArInvoiceEntryDocumentDetailUnit Declaration</summary>
         public virtual IDbSet<ArInvoiceEntryDocumentDetailUnit> ArInvoiceEntryDocumentDetailUnits { get; set; }
 
-        /// <summary> ServiceLevelAgreementUnit Declaration</summary>
-        public virtual IDbSet<ServiceLevelAgreementUnit> ServiceLevelAgreementUnit { get; set; }
-
-        /// <summary> BusinessProcessGroupUnit Declaration</summary>
-        public virtual IDbSet<BusinessProcessGroupUnit> BusinessProcessGroupUnit { get; set; }
-
         /// <summary> BatchReportItemUnit Declaration</summary>
         public virtual IDbSet<BatchReportItemUnit> BatchReportItemUnit { get; set; }
-
-        /// <summary> BusinessRuleCategoryUnit Declaration</summary>
-        public virtual IDbSet<BusinessRuleCategoryUnit> BusinessRuleCategoryUnit { get; set; }
-
-        /// <summary> BusinessRuleGroupUnit Declaration</summary>
-        public virtual IDbSet<BusinessRuleGroupUnit> BusinessRuleGroupUnit { get; set; }
-
-        /// <summary> BusinessProcessUnit Declaration</summary>
-        public virtual IDbSet<BusinessProcessUnit> BusinessProcessUnit { get; set; }
-
-        /// <summary> BusinessRuleUnit Declaration</summary>
-        public virtual IDbSet<BusinessRuleUnit> BusinessRuleUnit { get; set; }
-
-        /// <summary> RoleBusinessProcessUnit Declaration</summary>
-        public virtual IDbSet<RoleBusinessProcessUnit> RoleBusinessProcessUnit { get; set; }
-
-
-        /// <summary> TypeOfBusinessProcessControlUnit Declaration</summary>
-        public virtual IDbSet<TypeOfBusinessProcessControlUnit> TypeOfBusinessProcessControlUnit { get; set; }
-
-        /// <summary> UserRoleBusinessProcessUnit Declaration</summary>
-        public virtual IDbSet<UserRoleBusinessProcessUnit> UserRoleBusinessProcessUnit { get; set; }
 
         /// <summary> FiscalYearUnit Declaration</summary>
         public virtual IDbSet<FiscalYearUnit> FiscalYearUnit { get; set; }

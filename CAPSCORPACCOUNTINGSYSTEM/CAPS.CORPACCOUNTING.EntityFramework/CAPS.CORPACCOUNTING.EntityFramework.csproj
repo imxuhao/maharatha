@@ -675,6 +675,10 @@
     <Compile Include="Migrations\201603091205443_Add_BankRecClearedUnit_Table.Designer.cs">
       <DependentUpon>201603091205443_Add_BankRecClearedUnit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603100716240_Remove_BusinessProcess_Related_Tables.cs" />
+    <Compile Include="Migrations\201603100716240_Remove_BusinessProcess_Related_Tables.Designer.cs">
+      <DependentUpon>201603100716240_Remove_BusinessProcess_Related_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1110,6 +1114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603091205443_Add_BankRecClearedUnit_Table.resx">
       <DependentUpon>201603091205443_Add_BankRecClearedUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603100716240_Remove_BusinessProcess_Related_Tables.resx">
+      <DependentUpon>201603100716240_Remove_BusinessProcess_Related_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

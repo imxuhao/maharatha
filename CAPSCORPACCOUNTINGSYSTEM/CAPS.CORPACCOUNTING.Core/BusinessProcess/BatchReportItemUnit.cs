@@ -28,8 +28,8 @@ namespace CAPS.CORPACCOUNTING.BusinessProcess
 
         /// <summary>Gets or sets the BusinessProcessGroupId field. </summary>
         public virtual int BusinessProcessGroupId { get; set; }
-        [ForeignKey("BusinessProcessGroupId")]
-        public virtual BusinessProcessGroupUnit BusinessProcessGroupUnit { get; set; }
+        //[ForeignKey("BusinessProcessGroupId")]
+        //public virtual BusinessProcessGroupUnit BusinessProcessGroupUnit { get; set; }
         /// <summary>Gets or sets the UserReportId field. </summary>
         public virtual long UserReportId { get; set; }
 

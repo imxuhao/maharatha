@@ -5,7 +5,9 @@ Ext.define('LoginApp.view.bord.loginDashbord',{
     requires: [
         'LoginApp.view.bord.loginDashbordController',
         'LoginApp.view.bord.loginDashbordModel',
-        'LoginApp.view.login.LoginView'
+        'LoginApp.view.login.LoginView',
+        'LoginApp.view.resetpwd.ResetPassword',
+        'LoginApp.view.email.EmailActivation'
     ],
 
     controller: 'bord-logindashbord',
@@ -13,18 +15,18 @@ Ext.define('LoginApp.view.bord.loginDashbord',{
         type: 'bord-logindashbord'
     },
     header:false,
-    height: 350,
+    height: 390,
     width: 400,
     ui: 'navigation',
     renderTo: 'appDiv',
     titleRotation: 0,
     tabRotation: 0,
-    tabPosition: 'left',
+    tabPosition: 'bottom',
     //tabRotation:2,
     tabBar: {
         flex: 1,
         layout: {
-            align: 'left',
+            align: 'center',
             overflowHandler: 'none'
         }
     },
@@ -36,7 +38,7 @@ Ext.define('LoginApp.view.bord.loginDashbord',{
                 wide: {
                     iconAlign: 'top',
                     textAlign: 'center',
-                    width: 140
+                    flex: 1
                 },
                 tall: {
                     iconAlign: 'left',
@@ -48,7 +50,7 @@ Ext.define('LoginApp.view.bord.loginDashbord',{
     },
 
     items: [{
-        title: 'Login',
+        title: abp.localization.localize("LogIn"),
         iconCls: 'fa-unlock',
         baseCls:'',
         bodyStyle: {
@@ -57,25 +59,20 @@ Ext.define('LoginApp.view.bord.loginDashbord',{
         items: [{ xtype: 'loginView' }]
        
     }, {
-        title: 'Register',
-        iconCls: 'fa-key',
-        baseCls: '',
-        bodyStyle: {
-            'background-color': 'transparent'
-        }
-    }, {
-        title: 'Email Activation',
+        title: abp.localization.localize("EmailActivation"),
         iconCls: 'x-fa fa-inbox',
         baseCls: '',
         bodyStyle: {
             'background-color': 'transparent'
-        }
+        },
+        items: [{ xtype: 'emailactivationView' }]
     }, {
-        title: 'Reset Password',
+        title: abp.localization.localize("ForgotPassword"),
         iconCls: 'x-fa fa-lock',
         baseCls: '',
         bodyStyle: {
             'background-color': 'transparent'
-        }
+        },
+        items: [{ xtype: 'resetpwdView' }]
     }]
 });

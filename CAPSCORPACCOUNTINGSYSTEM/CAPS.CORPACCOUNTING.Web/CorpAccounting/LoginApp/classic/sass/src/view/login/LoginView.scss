@@ -1,0 +1,138 @@
+﻿@include extjs-text-field-ui(
+    $ui: 'roundedcorner',
+    $ui-height: 37px,
+    $ui-font-size: 14px,
+    $ui-font-family: $form-text-field-font-family,
+    $ui-font-weight: $form-text-field-font-weight,
+    $ui-color: #8290a3,
+    $ui-background-color: #dde3ec,
+    $ui-border-width: $form-text-field-border-width,
+    $ui-border-style: $form-text-field-border-style,
+    $ui-border-color: $form-text-field-border-color,
+    $ui-focus-border-color: $form-text-field-focus-border-color,
+    $ui-invalid-border-color: $form-text-field-invalid-border-color,
+    $ui-border-radius: 5px,
+    $ui-background-image: $form-text-field-background-image,
+    $ui-padding: $form-text-field-padding,
+    $ui-empty-color: $form-text-field-empty-color,
+    $ui-body-width: $form-text-field-body-width,
+
+    $ui-invalid-background-color: $form-field-invalid-background-color,
+    $ui-invalid-background-image: $form-field-invalid-background-image,
+    $ui-invalid-background-repeat: $form-field-invalid-background-repeat,
+    $ui-invalid-background-position: $form-field-invalid-background-position,
+
+    $ui-trigger-width: $form-trigger-width,
+    $ui-trigger-border-width: $form-trigger-border-width,
+    $ui-trigger-border-color: $form-trigger-border-color,
+    $ui-trigger-border-style: $form-trigger-border-style,
+
+    $ui-trigger-border-color-over: null,
+    $ui-trigger-border-color-focus: null,
+    $ui-trigger-border-color-pressed: null,
+
+    $ui-trigger-background-image: $form-trigger-background-image,
+    $ui-trigger-background-color: $form-trigger-background-color,
+
+    $ui-textarea-line-height: $form-textarea-line-height,
+    $ui-textarea-body-height: $form-textarea-body-height,
+    $ui-file-field-color: $form-file-field-color,
+
+    $ui-classic-border: $form-text-field-classic-border,
+
+$form-field-height:34px
+);
+
+@include extjs-button-small-ui(
+    $ui: 'roundedcorner',
+    $background-color: #36c6d3,
+$border-radius:3px,
+$border-color:#2bb8c4,
+$border-color-over:#2bb8c4,
+$border-color-focus:#2bb8c4,
+$padding:10px,
+$background-color-focus:#27a4b0,
+$background-color-pressed:#27a4b0,
+$color:white,
+$font-size:12px,
+$font-weight:bold
+);
+
+@include extjs-button-medium-ui(
+    $ui: 'roundedcorner',
+    $background-color: #36c6d3,
+$border-radius:3px,
+$border-color:#2bb8c4,
+$border-color-over:#2bb8c4,
+$border-color-focus:#2bb8c4,
+$padding:10px,
+$background-color-focus:#27a4b0,
+$background-color-pressed:#27a4b0,
+$color:white,
+$font-size:12px,
+$font-weight:bold
+);
+
+@include extjs-button-large-ui(
+    $ui: 'roundedcorner',
+    $background-color: #36c6d3,
+$border-radius:3px,
+$border-color:#2bb8c4,
+$border-color-over:#2bb8c4,
+$border-color-focus:#2bb8c4,
+$padding:10px,
+$background-color-focus:#27a4b0,
+$background-color-pressed:#27a4b0,
+$color:white,
+$font-size:12px,
+$font-weight:bold
+);
+
+
+@include extjs-button-small-ui(
+    $ui: 'back',
+    $background-color: white,
+$border-radius:3px,
+$border-color:white,
+$border-color-over:white,
+$border-color-focus:white,
+$padding:10px,
+$background-color-over:white,
+$background-color-focus:white,
+$background-color-pressed:white,
+$color:#6c7a8d,
+$font-size:12px,
+$font-weight:bold
+);
+
+@include extjs-button-medium-ui(
+    $ui: 'back',
+    $background-color: white,
+$border-radius:3px,
+$border-color:white,
+$border-color-over:white,
+$border-color-focus:white,
+$padding:10px,
+$background-color-over:white,
+$background-color-focus:white,
+$background-color-pressed:white,
+$color:#6c7a8d,
+$font-size:12px,
+$font-weight:bold
+);
+
+@include extjs-button-large-ui(
+    $ui: 'back',
+    $background-color: white,
+$border-radius:3px,
+$border-color:white,
+$border-color-over:white,
+$border-color-focus:white,
+$padding:10px,
+$background-color-over:white,
+$background-color-focus:white,
+$background-color-pressed:white,
+$color:#6c7a8d,
+$font-size:12px,
+$font-weight:bold
+);

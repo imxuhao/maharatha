@@ -26,14 +26,14 @@ Ext.define('LoginApp.view.login.LoginView', {
         bodyStyle: {
             'background-color': 'transparent'
         },
-        //padding: 10,
         width: '100%'
     },
     items: [
         {
             xtype: 'fieldset',
-            title: 'Login',
-            border: true,
+            title: abp.localization.localize("LogIn"),
+            border: false,
+            frame:false,
             width: '100%',
             layout: {
                 type: 'form',
@@ -43,20 +43,26 @@ Ext.define('LoginApp.view.login.LoginView', {
                 {
                     xtype: 'textfield',
                     name: 'TenancyName',
-                    emptyText: 'Tenancy name'
+                    emptyText: abp.localization.localize("TenancyName"),
+                    ui: 'roundedcorner',
+                    tabIndex:1
                 }, {
                     xtype: 'textfield',
                     name: 'UserNameOrEmailAddress',
-                    emptyText: 'User name or email',
+                    emptyText: abp.localization.localize("UserNameOrEmailAddress"),
                     allowBlank: false,
-                    msgTarget: 'side'
+                    msgTarget: 'side',
+                    ui: 'roundedcorner',
+                    tabIndex: 2
                 }, {
                     xtype: 'textfield',
                     name: 'Password',
                     inputType:'password',
-                    emptyText: 'Password',
+                    emptyText: abp.localization.localize("Password"),
                     allowBlank: false,
-                    msgTarget: 'side'
+                    msgTarget: 'side',
+                    ui: 'roundedcorner',
+                    tabIndex: 3
                 },
                 {
                     xtype: 'fieldcontainer',
@@ -69,16 +75,22 @@ Ext.define('LoginApp.view.login.LoginView', {
                         {
                             xtype: 'checkbox',
                             name: 'RememberMe',
-                            boxLabel: 'Remember Me',
-                            x: 80,
-                            y: 10
+                            boxLabel: abp.localization.localize("RememberMe"),
+                            style:{'padding-top':'5px'},
+                            x: 140,
+                            y: 10,
+                            tabIndex: 5
                             
                         },
                         {
                             xtype: 'button',
-                            text: 'LOG IN',
+                            text: abp.localization.localize("LogIn").toUpperCase(),
+                            ui: 'roundedcorner',
+                            scale: 'medium',
+                            width:120,
                             x: 0,
                             y: 10,
+                            tabIndex:4,
                             listeners: {
                                 click:'onLoginClick'
                             }

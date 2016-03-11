@@ -50,7 +50,8 @@
     <script type="text/javascript">
         @* This is used to get the application's root path from javascript.
         It's useful if you're running application in a virtual directory under IIS. *@
-        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
     </script>
 
 </head>
@@ -62,7 +63,7 @@
             <img src="~/Common/Images/app-logo-on-dark.png" alt="" width="149" height="35" />
         </a>
     </div>
-    <div id="appDiv" class="content" style="width: 400px !important;">
+    <div id="appDiv" class="content" style="width: 400px !important; background-color: transparent !important;">
         @RenderBody()
     </div>
     @Html.Action("Languages", "Account")
@@ -74,7 +75,7 @@
         <script src="~/libs/respond/respond.min.js"></script>
         <script src="~/libs/excanvas/excanvas.min.js"></script>
     <![endif]-->
-    @*@Html.IncludeScript(ScriptPaths.Json2)
+    @Html.IncludeScript(ScriptPaths.Json2)
     @Html.IncludeScript(ScriptPaths.JQuery)
     @Html.IncludeScript(ScriptPaths.JQuery_Migrate)
     @Html.IncludeScript(ScriptPaths.Bootstrap)
@@ -94,10 +95,10 @@
 
     <script type="text/javascript">
         abp.localization.defaultSourceName = '@LocalizationSourceName';
-    </script>*@
+    </script>
 
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
-    @*<script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
 
     @Html.IncludeScript(ScriptPaths.JQuery_Validation)
     @Html.IncludeScript(ScriptPaths.JQuery_Validation_Localization)
@@ -113,7 +114,7 @@
 
     @RenderSection("Scripts", false)
 
-    <script>
+    @*<script>
         jQuery(document).ready(function () {
             if (CurrentPage) {
                 CurrentPage.init();

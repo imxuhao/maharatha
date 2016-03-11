@@ -14901,6 +14901,9 @@
     <Content Include="CorpAccounting\LoginApp\app.js" />
     <Content Include="CorpAccounting\LoginApp\app\Application.js" />
     <Content Include="CorpAccounting\LoginApp\app\store\Personnel.js" />
+    <Content Include="CorpAccounting\LoginApp\classic\src\view\email\EmailActivation.js" />
+    <Content Include="CorpAccounting\LoginApp\classic\src\view\email\EmailActivationController.js" />
+    <Content Include="CorpAccounting\LoginApp\classic\src\view\email\EmailActivationModel.js" />
     <Content Include="CorpAccounting\LoginApp\app\view\main\MainController.js" />
     <Content Include="CorpAccounting\LoginApp\app\view\main\MainModel.js" />
     <Content Include="CorpAccounting\LoginApp\bootstrap.css" />
@@ -14914,6 +14917,9 @@
     <Content Include="CorpAccounting\LoginApp\classic\src\view\login\LoginViewModel.js" />
     <Content Include="CorpAccounting\LoginApp\classic\src\view\main\List.js" />
     <Content Include="CorpAccounting\LoginApp\classic\src\view\main\Main.js" />
+    <Content Include="CorpAccounting\LoginApp\classic\src\view\resetpwd\ResetPassword.js" />
+    <Content Include="CorpAccounting\LoginApp\classic\src\view\resetpwd\ResetPasswordController.js" />
+    <Content Include="CorpAccounting\LoginApp\classic\src\view\resetpwd\ResetPasswordModel.js" />
     <Content Include="CorpAccounting\LoginApp\index.html" />
     <Content Include="CorpAccounting\LoginApp\modern\src\view\main\List.js" />
     <Content Include="CorpAccounting\LoginApp\modern\src\view\main\Main.js" />
@@ -18815,6 +18821,7 @@
     <Content Include="CorpAccounting\build\development\Chaching\resources\fonts\OpenSans-Semibold.ttf" />
     <Content Include="CorpAccounting\build\development\Chaching\resources\fonts\OpenSans-SemiboldItalic.ttf" />
     <Content Include="CorpAccounting\build\development\Chaching\resources\Readme.md" />
+    <Content Include="CorpAccounting\LoginApp\classic\sass\src\view\login\LoginView.scss" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />

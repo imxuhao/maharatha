@@ -19,6 +19,8 @@ using CAPS.CORPACCOUNTING.CashEntry;
 using CAPS.CORPACCOUNTING.Reports;
 using CAPS.CORPACCOUNTING.ChargeEntry;
 using CAPS.CORPACCOUNTING.AccountReceivable;
+using CAPS.CORPACCOUNTING.Preferencees;
+using CAPS.CORPACCOUNTING.Common;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -360,7 +362,36 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public virtual IDbSet<UserReportUnit> UserReportUnit { get; set; }
 
 
-        
+        /// <summary> ArStatementDetailUnit Declaration</summary>
+        public virtual IDbSet<ArStatementDetailUnit> ArStatementDetailUnit { get; set; }
+
+        /// <summary> PreferenceChoiceGroupUnit Declaration</summary>
+        public virtual IDbSet<PreferenceChoiceGroupUnit> PreferenceChoiceGroupUnit { get; set; }
+
+        /// <summary> TypeOfPreferenceUnit Declaration</summary>
+        public virtual IDbSet<TypeOfPreferenceUnit> TypeOfPreferenceUnit { get; set; }
+
+        /// <summary> DefaultPreferenceUnit Declaration</summary>
+        public virtual IDbSet<DefaultPreferenceUnit> DefaultPreferenceUnit { get; set; }
+
+        /// <summary> SystemPreferenceUnit Declaration</summary>
+        public virtual IDbSet<SystemPreferenceUnit> SystemPreferenceUnit { get; set; }
+
+        /// <summary> ErrorMessageUnit Declaration</summary>
+        public virtual IDbSet<ErrorMessageUnit> ErrorMessageUnit { get; set; }
+
+        /// <summary> TypeOfAccountClassificationUnit Declaration</summary>
+        public virtual IDbSet<TypeOfAccountClassificationUnit> TypeOfAccountClassificationUnit { get; set; }
+
+        /// <summary> TypeOfAccountUnit Declaration</summary>
+        public virtual IDbSet<TypeOfAccountUnit> TypeOfAccountUnit { get; set; }
+
+        /// <summary> WebAddressUnit Declaration</summary>
+        public virtual IDbSet<WebAddressUnit> WebAddressUnit { get; set; }
+
+        /// <summary> VendorGroupUnit Declaration</summary>
+        public virtual IDbSet<VendorGroupUnit> VendorGroupUnit { get; set; }
+
 
 
 

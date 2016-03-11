@@ -755,6 +755,46 @@
     <Compile Include="Migrations\201603101336058_Add_UserReportUnit_Table.Designer.cs">
       <DependentUpon>201603101336058_Add_UserReportUnit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603111214543_Add_ArStatementDetail_Table.cs" />
+    <Compile Include="Migrations\201603111214543_Add_ArStatementDetail_Table.Designer.cs">
+      <DependentUpon>201603111214543_Add_ArStatementDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111220526_Add_PreferenceChoiceGroup_Table.cs" />
+    <Compile Include="Migrations\201603111220526_Add_PreferenceChoiceGroup_Table.Designer.cs">
+      <DependentUpon>201603111220526_Add_PreferenceChoiceGroup_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111223088_Add_TypeOfPreference_Table.cs" />
+    <Compile Include="Migrations\201603111223088_Add_TypeOfPreference_Table.Designer.cs">
+      <DependentUpon>201603111223088_Add_TypeOfPreference_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111226027_Add_DefaultPreference_Table.cs" />
+    <Compile Include="Migrations\201603111226027_Add_DefaultPreference_Table.Designer.cs">
+      <DependentUpon>201603111226027_Add_DefaultPreference_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111227446_Add_SystemPreference_Table.cs" />
+    <Compile Include="Migrations\201603111227446_Add_SystemPreference_Table.Designer.cs">
+      <DependentUpon>201603111227446_Add_SystemPreference_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111228439_Add_ErrorMessage_Table.cs" />
+    <Compile Include="Migrations\201603111228439_Add_ErrorMessage_Table.Designer.cs">
+      <DependentUpon>201603111228439_Add_ErrorMessage_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111229532_Add_TypeOfAccountClassification_Table.cs" />
+    <Compile Include="Migrations\201603111229532_Add_TypeOfAccountClassification_Table.Designer.cs">
+      <DependentUpon>201603111229532_Add_TypeOfAccountClassification_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111231061_Add_TypeOfAccount_Table.cs" />
+    <Compile Include="Migrations\201603111231061_Add_TypeOfAccount_Table.Designer.cs">
+      <DependentUpon>201603111231061_Add_TypeOfAccount_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111232058_Add_WebAddress_Table.cs" />
+    <Compile Include="Migrations\201603111232058_Add_WebAddress_Table.Designer.cs">
+      <DependentUpon>201603111232058_Add_WebAddress_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111233154_Add_VendorGroup_Table.cs" />
+    <Compile Include="Migrations\201603111233154_Add_VendorGroup_Table.Designer.cs">
+      <DependentUpon>201603111233154_Add_VendorGroup_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1250,6 +1290,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603101336058_Add_UserReportUnit_Table.resx">
       <DependentUpon>201603101336058_Add_UserReportUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111214543_Add_ArStatementDetail_Table.resx">
+      <DependentUpon>201603111214543_Add_ArStatementDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111220526_Add_PreferenceChoiceGroup_Table.resx">
+      <DependentUpon>201603111220526_Add_PreferenceChoiceGroup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111223088_Add_TypeOfPreference_Table.resx">
+      <DependentUpon>201603111223088_Add_TypeOfPreference_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111226027_Add_DefaultPreference_Table.resx">
+      <DependentUpon>201603111226027_Add_DefaultPreference_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111227446_Add_SystemPreference_Table.resx">
+      <DependentUpon>201603111227446_Add_SystemPreference_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111228439_Add_ErrorMessage_Table.resx">
+      <DependentUpon>201603111228439_Add_ErrorMessage_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111229532_Add_TypeOfAccountClassification_Table.resx">
+      <DependentUpon>201603111229532_Add_TypeOfAccountClassification_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111231061_Add_TypeOfAccount_Table.resx">
+      <DependentUpon>201603111231061_Add_TypeOfAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111232058_Add_WebAddress_Table.resx">
+      <DependentUpon>201603111232058_Add_WebAddress_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111233154_Add_VendorGroup_Table.resx">
+      <DependentUpon>201603111233154_Add_VendorGroup_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

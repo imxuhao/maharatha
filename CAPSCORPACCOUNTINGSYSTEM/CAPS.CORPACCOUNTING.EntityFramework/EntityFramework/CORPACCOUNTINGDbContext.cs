@@ -393,6 +393,42 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public virtual IDbSet<VendorGroupUnit> VendorGroupUnit { get; set; }
 
 
+        /// <summary> Code1099T4RateUnit Declaration</summary>
+        public virtual IDbSet<Code1099T4RateUnit> Code1099T4RateUnit { get; set; }
+
+        /// <summary> Code1099T4TypeUnit Declaration</summary>
+        public virtual IDbSet<Code1099T4TypeUnit> Code1099T4TypeUnit { get; set; }
+
+        /// <summary> EmailAddressUnit Declaration</summary>
+        public virtual IDbSet<EmailAddressUnit> EmailAddressUnit { get; set; }
+
+        /// <summary> EmailMsgLogUnit Declaration</summary>
+        public virtual IDbSet<EmailMsgLogUnit> EmailMsgLogUnit { get; set; }
+
+
+        /// <summary> EmailMsgAddressUnit Declaration</summary>
+        public virtual IDbSet<EmailMsgAddressUnit> EmailMsgAddressUnit { get; set; }
+
+        /// <summary> FedExTranslationUnit Declaration</summary>
+        public virtual IDbSet<FedExTranslationUnit> FedExTranslationUnit { get; set; }
+
+        /// <summary> TypeOfProfitCalcUnit Declaration</summary>
+        public virtual IDbSet<TypeOfProfitCalcUnit> TypeOfProfitCalcUnit { get; set; }
+
+        /// <summary> ProfitRuleUnit Declaration</summary>
+        public virtual IDbSet<ProfitRuleUnit> ProfitRuleUnit { get; set; }
+
+        /// <summary> SecureObjectUnit Declaration</summary>
+        public virtual IDbSet<SecureObjectUnit> SecureObjectUnit { get; set; }
+
+        /// <summary> TaxRebateUnit Declaration</summary>
+        public virtual IDbSet<TaxRebateUnit> TaxRebateUnit { get; set; }
+
+        /// <summary> WorkSheet1099Unit Declaration</summary>
+        public virtual IDbSet<WorkSheet1099Unit> WorkSheet1099Unit { get; set; }
+
+        /// <summary> NewCOATrimUnit Declaration</summary>
+        public virtual IDbSet<NewCOATrimUnit> NewCOATrimUnit { get; set; }
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

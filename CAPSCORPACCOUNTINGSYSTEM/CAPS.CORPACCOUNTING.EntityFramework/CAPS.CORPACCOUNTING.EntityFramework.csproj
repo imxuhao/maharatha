@@ -795,6 +795,54 @@
     <Compile Include="Migrations\201603111233154_Add_VendorGroup_Table.Designer.cs">
       <DependentUpon>201603111233154_Add_VendorGroup_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603111259295_Add_Code1099T4Rate_Table.cs" />
+    <Compile Include="Migrations\201603111259295_Add_Code1099T4Rate_Table.Designer.cs">
+      <DependentUpon>201603111259295_Add_Code1099T4Rate_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111300451_Add_Code1099T4TypeUnit_Table.cs" />
+    <Compile Include="Migrations\201603111300451_Add_Code1099T4TypeUnit_Table.Designer.cs">
+      <DependentUpon>201603111300451_Add_Code1099T4TypeUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111302138_Add_EmailAddressUnit_Table.cs" />
+    <Compile Include="Migrations\201603111302138_Add_EmailAddressUnit_Table.Designer.cs">
+      <DependentUpon>201603111302138_Add_EmailAddressUnit_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111304540_Add_EmailMsgLog_Table.cs" />
+    <Compile Include="Migrations\201603111304540_Add_EmailMsgLog_Table.Designer.cs">
+      <DependentUpon>201603111304540_Add_EmailMsgLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111306413_Add_EmailMsgAddress_Table.cs" />
+    <Compile Include="Migrations\201603111306413_Add_EmailMsgAddress_Table.Designer.cs">
+      <DependentUpon>201603111306413_Add_EmailMsgAddress_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111311314_Add_FedExTranslation_Table.cs" />
+    <Compile Include="Migrations\201603111311314_Add_FedExTranslation_Table.Designer.cs">
+      <DependentUpon>201603111311314_Add_FedExTranslation_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111312539_Add_TypeOfProfitCalc_Table.cs" />
+    <Compile Include="Migrations\201603111312539_Add_TypeOfProfitCalc_Table.Designer.cs">
+      <DependentUpon>201603111312539_Add_TypeOfProfitCalc_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111314177_Add_ProfitRule_Table.cs" />
+    <Compile Include="Migrations\201603111314177_Add_ProfitRule_Table.Designer.cs">
+      <DependentUpon>201603111314177_Add_ProfitRule_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111315338_Add_SecureObject_Table.cs" />
+    <Compile Include="Migrations\201603111315338_Add_SecureObject_Table.Designer.cs">
+      <DependentUpon>201603111315338_Add_SecureObject_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111316480_Add_TaxRebate_Table.cs" />
+    <Compile Include="Migrations\201603111316480_Add_TaxRebate_Table.Designer.cs">
+      <DependentUpon>201603111316480_Add_TaxRebate_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111318023_Add_WorkSheet1099_Table.cs" />
+    <Compile Include="Migrations\201603111318023_Add_WorkSheet1099_Table.Designer.cs">
+      <DependentUpon>201603111318023_Add_WorkSheet1099_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111319228_Add_NewCOATrim_Table.cs" />
+    <Compile Include="Migrations\201603111319228_Add_NewCOATrim_Table.Designer.cs">
+      <DependentUpon>201603111319228_Add_NewCOATrim_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1320,6 +1368,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603111233154_Add_VendorGroup_Table.resx">
       <DependentUpon>201603111233154_Add_VendorGroup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111259295_Add_Code1099T4Rate_Table.resx">
+      <DependentUpon>201603111259295_Add_Code1099T4Rate_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111300451_Add_Code1099T4TypeUnit_Table.resx">
+      <DependentUpon>201603111300451_Add_Code1099T4TypeUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111302138_Add_EmailAddressUnit_Table.resx">
+      <DependentUpon>201603111302138_Add_EmailAddressUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111304540_Add_EmailMsgLog_Table.resx">
+      <DependentUpon>201603111304540_Add_EmailMsgLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111306413_Add_EmailMsgAddress_Table.resx">
+      <DependentUpon>201603111306413_Add_EmailMsgAddress_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111311314_Add_FedExTranslation_Table.resx">
+      <DependentUpon>201603111311314_Add_FedExTranslation_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111312539_Add_TypeOfProfitCalc_Table.resx">
+      <DependentUpon>201603111312539_Add_TypeOfProfitCalc_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111314177_Add_ProfitRule_Table.resx">
+      <DependentUpon>201603111314177_Add_ProfitRule_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111315338_Add_SecureObject_Table.resx">
+      <DependentUpon>201603111315338_Add_SecureObject_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111316480_Add_TaxRebate_Table.resx">
+      <DependentUpon>201603111316480_Add_TaxRebate_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111318023_Add_WorkSheet1099_Table.resx">
+      <DependentUpon>201603111318023_Add_WorkSheet1099_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111319228_Add_NewCOATrim_Table.resx">
+      <DependentUpon>201603111319228_Add_NewCOATrim_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

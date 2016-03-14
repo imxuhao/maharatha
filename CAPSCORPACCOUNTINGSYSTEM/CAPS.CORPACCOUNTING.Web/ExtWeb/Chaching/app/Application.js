@@ -3,6 +3,8 @@
  * calls Ext.application(). This is the ideal place to handle application launch and
  * initialization details.
  */
+Ext.require(
+['Ext.*']);
 Ext.define('Chaching.Application', {
     extend: 'Ext.app.Application',
     
@@ -11,9 +13,12 @@ Ext.define('Chaching.Application', {
     stores: [
         // TODO: add global / shared stores here
     ],
-    
+    //requires: [
+    //    'Chaching.view.main.ChachingViewport'
+    //],
     launch: function () {
         // TODO - Launch the application
+        Ext.create('Chaching.view.main.ChachingViewport');
     },
 
     onAppUpdate: function () {

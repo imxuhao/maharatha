@@ -9,14 +9,15 @@ Ext.application({
     extend: 'Chaching.Application',
 
     requires: [
-        'Chaching.view.main.Main'
+        //'Chaching.view.main.Main'
+        //'Chaching.view.main.ChachingViewport'
     ],
 
     // The name of the initial view to create. With the classic toolkit this class
     // will gain a "viewport" plugin if it does not extend Ext.Viewport. With the
     // modern toolkit, the main view will be added to the Viewport.
     //
-    mainView: 'Chaching.view.main.Main'
+    //mainView: 'Chaching.view.main.ChachingViewport'
 	
     //-------------------------------------------------------------------------
     // Most customizations should be made to Chaching.Application. If you need to

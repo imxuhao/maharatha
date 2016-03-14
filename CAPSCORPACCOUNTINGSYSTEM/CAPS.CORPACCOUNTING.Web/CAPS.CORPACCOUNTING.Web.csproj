@@ -558,6 +558,7 @@
     </Content>
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\capslogo.png" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="ExtWeb\.sencha\workspace\plugin.xml" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\Chaching-all.css" />
@@ -1765,6 +1766,12 @@
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\Application.js" />
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeader.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeaderController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeaderModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\main\ChachingViewport.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\main\ChachingViewportController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\main\ChachingViewportModel.js" />
     <Content Include="ExtWeb\Chaching\app\view\main\MainController.js" />
     <Content Include="ExtWeb\Chaching\app\view\main\MainModel.js" />
     <Content Include="ExtWeb\Chaching\bootstrap.css" />
@@ -1772,6 +1779,9 @@
     <Content Include="ExtWeb\Chaching\build.xml" />
     <Content Include="ExtWeb\Chaching\classic\src\view\main\List.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\main\Main.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\menu\ChachingMenu.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\menu\ChachingMenuController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\menu\ChachingMenuModel.js" />
     <Content Include="ExtWeb\Chaching\index.html" />
     <Content Include="ExtWeb\Chaching\modern\src\view\main\List.js" />
     <Content Include="ExtWeb\Chaching\modern\src\view\main\Main.js" />
@@ -18822,6 +18832,7 @@
     <Content Include="ExtWeb\build\development\Chaching\resources\fonts\OpenSans-SemiboldItalic.ttf" />
     <Content Include="ExtWeb\build\development\Chaching\resources\Readme.md" />
     <Content Include="ExtWeb\LoginApp\classic\sass\src\view\login\LoginView.scss" />
+    <Content Include="ExtWeb\Chaching\classic\sass\src\view\menu\ChachingMenu.scss" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />

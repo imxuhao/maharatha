@@ -31,12 +31,12 @@
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
 
-    @Styles.Render("~/Bundles/Frontend/libs/css" + (CultureHelper.IsRtl ? "RTL" : ""))
+    @*@Styles.Render("~/Bundles/Frontend/libs/css" + (CultureHelper.IsRtl ? "RTL" : ""))
     @RenderSection("Styles", false)
     @Styles.Render("~/Bundles/Frontend/metronic/css" + (CultureHelper.IsRtl ? "RTL" : ""))
     @Styles.Render("~/Bundles/Common/css")
 
-    @Html.IncludeStyle("~/Views/Layout/layout.css")
+    @Html.IncludeStyle("~/Views/Layout/layout.css")*@
 
     <script type="text/javascript">
         @* This is used to get the application's root path from javascript.

@@ -7516,6 +7516,204 @@
     -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 2px 2px;
     box-shadow: rgba(0, 0, 0, 0.5) 0 2px 2px;
 }
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:461 */
+.x-treelist-nav {
+    background-color: white;
+    background-position: 24px 0%;
+    padding: 0 0 0 0;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:466 */
+.x-big .x-treelist-nav {
+    background-position:  0%;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:94 */
+.x-treelist-nav .x-treelist-toolstrip {
+    background-color: white;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:103 */
+.x-treelist-nav .x-treelist-item-selected.x-treelist-item-tool {
+    color: #f0f0f0;
+    background-color: #5fa2dd;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:125 */
+.x-treelist-nav .x-treelist-item-selected > .x-treelist-row {
+    background-color: #f2f8fc;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:134 */
+.x-treelist-nav .x-treelist-item-tool {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:141 */
+.x-treelist-nav .x-treelist-item-tool-floated:after {
+    height: 32px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: " ";
+    width: 4px;
+    background-color: #5fa2dd;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:157 */
+.x-treelist-nav .x-treelist-item-icon:before,
+.x-treelist-nav .x-treelist-item-tool:before,
+.x-treelist-nav .x-treelist-item-expander {
+    line-height: 32px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:169 */
+.x-treelist-nav .x-treelist-item-icon,
+.x-treelist-nav .x-treelist-item-tool,
+.x-treelist-nav .x-treelist-item-expander {
+    text-align: center;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:175 */
+.x-treelist-nav .x-treelist-item-icon,
+.x-treelist-nav .x-treelist-item-tool {
+    color: #83b2db;
+    font-size: 20px;
+    width: 24px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:188 */
+.x-treelist-nav .x-treelist-item-tool {
+    width: 44px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:198 */
+.x-treelist-nav .x-treelist-item-expander {
+    color: #83b2db;
+    font-size: 16px;
+    width: 24px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:227 */
+.x-treelist-nav .x-treelist-item-text {
+    color: #485a6a;
+    margin-left: 30px;
+    margin-right: 24px;
+    line-height: 32px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:243 */
+.x-treelist-nav .x-treelist-row {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:249 */
+.x-treelist-nav .x-treelist-row-over:before,
+.x-treelist-nav .x-treelist-item-selected > .x-treelist-row:before {
+    content: " ";
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:264 */
+.x-treelist-nav .x-treelist-item-selected > .x-treelist-row-over:before {
+    background-color: #fff;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:268 */
+.x-treelist-nav .x-treelist-item-selected > .x-treelist-row:before {
+    background-color: #5fa2dd;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:274 */
+.x-treelist-nav .x-treelist-item-floated .x-treelist-container {
+    width: auto;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:277 */
+.x-treelist-nav .x-treelist-item-floated > .x-treelist-row {
+    background-color: white;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:281 */
+.x-treelist-nav .x-treelist-item-floated > .x-treelist-container {
+    margin-left: -24px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:284 */
+.x-big .x-treelist-nav .x-treelist-item-floated > .x-treelist-container {
+    margin-left: 0;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:290 */
+.x-treelist-nav .x-treelist-item-floated > * > * > .x-treelist-item-text {
+    margin-left: 0;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:294 */
+.x-treelist-nav .x-treelist-item-floated > * .x-treelist-row {
+    padding-left: 0;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:298 */
+.x-treelist-nav .x-treelist-item-floated .x-treelist-row:before {
+    width: 0;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:302 */
+.x-treelist-nav .x-treelist-item-floated > .x-treelist-row-over {
+    background-color: white;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:305 */
+.x-treelist-nav .x-treelist-item-floated > .x-treelist-row-over > * > .x-treelist-item-text {
+    color: #485a6a;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:311 */
+.x-treelist-nav .x-treelist-item-expanded {
+    background-color: white;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:329 */
+.x-treelist-nav.x-treelist-highlight-path .x-treelist-item-over > * > .x-treelist-item-icon {
+    transition: color 0.5s;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:333 */
+.x-treelist-nav.x-treelist-highlight-path .x-treelist-item-over > * > .x-treelist-item-text {
+    color: #5b9bd1;
+    transition: color 0.5s;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:337 */
+.x-treelist-nav.x-treelist-highlight-path .x-treelist-item-over > * > .x-treelist-item-expander {
+    transition: color 0.5s;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:344 */
+.x-treelist-nav .x-treelist-row-over {
+    background-color: #f2f8fc;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:347 */
+.x-treelist-nav .x-treelist-row-over > * > .x-treelist-item-icon {
+    transition: color 0.5s;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:351 */
+.x-treelist-nav .x-treelist-row-over > * > .x-treelist-item-text {
+    color: #5b9bd1;
+    transition: color 0.5s;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:355 */
+.x-treelist-nav .x-treelist-row-over > * > .x-treelist-item-expander {
+    transition: color 0.5s;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:362 */
+.x-treelist-nav .x-treelist-expander-first .x-treelist-item-icon {
+    left: 24px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:371 */
+.x-treelist-nav .x-treelist-expander-first .x-treelist-item-text {
+    margin-left: 54px;
+    margin-right: 0;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:381 */
+.x-treelist-nav .x-treelist-expander-first .x-treelist-item-hide-icon > * > * > .x-treelist-item-text {
+    margin-left: 30px;
+}
+/* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:391 */
+.x-treelist-nav .x-treelist-item-hide-icon > * > * > .x-treelist-item-text {
+    margin-left: 6px;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/menu/ChachingMenu.scss:97 */
+.treelist-with-nav .x-panel-body {
+    background-color: #32404e !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/menu/ChachingMenu.scss:100 */
+.x-treelist-nav .x-treelist-item-text {
+    font-weight: 500 !important;
+    font-family: "Open Sans", sans-serif;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/menu/ChachingMenu.scss:104 */
+.x-treelist-nav {
+    border-radius: 5px !important;
+}
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:187 */
 .x-tab-navigation-top {
     -webkit-border-radius: 0;

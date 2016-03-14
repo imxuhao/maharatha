@@ -39,7 +39,7 @@
         Ext.beforeLoad = function (tags) {
             var s = location.search,  // the query string (ex "?foo=1&bar")
                 profile;
-            var applicationDir = abp.appPath+'CorpAccounting/Chaching/';
+            var applicationDir = abp.appPath+'ExtWeb/Chaching/';
             // For testing look for "?classic" or "?modern" in the URL to override
             // device detection default.
             //
@@ -66,4 +66,4 @@
 </script>
 
 <!-- The line below must be kept intact for Sencha Cmd to build your application -->
-<script id="microloader" data-app="3eaccde9-9942-4e29-8da3-49258118d93c" type="text/javascript" src="~/CorpAccounting/Chaching/bootstrap.js"></script>
+<script id="microloader" data-app="3eaccde9-9942-4e29-8da3-49258118d93c" type="text/javascript" src="~/ExtWeb/Chaching/bootstrap.js"></script>

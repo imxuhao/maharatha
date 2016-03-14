@@ -49,7 +49,7 @@ Ext.define('LoginApp.view.login.LoginView', {
                 }, {
                     xtype: 'textfield',
                     name: 'UserNameOrEmailAddress',
-                    emptyText: abp.localization.localize("UserNameOrEmailAddress"),
+                    emptyText: abp.localization.localize("UserNameOrEmail"),
                     allowBlank: false,
                     msgTarget: 'side',
                     ui: 'roundedcorner',

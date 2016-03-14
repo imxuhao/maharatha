@@ -10,7 +10,7 @@
         Ext.beforeLoad = function(tags) {
             var s = location.search, // the query string (ex "?foo=1&bar")
                 profile;
-            var applicationDir = abp.appPath + 'CorpAccounting/LoginApp/';
+            var applicationDir = abp.appPath + 'ExtWeb/LoginApp/';
             // For testing look for "?classic" or "?modern" in the URL to override
             // device detection default.
             //
@@ -34,7 +34,7 @@
         };
 </script>
     <!-- The line below must be kept intact for Sencha Cmd to build your application -->
-<script id="microloader" data-app="07bac92d-2915-44d7-a024-2a080b8867c1" type="text/javascript" src="../../CorpAccounting/LoginApp/bootstrap.js"></script>
+<script id="microloader" data-app="07bac92d-2915-44d7-a024-2a080b8867c1" type="text/javascript" src="../../ExtWeb/LoginApp/bootstrap.js"></script>
 
   
 

@@ -9,7 +9,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
     /// ArInvoiceEntryDocument is the table name in lajit
     /// </summary>
     [Table("CAPS_ARInvoiceEntryDocument")]
-    class ArInvoiceEntryDocumentUnit: AccountingHeaderTransactionsUnit
+   public class ArInvoiceEntryDocumentUnit: AccountingHeaderTransactionsUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual int? BatchId { get; set; }

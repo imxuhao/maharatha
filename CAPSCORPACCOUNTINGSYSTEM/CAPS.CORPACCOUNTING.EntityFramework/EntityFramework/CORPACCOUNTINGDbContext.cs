@@ -448,6 +448,35 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> AttachedObjectUnit Declaration</summary>
         public virtual IDbSet<AttachedObjectUnit> AttachedObjectUnit { get; set; }
 
+        /// <summary> NotedObjectUnit Declaration</summary>
+        public virtual IDbSet<NotedObjectUnit> NotedObjectUnit { get; set; }
+
+        /// <summary> ProfitVariableUnit Declaration</summary>
+        public virtual IDbSet<ProfitVariableUnit> ProfitVariableUnit { get; set; }
+
+        /// <summary> TypeOfSicCodeUnit Declaration</summary>
+        public virtual IDbSet<TypeOfSicCodeUnit> TypeOfSicCodeUnit { get; set; }
+
+        /// <summary> SICCodeUnit Declaration</summary>
+        public virtual IDbSet<SICCodeUnit> SICCodeUnit { get; set; }
+
+        /// <summary> UploadNameUnit Declaration</summary>
+        public virtual IDbSet<UploadNameUnit> UploadNameUnit { get; set; }
+
+        /// <summary> VendorShipMethodUnit Declaration</summary>
+        public virtual IDbSet<VendorShipMethodUnit> VendorShipMethodUnit { get; set; }
+
+        /// <summary> WorkFlowUnit Declaration</summary>
+        public virtual IDbSet<WorkFlowUnit> WorkFlowUnit { get; set; }
+
+        /// <summary> WorkFlowLogUnit Declaration</summary>
+        public virtual IDbSet<WorkFlowLogUnit> WorkFlowLogUnit { get; set; }
+
+        /// <summary> ReceiptHistoryUnit Declaration</summary>
+        public virtual IDbSet<ReceiptHistoryUnit> ReceiptHistoryUnit { get; set; }
+
+        /// <summary> PaymentPrintHistoryUnit Declaration</summary>
+        public virtual IDbSet<PaymentPrintHistoryUnit> PaymentPrintHistoryUnit { get; set; }
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 

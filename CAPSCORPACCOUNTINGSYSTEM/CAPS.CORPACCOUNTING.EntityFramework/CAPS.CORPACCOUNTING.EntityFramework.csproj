@@ -871,6 +871,46 @@
     <Compile Include="Migrations\201603141045079_Add_AttachedObject_Table.Designer.cs">
       <DependentUpon>201603141045079_Add_AttachedObject_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603141151463_Add_NotedObject_Table.cs" />
+    <Compile Include="Migrations\201603141151463_Add_NotedObject_Table.Designer.cs">
+      <DependentUpon>201603141151463_Add_NotedObject_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141201596_Add_ProfitVariable_Table.cs" />
+    <Compile Include="Migrations\201603141201596_Add_ProfitVariable_Table.Designer.cs">
+      <DependentUpon>201603141201596_Add_ProfitVariable_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141206058_Add_TypeOfSicCode_Table.cs" />
+    <Compile Include="Migrations\201603141206058_Add_TypeOfSicCode_Table.Designer.cs">
+      <DependentUpon>201603141206058_Add_TypeOfSicCode_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141214093_Add_SICCode_Table.cs" />
+    <Compile Include="Migrations\201603141214093_Add_SICCode_Table.Designer.cs">
+      <DependentUpon>201603141214093_Add_SICCode_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141216072_Add_UploadName_Table.cs" />
+    <Compile Include="Migrations\201603141216072_Add_UploadName_Table.Designer.cs">
+      <DependentUpon>201603141216072_Add_UploadName_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141222129_Add_VendorShipMethod_Table.cs" />
+    <Compile Include="Migrations\201603141222129_Add_VendorShipMethod_Table.Designer.cs">
+      <DependentUpon>201603141222129_Add_VendorShipMethod_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141225439_Add_WorkFlow_Table.cs" />
+    <Compile Include="Migrations\201603141225439_Add_WorkFlow_Table.Designer.cs">
+      <DependentUpon>201603141225439_Add_WorkFlow_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141233148_Add_WorkFlowLog_Table.cs" />
+    <Compile Include="Migrations\201603141233148_Add_WorkFlowLog_Table.Designer.cs">
+      <DependentUpon>201603141233148_Add_WorkFlowLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141242558_Add_ReceiptHistory_Table.cs" />
+    <Compile Include="Migrations\201603141242558_Add_ReceiptHistory_Table.Designer.cs">
+      <DependentUpon>201603141242558_Add_ReceiptHistory_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141251541_Add_PaymentPrintHistory_Table.cs" />
+    <Compile Include="Migrations\201603141251541_Add_PaymentPrintHistory_Table.Designer.cs">
+      <DependentUpon>201603141251541_Add_PaymentPrintHistory_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1453,6 +1493,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603141045079_Add_AttachedObject_Table.resx">
       <DependentUpon>201603141045079_Add_AttachedObject_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141151463_Add_NotedObject_Table.resx">
+      <DependentUpon>201603141151463_Add_NotedObject_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141201596_Add_ProfitVariable_Table.resx">
+      <DependentUpon>201603141201596_Add_ProfitVariable_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141206058_Add_TypeOfSicCode_Table.resx">
+      <DependentUpon>201603141206058_Add_TypeOfSicCode_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141214093_Add_SICCode_Table.resx">
+      <DependentUpon>201603141214093_Add_SICCode_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141216072_Add_UploadName_Table.resx">
+      <DependentUpon>201603141216072_Add_UploadName_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141222129_Add_VendorShipMethod_Table.resx">
+      <DependentUpon>201603141222129_Add_VendorShipMethod_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141225439_Add_WorkFlow_Table.resx">
+      <DependentUpon>201603141225439_Add_WorkFlow_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141233148_Add_WorkFlowLog_Table.resx">
+      <DependentUpon>201603141233148_Add_WorkFlowLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141242558_Add_ReceiptHistory_Table.resx">
+      <DependentUpon>201603141242558_Add_ReceiptHistory_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141251541_Add_PaymentPrintHistory_Table.resx">
+      <DependentUpon>201603141251541_Add_PaymentPrintHistory_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

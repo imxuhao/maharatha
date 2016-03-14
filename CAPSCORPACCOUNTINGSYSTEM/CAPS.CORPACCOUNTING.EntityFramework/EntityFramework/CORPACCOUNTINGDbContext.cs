@@ -429,6 +429,24 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> NewCOATrimUnit Declaration</summary>
         public virtual IDbSet<NewCOATrimUnit> NewCOATrimUnit { get; set; }
+       
+        /// <summary> ControlAccountUnit Declaration</summary>
+        public virtual IDbSet<ControlAccountUnit> ControlAccountUnit { get; set; }
+        /// <summary> ConsolidationGroupUnit Declaration</summary>
+        public virtual IDbSet<ConsolidationGroupUnit> ConsolidationGroupUnit { get; set; }
+
+        /// <summary> ConsolidationDetailUnit Declaration</summary>
+        public virtual IDbSet<ConsolidationDetailUnit> ConsolidationDetailUnit { get; set; }
+        /// <summary> ApprovalUnit Declaration</summary>
+        public virtual IDbSet<ApprovalUnit> ApprovalUnit { get; set; }
+
+        /// <summary> AccountingControlUnit Declaration</summary>
+        public virtual IDbSet<AccountingControlUnit> AccountingControlUnit { get; set; }
+
+        /// <summary> ApprovedSoxUnit Declaration</summary>
+        public virtual IDbSet<ApprovedSoxUnit> ApprovedSoxUnit { get; set; }
+        /// <summary> AttachedObjectUnit Declaration</summary>
+        public virtual IDbSet<AttachedObjectUnit> AttachedObjectUnit { get; set; }
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

@@ -843,6 +843,34 @@
     <Compile Include="Migrations\201603111319228_Add_NewCOATrim_Table.Designer.cs">
       <DependentUpon>201603111319228_Add_NewCOATrim_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603141034448_Add_ControlAccount_Table.cs" />
+    <Compile Include="Migrations\201603141034448_Add_ControlAccount_Table.Designer.cs">
+      <DependentUpon>201603141034448_Add_ControlAccount_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141036213_Add_ConsolidationGroup_Table.cs" />
+    <Compile Include="Migrations\201603141036213_Add_ConsolidationGroup_Table.Designer.cs">
+      <DependentUpon>201603141036213_Add_ConsolidationGroup_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141038099_Add_ConsolidationDetail_Table.cs" />
+    <Compile Include="Migrations\201603141038099_Add_ConsolidationDetail_Table.Designer.cs">
+      <DependentUpon>201603141038099_Add_ConsolidationDetail_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141039491_Add_Approval_Table.cs" />
+    <Compile Include="Migrations\201603141039491_Add_Approval_Table.Designer.cs">
+      <DependentUpon>201603141039491_Add_Approval_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141041205_Add_AccountingControl_Table.cs" />
+    <Compile Include="Migrations\201603141041205_Add_AccountingControl_Table.Designer.cs">
+      <DependentUpon>201603141041205_Add_AccountingControl_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141043104_Add_ApprovedSox_Table.cs" />
+    <Compile Include="Migrations\201603141043104_Add_ApprovedSox_Table.Designer.cs">
+      <DependentUpon>201603141043104_Add_ApprovedSox_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141045079_Add_AttachedObject_Table.cs" />
+    <Compile Include="Migrations\201603141045079_Add_AttachedObject_Table.Designer.cs">
+      <DependentUpon>201603141045079_Add_AttachedObject_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1404,6 +1432,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603111319228_Add_NewCOATrim_Table.resx">
       <DependentUpon>201603111319228_Add_NewCOATrim_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141034448_Add_ControlAccount_Table.resx">
+      <DependentUpon>201603141034448_Add_ControlAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141036213_Add_ConsolidationGroup_Table.resx">
+      <DependentUpon>201603141036213_Add_ConsolidationGroup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141038099_Add_ConsolidationDetail_Table.resx">
+      <DependentUpon>201603141038099_Add_ConsolidationDetail_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141039491_Add_Approval_Table.resx">
+      <DependentUpon>201603141039491_Add_Approval_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141041205_Add_AccountingControl_Table.resx">
+      <DependentUpon>201603141041205_Add_AccountingControl_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141043104_Add_ApprovedSox_Table.resx">
+      <DependentUpon>201603141043104_Add_ApprovedSox_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141045079_Add_AttachedObject_Table.resx">
+      <DependentUpon>201603141045079_Add_AttachedObject_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

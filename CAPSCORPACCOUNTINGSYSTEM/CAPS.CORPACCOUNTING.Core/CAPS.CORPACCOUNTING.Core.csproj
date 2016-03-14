@@ -108,10 +108,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounting\AccountingControlUnit.cs" />
     <Compile Include="Accounting\AccountingHeaderTransactionsUnit.cs" />
     <Compile Include="Accounting\AccountingItemUnit.cs" />
     <Compile Include="Accounting\AccountingLayoutUnit.cs" />
     <Compile Include="Accounting\AccountingLayoutItemUnit.cs" />
+    <Compile Include="Accounting\ControlAccountUnit.cs" />
     <Compile Include="Accounting\SubAccountUnit.cs" />
     <Compile Include="Accounting\TypeOfAccountClassificationUnit.cs" />
     <Compile Include="Accounting\TypeOfAccountUnit.cs" />
@@ -125,8 +127,13 @@
     <Compile Include="AccountReceivable\TypeOfArInvoiceBuildUnit.cs" />
     <Compile Include="Banking\BankRecAdjustmentUnit.cs" />
     <Compile Include="Banking\BankRecClearedUnit.cs" />
+    <Compile Include="Common\ApprovalUnit.cs" />
+    <Compile Include="Common\ApprovedSoxUnit.cs" />
+    <Compile Include="Common\AttachedObjectUnit.cs" />
     <Compile Include="Common\Code1099T4RateUnit.cs" />
     <Compile Include="Common\Code1099T4TypeUnit.cs" />
+    <Compile Include="Common\ConsolidationDetailUnit.cs" />
+    <Compile Include="Common\ConsolidationGroupUnit.cs" />
     <Compile Include="Common\EmailAddressUnit.cs" />
     <Compile Include="Common\EmailMsgAddressUnit.cs" />
     <Compile Include="Common\EmailMsgLogUnit.cs" />

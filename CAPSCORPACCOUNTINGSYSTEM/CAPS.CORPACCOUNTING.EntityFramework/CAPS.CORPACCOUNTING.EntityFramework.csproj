@@ -971,6 +971,38 @@
     <Compile Include="Migrations\201603150741459_Add_TypeOfPostingCycle_Table.Designer.cs">
       <DependentUpon>201603150741459_Add_TypeOfPostingCycle_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603150854115_Add_TypeOfSeverityLevel_Table.cs" />
+    <Compile Include="Migrations\201603150854115_Add_TypeOfSeverityLevel_Table.Designer.cs">
+      <DependentUpon>201603150854115_Add_TypeOfSeverityLevel_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150856202_Add_TypeOfProcessStatus_Table.cs" />
+    <Compile Include="Migrations\201603150856202_Add_TypeOfProcessStatus_Table.Designer.cs">
+      <DependentUpon>201603150856202_Add_TypeOfProcessStatus_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150859057_Add_TypeOfOtherName_Table.cs" />
+    <Compile Include="Migrations\201603150859057_Add_TypeOfOtherName_Table.Designer.cs">
+      <DependentUpon>201603150859057_Add_TypeOfOtherName_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150901136_Add_TypeOfModificationStatus_Table.cs" />
+    <Compile Include="Migrations\201603150901136_Add_TypeOfModificationStatus_Table.Designer.cs">
+      <DependentUpon>201603150901136_Add_TypeOfModificationStatus_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150902467_Add_TypeOfImport_Table.cs" />
+    <Compile Include="Migrations\201603150902467_Add_TypeOfImport_Table.Designer.cs">
+      <DependentUpon>201603150902467_Add_TypeOfImport_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150904139_Add_TypeOfGenericProcess_Table.cs" />
+    <Compile Include="Migrations\201603150904139_Add_TypeOfGenericProcess_Table.Designer.cs">
+      <DependentUpon>201603150904139_Add_TypeOfGenericProcess_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150906357_Add_TypeOfDocumentConsolidation_Table.cs" />
+    <Compile Include="Migrations\201603150906357_Add_TypeOfDocumentConsolidation_Table.Designer.cs">
+      <DependentUpon>201603150906357_Add_TypeOfDocumentConsolidation_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150927067_Add_JobType_Table.cs" />
+    <Compile Include="Migrations\201603150927067_Add_JobType_Table.Designer.cs">
+      <DependentUpon>201603150927067_Add_JobType_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1628,6 +1660,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603150741459_Add_TypeOfPostingCycle_Table.resx">
       <DependentUpon>201603150741459_Add_TypeOfPostingCycle_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150854115_Add_TypeOfSeverityLevel_Table.resx">
+      <DependentUpon>201603150854115_Add_TypeOfSeverityLevel_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150856202_Add_TypeOfProcessStatus_Table.resx">
+      <DependentUpon>201603150856202_Add_TypeOfProcessStatus_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150859057_Add_TypeOfOtherName_Table.resx">
+      <DependentUpon>201603150859057_Add_TypeOfOtherName_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150901136_Add_TypeOfModificationStatus_Table.resx">
+      <DependentUpon>201603150901136_Add_TypeOfModificationStatus_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150902467_Add_TypeOfImport_Table.resx">
+      <DependentUpon>201603150902467_Add_TypeOfImport_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150904139_Add_TypeOfGenericProcess_Table.resx">
+      <DependentUpon>201603150904139_Add_TypeOfGenericProcess_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150906357_Add_TypeOfDocumentConsolidation_Table.resx">
+      <DependentUpon>201603150906357_Add_TypeOfDocumentConsolidation_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150927067_Add_JobType_Table.resx">
+      <DependentUpon>201603150927067_Add_JobType_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

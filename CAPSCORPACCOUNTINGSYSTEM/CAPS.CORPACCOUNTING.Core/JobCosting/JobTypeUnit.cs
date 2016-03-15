@@ -5,6 +5,7 @@ using Abp.Organizations;
 using System.ComponentModel.DataAnnotations;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -27,6 +28,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public override int Id { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
+        [Required]
         [StringLength(MaxDescLength)]
         public virtual string Description { get; set; }
 
@@ -44,7 +46,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual short? TypeOfJobId { get; set; } 
 
         /// <summary>Gets or sets the TypeOfFormatMaskID field. </summary>
-        public virtual int? TypeOfFormatMaskId { get; set; }  
+        public virtual short? TypeOfFormatMaskId { get; set; }
+
+        [ForeignKey("TypeOfFormatMaskId")]
+        public TypeOfFormatMaskUnit TypeOfFormatMask { get; set; }
 
         /// <summary>Gets or sets the TypeOfHeadingID field. </summary>
         public virtual int? TypeOfHeadingId { get; set; } 
@@ -56,7 +61,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual AccountingLayoutUnit AccountingLayout { get; set; }
 
         /// <summary>Gets or sets the EntityID field. </summary>
-        public virtual int EntityId { get; set; } 
+        public virtual int EntityId { get; set; }
+        [ForeignKey("EntityId")]
+        public virtual EntityUnit Entity { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
         public virtual bool IsActive { get; set; } // 
@@ -70,7 +77,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
         #endregion
-
+        public JobTypeUnit()
+        {
+            IsActive = true;            
+        }
 
     }
 }

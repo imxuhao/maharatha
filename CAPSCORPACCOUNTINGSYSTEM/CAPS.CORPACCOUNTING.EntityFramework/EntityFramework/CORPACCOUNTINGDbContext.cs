@@ -523,8 +523,32 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> TypeOfPostingCycleUnit Declaration</summary>
         public virtual IDbSet<TypeOfPostingCycleUnit> TypeOfPostingCycleUnit { get; set; }
 
+        /// <summary> TypeOfSeverityLevelUnit Declaration</summary>
+        public virtual IDbSet<TypeOfSeverityLevelUnit> TypeOfSeverityLevelUnit { get; set; }
+
+        /// <summary> TypeOfProcessStatusUnit Declaration</summary>
+        public virtual IDbSet<TypeOfProcessStatusUnit> TypeOfProcessStatusUnit { get; set; }
+
+        /// <summary> TypeOfOtherNameUnit Declaration</summary>
+        public virtual IDbSet<TypeOfOtherNameUnit> TypeOfOtherNameUnit { get; set; }
+
+        /// <summary> TypeOfModificationStatusUnit Declaration</summary>
+        public virtual IDbSet<TypeOfModificationStatusUnit> TypeOfModificationStatusUnit { get; set; }
+
+        /// <summary> TypeOfImportUnit Declaration</summary>
+        public virtual IDbSet<TypeOfImportUnit> TypeOfImportUnit { get; set; }
+        
+        /// <summary> TypeOfGenericProcessUnit Declaration</summary>
+        public virtual IDbSet<TypeOfGenericProcessUnit> TypeOfGenericProcessUnit { get; set; }
+        
+        /// <summary> TypeOfDocumentConsolidationUnit Declaration</summary>
+        public virtual IDbSet<TypeOfDocumentConsolidationUnit> TypeOfDocumentConsolidationUnit { get; set; }
+
+        /// <summary> JobTypeUnit Declaration</summary>
+        public virtual IDbSet<JobTypeUnit> JobTypeUnit { get; set; }
 
 
+        
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

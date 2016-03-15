@@ -128,6 +128,7 @@
     <Compile Include="AccountReceivable\TypeOfArInvoiceBuildUnit.cs" />
     <Compile Include="Banking\BankRecAdjustmentUnit.cs" />
     <Compile Include="Banking\BankRecClearedUnit.cs" />
+    <Compile Include="Common\AccountingDocumentTypeUnit.cs" />
     <Compile Include="Common\ApprovalUnit.cs" />
     <Compile Include="Common\ApprovedSoxUnit.cs" />
     <Compile Include="Common\AttachedObjectUnit.cs" />
@@ -160,6 +161,13 @@
     <Compile Include="Common\TypeOfMessageUnit.cs" />
     <Compile Include="Common\TypeOfModificationUnit.cs" />
     <Compile Include="Common\TypeOfPostingCycleUnit.cs" />
+    <Compile Include="Common\TypeOfDocumentConsolidationUnit.cs" />
+    <Compile Include="Common\TypeOfGenericProcessUnit.cs" />
+    <Compile Include="Common\TypeOfImportUnit.cs" />
+    <Compile Include="Common\TypeOfModificationStatusUnit.cs" />
+    <Compile Include="Common\TypeOfOtherNameUnit.cs" />
+    <Compile Include="Common\TypeOfProcessStatusUnit.cs" />
+    <Compile Include="Common\TypeOfSeverityLevelUnit.cs" />
     <Compile Include="Common\UploadNameUnit.cs" />
     <Compile Include="Common\TypeOfCurrencyRateUnit.cs" />
     <Compile Include="Common\TypeOfProfitCalcUnit.cs" />
@@ -168,6 +176,7 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
+    <Compile Include="JobCosting\TypeOfJobUnit.cs" />
     <Compile Include="Masters\NewCOATrimUnit.cs" />
     <Compile Include="Masters\ValueAddedTaxRecoveryUnit.cs" />
     <Compile Include="Masters\ValueAddedTaxTypeUnit.cs" />

@@ -135,9 +135,14 @@
     <Compile Include="Common\Code1099T4TypeUnit.cs" />
     <Compile Include="Common\ConsolidationDetailUnit.cs" />
     <Compile Include="Common\ConsolidationGroupUnit.cs" />
+    <Compile Include="Common\CurrencyRateUnit.cs" />
+    <Compile Include="Common\CurrencyTypeOfRateUnit.cs" />
+    <Compile Include="Common\CurrencyTypeUnit.cs" />
+    <Compile Include="Common\CustomerGroupUnit.cs" />
     <Compile Include="Common\EmailAddressUnit.cs" />
     <Compile Include="Common\EmailMsgAddressUnit.cs" />
     <Compile Include="Common\EmailMsgLogUnit.cs" />
+    <Compile Include="Common\EmailUnit.cs" />
     <Compile Include="Common\FedExTranslationUnit.cs" />
     <Compile Include="Common\NotedObjectUnit.cs" />
     <Compile Include="Common\ProfitVariableUnit.cs" />
@@ -146,6 +151,7 @@
     <Compile Include="Common\SICCodeUnit.cs" />
     <Compile Include="Common\TaxRebateUnit.cs" />
     <Compile Include="Common\UploadNameUnit.cs" />
+    <Compile Include="Common\TypeOfCurrencyRateUnit.cs" />
     <Compile Include="Common\TypeOfProfitCalcUnit.cs" />
     <Compile Include="Common\TypeOfSicCodeUnit.cs" />
     <Compile Include="Common\VendorShipMethodUnit.cs" />

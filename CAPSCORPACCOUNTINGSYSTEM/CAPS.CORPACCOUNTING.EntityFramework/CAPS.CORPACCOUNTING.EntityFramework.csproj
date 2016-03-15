@@ -911,6 +911,26 @@
     <Compile Include="Migrations\201603141251541_Add_PaymentPrintHistory_Table.Designer.cs">
       <DependentUpon>201603141251541_Add_PaymentPrintHistory_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603150552000_Add_Email_Table.cs" />
+    <Compile Include="Migrations\201603150552000_Add_Email_Table.Designer.cs">
+      <DependentUpon>201603150552000_Add_Email_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150554391_Add_CustomerGroup_Table.cs" />
+    <Compile Include="Migrations\201603150554391_Add_CustomerGroup_Table.Designer.cs">
+      <DependentUpon>201603150554391_Add_CustomerGroup_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150628030_Add_TypeOfCurrencyRate_Table.cs" />
+    <Compile Include="Migrations\201603150628030_Add_TypeOfCurrencyRate_Table.Designer.cs">
+      <DependentUpon>201603150628030_Add_TypeOfCurrencyRate_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150629230_Add_CurrencyType_Table.cs" />
+    <Compile Include="Migrations\201603150629230_Add_CurrencyType_Table.Designer.cs">
+      <DependentUpon>201603150629230_Add_CurrencyType_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150632262_Add_CurrencyTypeOfRate_Table.cs" />
+    <Compile Include="Migrations\201603150632262_Add_CurrencyTypeOfRate_Table.Designer.cs">
+      <DependentUpon>201603150632262_Add_CurrencyTypeOfRate_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1523,6 +1543,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603141251541_Add_PaymentPrintHistory_Table.resx">
       <DependentUpon>201603141251541_Add_PaymentPrintHistory_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150552000_Add_Email_Table.resx">
+      <DependentUpon>201603150552000_Add_Email_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150554391_Add_CustomerGroup_Table.resx">
+      <DependentUpon>201603150554391_Add_CustomerGroup_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150628030_Add_TypeOfCurrencyRate_Table.resx">
+      <DependentUpon>201603150628030_Add_TypeOfCurrencyRate_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150629230_Add_CurrencyType_Table.resx">
+      <DependentUpon>201603150629230_Add_CurrencyType_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150632262_Add_CurrencyTypeOfRate_Table.resx">
+      <DependentUpon>201603150632262_Add_CurrencyTypeOfRate_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

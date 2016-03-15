@@ -931,6 +931,46 @@
     <Compile Include="Migrations\201603150632262_Add_CurrencyTypeOfRate_Table.Designer.cs">
       <DependentUpon>201603150632262_Add_CurrencyTypeOfRate_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603150651103_Add_TypeOfAllocationStatus_Table.cs" />
+    <Compile Include="Migrations\201603150651103_Add_TypeOfAllocationStatus_Table.Designer.cs">
+      <DependentUpon>201603150651103_Add_TypeOfAllocationStatus_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150717583_Add_TypeOfApprovalStatus_Table.cs" />
+    <Compile Include="Migrations\201603150717583_Add_TypeOfApprovalStatus_Table.Designer.cs">
+      <DependentUpon>201603150717583_Add_TypeOfApprovalStatus_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150720512_Add_TypeOfCharge_Table.cs" />
+    <Compile Include="Migrations\201603150720512_Add_TypeOfCharge_Table.Designer.cs">
+      <DependentUpon>201603150720512_Add_TypeOfCharge_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150724220_Add_TypeOfCreditRating_Table.cs" />
+    <Compile Include="Migrations\201603150724220_Add_TypeOfCreditRating_Table.Designer.cs">
+      <DependentUpon>201603150724220_Add_TypeOfCreditRating_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150729459_Add_TypeOfMasterAccount_Table.cs" />
+    <Compile Include="Migrations\201603150729459_Add_TypeOfMasterAccount_Table.Designer.cs">
+      <DependentUpon>201603150729459_Add_TypeOfMasterAccount_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150732158_Add_TypeOfMessageLog_Table.cs" />
+    <Compile Include="Migrations\201603150732158_Add_TypeOfMessageLog_Table.Designer.cs">
+      <DependentUpon>201603150732158_Add_TypeOfMessageLog_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150734299_Add_TypeOfMessage_Table.cs" />
+    <Compile Include="Migrations\201603150734299_Add_TypeOfMessage_Table.Designer.cs">
+      <DependentUpon>201603150734299_Add_TypeOfMessage_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150737035_Add_TypeOfModificationRequest_Table.cs" />
+    <Compile Include="Migrations\201603150737035_Add_TypeOfModificationRequest_Table.Designer.cs">
+      <DependentUpon>201603150737035_Add_TypeOfModificationRequest_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150739214_Add_TypeOfModification_Table.cs" />
+    <Compile Include="Migrations\201603150739214_Add_TypeOfModification_Table.Designer.cs">
+      <DependentUpon>201603150739214_Add_TypeOfModification_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603150741459_Add_TypeOfPostingCycle_Table.cs" />
+    <Compile Include="Migrations\201603150741459_Add_TypeOfPostingCycle_Table.Designer.cs">
+      <DependentUpon>201603150741459_Add_TypeOfPostingCycle_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1558,6 +1598,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603150632262_Add_CurrencyTypeOfRate_Table.resx">
       <DependentUpon>201603150632262_Add_CurrencyTypeOfRate_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150651103_Add_TypeOfAllocationStatus_Table.resx">
+      <DependentUpon>201603150651103_Add_TypeOfAllocationStatus_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150717583_Add_TypeOfApprovalStatus_Table.resx">
+      <DependentUpon>201603150717583_Add_TypeOfApprovalStatus_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150720512_Add_TypeOfCharge_Table.resx">
+      <DependentUpon>201603150720512_Add_TypeOfCharge_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150724220_Add_TypeOfCreditRating_Table.resx">
+      <DependentUpon>201603150724220_Add_TypeOfCreditRating_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150729459_Add_TypeOfMasterAccount_Table.resx">
+      <DependentUpon>201603150729459_Add_TypeOfMasterAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150732158_Add_TypeOfMessageLog_Table.resx">
+      <DependentUpon>201603150732158_Add_TypeOfMessageLog_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150734299_Add_TypeOfMessage_Table.resx">
+      <DependentUpon>201603150734299_Add_TypeOfMessage_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150737035_Add_TypeOfModificationRequest_Table.resx">
+      <DependentUpon>201603150737035_Add_TypeOfModificationRequest_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150739214_Add_TypeOfModification_Table.resx">
+      <DependentUpon>201603150739214_Add_TypeOfModification_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603150741459_Add_TypeOfPostingCycle_Table.resx">
+      <DependentUpon>201603150741459_Add_TypeOfPostingCycle_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

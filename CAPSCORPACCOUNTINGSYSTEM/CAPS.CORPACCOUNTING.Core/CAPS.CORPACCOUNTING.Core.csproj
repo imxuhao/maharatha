@@ -150,6 +150,16 @@
     <Compile Include="Common\SecureObjectUnit.cs" />
     <Compile Include="Common\SICCodeUnit.cs" />
     <Compile Include="Common\TaxRebateUnit.cs" />
+    <Compile Include="Common\TypeOfAllocationStatusUnit.cs" />
+    <Compile Include="Common\TypeOfApprovalStatusUnit.cs" />
+    <Compile Include="Common\TypeOfChargeUnit.cs" />
+    <Compile Include="Common\TypeOfModificationRequestUnit.cs" />
+    <Compile Include="Common\TypeOfCreditRatingUnit.cs" />
+    <Compile Include="Common\TypeOfMasterAccountUnit.cs" />
+    <Compile Include="Common\TypeOfMessageLogUnit.cs" />
+    <Compile Include="Common\TypeOfMessageUnit.cs" />
+    <Compile Include="Common\TypeOfModificationUnit.cs" />
+    <Compile Include="Common\TypeOfPostingCycleUnit.cs" />
     <Compile Include="Common\UploadNameUnit.cs" />
     <Compile Include="Common\TypeOfCurrencyRateUnit.cs" />
     <Compile Include="Common\TypeOfProfitCalcUnit.cs" />

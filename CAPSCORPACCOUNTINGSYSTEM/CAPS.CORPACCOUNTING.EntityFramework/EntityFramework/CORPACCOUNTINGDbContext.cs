@@ -492,7 +492,39 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> CurrencyTypeOfRateUnit Declaration</summary>
        public virtual IDbSet<CurrencyTypeOfRateUnit> CurrencyTypeOfRateUnit { get; set; }
-        
+
+        /// <summary> TypeOfAllocationStatusUnit Declaration</summary>
+        public virtual IDbSet<TypeOfAllocationStatusUnit> TypeOfAllocationStatusUnit { get; set; }
+
+        /// <summary> TypeOfApprovalStatusUnit Declaration</summary>
+        public virtual IDbSet<TypeOfApprovalStatusUnit> TypeOfApprovalStatusUnit { get; set; }
+
+        /// <summary> TypeOfChargeUnit Declaration</summary>
+        public virtual IDbSet<TypeOfChargeUnit> TypeOfChargeUnit { get; set; }
+
+        /// <summary> TypeOfCreditRatingUnit Declaration</summary>
+        public virtual IDbSet<TypeOfCreditRatingUnit> TypeOfCreditRatingUnit { get; set; }
+
+        /// <summary> TypeOfMasterAccountUnit Declaration</summary>
+        public virtual IDbSet<TypeOfMasterAccountUnit> TypeOfMasterAccountUnit { get; set; }
+
+        /// <summary> TypeOfMessageLogUnit Declaration</summary>
+        public virtual IDbSet<TypeOfMessageLogUnit> TypeOfMessageLogUnit { get; set; }
+
+        /// <summary> TypeOfMessageUnit Declaration</summary>
+        public virtual IDbSet<TypeOfMessageUnit> TypeOfMessageUnit { get; set; }
+
+        /// <summary> TypeOfModificationRequestUnit Declaration</summary>
+        public virtual IDbSet<TypeOfModificationRequestUnit> TypeOfModificationRequestUnit { get; set; }
+
+        /// <summary> TypeOfModificationUnit Declaration</summary>
+        public virtual IDbSet<TypeOfModificationUnit> TypeOfModificationUnit { get; set; }
+
+        /// <summary> TypeOfPostingCycleUnit Declaration</summary>
+        public virtual IDbSet<TypeOfPostingCycleUnit> TypeOfPostingCycleUnit { get; set; }
+
+
+
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

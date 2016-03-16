@@ -181,6 +181,7 @@
     <Compile Include="Masters\ValueAddedTaxRecoveryUnit.cs" />
     <Compile Include="Masters\ValueAddedTaxTypeUnit.cs" />
     <Compile Include="Payments\PaymentPrintHistoryUnit.cs" />
+    <Compile Include="Payroll\TypeOfPayrollUnit.cs" />
     <Compile Include="PettyCash\PCGridUnit.cs" />
     <Compile Include="Reports\BatchExecutionResultUnit.cs" />
     <Compile Include="Reports\BatchReportItemUnit.cs" />

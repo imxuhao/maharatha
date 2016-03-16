@@ -2,13 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CAPS.CORPACCOUNTING.JobCosting
+namespace CAPS.CORPACCOUNTING.Payroll
 {
     /// <summary>
-    /// TypeOfJob is the table name in Lajit
+    ///  TypeOfPayroll is the table name in Lajit
     /// </summary>
-    [Table("CAPS_TypeOfJob")]
-    public class TypeOfJobUnit : CreationAuditedEntity<short>
+    [Table("CAPS_TypeOfPayroll")]
+    public class TypeOfPayrollUnit : CreationAuditedEntity<short>
     {
         /// <summary>
         /// Maximum Length of Description
@@ -39,18 +39,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         /// <summary>Gets or sets the Notes field. </summary>
         public virtual string Notes { get; set; }
-
-        /// <summary>Gets or sets the IsCorporateLedger field. </summary>
-        public virtual bool IsCorporateLedger { get; set; } 
-
-        /// <summary>Gets or sets the IsActive field. </summary>
-        public virtual bool IsActive { get; set; } 
         #endregion
-
-        public TypeOfJobUnit()
-        {
-            IsCorporateLedger = false;
-            IsActive = true;
-        }
     }
 }

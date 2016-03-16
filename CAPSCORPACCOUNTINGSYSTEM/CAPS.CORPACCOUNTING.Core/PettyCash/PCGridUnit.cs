@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Entities;
 using Abp.Organizations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Abp.Domain.Entities.Auditing;
 
 namespace CAPS.CORPACCOUNTING.PettyCash
 {
@@ -9,8 +10,12 @@ namespace CAPS.CORPACCOUNTING.PettyCash
     ///  PCGrid is the table name in Lajit
     /// </summary>
     [Table("CAPS_PCGrid")]
-   public class PCGridUnit :IMustHaveTenant, IMayHaveOrganizationUnit
+   public class PCGridUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
+        /// <summary>Gets or sets the JobID field. </summary>
+        [Column("PCGridId")]
+        public override long Id { get; set; }
+
         /// <summary>Gets or sets the JobID field. </summary>
         public virtual long? JobID { get; set; }
 

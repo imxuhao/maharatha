@@ -1003,6 +1003,22 @@
     <Compile Include="Migrations\201603150927067_Add_JobType_Table.Designer.cs">
       <DependentUpon>201603150927067_Add_JobType_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603160453015_Add_TypeOfPayroll_Table.cs" />
+    <Compile Include="Migrations\201603160453015_Add_TypeOfPayroll_Table.Designer.cs">
+      <DependentUpon>201603160453015_Add_TypeOfPayroll_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603160519306_Add_CurrencyRate_Table.cs" />
+    <Compile Include="Migrations\201603160519306_Add_CurrencyRate_Table.Designer.cs">
+      <DependentUpon>201603160519306_Add_CurrencyRate_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603160524343_Add_PCGrid_Table.cs" />
+    <Compile Include="Migrations\201603160524343_Add_PCGrid_Table.Designer.cs">
+      <DependentUpon>201603160524343_Add_PCGrid_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603160531068_Add_TypeOfJob_Table.cs" />
+    <Compile Include="Migrations\201603160531068_Add_TypeOfJob_Table.Designer.cs">
+      <DependentUpon>201603160531068_Add_TypeOfJob_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1684,6 +1700,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603150927067_Add_JobType_Table.resx">
       <DependentUpon>201603150927067_Add_JobType_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603160453015_Add_TypeOfPayroll_Table.resx">
+      <DependentUpon>201603160453015_Add_TypeOfPayroll_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603160519306_Add_CurrencyRate_Table.resx">
+      <DependentUpon>201603160519306_Add_CurrencyRate_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603160524343_Add_PCGrid_Table.resx">
+      <DependentUpon>201603160524343_Add_PCGrid_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603160531068_Add_TypeOfJob_Table.resx">
+      <DependentUpon>201603160531068_Add_TypeOfJob_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

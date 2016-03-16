@@ -548,7 +548,19 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public virtual IDbSet<JobTypeUnit> JobTypeUnit { get; set; }
 
 
+        /// <summary> TypeOfPayrollUnit Declaration</summary>
+        public virtual IDbSet<TypeOfPayrollUnit> TypeOfPayrollUnit { get; set; }
         
+        /// <summary> CurrencyRateUnit Declaration</summary>
+         public virtual IDbSet<CurrencyRateUnit> CurrencyRateUnit { get; set; }
+        /// <summary> PCGridUnit Declaration</summary>
+        public virtual IDbSet<PCGridUnit> PCGridUnit { get; set; }
+
+        /// <summary> TypeOfJobUnit Declaration</summary>
+        public virtual IDbSet<TypeOfJobUnit> TypeOfJobUnit { get; set; }
+        
+
+
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

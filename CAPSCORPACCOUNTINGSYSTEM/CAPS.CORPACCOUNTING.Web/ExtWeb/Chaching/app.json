@@ -483,9 +483,9 @@
         {
             "path": "${toolkit.name}/resources"
         },
-        {
-            "path": "${build.id}/resources"
-        }
+      {
+        "path": "${build.id}/resources"
+      }
     ],
 
     /**

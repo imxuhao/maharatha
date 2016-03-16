@@ -56,6 +56,9 @@ Ext.define('Chaching.view.main.ChachingViewport', {
             ]
 
         }
-    ]
+    ],
+    listeners: {
+        resize:'onViewportResize'
+    }
   
 });

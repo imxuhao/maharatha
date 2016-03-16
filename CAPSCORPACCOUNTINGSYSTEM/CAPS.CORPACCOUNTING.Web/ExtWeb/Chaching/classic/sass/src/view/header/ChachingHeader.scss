@@ -1,0 +1,178 @@
+﻿@include extjs-text-field-ui{
+    $ui: 'country'   
+}
+
+.x-form-text-country{
+    font-size:14px !important;
+    font-weight:400 !important;
+    color:#7FB0DA !important;
+}
+.x-form-trigger-country{
+    width:32px !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    font-stretch: normal !important;
+    font-size: 16px !important;
+    line-height: 30px !important;
+    font-family: FontAwesome !important;
+    background:#fff !important;
+    color:#7FB0DA !important;
+    
+}
+.x-form-arrow-trigger-country{
+    content: "\f0d7";
+}
+
+
+@include extjs-button-small-ui(
+    $ui: 'countryMenu',
+    $background-color: white,
+$border-radius:0px,
+$border-color:white,
+$border-color-over:white,
+$border-color-focus:white,
+$padding:10px,
+$background-color-over:lighten(#5fa2dd,40%),
+$background-color-focus:lighten(#5fa2dd,40%),
+$background-color-pressed:lighten(#5fa2dd,40%),
+$color:#7FB0DA,
+$font-size:14px,
+$font-weight:400
+);
+
+.x-btn-icon-el-countryMenu-small{
+    height:11px !important;
+}
+.x-btn-inner-countryMenu-small{
+    font-family:FontAwesome !important;
+}
+@include extjs-menu-ui(
+$ui:'countryMenu',
+$ui-background-color:white,
+$ui-item-height:25px,
+$ui-item-icon-size:16px
+);
+
+.x-menu-item-icon-countryMenu{
+    height:11px !important;
+    top:8px !important;
+}
+.x-menu-item-text-countryMenu{
+    font-weight:400 !important;
+    color:black !important;
+}
+.x-menu-item-countryMenu.x-menu-item-active{
+    background-color:lavender !important;
+    color:black !important;
+}
+
+@include extjs-menu-ui(
+$ui:'balck',
+$ui-background-color:#414f59,
+$ui-item-height:25px
+);
+
+.x-menu-item-balck .x-menu-item-active{
+    background-color:lavender !important;
+    color:black !important;
+}
+.dropdown-menu{
+    max-width:320px !important;
+    width:320px !important;
+    background-color:transparent !important;
+    border:1px solid transparent !important;
+     list-style-type: none !important;
+}
+.dropdown-menu:hover{
+    background-color:lavender !important;
+        color:black !important;
+
+}
+.external notifications-header{
+    background-color:#414f59 !important;
+    text-align:left !important;
+    min-height:30px !important;
+    padding:8px !important;
+
+}
+.x-menu-balck{
+    color:white !important;
+    font-weight:400 !important;
+}
+.menuHeaderTextRight{
+    text-align:right !important;
+    font-weight:700 !important;
+    margin-right:20px !important;
+    text-decoration:underline !important
+}
+.x-view-item-focused{
+    outline:none !important;
+}
+
+@include extjs-button-small-ui(
+    $ui: 'badgeBtn',
+    $background-color: white,
+$border-radius:0px,
+$border-color:white,
+$border-color-over:white,
+$border-color-focus:white,
+$padding:10px,
+$background-color-over:lighten(#5fa2dd,40%),
+$background-color-focus:lighten(#5fa2dd,40%),
+$background-color-pressed:lighten(#5fa2dd,40%),
+$color:#7FB0DA,
+$font-size:14px,
+$font-weight:400
+);
+
+.x-btn-icon-el-badgeBtn-small{
+    height:20px !important;
+    background-color:#ed6b75 !important;
+    border-radius:12px !important;
+    width:20px !important;
+    margin-left:0px !important;
+}
+
+.x-btn-inner-badgeBtn-small{
+    font-family:FontAwesome !important;
+}
+.badge{
+    font-size:11px !important;
+    font-weight:400 !important;
+    text-align:center !important;
+    padding:3px 6px 3px 6px !important;
+    vertical-align:middle !important;
+    display:block !important;
+     background-color:#ed6b75 !important;
+}
+@include extjs-button-small-ui(
+    $ui: 'badgeBtnBack',
+    $background-color: white,
+$border-radius:0px,
+$border-color:white,
+$border-color-over:white,
+$border-color-focus:white,
+$padding:10px,
+$background-color-over:lighten(#5fa2dd,40%),
+$background-color-focus:lighten(#5fa2dd,40%),
+$background-color-pressed:lighten(#5fa2dd,40%),
+$color:#7FB0DA,
+$font-size:14px,
+$font-weight:400
+);
+
+.x-btn-icon-el-badgeBtnBack-small{
+    height:20px !important;
+    background-color:transparent !important;
+    border-radius:0px !important;
+    width:20px !important;
+    margin-left:0px !important;
+}
+
+.x-btn-inner-badgeBtnBack-small{
+    font-family:FontAwesome !important;
+}
+.x-btn-inner-badgeBtnBack-small{
+    font-weight:600 !important;
+}

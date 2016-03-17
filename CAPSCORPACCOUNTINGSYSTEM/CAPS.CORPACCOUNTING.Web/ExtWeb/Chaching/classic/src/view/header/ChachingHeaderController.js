@@ -38,6 +38,10 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         if (notificationBtn) {
             me.hideContextMenu(notificationBtn);
         }
+        var accountsBtn = view.down('button[itemId=AccountBtn]');
+        if (accountsBtn) {
+            me.hideContextMenu(accountsBtn);
+        }
         if (contextMenu) {
             contextMenu.showAt(position[0]-50, position[1] + 30, true);
         } else {
@@ -93,6 +97,10 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         if (localizationBtn) {
             me.hideContextMenu(localizationBtn);
         }
+        var accountsBtn = view.down('button[itemId=AccountBtn]');
+        if (accountsBtn) {
+            me.hideContextMenu(accountsBtn);
+        }
         if (contextMenu) {
             contextMenu.showAt(position[0] - 250, position[1] + 30, true);
         } else {
@@ -137,6 +145,113 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             btn.contextMenu = contextMenu;
             btn.menu = contextMenu;
             contextMenu.showAt(position[0] - 250, position[1] + 30, true);
+        }
+    },
+    onAccountsReady:function(btn) {
+        var me = this,
+            view = me.getView();
+        var userName = '';
+        //get user's login information
+        Ext.Ajax.request({
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            url: abp.appPath+'api/services/app/session/GetCurrentLoginInformations',
+
+            success: function (response, opts) {
+                var obj = Ext.decode(response.responseText);
+                if (obj && obj.success) {
+                    var result = obj.result;
+                    if (result.tenant) {
+                        userName = result.tenant.tenancyName + '\\' + result.user.userName;
+                    } else userName = '.\\' + result.user.userName;
+
+                    if (userName && abp.session.impersonatorUserId !== abp.session.userId && abp.session.impersonatorUserId !== null) {
+                        userName = '&#xf112 ' + userName;
+                        btn.gotoMyAccount = true;//to get go to my account menu item
+                        btn.setTooltip(abp.localization.localize("YouCanBackToYourAccount"));
+                    }
+                    var image = view.down('image[itemId=AccountPic]');
+                    var ticks = new Date().getTime();
+                    var profilePic = abp.appPath + 'Profile/GetProfilePicture?t=' + ticks;
+                    if (result.user.profilePictureId) {
+                        btn.gotoMyAccount ? btn.setWidth(180) : btn.setWidth(130);
+                        btn.setIcon(profilePic);
+                        image.hide();
+                    } else {
+                        image.show();
+                        image.setSrc(profilePic);
+                    }
+                    btn.setText(userName);
+                } else {
+                    Ext.toast(obj.error.message);
+                }
+            },
+
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+            }
+        });
+    },
+    onAccountsHover:function(btn) {
+        var me = this,
+           view = me.getView();
+        var contextMenu = btn.contextMenu;
+        var position = btn.getPosition();
+
+        var notificationBtn = view.down('button[itemId=NotificationBtn]');
+        if (notificationBtn) {
+            me.hideContextMenu(notificationBtn);
+        }
+        var localizationBtn = view.down('button[itemId=LocalizationBtn]');
+        if (localizationBtn) {
+            me.hideContextMenu(localizationBtn);
+        }
+        if (contextMenu) {
+            contextMenu.showAt(position[0] - 50, position[1] +btn.gotoMyAccount ? 60 : 30, true);
+        } else {
+            var items = [
+                { text: '&#xf112  ' + abp.localization.localize("BackToMyAccount"), hidden: !btn.gotoMyAccount },
+                {
+                    text: '&#xf0c1  ' + abp.localization.localize("LinkedAccounts"),
+                    menu: {
+                        ui: 'accounts',
+                        width:150,
+                        items: [
+                            {
+                                text: '&#xf013  ' + abp.localization.localize("ManageAccounts")
+                            }
+                        ]
+                    }
+                }, {
+                    text: '&#xf084  ' + abp.localization.localize("ChangePassword")
+                }, {
+                    text: '&#xf007  ' + abp.localization.localize("ChangeProfilePicture")
+                }, {
+                    text: '&#xf013  ' + abp.localization.localize("MySettings")
+                }, '-',
+                {
+                    text: '&#xf08b  ' + abp.localization.localize("Logout")
+                }
+            ];
+            if (btn.gotoMyAccount) {
+                items.splice(1, 0, "-");
+            }
+            contextMenu = Ext.create({
+                xtype: 'menu',
+                ui: 'accounts',
+                width: 200,
+                items: items,
+                ownerElement: btn,
+                //listeners: {
+                //    click: me.onLocalizationItemClick
+                //}
+            });
+            btn.contextMenu = contextMenu;
+            contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         }
     }
 

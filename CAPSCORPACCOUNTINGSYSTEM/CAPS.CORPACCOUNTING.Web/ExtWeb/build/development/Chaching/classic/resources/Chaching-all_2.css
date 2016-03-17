@@ -8565,13 +8565,22 @@
 .x-menu-item-icon-countryMenu {
     height: 11px !important;
     top: 8px !important;
+    margin-left: 5px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:61 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:62 */
+.x-menu-countryMenu {
+    border-radius: 5px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:65 */
 .x-menu-item-text-countryMenu {
     font-weight: 400 !important;
     color: black !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:65 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:69 */
+.x-menu-item-countryMenu {
+    padding-left: 5px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:72 */
 .x-menu-item-countryMenu.x-menu-item-active {
     background-color: lavender !important;
     color: black !important;
@@ -8584,7 +8593,7 @@
 }
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:324 */
 .x-menu-body-balck {
-    background: #414f59;
+    background: #576976;
     padding: 0;
 }
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:329 */
@@ -8911,14 +8920,17 @@
 }
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:704 */
 .x-ie8 .x-box-scroller-menu-balck {
-    background-color: #414f59;
+    background-color: #576976;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:76 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:83 */
 .x-menu-item-balck .x-menu-item-active {
-    background-color: lavender !important;
-    color: black !important;
+    background-color: #555 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:80 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:86 */
+.x-menu-balck {
+    border-radius: 5px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:89 */
 .dropdown-menu {
     max-width: 320px !important;
     width: 320px !important;
@@ -8926,31 +8938,34 @@
     border: 1px solid transparent !important;
     list-style-type: none !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:87 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:96 */
 .dropdown-menu:hover {
-    background-color: lavender !important;
-    color: black !important;
+    background-color: #555 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:92 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:99 */
 .external notifications-header {
     background-color: #414f59 !important;
     text-align: left !important;
     min-height: 30px !important;
     padding: 8px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:99 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:106 */
 .x-menu-balck {
-    color: white !important;
+    color: #d4dadf !important;
     font-weight: 400 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:103 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:110 */
 .menuHeaderTextRight {
     text-align: right !important;
     font-weight: 700 !important;
-    margin-right: 20px !important;
+    padding-right: 10px !important;
+    padding-top: 5px !important;
+    height: 35px !important;
+    width: 100% !important;
     text-decoration: underline !important;
+    background-color: black !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:109 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:120 */
 .x-view-item-focused {
     outline: none !important;
 }
@@ -9541,7 +9556,7 @@
 .x-button-badgeBtn-small-cell > .x-grid-cell-inner >.x-btn-badgeBtn-small {
     vertical-align: top;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:129 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:140 */
 .x-btn-icon-el-badgeBtn-small {
     height: 20px !important;
     background-color: #ed6b75 !important;
@@ -9549,11 +9564,11 @@
     width: 20px !important;
     margin-left: 0px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:137 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:148 */
 .x-btn-inner-badgeBtn-small {
     font-family: FontAwesome !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:140 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:151 */
 .badge {
     font-size: 11px !important;
     font-weight: 400 !important;
@@ -10150,21 +10165,386 @@
 .x-button-badgeBtnBack-small-cell > .x-grid-cell-inner >.x-btn-badgeBtnBack-small {
     vertical-align: top;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:165 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:176 */
 .x-btn-icon-el-badgeBtnBack-small {
-    height: 20px !important;
+    height: 45px !important;
     background-color: transparent !important;
-    border-radius: 0px !important;
-    width: 20px !important;
+    border-radius: 28px !important;
+    width: 45px !important;
     margin-left: 0px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:173 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:184 */
 .x-btn-inner-badgeBtnBack-small {
     font-family: FontAwesome !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:176 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:187 */
 .x-btn-inner-badgeBtnBack-small {
     font-weight: 600 !important;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:318 */
+.x-menu-accounts {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d0d0d0;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:324 */
+.x-menu-body-accounts {
+    background: #576976;
+    padding: 0;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:329 */
+.x-menu-icon-separator-accounts {
+    left: 32px;
+    border-left: solid 1px #d0d0d0;
+    background-color: #fff;
+    width: 1px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:338 */
+.x-rtl > .x-menu-icon-separator {
+    left: auto;
+    right: 32px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:343 */
+.x-menu-item-accounts {
+    border-width: 0;
+    cursor: pointer;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:347 */
+.x-menu-item-accounts.x-menu-item-active {
+    background-image: none;
+    background-color: #7fb5e4;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:359 */
+.x-nlg .x-menu-item-accounts.x-menu-item-active {
+    background: #7fb5e4 repeat-x left top;
+    background-image: url(images/menu/menu-item-accounts-active-bg.gif);
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:366 */
+.x-menu-item-accounts.x-menu-item-disabled {
+    cursor: default;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:369 */
+.x-menu-item-accounts.x-menu-item-disabled a {
+    cursor: default;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:374 */
+.x-menu-item-accounts.x-menu-item-separator {
+    height: 1px;
+    border-top: solid 1px #d0d0d0;
+    background-color: #fff;
+    margin: 2px 0;
+    padding: 0;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:382 */
+.x-menu-item-accounts.x-menu-item-disabled {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    opacity: 0.5;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:387 */
+.x-ie9m .x-menu-item-accounts.x-menu-item-disabled .x-menu-item-icon-ui {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    opacity: 0.5;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:391 */
+.x-ie9m .x-menu-item-accounts.x-menu-item-disabled .x-menu-item-text-accounts {
+    background-color: transparent;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:401 */
+.x-menu-item-accounts .x-form-item-label {
+    font-size: 13px;
+    color: #000;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:408 */
+.x-menu-item-text-accounts,
+.x-menu-item-cmp-accounts {
+    margin: 0 8px 0 8px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:413 */
+.x-menu-item-text-accounts {
+    font: 300 13px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    line-height: 29px;
+    padding-top: 1px;
+    color: #000;
+    cursor: pointer;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:425 */
+.x-menu-item-active .x-menu-item-text-accounts {
+    color: #fff;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:430 */
+.x-menu-item-text-accounts.x-menu-item-indent {
+    margin-left: 41px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:434 */
+.x-menu-item-text-accounts.x-menu-item-indent-no-separator {
+    margin-left: 36px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:438 */
+.x-menu-item-text-accounts.x-menu-item-indent-right-icon {
+    margin-right: 40px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:442 */
+.x-menu-item-text-accounts.x-menu-item-indent-right-arrow {
+    margin-right: 29px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:446 */
+.x-menu-item-disabled .x-menu-item-text-accounts {
+    cursor: default;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:453 */
+.x-rtl.x-menu-item-text-accounts,
+.x-rtl.x-menu-item-cmp-accounts {
+    margin: 0 8px 0 8px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:459 */
+.x-rtl.x-menu-item-text-accounts.x-menu-item-indent {
+    margin-right: 41px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:463 */
+.x-rtl.x-menu-item-text-accounts.x-menu-item-indent-no-separator {
+    margin-right: 36px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:467 */
+.x-rtl.x-menu-item-text-accounts.x-menu-item-indent-right-icon {
+    margin-left: 40px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:471 */
+.x-rtl.x-menu-item-text-accounts.x-menu-item-indent-right-arrow {
+    margin-left: 29px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:478 */
+.x-menu-item-indent-accounts {
+    margin-left: 41px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:481 */
+.x-menu-item-indent-accounts.x-rtl {
+    margin-left: 0;
+    margin-right: 41px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:488 */
+.x-menu-item-icon-accounts {
+    width: 24px;
+    height: 24px;
+    top: 3px;
+    left: 4px;
+    line-height: 24px;
+    font-size: 16px;
+    color: #919191;
+    background-position: center center;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:497 */
+.x-menu-item-active .x-menu-item-icon-accounts {
+    color: #fff;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:503 */
+.x-ie8 .x-menu-item-active .x-menu-item-icon-accounts {
+    color: #fff !important;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:512 */
+.x-menu-item-icon-accounts.x-rtl {
+    left: auto;
+    right: 4px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:516 */
+.x-menu-item-active .x-menu-item-icon-accounts.x-rtl {
+    right: 4px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:535 */
+.x-ie8 .x-menu-item-icon-accounts.x-menu-item-glyph {
+    color: #919191;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:543 */
+.x-menu-item-icon-accounts.x-menu-item-icon-right {
+    width: 24px;
+    height: 24px;
+    top: 3px;
+    right: 4px;
+    left: auto;
+    background-position: center center;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:552 */
+.x-menu-item-icon-accounts.x-menu-item-icon-right.x-rtl {
+    right: auto;
+    left: 4px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:556 */
+.x-menu-item-active .x-menu-item-icon-accounts.x-menu-item-icon-right.x-rtl {
+    left: 4px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:563 */
+.x-menu-item-icon-accounts.x-menu-item-checkbox {
+    color: #919191;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:573 */
+.x-menu-item-active .x-menu-item-icon-accounts.x-menu-item-checkbox {
+    color: #fff;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:579 */
+.x-menu-item-checked .x-menu-item-icon-accounts.x-menu-item-checkbox {
+    font: 18px/24px FontAwesome;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
+.x-menu-item-checked .x-menu-item-icon-accounts.x-menu-item-checkbox:before {
+    content: "\f046";
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:587 */
+.x-menu-item-unchecked .x-menu-item-icon-accounts.x-menu-item-checkbox {
+    font: 18px/24px FontAwesome;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
+.x-menu-item-unchecked .x-menu-item-icon-accounts.x-menu-item-checkbox:before {
+    content: "\f096";
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:602 */
+.x-menu-item-active .x-menu-item-icon-accounts.x-menu-group-icon {
+    color: #fff;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:608 */
+.x-menu-item-checked .x-menu-item-icon-accounts.x-menu-group-icon {
+    font: 18px/24px FontAwesome;
+    background-image: url(images/menu/accounts-group-checked.png);
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
+.x-menu-item-checked .x-menu-item-icon-accounts.x-menu-group-icon:before {
+    content: "\f00c";
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:615 */
+.x-menu-item-unchecked .x-menu-item-icon-accounts.x-menu-group-icon {
+    background-image: none;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:620 */
+.x-menu-item-unchecked .x-menu-item-icon-accounts.x-menu-group-icon:before {
+    content: '';
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:630 */
+.x-menu-item-arrow-accounts {
+    width: 16px;
+    height: 16px;
+    top: 7px;
+    right: 0;
+    margin: 0 4px 0;
+    font: 16px/1 FontAwesome;
+    color: #919191;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
+.x-menu-item-arrow-accounts:before {
+    content: "\f0da";
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:642 */
+.x-menu-item-active .x-menu-item-arrow-accounts {
+    color: #fff;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:650 */
+.x-menu-item-active .x-menu-item-arrow-accounts {
+    top: 7px;
+    right: 0;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:656 */
+.x-menu-item-arrow-accounts.x-rtl {
+    left: 0;
+    right: auto;
+    font: 16px/1 FontAwesome;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
+.x-menu-item-arrow-accounts.x-rtl:before {
+    content: "\f0d9";
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:667 */
+.x-menu-item-active .x-menu-item-arrow-accounts.x-rtl {
+    left: 0;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:170 */
+.x-menu-accounts-scroller .x-box-scroller-body-horizontal {
+    margin-left: 16px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:176 */
+.x-menu-accounts-vertical-scroller .x-box-scroller-body-vertical {
+    margin-top: 24px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:181 */
+.x-box-scroller-menu-accounts {
+    cursor: pointer;
+    color: #919191;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    opacity: 0.5;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:191 */
+.x-box-scroller-menu-accounts.x-box-scroller-hover {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+    opacity: 0.6;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:197 */
+.x-box-scroller-menu-accounts.x-box-scroller-pressed {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    opacity: 0.7;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:203 */
+.x-box-scroller-menu-accounts.x-box-scroller-disabled {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+    opacity: 0.25;
+    cursor: default;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:292 */
+.x-box-scroller-menu-accounts.x-box-scroller-top,
+.x-box-scroller-menu-accounts.x-box-scroller-bottom {
+    height: 16px;
+    width: 16px;
+    left: 50%;
+    margin-left: -8px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:319 */
+.x-box-scroller-menu-accounts.x-box-scroller-top {
+    margin-top: 4px;
+    margin-right: 0;
+    margin-bottom: 4px;
+    font: 16px/16px FontAwesome;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
+.x-box-scroller-menu-accounts.x-box-scroller-top:before {
+    content: "\f077";
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/layout/container/Box.scss:344 */
+.x-box-scroller-menu-accounts.x-box-scroller-bottom {
+    margin-top: 4px;
+    margin-right: 0;
+    margin-bottom: 4px;
+    font: 16px/16px FontAwesome;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
+.x-box-scroller-menu-accounts.x-box-scroller-bottom:before {
+    content: "\f078";
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:704 */
+.x-ie8 .x-box-scroller-menu-accounts {
+    background-color: #576976;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:197 */
+.x-menu-item-icon-accounts {
+    height: 11px !important;
+    top: 8px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:201 */
+.x-menu-accounts {
+    border-radius: 5px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:204 */
+.x-menu-item-text-accounts {
+    font-weight: 400 !important;
+    color: #d4dadf !important;
+    font-family: 'FontAwesome' !important;
+    font-size: 14px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:210 */
+.x-menu-item-accounts {
+    padding-left: 10px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:213 */
+.x-menu-item-accounts.x-menu-item-active {
+    background-color: #555 !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:216 */
+.x-menu-item-text-accounts.x-menu-item-indent-no-separator {
+    margin-left: 5px !important;
 }
 /* http://localhost:1841/ext/packages/core/sass/src/list/TreeItem.scss:461 */
 .x-treelist-nav {

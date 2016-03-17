@@ -57,10 +57,17 @@ $ui-item-icon-size:16px
 .x-menu-item-icon-countryMenu{
     height:11px !important;
     top:8px !important;
+    margin-left:5px !important;
+}
+.x-menu-countryMenu{
+    border-radius:5px !important;
 }
 .x-menu-item-text-countryMenu{
     font-weight:400 !important;
     color:black !important;
+}
+.x-menu-item-countryMenu{
+    padding-left:5px !important;
 }
 .x-menu-item-countryMenu.x-menu-item-active{
     background-color:lavender !important;
@@ -69,13 +76,15 @@ $ui-item-icon-size:16px
 
 @include extjs-menu-ui(
 $ui:'balck',
-$ui-background-color:#414f59,
+$ui-background-color:lighten(#414f59,10%),
 $ui-item-height:25px
 );
 
 .x-menu-item-balck .x-menu-item-active{
-    background-color:lavender !important;
-    color:black !important;
+    background-color:#555 !important;    
+}
+.x-menu-balck{
+    border-radius:5px !important;
 }
 .dropdown-menu{
     max-width:320px !important;
@@ -85,9 +94,7 @@ $ui-item-height:25px
      list-style-type: none !important;
 }
 .dropdown-menu:hover{
-    background-color:lavender !important;
-        color:black !important;
-
+    background-color:#555 !important;
 }
 .external notifications-header{
     background-color:#414f59 !important;
@@ -97,14 +104,18 @@ $ui-item-height:25px
 
 }
 .x-menu-balck{
-    color:white !important;
+    color:#d4dadf !important;
     font-weight:400 !important;
 }
 .menuHeaderTextRight{
     text-align:right !important;
     font-weight:700 !important;
-    margin-right:20px !important;
-    text-decoration:underline !important
+    padding-right:10px !important;
+    padding-top:5px !important;
+    height:35px !important;
+    width:100% !important;
+    text-decoration:underline !important;
+    background-color:black !important;
 }
 .x-view-item-focused{
     outline:none !important;
@@ -163,10 +174,10 @@ $font-weight:400
 );
 
 .x-btn-icon-el-badgeBtnBack-small{
-    height:20px !important;
+    height:45px !important;
     background-color:transparent !important;
-    border-radius:0px !important;
-    width:20px !important;
+    border-radius:28px !important;
+    width:45px !important;
     margin-left:0px !important;
 }
 
@@ -175,4 +186,33 @@ $font-weight:400
 }
 .x-btn-inner-badgeBtnBack-small{
     font-weight:600 !important;
+}
+
+@include extjs-menu-ui(
+$ui:'accounts',
+$ui-background-color:lighten(#414f59,10%),
+$ui-item-height:30px
+);
+
+.x-menu-item-icon-accounts{
+    height:11px !important;
+    top:8px !important;
+}
+.x-menu-accounts{
+    border-radius:5px !important;
+}
+.x-menu-item-text-accounts{
+    font-weight:400 !important;
+    color:#d4dadf !important;
+    font-family:'FontAwesome' !important;
+    font-size:14px !important;
+}
+.x-menu-item-accounts{
+    padding-left:10px !important;
+}
+.x-menu-item-accounts.x-menu-item-active{
+    background-color:#555 !important;
+}
+.x-menu-item-text-accounts.x-menu-item-indent-no-separator{
+    margin-left:5px !important;
 }

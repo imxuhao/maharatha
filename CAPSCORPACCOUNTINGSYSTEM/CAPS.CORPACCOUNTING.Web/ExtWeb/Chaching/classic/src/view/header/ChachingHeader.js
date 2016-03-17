@@ -54,6 +54,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             iconCls: 'famfamfam-flag-gb',
             iconAlign: 'left',
             text: 'English' + ' &#xf107;',
+            textAlign:'right',
             baseCls: '',
             itemId:'LocalizationBtn',
             contextMenu:undefined,
@@ -69,7 +70,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
              iconCls: 'badge',
              iconAlign: 'right',
              text: '&#xf0a2;',
-             textAlign: 'left',
+             textAlign: 'right',
              baseCls: '',
              itemId: 'NotificationBtn',
              contextMenu: undefined,
@@ -83,18 +84,30 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             scale: 'small',
             ui: 'badgeBtnBack',
             width: 100,
+            height:50,
             //iconCls: 'badge',
-            iconAlign: 'left',
-            text: '&#xf112 .\\admin',
-            textAlign: 'left',
+            iconAlign: 'right',
+            //icon: abp.appPath + 'Profile/GetProfilePicture?t=1000120112000',
+            text: '',//set dynamically based on login info of user
+            gotoMyAccount:false,
+            textAlign: 'right',
             baseCls: '',
             itemId: 'AccountBtn',
             contextMenu: undefined,
             menu: undefined,
+            style: {
+                'top':'3px !important'
+            },
             listeners: {
-                //mouseover: 'onAccountsHover',
-                //boxready: 'onAccountsReady'
+                mouseover: 'onAccountsHover',
+                boxready: 'onAccountsReady'
             }
+        }, {
+            xtype: 'image',
+            height: 50,
+            width: 50,
+            itemId: 'AccountPic',
+            hidden:true
         }
          //{
          //    xtype: 'button',

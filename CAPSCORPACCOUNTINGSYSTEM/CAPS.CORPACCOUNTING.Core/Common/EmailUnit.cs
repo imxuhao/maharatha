@@ -49,6 +49,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("EmailId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOfCategoryID field. </summary>
         public TypeOfCategoryUnit TypeOfCategoryId { get; set; }
 

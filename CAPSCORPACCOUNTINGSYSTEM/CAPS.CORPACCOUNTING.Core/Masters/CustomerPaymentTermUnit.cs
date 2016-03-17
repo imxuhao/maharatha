@@ -55,6 +55,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Overriding the ID column with CustomerPayTermsId</summary>
         [Column("ARPaymentTermId")]
         public override int Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxDesc)]

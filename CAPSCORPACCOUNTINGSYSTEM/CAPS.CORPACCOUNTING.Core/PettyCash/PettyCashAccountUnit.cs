@@ -18,12 +18,17 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         /// <summary>
         ///     Maximum length 
         /// </summary>
-        public const int MaxLength = 200;
+        public const int MaxLength = 400;
 
         #region Declaration of Properties
         /// <summary>Overriding the ID column with PettyCashAccountId</summary>
         [Column("PettyCashAccountId")]
         public override long Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
 
         /// <summary>Gets or sets the VendorID field. </summary>
         public virtual int VendorId { get; set; } 

@@ -74,6 +74,11 @@ namespace CAPS.CORPACCOUNTING.Reports
         [Column("ReportId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the PageInfo field. </summary>
         [StringLength(MaxPageInfoLength)]
         public virtual string PageInfo { get; set; }

@@ -24,6 +24,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [Column("UploadDocumentLogId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field.</summary>
         public virtual string Description { get; set; }
 

@@ -19,6 +19,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("AccountRollupId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the ChartOfAccountRollupID field. </summary>
         public virtual int ChartOfAccountRollupId { get; set; }
 

@@ -40,7 +40,13 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [Column("AccountingLayoutId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
+        [Required]
         [StringLength(MaxDescLength)]
         public virtual string Description { get; set; } // Description
 
@@ -75,7 +81,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Gets or sets the TenantId field. </summary>
         public virtual int TenantId { get; set; }
         #endregion
+        public AccountingLayoutUnit()
+        {
+            IsActive = true;          
+        }
 
-       
     }
 }

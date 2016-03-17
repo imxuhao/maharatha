@@ -18,6 +18,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <summary>Overriding the ID column with FiscalPeriodId</summary>
         [Column("FiscalPeriodId")]
         public override int Id { get; set; }
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
 
         /// <summary>Gets or sets the FiscalYearID field. </summary>
         public virtual int FiscalYearId { get; set; }
@@ -66,6 +70,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual long? OrganizationUnitId { get; set; }
 
         #endregion
-
+        public FiscalPeriodUnit()
+        {
+            IsPeriodOpen = false;
+            IsActive = true;
+        }
     }
 }

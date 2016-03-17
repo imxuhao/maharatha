@@ -16,6 +16,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("NotedObjectId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOfObjectId field. </summary>
         public virtual TypeofObject TypeOfObjectId { get; set; }
 
@@ -32,5 +37,10 @@ namespace CAPS.CORPACCOUNTING.Common
         public virtual int TenantId { get; set; }
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
+
+        public NotedObjectUnit()
+        {           
+            IsSharedUpdate = false;
+        }
     }
 }

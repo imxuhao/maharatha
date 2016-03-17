@@ -20,6 +20,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("SicCodeId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOfSicCodeId field. </summary>
         public virtual int? TypeOfSicCodeId { get; set; }
         [ForeignKey("TypeOfSicCodeId")]

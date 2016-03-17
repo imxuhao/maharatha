@@ -176,6 +176,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("AccountId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public long? LajitId { get; set; }
+
         [Required]
         [StringLength(MaxAccountSize)]
         public string AccountNumber { get; set; }

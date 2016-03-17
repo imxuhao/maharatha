@@ -2,8 +2,6 @@
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
-using CAPS.CORPACCOUNTING.Banking;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Accounting
@@ -32,7 +30,13 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [Column("SubAccountId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
+        [Required]
         [StringLength(MaxLength)]
         public string Description { get; set; }
 

@@ -18,6 +18,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("Code1099T4RateId")]
         public override short Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual short? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOf1099T4ID field. </summary>
         public virtual Typeof1099T4 TypeOf1099T4Id { get; set; }
 

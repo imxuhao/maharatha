@@ -5,7 +5,6 @@ using Abp.Domain.Entities;
 using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.JobCosting;
-using CAPS.CORPACCOUNTING.PettyCash;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
@@ -112,6 +111,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         [Column("BankAccountId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxLength)]
@@ -141,11 +145,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         public virtual string BankAccountName { get; set; }
 
         /// <summary>Gets or sets the BankAccountNumber field. </summary>
-        [StringLength(MaxAccountLength)]
+        [StringLength(MaxLength)]
         public virtual string BankAccountNumber { get; set; }
 
         /// <summary>Gets or sets the RoutingNumber field. </summary>
-        [StringLength(MaxAccountLength)]
+        [StringLength(MaxLength)]
         public virtual string RoutingNumber { get; set; }
 
         /// <summary>Gets or sets the TypeOfCheckStockId field. </summary>
@@ -252,8 +256,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         [StringLength(MaxAccountLength)]
         public virtual string CCFullAccountNO { get; set; }
 
-        /// <summary>Gets or sets the CCFootNote field. </summary>
-        [StringLength(MaxLength)]
+        /// <summary>Gets or sets the CCFootNote field. </summary>     
         public virtual string CCFootNote { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
@@ -262,7 +265,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
         #endregion
-        public BankAccountUnit() { }
+        public BankAccountUnit() {
+            IsClosed = false;
+            IsActive = false;
+            IsApproved = false;
+        }
         public BankAccountUnit(string description, short? displaysequence, TypeOfBankAccount typeofbankaccountid, long? accountid, int? jobid,
                      string bankaccountname, string bankaccountnumber, string routingnumber, int? typeofcheckstockid, long? lastchecknumbergenerated,
                      string controlaccount, long? clearingaccountid, int? clearingjobid, string expirationmmyyyy, int? typeofuploadfileid, int? vendorid,

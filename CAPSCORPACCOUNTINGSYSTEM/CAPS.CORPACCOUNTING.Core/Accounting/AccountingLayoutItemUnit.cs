@@ -2,8 +2,6 @@
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
-using CAPS.CORPACCOUNTING.Banking;
-using System;
 using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Accounting
@@ -24,11 +22,16 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [Column("AccountingLayoutItemId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the AccountingLayoutID field. </summary>
-        public int AccountingLayoutId { get; set; } 
+        public int AccountingLayoutId { get; set; }
 
         /// <summary>Gets or sets the TypeOfAccountingLayoutID field. </summary>
-        public int TypeOfAccountingLayoutId { get; set; } 
+        public int TypeOfAccountingLayoutId { get; set; }
 
         [ForeignKey("TypeOfAccountingLayoutId")]
         public TypeOfAccountingLayoutUnit TypeOfAccountingLayout { get; set; }
@@ -40,16 +43,16 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public TypeOfHeadingUnit TypeOfHeading { get; set; }
 
         /// <summary>Gets or sets the DisplaySequence field. </summary>
-        public short DisplaySequence { get; set; } 
+        public short DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the IsDisplayedOnFirstPage field. </summary>
-        public bool IsDisplayedOnFirstPage { get; set; } 
+        public bool IsDisplayedOnFirstPage { get; set; }
 
         /// <summary>Gets or sets the IsHidden field. </summary>
-        public bool IsHidden { get; set; } 
+        public bool IsHidden { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
-        public bool IsActive { get; set; } 
+        public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
@@ -58,6 +61,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int TenantId { get; set; }
         #endregion
 
-
+        public AccountingLayoutItemUnit()
+        {
+            IsDisplayedOnFirstPage = true;
+            IsHidden = false;
+            IsActive = true;
+        }
     }
 }

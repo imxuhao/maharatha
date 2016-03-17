@@ -20,6 +20,10 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <summary>Overriding the Id column with BankRecControlId</summary>
         [Column("BankRecControlId")]
         public override int Id { get; set; }
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
 
         /// <summary>Gets or sets the BankAccountId</summary>
         [Range(0, Int32.MaxValue)]
@@ -77,7 +81,12 @@ namespace CAPS.CORPACCOUNTING.Banking
         #endregion
 
         /// <summary>Default constructor  </summary>
-        public BankRecControlUnit() { }
+        public BankRecControlUnit() {
+
+            IsReconciled = false;
+            IsActive = true;
+            IsApproved = false;
+        }
 
         /// <summary>Parameterized constructor to initialize the properties  </summary>
         public BankRecControlUnit(long bankaccountid, int? jobid, int? accountid, DateTime? closingperiod, decimal? startingbalance, decimal? endingbalance, DateTime? datereconciled,

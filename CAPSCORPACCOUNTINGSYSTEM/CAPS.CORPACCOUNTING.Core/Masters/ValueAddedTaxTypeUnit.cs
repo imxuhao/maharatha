@@ -34,6 +34,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("ValueAddedTaxTypeId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOfCountryId field. </summary>
         public virtual short TypeOfCountryId { get; set; }
         [ForeignKey("TypeOfCountryId")]
@@ -50,6 +55,11 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
+
+        public ValueAddedTaxTypeUnit()
+        {
+            IsActive = true;
+        }
     }
 
 }

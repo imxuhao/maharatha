@@ -101,6 +101,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [Column("AccountingItemId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the AccountingDocumentID field. </summary>
         public virtual long? AccountingDocumentId { get; set; }
 
@@ -315,5 +320,13 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         #endregion
 
+
+        public AccountingItemUnit()
+        {          
+            IsAsset = false;           
+            IsChanged = false;
+            IsActive = true;
+            IsEnterable = false;           
+        }
     }
 }

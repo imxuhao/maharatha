@@ -16,6 +16,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("EmailMsgAddressId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the EmailMsgLogId field. </summary>
         public virtual long? EmailMsgLogId { get; set; }
         [ForeignKey("EmailMsgLogId")]

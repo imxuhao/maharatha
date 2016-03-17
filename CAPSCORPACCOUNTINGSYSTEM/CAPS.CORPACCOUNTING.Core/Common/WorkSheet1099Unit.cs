@@ -4,6 +4,7 @@ using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
 using System.ComponentModel.DataAnnotations.Schema;
 using CAPS.CORPACCOUNTING.Banking;
+using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Common
 {
@@ -14,9 +15,16 @@ namespace CAPS.CORPACCOUNTING.Common
     [Table("CAPS_WorkSheet1099")]
    public class WorkSheet1099Unit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
+        public const int MaxSSNLength = 50;
+
         /// <summary> Overriding the ID column with WorkSheet1099Id field. </summary>
         [Column("WorkSheet1099Id")]
         public override long Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
 
         /// <summary>Gets or sets the VendorId field. </summary>
         public virtual int? VendorId { get; set; }
@@ -50,6 +58,7 @@ namespace CAPS.CORPACCOUNTING.Common
         public virtual bool IsPrimaryAddress { get; set; }
 
         /// <summary>Gets or sets the SsnTaxId field. </summary>
+        [StringLength(MaxSSNLength)]
         public virtual string SsnTaxId { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>

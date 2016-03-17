@@ -123,7 +123,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Overriding the ID column with AddressId</summary>
         [Column("AddressId")]
         public override long Id { get; set; }
-       
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the ObjectId field. </summary>
         [Required]
         public virtual int ObjectId { get; set; }

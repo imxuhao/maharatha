@@ -25,6 +25,12 @@ namespace CAPS.CORPACCOUNTING.Payables
         /// <summary>Overriding the ID column with InvoicePaymentId</summary>
         [Column("InvoicePaymentId")]
         public override long Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the VendorID field. </summary>
         public virtual int? VendorId { get; set; } 
 

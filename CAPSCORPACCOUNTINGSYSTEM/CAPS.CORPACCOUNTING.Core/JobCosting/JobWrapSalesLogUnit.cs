@@ -23,6 +23,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [Column("JobWrapSalesLogId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the JobWrapDocumentLogID field. </summary>
         public virtual int? JobWrapDocumentLogId { get; set; } 
 

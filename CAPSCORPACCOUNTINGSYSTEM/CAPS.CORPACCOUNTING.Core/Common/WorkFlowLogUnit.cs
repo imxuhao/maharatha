@@ -20,7 +20,12 @@ namespace CAPS.CORPACCOUNTING.Common
         /// <summary> Overriding the ID column with WorkFlowLogId field. </summary>
         [Column("WorkFlowLogId")]
         public override long Id { get; set; }
-        
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the WorkFlowId field. </summary>
         public virtual long WorkFlowId { get; set; }
         [ForeignKey("WorkFlowId")]

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CAPS.CORPACCOUNTING.ChargeEntry
 {
     /// <summary>
-    /// ChargeEntryDocument is the table name in lajit
+    /// ChargeEntryDocument is the table name in Lajit
     /// </summary>
     [Table("CAPS_ChargeEntryDocument")]
     public class ChargeEntryDocumentUnit : AccountingHeaderTransactionsUnit
@@ -38,12 +38,16 @@ namespace CAPS.CORPACCOUNTING.ChargeEntry
         public virtual long? ApInvoiceAccountingDocId { get; set; }
 
         ///<summary>Get Sets the UploadDocumentLogId field.</summary>}
-        public virtual int? UploadDocumentLogId { get; set; }
+        public virtual long? UploadDocumentLogId { get; set; }
+
+        [ForeignKey("UploadDocumentLogId")]
         public virtual UploadDocumentLogUnit UploadDocumentLog { get; set; }
 
         ///<summary>Get Sets the IsApInvoiceGenSelected field.</summary>
         public virtual bool? IsApInvoiceGenSelected { get; set; }
 
-        public ChargeEntryDocumentUnit() { }
+        public ChargeEntryDocumentUnit() {
+            IsEnterable = false;
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         [Column("ARStatementDetailId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the AccountingDocumentID field. </summary>
         public virtual long AccountingDocumentId { get; set; } 
         [ForeignKey("AccountingDocumentId")]

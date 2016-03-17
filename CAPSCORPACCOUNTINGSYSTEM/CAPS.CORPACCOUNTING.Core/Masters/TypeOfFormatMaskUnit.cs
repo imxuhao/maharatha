@@ -33,6 +33,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("TypeOfFormatMaskId")]
         public override short Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxDescLength)]

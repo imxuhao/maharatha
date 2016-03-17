@@ -35,6 +35,12 @@ namespace CAPS.CORPACCOUNTING.Reports
         [Column("ReportDistributionId")]
         public override int Id { get; set; }
 
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOfReportDistributionId field. </summary>
         public virtual TypeOfReportDistribution TypeOfReportDistributionId { get; set; }
 

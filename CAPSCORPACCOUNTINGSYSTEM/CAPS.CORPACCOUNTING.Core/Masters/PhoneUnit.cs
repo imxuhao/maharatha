@@ -39,6 +39,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("PhoneId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOfCategoryId field. </summary>
         public virtual short TypeOfCategoryId { get; set; }
         [ForeignKey("TypeOfCategoryId")]
@@ -69,5 +74,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
 
+
+        public PhoneUnit()
+        {
+            IsPrimary = false;
+        }
     }
 }

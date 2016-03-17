@@ -5,17 +5,11 @@ using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.AccountReceivable
 {
-
-
     /// <summary>
     ///  ReceiptHistory is the table name in Lajit
     /// </summary>
@@ -28,6 +22,11 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// <summary> Overriding the ID column with ReceiptHistoryId field. </summary>
         [Column("ReceiptHistoryId")]
         public override int Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
 
         /// <summary>Gets or sets the ReceiptAccountingItemId field. </summary>
         public virtual long? ReceiptAccountingItemId { get; set; }

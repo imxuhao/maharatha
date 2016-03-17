@@ -24,6 +24,11 @@ namespace CAPS.CORPACCOUNTING.Payments
         [Column("PaymentPrintHistoryId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public long? LajitId { get; set; }
+
         /// <summary>Gets or sets the PaymentAccountingDocumentId field. </summary>
         public virtual long? PaymentAccountingDocumentId { get; set; }
 

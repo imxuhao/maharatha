@@ -20,6 +20,12 @@ namespace CAPS.CORPACCOUNTING.Common
         /// <summary>Overriding the ID column with CustomerGroupId</summary>
         [Column("CustomerGroupId")]
         public override int Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxDescLength)]

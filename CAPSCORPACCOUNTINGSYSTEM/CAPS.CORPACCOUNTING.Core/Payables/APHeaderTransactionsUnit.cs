@@ -56,7 +56,7 @@ namespace CAPS.CORPACCOUNTING.Payables
 
         ///<summary>Get Sets the PaymentDate field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? PaymentDate { get; set; }
+        public virtual DateTime? PaymentDate { get; set; }
 
         ///<summary>Get Sets the PaymentNumber field.</summary>
         public virtual string PaymentNumber { get; set; }
@@ -70,7 +70,7 @@ namespace CAPS.CORPACCOUNTING.Payables
 
         ///<summary>Get Sets the ReversalDate field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? ReversalDate { get; set; }
+        public virtual DateTime? ReversalDate { get; set; }
 
         ///<summary>Get Sets the IsInvoiceHistory field.</summary>
         public virtual bool IsInvoiceHistory { get; set; }

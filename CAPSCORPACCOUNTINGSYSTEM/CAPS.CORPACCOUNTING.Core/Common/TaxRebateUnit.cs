@@ -21,6 +21,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("TaxRebateId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the TaxCodeInfo field. </summary>
         [Required]
         [StringLength(MaxTaxCodeInfoLength)]
@@ -30,6 +35,7 @@ namespace CAPS.CORPACCOUNTING.Common
         public virtual int TaxFormTypeOfCateGoryId { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
+        [Required]
         public virtual string Description { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>

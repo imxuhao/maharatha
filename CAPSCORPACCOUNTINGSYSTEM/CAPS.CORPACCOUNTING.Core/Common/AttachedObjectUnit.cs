@@ -62,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.Common
     /// AttachedObject is the Table name in Lajit
     /// </summary>
     [Table("CAPS_AttachedObject")]
-    public class AttachedObjectUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class AttachedObjectUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         // <summary>
         ///     Maximum Length of FileExtensionLength  
@@ -72,7 +72,12 @@ namespace CAPS.CORPACCOUNTING.Common
         #region Declaration of Properties
         /// <summary>Overriding the ID column with AttachedObjectId</summary>
         [Column("AttachedObjectId")]
-        public override int Id { get; set; }
+        public override long Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
 
         /// <summary>Gets or sets the TypeOfAttachedObjectID field. </summary>
         public virtual TypeOfAttachedObject TypeOfAttachedObjectId { get; set; } 
@@ -87,9 +92,10 @@ namespace CAPS.CORPACCOUNTING.Common
         public virtual string Description { get; set; } 
        
         /// <summary>Gets or sets the FileName field. </summary>
-        public virtual string FileName { get; set; } 
-       
+        public virtual string FileName { get; set; }
+
         /// <summary>Gets or sets the AttachedDate field. </summary>
+        [Column(TypeName ="smalldatetime")]
         public virtual DateTime AttachedDate { get; set; }    
         
         /// <summary>Gets or sets the FileSize field. </summary>      

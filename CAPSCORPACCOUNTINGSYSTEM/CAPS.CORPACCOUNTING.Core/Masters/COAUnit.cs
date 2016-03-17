@@ -65,6 +65,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("ChartOfAccountId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Caption field. </summary>
         [StringLength(MaxDisplayNameLength)]
         [Required]

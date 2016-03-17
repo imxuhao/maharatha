@@ -2,9 +2,6 @@
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
-using System.ComponentModel.DataAnnotations;
-using CAPS.CORPACCOUNTING.Masters;
-using System;
 using CAPS.CORPACCOUNTING.Banking;
 
 namespace CAPS.CORPACCOUNTING.AccountReceivable
@@ -21,6 +18,11 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// <summary>Overriding the ID column with ARInvoiceBuildID</summary>
         [Column("ARInvoiceBuildID")]
         public override long Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
 
         /// <summary>Gets or sets the TypeOfARInvoiceBuildID field. </summary>
         public virtual short? TypeOfArInvoiceBuildId { get; set; } 

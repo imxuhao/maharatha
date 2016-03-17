@@ -17,7 +17,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
                         DisplaySequence = c.Short(),
                         Notes = c.String(),
                         IsCorporateLedger = c.Boolean(nullable: false),
-                        IsActive = c.Boolean(nullable: false),
+                        IsActive = c.Boolean(nullable: false,defaultValue:true),
                         CreationTime = c.DateTime(nullable: false),
                         CreatorUserId = c.Long(),
                     })

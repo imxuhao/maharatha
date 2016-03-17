@@ -6,7 +6,6 @@ using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Banking;
-using System.Data.SqlTypes;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -162,6 +161,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [Column("AccountingDocumentId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxLength)]
@@ -188,18 +192,18 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Get Sets the DocumentDate field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? DocumentDate { get; set; }
+        public virtual DateTime? DocumentDate { get; set; }
 
         /// <summary>Get Sets the TransactionDate field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime TransactionDate { get; set; }
+        public virtual DateTime TransactionDate { get; set; }
 
         // [Column(TypeName = "smalldatetime")]
         //  public virtual DateTime? DateCreated { get; set; }
 
         /// <summary>Get Sets the DatePosted field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? DatePosted { get; set; }
+        public virtual DateTime? DatePosted { get; set; }
 
         //[Column(TypeName = "smalldatetime")]
         //public virtual DateTime? DateChanged { get; set; }

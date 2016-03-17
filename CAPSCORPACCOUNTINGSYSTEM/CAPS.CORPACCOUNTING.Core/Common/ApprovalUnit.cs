@@ -62,6 +62,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("ApprovalId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxDescLength)]

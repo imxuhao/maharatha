@@ -1,14 +1,9 @@
 ﻿using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
-using CAPS.CORPACCOUNTING.JobCosting;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -24,6 +19,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary> Overriding the ID column with CustomerPayTermsId field. </summary>
         [Column("GroupItemRangeId")]
         public override int Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
 
         /// <summary>Gets or sets the GroupItemId field. </summary>
         public int GroupItemId { get; set; }
@@ -65,5 +65,10 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        public GroupItemRangeUnit()
+        {
+            IsNegative = false;
+        }
     }
 }

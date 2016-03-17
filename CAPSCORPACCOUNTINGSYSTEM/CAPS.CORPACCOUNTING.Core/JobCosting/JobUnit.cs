@@ -108,6 +108,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [Column("JobId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the JobNumber field. </summary>
         [Required]
         [StringLength(MaxJobNumberLength)]

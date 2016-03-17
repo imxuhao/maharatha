@@ -18,6 +18,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("AddressId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOfUploadFileId field. </summary>
         public virtual int TypeOfUploadFileId { get; set; }
         [ForeignKey("TypeOfUploadFileId")]
@@ -74,5 +79,11 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
+
+
+        public UploadAddressUnit()
+        {
+            IsPrimary = false;
+        }
     }
 }

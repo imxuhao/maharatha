@@ -21,6 +21,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [Column("JobAccountId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the JobId field. </summary>
         [Range(0, Int32.MaxValue)]
         public virtual int JobId { get; set; }
@@ -61,6 +66,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         public JobAccountUnit()
         {
+            
         }
         public JobAccountUnit(int jobid, long accountid, string description, int? rollupjobid, long? rollupaccountId, long? organizationunitid)
         {

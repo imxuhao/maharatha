@@ -1,5 +1,6 @@
 ﻿using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Banking;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 
@@ -48,7 +49,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
 
         ///<summary>Get Sets the BatchId field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime ReversalDate { get; set; }
+        public virtual DateTime ReversalDate { get; set; }
        
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual long? GroupBillingAccountingDocumentId { get; set; }

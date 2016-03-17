@@ -22,6 +22,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("PaymentTermsId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description</summary>
         [Required]
         [StringLength(MaxDesc)]

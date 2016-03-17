@@ -21,6 +21,11 @@ namespace CAPS.CORPACCOUNTING.Reports
         [Column("UserReportId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the Caption field. </summary>
         [StringLength(MaxCaptionLength)]
         public virtual string Caption { get; set; }

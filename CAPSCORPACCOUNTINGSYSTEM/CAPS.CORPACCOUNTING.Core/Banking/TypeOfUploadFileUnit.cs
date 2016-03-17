@@ -55,9 +55,15 @@ namespace CAPS.CORPACCOUNTING.Banking
         public JobUnit Job { get; set; }
 
         /// <summary>Gets or sets the SecureAccessCategoryIdAssignedByUser field.</summary>
-        public virtual int? SecureAccessCategoryIdAssignedByUser { get; set; }        
+        public virtual short? SecureAccessCategoryIdAssignedByUser { get; set; }
 
         #endregion
-
+        public TypeOfUploadFileUnit()
+        {
+            UploadOptionA = false;
+            UploadOptionB = false;
+            UploadOptionC = false;
+            UploadOptionD = false;
+        }
     }
 }

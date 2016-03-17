@@ -26,6 +26,11 @@ namespace CAPS.CORPACCOUNTING.Payments
         [Column("PaymentRequestId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the TypeOfAccountingDocumentId field.</summary>
         public virtual TypeOfAccountingDocument TypeOfAccountingDocumentId { get; set; }
 

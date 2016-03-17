@@ -19,6 +19,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [Column("FiscalYearId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the YearStartDate field. </summary>
         [Column(TypeName = "smalldatetime")]
         public virtual DateTime YearStartDate { get; set; }

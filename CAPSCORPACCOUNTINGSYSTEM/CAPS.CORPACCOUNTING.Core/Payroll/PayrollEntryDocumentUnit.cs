@@ -47,7 +47,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
 
         /// <summary>Gets or sets the ReversalDate field. </summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? ReversalDate { get; set; }
+        public virtual DateTime? ReversalDate { get; set; }
 
         /// <summary>Gets or sets the IsVoid field. </summary>
         public virtual bool? IsVoid { get; set; }
@@ -61,7 +61,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
         public PayrollEntryDocumentUnit() { }
 
         public PayrollEntryDocumentUnit(int? batchid, int? vendorid, TypeOfInvoice typeofinvoiceid, bool isenterable, long? apinvoiceaccountingdocid, int? uploaddocumentlogid,
-                                                bool? isreversed, int? reversedbyuserid, SqlDateTime? reversaldate, bool? isvoid, bool? isvoiddateoriginal, long? linkedaccountingdocumentid,
+                                                bool? isreversed, int? reversedbyuserid, DateTime? reversaldate, bool? isvoid, bool? isvoiddateoriginal, long? linkedaccountingdocumentid,
                                                  string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid, long? recurdocid, long? reversedocid,
                                                  DateTime? documentdate, DateTime transactiondate, DateTime? dateposted, long? originaldocumentid, decimal? controltotal, string documentreference,
                                                  string voucherreference, short? typeofcurrencyid, int? currencyadjustmentid, string postbatchdescription, bool isposted, bool isautoposted, bool ischanged,

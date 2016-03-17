@@ -20,6 +20,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("EntityId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxDescriptionLength)]

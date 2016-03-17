@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.Accounting;
+
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
 
@@ -18,6 +20,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <summary>Overriding the Id column with JobBudgetDetailId</summary>
         [Column("JobBudgetDetailId")]
         public override long Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
 
         /// <summary>Gets or sets the JobBudgetId field. </summary>
         [Required]
@@ -40,7 +47,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual long? SubAccountId { get; set; }
 
         [ForeignKey("SubAccountId")]
-        public AccountUnit SubAccount { get; set; }
+        public SubAccountUnit SubAccount { get; set; }
 
         /// <summary>Gets or sets the LocationId field. </summary>
         public int? LocationId { get; set; }

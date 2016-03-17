@@ -7,9 +7,9 @@ using CAPS.CORPACCOUNTING.Accounting;
 namespace CAPS.CORPACCOUNTING.Common
 {
     // <summary>
-    /// TypeOfSeverityLevel is the table name in Lajit
+    /// AccountingDocumentType is the table name in Lajit
     /// </summary>
-    [Table("CAPS_TypeOfSeverityLevel")]
+    [Table("CAPS_AccountingDocumentType")]
     public class AccountingDocumentTypeUnit : CreationAuditedEntity<short>, IMustHaveTenant
     {      
 
@@ -20,6 +20,11 @@ namespace CAPS.CORPACCOUNTING.Common
         /// <summary>Overriding the ID column with AccountingDocumentTypeId</summary>
         [Column("AccountingDocumentTypeId")]
         public override short Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual short? LajitId { get; set; }
 
         /// <summary>Gets or sets the CaptionOverride field. </summary>
         [StringLength(MaxCaptionLength)]

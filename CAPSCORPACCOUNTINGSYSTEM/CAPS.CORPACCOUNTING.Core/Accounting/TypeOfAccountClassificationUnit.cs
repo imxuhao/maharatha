@@ -21,6 +21,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [Column("TypeOfAccountClassificationId")]
         public override short Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual short? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxDescLength)]

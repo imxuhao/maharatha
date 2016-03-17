@@ -19,6 +19,10 @@ namespace CAPS.CORPACCOUNTING.Common
         /// <summary> Overriding the ID column with ShipMethodId field. </summary>
         [Column("ShipMethodId")]
         public override int Id { get; set; }
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
         [Required]

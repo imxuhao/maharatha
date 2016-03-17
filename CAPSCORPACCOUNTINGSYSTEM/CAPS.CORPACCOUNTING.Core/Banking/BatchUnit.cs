@@ -58,6 +58,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         [Column("BatchId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxLength)]
@@ -110,7 +115,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         public virtual long? OrganizationUnitId { get; set; }
 
         #endregion
-        public BatchUnit() { }
+        public BatchUnit() {
+            IsRetained = false;
+            IsDefault = false;
+            IsActive = true;
+        }
         public BatchUnit(string description, TypeOfBatch typeofbatchid, DateTime? defaulttransactiondate, DateTime? defaultcheckdate, DateTime? postingdate,
             decimal? controltotal, int? recurmonthincrement, bool isretained, bool isdefault, bool isactive, TypeOfInactiveStatus? typeofinactivestatusid,
             bool? isbatchfinalized, bool? isuniversal, long? organizationunitid)

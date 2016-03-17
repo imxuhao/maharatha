@@ -30,6 +30,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [Column("ARBillingTypeId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [Required]
         [StringLength(MaxDescLength)]
@@ -68,6 +73,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         public ARBillingTypeUnit()
         {
+            IsProjectBilling = false;          
         }
 
         public ARBillingTypeUnit(string description, int jobid, long accountid, bool isictbillingtype, bool isprojectbilling, long? organizationunitid)

@@ -42,7 +42,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
         public virtual BankAccountUnit SendingBankAccount { get; set; }
 
         ///<summary>Get Sets the PettyCashAccountId field.</summary>
-        public virtual long PettyCashAccountId { get; set; }
+        public virtual long? PettyCashAccountId { get; set; }
 
         [ForeignKey("PettyCashAccountId")]
         public PettyCashAccountUnit PettyCashAccount { get; set; }
@@ -58,7 +58,7 @@ namespace CAPS.CORPACCOUNTING.CashEntry
 
         ///<summary>Get Sets the ReversalDate field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? ReversalDate { get; set; }
+        public virtual DateTime? ReversalDate { get; set; }
 
         ///<summary>Get Sets the IsVoid field.</summary>
         public virtual bool? IsVoid { get; set; }
@@ -82,11 +82,12 @@ namespace CAPS.CORPACCOUNTING.CashEntry
         #endregion
         public CashEntryDocumentUnit()
         {
+            IsEnterable = false;
         }
 
 
-        public CashEntryDocumentUnit(int? batchid, long bankaccountid, int? reconciliationid, bool isenterable, long? sendingbankaccountid, long pettycashaccountid,
-                                string batchinfo, bool? isreversed, int? reversedbyuserid, SqlDateTime? reversaldate, bool? isvoid, bool? isvoiddateoriginal,
+        public CashEntryDocumentUnit(int? batchid, long bankaccountid, int? reconciliationid, bool isenterable, long? sendingbankaccountid, long? pettycashaccountid,
+                                string batchinfo, bool? isreversed, int? reversedbyuserid, DateTime? reversaldate, bool? isvoid, bool? isvoiddateoriginal,
                                 long? linkedaccountingdocumentid, int? reissuebatchid, int? reissuevoiddate, int? deposittypeofcategoryid,
                                  string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid, long? recurdocid, long? reversedocid,
                                 DateTime? documentdate, DateTime transactiondate, DateTime? dateposted, long? originaldocumentid, decimal? controltotal, string documentreference,

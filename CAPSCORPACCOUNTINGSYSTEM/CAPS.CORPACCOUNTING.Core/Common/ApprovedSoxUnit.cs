@@ -11,12 +11,17 @@ namespace CAPS.CORPACCOUNTING.Common
     /// ApprovedSOX is the Table name in Lajit
     /// </summary>
     [Table("CAPS_ApprovedSOX")]
-    public class ApprovedSoxUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class ApprovedSoxUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         #region Declaration of Properties
         /// <summary>Overriding the ID column with ApprovedSOXID</summary>
         [Column("ApprovedSOXID")]
-        public override int Id { get; set; }
+        public override long Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
 
         /// <summary>Gets or sets the TypeOfObjectID field. </summary>
         public virtual TypeofObject TypeOfObjectId { get; set; }
@@ -37,6 +42,10 @@ namespace CAPS.CORPACCOUNTING.Common
         /// <summary>Gets or sets the TenantId field. </summary>
         public virtual int TenantId { get; set; }
         #endregion
-
+        public ApprovedSoxUnit()
+        {
+            DateApproved = System.DateTime.Now;
+            IsUnApproved = false;
+        }
     }
 }

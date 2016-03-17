@@ -25,22 +25,22 @@ namespace CAPS.CORPACCOUNTING.Journals
 
         ///<summary>Get Sets the DateOfReversal field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? DateOfReversal { get; set; }
+        public virtual DateTime? DateOfReversal { get; set; }
 
         ///<summary>Get Sets the IsRecurringEntry field.</summary>
         public virtual bool IsRecurringEntry { get; set; }
 
         ///<summary>Get Sets the DateToRecur field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? DateToRecur { get; set; }
+        public virtual DateTime? DateToRecur { get; set; }
 
         ///<summary>Get Sets the FinalDate field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? FinalDate { get; set; }
+        public virtual DateTime? FinalDate { get; set; }
 
         ///<summary>Get Sets the LastPostDate field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual SqlDateTime? LastPostDate { get; set; }
+        public virtual DateTime? LastPostDate { get; set; }
 
         ///<summary>Get Sets the BatchInfo field.</summary>
         public virtual string BatchInfo { get; set; }
@@ -50,8 +50,8 @@ namespace CAPS.CORPACCOUNTING.Journals
 
         public JournalEntryDocumentUnit() { }
 
-        public JournalEntryDocumentUnit(int? batchid, bool isreversingentry, SqlDateTime? dateofreversal, bool isrecurringentry, SqlDateTime? datetorecur, SqlDateTime? finaldate,
-                                        SqlDateTime? lastpostdate, string batchinfo, bool? isbatchremoved, string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid,
+        public JournalEntryDocumentUnit(int? batchid, bool isreversingentry, DateTime? dateofreversal, bool isrecurringentry, DateTime? datetorecur, DateTime? finaldate,
+                                        DateTime? lastpostdate, string batchinfo, bool? isbatchremoved, string description, TypeOfAccountingDocument typeofaccountingdocumentid, TypeofObject? typeofobjectid,
                                         long? recurdocid, long? reversedocid, DateTime? documentdate, DateTime transactiondate, DateTime? dateposted, long? originaldocumentid, decimal? controltotal, string documentreference,
                                          string voucherreference, short? typeofcurrencyid, int? currencyadjustmentid, string postbatchdescription, bool isposted, bool isautoposted, bool ischanged,
                                          int? postedbyuserid, int? bankreccontrolid, bool isselected, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,

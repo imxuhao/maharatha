@@ -30,6 +30,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         [Column("BankRecClearedId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the BankAccountId field. </summary>
         public virtual int BankRecControlId { get; set; }       
 
@@ -53,8 +58,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         [StringLength(MaxLength)]
         public virtual string UploadNumber { get; set; }
 
-        /// <summary>Gets or sets the UploadInfo field. </summary> 
-        [StringLength(MaxUploadLength)]
+        /// <summary>Gets or sets the UploadInfo field. </summary>        
         public virtual string UploadInfo { get; set; }
 
         /// <summary>Gets or sets the UploadAmount field. </summary> 

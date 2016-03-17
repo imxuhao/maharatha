@@ -17,6 +17,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [Column("JobPCConfigId")]
         public override int Id { get; set; }
 
+
         /// <summary>Gets or sets the JobId field. </summary>
         [Range(0,Int32.MaxValue)]
         public virtual int JobId { get; set; }

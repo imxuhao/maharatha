@@ -24,6 +24,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("FedExTranslationId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the VendorTypeId field. </summary>
         public virtual TypeofVendor VendorTypeId { get; set; }
 

@@ -44,6 +44,11 @@ namespace CAPS.CORPACCOUNTING.Payroll
         [Column("PayrollControlFringeId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the PayrollControlID field. </summary>
         public virtual int PayrollControlId { get; set; }
 

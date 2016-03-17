@@ -70,6 +70,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Overriding the ID column with CustomerId</summary>
         [Column("CustomerId")]
         public override int Id { get; set; }
+
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public  int? LajitId { get; set; }
+
         /// <summary>Gets or sets the LastName field. </summary>
         [Required]
         [StringLength(MaxName)]

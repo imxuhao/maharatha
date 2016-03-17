@@ -18,6 +18,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("EmailAddressId")]
         public override long Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual long? LajitId { get; set; }
+
         /// <summary>Gets or sets the EmailAddress field. </summary>
         [Required]
         [StringLength(MaxEmailAddressLength)]

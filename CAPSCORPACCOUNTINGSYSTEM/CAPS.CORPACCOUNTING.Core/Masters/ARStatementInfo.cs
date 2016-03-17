@@ -22,6 +22,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("ArStatementInfoId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the Description field. </summary>
         [MaxLength(MaxDescriptionLength)]
         public virtual string Description { get; set; }
@@ -67,7 +72,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the EntityId field. </summary>
         public virtual int EntityId { get; set; }
-       
+
         /// <summary>Gets or sets the IsApproved field. </summary>
         public virtual bool IsApproved { get; set; }
 
@@ -82,5 +87,13 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
+
+        public ARStatementInfo()
+        {
+            IsLogoPrinted = false;
+            IsDefault = false;
+            IsApproved = false;
+            IsActive = true;
+        }
     }
 }

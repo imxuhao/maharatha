@@ -21,6 +21,11 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("ProfitVariableId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public virtual int? LajitId { get; set; }
+
         /// <summary>Gets or sets the ProfitId field. </summary>
         public virtual int ProfitId { get; set; }
 

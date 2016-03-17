@@ -10,9 +10,6 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <summary> Maximum length of the Description  property.</summary>
         public const int MaxDescriptionLength = 100;
 
-        /// <summary> Maximum length of the Notes  property.</summary>
-        public const int MaxNotesLength = 500;
-
         #region Class Property Declarations
 
         /// <summary>Overriding the ID column with TypeOfBankAccountId</summary>
@@ -27,8 +24,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <summary>Gets or sets the DisplaySequence field.</summary>
         public virtual int? DisplaySequence { get; set; }
 
-        /// <summary>Gets or sets the Notes field.</summary>
-        [StringLength(MaxNotesLength)]
+        /// <summary>Gets or sets the Notes field.</summary>        
         public virtual string Notes { get; set; }
 
       

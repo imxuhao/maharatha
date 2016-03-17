@@ -1019,6 +1019,18 @@
     <Compile Include="Migrations\201603160531068_Add_TypeOfJob_Table.Designer.cs">
       <DependentUpon>201603160531068_Add_TypeOfJob_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603170659579_Modify_Table_columns.cs" />
+    <Compile Include="Migrations\201603170659579_Modify_Table_columns.Designer.cs">
+      <DependentUpon>201603170659579_Modify_Table_columns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603170703415_Modify_ChargeEntryDocument_Table.cs" />
+    <Compile Include="Migrations\201603170703415_Modify_ChargeEntryDocument_Table.Designer.cs">
+      <DependentUpon>201603170703415_Modify_ChargeEntryDocument_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603171118217_Add_LajitId_Tables.cs" />
+    <Compile Include="Migrations\201603171118217_Add_LajitId_Tables.Designer.cs">
+      <DependentUpon>201603171118217_Add_LajitId_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1712,6 +1724,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603160531068_Add_TypeOfJob_Table.resx">
       <DependentUpon>201603160531068_Add_TypeOfJob_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603170659579_Modify_Table_columns.resx">
+      <DependentUpon>201603170659579_Modify_Table_columns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603170703415_Modify_ChargeEntryDocument_Table.resx">
+      <DependentUpon>201603170703415_Modify_ChargeEntryDocument_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603171118217_Add_LajitId_Tables.resx">
+      <DependentUpon>201603171118217_Add_LajitId_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

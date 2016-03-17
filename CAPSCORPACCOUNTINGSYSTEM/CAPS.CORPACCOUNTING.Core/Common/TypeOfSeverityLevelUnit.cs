@@ -21,7 +21,7 @@ namespace CAPS.CORPACCOUNTING.Common
         [Column("TypeOfSeverityLevelId")]
         public override short Id { get; set; }
 
-        [Required]
+      
         [StringLength(MaxDescLength)]
         /// <summary>Gets or sets the Description field.</summary>
         public virtual string Description { get; set; }

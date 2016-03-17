@@ -51,6 +51,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Column("ValueAddedTaxRecoveryId")]
         public override int Id { get; set; }
 
+        /// <summary>
+        /// Reference of Lajit IdentityColumn 
+        /// </summary>
+        public int? LajitId { get; set; }
+
         /// <summary>Gets or sets the ValueAddedTaxTypeId field. </summary>
         public virtual int ValueAddedTaxTypeId { get; set; }
         [ForeignKey("ValueAddedTaxTypeId")]
@@ -67,5 +72,10 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
+
+        public ValueAddedTaxRecoveryUnit()
+        {
+            IsActive = true;
+        }
     }
 }

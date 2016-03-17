@@ -119,25 +119,6 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                     UserNameOrEmailAddress = userNameOrEmailAddress
                 });
         }
-        public ActionResult LoginExt(string userNameOrEmailAddress = "", string returnUrl = "", string successMessage = "")
-        {
-            if (string.IsNullOrWhiteSpace(returnUrl))
-            {
-                returnUrl = Url.Action("Index", "Application");
-            }
-
-            ViewBag.ReturnUrl = returnUrl;
-            ViewBag.IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled;
-
-            return View(
-                new LoginFormViewModel
-                {
-                    TenancyName = _tenancyNameFinder.GetCurrentTenancyNameOrNull(),
-                    IsSelfRegistrationEnabled = IsSelfRegistrationEnabled(),
-                    SuccessMessage = successMessage,
-                    UserNameOrEmailAddress = userNameOrEmailAddress
-                });
-        }
 
         [HttpPost]
         [UnitOfWork]
@@ -181,47 +162,6 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             return Json(new MvcAjaxResponse { TargetUrl = returnUrl });
         }
 
-        [HttpPost]
-        [UnitOfWork]
-        [DisableAuditing]
-        public virtual async Task<ActionResult> LoginExt(LoginViewModel loginModel, string returnUrl = "", string returnUrlHash = "")
-        {
-            CheckModelState();
-
-            _unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MayHaveTenant);
-
-            var loginResult = await GetLoginResultAsync(loginModel.UsernameOrEmailAddress, loginModel.Password, loginModel.TenancyName);
-
-            if (loginResult.User.ShouldChangePasswordOnNextLogin)
-            {
-                loginResult.User.SetNewPasswordResetCode();
-
-                return Json(new MvcAjaxResponse
-                {
-                    TargetUrl = Url.Action(
-                        "ResetPassword",
-                        new ResetPasswordViewModel
-                        {
-                            UserId = SimpleStringCipher.Encrypt(loginResult.User.Id.ToString()),
-                            ResetCode = loginResult.User.PasswordResetCode
-                        })
-                });
-            }
-
-            await SignInAsync(loginResult.User, loginResult.Identity, loginModel.RememberMe);
-
-            if (string.IsNullOrWhiteSpace(returnUrl))
-            {
-                returnUrl = Url.Action("Index", "Application");
-            }
-
-            if (!string.IsNullOrWhiteSpace(returnUrlHash))
-            {
-                returnUrl = returnUrl + returnUrlHash;
-            }
-
-            return Json(new MvcAjaxResponse { TargetUrl = returnUrl });
-        }
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();

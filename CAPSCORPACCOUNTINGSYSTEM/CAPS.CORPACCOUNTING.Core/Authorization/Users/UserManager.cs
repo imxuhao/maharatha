@@ -20,7 +20,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
     /// </summary>
     public class UserManager : AbpUserManager<Tenant, Role, User>
     {
-       
         public UserManager(
             UserStore userStore,
             RoleManager roleManager,

@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using Abp.Application.Services.Dto;
 using Abp.Web.Mvc.Authorization;
 using CAPS.CORPACCOUNTING.Authorization;
-using CAPS.CORPACCOUNTING.Common;
+using CAPS.CORPACCOUNTING.Editions;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Tenants;
 using CAPS.CORPACCOUNTING.Web.Controllers;
@@ -16,28 +16,29 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
     public class TenantsController : CORPACCOUNTINGControllerBase
     {
         private readonly ITenantAppService _tenantAppService;
-        private readonly ICommonLookupAppService _lookupAppService;
         private readonly TenantManager _tenantManager;
+        private readonly IEditionAppService _editionAppService;
 
         public TenantsController(
-            ITenantAppService tenantAppService,
-            ICommonLookupAppService lookupAppService, 
-            TenantManager tenantManager)
+            ITenantAppService tenantAppService, 
+            TenantManager tenantManager, 
+            IEditionAppService editionAppService)
         {
             _tenantAppService = tenantAppService;
-            _lookupAppService = lookupAppService;
             _tenantManager = tenantManager;
+            _editionAppService = editionAppService;
         }
 
         public ActionResult Index()
         {
+            ViewBag.FilterText = Request.QueryString["filterText"];
             return View();
         }
 
         [AbpMvcAuthorize(AppPermissions.Pages_Tenants_Create)]
         public async Task<PartialViewResult> CreateModal()
         {
-            var editionItems = await GetEditionComboboxItems();
+            var editionItems = await _editionAppService.GetEditionComboboxItems();
             var viewModel = new CreateTenantViewModel(editionItems);
 
             return PartialView("_CreateModal", viewModel);
@@ -47,7 +48,7 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
         public async Task<PartialViewResult> EditModal(int id)
         {
             var tenantEditDto = await _tenantAppService.GetTenantForEdit(new EntityRequestInput(id));
-            var editionItems = await GetEditionComboboxItems(tenantEditDto.EditionId);
+            var editionItems = await _editionAppService.GetEditionComboboxItems(tenantEditDto.EditionId);
             var viewModel = new EditTenantViewModel(tenantEditDto, editionItems);
 
             return PartialView("_EditModal", viewModel);
@@ -61,29 +62,6 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
             var viewModel = new TenantFeaturesEditViewModel(tenant, output);
 
             return PartialView("_FeaturesModal", viewModel);
-        }
-
-        private async Task<List<ComboboxItemDto>> GetEditionComboboxItems(int? selectedEditionId = null)
-        {
-            var editionItems = (await _lookupAppService.GetEditionsForCombobox()).Items.ToList();
-
-            var defaultItem = new ComboboxItemDto("null", L("NotAssigned"));
-            editionItems.Insert(0, defaultItem);
-            
-            if (selectedEditionId.HasValue)
-            {
-                var selectedEdition = editionItems.FirstOrDefault(e => e.Value == selectedEditionId.Value.ToString());
-                if (selectedEdition != null)
-                {
-                    selectedEdition.IsSelected = true;
-                }
-            }
-            else
-            {
-                defaultItem.IsSelected = true;
-            }
-
-            return editionItems;
         }
     }
 }

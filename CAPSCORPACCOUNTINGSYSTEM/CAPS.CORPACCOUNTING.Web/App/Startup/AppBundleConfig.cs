@@ -28,6 +28,8 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                         ScriptPaths.Morris,
                         ScriptPaths.Morris_Raphael,
                         ScriptPaths.JQuery_Sparkline,
+                        ScriptPaths.JQuery_Color,
+                        ScriptPaths.JQuery_Jcrop,
                         ScriptPaths.JsTree,
                         ScriptPaths.Bootstrap_Switch,
                         ScriptPaths.SpinJs,
@@ -105,6 +107,7 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                     .Include(StylePaths.Bootstrap_DateRangePicker)
                     .Include(StylePaths.Bootstrap_Select)
                     .Include(StylePaths.Bootstrap_Switch)
+                    .Include(StylePaths.JQuery_Jcrop)
                     .ForceOrdered()
                 );
         }

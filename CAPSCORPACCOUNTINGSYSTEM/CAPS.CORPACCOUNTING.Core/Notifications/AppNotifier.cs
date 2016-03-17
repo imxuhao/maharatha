@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Abp.Localization;
 using Abp.Notifications;
 using CAPS.CORPACCOUNTING.Authorization.Users;
+using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Notifications
 {
@@ -37,6 +38,19 @@ namespace CAPS.CORPACCOUNTING.Notifications
             notificationData["emailAddress"] = user.EmailAddress;
 
             await _notificationPublisher.PublishAsync(AppNotificationNames.NewUserRegistered, notificationData, tenantIds: new[] { user.TenantId });
+        }
+
+        public async Task NewTenantRegisteredAsync(Tenant tenant)
+        {
+            var notificationData = new LocalizableMessageNotificationData(
+                new LocalizableString(
+                    "NewTenantRegisteredNotificationMessage",
+                    CORPACCOUNTINGConsts.LocalizationSourceName
+                    )
+                );
+
+            notificationData["tenancyName"] = tenant.TenancyName;
+            await _notificationPublisher.PublishAsync(AppNotificationNames.NewTenantRegistered, notificationData);
         }
 
         //This is for test purposes

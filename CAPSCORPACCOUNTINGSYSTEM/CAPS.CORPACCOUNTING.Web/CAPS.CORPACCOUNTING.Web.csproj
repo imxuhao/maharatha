@@ -62,6 +62,10 @@
       <HintPath>..\packages\Abp.Owin.0.8.3.0\lib\net452\Abp.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Abp.RedisCache, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.RedisCache.0.8.3.0\lib\net452\Abp.RedisCache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Abp.Web, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Abp.Web.0.8.3.0\lib\net452\Abp.Web.dll</HintPath>
       <Private>True</Private>
@@ -218,6 +222,10 @@
       <HintPath>..\packages\RecaptchaNet.2.1.0\lib\net451\Recaptcha.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.0.316.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.0.488\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
       <Private>True</Private>
@@ -365,6 +373,9 @@
     <Content Include="App\common\views\auditLogs\index.js" />
     <Content Include="App\common\views\languages\index.js" />
     <Content Include="App\common\views\languages\texts.js" />
+    <Content Include="App\common\views\users\loginAttemptsModal.css" />
+    <Content Include="App\common\views\users\loginAttemptsModal.js" />
+    <Content Include="App\common\views\users\loginAttemptsModal.min.css" />
     <Content Include="App\common\views\_empty\modal.js" />
     <Content Include="App\common\views\_empty\index.js" />
     <Content Include="App\common\views\_empty\README.txt" />
@@ -429,6 +440,9 @@
       <DependentUpon>_Layout.css</DependentUpon>
     </Content>
     <Content Include="Areas\Mpa\Views\Layout\_Header.js" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.css" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.js" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.min.css" />
     <Content Include="Areas\Mpa\Views\Notifications\Index.css">
       <DependentUpon>Index.less</DependentUpon>
     </Content>
@@ -478,6 +492,9 @@
       <DependentUpon>index.css</DependentUpon>
     </Content>
     <Content Include="Areas\Mpa\Views\Common\_PermissionTree.js" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.css" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.js" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.min.css" />
     <Content Include="Areas\Mpa\Views\Users\_PermissionsModal.js" />
     <Content Include="Areas\Mpa\Views\Users\_CreateOrEditModal.js" />
     <Content Include="CAPS.CORPACCOUNTING.Application.XML" />
@@ -558,6 +575,9 @@
     </Content>
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts-open-sans.css" />
+    <Content Include="Content\fonts-ptsans-narrow.css" />
+    <Content Include="Content\fonts-sourcesans-pro.css" />
     <Content Include="Content\images\capslogo.png" />
     <Content Include="Content\themesChaching\famfamfam-flags.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
@@ -18823,6 +18843,12 @@
     <Content Include="Abp\Framework\styles\abp.mixings.less" />
     <Content Include="Abp\Framework\styles\abp.less" />
     <Content Include="Abp\Framework\styles\abp.css.map" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.cshtml" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.less" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.cshtml" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.less" />
+    <Content Include="App\common\views\users\loginAttemptsModal.cshtml" />
+    <Content Include="App\common\views\users\loginAttemptsModal.less" />
     <None Include="Properties\PublishProfiles\DevServerRelease.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
@@ -18843,6 +18869,7 @@
     <Content Include="Views\Account\Register.js" />
     <Content Include="Views\Account\Login.js" />
     <Content Include="Views\Account\_Layout-rtl.css" />
+    <Content Include="Views\TenantRegistration\Index.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -18867,8 +18894,10 @@
     <Compile Include="Areas\Mpa\Controllers\AuditLogsController.cs" />
     <Compile Include="Areas\Mpa\Controllers\Common.cs" />
     <Compile Include="Areas\Mpa\Controllers\EditionsController.cs" />
+    <Compile Include="Areas\Mpa\Controllers\MaintenanceController.cs" />
     <Compile Include="Areas\Mpa\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Mpa\Controllers\OrganizationUnitsController.cs" />
+    <Compile Include="Areas\Mpa\Models\HostSettings\HostSettingsViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Languages\EditTextModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Controllers\LanguagesController.cs" />
     <Compile Include="Areas\Mpa\Controllers\ProfileController.cs" />
@@ -18877,6 +18906,7 @@
     <Compile Include="Areas\Mpa\Models\Layout\FooterViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Languages\CreateOrEditLanguageModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Common\Modals\LookupModalViewModel.cs" />
+    <Compile Include="Areas\Mpa\Models\Maintenance\MaintenanceViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\OrganizationUnits\CreateOrganizationUnitModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\OrganizationUnits\EditOrganizationUnitModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Tenants\TenantFeaturesEditViewModel.cs" />
@@ -18888,6 +18918,7 @@
     <Compile Include="Areas\Mpa\Models\Roles\CreateOrEditRoleModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Tenants\CreateTenantViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Tenants\EditTenantViewModel.cs" />
+    <Compile Include="Areas\Mpa\Models\Users\UserLoginAttemptModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Users\UserPermissionsEditViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Users\CreateOrEditUserModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Controllers\DashboardController.cs" />
@@ -18912,9 +18943,12 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\TenantRegistrationController.cs" />
     <Compile Include="Models\Account\ImpersonateModel.cs" />
     <Compile Include="Models\Account\SwitchToLinkedAccountModel.cs" />
     <Compile Include="Models\Account\TenantSelectionViewModel.cs" />
+    <Compile Include="Models\TenantRegistration\TenantRegisterResultViewModel.cs" />
+    <Compile Include="Models\TenantRegistration\TenantRegistrationViewModel.cs" />
     <Compile Include="MultiTenancy\ITenancyNameFinder.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -19139,6 +19173,8 @@
     <Content Include="Views\Account\LoginExt.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\TenantRegistration\Index.cshtml" />
+    <Content Include="Views\TenantRegistration\RegisterResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

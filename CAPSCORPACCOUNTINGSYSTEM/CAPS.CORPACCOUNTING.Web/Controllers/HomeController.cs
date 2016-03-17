@@ -8,9 +8,5 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             return View();
         }
-        public ActionResult Home()
-        {
-            return View();
-        }
-    }
+	}
 }

@@ -1034,6 +1034,10 @@
     <Compile Include="Migrations\201603171753173_Update2AbpZero 0.8.3.Designer.cs">
       <DependentUpon>201603171753173_Update2AbpZero 0.8.3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603172003098_Updating Abpzero to V1.9.0.cs" />
+    <Compile Include="Migrations\201603172003098_Updating Abpzero to V1.9.0.Designer.cs">
+      <DependentUpon>201603172003098_Updating Abpzero to V1.9.0.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1739,6 +1743,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603171753173_Update2AbpZero 0.8.3.resx">
       <DependentUpon>201603171753173_Update2AbpZero 0.8.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603172003098_Updating Abpzero to V1.9.0.resx">
+      <DependentUpon>201603172003098_Updating Abpzero to V1.9.0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,9 @@
 ﻿using System.Web.Mvc;
 using Abp.Application.Navigation;
+using Abp.Configuration;
 using Abp.Configuration.Startup;
 using Abp.Threading;
+using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Web.Models.Layout;
 using CAPS.CORPACCOUNTING.Web.Navigation;
@@ -41,6 +43,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             headerModel.CurrentPageName = currentPageName;
 
             headerModel.IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled;
+            headerModel.TenantRegistrationEnabled = SettingManager.GetSettingValue<bool>(AppSettings.TenantManagement.AllowSelfRegistration);
 
             return PartialView("~/Views/Layout/_Header.cshtml", headerModel);
         }

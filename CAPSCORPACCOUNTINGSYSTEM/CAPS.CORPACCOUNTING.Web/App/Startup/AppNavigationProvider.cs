@@ -77,6 +77,14 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                         requiredPermissionName: AppPermissions.Pages_Administration_AuditLogs
                         )
                     ).AddItem(new MenuItemDefinition(
+                        PageNames.App.Host.Maintenance,
+                        L("Maintenance"),
+                        url: "host.maintenance",
+                        icon: "icon-wrench",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Host_Maintenance
+                        )
+                    )
+                    .AddItem(new MenuItemDefinition(
                         PageNames.App.Host.Settings,
                         L("Settings"),
                         url: "host.settings",

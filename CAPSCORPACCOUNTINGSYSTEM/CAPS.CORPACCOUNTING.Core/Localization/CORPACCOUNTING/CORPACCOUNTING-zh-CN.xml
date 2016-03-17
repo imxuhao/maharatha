@@ -147,10 +147,10 @@
     <text name="ExportToExcel" value="导出到Excel" />
     <text name="ChangeProfilePicture" value="修改头像" />
     <text name="TenantName_Regex_Description" value="租户名称必须由2个以上字母、数字、-、_组成,以字母开头" />
-    <text name="ProfilePicture_Change_Info" value="只能选择30k内的JPG/JPEG图片." />
+    <text name="ProfilePicture_Change_Info" value="只能选择1mb内的JPG/JPEG/PNG图片." />
     <text name="ProfilePicture_Change_Error" value="头像修改错误." />
-    <text name="ProfilePicture_Warn_SizeLimit" value="只能选择30k内的JPG/JPEG图片，请重新选择头像文件." />
-    <text name="ProfilePicture_Warn_FileType" value="只能选择30k内的JPG/JPEG图片，请重新选择头像文件." />
+    <text name="ProfilePicture_Warn_SizeLimit" value="只能选择1mb内的JPG/JPEG图片，请重新选择头像文件." />
+    <text name="ProfilePicture_Warn_FileType" value="只能选择1mb内的JPG/JPEG图片，请重新选择头像文件." />
     <text name="Dashboard" value="工作台" />
     <text name="DashboardHeaderInfo" value="分析与报告" />
     <text name="GoToApplication" value="登录系统" />

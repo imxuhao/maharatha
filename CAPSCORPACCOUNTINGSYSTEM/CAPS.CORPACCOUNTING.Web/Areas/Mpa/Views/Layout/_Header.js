@@ -49,6 +49,18 @@
             changeProfilePictureModal.open();
         });
 
+        //Login attemtps
+        var userLoginAttemptsModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'Mpa/Users/LoginAttemptsModal',
+            scriptUrl: abp.appPath + 'Areas/Mpa/Views/Users/_LoginAttemptsModal.js',
+            modalClass: 'LoginAttemptsModal'
+        });
+
+        $('#ShowLoginAttemptsLink').click(function(e) {
+            e.preventDefault();
+            userLoginAttemptsModal.open();
+        });
+
         //Manage linked accounts
         var _userLinkService = abp.services.app.userLink;
 

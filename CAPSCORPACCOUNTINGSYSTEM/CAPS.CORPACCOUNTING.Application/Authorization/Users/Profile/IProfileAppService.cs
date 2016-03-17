@@ -11,5 +11,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
         Task UpdateCurrentUserProfile(CurrentUserProfileEditDto input);
         
         Task ChangePassword(ChangePasswordInput input);
+
+        Task UpdateProfilePicture(UpdateProfilePictureInput input);
     }
 }

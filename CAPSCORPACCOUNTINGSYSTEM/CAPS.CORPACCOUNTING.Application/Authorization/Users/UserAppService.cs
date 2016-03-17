@@ -11,12 +11,16 @@ using Abp.Authorization.Users;
 using Abp.AutoMapper;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.Notifications;
+using Abp.Runtime.Session;
+using Abp.UI;
 using Microsoft.AspNet.Identity;
 using CAPS.CORPACCOUNTING.Authorization.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Users.Exporting;
 using CAPS.CORPACCOUNTING.Dto;
+using CAPS.CORPACCOUNTING.Notifications;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
@@ -26,15 +30,21 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         private readonly RoleManager _roleManager;
         private readonly IUserEmailer _userEmailer;
         private readonly IUserListExcelExporter _userListExcelExporter;
+        private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
+        private readonly IAppNotifier _appNotifier;
 
         public UserAppService(
             RoleManager roleManager,
             IUserEmailer userEmailer,
-            IUserListExcelExporter userListExcelExporter)
+            IUserListExcelExporter userListExcelExporter,
+            INotificationSubscriptionManager notificationSubscriptionManager, 
+            IAppNotifier appNotifier)
         {
             _roleManager = roleManager;
             _userEmailer = userEmailer;
             _userListExcelExporter = userListExcelExporter;
+            _notificationSubscriptionManager = notificationSubscriptionManager;
+            _appNotifier = appNotifier;
         }
 
         public async Task<PagedResultOutput<UserListDto>> GetUsers(GetUsersInput input)
@@ -70,7 +80,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             var users = await UserManager.Users.Include(u => u.Roles).ToListAsync();
             var userListDtos = users.MapTo<List<UserListDto>>();
             await FillRoleNames(userListDtos);
-            
+
             return _userListExcelExporter.ExportToFile(userListDtos);
         }
 
@@ -81,11 +91,11 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             var userRoleDtos = (await _roleManager.Roles
                 .OrderBy(r => r.DisplayName)
                 .Select(r => new UserRoleDto
-                             {
-                                 RoleId = r.Id,
-                                 RoleName = r.Name,
-                                 RoleDisplayName = r.DisplayName
-                             })
+                {
+                    RoleId = r.Id,
+                    RoleName = r.Name,
+                    RoleDisplayName = r.DisplayName
+                })
                 .ToArrayAsync());
 
             var output = new GetUserForEditOutput
@@ -97,7 +107,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             {
                 //Creating a new user
                 output.User = new UserEditDto { IsActive = true, ShouldChangePasswordOnNextLogin = true };
-                
+
                 foreach (var defaultRole in await _roleManager.Roles.Where(r => r.IsDefault).ToListAsync())
                 {
                     var defaultUserRole = userRoleDtos.FirstOrDefault(ur => ur.RoleName == defaultRole.Name);
@@ -111,7 +121,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             {
                 //Editing an existing user
                 var user = await UserManager.GetUserByIdAsync(input.Id.Value);
-                
+
                 output.User = user.MapTo<UserEditDto>();
                 output.ProfilePictureId = user.ProfilePictureId;
 
@@ -132,10 +142,10 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             var grantedPermissions = await UserManager.GetGrantedPermissionsAsync(user);
 
             return new GetUserPermissionsForEditOutput
-                   {
-                       Permissions = permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList(),
-                       GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
-                   };
+            {
+                Permissions = permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList(),
+                GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
+            };
         }
 
         [AbpAuthorize(AppPermissions.Pages_Administration_Users_ChangePermissions)]
@@ -168,6 +178,11 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         [AbpAuthorize(AppPermissions.Pages_Administration_Users_Delete)]
         public async Task DeleteUser(IdInput<long> input)
         {
+            if (input.Id == AbpSession.GetUserId())
+            {
+                throw new UserFriendlyException(L("YouCanNotDeleteOwnAccount"));
+            }
+
             var user = await UserManager.GetUserByIdAsync(input.Id);
             CheckErrors(await UserManager.DeleteAsync(user));
         }
@@ -205,6 +220,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             var user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
             user.TenantId = AbpSession.TenantId;
 
+            //Set password
             if (!input.User.Password.IsNullOrEmpty())
             {
                 CheckErrors(await UserManager.PasswordValidator.ValidateAsync(input.User.Password));
@@ -217,6 +233,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             user.Password = new PasswordHasher().HashPassword(input.User.Password);
             user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
 
+            //Assign roles
             user.Roles = new Collection<UserRole>();
             foreach (var roleName in input.AssignedRoleNames)
             {
@@ -227,6 +244,11 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             CheckErrors(await UserManager.CreateAsync(user));
             await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
 
+            //Notifications
+            await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.TenantId, user.Id);
+            await _appNotifier.WelcomeToTheApplicationAsync(user);
+
+            //Send activation email
             if (input.SendActivationEmail)
             {
                 user.SetNewEmailConfirmationCode();

@@ -7,6 +7,7 @@ using Abp.Hangfire;
 using Abp.Hangfire.Configuration;
 using Abp.IO;
 using Abp.Modules;
+using Abp.Runtime.Caching.Redis;
 using Abp.Web.Mvc;
 using Abp.Web.SignalR;
 using Abp.Zero.Configuration;
@@ -24,7 +25,7 @@ namespace CAPS.CORPACCOUNTING.Web
 {
     /// <summary>
     /// Web module of the application.
-    /// This is the most top and entrance module that dependens on others.
+    /// This is the most top and entrance module that depends on others.
     /// </summary>
     [DependsOn(
         typeof(AbpWebMvcModule),
@@ -32,6 +33,7 @@ namespace CAPS.CORPACCOUNTING.Web
         typeof(CORPACCOUNTINGApplicationModule),
         typeof(CORPACCOUNTINGWebApiModule),
         typeof(AbpWebSignalRModule),
+        typeof(AbpRedisCacheModule), //AbpRedisCacheModule dependency can be removed if not using Redis cache
         typeof(AbpHangfireModule))] //AbpHangfireModule dependency can be removed if not using Hangfire
     public class CORPACCOUNTINGWebModule : AbpModule
     {
@@ -45,11 +47,14 @@ namespace CAPS.CORPACCOUNTING.Web
             Configuration.Navigation.Providers.Add<FrontEndNavigationProvider>();
             Configuration.Navigation.Providers.Add<MpaNavigationProvider>();
 
-            //Configure to use Hangfire as background job manager. Remove these lines to use default background job manager, instead of Hangfire.
-            Configuration.BackgroundJobs.UseHangfire(configuration =>
-            {
-                configuration.GlobalConfiguration.UseSqlServerStorage("Default");
-            });
+            //Uncomment these lines to use HangFire as background job manager.
+            //Configuration.BackgroundJobs.UseHangfire(configuration =>
+            //{
+            //    configuration.GlobalConfiguration.UseSqlServerStorage("Default");
+            //});
+
+            //Uncomment this line to use Redis cache instead of in-memory cache.
+            //Configuration.Caching.UseRedis();
         }
 
         public override void Initialize()
@@ -84,6 +89,7 @@ namespace CAPS.CORPACCOUNTING.Web
 
             appFolders.SampleProfileImagesFolder = server.MapPath("~/Common/Images/SampleProfilePics");
             appFolders.TempFileDownloadFolder = server.MapPath("~/Temp/Downloads");
+            appFolders.WebLogsFolder = server.MapPath("~/Logs");
 
             try { DirectoryHelper.CreateIfNotExists(appFolders.TempFileDownloadFolder); } catch { }
         }

@@ -83,7 +83,7 @@
                                 </label>
                                 <span class="help-block">@L("AllowUsersToRegisterThemselves_Hint")</span>
                             </div>
-                            <div class="md-checkbox" ng-show="vm.settings.userManagement.allowSelfRegistration">
+                            <div class="md-checkbox">
                                 <input id="Setting_IsNewRegisteredUserActiveByDefault" class="md-check" type="checkbox" name="IsNewRegisteredUserActiveByDefault" value="true" @(Model.UserManagement.IsNewRegisteredUserActiveByDefault ? "checked=\"checked\"" : "")>
                                 <label for="Setting_IsNewRegisteredUserActiveByDefault">
                                     <span class="inc"></span>
@@ -93,7 +93,7 @@
                                 </label>
                                 <span class="help-block">@L("NewRegisteredUsersIsActiveByDefault_Hint")</span>
                             </div>
-                            <div class="md-checkbox" ng-show="vm.settings.userManagement.allowSelfRegistration">
+                            <div class="md-checkbox">
                                 <input id="Setting_UseCaptchaOnRegistration" class="md-check" type="checkbox" name="UseCaptchaOnRegistration" value="true" @(Model.UserManagement.UseCaptchaOnRegistration ? "checked=\"checked\"" : "")>
                                 <label for="Setting_UseCaptchaOnRegistration">
                                     <span class="inc"></span>

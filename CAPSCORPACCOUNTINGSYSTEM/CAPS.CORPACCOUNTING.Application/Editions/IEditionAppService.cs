@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Editions.Dto;
@@ -14,5 +15,7 @@ namespace CAPS.CORPACCOUNTING.Editions
         Task CreateOrUpdateEdition(CreateOrUpdateEditionDto input);
 
         Task DeleteEdition(EntityRequestInput input);
+
+        Task<List<ComboboxItemDto>> GetEditionComboboxItems(int? selectedEditionId = null);
     }
 }

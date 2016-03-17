@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Abp.Auditing;
@@ -11,6 +15,7 @@ using Abp.Web.Models;
 using Abp.Web.Mvc.Authorization;
 using Abp.Web.Mvc.Models;
 using CAPS.CORPACCOUNTING.Authorization.Users;
+using CAPS.CORPACCOUNTING.IO;
 using CAPS.CORPACCOUNTING.Net.MimeTypes;
 using CAPS.CORPACCOUNTING.Storage;
 
@@ -21,11 +26,16 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
     {
         private readonly UserManager _userManager;
         private readonly IBinaryObjectManager _binaryObjectManager;
+        private readonly IAppFolders _appFolders;
 
-        public ProfileController(UserManager userManager, IBinaryObjectManager binaryObjectManager)
+        public ProfileController(
+            UserManager userManager,
+            IBinaryObjectManager binaryObjectManager,
+            IAppFolders appFolders)
         {
             _userManager = userManager;
             _binaryObjectManager = binaryObjectManager;
+            _appFolders = appFolders;
         }
 
         [DisableAuditing]
@@ -45,14 +55,14 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             if (id.IsNullOrEmpty())
             {
-                return GetDefaultProfilePicture();                
+                return GetDefaultProfilePicture();
             }
 
             return await GetProfilePictureById(Guid.Parse(id));
         }
 
         [UnitOfWork]
-        public async virtual Task<JsonResult> ChangeProfilePicture()
+        public virtual async Task<JsonResult> ChangeProfilePicture()
         {
             try
             {
@@ -91,6 +101,50 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             catch (UserFriendlyException ex)
             {
                 //Return error message
+                return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
+            }
+        }
+
+        public JsonResult UploadProfilePicture()
+        {
+            try
+            {
+                //Check input
+                if (Request.Files.Count <= 0 || Request.Files[0] == null)
+                {
+                    throw new UserFriendlyException(L("ProfilePicture_Change_Error"));
+                }
+
+                var file = Request.Files[0];
+
+                if (file.ContentLength > 5242880) //1MB.
+                {
+                    throw new UserFriendlyException(L("ProfilePicture_Warn_SizeLimit"));
+                }
+
+                //Check file type & format
+                var fileImage = Image.FromStream(file.InputStream);
+                if (!fileImage.RawFormat.Equals(ImageFormat.Jpeg) && !fileImage.RawFormat.Equals(ImageFormat.Png))
+                {
+                    throw new ApplicationException("Uploaded file is not an accepted image file !");
+                }
+
+                //Delete old temp profile pictures
+                AppFileHelper.DeleteFilesInFolderIfExists(_appFolders.TempFileDownloadFolder, "userProfileImage_" + AbpSession.GetUserId());
+
+                //Save new picture
+                var fileInfo = new FileInfo(file.FileName);
+                var tempFileName = "userProfileImage_" + AbpSession.GetUserId() + fileInfo.Extension;
+                var tempFilePath = Path.Combine(_appFolders.TempFileDownloadFolder, tempFileName);
+                file.SaveAs(tempFilePath);
+
+                using (var bmpImage = new Bitmap(tempFilePath))
+                {
+                    return Json(new MvcAjaxResponse(new { fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
+                }
+            }
+            catch (UserFriendlyException ex)
+            {
                 return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
             }
         }

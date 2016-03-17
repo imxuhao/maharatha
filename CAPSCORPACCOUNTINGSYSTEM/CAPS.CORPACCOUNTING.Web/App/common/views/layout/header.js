@@ -119,6 +119,14 @@
                 });
             };
 
+            vm.showLoginAttempts = function () {
+                $uibModal.open({
+                    templateUrl: '~/App/common/views/users/loginAttemptsModal.cshtml',
+                    controller: 'common.views.users.loginAttemptsModal as vm',
+                    backdrop: 'static'
+                });
+            };
+
             abp.event.on('abp.notifications.received', function (userNotification) {
                 appUserNotificationHelper.show(userNotification);
                 vm.loadNotifications();

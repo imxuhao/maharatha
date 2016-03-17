@@ -29,7 +29,7 @@
                             '<div class=\"ui-grid-cell-contents\">' +
                             '  <div class="btn-group dropdown" uib-dropdown="">' +
                             '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
-                            '    <ul class="uib-dropdown-menu">' +
+                            '    <ul uib-dropdown-menu>' +
                             '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editEdition(row.entity)">' + app.localize('Edit') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteEdition(row.entity)">' + app.localize('Delete') + '</a></li>' +
                             '    </ul>' +

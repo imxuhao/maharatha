@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('host.views.tenants.index', [
-        '$scope', '$uibModal', 'uiGridConstants', 'abp.services.app.tenant', 'abp.services.app.commonLookup', 'lookupModal',
-        function ($scope, $uibModal, uiGridConstants, tenantService, commonLookupService, lookupModal) {
+        '$scope', '$stateParams', '$uibModal', 'uiGridConstants', 'abp.services.app.tenant', 'abp.services.app.commonLookup', 'lookupModal',
+        function ($scope, $stateParams, $uibModal, uiGridConstants, tenantService, commonLookupService, lookupModal) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -9,7 +9,7 @@
             });
 
             vm.loading = false;
-            vm.filterText = null;
+            vm.filterText = $stateParams.filterText || null;
 
             vm.permissions = {
                 create: abp.auth.hasPermission('Pages.Tenants.Create'),
@@ -43,7 +43,7 @@
                             '<div class=\"ui-grid-cell-contents\">' +
                             '  <div class="btn-group dropdown" uib-dropdown="">' +
                             '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
-                            '    <ul class="uib-dropdown-menu">' +
+                            '    <ul uib-dropdown-menu>' +
                             '      <li><a ng-if="grid.appScope.permissions.impersonation" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisTenant') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editTenant(row.entity)">' + app.localize('Edit') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.changeFeatures" ng-click="grid.appScope.editFeatures(row.entity)">' + app.localize('Features') + '</a></li>' +
@@ -105,22 +105,22 @@
                 vm.tenantGridOptions.columnDefs.shift();
             }
 
-            vm.getTenants = function() {
+            vm.getTenants = function () {
                 vm.loading = true;
                 tenantService.getTenants({
                     skipCount: requestParams.skipCount,
                     maxResultCount: requestParams.maxResultCount,
                     sorting: requestParams.sorting,
                     filter: vm.filterText
-                }).success(function(data) {
+                }).success(function (data) {
                     vm.tenantGridOptions.totalItems = data.totalCount;
                     vm.tenantGridOptions.data = data.items;
-                }).finally(function() {
+                }).finally(function () {
                     vm.loading = false;
                 });
             };
 
-            vm.impersonate = function(tenant) {
+            vm.impersonate = function (tenant) {
                 lookupModal.open({
                     title: app.localize('SelectAUser'),
                     serviceMethod: commonLookupService.findUsers,

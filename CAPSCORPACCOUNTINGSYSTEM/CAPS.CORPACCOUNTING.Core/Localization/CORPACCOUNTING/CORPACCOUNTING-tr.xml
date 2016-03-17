@@ -147,9 +147,9 @@
     <text name="ExportToExcel" value="Excele aktar" />
     <text name="ChangeProfilePicture" value="Profil resmini değiştir" />
     <text name="TenantName_Regex_Description" value="Müşteri adı en az 2 karakter olmalı, bir harfle başlamalı ve harf, rakam, tire ya da alt çizgi ile devam etmelidir." />
-    <text name="ProfilePicture_Change_Info" value="30KB altında bir JPG/JPEG dosyası seçebilirsiniz." />
+    <text name="ProfilePicture_Change_Info" value="1MB altında bir JPG/JPEG/PNG dosyası seçebilirsiniz." />
     <text name="ProfilePicture_Change_Error" value="Profil resminiz değiştirilemedi." />
-    <text name="ProfilePicture_Warn_SizeLimit" value="Resim boyutu en fazla 30KB olabilir. Lütfen başka bir dosya seçin." />
+    <text name="ProfilePicture_Warn_SizeLimit" value="Resim boyutu en fazla 1MB olabilir. Lütfen başka bir dosya seçin." />
     <text name="ProfilePicture_Warn_FileType" value="Sadece JPG/JPEG uzantılı dosya seçebilirsiniz. Lütfen başka bir dosya seçin." />
     <text name="Dashboard" value="Genel görünüm" />
     <text name="DashboardHeaderInfo" value="istatistikler ve raporlar" />
@@ -231,7 +231,7 @@
       ]]>
     </text>
     <text name="SeeDemo" value="Demoyu görün" />
-    <text name="Edition" value="Edition" />
+    <text name="Edition" value="Paket" />
     <text name="Editions" value="Paketler" />
     <text name="EditionsHeaderInfo" value="Uygulamanın paketlerini yönetin." />
     <text name="CreateNewEdition" value="Yeni paket oluştur" />
@@ -345,5 +345,28 @@
     <text name="YouCanNotDeleteOwnAccount" value="Kendi kullanıcı hesabınızı silemezsiniz!" />
     <text name="On" value="Açık" />
     <text name="Off" value="Kapalı" />
+    <text name="Maintenance">Bakım</text>
+    <text name="Caches">Önbellekler</text>
+    <text name="CacheSuccessfullyCleared">Önbellek başarıyla temizlendi.</text>
+    <text name="AllCachesSuccessfullyCleared">Tüm önbellekler başarıyla temizlendi.</text>
+    <text name="ClearAll">Hepsini temizle</text>
+    <text name="Clear">Temizle</text>
+    <text name="CachesHeaderInfo">Uygulamadaki önbellekleri bu sayfada temizleyebilirsiniz.</text>
+    <text name="TestEmailSettingsHeader">E-posta Ayarlarını Test Et</text>
+    <text name="SendTestEmail">Test E-postası Gönder</text>
+    <text name="TestEmail_Subject">CORPACCOUNTING test maili</text>
+    <text name="TestEmail_Body">Bu bir test mailidir.</text>
+    <text name="TestEmailSentSuccessfully">Test e-postası başarıyla gönderildi.</text>
+    <text name="WebSiteLogs">Websitesi Logları</text>
+    <text name="WebSiteLogsHeaderInfo">Bu sayfada en güncel logları görebilir veya tüm logları tek bir zip dosyası olarak indirebilirsiniz.</text>
+    <text name="DownloadAll">Hepsini indir</text>
+    <text name="TenantManagement">Müşteri yönetimi</text>
+    <text name="TenantSignUp">Müşteri Kaydı</text>
+    <text name="NewTenantRegisteredNotificationDefinition" value="Yeni bir müşteri kaydolduğunda." />
+    <text name="NewTenantRegisteredNotificationMessage" value="Yeni bir müşteri kaydoldu. Müşteri adı: {tenancyName}." />
+    <text name="LoginAttempts">Giriş denemeleri</text>
+    <text name="Failed">Başarısız</text>
+    <text name="NewTenant">Yeni müşteri</text>
+    <text name="ResizedProfilePicture_Warn_SizeLimit" value="Kırpılmış resim boyutu en fazla 100KB olabilir. Lütfen kırpılmış alanı küçültüp tekrar deneyin." />
   </texts>
 </localizationDictionary>

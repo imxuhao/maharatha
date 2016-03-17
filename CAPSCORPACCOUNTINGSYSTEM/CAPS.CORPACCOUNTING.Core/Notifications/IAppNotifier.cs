@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Abp.Notifications;
 using CAPS.CORPACCOUNTING.Authorization.Users;
+using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Notifications
 {
@@ -9,6 +10,8 @@ namespace CAPS.CORPACCOUNTING.Notifications
         Task WelcomeToTheApplicationAsync(User user);
 
         Task NewUserRegisteredAsync(User user);
+
+        Task NewTenantRegisteredAsync(Tenant tenant);
 
         Task SendMessageAsync(long userId, string message, NotificationSeverity severity = NotificationSeverity.Info);
     }

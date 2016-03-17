@@ -105,6 +105,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Linq.Dynamic, Version=1.0.5840.25917, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
       <Private>True</Private>
@@ -124,9 +125,18 @@
     <Compile Include="Authorization\Users\Dto\GetLinkedUsersInput.cs" />
     <Compile Include="Authorization\Users\Dto\LinkToUserInput.cs" />
     <Compile Include="Authorization\Users\Dto\UnlinkUserInput.cs" />
+    <Compile Include="Authorization\Users\Dto\UserLoginAttemptDto.cs" />
     <Compile Include="Authorization\Users\IUserLinkAppService.cs" />
+    <Compile Include="Authorization\Users\IUserLoginAppService.cs" />
     <Compile Include="Authorization\Users\LinkedUserDto.cs" />
+    <Compile Include="Authorization\Users\Profile\Dto\UpdateProfilePictureInput.cs" />
     <Compile Include="Authorization\Users\UserLinkAppService.cs" />
+    <Compile Include="Authorization\Users\UserLoginAppService.cs" />
+    <Compile Include="Caching\CachingAppService.cs" />
+    <Compile Include="Caching\Dto\CacheDto.cs" />
+    <Compile Include="Caching\ICachingAppService.cs" />
+    <Compile Include="Configuration\Host\Dto\SendTestEmailInput.cs" />
+    <Compile Include="Configuration\Host\Dto\TenantManagementSettingsEditDto.cs" />
     <Compile Include="CORPACCOUNTINGApplicationModule.cs" />
     <Compile Include="CORPACCOUNTINGAppServiceBase.cs" />
     <Compile Include="AppConsts.cs" />
@@ -192,6 +202,7 @@
     <Compile Include="Interceptors\DTOInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\DTOInterceptors.cs" />
     <Compile Include="Interceptors\InternalAsyncHelper.cs" />
+    <Compile Include="IO\AppFileHelper.cs" />
     <Compile Include="JobCosting\Dto\CreateJobAccountUnitInput.cs" />
     <Compile Include="JobCosting\Dto\CreateJobBudgetUnitInput.cs" />
     <Compile Include="JobCosting\Dto\JobAccountUnitDto.cs" />

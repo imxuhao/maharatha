@@ -373,6 +373,7 @@
     <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-zh-CN.xml" />
     <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-de.xml" />
     <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-pt-BR.xml" />
+    <Content Include="Localization\CORPACCOUNTING\CORPACCOUNTING-it.xml" />
     <Content Include="Localization\CORPACCOUNTING\READ_ME.txt" />
     <EmbeddedResource Include="Emailing\EmailTemplates\default.html" />
   </ItemGroup>

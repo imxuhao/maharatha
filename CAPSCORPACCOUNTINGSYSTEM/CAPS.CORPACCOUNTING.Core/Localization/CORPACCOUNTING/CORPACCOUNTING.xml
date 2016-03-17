@@ -147,9 +147,9 @@
     <text name="ExportToExcel" value="Export to excel" />
     <text name="ChangeProfilePicture" value="Change profile picture" />
     <text name="TenantName_Regex_Description" value="Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore." />
-    <text name="ProfilePicture_Change_Info" value="You can select a JPG/JPEG file with a maximum 30KB size." />
+    <text name="ProfilePicture_Change_Info" value="You can select a JPG/JPEG/PNG file with a maximum 1MB size." />
     <text name="ProfilePicture_Change_Error" value="Your profile picture could not be changed." />
-    <text name="ProfilePicture_Warn_SizeLimit" value="Picture size must be smalled than 30KB. Please select another file." />
+    <text name="ProfilePicture_Warn_SizeLimit" value="Picture size must be smalled than 1MB. Please select another file." />
     <text name="ProfilePicture_Warn_FileType" value="You can only select JPG/JPEG file. Please select another file." />
     <text name="Dashboard" value="Dashboard" />
     <text name="DashboardHeaderInfo" value="statistics and reports" />
@@ -345,5 +345,32 @@
     <text name="YouCanNotDeleteOwnAccount" value="You can not delete own user account!" />
     <text name="On" value="On" />
     <text name="Off" value="Off" />
+    <text name="Maintenance">Maintenance</text>
+    <text name="Caches">Caches</text>
+    <text name="CacheSuccessfullyCleared">Cache successfully cleared.</text>
+    <text name="AllCachesSuccessfullyCleared">All caches successfully cleared.</text>
+    <text name="ClearAll">Clear all</text>
+    <text name="Clear">Clear</text>
+    <text name="CachesHeaderInfo">You can clear caches in application on this page.</text>
+    <text name="TestEmailSettingsHeader">Test Email Settings</text>
+    <text name="SendTestEmail">Send Test Email</text>
+    <text name="TestEmail_Subject">CORPACCOUNTING test email</text>
+    <text name="TestEmail_Body">This is a test email.</text>
+    <text name="TestEmailSentSuccessfully">Test e-mail sent successfully.</text>
+    <text name="WebSiteLogs">Website Logs</text>
+    <text name="WebSiteLogsHeaderInfo">You can see latest logs in this page or download all logs in a single zip file.</text>
+    <text name="DownloadAll">Download all</text>
+    <text name="TenantManagement">Tenant management</text>
+    <text name="AllowTenantsToRegisterThemselves" value="Allow tenants to register to the system." />
+    <text name="AllowTenantsToRegisterThemselves_Hint" value="If you disable this, tenants will only be added by admin using tenant management page." />
+    <text name="NewRegisteredTenantsIsActiveByDefault" value="New registered tenants are active by default." />
+    <text name="NewRegisteredTenantsIsActiveByDefault_Hint" value="If you disable this, new tenants will not be active (and can not login) until admin manually activate the account." />
+    <text name="TenantSignUp">Tenant SignUp</text>
+    <text name="NewTenantRegisteredNotificationDefinition" value="On a new tenant registered to the application." />
+    <text name="NewTenantRegisteredNotificationMessage" value="A new tenant registered to the application. Tenancy name: {tenancyName}." />
+    <text name="LoginAttempts">Login attempts</text>
+    <text name="Failed">Failed</text>
+    <text name="NewTenant">New tenant</text>
+    <text name="ResizedProfilePicture_Warn_SizeLimit" value="Resized picture size must be smalled than 100KB. Please resize down and try again." />
   </texts>
 </localizationDictionary>

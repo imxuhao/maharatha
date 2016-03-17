@@ -28,6 +28,8 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Startup
                         ScriptPaths.JQuery_Uniform,
                         ScriptPaths.JQuery_Ajax_Form,
                         ScriptPaths.JQuery_jTable,
+                        ScriptPaths.JQuery_Color,
+                        ScriptPaths.JQuery_Jcrop,
                         ScriptPaths.SignalR,
                         ScriptPaths.Morris,
                         ScriptPaths.Morris_Raphael,
@@ -93,6 +95,7 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Startup
                     .Include(StylePaths.Bootstrap_DateRangePicker)
                     .Include(StylePaths.Bootstrap_Switch)
                     .Include(StylePaths.Bootstrap_Select)
+                    .Include(StylePaths.JQuery_Jcrop)
                     .ForceOrdered()
                 );
         }

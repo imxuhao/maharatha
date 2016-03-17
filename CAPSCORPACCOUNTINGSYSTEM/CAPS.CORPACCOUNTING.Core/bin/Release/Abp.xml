@@ -895,6 +895,39 @@
             and job execution is not enabled (<see cref="P:Abp.BackgroundJobs.IBackgroundJobConfiguration.IsJobExecutionEnabled"/>) for the application.
             </summary>
         </member>
+        <member name="T:Abp.Json.JsonSerializationHelper">
+            <summary>
+            Defines helper methods to work with JSON.
+            </summary>
+        </member>
+        <member name="M:Abp.Json.JsonSerializationHelper.SerializeWithType(System.Object)">
+            <summary>
+            Serializes an object with a type information included.
+            So, it can be deserialized using <see cref="M:Abp.Json.JsonSerializationHelper.DeserializeWithType(System.String)"/> method later.
+            </summary>
+        </member>
+        <member name="M:Abp.Json.JsonSerializationHelper.SerializeWithType(System.Object,System.Type)">
+            <summary>
+            Serializes an object with a type information included.
+            So, it can be deserialized using <see cref="M:Abp.Json.JsonSerializationHelper.DeserializeWithType(System.String)"/> method later.
+            </summary>
+        </member>
+        <member name="M:Abp.Json.JsonSerializationHelper.DeserializeWithType``1(System.String)">
+            <summary>
+            Deserializes an object serialized with <see cref="M:Abp.Json.JsonSerializationHelper.SerializeWithType(System.Object)"/> methods.
+            </summary>
+        </member>
+        <member name="M:Abp.Json.JsonSerializationHelper.DeserializeWithType(System.String)">
+            <summary>
+            Deserializes an object serialized with <see cref="M:Abp.Json.JsonSerializationHelper.SerializeWithType(System.Object)"/> methods.
+            </summary>
+        </member>
+        <member name="M:Abp.Json.JsonExtensions.ToJsonString(System.Object,System.Boolean,System.Boolean)">
+            <summary>
+            Converts given object to JSON string.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Abp.Logging.LoggerExtensions">
             <summary>
             Extensions for <see cref="T:Castle.Core.Logging.ILogger"/>.
@@ -2230,6 +2263,75 @@
             Initializes a new instance of the <see cref="T:Abp.RealTime.OnlineClientManager"/> class.
             </summary>
         </member>
+        <member name="T:Abp.Reflection.TypeHelper">
+            <summary>
+            Some simple type-checking methods used internally.
+            </summary>
+        </member>
+        <member name="T:Abp.Reflection.CurrentDomainAssemblyFinder">
+            <summary>
+            Default implementation of <see cref="T:Abp.Reflection.IAssemblyFinder"/>.
+            If gets assemblies from current domain.
+            </summary>
+        </member>
+        <member name="P:Abp.Reflection.CurrentDomainAssemblyFinder.Instance">
+            <summary>
+            Gets Singleton instance of <see cref="T:Abp.Reflection.CurrentDomainAssemblyFinder"/>.
+            </summary>
+        </member>
+        <member name="T:Abp.Reflection.IAssemblyFinder">
+            <summary>
+            This interface is used to get all assemblies to investigate special classes
+            such as ABP modules.
+            </summary>
+        </member>
+        <member name="M:Abp.Reflection.IAssemblyFinder.GetAllAssemblies">
+            <summary>
+            This method should return all assemblies used by application.
+            </summary>
+            <returns>List of assemblies</returns>
+        </member>
+        <member name="T:Abp.Reflection.ReflectionHelper">
+            <summary>
+            Defines helper methods for reflection.
+            </summary>
+        </member>
+        <member name="M:Abp.Reflection.ReflectionHelper.IsAssignableToGenericType(System.Type,System.Type)">
+            <summary>
+            Checks whether <paramref name="givenType"/> implements/inherits <paramref name="genericType"/>.
+            </summary>
+            <param name="givenType">Type to check</param>
+            <param name="genericType">Generic type</param>
+        </member>
+        <member name="M:Abp.Reflection.ReflectionHelper.GetAttributesOfMemberAndDeclaringType``1(System.Reflection.MemberInfo)">
+            <summary>
+            Gets a list of attributes defined for a class member and it's declaring type including inherited attributes.
+            </summary>
+            <typeparam name="TAttribute">Type of the attribute</typeparam>
+            <param name="memberInfo">MemberInfo</param>
+        </member>
+        <member name="M:Abp.Reflection.ReflectionHelper.GetSingleAttributeOfMemberOrDeclaringTypeOrNull``1(System.Reflection.MemberInfo)">
+            <summary>
+            Tries to gets an of attribute defined for a class member and it's declaring type including inherited attributes.
+            Returns null if it's not declared at all.
+            </summary>
+            <typeparam name="TAttribute">Type of the attribute</typeparam>
+            <param name="memberInfo">MemberInfo</param>
+        </member>
+        <member name="T:Abp.Reflection.Extensions.MemberInfoExtensions">
+            <summary>
+            Extensions to <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.Reflection.Extensions.MemberInfoExtensions.GetSingleAttributeOrNull``1(System.Reflection.MemberInfo,System.Boolean)">
+            <summary>
+            Gets a single attribute for a member.
+            </summary>
+            <typeparam name="T">Type of the attribute</typeparam>
+            <param name="memberInfo">The member that will be checked for the attribute</param>
+            <param name="inherit">Include inherited attributes</param>
+            <returns>Returns the attribute object if found. Returns null if not found.</returns>
+        </member>
         <member name="T:Abp.RegularGuidGenerator">
             <summary>
             Implements <see cref="T:Abp.IGuidGenerator"/> by using <see cref="M:System.Guid.NewGuid"/>.
@@ -3143,7 +3245,7 @@
         <member name="M:Abp.Domain.Uow.UnitOfWorkRegistrar.Initialize(Abp.Dependency.IIocManager)">
             <summary>
             Initializes the registerer.
-            </summary>sssss
+            </summary>
             <param name="iocManager">IOC manager</param>
         </member>
         <member name="T:Abp.Domain.Uow.IUnitOfWork">
@@ -4402,7 +4504,7 @@
             <param name="stream">The stream that contains object</param>
             <returns>deserialized object</returns> 
         </member>
-        <member name="T:Abp.Runtime.Serialization.BinarySerializationHelper.DeserializationAppDomainBinder">
+        <member name="T:Abp.Runtime.Serialization.BinarySerializationHelper.ExtendedSerializationBinder">
             <summary>
             This class is used in deserializing to allow deserializing objects that are defined
             in assemlies that are load in runtime (like PlugIns).
@@ -4457,6 +4559,11 @@
         <member name="T:Abp.Runtime.Caching.Configuration.ICachingConfiguration">
             <summary>
             Used to configure caching system.
+            </summary>
+        </member>
+        <member name="P:Abp.Runtime.Caching.Configuration.ICachingConfiguration.AbpConfiguration">
+            <summary>
+            Gets the ABP configuration object.
             </summary>
         </member>
         <member name="P:Abp.Runtime.Caching.Configuration.ICachingConfiguration.Configurators">
@@ -5993,7 +6100,7 @@
         </member>
         <member name="M:Abp.Dependency.IocManager.Register(System.Type,System.Type,Abp.Dependency.DependencyLifeStyle)">
             <summary>
-            Registers a class as self registration.
+            Registers a type with it's implementation.
             </summary>
             <param name="type">Type of the class</param>
             <param name="impl">The type that implements <paramref name="type"/></param>
@@ -9576,17 +9683,17 @@
             Value of the setting.
             </summary>
         </member>
-        <member name="T:Abp.Configuration.DictionayBasedConfig">
+        <member name="T:Abp.Configuration.DictionaryBasedConfig">
             <summary>
             Used to set/get custom configuration.
             </summary>
         </member>
-        <member name="P:Abp.Configuration.DictionayBasedConfig.CustomSettings">
+        <member name="P:Abp.Configuration.DictionaryBasedConfig.CustomSettings">
             <summary>
             Dictionary of custom configuration.
             </summary>
         </member>
-        <member name="P:Abp.Configuration.DictionayBasedConfig.Item(System.String)">
+        <member name="P:Abp.Configuration.DictionaryBasedConfig.Item(System.String)">
             <summary>
             Gets/sets a config value.
             Returns null if no config with given name.
@@ -9594,12 +9701,12 @@
             <param name="name">Name of the config</param>
             <returns>Value of the config</returns>
         </member>
-        <member name="M:Abp.Configuration.DictionayBasedConfig.#ctor">
+        <member name="M:Abp.Configuration.DictionaryBasedConfig.#ctor">
             <summary>
             Constructor.
             </summary>
         </member>
-        <member name="M:Abp.Configuration.DictionayBasedConfig.Get``1(System.String)">
+        <member name="M:Abp.Configuration.DictionaryBasedConfig.Get``1(System.String)">
             <summary>
             Gets a configuration value as a specific type.
             </summary>
@@ -9607,7 +9714,7 @@
             <typeparam name="T">Type of the config</typeparam>
             <returns>Value of the configuration or null if not found</returns>
         </member>
-        <member name="M:Abp.Configuration.DictionayBasedConfig.Set``1(System.String,``0)">
+        <member name="M:Abp.Configuration.DictionaryBasedConfig.Set``1(System.String,``0)">
             <summary>
             Used to set a string named configuration.
             If there is already a configuration with same <paramref name="name"/>, it's overwritten.
@@ -9615,14 +9722,14 @@
             <param name="name">Unique name of the configuration</param>
             <param name="value">Value of the configuration</param>
         </member>
-        <member name="M:Abp.Configuration.DictionayBasedConfig.Get(System.String)">
+        <member name="M:Abp.Configuration.DictionaryBasedConfig.Get(System.String)">
             <summary>
             Gets a configuration object with given name.
             </summary>
             <param name="name">Unique name of the configuration</param>
             <returns>Value of the configuration or null if not found</returns>
         </member>
-        <member name="M:Abp.Configuration.DictionayBasedConfig.Get(System.String,System.Object)">
+        <member name="M:Abp.Configuration.DictionaryBasedConfig.Get(System.String,System.Object)">
             <summary>
             Gets a configuration object with given name.
             </summary>
@@ -9630,7 +9737,7 @@
             <param name="defaultValue">Default value of the object if can not found given configuration</param>
             <returns>Value of the configuration or null if not found</returns>
         </member>
-        <member name="M:Abp.Configuration.DictionayBasedConfig.Get``1(System.String,``0)">
+        <member name="M:Abp.Configuration.DictionaryBasedConfig.Get``1(System.String,``0)">
             <summary>
             Gets a configuration object with given name.
             </summary>
@@ -9639,7 +9746,7 @@
             <param name="defaultValue">Default value of the object if can not found given configuration</param>
             <returns>Value of the configuration or null if not found</returns>
         </member>
-        <member name="M:Abp.Configuration.DictionayBasedConfig.GetOrCreate``1(System.String,System.Func{``0})">
+        <member name="M:Abp.Configuration.DictionaryBasedConfig.GetOrCreate``1(System.String,System.Func{``0})">
             <summary>
             Gets a configuration object with given name.
             </summary>
@@ -9647,12 +9754,6 @@
             <param name="name">Unique name of the configuration</param>
             <param name="creator">The function that will be called to create if given configuration is not found</param>
             <returns>Value of the configuration or null if not found</returns>
-        </member>
-        <member name="M:Abp.Json.JsonExtensions.ToJsonString(System.Object,System.Boolean,System.Boolean)">
-            <summary>
-            Converts given object to JSON string.
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Abp.NameValue">
             <summary>
@@ -9693,75 +9794,6 @@
             <summary>
             Creates a new <see cref="T:Abp.NameValue"/>.
             </summary>
-        </member>
-        <member name="T:Abp.Reflection.TypeHelper">
-            <summary>
-            Some simple type-checking methods used internally.
-            </summary>
-        </member>
-        <member name="T:Abp.Reflection.CurrentDomainAssemblyFinder">
-            <summary>
-            Default implementation of <see cref="T:Abp.Reflection.IAssemblyFinder"/>.
-            If gets assemblies from current domain.
-            </summary>
-        </member>
-        <member name="P:Abp.Reflection.CurrentDomainAssemblyFinder.Instance">
-            <summary>
-            Gets Singleton instance of <see cref="T:Abp.Reflection.CurrentDomainAssemblyFinder"/>.
-            </summary>
-        </member>
-        <member name="T:Abp.Reflection.IAssemblyFinder">
-            <summary>
-            This interface is used to get all assemblies to investigate special classes
-            such as ABP modules.
-            </summary>
-        </member>
-        <member name="M:Abp.Reflection.IAssemblyFinder.GetAllAssemblies">
-            <summary>
-            This method should return all assemblies used by application.
-            </summary>
-            <returns>List of assemblies</returns>
-        </member>
-        <member name="T:Abp.Reflection.ReflectionHelper">
-            <summary>
-            Defines helper methods for reflection.
-            </summary>
-        </member>
-        <member name="M:Abp.Reflection.ReflectionHelper.IsAssignableToGenericType(System.Type,System.Type)">
-            <summary>
-            Checks whether <paramref name="givenType"/> implements/inherits <paramref name="genericType"/>.
-            </summary>
-            <param name="givenType">Type to check</param>
-            <param name="genericType">Generic type</param>
-        </member>
-        <member name="M:Abp.Reflection.ReflectionHelper.GetAttributesOfMemberAndDeclaringType``1(System.Reflection.MemberInfo)">
-            <summary>
-            Gets a list of attributes defined for a class member and it's declaring type including inherited attributes.
-            </summary>
-            <typeparam name="TAttribute">Type of the attribute</typeparam>
-            <param name="memberInfo">MemberInfo</param>
-        </member>
-        <member name="M:Abp.Reflection.ReflectionHelper.GetSingleAttributeOfMemberOrDeclaringTypeOrNull``1(System.Reflection.MemberInfo)">
-            <summary>
-            Tries to gets an of attribute defined for a class member and it's declaring type including inherited attributes.
-            Returns null if it's not declared at all.
-            </summary>
-            <typeparam name="TAttribute">Type of the attribute</typeparam>
-            <param name="memberInfo">MemberInfo</param>
-        </member>
-        <member name="T:Abp.Reflection.Extensions.MemberInfoExtensions">
-            <summary>
-            Extensions to <see cref="T:System.Reflection.MemberInfo"/>.
-            </summary>
-        </member>
-        <member name="M:Abp.Reflection.Extensions.MemberInfoExtensions.GetSingleAttributeOrNull``1(System.Reflection.MemberInfo,System.Boolean)">
-            <summary>
-            Gets a single attribute for a member.
-            </summary>
-            <typeparam name="T">Type of the attribute</typeparam>
-            <param name="memberInfo">The member that will be checked for the attribute</param>
-            <param name="inherit">Include inherited attributes</param>
-            <returns>Returns the attribute object if found. Returns null if not found.</returns>
         </member>
         <member name="T:Abp.Text.FormattedStringValueExtracter">
             <summary>

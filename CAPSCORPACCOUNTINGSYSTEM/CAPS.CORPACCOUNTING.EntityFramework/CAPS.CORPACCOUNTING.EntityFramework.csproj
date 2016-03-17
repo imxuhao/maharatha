@@ -111,7 +111,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityFramework\AbpZeroDbModelBuilderExtensions.cs" />
     <Compile Include="EntityFramework\CORPACCOUNTINGDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\CORPACCOUNTINGRepositoryBase.cs" />
     <Compile Include="Migrations\201501041229232_InitialCreate.cs" />
@@ -1031,6 +1030,10 @@
     <Compile Include="Migrations\201603171118217_Add_LajitId_Tables.Designer.cs">
       <DependentUpon>201603171118217_Add_LajitId_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603171753173_Update2AbpZero 0.8.3.cs" />
+    <Compile Include="Migrations\201603171753173_Update2AbpZero 0.8.3.Designer.cs">
+      <DependentUpon>201603171753173_Update2AbpZero 0.8.3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1733,6 +1736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603171118217_Add_LajitId_Tables.resx">
       <DependentUpon>201603171118217_Add_LajitId_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603171753173_Update2AbpZero 0.8.3.resx">
+      <DependentUpon>201603171753173_Update2AbpZero 0.8.3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

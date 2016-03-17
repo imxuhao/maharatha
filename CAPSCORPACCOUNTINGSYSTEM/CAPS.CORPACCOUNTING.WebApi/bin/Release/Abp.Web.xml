@@ -307,7 +307,7 @@
         </member>
         <member name="F:Abp.Web.WebAssemblyFinder.FindAssembliesSearchOption">
             <summary>
-            The search option used to find assemblies in bin folder.
+            The search option used to find assemblies in bin folder. 
             </summary>
         </member>
         <member name="M:Abp.Web.WebAssemblyFinder.GetAllAssemblies">

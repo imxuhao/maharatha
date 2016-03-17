@@ -9,6 +9,23 @@
             DbContext for ABP zero.
             </summary>
         </member>
+        <member name="M:Abp.Zero.EntityFramework.AbpZeroDbContext`3.#ctor">
+            <summary>
+            Default constructor.
+            Do not directly instantiate this class. Instead, use dependency injection!
+            </summary>
+        </member>
+        <member name="M:Abp.Zero.EntityFramework.AbpZeroDbContext`3.#ctor(System.String)">
+            <summary>
+            Constructor with connection string parameter.
+            </summary>
+            <param name="nameOrConnectionString">Connection string or a name in connection strings in configuration file</param>
+        </member>
+        <member name="M:Abp.Zero.EntityFramework.AbpZeroDbContext`3.#ctor(System.Data.Common.DbConnection,System.Boolean)">
+            <summary>
+            This constructor can be used for unit tests.
+            </summary>
+        </member>
         <member name="P:Abp.Zero.EntityFramework.AbpZeroDbContext`3.Tenants">
             <summary>
             Tenants
@@ -27,6 +44,11 @@
         <member name="P:Abp.Zero.EntityFramework.AbpZeroDbContext`3.UserLogins">
             <summary>
             User logins.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.EntityFramework.AbpZeroDbContext`3.UserLoginAttempts">
+            <summary>
+            User login attempts.
             </summary>
         </member>
         <member name="P:Abp.Zero.EntityFramework.AbpZeroDbContext`3.UserRoles">
@@ -119,22 +141,21 @@
             Notification subscriptions.
             </summary>
         </member>
-        <member name="M:Abp.Zero.EntityFramework.AbpZeroDbContext`3.#ctor">
+        <member name="T:Abp.Zero.EntityFramework.AbpZeroDbModelBuilderExtensions">
             <summary>
-            Default constructor.
-            Do not directly instantiate this class. Instead, use dependency injection!
+            Extension methods for <see cref="T:System.Data.Entity.DbModelBuilder"/>.
             </summary>
         </member>
-        <member name="M:Abp.Zero.EntityFramework.AbpZeroDbContext`3.#ctor(System.String)">
+        <member name="M:Abp.Zero.EntityFramework.AbpZeroDbModelBuilderExtensions.ChangeAbpTablePrefix``3(System.Data.Entity.DbModelBuilder,System.String)">
             <summary>
-            Constructor with connection string parameter.
+            Changes prefix for ABP tables (which is "Abp" by default).
+            Can be null/empty string to clear the prefix.
             </summary>
-            <param name="nameOrConnectionString">Connection string or a name in connection strings in configuration file</param>
-        </member>
-        <member name="M:Abp.Zero.EntityFramework.AbpZeroDbContext`3.#ctor(System.Data.Common.DbConnection,System.Boolean)">
-            <summary>
-            This constructor can be used for unit tests.
-            </summary>
+            <typeparam name="TTenant">The type of the tenant entity.</typeparam>
+            <typeparam name="TRole">The type of the role entity.</typeparam>
+            <typeparam name="TUser">The type of the user entity.</typeparam>
+            <param name="modelBuilder">Model builder.</param>
+            <param name="prefix">Table prefix, or null to clear prefix.</param>
         </member>
         <member name="T:Abp.Zero.EntityFramework.AbpZeroEntityFrameworkModule">
             <summary>

@@ -96,5 +96,6 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.xml
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.Concurrent.xml
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Core\bin\Release\Nito.AsyncEx.Enlightenment.xml
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Core\bin\Release\System.Collections.Immutable.xml
+C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.csprojResolveAssemblyReference.cache
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Core\obj\Release\CAPS.CORPACCOUNTING.Core.pdb

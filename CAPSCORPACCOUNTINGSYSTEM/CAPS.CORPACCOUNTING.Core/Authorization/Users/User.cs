@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Authorization.Users;
 using Abp.Extensions;
+using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Authorization.Roles;
 using Microsoft.AspNet.Identity;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 
@@ -43,5 +47,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         {
             return Guid.NewGuid().ToString("N").Truncate(16);
         }
+
+        
+        public OrganizationUnit  DefaultOrganization { get; set; }
     }
 }

@@ -467,6 +467,8 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.Add_LajitId_Tables.resources
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.Update2AbpZero083.resources
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.UpdatingAbpzerotoV190.resources
+C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.Remove_BpgId_ModifytypeofFinReport_Table.resources
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.EntityFramework.csproj.GenerateResource.Cache
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.EntityFramework.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.EntityFramework.pdb
+C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.Add_DefaultOrganization_User.resources

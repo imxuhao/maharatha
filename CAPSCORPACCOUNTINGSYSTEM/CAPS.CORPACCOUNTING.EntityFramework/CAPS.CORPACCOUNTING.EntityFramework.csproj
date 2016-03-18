@@ -1042,6 +1042,10 @@
     <Compile Include="Migrations\201603181140411_Remove_BpgId_ModifytypeofFinReport_Table.Designer.cs">
       <DependentUpon>201603181140411_Remove_BpgId_ModifytypeofFinReport_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603181545222_Add_DefaultOrganization_User.cs" />
+    <Compile Include="Migrations\201603181545222_Add_DefaultOrganization_User.Designer.cs">
+      <DependentUpon>201603181545222_Add_DefaultOrganization_User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1753,6 +1757,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603181140411_Remove_BpgId_ModifytypeofFinReport_Table.resx">
       <DependentUpon>201603181140411_Remove_BpgId_ModifytypeofFinReport_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603181545222_Add_DefaultOrganization_User.resx">
+      <DependentUpon>201603181545222_Add_DefaultOrganization_User.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

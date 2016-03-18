@@ -15,7 +15,7 @@ namespace CAPS.CORPACCOUNTING.Reports
         private const int MaxDescriptionLength = 100;
         private const int MaxCaptionLength = 20;
 
-        /// <summary> virtual the ID column with TypeOfBusinessProcessGroupId field. </summary>
+        /// <summary> virtual the ID column with TypeOfReportId field. </summary>
         [Column("TypeOfReportId")]
         public virtual int Id { get; set; }
 
@@ -40,9 +40,13 @@ namespace CAPS.CORPACCOUNTING.Reports
         public virtual string Notes { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
-        public virtual TypeOfCategoryUnit TypeOfCategoryId { get; set; }
+        
+        public  virtual short TypeOfCategoryId { get; set; }
 
-        /// <summary>Gets or sets the ReportBpgid field. </summary>
-        public virtual int? ReportBpgid { get; set; }
+        [ForeignKey("TypeOfCategoryId")]
+        public virtual TypeOfCategoryUnit TypeOfCategory { get; set; }
+
+         
+
     }
 }

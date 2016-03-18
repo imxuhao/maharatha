@@ -30,12 +30,7 @@ namespace CAPS.CORPACCOUNTING.Reports
         public virtual int BatchReportId { get; set; }
         [ForeignKey("BatchReportId")]
         public virtual BatchReportUnit BatchReportUnit { get; set; }
-
-        /// <summary>Gets or sets the BusinessProcessGroupId field. </summary>
-        public virtual int BusinessProcessGroupId { get; set; }
-        //[ForeignKey("BusinessProcessGroupId")]
-        //public virtual BusinessProcessGroupUnit BusinessProcessGroupUnit { get; set; }
-        /// <summary>Gets or sets the UserReportId field. </summary>
+        
         public virtual long UserReportId { get; set; }
 
         /// <summary>Gets or sets the ReportName field. </summary>

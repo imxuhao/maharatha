@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         #region Class Property Declarations
         /// <summary> Overriding the ID column with TypeOfChargeID field. </summary>
-        [Column("TypeOfPayroll")]
+        [Column("TypeOfJobId")]
         public override short Id { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>

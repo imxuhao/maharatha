@@ -1,13 +1,8 @@
 ﻿using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -66,10 +61,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the GroupLayoutStyle field. </summary>
         [MaxLength(MaxGroupLayoutStyleLength)]
-        public virtual string GroupLayoutStyle { get; set; }
-
-        /// <summary>Gets or sets the MaintenanceBpgid field. </summary>
-        public virtual int? MaintenanceBpgid { get; set; }
+        public virtual string GroupLayoutStyle { get; set; }       
 
         /// <summary>Gets or sets the IsNegative field. </summary>
         public virtual bool IsNegative { get; set; }

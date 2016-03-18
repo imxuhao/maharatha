@@ -16,7 +16,7 @@ namespace CAPS.CORPACCOUNTING.Common
         #region Class Property Declarations      
 
         /// <summary>Overriding the ID column with TypeOfDocumentConsolidation</summary>
-        [Column("TypeOfDocumentConsolidation")]
+        [Column("TypeOfDocumentConsolidationId")]
         public override short Id { get; set; }
 
         [Required]

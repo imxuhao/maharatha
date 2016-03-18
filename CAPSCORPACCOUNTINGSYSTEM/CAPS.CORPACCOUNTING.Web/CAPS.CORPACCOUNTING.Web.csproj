@@ -583,6 +583,13 @@
     <Content Include="Content\fonts-sourcesans-pro.css" />
     <Content Include="Content\images\capslogo.png" />
     <Content Include="Content\themesChaching\famfamfam-flags.css" />
+    <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.dev.svg" />
+    <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Content\themesChaching\simple-line-icons\icons-lte-ie7.js" />
+    <Content Include="Content\themesChaching\simple-line-icons\License.txt" />
+    <Content Include="Content\themesChaching\simple-line-icons\Readme.txt" />
+    <Content Include="Content\themesChaching\simple-line-icons\simple-line-icons.css" />
+    <Content Include="Content\themesChaching\simple-line-icons\simple-line-icons.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="ExtWeb\.sencha\workspace\plugin.xml" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\Chaching-all.css" />
@@ -18854,6 +18861,9 @@
     <Content Include="App\common\views\users\loginAttemptsModal.less" />
     <Content Include="App\host\views\maintenance\index.cshtml" />
     <Content Include="App\host\views\maintenance\index.less" />
+    <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.woff" />
     <None Include="Properties\PublishProfiles\DevServerRelease.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

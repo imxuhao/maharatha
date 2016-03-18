@@ -65,7 +65,14 @@
     background-repeat: no-repeat;
     background-position: -128px -177px !important;
 }
-
+.famfamfam-flag-it {
+     line-height: 11px;
+    /* vertical-align: text-top; */
+    background-image: url("../flags/famfamfam-flags.png");
+    background-repeat: no-repeat;
+     background-position: -96px -144px !important; 
+     width: 16px; height: 11px;
+}
 .ux-icon-combo-item {
     background-repeat: no-repeat !important;
     background-position: 3px 50% !important;
@@ -216,7 +223,7 @@
 .famfamfam-flag-jo { background-position: -48px -144px; width: 16px; height: 11px; }
 .famfamfam-flag-jm { background-position: -64px -144px; width: 16px; height: 11px; }
 .famfamfam-flag-je { background-position: -80px -144px; width: 16px; height: 11px; }
-.famfamfam-flag-it { background-position: -96px -144px; width: 16px; height: 11px; }
+
 .famfamfam-flag-is { background-position: -112px -144px; width: 16px; height: 11px; }
 .famfamfam-flag-ir { background-position: -128px -144px; width: 16px; height: 11px; }
 .famfamfam-flag-iq { background-position: -144px -144px; width: 16px; height: 11px; }

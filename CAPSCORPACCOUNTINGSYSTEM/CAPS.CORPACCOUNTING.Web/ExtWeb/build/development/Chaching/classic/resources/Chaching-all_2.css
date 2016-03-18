@@ -10739,8 +10739,10 @@
 .x-treelist-nav .x-treelist-item-text {
     font-weight: 500 !important;
     font-family: "Open Sans", sans-serif;
+    margin-left: 35px !important;
+    line-height: 35px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/menu/ChachingMenu.scss:104 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/menu/ChachingMenu.scss:106 */
 .x-treelist-nav {
     border-radius: 5px !important;
 }

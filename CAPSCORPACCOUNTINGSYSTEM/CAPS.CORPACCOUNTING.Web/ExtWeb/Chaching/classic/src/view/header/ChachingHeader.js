@@ -85,9 +85,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             ui: 'badgeBtnBack',
             width: 100,
             height:50,
-            //iconCls: 'badge',
             iconAlign: 'right',
-            //icon: abp.appPath + 'Profile/GetProfilePicture?t=1000120112000',
             text: '',//set dynamically based on login info of user
             gotoMyAccount:false,
             textAlign: 'right',
@@ -109,54 +107,5 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             itemId: 'AccountPic',
             hidden:true
         }
-         //{
-         //    xtype: 'button',
-         //    scale: 'small',
-         //    ui: 'countryMenu',
-         //    width: 40,
-         //    //iconCls: 'fa fa-angle-down',
-         //    //iconAlign: 'left',
-         //    text: '&#xf0a2;',
-         //    textAlign: 'center',
-         //    baseCls: '',
-         //    itemId: 'NotificationBtn',
-         //    contextMenu: undefined,
-         //    bodyStyle: {
-         //        'background-color': 'transparent',
-         //        'border-color': 'transparent',
-         //        'border-style': 'transparent'
-         //    },
-         //    listeners: {
-         //        mouseover: 'onNotificationHover'
-         //    }
-         //}
-        //{
-        //    xtype: 'combo',
-        //    width: 120,
-        //    ui: 'country',
-        //    bind: {
-        //        store: '{languageStore}'
-        //    },
-        //    valueField: 'name',
-        //    displayField: 'displayName',
-        //    fieldLabel: '',
-        //    iconClsField: 'icon',
-        //    editable: false,
-        //    typeAhead: false,
-        //    listeners: {
-        //        collapse: function(combo) {
-        //            return false;
-        //        }
-        //    },
-        //    listConfig: {
-        //        minWidth: 200,
-        //        getInnerTpl: function() {
-        //            var tpl = '<tpl for=".">' + //'<div class="x-combo-list-item">' +
-        //                '<p class="{icon}" style="width:16px; height:11px; display: inline-block;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p style="display: inline-block;height:11px;">&nbsp;&nbsp;{displayName}</p>' +
-        //                '</tpl>';
-        //            return tpl;
-        //        }
-        //    }
-        //}
     ]
 });

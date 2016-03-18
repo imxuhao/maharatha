@@ -20,7 +20,7 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
             treeList = westPanel.down('chachingmenu');
             var originalState = treeList.originalState === undefined ? false : treeList.originalState;
             treeList.setMicro(originalState);
-            westPanel.setWidth(!originalState ? 300 : 85);
+            westPanel.setWidth(!originalState ? 270 : 85);
             logo = northPanel.down('image[itemId=CapsLogo]');
             logo.setWidth(!originalState ? 110 : 0);
         }

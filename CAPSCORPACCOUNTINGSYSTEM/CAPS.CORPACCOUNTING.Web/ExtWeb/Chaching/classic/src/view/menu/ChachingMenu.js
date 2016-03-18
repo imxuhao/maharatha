@@ -20,5 +20,8 @@ Ext.define('Chaching.view.menu.ChachingMenu',{
     alias: 'widget.chachingmenu',
     layout: {
         type:'fit'
+    },
+    listeners: {
+        selectionchange: 'onNavigationTreeSelectionChange'
     }
 });

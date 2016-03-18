@@ -214,27 +214,32 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             contextMenu.showAt(position[0] - 50, position[1] +btn.gotoMyAccount ? 60 : 30, true);
         } else {
             var items = [
-                { text: '&#xf112  ' + abp.localization.localize("BackToMyAccount"), hidden: !btn.gotoMyAccount },
+                { text: '&#xf112  ' + abp.localization.localize("BackToMyAccount"), hidden: !btn.gotoMyAccount, name: 'BackToAccount' },
                 {
                     text: '&#xf0c1  ' + abp.localization.localize("LinkedAccounts"),
                     menu: {
                         ui: 'accounts',
-                        width:150,
+                        width: 150,
                         items: [
                             {
-                                text: '&#xf013  ' + abp.localization.localize("ManageAccounts")
+                                text: '&#xf013  ' + abp.localization.localize("ManageAccounts"),
+                                name: 'ManageAccount'
                             }
                         ]
                     }
                 }, {
-                    text: '&#xf084  ' + abp.localization.localize("ChangePassword")
+                    text: '&#xf084  ' + abp.localization.localize("ChangePassword"),
+                    name: 'ChangePassword'
                 }, {
-                    text: '&#xf007  ' + abp.localization.localize("ChangeProfilePicture")
+                    text: '&#xf007  ' + abp.localization.localize("ChangeProfilePicture"),
+                    name: 'ChangeProfilePicture'
                 }, {
-                    text: '&#xf013  ' + abp.localization.localize("MySettings")
+                    text: '&#xf013  ' + abp.localization.localize("MySettings"),
+                    name: 'MySettings'
                 }, '-',
                 {
-                    text: '&#xf08b  ' + abp.localization.localize("Logout")
+                    text: '&#xf08b  ' + abp.localization.localize("Logout"),
+                    name: 'Logout'
                 }
             ];
             if (btn.gotoMyAccount) {

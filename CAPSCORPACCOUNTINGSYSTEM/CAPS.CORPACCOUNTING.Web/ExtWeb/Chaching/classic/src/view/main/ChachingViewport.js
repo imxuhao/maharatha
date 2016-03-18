@@ -37,7 +37,7 @@ Ext.define('Chaching.view.main.ChachingViewport', {
         },
         {
             region: 'west',
-            width: 300,
+            width: 270,
             split: false,
             reference: 'treelistContainer',
             layout: {

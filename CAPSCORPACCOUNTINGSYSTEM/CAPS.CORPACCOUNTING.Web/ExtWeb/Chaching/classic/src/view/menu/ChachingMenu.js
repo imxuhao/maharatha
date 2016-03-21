@@ -16,7 +16,7 @@ Ext.define('Chaching.view.menu.ChachingMenu',{
     micro: false,
     ui: 'nav',
     reference: 'treelist',
-    bind: '{navItems}',
+    store: 'NavigationTree',
     alias: 'widget.chachingmenu',
     layout: {
         type:'fit'

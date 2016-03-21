@@ -50,8 +50,8 @@
                 profile = 'modern';
             }
             else {
-                profile = tags.desktop ? applicationDir + 'classic' : applicationDir + 'modern';
-                //profile = tags.phone ? 'modern' : 'classic';
+                //profile = tags.desktop ? applicationDir + 'classic' : applicationDir + 'modern';
+                profile = tags.phone ? applicationDir + 'modern' : applicationDir + 'classic';
             }
 
             Ext.manifest = profile; // this name must match a build profile name

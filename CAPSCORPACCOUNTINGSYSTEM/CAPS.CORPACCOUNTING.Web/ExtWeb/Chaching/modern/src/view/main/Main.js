@@ -6,56 +6,61 @@
  * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define('Chaching.view.main.Main', {
-    extend: 'Ext.tab.Panel',
+    
     xtype: 'app-main',
 
+    extend: 'Ext.Container',
     requires: [
-        'Ext.MessageBox',
-
-        'Chaching.view.main.MainController',
-        'Chaching.view.main.MainModel',
-        'Chaching.view.main.List'
+        'Ext.Button',
+        'Ext.list.Tree',
+        'Ext.navigation.View'
     ],
 
     controller: 'main',
-    viewModel: 'main',
-
-    defaults: {
-        tab: {
-            iconAlign: 'top'
-        },
-        styleHtmlContent: true
+    viewModel: {
+        type: 'main'
     },
-
-    tabBarPosition: 'bottom',
+    platformConfig: {
+        phone: {
+            controller: 'phone-main'
+        }
+    },
+    
+    layout: 'hbox',
 
     items: [
         {
-            title: 'Home',
-            iconCls: 'x-fa fa-home',
-            layout: 'fit',
-            // The following grid shares a store with the classic version's grid as well!
-            items: [{
-                xtype: 'mainlist'
-            }]
-        },{
-            title: 'Users',
-            iconCls: 'x-fa fa-user',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        },{
-            title: 'Groups',
-            iconCls: 'x-fa fa-users',
-            bind: {
-                html: '{loremIpsum}'
-            }
-        },{
-            title: 'Settings',
-            iconCls: 'x-fa fa-cog',
-            bind: {
-                html: '{loremIpsum}'
-            }
+            xtype: 'maintoolbar',
+            docked: 'top',
+            userCls: 'main-toolbar shadow'
+        },
+        {
+            xtype: 'container',
+            userCls: 'main-nav-container',
+            reference: 'navigation',
+            scrollable: true,
+            items: [
+                {
+                    xtype: 'treelist',
+                    reference: 'navigationTree',
+                    ui: 'navigation',
+                    itemId:'navigationMenu',
+                    store: 'NavigationTree',
+                    expanderFirst: false,
+                    expanderOnly: false,
+                    listeners: {
+                        itemclick: 'onNavigationItemClick',
+                        selectionchange: 'onNavigationTreeSelectionChange'
+                    }
+                }
+            ]
+        },
+        {
+            xtype: 'navigationview',
+            flex: 1,
+            reference: 'mainCard',
+            userCls: 'main-container',
+            navigationBar: false
         }
     ]
 });

@@ -12,7 +12,7 @@
     /**
      * The relative path to the application's markup file (html, jsp, asp, etc.).
      */
-    "indexHtmlPath": "../../Views/Home/Home.cshtml",
+    "indexHtmlPath": "../../Views/index.html",
 
     /**
      * Comma-separated string with the paths of directories or files to search. Any classes
@@ -138,7 +138,8 @@
          */
         "var": [
             "sass/var/all.scss",
-            "sass/var",
+          "sass/var",
+          "${toolkit.name}/sass/var/all.scss",
             "${toolkit.name}/sass/var"
         ],
 

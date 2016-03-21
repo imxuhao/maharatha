@@ -176,6 +176,7 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
+    <Compile Include="ExtendedEntities\OrganizationExtended.cs" />
     <Compile Include="JobCosting\TypeOfJobUnit.cs" />
     <Compile Include="Masters\NewCOATrimUnit.cs" />
     <Compile Include="Masters\ValueAddedTaxRecoveryUnit.cs" />

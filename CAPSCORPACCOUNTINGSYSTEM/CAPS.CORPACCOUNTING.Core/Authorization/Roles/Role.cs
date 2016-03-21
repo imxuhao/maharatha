@@ -9,6 +9,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
     /// </summary>
     public class Role : AbpRole<Tenant, User>
     {
+        public virtual int? LajitId { get; set; }
         public Role()
         {
             

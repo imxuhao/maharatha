@@ -472,3 +472,4 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.EntityFramework.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.EntityFramework.pdb
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.Add_DefaultOrganization_User.resources
+C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.Add_LajitID_Tenant_Organization_User_Role.resources

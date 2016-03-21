@@ -22,8 +22,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Reissue")]Reissue = 9,
         [Display(Name = "Void")]Void = 10,
         [Display(Name = "Cash Reserve")]CashReserve = 11,
-        [Display(Name = "Wire PPD-AMEX (Auto-Post CR Invoice)")]W1 = 12,
-        [Display(Name = "Wire PPD-AMEX")]W2 = 13
+        [Display(Name = "Wire PPD-AMEX (Auto-Post CR Invoice)")]W1 = 1000,
+        [Display(Name = "Wire PPD-AMEX")]W2 = 1001
     }
     /// <summary>
     /// Customer is the table name in lajit

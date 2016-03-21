@@ -19,11 +19,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Payroll Company")]PayrollCompany = 5,
         [Display(Name = "Shipping Partner")]ShippingPartner = 6,
         [Display(Name = "Per Diem Employee/Crew Member")]Pdecm = 7,
-        [Display(Name = "Director ")]Director = 8,
-        [Display(Name = "Sales Rep")]SalesRep = 9,
-        [Display(Name = "Messenger")]Messenger = 10,
-        [Display(Name = "Car Service")]CarService = 11,
-        [Display(Name = "Phones")]Phones = 12
+        [Display(Name = "Director ")]Director = 100,
+        [Display(Name = "Sales Rep")]SalesRep = 200,
+        [Display(Name = "Messenger")]Messenger = 202,
+        [Display(Name = "Car Service")]CarService = 204,
+        [Display(Name = "Phones")]Phones = 206
     }
     /// <summary>
     /// Enum for Typeof1099T4

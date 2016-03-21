@@ -23,6 +23,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         
         public virtual long? UserLinkId { get; set; }
 
+        public virtual int? LajitId { get; set; }
+
         /// <summary>
         /// Creates admin <see cref="User"/> for a tenant.
         /// </summary>

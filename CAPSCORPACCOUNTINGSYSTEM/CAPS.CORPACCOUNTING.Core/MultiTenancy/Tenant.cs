@@ -10,6 +10,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
     /// </summary>
     public class Tenant : AbpTenant<Tenant, User>
     {
+
+        public virtual int? LajitId { get; set; }
         protected Tenant()
         {
 

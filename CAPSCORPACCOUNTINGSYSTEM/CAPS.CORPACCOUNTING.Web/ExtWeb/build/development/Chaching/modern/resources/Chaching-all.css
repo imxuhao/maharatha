@@ -8374,10 +8374,13 @@ body.x-ios.x-webview.x-portrait {
     font-size: 11px !important;
     font-weight: 400 !important;
     text-align: center !important;
-    padding: 3px 6px 3px 6px !important;
     vertical-align: middle !important;
     display: block !important;
     background-color: #ed6b75 !important;
+    padding: 0 6px 6px !important;
+    border-radius: 14px !important;
+    color: white !important;
+    height: 20px !important;
 }
 /* http://localhost:1841/ext/modern/theme-neptune/sass/var/Button.scss:589 */
 .x-button-countryMenu {
@@ -8399,11 +8402,11 @@ body.x-ios.x-webview.x-portrait {
 .x-button-countryMenu .x-button-icon {
     color: #999;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:135 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:138 */
 .x-btn-icon-el-countryMenu {
     height: 11px !important;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:138 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:141 */
 .x-btn-inner-countryMenu {
     font-family: FontAwesome !important;
 }
@@ -8610,77 +8613,77 @@ body.x-ios.x-webview.x-portrait {
 .x-treelist-navigation .x-treelist-item-hide-icon > * > * > .x-treelist-item-text {
     margin-left: 6px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:195 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:198 */
 a {
     color: #35baf6;
     text-decoration: none;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:200 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:203 */
 .main-container {
     background-color: #f6f6f6;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:204 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:207 */
 .main-nav-container,
 .main-container {
     height: calc(100vh - 65px);
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:209 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:212 */
 .phone .main-container {
     height: calc(100vh - 45px);
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:213 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:216 */
 .phone .main-nav-container {
     height: 100vh;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:220 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:223 */
 .x-ios .main-container,
 .x-ios .main-nav-container {
     height: 100%;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:225 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:228 */
 .x-treelist-navigation:not(.x-treelist-floater) {
     min-height: calc(100vh - 65px);
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:228 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:231 */
 .phone .x-treelist-navigation:not(.x-treelist-floater) {
     min-height: calc(100vh - 45px);
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:233 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:236 */
 .x-treelist-navigation {
     transition: width 0.3s;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:237 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:240 */
 .main-nav-container,
 .main-logo {
     position: relative;
     transition: width 0.3s;
     width: 260px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:243 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:246 */
 .main-nav-collapsed {
     width: 64px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:247 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:250 */
 .main-toolbar {
     z-index: 1;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:251 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:254 */
 .main-logo,
 .main-toolbar {
     height: 65px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:254 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:257 */
 .phone .main-logo,
 .phone .main-toolbar {
     height: 45px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:259 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:262 */
 .x-big .main-toolbar,
 .main-toolbar {
     border: none;
     padding: 0 38px 0 0;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:264 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:267 */
 .main-nav-floated {
     background-color: #32404e;
     transition: left 0.3s;
@@ -8689,37 +8692,37 @@ a {
     top: 0;
     z-index: 10;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:273 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:276 */
 .main-nav-slid-out {
     left: -260px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:281 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:284 */
 .small-image {
     width: 35px;
     height: 35px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:287 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:290 */
 .phone .main-toolbar {
     padding-right: 16px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:291 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:294 */
 .phone .main-user-name {
     display: none;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:295 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:298 */
 .phone .main-logo {
     line-height: 45px;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:298 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:301 */
 .phone .main-logo:before {
     top: 9.5px;
     background-size: 85%;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:306 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:309 */
 .main-nav-mask > .x-mask-inner {
     display: none;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:310 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:313 */
 .main-logo {
     background-color: #35baf6;
     height: 65px;
@@ -8729,7 +8732,7 @@ a {
     padding-left: 64px;
     position: relative;
 }
-/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:320 */
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:323 */
 .main-logo:before {
     content: " ";
     position: absolute;
@@ -8738,4 +8741,14 @@ a {
     left: 22px;
     width: 17px;
     height: 26px;
+}
+/* http://localhost:1841/Chaching/modern/sass/src/view/main/Main.scss:333 */
+.main-notification-bar {
+    background-color: black !important;
+    height: 55px;
+    line-height: 65px;
+    font-size: 16px;
+    color: #fff;
+    padding-left: 64px;
+    position: relative;
 }

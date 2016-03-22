@@ -1,7 +1,6 @@
 Ext.define('Chaching.view.main.Toolbar', {
     extend: 'Ext.Toolbar',
     xtype: 'maintoolbar',
-
    
 
     items: [
@@ -27,6 +26,7 @@ Ext.define('Chaching.view.main.Toolbar', {
             ui: 'header',
             iconCls:'x-fa fa-search',
             href: '#searchresults',
+            itemId:'GlobalSearch',
             margin: '0 0 0 0',
             handler: 'toolbarButtonClick'
         },
@@ -39,25 +39,39 @@ Ext.define('Chaching.view.main.Toolbar', {
             iconAlign: 'right',
             href: '#localization',
             margin: '10 0 0 0',
-            handler: 'toolbarButtonClick'
+            handler: 'toolbarButtonClick',
+            listeners: {
+                painted: 'onBeforeLocalizationRender',
+                scope:'controller'
+            }
            
         },
         {
             xtype:'button',
             ui: 'badgeBtn',
-            //iconCls: 'badge',
-            //iconAlign: 'right',
             text: '&#xf0a2;',
-            //textAlign: 'left',
             href: '#notification',
+            //badgeText: '1',
+            //badgeCls: 'badge',
+            textAlign:'left',
+            itemId:'Notifiaction',
             margin: '6 0 0 0',
-            handler: 'toolbarButtonClick'
+            handler: 'toolbarButtonClick',
+            listeners: {
+                painted: 'onNotificationPainted',
+                scope: 'controller'
+            }
         },
         {
             xtype: 'image',
             userCls: 'main-user-image small-image circular',
             alt: 'Current user image',
-            src: abp.appPath + 'Profile/GetProfilePicture?t=' + new Date().getTime()
+            href:'profile',
+            src: abp.appPath + 'Profile/GetProfilePicture?t=' + new Date().getTime(),
+            listeners: {
+                tap: 'showProfileList',
+                scope: 'controller'
+            }
             //src: 'resources/images/user-profile/2.png'
         }
     ]

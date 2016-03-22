@@ -144,5 +144,268 @@ Ext.define('Chaching.view.main.MainController', {
     toolbarButtonClick: function(btn,e) {
         var href = btn.config.href;
         this.redirectTo(href);
-    }
+        switch (btn.getItemId()) {
+            case "Localization":
+                this.showLocalization(btn);
+                break;
+            case "Notifiaction":
+                this.showNotification(btn);
+                break;
+            default:
+                break;
+        }
+    },
+    onClearGlobalSearch:function(text, input, e, eOpts) {
+        var me = this,
+           refs = me.getReferences(),
+           globalSearchBox = refs.globalSearch;
+        globalSearchBox.hide();
+    },
+    showProfileList:function(btn) {
+        var me = this,
+           view = me.getView(),
+           contextMenu = btn.contextMenu,
+           refs = me.getReferences(),
+           mainCard = refs.mainCard;
+        if (contextMenu) {
+            //
+            var itemInMainCard = mainCard.child('component[id=' + contextMenu.id + ']');
+            if (itemInMainCard)
+                mainCard.setActiveItem(itemInMainCard);
+            else {
+                mainCard.add(btn.contextMenu);
+                mainCard.setActiveItem(contextMenu);
+            }
+        } else {
+            Ext.Ajax.request({
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                url: abp.appPath + 'api/services/app/session/GetCurrentLoginInformations',
+
+                success: function (response, opts) {
+                    var obj = Ext.decode(response.responseText);
+                    if (obj && obj.success) {
+                        var result = obj.result;
+                        
+                        var treeStore = me.getProfileStore();
+                        if (abp.session.impersonatorUserId === abp.session.userId || abp.session.impersonatorUserId === null) {
+                            var root = treeStore.getRoot();
+                            root.removeChild(root.childNodes[0]);
+                        }
+                       
+                        var treeList = Ext.create('Ext.list.Tree', {
+                            fullscreen: true,
+                            store: treeStore,
+                            ui: 'navigation',
+                            expanderFirst: false,
+                            expanderOnly: false
+                        });
+                        var container = Ext.create('Ext.Container', {
+                            fullscreen: true,
+                            items: [treeList]
+                        });
+                        btn.contextMenu = container;
+                        mainCard.add(container);
+                        mainCard.setActiveItem(container);
+
+                    } else {
+                        Ext.toast(obj.error.message);
+                    }
+                },
+
+                failure: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+        }
+
+    },
+    getProfileStore:function() {
+        var treeStore = Ext.create('Ext.data.TreeStore', {
+            fields: [
+                {
+                    name: 'text'
+                }, { name: 'iconCls' },{name:'href'}
+            ],
+            root: {
+                expanded: true,
+                children: [
+                    {
+                        text: abp.localization.localize("BackToMyAccount"),
+                        iconCls: 'icon-action-undo',
+                        name: 'BackToAccount',
+                        leaf: true
+                    },
+                    {
+                        text: abp.localization.localize("LinkedAccounts"),
+                        iconCls: 'icon-link',
+                        children:[
+                        {
+                            text: abp.localization.localize("ManageAccounts"),
+                            name: 'ManageAccount',
+                            iconCls: 'icon-settings',
+                            leaf: true
+                        }]
+                    },
+                     {
+                         text: abp.localization.localize("LoginAttempts"),
+                         iconCls: 'icon-shield',
+                         name: 'LoginAttempts',
+                         leaf: true
+                     },
+                    {
+                        text: abp.localization.localize("ChangePassword"),
+                        iconCls: 'icon-key',
+                        name: 'ChangePassword',
+                        leaf: true
+                    },
+                    {
+                        text: abp.localization.localize("ChangeProfilePicture"),
+                        iconCls: 'icon-user',
+                        name: 'ChangeProfilePicture',
+                        leaf: true
+                    },
+                    {
+                        text: abp.localization.localize("MySettings"),
+                        iconCls: 'icon-settings',
+                        name: 'MySettings',
+                        leaf: true
+                    },
+                    {
+                        text: abp.localization.localize("Logout"),
+                        iconCls: 'icon-logout',
+                        name: 'Logout',
+                        leaf: true
+                    }
+                ]
+            }
+        });
+        return treeStore;
+    },
+    showNotification:function(btn) {
+        var me = this,
+           view = me.getView(),
+           contextMenu = btn.contextMenu,
+           refs = me.getReferences(),
+           mainCard = refs.mainCard;
+        if (contextMenu) {
+            //
+            var itemInMainCard = mainCard.child('component[id=' + contextMenu.id + ']');
+            if(itemInMainCard)
+                mainCard.setActiveItem(itemInMainCard);
+            else {
+                mainCard.add(btn.contextMenu);
+                mainCard.setActiveItem(contextMenu);
+            }
+        } else {
+            ///TODO:to be populated from abp
+            var items = [];
+            items.push({ text: 'Notification One' });
+            items.push({text: 'Long line notification to test line wrapping' });
+            var notificationList = Ext.create('Ext.List', {
+                fullscreen: true,
+                ownerElement: btn,
+                itemTpl: '{text}',
+                data: items
+                //listeners: {
+                //    itemtap: me.changeLocale,
+                //    scope: me
+                //}
+            });
+            var notificationView = Ext.create('Ext.Panel', {
+                fullscreen: true,
+                items:[
+                {
+                    xtype: 'toolbar',
+                    userCls: 'main-notification-bar',
+                    width:'100%',
+                    dock: 'top',
+                    items:[
+                    {
+                        text: abp.localization.localize("SetAllAsRead"),
+                        ui: 'header'
+                    }, '->', { text: abp.localization.localize("Settings"), ui: 'header' }]
+                }, notificationList]
+            });
+            btn.contextMenu = notificationView;
+            mainCard.add(notificationView);
+            mainCard.setActiveItem(notificationView);
+        }
+    },
+    onNotificationPainted:function(btn) {
+        ///TODO: Populate from abp
+        btn.component.setBadgeText('1');
+        btn.component.setBadgeCls('badge');
+    },
+    showLocalization: function(btn) {
+        var me = this,
+            view = me.getView(),
+            contextMenu = btn.contextMenu,
+            refs = me.getReferences(),
+            mainCard = refs.mainCard;
+
+        if (contextMenu) {
+            //
+            var itemInMainCard = mainCard.child('component[id=' + contextMenu.id + ']');
+            if (itemInMainCard)
+                mainCard.setActiveItem(itemInMainCard);
+            else {
+                mainCard.add(btn.contextMenu);
+                mainCard.setActiveItem(contextMenu);
+            }
+
+        } else {
+            var items = [];
+            var locale = abp.localization.languages;
+            for (var i = 0; i < locale.length; i++) {
+                var item = locale[i];
+                var menuItem = {
+                    text: item.displayName,
+                    iconCls: item.icon,
+                    name: item.name,
+                    isDefault: item.isDefault
+                };
+                items.push(menuItem);
+            }
+            var localizationList = Ext.create('Ext.List', {
+                fullscreen: true,
+                ownerElement: btn,
+                itemTpl: '<table>' +
+                    '<tr><td><img  class="{iconCls}"/></td><td style="padding-left:10px;">{text}</td></tr></table>',
+                data: items,
+                listeners: {
+                    itemtap: me.changeLocale,
+                    scope: me
+                }
+            });
+
+            btn.contextMenu = localizationList;
+            mainCard.add(localizationList);
+            mainCard.setActiveItem(localizationList);
+        }
+    },
+    changeLocale:function(list, index, target, record, e, eOpts) {
+        var ownerElement = list.ownerElement;
+        if (ownerElement) {
+            ownerElement.setIconCls(record.get('iconCls'));
+            location.href = abp.appPath + 'AbpLocalization/ChangeCulture?cultureName=' + record.get('name') + '&returnUrl=' + window.location.href;
+        }
+    },
+    onBeforeLocalizationRender: function (btn) {
+        var currentCulture = abp.localization.currentCulture;
+        if (currentCulture) {
+            var locale = abp.localization.languages;
+            for (var i = 0; i < locale.length; i++) {
+                var item = locale[i];
+                if (item.name === currentCulture.name) {
+                    btn.component.setIconCls(item.icon);
+                    break;
+                }
+            }
+        }
+    },
 });

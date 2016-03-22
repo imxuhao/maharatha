@@ -118,11 +118,14 @@
 .badge{
     font-size:11px !important;
     font-weight:400 !important;
-    text-align:center !important;
-    padding:3px 6px 3px 6px !important;
+    text-align:center !important;    
     vertical-align:middle !important;
     display:block !important;
      background-color:#ed6b75 !important;
+     padding:0 6px 6px !important;
+     border-radius:14px !important;
+     color:white !important;
+     height:20px !important;
 }
 @include button-ui(
     $ui: 'countryMenu',    
@@ -324,6 +327,16 @@ $logo-image-height: 26px;
         width: $logo-image-width;
         height: $logo-image-height;       
     }
+}
+.main-notification-bar{
+    background-color: black !important;
+    height: 55px;
+    line-height: $main-toolbar-height;
+
+    font-size: 16px;
+    color: #fff;
+    padding-left: $main-nav-collapsed-width; // for symmetry
+    position: relative;
 }
 
 

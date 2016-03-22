@@ -196,15 +196,15 @@ $ui-item-height:30px
 
 .x-menu-item-icon-accounts{
     height:11px !important;
-    top:8px !important;
+    top:6px !important;
+    color:#d4dadf !important;
 }
 .x-menu-accounts{
     border-radius:5px !important;
 }
 .x-menu-item-text-accounts{
     font-weight:400 !important;
-    color:#d4dadf !important;
-    font-family:'FontAwesome' !important;
+    color:#d4dadf !important;    
     font-size:14px !important;
 }
 .x-menu-item-accounts{
@@ -214,5 +214,5 @@ $ui-item-height:30px
     background-color:#555 !important;
 }
 .x-menu-item-text-accounts.x-menu-item-indent-no-separator{
-    margin-left:5px !important;
+    margin-left:25px !important;
 }

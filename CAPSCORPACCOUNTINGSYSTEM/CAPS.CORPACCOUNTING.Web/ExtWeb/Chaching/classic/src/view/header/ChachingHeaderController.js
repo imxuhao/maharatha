@@ -214,31 +214,42 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             contextMenu.showAt(position[0] - 50, position[1] +btn.gotoMyAccount ? 60 : 30, true);
         } else {
             var items = [
-                { text: '&#xf112  ' + abp.localization.localize("BackToMyAccount"), hidden: !btn.gotoMyAccount, name: 'BackToAccount' },
+                { text: abp.localization.localize("BackToMyAccount"), hidden: !btn.gotoMyAccount, name: 'BackToAccount', iconCls: 'icon-action-undo' },
                 {
-                    text: '&#xf0c1  ' + abp.localization.localize("LinkedAccounts"),
+                    text: abp.localization.localize("LinkedAccounts"),
+                    iconCls: 'icon-link',
                     menu: {
                         ui: 'accounts',
-                        width: 150,
+                        width: 170,
                         items: [
                             {
-                                text: '&#xf013  ' + abp.localization.localize("ManageAccounts"),
+                                text: abp.localization.localize("ManageAccounts"),
+                                iconCls: 'icon-settings',
                                 name: 'ManageAccount'
                             }
                         ]
                     }
                 }, {
-                    text: '&#xf084  ' + abp.localization.localize("ChangePassword"),
+                    text: abp.localization.localize("LoginAttempts"),
+                    iconCls: 'icon-shield',
+                    name:'LoginAttempts',
+                    leaf: true
+                }, {
+                    text: abp.localization.localize("ChangePassword"),
+                    iconCls:'icon-key',
                     name: 'ChangePassword'
                 }, {
-                    text: '&#xf007  ' + abp.localization.localize("ChangeProfilePicture"),
+                    text: abp.localization.localize("ChangeProfilePicture"),
+                    iconCls: 'icon-user',
                     name: 'ChangeProfilePicture'
                 }, {
-                    text: '&#xf013  ' + abp.localization.localize("MySettings"),
+                    text: abp.localization.localize("MySettings"),
+                    iconCls: 'icon-settings',
                     name: 'MySettings'
                 }, '-',
                 {
-                    text: '&#xf08b  ' + abp.localization.localize("Logout"),
+                    text: abp.localization.localize("Logout"),
+                    iconCls: 'icon-logout',
                     name: 'Logout'
                 }
             ];

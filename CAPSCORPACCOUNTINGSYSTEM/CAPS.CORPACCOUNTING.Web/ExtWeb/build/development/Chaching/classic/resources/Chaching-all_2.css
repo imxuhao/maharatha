@@ -10725,17 +10725,17 @@ body.x-ios.x-webview.x-portrait {
 /* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:197 */
 .x-menu-item-icon-accounts {
     height: 11px !important;
-    top: 8px !important;
+    top: 6px !important;
+    color: #d4dadf !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:201 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:202 */
 .x-menu-accounts {
     border-radius: 5px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:204 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:205 */
 .x-menu-item-text-accounts {
     font-weight: 400 !important;
     color: #d4dadf !important;
-    font-family: 'FontAwesome' !important;
     font-size: 14px !important;
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:210 */
@@ -10748,5 +10748,5 @@ body.x-ios.x-webview.x-portrait {
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:216 */
 .x-menu-item-text-accounts.x-menu-item-indent-no-separator {
-    margin-left: 5px !important;
+    margin-left: 25px !important;
 }

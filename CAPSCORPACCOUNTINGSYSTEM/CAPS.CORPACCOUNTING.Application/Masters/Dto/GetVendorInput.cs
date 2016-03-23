@@ -1,7 +1,8 @@
-﻿using System;
-using Abp.Extensions;
+﻿using Abp.Extensions;
 using Abp.Runtime.Validation;
 using CAPS.CORPACCOUNTING.Dto;
+using CAPS.CORPACCOUNTING.Helper;
+using Newtonsoft.Json;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
@@ -40,45 +41,19 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeofVendorId to Search the Vendors based on TypeofVendorId. </summary>
         public TypeofVendor? TypeofVendorId { get; set; } = null;
 
+        
         public void Normalize()
         {
+            //Json TestData
+            //Sorting ="{ \"Sort\":[{\"ParentTableName\":\"Vendor\", \"ColumnName\":\"LastName\",\"Order\": \"ASC\"},{\"ParentTableName\":\"Vendor\", \"ColumnName\":\"PayToName\",\"Order\": \"desc\"}]}";
             if (Sorting.IsNullOrWhiteSpace())
             {
                 Sorting = "LastName ASC";
             }
-
-            if (Sorting.IndexOf("FirstName", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                Sorting = "Vendor." + Sorting;
-            }
-            else if (Sorting.IndexOf("LastName", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                Sorting = "Vendor." + Sorting;
-            }
-            else if (Sorting.IndexOf("PayToName", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                Sorting = "Vendor." + Sorting;
-            }
-            else if (Sorting.IndexOf("VendorNumber", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                Sorting = "Vendor." + Sorting;
-            }
-            else if (Sorting.IndexOf("VendorAccountInfo", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                Sorting = "Vendor." + Sorting;
-            }
-            else if (Sorting.IndexOf("FedralTaxId", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                Sorting = "Vendor." + Sorting;
-            }
-            else if (Sorting.IndexOf("SSNTaxId", StringComparison.InvariantCultureIgnoreCase) >= 0)
-            {
-                Sorting = "Vendor." + Sorting;
-            }
             else
             {
-                Sorting = "Vendor." + Sorting;
-            }
+                Sorting = Helper.Helper.GetSortOrderAsString(JsonConvert.DeserializeObject<SortList>(Sorting));
+            }            
         }
     }
 }

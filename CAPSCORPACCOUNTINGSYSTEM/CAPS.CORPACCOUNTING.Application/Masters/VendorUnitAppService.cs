@@ -158,8 +158,8 @@ namespace CAPS.CORPACCOUNTING.Masters
                 .OrderBy(input.Sorting)
                 .PageBy(input)
                 .ToListAsync();
-            var auditLogListDtos = ConvertToVendorDtos(results);
-            return new PagedResultOutput<VendorUnitDto>(resultCount, auditLogListDtos);
+            var vendorListDtos = ConvertToVendorDtos(results);
+            return new PagedResultOutput<VendorUnitDto>(resultCount, vendorListDtos);
         }
 
         /// <summary>

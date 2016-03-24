@@ -9,10 +9,15 @@ Ext.define('Chaching.Application', {
     extend: 'Ext.app.Application',
     
     name: 'Chaching',
-
+    requires: [
+        'Ext.saki.grid.MultiSearch',
+        'Ext.ux.grid.MultiSort',
+        'Ext.saki.form.field.Icon'
+    ],
     stores: [
         // TODO: add global / shared stores here
-         'NavigationTree'
+         'NavigationTree',
+         'Personnel'
     ],
     mainView:'Chaching.view.main.ChachingViewport',
     onAppUpdate: function () {

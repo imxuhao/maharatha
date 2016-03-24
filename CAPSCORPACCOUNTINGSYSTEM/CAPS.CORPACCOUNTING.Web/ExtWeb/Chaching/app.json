@@ -55,7 +55,8 @@
      *      ]
      */
     "requires": [
-        "font-awesome"
+      "font-awesome",
+      "ux"
     ],
 
     /**
@@ -264,14 +265,14 @@
      *      }
      */
     "css": [
-        {
-            // this entry uses an ant variable that is the calculated
-            // value of the generated output css file for the app,
-            // defined in .sencha/app/defaults.properties
-            "path": "${build.out.css.path}",
-            "bundle": true,
-            "exclude": ["fashion"]
-        }
+      {
+        // this entry uses an ant variable that is the calculated
+        // value of the generated output css file for the app,
+        // defined in .sencha/app/defaults.properties
+        "path": "${build.out.css.path}",
+        "bundle": true,
+        "exclude": [ "fashion" ]
+      }
     ],
 
     /**

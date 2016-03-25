@@ -1819,6 +1819,9 @@
     <Content Include="ExtWeb\Chaching\app\store\NavigationTree.js" />
     <Content Include="ExtWeb\Chaching\classic\src\Application.js" />
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingGridPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingGridPanelController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingGridPanelModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeader.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeaderController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeaderModel.js" />
@@ -1828,9 +1831,9 @@
     <Content Include="ExtWeb\Chaching\bootstrap.css" />
     <Content Include="ExtWeb\Chaching\bootstrap.js" />
     <Content Include="ExtWeb\Chaching\build.xml" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\menu\ChachingMenu.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\menu\ChachingMenuController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\menu\ChachingMenuModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsGridModel.js" />
     <Content Include="ExtWeb\Chaching\index.html" />
     <Content Include="ExtWeb\Chaching\modern\src\Application.js" />
     <Content Include="ExtWeb\Chaching\modern\src\profile\Phone.js" />
@@ -18881,7 +18884,6 @@
     <Content Include="ExtWeb\build\development\Chaching\resources\fonts\OpenSans-SemiboldItalic.ttf" />
     <Content Include="ExtWeb\build\development\Chaching\resources\Readme.md" />
     <Content Include="ExtWeb\LoginApp\classic\sass\src\view\login\LoginView.scss" />
-    <Content Include="ExtWeb\Chaching\classic\sass\src\view\menu\ChachingMenu.scss" />
     <Content Include="ExtWeb\Chaching\classic\sass\src\view\header\ChachingHeader.scss" />
     <Content Include="Abp\Framework\styles\abp.mixings.less" />
     <Content Include="Abp\Framework\styles\abp.less" />
@@ -18910,6 +18912,7 @@
     <Content Include="Logs\Logs.txt.mine" />
     <Content Include="Logs\Logs.txt.r156" />
     <Content Include="Logs\Logs.txt.r158" />
+    <Content Include="ExtWeb\Chaching\classic\sass\src\view\main\ChachingViewport.scss" />
     <None Include="Properties\PublishProfiles\DevServerRelease.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

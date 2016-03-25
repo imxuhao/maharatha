@@ -1,49 +1,50 @@
-﻿//@include treelist-ui(
-    //$ui: 'nav',
+﻿@include extjs-tab-panel-ui(
+    $ui: 'dashboard',
+    $ui-tab-background-color: #F3F5F9,
+$ui-bar-background-color:#F3F5F9,
+$ui-tab-background-color-over:white,
+    $ui-tab-color: #acacac,
+    $ui-tab-color-over: white,
+    $ui-tab-color-active: #4c82b1,
+    $ui-tab-glyph-color: #4c82b1,
+    $ui-tab-glyph-color-over: #4c82b1,
+    $ui-tab-glyph-color-active: #4c82b1,
+    $ui-tab-glyph-opacity: 1,
+    $ui-tab-border-radius: 5px 5px 0 0,
+    $ui-tab-border-width: 1px,
+$ui-tab-border-width-over:1px,
+$ui-tab-border-color-over:#F3F5F9,
+    $ui-tab-inner-border-width: 0,
+$ui-tab-color:#231919,
+$ui-tab-font-weight-active:600,
+$ui-tab-font-weight-over:600,
+$ui-tab-color-over:#4c82b1,
+$ui-tab-closable-icon-glyph-color:#4c82b1,
+$ui-tab-closable-icon-glyph-color-over:#4c82b1
+);
 
-    // Extra padding left/right
-    //$padding: 0 10px,
-
-    // Black-ish background color #ffffff,
-    //$background-color: 'white'
-    //$toolstrip-background-color: #32404e,
-
-    //$tool-selected-color: lighten(#5C9ACF,60%),
-    //$tool-selected-background-color: lighten(#5C9ACF,60%),
-
-    //$tool-float-indicator-width: 4px,
-    //$tool-float-indicator-color: lighten(#5C9ACF,60%),
-
-    // Darker background for expanded subtrees
-    //$item-expanded-background-color: #F3F5F9,
-
-    // Taller line height
-    //$item-line-height : 36px,
-
-    // Off-white text
-    //$item-icon-color: lighten(#5C9ACF,20%),
-    //$item-expander-color: lighten(#5C9ACF,20%),
-    //$item-text-color: #485a6a,
-
-    // Brighter when hovered
-    //$row-over-background-color: lighten(#5C9ACF,60%),
-    //$item-icon-over-color: lighten(#5C9ACF,20%),
-    //$item-expander-over-color: lighten(#5C9ACF,60%),
-    //$item-text-over-color: #5b9bd1,
-
-    //$row-indicator-width: 3px,
-    //$row-indicator-selected-color: #5fa2dd,
-    //$row-indicator-selected-over-color: lighten(#5fa2dd, 10%),
-    //$row-indicator-over-color: lighten(#5fa2dd, 10%),
-
-    // Various sizes for the pieces:
-    //$item-icon-font-size: 18px,
-    //$item-icon-width: 24px,
-    //$item-expander-font-size: 16px,
-    //$item-expander-width: 24px,
-
-    //$row-selected-background-color:lighten(#5C9ACF,60%)
-//);
+/**
+ * Generates a set of style rules for the "navigation" panel UI.
+ */
+@include extjs-panel-ui(
+    $ui: 'dashboard',
+ $ui-header-color: #fff,
+    $ui-header-glyph-color: #fff,
+    $ui-header-glyph-opacity: 1,
+    $ui-header-font-size: 20px,
+    $ui-header-line-height: 24px,
+    $ui-header-font-weight: bold,
+    $ui-header-icon-height: 24px,
+    $ui-header-icon-width: 24px,
+    $ui-header-icon-spacing: 15px,
+    $ui-header-background-color: $base-color,
+    $ui-header-padding: 0,
+    $ui-header-text-margin: 36px,
+    $ui-header-noborder-adjust: false
+);
+.x-box-scroller-tab-bar-dashboard{
+    color:#2D2A2A !important;
+}
 
 
 @include treelist-ui(

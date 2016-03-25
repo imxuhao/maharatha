@@ -436,7 +436,7 @@ Ext.define('Ext.saki.form.field.Icon', {
      */
     ,destroy:function() {
         var iconEl = this.getCmp().iconEl;
-        iconEl.removeAllListeners();
+        iconEl.clearListeners();
         Ext.destroy(iconEl);
         iconEl = null;
         console.log('destroyed');

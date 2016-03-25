@@ -5,9 +5,7 @@ Ext.define('Chaching.view.main.ChachingViewport', {
     requires: [
         'Chaching.view.main.ChachingViewportController',
         'Chaching.view.main.ChachingViewportModel',
-        'Chaching.view.menu.ChachingMenu',
         'Chaching.view.header.ChachingHeader'
-       
     ],
 
     controller: 'main-chachingviewport',
@@ -24,7 +22,10 @@ Ext.define('Chaching.view.main.ChachingViewport', {
     //height: '100%',
     //width: '100%',
     alias: 'widget.chachingviewport',
-
+    listeners: {
+        render: 'onMainViewRender',
+        resize: 'onViewportResize'
+    },
     items: [
         {
             region: 'north',
@@ -53,97 +54,43 @@ Ext.define('Chaching.view.main.ChachingViewport', {
             scrollable: 'y',
             items: [
                 {
-                    xtype: 'chachingmenu'
+                    xtype: 'treelist',
+                    reference: 'navigationTreeList',
+                    itemId: 'navigationTreeList',
+                    micro: false,
+                    ui: 'nav',
+                    store: 'NavigationTree',
+                    width: 250,
+                    expanderFirst: false,
+                    expanderOnly: false,
+                    listeners: {
+                        selectionchange: 'onNavigationTreeSelectionChange'
+                    }
                 }
             ]
 
         },
         {
-            xtype: 'container',
+            xtype: 'tabpanel',
             region: 'center',
-            layout: 'fit',
+            reference: 'mainCardPanel',
+            itemId: 'contentPanel',
+            stateId: 'mainCardPanelState',
+            ui: 'dashboard',
+            layout: {
+                type: 'card',
+                anchor: '100%'
+            },
+            listeners: {
+                tabchange: 'onTabItemChange'
+            },
             items: [
-                {
-                    xtype: 'gridpanel',
-                    //layout: 'fit',
-                    store: 'Personnel',
-                    title:'Personnel',
-                    bodyStyle: {
-                        'background-color': '#F3F5F9'
-                    },
-                    plugins: [
-                        {
-                            ptype: 'saki-gms',
-                            clearItemIconCls:'icon-settings',
-                            pluginId: 'gms',
-                            height:32,
-                            filterOnEnter: false
-                        }
-                    ],
-                    features:[{
-                        ftype:'ux-gmsrt'
-                ,displaySortOrder:true
-                    }],
-                    columns: [
-                        {
-                            text: 'Name',
-                            dataIndex: 'name',
-                            stateId: 'name',
-                            sortable: true,
-                            width: 160,
-                            // simplest filter configuration
-                            
-                            filterField: {
-                                xtype: 'textfield',
-                                width:'90%',
-                                plugins: [{
-                                    ptype: 'saki-ficn'
-                                    , iconCls: 'fa fa-info'
-                                    , qtip: 'Enter name to search'
-                                }]
-                            }
-                        }, {
-                            text: 'Email',
-                            dataIndex: 'email',
-                            sortable: true,
-                            flex: 1
-
-                            // equivalent to filterField:true
-                            // as textfield is created by default
-                            ,
-                            filterField: {
-                                xtype: 'textfield',
-                                width:'90%'
-                                , plugins: [{
-                                    ptype: 'saki-ficn'
-                                    , iconCls: 'fa fa-info'
-                                    , qtip: 'Enter Email Address to search'
-                                }]
-                            }
-                        }, {
-                            text: 'Phone',
-                            dataIndex: 'phone',
-                            sortable: true,
-                            width: 110,
-                            //align: 'right',
-                            //format: '0,000',
-                            filterField: {
-                                xtype: 'textfield',
-                                width: '90%'
-                               , plugins: [{
-                                   ptype: 'saki-ficn'
-                                   , iconCls: 'fa fa-info'
-                                   , qtip: 'Enter phone to search'
-                               }]
-                            }
-                        }
-                    ]
-                }
-            ]
+            {
+                title: 'Dashboard',
+                ui: 'dashboard',
+                routeId: 'dashboard',
+                iconCls: 'icon-home'
+            }]
         }
-    ],
-    listeners: {
-        resize: 'onViewportResize'
-    }
-
+    ]
 });

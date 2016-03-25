@@ -1,16 +1,16 @@
 ﻿Ext.define('Chaching.store.NavigationTree', {
     extend: 'Ext.data.TreeStore',
-    autoload:true,
+    autoload: true,
     storeId: 'NavigationTree',
     fields: [{ name: 'text' },
-    {name:'iconCls'},{name:'name'},{name:'url'}],
+    { name: 'iconCls' }, { name: 'name' }, { name: 'url' }, { name: 'viewType' }],
 
     root: {
         expanded: true
-       
+
     },
     listeners: {
-        load:function(treeStore, items, e) {
+        load: function (treeStore, items, e) {
             treeStore.loadNavigationData(treeStore);
         }
     },
@@ -62,6 +62,7 @@
                         break;
                     case "url":
                         newItem.url = originalItem[key];
+                        newItem.viewType = newItem.url;
                         break;
                     default:
                         break;

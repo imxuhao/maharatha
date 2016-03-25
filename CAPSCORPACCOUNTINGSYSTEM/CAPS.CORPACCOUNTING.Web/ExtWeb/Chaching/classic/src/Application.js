@@ -7,19 +7,20 @@ Ext.require(
 ['Ext.*']);
 Ext.define('Chaching.Application', {
     extend: 'Ext.app.Application',
-    
+
     name: 'Chaching',
     requires: [
         'Ext.saki.grid.MultiSearch',
         'Ext.ux.grid.MultiSort',
-        'Ext.saki.form.field.Icon'
+        'Ext.saki.form.field.Icon',
+        'Chaching.*'
     ],
     stores: [
         // TODO: add global / shared stores here
          'NavigationTree',
          'Personnel'
     ],
-    mainView:'Chaching.view.main.ChachingViewport',
+    mainView: 'Chaching.view.main.ChachingViewport',
     onAppUpdate: function () {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
             function (choice) {

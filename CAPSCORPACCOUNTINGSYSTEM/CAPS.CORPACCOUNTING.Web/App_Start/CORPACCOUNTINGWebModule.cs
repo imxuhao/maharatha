@@ -53,8 +53,8 @@ namespace CAPS.CORPACCOUNTING.Web
                 configuration.GlobalConfiguration.UseSqlServerStorage("Default");
             });
 
-            //Comment this line to stop use Redis cache instead of in-memory cache.
-            Configuration.Caching.UseRedis();
+            //Uncomment this line to use Redis cache instead of in-memory cache.
+            //Configuration.Caching.UseRedis();
         }
 
         public override void Initialize()

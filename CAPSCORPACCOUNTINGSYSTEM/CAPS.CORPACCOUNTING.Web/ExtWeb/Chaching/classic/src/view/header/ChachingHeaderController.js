@@ -6,7 +6,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             view = me.getView();
         var westPanel = view.up('viewport').down('panel[region=west]');
         if (westPanel) {
-            var treeList = westPanel.down('chachingmenu');
+            var treeList = westPanel.down('treelist[itemId=navigationTreeList]');
             var micro = treeList.getMicro();
             treeList.setMicro(!micro);
             westPanel.setWidth(micro ? 300 : 85);

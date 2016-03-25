@@ -97,6 +97,7 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\Castle.Wi
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\EntityFramework.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\EntityFramework.SqlServer.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\EPPlus.dll
+C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\ICSharpCode.SharpZipLib.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\Microsoft.AspNet.Identity.Core.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\Newtonsoft.Json.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\Nito.AsyncEx.Concurrent.dll
@@ -124,4 +125,3 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\System.Co
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\obj\Release\CAPS.CORPACCOUNTING.Application.csprojResolveAssemblyReference.cache
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\obj\Release\CAPS.CORPACCOUNTING.Application.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\obj\Release\CAPS.CORPACCOUNTING.Application.pdb
-C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.Application\bin\Release\ICSharpCode.SharpZipLib.dll

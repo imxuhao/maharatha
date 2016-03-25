@@ -193,6 +193,7 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\System.Web.Htt
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\System.Web.Http.Owin.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\System.Web.Http.WebHost.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\System.Web.OData.dll
+C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\ICSharpCode.SharpZipLib.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\EPPlus.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\Abp.Zero.Ldap.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\EntityFramework.dll
@@ -258,4 +259,3 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\zh-Hant\Micros
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\obj\Release\CAPS.CORPACCOUNTING.WebApi.csprojResolveAssemblyReference.cache
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\obj\Release\CAPS.CORPACCOUNTING.WebApi.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\obj\Release\CAPS.CORPACCOUNTING.WebApi.pdb
-C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\ICSharpCode.SharpZipLib.dll

@@ -2,12 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
-using Abp.Domain.Uow;
 using Abp.Zero.Configuration;
-using EntityFramework.DynamicFilters;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
+using CAPS.CORPACCOUNTING.Notifications;
 using Shouldly;
 using Xunit;
 
@@ -68,7 +67,11 @@ namespace CAPS.CORPACCOUNTING.Tests.MultiTenancy
                     }
 
                     //Check default admin user
-                    (await context.Users.CountAsync(u => u.TenantId == tenant.Id && u.UserName == User.AdminUserName)).ShouldBe(1);
+                    var adminUser = await context.Users.FirstOrDefaultAsync(u => u.TenantId == tenant.Id && u.UserName == User.AdminUserName);
+                    adminUser.ShouldNotBeNull();
+                    
+                    //Check notification registration
+                    (await context.NotificationSubscriptions.FirstOrDefaultAsync(ns => ns.UserId == adminUser.Id && ns.NotificationName == AppNotificationNames.NewUserRegistered)).ShouldNotBeNull();
                 });
 
             //GET FOR EDIT -----------------------------

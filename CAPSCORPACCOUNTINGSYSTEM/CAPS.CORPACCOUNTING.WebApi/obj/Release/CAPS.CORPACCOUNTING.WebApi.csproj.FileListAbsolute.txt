@@ -160,7 +160,6 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Release\zh-Hans\Microsoft.Spatial.resources.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\CAPSCORPACCOUNTINGSYSTEM\CAPS.CORPACCOUNTING.WebApi\bin\Release\zh-Hant\Microsoft.Spatial.resources.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\CAPS.CORPACCOUNTING.WebApi.dll.config
-C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\CAPS.CORPACCOUNTING.WebApi.XML
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\CAPS.CORPACCOUNTING.WebApi.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\CAPS.CORPACCOUNTING.WebApi.pdb
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\Abp.AutoMapper.dll
@@ -259,3 +258,4 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\zh-Hant\Micros
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\obj\Release\CAPS.CORPACCOUNTING.WebApi.csprojResolveAssemblyReference.cache
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\obj\Release\CAPS.CORPACCOUNTING.WebApi.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\obj\Release\CAPS.CORPACCOUNTING.WebApi.pdb
+C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.WebApi\bin\Release\ICSharpCode.SharpZipLib.dll

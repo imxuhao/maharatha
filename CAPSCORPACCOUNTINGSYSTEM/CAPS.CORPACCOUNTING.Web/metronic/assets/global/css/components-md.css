@@ -7550,10 +7550,10 @@ Customized Bootstrap Modal
     background-color: #333 !important; }
 
 body[ng-controller] .modal-backdrop {
-  z-index: 10049 !important; }
+  z-index: 10049; }
 
 body[ng-controller] .modal {
-  z-index: 10050 !important; }
+  z-index: 10050; }
 
 /* Full width modal */
 .modal-full.modal-dialog {

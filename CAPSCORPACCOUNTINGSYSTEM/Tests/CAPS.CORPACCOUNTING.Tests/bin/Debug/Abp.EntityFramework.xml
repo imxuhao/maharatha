@@ -9,26 +9,6 @@
             Base class for all DbContext classes in the application.
             </summary>
         </member>
-        <member name="P:Abp.EntityFramework.AbpDbContext.AbpSession">
-            <summary>
-            Used to get current session values.
-            </summary>
-        </member>
-        <member name="P:Abp.EntityFramework.AbpDbContext.EntityChangeEventHelper">
-            <summary>
-            Used to trigger entity change events.
-            </summary>
-        </member>
-        <member name="P:Abp.EntityFramework.AbpDbContext.Logger">
-            <summary>
-            Reference to the logger.
-            </summary>
-        </member>
-        <member name="P:Abp.EntityFramework.AbpDbContext.GuidGenerator">
-            <summary>
-            Reference to GUID generator.
-            </summary>
-        </member>
         <member name="M:Abp.EntityFramework.AbpDbContext.#ctor">
             <summary>
             Constructor.
@@ -63,6 +43,21 @@
         <member name="M:Abp.EntityFramework.AbpDbContext.#ctor(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.DbCompiledModel,System.Boolean)">
             <summary>
             Constructor.
+            </summary>
+        </member>
+        <member name="P:Abp.EntityFramework.AbpDbContext.AbpSession">
+            <summary>
+            Used to get current session values.
+            </summary>
+        </member>
+        <member name="P:Abp.EntityFramework.AbpDbContext.EntityChangeEventHelper">
+            <summary>
+            Used to trigger entity change events.
+            </summary>
+        </member>
+        <member name="P:Abp.EntityFramework.AbpDbContext.Logger">
+            <summary>
+            Reference to the logger.
             </summary>
         </member>
         <member name="T:Abp.EntityFramework.Dependency.EntityFrameworkConventionalRegistrar">
@@ -113,6 +108,12 @@
             <typeparam name="TEntity">Type of the Entity for this repository</typeparam>
             <typeparam name="TPrimaryKey">Primary key of the entity</typeparam>
         </member>
+        <member name="M:Abp.EntityFramework.Repositories.EfRepositoryBase`3.#ctor(Abp.EntityFramework.IDbContextProvider{`0})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="dbContextProvider"></param>
+        </member>
         <member name="P:Abp.EntityFramework.Repositories.EfRepositoryBase`3.Context">
             <summary>
             Gets EF DbContext object.
@@ -122,12 +123,6 @@
             <summary>
             Gets DbSet for given entity.
             </summary>
-        </member>
-        <member name="M:Abp.EntityFramework.Repositories.EfRepositoryBase`3.#ctor(Abp.EntityFramework.IDbContextProvider{`0})">
-            <summary>
-            Constructor
-            </summary>
-            <param name="dbContextProvider"></param>
         </member>
         <member name="T:Abp.EntityFramework.IDbContextProvider`1">
             <summary>
@@ -142,16 +137,16 @@
             </summary>
             <typeparam name="TDbContext">Type of the DbContext</typeparam>
         </member>
-        <member name="P:Abp.EntityFramework.Uow.UnitOfWorkDbContextProvider`1.DbContext">
-            <summary>
-            Gets the DbContext.
-            </summary>
-        </member>
         <member name="M:Abp.EntityFramework.Uow.UnitOfWorkDbContextProvider`1.#ctor(Abp.Domain.Uow.ICurrentUnitOfWorkProvider)">
             <summary>
             Creates a new <see cref="T:Abp.EntityFramework.Uow.UnitOfWorkDbContextProvider`1"/>.
             </summary>
             <param name="currentUnitOfWorkProvider"></param>
+        </member>
+        <member name="P:Abp.EntityFramework.Uow.UnitOfWorkDbContextProvider`1.DbContext">
+            <summary>
+            Gets the DbContext.
+            </summary>
         </member>
         <member name="T:Abp.EntityFramework.Uow.EfUnitOfWork">
             <summary>

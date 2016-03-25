@@ -1,50 +1,38 @@
-﻿using System.Reflection;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Web.Http;
 using Abp.Application.Services;
 using Abp.Configuration.Startup;
 using Abp.Modules;
 using Abp.WebApi;
 using Abp.WebApi.Controllers.Dynamic.Builders;
-using Swashbuckle.Application;
-using System.Linq;
-using System.IO;
-using System;
 using Abp.WebApi.OData;
 using Abp.WebApi.OData.Configuration;
-using CAPS.CORPACCOUNTING.Masters;
-
-#pragma warning disable 1587
+using Swashbuckle.Application;
 
 namespace CAPS.CORPACCOUNTING.WebApi
 {
     /// <summary>
     /// Web API layer of the application.
     /// </summary>
-    [DependsOn(typeof(AbpWebApiModule), typeof(CORPACCOUNTINGApplicationModule),typeof(AbpWebApiODataModule))]
+    [DependsOn(typeof(AbpWebApiModule), typeof(AbpWebApiODataModule), typeof(CORPACCOUNTINGApplicationModule))]
     public class CORPACCOUNTINGWebApiModule : AbpModule
     {
-        /// <summary>
-        /// This is the first event called on application startup. 
-        /// OData requires to declare entities which can be used as OData resources. We should do this in PreInitialize method of our module, as shown below:
-        /// </summary>
         public override void PreInitialize()
         {
-            var builder = Configuration.Modules.AbpWebApiOData().ODataModelBuilder;
-
-            //Configure your entities here...
-            builder.EntitySet<CoaUnit>("COA");
+            ConfigureOData();
         }
 
-        /// <summary>
-        /// This method is used to register dependencies for this module.
-        /// </summary>
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
-            ///Automatically creates Web API controllers for all application services of the application
-
-            DynamicApiControllerBuilder.ForAll<IApplicationService>(typeof(CORPACCOUNTINGApplicationModule).Assembly, "app").Build();
+            //Automatically creates Web API controllers for all application services of the application
+            DynamicApiControllerBuilder
+                .ForAll<IApplicationService>(typeof(CORPACCOUNTINGApplicationModule).Assembly, "app")
+                .Build();
 
             ///Automatically create Web API controllers for a particular service
 
@@ -53,11 +41,17 @@ namespace CAPS.CORPACCOUNTING.WebApi
             ///Overriding the methods you don't want to expose as web API
 
             //DynamicApiControllerBuilder.For<IAccountUnitAppService>("app/accountUnit").ForMethod("UpdateAccountUnit").DontCreateAction().Build();
-
-
             Configuration.Modules.AbpWebApi().HttpConfiguration.Filters.Add(new HostAuthenticationFilter("Bearer"));
 
-            ConfigureSwaggerUi();
+            ConfigureSwaggerUi(); //Remove this line to disable swagger UI.
+        }
+
+        private void ConfigureOData()
+        {
+            var builder = Configuration.Modules.AbpWebApiOData().ODataModelBuilder;
+
+            //Configure your entities here... see documentation: http://www.aspnetboilerplate.com/Pages/Documents/OData-Integration
+            //builder.EntitySet<YourEntity>("YourEntities");
         }
 
         private void ConfigureSwaggerUi()
@@ -65,7 +59,6 @@ namespace CAPS.CORPACCOUNTING.WebApi
             var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             var commentsFileName = "CAPS.CORPACCOUNTING.Application" + ".XML";
             var commentsFile = Path.Combine(baseDirectory, commentsFileName);
-
             Configuration.Modules.AbpWebApi().HttpConfiguration
                 .EnableSwagger(c =>
                 {
@@ -75,7 +68,6 @@ namespace CAPS.CORPACCOUNTING.WebApi
                     c.DocumentFilter<FilterRoutesDocumentFilter>();
                 })
                 .EnableSwaggerUi();
-
         }
     }
 }

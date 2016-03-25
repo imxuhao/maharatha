@@ -42,6 +42,10 @@
                             (abp.appPath + 'Common/Images/default-profile-picture.png');
     }
 
+    app.getUserProfilePicturePath = function () {
+        return abp.appPath + 'Profile/GetProfilePicture?v=' + new Date().valueOf();
+    }
+
     app.getShownLinkedUserName = function (linkedUser) {
         if (!abp.multiTenancy.isEnabled) {
             return linkedUser.userName;

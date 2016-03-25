@@ -47,14 +47,14 @@ namespace CAPS.CORPACCOUNTING.Web
             Configuration.Navigation.Providers.Add<FrontEndNavigationProvider>();
             Configuration.Navigation.Providers.Add<MpaNavigationProvider>();
 
-            //Uncomment these lines to use HangFire as background job manager.
-            //Configuration.BackgroundJobs.UseHangfire(configuration =>
-            //{
-            //    configuration.GlobalConfiguration.UseSqlServerStorage("Default");
-            //});
+            // Comment these lines to stop using HangFire as background job manager.
+            Configuration.BackgroundJobs.UseHangfire(configuration =>
+            {
+                configuration.GlobalConfiguration.UseSqlServerStorage("Default");
+            });
 
-            //Uncomment this line to use Redis cache instead of in-memory cache.
-            //Configuration.Caching.UseRedis();
+            //Comment this line to stop use Redis cache instead of in-memory cache.
+            Configuration.Caching.UseRedis();
         }
 
         public override void Initialize()

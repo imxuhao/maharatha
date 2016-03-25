@@ -202,6 +202,15 @@
     <Compile Include="Authorization\Users\Dto\UserEditDto.cs" />
     <Compile Include="Authorization\Users\Dto\UserRoleDto.cs" />
     <Compile Include="CustomDtoMapper.cs" />
+    <Compile Include="GenericSearch\AbstractSearch.cs" />
+    <Compile Include="GenericSearch\DecimalSearch.cs" />
+    <Compile Include="GenericSearch\NumericSearch.cs" />
+    <Compile Include="GenericSearch\DateSearch.cs" />
+    <Compile Include="GenericSearch\EnumSearch.cs" />
+    <Compile Include="GenericSearch\BooleanSearch.cs" />
+    <Compile Include="GenericSearch\SearchExtensions.cs" />
+    <Compile Include="GenericSearch\Dto\SearchInputDto.cs" />
+    <Compile Include="GenericSearch\TextSearch.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Interceptors\DTOInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\DTOInterceptors.cs" />

@@ -14,6 +14,8 @@ using System.Linq.Dynamic;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Helper;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -149,9 +151,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(GetVendorInput input)
+        public async Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(SearchInputDto input)
         {
             var query = CreateVendorQuery(input);
+            query = query.WhereIf(input.OrganizationUnitId != null, item => item.Vendor.OrganizationUnitId == input.OrganizationUnitId);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
@@ -185,7 +188,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 }).ToList();
         }
 
-        private IQueryable<VendorAndAddressDto> CreateVendorQuery(GetVendorInput input)
+        private IQueryable<VendorAndAddressDto> CreateVendorQuery(SearchInputDto input)
         {
             var query = from vendor in _vendorUnitRepository.GetAll()
                 join addr in _addresRepository.GetAll() on vendor.Id equals addr.ObjectId
@@ -196,24 +199,11 @@ namespace CAPS.CORPACCOUNTING.Masters
                 from pt in paymentperms.DefaultIfEmpty()
                 select new VendorAndAddressDto {Vendor = vendor, Address = rt, PaymentTerms = pt.Description};
 
-            query = query
-                .WhereIf(input.OrganizationUnitId != null,
-                    item => item.Vendor.OrganizationUnitId == input.OrganizationUnitId)
-                .WhereIf(!input.FirstName.IsNullOrWhiteSpace(), item => item.Vendor.FirstName.Contains(input.FirstName))
-                .WhereIf(!input.LastName.IsNullOrWhiteSpace(), item => item.Vendor.LastName.Contains(input.LastName))
-                .WhereIf(!input.SSNTaxId.IsNullOrWhiteSpace(), item => item.Vendor.SSNTaxId.Contains(input.SSNTaxId))
-                .WhereIf(!input.PayToName.IsNullOrWhiteSpace(), item => item.Vendor.PayToName.Contains(input.PayToName))
-                .WhereIf(!input.VendorNumber.IsNullOrWhiteSpace(),
-                    item => item.Vendor.VendorNumber.Contains(input.VendorNumber))
-                .WhereIf(!input.VendorAccountInfo.IsNullOrWhiteSpace(),
-                    item => item.Vendor.VendorAccountInfo.Contains(input.VendorAccountInfo))
-                .WhereIf(!input.FedralTaxId.IsNullOrWhiteSpace(),
-                    item => item.Vendor.FedralTaxId.Contains(input.FedralTaxId))
-                .WhereIf(input.Typeof1099Box != null, item => item.Vendor.Typeof1099Box == input.Typeof1099Box)
-                .WhereIf(input.TypeofVendorId != null, item => item.Vendor.TypeofVendorId == input.TypeofVendorId)
-                .WhereIf(!input.PhoneorEmail.IsNullOrWhiteSpace(), item => item.Address.Phone1 == input.PhoneorEmail)
-                .WhereIf(!input.PhoneorEmail.IsNullOrWhiteSpace(), item => item.Address.Phone2 == input.PhoneorEmail)
-                .WhereIf(!input.PhoneorEmail.IsNullOrWhiteSpace(), item => item.Address.Email == input.PhoneorEmail);
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.Helper.MappingFilters(input.Filters);
+                query = Helper.Helper.CreateFilters(query, mapSearchFilters);
+            }
             return query;
         }
 

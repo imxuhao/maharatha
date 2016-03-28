@@ -368,5 +368,7 @@
     <text name="Failed">Başarısız</text>
     <text name="NewTenant">Yeni müşteri</text>
     <text name="ResizedProfilePicture_Warn_SizeLimit" value="Kırpılmış resim boyutu en fazla 100KB olabilir. Lütfen kırpılmış alanı küçültüp tekrar deneyin." />
+    <text name="Export" value="İhracat" />
+    <text name="ExportToPDF" value="pdf İhracat" />
   </texts>
 </localizationDictionary>

@@ -345,5 +345,7 @@
     <text name="CacheSuccessfullyCleared">تم مسح ذاكرة التخزين المؤقت بنجاح.</text>
     <text name="AllCachesSuccessfullyCleared">تم مسح كل ذاكرة التخزين المؤقت بنجاح.</text>
     <text name="ClearAll">مسح الكل</text>
+    <text name="Export" value="تصدير" />
+    <text name="ExportToPDF" value="تصدير إلى PDF" />
   </texts>
 </localizationDictionary>

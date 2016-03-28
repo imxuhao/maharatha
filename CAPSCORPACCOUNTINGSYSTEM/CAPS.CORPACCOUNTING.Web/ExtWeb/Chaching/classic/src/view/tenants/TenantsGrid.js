@@ -1,6 +1,6 @@
 
 Ext.define('Chaching.view.tenants.TenantsGrid',{
-    extend: 'Ext.grid.Panel',
+    extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
         'Chaching.view.tenants.TenantsGridController',
@@ -15,39 +15,26 @@ Ext.define('Chaching.view.tenants.TenantsGrid',{
     store: 'Personnel',
     title:'Personnel',
     padding: 5,
-    dockedItems: [
-        {
-            xtype: 'toolbar',
-            docked: 'top',
-            layout: {
-                type: 'hbox',
-                pack:'left'
-            },
-            items:[
-            {
-                xtype:'displayfield',
-                value: 'Tenants',
-                width:100
-            },'->', {
-                text: 'CREATE NEW TENANT',
-                iconCls: 'fa fa-plus',
-                iconAlign:'left'
-            }]
-        }
-    ],
-    plugins: [
-        {
-            ptype: 'saki-gms',
-            clearItemIconCls:'icon-settings',
-            pluginId: 'gms',
-            height:32,
-            filterOnEnter: false
-        }
-    ],
-    features:[{
-        ftype:'ux-gmsrt'
-,displaySortOrder:true
+    headerButtonsConfig:[
+    {
+        xtype: 'displayfield',
+        value: abp.localization.localize("Tenants"),
+        ui:'headerTitle'
+    }, {
+        xtype: 'displayfield',
+        value: abp.localization.localize("TenantsHeaderInfo"),
+        ui: 'headerSubTitle'
+    }, '->', {
+        xtype: 'button',
+        scale: 'small',
+        ui: 'actionButton',
+        text: abp.localization.localize("CreateNewTenant").toUpperCase(),
+        iconCls: 'fa fa-plus',
+        iconAlign:'left'
     }],
+    requireExport: true,
+    requireMultiSearch:true,
+    requireMultisort:true,
     columns: [
         {
             text: 'Name',
@@ -59,12 +46,13 @@ Ext.define('Chaching.view.tenants.TenantsGrid',{
                             
             filterField: {
                 xtype: 'textfield',
-                width:'90%',
-                plugins: [{
-                    ptype: 'saki-ficn'
-                    , iconCls: 'fa fa-info'
-                    , qtip: 'Enter name to search'
-                }]
+                width:160,
+                emptyText:'Enter name to search'
+                //plugins: [{
+                //    ptype: 'saki-ficn'
+                //    , iconCls: 'fa fa-info'
+                //    , qtip: 'Enter name to search'
+                //}]
             }
         }, {
             text: 'Email',
@@ -77,28 +65,18 @@ Ext.define('Chaching.view.tenants.TenantsGrid',{
             ,
             filterField: {
                 xtype: 'textfield',
-                width:'90%'
-                , plugins: [{
-                    ptype: 'saki-ficn'
-                    , iconCls: 'fa fa-info'
-                    , qtip: 'Enter Email Address to search'
-                }]
+                flex: 1,
+                emptyText: 'Enter email to search'
             }
         }, {
             text: 'Phone',
             dataIndex: 'phone',
             sortable: true,
             width: 110,
-            //align: 'right',
-            //format: '0,000',
             filterField: {
                 xtype: 'textfield',
-                width: '90%'
-               , plugins: [{
-                   ptype: 'saki-ficn'
-                   , iconCls: 'fa fa-info'
-                   , qtip: 'Enter phone to search'
-               }]
+                width: 160,
+                emptyText: 'Enter phone to search'
             }
         }
     ]

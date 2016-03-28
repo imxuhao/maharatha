@@ -10,6 +10,7 @@ Ext.define('Chaching.Application', {
 
     name: 'Chaching',
     requires: [
+        'Chaching.view.common.grid.ChachingGridPanel',
         'Ext.saki.grid.MultiSearch',
         'Ext.ux.grid.MultiSort',
         'Ext.saki.form.field.Icon',

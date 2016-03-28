@@ -18913,6 +18913,7 @@
     <Content Include="Logs\Logs.txt.r156" />
     <Content Include="Logs\Logs.txt.r158" />
     <Content Include="ExtWeb\Chaching\classic\sass\src\view\main\ChachingViewport.scss" />
+    <Content Include="ExtWeb\Chaching\classic\sass\src\view\common\grid\ChachingGridPanel.scss" />
     <None Include="Properties\PublishProfiles\DevServerRelease.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

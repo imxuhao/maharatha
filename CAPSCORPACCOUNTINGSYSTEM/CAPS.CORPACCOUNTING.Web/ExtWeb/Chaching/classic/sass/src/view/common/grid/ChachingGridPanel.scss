@@ -1,0 +1,69 @@
+﻿@include extjs-toolbar-ui(
+$ui:'plain',
+$background-color:#F3F5F9,
+$border-color:'none',
+$border-width:0px
+);
+
+@include extjs-toolbar-ui(
+$ui:'plainBottom',
+$background-color:#00BCD4,
+$border-color:'none',
+$border-width:0px,
+$text-font-weight:400
+);
+.x-toolbar-plainBottom{
+    border-radius: 0 0 5px 5px !important;
+}
+.x-toolbar-plainBottom .x-toolbar-item{
+    font-weight:400 !important;
+    color:black !important;
+}
+.x-btn-icon-el-plain-toolbar-small{
+    color:black !important;
+}
+@include extjs-display-field-ui(
+$ui:'headerTitle',
+$ui-color:#697882,
+$ui-font-weight:400,
+$ui-font-size:22px
+);
+.x-form-display-field-headerTitle{
+    margin-top:12px !important
+}
+@include extjs-display-field-ui(
+$ui:'headerSubTitle',
+$ui-color:#9eacb4,
+$ui-font-weight:400,
+$ui-font-size:13px
+);
+.x-form-display-field-headerSubTitle{
+    margin-top:16px !important;
+    margin-left:5px !important;
+}
+.gridTitle{
+    font-weight:700 !important;
+    font-size: 18px !important;
+    color:#697882 !important;
+}
+.gridSubTitle{
+    font-weight:300 !important;
+    font-size: 13px !important;
+    color:#9eacb4 !important;
+}
+
+
+@include extjs-button-small-ui(
+    $ui: 'actionButton',
+    $color: #FFFFFF,
+    $icon-color: #FFFFFF,
+    $background-color: #3598dc,
+    $border-width: 0,
+$border-color:#3598dc,
+$border-radius:2px,
+$background-color-over:#217ebd,
+$background-color-focus:#217ebd,
+$border-color-over:#1f78b5,
+$border-color-focus:#1f78b5
+
+);

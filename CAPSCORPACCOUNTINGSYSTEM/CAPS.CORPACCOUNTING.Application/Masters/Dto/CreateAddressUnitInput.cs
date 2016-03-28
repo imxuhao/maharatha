@@ -8,7 +8,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     public class CreateAddressUnitInput : IInputDto
     {
         /// <summary>Gets or sets the ObjectId field. </summary>
-        public int ObjectId { get; set; }
+        public long ObjectId { get; set; }
       
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         public TypeofObject TypeofObjectId { get; set; }

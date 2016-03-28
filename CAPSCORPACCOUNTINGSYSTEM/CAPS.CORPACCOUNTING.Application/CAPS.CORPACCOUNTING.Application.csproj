@@ -135,6 +135,12 @@
     <Compile Include="Authorization\Users\Profile\Dto\UpdateProfilePictureInput.cs" />
     <Compile Include="Authorization\Users\UserLinkAppService.cs" />
     <Compile Include="Authorization\Users\UserLoginAppService.cs" />
+    <Compile Include="Banking\BankAccountUnitAppService.cs" />
+    <Compile Include="Banking\Dto\BankAccountAndAddressDto.cs" />
+    <Compile Include="Banking\Dto\BankAccountUnitDto.cs" />
+    <Compile Include="Banking\Dto\CreateBankAccountUnitInput.cs" />
+    <Compile Include="Banking\Dto\UpdateBankAccountUnitInput.cs" />
+    <Compile Include="Banking\IBankAccountUnitAppService.cs" />
     <Compile Include="Caching\CachingAppService.cs" />
     <Compile Include="Caching\Dto\CacheDto.cs" />
     <Compile Include="Caching\ICachingAppService.cs" />
@@ -211,6 +217,7 @@
     <Compile Include="GenericSearch\SearchExtensions.cs" />
     <Compile Include="GenericSearch\Dto\SearchInputDto.cs" />
     <Compile Include="GenericSearch\TextSearch.cs" />
+    <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Interceptors\DTOInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\DTOInterceptors.cs" />

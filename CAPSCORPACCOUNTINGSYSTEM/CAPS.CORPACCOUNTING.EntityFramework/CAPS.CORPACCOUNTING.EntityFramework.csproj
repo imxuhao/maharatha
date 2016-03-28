@@ -1050,6 +1050,10 @@
     <Compile Include="Migrations\201603212142527_Add_LajitID_Tenant_Organization_User_Role.Designer.cs">
       <DependentUpon>201603212142527_Add_LajitID_Tenant_Organization_User_Role.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603280746259_Modify_AddressUnit_Table.cs" />
+    <Compile Include="Migrations\201603280746259_Modify_AddressUnit_Table.Designer.cs">
+      <DependentUpon>201603280746259_Modify_AddressUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1767,6 +1771,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603212142527_Add_LajitID_Tenant_Organization_User_Role.resx">
       <DependentUpon>201603212142527_Add_LajitID_Tenant_Organization_User_Role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603280746259_Modify_AddressUnit_Table.resx">
+      <DependentUpon>201603280746259_Modify_AddressUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

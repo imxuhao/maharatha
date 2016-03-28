@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -22,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<CustomerUnitDto>> GetCustomerUnits(GetCustomerInput input);
+        Task<PagedResultOutput<CustomerUnitDto>> GetCustomerUnits(SearchInputDto input);
 
         /// <summary>
         /// Update the Customer based on CustomerId.

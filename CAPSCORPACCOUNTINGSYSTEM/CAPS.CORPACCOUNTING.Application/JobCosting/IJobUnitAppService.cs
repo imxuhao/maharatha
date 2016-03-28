@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -36,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<JobUnitDto>> GetJobUnits(GetJobInput input);
+        Task<PagedResultOutput<JobUnitDto>> GetJobUnits(SearchInputDto input);
 
         /// <summary>
         /// Get the Job based on JobId.

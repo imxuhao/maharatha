@@ -64,11 +64,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             await _jobDetailUnitManager.CreateAsync(jobDetailUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            // Create Job Locations
-            input.JobLocations.ForEach(a => { a.JobId = jobDetailUnit.JobId; a.JobDetailId = jobDetailUnit.Id;});
-            foreach (var location in input.JobLocations)
+            if (!ReferenceEquals(input.JobLocations, null))
             {
-                await _jobLocationAppService.CreateJobLocationUnit(location);
+                // Create Job Locations
+                input.JobLocations.ForEach(a => { a.JobId = jobDetailUnit.JobId; a.JobDetailId = jobDetailUnit.Id; });
+                foreach (var location in input.JobLocations)
+                {
+                    await _jobLocationAppService.CreateJobLocationUnit(location);
+                }
             }
             return jobDetailUnit.MapTo<JobCommercialUnitDto>();
         }

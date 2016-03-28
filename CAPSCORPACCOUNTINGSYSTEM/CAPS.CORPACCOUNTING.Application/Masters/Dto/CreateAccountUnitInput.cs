@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
+    [AutoMapTo(typeof(AccountUnit))]
     public class CreateAccountUnitInput : IInputDto
     {
         /// <summary>Gets or sets the ParentId field. </summary>

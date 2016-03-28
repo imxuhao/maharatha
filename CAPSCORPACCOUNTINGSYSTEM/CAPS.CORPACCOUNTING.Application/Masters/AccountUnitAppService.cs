@@ -6,11 +6,11 @@ using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using Abp.Domain.Uow;
-using Abp.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Linq.Extensions;
 using System.Linq.Dynamic;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -29,13 +29,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _unitOfWorkManager = unitOfWorkManager;
 
         }
-        public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId=null)
+        public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId = null)
         {
             var items =
                   from au in await _accountUnitRepository.GetAllListAsync()
                   where organizationUnitId == null || au.OrganizationUnitId == organizationUnitId
                   select new { au, memberCount = au };
-           
+
             return new ListResultOutput<AccountUnitDto>(
                 items.Select(item =>
                 {
@@ -53,30 +53,30 @@ namespace CAPS.CORPACCOUNTING.Accounts
         {
             var query =
                 from au in _accountUnitRepository.GetAll()
-                    select new { Account = au };
+                select new { Account = au };
 
-            query = query.Where(item => item.Account.ChartOfAccountId==input.CoaId)
-                .WhereIf(!input.Description.IsNullOrWhiteSpace(),
-                    item => item.Account.Description.Contains(input.Description))
-                .WhereIf(!input.Description.IsNullOrWhiteSpace(),
-                    item => item.Account.Description.Contains(input.Description))
-                      .WhereIf(!input.Caption.IsNullOrWhiteSpace(),
-                    item => item.Account.Caption.Contains(input.Caption));
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.Account.OrganizationUnitId == input.OrganizationUnitId || item.Account.OrganizationUnitId == null);
 
 
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("Account.AccountNumber ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 
-            return new PagedResultOutput<AccountUnitDto>(resultCount,results.Select(item =>
-                {
-                    var dto = item.Account.MapTo<AccountUnitDto>();
-                    dto.AccountId = item.Account.Id;
-                    return dto;
-                }).ToList());
+            return new PagedResultOutput<AccountUnitDto>(resultCount, results.Select(item =>
+                 {
+                     var dto = item.Account.MapTo<AccountUnitDto>();
+                     dto.AccountId = item.Account.Id;
+                     return dto;
+                 }).ToList());
         }
         /// <summary>
         /// Crating the AccountUnit
@@ -86,26 +86,10 @@ namespace CAPS.CORPACCOUNTING.Accounts
         [UnitOfWork]
         public async Task<AccountUnitDto> CreateAccountUnit(CreateAccountUnitInput input)
         {
-            var accountUnit = new AccountUnit(accountNumber: input.AccountNumber, caption: input.Caption,
-                chartOfAccountId: input.ChartOfAccountId, parentId: input.ParentId,
-                organizationunitid: input.OrganizationId,
-                balanceSheetName: input.BalanceSheetName, cashFlowName: input.CashFlowName,
-                description: input.Description, displaySequence: input.DisplaySequence, isActive: input.IsActive,
-                isApproved: input.IsApproved, isBalanceSheet: input.IsBalanceSheet, isCashFlow: input.IsCashFlow,
-                isDescriptionLocked: input.IsDescriptionLocked, isDocControlled: input.IsDocControlled,
-                isElimination: input.IsElimination, isEnterable: input.IsEnterable, isProfitLoss: input.IsProfitLoss,
-                isRollupAccount: input.IsRollupAccount, isRollupOverridable: input.IsRollupOverridable,
-                isSummaryAccount: input.IsSummaryAccount, isUs1120BalanceSheet: input.IsUs1120BalanceSheet,
-                isUs1120IncomeStmt: input.IsUs1120IncomeStmt, linkAccountId: input.LinkAccountId,
-                linkJobId: input.LinkJobId, profitLossName: input.ProfitLossName, rollupAccountId: input.RollupAccountId,
-                rollupJobId: input.RollupJobId, typeOfAccountId: input.TypeOfAccountId,
-                us1120BalanceSheetName: input.Us1120BalanceSheetName, us1120IncomeStmtName: input.Us1120IncomeStmtName);
-
+            var accountUnit = input.MapTo<AccountUnit>();
             await _accountUnitManager.CreateAsync(accountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
-
             _unitOfWorkManager.Current.Completed += (sender, args) => { };
-
             return accountUnit.MapTo<AccountUnitDto>();
         }
         /// <summary>
@@ -180,7 +164,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             AccountUnitDto result = accountUnit.MapTo<AccountUnitDto>();
             result.AccountId = accountUnit.Id;
             return result;
-                
+
         }
     }
 }

@@ -9,6 +9,8 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -32,11 +34,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public async Task<SalesRepUnitDto> CreateSalesRepUnit(
-            CreateSalesRepUnitInput input)
+        public async Task<SalesRepUnitDto> CreateSalesRepUnit(CreateSalesRepUnitInput input)
         {
-            var salesRepUnit = new SalesRepUnit(lastname:input.LastName,firstname:input.FirstName,region:input.Region,isactive:input.IsActive,
-                organizationunitid:input.OrganizationUnitId);
+            var salesRepUnit = input.MapTo<SalesRepUnit>();
             await _salesRepUnitManager.CreateAsync(salesRepUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             return salesRepUnit.MapTo<SalesRepUnitDto>();
@@ -55,20 +55,24 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<SalesRepUnitDto>> GetSalesRepUnits(GetSalesRepInput input)
+        public async Task<PagedResultOutput<SalesRepUnitDto>> GetSalesRepUnits(SearchInputDto input)
         {
 
             var query =
                 from sr in _salesRepUnitRepository.GetAll()
                 select new {SalesRep = sr};
-            query = query
-                .WhereIf(input.OrganizationUnitId != null,
-                    item => item.SalesRep.OrganizationUnitId == input.OrganizationUnitId);
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.SalesRep.OrganizationUnitId == input.OrganizationUnitId || item.SalesRep.OrganizationUnitId == null);
 
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("SalesRep.LastName ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
+using Abp.AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
+    [AutoMapTo(typeof(CustomerUnit))]
     public class CreateCustomerUnitInput : IInputDto
     {
         /// <summary>Gets or sets the LastName field. </summary>

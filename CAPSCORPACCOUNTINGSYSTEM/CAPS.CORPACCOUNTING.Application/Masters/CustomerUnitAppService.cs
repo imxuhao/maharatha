@@ -9,9 +9,10 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
-using Abp.Extensions;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -50,10 +51,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         [UnitOfWork]
         public async Task<CustomerUnitDto> CreateCustomerUnit(CreateCustomerUnitInput input)
-        {
-            var customerUnit = new CustomerUnit(lastname:input.LastName,firstname:input.FirstName,customernumber:input.CustomerNumber,creditlimit:input.CreditLimit,
-                salesrepid:input.SalesRepId,isapproved:input.IsApproved,isactive:input.IsActive,organizationunitid:input.OrganizationUnitId,
-               customerpaymenttermid:input.CustomerPayTermsId, typeofpaymentmethodid:input.TypeofPaymentMethodId);
+        {         
+            var customerUnit = input.MapTo<CustomerUnit>();
             await _customerUnitManager.CreateAsync(customerUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -95,13 +94,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<CustomerUnitDto>> GetCustomerUnits(GetCustomerInput input)
+        public async Task<PagedResultOutput<CustomerUnitDto>> GetCustomerUnits(SearchInputDto input)
         {
             var query = CreateCustomerQuery(input);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("Customer.LastName ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
             var customerListDtos = ConvertToCustomerDtos(results);
@@ -132,7 +131,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 }).ToList();
         }
 
-        private IQueryable<CustomerAndAddressDto> CreateCustomerQuery(GetCustomerInput input)
+        private IQueryable<CustomerAndAddressDto> CreateCustomerQuery(SearchInputDto input)
         {
             var query = from customer in _customerUnitRepository.GetAll()
                 join addr in _addressRepository.GetAll() on customer.Id equals addr.ObjectId
@@ -153,14 +152,13 @@ namespace CAPS.CORPACCOUNTING.Masters
                         SalesRepName = sr.LastName
                     };
 
-            query = query
-                .WhereIf(input.OrganizationUnitId != null,
-                    item => item.Customer.OrganizationUnitId == input.OrganizationUnitId)
-                .WhereIf(!input.FirstName.IsNullOrWhiteSpace(),
-                    item => item.Customer.FirstName.Contains(input.FirstName))
-                .WhereIf(!input.LastName.IsNullOrWhiteSpace(), item => item.Customer.LastName.Contains(input.LastName))
-                .WhereIf(!input.CustomerNumber.IsNullOrWhiteSpace(),
-                    item => item.Customer.CustomerNumber.Contains(input.CustomerNumber));
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.Customer.OrganizationUnitId == input.OrganizationUnitId || item.Customer.OrganizationUnitId == null);
             return query;
         }
 

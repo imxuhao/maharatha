@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -22,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(GetCoaInput input);
+        Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(SearchInputDto input);
 
         /// <summary>
         /// Update the ChartOfAccoout based on CoaId.

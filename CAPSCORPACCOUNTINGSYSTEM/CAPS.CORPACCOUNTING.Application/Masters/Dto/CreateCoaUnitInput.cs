@@ -1,8 +1,10 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
+    [AutoMapTo(typeof(CoaUnit))]
     public class CreateCoaUnitInput : IInputDto
     {
         /// <summary>Gets or sets the Caption field. </summary>

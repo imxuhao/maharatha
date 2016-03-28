@@ -11,10 +11,9 @@ using System.Linq;
 using System.Data.Entity;
 using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
-using Abp.Extensions;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
-using CAPS.CORPACCOUNTING.Helper;
+using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
@@ -53,26 +52,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<VendorUnitDto> CreateVendorUnit(CreateVendorUnitInput input)
         {
-            var vendorUnit = new VendorUnit(lastname: input.LastName, firstname: input.FirstName,
-                paytoname: input.PayToName, dbaname: input.DbaName, vendornumber: input.VendorNumber,
-                vendoraccountinfo: input.VendorAccountInfo, ssntaxid: input.SSNTaxId, fedraltaxid: input.FedralTaxId,
-                creditlimit: input.CreditLimit, typeofpaymentmethod: input.TypeofPaymentMethod,
-                paymenttermsid: input.PaymentTermsId, typeofcurrency: input.TypeofCurrency,
-                iscorporation: input.IsCorporation, is1099: input.Is1099,
-                isindependentcontractor: input.IsIndependentContractor,
-                isw9Onfile: input.Isw9OnFile, achroutingnumber: input.ACHRoutingNumber,
-                typeofvendorid: input.TypeOFvendorId, typeof1099Box: input.TypeOF1099Box,
-                eddcontractstartdate: input.EDDContractStartDate,
-                eddcontractstopdate: input.EDDContractStopDate, eddconctractamount: input.EDDConctractAmount,
-                workregion: input.WorkRegion, iseddcontractongoing: input.IsEDDContractOnGoing,
-                achbankname: input.ACHBankName, achaccountnumber: input.ACHAccountNumber,
-                achwirefrombankname: input.ACHWireFromBankName, achwirefrombankaddress: input.ACHWireFromBankAddress,
-                achwirefromswiftcode: input.ACHWireFromSwiftCode,
-                achwirefromaccountnumber: input.ACHWireFromAccountNumber, achwiretobankname: input.ACHWireToBankName,
-                achwiretoswiftcode: input.ACHWireToSwiftCode, achwiretobeneficiary: input.ACHWireToBeneficiary,
-                achwiretoaccountnumber: input.ACHWireToAccountNumber,
-                achwiretoiban: input.ACHWireToIBAN, isactive: input.IsActive, isapproved: input.IsApproved,
-                organizationunitid: input.OrganizationUnitId);
+            var vendorUnit = input.MapTo<VendorUnit>();
             await _vendorUnitManager.CreateAsync(vendorUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             if (input.Addresses != null)
@@ -152,13 +132,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(SearchInputDto input)
-        {
-            var query = CreateVendorQuery(input);
-            query = query.WhereIf(input.OrganizationUnitId != null, item => item.Vendor.OrganizationUnitId == input.OrganizationUnitId);
+        {             
+            var query = CreateVendorQuery(input);            
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("Vendor.LastName ASC",input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
             var vendorListDtos = ConvertToVendorDtos(results);
@@ -201,9 +180,11 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             if (!ReferenceEquals(input.Filters, null))
             {
-                SearchTypes mapSearchFilters = Helper.Helper.MappingFilters(input.Filters);
-                query = Helper.Helper.CreateFilters(query, mapSearchFilters);
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
             }
+            query = query.Where(item => item.Vendor.OrganizationUnitId == input.OrganizationUnitId || item.Vendor.OrganizationUnitId == null);
             return query;
         }
 

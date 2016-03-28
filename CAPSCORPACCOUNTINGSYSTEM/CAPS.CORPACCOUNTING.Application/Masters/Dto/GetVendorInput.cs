@@ -1,7 +1,7 @@
 ﻿using Abp.Extensions;
 using Abp.Runtime.Validation;
 using CAPS.CORPACCOUNTING.Dto;
-using CAPS.CORPACCOUNTING.Helper;
+using CAPS.CORPACCOUNTING.Helpers;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -19,7 +19,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
             }
             else
             {
-                Sorting = Helper.Helper.GetSortOrderAsString(SortList);
+                Sorting = Helper.GetSortOrderAsString(SortList);
             }
         }
     }

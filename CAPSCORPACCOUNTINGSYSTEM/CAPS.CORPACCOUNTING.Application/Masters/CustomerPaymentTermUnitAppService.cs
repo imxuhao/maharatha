@@ -9,6 +9,8 @@ using System.Linq;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -28,15 +30,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         }
 
         [UnitOfWork]
-        public async Task<CustomerPaymentTermUnitDto> CreateCustomerPaymentTermUnit(
-            CreateCustomerPaymentTermUnitInput input)
-        {
-            var customerPaymentTermUnit = new CustomerPaymentTermUnit(description: input.Description,
-                duedays: input.DueDays, paymentinstruction: input.PaymentInstruction,
-                discountpercent: input.DiscountPercent, discountdays: input.DiscountDays,
-                overnightinstructions: input.OvernightInstructions, wiringinstructions: input.WiringInstructions,
-                footermessage: input.FooterMessage, logocaption: input.LogoCaption, isdefault: input.IsDefault,
-                organizationid: input.OrganizationUnitId);
+        public async Task<CustomerPaymentTermUnitDto> CreateCustomerPaymentTermUnit(CreateCustomerPaymentTermUnitInput input)
+        {            
+            var customerPaymentTermUnit = input.MapTo<CustomerPaymentTermUnit>();
             await _customerPaymentTermUnitManager.CreateAsync(customerPaymentTermUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             return customerPaymentTermUnit.MapTo<CustomerPaymentTermUnitDto>();
@@ -47,21 +43,24 @@ namespace CAPS.CORPACCOUNTING.Masters
             await _customerPaymentTermUnitManager.DeleteAsync(input.Id);
         }
 
-        public async Task<PagedResultOutput<CustomerPaymentTermUnitDto>> GetCustomerPaymentTermUnits(
-            GetCustomerPaymentTermInput input)
+        public async Task<PagedResultOutput<CustomerPaymentTermUnitDto>> GetCustomerPaymentTermUnits(SearchInputDto input)
         {
             var query =
                 from cpt in _customerPaymentTermUnitRepository.GetAll()
                 select new {CustomerPayTerms = cpt};
 
-            query = query
-                .WhereIf(input.OrganizationUnitId != null,
-                    item => item.CustomerPayTerms.OrganizationUnitId == input.OrganizationUnitId);
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.CustomerPayTerms.OrganizationUnitId == input.OrganizationUnitId || item.CustomerPayTerms.OrganizationUnitId == null);
 
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("CustomerPayTerms.Description ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
             return new PagedResultOutput<CustomerPaymentTermUnitDto>(resultCount, results.Select(item =>

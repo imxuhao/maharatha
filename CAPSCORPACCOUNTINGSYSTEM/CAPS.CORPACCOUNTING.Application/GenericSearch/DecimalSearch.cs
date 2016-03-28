@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 namespace CAPS.CORPACCOUNTING.GenericSearch
@@ -8,20 +7,7 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
     {
         public decimal? SearchTerm { get; set; }
         public decimal? SearchTerm2 { get; set; }
-        public NumericComparators Comparator { get; set; }
-
-        //protected override Expression BuildExpression(MemberExpression property)
-        //{
-        //    if (!this.SearchTerm.HasValue)
-        //    {
-        //        return null;
-        //    }
-
-        //    Expression searchExpression = this.GetFilterExpression(property);
-
-        //    return searchExpression;
-        //}
-
+        public NumericComparators Comparator { get; set; }        
         protected override Expression BuildExpression(MemberExpression property)
         {
             Expression searchExpression1 = null;

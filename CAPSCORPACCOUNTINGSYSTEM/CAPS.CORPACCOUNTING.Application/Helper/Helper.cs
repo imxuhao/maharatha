@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-namespace CAPS.CORPACCOUNTING.Helper
+namespace CAPS.CORPACCOUNTING.Helpers
 {
     public static class Helper
     {
@@ -23,6 +23,17 @@ namespace CAPS.CORPACCOUNTING.Helper
                 sb.Append((sortItem.Entity.Trim().Length > 0 ? (sortItem.Entity + ".") : " ") + sortItem.Property + " " + sortItem.Order + ",");
             }
             return sb.ToString().TrimEnd(',');
+        }
+
+        /// <summary>
+        /// setting defaultsort string if sort is Empty
+        /// </summary>
+        /// <param name="defaultsort"></param>
+        /// <param name="sort"></param>
+        /// <returns></returns>
+        public static string GetSort(string defaultsort,string sort)
+        {
+           return string.IsNullOrEmpty(sort) ? defaultsort : sort;
         }
 
         /// <summary>

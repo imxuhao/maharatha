@@ -12,6 +12,8 @@ using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
 using Abp.Authorization;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -129,29 +131,27 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<JobUnitDto>> GetJobUnits(GetJobInput input)
+        public async Task<PagedResultOutput<JobUnitDto>> GetJobUnits(SearchInputDto input)
         {
             var query = from job in _jobUnitRepository.GetAll().Include(p => p.JobDetails)
                         join emp in _employeeUnitRepository.GetAll() on job.JobDetails.FirstOrDefault().DirectorEmployeeId equals emp.Id
-                                 into temp1
-                        from em in temp1.DefaultIfEmpty()
+                                 into employee
+                        from em in employee.DefaultIfEmpty()
                         join cust in _customerUnitRepository.GetAll() on job.JobDetails.FirstOrDefault().AgencyId equals cust.Id
                                 into tempcust
                         from cs in tempcust.DefaultIfEmpty()
                         select new { Job = job, Director = em.LastName, Agency = cs.LastName };
-            query = query
-                .WhereIf(input.OrganizationUnitId != null, item => item.Job.OrganizationUnitId == input.OrganizationUnitId)
-                .WhereIf(!input.Caption.IsNullOrWhiteSpace(), item => item.Job.Caption.Contains(input.Caption))
-                .WhereIf(!input.ProductName.IsNullOrWhiteSpace(), item => item.Job.JobDetails.FirstOrDefault().ProductName.Contains(input.ProductName))
-                .WhereIf(!input.JobNumber.IsNullOrWhiteSpace(), item => item.Job.JobNumber.Contains(input.JobNumber))
-                .WhereIf(!input.Director.IsNullOrWhiteSpace(), item => item.Director.Contains(input.Director))
-                .WhereIf(!input.Agency.IsNullOrWhiteSpace(), item => item.Agency.Contains(input.Agency))
-                .WhereIf(input.TypeOfJobStatusId != null, item => item.Job.TypeOfJobStatusId == input.TypeOfJobStatusId);
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.Job.OrganizationUnitId == input.OrganizationUnitId || item.Job.OrganizationUnitId == null);
 
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("Job.JobNumber ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 

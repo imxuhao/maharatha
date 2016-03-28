@@ -1,9 +1,11 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
+    [AutoMapTo(typeof(VendorPaymentTermUnit))]
     public class CreateVendorPaymentTermUnitInput : IInputDto
     {
         /// <summary>Gets or sets the Description field.</summary>

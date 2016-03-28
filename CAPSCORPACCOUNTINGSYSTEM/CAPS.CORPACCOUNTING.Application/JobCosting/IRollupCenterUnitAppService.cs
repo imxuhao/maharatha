@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -36,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<RollupCenterUnitDto>> GetRollupCenterUnits(GetRollupCenterInput input);
+        Task<PagedResultOutput<RollupCenterUnitDto>> GetRollupCenterUnits(SearchInputDto input);
 
         /// <summary>
         /// This is used to get the RollupCenter based on RollupCenterId.

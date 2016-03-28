@@ -9,9 +9,10 @@ using Abp.Domain.Uow;
 using Abp.Events.Bus;
 using Abp.Events.Bus.Entities;
 using CAPS.CORPACCOUNTING.Masters.Dto;
-using Abp.Extensions;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -38,24 +39,24 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(GetCoaInput input)
+        public async Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(SearchInputDto input)
         {
 
             var query =
                 from au in _coaUnitRepository.GetAll()
-                select new {Coa = au};
-            query = query
-                .WhereIf(input.OrganizationUnitId != null,
-                    item => item.Coa.OrganizationUnitId == input.OrganizationUnitId)
-                .WhereIf(!input.Description.IsNullOrWhiteSpace(),
-                    item => item.Coa.Description.Contains(input.Description))
-                .WhereIf(input.ChartofAccountsType != null,
-                    item => item.Coa.ChartofAccountsType == input.ChartofAccountsType);
+                select new { Coa = au };
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.Coa.OrganizationUnitId == input.OrganizationUnitId || item.Coa.OrganizationUnitId == null);
 
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("Coa.Description ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
             return new PagedResultOutput<CoaUnitDto>(resultCount, results.Select(item =>
@@ -65,6 +66,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 return dto;
             }).ToList());
         }
+      
         /// <summary>
         /// Creating COAUnit
         /// </summary>
@@ -74,8 +76,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
         {
-            var coaUnit = new CoaUnit(caption: input.Caption, chartofaccounttype: input.ChartofAccountsType, organizationid: input.OrganizationId, desc: input.Description,
-                displaysequence: input.DisplaySequence, isactive: input.IsActive, isapproved: input.IsApproved, isprivate: input.IsPrivate);
+            //var coaUnit = new CoaUnit(caption: input.Caption, chartofaccounttype: input.ChartofAccountsType, organizationid: input.OrganizationId, desc: input.Description,
+            //    displaysequence: input.DisplaySequence, isactive: input.IsActive, isapproved: input.IsApproved, isprivate: input.IsPrivate);
+            var coaUnit = input.MapTo<CoaUnit>();
             await _coaunitManager.CreateAsync(coaUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 

@@ -11,6 +11,8 @@ using System.Linq;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Helpers;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -38,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<VendorPaymentTermUnitDto> CreateVendorPaymentTermUnit(CreateVendorPaymentTermUnitInput input)
         {
-            var vendorPaymentTermUnit = new VendorPaymentTermUnit(description:input.Description,duedays:input.DueDays,discountdays:input.DiscountDays,isactive:input.IsActive,organizationid:input.OrganizationUnitId);
+            var vendorPaymentTermUnit = input.MapTo<VendorPaymentTermUnit>();
             await _vendorPaymentTermUnitManager.CreateAsync(vendorPaymentTermUnit);
             await   CurrentUnitOfWork.SaveChangesAsync();
 
@@ -74,19 +76,24 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(GetVendorPayTermsInput input)
+        public async Task<PagedResultOutput<VendorPaymentTermUnitDto>> GetVendorPaymentTermUnits(SearchInputDto input)
         {
             var query =
                 from vpt in _vendorPaymentTermUnitRepository.GetAll()
                 select new { VendorPayTerms=vpt };
-            query = query
-               .WhereIf(input.OrganizationUnitId != null,
-                   item => item.VendorPayTerms.OrganizationUnitId == input.OrganizationUnitId);
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.VendorPayTerms.OrganizationUnitId == input.OrganizationUnitId || item.VendorPayTerms.OrganizationUnitId == null);
 
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("VendorPayTerms.Description ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
             return new PagedResultOutput<VendorPaymentTermUnitDto>(resultCount, results.Select(item =>

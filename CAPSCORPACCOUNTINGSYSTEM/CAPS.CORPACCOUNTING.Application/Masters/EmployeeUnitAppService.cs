@@ -9,9 +9,10 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
-using Abp.Extensions;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Helpers;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -58,15 +59,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         [UnitOfWork]
         public async Task<EmployeeUnitDto> CreateEmployeeUnit(CreateEmployeeUnitInput input)
-        {
-            var employeeUnit = new EmployeeUnit(lastname: input.LastName, firstname: input.FirstName,
-                ssntaxid: input.SSNTaxId, employeeregion: input.EmployeeRegion, federaltaxid: input.FederalTaxId,
-                is1099: input.Is1099, isw9Onfile: input.IsW9OnFile,
-                isindependantcontractor: input.IsIndependantContractor, iscorporation: input.IsCorporation,
-                isproducer: input.IsProducer, isdirector: input.IsDirector, isdirphoto: input.IsDirPhoto,
-                issetdesigner: input.IsSetDesigner,
-                iseditor: input.IsEditor, isartdirector: input.IsArtDirector, isactive: input.IsActive,
-                isapproved: input.IsApproved, organizationunitid: input.OrganizationUnitId);
+        {           
+            var employeeUnit = input.MapTo<EmployeeUnit>();
             await _employeeUnitManager.CreateAsync(employeeUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -93,13 +87,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<EmployeeUnitDto>> GetEmployeeUnits(GetEmployeeInput input)
+        public async Task<PagedResultOutput<EmployeeUnitDto>> GetEmployeeUnits(SearchInputDto input)
         {
             var query = CreateEmployeeQuery(input);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("Employee.LastName ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
             var employeeListDtos = ConvertToEmployeeDtos(results);
@@ -128,7 +122,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 }).ToList();
         }
 
-        private IQueryable<EmployeeAndAddressDto> CreateEmployeeQuery(GetEmployeeInput input)
+        private IQueryable<EmployeeAndAddressDto> CreateEmployeeQuery(SearchInputDto input)
         {
             var query = from emp in _employeeUnitRepository.GetAll()
                         join addr in _addressUnitRepository.GetAll() on emp.Id equals addr.ObjectId
@@ -136,16 +130,13 @@ namespace CAPS.CORPACCOUNTING.Masters
                         from adrs in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Emp).DefaultIfEmpty()
                         select new EmployeeAndAddressDto { Employee = emp, Address = adrs };
 
-            query = query
-                .WhereIf(input.OrganizationUnitId != null,
-                    item => item.Employee.OrganizationUnitId == input.OrganizationUnitId)
-                .WhereIf(!input.FirstName.IsNullOrWhiteSpace(),
-                    item => item.Employee.FirstName.Contains(input.FirstName))
-                .WhereIf(!input.LastName.IsNullOrWhiteSpace(), item => item.Employee.LastName.Contains(input.LastName))
-                .WhereIf(!input.SSNTaxId.IsNullOrWhiteSpace(), item => item.Employee.SSNTaxId.Contains(input.SSNTaxId))
-                .WhereIf(!input.FedralTaxId.IsNullOrWhiteSpace(),
-                    item => item.Employee.FederalTaxId.Contains(input.FedralTaxId));
-                
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.Employee.OrganizationUnitId == input.OrganizationUnitId || item.Employee.OrganizationUnitId == null);
             return query;
         }
 

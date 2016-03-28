@@ -28,11 +28,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<AddressUnitDto> CreateAddressUnit(CreateAddressUnitInput input)
         {
-            var addressUnit = new AddressUnit(objectid: input.ObjectId, typeofobjectid: input.TypeofObjectId, addresstypeid: input.AddressTypeId,
-                contactnumber: input.ContactNumber, line1: input.Line1, line2: input.Line2, fax: input.Fax, line3: input.Line3, line4: input.Line4,
-                city: input.City, state: input.State, country: input.Country, postalcode: input.PostalCode, email: input.Email, phone1: input.Phone1,
-                phone2: input.Phone2, phone1Extension: input.Phone1Extension, phone2Extension: input.Phone2Extension, website: input.Website,
-                isprimary: input.IsPrimary, organizationunitid: input.OrganizationUnitId);
+            var addressUnit = input.MapTo<AddressUnit>();
             await _addressUnitManager.CreateAsync(addressUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             return addressUnit.MapTo<AddressUnitDto>();
@@ -45,12 +41,9 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task<ListResultOutput<AddressUnitDto>> GetAddressUnits(GetAddressUnitInput input)
         {
-            var query =
-                _addressUnitRepository.GetAll()
-                    .Where(
-                        au =>
-                            au.TypeofObjectId == input.TypeofObjectId &&
-                            (input.OrganizationUnitId == null || au.OrganizationUnitId == input.OrganizationUnitId))
+            var query = _addressUnitRepository.GetAll()
+                    .Where(au => au.TypeofObjectId == input.TypeofObjectId
+                    && (input.OrganizationUnitId == null || au.OrganizationUnitId == input.OrganizationUnitId))
                     .Select(au => new { au });
             var items = await query.ToListAsync();
 
@@ -65,6 +58,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task<AddressUnitDto> UpdateAddressUnit(UpdateAddressUnitInput input)
         {
+            
             var addressUnit = await _addressUnitRepository.GetAsync(input.AddressId);
 
             #region Setting the values to be updated

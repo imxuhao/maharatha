@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Abp.Runtime.Validation;
 using CAPS.CORPACCOUNTING.Dto;
-using CAPS.CORPACCOUNTING.Helper;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.GenericSearch.Dto
 {
@@ -15,7 +15,7 @@ namespace CAPS.CORPACCOUNTING.GenericSearch.Dto
         {
             if (!ReferenceEquals(SortList, null))
             {
-                Sorting = Helper.Helper.GetSortOrderAsString(SortList);
+                Sorting = Helper.GetSortOrderAsString(SortList);
             }
         }
     }

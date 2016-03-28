@@ -9,6 +9,8 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Helpers;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -31,8 +33,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task<RollupCenterUnitDto> CreateRollupCenterUnit(CreateRollupCenterUnitInput input)
         {
-            var rollupCenter = new RollupCenterUnit(caption: input.Caption, accountid: input.AccountId, jobid: input.JobId, isactive: input.IsActive, isapproved: input.IsApproved,
-                rolluptypeid: input.RollupTypeId, organizationunitid: input.OrganizationUnitId);
+            var rollupCenter = input.MapTo<RollupCenterUnit>();
             await _rollupCenterUnitManager.CreateAsync(rollupCenter);
             await CurrentUnitOfWork.SaveChangesAsync();
             return rollupCenter.MapTo<RollupCenterUnitDto>();
@@ -86,22 +87,21 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<RollupCenterUnitDto>> GetRollupCenterUnits(GetRollupCenterInput input)
+        public async Task<PagedResultOutput<RollupCenterUnitDto>> GetRollupCenterUnits(SearchInputDto input)
         {
             var query =from rc in _rollupCenterUnitRepository.GetAll()                
                 select new { RollupCenter = rc };
-            query = query
-                .WhereIf(input.OrganizationUnitId != null,
-                    item => item.RollupCenter.OrganizationUnitId == input.OrganizationUnitId)
-                .WhereIf(input.Caption != null,
-                    item => item.RollupCenter.Caption.Contains(input.Caption))
-                .WhereIf(input.RollupTypeId != null,
-                    item => item.RollupCenter.RollupTypeId == input.RollupTypeId);
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.RollupCenter.OrganizationUnitId == input.OrganizationUnitId || item.RollupCenter.OrganizationUnitId == null);
 
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("RollupCenter.Caption ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 

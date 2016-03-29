@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -53,8 +54,14 @@ namespace CAPS.CORPACCOUNTING.Web
                 configuration.GlobalConfiguration.UseSqlServerStorage("Default");
             });
 
-            //Uncomment this line to use Redis cache instead of in-memory cache.
+            //Comment this line to not use Redis cache instead of in-memory cache.
             //Configuration.Caching.UseRedis();
+
+            //Set the Caching Time as 2 hours
+            Configuration.Caching.ConfigureAll(cache =>
+            {
+                cache.DefaultSlidingExpireTime = TimeSpan.FromHours(2);
+            });
         }
 
         public override void Initialize()

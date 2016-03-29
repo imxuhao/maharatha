@@ -5,6 +5,7 @@ using Abp.Authorization.Users;
 using Abp.Extensions;
 using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
+using CAPS.CORPACCOUNTING.Masters;
 using Microsoft.AspNet.Identity;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 
@@ -51,6 +52,9 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         }
 
         
+        public long? DefaultOrganizationId { get; set; }
+
+        [ForeignKey("DefaultOrganizationId")]
         public OrganizationUnit  DefaultOrganization { get; set; }
     }
 }

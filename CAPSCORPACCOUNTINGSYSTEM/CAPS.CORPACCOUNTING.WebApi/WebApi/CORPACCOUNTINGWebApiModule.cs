@@ -10,6 +10,7 @@ using Abp.WebApi;
 using Abp.WebApi.Controllers.Dynamic.Builders;
 using Abp.WebApi.OData;
 using Abp.WebApi.OData.Configuration;
+using CAPS.CORPACCOUNTING.Masters;
 using Swashbuckle.Application;
 
 namespace CAPS.CORPACCOUNTING.WebApi
@@ -52,6 +53,7 @@ namespace CAPS.CORPACCOUNTING.WebApi
 
             //Configure your entities here... see documentation: http://www.aspnetboilerplate.com/Pages/Documents/OData-Integration
             //builder.EntitySet<YourEntity>("YourEntities");
+            builder.EntitySet<CoaUnit>("COA");
         }
 
         private void ConfigureSwaggerUi()

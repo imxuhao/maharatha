@@ -175,6 +175,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             }
 
+            identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId)));
+
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = rememberMe }, identity);
         }

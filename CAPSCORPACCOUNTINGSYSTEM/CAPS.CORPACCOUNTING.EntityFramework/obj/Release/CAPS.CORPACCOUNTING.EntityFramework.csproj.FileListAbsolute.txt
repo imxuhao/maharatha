@@ -474,3 +474,4 @@ C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.EntityFramework.dll
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.EntityFramework.pdb
 C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.Modify_AddressUnit_Table.resources
+C:\Source Code\ChaChingDEV\CAPS.CORPACCOUNTING.EntityFramework\obj\Release\CAPS.CORPACCOUNTING.Migrations.Update_User_OrganizationID.resources

@@ -9,5 +9,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
         Task<HostSettingsEditDto> GetAllSettings();
 
         Task UpdateAllSettings(HostSettingsEditDto input);
+
+        Task SendTestEmail(SendTestEmailInput input);
     }
 }

@@ -1,8 +1,8 @@
 ﻿(function () {
 
     appModule.controller('common.views.auditLogs.index', [
-        '$scope', '$modal', 'uiGridConstants', 'abp.services.app.auditLog',
-        function ($scope, $modal, uiGridConstants, auditLogService) {
+        '$scope', '$uibModal', 'uiGridConstants', 'abp.services.app.auditLog',
+        function ($scope, $uibModal, uiGridConstants, auditLogService) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -151,7 +151,7 @@
             };
 
             vm.showDetails = function (auditLog) {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: '~/App/common/views/auditLogs/detailModal.cshtml',
                     controller: 'common.views.auditLogs.detailModal as vm',
                     backdrop: 'static',

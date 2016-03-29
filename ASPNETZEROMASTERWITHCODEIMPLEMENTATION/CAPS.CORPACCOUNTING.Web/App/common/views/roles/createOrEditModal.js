@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.roles.createOrEditModal', [
-        '$scope', '$modalInstance', 'abp.services.app.role', 'roleId',
-        function ($scope, $modalInstance, roleService, roleId) {
+        '$scope', '$uibModalInstance', 'abp.services.app.role', 'roleId',
+        function ($scope, $uibModalInstance, roleService, roleId) {
             var vm = this;
 
             vm.saving = false;
@@ -15,14 +15,14 @@
                     grantedPermissionNames: vm.permissionEditData.grantedPermissionNames
                 }).success(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    $modalInstance.close();
+                    $uibModalInstance.close();
                 }).finally(function() {
                     vm.saving = false;
                 });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             function init() {

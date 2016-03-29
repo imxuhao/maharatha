@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.profile.changePassword', [
-        '$scope', 'appSession', '$modalInstance', 'abp.services.app.profile',
-        function ($scope, appSession, $modalInstance, profileService) {
+        '$scope', 'appSession', '$uibModalInstance', 'abp.services.app.profile',
+        function ($scope, appSession, $uibModalInstance, profileService) {
             var vm = this;
 
             vm.saving = false;
@@ -12,14 +12,14 @@
                 profileService.changePassword(vm.passwordInfo)
                     .success(function () {
                         abp.notify.info(app.localize('YourPasswordHasChangedSuccessfully'));
-                        $modalInstance.close();
+                        $uibModalInstance.close();
                     }).finally(function () {
                         vm.saving = false;
                     });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
         }
     ]);

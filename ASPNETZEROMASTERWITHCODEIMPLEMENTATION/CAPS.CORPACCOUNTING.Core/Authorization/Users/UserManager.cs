@@ -33,7 +33,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             ICacheManager cacheManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
             IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
-            IOrganizationUnitSettings organizationUnitSettings)
+            IOrganizationUnitSettings organizationUnitSettings,
+            IRepository<UserLoginAttempt, long> userLoginAttemptRepository)
             : base(
                 userStore,
                 roleManager,
@@ -47,7 +48,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 cacheManager,
                 organizationUnitRepository,
                 userOrganizationUnitRepository,
-                organizationUnitSettings)
+                organizationUnitSettings,
+                userLoginAttemptRepository)
         {
 
         }

@@ -78,20 +78,32 @@ var Layout = function() {
         var slideSpeed = parseInt(menu.data("slide-speed"));
         var keepExpand = menu.data("keep-expanded");
 
-        // disable active states
-        menu.find('li.active').removeClass('active');
-        menu.find('li > a > .selected').remove();
-
+        // begin: handle active state
         if (menu.hasClass('page-sidebar-menu-hover-submenu') === false) {
-            menu.find('li.open').each(function(){
-                if ($(this).children('.sub-menu').size() === 0) {
-                    $(this).removeClass('open');
-                    $(this).find('> a > .arrow.open').removeClass('open');
-                }                             
-            }); 
+            menu.find('li.nav-item.open').each(function() {
+                var match = false;
+                $(this).find('li').each(function(){
+                    if ($(this).find(' > a').attr('href') === el.attr('href')) {
+                        match = true;
+                        return;
+                    }
+                });
+
+                if (match === true) {
+                    return;
+                }
+
+                $(this).removeClass('open');
+                $(this).find('> a > .arrow.open').removeClass('open');
+                $(this).find('> .sub-menu').slideUp();
+            });  
         } else {
              menu.find('li.open').removeClass('open');
         }
+
+        menu.find('li.active').removeClass('active');
+        menu.find('li > a > .selected').remove();
+        // end: handle active state
 
         el.parents('li').each(function () {
             $(this).addClass('active');
@@ -127,11 +139,7 @@ var Layout = function() {
                 }
                 return;
             }
-
-            if ($(this).next().hasClass('sub-menu always-open')) {
-                return;
-            }
-
+            
             var parent = $(this).parent().parent();
             var the = $(this);
             var menu = $('.page-sidebar-menu');

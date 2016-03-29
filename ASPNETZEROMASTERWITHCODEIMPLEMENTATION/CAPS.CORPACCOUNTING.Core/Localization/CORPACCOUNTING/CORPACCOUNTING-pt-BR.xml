@@ -147,9 +147,9 @@
     <text name="ExportToExcel" value="Exportar para excel" />
     <text name="ChangeProfilePicture" value="Mudar a foto do perfil" />
     <text name="TenantName_Regex_Description" value="Nome de instância deve ter no mínimo 2 caracteres, começa com uma letra e continuar com letra, número, traço ou sublinhado." />
-    <text name="ProfilePicture_Change_Info" value="Você pode selecionar um arquivo JPG / JPEG com um tamanho máximo de 30KB." />
+    <text name="ProfilePicture_Change_Info" value="Você pode selecionar um arquivo JPG / JPEG / PNG com um tamanho máximo de 1MB." />
     <text name="ProfilePicture_Change_Error" value="Sua imagem de perfil não pode ser alterada." />
-    <text name="ProfilePicture_Warn_SizeLimit" value="O tamanho da imagem deve ser menor que 30KB. Por favor, selecione outro arquivo." />
+    <text name="ProfilePicture_Warn_SizeLimit" value="O tamanho da imagem deve ser menor que 1MB. Por favor, selecione outro arquivo." />
     <text name="ProfilePicture_Warn_FileType" value="Você só pode selecionar o arquivo JPG / JPEG. Por favor, selecione outro arquivo." />
     <text name="Dashboard" value="Dashboard" />
     <text name="DashboardHeaderInfo" value="estatísticas e relatórios" />
@@ -281,5 +281,69 @@
     <text name="LookingForMpaVersion" value="Procurando pela versão Multi-Page da aplicação?" />
     <text name="LookingForSpaVersion" value="Procurando pela versão Single-Page da aplicação?" />
     <text name="ThisLanguageAlreadyExists" value="Essa linguagem já existe!" />
+    <text name="OrganizationUnits" value="Unidades organizacionais"/>
+    <text name="OrganizationUnitsHeaderInfo" value="Use as unidades organizacionais para organizar membros e entidades"/>
+    <text name="OrganizationTree" value="Árvore Organizacional"/>
+    <text name="Members" value="Membros"/>
+    <text name="SelectAnOrganizationUnitToSeeMembers" value="Seleciona uma unidade organizacional para ver seus membros"/>
+    <text name="OrganizationUnitDeleteWarningMessage" value="Você tem certeza que deseja deletar a unidade organizacional {0}?"/>
+    <text name="AddSubUnit" value="Adicionar sub-unidade"/>
+    <text name="AddMember" value="Adicionar membro"/>
+    <text name="SuccessfullyAdded" value="Adicionado com sucesso"/>
+    <text name="RemoveUserFromOuWarningMessage" value="Você tem certeza que deseja remover o usuário {0} da unidade {1}?"/>
+    <text name="SuccessfullyRemoved" value="Removido com sucesso"/>
+    <text name="SelectAnItem" value="Selecione um item"/>
+    <text name="NewOrganizationUnit" value="Nova unidade organizacional"/>
+    <text name="SelectAUser" value="Selecione um usuário"/>
+    <text name="Select" value="Selecione"/>
+    <text name="UserIsAlreadyInTheOrganizationUnit" value="Este usuário já pertence à esta unidade organizacional"/>
+    <text name="AddRootUnit" value="Adicionar unidade raíz"/>
+    <text name="AddUser" value="Adicionar usuário"/>
+    <text name="NoOrganizationUnitDefinedYet" value="Nenhuma unidade organizacional definida ainda."/>
+    <text name="OrganizationUnitMoveConfirmMessage" value="Por favor confirme para mover de {0} para {1}."/>
+    <text name="Root" value="Raíz"/>
+    <text name="SuccessfullyMoved" value="Movido com sucesso"/>
+    <text name="AddedTime" value="Data de Adição"/>
+    <text name="ManagingMembers" value="Gerenciando Membros"/>
+    <text name="ManagingOrganizationTree" value="Gerenciando árvore organizacional"/>
+    <text name="LoginForUsers" value="Login para usuários"/>
+    <text name="LoginAsThisUser" value="Logar como esse usuário"/>
+    <text name="BackToMyAccount" value="Voltar para minha conta"/>
+    <text name="LoginForTenants" value="Login para instâncias"/>
+    <text name="LoginAsThisTenant" value="Logar como esta instância"/>
+    <text name="AuditLogImpersonatedOperationInfo" value="Observação: Esta operação é executada por outro usuário em nome do presente usuário." />
+    <text name="CustomData" value="Dados customizados" />
+    <text name="None" value="Nenhum" />
+    <text name="YouCanBackToYourAccount" value="Você pode voltar para sua conta aqui." />
+    <text name="CascadeImpersonationErrorMessage" value="Não foi possível realizar login. Você já está em um login de outro usuário!" />
+    <text name="FromTenantToHostImpersonationErrorMessage" value="Não é possível logar um usuário hospedeiro com um usuário de instância!" />
+    <text name="DifferentTenantImpersonationErrorMessage" value="Não é possível logar com um usuário de uma instância diferente!" />
+    <text name="ImpersonationTokenErrorMessage" value="Token de login para outro usuário é inválido ou está expirado!" />
+    <text name="NotImpersonatedLoginErrorMessage" value="Este não é um login como outro usuário!" />
+    <text name="YouCannotLinkToSameAccount">Você não pode ligar as mesmas contas!</text>
+    <text name="ChangePasswordBeforeLinkToAnAccount">Você deve mudar sua senha antes de ligar esta conta de usuário a sua!</text>
+    <text name="LinkedAccounts">Contas de usuários ligadas</text>
+    <text name="ManageAccounts">Gerenciar contas</text>
+    <text name="LinkNewAccount">Ligar nova conta de usuário</text>
+    <text name="SuccessfullyUnlinked">Desligado com sucesso</text>
+    <text name="LinkedUserDeleteWarningMessage">O ligamento com o usuário {0} vai ser deletado.</text>
+    <text name="SwitchToLinkedAccountTokenErrorMessage" value="Token de login para outro usuário é inválido ou está expirado!" />
+    <text name="WelcomeToTheApplicationNotificationMessage" value="Bem vindo à Bexcell! O sistema de notificação é usado para te informar de eventos de seu interesse. Você pode selecionar quais tipos de notificação você deseja receber na configuração de notificações." />
+    <text name="NewUserRegisteredNotificationDefinition" value="Quando um novo usuário for registrado no sistema." />
+    <text name="NewUserRegisteredNotificationMessage" value="Um novo usuário foi registrado no sistema. Login {userName}, Email: {emailAddress}." />
+    <text name="SeeAllNotifications" value="Ver todas as notificações" />
+    <text name="SetAsRead" value="marcar como lida" />
+    <text name="SetAllAsRead" value="Marcar todas como lidas" />
+    <text name="NotificationSettings" value="Configurações de notificação" />
+    <text name="ReceiveNotifications" value="Receber notificação" />
+    <text name="ReceiveNotifications_Definition" value="Esta opção pode ser usada para desligar/ligar completamente o recebimento de notificações." />
+    <text name="NotificationTypes" value="Tipos de notificação" />
+    <text name="ReceiveNotifications_DisableInfo" value="Você desabilitou o recebimento de todas notificações. Você pode rehabilitar e selecionar quais os tipos de notificação deseja receber." />
+    <text name="Notifications" value="Notificações" />
+    <text name="ThereIsNoNotification" value="Não existem notificações." />
+    <text name="Unread" value="Não lida" />
+    <text name="YouCanNotDeleteOwnAccount" value="Você não pode deletar sua própria conta de usuário!" />
+    <text name="On" value="Ligado" />
+    <text name="Off" value="Desligado" />`
   </texts>
 </localizationDictionary>

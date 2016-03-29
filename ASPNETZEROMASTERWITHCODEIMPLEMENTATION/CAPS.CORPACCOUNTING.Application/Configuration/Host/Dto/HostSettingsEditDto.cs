@@ -13,5 +13,9 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
 
         [Required]
         public EmailSettingsEditDto Email { get; set; }
+
+        [Required]
+        public TenantManagementSettingsEditDto TenantManagement { get; set; }
+
     }
 }

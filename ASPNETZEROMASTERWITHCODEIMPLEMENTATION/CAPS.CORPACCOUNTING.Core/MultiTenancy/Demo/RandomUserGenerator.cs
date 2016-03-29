@@ -107,7 +107,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Demo
                 Name = nameSurname.Split(' ')[0],
                 Surname = nameSurname.Split(' ')[1],
                 ShouldChangePasswordOnNextLogin = false,
-                IsActive = RandomHelper.GetRandomOf(true, false),
+                IsActive = (RandomHelper.GetRandom(0, 100) < 80), //A user will be active by 80% probability
                 IsEmailConfirmed = true
             };
         }

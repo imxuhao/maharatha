@@ -11,6 +11,14 @@ namespace CAPS.CORPACCOUNTING.Configuration
             public const string WebSiteRootAddress = "App.General.WebSiteRootAddress";
         }
 
+        public static class TenantManagement
+        {
+            public const string AllowSelfRegistration = "App.TenantManagement.AllowSelfRegistration";
+            public const string IsNewRegisteredTenantActiveByDefault = "App.TenantManagement.IsNewRegisteredTenantActiveByDefault";
+            public const string UseCaptchaOnRegistration = "App.TenantManagement.UseCaptchaOnRegistration";
+            public const string DefaultEdition = "App.TenantManagement.DefaultEdition";
+        }
+
         public static class UserManagement
         {
             public const string AllowSelfRegistration = "App.UserManagement.AllowSelfRegistration";

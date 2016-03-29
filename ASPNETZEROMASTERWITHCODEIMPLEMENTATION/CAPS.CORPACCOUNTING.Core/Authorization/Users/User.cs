@@ -17,6 +17,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
 
         public virtual bool ShouldChangePasswordOnNextLogin { get; set; }
         
+        public virtual long? UserLinkId { get; set; }
+
         /// <summary>
         /// Creates admin <see cref="User"/> for a tenant.
         /// </summary>

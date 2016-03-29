@@ -1,8 +1,8 @@
 ﻿(function () {
 
     appModule.controller('host.views.editions.index', [
-        '$scope', '$modal', 'uiGridConstants', 'abp.services.app.edition',
-        function ($scope, $modal, uiGridConstants, editionService) {
+        '$scope', '$uibModal', 'uiGridConstants', 'abp.services.app.edition',
+        function ($scope, $uibModal, uiGridConstants, editionService) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -27,9 +27,9 @@
                         width: 120,
                         cellTemplate:
                             '<div class=\"ui-grid-cell-contents\">' +
-                            '  <div class="btn-group dropdown" dropdown="">' +
-                            '    <button class="btn btn-xs btn-primary blue" dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
-                            '    <ul class="dropdown-menu">' +
+                            '  <div class="btn-group dropdown" uib-dropdown="">' +
+                            '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
+                            '    <ul uib-dropdown-menu>' +
                             '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editEdition(row.entity)">' + app.localize('Edit') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.delete" ng-click="grid.appScope.deleteEdition(row.entity)">' + app.localize('Delete') + '</a></li>' +
                             '    </ul>' +
@@ -59,7 +59,7 @@
             };
 
             function openCreateOrEditEditionModal(editionId) {
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                     templateUrl: '~/App/host/views/editions/createOrEditModal.cshtml',
                     controller: 'host.views.editions.createOrEditModal as vm',
                     backdrop: 'static',

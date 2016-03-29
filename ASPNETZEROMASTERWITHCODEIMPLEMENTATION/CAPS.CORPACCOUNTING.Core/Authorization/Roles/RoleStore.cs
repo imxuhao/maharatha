@@ -13,10 +13,9 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
             IRepository<UserRole, long> userRoleRepository,
             IRepository<RolePermissionSetting, long> rolePermissionSettingRepository)
             : base(
-            roleRepository,
-            userRoleRepository,
-            rolePermissionSettingRepository
-            )
+                roleRepository,
+                userRoleRepository,
+                rolePermissionSettingRepository)
         {
 
         }

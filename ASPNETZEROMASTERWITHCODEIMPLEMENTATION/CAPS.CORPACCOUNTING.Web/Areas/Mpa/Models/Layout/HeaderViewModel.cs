@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Layout
         public LanguageInfo CurrentLanguage { get; set; }
 
         public bool IsMultiTenancyEnabled { get; set; }
-        
+
         public bool IsImpersonatedLogin { get; set; }
 
         public string GetShownLoginName()

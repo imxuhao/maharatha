@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="ar">
   <texts>
-    <text name="HomePage">الصفحة الرئيسية</text>
+    <text name="HomePage">الرئيسية</text>
     <text name="AboutUs">من نحن</text>
     <text name="Administration">الإدارة</text>
     <text name="Roles">الأدوار</text>
@@ -27,9 +27,9 @@
     <text name="RoleProperties">خصائص الدور</text>
     <text name="Permissions">إذونات</text>
     <text name="Save">حـفظ</text>
-    <text name="Cancel">إلغاء</text>
+    <text name="Cancel">إغلاق</text>
     <text name="RolesHeaderInfo">إستخدم الأدوار لإنشاء مجموعة إذونات</text>
-    <text name="Static">مـثبت</text>
+    <text name="Static">مـثبّت</text>
     <text name="Actions">إجراءات</text>
     <text name="Delete">حـذف</text>
     <text name="SavedSuccessfully">تم الحفظ بنجاح.</text>
@@ -39,7 +39,7 @@
     <text name="UsersHeaderInfo">إدارة المستخدمين و الإذونات</text>
     <text name="CreateNewUser">إنشاء مستخدم جديد</text>
     <text name="UserName">اسم المستخدم</text>
-    <text name="Name">الإسم الأول</text>
+    <text name="Name">الإسـم</text>
     <text name="Surname">الإسم الأخير</text>
     <text name="EmailAddress">البريد الإلكتروني</text>
     <text name="LastLoginTime">آخر تسجيل الدخول</text>
@@ -78,7 +78,7 @@
     <text name="EditingRole"> تحرير الدور</text>
     <text name="CreatingNewRole"> إنشاء دور جديد</text>
     <text name="DeletingRole"> حذف الدور</text>
-    <text name="CreationTime">وقت الإنشاء</text>
+    <text name="CreationTime">الإنشاء</text>
     <text name="SearchWithThreeDot">بـحث...</text>
     <text name="ResetSpecialPermissions">مسح الإذونات الخاصة</text>
     <text name="SavingWithThreeDot">حـفظ...</text>
@@ -117,7 +117,7 @@
     <text name="InvalidEmailConfirmationCode">رمز تأكيد البريد الإلكتروني غير صحيح</text>
     <text name="InvalidEmailConfirmationCode_Detail">من فضلك تأكد من دخول هذه الصفحة بالضغط على الرابط المرسل إلى بريدك الإلكتروني. إذا كان هذا لا يحل المشكلة، يمكنك محاولة إعادة إرسال رمز التأكيد من جديد.</text>
     <text name="YourEmailIsConfirmedMessage">تم تأكيد بريدك الإلكتروني بنجاح</text>
-    <text name="ShouldChangePasswordOnNextLogin">يجب تغيير كلمة المرور عند تسجيل الدخول المقبل</text>
+    <text name="ShouldChangePasswordOnNextLogin">يجب تغيير كلمة المرور عند تسجيل الدخول المقبل.</text>
     <text name="SetRandomPassword">تعيين كلمة مرور عشوائية.</text>
     <text name="EmailActivation">تفعيل البريد الإلكتروني</text>
     <text name="SendEmailActivationLink_Information">سيتم إرسال رابط تأكيد بريدك الإلكتروني. إذا لم يصلك البريد الإلكتروني في غضون بضع دقائق, الرجاء أعد المحاولة.</text>
@@ -147,9 +147,9 @@
     <text name="ExportToExcel">تصدير إلى إكسل - Excel</text>
     <text name="ChangeProfilePicture">تغيير الصورة الشخصية</text>
     <text name="TenantName_Regex_Description">يجب أن يكون اسم العميل على الأقل حرفين ويبدأ بحرف ومن ثم : حرف أو رقم أو شرطه أو شرطه سفلية.</text>
-    <text name="ProfilePicture_Change_Info">يمكنك إختيار ملف JPG/JPEG وبحد أقصى للحجم 30 كيلوبايت  </text>
+    <text name="ProfilePicture_Change_Info">يمكنك إختيار ملف JPG/JPEG/PNG وبحد أقصى للحجم 1024 كيلوبايت  </text>
     <text name="ProfilePicture_Change_Error">تعذّر تغيير صورة ملفك الشخصي</text>
-    <text name="ProfilePicture_Warn_SizeLimit">يجب أن يكون حجم الصورة أصغر من 30 كيلوبايت يرجى تحديد ملف آخر</text>
+    <text name="ProfilePicture_Warn_SizeLimit">يجب أن يكون حجم الصورة أصغر من 1024 كيلوبايت يرجى تحديد ملف آخر</text>
     <text name="ProfilePicture_Warn_FileType">  يرجى تحديد ملف آخر  JPG / JPEG  يمكنك فقط اختيار ملف</text>
     <text name="Dashboard">لوحة القيادة</text>
     <text name="DashboardHeaderInfo">الإحصاءات والتقارير</text>
@@ -185,10 +185,10 @@
     <text name="Success">نجاح</text>
     <text name="Time">وقت</text>
     <text name="Service">خدمة</text>
-    <text name="Action">حركة</text>
-    <text name="Duration">المدة الزمنية</text>
+    <text name="Action">إجراء</text>
+    <text name="Duration">المدة</text>
     <text name="IpAddress">عنوان IP</text>
-    <text name="Client">زبون</text>
+    <text name="Client">زائر</text>
     <text name="Browser">المتصفح</text>
     <text name="Xms">{0} جزء ث.</text>
     <text name="Close">إغلاق</text>
@@ -225,32 +225,32 @@
       ملاحظة: يوجد أيضا  <strong>موقع تجريبي بصفحة واحدة</strong> مطوّر بإستخدام ASP.NET MVC مع <strong>AngularJs</strong>.
       ]]>
     </text>
-    <text name="SeeDemo">رؤية الموقع التجريبي</text>
-    <text name="Edition">طبعة</text>
-    <text name="Editions">الطبعات</text>
-    <text name="EditionsHeaderInfo">إدارة الطبعات ومميزات النظام</text>
-    <text name="CreateNewEdition">إنشاء طبعة جديدة</text>
-    <text name="EditEdition">تحرير طبعة</text>
-    <text name="EditionProperties">خصائص الطبعة</text>
-    <text name="EditionName">اسم الطبعة</text>
+    <text name="SeeDemo">مشاهدة الموقع التجريبي</text>
+    <text name="Edition">نسخة</text>
+    <text name="Editions">النسخات</text>
+    <text name="EditionsHeaderInfo">إدارة النسخات ومميزات النظام</text>
+    <text name="CreateNewEdition">إنشاء نسخة جديدة</text>
+    <text name="EditEdition">تحرير نسخة</text>
+    <text name="EditionProperties">خصائص النسخة</text>
+    <text name="EditionName">اسم النسخة</text>
     <text name="Features">مميزات</text>
     <text name="EditionDeleteWarningMessage">سيتم حذف {0} وسحبها من جميع العملاء</text>
-    <text name="CreatingNewEdition">إنشاء طبعة جديدة</text>
-    <text name="EditingEdition"> تحرير الطبعة</text>
-    <text name="DeletingEdition">حذف الطبعة</text>
+    <text name="CreatingNewEdition">إنشاء نسخة جديدة</text>
+    <text name="EditingEdition"> تحرير النسخة</text>
+    <text name="DeletingEdition">حذف النسخة</text>
     <text name="ChangingFeatures"> تغيير المميزات</text>
     <text name="ResetSpecialFeatures">مسح المميزات الخاصة</text>
-    <text name="ResetFeaturesTooltip">هذا الزر سيقوم على الفور بمسح المميزات للعميل. العميل سيملك المميزات المرتبطة بالطبعات المعينة من قبل.</text>
+    <text name="ResetFeaturesTooltip">هذا الزر سيقوم على الفور بمسح المميزات للعميل. العميل سيملك المميزات المرتبطة بالنسخات المعينة من قبل.</text>
     <text name="NotAssigned">لم يعيّن</text>
     <text name="InvalidFeaturesWarning">واحد أو أكثر من قيم الميزة غير صحيح</text>
     <text name="Languages">اللغات</text>
     <text name="LanguagesHeaderInfo">إدارة لغات واجهة المستخدم</text>
-    <text name="CreateNewLanguage">إنشاء لغة جديدة</text>
+    <text name="CreateNewLanguage">لغة جديدة</text>
     <text name="Code">رمز</text>
-    <text name="CreatingNewLanguage"> إنشاء لغة جديدة</text>
-    <text name="EditingLanguage">  تحرير الغة</text>
-    <text name="DeletingLanguages"> حذف اللغة</text>
-    <text name="ChangingTexts"> تغيير النصوص</text>
+    <text name="CreatingNewLanguage">إنشاء لغة جديدة</text>
+    <text name="EditingLanguage">تحرير الغة</text>
+    <text name="DeletingLanguages">حذف اللغة</text>
+    <text name="ChangingTexts">تغيير النصوص</text>
     <text name="SuccessfullySaved">تم الحـفظ بنجاح</text>
     <text name="Language">لغة</text>
     <text name="Flag">علم</text>
@@ -274,7 +274,76 @@
     <text name="LanguageDeleteWarningMessage">هل أنت متأكد من حذف اللغة {0}</text>
     <text name="CanNotEditOrDeleteDefaultLanguages">لا يمكن تعديل أو حذف اللغات الافتراضية. يمكنك فقط تعديل أو حذف اللغات التي قمت بإضافتها. ولكن يمكنك تغيير نصوص جميع اللغات</text>
     <text name="LookingForMpaVersion"> البحث عن موقع متعدد الصفحات</text>
-    <text name="LookingForSpaVersion"> البحث عن موقع ذو صفحه واحدة</text>
+    <text name="LookingForSpaVersion"> البحث عن موقع ذو صفحة واحدة</text>
     <text name="ThisLanguageAlreadyExists" value="هذه اللغة موجودة مسبقا" />
+    <text name="OrganizationUnits" value="الوحدات التنظيمية" />
+    <text name="OrganizationUnitsHeaderInfo" value="استخدم الوحدات التنظيمية لتجميع المستخدمين و الكيانات" />
+    <text name="OrganizationTree" value="الهيكل التنظيمي" />
+    <text name="Members" value="الأعضاء" />
+    <text name="SelectAnOrganizationUnitToSeeMembers" value="إختر وحدة تنظيمية لمعاينة الأعضاء" />
+    <text name="OrganizationUnitDeleteWarningMessage" value="هل أنت متأكد من حذف الوحدة التنظيمية {0} ؟" />
+    <text name="AddSubUnit" value="أضف وحدة ثانوية" />
+    <text name="AddMember" value="أضف عضو" />
+    <text name="SuccessfullyAdded" value="تمت الإضافة بنجاح." />
+    <text name="RemoveUserFromOuWarningMessage" value="هل أنت متأكد من إزالة المستخدم {0} من الوحدة {1} ؟" />
+    <text name="SuccessfullyRemoved" value="تمت الإزالة بنجاح." />
+    <text name="SelectAnItem" value="إختر سجل" />
+    <text name="NewOrganizationUnit" value="وحدة تنظيمية جديدة" />
+    <text name="SelectAUser" value="إختر مستخدم" />
+    <text name="Select" value="إختر" />
+    <text name="UserIsAlreadyInTheOrganizationUnit" value="هذا المستخدم موجود في الوحدة التنظيمية !" />
+    <text name="AddRootUnit" value="أضف وحدة جذرية" />
+    <text name="AddUser" value="أضف مستخدم" />
+    <text name="NoOrganizationUnitDefinedYet" value="لا توجد وحدات تنظيمية." />
+    <text name="OrganizationUnitMoveConfirmMessage" value="هل أنت متأكد من نقل {0} الى {1} ؟" />
+    <text name="Root" value="جذر" />
+    <text name="SuccessfullyMoved" value="تم النقل بنجاح." />
+    <text name="AddedTime" value="الإضافة" />
+    <text name="ManagingMembers" value="إدارة الأعضاء" />
+    <text name="ManagingOrganizationTree" value="إدارة الوحدات التنظيمية" />
+    <text name="LoginForUsers" value="تسجيل دخول المستخدمين" />
+    <text name="LoginAsThisUser" value="تسجيل الدخول كالمستخدم هذا" />
+    <text name="BackToMyAccount" value="العودة لحسابي" />
+    <text name="LoginForTenants" value="تسجيل دخول العملاء" />
+    <text name="LoginAsThisTenant" value="تسجيل الدخول كالعميل هذا" />
+    <text name="AuditLogImpersonatedOperationInfo" value="ملاحظة: يتم تنفيذ هذه العملية من قبل مستخدم آخر نيابة عن هذا المستخدم. " />
+    <text name="CustomData" value="بيانات مخصصة" />
+    <text name="None" value="لا شيء" />
+    <text name="YouCanBackToYourAccount" value="يمكنك العودة لحسابك هنا." />
+    <text name="CascadeImpersonationErrorMessage" value="لايمكن ثمتيل شخص آخر. لان تسجيل دخولك الحالي ممثّل من قبل مستخدم آخر." />
+    <text name="FromTenantToHostImpersonationErrorMessage" value="لا يمكن تمثيل مستخدم النظام من مستخدم العميل." />
+    <text name="DifferentTenantImpersonationErrorMessage" value="لا يمكن تمثيل مستخدم من عميل آخر!" />
+    <text name="ImpersonationTokenErrorMessage" value="رمز التمثيل غير صالح أو منتهية صلاحيتة!" />
+    <text name="NotImpersonatedLoginErrorMessage" value="هذا ليس تسجيل دخول ممثّل" />
+    <text name="YouCannotLinkToSameAccount">لايمكن ربط نفس الحساب</text>
+    <text name="ChangePasswordBeforeLinkToAnAccount">يجب تغيير كلمة المرور قبل ربط هذا الحساب</text>
+    <text name="LinkedAccounts">حسابات مرتبطة</text>
+    <text name="ManageAccounts">إدارة الحسابات</text>
+    <text name="LinkNewAccount">ربط حساب</text>
+    <text name="SuccessfullyUnlinked">تم إزالة الربط بنجاح.</text>
+    <text name="LinkedUserDeleteWarningMessage">سيتم إزالة الربط بالمستخدم {0}</text>
+    <text name="SwitchToLinkedAccountTokenErrorMessage" value="رمز التمثيل غير صالح أو منتهية صلاحيتة!" />
+    <text name="WelcomeToTheApplicationNotificationMessage" value="أهلا و سهلا بك لنظام CORPACCOUNTING! للإخطارات. نظام الإخطارات يستخدم لإعلامك عن إخطارات من النظام أو المستخدمين . يمكنك إختيار نوع الإخطارات التي تريد أن تتلقاها من خلال إعادات الإخطارات." />
+    <text name="NewUserRegisteredNotificationDefinition" value="عند إنشاء حساب مستخدم جديد بالنظام." />
+    <text name="NewUserRegisteredNotificationMessage" value="تم إنشاء حساب جديد بالنظام. المستخدم: {userName}, البريد الالكتروني: {emailAddress}." />
+    <text name="SeeAllNotifications" value="جميع الإخطارات" />
+    <text name="SetAsRead" value="تعيين كمقروء" />
+    <text name="SetAllAsRead" value="تعيين الكل مقروء" />
+    <text name="NotificationSettings" value="إعدادات الإخطارات" />
+    <text name="ReceiveNotifications" value="تلقي الإخطارات" />
+    <text name="ReceiveNotifications_Definition" value="هذا الخيار يمكن استخدامة لتمكين / تعطيل الإخطارات." />
+    <text name="NotificationTypes" value="أنواع الإخطارات" />
+    <text name="ReceiveNotifications_DisableInfo" value="تلقي الإخطارات معطّل. عند تمكينه يمكنك تحديد أنواع الإخطارات التي تريد الحصول عليها." />
+    <text name="Notifications" value="إخطارات" />
+    <text name="ThereIsNoNotification" value="لاتوجد إخطارات." />
+    <text name="Unread" value="غير مقروء" />
+    <text name="YouCanNotDeleteOwnAccount" value="لا يمكنك حذف حسابك!" />
+    <text name="On" value="ممكّن" />
+    <text name="Off" value="معطّل" />
+    <text name="Maintenance">الصيانة</text>
+    <text name="Caches">ذاكرة التخزين المؤقت</text>
+    <text name="CacheSuccessfullyCleared">تم مسح ذاكرة التخزين المؤقت بنجاح.</text>
+    <text name="AllCachesSuccessfullyCleared">تم مسح كل ذاكرة التخزين المؤقت بنجاح.</text>
+    <text name="ClearAll">مسح الكل</text>
   </texts>
 </localizationDictionary>

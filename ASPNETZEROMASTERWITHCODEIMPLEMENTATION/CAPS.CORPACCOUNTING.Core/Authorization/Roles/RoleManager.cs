@@ -13,10 +13,18 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
     /// </summary>
     public class RoleManager : AbpRoleManager<Tenant, Role, User>
     {
-        public RoleManager(RoleStore store, IPermissionManager permissionManager, IRoleManagementConfig roleManagementConfig, ICacheManager cacheManager)
-            : base(store, permissionManager, roleManagementConfig, cacheManager)
+        public RoleManager(
+            RoleStore store,
+            IPermissionManager permissionManager,
+            IRoleManagementConfig roleManagementConfig,
+            ICacheManager cacheManager)
+            : base(
+                store,
+                permissionManager,
+                roleManagementConfig,
+                cacheManager)
         {
-            
+
         }
     }
 }

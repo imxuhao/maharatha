@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.organizationUnits.index', [
-        '$scope', '$modal', '$q', 'uiGridConstants', 'abp.services.app.organizationUnit', 'abp.services.app.commonLookup', 'lookupModal',
-        function ($scope, $modal, $q, uiGridConstants, organizationUnitService, commonLookupService, lookupModal) {
+        '$scope', '$uibModal', '$q', 'uiGridConstants', 'abp.services.app.organizationUnit', 'abp.services.app.commonLookup', 'lookupModal',
+        function ($scope, $uibModal, $q, uiGridConstants, organizationUnitService, commonLookupService, lookupModal) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -135,7 +135,7 @@
                 },
 
                 openCreateOrEditUnitModal: function (organizationUnit, closeCallback) {
-                    var modalInstance = $modal.open({
+                    var modalInstance = $uibModal.open({
                         templateUrl: '~/App/common/views/organizationUnits/createOrEditUnitModal.cshtml',
                         controller: 'common.views.organizationUnits.createOrEditUnitModal as vm',
                         backdrop: 'static',

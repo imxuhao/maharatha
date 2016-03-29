@@ -18,6 +18,7 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
             {
                 public const string Tenants = "Tenants";
                 public const string Editions = "Editions";
+                public const string Maintenance = "Administration.Maintenance";
                 public const string Settings = "Administration.Settings.Host";
             }
 

@@ -22,7 +22,7 @@
 
     <link rel="shortcut icon" href="~/favicon.ico" />
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/Content/fonts-open-sans.css" rel="stylesheet" type="text/css" />
 
     @Styles.Render("~/Bundles/Mpa/libs/css" + (CultureHelper.IsRtl ? "RTL" : ""))
     @Styles.Render("~/Bundles/Mpa/metronic/css" + (CultureHelper.IsRtl ? "RTL" : ""))
@@ -92,6 +92,10 @@
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
     <script src="~/api/AbpServiceProxies/GetAll"></script>
     <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+
+    <!-- SignalR scripts -->
+    <script src="~/signalr/hubs"></script>
+    @Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")
 
     @Scripts.Render("~/Bundles/Mpa/metronic/js")
     <script type="text/javascript">

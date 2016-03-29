@@ -18,7 +18,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Demo
     /// <summary>
     /// Used to build demo data for new tenants.
     /// Creates sample organization units, users... etc.
-    /// It works only if in DEMO mode ("AppDemoMode" should be "true" in web.config). Otherwise, does nothing.
+    /// It works only if in DEMO mode ("App.DemoMode" should be "true" in web.config). Otherwise, does nothing.
     /// </summary>
     public class TenantDemoDataBuilder : CORPACCOUNTINGServiceBase, ITransientDependency
     {
@@ -26,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Demo
         {
             get
             {
-                return string.Equals(ConfigurationManager.AppSettings["AppDemoMode"], "true", StringComparison.InvariantCultureIgnoreCase);
+                return string.Equals(ConfigurationManager.AppSettings["App.DemoMode"], "true", StringComparison.InvariantCultureIgnoreCase);
             }
         }
 

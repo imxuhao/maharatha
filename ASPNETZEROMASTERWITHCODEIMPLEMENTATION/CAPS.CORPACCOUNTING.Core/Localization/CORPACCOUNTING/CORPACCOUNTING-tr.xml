@@ -147,9 +147,9 @@
     <text name="ExportToExcel" value="Excele aktar" />
     <text name="ChangeProfilePicture" value="Profil resmini değiştir" />
     <text name="TenantName_Regex_Description" value="Müşteri adı en az 2 karakter olmalı, bir harfle başlamalı ve harf, rakam, tire ya da alt çizgi ile devam etmelidir." />
-    <text name="ProfilePicture_Change_Info" value="30KB altında bir JPG/JPEG dosyası seçebilirsiniz." />
+    <text name="ProfilePicture_Change_Info" value="1MB altında bir JPG/JPEG/PNG dosyası seçebilirsiniz." />
     <text name="ProfilePicture_Change_Error" value="Profil resminiz değiştirilemedi." />
-    <text name="ProfilePicture_Warn_SizeLimit" value="Resim boyutu en fazla 30KB olabilir. Lütfen başka bir dosya seçin." />
+    <text name="ProfilePicture_Warn_SizeLimit" value="Resim boyutu en fazla 1MB olabilir. Lütfen başka bir dosya seçin." />
     <text name="ProfilePicture_Warn_FileType" value="Sadece JPG/JPEG uzantılı dosya seçebilirsiniz. Lütfen başka bir dosya seçin." />
     <text name="Dashboard" value="Genel görünüm" />
     <text name="DashboardHeaderInfo" value="istatistikler ve raporlar" />
@@ -176,7 +176,7 @@
       Bu grafik için REFRESH butonuna bastığınızda grafik verisi sunucu tarafında rastgele üretilir.
     </text>
     <text name="WelcomePage_Title" value="Hoşgeldiniz!" />
-    <text name="WelcomePage_Info" value="Uygulamaya hoşgeldiniz. Menüyü kullanarak uygulamayı kullanmaya başlayabilirsiniz. Eğer herhangi bir menü ögesi göremiyorsunuz muhtemelen herhangi bir sayfayı görme yetkiniz bulunmuyor demektir. Bu durumda yetki almak için sistem yöneticisine başvurabilirsiniz." />
+    <text name="WelcomePage_Info" value="Uygulamaya hoşgeldiniz. Menüyü kullanarak uygulamayı kullanmaya başlayabilirsiniz. Eğer herhangi bir menü ögesi göremiyorsanız muhtemelen herhangi bir sayfayı görme yetkiniz bulunmuyor demektir. Bu durumda yetki almak için sistem yöneticisine başvurabilirsiniz." />
     <text name="RequestedFileDoesNotExists" value="İstenilen dosya sistemde bulunamadı!" />
     <text name="MailSent" value="E-posta gönderildi" />
     <text name="PasswordResetMailSentMessage" value="E-posta adresinize bir şifre sıfırlama bağlantısı gönderilmiştir. Lütfen e-posta adresinizi kontrol ediniz." />
@@ -196,7 +196,7 @@
     <text name="Client" value="İstemci" />
     <text name="Browser" value="Tarayıcı" />
     <text name="Xms" value="{0} ms" />
-    <text name="Close" value="Close" />
+    <text name="Close" value="Kapat" />
     <text name="Refresh" value="Yenile" />
     <text name="ErrorState" value="Hata durumu" />
     <text name="All" value="Hepsi" />
@@ -231,7 +231,7 @@
       ]]>
     </text>
     <text name="SeeDemo" value="Demoyu görün" />
-    <text name="Edition" value="Edition" />
+    <text name="Edition" value="Paket" />
     <text name="Editions" value="Paketler" />
     <text name="EditionsHeaderInfo" value="Uygulamanın paketlerini yönetin." />
     <text name="CreateNewEdition" value="Yeni paket oluştur" />
@@ -320,5 +320,53 @@
     <text name="DifferentTenantImpersonationErrorMessage" value="Farklı bir müşterinin kullanıcısı adına giriş yapılamaz!" />
     <text name="ImpersonationTokenErrorMessage" value="Yetkilendirme kodu geçersiz ya da süresi dolmuş!" />
     <text name="NotImpersonatedLoginErrorMessage" value="Şu anda yetkilendirilmiş bir hesapta değilsiniz!" />
+    <text name="YouCannotLinkToSameAccount">Hesabı kendisine bağlayamazsınız!</text>
+    <text name="ChangePasswordBeforeLinkToAnAccount">Bu hesabı başka bir hesaba bağlamadan önce yeni bir şifre belirlemeniz gerkeiyor!</text>
+    <text name="LinkedAccounts">Bağlı hesaplar</text>
+    <text name="ManageAccounts">Hesapları yönet</text>
+    <text name="LinkNewAccount">Yeni hesap bağla</text>
+    <text name="SuccessfullyUnlinked">Bağlantı başarıyla kaldırıldı.</text>
+    <text name="LinkedUserDeleteWarningMessage">{0} kullanıcısına bağlantı silinecektir.</text>
+    <text name="SwitchToLinkedAccountTokenErrorMessage" value="Bağlı hesaba geçme kodu geçersiz ya da süresi dolmuş!" />
+    <text name="WelcomeToTheApplicationNotificationMessage" value="CORPACCOUNTING uygulamasına Hoşgeldiniz! Bilgilendirme sistemi sizi ilgilendiğiniz olaylar hakkında anın bilgilendirmek için geliştirilmiştir. Bildirim ayarları kısmından ne tür bilgilendirme almak istediğinizi ayarlayabilirsiniz." />
+    <text name="NewUserRegisteredNotificationDefinition" value="Yeni bir kullanıcı kaydolduğunda." />
+    <text name="NewUserRegisteredNotificationMessage" value="Yeni bir kullanıcı kaydoldu. Kullanıcı adı: {userName}, e-posta adresi: {emailAddress}." />
+    <text name="SeeAllNotifications" value="Tüm bildirimleri gör" />
+    <text name="SetAsRead" value="okundu olarak işaretle" />
+    <text name="SetAllAsRead" value="Tümünü okundu olarak işaretle" />
+    <text name="NotificationSettings" value="Bildirim ayarları" />
+    <text name="ReceiveNotifications" value="Bildirimleri Al" />
+    <text name="ReceiveNotifications_Definition" value="Bu seçenek bildirim almayı tamamen durdurmak için kullanılabilir." />
+    <text name="NotificationTypes" value="Bildirim Türleri" />
+    <text name="ReceiveNotifications_DisableInfo" value="Bildirim almayı tümüyle kapattınız. Bildirim almayı seçtikten sonra hangi bildirim türlerini almak istediğinizi tek tek belirleyebilirsiniz." />
+    <text name="Notifications" value="Bildirimler" />
+    <text name="ThereIsNoNotification" value="Bildirim yok." />
+    <text name="Unread" value="Okunmamış" />
+    <text name="YouCanNotDeleteOwnAccount" value="Kendi kullanıcı hesabınızı silemezsiniz!" />
+    <text name="On" value="Açık" />
+    <text name="Off" value="Kapalı" />
+    <text name="Maintenance">Bakım</text>
+    <text name="Caches">Önbellekler</text>
+    <text name="CacheSuccessfullyCleared">Önbellek başarıyla temizlendi.</text>
+    <text name="AllCachesSuccessfullyCleared">Tüm önbellekler başarıyla temizlendi.</text>
+    <text name="ClearAll">Hepsini temizle</text>
+    <text name="Clear">Temizle</text>
+    <text name="CachesHeaderInfo">Uygulamadaki önbellekleri bu sayfada temizleyebilirsiniz.</text>
+    <text name="TestEmailSettingsHeader">E-posta Ayarlarını Test Et</text>
+    <text name="SendTestEmail">Test E-postası Gönder</text>
+    <text name="TestEmail_Subject">CORPACCOUNTING test maili</text>
+    <text name="TestEmail_Body">Bu bir test mailidir.</text>
+    <text name="TestEmailSentSuccessfully">Test e-postası başarıyla gönderildi.</text>
+    <text name="WebSiteLogs">Websitesi Logları</text>
+    <text name="WebSiteLogsHeaderInfo">Bu sayfada en güncel logları görebilir veya tüm logları tek bir zip dosyası olarak indirebilirsiniz.</text>
+    <text name="DownloadAll">Hepsini indir</text>
+    <text name="TenantManagement">Müşteri yönetimi</text>
+    <text name="TenantSignUp">Müşteri Kaydı</text>
+    <text name="NewTenantRegisteredNotificationDefinition" value="Yeni bir müşteri kaydolduğunda." />
+    <text name="NewTenantRegisteredNotificationMessage" value="Yeni bir müşteri kaydoldu. Müşteri adı: {tenancyName}." />
+    <text name="LoginAttempts">Giriş denemeleri</text>
+    <text name="Failed">Başarısız</text>
+    <text name="NewTenant">Yeni müşteri</text>
+    <text name="ResizedProfilePicture_Warn_SizeLimit" value="Kırpılmış resim boyutu en fazla 100KB olabilir. Lütfen kırpılmış alanı küçültüp tekrar deneyin." />
   </texts>
 </localizationDictionary>

@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('host.views.tenants.featuresModal', [
-        '$scope', '$modalInstance', 'abp.services.app.tenant', 'tenant',
-        function ($scope, $modalInstance, tenantService, tenant) {
+        '$scope', '$uibModalInstance', 'abp.services.app.tenant', 'tenant',
+        function ($scope, $uibModalInstance, tenantService, tenant) {
             var vm = this;
             
             vm.saving = false;
@@ -33,14 +33,14 @@
                     featureValues: vm.featureEditData.featureValues
                 }).success(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    $modalInstance.close();
+                    $uibModalInstance.close();
                 }).finally(function () {
                     vm.saving = false;
                 });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             function loadFeatures() {

@@ -10,6 +10,8 @@ var appModule = angular.module("app", [
     "ngSanitize",
     'angularFileUpload',
     'daterangepicker',
+    'angularMoment',
+    'frapontillo.bootstrap-switch',
     'abp'
 ]);
 
@@ -77,7 +79,7 @@ appModule.config([
 
         if (abp.auth.hasPermission('Pages.Administration.Users')) {
             $stateProvider.state('users', {
-                url: '/users',
+                url: '/users?filterText',
                 templateUrl: '~/App/common/views/users/index.cshtml',
                 menu: 'Administration.Users'
             });
@@ -115,6 +117,11 @@ appModule.config([
             });
         }
 
+        $stateProvider.state('notifications', {
+            url: '/notifications',
+            templateUrl: '~/App/common/views/notifications/index.cshtml'
+        });
+
         //HOST routes
 
         $stateProvider.state('host', {
@@ -126,7 +133,7 @@ appModule.config([
         if (abp.auth.hasPermission('Pages.Tenants')) {
             $urlRouterProvider.otherwise("/host/tenants"); //Entrance page for the host
             $stateProvider.state('host.tenants', {
-                url: '/tenants',
+                url: '/tenants?filterText',
                 templateUrl: '~/App/host/views/tenants/index.cshtml',
                 menu: 'Tenants'
             });
@@ -137,6 +144,14 @@ appModule.config([
                 url: '/editions',
                 templateUrl: '~/App/host/views/editions/index.cshtml',
                 menu: 'Editions'
+            });
+        }
+
+        if (abp.auth.hasPermission('Pages.Administration.Host.Maintenance')) {
+            $stateProvider.state('host.maintenance', {
+                url: '/maintenance',
+                templateUrl: '~/App/host/views/maintenance/index.cshtml',
+                menu: 'Administration.Maintenance'
             });
         }
 
@@ -157,7 +172,7 @@ appModule.config([
         });
 
         if (abp.auth.hasPermission('Pages.Tenant.Dashboard')) {
-            $urlRouterProvider.otherwise("/tenant/dashboard"); //Entrace page for a tenant
+            $urlRouterProvider.otherwise("/tenant/dashboard"); //Entrance page for a tenant
             $stateProvider.state('tenant.dashboard', {
                 url: '/dashboard',
                 templateUrl: '~/App/tenant/views/dashboard/index.cshtml',
@@ -175,9 +190,16 @@ appModule.config([
     }
 ]);
 
-appModule.run(["$rootScope", "settings", "$state", function ($rootScope, settings, $state) {
+appModule.run(["$rootScope", "settings", "$state", 'i18nService', function ($rootScope, settings, $state, i18nService) {
     $rootScope.$state = $state;
-    $rootScope.$settings = settings; 
+    $rootScope.$settings = settings;
+
+    //Set Ui-Grid language
+    if (i18nService.get(abp.localization.currentCulture.name)) {
+        i18nService.setCurrentLang(abp.localization.currentCulture.name);
+    } else {
+        i18nService.setCurrentLang("en");
+    }
 
     $rootScope.safeApply = function (fn) {
         var phase = this.$root.$$phase;

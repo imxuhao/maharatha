@@ -9,12 +9,13 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Editions.Dto;
 
 namespace CAPS.CORPACCOUNTING.Editions
 {
     [AbpAuthorize(AppPermissions.Pages_Editions)]
-    public class EditionAppService: CORPACCOUNTINGAppServiceBase, IEditionAppService
+    public class EditionAppService : CORPACCOUNTINGAppServiceBase, IEditionAppService
     {
         private readonly EditionManager _editionManager;
 
@@ -77,6 +78,30 @@ namespace CAPS.CORPACCOUNTING.Editions
         {
             var edition = await _editionManager.GetByIdAsync(input.Id);
             await _editionManager.DeleteAsync(edition);
+        }
+
+        public async Task<List<ComboboxItemDto>> GetEditionComboboxItems(int? selectedEditionId = null)
+        {
+            var editions = await _editionManager.Editions.ToListAsync();
+            var editionItems = new ListResultOutput<ComboboxItemDto>(editions.Select(e => new ComboboxItemDto(e.Id.ToString(), e.DisplayName)).ToList()).Items.ToList();
+
+            var defaultItem = new ComboboxItemDto("null", L("NotAssigned"));
+            editionItems.Insert(0, defaultItem);
+
+            if (selectedEditionId.HasValue)
+            {
+                var selectedEdition = editionItems.FirstOrDefault(e => e.Value == selectedEditionId.Value.ToString());
+                if (selectedEdition != null)
+                {
+                    selectedEdition.IsSelected = true;
+                }
+            }
+            else
+            {
+                defaultItem.IsSelected = true;
+            }
+
+            return editionItems;
         }
 
         [AbpAuthorize(AppPermissions.Pages_Editions_Create)]

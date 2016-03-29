@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.users.createOrEditModal', [
-        '$scope', '$modalInstance', 'abp.services.app.user', 'userId',
-        function ($scope, $modalInstance, userService, userId) {
+        '$scope', '$uibModalInstance', 'abp.services.app.user', 'userId',
+        function ($scope, $uibModalInstance, userService, userId) {
             var vm = this;
             
             vm.saving = false;
@@ -30,14 +30,14 @@
                     sendActivationEmail: vm.sendActivationEmail
                 }).success(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    $modalInstance.close();
+                    $uibModalInstance.close();
                 }).finally(function () {
                     vm.saving = false;
                 });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             vm.getAssignedRoleCount = function() {

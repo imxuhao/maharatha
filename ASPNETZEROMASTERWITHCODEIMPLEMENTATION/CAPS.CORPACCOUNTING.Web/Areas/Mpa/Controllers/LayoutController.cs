@@ -3,6 +3,7 @@ using Abp.Application.Navigation;
 using Abp.Configuration.Startup;
 using Abp.Threading;
 using Abp.Web.Mvc.Authorization;
+using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Layout;
 using CAPS.CORPACCOUNTING.Web.Areas.Mpa.Startup;
@@ -20,7 +21,8 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
         public LayoutController(
             ISessionAppService sessionAppService, 
             IUserNavigationManager userNavigationManager, 
-            IMultiTenancyConfig multiTenancyConfig)
+            IMultiTenancyConfig multiTenancyConfig, 
+            IUserLinkAppService userLinkAppService)
         {
             _sessionAppService = sessionAppService;
             _userNavigationManager = userNavigationManager;

@@ -3,7 +3,7 @@ using CAPS.CORPACCOUNTING.Migrations.Seed;
 
 namespace CAPS.CORPACCOUNTING.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<CORPACCOUNTING.EntityFramework.CORPACCOUNTINGDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<EntityFramework.CORPACCOUNTINGDbContext>
     {
         public Configuration()
         {
@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
             ContextKey = "CORPACCOUNTING";
         }
 
-        protected override void Seed(CORPACCOUNTING.EntityFramework.CORPACCOUNTINGDbContext context)
+        protected override void Seed(EntityFramework.CORPACCOUNTINGDbContext context)
         {
             new InitialDbBuilder(context).Create();
         }

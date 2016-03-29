@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.languages.createOrEditModal', [
-        '$scope', '$modalInstance', 'abp.services.app.language', 'languageId',
-        function ($scope, $modalInstance, languageService, languageId) {
+        '$scope', '$uibModalInstance', 'abp.services.app.language', 'languageId',
+        function ($scope, $uibModalInstance, languageService, languageId) {
             var vm = this;
 
             vm.saving = false;
@@ -34,14 +34,14 @@
                     language: vm.language
                 }).success(function () {
                     abp.notify.info(app.localize('SavedSuccessfully'));
-                    $modalInstance.close();
+                    $uibModalInstance.close();
                 }).finally(function () {
                     vm.saving = false;
                 });
             };
 
             vm.cancel = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
             };
 
             function init() {

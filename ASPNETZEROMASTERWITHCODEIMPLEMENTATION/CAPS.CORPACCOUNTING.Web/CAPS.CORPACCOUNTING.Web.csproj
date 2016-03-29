@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CAPS.CORPACCOUNTING.Web</RootNamespace>
     <AssemblyName>CAPS.CORPACCOUNTING.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -42,47 +42,67 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.7.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.0.7.8.0\lib\net452\Abp.dll</HintPath>
+    <Reference Include="Abp, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.0.8.3.0\lib\net452\Abp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.AutoMapper, Version=0.7.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.AutoMapper.0.7.8.0\lib\net452\Abp.AutoMapper.dll</HintPath>
+    <Reference Include="Abp.AutoMapper, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.AutoMapper.0.8.3.0\lib\net452\Abp.AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.EntityFramework, Version=0.7.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.EntityFramework.0.7.8.0\lib\net452\Abp.EntityFramework.dll</HintPath>
+    <Reference Include="Abp.EntityFramework, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.EntityFramework.0.8.3.0\lib\net452\Abp.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web, Version=0.7.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.0.7.8.0\lib\net452\Abp.Web.dll</HintPath>
+    <Reference Include="Abp.HangFire, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.HangFire.0.8.3.0\lib\net452\Abp.HangFire.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.Api, Version=0.7.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.Api.0.7.8.0\lib\net452\Abp.Web.Api.dll</HintPath>
+    <Reference Include="Abp.Owin, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Owin.0.8.3.0\lib\net452\Abp.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Web.Mvc, Version=0.7.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Web.Mvc.0.7.8.0\lib\net452\Abp.Web.Mvc.dll</HintPath>
+    <Reference Include="Abp.RedisCache, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.RedisCache.0.8.3.0\lib\net452\Abp.RedisCache.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Zero, Version=0.7.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Zero.0.7.7.0\lib\net452\Abp.Zero.dll</HintPath>
+    <Reference Include="Abp.Web, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.0.8.3.0\lib\net452\Abp.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Zero.EntityFramework, Version=0.7.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Zero.EntityFramework.0.7.7.0\lib\net452\Abp.Zero.EntityFramework.dll</HintPath>
+    <Reference Include="Abp.Web.Api, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Api.0.8.3.0\lib\net452\Abp.Web.Api.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.Zero.Ldap, Version=0.7.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.Zero.Ldap.0.7.7.0\lib\net452\Abp.Zero.Ldap.dll</HintPath>
+    <Reference Include="Abp.Web.Api.OData, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Api.OData.0.8.3.0\lib\net452\Abp.Web.Api.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.Web.Mvc, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.Mvc.0.8.3.0\lib\net452\Abp.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.Web.SignalR, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Web.SignalR.0.8.3.0\lib\net452\Abp.Web.SignalR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.Zero, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Zero.0.8.3.0\lib\net452\Abp.Zero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.Zero.EntityFramework, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Zero.EntityFramework.0.8.3.0\lib\net452\Abp.Zero.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.Zero.Ldap, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.Zero.Ldap.0.8.3.0\lib\net452\Abp.Zero.Ldap.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -103,13 +123,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.DynamicFilters, Version=1.4.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.DynamicFilters.1.4.6\lib\net40\EntityFramework.DynamicFilters.dll</HintPath>
+    <Reference Include="EntityFramework.DynamicFilters, Version=1.4.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.DynamicFilters.1.4.7\lib\net40\EntityFramework.DynamicFilters.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.5.3\lib\net45\Hangfire.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.SqlServer.1.5.3\lib\net45\Hangfire.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -123,7 +151,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.OData.Core, Version=6.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.Core.6.14.0\lib\portable-net40+sl5+wp8+win8+wpa\Microsoft.OData.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.OData.Edm, Version=6.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OData.Edm.6.14.0\lib\portable-net40+sl5+wp8+win8+wpa\Microsoft.OData.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -151,6 +195,10 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Spatial, Version=6.14.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Spatial.6.14.0\lib\portable-net40+sl5+wp8+win8+wpa\Microsoft.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -174,8 +222,13 @@
       <HintPath>..\packages\RecaptchaNet.2.1.0\lib\net451\Recaptcha.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Collections.Immutable">
-      <HintPath>..\packages\Microsoft.Bcl.Immutable.1.0.34\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="StackExchange.Redis, Version=1.0.316.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.0.488\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -206,6 +259,10 @@
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.OData, Version=5.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.OData.5.8.0\lib\net45\System.Web.OData.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -247,6 +304,7 @@
     <Content Include="Abp\Framework\scripts\libs\abp.blockUI.js" />
     <Content Include="Abp\Framework\scripts\libs\abp.jquery.js" />
     <Content Include="Abp\Framework\scripts\libs\abp.jtable.js" />
+    <Content Include="Abp\Framework\scripts\libs\abp.signalr.js" />
     <Content Include="Abp\Framework\scripts\libs\abp.spin.js" />
     <Content Include="Abp\Framework\scripts\libs\abp.sweet-alert.js" />
     <Content Include="Abp\Framework\scripts\libs\abp.toastr.js" />
@@ -259,6 +317,7 @@
     <Content Include="Abp\Framework\styles\abp.mixings.min.css" />
     <Content Include="Abp\Framework\styles\utils\ie10fix.css" />
     <Content Include="App\common\directives\enterKey.js" />
+    <Content Include="App\common\services\appUserNotificationHelper.js" />
     <Content Include="App\common\views\auditLogs\detailModal.css">
       <DependentUpon>detailModal.less</DependentUpon>
     </Content>
@@ -281,6 +340,13 @@
     <Content Include="App\common\views\layout\sidebar.min.css">
       <DependentUpon>sidebar.css</DependentUpon>
     </Content>
+    <Content Include="App\common\views\notifications\index.css">
+      <DependentUpon>index.less</DependentUpon>
+    </Content>
+    <Content Include="App\common\views\notifications\index.js" />
+    <Content Include="App\common\views\notifications\index.min.css">
+      <DependentUpon>index.css</DependentUpon>
+    </Content>
     <Content Include="App\common\views\organizationUnits\index.css">
       <DependentUpon>index.less</DependentUpon>
     </Content>
@@ -289,6 +355,15 @@
     <Content Include="App\common\views\organizationUnits\index.min.css">
       <DependentUpon>index.css</DependentUpon>
     </Content>
+    <Content Include="App\common\views\profile\changePicture.css">
+      <DependentUpon>changePicture.less</DependentUpon>
+    </Content>
+    <Content Include="App\common\views\profile\changePicture.min.css">
+      <DependentUpon>changePicture.css</DependentUpon>
+    </Content>
+    <Content Include="App\common\views\profile\linkAccountModal.js" />
+    <Content Include="App\common\views\profile\linkedAccountsModal.js" />
+    <Content Include="App\common\views\notifications\settingsModal.js" />
     <Content Include="App\common\views\users\createOrEditModal.css">
       <DependentUpon>createOrEditModal.less</DependentUpon>
     </Content>
@@ -304,6 +379,13 @@
     <Content Include="App\common\views\auditLogs\index.js" />
     <Content Include="App\common\views\languages\index.js" />
     <Content Include="App\common\views\languages\texts.js" />
+    <Content Include="App\common\views\users\loginAttemptsModal.css">
+      <DependentUpon>loginAttemptsModal.less</DependentUpon>
+    </Content>
+    <Content Include="App\common\views\users\loginAttemptsModal.js" />
+    <Content Include="App\common\views\users\loginAttemptsModal.min.css">
+      <DependentUpon>loginAttemptsModal.css</DependentUpon>
+    </Content>
     <Content Include="App\common\views\_empty\modal.js" />
     <Content Include="App\common\views\_empty\index.js" />
     <Content Include="App\common\views\_empty\README.txt" />
@@ -316,6 +398,13 @@
     </Content>
     <Content Include="App\host\views\editions\createOrEditModal.js" />
     <Content Include="App\host\views\editions\index.js" />
+    <Content Include="App\host\views\maintenance\index.css">
+      <DependentUpon>index.less</DependentUpon>
+    </Content>
+    <Content Include="App\host\views\maintenance\index.js" />
+    <Content Include="App\host\views\maintenance\index.min.css">
+      <DependentUpon>index.css</DependentUpon>
+    </Content>
     <Content Include="App\host\views\tenants\featuresModal.js" />
     <Content Include="Areas\Mpa\Common\Scripts\jquery-validation-custom.js" />
     <Content Include="Areas\Mpa\Views\AuditLogs\index.css">
@@ -368,6 +457,21 @@
       <DependentUpon>_Layout.css</DependentUpon>
     </Content>
     <Content Include="Areas\Mpa\Views\Layout\_Header.js" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.css">
+      <DependentUpon>Index.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.js" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.min.css">
+      <DependentUpon>Index.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Mpa\Views\Notifications\Index.css">
+      <DependentUpon>Index.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Mpa\Views\Notifications\Index.js" />
+    <Content Include="Areas\Mpa\Views\Notifications\Index.min.css">
+      <DependentUpon>Index.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Mpa\Views\Notifications\_SettingsModal.js" />
     <Content Include="Areas\Mpa\Views\OrganizationUnits\Index.css">
       <DependentUpon>Index.less</DependentUpon>
     </Content>
@@ -378,6 +482,8 @@
     <Content Include="Areas\Mpa\Views\OrganizationUnits\_CreateModal.js" />
     <Content Include="Areas\Mpa\Views\OrganizationUnits\_EditModal.js" />
     <Content Include="Areas\Mpa\Views\Profile\_ChangePictureModal.js" />
+    <Content Include="Areas\Mpa\Views\Profile\_LinkAccountModal.js" />
+    <Content Include="Areas\Mpa\Views\Profile\_LinkedAccountsModal.js" />
     <Content Include="Areas\Mpa\Views\Profile\_MySettingsModal.js" />
     <Content Include="Areas\Mpa\Views\Profile\_ChangePasswordModal.js" />
     <Content Include="Areas\Mpa\Views\Roles\index.css">
@@ -407,11 +513,17 @@
       <DependentUpon>index.css</DependentUpon>
     </Content>
     <Content Include="Areas\Mpa\Views\Common\_PermissionTree.js" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.css">
+      <DependentUpon>_LoginAttemptsModal.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.js" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.min.css">
+      <DependentUpon>_LoginAttemptsModal.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Mpa\Views\Users\_PermissionsModal.js" />
     <Content Include="Areas\Mpa\Views\Users\_CreateOrEditModal.js" />
     <Content Include="Common\Images\app-logo-on-dark.png" />
     <Content Include="Common\Images\app-logo-on-light.png" />
-    <Content Include="Common\Images\capslogo.png" />
     <Content Include="Common\Images\default-profile-picture.png" />
     <Content Include="Common\Images\SampleProfilePics\sample-profile-08.jpg" />
     <Content Include="Common\Images\SampleProfilePics\sample-profile-01.jpg" />
@@ -423,6 +535,7 @@
     <Content Include="Common\Images\SampleProfilePics\sample-profile-07.jpg" />
     <Content Include="Common\Images\SampleProfilePics\sample-profile-09.jpg" />
     <Content Include="Common\Images\SampleProfilePics\sample-profile-10.jpg" />
+    <Content Include="Common\Scripts\appUserNotificationHelper.js" />
     <Content Include="Common\Scripts\helpers.js" />
     <Content Include="Common\Scripts\consts.js" />
     <Content Include="App\app.css">
@@ -486,11 +599,18 @@
     </Content>
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts-open-sans.css" />
+    <Content Include="Content\fonts-ptsans-narrow.css" />
+    <Content Include="Content\fonts-sourcesans-pro.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="libs\angular-bootstrap-switch\angular-bootstrap-switch.js" />
+    <Content Include="libs\angular-bootstrap-switch\angular-bootstrap-switch.min.js" />
     <Content Include="libs\angular-daterangepicker\angular-daterangepicker.js" />
     <Content Include="libs\angular-daterangepicker\angular-daterangepicker.min.js" />
     <Content Include="libs\angular-file-upload\angular-file-upload.min.js" />
+    <Content Include="libs\angular-moment\angular-moment.js" />
+    <Content Include="libs\angular-moment\angular-moment.min.js" />
     <Content Include="libs\angular-ocLazyLoad\ocLazyLoad.min.js" />
     <Content Include="libs\angular-ui-grid\ui-grid.css" />
     <Content Include="libs\angular-ui-grid\ui-grid.js" />
@@ -571,7 +691,7 @@
     <Content Include="libs\bootstrap\css\bootstrap-rtl.min.css" />
     <Content Include="libs\bootstrap\css\bootstrap.css" />
     <Content Include="libs\bootstrap\css\bootstrap.min.css" />
-    <Content Include="libs\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="libs\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="libs\bootstrap\js\bootstrap.js" />
     <Content Include="libs\bootstrap\js\bootstrap.min.js" />
     <Content Include="libs\bootstrap\js\npm.js" />
@@ -684,6 +804,12 @@
     <Content Include="libs\fancybox\source\jquery.fancybox.js" />
     <Content Include="libs\fancybox\source\jquery.fancybox.pack.js" />
     <Content Include="libs\html5shiv\html5shiv.js" />
+    <Content Include="libs\jcrop\css\Jcrop.gif" />
+    <Content Include="libs\jcrop\css\jquery.Jcrop.css" />
+    <Content Include="libs\jcrop\css\jquery.Jcrop.min.css" />
+    <Content Include="libs\jcrop\js\jquery.color.js" />
+    <Content Include="libs\jcrop\js\jquery.Jcrop.js" />
+    <Content Include="libs\jcrop\js\jquery.Jcrop.min.js" />
     <Content Include="libs\jquery-ajax-form\jquery.form.js" />
     <Content Include="libs\jquery-cookie\jquery.cookie.min.js" />
     <Content Include="libs\jquery-jtable\extensions\jquery.jtable.aspnetpagemethods.js" />
@@ -984,6 +1110,8 @@
     <Content Include="libs\morris\spec\viz\exemplary\stacked_bar0.png" />
     <Content Include="libs\morris\spec\viz\test.html" />
     <Content Include="libs\morris\spec\viz\visual_specs.js" />
+    <Content Include="libs\mustachejs\mustache.js" />
+    <Content Include="libs\mustachejs\mustache.min.js" />
     <Content Include="libs\slider-revolution-slider\css\extralayers.css" />
     <Content Include="libs\slider-revolution-slider\css\navstylechange.css" />
     <Content Include="libs\slider-revolution-slider\css\noneed.css" />
@@ -1703,41 +1831,29 @@
     <Content Include="libs\bootstrap-hover-dropdown\README.md" />
     <Content Include="libs\jquery-slimscroll\README.md" />
     <Content Include="libs\jquery-slimscroll\slimScroll.jquery.json" />
-    <Content Include="metronic\assets\global\img\social\Thumbs.db" />
     <Content Include="libs\angular-ui-grid\ui-grid.eot" />
     <Content Include="libs\angular-ui-grid\ui-grid.ttf" />
     <Content Include="libs\angular-ui-grid\ui-grid.woff" />
     <Content Include="App\tenant\views\settings\index.cshtml" />
     <Content Include="libs\fancybox\CHANGELOG.md" />
     <Content Include="libs\fancybox\README.md" />
-    <Content Include="libs\carousel-owl-carousel\demos\.DS_Store" />
     <Content Include="libs\carousel-owl-carousel\demos\.htaccess" />
-    <Content Include="libs\carousel-owl-carousel\demos\json\.DS_Store" />
     <Content Include="libs\carousel-owl-carousel\demos\json\customData.json" />
     <Content Include="libs\carousel-owl-carousel\demos\json\data.json" />
     <Content Include="libs\carousel-owl-carousel\LICENSE" />
-    <Content Include="libs\carousel-owl-carousel\owl-carousel\.DS_Store" />
     <Content Include="libs\carousel-owl-carousel\README.md" />
-    <Content Include="libs\slider-revolution-slider\css\.DS_Store" />
-    <Content Include="libs\slider-revolution-slider\images\.DS_Store" />
-    <Content Include="libs\slider-revolution-slider\rs-plugin\.DS_Store" />
     <Content Include="libs\slider-revolution-slider\rs-plugin\assets\arrows.psd" />
     <Content Include="libs\slider-revolution-slider\rs-plugin\assets\bullets.psd" />
     <Content Include="libs\slider-revolution-slider\rs-plugin\assets\small_arrows.psd" />
-    <Content Include="libs\slider-revolution-slider\rs-plugin\css\.DS_Store" />
     <Content Include="libs\slider-revolution-slider\rs-plugin\font\revicons.eot" />
     <Content Include="libs\slider-revolution-slider\rs-plugin\font\revicons.ttf" />
     <Content Include="libs\slider-revolution-slider\rs-plugin\font\revicons.woff" />
-    <Content Include="libs\slider-revolution-slider\rs-plugin\images\.DS_Store" />
-    <Content Include="libs\slider-revolution-slider\rs-plugin\js\.DS_Store" />
-    <Content Include="metronic\assets\frontend\layout\img\.DS_Store" />
-    <Content Include="metronic\assets\frontend\layout\img\icons\.DS_Store" />
     <Content Include="libs\jquery-validation\README.md" />
     <Content Include="libs\bootstrap\css\bootstrap.css.map" />
-    <Content Include="libs\bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="libs\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="libs\bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="libs\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="libs\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="libs\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="libs\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="libs\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <Content Include="libs\morris\less\morris.core.less" />
     <Content Include="libs\morris\lib\morris.area.coffee" />
     <Content Include="libs\morris\lib\morris.bar.coffee" />
@@ -1776,8 +1892,92 @@
     <Content Include="libs\jstree\themes\default\40px.png" />
     <Content Include="libs\jstree\themes\default\style.css" />
     <Content Include="libs\jstree\themes\default\throbber.gif" />
+    <Content Include="libs\angular-moment\angular-moment.min.js.map" />
+    <Content Include="libs\angular-moment\LICENSE" />
+    <Content Include="libs\angular-moment\README.md" />
+    <Content Include="App\common\views\notifications\settingsModal.cshtml" />
+    <Content Include="App\common\views\notifications\index.cshtml" />
+    <Content Include="Areas\Mpa\Views\Notifications\_SettingsModal.cshtml" />
+    <Content Include="Areas\Mpa\Views\Notifications\Index.cshtml" />
+    <Content Include="App\common\views\notifications\index.less" />
+    <Content Include="Areas\Mpa\Views\Notifications\Index.less" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\errors.json" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-touch.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-resource.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular-message-format.min.js.map" />
+    <Content Include="Scripts\angular-loader.min.js.map" />
+    <Content Include="Scripts\angular-cookies.min.js.map" />
+    <Content Include="Scripts\angular-aria.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="fonts\open-sans\59ZRklaO5bWGqF5A9baEERJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\open-sans\cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2" />
+    <Content Include="fonts\open-sans\DXI1ORHCpsQm3Vp6mXoaTa-j2U0lmluP9RWlSytm3ho.woff2" />
+    <Content Include="fonts\open-sans\DXI1ORHCpsQm3Vp6mXoaTaaRobkAwv3vxw3jMhVENGA.woff2" />
+    <Content Include="fonts\open-sans\DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.woff2" />
+    <Content Include="fonts\open-sans\DXI1ORHCpsQm3Vp6mXoaTf8zf_FOSsgRmwsS7Aa9k2w.woff2" />
+    <Content Include="fonts\open-sans\DXI1ORHCpsQm3Vp6mXoaTRWV49_lSm1NYrwo-zkhivY.woff2" />
+    <Content Include="fonts\open-sans\DXI1ORHCpsQm3Vp6mXoaTT0LW-43aMEzIO6XUTLjad8.woff2" />
+    <Content Include="fonts\open-sans\DXI1ORHCpsQm3Vp6mXoaTZX5f-9o1vgP2EXwfjgl7AY.woff2" />
+    <Content Include="fonts\open-sans\k3k702ZOKiLJc3WVjuplzBWV49_lSm1NYrwo-zkhivY.woff2" />
+    <Content Include="fonts\open-sans\k3k702ZOKiLJc3WVjuplzD0LW-43aMEzIO6XUTLjad8.woff2" />
+    <Content Include="fonts\open-sans\k3k702ZOKiLJc3WVjuplzJX5f-9o1vgP2EXwfjgl7AY.woff2" />
+    <Content Include="fonts\open-sans\k3k702ZOKiLJc3WVjuplzK-j2U0lmluP9RWlSytm3ho.woff2" />
+    <Content Include="fonts\open-sans\k3k702ZOKiLJc3WVjuplzKaRobkAwv3vxw3jMhVENGA.woff2" />
+    <Content Include="fonts\open-sans\k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2" />
+    <Content Include="fonts\open-sans\k3k702ZOKiLJc3WVjuplzP8zf_FOSsgRmwsS7Aa9k2w.woff2" />
+    <Content Include="fonts\open-sans\K88pR3goAWT7BTt32Z01mxJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\open-sans\LWCjsQkB6EMdfHrEVqA1KRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\open-sans\MTP_ySUJH_bn48VBG8sNShWV49_lSm1NYrwo-zkhivY.woff2" />
+    <Content Include="fonts\open-sans\MTP_ySUJH_bn48VBG8sNSj0LW-43aMEzIO6XUTLjad8.woff2" />
+    <Content Include="fonts\open-sans\MTP_ySUJH_bn48VBG8sNSpX5f-9o1vgP2EXwfjgl7AY.woff2" />
+    <Content Include="fonts\open-sans\MTP_ySUJH_bn48VBG8sNSq-j2U0lmluP9RWlSytm3ho.woff2" />
+    <Content Include="fonts\open-sans\MTP_ySUJH_bn48VBG8sNSqaRobkAwv3vxw3jMhVENGA.woff2" />
+    <Content Include="fonts\open-sans\MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2" />
+    <Content Include="fonts\open-sans\MTP_ySUJH_bn48VBG8sNSv8zf_FOSsgRmwsS7Aa9k2w.woff2" />
+    <Content Include="fonts\open-sans\RjgO7rYTmqiVp7vzi-Q5URJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\open-sans\u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\open-sans\xozscpT2726on7jbcb_pAhJtnKITppOI_IvcXXDNrsc.woff2" />
+    <Content Include="fonts\ptsans-narrow\UyYrYy3ltEffJV9QueSi4SppsHecKHw584ktcwPXSnc.woff2" />
+    <Content Include="fonts\ptsans-narrow\UyYrYy3ltEffJV9QueSi4T3sPXe5Q4a3bCZMR7ryN4o.woff2" />
+    <Content Include="fonts\ptsans-narrow\UyYrYy3ltEffJV9QueSi4UU-p1xzoRgkupcXIqgYFBc.woff2" />
+    <Content Include="fonts\ptsans-narrow\UyYrYy3ltEffJV9QueSi4Uvi3q9-zTdQoLrequQTguk.woff2" />
+    <Content Include="fonts\sourcesans-pro\ODelI1aHBYDBqgeIAH2zlC2Q8seG17bfDXYR_jUsrzg.woff2" />
+    <Content Include="fonts\sourcesans-pro\ODelI1aHBYDBqgeIAH2zlNOAHFN6BivSraYkjhveRHY.woff2" />
+    <Content Include="fonts\sourcesans-pro\ODelI1aHBYDBqgeIAH2zlNV_2ngZ8dMf8fLgjYEouxg.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGAIasgMoEcVHo3r268QTaWo.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGClYwVOhDRq2vbpGRTZ7bbs.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGCOFnW3Jk0f09zW_Yln67Ac.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGCVh0V6fR69OLaFLklYbiSk.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGDovqjS_dXPZszO_XltPdNg.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGDRVvBvQIc1z78c__uoBcyI.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGD_j0nMiB9fPhg_k1wdK2h0.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGEfh7q1GW6w7vv_rRnRqMrY.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGEo0As1BFRXtCDhS66znb_k.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGFKFh1TDTPrUZWzVp6FtpG8.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGFxe-GPfKKFmiXaJ_Q0GFr8.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGHZhYM0_6AejPZE-OqA592o.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGJCDkYQxybH_Rl7Qv7ee2N4.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGLpVETArfVi9McBbsQ4atuQ.woff2" />
+    <Content Include="fonts\sourcesans-pro\toadOcfmlt9b38dHJxOBGOode0-EuMkY--TSyExeINg.woff2" />
+    <Content Include="App\host\views\maintenance\index.cshtml" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.cshtml" />
+    <Content Include="App\host\views\maintenance\index.less" />
+    <Content Include="Areas\Mpa\Views\Maintenance\Index.less" />
+    <Content Include="App\common\views\profile\changePicture.less" />
+    <Content Include="Abp\Framework\styles\abp.mixings.less" />
+    <Content Include="Abp\Framework\styles\abp.less" />
+    <Content Include="Abp\Framework\styles\abp.css.map" />
+    <Content Include="App\common\views\users\loginAttemptsModal.cshtml" />
+    <Content Include="App\common\views\users\loginAttemptsModal.less" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.cshtml" />
+    <Content Include="Areas\Mpa\Views\Users\_LoginAttemptsModal.less" />
+    <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
@@ -2522,6 +2722,10 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="libs\respond\respond.min.js" />
     <Content Include="Scripts\moment-with-locales.js" />
@@ -2536,6 +2740,7 @@
     <Content Include="Views\Account\Register.js" />
     <Content Include="Views\Account\Login.js" />
     <Content Include="Views\Account\_Layout-rtl.css" />
+    <Content Include="Views\TenantRegistration\Index.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2543,7 +2748,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Bundling\CssRewriteUrlWithVirtualDirectoryTransform.cs" />
-    <Compile Include="App_Start\AppFolders.cs" />
     <Compile Include="App_Start\Bundling\AsIsBundleOrderer.cs" />
     <Compile Include="App\Startup\AppBundleConfig.cs" />
     <Compile Include="App_Start\Bundling\BundleExtensions.cs" />
@@ -2560,7 +2764,10 @@
     <Compile Include="Areas\Mpa\Controllers\AuditLogsController.cs" />
     <Compile Include="Areas\Mpa\Controllers\Common.cs" />
     <Compile Include="Areas\Mpa\Controllers\EditionsController.cs" />
+    <Compile Include="Areas\Mpa\Controllers\MaintenanceController.cs" />
+    <Compile Include="Areas\Mpa\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Mpa\Controllers\OrganizationUnitsController.cs" />
+    <Compile Include="Areas\Mpa\Models\HostSettings\HostSettingsViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Languages\EditTextModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Controllers\LanguagesController.cs" />
     <Compile Include="Areas\Mpa\Controllers\ProfileController.cs" />
@@ -2569,6 +2776,7 @@
     <Compile Include="Areas\Mpa\Models\Layout\FooterViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Languages\CreateOrEditLanguageModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Common\Modals\LookupModalViewModel.cs" />
+    <Compile Include="Areas\Mpa\Models\Maintenance\MaintenanceViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\OrganizationUnits\CreateOrganizationUnitModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\OrganizationUnits\EditOrganizationUnitModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Tenants\TenantFeaturesEditViewModel.cs" />
@@ -2580,6 +2788,7 @@
     <Compile Include="Areas\Mpa\Models\Roles\CreateOrEditRoleModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Tenants\CreateTenantViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Tenants\EditTenantViewModel.cs" />
+    <Compile Include="Areas\Mpa\Models\Users\UserLoginAttemptModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Users\UserPermissionsEditViewModel.cs" />
     <Compile Include="Areas\Mpa\Models\Users\CreateOrEditUserModalViewModel.cs" />
     <Compile Include="Areas\Mpa\Controllers\DashboardController.cs" />
@@ -2593,6 +2802,7 @@
     <Compile Include="Areas\Mpa\Models\Layout\HeaderViewModel.cs" />
     <Compile Include="Areas\Mpa\Controllers\HomeController.cs" />
     <Compile Include="Areas\Mpa\Controllers\LayoutController.cs" />
+    <Compile Include="Areas\Mpa\Models\Users\UsersViewModel.cs" />
     <Compile Include="Areas\Mpa\MpaAreaRegistration.cs" />
     <Compile Include="Areas\Mpa\Startup\MpaBundleConfig.cs" />
     <Compile Include="Areas\Mpa\Startup\MpaNavigationProvider.cs" />
@@ -2603,8 +2813,12 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\TenantRegistrationController.cs" />
     <Compile Include="Models\Account\ImpersonateModel.cs" />
+    <Compile Include="Models\Account\SwitchToLinkedAccountModel.cs" />
     <Compile Include="Models\Account\TenantSelectionViewModel.cs" />
+    <Compile Include="Models\TenantRegistration\TenantRegisterResultViewModel.cs" />
+    <Compile Include="Models\TenantRegistration\TenantRegistrationViewModel.cs" />
     <Compile Include="MultiTenancy\ITenancyNameFinder.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -2631,10 +2845,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Scripts\underscore.min.map" />
     <Content Include="Views\Account\RegisterResult.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Layout\_Layout.cshtml" />
@@ -2797,24 +3012,23 @@
     <Content Include="Areas\Mpa\Views\OrganizationUnits\_EditModal.cshtml" />
     <Content Include="Areas\Mpa\Views\OrganizationUnits\_CreateModal.cshtml" />
     <Content Include="Areas\Mpa\Views\Common\Modals\_LookupModal.cshtml" />
-    <Content Include="Abp\Framework\styles\abp.mixings.less" />
-    <Content Include="Abp\Framework\styles\abp.less" />
-    <Content Include="Abp\Framework\styles\abp.css.map" />
+    <Content Include="App\common\views\profile\linkedAccountsModal.cshtml" />
+    <Content Include="App\common\views\profile\linkAccountModal.cshtml" />
+    <Content Include="Areas\Mpa\Views\Profile\_LinkedAccountsModal.cshtml" />
+    <Content Include="Areas\Mpa\Views\Profile\_LinkAccountModal.cshtml" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="App\common\views\layout\header.css.map">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FileSystem_Release.pubxml" />
     <Content Include="Views\Account\TenantSelection.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-message-format.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
-    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Views\TenantRegistration\Index.cshtml" />
+    <Content Include="Views\TenantRegistration\RegisterResult.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

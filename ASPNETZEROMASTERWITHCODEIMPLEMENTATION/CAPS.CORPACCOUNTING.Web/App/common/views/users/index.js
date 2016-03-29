@@ -1,8 +1,8 @@
 ﻿(function () {
 
     appModule.controller('common.views.users.index', [
-        '$scope', '$modal', 'uiGridConstants', 'abp.services.app.user',
-        function ($scope, $modal, uiGridConstants, userService) {
+        '$scope', '$uibModal', '$stateParams', 'uiGridConstants', 'abp.services.app.user',
+        function ($scope, $uibModal, $stateParams, uiGridConstants, userService) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -10,7 +10,7 @@
             });
 
             vm.loading = false;
-            vm.filterText = null;
+            vm.filterText = $stateParams.filterText || '';
             vm.currentUserId = abp.session.userId;
 
             vm.permissions = {
@@ -43,9 +43,9 @@
                         width: 120,
                         cellTemplate:
                             '<div class=\"ui-grid-cell-contents\">' +
-                            '  <div class="btn-group dropdown" dropdown="">' +
-                            '    <button class="btn btn-xs btn-primary blue" dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
-                            '    <ul class="dropdown-menu">' +
+                            '  <div class="btn-group dropdown" uib-dropdown="">' +
+                            '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
+                            '    <ul uib-dropdown-menu>' +
                             '      <li><a ng-if="grid.appScope.permissions.impersonation && row.entity.id != grid.appScope.currentUserId" ng-click="grid.appScope.impersonate(row.entity)">' + app.localize('LoginAsThisUser') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.edit" ng-click="grid.appScope.editUser(row.entity)">' + app.localize('Edit') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.changePermissions" ng-click="grid.appScope.editPermissions(row.entity)">' + app.localize('Permissions') + '</a></li>' +
@@ -190,7 +190,7 @@
             };
 
             vm.editPermissions = function (user) {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: '~/App/common/views/users/permissionsModal.cshtml',
                     controller: 'common.views.users.permissionsModal as vm',
                     backdrop: 'static',
@@ -241,7 +241,7 @@
             };
 
             function openCreateOrEditUserModal(userId) {
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                     templateUrl: '~/App/common/views/users/createOrEditModal.cshtml',
                     controller: 'common.views.users.createOrEditModal as vm',
                     backdrop: 'static',

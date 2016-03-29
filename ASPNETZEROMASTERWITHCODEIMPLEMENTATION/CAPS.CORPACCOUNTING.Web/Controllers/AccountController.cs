@@ -14,10 +14,12 @@ using Abp.Configuration;
 using Abp.Configuration.Startup;
 using Abp.Domain.Uow;
 using Abp.Extensions;
+using Abp.Notifications;
 using Abp.Runtime.Caching;
 using Abp.Runtime.Security;
 using Abp.Runtime.Session;
 using Abp.Threading;
+using Abp.Timing;
 using Abp.UI;
 using Abp.Web.Mvc.Authorization;
 using Abp.Web.Mvc.Models;
@@ -30,9 +32,10 @@ using CAPS.CORPACCOUNTING.Authorization.Impersonation;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Configuration;
+using CAPS.CORPACCOUNTING.Debugging;
 using CAPS.CORPACCOUNTING.MultiTenancy;
+using CAPS.CORPACCOUNTING.Notifications;
 using CAPS.CORPACCOUNTING.Security;
-using CAPS.CORPACCOUNTING.Web.Auth;
 using CAPS.CORPACCOUNTING.Web.Controllers.Results;
 using CAPS.CORPACCOUNTING.Web.Models.Account;
 using CAPS.CORPACCOUNTING.Web.MultiTenancy;
@@ -52,6 +55,10 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         private readonly ITenancyNameFinder _tenancyNameFinder;
         private readonly ICacheManager _cacheManager;
         private readonly IWebUrlService _webUrlService;
+        private readonly IAppNotifier _appNotifier;
+        private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper;
+        private readonly IUserLinkManager _userLinkManager;
+        private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
 
         private IAuthenticationManager AuthenticationManager
         {
@@ -70,7 +77,11 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             IUnitOfWorkManager unitOfWorkManager,
             ITenancyNameFinder tenancyNameFinder, 
             ICacheManager cacheManager, 
-            IWebUrlService webUrlService)
+            IAppNotifier appNotifier,
+            IWebUrlService webUrlService,
+            AbpLoginResultTypeHelper abpLoginResultTypeHelper,
+            IUserLinkManager userLinkManager, 
+            INotificationSubscriptionManager notificationSubscriptionManager)
         {
             _userManager = userManager;
             _multiTenancyConfig = multiTenancyConfig;
@@ -81,6 +92,10 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             _tenancyNameFinder = tenancyNameFinder;
             _cacheManager = cacheManager;
             _webUrlService = webUrlService;
+            _appNotifier = appNotifier;
+            _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
+            _userLinkManager = userLinkManager;
+            _notificationSubscriptionManager = notificationSubscriptionManager;
         }
 
         #region Login / Logout
@@ -173,30 +188,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 case AbpLoginResultType.Success:
                     return loginResult;
                 default:
-                    throw CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, tenancyName);
-            }
-        }
-
-        private Exception CreateExceptionForFailedLoginAttempt(AbpLoginResultType result, string usernameOrEmailAddress, string tenancyName)
-        {
-            switch (result)
-            {
-                case AbpLoginResultType.Success:
-                    return new ApplicationException("Don't call this method with a success result!");
-                case AbpLoginResultType.InvalidUserNameOrEmailAddress:
-                case AbpLoginResultType.InvalidPassword:
-                    return new UserFriendlyException(L("LoginFailed"), L("InvalidUserNameOrPassword"));
-                case AbpLoginResultType.InvalidTenancyName:
-                    return new UserFriendlyException(L("LoginFailed"), L("ThereIsNoTenantDefinedWithName{0}", tenancyName));
-                case AbpLoginResultType.TenantIsNotActive:
-                    return new UserFriendlyException(L("LoginFailed"), L("TenantIsNotActive", tenancyName));
-                case AbpLoginResultType.UserIsNotActive:
-                    return new UserFriendlyException(L("LoginFailed"), L("UserIsNotActiveAndCanNotLogin", usernameOrEmailAddress));
-                case AbpLoginResultType.UserEmailIsNotConfirmed:
-                    return new UserFriendlyException(L("LoginFailed"), L("UserEmailIsNotConfirmedAndCanNotLogin"));
-                default: //Can not fall to default actually. But other result types can be added in the future and we may forget to handle it
-                    Logger.Warn("Unhandled login fail reason: " + result);
-                    return new UserFriendlyException(L("LoginFailed"));
+                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, tenancyName);
             }
         }
 
@@ -331,6 +323,11 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                     await _userEmailer.SendEmailActivationLinkAsync(user);
                 }
 
+                //Notifications
+                await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.TenantId, user.Id);
+                await _appNotifier.WelcomeToTheApplicationAsync(user);
+                await _appNotifier.NewUserRegisteredAsync(user);
+
                 //Directly login if possible
                 if (user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin))
                 {
@@ -375,6 +372,11 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
         private bool UseCaptchaOnRegistration()
         {
+            if (DebugHelper.IsDebug)
+            {
+                return false;
+            }
+
             var tenancyName = _tenancyNameFinder.GetCurrentTenancyNameOrNull();
             if (tenancyName.IsNullOrEmpty())
             {
@@ -533,7 +535,9 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 ? (await _tenantManager.GetByIdAsync(user.TenantId.Value)).TenancyName
                 : "";
 
-            return RedirectToAction("Login", new
+            return RedirectToAction(
+                "Login",
+                new
                                              {
                                                  successMessage = L("YourEmailIsConfirmedMessage"),
                                                  tenancyName = tenancyName,
@@ -657,7 +661,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             switch (loginResult.Result)
             {
                 case AbpLoginResultType.Success:
-                    await SignInAsync(loginResult.User, loginResult.Identity, false);
+                    await SignInAsync(loginResult.User, loginResult.Identity, true);
 
                     if (string.IsNullOrWhiteSpace(returnUrl))
                     {
@@ -668,7 +672,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 case AbpLoginResultType.UnknownExternalLogin:
                     return await RegisterView(loginInfo, tenancyName);
                 default:
-                    throw CreateExceptionForFailedLoginAttempt(loginResult.Result, loginInfo.Email ?? loginInfo.DefaultUserName, tenancyName);
+                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, loginInfo.Email ?? loginInfo.DefaultUserName, tenancyName);
             }
         }
 
@@ -677,7 +681,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             var name = loginInfo.DefaultUserName;
             var surname = loginInfo.DefaultUserName;
 
-            var extractedNameAndSurname = TryExtractNameAndSurnameFromClaims(loginInfo.ExternalIdentity.Claims, ref name, ref surname);
+            var extractedNameAndSurname = TryExtractNameAndSurnameFromClaims(loginInfo.ExternalIdentity.Claims.ToList(), ref name, ref surname);
 
             var viewModel = new RegisterViewModel
             {
@@ -711,7 +715,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 .ToList();
         }
 
-        private static bool TryExtractNameAndSurnameFromClaims(IEnumerable<Claim> claims, ref string name, ref string surname)
+        private static bool TryExtractNameAndSurnameFromClaims(List<Claim> claims, ref string name, ref string surname)
         {
             string foundName = null;
             string foundSurname = null;
@@ -790,7 +794,9 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 }
             }
 
-            return await SaveImpersonationTokenAndGetTargetUrl(model.TenantId, model.UserId, false);
+            var result = await SaveImpersonationTokenAndGetTargetUrl(model.TenantId, model.UserId, false);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return result;
         }
 
         [UnitOfWork]
@@ -845,7 +851,9 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 throw new UserFriendlyException(L("NotImpersonatedLoginErrorMessage"));
             }
 
-            return await SaveImpersonationTokenAndGetTargetUrl(AbpSession.ImpersonatorTenantId, AbpSession.ImpersonatorUserId.Value, true);
+            var result = await SaveImpersonationTokenAndGetTargetUrl(AbpSession.ImpersonatorTenantId, AbpSession.ImpersonatorUserId.Value, true);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return result;
         }
 
         private async Task<JsonResult> SaveImpersonationTokenAndGetTargetUrl(int? tenantId, long userId, bool isBackToImpersonator)
@@ -879,6 +887,123 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Create target URL
             var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/ImpersonateSignIn?tokenId=" + tokenId;
             return Json(new MvcAjaxResponse { TargetUrl = targetUrl });
+        }
+
+        #endregion
+
+        #region Linked Account
+
+        [UnitOfWork]
+        [AbpMvcAuthorize]
+        public virtual async Task<JsonResult> SwitchToLinkedAccount(SwitchToLinkedAccountModel model)
+        {
+            CheckModelState();
+
+            using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
+            {
+                if (!await _userLinkManager.AreUsersLinked(AbpSession.GetUserId(), model.TargetUserId))
+                {
+                    throw new ApplicationException(L("This account is not linked to your account"));
+                }
+
+                var targetUser = await _userManager.FindByIdAsync(model.TargetUserId);
+                var targetTenantId = targetUser.TenantId;
+
+                var result = await SaveAccountSwitchTokenAndGetTargetUrl(targetTenantId, model.TargetUserId);
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                return result;
+            }
+        }
+
+        [UnitOfWork]
+        public virtual async Task<ActionResult> SwitchToLinkedAccountSignIn(string tokenId)
+        {
+            var cacheItem = await _cacheManager.GetSwitchToLinkedAccountCache().GetOrDefaultAsync(tokenId);
+            if (cacheItem == null)
+            {
+                throw new UserFriendlyException(L("SwitchToLinkedAccountTokenErrorMessage"));
+            }
+
+            //Switch to requested tenant
+            using (_unitOfWorkManager.Current.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, cacheItem.TargetTenantId))
+            {
+                //Get the user from tenant
+                var user = await _userManager.FindByIdAsync(cacheItem.TargetUserId);
+
+                //Create identity
+                var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+
+                //Add claims for audit logging
+                if (cacheItem.ImpersonatorTenantId.HasValue)
+                {
+                    identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorTenantId, cacheItem.ImpersonatorTenantId.Value.ToString(CultureInfo.InvariantCulture)));
+                }
+
+                if (cacheItem.ImpersonatorUserId.HasValue)
+                {
+                    identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorUserId, cacheItem.ImpersonatorUserId.Value.ToString(CultureInfo.InvariantCulture)));
+                }
+
+                //Sign in with the target user
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+
+                user.LastLoginTime = Clock.Now;
+
+                //Remove the cache item to prevent re-use
+                await _cacheManager.GetSwitchToLinkedAccountCache().RemoveAsync(tokenId);
+
+                return RedirectToAction("Index", "Application");
+            }
+        }
+
+        private async Task<JsonResult> SaveAccountSwitchTokenAndGetTargetUrl(int? targetTenantId, long targetUserId)
+        {
+            //Create a cache item
+            var cacheItem = new SwitchToLinkedAccountCacheItem(
+                targetTenantId,
+                targetUserId,
+                AbpSession.ImpersonatorTenantId,
+                AbpSession.ImpersonatorUserId
+                );
+
+            //Create a random token and save to the cache
+            var tokenId = Guid.NewGuid().ToString();
+            await _cacheManager
+                .GetSwitchToLinkedAccountCache()
+                .SetAsync(tokenId, cacheItem, TimeSpan.FromMinutes(1));
+
+            //Find tenancy name
+            string tenancyName = null;
+            if (targetTenantId.HasValue)
+            {
+                tenancyName = (await _tenantManager.GetByIdAsync(targetTenantId.Value)).TenancyName;
+            }
+
+            //Create target URL
+            var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/SwitchToLinkedAccountSignIn?tokenId=" + tokenId;
+            return Json(new MvcAjaxResponse { TargetUrl = targetUrl });
+        }
+
+        #endregion
+
+        #region Etc
+
+        [AbpMvcAuthorize]
+        public async Task<ActionResult> TestNotification(string message = "", string severity = "info")
+        {
+            if (message.IsNullOrEmpty())
+            {
+                message = "This is a test notification, created at " + Clock.Now;                
+            }
+
+            await _appNotifier.SendMessageAsync(
+                AbpSession.GetUserId(),
+                message,
+                severity.ToPascalCase(CultureInfo.InvariantCulture).ToEnum<NotificationSeverity>()
+                );
+
+            return Content("Sent notification: " + message);
         }
 
         #endregion

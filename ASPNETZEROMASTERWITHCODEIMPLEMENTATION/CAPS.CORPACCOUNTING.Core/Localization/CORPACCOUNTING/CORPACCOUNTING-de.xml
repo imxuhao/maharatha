@@ -147,9 +147,9 @@
     <text name="ExportToExcel" value="Nach Excel exportieren" />
     <text name="ChangeProfilePicture" value="Profilbild ändern" />
     <text name="TenantName_Regex_Description" value="Mandantenname muss aus mindestens 2 Buchstaben bestehen und mit einem Buchstaben beginnen." />
-    <text name="ProfilePicture_Change_Info" value="Sie können eine JPG/JPEG Datei mit maximal 30KB Größe auswählen." />
+    <text name="ProfilePicture_Change_Info" value="Sie können eine JPG/JPEG/PNG Datei mit maximal 1MB Größe auswählen." />
     <text name="ProfilePicture_Change_Error" value="Es ist ein Fehler beim ändern des Profilbilds aufgetreten." />
-    <text name="ProfilePicture_Warn_SizeLimit" value="Bildergröße muss unter 30KB sein. Bitte wählen Sie eine andere Datei." />
+    <text name="ProfilePicture_Warn_SizeLimit" value="Bildergröße muss unter 1MB sein. Bitte wählen Sie eine andere Datei." />
     <text name="ProfilePicture_Warn_FileType" value="Sie können nur JPG/JPEG Dateien wählen. Bitte wählen Sie eine andere Datei." />
     <text name="Dashboard" value="Übersichtsseite" />
     <text name="DashboardHeaderInfo" value="Statistiken und Berichte" />

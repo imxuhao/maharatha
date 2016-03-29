@@ -3,12 +3,13 @@
 @Html.Partial("~/Areas/Mpa/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ChangeProfilePicture")))
 
 <div class="modal-body">
-    <form id="ChangeProfilePictureModalForm" method="POST" action="@(ApplicationPath + "Profile/ChangeProfilePicture")">
+    <form id="ChangeProfilePictureModalForm" method="POST" action="@(ApplicationPath + "Profile/UploadProfilePicture")">
         <div class="form-group">
-            <input type="file" name="ProfilePicture" />
+            <input type="file" name="ProfilePicture"/>
             <span class="help-block m-b-none">@L("ProfilePicture_Change_Info")</span>
         </div>
     </form>
+    <img id="ProfilePictureResize" src="" />
 </div>
 
 @Html.Partial("~/Areas/Mpa/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

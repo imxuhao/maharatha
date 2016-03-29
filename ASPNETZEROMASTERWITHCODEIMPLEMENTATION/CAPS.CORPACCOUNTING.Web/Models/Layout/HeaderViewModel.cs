@@ -19,6 +19,8 @@ namespace CAPS.CORPACCOUNTING.Web.Models.Layout
 
         public bool IsMultiTenancyEnabled { get; set; }
 
+        public bool TenantRegistrationEnabled { get; set; }
+
         public string GetShownLoginName()
         {
             if (!IsMultiTenancyEnabled)
@@ -30,5 +32,7 @@ namespace CAPS.CORPACCOUNTING.Web.Models.Layout
                 ? ".\\" + LoginInformations.User.UserName
                 : LoginInformations.Tenant.TenancyName + "\\" + LoginInformations.User.UserName;
         }
+
+
     }
 }

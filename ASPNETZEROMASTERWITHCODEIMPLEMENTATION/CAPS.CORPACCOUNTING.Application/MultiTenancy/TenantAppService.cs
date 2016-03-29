@@ -11,10 +11,7 @@ using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.Authorization;
-using CAPS.CORPACCOUNTING.Authorization.Roles;
-using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Editions.Dto;
-using CAPS.CORPACCOUNTING.MultiTenancy.Demo;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
@@ -22,18 +19,12 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
     [AbpAuthorize(AppPermissions.Pages_Tenants)]
     public class TenantAppService : CORPACCOUNTINGAppServiceBase, ITenantAppService
     {
-        private readonly RoleManager _roleManager;
-        private readonly IUserEmailer _userEmailer;
-        private readonly TenantDemoDataBuilder _demoDataBuilder;
+        private readonly TenantManager _tenantManager;
 
         public TenantAppService(
-            RoleManager roleManager, 
-            IUserEmailer userEmailer,
-            TenantDemoDataBuilder demoDataBuilder)
+            TenantManager tenantManager)
         {
-            _roleManager = roleManager;
-            _userEmailer = userEmailer;
-            _demoDataBuilder = demoDataBuilder;
+            _tenantManager = tenantManager;
         }
 
         public async Task<PagedResultOutput<TenantListDto>> GetTenants(GetTenantsInput input)
@@ -57,56 +48,17 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Create)]
+        [UnitOfWork(IsDisabled = true)]
         public async Task CreateTenant(CreateTenantInput input)
         {
-            //Create tenant
-            var tenant = new Tenant(input.TenancyName, input.Name) { IsActive = input.IsActive, EditionId = input.EditionId };
-            CheckErrors(await TenantManager.CreateAsync(tenant));
-            await CurrentUnitOfWork.SaveChangesAsync(); //To get new tenant's id.
-
-            //We are working entities of new tenant, so changing tenant filter
-            using (CurrentUnitOfWork.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, tenant.Id))
-            {
-                //Create static roles for new tenant
-                CheckErrors(await _roleManager.CreateStaticRoles(tenant.Id));
-                await CurrentUnitOfWork.SaveChangesAsync(); //To get static role ids
-
-                //grant all permissions to admin role
-                var adminRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.Admin);
-                await _roleManager.GrantAllPermissionsAsync(adminRole);
-
-                //User role should be default
-                var userRole = _roleManager.Roles.Single(r => r.Name == StaticRoleNames.Tenants.User);
-                userRole.IsDefault = true;
-                CheckErrors(await _roleManager.UpdateAsync(userRole));
-
-                //Create admin user for the tenant
-                if (input.AdminPassword.IsNullOrEmpty())
-                {
-                    input.AdminPassword = User.CreateRandomPassword();
-                }
-
-                var adminUser = User.CreateTenantAdminUser(tenant.Id, input.AdminEmailAddress, input.AdminPassword);
-                adminUser.ShouldChangePasswordOnNextLogin = input.ShouldChangePasswordOnNextLogin;
-                adminUser.IsActive = input.IsActive;
-
-                CheckErrors(await UserManager.CreateAsync(adminUser));
-                await CurrentUnitOfWork.SaveChangesAsync(); //To get admin user's id
-
-                //Assign admin user to admin role!
-                CheckErrors(await UserManager.AddToRoleAsync(adminUser.Id, adminRole.Name));
-
-                //Send activation email
-                if (input.SendActivationEmail)
-                {
-                    adminUser.SetNewEmailConfirmationCode();
-                    await _userEmailer.SendEmailActivationLinkAsync(adminUser, input.AdminPassword);
-                }
-
-                await CurrentUnitOfWork.SaveChangesAsync();
-
-                await _demoDataBuilder.BuildForAsync(tenant);
-            }
+            await _tenantManager.CreateWithAdminUserAsync(input.TenancyName,
+                input.Name,
+                input.AdminPassword,
+                input.AdminEmailAddress,
+                input.IsActive,
+                input.EditionId,
+                input.ShouldChangePasswordOnNextLogin,
+                input.SendActivationEmail);
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]

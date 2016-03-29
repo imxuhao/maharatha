@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using Abp.Owin;
+using Hangfire;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -18,6 +20,8 @@ namespace CAPS.CORPACCOUNTING.Web
     {
         public void Configuration(IAppBuilder app)
         {
+            app.UseAbp();
+
             app.UseOAuthBearerAuthentication(AccountController.OAuthBearerOptions);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -42,6 +46,11 @@ namespace CAPS.CORPACCOUNTING.Web
             {
                 app.UseGoogleAuthentication(CreateGoogleAuthOptions());                
             }
+
+            app.MapSignalR();
+
+            //Enable it to use HangFire dashboard (uncomment only if it's enabled in CORPACCOUNTINGWebModule)
+            //app.UseHangfireDashboard();
         }
 
         private static FacebookAuthenticationOptions CreateFacebookAuthOptions()

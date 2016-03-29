@@ -1,7 +1,7 @@
 ﻿(function () {
     appModule.controller('common.views.languages.index', [
-        '$scope', '$state', '$modal', 'abp.services.app.language', 'uiGridConstants',
-        function ($scope, $state, $modal, languageService, uiGridConstants) {
+        '$scope', '$state', '$uibModal', 'abp.services.app.language', 'uiGridConstants',
+        function ($scope, $state, $uibModal, languageService, uiGridConstants) {
             var vm = this;
 
             $scope.$on('$viewContentLoaded', function () {
@@ -31,9 +31,9 @@
                         enableSorting: false,
                         cellTemplate:
                             '<div class=\"ui-grid-cell-contents\">' +
-                            '  <div ng-if="grid.appScope.permissions.changeTexts || row.entity.tenantId == grid.appScope.currentTenantId" class="btn-group dropdown" dropdown="">' +
-                            '    <button class="btn btn-xs btn-primary blue" dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
-                            '    <ul class="dropdown-menu">' +
+                            '  <div ng-if="grid.appScope.permissions.changeTexts || row.entity.tenantId == grid.appScope.currentTenantId" class="btn-group dropdown" uib-dropdown="">' +
+                            '    <button class="btn btn-xs btn-primary blue" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> ' + app.localize('Actions') + ' <span class="caret"></span></button>' +
+                            '    <ul uib-dropdown-menu>' +
                             '      <li><a ng-if="grid.appScope.permissions.edit && row.entity.tenantId == grid.appScope.currentTenantId" ng-click="grid.appScope.editLanguage(row.entity)">' + app.localize('Edit') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.changeTexts" ng-click="grid.appScope.changeTexts(row.entity)">' + app.localize('ChangeTexts') + '</a></li>' +
                             '      <li><a ng-if="grid.appScope.permissions.edit && row.entity.name != grid.appScope.defaultLanguageName" ng-click="grid.appScope.setAsDefaultLanguage(row.entity)">' + app.localize('SetAsDefaultLanguage') + '</a></li>' +
@@ -139,7 +139,7 @@
             }
 
             function openCreateOrEditLanguageModal(id) {
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                     templateUrl: '~/App/common/views/languages/createOrEditModal.cshtml',
                     controller: 'common.views.languages.createOrEditModal as vm',
                     backdrop: 'static',

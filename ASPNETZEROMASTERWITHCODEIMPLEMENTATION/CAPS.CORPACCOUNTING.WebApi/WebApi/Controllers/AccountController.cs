@@ -7,6 +7,7 @@ using Abp.Web.Models;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.MultiTenancy;
@@ -19,15 +20,19 @@ namespace CAPS.CORPACCOUNTING.WebApi.Controllers
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
 
         private readonly UserManager _userManager;
+        private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper;
 
         static AccountController()
         {
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
         }
 
-        public AccountController(UserManager userManager)
+        public AccountController(
+            UserManager userManager, 
+            AbpLoginResultTypeHelper abpLoginResultTypeHelper)
         {
             _userManager = userManager;
+            _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
         }
 
         [HttpPost]
@@ -59,30 +64,7 @@ namespace CAPS.CORPACCOUNTING.WebApi.Controllers
                 case AbpLoginResultType.Success:
                     return loginResult;
                 default:
-                    throw CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, tenancyName);
-            }
-        }
-
-        private Exception CreateExceptionForFailedLoginAttempt(AbpLoginResultType result, string usernameOrEmailAddress, string tenancyName)
-        {
-            switch (result)
-            {
-                case AbpLoginResultType.Success:
-                    return new ApplicationException("Don't call this method with a success result!");
-                case AbpLoginResultType.InvalidUserNameOrEmailAddress:
-                case AbpLoginResultType.InvalidPassword:
-                    return new UserFriendlyException(L("LoginFailed"), L("InvalidUserNameOrPassword"));
-                case AbpLoginResultType.InvalidTenancyName:
-                    return new UserFriendlyException(L("LoginFailed"), L("ThereIsNoTenantDefinedWithName{0}", tenancyName));
-                case AbpLoginResultType.TenantIsNotActive:
-                    return new UserFriendlyException(L("LoginFailed"), L("TenantIsNotActive", tenancyName));
-                case AbpLoginResultType.UserIsNotActive:
-                    return new UserFriendlyException(L("LoginFailed"), L("UserIsNotActiveAndCanNotLogin", usernameOrEmailAddress));
-                case AbpLoginResultType.UserEmailIsNotConfirmed:
-                    return new UserFriendlyException(L("LoginFailed"), L("UserEmailIsNotConfirmedAndCanNotLogin"));
-                default: //Can not fall to default actually. But other result types can be added in the future and we may forget to handle it
-                    Logger.Warn("Unhandled login fail reason: " + result);
-                    return new UserFriendlyException(L("LoginFailed"));
+                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, tenancyName);
             }
         }
 

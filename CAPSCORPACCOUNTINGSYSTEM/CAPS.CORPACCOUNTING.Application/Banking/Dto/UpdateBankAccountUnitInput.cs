@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
-    [AutoMapTo(typeof(BankAccountUnit))]
     public class UpdateBankAccountUnitInput:IInputDto
     {
 

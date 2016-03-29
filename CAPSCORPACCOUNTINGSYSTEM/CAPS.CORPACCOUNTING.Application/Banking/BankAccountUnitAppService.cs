@@ -15,6 +15,7 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using System.Collections.ObjectModel;
+using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
@@ -57,6 +58,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         }
 
 
+        /// <summary>
+        /// Create the BankAccount.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task<BankAccountUnitDto> CreateBankAccountUnit(CreateBankAccountUnitInput input)
         {
@@ -64,7 +70,7 @@ namespace CAPS.CORPACCOUNTING.Banking
             await _bankAccountUnitManager.CreateAsync(bankAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            if (input.Addresses != null)
+            if (!ReferenceEquals(input.Addresses, null))
             {
                 foreach (var address in input.Addresses)
                 {
@@ -84,34 +90,45 @@ namespace CAPS.CORPACCOUNTING.Banking
 
         }
 
+
+        /// <summary>
+        ///  Update the BankAccount based on BankAccountId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [UnitOfWork]
         public async Task<BankAccountUnitDto> UpdateBankAccountUnit(UpdateBankAccountUnitInput input)
         {
             var bankAccountUnit = await _bankAccountUnitRepository.GetAsync(input.BankAccountId);
-            bankAccountUnit = input.MapTo<BankAccountUnit>();
-            bankAccountUnit.Id = input.BankAccountId;
+            Mapper.CreateMap<UpdateBankAccountUnitInput, BankAccountUnit>()
+                          .ForMember(u => u.Id, ap => ap.MapFrom(src => src.BankAccountId));
+            Mapper.Map(input, bankAccountUnit);
             await _bankAccountUnitManager.UpdateAsync(bankAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            foreach (var address in input.Addresses)
+            if (!ReferenceEquals(input.Addresses, null))
             {
-                if (address.AddressId != 0)
-                    await _addressAppService.UpdateAddressUnit(address);
-                else
+                foreach (var address in input.Addresses)
                 {
-                    if (address.Line1 != null || address.Line2 != null ||
-                        address.Line4 != null || address.Line4 != null ||
-                        address.State != null || address.Country != null ||
-                        address.Email != null || address.Phone1 != null || address.Website != null)
+                    if (address.AddressId != 0)
+                        await _addressAppService.UpdateAddressUnit(address);
+                    else
                     {
-                        address.TypeofObjectId = TypeofObject.Bank;
-                        address.ObjectId = input.BankAccountId;
-                        await
-                            _addressAppService.CreateAddressUnit(
-                                AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
+                        if (address.Line1 != null || address.Line2 != null ||
+                            address.Line4 != null || address.Line4 != null ||
+                            address.State != null || address.Country != null ||
+                            address.Email != null || address.Phone1 != null || address.Website != null)
+                        {
+                            address.TypeofObjectId = TypeofObject.Bank;
+                            address.ObjectId = input.BankAccountId;
+                            await
+                                _addressAppService.CreateAddressUnit(
+                                    AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
+                        }
                     }
-                }
-                await CurrentUnitOfWork.SaveChangesAsync();
+                    await CurrentUnitOfWork.SaveChangesAsync();
 
+                }
             }
 
 
@@ -124,6 +141,12 @@ namespace CAPS.CORPACCOUNTING.Banking
 
         }
 
+
+        /// <summary>
+        /// Delete the BankAccount based on BankAccountId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task DeleteBankAccountUnit(IdInput input)
         {
@@ -137,25 +160,10 @@ namespace CAPS.CORPACCOUNTING.Banking
         }
 
         /// <summary>
-        /// Get the BankAccount Details By BankAccountId
+        /// Get the list of all BankAccounts
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<BankAccountUnitDto> GetBankAccountUnitsById(IdInput input)
-        {
-            var bankAccountItem = await _bankAccountUnitRepository.GetAsync(input.Id);
-            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Bank);
-            var result = bankAccountItem.MapTo<BankAccountUnitDto>();
-            result.BankAccountId = bankAccountItem.Id;
-            result.Address = new Collection<AddressUnitDto>();
-            for (int i = 0; i < addressitems.Count; i++)
-            {
-                result.Address.Add(addressitems[i].MapTo<AddressUnitDto>());
-                result.Address[i].AddressId = addressitems[i].Id;
-            }
-            return result;
-        }
-
         public async Task<PagedResultOutput<BankAccountAndAddressDto>> GetBankAccountUnits(SearchInputDto input)
         {
 
@@ -178,6 +186,26 @@ namespace CAPS.CORPACCOUNTING.Banking
                                  }).ToList();
 
             return new PagedResultOutput<BankAccountAndAddressDto>(resultCount, mapEnumResults);
+        }
+
+        /// <summary>
+        /// Get the BankAccount Details By BankAccountId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<BankAccountUnitDto> GetBankAccountUnitsById(IdInput input)
+        {
+            var bankAccountItem = await _bankAccountUnitRepository.GetAsync(input.Id);
+            var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Bank);
+            var result = bankAccountItem.MapTo<BankAccountUnitDto>();
+            result.BankAccountId = bankAccountItem.Id;
+            result.Address = new Collection<AddressUnitDto>();
+            for (int i = 0; i < addressitems.Count; i++)
+            {
+                result.Address.Add(addressitems[i].MapTo<AddressUnitDto>());
+                result.Address[i].AddressId = addressitems[i].Id;
+            }
+            return result;
         }
 
         private IQueryable<BankAccountAndAddressDto> CreateBankAccountQuery(SearchInputDto input)

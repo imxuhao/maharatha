@@ -143,8 +143,7 @@
     <Compile Include="Banking\IBankAccountUnitAppService.cs" />
     <Compile Include="Caching\CachingAppService.cs" />
     <Compile Include="Caching\Dto\CacheDto.cs" />
-    <Compile Include="Caching\ICachingAppService.cs" />
-    <Compile Include="Common\Dto\NameValueExtendedDto.cs" />
+    <Compile Include="Caching\ICachingAppService.cs" />   
     <Compile Include="Configuration\Host\Dto\SendTestEmailInput.cs" />
     <Compile Include="Configuration\Host\Dto\TenantManagementSettingsEditDto.cs" />
     <Compile Include="CORPACCOUNTINGApplicationModule.cs" />

@@ -1,5 +1,5 @@
 
-Ext.define('Chaching.view.tenants.TenantsGrid',{
+Ext.define('Chaching.view.tenants.TenantsGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
@@ -11,15 +11,15 @@ Ext.define('Chaching.view.tenants.TenantsGrid',{
     viewModel: {
         type: 'tenants-tenantsgrid'
     },
-    xtype:'host.tenants',
+    xtype: 'host.tenants',
     store: 'Personnel',
-    title:'Personnel',
+    name: 'Tenants',
     padding: 5,
-    headerButtonsConfig:[
+    headerButtonsConfig: [
     {
         xtype: 'displayfield',
         value: abp.localization.localize("Tenants"),
-        ui:'headerTitle'
+        ui: 'headerTitle'
     }, {
         xtype: 'displayfield',
         value: abp.localization.localize("TenantsHeaderInfo"),
@@ -29,25 +29,29 @@ Ext.define('Chaching.view.tenants.TenantsGrid',{
         scale: 'small',
         ui: 'actionButton',
         text: abp.localization.localize("CreateNewTenant").toUpperCase(),
+        checkPermission: true,
         iconCls: 'fa fa-plus',
-        iconAlign:'left'
+        iconAlign: 'left'
     }],
     requireExport: true,
-    requireMultiSearch:true,
-    requireMultisort:true,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable:true,
+    editingMode: 'row',
+    columnLines: true,
+
     columns: [
         {
             text: 'Name',
             dataIndex: 'name',
             stateId: 'name',
             sortable: true,
-            width: 160,
+            width: '25%',
             // simplest filter configuration
-                            
             filterField: {
                 xtype: 'textfield',
-                width:160,
-                emptyText:'Enter name to search'
+                width: '100%',
+                emptyText: 'Enter name to search'
                 //plugins: [{
                 //    ptype: 'saki-ficn'
                 //    , iconCls: 'fa fa-info'
@@ -58,24 +62,23 @@ Ext.define('Chaching.view.tenants.TenantsGrid',{
             text: 'Email',
             dataIndex: 'email',
             sortable: true,
-            flex: 1
-
+            width: '50%'
             // equivalent to filterField:true
             // as textfield is created by default
             ,
             filterField: {
                 xtype: 'textfield',
-                flex: 1,
+                width: '100%',
                 emptyText: 'Enter email to search'
             }
         }, {
             text: 'Phone',
             dataIndex: 'phone',
             sortable: true,
-            width: 110,
+            width: '25%',
             filterField: {
                 xtype: 'textfield',
-                width: 160,
+                width: '100%',
                 emptyText: 'Enter phone to search'
             }
         }

@@ -1,14 +1,18 @@
 ﻿@include extjs-tab-panel-ui(
     $ui: 'dashboard',
     $ui-tab-background-color: #00BCD4,
-$ui-bar-background-color:#00BCD4,
-$ui-tab-background-color-over:white,
+$ui-tab-background-color-focus:#047E8E,
+$ui-bar-background-color:#F3F5F9,
+$ui-tab-background-color-over:#047E8E,
+$ui-tab-background-color-active:#047E8E,
+$ui-tab-background-color-focus-over:#047E8E,
+$ui-tab-background-color-focus-active:#047E8E,
     $ui-tab-color: white,
     $ui-tab-color-over: white,
-    $ui-tab-color-active: #4c82b1,
+    $ui-tab-color-active: white,
     $ui-tab-glyph-color: white,
     $ui-tab-glyph-color-over: white,
-    $ui-tab-glyph-color-active: #4c82b1,
+    $ui-tab-glyph-color-active: white,
     $ui-tab-glyph-opacity: 1,
     $ui-tab-border-radius: 5px 5px 0 0,
     $ui-tab-border-width: 1px,
@@ -19,13 +23,17 @@ $ui-tab-color:white,
 $ui-tab-font-weight-active:600,
 $ui-tab-font-weight-over:600,
 $ui-tab-color-over:white,
-$ui-tab-closable-icon-glyph-color:#4c82b1,
+$ui-tab-closable-icon-glyph-color:white,
+$ui-tab-closable-icon-glyph-color-active:white,
 $ui-tab-closable-icon-glyph-color-over:white
 );
 .x-tab-bar-dashboard{
     border-radius:5px 5px 0 0 !important;
 }
-/**
+.x-tab-over.x-tab-dashboard{
+    background-color:#047E8E !important;
+}
+/** #00BCD4-light  #047E8E-dark
  * Generates a set of style rules for the "navigation" panel UI.
  */
 @include extjs-panel-ui(

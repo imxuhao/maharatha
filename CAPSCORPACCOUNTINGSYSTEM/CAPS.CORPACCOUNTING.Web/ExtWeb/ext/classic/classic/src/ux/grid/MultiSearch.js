@@ -127,25 +127,25 @@
  *
  */
 Ext.define('Ext.saki.grid.MultiSearch', {
-     extend:'Ext.container.Container'
-    ,alternateClassName:'Ext.ux.grid.MultiSearch'
-    ,alias:['plugin.saki-gms', 'plugin.ux-gms']
+    extend: 'Ext.container.Container'
+    , alternateClassName: 'Ext.ux.grid.MultiSearch'
+    , alias: ['plugin.saki-gms', 'plugin.ux-gms']
 
     // see also custom methods:
     // applyStore, updateStore, updateColumns
-    ,config:{
+    , config: {
         /**
          * @private
          * @cfg {Ext.data.Store} store Automatically set from the parent grid
          */
-        store:null
+        store: null
 
         /**
          * @private
          * @cfg {Ext.grid.header.Column[]} columns Automatically
          * set from the parent grid
          */
-        ,columns:null
+        , columns: null
     }
 
     /**
@@ -153,7 +153,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @cfg {String} layout
      */
-    ,layout:'hbox'
+    , layout: 'hbox'
 
     /**
      * @hide
@@ -161,34 +161,34 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @cfg {String} dock Determines where to put filter fields. The only tested
      * and reasonable position is 'top'
      */
-    ,dock:'top'
+    , dock: 'top'
 
-    ,baseCls:'saki-gms-ct'
+    , baseCls: 'saki-gms-ct'
 
     /**
      * @cfg {Number}
      * Time in milliseconds to wait after the user stops typing, before
      * triggering the filtering
      */
-    ,buffer:500
+    , buffer: 500
 
     /**
      * @cfg {String} clearItemIconCls CSS class to use for "Clear Filter" menu item.
      */
-    ,clearItemIconCls:'icon-clear-filter'
+    , clearItemIconCls: 'icon-clear-filter'
 
     /**
      * @cfg {String} clearItemT Text to use for "Clear Filter" menu item.
      * This text can be localized by an override.
      */
-    ,clearItemT:'Clear Filter'
+    , clearItemT: 'Clear Filter'
 
     /**
      * @cfg {Boolean}
      * If true, filtering is not triggered as user types but
      * after he presses Enter key
      */
-    ,filterOnEnter:false
+    , filterOnEnter: false
 
     /**
      * @cfg {Number}
@@ -196,24 +196,24 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * theme you use in your application. The default value looks good with
      * Ext 5 Crisp Theme. Set it to 21 for Ext 4 classic and gray themes.
      */
-    ,height:24
+    , height: 24
 
     /**
      * @cfg {Boolean}
      * Set it to false if you do not want column with multisearch settings menu
      */
-    ,iconColumn:true
+    , iconColumn: true
 
     /**
      * @cfg {String} inSeparator Character used as separator to delimit "in" operator
      * items.
      */
-    ,inSeparator:','
+    , inSeparator: ','
 
     /**
      * @cfg {RegExp} operatorRe Regular expression of recognized operators
      */
-    ,operatorRe:/^(=|!=|<=|>=|<|>|in |like )/
+    , operatorRe: /^(=|!=|<=|>=|<|>|in |like )/
 
     /**
      * @cfg {String} parseOperator Set it to false to not parse operator from the
@@ -221,13 +221,13 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * value, however, if you use the plugin with Ext 4.x, or if your server parses
      * operators itself, set parseOperator to false.
      */
-    ,parseOperator:true
+    , parseOperator: true
 
     /**
      * @cfg {Number}
      * Must be high enough to render the filter row under the grid header
      */
-    ,weight:1000
+    , weight: 1000
 
     /**
      * called from setStore
@@ -235,13 +235,13 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @returns {Ext.data.Store}
      * @private
      */
-    ,applyStore:function(store) {
+    , applyStore: function (store) {
         store = store || this.grid.getStore();
 
         // Ext 4.x compatibility
         // Ext 4 Store does not have getFilters method, so add it
-        if(!store.getFilters) {
-            store.getFilters = function() {
+        if (!store.getFilters) {
+            store.getFilters = function () {
                 return this.filters;
             };
         }
@@ -254,19 +254,19 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @param {Ext.data.Store} newStore
      * @param {Ext.data.Store} oldStore
      */
-    ,updateStore:function(newStore, oldStore) {
+    , updateStore: function (newStore, oldStore) {
         // handling necessary on store change comes here
-        var  me = this
-            ,cfg = {
-            filterchange:{
-                 scope:this
-                ,fn:me.onStoreFilterChange
-            }
-        };
-        if(oldStore) {
+        var me = this
+            , cfg = {
+                filterchange: {
+                    scope: this
+                    , fn: me.onStoreFilterChange
+                }
+            };
+        if (oldStore) {
             oldStore.un(cfg);
         }
-        if(newStore) {
+        if (newStore) {
             newStore.on(cfg);
 
             // new store can be filtered so we set
@@ -280,9 +280,9 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * filters applied to the store.
      * @private
      */
-    ,onStoreFilterChange:function() {
+    , onStoreFilterChange: function () {
         var me = this;
-        if(!me.filtering) {
+        if (!me.filtering) {
             me.setValuesFromStore();
         }
     } // eo function onStoreFilterChange
@@ -292,11 +292,11 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * filtering status of the store
      * @private
      */
-    ,setValuesFromStore:function() {
-        var  me = this
-            ,values = me.getStoreFilters()
+    , setValuesFromStore: function () {
+        var me = this
+            , values = me.getStoreFilters()
         ;
-        if(values) {
+        if (values) {
             me.setValues(values, true);
         }
         else {
@@ -309,19 +309,19 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * that is suitable as argument of setValues(values) call
      * @returns {Object|null} values
      */
-    ,getStoreFilters:function() {
+    , getStoreFilters: function () {
 
-        var  me = this
-            ,store = me.getStore()
-            ,values = null
+        var me = this
+            , store = me.getStore()
+            , values = null
         ;
-        if(store) {
+        if (store) {
 
             store.getFilters().each(function (filter) {
-                var  property = filter.getProperty ? filter.getProperty() : filter.property
-                    ,operator = filter.getOperator ? filter.getOperator() : filter.operator
-                    ,value = filter.getValue ? filter.getValue() : filter.value
-                    ,space = ''
+                var property = filter.getProperty ? filter.getProperty() : filter.property
+                    , operator = filter.getOperator ? filter.getOperator() : filter.operator
+                    , value = filter.getValue ? filter.getValue() : filter.value
+                    , space = ''
                 ;
                 if ('in' === operator) {
                     value = value.join(',');
@@ -342,10 +342,10 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * called from setColumns
      * @private
      */
-    ,updateColumns:function() {
-        var  me = this
-            ,headerCt = me.headerCt
-            ,selModel = me.grid.getSelectionModel()
+    , updateColumns: function () {
+        var me = this
+            , headerCt = me.headerCt
+            , selModel = me.grid.getSelectionModel()
         ;
 
         // don't get interrupted by events
@@ -361,13 +361,13 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         me.add(me.getFields());
 
         // inject space for checkbox selection model
-        if('Ext.selection.CheckboxModel' === selModel.$className) {
+        if ('Ext.selection.CheckboxModel' === selModel.$className) {
             //console.log('pushing checkbox column')
             me.items.insert(selModel.injectCheckbox, Ext.widget({
-                 itemId:'item-' + selModel.injectCheckbox
-                ,xtype:'component'
-                ,cls:'saki-gms-nofilter'
-                ,height:me.height
+                itemId: 'item-' + selModel.injectCheckbox
+                , xtype: 'component'
+                , cls: 'saki-gms-nofilter'
+                , height: me.height
             }));
         }
 
@@ -380,7 +380,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         me.grid.getView().refresh();
 
         // let dom settle
-        Ext.Function.defer(function(){
+        Ext.Function.defer(function () {
             me.syncCols();
             me.syncUi();
         }, 1);
@@ -392,52 +392,59 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @param {Ext.grid.Panel} grid The grid this plugin is in.
      */
-    ,init:function(grid) {
-        var  me = this
-            ,headerCt = grid.getView().getHeaderCt()
-            ,extVersion = Ext.versions.extjs.major
+    , init: function (grid) {
+        var me = this
+            , headerCt = grid.getView().getHeaderCt()
+            , extVersion = Ext.versions.extjs.major
         ;
 
         // safety check (mainly) for Architect who does not have RegExp type, only string
-        if(Ext.isString(me.operatorRe)) {
-            me.operatorRe = new RegExp(me.operatorRe.replace(/(^\/|\/$)/g,''));
+        if (Ext.isString(me.operatorRe)) {
+            me.operatorRe = new RegExp(me.operatorRe.replace(/(^\/|\/$)/g, ''));
         }
 
         // save some vars in the instance
         Ext.apply(me, {
-             grid:grid
-            ,headerCt:headerCt
-            ,extVersion:extVersion
+            grid: grid
+            , headerCt: headerCt
+            , extVersion: extVersion
         });
 
         // install listeners on headerCt to sync sizes and positions
         headerCt.on({
-            afterlayout:{
-                 fn:me.afterHdLayout
-                ,scope:me
+            afterlayout: {
+                fn: me.afterHdLayout
+                , scope: me
             }
-            ,afterrender:{
-                 fn:me.afterHdRender
-                ,scope:me
-                ,single:true
+            , afterrender: {
+                fn: me.afterHdRender
+                , scope: me
+                , single: true
             }
-            ,columnmove:{
-                 fn:me.onColumnMove
-                ,scope:me
+            , columnmove: {
+                fn: me.onColumnMove
+                , scope: me
             }
         });
 
         grid.on({
-             scope:me
-            ,reconfigure:me.onReconfigure
+            scope: me
+            , reconfigure: me.onReconfigure
         });
 
+        var gridView = grid.getView();
+        if (gridView) {
+            var scroller = gridView.getScrollable();
+            if (scroller) {
+                scroller.on('scroll', me.onGridScroll, me);
+            }
+        }
         me.on({
-             afterrender:{
-                  fn:me.onAfterRender
-                 ,scope:me
-                 ,single:true
-             }
+            afterrender: {
+                fn: me.onAfterRender
+                , scope: me
+                , single: true
+            }
         });
 
         me.onReconfigure(grid, grid.store, grid.columns);
@@ -448,12 +455,14 @@ Ext.define('Ext.saki.grid.MultiSearch', {
          * @member Ext.grid.Panel
          * @returns {Ext.saki.grid.MultiSearch}
          */
-        grid.getFilter = function() {
+        grid.getFilter = function () {
             return me;
         };
 
     } // eo function init
-
+    , updateGridLayout: function (grid, e) {
+        grid.component.up().doLayout();
+    }
 
     /**
      * Grid reconfigure event listener. Main entry point
@@ -462,7 +471,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @param {Ext.grid.column.Column[]} columns
      * @param {Ext.data.Store} store
      */
-    ,onReconfigure:function(grid, store, columns) {
+    , onReconfigure: function (grid, store, columns) {
 
         // first we need to set new columns
         this.setColumns(columns);
@@ -478,60 +487,60 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @returns {Ext.form.Field[]} Array of instantiated fields
      */
-    ,getFields:function() {
-        var  me = this
-            ,items = []
-            ,gridCols = me.headerCt.getGridColumns()
-            ,selModel = me.grid.getSelectionModel()
+    , getFields: function () {
+        var me = this
+            , items = []
+            , gridCols = me.headerCt.getGridColumns()
+            , selModel = me.grid.getSelectionModel()
         ;
 
-        Ext.Array.each(gridCols, function(item, i) {
-            var  filter = item.filterField || item.filter
-                ,cfg = {xtype:'component'}
-                ,field = null
+        Ext.Array.each(gridCols, function (item, i) {
+            var filter = item.filterField || item.filter
+                , cfg = { xtype: 'component' }
+                , field = null
             ;
 
             // filter:true - create textfield
-            if(true === filter) {
+            if (true === filter) {
                 cfg.xtype = 'textfield';
             }
 
-            // filter is an instance of component
-            else if(filter && filter.isComponent) {
+                // filter is an instance of component
+            else if (filter && filter.isComponent) {
                 cfg = filter;
             }
 
-            // filter is string - that's xtype in fact
-            else if('string' === typeof filter) {
+                // filter is string - that's xtype in fact
+            else if ('string' === typeof filter) {
                 cfg.xtype = filter;
             }
 
-            // filter is a config object
-            else if(Ext.isObject(filter)) {
+                // filter is a config object
+            else if (Ext.isObject(filter)) {
                 Ext.apply(cfg, filter);
             }
 
-            // otherwise column shouldn't be filtered
+                // otherwise column shouldn't be filtered
             else {
                 cfg.cls = 'saki-gms-nofilter';
                 cfg.height = me.height;
             }
-            if('iconCol' === item.itemId) {
+            if ('iconCol' === item.itemId) {
                 Ext.apply(cfg, me.getIcon());
             }
             //if('component' !== cfg.xtype) {
-                Ext.apply(cfg, {
-                     itemId:item.itemId ? item.itemId : item.dataIndex || 'item' + i
-                });
+            Ext.apply(cfg, {
+                itemId: item.itemId ? item.itemId : item.dataIndex || 'item' + i
+            });
             //}
 
             field = Ext.widget(cfg);
 
-            if(me.filterOnEnter) {
+            if (me.filterOnEnter) {
                 field.on('specialkey', me.onSpecialKey, me);
             }
             else {
-                field.on('change', me.onChange, me, {buffer:me.buffer});
+                field.on('change', me.onChange, me, { buffer: me.buffer });
             }
 
             items.push(field);
@@ -545,11 +554,11 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @param {Ext.form.Field} field Field firing the event
      */
-    ,onChange:function(field) {
-        var  me = this;
+    , onChange: function (field) {
+        var me = this;
 
         // do nothing if not dirty
-        if(field.isDirty()){
+        if (field.isDirty()) {
             field.resetOriginalValue();
             me.doFieldChange(field);
         }
@@ -561,15 +570,15 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @param {Ext.form.field.Field} field
      */
-    ,doFieldChange:function(field) {
-        var  me = this
-            ,value = field.getSubmitValue()
-            ,property = field.getItemId()
-            ,parse = me.parseOperator
-            ,filter
+    , doFieldChange: function (field) {
+        var me = this
+            , value = field.getSubmitValue()
+            , property = field.getItemId()
+            , parse = me.parseOperator
+            , filter
         ;
 
-        filter = parse ? me.parseUserValue(value) : {value:value};
+        filter = parse ? me.parseUserValue(value) : { value: value };
         filter.property = property;
 
         // Ext 4 compat
@@ -585,15 +594,15 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @returns {Ext.util.Filter[]} Config objects
      */
-    ,getFilters:function() {
-        var  me = this
-            ,filters = []
+    , getFilters: function () {
+        var me = this
+            , filters = []
         ;
-        me.items.each(function(item){
+        me.items.each(function (item) {
             var filter;
-            if(item.isFormField) {
+            if (item.isFormField) {
                 filter = me.getFilterFromField(item);
-                if(filter) {
+                if (filter) {
                     filters.push(filter);
                 }
             }
@@ -607,12 +616,12 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @param {Ext.form.field.Field} field
      * @returns {null|Ext.util.Filter} Filter config object
      */
-    ,getFilterFromField:function(field) {
-        var  me = this
-            ,value = field.getSubmitValue()
-            ,filter
+    , getFilterFromField: function (field) {
+        var me = this
+            , value = field.getSubmitValue()
+            , filter
         ;
-        if(value) {
+        if (value) {
             filter = me.parseUserValue(value);
             filter.property = field.getItemId();
             return filter;
@@ -633,21 +642,21 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * This method should not be called from outside as it does not update
      * filter form fields. Use {@link #setValues setValues} instead.
      */
-    ,setFilter:function(filter) {
-        var  me = this
-            ,store = me.getStore()
+    , setFilter: function (filter) {
+        var me = this
+            , store = me.getStore()
         ;
 
-        if(Ext.isArray(filter)) {
+        if (Ext.isArray(filter)) {
             store.clearFilter(0 < filter.length);
             store.addFilter(filter);
         }
         else {
             me.filtering = true;
-            if(!filter.value) {
-                if(4 === me.extVersion) {
+            if (!filter.value) {
+                if (4 === me.extVersion) {
                     store.filters.removeAtKey(filter.property);
-                    if(store.filters.getCount()) {
+                    if (store.filters.getCount()) {
                         store.filter();
                     }
                     else {
@@ -672,23 +681,23 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @param {Ext.form.Field} field
      * @param {Boolean} preventFilter True to NOT trigger filtering
      */
-    ,clearField:function(field, preventFilter) {
-        var  me = this;
+    , clearField: function (field, preventFilter) {
+        var me = this;
 
-        if(field && Ext.isFunction(field.setValue) && !field.readOnly && !field.disabled) {
+        if (field && Ext.isFunction(field.setValue) && !field.readOnly && !field.disabled) {
 
 
-            if(true === preventFilter) {
+            if (true === preventFilter) {
                 field.suspendEvents();
             }
             field.setValue('');
             field.resetOriginalValue();
 
-            if(true === preventFilter) {
+            if (true === preventFilter) {
                 field.resumeEvents();
             }
 
-            if(true !== preventFilter) {
+            if (true !== preventFilter) {
                 me.doFieldChange(field);
             }
         }
@@ -701,23 +710,23 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @param {Boolean} preventFilter Set it to true
      * if you do not want to trigger the filtering
      */
-    ,setValues:function(values, preventFilter) {
-        var  me = this
-            ,field
+    , setValues: function (values, preventFilter) {
+        var me = this
+            , field
         ;
-        if(values && Ext.isObject(values)) {
+        if (values && Ext.isObject(values)) {
             me.clearValues(true);
-            Ext.Object.each(values, function(key, value){
+            Ext.Object.each(values, function (key, value) {
                 field = me.items.get(key);
-                if(field && Ext.isFunction(field.setValue)) {
+                if (field && Ext.isFunction(field.setValue)) {
 
-                    if(true === preventFilter) {
+                    if (true === preventFilter) {
                         field.suspendEvents();
                     }
                     field.setValue(value);
                     field.resetOriginalValue();
 
-                    if(true === preventFilter) {
+                    if (true === preventFilter) {
                         field.resumeEvents();
                     }
                 }
@@ -730,12 +739,12 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @param {Boolean} [preventFilter] True to prevent the
      * actual filtering from occurring
      */
-    ,clearValues:function(preventFilter) {
+    , clearValues: function (preventFilter) {
         var me = this;
-        me.items.each(function(field){
+        me.items.each(function (field) {
             me.clearField(field, preventFilter);
         });
-        if(!preventFilter) {
+        if (!preventFilter) {
             me.getStore().clearFilter();
         }
     } // eo function clearValues
@@ -748,15 +757,15 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * by tabbing through filter fields
      * @private
      */
-    ,onAfterRender:function() {
-        var  me = this
-            ,scrollerEl
-            ,event
-            ;
+    , onAfterRender: function () {
+        var me = this
+            , scrollerEl
+            , event
+        ;
 
         // Ext 4 does not have getScrollerEl function
-        if(!Ext.isFunction(me.getScrollerEl)) {
-            me.getScrollerEl = function() {
+        if (!Ext.isFunction(me.getScrollerEl)) {
+            me.getScrollerEl = function () {
                 return me.layout.innerCt;
             };
         }
@@ -764,7 +773,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         scrollerEl = me.getScrollerEl();
 
         // different events are listend to for Ext 5 and Ext 4
-        event = 5 === me.extVersion ? 'scroll' : 'keyup';
+        event = 6 === me.extVersion ? 'scroll' : 'keyup';
 
         scrollerEl.on(event, me.onFilterScroll, me);
     } // eo function onAfterRender
@@ -774,15 +783,14 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * Scrolls grid view in sync with GMS scroll
      * @private
      */
-    ,onFilterScroll:function() {
-        var  me = this
-            ,scrollLeft = me.getScrollerEl().getScrollLeft()
+    , onFilterScroll: function () {
+        var me = this
+            , scrollLeft = me.getScrollerEl().getScrollLeft()
         ;
 
-        if(5 === me.extVersion) {
+        if (5 === me.extVersion || 6 === me.extVersion) {
             me.grid.getView().scrollTo(scrollLeft, 0);
-        }
-        else {
+        } else {
             me.grid.getView().getEl().scrollTo('left', scrollLeft);
         }
     } // eo function onFilterScroll
@@ -794,38 +802,38 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @param {String} v The value to parse
      * @returns {Object} Object with value and optional operator
      */
-    ,parseUserValue:function(v) {
-        var  me = this
-            ,re = me.operatorRe
-            ,sep = me.inSeparator
-            ,va
-            ,operator
-            ,value
-            ,trim = Ext.String.trim
-            ;
+    , parseUserValue: function (v) {
+        var me = this
+            , re = me.operatorRe
+            , sep = me.inSeparator
+            , va
+            , operator
+            , value
+            , trim = Ext.String.trim
+        ;
 
-        if(!v) {
-            return {value:''};
+        if (!v) {
+            return { value: '' };
         }
 
         va = v.split(re);
-        if(2 > va.length) {
-            return {value:v};
+        if (2 > va.length) {
+            return { value: v };
         }
 
         value = trim(va[2]);
         operator = trim(va[1]);
 
-        if('in' !== operator) {
+        if ('in' !== operator) {
             return {
-                value:value
-                ,operator:operator
+                value: value
+                , operator: operator
             };
         }
 
         return {
-            value:trim(value).split(sep)
-            ,operator:operator
+            value: trim(value).split(sep)
+            , operator: operator
         };
     } // eo function parseUserValue
 
@@ -835,9 +843,9 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @param {Ext.form.field.Field} field
      * @param {Ext.EventObject} e
      */
-    ,onSpecialKey:function(field, e) {
-        var  me = this;
-        if(Ext.EventObject.ENTER === e.getKey()) {
+    , onSpecialKey: function (field, e) {
+        var me = this;
+        if (Ext.EventObject.ENTER === e.getKey()) {
             me.setFilter(me.getFilters());
         }
     } // eo function onSpecialKey
@@ -847,9 +855,9 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @param {Ext.EventObject} e
      */
-    ,onIconClick:function(e) {
+    , onIconClick: function (e) {
         var me = this;
-        if(me.filterMenu) {
+        if (me.filterMenu) {
             me.filterMenu.showBy(e.getTarget('div.x-tool'));
         }
     } // eo function onIconClick
@@ -859,16 +867,16 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @template
      * @returns {Object} Icon column config object
      */
-    ,getIconCol:function() {
+    , getIconCol: function () {
         return {
-             width:21
-            ,menuDisabled:true
-            ,hideable:false
-            ,sortable:false
-            ,itemId:'iconCol'
-            ,draggable:false
-            ,hoverCls:''
-            ,baseCls:''
+            width: 21
+            , menuDisabled: true
+            , hideable: false
+            , sortable: false
+            , itemId: 'iconCol'
+            , draggable: false
+            , hoverCls: ''
+            , baseCls: ''
         };
 
     } // eo function getIconCol
@@ -880,24 +888,24 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @template
      * @returns {Object} Icon config object
      */
-    ,getIcon:function() {
+    , getIcon: function () {
         return {
-            autoEl:{
-                 tag:'div'
-                ,children:[{
-                     tag:'img'
-                    ,src:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAADL0lEQVQ4y4XSb0hddRzH8ffvnHPv5v1/r63N2Gx34SX67zBotZhpXmtIC6KmRPQgHG6Mgi1iow0aMQMhepLpQ2uE6XKDMptuuI1alP1hVFhaKZYznXb1eq/n3HPOPb9fD5TYg6IXfJ58H3348BXVJz6tqL0/9dzVqUwDykspKYNKQVFK4n6NrF3EdiUKhZIKBStSMb6lNNA/PZc9ZRSlGm+q3ob4Jkh5bD3lER+aJlAClKcoKoXrFlfjeYzNLgfH53KVO7YmKj/4c+m4IZXithI41nWORCxKPBIgGgoRCwaIhkvwGT6W8ybZFZNl0ySbM5nP5nlt9xO8P/wTBkBOwRcnnmZiPsfUXyZj11eYNyVSKqSUeFKR2hDgppIwAZ+gLORnJmuhFBiemR0eX6RmYzTAlOWj5pYNPBvU0JHM5R2kJwn7BfmCx/jCCqPXstxXnuCPxRWK5tKwALZVHz/T8VJTbXpjIsRn0zZSeli2Q8F2MG0Hq+BiFVxc1+XJu28mk7PoGhgZ+rZt736j7uTgxPlX61scp6ezuTGdroiG+CWrCK33oSkFam19KXkgGePXjMPZSz8MXG3be/Cht76eFOnWIcKRMH0HdyR3HunpfGpPXToeDbBoSyzHxiq45G2PRLiEjOny29nukY/efrFx+K7SSYRApFuHiEQjWFaBT16uTj58tKez7rFH0/F4CMd1ybsepvBT0XWETQMdxDZvYWEpj/D5O3TdOGCwRghBw5uXJ/sP72oRorf9zqqqx+9IbcayHcq7XqFy7Bzbm18A/zrwJF9d+XL/7Mx1IdKtQ0RjESzLBiFAKfoP70o+eOzjiYuvN/DMh9PsO7SV3QdaoOxWcD3wGTA/w5lTpzGEEGSXlldbrLWpOzk4WXCKjOZB03WUpsP2nZBu5B8XTqPe6119JCEENxKAtJaHL/24UOM3NAxdg94Oit3tSCnRdA3Ntw6h6xj8CyEEV9qamoXofid++z31I5WNREcvUpUqw6cLisrj85+vkZH0ifo3zvNfBo/WJR9pvfCdGSyN7WuvfTcRjDwvhQYCMq7X1/z91CHB/7sXMIBZYNMN93ng978B0Pd3Bz+bKYEAAAAASUVORK5CYII='
-        
-                    ,cls:'saki-gms-icon x-tool-img x-tool-gear'
+            autoEl: {
+                tag: 'div'
+                , children: [{
+                    tag: 'img'
+                    , src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAADL0lEQVQ4y4XSb0hddRzH8ffvnHPv5v1/r63N2Gx34SX67zBotZhpXmtIC6KmRPQgHG6Mgi1iow0aMQMhepLpQ2uE6XKDMptuuI1alP1hVFhaKZYznXb1eq/n3HPOPb9fD5TYg6IXfJ58H3348BXVJz6tqL0/9dzVqUwDykspKYNKQVFK4n6NrF3EdiUKhZIKBStSMb6lNNA/PZc9ZRSlGm+q3ob4Jkh5bD3lER+aJlAClKcoKoXrFlfjeYzNLgfH53KVO7YmKj/4c+m4IZXithI41nWORCxKPBIgGgoRCwaIhkvwGT6W8ybZFZNl0ySbM5nP5nlt9xO8P/wTBkBOwRcnnmZiPsfUXyZj11eYNyVSKqSUeFKR2hDgppIwAZ+gLORnJmuhFBiemR0eX6RmYzTAlOWj5pYNPBvU0JHM5R2kJwn7BfmCx/jCCqPXstxXnuCPxRWK5tKwALZVHz/T8VJTbXpjIsRn0zZSeli2Q8F2MG0Hq+BiFVxc1+XJu28mk7PoGhgZ+rZt736j7uTgxPlX61scp6ezuTGdroiG+CWrCK33oSkFam19KXkgGePXjMPZSz8MXG3be/Cht76eFOnWIcKRMH0HdyR3HunpfGpPXToeDbBoSyzHxiq45G2PRLiEjOny29nukY/efrFx+K7SSYRApFuHiEQjWFaBT16uTj58tKez7rFH0/F4CMd1ybsepvBT0XWETQMdxDZvYWEpj/D5O3TdOGCwRghBw5uXJ/sP72oRorf9zqqqx+9IbcayHcq7XqFy7Bzbm18A/zrwJF9d+XL/7Mx1IdKtQ0RjESzLBiFAKfoP70o+eOzjiYuvN/DMh9PsO7SV3QdaoOxWcD3wGTA/w5lTpzGEEGSXlldbrLWpOzk4WXCKjOZB03WUpsP2nZBu5B8XTqPe6119JCEENxKAtJaHL/24UOM3NAxdg94Oit3tSCnRdA3Ntw6h6xj8CyEEV9qamoXofid++z31I5WNREcvUpUqw6cLisrj85+vkZH0ifo3zvNfBo/WJR9pvfCdGSyN7WuvfTcRjDwvhQYCMq7X1/z91CHB/7sXMIBZYNMN93ng978B0Pd3Bz+bKYEAAAAASUVORK5CYII='
+
+                    , cls: 'saki-gms-icon x-tool-img x-tool-gear'
                 }]
             }
-            ,cls:'saki-gms-nofilter x-tool'
-            ,overCls:'x-tool-over'
-            ,listeners:{
-                click:{
-                     fn:this.onIconClick
-                    ,scope:this
-                    ,element:'el'
+            , cls: 'saki-gms-nofilter x-tool'
+            , overCls: 'x-tool-over'
+            , listeners: {
+                click: {
+                    fn: this.onIconClick
+                    , scope: this
+                    , element: 'el'
                 }
             }
         };
@@ -908,23 +916,24 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * Creates filter control menu
      * @todo: implement saving named filters
      */
-    ,createFilterMenu:function() {
-        var  me = this
-            ,items = []
+    , createFilterMenu: function () {
+        var me = this
+            , items = []
         ;
-        if(!me.filterMenu) {
+        if (!me.filterMenu) {
             items.push({
-                 text:me.clearItemT
-                ,iconCls:me.clearItemIconCls
-                ,scope:me
-                ,handler:function(){
+                text: me.clearItemT
+                , iconCls: me.clearItemIconCls
+                , scope: me
+                , handler: function () {
                     me.clearValues(true);
                     me.getStore().clearFilter();
                 }
             });
             me.filterMenu = Ext.widget('menu', {
-                 defaultAlign:'tr-br?'
-                ,items:items
+                defaultAlign: 'tr-br?'
+                , ui: 'accounts'
+                , items: items
             });
         }
     } // eo function createFilterMenu
@@ -934,14 +943,14 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @param {Ext.form.field.Field} field
      */
-    ,updateClearIcon:function(field) {
-        var  me = this
-            ,cls = 'saki-gms-hasvalue'
-            ,body = field.bodyEl ? field.bodyEl.down('input') : null//.up('div')
-            ,value = field.getValue ? field.getValue() : null
+    , updateClearIcon: function (field) {
+        var me = this
+            , cls = 'saki-gms-hasvalue'
+            , body = field.bodyEl ? field.bodyEl.down('input') : null//.up('div')
+            , value = field.getValue ? field.getValue() : null
         ;
 
-        if(body) {
+        if (body) {
             body = me.extVersion === 4 ? body.up('td') : body.up('div');
 
             if (false !== field.clearIcon) {
@@ -950,7 +959,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                         tag: 'div', cls: 'saki-gms-clear'
                     });
                     field.clearIcon.on('click', Ext.bind(me.clearField, me, [field]));
-                    body.applyStyles({position: 'relative'});
+                    body.applyStyles({ position: 'relative' });
                 }
                 if (value && !field.readOnly && !field.disabled) {
                     body.addCls(cls);
@@ -968,19 +977,19 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @param {Ext.form.field.Field} field
      */
-    ,markFiltered:function(field) {
-        var  me = this
-            ,value = field.getValue ? field.getValue() : null
-            ,colEl = me.headerCt.getGridColumns()[me.items.indexOf(field)]//.getEl()
+    , markFiltered: function (field) {
+        var me = this
+            , value = field.getValue ? field.getValue() : null
+            , colEl = me.headerCt.getGridColumns()[me.items.indexOf(field)]//.getEl()
         ;
 
-        if(!colEl) {
+        if (!colEl) {
             return;
         }
         colEl = colEl.getEl();
         colEl.removeCls('saki-gms-filtered');
 
-        if(value) {
+        if (value) {
             colEl.addCls('saki-gms-filtered');
         }
         else {
@@ -993,10 +1002,10 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * It shows or hides field clear icon.
      * @private
      */
-    ,syncUi:function() {
-        var  me = this;
-        me.items.each(function(field) {
-            if(field && field.rendered) {
+    , syncUi: function () {
+        var me = this;
+        me.items.each(function (field) {
+            if (field && field.rendered) {
                 me.updateClearIcon(field);
                 me.markFiltered(field);
             }
@@ -1008,20 +1017,20 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * widths of columns.
      * @private
      */
-    ,syncCols:function() {
-        var  me = this
-            ,cols = me.headerCt.getGridColumns()//.headerCt.items
-            ,hdWidth
+    , syncCols: function () {
+        var me = this
+            , cols = me.headerCt.getGridColumns()//.headerCt.items
+            , hdWidth
         ;
-        if(!me.rendered) {
+        if (!me.rendered) {
             return;
         }
 
         hdWidth = me.headerCt.layout.innerCt.getWidth();
 
-        Ext.Array.each(cols, function(col, i){
+        Ext.Array.each(cols, function (col, i) {
             var filter = me.items.getAt(i);
-            if(filter) {
+            if (filter) {
                 filter.setWidth(col.getWidth());
             }
         });
@@ -1035,10 +1044,10 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * grid view, header and filters scrolling.
      * @private
      */
-    ,onGridScroll:function() {
-        var  me = this
-            ,scroll = me.grid.getView().getEl().getScroll()
-            ,scrollEl = me.getLayout().innerCt
+    , onGridScroll: function () {
+        var me = this
+            , scroll = me.grid.getView().getEl().getScroll()
+            , scrollEl = me.getLayout().innerCt
         ;
         scrollEl.scrollTo('left', scroll.left);
 
@@ -1049,8 +1058,8 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * in sync with column moves
      * @private
      */
-    ,onColumnMove:function() {
-        var  me = this;
+    , onColumnMove: function () {
+        var me = this;
 
         me.syncOrder();
         me.grid.getView().refresh();
@@ -1067,19 +1076,19 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * the order of the grid columns
      * @private
      */
-    ,syncOrder:function() {
-        var  me = this
-            ,cols = me.headerCt.getGridColumns()
-            ,i
-            ,field
+    , syncOrder: function () {
+        var me = this
+            , cols = me.headerCt.getGridColumns()
+            , i
+            , field
         ;
-        for(i = 0; i < cols.length; i++) {
+        for (i = 0; i < cols.length; i++) {
             field = me.items.get(cols[i].dataIndex);
-            if(field) {
+            if (field) {
                 me.items.insert(i, field);
             }
         }
-        me.doLayout();
+
 
     } // eo function syncOrder
 
@@ -1088,9 +1097,9 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * whenever the header changes layout
      * @private
      */
-    ,afterHdLayout:function() {
+    , afterHdLayout: function () {
         var me = this;
-        if(!me.grid.reconfiguring) {
+        if (!me.grid.reconfiguring) {
             me.syncCols();
             me.syncUi();
         }
@@ -1101,14 +1110,14 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * grid header and performs other initialization.
      * @private
      */
-    ,afterHdRender:function() {
-        var  me = this
-            ,grid = me.grid
+    , afterHdRender: function () {
+        var me = this
+            , grid = me.grid
         ;
 
         grid.dockedItems.add(me);
 
-        if(0 < Ext.versions.extjs.minor && 4 !== me.extVersion) {
+        if (0 < Ext.versions.extjs.minor && 4 !== me.extVersion) {
             grid.getView().on({
                 scroll: {
                     fn: me.onGridScroll, scope: me

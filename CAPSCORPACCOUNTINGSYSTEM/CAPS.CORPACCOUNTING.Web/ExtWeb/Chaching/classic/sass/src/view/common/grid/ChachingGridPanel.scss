@@ -7,13 +7,15 @@ $border-width:0px
 
 @include extjs-toolbar-ui(
 $ui:'plainBottom',
-$background-color:#00BCD4,
+$background-color:#F3F5F9,
 $border-color:'none',
 $border-width:0px,
 $text-font-weight:400
 );
 .x-toolbar-plainBottom{
     border-radius: 0 0 5px 5px !important;
+    border-width: 0 1px 1px 1px !important;
+    border-color:#d0d0d0 !important;
 }
 .x-toolbar-plainBottom .x-toolbar-item{
     font-weight:400 !important;
@@ -67,3 +69,96 @@ $border-color-over:#1f78b5,
 $border-color-focus:#1f78b5
 
 );
+
+@include extjs-button-small-ui(
+    $ui: 'actionMenuButton',
+    $color: #FFFFFF,
+    $icon-color: #FFFFFF,
+    $background-color: #3598dc,
+    $border-width: 0,
+$border-color:#3598dc,
+$border-radius:2px,
+$background-color-over:#217ebd,
+$background-color-focus:#217ebd,
+$border-color-over:#1f78b5,
+$border-color-focus:#1f78b5
+);
+.x-btn-icon-el-actionMenuButton-small{
+    font-size:10px !important;
+    line-height:10px !important;
+    height:10px !important;
+}
+.x-btn-button-actionMenuButton-small{
+    min-height:10px !important;
+}
+.x-btn-inner-actionMenuButton-small{
+    font-size:11px !important;
+}
+.chaching-grid .x-grid-cell { 
+    background-color: white; 
+    border-bottom-color: #e9e9e9; 
+    border-top-color: #e9e9e9; 
+    color: black; 
+}
+
+.chaching-grid .x-grid-cell-over { 
+    background-color: #CDDDFD; 
+    border-bottom-color: #CDDDFD; 
+    border-bottom-style: solid; 
+    border-top-color: #CDDDFD; 
+    border-top-style: solid; 
+} 
+ 
+/* Grid cells in the selected row */ 
+.chaching-grid .x-grid-item-selected { 
+    background-color: #F3F5F9 !important; 
+    border-bottom-color: #F3F5F9; 
+    border-bottom-style: solid; 
+    border-top-color: #F3F5F9; 
+    border-top-style: solid; 
+}
+.chaching-grid .x-grid-body{
+    border-width:1px !important;
+    border-color:#d0d0d0 !important;
+}
+.chaching-grid .x-grid-with-row-lines .x-grid-item .x-grid-item-selected{
+    border-color:#F3F5F9 !important; 
+    background-color: gray !important; 
+}
+.chaching-grid .x-grid-with-col-lines .x-grid-item-selected .x-grid-cell{
+    background-color:#CDDDFD !important;
+    border-color:#CDDDFD !important; 
+}
+.chaching-grid .x-grid-item{
+    color:black !important;
+    font-weight:400 !important;
+}
+.chaching-grid .x-grid-item-over{
+   background-color:#CDDDFD !important;
+    border-color:#CDDDFD !important; 
+}
+ 
+.chaching-grid .x-grid-item-alt .x-grid-cell { 
+    background-color: whitesmoke !important; 
+    color: black !important; 
+}
+.chaching-grid .x-column-header{
+    color:white !important;
+    background-color:#047E8E !important;
+    font-weight:700 !important;
+}
+.chaching-grid .x-column-header-over{
+    background-color:#00BCD4 !important;
+}
+.chaching-grid .x-column-header-last{
+     color:white !important;
+    background-color:#047E8E !important;
+    font-weight:700 !important;
+}
+.chaching-grid .x-column-header-last-over{
+    background-color:#00BCD4 !important;
+}
+.chaching-grid .x-grid-header-ct{
+    border-radius:5px 5px 0 0 !important;
+    background-color:#047E8E !important;
+}

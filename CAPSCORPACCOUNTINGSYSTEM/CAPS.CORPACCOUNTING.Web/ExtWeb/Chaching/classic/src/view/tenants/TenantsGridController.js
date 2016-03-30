@@ -1,5 +1,5 @@
 Ext.define('Chaching.view.tenants.TenantsGridController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.tenants-tenantsgrid'
     
 });

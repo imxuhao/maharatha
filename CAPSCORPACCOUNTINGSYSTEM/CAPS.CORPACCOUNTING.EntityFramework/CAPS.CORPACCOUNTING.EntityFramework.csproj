@@ -1058,9 +1058,18 @@
     <Compile Include="Migrations\201603290646527_Update_User_OrganizationID.Designer.cs">
       <DependentUpon>201603290646527_Update_User_OrganizationID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603300615092_Add_GridList_Table.cs" />
+    <Compile Include="Migrations\201603300615092_Add_GridList_Table.Designer.cs">
+      <DependentUpon>201603300615092_Add_GridList_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603300617185_Add_UserViewSettings_Table.cs" />
+    <Compile Include="Migrations\201603300617185_Add_UserViewSettings_Table.Designer.cs">
+      <DependentUpon>201603300617185_Add_UserViewSettings_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultGridListCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultLanguagesCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultSettingsCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultTenantRoleAndUserCreator.cs" />
@@ -1781,6 +1790,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603290646527_Update_User_OrganizationID.resx">
       <DependentUpon>201603290646527_Update_User_OrganizationID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603300615092_Add_GridList_Table.resx">
+      <DependentUpon>201603300615092_Add_GridList_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603300617185_Add_UserViewSettings_Table.resx">
+      <DependentUpon>201603300617185_Add_UserViewSettings_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

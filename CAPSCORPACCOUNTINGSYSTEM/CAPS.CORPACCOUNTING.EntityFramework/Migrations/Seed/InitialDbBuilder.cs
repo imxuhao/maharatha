@@ -21,6 +21,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
             new DefaultTenantRoleAndUserCreator(_context).Create();
             new DefaultSettingsCreator(_context).Create();
             new EnumGenerator(_context).Create();
+            new DefaultGridListCreator(_context).Create();
 
             _context.SaveChanges();
         }

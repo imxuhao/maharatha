@@ -183,7 +183,10 @@
     <Compile Include="Organization\OrganizationCacheItemManager.cs" />
     <Compile Include="Organization\OrganizationExtended.cs" />
     <Compile Include="JobCosting\TypeOfJobUnit.cs" />
+    <Compile Include="Masters\GridListUnit.cs" />
     <Compile Include="Masters\NewCOATrimUnit.cs" />
+    <Compile Include="Masters\UserViewSettingsUnit.cs" />
+    <Compile Include="Masters\UserViewSettingsUnitManager.cs" />
     <Compile Include="Masters\ValueAddedTaxRecoveryUnit.cs" />
     <Compile Include="Masters\ValueAddedTaxTypeUnit.cs" />
     <Compile Include="Payments\PaymentPrintHistoryUnit.cs" />

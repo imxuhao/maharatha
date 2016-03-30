@@ -558,8 +558,13 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> TypeOfJobUnit Declaration</summary>
         public virtual IDbSet<TypeOfJobUnit> TypeOfJobUnit { get; set; }
-        
 
+        /// <summary> GridListUnit Declaration</summary>
+        public virtual IDbSet<GridListUnit> GridListUnit { get; set; }
+
+        /// <summary> UserViewSettingsUnit Declaration</summary>
+        public virtual IDbSet<UserViewSettingsUnit> UserViewSettingsUnit { get; set; }
+        
 
 
 

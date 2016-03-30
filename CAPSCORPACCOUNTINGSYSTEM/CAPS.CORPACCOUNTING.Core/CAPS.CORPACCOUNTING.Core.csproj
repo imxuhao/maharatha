@@ -126,6 +126,7 @@
     <Compile Include="AccountReceivable\ReceiptHistoryDetailUnit.cs" />
     <Compile Include="AccountReceivable\ReceiptHistoryUnit.cs" />
     <Compile Include="AccountReceivable\TypeOfArInvoiceBuildUnit.cs" />
+    <Compile Include="AppFolders.cs" />
     <Compile Include="Banking\BankAccountUnitManager.cs" />
     <Compile Include="Banking\BankRecAdjustmentUnit.cs" />
     <Compile Include="Banking\BankRecClearedUnit.cs" />
@@ -177,7 +178,9 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
-    <Compile Include="ExtendedEntities\OrganizationExtended.cs" />
+    <Compile Include="Organization\OrganizationCacheItem.cs" />
+    <Compile Include="Organization\OrganizationCacheItemManager.cs" />
+    <Compile Include="Organization\OrganizationExtended.cs" />
     <Compile Include="JobCosting\TypeOfJobUnit.cs" />
     <Compile Include="Masters\NewCOATrimUnit.cs" />
     <Compile Include="Masters\ValueAddedTaxRecoveryUnit.cs" />

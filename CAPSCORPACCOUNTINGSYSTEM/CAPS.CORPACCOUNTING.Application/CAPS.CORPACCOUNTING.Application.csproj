@@ -223,12 +223,17 @@
     <Compile Include="Interceptors\DTOInterceptors.cs" />
     <Compile Include="Interceptors\InternalAsyncHelper.cs" />
     <Compile Include="IO\AppFileHelper.cs" />
+    <Compile Include="JobCosting\ARBillingTypeUnitAppService.cs" />
+    <Compile Include="JobCosting\Dto\ARBillingTypeDto.cs" />
+    <Compile Include="JobCosting\Dto\CreateARBillingTypeUnitInput.cs" />
     <Compile Include="JobCosting\Dto\CreateJobAccountUnitInput.cs" />
     <Compile Include="JobCosting\Dto\CreateJobBudgetUnitInput.cs" />
     <Compile Include="JobCosting\Dto\JobAccountUnitDto.cs" />
     <Compile Include="JobCosting\Dto\JobBudgetUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\UpdateARBillingTypeUnitInput.cs" />
     <Compile Include="JobCosting\Dto\UpdateJobAccountUnitInput.cs" />
     <Compile Include="JobCosting\Dto\UpdateJobBudgetUnitInput.cs" />
+    <Compile Include="JobCosting\IARBillingTypeUnitAppService.cs" />
     <Compile Include="JobCosting\IJobAccountUnitAppService.cs" />
     <Compile Include="JobCosting\IJobBudgetUnitAppService.cs" />
     <Compile Include="JobCosting\IJobLocationAppService.cs" />

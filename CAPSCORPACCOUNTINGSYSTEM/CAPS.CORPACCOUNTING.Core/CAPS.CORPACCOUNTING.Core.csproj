@@ -178,6 +178,7 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
+    <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="Organization\OrganizationCacheItem.cs" />
     <Compile Include="Organization\OrganizationCacheItemManager.cs" />
     <Compile Include="Organization\OrganizationExtended.cs" />

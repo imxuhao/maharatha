@@ -15,11 +15,11 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         {
             InitialGridList = new List<GridListUnit>
             {
-                new GridListUnit(gridid:1,name:"Tenants",description:"Tenants Information Showing in Grid")
+                new GridListUnit(gridid:1,name:"Tenants",description:"Tenants Information Showing in Grid",isactive:true)
             };
         }
 
-        public DefaultGridListCreator(CORPACCOUNTINGDbContext context)  
+        public DefaultGridListCreator(CORPACCOUNTINGDbContext context)
         {
             _context = context;
         }
@@ -40,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         private void AddGridListIfNotExists(GridListUnit gridList)
         {
-            if (_context.GridListUnit.Any(l => l.TenantId == gridList.TenantId && l.Name == gridList.Name))
+            if (_context.GridListUnit.Any(l =>l.Name == gridList.Name))
             {
                 return;
             }

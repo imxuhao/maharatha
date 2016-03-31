@@ -19,7 +19,7 @@ Ext.define('Chaching.Application', {
     stores: [
         // TODO: add global / shared stores here
          'NavigationTree',
-         'Personnel'
+         'tenants.TenantsStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     onAppUpdate: function () {

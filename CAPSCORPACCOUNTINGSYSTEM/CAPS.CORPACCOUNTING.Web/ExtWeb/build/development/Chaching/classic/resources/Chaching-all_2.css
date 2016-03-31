@@ -9883,22 +9883,23 @@ body.x-ios.x-webview.x-portrait {
     color: white !important;
     background-color: #047e8e !important;
     font-weight: 700 !important;
+    cursor: pointer !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:150 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:151 */
 .chaching-grid .x-column-header-over {
     background-color: #00bcd4 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:153 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:154 */
 .chaching-grid .x-column-header-last {
     color: white !important;
     background-color: #047e8e !important;
     font-weight: 700 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:158 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:159 */
 .chaching-grid .x-column-header-last-over {
     background-color: #00bcd4 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:161 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:162 */
 .chaching-grid .x-grid-header-ct {
     border-radius: 5px 5px 0 0 !important;
     background-color: #047e8e !important;

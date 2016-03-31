@@ -134,6 +134,7 @@ Ext.define('Ext.jozok.grid.MultiSort',{
             ,headerCt = me.view.headerCt
         ;
 
+        headerCt.showMenuBy = me.showMenuBy;
         if (headerCt.sortable) {
             headerCt.getMenuItems = me.getMenuItems();
             headerCt.getMenu().on({

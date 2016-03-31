@@ -26,6 +26,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     /**
     * @hide
     * @private
+    * @cfg {boolean} requireGrouping
+    */
+    requireGrouping:true,
+    /**
+    * @hide
+    * @private
     * @cfg {object[]} headerButtonsConfig
     */
     headerButtonsConfig: null,
@@ -77,12 +83,15 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     name: '',
     enableLocking:false,
     syncRowHeight: false,
+    editingModel:null,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
             headerTbButtons = [],
             plugins = [],
-            dockedItems = [];
+            dockedItems = [],
+            gridColumns = me.columns,
+            features = [];
 
         if (me.headerButtonsConfig) {
             for (var i = 0; i < me.headerButtonsConfig.length; i++) {
@@ -100,6 +109,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 text: abp.localization.localize("Export").toUpperCase(),
                 iconCls: 'fa fa-download',
                 iconAlign: 'left',
+                tooltip: app.localize('Export'),
                 menu: new Ext.menu.Menu({
                     ui: 'accounts',
                     items: [
@@ -110,6 +120,14 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             };
             headerTbButtons.push(exportBtn);
         }
+        //add clear filter button regardless of multisearch
+        var clearFilterBtn = {
+            iconCls: 'fa fa-refresh',
+            width: 20,
+            tooltip: app.localize('ClearFilter'),
+            ui: 'actionButton'
+        }
+        headerTbButtons.push(clearFilterBtn);
 
         if (headerTbButtons.length > 0) {
             var topBar =
@@ -134,17 +152,25 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
 
         //add requireMultisort plugin if required requireMultisort functionality
         if (me.requireMultisort) {
-            me.features = [
-                {
-                    ftype: 'ux-gmsrt',
-                    displaySortOrder: true
-                }
-            ];
+            var multiSortFeature= {
+                ftype: 'ux-gmsrt',
+                displaySortOrder: true
+            }
+            //features.push(multiSortFeature);
+        }
+        //add grouping if required
+        if (me.requireGrouping) {
+            var groupingFeature = {
+                ftype: 'grouping',
+                hideGroupedHeader: true,
+                startCollapsed: true
+            };
+            features.push(groupingFeature);
         }
         if (me.requireMultiSearch) {
             var mutisearch = {
                 ptype: 'saki-gms',
-                iconColumn: true,
+                iconColumn: false,
                 clearItemIconCls: 'icon-settings',
                 pluginId: 'gms',
                 height: 32,
@@ -152,7 +178,6 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             };
             plugins.push(mutisearch);
         }
-        me.plugins = plugins;
 
         if (me.showPagingToolbar) {
             var pagingToolBar = {
@@ -168,10 +193,56 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             };
             dockedItems.push(pagingToolBar);
         }
+        
+        me.columns = me.applyGridViewSetting(gridColumns);
+        //add editing plugin
+        if (me.isEditable) {
+            var editingModel;
+            switch (me.editingMode) {
+                case "cell":
+                    editingModel = {
+                        ptype: 'cellediting',
+                        pluginId: 'editingPlugin',
+                        clicksToEdit: 1,
+                        listeners: {
+                            beforeedit: 'onBeforeGridEdit'
+                        }
+                    }
+                    plugins.push(editingModel);
+                    me.selModel = 'cellmodel';
+                    break;
+                case "row":
+                    editingModel = {
+                        ptype: 'rowediting',
+                        pluginId: 'editingPlugin',
+                        clicksToEdit: 1,
+                        listeners: {
+                            beforeedit: 'onBeforeGridEdit'
+                        }
+                    }
+                    plugins.push(editingModel);
+                    me.selModel = 'rowmodel';
+                    break;
+                case "form":
+                    //add item double click event and open formpanel in new tab
+                    break;
+                default:
+                    break;
+            }
+            me.editingModel = editingModel;
+        }
+        me.plugins = plugins;
+        me.features = features;
         if (dockedItems.length > 0) {
             me.dockedItems = dockedItems;
         }
-
+        me.callParent(arguments);
+    },
+    applyGridViewSetting:function(defaultSetting) {
+        var me = this,
+            controller = me.getController();
+        ///TODO change according to userViewSetting if any else continue with default columns
+        var columns = [];
         //add actionColumn if required
         if (me.requireActionColumn) {
             var menuItems = [];
@@ -192,9 +263,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     menuItems.push(userMenuItems[l]);
                 }
             }
-            var actionCol= {
+            var actionCol = {
                 text: app.localize('Actions'),
-                width:150,
+                width: 70,
                 hidden: false,
                 sortable: false,
                 name: 'ActionColumn',
@@ -209,8 +280,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                             ui: 'actionMenuButton',
                             scale: 'small',
                             height: 25,
-                            width: 100,
-                            text: app.localize('Actions'),
+                            width: 50,
+                            //text: app.localize('Actions'),
                             iconCls: 'icon-settings',
                             iconAlign: 'left',
                             widgetRec: widgetRec,
@@ -234,13 +305,14 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
 
                 }
             }
-            me.columns.splice(0, 0, actionCol);
+            columns.push(actionCol);
         }
-        //add editing plugin
-        if (me.isEditable) {
-            
+        //add columns to columns array
+        for (var i = 0; i < defaultSetting.length; i++) {
+            var col = defaultSetting[i];
+            columns.push(col);
         }
-        me.callParent(arguments);
+        return columns;
     },
     getDefaultActionColumnMenuItems: function () {
         var me = this, controller = me.getController();

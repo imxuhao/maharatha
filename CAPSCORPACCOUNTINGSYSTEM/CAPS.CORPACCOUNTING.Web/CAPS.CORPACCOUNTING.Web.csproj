@@ -1816,7 +1816,12 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\slice-impl.xml" />
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
+    <Content Include="ExtWeb\Chaching\app\data\proxy\BaseProxy.js" />
+    <Content Include="ExtWeb\Chaching\app\model\base\BaseModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\tenants\TenantsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\store\base\BaseStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\NavigationTree.js" />
+    <Content Include="ExtWeb\Chaching\app\store\tenants\TenantsStore.js" />
     <Content Include="ExtWeb\Chaching\classic\src\Application.js" />
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingGridPanel.js" />

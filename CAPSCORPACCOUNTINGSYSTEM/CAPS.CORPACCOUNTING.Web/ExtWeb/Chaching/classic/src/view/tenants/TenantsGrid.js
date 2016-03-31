@@ -12,7 +12,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         type: 'tenants-tenantsgrid'
     },
     xtype: 'host.tenants',
-    store: 'Personnel',
+    store: 'tenants.TenantsStore',
     name: 'Tenants',
     padding: 5,
     headerButtonsConfig: [
@@ -29,6 +29,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         scale: 'small',
         ui: 'actionButton',
         text: abp.localization.localize("CreateNewTenant").toUpperCase(),
+        tooltip: app.localize('CreateNewTenant'),
         checkPermission: true,
         iconCls: 'fa fa-plus',
         iconAlign: 'left'
@@ -39,14 +40,16 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     isEditable:true,
     editingMode: 'row',
     columnLines: true,
-
+    multiColumnSort: true,
     columns: [
         {
-            text: 'Name',
-            dataIndex: 'name',
-            stateId: 'name',
+            xtype: 'gridcolumn',
+            text: app.localize('TenancyCodeName'),
+            dataIndex: 'tenancyName',
+            stateId: 'tenancyName',
             sortable: true,
             width: '25%',
+            groupable:true,
             // simplest filter configuration
             filterField: {
                 xtype: 'textfield',
@@ -57,12 +60,17 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                 //    , iconCls: 'fa fa-info'
                 //    , qtip: 'Enter name to search'
                 //}]
+            },
+            editor: {
+                xtype:'textfield'
             }
         }, {
-            text: 'Email',
-            dataIndex: 'email',
+            xtype: 'gridcolumn',
+            text: app.localize('Name'),
+            dataIndex: 'name',
             sortable: true,
-            width: '50%'
+            groupable: true,
+            width: '25%'
             // equivalent to filterField:true
             // as textfield is created by default
             ,
@@ -70,16 +78,55 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                 xtype: 'textfield',
                 width: '100%',
                 emptyText: 'Enter email to search'
+            },
+            editor: {
+                xtype: 'textfield'
             }
         }, {
-            text: 'Phone',
-            dataIndex: 'phone',
+            xtype: 'gridcolumn',
+            text: app.localize('Edition'),
+            dataIndex: 'editionDisplayName',
             sortable: true,
-            width: '25%',
+            groupable: true,
+            width: '20%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
                 emptyText: 'Enter phone to search'
+            },
+            editor: {
+                xtype: 'textfield'
+            }
+        },
+        {
+            xtype: 'gridcolumn',
+            text: app.localize('Active'),
+            dataIndex: 'isActive',
+            sortable: true,
+            groupable: true,
+            width: '10%',
+            filterField: {
+                xtype: 'combobox',
+                valueField: 'value',
+                displayField:'text',
+                store: {
+                    fields:[{name:'text'},{name:'value'}],
+                    data:[{text:'YES',value:true},{text:'NO',value:false}]
+                }
+            }
+        },
+        {
+            xtype: 'gridcolumn',
+            text: app.localize('CreationTime'),
+            dataIndex: 'creationTime',
+            sortable: true,
+            groupable: true,
+            width: '20%',
+            renderer: function(value) {
+                return Ext.Date.format(value, 'm/d/Y');
+            },
+            filterField: {
+                xtype: 'datefield'
             }
         }
     ]

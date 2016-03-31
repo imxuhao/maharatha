@@ -13,10 +13,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string Caption { get; set; }
 
         /// <summary>Gets or sets the Description field. </summary>
-        public string Description { get; set; }
-
-        /// <summary>Gets or sets the COA Type field. </summary>
-        public ChartofAccountsType ChartofAccountsType { get; set; }
+        public string Description { get; set; }       
 
         /// <summary>Gets or sets the Display Sequence field. </summary>
         public int? DisplaySequence { get; set; }
@@ -34,6 +31,18 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; }       
+
+        /// <summary>Gets or sets the IsCorporate field. </summary>
+        public bool IsCorporate { get; set; }
+
+        /// <summary>Gets or sets the IsNumeric field. </summary>
+        public bool IsNumeric { get; set; }
+
+        /// <summary>Gets or sets the LinkChartOfAccountID field. </summary>
+        public int? LinkChartOfAccountID { get; set; }
+
+        /// <summary>Gets or sets the StandardGroupTotalId field. </summary>      
+        public StandardGroupTotal? StandardGroupTotalId { get; set; }
     }
 }

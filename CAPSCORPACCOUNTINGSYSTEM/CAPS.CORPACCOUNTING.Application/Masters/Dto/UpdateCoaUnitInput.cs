@@ -16,11 +16,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Description field. </summary>
         [StringLength(CoaUnit.MaxDesc)]
-        public string Description { get; set; }
-
-        /// <summary>Gets or sets the ChartofAccountsType field. </summary>
-        [EnumDataType(typeof(ChartofAccountsType))]
-        public ChartofAccountsType ChartofAccountsType { get; set; }
+        public string Description { get; set; }        
 
         /// <summary>Gets or sets the DisplaySequence field. </summary>
         public int? DisplaySequence { get; set; }
@@ -35,6 +31,18 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool IsPrivate { get; set; } = false;
 
         /// <summary>Gets or sets the OrganizationId field. </summary>
-        public long? OrganizationId { get; set; }
+        public long? OrganizationId { get; set; }       
+
+        /// <summary>Gets or sets the IsCorporate field. </summary>
+        public bool IsCorporate { get; set; }
+
+        /// <summary>Gets or sets the IsNumeric field. </summary>
+        public bool IsNumeric { get; set; }
+
+        /// <summary>Gets or sets the LinkChartOfAccountID field. </summary>
+        public int? LinkChartOfAccountID { get; set; }
+
+        /// <summary>Gets or sets the StandardGroupTotalId field. </summary>      
+        public StandardGroupTotal? StandardGroupTotalId { get; set; }
     }
 }

@@ -13,6 +13,7 @@ using Abp.Linq.Extensions;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -76,8 +77,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
         {
-            //var coaUnit = new CoaUnit(caption: input.Caption, chartofaccounttype: input.ChartofAccountsType, organizationid: input.OrganizationId, desc: input.Description,
-            //    displaysequence: input.DisplaySequence, isactive: input.IsActive, isapproved: input.IsApproved, isprivate: input.IsPrivate);
             var coaUnit = input.MapTo<CoaUnit>();
             await _coaunitManager.CreateAsync(coaUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -111,17 +110,21 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             #region Setting the values to be updated
 
-            coaUnit.Caption = input.Caption;
-            coaUnit.ChartofAccountsType = input.ChartofAccountsType;
+            coaUnit.Caption = input.Caption;           
             coaUnit.Description = input.Description;
             coaUnit.DisplaySequence = input.DisplaySequence;
             coaUnit.IsActive = input.IsActive;
             coaUnit.IsApproved = input.IsApproved;
             coaUnit.IsPrivate = input.IsPrivate;
             coaUnit.OrganizationUnitId = input.OrganizationId;
-            #endregion
+            coaUnit.IsActive = input.IsActive;
+            coaUnit.IsCorporate = input.IsCorporate;
+            coaUnit.IsNumeric = input.IsNumeric;
+            coaUnit.LinkChartOfAccountID = input.LinkChartOfAccountID;
+            coaUnit.StandardGroupTotalId = input.StandardGroupTotalId; 
+        #endregion
 
-            await _coaunitManager.UpdateAsync(coaUnit);
+        await _coaunitManager.UpdateAsync(coaUnit);
 
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -161,5 +164,18 @@ namespace CAPS.CORPACCOUNTING.Masters
             result.CoaId = coaUnit.Id;
             return result;
         }
+        /// <summary>
+        /// Gets all the COA for that company except input Coa ( ConvertNewCOA Dropdown Data)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetCoaList(GetCoaInput input)
+        {           
+            return await (from au in _coaUnitRepository.GetAll()
+                          .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
+                          .WhereIf(input.OrganizationUnitId != null, p => p.OrganizationUnitId == input.OrganizationUnitId)
+                         select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();           
+        }
+
     }
 }

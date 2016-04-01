@@ -374,5 +374,6 @@
     <text name="ResizedProfilePicture_Warn_SizeLimit" value="Resized picture size must be smalled than 100KB. Please resize down and try again." />
     <text name="Export" value="Export" />
   <text name="ExportToPDF" value="Export to pdf" />
+  <text name="ClearFilter" value="Clear Filter" />
   </texts>
 </localizationDictionary>

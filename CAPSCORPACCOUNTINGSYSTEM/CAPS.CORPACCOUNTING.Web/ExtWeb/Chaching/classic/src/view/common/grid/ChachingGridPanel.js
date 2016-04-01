@@ -4,7 +4,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
 
     requires: [
         'Chaching.view.common.grid.ChachingGridPanelController',
-        'Chaching.view.common.grid.ChachingGridPanelModel'
+        'Chaching.view.common.grid.ChachingGridPanelModel',
+        'Chaching.components.plugins.RowEditing'
     ],
 
     controller: 'common-grid-chachinggridpanel',
@@ -96,6 +97,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         if (me.headerButtonsConfig) {
             for (var i = 0; i < me.headerButtonsConfig.length; i++) {
                 var btn = me.headerButtonsConfig[i];
+                if (btn.action==="create") {
+                    btn.handler = "onCreateNewBtnClicked";
+                }
                 if (btn.checkPermission) {
                     if (abp.auth.hasPermission("Pages." + me.name + ".Create"))
                         headerTbButtons.push(btn);
@@ -106,7 +110,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             var exportBtn = {
                 xtype: 'splitbutton',
                 ui: 'actionButton',
-                text: abp.localization.localize("Export").toUpperCase(),
+                //text: abp.localization.localize("Export").toUpperCase(),
                 iconCls: 'fa fa-download',
                 iconAlign: 'left',
                 tooltip: app.localize('Export'),
@@ -122,7 +126,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         }
         //add clear filter button regardless of multisearch
         var clearFilterBtn = {
-            iconCls: 'fa fa-refresh',
+            iconCls: 'fa fa-filter',
             width: 20,
             tooltip: app.localize('ClearFilter'),
             ui: 'actionButton'
@@ -213,11 +217,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     break;
                 case "row":
                     editingModel = {
-                        ptype: 'rowediting',
+                        ptype: 'chachingRowediting',
                         pluginId: 'editingPlugin',
                         clicksToEdit: 1,
                         listeners: {
-                            beforeedit: 'onBeforeGridEdit'
+                            beforeedit: 'onBeforeGridEdit',
+                            edit:'onEditComplete'
                         }
                     }
                     plugins.push(editingModel);
@@ -305,7 +310,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
 
                 }
             }
-            columns.push(actionCol);
+            if (menuItems.length > 0)
+                columns.push(actionCol);
         }
         //add columns to columns array
         for (var i = 0; i < defaultSetting.length; i++) {

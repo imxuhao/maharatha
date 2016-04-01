@@ -28,6 +28,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         xtype: 'button',
         scale: 'small',
         ui: 'actionButton',
+        action:'create',
         text: abp.localization.localize("CreateNewTenant").toUpperCase(),
         tooltip: app.localize('CreateNewTenant'),
         checkPermission: true,
@@ -95,7 +96,16 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                 emptyText: 'Enter phone to search'
             },
             editor: {
-                xtype: 'textfield'
+                xtype: 'combobox',
+                name:'editionDisplayName',
+                displayField: 'editionDisplayName',
+                valueField: 'editionId',
+                bind: {
+                    store: '{editionsForComboBox}'
+                },
+                listeners: {
+                    change:'onEditionChange'
+                }
             }
         },
         {
@@ -105,6 +115,10 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             sortable: true,
             groupable: true,
             width: '10%',
+            renderer:function(val) {
+                if (val) return 'YES';
+                else return 'NO';
+            },
             filterField: {
                 xtype: 'combobox',
                 valueField: 'value',
@@ -113,20 +127,22 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                     fields:[{name:'text'},{name:'value'}],
                     data:[{text:'YES',value:true},{text:'NO',value:false}]
                 }
+            },editor: {
+                xtype: 'checkbox'
             }
         },
         {
             xtype: 'gridcolumn',
-            text: app.localize('CreationTime'),
-            dataIndex: 'creationTime',
+            text: app.localize('AdminEmailAddress'),
+            dataIndex: 'adminEmailAddress',
             sortable: true,
             groupable: true,
             width: '20%',
-            renderer: function(value) {
-                return Ext.Date.format(value, 'm/d/Y');
-            },
             filterField: {
-                xtype: 'datefield'
+                xtype: 'textfield'
+            },
+            editor: {
+                xtype:'textfield'
             }
         }
     ]

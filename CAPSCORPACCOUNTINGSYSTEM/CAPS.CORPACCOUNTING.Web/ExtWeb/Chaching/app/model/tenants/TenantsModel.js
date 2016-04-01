@@ -4,8 +4,10 @@ Ext.define('Chaching.model.tenants.TenantsModel', {
     fields: [
         { name: 'id', type: 'int' },
         { name: 'editionDisplayName', type: 'string' },
+        { name: 'editionId', type: 'int' },
         { name: 'isActive', type: 'boolean' },
         { name: 'name', type: 'string' },
-        { name: 'tenancyName', type: 'string' }
+        { name: 'tenancyName', type: 'string' },
+        { name: 'adminEmailAddress', type: 'string' }
     ]
 });

@@ -1816,6 +1816,7 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\slice-impl.xml" />
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\plugins\RowEditing.js" />
     <Content Include="ExtWeb\Chaching\app\data\proxy\BaseProxy.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\BaseModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\tenants\TenantsModel.js" />

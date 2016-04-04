@@ -1,0 +1,26 @@
+﻿@include extjs-window-ui(
+$ui:'chachingWindow',
+$ui-padding:5px,
+$ui-border-radius:5px,
+$ui-border-color:white,
+$ui-inner-border-color:white,
+$ui-header-background-color:#1F3446,
+$ui-header-glyph-color:
+);
+.x-window-header-chachingWindow .x-tool-img{
+    background-color:transparent !important;
+}
+@include extjs-button-small-ui(
+    $ui: 'cancelButton',
+    $color: #FFFFFF,
+    $icon-color: #FFFFFF,
+    $background-color: white,
+    $border-width: 0,
+$border-color:white,
+$border-radius:2px,
+$background-color-over:whitesmoke,
+$background-color-focus:whitesmoke,
+$border-color-over:whitesmoke,
+$border-color-focus:whitesmoke
+
+);

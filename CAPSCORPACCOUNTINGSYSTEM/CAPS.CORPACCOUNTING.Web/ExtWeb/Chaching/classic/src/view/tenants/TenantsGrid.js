@@ -40,6 +40,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     requireMultisort: true,
     isEditable:true,
     editingMode: 'row',
+    createNewMode:'popup',
     columnLines: true,
     multiColumnSort: true,
     columns: [
@@ -49,13 +50,13 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             dataIndex: 'tenancyName',
             stateId: 'tenancyName',
             sortable: true,
-            width: '25%',
+            width: '27%',
             groupable:true,
             // simplest filter configuration
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
-                emptyText: 'Enter name to search'
+                emptyText: app.localize('TTenancyCodeName')
                 //plugins: [{
                 //    ptype: 'saki-ficn'
                 //    , iconCls: 'fa fa-info'
@@ -71,19 +72,20 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             dataIndex: 'name',
             sortable: true,
             groupable: true,
-            width: '25%'
+            width: '30%'
             // equivalent to filterField:true
             // as textfield is created by default
             ,
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
-                emptyText: 'Enter email to search'
+                emptyText: app.localize('TName')
             },
             editor: {
                 xtype: 'textfield'
             }
-        }, {
+        },
+        /*{//uncomment if required
             xtype: 'gridcolumn',
             text: app.localize('Edition'),
             dataIndex: 'editionDisplayName',
@@ -93,7 +95,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
-                emptyText: 'Enter phone to search'
+                emptyText: app.localize('TEdition')
             },
             editor: {
                 xtype: 'combobox',
@@ -107,7 +109,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                     change:'onEditionChange'
                 }
             }
-        },
+        },*/
         {
             xtype: 'gridcolumn',
             text: app.localize('Active'),
@@ -137,9 +139,11 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             dataIndex: 'adminEmailAddress',
             sortable: true,
             groupable: true,
-            width: '20%',
+            width: '25%',
             filterField: {
-                xtype: 'textfield'
+                xtype: 'textfield',
+                width: '100%',
+                emptyText: app.localize('TAdminEmailAddress')
             },
             editor: {
                 xtype:'textfield'

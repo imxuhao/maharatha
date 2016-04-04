@@ -9,5 +9,11 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
                 record = context.record;
             record.set('editionId', newValue);
         }
+    },
+    doAfterCreateAction:function(createMode, formView,isEdit) {
+        if (formView && isEdit) {
+            var form = formView.down('form').getForm();
+            form.findField('tenancyName').setReadOnly(true);
+        }
     }
 });

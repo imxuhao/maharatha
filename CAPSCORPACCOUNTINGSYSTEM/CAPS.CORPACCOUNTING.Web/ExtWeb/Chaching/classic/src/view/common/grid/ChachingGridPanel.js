@@ -58,8 +58,16 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     * @hide
     * @private
     * @cfg {string} editingMode
+     * values are cell and row.
     */
-    editingMode:null,
+    editingMode: null,
+    /**
+   * @hide
+   * @private
+   * @cfg {string} createNewMode
+     * values are inline(default based on editing mode), popup and tab
+   */
+    createNewMode:'inline',
     columnLines: true,
     padding: 5,
     frame: false,
@@ -94,6 +102,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             gridColumns = me.columns,
             features = [];
 
+        //validate grid config
+        if (me.isEditable && (me.editingMode === null || me.editingMode === undefined || me.editingMode === "")) {
+            Ext.Error.raise('Please specify Editing mode for the grid');
+        }
         if (me.headerButtonsConfig) {
             for (var i = 0; i < me.headerButtonsConfig.length; i++) {
                 var btn = me.headerButtonsConfig[i];
@@ -207,7 +219,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     editingModel = {
                         ptype: 'cellediting',
                         pluginId: 'editingPlugin',
-                        clicksToEdit: 1,
+                        clicksToEdit: 2,
                         listeners: {
                             beforeedit: 'onBeforeGridEdit'
                         }
@@ -219,7 +231,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     editingModel = {
                         ptype: 'chachingRowediting',
                         pluginId: 'editingPlugin',
-                        clicksToEdit: 1,
+                        clicksToEdit: 2,
                         listeners: {
                             beforeedit: 'onBeforeGridEdit',
                             edit:'onEditComplete'
@@ -227,9 +239,6 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     }
                     plugins.push(editingModel);
                     me.selModel = 'rowmodel';
-                    break;
-                case "form":
-                    //add item double click event and open formpanel in new tab
                     break;
                 default:
                     break;
@@ -325,13 +334,27 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         var defaultMenuItems = [];
         //check for permission from abp
         if (abp.auth.hasPermission("Pages." + me.name + ".Edit")) {
-            var editMenuItem = {
-                text: app.localize('Edit'), iconCls: 'fa fa-pencil',
-                listeners: {
-                    click: controller.editActionClicked
+            //full editing is required only when create mode is popup/tab
+            if (me.createNewMode === "popup" || me.createNewMode === "tab") {
+                var editMenuItem = {
+                    text: app.localize('Edit'),
+                    iconCls: 'fa fa-pencil',
+                    listeners: {
+                        click: controller.editActionClicked
+                    }
+                };
+                defaultMenuItems.push(editMenuItem);
+            }
+
+            if (me.isEditable) {
+                var quickEditMenuItem= {
+                    text: app.localize('QuickEdit'), iconCls: 'fa fa-pencil-square-o ',
+                    listeners: {
+                        click:controller.quickEditActionClicked
+                    }
                 }
-            };
-            defaultMenuItems.push(editMenuItem);
+                defaultMenuItems.push(quickEditMenuItem);
+            }
         }
         if (abp.auth.hasPermission("Pages." + me.name + ".Delete")) {
             var deleteMenuItem = {

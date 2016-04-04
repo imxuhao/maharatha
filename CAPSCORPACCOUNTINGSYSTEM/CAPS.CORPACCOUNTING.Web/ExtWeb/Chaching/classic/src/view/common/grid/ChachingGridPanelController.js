@@ -2,7 +2,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.common-grid-chachinggridpanel',
     //Event Listeners
-    editActionClicked: function (menu, item, e, eOpts) {
+    quickEditActionClicked: function (menu, item, e, eOpts) {
         //do edit based on editMode of grid
         var parentMenu = menu.parentMenu,
             widgetRec = parentMenu.widgetRecord,
@@ -18,6 +18,20 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             }
         }
 
+    },
+    editActionClicked:function(menu, item, e, eOpts) {
+        var parentMenu = menu.parentMenu,
+            widgetRec = parentMenu.widgetRecord,
+            widgetCol = parentMenu.widgetColumn,
+            grid = widgetCol.up('grid'),
+            controller = grid.getController();
+        //TODO start edit by checking row allowEdit property
+        if (widgetRec && grid) {
+            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode,true);
+            if (formView) {
+                formView.down('form').getForm().setValues(widgetRec.data);
+            }
+        }
     },
     deleteActionClicked: function (menu, item, e, eOpts) {
         //do delete based on operation of grid store
@@ -50,6 +64,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             if (record.get(idPropertyField) > 0) {
                 operation = Ext.data.Operation({
                     params: record.data,
+                    records:[record],
                     callback: me.onOperationCompleteCallBack
                 });
                 gridStore.update(operation);
@@ -108,11 +123,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             className = model.$className,
             idPropertyField = gridStore.idPropertyField,
             editingPlugin = view.getPlugin('editingPlugin');
-
+        
         var modelInstance;
-        if (view&&view.editingMode) {
-            switch (view.editingMode) {
-                case "row":
+        if (view && view.createNewMode) {
+            switch (view.createNewMode) {
+                case "inline":
                     modelInstance = Ext.create(className, {
                         idPropertyField: 0,
                         passEdit: true,
@@ -121,13 +136,44 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     gridStore.insert(0, modelInstance);
                     editingPlugin.startEdit(gridStore.getAt(0));
                     break;
-                case "cell":
+                case "popup":
+                    me.createNewRecord(view.xtype,'popup',false);
                     break;
-                case "form":
+                case "tab":
                     break;
                 default:
                     break;
             }
+            
+        }
+    },
+    //Do module specific tasks 
+    doBeforeCreateAction: function (createNewMode) { },
+    doAfterCreateAction: function (createNewMode,form) { },
+    createNewRecord:function(type,createMode,isEdit) {
+        var me = this,
+            view = me.getView(),
+            formView,
+            className;
+        me.doBeforeCreateAction(createMode);
+        if (createMode === "popup") {
+            className = type + ".createView";
+            formView = Ext.create({
+                xtype: className
+            });
+            formView.show();
+        }
+        me.setParentControl(formView);
+        me.doAfterCreateAction(createMode, formView,isEdit);
+        return formView;
+
+    },
+    setParentControl: function (formView) {
+        var me = this,
+            view = me.getView();
+        if (formView) {
+            var form = formView.down('form');
+            form.parentGrid = view;
         }
     }
     

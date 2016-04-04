@@ -1,0 +1,18 @@
+﻿@include extjs-text-field-ui(
+$ui:'fieldLabelTop',
+$ui-font-size:13px,
+$ui-font-weight:400,
+$ui-border-radius:5px
+);
+
+@include extjs-label-ui(
+$ui:'fieldLabelTop',
+$ui-font-size:14px,
+$ui-font-weight:400
+);
+.checkboxLabel{
+    font-weight:400 !important;
+    padding-left:22px !important;
+    display:inline-block !important;
+    margin-top:8px !important;
+}

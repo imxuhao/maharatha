@@ -14962,6 +14962,7 @@
     <Content Include="ExtWeb\ext\welcome\img\_bg-blue.gif" />
     <Content Include="ExtWeb\ext\welcome\release-notes.css" />
     <Content Include="Logs\Logs.txt" />
+    <Content Include="Views\Account\detect_timezone.js" />
     <Content Include="Views\index.html" />
     <Content Include="ExtWeb\LoginApp\.sencha\app\Boot.js" />
     <Content Include="ExtWeb\LoginApp\.sencha\app\bootstrap-impl.xml" />
@@ -18920,6 +18921,7 @@
     <Content Include="Logs\Logs.txt.r158" />
     <Content Include="ExtWeb\Chaching\classic\sass\src\view\main\ChachingViewport.scss" />
     <Content Include="ExtWeb\Chaching\classic\sass\src\view\common\grid\ChachingGridPanel.scss" />
+    <None Include="Properties\PublishProfiles\devBuild.pubxml" />
     <None Include="Properties\PublishProfiles\DevServerRelease.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

@@ -75,12 +75,12 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             RoleManager roleManager,
             TenantManager tenantManager,
             IUnitOfWorkManager unitOfWorkManager,
-            ITenancyNameFinder tenancyNameFinder, 
-            ICacheManager cacheManager, 
+            ITenancyNameFinder tenancyNameFinder,
+            ICacheManager cacheManager,
             IAppNotifier appNotifier,
             IWebUrlService webUrlService,
             AbpLoginResultTypeHelper abpLoginResultTypeHelper,
-            IUserLinkManager userLinkManager, 
+            IUserLinkManager userLinkManager,
             INotificationSubscriptionManager notificationSubscriptionManager)
         {
             _userManager = userManager;
@@ -176,6 +176,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             }
 
             identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId)));
+            identity.AddClaim(new Claim("timezoneoffset", GetClientTimeZoneOffSet()));
 
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = rememberMe }, identity);
@@ -293,14 +294,14 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                     if (string.Equals(externalLoginInfo.Email, model.EmailAddress, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        user.IsEmailConfirmed = true;                        
+                        user.IsEmailConfirmed = true;
                     }
                 }
                 else
                 {
                     if (model.UserName.IsNullOrEmpty() || model.Password.IsNullOrEmpty())
                     {
-                        throw new UserFriendlyException(L("FormIsNotValidMessage"));                        
+                        throw new UserFriendlyException(L("FormIsNotValidMessage"));
                     }
                 }
 
@@ -540,11 +541,11 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             return RedirectToAction(
                 "Login",
                 new
-                                             {
-                                                 successMessage = L("YourEmailIsConfirmedMessage"),
-                                                 tenancyName = tenancyName,
-                                                 userNameOrEmailAddress = user.UserName
-                                             });
+                {
+                    successMessage = L("YourEmailIsConfirmedMessage"),
+                    tenancyName = tenancyName,
+                    userNameOrEmailAddress = user.UserName
+                });
         }
 
         #endregion
@@ -603,7 +604,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
             return tenant;
         }
-        
+
         #endregion
 
         #region External Login
@@ -996,7 +997,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             if (message.IsNullOrEmpty())
             {
-                message = "This is a test notification, created at " + Clock.Now;                
+                message = "This is a test notification, created at " + Clock.Now;
             }
 
             await _appNotifier.SendMessageAsync(
@@ -1008,6 +1009,14 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             return Content("Sent notification: " + message);
         }
 
+        #endregion
+
+        #region Set Culture Info
+
+        private string GetClientTimeZoneOffSet()
+        {
+            return Request.Cookies["timezoneoffset"] != null ? Request.Cookies["timezoneoffset"].Value.ToString() : "";
+        }
         #endregion
     }
 }

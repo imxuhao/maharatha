@@ -1,8 +1,9 @@
 ﻿using Abp.AutoMapper;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.GenericSearch;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -10,6 +11,8 @@ namespace CAPS.CORPACCOUNTING.Helpers
 {
     public static class Helper
     {
+
+
         /// <summary>
         /// To get formatted sorting string 
         /// </summary>
@@ -31,9 +34,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
         /// <param name="defaultsort"></param>
         /// <param name="sort"></param>
         /// <returns></returns>
-        public static string GetSort(string defaultsort,string sort)
+        public static string GetSort(string defaultsort, string sort)
         {
-           return string.IsNullOrEmpty(sort) ? defaultsort : sort;
+            return string.IsNullOrEmpty(sort) ? defaultsort : sort;
         }
 
         /// <summary>
@@ -143,6 +146,34 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
             return query;
         }
+
+        public static DateTime GetClientDate(string date, object ClientTimeZoneoffset)
+        {
+            if (ClientTimeZoneoffset != null)
+            {
+                string Temp = ClientTimeZoneoffset.ToString().Trim();
+                if (!Temp.Contains("+") && !Temp.Contains("-"))
+                {
+                    Temp = Temp.Insert(0, "+");
+                }
+                //Retrieve all system time zones available into a collection
+                ReadOnlyCollection<TimeZoneInfo> timeZones = TimeZoneInfo.GetSystemTimeZones();
+                DateTime startTime = DateTime.Parse(date);
+                DateTime _now = DateTime.Parse(date);
+                foreach (TimeZoneInfo timeZoneInfo in timeZones)
+                {
+                    if (timeZoneInfo.ToString().Contains(Temp))
+                    {
+                        TimeZoneInfo tst = TimeZoneInfo.FindSystemTimeZoneById(timeZoneInfo.Id);
+                        _now = TimeZoneInfo.ConvertTime(startTime, TimeZoneInfo.Utc, tst);
+                        break;
+                    }
+                }
+                return _now;
+            }
+            else
+                return DateTime.Parse(date);
+        }
     }
 
     /// <summary>
@@ -174,7 +205,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public IEnumerable<BooleanSearch> BooleanSearch { get; set; }
 
         public IEnumerable<DecimalSearch> DecimalSearch { get; set; }
-        
+
 
     }
     public enum DataTypes
@@ -184,17 +215,17 @@ namespace CAPS.CORPACCOUNTING.Helpers
         Date = 2,
         Bool = 3,
         Enum = 4,
-        Decimal=5
+        Decimal = 5
     }
     public class Filters
     {
         public string Entity { get; set; }
-       
+
         public string Property { get; set; }
         public string SearchTerm { get; set; }
         public int Comparator { get; set; }
         public string SearchTerm2 { get; set; }
-       
+
         public DataTypes DataType { get; set; }
     }
 

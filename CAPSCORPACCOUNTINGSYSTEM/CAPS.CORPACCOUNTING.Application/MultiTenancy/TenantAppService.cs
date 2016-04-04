@@ -24,13 +24,15 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
     {
         private readonly TenantManager _tenantManager;
         private readonly IRepository<User,long> _userRepository;
+        private readonly IRepository<Tenant> _tenantRepository;
 
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         public TenantAppService(
-            TenantManager tenantManager, IRepository<User, long> userRepository, IUnitOfWorkManager unitOfWorkManager)
+            TenantManager tenantManager, IRepository<User, long> userRepository, IUnitOfWorkManager unitOfWorkManager, IRepository<Tenant> tenantRepository)
         {
             _tenantManager = tenantManager;
             _userRepository = userRepository;
+            _tenantRepository = tenantRepository;
             _unitOfWorkManager = unitOfWorkManager;
         }
 
@@ -42,8 +44,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             {
                 var query = from tenant in TenantManager.Tenants.Include(t => t.Edition)
                             join user in _userRepository.GetAll() on tenant.Id equals user.TenantId
-                            where user.Name == userName
-                            select new { tenant, user };
+                            into tentnuser
+                            from users in tentnuser.DefaultIfEmpty()
+                            select new { Tenant=tenant,User= users };
 
                 if (!ReferenceEquals(input.Filters, null))
                 {
@@ -51,15 +54,17 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     if (!ReferenceEquals(mapSearchFilters, null))
                         query = Helper.CreateFilters(query, mapSearchFilters);
                 }
-               
-                var tenantCount = await query.CountAsync();
 
-                var tenants = await query.OrderBy(Helper.GetSort("tenant.TenancyName ASC", input.Sorting)).PageBy(input).ToListAsync();
+                query = query.Where(item => item.User.Name== userName);
+
+                var tenantCount = await query.CountAsync();                
+                var tenants = await query.OrderBy(Helper.GetSort("Tenant.TenancyName ASC", input.Sorting)).PageBy(input).ToListAsync();
+               
 
                 return new PagedResultOutput<TenantListDto>(tenantCount, tenants.Select(item =>
                 {
-                    var dto = item.tenant.MapTo<TenantListDto>();
-                    dto.AdminEmailAddress = item.user.EmailAddress;
+                    var dto = item.Tenant.MapTo<TenantListDto>();
+                    dto.AdminEmailAddress = item.User.EmailAddress;
                     return dto;
                 }).ToList());
 

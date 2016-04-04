@@ -375,5 +375,10 @@
     <text name="Export" value="Export" />
   <text name="ExportToPDF" value="Export to pdf" />
   <text name="ClearFilter" value="Clear Filter" />
+    <text name="QuickEdit" value="Quick Edit" />
+    <text name="TTenancyCodeName" value="Enter tenant code name" />
+    <text name="TName" value="Enter name" />
+    <text name="TEdition" value="Select edition" />
+    <text name="TAdminEmailAddress" value="Enter admin email address" />
   </texts>
 </localizationDictionary>

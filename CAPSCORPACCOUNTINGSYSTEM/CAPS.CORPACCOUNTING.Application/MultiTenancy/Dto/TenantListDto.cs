@@ -18,5 +18,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
         public bool IsActive { get; set; }
 
         public DateTime CreationTime { get; set; }
+
+        public string AdminEmailAddress { get; set; }          
+
+        public int? EditionId { get; set; }
     }
 }

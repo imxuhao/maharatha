@@ -9,6 +9,7 @@ using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 using CAPS.CORPACCOUNTING.Notifications;
 using Shouldly;
 using Xunit;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Tests.MultiTenancy
 {
@@ -26,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.Tests.MultiTenancy
         public async Task GetTenants_Test()
         {
             //Act
-            var output = await _tenantAppService.GetTenants(new GetTenantsInput());
+            var output = await _tenantAppService.GetTenants(new SearchInputDto());
 
             //Assert
             output.TotalCount.ShouldBe(1);

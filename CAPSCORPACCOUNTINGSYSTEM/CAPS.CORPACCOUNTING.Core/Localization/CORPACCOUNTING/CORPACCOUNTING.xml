@@ -380,5 +380,6 @@
     <text name="TName" value="Enter name" />
     <text name="TEdition" value="Select edition" />
     <text name="TAdminEmailAddress" value="Enter admin email address" />
+  <text name="MandatoryToolTipText" value="Please fill out this field." />
   </texts>
 </localizationDictionary>

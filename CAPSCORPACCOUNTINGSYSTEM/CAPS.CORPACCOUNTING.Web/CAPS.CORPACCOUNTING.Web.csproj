@@ -595,6 +595,7 @@
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\Chaching-all.css" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\Chaching-all_1.css" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\Chaching-all_2.css" />
+    <Content Include="ExtWeb\build\development\Chaching\classic\resources\Chaching-all_3.css" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\ext\ext-watermark\demo-files\demo.css" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\ext\ext-watermark\demo-files\demo.js" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\ext\ext-watermark\demo.html" />

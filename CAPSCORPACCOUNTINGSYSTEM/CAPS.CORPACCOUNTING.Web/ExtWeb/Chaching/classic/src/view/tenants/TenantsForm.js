@@ -1,7 +1,7 @@
 
 Ext.define('Chaching.view.tenants.TenantsForm',{
     extend: 'Chaching.view.common.form.ChachingFormPanel',
-    alias:['host.tenant.create','host.tenant.edit'],
+    alias: ['host.tenants.create', 'host.tenants.edit'],
     requires: [
         'Chaching.view.tenants.TenantsFormController',
         'Chaching.view.tenants.TenantsFormModel'
@@ -17,7 +17,8 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
     layout: 'vbox',
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
-        labelAlign: 'top'
+        labelAlign: 'top',
+        blankText: app.localize('MandatoryToolTipText')
     },
     defaultFocus:'textfield#tenancyName',
     items: [{
@@ -27,29 +28,32 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
     }, {
         xtype: 'textfield',
         name: 'tenancyName',
-        itemId:'tenancyName',
-        fieldLabel: app.localize('TenancyName'),        
+        itemId: 'tenancyName',
+        allowBlank:false,
+        fieldLabel: app.localize('TenancyName').initCap(),
         width: '100%',
         ui:'fieldLabelTop',
         emptyText: app.localize('TTenancyCodeName')
     }, {
         xtype: 'textfield',
         name: 'name',
-        fieldLabel: app.localize('Name'),
+        allowBlank: false,
+        fieldLabel: app.localize('Name').initCap(),
         width: '100%',
         ui: 'fieldLabelTop',
         emptyText: app.localize('TName')
     }, {
         xtype: 'textfield',
         name: 'adminEmailAddress',
-        fieldLabel: app.localize('AdminEmailAddress'),
+        fieldLabel: app.localize('AdminEmailAddress').initCap(),
         width: '100%',
+        allowBlank: false,
         ui: 'fieldLabelTop',
         emptyText: app.localize('TAdminEmailAddress')
     }, {
         xtype: 'combobox',
         name: 'editionId',
-        fieldLabel: app.localize('Edition'),
+        fieldLabel: app.localize('Edition').initCap(),
         width: '100%',
         ui: 'fieldLabelTop',
         emptyText: app.localize('TEdition'),

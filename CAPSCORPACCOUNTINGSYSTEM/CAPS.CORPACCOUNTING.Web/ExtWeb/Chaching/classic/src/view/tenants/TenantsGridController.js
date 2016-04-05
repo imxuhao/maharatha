@@ -14,6 +14,7 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
         if (formView && isEdit) {
             var form = formView.down('form').getForm();
             form.findField('tenancyName').setReadOnly(true);
+            form.findField('adminEmailAddress').setReadOnly(true);
         }
     }
 });

@@ -43,6 +43,14 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     createNewMode:'popup',
     columnLines: true,
     multiColumnSort: true,
+    editWndTitleConfig: {
+        title: app.localize('EditTenant'),
+        iconCls: 'fa fa-pencil'
+    },
+    createWndTitleConfig: {
+        title: app.localize('CreateNewTenant'),
+        iconCls: 'fa fa-plus'
+    },
     columns: [
         {
             xtype: 'gridcolumn',

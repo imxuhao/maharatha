@@ -10,6 +10,23 @@ $ui:'fieldLabelTop',
 $ui-font-size:14px,
 $ui-font-weight:400
 );
+
+.x-form-trigger-fieldLabelTop{
+    background-color:transparent !important;
+    color:#080808 !important;
+}
+.x-form-trigger-wrap-fieldLabelTop{
+    border-top-color:transparent !important;
+    border-left-color:transparent !important;
+    border-right-color:transparent !important;
+    border-bottom-color:#27E4E4 !important;
+}
+.x-form-trigger-wrap-fieldLabelTop.x-form-trigger-wrap-invalid{
+     border-top-color:transparent !important;
+    border-left-color:transparent !important;
+    border-right-color:transparent !important;
+    border-bottom-color:#cf4c35 !important;
+}
 .checkboxLabel{
     font-weight:400 !important;
     padding-left:22px !important;

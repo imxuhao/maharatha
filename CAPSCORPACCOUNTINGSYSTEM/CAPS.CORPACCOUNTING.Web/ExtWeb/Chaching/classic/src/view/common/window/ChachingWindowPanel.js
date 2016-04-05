@@ -17,5 +17,5 @@ Ext.define('Chaching.view.common.window.ChachingWindowPanel',{
     ui:'chachingWindow',
     name: null,
     border: false,
-    frame: false,
+    frame: false
 });

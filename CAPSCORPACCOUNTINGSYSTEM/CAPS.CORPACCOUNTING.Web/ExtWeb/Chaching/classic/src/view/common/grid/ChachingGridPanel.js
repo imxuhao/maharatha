@@ -92,7 +92,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     name: '',
     enableLocking:false,
     syncRowHeight: false,
-    editingModel:null,
+    editingModel: null,
+    editWndTitleConfig: null,
+    createWndTitleConfig:null,
     initComponent: function () {
         var me = this,
             controller = me.getController(),

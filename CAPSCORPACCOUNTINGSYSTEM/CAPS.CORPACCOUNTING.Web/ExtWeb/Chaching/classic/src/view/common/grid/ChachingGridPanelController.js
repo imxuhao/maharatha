@@ -27,7 +27,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             controller = grid.getController();
         //TODO start edit by checking row allowEdit property
         if (widgetRec && grid) {
-            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode,true);
+            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig);
             if (formView) {
                 formView.down('form').getForm().setValues(widgetRec.data);
             }
@@ -137,7 +137,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     editingPlugin.startEdit(gridStore.getAt(0));
                     break;
                 case "popup":
-                    me.createNewRecord(view.xtype,'popup',false);
+                    me.createNewRecord(view.xtype, 'popup', false, view.createWndTitleConfig);
                     break;
                 case "tab":
                     break;
@@ -150,16 +150,19 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     //Do module specific tasks 
     doBeforeCreateAction: function (createNewMode) { },
     doAfterCreateAction: function (createNewMode,form) { },
-    createNewRecord:function(type,createMode,isEdit) {
+    createNewRecord:function(type,createMode,isEdit,titleConfig) {
         var me = this,
             view = me.getView(),
             formView,
             className;
         me.doBeforeCreateAction(createMode);
         if (createMode === "popup") {
+            if (!titleConfig)Ext.Error.raise('Please provide title configuration');
             className = type + ".createView";
             formView = Ext.create({
-                xtype: className
+                xtype: className,
+                title: titleConfig.title,
+                iconCls: titleConfig.iconCls
             });
             formView.show();
         }

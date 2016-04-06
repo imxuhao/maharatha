@@ -33,6 +33,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         tooltip: app.localize('CreateNewTenant'),
         checkPermission: true,
         iconCls: 'fa fa-plus',
+        routeName: 'host.tenants.create',
         iconAlign: 'left'
     }],
     requireExport: true,

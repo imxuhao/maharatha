@@ -1,7 +1,7 @@
 ﻿Ext.define('Chaching.store.tenants.TenantsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.tenants.TenantsModel',
-    autoLoad: true,
+    autoLoad: false,
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

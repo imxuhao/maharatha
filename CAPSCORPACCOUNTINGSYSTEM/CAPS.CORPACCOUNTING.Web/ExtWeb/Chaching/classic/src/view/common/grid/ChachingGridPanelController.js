@@ -1,6 +1,41 @@
 Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.common-grid-chachinggridpanel',
+    listen: {
+        controller: {
+            '#': {
+                unmatchedroute: 'onUnmatchedRoute'
+            }
+        }
+    },
+    routes: {
+        'host.tenants.create': {
+            action: 'createEditRecordInTab'
+        },
+        //'host.tenants.edit': {
+        //    action: 'showUser',
+        //    before: 'beforeShowUser',
+        //    conditions: {
+        //        ':id': '([0-9]+)'
+        //    }
+        //}
+    },
+   
+    createEditRecordInTab: function (hash) {
+        if (!hash) {
+            hash = this.currentRedirectedRoute;
+        }
+        Ext.toast(hash);
+    },
+    onUnmatchedRoute: function(hash) {
+        if (!hash) {
+            hash = this.currentRedirectedRoute;
+        }
+        if (Chaching.utilities.RoutesNames.menuItemRoutes.indexOf(hash) === -1) {
+            Ext.toast('No route found with :' + hash);
+        }
+    },
+    currentRedirectedRoute:null,
     //Event Listeners
     quickEditActionClicked: function (menu, item, e, eOpts) {
         //do edit based on editMode of grid
@@ -140,12 +175,17 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     me.createNewRecord(view.xtype, 'popup', false, view.createWndTitleConfig);
                     break;
                 case "tab":
+                    if (!btn.routeName)Ext.Error.raise('When create/edit mode is tab for grid then routeName config to button is mandatory!!!');
+                    me.currentRedirectedRoute = btn.routeName;
+                    me.redirectTo(btn.routeName);
                     break;
                 default:
+                    me.currentRedirectedRoute = null;
                     break;
             }
             
         }
+       
     },
     //Do module specific tasks 
     doBeforeCreateAction: function (createNewMode) { },

@@ -94,7 +94,19 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     syncRowHeight: false,
     editingModel: null,
     editWndTitleConfig: null,
-    createWndTitleConfig:null,
+    createWndTitleConfig: null,
+    /**
+   * @hide
+   * @private
+   * @cfg {object} modulePermissions
+     * Override this config in child grid if has additional permissions
+   */
+    modulePermissions: {
+        read: true,
+        create: true,
+        update: true,
+        destroy:true
+    },
     initComponent: function () {
         var me = this,
             controller = me.getController(),

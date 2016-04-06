@@ -1,8 +1,7 @@
 ﻿@include extjs-text-field-ui(
 $ui:'fieldLabelTop',
 $ui-font-size:13px,
-$ui-font-weight:400,
-$ui-border-radius:5px
+$ui-font-weight:400
 );
 
 @include extjs-label-ui(

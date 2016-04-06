@@ -16,7 +16,17 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
 
     lastView: null,
     onRouteChange: function (id) {
-        this.setCurrentView(id);
+        if (Chaching.utilities.RoutesNames.routesNames.indexOf(id) !== -1) {
+            //if route is in ignore list then find route in ChachingGridPanelController
+            var gridController = new Chaching.view.common.grid.ChachingGridPanelController;
+            if (gridController) {
+                gridController.currentRedirectedRoute = id;
+                gridController.redirectTo(id, true);
+            }
+        }
+        else {
+            this.setCurrentView(id);
+        }
     },
     setCurrentView: function (hashTag) {
         try {
@@ -55,6 +65,15 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
                     closable: true,
                     title: text
                 });
+                var modulePermission = abp.auth.hasPermission('Pages.' + newView.name);
+                if (!modulePermission) {
+                    Ext.toast('Requested resource by you is restricted due to security reason. Please contact support or clear #' + hashTag + ' from your browser url');
+                    return;
+                }
+                if (typeof(newView.getStore) === 'function') {
+                    var gridStore = newView.getStore();
+                    if (gridStore)gridStore.load();
+                }
             }
 
             if (!newView || !newView.isWindow) {
@@ -84,6 +103,7 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
 
             me.lastView = newView;
         } catch (e) {
+            debugger;
             Ext.toast('Please create view for the menuitem you clicked');
         }
     },

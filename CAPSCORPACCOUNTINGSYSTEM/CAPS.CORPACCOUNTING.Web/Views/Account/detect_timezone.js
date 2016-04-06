@@ -26,6 +26,8 @@ function calculate_time_zone() {
     minutes = convert(std_time_offset);
 
     document.cookie = "timezoneOffSet=" + minutes;
+    document.cookie = "cultureformat=" + Getcultureformat(minutes);
+
 }
 // This function is to convert the timezoneoffset to Standard format
 function convert(value) {
@@ -51,3 +53,13 @@ function convert(value) {
     return display_hours + ":" + mins;
 }
 // Adding the funtion to onload event of document object
+
+function Getcultureformat(value) {
+    var cultureFormat;
+    $.each(timeZonecultureList, function (i, v) {
+        if (v.TimeZoneOffSetId == value) {
+            cultureFormat = v.CultureFormat;
+        }
+    });
+    return cultureFormat;
+}

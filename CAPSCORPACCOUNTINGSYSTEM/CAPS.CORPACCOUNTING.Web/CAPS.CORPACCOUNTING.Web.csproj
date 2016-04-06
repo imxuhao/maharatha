@@ -1817,7 +1817,11 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\slice-impl.xml" />
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
+    <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
+    <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\Prototypes.js" />
+    <Content Include="ExtWeb\Chaching\app\model\users\UsersModel.js" />
+    <Content Include="ExtWeb\Chaching\app\store\users\UsersStore.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\RowEditing.js" />
     <Content Include="ExtWeb\Chaching\app\data\proxy\BaseProxy.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\BaseModel.js" />
@@ -1845,6 +1849,9 @@
     <Content Include="ExtWeb\Chaching\bootstrap.css" />
     <Content Include="ExtWeb\Chaching\bootstrap.js" />
     <Content Include="ExtWeb\Chaching\build.xml" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsFormModel.js" />
@@ -1854,6 +1861,15 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsViewModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersViewModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersFormModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersGridModel.js" />
     <Content Include="ExtWeb\Chaching\index.html" />
     <Content Include="ExtWeb\Chaching\modern\src\Application.js" />
     <Content Include="ExtWeb\Chaching\modern\src\profile\Phone.js" />
@@ -14977,6 +14993,7 @@
     <Content Include="ExtWeb\ext\welcome\release-notes.css" />
     <Content Include="Logs\Logs.txt" />
     <Content Include="Views\Account\detect_timezone.js" />
+    <Content Include="Views\Account\TimeZoneList.js" />
     <Content Include="Views\index.html" />
     <Content Include="ExtWeb\LoginApp\.sencha\app\Boot.js" />
     <Content Include="ExtWeb\LoginApp\.sencha\app\bootstrap-impl.xml" />
@@ -19271,7 +19288,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ExtWeb\Chaching\app\view\" />
     <Folder Include="ExtWeb\Chaching\overrides\" />
     <Folder Include="ExtWeb\LoginApp\overrides\" />
     <Folder Include="ExtWeb\LoginApp\sass\src\" />

@@ -378,7 +378,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-ar.xml" />
+    <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-ar.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-zh-CN.xml" />
     <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-de.xml" />
     <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-pt-BR.xml" />

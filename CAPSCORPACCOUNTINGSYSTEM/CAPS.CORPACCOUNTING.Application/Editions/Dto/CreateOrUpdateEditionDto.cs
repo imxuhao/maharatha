@@ -9,7 +9,7 @@ namespace CAPS.CORPACCOUNTING.Editions.Dto
         [Required]
         public EditionEditDto Edition { get; set; }
 
-        [Required]
+       // [Required]
         public List<NameValueDto> FeatureValues { get; set; }
     }
 }

@@ -3,10 +3,15 @@
     singleton: true,
     routesNames: [
         'host.tenants.create',
-        'host.tenants.edit'
+        'host.tenants.edit',
+        'host.editions.create',
+        'host.editions.edit'
     ],
     menuItemRoutes: [
         'host.tenants',
-        'users'
+        'host.editions',
+        'users',
+        'languages',
+        'roles'
     ]
 });

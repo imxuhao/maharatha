@@ -21,7 +21,9 @@ Ext.define('Chaching.Application', {
          'NavigationTree',
          'tenants.TenantsStore',
          'users.UsersStore',
-         'roles.RolesStore'
+         'roles.RolesStore',
+         'editions.EditionsStore',
+         'languages.LanguagesStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     onAppUpdate: function () {

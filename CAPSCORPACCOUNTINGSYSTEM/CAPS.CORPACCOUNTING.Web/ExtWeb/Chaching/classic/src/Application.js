@@ -23,7 +23,8 @@ Ext.define('Chaching.Application', {
          'users.UsersStore',
          'roles.RolesStore',
          'editions.EditionsStore',
-         'languages.LanguagesStore'
+         'languages.LanguagesStore',
+          'auditlogs.AuditLogsStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     onAppUpdate: function () {

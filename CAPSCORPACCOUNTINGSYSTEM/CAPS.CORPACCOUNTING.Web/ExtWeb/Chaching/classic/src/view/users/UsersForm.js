@@ -15,7 +15,7 @@ Ext.define('Chaching.view.users.UsersForm', {
     openInPopupWindow: true,
     hideDefaultButtons: false,
     layout: 'vbox',
-    autoScroll:true,
+    autoScroll: true,
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
         labelAlign: 'top'
@@ -42,7 +42,7 @@ Ext.define('Chaching.view.users.UsersForm', {
         width: '100%',
         ui: 'fieldLabelTop',
         emptyText: app.localize('USurname')
-    }, 
+    },
     {
         xtype: 'textfield',
         name: 'emailAddress',
@@ -73,16 +73,16 @@ Ext.define('Chaching.view.users.UsersForm', {
                 var txtpassword = Ext.getCmp('txtpassword');
                 var txtpasswordRepeat = Ext.getCmp('txtpasswordRepeat');
                 if (newValue) {
-                    txtpassword.show();
-                    txtpasswordRepeat.show();
-                  
-                }
-                else {
                     txtpassword.hide();
                     txtpasswordRepeat.hide();
+
                 }
-                txtpasswordRepeat.emptyText();
-                txtpassword.emptyText();
+                else {
+                    txtpassword.show();
+                    txtpasswordRepeat.show();
+                }
+                txtpasswordRepeat.reset();
+                txtpassword.reset();
             }
         }
     },
@@ -94,7 +94,10 @@ Ext.define('Chaching.view.users.UsersForm', {
          width: '100%',
          ui: 'fieldLabelTop',
          emptyText: app.localize('Password'),
-         id: 'txtpassword'
+         id: 'txtpassword',
+         hidden: true
+
+
      },
 
       {
@@ -105,7 +108,8 @@ Ext.define('Chaching.view.users.UsersForm', {
           width: '100%',
           ui: 'fieldLabelTop',
           emptyText: app.localize('PasswordRepeat'),
-          id: 'txtpasswordRepeat'
+          id: 'txtpasswordRepeat',
+          hidden: true
       },
 
     {
@@ -125,7 +129,6 @@ Ext.define('Chaching.view.users.UsersForm', {
         checked: true,
         boxLabelCls: 'checkboxLabel'
     }
-
     ]
 
 });

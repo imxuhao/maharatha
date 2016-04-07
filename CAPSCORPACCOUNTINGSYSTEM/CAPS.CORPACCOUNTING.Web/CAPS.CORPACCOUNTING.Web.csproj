@@ -583,6 +583,7 @@
     <Content Include="Content\fonts-sourcesans-pro.css" />
     <Content Include="Content\images\capslogo.png" />
     <Content Include="Content\themesChaching\famfamfam-flags.css" />
+    <Content Include="Content\RenderStyles.css" />
     <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.dev.svg" />
     <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.svg" />
     <Content Include="Content\themesChaching\simple-line-icons\icons-lte-ie7.js" />
@@ -1817,7 +1818,9 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\slice-impl.xml" />
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
+    <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
+    <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\Prototypes.js" />
     <Content Include="ExtWeb\Chaching\app\model\users\UsersModel.js" />
@@ -1836,6 +1839,9 @@
     <Content Include="ExtWeb\Chaching\app\store\tenants\TenantsStore.js" />
     <Content Include="ExtWeb\Chaching\classic\src\Application.js" />
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGridModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingFormPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingFormPanelController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingFormPanelModel.js" />

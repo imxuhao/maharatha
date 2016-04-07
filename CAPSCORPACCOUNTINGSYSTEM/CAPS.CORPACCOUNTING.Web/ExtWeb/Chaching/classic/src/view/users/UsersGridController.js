@@ -55,5 +55,5 @@ Ext.define('Chaching.view.users.UsersGridController', {
             }
 
         }
-    },
+    }
 });

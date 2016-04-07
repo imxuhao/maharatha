@@ -1,7 +1,6 @@
 ﻿Ext.define('Chaching.store.roles.RolesStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.roles.RolesModel',
-    autoLoad: true,
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

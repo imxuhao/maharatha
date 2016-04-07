@@ -12,6 +12,7 @@
         'host.editions',
         'users',
         'languages',
-        'roles'
+        'roles',
+        'auditlogs'
     ]
 });

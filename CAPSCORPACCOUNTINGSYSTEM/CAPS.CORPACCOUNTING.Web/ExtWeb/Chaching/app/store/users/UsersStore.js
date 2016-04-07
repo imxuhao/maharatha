@@ -1,7 +1,6 @@
 ﻿Ext.define('Chaching.store.users.UsersStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.users.UsersModel',
-    autoLoad: true,
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

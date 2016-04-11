@@ -213,7 +213,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
     /**
      * @cfg {RegExp} operatorRe Regular expression of recognized operators
      */
-    , operatorRe: /^(=|!=|<=|>=|<|>|in |like )/
+    , operatorRe: /^(=|!=|<=|>=|<|>|in |like |range)/
 
     /**
      * @cfg {String} parseOperator Set it to false to not parse operator from the
@@ -580,14 +580,91 @@ Ext.define('Ext.saki.grid.MultiSearch', {
 
         filter = parse ? me.parseUserValue(value) : { value: value };
         filter.property = property;
-
         // Ext 4 compat
         filter.id = property;
 
+        ///*******************Chaching code to convert default filters into expected filter
+        me.customizeFilters(filter, field);
         me.setFilter(filter);
         me.updateClearIcon(field);
 
     } // eo function doFieldChange
+    ,customizeFilters:function(filter, field) {
+        var me = this,
+            gridStore = me.getStore(),
+            model = gridStore.getModel(),
+            entityName = model.$config.values.searchEntityName,
+            dataField = model.getField(field.getItemId());
+       
+        if (filter && field) {
+            if (typeof(field.entityName) !== "undefined") {
+                filter.entity = field.entityName;
+            } else {
+                filter.entity = entityName;
+            }
+            if (typeof(filter.value) !== "object")
+                filter.searchTerm = filter.value;
+            
+            switch (dataField.type) {
+                case "string":
+                    if (filter.operator && filter.operator === "=") {
+                        filter.comparator = 1;
+                    } else filter.comparator = 0;
+                    filter.dataType = 1;
+                    break;
+                case "boolean":
+                case "bool":
+                    filter.comparator = 1;
+                    filter.dataType = 3;
+                    break;
+                case "date":
+                case "decimal":
+                case "float":
+                case "number":
+                case "integer":
+                case "int":
+                    if (dataField.type === "date") filter.dataType = 2;
+                    else if (dataField.type === "decimal" || dataField.type === "float") filter.dataType = 5;
+                    else if (dataField.type === "number" || dataField.type === "integer" || dataField.type === "int") filter.dataType = 0;
+                    
+                    if (filter.operator) {
+                        switch (filter.operator) {
+                            case "<":
+                                filter.comparator = 0;
+                                break;
+                            case "<=":
+                                filter.comparator = 1;
+                                break;
+                            case "==":
+                            case "=":
+                                filter.comparator = 2;
+                                break;
+                            case ">=":
+                                filter.comparator = 3;
+                                break;
+                            case ">":
+                                filter.comparator = 4;
+                                break;
+                            case "range":
+                                filter.comparator = 5;
+                                if (typeof (filter.value) === "object") {
+                                    filter.searchTerm = filter.value[0];
+                                    if (filter.value.length > 1) filter.searchTerm2 = filter.value[1];
+                                }
+                                break;
+                            case "in":
+                                ///TODO implement once done on server
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                default:
+                    break;
+            }
+
+        }
+    }
 
     /**
      * Returns array of filter config objects from values in filter fields
@@ -824,10 +901,10 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         value = trim(va[2]);
         operator = trim(va[1]);
 
-        if ('in' !== operator) {
+        if ('in' !== operator && 'range' !== operator) {
             return {
-                value: value
-                , operator: operator
+                value: value,
+                operator: operator
             };
         }
 

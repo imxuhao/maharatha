@@ -1,6 +1,8 @@
 Ext.define('Chaching.model.tenants.TenantsModel', {
     extend: 'Chaching.model.base.BaseModel',
-    
+    config: {
+        searchEntityName: 'Tenant'
+    },
     fields: [
         { name: 'id', type: 'int' },
         { name: 'editionDisplayName', type: 'string' },

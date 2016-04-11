@@ -136,7 +136,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                 displayField:'text',
                 store: {
                     fields:[{name:'text'},{name:'value'}],
-                    data:[{text:'YES',value:true},{text:'NO',value:false}]
+                    data:[{text:'YES',value:'true'},{text:'NO',value:'false'}]
                 }
             },editor: {
                 xtype: 'checkbox'

@@ -5,7 +5,7 @@
     limitParam: 'maxResultCount',
     startParam: 'skipCount',
     sortParam: 'sorting',
-    filterParam: 'filtering',
+    filterParam: 'filters',
     pageParam: '',
     headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -21,6 +21,28 @@
     },
     writer: {
         type: 'json'
+    },
+    encodeFilters: function(filters) {
+        var filterArray = [];
+        if (filters) {
+            for (var i = 0; i < filters.length; i++) {
+                var filterObject = {
+                    Entity: filters[i].entity,
+                    Property: filters[i].getProperty(),
+                    SearchTerm: filters[i].searchTerm,
+                    SearchTerm2: filters[i].searchTerm2,
+                    Comparator: filters[i].comparator,
+                    DataType: filters[i].dataType
+                };
+                filterArray.push(filterObject);
+            }
+            return filterArray;
+        }
+        return filters;
+    },
+    encodeSorters: function (sorters) {
+        ///TODO Implement as per server requirements
+        return sorters;
     },
     listeners:
     {
@@ -38,6 +60,9 @@
                 // no responseText sent
                 Ext.Msg.alert('Error', 'Unknown error: Unable to understand the response from the server');
             }
+        },
+        metachange:function(proxy, meta, eOpts) {
+            debugger;
         }
     }
 });

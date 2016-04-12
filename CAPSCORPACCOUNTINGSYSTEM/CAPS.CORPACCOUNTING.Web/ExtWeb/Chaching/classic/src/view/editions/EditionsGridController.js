@@ -14,8 +14,7 @@ Ext.define('Chaching.view.editions.EditionsGridController', {
                 idPropertyField = gridStore.idPropertyField;
             var operation;
             //if record.get(id)>0 then update else add
-            if (record.get(idPropertyField) > 0) {
-                debugger;
+            if (record.get(idPropertyField) > 0) {               
                 var input = new Object();
                 var Edition = {
                     Id: e.record.data.id,

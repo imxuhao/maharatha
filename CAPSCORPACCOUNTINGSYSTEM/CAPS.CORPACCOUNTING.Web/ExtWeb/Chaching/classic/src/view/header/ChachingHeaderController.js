@@ -196,6 +196,14 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             }
         });
     },
+    manageActionClicked: function (menu, item, e, eOpts) {      
+        var manageAction = Ext.create('Chaching.view.linkedaccounts.LinkedAccountsView');
+        var grid = manageAction.down('grid'),
+        gridStore = grid.getStore();
+        gridStore.load();
+        manageAction.show();
+
+    },
     onAccountsHover:function(btn) {
         var me = this,
            view = me.getView();
@@ -225,7 +233,10 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                             {
                                 text: abp.localization.localize("ManageAccounts"),
                                 iconCls: 'icon-settings',
-                                name: 'ManageAccount'
+                                name: 'ManageAccount',                              
+                                listeners: {
+                                    click: me.manageActionClicked
+                                }
                             }
                         ]
                     }

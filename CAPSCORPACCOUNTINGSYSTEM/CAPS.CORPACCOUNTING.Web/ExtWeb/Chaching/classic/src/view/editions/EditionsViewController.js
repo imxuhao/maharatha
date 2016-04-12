@@ -1,8 +1,7 @@
 Ext.define('Chaching.view.editions.EditionsViewController', {
     extend: 'Chaching.view.common.window.ChachingWindowPanelController',
     alias: 'controller.editions-editionsview',
-    onSaveClicked: function (btn) {
-        debugger;
+    onSaveClicked: function (btn) {       
         var me = this,
             view = me.getView(),
             parentGrid = view.parentGrid,
@@ -20,8 +19,7 @@ Ext.define('Chaching.view.editions.EditionsViewController', {
             });
 
             myMask.show();
-            if (values && parseInt(values[idPropertyField]) > 0) {
-                debugger;
+            if (values && parseInt(values[idPropertyField]) > 0) {                
                 var input = new Object();
                 var Edition = {
                     Id: e.record.data.id,
@@ -32,15 +30,7 @@ Ext.define('Chaching.view.editions.EditionsViewController', {
                 Ext.Ajax.request({
                     url: abp.appPath + 'api/services/app/edition/CreateOrUpdateEdition',
                     jsonData: Ext.encode(input)
-                });
-                //operation = Ext.data.Operation({
-                //    params: record.data,
-                //    parentGrid: parentGrid,
-                //    records: [record],
-                //    controller: me,
-                //    callback: me.onOperationCompleteCallBack
-                //});
-                //gridStore.update(operation);
+                });                
             } else if (values && parseInt(values[idPropertyField]) === 0) {
                 operation = Ext.data.Operation({
                     params: record.data,

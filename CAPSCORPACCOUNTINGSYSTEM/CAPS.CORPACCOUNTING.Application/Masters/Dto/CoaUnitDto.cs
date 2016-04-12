@@ -42,7 +42,13 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the LinkChartOfAccountID field. </summary>
         public int? LinkChartOfAccountID { get; set; }
 
+        /// <summary>Gets or sets the LinkChartOfAccountID field. </summary>
+        public string LinkChartOfAccountName { get; set; }
+
         /// <summary>Gets or sets the StandardGroupTotalId field. </summary>      
         public StandardGroupTotal? StandardGroupTotalId { get; set; }
+
+        /// <summary>Gets or sets the StandardGroupTotal field. </summary>      
+        public string StandardGroupTotal { get; set; }
     }
 }

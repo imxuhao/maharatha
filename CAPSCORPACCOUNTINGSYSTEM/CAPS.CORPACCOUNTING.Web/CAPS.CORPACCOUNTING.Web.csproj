@@ -1820,11 +1820,13 @@
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\coa\ChartOfAccountModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\linkedaccounts\LinkedAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguageTextsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\coa\ChartOfAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingRenderers.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\Prototypes.js" />
@@ -1845,6 +1847,9 @@
     <Content Include="ExtWeb\Chaching\app\store\tenants\TenantsStore.js" />
     <Content Include="ExtWeb\Chaching\classic\src\Application.js" />
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountGridModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGridModel.js" />

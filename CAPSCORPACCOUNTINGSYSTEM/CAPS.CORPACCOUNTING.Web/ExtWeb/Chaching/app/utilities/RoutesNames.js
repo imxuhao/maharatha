@@ -13,6 +13,7 @@
         'users',
         'languages',
         'roles',
-        'auditlogs'
+        'auditlogs',
+         'coa'
     ]
 });

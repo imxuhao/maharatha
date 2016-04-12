@@ -823,6 +823,17 @@
             A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
             </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.EnumList">
+            <summary>
+            Get All lookup Tables and send as List
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetStandardGroupTotalList">
+            <summary>
+            Get StandardGroupTotal Enum as List
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.Helper.GetSortOrderAsString(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Helpers.Sort})">
             <summary>
             To get formatted sorting string 
@@ -2574,6 +2585,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetCoaList(CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput)">
+            <summary>
+            Gets all the COA for that company except input Coa ( ConvertNewCOA Dropdown Data)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.GridId">
             <summary>Gets or sets the GridId field. </summary>
         </member>
@@ -2753,13 +2771,10 @@
             <summary> Gets or Sets the LastName to Search the Employees based on CompanyId </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.OrganizationUnitId">
-            <summary> Gets or Sets the CompanyId to Search the ChartofAccounts with CompanyId. </summary>
+            <summary> Gets or Sets the CompanyId. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.Description">
-            <summary> Gets or Sets the Description to Search the ChartofAccounts with Description. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.ChartofAccountsType">
-            <summary> Gets or Sets the ChartofAccountsType to Search the ChartofAccounts with ChartofAccountsType. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput.CoaId">
+            <summary> Gets or Sets the CoaId. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetSalesRepInput.OrganizationUnitId">
             <summary> Gets or Sets the LastName to Search the SalesRepresentatives based on CompanyId. </summary>
@@ -3729,9 +3744,6 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.Description">
             <summary>Gets or sets the Description field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.ChartofAccountsType">
-            <summary>Gets or sets the COA Type field. </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.DisplaySequence">
             <summary>Gets or sets the Display Sequence field. </summary>
         </member>
@@ -3749,6 +3761,24 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.IsActive">
             <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.IsCorporate">
+            <summary>Gets or sets the IsCorporate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.IsNumeric">
+            <summary>Gets or sets the IsNumeric field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.LinkChartOfAccountID">
+            <summary>Gets or sets the LinkChartOfAccountID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.LinkChartOfAccountName">
+            <summary>Gets or sets the LinkChartOfAccountID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.StandardGroupTotalId">
+            <summary>Gets or sets the StandardGroupTotalId field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.StandardGroupTotal">
+            <summary>Gets or sets the StandardGroupTotal field. </summary>      
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.SalesRepUnitDto.SalesRepId">
             <summary>>Gets or sets the SalesRepId field. </summary>
@@ -4089,9 +4119,6 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.ChartofAccountsType">
-            <summary>Gets or sets the ChartofAccountsType field. </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.DisplaySequence">
             <summary>Gets or sets the DisplaySequence field. </summary>
         </member>
@@ -4107,14 +4134,23 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.OrganizationId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.IsCorporate">
+            <summary>Gets or sets the IsCorporate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.IsNumeric">
+            <summary>Gets or sets the IsNumeric field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.LinkChartOfAccountID">
+            <summary>Gets or sets the LinkChartOfAccountID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.StandardGroupTotalId">
+            <summary>Gets or sets the StandardGroupTotalId field. </summary>      
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.Caption">
             <summary>Gets or sets the Caption field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.ChartofAccountsType">
-            <summary>Gets or sets the ChartofAccountsType field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.DisplaySequence">
             <summary>Gets or sets the DisplaySequence field. </summary>
@@ -4130,6 +4166,18 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.OrganizationId">
             <summary>Gets or sets the OrganizationId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.IsCorporate">
+            <summary>Gets or sets the IsCorporate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.IsNumeric">
+            <summary>Gets or sets the IsNumeric field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.LinkChartOfAccountID">
+            <summary>Gets or sets the LinkChartOfAccountID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.StandardGroupTotalId">
+            <summary>Gets or sets the StandardGroupTotalId field. </summary>      
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorPaymentTermUnitInput.VendorPaymentTermId">
             <summary>Gets or sets the VenorPaymentTermId field.</summary>

@@ -43,9 +43,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(SearchInputDto input)
         {
 
-            var query =
-                from au in _coaUnitRepository.GetAll()
-                select new { Coa = au };
+            var query = from coa in _coaUnitRepository.GetAll()
+                        join linkcoa in _coaUnitRepository.GetAll()
+                        on coa.Id equals linkcoa.LinkChartOfAccountID into tempCoa
+                        from coaunit in tempCoa.DefaultIfEmpty()
+                        select new { Coa = coa, LinkChartOfAccountName=coaunit.Caption };
+
             if (!ReferenceEquals(input.Filters, null))
             {
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
@@ -64,10 +67,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             {
                 var dto = item.Coa.MapTo<CoaUnitDto>();
                 dto.CoaId = item.Coa.Id;
+                dto.StandardGroupTotal = item.Coa.StandardGroupTotalId != null ? item.Coa.StandardGroupTotalId.ToDisplayName() : "";
                 return dto;
             }).ToList());
         }
-      
+
         /// <summary>
         /// Creating COAUnit
         /// </summary>
@@ -110,7 +114,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             #region Setting the values to be updated
 
-            coaUnit.Caption = input.Caption;           
+            coaUnit.Caption = input.Caption;
             coaUnit.Description = input.Description;
             coaUnit.DisplaySequence = input.DisplaySequence;
             coaUnit.IsActive = input.IsActive;
@@ -121,10 +125,10 @@ namespace CAPS.CORPACCOUNTING.Masters
             coaUnit.IsCorporate = input.IsCorporate;
             coaUnit.IsNumeric = input.IsNumeric;
             coaUnit.LinkChartOfAccountID = input.LinkChartOfAccountID;
-            coaUnit.StandardGroupTotalId = input.StandardGroupTotalId; 
-        #endregion
+            coaUnit.StandardGroupTotalId = input.StandardGroupTotalId;
+            #endregion
 
-        await _coaunitManager.UpdateAsync(coaUnit);
+            await _coaunitManager.UpdateAsync(coaUnit);
 
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -170,11 +174,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetCoaList(GetCoaInput input)
-        {           
+        {
             return await (from au in _coaUnitRepository.GetAll()
                           .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
                           .WhereIf(input.OrganizationUnitId != null, p => p.OrganizationUnitId == input.OrganizationUnitId)
-                         select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();           
+                          select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
         }
 
     }

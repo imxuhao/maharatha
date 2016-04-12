@@ -63,38 +63,25 @@ Ext.define('Chaching.view.users.UsersForm', {
     {
         xtype: 'checkbox',
         boxLabel: app.localize('SetRandomPassword'),
-        name: 'SetRandomPassword',
+        name: 'setRandomPassword',
+        reference: 'setRandomPassword',
         labelAlign: 'right',
         inputvalue: true,
         checked: true,
         boxLabelCls: 'checkboxLabel',
         listeners: {
-            change: function (checkbox, newValue, oldValue, eOpts) {
-                var txtpassword = Ext.getCmp('txtpassword');
-                var txtpasswordRepeat = Ext.getCmp('txtpasswordRepeat');
-                if (newValue) {
-                    txtpassword.hide();
-                    txtpasswordRepeat.hide();
-
-                }
-                else {
-                    txtpassword.show();
-                    txtpasswordRepeat.show();
-                }
-                txtpasswordRepeat.reset();
-                txtpassword.reset();
-            }
+            change: 'showRandomPassword'
         }
     },
      {
          xtype: 'textfield',
          name: 'password',
+         reference:'password',
          inputType: 'password',
          fieldLabel: app.localize('Password'),
          width: '100%',
          ui: 'fieldLabelTop',
          emptyText: app.localize('Password'),
-         id: 'txtpassword',
          hidden: true
 
 
@@ -103,12 +90,12 @@ Ext.define('Chaching.view.users.UsersForm', {
       {
           xtype: 'textfield',
           name: 'passwordRepeat',
+          reference: 'passwordRepeat',
           inputType: 'password',
           fieldLabel: app.localize('PasswordRepeat'),
           width: '100%',
           ui: 'fieldLabelTop',
           emptyText: app.localize('PasswordRepeat'),
-          id: 'txtpasswordRepeat',
           hidden: true
       },
 

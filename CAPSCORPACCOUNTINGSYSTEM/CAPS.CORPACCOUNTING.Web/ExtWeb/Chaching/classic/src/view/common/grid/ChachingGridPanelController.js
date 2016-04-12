@@ -20,14 +20,14 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         //    }
         //}
     },
-   
+
     createEditRecordInTab: function (hash) {
         if (!hash) {
             hash = this.currentRedirectedRoute;
         }
         Ext.toast(hash);
     },
-    onUnmatchedRoute: function(hash) {
+    onUnmatchedRoute: function (hash) {
         if (!hash) {
             hash = this.currentRedirectedRoute;
         }
@@ -35,7 +35,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             Ext.toast('No route found with :' + hash);
         }
     },
-    currentRedirectedRoute:null,
+    currentRedirectedRoute: null,
     //Event Listeners
     quickEditActionClicked: function (menu, item, e, eOpts) {
         //do edit based on editMode of grid
@@ -54,7 +54,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         }
 
     },
-    editActionClicked:function(menu, item, e, eOpts) {
+    editActionClicked: function (menu, item, e, eOpts) {
         var parentMenu = menu.parentMenu,
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
@@ -80,12 +80,22 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         //Delete record
         if (widgetRec && grid) {
             gridStore.setAutoSync(true);
+            var modelField = gridStore.getModel().getFields();
+            if (modelField) {
+                Ext.each(modelField, function (field) {
+                    if (field.isPrimaryKey) {
+                        widgetRec.set('id', widgetRec.get(field.name));
+                        return;
+                    }
+                });
+            }
+
             gridStore.remove(widgetRec);
             gridStore.setAutoSync(false);
-           
+
         }
     },
-    onEditComplete:function(editor, e) {
+    onEditComplete: function (editor, e) {
         var me = this,
             view = this.getView();
         if (editor && editor.ptype === "chachingRowediting" && editor.context) {
@@ -96,10 +106,20 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 idPropertyField = gridStore.idPropertyField;
             var operation;
             //if record.get(id)>0 then update else add
+
+            var modelField = gridStore.getModel().getFields();
+            if (modelField) {
+                Ext.each(modelField, function (field) {
+                    if (field.isPrimaryKey) {
+                        record.set('id', record.get(field.name));
+                        return;
+                    }
+                });
+            }
             if (record.get(idPropertyField) > 0) {
                 operation = Ext.data.Operation({
                     params: record.data,
-                    records:[record],
+                    records: [record],
                     callback: me.onOperationCompleteCallBack
                 });
                 gridStore.update(operation);
@@ -108,22 +128,22 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 record.set('id', 0);
                 operation = Ext.data.Operation({
                     params: record.data,
-                    controller:me,
+                    controller: me,
                     callback: me.onOperationCompleteCallBack
                 });
-                gridStore.create(record.data,operation);
+                gridStore.create(record.data, operation);
             }
 
         }
     },
-    doReloadGrid:function() {
+    doReloadGrid: function () {
         var me = this,
             view = me.getView(),
             gridStore = view.getStore();
 
         gridStore.reload();
     },
-    onOperationCompleteCallBack:function(records, operation, success) {
+    onOperationCompleteCallBack: function (records, operation, success) {
         if (success) {
             Ext.toast('Operation completed successfully.');
             var action = operation.getAction();
@@ -144,13 +164,13 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     },
 
     //editing plugin listeners
-    onBeforeGridEdit:function(editor, context, eOpts) {
+    onBeforeGridEdit: function (editor, context, eOpts) {
         ///TODO cancel edit if restricted
         //cancel edit if is actioncolumn editing
         var record = context.record;
         if (context.column.name === "ActionColumn" && !record.get('passEdit')) return false;
     },
-    onCreateNewBtnClicked:function(btn) {
+    onCreateNewBtnClicked: function (btn) {
         var me = this,
             view = me.getView(),
             gridStore = view.getStore(),
@@ -158,7 +178,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             className = model.$className,
             idPropertyField = gridStore.idPropertyField,
             editingPlugin = view.getPlugin('editingPlugin');
-        
+
         var modelInstance;
         if (view && view.createNewMode) {
             switch (view.createNewMode) {
@@ -166,7 +186,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     modelInstance = Ext.create(className, {
                         idPropertyField: 0,
                         passEdit: true,
-                        passDelete:true
+                        passDelete: true
                     });
                     gridStore.insert(0, modelInstance);
                     editingPlugin.startEdit(gridStore.getAt(0));
@@ -175,7 +195,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     me.createNewRecord(view.xtype, 'popup', false, view.createWndTitleConfig);
                     break;
                 case "tab":
-                    if (!btn.routeName)Ext.Error.raise('When create/edit mode is tab for grid then routeName config to button is mandatory!!!');
+                    if (!btn.routeName) Ext.Error.raise('When create/edit mode is tab for grid then routeName config to button is mandatory!!!');
                     me.currentRedirectedRoute = btn.routeName;
                     me.redirectTo(btn.routeName);
                     break;
@@ -183,21 +203,21 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     me.currentRedirectedRoute = null;
                     break;
             }
-            
+
         }
-       
+
     },
     //Do module specific tasks 
     doBeforeCreateAction: function (createNewMode) { },
-    doAfterCreateAction: function (createNewMode,form) { },
-    createNewRecord:function(type,createMode,isEdit,titleConfig) {
+    doAfterCreateAction: function (createNewMode, form) { },
+    createNewRecord: function (type, createMode, isEdit, titleConfig) {
         var me = this,
             view = me.getView(),
             formView,
             className;
         me.doBeforeCreateAction(createMode);
         if (createMode === "popup") {
-            if (!titleConfig)Ext.Error.raise('Please provide title configuration');
+            if (!titleConfig) Ext.Error.raise('Please provide title configuration');
             className = type + ".createView";
             formView = Ext.create({
                 xtype: className,
@@ -207,7 +227,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             formView.show();
         }
         me.setParentControl(formView);
-        me.doAfterCreateAction(createMode, formView,isEdit);
+        me.doAfterCreateAction(createMode, formView, isEdit);
         return formView;
 
     },
@@ -219,7 +239,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             form.parentGrid = view;
         }
     },
-    clearGridFilters:function(btn) {
+    clearGridFilters: function (btn) {
         var me = this,
             view = me.getView(),
             multiSearchPlugin = view.getPlugin('gms'),
@@ -231,5 +251,5 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         } else gridStore.clearFilter();
 
     }
-    
+
 });

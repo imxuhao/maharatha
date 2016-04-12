@@ -65,6 +65,15 @@ namespace CAPS.CORPACCOUNTING.Authorization
 
             administration.CreateChildPermission(AppPermissions.Pages_Administration_Host_Settings, L("Settings"), multiTenancySides: MultiTenancySides.Host);
             administration.CreateChildPermission(AppPermissions.Pages_Administration_Host_Maintenance, L("Maintenance"), multiTenancySides: MultiTenancySides.Host);
+
+            // PERMISSIONS FOR CHARTOFACCOUNTS
+
+            var financials = pages.CreateChildPermission(AppPermissions.Pages_Financials, L("Financials"));
+            var accounts = financials.CreateChildPermission(AppPermissions.Pages_Financials_Accounts, L("Accounts"));
+            var chartOfAccounts = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts, L("ChartOfAccounts"));
+            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Create, L("CreatingNewCOA"));
+            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Edit, L("EditingCOA"));
+            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Delete, L("DeletingCOA"));
         }
 
         private static ILocalizableString L(string name)

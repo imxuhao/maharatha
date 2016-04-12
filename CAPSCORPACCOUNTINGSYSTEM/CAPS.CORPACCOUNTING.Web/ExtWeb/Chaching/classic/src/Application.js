@@ -18,15 +18,17 @@ Ext.define('Chaching.Application', {
     ],
     stores: [
         // TODO: add global / shared stores here
-        'NavigationTree',
-        'tenants.TenantsStore',
-        'users.UsersStore',
-        'roles.RolesStore',
-        'editions.EditionsStore',
-        'languages.LanguagesStore',
+         'NavigationTree',
+         'tenants.TenantsStore',
+         'users.UsersStore',
+         'roles.RolesStore',
+         'editions.EditionsStore',
+         'languages.LanguagesStore',
         'auditlogs.AuditLogsStore',
         'languages.LanguageTextsStore',
-        'linkedaccounts.LinkedAccountsStore'
+        'linkedaccounts.LinkedAccountsStore',
+        'coa.ChartOfAccountStore'
+
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     onAppUpdate: function () {

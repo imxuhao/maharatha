@@ -98,7 +98,22 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                         icon: "icon-settings",
                         requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
-                    )
+                    )).AddItem(new MenuItemDefinition(
+                    PageNames.App.Common.Financials,
+                    L("Financials"),
+                    icon: "icon-wrench"
+                    ).AddItem(new MenuItemDefinition(
+                        PageNames.App.Common.FinancialsAccounts,
+                        L("Accounts"),
+                        icon: "icon-wrench"
+                        ).
+                   AddItem(new MenuItemDefinition(
+                        PageNames.App.Common.FinancialsAccountsCoas,
+                        L("ChartOfAccount"),
+                        url: "coa",
+                        icon: "icon-briefcase",
+                        requiredPermissionName: AppPermissions.Pages_Financials_Accounts_ChartOfAccounts
+                        )))
                 );
         }
 

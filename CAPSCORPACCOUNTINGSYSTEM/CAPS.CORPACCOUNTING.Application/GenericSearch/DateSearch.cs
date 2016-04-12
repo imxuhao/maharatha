@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq.Expressions;
 
 namespace CAPS.CORPACCOUNTING.GenericSearch
@@ -28,7 +29,7 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
 
             if (this.Comparator == DateComparators.InRange && this.SearchTerm2.HasValue)
             {
-                searchExpression2 = Expression.LessThanOrEqual(property, Expression.Constant(this.SearchTerm2.Value));
+                searchExpression2 = Expression.LessThanOrEqual(LeftExpressionTruncateTime(property), RightExpressionTruncateTime(this.SearchTerm2.Value));
             }
 
             if (searchExpression1 == null && searchExpression2 == null)
@@ -52,22 +53,42 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
 
         private Expression GetFilterExpression(MemberExpression property)
         {
+            Expression leftExp = LeftExpressionTruncateTime(property);
+           Expression rightExp= RightExpressionTruncateTime(this.SearchTerm.Value);
             switch (this.Comparator)
             {
                 case DateComparators.Less:
-                    return Expression.LessThan(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.LessThan(leftExp, rightExp);
                 case DateComparators.LessOrEqual:
-                    return Expression.LessThanOrEqual(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.LessThanOrEqual(leftExp, rightExp);
                 case DateComparators.Equal:
-                    return Expression.Equal(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.Equal(leftExp, rightExp);
                 case DateComparators.GreaterOrEqual:
                 case DateComparators.InRange:
-                    return Expression.GreaterThanOrEqual(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.GreaterThanOrEqual(leftExp, rightExp);
                 case DateComparators.Greater:
-                    return Expression.GreaterThan(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.GreaterThan(leftExp, rightExp);
                 default:
                     throw new InvalidOperationException("Comparator not supported.");
             }
+        }
+
+        private Expression LeftExpressionTruncateTime(MemberExpression property)
+        {
+            return Expression.Call(
+                                typeof(DbFunctions),
+                                "TruncateTime",
+                                Type.EmptyTypes,
+                                Expression.Convert(property, typeof(DateTime?)));
+        }
+
+        private Expression RightExpressionTruncateTime(DateTime? value)
+        {
+            return Expression.Call(
+                                typeof(DbFunctions),
+                                "TruncateTime",
+                                Type.EmptyTypes,
+                                Expression.Convert(Expression.Constant(value), typeof(DateTime?)));
         }
     }
 

@@ -57,4 +57,36 @@
         return '<div id="' + id + '"></div>';
 
     },
+    auditLogView: function (value, cell) {
+        var gridController = this.getController(),
+            view = gridController.getView();
+        var id = Ext.id();
+        var widgetRec = cell.record;
+        var widgetCol = cell.column;
+        Ext.Function.defer(function () {
+            var button = Ext.create('Ext.button.Button', {
+                scale: 'small',
+                width: '40%',
+                iconCls: 'fa fa-search',
+                iconAlign: 'left',
+                widgetRec: widgetRec,
+                widgetCol: widgetCol,
+                gridControl: view,
+                //listeners: {
+                //    click: gridController.auditLogView
+                //},
+            });
+            if (Ext.get(id)) {
+                button.render(Ext.get(id));
+            }
+        }, 1);
+        return '<div id="' + id + '"></div>';
+
+    },
+    auditLogExceptionIcon: function (val, meta, record, rowIndex) {
+        if (Ext.isEmpty(Ext.util.Format.trim(record.get('exception'))))
+            return '<i class="fa fa-check-circle font-green"  style="color:#32c5d2" ></i>';
+        else
+            return '<i class="fa fa-warning font-yellow-gold"  style="color:#32c5d2"></i>';
+    },
 });

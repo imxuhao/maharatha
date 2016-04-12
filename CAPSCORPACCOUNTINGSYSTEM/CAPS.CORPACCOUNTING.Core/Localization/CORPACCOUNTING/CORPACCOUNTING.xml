@@ -385,5 +385,12 @@
     <text name="USurname" value="Enter Surname" />
     <text name="UUserName" value="Enter User Name" />
     <text name="UEmailAddress" value="Enter email address" />
+    <text name="Financials" value="Financials" />
+    <text name="Accounts" value="Accounts" />
+    <text name="ChartOfAccount" value="Chart Of Account" />
+    <text name="CreatingNewCOA" value="Create Chart Of Account" />
+    <text name="EditingCOA" value="Editing Chart Of Account" />
+    <text name="DeletingCOA" value="Deleting Chart Of Account" />
+    <text name="EditCOA" value="Edit Chart Of Account" />
   </texts>
 </localizationDictionary>

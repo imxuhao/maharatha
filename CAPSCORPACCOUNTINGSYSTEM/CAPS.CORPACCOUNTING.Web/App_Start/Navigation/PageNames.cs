@@ -12,6 +12,9 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string AuditLogs = "Administration.AuditLogs";
                 public const string OrganizationUnits = "Administration.OrganizationUnits";
                 public const string Languages = "Administration.Languages";
+                public const string Financials = "Financials";
+                public const string FinancialsAccounts = "Financials.Accounts";
+                public const string FinancialsAccountsCoas = "Financials.Accounts.ChartOfAccounts";
             }
 
             public static class Host

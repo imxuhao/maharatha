@@ -59,5 +59,16 @@
         public const string Pages_Administration_Host_Maintenance = "Pages.Administration.Host.Maintenance";
 
         public const string Pages_Administration_Host_Settings = "Pages.Administration.Host.Settings";
+
+
+        // PERMISSIONS FOR CHARTOFACCOUNTS
+
+        public const string Pages_Financials = "Pages.Financials";
+        public const string Pages_Financials_Accounts = "Pages.Financials.Accounts";
+        public const string Pages_Financials_Accounts_ChartOfAccounts = "Pages.Financials.Accounts.ChartOfAccounts";
+        public const string Pages_Financials_Accounts_ChartOfAccounts_Create = "Pages.Financials.Accounts.ChartOfAccounts.Create";
+        public const string Pages_Financials_Accounts_ChartOfAccounts_Edit = "Pages.Financials.Accounts.ChartOfAccounts.Edit";
+        public const string Pages_Financials_Accounts_ChartOfAccounts_Delete = "Pages.Financials.Accounts.ChartOfAccounts.Delete";
+
     }
 }

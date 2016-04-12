@@ -17,9 +17,9 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
     padding: 5,
     headerButtonsConfig: [
       {
-        xtype: 'displayfield',
-        value: abp.localization.localize("AuditLogs"),
-        ui: 'headerTitle'
+          xtype: 'displayfield',
+          value: abp.localization.localize("AuditLogs"),
+          ui: 'headerTitle'
       }, '->'],
     requireExport: true,
     requireMultiSearch: true,
@@ -27,24 +27,17 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
     columnLines: true,
     multiColumnSort: true,
     columns: [
-         {
-             xtype: 'gridcolumn',
-             dataIndex: 'userId',
-             width: '5%',
-             renderer: function (val, meta, record, rowIndex) {
-                 return '<div class="ui-grid-cell-contents text-center ng-scope">  <button class="btn btn-default btn-xs"><i class="fa fa-search"></i></button></div>';
-             }
-         },
+          {
+              xtype: 'gridcolumn',
+              width: '8%',
+              text: app.localize('Actions'),
+              renderer: Chaching.utilities.ChachingRenderers.auditLogView
+          },
         {
             xtype: 'gridcolumn',
             dataIndex: 'exception',
             width: '5%',
-            renderer: function (val, meta, record, rowIndex) {
-                if (Ext.isEmpty(Ext.util.Format.trim(record.get('exception'))))
-                    return '<i class="fa fa-check-circle font-green"></i>';
-                else
-                    return '<i class="fa fa-warning font-yellow-gold"></i>';
-            }
+            renderer: Chaching.utilities.ChachingRenderers.auditLogExceptionIcon
         },
         {
             xtype: 'gridcolumn',

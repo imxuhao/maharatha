@@ -26,7 +26,6 @@ Ext.define('Ext.overrides.app.Application', {
 
     applyMainView: function(mainView) {
         var view, proto, config, plugins;
-
         if (typeof mainView === 'string') {
             view = this.getView(mainView);
         } else {

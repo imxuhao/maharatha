@@ -133,7 +133,9 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                     data:[{text:'YES',value:'true'},{text:'NO',value:'false'}]
                 }
             },editor: {
-                xtype: 'checkbox'
+                xtype: 'checkboxfield',
+                inputValue:true,
+                name: 'isActive'
             }
         },
          {

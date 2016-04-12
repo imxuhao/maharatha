@@ -60,9 +60,6 @@
                 // no responseText sent
                 Ext.Msg.alert('Error', 'Unknown error: Unable to understand the response from the server');
             }
-        },
-        metachange:function(proxy, meta, eOpts) {
-            debugger;
         }
     }
 });

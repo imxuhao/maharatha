@@ -29,7 +29,7 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
         }
     },
     setCurrentView: function (hashTag) {
-        try {
+        //try {
 
 
             hashTag = (hashTag || '').toLowerCase();
@@ -102,10 +102,10 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
             }
 
             me.lastView = newView;
-        } catch (e) {
-            debugger;
-            Ext.toast('Please create view for the menuitem you clicked');
-        }
+        //} catch (e) {
+           // debugger;
+            //Ext.toast('Please create view for the menuitem you clicked');
+        //}
     },
 
     onNavigationTreeSelectionChange: function (tree, node) {

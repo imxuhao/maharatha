@@ -218,6 +218,18 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             var form = formView.down('form');
             form.parentGrid = view;
         }
+    },
+    clearGridFilters:function(btn) {
+        var me = this,
+            view = me.getView(),
+            multiSearchPlugin = view.getPlugin('gms'),
+            gridStore = view.getStore();
+
+        if (multiSearchPlugin) {
+            multiSearchPlugin.clearValues(true);
+            gridStore.clearFilter();
+        } else gridStore.clearFilter();
+
     }
     
 });

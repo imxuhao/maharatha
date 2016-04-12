@@ -155,7 +155,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             iconCls: 'fa fa-filter',
             width: 20,
             tooltip: app.localize('ClearFilter'),
-            ui: 'actionButton'
+            ui: 'actionButton',
+            listeners: {
+                click:'clearGridFilters'
+            }
         }
         headerTbButtons.push(clearFilterBtn);
 

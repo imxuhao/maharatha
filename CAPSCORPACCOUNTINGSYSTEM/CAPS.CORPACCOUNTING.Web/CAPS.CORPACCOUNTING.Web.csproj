@@ -1822,12 +1822,14 @@
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\utilities\ChachingRenderers.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\Prototypes.js" />
     <Content Include="ExtWeb\Chaching\app\model\users\UsersModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\users\UsersStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\RoutesNames.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguagesModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesStore.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\filter\DateSearchField.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\RowEditing.js" />
     <Content Include="ExtWeb\Chaching\app\data\proxy\BaseProxy.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\BaseModel.js" />

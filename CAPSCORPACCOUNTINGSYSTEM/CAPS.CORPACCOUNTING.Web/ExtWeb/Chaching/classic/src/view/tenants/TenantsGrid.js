@@ -71,9 +71,6 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                 //    , iconCls: 'fa fa-info'
                 //    , qtip: 'Enter name to search'
                 //}]
-            },
-            editor: {
-                xtype:'textfield'
             }
         }, {
             xtype: 'gridcolumn',
@@ -126,10 +123,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             sortable: true,
             groupable: true,
             width: '10%',
-            renderer:function(val) {
-                if (val) return 'YES';
-                else return 'NO';
-            },
+            renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
             filterField: {
                 xtype: 'combobox',
                 valueField: 'value',
@@ -142,21 +136,20 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                 xtype: 'checkbox'
             }
         },
-        {
-            xtype: 'gridcolumn',
-            text: app.localize('AdminEmailAddress'),
-            dataIndex: 'adminEmailAddress',
-            sortable: true,
-            groupable: true,
-            width: '25%',
-            filterField: {
-                xtype: 'textfield',
-                width: '100%',
-                emptyText: app.localize('TAdminEmailAddress')
-            },
-            editor: {
-                xtype:'textfield'
-            }
-        }
+         {
+             xtype: 'gridcolumn',
+             text: app.localize('CreationTime'),
+             dataIndex: 'creationTime',
+             sortable: true,
+             groupable: true,
+             width: '25%',
+             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+             filterField: {
+                 xtype: 'dateSearchField',
+                 dataIndex: 'creationTime',
+                 width: '100%'
+                 //emptyText: app.localize('TAdminEmailAddress')
+             }
+         }
     ]
 });

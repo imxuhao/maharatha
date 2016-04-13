@@ -145,17 +145,38 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     },
     onOperationCompleteCallBack: function (records, operation, success) {
         if (success) {
-            Ext.toast('Operation completed successfully.');
             var action = operation.getAction();
             if (action === "create" || action === "destroy") {
                 var controller = operation.controller;
                 controller.doReloadGrid();
             }
+            Ext.toast({
+                html: 'Operation completed successfully.',
+                title: 'Success',
+                ui: 'chachingWindow',
+                align: 'tr'
+            });
         } else {
             var response = Ext.decode(operation.getResponse().responseText);
             var message = '',
                 title = 'Error';
             if (response && response.error) {
+                if (response.error.message && response.error.details) {
+                    title = response.error.message;
+                    message = response.error.details.replaceAll(' - ', '</br>-');
+                    var myMsg = Ext.create('Ext.window.MessageBox', {
+                        // set closeAction to 'destroy' if this instance is not
+                        // intended to be reused by the application
+                        closeAction: 'destroy',
+                        ui: 'chachingWindow'
+                    }).show({
+                        title: title,
+                        message: message,
+                        buttons: Ext.Msg.OKCANCEL,
+                        icon: Ext.Msg.INFO
+                    });
+                    return;
+                }
                 title = response.error.message;
                 message = response.error.details ? response.error.details : title;
             }
@@ -249,6 +270,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             multiSearchPlugin.clearValues(true);
             gridStore.clearFilter();
         } else gridStore.clearFilter();
+
+        gridStore.getSorters().clear();
+        if (gridStore.remoteSort)
+            gridStore.load({ sortList: null, filters: null });
 
     }
 

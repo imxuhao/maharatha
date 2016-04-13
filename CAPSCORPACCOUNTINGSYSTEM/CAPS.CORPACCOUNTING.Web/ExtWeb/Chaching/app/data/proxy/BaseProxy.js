@@ -4,7 +4,7 @@
     timeout: 6000000,
     limitParam: 'maxResultCount',
     startParam: 'skipCount',
-    sortParam: 'sorting',
+    sortParam: 'sortList',
     filterParam: 'filters',
     pageParam: '',
     headers: {
@@ -41,7 +41,21 @@
         return filters;
     },
     encodeSorters: function (sorters) {
-        ///TODO Implement as per server requirements
+        var me = this,
+            model = me.getModel(),
+            entityName = model.$config.values.searchEntityName;
+        var sortersArray = [];
+        if (sorters) {
+            for (var i = 0; i < sorters.length; i++) {
+                var sortObject = {
+                    Entity: entityName,
+                    Property: sorters[i].getProperty(),
+                    Order: sorters[i].getDirection()
+                };
+                sortersArray.push(sortObject);
+            }
+            return sortersArray;
+        }
         return sorters;
     },
     listeners:

@@ -59,7 +59,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             dataIndex: 'tenancyName',
             stateId: 'tenancyName',
             sortable: true,
-            width: '27%',
+            width: '29%',
             groupable:true,
             // simplest filter configuration
             filterField: {

@@ -608,8 +608,18 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             switch (dataField.type) {
                 case "string":
                     if (filter.operator && filter.operator === "=") {
-                        filter.comparator = 1;
-                    } else filter.comparator = 0;
+                        filter.comparator = 2;
+                    } else if (filter.operator && filter.operator === "in") {
+                        filter.comparator = 6;
+                        if (typeof (filter.value) === "object") {
+                            var values = '';
+                            for (var i = 0; i < filter.value.length; i++) {
+                                values += filter.value[i] + ',';
+                            }
+                            filter.searchTerm = values;
+                        }
+                    }
+                    else filter.comparator = 0;
                     filter.dataType = 1;
                     break;
                 case "boolean":
@@ -653,7 +663,14 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                                 }
                                 break;
                             case "in":
-                                ///TODO implement once done on server
+                                filter.comparator = 6;
+                                if (typeof (filter.value) === "object") {
+                                    var values = '';
+                                    for (var i = 0; i < filter.value.length; i++) {
+                                        values += filter.value[i] + ',';
+                                    }
+                                    filter.searchTerm = values;
+                                }
                                 break;
                             default:
                                 break;

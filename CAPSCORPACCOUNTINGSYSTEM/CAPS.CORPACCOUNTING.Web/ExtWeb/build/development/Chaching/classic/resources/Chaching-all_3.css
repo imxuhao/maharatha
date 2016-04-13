@@ -1532,10 +1532,15 @@
 .x-treelist-nav .x-treelist-item-text {
     font-weight: 500 !important;
     font-family: "Open Sans", sans-serif;
-    margin-left: 35px !important;
+    margin-left: 30px !important;
+    margin-right: 5px !important;
     line-height: 35px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/main/ChachingViewport.scss:117 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/main/ChachingViewport.scss:118 */
+.x-treelist-nav .x-treelist-row {
+    padding-right: 5px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/main/ChachingViewport.scss:121 */
 .x-treelist-nav {
     border-radius: 5px !important;
 }

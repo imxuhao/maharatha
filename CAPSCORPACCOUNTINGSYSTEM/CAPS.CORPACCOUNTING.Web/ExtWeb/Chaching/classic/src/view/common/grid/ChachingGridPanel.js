@@ -310,7 +310,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                         var button = Ext.create('Ext.button.Button', {
                             ui: 'actionMenuButton',
                             scale: 'small',
-                            height: 25,
+                            height: 20,
                             width: 50,
                             //text: app.localize('Actions'),
                             iconCls: 'icon-settings',

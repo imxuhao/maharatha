@@ -1857,6 +1857,12 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\auditlogs\AuditLogsGridModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountFormModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\coa\ChartOfAccountViewModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingFormPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingFormPanelController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingFormPanelModel.js" />

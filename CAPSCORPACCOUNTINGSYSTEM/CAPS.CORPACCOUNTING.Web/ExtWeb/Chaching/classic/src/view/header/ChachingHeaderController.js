@@ -298,7 +298,6 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         }
     },
     loginAttemptsClicked:function(menu, item, e, eOpts) {
-        debugger;
         var loginAttemptView = Ext.create('Chaching.view.profile.loginAttempts.LoginAttemptView');
         loginAttemptView.show();
     }

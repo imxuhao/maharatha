@@ -60,9 +60,21 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             widgetCol = parentMenu.widgetColumn,
             grid = widgetCol.up('grid'),
             controller = grid.getController();
+            gridStore = grid.getStore();
+
         //TODO start edit by checking row allowEdit property
-        if (widgetRec && grid) {
+            if (widgetRec && grid) {
             var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig);
+            gridStore.setAutoSync(true);
+            var modelField = gridStore.getModel().getFields();
+            if (modelField) {
+                Ext.each(modelField, function (field) {
+                    if (field.isPrimaryKey) {
+                        widgetRec.set('id', widgetRec.get(field.name));
+                        return;
+                    }
+                });
+            }
             if (formView) {
                 formView.down('form').getForm().setValues(widgetRec.data);
             }

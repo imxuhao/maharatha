@@ -79,9 +79,10 @@ Ext.define('Chaching.view.roles.RolesGrid', {
              sortable: true,
              groupable: true,
              width: '46%',
-             renderer: Ext.util.Format.dateRenderer('m-d-Y g:i A'),
+             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
-                 xtype: 'datefield',
+                 xtype: 'dateSearchField',
+                 dataIndex: 'creationTime',
                  width: '100%'
              }
          }

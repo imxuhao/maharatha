@@ -2592,6 +2592,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.StandardGroupTotalList">
+            <summary>
+            Get StandardGroupTotals as List
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.GridId">
             <summary>Gets or sets the GridId field. </summary>
         </member>
@@ -4680,6 +4686,18 @@
             Get the ChartOfAccoout based on CoaId.
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.GetCoaList(CAPS.CORPACCOUNTING.Masters.Dto.GetCoaInput)">
+            <summary>
+            Get GetCoaList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService.StandardGroupTotalList">
+            <summary>
+            Get StandardGroupTotals List
+            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ISalesRepUnitAppService">

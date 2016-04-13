@@ -47,11 +47,11 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
             sortable: true,
             width: '15%',
             groupable: true,
-            renderer: Ext.util.Format.dateRenderer('m-d-Y g:i A'),
+            renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
             filterField: {
-                xtype: 'datefield',
-                width: '100%',
-                emptyText: ' Selec Date to search'
+                xtype: 'dateSearchField',
+                dataIndex: 'executionTime',
+                width: '100%'
             }
 
         },

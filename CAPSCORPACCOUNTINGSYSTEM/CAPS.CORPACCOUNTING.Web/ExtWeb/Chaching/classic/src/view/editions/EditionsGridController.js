@@ -3,7 +3,6 @@ Ext.define('Chaching.view.editions.EditionsGridController', {
     alias: 'controller.editions-editionsgrid',
    
     onEditComplete: function (editor, e) {
-        debugger;
         var me = this,
             view = this.getView();
         if (editor && editor.ptype === "chachingRowediting" && editor.context) {

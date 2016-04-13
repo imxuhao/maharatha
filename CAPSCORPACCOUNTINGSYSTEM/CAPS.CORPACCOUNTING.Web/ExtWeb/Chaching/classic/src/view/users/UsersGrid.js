@@ -165,9 +165,10 @@ Ext.define('Chaching.view.users.UsersGrid', {
              sortable: true,
              groupable: true,
              width: '15%',
-             renderer: Ext.util.Format.dateRenderer('m-d-Y'),
+             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
-                 xtype: 'datefield',
+                 xtype: 'dateSearchField',
+                 dataIndex: 'lastLoginTime',
                  width: '100%'
              }
          }
@@ -204,9 +205,10 @@ Ext.define('Chaching.view.users.UsersGrid', {
              sortable: true,
              groupable: true,
              width: '20%',
-             renderer: Ext.util.Format.dateRenderer('m-d-Y g:i A'),
+             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
-                 xtype: 'datefield',
+                 xtype: 'dateSearchField',
+                 dataIndex: 'creationTime',
                  width: '100%'
              }
          }

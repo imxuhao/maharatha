@@ -11,5 +11,5 @@
             destroy: abp.appPath + 'api/services/app/coaUnit/DeleteCoaUnit'
         }
     },
-    idPropertyField: 'id'//important to set for add/update of records
+    idPropertyField: 'coaId'//important to set for add/update of records
 });

@@ -4,5 +4,4 @@ Ext.define('Chaching.view.coa.ChartOfAccountGridModel', {
     data: {
         name: 'Chaching'
     }
-
 });

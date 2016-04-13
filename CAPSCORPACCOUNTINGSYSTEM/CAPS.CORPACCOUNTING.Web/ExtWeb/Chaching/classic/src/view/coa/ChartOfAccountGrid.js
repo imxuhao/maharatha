@@ -29,6 +29,7 @@ Ext.define('Chaching.view.coa.ChartOfAccountGrid', {
           tooltip: app.localize('CreatingNewCOA'),
           checkPermission: true,
           iconCls: 'fa fa-plus',
+          routeName: 'coa.create',
           iconAlign: 'left'
       }],
     requireExport: true,
@@ -71,7 +72,7 @@ Ext.define('Chaching.view.coa.ChartOfAccountGrid', {
               sortable: true,
               groupable: true,
               width: '15%',
-              hidden:true,
+              hidden: true,
               filterField: {
                   xtype: 'textfield',
                   width: '100%',
@@ -181,27 +182,32 @@ Ext.define('Chaching.view.coa.ChartOfAccountGrid', {
 
     {
         xtype: 'gridcolumn',
-        text: app.localize('LinkChartOfAccountName'),
+        text: app.localize('ConvertToNewCOA'),
         dataIndex: 'linkChartOfAccountName',
         sortable: true,
         groupable: true,
         width: '15%',
-        hidden: true,
-        filterField: {
+        hidden: false
+        , filterField: {
             xtype: 'textfield',
             width: '100%',
-            emptyText: 'Enter Link Chart Of AccountName to search'
+            emptyText: 'Enter Convert To New COA to search'
         }
     }
           ,
 {
     xtype: 'gridcolumn',
-    text: app.localize('StandardGroupTotal'),
+    text: app.localize('StdGroupTotal'),
     dataIndex: 'standardGroupTotal',
     sortable: true,
     groupable: true,
     width: '15%',
-    hidden: true
+    hidden: false
+    , filterField: {
+        xtype: 'textfield',
+        width: '100%',
+        emptyText: 'Enter Std Group Total to search'
+    }
 }
     ]
 });

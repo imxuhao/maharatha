@@ -1,4 +1,4 @@
-Ext.define('Chaching.view.linkedaccounts.LinkedAccountsGridModel', {
+Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.linkedaccounts-linkedaccountsgrid',
     data: {

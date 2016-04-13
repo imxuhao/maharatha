@@ -1,17 +1,17 @@
 
-Ext.define('Chaching.view.linkedaccounts.LinkedAccountsGrid',{
+Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.linkedaccounts.LinkedAccountsGridController',
-        'Chaching.view.linkedaccounts.LinkedAccountsGridModel'
+        'Chaching.view.profile.linkedaccounts.LinkedAccountsGridController',
+        'Chaching.view.profile.linkedaccounts.LinkedAccountsGridModel'
     ],
 
     controller: 'linkedaccounts-linkedaccountsgrid',
     viewModel: {
         type: 'linkedaccounts-linkedaccountsgrid'
     },
-
+    xtype: 'manageaccounts',
     headerButtonsConfig: [
        '->', {
          xtype: 'button',
@@ -20,11 +20,11 @@ Ext.define('Chaching.view.linkedaccounts.LinkedAccountsGrid',{
          action: 'create',
          text: abp.localization.localize("LinkNewAccount").toUpperCase(),
          tooltip: app.localize('LinkNewAccount'),
-         checkPermission: false,
+         checkPermission: false,      
          iconCls: 'fa fa-plus',       
          iconAlign: 'left'
      }], 
-    store: 'linkedaccounts.LinkedAccountsStore',
+    store: 'profile.linkedaccounts.LinkedAccountsStore',
     name: 'LinkedAccounts',
     padding: 5, 
     requireMultiSearch: true,
@@ -57,10 +57,7 @@ Ext.define('Chaching.view.linkedaccounts.LinkedAccountsGrid',{
                  xtype: 'textfield',
                  width: '100%',
                  emptyText: app.localize('UUserName')
-             },
-             editor: {
-                 xtype: 'textfield'
-             }
+             }            
          },
          {
              xtype: 'gridcolumn',       

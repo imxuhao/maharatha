@@ -1,6 +1,6 @@
-﻿Ext.define('Chaching.store.linkedaccounts.LinkedAccountsStore', {
+﻿Ext.define('Chaching.store.profile.linkedaccounts.LinkedAccountsStore', {
     extend: 'Chaching.store.base.BaseStore',
-    model: 'Chaching.model.linkedaccounts.LinkedAccountsModel',   
+    model: 'Chaching.model.profile.linkedaccounts.LinkedAccountsModel',
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
@@ -12,7 +12,7 @@
             type:'json'
         },
         api: {
-            create: abp.appPath + 'api/services/app/userLink/LinkToUserInput',
+            create: abp.appPath + 'api/services/app/userLink/LinkToUser',
             read: abp.appPath + 'api/services/app/userLink/GetLinkedUsers',
             destroy: abp.appPath + 'api/services/app/userLink/unlinkUser'
         },

@@ -956,7 +956,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 //Remove the cache item to prevent re-use
                 await _cacheManager.GetSwitchToLinkedAccountCache().RemoveAsync(tokenId);
 
-                return RedirectToAction("Index", "Application");
+                return RedirectToAction("Index", "home/home");
             }
         }
 

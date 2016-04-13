@@ -1,11 +1,11 @@
 
-Ext.define('Chaching.view.linkedaccounts.LinkedAccountsView', {
+Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsView', {
     extend: 'Chaching.view.common.window.ChachingWindowPanel',
-    alias: ['widget.host.linkedaccounts.manageaccountsView'],
+    alias: ['widget.linkedaccounts.createView'],
     requires: [
-        'Chaching.view.linkedaccounts.LinkedAccountsViewController',
-        'Chaching.view.linkedaccounts.LinkedAccountsViewModel',
-        'Chaching.view.linkedaccounts.LinkedAccountsGrid'
+        'Chaching.view.profile.linkedaccounts.LinkedAccountsViewController',
+        'Chaching.view.profile.linkedaccounts.LinkedAccountsViewModel',
+        'Chaching.view.profile.linkedaccounts.LinkedAccountsGrid'
     ],
 
     controller: 'linkedaccounts-linkedaccountsview',
@@ -19,7 +19,7 @@ Ext.define('Chaching.view.linkedaccounts.LinkedAccountsView', {
     initComponent: function (config) {
         var me = this,
             controller = me.getController();
-        var form = Ext.create('Chaching.view.linkedaccounts.LinkedAccountsGrid', {
+        var form = Ext.create('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
             height: '100%',
             width: '100%',
             name: 'LinkedAccounts'

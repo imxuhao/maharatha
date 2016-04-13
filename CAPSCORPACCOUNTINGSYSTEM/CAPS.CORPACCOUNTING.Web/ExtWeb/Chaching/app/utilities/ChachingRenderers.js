@@ -34,6 +34,8 @@
 
     },
     loginaccount: function (value, cell) {
+        var gridController = this.getController(),
+           view = gridController.getView();
         var id = Ext.id();
         var widgetRec = cell.record;
         var widgetCol = cell.column;
@@ -47,8 +49,9 @@
                 iconAlign: 'left',
                 widgetRec: widgetRec,
                 widgetCol: widgetCol,
-                //controller: gridController
-
+                listeners: {
+                    click: gridController.login
+                },
             });
             if (Ext.get(id)) {
                 button.render(Ext.get(id));

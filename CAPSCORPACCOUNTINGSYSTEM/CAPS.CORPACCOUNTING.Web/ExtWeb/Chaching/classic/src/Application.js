@@ -26,10 +26,10 @@ Ext.define('Chaching.Application', {
          'languages.LanguagesStore',
         'auditlogs.AuditLogsStore',
         'languages.LanguageTextsStore',
-        'linkedaccounts.LinkedAccountsStore',
+        'profile.linkedaccounts.LinkedAccountsStore',
         'coa.ChartOfAccountStore',
         'profile.loginAttempts.LoginAttemptStore'
-
+      
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     onAppUpdate: function () {

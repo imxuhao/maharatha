@@ -1,4 +1,4 @@
-Ext.define('Chaching.view.linkedaccounts.LinkedAccountsViewModel', {
+Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsViewModel', {
     extend: 'Chaching.view.common.window.ChachingWindowPanelModel',
     alias: 'viewmodel.linkedaccounts-linkedaccountsview',
     data: {

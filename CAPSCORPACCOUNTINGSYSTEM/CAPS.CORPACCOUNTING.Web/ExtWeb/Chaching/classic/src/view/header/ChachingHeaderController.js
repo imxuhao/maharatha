@@ -1,7 +1,7 @@
 Ext.define('Chaching.view.header.ChachingHeaderController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.header-chachingheader',
-    onToggleClick:function(btn) {
+    onToggleClick: function (btn) {
         var me = this,
             view = me.getView();
         var westPanel = view.up('viewport').down('panel[region=west]');
@@ -14,21 +14,21 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             logo.setWidth(micro ? 110 : 0);
         }
     },
-    onBeforeLocalizationRender:function(btn) {
+    onBeforeLocalizationRender: function (btn) {
         var currentCulture = abp.localization.currentCulture;
         if (currentCulture) {
             var locale = abp.localization.languages;
             for (var i = 0; i < locale.length; i++) {
                 var item = locale[i];
                 if (item.name === currentCulture.name) {
-                    btn.text = currentCulture.displayName+ ' &#xf107;';
+                    btn.text = currentCulture.displayName + ' &#xf107;';
                     btn.iconCls = item.icon;
                     break;
                 }
             }
         }
     },
-    onLocalizationHover:function(btn, e, eOpts) {
+    onLocalizationHover: function (btn, e, eOpts) {
         var me = this,
             view = me.getView();
         var contextMenu = btn.contextMenu;
@@ -43,14 +43,14 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             me.hideContextMenu(accountsBtn);
         }
         if (contextMenu) {
-            contextMenu.showAt(position[0]-50, position[1] + 30, true);
+            contextMenu.showAt(position[0] - 50, position[1] + 30, true);
         } else {
             var items = [];
             var locale = abp.localization.languages;
             for (var i = 0; i < locale.length; i++) {
                 var item = locale[i];
                 var menuItem = {
-                    text: item.displayName ,
+                    text: item.displayName,
                     iconCls: item.icon,
                     name: item.name,
                     isDefault: item.isDefault
@@ -62,21 +62,21 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                 ui: 'countryMenu',
                 width: 150,
                 items: items,
-                ownerElement:btn,
+                ownerElement: btn,
                 listeners: {
                     click: me.onLocalizationItemClick
                 }
             });
             btn.contextMenu = contextMenu;
-            contextMenu.showAt(position[0]-50, position[1] + 30, true);
+            contextMenu.showAt(position[0] - 50, position[1] + 30, true);
         }
     },
-    hideContextMenu:function(overedBtn) {
+    hideContextMenu: function (overedBtn) {
         if (overedBtn && overedBtn.contextMenu) {
             overedBtn.contextMenu.hide();
         }
     },
-    onLocalizationItemClick:function(menu, item, e, eOpts) {
+    onLocalizationItemClick: function (menu, item, e, eOpts) {
         var ownerElement = menu.ownerElement;
         if (ownerElement) {
             ownerElement.setText(item.text + ' &#xf107;');
@@ -88,7 +88,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         ///TODO: Populate with unread count of notification
         btn.btnIconEl.dom.textContent = 1;
     },
-    onNotificationHover: function(btn) {
+    onNotificationHover: function (btn) {
         var me = this,
             view = me.getView();
         var contextMenu = btn.contextMenu;
@@ -121,12 +121,12 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                     '<li>{name}</li>',
                     '</ul>',
                     '</tpl>', {
-                        userRenderer: function(user) {
+                        userRenderer: function (user) {
                             //.. return a name instead of id
                             return user;
                         }
                     }, {
-                        timeRenderer: function(timeStamp) {
+                        timeRenderer: function (timeStamp) {
                             //.. return time in some format
                             return timeStamp;
                         }
@@ -147,7 +147,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             contextMenu.showAt(position[0] - 250, position[1] + 30, true);
         }
     },
-    onAccountsReady:function(btn) {
+    onAccountsReady: function (btn) {
         var me = this,
             view = me.getView();
         var userName = '';
@@ -157,7 +157,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             headers: {
                 'Accept': 'application/json'
             },
-            url: abp.appPath+'api/services/app/session/GetCurrentLoginInformations',
+            url: abp.appPath + 'api/services/app/session/GetCurrentLoginInformations',
 
             success: function (response, opts) {
                 var obj = Ext.decode(response.responseText);
@@ -210,14 +210,17 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         });
     },
     manageActionClicked: function (menu, item, e, eOpts) {      
-        var manageAction = Ext.create('Chaching.view.linkedaccounts.LinkedAccountsView');
+        var manageAction = Ext.create('Chaching.view.profile.linkedaccounts.LinkedAccountsView');
         var grid = manageAction.down('grid'),
         gridStore = grid.getStore();
         gridStore.load();
         manageAction.show();
-
     },
-    onAccountsHover:function(btn) {
+    changePasswordClick: function (menu, item, e, eOpts) {
+        var changepasswordAction = Ext.create('Chaching.view.profile.changepassword.ChangePasswordView');       
+        changepasswordAction.show();
+    },
+    onAccountsHover: function (btn) {
         var me = this,
            view = me.getView();
         var contextMenu = btn.contextMenu;
@@ -232,7 +235,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             me.hideContextMenu(localizationBtn);
         }
         if (contextMenu) {
-            contextMenu.showAt(position[0] - 50, position[1] +btn.gotoMyAccount ? 60 : 30, true);
+            contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         } else {
             var items = [
                 { text: abp.localization.localize("BackToMyAccount"), hidden: !btn.gotoMyAccount, name: 'BackToAccount', iconCls: 'icon-action-undo' },
@@ -263,8 +266,11 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                     }
                 }, {
                     text: abp.localization.localize("ChangePassword"),
-                    iconCls:'icon-key',
-                    name: 'ChangePassword'
+                    iconCls: 'icon-key',
+                    name: 'ChangePassword',
+                    listeners: {
+                        click: me.changePasswordClick
+                    }
                 }, {
                     text: abp.localization.localize("ChangeProfilePicture"),
                     iconCls: 'icon-user',

@@ -45,7 +45,8 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             var query = from coa in _coaUnitRepository.GetAll()
                         join linkcoa in _coaUnitRepository.GetAll()
-                        on coa.Id equals linkcoa.LinkChartOfAccountID into tempCoa
+                        on coa.LinkChartOfAccountID equals linkcoa.Id
+                        into tempCoa
                         from coaunit in tempCoa.DefaultIfEmpty()
                         select new { Coa = coa, LinkChartOfAccountName=coaunit.Caption };
 
@@ -68,6 +69,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 var dto = item.Coa.MapTo<CoaUnitDto>();
                 dto.CoaId = item.Coa.Id;
                 dto.StandardGroupTotal = item.Coa.StandardGroupTotalId != null ? item.Coa.StandardGroupTotalId.ToDisplayName() : "";
+                dto.LinkChartOfAccountName = item.LinkChartOfAccountName;
                 return dto;
             }).ToList());
         }
@@ -179,6 +181,15 @@ namespace CAPS.CORPACCOUNTING.Masters
                           .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
                           .WhereIf(input.OrganizationUnitId != null, p => p.OrganizationUnitId == input.OrganizationUnitId)
                           select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
+        }
+
+        /// <summary>
+        /// Get StandardGroupTotals as List
+        /// </summary>
+        /// <returns></returns>
+        public  List<NameValueDto> StandardGroupTotalList()
+        {
+            return EnumList.GetStandardGroupTotalList();
         }
 
     }

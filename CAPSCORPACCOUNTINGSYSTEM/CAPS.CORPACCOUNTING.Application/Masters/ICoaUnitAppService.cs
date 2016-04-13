@@ -47,7 +47,18 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         Task<CoaUnitDto> GetCoaUnitById(IdInput input);
 
+
+        /// <summary>
+        /// Get GetCoaList
+        /// </summary>
+        /// <returns></returns>
         Task<List<NameValueDto>> GetCoaList(GetCoaInput input);
+
+        /// <summary>
+        /// Get StandardGroupTotals List
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> StandardGroupTotalList();
 
     }
 }

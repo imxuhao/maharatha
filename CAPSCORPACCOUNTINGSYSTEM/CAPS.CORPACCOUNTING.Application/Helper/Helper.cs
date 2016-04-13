@@ -69,7 +69,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
                             numericSearch = new List<NumericSearch>();
                         Mapper.CreateMap<Filters, NumericSearch>()
                             .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
-                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property));
+                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                            .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : ""))) 
+                            .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
                         numericSearch.Add(item.MapTo(new NumericSearch()));
                         break;
                     case DataTypes.Date:
@@ -97,7 +99,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
                             .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
                             .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
                             .ForMember(u => u.SearchTerm2, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm2) ? src.SearchTerm2 : null)))
-                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property));
+                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                            .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : "")))
+                            .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
                         decimalSearch.Add(item.MapTo(new DecimalSearch()));
                         break;
                     default:
@@ -224,9 +228,11 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public string Property { get; set; }
         public string SearchTerm { get; set; }
         public int Comparator { get; set; }
-        public string SearchTerm2 { get; set; }
+        public string SearchTerm2 { get; set; }   
 
         public DataTypes DataType { get; set; }
     }
+
+  
 
 }

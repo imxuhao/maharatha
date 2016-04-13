@@ -8,7 +8,8 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
     {
         public int? SearchTerm { get; set; }
         public int? SearchTerm2 { get; set; }
-
+        public string SearchTerms { get; set; }
+        
         public NumericComparators Comparator { get; set; }
 
         //protected override Expression BuildExpression(MemberExpression property)
@@ -26,11 +27,30 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
         {
             Expression searchExpression1 = null;
             Expression searchExpression2 = null;
+            if (!string.IsNullOrEmpty(SearchTerms) && this.Comparator== NumericComparators.In)
+            {
+                Expression combinedExpression = null;
 
+                foreach (string val in SearchTerms.Split(','))
+                {
+                   // this.Comparator = NumericComparators.In;
+                    this.SearchTerm = Convert.ToInt32(val);
+                    searchExpression1 = this.GetFilterExpression(property);
+                    if (!ReferenceEquals(searchExpression1, null) && !ReferenceEquals(searchExpression2, null))
+                    {
+
+                        combinedExpression = Expression.OrElse(searchExpression2, searchExpression1);
+                        searchExpression1 = combinedExpression;
+                    }
+                    searchExpression2 = searchExpression1;
+                }
+                return combinedExpression;
+            }
+            else
             if (this.SearchTerm.HasValue)
             {
                 searchExpression1 = this.GetFilterExpression(property);
-            }
+            }            
 
             if (this.Comparator == NumericComparators.InRange && this.SearchTerm2.HasValue)
             {
@@ -71,6 +91,8 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
                     return Expression.GreaterThan(property, Expression.Constant(this.SearchTerm.Value));
                 case NumericComparators.InRange:
                     return Expression.GreaterThanOrEqual(property, Expression.Constant(this.SearchTerm.Value));
+                case NumericComparators.In:
+                    return Expression.Equal(property, Expression.Constant(this.SearchTerm.Value));
                 default:
                     throw new InvalidOperationException("Comparator not supported.");
             }
@@ -94,6 +116,9 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
         [Display(Name = ">")]
         Greater,
         [Display(Name = "Range")]
-        InRange
+        InRange,
+
+        [Display(Name = "In")]
+        In
     }
 }

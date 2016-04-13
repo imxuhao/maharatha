@@ -86,8 +86,8 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             width: 100,
             height:50,
             iconAlign: 'right',
-            text: '',//set dynamically based on login info of user
-            gotoMyAccount:false,
+            text:'',//set dynamically based on login info of user
+            gotoMyAccount: false,
             textAlign: 'right',
             baseCls: '',
             itemId: 'AccountBtn',

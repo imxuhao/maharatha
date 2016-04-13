@@ -27,7 +27,8 @@ Ext.define('Chaching.Application', {
         'auditlogs.AuditLogsStore',
         'languages.LanguageTextsStore',
         'linkedaccounts.LinkedAccountsStore',
-        'coa.ChartOfAccountStore'
+        'coa.ChartOfAccountStore',
+        'profile.loginAttempts.LoginAttemptStore'
 
     ],
     mainView: 'Chaching.view.main.ChachingViewport',

@@ -184,6 +184,19 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                         image.setSrc(profilePic);
                     }
                     btn.setText(userName);
+
+                    var loggedInUserInfo = {
+                        userName: userName,
+                        defaultOrganizationId: result.user.defaultOrganizationId,
+                        emailAddress: result.user.emailAddress,
+                        userId: result.user.id,
+                        name: result.user.name,
+                        profilePictureId: result.user.profilePictureId,
+                        surname: result.user.surname,
+                        userOrganizationId: result.userOrganizationId,
+                        gotoMyAccount: btn.gotoMyAccount
+                    }
+                    Chaching.utilities.ChachingGlobals.loggedInUserInfo = loggedInUserInfo;
                 } else {
                     Ext.toast(obj.error.message);
                 }
@@ -244,7 +257,10 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                     text: abp.localization.localize("LoginAttempts"),
                     iconCls: 'icon-shield',
                     name:'LoginAttempts',
-                    leaf: true
+                    leaf: true,
+                    listeners: {
+                        click: me.loginAttemptsClicked
+                    }
                 }, {
                     text: abp.localization.localize("ChangePassword"),
                     iconCls:'icon-key',
@@ -280,6 +296,11 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             btn.contextMenu = contextMenu;
             contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         }
+    },
+    loginAttemptsClicked:function(menu, item, e, eOpts) {
+        debugger;
+        var loginAttemptView = Ext.create('Chaching.view.profile.loginAttempts.LoginAttemptView');
+        loginAttemptView.show();
     }
 
 });

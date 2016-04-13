@@ -582,6 +582,7 @@
     <Content Include="Content\fonts-ptsans-narrow.css" />
     <Content Include="Content\fonts-sourcesans-pro.css" />
     <Content Include="Content\images\capslogo.png" />
+    <Content Include="Content\themesChaching\chachingGlobalcss.css" />
     <Content Include="Content\themesChaching\famfamfam-flags.css" />
     <Content Include="Content\RenderStyles.css" />
     <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.dev.svg" />
@@ -1821,13 +1822,16 @@
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\coa\ChartOfAccountModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\linkedaccounts\LinkedAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguageTextsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\coa\ChartOfAccountStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\profile\loginAttempts\LoginAttemptStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\utilities\ChachingGlobals.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingRenderers.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\Prototypes.js" />
     <Content Include="ExtWeb\Chaching\app\model\users\UsersModel.js" />
@@ -1895,6 +1899,10 @@
     <Content Include="ExtWeb\Chaching\bootstrap.css" />
     <Content Include="ExtWeb\Chaching\bootstrap.js" />
     <Content Include="ExtWeb\Chaching\build.xml" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\loginAttempts\LoginAttemptList.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\loginAttempts\LoginAttemptListController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\loginAttempts\LoginAttemptView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\loginAttempts\LoginAttemptViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridModel.js" />

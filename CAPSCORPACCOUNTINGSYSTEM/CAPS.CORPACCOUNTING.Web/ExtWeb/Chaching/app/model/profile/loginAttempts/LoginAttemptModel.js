@@ -7,14 +7,17 @@ Ext.define('Chaching.model.profile.loginAttempts.LoginAttemptModel', {
         { name: 'browserInfo', type: 'string' },
         { name: 'clientIpAddress', type: 'string' },
         { name: 'clientName', type: 'string' },
-        { name: 'result', type: 'string' },
+        { name: 'result', type: 'string',convert:function(value) {
+            return value === 'Success' ? app.localize('Success') :
+                   app.localize('Failed');
+        } },
         { name: 'tenancyName', type: 'string' },
         { name: 'userNameOrEmail', type: 'string' },
         {
             name: 'attemptedOn',
             type: 'string',
             convert: function(value, record) {
-                return Ext.Date.format(record.get('creationTime'), 'm/d/Y h:m:s');
+                return Chaching.utilities.ChachingRenderers.renderDateTimeWithFromNow(record.get('creationTime'));
             }
         },
         {
@@ -23,7 +26,7 @@ Ext.define('Chaching.model.profile.loginAttempts.LoginAttemptModel', {
             convert: function(value, record) {
                 var result = record.get('result');
                 if (result === "Success")
-                    return 'lable-success';
+                    return 'label-success';
                 else return 'label-danger';
             }
         }

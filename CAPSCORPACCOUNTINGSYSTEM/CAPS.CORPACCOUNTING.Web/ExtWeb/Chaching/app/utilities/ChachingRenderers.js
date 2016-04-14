@@ -91,5 +91,29 @@
             return '<i class="fa fa-check-circle font-green"  style="color:#32c5d2" ></i>';
         else
             return '<i class="fa fa-warning font-yellow-gold"  style="color:#32c5d2"></i>';
+    },// hh:mm:ss
+    renderDateOnly:function(value) {
+        if (value) {
+            return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateFormat);
+        }
+        return '';
     },
+    renderDateTime: function (value) {
+        if (value) {
+            return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeFormat);
+        }
+        return '';
+    },
+    renderDateTimeSeconds: function (value) {
+        if (value) {
+            return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormat);
+        }
+        return '';
+    },
+    renderDateTimeWithFromNow:function(value) {
+        if (value) {
+            return moment(value).fromNow() + ' (' + moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormat) + ')';
+        }
+        return '';
+    }
 });

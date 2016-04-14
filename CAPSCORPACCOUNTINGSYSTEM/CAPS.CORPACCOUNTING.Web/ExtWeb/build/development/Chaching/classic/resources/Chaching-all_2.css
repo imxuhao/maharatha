@@ -9823,17 +9823,21 @@ body.x-ios.x-webview.x-portrait {
 /* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:94 */
 .x-btn-inner-actionMenuButton-small {
     font-size: 11px !important;
-    font-weight: 600 !important;
-    font: 600 12px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;
+    font-weight: 400 !important;
+    font: 400 12px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:99 */
+.x-btn-inner-actionButton-small {
+    font-weight: 600 !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:102 */
 .chaching-grid .x-grid-cell {
     background-color: white;
     border-bottom-color: #e9e9e9;
     border-top-color: #e9e9e9;
     color: black;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:106 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:109 */
 .chaching-grid .x-grid-cell-over {
     background-color: #cdddfd;
     border-bottom-color: #cdddfd;
@@ -9841,7 +9845,7 @@ body.x-ios.x-webview.x-portrait {
     border-top-color: #cdddfd;
     border-top-style: solid;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:115 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:118 */
 .chaching-grid .x-grid-item-selected {
     /* Grid cells in the selected row */
     background-color: #f3f5f9 !important;
@@ -9850,58 +9854,58 @@ body.x-ios.x-webview.x-portrait {
     border-top-color: #f3f5f9;
     border-top-style: solid;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:122 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:125 */
 .chaching-grid .x-grid-body {
     border-width: 1px !important;
     border-color: #d0d0d0 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:126 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:129 */
 .chaching-grid .x-grid-with-row-lines .x-grid-item .x-grid-item-selected {
     border-color: #f3f5f9 !important;
     background-color: gray !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:130 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:133 */
 .chaching-grid .x-grid-with-col-lines .x-grid-item-selected .x-grid-cell {
     background-color: #cdddfd !important;
     border-color: #cdddfd !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:134 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:137 */
 .chaching-grid .x-grid-item {
     color: black !important;
     font-weight: 400 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:138 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:141 */
 .chaching-grid .x-grid-item-over {
     background-color: #cdddfd !important;
     border-color: #cdddfd !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:143 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:146 */
 .chaching-grid .x-grid-item-alt .x-grid-cell {
     background-color: whitesmoke !important;
     color: black !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:147 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:150 */
 .chaching-grid .x-column-header {
     color: white !important;
     background-color: #047e8e !important;
     font-weight: 700 !important;
     cursor: pointer !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:153 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:156 */
 .chaching-grid .x-column-header-over {
     background-color: #00bcd4 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:156 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:159 */
 .chaching-grid .x-column-header-last {
     color: white !important;
     background-color: #047e8e !important;
     font-weight: 700 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:161 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:164 */
 .chaching-grid .x-column-header-last-over {
     background-color: #00bcd4 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:164 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:167 */
 .chaching-grid .x-grid-header-ct {
     border-radius: 5px 5px 0 0 !important;
     background-color: #047e8e !important;
@@ -15608,9 +15612,4 @@ body.x-ios.x-webview.x-portrait {
     border-color: #00bcd4;
     background-image: none;
     background-color: rgba(4, 126, 142, 0.08);
-}
-/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/background-opacity.scss:19 */
-.x-ie8 .x-tab-focus.x-tab-over.x-tab-dashboard {
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#14047e8e, endColorstr=#14047e8e)";
-    zoom: 1;
 }

@@ -10,5 +10,8 @@
         userName:null,
         userOrganizationId: null,
         gotoMyAccount:false
-    }
+    },
+    defaultDateFormat: 'MM/DD/YYYY',
+    defaultDateTimeFormat: 'MM/DD/YYYY hh:mm a',
+    defaultDateTimeSecFormat: 'MM/DD/YYYY hh:mm:ss a'
 });

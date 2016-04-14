@@ -16,7 +16,7 @@ Ext.define('Chaching.view.profile.loginAttempts.LoginAttemptList', {
         '<div class="row">',
         '<div class="col-xs-3 text-center">',
         '<img src="' + abp.appPath + 'Profile/GetProfilePicture?t=65214896300' + '" class="img-circle" width="50" height="50"><br/>',
-        '<span class="label label-success"> {result} </span>',
+        '<span class="label {badgeClass}"> {result} </span>',
         '</div>',
         '<div class="col-xs-9">',
         '<div class="row">',

@@ -117,7 +117,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                 tpl: [
                     '<div class="menuHeaderTextRight">Settings</div>',
                     '<tpl for=".">',
-                    '<ul class="dropdown-menu">',
+                    '<ul>',
                     '<li>{name}</li>',
                     '</ul>',
                     '</tpl>', {
@@ -305,6 +305,8 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
     },
     loginAttemptsClicked:function(menu, item, e, eOpts) {
         var loginAttemptView = Ext.create('Chaching.view.profile.loginAttempts.LoginAttemptView');
+        var listStore = loginAttemptView.down('dataview').getStore();
+        listStore.load();
         loginAttemptView.show();
     }
 

@@ -30,7 +30,6 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         ui: 'actionButton',
         action:'create',
         text: abp.localization.localize("CreateNewTenant").toUpperCase(),
-        tooltip: app.localize('CreateNewTenant'),
         checkPermission: true,
         iconCls: 'fa fa-plus',
         routeName: 'host.tenants.create',
@@ -59,7 +58,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             dataIndex: 'tenancyName',
             stateId: 'tenancyName',
             sortable: true,
-            width: '29%',
+            width: '28%',
             groupable:true,
             // simplest filter configuration
             filterField: {
@@ -145,7 +144,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
              sortable: true,
              groupable: true,
              width: '25%',
-             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+             renderer: Chaching.utilities.ChachingRenderers.renderDateTime,
              filterField: {
                  xtype: 'dateSearchField',
                  dataIndex: 'creationTime',

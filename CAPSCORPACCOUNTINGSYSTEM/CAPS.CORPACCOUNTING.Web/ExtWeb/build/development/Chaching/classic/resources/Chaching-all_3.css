@@ -1,3 +1,8 @@
+/* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/background-opacity.scss:19 */
+.x-ie8 .x-tab-focus.x-tab-over.x-tab-dashboard {
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#14047e8e, endColorstr=#14047e8e)";
+    zoom: 1;
+}
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2495 */
 .x-ie8 .x-tab-focus.x-tab-over.x-tab-dashboard.x-tab-rotate-left {
     -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";

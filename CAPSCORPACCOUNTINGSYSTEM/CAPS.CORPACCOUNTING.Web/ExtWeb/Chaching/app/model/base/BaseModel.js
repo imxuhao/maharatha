@@ -10,9 +10,9 @@ Ext.define('Chaching.model.base.BaseModel', {
         { name: 'isDeleted', type: 'boolean' },
         { name: 'deletionTime', type: 'date' },
         { name: 'deleterUserId', type: 'int' },
-        { name: 'lastModificationTime', type: 'date' },
+        { name: 'lastModificationTime', type: 'date', dateFormat: 'c' },
         { name: 'lastModifierUserId', type: 'int' },
-        { name: 'creationTime', type: 'date' },
+        { name: 'creationTime', type: 'date',dateFormat:'c'},
         { name: 'creatorUserId', type: 'int' },
 
         //custom fields required for all entities

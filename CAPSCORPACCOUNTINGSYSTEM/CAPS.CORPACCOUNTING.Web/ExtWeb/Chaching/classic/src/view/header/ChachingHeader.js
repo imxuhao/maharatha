@@ -102,6 +102,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             }
         }, {
             xtype: 'image',
+            userCls:'img-circle',
             height: 50,
             width: 50,
             itemId: 'AccountPic',

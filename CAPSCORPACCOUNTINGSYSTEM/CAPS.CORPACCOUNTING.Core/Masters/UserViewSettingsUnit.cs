@@ -9,6 +9,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     [Table("CAPS_UserViewSettings")]
     public class UserViewSettingsUnit : FullAuditedEntity, IMustHaveTenant
     {
+        public const int ViewSettingNameLength= 300;
         #region Class Property Declarations
 
         /// <summary>Overriding the ID column with UserViewId</summary>
@@ -24,6 +25,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual long UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
+
+        [Required]
+        [StringLength(ViewSettingNameLength)]
+        public virtual string ViewSettingName { get; set; }
 
         /// <summary>Gets or sets the ViewSettings field. </summary>
         [Required]

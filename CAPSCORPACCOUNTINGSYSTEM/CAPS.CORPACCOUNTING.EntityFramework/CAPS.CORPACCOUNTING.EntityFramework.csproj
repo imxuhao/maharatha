@@ -1074,6 +1074,10 @@
     <Compile Include="Migrations\201603310833183_Modify_ChartofAccount_Table.Designer.cs">
       <DependentUpon>201603310833183_Modify_ChartofAccount_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604140747467_Modify_UserViewSettings_Table.cs" />
+    <Compile Include="Migrations\201604140747467_Modify_UserViewSettings_Table.Designer.cs">
+      <DependentUpon>201604140747467_Modify_UserViewSettings_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1810,6 +1814,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603310833183_Modify_ChartofAccount_Table.resx">
       <DependentUpon>201603310833183_Modify_ChartofAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604140747467_Modify_UserViewSettings_Table.resx">
+      <DependentUpon>201604140747467_Modify_UserViewSettings_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

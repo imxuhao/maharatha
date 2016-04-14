@@ -20,6 +20,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the UserId field. </summary>
         public virtual long UserId { get; set; }
 
+        /// <summary>Gets or sets the ViewSettingName field. </summary>
+        public virtual string ViewSettingName { get; set; }
+        
         /// <summary>Gets or sets the ViewSettings field. </summary>
         public virtual string ViewSettings { get; set; }
 

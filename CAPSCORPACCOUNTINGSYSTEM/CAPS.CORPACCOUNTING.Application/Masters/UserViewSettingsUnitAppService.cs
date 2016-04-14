@@ -103,6 +103,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         GridId = settings.GridId,
                         UserId = settings.UserId,
                         IsDefault = settings.IsDefault,
+                        ViewSettingName=settings.ViewSettingName,
                         ViewSettings = settings.ViewSettings,
                         Grid_Name = grdsettings.Name,
                         Grid_Description = grdsettings.Description

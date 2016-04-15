@@ -180,13 +180,13 @@ appModule.config([
             });
         }
 
-        if (abp.auth.hasPermission('Pages.Administration.Tenant.Settings')) {
-            $stateProvider.state('tenant.settings', {
-                url: '/settings',
-                templateUrl: '~/App/tenant/views/settings/index.cshtml',
-                menu: 'Administration.Settings.Tenant'
-            });
-        }
+        //if (abp.auth.hasPermission('Pages.Administration.Tenant.Settings')) {
+        //    $stateProvider.state('tenant.settings', {
+        //        url: '/settings',
+        //        templateUrl: '~/App/tenant/views/settings/index.cshtml',
+        //        menu: 'Administration.Settings.Tenant'
+        //    });
+        //}
     }
 ]);
 

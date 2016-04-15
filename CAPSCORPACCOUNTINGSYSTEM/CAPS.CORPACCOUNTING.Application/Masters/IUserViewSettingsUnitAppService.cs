@@ -39,7 +39,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<ListResultDto<UserViewSettingsUnitDto>> GetUserViewSettingsUnitsByUserId(GetUserViewSettingsUnitDto input);
+        Task<ListResultDto<UserViewSettingsUnitDto>> GetUserViewSettingsUnitsByUserId(SearchInputDto input);
 
     }
 }

@@ -2604,6 +2604,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.UserId">
             <summary>Gets or sets the UserId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.ViewSettingName">
+            <summary>Gets or sets the ViewSettingName field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.ViewSettings">
             <summary>Gets or sets the ViewSettings field. </summary>
         </member>
@@ -2797,6 +2800,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.UserId">
             <summary>Gets or sets the UserId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.ViewSettingName">
+            <summary>Gets or sets the ViewSettingName field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.ViewSettings">
             <summary>Gets or sets the ViewSettings field. </summary>
         </member>
@@ -2811,6 +2817,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.UserId">
             <summary>Gets or sets the UserId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.ViewSettingName">
+            <summary>Gets or sets the ViewSettingName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.ViewSettings">
             <summary>Gets or sets the ViewSettings field. </summary>
@@ -4519,7 +4528,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.IUserViewSettingsUnitAppService.GetUserViewSettingsUnitsByUserId(CAPS.CORPACCOUNTING.Masters.Dto.GetUserViewSettingsUnitDto)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IUserViewSettingsUnitAppService.GetUserViewSettingsUnitsByUserId(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get the list of all UserViewSettings by user Id
             </summary>
@@ -4848,7 +4857,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.UserViewSettingsUnitAppService.GetUserViewSettingsUnitsByUserId(CAPS.CORPACCOUNTING.Masters.Dto.GetUserViewSettingsUnitDto)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.UserViewSettingsUnitAppService.GetUserViewSettingsUnitsByUserId(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get the list of all UserViewSettings by User
             </summary>

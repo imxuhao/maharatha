@@ -385,6 +385,7 @@
     <text name="USurname" value="Enter Surname" />
     <text name="UUserName" value="Enter User Name" />
     <text name="UEmailAddress" value="Enter email address" />
+    <text name="Create" value="Create" />
     <text name="Financials" value="Financials" />
     <text name="Accounts" value="Accounts" />
     <text name="ChartOfAccount" value="Chart Of Account" />
@@ -401,5 +402,49 @@
     <text name="IsApproved" value="IsApproved" />
     <text name="Description" value="Description" />
     <text name="Caption" value="Caption" />
+
+    <text name="SubAccounts" value="Sub Accounts" />
+    <text name="Divisions" value="Divisions" />
+    <text name="Journals" value="Journals" />
+    <text name="Entry" value="Entry" />
+    <text name="Inquiry" value="Inquiry" />
+    <text name="Banking" value="Banking" />
+    <text name="Projects" value="Projects" />
+    <text name="ProjectMaintenance" value="Project Maintenance" />
+    <text name="Receivables" value="Receivables" />
+    <text name="Customers" value="Customers" />
+    <text name="Invoices" value="Invoices" />
+    <text name="Preferences" value="Preferences" />
+    <text name="Payables" value="Payables" />
+    <text name="Vendors" value="Vendors" />
+    <text name="YEProcesses" value="YEProcesses" />
+    <text name="PurchaseOrders" value="Purchase Orders" />
+    <text name="Purchasing" value="Purchasing" />
+    <text name="PettyCash" value="Petty Cash" />
+    <text name="PCVendors" value="PC Vendors" />
+    <text name="CreditCard" value="Credit Card" />
+    <text name="Payroll" value="Payroll" />
+    <text name="Posting" value="Posting" />
+    <text name="ARInvoiceTemplate" value="AR Invoice Template" />
+    <text name="BillingTypes" value="Billing Types" />
+    <!--<text name="Customers" value="Customers" />-->
+    <text name="History" value="History" />
+    <text name="PaymentTerms" value="PaymentTerms" />
+    <text name="Territories" value="Territories" />
+    <text name="ARInvoiceInquiry" value="AR Invoice Inquiry" />
+    <text name="CustomerSummary" value="Customer Summary" />
+    <text name="InvoiceDetail" value="Invoice Detail" />
+    <text name="Batched" value="Batched" />
+    <text name="UnBatched" value="UnBatched" />
+    <text name="BankSetup" value="Bank Setup" />
+    <text name="FiscalPeriod" value="Fiscal Period" />
+    <text name="ACH" value="ACH" />
+    <text name="ReceiptsOrTransfers" value="Receipts/Transfers" />
+    <text name="Reconciliation" value="Bank Reconciliation" />
+    <text name="AssetTracking" value="Asset Tracking" />
+    <text name="JournalHistory" value="Journal History" />
+    <text name="SearchTransactions" value="Search Transactions" />
+    <text name="Contracts" value="Contracts" />
+    <text name="ProjectCOAs" value="Project COAs" />
   </texts>
 </localizationDictionary>

@@ -11,6 +11,7 @@ using Abp.AutoMapper;
 using AutoMapper;
 using System.Data.Entity;
 using Abp.Domain.Uow;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -38,8 +39,19 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [UnitOfWork]
         public async Task<UserViewSettingsUnitDto> CreateUserViewSettingsUnit(CreateUserViewSettingsUnitInput input)
         {
+            if ( input.IsDefault.Value)
+            {
+                var res = await _userViewSettingsUnitRepository.FirstOrDefaultAsync(p => p.IsDefault == true && p.GridId == input.GridId && p.UserId == input.UserId);
+                if (!ReferenceEquals(res, null))
+                {
+                    res.IsDefault = false;
+                    await _userViewSettingsUnitManager.UpdateAsync(res);
+                    await CurrentUnitOfWork.SaveChangesAsync();
+                }
+            }
             var UserViewSettings = input.MapTo<UserViewSettingsUnit>();
             await _userViewSettingsUnitManager.CreateAsync(UserViewSettings);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -51,9 +63,20 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [UnitOfWork]
         public async Task<UserViewSettingsUnitDto> UpdateUserViewSettingsUnit(UpdateUserViewSettingsUnitInput input)
         {
             var UserViewSettings = await _userViewSettingsUnitRepository.GetAsync(input.UserViewId);
+            if (!UserViewSettings.IsDefault.Value && input.IsDefault.Value)
+            {
+                var res = await _userViewSettingsUnitRepository.FirstOrDefaultAsync(p => p.IsDefault == true && p.GridId==input.GridId && p.UserId==input.UserId);
+                if (!ReferenceEquals(res, null))
+                {
+                    res.IsDefault = false;
+                    await _userViewSettingsUnitManager.UpdateAsync(res);
+                    await CurrentUnitOfWork.SaveChangesAsync();
+                }
+            }
             Mapper.CreateMap<UpdateUserViewSettingsUnitInput, UserViewSettingsUnit>()
                           .ForMember(u => u.Id, ap => ap.MapFrom(src => src.UserViewId));
             Mapper.Map(input, UserViewSettings);
@@ -79,21 +102,17 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
 
-        public async Task<ListResultDto<UserViewSettingsUnitDto>> GetUserViewSettingsUnitsByUserId(GetUserViewSettingsUnitDto input)
+        public async Task<ListResultDto<UserViewSettingsUnitDto>> GetUserViewSettingsUnitsByUserId(SearchInputDto input)
         {
             _unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MustHaveTenant);
-            var userViewSettings = CreateUserViewSettingsQuery();
-            userViewSettings = userViewSettings.Where(u => u.UserId == input.UserId);
-           
-            if (input.GridId != 0)
-                userViewSettings = userViewSettings.Where(u => u.GridId == input.GridId);
+            var userViewSettings = CreateUserViewSettingsQuery(input);
             var results = await userViewSettings.ToListAsync();
             return new ListResultDto<UserViewSettingsUnitDto>(results);
         }
 
-        private IQueryable<UserViewSettingsUnitDto> CreateUserViewSettingsQuery()
+        private IQueryable<UserViewSettingsUnitDto> CreateUserViewSettingsQuery(SearchInputDto input)
         {
-            return (from settings in _userViewSettingsUnitRepository.GetAll()
+            IQueryable<UserViewSettingsUnitDto> query = (from settings in _userViewSettingsUnitRepository.GetAll()
                     join gridList in _gridListUnitRepository.GetAll()
                     on settings.GridId equals gridList.Id into gridsetting
                     from grdsettings in gridsetting.DefaultIfEmpty()
@@ -108,6 +127,15 @@ namespace CAPS.CORPACCOUNTING.Masters
                         Grid_Name = grdsettings.Name,
                         Grid_Description = grdsettings.Description
                     });
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+
+            return query;
         }
 
     }

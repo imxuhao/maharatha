@@ -373,7 +373,8 @@
     <text name="NewTenant">New tenant</text>
     <text name="ResizedProfilePicture_Warn_SizeLimit" value="Resized picture size must be smalled than 100KB. Please resize down and try again." />
     <text name="Export" value="Export" />
-  <text name="ExportToPDF" value="Export to pdf" />
+    <text name="ExportToPDF" value="Export to pdf" />
+    <text name="ExportToCSV" value="Export to CSV" />
   <text name="ClearFilter" value="Clear Filter" />
     <text name="QuickEdit" value="Quick Edit" />
     <text name="TTenancyCodeName" value="Enter tenant code name" />

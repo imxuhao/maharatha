@@ -1,13 +1,15 @@
 ﻿(function () {
     appModule.controller('common.views.layout.sidebar', [
-        '$scope',
-        function ($scope) {
+        '$scope', '$state',
+        function ($scope, $state) {
             var vm = this;
 
             vm.menu = abp.nav.menus.MainMenu;
 
             $scope.$on('$includeContentLoaded', function () {
-                Layout.initSidebar(); // init sidebar
+                setTimeout(function () {
+                    Layout.initSidebar($state); // init sidebar
+                }, 0);                
             });
         }
     ]);

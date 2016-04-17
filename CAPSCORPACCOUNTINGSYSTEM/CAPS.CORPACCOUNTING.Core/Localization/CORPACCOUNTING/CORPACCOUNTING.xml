@@ -447,5 +447,7 @@
     <text name="SearchTransactions" value="Search Transactions" />
     <text name="Contracts" value="Contracts" />
     <text name="ProjectCOAs" value="Project COAs" />
+    <text name="UploadSuccess" value="Successfully Uploaded" />
+    <text name="YourProfilePictureHasChangedSuccessfully" value="Your Profile Picture has changed successfully." />
   </texts>
 </localizationDictionary>

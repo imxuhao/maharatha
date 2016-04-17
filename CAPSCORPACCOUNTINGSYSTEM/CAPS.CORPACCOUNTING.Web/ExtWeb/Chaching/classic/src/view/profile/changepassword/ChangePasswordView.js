@@ -18,8 +18,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordView', {
     layout: 'fit',
     title: app.localize("Changepassword"),
     defaultFocus: 'tenancyName',
-    initComponent: function (config) {
-        debugger;
+    initComponent: function (config) {      
         var me = this,
             controller = me.getController();
         var form = Ext.create('Chaching.view.profile.changepassword.ChangePasswordForm', {

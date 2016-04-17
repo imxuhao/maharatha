@@ -40,8 +40,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', 
             Ext.Ajax.request({
                 url: abp.appPath + 'Account/SwitchToLinkedAccount',
                 jsonData: Ext.encode(model),
-                success: function (response) {
-                    debugger;
+                success: function (response) {                  
                     var res = Ext.decode(response.responseText);
                     if (res.success) {
                         document.location = res.targetUrl;

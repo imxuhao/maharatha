@@ -220,6 +220,32 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         var changepasswordAction = Ext.create('Chaching.view.profile.changepassword.ChangePasswordView');       
         changepasswordAction.show();
     },
+    mySettings: function (menu, item, e, eOpts) {
+        var changepasswordAction = Ext.create('Chaching.view.profile.settings.SettingsView');
+
+        Ext.Ajax.request({
+            url: abp.appPath + 'api/services/app/profile/GetCurrentUserProfileForEdit',
+            jsonData: {},
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    var form = changepasswordAction.down('form');
+                    form.getForm().setValues(res.result);
+                    changepasswordAction.show();
+                }
+            },
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+            }
+        });
+
+    },
+    changeProfilePicture: function (menu, item, e, eOpts) {
+        var changeProfilePicture = Ext.create('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureView');
+        changeProfilePicture.show();
+    },
     onAccountsHover: function (btn) {
         var me = this,
            view = me.getView();
@@ -259,7 +285,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                 }, {
                     text: abp.localization.localize("LoginAttempts"),
                     iconCls: 'icon-shield',
-                    name:'LoginAttempts',
+                    name: 'LoginAttempts',
                     leaf: true,
                     listeners: {
                         click: me.loginAttemptsClicked
@@ -274,11 +300,17 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                 }, {
                     text: abp.localization.localize("ChangeProfilePicture"),
                     iconCls: 'icon-user',
-                    name: 'ChangeProfilePicture'
+                    name: 'ChangeProfilePicture',
+                    listeners: {
+                        click: me.changeProfilePicture
+                    }
                 }, {
                     text: abp.localization.localize("MySettings"),
                     iconCls: 'icon-settings',
-                    name: 'MySettings'
+                    name: 'MySettings',
+                    listeners: {
+                        click: me.mySettings
+                    }
                 }, '-',
                 {
                     text: abp.localization.localize("Logout"),
@@ -303,7 +335,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         }
     },
-    loginAttemptsClicked:function(menu, item, e, eOpts) {
+    loginAttemptsClicked: function (menu, item, e, eOpts) {
         var loginAttemptView = Ext.create('Chaching.view.profile.loginAttempts.LoginAttemptView');
         var listStore = loginAttemptView.down('dataview').getStore();
         listStore.load();

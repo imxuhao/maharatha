@@ -1897,6 +1897,12 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesGridModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureFormModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureViewModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\linkedaccounts\LinkedAccountsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\linkedaccounts\LinkedAccountsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\linkedaccounts\LinkedAccountsFormModel.js" />
@@ -1917,6 +1923,12 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\loginAttempts\LoginAttemptListController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\loginAttempts\LoginAttemptView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\loginAttempts\LoginAttemptViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsFormModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsViewModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridModel.js" />
@@ -19365,6 +19377,7 @@
     <Folder Include="ExtWeb\packages\" />
     <Folder Include="libs\angular-ui-grid\plugins\" />
     <Folder Include="SignalR\" />
+    <Folder Include="Temp\Downloads\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CAPS.CORPACCOUNTING.Application\CAPS.CORPACCOUNTING.Application.csproj">

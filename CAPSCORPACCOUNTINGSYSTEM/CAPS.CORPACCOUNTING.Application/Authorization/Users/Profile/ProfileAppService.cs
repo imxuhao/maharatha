@@ -9,17 +9,18 @@ using Abp.Runtime.Session;
 using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto;
 using CAPS.CORPACCOUNTING.Storage;
+using System;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
 {
     [AbpAuthorize]
     public class ProfileAppService : CORPACCOUNTINGAppServiceBase, IProfileAppService
     {
-        private readonly IAppFolders _appFolders;
+        private readonly AppFolders _appFolders;
         private readonly IBinaryObjectManager _binaryObjectManager;
 
         public ProfileAppService(
-            IAppFolders appFolders,
+            AppFolders appFolders,
             IBinaryObjectManager binaryObjectManager)
         {
             _appFolders = appFolders;
@@ -46,9 +47,13 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
             CheckErrors(await UserManager.ChangePasswordAsync(user.Id, input.CurrentPassword, input.NewPassword));
         }
 
-        public async Task UpdateProfilePicture(UpdateProfilePictureInput input)
+        public async Task<byte[]> UpdateProfilePicture(UpdateProfilePictureInput input)
         {
-            var tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
+            string tempProfilePicturePath;
+            if (ReferenceEquals(_appFolders.TempFileDownloadFolder, null))
+                tempProfilePicturePath = input.TempFilePath;
+            else
+                tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
 
             byte[] byteArray;
 
@@ -87,6 +92,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
             user.ProfilePictureId = storedFile.Id;
 
             FileHelper.DeleteIfExists(tempProfilePicturePath);
+            return byteArray;
         }
     }
 }

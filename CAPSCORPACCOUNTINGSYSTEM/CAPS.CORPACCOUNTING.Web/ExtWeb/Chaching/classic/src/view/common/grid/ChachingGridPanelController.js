@@ -128,26 +128,28 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     }
                 });
             }
-            if (record.get(idPropertyField) > 0) {
-                operation = Ext.data.Operation({
-                    params: record.data,
-                    records: [record],
-                    callback: me.onOperationCompleteCallBack
-                });
-                gridStore.update(operation);
-            } else {
-                record.id = 0;
-                record.set('id', 0);
-                operation = Ext.data.Operation({
-                    params: record.data,
-                    controller: me,
-                    callback: me.onOperationCompleteCallBack
-                });
-                gridStore.create(record.data, operation);
+            if (me.doBeforeInlineAddUpdate(record)) {
+                if (record.get(idPropertyField) > 0) {
+                    operation = Ext.data.Operation({
+                        params: record.data,
+                        records: [record],
+                        callback: me.onOperationCompleteCallBack
+                    });
+                    gridStore.update(operation);
+                } else {
+                    record.id = 0;
+                    record.set('id', 0);
+                    operation = Ext.data.Operation({
+                        params: record.data,
+                        controller: me,
+                        callback: me.onOperationCompleteCallBack
+                    });
+                    gridStore.create(record.data, operation);
+                }
             }
-
         }
     },
+    doBeforeInlineAddUpdate:function(record) { return true; },
     doReloadGrid: function () {
         var me = this,
             view = me.getView(),
@@ -287,6 +289,16 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         if (gridStore.remoteSort)
             gridStore.load({ sortList: null, filters: null });
 
+    },
+    onManageViewClicked:function() {
+        var me = this,
+            view = me.getView();
+
+        var manageView = Ext.create('Chaching.view.manageView.ManageViewView', {
+            parentGrid: view,
+            title: app.localize("ManageUsersViewSetting") + ': ' + view.getTitle()
+        });
+        manageView.show();
     }
 
 });

@@ -304,6 +304,18 @@
         "modelNamespace": "Chaching.model",
         "name": "profile.loginAttempts.LoginAttemptModel"
       }
+    },
+    "app/model/manageView/ManageViewModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "manageView/ManageViewModel",
+        "modelNamespace": "Chaching.model",
+        "name": "manageView.ManageViewModel"
+      }
     }
   }
 }

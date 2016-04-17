@@ -115,5 +115,11 @@
             return moment(value).fromNow() + ' (' + moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormat) + ')';
         }
         return '';
-    }
+    },
+    rightWrongMarkRenderer: function (val, meta, record, rowIndex) {
+        if (val)
+            return '<i class="fa fa-check font-green"  style="color:#32c5d2" ></i>';
+        else
+            return '<i class="fa fa-close font-yellow-gold"  style="color:#E00353"></i>';
+    },
 });

@@ -28,10 +28,54 @@ Ext.define('Chaching.Application', {
         'languages.LanguageTextsStore',
         'profile.linkedaccounts.LinkedAccountsStore',
         'coa.ChartOfAccountStore',
-        'profile.loginAttempts.LoginAttemptStore'
+        'profile.loginAttempts.LoginAttemptStore',
+        'manageView.ManageViewStore'
       
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
+    launch: function () {
+        var me = this;
+        ///****Load usersDefaultView Settings
+        var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');
+        var storeProxy = defaultViewSettingStore.getProxy();
+        storeProxy.setExtraParam('userId', abp.session.userId);
+        storeProxy.setExtraParam('gridId', 0);
+        defaultViewSettingStore.load({
+            callback: function (records, operation, success) {
+                if (success && records && records.length > 0) {
+                    var usersDefaultGridViewSettings = [];
+                    var rec;
+                    Ext.each(records, function (record) {
+                        if (record.get('isDefault')) {
+                            rec = {
+                                gridId: record.get('gridId'),
+                                userViewId: record.get('userViewId'),
+                                viewSettingName: record.get('viewSettingName'),
+                                viewSettings: record.get('viewSettings'),
+                                isDefault: record.get('isDefault')
+                            }
+                            usersDefaultGridViewSettings.push(rec);
+                        }
+                    });
+                    Chaching.utilities.ChachingGlobals.usersDefaultGridViewSettings = usersDefaultGridViewSettings;
+
+                    if (me && window.location.hash && window.location.hash !== "#dashboard") {
+                        var mainView = me.getMainView();
+                        if (mainView) {
+                            var mainViewController = mainView.getController(),
+                                refs = mainViewController.getReferences(),
+                                mainCardPanel = refs.mainCardPanel,
+                                hasComponent = mainCardPanel.child('component[routeId=' + window.location.hash.replace('#', '') + ']');
+                            if (hasComponent&&typeof(hasComponent.applyGridViewSetting)==='function') {
+                                var cols = hasComponent.getColumns();
+                                hasComponent.applyGridViewSetting(cols, true);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    },
     onAppUpdate: function () {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
             function (choice) {

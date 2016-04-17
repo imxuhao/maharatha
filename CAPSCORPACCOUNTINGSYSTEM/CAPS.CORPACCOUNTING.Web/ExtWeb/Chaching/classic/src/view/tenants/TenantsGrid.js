@@ -15,6 +15,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     store: 'tenants.TenantsStore',
     name: 'Tenants',
     padding: 5,
+    gridId: 1,////*******Important to apply grid's userView setting
     headerButtonsConfig: [
     {
         xtype: 'displayfield',

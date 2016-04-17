@@ -13,5 +13,6 @@
     },
     defaultDateFormat: 'MM/DD/YYYY',
     defaultDateTimeFormat: 'MM/DD/YYYY hh:mm a',
-    defaultDateTimeSecFormat: 'MM/DD/YYYY hh:mm:ss a'
+    defaultDateTimeSecFormat: 'MM/DD/YYYY hh:mm:ss a',
+    usersDefaultGridViewSettings:null
 });

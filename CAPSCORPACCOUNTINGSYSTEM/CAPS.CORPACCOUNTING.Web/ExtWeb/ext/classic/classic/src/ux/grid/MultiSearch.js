@@ -535,7 +535,9 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             //}
 
             field = Ext.widget(cfg);
-
+            if (item.hidden) {
+                field.hidden = true;
+            }
             if (me.filterOnEnter) {
                 field.on('specialkey', me.onSpecialKey, me);
             }

@@ -8,10 +8,10 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsFormView', {
        // 'Chaching.view.linkedaccounts.LinkedAccountsFormViewModel'
     ],
 
-    controller: 'linkedaccounts-linkedaccountsformview',
-    viewModel: {
-        type: 'linkedaccounts-linkedaccountsformview'
-    },
+    //controller: 'linkedaccounts-linkedaccountsformview',
+    //viewModel: {
+    //    type: 'linkedaccounts-linkedaccountsformview'
+    //},
 
     height: 400,
     width: 450,

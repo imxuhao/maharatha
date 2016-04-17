@@ -107,6 +107,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         update: true,
         destroy:true
     },
+    manageViewSetting: true,
+    activeUserViewId:null,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -213,6 +215,23 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         }
 
         if (me.showPagingToolbar) {
+            var manageViewSettingsItem;
+            if (me.manageViewSetting) {
+                if (!me.gridId) {
+                    Ext.Error.raise('Please provide gridId');
+                }
+                manageViewSettingsItem = [
+                    {
+                        xtype: 'button',
+                        scale: 'small',
+                        text: app.localize('ManageUsersViewSetting'),
+                        iconCls: 'fa fa-gears',
+                        iconAlign: 'left',
+                        ui: 'actionButton',
+                        handler:'onManageViewClicked'
+                    }
+                ];
+            }
             var pagingToolBar = {
                 xtype: 'pagingtoolbar',
                 store: me.store,
@@ -221,7 +240,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 dock: 'bottom',
                 width: '100%',
                 tabIndex: -1,
-                ui: 'plainBottom'
+                ui: 'plainBottom',
+                items: manageViewSettingsItem
 
             };
             dockedItems.push(pagingToolBar);
@@ -242,7 +262,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                         }
                     }
                     plugins.push(editingModel);
-                    me.selModel = 'cellmodel';
+                    if (!me.selModelConfig)
+                        me.selModel = 'cellmodel';
                     break;
                 case "row":
                     editingModel = {
@@ -255,12 +276,16 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                         }
                     }
                     plugins.push(editingModel);
-                    me.selModel = 'rowmodel';
+                    if (!me.selModelConfig)
+                        me.selModel = 'rowmodel';
                     break;
                 default:
                     break;
             }
             me.editingModel = editingModel;
+        }
+        if (me.selModelConfig) {
+            me.selModel = me.selModelConfig;
         }
         me.plugins = plugins;
         me.features = features;
@@ -269,75 +294,50 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         }
         me.callParent(arguments);
     },
-    applyGridViewSetting:function(defaultSetting) {
+    applyGridViewSetting:function(defaultSetting,apply,settingsToApply) {
         var me = this,
             controller = me.getController();
+        var actCol = me.getActionMenuColumn();
         ///TODO change according to userViewSetting if any else continue with default columns
         var columns = [];
         //add actionColumn if required
-        if (me.requireActionColumn) {
-            var menuItems = [];
-            var defaultMenuItems = me.getDefaultActionColumnMenuItems();
-            var userMenuItems = me.actionColumnMenuItemsConfig;
+        if (me.requireActionColumn && actCol) {
+            columns.push(actCol);
+        }
 
-            if (defaultMenuItems && defaultMenuItems.length > 0) {
-                for (var k = 0; k < defaultMenuItems.length; k++) {
-                    menuItems.push(defaultMenuItems[k]);
-                }
-            }
+        ///Check for usersDefaultGridViewSetting
+        var usersDefaultGridViewSettings = undefined;
+        if (settingsToApply) {
+            usersDefaultGridViewSettings = settingsToApply;
+        } else
+            usersDefaultGridViewSettings = Chaching.utilities.ChachingGlobals.usersDefaultGridViewSettings;
 
-            if (userMenuItems && userMenuItems.length > 0) {
-                if (menuItems.length > 0) {
-                    menuItems.push('-');
-                }
-                for (var l = 0; l < userMenuItems.length; l++) {
-                    menuItems.push(userMenuItems[l]);
-                }
-            }
-            var actionCol = {
-                text: app.localize('Actions'),
-                width: 70,
-                hidden: false,
-                sortable: false,
-                name: 'ActionColumn',
-                hideable: false,
-                menuDisabled: true,
-                renderer: function (value, cell) {
-                    var id = Ext.id();
-                    var widgetRec = cell.record;
-                    var widgetCol = cell.column;
-                    Ext.Function.defer(function () {
-                        var button = Ext.create('Ext.button.Button', {
-                            ui: 'actionMenuButton',
-                            scale: 'small',
-                            height: 22,
-                            width: 50,
-                            //text: app.localize('Actions'),
-                            iconCls: 'icon-settings',
-                            iconAlign: 'left',
-                            widgetRec: widgetRec,
-                            widgetCol: widgetCol,
-                            menu: new Ext.menu.Menu({
-                                ui: 'accounts',
-                                items: menuItems
-                            }),
-                            listeners: {
-                                menushow: function (btn) {
-                                    btn.menu.widgetRecord = btn.widgetRec;
-                                    btn.menu.widgetColumn = btn.widgetCol;
-                                }
-                            }
-                        });
-                        if (Ext.get(id)) {
-                            button.render(Ext.get(id));
+        if (usersDefaultGridViewSettings && usersDefaultGridViewSettings.length > 0) {
+            var usersDefaultSettingForMe = me.getDefaultSettingForMe(usersDefaultGridViewSettings);
+            if (usersDefaultSettingForMe) {
+                if (apply) {
+                    //Fires when user apply selected view/when user reloads page with #tag
+                    var newInitialConfigs = [];
+                    for (var j = 0; j < defaultSetting.length; j++) {
+                        var configCol = defaultSetting[j];
+                        if (configCol && typeof(configCol.getInitialConfig) === 'function') {
+                            newInitialConfigs.push(configCol.initialConfig);
                         }
-                    }, 1);
-                    return '<div id="' + id + '"></div>';
-
+                    }
+                    var newColumns = [];
+                    if (me.requireActionColumn && actCol) {
+                        newColumns.push(actCol);
+                    }
+                    newColumns = me.applySettings(newInitialConfigs, Ext.decode(usersDefaultSettingForMe.viewSettings), newColumns);
+                    me.reconfigure(me.getStore(), newColumns);
+                    me.updateLayout();
+                    return;
+                } else {
+                    //fires when node/menuitem is clicked
+                    columns = me.applySettings(defaultSetting, Ext.decode(usersDefaultSettingForMe.viewSettings), columns);
+                    return columns;
                 }
             }
-            if (menuItems.length > 0)
-                columns.push(actionCol);
         }
         //add columns to columns array
         for (var i = 0; i < defaultSetting.length; i++) {
@@ -345,6 +345,113 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             columns.push(col);
         }
         return columns;
+    },
+    getActionMenuColumn: function () {
+        var me = this, controller = me.getController();
+        var menuItems = [];
+        var defaultMenuItems = me.getDefaultActionColumnMenuItems();
+        var userMenuItems = me.actionColumnMenuItemsConfig;
+
+        if (defaultMenuItems && defaultMenuItems.length > 0) {
+            for (var k = 0; k < defaultMenuItems.length; k++) {
+                menuItems.push(defaultMenuItems[k]);
+            }
+        }
+
+        if (userMenuItems && userMenuItems.length > 0) {
+            if (menuItems.length > 0) {
+                menuItems.push('-');
+            }
+            for (var l = 0; l < userMenuItems.length; l++) {
+                menuItems.push(userMenuItems[l]);
+            }
+        }
+        var actionCol = {
+            text: app.localize('Actions'),
+            width: 70,
+            hidden: false,
+            sortable: false,
+            name: 'ActionColumn',
+            hideable: false,
+            menuDisabled: true,
+            renderer: function (value, cell) {
+                var id = Ext.id();
+                var widgetRec = cell.record;
+                var widgetCol = cell.column;
+                Ext.Function.defer(function () {
+                    var button = Ext.create('Ext.button.Button', {
+                        ui: 'actionMenuButton',
+                        scale: 'small',
+                        height: 22,
+                        width: 50,
+                        //text: app.localize('Actions'),
+                        iconCls: 'icon-settings',
+                        iconAlign: 'left',
+                        widgetRec: widgetRec,
+                        widgetCol: widgetCol,
+                        menu: new Ext.menu.Menu({
+                            ui: 'accounts',
+                            items: menuItems
+                        }),
+                        listeners: {
+                            menushow: function (btn) {
+                                btn.menu.widgetRecord = btn.widgetRec;
+                                btn.menu.widgetColumn = btn.widgetCol;
+                            }
+                        }
+                    });
+                    if (Ext.get(id)) {
+                        button.render(Ext.get(id));
+                    }
+                }, 1);
+                return '<div id="' + id + '"></div>';
+
+            }
+        }
+        if (menuItems.length > 0)
+            return actionCol;
+    },
+    applySettings: function (definedColumns, usersDefaultSetting, outValue) {
+        var me = this,
+            myStore = me.getStore();
+        var defaultSettingColumns = usersDefaultSetting.column;
+        //loop setting object to get in order
+        for (var i = 0; i < defaultSettingColumns.length; i++) {
+            var settingCol = defaultSettingColumns[i];
+            for (var j = 0; j < definedColumns.length; j++) {
+                var definedCol = definedColumns[j];
+                if (settingCol.dataIndex===definedCol.dataIndex) {
+                    definedCol.width = settingCol.width;
+                    definedCol.hidden = settingCol.hidden;
+                    outValue.push(definedCol);
+                    break;
+                }
+            }
+        }
+        var groupInfo = usersDefaultSetting.groupInfo;
+        if (typeof (myStore) === 'string') {
+            myStore = Ext.getStore(myStore);
+        }
+        if (groupInfo && groupInfo.isGrouped) {
+            myStore.group(groupInfo.groupField, groupInfo.groupDir);
+        } else if (myStore.isGrouped()) {
+            myStore.group(null);
+        }
+        return outValue;
+    },
+    getDefaultSettingForMe: function (usersDefaultGridViewSettings) {
+        var me = this,
+            returnVal = undefined,
+            gridId = me.gridId;
+        for (var i = 0; i < usersDefaultGridViewSettings.length; i++) {
+            var defaultSetting = usersDefaultGridViewSettings[i];
+            if (defaultSetting.gridId === gridId) {
+                returnVal = defaultSetting;
+                me.activeUserViewId = defaultSetting.userViewId;
+                break;
+            }
+        }
+        return returnVal;
     },
     getDefaultActionColumnMenuItems: function () {
         var me = this, controller = me.getController();

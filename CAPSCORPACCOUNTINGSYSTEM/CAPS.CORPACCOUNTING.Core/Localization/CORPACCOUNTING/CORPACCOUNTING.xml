@@ -403,6 +403,14 @@
     <text name="IsApproved" value="IsApproved" />
     <text name="Description" value="Description" />
     <text name="Caption" value="Caption" />
+  <text name="ManageUsersViewSetting" value="Manage views" />
+  <text name="ManageUsersViewSettingHeaderInfo" value="Manage your views" />
+  <text name="ManageUsersViewSettingCreateNew" value="Create new view" />
+  <text name="GridName" value="Grid name" />
+  <text name="SettingName" value="Setting name" />
+     <text name="CurrentView" value="Current view" />
+  <text name="TSettingName" value="Search by setting name" />
+   <text name="TGridName" value="Search by grid name" />
 
     <text name="SubAccounts" value="Sub Accounts" />
     <text name="Divisions" value="Divisions" />

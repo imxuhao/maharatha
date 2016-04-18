@@ -16,6 +16,7 @@ Ext.define('Chaching.view.roles.RolesGrid', {
     store: 'roles.RolesStore',
     name: 'Administration.Roles',
     padding: 5,
+    gridId:6,
     headerButtonsConfig: [
     {
         xtype: 'displayfield',

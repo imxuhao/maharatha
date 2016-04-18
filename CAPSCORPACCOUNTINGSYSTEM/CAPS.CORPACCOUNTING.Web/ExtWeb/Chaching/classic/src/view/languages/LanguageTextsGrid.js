@@ -16,6 +16,7 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
     store: 'languages.LanguageTextsStore',
     name: 'LanguageTexts',
     padding: 5,
+    gridId:4,
     headerButtonsConfig: [
     {
         xtype: 'displayfield',

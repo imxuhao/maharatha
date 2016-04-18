@@ -16,6 +16,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
     store: 'users.UsersStore',
     name: 'Administration.Users',
     padding: 5,
+    gridId:7,
     headerButtonsConfig: [
     {
         xtype: 'displayfield',

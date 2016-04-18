@@ -86,9 +86,9 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string PayablesYEProcesses1099s = "Payables.YEProcesses.1099s";
                 #endregion
 
-                #region
+                #region PurchaseOrders
                 public const string PurchaseOrders = "PurchaseOrders";
-                public const string PurchaseOrdersEntry = "Payables.Entry";
+                public const string PurchaseOrdersEntry = "PurchaseOrders.Entry";
                 #endregion
 
                 #region Purchasing Tab

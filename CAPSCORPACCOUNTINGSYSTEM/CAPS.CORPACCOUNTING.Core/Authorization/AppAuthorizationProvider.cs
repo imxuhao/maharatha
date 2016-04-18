@@ -173,12 +173,11 @@ namespace CAPS.CORPACCOUNTING.Authorization
             contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Edit, L("Edit"));
             contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Delete, L("Delete"));
             #endregion
-
-
+            
             #region Receivables Tab
             var receivables = pages.CreateChildPermission(AppPermissions.Pages_Receivables, L("Receivables"));
             var customers = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Customers, L("Customers"));
-            var history = customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History , L("History"));
+            var history = customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History, L("History"));
             history.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History_Create, L("Create"));
             history.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History_Edit, L("Edit"));
             history.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History_Delete, L("Delete"));
@@ -215,7 +214,7 @@ namespace CAPS.CORPACCOUNTING.Authorization
             territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Create, L("Create"));
             territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Edit, L("Edit"));
             territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Delete, L("Delete"));
-           
+
             var paymentTerms = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms, L("PaymentTerms"));
             paymentTerms.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms_Create, L("Create"));
             paymentTerms.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms_Edit, L("Edit"));

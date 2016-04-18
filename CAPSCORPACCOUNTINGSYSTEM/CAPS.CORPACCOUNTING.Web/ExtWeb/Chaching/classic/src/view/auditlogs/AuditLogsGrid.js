@@ -15,6 +15,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
     store: 'auditlogs.AuditLogsStore',
     name: 'Administration.AuditLogs',
     padding: 5,
+    gridId: 5,
     headerButtonsConfig: [
       {
           xtype: 'displayfield',

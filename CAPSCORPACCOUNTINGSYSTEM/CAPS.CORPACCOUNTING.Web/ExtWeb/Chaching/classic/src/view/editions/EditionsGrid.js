@@ -16,6 +16,7 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
     store: 'editions.EditionsStore',
     name: 'Editions',
     padding: 5,
+    gridId:2,
     headerButtonsConfig: [
     {
         xtype: 'displayfield',

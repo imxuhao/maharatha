@@ -15,7 +15,15 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         {
             InitialGridList = new List<GridListUnit>
             {
-                new GridListUnit(gridid:1,name:"Tenants",description:"Tenants Information Showing in Grid",isactive:true)
+                new GridListUnit(gridid:1,name:"Tenants",description:"Tenants Information Showing in Grid",isactive:true),
+                new GridListUnit(gridid:2,name:"Editions",description:"Editions Information Showing in Grid",isactive:true),
+                new GridListUnit(gridid:3,name:"Languages",description:"Languages Information Showing in Grid",isactive:true),
+                 new GridListUnit(gridid:4,name:"LanguageTexts",description:"LanguageTexts Information Showing in Grid",isactive:true),
+                new GridListUnit(gridid:5,name:"AuditLogs",description:"AuditLogs Information Showing in Grid",isactive:true),
+                new GridListUnit(gridid:6,name:"Roles",description:"Roles Information Showing in Grid",isactive:true),
+                new GridListUnit(gridid:7,name:"Users",description:"Users Information Showing in Grid",isactive:true),
+                 new GridListUnit(gridid:8,name:"LinkedAccounts",description:"LinkedAccounts Information Showing in Grid",isactive:true),
+                  new GridListUnit(gridid:9,name:"ChartOfAccounts",description:"Chart Of Accounts Information Showing in Grid",isactive:true),
             };
         }
 

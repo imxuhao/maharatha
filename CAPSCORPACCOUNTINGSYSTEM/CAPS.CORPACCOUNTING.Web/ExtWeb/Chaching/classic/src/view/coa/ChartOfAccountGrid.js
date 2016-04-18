@@ -15,6 +15,7 @@ Ext.define('Chaching.view.coa.ChartOfAccountGrid', {
     store: 'coa.ChartOfAccountStore',
     name: 'Financials.Accounts.ChartOfAccounts',
     padding: 5,
+    gridId: 9,
     headerButtonsConfig: [
       {
           xtype: 'displayfield',
@@ -102,9 +103,10 @@ Ext.define('Chaching.view.coa.ChartOfAccountGrid', {
                        fields: [{ name: 'text' }, { name: 'value' }],
                        data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
                    }
-               }, editor: {
-                   xtype: 'checkbox'
                }
+               //, editor: {
+               //    xtype: 'checkbox'
+               //}
            }
           ,
            {
@@ -127,9 +129,10 @@ Ext.define('Chaching.view.coa.ChartOfAccountGrid', {
                        fields: [{ name: 'text' }, { name: 'value' }],
                        data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
                    }
-               }, editor: {
-                   xtype: 'checkbox'
                }
+               //, editor: {
+               //    xtype: 'checkbox'
+               //}
            }
         , {
             xtype: 'gridcolumn',

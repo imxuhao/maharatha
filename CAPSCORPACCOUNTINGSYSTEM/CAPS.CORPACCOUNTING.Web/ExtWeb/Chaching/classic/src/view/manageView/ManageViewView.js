@@ -18,12 +18,30 @@ Ext.define('Chaching.view.manageView.ManageViewView',{
             controller = me.getController();
         var form = Ext.create('Chaching.view.manageView.ManageViewList', {
             height: '100%',
-            width: '100%',
-            name: 'Tenants'
+            width: '100%'
         });
         var gridStore = form.getStore();
-        gridStore.getProxy().setExtraParam('userId', Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId);
-        gridStore.getProxy().setExtraParam('gridId', me.parentGrid.gridId);
+        var filters = [];
+        var filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: me.parentGrid.gridId,
+            comparator: 2,
+            dataType: 0,
+            property: 'gridId',
+            value: me.parentGrid.gridId
+        });
+        filters.push(filter);
+        filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId,
+            comparator: 2,
+            dataType: 0,
+            property: 'userId',
+            value: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId
+        });
+        filters.push(filter);
+        gridStore.clearFilter();
+        gridStore.filters.add(filters);
         form.getStore().load({
             callback: function(records, operation, success) {
                 var activeUserViewId = me.parentGrid.activeUserViewId;

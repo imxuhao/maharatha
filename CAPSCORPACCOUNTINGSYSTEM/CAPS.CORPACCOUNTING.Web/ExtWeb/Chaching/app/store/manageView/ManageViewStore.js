@@ -7,10 +7,6 @@
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-        extraParams: {
-            userId: 0,
-            gridId: 0
-        },
         api: {
             read: abp.appPath + 'api/services/app/userViewSettingsUnit/GetUserViewSettingsUnitsByUserId',
             create: abp.appPath + '/api/services/app/userViewSettingsUnit/CreateUserViewSettingsUnit',

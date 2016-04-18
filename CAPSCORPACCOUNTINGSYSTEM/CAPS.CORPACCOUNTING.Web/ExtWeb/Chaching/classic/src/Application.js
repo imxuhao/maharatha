@@ -37,9 +37,26 @@ Ext.define('Chaching.Application', {
         var me = this;
         ///****Load usersDefaultView Settings
         var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');
-        var storeProxy = defaultViewSettingStore.getProxy();
-        storeProxy.setExtraParam('userId', abp.session.userId);
-        storeProxy.setExtraParam('gridId', 0);
+        var filters = [];
+        var filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: true,
+            comparator: 1,
+            dataType: 3,
+            property: 'isDefault',
+            value: true
+        });
+        filters.push(filter);
+        filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId,
+            comparator: 2,
+            dataType: 0,
+            property: 'userId',
+            value: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId
+        });
+        filters.push(filter);
+        defaultViewSettingStore.filter(filters);
         defaultViewSettingStore.load({
             callback: function (records, operation, success) {
                 if (success && records && records.length > 0) {

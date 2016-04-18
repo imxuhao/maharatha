@@ -9,7 +9,13 @@ Ext.define('Chaching.view.manageView.ManageViewList',{
     controller: 'manageview-manageviewlist',
     xtype: 'host.manageUserViews',
     store: 'manageView.ManageViewStore',
-    name: 'Tenants',
+    name:'ManageView',
+    modulePermissions: {
+        read: true,
+        create: true,
+        edit: true,
+        destroy: true
+    },
     padding: 5,
     gridId: null,////*******Important to apply grid's userView setting
     requireActionColumn:true,

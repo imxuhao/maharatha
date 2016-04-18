@@ -6,10 +6,10 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
 {
     public class NumericSearch : AbstractSearch
     {
-        public int? SearchTerm { get; set; }
-        public int? SearchTerm2 { get; set; }
+        public long? SearchTerm { get; set; }
+        public long? SearchTerm2 { get; set; }
         public string SearchTerms { get; set; }
-        
+
         public NumericComparators Comparator { get; set; }
 
         //protected override Expression BuildExpression(MemberExpression property)
@@ -27,14 +27,14 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
         {
             Expression searchExpression1 = null;
             Expression searchExpression2 = null;
-            if (!string.IsNullOrEmpty(SearchTerms) && this.Comparator== NumericComparators.In)
+            if (!string.IsNullOrEmpty(SearchTerms) && this.Comparator == NumericComparators.In)
             {
                 Expression combinedExpression = null;
 
                 foreach (string val in SearchTerms.Split(','))
                 {
-                   // this.Comparator = NumericComparators.In;
-                    this.SearchTerm = Convert.ToInt32(val);
+                    // this.Comparator = NumericComparators.In;
+                    this.SearchTerm = Convert.ToInt64(val);
                     searchExpression1 = this.GetFilterExpression(property);
                     if (!ReferenceEquals(searchExpression1, null) && !ReferenceEquals(searchExpression2, null))
                     {
@@ -50,7 +50,7 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
             if (this.SearchTerm.HasValue)
             {
                 searchExpression1 = this.GetFilterExpression(property);
-            }            
+            }
 
             if (this.Comparator == NumericComparators.InRange && this.SearchTerm2.HasValue)
             {
@@ -77,22 +77,36 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
         }
         private Expression GetFilterExpression(MemberExpression property)
         {
+            Expression rightExp = null;
+            switch (property.Type.Name)
+            {
+                case "Int32":
+                    rightExp = Expression.Constant(Convert.ToInt32(this.SearchTerm.Value), typeof(Int32));
+                    break;
+                case "Int16":
+                    rightExp = Expression.Constant(Convert.ToInt16(this.SearchTerm.Value), typeof(Int16));
+                    break;
+                default:
+                    rightExp = Expression.Constant(this.SearchTerm.Value);
+                    break;
+            }
+
             switch (this.Comparator)
             {
                 case NumericComparators.Less:
-                    return Expression.LessThan(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.LessThan(property, rightExp);
                 case NumericComparators.LessOrEqual:
-                    return Expression.LessThanOrEqual(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.LessThanOrEqual(property, rightExp);
                 case NumericComparators.Equal:
-                    return Expression.Equal(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.Equal(property, rightExp);
                 case NumericComparators.GreaterOrEqual:
-                    return Expression.GreaterThanOrEqual(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.GreaterThanOrEqual(property, rightExp);
                 case NumericComparators.Greater:
-                    return Expression.GreaterThan(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.GreaterThan(property, rightExp);
                 case NumericComparators.InRange:
-                    return Expression.GreaterThanOrEqual(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.GreaterThanOrEqual(property, rightExp);
                 case NumericComparators.In:
-                    return Expression.Equal(property, Expression.Constant(this.SearchTerm.Value));
+                    return Expression.Equal(property, rightExp);
                 default:
                     throw new InvalidOperationException("Comparator not supported.");
             }

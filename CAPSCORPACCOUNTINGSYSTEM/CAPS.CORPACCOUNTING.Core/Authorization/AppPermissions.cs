@@ -210,19 +210,8 @@
 
         public const string Pages_Receivables_Inquiry = "pages.Receivables.Inquiry";
         public const string Pages_Receivables_Inquiry_ARInvoiceInquiry = "pages.Receivables.Inquiry.ARInvoiceInquiry";
-        public const string Pages_Receivables_Inquiry_ARInvoiceInquiry_Create = "pages.Receivables.Inquiry.ARInvoiceInquiry.Create";
-        public const string Pages_Receivables_Inquiry_ARInvoiceInquiry_Edit = "pages.Receivables.Inquiry.ARInvoiceInquiry.Edit";
-        public const string Pages_Receivables_Inquiry_ARInvoiceInquiry_Delete = "pages.Receivables.Inquiry.ARInvoiceInquiry.Delete";
-
         public const string Pages_Receivables_Inquiry_CustomerSummary = "pages.Receivables.Inquiry.CustomerSummary";
-        public const string Pages_Receivables_Inquiry_CustomerSummary_Create = "pages.Receivables.Inquiry.CustomerSummary.Create";
-        public const string Pages_Receivables_Inquiry_CustomerSummary_Edit = "pages.Receivables.Inquiry.CustomerSummary.Edit";
-        public const string Pages_Receivables_Inquiry_CustomerSummary_Delete = "pages.Receivables.Inquiry.CustomerSummary.Delete";
-
         public const string Pages_Receivables_Inquiry_InvoiceDetail = "pages.Receivables.Inquiry.InvoiceDetail";
-        public const string Pages_Receivables_Inquiry_InvoiceDetail_Create = "pages.Receivables.Inquiry.InvoiceDetail.Create";
-        public const string Pages_Receivables_Inquiry_InvoiceDetail_Edit = "pages.Receivables.Inquiry.InvoiceDetail.Edit";
-        public const string Pages_Receivables_Inquiry_InvoiceDetail_Delete = "pages.Receivables.Inquiry.InvoiceDetail.Delete";
 
         public const string Pages_Receivables_Preferences = "pages.Receivables.Preferences";
         public const string Pages_Receivables_Preferences_BillingTypes = "pages.Receivables.Preferences.BillingTypes";
@@ -252,165 +241,70 @@
         #region Payables Tab
 
         public const string Pages_Payables = "pages.Payables";
-
         public const string Pages_Payables_Vendors = "pages.Payables.Vendors";
-
         public const string Pages_Payables_Invoices = "pages.Payables.Invoices";
         public const string Pages_Payables_Invoices_Batch = "pages.Payables.Invoices.Batch";
-        public const string Pages_Payables_Invoices_Batch_Create = "pages.Payables.Invoices.Batch.Create";
-        public const string Pages_Payables_Invoices_Batch_Edit = "pages.Payables.Invoices.Batch.Edit";
-        public const string Pages_Payables_Invoices_Batch_Delete = "pages.Payables.Invoices.Batch.Delete";
-
         public const string Pages_Payables_Inquiry = "pages.Payables.Inquiry";
         public const string Pages_Payables_Inquiry_APInvoiceInquiry = "pages.Payables.Inquiry.APInvoiceInquiry";
-        public const string Pages_Payables_Inquiry_APInvoiceInquiry_Create = "pages.Payables.Inquiry.APInvoiceInquiry.Create";
-        public const string Pages_Payables_Inquiry_APInvoiceInquiry_Edit = "pages.Payables.Inquiry.APInvoiceInquiry.Edit";
-        public const string Pages_Payables_Inquiry_APInvoiceInquiry_Delete = "pages.Payables.Inquiry.APInvoiceInquiry.Delete";
-
         public const string Pages_Payables_Inquiry_PaymentHistory = "pages.Payables.Inquiry.PaymentHistory";
-        public const string Pages_Payables_Inquiry_PaymentHistory_Create = "pages.Payables.Inquiry.PaymentHistory.Create";
-        public const string Pages_Payables_Inquiry_PaymentHistory_Edit = "pages.Payables.Inquiry.PaymentHistory.Edit";
-        public const string Pages_Payables_Inquiry_PaymentHistory_Delete = "pages.Payables.Inquiry.PaymentHistory.Delete";
-
         public const string Pages_Payables_Inquiry_VendorSummary = "pages.Payables.Inquiry.VendorSummary";
-        public const string Pages_Payables_Inquiry_VendorSummary_Create = "pages.Payables.Inquiry.VendorSummary.Create";
-        public const string Pages_Payables_Inquiry_VendorSummary_Edit = "pages.Payables.Inquiry.VendorSummary.Edit";
-        public const string Pages_Payables_Inquiry_VendorSummary_Delete = "pages.Payables.Inquiry.VendorSummary.Delete";
-
         public const string Pages_Payables_Inquiry_InvoiceDetail = "pages.Payables.Inquiry.InvoiceDetail";
-        public const string Pages_Payables_Inquiry_InvoiceDetail_Create = "pages.Payables.Inquiry.InvoiceDetail.Create";
-        public const string Pages_Payables_Inquiry_InvoiceDetail_Edit = "pages.Payables.Inquiry.InvoiceDetail.Edit";
-        public const string Pages_Payables_Inquiry_InvoiceDetail_Delete = "pages.Payables.Inquiry.InvoiceDetail.Delete";
-
         public const string Pages_Payables_Preferences = "pages.Payables.Preferences";
         public const string Pages_Payables_Preferences_1099T4Codes = "pages.Payables.Preferences.1099T4Codes";
-        public const string Pages_Payables_Preferences_1099T4Codes_Create = "pages.Payables.Preferences.1099T4Codes.Create";
-        public const string Pages_Payables_Preferences_1099T4Codes_Edit = "pages.Payables.Preferences.1099T4Codes.Edit";
-        public const string Pages_Payables_Preferences_1099T4Codes_Delete = "pages.Payables.Preferences.1099T4Codes.Delete";
-
         public const string Pages_Payables_Preferences_VendorPaymentTerms = "pages.Payables.Preferences.VendorPaymentTerms";
         public const string Pages_Payables_Preferences_VendorPaymentTerms_Create = "pages.Payables.Preferences.VendorPaymentTerms.Create";
         public const string Pages_Payables_Preferences_VendorPaymentTerms_Edit = "pages.Payables.Preferences.VendorPaymentTerms.Edit";
         public const string Pages_Payables_Preferences_VendorPaymentTerms_Delete = "pages.Payables.Preferences.VendorPaymentTerms.Delete";
-
         public const string Pages_Payables_YEProcesses = "pages.Payables.YEProcesses";
         public const string Pages_Payables_YEProcesses_1099s = "pages.Payables.YEProcesses.1099s";
-        public const string Pages_Payables_YEProcesses_1099s_Create = "pages.Payables.YEProcesses.1099s.Create";
-        public const string Pages_Payables_YEProcesses_1099s_Edit = "pages.Payables.YEProcesses.1099s.Edit";
-        public const string Pages_Payables_YEProcesses_1099s_Delete = "pages.Payables.YEProcesses.1099s.Delete";
 
         #endregion
 
         #region Purchase Orders Tab
         public const string Pages_PurchaseOrders = "pages.PurchaseOrders";
-
-        public const string Pages_PurchaseOrders_Entry = "pages.Payables.Entry";
-
+        public const string Pages_PurchaseOrders_Entry = "pages.PurchaseOrders.Entry";
         #endregion
         
         #region Purchasing Tab
         public const string Pages_Purchasing = "pages.Purchasing";
         public const string Pages_Purchasing_Inquiry = "pages.Purchasing.Inquiry";
-
         public const string Pages_Purchasing_Inquiry_PurchaseOrderHistory = "pages.Purchasing.Inquiry.PurchaseOrderHistory";
-        public const string Pages_Purchasing_Inquiry_PurchaseOrderHistory_Create = "pages.Purchasing.Inquiry.PurchaseOrderHistory.Create";
-        public const string Pages_Purchasing_Inquiry_PurchaseOrderHistory_Edit = "pages.Purchasing.Inquiry.PurchaseOrderHistory.Edit";
-        public const string Pages_Purchasing_Inquiry_PurchaseOrderHistory_Delete = "pages.Purchasing.Inquiry.PurchaseOrderHistory.Delete";
-
         public const string Pages_Purchasing_Inquiry_SearchPurchaseOrders = "pages.Purchasing.Inquiry.SearchPurchaseOrders";
-        public const string Pages_Purchasing_Inquiry_SearchPurchaseOrders_Create = "pages.Purchasing.Inquiry.SearchPurchaseOrders.Create";
-        public const string Pages_Purchasing_Inquiry_SearchPurchaseOrders_Edit = "pages.Purchasing.Inquiry.SearchPurchaseOrders.Edit";
-        public const string Pages_Purchasing_Inquiry_SearchPurchaseOrders_Delete = "pages.Purchasing.Inquiry.SearchPurchaseOrders.Delete";
-
         public const string Pages_Purchasing_Inquiry_POAgingGrid = "pages.Purchasing.Inquiry.POAgingGrid";
-        public const string Pages_Purchasing_Inquiry_POAgingGrid_Create = "pages.Purchasing.Inquiry.POAgingGrid.Create";
-        public const string Pages_Purchasing_Inquiry_POAgingGrid_Edit = "pages.Purchasing.Inquiry.POAgingGrid.Edit";
-        public const string Pages_Purchasing_Inquiry_POAgingGrid_Delete = "pages.Purchasing.Inquiry.POAgingGrid.Delete";
+        
         #endregion
 
         #region Petty Cash Tab
-
         public const string Pages_PettyCash = "pages.PettyCash";
         public const string Pages_PettyCash_PCVendors = "pages.PettyCash.PCVendors";
         public const string Pages_PettyCash_Entry = "pages.PettyCash.Entry";
-
         public const string Pages_PettyCash_PCVendors_History = "pages.PettyCash.PCVendors.History";
-        public const string Pages_PettyCash_PCVendors_History_Create = "pages.PettyCash.PCVendors.History.Create";
-        public const string Pages_PettyCash_PCVendors_History_Edit = "pages.PettyCash.PCVendors.History.Edit";
-        public const string Pages_PettyCash_PCVendors_History_Delete = "pages.PettyCash.PCVendors.History.Delete";
-
         public const string Pages_PettyCash_Inquiry = "pages.PettyCash.Inquiry";
         public const string Pages_PettyCash_Inquiry_PCAccountSummary = "pages.PettyCash.Inquiry.PCAccountSummary";
-        public const string Pages_PettyCash_Inquiry_PCAccountSummary_Create = "pages.PettyCash.Inquiry.PCAccountSummary.Create";
-        public const string Pages_PettyCash_Inquiry_PCAccountSummary_Edit = "pages.PettyCash.Inquiry.PCAccountSummary.Edit";
-        public const string Pages_PettyCash_Inquiry_PCAccountSummary_Delete = "pages.PettyCash.Inquiry.PCAccountSummary.Delete";
-
         public const string Pages_PettyCash_Inquiry_PCAdvancedSearch = "pages.PettyCash.Inquiry.PCAdvancedSearch";
-        public const string Pages_PettyCash_Inquiry_PCAdvancedSearch_Create = "pages.PettyCash.Inquiry.PCAdvancedSearch.Create";
-        public const string Pages_PettyCash_Inquiry_PCAdvancedSearch_Edit = "pages.PettyCash.Inquiry.PCAdvancedSearch.Edit";
-        public const string Pages_PettyCash_Inquiry_PCAdvancedSearch_Delete = "pages.PettyCash.Inquiry.PCAdvancedSearch.Delete";
-
         #endregion
 
         #region Credit Card Tab
         public const string Pages_CreditCard = "pages.CreditCard";
         public const string Pages_CreditCard_Entry = "pages.CreditCard.Entry";
-
         public const string Pages_CreditCard_Inquiry = "pages.CreditCard.Inquiry";
         public const string Pages_CreditCard_Inquiry_CreditCardHistory = "pages.CreditCard.Inquiry.CreditCardHistory";
-        public const string Pages_CreditCard_Inquiry_CreditCardHistory_Create = "pages.CreditCard.Inquiry.CreditCardHistory.Create";
-        public const string Pages_CreditCard_Inquiry_CreditCardHistory_Edit = "pages.CreditCard.Inquiry.CreditCardHistory.Edit";
-        public const string Pages_CreditCard_Inquiry_CreditCardHistory_Delete = "pages.CreditCard.Inquiry.CreditCardHistory.Delete";
-
         public const string Pages_CreditCard_Inquiry_CreditCardUploadInfo = "pages.CreditCard.Inquiry.CreditCardUploadInfo";
-        public const string Pages_CreditCard_Inquiry_CreditCardUploadInfo_Create = "pages.CreditCard.Inquiry.CreditCardUploadInfo.Create";
-        public const string Pages_CreditCard_Inquiry_CreditCardUploadInfo_Edit = "pages.CreditCard.Inquiry.CreditCardUploadInfo.Edit";
-        public const string Pages_CreditCard_Inquiry_CreditCardUploadInfo_Delete = "pages.CreditCard.Inquiry.CreditCardUploadInfo.Delete";
-
         public const string Pages_CreditCard_Preferences = "pages.CreditCard.Preferences";
         public const string Pages_CreditCard_Preferences_CreditCardCompanies = "pages.CreditCard.Preferences.CreditCardCompanies";
-        public const string Pages_CreditCard_Preferences_CreditCardCompanies_Create = "pages.CreditCard.Preferences.CreditCardCompanies.Create";
-        public const string Pages_CreditCard_Preferences_CreditCardCompanies_Edit = "pages.CreditCard.Preferences.CreditCardCompanies.Edit";
-        public const string Pages_CreditCard_Preferences_CreditCardCompanies_Delete = "pages.CreditCard.Preferences.CreditCardCompanies.Delete";
-
         #endregion
 
         #region Payroll Tab
         public const string Pages_Payroll = "pages.Payroll";
         public const string Pages_Payroll_Entry = "pages.Payroll.Entry";
-
         public const string Pages_Payroll_Inquiry = "pages.Payroll.Inquiry";
         public const string Pages_Payroll_Inquiry_PayrollHistory = "pages.Payroll.Inquiry.PayrollHistory ";
-        public const string Pages_Payroll_Inquiry_PayrollHistory_Create = "pages.Payroll.Inquiry.PayrollHistory.Create";
-        public const string Pages_Payroll_Inquiry_PayrollHistory_Edit = "pages.Payroll.Inquiry.PayrollHistory.Edit";
-        public const string Pages_Payroll_Inquiry_PayrollHistory_Delete = "pages.Payroll.Inquiry.PayrollHistory.Delete";
-
         public const string Pages_Payroll_Inquiry_PayrollUploadInfo = "pages.Payroll.Inquiry.PayrollUploadInfo";
-        public const string Pages_Payroll_Inquiry_PayrollUploadInfo_Create = "pages.Payroll.Inquiry.PayrollUploadInfo.Create";
-        public const string Pages_Payroll_Inquiry_PayrollUploadInfo_Edit = "pages.Payroll.Inquiry.PayrollUploadInfo.Edit";
-        public const string Pages_Payroll_Inquiry_PayrollUploadInfo_Delete = "pages.Payroll.Inquiry.PayrollUploadInfo.Delete";
-
         public const string Pages_Payroll_Inquiry_PayrollLog = "pages.Payroll.Inquiry.PayrollLog";
-        public const string Pages_Payroll_Inquiry_PayrollLog_Create = "pages.Payroll.Inquiry.PayrollLog.Create";
-        public const string Pages_Payroll_Inquiry_PayrollLog_Edit = "pages.Payroll.Inquiry.PayrollLog.Edit";
-        public const string Pages_Payroll_Inquiry_PayrollLog_Delete = "pages.Payroll.Inquiry.PayrollLog.Delete";
-
         public const string Pages_Payroll_Preferences = "pages.Payroll.Preferences";
         public const string Pages_Payroll_Preferences_PayrollCompanies = "pages.Payroll.Preferences.PayrollCompanies";
-        public const string Pages_Payroll_Preferences_PayrollCompanies_Create = "pages.Payroll.Preferences.PayrollCompanies.Create";
-        public const string Pages_Payroll_Preferences_PayrollCompanies_Edit = "pages.Payroll.Preferences.PayrollCompanies.Edit";
-        public const string Pages_Payroll_Preferences_PayrollCompanies_Delete = "pages.Payroll.Preferences.PayrollCompanies.Delete";
-
         public const string Pages_Payroll_Preferences_PaychexControl = "pages.Payroll.Preferences.PaychexControl";
-        public const string Pages_Payroll_Preferences_PaychexControl_Create = "pages.Payroll.Preferences.PaychexControl.Create";
-        public const string Pages_Payroll_Preferences_PaychexControl_Edit = "pages.Payroll.Preferences.PaychexControl.Edit";
-        public const string Pages_Payroll_Preferences_PaychexControl_Delete = "pages.Payroll.Preferences.PaychexControl.Delete";
-
         public const string Pages_Payroll_Preferences_PayrollFringeReallocation = "pages.Payroll.Preferences.PayrollFringeReallocation";
-        public const string Pages_Payroll_Preferences_PayrollFringeReallocation_Create = "pages.Payroll.Preferences.PayrollFringeReallocation.Create";
-        public const string Pages_Payroll_Preferences_PayrollFringeReallocation_Edit = "pages.Payroll.Preferences.PayrollFringeReallocation.Edit";
-        public const string Pages_Payroll_Preferences_PayrollFringeReallocation_Delete = "pages.Payroll.Preferences.PayrollFringeReallocation.Delete";
-
         #endregion
 
         #region Posting Tab

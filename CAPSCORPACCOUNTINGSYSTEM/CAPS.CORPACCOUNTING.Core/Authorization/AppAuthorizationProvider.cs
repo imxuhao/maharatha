@@ -110,39 +110,14 @@ namespace CAPS.CORPACCOUNTING.Authorization
             reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Create, L("Create"));
             reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Edit, L("Edit"));
             reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Delete, L("Delete"));
-
             var inquiry = financials.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry, L("Inquiry"));
             var searchTransactions = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_SearchTransactions, L("SearchTransactions"));
-            searchTransactions.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_SearchTransactions_Create, L("Create"));
-            searchTransactions.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_SearchTransactions_Edit, L("Edit"));
-            searchTransactions.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_SearchTransactions_Delete, L("Delete"));
-
             var inquiryFinancials = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_Financials, L("Financials"));
-            inquiryFinancials.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_Financials_Create, L("Create"));
-            inquiryFinancials.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_Financials_Edit, L("Edit"));
-            inquiryFinancials.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_Financials_Delete, L("Delete"));
-
             var journalHistory = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_JournalHistory, L("JournalHistory"));
-            journalHistory.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_JournalHistory_Create, L("Create"));
-            journalHistory.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_JournalHistory_Edit, L("Edit"));
-            journalHistory.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_JournalHistory_Delete, L("Delete"));
-
             var assetTracking = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_AssetTracking, L("AssetTracking"));
-            assetTracking.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_AssetTracking_Create, L("Create"));
-            assetTracking.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_AssetTracking_Edit, L("Edit"));
-            assetTracking.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_AssetTracking_Delete, L("Delete"));
-
-            var posting = financials.CreateChildPermission(AppPermissions.Pages_Financials_Posting, L("Posting"));
-            var batched = posting.CreateChildPermission(AppPermissions.Pages_Financials_Posting_Batched, L("Batched"));
-            batched.CreateChildPermission(AppPermissions.Pages_Financials_Posting_Batched_Create, L("Create"));
-            batched.CreateChildPermission(AppPermissions.Pages_Financials_Posting_Batched_Edit, L("Edit"));
-            batched.CreateChildPermission(AppPermissions.Pages_Financials_Posting_Batched_Delete, L("Delete"));
-
-            var unBatched = posting.CreateChildPermission(AppPermissions.Pages_Financials_Posting_UnBatched, L("UnBatched"));
-            unBatched.CreateChildPermission(AppPermissions.Pages_Financials_Posting_UnBatched_Create, L("Create"));
-            unBatched.CreateChildPermission(AppPermissions.Pages_Financials_Posting_UnBatched_Edit, L("Edit"));
-            unBatched.CreateChildPermission(AppPermissions.Pages_Financials_Posting_UnBatched_Delete, L("Delete"));
-
+            var financialsPosting = financials.CreateChildPermission(AppPermissions.Pages_Financials_Posting, L("Posting"));
+            var batched = financialsPosting.CreateChildPermission(AppPermissions.Pages_Financials_Posting_Batched, L("Batched"));
+            var unBatched = financialsPosting.CreateChildPermission(AppPermissions.Pages_Financials_Posting_UnBatched, L("UnBatched"));
             var preferences = financials.CreateChildPermission(AppPermissions.Pages_Financials_Preferences, L("Preferences"));
             var fiscalPeriod = preferences.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_FiscalPeriod, L("FiscalPeriod"));
             fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_FiscalPeriod_Create, L("Create"));
@@ -172,39 +147,25 @@ namespace CAPS.CORPACCOUNTING.Authorization
             contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Create, L("Create"));
             contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Edit, L("Edit"));
             contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Delete, L("Delete"));
+
+            var projectInquiry = projects.CreateChildPermission(AppPermissions.Pages_Projects_Inquiry, L("Inquiry"));
             #endregion
-            
+
             #region Receivables Tab
             var receivables = pages.CreateChildPermission(AppPermissions.Pages_Receivables, L("Receivables"));
             var customers = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Customers, L("Customers"));
             var history = customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History, L("History"));
-            history.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History_Create, L("Create"));
-            history.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History_Edit, L("Edit"));
-            history.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History_Delete, L("Delete"));
-
             var invoices = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices, L("Invoices"));
             var invoicesEntry = invoices.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry, L("Entry"));
             invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Create, L("Create"));
             invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Edit, L("Edit"));
             invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Delete, L("Delete"));
-
             var receivablesInquiry = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry, L("Inquiry"));
             var aRInvoiceInquiry = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_ARInvoiceInquiry, L("ARInvoiceInquiry"));
-            aRInvoiceInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_ARInvoiceInquiry_Create, L("Create"));
-            aRInvoiceInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_ARInvoiceInquiry_Edit, L("Edit"));
-            aRInvoiceInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_ARInvoiceInquiry_Delete, L("Delete"));
-
             var customerSummary = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_CustomerSummary, L("CustomerSummary"));
-            customerSummary.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_CustomerSummary_Create, L("Create"));
-            customerSummary.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_CustomerSummary_Edit, L("Edit"));
-            customerSummary.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_CustomerSummary_Delete, L("Delete"));
-
             var invoiceDetail = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_InvoiceDetail, L("InvoiceDetail"));
-            invoiceDetail.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_InvoiceDetail_Create, L("Create"));
-            invoiceDetail.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_InvoiceDetail_Edit, L("Edit"));
-            invoiceDetail.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_InvoiceDetail_Delete, L("Delete"));
-
             var receivablesPreferences = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences, L("Preferences"));
+
             var billingTypes = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes, L("BillingTypes"));
             billingTypes.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes_Create, L("Create"));
             billingTypes.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes_Edit, L("Edit"));
@@ -225,6 +186,70 @@ namespace CAPS.CORPACCOUNTING.Authorization
             aRInvoiceTemplate.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate_Edit, L("Edit"));
             aRInvoiceTemplate.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate_Delete, L("Delete"));
 
+            #endregion
+            #region Payables Tab
+            var payables = pages.CreateChildPermission(AppPermissions.Pages_Payables, L("Payables"));
+            var vendors = payables.CreateChildPermission(AppPermissions.Pages_Payables_Vendors, L("Vendors"));
+
+            var payablesInvoices = payables.CreateChildPermission(AppPermissions.Pages_Payables_Invoices, L("Invoices"));
+            var batch = payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch, L("Batch"));
+
+            var payablesInquiry = payables.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry, L("Inquiry"));
+            var aPInvoiceInquiry = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_APInvoiceInquiry, L("APInvoiceInquiry"));
+            var paymentHistory = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_PaymentHistory, L("PaymentHistory"));
+            var vendorSummary = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_VendorSummary, L("VendorSummary"));
+            var payablesInvoiceDetail = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_InvoiceDetail, L("InvoiceDetail"));
+
+            var payablesPreferences = payables.CreateChildPermission(AppPermissions.Pages_Payables_Preferences, L("Preferences"));
+            var payables1099T4Codes = payablesPreferences.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_1099T4Codes, L("1099T4Codes"));
+
+            var vendorPaymentTerms = payablesPreferences.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms, L("VendorPaymentTerms"));
+            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Create, L("Create"));
+            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Edit, L("Edit"));
+            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Delete, L("Delete"));
+
+            var yEProcesses = payables.CreateChildPermission(AppPermissions.Pages_Payables_YEProcesses, L("YEProcesses"));
+            var yEProcessesVendor1099s = yEProcesses.CreateChildPermission(AppPermissions.Pages_Payables_YEProcesses_1099s, L("1099s"));
+
+
+            #endregion
+
+            #region  Purchase Orders Tab
+            var purchaseOrders = pages.CreateChildPermission(AppPermissions.Pages_PurchaseOrders, L("PurchaseOrders"));
+            var purchaseOrdersEntry = purchaseOrders.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry, L("Entry"));
+
+            #endregion
+
+            #region Purchasing Tab
+            var purchasing = pages.CreateChildPermission(AppPermissions.Pages_Purchasing, L("Purchasing"));
+            var purchasingInquiry = purchasing.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry, L("Inquiry"));
+            var purchaseOrderHistory = purchasingInquiry.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry_PurchaseOrderHistory, L("PurchaseOrderHistory"));
+            var searchPurchaseOrders = purchasingInquiry.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry_SearchPurchaseOrders, L("SearchPurchaseOrders"));
+            #endregion
+
+            #region Petty Cash Tab
+            var pettyCash = pages.CreateChildPermission(AppPermissions.Pages_PettyCash, L("PettyCash"));
+            var pCVendors = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_PCVendors, L("PCVendors"));
+            var pettyCashEntry = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_Entry, L("Entry"));
+            var pettyCashInquiry = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_Inquiry, L("Inquiry"));
+            #endregion
+
+            #region Credit Card Tab
+            var creditCard = pages.CreateChildPermission(AppPermissions.Pages_CreditCard, L("CreditCard"));
+            var creditCardEntry = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Entry, L("Entry"));
+            var creditCardInquiry = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Inquiry, L("Inquiry"));
+            var creditCardPreferences = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Preferences, L("Preferences"));
+            #endregion
+
+            #region Payroll Tab
+            var payroll = pages.CreateChildPermission(AppPermissions.Pages_Payroll, L("Payroll"));
+            var payrollEntry = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Entry, L("Entry"));
+            var payrollInquiry = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Inquiry, L("Inquiry"));
+            var payrollPreferences = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Preferences, L("Preferences"));
+            #endregion
+
+            #region Posting Tab
+            var posting = pages.CreateChildPermission(AppPermissions.Pages_Posting, L("Posting"));
             #endregion
         }
 

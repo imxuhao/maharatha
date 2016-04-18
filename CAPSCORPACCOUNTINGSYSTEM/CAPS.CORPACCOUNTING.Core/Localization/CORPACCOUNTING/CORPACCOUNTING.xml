@@ -375,13 +375,13 @@
     <text name="Export" value="Export" />
     <text name="ExportToPDF" value="Export to pdf" />
     <text name="ExportToCSV" value="Export to CSV" />
-  <text name="ClearFilter" value="Clear Filter" />
+    <text name="ClearFilter" value="Clear Filter" />
     <text name="QuickEdit" value="Quick Edit" />
     <text name="TTenancyCodeName" value="Enter tenant code name" />
     <text name="TName" value="Enter name" />
     <text name="TEdition" value="Select edition" />
     <text name="TAdminEmailAddress" value="Enter admin email address" />
-  <text name="MandatoryToolTipText" value="Please fill out this field." />
+    <text name="MandatoryToolTipText" value="Please fill out this field." />
     <text name="UName" value="Enter Name" />
     <text name="USurname" value="Enter Surname" />
     <text name="UUserName" value="Enter User Name" />
@@ -394,7 +394,7 @@
     <text name="EditingCOA" value="Editing Chart Of Account" />
     <text name="DeletingCOA" value="Deleting Chart Of Account" />
     <text name="EditCOA" value="Edit Chart Of Account" />
-  
+
     <text name="ConvertToNewCOA" value="Convert To New COA" />
     <text name="StdGroupTotal" value="Std Group Total" />
     <text name="IsCorporate" value="IsCorporate" />
@@ -403,14 +403,14 @@
     <text name="IsApproved" value="IsApproved" />
     <text name="Description" value="Description" />
     <text name="Caption" value="Caption" />
-  <text name="ManageUsersViewSetting" value="Manage views" />
-  <text name="ManageUsersViewSettingHeaderInfo" value="Manage your views" />
-  <text name="ManageUsersViewSettingCreateNew" value="Create new view" />
-  <text name="GridName" value="Grid name" />
-  <text name="SettingName" value="Setting name" />
-     <text name="CurrentView" value="Current view" />
-  <text name="TSettingName" value="Search by setting name" />
-   <text name="TGridName" value="Search by grid name" />
+    <text name="ManageUsersViewSetting" value="Manage views" />
+    <text name="ManageUsersViewSettingHeaderInfo" value="Manage your views" />
+    <text name="ManageUsersViewSettingCreateNew" value="Create new view" />
+    <text name="GridName" value="Grid name" />
+    <text name="SettingName" value="Setting name" />
+    <text name="CurrentView" value="Current view" />
+    <text name="TSettingName" value="Search by setting name" />
+    <text name="TGridName" value="Search by grid name" />
 
     <text name="SubAccounts" value="Sub Accounts" />
     <text name="Divisions" value="Divisions" />
@@ -436,20 +436,17 @@
     <text name="Posting" value="Posting" />
     <text name="ARInvoiceTemplate" value="AR Invoice Template" />
     <text name="BillingTypes" value="Billing Types" />
-    <!--<text name="Customers" value="Customers" />-->
     <text name="History" value="History" />
     <text name="PaymentTerms" value="PaymentTerms" />
     <text name="Territories" value="Territories" />
     <text name="ARInvoiceInquiry" value="AR Invoice Inquiry" />
     <text name="CustomerSummary" value="Customer Summary" />
     <text name="InvoiceDetail" value="Invoice Detail" />
-    <text name="Batched" value="Batched" />
-    <text name="UnBatched" value="UnBatched" />
     <text name="BankSetup" value="Bank Setup" />
     <text name="FiscalPeriod" value="Fiscal Period" />
     <text name="ACH" value="ACH" />
     <text name="ReceiptsOrTransfers" value="Receipts/Transfers" />
-    <text name="Reconciliation" value="Bank Reconciliation" />
+    <text name="BankReconciliation" value="Bank Reconciliation" />
     <text name="AssetTracking" value="Asset Tracking" />
     <text name="JournalHistory" value="Journal History" />
     <text name="SearchTransactions" value="Search Transactions" />
@@ -457,5 +454,16 @@
     <text name="ProjectCOAs" value="Project COAs" />
     <text name="UploadSuccess" value="Successfully Uploaded" />
     <text name="YourProfilePictureHasChangedSuccessfully" value="Your Profile Picture has changed successfully." />
+    <text name="APInvoiceInquiry" value="AP invoice Inquiry" />
+    <text name="PaymentHistory" value="Payment History/Voids Grid" />
+    <text name="VendorSummary" value="Vendor Summary (Aging)" />
+    <text name="Batch" value="Batch" />
+     <text name="UnBatched" value="UnBatched" />
+     <text name="Batched" value="Batched" />
+    <text name="1099T4Codes" value="1099 T.4 Codes" />
+    <text name="VendorPaymentTerms" value="Vendor Payment Terms" />
+    <text name="1099s" value="1099s" />
+    <text name="PurchaseOrderHistory" value="Purchase Order History" />
+    <text name="SearchPurchaseOrders" value="Search All Purchase Orders" />
   </texts>
 </localizationDictionary>

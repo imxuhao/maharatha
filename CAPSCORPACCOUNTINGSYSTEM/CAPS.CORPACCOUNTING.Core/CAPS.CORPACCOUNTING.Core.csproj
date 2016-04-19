@@ -114,6 +114,7 @@
     <Compile Include="Accounting\AccountingLayoutUnit.cs" />
     <Compile Include="Accounting\AccountingLayoutItemUnit.cs" />
     <Compile Include="Accounting\ControlAccountUnit.cs" />
+    <Compile Include="Accounting\SubAccountUnitManager.cs" />
     <Compile Include="Accounting\SubAccountUnit.cs" />
     <Compile Include="Accounting\TypeOfAccountClassificationUnit.cs" />
     <Compile Include="Accounting\TypeOfAccountUnit.cs" />

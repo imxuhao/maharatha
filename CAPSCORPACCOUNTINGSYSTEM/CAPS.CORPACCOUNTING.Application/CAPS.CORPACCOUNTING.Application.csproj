@@ -121,9 +121,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounting\AccountingHeaderTransactionUnitDto.cs" />
-    <Compile Include="Accounting\CreateAccountingHeaderTransactionInputUnit.cs" />
-    <Compile Include="Accounting\UpdateAccountingHeaderTransactionInputUnit.cs" />
+    <Compile Include="Accounting\Dto\AccountingHeaderTransactionUnitDto.cs" />
+    <Compile Include="Accounting\Dto\CreateAccountingHeaderTransactionInputUnit.cs" />
+    <Compile Include="Accounting\Dto\CreateSubAccountUnitInput.cs" />
+    <Compile Include="Accounting\Dto\SubAccountUnitDto.cs" />
+    <Compile Include="Accounting\Dto\UpdateAccountingHeaderTransactionInputUnit.cs" />
+    <Compile Include="Accounting\Dto\UpdateSubAccountUnitInput.cs" />
+    <Compile Include="Accounting\ISubAccountUnitAppService.cs" />
+    <Compile Include="Accounting\SubAccountUnitAppService.cs" />
     <Compile Include="Authorization\AbpLoginResultTypeHelper.cs" />
     <Compile Include="Authorization\Users\Dto\GetLinkedUsersInput.cs" />
     <Compile Include="Authorization\Users\Dto\LinkToUserInput.cs" />

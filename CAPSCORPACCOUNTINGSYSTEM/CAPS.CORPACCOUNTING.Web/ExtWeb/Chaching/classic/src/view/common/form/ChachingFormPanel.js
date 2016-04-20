@@ -53,11 +53,38 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
     referenceHolder: true,
     border: false,
     frame: false,
+    showFormTitle: false,
+    titleConfig:null,
     initComponent: function () {
         //create buttons
         var me = this,
             controller = me.getController,
             buttons = [];
+        if (me.showFormTitle&&me.titleConfig) {
+            var dockedItems = [
+                {
+                    xtype: 'toolbar',
+                    dock: 'top',
+                    layout: {
+                        type: 'hbox',
+                        pack: 'left'
+                    },
+                    items: [
+                        {
+                            xtype: 'displayfield',
+                            value: me.titleConfig.title,
+                            ui: 'headerTitle'
+                        },'->',
+                        {
+                            xtype: 'displayfield',
+                            value: 'Fields marked with (' + Chaching.utilities.ChachingGlobals.mandatoryFlag + '&nbsp;) are required.',
+                            ui: 'headerSubTitle'
+                        }
+                    ]
+                }
+            ];
+            me.dockedItems = dockedItems;
+        }
         if (!me.hideDefaultButtons) {
             buttons.push('->');
             var saveButton= {

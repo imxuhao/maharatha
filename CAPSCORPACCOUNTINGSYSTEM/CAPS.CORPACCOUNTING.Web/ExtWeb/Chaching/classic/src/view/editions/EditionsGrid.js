@@ -3,14 +3,10 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.editions.EditionsGridController',
-        'Chaching.view.editions.EditionsGridModel'
+        'Chaching.view.editions.EditionsGridController'
     ],
 
     controller: 'editions-editionsgrid',
-    viewModel: {
-        type: 'editions-editionsgrid'
-    },
 
     xtype: 'host.editions',
     store: 'editions.EditionsStore',

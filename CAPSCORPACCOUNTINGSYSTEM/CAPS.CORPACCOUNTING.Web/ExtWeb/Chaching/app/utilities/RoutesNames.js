@@ -14,6 +14,6 @@
         'languages',
         'roles',
         'auditlogs',
-         'coa'
+         'financials.accounts'
     ]
 });

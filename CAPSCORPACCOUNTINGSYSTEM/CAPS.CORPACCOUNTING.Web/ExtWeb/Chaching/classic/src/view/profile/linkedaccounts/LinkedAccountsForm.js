@@ -3,14 +3,10 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['linkedaccounts.createView'],
     requires: [
-        'Chaching.view.profile.linkedaccounts.LinkedAccountsFormController',
-        'Chaching.view.profile.linkedaccounts.LinkedAccountsFormModel'
+        'Chaching.view.profile.linkedaccounts.LinkedAccountsFormController'
     ],
 
     controller: 'linkedaccounts-linkedaccountsform',
-    viewModel: {
-        type: 'linkedaccounts-linkedaccountsform'
-    },
    
     openInPopupWindow: true,
     hideDefaultButtons: false,

@@ -3,14 +3,10 @@ Ext.define('Chaching.view.users.UsersForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['users.create', 'users.edit'],
     requires: [
-        'Chaching.view.users.UsersFormController',
-        'Chaching.view.users.UsersFormModel'
+        'Chaching.view.users.UsersFormController'
     ],
 
     controller: 'users-usersform',
-    viewModel: {
-        type: 'users-usersform'
-    },
     name: 'Users',
     openInPopupWindow: true,
     hideDefaultButtons: false,

@@ -4,13 +4,10 @@ Ext.define('Chaching.view.profile.settings.SettingsView',{
 
     requires: [
         'Chaching.view.profile.settings.SettingsViewController',
-        'Chaching.view.profile.settings.SettingsViewModel'
+        'Chaching.view.profile.settings.SettingsForm'
     ],
 
     controller: 'profile-settings-settingsview',
-    viewModel: {
-        type: 'profile-settings-settingsview'
-    },
     height: 450,
     width: 450,
     layout: 'fit',

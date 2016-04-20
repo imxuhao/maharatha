@@ -3,14 +3,10 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.languages.LanguageTextsGridController',
-     //  'Chaching.view.languages.LanguageTextsGridModel'
+        'Chaching.view.languages.LanguageTextsGridController'
     ],
 
     controller: 'languages-languagetextsgrid',
-    //viewModel: {
-    //    type: 'languages-languagetextsgrid'
-    //},
 
     xtype: 'Languagetexts',
     store: 'languages.LanguageTextsStore',
@@ -41,7 +37,11 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
             dataIndex: 'key',           
             sortable: true,
             width: '30%',
-            groupable: true,                 
+            groupable: true,
+            filterField: {
+                xtype: 'textfield',
+                width: '100%'
+            },
             editor: {
                 xtype: 'textfield'
             }
@@ -51,7 +51,11 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
             dataIndex: 'baseValue',
             sortable: true,
             groupable: true,
-            width: '30%',       
+            width: '30%',
+            filterField: {
+                xtype: 'textfield',
+                width: '100%'
+            },
             editor: {
                 xtype: 'textfield'
             }
@@ -62,7 +66,11 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
             dataIndex: 'targetValue',
             sortable: true,
             groupable: true,
-            width: '30%',     
+            width: '30%',
+            filterField: {
+                xtype: 'textfield',
+                width: '100%'
+            },
             editor: {
                 xtype: 'textfield'
             }

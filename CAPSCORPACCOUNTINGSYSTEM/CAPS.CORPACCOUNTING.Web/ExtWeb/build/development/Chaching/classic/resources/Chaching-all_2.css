@@ -10001,7 +10001,7 @@ body.x-ios.x-webview.x-portrait {
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/Labelable.scss:97 */
 .x-form-item-label-fieldLabelTop {
     color: #404040;
-    font: 400 14px/17px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    font: 600 13px/17px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
     min-height: 32px;
     padding-top: 8px;
     padding-right: 5px;
@@ -10062,25 +10062,34 @@ body.x-ios.x-webview.x-portrait {
     color: #080808 !important;
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:17 */
+.x-form-text-fieldLabelTop {
+    background-color: transparent !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:20 */
+.x-form-invalid-field-fieldLabelTop {
+    background-color: transparent !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:23 */
 .x-form-trigger-wrap-fieldLabelTop {
     border-top-color: transparent !important;
     border-left-color: transparent !important;
     border-right-color: transparent !important;
     border-bottom-color: #27e4e4 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:23 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:29 */
 .x-form-trigger-wrap-fieldLabelTop.x-form-trigger-wrap-invalid {
     border-top-color: transparent !important;
     border-left-color: transparent !important;
     border-right-color: transparent !important;
     border-bottom-color: #cf4c35 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:29 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:35 */
 .checkboxLabel {
-    font-weight: 400 !important;
+    font-weight: 600 !important;
     padding-left: 22px !important;
     display: inline-block !important;
     margin-top: 8px !important;
+    font-size: 13px !important;
 }
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/window/Window.scss:228 */
 .x-window-chachingWindow {
@@ -15602,14 +15611,4 @@ body.x-ios.x-webview.x-portrait {
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2415 */
 .x-tab-bar-plain .x-tab-over.x-tab-dashboard .x-tab-inner-dashboard {
     color: #606060;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2446 */
-.x-tab-bar-plain .x-tab-over.x-tab-dashboard .x-tab-icon-el {
-    color: #606060;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2466 */
-.x-tab-focus.x-tab-over.x-tab-dashboard {
-    border-color: #00bcd4;
-    background-image: none;
-    background-color: rgba(4, 126, 142, 0.08);
 }

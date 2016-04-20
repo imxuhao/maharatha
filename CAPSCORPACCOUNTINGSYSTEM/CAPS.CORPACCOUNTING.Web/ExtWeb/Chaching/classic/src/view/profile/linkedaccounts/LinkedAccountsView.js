@@ -4,14 +4,10 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsView', {
     alias: ['widget.linkedaccounts.createView'],
     requires: [
         'Chaching.view.profile.linkedaccounts.LinkedAccountsViewController',
-        'Chaching.view.profile.linkedaccounts.LinkedAccountsViewModel',
         'Chaching.view.profile.linkedaccounts.LinkedAccountsGrid'
     ],
 
     controller: 'linkedaccounts-linkedaccountsview',
-    viewModel: {
-        type: 'linkedaccounts-linkedaccountsview'
-    },
     height: 600,
     width: 550,
     layout: 'fit',

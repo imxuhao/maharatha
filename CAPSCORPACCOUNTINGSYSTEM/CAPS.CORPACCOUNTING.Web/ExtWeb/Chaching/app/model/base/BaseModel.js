@@ -1,7 +1,7 @@
 Ext.define('Chaching.model.base.BaseModel', {
     extend: 'Ext.data.Model',
     config: {
-        searchEntityName:'Base'
+        searchEntityName:''
     },
     fields: [
         //common fields in all entities

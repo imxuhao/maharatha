@@ -316,6 +316,42 @@
         "modelNamespace": "Chaching.model",
         "name": "manageView.ManageViewModel"
       }
+    },
+    "app/model/financials/accounts/ChartOfAccountsModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "financials/accounts/ChartOfAccountsModel",
+        "modelNamespace": "Chaching.model",
+        "name": "financials.accounts.ChartOfAccountsModel"
+      }
+    },
+    "app/model/financials/accounts/SubAccountsModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "financials/accounts/SubAccountsModel",
+        "modelNamespace": "Chaching.model",
+        "name": "financials.accounts.SubAccountsModel"
+      }
+    },
+    "app/model/financials/accounts/DivisionsModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "financials/accounts/DivisionsModel",
+        "modelNamespace": "Chaching.model",
+        "name": "financials.accounts.DivisionsModel"
+      }
     }
   }
 }

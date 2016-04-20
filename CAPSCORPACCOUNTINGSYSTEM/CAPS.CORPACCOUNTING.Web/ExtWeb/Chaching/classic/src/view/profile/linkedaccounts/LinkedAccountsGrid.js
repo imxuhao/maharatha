@@ -3,14 +3,10 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.profile.linkedaccounts.LinkedAccountsGridController',
-        'Chaching.view.profile.linkedaccounts.LinkedAccountsGridModel'
+        'Chaching.view.profile.linkedaccounts.LinkedAccountsGridController'
     ],
 
     controller: 'linkedaccounts-linkedaccountsgrid',
-    viewModel: {
-        type: 'linkedaccounts-linkedaccountsgrid'
-    },
     xtype: 'manageaccounts',
     headerButtonsConfig: [
        '->', {
@@ -28,13 +24,14 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
     name: 'LinkedAccounts',
     padding: 5,
     gridId:8,
-    requireMultiSearch: true,
-    requireMultisort: true,
+    requireMultiSearch: false,
+    requireMultisort: false,
     isEditable: true,
     editingMode: 'row',
     createNewMode: 'popup',
     columnLines: true,
-    multiColumnSort: true,   
+    multiColumnSort: true,
+    manageViewSetting:false,
     createWndTitleConfig: {
         title: app.localize('LinkNewAccount'),
         iconCls: 'fa fa-plus'

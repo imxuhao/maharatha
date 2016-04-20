@@ -4,14 +4,10 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
     alias: ['changepassword.editView'],
 
     requires: [
-        'Chaching.view.profile.changepassword.ChangePasswordFormController',
-        'Chaching.view.profile.changepassword.ChangePasswordFormModel'
+        'Chaching.view.profile.changepassword.ChangePasswordFormController'
     ],
 
     controller: 'changepassword-changepasswordform',
-    viewModel: {
-        type: 'changepassword-changepasswordform'
-    },
 
     name: 'ChangePassword',
     openInPopupWindow: true,

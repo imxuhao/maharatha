@@ -57,12 +57,16 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
             lastView = mainLayout.getActiveItem();
 
             if (!existingItem) {
+                var customData = node.get('customData');
+                if (customData && customData.length > 0) {
+                }
                 newView = Ext.create({
                     xtype: view,
                     routeId: hashTag,  // for existingItem search later
                     hideMode: 'offsets',
                     iconCls: iconCls,
                     closable: true,
+                    dynamicTabItems:customData,
                     title: text
                 });
                 var modulePermission = abp.auth.hasPermission('Pages.' + newView.name);

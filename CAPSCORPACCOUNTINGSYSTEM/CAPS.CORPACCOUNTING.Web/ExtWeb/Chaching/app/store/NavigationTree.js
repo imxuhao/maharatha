@@ -3,7 +3,7 @@
     autoload: true,
     storeId: 'NavigationTree',
     fields: [{ name: 'text' },
-    { name: 'iconCls' }, { name: 'name' }, { name: 'url' }, { name: 'viewType' }],
+    { name: 'iconCls' }, { name: 'name' }, { name: 'url' }, { name: 'viewType' },{name:'customData',type:'auto'}],
 
     root: {
         expanded: true
@@ -63,6 +63,9 @@
                     case "url":
                         newItem.url = originalItem[key];
                         newItem.viewType = newItem.url;
+                        break;
+                    case "customData":
+                        newItem.customData = originalItem[key];
                         break;
                     default:
                         break;

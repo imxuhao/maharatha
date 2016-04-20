@@ -5,14 +5,10 @@ Ext.define('Chaching.view.editions.EditionsForm',{
 
     alias:['host.edition.create','host.edition.edit'],
     requires: [
-        'Chaching.view.editions.EditionsFormController',
-        'Chaching.view.editions.EditionsFormModel'
+        'Chaching.view.editions.EditionsFormController'
     ],
 
     controller: 'editions-editionsform',
-    viewModel: {
-        type: 'editions-editionsform'
-    },
     name: 'Editions',
     openInPopupWindow: true,
     hideDefaultButtons: false,

@@ -5,14 +5,10 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordView', {
 
     requires: [
         'Chaching.view.profile.changepassword.ChangePasswordViewController',
-        'Chaching.view.profile.changepassword.ChangePasswordViewModel'
-        
+        'Chaching.view.profile.changepassword.ChangePasswordForm'
     ],
 
     controller: 'changepassword-changepasswordview',
-    viewModel: {
-        type: 'changepassword-changepasswordview'
-    },
     height: 400,
     width: 450,
     layout: 'fit',

@@ -5,13 +5,10 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureView'
 
     requires: [
         'Chaching.view.profile.changeprofilepicture.ChangeProfilePictureViewController',
-        'Chaching.view.profile.changeprofilepicture.ChangeProfilePictureViewModel'
+        'Chaching.view.profile.changeprofilepicture.ChangeProfilePictureForm'
     ],
 
     controller: 'profile-changeprofilepicture-changeprofilepictureview',
-    viewModel: {
-        type: 'profile-changeprofilepicture-changeprofilepictureview'
-    },
 
     height: 250,
     width: 400,

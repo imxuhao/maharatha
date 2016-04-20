@@ -3,14 +3,10 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['host.tenants.create', 'host.tenants.edit'],
     requires: [
-        'Chaching.view.tenants.TenantsFormController',
-        'Chaching.view.tenants.TenantsFormModel'
+        'Chaching.view.tenants.TenantsFormController'
     ],
 
     controller: 'tenants-tenantsform',
-    viewModel: {
-        type: 'tenants-tenantsform'
-    },
     name: 'Tenants',
     openInPopupWindow: true,
     hideDefaultButtons: false,

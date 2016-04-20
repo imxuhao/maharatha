@@ -3,14 +3,10 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.auditlogs.AuditLogsGridController',
-        'Chaching.view.auditlogs.AuditLogsGridModel'
+        'Chaching.view.auditlogs.AuditLogsGridController'
     ],
 
     controller: 'auditlogs-auditlogsgrid',
-    viewModel: {
-        type: 'auditlogs-auditlogsgrid'
-    },
     xtype: 'auditLogs',
     store: 'auditlogs.AuditLogsStore',
     name: 'Administration.AuditLogs',

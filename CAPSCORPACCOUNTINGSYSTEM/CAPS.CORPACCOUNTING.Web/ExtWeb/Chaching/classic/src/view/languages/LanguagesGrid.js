@@ -3,14 +3,10 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.languages.LanguagesGridController',
-      //  'Chaching.view.languages.LanguagesGridModel'
+        'Chaching.view.languages.LanguagesGridController'
     ],
 
     controller: 'languages-languagesgrid',
-    //viewModel: {
-    //    type: 'languages-languagesgrid'
-    //},
 
     xtype: 'languages',
     store: 'languages.LanguagesStore',
@@ -42,11 +38,11 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
         iconCls: 'fa fa-pencil',
         clickActionName: 'changeLanguageClick'
     }],
-    requireExport: true,
-    requireMultiSearch: true,
-    requireMultisort: true,
-    isEditable: true,
-    editingMode: 'row',
+    requireExport: false,
+    requireMultiSearch: false,
+    requireMultisort: false,
+    isEditable: false,
+    editingMode: '',
     createNewMode: 'popup',
     columnLines: true,
     columndata:null,
@@ -59,20 +55,8 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
             sortable: true,
             width: '32%',
             groupable: true,
-            // simplest filter configuration
-            filterField: {
-                xtype: 'textfield',
-                width: '100%',
-                emptyText: app.localize('Name')               
-            },
-            renderer: function (val, meta, record, rowIndex) {                
-                //if (record.data.isdefault)
-                //    return '<i class="' + record.get('icon') + '" style="display: inline-block;margin-right: 10px;"font-weight: bold;" !important" ></i><span>' + val + '<span style="font-weight: bold;">(Default)</span></span>';
-                //else
+            renderer: function (val, meta, record, rowIndex) { 
                     return '<i class="' + record.get('icon') + '" style="display: inline-block;margin-right: 10px; !important" ></i><span>' + val + '</span>';
-            },
-            editor: {
-                xtype: 'textfield'
             }
         }, {
             xtype: 'gridcolumn',
@@ -80,18 +64,7 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
             dataIndex: 'name',
             sortable: true,
             groupable: true,
-            width: '32%',           
-            // equivalent to filterField:true
-            // as textfield is created by default
-            
-            filterField: {
-                xtype: 'textfield',
-                width: '100%',
-                emptyText: app.localize('Code')
-            },
-            editor: {
-                xtype: 'textfield'
-            }
+            width: '32%'
         },
         {
             xtype: 'gridcolumn',
@@ -101,15 +74,7 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
             sortable: true,
             groupable: true,
             width: '30%',
-            renderer: Ext.util.Format.dateRenderer('m-d-Y g:i A'),
-            filterField: {
-                xtype: 'datefield',
-                width: '100%',
-                emptyText: 'Enter creation time to search'
-            },
-        },
-         
-       
-       
+            renderer: Ext.util.Format.dateRenderer('m-d-Y g:i A')
+        }
     ]
 });

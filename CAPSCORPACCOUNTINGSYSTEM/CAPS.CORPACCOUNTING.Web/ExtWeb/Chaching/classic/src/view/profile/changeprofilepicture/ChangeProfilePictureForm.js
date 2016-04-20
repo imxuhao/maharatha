@@ -3,14 +3,10 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureForm'
     extend: 'Chaching.view.common.form.ChachingFormPanel',
 
     requires: [
-        'Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormController',
-        'Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormModel'
+        'Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormController'
     ],
 
     controller: 'profile-changeprofilepicture-changeprofilepictureform',
-    viewModel: {
-        type: 'profile-changeprofilepicture-changeprofilepictureform'
-    },
 
     name: 'ChangeProfilePicture',
     openInPopupWindow: true,

@@ -3,19 +3,22 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.tenants.TenantsGridController',
-        'Chaching.view.tenants.TenantsGridModel'
+        'Chaching.view.tenants.TenantsGridController'
     ],
 
     controller: 'tenants-tenantsgrid',
-    viewModel: {
-        type: 'tenants-tenantsgrid'
-    },
     xtype: 'host.tenants',
     store: 'tenants.TenantsStore',
     name: 'Tenants',
     padding: 5,
     gridId: 1,////*******Important to apply grid's userView setting
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Tenants'),
+        create: abp.auth.isGranted('Pages.Tenants.Create'),
+        edit: abp.auth.isGranted('Pages.Tenants.Edit'),
+        destroy: abp.auth.isGranted('Pages.Tenants.Delete'),
+        changeFeature: abp.auth.isGranted('Pages.Tenants.ChangeFeatures')
+    },
     headerButtonsConfig: [
     {
         xtype: 'displayfield',

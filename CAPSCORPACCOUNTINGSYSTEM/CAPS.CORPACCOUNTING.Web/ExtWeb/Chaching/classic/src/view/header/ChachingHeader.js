@@ -3,14 +3,10 @@ Ext.define('Chaching.view.header.ChachingHeader', {
     extend: 'Ext.toolbar.Toolbar',
 
     requires: [
-        'Chaching.view.header.ChachingHeaderController',
-        'Chaching.view.header.ChachingHeaderModel'
+        'Chaching.view.header.ChachingHeaderController'
     ],
     alias: 'widget.chachingheader',
     controller: 'header-chachingheader',
-    viewModel: {
-        type: 'header-chachingheader'
-    },
 
     bodyStyle: {
         'background-color': '#F3F5F9'

@@ -39,7 +39,7 @@ Ext.define('Chaching.view.manageView.ManageViewList',{
         iconAlign: 'left'
     }],
     requireExport: false,
-    requireMultiSearch: true,
+    requireMultiSearch: false,
     requireMultisort: false,
     isEditable: true,
     editingMode: 'row',

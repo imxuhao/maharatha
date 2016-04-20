@@ -3,8 +3,8 @@ Ext.define('Chaching.view.languages.LanguagesView',{
     extend: 'Chaching.view.common.window.ChachingWindowPanel',
 
     columndata:null,
-    height: 600,
-    width: 800,
+    height: 650,
+    width: 850,
     layout: 'fit',
     title: app.localize("LanguageTexts"),  
     initComponent: function (config) {       

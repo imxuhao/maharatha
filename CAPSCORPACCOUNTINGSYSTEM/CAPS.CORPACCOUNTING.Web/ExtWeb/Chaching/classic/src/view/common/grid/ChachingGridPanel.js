@@ -101,14 +101,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
    * @cfg {object} modulePermissions
      * Override this config in child grid if has additional permissions
    */
-    modulePermissions: {
-        read: true,
-        create: true,
-        update: true,
-        destroy:true
-    },
+    modulePermissions: undefined,
     manageViewSetting: true,
-    activeUserViewId:null,
+    activeUserViewId: null,
+    isSubMenuItemTab: false,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -117,7 +113,15 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             dockedItems = [],
             gridColumns = me.columns,
             features = [];
-
+       
+        if (!me.modulePermissions) {
+            me.modulePermissions = {
+                read: abp.auth.isGranted('Pages.' + me.name),
+                create: abp.auth.isGranted('Pages.' + me.name + '.Create'),
+                edit: abp.auth.isGranted('Pages.' + me.name + '.Edit'),
+                destroy: abp.auth.isGranted('Pages.' + me.name + '.Delete')
+            };
+        }
         //validate grid config
         if (me.isEditable && (me.editingMode === null || me.editingMode === undefined || me.editingMode === "")) {
             Ext.Error.raise('Please specify Editing mode for the grid');
@@ -129,7 +133,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     btn.handler = "onCreateNewBtnClicked";
                 }
                 if (btn.checkPermission) {
-                    if (abp.auth.hasPermission("Pages." + me.name + ".Create"))
+                    if (me.modulePermissions.create)
                         headerTbButtons.push(btn);
                 } else headerTbButtons.push(btn);
             }
@@ -249,7 +253,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         
         me.columns = me.applyGridViewSetting(gridColumns);
         //add editing plugin
-        if (me.isEditable) {
+        if (me.isEditable && (me.modulePermissions.edit)) {
             var editingModel;
             switch (me.editingMode) {
                 case "cell":
@@ -463,14 +467,17 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         var me = this, controller = me.getController();
         var defaultMenuItems = [];
         //check for permission from abp
-        if (abp.auth.hasPermission("Pages." + me.name + ".Edit")) {
+        if (me.modulePermissions.edit) {
             //full editing is required only when create mode is popup/tab
             if (me.createNewMode === "popup" || me.createNewMode === "tab") {
                 var editMenuItem = {
                     text: app.localize('Edit'),
                     iconCls: 'fa fa-pencil',
+                    eventListenerName: 'editActionClicked',
                     listeners: {
-                        click: controller.editActionClicked
+                        click: function(menu, item, e, eOpts) {
+                            return controller.editActionClicked(menu, item, e, eOpts);
+                        }
                     }
                 };
                 defaultMenuItems.push(editMenuItem);
@@ -479,18 +486,24 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             if (me.isEditable) {
                 var quickEditMenuItem= {
                     text: app.localize('QuickEdit'), iconCls: 'fa fa-pencil-square-o ',
+                    eventListenerName: 'quickEditActionClicked',
                     listeners: {
-                        click:controller.quickEditActionClicked
+                        click: function (menu, item, e, eOpts) {
+                            return controller.quickEditActionClicked(menu, item, e, eOpts);
+                        }
                     }
                 }
                 defaultMenuItems.push(quickEditMenuItem);
             }
         }
-        if (abp.auth.hasPermission("Pages." + me.name + ".Delete")) {
+        if (me.modulePermissions.destroy) {
             var deleteMenuItem = {
                 text: app.localize('Delete'), iconCls: 'fa fa-recycle',
+                eventListenerName: 'deleteActionClicked',
                 listeners: {
-                    click: controller.deleteActionClicked
+                    click: function (menu, item, e, eOpts) {
+                        return controller.deleteActionClicked(menu, item, e, eOpts);
+                    }
                 }
             };
             defaultMenuItems.push(deleteMenuItem);

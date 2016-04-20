@@ -4,14 +4,10 @@ Ext.define('Chaching.view.editions.EditionsView', {
     alias: ['widget.host.editions.createView', 'widget.host.editions.editView'],
     requires: [
         'Chaching.view.editions.EditionsViewController',
-        'Chaching.view.editions.EditionsViewModel',
         'Chaching.view.editions.EditionsForm'
     ],
 
     controller: 'editions-editionsview',
-    viewModel: {
-        type: 'editions-editionsview'
-    },
     height: 500,
     width: 450,
     layout: 'fit',

@@ -3,14 +3,10 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['settings.createView'],
     requires: [
-        'Chaching.view.profile.settings.SettingsFormController',
-        'Chaching.view.profile.settings.SettingsFormModel'
+        'Chaching.view.profile.settings.SettingsFormController'
     ],
 
     controller: 'profile-settings-settingsform',
-    viewModel: {
-        type: 'profile-settings-settingsform'
-    },
 
     name: 'MySettings',
     openInPopupWindow: true,

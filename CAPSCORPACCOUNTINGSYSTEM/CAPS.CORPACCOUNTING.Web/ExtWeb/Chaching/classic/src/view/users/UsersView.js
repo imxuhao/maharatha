@@ -4,14 +4,10 @@ Ext.define('Chaching.view.users.UsersView', {
     alias: ['widget.users.createView', 'widget.users.editView'],
     requires: [
         'Chaching.view.users.UsersViewController',
-        'Chaching.view.users.UsersViewModel',
         'Chaching.view.users.UsersForm'
     ],
 
     controller: 'users-usersview',
-    viewModel: {
-        type: 'users-usersview'
-    },
     height: 600,
     width: 450,
     layout: 'fit',

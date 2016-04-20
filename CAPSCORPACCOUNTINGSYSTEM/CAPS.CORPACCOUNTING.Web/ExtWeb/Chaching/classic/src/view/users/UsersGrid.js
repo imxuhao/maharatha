@@ -3,14 +3,10 @@ Ext.define('Chaching.view.users.UsersGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.users.UsersGridController',
-        'Chaching.view.users.UsersGridModel'
+        'Chaching.view.users.UsersGridController'
     ],
 
     controller: 'users-usersgrid',
-    viewModel: {
-        type: 'users-usersgrid'
-    },
 
     xtype: 'users',
     store: 'users.UsersStore',

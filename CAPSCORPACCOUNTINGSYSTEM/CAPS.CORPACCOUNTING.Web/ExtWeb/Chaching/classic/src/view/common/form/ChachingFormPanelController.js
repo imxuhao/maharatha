@@ -58,7 +58,9 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
         if (view && view.openInPopupWindow) {
             var wnd = view.up('window');
             Ext.destroy(wnd);
+            return;
         }
+        Ext.destroy(view);
     },
     onOperationCompleteCallBack: function (records, operation, success) {
         var controller = operation.controller,
@@ -74,6 +76,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
                 if (view && view.openInPopupWindow) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
+                } else if (view) {
+                    Ext.destroy(view);
                 }
 
             }

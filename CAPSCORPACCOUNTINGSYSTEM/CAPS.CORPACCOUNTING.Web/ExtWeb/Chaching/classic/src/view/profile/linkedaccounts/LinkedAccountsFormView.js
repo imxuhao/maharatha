@@ -4,14 +4,8 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsFormView', {
     alias: 'widget.manageaccounts.createView',
 
     requires: [
-        //'Chaching.view.linkedaccounts.LinkedAccountsFormViewController',
-       // 'Chaching.view.linkedaccounts.LinkedAccountsFormViewModel'
+       'Chaching.view.profile.linkedaccounts.LinkedAccountsForm',
     ],
-
-    //controller: 'linkedaccounts-linkedaccountsformview',
-    //viewModel: {
-    //    type: 'linkedaccounts-linkedaccountsformview'
-    //},
 
     height: 400,
     width: 450,

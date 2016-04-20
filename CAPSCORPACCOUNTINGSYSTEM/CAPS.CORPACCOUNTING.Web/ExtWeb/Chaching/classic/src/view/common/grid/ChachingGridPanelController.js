@@ -59,13 +59,13 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
             grid = widgetCol.up('grid'),
-            controller = grid.getController();
+            controller = grid.getController(),
             gridStore = grid.getStore();
 
         //TODO start edit by checking row allowEdit property
             if (widgetRec && grid) {
             var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig);
-            gridStore.setAutoSync(true);
+            
             var modelField = gridStore.getModel().getFields();
             if (modelField) {
                 Ext.each(modelField, function (field) {
@@ -75,8 +75,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     }
                 });
             }
-            if (formView) {
+            if (formView && formView.isWindow) {
                 formView.down('form').getForm().setValues(widgetRec.data);
+            } else if (formView) {
+                formView.getForm().setValues(widgetRec.data);
             }
         }
     },
@@ -230,9 +232,14 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     me.createNewRecord(view.xtype, 'popup', false, view.createWndTitleConfig);
                     break;
                 case "tab":
-                    if (!btn.routeName) Ext.Error.raise('When create/edit mode is tab for grid then routeName config to button is mandatory!!!');
-                    me.currentRedirectedRoute = btn.routeName;
-                    me.redirectTo(btn.routeName);
+                    if (view.isSubMenuItemTab) {
+                        me.createNewRecord(view.xtype, 'tab', false, view.createWndTitleConfig);
+                    } else {
+                        if (!btn.routeName) Ext.Error.raise('When create/edit mode is tab for grid then routeName config to button is mandatory!!!');
+                        me.currentRedirectedRoute = btn.routeName;
+                        me.redirectTo(btn.routeName);
+                    }
+                   
                     break;
                 default:
                     me.currentRedirectedRoute = null;
@@ -249,10 +256,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         var me = this,
             view = me.getView(),
             formView,
-            className;
+            className,
+            tabPanel = view.up('tabpanel');
+        if (!titleConfig) Ext.Error.raise('Please provide title configuration');
         me.doBeforeCreateAction(createMode);
         if (createMode === "popup") {
-            if (!titleConfig) Ext.Error.raise('Please provide title configuration');
             className = type + ".createView";
             formView = Ext.create({
                 xtype: className,
@@ -260,18 +268,38 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 iconCls: titleConfig.iconCls
             });
             formView.show();
+        } else if (createMode === "tab" && tabPanel) {
+            var parentTabPanel = tabPanel.up('tabpanel');
+            if (parentTabPanel) {
+                className = type + ".create";
+                formView = Ext.create({
+                    xtype: className,
+                    hideMode: 'offsets',
+                    closable: true,
+                    title: titleConfig.title,
+                    iconCls:titleConfig.iconCls,
+                    titleConfig: titleConfig,
+                    isEdit: isEdit
+                });
+                var tabLayout = parentTabPanel.getLayout();
+                if (tabLayout) {
+                    tabLayout.setActiveItem(parentTabPanel.add(formView));
+                }
+            }
         }
-        me.setParentControl(formView);
+        me.setParentControl(formView, createMode);
         me.doAfterCreateAction(createMode, formView, isEdit);
         return formView;
 
     },
-    setParentControl: function (formView) {
+    setParentControl: function (formView, createMode) {
         var me = this,
             view = me.getView();
-        if (formView) {
+        if (formView && createMode==="popup") {
             var form = formView.down('form');
             form.parentGrid = view;
+        } else if (formView && createMode==="tab") {
+            formView.parentGrid = view;
         }
     },
     clearGridFilters: function (btn) {

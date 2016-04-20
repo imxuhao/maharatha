@@ -16,10 +16,11 @@ using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using System.Collections.ObjectModel;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
-  public class SubAccountUnitAppService: CORPACCOUNTINGServiceBase, ISubAccountUnitAppService
+    public class SubAccountUnitAppService : CORPACCOUNTINGServiceBase, ISubAccountUnitAppService
     {
 
         private readonly SubAccountUnitManager _subAccountUnitManager;
@@ -45,7 +46,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             await _subAccountUnitManager.CreateAsync(subAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-          
+
             return subAccountUnit.MapTo<SubAccountUnitDto>();
         }
 
@@ -83,7 +84,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<PagedResultOutput<SubAccountUnitDto>> GetSubAccountUnits(SearchInputDto input)
         {
-             var subAccountUnitQuery = CreateSubAccountQuery(input);
+            var subAccountUnitQuery = CreateSubAccountQuery(input);
             subAccountUnitQuery = subAccountUnitQuery.Where(item => item.OrganizationUnitId == input.OrganizationUnitId || item.OrganizationUnitId == null);
             var resultCount = await subAccountUnitQuery.CountAsync();
             var results = await subAccountUnitQuery
@@ -91,7 +92,37 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 .OrderBy(input.Sorting)
                 .PageBy(input)
                 .ToListAsync();
-            return new PagedResultOutput<SubAccountUnitDto>(resultCount, results);
+
+
+            var mapEnumResults = (from value in results
+                                  select new SubAccountUnitDto
+                                  {
+
+                                      AccountingLayoutItemId = value.AccountingLayoutItemId,
+                                      Caption = value.Caption,
+                                      Description = value.Description,
+                                      DisplaySequence = value.DisplaySequence,
+                                      EntityId = value.EntityId,
+                                      GroupCopyLabel = value.GroupCopyLabel,
+                                      IsAccountSpecific = value.IsAccountSpecific,
+                                      IsActive = value.IsActive,
+                                      IsApproved = value.IsApproved,
+                                      IsBudgetInclusive = value.IsBudgetInclusive,
+                                      IsCorporateSubAccount = value.IsCorporateSubAccount,
+                                      IsEnterable = value.IsEnterable,
+                                      IsMandatory = value.IsMandatory,
+                                      IsProjectSubAccount = value.IsProjectSubAccount,
+                                      OrganizationUnitId = value.OrganizationUnitId,
+                                      SearchNo = value.SearchNo,
+                                      SearchOrder = value.SearchOrder,
+                                      SubAccountId = value.SubAccountId,
+                                      SubAccountNumber = value.SubAccountNumber,
+                                      TypeOfInactiveStatusId = value.TypeOfInactiveStatusId,
+                                      TypeofSubAccount =  value.TypeofSubAccountId.ToDisplayName(),
+                                      TypeOfInactiveStatus = value.TypeOfInactiveStatusId != null ? value.TypeOfInactiveStatusId.ToDisplayName() : ""
+                                    
+                                  }).ToList();
+            return new PagedResultOutput<SubAccountUnitDto>(resultCount, mapEnumResults);
         }
 
         /// <summary>
@@ -107,7 +138,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         private IQueryable<SubAccountUnitDto> CreateSubAccountQuery(SearchInputDto input)
         {
-           
+
             var subAccountUnitQuery = from subAccount in _subAccountUnitRepository.GetAll()
                                       select new SubAccountUnitDto
                                       {
@@ -130,7 +161,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
                                           SearchOrder = subAccount.SearchOrder,
                                           SubAccountId = subAccount.Id,
                                           SubAccountNumber = subAccount.SubAccountNumber,
-                                          TypeOfInactiveStatusId = subAccount.TypeOfInactiveStatusId
+                                          TypeOfInactiveStatusId = subAccount.TypeOfInactiveStatusId,
+                                         TypeofSubAccountId=subAccount.TypeofSubAccountId
                                       };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -140,6 +172,15 @@ namespace CAPS.CORPACCOUNTING.Accounting
                     subAccountUnitQuery = Helper.CreateFilters(subAccountUnitQuery, mapSearchFilters);
             }
             return subAccountUnitQuery;
+        }
+
+        /// <summary>
+        /// Get SubAccountTypes
+        /// </summary>
+        /// <returns></returns>
+        public  List<NameValueDto> GetTypeofSubAccountList()
+        {
+            return EnumList.GetTypeofSubAccountList();
         }
     }
 }

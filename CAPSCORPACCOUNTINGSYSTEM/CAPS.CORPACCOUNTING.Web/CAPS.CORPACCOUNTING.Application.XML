@@ -228,6 +228,123 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.CreateAccountingHeaderTransactionInputUnit.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.Caption">
+            <summary>Gets or sets the Caption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.DisplaySequence">
+            <summary>Gets or sets the DisplaySequence field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.SubAccountNumber">
+            <summary>Gets or sets the SubAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.AccountingLayoutItemId">
+            <summary>Gets or sets the AccountingLayoutItemID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.GroupCopyLabel">
+            <summary>Gets or sets the GroupCopyLabel field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.IsAccountSpecific">
+            <summary>Gets or sets the IsAccountSpecific field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.IsMandatory">
+            <summary>Gets or sets the IsMandatory field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.IsBudgetInclusive">
+            <summary>Gets or sets the IsBudgetInclusive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.IsCorporateSubAccount">
+            <summary>Gets or sets the IsCorporateSubAccount field. </summary>// IsBudgetInclusive
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.IsProjectSubAccount">
+            <summary>Gets or sets the IsProjectSubAccount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.EntityId">
+            <summary>Gets or sets the EntityID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.IsApproved">
+            <summary>Gets or sets the IsApproved field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.IsEnterable">
+            <summary>Gets or sets the IsEnterable field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.SearchOrder">
+            <summary>Gets or sets the SearchOrder field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.SearchNo">
+            <summary>Gets or sets the SearchNo field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SubAccountId">
+            <summary>Gets or sets the SubAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.Caption">
+            <summary>Gets or sets the Caption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.DisplaySequence">
+            <summary>Gets or sets the DisplaySequence field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SubAccountNumber">
+            <summary>Gets or sets the SubAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.AccountingLayoutItemId">
+            <summary>Gets or sets the AccountingLayoutItemID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.GroupCopyLabel">
+            <summary>Gets or sets the GroupCopyLabel field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.IsAccountSpecific">
+            <summary>Gets or sets the IsAccountSpecific field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.IsMandatory">
+            <summary>Gets or sets the IsMandatory field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.IsBudgetInclusive">
+            <summary>Gets or sets the IsBudgetInclusive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.IsCorporateSubAccount">
+            <summary>Gets or sets the IsCorporateSubAccount field. </summary>// IsBudgetInclusive
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.IsProjectSubAccount">
+            <summary>Gets or sets the IsProjectSubAccount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.EntityId">
+            <summary>Gets or sets the EntityID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.IsApproved">
+            <summary>Gets or sets the IsApproved field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.IsEnterable">
+            <summary>Gets or sets the IsEnterable field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SearchOrder">
+            <summary>Gets or sets the SearchOrder field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SearchNo">
+            <summary>Gets or sets the SearchNo field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.UpdateAccountingHeaderTransactionInputUnit">
             <summary>
             Updates UpdateAccountingHeaderTransactionInputUnit
@@ -340,6 +457,88 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.UpdateAccountingHeaderTransactionInputUnit.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
+            <summary>
+            Create the SubAccount.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.UpdateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput)">
+            <summary>
+             Update the SubAccount based on SubAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.DeleteBankAccountUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the SubAccount based on SubAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.GetSubAccountUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all SubAccount
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.GetSubAccountUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get SubAccount based on SubAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.GetTypeofSubAccountList">
+            <summary>
+            Get GetTypeofSubAccount List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
+            <summary>
+            Create the Sub Account.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.UpdateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput)">
+            <summary>
+             Update Sub Account.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.DeleteBankAccountUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+             delete Sub Account.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.GetSubAccountUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all Sub Accounts
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.GetSubAccountUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get Sub Account based on Id
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.GetTypeofSubAccountList">
+            <summary>
+            Get SubAccountTypes
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserEditDto.Id">
             <summary>
@@ -831,6 +1030,18 @@
         <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetStandardGroupTotalList">
             <summary>
             Get StandardGroupTotal Enum as List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeOfInactiveStatusList">
+            <summary>
+            Get TypeOfInactiveStatus Enum as List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeofSubAccountList">
+            <summary>
+            Get TypeOfInactiveStatus Enum as List
             </summary>
             <returns></returns>
         </member>

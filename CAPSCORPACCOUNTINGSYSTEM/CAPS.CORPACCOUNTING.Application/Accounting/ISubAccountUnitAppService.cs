@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Accounting.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.Accounting
@@ -43,6 +44,12 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <param name="input"></param>
         /// <returns></returns>
         Task<SubAccountUnitDto> GetSubAccountUnitsById(IdInput input);
+
+        /// <summary>
+        /// Get GetTypeofSubAccount List
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeofSubAccountList();
 
     }
 }

@@ -3,9 +3,27 @@ using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 using System.ComponentModel.DataAnnotations;
+using CAPS.CORPACCOUNTING.Banking;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
+
+    /// <summary>
+    ///Enum for TypeofSubAccount 
+    /// </summary>
+    public enum TypeofSubAccount
+    {
+        [Display(Name = "Sub Accounts #1")]
+        SubAccounts1 = 1,
+        [Display(Name = "Sub Account #2")]
+        SubAccount2  = 2,
+        [Display(Name = "Sub Account #3")]
+        SubAccount3 = 3,
+        [Display(Name = "Locations")]
+        Locations = 4,
+        [Display(Name = "Sets")]
+        Sets = 5
+    }
     /// <summary>
     /// SubAccount is the Table name in Lajit
     /// </summary>
@@ -83,7 +101,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
-        public short? TypeOfInactiveStatusId { get; set; }
+        public TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
       
         /// <summary>Gets or sets the IsEnterable field. </summary>
         public bool? IsEnterable { get; set; }
@@ -100,6 +118,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public virtual int TenantId { get; set; }
+
+        /// <summary>Gets or sets the TypeofSubAccountId field. </summary>
+        [EnumDataType(typeof(TypeofSubAccount))]
+        public virtual TypeofSubAccount TypeofSubAccountId { get; set; }
         #endregion
 
         public SubAccountUnit()

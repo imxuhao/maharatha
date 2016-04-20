@@ -115,9 +115,9 @@ Ext.define('Chaching.view.users.UsersGrid', {
         renderer: function (val) {
             var rolesList = '';
             Ext.each(val, function (roles, index) {
-                rolesList = rolesList + roles.roleName + ',';
+                rolesList = rolesList + roles.roleName + ', ';
             });
-            return rolesList;
+            return rolesList.replace(/,\s*$/, "");
         }
     }
          , {

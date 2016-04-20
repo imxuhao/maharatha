@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using CAPS.CORPACCOUNTING.Banking;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Accounting.Dto
@@ -55,7 +56,7 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the TypeOfInactiveStatusId field. </summary>
-        public short? TypeOfInactiveStatusId { get; set; }
+        public TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
 
         /// <summary>Gets or sets the IsEnterable field. </summary>
         public bool? IsEnterable { get; set; }
@@ -69,5 +70,8 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
+
+        [Required]
+        public TypeofSubAccount TypeofSubAccountId { get; set; }
     }
 }

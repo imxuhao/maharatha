@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="EntityFramework\CORPACCOUNTINGDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\CORPACCOUNTINGRepositoryBase.cs" />
+    <Compile Include="MigrationExtensions.cs" />
     <Compile Include="Migrations\201501041229232_InitialCreate.cs" />
     <Compile Include="Migrations\201501041229232_InitialCreate.Designer.cs">
       <DependentUpon>201501041229232_InitialCreate.cs</DependentUpon>
@@ -1082,6 +1083,10 @@
     <Compile Include="Migrations\201604151401327_Update_Abp_V1.9.1.Designer.cs">
       <DependentUpon>201604151401327_Update_Abp_V1.9.1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604200644390_Modify_SubAccountUnit_Table.cs" />
+    <Compile Include="Migrations\201604200644390_Modify_SubAccountUnit_Table.Designer.cs">
+      <DependentUpon>201604200644390_Modify_SubAccountUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1824,6 +1829,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604151401327_Update_Abp_V1.9.1.resx">
       <DependentUpon>201604151401327_Update_Abp_V1.9.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604200644390_Modify_SubAccountUnit_Table.resx">
+      <DependentUpon>201604200644390_Modify_SubAccountUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

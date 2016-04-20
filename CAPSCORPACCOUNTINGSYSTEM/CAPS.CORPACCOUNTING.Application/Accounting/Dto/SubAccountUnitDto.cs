@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using CAPS.CORPACCOUNTING.Banking;
 
 namespace CAPS.CORPACCOUNTING.Accounting.Dto
 {
@@ -21,10 +22,13 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public int EntityId { get; set; }
         public bool IsApproved { get; set; }
         public bool IsActive { get; set; }
-        public short? TypeOfInactiveStatusId { get; set; }
+        public TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
+        public string TypeOfInactiveStatus { get; set; }
         public bool? IsEnterable { get; set; }
         public long? SearchOrder { get; set; }
         public string SearchNo { get; set; }
         public virtual long? OrganizationUnitId { get; set; }
+        public TypeofSubAccount TypeofSubAccountId { get; set; }
+        public string TypeofSubAccount { get; set; }
     }
 }

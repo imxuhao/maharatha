@@ -7,6 +7,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
     {
         public override void Up()
         {
+            this.DeleteDefaultContraint("dbo.CAPS_Address", "ObjectId");
             AlterColumn("dbo.CAPS_Address", "ObjectId", c => c.Long(nullable: false));
         }
         

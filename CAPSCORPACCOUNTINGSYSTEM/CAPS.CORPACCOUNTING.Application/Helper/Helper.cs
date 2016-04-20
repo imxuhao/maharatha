@@ -52,6 +52,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
             List<DateSearch> dateSearch = null;
             List<BooleanSearch> booleanSearch = null;
             List<DecimalSearch> decimalSearch = null;
+            List<EnumSearch> enumSearch = null;
             foreach (var item in Filters)
             {
                 switch (item.DataType)
@@ -70,7 +71,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
                         Mapper.CreateMap<Filters, NumericSearch>()
                             .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
                             .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
-                            .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : ""))) 
+                            .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : "")))
                             .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
                         numericSearch.Add(item.MapTo(new NumericSearch()));
                         break;
@@ -80,7 +81,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
                         Mapper.CreateMap<Filters, DateSearch>()
                            .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
-                         .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
+                           .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
                            .ForMember(u => u.SearchTerm2, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm2) ? src.SearchTerm2 : null)));
                         dateSearch.Add(item.MapTo(new DateSearch()));
                         break;
@@ -104,6 +105,14 @@ namespace CAPS.CORPACCOUNTING.Helpers
                             .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
                         decimalSearch.Add(item.MapTo(new DecimalSearch()));
                         break;
+                    case DataTypes.Enum:
+                        if (ReferenceEquals(enumSearch, null))
+                            enumSearch = new List<EnumSearch>();
+                        Mapper.CreateMap<Filters, EnumSearch>()
+                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                            .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)));
+                        enumSearch.Add(item.MapTo(new EnumSearch()));
+                        break;
                     default:
                         break;
                 }
@@ -119,6 +128,8 @@ namespace CAPS.CORPACCOUNTING.Helpers
                 search.BooleanSearch = booleanSearch;
             if (!ReferenceEquals(decimalSearch, null))
                 search.DecimalSearch = decimalSearch;
+            if (!ReferenceEquals(enumSearch, null))
+                search.EnumSearch = enumSearch;
             return search;
         }
 
@@ -142,11 +153,18 @@ namespace CAPS.CORPACCOUNTING.Helpers
             //date Search
             if (!ReferenceEquals(searchTypes.DateSearch, null))
                 query = query.ApplySearchCriterias(searchTypes.DateSearch);
+
             //Boolean Search
             if (!ReferenceEquals(searchTypes.BooleanSearch, null))
                 query = query.ApplySearchCriterias(searchTypes.BooleanSearch);
+
+            //Decimal Search
             if (!ReferenceEquals(searchTypes.DecimalSearch, null))
                 query = query.ApplySearchCriterias(searchTypes.DecimalSearch);
+
+            //Enum Search Search
+            if (!ReferenceEquals(searchTypes.EnumSearch, null))
+                query = query.ApplySearchCriterias(searchTypes.EnumSearch);
 
             return query;
         }
@@ -228,11 +246,11 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public string Property { get; set; }
         public string SearchTerm { get; set; }
         public int Comparator { get; set; }
-        public string SearchTerm2 { get; set; }   
+        public string SearchTerm2 { get; set; }
 
         public DataTypes DataType { get; set; }
     }
 
-  
+
 
 }

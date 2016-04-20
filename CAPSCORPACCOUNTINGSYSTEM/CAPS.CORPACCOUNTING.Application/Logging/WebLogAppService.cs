@@ -33,11 +33,32 @@ namespace CAPS.CORPACCOUNTING.Logging
                 return new GetLatestWebLogsOutput();
             }
 
-            var lines = AppFileHelper.ReadLines(lastLogFile.FullName).Reverse().Take(100).Reverse().ToList();
+            var lines = AppFileHelper.ReadLines(lastLogFile.FullName).Reverse().Take(1000).Reverse().ToList();
+            var logLineCount = 0;
+            var lineCount = 0;
+
+            foreach (var line in lines)
+            {
+                if (line.StartsWith("DEBUG") ||
+                    line.StartsWith("INFO") ||
+                    line.StartsWith("WARN") ||
+                    line.StartsWith("ERROR") ||
+                    line.StartsWith("FATAL"))
+                {
+                    logLineCount++;
+                }
+
+                lineCount++;
+
+                if (logLineCount == 100)
+                {
+                    break;
+                }
+            }
 
             return new GetLatestWebLogsOutput
             {
-                LatesWebLogLines = lines
+                LatesWebLogLines = lines.Take(lineCount).ToList()
             };
         }
 

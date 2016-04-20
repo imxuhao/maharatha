@@ -17,6 +17,9 @@ namespace CAPS.CORPACCOUNTING
             //Adding authorization providers
             Configuration.Authorization.Providers.Add<AppAuthorizationProvider>();
 
+            //Measuring the Duration of each Method
+            MeasureDurationInterceptorRegistrar.Initialize(IocManager.IocContainer.Kernel);
+
             ///TBD:This needs to be worked upon
            // DTOInterceptorRegistrar.Initialize(IocManager);
 

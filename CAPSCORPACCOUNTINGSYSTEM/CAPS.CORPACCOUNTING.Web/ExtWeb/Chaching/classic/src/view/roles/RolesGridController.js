@@ -1,8 +1,7 @@
 Ext.define('Chaching.view.roles.RolesGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.roles-rolesgrid',
-    doAfterCreateAction: function (createNewMode, form) {
-        debugger;
+    doAfterCreateAction: function (createNewMode, form) {       
         var me = this;
         var currentform = form;
         var data = {};

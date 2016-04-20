@@ -356,14 +356,20 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             for (var k = 0; k < defaultMenuItems.length; k++) {
                 menuItems.push(defaultMenuItems[k]);
             }
-        }
-
+        }      
         if (userMenuItems && userMenuItems.length > 0) {
             if (menuItems.length > 0) {
                 menuItems.push('-');
             }
             for (var l = 0; l < userMenuItems.length; l++) {
-                menuItems.push(userMenuItems[l]);
+                var userItem = {
+                    text: userMenuItems[l].text,
+                    iconCls: userMenuItems[l].iconCls,
+                    listeners: {
+                        click: controller[userMenuItems[l].clickActionName]
+                    }
+                }               
+                menuItems.push(userItem);
             }
         }
         var actionCol = {

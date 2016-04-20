@@ -29,7 +29,8 @@ Ext.define('Chaching.Application', {
         'profile.linkedaccounts.LinkedAccountsStore',
         'coa.ChartOfAccountStore',
         'profile.loginAttempts.LoginAttemptStore',
-        'manageView.ManageViewStore'
+        'manageView.ManageViewStore',
+        'roles.RolesTreeStore'
       
     ],
     mainView: 'Chaching.view.main.ChachingViewport',

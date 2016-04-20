@@ -1827,6 +1827,8 @@
     <Content Include="ExtWeb\Chaching\app\model\coa\ChartOfAccountModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\roles\RoleEditModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\roles\RolePermissionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
@@ -1835,6 +1837,7 @@
     <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\coa\ChartOfAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\loginAttempts\LoginAttemptStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingGlobals.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingRenderers.js" />
@@ -1857,6 +1860,9 @@
     <Content Include="ExtWeb\Chaching\classic\src\Application.js" />
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSelectionModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewList.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewListController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewView.js" />
@@ -1900,12 +1906,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeader.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeaderController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\header\ChachingHeaderModel.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguageTextsGridModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguageTextsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguageTextsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesGridController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesGridModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changeprofilepicture\ChangeProfilePictureFormModel.js" />
@@ -1938,9 +1942,12 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsViewModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsFormModel.js" />

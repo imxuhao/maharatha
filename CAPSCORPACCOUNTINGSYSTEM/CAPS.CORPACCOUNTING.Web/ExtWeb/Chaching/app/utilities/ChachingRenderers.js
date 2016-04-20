@@ -122,4 +122,7 @@
         else
             return '<i class="fa fa-close font-yellow-gold"  style="color:#E00353"></i>';
     },
+    languagesTextsEditIcon: function (val, meta, record, rowIndex) {        
+            return '<i class="fa fa-edit" ></i>';       
+    },
 });

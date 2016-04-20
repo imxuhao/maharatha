@@ -3,6 +3,12 @@
     model: 'Chaching.model.languages.LanguageTextsModel',  
     proxy: {
         type: 'chachingProxy',
+        extraParams: {
+            'TargetValueFilter':null,
+            'TargetLanguageName':null,
+            'BaseLanguageName':null,
+            'SourceName': null
+        },
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         headers: {
             'Accept': 'application/json, text/plain, */*',

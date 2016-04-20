@@ -3,15 +3,10 @@ Ext.define('Chaching.view.roles.RolesGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.roles.RolesGridController',
-        'Chaching.view.roles.RolesGridModel'
+        'Chaching.view.roles.RolesGridController'
     ],
 
     controller: 'roles-rolesgrid',
-    viewModel: {
-        type: 'roles-rolesgrid'
-    },
-
     xtype: 'roles',
     store: 'roles.RolesStore',
     name: 'Administration.Roles',

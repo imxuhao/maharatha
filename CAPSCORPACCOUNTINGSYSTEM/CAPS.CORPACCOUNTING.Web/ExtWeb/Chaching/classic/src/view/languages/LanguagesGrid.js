@@ -4,13 +4,13 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
 
     requires: [
         'Chaching.view.languages.LanguagesGridController',
-        'Chaching.view.languages.LanguagesGridModel'
+      //  'Chaching.view.languages.LanguagesGridModel'
     ],
 
     controller: 'languages-languagesgrid',
-    viewModel: {
-        type: 'languages-languagesgrid'
-    },
+    //viewModel: {
+    //    type: 'languages-languagesgrid'
+    //},
 
     xtype: 'languages',
     store: 'languages.LanguagesStore',
@@ -40,9 +40,7 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
     actionColumnMenuItemsConfig: [{
         text: app.localize('ChangeTexts'),
         iconCls: 'fa fa-pencil',
-        //listeners: {
-        //    click: controller.editActionClicked
-        //}
+        clickActionName: 'changeLanguageClick'
     }],
     requireExport: true,
     requireMultiSearch: true,
@@ -51,6 +49,7 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
     editingMode: 'row',
     createNewMode: 'popup',
     columnLines: true,
+    columndata:null,
     multiColumnSort: true,
     columns: [
         {

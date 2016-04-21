@@ -16,7 +16,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
-            autoLoad: true,
+            autoLoad: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -40,7 +40,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
-            autoLoad: true,
+            autoLoad: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -63,7 +63,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
-            autoLoad: true,
+            autoLoad: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -87,7 +87,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
-            autoLoad: true,
+            autoLoad: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',

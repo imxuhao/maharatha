@@ -1,6 +1,8 @@
 Ext.define('Chaching.model.financials.accounts.ChartOfAccountsModel', {
     extend: 'Chaching.model.base.BaseModel',
-    
+    config: {
+        searchEntityName: 'COA'
+    },
     fields: [
             { name: 'coaId', type: 'int', isPrimaryKey: true },
             { name: 'caption', type: 'string' },

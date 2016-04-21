@@ -28,5 +28,13 @@
         }
     },
     idPropertyField: 'id',
-   
+   listeners: {
+       beforeload:function(store, operation, eOpts) {
+           var proxy = operation.getProxy(),
+               params = proxy.getExtraParams();
+           if (params && (!params.TargetValueFilter || !params.TargetLanguageName || !params.BaseLanguageName || !params.SourceName)) {
+               return false;
+           }
+       }
+   }
 });

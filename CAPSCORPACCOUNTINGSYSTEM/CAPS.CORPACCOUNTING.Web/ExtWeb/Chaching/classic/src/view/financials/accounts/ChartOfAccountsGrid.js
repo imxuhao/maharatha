@@ -60,7 +60,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              dataIndex: 'caption',
              sortable: true,
              groupable: true,
-             width: '93%',
+             width: '50%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -177,7 +177,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              dataIndex: 'linkChartOfAccountName',
              sortable: true,
              groupable: true,
-             width: '15%',
+             width: '22%',
              hidden: false
         , filterField: {
             xtype: 'textfield',
@@ -190,11 +190,12 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              dataIndex: 'standardGroupTotal',
              sortable: true,
              groupable: true,
-             width: '15%',
+             width: '20%',
              hidden: false,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
+                 entityName:'',
                  emptyText: 'Enter Std Group Total to search'
              }
          }

@@ -13,7 +13,7 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
     routes: {
         ':node': 'onRouteChange'
     },
-
+    defaultToken:'#dashboard',
     lastView: null,
     onRouteChange: function (id) {
         if (Chaching.utilities.RoutesNames.routesNames.indexOf(id) !== -1) {
@@ -78,6 +78,7 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
                     var gridStore = newView.getStore();
                     if (gridStore)gridStore.load();
                 }
+                newView.on('beforedestroy', me.onTabClose, newView, me);
             }
 
             if (!newView || !newView.isWindow) {
@@ -153,6 +154,13 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
 
         if (to && window.location.hash !== '#' + to) {
             this.redirectTo(to);
+        }
+    },
+    onTabClose:function(tabPanel, controller) {
+        var to = tabPanel && (tabPanel.routeId);
+
+        if (to && window.location.hash === '#' + to) {
+            window.history.back();
         }
     }
 

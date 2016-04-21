@@ -170,7 +170,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * Time in milliseconds to wait after the user stops typing, before
      * triggering the filtering
      */
-    , buffer: 500
+    , buffer: 1000
 
     /**
      * @cfg {String} clearItemIconCls CSS class to use for "Clear Filter" menu item.
@@ -428,8 +428,10 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         });
 
         grid.on({
-            scope: me
-            , reconfigure: me.onReconfigure
+            scope: me,
+            reconfigure: me.onReconfigure,
+            columnhide: me.onGridColumnHide,
+            columnshow: me.onGridColumnShow
         });
 
         var gridView = grid.getView();
@@ -460,7 +462,29 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         };
 
     } // eo function init
-    , updateGridLayout: function (grid, e) {
+    //Grid event for hide/show of columns
+    ,onGridColumnHide:function(ct, column, eOpts) {
+        var me = this;
+        me.rearrangeFilterFields(column, 'hide');
+    }
+    , onGridColumnShow:function(ct, column, eOpts) {
+        var me = this;
+        me.rearrangeFilterFields(column, 'show');
+    }
+    ,rearrangeFilterFields: function(column, mode) {
+        var me = this,
+            items = me.items;
+        if (items && items.length > 0) {
+            var item = items.get(column.dataIndex);
+            if (item) {
+                mode === "show" ? item.show() : item.hide();
+            }
+        }
+        me.syncOrder();
+        me.syncUi();
+        me.syncCols();
+        me.grid.getView().refresh();
+    }, updateGridLayout: function (grid, e) {
         grid.component.up().doLayout();
     }
 
@@ -496,8 +520,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
 
         Ext.Array.each(gridCols, function (item, i) {
             var filter = item.filterField || item.filter
-                , cfg = { xtype: 'component' }
-                , field = null
+                , cfg = { xtype: 'component', width: '100%', hideMode: 'offsets' }, field = null
             ;
 
             // filter:true - create textfield
@@ -524,6 +547,21 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             else {
                 cfg.cls = 'saki-gms-nofilter';
                 cfg.height = me.height;
+                if (item.name==="ActionColumn") {
+                    //debugger;
+                    cfg =
+                    {
+                        xtype: 'button',
+                        iconCls: 'fa fa-filter',
+                        height: me.height,
+                        scale: 'small',
+                        tooltip: app.localize('ClearFilter'),
+                        ui: 'clearFilter',
+                        handler:function() {
+                            me.clearValues();
+                        }
+                    };
+                }
             }
             if ('iconCol' === item.itemId) {
                 Ext.apply(cfg, me.getIcon());
@@ -598,7 +636,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             entityName = model.$config.values.searchEntityName,
             dataField = model.getField(field.getItemId());
        
-        if (filter && field) {
+        if (filter && field&&dataField) {
             if (typeof(field.entityName) !== "undefined") {
                 filter.entity = field.entityName;
             } else {

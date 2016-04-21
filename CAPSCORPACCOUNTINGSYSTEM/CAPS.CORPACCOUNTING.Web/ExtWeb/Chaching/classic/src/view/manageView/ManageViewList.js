@@ -47,7 +47,8 @@ Ext.define('Chaching.view.manageView.ManageViewList',{
     columnLines: true,
     multiColumnSort: false,
     manageViewSetting: false,
-    showPagingToolbar:false,
+    showPagingToolbar: false,
+    hideClearFilter:true,
     selModelConfig: {
         selType: 'chachingCheckboxSelectionModel',
         injectCheckbox: 'last',

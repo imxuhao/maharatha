@@ -105,6 +105,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     manageViewSetting: true,
     activeUserViewId: null,
     isSubMenuItemTab: false,
+    hideClearFilter:false,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -162,6 +163,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             width: 20,
             tooltip: app.localize('ClearFilter'),
             ui: 'actionButton',
+            hidden:me.hideClearFilter,
             listeners: {
                 click:'clearGridFilters'
             }

@@ -55,7 +55,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             itemId:'LocalizationBtn',
             contextMenu:undefined,
             listeners: {
-                mouseover: 'onLocalizationHover',
+                click: 'onLocalizationHover',
                 beforerender:'onBeforeLocalizationRender'
             }
         },
@@ -72,7 +72,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
              contextMenu: undefined,
              menu: undefined,
              listeners: {
-                 mouseover: 'onNotificationHover',
+                 click: 'onNotificationHover',
                  boxready: 'onNotificationReady'
              }
          },
@@ -93,7 +93,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
                 'top':'3px !important'
             },
             listeners: {
-                mouseover: 'onAccountsHover',
+                click: 'onAccountsHover',
                 boxready: 'onAccountsReady'
             }
         }, {

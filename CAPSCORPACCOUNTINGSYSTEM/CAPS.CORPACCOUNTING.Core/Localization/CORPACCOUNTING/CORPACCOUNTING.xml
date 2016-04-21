@@ -465,5 +465,19 @@
     <text name="1099s" value="1099s" />
     <text name="PurchaseOrderHistory" value="Purchase Order History" />
     <text name="SearchPurchaseOrders" value="Search All Purchase Orders" />
+    <text name="Number" value="Number" />
+    <text name="JournalsAllowed" value="Journals Allowed" />
+    <text name="CorpSubAccount" value="Corp. Sub-Account" />
+    <text name="ProjectSubAccount" value="Project Sub-Account" />
+    <text name="AccountSpecific" value="Account Specific" />
+    <text name="MandatoryEntry" value="Mandatory Entry" />
+    <text name="BudgetInclusive" value="Budget Inclusive" />
+    <text name="GroupCopyLabel" value="group Copy Label" />
+    <text name="TypeofSubAccount" value="Type Of Sub Account" />
+    <text name="Trans#" value="Trans #" />
+    <text name="CreateNewSubAccounts" value="Create New Sub Account" />
+    <text name="EditSubAccount" value="Edit Sub Account" />
+    <text name="MandatoryField" value="This is Mandatory Field" />
+    this is mandatory field
   </texts>
 </localizationDictionary>

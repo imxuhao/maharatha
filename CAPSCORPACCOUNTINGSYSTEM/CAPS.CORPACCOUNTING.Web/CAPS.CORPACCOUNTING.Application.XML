@@ -285,6 +285,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.TypeofSubAccountId">
+            <summary>Gets or sets the TypeofSubAccountId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SubAccountId">
             <summary>Gets or sets the SubAccountId field. </summary>
         </member>
@@ -344,6 +347,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.TypeofSubAccountId">
+            <summary>Gets or sets the TypeofSubAccountId field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.UpdateAccountingHeaderTransactionInputUnit">
             <summary>
@@ -1021,6 +1027,13 @@
             <summary>
             A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
             </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumHelper.GetEnumValue``1(System.Int32)">
+            
+             Method to get enumeration value from int value.
+            
+            
+            
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.EnumList">
             <summary>

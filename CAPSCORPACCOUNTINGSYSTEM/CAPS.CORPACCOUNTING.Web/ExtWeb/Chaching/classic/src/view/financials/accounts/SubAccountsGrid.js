@@ -1,5 +1,5 @@
 
-Ext.define('Chaching.view.financials.accounts.SubAccountsGrid',{
+Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
@@ -54,15 +54,15 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid',{
     columns: [
          {
              xtype: 'gridcolumn',
-             text: app.localize('Caption'),
-             dataIndex: 'caption',
+             text: app.localize('Number'),
+             dataIndex: 'subAccountNumber',
              sortable: true,
              groupable: true,
-             width: '93%',
+             width: '10%',
              filterField: {
                  xtype: 'textfield',
-                 width: '100%',
-                 emptyText: 'Enter Chart Of Account to search'
+                 width: '15%',
+                 emptyText: 'Enter Number to search'
              }, editor: {
                  xtype: 'textfield',
              }
@@ -73,7 +73,6 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid',{
              sortable: true,
              groupable: true,
              width: '15%',
-             hidden: true,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -81,120 +80,163 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid',{
              }, editor: {
                  xtype: 'textfield',
              }
-         }, {
+         },
+          {
+              xtype: 'gridcolumn',
+              text: app.localize('TypeofSubAccount'),
+              dataIndex: 'typeofSubAccount',
+              sortable: true,
+              groupable: true,
+              width: '15%',
+              filterField: {
+                  xtype: 'combobox',
+                  valueField: 'typeofSubAccountId',
+                  displayField: 'typeofSubAccount',                  
+                  bind: {
+                      store: '{typeOfSubAccountList}'
+                  }
+              }
+          },
+
+         {
              xtype: 'gridcolumn',
-             text: app.localize('IsApproved'),
-             dataIndex: 'isApproved',
+             text: app.localize('JournalsAllowed'),
+             dataIndex: 'isActive',
              sortable: true,
              groupable: true,
-             width: '5%',
-             hidden: true,
-             renderer: function (val) {
-                 if (val) return 'YES';
-                 else return 'NO';
-             },
+             width: '8%',
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
                  valueField: 'value',
                  displayField: 'text',
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
-                 }
-             }
-         }, {
-             xtype: 'gridcolumn',
-             text: app.localize('IsPrivate'),
-             dataIndex: 'isPrivate',
-             sortable: true,
-             groupable: true,
-             hidden: true,
-             width: '5%',
-             renderer: function (val) {
-                 if (val) return 'YES';
-                 else return 'NO';
-             },
-             filterField: {
-                 xtype: 'combobox',
-                 valueField: 'value',
-                 displayField: 'text',
-                 store: {
-                     fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
-                 }
-             }
-         }, {
-             xtype: 'gridcolumn',
-             text: app.localize('IsCorporate'),
-             dataIndex: 'isCorporate',
-             sortable: true,
-             groupable: true,
-             width: '5%',
-             hidden: true,
-             renderer: function (val) {
-                 if (val) return 'YES';
-                 else return 'NO';
-             },
-             filterField: {
-                 xtype: 'combobox',
-                 valueField: 'value',
-                 displayField: 'text',
-                 store: {
-                     fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
                  xtype: 'checkbox'
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('IsNumeric'),
-             dataIndex: 'isNumeric',
+             text: app.localize('CorpSubAccount'),
+             dataIndex: 'isCorporateSubAccount',
              sortable: true,
              groupable: true,
-             width: '5%',
-             hidden: true,
-             renderer: function (val) {
-                 if (val) return 'YES';
-                 else return 'NO';
-             },
+             width: '8%',
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
                  valueField: 'value',
                  displayField: 'text',
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
                  xtype: 'checkbox'
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('ConvertToNewCOA'),
-             dataIndex: 'linkChartOfAccountName',
+             text: app.localize('ProjectSubAccount'),
+             dataIndex: 'isProjectSubAccount',
              sortable: true,
              groupable: true,
-             width: '15%',
-             hidden: false
-        , filterField: {
-            xtype: 'textfield',
-            width: '100%',
-            emptyText: 'Enter Convert To New COA to search'
-        }
+             width: '8%',
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: 'combobox',
+                 valueField: 'value',
+                 displayField: 'text',
+                 store: {
+                     fields: [{ name: 'text' }, { name: 'value' }],
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                 }
+             }, editor: {
+                 xtype: 'checkbox'
+             }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('StdGroupTotal'),
-             dataIndex: 'standardGroupTotal',
+             text: app.localize('AccountSpecific'),
+             dataIndex: 'isAccountSpecific',
              sortable: true,
              groupable: true,
-             width: '15%',
-             hidden: false,
+             width: '6%',
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: 'combobox',
+                 valueField: 'value',
+                 displayField: 'text',
+                 store: {
+                     fields: [{ name: 'text' }, { name: 'value' }],
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                 }
+             }, editor: {
+                 xtype: 'checkbox'
+             }
+         }
+         , {
+             xtype: 'gridcolumn',
+             text: app.localize('MandatoryEntry'),
+             dataIndex: 'isMandatory',
+             sortable: true,
+             groupable: true,
+             width: '6%',
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: 'combobox',
+                 valueField: 'value',
+                 displayField: 'text',
+                 store: {
+                     fields: [{ name: 'text' }, { name: 'value' }],
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                 }
+             }, editor: {
+                 xtype: 'checkbox'
+             }
+         }
+         , {
+             xtype: 'gridcolumn',
+             text: app.localize('BudgetInclusive'),
+             dataIndex: 'isBudgetInclusive',
+             sortable: true,
+             groupable: true,
+             width: '6%',
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: 'combobox',
+                 valueField: 'value',
+                 displayField: 'text',
+                 store: {
+                     fields: [{ name: 'text' }, { name: 'value' }],
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                 }
+             }, editor: {
+                 xtype: 'checkbox'
+             }
+         }
+         , {
+             xtype: 'gridcolumn',
+             text: app.localize('GroupCopyLabel'),
+             dataIndex: 'groupCopyLabel',
+             sortable: true,
+             groupable: true,
+             width: '10%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
-                 emptyText: 'Enter Std Group Total to search'
+                 emptyText: 'Enter Group Copy Label to search'
+             }, editor: {
+                 xtype: 'textfield',
              }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('Trans#'),
+             dataIndex: 'subAccountId',
+             sortable: true,
+             groupable: true,
+             width: '10%',
+             hidden: true
          }
     ]
 });

@@ -106,7 +106,7 @@ namespace CAPS.CORPACCOUNTING.Authorization
             ach.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ACH_Edit, L("Edit"));
             ach.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ACH_Delete, L("Delete"));
 
-            var reconciliation = banking.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation, L("Reconciliation"));
+            var reconciliation = banking.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation, L("BankReconciliation"));
             reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Create, L("Create"));
             reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Edit, L("Edit"));
             reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Delete, L("Delete"));

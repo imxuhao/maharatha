@@ -215,7 +215,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 clearItemIconCls: 'icon-settings',
                 pluginId: 'gms',
                 height: 32,
-                filterOnEnter: false
+                filterOnEnter: false,
+                viewModel: {
+                    type: 'common-grid-chachinggridpanel'
+                }
             };
             plugins.push(mutisearch);
         }

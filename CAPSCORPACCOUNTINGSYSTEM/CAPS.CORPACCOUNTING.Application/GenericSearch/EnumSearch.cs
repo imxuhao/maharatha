@@ -11,7 +11,11 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
         {
             get
             {
-                return Type.GetType(this.EnumTypeName);
+                if (!string.IsNullOrEmpty(this.EnumTypeName))
+                    return Type.GetType(this.EnumTypeName);
+                else
+                    return null;
+
             }
         }
 
@@ -32,8 +36,11 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
             {
                 return null;
             }
-
-            var enumValue = Enum.Parse(this.EnumType, this.SearchTerm);
+            object enumValue = null;
+            if (!ReferenceEquals(this.EnumType, null))
+                 enumValue = Enum.Parse(this.EnumType, this.SearchTerm);
+            else
+                 enumValue = Enum.Parse(property.Type, this.SearchTerm);
 
             Expression searchExpression = Expression.Equal(property, Expression.Constant(enumValue));
 

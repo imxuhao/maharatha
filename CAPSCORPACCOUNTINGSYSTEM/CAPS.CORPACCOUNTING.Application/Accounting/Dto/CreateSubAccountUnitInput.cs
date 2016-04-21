@@ -21,6 +21,7 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public short? DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the SubAccountNumber field. </summary>
+       [Required]
         [StringLength(SubAccountUnit.MaxLength)]
         public string SubAccountNumber { get; set; }
 
@@ -71,7 +72,8 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
 
-        [Required]
+        /// <summary>Gets or sets the TypeofSubAccountId field. </summary>
+        [EnumDataType(typeof(TypeofSubAccount))]
         public TypeofSubAccount TypeofSubAccountId { get; set; }
     }
 }

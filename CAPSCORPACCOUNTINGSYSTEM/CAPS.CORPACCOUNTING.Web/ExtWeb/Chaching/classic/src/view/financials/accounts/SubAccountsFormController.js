@@ -1,5 +1,5 @@
 Ext.define('Chaching.view.financials.accounts.SubAccountsFormController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.financials-accounts-subaccountsform'
     
 });

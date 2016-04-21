@@ -1,20 +1,15 @@
-﻿using Abp.Authorization;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Accounting.Dto;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
-using CAPS.CORPACCOUNTING.Masters.Dto;
-using CAPS.CORPACCOUNTING.Masters;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
-using CAPS.CORPACCOUNTING.JobCosting;
 using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
-using System.Collections.ObjectModel;
 using AutoMapper;
 using System.Collections.Generic;
 
@@ -89,7 +84,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var resultCount = await subAccountUnitQuery.CountAsync();
             var results = await subAccountUnitQuery
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("Description ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 
@@ -118,9 +113,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
                                       SubAccountId = value.SubAccountId,
                                       SubAccountNumber = value.SubAccountNumber,
                                       TypeOfInactiveStatusId = value.TypeOfInactiveStatusId,
-                                      TypeofSubAccount =  value.TypeofSubAccountId.ToDisplayName(),
-                                      TypeOfInactiveStatus = value.TypeOfInactiveStatusId != null ? value.TypeOfInactiveStatusId.ToDisplayName() : ""
-                                    
+                                      TypeOfInactiveStatus = value.TypeOfInactiveStatusId != null ? value.TypeOfInactiveStatusId.ToDisplayName() : "",
+                                      TypeofSubAccount = value.TypeofSubAccountId.ToDisplayName(),
+                                      TypeofSubAccountId=value.TypeofSubAccountId
                                   }).ToList();
             return new PagedResultOutput<SubAccountUnitDto>(resultCount, mapEnumResults);
         }
@@ -161,8 +156,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
                                           SearchOrder = subAccount.SearchOrder,
                                           SubAccountId = subAccount.Id,
                                           SubAccountNumber = subAccount.SubAccountNumber,
-                                          TypeOfInactiveStatusId = subAccount.TypeOfInactiveStatusId,
-                                         TypeofSubAccountId=subAccount.TypeofSubAccountId
+                                          TypeOfInactiveStatusId = subAccount.TypeOfInactiveStatusId.Value,
+                                          TypeofSubAccountId = subAccount.TypeofSubAccountId
                                       };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -178,7 +173,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// Get SubAccountTypes
         /// </summary>
         /// <returns></returns>
-        public  List<NameValueDto> GetTypeofSubAccountList()
+        public List<NameValueDto> GetTypeofSubAccountList()
         {
             return EnumList.GetTypeofSubAccountList();
         }

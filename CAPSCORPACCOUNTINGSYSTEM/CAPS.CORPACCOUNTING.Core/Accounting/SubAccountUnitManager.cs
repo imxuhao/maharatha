@@ -46,7 +46,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             //Validating if Duplicate Sub Account exists
             if (SubAccountUnitRepository != null)
             {
-                var subaccountunit = (await SubAccountUnitRepository.GetAllListAsync(p => p.Caption == subAccountUnit.Caption && p.OrganizationUnitId == subAccountUnit.OrganizationUnitId && p.TenantId == subAccountUnit.TenantId));
+                var subaccountunit = (await SubAccountUnitRepository.GetAllListAsync(p => p.SubAccountNumber == subAccountUnit.SubAccountNumber && p.OrganizationUnitId == subAccountUnit.OrganizationUnitId && p.TenantId == subAccountUnit.TenantId));
 
                 if (subAccountUnit.Id == 0)
                 {
@@ -57,7 +57,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 }
                 else
                 {
-                    if (subaccountunit.FirstOrDefault(p => p.Id != subAccountUnit.Id && p.Caption == subAccountUnit.Caption) != null)
+                    if (subaccountunit.FirstOrDefault(p => p.Id != subAccountUnit.Id && p.SubAccountNumber == subAccountUnit.SubAccountNumber) != null)
                     {
                         throw new UserFriendlyException(L("Duplicate Sub Account", subAccountUnit.Caption));
                     }

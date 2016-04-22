@@ -3,6 +3,7 @@ using Abp.Application.Services;
 using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -46,6 +47,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         Task<JobUnitDto> GetJobUnitById(IdInput input);
 
-     
+        Task<List<NameValueDto>> GetOrganizationUnits(IdInput input);
+
+
     }
 }

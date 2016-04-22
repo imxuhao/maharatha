@@ -121,6 +121,32 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                     totalProperty: 'result.totalCount'
                 }
             }
+        },
+        getOrganizations: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'organizationName', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'organizationId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            autoLoad: false,
+            extraParams: {
+                'Id':1
+            },
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/jobUnit/GetOrganizationUnits',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result',
+                    totalProperty: 'result.totalCount'
+                }
+            }
         }
     }
 

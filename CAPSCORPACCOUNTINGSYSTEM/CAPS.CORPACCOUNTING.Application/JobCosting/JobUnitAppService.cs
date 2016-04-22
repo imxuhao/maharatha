@@ -14,6 +14,7 @@ using Abp.Authorization;
 using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
+using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -28,9 +29,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<CustomerUnit> _customerUnitRepository;
         private readonly IJobCommercialAppService _jobCommercialAppService;
         private readonly IJobBudgetUnitAppService _jobBudgetUnitAppService;
+        private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
+
 
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IUnitOfWorkManager unitOfWorkManager, IRepository<JobCommercialUnit> jobDetailUnitRepository,
-            IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService, IJobBudgetUnitAppService jobBudgetUnitAppService)
+            IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService, IJobBudgetUnitAppService jobBudgetUnitAppService,
+            IRepository<OrganizationUnit, long> organizationUnitRepository)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -40,6 +44,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _customerUnitRepository = customerUnitRepository;
             _jobCommercialAppService = jobCommercialAppService;
             _jobBudgetUnitAppService = jobBudgetUnitAppService;
+            _organizationUnitRepository = organizationUnitRepository;
         }
         /// <summary>
         /// To create the Job
@@ -174,6 +179,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             result.JobId = jobitem.Id;
             return result;
 
+        }
+
+       public async Task<List<NameValueDto>> GetOrganizationUnits(IdInput input)
+        {
+            var organizations = await _organizationUnitRepository.GetAll().Where(p => p.Id != input.Id)
+                .Select(u=> new NameValueDto {Name=u.DisplayName,Value=u.Id.ToString() }).ToListAsync(); 
+         return organizations; 
         }
 
     }

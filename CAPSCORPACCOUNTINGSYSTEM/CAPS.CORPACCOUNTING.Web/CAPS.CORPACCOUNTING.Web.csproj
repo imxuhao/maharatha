@@ -1830,6 +1830,8 @@
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\ChartOfAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\DivisionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\SubAccountsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobLocationsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobCommercialsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />

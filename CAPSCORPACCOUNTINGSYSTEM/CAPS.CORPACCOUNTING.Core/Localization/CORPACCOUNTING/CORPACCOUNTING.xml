@@ -477,7 +477,19 @@
     <text name="Trans#" value="Trans #" />
     <text name="CreateNewSubAccounts" value="Create New Sub Account" />
     <text name="EditSubAccount" value="Edit Sub Account" />
-    <text name="MandatoryField" value="This is Mandatory Field" />
-    this is mandatory field
+    <text name="MandatoryField" value="This is Mandatory Field" />  
+
+    <text name="CreateNewDivision" value="CREATE NEW DIVISION" />
+    <text name="EditDivision" value="Edit Division" />
+    <text name="DivisionNumber" value="Division Number" />
+    <text name="Currency" value="Currency" />
+    <text name="Inter-CompanyAccount" value="Inter-Company Account" />
+    <text name="UseCorpDivisionDefault" value="UseCorp Division Default" />
+    <text name="Inter-CompanyLink" value="Inter-CompanyLink" />
+    <text name="Inter-CompanySub" value="Inter-Company Sub" />
+    
+    
+    
+
   </texts>
 </localizationDictionary>

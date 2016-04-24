@@ -12,8 +12,26 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string AuditLogs = "Administration.AuditLogs";
                 public const string OrganizationUnits = "Administration.OrganizationUnits";
                 public const string Languages = "Administration.Languages";
+            }
 
+            public static class Host
+            {
+                public const string Tenants = "Tenants";
+                public const string Editions = "Editions";
+                public const string Maintenance = "Administration.Maintenance";
+                public const string Settings = "Administration.Settings.Host";
+            }
+
+            public static class Tenant
+            {
+                public const string Dashboard = "Dashboard.Tenant";
+                public const string Settings = "Administration.Settings.Tenant";
+            }
+
+            public static class  Organization
+            {
                 #region Financials Tabs
+
                 public const string Financials = "Financials";
                 public const string FinancialsAccounts = "Financials.Accounts";
                 public const string FinancialsAccountsCoas = "Financials.Accounts.ChartOfAccounts";
@@ -41,18 +59,22 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string FinancialsPreferences = "Financials.Preferences";
                 public const string FinancialsPreferencesFiscalPeriod = "Financials.Preferences.FiscalPeriod";
                 public const string FinancialsPreferencesBankSetup = "Financials.Preferences.BankSetup";
+
                 #endregion
 
                 #region Projects Tab
+
                 public const string Projects = "Projects";
                 public const string ProjectsProjectMaintenance = "Projects.ProjectMaintenance";
                 public const string ProjectsMaintenanceProjects = "Projects.ProjectMaintenance.Projects";
                 public const string ProjectsMaintenanceProjectCoas = "Projects.ProjectMaintenance.ProjectCOAs";
                 public const string ProjectsMaintenanceContracts = "Projects.ProjectMaintenance.Contracts";
                 public const string ProjectsInquiry = "Projects.Inquiry";
+
                 #endregion
 
                 #region Receivables Tab
+
                 public const string Receivables = "Receivables";
                 public const string ReceivablesCustomers = "Receivables.Customers";
                 public const string ReceivablesCustomersHistory = "Receivables.Customers.History";
@@ -67,9 +89,11 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string ReceivablesPreferencesTerritories = "Receivables.Preferences.Territories";
                 public const string ReceivablesPreferencesPaymentTerms = "Receivables.Preferences.PaymentTerms";
                 public const string ReceivablesPreferencesARInvoiceTemplate = "Receivables.Preferences.ARInvoiceTemplate";
+
                 #endregion
 
                 #region Payables Tab
+
                 public const string Payables = "Payables";
                 public const string PayablesVendors = "Payables.Vendors";
                 public const string PayablesInvoices = "Payables.Invoices";
@@ -84,22 +108,28 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string PayablesPreferencesVendorPaymentTerms = "Payables.Preferences.VendorPaymentTerms";
                 public const string PayablesYEProcesses = "Payables.YEProcesses";
                 public const string PayablesYEProcesses1099s = "Payables.YEProcesses.1099s";
+
                 #endregion
 
                 #region PurchaseOrders
+
                 public const string PurchaseOrders = "PurchaseOrders";
                 public const string PurchaseOrdersEntry = "PurchaseOrders.Entry";
+
                 #endregion
 
                 #region Purchasing Tab
+
                 public const string Purchasing = "Purchasing";
                 public const string PurchasingInquiry = "Purchasing.Inquiry";
                 public const string PurchasingInquiryPurchaseOrderHistory = "Purchasing.Inquiry.PurchaseOrderHistory";
                 public const string PurchasingInquirySearchPurchaseOrders = "Purchasing.Inquiry.SearchPurchaseOrders";
                 public const string PurchasingInquiryPOAgingGrid = "Purchasing.Inquiry.POAgingGrid";
+
                 #endregion
 
                 #region Petty Cash Tab
+
                 public const string PettyCash = "PettyCash";
                 public const string PettyCashPCVendors = "PettyCash.PCVendors";
                 public const string PettyCashEntry = "PettyCash.Entry";
@@ -107,9 +137,11 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string PettyCashPCVendorsHistory = "PettyCash.PCVendors.History";
                 public const string PettyCashInquiryPCAccountSummary = "PettyCash.Inquiry.PCAccountSummary";
                 public const string PettyCashInquiryPCAdvancedSearch = "PettyCash.Inquiry.PCAdvancedSearch";
+
                 #endregion
 
                 #region Credit Card Tab
+
                 public const string CreditCard = "CreditCard";
                 public const string CreditCardEntry = "CreditCard.Entry";
                 public const string CreditCardInquiry = "CreditCard.Inquiry";
@@ -117,9 +149,11 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string CreditCardInquiryCreditCardUploadInfo = "CreditCard.Inquiry.CreditCardUploadInfo";
                 public const string CreditCardPreferences = "CreditCard.Preferences";
                 public const string CreditCardPreferencesCreditCardCompanies = "CreditCard.Preferences.CreditCardCompanies";
+
                 #endregion
 
                 #region Payroll Tab
+
                 public const string Payroll = "Payroll";
                 public const string PayrollEntry = "Payroll.Entry";
                 public const string PayrollInquiry = "Payroll.Inquiry";
@@ -130,25 +164,14 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string PayrollPreferencesPayrollCompanies = "Payroll.Preferences.PayrollCompanies";
                 public const string PayrollPreferencesPaychexControl = "Payroll.Preferences.PaychexControl";
                 public const string PayrollPreferencesPayrollFringeReallocation = "Payroll.Preferences.PayrollFringeReallocation";
+
                 #endregion
 
                 #region Posting Tab
+
                 public const string Posting = "Posting";
+
                 #endregion
-            }
-
-            public static class Host
-            {
-                public const string Tenants = "Tenants";
-                public const string Editions = "Editions";
-                public const string Maintenance = "Administration.Maintenance";
-                public const string Settings = "Administration.Settings.Host";
-            }
-
-            public static class Tenant
-            {
-                public const string Dashboard = "Dashboard.Tenant";
-                public const string Settings = "Administration.Settings.Tenant";
             }
         }
 

@@ -1,18 +1,16 @@
-﻿using Abp.Application.Features;
+﻿using System.Collections.Generic;
 using Abp.Application.Navigation;
 using Abp.Localization;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Web.Navigation;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace CAPS.CORPACCOUNTING.Web.App.Startup
 {
     /// <summary>
-    /// This class defines menus for the application.
-    /// It uses ABP's menu system.
-    /// When you add menu items here, they are automatically appear in angular application.
-    /// See .cshtml and .js files under App/Main/views/layout/header to know how to render menu.
+    ///     This class defines menus for the application.
+    ///     It uses ABP's menu system.
+    ///     When you add menu items here, they are automatically appear in angular application.
+    ///     See .cshtml and .js files under App/Main/views/layout/header to know how to render menu.
     /// </summary>
     public class AppNavigationProvider : NavigationProvider
     {
@@ -42,8 +40,7 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                     )
                 ).AddItem(new MenuItemDefinition(
                     PageNames.App.Common.Administration,
-                    L("Administration"),
-                    icon: "icon-wrench"
+                    L("Administration"), "icon-wrench"
                     ).AddItem(new MenuItemDefinition(
                         PageNames.App.Common.OrganizationUnits,
                         L("OrganizationUnits"),
@@ -102,174 +99,137 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                         requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
                         )
                     ))
-                    .AddItem(FinancialsTabs())
-                    .AddItem(ProjectsTabs())
-                    .AddItem(ReceivablesTabs())
-                    .AddItem(PayablesTabs())
-                    .AddItem(PurchaseOrdersTabs())
-                    .AddItem(PurchasingTabs())
-                    .AddItem(PettyCashTabs())
-                    .AddItem(CreditCardTabs())
-                    .AddItem(PayrollTabs())
-                    .AddItem(PostingTabs());
+                .AddItem(FinancialsTabs())
+                .AddItem(ProjectsTabs())
+                .AddItem(ReceivablesTabs())
+                .AddItem(PayablesTabs())
+                .AddItem(PurchaseOrdersTabs())
+                .AddItem(PurchasingTabs())
+                .AddItem(PettyCashTabs())
+                .AddItem(CreditCardTabs())
+                .AddItem(PayrollTabs())
+                .AddItem(PostingTabs());
         }
 
         #region Tabs
+
         private MenuItemDefinition ProjectsTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.Projects,
-                                L("Projects"),
-                                icon: "icon-wrench",
-                                  requiredPermissionName: AppPermissions.Pages_Projects
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.ProjectsProjectMaintenance,
-                                    L("ProjectMaintenance"),
-                                    icon: "icon-wrench",
-                                    url: "projects.projectmaintenance",
-                                  requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance,
-                                    customData: MenuItemsList("Projects", "ProjectMaintenance")
-                                    ))
-                                    .AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.ProjectsInquiry,
-                                    L("Inquiry"),
-                                    icon: "icon-wrench",
-                                      url: "projects.inquiry",
-                                       requiredPermissionName: AppPermissions.Pages_Projects_Inquiry,
-                                    customData: MenuItemsList("Projects", "Inquiry")
-                                    ));
+                PageNames.App.Organization.Projects,
+                L("Projects"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_Projects
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.ProjectsProjectMaintenance,
+                    L("ProjectMaintenance"), "icon-wrench", "projects.projectmaintenance",
+                    requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance,
+                    customData: MenuItemsList("Projects", "ProjectMaintenance")
+                    ))
+                .AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.ProjectsInquiry,
+                    L("Inquiry"), "icon-wrench", "projects.inquiry",
+                    requiredPermissionName: AppPermissions.Pages_Projects_Inquiry,
+                    customData: MenuItemsList("Projects", "Inquiry")
+                    ));
         }
 
         private MenuItemDefinition FinancialsTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.Financials,
-                                L("Financials"),
-                                icon: "icon-wrench",
-                                  requiredPermissionName: AppPermissions.Pages_Financials
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.FinancialsAccounts,
-                                    L("Accounts"),
-                                    icon: "icon-wrench",
-                                      url: "financials.accounts",
-                                  requiredPermissionName: AppPermissions.Pages_Financials_Accounts,
-                                    customData: MenuItemsList("Financials", "Accounts")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.FinancialsJournals,
-                                    L("Journals"),
-                                    icon: "icon-wrench",
-                                         url: "financials.journals",
-                                  requiredPermissionName: AppPermissions.Pages_Financials_Journals,
-                                    customData: MenuItemsList("Financials", "Journals")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.FinancialsBanking,
-                                    L("Banking"),
-                                    icon: "icon-wrench",
-                                           url: "financials.banking",
-                                  requiredPermissionName: AppPermissions.Pages_Financials_Banking,
-                                    customData: MenuItemsList("Financials", "Banking")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.FinancialsInquiry,
-                                    L("Inquiry"),
-                                    icon: "icon-wrench",
-                                            url: "financials.inquiry",
-                                  requiredPermissionName: AppPermissions.Pages_Financials_Inquiry,
-                                    customData: MenuItemsList("Financials", "Inquiry")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.FinancialsPosting,
-                                    L("Posting"),
-                                    icon: "icon-wrench",
-                                     url: "financials.posting",
-                                  requiredPermissionName: AppPermissions.Pages_Financials_Posting,
+                PageNames.App.Organization.Financials,
+                L("Financials"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_Financials
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.FinancialsAccounts,
+                    L("Accounts"), "icon-wrench", "financials.accounts",
+                    requiredPermissionName: AppPermissions.Pages_Financials_Accounts,
+                    customData: MenuItemsList("Financials", "Accounts")
+                    )).AddItem(new MenuItemDefinition(
+                        PageNames.App.Organization.FinancialsJournals,
+                        L("Journals"), "icon-wrench", "financials.journals",
+                        requiredPermissionName: AppPermissions.Pages_Financials_Journals,
+                        customData: MenuItemsList("Financials", "Journals")
+                        )).AddItem(new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsBanking,
+                            L("Banking"), "icon-wrench", "financials.banking",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Banking,
+                            customData: MenuItemsList("Financials", "Banking")
+                            )).AddItem(new MenuItemDefinition(
+                                PageNames.App.Organization.FinancialsInquiry,
+                                L("Inquiry"), "icon-wrench", "financials.inquiry",
+                                requiredPermissionName: AppPermissions.Pages_Financials_Inquiry,
+                                customData: MenuItemsList("Financials", "Inquiry")
+                                )).AddItem(new MenuItemDefinition(
+                                    PageNames.App.Organization.FinancialsPosting,
+                                    L("Posting"), "icon-wrench", "financials.posting",
+                                    requiredPermissionName: AppPermissions.Pages_Financials_Posting,
                                     customData: MenuItemsList("Financials", "Posting")
                                     )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.FinancialsPreferences,
-                                    L("Preferences"),
-                                    icon: "icon-wrench",
-                                       url: "financials.preferences",
-                                  requiredPermissionName: AppPermissions.Pages_Financials_Preferences,
-                                    customData: MenuItemsList("Financials", "Preferences")
-                                    ));
+                                        PageNames.App.Organization.FinancialsPreferences,
+                                        L("Preferences"), "icon-wrench", "financials.preferences",
+                                        requiredPermissionName: AppPermissions.Pages_Financials_Preferences,
+                                        customData: MenuItemsList("Financials", "Preferences")
+                                        ));
         }
 
         private MenuItemDefinition ReceivablesTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.Receivables,
-                                L("Receivables"),
-                                icon: "icon-wrench",
-                                  requiredPermissionName: AppPermissions.Pages_Receivables
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.ReceivablesCustomers,
-                                    L("Customers"),
-                                    icon: "icon-wrench",
-                                        url: "receivables.customers",
-                                  requiredPermissionName: AppPermissions.Pages_Receivables_Customers,
-                                    customData: MenuItemsList("Receivables", "Customers")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.ReceivablesInvoices,
-                                    L("Invoices"),
-                                    icon: "icon-wrench",
-                                         url: "receivables.invoices",
-                                  requiredPermissionName: AppPermissions.Pages_Receivables_Invoices,
-                                    customData: MenuItemsList("Receivables", "Invoices")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.ReceivablesInquiry,
-                                    L("Inquiry"),
-                                    icon: "icon-wrench",
-                                    url: "receivables.inquiry",
-                                    requiredPermissionName: AppPermissions.Pages_Receivables_Inquiry,
-                                    customData: MenuItemsList("Receivables", "Inquiry")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.ReceivablesPreferences,
-                                    L("Preferences"),
-                                    icon: "icon-wrench",
-                                     url: "receivables.preferences",
-                                    requiredPermissionName: AppPermissions.Pages_Receivables_Preferences,
-                                    customData: MenuItemsList("Receivables", "Preferences")
-                                    ));
+                PageNames.App.Organization.Receivables,
+                L("Receivables"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_Receivables
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.ReceivablesCustomers,
+                    L("Customers"), "icon-wrench", "receivables.customers",
+                    requiredPermissionName: AppPermissions.Pages_Receivables_Customers,
+                    customData: MenuItemsList("Receivables", "Customers")
+                    )).AddItem(new MenuItemDefinition(
+                        PageNames.App.Organization.ReceivablesInvoices,
+                        L("Invoices"), "icon-wrench", "receivables.invoices",
+                        requiredPermissionName: AppPermissions.Pages_Receivables_Invoices,
+                        customData: MenuItemsList("Receivables", "Invoices")
+                        )).AddItem(new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesInquiry,
+                            L("Inquiry"), "icon-wrench", "receivables.inquiry",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Inquiry,
+                            customData: MenuItemsList("Receivables", "Inquiry")
+                            )).AddItem(new MenuItemDefinition(
+                                PageNames.App.Organization.ReceivablesPreferences,
+                                L("Preferences"), "icon-wrench", "receivables.preferences",
+                                requiredPermissionName: AppPermissions.Pages_Receivables_Preferences,
+                                customData: MenuItemsList("Receivables", "Preferences")
+                                ));
         }
 
         private MenuItemDefinition PayablesTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.Payables,
-                                L("Payables"),
-                                icon: "icon-wrench",
-                                  requiredPermissionName: AppPermissions.Pages_Payables
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PayablesVendors,
-                                    L("Vendors"),
-                                    icon: "icon-wrench",
-                                    url: "payables.vendors",
-                                    requiredPermissionName: AppPermissions.Pages_Payables_Vendors,
-                                    customData: MenuItemsList("Payables", "Vendors")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PayablesInvoices,
-                                    L("Invoices"),
-                                    icon: "icon-wrench",
-                                     url: "payables.invoices",
-                                    requiredPermissionName: AppPermissions.Pages_Payables_Invoices,
-                                    customData: MenuItemsList("Payables", "Invoices")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PayablesInquiry,
-                                    L("Inquiry"),
-                                    icon: "icon-wrench",
-                                     url: "payables.inquiry",
-                                    requiredPermissionName: AppPermissions.Pages_Payables_Inquiry,
-                                    customData: MenuItemsList("Payables", "Inquiry")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PayablesPreferences,
-                                    L("Preferences"),
-                                    icon: "icon-wrench",
-                                      url: "payables.preferences",
-                                    requiredPermissionName: AppPermissions.Pages_Payables_Preferences,
-                                    customData: MenuItemsList("Payables", "Preferences")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PayablesYEProcesses,
-                                    L("YEProcesses"),
-                                    icon: "icon-wrench",
-                                      url: "payables.yeprocesses",
+                PageNames.App.Organization.Payables,
+                L("Payables"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_Payables
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.PayablesVendors,
+                    L("Vendors"), "icon-wrench", "payables.vendors",
+                    requiredPermissionName: AppPermissions.Pages_Payables_Vendors,
+                    customData: MenuItemsList("Payables", "Vendors")
+                    )).AddItem(new MenuItemDefinition(
+                        PageNames.App.Organization.PayablesInvoices,
+                        L("Invoices"), "icon-wrench", "payables.invoices",
+                        requiredPermissionName: AppPermissions.Pages_Payables_Invoices,
+                        customData: MenuItemsList("Payables", "Invoices")
+                        )).AddItem(new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesInquiry,
+                            L("Inquiry"), "icon-wrench", "payables.inquiry",
+                            requiredPermissionName: AppPermissions.Pages_Payables_Inquiry,
+                            customData: MenuItemsList("Payables", "Inquiry")
+                            )).AddItem(new MenuItemDefinition(
+                                PageNames.App.Organization.PayablesPreferences,
+                                L("Preferences"), "icon-wrench", "payables.preferences",
+                                requiredPermissionName: AppPermissions.Pages_Payables_Preferences,
+                                customData: MenuItemsList("Payables", "Preferences")
+                                )).AddItem(new MenuItemDefinition(
+                                    PageNames.App.Organization.PayablesYEProcesses,
+                                    L("YEProcesses"), "icon-wrench", "payables.yeprocesses",
                                     requiredPermissionName: AppPermissions.Pages_Payables_YEProcesses,
                                     customData: MenuItemsList("Payables", "YEProcesses")
                                     ));
@@ -278,139 +238,110 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
         private MenuItemDefinition PurchaseOrdersTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.PurchaseOrders,
-                                L("PurchaseOrders"),
-                                icon: "icon-wrench",
-                                   requiredPermissionName: AppPermissions.Pages_PurchaseOrders
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PurchaseOrdersEntry,
-                                    L("Entry"),
-                                    icon: "icon-wrench",
-                                    url: "purchaseorders.entry",
-                                   requiredPermissionName: AppPermissions.Pages_PurchaseOrders_Entry,
-                                    customData: MenuItemsList("PurchaseOrders", "Entry")
-                                    ));
+                PageNames.App.Organization.PurchaseOrders,
+                L("PurchaseOrders"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_PurchaseOrders
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.PurchaseOrdersEntry,
+                    L("Entry"), "icon-wrench", "purchaseorders.entry",
+                    requiredPermissionName: AppPermissions.Pages_PurchaseOrders_Entry,
+                    customData: MenuItemsList("PurchaseOrders", "Entry")
+                    ));
         }
 
         private MenuItemDefinition PurchasingTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.Purchasing,
-                                L("Purchasing"),
-                                icon: "icon-wrench",
-                                 requiredPermissionName: AppPermissions.Pages_Purchasing
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PurchasingInquiry,
-                                    L("Inquiry"),
-                                    icon: "icon-wrench",
-                                     url: "purchasing.inquiry",
-                                   requiredPermissionName: AppPermissions.Pages_Purchasing_Inquiry,
-                                    customData: MenuItemsList("Purchasing", "Inquiry")
-                                    ));
+                PageNames.App.Organization.Purchasing,
+                L("Purchasing"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_Purchasing
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.PurchasingInquiry,
+                    L("Inquiry"), "icon-wrench", "purchasing.inquiry",
+                    requiredPermissionName: AppPermissions.Pages_Purchasing_Inquiry,
+                    customData: MenuItemsList("Purchasing", "Inquiry")
+                    ));
         }
 
         private MenuItemDefinition PettyCashTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.PettyCash,
-                                L("PettyCash"),
-                                icon: "icon-wrench",
-                                requiredPermissionName: AppPermissions.Pages_PettyCash
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PettyCashPCVendors,
-                                    L("PCVendors"),
-                                    icon: "icon-wrench",
-                                    url: "pettycash.pcvendors",
-                                   requiredPermissionName: AppPermissions.Pages_PettyCash_PCVendors,
-                                    customData: MenuItemsList("PettyCash", "PCVendors")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PettyCashEntry,
-                                    L("Entry"),
-                                    icon: "icon-wrench",
-                                       url: "pettycash.entry",
-                                    requiredPermissionName: AppPermissions.Pages_PettyCash_Entry,
-                                    customData: MenuItemsList("PettyCash", "Entry")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PettyCashInquiry,
-                                    L("Inquiry"),
-                                    icon: "icon-wrench",
-                                        url: "pettycash.inquiry",
-                                    requiredPermissionName: AppPermissions.Pages_PettyCash_Inquiry,
-                                    customData: MenuItemsList("PettyCash", "Inquiry")
-                                    ));
+                PageNames.App.Organization.PettyCash,
+                L("PettyCash"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_PettyCash
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.PettyCashPCVendors,
+                    L("PCVendors"), "icon-wrench", "pettycash.pcvendors",
+                    requiredPermissionName: AppPermissions.Pages_PettyCash_PCVendors,
+                    customData: MenuItemsList("PettyCash", "PCVendors")
+                    )).AddItem(new MenuItemDefinition(
+                        PageNames.App.Organization.PettyCashEntry,
+                        L("Entry"), "icon-wrench", "pettycash.entry",
+                        requiredPermissionName: AppPermissions.Pages_PettyCash_Entry,
+                        customData: MenuItemsList("PettyCash", "Entry")
+                        )).AddItem(new MenuItemDefinition(
+                            PageNames.App.Organization.PettyCashInquiry,
+                            L("Inquiry"), "icon-wrench", "pettycash.inquiry",
+                            requiredPermissionName: AppPermissions.Pages_PettyCash_Inquiry,
+                            customData: MenuItemsList("PettyCash", "Inquiry")
+                            ));
         }
 
         private MenuItemDefinition CreditCardTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.CreditCard,
-                                L("CreditCard"),
-                                icon: "icon-wrench",
-                                requiredPermissionName: AppPermissions.Pages_CreditCard
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.CreditCardEntry,
-                                    L("Entry"),
-                                    icon: "icon-wrench",
-                                       url: "creditcard.entry",
-                                 requiredPermissionName: AppPermissions.Pages_CreditCard_Entry,
-                                    customData: MenuItemsList("CreditCard", "Entry")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.CreditCardInquiry,
-                                    L("Inquiry"),
-                                    icon: "icon-wrench",
-                                    url: "creditcard.inquiry",
-                                 requiredPermissionName: AppPermissions.Pages_CreditCard_Inquiry,
-                                    customData: MenuItemsList("CreditCard", "Inquiry")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.CreditCardPreferences,
-                                    L("Preferences"),
-                                    icon: "icon-wrench",
-                                      url: "creditcard.preferences",
-                                 requiredPermissionName: AppPermissions.Pages_CreditCard_Preferences,
-                                    customData: MenuItemsList("CreditCard", "Preferences")
-                                    ));
+                PageNames.App.Organization.CreditCard,
+                L("CreditCard"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_CreditCard
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.CreditCardEntry,
+                    L("Entry"), "icon-wrench", "creditcard.entry",
+                    requiredPermissionName: AppPermissions.Pages_CreditCard_Entry,
+                    customData: MenuItemsList("CreditCard", "Entry")
+                    )).AddItem(new MenuItemDefinition(
+                        PageNames.App.Organization.CreditCardInquiry,
+                        L("Inquiry"), "icon-wrench", "creditcard.inquiry",
+                        requiredPermissionName: AppPermissions.Pages_CreditCard_Inquiry,
+                        customData: MenuItemsList("CreditCard", "Inquiry")
+                        )).AddItem(new MenuItemDefinition(
+                            PageNames.App.Organization.CreditCardPreferences,
+                            L("Preferences"), "icon-wrench", "creditcard.preferences",
+                            requiredPermissionName: AppPermissions.Pages_CreditCard_Preferences,
+                            customData: MenuItemsList("CreditCard", "Preferences")
+                            ));
         }
 
         private MenuItemDefinition PayrollTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.Payroll,
-                                L("Payroll"),
-                                icon: "icon-wrench",
-                                 requiredPermissionName: AppPermissions.Pages_Payroll
-                                ).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PayrollEntry,
-                                    L("Entry"),
-                                    icon: "icon-wrench",
-                                      url: "payroll.entry",
-                                 requiredPermissionName: AppPermissions.Pages_Payroll_Entry,
-                                    customData: MenuItemsList("Payroll", "Entry")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PayrollInquiry,
-                                    L("Inquiry"),
-                                    icon: "icon-wrench",
-                                         url: "payroll.inquiry",
-                                 requiredPermissionName: AppPermissions.Pages_Payroll_Inquiry,
-                                    customData: MenuItemsList("Payroll", "Inquiry")
-                                    )).AddItem(new MenuItemDefinition(
-                                    PageNames.App.Common.PayablesPreferences,
-                                    L("Preferences"),
-                                    icon: "icon-wrench",
-                                         url: "payroll.preferences",
-                                 requiredPermissionName: AppPermissions.Pages_Payroll_Preferences,
-                                    customData: MenuItemsList("Payroll", "Preferences")
-                                    ));
+                PageNames.App.Organization.Payroll,
+                L("Payroll"), "icon-wrench",
+                requiredPermissionName: AppPermissions.Pages_Payroll
+                ).AddItem(new MenuItemDefinition(
+                    PageNames.App.Organization.PayrollEntry,
+                    L("Entry"), "icon-wrench", "payroll.entry",
+                    requiredPermissionName: AppPermissions.Pages_Payroll_Entry,
+                    customData: MenuItemsList("Payroll", "Entry")
+                    )).AddItem(new MenuItemDefinition(
+                        PageNames.App.Organization.PayrollInquiry,
+                        L("Inquiry"), "icon-wrench", "payroll.inquiry",
+                        requiredPermissionName: AppPermissions.Pages_Payroll_Inquiry,
+                        customData: MenuItemsList("Payroll", "Inquiry")
+                        )).AddItem(new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesPreferences,
+                            L("Preferences"), "icon-wrench", "payroll.preferences",
+                            requiredPermissionName: AppPermissions.Pages_Payroll_Preferences,
+                            customData: MenuItemsList("Payroll", "Preferences")
+                            ));
         }
 
         private MenuItemDefinition PostingTabs()
         {
             return new MenuItemDefinition(
-                                PageNames.App.Common.Posting,
-                                L("Posting"),
-                                icon: "icon-wrench",
-                                url:"posting",
-                               requiredPermissionName: AppPermissions.Pages_Posting
-                                );
+                PageNames.App.Organization.Posting,
+                L("Posting"), "icon-wrench", "posting",
+                requiredPermissionName: AppPermissions.Pages_Posting
+                );
         }
 
         public List<MenuItemDefinition> MenuItemsList(string ParentTab, string ChildTab)
@@ -420,54 +351,54 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ParentTab)
             {
                 case "Financials":
-                    {
-                        itemList = FinancialsSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = FinancialsSubTabs(ChildTab, null);
+                }
                     break;
                 case "Projects":
-                    {
-                        itemList = ProjectSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = ProjectSubTabs(ChildTab, null);
+                }
                     break;
                 case "Receivables":
-                    {
-                        itemList = ReceivablesSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = ReceivablesSubTabs(ChildTab, null);
+                }
                     break;
                 case "Payables":
-                    {
-                        itemList = PayablesSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = PayablesSubTabs(ChildTab, null);
+                }
                     break;
                 case "PurchaseOrders":
-                    {
-                        itemList = PurchaseOrdersSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = PurchaseOrdersSubTabs(ChildTab, null);
+                }
                     break;
                 case "Purchasing":
-                    {
-                        itemList = PurchasingSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = PurchasingSubTabs(ChildTab, null);
+                }
                     break;
                 case "PettyCash":
-                    {
-                        itemList = PettyCashSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = PettyCashSubTabs(ChildTab, null);
+                }
                     break;
                 case "CreditCard":
-                    {
-                        itemList = CreditCardSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = CreditCardSubTabs(ChildTab, null);
+                }
                     break;
                 case "Payroll":
-                    {
-                        itemList = PayrollSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = PayrollSubTabs(ChildTab, null);
+                }
                     break;
                 case "Posting":
-                    {
-                        itemList = PostingSubTabs(ChildTab, itemList);
-                    }
+                {
+                    itemList = PostingSubTabs(ChildTab, null);
+                }
                     break;
             }
             return itemList;
@@ -478,127 +409,140 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "Accounts":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.FinancialsAccountsCoas,
-                                     L("ChartOfAccount"),
-                                     url: "financials.accounts.coa",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_Financials_Accounts_ChartOfAccounts) },
-                                        { new MenuItemDefinition(
-                                    PageNames.App.Common.FinancialsAccountsSubAccounts,
-                                    L("SubAccounts"),
-                                    url: "financials.accounts.subaccounts",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Financials_Accounts_SubAccounts)},
-                                        {new MenuItemDefinition(
-                                    PageNames.App.Common.FinancialsAccountsDivisions,
-                                    L("Divisions"),
-                                    url: "financials.accounts.divisions",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Financials_Accounts_Divisions) }
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsAccountsCoas,
+                            L("ChartOfAccount"),
+                            url: "financials.accounts.coa",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Accounts_ChartOfAccounts),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsAccountsSubAccounts,
+                            L("SubAccounts"),
+                            url: "financials.accounts.subaccounts",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Accounts_SubAccounts),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsAccountsDivisions,
+                            L("Divisions"),
+                            url: "financials.accounts.divisions",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Accounts_Divisions)
+                    };
+                }
                     break;
 
                 case "Journals":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() {
-                                                new MenuItemDefinition(
-                                                PageNames.App.Common.FinancialsJournalsEntry,
-                                                L("Entry"),
-                                                url: "financials.journals.entry",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Financials_Journals_Entry)};
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsJournalsEntry,
+                            L("Entry"),
+                            url: "financials.journals.entry",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Journals_Entry)
+                    };
+                }
                     break;
                 case "Banking":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                                PageNames.App.Common.FinancialsBankingReceiptsOrTransfers,
-                                                L("ReceiptsOrTransfers"),
-                                                url: "financials.banking.receiptsortransfers",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Financials_Banking_ReceiptsOrTransfers) },
-                                                                             {new MenuItemDefinition(
-                                                PageNames.App.Common.FinancialsBankingAch,
-                                                L("ACH"),
-                                                url: "financials.banking.ach",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Financials_Banking_ACH) },
-                                                                            {new MenuItemDefinition(
-                                                PageNames.App.Common.FinancialsBankingReconciliation,
-                                                L("BankReconciliation"),
-                                                url: "financials.banking.reconciliation",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Financials_Banking_Reconciliation
-                                                ) }
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsBankingReceiptsOrTransfers,
+                            L("ReceiptsOrTransfers"),
+                            url: "financials.banking.receiptsortransfers",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Banking_ReceiptsOrTransfers),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsBankingAch,
+                            L("ACH"),
+                            url: "financials.banking.ach",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Banking_ACH),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsBankingReconciliation,
+                            L("BankReconciliation"),
+                            url: "financials.banking.reconciliation",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Banking_Reconciliation
+                            )
+                    };
+                }
                     break;
                 case "Inquiry":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>(){ {new MenuItemDefinition(
-                                             PageNames.App.Common.FinancialsInquirySearchTransactions,
-                                             L("SearchTransactions"),
-                                             url: "financials.inquiry.searchtransactions",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Financials_Inquiry_SearchTransactions) },
-                                                                             {new MenuItemDefinition(
-                                             PageNames.App.Common.FinancialsInquiryFinancials,
-                                             L("Financials"),
-                                             url: "financials.inquiry.financials",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Financials_Inquiry_Financials) },
-                                                                                { new MenuItemDefinition(
-                                             PageNames.App.Common.FinancialsInquiryJournalHistory,
-                                             L("journalhistory"),
-                                             url: "financials.inquiry.journalhistory",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Financials_Inquiry_JournalHistory)},
-                                                                                {new MenuItemDefinition(
-                                             PageNames.App.Common.FinancialsInquiryAssetTracking,
-                                             L("assettracking"),
-                                             url: "financials.inquiry.assettracking",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Financials_Inquiry_AssetTracking) }
-                                    };
-
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsInquirySearchTransactions,
+                            L("SearchTransactions"),
+                            url: "financials.inquiry.searchtransactions",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Inquiry_SearchTransactions),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsInquiryFinancials,
+                            L("Financials"),
+                            url: "financials.inquiry.financials",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Inquiry_Financials),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsInquiryJournalHistory,
+                            L("journalhistory"),
+                            url: "financials.inquiry.journalhistory",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Inquiry_JournalHistory),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsInquiryAssetTracking,
+                            L("assettracking"),
+                            url: "financials.inquiry.assettracking",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Inquiry_AssetTracking)
+                    };
+                }
                     break;
 
                 case "Posting":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                                PageNames.App.Common.FinancialsPostingBatched,
-                                                L("Batched"),
-                                                url: "financials.posting.batched",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Financials_Posting_Batched) },
-                                                                             {new MenuItemDefinition(
-                                                PageNames.App.Common.FinancialsPostingUnBatched,
-                                                L("UnBatched"),
-                                                url: "financials.posting.unbatched",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Financials_Posting_UnBatched) }};
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsPostingBatched,
+                            L("Batched"),
+                            url: "financials.posting.batched",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Posting_Batched),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsPostingUnBatched,
+                            L("UnBatched"),
+                            url: "financials.posting.unbatched",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Posting_UnBatched)
+                    };
+                }
                     break;
 
                 case "Preferences":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                                PageNames.App.Common.FinancialsPreferencesFiscalPeriod,
-                                                L("FiscalPeriod"),
-                                                url: "financials.preferences.fiscalperiod",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Financials_Preferences_FiscalPeriod) },
-                                                                             {new MenuItemDefinition(
-                                                PageNames.App.Common.FinancialsPreferencesBankSetup,
-                                                L("BankSetup"),
-                                                url: "financials.preferences.banksetup",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Financials_Preferences_BankSetup) }};
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsPreferencesFiscalPeriod,
+                            L("FiscalPeriod"),
+                            url: "financials.preferences.fiscalperiod",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Preferences_FiscalPeriod),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsPreferencesBankSetup,
+                            L("BankSetup"),
+                            url: "financials.preferences.banksetup",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Preferences_BankSetup)
+                    };
+                }
                     break;
             }
             return itemList;
@@ -609,32 +553,33 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "ProjectMaintenance":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.ProjectsMaintenanceProjects,
-                                     L("Projects"),
-                                     url: "projects.projectmaintenance.projects",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance_Projects) },
-                                        { new MenuItemDefinition(
-                                    PageNames.App.Common.ProjectsMaintenanceProjectCoas,
-                                    L("ProjectCoas"),
-                                    url: "projects.projectmaintenance.projectcoas",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs)},
-                                        {new MenuItemDefinition(
-                                    PageNames.App.Common.ProjectsMaintenanceContracts,
-                                    L("Contracts"),
-                                    url: "projects.projectmaintenance.contracts",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance_Contracts) }
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ProjectsMaintenanceProjects,
+                            L("Projects"),
+                            url: "projects.projectmaintenance.projects",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance_Projects),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ProjectsMaintenanceProjectCoas,
+                            L("ProjectCoas"),
+                            url: "projects.projectmaintenance.projectcoas",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ProjectsMaintenanceContracts,
+                            L("Contracts"),
+                            url: "projects.projectmaintenance.contracts",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance_Contracts)
+                    };
+                }
                     break;
                 case "Inquiry":
-                    {
-
-                    }
+                {
+                }
                     break;
             }
 
@@ -646,83 +591,89 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "Customers":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.ReceivablesCustomersHistory,
-                                     L("History"),
-                                     url: "receivables.customers.history",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_Receivables_Customers_History) }
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesCustomersHistory,
+                            L("History"),
+                            url: "receivables.customers.history",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Customers_History)
+                    };
+                }
                     break;
 
                 case "Invoices":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() {
-                                                new MenuItemDefinition(
-                                                PageNames.App.Common.ReceivablesInvoicesEntry,
-                                                L("Entry"),
-                                                url: "receivables.invoices.entry",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Receivables_Invoices_Entry)};
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesInvoicesEntry,
+                            L("Entry"),
+                            url: "receivables.invoices.entry",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Invoices_Entry)
+                    };
+                }
                     break;
                 case "Inquiry":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                                PageNames.App.Common.ReceivablesInquiryARInvoiceInquiry,
-                                                L("ARInvoiceInquiry"),
-                                                url: "receivables.inquiry.arinvoiceinquiry",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Receivables_Inquiry_ARInvoiceInquiry) },
-                                                                             {new MenuItemDefinition(
-                                                PageNames.App.Common.ReceivablesInquiryCustomerSummary,
-                                                L("CustomerSummary"),
-                                                url: "receivables.inquiry.customersummary",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Receivables_Inquiry_CustomerSummary) },
-                                                                            {new MenuItemDefinition(
-                                                PageNames.App.Common.ReceivablesInquiryInvoiceDetail,
-                                                L("Invoice Detail"),
-                                                url: "receivables.inquiry.invoicedetail",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Receivables_Inquiry_InvoiceDetail
-                                                ) }
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesInquiryARInvoiceInquiry,
+                            L("ARInvoiceInquiry"),
+                            url: "receivables.inquiry.arinvoiceinquiry",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Inquiry_ARInvoiceInquiry),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesInquiryCustomerSummary,
+                            L("CustomerSummary"),
+                            url: "receivables.inquiry.customersummary",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Inquiry_CustomerSummary),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesInquiryInvoiceDetail,
+                            L("Invoice Detail"),
+                            url: "receivables.inquiry.invoicedetail",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Inquiry_InvoiceDetail
+                            )
+                    };
+                }
                     break;
                 case "Preferences":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>(){ {new MenuItemDefinition(
-                                             PageNames.App.Common.ReceivablesPreferencesBillingTypes,
-                                             L("BillingTypes"),
-                                             url: "receivables.preferences.billingtypes",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Receivables_Preferences_BillingTypes) },
-                                                                             {new MenuItemDefinition(
-                                             PageNames.App.Common.ReceivablesPreferencesTerritories,
-                                             L("Territories"),
-                                             url: "receivables.preferences.territories",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Receivables_Preferences_Territories) },
-                                                                                { new MenuItemDefinition(
-                                             PageNames.App.Common.ReceivablesPreferencesPaymentTerms,
-                                             L("PaymentTerms"),
-                                             url: "Receivables.Preferences.PaymentTerms",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Receivables_Preferences_PaymentTerms)},
-                                                                                {new MenuItemDefinition(
-                                             PageNames.App.Common.ReceivablesPreferencesARInvoiceTemplate ,
-                                             L("ARInvoiceTemplate"),
-                                             url: "receivables.preferences.arinvoicetemplate",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate) }
-                                    };
-
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesPreferencesBillingTypes,
+                            L("BillingTypes"),
+                            url: "receivables.preferences.billingtypes",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Preferences_BillingTypes),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesPreferencesTerritories,
+                            L("Territories"),
+                            url: "receivables.preferences.territories",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Preferences_Territories),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesPreferencesPaymentTerms,
+                            L("PaymentTerms"),
+                            url: "Receivables.Preferences.PaymentTerms",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Preferences_PaymentTerms),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.ReceivablesPreferencesARInvoiceTemplate,
+                            L("ARInvoiceTemplate"),
+                            url: "receivables.preferences.arinvoicetemplate",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate)
+                    };
+                }
                     break;
-
             }
 
             return itemList;
@@ -733,81 +684,86 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "Vendors":
-                    {
-
-                    }
+                {
+                }
                     break;
 
                 case "Invoices":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() {
-                                                new MenuItemDefinition(
-                                                PageNames.App.Common.PayablesInvoicesBatch,
-                                                L("Batch"),
-                                                url: "payables.invoices.batch",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Payables_Invoices_Batch)};
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesInvoicesBatch,
+                            L("Batch"),
+                            url: "payables.invoices.batch",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payables_Invoices_Batch)
+                    };
+                }
                     break;
                 case "APinvoiceInquiry":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                                PageNames.App.Common.PayablesInquiryAPInvoiceInquiry,
-                                                L("APinvoiceInquiry"),
-                                                url: "payables.inquiry.apinvoiceinquiry",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Payables_Inquiry_APInvoiceInquiry) },
-                                                                             {new MenuItemDefinition(
-                                                PageNames.App.Common.PayablesInquiryPaymentHistory,
-                                                L("PaymentHistory"),
-                                                url: "Payables.Inquiry.PaymentHistory",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Payables_Inquiry_PaymentHistory) },
-                                                                            {new MenuItemDefinition(
-                                                PageNames.App.Common.PayablesInquiryVendorSummary,
-                                                L("VendorSummary"),
-                                                url: "payables.inquiry.vendorsummary",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Payables_Inquiry_VendorSummary) },
-                                                                             {new MenuItemDefinition(
-                                                PageNames.App.Common.PayablesInquiryInvoiceDetail,
-                                                L("InvoiceDetail"),
-                                                url: "payables.inquiry.invoicedetail",
-                                                icon: "icon-briefcase",
-                                                requiredPermissionName: AppPermissions.Pages_Payables_Inquiry_InvoiceDetail) }
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesInquiryAPInvoiceInquiry,
+                            L("APinvoiceInquiry"),
+                            url: "payables.inquiry.apinvoiceinquiry",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payables_Inquiry_APInvoiceInquiry),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesInquiryPaymentHistory,
+                            L("PaymentHistory"),
+                            url: "Payables.Inquiry.PaymentHistory",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payables_Inquiry_PaymentHistory),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesInquiryVendorSummary,
+                            L("VendorSummary"),
+                            url: "payables.inquiry.vendorsummary",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payables_Inquiry_VendorSummary),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesInquiryInvoiceDetail,
+                            L("InvoiceDetail"),
+                            url: "payables.inquiry.invoicedetail",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payables_Inquiry_InvoiceDetail)
+                    };
+                }
                     break;
                 case "Preferences":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>(){ {new MenuItemDefinition(
-                                             PageNames.App.Common.PayablesPreferences1099T4Codes,
-                                             L("1099T4Codes"),
-                                             url: "payables.preferences.1099t4codes",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Payables_Preferences_1099T4Codes) },
-                                                                             {new MenuItemDefinition(
-                                             PageNames.App.Common.PayablesPreferencesVendorPaymentTerms,
-                                             L("VendorPaymentTerms"),
-                                             url: "payables.preferences.vendorpaymentterms",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms) }
-                                    };
-
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesPreferences1099T4Codes,
+                            L("1099T4Codes"),
+                            url: "payables.preferences.1099t4codes",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payables_Preferences_1099T4Codes),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesPreferencesVendorPaymentTerms,
+                            L("VendorPaymentTerms"),
+                            url: "payables.preferences.vendorpaymentterms",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms)
+                    };
+                }
                     break;
                 case "YEProcesses":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>(){ {new MenuItemDefinition(
-                                             PageNames.App.Common.PayablesYEProcesses1099s,
-                                             L("1099s"),
-                                             url: "payables.yeprocesses.1099s",
-                                             icon: "icon-briefcase",
-                                             requiredPermissionName: AppPermissions.Pages_Payables_YEProcesses_1099s) }};
-
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayablesYEProcesses1099s,
+                            L("1099s"),
+                            url: "payables.yeprocesses.1099s",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payables_YEProcesses_1099s)
+                    };
+                }
                     break;
-
             }
 
             return itemList;
@@ -818,9 +774,8 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "Entry":
-                    {
-
-                    }
+                {
+                }
                     break;
             }
             return itemList;
@@ -831,27 +786,29 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "Inquiry":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.PurchasingInquiryPurchaseOrderHistory,
-                                     L("PurchaseOrderHistory"),
-                                     url: "purchasing.inquiry.purchaseorderhistory",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_Purchasing_Inquiry_PurchaseOrderHistory) },
-                                        { new MenuItemDefinition(
-                                    PageNames.App.Common.PurchasingInquirySearchPurchaseOrders,
-                                    L("SearchAllPurchaseOrders"),
-                                    url: "purchasing.inquiry.searchpurchaseorders",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Purchasing_Inquiry_SearchPurchaseOrders)},
-                                        {new MenuItemDefinition(
-                                    PageNames.App.Common.PurchasingInquiryPOAgingGrid,
-                                    L("POAgingGrid"),
-                                    url: "purchasing.inquiry.poaginggrid",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Purchasing_Inquiry_POAgingGrid) }
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PurchasingInquiryPurchaseOrderHistory,
+                            L("PurchaseOrderHistory"),
+                            url: "purchasing.inquiry.purchaseorderhistory",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Purchasing_Inquiry_PurchaseOrderHistory),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PurchasingInquirySearchPurchaseOrders,
+                            L("SearchAllPurchaseOrders"),
+                            url: "purchasing.inquiry.searchpurchaseorders",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Purchasing_Inquiry_SearchPurchaseOrders),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PurchasingInquiryPOAgingGrid,
+                            L("POAgingGrid"),
+                            url: "purchasing.inquiry.poaginggrid",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Purchasing_Inquiry_POAgingGrid)
+                    };
+                }
                     break;
             }
 
@@ -863,77 +820,85 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "PCVendors":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.PettyCashPCVendorsHistory,
-                                     L("History"),
-                                     url: "pettycash.pcvendors.history",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_PettyCash_PCVendors_History) } };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PettyCashPCVendorsHistory,
+                            L("History"),
+                            url: "pettycash.pcvendors.history",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_PettyCash_PCVendors_History)
+                    };
+                }
                     break;
                 case "Entry":
-                    {
-
-                    }
+                {
+                }
                     break;
                 case "Inquiry":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.PettyCashInquiryPCAccountSummary,
-                                     L("PCAccountSummary"),
-                                     url: "pettycash.inquiry.pcadvancedsearch",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_PettyCash_Inquiry_PCAccountSummary) },
-                                        { new MenuItemDefinition(
-                                    PageNames.App.Common.PettyCashInquiryPCAdvancedSearch,
-                                    L("PCAdvancedSearch"),
-                                    url: "pettycash.inquiry.pcadvancedsearch",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_PettyCash_Inquiry_PCAdvancedSearch)},
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PettyCashInquiryPCAccountSummary,
+                            L("PCAccountSummary"),
+                            url: "pettycash.inquiry.pcadvancedsearch",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_PettyCash_Inquiry_PCAccountSummary),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PettyCashInquiryPCAdvancedSearch,
+                            L("PCAdvancedSearch"),
+                            url: "pettycash.inquiry.pcadvancedsearch",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_PettyCash_Inquiry_PCAdvancedSearch)
+                    };
+                }
                     break;
             }
 
             return itemList;
         }
 
-        private static List<MenuItemDefinition> CreditCardSubTabs(string ChildTab, List<MenuItemDefinition> itemList)
+        private static List<MenuItemDefinition> CreditCardSubTabs(string childTab, List<MenuItemDefinition> itemList)
         {
-            switch (ChildTab)
+            switch (childTab)
             {
                 case "Entry":
-                    {
-
-                    }
+                {
+                }
                     break;
                 case "Inquiry":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.CreditCardInquiryCreditCardHistory,
-                                     L("CreditCardHistory"),
-                                     url: "creditcard.inquiry.ccdhistory",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_CreditCard_Inquiry_CreditCardHistory) },
-                                        { new MenuItemDefinition(
-                                    PageNames.App.Common.CreditCardInquiryCreditCardUploadInfo,
-                                    L("CreditCardUploadInformation"),
-                                    url: "creditcard.inquiry.ccduploadinfo",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_CreditCard_Inquiry_CreditCardUploadInfo)},
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.CreditCardInquiryCreditCardHistory,
+                            L("CreditCardHistory"),
+                            url: "creditcard.inquiry.ccdhistory",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_CreditCard_Inquiry_CreditCardHistory),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.CreditCardInquiryCreditCardUploadInfo,
+                            L("CreditCardUploadInformation"),
+                            url: "creditcard.inquiry.ccduploadinfo",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_CreditCard_Inquiry_CreditCardUploadInfo)
+                    };
+                }
                     break;
                 case "Preferences":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.CreditCardPreferencesCreditCardCompanies,
-                                     L("CreditCardCompanies"),
-                                     url: "creditcard.preferences.ccdcompanies",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_CreditCard_Preferences_CreditCardCompanies) }};
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.CreditCardPreferencesCreditCardCompanies,
+                            L("CreditCardCompanies"),
+                            url: "creditcard.preferences.ccdcompanies",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_CreditCard_Preferences_CreditCardCompanies)
+                    };
+                }
                     break;
             }
 
@@ -945,55 +910,58 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "Entry":
-                    {
-
-                    }
+                {
+                }
                     break;
                 case "Inquiry":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.PayrollInquiryPayrollHistory,
-                                     L("PayrollHistory"),
-                                     url: "payroll.inquiry.history",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_Payroll_Inquiry_PayrollHistory) },
-                                        { new MenuItemDefinition(
-                                    PageNames.App.Common.PayrollInquiryPayrollUploadInfo,
-                                    L("PayrollUploadInformation"),
-                                    url: "payroll.inquiry.uploadinfo",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Payroll_Inquiry_PayrollUploadInfo)},
-                                         { new MenuItemDefinition(
-                                    PageNames.App.Common.PayrollInquiryPayrollLog,
-                                    L("PayrollLog"),
-                                    url: "payroll.inquiry.payrolllog",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Payroll_Inquiry_PayrollLog)},
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayrollInquiryPayrollHistory,
+                            L("PayrollHistory"),
+                            url: "payroll.inquiry.history",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payroll_Inquiry_PayrollHistory),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayrollInquiryPayrollUploadInfo,
+                            L("PayrollUploadInformation"),
+                            url: "payroll.inquiry.uploadinfo",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payroll_Inquiry_PayrollUploadInfo),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayrollInquiryPayrollLog,
+                            L("PayrollLog"),
+                            url: "payroll.inquiry.payrolllog",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payroll_Inquiry_PayrollLog)
+                    };
+                }
                     break;
                 case "Preferences":
+                {
+                    itemList = new List<MenuItemDefinition>
                     {
-                        itemList = new List<MenuItemDefinition>() { {new MenuItemDefinition(
-                                     PageNames.App.Common.PayrollPreferencesPayrollCompanies,
-                                     L("PayrollCompanies"),
-                                     url: "payroll.preferences.payrollcompanies",
-                                     icon: "icon-briefcase",
-                                     requiredPermissionName: AppPermissions.Pages_Payroll_Preferences_PayrollCompanies) },
-                                        { new MenuItemDefinition(
-                                    PageNames.App.Common.PayrollPreferencesPaychexControl,
-                                    L("PaychexControl"),
-                                    url: "payroll.preferences.paychexcontrol",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Payroll_Preferences_PaychexControl)},
-                                         { new MenuItemDefinition(
-                                    PageNames.App.Common.PayrollPreferencesPayrollFringeReallocation,
-                                    L("PayrollFringeReallocation"),
-                                    url: "payroll.preferences.fringereallocation",
-                                    icon: "icon-briefcase",
-                                    requiredPermissionName: AppPermissions.Pages_Payroll_Preferences_PayrollFringeReallocation)},
-                                    };
-                    }
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayrollPreferencesPayrollCompanies,
+                            L("PayrollCompanies"),
+                            url: "payroll.preferences.payrollcompanies",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payroll_Preferences_PayrollCompanies),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayrollPreferencesPaychexControl,
+                            L("PaychexControl"),
+                            url: "payroll.preferences.paychexcontrol",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payroll_Preferences_PaychexControl),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.PayrollPreferencesPayrollFringeReallocation,
+                            L("PayrollFringeReallocation"),
+                            url: "payroll.preferences.fringereallocation",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Payroll_Preferences_PayrollFringeReallocation)
+                    };
+                }
                     break;
             }
 
@@ -1005,13 +973,13 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             switch (ChildTab)
             {
                 case "Entry":
-                    {
-
-                    }
+                {
+                }
                     break;
             }
             return itemList;
         }
+
         #endregion
 
         private static ILocalizableString L(string name)

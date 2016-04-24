@@ -84,7 +84,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var resultCount = await subAccountUnitQuery.CountAsync();
             var results = await subAccountUnitQuery
                 .AsNoTracking()
-                .OrderBy(Helper.GetSort("Description ASC", input.Sorting))
+                .OrderBy(Helper.GetSort(SubAccountUnit.DefaultSortColumn + " "+"ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 

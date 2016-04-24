@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
@@ -41,6 +42,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public const int MaxCaptionLength = 20;
 
         public const int MaxSerialNoLength = 50;
+
+        public const string DefaultSortColumn = "Description";
 
 
         #region Declaration of Properties

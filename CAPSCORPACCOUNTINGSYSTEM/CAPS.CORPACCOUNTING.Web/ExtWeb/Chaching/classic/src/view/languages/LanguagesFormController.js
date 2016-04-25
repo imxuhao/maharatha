@@ -1,18 +1,16 @@
 Ext.define('Chaching.view.languages.LanguagesFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.languages-languagesform',
-    getLanguageTextsonChange: function (form) {       
-        var form=  form.up('form');
-        var store = form.down('Languagetexts').getStore();
-        var data = store.getProxy();
-        var filterdata = form.getValues();
-        data.extraParams = {
-            'TargetValueFilter': filterdata.targetValue,
-            'TargetLanguageName': filterdata.targetLanguage,
-            'BaseLanguageName': filterdata.baseLanguage,
-            'SourceName': filterdata.source
+    doPreSaveOperation: function(record, values, idPropertyField) {
+        var data= {
+            language: {
+                id: parseInt(values.id) === 0 ? null : values.id,
+                name: values.name,
+                icon: values.icon
+            }
         }
-        store.load();
-    }
+        record.data = data;
+        return record;
+    },
     
 });

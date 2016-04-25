@@ -6,139 +6,70 @@ Ext.define('Chaching.view.languages.LanguagesForm', {
         'Chaching.view.languages.LanguagesFormController'
     ],
     controller: 'languages-languagesform',
-
-    hideDefaultButtons: true,
-    name: 'LanguageTextsForm',
+    name: 'Languages',
     openInPopupWindow: true,
+    hideDefaultButtons: false,
     layout: 'vbox',
+    setDefferedValuesOnEdit: true,
+    defferedValueSetDelay: 5,
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
         labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
+    defaultFocus: 'textfield#tenancyName',
     items: [
         {
-            xtype: 'container',
-            height: 70,
-            width: '100%',
-            layout: 'column',
-            items: [
-                {
-                    columnWidth: .25,
-                    border: false,
-                    frame: false,
-                    padding: '0 2px 1px 0px',
-                    items: [
-                        {
-                            xtype: 'combobox',
-                            name: 'baseLanguage',
-                            fieldLabel: app.localize('BaseLanguage').initCap(),
-                            width: '99%',
-                            ui: 'fieldLabelTop',
-                            displayField: 'displayName',
-                            valueField: 'name',
-                            labelAlign: 'top',
-                            listeners: {
-                                change: 'getLanguageTextsonChange'
-                            },
-                            store: {
-                                fields: [{ name: 'displayName' }, { name: 'name' }, { name: 'icon' }],
-                                data: abp.localization.languages
-                            }
-                        }
-                    ]
-                }, {
-                    columnWidth: .25,
-                    border: false,
-                    frame: false,
-                    padding: '0 2px 1px 0px',
-                    items: [
-                        {
-                            xtype: 'combobox',
-                            name: 'targetLanguage',
-                            fieldLabel: app.localize('TargetLanguage').initCap(),
-                            width: '99%',
-                            ui: 'fieldLabelTop',
-                            displayField: 'displayName',
-                            valueField: 'name',
-                            labelAlign: 'top',
-                            listeners: {
-                                change: 'getLanguageTextsonChange'
-                            },
-                            bind: {
-                                store: {
-                                    fields: [{ name: 'displayName' }, { name: 'name' }, { name: 'icon' }],
-                                    data: abp.localization.languages
-                                }
-                            }
-                        }
-                    ]
-                }, {
-                    columnWidth: .25,
-                    border: false,
-                    frame: false,
-                    padding: '0 2px 1px 0px',
-                    items: [
-                        {
-                            xtype: 'combobox',
-                            name: 'source',
-                            fieldLabel: app.localize('Source').initCap(),
-                            width: '99%',
-                            ui: 'fieldLabelTop',
-                            displayField: 'name',
-                            valueField: 'name',
-                            labelAlign: 'top',
-                            listeners: {
-                                change: 'getLanguageTextsonChange'
-                            },
-                            bind: {
-                                store: {
-                                    fields: [{ name: 'name' }, { name: 'name' }],
-                                    data: abp.localization.sources
-
-                                }
-                            }
-                        }
-                    ]
-                }, {
-                    columnWidth: .25,
-                    border: false,
-                    frame: false,
-                    padding: '0 2px 1px 0px',
-                    items: [
-                        {
-                            xtype: 'combobox',
-                            name: 'targetValue',
-                            fieldLabel: app.localize('TargetValue').initCap(),
-                            width: '99%',
-                            ui: 'fieldLabelTop',
-                            displayField: 'text',
-                            valueField: 'value',
-                            labelAlign: 'top',
-                            listeners: {
-                                change: 'getLanguageTextsonChange'
-                            },
-                            bind: {
-                                store: {
-                                    fields: [{ name: 'text' }, { name: 'value' }],
-                                    data: [{ text: 'All', value: 'ALL' }, { text: 'EmptyOnes', value: 'EMPTY' }]
-
-                                }
-                            }
-                        }
-                    ]
-                }
-            ]
+            xtype: 'hiddenfield',
+            name: 'id',
+            value: 0
         }, {
-            xtype: 'container',
-            layout: 'fit',
+            xtype: 'combobox',
+            name: 'name',
+            fieldLabel: app.localize('Language').initCap(),
             width: '100%',
-            items: [
-                {
-                    xtype: 'Languagetexts',
-                    layout: 'fit'
+            ui: 'fieldLabelTop',
+            emptyText: app.localize('Language'),
+            displayField: 'displayText',
+            valueField: 'value',
+            queryMode: 'local',
+            //renderTpl: [
+            //   // '<i class="{value}">',
+            ////'<h1 class="title">{title}</h1>',
+            //'<p>{value}-{displayText}</p>'//,
+            // //'<p>{displayText}</p>'
+            //],
+            //store: 'languages.LanguagesDataStore'
+            store: {
+                model: 'Chaching.model.languages.LanguagesNamesModel',
+                data: []
+            }
+        }, {
+            xtype: 'combobox',
+            name: 'icon',
+            fieldLabel: app.localize('Flag').initCap(),
+            width: '100%',
+            ui: 'fieldLabelTop',
+            emptyText: app.localize('Flag'),
+            displayField: 'displayText',
+            valueField: 'value',
+            queryMode: 'local',
+            //store: 'languages.LanguagesDataStore'
+
+            listConfig: {
+                getInnerTpl: function() {
+                    // here you place the images in your combo
+                    var div = '<div style="padding:8px 16px 0 0; display:block; line-height:18px;">' +
+                        '<span class="famfamfam-flag {value}" style="height:11px !important; width:16px !important; display:inline-block; line-height:18px;"></span>&nbsp;&nbsp;' +
+                        '<span style="display:inline-block; line-height:18px;">{displayText}</span></div>';
+                    return div;
                 }
-            ]
+            },
+            store: {
+                model: 'Chaching.model.languages.LanguagesFlagModel',
+                data: []
+            }
         }
     ]
+
 });

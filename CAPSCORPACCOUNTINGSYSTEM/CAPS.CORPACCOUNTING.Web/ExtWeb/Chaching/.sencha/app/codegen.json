@@ -352,6 +352,42 @@
         "modelNamespace": "Chaching.model",
         "name": "financials.accounts.DivisionsModel"
       }
+    },
+    "app/model/languages/LanguagesNamesModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "languages/LanguagesNamesModel",
+        "modelNamespace": "Chaching.model",
+        "name": "languages.LanguagesNamesModel"
+      }
+    },
+    "app/model/languages/LanguagesFlagModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "languages/LanguagesFlagModel",
+        "modelNamespace": "Chaching.model",
+        "name": "languages.LanguagesFlagModel"
+      }
+    },
+    "app/model/languages/LanguageMainModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "languages/LanguageMainModel",
+        "modelNamespace": "Chaching.model",
+        "name": "languages.LanguageMainModel"
+      }
     }
   }
 }

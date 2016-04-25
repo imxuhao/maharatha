@@ -16,7 +16,8 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
     layout: 'column',
     autoScroll: true,
     border: false,
-    showFormTitle:true,
+    showFormTitle: true,
+    displayDefaultButtonsCenter:true,
     titleConfig: { 
         title: abp.localization.localize("CreatingNewCOA").initCap()
     },

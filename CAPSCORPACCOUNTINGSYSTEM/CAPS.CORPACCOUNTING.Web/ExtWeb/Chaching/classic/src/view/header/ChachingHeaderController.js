@@ -51,7 +51,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                 var item = locale[i];
                 var menuItem = {
                     text: item.displayName,
-                    iconCls: item.icon,
+                    iconCls: 'famfamfam-flag '+item.icon,
                     name: item.name,
                     isDefault: item.isDefault
                 };

@@ -54,7 +54,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         }
 
     },
-    editActionClicked: function (menu, item, e, eOpts) {
+    editActionClicked: function(menu, item, e, eOpts) {
         var parentMenu = menu.parentMenu,
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
@@ -63,22 +63,29 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             gridStore = grid.getStore();
 
         //TODO start edit by checking row allowEdit property
-            if (widgetRec && grid) {
+        if (widgetRec && grid) {
             var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig);
-            
+
             var modelField = gridStore.getModel().getFields();
             if (modelField) {
-                Ext.each(modelField, function (field) {
+                Ext.each(modelField, function(field) {
                     if (field.isPrimaryKey) {
                         widgetRec.set('id', widgetRec.get(field.name));
                         return;
                     }
                 });
             }
+
+            var form, formPanel;
             if (formView && formView.isWindow) {
-                formView.down('form').getForm().setValues(widgetRec.data);
+                formPanel = formView.down('form'),
+                    form = formPanel.getForm();
+                form.setValues(widgetRec.data);
+                form.loadRecord(widgetRec);
             } else if (formView) {
-                formView.getForm().setValues(widgetRec.data);
+                form = formView.getForm();
+                form.setValues(widgetRec.data);
+                form.loadRecord(widgetRec);
             }
         }
     },
@@ -170,6 +177,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 html: 'Operation completed successfully.',
                 title: 'Success',
                 ui: 'chachingWindow',
+                alwaysOnTop: true,
+                saveDelay: 500,
+                animateShadow: true,
                 align: 'tr'
             });
         } else {

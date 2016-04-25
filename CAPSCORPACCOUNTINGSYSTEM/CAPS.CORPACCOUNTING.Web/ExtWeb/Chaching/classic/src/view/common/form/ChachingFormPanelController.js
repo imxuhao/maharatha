@@ -2,7 +2,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.common-form-chachingformpanel',
     //default buttons action handler
-    onSaveClicked:function(btn) {
+    onSaveClicked: function(btn) {
         var me = this,
             view = me.getView(),
             parentGrid = view.parentGrid,
@@ -24,17 +24,20 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
                 msg: 'Please wait...',
                 target: target
             });
-            
+
+            //perform any custom operation in doPreSaveOperation function of controller.
+            //if doPreSaveOperation returns false the saving will be cancel
+            record = me.doPreSaveOperation(record, values, idPropertyField);
+            if (!record) return record;
 
             myMask.show();
-            
             if (values && parseInt(values[idPropertyField]) > 0) {
                 operation = Ext.data.Operation({
                     params: record.data,
                     parentGrid: parentGrid,
                     records: [record],
                     controller: me,
-                    operationMask:myMask,
+                    operationMask: myMask,
                     callback: me.onOperationCompleteCallBack
                 });
                 gridStore.update(operation);
@@ -52,6 +55,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             }
         }
     },
+    //override in child classes if required to perform customOperation and return false to cancel save
+    doPreSaveOperation:function(record,values,idPropertyField) { return record; },
     onCancelClicked:function(btn) {
         var me = this,
             view = me.getView();
@@ -85,8 +90,12 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
                 html: 'Operation completed successfully.',
                 title: 'Success',
                 ui: 'chachingWindow',
-                align:'tr'
+                alwaysOnTop: true,
+                saveDelay: 500,
+                animateShadow: true,
+                align: 'tr'
             });
+           
         } else {
             var response = Ext.decode(operation.getResponse().responseText);
             var message = '',

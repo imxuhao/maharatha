@@ -33,7 +33,8 @@ Ext.define('Chaching.Application', {
         'financials.accounts.SubAccountsStore',
         'financials.accounts.DivisionsStore',
         'manageView.ManageViewStore',
-        'roles.RolesTreeStore'
+        'roles.RolesTreeStore',
+        'languages.LanguagesDataStore'
       
     ],
     mainView: 'Chaching.view.main.ChachingViewport',

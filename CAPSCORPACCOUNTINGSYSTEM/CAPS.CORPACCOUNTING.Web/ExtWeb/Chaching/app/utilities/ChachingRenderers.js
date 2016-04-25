@@ -125,4 +125,7 @@
     languagesTextsEditIcon: function (val, meta, record, rowIndex) {        
             return '<i class="fa fa-edit" ></i>';       
     },
+    languageIconRenderer: function (val, meta, record, rowIndex) {
+        return '<i class="famfamfam-flag ' + record.get('icon') + '" style="display: inline-block;margin-right: 10px; !important" ></i><span>' + val + '</span>';
+    }
 });

@@ -30,6 +30,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
      * if set to true then create new buttons
   */
     hideDefaultButtons: false,
+    displayDefaultButtonsCenter:false,
     /**
   * @hide
   * @private
@@ -118,6 +119,9 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
                 }
             }
             buttons.push(cancelButton);
+            if (me.displayDefaultButtonsCenter) {
+                buttons.push('->');
+            }
             me.bbar = buttons;
             //me.button = buttons;
             me.buttonAlign = 'right';

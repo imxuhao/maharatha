@@ -1832,6 +1832,9 @@
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\SubAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobLocationsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobCommercialsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\languages\LanguageMainModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\languages\LanguagesFlagModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\languages\LanguagesNamesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
@@ -1841,6 +1844,7 @@
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\linkedaccounts\LinkedAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguageTextsStore.js" />
@@ -1872,6 +1876,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSelectionModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\tab\ChachingTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\tab\ChachingTabPanelController.js" />

@@ -77,7 +77,7 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
         },
         {
             xtype: 'gridcolumn',
-            width: '10%',
+            width: '8%',
             text: app.localize('Edit'),
             renderer: Chaching.utilities.ChachingRenderers.languagesTextsEditIcon
         }, ]

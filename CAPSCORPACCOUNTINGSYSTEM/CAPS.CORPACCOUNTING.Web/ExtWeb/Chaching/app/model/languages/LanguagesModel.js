@@ -3,12 +3,10 @@ Ext.define('Chaching.model.languages.LanguagesModel', {
 
     fields: [
         { name: 'id', type: 'int' },
-        { name: 'actions', type: 'string' },       
-         { name: 'displayName', type: 'string' },
-            { name: 'name', type: 'string' },
-          { name: 'creationTime', type: "date", format: 'Y/m/d H:i:s' },
-          { name: 'icon', type: "string" },
-            { name: 'isdefault', type: "boolean" }
-
+        { name: 'actions', type: 'string' },
+        { name: 'displayName', type: 'string' },
+        { name: 'name', type: 'string' },
+        { name: 'icon', type: "string" },
+        { name: 'isdefault', type: "boolean" }
     ]
 });

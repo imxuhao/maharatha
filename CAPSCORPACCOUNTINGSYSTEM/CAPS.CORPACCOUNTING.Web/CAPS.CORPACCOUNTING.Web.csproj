@@ -19056,6 +19056,7 @@
     <Content Include="Abp\Framework\styles\abp.mixings.less" />
     <Content Include="Abp\Framework\styles\abp.less" />
     <Content Include="Abp\Framework\styles\abp.css.map" />
+    <Content Include="ExtWeb\Chaching\classic\sass\src\view\common\tab\ChachingTabPanel.scss" />
     <None Include="Properties\PublishProfiles\DevServerRelease.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

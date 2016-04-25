@@ -1,13 +1,12 @@
 ﻿@include extjs-tab-panel-ui(
     $ui: 'dashboard',
-    $ui-tab-background-color: #00BCD4,
+    $ui-tab-background-color: transparent,
 $ui-tab-background-color-focus:#047E8E,
-$ui-bar-background-color:#F3F5F9,
+$ui-bar-background-color:#7FB0DA,
 $ui-tab-background-color-over:#047E8E,
 $ui-tab-background-color-active:#047E8E,
 $ui-tab-background-color-focus-over:#047E8E,
-$ui-tab-background-color-focus-active:#047E8E,
-    $ui-tab-color: white,
+$ui-tab-background-color-focus-active:#047E8E,   
     $ui-tab-color-over: white,
     $ui-tab-color-active: white,
     $ui-tab-glyph-color: white,
@@ -25,7 +24,8 @@ $ui-tab-font-weight-over:600,
 $ui-tab-color-over:white,
 $ui-tab-closable-icon-glyph-color:white,
 $ui-tab-closable-icon-glyph-color-active:white,
-$ui-tab-closable-icon-glyph-color-over:white
+$ui-tab-closable-icon-glyph-color-over:white,
+$ui-tab-border-color-active:transparent
 );
 .x-tab-bar-dashboard{
     border-radius:5px 5px 0 0 !important;

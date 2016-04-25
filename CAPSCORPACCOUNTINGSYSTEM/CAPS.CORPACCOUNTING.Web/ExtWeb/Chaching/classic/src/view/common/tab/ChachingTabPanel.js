@@ -11,7 +11,7 @@ Ext.define('Chaching.view.common.tab.ChachingTabPanel',{
     viewModel: {
         type: 'common-tab-chachingtabpanel'
     },
-    ui: 'dashboard',
+    ui: 'submenuTabs',
     tabPosition: 'left',
     tabStretchMax: true,
     titleAlign: 'left',
@@ -54,15 +54,20 @@ Ext.define('Chaching.view.common.tab.ChachingTabPanel',{
             for (var j = 0; j < dynamicTabItems.length; j++) {
                 var dynamicItem = dynamicTabItems[j];
                 controller.doBeforeAddDynamicTabItem(dynamicItem);
-                if (typeof (dynamicItem.getStore) === "function") {
-                    dynamicItem.getStore().load();
-                }
                 items.push(dynamicItem);
             }
             
         }
+        //load first tab list's store
+        if (items.length>0) {
+            var firstTabItem = items[0];
+            if (typeof (firstTabItem.getStore) === "function") {
+                firstTabItem.getStore().load();
+            }
+        }
         me.items = items;
         me.callParent(arguments);
+        me.on('tabchange', controller.onSubMenuItemTabChange);
     },
     getDynamicTabItems:function() {
         var me = this,

@@ -62,7 +62,7 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="EfEnumToLookup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1fde139e1e56f7c4, processorArchitecture=MSIL">
-      <HintPath>..\packages\ef-enum-to-lookup.1.9.0\lib\net45\EfEnumToLookup.dll</HintPath>
+      <HintPath>D:\Cha-Ching\CHACHINGNEW\CAPS.CORPACCOUNTING.EntityFramework\bin\Debug\EfEnumToLookup.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -1087,6 +1087,10 @@
     <Compile Include="Migrations\201604200644390_Modify_SubAccountUnit_Table.Designer.cs">
       <DependentUpon>201604200644390_Modify_SubAccountUnit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604250841456_Add_CustomLanguageTexts_Table.cs" />
+    <Compile Include="Migrations\201604250841456_Add_CustomLanguageTexts_Table.Designer.cs">
+      <DependentUpon>201604250841456_Add_CustomLanguageTexts_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1832,6 +1836,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604200644390_Modify_SubAccountUnit_Table.resx">
       <DependentUpon>201604200644390_Modify_SubAccountUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604250841456_Add_CustomLanguageTexts_Table.resx">
+      <DependentUpon>201604250841456_Add_CustomLanguageTexts_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

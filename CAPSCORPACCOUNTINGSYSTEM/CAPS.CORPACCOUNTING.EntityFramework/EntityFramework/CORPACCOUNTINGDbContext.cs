@@ -21,6 +21,7 @@ using CAPS.CORPACCOUNTING.ChargeEntry;
 using CAPS.CORPACCOUNTING.AccountReceivable;
 using CAPS.CORPACCOUNTING.Preferencees;
 using CAPS.CORPACCOUNTING.Common;
+using CAPS.CORPACCOUNTING.Localization;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -564,6 +565,8 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> UserViewSettingsUnit Declaration</summary>
         public virtual IDbSet<UserViewSettingsUnit> UserViewSettingsUnit { get; set; }
+
+        public virtual IDbSet<CustomLanguageTextsUnit> CustomLanguageTextsUnit { get; set; }
         
 
 

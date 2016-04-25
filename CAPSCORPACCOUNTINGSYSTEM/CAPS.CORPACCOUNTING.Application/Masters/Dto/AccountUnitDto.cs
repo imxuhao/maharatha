@@ -64,6 +64,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeOfAccountId field. </summary>
         public int? TypeOfAccountId { get; set; }
 
+        /// <summary>Gets or sets the TypeOfAccount field. </summary>
+        public string TypeOfAccount { get; set; }
+
         /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
         public bool IsDocControlled { get; set; }
 
@@ -102,6 +105,24 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
         public string Us1120IncomeStmtName { get; set; }
+
+        /// <summary>Gets or sets the TypeofConsolidationId field. </summary>
+        public TypeofConsolidation? TypeofConsolidationId { get; set; }
+
+        /// <summary>Gets or sets the TypeofConsolidation field. </summary>
+        public string TypeofConsolidation { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        public TypeOfCurrency? TypeOfCurrencyId { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrency field. </summary>
+        public string TypeOfCurrency { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
+        public short? TypeOfCurrencyRateId { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrencyRate field. </summary>
+        public string TypeOfCurrencyRate { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set; }

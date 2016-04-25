@@ -279,7 +279,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             });
             formView.show();
         } else if (createMode === "tab" && tabPanel) {
-            var parentTabPanel = tabPanel.up('tabpanel');
+            var parentTabPanel = tabPanel.up('tabpanel') ? tabPanel.up('tabpanel') : tabPanel;
             if (parentTabPanel) {
                 className = type + ".create";
                 formView = Ext.create({

@@ -83,8 +83,17 @@ namespace CAPS.CORPACCOUNTING.Authorization
             subAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts_Edit, L("Edit"));
             subAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts_Delete, L("Delete"));
 
-            // PERMISSIONS FOR DIVISIONS
-            var divisions = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions, L("Divisions"));
+
+
+            #region Accounts
+            var financialsAccounts = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts, L("Accounts"));
+            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Create, L("Create"));
+            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Edit, L("Edit"));
+            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Delete, L("Delete"));
+        #endregion
+
+        // PERMISSIONS FOR DIVISIONS
+        var divisions = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions, L("Divisions"));
             divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Create, L("Create"));
             divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Edit, L("Edit"));
             divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Delete, L("Delete"));
@@ -251,9 +260,11 @@ namespace CAPS.CORPACCOUNTING.Authorization
             #region Posting Tab
             var posting = pages.CreateChildPermission(AppPermissions.Pages_Posting, L("Posting"));
             #endregion
-        }
 
-        private static ILocalizableString L(string name)
+
+    }
+
+    private static ILocalizableString L(string name)
         {
             return new LocalizableString(name, CORPACCOUNTINGConsts.LocalizationSourceName);
         }

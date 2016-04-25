@@ -135,12 +135,103 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
             xtype: 'ajax',
             autoLoad: false,
             extraParams: {
-                'Id':1
+                'Id': 1
             },
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
                 url: abp.appPath + 'api/services/app/jobUnit/GetOrganizationUnits',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result',
+                    totalProperty: 'result.totalCount'
+                }
+            }
+        },
+
+        typeofConsolidationList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'typeofConsolidation', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeofConsolidationId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/accountUnit/GetTypeofConsolidationList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result',
+                    totalProperty: 'result.totalCount'
+                }
+            }
+        }
+        ,
+        typeOfAccountList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'typeOfAccount', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeOfAccountId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/accountUnit/GetTypeOfAccountList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result',
+                    totalProperty: 'result.totalCount'
+                }
+            }
+        }
+        ,
+        typeOfCurrencyList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'typeOfCurrency', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeOfCurrencyId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/accountUnit/GetTypeOfCurrencyList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result',
+                    totalProperty: 'result.totalCount'
+                }
+            }
+        },
+        typeOfCurrencyRateList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'typeOfCurrencyRate', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeOfCurrencyRateId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/accountUnit/GetTypeOfCurrencyRateList',
                 reader: {
                     type: 'json',
                     rootProperty: 'result',

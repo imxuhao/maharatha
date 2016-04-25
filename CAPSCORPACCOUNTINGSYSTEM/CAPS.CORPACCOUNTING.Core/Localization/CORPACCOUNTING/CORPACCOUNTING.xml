@@ -466,6 +466,7 @@
     <text name="PurchaseOrderHistory" value="Purchase Order History" />
     <text name="SearchPurchaseOrders" value="Search All Purchase Orders" />
     <text name="Number" value="Number" />
+    <text name="SubAccountNumber" value="Sub Account Number" />
     <text name="JournalsAllowed" value="Journals Allowed" />
     <text name="CorpSubAccount" value="Corp. Sub-Account" />
     <text name="ProjectSubAccount" value="Project Sub-Account" />
@@ -477,8 +478,7 @@
     <text name="Trans#" value="Trans #" />
     <text name="CreateNewSubAccounts" value="Create New Sub Account" />
     <text name="EditSubAccount" value="Edit Sub Account" />
-    <text name="MandatoryField" value="This is Mandatory Field" />  
-
+    <text name="MandatoryField" value="This is Mandatory Field" />
     <text name="CreateNewDivision" value="CREATE NEW DIVISION" />
     <text name="EditDivision" value="Edit Division" />
     <text name="DivisionNumber" value="Division Number" />
@@ -487,9 +487,25 @@
     <text name="UseCorpDivisionDefault" value="UseCorp Division Default" />
     <text name="Inter-CompanyLink" value="Inter-CompanyLink" />
     <text name="Inter-CompanySub" value="Inter-Company Sub" />
-    
-    
-    
-
+    <text name="IsMandatory" value="Is Mandatory" />
+    <text name="FinancialAccounts" value="Financial Accounts" />
+    <text name="CreateNewFinancialAccount" value="Create New Financial Account" />
+    <text name="EditFinancialAccount" value="Edit Financial Account" />
+    <text name="Account" value="Account" />
+    <text name="NotOverriden" value="Not Overriden" />
+    <text name="Classification" value="Classification" />
+    <text name="AccountSearch" value="Enter Account to Search" />
+    <text name="DescriptionSearch" value="Enter Description to search" />
+    <text name="SubAccountNumberSearch" value="Enter Sub Account Number to search" />
+    <text name="GroupCopyLabelSearch" value="Enter Group Copy Label to search" />
+    <text name="ConvertToNewCOASearch" value="Enter Convert To New COA to search" />
+    <text name="StdGroupTotalSearch" value="Enter Std Group Total to search" />
+    <text name="ChartOfAccountSearch" value="Enter Chart Of Account to search" />
+    <text name="RollUpAccount" value="Roll Up Account" />
+    <text name="EliminationAccount" value="Elimination Account" />
+    <text name="Consolidation" value="Consolidation" />
+    <text name="RateTypeOverride" value="Rate Type Override" />
+    <text name="Multi-CurrencyReval" value="Multi-Currency Reval" />
+    <text name="NewAccount" value="New Account" />
   </texts>
 </localizationDictionary>

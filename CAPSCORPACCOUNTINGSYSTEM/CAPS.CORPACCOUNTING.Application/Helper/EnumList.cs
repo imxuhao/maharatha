@@ -48,5 +48,26 @@ namespace CAPS.CORPACCOUNTING.Helpers
         }
 
 
+        /// <summary>
+        /// Get TypeofConsolidation Enum as List
+        /// </summary>
+        /// <returns></returns>
+        public static List<NameValueDto> GetTypeofConsolidationList()
+        {
+            var listEnums = (from TypeofConsolidation n in Enum.GetValues(typeof(TypeofConsolidation))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+        /// <summary>
+        /// Get TypeofConsolidation Enum as List
+        /// </summary>
+        /// <returns></returns>
+        public static List<NameValueDto> GetTypeOfCurrencyList()
+        {
+            var listEnums = (from TypeOfCurrency n in Enum.GetValues(typeof(TypeOfCurrency))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+
     }
 }

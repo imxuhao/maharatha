@@ -53,6 +53,9 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
     },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
+    listeners: {
+        cellclick: 'onChartOfAccountClicked'
+    },
     columns: [
          {
              xtype: 'gridcolumn',
@@ -61,12 +64,11 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              sortable: true,
              groupable: true,
              width: '50%',
+             renderer:Chaching.utilities.ChachingRenderers.rendererHyperLink,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
-                 emptyText: 'Enter Chart Of Account to search'
-             }, editor: {
-                 xtype: 'textfield',
+                 emptyText: app.localize('ChartOfAccountSearch')
              }
          }, {
              xtype: 'gridcolumn',
@@ -79,7 +81,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
-                 emptyText: 'Enter Description to search'
+                 emptyText: app.localize('DescriptionSearch'),
              }, editor: {
                  xtype: 'textfield',
              }
@@ -182,7 +184,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
         , filterField: {
             xtype: 'textfield',
             width: '100%',
-            emptyText: 'Enter Convert To New COA to search'
+            emptyText:  app.localize('ConvertToNewCOASearch')
         }
          }, {
              xtype: 'gridcolumn',
@@ -195,8 +197,8 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
-                 entityName:'',
-                 emptyText: 'Enter Std Group Total to search'
+                 entityName: '',
+                 emptyText: app.localize('StdGroupTotalSearch')
              }
          }
     ]

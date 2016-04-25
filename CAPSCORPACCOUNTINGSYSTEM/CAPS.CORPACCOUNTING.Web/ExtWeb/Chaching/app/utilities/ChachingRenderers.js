@@ -127,5 +127,10 @@
     },
     languageIconRenderer: function (val, meta, record, rowIndex) {
         return '<i class="famfamfam-flag ' + record.get('icon') + '" style="display: inline-block;margin-right: 10px; !important" ></i><span>' + val + '</span>';
+    },
+    rendererHyperLink: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (val)
+            return '<a style="text-decoration:underline;">' + val + '</a>';
+        return val;
     }
 });

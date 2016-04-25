@@ -11,6 +11,32 @@ using Abp.Organizations;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
+
+    /// <summary>
+    ///Enum for TypeOfConsolidation 
+    /// </summary>
+    public enum TypeofConsolidation
+    {
+        [Display(Name = "Date")]
+        Date = 1,
+        [Display(Name = "Month")]
+        Month = 2,
+        [Display(Name = "Year")]
+        Year = 3,
+        [Display(Name = "Voucher Reference")]
+        VoucherReference = 4
+    }
+    /// <summary>
+    ///Enum for TypeOfConsolidation 
+    /// </summary>
+    public enum TypeOfCurrency
+    {
+        [Display(Name = "US Dollar")]
+        USDollar = 1,
+        [Display(Name = "Canadian Dollar")]
+        CanadianDollar = 2
+    }
+    
     /// <summary>
     /// Account is the table name in lajit
     /// </summary>
@@ -212,7 +238,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         public long? ParentId { get; set; }
 
 
-        /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        // <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+
+        public TypeOfCurrency? TypeOfCurrencyId { get; set; }
+
         /// <summary>
         ///     Hierarchical Code of this organization unit.
         ///     Example: "00001.00042.00005".
@@ -326,6 +355,15 @@ namespace CAPS.CORPACCOUNTING.Masters
         [MaxLength(MaxDisplayNameLength)]
         public string CashFlowName { get; set; }
 
+        /// <summary>Gets or sets the TypeofConsolidationId field. </summary>
+        public TypeofConsolidation? TypeofConsolidationId { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
+        public short? TypeOfCurrencyRateId { get; set; }
+
+        /// <summary>Gets or sets the IsAccountRevalued field. </summary>
+        public bool IsAccountRevalued { get; set; }
+        
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set; }
 

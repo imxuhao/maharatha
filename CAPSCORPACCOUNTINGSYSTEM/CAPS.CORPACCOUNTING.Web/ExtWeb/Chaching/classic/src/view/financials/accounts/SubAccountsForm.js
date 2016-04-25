@@ -19,10 +19,10 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
     },
     items: [
         {
-        xtype: 'hiddenfield',
-        name: 'subAccountId',
-        value: 0
-    },
+            xtype: 'hiddenfield',
+            name: 'subAccountId',
+            value: 0
+        },
     {
         columnWidth: .5,
         padding: '20 10 0 20',
@@ -36,13 +36,13 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                 name: 'subAccountNumber',
                 itemId: 'subAccountNumber',
                 allowBlank: false,
-                fieldLabel: app.localize('Number').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                fieldLabel: app.localize('SubAccountNumber').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
                 width: '100%',
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('MandatoryField')
             }
-           
-        
+
+
         , {
             xtype: 'textfield',
             name: 'caption',
@@ -77,25 +77,9 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
             checked: false,
             boxLabelCls: 'checkboxLabel'
         }
-          , {
-              xtype: 'checkbox',
-              boxLabel: app.localize('CorpSubAccount'),
-              name: 'isCorporateSubAccount',
-              labelAlign: 'right',
-              inputValue: true,
-              checked: false,
-              boxLabelCls: 'checkboxLabel'
-          }
-          , {
-              xtype: 'checkbox',
-              boxLabel: app.localize('ProjectSubAccount'),
-              name: 'isProjectSubAccount',
-              labelAlign: 'right',
-              inputValue: true,
-              checked: false,
-              boxLabelCls: 'checkboxLabel'
-          }
-         
+
+
+
         ]
     }
 
@@ -118,37 +102,30 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                  ui: 'fieldLabelTop',
                  emptyText: app.localize('MandatoryField')
              }
+                  , {
+                      xtype: 'checkbox',
+                      boxLabel: app.localize('CorpSubAccount'),
+                      name: 'isCorporateSubAccount',
+                      labelAlign: 'right',
+                      inputValue: true,
+                      checked: false,
+                      boxLabelCls: 'checkboxLabel'
+                  }
+                  , {
+                      xtype: 'checkbox',
+                      boxLabel: app.localize('ProjectSubAccount'),
+                      name: 'isProjectSubAccount',
+                      labelAlign: 'right',
+                      inputValue: true,
+                      checked: false,
+                      boxLabelCls: 'checkboxLabel'
+                  }
              ,
-              {
-                  xtype: 'textfield',
-                  name: 'groupCopyLabel',
-                  itemId: 'groupCopyLabel',
-                  allowBlank: false,
-                  fieldLabel: app.localize('GroupCopyLabel').initCap(),
-                  width: '100%',
-                  ui: 'fieldLabelTop'
-              }
-             ,
+
            {
                xtype: 'checkbox',
                boxLabel: app.localize('AccountSpecific'),
                name: 'isAccountSpecific',
-               labelAlign: 'right',
-               inputValue: true,
-               checked: false,
-               boxLabelCls: 'checkboxLabel'
-           }, {
-               xtype: 'checkbox',
-               boxLabel: app.localize('MandatoryEntry'),
-               name: 'isMandatory',
-               labelAlign: 'right',
-               inputValue: true,
-               checked: false,
-               boxLabelCls: 'checkboxLabel'
-           }, {
-               xtype: 'checkbox',
-               boxLabel: app.localize('BudgetInclusive'),
-               name: 'isBudgetInclusive',
                labelAlign: 'right',
                inputValue: true,
                checked: false,

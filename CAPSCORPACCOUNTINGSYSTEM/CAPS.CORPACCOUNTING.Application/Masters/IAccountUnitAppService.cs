@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -51,5 +52,23 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<AccountUnitDto> GetAccountUnitsById(IdInput input);
+
+        /// <summary>
+        /// Get TypeofConsolidation
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeofConsolidationList();
+
+        /// <summary>
+        /// Get TypeOfAccount List
+        /// </summary>
+        /// <returns></returns>
+          Task<List<NameValueDto>> GetTypeOfAccountList();
+
+        /// <summary>
+        /// Get TypeOfCurrency
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeOfCurrencyList();
     }
 }

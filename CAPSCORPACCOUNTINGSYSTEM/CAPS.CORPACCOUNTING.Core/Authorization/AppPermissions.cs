@@ -77,6 +77,12 @@
         public const string Pages_Financials_Accounts_SubAccounts_Edit = "Pages.Financials.Accounts.SubAccounts.Edit";
         public const string Pages_Financials_Accounts_SubAccounts_Delete = "Pages.Financials.Accounts.SubAccounts.Delete";
 
+        // PERMISSIONS FOR ACCOUNTS
+
+        public const string Pages_Financials_Accounts_Accounts = "Pages.Financials.Accounts.Accounts";
+        public const string Pages_Financials_Accounts_Accounts_Create = "Pages.Financials.Accounts.Accounts.Create";
+        public const string Pages_Financials_Accounts_Accounts_Edit = "Pages.Financials.Accounts.Accounts.Edit";
+        public const string Pages_Financials_Accounts_Accounts_Delete = "Pages.Financials.Accounts.Accounts.Delete";
 
         // PERMISSIONS FOR DIVISIONS
 

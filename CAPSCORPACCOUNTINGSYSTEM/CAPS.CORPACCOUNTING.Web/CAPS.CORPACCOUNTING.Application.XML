@@ -1058,6 +1058,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeofConsolidationList">
+            <summary>
+            Get TypeofConsolidation Enum as List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeOfCurrencyList">
+            <summary>
+            Get TypeofConsolidation Enum as List
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.Helper.GetSortOrderAsString(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Helpers.Sort})">
             <summary>
             To get formatted sorting string 
@@ -2774,6 +2786,30 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetTypeofConsolidationList">
+            <summary>
+            Get TypeofConsolidation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetTypeOfCurrencyList">
+            <summary>
+            Get TypeOfCurrency
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetTypeOfAccountList">
+            <summary>
+            Get TypeOfAccount List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetTypeOfCurrencyRateList">
+            <summary>
+            Get TypeOfCurrencyRate List
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get the Records for Grid with paging and  sorting
@@ -3929,6 +3965,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TypeOfAccountId">
             <summary>Gets or sets the TypeOfAccountId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TypeOfAccount">
+            <summary>Gets or sets the TypeOfAccount field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.IsDocControlled">
             <summary>Gets or sets the TypeOfCurrencyId field. </summary>
         </member>
@@ -3967,6 +4006,24 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.Us1120IncomeStmtName">
             <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TypeofConsolidationId">
+            <summary>Gets or sets the TypeofConsolidationId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TypeofConsolidation">
+            <summary>Gets or sets the TypeofConsolidation field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TypeOfCurrencyId">
+            <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TypeOfCurrency">
+            <summary>Gets or sets the TypeOfCurrency field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TypeOfCurrencyRateId">
+            <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TypeOfCurrencyRate">
+            <summary>Gets or sets the TypeOfCurrencyRate field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TenantId">
             <summary>Gets or sets the TenantId field. </summary>
@@ -4256,6 +4313,15 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.OrganizationId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.TypeofConsolidationId">
+            <summary>Gets or sets the TypeofConsolidationId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.TypeOfCurrencyId">
+            <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.TypeOfCurrencyRateId">
+            <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.ParentId">
             <summary>Gets or sets the ParentId field. </summary>
         </member>
@@ -4351,6 +4417,15 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.OrganizationId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeofConsolidationId">
+            <summary>Gets or sets the TypeofConsolidationId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeOfCurrencyId">
+            <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeOfCurrencyRateId">
+            <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.Caption">
             <summary>Gets or sets the Caption field. </summary>
@@ -4879,6 +4954,24 @@
             Get the Account based on AccountId.
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetTypeofConsolidationList">
+            <summary>
+            Get TypeofConsolidation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetTypeOfAccountList">
+            <summary>
+            Get TypeOfAccount List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetTypeOfCurrencyList">
+            <summary>
+            Get TypeOfCurrency
+            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService">

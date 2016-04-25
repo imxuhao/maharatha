@@ -109,5 +109,18 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationId { get; set; }
+
+        /// <summary>Gets or sets the TypeofConsolidationId field. </summary>
+        public TypeofConsolidation? TypeofConsolidationId { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        public TypeOfCurrency? TypeOfCurrencyId { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
+        public short? TypeOfCurrencyRateId { get; set; }
+
+        
+
+
     }
 }

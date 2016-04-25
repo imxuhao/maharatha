@@ -1827,6 +1827,7 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\ChartOfAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\DivisionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\SubAccountsModel.js" />
@@ -1842,6 +1843,7 @@
     <Content Include="ExtWeb\Chaching\app\model\roles\RolePermissionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
@@ -1874,6 +1876,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\Application.js" />
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSelectionModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextForm.js" />

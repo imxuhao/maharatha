@@ -11,6 +11,9 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Linq.Extensions;
 using System.Linq.Dynamic;
 using CAPS.CORPACCOUNTING.Helpers;
+using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.Common;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -18,16 +21,21 @@ namespace CAPS.CORPACCOUNTING.Accounts
     {
         private readonly AccountUnitManager _accountUnitManager;
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
+        private readonly IRepository<TypeOfAccountUnit, int> _typeOfAccountRepository;
+        private readonly IRepository<TypeOfCurrencyRateUnit, short> _typeOfCurrencyRateRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository, UserManager userManager, IUnitOfWorkManager unitOfWorkManager)
+        public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
+            UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
+            IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
             _userManager = userManager;
             _unitOfWorkManager = unitOfWorkManager;
-
+            _typeOfAccountRepository = typeOfAccountRepository;
+            _typeOfCurrencyRateRepository = typeOfCurrencyRateRepository;
         }
         public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId = null)
         {
@@ -53,7 +61,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
         {
             var query =
                 from au in _accountUnitRepository.GetAll()
-                select new { Account = au };
+                join typeOfAccount in _typeOfAccountRepository.GetAll() on au.TypeOfAccountId equals typeOfAccount.Id
+                into accounts
+                from coaunit in accounts.DefaultIfEmpty()
+                join currencyrate in _typeOfCurrencyRateRepository.GetAll() on au.TypeOfCurrencyRateId equals currencyrate.Id
+                into ratecurrency 
+                from accountresults in ratecurrency.DefaultIfEmpty()
+                select new { Account = au, TypeOfAccount= coaunit.Description, TypeOfAccountRate=accountresults.Description };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -61,7 +75,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.Account.OrganizationUnitId == input.OrganizationUnitId || item.Account.OrganizationUnitId == null);
+            query = query.Where(item =>item.Account.ChartOfAccountId==input.CoaId && (item.Account.OrganizationUnitId == input.OrganizationUnitId || item.Account.OrganizationUnitId == null));
 
 
             var resultCount = await query.CountAsync();
@@ -75,9 +89,14 @@ namespace CAPS.CORPACCOUNTING.Accounts
                  {
                      var dto = item.Account.MapTo<AccountUnitDto>();
                      dto.AccountId = item.Account.Id;
+                     dto.TypeofConsolidation = item.Account.TypeofConsolidationId != null ? item.Account.TypeofConsolidationId.ToDisplayName():"";
+                     dto.TypeOfAccount = item.TypeOfAccount;
+                     dto.TypeOfCurrency= item.Account.TypeOfCurrencyId != null ? item.Account.TypeOfCurrencyId.ToDisplayName() : "";
+                     dto.TypeOfCurrencyRate = item.TypeOfAccountRate;
                      return dto;
                  }).ToList());
         }
+       
         /// <summary>
         /// Crating the AccountUnit
         /// </summary>
@@ -87,6 +106,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
         public async Task<AccountUnitDto> CreateAccountUnit(CreateAccountUnitInput input)
         {
             var accountUnit = input.MapTo<AccountUnit>();
+            accountUnit.ParentId = input.ParentId != 0 ? input.ParentId : null;
             await _accountUnitManager.CreateAsync(accountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             _unitOfWorkManager.Current.Completed += (sender, args) => { };
@@ -106,7 +126,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             accountUnit.AccountNumber = input.AccountNumber;
             accountUnit.Caption = input.Caption;
             accountUnit.ChartOfAccountId = input.ChartOfAccountId;
-            accountUnit.ParentId = input.ParentId;
+            accountUnit.ParentId = input.ParentId!=0? input.ParentId:null;
             accountUnit.OrganizationUnitId = input.OrganizationId;
             accountUnit.BalanceSheetName = input.BalanceSheetName;
             accountUnit.CashFlowName = input.CashFlowName;
@@ -129,6 +149,10 @@ namespace CAPS.CORPACCOUNTING.Accounts
             accountUnit.LinkJobId = input.LinkJobId;
             accountUnit.ProfitLossName = input.ProfitLossName;
             accountUnit.RollupAccountId = input.RollupAccountId;
+            accountUnit.IsAccountRevalued = input.IsAccountRevalued;
+            accountUnit.TypeOfCurrencyId = input.TypeOfCurrencyId;
+            accountUnit.TypeOfCurrencyRateId = input.TypeOfCurrencyRateId;
+            accountUnit.TypeofConsolidationId = input.TypeofConsolidationId;
             accountUnit.RollupJobId = input.RollupJobId;
             accountUnit.TypeOfAccountId = input.TypeOfAccountId;
             accountUnit.Us1120BalanceSheetName = input.Us1120BalanceSheetName;
@@ -166,5 +190,45 @@ namespace CAPS.CORPACCOUNTING.Accounts
             return result;
 
         }
+
+
+        /// <summary>
+        /// Get TypeofConsolidation
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeofConsolidationList()
+        {
+            return EnumList.GetTypeofConsolidationList();
+        }
+
+        /// <summary>
+        /// Get TypeOfCurrency
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeOfCurrencyList()
+        {
+            return EnumList.GetTypeOfCurrencyList();
+        }
+
+        /// <summary>
+        /// Get TypeOfAccount List
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetTypeOfAccountList()
+        {
+            var typeOfAccounts = await _typeOfAccountRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return typeOfAccounts;
+        }
+
+        /// <summary>
+        /// Get TypeOfCurrencyRate List
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetTypeOfCurrencyRateList()
+        {
+            var typeOfCurrencyRates = await _typeOfCurrencyRateRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return typeOfCurrencyRates;
+        }
+
     }
 }

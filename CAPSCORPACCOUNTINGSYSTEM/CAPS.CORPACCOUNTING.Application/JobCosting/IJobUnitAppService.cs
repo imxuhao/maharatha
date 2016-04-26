@@ -47,7 +47,19 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         Task<JobUnitDto> GetJobUnitById(IdInput input);
 
+        /// <summary>
+        /// Get Organizations of Tenant except input Organization.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<List<NameValueDto>> GetOrganizationUnits(IdInput input);
+
+        /// <summary>
+        ///Get the list of all Divisions(Jobs) and also provided with Sorting,Paging and Searching functionality.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<JobUnitDto>> GetDivisionUnits(SearchInputDto input);
 
 
     }

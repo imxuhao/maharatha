@@ -17,16 +17,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         [Required]
         public string Caption { get; set; }
 
-        /// <summary>Gets or sets the RollupCenterId field. </summary>
-        [Range(1,Int32.MaxValue,ErrorMessage ="RollupCenter is Required ")]
-        public int RollupCenterId { get; set; }       
+        /// <summary>Gets or sets the RollupCenterId field. </summary>       
+        public int? RollupCenterId { get; set; }       
 
         /// <summary>Gets or sets the IsCorporateDefault field. </summary>
         public bool IsCorporateDefault { get; set; }
 
-        /// <summary>Gets or sets the ChartOfAccountId field. </summary>
-        [Range(1, Int32.MaxValue, ErrorMessage = "ChartOfAccount is Required ")]
-        public int ChartOfAccountId { get; set; }       
+        /// <summary>Gets or sets the ChartOfAccountId field. </summary>       
+        public int? ChartOfAccountId { get; set; }       
 
         /// <summary>Gets or sets the RollupAccountId field. </summary>
         public long? RollupAccountId { get; set; }        
@@ -46,7 +44,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the IsApproved field. </summary>
         public bool IsApproved { get; set; }
 
-        /// <summary>Gets or sets the IsActive field. </summary>
+        /// <summary>Gets or sets the IsActive field. 
+        /// When checked- this division is available for selection on entry and history pages and posting to this division is allowed.     
+        ///	When unchecked- this division cannot be posted to and WILL NOT be available for selection on Entry and History Pages.
+        /// But Will be available for selection on reporting filter pages, and searchable in inquiry grids.
+        /// </summary>
         public bool IsActive { get; set; } = true;
 
         /// <summary>Gets or sets the IsICTDivision field. </summary>

@@ -17,13 +17,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public string Caption { get; set; }
 
         /// <summary>Gets or sets the RollupCenterId field. </summary>
-        public int RollupCenterId { get; set; }
+        public int? RollupCenterId { get; set; }
 
         /// <summary>Gets or sets the IsCorporateDefault field. </summary>
         public bool IsCorporateDefault { get; set; }
 
         /// <summary>Gets or sets the ChartOfAccountId field. </summary>
-        public int ChartOfAccountId { get; set; }
+        public int? ChartOfAccountId { get; set; }
 
         /// <summary>Gets or sets the RollupAccountId field. </summary>
         public long? RollupAccountId { get; set; }

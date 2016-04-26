@@ -19,36 +19,38 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         [Required]
         public string Caption { get; set; }
 
-        /// <summary>Gets or sets the RollupCenterId field. </summary>
-        [Range(1, Int32.MaxValue)]
-        public int RollupCenterId { get; set; }       
+        /// <summary>Gets or sets the RollupCenterId field. </summary>       
+        public int? RollupCenterId { get; set; }       
 
         /// <summary>Gets or sets the IsCorporateDefault field. </summary>
         public bool IsCorporateDefault { get; set; }
 
-        /// <summary>Gets or sets the ChartOfAccountId field. </summary>
-        [Range(0, Int32.MaxValue)]
-        public int ChartOfAccountId { get; set; }       
+        /// <summary>Gets or sets the ChartOfAccountId field. </summary>       
+        public int? ChartOfAccountId { get; set; }       
 
         /// <summary>Gets or sets the RollupAccountId field. </summary>
-        public long? RollupAccountId { get; set; }        
+        public long? RollupAccountId { get; set; }
 
         /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
         public int? TypeOfCurrencyId { get; set; }
 
         /// <summary>Gets or sets the RollupJobId field. </summary>
-        public int? RollupJobId { get; set; }        
+        public int? RollupJobId { get; set; } 
 
         /// <summary>Gets or sets the TypeOfJobStatusId field. </summary>
-        public ProjectStatus? TypeOfJobStatusId { get; set; }
+        public ProjectStatus? TypeOfJobStatusId { get; set; } 
 
         /// <summary>Gets or sets the TypeOfBidSoftwareId field. </summary>
         public BudgetSoftware? TypeOfBidSoftwareId { get; set; }
 
         /// <summary>Gets or sets the IsApproved field. </summary>
         public bool IsApproved { get; set; }
-
-        /// <summary>Gets or sets the IsActive field. </summary>
+        
+        /// <summary>Gets or sets the IsActive field. 
+        /// When checked- this division is available for selection on entry and history pages and posting to this division is allowed.     
+        ///	When unchecked- this division cannot be posted to and WILL NOT be available for selection on Entry and History Pages.
+        /// But Will be available for selection on reporting filter pages, and searchable in inquiry grids.
+        /// </summary>
         public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the IsICTDivision field. </summary>

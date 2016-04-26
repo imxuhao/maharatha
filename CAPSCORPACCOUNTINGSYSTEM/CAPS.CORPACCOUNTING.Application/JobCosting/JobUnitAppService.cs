@@ -7,7 +7,6 @@ using Abp.AutoMapper;
 using System.Linq;
 using System.Data.Entity;
 using System.Linq.Dynamic;
-using Abp.Extensions;
 using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
 using Abp.Authorization;
@@ -15,6 +14,9 @@ using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Sessions;
+using System;
+using CAPS.CORPACCOUNTING.Authorization;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -30,11 +32,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IJobCommercialAppService _jobCommercialAppService;
         private readonly IJobBudgetUnitAppService _jobBudgetUnitAppService;
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
-
+        private readonly CustomAppSession _customAppSessionSession;
+        long? OrgnizationId=null;
 
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IUnitOfWorkManager unitOfWorkManager, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService, IJobBudgetUnitAppService jobBudgetUnitAppService,
-            IRepository<OrganizationUnit, long> organizationUnitRepository)
+            IRepository<OrganizationUnit, long> organizationUnitRepository, CustomAppSession customAppSessionSession)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -45,6 +48,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _jobCommercialAppService = jobCommercialAppService;
             _jobBudgetUnitAppService = jobBudgetUnitAppService;
             _organizationUnitRepository = organizationUnitRepository;
+            _customAppSessionSession = customAppSessionSession;
+            if (!ReferenceEquals(_customAppSessionSession.OrganizationId, null))
+                OrgnizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
+
         }
         /// <summary>
         /// To create the Job
@@ -52,29 +59,34 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Create)]
         public async Task<JobUnitDto> CreateJobUnit(CreateJobUnitInput input)
         {
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,
-                isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: input.OrganizationUnitId, typeofprojectid: input.TypeofProjectId,
+                isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: OrgnizationId, typeofprojectid: input.TypeofProjectId,
                 taxrecoveryid: input.TaxRecoveryId, chartofaccountid: input.ChartOfAccountId, rollupcenterid: input.RollupCenterId);
             await _jobUnitManager.CreateAsync(jobUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
             //create job details
-            input.JobDetails.ForEach(u => { u.JobId = jobUnit.Id;});
-            foreach (var jobdetails in input.JobDetails)
+            if (!ReferenceEquals(input.JobDetails, null))
             {
-                await _jobCommercialAppService.CreateJobDetailUnit(jobdetails);
+                input.JobDetails.ForEach(u => { u.JobId = jobUnit.Id; });
+                foreach (var jobdetails in input.JobDetails)
+                {
+                    await _jobCommercialAppService.CreateJobDetailUnit(jobdetails);
+                }
             }
-
             //create jobbudget
-            input.JobBudget.ForEach(u => { u.JobId = jobUnit.Id;});
-            foreach (var jobBudget in input.JobBudget)
+            if (!ReferenceEquals(input.JobBudget, null))
             {
-                await _jobBudgetUnitAppService.CreateJobBudgetUnit(jobBudget);
+                input.JobBudget.ForEach(u => { u.JobId = jobUnit.Id; });
+                foreach (var jobBudget in input.JobBudget)
+                {
+                    await _jobBudgetUnitAppService.CreateJobBudgetUnit(jobBudget);
+                }
             }
-
             return jobUnit.MapTo<JobUnitDto>();
         }
 
@@ -83,10 +95,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Edit)]
         public async Task<JobUnitDto> UpdateJobUnit(UpdateJobUnitInput input)
         {
-            var jobUnit = await _jobUnitRepository.GetAsync(input.JobId);
-
+            var jobUnit = await _jobUnitRepository.GetAsync(input.JobId);            
             #region Setting the values to be updated
 
             jobUnit.JobNumber = input.JobNumber;
@@ -100,7 +112,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobUnit.IsApproved = input.IsApproved;
             jobUnit.IsActive = input.IsActive;
             jobUnit.IsICTDivision = input.IsICTDivision;
-            jobUnit.OrganizationUnitId = input.OrganizationUnitId;
+            jobUnit.OrganizationUnitId = OrgnizationId;
             jobUnit.TypeofProjectId = input.TypeofProjectId;
             jobUnit.TaxRecoveryId = input.TaxRecoveryId;
             jobUnit.ChartOfAccountId = input.ChartOfAccountId;
@@ -126,6 +138,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Delete)]
         public async Task DeleteJobUnit(IdInput input)
         {
             await _jobCommercialAppService.DeleteJobDetailUnit(input);
@@ -168,6 +181,32 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     dto.Director = item.Director;
                 if (item.Agency != null)
                     dto.Agency = item.Agency;
+                return dto;
+            }).ToList());
+        }
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions)]
+        public async Task<PagedResultOutput<JobUnitDto>> GetDivisionUnits(SearchInputDto input)
+        {
+            var query = from job in _jobUnitRepository.GetAll()                       
+                        select new { Job = job };
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.Where(item => item.Job.OrganizationUnitId == input.OrganizationUnitId || item.Job.OrganizationUnitId == null);
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("Job.JobNumber ASC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+
+            return new PagedResultOutput<JobUnitDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.Job.MapTo<JobUnitDto>();
+                dto.JobId = item.Job.Id;               
                 return dto;
             }).ToList());
         }

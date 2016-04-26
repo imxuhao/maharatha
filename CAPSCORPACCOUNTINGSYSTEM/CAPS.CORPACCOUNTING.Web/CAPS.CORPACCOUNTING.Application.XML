@@ -2188,13 +2188,13 @@
             <summary>Gets or sets the Caption field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.RollupCenterId">
-            <summary>Gets or sets the RollupCenterId field. </summary>
+            <summary>Gets or sets the RollupCenterId field. </summary>       
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.IsCorporateDefault">
             <summary>Gets or sets the IsCorporateDefault field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.ChartOfAccountId">
-            <summary>Gets or sets the ChartOfAccountId field. </summary>
+            <summary>Gets or sets the ChartOfAccountId field. </summary>       
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.RollupAccountId">
             <summary>Gets or sets the RollupAccountId field. </summary>
@@ -2215,7 +2215,11 @@
             <summary>Gets or sets the IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
+            <summary>Gets or sets the IsActive field. 
+            When checked- this division is available for selection on entry and history pages and posting to this division is allowed.     
+            When unchecked- this division cannot be posted to and WILL NOT be available for selection on Entry and History Pages.
+            But Will be available for selection on reporting filter pages, and searchable in inquiry grids.
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.IsICTDivision">
             <summary>Gets or sets the IsICTDivision field. </summary>
@@ -2236,13 +2240,13 @@
             <summary>Gets or sets the Caption field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.RollupCenterId">
-            <summary>Gets or sets the RollupCenterId field. </summary>
+            <summary>Gets or sets the RollupCenterId field. </summary>       
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.IsCorporateDefault">
             <summary>Gets or sets the IsCorporateDefault field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.ChartOfAccountId">
-            <summary>Gets or sets the ChartOfAccountId field. </summary>
+            <summary>Gets or sets the ChartOfAccountId field. </summary>       
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.RollupAccountId">
             <summary>Gets or sets the RollupAccountId field. </summary>
@@ -2263,7 +2267,11 @@
             <summary>Gets or sets the IsApproved field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
+            <summary>Gets or sets the IsActive field. 
+            When checked- this division is available for selection on entry and history pages and posting to this division is allowed.     
+            When unchecked- this division cannot be posted to and WILL NOT be available for selection on Entry and History Pages.
+            But Will be available for selection on reporting filter pages, and searchable in inquiry grids.
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.IsICTDivision">
             <summary>Gets or sets the IsICTDivision field. </summary>
@@ -2531,6 +2539,20 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetOrganizationUnits(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get Organizations of Tenant except input Organization.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetDivisionUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+             <summary>
+            Get the list of all Divisions(Jobs) and also provided with Sorting,Paging and Searching functionality.
+             </summary>
+             <param name="input"></param>
+             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService.CreateJobDetailUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput)">
             <summary>

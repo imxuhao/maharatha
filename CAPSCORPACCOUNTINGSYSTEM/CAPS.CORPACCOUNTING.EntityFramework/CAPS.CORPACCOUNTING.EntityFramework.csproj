@@ -1099,6 +1099,10 @@
     <Compile Include="Migrations\201604260519082_Add_TypeOfCurrency_Table.Designer.cs">
       <DependentUpon>201604260519082_Add_TypeOfCurrency_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604260741587_Modify_Job_Table.cs" />
+    <Compile Include="Migrations\201604260741587_Modify_Job_Table.Designer.cs">
+      <DependentUpon>201604260741587_Modify_Job_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1853,6 +1857,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604260519082_Add_TypeOfCurrency_Table.resx">
       <DependentUpon>201604260519082_Add_TypeOfCurrency_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604260741587_Modify_Job_Table.resx">
+      <DependentUpon>201604260741587_Modify_Job_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

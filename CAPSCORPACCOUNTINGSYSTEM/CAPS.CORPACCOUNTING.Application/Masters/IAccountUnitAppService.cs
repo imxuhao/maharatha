@@ -70,5 +70,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <returns></returns>
         Task<List<NameValueDto>> GetTypeOfCurrencyList();
+
+        /// <summary>
+        /// Get LinkAccount List By CoaId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetLinkAccountListByCoaId(AutoSearchInput input);
     }
 }

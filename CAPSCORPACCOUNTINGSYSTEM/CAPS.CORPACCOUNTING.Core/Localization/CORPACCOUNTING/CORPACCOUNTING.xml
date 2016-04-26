@@ -505,7 +505,10 @@
     <text name="EliminationAccount" value="Elimination Account" />
     <text name="Consolidation" value="Consolidation" />
     <text name="RateTypeOverride" value="Rate Type Override" />
-    <text name="Multi-CurrencyReval" value="Multi-Currency Reval" />
+    <text name="Multi-CurrencyReval" value="Multi-Currency Revalued" />
     <text name="NewAccount" value="New Account" />
+    <text name="AccountNumber" value="Account Number" />
+    <text name="CreateNewAccount" value="Create New Account" />
+    <text name="EditAccount" value="Edit Account" />
   </texts>
 </localizationDictionary>

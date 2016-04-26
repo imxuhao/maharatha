@@ -139,6 +139,31 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                     totalProperty: 'result.totalCount'
                 }
             }
+        },
+            linkAccountListByCoaId: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'linkAccount', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'linkAccountId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            extraParams: {
+                Id: 0
+            },
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/accountUnit/GetLinkAccountListByCoaId',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result',
+                    totalProperty: 'result.totalCount'
+                }
+            }
         }
     }
 

@@ -18,6 +18,7 @@
             { name: 'isRollupAccount', type: 'boolean' },
             { name: 'isRollupOverridable', type: 'boolean' },
             { name: 'linkAccountId', type: 'int' },
+             { name: 'linkAccount', type: 'string' },
             { name: 'linkJobId', type: 'int' },
             { name: 'rollupAccountId', type: 'int' },
             { name: 'rollupJobId', type: 'int' },

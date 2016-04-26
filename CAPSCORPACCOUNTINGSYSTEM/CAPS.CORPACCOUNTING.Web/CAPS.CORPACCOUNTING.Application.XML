@@ -2826,6 +2826,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetLinkAccountListByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get LinkAccount List By CoaId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get the Records for Grid with paging and  sorting
@@ -3969,6 +3976,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.LinkAccountId">
             <summary>Gets or sets the LinkAccountId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.LinkAccount">
+            <summary>Gets or sets the LinkAccount field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.LinkJobId">
             <summary>Gets or sets the LinkJobId field. </summary>
         </member>
@@ -4988,6 +4998,13 @@
             <summary>
             Get TypeOfCurrency
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetLinkAccountListByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get LinkAccount List By CoaId
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService">

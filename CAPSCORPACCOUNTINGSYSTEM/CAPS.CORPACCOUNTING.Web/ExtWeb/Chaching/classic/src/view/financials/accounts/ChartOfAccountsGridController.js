@@ -16,7 +16,8 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
                     closable: true,
                     title: abp.localization.localize("FinancialAccounts"),
                     routId: 'financials.accounts.accounts',
-                    parentAccountId: record.get('coaId')
+                    coaId: record.get('coaId'),
+                    linkChartOfAccountID: record.get('linkChartOfAccountID')
                     //iconCls: titleConfig.iconCls,
                     //titleConfig: titleConfig,
                     //isEdit: isEdit

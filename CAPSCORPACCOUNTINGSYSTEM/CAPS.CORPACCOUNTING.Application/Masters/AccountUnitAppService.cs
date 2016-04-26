@@ -24,12 +24,14 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly IRepository<TypeOfAccountUnit, int> _typeOfAccountRepository;
         private readonly IRepository<TypeOfCurrencyRateUnit, short> _typeOfCurrencyRateRepository;
         private readonly IRepository<TypeOfCurrencyUnit, short> _typeOfCurrencyRepository;
+        private readonly IRepository<CoaUnit, int> _coaRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
-            IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository)
+            IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
+            IRepository<CoaUnit, int> coaRepository)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
@@ -38,6 +40,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _typeOfAccountRepository = typeOfAccountRepository;
             _typeOfCurrencyRateRepository = typeOfCurrencyRateRepository;
             _typeOfCurrencyRepository = typeOfCurrencyRepository;
+            _coaRepository = coaRepository;
         }
         public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId = null)
         {
@@ -63,16 +66,19 @@ namespace CAPS.CORPACCOUNTING.Accounts
         {
             var query =
                 from au in _accountUnitRepository.GetAll()
+                join linkAu in _accountUnitRepository.GetAll() on au.LinkAccountId equals linkAu.Id
+                into linkAccount
+                from linkAccounts in linkAccount.DefaultIfEmpty()
                 join typeOfAccount in _typeOfAccountRepository.GetAll() on au.TypeOfAccountId equals typeOfAccount.Id
                 into accounts
                 from coaunit in accounts.DefaultIfEmpty()
                 join currencytype in _typeOfCurrencyRepository.GetAll() on au.TypeOfCurrencyId equals currencytype.Id
-                into  currencyt
+                into currencyt
                 from currency in currencyt.DefaultIfEmpty()
                 join currencyrate in _typeOfCurrencyRateRepository.GetAll() on au.TypeOfCurrencyRateId equals currencyrate.Id
-                into ratecurrency 
+                into ratecurrency
                 from accountresults in ratecurrency.DefaultIfEmpty()
-                select new { Account = au, TypeOfAccount= coaunit.Description, TypeOfAccountRate=accountresults.Description , TypeOfCurrency =currency.Description};
+                select new { Account = au, TypeOfAccount = coaunit.Description, TypeOfAccountRate = accountresults.Description, TypeOfCurrency = currency.Description, LinkAccount=linkAccounts.Caption };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -80,7 +86,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item =>item.Account.ChartOfAccountId==input.CoaId && (item.Account.OrganizationUnitId == input.OrganizationUnitId || item.Account.OrganizationUnitId == null));
+            query = query.Where(item => item.Account.ChartOfAccountId == input.CoaId && (item.Account.OrganizationUnitId == input.OrganizationUnitId || item.Account.OrganizationUnitId == null));
 
 
             var resultCount = await query.CountAsync();
@@ -94,14 +100,15 @@ namespace CAPS.CORPACCOUNTING.Accounts
                  {
                      var dto = item.Account.MapTo<AccountUnitDto>();
                      dto.AccountId = item.Account.Id;
-                     dto.TypeofConsolidation = item.Account.TypeofConsolidationId != null ? item.Account.TypeofConsolidationId.ToDisplayName():"";
+                     dto.TypeofConsolidation = item.Account.TypeofConsolidationId != null ? item.Account.TypeofConsolidationId.ToDisplayName() : "";
                      dto.TypeOfAccount = item.TypeOfAccount;
                      dto.TypeOfCurrency = item.TypeOfCurrency;
                      dto.TypeOfCurrencyRate = item.TypeOfAccountRate;
+                     dto.LinkAccount = item.LinkAccount;
                      return dto;
                  }).ToList());
         }
-       
+
         /// <summary>
         /// Crating the AccountUnit
         /// </summary>
@@ -131,7 +138,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             accountUnit.AccountNumber = input.AccountNumber;
             accountUnit.Caption = input.Caption;
             accountUnit.ChartOfAccountId = input.ChartOfAccountId;
-            accountUnit.ParentId = input.ParentId!=0? input.ParentId:null;
+            accountUnit.ParentId = input.ParentId != 0 ? input.ParentId : null;
             accountUnit.OrganizationUnitId = input.OrganizationId;
             accountUnit.BalanceSheetName = input.BalanceSheetName;
             accountUnit.CashFlowName = input.CashFlowName;
@@ -212,7 +219,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetTypeOfCurrencyList()
         {
-            
+
             var typeOfCurrency = await _typeOfCurrencyRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return typeOfCurrency;
         }
@@ -235,6 +242,23 @@ namespace CAPS.CORPACCOUNTING.Accounts
         {
             var typeOfCurrencyRates = await _typeOfCurrencyRateRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return typeOfCurrencyRates;
+        }
+        /// <summary>
+        /// Get LinkAccount List By CoaId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetLinkAccountListByCoaId(AutoSearchInput input)
+        {
+            var linkCoaId = _coaRepository.GetAll().Where(u => u.Id == input.Id).Select(u => u.LinkChartOfAccountID).FirstOrDefault();
+
+            var linkAccountList =  _accountUnitRepository.GetAll().Where(u => u.ChartOfAccountId == linkCoaId);
+            if (!string.IsNullOrEmpty(input.Query))
+                linkAccountList = linkAccountList.Where(u => u.Caption.Contains(input.Query));
+
+            var result=await linkAccountList.Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() })
+             .ToListAsync();
+            return result;
         }
 
     }

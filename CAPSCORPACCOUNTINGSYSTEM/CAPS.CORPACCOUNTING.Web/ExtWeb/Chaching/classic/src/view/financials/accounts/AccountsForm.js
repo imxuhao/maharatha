@@ -38,7 +38,7 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
             name: 'accountNumber',
             itemId: 'accountNumber',
             allowBlank: false,
-            fieldLabel: app.localize('Account').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('AccountNumber').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')
@@ -67,20 +67,23 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
             bind: {
                 store: '{typeOfCurrencyList}'
             }
+        }, {
+            xtype: 'combobox',
+            name: 'linkAccountId',
+            typeAhead: true,
+            fieldLabel: app.localize('NewAccount').initCap(),
+            width: '100%',
+            ui: 'fieldLabelTop',
+            displayField: 'linkAccount',
+            valueField: 'linkAccountId',
+            bind: {
+                store: '{linkAccountListByCoaId}'
+            }
         },
         {
             xtype: 'checkbox',
             boxLabel: app.localize('Multi-CurrencyReval'),
             name: 'isAccountRevalued',
-            labelAlign: 'right',
-            inputValue: true,
-            checked: false,
-            boxLabelCls: 'checkboxLabel'
-        },
-        {
-            xtype: 'checkbox',
-            boxLabel: app.localize('JournalsAllowed'),
-            name: 'isEnterable',
             labelAlign: 'right',
             inputValue: true,
             checked: false,
@@ -141,6 +144,15 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
             xtype: 'checkbox',
             boxLabel: app.localize('RollUpAccount'),
             name: 'isRollupAccount',
+            labelAlign: 'right',
+            inputValue: true,
+            checked: false,
+            boxLabelCls: 'checkboxLabel'
+        },
+        {
+            xtype: 'checkbox',
+            boxLabel: app.localize('JournalsAllowed'),
+            name: 'isEnterable',
             labelAlign: 'right',
             inputValue: true,
             checked: false,

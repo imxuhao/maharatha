@@ -26,7 +26,7 @@
           scale: 'small',
           ui: 'actionButton',
           action: 'create',
-          text: abp.localization.localize("CreateNewFinancialAccount").toUpperCase(),
+          text: abp.localization.localize("CreateNewAccount").toUpperCase(),
           checkPermission: true,
           iconCls: 'fa fa-plus',
           iconAlign: 'left'
@@ -39,11 +39,11 @@
     columnLines: true,
     multiColumnSort: true,
     editWndTitleConfig: {
-        title: app.localize('EditFinancialAccount'),
+        title: app.localize('EditAccount'),
         iconCls: 'fa fa-pencil'
     },
     createWndTitleConfig: {
-        title: app.localize('CreateNewFinancialAccount'),
+        title: app.localize('CreateNewAccount'),
         iconCls: 'fa fa-plus'
     },
     createNewMode: 'tab',
@@ -51,7 +51,7 @@
     columns: [
          {
              xtype: 'gridcolumn',
-             text: app.localize('Account'),
+             text: app.localize('AccountNumber'),
              dataIndex: 'accountNumber',
              sortable: true,
              groupable: true,
@@ -69,7 +69,7 @@
              dataIndex: 'caption',
              sortable: true,
              groupable: true,
-             width: '15%',
+             width: '10%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -79,11 +79,11 @@
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('Classification'),
+             text: app.localize('NewAccount'),
              dataIndex: 'typeOfAccount',
              sortable: true,
              groupable: true,
-             width: '10%',
+             width: '8%',
              filterField: {
                  xtype: 'combobox',
                  valueField: 'typeOfAccountId',
@@ -222,6 +222,22 @@
                  }
              }, editor: {
                  xtype: 'checkbox'
+             }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('NewAccount'),
+             dataIndex: 'linkAccount',
+             sortable: true,
+             groupable: true,
+             width: '8%'
+             , editor: {
+                 xtype: 'combobox',
+                 typeAhead: true,
+                 valueField: 'linkAccountId',
+                 displayField: 'linkAccount',
+                 bind: {
+                     store: '{linkAccountListByCoaId}'
+                 }
              }
          }
     ]

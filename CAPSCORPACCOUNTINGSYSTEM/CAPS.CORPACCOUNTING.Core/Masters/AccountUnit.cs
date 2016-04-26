@@ -274,7 +274,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public bool IsRollupOverridable { get; set; }
 
         /// <summary>Gets or sets the LinkAccountId field. </summary>
-        public int? LinkAccountId { get; set; }
+        public long? LinkAccountId { get; set; }
 
         /// <summary>Gets or sets the LinkJobId field. </summary>
         public int? LinkJobId { get; set; }

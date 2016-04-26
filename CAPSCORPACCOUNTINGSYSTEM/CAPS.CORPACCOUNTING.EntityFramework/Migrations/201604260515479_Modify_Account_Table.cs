@@ -7,7 +7,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.CAPS_Account", "TypeOfCurrencyId", c => c.Int());
+            AddColumn("dbo.CAPS_Account", "TypeOfCurrencyId", c => c.Short());
             AddColumn("dbo.CAPS_Account", "TypeofConsolidationId", c => c.Int());
             AddColumn("dbo.CAPS_Account", "TypeOfCurrencyRateId", c => c.Short());
             AddColumn("dbo.CAPS_Account", "IsAccountRevalued", c => c.Boolean(nullable: false));

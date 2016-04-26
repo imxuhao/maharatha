@@ -14,6 +14,7 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
     autoScroll: true,
     border: false,
     showFormTitle: true,
+    displayDefaultButtonsCenter: true,
     titleConfig: {
         title: abp.localization.localize("CreateNewFinancialAccount").initCap()
     },
@@ -37,9 +38,10 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
             name: 'accountNumber',
             itemId: 'accountNumber',
             allowBlank: false,
-            fieldLabel: app.localize('Account').initCap(),
+            fieldLabel: app.localize('Account').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
             width: '100%',
-            ui: 'fieldLabelTop'
+            ui: 'fieldLabelTop',
+            emptyText: app.localize('MandatoryField')
         }, {
             xtype: 'combobox',
             name: 'typeOfAccountId',

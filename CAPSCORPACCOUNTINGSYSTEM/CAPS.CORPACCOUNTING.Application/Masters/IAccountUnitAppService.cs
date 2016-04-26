@@ -69,6 +69,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// Get TypeOfCurrency
         /// </summary>
         /// <returns></returns>
-        List<NameValueDto> GetTypeOfCurrencyList();
+        Task<List<NameValueDto>> GetTypeOfCurrencyList();
     }
 }

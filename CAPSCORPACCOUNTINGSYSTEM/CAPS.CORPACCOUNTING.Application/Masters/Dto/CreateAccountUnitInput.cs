@@ -114,7 +114,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public TypeofConsolidation? TypeofConsolidationId { get; set; }
 
         /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
-        public TypeOfCurrency? TypeOfCurrencyId { get; set; }
+        public short? TypeOfCurrencyId { get; set; }
 
         /// <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
         public short? TypeOfCurrencyRateId { get; set; }

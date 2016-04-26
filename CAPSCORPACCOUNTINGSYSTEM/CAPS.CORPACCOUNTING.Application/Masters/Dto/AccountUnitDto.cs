@@ -113,7 +113,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string TypeofConsolidation { get; set; }
 
         /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
-        public TypeOfCurrency? TypeOfCurrencyId { get; set; }
+        public short? TypeOfCurrencyId { get; set; }
 
         /// <summary>Gets or sets the TypeOfCurrency field. </summary>
         public string TypeOfCurrency { get; set; }

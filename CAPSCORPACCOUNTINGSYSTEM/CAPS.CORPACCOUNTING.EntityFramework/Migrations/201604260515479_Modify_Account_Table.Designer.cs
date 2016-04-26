@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201604251224054_Modify_Account_Table"; }
+            get { return "201604260515479_Modify_Account_Table"; }
         }
         
         string IMigrationMetadata.Source

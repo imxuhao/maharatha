@@ -23,12 +23,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
         private readonly IRepository<TypeOfAccountUnit, int> _typeOfAccountRepository;
         private readonly IRepository<TypeOfCurrencyRateUnit, short> _typeOfCurrencyRateRepository;
+        private readonly IRepository<TypeOfCurrencyUnit, short> _typeOfCurrencyRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
-            IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository)
+            IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
@@ -36,6 +37,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _unitOfWorkManager = unitOfWorkManager;
             _typeOfAccountRepository = typeOfAccountRepository;
             _typeOfCurrencyRateRepository = typeOfCurrencyRateRepository;
+            _typeOfCurrencyRepository = typeOfCurrencyRepository;
         }
         public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId = null)
         {
@@ -64,10 +66,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 join typeOfAccount in _typeOfAccountRepository.GetAll() on au.TypeOfAccountId equals typeOfAccount.Id
                 into accounts
                 from coaunit in accounts.DefaultIfEmpty()
+                join currencytype in _typeOfCurrencyRepository.GetAll() on au.TypeOfCurrencyId equals currencytype.Id
+                into  currencyt
+                from currency in currencyt.DefaultIfEmpty()
                 join currencyrate in _typeOfCurrencyRateRepository.GetAll() on au.TypeOfCurrencyRateId equals currencyrate.Id
                 into ratecurrency 
                 from accountresults in ratecurrency.DefaultIfEmpty()
-                select new { Account = au, TypeOfAccount= coaunit.Description, TypeOfAccountRate=accountresults.Description };
+                select new { Account = au, TypeOfAccount= coaunit.Description, TypeOfAccountRate=accountresults.Description , TypeOfCurrency =currency.Description};
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -91,7 +96,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                      dto.AccountId = item.Account.Id;
                      dto.TypeofConsolidation = item.Account.TypeofConsolidationId != null ? item.Account.TypeofConsolidationId.ToDisplayName():"";
                      dto.TypeOfAccount = item.TypeOfAccount;
-                     dto.TypeOfCurrency= item.Account.TypeOfCurrencyId != null ? item.Account.TypeOfCurrencyId.ToDisplayName() : "";
+                     dto.TypeOfCurrency = item.TypeOfCurrency;
                      dto.TypeOfCurrencyRate = item.TypeOfAccountRate;
                      return dto;
                  }).ToList());
@@ -205,9 +210,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// Get TypeOfCurrency
         /// </summary>
         /// <returns></returns>
-        public List<NameValueDto> GetTypeOfCurrencyList()
+        public async Task<List<NameValueDto>> GetTypeOfCurrencyList()
         {
-            return EnumList.GetTypeOfCurrencyList();
+            
+            var typeOfCurrency = await _typeOfCurrencyRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return typeOfCurrency;
         }
 
         /// <summary>

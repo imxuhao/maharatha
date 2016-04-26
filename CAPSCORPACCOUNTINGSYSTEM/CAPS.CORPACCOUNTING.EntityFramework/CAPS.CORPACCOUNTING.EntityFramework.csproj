@@ -1091,9 +1091,13 @@
     <Compile Include="Migrations\201604250841456_Add_CustomLanguageTexts_Table.Designer.cs">
       <DependentUpon>201604250841456_Add_CustomLanguageTexts_Table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604251224054_Modify_Account_Table.cs" />
-    <Compile Include="Migrations\201604251224054_Modify_Account_Table.Designer.cs">
-      <DependentUpon>201604251224054_Modify_Account_Table.cs</DependentUpon>
+    <Compile Include="Migrations\201604260515479_Modify_Account_Table.cs" />
+    <Compile Include="Migrations\201604260515479_Modify_Account_Table.Designer.cs">
+      <DependentUpon>201604260515479_Modify_Account_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604260519082_Add_TypeOfCurrency_Table.cs" />
+    <Compile Include="Migrations\201604260519082_Add_TypeOfCurrency_Table.Designer.cs">
+      <DependentUpon>201604260519082_Add_TypeOfCurrency_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
@@ -1844,8 +1848,11 @@
     <EmbeddedResource Include="Migrations\201604250841456_Add_CustomLanguageTexts_Table.resx">
       <DependentUpon>201604250841456_Add_CustomLanguageTexts_Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604251224054_Modify_Account_Table.resx">
-      <DependentUpon>201604251224054_Modify_Account_Table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604260515479_Modify_Account_Table.resx">
+      <DependentUpon>201604260515479_Modify_Account_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604260519082_Add_TypeOfCurrency_Table.resx">
+      <DependentUpon>201604260519082_Add_TypeOfCurrency_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

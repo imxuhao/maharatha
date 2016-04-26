@@ -26,16 +26,16 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "Voucher Reference")]
         VoucherReference = 4
     }
-    /// <summary>
-    ///Enum for TypeOfConsolidation 
-    /// </summary>
-    public enum TypeOfCurrency
-    {
-        [Display(Name = "US Dollar")]
-        USDollar = 1,
-        [Display(Name = "Canadian Dollar")]
-        CanadianDollar = 2
-    }
+    ///// <summary>
+    /////Enum for TypeOfConsolidation 
+    ///// </summary>
+    //public enum TypeOfCurrency
+    //{
+    //    [Display(Name = "US Dollar")]
+    //    USDollar = 1,
+    //    [Display(Name = "Canadian Dollar")]
+    //    CanadianDollar = 2
+    //}
     
     /// <summary>
     /// Account is the table name in lajit
@@ -240,7 +240,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         // <summary>Gets or sets the TypeOfCurrencyId field. </summary>
 
-        public TypeOfCurrency? TypeOfCurrencyId { get; set; }
+        public short? TypeOfCurrencyId { get; set; }
 
         /// <summary>
         ///     Hierarchical Code of this organization unit.

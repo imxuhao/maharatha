@@ -1064,12 +1064,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeOfCurrencyList">
-            <summary>
-            Get TypeofConsolidation Enum as List
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.Helper.GetSortOrderAsString(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Helpers.Sort})">
             <summary>
             To get formatted sorting string 

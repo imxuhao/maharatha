@@ -79,7 +79,7 @@
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('NewAccount'),
+             text: app.localize('Classification'),
              dataIndex: 'typeOfAccount',
              sortable: true,
              groupable: true,

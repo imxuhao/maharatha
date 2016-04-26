@@ -501,11 +501,11 @@
     <text name="ConvertToNewCOASearch" value="Enter Convert To New COA to search" />
     <text name="StdGroupTotalSearch" value="Enter Std Group Total to search" />
     <text name="ChartOfAccountSearch" value="Enter Chart Of Account to search" />
-    <text name="RollUpAccount" value="Roll Up Account" />
+    <text name="RollUpAccount" value="RollUp Account" />
     <text name="EliminationAccount" value="Elimination Account" />
     <text name="Consolidation" value="Consolidation" />
     <text name="RateTypeOverride" value="Rate Type Override" />
-    <text name="Multi-CurrencyReval" value="Multi-Currency Revalued" />
+    <text name="Multi-CurrencyReval" value="Multi-Currency Revaluation" />
     <text name="NewAccount" value="New Account" />
     <text name="AccountNumber" value="Account Number" />
     <text name="CreateNewAccount" value="Create New Account" />

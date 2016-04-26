@@ -132,7 +132,7 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
         },
         {
             xtype: 'checkbox',
-            boxLabel: app.localize('RateTypeOverride'),
+            boxLabel: app.localize('EliminationAccount'),
             name: 'isElimination',
             labelAlign: 'right',
             inputValue: true,

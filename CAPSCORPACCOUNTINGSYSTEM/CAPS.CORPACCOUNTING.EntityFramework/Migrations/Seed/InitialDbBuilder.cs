@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
             new DefaultSettingsCreator(_context).Create();
             new EnumGenerator(_context).Create();
             new DefaultGridListCreator(_context).Create();
-
+            new DefaultCurrencyCreator(_context).Create();
             _context.SaveChanges();
         }
     }

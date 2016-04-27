@@ -1962,6 +1962,15 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ContractsView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ContractsViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanelController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanelModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />

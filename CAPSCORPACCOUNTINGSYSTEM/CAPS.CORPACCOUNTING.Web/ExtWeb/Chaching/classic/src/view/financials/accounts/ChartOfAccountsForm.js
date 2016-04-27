@@ -1,7 +1,8 @@
 
 Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
-    alias: ['widget.financials.accounts.coa.create', 'widget.financials.accounts.coa.edit'],
+    alias: ['widget.financials.accounts.coa.create', 'widget.financials.accounts.coa.edit',
+        'widget.projects.projectmaintenance.projectcoas.create', 'widget.projects.projectmaintenance.projectcoas.edit'],
     requires: [
         'Chaching.view.financials.accounts.ChartOfAccountsFormController'
     ],

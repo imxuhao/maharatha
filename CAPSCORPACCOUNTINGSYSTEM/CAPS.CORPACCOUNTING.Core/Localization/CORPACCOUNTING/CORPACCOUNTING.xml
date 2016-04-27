@@ -510,5 +510,21 @@
     <text name="AccountNumber" value="Account Number" />
     <text name="CreateNewAccount" value="Create New Account" />
     <text name="EditAccount" value="Edit Account" />
+    <text name="ProjectChartOfAccount" value="Project ChartOfAccount" />
+    <text name="CreatingNewProjectCOA" value="Creating New ProjectCOA" />
+    <text name="EditProjectCOA" value="Edit ProjectCOA" />
+    <text name="Defaults" value="Defaults" />
+    <text name="Lines" value="Lines" />
+    <text name="CreateNewLine" value="Create NewLine" />
+    <text name="EditLine" value="Edit Line" />
+    <text name="LineNumber" value="LineNumber" />
+    <text name="LineNumbers" value="LineNumbers" />
+    <text name="LineSearch" value="Enter Line to Search" />
+
+    
+    
+
+
+
   </texts>
 </localizationDictionary>

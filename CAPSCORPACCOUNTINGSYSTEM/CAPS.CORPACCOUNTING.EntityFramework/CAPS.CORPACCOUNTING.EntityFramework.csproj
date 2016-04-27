@@ -1126,6 +1126,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultCurrencyCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultGridListCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultLanguagesCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultSettingsCreator.cs" />

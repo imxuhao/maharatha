@@ -14,6 +14,7 @@
         'languages',
         'roles',
         'auditlogs',
-         'financials.accounts'
+        'financials.accounts',
+        'projects.projectmaintenance'
     ]
 });

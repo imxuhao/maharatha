@@ -47,5 +47,15 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         #endregion
 
+        public TypeOfCurrencyUnit() { }
+        public TypeOfCurrencyUnit(string description, string caption, string isocurrencycode, string currencysymbol, int tenantid, long? organizationunitid) {
+            Description = description;
+            Caption = caption;
+            ISOCurrencyCode = isocurrencycode;
+            CurrencySymbol = currencysymbol;
+            TenantId = tenantid;
+            OrganizationUnitId = organizationunitid;
+        }
+
     }
 }

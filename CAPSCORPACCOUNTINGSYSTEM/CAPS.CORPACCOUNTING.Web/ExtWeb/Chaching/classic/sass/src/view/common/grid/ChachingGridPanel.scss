@@ -188,3 +188,15 @@ $border-color-focus:transparent
     font-size:20px !important;
     color:#565855 !important;
 }
+
+
+@include extjs-panel-ui(
+    $ui: 'dragDropPanel',
+    $ui-border-width:0px,
+    $ui-border-radius:5px 5px 0 0,
+    $ui-header-color:#fff,//#3598dc
+    $ui-header-font-size: 16px,
+    $ui-header-font-weight:600,
+    $ui-header-padding:6px,
+    $ui-header-background-color:#3598DC
+);

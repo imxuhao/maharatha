@@ -361,8 +361,19 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         me.add(me.getFields());
 
         // inject space for checkbox selection model
-        if ('Ext.selection.CheckboxModel' === selModel.$className) {
+        if ('Ext.selection.CheckboxModel' === selModel.$className || 'Chaching.components.selection.CheckboxSelectionModel' === selModel.$className) {
             //console.log('pushing checkbox column')
+            if (typeof(selModel.injectCheckbox)==="string") {
+                switch (selModel.injectCheckbox) {
+                    case "first":
+                        selModel.injectCheckbox = 0;
+                        break;
+                    case "last":
+                        selModel.injectCheckbox = me.items.length + 1;
+                    default:
+                        break;
+                }
+            }
             me.items.insert(selModel.injectCheckbox, Ext.widget({
                 itemId: 'item-' + selModel.injectCheckbox
                 , xtype: 'component'

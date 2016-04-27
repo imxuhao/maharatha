@@ -2,6 +2,18 @@
  * This file contains the custom datepicker control for search in grid.
  * Author: Krishna Garad
  * Date:04/12/2016
+ * This class is inherited from {@link Class#Ext.form.field.Picker} class. Basically this class overrides the Picker's createPicker function to create custom picker.
+ */
+/**
+ * @class Chaching.components.filter.DateSearchField
+ * The datePicker control with for range search.
+ * @alias widget.dateSearchField
+ * An embedded live example:
+ *
+ *     @example
+ *     Ext.create('Chaching.components.filter.DateSearchField', {
+ *      renderTo:Ext.getBody() 
+ *     });
  */
 Ext.define('Chaching.components.filter.DateSearchField', {
     extend: 'Ext.form.field.Picker',
@@ -23,6 +35,9 @@ Ext.define('Chaching.components.filter.DateSearchField', {
         me.store = gridStore;
         me.callParent(arguments);
     },
+    /**
+   * Creates the gridPicker control.  
+   */
     createPicker: function () {
         var me = this,
 	        opts = Ext.apply({
@@ -66,9 +81,15 @@ Ext.define('Chaching.components.filter.DateSearchField', {
         me.picker = picker;
         return picker;
     },
+    /**
+   * Event listener onBeforeRowCellClick.  Fires before row cell click.
+   */
     onBeforeRowCellClick: function (view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
         record.set('ColumnIndex', cellIndex);
     },
+    /**
+  * Event listener onRecordDeselect. Fires on record is being deselected.
+  */
     onRecordDeselect: function (selectionModel, record, index, eOpts) {
         var me = this,
            ownerCt = me.view.ownerCt;
@@ -79,6 +100,9 @@ Ext.define('Chaching.components.filter.DateSearchField', {
         ownerCt.ownerCmp.setValue(null);
         ownerCt.ownerCmp.collapse();
     },
+    /**
+* Event listener onRecordSelect. Fires on record is selected.
+*/
     onRecordSelect: function (selectionModel, record, index, eOpts) {
         var me = this,
             ownerCt = me.view.ownerCt;
@@ -104,6 +128,9 @@ Ext.define('Chaching.components.filter.DateSearchField', {
             ownerCt.ownerCmp.collapse();
         }
     },
+    /**
+* Event listener OnBeforeSelect. Fires before record is being selected.
+*/
     onBeforeSelect:function(selectionModel, record, index, eOpts) {
         var allowSelect = false;
         //allow selection only when checkbox is clicked and filter fields has values
@@ -113,6 +140,9 @@ Ext.define('Chaching.components.filter.DateSearchField', {
         return allowSelect;
 
     },
+    /**
+* Get's the columns for gridPicker.
+*/
     getColumns:function() {
         var columns = [
             {
@@ -157,6 +187,9 @@ Ext.define('Chaching.components.filter.DateSearchField', {
         ];
         return columns;
     },
+    /**
+* Aligns the picker below dropdown input field as well adjust's height and width for list.
+*/
     alignPicker: function () {
         var me = this,
             picker;

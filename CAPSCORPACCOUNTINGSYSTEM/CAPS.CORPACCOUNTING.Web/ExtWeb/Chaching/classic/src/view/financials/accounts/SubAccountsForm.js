@@ -3,7 +3,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['widget.financials.accounts.subaccounts.create', 'widget.financials.accounts.subaccounts.edit'],
     requires: [
-        'Chaching.view.financials.accounts.SubAccountsFormController'
+        'Chaching.view.financials.accounts.SubAccountsFormController',
+        'Chaching.components.dragdrop.GridToGrid'
     ],
 
     controller: 'financials-accounts-subaccountsform',
@@ -133,6 +134,51 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                boxLabelCls: 'checkboxLabel'
            }
         ]
-    }
+    },
+    {
+        columnWidth: 1.0,
+        items:[
+        {
+            xtype: 'chachingGridDragDrop',
+            columns: [
+                {
+                    xtype: 'gridcolumn',
+                    text:app.localize('Caption'),
+                    dataIndex: 'caption',
+                    sortable: true,
+                    groupable: true,
+                    width: '47%',
+                    filterField: {
+                        xtype: 'textfield',
+                        width: '15%',
+                        emptyText: app.localize('SubAccountNumberSearch')
+                    }
+                }, {
+                    xtype: 'gridcolumn',
+                    text: app.localize('Description'),
+                    dataIndex: 'description',
+                    sortable: true,
+                    groupable: true,
+                    width: '47%',
+                    filterField: {
+                        xtype: 'textfield',
+                        width: '100%',
+                        emptyText: app.localize('DescriptionSearch')
+                    }
+                }
+            ],
+            store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
+            loadStoreOnCreate: true,
+            requireMultiSearch:true,
+            selModelConfig: {
+                selType: 'chachingCheckboxSelectionModel',
+                injectCheckbox: "first",
+                headerWidth: '5%',
+                mode: 'MULTI',
+                showHeaderCheckbox: false
+            },
+            doSaveOperation: function (direction, records) {}
+        }]
+     }
     ]
 });

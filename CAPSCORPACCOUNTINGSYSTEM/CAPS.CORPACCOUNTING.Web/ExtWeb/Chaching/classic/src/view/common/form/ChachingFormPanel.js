@@ -12,44 +12,32 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
         type: 'common-form-chachingformpanel'
     },
     /**
-   * @hide
-   * @private
-   * @cfg {string} name of the grid to do permission check
-   */
+    * @cfg {string} name of the grid to do permission check
+    */
     name: null,
     /**
-  * @hide
-  * @private
-  * @cfg {object} parentGrid from which this formpanel is created
-  */
+    * @cfg {object} parentGrid from which this formpanel is created
+    */
     parentGrid: null,
     /**
-  * @hide
-  * @private
-  * @cfg {boolean} hide default save and cancel buttons.
-     * if set to true then create new buttons
-  */
+    * @cfg {boolean} hide default save and cancel buttons.
+    * if set to true then create new buttons
+    */
     hideDefaultButtons: false,
     displayDefaultButtonsCenter:false,
     /**
-  * @hide
-  * @private
-  * @cfg {object} default values to be loaded when the form loads
-     * use beforeCreateAction in parentGrid's controller class to set defaultValues if any.
-  */
+    * @cfg {object} default values to be loaded when the form loads
+    * use beforeCreateAction in parentGrid's controller class to set defaultValues if any.
+    */
     defaultValuesToLoad: null,
     /**
- * @hide
- * @private
- * @cfg {boolean} open this form in window panel.
+    * @cfg {boolean} open this form in window panel.
     * if set to true then popup window will be opened containing this form
- */
+    */
     openInPopupWindow: false,
     /**
-* @hide
-* @private
-* @cfg {boolean} save button to act accordingly create/update.   
-*/
+    * @cfg {boolean} save button to act accordingly create/update.   
+    */
     isEditing: false,
     referenceHolder: true,
     border: false,
@@ -75,11 +63,6 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
                             xtype: 'displayfield',
                             value: me.titleConfig.title,
                             ui: 'headerTitle'
-                        },'->',
-                        {
-                            xtype: 'displayfield',
-                            value: 'Fields marked with (' + Chaching.utilities.ChachingGlobals.mandatoryFlag + '&nbsp;) are required.',
-                            ui: 'headerSubTitle'
                         }
                     ]
                 }

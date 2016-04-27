@@ -4,7 +4,9 @@ Ext.define('Chaching.view.common.tab.ChachingTabPanelController', {
     //do your custom operation before adding dynamicTabItem
     doBeforeAddDynamicTabItem: function (dynamicTabItem) { },
     onSubMenuItemTabChange:function(tabPanel, newCard, oldCard, eOpts) {
-        if (newCard && typeof (newCard.getStore)==="function") {
+        if (newCard && typeof (newCard.getStore) === "function" && !newCard.isStoreLoaded) {
+            newCard.isStoreLoaded = true;
+            oldCard.isStoreLoaded = true;
             newCard.getStore().load();
         }
     }

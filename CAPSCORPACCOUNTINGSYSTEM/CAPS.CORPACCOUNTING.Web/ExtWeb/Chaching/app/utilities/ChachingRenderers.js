@@ -130,7 +130,7 @@
     },
     rendererHyperLink: function (val, meta, record, rowIndex, colIndex, store, view) {
         if (val)
-            return '<a style="text-decoration:underline;">' + val + '</a>';
+            return '<a style="text-decoration:underline; cursor:pointer;">' + val + '</a>';
         return val;
     }
 });

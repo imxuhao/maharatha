@@ -61,15 +61,15 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
                  width: '100%',
                  emptyText: 'Enter Description to search'
              }, editor: {
-                 xtype: 'textfield',
+                 xtype: 'textfield'
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('IsActive'),
+             text: app.localize('Active'),
              dataIndex: 'isActive',             
              sortable: true,
              groupable: true,
-             width: '15%',
+             width: '10%',
              hidden: false,
             
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,

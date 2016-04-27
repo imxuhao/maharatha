@@ -13,60 +13,42 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         type: 'common-grid-chachinggridpanel'
     },
     /**
-    * @hide
-    * @private
     * @cfg {boolean} requireMultiSearch
     */
     requireMultiSearch: true,
     /**
-    * @hide
-    * @private
     * @cfg {boolean} requireMultisort
     */
     requireMultisort: true,
     /**
-    * @hide
-    * @private
     * @cfg {boolean} requireGrouping
     */
     requireGrouping:true,
     /**
-    * @hide
-    * @private
-    * @cfg {object[]} headerButtonsConfig
+    * @cfg {object} headerButtonsConfig
     */
     headerButtonsConfig: null,
     /**
-    * @hide
-    * @private
     * @cfg {boolean} requireExport
     */
     requireExport: false,
     /**
-    * @hide
-    * @private
     * @cfg {object} selModelConfig
     */
     selModelConfig: null,
     /**
-    * @hide
-    * @private
     * @cfg {boolean} isEditable
     */
     isEditable: false,
     /**
-    * @hide
-    * @private
     * @cfg {string} editingMode
-     * values are cell and row.
+    * values are cell and row.
     */
     editingMode: null,
     /**
-   * @hide
-   * @private
-   * @cfg {string} createNewMode
-     * values are inline(default based on editing mode), popup and tab
-   */
+    * @cfg {string} createNewMode
+    * values are inline(default based on editing mode), popup and tab
+    */
     createNewMode:'inline',
     columnLines: true,
     padding: 5,
@@ -74,18 +56,18 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     layout: {
         type: 'fit'
     },
+    /**
+    * @cfg {boolean} showPagingToolbar
+    * show paging toolbar for grid. Defaults to 'true'
+    */
     showPagingToolbar: true,
     ignoreCellDblClick: false,
     cls: 'chaching-grid',
     /**
-    * @hide
-    * @private
     * @cfg {object[]} actionColumnMenuItemsConfig
     */
     actionColumnMenuItemsConfig: null,//grid related action columns menu items
     /**
-    * @hide
-    * @private
     * @cfg {boolean} requireActionColumn
     */
     requireActionColumn: true,
@@ -93,19 +75,33 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     enableLocking:false,
     syncRowHeight: false,
     editingModel: null,
+    /**
+    * @cfg {object} editWndTitleConfig
+    * when editing record title and iconCls for window/tab
+    * ##Usage { 
+     * title:'Editing'
+     * iconCls:'fa fa-edit-o'
+    * }
+    */
     editWndTitleConfig: null,
+    /**
+    * @cfg {object} createWndTitleConfig
+    * when creating new record title and iconCls for window/tab
+    * ##Usage { 
+    * title:'Creating'
+    * iconCls:'fa fa-edit-o'
+    * }
+    */
     createWndTitleConfig: null,
     /**
-   * @hide
-   * @private
-   * @cfg {object} modulePermissions
-     * Override this config in child grid if has additional permissions
-   */
+    * @cfg {object} modulePermissions
+    * Override this config in child grid if has additional permissions
+    */
     modulePermissions: undefined,
     manageViewSetting: true,
     activeUserViewId: null,
     isSubMenuItemTab: false,
-    hideClearFilter:false,
+    hideClearFilter:true,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -423,8 +419,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
 
             }
         }
-        if (menuItems.length > 0)
-            return actionCol;
+
+        return actionCol;
     },
     applySettings: function (definedColumns, usersDefaultSetting, outValue) {
         var me = this,

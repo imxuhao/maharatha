@@ -108,6 +108,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessRestriction\AccountAccessRestrictionUnit.cs" />
+    <Compile Include="AccessRestriction\JobAccessRestrictionUnit.cs" />
+    <Compile Include="AccessRestriction\SubAccountRestrictionUnit.cs" />
     <Compile Include="Accounting\AccountingControlUnit.cs" />
     <Compile Include="Accounting\AccountingHeaderTransactionsUnit.cs" />
     <Compile Include="Accounting\AccountingItemUnit.cs" />
@@ -360,6 +363,8 @@
     <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentDetailUnit.cs" />
     <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentUnit.cs" />
     <Compile Include="Reports\UserReportUnit.cs" />
+    <Compile Include="Security\SecureGroup.cs" />
+    <Compile Include="Security\SecureGroupMappingUnit.cs" />
     <Compile Include="Security\SimpleStringCipher.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />
     <Compile Include="Storage\IBinaryObjectManager.cs" />

@@ -41,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// Account is the table name in lajit
     /// </summary>
     [Table("CAPS_Account")]
-    public sealed class AccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class AccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
         ///     Maximum length of the <see cref="Caption" /> property.

@@ -1107,6 +1107,18 @@
     <Compile Include="Migrations\201604261303330_Modify_AccountUnit_Table.Designer.cs">
       <DependentUpon>201604261303330_Modify_AccountUnit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604270344076_Clear_Access_Tables.cs" />
+    <Compile Include="Migrations\201604270344076_Clear_Access_Tables.Designer.cs">
+      <DependentUpon>201604270344076_Clear_Access_Tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604270348214_Adding_Security_Access_restriction.cs" />
+    <Compile Include="Migrations\201604270348214_Adding_Security_Access_restriction.Designer.cs">
+      <DependentUpon>201604270348214_Adding_Security_Access_restriction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604270423549_Adding_SubAccount_restriction.cs" />
+    <Compile Include="Migrations\201604270423549_Adding_SubAccount_restriction.Designer.cs">
+      <DependentUpon>201604270423549_Adding_SubAccount_restriction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1867,6 +1879,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604261303330_Modify_AccountUnit_Table.resx">
       <DependentUpon>201604261303330_Modify_AccountUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604270344076_Clear_Access_Tables.resx">
+      <DependentUpon>201604270344076_Clear_Access_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604270348214_Adding_Security_Access_restriction.resx">
+      <DependentUpon>201604270348214_Adding_Security_Access_restriction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604270423549_Adding_SubAccount_restriction.resx">
+      <DependentUpon>201604270423549_Adding_SubAccount_restriction.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

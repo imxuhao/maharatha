@@ -29,30 +29,30 @@ namespace CAPS.CORPACCOUNTING.Migrations
             DropIndex("dbo.CAPS_SecureGroupMappingUnit", new[] { "SecureGroupID" });
             DropIndex("dbo.CAPS_SecureGroupMappingUnit", new[] { "RoleId" });
             DropIndex("dbo.CAPS_SecureGroupMappingUnit", new[] { "UserId" });
-            DropTable("dbo.CAPS_SecureGroup",
-                removedAnnotations: new Dictionary<string, object>
-                {
-                    { "DynamicFilter_SecureGroup_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
-                    { "DynamicFilter_SecureGroup_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
-                });
-            DropTable("dbo.CAPS_AccountAccessControl",
-                removedAnnotations: new Dictionary<string, object>
-                {
-                    { "DynamicFilter_AccountAccessRestrictionUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
-                    { "DynamicFilter_AccountAccessRestrictionUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
-                });
-            DropTable("dbo.CAPS_JobAccessControl",
-                removedAnnotations: new Dictionary<string, object>
-                {
-                    { "DynamicFilter_JobAccessRestrictionUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
-                    { "DynamicFilter_JobAccessRestrictionUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
-                });
-            DropTable("dbo.CAPS_SecureGroupMappingUnit",
-                removedAnnotations: new Dictionary<string, object>
-                {
-                    { "DynamicFilter_SecureGroupMappingUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
-                    { "DynamicFilter_SecureGroupMappingUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
-                });
+            //DropTable("dbo.CAPS_SecureGroup",
+            //    removedAnnotations: new Dictionary<string, object>
+            //    {
+            //        { "DynamicFilter_SecureGroup_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+            //        { "DynamicFilter_SecureGroup_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+            //    });
+            //DropTable("dbo.CAPS_AccountAccessControl",
+            //    removedAnnotations: new Dictionary<string, object>
+            //    {
+            //        { "DynamicFilter_AccountAccessRestrictionUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+            //        { "DynamicFilter_AccountAccessRestrictionUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+            //    });
+            //DropTable("dbo.CAPS_JobAccessControl",
+            //    removedAnnotations: new Dictionary<string, object>
+            //    {
+            //        { "DynamicFilter_JobAccessRestrictionUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+            //        { "DynamicFilter_JobAccessRestrictionUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+            //    });
+            //DropTable("dbo.CAPS_SecureGroupMappingUnit",
+            //    removedAnnotations: new Dictionary<string, object>
+            //    {
+            //        { "DynamicFilter_SecureGroupMappingUnit_MustHaveTenant", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+            //        { "DynamicFilter_SecureGroupMappingUnit_SoftDelete", "EntityFramework.DynamicFilters.DynamicFilterDefinition" },
+            //    });
         }
         
         public override void Down()

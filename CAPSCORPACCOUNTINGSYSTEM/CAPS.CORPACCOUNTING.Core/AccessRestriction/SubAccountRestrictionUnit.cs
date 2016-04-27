@@ -15,10 +15,10 @@ namespace CAPS.CORPACCOUNTING.AccessRestriction
     public class SubAccountRestrictionUnit :SubAccountUnit
     {
 
-        //public long AccountId { get; set; }
+        public long AccountId { get; set; }
 
-        //[ForeignKey("AccountId")]
-        //public  virtual AccountUnit  AccountUnit { get; set; }
+        [ForeignKey("AccountId")]
+        public virtual AccountUnit AccountUnit { get; set; }
         public virtual int? SecureId { get; set; }
 
         [ForeignKey("SecureId")]

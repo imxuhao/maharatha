@@ -360,7 +360,13 @@
     <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentDetailUnit.cs" />
     <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentUnit.cs" />
     <Compile Include="Reports\UserReportUnit.cs" />
+    <Compile Include="Security\IMayHaveRoleRestriction.cs" />
+    <Compile Include="Security\IMayHaveSecurityRestriction.cs" />
+    <Compile Include="Security\IMayHaveUserRestriction.cs" />
+    <Compile Include="Security\SecureGroup.cs" />
+    <Compile Include="Security\SecureGroupMappingUnit.cs" />
     <Compile Include="Security\SimpleStringCipher.cs" />
+    <Compile Include="Security\SubEntityAccessRestrictionUnit.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />
     <Compile Include="Storage\IBinaryObjectManager.cs" />
     <Compile Include="Storage\BinaryObject.cs" />

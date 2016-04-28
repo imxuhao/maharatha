@@ -573,11 +573,11 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> TypeOfCurrencyUnit Declaration</summary>
         public virtual IDbSet<TypeOfCurrencyUnit> TypeOfCurrencyUnit { get; set; }
 
-        //public virtual IDbSet<SubEntityAccessRestrictionUnit> SubEntityAccessRestrictionUnit { get; set; }
+        public virtual IDbSet<SubEntityAccessRestrictionUnit> SubEntityAccessRestrictionUnit { get; set; }
 
-        //public virtual IDbSet<SecureGroup> SecureGroup { get; set; }
+        public virtual IDbSet<SecureGroup> SecureGroup { get; set; }
 
-        //public virtual IDbSet<SecureGroupMappingUnit> SecureGroupMappingUnit { get; set; }
+        public virtual IDbSet<SecureGroupMappingUnit> SecureGroupMappingUnit { get; set; }
 
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.

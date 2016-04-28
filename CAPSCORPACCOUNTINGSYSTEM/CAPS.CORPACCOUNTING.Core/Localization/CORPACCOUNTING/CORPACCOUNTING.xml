@@ -520,11 +520,26 @@
     <text name="LineNumber" value="LineNumber" />
     <text name="LineNumbers" value="LineNumbers" />
     <text name="LineSearch" value="Enter Line to Search" />
-
-    
-    
-
-
-
+    <text name="AddNew" value="Add" />
+    <text name="CreateNewProject" value="Create new project" />
+    <text name="EditProject" value="Edit Project" />
+    <text name="JobNumber" value="Job #" />
+    <text name="ToolTipJobNumber" value="Enter Job #" />
+    <text name="ProjectName" value="Project name" />
+    <text name="ToolTipProjectName" value="Enter project name" />
+    <text name="DetailReport" value="Detail report" />
+    <text name="ProductName" value="Product name" />
+    <text name="ToolTipProductName" value="Enter product name" />
+    <text name="Director" value="Director" />
+    <text name="ToolTipDirector" value="Select director" />
+    <text name="Agency" value="Agency" />
+    <text name="ToolTipAgency" value="Enter agency" />
+    <text name="POLog" value="PO log details" />
+    <text name="ProjectType" value="Project type" />
+    <text name="ToolTipProjectType" value="Select project type" />
+    <text name="ShootDate" value="Shoot date" />
+    <text name="ToolTipShootDate" value="Select shoot date" />
+    <text name="WrapUpInsurance" value="Wrap up insurance" />
+    <text name="ToolTipStatus" value="Select status" />
   </texts>
 </localizationDictionary>

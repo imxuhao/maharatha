@@ -36,7 +36,18 @@ namespace CAPS.CORPACCOUNTING.Common
         public virtual string Notes { get; set; } 
 
         /// <summary>Gets or sets the TypeOfUploadFileID field.</summary>
-        public virtual int? TypeOfUploadFileId { get; set; } 
+        public virtual int? TypeOfUploadFileId { get; set; }
         #endregion
+
+
+
+        public TypeOfCurrencyRateUnit() { }
+        public TypeOfCurrencyRateUnit(string description, string caption, string notes, int? typeOfUploadFileId)
+        {
+            Description = description;
+            Caption = caption;
+            Notes = notes;
+            TypeOfUploadFileId = typeOfUploadFileId;
+        }
     }
 }

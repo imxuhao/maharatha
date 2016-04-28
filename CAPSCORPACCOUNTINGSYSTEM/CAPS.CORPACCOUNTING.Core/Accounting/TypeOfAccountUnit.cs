@@ -59,10 +59,25 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
         #endregion
+
         public TypeOfAccountUnit()
         {
             IsCurrencyCodeRequired = false;
             IsPaymentType = false;
+        }
+
+
+
+      
+        public TypeOfAccountUnit(string description, string caption, short typeOfAccountClassificationId, bool isCurrencyCodeRequired, bool isPaymentType,int tenantId)
+        {
+            Description = description;
+            Caption = caption;
+            TypeOfAccountClassificationId = typeOfAccountClassificationId;
+            IsCurrencyCodeRequired = isCurrencyCodeRequired;
+            IsPaymentType = isPaymentType;
+            TenantId = tenantId;
+            CreationTime = System.DateTime.Now;
         }
 
     }

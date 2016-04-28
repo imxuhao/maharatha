@@ -1123,6 +1123,10 @@
     <Compile Include="Migrations\201604270437358_Adding_SubAccount_restriction_AccountID.Designer.cs">
       <DependentUpon>201604270437358_Adding_SubAccount_restriction_AccountID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604280551159_Modify_TypeOfAccountClassification_Table.cs" />
+    <Compile Include="Migrations\201604280551159_Modify_TypeOfAccountClassification_Table.Designer.cs">
+      <DependentUpon>201604280551159_Modify_TypeOfAccountClassification_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1131,6 +1135,9 @@
     <Compile Include="Migrations\Seed\DefaultLanguagesCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultSettingsCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultTenantRoleAndUserCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeOfAccountClassificationCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeOfAccountCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeOfCurrencyRateCreator.cs" />
     <Compile Include="Migrations\Seed\EnumGenerator.cs" />
     <Compile Include="Migrations\Seed\InitialDbBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1896,6 +1903,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604270437358_Adding_SubAccount_restriction_AccountID.resx">
       <DependentUpon>201604270437358_Adding_SubAccount_restriction_AccountID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604280551159_Modify_TypeOfAccountClassification_Table.resx">
+      <DependentUpon>201604280551159_Modify_TypeOfAccountClassification_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

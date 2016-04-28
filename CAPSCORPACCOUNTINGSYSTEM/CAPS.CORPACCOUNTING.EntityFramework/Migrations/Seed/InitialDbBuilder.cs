@@ -23,6 +23,9 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
             new EnumGenerator(_context).Create();
             new DefaultGridListCreator(_context).Create();
             new DefaultCurrencyCreator(_context).Create();
+            new DefaultTypeOfAccountClassificationCreator(_context).Create();
+            new DefaultTypeOfAccountCreator(_context).Create();
+            new DefaultTypeOfCurrencyRateCreator(_context).Create();
             _context.SaveChanges();
         }
     }

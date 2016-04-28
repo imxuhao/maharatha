@@ -9,6 +9,9 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
             var horizontalTabPanel = tabPanel.up('tabpanel');
             var target = e.target,
                 nodeName = target.nodeName;
+            if (nodeName === "DIV" && target.attributes.isHyperLink) {
+                nodeName = "A";
+            }
             if (nodeName === "A" && horizontalTabPanel) {
                 var accountsGrid = Ext.create({
                     xtype: 'financials.accounts.accounts',
@@ -17,8 +20,8 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
                     title: abp.localization.localize("FinancialAccounts"),
                     routId: 'financials.accounts.accounts',
                     coaId: record.get('coaId'),
-                    linkChartOfAccountID: record.get('linkChartOfAccountID')
-                    //iconCls: titleConfig.iconCls,
+                    linkChartOfAccountID: record.get('linkChartOfAccountID'),
+                    iconCls: 'fa fa-book'
                     //titleConfig: titleConfig,
                     //isEdit: isEdit
                 });

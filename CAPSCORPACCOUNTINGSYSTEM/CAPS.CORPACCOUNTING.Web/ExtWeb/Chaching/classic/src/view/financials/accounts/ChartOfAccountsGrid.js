@@ -180,7 +180,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              sortable: true,
              groupable: true,
              width: '22%',
-             hidden: false
+             hidden: true
         , filterField: {
             xtype: 'textfield',
             width: '100%',

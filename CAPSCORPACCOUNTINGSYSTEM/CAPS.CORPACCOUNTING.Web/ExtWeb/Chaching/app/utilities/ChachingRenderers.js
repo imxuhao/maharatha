@@ -129,8 +129,11 @@
         return '<i class="famfamfam-flag ' + record.get('icon') + '" style="display: inline-block;margin-right: 10px; !important" ></i><span>' + val + '</span>';
     },
     rendererHyperLink: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (val)
-            return '<a style="text-decoration:underline; cursor:pointer;">' + val + '</a>';
+        if (val) {
+            var a = '<a style="color:white !important; padding-left:10px;">' + val + '</a>';
+            var div = '<div class="fa fa-th" isHyperLink="true" style="overflow:hidden; color:white; cursor:pointer; height:25px; width:100%; color:white !important; background-color:#3598DC !important; padding-top:6px; padding-left:6px; border-radius:2px;" title="' + val + '">' + a + '</div>';
+            return div;
+        }
         return val;
     }
 });

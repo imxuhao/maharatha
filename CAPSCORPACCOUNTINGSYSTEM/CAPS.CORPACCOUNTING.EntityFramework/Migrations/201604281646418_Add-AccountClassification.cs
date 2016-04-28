@@ -5,7 +5,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
-    public partial class Modify_TypeOfAccountClassification_Table : DbMigration
+    public partial class AddAccountClassification : DbMigration
     {
         public override void Up()
         {

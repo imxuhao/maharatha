@@ -22,6 +22,7 @@ using CAPS.CORPACCOUNTING.AccountReceivable;
 using CAPS.CORPACCOUNTING.Preferencees;
 using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Localization;
+using CAPS.CORPACCOUNTING.Security;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -571,7 +572,13 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> TypeOfCurrencyUnit Declaration</summary>
         public virtual IDbSet<TypeOfCurrencyUnit> TypeOfCurrencyUnit { get; set; }
-        
+
+        //public virtual IDbSet<SubEntityAccessRestrictionUnit> SubEntityAccessRestrictionUnit { get; set; }
+
+        //public virtual IDbSet<SecureGroup> SecureGroup { get; set; }
+
+        //public virtual IDbSet<SecureGroupMappingUnit> SecureGroupMappingUnit { get; set; }
+
 
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 

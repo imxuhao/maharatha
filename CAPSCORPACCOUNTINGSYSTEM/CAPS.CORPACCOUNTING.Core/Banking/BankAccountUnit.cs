@@ -86,7 +86,7 @@ namespace CAPS.CORPACCOUNTING.Banking
     }
 
     /// <summary>
-    /// BankAccount is the table name in Lajit
+    /// This table stores the information for Bank, CreditCard and Payroll
     /// </summary>
 
     [Table("CAPS_BankAccount")]

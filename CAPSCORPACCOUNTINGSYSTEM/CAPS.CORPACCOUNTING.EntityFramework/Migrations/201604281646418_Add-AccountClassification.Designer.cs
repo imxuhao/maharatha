@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Clear_Access_Tables : IMigrationMetadata
+    public sealed partial class AddAccountClassification : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Clear_Access_Tables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAccountClassification));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604270344076_Clear_Access_Tables"; }
+            get { return "201604281646418_Add-AccountClassification"; }
         }
         
         string IMigrationMetadata.Source

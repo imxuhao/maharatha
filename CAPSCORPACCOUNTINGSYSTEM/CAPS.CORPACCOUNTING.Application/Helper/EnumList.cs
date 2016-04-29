@@ -60,6 +60,62 @@ namespace CAPS.CORPACCOUNTING.Helpers
             return listEnums;
         }
 
+
+        /// <summary>
+        /// Get TypeofPaymentMethod Enum as List
+        /// </summary>
+        /// <returns></returns>
+        public static List<NameValueDto> GetTypeofPaymentMethodList()
+        {
+            var listEnums = (from TypeofPaymentMethod n in Enum.GetValues(typeof(TypeofPaymentMethod))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+
+        /// <summary>
+        /// Get Typeof1099T4 Enum as List
+        /// </summary>
+        /// <returns></returns>
+        public static List<NameValueDto> GetTypeof1099T4List()
+        {
+            var listEnums = (from Typeof1099T4 n in Enum.GetValues(typeof(Typeof1099T4))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+
+        /// <summary>
+        /// Get TypeofVendor Enum as List
+        /// </summary>
+        /// <returns></returns>
+        public static List<NameValueDto> GetTypeofVendorList()
+        {
+            var listEnums = (from TypeofVendor n in Enum.GetValues(typeof(TypeofVendor))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+
+        /// <summary>
+        /// Get TypeofAddress Enum as List
+        /// </summary>
+        /// <returns></returns>
+        public static List<NameValueDto> GetTypeofAddressList()
+        {
+            var listEnums = (from TypeofAddress n in Enum.GetValues(typeof(TypeofAddress))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+
+        /// <summary>
+        /// Get TypeofObject Enum as List
+        /// </summary>
+        /// <returns></returns>
+        public static List<NameValueDto> GetTypeofObjectList()
+        {
+            var listEnums = (from TypeofObject n in Enum.GetValues(typeof(TypeofObject))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+
         public static List<NameValueDto> GetBudgetSoftwareList()
         {
             var listEnums = (from BudgetSoftware n in Enum.GetValues(typeof(BudgetSoftware))

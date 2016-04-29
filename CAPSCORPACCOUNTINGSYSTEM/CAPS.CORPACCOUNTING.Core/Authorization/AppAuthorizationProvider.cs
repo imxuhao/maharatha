@@ -199,6 +199,9 @@ namespace CAPS.CORPACCOUNTING.Authorization
             #region Payables Tab
             var payables = pages.CreateChildPermission(AppPermissions.Pages_Payables, L("Payables"));
             var vendors = payables.CreateChildPermission(AppPermissions.Pages_Payables_Vendors, L("Vendors"));
+            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Create, L("Create"));
+            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Edit, L("Edit"));
+            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Delete, L("Delete"));
 
             var payablesInvoices = payables.CreateChildPermission(AppPermissions.Pages_Payables_Invoices, L("Invoices"));
             var batch = payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch, L("Batch"));

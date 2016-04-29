@@ -71,6 +71,8 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
             xtype: 'combobox',
             name: 'linkAccountId',
             typeAhead: true,
+            queryMode: 'remote',
+            forceSelection: true,
             fieldLabel: app.localize('NewAccount').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',

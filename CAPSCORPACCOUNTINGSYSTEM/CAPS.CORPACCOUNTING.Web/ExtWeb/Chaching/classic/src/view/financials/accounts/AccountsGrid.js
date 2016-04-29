@@ -229,14 +229,51 @@
              dataIndex: 'linkAccount',
              sortable: true,
              groupable: true,
-             width: '8%'
-             , editor: {
+           
+             width: '8%',
+             filterField: {
                  xtype: 'combobox',
-                 typeAhead: true,
+                 itemId: 'linkAccountId',
                  valueField: 'linkAccountId',
                  displayField: 'linkAccount',
+                 typeAhead: true,
+                 queryMode: 'remote',
+                 forceSelection: true,
                  bind: {
                      store: '{linkAccountListByCoaId}'
+                 },
+                 listeners: {
+                     beforequery: function (query, eOpts) {
+                         var grid = this.up().grid;
+                         if (grid) {
+                             var coaId = grid.coaId;
+                             var myStore = this.getStore();
+                             myStore.getProxy().setExtraParam('id', coaId);
+                         }
+                     }
+                 }
+             },
+             editor: {
+                 xtype: 'combobox',
+                 typeAhead: true,
+                 itemId: 'linkAccountId',
+                 valueField: 'linkAccountId',
+                 displayField: 'linkAccount',
+                 typeAhead: true,
+                 queryMode: 'remote',
+                 forceSelection: true,
+                 bind: {
+                     store: '{linkAccountListByCoaId}'
+                 },
+                 listeners: {
+                     beforequery: function (query, eOpts) {
+                         var grid = this.up('grid');
+                         if (grid) {
+                             var coaId = grid.coaId;
+                             var myStore = this.getStore();
+                             myStore.getProxy().setExtraParam('id', coaId);
+                         }
+                     }
                  }
              }
          }

@@ -15,7 +15,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
     },
     store:'financials.accounts.DivisionsStore',
     padding: 5,
-    gridId: 9,
+    gridId: 12,
     headerButtonsConfig: [
       {
           xtype: 'displayfield',

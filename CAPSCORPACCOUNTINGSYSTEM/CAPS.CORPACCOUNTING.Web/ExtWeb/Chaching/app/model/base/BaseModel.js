@@ -1,5 +1,8 @@
 Ext.define('Chaching.model.base.BaseModel', {
     extend: 'Ext.data.Model',
+    schema: {
+        namespace: 'Chaching.model'
+    },
     config: {
         searchEntityName:''
     },

@@ -1838,6 +1838,8 @@
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguagesNamesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RoleEditModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolePermissionsModel.js" />
@@ -1850,6 +1852,7 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\linkedaccounts\LinkedAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguageTextsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
@@ -1914,6 +1917,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewListController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changepassword\ChangePasswordForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changepassword\ChangePasswordFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changepassword\ChangePasswordView.js" />

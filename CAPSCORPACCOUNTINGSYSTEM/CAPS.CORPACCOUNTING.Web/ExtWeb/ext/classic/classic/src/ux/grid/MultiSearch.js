@@ -646,6 +646,18 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             model = gridStore.getModel(),
             entityName = model.$config.values.searchEntityName,
             dataField = model.getField(field.getItemId());
+        if (!dataField) {
+            var references = model.references;
+            if (references) {
+                for (var k = 0; k < references.length; k++) {
+                    var associatationModel = model.references[k].reference.getReader().getModel();
+                    if (associatationModel) {
+                        dataField = associatationModel.getField(field.getItemId());
+                    }
+                }
+            }
+           
+        }
         if ((field.xtype === "combo" || field.xtype === "combobox") && field.forceSelection) {
             filter.operator = "=";
         }

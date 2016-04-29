@@ -152,7 +152,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
             }],
             xtype: 'ajax',
             extraParams: {
-                Id: 0
+                id: 0
             },
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

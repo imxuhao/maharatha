@@ -37,8 +37,8 @@ Ext.define('Chaching.Application', {
          'financials.accounts.AccountsStore',
         'languages.LanguagesDataStore',
         'projects.projectmaintenance.LinesStore',
-        'financials.accounts.RollupAccountStore'
-      
+        'financials.accounts.RollupAccountStore',
+        'payables.vendors.VendorsStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {
@@ -91,7 +91,7 @@ Ext.define('Chaching.Application', {
                                 refs = mainViewController.getReferences(),
                                 mainCardPanel = refs.mainCardPanel,
                                 hasComponent = mainCardPanel.child('component[routeId=' + window.location.hash.replace('#', '') + ']');
-                            if (hasComponent&&typeof(hasComponent.applyGridViewSetting)==='function') {
+                            if (hasComponent && typeof (hasComponent.applyGridViewSetting) === 'function') {
                                 var cols = hasComponent.getColumns();
                                 hasComponent.applyGridViewSetting(cols, true);
                             }

@@ -135,5 +135,33 @@
             return div;
         }
         return val;
+    },
+    renderFullAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('line1') + ' ' + address.get('line2') + ' ' + address.get('line3');
+            }
+        }
+        return value;
+    },
+    renderContactNumber: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('contactNumber');
+            }
+        }
+        return value;
+    },
+    renderEmail: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('email');
+            }
+        }
+        return value;
     }
+
 });

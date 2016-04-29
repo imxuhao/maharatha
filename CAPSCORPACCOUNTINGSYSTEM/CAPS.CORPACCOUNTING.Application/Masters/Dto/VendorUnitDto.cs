@@ -38,14 +38,23 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CreditLimit field. </summary>
         public decimal? CreditLimit { get; set; }
 
+        /// <summary>Gets or sets the TypeofPaymentMethodId field. </summary>
+        public TypeofPaymentMethod? TypeofPaymentMethodId { get; set; }
+
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
-        public TypeofPaymentMethod? TypeofPaymentMethod { get; set; }
+        public string TypeofPaymentMethod { get; set; }
 
         /// <summary>Gets or sets the PaymentTermsId field. </summary>
         public int? PaymentTermsId { get; set; }
 
+        /// <summary>Gets or sets the PaymentTerms field. </summary>
+        public string PaymentTerms{ get; set; }
+
         /// <summary>Gets or sets the TypeofCurrency field. </summary>
         public string TypeofCurrency { get; set; }
+
+        /// <summary>Gets or sets the TypeofCurrencyId field. </summary>
+        public int? TypeofCurrencyId { get; set; }
 
         /// <summary>Gets or sets the IsCorporation field. </summary>
         public bool IsCorporation { get; set; }
@@ -62,8 +71,14 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeOfvendorId field. </summary>
         public TypeofVendor? TypeofVendorId { get; set; }
 
+        /// <summary>Gets or sets the TypeofVendor field. </summary>
+        public string TypeofVendor { get; set; }
+
         /// <summary>Gets or sets the Typeof1099Box field. </summary>
-        public Typeof1099T4? Typeof1099Box { get; set; }
+        public Typeof1099T4? Typeof1099BoxId { get; set; }
+
+        /// <summary>Gets or sets the Typeof1099Box field. </summary>
+        public string Typeof1099Box { get; set; }
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
         public DateTime? EDDContractStartDate { get; set; }
@@ -128,7 +143,6 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the Addresses of the vendor. </summary>
         public Collection<AddressUnitDto> Address { get; set; }
 
-        /// <summary>Gets or sets the PaymentTermDescription field. </summary>
-        public string PaymentTermDescription { get; set; }
+      
     }
 }

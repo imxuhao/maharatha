@@ -18,7 +18,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
         destroy: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Delete'),
     },
     padding: 5,
-    gridId: 9,
+    gridId: 10,
     headerButtonsConfig: [
       {
           xtype: 'displayfield',

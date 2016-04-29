@@ -1064,6 +1064,36 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeofPaymentMethodList">
+            <summary>
+            Get TypeofPaymentMethod Enum as List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeof1099T4List">
+            <summary>
+            Get Typeof1099T4 Enum as List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeofVendorList">
+            <summary>
+            Get TypeofVendor Enum as List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeofAddressList">
+            <summary>
+            Get TypeofAddress Enum as List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumList.GetTypeofObjectList">
+            <summary>
+            Get TypeofObject Enum as List
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.Helper.GetSortOrderAsString(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Helpers.Sort})">
             <summary>
             To get formatted sorting string 
@@ -3416,14 +3446,23 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.CreditLimit">
             <summary>Gets or sets the CreditLimit field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofPaymentMethodId">
+            <summary>Gets or sets the TypeofPaymentMethodId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofPaymentMethod">
             <summary>Gets or sets the TypeofPaymentMethod field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.PaymentTermsId">
             <summary>Gets or sets the PaymentTermsId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.PaymentTerms">
+            <summary>Gets or sets the PaymentTerms field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofCurrency">
             <summary>Gets or sets the TypeofCurrency field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofCurrencyId">
+            <summary>Gets or sets the TypeofCurrencyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.IsCorporation">
             <summary>Gets or sets the IsCorporation field. </summary>
@@ -3439,6 +3478,12 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofVendorId">
             <summary>Gets or sets the TypeOfvendorId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofVendor">
+            <summary>Gets or sets the TypeofVendor field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.Typeof1099BoxId">
+            <summary>Gets or sets the Typeof1099Box field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.Typeof1099Box">
             <summary>Gets or sets the Typeof1099Box field. </summary>
@@ -3505,9 +3550,6 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.Address">
             <summary>Gets or sets the Addresses of the vendor. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.PaymentTermDescription">
-            <summary>Gets or sets the PaymentTermDescription field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.VendorId">
             <summary>Gets or sets the VendorId field. </summary>
@@ -5158,6 +5200,36 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetTypeofPaymentMethodList">
+            <summary>
+            Get TypeofPaymentMethod 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetTypeof1099T4List">
+            <summary>
+            Get Typeof1099T4
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetTypeofVendorList">
+            <summary>
+            Get TypeofVendor
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetTypeofAddressList">
+            <summary>
+            Get TypeofAddress
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetTypeofObjectList">
+            <summary>
+            Get TypeofObject
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.SalesRepUnitAppService.CreateSalesRepUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateSalesRepUnitInput)">
             <summary>
             Creating the SalesRepresentative 
@@ -5524,6 +5596,36 @@
             Updating Vendor with Addresses
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetTypeofPaymentMethodList">
+            <summary>
+            Get TypeofPaymentMethod 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetTypeof1099T4List">
+            <summary>
+            Get Typeof1099T4
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetTypeofVendorList">
+            <summary>
+            Get TypeofVendor
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetTypeofAddressList">
+            <summary>
+            Get TypeofAddress
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetTypeofObjectList">
+            <summary>
+            Get TypeofObject
+            </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnitAppService.CreateVendorPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorPaymentTermUnitInput)">

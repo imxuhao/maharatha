@@ -437,7 +437,7 @@
     <text name="ARInvoiceTemplate" value="AR Invoice Template" />
     <text name="BillingTypes" value="Billing Types" />
     <text name="History" value="History" />
-    <text name="PaymentTerms" value="PaymentTerms" />
+    <text name="PaymentTerms" value="Payment Terms" />
     <text name="Territories" value="Territories" />
     <text name="ARInvoiceInquiry" value="AR Invoice Inquiry" />
     <text name="CustomerSummary" value="Customer Summary" />
@@ -541,5 +541,18 @@
     <text name="ToolTipShootDate" value="Select shoot date" />
     <text name="WrapUpInsurance" value="Wrap up insurance" />
     <text name="ToolTipStatus" value="Select status" />
+    <text name="CreatingNewVendors" value="Creating New Vendors" />
+    <text name="EditVendors" value="Edit Vendors" />
+    <text name="VendorName" value="Vendor Name" />
+    <text name="Address" value="Address" />
+    <text name="Telephone" value="Telephone" />
+    <text name="Email" value="Email" />
+    <text name="1099Code" value="1099 Code" />
+    <text name="VendorSearch" value="Vendor Search" />
+    <text name="AddressSearch" value="Address Search" />
+    <text name="TelephoneSearch" value="Telephone Search" />
+    <text name="EmailSearch" value="Email Search" />
+    <text name="1099CodeSearch" value="1099 Code Search" />
+    <text name="PaymentTermsSearch" value="Payment Terms Search" />
   </texts>
 </localizationDictionary>

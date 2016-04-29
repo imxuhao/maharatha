@@ -3,6 +3,7 @@ using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -45,5 +46,41 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(SearchInputDto input);
+
+
+        /// <summary>
+        /// Get TypeofPaymentMethod 
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeofPaymentMethodList();
+      
+
+        /// <summary>
+        /// Get Typeof1099T4
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeof1099T4List();
+
+
+        /// <summary>
+        /// Get TypeofVendor
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeofVendorList();
+
+
+        /// <summary>
+        /// Get TypeofAddress
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeofAddressList();
+
+
+        /// <summary>
+        /// Get TypeofObject
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeofObjectList();
+       
     }
 }

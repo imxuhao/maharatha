@@ -17,7 +17,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
         destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete'),
     },
     padding: 5,
-    gridId: 9,
+    gridId: 14,
     headerButtonsConfig: [
       {
           xtype: 'displayfield',

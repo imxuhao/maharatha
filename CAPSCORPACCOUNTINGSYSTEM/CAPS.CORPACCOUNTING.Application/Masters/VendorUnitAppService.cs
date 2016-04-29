@@ -42,7 +42,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             _vendorPaytermRepository = vendorPaytermRepository;
         }
 
-        public IEventBus EventBus { get; set; }        
+        public IEventBus EventBus { get; set; }
 
         /// <summary>
         /// Creating the Vendor with Addresses
@@ -115,7 +115,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<VendorUnitDto> GetVendorUnitsById(IdInput input)
         {
             var vendorItem = await _vendorUnitRepository.GetAsync(input.Id);
-            var addressitems = await  _addresRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Vendor);
+            var addressitems = await _addresRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Vendor);
             var result = vendorItem.MapTo<VendorUnitDto>();
             result.VendorId = vendorItem.Id;
             result.Address = new Collection<AddressUnitDto>();
@@ -132,12 +132,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(SearchInputDto input)
-        {             
-            var query = CreateVendorQuery(input);            
+        {
+            var query = CreateVendorQuery(input);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(Helper.GetSort("Vendor.LastName ASC",input.Sorting))
+                .OrderBy(Helper.GetSort("Vendor.LastName ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
             var vendorListDtos = ConvertToVendorDtos(results);
@@ -156,7 +156,10 @@ namespace CAPS.CORPACCOUNTING.Masters
                 {
                     var dto = result.Vendor.MapTo<VendorUnitDto>();
                     dto.VendorId = result.Vendor.Id;
-                    dto.PaymentTermDescription = result.PaymentTerms;
+                    dto.PaymentTerms = result.PaymentTerms;
+                    dto.TypeofCurrency = result.Vendor.TypeofCurrency;
+                    dto.TypeofPaymentMethod = result.Vendor.TypeofPaymentMethod != null ? result.Vendor.TypeofPaymentMethod.ToDisplayName() : ""; 
+                    dto.Typeof1099Box = result.Vendor.Typeof1099Box != null ? result.Vendor.Typeof1099Box.ToDisplayName() : ""; 
                     dto.Address = new Collection<AddressUnitDto>();
                     if (result.Address != null)
                     {
@@ -170,13 +173,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         private IQueryable<VendorAndAddressDto> CreateVendorQuery(SearchInputDto input)
         {
             var query = from vendor in _vendorUnitRepository.GetAll()
-                join addr in _addresRepository.GetAll() on vendor.Id equals addr.ObjectId
-                    into temp
-                from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId==TypeofObject.Vendor).DefaultIfEmpty()
-                join payterms in _vendorPaytermRepository.GetAll() on vendor.Id equals payterms.Id
-                    into paymentperms
-                from pt in paymentperms.DefaultIfEmpty()
-                select new VendorAndAddressDto {Vendor = vendor, Address = rt, PaymentTerms = pt.Description};
+                        join addr in _addresRepository.GetAll() on vendor.Id equals addr.ObjectId
+                            into temp
+                        from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Vendor).DefaultIfEmpty()
+                        join payterms in _vendorPaytermRepository.GetAll() on vendor.Id equals payterms.Id
+                            into paymentperms
+                        from pt in paymentperms.DefaultIfEmpty()
+                        select new VendorAndAddressDto { Vendor = vendor, Address = rt, PaymentTerms = pt.Description };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -282,6 +285,51 @@ namespace CAPS.CORPACCOUNTING.Masters
                 });
 
             return vendorUnit.MapTo<VendorUnitDto>();
+        }
+
+        /// <summary>
+        /// Get TypeofPaymentMethod 
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeofPaymentMethodList()
+        {
+            return EnumList.GetTypeofPaymentMethodList();
+        }
+
+        /// <summary>
+        /// Get Typeof1099T4
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeof1099T4List()
+        {
+            return EnumList.GetTypeof1099T4List();
+        }
+
+        /// <summary>
+        /// Get TypeofVendor
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeofVendorList()
+        {
+            return EnumList.GetTypeofVendorList();
+        }
+
+        /// <summary>
+        /// Get TypeofAddress
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeofAddressList()
+        {
+            return EnumList.GetTypeofAddressList();
+        }
+
+        /// <summary>
+        /// Get TypeofObject
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeofObjectList()
+        {
+            return EnumList.GetTypeofObjectList();
         }
 
     }

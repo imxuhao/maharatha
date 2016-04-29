@@ -576,7 +576,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             }
             if ('iconCol' === item.itemId) {
                 Ext.apply(cfg, me.getIcon());
-            }
+            } 
             //if('component' !== cfg.xtype) {
             Ext.apply(cfg, {
                 itemId: item.itemId ? item.itemId : item.dataIndex || 'item' + i
@@ -640,13 +640,15 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         me.updateClearIcon(field);
 
     } // eo function doFieldChange
-    ,customizeFilters:function(filter, field) {
+    , customizeFilters: function (filter, field) {
         var me = this,
             gridStore = me.getStore(),
             model = gridStore.getModel(),
             entityName = model.$config.values.searchEntityName,
             dataField = model.getField(field.getItemId());
-       
+        if ((field.xtype === "combo" || field.xtype === "combobox") && field.forceSelection) {
+            filter.operator = "=";
+        }
         if (filter && field&&dataField) {
             if (typeof(field.entityName) !== "undefined") {
                 filter.entity = field.entityName;

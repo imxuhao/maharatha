@@ -4,6 +4,7 @@ using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -61,6 +62,35 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         Task<PagedResultOutput<JobUnitDto>> GetDivisionUnits(SearchInputDto input);
 
+        /// <summary>
+        /// Get DivisionsList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetDivisionList(AutoSearchInput input);
+
+        /// <summary>
+        /// Get ProjectStatusList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetProjectStatusList();
+
+        /// <summary>
+        /// Get BudgetSoftwareList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetBudgetSoftwareList();
+        /// <summary>
+        /// Get ProjectCoaList
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetProjectCoaList(AutoSearchInput input);
+        /// <summary>
+        /// Get RollupAccountList
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetRollupAccountList(AutoSearchInput input);
 
     }
 }

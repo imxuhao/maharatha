@@ -73,6 +73,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
-
+        /// <summary>
+        /// Isdivision is true then this job is a Division
+        /// IsDivision is false then the job is Project
+        /// </summary>
+        public bool IsDivision { get; set; }
+        
     }
 }

@@ -515,10 +515,10 @@
     <text name="EditProjectCOA" value="Edit ProjectCOA" />
     <text name="Defaults" value="Defaults" />
     <text name="Lines" value="Lines" />
-    <text name="CreateNewLine" value="Create NewLine" />
+    <text name="CreateNewLine" value="Create New Line" />
     <text name="EditLine" value="Edit Line" />
     <text name="LineNumber" value="LineNumber" />
-    <text name="LineNumbers" value="LineNumbers" />
+    <text name="LineNumbers" value="Lines" />
     <text name="LineSearch" value="Enter Line to Search" />
     <text name="AddNew" value="Add" />
     <text name="CreateNewProject" value="Create new project" />

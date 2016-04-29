@@ -6,29 +6,28 @@ using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
-using Abp.Events.Bus;
-using Abp.Events.Bus.Entities;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
-using System.Collections.Generic;
-using CAPS.CORPACCOUNTING.Sessions;
+using CAPS.CORPACCOUNTING.Masters;
+using Abp.Collections.Extensions;
 using System;
+using CAPS.CORPACCOUNTING.Sessions;
 
-namespace CAPS.CORPACCOUNTING.Masters
+namespace CAPS.CORPACCOUNTING.JobCosting
 {
 
     [AbpAuthorize] ///This is to ensure only logged in user has access to this module. We will improvise accordingly
-    public class CoaUnitAppService : CORPACCOUNTINGServiceBase, ICoaUnitAppService
+    public class ProjectCoaUnitAppService : CORPACCOUNTINGServiceBase, IProjectCoaUnitAppService
     {
         private readonly CoaUnitManager _coaunitManager;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSessionSession;
         long? OrganizationId = null;
-        public CoaUnitAppService(CoaUnitManager coaunitManager, IRepository<CoaUnit> coaUnitRepository,
+        public ProjectCoaUnitAppService(CoaUnitManager coaunitManager, IRepository<CoaUnit> coaUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, CustomAppSession customAppSessionSession)
         {
             _coaunitManager = coaunitManager;
@@ -39,14 +38,12 @@ namespace CAPS.CORPACCOUNTING.Masters
                 OrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
         }
 
-        public IEventBus EventBus { get; set; }
-
         /// <summary>
         /// Get the Records for Grid with paging and  sorting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<CoaUnitDto>> GetCoaUnits(SearchInputDto input)
+        public async Task<PagedResultOutput<CoaUnitDto>> GetProjectCoaList(SearchInputDto input)
         {
 
             var query = from coa in _coaUnitRepository.GetAll()
@@ -54,6 +51,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         on coa.LinkChartOfAccountID equals linkcoa.Id
                         into tempCoa
                         from coaunit in tempCoa.DefaultIfEmpty()
+                        where coa.IsCorporate==false
                         select new { Coa = coa, LinkChartOfAccountName=coaunit.Caption };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -62,8 +60,8 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Coa.OrganizationUnitId == input.OrganizationUnitId)
-                .Where(p => p.Coa.IsCorporate == true);
+            query = query.WhereIf( !ReferenceEquals(input.OrganizationUnitId, null) ,item => item.Coa.OrganizationUnitId == input.OrganizationUnitId)
+                .Where(p=>p.Coa.IsCorporate==false);
 
             var resultCount = await query.CountAsync();
             var results = await query
@@ -75,50 +73,32 @@ namespace CAPS.CORPACCOUNTING.Masters
             {
                 var dto = item.Coa.MapTo<CoaUnitDto>();
                 dto.CoaId = item.Coa.Id;
-                dto.StandardGroupTotal = item.Coa.StandardGroupTotalId != null ? item.Coa.StandardGroupTotalId.ToDisplayName() : "";
-                dto.LinkChartOfAccountName = item.LinkChartOfAccountName;
                 return dto;
             }).ToList());
         }
 
         /// <summary>
-        /// Creating COAUnit
+        /// Creating ProjectCoa
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
 
         [UnitOfWork]
-        public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
+        public async Task<CoaUnitDto> CreateProjectCoaUnit(CreateCoaUnitInput input)
         {
             var coaUnit = input.MapTo<CoaUnit>();
-            coaUnit.OrganizationUnitId = OrganizationId;           
             await _coaunitManager.CreateAsync(coaUnit);
+            coaUnit.OrganizationUnitId = OrganizationId;
+            coaUnit.IsCorporate = false;
             await CurrentUnitOfWork.SaveChangesAsync();
-
-            #region Example to show the usage of Event Bus as well Unit of Work Completion
-
-            _unitOfWorkManager.Current.Completed += (sender, args) =>
-            {
-                /*Do Something when the Chart of Account is Added*/
-            };
-
-            EventBus.Register<EntityChangedEventData<CoaUnit>>(
-                eventData =>
-                {
-                    // http://www.aspnetboilerplate.com/Pages/Documents/EventBus-Domain-Events#DocTriggerEvents
-                    //Do something when COA is added
-                });
-
-            #endregion
-
             return coaUnit.MapTo<CoaUnitDto>();
         }
         /// <summary>
-        /// Updating COAUnit
+        /// Updating ProjectCoa
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input)
+        public async Task<CoaUnitDto> UpdateProjectCoaUnit(UpdateCoaUnitInput input)
         {
             var coaUnit = await _coaUnitRepository.GetAsync(input.CoaId);
 
@@ -142,62 +122,16 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            _unitOfWorkManager.Current.Completed += (sender, args) =>
-            {
-                /*Do Something when the Chart of Account is Added*/
-            };
-
-            EventBus.Register<EntityChangedEventData<CoaUnit>>(
-                eventData =>
-                {
-                    // http://www.aspnetboilerplate.com/Pages/Documents/EventBus-Domain-Events#DocTriggerEvents
-                    //Do something when COA is added
-                });
-
             return coaUnit.MapTo<CoaUnitDto>();
         }
         /// <summary>
-        /// Delete COAUnit by Id
+        /// Delete ProjectCoa by Id
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task DeleteCoaUnit(IdInput input)
+        public async Task DeleteProjectCoaUnit(IdInput input)
         {
             await _coaunitManager.DeleteAsync(input.Id);
-        }
-
-        /// <summary>
-        /// Get COAUnit by Id
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<CoaUnitDto> GetCoaUnitById(IdInput input)
-        {
-            CoaUnit coaUnit = await _coaUnitRepository.GetAsync(input.Id);
-            CoaUnitDto result = coaUnit.MapTo<CoaUnitDto>();
-            result.CoaId = coaUnit.Id;
-            return result;
-        }
-        /// <summary>
-        /// Gets all the COA for that company except input Coa ( ConvertNewCOA Dropdown Data)
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetCoaList(GetCoaInput input)
-        {
-            return await (from au in _coaUnitRepository.GetAll()
-                          .WhereIf(input.CoaId != null, p => p.Id != input.CoaId)
-                          .WhereIf(input.OrganizationUnitId != null, p => p.OrganizationUnitId == input.OrganizationUnitId)
-                          select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
-        }
-
-        /// <summary>
-        /// Get StandardGroupTotals as List
-        /// </summary>
-        /// <returns></returns>
-        public  List<NameValueDto> StandardGroupTotalList()
-        {
-            return EnumList.GetStandardGroupTotalList();
         }
 
     }

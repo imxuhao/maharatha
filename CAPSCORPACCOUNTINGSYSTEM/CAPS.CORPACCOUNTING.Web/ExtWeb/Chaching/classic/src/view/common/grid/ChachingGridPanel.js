@@ -110,6 +110,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             dockedItems = [],
             gridColumns = me.columns,
             features = [];
+        var gridStore = me.store;
+        if (typeof(gridStore)==="string") {
+            me.store = Ext.create('Chaching.store.'+gridStore);
+        }
        
         if (!me.modulePermissions) {
             me.modulePermissions = {

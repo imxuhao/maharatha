@@ -1,6 +1,7 @@
 ﻿Ext.define('Chaching.store.financials.accounts.ChartOfAccountStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.financials.accounts.ChartOfAccountsModel',
+    //storeId:"coaStore",
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

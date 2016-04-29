@@ -6,6 +6,7 @@ using System.Linq;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.Helpers
 {
@@ -55,6 +56,19 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public static List<NameValueDto> GetTypeofConsolidationList()
         {
             var listEnums = (from TypeofConsolidation n in Enum.GetValues(typeof(TypeofConsolidation))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+
+        public static List<NameValueDto> GetBudgetSoftwareList()
+        {
+            var listEnums = (from BudgetSoftware n in Enum.GetValues(typeof(BudgetSoftware))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+        public static List<NameValueDto> GetProjectStatusList()
+        {
+            var listEnums = (from ProjectStatus n in Enum.GetValues(typeof(ProjectStatus))
                              select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
             return listEnums;
         }

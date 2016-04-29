@@ -181,7 +181,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set;}
 
-      
+        /// <summary>Gets or sets the IsDivision field. </summary>
+        public virtual bool IsDivision { get; set; }
+
+
         public virtual List<JobCommercialUnit> JobDetails { get; set; }
 
         public List<JobLocationUnit> joblocations { get; set; }
@@ -195,7 +198,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public JobUnit(string jobnumber, string caption, bool iscorporatedefault, int? chartofaccountid,
             long? rollupaccountid, int? typeofcurrencyid, int? rollupjobid, ProjectStatus? typeofjobstatusid,
             BudgetSoftware? typeofbidsoftwareid, int? rollupcenterid, bool isapproved, bool isactive, bool isictdivision,
-            long? organizationunitid, TypeofProject? typeofprojectid, TaxRecovery? taxrecoveryid)
+            long? organizationunitid, TypeofProject? typeofprojectid, TaxRecovery? taxrecoveryid,bool isdivision)
         {
             JobNumber = jobnumber;
             Caption = caption;
@@ -212,6 +215,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             TypeofProjectId = typeofprojectid;
             TaxRecoveryId = taxrecoveryid;
             ChartOfAccountId = chartofaccountid;
+            IsDivision = isdivision;
         }
     }
 }

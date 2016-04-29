@@ -63,9 +63,29 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         private string DetailReport { get; set; } = "Detail Report";
        
         /// <summary> Gets or sets the Director.</summary>
-        public string Director { get; set; }
+        public string DirectorName { get; set; }
        
         /// <summary> Gets or sets the Agency.</summary>
         public string Agency { get; set; }
+        /// <summary>
+        ///  Gets or sets the JobStatusName 
+        /// </summary>
+        public string JobStatusName { get; set; }
+        /// <summary>
+        ///  Gets or sets the TypeofProjectName
+        /// </summary>
+        public string TypeofProjectName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the TransactionCount
+        /// </summary>
+        public string TransactionCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the POTransactionType
+        /// </summary>
+        public string POTransactionType { get; set; }
+
+
     }
 }

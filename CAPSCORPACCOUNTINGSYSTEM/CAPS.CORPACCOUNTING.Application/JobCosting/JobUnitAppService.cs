@@ -17,6 +17,7 @@ using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Sessions;
 using System;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -32,13 +33,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IJobCommercialAppService _jobCommercialAppService;
         private readonly IJobBudgetUnitAppService _jobBudgetUnitAppService;
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
+        private readonly IRepository<CoaUnit> _coaUnitRepository;
+        private readonly IRepository<AccountUnit,long> _accountUnitRepository;
         private readonly CustomAppSession _customAppSessionSession;
         long? OrgnizationId=null;
 
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IUnitOfWorkManager unitOfWorkManager, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService, IJobBudgetUnitAppService jobBudgetUnitAppService,
-            IRepository<OrganizationUnit, long> organizationUnitRepository, CustomAppSession customAppSessionSession)
-        {
+            IRepository<OrganizationUnit, long> organizationUnitRepository, CustomAppSession customAppSessionSession,
+            IRepository<CoaUnit> coaUnitRepository, IRepository<AccountUnit, long> accountUnitRepository)
+        {   
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
@@ -49,6 +53,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _jobBudgetUnitAppService = jobBudgetUnitAppService;
             _organizationUnitRepository = organizationUnitRepository;
             _customAppSessionSession = customAppSessionSession;
+            _coaUnitRepository = coaUnitRepository;
+            _accountUnitRepository = accountUnitRepository;
             if (!ReferenceEquals(_customAppSessionSession.OrganizationId, null))
                 OrgnizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
 
@@ -65,7 +71,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,
                 isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: OrgnizationId, typeofprojectid: input.TypeofProjectId,
-                taxrecoveryid: input.TaxRecoveryId, chartofaccountid: input.ChartOfAccountId, rollupcenterid: input.RollupCenterId);
+                taxrecoveryid: input.TaxRecoveryId, chartofaccountid: input.ChartOfAccountId, rollupcenterid: input.RollupCenterId, isdivision: true);
             await _jobUnitManager.CreateAsync(jobUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -158,7 +164,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         join cust in _customerUnitRepository.GetAll() on job.JobDetails.FirstOrDefault().AgencyId equals cust.Id
                                 into tempcust
                         from cs in tempcust.DefaultIfEmpty()
-                        select new { Job = job, Director = em.LastName, Agency = cs.LastName };
+                        select new { Job = job, DirectorName = em.LastName, Agency = cs.LastName };
             if (!ReferenceEquals(input.Filters, null))
             {
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
@@ -177,10 +183,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 var dto = item.Job.MapTo<JobUnitDto>();
                 dto.JobId = item.Job.Id;
-                if (item.Director != null)
-                    dto.Director = item.Director;
+                if (item.DirectorName != null)
+                    dto.DirectorName = item.DirectorName;
                 if (item.Agency != null)
                     dto.Agency = item.Agency;
+                dto.JobStatusName = item.Job.TypeOfJobStatusId != null ? item.Job.TypeOfJobStatusId.ToDisplayName() : "";
+                dto.TypeofProjectName = item.Job.TypeofProjectId != null ? item.Job.TypeofProjectId.ToDisplayName() : "";
                 return dto;
             }).ToList());
         }
@@ -226,6 +234,53 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 .Select(u=> new NameValueDto {Name=u.DisplayName,Value=u.Id.ToString() }).ToListAsync(); 
          return organizations; 
         }
+        public async Task<List<NameValueDto>> GetRollupAccountList(AutoSearchInput input)
+        {
+            var query = from account in _accountUnitRepository.GetAll()
+                        join coa in _coaUnitRepository.GetAll() on account.ChartOfAccountId equals coa.Id
+                             where coa.IsCorporate == true && account.IsRollupAccount==true
+                            select new { account };
+            var divisions= await query.
+                WhereIf(!ReferenceEquals(OrgnizationId, null), p => p.account.OrganizationUnitId == OrgnizationId)               
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.account.Caption.Contains(input.Query))
+                 .Select(u => new NameValueDto { Name = u.account.Caption, Value = u.account.Id.ToString() }).ToListAsync();
+            return divisions;
+
+        }
+
+        public async Task<List<NameValueDto>> GetProjectCoaList(AutoSearchInput input)
+        {
+          var divisions = await _coaUnitRepository.GetAll().Where(p => p.IsCorporate == false)
+               .WhereIf(!ReferenceEquals(OrgnizationId, null), p => p.OrganizationUnitId == OrgnizationId)
+               .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
+               .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
+            return divisions;
+
+        }      
+
+        /// <summary>
+        /// Get DivisionsList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetDivisionList(AutoSearchInput input )
+        {
+           var divisions = await _jobUnitRepository.GetAll().Where(p => p.IsDivision == true)
+                .WhereIf( !ReferenceEquals(OrgnizationId, null), p => p.OrganizationUnitId == OrgnizationId)
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
+                .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
+            return divisions;         
+        }
+
+        public async Task<List<NameValueDto>> GetBudgetSoftwareList()
+        {
+            return EnumList.GetBudgetSoftwareList();
+        }
+        public async Task<List<NameValueDto>> GetProjectStatusList()
+        {
+            return EnumList.GetProjectStatusList();
+        }
+
+
 
     }
 }

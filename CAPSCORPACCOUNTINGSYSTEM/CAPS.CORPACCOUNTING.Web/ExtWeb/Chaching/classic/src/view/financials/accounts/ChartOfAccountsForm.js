@@ -110,7 +110,8 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'isCorporate',
             labelAlign: 'right',
             inputValue: true,
-            checked: false,
+            checked: true,
+            readOnly:true,
             boxLabelCls: 'checkboxLabel'
         }, {
             xtype: 'checkbox',

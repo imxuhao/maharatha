@@ -67,7 +67,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             //Validating if Duplicate COA exists
             if (CoaUnitRepository != null)
             {
-                var coaunit = (await CoaUnitRepository.GetAllListAsync(p => p.Caption == coaUnit.Caption && p.OrganizationUnitId== coaUnit.OrganizationUnitId && p.TenantId ==coaUnit.TenantId ));
+                var coaunit = (await CoaUnitRepository.GetAllListAsync(p => p.Caption == coaUnit.Caption && p.OrganizationUnitId== coaUnit.OrganizationUnitId ));
 
                 if (coaUnit.Id == 0)
                 {

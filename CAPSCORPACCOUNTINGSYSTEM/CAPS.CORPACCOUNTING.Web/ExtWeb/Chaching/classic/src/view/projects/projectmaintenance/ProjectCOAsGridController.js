@@ -16,11 +16,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGridController'
                     closable: true,
                     title: abp.localization.localize("LineNumbers"),
                     routId: 'projects.projectmaintenance.linenumbers',
-                    coaId: record.get('coaId'),
-                   // linkChartOfAccountID: record.get('linkChartOfAccountID')
+                    coaId: record.get('coaId')                 
                    
-                });
-                var gridStore = accountsGrid.getStore(),
+                });              
+                var gridStore = accountsGrid.getStore(),                    
                     storeProxy = gridStore.getProxy();
                 storeProxy.setExtraParam('coaId', record.get('coaId'));
                 gridStore.load();
@@ -31,5 +30,11 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGridController'
             }
         }
     },
+    doAfterCreateAction: function (createMode, formView, isEdit) {        
+        if (formView) {
+            var field = formView.getForm().findField('isCorporate');
+            field.checked = false;
+        }
+    }
     
 });

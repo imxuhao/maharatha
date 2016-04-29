@@ -42,6 +42,9 @@
             { name: 'balanceSheetName', type: 'string' },
             { name: 'profitLossName', type: 'string' },
             { name: 'us1120IncomeStmtName', type: 'string' },
-            { name: 'isActive', type: 'boolean' }
+            { name: 'isActive', type: 'boolean' },
+            { name: 'rollUpAccountCaption', type: 'string' },
+             { name: 'RollUpDivision', type: 'string' },
+            
     ]
 });

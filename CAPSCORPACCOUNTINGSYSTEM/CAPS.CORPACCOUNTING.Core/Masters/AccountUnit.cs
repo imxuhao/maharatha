@@ -280,7 +280,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public int? LinkJobId { get; set; }
 
         /// <summary>Gets or sets the RollupAccountId field. </summary>
-        public int? RollupAccountId { get; set; }
+        public long? RollupAccountId { get; set; }
 
         /// <summary>Gets or sets the RollupJobId field. </summary>
         public int? RollupJobId { get; set; }
@@ -385,7 +385,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             bool isApproved, bool isBalanceSheet, bool isCashFlow, bool isDescriptionLocked, bool isDocControlled,
             bool isElimination, bool isEnterable, bool isProfitLoss, bool isRollupAccount, bool isRollupOverridable,
             bool isSummaryAccount, bool isUs1120BalanceSheet, bool isUs1120IncomeStmt, int? linkAccountId,
-            int? linkJobId, long? parentId, string profitLossName, int? rollupAccountId, int? rollupJobId,
+            int? linkJobId, long? parentId, string profitLossName, long? rollupAccountId, int? rollupJobId,
             int? typeOfAccountId, string us1120BalanceSheetName, string us1120IncomeStmtName, long? organizationunitid)
         {
             if (chartOfAccountId <= 0) throw new ArgumentOutOfRangeException(nameof(chartOfAccountId));

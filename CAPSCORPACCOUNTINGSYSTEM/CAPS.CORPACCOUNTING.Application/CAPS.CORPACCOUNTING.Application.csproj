@@ -231,6 +231,11 @@
     <Compile Include="Interceptors\MeasureDurationInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\MeasureDurationWithPostAsyncActionInterceptor.cs" />
     <Compile Include="IO\AppFileHelper.cs" />
+    <Compile Include="JobCosting\IDivisionUnitAppService.cs" />
+    <Compile Include="JobCosting\DivisionUnitAppService.cs" />
+    <Compile Include="JobCosting\ProjectCoaUnitAppService.cs" />
+    <Compile Include="JobCosting\IProjectCoaUnitAppService.cs" />
+    <Compile Include="JobCosting\LinesUnitAppService.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitAppService.cs" />
     <Compile Include="JobCosting\Dto\ARBillingTypeDto.cs" />
     <Compile Include="JobCosting\Dto\CreateARBillingTypeUnitInput.cs" />
@@ -241,6 +246,7 @@
     <Compile Include="JobCosting\Dto\UpdateARBillingTypeUnitInput.cs" />
     <Compile Include="JobCosting\Dto\UpdateJobAccountUnitInput.cs" />
     <Compile Include="JobCosting\Dto\UpdateJobBudgetUnitInput.cs" />
+    <Compile Include="JobCosting\ILinesUnitAppService.cs" />
     <Compile Include="JobCosting\IARBillingTypeUnitAppService.cs" />
     <Compile Include="JobCosting\IJobAccountUnitAppService.cs" />
     <Compile Include="JobCosting\IJobBudgetUnitAppService.cs" />

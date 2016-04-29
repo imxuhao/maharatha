@@ -1115,6 +1115,10 @@
     <Compile Include="Migrations\201604281649277_Security_Access_Restriction_Modified.Designer.cs">
       <DependentUpon>201604281649277_Security_Access_Restriction_Modified.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604291007387_Modify_Job_Account_Table.cs" />
+    <Compile Include="Migrations\201604291007387_Modify_Job_Account_Table.Designer.cs">
+      <DependentUpon>201604291007387_Modify_Job_Account_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1885,6 +1889,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604281649277_Security_Access_Restriction_Modified.resx">
       <DependentUpon>201604281649277_Security_Access_Restriction_Modified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604291007387_Modify_Job_Account_Table.resx">
+      <DependentUpon>201604291007387_Modify_Job_Account_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

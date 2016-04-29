@@ -59,7 +59,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int? LinkJobId { get; set; }
 
         /// <summary>Gets or sets the RollupAccountId field. </summary>
-        public int? RollupAccountId { get; set; }
+        public long? RollupAccountId { get; set; }
 
         /// <summary>Gets or sets the RollupJobId field. </summary>
         public int? RollupJobId { get; set; }

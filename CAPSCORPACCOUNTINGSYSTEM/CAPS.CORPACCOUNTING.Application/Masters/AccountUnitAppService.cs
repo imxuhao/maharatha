@@ -14,6 +14,8 @@ using CAPS.CORPACCOUNTING.Helpers;
 using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Common;
+using CAPS.CORPACCOUNTING.Sessions;
+using System;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -27,11 +29,12 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly IRepository<CoaUnit, int> _coaRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-
+        private readonly CustomAppSession _customAppSessionSession;
+        long? OrgnizationId = null;
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
-            IRepository<CoaUnit, int> coaRepository)
+            IRepository<CoaUnit, int> coaRepository, CustomAppSession customAppSessionSession)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
@@ -41,6 +44,9 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _typeOfCurrencyRateRepository = typeOfCurrencyRateRepository;
             _typeOfCurrencyRepository = typeOfCurrencyRepository;
             _coaRepository = coaRepository;
+            _customAppSessionSession = customAppSessionSession;
+            if (!ReferenceEquals(_customAppSessionSession.OrganizationId, null))
+                OrgnizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
         }
         public async Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId = null)
         {
@@ -78,7 +84,10 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 join currencyrate in _typeOfCurrencyRateRepository.GetAll() on au.TypeOfCurrencyRateId equals currencyrate.Id
                 into ratecurrency
                 from accountresults in ratecurrency.DefaultIfEmpty()
-                select new { Account = au, TypeOfAccount = coaunit.Description, TypeOfAccountRate = accountresults.Description, TypeOfCurrency = currency.Description, LinkAccount=linkAccounts.Caption };
+                select new { Account = au, TypeOfAccount = coaunit.Description, TypeOfAccountRate = accountresults.Description,
+                    TypeOfCurrency = currency.Description, LinkAccount=linkAccounts.Caption
+                  
+                };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -104,7 +113,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                      dto.TypeOfAccount = item.TypeOfAccount;
                      dto.TypeOfCurrency = item.TypeOfCurrency;
                      dto.TypeOfCurrencyRate = item.TypeOfAccountRate;
-                     dto.LinkAccount = item.LinkAccount;
+                     dto.LinkAccount = item.LinkAccount;                    
                      return dto;
                  }).ToList());
         }
@@ -259,6 +268,19 @@ namespace CAPS.CORPACCOUNTING.Accounts
             var result=await linkAccountList.Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() })
              .ToListAsync();
             return result;
+        }
+
+        /// <summary>
+        /// Get GetRollupAccountsList 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetRollupAccountsList(AutoSearchInput input)
+        {
+            return await (from au in _accountUnitRepository.GetAll()
+                         .Where( p => p.IsRollupAccount ==true && p.ChartOfAccountId==input.Id)
+                         .WhereIf(!string.IsNullOrEmpty(input.Query),p=>p.Caption.Contains(input.Query))
+                         .WhereIf(! ReferenceEquals(OrgnizationId, null), p => p.OrganizationUnitId == OrgnizationId)
+                          select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
         }
 
     }

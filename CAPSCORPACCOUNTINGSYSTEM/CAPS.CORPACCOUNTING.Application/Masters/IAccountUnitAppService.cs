@@ -77,5 +77,16 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetLinkAccountListByCoaId(AutoSearchInput input);
+
+        /// <summary>
+        /// Get RollupAccountsList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetRollupAccountsList(AutoSearchInput input);
+        /// <summary>
+        /// Get TypeofCurrencyRate
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetTypeOfCurrencyRateList();
     }
 }

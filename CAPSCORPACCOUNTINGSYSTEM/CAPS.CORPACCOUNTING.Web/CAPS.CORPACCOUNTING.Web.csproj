@@ -1844,6 +1844,8 @@
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\accounts\ProjectsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\accounts\RollupAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
@@ -1853,6 +1855,8 @@
     <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\ChartOfAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\loginAttempts\LoginAttemptStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectCoaStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\LinesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingGlobals.js" />
@@ -1964,6 +1968,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\settings\SettingsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ContractsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ContractsViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\LineNumbersForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\LineNumbersFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\LineNumbersGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\LineNumbersGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsView.js" />

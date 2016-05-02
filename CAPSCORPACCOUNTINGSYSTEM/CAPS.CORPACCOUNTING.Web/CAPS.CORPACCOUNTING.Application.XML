@@ -2785,13 +2785,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetDivisionUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-             <summary>
-            Get the list of all Divisions(Jobs) and also provided with Sorting,Paging and Searching functionality.
-             </summary>
-             <param name="input"></param>
-             <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get DivisionsList

@@ -65,7 +65,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Create)]
+        [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Create)]
         public async Task<JobUnitDto> CreateJobUnit(CreateJobUnitInput input)
         {
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
@@ -101,7 +101,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Edit)]
+        [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Edit)]
         public async Task<JobUnitDto> UpdateJobUnit(UpdateJobUnitInput input)
         {
             var jobUnit = await _jobUnitRepository.GetAsync(input.JobId);            
@@ -144,7 +144,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Delete)]
+        [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Delete)]
         public async Task DeleteJobUnit(IdInput input)
         {
             await _jobCommercialAppService.DeleteJobDetailUnit(input);
@@ -155,6 +155,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects)]
         public async Task<PagedResultOutput<JobUnitDto>> GetJobUnits(SearchInputDto input)
         {
             var query = from job in _jobUnitRepository.GetAll().Include(p => p.JobDetails)
@@ -170,8 +171,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
                 query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.Job.OrganizationUnitId == input.OrganizationUnitId || item.Job.OrganizationUnitId == null);
-
+            query = query.Where(item => item.Job.OrganizationUnitId == input.OrganizationUnitId || item.Job.OrganizationUnitId == null)
+                     .Where(item => item.Job.IsDivision == false);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
@@ -191,34 +192,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 dto.TypeofProjectName = item.Job.TypeofProjectId != null ? item.Job.TypeofProjectId.ToDisplayName() : "";
                 return dto;
             }).ToList());
-        }
-        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions)]
-        public async Task<PagedResultOutput<JobUnitDto>> GetDivisionUnits(SearchInputDto input)
-        {
-            var query = from job in _jobUnitRepository.GetAll()                       
-                        select new { Job = job };
-            if (!ReferenceEquals(input.Filters, null))
-            {
-                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
-                query = Helper.CreateFilters(query, mapSearchFilters);
-            }
-            query = query.Where(item => item.Job.OrganizationUnitId == input.OrganizationUnitId || item.Job.OrganizationUnitId == null);
-
-            var resultCount = await query.CountAsync();
-            var results = await query
-                .AsNoTracking()
-                .OrderBy(Helper.GetSort("Job.JobNumber ASC", input.Sorting))
-                .PageBy(input)
-                .ToListAsync();
-
-            return new PagedResultOutput<JobUnitDto>(resultCount, results.Select(item =>
-            {
-                var dto = item.Job.MapTo<JobUnitDto>();
-                dto.JobId = item.Job.Id;               
-                return dto;
-            }).ToList());
-        }
-
+        }       
         public async Task<JobUnitDto> GetJobUnitById(IdInput input)
         {
             JobUnit jobitem = await _jobUnitRepository.GetAsync(input.Id);
@@ -270,7 +244,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
             return divisions;         
         }
-
         public async Task<List<NameValueDto>> GetBudgetSoftwareList()
         {
             return EnumList.GetBudgetSoftwareList();

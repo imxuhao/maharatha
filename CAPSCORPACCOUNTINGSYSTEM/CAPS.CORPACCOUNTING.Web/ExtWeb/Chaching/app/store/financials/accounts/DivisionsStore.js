@@ -8,7 +8,7 @@
             create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
             read: abp.appPath + 'api/services/app/jobUnit/GetDivisionUnits',
             update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
-            destroy: abp.appPath + 'api/services/app/divisionUnit/GetDivisionUnits'            
+            destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
         }
     },
     idPropertyField: 'jobId'//important to set for add/update of records

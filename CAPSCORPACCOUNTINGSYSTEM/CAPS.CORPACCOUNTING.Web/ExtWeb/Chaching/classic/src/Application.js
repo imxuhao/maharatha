@@ -38,7 +38,10 @@ Ext.define('Chaching.Application', {
         'languages.LanguagesDataStore',
         'projects.projectmaintenance.LinesStore',
         'financials.accounts.RollupAccountStore',
-        'payables.vendors.VendorsStore'
+        'payables.vendors.VendorsStore',
+        'languages.LanguagesDataStore',
+        'projects.projectmaintenance.ProjectsStore'
+      
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {
@@ -111,3 +114,7 @@ Ext.define('Chaching.Application', {
         );
     }
 });
+var nullHandler = function (val) {
+    if (val) return val;
+    else return null;
+};

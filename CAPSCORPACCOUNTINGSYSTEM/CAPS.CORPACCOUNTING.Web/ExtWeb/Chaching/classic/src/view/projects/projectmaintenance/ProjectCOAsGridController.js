@@ -33,7 +33,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGridController'
     doAfterCreateAction: function (createMode, formView, isEdit) {        
         if (formView) {
             var field = formView.getForm().findField('isCorporate');
-            field.checked = false;
+            field.setValue(false);
         }
     }
     

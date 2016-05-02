@@ -3,6 +3,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
     alias: 'controller.common-form-chachingformpanel',
     //default buttons action handler
     onSaveClicked: function(btn) {
+        debugger;
         var me = this,
             view = me.getView(),
             parentGrid = view.parentGrid,
@@ -42,6 +43,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
                 });
                 gridStore.update(operation);
             } else if (values && parseInt(values[idPropertyField]) === 0) {
+                record.id = 0;
+                record.set('id', 0);
                 operation = Ext.data.Operation({
                     params: record.data,
                     parentGrid: parentGrid,

@@ -1,10 +1,11 @@
 Ext.define('Chaching.view.projects.ProjectsTabPanelController', {
     extend: 'Chaching.view.common.tab.ChachingTabPanelController',
     alias: 'controller.projects-projectstabpanel',
-    onSubMenuItemTabChange: function (tabPanel, newCard, oldCard, eOpts) {      
-        if (newCard && typeof (newCard.getStore) === "function") {
+    onSubMenuItemTabChange: function (tabPanel, newCard, oldCard, eOpts) {
+      
+        if (newCard && typeof (newCard.getStore) === "function" && !newCard.isStoreLoaded) {
             var store = newCard.getStore();
-            if (newCard.config.xtype == "projects.projectmaintenance.projectcoas") {
+            if (newCard.config.xtype === "projects.projectmaintenance.projectcoas") {
                 var filters = [];
                 var filter = new Ext.util.Filter({
                     entity: 'Coa',
@@ -17,6 +18,8 @@ Ext.define('Chaching.view.projects.ProjectsTabPanelController', {
                 filters.push(filter);             
                 store.filter(filters);
             }
+            newCard.isStoreLoaded = true;
+            oldCard.isStoreLoaded = true;
             store.load();
         }
     }

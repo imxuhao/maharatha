@@ -1841,12 +1841,12 @@
     <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\ProjectModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RoleEditModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolePermissionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />
-    <Content Include="ExtWeb\Chaching\app\store\financials\accounts\ProjectsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\RollupAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
@@ -1860,6 +1860,7 @@
     <Content Include="ExtWeb\Chaching\app\store\profile\loginAttempts\LoginAttemptStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectCoaStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\LinesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingGlobals.js" />
@@ -1979,6 +1980,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\LineNumbersGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanel.js" />

@@ -287,6 +287,45 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }
         },
+        projectStatusList: {
+            fields: [{ name: 'name' }, { name: 'value' }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/jobUnit/GetProjectStatusList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        },
+        genericRollupAccountList: {
+            fields: [{ name: 'name' }, { name: 'value' }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/jobUnit/GetGenericRollupAccountsList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        },
+        getProjectTypeList: {
+            fields: [{ name: 'name' }, { name: 'value' }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/jobUnit/GetProjectTypeList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        },
     }
 
 });

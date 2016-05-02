@@ -388,6 +388,18 @@
         "modelNamespace": "Chaching.model",
         "name": "languages.LanguageMainModel"
       }
+    },
+    "app/model/projects/projectmaintenance/ProjectModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "projects/projectmaintenance/ProjectModel",
+        "modelNamespace": "Chaching.model",
+        "name": "projects.projectmaintenance.ProjectModel"
+      }
     }
   }
 }

@@ -6,7 +6,7 @@
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
             create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
-            read: abp.appPath + 'api/services/app/jobUnit/GetDivisionUnits',
+            read: abp.appPath + 'api/services/app/divisionUnit/GetDivisionUnits',
             update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
             destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
         }

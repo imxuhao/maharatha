@@ -64,7 +64,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
 
         //TODO start edit by checking row allowEdit property
         if (widgetRec && grid) {
-            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig);
+            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, widgetRec);
 
             var modelField = gridStore.getModel().getFields();
             if (modelField) {
@@ -261,8 +261,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     },
     //Do module specific tasks 
     doBeforeCreateAction: function (createNewMode) { },
-    doAfterCreateAction: function (createNewMode, form) { },
-    createNewRecord: function (type, createMode, isEdit, titleConfig) {
+    doAfterCreateAction: function (createNewMode, form,isEdit) { },
+    createNewRecord: function (type, createMode, isEdit, titleConfig,record) {
         var me = this,
             view = me.getView(),
             formView,
@@ -298,7 +298,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             }
         }
         me.setParentControl(formView, createMode);
-        me.doAfterCreateAction(createMode, formView, isEdit);
+        me.doAfterCreateAction(createMode, formView, isEdit, record);
         return formView;
 
     },

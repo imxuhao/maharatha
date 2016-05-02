@@ -70,5 +70,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// IsDivision is false then the job is Project
         /// </summary>
         public bool IsDivision { get; set; }
+
+
+        public UpdateJobCommercialnput JobDetails { get; set; }
     }
 }

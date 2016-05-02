@@ -85,5 +85,17 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         Task<List<NameValueDto>> GetRollupAccountList(AutoSearchInput input);
 
+        /// <summary>
+        /// Get AllFinancialRollupAccountList 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetGenericRollupAccountsList(AutoSearchInput input);
+        /// <summary>
+        /// Get ProjectTypeList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetProjectTypeList();
+
     }
 }

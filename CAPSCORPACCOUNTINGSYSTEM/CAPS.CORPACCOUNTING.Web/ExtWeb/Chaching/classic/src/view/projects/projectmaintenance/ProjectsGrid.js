@@ -14,7 +14,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
         destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete'),
     },
     padding: 5,
-    gridId:10,
+    gridId:16,
     store:'projects.projectmaintenance.ProjectsStore',
     headerButtonsConfig: [
       {

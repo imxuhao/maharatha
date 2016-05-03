@@ -74,8 +74,7 @@ Ext.define('Chaching.model.Jobcasting.JobCommercialsModel', {
             { name: 'isFringeAccountSeparate', type: 'boolean'},
             { name: 'isOTon', type: 'boolean'},
             { name: 'agencyEmail', type: 'string'},
-            { name: 'organizationUnitId', type: 'int', defaultValue: null, convert: nullHandler },
-            { name: 'isWrapUpInsurance', type: 'boolean'}
+            { name: 'organizationUnitId', type: 'int', defaultValue: null, convert: nullHandler }
     ]
 });
 

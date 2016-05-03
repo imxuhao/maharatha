@@ -41,7 +41,7 @@ Ext.define('Chaching.view.manageView.ManageViewView',{
         });
         filters.push(filter);
         gridStore.clearFilter();
-        gridStore.filters.add(filters);
+        gridStore.filter(filters);
         form.getStore().load({
             callback: function(records, operation, success) {
                 var activeUserViewId = me.parentGrid.activeUserViewId;

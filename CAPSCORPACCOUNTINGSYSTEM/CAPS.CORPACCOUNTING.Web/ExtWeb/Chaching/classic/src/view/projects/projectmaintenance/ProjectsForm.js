@@ -3,7 +3,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['widget.projects.projectmaintenance.projects.create', 'widget.projects.projectmaintenance.projects.edit'],
     requires: [
-        'Chaching.view.projects.projectmaintenance.ProjectsFormController'
+        'Chaching.view.projects.projectmaintenance.ProjectsFormController',
+        'Chaching.view.projects.projectmaintenance.ProjectLocations'
     ],
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
@@ -82,13 +83,14 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                     name: 'chartOfAccountId',
                     itemId: 'chartOfAccountId',
                     queryMode: 'local',
-                    store: 'financials.accounts.ChartOfAccountStore',
+                    store: 'projects.projectmaintenance.ProjectCoaStore',
                     valueField: 'coaId',
                     displayField: 'caption',
                     width: '100%',
                     ui: 'fieldLabelTop',
-                    fieldLabel: app.localize('BudgetFormat'),
-                    emptyText: app.localize('SelectOption')
+                    allowBlank:false,
+                    fieldLabel: app.localize('BudgetFormat') + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                    emptyText: app.localize('MandatoryField')
                 }, {
                     xtype: 'combobox',
                     name: 'rollupAccountId',
@@ -194,11 +196,15 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'datefield',
                             name: 'bidDate',
                             itemId: 'bidDate',
+                            format:Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                            emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                             fieldLabel: app.localize('BidDate')
                         }, {
                             xtype: 'datefield',
                             name: 'awardDate',
                             itemId: 'awardDate',
+                            format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                            emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                             fieldLabel: app.localize('AwardDate')
                         }]
                     }, {
@@ -294,6 +300,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'datefield',
                             name: 'contractDate',
                             itemId: 'contractDate',
+                            format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                            emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                             fieldLabel: app.localize('ContractExecDate')
                         }, {
                             xtype: 'checkbox',
@@ -305,10 +313,223 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             boxLabelCls: 'checkboxLabel',
                             boxLabel: app.localize('WrapUpInsurance')
                         }]
+                    }, {
+                        columnWidth: .5,
+                        padding: '0 10 0 20',
+                        defaults: {
+                            width: '100%',
+                            ui: 'fieldLabelTop',
+                            
+                            labelAlign: 'top'
+                        },
+                        items:[
+                        {
+                            xtype: 'numberfield',
+                            minValue: 0,
+                            maxValue: 100,
+                            hideTrigger:true,
+                            fieldLabel: app.localize('InvoiceSchedule1'),
+                            emptyText: app.localize('ToolTipInvoiceSchedule1')
+                        }, {
+                            xtype: 'numberfield',
+                            minValue: 0,
+                            maxValue: 100,
+                            hideTrigger: true,
+                            fieldLabel: app.localize('InvoiceSchedule2'),
+                            emptyText: app.localize('ToolTipInvoiceSchedule2')
+                        }, {
+                            xtype: 'numberfield',
+                            minValue: 0,
+                            maxValue: 100,
+                            hideTrigger: true,
+                            fieldLabel: app.localize('InvoiceSchedule3'),
+                            emptyText: app.localize('ToolTipInvoiceSchedule3')
+                        }, {///TODO: Rplace with combo once terms section is completed on contracts tab
+                            xtype: 'textfield',
+                            name: 'termId',
+                            itemId: 'termId',
+                            fieldLabel: app.localize('Terms'),
+                            emptyText: app.localize('SelectOption')
+                        }, {
+                            xtype: 'textfield',
+                            name: 'comments',
+                            itemId: 'comments',
+                            fieldLabel: app.localize('Comments'),
+                            emptyText: app.localize('ToolTipComments')
+                        }, {
+                            xtype: 'textfield',
+                            name: 'amount',
+                            itemId: 'amount',
+                            fieldLabel: app.localize('Amount'),
+                            emptyText: app.localize('ToolTipAmount')
+                        }, {
+                            xtype: 'checkbox',
+                            name: 'isCostPlus',
+                            itemId: 'isCostPlus',
+                            labelAlign: 'right',
+                            inputValue: true,
+                            ui: 'default',
+                            boxLabelCls: 'checkboxLabel',
+                            boxLabel: app.localize('IsCostPlus')
+                        }, {
+                            xtype: 'button',
+                            scale: 'small',
+                            itemId: 'createInvoices',
+                            text: app.localize('GenerateInvoices'),
+                            ui: 'actionButton',
+                            iconCls: 'fa fa-plus-circle',
+                            width:200,
+                            disabled:true
+                        }
+                        ////TODO :  uncomment if required to attach the file
+                        //, {
+                        //    xtype: 'filebutton',
+                        //    scale: 'small',
+                        //    itemId: 'AttachContract',
+                        //    text: app.localize('AttachContract'),
+                        //    ui: 'actionButton',
+                        //    iconCls: 'fa fa-plus-circle',
+                        //    width: 150
+                        //}
+                        //, {
+                        //        xtype: 'filefield',
+                        //        name: 'attachContract',
+                        //        itemId: 'attachContract',
+                        //        fieldLabel: app.localize('AttachContract'),
+                        //        emptyText: app.localize('ToolTopAttachContract'),
+                        //        buttonText: app.localize('Attach'),
+                        //        ui: 'fieldLabelTopType2'
+                        //    }
+                        ]
+                    }]
+                    
+                }, {
+                    xtype: 'fieldset',
+                    title: app.localize('ShootInfo'),
+                    ui: 'transparentFieldSet',
+                    layout: 'column',
+                    items:[
+                    {
+                        columnWidth: .5,
+                        padding: '0 10 0 20',
+                        defaults: {
+                            width: '100%',
+                            ui: 'fieldLabelTop',
+                            labelAlign: 'top'
+                        },
+                        items:[
+                        {//TODO: Convert to combo when director service is ready
+                            xtype: 'textfield',
+                            name: 'directorEmployeeId',
+                            itemId: 'directorEmployeeId',
+                            fieldLabel: app.localize('Director'),
+                            emptyText:app.localize('SelectOption')
+                        }, {//TODO: Convert to combo when executive producer service is ready
+                            xtype: 'textfield',
+                            name: 'executiveProducerId',
+                            itemId: 'executiveProducerId',
+                            fieldLabel: app.localize('ExeProducer'),
+                            emptyText: app.localize('SelectOption')
+                        }, {//TODO: Convert to combo when director service is ready
+                            xtype: 'textfield',
+                            name: 'dirOfPhotoEmployeeId',
+                            itemId: 'dirOfPhotoEmployeeId',
+                            fieldLabel: app.localize('DirOfPhotography'),
+                            emptyText: app.localize('SelectOption')
+                        },{///TODO: to be added
+                            xtype: 'datefield',
+                            name: 'deliveryDate',
+                            itemId: 'deliveryDate',
+                            format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                            emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
+                            fieldLabel: app.localize('DeliveryDate')
+                        }, {//TODO: Convert to combo when delivery format is finalize and service is ready. This field needs to be added in dto
+                            xtype: 'textfield',
+                            name: 'deliveryFormat',
+                            itemId: 'deliveryFormat',
+                            fieldLabel: app.localize('DeliveryFormat'),
+                            emptyText: app.localize('SelectOption')
+                        }, {
+                            xtype: 'numberfield',
+                            name: 'commercialNumber',
+                            itemId: 'commercialNumber',
+                            minValue: 0,
+                            maxValue:100,
+                            fieldLabel: app.localize('CommercialNumber'),
+                            emptyText:app.localize('ToolTipCommercialNumber'),
+                            hideTrigger:true
+                        }, {
+                            xtype: 'numberfield',
+                            name: 'commercialLength',
+                            itemId: 'commercialLength',
+                            minValue: 0,
+                            maxValue: 100,
+                            fieldLabel: app.localize('CommercialLength'),
+                            emptyText: app.localize('ToolTipCommercialLength'),
+                            hideTrigger: true
+                        }]
+                    }, {
+                        columnWidth: .5,
+                        padding: '0 10 0 20',
+                        defaults: {
+                            width: '100%',
+                            ui: 'fieldLabelTop',
+
+                            labelAlign: 'top'
+                        },
+                        items:[
+                       {
+                           xtype: 'textfield',
+                           name: 'commercialTitle1',
+                           itemId: 'commercialTitle1',
+                           fieldLabel: app.localize('CommercialTitle1'),
+                           emptyText: app.localize('ToolTipCommercialTitle1')
+                       }, {
+                           xtype: 'textfield',
+                           name: 'commercialTitle2',
+                           itemId: 'commercialTitle2',
+                           fieldLabel: app.localize('CommercialTitle2'),
+                           emptyText: app.localize('ToolTipCommercialTitle2')
+                       }, {
+                           xtype: 'textfield',
+                           name: 'commercialTitle3',
+                           itemId: 'commercialTitle3',
+                           fieldLabel: app.localize('CommercialTitle3'),
+                           emptyText: app.localize('ToolTipCommercialTitle3')
+                       }, {
+                           xtype: 'textfield',
+                           name: 'commercialTitle4',
+                           itemId: 'commercialTitle4',
+                           fieldLabel: app.localize('CommercialTitle4'),
+                           emptyText: app.localize('ToolTipCommercialTitle4')
+                       }, {
+                           xtype: 'textfield',
+                           name: 'commercialTitle5',
+                           itemId: 'commercialTitle5',
+                           fieldLabel: app.localize('CommercialTitle5'),
+                           emptyText: app.localize('ToolTipCommercialTitle5')
+                       }, {
+                           xtype: 'textfield',
+                           name: 'commercialTitle6',
+                           itemId: 'commercialTitle6',
+                           fieldLabel: app.localize('CommercialTitle6'),
+                           emptyText: app.localize('ToolTipCommercialTitle6')
+                       }]
+                    }, {
+                        columnWidth: 1,
+                        padding: '0 10 0 20',
+                        defaults: {
+                            width: '100%',
+                            ui: 'dragDropPanel'
+                        },
+                        items:[
+                        {
+                            xtype: 'widget.projects.projectmaintenance.projectLocations'
+                        }]
                     }]
                     
                 }]
-            },//end of project details card
+            },//end of project details card  
             {///// Start of cost manager card
                 title: app.localize('CostManager'),
                 iconCls: 'fa fa-bar-chart'

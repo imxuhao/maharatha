@@ -49,6 +49,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             var editingPlugin = grid.getPlugin('editingPlugin');
             if (editingPlugin) {
                 widgetRec.set('passEdit', true);
+                if (grid.editingMode==="cell") {
+                    editingPlugin.startEdit(widgetRec, 1);
+                    return;
+                }
                 editingPlugin.startEdit(widgetRec);
             }
         }
@@ -236,6 +240,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                         passDelete: true
                     });
                     gridStore.insert(0, modelInstance);
+                    if (view.editingMode === "cell") {
+                        editingPlugin.startEdit(gridStore.getAt(0), 1);
+                        break;
+                    }
                     editingPlugin.startEdit(gridStore.getAt(0));
                     break;
                 case "popup":

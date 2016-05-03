@@ -95,7 +95,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.Account.ChartOfAccountId == input.CoaId && (item.Account.OrganizationUnitId == input.OrganizationUnitId || item.Account.OrganizationUnitId == null));
+            query = query.Where(item => item.Account.ChartOfAccountId == input.CoaId);
 
 
             var resultCount = await query.CountAsync();

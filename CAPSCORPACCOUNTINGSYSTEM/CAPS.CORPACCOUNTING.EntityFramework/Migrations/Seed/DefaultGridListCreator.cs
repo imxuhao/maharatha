@@ -30,6 +30,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 new GridListUnit(gridid:13,name:"ProjectCoas",description:"Project Coas Information Showing in Grid",isactive:true),
                 new GridListUnit(gridid:14,name:"LineNumbers",description:"Line Numbers Information Showing in Grid",isactive:true),
                  new GridListUnit(gridid:15,name:"Vendors",description:"Vendors Information Showing in Grid",isactive:true),
+                 new GridListUnit(gridid:16,name:"Projects",description:"Projects or job information Showing in Grid",isactive:true),
             };
         }
 

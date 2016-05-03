@@ -586,5 +586,42 @@
     <text name="AgencyTelephone" value="Agency phone" />
     <text name="ToolTipAgencyTelephone" value="Enter agency telephone#" />
     <text name="ToolTipAgencyJobNumber" value="Enter agency job#" />
+  <text name="InvoiceSchedule1" value="Invoice schedule % 1" />
+  <text name="InvoiceSchedule2" value="Invoice schedule % 2" />
+<text name="InvoiceSchedule3" value="Invoice schedule % 3" />
+<text name="ToolTipInvoiceSchedule1" value="Enter first installment percentage" />
+<text name="ToolTipInvoiceSchedule2" value="Enter second installment percentage" />
+<text name="ToolTipInvoiceSchedule3" value="Enter third installment percentage" />
+<text name="Terms" value="Terms" />
+<text name="Comments" value="Comments" />
+<text name="ToolTipComments" value="Enter comments for AR transaction" />
+<text name="Amount" value="Amount" />
+  <text name="ToolTipAmount" value="Enter amount" />
+<text name="IsCostPlus" value="Is cost plus" />
+<text name="GenerateInvoices" value="Generate invoices" />
+  <text name="ShootInfo" value="Shooting info" />
+<text name="ExeProducer" value="Executive producer" />
+<text name="DirOfPhotography" value="Director of photography" />
+<text name="DeliveryDate" value="Delivery date" />
+<text name="DeliveryFormat" value="Delivery format" />
+<text name="CommercialNumber" value="Commercial number" />
+<text name="ToolTipCommercialNumber" value="Enter commercial number" />
+<text name="CommercialLength" value="Commercial length" />
+<text name="ToolTipCommercialLength" value="Enter commercial length" />
+<text name="CommercialTitle1" value="Commercial title 1" />
+<text name="ToolTipCommercialTitle1" value="Enter commercial title 1" />
+<text name="CommercialTitle2" value="Commercial title 2" />
+<text name="ToolTipCommercialTitle2" value="Enter commercial title 2" />
+<text name="CommercialTitle3" value="Commercial title 3" />
+<text name="ToolTipCommercialTitle3" value="Enter commercial title 3" />
+<text name="CommercialTitle4" value="Commercial title 4" />
+<text name="ToolTipCommercialTitle4" value="Enter commercial title 4" />
+<text name="CommercialTitle5" value="Commercial title 5" />
+<text name="ToolTipCommercialTitle5" value="Enter commercial title 5" />
+<text name="CommercialTitle6" value="Commercial title 6" />
+<text name="ToolTipCommercialTitle6" value="Enter commercial title 6" />
+<text name="JobLocations" value="Job locations" />
+<text name="Location" value="Location" />
+<text name="LocationDate" value="Location date" />
   </texts>
 </localizationDictionary>

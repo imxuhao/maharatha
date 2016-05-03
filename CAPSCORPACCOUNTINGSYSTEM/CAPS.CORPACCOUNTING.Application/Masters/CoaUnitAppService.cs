@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSessionSession;
-        long? OrganizationId = null;
+        long OrganizationId;
         public CoaUnitAppService(CoaUnitManager coaunitManager, IRepository<CoaUnit> coaUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, CustomAppSession customAppSessionSession)
         {
@@ -35,8 +35,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             _coaUnitRepository = coaUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _customAppSessionSession = customAppSessionSession;
-            if (!ReferenceEquals(_customAppSessionSession.OrganizationId, null))
-                OrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
+            OrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
         }
 
         public IEventBus EventBus { get; set; }
@@ -54,7 +53,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         on coa.LinkChartOfAccountID equals linkcoa.Id
                         into tempCoa
                         from coaunit in tempCoa.DefaultIfEmpty()
-                        select new { Coa = coa, LinkChartOfAccountName=coaunit.Caption };
+                        select new { Coa = coa, LinkChartOfAccountName = coaunit.Caption };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -91,7 +90,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
         {
             var coaUnit = input.MapTo<CoaUnit>();
-            coaUnit.OrganizationUnitId = OrganizationId;           
+            coaUnit.OrganizationUnitId = OrganizationId;
             await _coaunitManager.CreateAsync(coaUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -195,7 +194,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// Get StandardGroupTotals as List
         /// </summary>
         /// <returns></returns>
-        public  List<NameValueDto> StandardGroupTotalList()
+        public List<NameValueDto> StandardGroupTotalList()
         {
             return EnumList.GetStandardGroupTotalList();
         }

@@ -38,7 +38,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
-    isEditable: true,
+    isEditable: false,
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,

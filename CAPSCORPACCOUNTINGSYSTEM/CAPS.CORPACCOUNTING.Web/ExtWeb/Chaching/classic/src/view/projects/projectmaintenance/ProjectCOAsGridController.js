@@ -31,10 +31,15 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGridController'
         }
     },
     doAfterCreateAction: function (createMode, formView, isEdit) {        
-        if (formView) {
-            var field = formView.getForm().findField('isCorporate');
-            field.setValue(false);
+        var viewModel = formView.getViewModel();
+        var form = formView.getForm();
+        if (isEdit) {      
+            var rollupDivision = viewModel.getStore('rollupDivisionList');
+            rollupDivision.load();
+            var rollupAccount = viewModel.getStore('genericRollupAccountList');
+            rollupAccount.load();
         }
+        
     }
     
 });

@@ -1197,7 +1197,7 @@
             To Delete the Division
             </summary>
             <param name="input"></param>
-            <returns></returns>
+            <returns></returns>g
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.ProjectCoaUnitAppService.GetProjectCoaList(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
@@ -2817,6 +2817,19 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetGenericRollupAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get AllFinancialRollupAccountList 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetProjectTypeList">
+            <summary>
+            Get ProjectTypeList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService.CreateJobDetailUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput)">
             <summary>
             Creating JobDetails
@@ -2911,6 +2924,30 @@
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get DivisionsList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetBudgetSoftwareList">
+            <summary>
+             Get BudgetSoftwareList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetProjectStatusList">
+            <summary>
+            Get ProjectStatusList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetProjectTypeList">
+            <summary>
+            Get ProjectTypeList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetGenericRollupAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get AllFinancialRollupAccountList 
             </summary>
             <returns></returns>
         </member>
@@ -4395,6 +4432,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.StandardGroupTotal">
             <summary>Gets or sets the StandardGroupTotal field. </summary>      
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.RollupAccountId">
+            <summary>Gets or sets the RollupAccountId field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CoaUnitDto.RollupDivisionId">
+            <summary>Gets or sets the RollupDivisionId field. </summary>      
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.SalesRepUnitDto.SalesRepId">
             <summary>>Gets or sets the SalesRepId field. </summary>
         </member>
@@ -4779,6 +4822,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.StandardGroupTotalId">
             <summary>Gets or sets the StandardGroupTotalId field. </summary>      
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.RollupAccountId">
+            <summary>Gets or sets the RollupAccountId field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.RollupDivisionId">
+            <summary>Gets or sets the RollupDivisionId field. </summary>      
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.Caption">
             <summary>Gets or sets the Caption field. </summary>
         </member>
@@ -4811,6 +4860,12 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.StandardGroupTotalId">
             <summary>Gets or sets the StandardGroupTotalId field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.RollupAccountId">
+            <summary>Gets or sets the RollupAccountId field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.RollupDivisionId">
+            <summary>Gets or sets the RollupDivisionId field. </summary>      
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorPaymentTermUnitInput.VendorPaymentTermId">
             <summary>Gets or sets the VenorPaymentTermId field.</summary>

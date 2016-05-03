@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {  
@@ -30,7 +31,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// ChartOfAccount  is the table name in lajit
     /// </summary>
     [Table("CAPS_ChartOfAccount")]
-    public class CoaUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class CoaUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
     {
         /// <summary>
         ///     Maximum length of the <see cref="Caption" /> property.
@@ -52,9 +53,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         ///     Initializes a new instance of the <see cref="CoaUnit" /> class.
         /// </summary>
-        public CoaUnit(string caption,
-            string desc = null, int? displaysequence = null,long? organizationid=null, bool isactive = true, bool isapproved = false,
-            bool isprivate = false)
+        public CoaUnit(string caption, long organizationid,string desc = null,
+            int? displaysequence = null, bool isactive = true, 
+            bool isapproved = false,bool isprivate = false)
         {
             Caption = caption;           
             DisplaySequence = displaysequence;
@@ -98,7 +99,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual  int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual  long? OrganizationUnitId { get; set; }
+        public virtual  long OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
         public virtual  bool IsActive { get; set; }
@@ -111,6 +112,17 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the LinkChartOfAccountID field. </summary>
         public virtual  int? LinkChartOfAccountID { get; set; }
+
+        /// <summary>Gets or sets the RollupAccountId field. </summary>
+        public virtual long? RollupAccountId { get; set; }
+
+       
+
+        /// <summary>Gets or sets the RollupDivisionId field. </summary>
+        public virtual int? RollupDivisionId { get; set; }
+
+      
+
 
         /// <summary>Gets or sets the StandardGroupTotalId field. </summary>      
         public virtual  StandardGroupTotal? StandardGroupTotalId { get; set; }

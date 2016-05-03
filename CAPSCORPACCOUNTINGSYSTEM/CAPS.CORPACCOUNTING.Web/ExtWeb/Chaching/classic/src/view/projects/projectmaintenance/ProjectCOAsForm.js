@@ -1,27 +1,22 @@
 
-Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
+Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
     extend: 'Chaching.view.common.form.ChachingFormPanel',
-    alias: ['widget.financials.accounts.coa.create', 'widget.financials.accounts.coa.edit'],
+    alias:['widget.projects.projectmaintenance.projectcoas.create', 'widget.projects.projectmaintenance.projectcoas.edit'],
     requires: [
-        'Chaching.view.financials.accounts.ChartOfAccountsFormController'
+        'Chaching.view.projects.projectmaintenance.ProjectCOAsFormController'        
     ],
-
-    controller: 'financials-accounts-chartofaccountsform',
-    //viewModel: {
-    //    type: 'financials-accounts-chartofaccountsform'
-    //},
-    name: 'coa',
+    controller: 'projects-projectmaintenance-projectcoasform',
+    name: 'projectcoa',
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: 'column',
     autoScroll: true,
     border: false,
     showFormTitle: true,
-    displayDefaultButtonsCenter:true,
-    titleConfig: { 
-        title: abp.localization.localize("CreatingNewCOA").initCap()
+    displayDefaultButtonsCenter: true,
+    titleConfig: {
+        title: abp.localization.localize("CreatingNewProjectCOA").initCap()
     },
-    //bodyStyle: { 'background-color': '#F3F5F9' },   
     items: [{
         xtype: 'hiddenfield',
         name: 'coaId',
@@ -39,7 +34,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'caption',
             itemId: 'caption',
             allowBlank: false,
-            fieldLabel: app.localize('Caption').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('Caption').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')
@@ -48,7 +43,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'description',
             itemId: 'description',
             allowBlank: false,
-            fieldLabel: app.localize('description').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('description').initCap() ,
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')
@@ -81,27 +76,27 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
         },
         items: [{
             xtype: 'combobox',
-            name: 'standardGroupTotalId',
-            fieldLabel: app.localize('StdGroupTotal').initCap(),
+            name: 'rollupDivisionId',
+            fieldLabel: app.localize('DefaultRollupJob').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('StdGroupTotal'),
-            displayField: 'standardGroupTotal',
-            valueField: 'standardGroupTotalId',
+            emptyText: app.localize('DefaultRollupJob'),
+            displayField: 'rollupDivision',
+            valueField: 'rollupDivisionId',
             bind: {
-                store: '{StandardGroupTotalList}'
+                store: '{rollupDivisionList}'
             }
         }, {
             xtype: 'combobox',
-            name: 'linkChartOfAccountID',
-            fieldLabel: app.localize('ConvertToNewCOA').initCap(),
+            name: 'rollupAccountId',
+            fieldLabel: app.localize('DefaultRollupAccount').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('ConvertToNewCOA'),
-            displayField: 'linkChartOfAccount',
-            valueField: 'linkChartOfAccountID',
+            emptyText: app.localize('DefaultRollupAccount'),
+            displayField: 'name',
+            valueField: 'value',
             bind: {
-                store: '{linkChartOfAccountList}'
+                store: '{genericRollupAccountList}'
             }
         }, {
             xtype: 'checkbox',
@@ -109,8 +104,8 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'isCorporate',
             labelAlign: 'right',
             inputValue: true,
-            checked: true,
-            readOnly:true,
+            checked: false,
+            readOnly: true,
             boxLabelCls: 'checkboxLabel'
         }, {
             xtype: 'checkbox',
@@ -122,4 +117,5 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             boxLabelCls: 'checkboxLabel'
         }]
     }]
+   
 });

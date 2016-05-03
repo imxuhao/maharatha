@@ -2,8 +2,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.common-form-chachingformpanel',
     //default buttons action handler
-    onSaveClicked: function(btn) {
-        debugger;
+    onSaveClicked: function(btn) {        
         var me = this,
             view = me.getView(),
             parentGrid = view.parentGrid,

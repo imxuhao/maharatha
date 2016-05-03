@@ -26,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSessionSession;
-        long? OrganizationId = null;
+        long OrganizationId;
         public ProjectCoaUnitAppService(CoaUnitManager coaunitManager, IRepository<CoaUnit> coaUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, CustomAppSession customAppSessionSession)
         {
@@ -34,8 +34,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _coaUnitRepository = coaUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _customAppSessionSession = customAppSessionSession;
-            if (!ReferenceEquals(_customAppSessionSession.OrganizationId, null))
-                OrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
+            OrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
         }
 
         /// <summary>
@@ -51,8 +50,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         on coa.LinkChartOfAccountID equals linkcoa.Id
                         into tempCoa
                         from coaunit in tempCoa.DefaultIfEmpty()
-                        where coa.IsCorporate==false
-                        select new { Coa = coa, LinkChartOfAccountName=coaunit.Caption };
+                        where coa.IsCorporate == false
+                        select new { Coa = coa, LinkChartOfAccountName = coaunit.Caption };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -60,8 +59,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf( !ReferenceEquals(input.OrganizationUnitId, null) ,item => item.Coa.OrganizationUnitId == input.OrganizationUnitId)
-                .Where(p=>p.Coa.IsCorporate==false);
+            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Coa.OrganizationUnitId == input.OrganizationUnitId)
+                .Where(p => p.Coa.IsCorporate == false);
 
             var resultCount = await query.CountAsync();
             var results = await query

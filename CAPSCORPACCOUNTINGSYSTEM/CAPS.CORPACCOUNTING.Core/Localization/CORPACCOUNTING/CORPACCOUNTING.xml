@@ -458,8 +458,8 @@
     <text name="PaymentHistory" value="Payment History/Voids Grid" />
     <text name="VendorSummary" value="Vendor Summary (Aging)" />
     <text name="Batch" value="Batch" />
-     <text name="UnBatched" value="UnBatched" />
-     <text name="Batched" value="Batched" />
+    <text name="UnBatched" value="UnBatched" />
+    <text name="Batched" value="Batched" />
     <text name="1099T4Codes" value="1099 T.4 Codes" />
     <text name="VendorPaymentTerms" value="Vendor Payment Terms" />
     <text name="1099s" value="1099s" />
@@ -554,35 +554,37 @@
     <text name="EmailSearch" value="Email Search" />
     <text name="1099CodeSearch" value="1099 Code Search" />
     <text name="PaymentTermsSearch" value="Payment Terms Search" />
+    <text name="DefaultRollupJob" value="Default Roll Up Job" />
+    <text name="DefaultRollupAccount" value="Default Roll Up Account" />
     <text name="JobName" value="Job name" />
     <text name="ToolTipJobName" value="Enter job name" />
     <text name="SelectOption" value="--- Select ---" />
-  <text name="Setup" value="Setup" />
-  <text name="ProjectDetails" value="Project details" />
-  <text name="CostManager" value="Cost manager" />
-  <text name="PcAccount" value="PC Accounts" />
-  <text name="PoLog" value="PO Log" />
-  <text name="BudgetFormat" value="Budget format" />
-  <text name="RollupDivision" value="Roll up division" />
-  <text name="RollupAccount" value="Roll up account" />
-  <text name="TaxRecovery" value="Tax recovery" />
-  <text name="BiddingInfo" value="Bidding Info" />
-<text name="BidDate" value="Bid date" />
-<text name="AwardDate" value="Award date" />
-  <text name="Bidder" value="Bidder" />
-<text name="OtBasedOn" value="OtBasedOn" />
-<text name="AgencyInfo" value="Agency Info" />
-<text name="ThirdPartyCustomer" value="3rd party customer" />
-  <text name="AgencyProducer" value="Agency producer" />
-     <text name="ToolTipAgencyProducer" value="Enter agency producer" />
-  <text name="BizManager" value="Business manager" />
+    <text name="Setup" value="Setup" />
+    <text name="ProjectDetails" value="Project details" />
+    <text name="CostManager" value="Cost manager" />
+    <text name="PcAccount" value="PC Accounts" />
+    <text name="PoLog" value="PO Log" />
+    <text name="BudgetFormat" value="Budget format" />
+    <text name="RollupDivision" value="Roll up division" />
+    <text name="RollupAccount" value="Roll up account" />
+    <text name="TaxRecovery" value="Tax recovery" />
+    <text name="BiddingInfo" value="Bidding Info" />
+    <text name="BidDate" value="Bid date" />
+    <text name="AwardDate" value="Award date" />
+    <text name="Bidder" value="Bidder" />
+    <text name="OtBasedOn" value="OtBasedOn" />
+    <text name="AgencyInfo" value="Agency Info" />
+    <text name="ThirdPartyCustomer" value="3rd party customer" />
+    <text name="AgencyProducer" value="Agency producer" />
+    <text name="ToolTipAgencyProducer" value="Enter agency producer" />
+    <text name="BizManager" value="Business manager" />
     <text name="ToolTipBizManager" value="Enter business manager" />
-<text name="AgencyJobNumber" value="Agency job#" />
-  <text name="ContractExecDate" value="Contract execution date" />
-  <text name="ContractTerms" value="Contract Terms" />
-  <text name="ToolTipAgencyAddress" value="Enter agency address" />
-  <text name="AgencyTelephone" value="Agency phone" />
-<text name="ToolTipAgencyTelephone" value="Enter agency telephone#" />
-  <text name="ToolTipAgencyJobNumber" value="Enter agency job#" />
+    <text name="AgencyJobNumber" value="Agency job#" />
+    <text name="ContractExecDate" value="Contract execution date" />
+    <text name="ContractTerms" value="Contract Terms" />
+    <text name="ToolTipAgencyAddress" value="Enter agency address" />
+    <text name="AgencyTelephone" value="Agency phone" />
+    <text name="ToolTipAgencyTelephone" value="Enter agency telephone#" />
+    <text name="ToolTipAgencyJobNumber" value="Enter agency job#" />
   </texts>
 </localizationDictionary>

@@ -1978,6 +1978,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\LineNumbersFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\LineNumbersGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\LineNumbersGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsForm.js" />

@@ -1119,6 +1119,10 @@
     <Compile Include="Migrations\201604291007387_Modify_Job_Account_Table.Designer.cs">
       <DependentUpon>201604291007387_Modify_Job_Account_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605021209541_Modify_ChartofAccount_Teble.cs" />
+    <Compile Include="Migrations\201605021209541_Modify_ChartofAccount_Teble.Designer.cs">
+      <DependentUpon>201605021209541_Modify_ChartofAccount_Teble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -1892,6 +1896,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604291007387_Modify_Job_Account_Table.resx">
       <DependentUpon>201604291007387_Modify_Job_Account_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605021209541_Modify_ChartofAccount_Teble.resx">
+      <DependentUpon>201605021209541_Modify_ChartofAccount_Teble.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

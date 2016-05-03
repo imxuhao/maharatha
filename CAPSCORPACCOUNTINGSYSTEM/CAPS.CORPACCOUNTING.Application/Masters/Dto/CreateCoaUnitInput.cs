@@ -29,7 +29,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool IsPrivate { get; set; } = false;
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long? OrganizationId { get; set; }      
+        public long OrganizationId { get; set; }      
 
         /// <summary>Gets or sets the IsCorporate field. </summary>
         public bool IsCorporate { get; set; }
@@ -42,5 +42,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the StandardGroupTotalId field. </summary>      
         public StandardGroupTotal? StandardGroupTotalId { get; set; }
+
+        /// <summary>Gets or sets the RollupAccountId field. </summary>      
+        public virtual long? RollupAccountId { get; set; }
+
+        /// <summary>Gets or sets the RollupDivisionId field. </summary>      
+        public virtual int? RollupDivisionId { get; set; }
     }
 }

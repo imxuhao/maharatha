@@ -26,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<JobUnit> _jobUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSessionSession;
-        long? OrgnizationId=null;
+        long? OrganizationId=null;
 
         public DivisionUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IUnitOfWorkManager unitOfWorkManager,
             CustomAppSession customAppSessionSession,
@@ -37,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _unitOfWorkManager = unitOfWorkManager;            
             _customAppSessionSession = customAppSessionSession;
             if (!ReferenceEquals(_customAppSessionSession.OrganizationId, null))
-                OrgnizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
+                OrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
 
         }
         /// <summary>
@@ -51,7 +51,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,
-                isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: OrgnizationId, typeofprojectid: input.TypeofProjectId,
+                isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid: OrganizationId, typeofprojectid: input.TypeofProjectId,
                 taxrecoveryid: input.TaxRecoveryId, chartofaccountid: input.ChartOfAccountId, rollupcenterid: input.RollupCenterId,isdivision:true);
             await _jobUnitManager.CreateAsync(jobUnit);
             await CurrentUnitOfWork.SaveChangesAsync();            
@@ -73,7 +73,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobUnit.Caption = input.Caption;            
             jobUnit.TypeOfCurrencyId = input.TypeOfCurrencyId;           
             jobUnit.IsActive = input.IsActive;          
-            jobUnit.OrganizationUnitId = OrgnizationId;
+            jobUnit.OrganizationUnitId = OrganizationId;
             jobUnit.IsDivision = true;         
 
             #endregion
@@ -89,7 +89,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// To Delete the Division
         /// </summary>
         /// <param name="input"></param>
-        /// <returns></returns>
+        /// <returns></returns>g
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions_Delete)]
         public async Task DeleteDivisionUnit(IdInput input)
@@ -107,7 +107,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
                 query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.Job.OrganizationUnitId == input.OrganizationUnitId || item.Job.OrganizationUnitId == null)
+            query = query.WhereIf(!ReferenceEquals(OrganizationId, null), item => item.Job.OrganizationUnitId==OrganizationId )
                 .Where(item=>item.Job.IsDivision==true);
                 
 

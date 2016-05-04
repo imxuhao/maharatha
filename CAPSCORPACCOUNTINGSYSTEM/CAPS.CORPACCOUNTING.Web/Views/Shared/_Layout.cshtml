@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@using Abp.Timing
 @using Abp.Web.Mvc.Extensions
 @using CAPS.CORPACCOUNTING.Localization
 <!DOCTYPE html>
@@ -70,7 +71,10 @@
     </script>
 
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
-    <script src="~/AbpScripts/GetScripts" type="text/javascript"></script>
+    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+    <script src="~/api/AbpServiceProxies/GetAll?type=angular&v=@(Clock.Now.Ticks)"></script>
+    <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
+    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
 
     @Scripts.Render("~/Bundles/Frontend/metronic/js")
 

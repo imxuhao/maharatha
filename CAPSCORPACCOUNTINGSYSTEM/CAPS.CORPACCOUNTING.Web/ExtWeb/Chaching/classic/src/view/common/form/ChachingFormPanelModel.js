@@ -122,7 +122,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }
         },
-      
+
 
         typeofConsolidationList: {
             fields: [{ name: 'name' }, { name: 'value' }, {
@@ -216,7 +216,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
             }
         },
         linkAccountListByCoaId: {
-           
+
             fields: [{ name: 'name' }, { name: 'value' }, {
                 name: 'linkAccount', convert: function (value, record) {
                     return record.get('name');
@@ -227,7 +227,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
-            extraParams: {               
+            extraParams: {
                 id: 0
             },
             proxy: {
@@ -261,7 +261,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 },
                 reader: {
                     type: 'json',
-                    rootProperty: 'result'                   
+                    rootProperty: 'result'
                 }
             }
         },
@@ -283,7 +283,49 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 url: abp.appPath + 'api/services/app/jobUnit/GetDivisionList',
                 reader: {
                     type: 'json',
-                    rootProperty: 'result'                    
+                    rootProperty: 'result'
+                }
+            }
+        },
+        vendorTypeList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'typeofvendor', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeofvendorId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/vendorUnit/GetTypeofVendorList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        },
+        typeof1099BoxList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'typeof1099Box', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeof1099BoxId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/vendorUnit/GetTypeof1099T4List',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
                 }
             }
         },
@@ -326,6 +368,27 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }
         },
+        typeofAddressList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'typeofAddress', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeofAddressId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/vendorUnit/GetTypeofAddressList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        }
     }
 
 });

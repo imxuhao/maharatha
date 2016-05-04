@@ -1123,16 +1123,23 @@
     <Compile Include="Migrations\201605021209541_Modify_ChartofAccount_Teble.Designer.cs">
       <DependentUpon>201605021209541_Modify_ChartofAccount_Teble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605030939241_Add_Country_Table.cs" />
+    <Compile Include="Migrations\201605030939241_Add_Country_Table.Designer.cs">
+      <DependentUpon>201605030939241_Add_Country_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
+    <Compile Include="Migrations\Seed\DefaultCountryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultCurrencyCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultGridListCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultLanguagesCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultRegionCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultSettingsCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultTenantRoleAndUserCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeOfAccountClassificationCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeOfAccountCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeOfCountryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeOfCurrencyRateCreator.cs" />
     <Compile Include="Migrations\Seed\EnumGenerator.cs" />
     <Compile Include="Migrations\Seed\InitialDbBuilder.cs" />
@@ -1899,6 +1906,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605021209541_Modify_ChartofAccount_Teble.resx">
       <DependentUpon>201605021209541_Modify_ChartofAccount_Teble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605030939241_Add_Country_Table.resx">
+      <DependentUpon>201605030939241_Add_Country_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

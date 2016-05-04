@@ -7,7 +7,7 @@
         if (val) return 'YES';
         else return 'NO';
     },
-    unlinkedaccount: function (value, cell) {       
+    unlinkedaccount: function (value, cell) {
         var gridController = this.getController(),
             view = gridController.getView();
         var id = Ext.id();
@@ -92,7 +92,7 @@
         else
             return '<i class="fa fa-warning font-yellow-gold"  style="color:#32c5d2"></i>';
     },// hh:mm:ss
-    renderDateOnly:function(value) {
+    renderDateOnly: function (value) {
         if (value) {
             return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateFormat);
         }
@@ -110,7 +110,7 @@
         }
         return '';
     },
-    renderDateTimeWithFromNow:function(value) {
+    renderDateTimeWithFromNow: function (value) {
         if (value) {
             return moment(value).fromNow() + ' (' + moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormat) + ')';
         }
@@ -122,8 +122,8 @@
         else
             return '<i class="fa fa-close font-yellow-gold"  style="color:#E00353"></i>';
     },
-    languagesTextsEditIcon: function (val, meta, record, rowIndex) {        
-            return '<i class="fa fa-edit" ></i>';       
+    languagesTextsEditIcon: function (val, meta, record, rowIndex) {
+        return '<i class="fa fa-edit" ></i>';
     },
     languageIconRenderer: function (val, meta, record, rowIndex) {
         return '<i class="famfamfam-flag ' + record.get('icon') + '" style="display: inline-block;margin-right: 10px; !important" ></i><span>' + val + '</span>';
@@ -159,6 +159,51 @@
             var address = record.getAddress();
             if (address) {
                 return address.get('email');
+            }
+        }
+        return value;
+    },
+    renderFirstAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('line1');
+            }
+        }
+        return value;
+    },
+    renderSecondAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('line2');
+            }
+        }
+        return value;
+    },
+    renderThirdAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('line3');
+            }
+        }
+        return value;
+    },
+    renderFourthAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('line4');
+            }
+        }
+        return value;
+    },
+    renderPhone1: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('Phone1');
             }
         }
         return value;

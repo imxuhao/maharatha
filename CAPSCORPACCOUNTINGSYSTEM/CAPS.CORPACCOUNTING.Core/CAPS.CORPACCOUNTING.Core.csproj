@@ -182,6 +182,7 @@
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="Localization\CustomLanguageTextsUnit.cs" />
     <Compile Include="Localization\CustomLanguageTextsUnitManager.cs" />
+    <Compile Include="Masters\CountryUnit.cs" />
     <Compile Include="Masters\TypeOfCurrencyUnit.cs" />
     <Compile Include="Organization\OrganizationCacheItem.cs" />
     <Compile Include="Organization\OrganizationCacheItemManager.cs" />

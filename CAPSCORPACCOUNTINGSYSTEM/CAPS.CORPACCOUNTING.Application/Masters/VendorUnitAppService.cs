@@ -27,12 +27,17 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IAddressUnitAppService _addressAppService;
         private readonly IRepository<AddressUnit, long> _addresRepository;
         private readonly IRepository<VendorPaymentTermUnit> _vendorPaytermRepository;
+        private readonly IRepository<TypeOfCountryUnit,short> _typeOfCountryRepository;
+        private readonly IRepository<RegionUnit> _regionRepository;
+        private readonly IRepository<CountryUnit> _countryRepository;
 
 
 
         public VendorUnitAppService(VendorUnitManager vendorUnitManager, IRepository<VendorUnit> vendorUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService,
-            IRepository<AddressUnit, long> addresRepository, IRepository<VendorPaymentTermUnit> vendorPaytermRepository)
+            IRepository<AddressUnit, long> addresRepository, IRepository<VendorPaymentTermUnit> vendorPaytermRepository,
+            IRepository<TypeOfCountryUnit, short> typeOfCountryRepository,IRepository<RegionUnit> regionRepository,
+            IRepository<CountryUnit> countryRepository)
         {
             _vendorUnitManager = vendorUnitManager;
             _vendorUnitRepository = vendorUnitRepository;
@@ -40,6 +45,9 @@ namespace CAPS.CORPACCOUNTING.Masters
             _addressAppService = addressAppService;
             _addresRepository = addresRepository;
             _vendorPaytermRepository = vendorPaytermRepository;
+            _typeOfCountryRepository = typeOfCountryRepository;
+            _regionRepository = regionRepository;
+            _countryRepository = countryRepository;
         }
 
         public IEventBus EventBus { get; set; }
@@ -331,6 +339,16 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             return EnumList.GetTypeofObjectList();
         }
+
+        ///// <summary>
+        ///// Get TypeofObject
+        ///// </summary>
+        ///// <returns></returns>
+        //public async List<NameValueDto> GetCountryList()
+        //{
+        //    var typeOfCurrencyRates = await _typeOfCurrencyRateRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+        //    return typeOfCurrencyRates;
+        //}
 
     }
 }

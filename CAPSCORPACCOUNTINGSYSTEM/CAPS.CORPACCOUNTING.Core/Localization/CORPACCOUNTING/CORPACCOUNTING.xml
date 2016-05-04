@@ -538,7 +538,6 @@
     <text name="ProjectType" value="Project type" />
     <text name="ToolTipProjectType" value="Select project type" />
     <text name="ShootDate" value="Shoot date" />
-    <text name="ToolTipShootDate" value="Select shoot date" />
     <text name="WrapUpInsurance" value="Wrap up insurance" />
     <text name="ToolTipStatus" value="Select status" />
     <text name="CreatingNewVendors" value="Creating New Vendors" />
@@ -554,6 +553,30 @@
     <text name="EmailSearch" value="Email Search" />
     <text name="1099CodeSearch" value="1099 Code Search" />
     <text name="PaymentTermsSearch" value="Payment Terms Search" />
+    <text name="TotalOutstanding" value="Total Outstanding" />
+    <text name="Contact" value="Contact" />
+    <text name="Other" value="Other" />
+    <text name="Company/LastName" value="Company/Last Name" />
+    <text name="FirstName" value="First Name" />
+    <text name="PayToName" value="(Pay To) Name" />
+    <text name="Type" value="Type" />
+    <text name="VendorNumber" value="Vendor Number" />
+    <text name="SSN/TaxID" value="SSN/Tax ID" />
+    <text name="FedTaxID" value="Fed Tax ID" />
+    <text name="Corporation" value="Corporation" />
+    <text name="LegalName" value="Legal Name" />
+    <text name="W9OnFile" value="W9 On File" />
+    <text name="CreditLimit" value="Credit Limit" />
+    <text name="Primary" value="Primary" />
+    <text name="City" value="City" />
+    <text name="Area" value="Area" />
+    <text name="Country" value="Country" />
+    <text name="State/Region" value="State/Region" />
+    <text name="PostalCode" value="Postal Code" />
+    <text name="ContactName" value="Contact Name" />
+    <text name="ContactInformation" value="Contact Information" />
+    <text name="Website" value="Website" />
+    <text name="CreatingNewAddress" value="Create new Address" />
     <text name="DefaultRollupJob" value="Default Roll Up Job" />
     <text name="DefaultRollupAccount" value="Default Roll Up Account" />
     <text name="JobName" value="Job name" />
@@ -623,5 +646,9 @@
 <text name="JobLocations" value="Job locations" />
 <text name="Location" value="Location" />
 <text name="LocationDate" value="Location date" />
+    <text name="SecondAddress" value="Second Address" />
+    <text name="ThirdAddress" value="Third Address" />
+    <text name="FourthAddress" value="Fourth Address" />
+    <text name="FirstAddress" value="First Address" />
   </texts>
 </localizationDictionary>

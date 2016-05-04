@@ -15,6 +15,7 @@
         'roles',
         'auditlogs',
         'financials.accounts',
-        'projects.projectmaintenance'
+        'projects.projectmaintenance',
+         'payables.vendors'
     ]
 });

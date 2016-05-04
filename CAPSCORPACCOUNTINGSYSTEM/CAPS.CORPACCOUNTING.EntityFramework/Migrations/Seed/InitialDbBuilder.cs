@@ -25,8 +25,11 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
             new DefaultCurrencyCreator(_context).Create();
             new DefaultTypeOfAccountClassificationCreator(_context).Create();
             new DefaultTypeOfAccountCreator(_context).Create();
-            new DefaultTypeOfCurrencyRateCreator(_context).Create();
+            new DefaultTypeOfCountryCreator(_context).Create();
+            new DefaultRegionCreator(_context).Create();
+            new DefaultCountryCreator(_context).Create();
             _context.SaveChanges();
         }
+        
     }
 }

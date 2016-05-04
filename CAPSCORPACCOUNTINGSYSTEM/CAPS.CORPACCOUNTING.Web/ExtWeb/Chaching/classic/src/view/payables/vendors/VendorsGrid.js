@@ -57,7 +57,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
     columns: [{
         xtype: 'gridcolumn',
         text: app.localize('VendorName'),
-        dataIndex: 'firstName',
+        dataIndex: 'lastName',
         sortable: true,
         groupable: true,
         width: '15%',
@@ -70,23 +70,76 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
        
         xtype: 'gridcolumn',
         text: app.localize('Address'),
-        dataIndex: 'fullAddress',
+        dataIndex: 'line1',
         sortable: true,
         groupable: true,
-        width: '23%',        
+        isAssociationField: true,
+
+        width: '15%',        
         filterField: {
             xtype: 'textfield',
             width: '15%',
             emptyText: app.localize('AddressSearch')
-        }, renderer: Chaching.utilities.ChachingRenderers.renderFullAddress
-    }, {
+        }, renderer: Chaching.utilities.ChachingRenderers.renderFirstAddress
+    }
+    , {
+
         xtype: 'gridcolumn',
-        text: app.localize('Telephone'),
-        dataIndex: 'contactNumber',
+        text: app.localize('SecondAddress'),
+        dataIndex: 'line2',
         sortable: true,
         groupable: true,
+        width: '15%',
+        isAssociationField: true,
+        hidden: true,
+        filterField: {
+            xtype: 'textfield',
+            width: '15%',
+            emptyText: app.localize('AddressSearch')
+        }, renderer: Chaching.utilities.ChachingRenderers.renderSecondAddress
+    }
+    , {
+
+        xtype: 'gridcolumn',
+        text: app.localize('ThirdAddress'),
+        dataIndex: 'line3',
+        sortable: true,
+        groupable: true,
+        width: '15%',
+        hidden: true,
+        isAssociationField: true,
+        filterField: {
+            xtype: 'textfield',
+            width: '15%',
+            emptyText: app.localize('AddressSearch')
+        }, renderer: Chaching.utilities.ChachingRenderers.renderThirdAddress
+    }
+
+    , {
+
+        xtype: 'gridcolumn',
+        text: app.localize('FourthAddress'),
+        dataIndex: 'line4',
+        sortable: true,
+        groupable: true,
+        hidden: true,
+        width: '15%',
+        isAssociationField: true,
+        filterField: {
+            xtype: 'textfield',
+            width: '15%',
+            emptyText: app.localize('AddressSearch')
+        }, renderer: Chaching.utilities.ChachingRenderers.renderFourthAddress
+    }
+    , {
+        xtype: 'gridcolumn',
+        text: app.localize('Telephone'),
+        dataIndex: 'phone1',
+        sortable: true,
+        groupable: true,
+        isAssociationField: true,
         width: '10%',
-        renderer: Chaching.utilities.ChachingRenderers.renderContactNumber,
+        renderer: Chaching.utilities.ChachingRenderers.renderPhone1,
         filterField: {
             xtype: 'textfield',
             width: '15%',
@@ -101,6 +154,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         sortable: true,
         groupable: true,
         width: '15%',
+        isAssociationField: true,
         renderer: Chaching.utilities.ChachingRenderers.renderEmail,
         filterField: {
             xtype: 'textfield',
@@ -114,7 +168,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         dataIndex: 'typeof1099Box',
         sortable: true,
         groupable: true,
-        width: '15%',
+        width: '10%',
         filterField: {
             xtype: 'textfield',
             width: '15%',
@@ -134,6 +188,11 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
             entityName: "",
             emptyText: app.localize('PaymentTermsSearch')
         }
+    }
+    , {
+        xtype: 'gridcolumn',
+        text: app.localize('TotalOutstanding'),
+        width: '13%'
     }
     ]
 });

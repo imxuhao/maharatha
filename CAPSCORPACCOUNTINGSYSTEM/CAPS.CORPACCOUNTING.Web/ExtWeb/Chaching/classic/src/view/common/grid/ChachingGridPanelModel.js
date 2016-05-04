@@ -214,6 +214,27 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                     }
                 }
             },
+                typeofAddressList: {
+        fields: [{ name: 'name' }, { name: 'value' }, {
+            name: 'typeofAddress', convert: function (value, record) {
+                return record.get('name');
+            }
+        }, {
+            name: 'typeofAddressId', convert: function (value, record) {
+                return record.get('value');
+            }
+        }],
+        xtype: 'ajax',
+        proxy: {
+                        actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                        type: 'chachingProxy',
+                        url: abp.appPath + 'api/services/app/vendorUnit/GetTypeofAddressList',
+                        reader: {
+                type: 'json',
+                rootProperty: 'result'
+                        }
+        }
+                }
     }
 
 });

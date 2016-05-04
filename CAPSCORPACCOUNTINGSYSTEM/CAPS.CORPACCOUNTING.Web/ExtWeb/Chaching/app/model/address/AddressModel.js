@@ -25,6 +25,7 @@
         { name: 'phone2Extension', type: "string" },
         { name: 'website', type: "string" },
         { name: 'isPrimary', type: "boolean" }
+      
     ],
     //belongsTo: 'Chaching.model.payables.vendors.VendorsModel'
 });

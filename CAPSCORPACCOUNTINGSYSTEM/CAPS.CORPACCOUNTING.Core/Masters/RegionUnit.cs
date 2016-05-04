@@ -49,6 +49,16 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
 
+        public RegionUnit()
+        { }
 
+        public RegionUnit(string description,string regionAbbreviation,string stateCode)
+        {
+            Description = description;
+            RegionAbbreviation = regionAbbreviation;
+            TypeOfCountryId = null;
+            StateCode = StateCode;
+            TenantId = 1;
+        }
     }
 }

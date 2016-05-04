@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Abp.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.Masters
@@ -8,7 +9,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     ///  TypeOfCountry is the table name in Lajit
     /// </summary>
     [Table("CAPS_TypeOfCountry")]
-    public class TypeOfCountryUnit
+    public class TypeOfCountryUnit:Entity<short>
     {
 
         private const int MaxDescriptionLength = 100;
@@ -48,5 +49,16 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the IsoNumber field. </summary>
         [MaxLength(MaxIsoNumberLength)]
         public virtual string IsoNumber { get; set; }
+
+        public TypeOfCountryUnit()
+        { }
+
+        public TypeOfCountryUnit(string description,string twoLetterAbbreviation,string threeLetterAbbreviation,string isoNumber)
+        {
+            Description = description;
+            TwoLetterAbbreviation = twoLetterAbbreviation;
+            ThreeLetterAbbreviation = threeLetterAbbreviation;
+            IsoNumber = isoNumber;
+        }
     }
 }

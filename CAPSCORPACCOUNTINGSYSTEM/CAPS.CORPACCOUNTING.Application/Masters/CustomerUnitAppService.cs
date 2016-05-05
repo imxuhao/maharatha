@@ -26,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IAddressUnitAppService _addressAppService;
         private readonly IRepository<AddressUnit,long> _addressRepository;
         private readonly IRepository<CustomerPaymentTermUnit> _customerPaymentTermRepository;
-        private readonly IRepository<SalesRepUnit> _salesRepRepository;
+        private readonly IRepository<SalesRepUnit> _salesRepRepository;       
 
         public CustomerUnitAppService(CustomerUnitManager customerUnitManager,
             IRepository<CustomerUnit> customerUnitRepository,
@@ -41,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             _addressAppService = addressAppService;
             _addressRepository = addressRepository;
             _customerPaymentTermRepository = customerPaymentTermRepository;
-            _salesRepRepository = salesRepRepository;
+            _salesRepRepository = salesRepRepository;            
         }       
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<CustomerUnitDto> CreateCustomerUnit(CreateCustomerUnitInput input)
         {         
-            var customerUnit = input.MapTo<CustomerUnit>();
+            var customerUnit = input.MapTo<CustomerUnit>();            
             await _customerUnitManager.CreateAsync(customerUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -158,7 +158,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.Customer.OrganizationUnitId == input.OrganizationUnitId || item.Customer.OrganizationUnitId == null);
+            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Customer.OrganizationUnitId == input.OrganizationUnitId); 
             return query;
         }
 
@@ -241,6 +241,14 @@ namespace CAPS.CORPACCOUNTING.Masters
                 result.Addresses[i].AddressId = addressitems[i].Id;
             }
             return result;
+        }
+
+        public async Task<List<NameValueDto>> GetCustomerList(AutoSearchInput input)
+        {
+            var divisions = await _customerUnitRepository.GetAll()                
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.Contains(input.Query))
+                 .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
+            return divisions;
         }
     }
 }

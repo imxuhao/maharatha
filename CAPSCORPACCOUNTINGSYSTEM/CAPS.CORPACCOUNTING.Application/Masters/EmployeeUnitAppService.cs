@@ -13,6 +13,9 @@ using Abp.Linq.Extensions;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Sessions;
+using System;
+using Abp.Collections.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -23,17 +26,18 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<EmployeeUnit> _employeeUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IAddressUnitAppService _addressAppService;
-        private readonly IRepository<AddressUnit,long> _addressUnitRepository;
+        private readonly IRepository<AddressUnit, long> _addressUnitRepository;       
 
         public EmployeeUnitAppService(EmployeeUnitManager employeeUnitManager,
             IRepository<EmployeeUnit> employeeUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService, IRepository<AddressUnit,long> addressRepository )
+            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService, 
+            IRepository<AddressUnit, long> addressRepository)
         {
             _employeeUnitManager = employeeUnitManager;
             _employeeUnitRepository = employeeUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _addressAppService = addressAppService;
-            _addressUnitRepository = addressRepository;
+            _addressUnitRepository = addressRepository;            
         }
         /// <summary>
         /// Delete the Employee abd EmployeeAddresses
@@ -50,7 +54,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnit(dto);
-        }       
+        }
 
         /// <summary>
         /// Creates the Employee with Addresses
@@ -59,8 +63,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         [UnitOfWork]
         public async Task<EmployeeUnitDto> CreateEmployeeUnit(CreateEmployeeUnitInput input)
-        {           
-            var employeeUnit = input.MapTo<EmployeeUnit>();
+        {
+            var employeeUnit = input.MapTo<EmployeeUnit>();            
             await _employeeUnitManager.CreateAsync(employeeUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -81,7 +85,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             }
             return employeeUnit.MapTo<EmployeeUnitDto>();
         }
-        
+
         /// <summary>
         /// This method is for retrieve the records for showing in the grid with filters and SortOrder
         /// </summary>
@@ -136,7 +140,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(item => item.Employee.OrganizationUnitId == input.OrganizationUnitId || item.Employee.OrganizationUnitId == null);
+            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId,null),item=>item.Employee.OrganizationUnitId==input.OrganizationUnitId);
             return query;
         }
 
@@ -150,7 +154,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<EmployeeUnitDto> UpdateEmployeeUnit(UpdateEmployeeUnitInput input)
         {
             var employeeUnit = await _employeeUnitRepository.GetAsync(input.EmployeeId);
-            
+
             #region Setting the values to be updated
             employeeUnit.LastName = input.LastName;
             employeeUnit.FirstName = input.FirstName;
@@ -218,7 +222,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Emp);
             var result = empItem.MapTo<EmployeeUnitDto>();
             result.EmployeeId = empItem.Id;
-            result.Addresses = new Collection<AddressUnitDto>();            
+            result.Addresses = new Collection<AddressUnitDto>();
             for (int i = 0; i < addressitems.Count; i++)
             {
                 result.Addresses.Add(addressitems[i].MapTo<AddressUnitDto>());
@@ -226,5 +230,21 @@ namespace CAPS.CORPACCOUNTING.Masters
             }
             return result;
         }
+
+        public async Task<List<NameValueDto>> GetEmployeeList(SearchInputDto input)
+        {
+            var query = from emp in _employeeUnitRepository.GetAll()
+                        select emp;
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            var employeeList = await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.OrganizationUnitId == input.OrganizationUnitId)
+                  .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
+            return employeeList;
+        }
+
     }
 }

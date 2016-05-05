@@ -3,6 +3,7 @@ using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -45,5 +46,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<CustomerUnitDto> GetCustomerUnitsById(IdInput input);
+
+        /// <summary>
+        /// Get the CustomersList of Organization
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetCustomerList(AutoSearchInput input);
     }
 }

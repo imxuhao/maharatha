@@ -3,6 +3,7 @@ using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -45,5 +46,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<EmployeeUnitDto> GetEmployeeUnitsById(IdInput input);
+        /// <summary>
+        /// Get Empolyee list based on IsDirector or IsProducer or Is ArtDirector Flags
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetEmployeeList(SearchInputDto input);
     }
 }

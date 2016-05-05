@@ -5,7 +5,7 @@ Ext.define('Chaching.model.projects.projectmaintenance.ProjectModel', {
     },
     fields: [
         { name: 'jobId', type: 'int', isPrimaryKey: true },
-        { name: 'jobNumber', type: 'string'},
+        { name: 'jobNumber', type: 'string' },
         { name: 'caption', type: 'string' },
         { name: 'rollupCenterId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'isCorporateDefault', type: 'boolean' },
@@ -24,6 +24,12 @@ Ext.define('Chaching.model.projects.projectmaintenance.ProjectModel', {
         { name: 'rollupcenterid', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'detailTransactions', type: 'string', defaultValue: 'Transactions' },
         { name: 'typeofProjectName', type: 'string' },
-        { name: 'jobStatusName',type:'string' }
+        { name: 'jobStatusName', type: 'string' },
+        {
+            name: 'jobDetails',
+            reference: {
+                parent: 'Jobcasting.JobCommercialsModel'
+            }
+        }
     ]
 });

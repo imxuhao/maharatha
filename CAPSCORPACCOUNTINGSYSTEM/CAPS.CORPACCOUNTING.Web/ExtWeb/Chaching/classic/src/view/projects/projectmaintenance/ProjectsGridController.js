@@ -27,6 +27,32 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
 
             var projectTypeStore = viewModel.getStore('getProjectTypeList');
             projectTypeStore.load();
+
+            if (isEdit) {
+                //enable all tabs
+                var projectDetails = formPanel.down('*[itemId=ProjectDetailsTab]');
+                if (projectDetails) {
+                    projectDetails.setDisabled(false);
+                }
+                var cmTab = formPanel.down('*[itemId=CostManagerTab]');
+                if (cmTab) cmTab.setDisabled(false);
+                var pcAccountTab = formPanel.down('*[itemId=PCAccountTab]');
+                if (pcAccountTab) pcAccountTab.setDisabled(false);
+                var poLogTab = formPanel.down('*[itemId=POLogTab]');
+                if (poLogTab) poLogTab.setDisabled(false);
+
+                var customerStore = viewModel.getStore('getCustomersList');
+                customerStore.load();
+
+                var directorsStore = viewModel.getStore('getDirectorsList');
+                directorsStore.load();
+
+                var producersStore = viewModel.getStore('getProducersList');
+                producersStore.load();
+
+                var dirOfPhotStore = viewModel.getStore('getDirofPhotoList');
+                dirOfPhotStore.load();
+            }
         }
     },
     

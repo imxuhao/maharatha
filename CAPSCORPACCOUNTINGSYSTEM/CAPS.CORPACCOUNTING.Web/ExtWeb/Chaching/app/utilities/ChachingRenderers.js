@@ -207,6 +207,31 @@
             }
         }
         return value;
+    },
+    renderEmployeeInnerTpl: function () {
+        return '{firstName} {lastName}';
+    },
+    renderEmployeeDispalyTpl: function () {
+        var xtemplate = Ext.create('Ext.XTemplate', [
+            '<tpl for=".">',
+            '{firstName} {lastName}',
+            '</tpl>'
+        ]);
+        return xtemplate;
+    },
+    renderCustomerInnerTpl: function() {
+        return '{firstName} {lastName} {{customerNumber}}';
+    },
+    renderCustomerDispalyTpl: function () {
+        var xtemplate = Ext.create('Ext.XTemplate', [
+            '<tpl for=".">',
+            '{firstName} {lastName} {{customerNumber}}',
+            '</tpl>'
+        ]);
+        return xtemplate;
+    },
+    renderMailToTag:function(email) {
+        return '<a href="mailto:' + email + '" style="text-decoration:underline !important;color:#477EBF !important;font-size:15px;">' + email + '</a>';
     }
 
 });

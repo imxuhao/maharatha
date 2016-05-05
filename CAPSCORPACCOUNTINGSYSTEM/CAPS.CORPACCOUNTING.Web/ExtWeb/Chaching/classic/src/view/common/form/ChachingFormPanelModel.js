@@ -1,9 +1,22 @@
+/**
+ * This Class is base ViewModel class for all forms which are inherited from base formpanel.
+ * Author: Krishna Garad
+ * Date: 04/05/2016
+ */
+/**
+ * @class Chaching.view.common.form.ChachingFormPanelModel
+ * The base ViewModel class for all formpanels 
+ */
 Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.common-form-chachingformpanel',
     data: {
         name: 'Chaching'
     },
+    /**
+    * @cfg {object}
+    * A config option for for stores in viewmodel
+    */
     stores: {
         StandardGroupTotalList: {
             fields: [{ name: 'name' }, { name: 'value' }, {
@@ -365,6 +378,92 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 reader: {
                     type: 'json',
                     rootProperty: 'result'
+                }
+            }
+        },
+        getCustomersList: {
+            model:'Chaching.model.customers.CustomersModel',
+            xtype: 'ajax',
+            pageSize:1000,
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/customerUnit/GetCustomerUnits',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result.items'
+                }
+            }
+        },
+        getDirectorsList: {
+            model: 'Chaching.model.employee.EmployeeModel',
+            xtype: 'ajax',
+            pageSize: 1000,
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                extraParams: {
+                    filters: [{
+                        entity: 'Employee',
+                        searchTerm: true,
+                        comparator: 1,
+                        dataType: 3,
+                        property: 'isDirector',
+                        value: true
+                    }]
+                },
+                url: abp.appPath + 'api/services/app/employeeUnit/GetEmployeeUnits',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result.items'
+                }
+            }
+        },
+        getProducersList: {
+            model: 'Chaching.model.employee.EmployeeModel',
+            xtype: 'ajax',
+            pageSize: 1000,
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                extraParams: {
+                    filters: [{
+                        entity: 'Employee',
+                        searchTerm: true,
+                        comparator: 1,
+                        dataType: 3,
+                        property: 'isProducer',
+                        value: true
+                    }]
+                },
+                url: abp.appPath + 'api/services/app/employeeUnit/GetEmployeeUnits',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result.items'
+                }
+            }
+        },
+        getDirofPhotoList: {
+            model: 'Chaching.model.employee.EmployeeModel',
+            xtype: 'ajax',
+            pageSize: 1000,
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                extraParams: {
+                    filters: [{
+                        entity: 'Employee',
+                        searchTerm: true,
+                        comparator: 1,
+                        dataType: 3,
+                        property: 'isDirPhoto',
+                        value: true
+                    }]
+                },
+                url: abp.appPath + 'api/services/app/employeeUnit/GetEmployeeUnits',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result.items'
                 }
             }
         },

@@ -400,6 +400,30 @@
         "modelNamespace": "Chaching.model",
         "name": "projects.projectmaintenance.ProjectModel"
       }
+    },
+    "app/model/customers/CustomersModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "customers/CustomersModel",
+        "modelNamespace": "Chaching.model",
+        "name": "customers.CustomersModel"
+      }
+    },
+    "app/model/employee/EmployeeModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "employee/EmployeeModel",
+        "modelNamespace": "Chaching.model",
+        "name": "employee.EmployeeModel"
+      }
     }
   }
 }

@@ -1827,6 +1827,8 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\employee\EmployeeModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\ChartOfAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\DivisionsModel.js" />
@@ -19087,11 +19089,6 @@
     <Content Include="ExtWeb\Chaching\modern\sass\var\view\main\Main.scss" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\ux\Readme.md" />
     <Content Include="ExtWeb\build\development\Chaching\modern\resources\ux\Readme.md" />
-    <Content Include="Logs\Logs.txt.1" />
-    <Content Include="Logs\Logs.txt.2" />
-    <Content Include="Logs\Logs.txt.mine" />
-    <Content Include="Logs\Logs.txt.r156" />
-    <Content Include="Logs\Logs.txt.r158" />
     <Content Include="ExtWeb\Chaching\classic\sass\src\view\main\ChachingViewport.scss" />
     <Content Include="ExtWeb\Chaching\classic\sass\src\view\common\grid\ChachingGridPanel.scss" />
     <Content Include="ExtWeb\Chaching\classic\sass\src\view\common\window\ChachingWindowPanel.scss" />

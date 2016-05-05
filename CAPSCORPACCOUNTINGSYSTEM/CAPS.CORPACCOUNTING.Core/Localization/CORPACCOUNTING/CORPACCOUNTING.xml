@@ -595,7 +595,7 @@
     <text name="BidDate" value="Bid date" />
     <text name="AwardDate" value="Award date" />
     <text name="Bidder" value="Bidder" />
-    <text name="OtBasedOn" value="OtBasedOn" />
+    <text name="OtBasedOn" value="OT based on" />
     <text name="AgencyInfo" value="Agency Info" />
     <text name="ThirdPartyCustomer" value="3rd party customer" />
     <text name="AgencyProducer" value="Agency producer" />
@@ -650,5 +650,8 @@
     <text name="ThirdAddress" value="Third Address" />
     <text name="FourthAddress" value="Fourth Address" />
     <text name="FirstAddress" value="First Address" />
+     <text name="ProjectSetup" value="Project setup" />
+   <text name="AgencyContractInfo" value="Agency Contract Info" />
+  <text name="ToolTipBidder" value="Enter product owner" />
   </texts>
 </localizationDictionary>

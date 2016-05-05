@@ -84,11 +84,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             if (formView && formView.isWindow) {
                 formPanel = formView.down('form'),
                     form = formPanel.getForm();
-                form.setValues(widgetRec.data);
+                //form.setValues(widgetRec.data);
                 form.loadRecord(widgetRec);
             } else if (formView) {
                 form = formView.getForm();
-                form.setValues(widgetRec.data);
+                //form.setValues(widgetRec.data);
                 form.loadRecord(widgetRec);
             }
         }

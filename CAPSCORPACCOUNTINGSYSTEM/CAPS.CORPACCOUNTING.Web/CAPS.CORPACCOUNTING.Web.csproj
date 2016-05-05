@@ -1876,6 +1876,8 @@
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesStore.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\dragdrop\GridToGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\filter\DateSearchField.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\form\Basic.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\form\Panel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\RowEditing.js" />
     <Content Include="ExtWeb\Chaching\app\data\proxy\BaseProxy.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\BaseModel.js" />

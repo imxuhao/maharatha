@@ -73,7 +73,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         ui: 'fieldLabelTop',
                                         emptyText: app.localize('MandatoryField')
                                     }, {
-///TODO: Replace with combo once servie is ready
                                         xtype: 'combobox',
                                         name: 'typeofProjectId',
                                         itemId: 'typeofProjectId',
@@ -379,7 +378,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'hiddenfield',
                             name: 'agencyEmail',
                             value: null
-                        }, {///TODO: update value
+                        }, {
                             xtype: 'displayfield',
                             name: 'agencyEmailDisplay',
                             itemId: 'agencyEmailDisplay',
@@ -433,7 +432,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             },
                             items: [
                                 {
-                                    
                                     fieldLabel: app.localize('InvoiceSchedule1'),
                                     emptyText: app.localize('ToolTipInvoiceSchedule1')
                                 }, {
@@ -553,7 +551,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             anyMatch: true,
                             fieldLabel: app.localize('ExeProducer'),
                             emptyText: app.localize('SelectOption')
-                        }, {//TODO: Convert to combo when director service is ready
+                        }, {
                             xtype: 'combobox',
                             name: 'dirOfPhotoEmployeeId',
                             itemId: 'dirOfPhotoEmployeeId',

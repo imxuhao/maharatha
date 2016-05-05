@@ -6,7 +6,6 @@ Ext.define('Chaching.model.Jobcasting.JobCommercialsModel', {
     fields: [
             { name: 'jobCommercialId', type: 'int' ,isPrimaryKey: true},
             { name: 'jobId', type: 'int' },
-            { name: 'caption', type: 'string'},
             { name: 'bidDate', type: 'date'},
             { name: 'awardDate', type: 'date'},
             { name: 'shootingDate', type: 'date'},

@@ -653,5 +653,8 @@
      <text name="ProjectSetup" value="Project setup" />
    <text name="AgencyContractInfo" value="Agency Contract Info" />
   <text name="ToolTipBidder" value="Enter product owner" />
+  <text name="SaveProject" value="Save project" />
+  <text name="SaveProjectDetails" value="Save project details" />
+  <text name="LineNumbersTab" value="Line #" />
   </texts>
 </localizationDictionary>

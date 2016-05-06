@@ -11,7 +11,7 @@ Ext.define('Chaching.model.financials.accounts.DivisionsModel', {
             //{ name: 'rollupCenterId', type: 'int'},
             //{ name: 'chartOfAccountId', type: 'int'},
             //{ name: 'rollupAccountId', type: 'int'},
-            { name: 'typeOfCurrencyId', type: 'int'},
+            { name: 'typeOfCurrencyId', type: 'int', defaultValue: null, convert: nullHandler },
             //{ name: 'rollupJobId', type: 'int'},
             //{ name: 'typeOfJobStatusId', type: 'int'},
             //{ name: 'typeOfBidSoftwareId', type: 'int'},

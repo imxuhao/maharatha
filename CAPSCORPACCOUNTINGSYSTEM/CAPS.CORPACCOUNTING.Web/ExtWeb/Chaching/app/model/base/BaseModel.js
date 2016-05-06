@@ -9,14 +9,14 @@ Ext.define('Chaching.model.base.BaseModel', {
     fields: [
         //common fields in all entities
         { name: 'tenantId', type: 'int' },
-        { name: 'organizationUnitId', type: 'int' },
+        { name: 'organizationUnitId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'isDeleted', type: 'boolean' },
         { name: 'deletionTime', type: 'date' },
-        { name: 'deleterUserId', type: 'int' },
+        { name: 'deleterUserId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'lastModificationTime', type: 'date', dateFormat: 'c' },
-        { name: 'lastModifierUserId', type: 'int' },
+        { name: 'lastModifierUserId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'creationTime', type: 'date',dateFormat:'c'},
-        { name: 'creatorUserId', type: 'int' },
+        { name: 'creatorUserId', type: 'int', defaultValue: null, convert: nullHandler },
 
         //custom fields required for all entities
         { name: 'allowEdit', type: 'boolean', defaultValue: true },

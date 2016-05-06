@@ -177,15 +177,16 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 var controller = operation.controller;
                 controller.doReloadGrid();
             }
-            Ext.toast({
-                html: 'Operation completed successfully.',
-                title: 'Success',
-                ui: 'chachingWindow',
-                alwaysOnTop: true,
-                saveDelay: 500,
-                animateShadow: true,
-                align: 'tr'
-            });
+            abp.notify.success('Operation completed successfully.', 'Success');
+            //Ext.toast({
+            //    html: 'Operation completed successfully.',
+            //    title: 'Success',
+            //    ui: 'chachingWindow',
+            //    alwaysOnTop: true,
+            //    saveDelay: 500,
+            //    animateShadow: true,
+            //    align: 'tr'
+            //});
         } else {
             var response = Ext.decode(operation.getResponse().responseText);
             var message = '',
@@ -193,8 +194,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             if (response && response.error) {
                 if (response.error.message && response.error.details) {
                     title = response.error.message;
-                    message = response.error.details.replaceAll(' - ', '</br>-');
-                    var myMsg = Ext.create('Ext.window.MessageBox', {
+                    message = response.error.details;//.replaceAll(' - ', '</br>-');
+                    abp.message.warn(message, title);
+                    /*var myMsg = Ext.create('Ext.window.MessageBox', {
                         // set closeAction to 'destroy' if this instance is not
                         // intended to be reused by the application
                         closeAction: 'destroy',
@@ -204,13 +206,13 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                         message: message,
                         buttons: Ext.Msg.OKCANCEL,
                         icon: Ext.Msg.INFO
-                    });
+                    });*/
                     return;
                 }
                 title = response.error.message;
                 message = response.error.details ? response.error.details : title;
             }
-            Ext.toast(message);
+            abp.message.warn(message, title);
         }
     },
 

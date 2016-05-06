@@ -15,7 +15,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
     controller: 'projects-projectmaintenance-projectsform',
     name: 'Projects',
     openInPopupWindow: false,
-    hideDefaultButtons: false,
+    hideDefaultButtons: true,
     layout: 'fit',
     autoScroll: true,
     border: false,
@@ -189,7 +189,36 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             }
                         ]
                     }
-                ]
+                ],
+                dockedItems:[
+                {
+                    xtype: 'toolbar',
+                    dock: 'bottom',
+                    layout: {
+                        type: 'hbox',
+                        pack:'center'
+                    },
+                    items:[
+                    {
+                        xtype: 'button',
+                        itemId: 'btnSaveSetup',
+                        ui: 'actionButton',
+                        text: app.localize('SaveProject').toUpperCase(),
+                        iconCls: 'fa fa-save',
+                        listeners: {
+                            click:'onProjectSetupSave'
+                        }
+                    }, {
+                        xtype: 'button',
+                        itemId: 'btnCancelSetup',
+                        ui: 'actionButton',
+                        text: app.localize('Cancel').toUpperCase(),
+                        iconCls: 'fa fa-close',
+                        listeners: {
+                            click: 'onCancelClicked'
+                        }
+                    }]
+                }]
 
             },/////End of setup card
             {///// Start of project details card
@@ -665,6 +694,35 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         }]
                     }]
                     
+                }],
+                dockedItems: [
+                {
+                    xtype: 'toolbar',
+                    dock: 'bottom',
+                    layout: {
+                        type: 'hbox',
+                        pack:'center'
+                    },
+                    items:[
+                    {
+                        xtype: 'button',
+                        itemId: 'btnSaveProjectDetails',
+                        ui: 'actionButton',
+                        text: app.localize('SaveProjectDetails').toUpperCase(),
+                        iconCls: 'fa fa-save',
+                        listeners: {
+                            click: 'onProjectDetailsSave'
+                        }
+                    }, {
+                        xtype: 'button',
+                        itemId: 'btnCancelProjectDetails',
+                        ui: 'actionButton',
+                        text: app.localize('Cancel').toUpperCase(),
+                        iconCls: 'fa fa-close',
+                        listeners: {
+                            click: 'onCancelClicked'
+                        }
+                    }]
                 }]
             },//end of project details card  
             {///// Start of cost manager card
@@ -684,7 +742,13 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                 iconCls: 'fa fa-shopping-cart',
                 disabled: true,
                 itemId: 'POLogTab'
-            }//end of Po Log card
+            },//end of Po Log card
+            {///// Start of Line numbers card
+                title: app.localize('LineNumbersTab').initCap(),
+                iconCls: 'fa fa-list-ol',
+                disabled: true,
+                itemId: 'LineNumbersTab'
+            }//end of Line numbers card
         ]
     }]
     

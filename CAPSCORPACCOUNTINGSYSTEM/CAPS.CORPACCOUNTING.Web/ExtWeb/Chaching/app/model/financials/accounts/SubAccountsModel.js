@@ -20,8 +20,7 @@ Ext.define('Chaching.model.financials.accounts.SubAccountsModel', {
         { name: 'isEnterable', type: 'boolean' },
         { name: 'searchOrder', type: 'int' },
         { name: 'searchNo', type: 'string' },
-        { name: 'organizationUnitId', type: 'int' },
         { name: 'typeofSubAccount', type: 'string' },
-        { name: 'typeofSubAccountId', type: 'auto' }
+        { name: 'typeofSubAccountId', type: 'int', defaultValue: null, convert: nullHandler }
     ]
 });

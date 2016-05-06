@@ -11,11 +11,11 @@ Ext.define('Chaching.model.financials.accounts.ChartOfAccountsModel', {
             { name: 'isPrivate', type: 'boolean' },
             { name: 'isCorporate', type: 'boolean' },
             { name: 'isNumeric', type: 'boolean' },
-            { name: 'standardGroupTotalId', type: 'int' ,defaultValue:null},
-            { name: 'linkChartOfAccountID', type: 'int' ,defaultValue:null},
+            { name: 'standardGroupTotalId', type: 'int', defaultValue: null, convert: nullHandler },
+            { name: 'linkChartOfAccountID', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'linkChartOfAccountName', type: 'string' },
             { name: 'standardGroupTotal', type: 'string' },
-            { name: 'rollupAccountId', type: 'int' ,defaultValue:null},
-            { name: 'rollupDivisionId', type: 'int',defaultValue:null }
+            { name: 'rollupAccountId', type: 'int', defaultValue: null, convert: nullHandler },
+            { name: 'rollupDivisionId', type: 'int', defaultValue: null, convert: nullHandler }
     ]
 });

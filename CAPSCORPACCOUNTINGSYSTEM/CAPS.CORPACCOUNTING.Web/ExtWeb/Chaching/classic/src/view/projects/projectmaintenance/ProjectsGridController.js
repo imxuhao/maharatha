@@ -40,6 +40,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
                 if (pcAccountTab) pcAccountTab.setDisabled(false);
                 var poLogTab = formPanel.down('*[itemId=POLogTab]');
                 if (poLogTab) poLogTab.setDisabled(false);
+                var lineNumberTab = formPanel.down('*[itemId=LineNumbersTab]');
+                if (lineNumberTab) lineNumberTab.setDisabled(false);
 
                 var customerStore = viewModel.getStore('getCustomersList');
                 customerStore.load();

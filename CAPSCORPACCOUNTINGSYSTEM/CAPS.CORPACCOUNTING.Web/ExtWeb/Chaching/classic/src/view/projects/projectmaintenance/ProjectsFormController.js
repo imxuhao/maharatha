@@ -39,6 +39,15 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
         if (addresses.get('state')) fullAddress +=','+ addresses.get('state') + ' ';
         if (addresses.get('postalCode')) fullAddress += ','+addresses.get('postalCode');
         return fullAddress;
+    },
+    onProjectSetupSave:function() {
+        var me = this,
+            view = me.getView();
+        ///TODO: do save operations for project setup tab along with line#
+    },
+    onProjectDetailsSave:function() {
+        var me = this,
+            view = me.getView();
+        ///TODO: do save operations for project details tab along with locations data
     }
-    
 });

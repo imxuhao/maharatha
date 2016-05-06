@@ -88,16 +88,18 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
                 }
 
             }
-            Ext.toast({
-                html: 'Operation completed successfully.',
-                title: 'Success',
-                ui: 'chachingWindow',
-                alwaysOnTop: true,
-                saveDelay: 500,
-                animateShadow: true,
-                align: 'tr'
-            });
-           
+            abp.notify.success('Operation completed successfully.', 'Success');
+            ///TODO: Uncomment extjs toast if needed.
+            //Ext.toast({
+            //    html: 'Operation completed successfully.',
+            //    title: 'Success',
+            //    ui: 'chachingWindow',
+            //    alwaysOnTop: true,
+            //    saveDelay: 500,
+            //    animateShadow: true,
+            //    align: 'tr'
+            //});
+
         } else {
             var response = Ext.decode(operation.getResponse().responseText);
             var message = '',
@@ -105,24 +107,26 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             if (response && response.error) {
                 if (response.error.message && response.error.details) {
                     title = response.error.message;
-                    message = response.error.details.replaceAll(' - ', '</br>-');
-                    var myMsg = Ext.create('Ext.window.MessageBox', {
-                        // set closeAction to 'destroy' if this instance is not
-                        // intended to be reused by the application
-                        closeAction: 'destroy',
-                        ui: 'chachingWindow'
-                    }).show({
-                        title: title,
-                        message: message,
-                        buttons: Ext.Msg.OKCANCEL,
-                        icon: Ext.Msg.INFO
-                    });
+                    message = response.error.details;//.replaceAll(' - ', '</br>-');
+                    abp.message.warn(message, title);
                     return;
+                    /* var myMsg = Ext.create('Ext.window.MessageBox', {
+                         // set closeAction to 'destroy' if this instance is not
+                         // intended to be reused by the application
+                         closeAction: 'destroy',
+                         ui: 'chachingWindow'
+                     }).show({
+                         title: title,
+                         message: message,
+                         buttons: Ext.Msg.OKCANCEL,
+                         icon: Ext.Msg.INFO
+                     });
+                     return;*/
                 }
                 title = response.error.message;
                 message = response.error.details ? response.error.details : title;
             }
-            Ext.toast(message);
+            abp.message.error(message, title);
         }
     },
     

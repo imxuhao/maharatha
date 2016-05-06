@@ -34,14 +34,14 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         var contextMenu = btn.contextMenu;
         var position = btn.getPosition();
 
-        var notificationBtn = view.down('button[itemId=NotificationBtn]');
-        if (notificationBtn) {
-            me.hideContextMenu(notificationBtn);
-        }
-        var accountsBtn = view.down('button[itemId=AccountBtn]');
-        if (accountsBtn) {
-            me.hideContextMenu(accountsBtn);
-        }
+        //var notificationBtn = view.down('button[itemId=NotificationBtn]');
+        //if (notificationBtn) {
+        //    me.hideContextMenu(notificationBtn);
+        //}
+        //var accountsBtn = view.down('button[itemId=AccountBtn]');
+        //if (accountsBtn) {
+        //    me.hideContextMenu(accountsBtn);
+        //}
         if (contextMenu) {
             contextMenu.showAt(position[0] - 50, position[1] + 30, true);
         } else {
@@ -93,14 +93,14 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             view = me.getView();
         var contextMenu = btn.contextMenu;
         var position = btn.getPosition();
-        var localizationBtn = view.down('button[itemId=LocalizationBtn]');
-        if (localizationBtn) {
-            me.hideContextMenu(localizationBtn);
-        }
-        var accountsBtn = view.down('button[itemId=AccountBtn]');
-        if (accountsBtn) {
-            me.hideContextMenu(accountsBtn);
-        }
+        //var localizationBtn = view.down('button[itemId=LocalizationBtn]');
+        //if (localizationBtn) {
+        //    me.hideContextMenu(localizationBtn);
+        //}
+        //var accountsBtn = view.down('button[itemId=AccountBtn]');
+        //if (accountsBtn) {
+        //    me.hideContextMenu(accountsBtn);
+        //}
         if (contextMenu) {
             contextMenu.showAt(position[0] - 250, position[1] + 30, true);
         } else {
@@ -252,14 +252,14 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         var contextMenu = btn.contextMenu;
         var position = btn.getPosition();
 
-        var notificationBtn = view.down('button[itemId=NotificationBtn]');
-        if (notificationBtn) {
-            me.hideContextMenu(notificationBtn);
-        }
-        var localizationBtn = view.down('button[itemId=LocalizationBtn]');
-        if (localizationBtn) {
-            me.hideContextMenu(localizationBtn);
-        }
+        //var notificationBtn = view.down('button[itemId=NotificationBtn]');
+        //if (notificationBtn) {
+        //    me.hideContextMenu(notificationBtn);
+        //}
+        //var localizationBtn = view.down('button[itemId=LocalizationBtn]');
+        //if (localizationBtn) {
+        //    me.hideContextMenu(localizationBtn);
+        //}
         if (contextMenu) {
             contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         } else {

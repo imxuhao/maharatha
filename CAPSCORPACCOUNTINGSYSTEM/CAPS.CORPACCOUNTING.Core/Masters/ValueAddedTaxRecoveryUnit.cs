@@ -44,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// </summary>
 
     [Table("CAPS_ValueAddedTaxRecovery")]
-    public class ValueAddedTaxRecoveryUnit: FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class ValueAddedTaxRecoveryUnit: Entity
     {
 
         /// <summary> Overriding the ID column with ValueAddedTaxRecoveryId field. </summary>
@@ -67,15 +67,17 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the IsActive field. </summary>
         public virtual bool IsActive { get; set; } 
 
-        /// <summary>Gets or sets the TenantId field. </summary>
-        public virtual int TenantId { get; set; }
-
-        /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long? OrganizationUnitId { get; set; }
-
         public ValueAddedTaxRecoveryUnit()
         {
             IsActive = true;
+        }
+
+        public ValueAddedTaxRecoveryUnit(int valueaddedtaxtypeid, TypeOfVatRecovery typeofvatrecoveryid, bool isactive)
+        {
+            ValueAddedTaxTypeId = valueaddedtaxtypeid;
+            TypeOfVatRecoveryId = typeofvatrecoveryid;
+            IsActive = isactive;
+
         }
     }
 }

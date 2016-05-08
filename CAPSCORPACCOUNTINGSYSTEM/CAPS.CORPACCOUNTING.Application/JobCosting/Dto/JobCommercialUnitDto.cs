@@ -1,5 +1,4 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
+﻿using Abp.AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,14 +6,8 @@ using System.ComponentModel.DataAnnotations;
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     [AutoMapFrom(typeof(JobCommercialUnit))]
-    public class JobCommercialUnitDto : IOutputDto
+    public class JobCommercialUnitDto : JobUnitDto
     {
-        /// <summary>Gets or Sets JobId Field.  </summary>        
-        public int JobCommercialId { get; set; }
-
-        /// <summary>Gets or Sets JobId Field.  </summary>      
-        public int JobId { get; set; }
-
         /// <summary>Gets or Sets BidDate Field.  </summary>
         public DateTime? BidDate { get; set; }
 
@@ -244,10 +237,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         [StringLength(JobCommercialUnit.MaxEmailLength)]
         public string AgencyEmail { get; set; }
 
-        /// <summary>Gets or Sets Company Field.  </summary>
-        public long? OrganizationUnitId { get; set; }
-
-        /// <summary>Gets or Sets the JobLocations of the Employee. </summary>
+        /// <summary>Gets or Sets the JobLocations. </summary>
         public List<JobLocationUnitDto> JobLocations { get; set; }
     }
 }

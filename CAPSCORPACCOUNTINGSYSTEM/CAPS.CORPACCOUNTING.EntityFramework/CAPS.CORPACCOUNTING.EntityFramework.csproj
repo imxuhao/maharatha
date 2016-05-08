@@ -1127,8 +1127,22 @@
     <Compile Include="Migrations\201605030939241_Add_Country_Table.Designer.cs">
       <DependentUpon>201605030939241_Add_Country_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605061021414_Modify_JobCommercial_JobLocation_Table.cs" />
+    <Compile Include="Migrations\201605061021414_Modify_JobCommercial_JobLocation_Table.Designer.cs">
+      <DependentUpon>201605061021414_Modify_JobCommercial_JobLocation_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605061144522_Modify_JobCommercials_Table.cs" />
+    <Compile Include="Migrations\201605061144522_Modify_JobCommercials_Table.Designer.cs">
+      <DependentUpon>201605061144522_Modify_JobCommercials_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605061149110_Modify_TaxRecovery_Tables.cs" />
+    <Compile Include="Migrations\201605061149110_Modify_TaxRecovery_Tables.Designer.cs">
+      <DependentUpon>201605061149110_Modify_TaxRecovery_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
+    <Compile Include="Migrations\Seed\DefaultValueAddedTaxTypeCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultValueAddedTaxRecoveryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultCountryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultCurrencyCreator.cs" />
@@ -1909,6 +1923,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605030939241_Add_Country_Table.resx">
       <DependentUpon>201605030939241_Add_Country_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605061021414_Modify_JobCommercial_JobLocation_Table.resx">
+      <DependentUpon>201605061021414_Modify_JobCommercial_JobLocation_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605061144522_Modify_JobCommercials_Table.resx">
+      <DependentUpon>201605061144522_Modify_JobCommercials_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605061149110_Modify_TaxRecovery_Tables.resx">
+      <DependentUpon>201605061149110_Modify_TaxRecovery_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

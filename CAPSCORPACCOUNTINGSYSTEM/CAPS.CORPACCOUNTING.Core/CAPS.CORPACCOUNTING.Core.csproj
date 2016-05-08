@@ -180,6 +180,7 @@
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
+    <Compile Include="JobCosting\JobLocationUnitManager.cs" />
     <Compile Include="Localization\CustomLanguageTextsUnit.cs" />
     <Compile Include="Localization\CustomLanguageTextsUnitManager.cs" />
     <Compile Include="Masters\CountryUnit.cs" />
@@ -299,7 +300,6 @@
     <Compile Include="JobCosting\JobBudgetUnit.cs" />
     <Compile Include="JobCosting\JobCommercialUnit.cs" />
     <Compile Include="JobCosting\JobLocationUnit.cs" />
-    <Compile Include="JobCosting\JobLocationUnitManager.cs" />
     <Compile Include="JobCosting\JobPCConfigUnit.cs" />
     <Compile Include="JobCosting\JobPettyCashLogUnit.cs" />
     <Compile Include="JobCosting\JobPONumbersUnit.cs" />

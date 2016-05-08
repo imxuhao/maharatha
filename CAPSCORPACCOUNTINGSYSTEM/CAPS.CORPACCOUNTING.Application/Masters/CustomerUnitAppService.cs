@@ -247,6 +247,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             var divisions = await _customerUnitRepository.GetAll()                
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.Contains(input.Query))
+                 .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
                  .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
             return divisions;
         }

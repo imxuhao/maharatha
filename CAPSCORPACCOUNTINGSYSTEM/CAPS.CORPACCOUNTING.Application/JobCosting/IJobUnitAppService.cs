@@ -97,5 +97,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         Task<List<NameValueDto>> GetProjectTypeList();
 
+        /// <summary>
+        /// Get JobAccounts by CoaId and JobId
+        /// </summary>
+        /// <returns></returns>
+        Task<List<JobAccountUnitDto>> GetLineListByProjectCoa(GetJobAccountInputDto input);
+
+
+        Task<List<NameValueDto>> GetTaxRecovery();
+
     }
 }

@@ -4,13 +4,13 @@ using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using Abp.Application.Services.Dto;
-using System.Collections.Generic;
-using System.Data.Entity;
 using Abp.Authorization;
-using System.Linq;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
     public class JobCommercialAppService : CORPACCOUNTINGServiceBase, IJobCommercialAppService
     {
@@ -38,42 +38,15 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [UnitOfWork]
         public async Task<JobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input)
         {
-
-            var jobDetailUnit = new JobCommercialUnit(jobid: input.JobId, biddate: input.BidDate, awarddate: input.AwardDate, shootingdate: input.ShootingDate,
-                wrapdate: input.WrapDate, roughcutdate: input.RoughCutDate, airdate: input.AirDate, dateclosed: input.DateClosed,
-                finalshootdate: input.FinalShootDate, productowner: input.ProductOwner, productname: input.ProductName,
-                executiveproducerid: input.ExecutiveProducerId, directoremployeeid: input.DirectorEmployeeId, produceremployeeid: input.ProducerEmployeeId,
-                dirofphotoemployeeid: input.DirOfPhotoEmployeeId, setdesigneremployeeid: input.SetDesignerEmployeeId,
-                artdirectoremployeeid: input.ArtDirectorEmployeeId, salesrepid: input.SalesRepId, agencyid: input.AgencyId, agencyclientcustomerid: input.AgencyClientCustomerId,
-                thirdpartycustomerid: input.ThirdPartyCustomerId, agencyproducer: input.AgencyProducer, agencyproducercontactinfo: input.AgencyProducerContactInfo,
-                agencyartdirector: input.AgencyArtDirector, agencyartdircontactinfo: input.AgencyArtDirContactInfo, agencywriter: input.AgencyWriter,
-                agencywritercontactinfo: input.AgencyWriterContactInfo, agencybusinessmanager: input.AgencyBusinessManager,
-                agencybusmgrcontactinfo: input.AgencyBusMgrContactInfo, agencyjobnumber: input.AgencyJobNumber, agencyponumber: input.AgencyPONumber,
-                agencyname: input.AgencyName, agencyaddress: input.AgencyAddress, agencyphone: input.AgencyPhone, commercialtitle1: input.CommercialTitle1,
-                commercialtitle2: input.CommercialTitle2, commercialtitle3: input.CommercialTitle3, commercialtitle4: input.CommercialTitle4,
-                commercialtitle5: input.CommercialTitle5, commercialtitle6: input.CommercialTitle6, commerciallength: input.CommercialLength,
-                commercialnumber: input.CommercialNumber, prelightdays: input.PreLightDays, prelighthours: input.PreLightHours, preproductiondays: input.PreProductionDays,
-                strikedays: input.StrikeDays, strikehours: input.StrikeHours, projecttotal: input.ProjectTotal, cgitotal: input.CGITotal,
-                isbudgetlocked: input.IsBudgetLocked, iscostplus: input.IsCostPlus, isfringeaccountseparate: input.IsFringeAccountSeparate,
-                isoton: input.IsOTon, iswrapupinsurance: input.IsWrapUpInsurance, agencyemail: input.AgencyEmail, organizationunitid: input.OrganizationUnitId,
-                postproductioncompany: input.PostProductionCompany, costaccrual: input.CostAccrual, dubbinghouse: input.DubbingHouse,
-                editoremployeeid: input.EditorEmployeeId, incomeaccrual: input.IncomeAccrual, locationdays: input.LocationDays, locationhours: input.LocationHours,
-                markuppercent: input.MarkupPercent, markuptotal: input.MarkupTotal, rdarevenue: input.RDARevenue, shoothours: input.ShootHours,
-                studioshootdays: input.StudioShootDays, storagehouse: input.StorageHouse);
+            var jobDetailUnit = input.MapTo<JobCommercialUnit>();
 
             await _jobDetailUnitManager.CreateAsync(jobDetailUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            if (!ReferenceEquals(input.JobLocations, null))
-            {
-                // Create Job Locations
-                input.JobLocations.ForEach(a => { a.JobId = jobDetailUnit.JobId; a.JobDetailId = jobDetailUnit.Id; });
-                foreach (var location in input.JobLocations)
-                {
-                    await _jobLocationAppService.CreateJobLocationUnit(location);
-                }
-            }
-            return jobDetailUnit.MapTo<JobCommercialUnitDto>();
+            JobCommercialUnitDto response = jobDetailUnit.MapTo<JobCommercialUnitDto>();
+            response.JobId = jobDetailUnit.Id;
+            return response;
+
         }
 
         /// <summary>
@@ -83,7 +56,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task DeleteJobDetailUnit(IdInput input)
         {
-            await _jobLocationAppService.DeleteJobLocationUnit(input);
+              await _jobLocationAppService.DeleteJobLocationUnit(input);
             await _jobDetailUnitManager.DeleteAsync(input);
         }
 
@@ -95,11 +68,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [UnitOfWork]
         public async Task<JobCommercialUnitDto> UpdateJobDetailUnit(UpdateJobCommercialnput input)
         {
-            var jobDetailUnit = await _jobDetailUnitRepository.GetAsync(input.JobCommercialId);
+            var jobDetailUnit = await _jobDetailUnitRepository.GetAsync(input.JobId);
 
             #region Setting the values to be updated
 
-            jobDetailUnit.JobId = input.JobId;
+            jobDetailUnit.Id = input.JobId;
             jobDetailUnit.BidDate = input.BidDate;
             jobDetailUnit.AwardDate = input.AwardDate;
             jobDetailUnit.ShootingDate = input.ShootingDate;
@@ -110,7 +83,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobDetailUnit.FinalShootDate = input.FinalShootDate;
             jobDetailUnit.ProductName = input.ProductName;
             jobDetailUnit.ProductOwner = input.ProductOwner;
-            jobDetailUnit.OrganizationUnitId = input.OrganizationUnitId;
+            //jobDetailUnit.OrganizationUnitId = input.OrganizationUnitId;
             jobDetailUnit.ExecutiveProducerId = input.ExecutiveProducerId;
             jobDetailUnit.DirectorEmployeeId = input.DirectorEmployeeId;
             jobDetailUnit.ProducerEmployeeId = input.ProducerEmployeeId;
@@ -180,37 +153,21 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 foreach (var location in input.JobLocations)
                 {
                     if (location.JobLocationId != 0)
+                    {
                         await _jobLocationAppService.UpdateJobLocationUnit(location);
+                    }
                     else
                     {
                         AutoMapper.Mapper.CreateMap<UpdateJobLocationInput, CreateJobLocationInput>();
-                        await _jobLocationAppService.CreateJobLocationUnit(AutoMapper.Mapper.Map<UpdateJobLocationInput, CreateJobLocationInput>(location));
+                         await _jobLocationAppService.CreateJobLocationUnit(AutoMapper.Mapper.Map<UpdateJobLocationInput, CreateJobLocationInput>(location));
                         await CurrentUnitOfWork.SaveChangesAsync();
                     }
                     await CurrentUnitOfWork.SaveChangesAsync();
                 }
             }
-            _unitOfWorkManager.Current.Completed += (sender, args) =>
-            {
-                /*Do Something when the Chart of Job is Added*/
-            };
-
             return jobDetailUnit.MapTo<JobCommercialUnitDto>();
 
         }
-
-        /// <summary>
-        /// Get JobDeatils By JobId
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<JobCommercialUnitDto> GetJobDetailsByJobId(IdInput input)
-        {
-            var jobitems = _jobDetailUnitRepository.GetAll().Include(q => q.JobLocations).Where(job => job.JobId == input.Id).ToList();
-
-            var result = jobitems.FirstOrDefault().MapTo<JobCommercialUnitDto>();
-            result.JobCommercialId = jobitems.FirstOrDefault().Id;
-            return result;
-        }
+       
     }
 }

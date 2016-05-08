@@ -12,5 +12,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public long? Id { get; set; }
 
         public string Query { get; set; }
+
+        public long? OrganizationId { get; set; }
     }
 }

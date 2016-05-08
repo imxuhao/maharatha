@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
 
@@ -60,7 +61,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public TypeofProject? TypeofProjectId { get; set; }
 
         /// <summary>Gets or sets the TaxRecovery field. </summary>
-        public TaxRecovery? TaxRecoveryId { get; set; }
+        public int? TaxRecoveryId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
@@ -71,7 +72,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// </summary>
         public bool IsDivision { get; set; }
 
-
-        public UpdateJobCommercialnput JobDetails { get; set; }
+        /// <summary>
+        /// Get or Set List of JobAccounts
+        /// </summary>
+        public  List<UpdateJobAccountUnitInput> JobAccountList { get; set; }
     }
 }

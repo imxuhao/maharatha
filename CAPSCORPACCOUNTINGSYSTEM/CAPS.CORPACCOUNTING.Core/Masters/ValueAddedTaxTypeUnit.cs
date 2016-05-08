@@ -27,9 +27,8 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// </summary>
 
     [Table("CAPS_ValueAddedTaxType")]
-    public class ValueAddedTaxTypeUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class ValueAddedTaxTypeUnit : Entity
     {
-
         /// <summary> Overriding the ID column with ValueAddedTaxTypeId field. </summary>
         [Column("ValueAddedTaxTypeId")]
         public override int Id { get; set; }
@@ -49,17 +48,19 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         /// <summary>Gets or sets the IsActive field. </summary>
         public virtual bool IsActive { get; set; }
-
-        /// <summary>Gets or sets the TenantId field. </summary>
-        public virtual int TenantId { get; set; }
-
-        /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long? OrganizationUnitId { get; set; }
-
         public ValueAddedTaxTypeUnit()
         {
             IsActive = true;
         }
-    }
 
+       
+
+        public ValueAddedTaxTypeUnit(short typeOfcountryId, TypeOfValueAddedTax typeOfvalueaddedtaxId, bool isactive)
+        {
+            TypeOfCountryId = typeOfcountryId;
+            TypeOfValueAddedTaxId = typeOfvalueaddedtaxId;
+            IsActive = isactive;
+        }
+    }
+    
 }

@@ -231,8 +231,11 @@
     <Compile Include="Interceptors\MeasureDurationInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\MeasureDurationWithPostAsyncActionInterceptor.cs" />
     <Compile Include="IO\AppFileHelper.cs" />
+    <Compile Include="JobCosting\Dto\GetJobAccountInputDto.cs" />
     <Compile Include="JobCosting\IDivisionUnitAppService.cs" />
     <Compile Include="JobCosting\DivisionUnitAppService.cs" />
+    <Compile Include="JobCosting\IJobLocationAppService.cs" />
+    <Compile Include="JobCosting\JobLocationAppService.cs" />
     <Compile Include="JobCosting\ProjectCoaUnitAppService.cs" />
     <Compile Include="JobCosting\IProjectCoaUnitAppService.cs" />
     <Compile Include="JobCosting\LinesUnitAppService.cs" />
@@ -250,7 +253,6 @@
     <Compile Include="JobCosting\IARBillingTypeUnitAppService.cs" />
     <Compile Include="JobCosting\IJobAccountUnitAppService.cs" />
     <Compile Include="JobCosting\IJobBudgetUnitAppService.cs" />
-    <Compile Include="JobCosting\IJobLocationAppService.cs" />
     <Compile Include="JobCosting\Dto\JobLocationUnitDto.cs" />
     <Compile Include="JobCosting\Dto\UpdateJobLocationInput.cs" />
     <Compile Include="JobCosting\Dto\CreateJobLocationInput.cs" />
@@ -271,7 +273,6 @@
     <Compile Include="JobCosting\JobAccountUnitAppService.cs" />
     <Compile Include="JobCosting\JobBudgetUnitAppService.cs" />
     <Compile Include="JobCosting\JobCommercialAppService.cs" />
-    <Compile Include="JobCosting\JobLocationAppService.cs" />
     <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\JobUnitAppService.cs" />
     <Compile Include="Journals\Dto\CreateJournalEntryDocumentInputUnit.cs" />

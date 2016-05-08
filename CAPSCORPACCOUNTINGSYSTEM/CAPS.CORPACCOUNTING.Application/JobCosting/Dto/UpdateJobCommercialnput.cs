@@ -7,10 +7,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     public class UpdateJobCommercialnput : IInputDto
     {
-        /// <summary>Gets or Sets JobCommercialId Field.  </summary>
-        [Range(1, Int32.MaxValue)]
-        public int JobCommercialId { get; set; }
-
         /// <summary>Gets or Sets JobId Field.  </summary>
         [Range(1, Int32.MaxValue)]
         public int JobId { get; set; }

@@ -15,15 +15,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         
         /// <summary>Gets or sets the LocationId field. </summary>
         public int LocationId { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public  int JobDetailId { get; set; }
-
+       
         /// <summary>Gets or sets the LocationSiteDate field. </summary>
         public DateTime? LocationSiteDate { get; set; }
 
-        /// <summary>Gets or sets the CompanyId field. </summary>
-        public long? OrganizationUnitId { get; set; }
+        /// <summary>Gets or sets the LocationName field. </summary>
+        public string  LocationName { get; set; }
+       
     }
 }

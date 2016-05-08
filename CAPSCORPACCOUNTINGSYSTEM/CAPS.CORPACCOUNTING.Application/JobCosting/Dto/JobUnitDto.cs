@@ -53,7 +53,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public TypeofProject? TypeofProjectId { get; set; }
 
         /// <summary>Gets or sets the TaxRecoveryId field. </summary>
-        public TaxRecovery? TaxRecoveryId { get; set; }
+        public int? TaxRecoveryId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

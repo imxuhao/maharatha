@@ -7,7 +7,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
     public class UpdateJobLocationInput : IInputDto
     {
         /// <summary>Gets or sets the JobLocationId field. </summary>
-        [Range(1,Int32.MaxValue)]
         public int JobLocationId { get; set; }
 
         /// <summary>Gets or sets the JobId field. </summary>
@@ -17,17 +16,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the LocationId field. </summary>
         [Range(1, Int32.MaxValue)]
         public virtual int LocationId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the JobDetailId field.
-        /// </summary>
-        [Range(1, Int32.MaxValue)]
-        public int JobDetailId { get; set; }
+       
 
         /// <summary>Gets or sets the LocationSiteDate field. </summary>
         public DateTime? LocationSiteDate { get; set; }
 
-        /// <summary>Gets or sets the CompanyId field. </summary>
-        public long? OrganizationUnitId { get; set; }
+       
     }
 }

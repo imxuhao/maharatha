@@ -646,10 +646,11 @@
 <text name="JobLocations" value="Job locations" />
 <text name="Location" value="Location" />
 <text name="LocationDate" value="Location date" />
-    <text name="SecondAddress" value="Second Address" />
-    <text name="ThirdAddress" value="Third Address" />
-    <text name="FourthAddress" value="Fourth Address" />
-    <text name="FirstAddress" value="First Address" />
+<text name="SecondAddress" value="Second Address" />
+<text name="ThirdAddress" value="Third Address" />
+<text name="FourthAddress" value="Fourth Address" />
+<text name="FirstAddress" value="First Address" />
+ <text name="BudgetFormatisRequired" value="Budget Format is Required" />   
      <text name="ProjectSetup" value="Project setup" />
    <text name="AgencyContractInfo" value="Agency Contract Info" />
   <text name="ToolTipBidder" value="Enter product owner" />

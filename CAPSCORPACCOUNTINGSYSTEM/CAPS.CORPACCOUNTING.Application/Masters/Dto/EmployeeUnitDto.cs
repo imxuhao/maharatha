@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 namespace CAPS.CORPACCOUNTING.Masters.Dto
 {
     [AutoMapFrom(typeof(EmployeeUnit))]  
-    public class EmployeeUnitDto : FullAuditedEntityDto
+    public class EmployeeUnitDto : IOutputDto
     {
         /// <summary>Gets or sets the  EmployeeId</summary>
         public int EmployeeId { get; set; }

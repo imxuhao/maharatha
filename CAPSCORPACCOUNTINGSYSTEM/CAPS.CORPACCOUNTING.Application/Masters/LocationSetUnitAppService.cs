@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using Abp.Authorization;
+using System.Data.Entity;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -59,6 +63,14 @@ namespace CAPS.CORPACCOUNTING.Masters
             await CurrentUnitOfWork.SaveChangesAsync();
 
             return locationSetUnit.MapTo<LocationSetUnitDto>();
+        }
+        public async Task<List<NameValueDto>> GetLocationList(AutoSearchInput input)
+        {
+            var locationSets = await _locationSetUnitRepository.GetAll()
+                 .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
+                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return locationSets;
         }
     }
 }

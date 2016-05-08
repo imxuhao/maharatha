@@ -1,11 +1,13 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
-    public  class CreateJobCommercialInput : IInputDto
+    [AutoMapTo(typeof(JobCommercialUnit))]
+    public  class CreateJobCommercialInput : CreateJobUnitInput
     { 
         /// <summary>Gets or Sets JobId Field.  </summary>
         [Range(0, Int32.MaxValue)]
@@ -241,8 +243,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         [EmailAddress]
         public string AgencyEmail { get; set; }
 
-        /// <summary>Gets or Sets CompanyId Field.  </summary>
-        public long? OrganizationUnitId { get; set; }
+        public virtual DateTime? ContractExecutionDate { get; set; }
+
+        public virtual DateTime? DeliveryDate { get; set; }
+       
         
         /// <summary>Gets or Sets the JobLocations of the Job </summary>
         public List<CreateJobLocationInput> JobLocations { get; set; }

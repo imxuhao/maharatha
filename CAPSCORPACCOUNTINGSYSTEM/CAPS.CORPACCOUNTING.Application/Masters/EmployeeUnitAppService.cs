@@ -13,9 +13,6 @@ using Abp.Linq.Extensions;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
-using CAPS.CORPACCOUNTING.Sessions;
-using System;
-using Abp.Collections.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {

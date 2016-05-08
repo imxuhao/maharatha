@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
                 "dbo.CAPS_JobCommercial",
                 c => new
                     {
-                        JobCommertialId = c.Int(nullable: false, identity: true),
+                        JobCommertialId = c.Int(nullable: false, identity: false),
                         JobId = c.Int(nullable: false),
                         BidDate = c.DateTime(),
                         AwardDate = c.DateTime(),

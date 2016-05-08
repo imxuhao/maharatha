@@ -172,7 +172,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual TypeofProject? TypeofProjectId { get; set; }
 
         /// <summary>Gets or sets the TaxRecovery field. </summary>
-        public virtual TaxRecovery? TaxRecoveryId { get; set; }        
+        public virtual int? TaxRecoveryId { get; set; }        
 
 
         /// <summary>Gets or sets the CompanyId field. </summary>
@@ -185,9 +185,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual bool IsDivision { get; set; }
 
 
-        public virtual List<JobCommercialUnit> JobDetails { get; set; }
+       // public virtual List<JobCommercialUnit> JobDetails { get; set; }
 
-        public List<JobLocationUnit> joblocations { get; set; }
+        //public List<JobLocationUnit> joblocations { get; set; }
 
         #endregion
 
@@ -198,7 +198,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public JobUnit(string jobnumber, string caption, bool iscorporatedefault, int? chartofaccountid,
             long? rollupaccountid, int? typeofcurrencyid, int? rollupjobid, ProjectStatus? typeofjobstatusid,
             BudgetSoftware? typeofbidsoftwareid, int? rollupcenterid, bool isapproved, bool isactive, bool isictdivision,
-            long? organizationunitid, TypeofProject? typeofprojectid, TaxRecovery? taxrecoveryid,bool isdivision)
+            long? organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid,bool isdivision)
         {
             JobNumber = jobnumber;
             Caption = caption;

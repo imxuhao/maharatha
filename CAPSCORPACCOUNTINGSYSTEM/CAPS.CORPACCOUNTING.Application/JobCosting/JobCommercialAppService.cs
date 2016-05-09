@@ -56,7 +56,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task DeleteJobDetailUnit(IdInput input)
         {
-              await _jobLocationAppService.DeleteJobLocationUnit(input);
+            await _jobLocationRepository.DeleteAsync(p => p.JobId == input.Id);
             await _jobDetailUnitManager.DeleteAsync(input);
         }
 
@@ -83,7 +83,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobDetailUnit.FinalShootDate = input.FinalShootDate;
             jobDetailUnit.ProductName = input.ProductName;
             jobDetailUnit.ProductOwner = input.ProductOwner;
-            //jobDetailUnit.OrganizationUnitId = input.OrganizationUnitId;
+            jobDetailUnit.OrganizationUnitId = input.OrganizationUnitId;
             jobDetailUnit.ExecutiveProducerId = input.ExecutiveProducerId;
             jobDetailUnit.DirectorEmployeeId = input.DirectorEmployeeId;
             jobDetailUnit.ProducerEmployeeId = input.ProducerEmployeeId;

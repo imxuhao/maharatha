@@ -108,7 +108,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string Us1120IncomeStmtName { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long? OrganizationId { get; set; }
+        public long OrganizationId { get; set; }
 
         /// <summary>Gets or sets the TypeofConsolidationId field. </summary>
         public TypeofConsolidation? TypeofConsolidationId { get; set; }

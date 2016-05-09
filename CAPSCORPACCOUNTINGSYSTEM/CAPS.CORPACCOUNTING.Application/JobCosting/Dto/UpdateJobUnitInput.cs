@@ -64,7 +64,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public int? TaxRecoveryId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long? OrganizationUnitId { get; set; }
+        public long OrganizationUnitId { get; set; }
 
         /// <summary>
         /// Isdivision is true then this job is a Division
@@ -76,5 +76,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// Get or Set List of JobAccounts
         /// </summary>
         public  List<UpdateJobAccountUnitInput> JobAccountList { get; set; }
+
+        /// <summary>Gets or sets the TaxCreditId field. </summary>
+        public int? TaxCreditId { get; set; }
     }
 }

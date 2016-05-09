@@ -1151,6 +1151,10 @@
     <Compile Include="Migrations\201605090640156_Add_TaxCredit_Table.Designer.cs">
       <DependentUpon>201605090640156_Add_TaxCredit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605090926099_Modify_Job_Account_Tables.cs" />
+    <Compile Include="Migrations\201605090926099_Modify_Job_Account_Tables.Designer.cs">
+      <DependentUpon>201605090926099_Modify_Job_Account_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultValueAddedTaxTypeCreator.cs" />
@@ -1953,6 +1957,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605090640156_Add_TaxCredit_Table.resx">
       <DependentUpon>201605090640156_Add_TaxCredit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090926099_Modify_Job_Account_Tables.resx">
+      <DependentUpon>201605090926099_Modify_Job_Account_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

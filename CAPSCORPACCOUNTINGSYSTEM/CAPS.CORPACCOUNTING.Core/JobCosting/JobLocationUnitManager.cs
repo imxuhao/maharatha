@@ -20,7 +20,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <summary>
         /// Inserting JobLocation Entity 
         /// </summary>
-        /// <param name="jobDetailUnit"></param>
+        /// <param name="jobLocationUnit"></param>
         /// <returns></returns>       
         public virtual async Task CreateAsync(JobLocationUnit jobLocationUnit)
         {
@@ -30,7 +30,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <summary>
         /// Updating JobLocation
         /// </summary>
-        /// <param name="jobDetailUnit"></param>
+        /// <param name="jobLocationUnit"></param>
         /// <returns></returns>
         public virtual async Task UpdateAsync(JobLocationUnit jobLocationUnit)
         {          
@@ -38,7 +38,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         }
         public virtual async Task DeleteAsync(IdInput input)
         {
-            await JobLocationUnitRepository.DeleteAsync(p=>p.JobId==input.Id);
+            await JobLocationUnitRepository.DeleteAsync(input.Id);
         }
 
     }

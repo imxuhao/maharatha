@@ -315,100 +315,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
         }
 
-        public JobCommercialUnit(int jobid, DateTime? biddate, DateTime? awarddate, DateTime? shootingdate,
-            DateTime? wrapdate, DateTime? roughcutdate, DateTime? airdate, DateTime? dateclosed,
-            DateTime? finalshootdate, string productowner, string productname, int? executiveproducerid,
-            int? directoremployeeid,
-            int? produceremployeeid, int? dirofphotoemployeeid, int? setdesigneremployeeid, int? editoremployeeid,
-            int? artdirectoremployeeid, int? salesrepid, int? agencyid, int? agencyclientcustomerid,
-            int? thirdpartycustomerid, string agencyproducer, string agencyproducercontactinfo, string agencyartdirector,
-            string agencyartdircontactinfo,
-            string agencywriter, string agencywritercontactinfo, string agencybusinessmanager,
-            string agencybusmgrcontactinfo,
-            string agencyjobnumber, string agencyponumber, string agencyname, string agencyaddress, string agencyphone,
-            string commercialtitle1, string commercialtitle2, string commercialtitle3, string commercialtitle4,
-            string commercialtitle5, string commercialtitle6,
-            decimal? projecttotal, decimal? cgitotal, decimal? markuppercent, decimal? markuptotal,
-            decimal? rdarevenue, decimal? incomeaccrual, decimal? costaccrual, string postproductioncompany,
-            string dubbinghouse, string storagehouse, bool isbudgetlocked, string commercialnumber,
-            string commerciallength, int? preproductiondays, int? strikedays, int? prelightdays, int? prelighthours,
-            int? strikehours, int? studioshootdays, int? shoothours, int? locationdays, int? locationhours,
-            bool iscostplus, bool iswrapupinsurance,bool isfringeaccountseparate, long? organizationunitid,
-            string agencyemail, bool isoton, DateTime? contractexecutiondate, DateTime? deliverydate)
-        {
-            //JobId = jobid;
-            BidDate = biddate;
-            AwardDate = awarddate;
-            ShootingDate = shootingdate;
-            WrapDate = wrapdate;
-            RoughCutDate = roughcutdate;
-            AirDate = airdate;
-            DateClosed = dateclosed;
-            FinalShootDate = finalshootdate;
-            ProductOwner = productowner;
-            ProductName = productname;
-            ExecutiveProducerId = executiveproducerid;
-            DirectorEmployeeId = directoremployeeid;
-            ProducerEmployeeId = produceremployeeid;
-            DirOfPhotoEmployeeId = dirofphotoemployeeid;
-            SetDesignerEmployeeId = setdesigneremployeeid;
-            EditorEmployeeId = editoremployeeid;
-            ArtDirectorEmployeeId = artdirectoremployeeid;
-            SalesRepId = salesrepid;
-            AgencyId = agencyid;
-            AgencyClientCustomerId = agencyclientcustomerid;
-            ThirdPartyCustomerId = thirdpartycustomerid;
-            AgencyProducer = agencyproducer;
-            AgencyProducerContactInfo = agencyproducercontactinfo;
-            AgencyArtDirector = agencyartdirector;
-            AgencyArtDirContactInfo = agencyartdircontactinfo;
-            AgencyWriter = agencywriter;
-            AgencyWriterContactInfo = agencywritercontactinfo;
-            AgencyBusinessManager = agencybusinessmanager;
-            AgencyBusMgrContactInfo = agencybusmgrcontactinfo;
-            AgencyJobNumber = agencyjobnumber;
-            AgencyPONumber = agencyponumber;
-            AgencyName = agencyname;
-            AgencyAddress = agencyaddress;
-            AgencyPhone = agencyphone;
-            CommercialTitle1 = commercialtitle1;
-            CommercialTitle2 = commercialtitle2;
-            CommercialTitle3 = commercialtitle3;
-            CommercialTitle4 = commercialtitle4;
-            CommercialTitle5 = commercialtitle5;
-            CommercialTitle6 = commercialtitle6;
-            ProjectTotal = projecttotal;
-            CGITotal = cgitotal;
-            MarkupPercent = markuppercent;
-            RDARevenue = rdarevenue;
-            IncomeAccrual = incomeaccrual;
-            CostAccrual = costaccrual;
-            PostProductionCompany = postproductioncompany;
-            DubbingHouse = dubbinghouse;
-            StorageHouse = storagehouse;
-            IsBudgetLocked = isbudgetlocked;
-            CommercialNumber = commercialnumber;
-            CommercialLength = commerciallength;
-            PreProductionDays = preproductiondays;
-            StrikeHours = strikehours;
-            StrikeDays = strikedays;
-            PreLightDays = prelightdays;
-            PreLightHours = prelighthours;
-            StudioShootDays = studioshootdays;
-            ShootHours = shoothours;
-            LocationDays = locationdays;
-            LocationHours = locationhours;
-            IsCostPlus = iscostplus;
-            IsWrapUpInsurance = iswrapupinsurance;
-            IsFringeAccountSeparate = isfringeaccountseparate;
-            //OrganizationUnitId = organizationunitid;
-            AgencyEmail = agencyemail;
-            IsOTon = isoton;
-            ContractExecutionDate = contractexecutiondate;
-            DeliveryDate = deliverydate;
-        }
-
-
         public JobCommercialUnit( DateTime? biddate, DateTime? awarddate, DateTime? shootingdate,
             DateTime? wrapdate, DateTime? roughcutdate, DateTime? airdate, DateTime? dateclosed,
             DateTime? finalshootdate, string productowner, string productname, int? executiveproducerid,
@@ -432,12 +338,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             string caption, bool iscorporatedefault, int? chartofaccountid,
             long? rollupaccountid, int? typeofcurrencyid, int? rollupjobid, ProjectStatus? typeofjobstatusid,
             BudgetSoftware? typeofbidsoftwareid, int? rollupcenterid, bool isapproved, bool isactive, bool isictdivision,
-            long? organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid)
+            long organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid, int? taxcreditid)
             : base(jobnumber: jobnumber, caption: caption, iscorporatedefault: iscorporatedefault,
                 rollupaccountid: rollupaccountid,
                 typeofcurrencyid: typeofcurrencyid, rollupjobid: rollupjobid, typeofjobstatusid: typeofjobstatusid, typeofbidsoftwareid: typeofbidsoftwareid,
                 isapproved: isapproved, isactive: isactive, isictdivision: isictdivision, organizationunitid: organizationunitid, typeofprojectid: typeofprojectid,
-                taxrecoveryid: taxrecoveryid, chartofaccountid: chartofaccountid, rollupcenterid: rollupcenterid, isdivision: false)
+                taxrecoveryid: taxrecoveryid, chartofaccountid: chartofaccountid, rollupcenterid: rollupcenterid, isdivision: false, taxcreditid: taxcreditid)
         {
             //JobId = jobid;
             BidDate = biddate;

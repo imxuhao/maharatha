@@ -25,16 +25,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly CoaUnitManager _coaunitManager;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly CustomAppSession _customAppSessionSession;
-        long OrganizationId;
+      
         public ProjectCoaUnitAppService(CoaUnitManager coaunitManager, IRepository<CoaUnit> coaUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, CustomAppSession customAppSessionSession)
+            IUnitOfWorkManager unitOfWorkManager)
         {
             _coaunitManager = coaunitManager;
             _coaUnitRepository = coaUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
-            _customAppSessionSession = customAppSessionSession;
-            OrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
         }
 
         /// <summary>
@@ -87,7 +84,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             var coaUnit = input.MapTo<CoaUnit>();
             await _coaunitManager.CreateAsync(coaUnit);
-            coaUnit.OrganizationUnitId = OrganizationId;
+            coaUnit.OrganizationUnitId = input.OrganizationId;
             coaUnit.IsCorporate = false;
             await CurrentUnitOfWork.SaveChangesAsync();
             return coaUnit.MapTo<CoaUnitDto>();

@@ -38,6 +38,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<TypeOfCountryUnit, short> _typeOfCountryUnitRepository;
         private readonly IRepository<CountryUnit> _countryUnitRepository;
         private readonly IJobAccountUnitAppService _jobAccountUnitAppService;
+        private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
 
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService,
@@ -46,7 +47,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             IRepository<ValueAddedTaxRecoveryUnit> valueAddedTaxRecoveryUnitRepository,
         IRepository<ValueAddedTaxTypeUnit> valueAddedTaxTypeUnitRepository,
         IRepository<TypeOfCountryUnit, short> typeOfCountryUnitRepository,
-        IRepository<CountryUnit> countryUnitRepository, IJobAccountUnitAppService jobAccountUnitAppService)
+        IRepository<CountryUnit> countryUnitRepository, IJobAccountUnitAppService jobAccountUnitAppService, IRepository<TaxCreditUnit> taxCreditUnitRepository)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -63,6 +64,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _typeOfCountryUnitRepository = typeOfCountryUnitRepository;
             _countryUnitRepository = countryUnitRepository;
             _jobAccountUnitAppService = jobAccountUnitAppService;
+            _taxCreditUnitRepository = taxCreditUnitRepository;
+
         }
         /// <summary>
         /// To create the Job
@@ -144,7 +147,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobUnit.TaxRecoveryId = input.TaxRecoveryId;
             jobUnit.ChartOfAccountId = input.ChartOfAccountId;
             jobUnit.RollupCenterId = input.RollupCenterId;
-
             #endregion
 
             await _jobUnitManager.UpdateAsync(jobUnit);
@@ -324,6 +326,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 {
                     var dto = result.jobaccount.MapTo<JobAccountUnitDto>();
                     dto.JobAccountId = result.jobaccount.Id;
+                    dto.AccountNumber = result.account.AccountNumber;
                     return dto;
                 }).ToList();
 
@@ -347,6 +350,19 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     dto.Value = result.valuetaxrecovery.Id.ToString();
                     return dto;
                 }).ToList();
+        }
+        /// <summary>
+        /// Get TaxCreditList
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input)
+        {
+            var taxCreditList = await _taxCreditUnitRepository.GetAll()
+                 .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
+                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return taxCreditList;
         }
 
     }

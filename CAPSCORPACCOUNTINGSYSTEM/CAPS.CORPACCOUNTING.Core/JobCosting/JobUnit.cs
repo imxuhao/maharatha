@@ -97,7 +97,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     /// Job is the table name in lajit
     /// </summary>
     [Table("CAPS_Job")]
-    public class JobUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class JobUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
     {
         public const int MaxJobNumberLength = 50;
         public const int MaxCaptionLength = 200;
@@ -176,7 +176,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long? OrganizationUnitId { get; set; }
+        public long OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set;}
@@ -184,10 +184,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <summary>Gets or sets the IsDivision field. </summary>
         public virtual bool IsDivision { get; set; }
 
-
-       // public virtual List<JobCommercialUnit> JobDetails { get; set; }
-
-        //public List<JobLocationUnit> joblocations { get; set; }
+        /// <summary>Gets or sets the TaxCreditId field. </summary>
+        public virtual int? TaxCreditId { get; set; }
+     
+        [ForeignKey("TaxCreditId")]
+        public virtual TaxCreditUnit TaxCredit{ get; set; }
 
         #endregion
 
@@ -198,7 +199,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public JobUnit(string jobnumber, string caption, bool iscorporatedefault, int? chartofaccountid,
             long? rollupaccountid, int? typeofcurrencyid, int? rollupjobid, ProjectStatus? typeofjobstatusid,
             BudgetSoftware? typeofbidsoftwareid, int? rollupcenterid, bool isapproved, bool isactive, bool isictdivision,
-            long? organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid,bool isdivision)
+            long organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid,bool isdivision, int? taxcreditid)
         {
             JobNumber = jobnumber;
             Caption = caption;
@@ -216,6 +217,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             TaxRecoveryId = taxrecoveryid;
             ChartOfAccountId = chartofaccountid;
             IsDivision = isdivision;
+            TaxCreditId = taxcreditid;
         }
     }
 }

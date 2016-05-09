@@ -41,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// Account is the table name in lajit
     /// </summary>
     [Table("CAPS_Account")]
-    public class AccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class AccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
     {
         /// <summary>
         ///     Maximum length of the <see cref="Caption" /> property.
@@ -368,7 +368,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long? OrganizationUnitId { get; set; }
+        public long OrganizationUnitId { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -386,7 +386,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             bool isElimination, bool isEnterable, bool isProfitLoss, bool isRollupAccount, bool isRollupOverridable,
             bool isSummaryAccount, bool isUs1120BalanceSheet, bool isUs1120IncomeStmt, int? linkAccountId,
             int? linkJobId, long? parentId, string profitLossName, long? rollupAccountId, int? rollupJobId,
-            int? typeOfAccountId, string us1120BalanceSheetName, string us1120IncomeStmtName, long? organizationunitid)
+            int? typeOfAccountId, string us1120BalanceSheetName, string us1120IncomeStmtName, long organizationunitid)
         {
             if (chartOfAccountId <= 0) throw new ArgumentOutOfRangeException(nameof(chartOfAccountId));
             AccountNumber = accountNumber;

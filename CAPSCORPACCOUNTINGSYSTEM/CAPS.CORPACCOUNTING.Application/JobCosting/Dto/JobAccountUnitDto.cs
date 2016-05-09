@@ -26,5 +26,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the AccountNumber field. </summary>
+        public string AccountNumber { get; set; }
     }
 }

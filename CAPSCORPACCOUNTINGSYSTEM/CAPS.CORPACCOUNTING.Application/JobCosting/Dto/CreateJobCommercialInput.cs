@@ -243,8 +243,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         [EmailAddress]
         public string AgencyEmail { get; set; }
 
+        /// <summary>
+        /// Gets or sets ContractExecutionDate Field
+        /// </summary>
         public virtual DateTime? ContractExecutionDate { get; set; }
 
+        /// <summary>
+        /// Gets or sets DeliveryDate Field
+        /// </summary>
         public virtual DateTime? DeliveryDate { get; set; }
        
         

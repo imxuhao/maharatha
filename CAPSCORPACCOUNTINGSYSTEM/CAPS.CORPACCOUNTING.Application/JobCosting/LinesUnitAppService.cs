@@ -23,30 +23,23 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     {
         private readonly AccountUnitManager _accountUnitManager;
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
-        private readonly IRepository<TypeOfAccountUnit, int> _typeOfAccountRepository;        
+        private readonly IRepository<TypeOfAccountUnit, int> _typeOfAccountRepository;
         private readonly IRepository<TypeOfCurrencyUnit, short> _typeOfCurrencyRepository;
         private readonly IRepository<JobUnit, int> _jobRepository;
-        private readonly UserManager _userManager;
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly CustomAppSession _customAppSessionSession;
-        long? OrgnizationId = null;
-        public LinesUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
-            UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
+
+        public LinesUnitAppService(AccountUnitManager accountUnitManager,
+            IRepository<AccountUnit, long> accountUnitRepository,
+            IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
-            IRepository<JobUnit, int> jobRepository, CustomAppSession customAppSessionSession)
+            IRepository<JobUnit, int> jobRepository)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
-            _userManager = userManager;
-            _unitOfWorkManager = unitOfWorkManager;
-            _typeOfAccountRepository = typeOfAccountRepository;            
+            _typeOfAccountRepository = typeOfAccountRepository;
             _typeOfCurrencyRepository = typeOfCurrencyRepository;
             _jobRepository = jobRepository;
-            _customAppSessionSession = customAppSessionSession;
-            if (!ReferenceEquals(_customAppSessionSession.OrganizationId, null))
-                OrgnizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
         }
-       
+
         /// <summary>
         /// Get the Records by ProjectCoaId with paging sorting
         /// </summary>
@@ -55,23 +48,26 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<PagedResultOutput<AccountUnitDto>> GetLinesByCoaId(GetAccountInput input)
         {
             var query =
-                from au in _accountUnitRepository.GetAll()               
+                from au in _accountUnitRepository.GetAll()
                 join typeOfAccount in _typeOfAccountRepository.GetAll() on au.TypeOfAccountId equals typeOfAccount.Id
                 into accounts
                 from accunit in accounts.DefaultIfEmpty()
                 join currencytype in _typeOfCurrencyRepository.GetAll() on au.TypeOfCurrencyId equals currencytype.Id
                 into currencyt
-                from currency in currencyt.DefaultIfEmpty()               
+                from currency in currencyt.DefaultIfEmpty()
                 join rollupacc in _accountUnitRepository.GetAll() on au.RollupAccountId equals rollupacc.Id
                into rollupaccount
                 from rollupaccounts in rollupaccount.DefaultIfEmpty()
                 join rollupdiv in _jobRepository.GetAll() on au.RollupJobId equals rollupdiv.Id
                 into rollupAccount
                 from rollupAccounts in rollupAccount.DefaultIfEmpty()
-                select new { Account = au, TypeOfAccount = accunit.Description,
-                    TypeOfCurrency = currency.Description, 
-                    RollUpAccountCaption=rollupaccounts.Caption,
-                    RollUpDivision= rollupAccounts.Caption
+                select new
+                {
+                    Account = au,
+                    TypeOfAccount = accunit.Description,
+                    TypeOfCurrency = currency.Description,
+                    RollUpAccountCaption = rollupaccounts.Caption,
+                    RollUpDivision = rollupAccounts.Caption
                 };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -81,7 +77,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
             query = query.Where(item => item.Account.ChartOfAccountId == input.CoaId)
-                .WhereIf(OrgnizationId != null, p => p.Account.OrganizationUnitId == OrgnizationId);
+                .WhereIf(!ReferenceEquals(input.OrganizationUnitId ,null), p => p.Account.OrganizationUnitId == input.OrganizationUnitId);
 
             var resultCount = await query.CountAsync();
             var results = await query
@@ -96,8 +92,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                      dto.AccountId = item.Account.Id;
                      dto.TypeofConsolidation = item.Account.TypeofConsolidationId != null ? item.Account.TypeofConsolidationId.ToDisplayName() : "";
                      dto.TypeOfAccount = item.TypeOfAccount;
-                     dto.TypeOfCurrency = item.TypeOfCurrency;                    
-                     dto.RollUpAccountCaption =item.RollUpAccountCaption;
+                     dto.TypeOfCurrency = item.TypeOfCurrency;
+                     dto.RollUpAccountCaption = item.RollUpAccountCaption;
                      dto.RollUpDivision = item.RollUpDivision;
                      return dto;
                  }).ToList());
@@ -113,9 +109,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             var accountUnit = input.MapTo<AccountUnit>();
             accountUnit.ParentId = input.ParentId != 0 ? input.ParentId : null;
-            accountUnit.OrganizationUnitId = OrgnizationId;
+            accountUnit.OrganizationUnitId = input.OrganizationId;
             await _accountUnitManager.CreateAsync(accountUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();           
+            await CurrentUnitOfWork.SaveChangesAsync();
             return accountUnit.MapTo<AccountUnitDto>();
         }
         /// <summary>
@@ -132,12 +128,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             accountUnit.AccountNumber = input.AccountNumber;
             accountUnit.Caption = input.Caption;
             accountUnit.ChartOfAccountId = input.ChartOfAccountId;
-            accountUnit.ParentId = input.ParentId != 0 ? input.ParentId : null;                
-            accountUnit.RollupAccountId = input.RollupAccountId;         
-            accountUnit.TypeOfCurrencyId = input.TypeOfCurrencyId;          
+            accountUnit.ParentId = input.ParentId != 0 ? input.ParentId : null;
+            accountUnit.RollupAccountId = input.RollupAccountId;
+            accountUnit.TypeOfCurrencyId = input.TypeOfCurrencyId;
             accountUnit.TypeofConsolidationId = input.TypeofConsolidationId;
             accountUnit.RollupJobId = input.RollupJobId;
-            accountUnit.TypeOfAccountId = input.TypeOfAccountId;         
+            accountUnit.TypeOfAccountId = input.TypeOfAccountId;
             #endregion
 
             await _accountUnitManager.UpdateAsync(accountUnit);
@@ -155,6 +151,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task DeleteLineUnit(IdInput<long> input)
         {
             await _accountUnitManager.DeleteAsync(input.Id);
-        }        
+        }
     }
 }

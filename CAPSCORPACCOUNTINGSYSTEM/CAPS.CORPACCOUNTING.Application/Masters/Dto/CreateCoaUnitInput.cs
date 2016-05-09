@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using System.ComponentModel.DataAnnotations;
 
@@ -29,6 +30,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool IsPrivate { get; set; } = false;
 
         /// <summary>Gets or sets the CompanyId field. </summary>
+      
         public long OrganizationId { get; set; }      
 
         /// <summary>Gets or sets the IsCorporate field. </summary>

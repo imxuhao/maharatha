@@ -13,14 +13,14 @@ namespace CAPS.CORPACCOUNTING.Masters
 {
 
     [Table("CAPS_TaxCredit")]
-    public class TaxCreditUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class TaxCreditUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxNumberLength = 5;
         public const int MaxDescriptionLength = 50;
 
         /// <summary>Gets or sets the AccountId field. </summary>
         [Column("TaxCreditId")]
-        public override long Id { get; set; }
+        public override int Id { get; set; }
 
         /// <summary>Gets or sets the Number field. </summary>
         [Required]

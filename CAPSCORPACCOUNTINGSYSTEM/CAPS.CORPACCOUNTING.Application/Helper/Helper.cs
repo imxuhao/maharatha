@@ -65,7 +65,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
                         .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property));
                         textSearch.Add(item.MapTo(new TextSearch()));
                         break;
-                    case DataTypes.Numaric:
+                    case DataTypes.Numeric:
                         if (ReferenceEquals(numericSearch, null))
                             numericSearch = new List<NumericSearch>();
                         Mapper.CreateMap<Filters, NumericSearch>()
@@ -146,7 +146,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
             if (!ReferenceEquals(searchTypes.TextSearch, null))
                 query = query.ApplySearchCriterias(searchTypes.TextSearch);
 
-            //Numaric Search
+            //Numeric Search
             if (!ReferenceEquals(searchTypes.NumericSearch, null))
                 query = query.ApplySearchCriterias(searchTypes.NumericSearch);
 
@@ -232,7 +232,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
     }
     public enum DataTypes
     {
-        Numaric = 0,
+        Numeric = 0,
         Text = 1,
         Date = 2,
         Bool = 3,

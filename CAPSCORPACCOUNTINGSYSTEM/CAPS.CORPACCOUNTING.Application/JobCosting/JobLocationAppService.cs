@@ -72,6 +72,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 items.Select(item=>
                 {
                     var dto = item.JobLocation.MapTo<JobLocationUnitDto>();
+                    dto.JobLocationId = item.JobLocation.Id;
                     dto.LocationName = item.LocationName;
                     return dto;
                 }).ToList());
@@ -103,7 +104,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             return new PagedResultOutput<JobLocationUnitDto>(resultCount, results.Select(item =>
             {
                 var dto = item.JobLocation.MapTo<JobLocationUnitDto>();
-                dto.LocationId = item.JobLocation.Id;
+                dto.JobLocationId = item.JobLocation.Id;
                 dto.LocationName = item.LocationName;
                 return dto;
 

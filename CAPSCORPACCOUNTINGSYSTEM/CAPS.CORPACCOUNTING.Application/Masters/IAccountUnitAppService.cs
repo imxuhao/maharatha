@@ -12,13 +12,6 @@ namespace CAPS.CORPACCOUNTING.Masters
     public interface IAccountUnitAppService:IApplicationService
     {
         /// <summary>
-        /// Get the list of all Accounts based on CompanyId.
-        /// </summary>
-        /// <param name="organizationUnitId"></param>
-        /// <returns></returns>
-        Task<ListResultOutput<AccountUnitDto>> GetAccountUnits(long? organizationUnitId);
-
-        /// <summary>
         /// Create the Account.
         /// </summary>
         /// <param name="input"></param>

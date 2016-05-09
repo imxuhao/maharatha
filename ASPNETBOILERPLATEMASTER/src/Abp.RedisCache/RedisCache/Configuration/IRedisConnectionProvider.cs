@@ -6,6 +6,8 @@ namespace Abp.RedisCache.Configuration
     {
         ConnectionMultiplexer GetConnection(string connectionString);
 
-        string GetConnectionString(string service);
+        string GetConnectionString(string name);
+        
+        int GetDatabaseId(string name);
     }
 }

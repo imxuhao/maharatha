@@ -2,23 +2,24 @@
 using System;
 using System.Collections.Concurrent;
 using System.Configuration;
+using Abp.Dependency;
+using Abp.Extensions;
 
 namespace Abp.RedisCache.Configuration
 {
-    public class AbpRedisConnectionProvider : IAbpRedisConnectionProvider
+    public class AbpRedisConnectionProvider : IAbpRedisConnectionProvider, ISingletonDependency
     {
         private static readonly ConcurrentDictionary<string, Lazy<ConnectionMultiplexer>> ConnectionMultiplexers = new ConcurrentDictionary<string, Lazy<ConnectionMultiplexer>>();
 
-        public string GetConnectionString(string service)
+        public string GetConnectionString(string name)
         {
-            var connectionStringSettings = ConfigurationManager.ConnectionStrings[service];
-
-            if (connectionStringSettings == null)
+            var connStr = ConfigurationManager.ConnectionStrings[name];
+            if (connStr == null)
             {
-                throw new ConfigurationErrorsException("A connection string is expected for " + service);
+                return "localhost";
             }
-
-            return connectionStringSettings.ConnectionString;
+            
+            return connStr.ConnectionString;
         }
 
         public ConnectionMultiplexer GetConnection(string connectionString)
@@ -37,6 +38,23 @@ namespace Abp.RedisCache.Configuration
                 connectionString,
                 new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(connectionString))
                 ).Value;
+        }
+
+        public int GetDatabaseId(string databaseIdAppSettingName)
+        {
+            var appSetting = ConfigurationManager.AppSettings[databaseIdAppSettingName];
+            if (appSetting.IsNullOrEmpty())
+            {
+                return -1;
+            }
+
+            int databaseId;
+            if (!int.TryParse(appSetting, out databaseId))
+            {
+                return -1;
+            }
+
+            return databaseId;
         }
     }
 }

@@ -11,15 +11,16 @@
             { name: 'payToName', type: 'string' },
             { name: 'dbaName', type: 'string' },
             { name: 'vendorNumber', type: 'string' },
+             { name: 'contactNumber', type: 'string' },
             { name: 'vendorAccountInfo', type: 'string' },
             { name: 'fedralTaxId', type: 'string' },
             { name: 'ssnTaxId', type: 'string' },
             { name: 'creditLimit', type: 'float' },
             { name: 'typeofPaymentMethod', type: "string" },
             { name: 'typeofPaymentMethodId', type: "auto" },
-            { name: 'paymentTermsId', type: "int" },
+            { name: 'paymentTermsId', type: "int",defaultVaule:null,convert:nullHandler },
             { name: 'typeofCurrency', type: "string" },
-            { name: 'typeofCurrencyId', type: "int" },
+            { name: 'typeofCurrencyId', type: "int", defaultVaule: null, convert: nullHandler },
             { name: 'isCorporation', type: "boolean" },
             { name: 'is1099', type: "boolean" },
             { name: 'isIndependentContractor', type: "boolean" },
@@ -47,12 +48,25 @@
             { name: 'isActive', type: "boolean" },
             { name: 'isApproved', type: "boolean" },
             { name: 'paymentTerms', type: "string" },
+            { name: 'billingAccount', type: "string" },
+            { name: 'typeofTaxId', type: "int", defaultVaule: null, convert: nullHandler },
+            { name: 'taxCreditId', type: "int", defaultVaule: null, convert: nullHandler },
+            { name: 'jobId', type: "int", defaultVaule: null, convert: nullHandler },
+            { name: 'glAccountId', type: "int", defaultVaule: null, convert: nullHandler },
+            { name: 'accountId', type: "int", defaultVaule: null, convert: nullHandler },
+            { name: 'notes', type: "string" },
             {
                 name: 'address',
                 reference: {
                     parent: 'address.AddressModel'
                 }
-            }
+            },
+            //{
+            //    name: 'vendorAlias',
+            //    reference: {
+            //        parent: 'payables.vendors.VendorAliasModel'
+            //    }
+            //}
     ],
 });
 

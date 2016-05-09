@@ -42,7 +42,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<ListResultOutput<AddressUnitDto>> GetAddressUnits(GetAddressUnitInput input)
         {
             var query = _addressUnitRepository.GetAll()
-                    .Where(au => au.TypeofObjectId == input.TypeofObjectId
+                    .Where(au => au.TypeofObjectId == input.TypeofObjectId && au.ObjectId==input.ObjectId
                     && (input.OrganizationUnitId == null || au.OrganizationUnitId == input.OrganizationUnitId))
                     .Select(au => new { au });
             var items = await query.ToListAsync();

@@ -1841,6 +1841,7 @@
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorAliasModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\ProjectModel.js" />
@@ -1925,6 +1926,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewListController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorAliasGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorAliasGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsGrid.js" />

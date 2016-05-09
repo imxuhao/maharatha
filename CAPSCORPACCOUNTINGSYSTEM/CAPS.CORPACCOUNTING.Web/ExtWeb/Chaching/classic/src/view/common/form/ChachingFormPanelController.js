@@ -2,7 +2,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.common-form-chachingformpanel',
     //default buttons action handler
-    onSaveClicked: function(btn) {        
+    onSaveClicked: function (btn) {
         var me = this,
             view = me.getView(),
             parentGrid = view.parentGrid,
@@ -73,19 +73,41 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
         var controller = operation.controller,
                 view = controller.getView();
         var mask = operation.operationMask;
-        if (mask)mask.hide();
+        if (mask) mask.hide();
+        var promise = controller.doPostSaveOperations(records, operation, success);
+        var runner = new Ext.util.TaskRunner(),
+    task;
+
+        task = runner.newTask({
+            run: function () {
+                if (promise && promise.owner.completed) {
+                    task.stop();
+                    if (promise.owner.completionAction === "fulfill") {
+                        controller.handleMainThreadResponse(records, operation, success)
+                    }
+                }
+            },
+            interval: 1000
+        });
+
+        task.start();
+    },
+    handleMainThreadResponse: function (records, operation, success) {
+        var controller = operation.controller,
+               view = controller.getView();
         if (success) {
             var action = operation.getAction();
             if (action === "create" || action === "update") {
                 var gridController = operation.parentGrid.getController();
                 gridController.doReloadGrid();
-               
+
                 if (view && view.openInPopupWindow) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
                 } else if (view) {
                     Ext.destroy(view);
                 }
+
 
             }
             abp.notify.success('Operation completed successfully.', 'Success');
@@ -128,6 +150,11 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             }
             abp.message.error(message, title);
         }
-    },
+    },   
+    doPostSaveOperations: function (records, operation, success) {
+        var deferred = new Ext.Deferred();
+        deferred.resolve('{success:true}');        
+        return deferred.promise;       
+    }
     
 });

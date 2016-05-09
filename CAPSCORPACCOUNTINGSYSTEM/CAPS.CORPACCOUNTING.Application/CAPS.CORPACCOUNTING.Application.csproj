@@ -318,6 +318,7 @@
     <Compile Include="Masters\Dto\GetSalesRepInput.cs" />
     <Compile Include="Masters\Dto\UpdateUserViewSettingsUnitInput.cs" />
     <Compile Include="Masters\Dto\UserViewSettingsUnitDto.cs" />
+    <Compile Include="Masters\Dto\VendorAliasUnitDto.cs" />
     <Compile Include="Masters\Dto\VendorAndAddressDto.cs" />
     <Compile Include="Masters\Dto\GetVendorInput.cs" />
     <Compile Include="Masters\Dto\GetCustomerInput.cs" />

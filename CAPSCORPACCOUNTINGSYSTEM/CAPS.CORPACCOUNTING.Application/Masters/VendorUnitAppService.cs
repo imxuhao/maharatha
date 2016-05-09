@@ -15,6 +15,7 @@ using Abp.Linq.Extensions;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -30,14 +31,16 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<TypeOfCountryUnit,short> _typeOfCountryRepository;
         private readonly IRepository<RegionUnit> _regionRepository;
         private readonly IRepository<CountryUnit> _countryRepository;
-
-
+        private readonly IRepository<VendorAliasUnit> _vendorAliasUnitRepository;
+        private readonly IRepository<AccountUnit,long> _accountUnitRepository;
+        private readonly IRepository<CoaUnit> _coaUnitRepository;
 
         public VendorUnitAppService(VendorUnitManager vendorUnitManager, IRepository<VendorUnit> vendorUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService,
             IRepository<AddressUnit, long> addresRepository, IRepository<VendorPaymentTermUnit> vendorPaytermRepository,
             IRepository<TypeOfCountryUnit, short> typeOfCountryRepository,IRepository<RegionUnit> regionRepository,
-            IRepository<CountryUnit> countryRepository)
+            IRepository<CountryUnit> countryRepository, IRepository<VendorAliasUnit> vendorAliasUnitRepository,
+            IRepository<AccountUnit, long> accountUnitRepository, IRepository<CoaUnit> coaUnitRepository)
         {
             _vendorUnitManager = vendorUnitManager;
             _vendorUnitRepository = vendorUnitRepository;
@@ -48,6 +51,9 @@ namespace CAPS.CORPACCOUNTING.Masters
             _typeOfCountryRepository = typeOfCountryRepository;
             _regionRepository = regionRepository;
             _countryRepository = countryRepository;
+            _vendorAliasUnitRepository = vendorAliasUnitRepository;
+            _accountUnitRepository = accountUnitRepository;
+            _coaUnitRepository = coaUnitRepository;
         }
 
         public IEventBus EventBus { get; set; }
@@ -57,6 +63,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Payables_Vendors_Create)]
         [UnitOfWork]
         public async Task<VendorUnitDto> CreateVendorUnit(CreateVendorUnitInput input)
         {
@@ -103,6 +110,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Payables_Vendors_Delete)]
         [UnitOfWork]
         public async Task DeleteVendorUnit(IdInput input)
         {
@@ -139,6 +147,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Payables_Vendors)]
         public async Task<PagedResultOutput<VendorUnitDto>> GetVendorUnits(SearchInputDto input)
         {
             var query = CreateVendorQuery(input);
@@ -165,14 +174,23 @@ namespace CAPS.CORPACCOUNTING.Masters
                     var dto = result.Vendor.MapTo<VendorUnitDto>();
                     dto.VendorId = result.Vendor.Id;
                     dto.PaymentTerms = result.PaymentTerms;
-                    dto.TypeofCurrency = result.Vendor.TypeofCurrency;
-                    dto.TypeofPaymentMethod = result.Vendor.TypeofPaymentMethod != null ? result.Vendor.TypeofPaymentMethod.ToDisplayName() : ""; 
-                    dto.Typeof1099Box = result.Vendor.Typeof1099Box != null ? result.Vendor.Typeof1099Box.ToDisplayName() : ""; 
+                    dto.TypeofCurrencyId = result.Vendor.TypeofCurrencyId;
+                    dto.TypeofPaymentMethod = result.Vendor.TypeofPaymentMethodId != null ? result.Vendor.TypeofPaymentMethodId.ToDisplayName() : ""; 
+                    dto.Typeof1099Box = result.Vendor.Typeof1099BoxId != null ? result.Vendor.Typeof1099BoxId.ToDisplayName() : ""; 
                     dto.Address = new Collection<AddressUnitDto>();
                     if (result.Address != null)
                     {
                         dto.Address.Add(result.Address.MapTo<AddressUnitDto>());
                         dto.Address[0].AddressId = result.Address.Id;
+                    }
+                    dto.VendorAlias = new Collection<VendorAliasUnitDto>();
+
+                    if (result.VendorAlias.Count !=0)
+                    {
+                        foreach (var item in result.VendorAlias)
+                        {
+                            dto.VendorAlias.Add(item.MapTo<VendorAliasUnitDto>());
+                        }
                     }
                     return dto;
                 }).ToList();
@@ -180,14 +198,19 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         private IQueryable<VendorAndAddressDto> CreateVendorQuery(SearchInputDto input)
         {
-            var query = from vendor in _vendorUnitRepository.GetAll()
+            var query = from vendor in _vendorUnitRepository.GetAll().Include(u=>u.VendorAlias)
                         join addr in _addresRepository.GetAll() on vendor.Id equals addr.ObjectId
                             into temp
                         from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Vendor).DefaultIfEmpty()
-                        join payterms in _vendorPaytermRepository.GetAll() on vendor.Id equals payterms.Id
+                        join payterms in _vendorPaytermRepository.GetAll() on vendor.PaymentTermsId equals payterms.Id
                             into paymentperms
                         from pt in paymentperms.DefaultIfEmpty()
-                        select new VendorAndAddressDto { Vendor = vendor, Address = rt, PaymentTerms = pt.Description };
+                        select new VendorAndAddressDto {
+                            Vendor = vendor,
+                            Address = rt,
+                            PaymentTerms = pt.Description,
+                           VendorAlias = vendor.VendorAlias
+                        };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -204,31 +227,37 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+
+        [AbpAuthorize(AppPermissions.Pages_Payables_Vendors_Edit)]
         [UnitOfWork]
         public async Task<VendorUnitDto> UpdateVendorUnit(UpdateVendorUnitInput input)
         {
             var vendorUnit = await _vendorUnitRepository.GetAsync(input.VendorId);
-            foreach (var address in input.Addresses)
-            {
-                if (address.AddressId != 0)
-                    await _addressAppService.UpdateAddressUnit(address);
-                else
-                {
-                    if (address.Line1 != null || address.Line2 != null ||
-                        address.Line4 != null || address.Line4 != null ||
-                        address.State != null || address.Country != null ||
-                        address.Email != null || address.Phone1 != null || address.Website != null)
-                    {
-                        address.TypeofObjectId = TypeofObject.Vendor;
-                        address.ObjectId = input.VendorId;
-                        AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
-                        await
-                            _addressAppService.CreateAddressUnit(
-                                AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
-                    }
-                }
-                await CurrentUnitOfWork.SaveChangesAsync();
 
+            if (!ReferenceEquals(input.Addresses, null))
+            {
+                foreach (var address in input.Addresses)
+                {
+                    if (address.AddressId != 0)
+                        await _addressAppService.UpdateAddressUnit(address);
+                    else
+                    {
+                        if (address.Line1 != null || address.Line2 != null ||
+                            address.Line4 != null || address.Line4 != null ||
+                            address.State != null || address.Country != null ||
+                            address.Email != null || address.Phone1 != null || address.Website != null)
+                        {
+                            address.TypeofObjectId = TypeofObject.Vendor;
+                            address.ObjectId = input.VendorId;
+                            AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            await
+                                _addressAppService.CreateAddressUnit(
+                                    AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
+                        }
+                    }
+                    await CurrentUnitOfWork.SaveChangesAsync();
+
+                }
             }
 
 
@@ -259,11 +288,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             vendorUnit.FirstName = input.FirstName;
             vendorUnit.DbaName = input.DbaName;
             vendorUnit.SSNTaxId = input.SSNTaxId;
-            vendorUnit.TypeofPaymentMethod = input.TypeofPaymentMethod;
-            vendorUnit.TypeofCurrency = input.TypeofCurrency;
+            vendorUnit.TypeofPaymentMethodId = input.TypeofPaymentMethodId;
+            vendorUnit.TypeofCurrencyId = input.TypeofCurrencyId;
             vendorUnit.Is1099 = input.Is1099;
             vendorUnit.ACHRoutingNumber = input.ACHRoutingNumber;
-            vendorUnit.Typeof1099Box = input.Typeof1099Box;
+            vendorUnit.Typeof1099BoxId = input.Typeof1099BoxId;
             vendorUnit.EDDConctractAmount = input.EDDConctractAmount;
             vendorUnit.IsEDDContractOnGoing = input.IsEDDContractOnGoing;
             vendorUnit.ACHAccountNumber = input.ACHAccountNumber;
@@ -340,17 +369,65 @@ namespace CAPS.CORPACCOUNTING.Masters
             return EnumList.GetTypeofObjectList();
         }
 
-        ///// <summary>
-        ///// Get TypeofObject
-        ///// </summary>
-        ///// <returns></returns>
-        //public async List<NameValueDto> GetCountryList()
-        //{
-        //    var typeOfCurrencyRates = await _typeOfCurrencyRateRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
-        //    return typeOfCurrencyRates;
-        //}
+        /// <summary>
+        /// Get TypeOfTax
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeOfTaxList()
+        {
+            return EnumList.GetTypeOfTaxList();
+        }
+
+        /// <summary>
+        /// Get PaymentTerms
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetPaymentTermsList()
+        {
+            var Payterms = await _vendorPaytermRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return Payterms;
+        }
+
+        /// <summary>
+        /// Get PaymentTerms
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetCountryList()
+        {
+            var countryList=await (from country in _countryRepository.GetAll()
+                            join typeOfCountry in _typeOfCountryRepository.GetAll() on country.TypeOfCountryId equals typeOfCountry.Id
+                            select new NameValueDto { Name = typeOfCountry.Description, Value = typeOfCountry.Id.ToString() }).ToListAsync();
+
+            return countryList;
+        }
+
+        /// <summary>
+        /// Get PaymentTerms
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetRegionList()
+        {
+            var RegionList = await _regionRepository.GetAll().Select(u => new NameValueDto { Name = u.Description+" ("+u.RegionAbbreviation+")", Value = u.Id.ToString() }).ToListAsync();
+            return RegionList;
+        }
+
+
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="search"></param>
+       /// <returns></returns>
+        public async Task<List<NameValueDto>> GetAccountsList(AutoSearchInput search)
+        {
+            var accountList = await (from account in _accountUnitRepository.GetAll()
+                                     join coa in _coaUnitRepository.GetAll() on account.ChartOfAccountId equals coa.Id
+                                     where coa.IsCorporate==search.Value
+                                     select new NameValueDto { Name = account.Description, Value = account.Id.ToString() }).ToListAsync();
+            return accountList;
+        }
 
     }
+    
 }
 
 

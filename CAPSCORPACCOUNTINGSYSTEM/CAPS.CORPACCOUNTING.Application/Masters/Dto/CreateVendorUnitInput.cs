@@ -148,6 +148,28 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
 
+        /// <summary>Gets or sets the BillingAccount field. </summary>
+        [StringLength(VendorUnit.MaxBillingAccountLength)]
+        public string BillingAccount { get; set; }
+
+        /// <summary>Gets or sets the TypeofTaxId field. </summary>
+        public TypeofTax? TypeofTaxId { get; set; }
+
+        /// <summary>Gets or sets the TaxCreditId field. </summary>
+        public int? TaxCreditId { get; set; }
+
+        /// <summary>Gets or sets the JobId field. </summary>
+        public int? JobId { get; set; }
+
+        /// <summary>Gets or sets the GLAccountId field. </summary>
+        public long? GLAccountId { get; set; }
+
+        /// <summary>Gets or sets the AccountId field. </summary>
+        public long? AccountId { get; set; }
+
+        /// <summary>Gets or sets the Notes field. </summary>
+        public string Notes { get; set; }
+
         /// <summary> Gets or sets Addresses of the Vendor. </summary>
         public List<CreateAddressUnitInput> Addresses { get; set; }
     }

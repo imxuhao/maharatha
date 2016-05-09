@@ -553,12 +553,12 @@
     <text name="EmailSearch" value="Email Search" />
     <text name="1099CodeSearch" value="1099 Code Search" />
     <text name="PaymentTermsSearch" value="Payment Terms Search" />
-    <text name="TotalOutstanding" value="Total Outstanding" />
+    <text name="TotalOutstandingInvoices" value="Total Outstanding Invoices" />
     <text name="Contact" value="Contact" />
     <text name="Other" value="Other" />
     <text name="Company/LastName" value="Company/Last Name" />
     <text name="FirstName" value="First Name" />
-    <text name="PayToName" value="(Pay To) Name" />
+    <text name="PayToName" value="Pay to Name" />
     <text name="Type" value="Type" />
     <text name="VendorNumber" value="Vendor Number" />
     <text name="SSN/TaxID" value="SSN/Tax ID" />
@@ -646,6 +646,31 @@
     <text name="JobLocations" value="Job locations" />
     <text name="Location" value="Location" />
     <text name="LocationDate" value="Location date" />
+    <text name="Address1" value="Address1" />
+    <text name="Address2" value="Address2" />
+    <text name="Address3" value="Address3" />
+    <text name="Address4" value="Address4" />
+    <text name="CompanyName" value="Company Name" />
+    <text name="BillingAccount#" value="Billing Account #" />
+    <text name="TaxInformation" value="Tax Information" />
+    <text name="TaxCredit" value="Tax Credit" />
+    <text name="Division" value="Division" />
+    <text name="GLAccount" value="GL Account" />
+    <text name="Line#" value="Line #" />
+    <text name="DateCreated" value="Date Created" />
+    <text name="Zip" value="Zip" />
+    <text name="ZipCode" value="Zip Code" />
+    <text name="PreviousYearPayments" value="Previous Year Payments" />
+    <text name="CurrentYearPayments" value="Current Year Payments" />
+    <text name="OpenPurchaseOrders" value="Open Purchase Orders" />
+    <text name="FederalTaxID" value="Federal Tax ID" />
+    <text name="IndependentContractor" value="Independent Contractor" />
+    <text name="BillingAccount" value="Billing Account" />
+    <text name="SSN" value="SSN" />
+    <text name="DefaultsSection" value="Defaults Section" />
+    <text name="VendorAliasSection" value="Vendor Alias Section" />
+    <text name="NotesSection" value="Notes Section" />
+    <text name="Notes" value="Notes" />
 <text name="SecondAddress" value="Second Address" />
 <text name="ThirdAddress" value="Third Address" />
 <text name="FourthAddress" value="Fourth Address" />
@@ -654,6 +679,10 @@
      <text name="ProjectSetup" value="Project setup" />
    <text name="AgencyContractInfo" value="Agency Contract Info" />
   <text name="ToolTipBidder" value="Enter product owner" />
+    <text name="GeneralInformation" value="General Information" />
+    <text name="VendorAlias" value="Vendor Alias" />
+    <text name="CreatingVendorAlias" value="Creating Vendor Alias" />
+    
   <text name="SaveProject" value="Save project" />
   <text name="SaveProjectDetails" value="Save project details" />
   <text name="LineNumbersTab" value="Line #" />

@@ -14,6 +14,7 @@ namespace CAPS.CORPACCOUNTING
         {
             //web.config (or app.config for non-web projects) file should containt a connection string named "Default".
             Configuration.DefaultNameOrConnectionString = "Default";
+          
         }
 
         public override void Initialize()

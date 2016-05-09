@@ -81,6 +81,39 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <returns></returns>
         List<NameValueDto> GetTypeofObjectList();
-       
+
+
+        /// <summary>
+        /// Get TypeOfTax
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeOfTaxList();
+
+
+        /// <summary>
+        /// Get PaymentTerms
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetPaymentTermsList();
+
+        /// <summary>
+        /// Get Country list
+        /// </summary>
+        /// <returns></returns>
+         Task<List<NameValueDto>> GetCountryList();
+
+        /// <summary>
+        /// Get Country list
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetRegionList();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetAccountsList(AutoSearchInput search);
+
     }
 }

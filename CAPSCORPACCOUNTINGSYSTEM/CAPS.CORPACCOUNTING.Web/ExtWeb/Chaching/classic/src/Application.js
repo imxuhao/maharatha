@@ -41,7 +41,8 @@ Ext.define('Chaching.Application', {
         'payables.vendors.VendorsStore',
         'languages.LanguagesDataStore',
         'projects.projectmaintenance.ProjectsStore',
-        'projects.projectmaintenance.ProjectCoaStore'
+        'projects.projectmaintenance.ProjectCoaStore',
+         'address.AddressStore'
       
     ],
     mainView: 'Chaching.view.main.ChachingViewport',

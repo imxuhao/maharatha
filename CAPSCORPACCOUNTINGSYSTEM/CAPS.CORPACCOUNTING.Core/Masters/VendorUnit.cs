@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -45,11 +47,25 @@ namespace CAPS.CORPACCOUNTING.Masters
         [Display(Name = "(Canada) Rent")] CanadaRent = 13,
         [Display(Name = "(Canada) NEC/Attorney")] NecAttorney = 14,
     }
+
+    /// <summary>
+    /// Enum for Typeof1099T4
+    /// </summary>
+    public enum TypeofTax
+    {
+        [Display(Name = "Corporation")]
+        Corporation = 1,
+        [Display(Name = "Non-Corporation")]
+        NonCorporation = 2,
+        [Display(Name = "Individual")]
+        Individual = 3,
+       
+    }
     /// <summary>
     /// Vendor is the table name in lajit
     /// </summary>
     [Table("CAPS_Vendor")]
-    public sealed class VendorUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public  class VendorUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
         ///     Maximum length of the <see cref="MaxDisplayNameLength" /> property.
@@ -61,6 +77,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public const int MaxSsnLength = 15;
         public const int MaxRegionLength = 10;
         public const int MaxAchwireLength = 30;
+        public const int MaxBillingAccountLength = 100;
 
         /// <summary>
         ///     Maximum size of VendorNumber.
@@ -77,11 +94,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         ///     Initializes a new instance of the <see cref="VendorUnit" /> class.
         /// </summary>
-        public VendorUnit(string lastname, TypeofPaymentMethod? typeofpaymentmethod, Typeof1099T4? typeof1099Box,
+        public VendorUnit(string lastname, TypeofPaymentMethod? typeofpaymentmethodId, Typeof1099T4? typeof1099BoxId,
             string firstname, string paytoname, string dbaname,
             string vendornumber, string vendoraccountinfo,
             string fedraltaxid, string ssntaxid, decimal? creditlimit, int? paymenttermsid,
-            string typeofcurrency, bool iscorporation, bool is1099,
+            int typeofcurrencyId, bool iscorporation, bool is1099,
             bool isindependentcontractor, bool isw9Onfile, string achroutingnumber,
             TypeofVendor typeofvendorid,
             DateTime? eddcontractstartdate,
@@ -103,17 +120,17 @@ namespace CAPS.CORPACCOUNTING.Masters
             SSNTaxId = ssntaxid;
             CreditLimit = creditlimit;
             PaymentTermsId = paymenttermsid;
-            TypeofCurrency = typeofcurrency;
+            TypeofCurrencyId = typeofcurrencyId;
             IsCorporation = iscorporation;
             Is1099 = is1099;
             IsIndependentContractor = isindependentcontractor;
             Isw9OnFile = isw9Onfile;
             TypeofVendorId = typeofvendorid;
-            Typeof1099Box = typeof1099Box;
+            Typeof1099BoxId = typeof1099BoxId;
             EDDContractStartDate = eddcontractstartdate;
             EDDContractStopDate = eddcontractstopdate;
             EDDConctractAmount = eddconctractamount;
-            TypeofPaymentMethod = typeofpaymentmethod;
+            TypeofPaymentMethodId = typeofpaymentmethodId;
             WorkRegion = workregion;
             IsEDDContractOnGoing = iseddcontractongoing;
             ACHBankName = achbankname;
@@ -181,7 +198,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public decimal? CreditLimit { get; set; }
        
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
-        public TypeofPaymentMethod? TypeofPaymentMethod { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethodId { get; set; }
 
         [ForeignKey("PaymentTermsId")]
         public VendorPaymentTermUnit PaymentTerms { get; set; }
@@ -190,8 +207,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public int? PaymentTermsId { get; set; }
 
         /// <summary>Gets or sets the TypeofCurrency field. </summary>
-        [StringLength(MaxAchLength)]
-        public string TypeofCurrency { get; set; }
+        public int TypeofCurrencyId { get; set; }
 
         /// <summary>Gets or sets the IsCorporation field. </summary>
         public bool IsCorporation { get; set; }
@@ -208,7 +224,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public TypeofVendor TypeofVendorId { get; set; }
 
         /// <summary>Gets or sets the Typeof1099T4 field. </summary>
-        public Typeof1099T4? Typeof1099Box { get; set; }
+        public Typeof1099T4? Typeof1099BoxId { get; set; }
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
         public DateTime? EDDContractStartDate { get; set; }
@@ -278,13 +294,37 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>Gets or sets the IsApproved field. </summary>
         public bool IsApproved { get; set; }
 
-
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
-        
+
+        /// <summary>Gets or sets the BillingAccount field. </summary>
+        [StringLength(MaxBillingAccountLength)]
+        public string BillingAccount { get; set; }
+
+        /// <summary>Gets or sets the TypeofTaxId field. </summary>
+        public TypeofTax? TypeofTaxId { get; set; }
+
+        /// <summary>Gets or sets the TaxCreditId field. </summary>
+        public int? TaxCreditId { get; set; }
+
+        /// <summary>Gets or sets the JobId field. </summary>
+        public int? JobId { get; set; }
+
+        /// <summary>Gets or sets the GLAccountId field. </summary>
+        public long? GLAccountId { get; set; }
+
+        /// <summary>Gets or sets the AccountId field. </summary>
+        public long? AccountId { get; set; }
+
+        /// <summary>Gets or sets the Notes field. </summary>
+        public string Notes { get; set; }
+
+        /// <summary>Gets or sets the VendorAlias field. </summary>
+        public IList<VendorAliasUnit> VendorAlias { get; set; }
+
         #endregion
     }
 }

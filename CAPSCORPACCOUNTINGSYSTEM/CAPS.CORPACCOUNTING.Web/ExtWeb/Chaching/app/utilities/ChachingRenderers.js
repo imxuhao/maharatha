@@ -203,7 +203,34 @@
         if (record) {
             var address = record.getAddress();
             if (address) {
-                return address.get('Phone1');
+                return address.get('phone1');
+            }
+        }
+        return value;
+    },
+    renderCity: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get('city');
+            }
+        }
+        return value;
+    },
+    renderState: function (val, meta, record, rowIndex, colIndex, store, view) {
+            if (record) {
+                var address = record.getAddress();
+                if (address) {
+                    return address.get('state');
+                }
+            }
+            return value;
+        },
+        renderPostalCode: function (val, meta, record, rowIndex, colIndex, store, view) {
+            if (record) {
+                var address = record.getAddress();
+                if (address) {
+                    return address.get('postalCode');
             }
         }
         return value;

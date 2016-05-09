@@ -1139,6 +1139,18 @@
     <Compile Include="Migrations\201605061149110_Modify_TaxRecovery_Tables.Designer.cs">
       <DependentUpon>201605061149110_Modify_TaxRecovery_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605090619169_Modify_Vendor_Table.cs" />
+    <Compile Include="Migrations\201605090619169_Modify_Vendor_Table.Designer.cs">
+      <DependentUpon>201605090619169_Modify_Vendor_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605090637554_Add_VendorAlias_Table.cs" />
+    <Compile Include="Migrations\201605090637554_Add_VendorAlias_Table.Designer.cs">
+      <DependentUpon>201605090637554_Add_VendorAlias_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605090640156_Add_TaxCredit_Table.cs" />
+    <Compile Include="Migrations\201605090640156_Add_TaxCredit_Table.Designer.cs">
+      <DependentUpon>201605090640156_Add_TaxCredit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultValueAddedTaxTypeCreator.cs" />
@@ -1932,6 +1944,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605061149110_Modify_TaxRecovery_Tables.resx">
       <DependentUpon>201605061149110_Modify_TaxRecovery_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090619169_Modify_Vendor_Table.resx">
+      <DependentUpon>201605090619169_Modify_Vendor_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090637554_Add_VendorAlias_Table.resx">
+      <DependentUpon>201605090637554_Add_VendorAlias_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605090640156_Add_TaxCredit_Table.resx">
+      <DependentUpon>201605090640156_Add_TaxCredit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

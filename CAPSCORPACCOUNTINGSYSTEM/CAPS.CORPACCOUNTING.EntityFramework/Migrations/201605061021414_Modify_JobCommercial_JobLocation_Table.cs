@@ -9,7 +9,10 @@ namespace CAPS.CORPACCOUNTING.Migrations
     {
         public override void Up()
         {
-            Sql("alter table dbo.CAPS_JobLocation DROP CONSTRAINT[FK_dbo.CAPS_JobLocation_dbo.CAPS_JobDetail_JobDetailId]");
+            Sql(@"IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_dbo.CAPS_JobLocation_dbo.CAPS_JobDetail_JobDetailId]') AND type in (N'F'))
+                BEGIN
+                ALTER TABLE dbo.CAPS_JobLocation DROP CONSTRAINT[FK_dbo.CAPS_JobLocation_dbo.CAPS_JobDetail_JobDetailId]
+                END");
             DropForeignKey("dbo.CAPS_JobLocation", "JobDetailId", "dbo.CAPS_JobCommercial");
             DropForeignKey("dbo.CAPS_JobCommercial", "JobId", "dbo.CAPS_Job");
             DropIndex("dbo.CAPS_JobCommercial", new[] { "JobId" });
@@ -287,8 +290,8 @@ namespace CAPS.CORPACCOUNTING.Migrations
             AddPrimaryKey("dbo.CAPS_JobCommercial", "JobCommercialId");
             CreateIndex("dbo.CAPS_JobLocation", "JobDetailId");
             CreateIndex("dbo.CAPS_JobCommercial", "JobId");
-            AddForeignKey("dbo.CAPS_JobCommercial", "JobId", "dbo.CAPS_Job", "JobId", cascadeDelete: true);
-            AddForeignKey("dbo.CAPS_JobLocation", "JobDetailId", "dbo.CAPS_JobCommercial", "JobCommercialId", cascadeDelete: true);
+            AddForeignKey("dbo.CAPS_JobCommercial", "JobId", "dbo.CAPS_Job", "JobId", cascadeDelete: false);
+            AddForeignKey("dbo.CAPS_JobLocation", "JobDetailId", "dbo.CAPS_JobCommercial", "JobCommercialId", cascadeDelete: false);
         }
     }
 }

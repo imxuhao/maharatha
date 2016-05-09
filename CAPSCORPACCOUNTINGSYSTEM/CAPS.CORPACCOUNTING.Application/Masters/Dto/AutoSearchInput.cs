@@ -13,6 +13,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         public string Query { get; set; }
 
+        public bool Value { get; set; }
+
         public long? OrganizationId { get; set; }
     }
 }

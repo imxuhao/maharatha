@@ -487,6 +487,73 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                     rootProperty: 'result'
                 }
             }
+        },
+        typeOfTaxList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'typeOfTax', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeOfTaxId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/vendorUnit/GetTypeOfTaxList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        }
+        ,
+        paymentTermsList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'paymentTerms', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'paymentTermsId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/vendorUnit/GetPaymentTermsList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        },
+        getAccountsList: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+                name: 'account', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'accountId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            extraParams: {
+                value: false
+            },
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/vendorUnit/GetAccountsList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
         }
     }
 

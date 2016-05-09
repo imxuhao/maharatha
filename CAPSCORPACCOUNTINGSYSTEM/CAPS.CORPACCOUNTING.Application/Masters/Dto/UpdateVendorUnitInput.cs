@@ -47,14 +47,14 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public decimal? CreditLimit { get; set; }
 
         /// <summary>Gets or sets the TypeofPaymentMethod field. </summary>
-        public TypeofPaymentMethod? TypeofPaymentMethod { get; set; }
+        public TypeofPaymentMethod? TypeofPaymentMethodId { get; set; }
 
         /// <summary>Gets or sets the PaymentTermsId field. </summary>
         public int? PaymentTermsId { get; set; }
 
         /// <summary>Gets or sets the TypeofCurrency field. </summary>
         [StringLength(VendorUnit.MaxAchLength)]
-        public string TypeofCurrency { get; set; }
+        public int TypeofCurrencyId { get; set; }
 
         /// <summary>Gets or sets the IsCorporation field. </summary>
         public bool IsCorporation { get; set; }
@@ -73,7 +73,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public TypeofVendor TypeofvendorId { get; set; }
 
         /// <summary>Gets or sets the Typeof1099T4 field. </summary>
-        public Typeof1099T4? Typeof1099Box { get; set; }
+        public Typeof1099T4? Typeof1099BoxId { get; set; }
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
         public DateTime? EDDContractStartDate { get; set; }
@@ -147,6 +147,29 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+
+        /// <summary>Gets or sets the BillingAccount field. </summary>
+        [StringLength(VendorUnit.MaxBillingAccountLength)]
+        public string BillingAccount { get; set; }
+
+        /// <summary>Gets or sets the TypeofTaxId field. </summary>
+        public TypeofTax? TypeofTaxId { get; set; }
+
+        /// <summary>Gets or sets the TaxCreditId field. </summary>
+        public int? TaxCreditId { get; set; }
+
+        /// <summary>Gets or sets the JobId field. </summary>
+        public int? JobId { get; set; }
+
+        /// <summary>Gets or sets the GLAccountId field. </summary>
+        public long? GLAccountId { get; set; }
+
+        /// <summary>Gets or sets the AccountId field. </summary>
+        public long? AccountId { get; set; }
+
+        /// <summary>Gets or sets the Notes field. </summary>
+        public string Notes { get; set; }
 
         /// <summary> Gets or sets the  Addresses of the Vendor </summary>
         public List<UpdateAddressUnitInput> Addresses { get; set; }

@@ -44,6 +44,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetLocationList(AutoSearchInput input);
+        Task<List<NameValueDto>> GetLocationList(GetLocationsInput input);
     }
 }

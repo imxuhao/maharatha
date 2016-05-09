@@ -25,6 +25,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             _locationSetUnitRepository = locationSetUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
         }
+        /// <summary>
+        /// Create the LocationSet.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<LocationSetUnitDto> CreateLocationSetUnit(CreateLocationSetUnitInput input)
         {
             var locationSetUnit = new LocationSetUnit(typeoflocationsetid: input.TypeOfLocationSetId, description: input.Description, number: input.Number,organizationunitid:input.OrganizationUnitId);
@@ -33,11 +38,22 @@ namespace CAPS.CORPACCOUNTING.Masters
             return locationSetUnit.MapTo<LocationSetUnitDto>();
         }
 
+        /// <summary>
+        /// Delete the LocationSet based on LocationSetId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task DeleteLocationSetUnit(IdInput input)
         {
             await _locationSetUnitManager.DeleteAsync(input.Id);
         }
 
+
+        /// <summary>
+        /// Get the LocationSet based on LocationSetId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<LocationSetUnitDto> GetLocationSetUnitsById(IdInput input)
         {
             var locationSet =await _locationSetUnitRepository.GetAsync(input.Id);
@@ -46,6 +62,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             return result;
         }
 
+        /// <summary>
+        /// Update the LocationSet based on LocationSetId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<LocationSetUnitDto> UpdateLocationSetUnit(UpdateLocationSetUnitInput input)
         {
             var locationSetUnit = await _locationSetUnitRepository.GetAsync(input.LocationSetId);
@@ -64,9 +85,16 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             return locationSetUnit.MapTo<LocationSetUnitDto>();
         }
-        public async Task<List<NameValueDto>> GetLocationList(AutoSearchInput input)
+
+        /// <summary>
+        /// Get All Locations List
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetLocationList(GetLocationsInput input)
         {
             var locationSets = await _locationSetUnitRepository.GetAll()
+                 .Where(p=>p.TypeOfLocationSetId== input.LocationSetTypeId)
                  .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();

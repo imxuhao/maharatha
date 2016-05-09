@@ -12,8 +12,6 @@ using CAPS.CORPACCOUNTING.Masters;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
-using CAPS.CORPACCOUNTING.Sessions;
-using System;
 using CAPS.CORPACCOUNTING.Authorization;
 
 

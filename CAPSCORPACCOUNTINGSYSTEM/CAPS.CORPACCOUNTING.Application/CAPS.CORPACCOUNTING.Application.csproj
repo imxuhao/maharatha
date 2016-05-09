@@ -301,6 +301,7 @@
     <Compile Include="Logging\WebLogAppService.cs" />
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\Dto\GetLocationsInput.cs" />
     <Compile Include="Masters\Dto\AutoSearchInput.cs" />
     <Compile Include="Masters\Dto\CreateUserViewSettingsUnitInput.cs" />
     <Compile Include="Masters\Dto\GetUserViewSettingsUnitDto.cs" />

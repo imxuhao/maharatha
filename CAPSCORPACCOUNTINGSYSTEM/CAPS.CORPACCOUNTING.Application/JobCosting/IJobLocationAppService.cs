@@ -30,7 +30,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<ListResultOutput<JobLocationUnitDto>> GetJobLocationUnitsByJobId(IdInput input);
+        Task<ListResultOutput<JobLocationUnitDto>> GetJobLocationUnitsByJobId(GetJobInput input);
 
         /// <summary>
         /// Delete the JobLocation based on JobId.

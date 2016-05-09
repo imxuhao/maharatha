@@ -372,5 +372,6 @@
     <text name="Failed">Failed</text>
     <text name="NewTenant">New tenant</text>
     <text name="ResizedProfilePicture_Warn_SizeLimit" value="Resized picture size must be smalled than 100KB. Please resize down and try again." />
+    <text name="RegisterFormUserNameInvalidMessage">Please dont enter an email address for username.</text>
   </texts>
 </localizationDictionary>

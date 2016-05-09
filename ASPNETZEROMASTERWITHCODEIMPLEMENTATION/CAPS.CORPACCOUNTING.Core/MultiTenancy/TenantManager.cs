@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Abp.Application.Features;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.IdentityFramework;
@@ -38,12 +39,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             TenantDemoDataBuilder demoDataBuilder, 
             UserManager userManager, 
             INotificationSubscriptionManager notificationSubscriptionManager, 
-            IAppNotifier appNotifier) :
-            base(
-                tenantRepository,
-                tenantFeatureRepository,
-                editionManager
-            )
+            IAppNotifier appNotifier,
+            IAbpZeroFeatureValueStore featureValueStore) :
+            base(tenantRepository,tenantFeatureRepository,editionManager, featureValueStore)
         {
             _unitOfWorkManager = unitOfWorkManager;
             _roleManager = roleManager;

@@ -77,7 +77,8 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault, input.TenantManagement.IsNewRegisteredTenantActiveByDefault.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.TenantManagement.UseCaptchaOnRegistration, input.TenantManagement.UseCaptchaOnRegistration.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
 
-            var defaultEditionId = input.TenantManagement.DefaultEditionId?.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture) ?? "";
+            var defaultEditionId = (input.TenantManagement.DefaultEditionId == null ? null : input.TenantManagement.DefaultEditionId.Value.ToString()) ?? "";
+
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.TenantManagement.DefaultEdition, defaultEditionId);
 
             //User management

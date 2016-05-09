@@ -54,3 +54,32 @@ D:\SVN\Cha-Ching\Trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTIN
 D:\SVN\Cha-Ching\Trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\System.Collections.Immutable.xml
 D:\SVN\Cha-Ching\Trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.dll
 D:\SVN\Cha-Ching\Trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\CAPS.CORPACCOUNTING.Core.dll.config
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\CAPS.CORPACCOUNTING.Core.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\CAPS.CORPACCOUNTING.Core.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Abp.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Abp.Zero.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Abp.Zero.Ldap.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Castle.Core.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Castle.Facilities.Logging.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Castle.Windsor.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Newtonsoft.Json.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Nito.AsyncEx.Concurrent.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Nito.AsyncEx.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Nito.AsyncEx.Enlightenment.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\System.Collections.Immutable.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Abp.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Abp.Zero.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Castle.Core.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Castle.Facilities.Logging.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Castle.Windsor.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Newtonsoft.Json.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Nito.AsyncEx.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Nito.AsyncEx.Concurrent.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Nito.AsyncEx.Enlightenment.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\System.Collections.Immutable.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.csprojResolveAssemblyReference.cache
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.pdb

@@ -64,8 +64,8 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
 
             //METRONIC
 
-            AddAppMetrinicCss(bundles, isRTL: false);
-            AddAppMetrinicCss(bundles, isRTL: true);
+            AddAppMetronicCss(bundles, isRTL: false);
+            AddAppMetronicCss(bundles, isRTL: true);
 
             bundles.Add(
               new ScriptBundle("~/Bundles/App/metronic/js")
@@ -112,7 +112,7 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                 );
         }
 
-        private static void AddAppMetrinicCss(BundleCollection bundles, bool isRTL)
+        private static void AddAppMetronicCss(BundleCollection bundles, bool isRTL)
         {
             bundles.Add(
                 new StyleBundle("~/Bundles/App/metronic/css" + (isRTL ? "RTL" : ""))

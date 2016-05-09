@@ -75,14 +75,14 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
                 });
 
             //Assert
-            UsingDbContext(async context =>
+            await UsingDbContext(async context =>
             {
                 //Get created user
-                var createdUser = await context.Users.FirstOrDefaultAsync(u => u.UserName == "jnash");
+                var createdUser = await context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
                 createdUser.ShouldNotBe(null);
 
                 //Check some properties
-                createdUser.EmailAddress.ShouldBe("john@nash.com");
+                createdUser.EmailAddress.ShouldBe(emailAddress);
                 createdUser.TenantId.ShouldBe(tenantId);
 
                 //Check roles

@@ -35,7 +35,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
         {
             //Arrange
             var adminUser = await GetUserByUserNameOrNullAsync(User.AdminUserName);
-            var managerRole = await CreateRoleAsync("Manager");
+            var managerRole = CreateRole("Manager");
             var roleCount = UsingDbContext(context => context.Roles.Count(r => r.TenantId == AbpSession.TenantId));
 
             //Act
@@ -57,9 +57,9 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
             adminRoleDto.IsAssigned.ShouldBe(true);
         }
 
-        protected async Task<Role> CreateRoleAsync(string roleName)
+        protected Role CreateRole(string roleName)
         {
-            return await UsingDbContextAsync(async context => context.Roles.Add(new Role(AbpSession.TenantId, roleName, roleName)));
+            return UsingDbContext(context => context.Roles.Add(new Role(AbpSession.TenantId, roleName, roleName)));
         }
     }
 }

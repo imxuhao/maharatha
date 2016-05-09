@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.Jobcasting.JobCommercialsModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+        searchEntityName: &#39;&#39;
+    },
+    fields: [
+            { name: &#39;jobCommercialId&#39;, type: &#39;int&#39; ,isPrimaryKey: true},
+            { name: &#39;jobId&#39;, type: &#39;int&#39; },
+            { name: &#39;caption&#39;, type: &#39;int&#39;},
+            { name: &#39;bidDate&#39;, type: &#39;date&#39;},
+            { name: &#39;awardDate&#39;, type: &#39;date&#39;},
+            { name: &#39;shootingDate&#39;, type: &#39;date&#39;},
+            { name: &#39;wrapDate&#39;, type: &#39;date&#39;},
+            { name: &#39;roughCutDate&#39;, type: &#39;date&#39;},
+            { name: &#39;airDate&#39;, type: &#39;date&#39;},
+            { name: &#39;dateClosed&#39;, type: &#39;date&#39;},
+            { name: &#39;finalShootDate&#39;, type: &#39;date&#39;},
+            { name: &#39;productOwner&#39;, type: &#39;string&#39;},
+            { name: &#39;productName&#39;, type: &#39;string&#39;},
+            { name: &#39;executiveProducerId&#39;, type: &#39;int&#39;},
+            { name: &#39;directorEmployeeId&#39;, type: &#39;int&#39;},
+            { name: &#39;producerEmployeeId&#39;, type: &#39;int&#39;},
+            { name: &#39;dirOfPhotoEmployeeId&#39;, type: &#39;int&#39;},
+            { name: &#39;setDesignerEmployeeId&#39;, type: &#39;int&#39;},
+            { name: &#39;artDirectorEmployeeId&#39;, type: &#39;int&#39;},
+            { name: &#39;editorEmployeeId&#39;, type: &#39;int&#39;},
+            { name: &#39;salesRepId&#39;, type: &#39;int&#39;},
+            { name: &#39;agencyId&#39;, type: &#39;int&#39;},
+            { name: &#39;agencyClientCustomerId&#39;, type: &#39;int&#39;},
+            { name: &#39;thirdPartyCustomerId&#39;, type: &#39;int&#39;},
+            { name: &#39;agencyProducer&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyProducerContactInfo&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyArtDirector&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyArtDirContactInfo&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyWriter&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyWriterContactInfo&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyBusinessManager&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyBusMgrContactInfo&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyJobNumber&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyPONumber&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyName&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyAddress&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyPhone&#39;, type: &#39;string&#39;},
+            { name: &#39;commercialTitle1&#39;, type: &#39;string&#39;},
+            { name: &#39;commercialTitle2&#39;, type: &#39;string&#39;},
+            { name: &#39;commercialTitle3&#39;, type: &#39;string&#39;},
+            { name: &#39;commercialTitle4&#39;, type: &#39;string&#39;},
+            { name: &#39;commercialTitle5&#39;, type: &#39;string&#39;},
+            { name: &#39;commercialTitle6&#39;, type: &#39;string&#39;},            
+            { name: &#39;projectTotal&#39;, type: &#39;float&#39;},
+            { name: &#39;cGITotal&#39;, type: &#39;float&#39;},
+            { name: &#39;markupPercent&#39;, type: &#39;float&#39;},
+            { name: &#39;markupTotal&#39;, type: &#39;float&#39;},
+            { name: &#39;rDARevenue&#39;, type: &#39;float&#39;},
+            { name: &#39;incomeAccrual&#39;, type: &#39;float&#39;},
+            { name: &#39;costAccrual&#39;, type: &#39;float&#39;},
+            { name: &#39;postProductionCompany&#39;, type: &#39;float&#39;},
+            { name: &#39;dubbingHouse&#39;, type: &#39;string&#39;},
+            { name: &#39;storageHouse&#39;, type: &#39;string&#39;},
+            { name: &#39;isBudgetLocked&#39;, type: &#39;boolean&#39;},
+            { name: &#39;commercialNumber&#39;, type: &#39;string&#39;},
+            { name: &#39;commercialLength&#39;, type: &#39;string&#39;},
+            { name: &#39;preProductionDays&#39;, type: &#39;int&#39;},
+            { name: &#39;strikeDays&#39;, type: &#39;int&#39;},
+            { name: &#39;preLightDays&#39;, type: &#39;int&#39;},
+            { name: &#39;preLightHours&#39;, type: &#39;int&#39;},
+            { name: &#39;strikeHours&#39;, type: &#39;int&#39;},
+            { name: &#39;studioShootDays&#39;, type: &#39;int&#39;},
+            { name: &#39;shootHours&#39;, type: &#39;int&#39;},
+            { name: &#39;locationDays&#39;, type: &#39;int&#39;},
+            { name: &#39;locationHours&#39;, type: &#39;int&#39;},
+            { name: &#39;isCostPlus&#39;, type: &#39;boolean&#39;},
+            { name: &#39;isWrapUpInsurance&#39;, type: &#39;boolean&#39;},
+            { name: &#39;isFringeAccountSeparate&#39;, type: &#39;boolean&#39;},
+            { name: &#39;isOTon&#39;, type: &#39;boolean&#39;},
+            { name: &#39;agencyEmail&#39;, type: &#39;string&#39;},
+            { name: &#39;organizationUnitId&#39;, type: &#39;int&#39;},
+            { name: &#39;isWrapUpInsurance&#39;, type: &#39;boolean&#39;}
+    ]
+});
+
+</pre>
+</body>
+</html>

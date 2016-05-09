@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-grid-column-Check'>/**
+</span> * A Column subclass which renders a checkbox in each column cell which toggles the truthiness of the associated data field on click.
+ *
+ * Example usage:
+ *
+ *     @example
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;name&#39;, &#39;email&#39;, &#39;phone&#39;, &#39;active&#39;],
+ *         data: [
+ *             { name: &#39;Lisa&#39;, email: &#39;lisa@simpsons.com&#39;, phone: &#39;555-111-1224&#39;, active: true },
+ *             { name: &#39;Bart&#39;, email: &#39;bart@simpsons.com&#39;, phone: &#39;555-222-1234&#39;, active: true },
+ *             { name: &#39;Homer&#39;, email: &#39;homer@simpsons.com&#39;, phone: &#39;555-222-1244&#39;, active: false },
+ *             { name: &#39;Marge&#39;, email: &#39;marge@simpsons.com&#39;, phone: &#39;555-222-1254&#39;, active: true }
+ *         ]
+ *     });
+ *
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Simpsons&#39;,
+ *         height: 200,
+ *         width: 400,
+ *         renderTo: Ext.getBody(),
+ *         store: store,
+ *         columns: [
+ *             { text: &#39;Name&#39;, dataIndex: &#39;name&#39; },
+ *             { text: &#39;Email&#39;, dataIndex: &#39;email&#39;, flex: 1 },
+ *             { text: &#39;Phone&#39;, dataIndex: &#39;phone&#39; },
+ *             { xtype: &#39;checkcolumn&#39;, text: &#39;Active&#39;, dataIndex: &#39;active&#39; }
+ *         ]
+ *     });
+ *
+ * The check column can be at any index in the columns array.
+ */
+Ext.define(&#39;Ext.grid.column.Check&#39;, {
+    extend: &#39;Ext.grid.column.Column&#39;,
+    alternateClassName: [&#39;Ext.ux.CheckColumn&#39;, &#39;Ext.grid.column.CheckColumn&#39;],
+    alias: &#39;widget.checkcolumn&#39;,
+
+<span id='Ext-grid-column-Check-cfg-align'>    /**
+</span>     * @cfg
+     * @hide
+     * Overridden from base class. Must center to line up with editor.
+     */
+    align: &#39;center&#39;,
+
+<span id='Ext-grid-column-Check-cfg-ignoreExport'>    ignoreExport: true,
+</span>
+<span id='Ext-grid-column-Check-cfg-stopSelection'>    /**
+</span>     * @cfg {Boolean} [stopSelection=true]
+     * Prevent grid selection upon mousedown.
+     */
+    stopSelection: true,
+
+<span id='Ext-grid-column-Check-cfg-tdCls'>    tdCls: Ext.baseCSSPrefix + &#39;grid-cell-checkcolumn&#39;,
+</span><span id='Ext-grid-column-Check-property-innerCls'>    innerCls: Ext.baseCSSPrefix + &#39;grid-cell-inner-checkcolumn&#39;,
+</span>
+<span id='Ext-grid-column-Check-property-clickTargetName'>    clickTargetName: &#39;el&#39;,
+</span>
+<span id='Ext-grid-column-Check-property-defaultFilterType'>    defaultFilterType: &#39;boolean&#39;,
+</span>
+<span id='Ext-grid-column-Check-event-beforecheckchange'>    /**
+</span>     * @event beforecheckchange
+     * Fires when before checked state of a row changes.
+     * The change may be vetoed by returning `false` from a listener.
+     * @param {Ext.ux.CheckColumn} this CheckColumn
+     * @param {Number} rowIndex The row index
+     * @param {Boolean} checked True if the box is to be checked
+     * @param {Ext.data.Model} record The record that is being changed
+     */
+
+<span id='Ext-grid-column-Check-event-checkchange'>    /**
+</span>     * @event checkchange
+     * Fires when the checked state of a row changes
+     * @param {Ext.ux.CheckColumn} this CheckColumn
+     * @param {Number} rowIndex The row index
+     * @param {Boolean} checked True if the box is now checked
+     * @param {Ext.data.Model} record The record that is being changed
+     */
+
+    constructor: function() {
+        this.scope = this;
+        this.callParent(arguments);
+    },
+
+<span id='Ext-grid-column-Check-method-processEvent'>    /**
+</span>     * @private
+     * Process and refire events routed from the GridView&#39;s processEvent method.
+     */
+    processEvent: function(type, view, cell, recordIndex, cellIndex, e, record, row) {
+        var me = this,
+            key = type === &#39;keydown&#39; &amp;&amp; e.getKey(),
+            mousedown = type === &#39;mousedown&#39;,
+            disabled = me.disabled,
+            ret,
+            checked;
+
+        // Flag event to tell SelectionModel not to process it.
+        e.stopSelection = !key &amp;&amp; me.stopSelection;
+
+        if (!disabled &amp;&amp; (mousedown || (key === e.ENTER || key === e.SPACE))) {
+            checked = !me.isRecordChecked(record);
+
+            // Allow apps to hook beforecheckchange
+            if (me.fireEvent(&#39;beforecheckchange&#39;, me, recordIndex, checked, record) !== false) {
+                me.setRecordCheck(record, checked, cell, row, e);
+                me.fireEvent(&#39;checkchange&#39;, me, recordIndex, checked, record);
+
+                // Do not allow focus to follow from this mousedown unless the grid is already in actionable mode
+                if (mousedown &amp;&amp; !me.getView().actionableMode) {
+                    e.preventDefault();
+                }
+            }
+        } else {
+            ret = me.callParent(arguments);
+        }
+        return ret;
+    },
+
+<span id='Ext-grid-column-Check-method-onEnable'>    /**
+</span>     * Enables this CheckColumn.
+     */
+    onEnable: function() {
+        this.callParent(arguments);
+        this._setDisabled(false);
+    },
+
+<span id='Ext-grid-column-Check-method-onDisable'>    /**
+</span>     * Disables this CheckColumn.
+     */
+    onDisable: function() {
+        this._setDisabled(true);
+    },
+
+<span id='Ext-grid-column-Check-method-_setDisabled'>    // Don&#39;t want to conflict with the Component method
+</span>    _setDisabled: function(disabled) {
+        var me = this,
+            cls = me.disabledCls,
+            items;
+
+        items = me.up(&#39;tablepanel&#39;).el.select(me.getCellSelector());
+        if (disabled) {
+            items.addCls(cls);
+        } else {
+            items.removeCls(cls);
+        }
+    },
+
+<span id='Ext-grid-column-Check-method-defaultRenderer'>    // Note: class names are not placed on the prototype bc renderer scope
+</span>    // is not in the header.
+    defaultRenderer : function(value, cellValues) {
+        var cssPrefix = Ext.baseCSSPrefix,
+            cls = cssPrefix + &#39;grid-checkcolumn&#39;;
+
+        if (this.disabled) {
+            cellValues.tdCls += &#39; &#39; + this.disabledCls;
+        }
+        if (value) {
+            cls += &#39; &#39; + cssPrefix + &#39;grid-checkcolumn-checked&#39;;
+        }
+        return &#39;&lt;div class=&quot;&#39; + cls + &#39;&quot; role=&quot;button&quot; tabIndex=&quot;0&quot;&gt;&lt;/div&gt;&#39;;
+    },
+
+<span id='Ext-grid-column-Check-method-isRecordChecked'>    isRecordChecked: function (record) {
+</span>        var prop = this.property;
+        if (prop) {
+            return record[prop];
+        }
+        return record.get(this.dataIndex);
+    },
+
+<span id='Ext-grid-column-Check-method-setRecordCheck'>    setRecordCheck: function (record, checked, cell, row, e) {
+</span>        var me = this,
+            prop = me.property;
+
+        if (prop) {
+            record[prop] = checked;
+            me.updater(cell, checked);
+        } else {
+            record.set(me.dataIndex, checked);
+        }
+    },
+
+<span id='Ext-grid-column-Check-method-updater'>    updater: function (cell, value) {
+</span>        cell = Ext.fly(cell);
+
+        cell[this.disabled ? &#39;addCls&#39; : &#39;removeCls&#39;](this.disabledCls);
+        Ext.fly(cell.down(this.getView().innerSelector, true).firstChild)[value ? &#39;addCls&#39; : &#39;removeCls&#39;](Ext.baseCSSPrefix + &#39;grid-checkcolumn-checked&#39;);
+    }
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-components-selection-CheckboxSelectionModel'>/**
+</span> * This file contains the custom component for rendering column header text for checkbox selection model.
+ * Author: Krishna Garad
+ * Date:04/15/2016
+ */
+
+Ext.define(&#39;Chaching.components.selection.CheckboxSelectionModel&#39;, {
+    extend: &#39;Ext.selection.CheckboxModel&#39;,
+    alias: &#39;selection.chachingCheckboxSelectionModel&#39;,
+
+<span id='Chaching-components-selection-CheckboxSelectionModel-property-headerWidth'>    headerWidth: 40,
+</span><span id='Chaching-components-selection-CheckboxSelectionModel-property-headerText'>    headerText: &#39;&#39;,
+</span><span id='Chaching-components-selection-CheckboxSelectionModel-method-getHeaderConfig'>    getHeaderConfig: function () {
+</span>        var me = this,
+            showCheck = me.showHeaderCheckbox !== false;
+        var headerTextStyle = &#39;style=&quot;float:right; width:70%;text-align:left;&quot;&#39;;
+        if (showCheck)
+            headerTextStyle = &#39;style = &quot;width:70%;text-align:left;&quot;&#39;;
+        var checkBox = {
+            isCheckerHd: showCheck,
+            text: me.headerText,
+            labelAlign: &#39;right&#39;,
+            clickTargetName: &#39;el&#39;,
+            width: me.headerWidth,
+            sortable: false,
+            draggable: false,
+            resizable: false,
+            hideable: false,
+            menuDisabled: true,
+            dataIndex: &#39;&#39;,
+            tdCls: me.tdCls,
+            cls: showCheck ? Ext.baseCSSPrefix + &#39;column-header-checkbox&#39; : &#39;&#39;,
+            defaultRenderer: me.renderer.bind(me),
+            editRenderer: me.editRenderer || me.renderEmpty,
+            locked: me.hasLockedHeader(),
+            ///TODO: Once Ext fixes out headerText issue remove renderTpl
+            renderTpl: [
+        &#39;&lt;div id=&quot;{id}-titleEl&quot; data-ref=&quot;titleEl&quot; {tipMarkup}class=&quot;&#39;, Ext.baseCSSPrefix, &#39;column-header-inner&lt;tpl if=&quot;!$comp.isContainer&quot;&gt; &#39;, Ext.baseCSSPrefix, &#39;leaf-column-header&lt;/tpl&gt;&#39;,
+            &#39;&lt;tpl if=&quot;empty&quot;&gt; &#39;, Ext.baseCSSPrefix, &#39;column-header-inner-empty&lt;/tpl&gt;&quot;&gt;&#39;,
+            &#39;&lt;span id=&quot;{id}-textContainerEl&quot; data-ref=&quot;textContainerEl&quot; class=&quot;&#39;, Ext.baseCSSPrefix, &#39;column-header-text-container&quot;&gt;&#39;,
+                &#39;&lt;span class=&quot;&#39;, Ext.baseCSSPrefix, &#39;column-header-text-wrapper&quot;&gt;&#39;,
+                    &#39;&lt;span id=&quot;{id}-textEl&quot; data-ref=&quot;textEl&quot; class=&quot;&#39;, Ext.baseCSSPrefix, &#39;column-header-text&#39;,
+                        &#39;{childElCls}&quot; style=&quot;float:left; width:18px !important;color:white !important;&quot;&gt;&#39;,
+                    &#39;&lt;/span&gt;&#39;,
+                    &#39;&lt;span style=&quot;&#39;+headerTextStyle+&#39;&quot;&gt;{text}&lt;/span&gt;&#39;,
+                &#39;&lt;/span&gt;&#39;,
+            &#39;&lt;/span&gt;&#39;,
+            &#39;&lt;tpl if=&quot;!menuDisabled&quot;&gt;&#39;,
+                &#39;&lt;div id=&quot;{id}-triggerEl&quot; data-ref=&quot;triggerEl&quot; role=&quot;presentation&quot; class=&quot;&#39;, Ext.baseCSSPrefix, &#39;column-header-trigger&#39;,
+                &#39;{childElCls}&quot; style=&quot;{triggerStyle}&quot;&gt;&lt;/div&gt;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;{%this.renderContainer(out,values)%}&#39;
+            ]
+
+        }
+        return checkBox;
+
+    },
+<span id='Chaching-components-selection-CheckboxSelectionModel-method-renderer'>    renderer: function (value, metaData, record, rowIndex, colIndex, store, view) {
+</span>        var me = this;
+        var baseCSSPrefix = Ext.baseCSSPrefix;
+        metaData.tdCls = baseCSSPrefix + &#39;grid-cell-special &#39; + baseCSSPrefix + &#39;grid-cell-row-checker&#39;;
+        if (record.data.IsEmpty == true) {
+            return &quot;&quot;;
+        }
+        return &#39;&lt;div class=&quot;&#39; + baseCSSPrefix + &#39;grid-row-checker&quot;&gt;&amp;#160; &lt;/div&gt;&lt;div style=&quot;margin: -15px 0 0 25px;&quot;&gt;&#39; + me.columnText + &#39;&lt;/div&gt;&#39;;
+    }
+});</pre>
+</body>
+</html>

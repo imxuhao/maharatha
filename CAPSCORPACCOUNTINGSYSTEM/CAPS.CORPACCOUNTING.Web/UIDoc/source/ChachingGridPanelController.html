@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanelController&#39;, {
+    extend: &#39;Ext.app.ViewController&#39;,
+    alias: &#39;controller.common-grid-chachinggridpanel&#39;,
+    listen: {
+        controller: {
+            &#39;#&#39;: {
+                unmatchedroute: &#39;onUnmatchedRoute&#39;
+            }
+        }
+    },
+    routes: {
+        &#39;host.tenants.create&#39;: {
+            action: &#39;createEditRecordInTab&#39;
+        },
+        //&#39;host.tenants.edit&#39;: {
+        //    action: &#39;showUser&#39;,
+        //    before: &#39;beforeShowUser&#39;,
+        //    conditions: {
+        //        &#39;:id&#39;: &#39;([0-9]+)&#39;
+        //    }
+        //}
+    },
+
+    createEditRecordInTab: function (hash) {
+        if (!hash) {
+            hash = this.currentRedirectedRoute;
+        }
+        Ext.toast(hash);
+    },
+    onUnmatchedRoute: function (hash) {
+        if (!hash) {
+            hash = this.currentRedirectedRoute;
+        }
+        if (Chaching.utilities.RoutesNames.menuItemRoutes.indexOf(hash) === -1) {
+            Ext.toast(&#39;No route found with :&#39; + hash);
+        }
+    },
+    currentRedirectedRoute: null,
+    //Event Listeners
+    quickEditActionClicked: function (menu, item, e, eOpts) {
+        //do edit based on editMode of grid
+        var parentMenu = menu.parentMenu,
+            widgetRec = parentMenu.widgetRecord,
+            widgetCol = parentMenu.widgetColumn,
+            grid = widgetCol.up(&#39;grid&#39;);
+
+        //TODO start edit by checking row allowEdit property
+        if (widgetRec &amp;&amp; grid) {
+            var editingPlugin = grid.getPlugin(&#39;editingPlugin&#39;);
+            if (editingPlugin) {
+                widgetRec.set(&#39;passEdit&#39;, true);
+                editingPlugin.startEdit(widgetRec);
+            }
+        }
+
+    },
+    editActionClicked: function(menu, item, e, eOpts) {
+        var parentMenu = menu.parentMenu,
+            widgetRec = parentMenu.widgetRecord,
+            widgetCol = parentMenu.widgetColumn,
+            grid = widgetCol.up(&#39;grid&#39;),
+            controller = grid.getController(),
+            gridStore = grid.getStore();
+
+        //TODO start edit by checking row allowEdit property
+        if (widgetRec &amp;&amp; grid) {
+            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig);
+
+            var modelField = gridStore.getModel().getFields();
+            if (modelField) {
+                Ext.each(modelField, function(field) {
+                    if (field.isPrimaryKey) {
+                        widgetRec.set(&#39;id&#39;, widgetRec.get(field.name));
+                        return;
+                    }
+                });
+            }
+
+            var form, formPanel;
+            if (formView &amp;&amp; formView.isWindow) {
+                formPanel = formView.down(&#39;form&#39;),
+                    form = formPanel.getForm();
+                form.setValues(widgetRec.data);
+                form.loadRecord(widgetRec);
+            } else if (formView) {
+                form = formView.getForm();
+                form.setValues(widgetRec.data);
+                form.loadRecord(widgetRec);
+            }
+        }
+    },
+    deleteActionClicked: function (menu, item, e, eOpts) {
+        //do delete based on operation of grid store
+        var parentMenu = menu.parentMenu,
+            widgetRec = parentMenu.widgetRecord,
+            widgetCol = parentMenu.widgetColumn,
+            grid = widgetCol.up(&#39;grid&#39;),
+            controller = grid.getController,
+            gridStore = grid.getStore();
+
+        //Delete record
+        if (widgetRec &amp;&amp; grid) {
+            gridStore.setAutoSync(true);
+            var modelField = gridStore.getModel().getFields();
+            if (modelField) {
+                Ext.each(modelField, function (field) {
+                    if (field.isPrimaryKey) {
+                        widgetRec.set(&#39;id&#39;, widgetRec.get(field.name));
+                        return;
+                    }
+                });
+            }
+
+            gridStore.remove(widgetRec);
+            gridStore.setAutoSync(false);
+
+        }
+    },
+    onEditComplete: function (editor, e) {
+        var me = this,
+            view = this.getView();
+        if (editor &amp;&amp; editor.ptype === &quot;chachingRowediting&quot; &amp;&amp; editor.context) {
+            var context = editor.context,
+                grid = context.grid,
+                gridStore = grid.getStore(),
+                record = context.record,
+                idPropertyField = gridStore.idPropertyField;
+            var operation;
+            //if record.get(id)&gt;0 then update else add
+
+            var modelField = gridStore.getModel().getFields();
+            if (modelField) {
+                Ext.each(modelField, function (field) {
+                    if (field.isPrimaryKey) {
+                        record.set(&#39;id&#39;, record.get(field.name));
+                        return;
+                    }
+                });
+            }
+            if (me.doBeforeInlineAddUpdate(record)) {
+                if (record.get(idPropertyField) &gt; 0) {
+                    operation = Ext.data.Operation({
+                        params: record.data,
+                        records: [record],
+                        callback: me.onOperationCompleteCallBack
+                    });
+                    gridStore.update(operation);
+                } else {
+                    record.id = 0;
+                    record.set(&#39;id&#39;, 0);
+                    operation = Ext.data.Operation({
+                        params: record.data,
+                        controller: me,
+                        callback: me.onOperationCompleteCallBack
+                    });
+                    gridStore.create(record.data, operation);
+                }
+            }
+        }
+    },
+    doBeforeInlineAddUpdate:function(record) { return true; },
+    doReloadGrid: function () {
+        var me = this,
+            view = me.getView(),
+            gridStore = view.getStore();
+
+        gridStore.reload();
+    },
+    onOperationCompleteCallBack: function (records, operation, success) {
+        if (success) {
+            var action = operation.getAction();
+            if (action === &quot;create&quot; || action === &quot;destroy&quot;) {
+                var controller = operation.controller;
+                controller.doReloadGrid();
+            }
+            Ext.toast({
+                html: &#39;Operation completed successfully.&#39;,
+                title: &#39;Success&#39;,
+                ui: &#39;chachingWindow&#39;,
+                alwaysOnTop: true,
+                saveDelay: 500,
+                animateShadow: true,
+                align: &#39;tr&#39;
+            });
+        } else {
+            var response = Ext.decode(operation.getResponse().responseText);
+            var message = &#39;&#39;,
+                title = &#39;Error&#39;;
+            if (response &amp;&amp; response.error) {
+                if (response.error.message &amp;&amp; response.error.details) {
+                    title = response.error.message;
+                    message = response.error.details.replaceAll(&#39; - &#39;, &#39;&lt;/br&gt;-&#39;);
+                    var myMsg = Ext.create(&#39;Ext.window.MessageBox&#39;, {
+                        // set closeAction to &#39;destroy&#39; if this instance is not
+                        // intended to be reused by the application
+                        closeAction: &#39;destroy&#39;,
+                        ui: &#39;chachingWindow&#39;
+                    }).show({
+                        title: title,
+                        message: message,
+                        buttons: Ext.Msg.OKCANCEL,
+                        icon: Ext.Msg.INFO
+                    });
+                    return;
+                }
+                title = response.error.message;
+                message = response.error.details ? response.error.details : title;
+            }
+            Ext.toast(message);
+        }
+    },
+
+    //editing plugin listeners
+    onBeforeGridEdit: function (editor, context, eOpts) {
+        ///TODO cancel edit if restricted
+        //cancel edit if is actioncolumn editing
+        var record = context.record;
+        if (context.column.name === &quot;ActionColumn&quot; &amp;&amp; !record.get(&#39;passEdit&#39;)) return false;
+    },
+    onCreateNewBtnClicked: function (btn) {
+        var me = this,
+            view = me.getView(),
+            gridStore = view.getStore(),
+            model = gridStore.getModel(),
+            className = model.$className,
+            idPropertyField = gridStore.idPropertyField,
+            editingPlugin = view.getPlugin(&#39;editingPlugin&#39;);
+
+        var modelInstance;
+        if (view &amp;&amp; view.createNewMode) {
+            switch (view.createNewMode) {
+                case &quot;inline&quot;:
+                    modelInstance = Ext.create(className, {
+                        idPropertyField: 0,
+                        passEdit: true,
+                        passDelete: true
+                    });
+                    gridStore.insert(0, modelInstance);
+                    editingPlugin.startEdit(gridStore.getAt(0));
+                    break;
+                case &quot;popup&quot;:
+                    me.createNewRecord(view.xtype, &#39;popup&#39;, false, view.createWndTitleConfig);
+                    break;
+                case &quot;tab&quot;:
+                    if (view.isSubMenuItemTab) {
+                        me.createNewRecord(view.xtype, &#39;tab&#39;, false, view.createWndTitleConfig);
+                    } else {
+                        if (!btn.routeName) Ext.Error.raise(&#39;When create/edit mode is tab for grid then routeName config to button is mandatory!!!&#39;);
+                        me.currentRedirectedRoute = btn.routeName;
+                        me.redirectTo(btn.routeName);
+                    }
+                   
+                    break;
+                default:
+                    me.currentRedirectedRoute = null;
+                    break;
+            }
+
+        }
+
+    },
+    //Do module specific tasks 
+    doBeforeCreateAction: function (createNewMode) { },
+    doAfterCreateAction: function (createNewMode, form) { },
+    createNewRecord: function (type, createMode, isEdit, titleConfig) {
+        var me = this,
+            view = me.getView(),
+            formView,
+            className,
+            tabPanel = view.up(&#39;tabpanel&#39;);
+        if (!titleConfig) Ext.Error.raise(&#39;Please provide title configuration&#39;);
+        me.doBeforeCreateAction(createMode);
+        if (createMode === &quot;popup&quot;) {
+            className = type + &quot;.createView&quot;;
+            formView = Ext.create({
+                xtype: className,
+                title: titleConfig.title,
+                iconCls: titleConfig.iconCls
+            });
+            formView.show();
+        } else if (createMode === &quot;tab&quot; &amp;&amp; tabPanel) {
+            var parentTabPanel = tabPanel.up(&#39;tabpanel&#39;);
+            if (parentTabPanel) {
+                className = type + &quot;.create&quot;;
+                formView = Ext.create({
+                    xtype: className,
+                    hideMode: &#39;offsets&#39;,
+                    closable: true,
+                    title: titleConfig.title,
+                    iconCls:titleConfig.iconCls,
+                    titleConfig: titleConfig,
+                    isEdit: isEdit
+                });
+                var tabLayout = parentTabPanel.getLayout();
+                if (tabLayout) {
+                    tabLayout.setActiveItem(parentTabPanel.add(formView));
+                }
+            }
+        }
+        me.setParentControl(formView, createMode);
+        me.doAfterCreateAction(createMode, formView, isEdit);
+        return formView;
+
+    },
+    setParentControl: function (formView, createMode) {
+        var me = this,
+            view = me.getView();
+        if (formView &amp;&amp; createMode===&quot;popup&quot;) {
+            var form = formView.down(&#39;form&#39;);
+            form.parentGrid = view;
+        } else if (formView &amp;&amp; createMode===&quot;tab&quot;) {
+            formView.parentGrid = view;
+        }
+    },
+    clearGridFilters: function (btn) {
+        var me = this,
+            view = me.getView(),
+            multiSearchPlugin = view.getPlugin(&#39;gms&#39;),
+            gridStore = view.getStore();
+
+        if (multiSearchPlugin) {
+            multiSearchPlugin.clearValues(true);
+            gridStore.clearFilter();
+        } else gridStore.clearFilter();
+
+        gridStore.getSorters().clear();
+        if (gridStore.remoteSort)
+            gridStore.load({ sortList: null, filters: null });
+
+    },
+    onManageViewClicked:function() {
+        var me = this,
+            view = me.getView();
+
+        var manageView = Ext.create(&#39;Chaching.view.manageView.ManageViewView&#39;, {
+            parentGrid: view,
+            title: app.localize(&quot;ManageUsersViewSetting&quot;) + &#39;: &#39; + view.getTitle()
+        });
+        manageView.show();
+    }
+
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.header.ChachingHeaderController&#39;, {
+    extend: &#39;Ext.app.ViewController&#39;,
+    alias: &#39;controller.header-chachingheader&#39;,
+    onToggleClick: function (btn) {
+        var me = this,
+            view = me.getView();
+        var westPanel = view.up(&#39;viewport&#39;).down(&#39;panel[region=west]&#39;);
+        if (westPanel) {
+            var treeList = westPanel.down(&#39;treelist[itemId=navigationTreeList]&#39;);
+            var micro = treeList.getMicro();
+            treeList.setMicro(!micro);
+            westPanel.setWidth(micro ? 250 : 85);
+            var logo = view.down(&#39;image[itemId=CapsLogo]&#39;);
+            logo.setWidth(micro ? 110 : 0);
+        }
+    },
+    onBeforeLocalizationRender: function (btn) {
+        var currentCulture = abp.localization.currentCulture;
+        if (currentCulture) {
+            var locale = abp.localization.languages;
+            for (var i = 0; i &lt; locale.length; i++) {
+                var item = locale[i];
+                if (item.name === currentCulture.name) {
+                    btn.text = currentCulture.displayName + &#39; &amp;#xf107;&#39;;
+                    btn.iconCls = item.icon;
+                    break;
+                }
+            }
+        }
+    },
+    onLocalizationHover: function (btn, e, eOpts) {
+        var me = this,
+            view = me.getView();
+        var contextMenu = btn.contextMenu;
+        var position = btn.getPosition();
+
+        var notificationBtn = view.down(&#39;button[itemId=NotificationBtn]&#39;);
+        if (notificationBtn) {
+            me.hideContextMenu(notificationBtn);
+        }
+        var accountsBtn = view.down(&#39;button[itemId=AccountBtn]&#39;);
+        if (accountsBtn) {
+            me.hideContextMenu(accountsBtn);
+        }
+        if (contextMenu) {
+            contextMenu.showAt(position[0] - 50, position[1] + 30, true);
+        } else {
+            var items = [];
+            var locale = abp.localization.languages;
+            for (var i = 0; i &lt; locale.length; i++) {
+                var item = locale[i];
+                var menuItem = {
+                    text: item.displayName,
+                    iconCls: &#39;famfamfam-flag &#39;+item.icon,
+                    name: item.name,
+                    isDefault: item.isDefault
+                };
+                items.push(menuItem);
+            }
+            contextMenu = Ext.create({
+                xtype: &#39;menu&#39;,
+                ui: &#39;countryMenu&#39;,
+                width: 150,
+                items: items,
+                ownerElement: btn,
+                listeners: {
+                    click: me.onLocalizationItemClick
+                }
+            });
+            btn.contextMenu = contextMenu;
+            contextMenu.showAt(position[0] - 50, position[1] + 30, true);
+        }
+    },
+    hideContextMenu: function (overedBtn) {
+        if (overedBtn &amp;&amp; overedBtn.contextMenu) {
+            overedBtn.contextMenu.hide();
+        }
+    },
+    onLocalizationItemClick: function (menu, item, e, eOpts) {
+        var ownerElement = menu.ownerElement;
+        if (ownerElement) {
+            ownerElement.setText(item.text + &#39; &amp;#xf107;&#39;);
+            ownerElement.setIconCls(item.iconCls);
+            location.href = abp.appPath + &#39;AbpLocalization/ChangeCulture?cultureName=&#39; + item.name + &#39;&amp;returnUrl=&#39; + window.location.href;
+        }
+    },
+    onNotificationReady: function (btn) {
+        ///TODO: Populate with unread count of notification
+        btn.btnIconEl.dom.textContent = 1;
+    },
+    onNotificationHover: function (btn) {
+        var me = this,
+            view = me.getView();
+        var contextMenu = btn.contextMenu;
+        var position = btn.getPosition();
+        var localizationBtn = view.down(&#39;button[itemId=LocalizationBtn]&#39;);
+        if (localizationBtn) {
+            me.hideContextMenu(localizationBtn);
+        }
+        var accountsBtn = view.down(&#39;button[itemId=AccountBtn]&#39;);
+        if (accountsBtn) {
+            me.hideContextMenu(accountsBtn);
+        }
+        if (contextMenu) {
+            contextMenu.showAt(position[0] - 250, position[1] + 30, true);
+        } else {
+            ///TODO: Store To be populated with real time data as service does not return data.
+            var dataview = new Ext.view.View({
+                ui: &#39;balck&#39;,
+                store: {
+                    fields: [&#39;name&#39;],
+                    data: [
+                        { name: &#39;Notification one&#39; },
+                        { name: &#39;This is long notification message wraps to second line&#39; }
+                    ]
+                },
+                tpl: [
+                    &#39;&lt;div class=&quot;menuHeaderTextRight&quot;&gt;Settings&lt;/div&gt;&#39;,
+                    &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+                    &#39;&lt;ul&gt;&#39;,
+                    &#39;&lt;li&gt;{name}&lt;/li&gt;&#39;,
+                    &#39;&lt;/ul&gt;&#39;,
+                    &#39;&lt;/tpl&gt;&#39;, {
+                        userRenderer: function (user) {
+                            //.. return a name instead of id
+                            return user;
+                        }
+                    }, {
+                        timeRenderer: function (timeStamp) {
+                            //.. return time in some format
+                            return timeStamp;
+                        }
+                    }
+                ],
+                // Match the li, since each one maps to a record
+                itemSelector: &#39;li&#39;
+            });
+            contextMenu = Ext.create({
+                xtype: &#39;menu&#39;,
+                ui: &#39;balck&#39;,
+                width: 300,
+                items: [dataview],
+                ownerElement: btn
+            });
+            btn.contextMenu = contextMenu;
+            btn.menu = contextMenu;
+            contextMenu.showAt(position[0] - 250, position[1] + 30, true);
+        }
+    },
+    onAccountsReady: function (btn) {
+        var me = this,
+            view = me.getView();
+        var userName = &#39;&#39;;
+        //get user&#39;s login information
+        Ext.Ajax.request({
+            method: &#39;POST&#39;,
+            headers: {
+                &#39;Accept&#39;: &#39;application/json&#39;
+            },
+            url: abp.appPath + &#39;api/services/app/session/GetCurrentLoginInformations&#39;,
+
+            success: function (response, opts) {
+                var obj = Ext.decode(response.responseText);
+                if (obj &amp;&amp; obj.success) {
+                    var result = obj.result;
+                    if (result.tenant) {
+                        userName = result.tenant.tenancyName + &#39;\\&#39; + result.user.userName;
+                    } else userName = &#39;.\\&#39; + result.user.userName;
+
+                    if (userName &amp;&amp; abp.session.impersonatorUserId !== abp.session.userId &amp;&amp; abp.session.impersonatorUserId !== null) {
+                        userName = &#39;&amp;#xf112 &#39; + userName;
+                        btn.gotoMyAccount = true;//to get go to my account menu item
+                        btn.setTooltip(abp.localization.localize(&quot;YouCanBackToYourAccount&quot;));
+                    }
+                    var image = view.down(&#39;image[itemId=AccountPic]&#39;);
+                    var ticks = new Date().getTime();
+                    var profilePic = abp.appPath + &#39;Profile/GetProfilePicture?t=&#39; + ticks;
+                    if (result.user.profilePictureId) {
+                        btn.gotoMyAccount ? btn.setWidth(180) : btn.setWidth(130);
+                        btn.setIcon(profilePic);
+                        image.hide();
+                    } else {
+                        image.show();
+                        image.setSrc(profilePic);
+                    }
+                    btn.setText(userName);
+
+                    var loggedInUserInfo = {
+                        userName: userName,
+                        defaultOrganizationId: result.user.defaultOrganizationId,
+                        emailAddress: result.user.emailAddress,
+                        userId: result.user.id,
+                        name: result.user.name,
+                        profilePictureId: result.user.profilePictureId,
+                        surname: result.user.surname,
+                        userOrganizationId: result.userOrganizationId,
+                        gotoMyAccount: btn.gotoMyAccount
+                    }
+                    Chaching.utilities.ChachingGlobals.loggedInUserInfo = loggedInUserInfo;
+                } else {
+                    Ext.toast(obj.error.message);
+                }
+            },
+
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+            }
+        });
+    },
+    manageActionClicked: function (menu, item, e, eOpts) {      
+        var manageAction = Ext.create(&#39;Chaching.view.profile.linkedaccounts.LinkedAccountsView&#39;);
+        var grid = manageAction.down(&#39;grid&#39;),
+        gridStore = grid.getStore();
+        gridStore.load();
+        manageAction.show();
+    },
+    changePasswordClick: function (menu, item, e, eOpts) {
+        var changepasswordAction = Ext.create(&#39;Chaching.view.profile.changepassword.ChangePasswordView&#39;);       
+        changepasswordAction.show();
+    },
+    mySettings: function (menu, item, e, eOpts) {
+        var changepasswordAction = Ext.create(&#39;Chaching.view.profile.settings.SettingsView&#39;);
+
+        Ext.Ajax.request({
+            url: abp.appPath + &#39;api/services/app/profile/GetCurrentUserProfileForEdit&#39;,
+            jsonData: {},
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    var form = changepasswordAction.down(&#39;form&#39;);
+                    form.getForm().setValues(res.result);
+                    changepasswordAction.show();
+                }
+            },
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+            }
+        });
+
+    },
+    changeProfilePicture: function (menu, item, e, eOpts) {
+        var changeProfilePicture = Ext.create(&#39;Chaching.view.profile.changeprofilepicture.ChangeProfilePictureView&#39;);
+        changeProfilePicture.show();
+    },
+    onAccountsHover: function (btn) {
+        var me = this,
+           view = me.getView();
+        var contextMenu = btn.contextMenu;
+        var position = btn.getPosition();
+
+        var notificationBtn = view.down(&#39;button[itemId=NotificationBtn]&#39;);
+        if (notificationBtn) {
+            me.hideContextMenu(notificationBtn);
+        }
+        var localizationBtn = view.down(&#39;button[itemId=LocalizationBtn]&#39;);
+        if (localizationBtn) {
+            me.hideContextMenu(localizationBtn);
+        }
+        if (contextMenu) {
+            contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
+        } else {
+            var items = [
+                { text: abp.localization.localize(&quot;BackToMyAccount&quot;), hidden: !btn.gotoMyAccount, name: &#39;BackToAccount&#39;, iconCls: &#39;icon-action-undo&#39; },
+                {
+                    text: abp.localization.localize(&quot;LinkedAccounts&quot;),
+                    iconCls: &#39;icon-link&#39;,
+                    menu: {
+                        ui: &#39;accounts&#39;,
+                        width: 170,
+                        items: [
+                            {
+                                text: abp.localization.localize(&quot;ManageAccounts&quot;),
+                                iconCls: &#39;icon-settings&#39;,
+                                name: &#39;ManageAccount&#39;,                              
+                                listeners: {
+                                    click: me.manageActionClicked
+                                }
+                            }
+                        ]
+                    }
+                }, {
+                    text: abp.localization.localize(&quot;LoginAttempts&quot;),
+                    iconCls: &#39;icon-shield&#39;,
+                    name: &#39;LoginAttempts&#39;,
+                    leaf: true,
+                    listeners: {
+                        click: me.loginAttemptsClicked
+                    }
+                }, {
+                    text: abp.localization.localize(&quot;ChangePassword&quot;),
+                    iconCls: &#39;icon-key&#39;,
+                    name: &#39;ChangePassword&#39;,
+                    listeners: {
+                        click: me.changePasswordClick
+                    }
+                }, {
+                    text: abp.localization.localize(&quot;ChangeProfilePicture&quot;),
+                    iconCls: &#39;icon-user&#39;,
+                    name: &#39;ChangeProfilePicture&#39;,
+                    listeners: {
+                        click: me.changeProfilePicture
+                    }
+                }, {
+                    text: abp.localization.localize(&quot;MySettings&quot;),
+                    iconCls: &#39;icon-settings&#39;,
+                    name: &#39;MySettings&#39;,
+                    listeners: {
+                        click: me.mySettings
+                    }
+                }, &#39;-&#39;,
+                {
+                    text: abp.localization.localize(&quot;Logout&quot;),
+                    iconCls: &#39;icon-logout&#39;,
+                    name: &#39;Logout&#39;
+                }
+            ];
+            if (btn.gotoMyAccount) {
+                items.splice(1, 0, &quot;-&quot;);
+            }
+            contextMenu = Ext.create({
+                xtype: &#39;menu&#39;,
+                ui: &#39;accounts&#39;,
+                width: 200,
+                items: items,
+                ownerElement: btn,
+                //listeners: {
+                //    click: me.onLocalizationItemClick
+                //}
+            });
+            btn.contextMenu = contextMenu;
+            contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
+        }
+    },
+    loginAttemptsClicked: function (menu, item, e, eOpts) {
+        var loginAttemptView = Ext.create(&#39;Chaching.view.profile.loginAttempts.LoginAttemptView&#39;);
+        var listStore = loginAttemptView.down(&#39;dataview&#39;).getStore();
+        listStore.load();
+        loginAttemptView.show();
+    }
+
+});
+</pre>
+</body>
+</html>

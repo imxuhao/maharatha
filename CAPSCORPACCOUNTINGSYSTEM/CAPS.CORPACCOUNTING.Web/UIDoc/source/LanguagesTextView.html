@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.languages.LanguagesTextView&#39;,{
+    extend: &#39;Chaching.view.common.window.ChachingWindowPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.languages.LanguagesTextViewController&#39;,
+        &#39;Chaching.view.languages.LanguagesTextForm&#39;
+    ],
+    controller: &#39;languages-languagestextview&#39;,
+    columndata: null,
+    height: 655,
+    width: 900,
+    layout: &#39;fit&#39;,
+    title: app.localize(&quot;LanguageTexts&quot;),
+    initComponent: function (config) {
+        var me = this,
+            controller = me.getController();
+        var form = Ext.create(&#39;Chaching.view.languages.LanguagesTextForm&#39;, {
+            height: &#39;100%&#39;,
+            width: &#39;100%&#39;,
+            name: &#39;LanguageTexts&#39;
+        });
+        me.items = [form];
+
+        me.callParent(arguments);
+    }
+});
+</pre>
+</body>
+</html>

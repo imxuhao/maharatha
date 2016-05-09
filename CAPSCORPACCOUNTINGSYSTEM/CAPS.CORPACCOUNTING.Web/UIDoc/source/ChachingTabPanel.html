@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.common.tab.ChachingTabPanel&#39;,{
+    extend: &#39;Ext.tab.Panel&#39;,
+
+    requires: [
+        &#39;Chaching.view.common.tab.ChachingTabPanelController&#39;,
+        &#39;Chaching.view.common.tab.ChachingTabPanelModel&#39;
+    ],
+
+    controller: &#39;common-tab-chachingtabpanel&#39;,
+    viewModel: {
+        type: &#39;common-tab-chachingtabpanel&#39;
+    },
+    ui: &#39;submenuTabs&#39;,
+    tabPosition: &#39;left&#39;,
+    tabStretchMax: true,
+    titleAlign: &#39;left&#39;,
+    //tabBarHeaderPosition: 1,
+    titleRotation: 0,
+    tabRotation: 2,//0
+    bodyStyle: {
+        &#39;background-color&#39;: &#39;#F3F5F9&#39;
+    },
+<span id='global-cfg-modulePermissions'>    /**
+</span>  * @hide
+  * @private
+  * @cfg {object} modulePermissions
+    * Override this config in child grid if has additional permissions
+  */
+    modulePermissions: undefined,
+    //creates dynamic tabs apart from items config of tabPanel
+    dynamicTabItems: null,
+    staticTabItems:null,
+    layout: {
+        type: &#39;card&#39;,
+        anchor: &#39;100%&#39;
+    },
+    initComponent: function() {
+        var me = this,
+            controller = me.getController(),
+            items = [];
+
+        //creates statics items
+        var staticTabItems = me.getStaticTabItems();
+        if (staticTabItems &amp;&amp; staticTabItems.length &gt; 0) {
+            for (var i = 0; i &lt; staticTabItems.length; i++) {
+                items.push(staticTabItems[i]);
+            }
+            
+        }
+        //create items based on custom data config apart from items config of tabpanel
+        var dynamicTabItems = me.getDynamicTabItems();
+        if (dynamicTabItems) {
+            for (var j = 0; j &lt; dynamicTabItems.length; j++) {
+                var dynamicItem = dynamicTabItems[j];
+                controller.doBeforeAddDynamicTabItem(dynamicItem);
+                items.push(dynamicItem);
+            }
+            
+        }
+        //load first tab list&#39;s store
+        if (items.length&gt;0) {
+            var firstTabItem = items[0];
+            if (typeof (firstTabItem.getStore) === &quot;function&quot;) {
+                firstTabItem.getStore().load();
+            }
+        }
+        me.items = items;
+        me.callParent(arguments);
+        me.on(&#39;tabchange&#39;, controller.onSubMenuItemTabChange);
+    },
+    getDynamicTabItems:function() {
+        var me = this,
+           controller = me.getController(),
+           items;
+        var dynamicItems = me.dynamicTabItems;
+        if (dynamicItems &amp;&amp; dynamicItems.length &gt; 0) {
+            items = [];
+            
+            for (var i = 0; i &lt; dynamicItems.length; i++) {
+                var custom = dynamicItems[i];
+                var dynamicItem = Ext.create({
+                    xtype: custom.url,
+                    hideMode: &#39;offsets&#39;,
+                    closable: false,
+                    title: app.localize(custom.displayName.name)
+                });
+                if (dynamicItem &amp;&amp; dynamicItem.modulePermissions.read) {
+                    items.push(dynamicItem);
+                }
+            }
+        }
+        return items;
+    },
+    getStaticTabItems:function() {
+        var me = this,
+            controller = me.getController(),
+            items;
+        var staticItems = me.staticTabItems;
+        if (staticItems &amp;&amp; staticItems.length &gt; 0) {
+            items = [];
+            for (var i = 0; i &lt; staticItems.length; i++) {
+                var item = staticItems[i];
+                items.push(item);
+            }
+        }
+        return items;
+    }
+});
+</pre>
+</body>
+</html>

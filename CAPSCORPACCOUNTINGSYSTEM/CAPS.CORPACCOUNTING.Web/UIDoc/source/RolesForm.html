@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.roles.RolesForm&#39;,{
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [&#39;host.roles.create&#39;, &#39;host.roles.edit&#39;],
+
+    requires: [
+        &#39;Chaching.view.roles.RolesFormController&#39;       
+    ],
+
+    controller: &#39;roles-rolesform&#39;,
+  
+
+    name: &#39;Roles&#39;,
+    openInPopupWindow: true,
+    hideDefaultButtons: false,
+    layout: &#39;vbox&#39;,
+    defaults: {
+        bodyStyle: { &#39;background-color&#39;: &#39;trasparent&#39; },
+        labelAlign: &#39;top&#39;,
+        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+    },
+    defaultFocus: &#39;textfield#displayName&#39;,
+    items: {
+        xtype: &#39;tabpanel&#39;,
+        width:&#39;100%&#39;,
+        //region: &#39;center&#39;,      
+        ui: &#39;dashboard&#39;,       
+        items: [
+        {
+            title: &#39;Roles&#39;,                            
+            items: [{
+                xtype: &#39;hiddenfield&#39;,
+                name: &#39;id&#39;,
+                value:0
+            }, {
+                xtype: &#39;textfield&#39;,
+                name: &#39;displayName&#39;,
+                itemId: &#39;displayName&#39;,
+                fieldLabel: app.localize(&#39;RoleName&#39;),
+                width: &#39;100%&#39;,
+                ui:&#39;fieldLabelTop&#39;,
+                emptyText: app.localize(&#39;RoleName&#39;)
+            },
+            ,{
+                xtype: &#39;checkbox&#39;,
+                boxLabel: app.localize(&#39;Default&#39;),
+                name: &#39;default&#39;,
+                labelAlign: &#39;right&#39;,
+                inputValue: true,
+                checked: true,
+                boxLabelCls: &#39;checkboxLabel&#39;
+            },
+            {
+                xtype: &#39;label&#39;,             
+                text: app.localize(&#39;DefaultRole_Description&#39;).initCap(),
+                width: &#39;100%&#39;,
+                reference: &quot;lablepassword&quot;
+            },
+            ],          
+        },
+        {
+            title:&#39;Permissions&#39;,
+            xtype: &#39;treepanel&#39;,
+            name: &#39;permissions&#39;,
+            store: &#39;roles.RolesTreeStore&#39;,
+            rootVisible: true,
+            width: 400,
+            height: 500
+        }
+        
+        ]
+    }
+
+});
+</pre>
+</body>
+</html>

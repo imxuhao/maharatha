@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.editions.EditionsViewController&#39;, {
+    extend: &#39;Chaching.view.common.window.ChachingWindowPanelController&#39;,
+    alias: &#39;controller.editions-editionsview&#39;,
+    onSaveClicked: function (btn) {       
+        var me = this,
+            view = me.getView(),
+            parentGrid = view.parentGrid,
+            values = view.getValues();
+
+        if (parentGrid) {
+            var gridStore = parentGrid.getStore(),
+                idPropertyField = gridStore.idPropertyField,
+                operation;
+            var record = Ext.create(gridStore.model.$className);
+            Ext.apply(record.data, values);
+            var myMask = new Ext.LoadMask({
+                msg: &#39;Please wait...&#39;,
+                target: view
+            });
+
+            myMask.show();
+            if (values &amp;&amp; parseInt(values[idPropertyField]) &gt; 0) {                
+                var input = new Object();
+                var Edition = {
+                    Id: e.record.data.id,
+                    DisplayName: e.record.data.displayName
+                };
+                input.Edition = Edition;
+
+                Ext.Ajax.request({
+                    url: abp.appPath + &#39;api/services/app/edition/CreateOrUpdateEdition&#39;,
+                    jsonData: Ext.encode(input)
+                });                
+            } else if (values &amp;&amp; parseInt(values[idPropertyField]) === 0) {
+                operation = Ext.data.Operation({
+                    params: record.data,
+                    parentGrid: parentGrid,
+                    controller: me,
+                    callback: me.onOperationCompleteCallBack
+                });
+                gridStore.create(values, operation);
+            } else {
+                myMask.hide();
+            }
+        }
+    },
+    
+});
+</pre>
+</body>
+</html>

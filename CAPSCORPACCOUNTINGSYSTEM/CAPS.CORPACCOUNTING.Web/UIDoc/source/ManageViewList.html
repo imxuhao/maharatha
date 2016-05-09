@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.manageView.ManageViewList&#39;,{
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.manageView.ManageViewListController&#39;
+    ],
+
+    controller: &#39;manageview-manageviewlist&#39;,
+    xtype: &#39;host.manageUserViews&#39;,
+    store: &#39;manageView.ManageViewStore&#39;,
+    name:&#39;ManageView&#39;,
+    modulePermissions: {
+        read: true,
+        create: true,
+        edit: true,
+        destroy: true
+    },
+    padding: 5,
+    gridId: null,////*******Important to apply grid&#39;s userView setting
+    requireActionColumn:true,
+    headerButtonsConfig: [
+    {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;ManageUsersViewSetting&quot;),
+        ui: &#39;headerTitle&#39;
+    }, {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;ManageUsersViewSettingHeaderInfo&quot;),
+        ui: &#39;headerSubTitle&#39;
+    }, &#39;-&gt;&#39;, {
+        xtype: &#39;button&#39;,
+        scale: &#39;small&#39;,
+        ui: &#39;actionButton&#39;,
+        action: &#39;create&#39;,
+        text: abp.localization.localize(&quot;ManageUsersViewSettingCreateNew&quot;).toUpperCase(),
+        checkPermission: false,
+        iconCls: &#39;fa fa-plus&#39;,
+        iconAlign: &#39;left&#39;
+    }],
+    requireExport: false,
+    requireMultiSearch: false,
+    requireMultisort: false,
+    isEditable: true,
+    editingMode: &#39;row&#39;,
+    createNewMode: &#39;inline&#39;,
+    columnLines: true,
+    multiColumnSort: false,
+    manageViewSetting: false,
+    showPagingToolbar: false,
+    hideClearFilter:true,
+    selModelConfig: {
+        selType: &#39;chachingCheckboxSelectionModel&#39;,
+        injectCheckbox: &#39;last&#39;,
+        headerText: app.localize(&#39;Apply&#39;),
+        headerWidth:&#39;15%&#39;,
+        mode:&#39;SINGLE&#39;,
+        showHeaderCheckbox: false,
+        listeners: {
+            beforeselect: &#39;onBeforeApplySelectedView&#39;,
+            select: &#39;onApplySelectedView&#39;
+        }
+    },
+    listeners: {
+        beforecellclick: &#39;onBeforeRowCellClick&#39;
+    },
+    columns:[
+    {
+        text: abp.localization.localize(&quot;SettingName&quot;),
+        dataIndex: &#39;viewSettingName&#39;,
+        xtype: &#39;gridcolumn&#39;,
+        sortable: false,
+        groupable: false,
+        //flex:1,
+        width: &#39;45%&#39;,
+        filterField: {
+            xtype: &#39;textfield&#39;,
+            width: &#39;100%&#39;,
+            emptyText: app.localize(&#39;TSettingName&#39;)
+        },editor: {
+            xtype: &#39;textfield&#39;,
+            name:&#39;viewSettingName&#39;
+        }
+    },{
+        text: abp.localization.localize(&quot;Default&quot;),
+        dataIndex: &#39;isDefault&#39;,
+        xtype: &#39;gridcolumn&#39;,
+        sortable: false,
+        groupable: false,
+        renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+        width: &#39;15%&#39;,
+        editor: {
+            xtype: &#39;checkboxfield&#39;,
+            inputValue: true,
+            name: &#39;isDefault&#39;
+        }
+    }, {
+        text: abp.localization.localize(&quot;CurrentView&quot;),
+        dataIndex: &#39;isActive&#39;,
+        xtype: &#39;gridcolumn&#39;,
+        sortable: false,
+        groupable: false,
+        renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+        width: &#39;15%&#39;
+    }]
+    
+});
+</pre>
+</body>
+</html>

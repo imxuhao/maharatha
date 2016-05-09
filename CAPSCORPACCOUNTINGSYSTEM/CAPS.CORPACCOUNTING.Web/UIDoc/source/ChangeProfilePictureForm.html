@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.profile.changeprofilepicture.ChangeProfilePictureForm&#39;,{
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormController&#39;
+    ],
+
+    controller: &#39;profile-changeprofilepicture-changeprofilepictureform&#39;,
+
+    name: &#39;ChangeProfilePicture&#39;,
+    openInPopupWindow: true,
+    hideDefaultButtons: false,
+    layout: &#39;vbox&#39;,
+    dataobject:null,
+    defaults: {
+        bodyStyle: { &#39;background-color&#39;: &#39;trasparent&#39; },
+        labelAlign: &#39;top&#39;,
+        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+    },
+    //  defaultFocus: &#39;textfield#tenancyName&#39;,
+
+    items: [       
+        {
+            xtype: &#39;filefield&#39;,
+            name: &#39;changeprofilepicture&#39;,            
+            clearOnSubmit :false,
+            anchor: &#39;100%&#39;,
+            width: &#39;100%&#39;,
+            listeners: {
+                change: &#39;filechange&#39;
+            }
+          
+
+        },
+         {
+             xtype: &#39;label&#39;,             
+             text: app.localize(&#39;ProfilePicture_Change_Info&#39;).initCap(),
+             width: &#39;100%&#39;            
+         },
+        ]
+});
+</pre>
+</body>
+</html>

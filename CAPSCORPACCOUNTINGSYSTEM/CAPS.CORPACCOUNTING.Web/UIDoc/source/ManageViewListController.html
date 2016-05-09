@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.manageView.ManageViewListController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.manageview-manageviewlist&#39;,
+    doBeforeInlineAddUpdate: function(record) {
+        var me = this,
+            view = me.getView(),
+            parentGrid = view.up(&#39;window&#39;).parentGrid;
+        var gridStore = parentGrid.getStore(),
+            isGrouped = gridStore.isGrouped(),
+            groupField = gridStore.getGroupField(),
+            groupDir = gridStore.getGroupDir(),
+            idPropertyField = view.getStore().idPropertyField;
+
+        if (record.get(idPropertyField) &gt; 0 &amp;&amp; !record.get(&#39;isActive&#39;)) {
+            return true;
+        }
+        if (parentGrid) {
+            var parentGridColumns = parentGrid.getColumns();
+            if (parentGridColumns &amp;&amp; parentGridColumns.length &gt; 0) {
+                var userViewSetting = {};
+                var viewColumns = [];
+                for (var i = 0; i &lt; parentGridColumns.length; i++) {
+                    var gridCol = parentGridColumns[i];
+                    if (gridCol.name !== &quot;ActionColumn&quot; &amp;&amp; gridCol.xtype !== &quot;actioncolumn&quot;) {
+                        var column = {
+                            hidden: gridCol.hidden,
+                            width: gridCol.width,
+                            dataIndex: gridCol.dataIndex
+                        };
+                        viewColumns.push(column);
+                    }
+                }
+                userViewSetting.column = viewColumns;
+                userViewSetting.groupInfo = {
+                    isGrouped: isGrouped,
+                    groupField: groupField,
+                    groupDir: groupDir
+                };
+                if (record.get(idPropertyField) &gt; 0) {
+                    record.set(&#39;viewSettings&#39;, Ext.encode(userViewSetting));
+                } else {
+                    record.set(&#39;userId&#39;, Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId);
+                    record.set(&#39;gridId&#39;, parentGrid.gridId);
+                    record.set(&#39;id&#39;, 0);
+                    record.set(&#39;viewSettings&#39;, Ext.encode(userViewSetting));
+                }
+            }
+            return true;
+        }
+        return false;
+    },
+    onBeforeRowCellClick: function (view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+        record.set(&#39;ColumnIndex&#39;, cellIndex);
+    },
+    onBeforeApplySelectedView: function(selectionModel, record, index, eOpts) {
+        var allowSelect = false;
+        //allow selection only when checkbox is clicked and filter fields has values
+        if (record.get(&#39;ColumnIndex&#39;) === 4) {
+            allowSelect = true;
+        }
+        return allowSelect;
+    },
+    onApplySelectedView: function (selectionModel, record, index, eOpts) {
+        var me = this,
+            ownerCt = me.view.ownerCt,
+            targetGrid = ownerCt.parentGrid,
+            activeUserViewId = targetGrid.activeUserViewId,
+            myStore = selectionModel.getStore();
+        var existingActiveRec = myStore.findRecord(&#39;userViewId&#39;, activeUserViewId);
+        Ext.Msg.confirm({
+            title: &#39;Apply View&#39;,
+            message: &#39;Do you really want to apply selected view setting?&#39;,
+            buttons: Ext.Msg.YESNO,
+            icon: Ext.Msg.QUESTION,
+            fn: function (btn) {
+                switch (btn) {
+                    case &quot;yes&quot;:
+                        //set current view
+                        if (existingActiveRec) {
+                            existingActiveRec.set(&#39;isActive&#39;, false);
+                            existingActiveRec.commit();
+                        }
+                        record.set(&#39;isActive&#39;, true);
+                        record.commit();
+                        if (targetGrid) {
+                            var cols = targetGrid.getColumns();
+                            var settingsToApply = [];
+                            var rec = {
+                                gridId: record.get(&#39;gridId&#39;),
+                                userViewId: record.get(&#39;userViewId&#39;),
+                                viewSettingName: record.get(&#39;viewSettingName&#39;),
+                                viewSettings: record.get(&#39;viewSettings&#39;),
+                                isDefault: record.get(&#39;isDefault&#39;)
+                            }
+                            settingsToApply.push(rec);
+                            targetGrid.activeUserViewId = record.get(&#39;userViewId&#39;);
+                            targetGrid.applyGridViewSetting(cols, true, settingsToApply);
+                        }
+                        Ext.destroy(ownerCt);
+                        break;
+                    default:
+                        selectionModel.deselectAll();
+                        break;
+
+                }
+            }
+        });
+    }
+
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,2660 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">// @tag core
+// @define Ext.Boot
+
+var Ext = Ext || {};
+
+//&lt;editor-fold desc=&quot;Boot&quot;&gt;
+<span id='Ext-Boot'>/**
+</span> * @class Ext.Boot
+ * @singleton
+ * @private
+ */
+Ext.Boot = Ext.Boot || (function (emptyFn) {
+
+    var doc = document,
+        _emptyArray = [],
+        _config = {
+<span id='Ext-Boot-cfg-disableCaching'>            /**
+</span>             * @cfg {Boolean} [disableCaching=true]
+             * If `true` current timestamp is added to script URL&#39;s to prevent caching.
+             * In debug builds, adding a &quot;cache&quot; or &quot;disableCacheBuster&quot; query parameter
+             * to the page&#39;s URL will set this to `false`.
+             */
+            disableCaching: (/[?&amp;](?:cache|disableCacheBuster)\b/i.test(location.search) ||
+                !(/http[s]?\:/i.test(location.href)) ||
+                /(^|[ ;])ext-cache=1/.test(doc.cookie)) ? false :
+                true,
+
+<span id='Ext-Boot-cfg-disableCachingParam'>            /**
+</span>             * @cfg {String} [disableCachingParam=&quot;_dc&quot;]
+             * The query parameter name for the cache buster&#39;s timestamp.
+             */
+            disableCachingParam: &#39;_dc&#39;,
+
+<span id='Ext-Boot-cfg-loadDelay'>            /**
+</span>             * @cfg {Boolean} loadDelay
+             * Millisecond delay between asynchronous script injection (prevents stack
+             * overflow on some user agents) &#39;false&#39; disables delay but potentially
+             * increases stack load.
+             */
+            loadDelay: false,
+
+<span id='Ext-Boot-cfg-preserveScripts'>            /**
+</span>             * @cfg {Boolean} preserveScripts
+             * `false` to remove asynchronously loaded scripts, `true` to retain script
+             * element for browser debugger compatibility and improved load performance.
+             */
+            preserveScripts: true,
+
+<span id='Ext-Boot-cfg-charset'>            /**
+</span>             * @cfg {String} [charset=UTF-8]
+             * Optional charset to specify encoding of dynamic content.
+             */
+            charset: &#39;UTF-8&#39;
+        },
+
+        _assetConfig= {},
+
+        cssRe = /\.css(?:\?|$)/i,
+        resolverEl = doc.createElement(&#39;a&#39;),
+        isBrowser = typeof window !== &#39;undefined&#39;,
+        _environment = {
+            browser: isBrowser,
+            node: !isBrowser &amp;&amp; (typeof require === &#39;function&#39;),
+            phantom: (window &amp;&amp; (window._phantom || window.callPhantom)) || /PhantomJS/.test(window.navigator.userAgent)
+        },
+        _tags = (Ext.platformTags = {}),
+
+        // All calls to _debug are commented out to speed up old browsers a bit;
+        // yes that makes a difference because the cost of concatenating strings
+        // and passing them into _debug() adds up pretty quickly.
+        _debug = function (message) {
+            //console.log(message);
+        },
+        _apply = function (object, config, defaults) {
+            if (defaults) {
+                _apply(object, defaults);
+            }
+            if (object &amp;&amp; config &amp;&amp; typeof config === &#39;object&#39;) {
+                for (var i in config) {
+                    object[i] = config[i];
+                }
+            }
+            return object;
+        },
+        _merge = function() {
+            var lowerCase = false,
+                obj = Array.prototype.shift.call(arguments),
+                index, i, len, value;
+
+            if (typeof arguments[arguments.length - 1] === &#39;boolean&#39;) {
+                lowerCase = Array.prototype.pop.call(arguments);
+            }
+
+            len = arguments.length;
+            for (index = 0; index &lt; len; index++) {
+                value = arguments[index];
+                if (typeof value === &#39;object&#39;) {
+                    for (i in value) {
+                        obj[lowerCase ? i.toLowerCase() : i] = value[i];
+                    }
+                }
+            }
+
+            return obj;
+        },
+        _getKeys = (typeof Object.keys == &#39;function&#39;) ?
+            function(object){
+                if (!object) {
+                    return [];
+                }
+                return Object.keys(object);
+            } :
+            function(object) {
+                var keys = [],
+                    property;
+
+                for (property in object) {
+                    if (object.hasOwnProperty(property)) {
+                        keys.push(property);
+                    }
+                }
+
+                return keys;
+            },
+    /*
+     * The Boot loader class manages Request objects that contain one or
+     * more individual urls that need to be loaded.  Requests can be performed
+     * synchronously or asynchronously, but will always evaluate urls in the
+     * order specified on the request object.
+     */
+        Boot = {
+            loading: 0,
+            loaded: 0,
+            apply: _apply,
+            env: _environment,
+            config: _config,
+
+<span id='Ext-Boot-cfg-assetConfig'>            /**
+</span>             * @cfg {Object} assetConfig
+             * A map (url-&gt;assetConfig) that contains information about assets loaded by the Microlaoder.
+             */
+            assetConfig: _assetConfig,
+
+            // Keyed by absolute URL this object holds &quot;true&quot; if that URL is already loaded
+            // or an array of callbacks to call once it loads.
+            scripts: {
+                /*
+                 Entry objects
+
+                 &#39;http://foo.com/bar/baz/Thing.js&#39;: {
+                 done: true,
+                 el: scriptEl || linkEl,
+                 preserve: true,
+                 requests: [ request1, ... ]
+                 }
+                 */
+            },
+
+<span id='Ext-Boot-property-currentFile'>            /**
+</span>             * contains the current script name being loaded
+             * (loadSync or sequential load only)
+             */
+            currentFile: null,
+            suspendedQueue: [],
+            currentRequest: null,
+
+            // when loadSync is called, need to cause subsequent load requests to also be loadSync,
+            // eg, when Ext.require(...) is called
+            syncMode: false,
+
+            /*
+             * simple helper method for debugging
+             */
+            debug: _debug,
+
+<span id='Ext-Boot-property-useElements'>            /**
+</span>             * enables / disables loading scripts via script / link elements rather
+             * than using ajax / eval
+             */
+            useElements: true,
+
+            listeners: [],
+
+            Request: Request,
+
+            Entry: Entry,
+
+            allowMultipleBrowsers: false,
+
+            browserNames: {
+                ie: &#39;IE&#39;,
+                firefox: &#39;Firefox&#39;,
+                safari: &#39;Safari&#39;,
+                chrome: &#39;Chrome&#39;,
+                opera: &#39;Opera&#39;,
+                dolfin: &#39;Dolfin&#39;,
+                edge: &#39;Edge&#39;,
+                webosbrowser: &#39;webOSBrowser&#39;,
+                chromeMobile: &#39;ChromeMobile&#39;,
+                chromeiOS: &#39;ChromeiOS&#39;,
+                silk: &#39;Silk&#39;,
+                other: &#39;Other&#39;
+            },
+
+            osNames: {
+                ios: &#39;iOS&#39;,
+                android: &#39;Android&#39;,
+                windowsPhone: &#39;WindowsPhone&#39;,
+                webos: &#39;webOS&#39;,
+                blackberry: &#39;BlackBerry&#39;,
+                rimTablet: &#39;RIMTablet&#39;,
+                mac: &#39;MacOS&#39;,
+                win: &#39;Windows&#39;,
+                tizen: &#39;Tizen&#39;,
+                linux: &#39;Linux&#39;,
+                bada: &#39;Bada&#39;,
+                chromeOS: &#39;ChromeOS&#39;,
+                other: &#39;Other&#39;
+            },
+
+            browserPrefixes: {
+                ie: &#39;MSIE &#39;,
+                edge: &#39;Edge/&#39;,
+                firefox: &#39;Firefox/&#39;,
+                chrome: &#39;Chrome/&#39;,
+                safari: &#39;Version/&#39;,
+                opera: &#39;OPR/&#39;,
+                dolfin: &#39;Dolfin/&#39;,
+                webosbrowser: &#39;wOSBrowser/&#39;,
+                chromeMobile: &#39;CrMo/&#39;,
+                chromeiOS: &#39;CriOS/&#39;,
+                silk: &#39;Silk/&#39;
+            },
+
+            // When a UA reports multiple browsers this list is used to prioritize the &#39;real&#39; browser
+            // lower index number will win
+            browserPriority: [
+                &#39;edge&#39;,
+                &#39;opera&#39;,
+                &#39;dolfin&#39;,
+                &#39;webosbrowser&#39;,
+                &#39;silk&#39;,
+                &#39;chromeiOS&#39;,
+                &#39;chromeMobile&#39;,
+                &#39;ie&#39;,
+                &#39;firefox&#39;,
+                &#39;safari&#39;,
+                &#39;chrome&#39;
+            ],
+
+            osPrefixes: {
+                tizen: &#39;(Tizen )&#39;,
+                ios: &#39;i(?:Pad|Phone|Pod)(?:.*)CPU(?: iPhone)? OS &#39;,
+                android: &#39;(Android |HTC_|Silk/)&#39;, // Some HTC devices ship with an OSX userAgent by default,
+                // so we need to add a direct check for HTC_
+                windowsPhone: &#39;Windows Phone &#39;,
+                blackberry: &#39;(?:BlackBerry|BB)(?:.*)Version\/&#39;,
+                rimTablet: &#39;RIM Tablet OS &#39;,
+                webos: &#39;(?:webOS|hpwOS)\/&#39;,
+                bada: &#39;Bada\/&#39;,
+                chromeOS: &#39;CrOS &#39;
+            },
+
+            fallbackOSPrefixes: {
+                windows: &#39;win&#39;,
+                mac: &#39;mac&#39;,
+                linux: &#39;linux&#39;
+            },
+
+            devicePrefixes: {
+                iPhone: &#39;iPhone&#39;,
+                iPod: &#39;iPod&#39;,
+                iPad: &#39;iPad&#39;
+            },
+
+            maxIEVersion: 12,
+
+
+<span id='Ext-Boot-method-detectPlatformTags'>            /**
+</span>             * The default function that detects various platforms and sets tags
+             * in the platform map accordingly.  Examples are iOS, android, tablet, etc.
+             * @param tags the set of tags to populate
+             */
+            detectPlatformTags: function () {
+                var me = this,
+                    ua = navigator.userAgent,
+                    isMobile = /Mobile(\/|\s)/.test(ua),
+                    element = document.createElement(&#39;div&#39;),
+                    isEventSupported = function (name, tag) {
+                        if (tag === undefined) {
+                            tag = window;
+                        }
+
+                        var eventName = &#39;on&#39; + name.toLowerCase(),
+                            isSupported = (eventName in element);
+
+                        if (!isSupported) {
+                            if (element.setAttribute &amp;&amp; element.removeAttribute) {
+                                element.setAttribute(eventName, &#39;&#39;);
+                                isSupported = typeof element[eventName] === &#39;function&#39;;
+
+                                if (typeof element[eventName] !== &#39;undefined&#39;) {
+                                    element[eventName] = undefined;
+                                }
+
+                                element.removeAttribute(eventName);
+                            }
+                        }
+
+                        return isSupported;
+                    },
+
+                    // Browser Detection
+                    getBrowsers = function () {
+                        var browsers = {},
+                            maxIEVersion, prefix,
+                            value, key, index, len, match, version, matched;
+
+                        // MS Edge browser (and possibly others) can report multiple browsers in the UserAgent
+                        // &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240&quot;
+                        // we use this to prioritize the actual browser in this situation
+                        len = me.browserPriority.length;
+                        for (index = 0; index &lt; len; index++) {
+                            key = me.browserPriority[index];
+                            if (!matched) {
+                                value = me.browserPrefixes[key];
+                                match = ua.match(new RegExp(&#39;(&#39; + value + &#39;)([\\w\\._]+)&#39;));
+                                version = match &amp;&amp; match.length &gt; 1 ? parseInt(match[2]) : 0;
+                                if (version) {
+                                    matched = true;
+                                }
+                            } else {
+                                version = 0;
+                            }
+                            browsers[key] = version;
+                        }
+
+                        //Deal with IE document mode
+                        if (browsers.ie) {
+                            var mode = document.documentMode;
+
+                            if (mode &gt;= 8) {
+                                browsers.ie = mode;
+                            }
+                        }
+
+                        // Fancy IE greater than and less then quick tags
+                        version = browsers.ie || false;
+                        maxIEVersion = Math.max(version, me.maxIEVersion);
+
+                        for (index = 8; index &lt;= maxIEVersion; ++index) {
+                            prefix = &#39;ie&#39; + index;
+                            browsers[prefix + &#39;m&#39;] = version ? version &lt;= index : 0;
+                            browsers[prefix] = version ? version === index : 0;
+                            browsers[prefix + &#39;p&#39;] = version ? version &gt;= index : 0;
+                        }
+
+                        return browsers;
+                    },
+
+                    //OS Detection
+                    getOperatingSystems = function () {
+                        var systems = {},
+                            value, key, keys, index, len, match, matched, version, activeCount;
+
+                        keys = _getKeys(me.osPrefixes);
+                        len = keys.length;
+                        for (index = 0, activeCount = 0; index &lt; len; index++) {
+                            key = keys[index];
+                            value = me.osPrefixes[key];
+                            match = ua.match(new RegExp(&#39;(&#39; + value + &#39;)([^\\s;]+)&#39;));
+                            matched = match ? match[1] : null;
+
+                            // This is here because some HTC android devices show an OSX Snow Leopard userAgent by default.
+                            // And the Kindle Fire doesn&#39;t have any indicator of Android as the OS in its User Agent
+                            if (matched &amp;&amp; (matched === &#39;HTC_&#39; || matched === &#39;Silk/&#39;)) {
+                                version = 2.3;
+                            } else {
+                                version = match &amp;&amp; match.length &gt; 1 ? parseFloat(match[match.length - 1]) : 0;
+                            }
+
+                            if (version) {
+                                activeCount++;
+                            }
+                            systems[key] = version;
+                        }
+
+                        keys = _getKeys(me.fallbackOSPrefixes);
+
+                        // If no OS could be found we resort to the fallbacks, otherwise we just
+                        // falsify the fallbacks
+                        len = keys.length;
+                        for (index = 0; index &lt; len; index++) {
+                            key = keys[index];
+
+                            // No OS was detected from osPrefixes
+                            if (activeCount === 0) {
+                                value = me.fallbackOSPrefixes[key];
+                                match = ua.toLowerCase().match(new RegExp(value));
+                                systems[key] = match ? true : 0;
+                            } else {
+                                systems[key] = 0;
+                            }
+                        }
+
+                        return systems;
+                    },
+
+                    // Device Detection
+                    getDevices = function () {
+                        var devices = {},
+                            value, key, keys, index, len, match;
+
+                        keys = _getKeys(me.devicePrefixes);
+                        len = keys.length;
+                        for (index = 0; index &lt; len; index++) {
+                            key = keys[index];
+                            value = me.devicePrefixes[key];
+                            match = ua.match(new RegExp(value));
+                            devices[key] = match ? true : 0;
+                        }
+
+                        return devices;
+                    },
+                    browsers = getBrowsers(),
+                    systems = getOperatingSystems(),
+                    devices = getDevices(),
+                    platformParams = Boot.loadPlatformsParam();
+
+                // We apply platformParams from the query here first to allow for forced user valued
+                // to be used in calculation of generated tags
+                _merge(_tags, browsers, systems, devices, platformParams, true);
+
+                _tags.phone = !!((_tags.iphone || _tags.ipod) ||
+                    (!_tags.silk &amp;&amp; (_tags.android &amp;&amp; (_tags.android &lt; 3 || isMobile))) ||
+                    (_tags.blackberry &amp;&amp; isMobile) ||
+                    (_tags.windowsphone));
+
+                _tags.tablet = !!(!_tags.phone &amp;&amp; (
+                        _tags.ipad ||
+                        _tags.android ||
+                        _tags.silk ||
+                        _tags.rimtablet ||
+                        (_tags.ie10 &amp;&amp; /; Touch/.test(ua))
+                    ));
+
+                _tags.touch =
+                    // if the browser has touch events we can be reasonably sure the device has
+                    // a touch screen
+                    isEventSupported(&#39;touchend&#39;) ||
+                    // browsers that use pointer event have maxTouchPoints &gt; 0 if the
+                    // device supports touch input
+                    // http://www.w3.org/TR/pointerevents/#widl-Navigator-maxTouchPoints
+                    navigator.maxTouchPoints ||
+                    // IE10 uses a vendor-prefixed maxTouchPoints property
+                    navigator.msMaxTouchPoints;
+
+                _tags.desktop = !_tags.phone &amp;&amp; !_tags.tablet;
+                _tags.cordova = _tags.phonegap = !!(window.PhoneGap || window.Cordova || window.cordova);
+                _tags.webview = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)(?!.*FBAN)/i.test(ua);
+                _tags.androidstock = (_tags.android &lt;= 4.3) &amp;&amp; (_tags.safari || _tags.silk);
+
+                // Re-apply any query params here to allow for user override of generated tags (desktop, touch, tablet, etc)
+                _merge(_tags, platformParams, true);
+            },
+
+<span id='Ext-Boot-method-loadPlatformsParam'>            /**
+</span>             * Extracts user supplied platform tags from the &quot;platformTags&quot; query parameter
+             * of the form:
+             *
+             *      ?platformTags=name:state,name:state,...
+             *
+             * (each tag defaults to true when state is unspecified)
+             *
+             * Example:
+             *
+             *      ?platformTags=isTablet,isPhone:false,isDesktop:0,iOS:1,Safari:true, ...
+             *
+             * @returns {Object} the platform tags supplied by the query string
+             */
+            loadPlatformsParam: function () {
+                // Check if the ?platform parameter is set in the URL
+                var paramsString = window.location.search.substr(1),
+                    paramsArray = paramsString.split(&quot;&amp;&quot;),
+                    params = {}, i,
+                    platforms = {},
+                    tmpArray, tmplen, platform, name, enabled;
+
+                for (i = 0; i &lt; paramsArray.length; i++) {
+                    tmpArray = paramsArray[i].split(&quot;=&quot;);
+                    params[tmpArray[0]] = tmpArray[1];
+                }
+
+                if (params.platformTags) {
+                    tmpArray = params.platformTags.split(&quot;,&quot;);
+                    for (tmplen = tmpArray.length, i = 0; i &lt; tmplen; i++) {
+                        platform = tmpArray[i].split(&quot;:&quot;);
+                        name = platform[0];
+                        enabled=true;
+                        if (platform.length &gt; 1) {
+                            enabled = platform[1];
+                            if (enabled === &#39;false&#39; || enabled === &#39;0&#39;) {
+                                enabled = false;
+                            }
+                        }
+                        platforms[name] = enabled;
+                    }
+                }
+                return platforms;
+            },
+
+            filterPlatform: function (platform, excludes) {
+                platform = _emptyArray.concat(platform || _emptyArray);
+                excludes = _emptyArray.concat(excludes || _emptyArray);
+
+                var plen = platform.length,
+                    elen = excludes.length,
+                    include = (!plen &amp;&amp; elen), // default true if only excludes specified
+                    i, tag;
+
+                for (i = 0; i &lt; plen &amp;&amp; !include; i++) {
+                    tag = platform[i];
+                    include = !!_tags[tag];
+                }
+
+                for (i = 0; i &lt; elen &amp;&amp; include; i++) {
+                    tag = excludes[i];
+                    include = !_tags[tag];
+                }
+
+                return include;
+            },
+
+            init: function () {
+                var scriptEls = doc.getElementsByTagName(&#39;script&#39;),
+                    len = scriptEls.length,
+                    re = /\/ext(\-[a-z\-]+)?\.js$/,
+                    entry, script, src, state, baseUrl, key, n, origin;
+
+                // Since we are loading after other scripts, and we needed to gather them
+                // anyway, we track them in _scripts so we don&#39;t have to ask for them all
+                // repeatedly.
+                for (n = 0; n &lt; len; n++) {
+                    src = (script = scriptEls[n]).src;
+                    if (!src) {
+                        continue;
+                    }
+                    state = script.readyState || null;
+
+                    // If we find a script file called &quot;ext-*.js&quot;, then the base path is that file&#39;s base path.
+                    if (!baseUrl) {
+                        if (re.test(src)) {
+                            Boot.hasReadyState = (&quot;readyState&quot; in script);
+                            Boot.hasAsync = (&quot;async&quot; in script) || !Boot.hasReadyState;
+                            baseUrl = src;
+                        }
+                    }
+
+                    if (!Boot.scripts[key = Boot.canonicalUrl(src)]) {
+//                         _debug(&quot;creating entry &quot; + key + &quot; in Boot.init&quot;);
+                        entry = new Entry({
+                            key: key,
+                            url: src,
+                            done: state === null ||  // non-IE
+                                state === &#39;loaded&#39; || state === &#39;complete&#39;, // IE only
+                            el: script,
+                            prop: &#39;src&#39;
+                        });
+                    }
+                }
+
+                if (!baseUrl) {
+                    script = scriptEls[scriptEls.length - 1];
+                    baseUrl = script.src;
+                    Boot.hasReadyState = (&#39;readyState&#39; in script);
+                    Boot.hasAsync = (&quot;async&quot; in script) || !Boot.hasReadyState;
+                }
+
+                Boot.baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf(&#39;/&#39;) + 1);
+                origin = window.location.origin ||
+                    window.location.protocol +
+                    &quot;//&quot; +
+                    window.location.hostname +
+                    (window.location.port ? &#39;:&#39; + window.location.port: &#39;&#39;);
+                Boot.origin = origin;
+
+                Boot.detectPlatformTags();
+                Ext.filterPlatform = Boot.filterPlatform;
+            },
+
+<span id='Ext-Boot-method-canonicalUrl'>            /**
+</span>             * This method returns a canonical URL for the given URL.
+             *
+             * For example, the following all produce the same canonical URL (which is the
+             * last one):
+             *
+             *      http://foo.com/bar/baz/zoo/derp/../../goo/Thing.js?_dc=12345
+             *      http://foo.com/bar/baz/zoo/derp/../../goo/Thing.js
+             *      http://foo.com/bar/baz/zoo/derp/../jazz/../../goo/Thing.js
+             *      http://foo.com/bar/baz/zoo/../goo/Thing.js
+             *      http://foo.com/bar/baz/goo/Thing.js
+             *
+             * @private
+             */
+            canonicalUrl: function (url) {
+                // *WARNING WARNING WARNING*
+                // This method yields the most correct result we can get but it is EXPENSIVE!
+                // In ALL browsers! When called multiple times in a sequence, as if when
+                // we resolve dependencies for entries, it will cause garbage collection events
+                // and overall painful slowness. This is why we try to avoid it as much as we can.
+                // 
+                // @TODO - see if we need this fallback logic
+                // http://stackoverflow.com/questions/470832/getting-an-absolute-url-from-a-relative-one-ie6-issue
+                resolverEl.href = url;
+
+                var ret = resolverEl.href,
+                    dc = _config.disableCachingParam,
+                    pos = dc ? ret.indexOf(dc + &#39;=&#39;) : -1,
+                    c, end;
+
+                // If we have a _dc query parameter we need to remove it from the canonical
+                // URL.
+                if (pos &gt; 0 &amp;&amp; ((c = ret.charAt(pos - 1)) === &#39;?&#39; || c === &#39;&amp;&#39;)) {
+                    end = ret.indexOf(&#39;&amp;&#39;, pos);
+                    end = (end &lt; 0) ? &#39;&#39; : ret.substring(end);
+                    if (end &amp;&amp; c === &#39;?&#39;) {
+                        ++pos; // keep the &#39;?&#39;
+                        end = end.substring(1); // remove the &#39;&amp;&#39;
+                    }
+                    ret = ret.substring(0, pos - 1) + end;
+                }
+
+                return ret;
+            },
+
+<span id='Ext-Boot-method-getConfig'>            /**
+</span>             * Get the config value corresponding to the specified name. If no name is given, will return the config object
+             * @param {String} name The config property name
+             * @return {Object}
+             */
+            getConfig: function (name) {
+                return name ? Boot.config[name] : Boot.config;
+            },
+
+<span id='Ext-Boot-method-setConfig'>            /**
+</span>             * Set the configuration.
+             * @param {Object} config The config object to override the default values.
+             * @return {Ext.Boot} this
+             */
+            setConfig: function (name, value) {
+                if (typeof name === &#39;string&#39;) {
+                    Boot.config[name] = value;
+                } else {
+                    for (var s in name) {
+                        Boot.setConfig(s, name[s]);
+                    }
+                }
+                return Boot;
+            },
+
+            getHead: function () {
+                return Boot.docHead ||
+                    (Boot.docHead = doc.head ||
+                        doc.getElementsByTagName(&#39;head&#39;)[0]);
+            },
+
+            create: function (url, key, cfg) {
+                var config = cfg || {};
+                config.url = url;
+                config.key = key;
+                return Boot.scripts[key] = new Entry(config);
+            },
+
+            getEntry: function (url, cfg, canonicalPath) {
+                var key, entry;
+                
+                // Canonicalizing URLs via anchor element href yields the most correct result
+                // but is *extremely* resource heavy so we need to avoid it whenever possible
+                key = canonicalPath ? url : Boot.canonicalUrl(url);
+                entry = Boot.scripts[key];
+                
+                if (!entry) {
+                    entry = Boot.create(url, key, cfg);
+                    
+                    if (canonicalPath) {
+                        entry.canonicalPath = true;
+                    }
+                }
+                
+                return entry;
+            },
+
+            registerContent: function (url, type, content) {
+                var cfg = {
+                    content: content,
+                    loaded: true,
+                    css: type === &#39;css&#39;
+                };
+
+                return Boot.getEntry(url, cfg);
+            },
+
+            processRequest: function(request, sync) {
+                request.loadEntries(sync);
+            },
+
+            load: function (request) {
+//                 _debug(&quot;Boot.load called&quot;);
+                var request = new Request(request);
+
+                if (request.sync || Boot.syncMode) {
+                    return Boot.loadSync(request);
+                }
+
+                // If there is a request in progress, we must
+                // queue this new request to be fired  when the current request completes.
+                if (Boot.currentRequest) {
+//                     _debug(&quot;current active request, suspending this request&quot;);
+                    // trigger assignment of entries now to ensure that overlapping
+                    // entries with currently running requests will synchronize state
+                    // with this pending one as they complete
+                    request.getEntries();
+                    Boot.suspendedQueue.push(request);
+                } else {
+                    Boot.currentRequest = request;
+                    Boot.processRequest(request, false);
+                }
+                return Boot;
+            },
+
+            loadSync: function (request) {
+//                 _debug(&quot;Boot.loadSync called&quot;);
+                var request = new Request(request);
+
+                Boot.syncMode++;
+                Boot.processRequest(request, true);
+                Boot.syncMode--;
+                return Boot;
+            },
+
+            loadBasePrefix: function(request) {
+                request = new Request(request);
+                request.prependBaseUrl = true;
+                return Boot.load(request);
+            },
+
+            loadSyncBasePrefix: function(request) {
+                request = new Request(request);
+                request.prependBaseUrl = true;
+                return Boot.loadSync(request);
+            },
+
+            requestComplete: function(request) {
+                var next;
+
+                if (Boot.currentRequest === request) {
+                    Boot.currentRequest = null;
+                    while(Boot.suspendedQueue.length &gt; 0) {
+                        next = Boot.suspendedQueue.shift();
+                        if(!next.done) {
+//                             _debug(&quot;resuming suspended request&quot;);
+                            Boot.load(next);
+                            break;
+                        }
+                    }
+                }
+                if (!Boot.currentRequest &amp;&amp; Boot.suspendedQueue.length == 0) {
+                    Boot.fireListeners();
+                }
+            },
+
+            isLoading: function () {
+                return !Boot.currentRequest &amp;&amp; Boot.suspendedQueue.length == 0;
+            },
+
+            fireListeners: function () {
+                var listener;
+                while (Boot.isLoading() &amp;&amp; (listener = Boot.listeners.shift())) {
+                    listener();
+                }
+            },
+
+            onBootReady: function (listener) {
+                if (!Boot.isLoading()) {
+                    listener();
+                } else {
+                    Boot.listeners.push(listener);
+                }
+            },
+
+<span id='Ext-Boot-method-getPathsFromIndexes'>            /**
+</span>             * this is a helper function used by Ext.Loader to flush out
+             * &#39;uses&#39; arrays for classes in some Ext versions
+             */
+            getPathsFromIndexes: function (indexMap, loadOrder) {
+                // In older versions indexMap was an object instead of a sparse array
+                if (!(&#39;length&#39; in indexMap)) {
+                    var indexArray = [],
+                        index;
+                    
+                    for (index in indexMap) {
+                        if (!isNaN(+index)) {
+                            indexArray[+index] = indexMap[index];
+                        }
+                    }
+                    
+                    indexMap = indexArray;
+                }
+                
+                return Request.prototype.getPathsFromIndexes(indexMap, loadOrder);
+            },
+
+            createLoadOrderMap: function(loadOrder) {
+                return Request.prototype.createLoadOrderMap(loadOrder);
+            },
+
+            fetch: function(url, complete, scope, async) {
+                async = (async === undefined) ? !!complete : async;
+
+                var xhr = new XMLHttpRequest(),
+                    result, status, content, exception = false,
+                    readyStateChange = function () {
+                        if (xhr &amp;&amp; xhr.readyState == 4) {
+                            status = (xhr.status === 1223) ? 204 :
+                                (xhr.status === 0 &amp;&amp; ((self.location || {}).protocol === &#39;file:&#39; ||
+                                    (self.location || {}).protocol === &#39;ionp:&#39;)) ? 200 : xhr.status;
+                            content = xhr.responseText;
+                            result = {
+                                content: content,
+                                status: status,
+                                exception: exception
+                            };
+                            if (complete) {
+                                complete.call(scope, result);
+                            }
+                            xhr.onreadystatechange = emptyFn;
+                            xhr = null;
+                        }
+                    };
+
+                if (async) {
+                    xhr.onreadystatechange = readyStateChange;
+                }
+
+                try {
+//                     _debug(&quot;fetching &quot; + url + &quot; &quot; + (async ? &quot;async&quot; : &quot;sync&quot;));
+                    xhr.open(&#39;GET&#39;, url, async);
+                    xhr.send(null);
+                } catch (err) {
+                    exception = err;
+                    readyStateChange();
+                    return result;
+                }
+
+                if (!async) {
+                    readyStateChange();
+                }
+
+                return result;
+            },
+
+            notifyAll: function(entry) {
+                entry.notifyRequests();
+            }
+        };
+
+    function Request(cfg) {
+         //The request class encapsulates a series of Entry objects
+         //and provides notification around the completion of all Entries
+         //in this request.
+
+        if(cfg.$isRequest) {
+            return cfg;
+        }
+
+        var cfg = cfg.url ? cfg : {url: cfg},
+            url = cfg.url,
+            urls = url.charAt ? [ url ] : url,
+            charset = cfg.charset || Boot.config.charset;
+
+        _apply(this, cfg);
+            
+        delete this.url;
+        this.urls = urls;
+        this.charset = charset;
+    };
+    
+    Request.prototype = {
+        $isRequest: true,
+
+        createLoadOrderMap: function (loadOrder) {
+            var len = loadOrder.length,
+                loadOrderMap = {},
+                i, element;
+
+            for (i = 0; i &lt; len; i++) {
+                element = loadOrder[i];
+                loadOrderMap[element.path] = element;
+            }
+
+            return loadOrderMap;
+        },
+
+        getLoadIndexes: function (item, indexMap, loadOrder, includeUses, skipLoaded) {
+            var resolved = [],
+                queue = [item],
+                itemIndex = item.idx,
+                queue, entry, dependencies, depIndex, i, len;
+            
+            if (indexMap[itemIndex]) {
+                // prevent cycles
+                return resolved;
+            }
+            
+            // Both indexMap and resolved are sparse arrays keyed by indexes.
+            // This gives us a naturally sorted sequence of indexes later on
+            // when we need to convert them to paths.
+            // indexMap is the map of all indexes we have visited at least once
+            // per the current expandUrls() invocation, and resolved is the map
+            // of all dependencies for the current item that are not included
+            // in indexMap.
+            indexMap[itemIndex] = resolved[itemIndex] = true;
+            
+            while (item = queue.shift()) {
+                // Canonicalizing URLs is expensive, we try to avoid it
+                if (item.canonicalPath) {
+                    entry = Boot.getEntry(item.path, null, true);
+                }
+                else {
+                    entry = Boot.getEntry(this.prepareUrl(item.path));
+                }
+                
+                if (!(skipLoaded &amp;&amp; entry.done)) {
+                    if (includeUses &amp;&amp; item.uses.length) {
+                        dependencies = item.requires.concat(item.uses);
+                    }
+                    else {
+                        dependencies = item.requires;
+                    }
+                    
+                    for (i = 0, len = dependencies.length; i &lt; len; i++) {
+                        depIndex = dependencies[i];
+                        
+                        if (!indexMap[depIndex]) {
+                            indexMap[depIndex] = resolved[depIndex] = true;
+                            queue.push(loadOrder[depIndex]);
+                        }
+                    }
+                }
+            }
+            
+            return resolved;
+        },
+
+        getPathsFromIndexes: function (indexes, loadOrder) {
+            var paths = [],
+                index, len;
+            
+            // indexes is a sparse array with values being true for defined indexes
+            for (index = 0, len = indexes.length; index &lt; len; index++) {
+                if (indexes[index]) {
+                    paths.push(loadOrder[index].path);
+                }
+            }
+            
+            return paths;
+        },
+
+        expandUrl: function (url, loadOrder, loadOrderMap, indexMap, includeUses, skipLoaded) {
+            var item, resolved;
+            
+            if (loadOrder) {
+                item = loadOrderMap[url];
+                
+                if (item) {
+                    resolved = this.getLoadIndexes(item, indexMap, loadOrder, includeUses, skipLoaded);
+                    
+                    if (resolved.length) {
+                        return this.getPathsFromIndexes(resolved, loadOrder);
+                    }
+                }
+            }
+            
+            return [url];
+        },
+
+        expandUrls: function (urls, includeUses) {
+            var me = this,
+                loadOrder = me.loadOrder,
+                expanded = [],
+                expandMap = {},
+                indexMap = [],
+                loadOrderMap, tmpExpanded, i, len, t, tlen, tUrl;
+            
+            if (typeof urls === &quot;string&quot;) {
+                urls = [urls];
+            }
+            
+            if (loadOrder) {
+                loadOrderMap = me.loadOrderMap;
+                
+                if (!loadOrderMap) {
+                    loadOrderMap = me.loadOrderMap = me.createLoadOrderMap(loadOrder);
+                }
+            }
+            
+            for (i = 0, len = urls.length; i &lt; len; i++) {
+                // We don&#39;t want to skip loaded entries (last argument === false).
+                // There are some overrides that get loaded before their respective classes,
+                // and when the class dependencies are processed we don&#39;t want to skip over
+                // the overrides&#39; dependencies just because they were loaded first.
+                tmpExpanded = this.expandUrl(urls[i], loadOrder, loadOrderMap, indexMap, includeUses, false);
+                
+                for (t = 0, tlen = tmpExpanded.length; t &lt; tlen; t++) {
+                    tUrl = tmpExpanded[t];
+                    
+                    if (!expandMap[tUrl]) {
+                        expandMap[tUrl] = true;
+                        expanded.push(tUrl);
+                    }
+                }
+            }
+            
+            if (expanded.length === 0) {
+                expanded = urls;
+            }
+            
+            return expanded;
+        },
+
+        expandLoadOrder: function () {
+            var me = this,
+                urls = me.urls,
+                expanded;
+
+            if (!me.expanded) {
+                expanded = this.expandUrls(urls, true);
+                me.expanded = true;
+            } else {
+                expanded = urls;
+            }
+
+            me.urls = expanded;
+
+            // if we added some urls to the request to honor the indicated
+            // load order, the request needs to be sequential
+            if (urls.length != expanded.length) {
+                me.sequential = true;
+            }
+
+            return me;
+        },
+
+        getUrls: function () {
+            this.expandLoadOrder();
+            return this.urls;
+        },
+
+        prepareUrl: function(url) {
+            if(this.prependBaseUrl) {
+                return Boot.baseUrl + url;
+            }
+            return url;
+        },
+
+        getEntries: function () {
+            var me = this,
+                entries = me.entries,
+                loadOrderMap, item, i, entry, urls, url;
+            
+            if (!entries) {
+                entries = [];
+                urls = me.getUrls();
+                
+                // If we have loadOrder array then the map will be expanded by now
+                if (me.loadOrder) {
+                    loadOrderMap = me.loadOrderMap;
+                }
+                
+                for (i = 0; i &lt; urls.length; i++) {
+                    url = me.prepareUrl(urls[i]);
+                    
+                    if (loadOrderMap) {
+                        item = loadOrderMap[url];
+                    }
+                    
+                    entry = Boot.getEntry(url, {
+                        buster: me.buster,
+                        charset: me.charset
+                    }, item &amp;&amp; item.canonicalPath);
+                    
+                    entry.requests.push(me);
+                    entries.push(entry);
+                }
+                
+                me.entries = entries;
+            }
+            
+            return entries;
+        },
+
+        loadEntries: function(sync) {
+            var me = this,
+                entries = me.getEntries(),
+                len = entries.length,
+                start = me.loadStart || 0,
+                continueLoad, entries, entry, i;
+
+            if(sync !== undefined) {
+                me.sync = sync;
+            }
+
+            me.loaded = me.loaded || 0;
+            me.loading = me.loading || len;
+
+            for(i = start; i &lt; len; i++) {
+                entry = entries[i];
+                if(!entry.loaded) {
+                    continueLoad = entries[i].load(me.sync);
+                } else {
+                    continueLoad = true;
+                }
+                if(!continueLoad) {
+                    me.loadStart = i;
+                    entry.onDone(function(){
+                        me.loadEntries(sync);
+                    });
+                    break;
+                }
+            }
+            me.processLoadedEntries();
+        },
+
+        processLoadedEntries: function () {
+            var me = this,
+                entries = me.getEntries(),
+                len = entries.length,
+                start = me.startIndex || 0,
+                i, entry;
+
+            if (!me.done) {
+                for (i = start; i &lt; len; i++) {
+                    entry = entries[i];
+
+                    if (!entry.loaded) {
+                        me.startIndex = i;
+                        return;
+                    }
+
+                    if (!entry.evaluated) {
+                        entry.evaluate();
+                    }
+
+                    if (entry.error) {
+                        me.error = true;
+                    }
+                }
+                me.notify();
+            }
+        },
+
+        notify: function () {
+            var me = this;
+            if (!me.done) {
+                var error = me.error,
+                    fn = me[error ? &#39;failure&#39; : &#39;success&#39;],
+                    delay = (&#39;delay&#39; in me)
+                        ? me.delay
+                        : (error ? 1 : Boot.config.chainDelay),
+                    scope = me.scope || me;
+                me.done = true;
+                if (fn) {
+                    if (delay === 0 || delay &gt; 0) {
+                        // Free the stack (and defer the next script)
+                        setTimeout(function () {
+                            fn.call(scope, me);
+                        }, delay);
+                    } else {
+                        fn.call(scope, me);
+                    }
+                }
+                me.fireListeners();
+                Boot.requestComplete(me);
+            }
+        },
+
+        onDone: function(listener) {
+            var me = this,
+                listeners = me.listeners || (me.listeners = []);
+            if(me.done) {
+                listener(me);
+            } else {
+                listeners.push(listener);
+            }
+        },
+
+        fireListeners: function() {
+            var listeners = this.listeners,
+                listener;
+            if(listeners) {
+//                 _debug(&quot;firing request listeners&quot;);
+                while((listener = listeners.shift())) {
+                    listener(this);
+                }
+            }
+        }
+    };
+
+    function Entry(cfg) {
+         //The Entry class is a token to manage the load and evaluation
+         //state of a particular url.  It is used to notify all Requests
+         //interested in this url that the content is available.
+
+        if(cfg.$isEntry) {
+            return cfg;
+        }
+
+//         _debug(&quot;creating entry for &quot; + cfg.url);
+
+        var charset = cfg.charset || Boot.config.charset,
+            manifest = Ext.manifest,
+            loader = manifest &amp;&amp; manifest.loader,
+            cache = (cfg.cache !== undefined) ? cfg.cache : (loader &amp;&amp; loader.cache),
+            buster, busterParam;
+
+        if (Boot.config.disableCaching) {
+            if (cache === undefined) {
+                cache = !Boot.config.disableCaching;
+            }
+
+            if (cache === false) {
+                buster = +new Date();
+            } else if (cache !== true) {
+                buster = cache;
+            }
+
+            if (buster) {
+                busterParam = (loader &amp;&amp; loader.cacheParam) || Boot.config.disableCachingParam;
+                buster = busterParam + &quot;=&quot; + buster;
+            }
+        }
+
+        _apply(this, cfg);
+        
+        this.charset = charset;
+        this.buster = buster;
+        this.requests = [];
+    };
+    
+    Entry.prototype = {
+        $isEntry: true,
+        done: false,
+        evaluated: false,
+        loaded: false,
+
+        isCrossDomain: function() {
+            var me = this;
+            if(me.crossDomain === undefined) {
+//                 _debug(&quot;checking &quot; + me.getLoadUrl() + &quot; for prefix &quot; + Boot.origin);
+                me.crossDomain = (me.getLoadUrl().indexOf(Boot.origin) !== 0);
+            }
+            return me.crossDomain;
+        },
+
+        isCss: function () {
+            var me = this;
+            if (me.css === undefined) {
+                if (me.url) {
+                    var assetConfig = Boot.assetConfig[me.url];
+                    me.css = assetConfig ? assetConfig.type === &quot;css&quot; : cssRe.test(me.url);
+                } else {
+                    me.css = false;
+                }
+            }
+            return this.css;
+        },
+
+        getElement: function (tag) {
+            var me = this,
+                el = me.el;
+            if (!el) {
+//                 _debug(&quot;creating element for &quot; + me.url);
+                if (me.isCss()) {
+                    tag = tag || &quot;link&quot;;
+                    el = doc.createElement(tag);
+                    if(tag == &quot;link&quot;) {
+                        el.rel = &#39;stylesheet&#39;;
+                        me.prop = &#39;href&#39;;
+                    } else {
+                        me.prop=&quot;textContent&quot;;
+                    }
+                    el.type = &quot;text/css&quot;;
+                } else {
+                    tag = tag || &quot;script&quot;;
+                    el = doc.createElement(tag);
+                    el.type = &#39;text/javascript&#39;;
+                    me.prop = &#39;src&#39;;
+
+                    if (me.charset) {
+                        el.charset = me.charset;
+                    }
+
+                    if (Boot.hasAsync) {
+                        el.async = false;
+                    }
+                }
+                me.el = el;
+            }
+            return el;
+        },
+
+        getLoadUrl: function () {
+            var me = this,
+                url;
+            
+            url = me.canonicalPath ? me.url : Boot.canonicalUrl(me.url);
+            
+            if (!me.loadUrl) {
+                me.loadUrl = !!me.buster
+                    ? (url + (url.indexOf(&#39;?&#39;) === -1 ? &#39;?&#39; : &#39;&amp;&#39;) + me.buster)
+                    : url;
+            }
+            return me.loadUrl;
+        },
+
+        fetch: function (req) {
+            var url = this.getLoadUrl(),
+                async = !!req.async,
+                complete = req.complete;
+
+            Boot.fetch(url, complete, this, async);
+        },
+
+        onContentLoaded: function (response) {
+            var me = this,
+                status = response.status,
+                content = response.content,
+                exception = response.exception,
+                url = this.getLoadUrl();
+            me.loaded = true;
+            if ((exception || status === 0) &amp;&amp; !_environment.phantom) {
+                me.error =
+                    (&quot;Failed loading synchronously via XHR: &#39;&quot; + url +
+                        &quot;&#39;. It&#39;s likely that the file is either being loaded from a &quot; +
+                        &quot;different domain or from the local file system where cross &quot; +
+                        &quot;origin requests are not allowed for security reasons. Try &quot; +
+                        &quot;asynchronous loading instead.&quot;) ||
+                    true;
+                me.evaluated = true;
+            }
+            else if ((status &gt;= 200 &amp;&amp; status &lt; 300) || status === 304
+                || _environment.phantom
+                || (status === 0 &amp;&amp; content.length &gt; 0)
+                ) {
+                me.content = content;
+            }
+            else {
+                me.error =
+                    (&quot;Failed loading synchronously via XHR: &#39;&quot; + url +
+                        &quot;&#39;. Please verify that the file exists. XHR status code: &quot; +
+                        status) ||
+                    true;
+                me.evaluated = true;
+            }
+        },
+
+        createLoadElement: function(callback) {
+            var me = this,
+                el = me.getElement(),
+                readyStateChange = function(){
+                    if (this.readyState === &#39;loaded&#39; || this.readyState === &#39;complete&#39;) {
+                        if(callback) {
+                            callback();
+                        }
+                    }
+                },
+                errorFn = function() {
+                    me.error = true;
+                    if(callback) {
+                        callback();
+                    }
+                };
+            me.preserve = true;
+            el.onerror = errorFn;
+            if(Boot.hasReadyState) {
+                el.onreadystatechange = readyStateChange;
+            } else {
+                el.onload = callback;
+            }
+            // IE starts loading here
+            el[me.prop] = me.getLoadUrl();
+        },
+
+        onLoadElementReady: function() {
+            Boot.getHead().appendChild(this.getElement());
+            this.evaluated = true;
+        },
+
+        inject: function (content, asset) {
+//             _debug(&quot;injecting content for &quot; + this.url);
+            var me = this,
+                head = Boot.getHead(),
+                url = me.url,
+                key = me.key,
+                base, el, ieMode, basePath;
+
+            if (me.isCss()) {
+                me.preserve = true;
+                basePath = key.substring(0, key.lastIndexOf(&quot;/&quot;) + 1);
+                base = doc.createElement(&#39;base&#39;);
+                base.href = basePath;
+                if(head.firstChild) {
+                    head.insertBefore(base, head.firstChild);
+                } else {
+                    head.appendChild(base);
+                }
+                // reset the href attribute to cuase IE to pick up the change
+                base.href = base.href;
+
+                if (url) {
+                    content += &quot;\n/*# sourceURL=&quot; + key + &quot; */&quot;;
+                }
+
+                // create element after setting base
+                el = me.getElement(&quot;style&quot;);
+
+                ieMode = (&#39;styleSheet&#39; in el);
+
+                head.appendChild(base);
+                if(ieMode) {
+                    head.appendChild(el);
+                    el.styleSheet.cssText = content;
+                } else {
+                    el.textContent = content;
+                    head.appendChild(el);
+                }
+                head.removeChild(base);
+
+            } else {
+                // Debugger friendly, file names are still shown even though they&#39;re
+                // eval&#39;ed code. Breakpoints work on both Firebug and Chrome&#39;s Web
+                // Inspector.
+                if (url) {
+                    content += &quot;\n//# sourceURL=&quot; + key;
+                }
+                Ext.globalEval(content);
+            }
+            return me;
+        },
+
+        loadCrossDomain: function() {
+            var me = this,
+                complete = function(){
+                    me.el.onerror = me.el.onload = emptyFn;
+                    me.el = null;
+                    me.loaded = me.evaluated = me.done = true;
+                    me.notifyRequests();
+                };
+            me.createLoadElement(function(){
+                complete();
+            });
+            me.evaluateLoadElement();
+            // at this point, we need sequential evaluation,
+            // which means we can&#39;t advance the load until
+            // this entry has fully completed
+            return false;
+        },
+
+        loadElement: function() {
+            var me = this,
+                complete = function(){
+                    me.el.onerror = me.el.onload = emptyFn;
+                    me.el = null;
+                    me.loaded = me.evaluated = me.done = true;
+                    me.notifyRequests();
+                };
+            me.createLoadElement(function(){
+                complete();
+            });
+            me.evaluateLoadElement();
+            return true;
+        },
+
+        loadSync: function() {
+            var me = this;
+            me.fetch({
+                async: false,
+                complete: function (response) {
+                    me.onContentLoaded(response);
+                }
+            });
+            me.evaluate();
+            me.notifyRequests();
+        },
+
+        load: function (sync) {
+            var me = this;
+            if (!me.loaded) {
+                if(me.loading) {
+                    // if we&#39;re calling back through load and we&#39;re loading but haven&#39;t
+                    // yet loaded, then we should be in a sequential, cross domain
+                    // load scenario which means we can&#39;t continue the load on the
+                    // request until this entry has fully evaluated, which will mean
+                    // loaded = evaluated = done = true in one step.  For css files, this
+                    // will happen immediately upon &lt;link&gt; element creation / insertion,
+                    // but &lt;script&gt; elements will set this upon load notification
+                    return false;
+                }
+                me.loading = true;
+
+                // for async modes, we have some options
+                if (!sync) {
+                    // if cross domain, just inject the script tag and let the onload
+                    // events drive the progression
+                    if(me.isCrossDomain()) {
+                        return me.loadCrossDomain();
+                    }
+                    // for IE, use the readyStateChange allows us to load scripts in parallel
+                    // but serialize the evaluation by appending the script node to the
+                    // document
+                    else if(!me.isCss() &amp;&amp; Boot.hasReadyState) {
+                        me.createLoadElement(function () {
+                            me.loaded = true;
+                            me.notifyRequests();
+                        });
+                    }
+
+                    else if(Boot.useElements &amp;&amp;
+                        // older webkit, phantomjs included, won&#39;t fire load for link elements
+                        !(me.isCss() &amp;&amp; _environment.phantom)) {
+                        return me.loadElement();
+                    }
+                    // for other browsers, just ajax the content down in parallel, and use
+                    // globalEval to serialize evaluation
+                    else {
+                        me.fetch({
+                            async: !sync,
+                            complete: function (response) {
+                                me.onContentLoaded(response);
+                                me.notifyRequests();
+                            }
+                        });
+                    }
+                }
+
+                // for sync mode in js, global eval FTW.  IE won&#39;t honor the comment
+                // paths in the debugger, so eventually we need a sync mode for IE that
+                // uses the readyStateChange mechanism
+                else {
+                    me.loadSync();
+                }
+            }
+            // signal that the load process can continue
+            return true;
+        },
+
+        evaluateContent: function () {
+            this.inject(this.content);
+            this.content = null;
+        },
+
+        evaluateLoadElement: function() {
+            Boot.getHead().appendChild(this.getElement());
+        },
+
+        evaluate: function () {
+            var me = this;
+            if(!me.evaluated) {
+                if(me.evaluating) {
+                    return;
+                }
+                me.evaluating = true;
+                if(me.content !== undefined) {
+                    me.evaluateContent();
+                } else if(!me.error) {
+                    me.evaluateLoadElement();
+                }
+                me.evaluated = me.done = true;
+                me.cleanup();
+            }
+        },
+
+        cleanup: function () {
+            var me = this,
+                el = me.el,
+                prop;
+
+            if (!el) {
+                return;
+            }
+
+            if (!me.preserve) {
+                me.el = null;
+
+                el.parentNode.removeChild(el); // Remove, since its useless now
+
+                for (prop in el) {
+                    try {
+                        if (prop !== me.prop) {
+                            // If we set the src property to null IE
+                            // will try and request a script at &#39;./null&#39;
+                            el[prop] = null;
+                        }
+                        delete el[prop];      // and prepare for GC
+                    } catch (cleanEx) {
+                        //ignore
+                    }
+                }
+            }
+
+            // Setting to null can cause exceptions if IE ever needs to call these
+            // again (like onreadystatechange). This emptyFn has nothing locked in
+            // closure scope so it is about as safe as null for memory leaks.
+            el.onload = el.onerror = el.onreadystatechange = emptyFn;
+        },
+
+        notifyRequests: function () {
+            var requests = this.requests,
+                len = requests.length,
+                i, request;
+            for (i = 0; i &lt; len; i++) {
+                request = requests[i];
+                request.processLoadedEntries();
+            }
+            if(this.done) {
+                this.fireListeners();
+            }
+        },
+
+        onDone: function(listener) {
+            var me = this,
+                listeners = me.listeners || (me.listeners = []);
+            if(me.done) {
+                listener(me);
+            } else {
+                listeners.push(listener);
+            }
+        },
+
+        fireListeners: function() {
+            var listeners = this.listeners,
+                listener;
+            if(listeners &amp;&amp; listeners.length &gt; 0) {
+//                 _debug(&quot;firing event listeners for url &quot; + this.url);
+                while((listener = listeners.shift())) {
+                    listener(this);
+                }
+            }
+        }
+    };
+
+<span id='Ext-Boot-method-disableCacheBuster'>    /**
+</span>     * Turns on or off the &quot;cache buster&quot; applied to dynamically loaded scripts. Normally
+     * dynamically loaded scripts have an extra query parameter appended to avoid stale
+     * cached scripts. This method can be used to disable this mechanism, and is primarily
+     * useful for testing. This is done using a cookie.
+     * @param {Boolean} disable True to disable the cache buster.
+     * @param {String} [path=&quot;/&quot;] An optional path to scope the cookie.
+     */
+    Ext.disableCacheBuster = function (disable, path) {
+        var date = new Date();
+        date.setTime(date.getTime() + (disable ? 10 * 365 : -1) * 24 * 60 * 60 * 1000);
+        date = date.toGMTString();
+        doc.cookie = &#39;ext-cache=1; expires=&#39; + date + &#39;; path=&#39; + (path || &#39;/&#39;);
+    };
+
+
+    Boot.init();
+    return Boot;
+
+// NOTE: We run the eval at global scope to protect the body of the function and allow
+// compressors to still process it.
+}(function () {
+}));//(eval(&quot;/*@cc_on!@*/!1&quot;));
+
+<span id='Ext-method-globalEval'>/**
+</span> * This method evaluates the given code free of any local variable. This
+ * will be at global scope, in others it will be in a function.
+ * @param {String} code The code to evaluate.
+ * @private
+ * @method
+ * @member Ext
+ */
+Ext.globalEval = Ext.globalEval || (this.execScript
+    ? function (code) { execScript(code); }
+    : function ($$code) { eval.call(window, $$code); });
+
+/*
+ * Only IE8 &amp; IE/Quirks lack Function.prototype.bind so we polyfill that here.
+ */
+if (!Function.prototype.bind) {
+    (function () {
+        var slice = Array.prototype.slice,
+        // To reduce overhead on call of the bound fn we have two flavors based on
+        // whether we have args to prepend or not:
+            bind = function (me) {
+                var args = slice.call(arguments, 1),
+                    method = this;
+
+                if (args.length) {
+                    return function () {
+                        var t = arguments;
+                        // avoid the slice/concat if the caller does not supply args
+                        return method.apply(me, t.length ? args.concat(slice.call(t)) : args);
+                    };
+                }
+                // this is the majority use case - just fn.bind(this) and no args
+
+                args = null;
+                return function () {
+                    return method.apply(me, arguments);
+                };
+            };
+        Function.prototype.bind = bind;
+        bind.$extjs = true; // to detect this polyfill if one want to improve it
+    }());
+}
+
+//&lt;/editor-fold&gt;
+
+Ext.setResourcePath = function (poolName, path) {
+    var manifest = Ext.manifest || (Ext.manifest = {}),
+        paths = manifest.resources || (manifest.resources = {});
+
+    if (manifest) {
+        if (typeof poolName !== &#39;string&#39;) {
+            Ext.apply(paths, poolName);
+        } else {
+            paths[poolName] = path;
+        }
+        manifest.resources = paths;
+    }
+};
+
+Ext.getResourcePath = function (path, poolName, packageName) {
+    if (typeof path !== &#39;string&#39;) {
+        poolName = path.pool;
+        packageName = path.packageName;
+        path = path.path;
+    }
+    var manifest = Ext.manifest,
+        paths = manifest &amp;&amp; manifest.resources,
+        poolPath = paths[poolName],
+        output = [];
+
+    if (poolPath == null) {
+        poolPath = paths.path;
+        if (poolPath == null) {
+            poolPath = &#39;resources&#39;;
+        }
+    }
+
+    if (poolPath) {
+        output.push(poolPath);
+    }
+
+    if (packageName) {
+        output.push(packageName);
+    }
+
+    output.push(path);
+    return output.join(&#39;/&#39;);
+};
+// here, the extra check for window[&#39;Ext&#39;] is needed for use with cmd-test
+// code injection.  we need to make that this file will sync up with page global
+// scope to avoid duplicate Ext.Boot state.  That check is after the initial Ext check
+// to allow the sandboxing template to inject an appropriate Ext var and prevent the
+// global detection.
+var Ext = Ext || window[&#39;Ext&#39;] || {};
+
+
+//&lt;editor-fold desc=&quot;Microloader&quot;&gt;
+<span id='Ext-Microloader'>/**
+</span> * @class Ext.Microloader
+ * @private
+ * @singleton
+ */
+Ext.Microloader = Ext.Microloader || (function () {
+    var Boot = Ext.Boot,
+        _debug = function (message) {
+            //console.log(message);
+        },
+        _warn = function (message) {
+            console.log(&quot;[WARN] &quot; + message);
+        },
+        _privatePrefix = &#39;_ext:&#39; + location.pathname,
+
+<span id='Ext-Microloader-method-getStorageKey'>        /**
+</span>         * @method getStorageKey
+         * The Following combination is used to create isolated local storage keys
+         * &#39;_ext&#39; is used to scope all the local storage keys that we internally by Ext
+         * &#39;location.pathname&#39; is used to force each assets to cache by an absolute URL (/build/MyApp) (dev vs prod)
+         * &#39;url&#39; is used to force each asset to cache relative to the page (app.json vs resources/app.css)
+         * &#39;profileId&#39; is used to differentiate the builds of an application (neptune vs crisp)
+         * &#39;Microloader.appId&#39; is unique to the application and will differentiate apps on the same host (dev mode running app watch against multiple apps)
+         */
+        getStorageKey = function(url, profileId) {
+            return  _privatePrefix + url + &#39;-&#39; + (profileId ? profileId + &#39;-&#39; : &#39;&#39;) + Microloader.appId;
+        },
+        postProcessor, _storage;
+
+    try {
+        _storage = window[&#39;localStorage&#39;];
+    } catch(ex) {
+        // ignore
+    }
+
+    var _cache = window[&#39;applicationCache&#39;],
+        // Local Storage Controller
+        LocalStorage = {
+            clearAllPrivate: function(manifest) {
+                if(_storage) {
+
+                    //Remove the entry for the manifest first
+                    _storage.removeItem(manifest.key);
+
+                    var i, key,
+                        removeKeys = [],
+                        suffix = manifest.profile + &#39;-&#39; + Microloader.appId,
+                        ln = _storage.length;
+                    for (i = 0; i &lt; ln; i++) {
+                        key = _storage.key(i);
+                        // If key starts with the private key and the suffix is present we can clear this entry
+                        if (key.indexOf(_privatePrefix) === 0 &amp;&amp; key.indexOf(suffix) !== -1) {
+                            removeKeys.push(key);
+                        }
+                    }
+
+                    for(i in removeKeys) {
+                        _debug(&quot;Removing &quot;+ removeKeys[i] + &quot; from Local Storage&quot;);
+                        _storage.removeItem(removeKeys[i]);
+                    }
+                }
+            },
+<span id='Ext-Microloader-method-retrieveAsset'>            /**
+</span>             * @private
+             */
+            retrieveAsset: function (key) {
+                try {
+                    return _storage.getItem(key);
+                }
+                catch (e) {
+                    // Private browsing mode
+                    return null;
+                }
+            },
+
+            setAsset: function(key, content) {
+                try {
+                    if (content === null || content == &#39;&#39;) {
+                        _storage.removeItem(key);
+                    } else {
+                        _storage.setItem(key, content);
+                    }
+                }
+                catch (e) {
+                    if (_storage &amp;&amp; e.code == e.QUOTA_EXCEEDED_ERR) {
+                        _warn(&quot;LocalStorage Quota exceeded, cannot store &quot; + key + &quot; locally&quot;);
+                    }
+                }
+            }
+        };
+
+        var Asset = function (cfg) {
+            if (typeof cfg.assetConfig === &#39;string&#39;) {
+                this.assetConfig = {
+                    path: cfg.assetConfig
+                };
+            } else {
+                this.assetConfig = cfg.assetConfig;
+            }
+
+            this.type = cfg.type;
+            this.key = getStorageKey(this.assetConfig.path, cfg.manifest.profile);
+
+            if (cfg.loadFromCache) {
+                this.loadFromCache();
+            }
+        };
+
+        Asset.prototype = {
+            shouldCache: function() {
+                return _storage &amp;&amp; this.assetConfig.update &amp;&amp; this.assetConfig.hash &amp;&amp; !this.assetConfig.remote;
+            },
+
+            is: function (asset) {
+                return (!!asset &amp;&amp; this.assetConfig &amp;&amp; asset.assetConfig &amp;&amp; (this.assetConfig.hash === asset.assetConfig.hash))
+            },
+
+            cache: function(content) {
+                if (this.shouldCache()) {
+                    LocalStorage.setAsset(this.key, content || this.content);
+                }
+            },
+
+            uncache: function() {
+                LocalStorage.setAsset(this.key, null);
+            },
+
+            updateContent: function (content) {
+                this.content = content;
+            },
+
+            getSize: function () {
+                return this.content ? this.content.length : 0;
+            },
+
+            loadFromCache: function() {
+                if (this.shouldCache()) {
+                    this.content = LocalStorage.retrieveAsset(this.key);
+                }
+            }
+        };
+
+        var Manifest = function (cfg) {
+            if (typeof cfg.content === &quot;string&quot;) {
+                this.content = JSON.parse(cfg.content);
+            } else {
+                this.content = cfg.content;
+            }
+            this.assetMap = {};
+
+            this.url = cfg.url;
+            this.fromCache = !!cfg.cached;
+            this.assetCache = !(cfg.assetCache === false);
+            this.key = getStorageKey(this.url);
+
+            // Pull out select properties for repetitive use
+            this.profile = this.content.profile;
+            this.hash = this.content.hash;
+            this.loadOrder = this.content.loadOrder;
+            this.deltas = this.content.cache ? this.content.cache.deltas : null;
+            this.cacheEnabled = this.content.cache ? this.content.cache.enable : false;
+
+            this.loadOrderMap = (this.loadOrder) ? Boot.createLoadOrderMap(this.loadOrder) : null;
+
+            var tags = this.content.tags,
+                platformTags = Ext.platformTags;
+
+            if (tags) {
+                if (tags instanceof Array) {
+                    for (var i = 0; i &lt; tags.length; i++) {
+                        platformTags[tags[i]] = true;
+                    }
+                } else {
+                    Boot.apply(platformTags, tags);
+                }
+
+                // re-apply the query parameters, so that the params as specified
+                // in the url always has highest priority
+                Boot.apply(platformTags, Boot.loadPlatformsParam());
+            }
+
+            // Convert all assets into Assets
+            this.js = this.processAssets(this.content.js, &#39;js&#39;);
+            this.css = this.processAssets(this.content.css, &#39;css&#39;);
+        };
+
+        Manifest.prototype = {
+            processAsset:  function(assetConfig, type) {
+                var processedAsset = new Asset({
+                    manifest: this,
+                    assetConfig: assetConfig,
+                    type: type,
+                    loadFromCache: this.assetCache
+                });
+                this.assetMap[assetConfig.path] = processedAsset;
+                return processedAsset;
+            },
+
+            processAssets: function(assets, type) {
+                var results = [],
+                    ln = assets.length,
+                    i, assetConfig;
+
+                for (i = 0; i &lt; ln; i++) {
+                    assetConfig = assets[i];
+                    results.push(this.processAsset(assetConfig, type));
+                }
+
+                return results;
+            },
+
+            useAppCache: function() {
+                return true;
+            },
+
+            // Concatenate all assets for easy access
+            getAssets: function () {
+                return this.css.concat(this.js);
+            },
+
+            getAsset: function (path) {
+                return this.assetMap[path];
+            },
+
+            shouldCache: function() {
+                return this.hash &amp;&amp; this.cacheEnabled;
+            },
+
+            cache: function(content) {
+                if (this.shouldCache()) {
+                    LocalStorage.setAsset(this.key, JSON.stringify(content || this.content));
+                }
+                else {
+                    _debug(&quot;Manifest caching is disabled.&quot;);
+                }
+            },
+
+            is: function(manifest) {
+                _debug(&quot;Testing Manifest: &quot; + this.hash + &quot; VS &quot; +  manifest.hash);
+                return this.hash === manifest.hash;
+            },
+
+            // Clear the manifest from local storage
+            uncache: function() {
+                LocalStorage.setAsset(this.key, null);
+            },
+
+            exportContent: function() {
+                return Boot.apply({
+                    loadOrderMap: this.loadOrderMap
+                }, this.content);
+            }
+        };
+
+<span id='Ext-Microloader-property-_listeners'>        /**
+</span>         * Microloader
+         * @type {Array}
+         * @private
+         */
+        var _listeners = [],
+        _loaded = false,
+        Microloader = {
+            init: function () {
+                Ext.microloaded = true;
+
+                // data-app is in the dev template for an application and is also
+                // injected into the app my CMD for production
+                // We use this to prefix localStorage cache to prevent collisions
+                var microloaderElement = document.getElementById(&#39;microloader&#39;);
+                Microloader.appId = microloaderElement ? microloaderElement.getAttribute(&#39;data-app&#39;) : &#39;&#39;;
+
+                if (Ext.beforeLoad) {
+                    postProcessor = Ext.beforeLoad(Ext.platformTags);
+                }
+
+                var readyHandler = Ext._beforereadyhandler;
+
+                Ext._beforereadyhandler = function () {
+                    if (Ext.Boot !== Boot) {
+                        Ext.apply(Ext.Boot, Boot);
+                        Ext.Boot = Boot;
+                    }
+                    if (readyHandler) {
+                        readyHandler();
+                    }
+                };
+            },
+
+            applyCacheBuster: function(url) {
+                var tstamp = new Date().getTime(),
+                    sep = url.indexOf(&#39;?&#39;) === -1 ? &#39;?&#39; : &#39;&amp;&#39;;
+                url = url + sep + &quot;_dc=&quot; + tstamp;
+                return url;
+            },
+
+            run: function() {
+                Microloader.init();
+                var manifest = Ext.manifest;
+
+                if (typeof manifest === &quot;string&quot;) {
+                    var extension = &quot;.json&quot;,
+                        url = manifest.indexOf(extension) === manifest.length - extension.length
+                            ? manifest
+                            : manifest + &quot;.json&quot;,
+                        key = getStorageKey(url),
+                        content = LocalStorage.retrieveAsset(key);
+
+                    // Manifest found in local storage, use this for immediate boot except in PhantomJS environments for building.
+                    if (content) {
+                            _debug(&quot;Manifest file, &#39;&quot; + url + &quot;&#39;, was found in Local Storage&quot;);
+                        manifest = new Manifest({
+                            url: url,
+                            content: content,
+                            cached: true
+                        });
+                        if (postProcessor) {
+                            postProcessor(manifest);
+                        }
+                        Microloader.load(manifest);
+
+
+                    // Manifest is not in local storage. Fetch it from the server
+                    } else {
+                        Boot.fetch(Microloader.applyCacheBuster(url), function (result) {
+                                _debug(&quot;Manifest file was not found in Local Storage, loading: &quot; + url);
+                            manifest = new Manifest({
+                                url: url,
+                                content: result.content
+                            });
+
+                            manifest.cache();
+                            if (postProcessor) {
+                                postProcessor(manifest);
+                            }
+                            Microloader.load(manifest);
+                        });
+                    }
+
+                // Embedded Manifest into JS file
+                } else {
+                        _debug(&quot;Manifest was embedded into application javascript file&quot;);
+                    manifest = new Manifest({
+                        content: manifest
+                    });
+                    Microloader.load(manifest);
+                }
+            },
+
+<span id='Ext-Microloader-method-load'>            /**
+</span>             * @param {Manifest} manifest
+             */
+            load: function (manifest) {
+                Microloader.urls = [];
+                Microloader.manifest = manifest;
+                Ext.manifest = Microloader.manifest.exportContent();
+
+                var assets = manifest.getAssets(),
+                    cachedAssets = [],
+                    asset, i, len, include, entry;
+
+                for (len = assets.length, i = 0; i &lt; len; i++) {
+                    asset = assets[i];
+                    include = Microloader.filterAsset(asset);
+                    if (include) {
+                        // Asset is using the localStorage caching system
+                        if (manifest.shouldCache() &amp;&amp; asset.shouldCache()) {
+                            // Asset already has content from localStorage, instantly seed that into boot
+                            if (asset.content) {
+                                    _debug(&quot;Asset: &quot; + asset.assetConfig.path + &quot; was found in local storage. No remote load for this file&quot;);
+                                entry = Boot.registerContent(asset.assetConfig.path, asset.type, asset.content);
+                                if (entry.evaluated) {
+                                    _warn(&quot;Asset: &quot; + asset.assetConfig.path + &quot; was evaluated prior to local storage being consulted.&quot;);
+                                }
+                            //load via AJAX and seed content into Boot
+                            } else {
+                                    _debug(&quot;Asset: &quot; + asset.assetConfig.path + &quot; was NOT found in local storage. Adding to load queue&quot;);
+                                cachedAssets.push(asset);
+                            }
+                        }
+                        Microloader.urls.push(asset.assetConfig.path);
+                        Boot.assetConfig[asset.assetConfig.path] = Boot.apply({type: asset.type}, asset.assetConfig);
+                    }
+                }
+
+                // If any assets are using the caching system and do not have local versions load them first via AJAX
+                if (cachedAssets.length &gt; 0) {
+                    Microloader.remainingCachedAssets = cachedAssets.length;
+                    while (cachedAssets.length &gt; 0) {
+                        asset = cachedAssets.pop();
+                            _debug(&quot;Preloading/Fetching Cached Assets from: &quot; + asset.assetConfig.path);
+                        Boot.fetch(asset.assetConfig.path, (function(asset) {
+                            return function(result) {
+                                Microloader.onCachedAssetLoaded(asset, result);
+                            }
+                        })(asset));
+                    }
+                } else {
+                    Microloader.onCachedAssetsReady();
+                }
+            },
+
+            // Load the asset and seed its content into Boot to be evaluated in sequence
+            onCachedAssetLoaded: function (asset, result) {
+                var checksum;
+                result = Microloader.parseResult(result);
+                Microloader.remainingCachedAssets--;
+
+                if (!result.error) {
+                    checksum = Microloader.checksum(result.content, asset.assetConfig.hash);
+                    if (!checksum) {
+                        _warn(&quot;Cached Asset &#39;&quot; + asset.assetConfig.path + &quot;&#39; has failed checksum. This asset will be uncached for future loading&quot;);
+
+                        // Un cache this asset so it is loaded next time
+                        asset.uncache();
+                    }
+
+                        _debug(&quot;Checksum for Cached Asset: &quot; + asset.assetConfig.path + &quot; is &quot; + checksum);
+                    Boot.registerContent(asset.assetConfig.path, asset.type, result.content);
+                    asset.updateContent(result.content);
+                    asset.cache();
+                } else {
+                    _warn(&quot;There was an error pre-loading the asset &#39;&quot; + asset.assetConfig.path + &quot;&#39;. This asset will be uncached for future loading&quot;);
+
+                    // Un cache this asset so it is loaded next time
+                    asset.uncache();
+                }
+
+                if (Microloader.remainingCachedAssets === 0) {
+                    Microloader.onCachedAssetsReady();
+                }
+            },
+
+            onCachedAssetsReady: function(){
+                Boot.load({
+                    url: Microloader.urls,
+                    loadOrder: Microloader.manifest.loadOrder,
+                    loadOrderMap: Microloader.manifest.loadOrderMap,
+                    sequential: true,
+                    success: Microloader.onAllAssetsReady,
+                    failure: Microloader.onAllAssetsReady
+                });
+            },
+
+            onAllAssetsReady: function() {
+                _loaded = true;
+                Microloader.notify();
+
+                if (navigator.onLine !== false) {
+                        _debug(&quot;Application is online, checking for updates&quot;);
+                    Microloader.checkAllUpdates();
+                }
+                else {
+                        _debug(&quot;Application is offline, adding online listener to check for updates&quot;);
+                    if(window[&#39;addEventListener&#39;]) {
+                        window.addEventListener(&#39;online&#39;, Microloader.checkAllUpdates, false);
+                    }
+                }
+            },
+
+            onMicroloaderReady: function (listener) {
+                if (_loaded) {
+                    listener();
+                } else {
+                    _listeners.push(listener);
+                }
+            },
+
+<span id='Ext-Microloader-method-notify'>            /**
+</span>             * @private
+             */
+            notify: function () {
+                    _debug(&quot;notifying microloader ready listeners.&quot;);
+                var listener;
+                while((listener = _listeners.shift())) {
+                    listener();
+                }
+            },
+
+            // Delta patches content
+            patch: function (content, delta) {
+                var output = [],
+                    chunk, i, ln;
+
+                if (delta.length === 0) {
+                    return content;
+                }
+
+                for (i = 0,ln = delta.length; i &lt; ln; i++) {
+                    chunk = delta[i];
+
+                    if (typeof chunk === &#39;number&#39;) {
+                        output.push(content.substring(chunk, chunk + delta[++i]));
+                    }
+                    else {
+                        output.push(chunk);
+                    }
+                }
+
+                return output.join(&#39;&#39;);
+            },
+
+            checkAllUpdates: function() {
+                    _debug(&quot;Checking for All Updates&quot;);
+                if(window[&#39;removeEventListener&#39;]) {
+                    window.removeEventListener(&#39;online&#39;, Microloader.checkAllUpdates, false);
+                }
+
+                if(_cache) {
+                    Microloader.checkForAppCacheUpdate();
+                }
+
+                // Manifest came from a cached instance, check for updates
+                if (Microloader.manifest.fromCache) {
+                    Microloader.checkForUpdates();
+                }
+            },
+
+            checkForAppCacheUpdate: function() {
+                    _debug(&quot;Checking App Cache status&quot;);
+                if (_cache.status === _cache.UPDATEREADY || _cache.status === _cache.OBSOLETE) {
+                        _debug(&quot;App Cache is already in an updated&quot;);
+                    Microloader.appCacheState = &#39;updated&#39;;
+                } else if (_cache.status !== _cache.IDLE &amp;&amp; _cache.status !== _cache.UNCACHED) {
+                        _debug(&quot;App Cache is checking or downloading updates, adding listeners&quot;);
+                    Microloader.appCacheState = &#39;checking&#39;;
+                    _cache.addEventListener(&#39;error&#39;, Microloader.onAppCacheError);
+                    _cache.addEventListener(&#39;noupdate&#39;, Microloader.onAppCacheNotUpdated);
+                    _cache.addEventListener(&#39;cached&#39;, Microloader.onAppCacheNotUpdated);
+                    _cache.addEventListener(&#39;updateready&#39;, Microloader.onAppCacheReady);
+                    _cache.addEventListener(&#39;obsolete&#39;, Microloader.onAppCacheObsolete);
+                } else {
+                        _debug(&quot;App Cache is current or uncached&quot;);
+                    Microloader.appCacheState = &#39;current&#39;;
+                }
+            },
+
+            checkForUpdates: function() {
+                // Fetch the Latest Manifest from the server
+                    _debug(&quot;Checking for updates at: &quot; + Microloader.manifest.url);
+                Boot.fetch(Microloader.applyCacheBuster(Microloader.manifest.url), Microloader.onUpdatedManifestLoaded);
+            },
+
+            onAppCacheError: function(e) {
+                _warn(e.message);
+
+                Microloader.appCacheState = &#39;error&#39;;
+                Microloader.notifyUpdateReady();
+            },
+
+            onAppCacheReady: function() {
+                _cache.swapCache();
+                Microloader.appCacheUpdated();
+            },
+
+            onAppCacheObsolete: function() {
+                Microloader.appCacheUpdated();
+            },
+
+            appCacheUpdated: function() {
+                    _debug(&quot;App Cache Updated&quot;);
+                Microloader.appCacheState = &#39;updated&#39;;
+                Microloader.notifyUpdateReady();
+            },
+
+            onAppCacheNotUpdated: function() {
+                    _debug(&quot;App Cache Not Updated Callback&quot;);
+                Microloader.appCacheState = &#39;current&#39;;
+                Microloader.notifyUpdateReady();
+            },
+
+
+            filterAsset: function(asset) {
+                var cfg = (asset &amp;&amp; asset.assetConfig) || {};
+                if(cfg.platform || cfg.exclude) {
+                    return Boot.filterPlatform(cfg.platform, cfg.exclude);
+                }
+                return true;
+            },
+
+            onUpdatedManifestLoaded: function (result) {
+                result = Microloader.parseResult(result);
+
+                if (!result.error) {
+                    var currentAssets, newAssets, currentAsset, newAsset, prop,
+                        assets, deltas, deltaPath, include,
+                        updatingAssets = [],
+                        manifest = new Manifest({
+                            url: Microloader.manifest.url,
+                            content: result.content,
+                            assetCache: false
+                        });
+
+                    Microloader.remainingUpdatingAssets = 0;
+                    Microloader.updatedAssets = [];
+                    Microloader.removedAssets = [];
+                    Microloader.updatedManifest = null;
+                    Microloader.updatedAssetsReady = false;
+
+                    // If the updated manifest has turned off caching we need to clear out all local storage
+                    // and trigger a appupdate as all content is now uncached
+                    if (!manifest.shouldCache()) {
+                        _debug(&quot;New Manifest has caching disabled, clearing out any private storage&quot;);
+
+                        Microloader.updatedManifest = manifest;
+                        LocalStorage.clearAllPrivate(manifest);
+                        Microloader.onAllUpdatedAssetsReady();
+                        return;
+                    }
+
+                    // Manifest itself has changed
+                    if (!Microloader.manifest.is(manifest)) {
+                        Microloader.updatedManifest = manifest;
+
+                        currentAssets = Microloader.manifest.getAssets();
+                        newAssets = manifest.getAssets();
+
+                        // Look through new assets for assets that do not exist or assets that have different versions
+                        for (prop in newAssets) {
+                            newAsset = newAssets[prop];
+                            currentAsset = Microloader.manifest.getAsset(newAsset.assetConfig.path);
+                            include = Microloader.filterAsset(newAsset);
+
+                            if (include &amp;&amp; (!currentAsset || (newAsset.shouldCache() &amp;&amp; (!currentAsset.is(newAsset))))) {
+                                    _debug(&quot;New/Updated Version of Asset: &quot; + newAsset.assetConfig.path + &quot; was found in new manifest&quot;);
+                                updatingAssets.push({_new: newAsset, _current: currentAsset});
+                            }
+                        }
+
+                        // Look through current assets for stale/old assets that have been removed
+                        for (prop in currentAssets) {
+                            currentAsset = currentAssets[prop];
+                            newAsset = manifest.getAsset(currentAsset.assetConfig.path);
+
+                            //New version of this asset has been filtered out
+                            include = !Microloader.filterAsset(newAsset);
+
+                            if (!include || !newAsset || (currentAsset.shouldCache() &amp;&amp; !newAsset.shouldCache())) {
+                                    _debug(&quot;Asset: &quot; + currentAsset.assetConfig.path + &quot; was not found in new manifest, has been filtered out or has been switched to not cache. Marked for removal&quot;);
+                                Microloader.removedAssets.push(currentAsset);
+                            }
+                        }
+
+                        // Loop through all assets that need updating
+                        if (updatingAssets.length &gt; 0) {
+                            Microloader.remainingUpdatingAssets = updatingAssets.length;
+                            while (updatingAssets.length &gt; 0) {
+                                assets = updatingAssets.pop();
+                                newAsset = assets._new;
+                                currentAsset = assets._current;
+
+                                // Full Updates will simply download the file and replace its current content
+                                if (newAsset.assetConfig.update === &quot;full&quot; || !currentAsset) {
+
+                                    if (newAsset.assetConfig.update === &quot;delta&quot;) {
+                                        _debug(&quot;Delta updated asset found without current asset available: &quot; + newAsset.assetConfig.path + &quot; fetching full file&quot;);
+                                    } else {
+                                        _debug(&quot;Full update found for: &quot; + newAsset.assetConfig.path + &quot; fetching&quot;);
+                                    }
+
+                                    // Load the asset and cache its  its content into Boot to be evaluated in sequence
+                                    Boot.fetch(newAsset.assetConfig.path, (function (asset) {
+                                            return function (result) {
+                                                Microloader.onFullAssetUpdateLoaded(asset, result)
+                                            };
+                                        }(newAsset))
+                                    );
+
+                                    // Delta updates will be given a delta patch
+                                } else if (newAsset.assetConfig.update === &quot;delta&quot;) {
+                                    deltas = manifest.deltas;
+                                    deltaPath = deltas + &quot;/&quot; + newAsset.assetConfig.path + &quot;/&quot; + currentAsset.assetConfig.hash + &quot;.json&quot;;
+                                    // Fetch the Delta Patch and update the contents of the asset
+                                        _debug(&quot;Delta update found for: &quot; + newAsset.assetConfig.path + &quot; fetching&quot;);
+                                    Boot.fetch(deltaPath,
+                                        (function (asset, oldAsset) {
+                                            return function (result) {
+                                                Microloader.onDeltaAssetUpdateLoaded(asset, oldAsset, result)
+                                            };
+                                        }(newAsset, currentAsset))
+                                    );
+                                }
+                            }
+                        } else {
+                                _debug(&quot;No Assets needed updating&quot;);
+                            Microloader.onAllUpdatedAssetsReady();
+                        }
+                    } else {
+                            _debug(&quot;Manifest files have matching hash&#39;s&quot;);
+                        Microloader.onAllUpdatedAssetsReady();
+                    }
+                } else {
+                    _warn(&quot;Error loading manifest file to check for updates&quot;);
+                    Microloader.onAllUpdatedAssetsReady();
+                }
+            },
+
+            onFullAssetUpdateLoaded: function(asset, result) {
+                var checksum;
+                result = Microloader.parseResult(result);
+                Microloader.remainingUpdatingAssets--;
+
+                if (!result.error) {
+                    checksum = Microloader.checksum(result.content, asset.assetConfig.hash);
+                        _debug(&quot;Checksum for Full asset: &quot; + asset.assetConfig.path + &quot; is &quot; + checksum);
+                    if (!checksum) {
+                            _debug(&quot;Full Update Asset: &quot; + asset.assetConfig.path + &quot; has failed checksum. This asset will be uncached for future loading&quot;);
+
+                        // uncache this asset as there is a new version somewhere that has not been loaded.
+                        asset.uncache();
+                    } else {
+                        asset.updateContent(result.content);
+                        Microloader.updatedAssets.push(asset);
+                    }
+                } else {
+                        _debug(&quot;Error loading file at&quot; + asset.assetConfig.path + &quot;. This asset will be uncached for future loading&quot;);
+
+                    // uncache this asset as there is a new version somewhere that has not been loaded.
+                    asset.uncache();
+                }
+
+                if (Microloader.remainingUpdatingAssets === 0) {
+                        Microloader.onAllUpdatedAssetsReady();
+                }
+            },
+
+            onDeltaAssetUpdateLoaded: function(asset, oldAsset, result) {
+                var json, checksum, content;
+                result = Microloader.parseResult(result);
+                Microloader.remainingUpdatingAssets--;
+
+                if (!result.error) {
+                        _debug(&quot;Delta patch loaded successfully, patching content&quot;);
+                    try {
+                        json = JSON.parse(result.content);
+                        content = Microloader.patch(oldAsset.content, json);
+                        checksum = Microloader.checksum(content, asset.assetConfig.hash);
+                            _debug(&quot;Checksum for Delta Patched asset: &quot; + asset.assetConfig.path + &quot; is &quot; + checksum);
+                        if (!checksum) {
+                                _debug(&quot;Delta Update Asset: &quot; + asset.assetConfig.path + &quot; has failed checksum. This asset will be uncached for future loading&quot;);
+
+                            // uncache this asset as there is a new version somewhere that has not been loaded.
+                            asset.uncache();
+                        } else {
+                            asset.updateContent(content);
+                            Microloader.updatedAssets.push(asset);
+                        }
+                    } catch (e) {
+                        _warn(&quot;Error parsing delta patch for &quot; + asset.assetConfig.path + &quot; with hash &quot; + oldAsset.assetConfig.hash + &quot; . This asset will be uncached for future loading&quot;);
+                        // uncache this asset as there is a new version somewhere that has not been loaded.
+                        asset.uncache();
+                    }
+                } else {
+                    _warn(&quot;Error loading delta patch for &quot; + asset.assetConfig.path + &quot; with hash &quot; + oldAsset.assetConfig.hash + &quot; . This asset will be uncached for future loading&quot;);
+
+                    // uncache this asset as there is a new version somewhere that has not been loaded.
+                    asset.uncache();
+                }
+                if (Microloader.remainingUpdatingAssets === 0) {
+                    Microloader.onAllUpdatedAssetsReady();
+                }
+            },
+
+            //TODO: Make this all transaction based to allow for reverting if quota is exceeded
+            onAllUpdatedAssetsReady: function() {
+                var asset;
+                Microloader.updatedAssetsReady = true;
+
+                if (Microloader.updatedManifest) {
+                    while (Microloader.removedAssets.length &gt; 0) {
+                        asset = Microloader.removedAssets.pop();
+                            _debug(&quot;Asset: &quot; + asset.assetConfig.path + &quot; was removed, un-caching&quot;);
+                        asset.uncache();
+                    }
+
+                    if (Microloader.updatedManifest) {
+                        _debug(&quot;Manifest was updated, re-caching&quot;);
+                        Microloader.updatedManifest.cache();
+                    }
+
+                    while (Microloader.updatedAssets.length &gt; 0) {
+                        asset = Microloader.updatedAssets.pop();
+                            _debug(&quot;Asset: &quot; + asset.assetConfig.path + &quot; was updated, re-caching&quot;);
+                        asset.cache();
+                    }
+
+                }
+
+                Microloader.notifyUpdateReady();
+            },
+
+            notifyUpdateReady: function () {
+                if (Microloader.appCacheState !== &#39;checking&#39; &amp;&amp; Microloader.updatedAssetsReady) {
+                    if (Microloader.appCacheState === &#39;updated&#39; || Microloader.updatedManifest) {
+                            _debug(&quot;There was an update here you will want to reload the app, trigger an event&quot;);
+                        Microloader.appUpdate = {
+                            updated: true,
+                            app: Microloader.appCacheState === &#39;updated&#39;,
+                            manifest: Microloader.updatedManifest &amp;&amp; Microloader.updatedManifest.exportContent()
+                        };
+
+                        Microloader.fireAppUpdate();
+                    }
+                    else {
+                        _debug(&quot;AppCache and LocalStorage Cache are current, no updating needed&quot;);
+                        Microloader.appUpdate = {};
+                    }
+                }
+            },
+
+            fireAppUpdate: function() {
+                if (Ext.GlobalEvents) {
+                    // We defer dispatching this event slightly in order to let the application finish loading
+                    // as we are still very early in the lifecycle
+                    Ext.defer(function() {
+                        Ext.GlobalEvents.fireEvent(&#39;appupdate&#39;, Microloader.appUpdate);
+                    }, 100);
+                }
+            },
+
+            checksum: function(content, hash) {
+                if(!content || !hash) {
+                    return false;
+                }
+
+                var passed = true,
+                    hashLn = hash.length,
+                    checksumType = content.substring(0, 1);
+
+                if (checksumType == &#39;/&#39;) {
+                    if (content.substring(2, hashLn + 2) !== hash) {
+                        passed = false;
+                    }
+                } else if (checksumType == &#39;f&#39;) {
+                    if (content.substring(10, hashLn + 10) !== hash) {
+                        passed = false;
+                    }
+                } else if (checksumType == &#39;.&#39;) {
+                    if (content.substring(1, hashLn + 1) !== hash) {
+                        passed = false;
+                    }
+                }
+                return passed;
+            },
+            parseResult: function(result) {
+                var rst = {};
+                if ((result.exception || result.status === 0) &amp;&amp; !Boot.env.phantom) {
+                    rst.error = true;
+                } else if ((result.status &gt;= 200 &amp;&amp; result.status &lt; 300) || result.status === 304
+                    || Boot.env.phantom
+                    || (result.status === 0 &amp;&amp; result.content.length &gt; 0)
+                ) {
+                    rst.content = result.content;
+                } else {
+                    rst.error = true;
+                }
+                return rst;
+            }
+        };
+
+    return Microloader;
+}());
+
+<span id='Ext-Microloader-property-manifest'>/**
+</span> * @type {String/Object}
+ */
+Ext.manifest = Ext.manifest || &quot;bootstrap&quot;;
+
+Ext.Microloader.run();
+</pre>
+</body>
+</html>

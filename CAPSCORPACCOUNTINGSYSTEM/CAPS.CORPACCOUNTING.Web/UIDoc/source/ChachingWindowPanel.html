@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.common.window.ChachingWindowPanel&#39;,{
+    extend: &#39;Ext.window.Window&#39;,
+
+    requires: [
+        &#39;Chaching.view.common.window.ChachingWindowPanelController&#39;,
+        &#39;Chaching.view.common.window.ChachingWindowPanelModel&#39;
+    ],
+
+    controller: &#39;common-window-chachingwindowpanel&#39;,
+    viewModel: {
+        type: &#39;common-window-chachingwindowpanel&#39;
+    },
+    modal: true,
+    padding:5,
+    closeAction: &#39;destroy&#39;,
+    ui:&#39;chachingWindow&#39;,
+    name: null,
+    border: false,
+    frame: false
+});
+</pre>
+</body>
+</html>

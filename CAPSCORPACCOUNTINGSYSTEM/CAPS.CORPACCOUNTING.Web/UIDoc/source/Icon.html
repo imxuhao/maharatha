@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">// vim: sw=4:ts=4:nu:nospell:fdc=4
+/*global Ext:true */
+/*jslint browser: true, devel:true, sloppy: true, white: true, plusplus: true */
+
+/*
+ This file is part of saki-field-icon Package
+
+ Copyright (c) 2014, Jozef Sakalos, Saki
+
+ Package:  saki-field-icon
+ Author:   Jozef Sakalos, Saki
+ Contact:  http://extjs.eu/contact
+ Date:     23. April 2014
+
+ Commercial License
+ Developer, or the specified number of developers, may use this file in any number
+ of projects during the license period in accordance with the license purchased.
+
+ Uses other than including the file in a project are prohibited.
+ See http://extjs.eu/licensing for details.
+ */
+
+<span id='Ext-saki-form-field-Icon'>/**
+</span> * # Icon for form field
+ *
+ * This plugin adds highly configurable icon to the form field it is plugged into.
+ * Icon can be made (right) clickable to trigger an action or to display a context
+ * menu or a {@link Ext.tip.QuickTip QuickTip} or {@link Ext.tip.ToolTip ToolTip}
+ * can be configured to show on icon hover.
+ *
+ * The plugin works best with icon fonts especially with
+ * &lt;a href=&quot;http://fortawesome.github.io/Font-Awesome/&quot;&gt;`FontAwesome`&lt;/a&gt; for which it
+ * is preconfigured.
+ *
+ * ### How to use Field Icon with `FontAwesome`
+ *
+ *  1. Include `FontAwesome` stylesheet in your `index.html`. For example:
+ *
+ *          &lt;link rel=&quot;stylesheet&quot; href=&quot;//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css&quot;&gt;
+ *
+ *  2. Select an icon to show at
+ *      &lt;a href=&quot;http://fortawesome.github.io/Font-Awesome/icons/&quot;&gt;FontAwesome&lt;/a&gt; site.
+ *      The default icon is `fa-info-circle`, if it is the icon you want you can skip this step.
+ *
+ *  3. Configure your form field similar to this:
+ *
+ *           xtype:&#39;numberfield&#39;
+ *          ,name:&#39;age&#39;
+ *          ,fieldLabel:&#39;Your Age&#39;
+ *          ,plugins:[{
+ *               ptype:&#39;saki-ficn&#39;
+ *              ,iconCls:&#39;fa-smile-o&#39;
+ *              ,qtip:&#39;Integer posuere erat a ante venenatis dapibus posuere velit aliquet. &#39;
+ *                   +&#39;Cras mattis consectetur purus sit amet fermentum. Cum sociis natoque &#39;
+ *                   +&#39;penatibus et magnis dis parturient montes, nascetur ridiculus mus.&#39;
+ *          }]
+ *
+ * ### See this documentation and included documentation of {@link Ext.form.field.Field Ext.form.field.Field} for other configuration options.
+ */
+Ext.define(&#39;Ext.saki.form.field.Icon&#39;, {
+     extend:&#39;Ext.AbstractPlugin&#39;
+    ,alternateClassName:&#39;Ext.ux.form.field.Icon&#39;
+    ,alias:[&#39;plugin.saki-ficn&#39;, &#39;plugin.ux-ficn&#39;]
+
+<span id='Ext-saki-form-field-Icon-cfg-iconBaseCls'>    /**
+</span>     * @cfg {string} iconBaseCls This CSS class is
+     * prepended to {@link #iconCls iconCls}
+     */
+    ,iconBaseCls:&#39;fa&#39;
+
+<span id='Ext-saki-form-field-Icon-cfg-iconCls'>    /**
+</span>     * @cfg {string} iconCls class of the icon
+     */
+    ,iconCls:&#39;fa-info-circle&#39;
+
+<span id='Ext-saki-form-field-Icon-cfg-iconPath'>    /**
+</span>     * @cfg {string} iconPath Path to the image of icon. Used only
+     * if {@link #iconMode iconMode} is &#39;**img**&#39;
+     *
+     * Defaults: undefined
+     */
+
+<span id='Ext-saki-form-field-Icon-cfg-iconMode'>    /**
+</span>     * @cfg {string} iconMode Mode of the icon. Valid values are
+     * &#39;**font**&#39;, &#39;**img**&#39; and &#39;**css**&#39;
+     */
+    ,iconMode:&#39;font&#39;
+
+<span id='Ext-saki-form-field-Icon-cfg-iconColor'>    /**
+</span>     * @cfg {string} iconColor CSS color specification for the icon.
+     * It is used only for {@link #iconMode iconMode}  &#39;**font**&#39;
+     */
+    ,iconColor:&#39;#5278FF&#39;
+
+<span id='Ext-saki-form-field-Icon-cfg-iconWidth'>    /**
+</span>     * @cfg {number} iconWidth Width of the icon in pixels
+     */
+    ,iconWidth:16
+
+<span id='Ext-saki-form-field-Icon-cfg-iconHeight'>    /**
+</span>     * @cfg {number} iconHeight Height of the icon in pixels
+     */
+    ,iconHeight:16
+
+<span id='Ext-saki-form-field-Icon-cfg-cellWidthAdjust'>    /**
+</span>     * @cfg {number} cellWidthAdjust Width in pixels to add to
+     * iconWidth to calculate wrapping cell width.
+     */
+    ,cellWidthAdjust:6
+
+<span id='Ext-saki-form-field-Icon-cfg-iconCursor'>    /**
+</span>     * @cfg {string} iconCursor Cursor style specification that is
+     * added to the icon style. You can try &#39;`help`&#39; if you use info
+     * icons.
+     */
+    ,iconCursor:&#39;pointer&#39;
+
+<span id='Ext-saki-form-field-Icon-cfg-iconMargin'>    /**
+</span>     * @cfg {string} iconMargin CSS specification of margin to add
+     * around the icon in order: top, right, bottom, left
+     */
+    ,iconMargin:&#39;0 3px 0 3px&#39;
+
+<span id='Ext-saki-form-field-Icon-cfg-position'>    /**
+</span>     * @cfg {string} position Where you want to insert your icon. Valid
+     * positions are: &#39;**beforeLabel**&#39;, &#39;**afterLabel**&#39;, &#39;**beforeInput**&#39;,
+     * &#39;**afterInput**&#39;.
+     *
+     * Note: Some field type/position combinations do not look good. For
+     * example, checkbox with &#39;**afterInput**&#39; is not very usable.
+     */
+    ,position:&#39;afterInput&#39;
+
+<span id='Ext-saki-form-field-Icon-cfg-clickEvents'>    /**
+</span>     * @cfg {string[]} clickEvents These click events on the icon are
+     * listened to and fired as if the were originated from the field.
+     * Names are prepended with `icon`, so the form field fires
+     * `iconclick` and `iconcontextmenu`
+     */
+    ,clickEvents:[&#39;click&#39;, &#39;contextmenu&#39;]
+
+<span id='Ext-saki-form-field-Icon-cfg-qtipTitle'>    /**
+</span>     * @cfg {string/undefined} qtipTitle Title to show on quick tip.
+     * Used only in {@link #tip tip} is not defined.
+     *
+     * Defaults to: `undefined`
+     */
+
+<span id='Ext-saki-form-field-Icon-cfg-qtip'>    /**
+</span>     * @cfg {string/undefined} qtip Text to show on quick tip.
+     * Used only in {@link #tip tip} is not defined.
+     *
+     * Defaults to: `undefined`
+     */
+
+<span id='Ext-saki-form-field-Icon-cfg-tip'>    /**
+</span>     * @cfg {Object/Ext.tip.ToolTip/undefined} tip Configuration object or instance
+     * of {@link Ext.tip.ToolTip Ext.tip.ToolTip} to display on icon hover.
+     *
+     * Defaults to: undefined
+     */
+
+<span id='Ext-saki-form-field-Icon-cfg-iconPath'>    /**
+</span>     * @cfg {string} iconPath Path to icon image. Only used when
+     * {@link #iconMode iconMode} is &#39;**img**&#39;
+     *
+     * Defaults to: undefined
+     */
+
+<span id='Ext-form-field-Field-property-iconEl'>    /**
+</span>     * @readonly
+     * @member Ext.form.field.Field
+     * @property {Ext.dom.Element} iconEl Icon element
+     */
+
+<span id='Ext-form-field-Field-event-iconclick'>    /**
+</span>     * @event iconclick
+     * @member Ext.form.field.Field
+     * @param {Ext.form.field.Field} this
+     * @param {Ext.EventObject} e
+     */
+
+<span id='Ext-form-field-Field-event-iconcontextmenu'>    /**
+</span>     * @event iconcontextmenu
+     * @member Ext.form.field.Field
+     * @param {Ext.form.field.Field} this
+     * @param {Ext.EventObject} e
+     */
+
+<span id='Ext-saki-form-field-Icon-method-init'>    /**
+</span>     * The plugin initialization. Called by the framework
+     * @private
+     * @param {Ext.form.Field} cmp Form field this plugin is in
+     */
+    ,init:function(cmp) {
+        var  me = this;
+
+        me.setCmp(cmp);
+
+        // Insert the icon after the field (cmp) is rendered
+        cmp.on({
+            afterrender:{
+                 scope:me
+                ,single:true
+                ,fn:me.afterCmpRender
+            }
+        });
+
+        // add some useful methods to the field
+        Ext.apply(cmp, {
+<span id='Ext-form-field-Field-method-getIcon'>            /**
+</span>             * Returns instance of this plugin
+             * @member Ext.form.field.Field
+             * @returns {Ext.saki.form.field.Icon}
+             */
+            getIcon:function() {
+               return me;
+            }
+
+<span id='Ext-form-field-Field-method-setIconCls'>            /**
+</span>             * Sets the new icon by setting the new {@link Ext.saki.form.field.Icon#iconCls iconCls}
+             * @member Ext.form.field.Field
+             * @param {string} cls The new icon css class
+             */
+            ,setIconCls:function(cls) {
+                this.iconEl.replaceCls(me.iconCls, cls);
+                me.iconCls = cls;
+            }
+
+<span id='Ext-form-field-Field-method-setIconStyle'>            /**
+</span>             * Sets the style of the icon
+             * @member Ext.form.field.Field
+             * @param {string} style Style for the icon
+             */
+            ,setIconStyle:function(style) {
+                this.iconEl.applyStyles(style);
+            }
+
+<span id='Ext-form-field-Field-method-setIconColor'>            /**
+</span>             * Sets the icon color. Only used if
+             * {@link Ext.saki.form.field.Icon#iconMode iconMode} is &#39;**font**&#39;
+             * @member Ext.form.field.Field
+             * @param {string} color Color of the icon
+             */
+            ,setIconColor:function(color) {
+                this.setIconStyle({color:color});
+            }
+
+<span id='Ext-form-field-Field-method-setIconTip'>            /**
+</span>             * Sets the quick tip text. Only used for icons with quick tips.
+             * It is ignored if a rich tooltip is used.
+             * @member Ext.form.field.Field
+             * @param {string} text Text for the quicktip
+             */
+            ,setIconTip:function(text) {
+                this.iconEl.set({&#39;data-qtip&#39;:text})
+            }
+
+<span id='Ext-form-field-Field-method-setIconTipTitle'>            /**
+</span>             * Sets the quick tip title. Only used for icons with quick tips.
+             * It is ignored if a rich tooltip is used.
+             * @member Ext.form.field.Field
+             * @param {string} text Text for the quicktip title
+             */
+            ,setIconTipTitle:function(text) {
+                this.iconEl.set({&#39;data-qtitle&#39;:text})
+            }
+
+        });
+
+    } // eo function init
+
+<span id='Ext-saki-form-field-Icon-method-afterCmpRender'>    /**
+</span>     * Runs once after the field is rendered. Creates the icon
+     * and initializes the events.
+     * @private
+     */
+    ,afterCmpRender:function() {
+        var  me = this
+            ,cmp = me.getCmp()
+            ,cfg = me.getIconConfig()
+            ,isCheckbox = false
+            ,isTextArea = false
+            ,iconEl
+            ,wrap = {
+                 tag:&#39;div&#39;
+                ,style:{
+                     display:&#39;table-cell&#39;
+                    ,width:(me.iconWidth + me.cellWidthAdjust) + &#39;px&#39;
+                }
+                ,cn:[cfg]
+            }
+        ;
+
+        // special handling for checkbox and textarea
+        try {
+            isCheckbox = cmp instanceof Ext.form.field.Checkbox;
+            isTextArea = cmp instanceof Ext.form.field.TextArea;
+        } catch(e){};
+
+        // put icon near top of textarea
+        if(isTextArea) {
+            Ext.apply(wrap.style, {
+                 &#39;vertical-align&#39;:&#39;top&#39;
+                ,&#39;padding-top&#39;:&#39;3px&#39;
+            });
+        }
+
+        // icon position switch
+        switch(me.position) {
+            case &#39;afterInput&#39;:
+                if(isCheckbox) {
+                    iconEl = cmp.inputEl.insertSibling(cfg, &#39;after&#39;);
+                } else {
+                    iconEl = cmp.bodyEl.insertSibling(wrap, &#39;after&#39;);
+                    iconEl = iconEl.down(&#39;i&#39;);
+                }
+            break;
+
+            case &#39;beforeInput&#39;:
+                iconEl = cmp.labelEl.next().insertSibling(wrap, &#39;before&#39;);
+                iconEl = iconEl.down(&#39;i&#39;);
+            break;
+
+            case &#39;afterLabel&#39;:
+                if(isCheckbox &amp;&amp; cmp.boxLabelEl) {
+                    cfg.style[&#39;vertical-align&#39;] = &#39;middle&#39;;
+                    iconEl = cmp.boxLabelEl.insertSibling(cfg, &#39;after&#39;);
+                } else {
+                    iconEl = cmp.labelEl.insertSibling(wrap, &#39;after&#39;);
+                }
+            break;
+
+            case &#39;beforeLabel&#39;:
+                if(isCheckbox &amp;&amp; cmp.boxLabelEl) {
+                    cfg.style[&#39;margin-left&#39;] = (me.iconWidth + me.cellWidthAdjust/2) + &#39;px&#39;;
+                    cmp.boxLabelEl.setStyle({&#39;padding-left&#39;:0});
+                    iconEl = cmp.boxLabelEl.insertSibling(cfg, &#39;before&#39;);
+                } else {
+                    iconEl = cmp.labelEl.insertSibling(wrap, &#39;before&#39;);
+                    iconEl = iconEl.down(&#39;i&#39;);
+                }
+            break;
+        }
+
+        cmp.iconEl = iconEl;
+
+        // set the target of tooltip if we have one
+        if(me.tip) {
+            if(!(me.tip instanceof Ext.Base)) {
+                me.tip = Ext.widget(&#39;tooltip&#39;, me.tip);
+            }
+            me.tip.setTarget(iconEl);
+        }
+
+        me.initEvents();
+
+    } // eo afterCmpRender
+
+<span id='Ext-saki-form-field-Icon-method-initEvents'>    /**
+</span>     * Installs listeners on the icon that then fire events as if they
+     * would be originated by the field
+     * @private
+     */
+    ,initEvents:function() {
+        var  me = this
+            ,cmp = me.getCmp()
+            ,iconEl = cmp.iconEl
+            ,listeners
+        ;
+        Ext.Array.each(me.clickEvents, function(ev) {
+            iconEl.on(ev, function(e){
+                e.stopEvent();
+                cmp.fireEvent(&#39;icon&#39; + ev, cmp, e);
+                return false;
+            });
+        });
+
+    } // eo function initEvents
+
+<span id='Ext-saki-form-field-Icon-method-getIconConfig'>    /**
+</span>     * Override this method if you need a special icon
+     * @returns {Object} Icon configuration for Ext.DomHelper
+     * @template
+     */
+    ,getIconConfig:function() {
+        var  me = this
+            ,cmp = me.getCmp()
+
+            // this cfg will do for iconMode font and css
+            ,cfg = {
+                 tag:&#39;i&#39;
+                ,cls:Ext.String.format(&#39;{0} {1}&#39;, me.iconBaseCls, me.iconCls)
+                ,style:{
+                     &#39;width&#39;:me.iconWidth + &#39;px&#39;
+                    ,&#39;height&#39;:me.iconHeight + &#39;px&#39;
+                    ,&#39;font-size&#39;:me.iconHeight + &#39;px&#39;
+                    ,&#39;color&#39;:me.iconColor
+                    ,&#39;cursor&#39;:me.iconCursor
+                    ,&#39;margin&#39;:me.iconMargin
+//                    ,&#39;vertical-align&#39;:&#39;middle&#39;
+                }
+
+            }
+        ;
+
+        // handling of iconMode img
+        if(&#39;img&#39; === me.iconMode &amp;&amp; me.iconPath) {
+            cfg.cls = me.iconBaseCls;
+            cfg.cn = [{
+                 tag:&#39;img&#39;
+                ,src:me.iconPath
+                ,style:{
+                    &#39;vertical-align&#39;:&#39;middle&#39;
+                }
+            }];
+
+        }
+
+        // use qtip config options only if we don&#39;t have tip
+        if(!me.tip) {
+            if(me.qtipTitle) {
+                cfg[&#39;data-qtitle&#39;] = me.qtipTitle;
+            }
+            if(me.qtip) {
+                cfg[&#39;data-qtip&#39;] = me.qtip
+            }
+        }
+        return cfg;
+
+    } // eo function getIconConfig
+
+<span id='Ext-saki-form-field-Icon-method-destroy'>    /**
+</span>     * Destroys the plugin
+     * @private
+     */
+    ,destroy:function() {
+        var iconEl = this.getCmp().iconEl;
+        iconEl.clearListeners();
+        Ext.destroy(iconEl);
+        iconEl = null;
+        console.log(&#39;destroyed&#39;);
+    } // eo function destroy
+
+});
+
+// eof</pre>
+</body>
+</html>

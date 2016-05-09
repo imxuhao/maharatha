@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.main.MainController&#39;, {
+    extend: &#39;Ext.app.ViewController&#39;,
+    alias: &#39;controller.main&#39;,
+
+    //listen : {
+    //    controller : {
+    //        &#39;#&#39; : {
+    //            unmatchedroute : &#39;onRouteChange&#39;
+    //        }
+    //    }
+    //},
+
+    //routes: {
+    //    &#39;:node&#39;: &#39;onRouteChange&#39;
+    //},
+
+    config: {
+        showNavigation: true
+    },
+
+    collapsedCls: &#39;main-nav-collapsed&#39;,
+
+    init: function (view) {
+        var me = this,
+            refs = me.getReferences();
+
+        me.callParent([ view ]);
+
+        me.nav = refs.navigation;
+        me.navigationTree = refs.navigationTree;
+    },
+
+    onNavigationItemClick: function () {
+        // The phone profile&#39;s controller uses this event to slide out the navigation
+        // tree. We don&#39;t need to do anything but must be present since we always have
+        // the listener on the view...
+    },
+
+    onNavigationTreeSelectionChange: function (tree, node) {
+        var to = node &amp;&amp; (node.get(&#39;routeId&#39;) || node.get(&#39;viewType&#39;));
+
+        if (to) {
+            this.redirectTo(to);
+        }
+    },
+
+    onRouteChange: function (id) {
+        this.setCurrentView(id);
+    },
+
+    onSwitchToClassic: function () {
+        Ext.Msg.confirm(&#39;Switch to Classic&#39;, &#39;Are you sure you want to switch toolkits?&#39;,
+                        this.onSwitchToClassicConfirmed, this);
+    },
+
+    onSwitchToClassicConfirmed: function (choice) {
+        if (choice === &#39;yes&#39;) {
+            var s = location.search;
+
+            // Strip &quot;?modern&quot; or &quot;&amp;modern&quot; with optionally more &quot;&amp;foo&quot; tokens following
+            // and ensure we don&#39;t start with &quot;?&quot;.
+            s = s.replace(/(^\?|&amp;)modern($|&amp;)/, &#39;&#39;).replace(/^\?/, &#39;&#39;);
+
+            // Add &quot;?classic&amp;&quot; before the remaining tokens and strip &amp; if there are none.
+            location.search = (&#39;?classic&amp;&#39; + s).replace(/&amp;$/, &#39;&#39;);
+        }
+    },
+
+    onToggleNavigationSize: function () {
+        this.setShowNavigation(!this.getShowNavigation());
+    },
+
+    setCurrentView: function (hashTag) {
+        hashTag = (hashTag || &#39;&#39;).toLowerCase();
+
+        var me = this,
+            refs = me.getReferences(),
+            mainCard = refs.mainCard,
+            navigationTree = me.navigationTree,
+            store = navigationTree.getStore(),
+            node = store.findNode(&#39;routeId&#39;, hashTag) ||
+                   store.findNode(&#39;viewType&#39;, hashTag),
+            item = mainCard.child(&#39;component[routeId=&#39; + hashTag + &#39;]&#39;);
+
+        if (!item) {
+            item = mainCard.add({
+                xtype: node.get(&#39;viewType&#39;),
+                routeId: hashTag
+            });
+        }
+        
+        mainCard.setActiveItem(item);
+        
+        navigationTree.setSelection(node);
+
+        //if (newView.isFocusable(true)) {
+        //    newView.focus();
+        //}
+    },
+
+    updateShowNavigation: function (showNavigation, oldValue) {
+        // Ignore the first update since our initial state is managed specially. This
+        // logic depends on view state that must be fully setup before we can toggle
+        // things.
+        //
+        if (oldValue !== undefined) {
+            var me = this,
+                cls = me.collapsedCls,
+                refs = me.getReferences(),
+                logo = refs.logo,
+                navigation = me.nav,
+                navigationTree = refs.navigationTree,
+                rootEl = navigationTree.rootItem.el;
+
+            navigation.toggleCls(cls);
+            logo.toggleCls(cls);
+
+            if (showNavigation) {
+                // Restore the text and other decorations before we expand so that they
+                // will be revealed properly. The forced width is still in force from
+                // the collapse so the items won&#39;t wrap.
+                navigationTree.setMicro(false);
+            } else {
+                // Ensure the right-side decorations (they get munged by the animation)
+                // get clipped by propping up the width of the tree&#39;s root item while we
+                // are collapsed.
+                rootEl.setWidth(rootEl.getWidth());
+            }
+
+            logo.element.on({
+                transitionend: function () {
+                    if (showNavigation) {
+                        // after expanding, we should remove the forced width
+                        rootEl.setWidth(&#39;&#39;);
+                    } else {
+                        navigationTree.setMicro(true);
+                    }
+                },
+                single: true
+            });
+        }
+    },
+
+    toolbarButtonClick: function(btn,e) {
+        var href = btn.config.href;
+        this.redirectTo(href);
+        switch (btn.getItemId()) {
+            case &quot;Localization&quot;:
+                this.showLocalization(btn);
+                break;
+            case &quot;Notifiaction&quot;:
+                this.showNotification(btn);
+                break;
+            default:
+                break;
+        }
+    },
+    onClearGlobalSearch:function(text, input, e, eOpts) {
+        var me = this,
+           refs = me.getReferences(),
+           globalSearchBox = refs.globalSearch;
+        globalSearchBox.hide();
+    },
+    showProfileList:function(btn) {
+        var me = this,
+           view = me.getView(),
+           contextMenu = btn.contextMenu,
+           refs = me.getReferences(),
+           mainCard = refs.mainCard;
+        if (contextMenu) {
+            //
+            var itemInMainCard = mainCard.child(&#39;component[id=&#39; + contextMenu.id + &#39;]&#39;);
+            if (itemInMainCard)
+                mainCard.setActiveItem(itemInMainCard);
+            else {
+                mainCard.add(btn.contextMenu);
+                mainCard.setActiveItem(contextMenu);
+            }
+        } else {
+            Ext.Ajax.request({
+                method: &#39;POST&#39;,
+                headers: {
+                    &#39;Accept&#39;: &#39;application/json&#39;
+                },
+                url: abp.appPath + &#39;api/services/app/session/GetCurrentLoginInformations&#39;,
+
+                success: function (response, opts) {
+                    var obj = Ext.decode(response.responseText);
+                    if (obj &amp;&amp; obj.success) {
+                        var result = obj.result;
+                        
+                        var treeStore = me.getProfileStore();
+                        if (abp.session.impersonatorUserId === abp.session.userId || abp.session.impersonatorUserId === null) {
+                            var root = treeStore.getRoot();
+                            root.removeChild(root.childNodes[0]);
+                        }
+                       
+                        var treeList = Ext.create(&#39;Ext.list.Tree&#39;, {
+                            fullscreen: true,
+                            store: treeStore,
+                            ui: &#39;navigation&#39;,
+                            expanderFirst: false,
+                            expanderOnly: false
+                        });
+                        var container = Ext.create(&#39;Ext.Container&#39;, {
+                            fullscreen: true,
+                            items: [treeList]
+                        });
+                        btn.contextMenu = container;
+                        mainCard.add(container);
+                        mainCard.setActiveItem(container);
+
+                    } else {
+                        Ext.toast(obj.error.message);
+                    }
+                },
+
+                failure: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+        }
+
+    },
+    getProfileStore:function() {
+        var treeStore = Ext.create(&#39;Ext.data.TreeStore&#39;, {
+            fields: [
+                {
+                    name: &#39;text&#39;
+                }, { name: &#39;iconCls&#39; },{name:&#39;href&#39;}
+            ],
+            root: {
+                expanded: true,
+                children: [
+                    {
+                        text: abp.localization.localize(&quot;BackToMyAccount&quot;),
+                        iconCls: &#39;icon-action-undo&#39;,
+                        name: &#39;BackToAccount&#39;,
+                        leaf: true
+                    },
+                    {
+                        text: abp.localization.localize(&quot;LinkedAccounts&quot;),
+                        iconCls: &#39;icon-link&#39;,
+                        children:[
+                        {
+                            text: abp.localization.localize(&quot;ManageAccounts&quot;),
+                            name: &#39;ManageAccount&#39;,
+                            iconCls: &#39;icon-settings&#39;,
+                            leaf: true
+                        }]
+                    },
+                     {
+                         text: abp.localization.localize(&quot;LoginAttempts&quot;),
+                         iconCls: &#39;icon-shield&#39;,
+                         name: &#39;LoginAttempts&#39;,
+                         leaf: true
+                     },
+                    {
+                        text: abp.localization.localize(&quot;ChangePassword&quot;),
+                        iconCls: &#39;icon-key&#39;,
+                        name: &#39;ChangePassword&#39;,
+                        leaf: true
+                    },
+                    {
+                        text: abp.localization.localize(&quot;ChangeProfilePicture&quot;),
+                        iconCls: &#39;icon-user&#39;,
+                        name: &#39;ChangeProfilePicture&#39;,
+                        leaf: true
+                    },
+                    {
+                        text: abp.localization.localize(&quot;MySettings&quot;),
+                        iconCls: &#39;icon-settings&#39;,
+                        name: &#39;MySettings&#39;,
+                        leaf: true
+                    },
+                    {
+                        text: abp.localization.localize(&quot;Logout&quot;),
+                        iconCls: &#39;icon-logout&#39;,
+                        name: &#39;Logout&#39;,
+                        leaf: true
+                    }
+                ]
+            }
+        });
+        return treeStore;
+    },
+    showNotification:function(btn) {
+        var me = this,
+           view = me.getView(),
+           contextMenu = btn.contextMenu,
+           refs = me.getReferences(),
+           mainCard = refs.mainCard;
+        if (contextMenu) {
+            //
+            var itemInMainCard = mainCard.child(&#39;component[id=&#39; + contextMenu.id + &#39;]&#39;);
+            if(itemInMainCard)
+                mainCard.setActiveItem(itemInMainCard);
+            else {
+                mainCard.add(btn.contextMenu);
+                mainCard.setActiveItem(contextMenu);
+            }
+        } else {
+            ///TODO:to be populated from abp
+            var items = [];
+            items.push({ text: &#39;Notification One&#39; });
+            items.push({text: &#39;Long line notification to test line wrapping&#39; });
+            var notificationList = Ext.create(&#39;Ext.List&#39;, {
+                fullscreen: true,
+                ownerElement: btn,
+                itemTpl: &#39;{text}&#39;,
+                data: items
+                //listeners: {
+                //    itemtap: me.changeLocale,
+                //    scope: me
+                //}
+            });
+            var notificationView = Ext.create(&#39;Ext.Panel&#39;, {
+                fullscreen: true,
+                items:[
+                {
+                    xtype: &#39;toolbar&#39;,
+                    userCls: &#39;main-notification-bar&#39;,
+                    width:&#39;100%&#39;,
+                    dock: &#39;top&#39;,
+                    items:[
+                    {
+                        text: abp.localization.localize(&quot;SetAllAsRead&quot;),
+                        ui: &#39;header&#39;
+                    }, &#39;-&gt;&#39;, { text: abp.localization.localize(&quot;Settings&quot;), ui: &#39;header&#39; }]
+                }, notificationList]
+            });
+            btn.contextMenu = notificationView;
+            mainCard.add(notificationView);
+            mainCard.setActiveItem(notificationView);
+        }
+    },
+    onNotificationPainted:function(btn) {
+        ///TODO: Populate from abp
+        btn.component.setBadgeText(&#39;1&#39;);
+        btn.component.setBadgeCls(&#39;badge&#39;);
+    },
+    showLocalization: function(btn) {
+        var me = this,
+            view = me.getView(),
+            contextMenu = btn.contextMenu,
+            refs = me.getReferences(),
+            mainCard = refs.mainCard;
+
+        if (contextMenu) {
+            //
+            var itemInMainCard = mainCard.child(&#39;component[id=&#39; + contextMenu.id + &#39;]&#39;);
+            if (itemInMainCard)
+                mainCard.setActiveItem(itemInMainCard);
+            else {
+                mainCard.add(btn.contextMenu);
+                mainCard.setActiveItem(contextMenu);
+            }
+
+        } else {
+            var items = [];
+            var locale = abp.localization.languages;
+            for (var i = 0; i &lt; locale.length; i++) {
+                var item = locale[i];
+                var menuItem = {
+                    text: item.displayName,
+                    iconCls: item.icon,
+                    name: item.name,
+                    isDefault: item.isDefault
+                };
+                items.push(menuItem);
+            }
+            var localizationList = Ext.create(&#39;Ext.List&#39;, {
+                fullscreen: true,
+                ownerElement: btn,
+                itemTpl: &#39;&lt;table&gt;&#39; +
+                    &#39;&lt;tr&gt;&lt;td&gt;&lt;img  class=&quot;{iconCls}&quot;/&gt;&lt;/td&gt;&lt;td style=&quot;padding-left:10px;&quot;&gt;{text}&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#39;,
+                data: items,
+                listeners: {
+                    itemtap: me.changeLocale,
+                    scope: me
+                }
+            });
+
+            btn.contextMenu = localizationList;
+            mainCard.add(localizationList);
+            mainCard.setActiveItem(localizationList);
+        }
+    },
+    changeLocale:function(list, index, target, record, e, eOpts) {
+        var ownerElement = list.ownerElement;
+        if (ownerElement) {
+            ownerElement.setIconCls(record.get(&#39;iconCls&#39;));
+            location.href = abp.appPath + &#39;AbpLocalization/ChangeCulture?cultureName=&#39; + record.get(&#39;name&#39;) + &#39;&amp;returnUrl=&#39; + window.location.href;
+        }
+    },
+    onBeforeLocalizationRender: function (btn) {
+        var currentCulture = abp.localization.currentCulture;
+        if (currentCulture) {
+            var locale = abp.localization.languages;
+            for (var i = 0; i &lt; locale.length; i++) {
+                var item = locale[i];
+                if (item.name === currentCulture.name) {
+                    btn.component.setIconCls(item.icon);
+                    break;
+                }
+            }
+        }
+    },
+});
+</pre>
+</body>
+</html>

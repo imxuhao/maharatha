@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.users.UsersForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [&#39;users.create&#39;, &#39;users.edit&#39;],
+    requires: [
+        &#39;Chaching.view.users.UsersFormController&#39;
+    ],
+
+    controller: &#39;users-usersform&#39;,
+    name: &#39;Users&#39;,
+    openInPopupWindow: true,
+    hideDefaultButtons: false,
+    layout: &#39;vbox&#39;,
+    autoScroll: true,
+    defaults: {
+        bodyStyle: { &#39;background-color&#39;: &#39;trasparent&#39; },
+        labelAlign: &#39;top&#39;
+    },
+    defaultFocus: &#39;textfield#name&#39;,
+    items: [{
+        xtype: &#39;hiddenfield&#39;,
+        name: &#39;id&#39;,
+        value: 0
+    }
+    ,
+    {
+        xtype: &#39;textfield&#39;,
+        name: &#39;name&#39;,
+        itemId: &#39;name&#39;,
+        fieldLabel: app.localize(&#39;Name&#39;),
+        width: &#39;100%&#39;,
+        ui: &#39;fieldLabelTop&#39;,
+        emptyText: app.localize(&#39;UName&#39;)
+    }, {
+        xtype: &#39;textfield&#39;,
+        name: &#39;surname&#39;,
+        fieldLabel: app.localize(&#39;Surname&#39;),
+        width: &#39;100%&#39;,
+        ui: &#39;fieldLabelTop&#39;,
+        emptyText: app.localize(&#39;USurname&#39;)
+    },
+    {
+        xtype: &#39;textfield&#39;,
+        name: &#39;emailAddress&#39;,
+        fieldLabel: app.localize(&#39;EmailAddress&#39;),
+        width: &#39;100%&#39;,
+        ui: &#39;fieldLabelTop&#39;,
+        emptyText: app.localize(&#39;UEmailAddress&#39;)
+    },
+    {
+        xtype: &#39;textfield&#39;,
+        name: &#39;userName&#39;,
+        fieldLabel: app.localize(&#39;UserName&#39;),
+        width: &#39;100%&#39;,
+        ui: &#39;fieldLabelTop&#39;,
+        emptyText: app.localize(&#39;UUserName&#39;)
+    }
+    ,
+    {
+        xtype: &#39;checkbox&#39;,
+        boxLabel: app.localize(&#39;SetRandomPassword&#39;),
+        name: &#39;setRandomPassword&#39;,
+        reference: &#39;setRandomPassword&#39;,
+        labelAlign: &#39;right&#39;,
+        inputvalue: true,
+        checked: true,
+        boxLabelCls: &#39;checkboxLabel&#39;,
+        listeners: {
+            change: &#39;showRandomPassword&#39;
+        }
+    },
+     {
+         xtype: &#39;textfield&#39;,
+         name: &#39;password&#39;,
+         reference:&#39;password&#39;,
+         inputType: &#39;password&#39;,
+         fieldLabel: app.localize(&#39;Password&#39;),
+         width: &#39;100%&#39;,
+         ui: &#39;fieldLabelTop&#39;,
+         emptyText: app.localize(&#39;Password&#39;),
+         hidden: true
+
+
+     },
+
+      {
+          xtype: &#39;textfield&#39;,
+          name: &#39;passwordRepeat&#39;,
+          reference: &#39;passwordRepeat&#39;,
+          inputType: &#39;password&#39;,
+          fieldLabel: app.localize(&#39;PasswordRepeat&#39;),
+          width: &#39;100%&#39;,
+          ui: &#39;fieldLabelTop&#39;,
+          emptyText: app.localize(&#39;PasswordRepeat&#39;),
+          hidden: true
+      },
+
+    {
+        xtype: &#39;checkbox&#39;,
+        boxLabel: app.localize(&#39;sendactivationemail&#39;),
+        name: &#39;sendactivationemail&#39;,
+        labelAlign: &#39;right&#39;,
+        inputValue: true,
+        checked: true,
+        boxLabelCls: &#39;checkboxLabel&#39;
+    }, {
+        xtype: &#39;checkbox&#39;,
+        boxLabel: app.localize(&#39;active&#39;),
+        name: &#39;isactive&#39;,
+        labelAlign: &#39;right&#39;,
+        inputValue: true,
+        checked: true,
+        boxLabelCls: &#39;checkboxLabel&#39;
+    }
+    ]
+
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.main.ChachingViewportController&#39;, {
+    extend: &#39;Ext.app.ViewController&#39;,
+    alias: &#39;controller.main-chachingviewport&#39;,
+
+    listen: {
+        controller: {
+            &#39;#&#39;: {
+                unmatchedroute: &#39;onRouteChange&#39;
+            }
+        }
+    },
+
+    routes: {
+        &#39;:node&#39;: &#39;onRouteChange&#39;
+    },
+    defaultToken:&#39;#dashboard&#39;,
+    lastView: null,
+    onRouteChange: function (id) {
+        if (Chaching.utilities.RoutesNames.routesNames.indexOf(id) !== -1) {
+            //if route is in ignore list then find route in ChachingGridPanelController
+            var gridController = new Chaching.view.common.grid.ChachingGridPanelController;
+            if (gridController) {
+                gridController.currentRedirectedRoute = id;
+                gridController.redirectTo(id, true);
+            }
+        }
+        else {
+            this.setCurrentView(id);
+        }
+    },
+    setCurrentView: function (hashTag) {
+        //try {
+
+
+            hashTag = (hashTag || &#39;&#39;).toLowerCase();
+
+            var me = this,
+                refs = me.getReferences(),
+                mainCard = refs.mainCardPanel,
+                mainLayout = mainCard.getLayout(),
+                navigationList = refs.navigationTreeList,
+                store = navigationList.getStore(),
+                node = store.findNode(&#39;url&#39;, hashTag) ||
+                       store.findNode(&#39;viewType&#39;, hashTag),
+                view = (node &amp;&amp; node.get(&#39;viewType&#39;)) || &#39;page404&#39;,
+                lastView = me.lastView,
+                iconCls = (node &amp;&amp; node.get(&#39;iconCls&#39;)) || &#39;&#39;,
+                text = (node &amp;&amp; node.get(&#39;text&#39;)) || &#39;Dashboard&#39;,
+                existingItem = mainCard.child(&#39;component[routeId=&#39; + hashTag + &#39;]&#39;),
+                newView;
+
+            // Kill any previously routed window
+            if (lastView &amp;&amp; lastView.isWindow) {
+                lastView.destroy();
+            }
+
+            lastView = mainLayout.getActiveItem();
+
+            if (!existingItem) {
+                var customData = node.get(&#39;customData&#39;);
+                if (customData &amp;&amp; customData.length &gt; 0) {
+                }
+                newView = Ext.create({
+                    xtype: view,
+                    routeId: hashTag,  // for existingItem search later
+                    hideMode: &#39;offsets&#39;,
+                    iconCls: iconCls,
+                    closable: true,
+                    dynamicTabItems:customData,
+                    title: text
+                });
+                var modulePermission = abp.auth.hasPermission(&#39;Pages.&#39; + newView.name);
+                if (!modulePermission) {
+                    Ext.toast(&#39;Requested resource by you is restricted due to security reason. Please contact support or clear #&#39; + hashTag + &#39; from your browser url&#39;);
+                    return;
+                }
+                if (typeof(newView.getStore) === &#39;function&#39;) {
+                    var gridStore = newView.getStore();
+                    if (gridStore)gridStore.load();
+                }
+                newView.on(&#39;beforedestroy&#39;, me.onTabClose, newView, me);
+            }
+
+            if (!newView || !newView.isWindow) {
+                // !newView means we have an existing view, but if the newView isWindow
+                // we don&#39;t add it to the card layout.
+                if (existingItem) {
+                    // We don&#39;t have a newView, so activate the existing view.
+                    if (existingItem !== lastView) {
+                        mainLayout.setActiveItem(existingItem);
+                    }
+                    newView = existingItem;
+                }
+                else {
+                    // newView is set (did not exist already), so add it and make it the
+                    // activeItem.
+                    Ext.suspendLayouts();
+                    mainLayout.setActiveItem(mainCard.add(newView));
+                    Ext.resumeLayouts(true);
+                }
+            }
+
+            navigationList.setSelection(node);
+
+            if (newView.isFocusable(true)) {
+                newView.focus();
+            }
+
+            me.lastView = newView;
+        //} catch (e) {
+           // debugger;
+            //Ext.toast(&#39;Please create view for the menuitem you clicked&#39;);
+        //}
+    },
+
+    onNavigationTreeSelectionChange: function (tree, node) {
+        var to = node &amp;&amp; (node.get(&#39;url&#39;) || node.get(&#39;viewType&#39;));
+
+        if (to) {
+            this.redirectTo(to);
+        }
+    },
+    onMainViewRender: function () {
+        if (!window.location.hash) {
+            this.redirectTo(&quot;dashboard&quot;);
+        }
+    },
+    onViewportResize: function (vprt, width, height, oldWidth, oldHeight, eOpts) {
+        var me = this,
+            view = me.getView();
+        var westPanel = view.down(&#39;panel[region=west]&#39;);
+        var northPanel = view.down(&#39;panel[region=north]&#39;);
+        var treeList = undefined;
+        var logo = undefined;
+        if (width &lt; 600 &amp;&amp; westPanel &amp;&amp; northPanel) {
+            treeList = westPanel.down(&#39;treelist[itemId=navigationTreeList]&#39;);
+            treeList.originalState = treeList.getMicro();
+            treeList.setMicro(true);
+            westPanel.setWidth(80);
+            logo = northPanel.down(&#39;image[itemId=CapsLogo]&#39;);
+            logo.setWidth(0);
+
+        } else if (westPanel &amp;&amp; northPanel) {
+            treeList = westPanel.down(&#39;treelist[itemId=navigationTreeList]&#39;);
+            var originalState = treeList.originalState === undefined ? false : treeList.originalState;
+            treeList.setMicro(originalState);
+            westPanel.setWidth(!originalState ? 250 : 80);
+            logo = northPanel.down(&#39;image[itemId=CapsLogo]&#39;);
+            logo.setWidth(!originalState ? 110 : 0);
+        }
+    },
+    onTabItemChange: function (tabPanel, newCard, oldCard, eOpts) {
+        var to = newCard &amp;&amp; (newCard.routeId);
+
+        if (to &amp;&amp; window.location.hash !== &#39;#&#39; + to) {
+            this.redirectTo(to);
+        }
+    },
+    onTabClose:function(tabPanel, controller) {
+        var to = tabPanel &amp;&amp; (tabPanel.routeId);
+
+        if (to &amp;&amp; window.location.hash === &#39;#&#39; + to) {
+            window.history.back();
+        }
+    }
+
+});
+</pre>
+</body>
+</html>

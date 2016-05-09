@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The main application class. An instance of this class is created by app.js when it
+ * calls Ext.application(). This is the ideal place to handle application launch and
+ * initialization details.
+ */
+//Ext.require(
+//[&#39;Ext.*&#39;]);
+Ext.define(&#39;Chaching.Application&#39;, {
+    extend: &#39;Ext.app.Application&#39;,
+
+    name: &#39;Chaching&#39;,
+
+    stores: [
+        &#39;NavigationTree&#39;
+    ],
+    requires: [
+        &#39;Chaching.*&#39;
+    ],
+   
+
+    defaultToken: &#39;dashboard&#39;,
+    profiles: [
+        &#39;Phone&#39;,
+        &#39;Tablet&#39;
+    ],
+    mainView:&#39;Chaching.view.main.Main&#39;,
+    launch: function () {
+       
+    },
+  
+
+    onAppUpdate: function () {
+        Ext.Msg.confirm(&#39;Application Update&#39;, &#39;This application has an update, reload?&#39;,
+            function (choice) {
+                if (choice === &#39;yes&#39;) {
+                    window.location.reload();
+                }
+            }
+        );
+    }
+});
+</pre>
+</body>
+</html>

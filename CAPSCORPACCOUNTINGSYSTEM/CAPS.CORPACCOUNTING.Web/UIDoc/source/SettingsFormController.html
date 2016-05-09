@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.profile.settings.SettingsFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.profile-settings-settingsform&#39;,
+    onSaveClicked: function (btn) {      
+        var me = this;
+        view = me.getView();
+        var data = view.getValues();        
+        var input = new Object();
+        input.Name = data.name,
+        input.Surname = data.surname,
+        input.UserName = data.userName,
+        input.EmailAddress = data.emailAddress;
+            
+        Ext.Ajax.request({
+            url: abp.appPath + &#39;api/services/app/profile/UpdateCurrentUserProfile&#39;,
+            jsonData: Ext.encode(input),
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    var wnd = view.up(&#39;window&#39;);
+                    Ext.destroy(wnd);
+                }
+            },
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+            }
+
+
+
+        })
+    }
+    
+});
+</pre>
+</body>
+</html>

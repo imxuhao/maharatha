@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.main.Toolbar&#39;, {
+    extend: &#39;Ext.Toolbar&#39;,
+    xtype: &#39;maintoolbar&#39;,
+   
+
+    items: [
+        {
+            // This component is moved to the floating nav container by the phone profile
+            xtype: &#39;component&#39;,
+            reference: &#39;logo&#39;,
+            userCls: &#39;main-logo&#39;,
+            html: &#39;&lt;img src=&quot;&#39;+abp.appPath+&#39;Content/images/capslogo.png&quot; height=30px width=80px style=&quot;margin-top:5px;&quot;/&gt;&#39;
+        },
+        {
+            xtype: &#39;button&#39;,
+            ui: &#39;header&#39;,
+            iconCls: &#39;x-fa fa-bars&#39;,
+            margin: &#39;0 0 0 10&#39;,
+            listeners: {
+                tap: &#39;onToggleNavigationSize&#39;
+            }
+        },
+        &#39;-&gt;&#39;,
+        {
+            xtype:&#39;button&#39;,
+            ui: &#39;header&#39;,
+            iconCls:&#39;x-fa fa-search&#39;,
+            href: &#39;#searchresults&#39;,
+            itemId:&#39;GlobalSearch&#39;,
+            margin: &#39;0 0 0 0&#39;,
+            handler: &#39;toolbarButtonClick&#39;
+        },
+        {
+            xtype:&#39;button&#39;,
+            ui: &#39;header&#39;,
+            scale: &#39;small&#39;,
+            itemId:&#39;Localization&#39;,
+            iconCls: &#39;famfamfam-flag-gb&#39;,
+            iconAlign: &#39;right&#39;,
+            href: &#39;#localization&#39;,
+            margin: &#39;10 0 0 0&#39;,
+            handler: &#39;toolbarButtonClick&#39;,
+            listeners: {
+                painted: &#39;onBeforeLocalizationRender&#39;,
+                scope:&#39;controller&#39;
+            }
+           
+        },
+        {
+            xtype:&#39;button&#39;,
+            ui: &#39;badgeBtn&#39;,
+            text: &#39;&amp;#xf0a2;&#39;,
+            href: &#39;#notification&#39;,
+            //badgeText: &#39;1&#39;,
+            //badgeCls: &#39;badge&#39;,
+            textAlign:&#39;left&#39;,
+            itemId:&#39;Notifiaction&#39;,
+            margin: &#39;6 0 0 0&#39;,
+            handler: &#39;toolbarButtonClick&#39;,
+            listeners: {
+                painted: &#39;onNotificationPainted&#39;,
+                scope: &#39;controller&#39;
+            }
+        },
+        {
+            xtype: &#39;image&#39;,
+            userCls: &#39;main-user-image small-image circular&#39;,
+            alt: &#39;Current user image&#39;,
+            href:&#39;profile&#39;,
+            src: abp.appPath + &#39;Profile/GetProfilePicture?t=&#39; + new Date().getTime(),
+            listeners: {
+                tap: &#39;showProfileList&#39;,
+                scope: &#39;controller&#39;
+            }
+            //src: &#39;resources/images/user-profile/2.png&#39;
+        }
+    ]
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.main.ChachingViewport&#39;, {
+    extend: &#39;Ext.container.Viewport&#39;,
+
+    requires: [
+        &#39;Chaching.view.main.ChachingViewportController&#39;,
+        &#39;Chaching.view.main.ChachingViewportModel&#39;,
+        &#39;Chaching.view.header.ChachingHeader&#39;
+    ],
+
+    controller: &#39;main-chachingviewport&#39;,
+    viewModel: {
+        type: &#39;main-chachingviewport&#39;
+    },
+
+    layout: &#39;border&#39;,
+    defaults: {
+        bodyStyle: {
+            &#39;background-color&#39;: &#39;#F3F5F9&#39;
+        }
+    },
+    //height: &#39;100%&#39;,
+    //width: &#39;100%&#39;,
+    alias: &#39;widget.chachingviewport&#39;,
+    listeners: {
+        render: &#39;onMainViewRender&#39;,
+        resize: &#39;onViewportResize&#39;
+    },
+    items: [
+        {
+            region: &#39;north&#39;,
+            height: 70,
+            items: [
+                {
+                    xtype: &#39;chachingheader&#39;,
+                    height: 70
+                }
+            ]
+        },
+        {
+            region: &#39;west&#39;,
+            width: 250,
+            split: false,
+            reference: &#39;treelistContainer&#39;,
+            layout: {
+                type: &#39;vbox&#39;,
+                align: &#39;stretch&#39;
+            },
+            bodyStyle: {
+                &#39;background-color&#39;: &#39;#F3F5F9&#39;,
+                &#39;padding&#39;: &#39;10px 20px 20px 20px&#39;
+            },
+            border: false,
+            scrollable: false,
+            items: [
+                {
+                    xtype: &#39;treelist&#39;,
+                    reference: &#39;navigationTreeList&#39;,
+                    itemId: &#39;navigationTreeList&#39;,
+                    micro: false,
+                    ui: &#39;nav&#39;,
+                    store: &#39;NavigationTree&#39;,
+                    width: 250,
+                    expanderFirst: false,
+                    expanderOnly: false,
+                    singleExpand:true,
+                    listeners: {
+                        selectionchange: &#39;onNavigationTreeSelectionChange&#39;
+                    }
+                }
+            ]
+
+        },
+        {
+            xtype: &#39;tabpanel&#39;,
+            region: &#39;center&#39;,
+            reference: &#39;mainCardPanel&#39;,
+            itemId: &#39;contentPanel&#39;,
+            stateId: &#39;mainCardPanelState&#39;,
+            ui: &#39;dashboard&#39;,
+            layout: {
+                type: &#39;card&#39;,
+                anchor: &#39;100%&#39;
+            },
+            listeners: {
+                tabchange: &#39;onTabItemChange&#39;
+            },
+            items: [
+            {
+                title: &#39;Dashboard&#39;,
+                ui: &#39;dashboard&#39;,
+                routeId: &#39;dashboard&#39;,
+                iconCls: &#39;icon-home&#39;
+            }]
+        }
+    ]
+});
+</pre>
+</body>
+</html>

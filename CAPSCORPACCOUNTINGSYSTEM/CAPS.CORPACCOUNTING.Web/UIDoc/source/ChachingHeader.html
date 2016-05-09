@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.header.ChachingHeader&#39;, {
+    extend: &#39;Ext.toolbar.Toolbar&#39;,
+
+    requires: [
+        &#39;Chaching.view.header.ChachingHeaderController&#39;
+    ],
+    alias: &#39;widget.chachingheader&#39;,
+    controller: &#39;header-chachingheader&#39;,
+
+    bodyStyle: {
+        &#39;background-color&#39;: &#39;#F3F5F9&#39;
+    },
+
+    layout: {
+        type: &#39;hbox&#39;
+    },
+    defaults: {
+        bodyStyle: {
+            &#39;background-color&#39;: &#39;transparent&#39;,
+            &#39;border-color&#39;: &#39;transparent&#39;,
+            &#39;border-style&#39;: &#39;transparent&#39;
+        }
+    },
+    items: [
+        {
+            xtype: &#39;image&#39;,
+            height: 30,
+            itemId: &#39;CapsLogo&#39;,
+            width: 110,
+            src: abp.appPath + &#39;Content/images/capslogo.png&#39;,
+            margin: &#39;2px&#39;
+        }, {
+            xtype: &#39;button&#39;,
+            text: &#39;&#39;,
+            scale: &#39;medium&#39;,
+            iconCls: &#39;x-fa fa-list&#39;,
+            iconAlign: &#39;right&#39;,
+            width: 120,
+            baseCls: &#39;&#39;,
+            listeners: {
+                click: &#39;onToggleClick&#39;
+            }
+        }, &#39;-&gt;&#39;,
+        {
+            xtype: &#39;button&#39;,
+            scale: &#39;small&#39;,
+            ui: &#39;countryMenu&#39;,
+            width: 120,
+            iconCls: &#39;famfamfam-flag-gb&#39;,
+            iconAlign: &#39;left&#39;,
+            text: &#39;English&#39; + &#39; &amp;#xf107;&#39;,
+            textAlign:&#39;right&#39;,
+            baseCls: &#39;&#39;,
+            itemId:&#39;LocalizationBtn&#39;,
+            contextMenu:undefined,
+            listeners: {
+                click: &#39;onLocalizationHover&#39;,
+                beforerender:&#39;onBeforeLocalizationRender&#39;
+            }
+        },
+         {
+             scale: &#39;small&#39;,
+             ui: &#39;badgeBtn&#39;,
+             width: 50,
+             iconCls: &#39;badge&#39;,
+             iconAlign: &#39;right&#39;,
+             text: &#39;&amp;#xf0a2;&#39;,
+             textAlign: &#39;right&#39;,
+             baseCls: &#39;&#39;,
+             itemId: &#39;NotificationBtn&#39;,
+             contextMenu: undefined,
+             menu: undefined,
+             listeners: {
+                 click: &#39;onNotificationHover&#39;,
+                 boxready: &#39;onNotificationReady&#39;
+             }
+         },
+        {
+            scale: &#39;small&#39;,
+            ui: &#39;badgeBtnBack&#39;,
+            width: 100,
+            height:50,
+            iconAlign: &#39;right&#39;,
+            text:&#39;&#39;,//set dynamically based on login info of user
+            gotoMyAccount: false,
+            textAlign: &#39;right&#39;,
+            baseCls: &#39;&#39;,
+            itemId: &#39;AccountBtn&#39;,
+            contextMenu: undefined,
+            menu: undefined,
+            style: {
+                &#39;top&#39;:&#39;3px !important&#39;
+            },
+            listeners: {
+                click: &#39;onAccountsHover&#39;,
+                boxready: &#39;onAccountsReady&#39;
+            }
+        }, {
+            xtype: &#39;image&#39;,
+            userCls:&#39;img-circle&#39;,
+            height: 50,
+            width: 50,
+            itemId: &#39;AccountPic&#39;,
+            hidden:true
+        }
+    ]
+});
+</pre>
+</body>
+</html>

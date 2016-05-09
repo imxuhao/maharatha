@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.financials.AccountsTabPanel&#39;, {
+    extend: &#39;Chaching.view.common.tab.ChachingTabPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.financials.AccountsTabPanelController&#39;,
+        &#39;Chaching.view.financials.AccountsTabPanelModel&#39;
+    ],
+    xtype:&#39;financials.accounts&#39;,
+    controller: &#39;financials-accountstabpanel&#39;,
+    viewModel: {
+        type: &#39;financials-accountstabpanel&#39;
+    },
+    name: &#39;Financials.Accounts&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Financials.Accounts&#39;)
+    },
+    staticTabItems: null
+});
+</pre>
+</body>
+</html>

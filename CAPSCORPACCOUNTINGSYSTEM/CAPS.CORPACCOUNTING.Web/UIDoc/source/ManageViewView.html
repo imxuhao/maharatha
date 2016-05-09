@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.manageView.ManageViewView&#39;,{
+    extend: &#39;Chaching.view.common.window.ChachingWindowPanel&#39;,
+    alias: [&#39;widget.manageView.createView&#39;, &#39;widget.manageView.editView&#39;],
+    requires: [
+        &#39;Chaching.view.manageView.ManageViewViewController&#39;,
+        &#39;Chaching.view.manageView.ManageViewList&#39;
+    ],
+
+    controller: &#39;manageview-manageviewview&#39;,
+    height: 500,
+    width: 750,
+    layout: &#39;fit&#39;,
+    title: app.localize(&quot;ManageUsersViewSetting&quot;),
+    iconCls: &#39;fa fa-gears&#39;,
+    initComponent: function (config) {
+        var me = this,
+            controller = me.getController();
+        var form = Ext.create(&#39;Chaching.view.manageView.ManageViewList&#39;, {
+            height: &#39;100%&#39;,
+            width: &#39;100%&#39;
+        });
+        var gridStore = form.getStore();
+        var filters = [];
+        var filter = new Ext.util.Filter({
+            entity: &#39;&#39;,
+            searchTerm: me.parentGrid.gridId,
+            comparator: 2,
+            dataType: 0,
+            property: &#39;gridId&#39;,
+            value: me.parentGrid.gridId
+        });
+        filters.push(filter);
+        filter = new Ext.util.Filter({
+            entity: &#39;&#39;,
+            searchTerm: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId,
+            comparator: 2,
+            dataType: 0,
+            property: &#39;userId&#39;,
+            value: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId
+        });
+        filters.push(filter);
+        gridStore.clearFilter();
+        gridStore.filters.add(filters);
+        form.getStore().load({
+            callback: function(records, operation, success) {
+                var activeUserViewId = me.parentGrid.activeUserViewId;
+                var activeRecord = this.findRecord(&#39;userViewId&#39;, activeUserViewId);
+                if (activeRecord) {
+                    activeRecord.set(&#39;isActive&#39;, true);
+                    activeRecord.commit();
+                }
+            }
+        });
+        me.items = [form];
+
+        me.callParent(arguments);
+    }
+});
+</pre>
+</body>
+</html>

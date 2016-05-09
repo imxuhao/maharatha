@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.profile.linkedaccounts.LinkedAccountsGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.profile.linkedaccounts.LinkedAccountsGridController&#39;
+    ],
+
+    controller: &#39;linkedaccounts-linkedaccountsgrid&#39;,
+    xtype: &#39;manageaccounts&#39;,
+    headerButtonsConfig: [
+       &#39;-&gt;&#39;, {
+         xtype: &#39;button&#39;,
+         scale: &#39;small&#39;,
+         ui: &#39;actionButton&#39;,
+         action: &#39;create&#39;,
+         text: abp.localization.localize(&quot;LinkNewAccount&quot;).toUpperCase(),
+         tooltip: app.localize(&#39;LinkNewAccount&#39;),
+         checkPermission: false,      
+         iconCls: &#39;fa fa-plus&#39;,       
+         iconAlign: &#39;left&#39;
+     }], 
+    store: &#39;profile.linkedaccounts.LinkedAccountsStore&#39;,
+    name: &#39;LinkedAccounts&#39;,
+    padding: 5,
+    gridId:8,
+    requireMultiSearch: false,
+    requireMultisort: false,
+    isEditable: true,
+    editingMode: &#39;row&#39;,
+    createNewMode: &#39;popup&#39;,
+    columnLines: true,
+    multiColumnSort: true,
+    manageViewSetting:false,
+    createWndTitleConfig: {
+        title: app.localize(&#39;LinkNewAccount&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },   
+    columns: [
+        {
+            xtype: &#39;gridcolumn&#39;,           
+            width: &#39;20%&#39;,           
+            text: app.localize(&#39;Actions&#39;),        
+            renderer: Chaching.utilities.ChachingRenderers.loginaccount
+        },
+
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;UserName&#39;),
+             dataIndex: &#39;username&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;60%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;UUserName&#39;)
+             }            
+         },
+         {
+             xtype: &#39;gridcolumn&#39;,       
+             text: app.localize(&#39;Delete&#39;),
+             width: &#39;20%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.unlinkedaccount
+            
+         }
+
+
+    ]
+});
+</pre>
+</body>
+</html>

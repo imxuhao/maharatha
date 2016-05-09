@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.languages.LanguagesView&#39;,{
+    extend: &#39;Chaching.view.common.window.ChachingWindowPanel&#39;,
+    requires: [&#39;Chaching.view.languages.LanguagesForm&#39;],
+    alias: [&#39;widget.languages.createView&#39;, &#39;widget.languages.editView&#39;],
+    height:300,
+    width: 400,
+    layout: &#39;fit&#39;,
+    initComponent: function (config) {
+        var me = this,
+            controller = me.getController();
+        var form = Ext.create(&#39;Chaching.view.languages.LanguagesForm&#39;, {
+            height: &#39;100%&#39;,
+            width: &#39;100%&#39;,
+            name: &#39;LanguageTexts&#39;
+        });
+        var languageNames = form.getForm().findField(&#39;name&#39;);
+        var languageFlags = form.getForm().findField(&#39;icon&#39;);
+        me.items = [form];
+        me.callParent(arguments);
+        var languagesStore = Ext.create(&#39;Chaching.store.languages.LanguagesDataStore&#39;);
+        languagesStore.load(function (records, operation, success) {
+            if (success &amp;&amp; records &amp;&amp; records.length &gt; 0) {
+                var record = records[0],
+                    names = record.get(&#39;languageNames&#39;),//languageNames(), //
+                    flags = record.get(&#39;flags&#39;);//flags();//
+                languageNames.getStore().loadData(names);
+                languageFlags.getStore().loadData(flags);
+            }
+            var basicForm = form.getForm();
+            var formRecord = basicForm.getRecord();
+            if (formRecord)
+                basicForm.setValues(basicForm.getRecord().data);
+        });
+
+    }
+});
+</pre>
+</body>
+</html>

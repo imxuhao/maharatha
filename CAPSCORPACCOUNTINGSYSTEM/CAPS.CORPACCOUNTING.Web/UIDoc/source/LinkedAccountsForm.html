@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.profile.linkedaccounts.LinkedAccountsForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [&#39;linkedaccounts.createView&#39;],
+    requires: [
+        &#39;Chaching.view.profile.linkedaccounts.LinkedAccountsFormController&#39;
+    ],
+
+    controller: &#39;linkedaccounts-linkedaccountsform&#39;,
+   
+    openInPopupWindow: true,
+    hideDefaultButtons: false,
+    layout: &#39;vbox&#39;,
+    defaults: {
+        bodyStyle: { &#39;background-color&#39;: &#39;trasparent&#39; },
+        labelAlign: &#39;top&#39;
+    },
+    defaultFocus: &#39;textfield#usernameOrEmailAddress&#39;,
+ 
+    items: [{
+        xtype: &#39;hiddenfield&#39;,
+        name: &#39;id&#39;,
+        value:0
+    }, {
+        xtype: &#39;textfield&#39;,
+        name: &#39;tenancyName&#39;,
+        itemId: &#39;tenancyName&#39;,
+        allowBlank:true,
+        fieldLabel: app.localize(&#39;TenancyName&#39;).initCap(),
+        width: &#39;100%&#39;,
+        ui:&#39;fieldLabelTop&#39;,
+        emptyText: app.localize(&#39;TenancyName&#39;)
+    }, {
+        xtype: &#39;textfield&#39;,
+        name: &#39;usernameOrEmailAddress&#39;,
+        allowBlank: false,
+        fieldLabel: app.localize(&#39;UserName&#39;).initCap(),
+        width: &#39;100%&#39;,
+        ui: &#39;fieldLabelTop&#39;,
+        emptyText: app.localize(&#39;UserName&#39;)
+    },
+    {
+        xtype: &#39;textfield&#39;,
+        name: &#39;password&#39;,
+        allowBlank: false,
+        inputType: &#39;password&#39;,
+        fieldLabel: app.localize(&#39;Password&#39;).initCap(),
+        width: &#39;100%&#39;,
+        ui: &#39;fieldLabelTop&#39;,
+        emptyText: app.localize(&#39;Password&#39;)
+    },
+    ]
+    
+    
+});
+</pre>
+</body>
+</html>

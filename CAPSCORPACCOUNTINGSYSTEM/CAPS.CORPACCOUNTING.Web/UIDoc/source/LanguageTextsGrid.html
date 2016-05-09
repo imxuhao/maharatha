@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.languages.LanguageTextsGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.languages.LanguageTextsGridController&#39;
+    ],
+
+    controller: &#39;languages-languagetextsgrid&#39;,
+
+    xtype: &#39;Languagetexts&#39;,
+    store: &#39;languages.LanguageTextsStore&#39;,
+    name: &#39;LanguageTexts&#39;,
+    padding: 5,
+    gridId:4,
+    headerButtonsConfig: [
+    {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;BaseLanguage&quot;),
+        ui: &#39;headerTitle&#39;
+    }, {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;TargetLanguage&quot;),
+        ui: &#39;headerSubTitle&#39;
+    }, &#39;-&gt;&#39;],
+    manageViewSetting: false,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable: true,
+    editingMode: &#39;row&#39;,   
+    columnLines: true,   
+    multiColumnSort: true,
+    columns: [
+        {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;Key&#39;),
+            dataIndex: &#39;key&#39;,           
+            sortable: true,
+            width: &#39;30%&#39;,
+            groupable: true,
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;
+            },
+            editor: {
+                xtype: &#39;textfield&#39;
+            }
+        }, {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;BaseValue&#39;),
+            dataIndex: &#39;baseValue&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;30%&#39;,
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;
+            },
+            editor: {
+                xtype: &#39;textfield&#39;
+            }
+        },
+        {
+            xtype: &#39;gridcolumn&#39;,          
+            text: app.localize(&#39;TargetValue&#39;),
+            dataIndex: &#39;targetValue&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;30%&#39;,
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;
+            },
+            editor: {
+                xtype: &#39;textfield&#39;
+            }
+        },
+        {
+            xtype: &#39;gridcolumn&#39;,
+            width: &#39;8%&#39;,
+            text: app.localize(&#39;Edit&#39;),
+            renderer: Chaching.utilities.ChachingRenderers.languagesTextsEditIcon
+        }, ]
+});
+</pre>
+</body>
+</html>

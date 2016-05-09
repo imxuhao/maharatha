@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.profile.settings.SettingsView&#39;,{
+    extend: &#39;Chaching.view.common.window.ChachingWindowPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.profile.settings.SettingsViewController&#39;,
+        &#39;Chaching.view.profile.settings.SettingsForm&#39;
+    ],
+
+    controller: &#39;profile-settings-settingsview&#39;,
+    height: 450,
+    width: 450,
+    layout: &#39;fit&#39;,
+    title: app.localize(&quot;MySettings&quot;),
+    defaultFocus: &#39;admin&#39;,
+    initComponent: function (config) {     
+        var me = this,
+            controller = me.getController();
+        var form = Ext.create(&#39;Chaching.view.profile.settings.SettingsForm&#39;, {
+            height: &#39;100%&#39;,
+            width: &#39;100%&#39;,
+            name: &#39;MySettings&#39;
+        });
+        me.items = [form];
+
+        me.callParent(arguments);
+    }
+});
+</pre>
+</body>
+</html>

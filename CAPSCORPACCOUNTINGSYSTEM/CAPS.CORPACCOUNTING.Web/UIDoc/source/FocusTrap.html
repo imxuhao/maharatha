@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-util-FocusTrap'>/**
+</span> * This mixin implements focus trap for widgets that do not want to allow the user
+ * to tab out, circling focus among the child items instead. The widget should be
+ * derived from Panel since it relies on the tab guards feature of the Panel.
+ *
+ * The best example of such widget is a Window, or a dialog as per WAI-ARIA 1.0:
+ * http://www.w3.org/TR/wai-aria-practices/#dialog_modal
+ * http://www.w3.org/TR/wai-aria-practices/#dialog_nonmodal
+ *
+ * @private
+ */
+Ext.define(&#39;Ext.util.FocusTrap&#39;, {
+    extend: &#39;Ext.Mixin&#39;,
+    
+<span id='Ext-util-FocusTrap-property-mixinConfig'>    mixinConfig: {
+</span>        id: &#39;focustrap&#39;,
+        
+        after: {
+            afterRender: &#39;initTabGuards&#39;,
+            addTool: &#39;initTabGuards&#39;,
+            add: &#39;initTabGuards&#39;,
+            remove: &#39;initTabGuards&#39;,
+            addDocked: &#39;initTabGuards&#39;,
+            removeDocked: &#39;initTabGuards&#39;,
+            onShow: &#39;initTabGuards&#39;,
+            afterHide: &#39;initTabGuards&#39;
+        }
+    },
+    
+    config: {
+<span id='Ext-util-FocusTrap-cfg-tabGuard'>        tabGuard: true,
+</span>    
+<span id='Ext-util-FocusTrap-cfg-tabGuardTpl'>        tabGuardTpl:
+</span>            &#39;&lt;div id=&quot;{id}-{tabGuardEl}&quot; data-ref=&quot;{tabGuardEl}&quot; role=&quot;button&quot; &#39; +
+                &#39;data-tabguardposition=&quot;{tabGuard}&quot; aria-busy=&quot;true&quot; style=&quot;height:0&quot;&#39; +
+                &#39;class=&quot;&#39; + Ext.baseCSSPrefix + &#39;hidden-clip&quot;&gt;&#39; +
+            &#39;&lt;/div&gt;&#39;,
+    
+<span id='Ext-util-FocusTrap-cfg-tabGuardIndex'>        tabGuardIndex: 0
+</span>    },
+    
+<span id='Ext-util-FocusTrap-property-tabGuardPositionAttribute'>    tabGuardPositionAttribute: &#39;data-tabguardposition&#39;,
+</span>    
+<span id='Ext-util-FocusTrap-property-privates'>    privates: {
+</span>        initTabGuards: function() {
+            var me = this,
+                posAttr = me.tabGuardPositionAttribute,
+                beforeGuard = me.tabGuardBeforeEl,
+                afterGuard = me.tabGuardAfterEl,
+                tabIndex = me.tabGuardIndex,
+                nodes;
+            
+            if (!me.rendered || !me.tabGuard) {
+                return;
+            }
+            
+            nodes = me.el.findTabbableElements({
+                skipSelf: true
+            });
+            
+            // Both tab guards may be in the list, disregard them
+            if (nodes[0] &amp;&amp; nodes[0].hasAttribute(posAttr)) {
+                nodes.shift();
+            }
+            
+            if (nodes.length &amp;&amp; nodes[nodes.length - 1].hasAttribute(posAttr)) {
+                nodes.pop();
+            }
+            
+            if (nodes.length) {
+                beforeGuard.dom.setAttribute(&#39;tabIndex&#39;, tabIndex);
+                beforeGuard.on(&#39;focusenter&#39;, me.onTabGuardFocusEnter, me);
+                
+                afterGuard.dom.setAttribute(&#39;tabIndex&#39;, tabIndex);
+                afterGuard.on(&#39;focusenter&#39;,  me.onTabGuardFocusEnter, me);
+            }
+            else {
+                beforeGuard.dom.removeAttribute(&#39;tabIndex&#39;);
+                beforeGuard.un(&#39;focusenter&#39;, me.onTabGuardFocusEnter, me);
+                
+                afterGuard.dom.removeAttribute(&#39;tabIndex&#39;);
+                afterGuard.un(&#39;focusenter&#39;,  me.onTabGuardFocusEnter, me);
+            }
+        },
+        
+        onTabGuardFocusEnter: function(e, target) {
+            var me = this,
+                el = me.el,
+                posAttr = me.tabGuardPositionAttribute,
+                position = target.getAttribute(posAttr),
+                from = e.relatedTarget,
+                nodes, forward, nextFocus;
+            
+            // Focus was within the parent widget and is trying to escape;
+            // for topmost guard we need to bounce focus back to the last tabbable
+            // element in the parent widget, and vice versa for the bottom trap.
+            if (!from.hasAttribute(posAttr) &amp;&amp; from !== el.dom &amp;&amp; el.contains(from)) {
+                forward = position === &#39;before&#39; ? false : true;
+            }
+            
+            // It is entirely possible that focus was outside the widget and
+            // the user tabbed into the widget, or widget main el was focused
+            // and the user pressed the Tab key. In that case we forward the focus
+            // to the next available element in the natural tab order, i.e. the element
+            // after the topmost guard, or the element before the bottom guard.
+            else {
+                forward = position === &#39;before&#39; ? true : false;
+            }
+            
+            nodes = el.findTabbableElements({
+                skipSelf: true
+            });
+            
+            // Tabbables will include two tab guards, so remove them
+            nodes.shift();
+            nodes.pop();
+            
+            nextFocus = forward ? nodes[0] : nodes[nodes.length - 1];
+            
+            if (nextFocus) {
+                nextFocus.focus();
+            }
+        }
+    }
+});
+</pre>
+</body>
+</html>

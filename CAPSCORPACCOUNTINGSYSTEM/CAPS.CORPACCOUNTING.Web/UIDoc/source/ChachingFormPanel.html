@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.common.form.ChachingFormPanel&#39;,{
+    extend: &#39;Ext.form.Panel&#39;,
+
+    requires: [
+        &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+        &#39;Chaching.view.common.form.ChachingFormPanelModel&#39;
+    ],
+
+    controller: &#39;common-form-chachingformpanel&#39;,
+    viewModel: {
+        type: &#39;common-form-chachingformpanel&#39;
+    },
+<span id='global-cfg-name'>    /**
+</span>   * @hide
+   * @private
+   * @cfg {string} name of the grid to do permission check
+   */
+    name: null,
+<span id='global-cfg-parentGrid'>    /**
+</span>  * @hide
+  * @private
+  * @cfg {object} parentGrid from which this formpanel is created
+  */
+    parentGrid: null,
+<span id='global-cfg-hide'>    /**
+</span>  * @hide
+  * @private
+  * @cfg {boolean} hide default save and cancel buttons.
+     * if set to true then create new buttons
+  */
+    hideDefaultButtons: false,
+    displayDefaultButtonsCenter:false,
+<span id='global-cfg-default'>    /**
+</span>  * @hide
+  * @private
+  * @cfg {object} default values to be loaded when the form loads
+     * use beforeCreateAction in parentGrid&#39;s controller class to set defaultValues if any.
+  */
+    defaultValuesToLoad: null,
+<span id='global-cfg-open'>    /**
+</span> * @hide
+ * @private
+ * @cfg {boolean} open this form in window panel.
+    * if set to true then popup window will be opened containing this form
+ */
+    openInPopupWindow: false,
+<span id='global-cfg-save'>    /**
+</span>* @hide
+* @private
+* @cfg {boolean} save button to act accordingly create/update.   
+*/
+    isEditing: false,
+    referenceHolder: true,
+    border: false,
+    frame: false,
+    showFormTitle: false,
+    titleConfig:null,
+    initComponent: function () {
+        //create buttons
+        var me = this,
+            controller = me.getController,
+            buttons = [];
+        if (me.showFormTitle&amp;&amp;me.titleConfig) {
+            var dockedItems = [
+                {
+                    xtype: &#39;toolbar&#39;,
+                    dock: &#39;top&#39;,
+                    layout: {
+                        type: &#39;hbox&#39;,
+                        pack: &#39;left&#39;
+                    },
+                    items: [
+                        {
+                            xtype: &#39;displayfield&#39;,
+                            value: me.titleConfig.title,
+                            ui: &#39;headerTitle&#39;
+                        },&#39;-&gt;&#39;,
+                        {
+                            xtype: &#39;displayfield&#39;,
+                            value: &#39;Fields marked with (&#39; + Chaching.utilities.ChachingGlobals.mandatoryFlag + &#39;&amp;nbsp;) are required.&#39;,
+                            ui: &#39;headerSubTitle&#39;
+                        }
+                    ]
+                }
+            ];
+            me.dockedItems = dockedItems;
+        }
+        if (!me.hideDefaultButtons) {
+            buttons.push(&#39;-&gt;&#39;);
+            var saveButton= {
+                xtype: &#39;button&#39;,
+                scale: &#39;small&#39;,
+                iconCls: &#39;fa fa-save&#39;,
+                iconAlign: &#39;left&#39;,
+                text: app.localize(&#39;Save&#39;).toUpperCase(),
+                ui: &#39;actionButton&#39;,
+                name: &#39;Save&#39;,
+                itemId: &#39;BtnSave&#39;,
+                reference:&#39;BtnSave&#39;,
+                listeners: {
+                    click:&#39;onSaveClicked&#39;
+                }
+            }
+            buttons.push(saveButton);
+
+            var cancelButton= {
+                xtype: &#39;button&#39;,
+                scale: &#39;small&#39;,
+                iconCls: &#39;fa fa-close&#39;,
+                iconAlign: &#39;left&#39;,
+                text: app.localize(&#39;Cancel&#39;).toUpperCase(),
+                ui: &#39;actionButton&#39;,
+                name: &#39;Cancel&#39;,
+                itemId: &#39;BtnCancel&#39;,
+                reference: &#39;BtnCancel&#39;,
+                listeners: {
+                    click: &#39;onCancelClicked&#39;
+                }
+            }
+            buttons.push(cancelButton);
+            if (me.displayDefaultButtonsCenter) {
+                buttons.push(&#39;-&gt;&#39;);
+            }
+            me.bbar = buttons;
+            //me.button = buttons;
+            me.buttonAlign = &#39;right&#39;;
+            me.defaultButton = &#39;BtnSave&#39;;
+        }
+        me.callParent(arguments);
+    },
+    findField: function (id) {
+        return this.getFields().findBy(function (f) {
+            return f.id === id || f.getName() === id || f.hiddenName === id;
+        });
+    }
+});
+</pre>
+</body>
+</html>

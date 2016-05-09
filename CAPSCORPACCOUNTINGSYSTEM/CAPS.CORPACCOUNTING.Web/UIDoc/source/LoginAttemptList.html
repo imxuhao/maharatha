@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.profile.loginAttempts.LoginAttemptList&#39;, {
+    extend: &#39;Ext.view.View&#39;,
+
+    requires: [
+        &#39;Chaching.view.profile.loginAttempts.LoginAttemptListController&#39;
+    ],
+
+    controller: &#39;profile-loginattempts-loginattemptlist&#39;,
+    store: &#39;profile.loginAttempts.LoginAttemptStore&#39;,
+    scrollable:true,
+    tpl: [
+        &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+        &#39;&lt;div class=&quot;col-xs-12&quot;&gt;&#39;,
+        &#39;&lt;div class=&quot;alert bg-grey-cararra bg-font-grey-cararra&quot;&gt;&#39;,
+        &#39;&lt;div class=&quot;row&quot;&gt;&#39;,
+        &#39;&lt;div class=&quot;col-xs-3 text-center&quot;&gt;&#39;,
+        &#39;&lt;img src=&quot;&#39; + abp.appPath + &#39;Profile/GetProfilePicture?t=65214896300&#39; + &#39;&quot; class=&quot;img-circle&quot; width=&quot;50&quot; height=&quot;50&quot;&gt;&lt;br/&gt;&#39;,
+        &#39;&lt;span class=&quot;label {badgeClass}&quot;&gt; {result} &lt;/span&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;div class=&quot;col-xs-9&quot;&gt;&#39;,
+        &#39;&lt;div class=&quot;row&quot;&gt;&#39;,
+        &#39;&lt;label class=&quot;control-label col-sm-3 text-right&quot;&gt;&#39; + app.localize(&quot;IpAddress&quot;) + &#39;&lt;/label&gt;&#39;,
+        &#39;&lt;div class=&quot;col-sm-9&quot;&gt;&#39;,
+        &#39;&lt;p class=&quot;form-control-static&quot;&gt;&#39;,
+        &#39;{clientIpAddress}&#39;,
+        &#39;&lt;/p&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;div class=&quot;row&quot;&gt;&#39;,
+        &#39;&lt;label class=&quot;control-label col-sm-3 text-right&quot;&gt;&#39;+app.localize(&quot;Client&quot;)+&#39;&lt;/label&gt;&#39;,
+        &#39;&lt;div class=&quot;col-sm-9&quot;&gt;&#39;,
+        &#39;&lt;p class=&quot;form-control-static&quot;&gt;&#39;,
+        &#39;{clientName}&#39;,
+        &#39;&lt;/p&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;div class=&quot;row&quot;&gt;&#39;,
+        &#39;&lt;label class=&quot;control-label col-sm-3 text-right&quot;&gt;&#39;+app.localize(&quot;Browser&quot;)+&#39;&lt;/label&gt;&#39;,
+        &#39;&lt;div class=&quot;col-sm-9&quot;&gt;&#39;,
+        &#39;&lt;p class=&quot;form-control-static&quot;&gt;&#39;,
+        &#39;{browserInfo}&#39;,
+        &#39;&lt;/p&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;div class=&quot;row&quot;&gt;&#39;,
+        &#39;&lt;label class=&quot;control-label col-sm-3 text-right&quot;&gt;&#39;+app.localize(&quot;Time&quot;)+&#39;&lt;/label&gt;&#39;,
+        &#39;&lt;div class=&quot;col-sm-9&quot;&gt;&#39;,
+        &#39;&lt;p class=&quot;form-control-static&quot;&gt;&#39;,
+        &#39;{attemptedOn}&#39;,
+        &#39;&lt;/p&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;
+    ],
+    itemSelector: &#39;div.col-xs-12&#39;,
+    height: &#39;100%&#39;,
+    width: &#39;100%&#39;
+});
+</pre>
+</body>
+</html>

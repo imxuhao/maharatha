@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.users.UsersFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.users-usersform&#39;,
+    showRandomPassword: function () {
+        var me = this;
+        setRandomPassword = me.lookupReference(&#39;setRandomPassword&#39;);
+        password = me.lookupReference(&#39;password&#39;);
+        passwordRepeat = me.lookupReference(&#39;passwordRepeat&#39;);
+        if (setRandomPassword.value) {
+            password.hide();
+            passwordRepeat.hide();
+        }
+        else {
+            password.show();
+            passwordRepeat.show();
+        }
+        password.reset();
+        passwordRepeat.reset();
+    },
+
+});
+</pre>
+</body>
+</html>

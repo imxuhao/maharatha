@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.profile.loginAttempts.LoginAttemptModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+        searchEntityName: &#39;LoginAttempts&#39;
+    },
+    fields: [
+        { name: &#39;browserInfo&#39;, type: &#39;string&#39; },
+        { name: &#39;clientIpAddress&#39;, type: &#39;string&#39; },
+        { name: &#39;clientName&#39;, type: &#39;string&#39; },
+        { name: &#39;result&#39;, type: &#39;string&#39;,convert:function(value) {
+            return value === &#39;Success&#39; ? app.localize(&#39;Success&#39;) :
+                   app.localize(&#39;Failed&#39;);
+        } },
+        { name: &#39;tenancyName&#39;, type: &#39;string&#39; },
+        { name: &#39;userNameOrEmail&#39;, type: &#39;string&#39; },
+        {
+            name: &#39;attemptedOn&#39;,
+            type: &#39;string&#39;,
+            convert: function(value, record) {
+                return Chaching.utilities.ChachingRenderers.renderDateTimeWithFromNow(record.get(&#39;creationTime&#39;));
+            }
+        },
+        {
+            name: &#39;badgeClass&#39;,
+            type: &#39;string&#39;,
+            convert: function(value, record) {
+                var result = record.get(&#39;result&#39;);
+                if (result === &quot;Success&quot;)
+                    return &#39;label-success&#39;;
+                else return &#39;label-danger&#39;;
+            }
+        }
+    ]
+});
+</pre>
+</body>
+</html>

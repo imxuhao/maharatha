@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.tenants.TenantsGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.tenants.TenantsGridController&#39;
+    ],
+
+    controller: &#39;tenants-tenantsgrid&#39;,
+    xtype: &#39;host.tenants&#39;,
+    store: &#39;tenants.TenantsStore&#39;,
+    name: &#39;Tenants&#39;,
+    padding: 5,
+    gridId: 1,////*******Important to apply grid&#39;s userView setting
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Tenants&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Tenants.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Tenants.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Tenants.Delete&#39;),
+        changeFeature: abp.auth.isGranted(&#39;Pages.Tenants.ChangeFeatures&#39;)
+    },
+    headerButtonsConfig: [
+    {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;Tenants&quot;),
+        ui: &#39;headerTitle&#39;
+    }, {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;TenantsHeaderInfo&quot;),
+        ui: &#39;headerSubTitle&#39;
+    }, &#39;-&gt;&#39;, {
+        xtype: &#39;button&#39;,
+        scale: &#39;small&#39;,
+        ui: &#39;actionButton&#39;,
+        action:&#39;create&#39;,
+        text: abp.localization.localize(&quot;CreateNewTenant&quot;).toUpperCase(),
+        checkPermission: true,
+        iconCls: &#39;fa fa-plus&#39;,
+        routeName: &#39;host.tenants.create&#39;,
+        iconAlign: &#39;left&#39;
+    }],
+    requireExport: true,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable:true,
+    editingMode: &#39;row&#39;,
+    createNewMode:&#39;popup&#39;,
+    columnLines: true,
+    multiColumnSort: true,
+    editWndTitleConfig: {
+        title: app.localize(&#39;EditTenant&#39;),
+        iconCls: &#39;fa fa-pencil&#39;
+    },
+    createWndTitleConfig: {
+        title: app.localize(&#39;CreateNewTenant&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+    columns: [
+        {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;TenancyCodeName&#39;),
+            dataIndex: &#39;tenancyName&#39;,
+            stateId: &#39;tenancyName&#39;,
+            sortable: true,
+            width: &#39;28%&#39;,
+            groupable:true,
+            // simplest filter configuration
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;,
+                emptyText: app.localize(&#39;TTenancyCodeName&#39;)
+                //plugins: [{
+                //    ptype: &#39;saki-ficn&#39;
+                //    , iconCls: &#39;fa fa-info&#39;
+                //    , qtip: &#39;Enter name to search&#39;
+                //}]
+            }
+        }, {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;Name&#39;),
+            dataIndex: &#39;name&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;30%&#39;
+            // equivalent to filterField:true
+            // as textfield is created by default
+            ,
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;,
+                emptyText: app.localize(&#39;TName&#39;)
+            },
+            editor: {
+                xtype: &#39;textfield&#39;
+            }
+        },
+        /*{//uncomment if required
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;Edition&#39;),
+            dataIndex: &#39;editionDisplayName&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;20%&#39;,
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;,
+                emptyText: app.localize(&#39;TEdition&#39;)
+            },
+            editor: {
+                xtype: &#39;combobox&#39;,
+                name:&#39;editionDisplayName&#39;,
+                displayField: &#39;editionDisplayName&#39;,
+                valueField: &#39;editionId&#39;,
+                bind: {
+                    store: &#39;{editionsForComboBox}&#39;
+                },
+                listeners: {
+                    change:&#39;onEditionChange&#39;
+                }
+            }
+        },*/
+        {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;Active&#39;),
+            dataIndex: &#39;isActive&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;10%&#39;,
+            renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
+            filterField: {
+                xtype: &#39;combobox&#39;,
+                valueField: &#39;value&#39;,
+                displayField:&#39;text&#39;,
+                store: {
+                    fields:[{name:&#39;text&#39;},{name:&#39;value&#39;}],
+                    data:[{text:&#39;YES&#39;,value:&#39;true&#39;},{text:&#39;NO&#39;,value:&#39;false&#39;}]
+                }
+            },editor: {
+                xtype: &#39;checkboxfield&#39;,
+                inputValue:true,
+                name: &#39;isActive&#39;
+            }
+        },
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;CreationTime&#39;),
+             dataIndex: &#39;creationTime&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;25%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.renderDateTime,
+             filterField: {
+                 xtype: &#39;dateSearchField&#39;,
+                 dataIndex: &#39;creationTime&#39;,
+                 width: &#39;100%&#39;
+                 //emptyText: app.localize(&#39;TAdminEmailAddress&#39;)
+             }
+         }
+    ]
+});
+</pre>
+</body>
+</html>

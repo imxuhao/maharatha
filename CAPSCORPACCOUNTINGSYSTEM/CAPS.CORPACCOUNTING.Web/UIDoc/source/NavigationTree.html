@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.NavigationTree&#39;, {
+    extend: &#39;Ext.data.TreeStore&#39;,
+    autoload: true,
+    storeId: &#39;NavigationTree&#39;,
+    fields: [{ name: &#39;text&#39; },
+    { name: &#39;iconCls&#39; }, { name: &#39;name&#39; }, { name: &#39;url&#39; }, { name: &#39;viewType&#39; },{name:&#39;customData&#39;,type:&#39;auto&#39;}],
+
+    root: {
+        expanded: true
+
+    },
+    listeners: {
+        load: function (treeStore, items, e) {
+            treeStore.loadNavigationData(treeStore);
+        }
+    },
+    loadNavigationData: function (navStore) {
+        var me = this;
+        var originalMenu = abp.nav.menus.MainMenu;
+        var root = navStore.getRoot();
+        if (originalMenu &amp;&amp; originalMenu.items.length &gt; 0) {
+            for (var i = 0; i &lt; originalMenu.items.length; i++) {
+                var originalItem = originalMenu.items[i];
+                root.appendChild(me.transformData(originalItem));
+            }
+        }
+    },
+    transformData: function (originalItem) {
+        var transformedItem = [];
+        var me = this;
+
+        var newItem = {
+            text: null,
+            iconCls: null,
+            expanded: false,
+            name: null,
+            url: null,
+            children: [],
+            leaf: true
+        };
+        for (var key in originalItem) {
+            if (originalItem.hasOwnProperty(key)) {
+                switch (key) {
+                    case &quot;items&quot;:
+                        //recusively transform child items
+                        if (originalItem[key].length &gt; 0) {
+                            newItem.leaf = false;
+                            for (var i = 0; i &lt; originalItem[key].length; i++) {
+                                var subMenuItem = originalItem[key][i];
+                                newItem.children.push(me.transformData(subMenuItem));
+                            }
+                        }
+                        break;
+                    case &quot;displayName&quot;:
+                        newItem.text = originalItem[key];
+                        break;
+                    case &quot;icon&quot;:
+                        newItem.iconCls = originalItem[key];
+                        break;
+                    case &quot;name&quot;:
+                        newItem.name = originalItem[key];
+                        break;
+                    case &quot;url&quot;:
+                        newItem.url = originalItem[key];
+                        newItem.viewType = newItem.url;
+                        break;
+                    case &quot;customData&quot;:
+                        newItem.customData = originalItem[key];
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        transformedItem.push(newItem);
+        return newItem;
+    },
+});
+</pre>
+</body>
+</html>

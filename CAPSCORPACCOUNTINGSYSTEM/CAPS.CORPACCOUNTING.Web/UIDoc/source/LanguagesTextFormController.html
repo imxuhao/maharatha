@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.languages.LanguagesTextFormController&#39;, {
+    extend: &#39;Ext.app.ViewController&#39;,
+    alias: &#39;controller.languages-languagestextform&#39;,
+    getLanguageTextsonChange: function (form) {
+        var form = form.up(&#39;form&#39;);
+        var store = form.down(&#39;Languagetexts&#39;).getStore();
+        var data = store.getProxy();
+        var filterdata = form.getValues();
+        data.extraParams = {
+            &#39;TargetValueFilter&#39;: filterdata.targetValue,
+            &#39;TargetLanguageName&#39;: filterdata.targetLanguage,
+            &#39;BaseLanguageName&#39;: filterdata.baseLanguage,
+            &#39;SourceName&#39;: filterdata.source
+        }
+        store.load();
+    }
+    
+});
+</pre>
+</body>
+</html>

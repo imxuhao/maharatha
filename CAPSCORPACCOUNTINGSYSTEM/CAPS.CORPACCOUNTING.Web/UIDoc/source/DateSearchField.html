@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-components-filter-DateSearchField'>/**
+</span> * This file contains the custom datepicker control for search in grid.
+ * Author: Krishna Garad
+ * Date:04/12/2016
+ */
+Ext.define(&#39;Chaching.components.filter.DateSearchField&#39;, {
+    extend: &#39;Ext.form.field.Picker&#39;,
+    alias: &#39;widget.dateSearchField&#39;,
+    uses: [&#39;Ext.picker.Date&#39;, &#39;Ext.menu.DatePicker&#39;],
+<span id='Chaching-components-filter-DateSearchField-property-displayField'>    displayField: &#39;FilterValue&#39;,
+</span><span id='Chaching-components-filter-DateSearchField-property-valueField'>    valueField:&#39;FilterValue&#39;,
+</span><span id='Chaching-components-filter-DateSearchField-method-initComponent'>    initComponent: function () {
+</span>        var me = this;
+        var gridStore = Ext.create(&#39;Ext.data.ArrayStore&#39;, {
+            fields: [{ name: &#39;Before&#39;, type: &#39;date&#39;
+            }, {
+                name: &#39;After&#39;, type: &#39;date&#39;
+            }, {
+                name: &#39;On&#39;, type: &#39;date&#39;
+            }, { name: &#39;FilterValue&#39;, type: &#39;string&#39; }, { name: &#39;ColumnIndex&#39;, type: &#39;int&#39; }]
+        });
+        gridStore.add({ Before: &#39;&#39;, After: &#39;&#39;, On: &#39;&#39;, FilterValue: &#39;&#39; });
+        me.store = gridStore;
+        me.callParent(arguments);
+    },
+<span id='Chaching-components-filter-DateSearchField-method-createPicker'>    createPicker: function () {
+</span>        var me = this,
+	        opts = Ext.apply({
+	            shrinkWrapDock: 2,
+	            manageHeight: false,
+	            store: me.store,
+	            displayField: me.displayField,
+	            columns: me.getColumns(),
+	            columnLines: true,
+	            rowLines: true,
+	            forceFit: true,
+	            layout: &#39;fit&#39;,
+	            floating: true,
+	            multiSelect: true,
+	            cls: &#39;chaching-grid&#39;,
+	            selModel: {
+	                selType: &#39;checkboxmodel&#39;,
+	                showHeaderCheckbox:false,
+                    listeners: {
+                        beforeselect: me.onBeforeSelect,
+                        select: me.onRecordSelect,
+                        deselect:me.onRecordDeselect
+                    }
+	            },
+                plugins:[
+                {
+                    ptype: &#39;cellediting&#39;,
+                    pluginId: &#39;editingPluginSearch&#39;,
+                    clicksToEdit: 1
+                }],
+	            viewConfig: {
+	                stripeRows: true
+	            },
+                listeners: {
+                    beforecellclick: me.onBeforeRowCellClick
+                }
+
+	        }, me.listConfig);
+
+        var picker = me.picker = Ext.create(&#39;Ext.grid.Panel&#39;, opts);
+        me.picker = picker;
+        return picker;
+    },
+<span id='Chaching-components-filter-DateSearchField-method-onBeforeRowCellClick'>    onBeforeRowCellClick: function (view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+</span>        record.set(&#39;ColumnIndex&#39;, cellIndex);
+    },
+<span id='Chaching-components-filter-DateSearchField-method-onRecordDeselect'>    onRecordDeselect: function (selectionModel, record, index, eOpts) {
+</span>        var me = this,
+           ownerCt = me.view.ownerCt;
+        record.set(&#39;Before&#39;, &#39;&#39;);
+        record.set(&#39;After&#39;, &#39;&#39;);
+        record.set(&#39;On&#39;, &#39;&#39;);
+        record.set(&#39;FilterValue&#39;, &#39;&#39;);
+        ownerCt.ownerCmp.setValue(null);
+        ownerCt.ownerCmp.collapse();
+    },
+<span id='Chaching-components-filter-DateSearchField-method-onRecordSelect'>    onRecordSelect: function (selectionModel, record, index, eOpts) {
+</span>        var me = this,
+            ownerCt = me.view.ownerCt;
+        //build expected filter
+        var filterValue = undefined;
+        var after = Ext.Date.format(record.get(&#39;After&#39;), &#39;m/d/Y&#39;),
+            before = Ext.Date.format(record.get(&#39;Before&#39;), &#39;m/d/Y&#39;),
+            on = Ext.Date.format(record.get(&#39;On&#39;), &#39;m/d/Y&#39;);
+        if (after &amp;&amp; before) {
+            filterValue = &#39;range &#39; + after + &#39;,&#39; + before;
+        }
+        else if (after) {
+            filterValue = &#39;&gt;=&#39; + after;
+        } else if (before) {
+            filterValue = &#39;&lt;=&#39; + before;
+        }else if (on) {
+            filterValue = &#39;=&#39; + on;
+        }
+
+        if (filterValue) {
+            record.set(&#39;FilterValue&#39;, filterValue);
+            ownerCt.ownerCmp.setValue(filterValue);
+            ownerCt.ownerCmp.collapse();
+        }
+    },
+<span id='Chaching-components-filter-DateSearchField-method-onBeforeSelect'>    onBeforeSelect:function(selectionModel, record, index, eOpts) {
+</span>        var allowSelect = false;
+        //allow selection only when checkbox is clicked and filter fields has values
+        if ((record.get(&#39;After&#39;) || record.get(&#39;Before&#39;) || record.get(&#39;On&#39;)) &amp;&amp; record.get(&#39;ColumnIndex&#39;) === 0) {
+            allowSelect = true;
+        }
+        return allowSelect;
+
+    },
+<span id='Chaching-components-filter-DateSearchField-method-getColumns'>    getColumns:function() {
+</span>        var columns = [
+            {
+                xtype: &#39;gridcolumn&#39;,
+                text: &#39;After&#39;,
+                dataIndex: &#39;After&#39;,
+                width: &#39;30%&#39;,
+                menuDisabled: true,
+                sortable:false,
+                renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+                editor: {
+                    xtype: &#39;datefield&#39;,
+                    format:&#39;m/d/Y&#39;
+                }
+            },
+            {
+                xtype: &#39;gridcolumn&#39;,
+                text: &#39;Before&#39;,
+                dataIndex: &#39;Before&#39;,
+                width: &#39;30%&#39;,
+                menuDisabled: true,
+                sortable: false,
+                renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+                editor: {
+                    xtype: &#39;datefield&#39;,
+                    format: &#39;m/d/Y&#39;
+                }
+            },
+            {
+                xtype: &#39;gridcolumn&#39;,
+                text: &#39;On&#39;,
+                dataIndex: &#39;On&#39;,
+                width: &#39;30%&#39;,
+                menuDisabled: true,
+                sortable: false,
+                renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+                editor: {
+                    xtype: &#39;datefield&#39;,
+                    format: &#39;m/d/Y&#39;
+                }
+            }
+        ];
+        return columns;
+    },
+<span id='Chaching-components-filter-DateSearchField-method-alignPicker'>    alignPicker: function () {
+</span>        var me = this,
+            picker;
+
+        if (me.isExpanded) {
+            picker = me.getPicker();
+            if (me.matchFieldWidth) {
+
+                picker.setWidth(me.bodyEl.getWidth());
+            }
+            if (picker.isFloating()) {
+                me.doAlign();
+            }
+        }
+    }
+});</pre>
+</body>
+</html>

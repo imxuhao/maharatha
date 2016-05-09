@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
+    extend: &#39;Ext.grid.Panel&#39;,
+
+    requires: [
+        &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+        &#39;Chaching.view.common.grid.ChachingGridPanelModel&#39;,
+        &#39;Chaching.components.plugins.RowEditing&#39;
+    ],
+
+    controller: &#39;common-grid-chachinggridpanel&#39;,
+    viewModel: {
+        type: &#39;common-grid-chachinggridpanel&#39;
+    },
+<span id='global-cfg-requireMultiSearch'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {boolean} requireMultiSearch
+    */
+    requireMultiSearch: true,
+<span id='global-cfg-requireMultisort'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {boolean} requireMultisort
+    */
+    requireMultisort: true,
+<span id='global-cfg-requireGrouping'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {boolean} requireGrouping
+    */
+    requireGrouping:true,
+<span id='global-cfg-headerButtonsConfig'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {object[]} headerButtonsConfig
+    */
+    headerButtonsConfig: null,
+<span id='global-cfg-requireExport'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {boolean} requireExport
+    */
+    requireExport: false,
+<span id='global-cfg-selModelConfig'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {object} selModelConfig
+    */
+    selModelConfig: null,
+<span id='global-cfg-isEditable'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {boolean} isEditable
+    */
+    isEditable: false,
+<span id='global-cfg-editingMode'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {string} editingMode
+     * values are cell and row.
+    */
+    editingMode: null,
+<span id='global-cfg-createNewMode'>    /**
+</span>   * @hide
+   * @private
+   * @cfg {string} createNewMode
+     * values are inline(default based on editing mode), popup and tab
+   */
+    createNewMode:&#39;inline&#39;,
+    columnLines: true,
+    padding: 5,
+    frame: false,
+    layout: {
+        type: &#39;fit&#39;
+    },
+    showPagingToolbar: true,
+    ignoreCellDblClick: false,
+    cls: &#39;chaching-grid&#39;,
+<span id='global-cfg-actionColumnMenuItemsConfig'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {object[]} actionColumnMenuItemsConfig
+    */
+    actionColumnMenuItemsConfig: null,//grid related action columns menu items
+<span id='global-cfg-requireActionColumn'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {boolean} requireActionColumn
+    */
+    requireActionColumn: true,
+    name: &#39;&#39;,
+    enableLocking:false,
+    syncRowHeight: false,
+    editingModel: null,
+    editWndTitleConfig: null,
+    createWndTitleConfig: null,
+<span id='global-cfg-modulePermissions'>    /**
+</span>   * @hide
+   * @private
+   * @cfg {object} modulePermissions
+     * Override this config in child grid if has additional permissions
+   */
+    modulePermissions: undefined,
+    manageViewSetting: true,
+    activeUserViewId: null,
+    isSubMenuItemTab: false,
+    hideClearFilter:false,
+    initComponent: function () {
+        var me = this,
+            controller = me.getController(),
+            headerTbButtons = [],
+            plugins = [],
+            dockedItems = [],
+            gridColumns = me.columns,
+            features = [];
+       
+        if (!me.modulePermissions) {
+            me.modulePermissions = {
+                read: abp.auth.isGranted(&#39;Pages.&#39; + me.name),
+                create: abp.auth.isGranted(&#39;Pages.&#39; + me.name + &#39;.Create&#39;),
+                edit: abp.auth.isGranted(&#39;Pages.&#39; + me.name + &#39;.Edit&#39;),
+                destroy: abp.auth.isGranted(&#39;Pages.&#39; + me.name + &#39;.Delete&#39;)
+            };
+        }
+        //validate grid config
+        if (me.isEditable &amp;&amp; (me.editingMode === null || me.editingMode === undefined || me.editingMode === &quot;&quot;)) {
+            Ext.Error.raise(&#39;Please specify Editing mode for the grid&#39;);
+        }
+        if (me.headerButtonsConfig) {
+            for (var i = 0; i &lt; me.headerButtonsConfig.length; i++) {
+                var btn = me.headerButtonsConfig[i];
+                if (btn.action===&quot;create&quot;) {
+                    btn.handler = &quot;onCreateNewBtnClicked&quot;;
+                }
+                if (btn.checkPermission) {
+                    if (me.modulePermissions.create)
+                        headerTbButtons.push(btn);
+                } else headerTbButtons.push(btn);
+            }
+        }
+        if (me.requireExport) {
+            var exportBtn = {
+                xtype: &#39;splitbutton&#39;,
+                ui: &#39;actionButton&#39;,
+                //text: abp.localization.localize(&quot;Export&quot;).toUpperCase(),
+                iconCls: &#39;fa fa-download&#39;,
+                iconAlign: &#39;left&#39;,
+                tooltip: app.localize(&#39;Export&#39;),
+                menu: new Ext.menu.Menu({
+                    ui: &#39;accounts&#39;,
+                    items: [
+                        { text: abp.localization.localize(&quot;ExportToExcel&quot;).toUpperCase(), iconCls: &#39;fa fa-file-excel-o&#39;, itemId: &#39;ExportExcel&#39; },
+                        { text: abp.localization.localize(&quot;ExportToPDF&quot;).toUpperCase(), iconCls: &#39;fa fa-file-pdf-o&#39;, itemId: &#39;ExportPDF&#39; }
+                    ]
+                })
+            };
+            headerTbButtons.push(exportBtn);
+        }
+        //add clear filter button regardless of multisearch
+        var clearFilterBtn = {
+            iconCls: &#39;fa fa-filter&#39;,
+            width: 20,
+            tooltip: app.localize(&#39;ClearFilter&#39;),
+            ui: &#39;actionButton&#39;,
+            hidden:me.hideClearFilter,
+            listeners: {
+                click:&#39;clearGridFilters&#39;
+            }
+        }
+        headerTbButtons.push(clearFilterBtn);
+
+        if (headerTbButtons.length &gt; 0) {
+            var topBar =
+            {
+                xtype: &#39;toolbar&#39;,
+                ui: &#39;plain&#39;,
+                dock: &#39;top&#39;,
+                layout: {
+                    type: &#39;hbox&#39;,
+                    pack: &#39;left&#39;
+                },
+                //width: &#39;100%&#39;,
+                items: []
+            };
+            for (var j = 0; j &lt; headerTbButtons.length; j++) {
+                var item = headerTbButtons[j];
+                topBar.items.push(item);
+            }
+            dockedItems.push(topBar);
+
+        }
+
+        //add requireMultisort plugin if required requireMultisort functionality
+        if (me.requireMultisort) {
+            var multiSortFeature= {
+                ftype: &#39;ux-gmsrt&#39;,
+                displaySortOrder: true
+            }
+            //features.push(multiSortFeature);
+        }
+        //add grouping if required
+        if (me.requireGrouping) {
+            var groupingFeature = {
+                ftype: &#39;grouping&#39;,
+                hideGroupedHeader: true,
+                startCollapsed: true
+            };
+            features.push(groupingFeature);
+        }
+        if (me.requireMultiSearch) {
+            var mutisearch = {
+                ptype: &#39;saki-gms&#39;,
+                iconColumn: false,
+                clearItemIconCls: &#39;icon-settings&#39;,
+                pluginId: &#39;gms&#39;,
+                height: 32,
+                filterOnEnter: false,
+                viewModel: {
+                    type: &#39;common-grid-chachinggridpanel&#39;
+                }
+            };
+            plugins.push(mutisearch);
+        }
+
+        if (me.showPagingToolbar) {
+            var manageViewSettingsItem;
+            if (me.manageViewSetting) {
+                if (!me.gridId) {
+                    Ext.Error.raise(&#39;Please provide gridId&#39;);
+                }
+                manageViewSettingsItem = [
+                    {
+                        xtype: &#39;button&#39;,
+                        scale: &#39;small&#39;,
+                        text: app.localize(&#39;ManageUsersViewSetting&#39;),
+                        iconCls: &#39;fa fa-gears&#39;,
+                        iconAlign: &#39;left&#39;,
+                        ui: &#39;actionButton&#39;,
+                        handler:&#39;onManageViewClicked&#39;
+                    }
+                ];
+            }
+            var pagingToolBar = {
+                xtype: &#39;pagingtoolbar&#39;,
+                store: me.store,
+                displayInfo: true,
+                //inputItemWidth: 50,
+                dock: &#39;bottom&#39;,
+                width: &#39;100%&#39;,
+                tabIndex: -1,
+                ui: &#39;plainBottom&#39;,
+                items: manageViewSettingsItem
+
+            };
+            dockedItems.push(pagingToolBar);
+        }
+        
+        me.columns = me.applyGridViewSetting(gridColumns);
+        //add editing plugin
+        if (me.isEditable &amp;&amp; (me.modulePermissions.edit)) {
+            var editingModel;
+            switch (me.editingMode) {
+                case &quot;cell&quot;:
+                    editingModel = {
+                        ptype: &#39;cellediting&#39;,
+                        pluginId: &#39;editingPlugin&#39;,
+                        clicksToEdit: 2,
+                        listeners: {
+                            beforeedit: &#39;onBeforeGridEdit&#39;
+                        }
+                    }
+                    plugins.push(editingModel);
+                    if (!me.selModelConfig)
+                        me.selModel = &#39;cellmodel&#39;;
+                    break;
+                case &quot;row&quot;:
+                    editingModel = {
+                        ptype: &#39;chachingRowediting&#39;,
+                        pluginId: &#39;editingPlugin&#39;,
+                        clicksToEdit: 2,
+                        listeners: {
+                            beforeedit: &#39;onBeforeGridEdit&#39;,
+                            edit:&#39;onEditComplete&#39;
+                        }
+                    }
+                    plugins.push(editingModel);
+                    if (!me.selModelConfig)
+                        me.selModel = &#39;rowmodel&#39;;
+                    break;
+                default:
+                    break;
+            }
+            me.editingModel = editingModel;
+        }
+        if (me.selModelConfig) {
+            me.selModel = me.selModelConfig;
+        }
+        me.plugins = plugins;
+        me.features = features;
+        if (dockedItems.length &gt; 0) {
+            me.dockedItems = dockedItems;
+        }
+        me.callParent(arguments);
+    },
+    applyGridViewSetting:function(defaultSetting,apply,settingsToApply) {
+        var me = this,
+            controller = me.getController();
+        var actCol = me.getActionMenuColumn();
+        ///TODO change according to userViewSetting if any else continue with default columns
+        var columns = [];
+        //add actionColumn if required
+        if (me.requireActionColumn &amp;&amp; actCol) {
+            columns.push(actCol);
+        }
+
+        ///Check for usersDefaultGridViewSetting
+        var usersDefaultGridViewSettings = undefined;
+        if (settingsToApply) {
+            usersDefaultGridViewSettings = settingsToApply;
+        } else
+            usersDefaultGridViewSettings = Chaching.utilities.ChachingGlobals.usersDefaultGridViewSettings;
+
+        if (usersDefaultGridViewSettings &amp;&amp; usersDefaultGridViewSettings.length &gt; 0) {
+            var usersDefaultSettingForMe = me.getDefaultSettingForMe(usersDefaultGridViewSettings);
+            if (usersDefaultSettingForMe) {
+                if (apply) {
+                    //Fires when user apply selected view/when user reloads page with #tag
+                    var newInitialConfigs = [];
+                    for (var j = 0; j &lt; defaultSetting.length; j++) {
+                        var configCol = defaultSetting[j];
+                        if (configCol &amp;&amp; typeof(configCol.getInitialConfig) === &#39;function&#39;) {
+                            newInitialConfigs.push(configCol.initialConfig);
+                        }
+                    }
+                    var newColumns = [];
+                    if (me.requireActionColumn &amp;&amp; actCol) {
+                        newColumns.push(actCol);
+                    }
+                    newColumns = me.applySettings(newInitialConfigs, Ext.decode(usersDefaultSettingForMe.viewSettings), newColumns);
+                    me.reconfigure(me.getStore(), newColumns);
+                    me.updateLayout();
+                    return;
+                } else {
+                    //fires when node/menuitem is clicked
+                    columns = me.applySettings(defaultSetting, Ext.decode(usersDefaultSettingForMe.viewSettings), columns);
+                    return columns;
+                }
+            }
+        }
+        //add columns to columns array
+        for (var i = 0; i &lt; defaultSetting.length; i++) {
+            var col = defaultSetting[i];
+            columns.push(col);
+        }
+        return columns;
+    },
+    getActionMenuColumn: function () {
+        var me = this, controller = me.getController();
+        var menuItems = [];
+        var defaultMenuItems = me.getDefaultActionColumnMenuItems();
+        var userMenuItems = me.actionColumnMenuItemsConfig;
+
+        if (defaultMenuItems &amp;&amp; defaultMenuItems.length &gt; 0) {
+            for (var k = 0; k &lt; defaultMenuItems.length; k++) {
+                menuItems.push(defaultMenuItems[k]);
+            }
+        }      
+        if (userMenuItems &amp;&amp; userMenuItems.length &gt; 0) {
+            if (menuItems.length &gt; 0) {
+                menuItems.push(&#39;-&#39;);
+            }
+            for (var l = 0; l &lt; userMenuItems.length; l++) {
+                var userItem = {
+                    text: userMenuItems[l].text,
+                    iconCls: userMenuItems[l].iconCls,
+                    listeners: {
+                        click: controller[userMenuItems[l].clickActionName]
+                    }
+                }               
+                menuItems.push(userItem);
+            }
+        }
+        var actionCol = {
+            text: app.localize(&#39;Actions&#39;),
+            width: 70,
+            hidden: false,
+            sortable: false,
+            name: &#39;ActionColumn&#39;,
+            hideable: false,
+            menuDisabled: true,
+            renderer: function (value, cell) {
+                var id = Ext.id();
+                var widgetRec = cell.record;
+                var widgetCol = cell.column;
+                Ext.Function.defer(function () {
+                    var button = Ext.create(&#39;Ext.button.Button&#39;, {
+                        ui: &#39;actionMenuButton&#39;,
+                        scale: &#39;small&#39;,
+                        height: 22,
+                        width: 50,
+                        //text: app.localize(&#39;Actions&#39;),
+                        iconCls: &#39;icon-settings&#39;,
+                        iconAlign: &#39;left&#39;,
+                        widgetRec: widgetRec,
+                        widgetCol: widgetCol,
+                        menu: new Ext.menu.Menu({
+                            ui: &#39;accounts&#39;,
+                            items: menuItems
+                        }),
+                        listeners: {
+                            menushow: function (btn) {
+                                btn.menu.widgetRecord = btn.widgetRec;
+                                btn.menu.widgetColumn = btn.widgetCol;
+                            }
+                        }
+                    });
+                    if (Ext.get(id)) {
+                        button.render(Ext.get(id));
+                    }
+                }, 1);
+                return &#39;&lt;div id=&quot;&#39; + id + &#39;&quot;&gt;&lt;/div&gt;&#39;;
+
+            }
+        }
+        if (menuItems.length &gt; 0)
+            return actionCol;
+    },
+    applySettings: function (definedColumns, usersDefaultSetting, outValue) {
+        var me = this,
+            myStore = me.getStore();
+        var defaultSettingColumns = usersDefaultSetting.column;
+        //loop setting object to get in order
+        for (var i = 0; i &lt; defaultSettingColumns.length; i++) {
+            var settingCol = defaultSettingColumns[i];
+            for (var j = 0; j &lt; definedColumns.length; j++) {
+                var definedCol = definedColumns[j];
+                if (settingCol.dataIndex===definedCol.dataIndex) {
+                    definedCol.width = settingCol.width;
+                    definedCol.hidden = settingCol.hidden;
+                    outValue.push(definedCol);
+                    break;
+                }
+            }
+        }
+        var groupInfo = usersDefaultSetting.groupInfo;
+        if (typeof (myStore) === &#39;string&#39;) {
+            myStore = Ext.getStore(myStore);
+        }
+        if (groupInfo &amp;&amp; groupInfo.isGrouped) {
+            myStore.group(groupInfo.groupField, groupInfo.groupDir);
+        } else if (myStore.isGrouped()) {
+            myStore.group(null);
+        }
+        return outValue;
+    },
+    getDefaultSettingForMe: function (usersDefaultGridViewSettings) {
+        var me = this,
+            returnVal = undefined,
+            gridId = me.gridId;
+        for (var i = 0; i &lt; usersDefaultGridViewSettings.length; i++) {
+            var defaultSetting = usersDefaultGridViewSettings[i];
+            if (defaultSetting.gridId === gridId) {
+                returnVal = defaultSetting;
+                me.activeUserViewId = defaultSetting.userViewId;
+                break;
+            }
+        }
+        return returnVal;
+    },
+    getDefaultActionColumnMenuItems: function () {
+        var me = this, controller = me.getController();
+        var defaultMenuItems = [];
+        //check for permission from abp
+        if (me.modulePermissions.edit) {
+            //full editing is required only when create mode is popup/tab
+            if (me.createNewMode === &quot;popup&quot; || me.createNewMode === &quot;tab&quot;) {
+                var editMenuItem = {
+                    text: app.localize(&#39;Edit&#39;),
+                    iconCls: &#39;fa fa-pencil&#39;,
+                    eventListenerName: &#39;editActionClicked&#39;,
+                    listeners: {
+                        click: function(menu, item, e, eOpts) {
+                            return controller.editActionClicked(menu, item, e, eOpts);
+                        }
+                    }
+                };
+                defaultMenuItems.push(editMenuItem);
+            }
+
+            if (me.isEditable) {
+                var quickEditMenuItem= {
+                    text: app.localize(&#39;QuickEdit&#39;), iconCls: &#39;fa fa-pencil-square-o &#39;,
+                    eventListenerName: &#39;quickEditActionClicked&#39;,
+                    listeners: {
+                        click: function (menu, item, e, eOpts) {
+                            return controller.quickEditActionClicked(menu, item, e, eOpts);
+                        }
+                    }
+                }
+                defaultMenuItems.push(quickEditMenuItem);
+            }
+        }
+        if (me.modulePermissions.destroy) {
+            var deleteMenuItem = {
+                text: app.localize(&#39;Delete&#39;), iconCls: &#39;fa fa-recycle&#39;,
+                eventListenerName: &#39;deleteActionClicked&#39;,
+                listeners: {
+                    click: function (menu, item, e, eOpts) {
+                        return controller.deleteActionClicked(menu, item, e, eOpts);
+                    }
+                }
+            };
+            defaultMenuItems.push(deleteMenuItem);
+        }
+        return defaultMenuItems;
+    }
+
+
+});
+</pre>
+</body>
+</html>

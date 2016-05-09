@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.languages.LanguageTextsStore&#39;, {
+    extend: &#39;Chaching.store.base.BaseStore&#39;,
+    model: &#39;Chaching.model.languages.LanguageTextsModel&#39;,  
+    proxy: {
+        type: &#39;chachingProxy&#39;,
+        extraParams: {
+            &#39;TargetValueFilter&#39;:null,
+            &#39;TargetLanguageName&#39;:null,
+            &#39;BaseLanguageName&#39;:null,
+            &#39;SourceName&#39;: null
+        },
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+        headers: {
+            &#39;Accept&#39;: &#39;application/json, text/plain, */*&#39;,
+            &#39;Content-Type&#39;:&#39;application/json;charset=UTF-8&#39;
+        },
+        writer: {
+            type:&#39;json&#39;
+        },
+        api: {           
+            read: abp.appPath + &#39;api/services/app/language/GetLanguageTexts&#39;,
+            update: abp.appPath + &#39;api/services/app/language/UpdateLanguageText&#39;,          
+        },
+        reader: {
+            type: &#39;json&#39;,
+            rootProperty: &#39;result.items&#39;,
+            totalProperty: &#39;result.totalCount&#39;
+        }
+    },
+    idPropertyField: &#39;id&#39;,
+   listeners: {
+       beforeload:function(store, operation, eOpts) {
+           var proxy = operation.getProxy(),
+               params = proxy.getExtraParams();
+           if (params &amp;&amp; (!params.TargetValueFilter || !params.TargetLanguageName || !params.BaseLanguageName || !params.SourceName)) {
+               return false;
+           }
+       }
+   }
+});</pre>
+</body>
+</html>

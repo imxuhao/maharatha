@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.financials.accounts.ChartOfAccountsModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+        searchEntityName: &#39;COA&#39;
+    },
+    fields: [
+            { name: &#39;coaId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+            { name: &#39;caption&#39;, type: &#39;string&#39; },
+            { name: &#39;description&#39;, type: &#39;string&#39; },
+            { name: &#39;isApproved&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isPrivate&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isCorporate&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isNumeric&#39;, type: &#39;boolean&#39; },
+            { name: &#39;standardGroupTotalId&#39;, type: &#39;int&#39; },
+            { name: &#39;linkChartOfAccountID&#39;, type: &#39;int&#39; },
+            { name: &#39;linkChartOfAccountName&#39;, type: &#39;string&#39; },
+            { name: &#39;standardGroupTotal&#39;, type: &#39;string&#39; }
+    ]
+});
+</pre>
+</body>
+</html>

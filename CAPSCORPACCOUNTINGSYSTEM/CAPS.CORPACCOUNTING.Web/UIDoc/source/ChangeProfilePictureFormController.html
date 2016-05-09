@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.profile-changeprofilepicture-changeprofilepictureform&#39;,
+    onSaveClicked: function (btn) {        
+        var me = this;
+        view = me.getView();
+        data = view.dataobject;
+        Ext.Ajax.request({
+            url: abp.appPath + &#39;api/services/app/profile/UpdateProfilePicture&#39;,
+            jsonData: Ext.encode(data),
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {                   
+                    var wnd = view.up(&#39;window&#39;);
+                    Ext.destroy(wnd);
+                    if (Chaching.app)
+                        main = Chaching.app.getMainView();
+                    if (main)
+                        headerview = main.down(&#39;chachingheader&#39;);
+                    if (headerview) {
+                        var img = headerview.down(&#39;image[itemId=AccountPic]&#39;);
+                        var button = headerview.down(&#39;*[itemId=AccountBtn]&#39;);
+                        var src = &#39;data:image/jpeg;base64,&#39; + res.result;
+                        if (button.icon)
+                            button.setIcon(src);
+                        else
+                            img.setSrc(src);
+                        Ext.toast(app.localize(&#39;YourProfilePictureHasChangedSuccessfully&#39;).initCap());
+                    }
+                }
+                else {
+                    Ext.toast(res.error.message);
+                }
+            },
+            failure: function (response) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.error.message);
+                console.log(response);
+            }
+        })
+    },
+    filechange: function (file,e,value) {             
+        var me = this;
+        view = me.getView();
+        if (file.value==&quot;&quot;)
+        {
+            return;
+        }
+        var newvalue = file.value.replace(/^c:\\fakepath\\/i, &#39;&#39;);
+        file.setRawValue(newvalue);
+        if (file.value &amp;&amp; !/^.*\.(Png|gif|jpg|jpeg|jfif|tiff|bmp)$/i.test(file.value)) {
+            var myMsg = Ext.create(&#39;Ext.window.MessageBox&#39;, {
+                closeAction: &#39;destroy&#39;,
+                ui: &#39;chachingWindow&#39;
+            }).show({
+                title: &quot;Error&quot;,
+                message: app.localize(&#39;ProfilePicture_Warn_FileType&#39;).initCap(),
+                buttons: Ext.Msg.OKCANCEL,
+                icon: Ext.Msg.INFO
+            });
+            return;
+        };
+        if (file.fileInputEl &amp;&amp; file.fileInputEl.dom &amp;&amp; file.fileInputEl.dom.files &amp;&amp; file.fileInputEl.dom.files[0].size &gt; 2097152) {
+
+            var myMsg = Ext.create(&#39;Ext.window.MessageBox&#39;, {                
+                closeAction: &#39;destroy&#39;,
+                ui: &#39;chachingWindow&#39;
+            }).show({
+                title: &quot;Error&quot;,
+                message: app.localize(&#39;ProfilePicture_Warn_SizeLimit&#39;).initCap(),
+                buttons: Ext.Msg.OKCANCEL,
+                icon: Ext.Msg.INFO
+            });          
+            return;
+        }       
+        view.submit({
+            url: abp.appPath + &#39;Profile/UploadProfilePicture&#39;,
+            success: function (form, response) {
+                if (response.result) {
+                    form.findField(&#39;changeprofilepicture&#39;).value = &quot;gjhsagjd&quot;
+                    var data = response.result.result;
+                    if (response.success) {
+                        view.filePath = data.tempFilePath;
+                        view.dataobject = data;
+                        Ext.toast(app.localize(&#39;UploadSuccess&#39;).initCap());
+                    }
+                }
+            },
+            failure: function (form, action) {                
+                var myMsg = Ext.create(&#39;Ext.window.MessageBox&#39;, {
+                    closeAction: &#39;destroy&#39;,
+                    ui: &#39;chachingWindow&#39;
+                }).show({
+                    title: &quot;Error&quot;,
+                    message: app.localize(&#39;Failed&#39;).initCap(),
+                    buttons: Ext.Msg.OKCANCEL,
+                    icon: Ext.Msg.INFO
+                });              
+            }
+        });
+
+    }
+
+});
+</pre>
+</body>
+</html>

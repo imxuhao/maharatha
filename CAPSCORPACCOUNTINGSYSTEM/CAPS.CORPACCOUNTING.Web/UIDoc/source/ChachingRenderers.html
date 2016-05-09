@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.utilities.ChachingRenderers&#39;, {
+    singleton: true,
+    dateSearchFieldRenderer: function (value) {
+        return Ext.Date.format(value, &#39;m/d/Y&#39;);
+    },
+    statusRenderer: function (val) {
+        if (val) return &#39;YES&#39;;
+        else return &#39;NO&#39;;
+    },
+    unlinkedaccount: function (value, cell) {       
+        var gridController = this.getController(),
+            view = gridController.getView();
+        var id = Ext.id();
+        var widgetRec = cell.record;
+        var widgetCol = cell.column;
+        Ext.Function.defer(function () {
+            var button = Ext.create(&#39;Ext.button.Button&#39;, {
+                scale: &#39;small&#39;,
+                width: &#39;100%&#39;,
+                iconCls: &#39;fa fa-trash&#39;,
+                iconAlign: &#39;left&#39;,
+                widgetRec: widgetRec,
+                widgetCol: widgetCol,
+                gridControl: view,
+                listeners: {
+                    click: gridController.unlinkUser
+                },
+            });
+            if (Ext.get(id)) {
+                button.render(Ext.get(id));
+            }
+        }, 1);
+        return &#39;&lt;div id=&quot;&#39; + id + &#39;&quot;&gt;&lt;/div&gt;&#39;;
+
+    },
+    loginaccount: function (value, cell) {
+        var gridController = this.getController(),
+           view = gridController.getView();
+        var id = Ext.id();
+        var widgetRec = cell.record;
+        var widgetCol = cell.column;
+        Ext.Function.defer(function () {
+            var button = Ext.create(&#39;Ext.button.Button&#39;, {
+                ui: &#39;actionMenuButton&#39;,
+                scale: &#39;small&#39;,
+                width: &#39;100%&#39;,
+                text: app.localize(&#39;Login&#39;),
+                iconCls: &#39;fa fa-sign-in&#39;,
+                iconAlign: &#39;left&#39;,
+                widgetRec: widgetRec,
+                widgetCol: widgetCol,
+                listeners: {
+                    click: gridController.login
+                },
+            });
+            if (Ext.get(id)) {
+                button.render(Ext.get(id));
+            }
+        }, 1);
+        return &#39;&lt;div id=&quot;&#39; + id + &#39;&quot;&gt;&lt;/div&gt;&#39;;
+
+    },
+    auditLogView: function (value, cell) {
+        var gridController = this.getController(),
+            view = gridController.getView();
+        var id = Ext.id();
+        var widgetRec = cell.record;
+        var widgetCol = cell.column;
+        Ext.Function.defer(function () {
+            var button = Ext.create(&#39;Ext.button.Button&#39;, {
+                scale: &#39;small&#39;,
+                width: &#39;40%&#39;,
+                iconCls: &#39;fa fa-search&#39;,
+                iconAlign: &#39;left&#39;,
+                widgetRec: widgetRec,
+                widgetCol: widgetCol,
+                gridControl: view,
+                //listeners: {
+                //    click: gridController.auditLogView
+                //},
+            });
+            if (Ext.get(id)) {
+                button.render(Ext.get(id));
+            }
+        }, 1);
+        return &#39;&lt;div id=&quot;&#39; + id + &#39;&quot;&gt;&lt;/div&gt;&#39;;
+
+    },
+    auditLogExceptionIcon: function (val, meta, record, rowIndex) {
+        if (Ext.isEmpty(Ext.util.Format.trim(record.get(&#39;exception&#39;))))
+            return &#39;&lt;i class=&quot;fa fa-check-circle font-green&quot;  style=&quot;color:#32c5d2&quot; &gt;&lt;/i&gt;&#39;;
+        else
+            return &#39;&lt;i class=&quot;fa fa-warning font-yellow-gold&quot;  style=&quot;color:#32c5d2&quot;&gt;&lt;/i&gt;&#39;;
+    },// hh:mm:ss
+    renderDateOnly:function(value) {
+        if (value) {
+            return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateFormat);
+        }
+        return &#39;&#39;;
+    },
+    renderDateTime: function (value) {
+        if (value) {
+            return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeFormat);
+        }
+        return &#39;&#39;;
+    },
+    renderDateTimeSeconds: function (value) {
+        if (value) {
+            return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormat);
+        }
+        return &#39;&#39;;
+    },
+    renderDateTimeWithFromNow:function(value) {
+        if (value) {
+            return moment(value).fromNow() + &#39; (&#39; + moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormat) + &#39;)&#39;;
+        }
+        return &#39;&#39;;
+    },
+    rightWrongMarkRenderer: function (val, meta, record, rowIndex) {
+        if (val)
+            return &#39;&lt;i class=&quot;fa fa-check font-green&quot;  style=&quot;color:#32c5d2&quot; &gt;&lt;/i&gt;&#39;;
+        else
+            return &#39;&lt;i class=&quot;fa fa-close font-yellow-gold&quot;  style=&quot;color:#E00353&quot;&gt;&lt;/i&gt;&#39;;
+    },
+    languagesTextsEditIcon: function (val, meta, record, rowIndex) {        
+            return &#39;&lt;i class=&quot;fa fa-edit&quot; &gt;&lt;/i&gt;&#39;;       
+    },
+    languageIconRenderer: function (val, meta, record, rowIndex) {
+        return &#39;&lt;i class=&quot;famfamfam-flag &#39; + record.get(&#39;icon&#39;) + &#39;&quot; style=&quot;display: inline-block;margin-right: 10px; !important&quot; &gt;&lt;/i&gt;&lt;span&gt;&#39; + val + &#39;&lt;/span&gt;&#39;;
+    }
+});</pre>
+</body>
+</html>

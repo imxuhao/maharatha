@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-view-phone-main-MainController'>/**
+</span> * This view controller extends the MainController for the phone profile. The main
+ * difference is that the navigation tree (and the logo) are removed from the main
+ * view and floated out on demand.
+ */
+Ext.define(&#39;Chaching.view.phone.main.MainController&#39;, {
+    extend: &#39;Chaching.view.main.MainController&#39;,
+    alias: &#39;controller.phone-main&#39;,
+
+<span id='Chaching-view-phone-main-MainController-property-slidOutCls'>    slidOutCls: &#39;main-nav-slid-out&#39;,
+</span>
+<span id='Chaching-view-phone-main-MainController-property-showNavigation'>    showNavigation: false,
+</span>
+<span id='Chaching-view-phone-main-MainController-method-init'>    init: function (view) {
+</span>        var me = this,
+            refs = me.getReferences(),
+            logo = refs.logo,
+            nav;
+
+        me.callParent([ view ]);
+
+        nav = me.nav;
+
+        // Detach the navigation container so we can float it in from the edge.
+        nav.getParent().remove(nav, false);
+        nav.addCls([&#39;x-floating&#39;, &#39;main-nav-floated&#39;, me.slidOutCls]);
+        nav.setScrollable(true);
+        nav.getRefOwner = function () {
+            // we still need events to route here or our base
+            return view;
+        };
+
+        // Also, transplant the logo from the toolbar to be docked at the top of the
+        // floating nav.
+        nav.add(logo);
+        logo.setDocked(&#39;top&#39;);
+
+        Ext.getBody().appendChild(nav.element);
+    },
+
+<span id='Chaching-view-phone-main-MainController-method-onNavigationItemClick'>    onNavigationItemClick: function (tree, info) {
+</span>        if (info.select) {
+            // If we click a selectable node, slide out the navigation tree. We cannot
+            // use select event for this since the user may tap the currently selected
+            // node. We don&#39;t want to slide out, however, if the tap is on an unselectable
+            // thing (such as a parent node).
+            this.setShowNavigation(false);
+        }
+    },
+
+<span id='Chaching-view-phone-main-MainController-method-onNavigationTreeSelectionChange'>    onNavigationTreeSelectionChange: function (tree, node) {
+</span>        this.setShowNavigation(false);
+
+        this.callParent(arguments);
+    },
+
+<span id='Chaching-view-phone-main-MainController-method-updateShowNavigation'>    updateShowNavigation: function (showNavigation, oldValue) {
+</span>        // Ignore the first update since our initial state is managed specially. This
+        // logic depends on view state that must be fully setup before we can toggle
+        // things.
+        //
+        // NOTE: We do not callParent here; we replace its logic since we took over
+        // the navigation container.
+        //
+        if (oldValue !== undefined) {
+            var me = this,
+                nav = me.nav,
+                mask = me.mask;
+
+            if (showNavigation) {
+                me.mask = mask = Ext.Viewport.add({
+                    xtype: &#39;loadmask&#39;,
+                    userCls: &#39;main-nav-mask&#39;
+                });
+
+                mask.element.on({
+                    tap: me.onToggleNavigationSize,
+                    scope: me,
+                    single: true
+                });
+            } else if (mask) {
+                mask.destroy();
+                me.mask = null;
+            }
+
+            nav.toggleCls(me.slidOutCls, !showNavigation);
+        }
+    }
+});
+</pre>
+</body>
+</html>

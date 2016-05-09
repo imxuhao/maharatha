@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-tree-Column'>/**
+</span> * Provides indentation and folder structure markup for a Tree taking into account
+ * depth and position within the tree hierarchy.
+ */
+Ext.define(&#39;Ext.tree.Column&#39;, {
+    extend: &#39;Ext.grid.column.Column&#39;,
+    alias: &#39;widget.treecolumn&#39;,
+
+<span id='Ext-tree-Column-cfg-tdCls'>    tdCls: Ext.baseCSSPrefix + &#39;grid-cell-treecolumn&#39;,
+</span>
+<span id='Ext-tree-Column-property-autoLock'>    autoLock: true,
+</span><span id='Ext-tree-Column-cfg-lockable'>    lockable: false,
+</span><span id='Ext-tree-Column-cfg-draggable'>    draggable: false,
+</span><span id='Ext-tree-Column-cfg-hideable'>    hideable: false,
+</span>
+<span id='Ext-tree-Column-property-iconCls'>    iconCls: Ext.baseCSSPrefix + &#39;tree-icon&#39;,
+</span><span id='Ext-tree-Column-property-checkboxCls'>    checkboxCls: Ext.baseCSSPrefix + &#39;tree-checkbox&#39;,
+</span><span id='Ext-tree-Column-property-elbowCls'>    elbowCls: Ext.baseCSSPrefix + &#39;tree-elbow&#39;,
+</span><span id='Ext-tree-Column-property-expanderCls'>    expanderCls: Ext.baseCSSPrefix + &#39;tree-expander&#39;,
+</span><span id='Ext-tree-Column-property-textCls'>    textCls: Ext.baseCSSPrefix + &#39;tree-node-text&#39;,
+</span><span id='Ext-tree-Column-property-innerCls'>    innerCls: Ext.baseCSSPrefix + &#39;grid-cell-inner-treecolumn&#39;,
+</span><span id='Ext-tree-Column-property-customIconCls'>    customIconCls: Ext.baseCSSPrefix + &#39;tree-icon-custom&#39;,
+</span><span id='Ext-tree-Column-property-isTreeColumn'>    isTreeColumn: true,
+</span>
+<span id='Ext-tree-Column-property-cellTpl'>    cellTpl: [
+</span>        &#39;&lt;tpl for=&quot;lines&quot;&gt;&#39;,
+            &#39;&lt;div class=&quot;{parent.childCls} {parent.elbowCls}-img &#39;,
+            &#39;{parent.elbowCls}-&lt;tpl if=&quot;.&quot;&gt;line&lt;tpl else&gt;empty&lt;/tpl&gt;&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;div class=&quot;{childCls} {elbowCls}-img {elbowCls}&#39;,
+            &#39;&lt;tpl if=&quot;isLast&quot;&gt;-end&lt;/tpl&gt;&lt;tpl if=&quot;expandable&quot;&gt;-plus {expanderCls}&lt;/tpl&gt;&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+        &#39;&lt;tpl if=&quot;checked !== null&quot;&gt;&#39;,
+            &#39;&lt;div role=&quot;button&quot; {ariaCellCheckboxAttr}&#39;,
+                &#39; class=&quot;{childCls} {checkboxCls}&lt;tpl if=&quot;checked&quot;&gt; {checkboxCls}-checked&lt;/tpl&gt;&quot;&gt;&lt;/div&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;icon&quot;&gt;&lt;img src=&quot;{blankUrl}&quot;&lt;tpl else&gt;&lt;div&lt;/tpl&gt;&#39;,
+            &#39; role=&quot;presentation&quot; class=&quot;{childCls} {baseIconCls} {customIconCls} &#39;,
+            &#39;{baseIconCls}-&lt;tpl if=&quot;leaf&quot;&gt;leaf&lt;tpl else&gt;&lt;tpl if=&quot;expanded&quot;&gt;parent-expanded&lt;tpl else&gt;parent&lt;/tpl&gt;&lt;/tpl&gt; {iconCls}&quot; &#39;,
+            &#39;&lt;tpl if=&quot;icon&quot;&gt;style=&quot;background-image:url({icon})&quot;/&gt;&lt;tpl else&gt;&gt;&lt;/div&gt;&lt;/tpl&gt;&#39;,
+        &#39;&lt;tpl if=&quot;href&quot;&gt;&#39;,
+            &#39;&lt;a href=&quot;{href}&quot; role=&quot;link&quot; target=&quot;{hrefTarget}&quot; class=&quot;{textCls} {childCls}&quot;&gt;{value}&lt;/a&gt;&#39;,
+        &#39;&lt;tpl else&gt;&#39;,
+            &#39;&lt;span class=&quot;{textCls} {childCls}&quot;&gt;{value}&lt;/span&gt;&#39;,
+        &#39;&lt;/tpl&gt;&#39;
+    ],
+
+<span id='Ext-tree-Column-property-uiFields'>    // fields that will trigger a change in the ui that aren&#39;t likely to be bound to a column
+</span>    uiFields: {
+        checked: 1,
+        icon: 1,
+        iconCls: 1
+    },
+
+<span id='Ext-tree-Column-property-rowFields'>    // fields that requires a full row render
+</span>    rowFields: {
+        expanded: 1,
+        loaded: 1,
+        expandable: 1,
+        leaf: 1,
+        loading: 1,
+        qtip: 1,
+        qtitle: 1,
+        cls: 1
+    },
+
+<span id='Ext-tree-Column-method-initComponent'>    initComponent: function() {
+</span>        var me = this;
+
+        me.rendererScope = me.scope;
+        me.setupRenderer();
+
+        // This always uses its own renderer.
+        // Any custom renderer is used as an inner renderer to produce the text node of a tree cell.
+        me.innerRenderer = me.renderer;
+
+        me.renderer = me.treeRenderer;
+
+        me.callParent();
+
+        me.scope = me;
+        
+        me.hasCustomRenderer = me.innerRenderer &amp;&amp; me.innerRenderer.length &gt; 1;
+    },
+
+<span id='Ext-tree-Column-method-treeRenderer'>    treeRenderer: function(value, metaData, record, rowIdx, colIdx, store, view){
+</span>        var me = this,
+            cls = record.get(&#39;cls&#39;),
+            rendererData;
+
+        // The initial render will inject the cls into the TD&#39;s attributes.
+        // If cls is ever *changed*, then the full rendering path is followed.
+        if (metaData &amp;&amp; cls) {
+            metaData.tdCls += &#39; &#39; + cls;
+        }
+
+        rendererData = me.initTemplateRendererData(value, metaData, record, rowIdx, colIdx, store, view);
+        
+        return me.getTpl(&#39;cellTpl&#39;).apply(rendererData);
+    },
+    
+<span id='Ext-tree-Column-method-initTemplateRendererData'>    initTemplateRendererData: function(value, metaData, record, rowIdx, colIdx, store, view) {
+</span>        var me = this,
+            innerRenderer = me.innerRenderer,
+            data = record.data,
+            parent = record.parentNode,
+            rootVisible = view.rootVisible,
+            lines = [],
+            parentData;
+        
+        while (parent &amp;&amp; (rootVisible || parent.data.depth &gt; 0)) {
+            parentData = parent.data;
+            lines[rootVisible ? parentData.depth : parentData.depth - 1] =
+                    parent.isLastVisible() ? 0 : 1;
+            parent = parent.parentNode;
+        }
+        
+        return {
+            record: record,
+            baseIconCls: me.iconCls,
+            customIconCls: (data.icon || data.iconCls) ? me.customIconCls : &#39;&#39;,
+            iconCls: data.iconCls,
+            icon: data.icon,
+            checkboxCls: me.checkboxCls,
+            checked: data.checked,
+            elbowCls: me.elbowCls,
+            expanderCls: me.expanderCls,
+            textCls: me.textCls,
+            leaf: data.leaf,
+            expandable: record.isExpandable(),
+            expanded: data.expanded,
+            isLast: record.isLastVisible(),
+            blankUrl: Ext.BLANK_IMAGE_URL,
+            href: data.href,
+            hrefTarget: data.hrefTarget,
+            lines: lines,
+            metaData: metaData,
+            // subclasses or overrides can implement a getChildCls() method, which can
+            // return an extra class to add to all of the cell&#39;s child elements (icon,
+            // expander, elbow, checkbox).  This is used by the rtl override to add the
+            // &quot;x-rtl&quot; class to these elements.
+            childCls: me.getChildCls ? me.getChildCls() + &#39; &#39; : &#39;&#39;,
+            value: innerRenderer ? innerRenderer.apply(me.rendererScope, arguments) : value
+        };
+    },
+
+<span id='Ext-tree-Column-method-shouldUpdateCell'>    shouldUpdateCell: function(record, changedFieldNames) {
+</span>        // For the TreeColumn, if any of the known tree column UI affecting fields are updated
+        // the cell should be updated in whatever way.
+        // 1 if a custom renderer (not our default tree cell renderer), else 2.
+        var me = this,
+            i = 0,
+            len, field;
+
+        if (changedFieldNames) {
+            len = changedFieldNames.length;
+
+            for (; i &lt; len; ++i) {
+                field = changedFieldNames[i];
+                // Check for fields which always require a full row update.
+                if (me.rowFields[field]) {
+                    return 1;
+                }
+
+                // Check for fields which require this column to be updated.
+                // The TreeColumn&#39;s treeRenderer is not a custom renderer.
+                if (me.uiFields[field]) {
+                    return 2;
+                }
+            }
+        }
+
+        return me.callParent([record, changedFieldNames]);
+    }
+});
+</pre>
+</body>
+</html>

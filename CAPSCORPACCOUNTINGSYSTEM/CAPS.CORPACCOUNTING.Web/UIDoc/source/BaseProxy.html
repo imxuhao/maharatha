@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.data.proxy.BaseProxy&#39;, {
+    extend: &#39;Ext.data.proxy.Ajax&#39;,
+    alias: &#39;proxy.chachingProxy&#39;,
+    timeout: 6000000,
+    limitParam: &#39;maxResultCount&#39;,
+    startParam: &#39;skipCount&#39;,
+    sortParam: &#39;sortList&#39;,
+    filterParam: &#39;filters&#39;,
+    pageParam: &#39;&#39;,
+    headers: {
+        &#39;Accept&#39;: &#39;application/json, text/plain, */*&#39;,
+        &#39;Content-Type&#39;: &#39;application/json;charset=UTF-8&#39;
+    },
+    actionMethods: { create: &#39;POST&#39;, read: &#39;GET&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+    paramsAsJson: true,
+
+    reader: {
+        type: &#39;json&#39;,
+        rootProperty: &#39;result.items&#39;,
+        totalProperty: &#39;result.totalCount&#39;
+    },
+    writer: {
+        type: &#39;json&#39;
+    },
+    encodeFilters: function(filters) {
+        var filterArray = [];
+        if (filters) {
+            for (var i = 0; i &lt; filters.length; i++) {
+                var filterObject = {
+                    Entity: filters[i].entity,
+                    Property: filters[i].getProperty(),
+                    SearchTerm: filters[i].searchTerm,
+                    SearchTerm2: filters[i].searchTerm2,
+                    Comparator: filters[i].comparator,
+                    DataType: filters[i].dataType
+                };
+                filterArray.push(filterObject);
+            }
+            return filterArray;
+        }
+        return filters;
+    },
+    encodeSorters: function (sorters) {
+        var me = this,
+            model = me.getModel(),
+            entityName = model.$config.values.searchEntityName;
+        var sortersArray = [];
+        if (sorters) {
+            for (var i = 0; i &lt; sorters.length; i++) {
+                var sortObject = {
+                    Entity: entityName,
+                    Property: sorters[i].getProperty(),
+                    Order: sorters[i].getDirection()
+                };
+                sortersArray.push(sortObject);
+            }
+            return sortersArray;
+        }
+        return sorters;
+    },
+    listeners:
+    {
+        exception: function(proxy, request, operation) {
+            if (request.responseText != undefined) {
+                // responseText was returned, decode it
+                try {
+                    var responseObj = Ext.decode(request.responseText, true);
+
+                } catch (e) {
+                    Ext.Msg.alert(&#39;Error&#39;, &#39;Unknown error: The server did not send any information about the error.&#39;);
+                }
+
+            } else {
+                // no responseText sent
+                Ext.Msg.alert(&#39;Error&#39;, &#39;Unknown error: Unable to understand the response from the server&#39;);
+            }
+        }
+    }
+});</pre>
+</body>
+</html>

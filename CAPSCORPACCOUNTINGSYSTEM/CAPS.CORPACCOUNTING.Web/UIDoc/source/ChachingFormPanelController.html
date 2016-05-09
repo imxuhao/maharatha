@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.common.form.ChachingFormPanelController&#39;, {
+    extend: &#39;Ext.app.ViewController&#39;,
+    alias: &#39;controller.common-form-chachingformpanel&#39;,
+    //default buttons action handler
+    onSaveClicked: function(btn) {
+        var me = this,
+            view = me.getView(),
+            parentGrid = view.parentGrid,
+            values = view.getValues();
+
+        if (parentGrid) {
+            var gridStore = parentGrid.getStore(),
+                idPropertyField = gridStore.idPropertyField,
+                operation;
+            var record = Ext.create(gridStore.model.$className);
+            Ext.apply(record.data, values);
+            var target;
+            if (view.openInPopupWindow) {
+                target = view.up(&#39;window&#39;);
+            } else {
+                target = view;
+            }
+            var myMask = new Ext.LoadMask({
+                msg: &#39;Please wait...&#39;,
+                target: target
+            });
+
+            //perform any custom operation in doPreSaveOperation function of controller.
+            //if doPreSaveOperation returns false the saving will be cancel
+            record = me.doPreSaveOperation(record, values, idPropertyField);
+            if (!record) return record;
+
+            myMask.show();
+            if (values &amp;&amp; parseInt(values[idPropertyField]) &gt; 0) {
+                operation = Ext.data.Operation({
+                    params: record.data,
+                    parentGrid: parentGrid,
+                    records: [record],
+                    controller: me,
+                    operationMask: myMask,
+                    callback: me.onOperationCompleteCallBack
+                });
+                gridStore.update(operation);
+            } else if (values &amp;&amp; parseInt(values[idPropertyField]) === 0) {
+                operation = Ext.data.Operation({
+                    params: record.data,
+                    parentGrid: parentGrid,
+                    controller: me,
+                    operationMask: myMask,
+                    callback: me.onOperationCompleteCallBack
+                });
+                gridStore.create(values, operation);
+            } else {
+                myMask.hide();
+            }
+        }
+    },
+    //override in child classes if required to perform customOperation and return false to cancel save
+    doPreSaveOperation:function(record,values,idPropertyField) { return record; },
+    onCancelClicked:function(btn) {
+        var me = this,
+            view = me.getView();
+        if (view &amp;&amp; view.openInPopupWindow) {
+            var wnd = view.up(&#39;window&#39;);
+            Ext.destroy(wnd);
+            return;
+        }
+        Ext.destroy(view);
+    },
+    onOperationCompleteCallBack: function (records, operation, success) {
+        var controller = operation.controller,
+                view = controller.getView();
+        var mask = operation.operationMask;
+        if (mask)mask.hide();
+        if (success) {
+            var action = operation.getAction();
+            if (action === &quot;create&quot; || action === &quot;update&quot;) {
+                var gridController = operation.parentGrid.getController();
+                gridController.doReloadGrid();
+               
+                if (view &amp;&amp; view.openInPopupWindow) {
+                    var wnd = view.up(&#39;window&#39;);
+                    Ext.destroy(wnd);
+                } else if (view) {
+                    Ext.destroy(view);
+                }
+
+            }
+            Ext.toast({
+                html: &#39;Operation completed successfully.&#39;,
+                title: &#39;Success&#39;,
+                ui: &#39;chachingWindow&#39;,
+                alwaysOnTop: true,
+                saveDelay: 500,
+                animateShadow: true,
+                align: &#39;tr&#39;
+            });
+           
+        } else {
+            var response = Ext.decode(operation.getResponse().responseText);
+            var message = &#39;&#39;,
+                title = &#39;Error&#39;;
+            if (response &amp;&amp; response.error) {
+                if (response.error.message &amp;&amp; response.error.details) {
+                    title = response.error.message;
+                    message = response.error.details.replaceAll(&#39; - &#39;, &#39;&lt;/br&gt;-&#39;);
+                    var myMsg = Ext.create(&#39;Ext.window.MessageBox&#39;, {
+                        // set closeAction to &#39;destroy&#39; if this instance is not
+                        // intended to be reused by the application
+                        closeAction: &#39;destroy&#39;,
+                        ui: &#39;chachingWindow&#39;
+                    }).show({
+                        title: title,
+                        message: message,
+                        buttons: Ext.Msg.OKCANCEL,
+                        icon: Ext.Msg.INFO
+                    });
+                    return;
+                }
+                title = response.error.message;
+                message = response.error.details ? response.error.details : title;
+            }
+            Ext.toast(message);
+        }
+    },
+    
+});
+</pre>
+</body>
+</html>

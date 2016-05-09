@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.languages.LanguagesGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.languages-languagesgrid&#39;,    
+    changeLanguageClick: function (menu, formView, isEdit) {        
+        var parentMenu = menu.parentMenu,
+           widgetRec = parentMenu.widgetRecord,         
+            data=widgetRec.data,
+        
+        changepasswordAction = Ext.create(&#39;Chaching.view.languages.LanguagesTextView&#39;);
+            var form = changepasswordAction.down(&#39;form&#39;).getForm();
+            form.findField(&#39;baseLanguage&#39;).setValue(&#39;en&#39;);
+            form.findField(&#39;source&#39;).setValue(&#39;CORPACCOUNTING&#39;);
+            form.findField(&#39;targetValue&#39;).setValue(&#39;All&#39;);
+            form.findField(&#39;targetLanguage&#39;).setValue(data.name);
+        changepasswordAction.show();
+    },
+
+});
+</pre>
+</body>
+</html>

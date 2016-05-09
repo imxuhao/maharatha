@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.tenants.TenantsGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.tenants-tenantsgrid&#39;,
+    //TODO convert this function in component(editing) so for every combo we need not to write
+    onEditionChange:function(combo, newValue, oldValue, e) {
+        var grid = combo.up();
+        if (grid) {
+            var context = grid.context,
+                record = context.record;
+            record.set(&#39;editionId&#39;, newValue);
+        }
+    },
+    doAfterCreateAction:function(createMode, formView,isEdit) {
+        if (formView &amp;&amp; isEdit) {
+            var form = formView.down(&#39;form&#39;).getForm();
+            form.findField(&#39;tenancyName&#39;).setReadOnly(true);
+            form.findField(&#39;adminEmailAddress&#39;).setReadOnly(true);
+            var viewModel = formView.down(&#39;form&#39;).getViewModel();
+            var editionStore = viewModel.getStore(&#39;editionsForComboBox&#39;);
+            editionStore.load();
+        }
+    }
+});
+</pre>
+</body>
+</html>

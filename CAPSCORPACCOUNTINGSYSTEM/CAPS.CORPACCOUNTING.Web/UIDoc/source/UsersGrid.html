@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.users.UsersGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.users.UsersGridController&#39;
+    ],
+
+    controller: &#39;users-usersgrid&#39;,
+
+    xtype: &#39;users&#39;,
+    store: &#39;users.UsersStore&#39;,
+    name: &#39;Administration.Users&#39;,
+    padding: 5,
+    gridId:7,
+    headerButtonsConfig: [
+    {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;Users&quot;),
+        ui: &#39;headerTitle&#39;
+    }, {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;UsersHeaderInfo&quot;),
+        ui: &#39;headerSubTitle&#39;
+    }, &#39;-&gt;&#39;, {
+        xtype: &#39;button&#39;,
+        scale: &#39;small&#39;,
+        ui: &#39;actionButton&#39;,
+        action: &#39;create&#39;,
+        text: abp.localization.localize(&quot;CreateNewUser&quot;).toUpperCase(),
+        tooltip: app.localize(&#39;CreateNewUser&#39;),
+        checkPermission: true,
+        iconCls: &#39;fa fa-plus&#39;,
+        iconAlign: &#39;left&#39;
+    }],
+    requireExport: true,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable: true,
+    editingMode: &#39;row&#39;,
+    columnLines: true,
+    multiColumnSort: true,
+    editWndTitleConfig: {
+        title: app.localize(&#39;EditUser&#39;),
+        iconCls: &#39;fa fa-pencil&#39;
+    },
+    createWndTitleConfig: {
+        title: app.localize(&#39;CreateNewUser&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+    createNewMode: &#39;popup&#39;,
+    columns: [
+        {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;UserName&#39;),
+            dataIndex: &#39;userName&#39;,
+            stateId: &#39;userName&#39;,
+            sortable: true,
+            width: &#39;10%&#39;,
+            groupable: true,
+            // simplest filter configuration
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;,
+                emptyText: &#39;Enter User Name to search&#39;
+            }
+
+        }, {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;Name&#39;),
+            dataIndex: &#39;name&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;10%&#39;
+            // equivalent to filterField:true
+            // as textfield is created by default
+            ,
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;,
+                emptyText: &#39;Enter Name to search&#39;
+            },
+            editor: {
+                xtype: &#39;textfield&#39;
+            }
+        }
+        , {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;Surname&#39;),
+            dataIndex: &#39;surname&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;10%&#39;,
+            filterField: {
+                xtype: &#39;textfield&#39;,
+                width: &#39;100%&#39;,
+                emptyText: &#39;Enter Surname to search&#39;
+            },
+            editor: {
+                xtype: &#39;textfield&#39;
+            }
+        },
+    {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;Roles&#39;),
+        dataIndex: &#39;roles&#39;,
+        sortable: true,
+        groupable: true,
+        width: &#39;5%&#39;
+        ,
+        renderer: function (val) {
+            var rolesList = &#39;&#39;;
+            Ext.each(val, function (roles, index) {
+                rolesList = rolesList + roles.roleName + &#39;, &#39;;
+            });
+            return rolesList.replace(/,\s*$/, &quot;&quot;);
+        }
+    }
+         , {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;EmailAddress&#39;),
+             dataIndex: &#39;emailAddress&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;20%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: &#39;Enter Email Address to search&#39;
+             },
+             editor: {
+                 xtype: &#39;textfield&#39;
+             }
+         }
+        ,
+        {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;EmailConfirm&#39;),
+            dataIndex: &#39;isEmailConfirmed&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;5%&#39;,
+            renderer: function (val) {
+                if (val) return &#39;YES&#39;;
+                else return &#39;NO&#39;;
+            },
+            filterField: {
+                xtype: &#39;combobox&#39;,
+                valueField: &#39;value&#39;,
+                displayField: &#39;text&#39;,
+                store: {
+                    fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                    data: [{ text: &#39;YES&#39;, value: true }, { text: &#39;NO&#39;, value: false }]
+                }
+            }
+        }
+        ,
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;LastLoginTime&#39;),
+             dataIndex: &#39;lastLoginTime&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;15%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+             filterField: {
+                 xtype: &#39;dateSearchField&#39;,
+                 dataIndex: &#39;lastLoginTime&#39;,
+                 width: &#39;100%&#39;
+             }
+         }
+
+        ,
+        {
+            xtype: &#39;gridcolumn&#39;,
+            text: app.localize(&#39;Active&#39;),
+            dataIndex: &#39;isActive&#39;,
+            sortable: true,
+            groupable: true,
+            width: &#39;5%&#39;,
+            renderer: function (val) {
+                if (val) return &#39;YES&#39;;
+                else return &#39;NO&#39;;
+            },
+            filterField: {
+                xtype: &#39;combobox&#39;,
+                valueField: &#39;value&#39;,
+                displayField: &#39;text&#39;,
+                store: {
+                    fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                    data: [{ text: &#39;YES&#39;, value: true }, { text: &#39;NO&#39;, value: false }]
+                }
+            }, editor: {
+                xtype: &#39;checkbox&#39;
+            }
+        }
+         ,
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;CreationTime&#39;),
+             dataIndex: &#39;creationTime&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;20%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+             filterField: {
+                 xtype: &#39;dateSearchField&#39;,
+                 dataIndex: &#39;creationTime&#39;,
+                 width: &#39;100%&#39;
+             }
+         }
+    ]
+});
+</pre>
+</body>
+</html>

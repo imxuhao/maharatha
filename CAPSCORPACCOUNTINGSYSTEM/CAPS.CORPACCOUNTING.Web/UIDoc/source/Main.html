@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-view-main-Main'>/**
+</span> * This class is the main view for the application. It is specified in app.js as the
+ * &quot;mainView&quot; property. That setting causes an instance of this class to be created and
+ * added to the Viewport container.
+ *
+ * TODO - Replace this content of this view to suite the needs of your application.
+ */
+Ext.define(&#39;Chaching.view.main.Main&#39;, {
+    
+    xtype: &#39;app-main&#39;,
+
+    extend: &#39;Ext.Container&#39;,
+    requires: [
+        &#39;Ext.Button&#39;,
+        &#39;Ext.list.Tree&#39;,
+        &#39;Ext.navigation.View&#39;
+    ],
+
+<span id='Chaching-view-main-Main-property-controller'>    controller: &#39;main&#39;,
+</span><span id='Chaching-view-main-Main-property-viewModel'>    viewModel: {
+</span>        type: &#39;main&#39;
+    },
+<span id='Chaching-view-main-Main-property-platformConfig'>    platformConfig: {
+</span>        phone: {
+            controller: &#39;phone-main&#39;
+        }
+    },
+    
+<span id='Chaching-view-main-Main-cfg-layout'>    layout: &#39;hbox&#39;,
+</span>
+<span id='Chaching-view-main-Main-property-items'>    items: [
+</span>        {
+            xtype: &#39;maintoolbar&#39;,
+            docked: &#39;top&#39;,
+            userCls: &#39;main-toolbar shadow&#39;
+        },
+        {
+            xtype: &#39;container&#39;,
+            userCls: &#39;main-nav-container&#39;,
+            reference: &#39;navigation&#39;,
+            scrollable: true,
+            items: [
+                {
+                    xtype: &#39;treelist&#39;,
+                    reference: &#39;navigationTree&#39;,
+                    ui: &#39;navigation&#39;,
+                    itemId:&#39;navigationMenu&#39;,
+                    store: &#39;NavigationTree&#39;,
+                    expanderFirst: false,
+                    expanderOnly: false,
+                    listeners: {
+                        itemclick: &#39;onNavigationItemClick&#39;,
+                        selectionchange: &#39;onNavigationTreeSelectionChange&#39;
+                    }
+                }
+            ]
+        },
+        {
+            xtype: &#39;navigationview&#39;,
+            flex: 1,
+            reference: &#39;mainCard&#39;,
+            userCls: &#39;main-container&#39;,
+            navigationBar: false
+        }
+    ]
+});
+</pre>
+</body>
+</html>

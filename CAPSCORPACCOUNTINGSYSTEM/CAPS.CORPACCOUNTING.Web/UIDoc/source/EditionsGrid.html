@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.editions.EditionsGrid&#39;,{
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.editions.EditionsGridController&#39;
+    ],
+
+    controller: &#39;editions-editionsgrid&#39;,
+
+    xtype: &#39;host.editions&#39;,
+    store: &#39;editions.EditionsStore&#39;,
+    name: &#39;Editions&#39;,
+    padding: 5,
+    gridId:2,
+    headerButtonsConfig: [
+    {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;Editions&quot;),
+        ui: &#39;headerTitle&#39;
+    }, {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;EditionsHeaderInfo&quot;),
+        ui: &#39;headerSubTitle&#39;
+    }, &#39;-&gt;&#39;, {
+        xtype: &#39;button&#39;,
+        scale: &#39;small&#39;,
+        ui: &#39;actionButton&#39;,
+        action: &#39;create&#39;,
+        text: abp.localization.localize(&quot;CreateNewEdition&quot;).toUpperCase(),
+        tooltip: app.localize(&#39;CreateNewEdition&#39;),
+        checkPermission: true,
+        iconCls: &#39;fa fa-plus&#39;,
+        iconAlign: &#39;left&#39;
+    }],
+    requireExport: true,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable: true,
+    editingMode: &#39;row&#39;,
+    createNewMode: &#39;popup&#39;,
+    columnLines: true,
+    multiColumnSort: true,
+    editWndTitleConfig: {
+        title: app.localize(&#39;EditEdition&#39;),
+        iconCls: &#39;fa fa-pencil&#39;
+    },
+    createWndTitleConfig: {
+        title: app.localize(&#39;CreateNewEdition&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+    columns: [             
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Name&#39;),
+             dataIndex: &#39;displayName&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;47%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: &#39;Enter DisplayName to search&#39;
+             },
+             editor: {
+                 xtype: &#39;textfield&#39;
+             }
+         },
+          {
+              xtype: &#39;gridcolumn&#39;,
+              format:&#39;Y-m-d&#39;,
+             text: app.localize(&#39;Creation Time&#39;),
+             dataIndex: &#39;creationTime&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;47%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.renderDateTime,
+             filterField: {
+                 xtype: &#39;datefield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: &#39;Enter creation time to search&#39;
+             },                      
+         },
+        
+       
+       
+    ]
+   
+});
+</pre>
+</body>
+</html>

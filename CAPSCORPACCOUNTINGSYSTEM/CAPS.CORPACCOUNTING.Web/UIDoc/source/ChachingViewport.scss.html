@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">@include extjs-tab-panel-ui(
+    $ui: &#39;dashboard&#39;,
+    $ui-tab-background-color: transparent,
+$ui-tab-background-color-focus:#047E8E,
+$ui-bar-background-color:#7FB0DA,
+$ui-tab-background-color-over:#047E8E,
+$ui-tab-background-color-active:#047E8E,
+$ui-tab-background-color-focus-over:#047E8E,
+$ui-tab-background-color-focus-active:#047E8E,   
+    $ui-tab-color-over: white,
+    $ui-tab-color-active: white,
+    $ui-tab-glyph-color: white,
+    $ui-tab-glyph-color-over: white,
+    $ui-tab-glyph-color-active: white,
+    $ui-tab-glyph-opacity: 1,
+    $ui-tab-border-radius: 5px 5px 0 0,
+    $ui-tab-border-width: 1px,
+$ui-tab-border-width-over:1px,
+$ui-tab-border-color-over:#00BCD4,
+    $ui-tab-inner-border-width: 0,
+$ui-tab-color:white,
+$ui-tab-font-weight-active:600,
+$ui-tab-font-weight-over:600,
+$ui-tab-color-over:white,
+$ui-tab-closable-icon-glyph-color:white,
+$ui-tab-closable-icon-glyph-color-active:white,
+$ui-tab-closable-icon-glyph-color-over:white,
+$ui-tab-border-color-active:transparent
+);
+.x-tab-bar-dashboard{
+    border-radius:5px 5px 0 0 !important;
+}
+.x-tab-over.x-tab-dashboard{
+    background-color:#047E8E !important;
+}
+<span id='global-property-'>/** #00BCD4-light  #047E8E-dark
+</span> * Generates a set of style rules for the &quot;navigation&quot; panel UI.
+ */
+@include extjs-panel-ui(
+    $ui: &#39;dashboard&#39;,
+ $ui-header-color: #fff,
+    $ui-header-glyph-color: #fff,
+    $ui-header-glyph-opacity: 1,
+    $ui-header-font-size: 20px,
+    $ui-header-line-height: 24px,
+    $ui-header-font-weight: bold,
+    $ui-header-icon-height: 24px,
+    $ui-header-icon-width: 24px,
+    $ui-header-icon-spacing: 15px,
+    $ui-header-background-color: $base-color,
+    $ui-header-padding: 0,
+    $ui-header-text-margin: 36px,
+    $ui-header-noborder-adjust: false
+);
+.x-box-scroller-tab-bar-dashboard{
+    color:#2D2A2A !important;
+}
+
+
+@include treelist-ui(
+    $ui: &#39;nav&#39;,
+    
+    // Extra padding left/right
+    $padding: 0 10px,
+
+    // Black-ish background color #ffffff,
+    $background-color: white,
+    $toolstrip-background-color: white,
+
+    $tool-selected-color: #f0f0f0,
+    $tool-selected-background-color: #5fa2dd,
+
+    $tool-float-indicator-width: 4px,
+    $tool-float-indicator-color: #5fa2dd,
+
+    // Darker background for expanded subtrees #F3F5F9,
+    $item-expanded-background-color: white,
+
+    // Taller line height
+    $item-line-height : 32px,
+
+    // Off-white text
+    $item-icon-color: lighten(#5C9ACF,10%),
+    $item-expander-color: lighten(#5C9ACF,10%),
+    $item-text-color: #485a6a,
+
+    // Brighter when hovered
+    $row-over-background-color: lighten(#5fa2dd,35%),
+    //$item-icon-over-color: lighten(#5C9ACF,20%),
+    //$item-expander-over-color: lighten(#5fa2dd,10%),#f2f6f9
+    $item-text-over-color: #5b9bd1,
+
+    $row-indicator-width: 3px,
+    $row-indicator-selected-color: #5fa2dd,
+    $row-indicator-selected-over-color: lighten(#5C9ACF, 60%),
+    //$row-indicator-over-color: lighten(#5fa2dd, 50%),
+
+    // Various sizes for the pieces:
+    $item-icon-font-size: 20px,
+    $item-icon-width: 24px,
+    $item-expander-font-size: 16px,
+    $item-expander-width: 24px,
+
+    $row-selected-background-color:lighten(#5fa2dd,35%)
+);
+
+
+.treelist-with-nav .#{$prefix}panel-body {
+    background-color: #32404e !important;
+}
+.x-treelist-nav .x-treelist-item-text{
+    font-weight:500 !important;
+    font-family:&quot;Open Sans&quot;, sans-serif !Important;
+    margin-left:30px !important;
+    margin-right:5px !important;
+    line-height:35px !important;
+}
+.x-treelist-nav .x-treelist-row{
+    padding-right:5px !important;
+}
+.x-treelist-nav{
+    border-radius:5px !important;
+}</pre>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.financials.accounts.DivisionsForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [&#39;widget.financials.accounts.divisions.create&#39;, &#39;widget.financials.accounts.divisions.edit&#39;],
+    requires: [
+        &#39;Chaching.view.financials.accounts.DivisionsFormController&#39;
+    ],
+
+    controller: &#39;financials-accounts-divisionsform&#39;,
+    name: &#39;divisions&#39;,
+    openInPopupWindow: false,
+    hideDefaultButtons: false,
+    layout: &#39;column&#39;,
+    autoScroll: true,
+    border: false,
+    showFormTitle: true,
+    titleConfig: {
+        title: abp.localization.localize(&quot;CreateNewDivision&quot;).initCap()
+    },
+    items: [{
+        xtype: &#39;hiddenfield&#39;,
+        name: &#39;jobId&#39;,
+        value: 0
+    }, {
+        columnWidth: .5,
+        padding: &#39;20 10 0 20&#39;,
+        //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; },
+        defaults: {
+            labelAlign: &#39;top&#39;,
+            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+        },
+        items: [{
+            xtype: &#39;textfield&#39;,
+            name: &#39;jobNumber&#39;,
+            itemId: &#39;jobNumber&#39;,
+            allowBlank: false,
+            fieldLabel: app.localize(&#39;DivisionNumber&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;MandatoryField&#39;)
+        },
+        {
+            xtype: &#39;combobox&#39;,
+            name: &#39;typeOfCurrencyId&#39;,
+            fieldLabel: app.localize(&#39;Currency&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;Currency&#39;),
+            displayField: &#39;currencyId&#39;,
+            valueField: &#39;currencyName&#39;,
+            bind: {
+                // store: &#39;{StandardGroupTotalList}&#39;
+            }
+        },
+        {
+            xtype: &#39;combobox&#39;,
+            name: &#39;typeOfBidSoftwareId&#39;,// &#39;iCTCompanyAccount&#39;,
+            fieldLabel: app.localize(&#39;Inter-CompanyAccount&#39;),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;Inter-CompanyAccount&#39;),
+            displayField: &#39;organizationName&#39;,
+            valueField: &#39;organizationId&#39;,
+            bind: {
+                 store: &#39;{getOrganizations}&#39;
+            }
+        },
+        {
+            xtype: &#39;checkbox&#39;,
+            boxLabel: app.localize(&#39;UseCorpDivisionDefault&#39;),
+            name: &#39;isICTDivision&#39;,
+            labelAlign: &#39;right&#39;,
+            inputValue: true,
+            checked: true,
+            boxLabelCls: &#39;checkboxLabel&#39;,
+            hidden: false
+        }]
+    },
+        {
+            columnWidth: .5,
+            padding: &#39;20 10 0 20&#39;,          
+            defaults: {
+                labelAlign: &#39;top&#39;,
+                blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+            },
+            items: [
+                 {
+                     xtype: &#39;textfield&#39;,
+                     name: &#39;caption&#39;,
+                     itemId: &#39;caption&#39;,
+                     allowBlank: false,
+                     fieldLabel: app.localize(&#39;description&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                     width: &#39;100%&#39;,
+                     ui: &#39;fieldLabelTop&#39;,
+                     emptyText: app.localize(&#39;MandatoryField&#39;)
+                 },
+                 {
+                     xtype: &#39;combobox&#39;,
+                     name: &#39;rollupAccountId&#39;,//&#39;iCTCompanyId&#39;,
+                     fieldLabel: app.localize(&#39;Inter-CompanyLink&#39;).initCap(),
+                     width: &#39;100%&#39;,
+                     ui: &#39;fieldLabelTop&#39;,
+                     emptyText: app.localize(&#39;Inter-CompanyLink&#39;),
+                     displayField: &#39;organizationName&#39;,
+                     valueField: &#39;orgnizationId&#39;,
+                     bind: {
+                         store: &#39;{getOrganizations}&#39;
+                     }
+                 },
+                 {
+                     xtype: &#39;combobox&#39;,
+                     name: &#39;typeofProjectId&#39;,// &#39;iCTCompanyAccount&#39;,
+                     fieldLabel: app.localize(&#39;Inter-CompanySub&#39;).initCap(),
+                     width: &#39;100%&#39;,
+                     ui: &#39;fieldLabelTop&#39;,
+                     emptyText: app.localize(&#39;Inter-CompanySub&#39;),
+                     displayField: &#39;subAcccountCaption&#39;,
+                     valueField: &#39;aubAccountId&#39;,
+                     bind: {
+                        
+                     }
+                 },
+         {
+             xtype: &#39;checkbox&#39;,
+             boxLabel: app.localize(&#39;Active&#39;),
+             name: &#39;isActive&#39;,
+             labelAlign: &#39;right&#39;,
+             inputValue: true,
+             checked: true,
+             boxLabelCls: &#39;checkboxLabel&#39;,
+             hidden: false
+         }]
+
+        }]
+});
+</pre>
+</body>
+</html>

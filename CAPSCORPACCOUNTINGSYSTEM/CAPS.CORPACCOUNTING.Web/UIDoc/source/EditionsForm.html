@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.editions.EditionsForm&#39;,{
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+  
+
+    alias:[&#39;host.edition.create&#39;,&#39;host.edition.edit&#39;],
+    requires: [
+        &#39;Chaching.view.editions.EditionsFormController&#39;
+    ],
+
+    controller: &#39;editions-editionsform&#39;,
+    name: &#39;Editions&#39;,
+    openInPopupWindow: true,
+    hideDefaultButtons: false,
+    layout: &#39;vbox&#39;,
+    defaults: {
+        bodyStyle: { &#39;background-color&#39;: &#39;trasparent&#39; },
+        labelAlign: &#39;top&#39;
+    },
+    defaultFocus: &#39;textfield#displayName&#39;,
+ 
+    items: [{
+        xtype: &#39;tabpanel&#39;,
+        region: &#39;center&#39;,      
+        ui: &#39;dashboard&#39;,       
+        items: [
+        {
+            title: &#39;Editions&#39;,                
+            iconCls: &#39;icon-grid&#39;,
+            items: [{
+                xtype: &#39;hiddenfield&#39;,
+                name: &#39;id&#39;,
+                value:0
+            }, {
+                xtype: &#39;textfield&#39;,
+                name: &#39;displayName&#39;,
+                itemId: &#39;displayName&#39;,
+                fieldLabel: app.localize(&#39;Name&#39;),
+                width: &#39;100%&#39;,
+                ui:&#39;fieldLabelTop&#39;,
+                emptyText: app.localize(&#39;Edition Name&#39;)
+            }
+            ]
+        },
+        {
+            title: &#39;Features&#39;,
+            ui: &#39;dashboard&#39;,          
+            iconCls: &#39;icon-home&#39;
+        }
+        ]
+    }
+    ]
+    
+    
+});
+</pre>
+</body>
+</html>

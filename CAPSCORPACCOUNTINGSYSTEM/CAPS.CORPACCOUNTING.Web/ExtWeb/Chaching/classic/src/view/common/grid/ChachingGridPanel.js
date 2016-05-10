@@ -263,7 +263,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             switch (me.editingMode) {
                 case "cell":
                     editingModel = {
-                        ptype: 'cellediting',
+                        ptype: 'chachingCellediting',
                         pluginId: 'editingPlugin',
                         clicksToEdit: 2,
                         listeners: {

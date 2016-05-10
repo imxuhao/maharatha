@@ -14,10 +14,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectLocations',{
         destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete'),
     },
     padding: 5,
-    store: {
-        model: 'Chaching.model.Jobcasting.JobLocationsModel',
-        data:[]
-    },
+    store: 'projects.projectmaintenance.ProjectLocationsStore',
     headerButtonsConfig: [{
         xtype: 'displayfield',
         value: app.localize('JobLocations'),
@@ -52,19 +49,24 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectLocations',{
         sortable: false,
         groupable: false,
         width: '45%',
-        editor: {//todo: replace with combo
-            xtype: 'textfield'
+        editor: {
+            xtype: 'combobox',
+            name: 'locationName',
+            store: 'utilities.LocationListStore',
+            valueField: 'locationId',
+            displayField: 'locationName',
+            queryMode:'local'
         }
     }, {
         xtype: 'gridcolumn',
-        dataIndex: 'LocationSiteDate',
+        dataIndex: 'locationSiteDate',
         text: app.localize('LocationDate').initCap(),
         renderer: Chaching.utilities.ChachingRenderers.renderDateOnly,
         sortable: false,
         groupable: false,
         width: '45%',
         editor: {
-            xtype: 'datefield',
+            xtype: 'datefield'
         }
     }]
 });

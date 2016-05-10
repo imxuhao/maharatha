@@ -508,8 +508,33 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                     rootProperty: 'result'
                 }
             }
-        }
-        ,
+        },
+        getTaxRecoveryList: {
+            fields: [{ name: 'name' }, { name: 'value' }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/jobUnit/GetTaxRecovery',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        },
+        getTaxCreditList: {
+            fields: [{ name: 'name' }, { name: 'value' }],
+            xtype: 'ajax',
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/jobUnit/GetTaxCreditList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        },
         paymentTermsList: {
             fields: [{ name: 'name' }, { name: 'value' }, {
                 name: 'paymentTerms', convert: function (value, record) {

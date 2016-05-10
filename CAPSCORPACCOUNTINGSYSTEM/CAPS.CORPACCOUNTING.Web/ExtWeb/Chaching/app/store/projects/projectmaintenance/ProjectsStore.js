@@ -1,6 +1,6 @@
 ﻿Ext.define('Chaching.store.projects.projectmaintenance.ProjectsStore', {
     extend: 'Chaching.store.base.BaseStore',
-    model: 'Chaching.model.projects.projectmaintenance.ProjectModel',
+    model: 'Chaching.model.Jobcasting.JobCommercialsModel',
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

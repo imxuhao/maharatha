@@ -96,13 +96,11 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  xtype: 'textfield',
                  width: '100%',
                  emptyText: app.localize('ToolTipProductName')
-             }, editor: {
-                 xtype: 'textfield'
              }
          }, {
              xtype: 'gridcolumn',
              text: app.localize('Director'),
-             dataIndex: 'directorEmployeeId',//TODO: change to name
+             dataIndex: 'directorName',
              sortable: true,
              groupable: true,
              width: '10%',
@@ -114,7 +112,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
          }, {
              xtype: 'gridcolumn',
              text: app.localize('Agency'),
-             dataIndex: 'agencyName',
+             dataIndex: 'agency',
              sortable: true,
              groupable: true,
              width: '10%',
@@ -176,6 +174,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  width: '100%',
                  emptyText: app.localize('ToolTipStatus')
              }
-         },
+         }
     ]
 });

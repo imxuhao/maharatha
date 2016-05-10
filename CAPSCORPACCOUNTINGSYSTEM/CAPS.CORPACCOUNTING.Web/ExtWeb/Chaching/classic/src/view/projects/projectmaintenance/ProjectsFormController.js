@@ -7,7 +7,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
         var comboStore = combo.getStore();
         if (comboStore) {
             var record = comboStore.findRecord('customerId', newValue);
-            if (record) {
+            if (record && record._addresses) {
                 var addresses = record.getAddresses();
                 if (addresses) {
                     var form = view.getForm(),
@@ -22,10 +22,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
 
                 }
             }
-            
         }
-       
-
     },
     getAgencyAddress:function(addresses) {
         var fullAddress = '';
@@ -40,14 +37,112 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
         if (addresses.get('postalCode')) fullAddress += ','+addresses.get('postalCode');
         return fullAddress;
     },
-    onProjectSetupSave:function() {
+    doPreSaveOperation: function (record, values, idPropertyField) {
         var me = this,
-            view = me.getView();
-        ///TODO: do save operations for project setup tab along with line#
+            view = me.getView(),
+            lineNumbersGrid = view.down('gridpanel[itemId=jobAccountsGridPanel]'),
+            lineNumberStore = lineNumbersGrid.getStore();
+
+        var modifiedRecord = lineNumberStore.getModifiedRecords();
+        var modifiedJobAccounts = [];
+        if (modifiedRecord&&modifiedRecord.length>0) {
+            Ext.each(modifiedRecord, function(rec) {
+                var record = {
+                    description: rec.get('description'),
+                    accountId: rec.get('accountId'),
+                    jobAccountId: rec.get('jobAccountId'),
+                    jobId: rec.get('jobId'),
+                    rollupAccountId: rec.get('rollupAccountId'),
+                    rollupJobId: rec.get('rollupJobId')
+                };
+                modifiedJobAccounts.push(record);
+            });
+            record.set('JobAccountList', modifiedJobAccounts);
+        }
+        return record;
     },
     onProjectDetailsSave:function() {
         var me = this,
-            view = me.getView();
-        ///TODO: do save operations for project details tab along with locations data
+            view = me.getView(),
+            parentGrid = view.parentGrid,
+            values = view.getValues();
+        var jobLocations = [];
+        if (parentGrid) {
+            var gridStore = parentGrid.getStore(),
+               idPropertyField = gridStore.idPropertyField,
+               operation;
+            var target;
+            if (view.openInPopupWindow) {
+                target = view.up('window');
+            } else {
+                target = view;
+            }
+            var myMask = new Ext.LoadMask({
+                msg: 'Please wait...',
+                target: target
+            });
+
+            
+            myMask.show();
+            if (values.agencyEmail === "")values.agencyEmail = null;
+            //get updated joblocation
+            var jobLocationGridStore = view.down('gridpanel[itemId=jobLocationsGridPanel]').getStore();
+            var modifiedRecords = jobLocationGridStore.getModifiedRecords();
+            if (modifiedRecords && modifiedRecords.length>0) {
+                Ext.each(modifiedRecords, function(rec) {
+                    var record = {
+                        jobLocationId: rec.get('jobLocationId'),
+                        jobId: values.jobId,
+                        locationId: rec.get('locationId'),
+                        locationSiteDate: rec.get('locationSiteDate'),
+                        locationName: rec.get('locationName')
+                    };
+                    jobLocations.push(record);
+                });
+                values.jobLocations = jobLocations;
+            }
+            //fire save request
+            Ext.Ajax.request({
+                url: abp.appPath + 'api/services/app/jobCommercial/UpdateJobDetailUnit',
+                jsonData: Ext.encode(values),
+                success: function (response, opts) {
+                    myMask.hide();
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        var gridController = parentGrid.getController();
+                        gridController.doReloadGrid();
+
+                        if (view && view.openInPopupWindow) {
+                            var wnd = view.up('window');
+                            Ext.destroy(wnd);
+                        } else if (view) {
+                            Ext.destroy(view);
+                        }
+                        abp.notify.success('Operation completed successfully.', 'Success');
+                    } else {
+                        var message = '',
+                            title = 'Error';
+                        if (res && res.error) {
+                            if (res.error.message && res.error.details) {
+                                title = res.error.message;
+                                message = res.error.details;
+                                abp.message.warn(message, title);
+                                return;
+                            }
+                            title = res.error.message;
+                            message = res.error.details ? res.error.details : title;
+                        }
+                        abp.message.error(message, title);
+                    }
+                },
+                failure: function (response, opts) {
+                    myMask.hide();
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+        }
+        
     }
 });

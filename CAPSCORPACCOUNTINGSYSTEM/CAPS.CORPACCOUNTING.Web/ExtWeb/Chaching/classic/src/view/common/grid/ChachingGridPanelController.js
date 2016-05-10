@@ -104,7 +104,6 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
 
         //Delete record
         if (widgetRec && grid) {
-            gridStore.setAutoSync(true);
             var modelField = gridStore.getModel().getFields();
             if (modelField) {
                 Ext.each(modelField, function (field) {
@@ -114,7 +113,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     }
                 });
             }
-
+            gridStore.setAutoSync(true);
             gridStore.remove(widgetRec);
             gridStore.setAutoSync(false);
 

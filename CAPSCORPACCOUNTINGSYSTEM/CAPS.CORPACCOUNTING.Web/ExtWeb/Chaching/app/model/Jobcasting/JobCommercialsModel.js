@@ -1,8 +1,8 @@
 Ext.define('Chaching.model.Jobcasting.JobCommercialsModel', {
-    extend: 'Chaching.model.base.BaseModel',
-    config: {
-        searchEntityName: ''
-    },
+    extend: 'Chaching.model.projects.projectmaintenance.ProjectModel',
+    //config: {
+    //    searchEntityName: ''
+    //},
     fields: [
             { name: 'jobCommercialId', type: 'int' ,isPrimaryKey: true},
             { name: 'jobId', type: 'int' },
@@ -37,7 +37,8 @@ Ext.define('Chaching.model.Jobcasting.JobCommercialsModel', {
             { name: 'agencyBusMgrContactInfo', type: 'string'},
             { name: 'agencyJobNumber', type: 'string'},
             { name: 'agencyPONumber', type: 'string'},
-            { name: 'agencyName', type: 'string'},
+            { name: 'agencyName', type: 'string' },
+            {name:'agency',type:'string'},
             { name: 'agencyAddress', type: 'string'},
             { name: 'agencyPhone', type: 'string'},
             { name: 'commercialTitle1', type: 'string'},
@@ -72,7 +73,8 @@ Ext.define('Chaching.model.Jobcasting.JobCommercialsModel', {
             { name: 'isWrapUpInsurance', type: 'boolean'},
             { name: 'isFringeAccountSeparate', type: 'boolean'},
             { name: 'isOTon', type: 'boolean'},
-            { name: 'agencyEmail', type: 'string'},
+            { name: 'agencyEmail', type: 'string' },
+            {name:'directorName',type:'string'},
             { name: 'organizationUnitId', type: 'int', defaultValue: null, convert: nullHandler }
     ]
 });

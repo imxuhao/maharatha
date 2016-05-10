@@ -1844,6 +1844,7 @@
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorAliasModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\JobAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\ProjectModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RoleEditModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolePermissionsModel.js" />
@@ -1862,11 +1863,14 @@
     <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\ChartOfAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\loginAttempts\LoginAttemptStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\JobAccountsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectLocationsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectCoaStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\LinesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\LocationListStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingGlobals.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingRenderers.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\Prototypes.js" />
@@ -1879,6 +1883,7 @@
     <Content Include="ExtWeb\Chaching\classic\src\components\filter\DateSearchField.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Basic.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Panel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\plugins\CellEditing.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\RowEditing.js" />
     <Content Include="ExtWeb\Chaching\app\data\proxy\BaseProxy.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\BaseModel.js" />

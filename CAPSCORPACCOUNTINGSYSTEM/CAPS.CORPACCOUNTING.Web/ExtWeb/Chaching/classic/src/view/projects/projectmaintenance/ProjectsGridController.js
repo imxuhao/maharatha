@@ -28,6 +28,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
             var projectTypeStore = viewModel.getStore('getProjectTypeList');
             projectTypeStore.load();
 
+            var taxCreditStore = viewModel.getStore('getTaxCreditList');
+            taxCreditStore.load();
+
             if (isEdit) {
                 //enable all tabs
                 var projectDetails = formPanel.down('*[itemId=ProjectDetailsTab]');
@@ -54,6 +57,16 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
 
                 var dirOfPhotStore = viewModel.getStore('getDirofPhotoList');
                 dirOfPhotStore.load();
+
+                var jobAccountGridStore = formPanel.down('gridpanel[itemId=jobAccountsGridPanel]').getStore();
+                var jobAccountProxy = jobAccountGridStore.getProxy();
+                jobAccountProxy.setExtraParam('chartofAccountId', record.get('chartOfAccountId'));
+                jobAccountProxy.setExtraParam('jobId', record.get('jobId'));
+                jobAccountGridStore.load();
+
+                var jobLocationsStore = formPanel.down('gridpanel[itemId=jobLocationsGridPanel]').getStore();
+                jobLocationsStore.getProxy().setExtraParam('jobId', record.get('jobId'));
+                jobLocationsStore.load();
             }
         }
     },

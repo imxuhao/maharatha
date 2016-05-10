@@ -65,12 +65,6 @@
                 // responseText was returned, decode it
                 try {
                     var responseObj = Ext.decode(request.responseText, true);
-                    if (responseObj) {
-                        var title = 'Error';
-                        var message = responseObj.error.message;
-                        abp.message.error(message, title);
-                    }
-
                 } catch (e) {
                     abp.message.warn('Unknown error: The server did not send any information about the error.', 'Error');
                     //Ext.Msg.alert('Error', 'Unknown error: The server did not send any information about the error.');

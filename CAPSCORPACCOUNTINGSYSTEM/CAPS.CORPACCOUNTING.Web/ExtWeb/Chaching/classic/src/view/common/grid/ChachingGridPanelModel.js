@@ -279,7 +279,5 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                 }
             }
         }
-
     }
-
 });

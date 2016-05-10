@@ -130,8 +130,8 @@
     },
     rendererHyperLink: function (val, meta, record, rowIndex, colIndex, store, view) {
         if (val) {
-            var a = '<a style="color:white !important; padding-left:10px;">' + val + '</a>';
-            var div = '<div class="fa fa-th" isHyperLink="true" style="overflow:hidden; color:white; cursor:pointer; height:25px; width:100%; color:white !important; background-color:#3598DC !important; padding-top:6px; padding-left:6px; border-radius:2px;" title="' + val + '">' + a + '</div>';
+            var a = '<a style="padding-left:10px;text-decoration:underline !important;">' + val + '</a>';
+            var div = '<div class="fa fa-th" isHyperLink="true" style="overflow:hidden; color:white; cursor:pointer; width:100%; color:#3598DC !important;" title="' + val + '">' + a + '</div>';
             return div;
         }
         return val;

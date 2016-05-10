@@ -19,7 +19,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
     layout: 'fit',
     autoScroll: true,
     border: false,
-    showFormTitle: true,
+    showFormTitle: false,
     displayDefaultButtonsCenter: true,
     titleConfig: {
         title: abp.localization.localize("CreateNewProject").initCap()
@@ -147,11 +147,17 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 items: [
                                     {
 ///TODO: Replace with combo box once tax credit service is ready
-                                        xtype: 'textfield',
-                                        name: 'taxRecoveryId',
-                                        itemId: 'taxRecoveryId',
+                                        xtype: 'combobox',
+                                        name: 'taxCreditId',
+                                        itemId: 'taxCreditId',
                                         allowBlank: true,
-                                        fieldLabel: app.localize('TaxRecovery'),
+                                        queryMode: 'local',
+                                        bind: {
+                                            store: '{getTaxCreditList}'
+                                        },
+                                        valueField: 'value',
+                                        displayField: 'name',
+                                        fieldLabel: app.localize('TaxCredit'),
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         emptyText: app.localize('SelectOption')
@@ -206,7 +212,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         text: app.localize('SaveProject').toUpperCase(),
                         iconCls: 'fa fa-save',
                         listeners: {
-                            click:'onProjectSetupSave'
+                            click: 'onSaveClicked'
                         }
                     }, {
                         xtype: 'button',
@@ -236,7 +242,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                     collapsible :true,
                     items:[
                     {
-                        columnWidth: .33,
+                        columnWidth: .25,
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
@@ -253,7 +259,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             fieldLabel: app.localize('BidDate')
                         }]
                     }, {
-                        columnWidth: .33,
+                        columnWidth: .25,
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
@@ -271,7 +277,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             }
                         ]
                     }, {
-                        columnWidth: .33,
+                        columnWidth: .25,
                         padding: '0 10 0 20',
                         defaults: {
                             labelAlign: 'top',
@@ -286,7 +292,14 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             width:'100%',
                             fieldLabel: app.localize('Bidder'),
                             emptyText: app.localize('ToolTipBidder')
-                        }, {
+                        }]
+                    }, {
+                        columnWidth: .25,
+                        padding: '0 10 0 20',
+                        defaults: {
+                            width: '100%'
+                        },
+                        items: [{
                             xtype: 'checkbox',
                             name: 'isOTon',
                             itemId: 'isOTon',
@@ -690,7 +703,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         },
                         items:[
                         {
-                            xtype: 'widget.projects.projectmaintenance.projectLocations'
+                            xtype: 'widget.projects.projectmaintenance.projectLocations',
+                            itemId: 'jobLocationsGridPanel'
                         }]
                     }]
                     
@@ -724,7 +738,53 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         }
                     }]
                 }]
-            },//end of project details card  
+            },//end of project details card
+            {///// Start of Line numbers card
+                title: app.localize('LineNumbersTab').initCap(),
+                iconCls: 'fa fa-list-ol',
+                disabled: true,
+                itemId: 'LineNumbersTab',
+                items:[
+                {
+                    
+                    xtype: 'projects.projectmaintenance.linenumbers',
+                    store: 'projects.projectmaintenance.JobAccountsStore',
+                    headerButtonsConfig: null,
+                    requireExport: false,
+                    requireMultiSearch: false,
+                    requireMultisort: false,
+                    editingMode: 'cell',
+                    createNewMode: 'inline',
+                    isSubMenuItemTab: false,
+                    showPagingToolbar: false,
+                    itemId: 'jobAccountsGridPanel',
+                    modulePermissions: {
+                        read: true,
+                        create: false,
+                        edit: true,
+                        destroy: false,
+                    },
+                    columns:[
+                    {
+                        xtype: 'gridcolumn',
+                        text: app.localize('LineNumber'),
+                        dataIndex: 'accountNumber',
+                        sortable: true,
+                        groupable: true,
+                        width: '20%'
+                    }, {
+                        xtype: 'gridcolumn',
+                        text: app.localize('Description'),
+                        dataIndex: 'description',
+                        sortable: true,
+                        groupable: true,
+                        width: '70%',
+                        editor: {
+                            xtype: 'textfield'
+                        }
+                    }]
+                }]
+            },//end of Line numbers card
             {///// Start of cost manager card
                 title: app.localize('CostManager').initCap(),
                 iconCls: 'fa fa-bar-chart',
@@ -742,13 +802,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                 iconCls: 'fa fa-shopping-cart',
                 disabled: true,
                 itemId: 'POLogTab'
-            },//end of Po Log card
-            {///// Start of Line numbers card
-                title: app.localize('LineNumbersTab').initCap(),
-                iconCls: 'fa fa-list-ol',
-                disabled: true,
-                itemId: 'LineNumbersTab'
-            }//end of Line numbers card
+            }//end of Po Log card
         ]
     }]
     

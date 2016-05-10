@@ -83,7 +83,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
                 if (promise && promise.owner.completed) {
                     task.stop();
                     if (promise.owner.completionAction === "fulfill") {
-                        controller.handleMainThreadResponse(records, operation, success)
+                        controller.handleMainThreadResponse(records, operation, success);
                     }
                 }
             },

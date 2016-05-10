@@ -20,16 +20,11 @@ Ext.define('Chaching.model.projects.projectmaintenance.ProjectModel', {
         { name: 'isictDivision', type: 'boolean' },
         { name: 'typeofProjectId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'taxRecoveryId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'taxCreditId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'organizationUnitId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'rollupcenterid', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'detailTransactions', type: 'string', defaultValue: 'Transactions' },
         { name: 'typeofProjectName', type: 'string' },
-        { name: 'jobStatusName', type: 'string' },
-        {
-            name: 'jobDetails',
-            reference: {
-                parent: 'Jobcasting.JobCommercialsModel'
-            }
-        }
+        { name: 'jobStatusName', type: 'string' }
     ]
 });

@@ -686,5 +686,7 @@
   <text name="SaveProject" value="Save project" />
   <text name="SaveProjectDetails" value="Save project details" />
   <text name="LineNumbersTab" value="Line #" />
+    <text name="DuplicateChartofAccount" value="Duplicate ChartofAccount" />
+    <text name="Pleasesetupchartofaccount" value="Please setup ChartofAccount First." />
   </texts>
 </localizationDictionary>

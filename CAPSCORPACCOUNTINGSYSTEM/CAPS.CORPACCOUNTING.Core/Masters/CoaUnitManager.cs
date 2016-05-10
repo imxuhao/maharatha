@@ -67,20 +67,36 @@ namespace CAPS.CORPACCOUNTING.Masters
             //Validating if Duplicate COA exists
             if (CoaUnitRepository != null)
             {
-                var coaunit = (await CoaUnitRepository.GetAllListAsync(p => p.Caption == coaUnit.Caption && p.OrganizationUnitId== coaUnit.OrganizationUnitId ));
-
-                if (coaUnit.Id == 0)
+                if (coaUnit.IsCorporate)
                 {
-                    if (coaunit.Count > 0)
+                    int count = (await CoaUnitRepository.CountAsync(p => p.OrganizationUnitId ==
+                                                                         coaUnit.OrganizationUnitId &&
+                                                                         p.IsCorporate == true));
+                    if (count > 0)
                     {
-                        throw new UserFriendlyException(L("Duplicate Chart of Account", coaUnit.Caption));
+                        throw new UserFriendlyException(L("DuplicateChartofAccount"));
                     }
                 }
+
                 else
                 {
-                    if (coaunit.FirstOrDefault(p => p.Id != coaUnit.Id && p.Caption == coaUnit.Caption) != null)
+                    var coaunit = (await CoaUnitRepository.
+                        GetAllListAsync(
+                            p => p.Caption == coaUnit.Caption && p.OrganizationUnitId == coaUnit.OrganizationUnitId));
+
+                    if (coaUnit.Id == 0)
                     {
-                        throw new UserFriendlyException(L("Duplicate Chart of Account", coaUnit.Caption));
+                        if (coaunit.Count > 0)
+                        {
+                            throw new UserFriendlyException(L("DuplicateChartofAccount", coaUnit.Caption));
+                        }
+                    }
+                    else
+                    {
+                        if (coaunit.FirstOrDefault(p => p.Id != coaUnit.Id && p.Caption == coaUnit.Caption) != null)
+                        {
+                            throw new UserFriendlyException(L("Duplicate Chart of Account", coaUnit.Caption));
+                        }
                     }
                 }
             }

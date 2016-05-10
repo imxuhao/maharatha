@@ -23,21 +23,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
 
         #region Class Property Declarations
-        /// <summary>Overriding the ID column with JobDetailId</summary>
-        //[Column("JobCommercialId"), DatabaseGenerated(DatabaseGeneratedOption.None)]
-        //public override int Id { get; set; }
-
-        ///// <summary>
-        ///// Reference of Lajit IdentityColumn 
-        ///// </summary>
-        //public virtual int? LajitId { get; set; }
-
-        ///// <summary>Gets or Sets JobId Field.  </summary>
-        //[Range(0,Int32.MaxValue)]
-        //public virtual int JobId { get; set; }
-
-        //[ForeignKey("JobId")]
-        //public virtual JobUnit Jobs { get; set; }
 
         /// <summary>Gets or Sets BidDate Field.  </summary>
         public virtual DateTime? BidDate { get; set; }
@@ -303,11 +288,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [StringLength(MaxEmailLength)]
         public virtual string AgencyEmail { get; set; }
 
+        /// <summary>Gets or Sets ContractExecutionDate Field.  </summary>
         public virtual DateTime? ContractExecutionDate { get; set; }
 
+        /// <summary>Gets or Sets DeliveryDate Field.  </summary>
         public virtual DateTime? DeliveryDate { get; set; }
 
-       
+        /// <summary>Gets or Sets LocationNames Field.  </summary>
+        public virtual string LocationNames { get; set; }
+
+
 
         #endregion
 
@@ -335,10 +325,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             int? strikehours, int? studioshootdays, int? shoothours, int? locationdays, int? locationhours,
             bool iscostplus, bool iswrapupinsurance, bool isfringeaccountseparate, 
             string agencyemail, bool isoton, DateTime? contractexecutiondate, DateTime? deliverydate, string jobnumber,
-            string caption, bool iscorporatedefault, int? chartofaccountid,
+            string caption, bool iscorporatedefault, int chartofaccountid,
             long? rollupaccountid, int? typeofcurrencyid, int? rollupjobid, ProjectStatus? typeofjobstatusid,
             BudgetSoftware? typeofbidsoftwareid, int? rollupcenterid, bool isapproved, bool isactive, bool isictdivision,
-            long organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid, int? taxcreditid)
+            long organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid, int? taxcreditid, string locationnames)
             : base(jobnumber: jobnumber, caption: caption, iscorporatedefault: iscorporatedefault,
                 rollupaccountid: rollupaccountid,
                 typeofcurrencyid: typeofcurrencyid, rollupjobid: rollupjobid, typeofjobstatusid: typeofjobstatusid, typeofbidsoftwareid: typeofbidsoftwareid,
@@ -415,6 +405,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             IsOTon = isoton;
             ContractExecutionDate = contractexecutiondate;
             DeliveryDate = deliverydate;
+            LocationNames = locationnames;
         }
 
        

@@ -1,14 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
+using Castle.Core;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
     /// <summary>
     /// This service will provide all CRUD operations on Account.
     /// </summary>
+   
     public interface IAccountUnitAppService:IApplicationService
     {
         /// <summary>
@@ -16,6 +19,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+      
         Task<AccountUnitDto> CreateAccountUnit(CreateAccountUnitInput input);
 
         /// <summary>
@@ -82,4 +86,5 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         Task<List<NameValueDto>> GetTypeOfCurrencyRateList();
     }
+    
 }

@@ -11,6 +11,7 @@ using Abp.AutoMapper;
 using AutoMapper;
 using System.Data.Entity;
 using Abp.Domain.Uow;
+using Abp.Runtime.Session;
 using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
@@ -22,6 +23,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<UserViewSettingsUnit, int> _userViewSettingsUnitRepository;
         private readonly IRepository<GridListUnit, int> _gridListUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private IAbpSession AbpSession { get; set; }
         public UserViewSettingsUnitAppService(UserViewSettingsUnitManager userViewSettingsUnitManager,
             IRepository<UserViewSettingsUnit, int> userViewSettingsUnitRepository,
             IRepository<GridListUnit, int> gridListUnitRepository,
@@ -31,6 +33,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             _userViewSettingsUnitRepository = userViewSettingsUnitRepository;
             _gridListUnitRepository = gridListUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
+            AbpSession = NullAbpSession.Instance;
         }
 
 
@@ -112,6 +115,8 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         private IQueryable<UserViewSettingsUnitDto> CreateUserViewSettingsQuery(SearchInputDto input)
         {
+            int? tenantId = AbpSession.TenantId;
+            long? userId = AbpSession.UserId;
             IQueryable<UserViewSettingsUnitDto> query = (from settings in _userViewSettingsUnitRepository.GetAll()
                     join gridList in _gridListUnitRepository.GetAll()
                     on settings.GridId equals gridList.Id into gridsetting

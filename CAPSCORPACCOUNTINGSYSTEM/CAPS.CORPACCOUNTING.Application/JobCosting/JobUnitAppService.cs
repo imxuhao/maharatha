@@ -76,6 +76,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Create)]
         public async Task<JobUnitDto> CreateJobUnit(CreateJobUnitInput input)
         {
+
+            //validating the  BudgetFormat(ChartofAccountId)
+            if (input.ChartOfAccountId==0)
+            {
+                throw new UserFriendlyException(L("BudgetFormatisRequired"));
+            }
             CreateJobCommercialInput jobcommercialunit = new CreateJobCommercialInput();
             jobcommercialunit.JobNumber = input.JobNumber;
             jobcommercialunit.Caption = input.Caption;
@@ -106,7 +112,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                                                                      Description = account.Caption
                                                                  }).ToListAsync();
             #region Inserting JobId,AccountId,Description in JobAccount Table
-
+            //bulk insert
             foreach (var jobAccount in jobAccounts)
             {
                 await _jobAccountUnitAppService.CreateJobAccountUnit(jobAccount);
@@ -124,6 +130,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [UnitOfWork]
         public async Task<JobUnitDto> UpdateJobUnit(UpdateJobUnitInput input)
         {
+            if (input.ChartOfAccountId == 0)
+            {
+                throw new UserFriendlyException(L("BudgetFormatisRequired"));
+            }
             var jobUnit = await _jobUnitRepository.GetAsync(input.JobId);
             #region Setting the values to be updated
             jobUnit.JobNumber = input.JobNumber;
@@ -144,10 +154,45 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobUnit.RollupCenterId = input.RollupCenterId;
             #endregion
 
+           
             await _jobUnitManager.UpdateAsync(jobUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
+            //disable the SoftDelete Filter
+            #region Adding the new lines to jobAccount
+            using (UnitOfWorkManager.Current.DisableFilter(AbpDataFilters.SoftDelete))
+            {
+                //get all jobaccounts and Lines 
+                var joblocations = (from lines in _accountUnitRepository.GetAll().Where(p=>p.ChartOfAccountId==input.ChartOfAccountId
+                                    && p.OrganizationUnitId==input.OrganizationUnitId)
+                                     join jobacc in _jobAccountUnitRepository.GetAll() on lines.Id equals jobacc.AccountId into jobaccount
+                                     from jobaccounts in jobaccount.DefaultIfEmpty()
+                                     select new { lines,jobaccounts }).ToList();
+                //bulkinsertion
+                foreach (var joblocation in joblocations)
+                {
+                    if (ReferenceEquals(joblocation.jobaccounts, null) && !joblocation.lines.IsDeleted)
+                    {
+                        CreateJobAccountUnitInput jobAccount = new CreateJobAccountUnitInput
+                        {
+                            JobId = input.JobId,
+                            AccountId = joblocation.lines.Id,
+                            OrganizationUnitId = input.OrganizationUnitId,
+                            Description = joblocation.lines.Caption
+                        };
+
+                        await _jobAccountUnitAppService.CreateJobAccountUnit(jobAccount);
+                        
+                    }
+                }
+
+            }
+            #endregion
+
+            var xx = _accountUnitRepository.GetAll().ToList() ;
+
             #region updating all JobAccounts of Job
+            //bulk update
             if (!ReferenceEquals(input.JobAccountList, null))
             {
                 foreach (var jobAccounts in input.JobAccountList)

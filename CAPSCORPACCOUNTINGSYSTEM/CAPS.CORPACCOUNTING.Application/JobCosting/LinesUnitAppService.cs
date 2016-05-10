@@ -26,18 +26,21 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<TypeOfAccountUnit, int> _typeOfAccountRepository;
         private readonly IRepository<TypeOfCurrencyUnit, short> _typeOfCurrencyRepository;
         private readonly IRepository<JobUnit, int> _jobRepository;
+        private readonly IRepository<JobAccountUnit,long> _jobaccontRepository;
 
         public LinesUnitAppService(AccountUnitManager accountUnitManager,
             IRepository<AccountUnit, long> accountUnitRepository,
             IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
-            IRepository<JobUnit, int> jobRepository)
+            IRepository<JobUnit, int> jobRepository,
+            IRepository<JobAccountUnit, long> jobaccontRepository)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
             _typeOfAccountRepository = typeOfAccountRepository;
             _typeOfCurrencyRepository = typeOfCurrencyRepository;
             _jobRepository = jobRepository;
+            _jobaccontRepository = jobaccontRepository;
         }
 
         /// <summary>
@@ -150,6 +153,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [UnitOfWork]
         public async Task DeleteLineUnit(IdInput<long> input)
         {
+            //deleting the jobaccounts based on accountId
+            await _jobaccontRepository.DeleteAsync(p => p.AccountId == input.Id);
             await _accountUnitManager.DeleteAsync(input.Id);
         }
     }

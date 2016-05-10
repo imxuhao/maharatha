@@ -10,6 +10,7 @@ using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
 using Abp.Authorization;
+using Abp.UI;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Authorization;
@@ -22,11 +23,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     {
         private readonly JobUnitManager _jobUnitManager;
         private readonly IRepository<JobUnit> _jobUnitRepository;
+        private readonly IRepository<CoaUnit> _coaUnitRepository;
         public DivisionUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository,
-            IRepository<CoaUnit> coaUnitRepository, IRepository<AccountUnit, long> accountUnitRepository)
+            IRepository<CoaUnit> coaUnitRepository)
         {   
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
+            _coaUnitRepository = coaUnitRepository;
         }
         /// <summary>
         /// To create the Division
@@ -37,10 +40,17 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions_Create)]
         public async Task<JobUnitDto> CreateDivisionUnit(CreateJobUnitInput input)
         {
+            var chartofaccount = 
+                _coaUnitRepository.FirstOrDefault(
+                    p => p.IsCorporate == true && p.OrganizationUnitId == input.OrganizationUnitId);
+            if (ReferenceEquals(chartofaccount, null))
+            {
+                throw new UserFriendlyException(L("Pleasesetupchartofaccount"));
+            }
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,
                 isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid:input.OrganizationUnitId, typeofprojectid: input.TypeofProjectId,
-                taxrecoveryid: input.TaxRecoveryId, chartofaccountid: input.ChartOfAccountId, rollupcenterid: input.RollupCenterId,isdivision:true, taxcreditid:input.TaxCreditId);
+                taxrecoveryid: input.TaxRecoveryId, chartofaccountid: chartofaccount.Id, rollupcenterid: input.RollupCenterId,isdivision:true, taxcreditid:input.TaxCreditId);
             await _jobUnitManager.CreateAsync(jobUnit);
             await CurrentUnitOfWork.SaveChangesAsync();            
             return jobUnit.MapTo<JobUnitDto>();

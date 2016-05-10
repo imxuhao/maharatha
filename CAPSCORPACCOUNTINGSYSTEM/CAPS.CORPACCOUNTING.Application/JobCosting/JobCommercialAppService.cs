@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text;
+using System.Threading.Tasks;
 using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
@@ -68,6 +69,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [UnitOfWork]
         public async Task<JobCommercialUnitDto> UpdateJobDetailUnit(UpdateJobCommercialnput input)
         {
+            string locationNames = string.Empty;
+            if (!ReferenceEquals(input.JobLocations,null))
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var joblocation in input.JobLocations)
+                {
+                    sb.Append(joblocation.LocationName+ ",");
+                }
+                locationNames= sb.ToString().TrimEnd(',');
+            }
             var jobDetailUnit = await _jobDetailUnitRepository.GetAsync(input.JobId);
 
             #region Setting the values to be updated
@@ -141,14 +152,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobDetailUnit.StudioShootDays = input.StudioShootDays;
             jobDetailUnit.StorageHouse = input.StorageHouse;
             jobDetailUnit.MarkupTotal = input.MarkupTotal;
-
+            jobDetailUnit.LocationNames = locationNames;
             #endregion
 
             await _jobDetailUnitManager.UpdateAsync(jobDetailUnit);
 
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            if (input.JobLocations != null)
+            if (!ReferenceEquals(input.JobLocations, null))
             {
                 foreach (var location in input.JobLocations)
                 {

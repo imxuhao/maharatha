@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         public virtual async Task DeleteAsync(IdInput input)
         {
-            await JobAccountUnitRepository.DeleteAsync(p=>p.JobId==input.Id);
+            await JobAccountUnitRepository.DeleteAsync(input.Id);
         }
     }
 }

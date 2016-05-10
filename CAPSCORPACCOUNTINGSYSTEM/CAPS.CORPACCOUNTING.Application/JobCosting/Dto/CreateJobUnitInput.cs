@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
@@ -21,8 +22,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the IsCorporateDefault field. </summary>
         public bool IsCorporateDefault { get; set; }
 
-        /// <summary>Gets or sets the ChartOfAccountId field. </summary>       
-        public int? ChartOfAccountId { get; set; }       
+        /// <summary>Gets or sets the ChartOfAccountId field. </summary>  
+        public int ChartOfAccountId { get; set; }       
 
         /// <summary>Gets or sets the RollupAccountId field. </summary>
         public long? RollupAccountId { get; set; }        

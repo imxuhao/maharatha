@@ -39,7 +39,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<JobUnitDto>> GetJobUnits(SearchInputDto input);
+        Task<PagedResultOutput<JobCommercialUnitDto>> GetJobUnits(SearchInputDto input);
 
         /// <summary>
         /// Get the Job based on JobId.

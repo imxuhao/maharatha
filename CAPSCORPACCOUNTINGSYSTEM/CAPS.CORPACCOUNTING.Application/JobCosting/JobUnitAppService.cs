@@ -68,7 +68,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         }
         /// <summary>
-        /// To create the Job
+        /// To create the Job.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -76,11 +76,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Create)]
         public async Task<JobUnitDto> CreateJobUnit(CreateJobUnitInput input)
         {
-            //validating the  BudgetFormat(ChartofAccountId)
-            if (ReferenceEquals(input.ChartOfAccountId, null))
-            {
-                throw new UserFriendlyException(L("BudgetFormatisRequired"));
-            }
             CreateJobCommercialInput jobcommercialunit = new CreateJobCommercialInput();
             jobcommercialunit.JobNumber = input.JobNumber;
             jobcommercialunit.Caption = input.Caption;
@@ -181,7 +176,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects)]
-        public async Task<PagedResultOutput<JobUnitDto>> GetJobUnits(SearchInputDto input)
+        public async Task<PagedResultOutput<JobCommercialUnitDto>> GetJobUnits(SearchInputDto input)
         {
             var query = from job in _jobDetailUnitRepository.GetAll()
                         join emp in _employeeUnitRepository.GetAll() on job.DirectorEmployeeId equals emp.Id
@@ -205,9 +200,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 .PageBy(input)
                 .ToListAsync();
 
-            return new PagedResultOutput<JobUnitDto>(resultCount, results.Select(item =>
+            return new PagedResultOutput<JobCommercialUnitDto>(resultCount, results.Select(item =>
             {
-                var dto = item.Job.MapTo<JobUnitDto>();
+                var dto = item.Job.MapTo<JobCommercialUnitDto>();
                 dto.JobId = item.Job.Id;
                 if (item.DirectorName != null)
                     dto.DirectorName = item.DirectorName;

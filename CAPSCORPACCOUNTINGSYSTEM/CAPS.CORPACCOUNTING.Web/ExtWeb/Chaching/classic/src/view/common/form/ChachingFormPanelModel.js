@@ -382,9 +382,9 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
             }
         },
         getCustomersList: {
-            model:'Chaching.model.customers.CustomersModel',
+            model: 'Chaching.model.customers.CustomersModel',
             xtype: 'ajax',
-            pageSize:1000,
+            pageSize: 1000,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -490,11 +490,11 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
         },
         typeOfTaxList: {
             fields: [{ name: 'name' }, { name: 'value' }, {
-                name: 'typeOfTax', convert: function (value, record) {
+                name: 'typeofTax', convert: function (value, record) {
                     return record.get('name');
                 }
             }, {
-                name: 'typeOfTaxId', convert: function (value, record) {
+                name: 'typeofTaxId', convert: function (value, record) {
                     return record.get('value');
                 }
             }],
@@ -556,8 +556,35 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }
         },
+        getAccountsListLines: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+
+                name: 'account', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'accountId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            extraParams: {
+                value: false
+            },
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/vendorUnit/GetAccountsList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
+        },
+
         getAccountsList: {
             fields: [{ name: 'name' }, { name: 'value' }, {
+
                 name: 'account', convert: function (value, record) {
                     return record.get('name');
                 }

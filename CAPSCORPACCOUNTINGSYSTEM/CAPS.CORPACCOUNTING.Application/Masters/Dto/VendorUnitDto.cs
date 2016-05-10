@@ -150,6 +150,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeofTaxId field. </summary>
         public TypeofTax? TypeofTaxId { get; set; }
 
+        /// <summary>Gets or sets the TypeofTax field. </summary>
+        public string TypeofTax { get; set; }
+
         /// <summary>Gets or sets the TaxCreditId field. </summary>
         public int? TaxCreditId { get; set; }
 

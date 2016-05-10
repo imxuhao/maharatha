@@ -63,7 +63,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         width: '15%',
         filterField: {
             xtype: 'textfield',
-            width: '15%',
+            width: '100%',
             emptyText: app.localize('VendorSearch')
         }
     }, {
@@ -78,7 +78,8 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         width: '15%',
         filterField: {
             xtype: 'textfield',
-            width: '15%',
+            width: '100%',
+            entityName: 'Address',
             emptyText: app.localize('AddressSearch')
         }, renderer: Chaching.utilities.ChachingRenderers.renderFirstAddress
     }
@@ -93,7 +94,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         renderer: Chaching.utilities.ChachingRenderers.renderPhone1,
         filterField: {
             xtype: 'textfield',
-            width: '15%',
+            width: '100%',
             entityName: "Address",
             emptyText: app.localize('TelephoneSearch')
         }
@@ -109,7 +110,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         renderer: Chaching.utilities.ChachingRenderers.renderEmail,
         filterField: {
             xtype: 'textfield',
-            width: '15%',
+            width: '100%',
             emptyText: app.localize('EmailSearch')
         }
     }
@@ -121,9 +122,12 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         groupable: true,
         width: '10%',
         filterField: {
-            xtype: 'textfield',
-            width: '15%',
-            emptyText: app.localize('1099CodeSearch')
+            xtype: 'combobox',
+            valueField: 'typeof1099BoxId',
+            displayField: 'typeof1099Box',
+            bind: {
+                store: '{typeof1099BoxList}'
+            }
         }
     }
     , {
@@ -134,16 +138,19 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         groupable: true,
         width: '15%',
         filterField: {
-            xtype: 'textfield',
-            width: '15%',
-            entityName: "",
-            emptyText: app.localize('PaymentTermsSearch')
+            xtype: 'combobox',
+            valueField: 'paymentTermsId',
+            displayField: 'paymentTerms',
+            bind: {
+                store: '{paymentTermsList}'
+            }
         }
     }
     , {
         xtype: 'gridcolumn',
         text: app.localize('TotalOutstandingInvoices'),
-        width: '13%'
+        dataIndex: 'TotalOutstandingInvoices',
+        width: '18%'
     }
     ,
     {
@@ -161,7 +168,13 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
          dataIndex: 'city',
          width: '13%',
          renderer: Chaching.utilities.ChachingRenderers.renderCity,
-         hidden: true
+         hidden: true,
+         filterField: {
+             xtype: 'textfield',
+             width: '100%',
+             entityName: "Address",
+             emptyText: app.localize('CitySearch')
+         }
      }
        , {
            xtype: 'gridcolumn',
@@ -172,8 +185,8 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
            hidden: true,
            filterField: {
                xtype: 'textfield',
-               width: '15%',
-               entityName: "",
+               width: '100%',
+               entityName: "Address",
                emptyText: app.localize('StateSearch')
            }
        }
@@ -186,27 +199,30 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
              hidden: true,
              filterField: {
                  xtype: 'textfield',
-                 width: '15%',
-                 entityName: "",
-                 emptyText: app.localize('PostalCodeSearch')
+                 width: '100%',
+                 entityName: "Address",
+                 emptyText: app.localize('ZipCodeSearch')
              }
          }
      , {
          xtype: 'gridcolumn',
          text: app.localize('PreviousYearPayments'),
-         width: '13%',
+         dataIndex: 'PreviousYearPayments',
+         width: '18%',
          hidden: true
      }
       , {
           xtype: 'gridcolumn',
           text: app.localize('CurrentYearPayments'),
-          width: '13%',
+          dataIndex: 'CurrentYearPayments',
+          width: '18%',
           hidden: true
       }
       , {
           xtype: 'gridcolumn',
           text: app.localize('OpenPurchaseOrders'),
-          width: '13%',
+          dataIndex: 'OpenPurchaseOrders',
+          width: '18%',
           hidden: true
       }
        , {
@@ -217,8 +233,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
            hidden: true,
            filterField: {
                xtype: 'textfield',
-               width: '15%',
-               entityName: "",
+               width: '100%',
                emptyText: app.localize('SSNSearch')
            }
        }
@@ -230,58 +245,43 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
           hidden: true,
           filterField: {
               xtype: 'textfield',
-              width: '15%',
-              entityName: "",
+              width: '100%',
               emptyText: app.localize('FedralTaxSearch')
           }
       }
-
-       //, {
-       //    xtype: 'gridcolumn',
-       //    text: app.localize('Corporation'),
-       //    dataIndex: 'isCorporation',
-       //    sortable: true,
-       //    groupable: true,
-       //    width: '10%',
-       //    hidden: true,
-
-       //    renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-       //    filterField: {
-       //        xtype: 'combobox',
-       //        valueField: 'value',
-       //        displayField: 'text',
-       //        store: {
-       //            fields: [{ name: 'text' }, { name: 'value' }],
-       //            data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
-       //        }
-       //    }
-       //}
-
        , {
            xtype: 'gridcolumn',
            text: app.localize('Corporation'),
+           dataIndex: 'typeofTax',
            width: '13%',
-           hidden: true
+           hidden: true,
+           filterField: {
+               xtype: 'combobox',
+               valueField: 'typeofTaxId',
+               displayField: 'typeofTax',
+               bind: {
+                   store: '{typeOfTaxList}'
+               }
+           }
        }
-            , {
-                xtype: 'gridcolumn',
-                text: app.localize('IndependentContractor'),
-                dataIndex: 'isIndependentContractor',
-                sortable: true,
-                groupable: true,
-                width: '10%',
-                hidden: true,
-
-                renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-                filterField: {
-                    xtype: 'combobox',
-                    valueField: 'value',
-                    displayField: 'text',
-                    store: {
-                        fields: [{ name: 'text' }, { name: 'value' }],
-                        data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
-                    }
-                }
-            }
+         , {
+             xtype: 'gridcolumn',
+             text: app.localize('IndependentContractor'),
+             dataIndex: 'isIndependentContractor',
+             sortable: true,
+             groupable: true,
+             width: '18%',
+             hidden: true,
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: 'combobox',
+                 valueField: 'value',
+                 displayField: 'text',
+                 store: {
+                     fields: [{ name: 'text' }, { name: 'value' }],
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                 }
+             }
+         }
     ]
 });

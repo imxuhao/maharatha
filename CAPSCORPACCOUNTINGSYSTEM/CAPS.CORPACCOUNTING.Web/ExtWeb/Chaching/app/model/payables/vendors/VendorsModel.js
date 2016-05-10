@@ -1,6 +1,6 @@
 ﻿Ext.define('Chaching.model.payables.vendors.VendorsModel', {
     extend: 'Chaching.model.base.BaseModel',
-    //requires:['Chaching.model.address.AddressModel'],
+    requires:['Chaching.model.address.AddressModel'],
     config: {
         searchEntityName: 'Vendor'
     },

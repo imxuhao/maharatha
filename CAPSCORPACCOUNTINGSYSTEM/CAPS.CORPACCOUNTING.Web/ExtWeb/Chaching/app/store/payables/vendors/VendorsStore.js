@@ -4,9 +4,9 @@
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-        extraParams: {
-            organizationUnitId: 0
-        },
+        //extraParams: {
+        //    organizationUnitId: 0
+        //},
         api: {
             create: abp.appPath + 'api/services/app/vendorUnit/CreateVendorUnit',
             read: abp.appPath + 'api/services/app/vendorUnit/GetVendorUnits',

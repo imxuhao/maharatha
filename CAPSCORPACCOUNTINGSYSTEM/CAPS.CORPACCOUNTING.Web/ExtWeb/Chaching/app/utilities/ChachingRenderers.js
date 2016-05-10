@@ -137,103 +137,103 @@
         return val;
     },
     renderFullAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('line1') + ' ' + address.get('line2') + ' ' + address.get('line3');
             }
         }
-        return value;
+        return val;
     },
     renderContactNumber: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('contactNumber');
             }
         }
-        return value;
+        return val;
     },
     renderEmail: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('email');
             }
         }
-        return value;
+        return val;
     },
     renderFirstAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('line1');
             }
         }
-        return value;
+        return val;
     },
     renderSecondAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('line2');
             }
         }
-        return value;
+        return val;
     },
     renderThirdAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('line3');
             }
         }
-        return value;
+        return val;
     },
     renderFourthAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('line4');
             }
         }
-        return value;
+        return val;
     },
     renderPhone1: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('phone1');
             }
         }
-        return value;
+        return val;
     },
     renderCity: function (val, meta, record, rowIndex, colIndex, store, view) {
-        if (record) {
+        if (record && record._address) {
             var address = record.getAddress();
             if (address) {
                 return address.get('city');
             }
         }
-        return value;
+        return val;
     },
     renderState: function (val, meta, record, rowIndex, colIndex, store, view) {
-            if (record) {
+        if (record && record._address) {
                 var address = record.getAddress();
                 if (address) {
                     return address.get('state');
                 }
             }
-            return value;
+            return val;
         },
         renderPostalCode: function (val, meta, record, rowIndex, colIndex, store, view) {
-            if (record) {
+            if (record && record._address) {
                 var address = record.getAddress();
                 if (address) {
                     return address.get('postalCode');
             }
         }
-        return value;
+        return val;
     },
     renderEmployeeInnerTpl: function () {
         return '{firstName} {lastName}';

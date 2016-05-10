@@ -8,14 +8,14 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     {
         /// <summary>Gets or sets the ObjectId field. </summary>
         [Range(1, Int32.MaxValue)]
-        public int ObjectId { get; set; }
+        public int? ObjectId { get; set; }
 
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         [EnumDataType(typeof(TypeofObject))]
-        public TypeofObject TypeofObjectId { get; set; }
+        public TypeofObject? TypeofObjectId { get; set; }
 
         /// <summary>Gets or sets the AddressTypeId field. </summary>
-        public TypeofAddress AddressTypeId { get; set; }
+        public TypeofAddress? AddressTypeId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }

@@ -49,6 +49,14 @@ namespace CAPS.CORPACCOUNTING.Masters
 
 
         /// <summary>
+        /// Get the list of all vendors alias names based on VendorId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<ListResultOutput<VendorAliasUnitDto>> GetVendorAliasUnits(IdInput input);
+
+
+        /// <summary>
         /// Get TypeofPaymentMethod 
         /// </summary>
         /// <returns></returns>
@@ -114,6 +122,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="search"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetAccountsList(AutoSearchInput search);
+
+       
 
     }
 }

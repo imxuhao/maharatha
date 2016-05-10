@@ -304,6 +304,7 @@
     <Compile Include="Masters\Dto\GetLocationsInput.cs" />
     <Compile Include="Masters\Dto\AutoSearchInput.cs" />
     <Compile Include="Masters\Dto\CreateUserViewSettingsUnitInput.cs" />
+    <Compile Include="Masters\Dto\CreateVendorAliasUnitInput.cs" />
     <Compile Include="Masters\Dto\GetUserViewSettingsUnitDto.cs" />
     <Compile Include="Masters\Dto\LocationSetUnitDto.cs" />
     <Compile Include="Masters\Dto\UpdateLocationSetUnitInput.cs" />
@@ -318,6 +319,7 @@
     <Compile Include="Masters\Dto\GetCoaInput.cs" />
     <Compile Include="Masters\Dto\GetSalesRepInput.cs" />
     <Compile Include="Masters\Dto\UpdateUserViewSettingsUnitInput.cs" />
+    <Compile Include="Masters\Dto\UpdateVendorAliasUnitInput.cs" />
     <Compile Include="Masters\Dto\UserViewSettingsUnitDto.cs" />
     <Compile Include="Masters\Dto\VendorAliasUnitDto.cs" />
     <Compile Include="Masters\Dto\VendorAndAddressDto.cs" />

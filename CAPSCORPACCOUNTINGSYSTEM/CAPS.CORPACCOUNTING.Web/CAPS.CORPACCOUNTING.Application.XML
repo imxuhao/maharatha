@@ -1361,6 +1361,9 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput.LocationSiteDate">
             <summary>Gets or sets the LocationSiteDate field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobLocationInput.LocationName">
+            <summary>Gets or sets the LocationName field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobLocationInput.JobId">
             <summary>Gets or sets the JobId field. </summary>
         </member>
@@ -1370,26 +1373,10 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobLocationInput.LocationSiteDate">
             <summary>Gets or sets the LocationSite1Date field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.OrganizationUnitId">
-            <summary> Gets or Sets the ComapnyId to Search the Jobs based on  ComapnyId. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.Caption">
-            <summary> Gets or Sets the Caption to Search the Jobs based on Caption. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.ProductName">
-            <summary> Gets or Sets the ProductName to Search the Jobdetails based on ProductName. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.JobNumber">
-            <summary> Gets or Sets the JobNumber to Search the Jobs based on JobNumber. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.Director">
-            <summary> Gets or Sets the Director to Search the Employees based on EmployeeLastName. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.Agency">
-            <summary> Gets or Sets the Agency to Search the Customers based on CustomerId. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.TypeOfJobStatusId">
-            <summary> Gets or Sets the TypeOfJobStatusId to Search the Jobs based on TypeOfJobStatusId. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput.JobId">
+            <summary>
+            Gets or sets JobId 
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.BidDate">
             <summary>Gets or Sets BidDate Field.  </summary>
@@ -1594,6 +1581,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.JobLocations">
             <summary>Gets or Sets the JobLocations. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.LocationNames">
+            <summary>Gets or Sets LocationNames Field.  </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.JobId">
             <summary>Gets or Sets JobId Field.  </summary>
@@ -1804,6 +1794,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.JobLocations">
             <summary>Gets or Sets the JobLocations of the Job. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.LocationNames">
+            <summary>Gets or Sets LocationNames Field.  </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.JobId">
             <summary>Gets or Sets JobId Field.  </summary>
@@ -2022,6 +2015,9 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.JobLocations">
             <summary>Gets or Sets the JobLocations of the Job </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.LocationNames">
+            <summary>Gets or Sets LocationNames Field.  </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetRollupCenterInput.OrganizationUnitId">
             <summary> Gets or Sets the CompanyId to Search the RollupCenters based on  CompanyId </summary>
         </member>
@@ -2199,7 +2195,7 @@
             <summary>Gets or sets the IsCorporateDefault field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.ChartOfAccountId">
-            <summary>Gets or sets the ChartOfAccountId field. </summary>       
+            <summary>Gets or sets the ChartOfAccountId field. </summary> 
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.RollupAccountId">
             <summary>Gets or sets the RollupAccountId field. </summary>
@@ -2265,7 +2261,7 @@
             <summary>Gets or sets the IsCorporateDefault field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.ChartOfAccountId">
-            <summary>Gets or sets the ChartOfAccountId field. </summary>       
+            <summary>Gets or sets the ChartOfAccountId field. </summary>  
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.RollupAccountId">
             <summary>Gets or sets the RollupAccountId field. </summary>
@@ -2386,7 +2382,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.GetJobLocationUnitsByJobId(Abp.Application.Services.Dto.IdInput)">
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.GetJobLocationUnitsByJobId(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
             <summary>
             Get the list of all JobLocations based on JobId.
             </summary>
@@ -2891,7 +2887,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.CreateJobUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput)">
             <summary>
-            To create the Job
+            To create the Job.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3223,6 +3219,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.IsDefault">
             <summary>Gets or sets the IsDefault field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorAliasUnitInput.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorAliasUnitInput.AliasName">
+            <summary>Gets or sets the AliasName field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetUserViewSettingsUnitDto.UserId">
             <summary>Gets or sets the UserId field. </summary>
         </member>
@@ -3419,6 +3421,15 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.IsDefault">
             <summary>Gets or sets the IsDefault field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorAliasUnitInput.VendorAliasId">
+            <summary>Gets or sets the VendorAliasId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorAliasUnitInput.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorAliasUnitInput.AliasName">
+            <summary>Gets or sets the AliasName field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.UserViewId">
             <summary>Gets or sets the UserViewId field. </summary>
         </member>
@@ -3614,6 +3625,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofTaxId">
             <summary>Gets or sets the TypeofTaxId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TypeofTax">
+            <summary>Gets or sets the TypeofTax field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorUnitDto.TaxCreditId">
             <summary>Gets or sets the TaxCreditId field. </summary>
         </member>
@@ -3776,6 +3790,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.Addresses">
             <summary> Gets or sets the  Addresses of the Vendor </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput.VendorAlias">
+            <summary> Gets or sets Addresses of the Vendor. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.LastName">
             <summary>Gets or sets the LastName field. </summary>
         </member>
@@ -3809,7 +3826,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.PaymentTermsId">
             <summary>Gets or sets the PaymentTermsId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.TypeofCurrency">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.TypeofCurrencyId">
             <summary>Gets or sets the TypeofCurrency field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.IsCorporation">
@@ -3912,6 +3929,9 @@
             <summary>Gets or sets the Notes field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.Addresses">
+            <summary> Gets or sets Addresses of the Vendor. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.VendorAlias">
             <summary> Gets or sets Addresses of the Vendor. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetAddressUnitInput.ObjectId">
@@ -5285,7 +5305,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.GetLocationList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.GetLocationList(CAPS.CORPACCOUNTING.Masters.Dto.GetLocationsInput)">
             <summary>
             Get All Locationsets 
             </summary>
@@ -5365,6 +5385,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorAliasUnits(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get the list of all vendors alias names based on VendorId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetTypeofPaymentMethodList">
             <summary>
             Get TypeofPaymentMethod 
@@ -5424,6 +5451,41 @@
             
             </summary>
             <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.CreateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateLocationSetUnitInput)">
+            <summary>
+            Create the LocationSet.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.DeleteLocationSetUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the LocationSet based on LocationSetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.GetLocationSetUnitsById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get the LocationSet based on LocationSetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.UpdateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput)">
+            <summary>
+            Update the LocationSet based on LocationSetId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.GetLocationList(CAPS.CORPACCOUNTING.Masters.Dto.GetLocationsInput)">
+            <summary>
+            Get All Locations List
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.SalesRepUnitAppService.CreateSalesRepUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateSalesRepUnitInput)">
@@ -5745,16 +5807,44 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.#ctor(CAPS.CORPACCOUNTING.Masters.VendorUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCountryUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorAliasUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Masters.VendorAliasUnitManager)">
+            <summary>
+            
+            </summary>
+            <param name="vendorUnitManager"></param>
+            <param name="vendorUnitRepository"></param>
+            <param name="unitOfWorkManager"></param>
+            <param name="addressAppService"></param>
+            <param name="addresRepository"></param>
+            <param name="vendorPaytermRepository"></param>
+            <param name="typeOfCountryRepository"></param>
+            <param name="regionRepository"></param>
+            <param name="countryRepository"></param>
+            <param name="vendorAliasUnitRepository"></param>
+            <param name="accountUnitRepository"></param>
+            <param name="coaUnitRepository"></param>
+            <param name="vendorAliasUnitManager"></param>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.EventBus">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.CreateVendorUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput)">
             <summary>
-            Creating the Vendor with Addresses
+            Creating the Vendor,Addresses and Vendor Alias Information
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.DeleteVendorUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
-            Delete Vendor and its Addresses
+            Delete Vendor,VendorAlias and its Addresses
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -5782,7 +5872,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.UpdateVendorUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateVendorUnitInput)">
             <summary>
-            Updating Vendor with Addresses
+            Updating Vendor,vendoralias with Addresses
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -5846,6 +5936,13 @@
             
             </summary>
             <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetVendorAliasUnits(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnitAppService.CreateVendorPaymentTermUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorPaymentTermUnitInput)">

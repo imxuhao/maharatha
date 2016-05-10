@@ -671,21 +671,26 @@
     <text name="VendorAliasSection" value="Vendor Alias Section" />
     <text name="NotesSection" value="Notes Section" />
     <text name="Notes" value="Notes" />
-<text name="SecondAddress" value="Second Address" />
-<text name="ThirdAddress" value="Third Address" />
-<text name="FourthAddress" value="Fourth Address" />
-<text name="FirstAddress" value="First Address" />
- <text name="BudgetFormatisRequired" value="Budget Format is Required" />   
-     <text name="ProjectSetup" value="Project setup" />
-   <text name="AgencyContractInfo" value="Agency Contract Info" />
-  <text name="ToolTipBidder" value="Enter product owner" />
+    <text name="SecondAddress" value="Second Address" />
+    <text name="ThirdAddress" value="Third Address" />
+    <text name="FourthAddress" value="Fourth Address" />
+    <text name="FirstAddress" value="First Address" />
+    <text name="BudgetFormatisRequired" value="Budget Format is Required" />
+    <text name="ProjectSetup" value="Project setup" />
+    <text name="AgencyContractInfo" value="Agency Contract Info" />
+    <text name="ToolTipBidder" value="Enter product owner" />
     <text name="GeneralInformation" value="General Information" />
     <text name="VendorAlias" value="Vendor Alias" />
     <text name="CreatingVendorAlias" value="Creating Vendor Alias" />
-    
-  <text name="SaveProject" value="Save project" />
-  <text name="SaveProjectDetails" value="Save project details" />
-  <text name="LineNumbersTab" value="Line #" />
+    <text name="SaveProject" value="Save project" />
+    <text name="SaveProjectDetails" value="Save project details" />
+    <text name="LineNumbersTab" value="Line #" />
+    <text name="StateSearch" value="State Search" />
+    <text name="PostalCodeSearch" value="Postal Code Search"/>
+    <text name="ZipCodeSearch" value="Zip Search" />
+    <text name="SSNSearch" value="SSN Search" />
+    <text name="FedralTaxSearch" value="Fedral Tax Search" />
+    <text name="CitySearch" value="City Search" />
     <text name="DuplicateChartofAccount" value="Duplicate ChartofAccount" />
     <text name="Pleasesetupchartofaccount" value="Please setup ChartofAccount First." />
   </texts>

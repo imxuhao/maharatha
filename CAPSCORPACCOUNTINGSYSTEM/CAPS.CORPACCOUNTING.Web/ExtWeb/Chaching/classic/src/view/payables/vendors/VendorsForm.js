@@ -92,7 +92,7 @@
                                 items: [{
                                     xtype: 'combobox',
                                     name: 'typeofVendorId',
-                                    fieldLabel: app.localize('Type').initCap(),
+                                    fieldLabel: app.localize('Type').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
                                     width: '100%',
                                     ui: 'fieldLabelTop',
                                     displayField: 'typeofvendor',
@@ -121,6 +121,7 @@
                                 },
                                 items: [{
                                     xtype: 'address',
+                                    itemId: 'addressGrid',
                                     layout: 'fit',
                                     width: '100%'
                                 }]
@@ -142,12 +143,12 @@
                        items: [
                                                 {
                                                     xtype: 'combobox',
-                                                    name: 'typeOfTaxId',
+                                                    name: 'typeofTaxId',
                                                     fieldLabel: app.localize('Type').initCap(),
                                                     width: '100%',
                                                     ui: 'fieldLabelTop',
-                                                    displayField: 'typeOfTax',
-                                                    valueField: 'typeOfTaxId',
+                                                    displayField: 'typeofTax',
+                                                    valueField: 'typeofTaxId',
                                                     emptyText: app.localize('SelectOption'),
                                                     bind: {
                                                         store: '{typeOfTaxList}'
@@ -255,8 +256,8 @@
                   fieldLabel: app.localize('GLAccount').initCap(),
                   width: '100%',
                   ui: 'fieldLabelTop',
-                  displayField: '',
-                  valueField: '',
+                  displayField: 'account',
+                  valueField: 'accountId',
                   emptyText: app.localize('SelectOption'),
                   bind: {
                       store: '{getAccountsList}'
@@ -284,11 +285,11 @@
                   fieldLabel: app.localize('Line#').initCap(),
                   width: '100%',
                   ui: 'fieldLabelTop',
-                  displayField: '',
-                  valueField: '',
+                  displayField: 'account',
+                  valueField: 'accountId',
                   emptyText: app.localize('SelectOption'),
                   bind: {
-                      store: '{getAccountsList}'
+                      store: '{getAccountsListLines}'
                   }
               }]
                   },
@@ -324,27 +325,11 @@
                           xtype: 'vendoralias',
                           itemId: 'vendorAliasGrid',
                           width: 450
-                          //layout: 'fit',
-                          //width: '40%'
                       }
                       ]
                   }]
               },
-              //{
-              //    xtype: 'fieldset',
-              //    title: abp.localization.localize("VendorAliasSection").initCap(),
-              //    collapsible: true,
-              //    ui: 'transparentFieldSet',
-              //    items: [
-              //        {
-              //            xtype: 'vendoralias',
-              //            itemId:'vendorAliasGrid',
-              //            width:450
-              //            //layout: 'fit',
-              //            //width: '40%'
-              //        }
-              //    ]
-              //},
+              
             {
                 xtype: 'fieldset',
                 title: abp.localization.localize("NotesSection").initCap(),
@@ -354,6 +339,7 @@
                     xtype: 'textareafield',
                     grow: true,
                     name: 'notes',
+                    itemId: 'notes',
                     fieldLabel: app.localize('Notes').initCap(),
                     anchor: '50%',
                     ui: 'fieldLabelTop'

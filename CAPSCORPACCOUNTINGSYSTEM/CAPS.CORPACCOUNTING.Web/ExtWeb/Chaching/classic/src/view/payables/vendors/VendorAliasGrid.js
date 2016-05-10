@@ -40,10 +40,11 @@
     manageViewSetting: false,
     showPagingToolbar: false,
     hideClearFilter: true,
-    store: {
-        model: 'Chaching.model.payables.vendors.VendorAliasModel',
-        data: []
-    },
+    //store: {
+    //    model: 'Chaching.model.payables.vendors.VendorAliasModel',
+    //    data: []
+    //},
+    store: 'payables.vendors.VendorsAliasStore',
     columns: [{
         text: app.localize('Names'),
         dataIndex: 'aliasName',

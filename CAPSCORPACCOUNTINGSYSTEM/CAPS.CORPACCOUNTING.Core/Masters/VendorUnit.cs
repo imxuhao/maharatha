@@ -323,7 +323,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         public string Notes { get; set; }
 
         /// <summary>Gets or sets the VendorAlias field. </summary>
-        public IList<VendorAliasUnit> VendorAlias { get; set; }
+     
+       // public virtual IList<VendorAliasUnit> VendorAlias { get; set; }
 
         #endregion
     }

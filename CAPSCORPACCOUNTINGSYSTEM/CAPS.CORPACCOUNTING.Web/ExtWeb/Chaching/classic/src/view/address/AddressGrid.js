@@ -44,7 +44,7 @@
     hideClearFilter: true,
     columns: [
     {
-        text: app.localize('Apply'),
+        text: app.localize('Primary'),
         xtype: 'checkcolumn', dataIndex: 'isPrimary',
         listeners: {
             checkchange: function (column, recordIndex, checked) {
@@ -61,7 +61,7 @@
      {
          text: abp.localization.localize("Type"),
          xtype: 'gridcolumn',
-         dataIndex: 'typeofAddressId',
+         dataIndex: 'addressTypeId',
          sortable: true,
          groupable: true,
          width: '15%',
@@ -70,7 +70,27 @@
              valueField: 'typeofAddressId',
              displayField: 'typeofAddress',
              bind: {
-                 store: '{typeofAddressList}'
+                 store: {
+                     fields: [{ name: 'name' }, { name: 'value' }, {
+                         name: 'typeofAddress', convert: function (value, record) {
+                             return record.get('name');
+                         }
+                     }, {
+                         name: 'typeofAddressId', convert: function (value, record) {
+                             return record.get('value');
+                         }
+                     }],
+                     xtype: 'ajax',
+                     proxy: {
+                         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                         type: 'chachingProxy',
+                         url: abp.appPath + 'api/services/app/vendorUnit/GetTypeofAddressList',
+                         reader: {
+                             type: 'json',
+                             rootProperty: 'result'
+                         }
+                     }
+                 }
              }
          }
      }
@@ -86,7 +106,27 @@
              valueField: 'countryId',
              displayField: 'country',
              bind: {
-                 store: '{getCountryList}'
+                 store: {
+                     fields: [{ name: 'name' }, { name: 'value' }, {
+                         name: 'country', convert: function (value, record) {
+                             return record.get('name');
+                         }
+                     }, {
+                         name: 'countryId', convert: function (value, record) {
+                             return record.get('value');
+                         }
+                     }],
+                     xtype: 'ajax',
+                     proxy: {
+                         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                         type: 'chachingProxy',
+                         url: abp.appPath + 'api/services/app/vendorUnit/GetCountryList',
+                         reader: {
+                             type: 'json',
+                             rootProperty: 'result'
+                         }
+                     }
+                 }
              }
          }
      }
@@ -131,20 +171,6 @@
                   name: 'line3'
               }
           },
-          //{
-          //    text: app.localize('FourthAddress'),
-          //    dataIndex: 'line4',
-          //    xtype: 'gridcolumn',
-          //    sortable: false,
-          //    groupable: false,
-          //    //flex:1,
-          //    width: '13%',
-          //    editor: {
-          //        xtype: 'textfield',
-          //        name: 'line4'
-          //    }
-          //}
-          //,
            {
                text: app.localize('Contact'),
                dataIndex: 'contactNumber',
@@ -197,10 +223,30 @@
                    xtype: 'combobox',
                    valueField: 'stateId',
                    displayField: 'state',
-                   bind: {
-                       store: '{getStateOrRegionList}'
+                   store: {
+                       fields: [{ name: 'name' }, { name: 'value' }, {
+                           name: 'state', convert: function (value, record) {
+                               return record.get('name');
+                           }
+                       }, {
+                           name: 'stateId', convert: function (value, record) {
+                               return record.get('value');
+                           }
+                       }],
+                       xtype: 'ajax',
+                       proxy: {
+                           actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                           type: 'chachingProxy',
+                           url: abp.appPath + 'api/services/app/vendorUnit/GetRegionList',
+                           reader: {
+                               type: 'json',
+                               rootProperty: 'result'
+                           }
+                       }
                    }
                }
+
+
            },
 
            {

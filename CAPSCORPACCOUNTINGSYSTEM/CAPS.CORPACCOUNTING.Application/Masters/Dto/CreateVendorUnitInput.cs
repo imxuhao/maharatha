@@ -52,8 +52,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int? PaymentTermsId { get; set; }
 
         /// <summary>Gets or sets the TypeofCurrency field. </summary>
-        [StringLength(VendorUnit.MaxAchLength)]
-        public string TypeofCurrency { get; set; }
+        public int TypeofCurrencyId { get; set; }
 
         /// <summary>Gets or sets the IsCorporation field. </summary>
         public bool IsCorporation { get; set; }
@@ -172,5 +171,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary> Gets or sets Addresses of the Vendor. </summary>
         public List<CreateAddressUnitInput> Addresses { get; set; }
+
+        /// <summary> Gets or sets Addresses of the Vendor. </summary>
+        public List<CreateVendorAliasUnitInput> VendorAlias { get; set; }
     }
 }

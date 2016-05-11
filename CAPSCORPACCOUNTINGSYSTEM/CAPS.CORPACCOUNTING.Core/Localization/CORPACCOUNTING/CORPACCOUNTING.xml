@@ -693,5 +693,26 @@
     <text name="CitySearch" value="City Search" />
     <text name="DuplicateChartofAccount" value="Duplicate ChartofAccount" />
     <text name="Pleasesetupchartofaccount" value="Please setup ChartofAccount First." />
+  <text name="TotalCost" value="Total cost" />
+<text name="ToolTipTotalCost" value="Enter total cost" />
+<text name="BidContract" value="Bid/Contract" />
+<text name="ToolTipBidContract" value="Enter bid/contract amount" />
+<text name="ProducersActual" value="Producers actual" />
+<text name="ToolTipProducersActual" value="Enter producers actual" />
+<text name="BilledAmount" value="Billed amount" />
+<text name="ToolTipBilledAmount" value="Enter billed amount" />
+<text name="RecievedAmount" value="Recieved amount" />
+  <text name="ToolTipRecievedAmount" value="Enter recieved amount" />
+<text name="Variance" value="Variance" />
+<text name="ToolTipVariance" value="Enter variance" />
+  <text name="ShootLocations" value="Shoot locations" />
+<text name="ToolTipShootLocations" value="Enter shoot locations" />
+   <text name="OtherInfo" value="Other Info" />
+<text name="SalesRep" value="Sales rep" />
+ <text name="CreateJobLocation" value="Add new location" />
+<text name="POAllocation" value="Purchase order allocation" />
+ <text name="AddNewRange" value="Add new range" />
+<text name="StartingPo" value="Starting PO#" />
+  <text name="EndingPo" value="Ending PO#" />
   </texts>
 </localizationDictionary>

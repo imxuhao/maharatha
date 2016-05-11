@@ -12,5 +12,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public bool Value { get; set; }
 
         public long? OrganizationId { get; set; }
+        public  int VendorAliasId { get; set; }
+        public  int VendorId { get; set; }
     }
 }

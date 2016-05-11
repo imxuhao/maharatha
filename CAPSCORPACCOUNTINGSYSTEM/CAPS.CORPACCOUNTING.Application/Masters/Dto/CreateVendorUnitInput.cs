@@ -70,8 +70,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         [EnumDataType(typeof(TypeofVendor))]
         public TypeofVendor TypeOFvendorId { get; set; }
 
-        /// <summary>Gets or sets the TypeOF1099Box field. </summary>
-        public Typeof1099T4? TypeOF1099Box { get; set; } 
+        /// <summary>Gets or sets the TypeOf1099BoxId field. </summary>
+        public Typeof1099T4? Typeof1099BoxId { get; set; }
 
         /// <summary>Gets or sets the EDDContractStartDate field. </summary>
         public DateTime? EDDContractStartDate { get; set; }

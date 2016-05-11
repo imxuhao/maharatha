@@ -10,6 +10,7 @@
     actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
     api: {
         read: abp.appPath + 'api/services/app/addressUnit/GetAddressUnits',
+        destroy: abp.appPath + 'api/services/app/addressUnit/DeleteAddressUnit'
         }
     },
     idPropertyField: 'addressId'

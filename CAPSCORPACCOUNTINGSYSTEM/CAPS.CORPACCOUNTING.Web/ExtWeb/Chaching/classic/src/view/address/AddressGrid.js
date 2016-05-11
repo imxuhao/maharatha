@@ -61,22 +61,22 @@
      {
          text: abp.localization.localize("Type"),
          xtype: 'gridcolumn',
-         dataIndex: 'addressTypeId',
+         dataIndex: 'addressType',
          sortable: true,
          groupable: true,
          width: '15%',
          editor: {
              xtype: 'combobox',
-             valueField: 'typeofAddressId',
-             displayField: 'typeofAddress',
+             valueField: 'addressTypeId',
+             displayField: 'addressType',
              bind: {
                  store: {
                      fields: [{ name: 'name' }, { name: 'value' }, {
-                         name: 'typeofAddress', convert: function (value, record) {
+                         name: 'addressType', convert: function (value, record) {
                              return record.get('name');
                          }
                      }, {
-                         name: 'typeofAddressId', convert: function (value, record) {
+                         name: 'addressTypeId', convert: function (value, record) {
                              return record.get('value');
                          }
                      }],

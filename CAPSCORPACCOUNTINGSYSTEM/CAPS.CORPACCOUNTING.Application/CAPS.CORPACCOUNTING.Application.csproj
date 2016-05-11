@@ -236,6 +236,7 @@
     <Compile Include="Interceptors\MeasureDurationWithPostAsyncActionInterceptor.cs" />
     <Compile Include="IO\AppFileHelper.cs" />
     <Compile Include="JobCosting\Dto\GetJobAccountInputDto.cs" />
+    <Compile Include="JobCosting\Dto\JobPORangeAllocationUnitDto.cs" />
     <Compile Include="JobCosting\IDivisionUnitAppService.cs" />
     <Compile Include="JobCosting\DivisionUnitAppService.cs" />
     <Compile Include="JobCosting\IJobLocationAppService.cs" />
@@ -301,12 +302,14 @@
     <Compile Include="Logging\WebLogAppService.cs" />
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\Dto\CreateTaxCreditUnitInput.cs" />
     <Compile Include="Masters\Dto\GetLocationsInput.cs" />
     <Compile Include="Masters\Dto\AutoSearchInput.cs" />
     <Compile Include="Masters\Dto\CreateUserViewSettingsUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateVendorAliasUnitInput.cs" />
     <Compile Include="Masters\Dto\GetUserViewSettingsUnitDto.cs" />
     <Compile Include="Masters\Dto\LocationSetUnitDto.cs" />
+    <Compile Include="Masters\Dto\TaxCreditUnitDto.cs" />
     <Compile Include="Masters\Dto\UpdateLocationSetUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateLocationSetUnitInput.cs" />
     <Compile Include="Masters\Dto\AddressUnitDto.cs" />
@@ -318,6 +321,7 @@
     <Compile Include="Masters\Dto\GetEmployeeInput.cs" />
     <Compile Include="Masters\Dto\GetCoaInput.cs" />
     <Compile Include="Masters\Dto\GetSalesRepInput.cs" />
+    <Compile Include="Masters\Dto\UpdateTaxCreditUnitInput.cs" />
     <Compile Include="Masters\Dto\UpdateUserViewSettingsUnitInput.cs" />
     <Compile Include="Masters\Dto\UpdateVendorAliasUnitInput.cs" />
     <Compile Include="Masters\Dto\UserViewSettingsUnitDto.cs" />
@@ -345,6 +349,7 @@
     <Compile Include="Masters\CustomerUnitAppService.cs" />
     <Compile Include="Masters\IAddressUnitAppService.cs" />
     <Compile Include="Masters\ILocationSetUnitAppService.cs" />
+    <Compile Include="Masters\ITaxCreditUnitAppService.cs" />
     <Compile Include="Masters\IUserViewSettingsUnitAppService.cs" />
     <Compile Include="Masters\IVendorUnitAppService.cs" />
     <Compile Include="Masters\LocationSetUnitAppService.cs" />
@@ -370,6 +375,7 @@
     <Compile Include="Masters\ICustomerPaymentTermUnitAppService.cs" />
     <Compile Include="Masters\IVendorPaymentTermUnitAppService.cs" />
     <Compile Include="Masters\CustomerPaymentTermUnitAppService.cs" />
+    <Compile Include="Masters\TaxCreditUnitAppService.cs" />
     <Compile Include="Masters\UserViewSettingsUnitAppService.cs" />
     <Compile Include="Masters\VendorUnitAppService.cs" />
     <Compile Include="Masters\VendorPaymentTermUnitAppService.cs" />

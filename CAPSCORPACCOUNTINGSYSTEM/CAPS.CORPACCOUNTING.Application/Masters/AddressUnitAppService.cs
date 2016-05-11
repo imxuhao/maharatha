@@ -7,6 +7,7 @@ using Abp.AutoMapper;
 using System.Linq;
 using System.Data.Entity;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -52,6 +53,8 @@ namespace CAPS.CORPACCOUNTING.Masters
                 {
                     var dto = item.au.MapTo<AddressUnitDto>();
                     dto.AddressId = item.au.Id;
+                    dto.AddressType = item.au.AddressTypeId.ToDisplayName();
+                    dto.TypeofObject = item.au.TypeofObjectId.ToDisplayName();
                     return dto;
                 }).ToList());
         }

@@ -1151,6 +1151,21 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobAccountInputDto.JobId">
             <summary>Gets or sets the Job field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobPORangeAllocationUnitDto.PORangeAllocationId">
+            <summary>Overriding the ID column with PORangeAllocationId</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobPORangeAllocationUnitDto.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobPORangeAllocationUnitDto.PoRangeStartNumber">
+            <summary>Gets or sets the poRangeStartNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobPORangeAllocationUnitDto.PoRangeEndNumber">
+            <summary>Gets or sets the poRangeEndNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobPORangeAllocationUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the Company field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.ARBillingTypeDto.ARBillingTypeId">
             <summary>Gets or sets the ARBillingTypeId field.</summary>
         </member>
@@ -2824,6 +2839,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetJobPORangeAllocationsUnits(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
+            <summary>
+            Get JobPORangeAllocation based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.DeleteJobPORangeAllocationUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the JobPORangeAllocation based on PORangeAllocationId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService">
             <summary>
             
@@ -2958,6 +2987,20 @@
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetTaxCreditList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get TaxCreditList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetJobPORangeAllocationsUnits(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
+            <summary>
+            Get JobPORange Numbers by JobId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.DeleteJobPORangeAllocationUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+             Delete the JobPORangeAllocation based on PORangeAllocationId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3204,6 +3247,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput.Number">
+            <summary>Gets or sets the Number field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput.IsDefault">
+            <summary>Gets or sets the IsDefault field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.GridId">
             <summary>Gets or sets the GridId field. </summary>
         </member>
@@ -3246,6 +3304,24 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TaxCreditUnitDto.TaxCreditId">
+            <summary>Gets or sets the TaxCreditId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TaxCreditUnitDto.Number">
+            <summary>Gets or sets the Number field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TaxCreditUnitDto.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TaxCreditUnitDto.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TaxCreditUnitDto.IsDefault">
+            <summary>Gets or sets the IsDefault field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TaxCreditUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput.LocationSetId">
             <summary>>Gets or sets the LocationSetId field.</summary>    
         </member>
@@ -3282,7 +3358,13 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.TypeofObjectId">
             <summary>Gets or sets the TypeofObjectId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.TypeofObject">
+            <summary>Gets or sets the TypeofObjectId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.AddressTypeId">
+            <summary>Gets or sets the AddressTypeId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.AddressType">
             <summary>Gets or sets the AddressTypeId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.ContactNumber">
@@ -3402,6 +3484,24 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetSalesRepInput.LastName">
             <summary> Gets or Sets the LastName to Search the SalesRepresentatives based on LastName. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput.TaxCreditId">
+            <summary>Gets or sets the TaxCreditId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput.Number">
+            <summary>Gets or sets the Number field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput.IsDefault">
+            <summary>Gets or sets the IsDefault field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.UserViewId">
             <summary>Gets or sets the UserViewId field. </summary>
@@ -3844,8 +3944,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.TypeOFvendorId">
             <summary>Gets or sets the TypeOFvendorId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.TypeOF1099Box">
-            <summary>Gets or sets the TypeOF1099Box field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.Typeof1099BoxId">
+            <summary>Gets or sets the TypeOf1099BoxId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateVendorUnitInput.EDDContractStartDate">
             <summary>Gets or sets the EDDContractStartDate field. </summary>
@@ -4494,7 +4594,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.TenantId">
             <summary>Gets or sets the TenantId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.OrganizationId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.OrganizationUnitId">
             <summary>Gets or sets the OrganizationId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.RollUpAccountCaption">
@@ -4788,7 +4888,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.Us1120IncomeStmtName">
             <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.OrganizationId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAccountUnitInput.TypeofConsolidationId">
@@ -4893,7 +4993,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.Us1120IncomeStmtName">
             <summary>Gets or sets the Us1120IncomeStmtName field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.OrganizationId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeofConsolidationId">
@@ -4923,7 +5023,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.IsPrivate">
             <summary>Gets or sets the IsPrivate field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.OrganizationId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCoaUnitInput.IsCorporate">
@@ -4962,7 +5062,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.IsPrivate">
             <summary>Gets or sets the IsPrivate field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.OrganizationId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.OrganizationUnitId">
             <summary>Gets or sets the OrganizationId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCoaUnitInput.IsCorporate">
@@ -5312,6 +5412,39 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.ITaxCreditUnitAppService">
+            <summary>
+            This service will provide all CRUD operations on TaxCredit.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ITaxCreditUnitAppService.CreateTaxCreditUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput)">
+            <summary>
+             Create the TaxCredit.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ITaxCreditUnitAppService.GetTaxCreditUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all TaxCredit.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ITaxCreditUnitAppService.UpdateTaxCreditUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput)">
+            <summary>
+            Update the TaxCredit based on TaxCreditId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ITaxCreditUnitAppService.DeleteTaxCreditUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the TaxCredit based on TaxCreditId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.IUserViewSettingsUnitAppService">
             <summary>
             This service will provide all CRUD operations on UserViewSettings.
@@ -5385,9 +5518,16 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorAliasUnits(Abp.Application.Services.Dto.IdInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorAliasUnits(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get the list of all vendors alias names based on VendorId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.DeleteVendorAliasUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+              Delete the Vendor Alias based on VendorAliasId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -5779,6 +5919,47 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.TaxCreditUnitAppService">
+            <summary>
+            TaxCreditUnit AppService
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TaxCreditUnitAppService.#ctor(Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.TaxCreditUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit})">
+            <summary>
+            
+            </summary>
+            <param name="unitOfWorkManager"></param>
+            <param name="taxCreditUnitManager"></param>
+            <param name="taxCreditUnitRepository"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TaxCreditUnitAppService.CreateTaxCreditUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput)">
+            <summary>
+            Create the TaxCredit.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TaxCreditUnitAppService.UpdateTaxCreditUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput)">
+            <summary>
+            Update the TaxCredit based on TaxCreditId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TaxCreditUnitAppService.GetTaxCreditUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+             Get the list of all TaxCredit.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TaxCreditUnitAppService.DeleteTaxCreditUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+             Delete the TaxCredit based on TaxCreditId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.UserViewSettingsUnitAppService.CreateUserViewSettingsUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput)">
             <summary>
             Create the UserViewSettings.
@@ -5938,9 +6119,16 @@
             <param name="search"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetVendorAliasUnits(Abp.Application.Services.Dto.IdInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetVendorAliasUnits(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.DeleteVendorAliasUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            delete vendoralias
             </summary>
             <param name="input"></param>
             <returns></returns>

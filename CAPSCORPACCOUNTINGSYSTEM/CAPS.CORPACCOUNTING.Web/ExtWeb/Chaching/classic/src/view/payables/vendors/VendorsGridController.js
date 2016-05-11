@@ -32,6 +32,9 @@ Ext.define('Chaching.view.payables.vendors.VendorsGridController', {
             var rollupDivisionList = viewModel.getStore('rollupDivisionList');
             rollupDivisionList.load();
 
+            var getTaxCreditList = viewModel.getStore('getTaxCreditList');
+            getTaxCreditList.load();
+
             var glAccountList = viewModel.getStore('getAccountsList');
             glAccountList.getProxy().setExtraParams({
                 value: 'true'
@@ -50,7 +53,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGridController', {
                 if (vendorAliasGrid) {
                     var aliasStore = vendorAliasGrid.getStore();
                     Ext.apply(aliasStore.getProxy().extraParams, {
-                        id: record.get('vendorId')
+                        vendorId: record.get('vendorId')
                     });
                     aliasStore.load();
                 }

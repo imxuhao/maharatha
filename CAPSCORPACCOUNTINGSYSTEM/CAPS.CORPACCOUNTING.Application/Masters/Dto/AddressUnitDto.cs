@@ -15,8 +15,14 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         public TypeofObject TypeofObjectId { get; set; }
 
+        /// <summary>Gets or sets the TypeofObjectId field. </summary>
+        public string TypeofObject { get; set; }
+
         /// <summary>Gets or sets the AddressTypeId field. </summary>
         public TypeofAddress AddressTypeId { get; set; }
+
+        /// <summary>Gets or sets the AddressTypeId field. </summary>
+        public string AddressType { get; set; }
 
         /// <summary>Gets or sets the ContactNumber field. </summary>
         public string ContactNumber { get; set; }

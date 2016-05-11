@@ -39,15 +39,15 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<CountryUnit> _countryUnitRepository;
         private readonly IJobAccountUnitAppService _jobAccountUnitAppService;
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
+        private readonly IRepository<JobPORangeAllocationUnit> _jobPORangeAllocationUnitRepository;
 
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService,
             IRepository<OrganizationUnit, long> organizationUnitRepository, IRepository<JobAccountUnit, long> jobAccountUnitRepository,
-            IRepository<CoaUnit> coaUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
-            IRepository<ValueAddedTaxRecoveryUnit> valueAddedTaxRecoveryUnitRepository,
-        IRepository<ValueAddedTaxTypeUnit> valueAddedTaxTypeUnitRepository,
-        IRepository<TypeOfCountryUnit, short> typeOfCountryUnitRepository,
-        IRepository<CountryUnit> countryUnitRepository, IJobAccountUnitAppService jobAccountUnitAppService, IRepository<TaxCreditUnit> taxCreditUnitRepository)
+            IRepository<CoaUnit> coaUnitRepository, IRepository<AccountUnit, long> accountUnitRepository, IRepository<ValueAddedTaxRecoveryUnit> valueAddedTaxRecoveryUnitRepository,
+        IRepository<ValueAddedTaxTypeUnit> valueAddedTaxTypeUnitRepository, IRepository<TypeOfCountryUnit, short> typeOfCountryUnitRepository,
+        IRepository<CountryUnit> countryUnitRepository, IJobAccountUnitAppService jobAccountUnitAppService, IRepository<TaxCreditUnit> taxCreditUnitRepository,
+             IRepository<JobPORangeAllocationUnit> jobPORangeAllocationUnitRepository)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -65,6 +65,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _countryUnitRepository = countryUnitRepository;
             _jobAccountUnitAppService = jobAccountUnitAppService;
             _taxCreditUnitRepository = taxCreditUnitRepository;
+            _jobPORangeAllocationUnitRepository = jobPORangeAllocationUnitRepository;
 
         }
         /// <summary>
@@ -78,7 +79,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
 
             //validating the  BudgetFormat(ChartofAccountId)
-            if (input.ChartOfAccountId==0)
+            if (input.ChartOfAccountId == 0)
             {
                 throw new UserFriendlyException(L("BudgetFormatisRequired"));
             }
@@ -154,7 +155,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobUnit.RollupCenterId = input.RollupCenterId;
             #endregion
 
-           
+
             await _jobUnitManager.UpdateAsync(jobUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -163,11 +164,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             using (UnitOfWorkManager.Current.DisableFilter(AbpDataFilters.SoftDelete))
             {
                 //get all jobaccounts and Lines 
-                var joblocations = (from lines in _accountUnitRepository.GetAll().Where(p=>p.ChartOfAccountId==input.ChartOfAccountId
-                                    && p.OrganizationUnitId==input.OrganizationUnitId)
-                                     join jobacc in _jobAccountUnitRepository.GetAll() on lines.Id equals jobacc.AccountId into jobaccount
-                                     from jobaccounts in jobaccount.DefaultIfEmpty()
-                                     select new { lines,jobaccounts }).ToList();
+                var joblocations = (from lines in _accountUnitRepository.GetAll().Where(p => p.ChartOfAccountId == input.ChartOfAccountId
+                                    && p.OrganizationUnitId == input.OrganizationUnitId)
+                                    join jobacc in _jobAccountUnitRepository.GetAll() on lines.Id equals jobacc.AccountId into jobaccount
+                                    from jobaccounts in jobaccount.DefaultIfEmpty()
+                                    select new { lines, jobaccounts }).ToList();
                 //bulkinsertion
                 foreach (var joblocation in joblocations)
                 {
@@ -182,14 +183,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         };
 
                         await _jobAccountUnitAppService.CreateJobAccountUnit(jobAccount);
-                        
+
                     }
                 }
 
             }
             #endregion
 
-            var xx = _accountUnitRepository.GetAll().ToList() ;
+            var xx = _accountUnitRepository.GetAll().ToList();
 
             #region updating all JobAccounts of Job
             //bulk update
@@ -281,7 +282,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         select new { account };
             var divisions = await query
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.account.Caption.Contains(input.Query))
-                 .WhereIf(!ReferenceEquals(input.OrganizationId,null), p => p.account.OrganizationUnitId==input.OrganizationId)
+                 .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.account.OrganizationUnitId == input.OrganizationId)
                  .Select(u => new NameValueDto { Name = u.account.Caption, Value = u.account.Id.ToString() }).ToListAsync();
             return divisions;
 
@@ -405,5 +406,37 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             return taxCreditList;
         }
 
+
+        /// <summary>
+        /// Get JobPORange Numbers by JobId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<ListResultOutput<JobPORangeAllocationUnitDto>> GetJobPORangeAllocationsUnits(GetJobInput input)
+        {
+            var query = _jobPORangeAllocationUnitRepository.GetAll().Where(u => u.JobId == input.JobId);
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .ToListAsync();
+
+            return new ListResultOutput<JobPORangeAllocationUnitDto>(results.Select(item =>
+            {
+                var dto = item.MapTo<JobPORangeAllocationUnitDto>();
+                dto.PORangeAllocationId = item.Id;
+                return dto;
+            }).ToList());
+        }
+
+        /// <summary>
+        ///  Delete the JobPORangeAllocation based on PORangeAllocationId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task DeleteJobPORangeAllocationUnit(IdInput input)
+        {
+            await _jobPORangeAllocationUnitRepository.DeleteAsync(input.Id);
+        }
     }
 }

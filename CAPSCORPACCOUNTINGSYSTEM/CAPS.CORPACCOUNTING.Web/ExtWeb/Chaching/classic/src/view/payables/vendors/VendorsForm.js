@@ -7,7 +7,7 @@
     controller: 'payables-vendors-vendorsform',
     name: 'vendors',
     openInPopupWindow: false,
-    hideDefaultButtons: false,
+    hideDefaultButtons: true,
     autoScroll: true,
     border: false,
     showFormTitle: true,
@@ -272,14 +272,32 @@
                           blankText: app.localize('MandatoryToolTipText')
                       },
                       items: [
+              //{
+              //    xtype: 'textfield',
+              //    name: 'taxCredit',
+              //    itemId: 'taxCredit',
+              //    fieldLabel: app.localize('TaxCredit').initCap(),
+              //    width: '100%',
+              //    ui: 'fieldLabelTop'
+              //},
+                {
+                    ///TODO: Replace with combo box once tax credit service is ready
+                    xtype: 'combobox',
+                    name: 'taxCreditId',
+                    itemId: 'taxCreditId',
+                    //allowBlank: true,
+                    //queryMode: 'local',
+                    bind: {
+                        store: '{getTaxCreditList}'
+                    },
+                    valueField: 'value',
+                    displayField: 'name',
+                    fieldLabel: app.localize('TaxCredit').initCap(),
+                    width: '100%',
+                    ui: 'fieldLabelTop',
+                    emptyText: app.localize('SelectOption')
+                },
               {
-                  xtype: 'textfield',
-                  name: 'taxCredit',
-                  itemId: 'taxCredit',
-                  fieldLabel: app.localize('TaxCredit').initCap(),
-                  width: '100%',
-                  ui: 'fieldLabelTop'
-              }, {
                   xtype: 'combobox',
                   name: 'accountId',
                   fieldLabel: app.localize('Line#').initCap(),
@@ -329,7 +347,7 @@
                       ]
                   }]
               },
-              
+
             {
                 xtype: 'fieldset',
                 title: abp.localization.localize("NotesSection").initCap(),
@@ -346,6 +364,35 @@
                 }]
 
             }]
-        }]
+        }],
+        dockedItems: [
+                {
+                    xtype: 'toolbar',
+                    dock: 'bottom',
+                    layout: {
+                        type: 'hbox',
+                        pack: 'center'
+                    },
+                    items: [
+                    {
+                        xtype: 'button',
+                        itemId: 'btnSaveSetup',
+                        ui: 'actionButton',
+                        text: app.localize('SaveVendor').toUpperCase(),
+                        iconCls: 'fa fa-save',
+                        listeners: {
+                            click: 'onSaveClicked'
+                        }
+                    }, {
+                        xtype: 'button',
+                        itemId: 'btnCancelSetup',
+                        ui: 'actionButton',
+                        text: app.localize('Cancel').toUpperCase(),
+                        iconCls: 'fa fa-close',
+                        listeners: {
+                            click: 'onCancelClicked'
+                        }
+                    }]
+                }]
     }
 });

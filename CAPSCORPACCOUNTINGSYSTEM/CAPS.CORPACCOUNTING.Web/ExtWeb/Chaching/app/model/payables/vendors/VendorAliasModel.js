@@ -3,7 +3,7 @@
     config: {
         searchEntityName: 'VendorAlias'
     }, fields: [
-        { name: 'vendorAliasId', type: 'int' },
+        { name: 'vendorAliasId', type: 'int',isPrimaryKey:true },
         { name: 'vendorId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'aliasName', type: 'string' },
          //{ name: 'vendorId', reference: 'vendors.VendorsModel' }

@@ -184,10 +184,12 @@
     <Compile Include="Common\WorkSheet1099Unit.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="JobCosting\JobLocationUnitManager.cs" />
+    <Compile Include="JobCosting\JobPORangeAllocationUnit.cs" />
     <Compile Include="Localization\CustomLanguageTextsUnit.cs" />
     <Compile Include="Localization\CustomLanguageTextsUnitManager.cs" />
     <Compile Include="Masters\CountryUnit.cs" />
     <Compile Include="Masters\TaxCreditUnit.cs" />
+    <Compile Include="Masters\TaxCreditUnitManager.cs" />
     <Compile Include="Masters\TypeOfCurrencyUnit.cs" />
     <Compile Include="Masters\VendorAliasUnit.cs" />
     <Compile Include="Masters\VendorAliasUnitManager.cs" />

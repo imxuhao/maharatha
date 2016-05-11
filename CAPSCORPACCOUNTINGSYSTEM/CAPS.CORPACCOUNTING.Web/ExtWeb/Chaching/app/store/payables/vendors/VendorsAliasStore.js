@@ -4,11 +4,12 @@
     proxy: {
         type: 'chachingProxy',
         extParams: {
-            id: 0
+            vendorId: 0
         },
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
             read: abp.appPath + 'api/services/app/vendorUnit/GetVendorAliasUnits',
+            destroy: abp.appPath + 'api/services/app/vendorUnit/DeleteVendorAliasUnit'
         }
     },
     idPropertyField: 'vendorAliasId'

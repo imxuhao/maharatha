@@ -387,6 +387,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             vendorUnit.AccountId = input.AccountId;
             vendorUnit.Notes = input.Notes;
             vendorUnit.JobId = input.JobId;
+            vendorUnit.TaxCreditId = input.TaxCreditId;
             #endregion
 
             await _vendorUnitManager.UpdateAsync(vendorUnit);
@@ -515,10 +516,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ListResultOutput<VendorAliasUnitDto>> GetVendorAliasUnits(IdInput input)
+        public async Task<ListResultOutput<VendorAliasUnitDto>> GetVendorAliasUnits(AutoSearchInput input)
         {
             var query = _vendorAliasUnitRepository.GetAll()
-                    .Where(au => au.VendorId == input.Id);
+                    .Where(au => au.VendorId == input.VendorId);
                 
             var items = await query.ToListAsync();
 
@@ -529,6 +530,17 @@ namespace CAPS.CORPACCOUNTING.Masters
                     dto.VendorAliasId = item.Id;
                     return dto;
                 }).ToList());
+        }
+
+        
+        /// <summary>
+        /// delete vendoralias
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task DeleteVendorAliasUnit(IdInput input)
+        {
+            await _vendorAliasUnitManager.DeleteAsync(input.Id);
         }
     }
 

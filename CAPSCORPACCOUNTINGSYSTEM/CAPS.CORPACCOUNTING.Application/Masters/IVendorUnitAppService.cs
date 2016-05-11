@@ -53,7 +53,15 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<ListResultOutput<VendorAliasUnitDto>> GetVendorAliasUnits(IdInput input);
+        Task<ListResultOutput<VendorAliasUnitDto>> GetVendorAliasUnits(AutoSearchInput input);
+
+
+        /// <summary>
+        ///   Delete the Vendor Alias based on VendorAliasId.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeleteVendorAliasUnit(IdInput input);
 
 
         /// <summary>

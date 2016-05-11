@@ -28,8 +28,9 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
             new DefaultTypeOfCountryCreator(_context).Create();
             new DefaultRegionCreator(_context).Create();
             new DefaultCountryCreator(_context).Create();
-           // new DefaultValueAddedTaxTypeCreator(_context).Create();
+            // new DefaultValueAddedTaxTypeCreator(_context).Create();
             //new DefaultValueAddedTaxRecoveryCreator(_context).Create();
+            //new DefaultUserViewSettingsCreator(_context).Create();
             _context.SaveChanges();
         }
         

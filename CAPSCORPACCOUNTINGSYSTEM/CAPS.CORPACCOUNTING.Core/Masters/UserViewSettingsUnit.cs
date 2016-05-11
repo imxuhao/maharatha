@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual GridListUnit GridListUnit { get; set; }
 
         /// <summary>Gets or sets the UserId field. </summary>
-        public virtual long UserId { get; set; }
+        public virtual long? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
 
@@ -41,6 +41,21 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual int? TenantId { get; set; }
 
         #endregion
+
+        public UserViewSettingsUnit()
+        {
+            
+        }
+
+        public UserViewSettingsUnit(int gridId, long? userId, string viewSettingName, string viewSettings)
+        {
+            GridId = gridId;
+            UserId = userId;
+            ViewSettings= viewSettingName;
+            ViewSettings = viewSettings;
+            IsDefault = false;
+            TenantId = null;
+        }
 
     }
 }

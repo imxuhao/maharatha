@@ -9,24 +9,24 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     {
 
         /// <summary>Gets or sets the UserViewId field. </summary>
-        public virtual int UserViewId { get; set; }
+        public int UserViewId { get; set; }
 
         /// <summary>Gets or sets the GridId field. </summary>
-        public virtual int GridId { get; set; }
+        public int GridId { get; set; }
 
         /// <summary>Gets or sets the UserId field. </summary>
-        public virtual long UserId { get; set; }
+        public long? UserId { get; set; }
 
         /// <summary>Gets or sets the ViewSettingName field. </summary>
         [Required]
         [StringLength(UserViewSettingsUnit.ViewSettingNameLength)]
-        public virtual string ViewSettingName { get; set; }
+        public string ViewSettingName { get; set; }
 
         /// <summary>Gets or sets the ViewSettings field. </summary>
         [Required]
-        public virtual string ViewSettings { get; set; }
+        public string ViewSettings { get; set; }
 
         /// <summary>Gets or sets the IsDefault field. </summary>
-        public virtual bool? IsDefault { get; set; }
+        public bool? IsDefault { get; set; }
     }
 }

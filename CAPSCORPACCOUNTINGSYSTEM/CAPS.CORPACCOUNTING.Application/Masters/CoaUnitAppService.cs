@@ -26,16 +26,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly CoaUnitManager _coaunitManager;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly CustomAppSession _customAppSessionSession;
-        long OrganizationId;
         public CoaUnitAppService(CoaUnitManager coaunitManager, IRepository<CoaUnit> coaUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, CustomAppSession customAppSessionSession)
+            IUnitOfWorkManager unitOfWorkManager)
         {
             _coaunitManager = coaunitManager;
             _coaUnitRepository = coaUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
-            _customAppSessionSession = customAppSessionSession;
-            OrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
         }
 
         public IEventBus EventBus { get; set; }
@@ -90,7 +86,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
         {
             var coaUnit = input.MapTo<CoaUnit>();
-            coaUnit.OrganizationUnitId = OrganizationId;
+            coaUnit.OrganizationUnitId = input.OrganizationUnitId;
             await _coaunitManager.CreateAsync(coaUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -129,7 +125,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             coaUnit.IsActive = input.IsActive;
             coaUnit.IsApproved = input.IsApproved;
             coaUnit.IsPrivate = input.IsPrivate;
-            coaUnit.OrganizationUnitId = input.OrganizationId;
+            coaUnit.OrganizationUnitId = input.OrganizationUnitId;
             coaUnit.IsActive = input.IsActive;
             coaUnit.IsCorporate = input.IsCorporate;
             coaUnit.IsNumeric = input.IsNumeric;

@@ -31,7 +31,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
       
-        public long OrganizationId { get; set; }      
+        [Range(1,Int64.MaxValue,ErrorMessage = "Please setup the Organization")]
+        public long OrganizationUnitId { get; set; }      
 
         /// <summary>Gets or sets the IsCorporate field. </summary>
         public bool IsCorporate { get; set; }

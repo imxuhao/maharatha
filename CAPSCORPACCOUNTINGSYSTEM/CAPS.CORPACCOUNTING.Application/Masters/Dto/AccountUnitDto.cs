@@ -131,7 +131,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int TenantId { get; set; }
 
         /// <summary>Gets or sets the OrganizationId field. </summary>
-        public long OrganizationId { get; set; }
+        public long OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the RollUpAccountCaption field. </summary>
         public string RollUpAccountCaption { get; set; }

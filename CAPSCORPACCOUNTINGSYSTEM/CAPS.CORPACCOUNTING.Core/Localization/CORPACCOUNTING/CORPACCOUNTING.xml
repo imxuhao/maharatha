@@ -714,5 +714,6 @@
  <text name="AddNewRange" value="Add new range" />
 <text name="StartingPo" value="Starting PO#" />
   <text name="EndingPo" value="Ending PO#" />
+    <text name="MultiplechartofAccounts" value="Cannot create multiple chartofAccounts" />
   </texts>
 </localizationDictionary>

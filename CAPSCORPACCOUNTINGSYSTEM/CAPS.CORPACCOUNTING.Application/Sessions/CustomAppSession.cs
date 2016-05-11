@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Abp.Dependency;
 
 namespace CAPS.CORPACCOUNTING.Sessions
 {
-   public class CustomAppSession:ITransientDependency
+    public class CustomAppSession:ITransientDependency
     {
         public string OrganizationId   
         {
@@ -24,6 +20,22 @@ namespace CAPS.CORPACCOUNTING.Sessions
                 }
 
                 return organizationClaim.Value;
+            }
+        }
+
+        public string TenantId
+        {
+            get
+            {
+                var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "http://www.aspnetboilerplate.com/identity/claims/tenantId");
+                if (string.IsNullOrEmpty(tenantClaim?.Value))
+                {
+                    return null;
+                }
+
+                return tenantClaim.Value;
             }
         }
 

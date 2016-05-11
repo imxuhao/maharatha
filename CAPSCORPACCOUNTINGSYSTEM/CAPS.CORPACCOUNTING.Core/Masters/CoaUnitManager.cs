@@ -67,14 +67,14 @@ namespace CAPS.CORPACCOUNTING.Masters
             //Validating if Duplicate COA exists
             if (CoaUnitRepository != null)
             {
-                if (coaUnit.IsCorporate)
+                if (coaUnit.IsCorporate && coaUnit.Id==0)
                 {
                     int count = (await CoaUnitRepository.CountAsync(p => p.OrganizationUnitId ==
                                                                          coaUnit.OrganizationUnitId &&
-                                                                         p.IsCorporate == true));
+                                                                         p.IsCorporate == true ));
                     if (count > 0)
                     {
-                        throw new UserFriendlyException(L("DuplicateChartofAccount"));
+                        throw new UserFriendlyException(L("MultiplechartofAccounts"));
                     }
                 }
 

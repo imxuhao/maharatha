@@ -12,9 +12,6 @@ using Abp.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Masters;
-using Abp.Collections.Extensions;
-using System;
-using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -84,7 +81,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             var coaUnit = input.MapTo<CoaUnit>();
             await _coaunitManager.CreateAsync(coaUnit);
-            coaUnit.OrganizationUnitId = input.OrganizationId;
+            coaUnit.OrganizationUnitId = input.OrganizationUnitId;
             coaUnit.IsCorporate = false;
             await CurrentUnitOfWork.SaveChangesAsync();
             return coaUnit.MapTo<CoaUnitDto>();
@@ -106,7 +103,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             coaUnit.IsActive = input.IsActive;
             coaUnit.IsApproved = input.IsApproved;
             coaUnit.IsPrivate = input.IsPrivate;
-            coaUnit.OrganizationUnitId = input.OrganizationId;
+            coaUnit.OrganizationUnitId = input.OrganizationUnitId;
             coaUnit.IsActive = input.IsActive;
             coaUnit.IsCorporate = input.IsCorporate;
             coaUnit.IsNumeric = input.IsNumeric;

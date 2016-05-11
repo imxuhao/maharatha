@@ -1159,8 +1159,13 @@
     <Compile Include="Migrations\201605101201578_Modify_Job_Jobdetails_Tables.Designer.cs">
       <DependentUpon>201605101201578_Modify_Job_Jobdetails_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605110912344_Modify_UserViewSettings_Table1.cs" />
+    <Compile Include="Migrations\201605110912344_Modify_UserViewSettings_Table1.Designer.cs">
+      <DependentUpon>201605110912344_Modify_UserViewSettings_Table1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
+    <Compile Include="Migrations\Seed\DefaultUserViewSettingsCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultValueAddedTaxTypeCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultValueAddedTaxRecoveryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultCountryCreator.cs" />
@@ -1967,6 +1972,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605101201578_Modify_Job_Jobdetails_Tables.resx">
       <DependentUpon>201605101201578_Modify_Job_Jobdetails_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605110912344_Modify_UserViewSettings_Table1.resx">
+      <DependentUpon>201605110912344_Modify_UserViewSettings_Table1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

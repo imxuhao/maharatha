@@ -4,18 +4,14 @@ using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
-using CAPS.CORPACCOUNTING.Authorization.Users;
 using Abp.Domain.Uow;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Linq.Extensions;
 using System.Linq.Dynamic;
 using CAPS.CORPACCOUNTING.Helpers;
-using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Accounting;
-using CAPS.CORPACCOUNTING.Common;
-using CAPS.CORPACCOUNTING.Sessions;
-using System;
+
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -112,7 +108,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             var accountUnit = input.MapTo<AccountUnit>();
             accountUnit.ParentId = input.ParentId != 0 ? input.ParentId : null;
-            accountUnit.OrganizationUnitId = input.OrganizationId;
+            accountUnit.OrganizationUnitId = input.OrganizationUnitId;
             await _accountUnitManager.CreateAsync(accountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             return accountUnit.MapTo<AccountUnitDto>();
@@ -159,3 +155,4 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         }
     }
 }
+

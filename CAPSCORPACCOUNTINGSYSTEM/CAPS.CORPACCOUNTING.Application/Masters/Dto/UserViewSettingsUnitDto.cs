@@ -18,7 +18,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public virtual int GridId { get; set; }
 
         /// <summary>Gets or sets the UserId field. </summary>
-        public virtual long UserId { get; set; }
+        public virtual long? UserId { get; set; }
 
         /// <summary>Gets or sets the ViewSettingName field. </summary>
         public virtual string ViewSettingName { get; set; }
@@ -32,5 +32,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public virtual string Grid_Name { get; set; }
 
         public virtual string Grid_Description { get; set; }
+
+        public bool IsSystemDefault { get; set; }
     }
 }

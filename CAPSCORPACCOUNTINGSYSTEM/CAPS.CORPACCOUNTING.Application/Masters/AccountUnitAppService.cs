@@ -133,7 +133,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             accountUnit.Caption = input.Caption;
             accountUnit.ChartOfAccountId = input.ChartOfAccountId;
             accountUnit.ParentId = input.ParentId != 0 ? input.ParentId : null;
-            accountUnit.OrganizationUnitId = input.OrganizationId;
+            accountUnit.OrganizationUnitId = input.OrganizationUnitId;
             accountUnit.BalanceSheetName = input.BalanceSheetName;
             accountUnit.CashFlowName = input.CashFlowName;
             accountUnit.Description = input.Description;

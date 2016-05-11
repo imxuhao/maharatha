@@ -61,6 +61,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
 
         /// <summary>Gets or sets the CompanyId field. </summary>
+        [Range(1, Int64.MaxValue, ErrorMessage = "Please setup the Organization")]
         public long OrganizationUnitId { get; set; }
         /// <summary>
         /// Isdivision is true then this job is a Division

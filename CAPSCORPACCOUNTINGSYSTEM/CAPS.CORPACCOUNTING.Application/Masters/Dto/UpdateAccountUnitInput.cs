@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters.Dto
@@ -110,7 +111,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string Us1120IncomeStmtName { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long OrganizationId { get; set; }
+        [Range(1, Int64.MaxValue, ErrorMessage = "Please setup the Organization")]
+        public long OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the TypeofConsolidationId field. </summary>
         public TypeofConsolidation? TypeofConsolidationId { get; set; }

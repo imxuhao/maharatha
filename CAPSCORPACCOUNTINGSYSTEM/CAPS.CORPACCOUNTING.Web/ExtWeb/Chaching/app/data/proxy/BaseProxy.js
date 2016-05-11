@@ -1,4 +1,33 @@
-﻿Ext.define('Chaching.data.proxy.BaseProxy', {
+﻿/**
+ * This Class is created as a base class for all Ext.data.Operations.
+ * Author: Krishna Garad
+ * Date: 31/03/2016
+ */
+/**
+ * @class Chaching.data.proxy.BaseProxy
+ * The based class for all Ext.data.Operation.
+ * @alias proxy.chachingProxy
+ *
+ *     @example usage 
+ *     Ext.define('Chaching.store.CustomerStore', {
+ *     extend: 'Chaching.store.base.BaseStore',
+       pageSize: 1000,
+       model: 'Chaching.model.CustomerModel',
+       proxy: {
+        type: 'chachingProxy',
+        actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+        api: {
+            read: abp.appPath + '',
+            destroy:abp.appPath+''
+        },
+        reader: {
+            type: 'json',
+            rootProperty: 'result'
+        }
+        
+ *     });
+ */
+Ext.define('Chaching.data.proxy.BaseProxy', {
     extend: 'Ext.data.proxy.Ajax',
     alias: 'proxy.chachingProxy',
     timeout: 6000000,
@@ -57,6 +86,50 @@
             return sortersArray;
         }
         return sorters;
+    },
+    doRequest: function (operation) {
+        var me = this,
+            writer = me.getWriter(),
+            request = me.buildRequest(operation),
+            method = me.getMethod(request),
+            jsonData, params;
+        if (writer && operation.allowWrite()) {
+            request = writer.write(request);
+        }
+        request.setConfig({
+            binary: me.getBinary(),
+            headers: me.getHeaders(),
+            timeout: me.getTimeout(),
+            scope: me,
+            callback: me.createRequestCallback(request, operation),
+            method: method,
+            useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
+            disableCaching: false
+        });
+        // explicitly set it to false, ServerProxy handles caching
+        if (method.toUpperCase() !== 'GET' && me.getParamsAsJson()) {
+            params = request.getParams();
+            if (params) {
+                //Set users logged in organizationId
+                if (!params.organizationUnitId)
+                    params.organizationUnitId = Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId;
+
+                jsonData = request.getJsonData();
+                if (jsonData) {
+                    jsonData = Ext.Object.merge({}, jsonData, params);
+                } else {
+                    jsonData = params;
+                }
+                request.setJsonData(jsonData);
+                request.setParams(undefined);
+            }
+        }
+        if (me.getWithCredentials()) {
+            request.setWithCredentials(true);
+            request.setUsername(me.getUsername());
+            request.setPassword(me.getPassword());
+        }
+        return me.sendRequest(request);
     },
     listeners:
     {

@@ -1,3 +1,13 @@
+/**
+ * The ViewController class Project/Job form
+ * Author: Krishna Garad
+ * Date: 29/04/2016
+ */
+/**
+ * @class Chaching.view.projects.projectmaintenance.ProjectsFormController
+ * ViewController class for project/job
+ * @alias controller.projects-projectmaintenance-projectsform
+ */
 Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.projects-projectmaintenance-projectsform',

@@ -436,6 +436,18 @@
         "modelNamespace": "Chaching.model",
         "name": "projects.projectmaintenance.JobAccountsModel"
       }
+    },
+    "app/model/projects/projectmaintenance/PoRangeAllocationModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "projects/projectmaintenance/PoRangeAllocationModel",
+        "modelNamespace": "Chaching.model",
+        "name": "projects.projectmaintenance.PoRangeAllocationModel"
+      }
     }
   }
 }

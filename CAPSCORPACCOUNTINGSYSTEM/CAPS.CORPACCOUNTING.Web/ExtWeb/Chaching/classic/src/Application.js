@@ -46,7 +46,8 @@ Ext.define('Chaching.Application', {
         'projects.projectmaintenance.ProjectCoaStore',
         'projects.projectmaintenance.JobAccountsStore',
         'projects.projectmaintenance.ProjectLocationsStore',
-        'utilities.LocationListStore'
+        'utilities.LocationListStore',
+        'projects.projectmaintenance.PoRangeAllocationStore'
       
     ],
     mainView: 'Chaching.view.main.ChachingViewport',

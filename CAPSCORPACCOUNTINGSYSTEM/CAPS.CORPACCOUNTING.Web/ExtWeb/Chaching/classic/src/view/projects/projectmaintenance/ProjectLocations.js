@@ -1,17 +1,21 @@
-
+/**
+ * The class is created to provide inline add/update/delete of project/job locations
+ * Author: Krishna Garad
+ * Date: 03/05/2016
+ */
+/**
+ * @class Chaching.view.projects.projectmaintenance.ProjectLocations
+ * UI design for project/job locations
+ * @alias widget.projects.projectmaintenance.projectLocations
+ */
 Ext.define('Chaching.view.projects.projectmaintenance.ProjectLocations',{
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
-
-    requires: [
-        'Chaching.view.projects.projectmaintenance.ProjectLocationsController'
-    ],
     xtype: 'widget.projects.projectmaintenance.projectLocations',
-    controller: 'projects-projectmaintenance-projectlocations',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),
         edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Edit'),
-        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete'),
+        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete')
     },
     padding: 5,
     store: 'projects.projectmaintenance.ProjectLocationsStore',

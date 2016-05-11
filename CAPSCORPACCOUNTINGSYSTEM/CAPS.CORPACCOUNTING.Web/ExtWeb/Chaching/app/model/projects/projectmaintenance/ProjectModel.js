@@ -23,7 +23,13 @@ Ext.define('Chaching.model.projects.projectmaintenance.ProjectModel', {
         { name: 'taxCreditId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'organizationUnitId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'rollupcenterid', type: 'int', defaultValue: null, convert: nullHandler },
-        { name: 'detailTransactions', type: 'string', defaultValue: 'Transactions' },
+        ///TODO: Remove convert function once service sent po log count and transaction count
+        { name: 'detailTransactions', type: 'int',convert:function(val) {
+            return Ext.Number.randomInt(0, 100);
+        } },
+        { name: 'poLogCount', type: 'int', convert:function(val) {
+            return Ext.Number.randomInt(0, 100);
+        } },
         { name: 'typeofProjectName', type: 'string' },
         { name: 'jobStatusName', type: 'string' }
     ]

@@ -9,6 +9,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGridController'
             var horizontalTabPanel = tabPanel.up('tabpanel');
             var target = e.target,
                 nodeName = target.nodeName;
+            if (nodeName === "DIV" && target.attributes.isHyperLink) {
+                nodeName = "A";
+            }
             if (nodeName === "A" && horizontalTabPanel) {
                 var accountsGrid = Ext.create({
                     xtype: 'projects.projectmaintenance.linenumbers',

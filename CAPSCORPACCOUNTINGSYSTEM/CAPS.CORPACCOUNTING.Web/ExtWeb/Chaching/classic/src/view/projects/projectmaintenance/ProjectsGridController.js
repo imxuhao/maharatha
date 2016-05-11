@@ -1,3 +1,13 @@
+/**
+ * The viewController class for projects/jobs list
+ * Author: Krishna Garad
+ * Date: 28/04/2016
+ */
+/**
+ * @class Chaching.view.projects.projectmaintenance.ProjectsGridController
+ * ViewController class for project/job.
+ * @alias controller.projects-projectmaintenance-projectsgrid
+ */
 Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.projects-projectmaintenance-projectsgrid',
@@ -67,8 +77,54 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
                 var jobLocationsStore = formPanel.down('gridpanel[itemId=jobLocationsGridPanel]').getStore();
                 jobLocationsStore.getProxy().setExtraParam('jobId', record.get('jobId'));
                 jobLocationsStore.load();
+
+                var poAllocationStore = formPanel.down('gridpanel[itemId=jobPurchaseOrderAllocation]').getStore();
+                poAllocationStore.getProxy().setExtraParam('jobId', record.get('jobId'));
+                poAllocationStore.load();
             }
         }
     },
-    
+    onProjectsCellClick: function(view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+        var me = this,
+            grid = me.getView(),
+            columns = grid.getColumns(),
+            tabPanel = view.up('tabpanel');
+        if (e && e.target && tabPanel) {
+            var horizontalTabPanel = tabPanel.up('tabpanel');
+            var target = e.target,
+                nodeName = target.nodeName;
+            if (nodeName === "DIV" && target.attributes.isHyperLink) {
+                nodeName = "A";
+            }
+            var column = columns[cellIndex];
+            if (nodeName === "A" && horizontalTabPanel&&column) {
+                var formView = undefined;
+                switch (column.dataIndex) {
+                    case "jobNumber":
+                        formView = me.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, record);
+                        break;
+                    case "caption":
+                        formView = me.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, record);
+                        if (formView) {
+                            formView.down('tabpanel').setActiveItem(3);
+                        }
+                        break;
+                    case "detailTransactions":
+                        abp.notify.info('Comming sooooooooooon.....', 'Not available');
+                        break;
+                    case "poLogCount":
+                        formView = me.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, record);
+                        if (formView) {
+                            formView.down('tabpanel').setActiveItem(5);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (formView) {
+                    formView.getForm().loadRecord(record);
+                }
+            }
+        }
+    }
 });

@@ -1,4 +1,13 @@
-
+/**
+ * The class is created to provide main UI to access projects/jobs.
+ * Author: Krishna Garad
+ * Date: 28/04/2016
+ */
+/**
+ * @class Chaching.view.projects.projectmaintenance.ProjectsGrid
+ * UI design for project/job.
+ * @alias widget.projects.projectmaintenance.projects
+ */
 Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
@@ -11,7 +20,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),
         edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Edit'),
-        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete'),
+        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete')
     },
     padding: 5,
     gridId:16,
@@ -49,7 +58,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
         iconCls: 'fa fa-plus'
     },
     createNewMode: 'tab',
-    isSubMenuItemTab: true,   
+    isSubMenuItemTab: true,
+    listeners: {
+        cellclick:'onProjectsCellClick'
+    },
     columns: [
          {
              xtype: 'gridcolumn',
@@ -71,12 +83,13 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              sortable: true,
              groupable: true,
              width: '15%',
+             renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
                  emptyText: app.localize('ToolTipJobName')
              }, editor: {
-                 xtype: 'textfield',
+                 xtype: 'textfield'
              }
          },{
              xtype: 'gridcolumn',
@@ -84,6 +97,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              dataIndex: 'detailTransactions',//TODO: render hyperlink based on transactions count
              sortable: false,
              groupable: false,
+             renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              width: '13%'
          }, {
              xtype: 'gridcolumn',
@@ -127,6 +141,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              dataIndex: 'poLogCount',//TODO: render hyperlink based on po log count
              sortable: false,
              groupable: false,
+             renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              width: '15%'
          }, {
              xtype: 'gridcolumn',
@@ -154,13 +169,25 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  width: '100%',
                  emptyText: app.localize('ToolTipShootDate')
              }
+         }, {///TODO : field to be added
+             xtype: 'gridcolumn',
+             text: app.localize('ShootLocations').initCap(),
+             dataIndex: 'shootLocations',
+             sortable: true,
+             groupable: true,
+             width: '14%',
+             filterField: {
+                 xtype: 'textfield',
+                 width: '100%',
+                 emptyText: app.localize('ToolTipShootLocations')
+             }
          }, {
              xtype: 'gridcolumn',
              text: app.localize('WrapUpInsurance').initCap(),
              dataIndex: 'isWrapUpInsurance',
              sortable: false,
              groupable: false,
-             renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              width: '15%'
          }, {
              xtype: 'gridcolumn',
@@ -174,6 +201,100 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  width: '100%',
                  emptyText: app.localize('ToolTipStatus')
              }
+         },
+         ////TODO : dummy columns for default manage view
+         {
+             xtype: 'gridcolumn',
+             text: app.localize('TotalCost').initCap(),
+             dataIndex: 'totalCost',
+             sortable: true,
+             groupable: true,
+             hidden:true,
+             width: '10%',
+             filterField: {
+                 xtype: 'textfield',
+                 width: '100%',
+                 emptyText: app.localize('ToolTipTotalCost')
+             }
+         },{
+             xtype: 'gridcolumn',
+             text: app.localize('BidContract').initCap(),
+             dataIndex: 'bidContractTotal',
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: '12%',
+             filterField: {
+                 xtype: 'textfield',
+                 width: '100%',
+                 emptyText: app.localize('ToolTipBidContract')
+             }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('ProducersActual').initCap(),
+             dataIndex: 'producersActual',
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: '13%',
+             filterField: {
+                 xtype: 'textfield',
+                 width: '100%',
+                 emptyText: app.localize('ToolTipProducersActual')
+             }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('BilledAmount').initCap(),
+             dataIndex: 'billedAmount',
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: '13%',
+             filterField: {
+                 xtype: 'textfield',
+                 width: '100%',
+                 emptyText: app.localize('ToolTipBilledAmount')
+             }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('RecievedAmount').initCap(),
+             dataIndex: 'recievedAmount',
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: '13%',
+             filterField: {
+                 xtype: 'textfield',
+                 width: '100%',
+                 emptyText: app.localize('ToolTipRecievedAmount')
+             }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('Variance'),
+             dataIndex: 'variance',
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: '11%',
+             filterField: {
+                 xtype: 'textfield',
+                 width: '100%',
+                 emptyText: app.localize('ToolTipVariance')
+             }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('AgencyProducer').initCap(),
+             dataIndex: 'agencyProducer',
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: '13%',
+             filterField: {
+                 xtype: 'textfield',
+                 width: '100%',
+                 emptyText: app.localize('ToolTipAgencyProducer')
+             }
          }
+
     ]
 });

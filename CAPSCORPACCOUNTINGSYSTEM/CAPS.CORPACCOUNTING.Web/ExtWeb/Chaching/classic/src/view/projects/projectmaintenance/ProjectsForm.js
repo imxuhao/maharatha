@@ -1,11 +1,25 @@
-
+/**
+ * The class is created to design project/job UI
+ * Author: Krishna Garad
+ * Date: 29/04/2016
+ */
+/**
+ * @class Chaching.view.projects.projectmaintenance.ProjectsForm
+ * UI design for project/job
+ * @alias widget.projects.projectmaintenance.projects.create, widget.projects.projectmaintenance.projects.edit
+ */
 Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['widget.projects.projectmaintenance.projects.create', 'widget.projects.projectmaintenance.projects.edit'],
     requires: [
         'Chaching.view.projects.projectmaintenance.ProjectsFormController',
-        'Chaching.view.projects.projectmaintenance.ProjectLocations'
+        'Chaching.view.projects.projectmaintenance.ProjectLocations',
+        'Chaching.view.projects.projectmaintenance.PoRangeAllocationGrid'
     ],
+    /**
+     * @cfg {object}
+     * permissions to access project/job.
+     */
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),
@@ -46,6 +60,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 xtype: 'hiddenfield',
                                 name: 'jobId',
                                 value: 0
+                            }, {
+                                xtype: 'hiddenfield',
+                                name: 'organizationUnitId',
+                                value: null
                             }, {
                                 columnWidth: .33,
                                 padding: '20 10 0 20',
@@ -708,6 +726,43 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         }]
                     }]
                     
+                }, {
+                    xtype: 'fieldset',
+                    title: app.localize('OtherInfo'),
+                    ui: 'transparentFieldSet',
+                    layout: 'column',
+                    collapsible: true,
+                    items:[
+                    {
+                        columnWidth: .33,
+                        padding: '0 10 0 20',
+                        defaults: {
+                            width: '100%',
+                            ui: 'fieldLabelTop',
+                            labelAlign: 'top'
+                        },
+                        items:[
+                        {
+                            xtype: 'textfield',
+                            name: 'salesRepId',
+                            itemId: 'salesRepId',
+                            fieldLabel: app.localize('SalesRep'),
+                            emptyText:app.localize('SelectOption')
+                        }]
+                    }, {
+                        columnWidth: .66,
+                        padding: '0 10 0 20',
+                        defaults: {
+                            width: '100%',
+                            ui: 'fieldLabelTop',
+                            labelAlign: 'top'
+                        },
+                        items:[
+                        {
+                            xtype: 'widget.projects.projectmaintenance.porangeallocation',
+                            itemId: 'jobPurchaseOrderAllocation'
+                        }]
+                    }]
                 }],
                 dockedItems: [
                 {

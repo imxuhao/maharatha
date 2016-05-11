@@ -131,7 +131,7 @@
     rendererHyperLink: function (val, meta, record, rowIndex, colIndex, store, view) {
         if (val) {
             var a = '<a style="padding-left:10px;text-decoration:underline !important;">' + val + '</a>';
-            var div = '<div class="fa fa-th" isHyperLink="true" style="overflow:hidden; color:white; cursor:pointer; width:100%; color:#3598DC !important;" title="' + val + '">' + a + '</div>';
+            var div = '<div class="fa fa-th" isHyperLink="true" style="overflow:hidden; text-overflow:ellipsis; color:white; cursor:pointer; width:98%; color:#3598DC !important;" title="' + val + '">' + a + '</div>';
             return div;
         }
         return val;

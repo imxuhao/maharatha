@@ -110,6 +110,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  xtype: 'textfield',
                  width: '100%',
                  emptyText: app.localize('ToolTipProductName')
+             },editor: {
+                 xtype:'textfield'
              }
          }, {
              xtype: 'gridcolumn',
@@ -134,6 +136,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  xtype: 'textfield',
                  width: '100%',
                  emptyText: app.localize('ToolTipAgency')
+             }, editor: {
+                 xtype: 'textfield'
              }
          }, {
              xtype: 'gridcolumn',
@@ -168,6 +172,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  dataIndex: 'shootingDate',
                  width: '100%',
                  emptyText: app.localize('ToolTipShootDate')
+             }, editor: {
+                 xtype: 'datefield'
              }
          }, {///TODO : field to be added
              xtype: 'gridcolumn',
@@ -188,7 +194,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              sortable: false,
              groupable: false,
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-             width: '15%'
+             width: '15%',
+             editor: {
+                 xtype: 'checkboxfield'
+             }
          }, {
              xtype: 'gridcolumn',
              text: app.localize('Status'),

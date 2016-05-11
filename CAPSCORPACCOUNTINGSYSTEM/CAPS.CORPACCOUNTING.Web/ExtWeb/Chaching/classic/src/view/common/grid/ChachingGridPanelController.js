@@ -145,6 +145,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     operation = Ext.data.Operation({
                         params: record.data,
                         records: [record],
+                        controller: me,
                         callback: me.onOperationCompleteCallBack
                     });
                     gridStore.update(operation);
@@ -170,6 +171,49 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         gridStore.reload();
     },
     onOperationCompleteCallBack: function (records, operation, success) {
+        var controller = operation.controller,
+               view = controller.getView();
+        var promise = controller.doPostSaveOperations(records, operation, success);
+        var runner = new Ext.util.TaskRunner(),
+            task = undefined;
+
+        task = runner.newTask({
+            run: function () {
+                if (promise && promise.owner.completed) {
+                    task.stop();
+                    if (promise.owner.completionAction === "fulfill") {
+                        controller.handleFulFillResponse(records, operation, success);
+                    } else if (promise.owner.completionAction === "reject") {
+                        controller.handleRejectResponse(records, operation, success, promise.owner.completionValue);
+                    }
+                }
+            },
+            interval: 1000
+        });
+
+        task.start();
+    },
+    handleRejectResponse: function(records, operation, success, rejectResponseValue) {
+        if (records && rejectResponseValue) {
+            var record = records[0],
+                rejectResponse = Ext.decode(rejectResponseValue);
+            var message = '',
+               title = 'Error';
+            record.reject();
+            if (rejectResponse && rejectResponse.error) {
+                if (rejectResponse.error.message && rejectResponse.error.details) {
+                    title = rejectResponse.error.message;
+                    message = rejectResponse.error.details;
+                    abp.message.warn(message, title);
+                    return;
+                }
+                title = rejectResponse.error.message;
+                message = rejectResponse.error.details ? rejectResponse.error.details : title;
+            }
+            abp.message.warn(message, title);
+        }
+    },
+    handleFulFillResponse: function (records, operation, success) {
         if (success) {
             var action = operation.getAction();
             if (action === "create" || action === "destroy") {
@@ -177,15 +221,6 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 controller.doReloadGrid();
             }
             abp.notify.success('Operation completed successfully.', 'Success');
-            //Ext.toast({
-            //    html: 'Operation completed successfully.',
-            //    title: 'Success',
-            //    ui: 'chachingWindow',
-            //    alwaysOnTop: true,
-            //    saveDelay: 500,
-            //    animateShadow: true,
-            //    align: 'tr'
-            //});
         } else {
             var response = Ext.decode(operation.getResponse().responseText);
             var message = '',
@@ -193,19 +228,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             if (response && response.error) {
                 if (response.error.message && response.error.details) {
                     title = response.error.message;
-                    message = response.error.details;//.replaceAll(' - ', '</br>-');
+                    message = response.error.details;
                     abp.message.warn(message, title);
-                    /*var myMsg = Ext.create('Ext.window.MessageBox', {
-                        // set closeAction to 'destroy' if this instance is not
-                        // intended to be reused by the application
-                        closeAction: 'destroy',
-                        ui: 'chachingWindow'
-                    }).show({
-                        title: title,
-                        message: message,
-                        buttons: Ext.Msg.OKCANCEL,
-                        icon: Ext.Msg.INFO
-                    });*/
                     return;
                 }
                 title = response.error.message;
@@ -214,7 +238,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             abp.message.warn(message, title);
         }
     },
-
+  
+   doPostSaveOperations: function(records, operation, success) {
+        var deferred = new Ext.Deferred();
+        deferred.resolve('{success:true}');
+        return deferred.promise;
+    },
     //editing plugin listeners
     onBeforeGridEdit: function (editor, context, eOpts) {
         ///TODO cancel edit if restricted

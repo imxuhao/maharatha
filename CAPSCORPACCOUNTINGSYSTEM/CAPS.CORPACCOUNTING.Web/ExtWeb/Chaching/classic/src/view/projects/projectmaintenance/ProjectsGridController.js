@@ -126,5 +126,28 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
                 }
             }
         }
+    },
+    doPostSaveOperations: function(records, operation, success) {
+        var deferred = new Ext.Deferred();
+        if (records) {
+            var record = records[0];
+            if (record.get('agencyEmail') === "") record.data.agencyEmail = null;
+            Ext.Ajax.request({
+                url: abp.appPath + 'api/services/app/jobCommercial/UpdateJobDetailUnit',
+                jsonData: Ext.encode(record.data),
+                success: function(response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        deferred.resolve(response.responseText);
+                    } else {
+                        deferred.reject(response.responseText);
+                    }
+                },
+                failure: function(response, opts) {
+                    deferred.reject(response.responseText);
+                }
+            });
+        }
+        return deferred.promise;
     }
 });

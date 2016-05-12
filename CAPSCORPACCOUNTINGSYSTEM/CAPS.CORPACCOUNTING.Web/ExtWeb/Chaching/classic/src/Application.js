@@ -83,9 +83,9 @@ Ext.define('Chaching.Application', {
                     Ext.each(records, function (record) {
                         if (record.get('isDefault')) {
                             rec = {
-                                gridId: record.get('gridId'),
+                                gridId: record.get('viewId'),
                                 userViewId: record.get('userViewId'),
-                                viewSettingName: record.get('viewSettingName'),
+                                viewSettingName: record.get('viewName'),
                                 viewSettings: record.get('viewSettings'),
                                 isDefault: record.get('isDefault')
                             }

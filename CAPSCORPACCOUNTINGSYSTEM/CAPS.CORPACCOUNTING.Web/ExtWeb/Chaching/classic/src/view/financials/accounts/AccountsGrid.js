@@ -15,7 +15,7 @@
         destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete'),
     },
     padding: 5,
-    gridId: 9,
+    gridId: 11,
     headerButtonsConfig: [
       {
           xtype: 'displayfield',

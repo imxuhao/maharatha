@@ -3262,13 +3262,13 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.GridId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.ViewId">
             <summary>Gets or sets the GridId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.UserId">
             <summary>Gets or sets the UserId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.ViewSettingName">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.ViewName">
             <summary>Gets or sets the ViewSettingName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput.ViewSettings">
@@ -3506,13 +3506,13 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.UserViewId">
             <summary>Gets or sets the UserViewId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.GridId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.ViewId">
             <summary>Gets or sets the GridId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.UserId">
             <summary>Gets or sets the UserId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.ViewSettingName">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.ViewName">
             <summary>Gets or sets the ViewSettingName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.ViewSettings">
@@ -3533,13 +3533,13 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.UserViewId">
             <summary>Gets or sets the UserViewId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.GridId">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.ViewId">
             <summary>Gets or sets the GridId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.UserId">
             <summary>Gets or sets the UserId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.ViewSettingName">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.ViewName">
             <summary>Gets or sets the ViewSettingName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.ViewSettings">
@@ -3547,6 +3547,21 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.IsDefault">
             <summary>Gets or sets the IsDefault field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.Grid_Name">
+            <summary>Gets or sets the Grid_Name field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.Grid_Description">
+            <summary>Gets or sets the Grid_Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.IsSystemDefault">
+            <summary>Gets or sets the IsDefault field. 
+            if IsSystemDefault is true means the View is from SystemViewSettings
+            if its is false the View is from UserViewSettings
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UserViewSettingsUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorAliasUnitDto.VendorAliasId">
             <summary>Gets or sets the VendorAliasId field. </summary>

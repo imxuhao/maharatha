@@ -67,7 +67,7 @@ Ext.define('Chaching.view.manageView.ManageViewList',{
     columns:[
     {
         text: abp.localization.localize("SettingName"),
-        dataIndex: 'viewSettingName',
+        dataIndex: 'viewName',
         xtype: 'gridcolumn',
         sortable: false,
         groupable: false,
@@ -79,7 +79,7 @@ Ext.define('Chaching.view.manageView.ManageViewList',{
             emptyText: app.localize('TSettingName')
         },editor: {
             xtype: 'textfield',
-            name:'viewSettingName'
+            name:'viewName'
         }
     },{
         text: abp.localization.localize("Default"),

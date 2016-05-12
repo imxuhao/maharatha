@@ -133,7 +133,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             if (input.ChartOfAccountId == 0)
             {
-                throw new UserFriendlyException(L("BudgetFormatisRequired"));
+                throw new UserFriendlyException(L("BudgetFormat is Required"));
             }
             var jobUnit = await _jobUnitRepository.GetAsync(input.JobId);
             #region Setting the values to be updated

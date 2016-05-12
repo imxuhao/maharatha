@@ -74,7 +74,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                                                                          p.IsCorporate == true ));
                     if (count > 0)
                     {
-                        throw new UserFriendlyException(L("MultiplechartofAccounts"));
+                        throw new UserFriendlyException(L("Cannot create multiple chartofAccounts"));
                     }
                 }
 
@@ -88,14 +88,14 @@ namespace CAPS.CORPACCOUNTING.Masters
                     {
                         if (coaunit.Count > 0)
                         {
-                            throw new UserFriendlyException(L("DuplicateChartofAccount", coaUnit.Caption));
+                            throw new UserFriendlyException(L("Duplicate ChartofAccount", coaUnit.Caption));
                         }
                     }
                     else
                     {
                         if (coaunit.FirstOrDefault(p => p.Id != coaUnit.Id && p.Caption == coaUnit.Caption) != null)
                         {
-                            throw new UserFriendlyException(L("Duplicate Chart of Account", coaUnit.Caption));
+                            throw new UserFriendlyException(L("Duplicate ChartofAccount", coaUnit.Caption));
                         }
                     }
                 }

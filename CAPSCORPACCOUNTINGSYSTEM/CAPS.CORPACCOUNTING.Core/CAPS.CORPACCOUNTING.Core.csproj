@@ -191,6 +191,7 @@
     <Compile Include="Masters\TaxCreditUnit.cs" />
     <Compile Include="Masters\TaxCreditUnitManager.cs" />
     <Compile Include="Masters\TypeOfCurrencyUnit.cs" />
+    <Compile Include="Masters\SystemViewSettingsUnit.cs" />
     <Compile Include="Masters\VendorAliasUnit.cs" />
     <Compile Include="Masters\VendorAliasUnitManager.cs" />
     <Compile Include="Organization\OrganizationCacheItem.cs" />

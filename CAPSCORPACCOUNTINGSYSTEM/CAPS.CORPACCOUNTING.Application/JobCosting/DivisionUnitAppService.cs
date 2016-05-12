@@ -45,7 +45,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     p => p.IsCorporate == true && p.OrganizationUnitId == input.OrganizationUnitId);
             if (ReferenceEquals(chartofaccount, null))
             {
-                throw new UserFriendlyException(L("Pleasesetupchartofaccount"));
+                throw new UserFriendlyException(L("Please setup chartofaccount"));
             }
             var jobUnit = new JobUnit(jobnumber: input.JobNumber, caption: input.Caption, iscorporatedefault: input.IsCorporateDefault, rollupaccountid: input.RollupAccountId,
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,

@@ -13,15 +13,15 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     public class CreateUserViewSettingsUnitInput: IInputDto
     {
         /// <summary>Gets or sets the GridId field. </summary>
-        public int GridId { get; set; }
+        public int ViewId { get; set; }
 
         /// <summary>Gets or sets the UserId field. </summary>
-        public long? UserId { get; set; }
+        public long UserId { get; set; }
 
         /// <summary>Gets or sets the ViewSettingName field. </summary>
         [Required]
         [StringLength(UserViewSettingsUnit.ViewSettingNameLength)]
-        public string ViewSettingName { get; set; }
+        public string ViewName { get; set; }
 
         /// <summary>Gets or sets the ViewSettings field. </summary>
         [Required]
@@ -29,6 +29,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the IsDefault field. </summary>
         public bool? IsDefault { get; set; }
+
+        public long? OrganizationUnitId { get; set; }
 
     }
 }

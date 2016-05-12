@@ -1,17 +1,16 @@
 ﻿using Abp.Domain.Entities;
-using Abp.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [Table("CAPS_GridList")]
+    [Table("CAPS_SystemViewList")]
     public class GridListUnit : Entity
     {
         #region Class Property Declarations
         public const int MaxNameLength = 300;
         /// <summary>Overriding the ID column with GridId</summary>
-        [Column("GridId"), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Column("ViewId"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public override int Id { get; set; }
 
         /// <summary>Gets or sets the Name field. </summary>

@@ -40,7 +40,7 @@ Ext.define('Chaching.view.manageView.ManageViewListController', {
                     record.set('viewSettings', Ext.encode(userViewSetting));
                 } else {
                     record.set('userId', Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId);
-                    record.set('gridId', parentGrid.gridId);
+                    record.set('viewId', parentGrid.gridId);
                     record.set('id', 0);
                     record.set('viewSettings', Ext.encode(userViewSetting));
                 }
@@ -86,9 +86,9 @@ Ext.define('Chaching.view.manageView.ManageViewListController', {
                             var cols = targetGrid.getColumns();
                             var settingsToApply = [];
                             var rec = {
-                                gridId: record.get('gridId'),
+                                gridId: record.get('viewId'),
                                 userViewId: record.get('userViewId'),
-                                viewSettingName: record.get('viewSettingName'),
+                                viewSettingName: record.get('viewName'),
                                 viewSettings: record.get('viewSettings'),
                                 isDefault: record.get('isDefault')
                             }

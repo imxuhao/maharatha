@@ -27,7 +27,7 @@ Ext.define('Chaching.view.manageView.ManageViewView',{
             searchTerm: me.parentGrid.gridId,
             comparator: 2,
             dataType: 0,
-            property: 'gridId',
+            property: 'viewId',
             value: me.parentGrid.gridId
         });
         filters.push(filter);

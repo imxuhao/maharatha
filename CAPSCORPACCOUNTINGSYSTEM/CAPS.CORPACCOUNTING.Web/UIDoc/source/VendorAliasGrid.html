@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.vendors.VendorAliasGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+    requires: [
+        &#39;Chaching.view.payables.vendors.VendorAliasGridController&#39;
+    ],
+    controller: &#39;vendors-vendoraliasgrid&#39;,
+    xtype: &#39;vendoralias&#39;,
+    name: &#39;vendoralias&#39;,
+    modulePermissions: {
+        read: true,
+        create: true,
+        edit: true,
+        destroy: true
+    },
+    padding: 5,
+    gridId: 18,
+    headerButtonsConfig: [{
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;VendorAlias&quot;),
+        ui: &#39;headerTitle&#39;
+    }, &#39;-&gt;&#39;, {
+        xtype: &#39;button&#39;,
+        scale: &#39;small&#39;,
+        ui: &#39;actionButton&#39;,
+        action: &#39;create&#39;,
+        text: abp.localization.localize(&quot;CreatingVendorAlias&quot;).toUpperCase(),
+        checkPermission: false,
+        iconCls: &#39;fa fa-plus&#39;,
+        iconAlign: &#39;left&#39;
+    }],
+     
+    requireExport: false,
+    requireMultiSearch: false,
+    requireMultisort: false,
+    isEditable: true,
+    editingMode: &#39;cell&#39;,
+    createNewMode: &#39;inline&#39;,
+    columnLines: true,
+    multiColumnSort: false,
+    manageViewSetting: false,
+    showPagingToolbar: false,
+    hideClearFilter: true,
+    //store: {
+    //    model: &#39;Chaching.model.payables.vendors.VendorAliasModel&#39;,
+    //    data: []
+    //},
+    store: &#39;payables.vendors.VendorsAliasStore&#39;,
+    columns: [{
+        text: app.localize(&#39;Names&#39;),
+        dataIndex: &#39;aliasName&#39;,
+        xtype: &#39;gridcolumn&#39;,
+        sortable: false,
+        groupable: false,
+        //flex:1,
+        width: &#39;80%&#39;,
+        editor: {
+            xtype: &#39;textfield&#39;,
+            name: &#39;aliasName&#39;
+        }
+    }]
+});</pre>
+</body>
+</html>

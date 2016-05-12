@@ -15,10 +15,61 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js"><span id='Chaching-components-plugins-RowEditing'>/**
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
 </span> * This file contains the custom logic require for the rowediting plugin.
  * Author: Krishna Garad
  * Date:04/01/2016
+ */
+<span id='Chaching-components-plugins-RowEditing'>/**
+</span> * The Chaching.components.plugins.RowEditing plugin injects editing at a row level for a Grid. When editing begins,
+ * a small floating dialog will be shown for the appropriate row. Each editable column will show a field
+ * for editing. There is a button to save or cancel all changes for the edit.
+ *
+ * The field that will be used for the editor is defined at the
+ * {@link Ext.grid.column.Column#editor editor}. The editor can be a field instance or a field configuration.
+ * If an editor is not specified for a particular column then that column won&#39;t be editable and the value of
+ * the column will be displayed. To provide a custom renderer for non-editable values, use the 
+ * {@link Ext.grid.column.Column#editRenderer editRenderer} configuration on the column.
+ *
+ * The editor may be shared for each column in the grid, or a different one may be specified for each column.
+ * An appropriate field type should be chosen to match the data structure that it will be editing. For example,
+ * to edit a date, it would be useful to specify {@link Ext.form.field.Date} as the editor.
+ *
+ *     @example
+ *     Ext.create(&#39;Ext.data.Store&#39;, {
+ *         storeId: &#39;simpsonsStore&#39;,
+ *         fields:[ &#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
+ *         data: [
+ *             { name: &#39;Lisa&#39;, email: &#39;lisa@simpsons.com&#39;, phone: &#39;555-111-1224&#39; },
+ *             { name: &#39;Bart&#39;, email: &#39;bart@simpsons.com&#39;, phone: &#39;555-222-1234&#39; },
+ *             { name: &#39;Homer&#39;, email: &#39;homer@simpsons.com&#39;, phone: &#39;555-222-1244&#39; },
+ *             { name: &#39;Marge&#39;, email: &#39;marge@simpsons.com&#39;, phone: &#39;555-222-1254&#39; }
+ *         ]
+ *     });
+ *
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Simpsons&#39;,
+ *         store: Ext.data.StoreManager.lookup(&#39;simpsonsStore&#39;),
+ *         columns: [
+ *             {header: &#39;Name&#39;, dataIndex: &#39;name&#39;, editor: &#39;textfield&#39;},
+ *             {header: &#39;Email&#39;, dataIndex: &#39;email&#39;, flex:1,
+ *                 editor: {
+ *                     xtype: &#39;textfield&#39;,
+ *                     allowBlank: false
+ *                 }
+ *             },
+ *             {header: &#39;Phone&#39;, dataIndex: &#39;phone&#39;}
+ *         ],
+ *         selModel: &#39;rowmodel&#39;,
+ *         plugins: {
+ *             ptype: &#39;chachingRowediting&#39;,
+ *             clicksToEdit: 1
+ *         },
+ *         height: 200,
+ *         width: 400,
+ *         renderTo: Ext.getBody()
+ *     });
+ *
  */
 Ext.define(&#39;Chaching.components.plugins.RowEditing&#39;, {
     extend: &#39;Ext.grid.plugin.RowEditing&#39;,
@@ -32,23 +83,75 @@ Ext.define(&#39;Chaching.components.plugins.RowEditing&#39;, {
             me.updateEditingContextRecord(context);
             me.editing = false;
             me.fireEvent(&#39;edit&#39;, me, context);
-
-            //do key:value adjustments for comboboxes
-            var combos = me.editor.query(&#39;combobox&#39;);
-            if (combos &amp;&amp; combos.length &gt; 0) {
-                for (var i = 0; i &lt; combos.length; i++) {
-                    context.record.set(combos[i].displayField, combos[i].getRawValue());
-                }
-            }
         }
     },
+<span id='Chaching-components-plugins-RowEditing-method-startEdit'>    /**
+</span>    * Starts editing the specified record, using the specified Column definition to define which field is being edited.
+    * @param {Ext.data.Model} record The Store data record which backs the row to be edited.
+    * @param {Ext.grid.column.Column/Number} [columnHeader] The Column object defining the column field to be focused, or index of the column.
+    * If not specified, it will default to the first visible column.
+    * @return {Boolean} `true` if editing was started, `false` otherwise.
+    */
+    startEdit: function (record, columnHeader) {
+        var me = this,
+            editor = me.getEditor(),
+            context;
+
+        if (Ext.isEmpty(columnHeader)) {
+            columnHeader = me.grid.getTopLevelVisibleColumnManager().getHeaderAtIndex(0);
+        }
+
+        if (editor.beforeEdit() !== false) {
+            context = me.getEditingContext(record, columnHeader);
+            if (context &amp;&amp; me.beforeEdit(context) !== false &amp;&amp; me.fireEvent(&#39;beforeedit&#39;, me, context) !== false &amp;&amp; !context.cancel) {
+                me.context = context;
+               
+                // If editing one side of a lockable grid, cancel any edit on the other side.
+                if (me.lockingPartner) {
+                    me.lockingPartner.cancelEdit();
+                }
+                editor.startEdit(context.record, context.column, context);
+                //set value and rawValue for combos
+                if (editor.form) {
+                    var formFields = editor.form.getFields();
+                    for (var i = 0; i &lt; formFields.items.length; i++) {
+                        var field = formFields.items[i];
+                        if (field.xtype === &quot;combo&quot; || field.xtype === &quot;combobox&quot;) {
+                            var editorStore = field.getStore();
+                            if (editorStore &amp;&amp; !editorStore.isDataLoaded) {
+                                editorStore.field = field;
+                                editorStore.load({
+                                    callback: function (records, operation, success) {
+                                        this.field.setValue(record.get(this.field.valueField));
+                                        this.field.setRawValue(record.get(this.field.displayField));
+                                    }
+                                });
+                                editorStore.isDataLoaded = true;
+                            } else {
+                                field.setValue(record.get(field.valueField));
+                                field.setRawValue(record.get(field.displayField));
+                            }
+                        }
+                    }
+                }
+                me.editing = true;
+                return true;
+            }
+        }
+        return false;
+    },
 <span id='Chaching-components-plugins-RowEditing-method-updateEditingContextRecord'>    updateEditingContextRecord:function(context) {
-</span>        if (context &amp;&amp; context.newValues) {
-            var newVals = context.newValues,
-                record = context.record;
-            for (var key in newVals) {
-                if (newVals.hasOwnProperty(key)) {
-                    record.set(key, newVals[key]);
+</span>        var me = this,
+            editor = me.editor,
+            form = editor.form,
+            fields = form.getFields();
+        if (context &amp;&amp; fields) {
+            var record = context.record;
+            for (var i = 0; i &lt; fields.items.length; i++) {
+                var field = fields.items[i];
+                if (field.xtype===&quot;combo&quot;||field.xtype===&quot;combobox&quot;) {
+                    record.set(field.valueField, field.getValue());
+                    record.set(field.displayField, field.getRawValue());
                 }
             }
         }

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * This Class is created for drag and drop from one grid to another grid.
+ * Author: Krishna Garad
+ * Date: 26/04/2016
+ */
+<span id='Chaching-components-dragdrop-GridToGrid'>/**
+</span> * @class Chaching.components.dragdrop.GridToGrid
+ * The Drag &amp; Drop control from one grid to another.
+ * @alias widget.chachingGridDragDrop
+ *
+ *     @example usage 
+ *     Ext.create(&#39;Chaching.components.dragdrop.GridToGrid&#39;, {
+ *      config:{
+ *              columns:[{text:&#39;Column1&#39;,dataIndex:&#39;Column1&#39;},{text:&#39;Column2&#39;,dataIndex:&#39;Column2&#39;}],
+ *              store:{
+ *                      fields:[{name:&#39;Column1&#39;},{name:&#39;Column2&#39;}],
+ *                      data:[{Column1:&#39;rec1&#39;,Column2:&#39;10&#39;},{Column1:&#39;rec2&#39;,Column2:&#39;20&#39;},{Column1:&#39;rec3&#39;,Column2:&#39;30&#39;},{Column1:&#39;rec4&#39;,Column2:&#39;40&#39;},{Column1:&#39;rec5&#39;,Column2:&#39;50&#39;}]
+ *                     }
+ *              },
+ * 
+ *      renderTo:Ext.getBody() 
+ *     });
+ */
+
+Ext.define(&#39;Chaching.components.dragdrop.GridToGrid&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    alias: &#39;widget.chachingGridDragDrop&#39;,
+    requires: [
+        &#39;Ext.grid.*&#39;,
+        &#39;Ext.layout.container.HBox&#39;,
+        &#39;Chaching.components.selection.CheckboxSelectionModel&#39;
+    ],
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-config'>    /**
+</span>    * @cfg {object}
+    * A config option for columns, store, left title and right title
+    */
+    config: {
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-columns'>       /**
+</span>       * A config option for columns      
+       */
+        columns: null,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-store'>        /**
+</span>        * @cfg {object/string}
+        * A config option store to assign to grids
+        */
+        store: null,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-leftStore'>        /**
+</span>        * @cfg {object/string}
+        * A config option store to assign to left grid
+        */
+        leftStore: null,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-leftStoreLoadOptions'>        /**
+</span>        * @cfg {object}
+        * A config option to load the leftStore with given params.
+        * Only used when loadStoreOnCreate=true
+        */
+        leftStoreLoadOptions:null,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-rightStore'>        /**
+</span>        * @cfg {object/string}
+        * A config option store to assign to right grid
+        */
+        rightStore: null,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-rightStoreLoadOptions'>        /**
+</span>        * @cfg {object}
+        * A config option to load the rightStore with given params.
+        */
+        rightStoreLoadOptions: null,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-loadStoreOnCreate'>        /**
+</span>        * @cfg {boolean}
+        * A config option to load the store(s) on create.
+        * Only used when loadStoreOnCreate=true
+        */
+        loadStoreOnCreate:false,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-leftTitle'>        /**
+</span>        * @cfg {String}
+        * A config option for left grid title
+        * Defuaults to &#39;Left Group&#39;
+        */
+        leftTitle: &#39;Left Group&#39;,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-rightTitle'>        /**
+</span>        * @cfg {String}
+        * A config option for right grid title
+        * Defuaults to &#39;Right Group&#39;
+        */
+        rightTitle: &#39;Right Group&#39;,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-selModelConfig'>        /**
+</span>        * @cfg {object}
+        * A config option for selModel for grids
+        * Defuaults to &#39;rowmodel&#39;
+        * Override selModelConfig to checkboxselection model if required.
+        */
+        selModelConfig: {
+            selType: &#39;rowmodel&#39;,
+            multiSelect:true
+        },
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-requireMultiSearch'>        /**
+</span>        * @cfg {boolean}
+        * Require multisearch option
+        * Defuaults to &#39;false&#39;      
+        */
+        requireMultiSearch: false,
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-dragDropDirection'>        /**
+</span>        * @cfg {String}
+        * Config option for dragDrop Direction
+        * Defaults to &#39;both&#39;
+        * Possible values are lefttoright,righttoleft and both
+        * Defuaults to &#39;false&#39;      
+        */
+        dragDropDirection:&#39;both&#39;
+    },
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-layout'>    /**
+</span>    * @hide
+    * @private
+    * @cfg {String/object} layout
+    */
+    layout: {
+        type: &#39;hbox&#39;,
+        align: &#39;stretch&#39;,
+        padding: 5
+    },
+<span id='Chaching-components-dragdrop-GridToGrid-cfg-width'>    width: &#39;100%&#39;,
+</span><span id='Chaching-components-dragdrop-GridToGrid-cfg-height'>    height: 220,
+</span><span id='Chaching-components-dragdrop-GridToGrid-method-initComponent'>    /**
+</span>     * Called automatically by the framework.
+     * @private     
+     */
+    initComponent: function() {
+        var me = this;
+        var leftGroup = me.id + &#39;LeftGroup&#39;,
+            rightGroup = me.id + &#39;RightGroup&#39;;
+        var columns = me.getColumns();
+        if (!columns) {
+            Ext.Error.raise(&#39;Please provide columns config&#39;);
+        }
+        //control can have single store for both grids or can have left and right store.
+        //if store config is provided the left and right stores will be ignored
+        var singleStore = me.getStore();
+        var leftStore = me.getLeftStore(),
+            rightStore = me.getRightStore();
+        if (!singleStore &amp;&amp; (!leftStore &amp;&amp; !rightStore)) {
+            Ext.Error.raise(&#39;Please provide store/left and right store config&#39;);
+        }
+        if (singleStore) {
+            if (typeof(singleStore)===&quot;string&quot;) {
+                leftStore = Ext.create(singleStore);
+                rightStore = Ext.create(singleStore);
+            }
+        } else {
+            if (typeof(leftStore)===&quot;string&quot;) {
+                leftStore = Ext.create(singleStore);
+            }
+            if (typeof(rightStore) === &quot;string&quot;) {
+                rightStore = Ext.create(singleStore);
+            }
+        }
+        me.setLeftStore(leftStore);
+        me.setRightStore(rightStore);
+        if (me.getLoadStoreOnCreate()) {
+            leftStore.load(me.getLeftStoreLoadOptions());
+            rightStore.load(me.getRightStoreLoadOptions());
+        }
+        var leftPlugins = [], rightPlugins = [];
+        var buttons = [];
+        switch (me.getDragDropDirection()) {
+            case &#39;lefttoright&#39;:
+                leftPlugins.push({
+                    ptype: &#39;gridviewdragdrop&#39;,
+                    containerScroll: true,
+                    dragGroup: leftGroup,
+                    dropGroup: rightGroup
+                });
+                buttons.push({
+                    xtype: &#39;button&#39;,
+                    itemId:&#39;leftToRight&#39;,
+                    scale: &#39;small&#39;,
+                    ui: &#39;actionButton&#39;,
+                    iconCls: &#39;fa fa-arrow-circle-o-right&#39;,
+                    tooltip:&#39;Move selected.&#39;,
+                    width: 40,
+                    handler:me.onLeftToRight
+                });
+                break;
+            case &#39;righttoleft&#39;:
+                rightPlugins.push({
+                    ptype: &#39;gridviewdragdrop&#39;,
+                    containerScroll: true,
+                    dragGroup: rightGroup,
+                    dropGroup: leftGroup
+                });
+                buttons.push({
+                    xtype: &#39;button&#39;,
+                    itemId: &#39;rightToLeft&#39;,
+                    scale: &#39;small&#39;,
+                    ui: &#39;actionButton&#39;,
+                    iconCls: &#39;fa fa-arrow-circle-o-left&#39;,
+                    tooltip: &#39;Move selected.&#39;,
+                    width: 40,
+                    handler: me.onRightToLeft
+                });
+                break;
+            default://both way
+                leftPlugins.push({
+                    ptype: &#39;gridviewdragdrop&#39;,
+                    containerScroll: true,
+                    dragGroup: leftGroup,
+                    dropGroup: rightGroup
+                });
+                rightPlugins.push({
+                    ptype: &#39;gridviewdragdrop&#39;,
+                    containerScroll: true,
+                    dragGroup: rightGroup,
+                    dropGroup: leftGroup
+                });
+                buttons.push({
+                    xtype: &#39;button&#39;,
+                    itemId: &#39;leftToRight&#39;,
+                    scale: &#39;small&#39;,
+                    ui: &#39;actionButton&#39;,
+                    iconCls: &#39;fa fa-arrow-circle-o-right&#39;,
+                    tooltip: &#39;Move selected.&#39;,
+                    width: 40,
+                    handler: me.onLeftToRight
+                });
+                buttons.push({ xtype: &#39;tbspacer&#39;, height:30 });
+                buttons.push({
+                    xtype: &#39;button&#39;,
+                    itemId: &#39;rightToLeft&#39;,
+                    scale: &#39;small&#39;,
+                    ui: &#39;actionButton&#39;,
+                    iconCls: &#39;fa fa-arrow-circle-o-left&#39;,
+                    tooltip: &#39;Move selected.&#39;,
+                    width: 40,
+                    handler: me.onRightToLeft
+                });
+                break;
+
+        }
+        var plugins = [];
+        if (me.getRequireMultiSearch()) {
+            plugins.push({
+                ptype: &#39;saki-gms&#39;,
+                iconColumn: false,
+                clearItemIconCls: &#39;icon-settings&#39;,
+                pluginId: &#39;gms&#39;,
+                height: 32,
+                filterOnEnter: false
+            });
+        }
+        me.items = [
+            {
+                xtype: &#39;gridpanel&#39;,
+                itemId: &#39;leftGrid&#39;,
+                flex:1,
+                //width: &#39;47%&#39;,
+                selModel: me.getSelModelConfig(),
+                store: leftStore,
+                title: me.getLeftTitle(),
+                columns: columns,
+                padding: 10,
+                plugins: plugins,
+                cls: &#39;chaching-grid&#39;,
+                ui: &#39;dragDropPanel&#39;,
+                border: false,
+                viewConfig: {
+                    plugins: leftPlugins,
+                    listeners: {
+                        drop: function (node, data, dropRec, dropPosition) {
+                            me.doSaveOperation(&#39;rightToLeft&#39;, data.records);
+                        }
+                    }
+                }
+            }, {
+                xtype: &#39;panel&#39;,
+                itemId: &#39;toolPanel&#39;,
+                border: false,
+                frame:false,
+                ui: &#39;dragDropPanel&#39;,
+                width: &#39;6%&#39;,
+                padding:10,
+                layout: {
+                    type: &#39;fit&#39;
+                },
+                items:[
+                {
+                    xtype: &#39;toolbar&#39;,
+                    //ui:&#39;plain&#39;,
+                    dock: &#39;center&#39;,
+                    height: &#39;100%&#39;,
+                    baseCls:&#39;&#39;,
+                    bodyStyle: {
+                        &#39;background-color&#39;: &#39;transparent&#39;,
+                        &#39;border-color&#39;: &#39;transparent&#39;,
+                        &#39;border-style&#39;: &#39;transparent&#39;
+                    },
+                    layout: {
+                        type:&#39;vbox&#39;,
+                        pack:&#39;center&#39;
+                    },
+                    items:buttons
+                }]
+        }, {
+                xtype: &#39;gridpanel&#39;,
+                itemId: &#39;rightGrid&#39;,
+                flex: 1,
+                //width: &#39;47%&#39;,
+                selModel: me.getSelModelConfig(),
+                store: rightStore,
+                title: me.getRightTitle(),
+                columns: columns,
+                padding: 10,
+                plugins: plugins,
+                cls: &#39;chaching-grid&#39;,
+                ui: &#39;dragDropPanel&#39;,
+                border: false,
+                viewConfig: {
+                    plugins: rightPlugins,
+                    listeners: {
+                        drop: function (node, data, dropRec, dropPosition) {
+                            me.doSaveOperation(&#39;leftToRight&#39;, data.records);
+                        }
+                    }
+                }
+            }
+        ];
+        me.callParent(arguments);
+    },
+<span id='Chaching-components-dragdrop-GridToGrid-method-onLeftToRight'>    /**
+</span>    * Records moved from left to right.
+    * @param {Object} button
+    */
+    onLeftToRight:function(btn) {
+        var me = btn.up(&#39;chachingGridDragDrop&#39;);
+        var leftGrid = me.getLeftGrid(),
+            rightGrid = me.getRightGrid();
+        var leftSelModel = leftGrid.getSelectionModel(),
+            leftSelected = leftSelModel.getSelection();
+
+        if (leftSelected &amp;&amp; leftSelected.length &gt; 0) {
+            var rightStore = me.getRightStore();
+            var leftStore = me.getLeftStore();
+            for (var i = 0; i &lt; leftSelected.length; i++) {
+                var selected = leftSelected[i];
+                rightStore.insert(rightStore.getTotalCount() + 1, selected);
+                leftStore.remove(selected);
+            }
+            me.doSaveOperation(&#39;leftToRight&#39;, leftSelected);
+        }
+        
+    },
+<span id='Chaching-components-dragdrop-GridToGrid-method-onRightToLeft'>    /**
+</span>    * Records moved from right to left.
+    * @param {Object} button
+    */
+    onRightToLeft: function (btn) {
+        var me = btn.up(&#39;chachingGridDragDrop&#39;);
+        var leftGrid = me.getLeftGrid(),
+            rightGrid = me.getRightGrid();
+        var rightSelModel = rightGrid.getSelectionModel(),
+            rightSelected = rightSelModel.getSelection();
+
+        if (rightSelected &amp;&amp; rightSelected.length &gt; 0) {
+            var rightStore = me.getRightStore();
+            var leftStore = me.getLeftStore();
+            for (var i = 0; i &lt; rightSelected.length; i++) {
+                var selected = rightSelected[i];
+                leftStore.insert(leftStore.getTotalCount() + 1, selected);
+                rightStore.remove(selected);
+            }
+            me.doSaveOperation(&#39;rightToLeft&#39;, rightSelected);
+        }
+    },
+<span id='Chaching-components-dragdrop-GridToGrid-method-doSaveOperation'>    /**
+</span>    * Do save operation as you like
+    * @param {String} direction values are leftToRight and rightToLeft
+    * @param{Array}records moved
+    */
+    doSaveOperation:function(direction,records){},
+<span id='Chaching-components-dragdrop-GridToGrid-method-getLeftGrid'>    /**
+</span>    * Get leftGrid component.   
+    */
+    getLeftGrid:function() {
+        var me = this;
+        return me.down(&#39;gridpanel[itemId=leftGrid]&#39;);
+    },
+<span id='Chaching-components-dragdrop-GridToGrid-method-getRightGrid'>    /**
+</span>    * Get rightGrid component.   
+    */
+    getRightGrid: function () {
+        var me = this;
+        return me.down(&#39;gridpanel[itemId=rightGrid]&#39;);
+    }
+});</pre>
+</body>
+</html>

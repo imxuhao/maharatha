@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.payables.vendors.VendorsGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.payables-vendors-vendorsgrid&#39;,
+    doBeforeInlineAddUpdate: function (record) {
+        if (record) {
+            var address = record._address;
+            if (address) {
+                record.set(&#39;address&#39;, Ext.apply(address.data, record.address));
+            }
+        }
+        return true;
+    },
+    doAfterCreateAction: function (createMode, formPanel, isEdit, record) {
+        var me = this,
+            view = me.getView();
+        var viewModel = formPanel.getViewModel();
+        var form = formPanel.getForm();
+        if (isEdit) {
+
+            var vendorTypeList = viewModel.getStore(&#39;vendorTypeList&#39;);
+            vendorTypeList.load();
+
+            var typeOfTaxList = viewModel.getStore(&#39;typeOfTaxList&#39;);
+            typeOfTaxList.load();
+
+            var typeof1099BoxList = viewModel.getStore(&#39;typeof1099BoxList&#39;);
+            typeof1099BoxList.load();
+
+            var paymentTermsList = viewModel.getStore(&#39;paymentTermsList&#39;);
+            paymentTermsList.load();
+
+            var rollupDivisionList = viewModel.getStore(&#39;rollupDivisionList&#39;);
+            rollupDivisionList.load();
+
+            var getTaxCreditList = viewModel.getStore(&#39;getTaxCreditList&#39;);
+            getTaxCreditList.load();
+
+            var glAccountList = viewModel.getStore(&#39;getAccountsList&#39;);
+            glAccountList.getProxy().setExtraParams({
+                value: &#39;true&#39;
+            });
+            glAccountList.load();
+
+            var getAccountsListLines = viewModel.getStore(&#39;getAccountsListLines&#39;);
+            getAccountsListLines.getProxy().setExtraParams({
+                value: &#39;false&#39;
+            });
+            getAccountsListLines.load();
+
+            if (record) {
+
+                var vendorAliasGrid = formPanel.down(&#39;*[itemId=vendorAliasGrid]&#39;);
+                if (vendorAliasGrid) {
+                    var aliasStore = vendorAliasGrid.getStore();
+                    Ext.apply(aliasStore.getProxy().extraParams, {
+                        vendorId: record.get(&#39;vendorId&#39;)
+                    });
+                    aliasStore.load();
+                }
+
+                var vendoraddressGrid = formPanel.down(&#39;*[itemId=addressGrid]&#39;);
+                if (vendoraddressGrid) {
+                    var addressStore = vendoraddressGrid.getStore();
+                    Ext.apply(addressStore.getProxy().extraParams, {
+                        typeofObjectId: 1,
+                        objectId: record.get(&#39;vendorId&#39;)
+                    });
+                    addressStore.load();
+                }
+            }
+        }
+        else {
+            var glAccountList = viewModel.getStore(&#39;getAccountsList&#39;);
+            glAccountList.getProxy().setExtraParams({
+                value: &#39;true&#39;
+            });
+            glAccountList.load();
+
+            var getAccountsListLines = viewModel.getStore(&#39;getAccountsListLines&#39;);
+            getAccountsListLines.getProxy().setExtraParams({
+                value: &#39;false&#39;
+            });
+            getAccountsListLines.load();
+
+        }
+    }
+});
+</pre>
+</body>
+</html>

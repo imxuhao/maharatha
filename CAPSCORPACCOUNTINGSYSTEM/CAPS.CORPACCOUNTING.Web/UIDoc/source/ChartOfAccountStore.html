@@ -18,6 +18,7 @@
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.financials.accounts.ChartOfAccountStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
     model: &#39;Chaching.model.financials.accounts.ChartOfAccountsModel&#39;,
+    //storeId:&quot;coaStore&quot;,
     proxy: {
         type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
@@ -28,6 +29,7 @@
             destroy: abp.appPath + &#39;api/services/app/coaUnit/DeleteCoaUnit&#39;
         }
     },
+    statefulFilters:true,
     idPropertyField: &#39;coaId&#39;//important to set for add/update of records
 });
 </pre>

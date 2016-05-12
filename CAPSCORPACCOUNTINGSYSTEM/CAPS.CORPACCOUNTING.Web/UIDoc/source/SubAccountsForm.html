@@ -20,7 +20,8 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsForm&#39;, {
     extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
     alias: [&#39;widget.financials.accounts.subaccounts.create&#39;, &#39;widget.financials.accounts.subaccounts.edit&#39;],
     requires: [
-        &#39;Chaching.view.financials.accounts.SubAccountsFormController&#39;
+        &#39;Chaching.view.financials.accounts.SubAccountsFormController&#39;,
+        &#39;Chaching.components.dragdrop.GridToGrid&#39;
     ],
 
     controller: &#39;financials-accounts-subaccountsform&#39;,
@@ -31,15 +32,16 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsForm&#39;, {
     autoScroll: true,
     border: false,
     showFormTitle: true,
+    displayDefaultButtonsCenter: true,
     titleConfig: {
         title: abp.localization.localize(&quot;CreateNewSubAccounts&quot;).initCap()
     },
     items: [
         {
-        xtype: &#39;hiddenfield&#39;,
-        name: &#39;subAccountId&#39;,
-        value: 0
-    },
+            xtype: &#39;hiddenfield&#39;,
+            name: &#39;subAccountId&#39;,
+            value: 0
+        },
     {
         columnWidth: .5,
         padding: &#39;20 10 0 20&#39;,
@@ -53,13 +55,13 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsForm&#39;, {
                 name: &#39;subAccountNumber&#39;,
                 itemId: &#39;subAccountNumber&#39;,
                 allowBlank: false,
-                fieldLabel: app.localize(&#39;Number&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                fieldLabel: app.localize(&#39;SubAccountNumber&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
                 width: &#39;100%&#39;,
                 ui: &#39;fieldLabelTop&#39;,
                 emptyText: app.localize(&#39;MandatoryField&#39;)
             }
-           
-        
+
+
         , {
             xtype: &#39;textfield&#39;,
             name: &#39;caption&#39;,
@@ -94,25 +96,9 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsForm&#39;, {
             checked: false,
             boxLabelCls: &#39;checkboxLabel&#39;
         }
-          , {
-              xtype: &#39;checkbox&#39;,
-              boxLabel: app.localize(&#39;CorpSubAccount&#39;),
-              name: &#39;isCorporateSubAccount&#39;,
-              labelAlign: &#39;right&#39;,
-              inputValue: true,
-              checked: false,
-              boxLabelCls: &#39;checkboxLabel&#39;
-          }
-          , {
-              xtype: &#39;checkbox&#39;,
-              boxLabel: app.localize(&#39;ProjectSubAccount&#39;),
-              name: &#39;isProjectSubAccount&#39;,
-              labelAlign: &#39;right&#39;,
-              inputValue: true,
-              checked: false,
-              boxLabelCls: &#39;checkboxLabel&#39;
-          }
-         
+
+
+
         ]
     }
 
@@ -135,17 +121,26 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsForm&#39;, {
                  ui: &#39;fieldLabelTop&#39;,
                  emptyText: app.localize(&#39;MandatoryField&#39;)
              }
+                  , {
+                      xtype: &#39;checkbox&#39;,
+                      boxLabel: app.localize(&#39;CorpSubAccount&#39;),
+                      name: &#39;isCorporateSubAccount&#39;,
+                      labelAlign: &#39;right&#39;,
+                      inputValue: true,
+                      checked: false,
+                      boxLabelCls: &#39;checkboxLabel&#39;
+                  }
+                  , {
+                      xtype: &#39;checkbox&#39;,
+                      boxLabel: app.localize(&#39;ProjectSubAccount&#39;),
+                      name: &#39;isProjectSubAccount&#39;,
+                      labelAlign: &#39;right&#39;,
+                      inputValue: true,
+                      checked: false,
+                      boxLabelCls: &#39;checkboxLabel&#39;
+                  }
              ,
-              {
-                  xtype: &#39;textfield&#39;,
-                  name: &#39;groupCopyLabel&#39;,
-                  itemId: &#39;groupCopyLabel&#39;,
-                  allowBlank: false,
-                  fieldLabel: app.localize(&#39;GroupCopyLabel&#39;).initCap(),
-                  width: &#39;100%&#39;,
-                  ui: &#39;fieldLabelTop&#39;
-              }
-             ,
+
            {
                xtype: &#39;checkbox&#39;,
                boxLabel: app.localize(&#39;AccountSpecific&#39;),
@@ -154,25 +149,54 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsForm&#39;, {
                inputValue: true,
                checked: false,
                boxLabelCls: &#39;checkboxLabel&#39;
-           }, {
-               xtype: &#39;checkbox&#39;,
-               boxLabel: app.localize(&#39;MandatoryEntry&#39;),
-               name: &#39;isMandatory&#39;,
-               labelAlign: &#39;right&#39;,
-               inputValue: true,
-               checked: false,
-               boxLabelCls: &#39;checkboxLabel&#39;
-           }, {
-               xtype: &#39;checkbox&#39;,
-               boxLabel: app.localize(&#39;BudgetInclusive&#39;),
-               name: &#39;isBudgetInclusive&#39;,
-               labelAlign: &#39;right&#39;,
-               inputValue: true,
-               checked: false,
-               boxLabelCls: &#39;checkboxLabel&#39;
            }
         ]
-    }
+    },
+    {
+        columnWidth: 1.0,
+        items:[
+        {
+            xtype: &#39;chachingGridDragDrop&#39;,
+            columns: [
+                {
+                    xtype: &#39;gridcolumn&#39;,
+                    text:app.localize(&#39;Caption&#39;),
+                    dataIndex: &#39;caption&#39;,
+                    sortable: true,
+                    groupable: true,
+                    width: &#39;47%&#39;,
+                    filterField: {
+                        xtype: &#39;textfield&#39;,
+                        width: &#39;15%&#39;,
+                        emptyText: app.localize(&#39;SubAccountNumberSearch&#39;)
+                    }
+                }, {
+                    xtype: &#39;gridcolumn&#39;,
+                    text: app.localize(&#39;Description&#39;),
+                    dataIndex: &#39;description&#39;,
+                    sortable: true,
+                    groupable: true,
+                    width: &#39;47%&#39;,
+                    filterField: {
+                        xtype: &#39;textfield&#39;,
+                        width: &#39;100%&#39;,
+                        emptyText: app.localize(&#39;DescriptionSearch&#39;)
+                    }
+                }
+            ],
+            store: &#39;Chaching.store.financials.accounts.ChartOfAccountStore&#39;,
+            loadStoreOnCreate: true,
+            requireMultiSearch:true,
+            selModelConfig: {
+                selType: &#39;chachingCheckboxSelectionModel&#39;,
+                injectCheckbox: &quot;first&quot;,
+                headerWidth: &#39;5%&#39;,
+                mode: &#39;MULTI&#39;,
+                showHeaderCheckbox: false
+            },
+            doSaveOperation: function (direction, records) {}
+        }]
+     }
     ]
 });
 </pre>

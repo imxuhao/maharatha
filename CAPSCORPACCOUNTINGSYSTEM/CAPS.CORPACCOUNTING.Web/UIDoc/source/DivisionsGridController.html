@@ -18,13 +18,12 @@
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.accounts.DivisionsGridController&#39;, {
     extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
     alias: &#39;controller.financials-accounts-divisionsgrid&#39;,
-    doAfterCreateAction: function (createMode, formView, isEdit) {       
-        var viewModel= formView.getViewModel(),     
-         editionStore = viewModel.getStore(&#39;getOrganizations&#39;);
-            editionStore.extraParams={
-                &#39;Id&#39;:1
-            };
-            editionStore.load();
+    doAfterCreateAction: function (createMode, formView, isEdit) {   
+            if (isEdit) {
+                var viewModel = formView.getViewModel();
+                var typeOfCurrency = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
+                typeOfCurrency.load();
+            }    
         }   
     
 });

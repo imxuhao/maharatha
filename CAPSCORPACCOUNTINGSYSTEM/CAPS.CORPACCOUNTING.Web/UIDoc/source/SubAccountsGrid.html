@@ -35,7 +35,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
         destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.SubAccounts.Delete&#39;),
     },
     padding: 5,
-    gridId: 9,
+    gridId: 10,
     headerButtonsConfig: [
       {
           xtype: &#39;displayfield&#39;,
@@ -68,18 +68,20 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
     },
     createNewMode: &#39;tab&#39;,
     isSubMenuItemTab: true,
+
     columns: [
          {
              xtype: &#39;gridcolumn&#39;,
-             text: app.localize(&#39;Number&#39;),
+             text: app.localize(&#39;SubAccountNumber&#39;),
              dataIndex: &#39;subAccountNumber&#39;,
              sortable: true,
              groupable: true,
-             width: &#39;10%&#39;,
+             width: &#39;15%&#39;,
+
              filterField: {
                  xtype: &#39;textfield&#39;,
                  width: &#39;15%&#39;,
-                 emptyText: &#39;Enter Number to search&#39;
+                 emptyText: app.localize(&#39;SubAccountNumberSearch&#39;)
              }, editor: {
                  xtype: &#39;textfield&#39;,
              }
@@ -89,11 +91,11 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
              dataIndex: &#39;description&#39;,
              sortable: true,
              groupable: true,
-             width: &#39;15%&#39;,
+             width: &#39;20%&#39;,
              filterField: {
                  xtype: &#39;textfield&#39;,
                  width: &#39;100%&#39;,
-                 emptyText: &#39;Enter Description to search&#39;
+                 emptyText: app.localize(&#39;DescriptionSearch&#39;)
              }, editor: {
                  xtype: &#39;textfield&#39;,
              }
@@ -108,7 +110,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
               filterField: {
                   xtype: &#39;combobox&#39;,
                   valueField: &#39;typeofSubAccountId&#39;,
-                  displayField: &#39;typeofSubAccount&#39;,                  
+                  displayField: &#39;typeofSubAccount&#39;,
                   bind: {
                       store: &#39;{typeOfSubAccountList}&#39;
                   }
@@ -121,7 +123,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
              dataIndex: &#39;isActive&#39;,
              sortable: true,
              groupable: true,
-             width: &#39;8%&#39;,
+             width: &#39;14%&#39;,
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: &#39;combobox&#39;,
@@ -140,7 +142,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
              dataIndex: &#39;isCorporateSubAccount&#39;,
              sortable: true,
              groupable: true,
-             width: &#39;8%&#39;,
+             width: &#39;14%&#39;,
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: &#39;combobox&#39;,
@@ -159,7 +161,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
              dataIndex: &#39;isProjectSubAccount&#39;,
              sortable: true,
              groupable: true,
-             width: &#39;8%&#39;,
+             width: &#39;15%&#39;,
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: &#39;combobox&#39;,
@@ -178,7 +180,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
              dataIndex: &#39;isAccountSpecific&#39;,
              sortable: true,
              groupable: true,
-             width: &#39;6%&#39;,
+             width: &#39;12%&#39;,
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: &#39;combobox&#39;,
@@ -192,69 +194,16 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
                  xtype: &#39;checkbox&#39;
              }
          }
-         , {
-             xtype: &#39;gridcolumn&#39;,
-             text: app.localize(&#39;MandatoryEntry&#39;),
-             dataIndex: &#39;isMandatory&#39;,
-             sortable: true,
-             groupable: true,
-             width: &#39;6%&#39;,
-             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-             filterField: {
-                 xtype: &#39;combobox&#39;,
-                 valueField: &#39;value&#39;,
-                 displayField: &#39;text&#39;,
-                 store: {
-                     fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
-                     data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
-                 }
-             }, editor: {
-                 xtype: &#39;checkbox&#39;
-             }
-         }
-         , {
-             xtype: &#39;gridcolumn&#39;,
-             text: app.localize(&#39;BudgetInclusive&#39;),
-             dataIndex: &#39;isBudgetInclusive&#39;,
-             sortable: true,
-             groupable: true,
-             width: &#39;6%&#39;,
-             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-             filterField: {
-                 xtype: &#39;combobox&#39;,
-                 valueField: &#39;value&#39;,
-                 displayField: &#39;text&#39;,
-                 store: {
-                     fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
-                     data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
-                 }
-             }, editor: {
-                 xtype: &#39;checkbox&#39;
-             }
-         }
-         , {
-             xtype: &#39;gridcolumn&#39;,
-             text: app.localize(&#39;GroupCopyLabel&#39;),
-             dataIndex: &#39;groupCopyLabel&#39;,
-             sortable: true,
-             groupable: true,
-             width: &#39;10%&#39;,
-             filterField: {
-                 xtype: &#39;textfield&#39;,
-                 width: &#39;100%&#39;,
-                 emptyText: &#39;Enter Group Copy Label to search&#39;
-             }, editor: {
-                 xtype: &#39;textfield&#39;,
-             }
-         }, {
-             xtype: &#39;gridcolumn&#39;,
-             text: app.localize(&#39;Trans#&#39;),
-             dataIndex: &#39;subAccountId&#39;,
-             sortable: true,
-             groupable: true,
-             width: &#39;10%&#39;,
-             hidden: true
-         }
+
+         //, {
+         //    xtype: &#39;gridcolumn&#39;,
+         //    text: app.localize(&#39;Trans#&#39;),
+         //    dataIndex: &#39;subAccountId&#39;,
+         //    sortable: true,
+         //    groupable: true,
+         //    width: &#39;10%&#39;,
+         //    hidden: true
+         //}
     ]
 });
 </pre>

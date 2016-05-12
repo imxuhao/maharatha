@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.accounts.AccountsGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+    requires: [
+        &#39;Chaching.view.financials.accounts.AccountsGridController&#39;
+    ],
+    controller: &#39;financials-accounts-accountsgrid&#39;,
+
+    xtype: &#39;widget.financials.accounts.accounts&#39;,
+    store: &#39;financials.accounts.AccountsStore&#39;,
+    name: &#39;Financials.Accounts.Accounts&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;),
+    },
+    padding: 5,
+    gridId: 11,
+    headerButtonsConfig: [
+      {
+          xtype: &#39;displayfield&#39;,
+          value: abp.localization.localize(&quot;FinancialAccounts&quot;),
+          ui: &#39;headerTitle&#39;
+      }, &#39;-&gt;&#39;, {
+          xtype: &#39;button&#39;,
+          scale: &#39;small&#39;,
+          ui: &#39;actionButton&#39;,
+          action: &#39;create&#39;,
+          text: abp.localization.localize(&quot;CreateNewAccount&quot;).toUpperCase(),
+          checkPermission: true,
+          iconCls: &#39;fa fa-plus&#39;,
+          iconAlign: &#39;left&#39;
+      }],
+    requireExport: true,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable: true,
+    editingMode: &#39;row&#39;,
+    columnLines: true,
+    multiColumnSort: true,
+    editWndTitleConfig: {
+        title: app.localize(&#39;EditAccount&#39;),
+        iconCls: &#39;fa fa-pencil&#39;
+    },
+    createWndTitleConfig: {
+        title: app.localize(&#39;CreateNewAccount&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+    createNewMode: &#39;tab&#39;,
+    isSubMenuItemTab: true,
+    columns: [
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;AccountNumber&#39;),
+             dataIndex: &#39;accountNumber&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;10%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;15%&#39;,
+                 emptyText: app.localize(&#39;AccountSearch&#39;)
+             }, editor: {
+                 xtype: &#39;textfield&#39;,
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Description&#39;),
+             dataIndex: &#39;caption&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;10%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;DescriptionSearch&#39;),
+             }, editor: {
+                 xtype: &#39;textfield&#39;,
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Classification&#39;),
+             dataIndex: &#39;typeOfAccount&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;8%&#39;,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 valueField: &#39;typeOfAccountId&#39;,
+                 displayField: &#39;typeOfAccount&#39;,
+                 bind: {
+                     store: &#39;{typeOfAccountList}&#39;
+                 }
+             }
+         }
+         , {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Consolidation&#39;),
+             dataIndex: &#39;typeofConsolidation&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;10%&#39;,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 valueField: &#39;typeofConsolidationId&#39;,
+                 displayField: &#39;typeofConsolidation&#39;,
+                 bind: {
+                     store: &#39;{typeofConsolidationList}&#39;
+                 }
+             }
+         },
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;JournalsAllowed&#39;),
+             dataIndex: &#39;isEnterable&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;8%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 valueField: &#39;value&#39;,
+                 displayField: &#39;text&#39;,
+                 store: {
+                     fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                     data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                 }
+             }, editor: {
+                 xtype: &#39;checkbox&#39;
+             }
+         }
+         ,
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;RollUpAccount&#39;),
+             dataIndex: &#39;isRollupAccount&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;8%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 valueField: &#39;value&#39;,
+                 displayField: &#39;text&#39;,
+                 store: {
+                     fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                     data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                 }
+             }, editor: {
+                 xtype: &#39;checkbox&#39;
+             }
+         }
+         ,
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;EliminationAccount&#39;),
+             dataIndex: &#39;isElimination&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;8%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 valueField: &#39;value&#39;,
+                 displayField: &#39;text&#39;,
+                 store: {
+                     fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                     data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                 }
+             }, editor: {
+                 xtype: &#39;checkbox&#39;
+             }
+         }
+         , {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Currency&#39;),
+             dataIndex: &#39;typeOfCurrency&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;8%&#39;,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 valueField: &#39;typeOfCurrencyId&#39;,
+                 displayField: &#39;typeOfCurrency&#39;,
+                 bind: {
+                     store: &#39;{typeOfCurrencyList}&#39;
+                 }
+             }
+         }
+          , {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;RateTypeOverride&#39;),
+              dataIndex: &#39;typeOfCurrencyRate&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;8%&#39;,
+              filterField: {
+                  xtype: &#39;combobox&#39;,
+                  valueField: &#39;typeOfCurrencyRateId&#39;,
+                  displayField: &#39;typeOfCurrencyRate&#39;,
+                  bind: {
+                      store: &#39;{typeOfCurrencyRateList}&#39;
+                  }
+              }
+          }
+          ,
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Multi-CurrencyReval&#39;),
+             dataIndex: &#39;isAccountRevalued&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;8%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 valueField: &#39;value&#39;,
+                 displayField: &#39;text&#39;,
+                 store: {
+                     fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                     data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                 }
+             }, editor: {
+                 xtype: &#39;checkbox&#39;
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;NewAccount&#39;),
+             dataIndex: &#39;linkAccount&#39;,
+             sortable: true,
+             groupable: true,
+           
+             width: &#39;8%&#39;,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 itemId: &#39;linkAccountId&#39;,
+                 valueField: &#39;linkAccountId&#39;,
+                 displayField: &#39;linkAccount&#39;,
+                 typeAhead: true,
+                 queryMode: &#39;remote&#39;,
+                 forceSelection: true,
+                 bind: {
+                     store: &#39;{linkAccountListByCoaId}&#39;
+                 },
+                 listeners: {
+                     beforequery: function (query, eOpts) {
+                         var grid = this.up().grid;
+                         if (grid) {
+                             var coaId = grid.coaId;
+                             var myStore = this.getStore();
+                             myStore.getProxy().setExtraParam(&#39;id&#39;, coaId);
+                         }
+                     }
+                 }
+             },
+             editor: {
+                 xtype: &#39;combobox&#39;,
+                 typeAhead: true,
+                 itemId: &#39;linkAccountId&#39;,
+                 valueField: &#39;linkAccountId&#39;,
+                 displayField: &#39;linkAccount&#39;,
+                 typeAhead: true,
+                 queryMode: &#39;remote&#39;,
+                 forceSelection: true,
+                 bind: {
+                     store: &#39;{linkAccountListByCoaId}&#39;
+                 },
+                 listeners: {
+                     beforequery: function (query, eOpts) {
+                         var grid = this.up(&#39;grid&#39;);
+                         if (grid) {
+                             var coaId = grid.coaId;
+                             var myStore = this.getStore();
+                             myStore.getProxy().setExtraParam(&#39;id&#39;, coaId);
+                         }
+                     }
+                 }
+             }
+         }
+    ]
+})</pre>
+</body>
+</html>

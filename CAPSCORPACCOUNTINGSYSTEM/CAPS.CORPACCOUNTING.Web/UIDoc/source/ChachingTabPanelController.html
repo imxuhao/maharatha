@@ -21,7 +21,9 @@
     //do your custom operation before adding dynamicTabItem
     doBeforeAddDynamicTabItem: function (dynamicTabItem) { },
     onSubMenuItemTabChange:function(tabPanel, newCard, oldCard, eOpts) {
-        if (newCard &amp;&amp; typeof (newCard.getStore)===&quot;function&quot;) {
+        if (newCard &amp;&amp; typeof (newCard.getStore) === &quot;function&quot; &amp;&amp; !newCard.isStoreLoaded) {
+            newCard.isStoreLoaded = true;
+            oldCard.isStoreLoaded = true;
             newCard.getStore().load();
         }
     }

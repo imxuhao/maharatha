@@ -19,7 +19,7 @@
     extend: &#39;Ext.app.ViewController&#39;,
     alias: &#39;controller.common-form-chachingformpanel&#39;,
     //default buttons action handler
-    onSaveClicked: function(btn) {
+    onSaveClicked: function (btn) {
         var me = this,
             view = me.getView(),
             parentGrid = view.parentGrid,
@@ -59,6 +59,8 @@
                 });
                 gridStore.update(operation);
             } else if (values &amp;&amp; parseInt(values[idPropertyField]) === 0) {
+                record.id = 0;
+                record.set(&#39;id&#39;, 0);
                 operation = Ext.data.Operation({
                     params: record.data,
                     parentGrid: parentGrid,
@@ -88,13 +90,34 @@
         var controller = operation.controller,
                 view = controller.getView();
         var mask = operation.operationMask;
-        if (mask)mask.hide();
+        if (mask) mask.hide();
+        var promise = controller.doPostSaveOperations(records, operation, success);
+        var runner = new Ext.util.TaskRunner(),
+    task;
+
+        task = runner.newTask({
+            run: function () {
+                if (promise &amp;&amp; promise.owner.completed) {
+                    task.stop();
+                    if (promise.owner.completionAction === &quot;fulfill&quot;) {
+                        controller.handleMainThreadResponse(records, operation, success);
+                    }
+                }
+            },
+            interval: 1000
+        });
+
+        task.start();
+    },
+    handleMainThreadResponse: function (records, operation, success) {
+        var controller = operation.controller,
+               view = controller.getView();
         if (success) {
             var action = operation.getAction();
             if (action === &quot;create&quot; || action === &quot;update&quot;) {
                 var gridController = operation.parentGrid.getController();
                 gridController.doReloadGrid();
-               
+
                 if (view &amp;&amp; view.openInPopupWindow) {
                     var wnd = view.up(&#39;window&#39;);
                     Ext.destroy(wnd);
@@ -102,17 +125,20 @@
                     Ext.destroy(view);
                 }
 
+
             }
-            Ext.toast({
-                html: &#39;Operation completed successfully.&#39;,
-                title: &#39;Success&#39;,
-                ui: &#39;chachingWindow&#39;,
-                alwaysOnTop: true,
-                saveDelay: 500,
-                animateShadow: true,
-                align: &#39;tr&#39;
-            });
-           
+            abp.notify.success(&#39;Operation completed successfully.&#39;, &#39;Success&#39;);
+            ///TODO: Uncomment extjs toast if needed.
+            //Ext.toast({
+            //    html: &#39;Operation completed successfully.&#39;,
+            //    title: &#39;Success&#39;,
+            //    ui: &#39;chachingWindow&#39;,
+            //    alwaysOnTop: true,
+            //    saveDelay: 500,
+            //    animateShadow: true,
+            //    align: &#39;tr&#39;
+            //});
+
         } else {
             var response = Ext.decode(operation.getResponse().responseText);
             var message = &#39;&#39;,
@@ -120,26 +146,33 @@
             if (response &amp;&amp; response.error) {
                 if (response.error.message &amp;&amp; response.error.details) {
                     title = response.error.message;
-                    message = response.error.details.replaceAll(&#39; - &#39;, &#39;&lt;/br&gt;-&#39;);
-                    var myMsg = Ext.create(&#39;Ext.window.MessageBox&#39;, {
-                        // set closeAction to &#39;destroy&#39; if this instance is not
-                        // intended to be reused by the application
-                        closeAction: &#39;destroy&#39;,
-                        ui: &#39;chachingWindow&#39;
-                    }).show({
-                        title: title,
-                        message: message,
-                        buttons: Ext.Msg.OKCANCEL,
-                        icon: Ext.Msg.INFO
-                    });
+                    message = response.error.details;//.replaceAll(&#39; - &#39;, &#39;&lt;/br&gt;-&#39;);
+                    abp.message.warn(message, title);
                     return;
+                    /* var myMsg = Ext.create(&#39;Ext.window.MessageBox&#39;, {
+                         // set closeAction to &#39;destroy&#39; if this instance is not
+                         // intended to be reused by the application
+                         closeAction: &#39;destroy&#39;,
+                         ui: &#39;chachingWindow&#39;
+                     }).show({
+                         title: title,
+                         message: message,
+                         buttons: Ext.Msg.OKCANCEL,
+                         icon: Ext.Msg.INFO
+                     });
+                     return;*/
                 }
                 title = response.error.message;
                 message = response.error.details ? response.error.details : title;
             }
-            Ext.toast(message);
+            abp.message.error(message, title);
         }
-    },
+    },   
+    doPostSaveOperations: function (records, operation, success) {
+        var deferred = new Ext.Deferred();
+        deferred.resolve(&#39;{success:true}&#39;);        
+        return deferred.promise;       
+    }
     
 });
 </pre>

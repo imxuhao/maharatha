@@ -66,6 +66,10 @@
             var editingPlugin = grid.getPlugin(&#39;editingPlugin&#39;);
             if (editingPlugin) {
                 widgetRec.set(&#39;passEdit&#39;, true);
+                if (grid.editingMode===&quot;cell&quot;) {
+                    editingPlugin.startEdit(widgetRec, 1);
+                    return;
+                }
                 editingPlugin.startEdit(widgetRec);
             }
         }
@@ -81,27 +85,27 @@
 
         //TODO start edit by checking row allowEdit property
         if (widgetRec &amp;&amp; grid) {
-            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig);
+            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, widgetRec);
 
-            var modelField = gridStore.getModel().getFields();
-            if (modelField) {
-                Ext.each(modelField, function(field) {
-                    if (field.isPrimaryKey) {
-                        widgetRec.set(&#39;id&#39;, widgetRec.get(field.name));
-                        return;
-                    }
-                });
-            }
+            //var modelField = gridStore.getModel().getFields();
+            //if (modelField) {
+            //    Ext.each(modelField, function(field) {
+            //        if (field.isPrimaryKey) {
+            //            widgetRec.set(&#39;id&#39;, widgetRec.get(field.name));
+            //            return;
+            //        }
+            //    });
+            //}
 
             var form, formPanel;
             if (formView &amp;&amp; formView.isWindow) {
                 formPanel = formView.down(&#39;form&#39;),
                     form = formPanel.getForm();
-                form.setValues(widgetRec.data);
+                //form.setValues(widgetRec.data);
                 form.loadRecord(widgetRec);
             } else if (formView) {
                 form = formView.getForm();
-                form.setValues(widgetRec.data);
+                //form.setValues(widgetRec.data);
                 form.loadRecord(widgetRec);
             }
         }
@@ -117,7 +121,6 @@
 
         //Delete record
         if (widgetRec &amp;&amp; grid) {
-            gridStore.setAutoSync(true);
             var modelField = gridStore.getModel().getFields();
             if (modelField) {
                 Ext.each(modelField, function (field) {
@@ -127,7 +130,7 @@
                     }
                 });
             }
-
+            gridStore.setAutoSync(true);
             gridStore.remove(widgetRec);
             gridStore.setAutoSync(false);
 
@@ -159,6 +162,7 @@
                     operation = Ext.data.Operation({
                         params: record.data,
                         records: [record],
+                        controller: me,
                         callback: me.onOperationCompleteCallBack
                     });
                     gridStore.update(operation);
@@ -184,21 +188,56 @@
         gridStore.reload();
     },
     onOperationCompleteCallBack: function (records, operation, success) {
+        var controller = operation.controller,
+               view = controller.getView();
+        var promise = controller.doPostSaveOperations(records, operation, success);
+        var runner = new Ext.util.TaskRunner(),
+            task = undefined;
+
+        task = runner.newTask({
+            run: function () {
+                if (promise &amp;&amp; promise.owner.completed) {
+                    task.stop();
+                    if (promise.owner.completionAction === &quot;fulfill&quot;) {
+                        controller.handleFulFillResponse(records, operation, success);
+                    } else if (promise.owner.completionAction === &quot;reject&quot;) {
+                        controller.handleRejectResponse(records, operation, success, promise.owner.completionValue);
+                    }
+                }
+            },
+            interval: 1000
+        });
+
+        task.start();
+    },
+    handleRejectResponse: function(records, operation, success, rejectResponseValue) {
+        if (records &amp;&amp; rejectResponseValue) {
+            var record = records[0],
+                rejectResponse = Ext.decode(rejectResponseValue);
+            var message = &#39;&#39;,
+               title = &#39;Error&#39;;
+            record.reject();
+            if (rejectResponse &amp;&amp; rejectResponse.error) {
+                if (rejectResponse.error.message &amp;&amp; rejectResponse.error.details) {
+                    title = rejectResponse.error.message;
+                    message = rejectResponse.error.details;
+                    abp.message.warn(message, title);
+                    return;
+                }
+                title = rejectResponse.error.message;
+                message = rejectResponse.error.details ? rejectResponse.error.details : title;
+            }
+            abp.message.warn(message, title);
+        }
+    },
+    handleFulFillResponse: function (records, operation, success) {
         if (success) {
             var action = operation.getAction();
-            if (action === &quot;create&quot; || action === &quot;destroy&quot;) {
+            if (action === &quot;create&quot; || action === &quot;destroy&quot;||action===&quot;update&quot;) {
                 var controller = operation.controller;
                 controller.doReloadGrid();
             }
-            Ext.toast({
-                html: &#39;Operation completed successfully.&#39;,
-                title: &#39;Success&#39;,
-                ui: &#39;chachingWindow&#39;,
-                alwaysOnTop: true,
-                saveDelay: 500,
-                animateShadow: true,
-                align: &#39;tr&#39;
-            });
+            abp.notify.success(&#39;Operation completed successfully.&#39;, &#39;Success&#39;);
         } else {
             var response = Ext.decode(operation.getResponse().responseText);
             var message = &#39;&#39;,
@@ -206,27 +245,22 @@
             if (response &amp;&amp; response.error) {
                 if (response.error.message &amp;&amp; response.error.details) {
                     title = response.error.message;
-                    message = response.error.details.replaceAll(&#39; - &#39;, &#39;&lt;/br&gt;-&#39;);
-                    var myMsg = Ext.create(&#39;Ext.window.MessageBox&#39;, {
-                        // set closeAction to &#39;destroy&#39; if this instance is not
-                        // intended to be reused by the application
-                        closeAction: &#39;destroy&#39;,
-                        ui: &#39;chachingWindow&#39;
-                    }).show({
-                        title: title,
-                        message: message,
-                        buttons: Ext.Msg.OKCANCEL,
-                        icon: Ext.Msg.INFO
-                    });
+                    message = response.error.details;
+                    abp.message.warn(message, title);
                     return;
                 }
                 title = response.error.message;
                 message = response.error.details ? response.error.details : title;
             }
-            Ext.toast(message);
+            abp.message.warn(message, title);
         }
     },
-
+  
+   doPostSaveOperations: function(records, operation, success) {
+        var deferred = new Ext.Deferred();
+        deferred.resolve(&#39;{success:true}&#39;);
+        return deferred.promise;
+    },
     //editing plugin listeners
     onBeforeGridEdit: function (editor, context, eOpts) {
         ///TODO cancel edit if restricted
@@ -253,6 +287,10 @@
                         passDelete: true
                     });
                     gridStore.insert(0, modelInstance);
+                    if (view.editingMode === &quot;cell&quot;) {
+                        editingPlugin.startEdit(gridStore.getAt(0), 1);
+                        break;
+                    }
                     editingPlugin.startEdit(gridStore.getAt(0));
                     break;
                 case &quot;popup&quot;:
@@ -278,8 +316,8 @@
     },
     //Do module specific tasks 
     doBeforeCreateAction: function (createNewMode) { },
-    doAfterCreateAction: function (createNewMode, form) { },
-    createNewRecord: function (type, createMode, isEdit, titleConfig) {
+    doAfterCreateAction: function (createNewMode, form,isEdit) { },
+    createNewRecord: function (type, createMode, isEdit, titleConfig,record) {
         var me = this,
             view = me.getView(),
             formView,
@@ -296,7 +334,7 @@
             });
             formView.show();
         } else if (createMode === &quot;tab&quot; &amp;&amp; tabPanel) {
-            var parentTabPanel = tabPanel.up(&#39;tabpanel&#39;);
+            var parentTabPanel = tabPanel.up(&#39;tabpanel&#39;) ? tabPanel.up(&#39;tabpanel&#39;) : tabPanel;
             if (parentTabPanel) {
                 className = type + &quot;.create&quot;;
                 formView = Ext.create({
@@ -315,7 +353,7 @@
             }
         }
         me.setParentControl(formView, createMode);
-        me.doAfterCreateAction(createMode, formView, isEdit);
+        me.doAfterCreateAction(createMode, formView, isEdit, record);
         return formView;
 
     },

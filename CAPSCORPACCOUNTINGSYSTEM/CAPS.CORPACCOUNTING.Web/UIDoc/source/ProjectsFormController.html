@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The ViewController class Project/Job form
+ * Author: Krishna Garad
+ * Date: 29/04/2016
+ */
+<span id='Chaching-view-projects-projectmaintenance-ProjectsFormController'>/**
+</span> * @class Chaching.view.projects.projectmaintenance.ProjectsFormController
+ * ViewController class for project/job
+ * @alias controller.projects-projectmaintenance-projectsform
+ */
+Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.projects-projectmaintenance-projectsform&#39;,
+<span id='Chaching-view-projects-projectmaintenance-ProjectsFormController-method-onAgencyChange'>    onAgencyChange:function(combo, newValue, oldValue, eOpts) {
+</span>        var me = this,
+            view = me.getView();
+        var comboStore = combo.getStore();
+        if (comboStore) {
+            var record = comboStore.findRecord(&#39;customerId&#39;, newValue);
+            if (record &amp;&amp; record._addresses) {
+                var addresses = record.getAddresses();
+                if (addresses) {
+                    var form = view.getForm(),
+                        agencyEmailField = form.findField(&#39;agencyEmail&#39;),
+                        agencyEmailDisplay = form.findField(&#39;agencyEmailDisplay&#39;),
+                        agencyAddressField = form.findField(&#39;agencyAddress&#39;),
+                        agencyPhoneField = form.findField(&#39;agencyPhone&#39;);
+                    agencyEmailField.setValue(addresses.get(&#39;email&#39;));
+                    agencyEmailDisplay.setValue(Chaching.utilities.ChachingRenderers.renderMailToTag(addresses.get(&#39;email&#39;)));
+                    agencyAddressField.setValue(me.getAgencyAddress(addresses));
+                    agencyPhoneField.setValue(addresses.get(&#39;phone1Extension&#39;) + addresses.get(&#39;phone1&#39;));
+
+                }
+            }
+        }
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsFormController-method-getAgencyAddress'>    getAgencyAddress:function(addresses) {
+</span>        var fullAddress = &#39;&#39;;
+        if (addresses.get(&#39;line1&#39;)) {
+            fullAddress = addresses.get(&#39;line1&#39;) + &#39; &#39;;
+        }
+        if (addresses.get(&#39;line2&#39;)) fullAddress += addresses.get(&#39;line2&#39;) + &#39; &#39;;
+        if (addresses.get(&#39;line3&#39;)) fullAddress += addresses.get(&#39;line3&#39;) + &#39; &#39;;
+        if (addresses.get(&#39;line4&#39;)) fullAddress += addresses.get(&#39;line4&#39;) + &#39; &#39;;
+        if (addresses.get(&#39;city&#39;)) fullAddress += &#39;,&#39;+addresses.get(&#39;city&#39;) + &#39; &#39;;
+        if (addresses.get(&#39;state&#39;)) fullAddress +=&#39;,&#39;+ addresses.get(&#39;state&#39;) + &#39; &#39;;
+        if (addresses.get(&#39;postalCode&#39;)) fullAddress += &#39;,&#39;+addresses.get(&#39;postalCode&#39;);
+        return fullAddress;
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsFormController-method-doPreSaveOperation'>    doPreSaveOperation: function (record, values, idPropertyField) {
+</span>        var me = this,
+            view = me.getView(),
+            lineNumbersGrid = view.down(&#39;gridpanel[itemId=jobAccountsGridPanel]&#39;),
+            lineNumberStore = lineNumbersGrid.getStore();
+
+        var modifiedRecord = lineNumberStore.getModifiedRecords();
+        var modifiedJobAccounts = [];
+        if (modifiedRecord&amp;&amp;modifiedRecord.length&gt;0) {
+            Ext.each(modifiedRecord, function(rec) {
+                var record = {
+                    description: rec.get(&#39;description&#39;),
+                    accountId: rec.get(&#39;accountId&#39;),
+                    jobAccountId: rec.get(&#39;jobAccountId&#39;),
+                    jobId: rec.get(&#39;jobId&#39;),
+                    rollupAccountId: rec.get(&#39;rollupAccountId&#39;),
+                    rollupJobId: rec.get(&#39;rollupJobId&#39;)
+                };
+                modifiedJobAccounts.push(record);
+            });
+            record.set(&#39;JobAccountList&#39;, modifiedJobAccounts);
+        }
+        return record;
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsFormController-method-onProjectDetailsSave'>    onProjectDetailsSave:function() {
+</span>        var me = this,
+            view = me.getView(),
+            parentGrid = view.parentGrid,
+            values = view.getValues();
+        var jobLocations = [],
+            poRanges = [];
+        
+        if (parentGrid) {
+            var gridStore = parentGrid.getStore(),
+               idPropertyField = gridStore.idPropertyField,
+               operation;
+            var target;
+            if (view.openInPopupWindow) {
+                target = view.up(&#39;window&#39;);
+            } else {
+                target = view;
+            }
+            var myMask = new Ext.LoadMask({
+                msg: &#39;Please wait...&#39;,
+                target: target
+            });
+
+            
+            myMask.show();
+            if (values.agencyEmail === &quot;&quot;)values.agencyEmail = null;
+            //get updated joblocation
+            var jobLocationGridStore = view.down(&#39;gridpanel[itemId=jobLocationsGridPanel]&#39;).getStore();
+            var modifiedRecords = jobLocationGridStore.getModifiedRecords();
+            if (modifiedRecords &amp;&amp; modifiedRecords.length&gt;0) {
+                Ext.each(modifiedRecords, function(rec) {
+                    var record = {
+                        jobLocationId: rec.get(&#39;jobLocationId&#39;),
+                        jobId: values.jobId,
+                        locationId: rec.get(&#39;locationId&#39;),
+                        locationSiteDate: rec.get(&#39;locationSiteDate&#39;),
+                        locationName: rec.get(&#39;locationName&#39;)
+                    };
+                    jobLocations.push(record);
+                });
+                values.jobLocations = jobLocations;
+            }
+
+            var poAllocationStore = view.down(&#39;gridpanel[itemId=jobPurchaseOrderAllocation]&#39;).getStore();
+            var modifiedPoRangeRecords = poAllocationStore.getModifiedRecords();
+            if (modifiedPoRangeRecords &amp;&amp; modifiedPoRangeRecords.length&gt;0) {
+                Ext.each(modifiedPoRangeRecords, function (rec) {
+                    var record = {
+                        poRangeId: rec.get(&#39;poRangeId&#39;),
+                        jobId: values.jobId,
+                        poRangeStartNumber: rec.get(&#39;poRangeStartNumber&#39;),
+                        poRangeEndNumber: rec.get(&#39;poRangeEndNumber&#39;),
+                        organizationUnitId: rec.get(&#39;organizationUnitId&#39;)
+                    };
+                    poRanges.push(record);
+                });
+                values.poAllocations = poRanges;
+            }
+            //fire save request
+            Ext.Ajax.request({
+                url: abp.appPath + &#39;api/services/app/jobCommercial/UpdateJobDetailUnit&#39;,
+                jsonData: Ext.encode(values),
+                success: function (response, opts) {
+                    myMask.hide();
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        var gridController = parentGrid.getController();
+                        gridController.doReloadGrid();
+
+                        if (view &amp;&amp; view.openInPopupWindow) {
+                            var wnd = view.up(&#39;window&#39;);
+                            Ext.destroy(wnd);
+                        } else if (view) {
+                            Ext.destroy(view);
+                        }
+                        abp.notify.success(&#39;Operation completed successfully.&#39;, &#39;Success&#39;);
+                    } else {
+                        var message = &#39;&#39;,
+                            title = &#39;Error&#39;;
+                        if (res &amp;&amp; res.error) {
+                            if (res.error.message &amp;&amp; res.error.details) {
+                                title = res.error.message;
+                                message = res.error.details;
+                                abp.message.warn(message, title);
+                                return;
+                            }
+                            title = res.error.message;
+                            message = res.error.details ? res.error.details : title;
+                        }
+                        abp.message.error(message, title);
+                    }
+                },
+                failure: function (response, opts) {
+                    myMask.hide();
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+        }
+        
+    }
+});
+</pre>
+</body>
+</html>

@@ -21,12 +21,11 @@
         searchEntityName: &#39;&#39;
     },
     fields: [
-            { name: &#39;JobLocationId&#39;, type: &#39;int&#39; ,isPrimaryKey: true},
-            { name: &#39;jobId&#39;, type: &#39;int&#39; },
-            { name: &#39;LocationId&#39;, type: &#39;int&#39;},
-            { name: &#39;JobDetailId&#39;, type: &#39;int&#39;},
-            { name: &#39;LocationSiteDate&#39;, type: &#39;date&#39;},
-            { name: &#39;OrganizationUnitId&#39;, type: &#39;int&#39;}           
+            { name: &#39;jobLocationId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+            { name: &#39;jobId&#39;, type: &#39;int&#39;,defaultValue:null,convert:nullHandler },
+            { name: &#39;locationId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;locationSiteDate&#39;, type: &#39;date&#39; },
+            { name: &#39;locationName&#39;, type: &#39;string&#39; }
     ]
 });
 </pre>

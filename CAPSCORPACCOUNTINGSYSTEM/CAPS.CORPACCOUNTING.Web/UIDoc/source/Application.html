@@ -51,7 +51,24 @@ Ext.define(&#39;Chaching.Application&#39;, {
         &#39;financials.accounts.DivisionsStore&#39;,
         &#39;manageView.ManageViewStore&#39;,
         &#39;roles.RolesTreeStore&#39;,
-        &#39;languages.LanguagesDataStore&#39;
+         &#39;financials.accounts.AccountsStore&#39;,
+        &#39;languages.LanguagesDataStore&#39;,
+        &#39;projects.projectmaintenance.LinesStore&#39;,
+        &#39;financials.accounts.RollupAccountStore&#39;,
+        &#39;payables.vendors.VendorsStore&#39;,
+        &#39;languages.LanguagesDataStore&#39;,
+        &#39;projects.projectmaintenance.ProjectsStore&#39;,
+        &#39;projects.projectmaintenance.ProjectCoaStore&#39;,
+         &#39;address.AddressStore&#39;,
+        &#39;projects.projectmaintenance.ProjectCoaStore&#39;,
+        &#39;projects.projectmaintenance.JobAccountsStore&#39;,
+        &#39;projects.projectmaintenance.ProjectLocationsStore&#39;,
+        &#39;utilities.LocationListStore&#39;,
+        &#39;projects.projectmaintenance.PoRangeAllocationStore&#39;,
+        &#39;employee.EmployeeStore&#39;,
+        &#39;customers.CustomersStore&#39;,
+        &#39;utilities.ProjectTypeStore&#39;,
+        &#39;utilities.ProjectStatusStore&#39;
       
     ],
     mainView: &#39;Chaching.view.main.ChachingViewport&#39;,
@@ -87,9 +104,9 @@ Ext.define(&#39;Chaching.Application&#39;, {
                     Ext.each(records, function (record) {
                         if (record.get(&#39;isDefault&#39;)) {
                             rec = {
-                                gridId: record.get(&#39;gridId&#39;),
+                                gridId: record.get(&#39;viewId&#39;),
                                 userViewId: record.get(&#39;userViewId&#39;),
-                                viewSettingName: record.get(&#39;viewSettingName&#39;),
+                                viewSettingName: record.get(&#39;viewName&#39;),
                                 viewSettings: record.get(&#39;viewSettings&#39;),
                                 isDefault: record.get(&#39;isDefault&#39;)
                             }
@@ -105,7 +122,7 @@ Ext.define(&#39;Chaching.Application&#39;, {
                                 refs = mainViewController.getReferences(),
                                 mainCardPanel = refs.mainCardPanel,
                                 hasComponent = mainCardPanel.child(&#39;component[routeId=&#39; + window.location.hash.replace(&#39;#&#39;, &#39;&#39;) + &#39;]&#39;);
-                            if (hasComponent&amp;&amp;typeof(hasComponent.applyGridViewSetting)===&#39;function&#39;) {
+                            if (hasComponent &amp;&amp; typeof (hasComponent.applyGridViewSetting) === &#39;function&#39;) {
                                 var cols = hasComponent.getColumns();
                                 hasComponent.applyGridViewSetting(cols, true);
                             }
@@ -125,6 +142,9 @@ Ext.define(&#39;Chaching.Application&#39;, {
         );
     }
 });
-</pre>
+var nullHandler = function (val) {
+    if (val) return val;
+    else return null;
+};</pre>
 </body>
 </html>

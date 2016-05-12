@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.projects.projectmaintenance.ProjectModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+        searchEntityName: &#39;Job&#39;
+    },
+    fields: [
+        { name: &#39;jobId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+        { name: &#39;jobNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;caption&#39;, type: &#39;string&#39; },
+        { name: &#39;rollupCenterId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;isCorporateDefault&#39;, type: &#39;boolean&#39; },
+        { name: &#39;chartOfAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;rollupAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;typeOfCurrencyId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;rollupJobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;typeOfJobStatusId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;typeOfBidSoftwareId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;isApproved&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isActive&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isictDivision&#39;, type: &#39;boolean&#39; },
+        { name: &#39;typeofProjectId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;taxRecoveryId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;taxCreditId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;organizationUnitId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;rollupcenterid&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        ///TODO: Remove convert function once service sent po log count and transaction count
+        { name: &#39;detailTransactions&#39;, type: &#39;int&#39;,convert:function(val) {
+            return Ext.Number.randomInt(0, 100);
+        } },
+        { name: &#39;poLogCount&#39;, type: &#39;int&#39;, convert:function(val) {
+            return Ext.Number.randomInt(0, 100);
+        } },
+        { name: &#39;typeofProjectName&#39;, type: &#39;string&#39; },
+        { name: &#39;jobStatusName&#39;, type: &#39;string&#39; }
+    ]
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.accounts.AccountsGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.financials-accounts-accountsgrid&#39;,
+    doAfterCreateAction: function (createMode, formView, isEdit) {
+        var viewModel = formView.getViewModel();
+        var form = formView.getForm();
+        if (!isEdit) {            
+            form.findField(&quot;chartOfAccountId&quot;).setValue(formView.parentGrid.coaId);
+        }
+        else {           
+            var typeOfCurrency = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
+            typeOfCurrency.load();
+            var typeOfCurrencyRate = viewModel.getStore(&#39;typeOfCurrencyRateList&#39;);
+            typeOfCurrencyRate.load();
+            var typeOfAccount = viewModel.getStore(&#39;typeOfAccountList&#39;);
+            typeOfAccount.load();
+            var typeofConsolidation = viewModel.getStore(&#39;typeofConsolidationList&#39;);
+            typeofConsolidation.load();
+        }
+        var linkAccountStore = viewModel.getStore(&#39;linkAccountListByCoaId&#39;);
+        linkAccountStore.getProxy().setExtraParam(&#39;id&#39;, formView.parentGrid.coaId);
+        linkAccountStore.load();
+    }
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectCOAsForm&#39;,{
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias:[&#39;widget.projects.projectmaintenance.projectcoas.create&#39;, &#39;widget.projects.projectmaintenance.projectcoas.edit&#39;],
+    requires: [
+        &#39;Chaching.view.projects.projectmaintenance.ProjectCOAsFormController&#39;        
+    ],
+    controller: &#39;projects-projectmaintenance-projectcoasform&#39;,
+    name: &#39;projectcoa&#39;,
+    openInPopupWindow: false,
+    hideDefaultButtons: false,
+    layout: &#39;column&#39;,
+    autoScroll: true,
+    border: false,
+    showFormTitle: true,
+    displayDefaultButtonsCenter: true,
+    titleConfig: {
+        title: abp.localization.localize(&quot;CreatingNewProjectCOA&quot;).initCap()
+    },
+    items: [{
+        xtype: &#39;hiddenfield&#39;,
+        name: &#39;coaId&#39;,
+        value: 0
+    }, {
+        columnWidth: .5,
+        padding: &#39;20 10 0 20&#39;,
+        //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; },
+        defaults: {
+            labelAlign: &#39;top&#39;,
+            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+        },
+        items: [{
+            xtype: &#39;textfield&#39;,
+            name: &#39;caption&#39;,
+            itemId: &#39;caption&#39;,
+            allowBlank: false,
+            fieldLabel: app.localize(&#39;Caption&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;MandatoryField&#39;)
+        }, {
+            xtype: &#39;textfield&#39;,
+            name: &#39;description&#39;,
+            itemId: &#39;description&#39;,
+            allowBlank: false,
+            fieldLabel: app.localize(&#39;description&#39;).initCap() ,
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;MandatoryField&#39;)
+        }, {
+            xtype: &#39;checkbox&#39;,
+            boxLabel: app.localize(&#39;IsApproved&#39;),
+            name: &#39;isApproved&#39;,
+            labelAlign: &#39;right&#39;,
+            inputValue: true,
+            checked: true,
+            boxLabelCls: &#39;checkboxLabel&#39;,
+            hidden: false
+        }, {
+            xtype: &#39;checkbox&#39;,
+            boxLabel: app.localize(&#39;IsPrivate&#39;),
+            name: &#39;isPrivate&#39;,
+            labelAlign: &#39;right&#39;,
+            inputValue: true,
+            checked: true,
+            boxLabelCls: &#39;checkboxLabel&#39;,
+            hidden: false
+        }]
+    }, {
+        columnWidth: .5,
+        padding: &#39;20 10 0 20&#39;,
+        //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; },
+        defaults: {
+            labelAlign: &#39;top&#39;,
+            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+        },
+        items: [{
+            xtype: &#39;combobox&#39;,
+            name: &#39;rollupDivisionId&#39;,
+            fieldLabel: app.localize(&#39;DefaultRollupJob&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;DefaultRollupJob&#39;),
+            displayField: &#39;rollupDivision&#39;,
+            valueField: &#39;rollupDivisionId&#39;,
+            bind: {
+                store: &#39;{rollupDivisionList}&#39;
+            }
+        }, {
+            xtype: &#39;combobox&#39;,
+            name: &#39;rollupAccountId&#39;,
+            fieldLabel: app.localize(&#39;DefaultRollupAccount&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;DefaultRollupAccount&#39;),
+            displayField: &#39;name&#39;,
+            valueField: &#39;value&#39;,
+            bind: {
+                store: &#39;{genericRollupAccountList}&#39;
+            }
+        }, {
+            xtype: &#39;checkbox&#39;,
+            boxLabel: app.localize(&#39;IsCorporate&#39;),
+            name: &#39;isCorporate&#39;,
+            labelAlign: &#39;right&#39;,
+            inputValue: true,
+            checked: false,
+            readOnly: true,
+            boxLabelCls: &#39;checkboxLabel&#39;
+        }, {
+            xtype: &#39;checkbox&#39;,
+            boxLabel: app.localize(&#39;IsNumeric&#39;),
+            name: &#39;isNumeric&#39;,
+            labelAlign: &#39;right&#39;,
+            inputValue: true,
+            checked: true,
+            boxLabelCls: &#39;checkboxLabel&#39;
+        }]
+    }]
+   
+});
+</pre>
+</body>
+</html>

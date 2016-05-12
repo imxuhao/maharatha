@@ -24,7 +24,7 @@
         if (val) return &#39;YES&#39;;
         else return &#39;NO&#39;;
     },
-    unlinkedaccount: function (value, cell) {       
+    unlinkedaccount: function (value, cell) {
         var gridController = this.getController(),
             view = gridController.getView();
         var id = Ext.id();
@@ -109,7 +109,7 @@
         else
             return &#39;&lt;i class=&quot;fa fa-warning font-yellow-gold&quot;  style=&quot;color:#32c5d2&quot;&gt;&lt;/i&gt;&#39;;
     },// hh:mm:ss
-    renderDateOnly:function(value) {
+    renderDateOnly: function (value) {
         if (value) {
             return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateFormat);
         }
@@ -127,7 +127,7 @@
         }
         return &#39;&#39;;
     },
-    renderDateTimeWithFromNow:function(value) {
+    renderDateTimeWithFromNow: function (value) {
         if (value) {
             return moment(value).fromNow() + &#39; (&#39; + moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormat) + &#39;)&#39;;
         }
@@ -139,12 +139,145 @@
         else
             return &#39;&lt;i class=&quot;fa fa-close font-yellow-gold&quot;  style=&quot;color:#E00353&quot;&gt;&lt;/i&gt;&#39;;
     },
-    languagesTextsEditIcon: function (val, meta, record, rowIndex) {        
-            return &#39;&lt;i class=&quot;fa fa-edit&quot; &gt;&lt;/i&gt;&#39;;       
+    languagesTextsEditIcon: function (val, meta, record, rowIndex) {
+        return &#39;&lt;i class=&quot;fa fa-edit&quot; &gt;&lt;/i&gt;&#39;;
     },
     languageIconRenderer: function (val, meta, record, rowIndex) {
         return &#39;&lt;i class=&quot;famfamfam-flag &#39; + record.get(&#39;icon&#39;) + &#39;&quot; style=&quot;display: inline-block;margin-right: 10px; !important&quot; &gt;&lt;/i&gt;&lt;span&gt;&#39; + val + &#39;&lt;/span&gt;&#39;;
+    },
+    rendererHyperLink: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (val) {
+            var a = &#39;&lt;a style=&quot;padding-left:10px;text-decoration:underline !important;&quot;&gt;&#39; + val + &#39;&lt;/a&gt;&#39;;
+            var div = &#39;&lt;div class=&quot;fa fa-th&quot; isHyperLink=&quot;true&quot; style=&quot;overflow:hidden; text-overflow:ellipsis; color:white; cursor:pointer; width:98%; color:#3598DC !important;&quot; title=&quot;&#39; + val + &#39;&quot;&gt;&#39; + a + &#39;&lt;/div&gt;&#39;;
+            return div;
+        }
+        return val;
+    },
+    renderFullAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;line1&#39;) + &#39; &#39; + address.get(&#39;line2&#39;) + &#39; &#39; + address.get(&#39;line3&#39;);
+            }
+        }
+        return val;
+    },
+    renderContactNumber: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;contactNumber&#39;);
+            }
+        }
+        return val;
+    },
+    renderEmail: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;email&#39;);
+            }
+        }
+        return val;
+    },
+    renderFirstAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;line1&#39;);
+            }
+        }
+        return val;
+    },
+    renderSecondAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;line2&#39;);
+            }
+        }
+        return val;
+    },
+    renderThirdAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;line3&#39;);
+            }
+        }
+        return val;
+    },
+    renderFourthAddress: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;line4&#39;);
+            }
+        }
+        return val;
+    },
+    renderPhone1: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;phone1&#39;);
+            }
+        }
+        return val;
+    },
+    renderCity: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+            var address = record.getAddress();
+            if (address) {
+                return address.get(&#39;city&#39;);
+            }
+        }
+        return val;
+    },
+    renderState: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (record &amp;&amp; record._address) {
+                var address = record.getAddress();
+                if (address) {
+                    return address.get(&#39;state&#39;);
+                }
+            }
+            return val;
+        },
+        renderPostalCode: function (val, meta, record, rowIndex, colIndex, store, view) {
+            if (record &amp;&amp; record._address) {
+                var address = record.getAddress();
+                if (address) {
+                    return address.get(&#39;postalCode&#39;);
+            }
+        }
+        return val;
+    },
+    renderEmployeeInnerTpl: function () {
+        return &#39;{firstName} {lastName}&#39;;
+    },
+    renderEmployeeDispalyTpl: function () {
+        var xtemplate = Ext.create(&#39;Ext.XTemplate&#39;, [
+            &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+            &#39;{firstName} {lastName}&#39;,
+            &#39;&lt;/tpl&gt;&#39;
+        ]);
+        return xtemplate;
+    },
+    renderCustomerInnerTpl: function() {
+        return &#39;{firstName} {lastName} {{customerNumber}}&#39;;
+    },
+    renderCustomerDispalyTpl: function () {
+        var xtemplate = Ext.create(&#39;Ext.XTemplate&#39;, [
+            &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+            &#39;{firstName} {lastName} {{customerNumber}}&#39;,
+            &#39;&lt;/tpl&gt;&#39;
+        ]);
+        return xtemplate;
+    },
+    renderMailToTag:function(email) {
+        return &#39;&lt;a href=&quot;mailto:&#39; + email + &#39;&quot; style=&quot;text-decoration:underline !important;color:#477EBF !important;font-size:15px;&quot;&gt;&#39; + email + &#39;&lt;/a&gt;&#39;;
     }
+
 });</pre>
 </body>
 </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.financials.accounts.AccountsModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+        searchEntityName: &#39;Account&#39;
+    },
+    fields: [
+            { name: &#39;accountId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+            { name: &#39;parentId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;caption&#39;, type: &#39;string&#39; },
+            { name: &#39;description&#39;, type: &#39;string&#39; },
+            { name: &#39;chartOfAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;accountNumber&#39;, type: &#39;string&#39; },
+            { name: &#39;isAccountRevalued&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isApproved&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isDescriptionLocked&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isElimination&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isEnterable&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isRollupAccount&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isRollupOverridable&#39;, type: &#39;boolean&#39; },
+            { name: &#39;linkAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+             { name: &#39;linkAccount&#39;, type: &#39;string&#39; },
+            { name: &#39;linkJobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;rollupAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;rollupJobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;typeOfAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;typeOfAccount&#39;, type: &#39;string&#39; },
+            { name: &#39;typeofConsolidationId&#39;, type: &#39;auto&#39; },
+            { name: &#39;typeofConsolidation&#39;, type: &#39;string&#39; },
+             { name: &#39;typeOfCurrencyId&#39;, type: &#39;auto&#39; },
+            { name: &#39;typeOfCurrency&#39;, type: &#39;string&#39; },
+             { name: &#39;typeOfCurrencyRateId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;typeOfCurrencyRate&#39;, type: &#39;string&#39; },
+            { name: &#39;isDocControlled&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isSummaryAccount&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isBalanceSheet&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isUs1120BalanceSheet&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isProfitLoss&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isUs1120IncomeStmt&#39;, type: &#39;boolean&#39; },
+            { name: &#39;isCashFlow&#39;, type: &#39;boolean&#39; },
+            { name: &#39;cashFlowName&#39;, type: &#39;string&#39; },
+            { name: &#39;us1120BalanceSheetName&#39;, type: &#39;string&#39; },
+            { name: &#39;balanceSheetName&#39;, type: &#39;string&#39; },
+            { name: &#39;profitLossName&#39;, type: &#39;string&#39; },
+            { name: &#39;us1120IncomeStmtName&#39;, type: &#39;string&#39; },
+            { name: &#39;isActive&#39;, type: &#39;boolean&#39; },
+            { name: &#39;rollUpAccountCaption&#39;, type: &#39;string&#39; },
+             { name: &#39;RollUpDivision&#39;, type: &#39;string&#39; }
+            
+    ]
+});</pre>
+</body>
+</html>

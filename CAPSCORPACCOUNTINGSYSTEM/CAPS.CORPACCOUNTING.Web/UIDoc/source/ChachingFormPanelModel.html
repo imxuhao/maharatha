@@ -15,12 +15,25 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.common.form.ChachingFormPanelModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * This Class is base ViewModel class for all forms which are inherited from base formpanel.
+ * Author: Krishna Garad
+ * Date: 04/05/2016
+ */
+<span id='Chaching-view-common-form-ChachingFormPanelModel'>/**
+</span> * @class Chaching.view.common.form.ChachingFormPanelModel
+ * The base ViewModel class for all formpanels 
+ */
+Ext.define(&#39;Chaching.view.common.form.ChachingFormPanelModel&#39;, {
     extend: &#39;Ext.app.ViewModel&#39;,
     alias: &#39;viewmodel.common-form-chachingformpanel&#39;,
-    data: {
-        name: &#39;Chaching&#39;
+<span id='Chaching-view-common-form-ChachingFormPanelModel-property-data'>    data: {
+</span>        name: &#39;Chaching&#39;
     },
+<span id='Chaching-view-common-form-ChachingFormPanelModel-cfg-stores'>    /**
+</span>    * @cfg {object}
+    * A config option for for stores in viewmodel
+    */
     stores: {
         StandardGroupTotalList: {
             fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
@@ -139,29 +152,363 @@
                 }
             }
         },
-        getOrganizations: {
+
+
+        typeofConsolidationList: {
             fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
-                name: &#39;organizationName&#39;, convert: function (value, record) {
+                name: &#39;typeofConsolidation&#39;, convert: function (value, record) {
                     return record.get(&#39;name&#39;);
                 }
             }, {
-                name: &#39;organizationId&#39;, convert: function (value, record) {
+                name: &#39;typeofConsolidationId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/accountUnit/GetTypeofConsolidationList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;,
+                    totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        }
+        ,
+        typeOfAccountList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeOfAccount&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;typeOfAccountId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/accountUnit/GetTypeOfAccountList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;,
+                    totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        }
+        ,
+        typeOfCurrencyList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeOfCurrency&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;typeOfCurrencyId&#39;, convert: function (value, record) {
                     return record.get(&#39;value&#39;);
                 }
             }],
             xtype: &#39;ajax&#39;,
             autoLoad: false,
-            extraParams: {
-                &#39;Id&#39;:1
-            },
             proxy: {
                 actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
                 type: &#39;chachingProxy&#39;,
-                url: abp.appPath + &#39;api/services/app/jobUnit/GetOrganizationUnits&#39;,
+                url: abp.appPath + &#39;api/services/app/accountUnit/GetTypeOfCurrencyList&#39;,
                 reader: {
                     type: &#39;json&#39;,
                     rootProperty: &#39;result&#39;,
                     totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        },
+        typeOfCurrencyRateList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeOfCurrencyRate&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;typeOfCurrencyRateId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/accountUnit/GetTypeOfCurrencyRateList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;,
+                    totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        },
+        linkAccountListByCoaId: {
+
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;linkAccount&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;linkAccountId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            extraParams: {
+                id: 0
+            },
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/accountUnit/GetLinkAccountListByCoaId&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;,
+                    totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        },
+        rollupAccountList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;rollupAccount&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;rollupAccountId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/accountUnit/GetRollupAccountsList&#39;,
+                extraParams: {
+                    Id: null
+                },
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+
+        rollupDivisionList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;rollupDivision&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;rollupDivisionId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/jobUnit/GetDivisionList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        vendorTypeList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeofvendor&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;typeofvendorId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/vendorUnit/GetTypeofVendorList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        typeof1099BoxList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeof1099Box&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;typeof1099BoxId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/vendorUnit/GetTypeof1099T4List&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        genericRollupAccountList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/jobUnit/GetGenericRollupAccountsList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        typeofAddressList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeofAddress&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;typeofAddressId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/vendorUnit/GetTypeofAddressList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        typeOfTaxList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeofTax&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;typeofTaxId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/vendorUnit/GetTypeOfTaxList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        getTaxRecoveryList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/jobUnit/GetTaxRecovery&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        getTaxCreditList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/jobUnit/GetTaxCreditList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        paymentTermsList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;paymentTerms&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;paymentTermsId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/vendorUnit/GetPaymentTermsList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+        getAccountsListLines: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+
+                name: &#39;account&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;accountId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            extraParams: {
+                value: false
+            },
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/vendorUnit/GetAccountsList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
+                }
+            }
+        },
+
+        getAccountsList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+
+                name: &#39;account&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;accountId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            extraParams: {
+                value: false
+            },
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/vendorUnit/GetAccountsList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;
                 }
             }
         }

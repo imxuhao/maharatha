@@ -28,10 +28,12 @@
             { name: &#39;isPrivate&#39;, type: &#39;boolean&#39; },
             { name: &#39;isCorporate&#39;, type: &#39;boolean&#39; },
             { name: &#39;isNumeric&#39;, type: &#39;boolean&#39; },
-            { name: &#39;standardGroupTotalId&#39;, type: &#39;int&#39; },
-            { name: &#39;linkChartOfAccountID&#39;, type: &#39;int&#39; },
+            { name: &#39;standardGroupTotalId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;linkChartOfAccountID&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;linkChartOfAccountName&#39;, type: &#39;string&#39; },
-            { name: &#39;standardGroupTotal&#39;, type: &#39;string&#39; }
+            { name: &#39;standardGroupTotal&#39;, type: &#39;string&#39; },
+            { name: &#39;rollupAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;rollupDivisionId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler }
     ]
 });
 </pre>

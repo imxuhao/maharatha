@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.address.AddressGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.address-addressgrid&#39;,
+    //doBeforeInlineAddUpdate: function (record) {
+    //    var me = this,
+    //        view = me.getView(),
+    //        parentGrid = view.up(&#39;window&#39;).parentGrid;
+    //    var gridStore = parentGrid.getStore(),
+    //        isGrouped = gridStore.isGrouped(),
+    //        groupField = gridStore.getGroupField(),
+    //        groupDir = gridStore.getGroupDir(),
+    //        idPropertyField = view.getStore().idPropertyField;
+
+    //    if (record.get(idPropertyField) &gt; 0 &amp;&amp; !record.get(&#39;isActive&#39;)) {
+    //        return true;
+    //    }
+    //    if (parentGrid) {
+    //        var parentGridColumns = parentGrid.getColumns();
+    //        if (parentGridColumns &amp;&amp; parentGridColumns.length &gt; 0) {
+    //            var userViewSetting = {};
+    //            var viewColumns = [];
+    //            for (var i = 0; i &lt; parentGridColumns.length; i++) {
+    //                var gridCol = parentGridColumns[i];
+    //                if (gridCol.name !== &quot;ActionColumn&quot; &amp;&amp; gridCol.xtype !== &quot;actioncolumn&quot;) {
+    //                    var column = {
+    //                        hidden: gridCol.hidden,
+    //                        width: gridCol.width,
+    //                        dataIndex: gridCol.dataIndex
+    //                    };
+    //                    viewColumns.push(column);
+    //                }
+    //            }
+    //            userViewSetting.column = viewColumns;
+    //            userViewSetting.groupInfo = {
+    //                isGrouped: isGrouped,
+    //                groupField: groupField,
+    //                groupDir: groupDir
+    //            };
+    //            if (record.get(idPropertyField) &gt; 0) {
+    //                record.set(&#39;viewSettings&#39;, Ext.encode(userViewSetting));
+    //            } else {
+    //                record.set(&#39;userId&#39;, Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId);
+    //                record.set(&#39;gridId&#39;, parentGrid.gridId);
+    //                record.set(&#39;id&#39;, 0);
+    //                record.set(&#39;viewSettings&#39;, Ext.encode(userViewSetting));
+    //            }
+    //        }
+    //        return true;
+    //    }
+    //    return false;
+    //}
+});
+</pre>
+</body>
+</html>

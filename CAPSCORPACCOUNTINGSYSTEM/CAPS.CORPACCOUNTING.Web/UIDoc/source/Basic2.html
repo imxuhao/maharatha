@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * This Class is created for Basic form for chaching.
+ * Author: Krishna Garad
+ * Date: 05/05/2016
+ */
+<span id='Chaching-components-form-Basic'>/**
+</span> * Provides input field management, validation, submission, and form loading services for the collection
+ * of {@link Ext.form.field.Field Field} instances within a {@link Ext.container.Container}. It is recommended
+ * that you use a {@link Ext.form.Panel} as the form container, as that has logic to automatically
+ * hook up an instance of {@link Ext.form.Basic} (plus other conveniences related to field configuration.)
+ *
+ * ## Form Actions
+ *
+ * The Basic class delegates the handling of form loads and submits to instances of {@link Ext.form.action.Action}.
+ * See the various Action implementations for specific details of each one&#39;s functionality, as well as the
+ * documentation for {@link #doAction} which details the configuration options that can be specified in
+ * each action call.
+ *
+ * The default submit Action is {@link Ext.form.action.Submit}, which uses an Ajax request to submit the
+ * form&#39;s values to a configured URL. To enable normal browser submission of an Ext form, use the
+ * {@link #standardSubmit} config option.
+ *
+ * ## File uploads
+ *
+ * File uploads are not performed using normal &#39;Ajax&#39; techniques; see the description for
+ * {@link #hasUpload} for details. If you&#39;re using file uploads you should read the method description.
+ *
+ * ## Example usage:
+ *
+ *     @example
+ *     Ext.create(&#39;Chaching.components.form.Panel&#39;, {
+ *         title: &#39;Basic Form&#39;,
+ *         renderTo: Ext.getBody(),
+ *         bodyPadding: 5,
+ *         width: 350,
+ *
+ *         // Any configuration items here will be automatically passed along to
+ *         // the Ext.form.Basic instance when it gets created.
+ *
+ *         // The form will submit an AJAX request to this URL when submitted
+ *         url: &#39;save-form.php&#39;,
+ *
+ *         items: [{
+ *             xtype: &#39;textfield&#39;,
+ *             fieldLabel: &#39;Field&#39;,
+ *             name: &#39;theField&#39;
+ *         }],
+ *
+ *         buttons: [{
+ *             text: &#39;Submit&#39;,
+ *             handler: function() {
+ *                 // The getForm() method returns the Ext.form.Basic instance:
+ *                 var form = this.up(&#39;form&#39;).getForm();
+ *                 if (form.isValid()) {
+ *                     // Submit the Ajax request and handle the response
+ *                     form.submit({
+ *                         success: function(form, action) {
+ *                            Ext.Msg.alert(&#39;Success&#39;, action.result.message);
+ *                         },
+ *                         failure: function(form, action) {
+ *                             Ext.Msg.alert(&#39;Failed&#39;, action.result ? action.result.message : &#39;No response&#39;);
+ *                         }
+ *                     });
+ *                 }
+ *             }
+ *         }]
+ *     });
+ */
+Ext.define(&#39;Chaching.components.form.Basic&#39;, {
+    extend: &#39;Ext.form.Basic&#39;,
+    alternateClassName: &#39;Chaching.form.BasicForm&#39;,
+    alias: &#39;form.chachingBasicForm&#39;,
+<span id='Chaching-components-form-Basic-method-loadRecord'>    /**
+</span>    * Loads an {@link Ext.data.Model} into this form by calling {@link #setValues} with the
+    * {@link Ext.data.Model#getData record data}. The fields in the model are mapped to 
+    * fields in the form by matching either the {@link Ext.form.field.Base#name} or {@link Ext.Component#itemId}.  
+    * See also {@link #trackResetOnLoad}. 
+    * @param {Ext.data.Model} record The record to load
+    * @return {Ext.form.Basic} this
+    */
+    loadRecord: function (record) {
+        var me = this;
+        me._record = record;
+        if (record &amp;&amp; record.associations) {
+            var associationInfo = record.associations;
+            for (var associationKey in associationInfo) {
+                if (associationInfo.hasOwnProperty(associationKey)) {
+                    var association = associationInfo[associationKey];
+                    var associationRecord = record[association.instanceName];
+                    if (associationRecord) {
+                        for (var key in associationRecord.data) {
+                            if (associationRecord.data.hasOwnProperty(key) &amp;&amp; key !== &quot;id&quot;) {
+                                record.data[key] = associationRecord.data[key];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return this.setValues(record.getData());
+    },
+<span id='Chaching-components-form-Basic-method-setValues'>    /**
+</span>     * Set values for fields in this form in bulk.
+     *
+     * @param {Object/Object[]} values Either an array in the form:
+     *
+     *     [{id:&#39;clientName&#39;, value:&#39;Fred. Olsen Lines&#39;},
+     *      {id:&#39;portOfLoading&#39;, value:&#39;FXT&#39;},
+     *      {id:&#39;portOfDischarge&#39;, value:&#39;OSL&#39;} ]
+     *
+     * or an object hash of the form:
+     *
+     *     {
+     *         clientName: &#39;Fred. Olsen Lines&#39;,
+     *         portOfLoading: &#39;FXT&#39;,
+     *         portOfDischarge: &#39;OSL&#39;
+     *     }
+     *
+     * @return {Ext.form.Basic} this
+     */
+    setValues: function (values) {
+        var me = this,
+            v, vLen, val;
+
+        function setVal(fieldId, val) {
+            var field = me.findField(fieldId);
+            if (field) {
+                field.setValue(val);
+                if (me.trackResetOnLoad) {
+                    field.resetOriginalValue();
+                }
+            }
+        }
+
+        // Suspend here because setting the value on a field could trigger
+        // a layout, for example if an error gets set, or it&#39;s a display field
+        Ext.suspendLayouts();
+        if (Ext.isArray(values)) {
+            // array of objects
+            vLen = values.length;
+
+            for (v = 0; v &lt; vLen; v++) {
+                val = values[v];
+
+                setVal(val.id, val.value);
+            }
+        } else {
+            // object hash
+            Ext.iterate(values, setVal);
+        }
+        Ext.resumeLayouts(true);
+        return this;
+    }
+});</pre>
+</body>
+</html>

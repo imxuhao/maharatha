@@ -30,60 +30,42 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
         type: &#39;common-grid-chachinggridpanel&#39;
     },
 <span id='global-cfg-requireMultiSearch'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {boolean} requireMultiSearch
+</span>    * @cfg {boolean} requireMultiSearch
     */
     requireMultiSearch: true,
 <span id='global-cfg-requireMultisort'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {boolean} requireMultisort
+</span>    * @cfg {boolean} requireMultisort
     */
     requireMultisort: true,
 <span id='global-cfg-requireGrouping'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {boolean} requireGrouping
+</span>    * @cfg {boolean} requireGrouping
     */
     requireGrouping:true,
 <span id='global-cfg-headerButtonsConfig'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {object[]} headerButtonsConfig
+</span>    * @cfg {object} headerButtonsConfig
     */
     headerButtonsConfig: null,
 <span id='global-cfg-requireExport'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {boolean} requireExport
+</span>    * @cfg {boolean} requireExport
     */
     requireExport: false,
 <span id='global-cfg-selModelConfig'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {object} selModelConfig
+</span>    * @cfg {object} selModelConfig
     */
     selModelConfig: null,
 <span id='global-cfg-isEditable'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {boolean} isEditable
+</span>    * @cfg {boolean} isEditable
     */
     isEditable: false,
 <span id='global-cfg-editingMode'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {string} editingMode
-     * values are cell and row.
+</span>    * @cfg {string} editingMode
+    * values are cell and row.
     */
     editingMode: null,
 <span id='global-cfg-createNewMode'>    /**
-</span>   * @hide
-   * @private
-   * @cfg {string} createNewMode
-     * values are inline(default based on editing mode), popup and tab
-   */
+</span>    * @cfg {string} createNewMode
+    * values are inline(default based on editing mode), popup and tab
+    */
     createNewMode:&#39;inline&#39;,
     columnLines: true,
     padding: 5,
@@ -91,38 +73,52 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
     layout: {
         type: &#39;fit&#39;
     },
+<span id='global-cfg-showPagingToolbar'>    /**
+</span>    * @cfg {boolean} showPagingToolbar
+    * show paging toolbar for grid. Defaults to &#39;true&#39;
+    */
     showPagingToolbar: true,
     ignoreCellDblClick: false,
     cls: &#39;chaching-grid&#39;,
 <span id='global-cfg-actionColumnMenuItemsConfig'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {object[]} actionColumnMenuItemsConfig
+</span>    * @cfg {object[]} actionColumnMenuItemsConfig
     */
     actionColumnMenuItemsConfig: null,//grid related action columns menu items
 <span id='global-cfg-requireActionColumn'>    /**
-</span>    * @hide
-    * @private
-    * @cfg {boolean} requireActionColumn
+</span>    * @cfg {boolean} requireActionColumn
     */
     requireActionColumn: true,
     name: &#39;&#39;,
     enableLocking:false,
     syncRowHeight: false,
     editingModel: null,
+<span id='global-cfg-editWndTitleConfig'>    /**
+</span>    * @cfg {object} editWndTitleConfig
+    * when editing record title and iconCls for window/tab
+    * ##Usage { 
+     * title:&#39;Editing&#39;
+     * iconCls:&#39;fa fa-edit-o&#39;
+    * }
+    */
     editWndTitleConfig: null,
+<span id='global-cfg-createWndTitleConfig'>    /**
+</span>    * @cfg {object} createWndTitleConfig
+    * when creating new record title and iconCls for window/tab
+    * ##Usage { 
+    * title:&#39;Creating&#39;
+    * iconCls:&#39;fa fa-edit-o&#39;
+    * }
+    */
     createWndTitleConfig: null,
 <span id='global-cfg-modulePermissions'>    /**
-</span>   * @hide
-   * @private
-   * @cfg {object} modulePermissions
-     * Override this config in child grid if has additional permissions
-   */
+</span>    * @cfg {object} modulePermissions
+    * Override this config in child grid if has additional permissions
+    */
     modulePermissions: undefined,
     manageViewSetting: true,
     activeUserViewId: null,
     isSubMenuItemTab: false,
-    hideClearFilter:false,
+    hideClearFilter:true,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -131,6 +127,10 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
             dockedItems = [],
             gridColumns = me.columns,
             features = [];
+        var gridStore = me.store;
+        if (typeof(gridStore)===&quot;string&quot;) {
+            me.store = Ext.create(&#39;Chaching.store.&#39;+gridStore);
+        }
        
         if (!me.modulePermissions) {
             me.modulePermissions = {
@@ -280,7 +280,7 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
             switch (me.editingMode) {
                 case &quot;cell&quot;:
                     editingModel = {
-                        ptype: &#39;cellediting&#39;,
+                        ptype: &#39;chachingCellediting&#39;,
                         pluginId: &#39;editingPlugin&#39;,
                         clicksToEdit: 2,
                         listeners: {
@@ -440,8 +440,8 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
 
             }
         }
-        if (menuItems.length &gt; 0)
-            return actionCol;
+
+        return actionCol;
     },
     applySettings: function (definedColumns, usersDefaultSetting, outValue) {
         var me = this,

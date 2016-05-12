@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The class is created to provide main UI to access projects/jobs.
+ * Author: Krishna Garad
+ * Date: 28/04/2016
+ */
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid'>/**
+</span> * @class Chaching.view.projects.projectmaintenance.ProjectsGrid
+ * UI design for project/job.
+ * @alias widget.projects.projectmaintenance.projects
+ */
+Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsGrid&#39;,{
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.projects.projectmaintenance.ProjectsGridController&#39;
+    ],
+    xtype:&#39;widget.projects.projectmaintenance.projects&#39;,
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-controller'>    controller: &#39;projects-projectmaintenance-projectsgrid&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-modulePermissions'>    modulePermissions: {
+</span>        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-padding'>    padding: 5,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-gridId'>    gridId:16,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-store'>    store:&#39;projects.projectmaintenance.ProjectsStore&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-headerButtonsConfig'>    headerButtonsConfig: [
+</span>      {
+          xtype: &#39;displayfield&#39;,
+          value: abp.localization.localize(&quot;Projects&quot;),
+          ui: &#39;headerTitle&#39;
+      }, &#39;-&gt;&#39;, {
+          xtype: &#39;button&#39;,
+          scale: &#39;small&#39;,
+          ui: &#39;actionButton&#39;,
+          action: &#39;create&#39;,
+          text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
+          tooltip: app.localize(&#39;CreateNewProject&#39;),
+          checkPermission: true,
+          iconCls: &#39;fa fa-plus&#39;,
+          routeName: &#39;project.projectmaintenance.projects.create&#39;,
+          iconAlign: &#39;left&#39;
+      }],
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-requireExport'>    requireExport: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-requireMultiSearch'>    requireMultiSearch: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-requireMultisort'>    requireMultisort: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-isEditable'>    isEditable: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-editingMode'>    editingMode: &#39;row&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-columnLines'>    columnLines: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-multiColumnSort'>    multiColumnSort: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-editWndTitleConfig'>    editWndTitleConfig: {
+</span>        title: app.localize(&#39;EditProject&#39;).initCap(),
+        iconCls: &#39;fa fa-pencil&#39;
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-createWndTitleConfig'>    createWndTitleConfig: {
+</span>        title: app.localize(&#39;CreateNewProject&#39;).initCap(),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-createNewMode'>    createNewMode: &#39;tab&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-isSubMenuItemTab'>    isSubMenuItemTab: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-listeners'>    listeners: {
+</span>        cellclick:&#39;onProjectsCellClick&#39;
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-columns'>    columns: [
+</span>         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;JobNumber&#39;),
+             dataIndex: &#39;jobNumber&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;10%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipJobNumber&#39;)
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;JobName&#39;).initCap(),
+             dataIndex: &#39;caption&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;15%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipJobName&#39;)
+             }, editor: {
+                 xtype: &#39;textfield&#39;,
+                 allowBlank:false
+             }
+         },{
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;DetailReport&#39;).initCap(),
+             dataIndex: &#39;detailTransactions&#39;,//TODO: render hyperlink based on transactions count
+             sortable: false,
+             groupable: false,
+             renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
+             width: &#39;13%&#39;
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;ProductName&#39;).initCap(),
+             dataIndex: &#39;productName&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;15%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipProductName&#39;)
+             },editor: {
+                 xtype:&#39;textfield&#39;
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Director&#39;),
+             dataIndex: &#39;directorName&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;10%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 entityName:&#39;&#39;,
+                 emptyText: app.localize(&#39;ToolTipDirector&#39;)
+             }, editor: {
+                 xtype: &#39;combobox&#39;,
+                 store: new Chaching.store.employee.EmployeeStore({
+                     filters: [
+                     {
+                         entity: &#39;Employee&#39;,
+                         searchTerm: true,
+                         comparator: 1,
+                         dataType: 3,
+                         property: &#39;isDirector&#39;,
+                         value: true
+                     }]
+                 }),
+                 valueField: &#39;directorEmployeeId&#39;,
+                 displayField: &#39;directorName&#39;,
+                 queryMode:&#39;local&#39;
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Agency&#39;),
+             dataIndex: &#39;agency&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;10%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 entityName: &#39;&#39;,
+                 emptyText: app.localize(&#39;ToolTipAgency&#39;)
+             }, editor: {
+                 xtype: &#39;combobox&#39;,
+                 store: &#39;customers.CustomersStore&#39;,
+                 valueField: &#39;agencyId&#39;,
+                 displayField: &#39;agency&#39;,
+                 queryMode: &#39;local&#39;
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;POLog&#39;).initCap(),
+             dataIndex: &#39;poLogCount&#39;,//TODO: render hyperlink based on po log count
+             sortable: false,
+             groupable: false,
+             renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
+             width: &#39;15%&#39;
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;ProjectType&#39;).initCap(),
+             dataIndex: &#39;typeofProjectName&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;15%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipProjectType&#39;)
+             },
+             editor: {
+                 xtype: &#39;combobox&#39;,
+                 allowBlank: false,
+                 queryMode: &#39;local&#39;,
+                 store:&#39;utilities.ProjectTypeStore&#39;,
+                 valueField: &#39;typeofProjectId&#39;,
+                 displayField: &#39;typeofProjectName&#39;
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;ShootDate&#39;).initCap(),
+             dataIndex: &#39;shootingDate&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;20%&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.renderDateOnly,
+             filterField: {
+                 xtype: &#39;dateSearchField&#39;,
+                 dataIndex: &#39;shootingDate&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipShootDate&#39;)
+             }, editor: {
+                 xtype: &#39;datefield&#39;
+             }
+         }, {///TODO : field to be added
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;ShootLocations&#39;).initCap(),
+             dataIndex: &#39;shootLocations&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;14%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipShootLocations&#39;)
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;WrapUpInsurance&#39;).initCap(),
+             dataIndex: &#39;isWrapUpInsurance&#39;,
+             sortable: false,
+             groupable: false,
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             width: &#39;15%&#39;,
+             editor: {
+                 xtype: &#39;checkboxfield&#39;
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Status&#39;),
+             dataIndex: &#39;jobStatusName&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;10%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipStatus&#39;)
+             },
+             editor: {
+                 xtype: &#39;combobox&#39;,
+                 queryMode: &#39;local&#39;,
+                 store: &#39;utilities.ProjectStatusStore&#39;,
+                 valueField: &#39;typeOfJobStatusId&#39;,
+                 displayField: &#39;jobStatusName&#39;
+             }
+         },
+         ////TODO : dummy columns for default manage view
+         {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;TotalCost&#39;).initCap(),
+             dataIndex: &#39;totalCost&#39;,
+             sortable: true,
+             groupable: true,
+             hidden:true,
+             width: &#39;10%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipTotalCost&#39;)
+             }
+         },{
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;BidContract&#39;).initCap(),
+             dataIndex: &#39;bidContractTotal&#39;,
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: &#39;12%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipBidContract&#39;)
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;ProducersActual&#39;).initCap(),
+             dataIndex: &#39;producersActual&#39;,
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: &#39;13%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipProducersActual&#39;)
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;BilledAmount&#39;).initCap(),
+             dataIndex: &#39;billedAmount&#39;,
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: &#39;13%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipBilledAmount&#39;)
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;RecievedAmount&#39;).initCap(),
+             dataIndex: &#39;recievedAmount&#39;,
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: &#39;13%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipRecievedAmount&#39;)
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Variance&#39;),
+             dataIndex: &#39;variance&#39;,
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: &#39;11%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipVariance&#39;)
+             }
+         }, {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;AgencyProducer&#39;).initCap(),
+             dataIndex: &#39;agencyProducer&#39;,
+             sortable: true,
+             groupable: true,
+             hidden: true,
+             width: &#39;13%&#39;,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 emptyText: app.localize(&#39;ToolTipAgencyProducer&#39;)
+             }
+         }
+
+    ]
+});
+</pre>
+</body>
+</html>

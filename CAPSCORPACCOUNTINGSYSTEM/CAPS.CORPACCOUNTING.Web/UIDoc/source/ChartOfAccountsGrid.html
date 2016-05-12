@@ -70,6 +70,9 @@ Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsGrid&#39;, {
     },
     createNewMode: &#39;tab&#39;,
     isSubMenuItemTab: true,
+    listeners: {
+        cellclick: &#39;onChartOfAccountClicked&#39;
+    },
     columns: [
          {
              xtype: &#39;gridcolumn&#39;,
@@ -78,12 +81,11 @@ Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsGrid&#39;, {
              sortable: true,
              groupable: true,
              width: &#39;50%&#39;,
+             renderer:Chaching.utilities.ChachingRenderers.rendererHyperLink,
              filterField: {
                  xtype: &#39;textfield&#39;,
                  width: &#39;100%&#39;,
-                 emptyText: &#39;Enter Chart Of Account to search&#39;
-             }, editor: {
-                 xtype: &#39;textfield&#39;,
+                 emptyText: app.localize(&#39;ChartOfAccountSearch&#39;)
              }
          }, {
              xtype: &#39;gridcolumn&#39;,
@@ -96,7 +98,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsGrid&#39;, {
              filterField: {
                  xtype: &#39;textfield&#39;,
                  width: &#39;100%&#39;,
-                 emptyText: &#39;Enter Description to search&#39;
+                 emptyText: app.localize(&#39;DescriptionSearch&#39;),
              }, editor: {
                  xtype: &#39;textfield&#39;,
              }
@@ -195,11 +197,11 @@ Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsGrid&#39;, {
              sortable: true,
              groupable: true,
              width: &#39;22%&#39;,
-             hidden: false
+             hidden: true
         , filterField: {
             xtype: &#39;textfield&#39;,
             width: &#39;100%&#39;,
-            emptyText: &#39;Enter Convert To New COA to search&#39;
+            emptyText:  app.localize(&#39;ConvertToNewCOASearch&#39;)
         }
          }, {
              xtype: &#39;gridcolumn&#39;,
@@ -212,8 +214,8 @@ Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsGrid&#39;, {
              filterField: {
                  xtype: &#39;textfield&#39;,
                  width: &#39;100%&#39;,
-                 entityName:&#39;&#39;,
-                 emptyText: &#39;Enter Std Group Total to search&#39;
+                 entityName: &#39;&#39;,
+                 emptyText: app.localize(&#39;StdGroupTotalSearch&#39;)
              }
          }
     ]

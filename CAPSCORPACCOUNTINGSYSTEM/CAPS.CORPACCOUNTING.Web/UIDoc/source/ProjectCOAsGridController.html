@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectCOAsGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.projects-projectmaintenance-projectcoasgrid&#39;,
+    onChartOfAccountClicked: function (tableView, td, cellIndex, record, tr, rowIndex, e, eOpts) {       
+        var me = this,
+            view = me.getView(),
+            tabPanel = view.up(&#39;tabpanel&#39;);
+        if (e &amp;&amp; e.target &amp;&amp; tabPanel) {
+            var horizontalTabPanel = tabPanel.up(&#39;tabpanel&#39;);
+            var target = e.target,
+                nodeName = target.nodeName;
+            if (nodeName === &quot;DIV&quot; &amp;&amp; target.attributes.isHyperLink) {
+                nodeName = &quot;A&quot;;
+            }
+            if (nodeName === &quot;A&quot; &amp;&amp; horizontalTabPanel) {
+                var accountsGrid = Ext.create({
+                    xtype: &#39;projects.projectmaintenance.linenumbers&#39;,
+                    hideMode: &#39;offsets&#39;,
+                    closable: true,
+                    title: abp.localization.localize(&quot;LineNumbers&quot;),
+                    routId: &#39;projects.projectmaintenance.linenumbers&#39;,
+                    coaId: record.get(&#39;coaId&#39;)                 
+                   
+                });              
+                var gridStore = accountsGrid.getStore(),                    
+                    storeProxy = gridStore.getProxy();
+                storeProxy.setExtraParam(&#39;coaId&#39;, record.get(&#39;coaId&#39;));
+                gridStore.load();
+                var tabLayout = horizontalTabPanel.getLayout();
+                if (tabLayout) {
+                    tabLayout.setActiveItem(horizontalTabPanel.add(accountsGrid));
+                }
+            }
+        }
+    },
+    doAfterCreateAction: function (createMode, formView, isEdit) {        
+        var viewModel = formView.getViewModel();
+        var form = formView.getForm();
+        if (isEdit) {      
+            var rollupDivision = viewModel.getStore(&#39;rollupDivisionList&#39;);
+            rollupDivision.load();
+            var rollupAccount = viewModel.getStore(&#39;genericRollupAccountList&#39;);
+            rollupAccount.load();
+        }
+        
+    }
+    
+});
+</pre>
+</body>
+</html>

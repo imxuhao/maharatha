@@ -17,20 +17,23 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.base.BaseModel&#39;, {
     extend: &#39;Ext.data.Model&#39;,
+    schema: {
+        namespace: &#39;Chaching.model&#39;
+    },
     config: {
         searchEntityName:&#39;&#39;
     },
     fields: [
         //common fields in all entities
         { name: &#39;tenantId&#39;, type: &#39;int&#39; },
-        { name: &#39;organizationUnitId&#39;, type: &#39;int&#39; },
+        { name: &#39;organizationUnitId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
         { name: &#39;isDeleted&#39;, type: &#39;boolean&#39; },
         { name: &#39;deletionTime&#39;, type: &#39;date&#39; },
-        { name: &#39;deleterUserId&#39;, type: &#39;int&#39; },
+        { name: &#39;deleterUserId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
         { name: &#39;lastModificationTime&#39;, type: &#39;date&#39;, dateFormat: &#39;c&#39; },
-        { name: &#39;lastModifierUserId&#39;, type: &#39;int&#39; },
+        { name: &#39;lastModifierUserId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
         { name: &#39;creationTime&#39;, type: &#39;date&#39;,dateFormat:&#39;c&#39;},
-        { name: &#39;creatorUserId&#39;, type: &#39;int&#39; },
+        { name: &#39;creatorUserId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
 
         //custom fields required for all entities
         { name: &#39;allowEdit&#39;, type: &#39;boolean&#39;, defaultValue: true },

@@ -17,7 +17,51 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsGridController&#39;, {
     extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
-    alias: &#39;controller.financials-accounts-chartofaccountsgrid&#39;
+    alias: &#39;controller.financials-accounts-chartofaccountsgrid&#39;,
+    onChartOfAccountClicked: function (tableView, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+        var me = this,
+            view = me.getView(),
+            tabPanel = view.up(&#39;tabpanel&#39;);
+        if (e &amp;&amp; e.target &amp;&amp; tabPanel) {
+            var horizontalTabPanel = tabPanel.up(&#39;tabpanel&#39;);
+            var target = e.target,
+                nodeName = target.nodeName;
+            if (nodeName === &quot;DIV&quot; &amp;&amp; target.attributes.isHyperLink) {
+                nodeName = &quot;A&quot;;
+            }
+            if (nodeName === &quot;A&quot; &amp;&amp; horizontalTabPanel) {
+                var accountsGrid = Ext.create({
+                    xtype: &#39;financials.accounts.accounts&#39;,
+                    hideMode: &#39;offsets&#39;,
+                    closable: true,
+                    title: abp.localization.localize(&quot;FinancialAccounts&quot;),
+                    routId: &#39;financials.accounts.accounts&#39;,
+                    coaId: record.get(&#39;coaId&#39;),
+                    linkChartOfAccountID: record.get(&#39;linkChartOfAccountID&#39;),
+                    iconCls: &#39;fa fa-book&#39;
+                    //titleConfig: titleConfig,
+                    //isEdit: isEdit
+                });
+                var gridStore = accountsGrid.getStore(),
+                    storeProxy = gridStore.getProxy();
+                storeProxy.setExtraParam(&#39;coaId&#39;, record.get(&#39;coaId&#39;));
+                gridStore.load();
+                var tabLayout = horizontalTabPanel.getLayout();
+                if (tabLayout) {
+                    tabLayout.setActiveItem(horizontalTabPanel.add(accountsGrid));
+                }
+            }
+        }
+    },
+    doAfterCreateAction: function (createMode, formView, isEdit) {
+        if (formView &amp;&amp; isEdit) {
+            var viewModel = formView.getViewModel();
+            var StandardGroupTotal = viewModel.getStore(&#39;StandardGroupTotalList&#39;);
+            StandardGroupTotal.load();
+            var linkChartOfAccount = viewModel.getStore(&#39;linkChartOfAccountList&#39;);
+            linkChartOfAccount.load();
+        }
+    }
     
 });
 </pre>

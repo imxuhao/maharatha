@@ -378,8 +378,19 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
         me.add(me.getFields());
 
         // inject space for checkbox selection model
-        if (&#39;Ext.selection.CheckboxModel&#39; === selModel.$className) {
+        if (&#39;Ext.selection.CheckboxModel&#39; === selModel.$className || &#39;Chaching.components.selection.CheckboxSelectionModel&#39; === selModel.$className) {
             //console.log(&#39;pushing checkbox column&#39;)
+            if (typeof(selModel.injectCheckbox)===&quot;string&quot;) {
+                switch (selModel.injectCheckbox) {
+                    case &quot;first&quot;:
+                        selModel.injectCheckbox = 0;
+                        break;
+                    case &quot;last&quot;:
+                        selModel.injectCheckbox = me.items.length + 1;
+                    default:
+                        break;
+                }
+            }
             me.items.insert(selModel.injectCheckbox, Ext.widget({
                 itemId: &#39;item-&#39; + selModel.injectCheckbox
                 , xtype: &#39;component&#39;
@@ -582,7 +593,7 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
             }
             if (&#39;iconCol&#39; === item.itemId) {
                 Ext.apply(cfg, me.getIcon());
-            }
+            } 
             //if(&#39;component&#39; !== cfg.xtype) {
             Ext.apply(cfg, {
                 itemId: item.itemId ? item.itemId : item.dataIndex || &#39;item&#39; + i
@@ -590,6 +601,12 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
             //}
 
             field = Ext.widget(cfg);
+            if ((field.xtype===&quot;combo&quot;||field.xtype===&quot;combobox&quot;)&amp;&amp;field.queryMode===&quot;local&quot;) {
+                var fieldStore = field.getStore();
+                if (fieldStore &amp;&amp; field.loadStoreOnCreate) {
+                    fieldStore.load();
+                }
+            }
             if (item.hidden) {
                 field.hidden = true;
             }
@@ -646,13 +663,27 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
         me.updateClearIcon(field);
 
 <span id='Ext-saki-grid-MultiSearch-method-customizeFilters'>    } // eo function doFieldChange
-</span>    ,customizeFilters:function(filter, field) {
+</span>    , customizeFilters: function (filter, field) {
         var me = this,
             gridStore = me.getStore(),
             model = gridStore.getModel(),
             entityName = model.$config.values.searchEntityName,
             dataField = model.getField(field.getItemId());
-       
+        if (!dataField) {
+            var references = model.references;
+            if (references) {
+                for (var k = 0; k &lt; references.length; k++) {
+                    var associatationModel = model.references[k].reference.getReader().getModel();
+                    if (associatationModel) {
+                        dataField = associatationModel.getField(field.getItemId());
+                    }
+                }
+            }
+           
+        }
+        if ((field.xtype === &quot;combo&quot; || field.xtype === &quot;combobox&quot;) &amp;&amp; field.forceSelection) {
+            filter.operator = &quot;=&quot;;
+        }
         if (filter &amp;&amp; field&amp;&amp;dataField) {
             if (typeof(field.entityName) !== &quot;undefined&quot;) {
                 filter.entity = field.entityName;
@@ -966,7 +997,9 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
         if (!v) {
             return { value: &#39;&#39; };
         }
-
+        if (typeof(v)===&#39;number&#39;) {
+            v = v.toString();
+        }
         va = v.split(re);
         if (2 &gt; va.length) {
             return { value: v };

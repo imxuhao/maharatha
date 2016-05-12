@@ -44,7 +44,7 @@ Ext.define(&#39;Chaching.view.manageView.ManageViewView&#39;,{
             searchTerm: me.parentGrid.gridId,
             comparator: 2,
             dataType: 0,
-            property: &#39;gridId&#39;,
+            property: &#39;viewId&#39;,
             value: me.parentGrid.gridId
         });
         filters.push(filter);
@@ -58,7 +58,7 @@ Ext.define(&#39;Chaching.view.manageView.ManageViewView&#39;,{
         });
         filters.push(filter);
         gridStore.clearFilter();
-        gridStore.filters.add(filters);
+        gridStore.filter(filters);
         form.getStore().load({
             callback: function(records, operation, success) {
                 var activeUserViewId = me.parentGrid.activeUserViewId;

@@ -24,6 +24,47 @@ $ui-tab-background-color-active:#F3F5F9,
 );
 .x-tab-bar-submenuTabs{
     border-radius:0 5px 0 0 !important;
+}
+
+@include extjs-tab-panel-ui(
+    $ui: &#39;formTabPanels&#39;,
+$ui-tab-background-color:transparent,
+    $ui-bar-background-color: transparent,
+$ui-tab-background-color-focus:transparent,
+$ui-tab-background-color-active:transparent,
+$ui-tab-background-color-focus-over:transparent,
+$ui-tab-background-color-focus-active:transparent,
+$ui-tab-font-size:15px,
+$ui-tab-font-weight:600,
+$ui-tab-color:black,
+$ui-tab-color-focus:#347EBF,
+$ui-tab-color-over:#347EBF,
+$ui-tab-color-active:#347EBF,
+    $ui-tab-border-radius: 5px 5px 0 0
+);
+
+.x-tab-icon-el-formTabPanels{
+    color:#737373 !important;
+}
+.x-tab.x-tab-active.x-tab-formTabPanels .x-tab-icon-el{
+color:#347EBF !important;
+}
+
+@include extjs-fieldset-ui(
+$ui:&#39;transparentFieldSet&#39;,
+$ui-header-font-size:15px,
+$ui-header-font-weight:600,
+$ui-header-line-height:15px,
+$ui-header-color:#347EBF,
+$ui-border-width:0px,
+$ui-border-color:transparent,
+$ui-header-padding:0px
+);
+
+.x-fieldset-transparentFieldSet{
+    background:transparent !important;
+    padding:0 0 5px 5px !important;
+    border-top:0px !important; 
 }</pre>
 </body>
 </html>

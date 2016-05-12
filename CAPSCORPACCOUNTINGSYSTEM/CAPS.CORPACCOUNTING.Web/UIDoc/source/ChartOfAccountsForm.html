@@ -59,7 +59,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsForm&#39;, {
             fieldLabel: app.localize(&#39;Caption&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
             width: &#39;100%&#39;,
             ui: &#39;fieldLabelTop&#39;,
-            emptyText: app.localize(&#39;Caption&#39;)
+            emptyText: app.localize(&#39;MandatoryField&#39;)
         }, {
             xtype: &#39;textfield&#39;,
             name: &#39;description&#39;,
@@ -68,7 +68,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsForm&#39;, {
             fieldLabel: app.localize(&#39;description&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
             width: &#39;100%&#39;,
             ui: &#39;fieldLabelTop&#39;,
-            emptyText: app.localize(&#39;Description&#39;)
+            emptyText: app.localize(&#39;MandatoryField&#39;)
         }, {
             xtype: &#39;checkbox&#39;,
             boxLabel: app.localize(&#39;IsApproved&#39;),
@@ -126,7 +126,8 @@ Ext.define(&#39;Chaching.view.financials.accounts.ChartOfAccountsForm&#39;, {
             name: &#39;isCorporate&#39;,
             labelAlign: &#39;right&#39;,
             inputValue: true,
-            checked: false,
+            checked: true,
+            readOnly:true,
             boxLabelCls: &#39;checkboxLabel&#39;
         }, {
             xtype: &#39;checkbox&#39;,

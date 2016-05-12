@@ -15,32 +15,61 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.data.proxy.BaseProxy&#39;, {
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * This Class is created as a base class for all Ext.data.Operations.
+ * Author: Krishna Garad
+ * Date: 31/03/2016
+ */
+<span id='Chaching-data-proxy-BaseProxy'>/**
+</span> * @class Chaching.data.proxy.BaseProxy
+ * The based class for all Ext.data.Operation.
+ * @alias proxy.chachingProxy
+ *
+ *     @example usage 
+ *     Ext.define(&#39;Chaching.store.CustomerStore&#39;, {
+ *     extend: &#39;Chaching.store.base.BaseStore&#39;,
+       pageSize: 1000,
+       model: &#39;Chaching.model.CustomerModel&#39;,
+       proxy: {
+        type: &#39;chachingProxy&#39;,
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+        api: {
+            read: abp.appPath + &#39;&#39;,
+            destroy:abp.appPath+&#39;&#39;
+        },
+        reader: {
+            type: &#39;json&#39;,
+            rootProperty: &#39;result&#39;
+        }
+        
+ *     });
+ */
+Ext.define(&#39;Chaching.data.proxy.BaseProxy&#39;, {
     extend: &#39;Ext.data.proxy.Ajax&#39;,
     alias: &#39;proxy.chachingProxy&#39;,
-    timeout: 6000000,
-    limitParam: &#39;maxResultCount&#39;,
-    startParam: &#39;skipCount&#39;,
-    sortParam: &#39;sortList&#39;,
-    filterParam: &#39;filters&#39;,
-    pageParam: &#39;&#39;,
-    headers: {
-        &#39;Accept&#39;: &#39;application/json, text/plain, */*&#39;,
+<span id='Chaching-data-proxy-BaseProxy-property-timeout'>    timeout: 6000000,
+</span><span id='Chaching-data-proxy-BaseProxy-property-limitParam'>    limitParam: &#39;maxResultCount&#39;,
+</span><span id='Chaching-data-proxy-BaseProxy-property-startParam'>    startParam: &#39;skipCount&#39;,
+</span><span id='Chaching-data-proxy-BaseProxy-property-sortParam'>    sortParam: &#39;sortList&#39;,
+</span><span id='Chaching-data-proxy-BaseProxy-property-filterParam'>    filterParam: &#39;filters&#39;,
+</span><span id='Chaching-data-proxy-BaseProxy-property-pageParam'>    pageParam: &#39;&#39;,
+</span><span id='Chaching-data-proxy-BaseProxy-property-headers'>    headers: {
+</span>        &#39;Accept&#39;: &#39;application/json, text/plain, */*&#39;,
         &#39;Content-Type&#39;: &#39;application/json;charset=UTF-8&#39;
     },
-    actionMethods: { create: &#39;POST&#39;, read: &#39;GET&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
-    paramsAsJson: true,
-
-    reader: {
-        type: &#39;json&#39;,
+<span id='Chaching-data-proxy-BaseProxy-property-actionMethods'>    actionMethods: { create: &#39;POST&#39;, read: &#39;GET&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+</span><span id='Chaching-data-proxy-BaseProxy-property-paramsAsJson'>    paramsAsJson: true,
+</span>
+<span id='Chaching-data-proxy-BaseProxy-property-reader'>    reader: {
+</span>        type: &#39;json&#39;,
         rootProperty: &#39;result.items&#39;,
         totalProperty: &#39;result.totalCount&#39;
     },
-    writer: {
-        type: &#39;json&#39;
+<span id='Chaching-data-proxy-BaseProxy-property-writer'>    writer: {
+</span>        type: &#39;json&#39;
     },
-    encodeFilters: function(filters) {
-        var filterArray = [];
+<span id='Chaching-data-proxy-BaseProxy-method-encodeFilters'>    encodeFilters: function(filters) {
+</span>        var filterArray = [];
         if (filters) {
             for (var i = 0; i &lt; filters.length; i++) {
                 var filterObject = {
@@ -57,8 +86,8 @@
         }
         return filters;
     },
-    encodeSorters: function (sorters) {
-        var me = this,
+<span id='Chaching-data-proxy-BaseProxy-method-encodeSorters'>    encodeSorters: function (sorters) {
+</span>        var me = this,
             model = me.getModel(),
             entityName = model.$config.values.searchEntityName;
         var sortersArray = [];
@@ -75,21 +104,66 @@
         }
         return sorters;
     },
-    listeners:
-    {
+<span id='Chaching-data-proxy-BaseProxy-method-doRequest'>    doRequest: function (operation) {
+</span>        var me = this,
+            writer = me.getWriter(),
+            request = me.buildRequest(operation),
+            method = me.getMethod(request),
+            jsonData, params;
+        if (writer &amp;&amp; operation.allowWrite()) {
+            request = writer.write(request);
+        }
+        request.setConfig({
+            binary: me.getBinary(),
+            headers: me.getHeaders(),
+            timeout: me.getTimeout(),
+            scope: me,
+            callback: me.createRequestCallback(request, operation),
+            method: method,
+            useDefaultXhrHeader: me.getUseDefaultXhrHeader(),
+            disableCaching: false
+        });
+        // explicitly set it to false, ServerProxy handles caching
+        if (method.toUpperCase() !== &#39;GET&#39; &amp;&amp; me.getParamsAsJson()) {
+            params = request.getParams();
+            if (params) {
+                //Set users logged in organizationId
+                if (!params.organizationUnitId)
+                    params.organizationUnitId = Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId;
+
+                jsonData = request.getJsonData();
+                if (jsonData) {
+                    jsonData = Ext.Object.merge({}, jsonData, params);
+                } else {
+                    jsonData = params;
+                }
+                request.setJsonData(jsonData);
+                request.setParams(undefined);
+            }
+        }
+        if (me.getWithCredentials()) {
+            request.setWithCredentials(true);
+            request.setUsername(me.getUsername());
+            request.setPassword(me.getPassword());
+        }
+        return me.sendRequest(request);
+    },
+<span id='Chaching-data-proxy-BaseProxy-property-listeners'>    listeners:
+</span>    {
         exception: function(proxy, request, operation) {
             if (request.responseText != undefined) {
                 // responseText was returned, decode it
                 try {
                     var responseObj = Ext.decode(request.responseText, true);
-
                 } catch (e) {
-                    Ext.Msg.alert(&#39;Error&#39;, &#39;Unknown error: The server did not send any information about the error.&#39;);
+                    abp.message.warn(&#39;Unknown error: The server did not send any information about the error.&#39;, &#39;Error&#39;);
+                    //Ext.Msg.alert(&#39;Error&#39;, &#39;Unknown error: The server did not send any information about the error.&#39;);
                 }
 
             } else {
+                abp.message.error(&#39;Unknown error: Unable to understand the response from the server&#39;, &#39;Error&#39;);
                 // no responseText sent
-                Ext.Msg.alert(&#39;Error&#39;, &#39;Unknown error: Unable to understand the response from the server&#39;);
+                // Ext.Msg.alert(&#39;Error&#39;, &#39;Unknown error: Unable to understand the response from the server&#39;);
             }
         }
     }

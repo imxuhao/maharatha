@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.address.AddressGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.address.AddressGridController&#39;
+    ],
+    controller: &#39;address-addressgrid&#39;,
+    xtype: &#39;address&#39;,
+    store: &#39;address.AddressStore&#39;,
+    name: &#39;address&#39;,
+    modulePermissions: {
+        read: true,
+        create: true,
+        edit: true,
+        destroy: true
+    },
+    padding: 5,
+    gridId: 17,
+    headerButtonsConfig: [{
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;Address&quot;),
+        ui: &#39;headerTitle&#39;
+    }, &#39;-&gt;&#39;, {
+        xtype: &#39;button&#39;,
+        scale: &#39;small&#39;,
+        ui: &#39;actionButton&#39;,
+        action: &#39;create&#39;,
+        text: abp.localization.localize(&quot;CreatingNewAddress&quot;).toUpperCase(),
+        checkPermission: false,
+        iconCls: &#39;fa fa-plus&#39;,
+        iconAlign: &#39;left&#39;
+    }],
+
+    requireExport: false,
+    requireMultiSearch: false,
+    requireMultisort: false,
+    isEditable: true,
+    editingMode: &#39;cell&#39;,
+    createNewMode: &#39;inline&#39;,
+    columnLines: true,
+    multiColumnSort: false,
+    manageViewSetting: false,
+    showPagingToolbar: false,
+    hideClearFilter: true,
+    columns: [
+    {
+        text: app.localize(&#39;Primary&#39;),
+        xtype: &#39;checkcolumn&#39;, dataIndex: &#39;isPrimary&#39;,
+        listeners: {
+            checkchange: function (column, recordIndex, checked) {
+                var store = this.up(&#39;grid&#39;).getStore();
+                Ext.each(store, function (record) {
+                    for (var i = 0; i &lt; record.count() ; i++) {
+                        record.getAt(i).set(&#39;isPrimary&#39;, false);
+                    }
+                    record.getAt(recordIndex).set(&#39;isPrimary&#39;, true);
+                });
+            }
+        }
+    },
+     {
+         text: abp.localization.localize(&quot;Type&quot;),
+         xtype: &#39;gridcolumn&#39;,
+         dataIndex: &#39;addressType&#39;,
+         sortable: true,
+         groupable: true,
+         width: &#39;15%&#39;,
+         editor: {
+             xtype: &#39;combobox&#39;,
+             valueField: &#39;addressTypeId&#39;,
+             displayField: &#39;addressType&#39;,
+             bind: {
+                 store: {
+                     fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                         name: &#39;addressType&#39;, convert: function (value, record) {
+                             return record.get(&#39;name&#39;);
+                         }
+                     }, {
+                         name: &#39;addressTypeId&#39;, convert: function (value, record) {
+                             return record.get(&#39;value&#39;);
+                         }
+                     }],
+                     xtype: &#39;ajax&#39;,
+                     proxy: {
+                         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                         type: &#39;chachingProxy&#39;,
+                         url: abp.appPath + &#39;api/services/app/vendorUnit/GetTypeofAddressList&#39;,
+                         reader: {
+                             type: &#39;json&#39;,
+                             rootProperty: &#39;result&#39;
+                         }
+                     }
+                 }
+             }
+         }
+     }
+     , {
+         xtype: &#39;gridcolumn&#39;,
+         text: app.localize(&#39;Country&#39;),
+         dataIndex: &#39;country&#39;,
+         sortable: true,
+         groupable: true,
+         width: &#39;8%&#39;,
+         editor: {
+             xtype: &#39;combobox&#39;,
+             valueField: &#39;countryId&#39;,
+             displayField: &#39;country&#39;,
+             bind: {
+                 store: {
+                     fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                         name: &#39;country&#39;, convert: function (value, record) {
+                             return record.get(&#39;name&#39;);
+                         }
+                     }, {
+                         name: &#39;countryId&#39;, convert: function (value, record) {
+                             return record.get(&#39;value&#39;);
+                         }
+                     }],
+                     xtype: &#39;ajax&#39;,
+                     proxy: {
+                         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                         type: &#39;chachingProxy&#39;,
+                         url: abp.appPath + &#39;api/services/app/vendorUnit/GetCountryList&#39;,
+                         reader: {
+                             type: &#39;json&#39;,
+                             rootProperty: &#39;result&#39;
+                         }
+                     }
+                 }
+             }
+         }
+     }
+        ,
+         {
+             text: app.localize(&#39;Address1&#39;),
+             dataIndex: &#39;line1&#39;,
+             xtype: &#39;gridcolumn&#39;,
+             sortable: false,
+             groupable: false,
+             //flex:1,
+             width: &#39;10%&#39;,
+             editor: {
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;line1&#39;
+             }
+         },
+          {
+              text: app.localize(&#39;Address2&#39;),
+              dataIndex: &#39;line2&#39;,
+              xtype: &#39;gridcolumn&#39;,
+              sortable: false,
+              groupable: false,
+              //flex:1,
+              width: &#39;13%&#39;,
+              editor: {
+                  xtype: &#39;textfield&#39;,
+                  name: &#39;line2&#39;
+              }
+          }
+          ,
+          {
+              text: app.localize(&#39;Address3&#39;),
+              dataIndex: &#39;line3&#39;,
+              xtype: &#39;gridcolumn&#39;,
+              sortable: false,
+              groupable: false,
+              //flex:1,
+              width: &#39;13%&#39;,
+              editor: {
+                  xtype: &#39;textfield&#39;,
+                  name: &#39;line3&#39;
+              }
+          },
+           {
+               text: app.localize(&#39;Contact&#39;),
+               dataIndex: &#39;contactNumber&#39;,
+               xtype: &#39;gridcolumn&#39;,
+               sortable: false,
+               groupable: false,
+               //flex:1,
+               width: &#39;13%&#39;,
+               editor: {
+                   xtype: &#39;textfield&#39;,
+                   name: &#39;line3&#39;
+               }
+           },
+          {
+              text: abp.localization.localize(&quot;ZipCode&quot;),
+              dataIndex: &#39;postalCode&#39;,
+              xtype: &#39;gridcolumn&#39;,
+              sortable: false,
+              groupable: false,
+              //flex:1,
+              width: &#39;10%&#39;,
+              editor: {
+                  xtype: &#39;textfield&#39;,
+                  name: &#39;postalCode&#39;
+              }
+          }
+           ,
+          {
+              text: app.localize(&#39;City&#39;),
+              dataIndex: &#39;city&#39;,
+              xtype: &#39;gridcolumn&#39;,
+              sortable: false,
+              groupable: false,
+              //flex:1,
+              width: &#39;10%&#39;,
+              editor: {
+                  xtype: &#39;textfield&#39;,
+                  name: &#39;city&#39;
+              }
+          }
+
+           , {
+               xtype: &#39;gridcolumn&#39;,
+               text: app.localize(&#39;State/Region&#39;),
+               dataIndex: &#39;state&#39;,
+               sortable: true,
+               groupable: true,
+               width: &#39;12%&#39;,
+               editor: {
+                   xtype: &#39;combobox&#39;,
+                   valueField: &#39;stateId&#39;,
+                   displayField: &#39;state&#39;,
+                   store: {
+                       fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                           name: &#39;state&#39;, convert: function (value, record) {
+                               return record.get(&#39;name&#39;);
+                           }
+                       }, {
+                           name: &#39;stateId&#39;, convert: function (value, record) {
+                               return record.get(&#39;value&#39;);
+                           }
+                       }],
+                       xtype: &#39;ajax&#39;,
+                       proxy: {
+                           actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                           type: &#39;chachingProxy&#39;,
+                           url: abp.appPath + &#39;api/services/app/vendorUnit/GetRegionList&#39;,
+                           reader: {
+                               type: &#39;json&#39;,
+                               rootProperty: &#39;result&#39;
+                           }
+                       }
+                   }
+               }
+
+
+           },
+
+           {
+               text: abp.localization.localize(&quot;Telephone&quot;),
+               dataIndex: &#39;phone1&#39;,
+               xtype: &#39;gridcolumn&#39;,
+               sortable: false,
+               groupable: false,
+               //flex:1,
+               width: &#39;10%&#39;,
+               editor: {
+                   xtype: &#39;textfield&#39;,
+                   name: &#39;phone1&#39;
+               }
+           }
+           ,
+           {
+               text: abp.localization.localize(&quot;Email&quot;),
+               dataIndex: &#39;email&#39;,
+               xtype: &#39;gridcolumn&#39;,
+               sortable: false,
+               groupable: false,
+               //flex:1,
+               width: &#39;10%&#39;,
+               editor: {
+                   xtype: &#39;textfield&#39;,
+                   name: &#39;email&#39;
+               }
+           }
+           //,
+           //{
+           //    text: abp.localization.localize(&quot;Website&quot;),
+           //    dataIndex: &#39;website&#39;,
+           //    xtype: &#39;gridcolumn&#39;,
+           //    sortable: false,
+           //    groupable: false,
+           //    //flex:1,
+           //    width: &#39;10%&#39;,
+           //    editor: {
+           //        xtype: &#39;textfield&#39;,
+           //        name: &#39;website&#39;
+           //    }
+           //}
+
+    ]
+});
+</pre>
+</body>
+</html>

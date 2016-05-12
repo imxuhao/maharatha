@@ -57,7 +57,7 @@
                     record.set(&#39;viewSettings&#39;, Ext.encode(userViewSetting));
                 } else {
                     record.set(&#39;userId&#39;, Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId);
-                    record.set(&#39;gridId&#39;, parentGrid.gridId);
+                    record.set(&#39;viewId&#39;, parentGrid.gridId);
                     record.set(&#39;id&#39;, 0);
                     record.set(&#39;viewSettings&#39;, Ext.encode(userViewSetting));
                 }
@@ -103,9 +103,9 @@
                             var cols = targetGrid.getColumns();
                             var settingsToApply = [];
                             var rec = {
-                                gridId: record.get(&#39;gridId&#39;),
+                                gridId: record.get(&#39;viewId&#39;),
                                 userViewId: record.get(&#39;userViewId&#39;),
-                                viewSettingName: record.get(&#39;viewSettingName&#39;),
+                                viewSettingName: record.get(&#39;viewName&#39;),
                                 viewSettings: record.get(&#39;viewSettings&#39;),
                                 isDefault: record.get(&#39;isDefault&#39;)
                             }

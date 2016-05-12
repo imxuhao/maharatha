@@ -15,7 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * This class is created as a base tabpanel for submenu items.
+ * Author: Krishna Garad
+ * Date Created: 12/05/2016
+ */
+<span id='Chaching-view-common-tab-ChachingTabPanel'>/**
+</span> * @class Chaching.view.common.tab.ChachingTabPanel
+ * Base TabPanel for subMenuItems.
+ */
 Ext.define(&#39;Chaching.view.common.tab.ChachingTabPanel&#39;,{
     extend: &#39;Ext.tab.Panel&#39;,
 
@@ -24,36 +32,36 @@ Ext.define(&#39;Chaching.view.common.tab.ChachingTabPanel&#39;,{
         &#39;Chaching.view.common.tab.ChachingTabPanelModel&#39;
     ],
 
-    controller: &#39;common-tab-chachingtabpanel&#39;,
-    viewModel: {
-        type: &#39;common-tab-chachingtabpanel&#39;
+<span id='Chaching-view-common-tab-ChachingTabPanel-property-controller'>    controller: &#39;common-tab-chachingtabpanel&#39;,
+</span><span id='Chaching-view-common-tab-ChachingTabPanel-property-viewModel'>    viewModel: {
+</span>        type: &#39;common-tab-chachingtabpanel&#39;
     },
-    ui: &#39;submenuTabs&#39;,
-    tabPosition: &#39;left&#39;,
-    tabStretchMax: true,
-    titleAlign: &#39;left&#39;,
-    //tabBarHeaderPosition: 1,
-    titleRotation: 0,
-    tabRotation: 2,//0
-    bodyStyle: {
+<span id='Chaching-view-common-tab-ChachingTabPanel-cfg-ui'>    ui: &#39;submenuTabs&#39;,
+</span><span id='Chaching-view-common-tab-ChachingTabPanel-cfg-tabPosition'>    tabPosition: &#39;left&#39;,
+</span><span id='Chaching-view-common-tab-ChachingTabPanel-cfg-tabStretchMax'>    tabStretchMax: true,
+</span><span id='Chaching-view-common-tab-ChachingTabPanel-property-titleAlign'>    titleAlign: &#39;left&#39;,
+</span><span id='Chaching-view-common-tab-ChachingTabPanel-property-titleRotation'>    //tabBarHeaderPosition: 1,
+</span>    titleRotation: 0,
+<span id='Chaching-view-common-tab-ChachingTabPanel-cfg-bodyStyle'><span id='Chaching-view-common-tab-ChachingTabPanel-cfg-tabRotation'>    tabRotation: 2,//0
+</span></span>    bodyStyle: {
         &#39;background-color&#39;: &#39;#F3F5F9&#39;
     },
-<span id='global-cfg-modulePermissions'>    /**
+<span id='Chaching-view-common-tab-ChachingTabPanel-cfg-modulePermissions'>    /**
 </span>  * @hide
   * @private
   * @cfg {object} modulePermissions
     * Override this config in child grid if has additional permissions
   */
     modulePermissions: undefined,
-    //creates dynamic tabs apart from items config of tabPanel
-    dynamicTabItems: null,
-    staticTabItems:null,
-    layout: {
-        type: &#39;card&#39;,
+<span id='Chaching-view-common-tab-ChachingTabPanel-property-dynamicTabItems'>    //creates dynamic tabs apart from items config of tabPanel
+</span>    dynamicTabItems: null,
+<span id='Chaching-view-common-tab-ChachingTabPanel-property-staticTabItems'>    staticTabItems:null,
+</span><span id='Chaching-view-common-tab-ChachingTabPanel-cfg-layout'>    layout: {
+</span>        type: &#39;card&#39;,
         anchor: &#39;100%&#39;
     },
-    initComponent: function() {
-        var me = this,
+<span id='Chaching-view-common-tab-ChachingTabPanel-method-initComponent'>    initComponent: function() {
+</span>        var me = this,
             controller = me.getController(),
             items = [];
 
@@ -86,8 +94,8 @@ Ext.define(&#39;Chaching.view.common.tab.ChachingTabPanel&#39;,{
         me.callParent(arguments);
         me.on(&#39;tabchange&#39;, controller.onSubMenuItemTabChange);
     },
-    getDynamicTabItems:function() {
-        var me = this,
+<span id='Chaching-view-common-tab-ChachingTabPanel-method-getDynamicTabItems'>    getDynamicTabItems:function() {
+</span>        var me = this,
            controller = me.getController(),
            items;
         var dynamicItems = me.dynamicTabItems;
@@ -109,8 +117,8 @@ Ext.define(&#39;Chaching.view.common.tab.ChachingTabPanel&#39;,{
         }
         return items;
     },
-    getStaticTabItems:function() {
-        var me = this,
+<span id='Chaching-view-common-tab-ChachingTabPanel-method-getStaticTabItems'>    getStaticTabItems:function() {
+</span>        var me = this,
             controller = me.getController(),
             items;
         var staticItems = me.staticTabItems;

@@ -16,14 +16,13 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.Jobcasting.JobCommercialsModel&#39;, {
-    extend: &#39;Chaching.model.base.BaseModel&#39;,
-    config: {
-        searchEntityName: &#39;&#39;
-    },
+    extend: &#39;Chaching.model.projects.projectmaintenance.ProjectModel&#39;,
+    //config: {
+    //    searchEntityName: &#39;&#39;
+    //},
     fields: [
-            { name: &#39;jobCommercialId&#39;, type: &#39;int&#39; ,isPrimaryKey: true},
-            { name: &#39;jobId&#39;, type: &#39;int&#39; },
-            { name: &#39;caption&#39;, type: &#39;int&#39;},
+            { name: &#39;jobCommercialId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;jobId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
             { name: &#39;bidDate&#39;, type: &#39;date&#39;},
             { name: &#39;awardDate&#39;, type: &#39;date&#39;},
             { name: &#39;shootingDate&#39;, type: &#39;date&#39;},
@@ -34,17 +33,17 @@
             { name: &#39;finalShootDate&#39;, type: &#39;date&#39;},
             { name: &#39;productOwner&#39;, type: &#39;string&#39;},
             { name: &#39;productName&#39;, type: &#39;string&#39;},
-            { name: &#39;executiveProducerId&#39;, type: &#39;int&#39;},
-            { name: &#39;directorEmployeeId&#39;, type: &#39;int&#39;},
-            { name: &#39;producerEmployeeId&#39;, type: &#39;int&#39;},
-            { name: &#39;dirOfPhotoEmployeeId&#39;, type: &#39;int&#39;},
-            { name: &#39;setDesignerEmployeeId&#39;, type: &#39;int&#39;},
-            { name: &#39;artDirectorEmployeeId&#39;, type: &#39;int&#39;},
-            { name: &#39;editorEmployeeId&#39;, type: &#39;int&#39;},
-            { name: &#39;salesRepId&#39;, type: &#39;int&#39;},
-            { name: &#39;agencyId&#39;, type: &#39;int&#39;},
-            { name: &#39;agencyClientCustomerId&#39;, type: &#39;int&#39;},
-            { name: &#39;thirdPartyCustomerId&#39;, type: &#39;int&#39;},
+            { name: &#39;executiveProducerId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;directorEmployeeId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;producerEmployeeId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;dirOfPhotoEmployeeId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;setDesignerEmployeeId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;artDirectorEmployeeId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;editorEmployeeId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;salesRepId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;agencyId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;agencyClientCustomerId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;thirdPartyCustomerId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;agencyProducer&#39;, type: &#39;string&#39;},
             { name: &#39;agencyProducerContactInfo&#39;, type: &#39;string&#39;},
             { name: &#39;agencyArtDirector&#39;, type: &#39;string&#39;},
@@ -55,7 +54,8 @@
             { name: &#39;agencyBusMgrContactInfo&#39;, type: &#39;string&#39;},
             { name: &#39;agencyJobNumber&#39;, type: &#39;string&#39;},
             { name: &#39;agencyPONumber&#39;, type: &#39;string&#39;},
-            { name: &#39;agencyName&#39;, type: &#39;string&#39;},
+            { name: &#39;agencyName&#39;, type: &#39;string&#39; },
+            {name:&#39;agency&#39;,type:&#39;string&#39;},
             { name: &#39;agencyAddress&#39;, type: &#39;string&#39;},
             { name: &#39;agencyPhone&#39;, type: &#39;string&#39;},
             { name: &#39;commercialTitle1&#39;, type: &#39;string&#39;},
@@ -90,9 +90,8 @@
             { name: &#39;isWrapUpInsurance&#39;, type: &#39;boolean&#39;},
             { name: &#39;isFringeAccountSeparate&#39;, type: &#39;boolean&#39;},
             { name: &#39;isOTon&#39;, type: &#39;boolean&#39;},
-            { name: &#39;agencyEmail&#39;, type: &#39;string&#39;},
-            { name: &#39;organizationUnitId&#39;, type: &#39;int&#39;},
-            { name: &#39;isWrapUpInsurance&#39;, type: &#39;boolean&#39;}
+            { name: &#39;agencyEmail&#39;, type: &#39;string&#39; },
+            {name:&#39;directorName&#39;,type:&#39;string&#39;}
     ]
 });
 

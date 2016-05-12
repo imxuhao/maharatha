@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The viewController class for projects/jobs list
+ * Author: Krishna Garad
+ * Date: 28/04/2016
+ */
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGridController'>/**
+</span> * @class Chaching.view.projects.projectmaintenance.ProjectsGridController
+ * ViewController class for project/job.
+ * @alias controller.projects-projectmaintenance-projectsgrid
+ */
+Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.projects-projectmaintenance-projectsgrid&#39;,
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGridController-method-doAfterCreateAction'>    doAfterCreateAction: function(createMode, formPanel, isEdit,record) {
+</span>        var form = undefined;
+        var viewModel = undefined;
+        if (formPanel) {
+            form = formPanel.getForm();
+            viewModel = formPanel.getViewModel();
+        }
+
+        if (form &amp;&amp; viewModel) {
+            var budgetFormatFieldStore = form.findField(&#39;chartOfAccountId&#39;).getStore();
+            budgetFormatFieldStore.load();
+          
+            var rollUpAccountsStore = viewModel.getStore(&#39;genericRollupAccountList&#39;);
+            rollUpAccountsStore.load();
+
+            var rollUpJobStore = form.findField(&#39;rollupJobId&#39;).getStore();
+            rollUpJobStore.load();
+
+            var currencyStore = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
+            currencyStore.load();
+
+            var projectStatusStore = form.findField(&#39;typeOfJobStatusId&#39;).getStore();
+            projectStatusStore.load();
+
+            var projectTypeStore = form.findField(&#39;typeofProjectId&#39;).getStore();
+            projectTypeStore.load();
+
+            var taxCreditStore = viewModel.getStore(&#39;getTaxCreditList&#39;);
+            taxCreditStore.load();
+
+            if (isEdit) {
+                //enable all tabs
+                var projectDetails = formPanel.down(&#39;*[itemId=ProjectDetailsTab]&#39;);
+                if (projectDetails) {
+                    projectDetails.setDisabled(false);
+                }
+                var cmTab = formPanel.down(&#39;*[itemId=CostManagerTab]&#39;);
+                if (cmTab) cmTab.setDisabled(false);
+                var pcAccountTab = formPanel.down(&#39;*[itemId=PCAccountTab]&#39;);
+                if (pcAccountTab) pcAccountTab.setDisabled(false);
+                var poLogTab = formPanel.down(&#39;*[itemId=POLogTab]&#39;);
+                if (poLogTab) poLogTab.setDisabled(false);
+                var lineNumberTab = formPanel.down(&#39;*[itemId=LineNumbersTab]&#39;);
+                if (lineNumberTab) lineNumberTab.setDisabled(false);
+
+                var customerStore = form.findField(&#39;agencyId&#39;).getStore();//viewModel.getStore(&#39;getCustomersList&#39;);
+                customerStore.load();
+
+                var directorsStore = form.findField(&#39;directorEmployeeId&#39;).getStore();
+                var filters = [
+                    {
+                        entity: &#39;Employee&#39;,
+                        searchTerm: true,
+                        comparator: 1,
+                        dataType: 3,
+                        property: &#39;isDirector&#39;,
+                        value: true
+                    }
+                ];
+                directorsStore.filter(filters);
+                directorsStore.load();
+
+                var producersStore = form.findField(&#39;executiveProducerId&#39;).getStore();//viewModel.getStore(&#39;getProducersList&#39;);
+                filters = [
+                    {
+                        entity: &#39;Employee&#39;,
+                        searchTerm: true,
+                        comparator: 1,
+                        dataType: 3,
+                        property: &#39;isProducer&#39;,
+                        value: true
+                    }
+                ];
+                producersStore.filter(filters);
+                producersStore.load();
+
+                var dirOfPhotStore = form.findField(&#39;dirOfPhotoEmployeeId&#39;).getStore();
+                filters = [
+                   {
+                       entity: &#39;Employee&#39;,
+                       searchTerm: true,
+                       comparator: 1,
+                       dataType: 3,
+                       property: &#39;isDirPhoto&#39;,
+                       value: true
+                   }
+                ];
+                dirOfPhotStore.filter(filters);
+                dirOfPhotStore.load();
+
+                var jobAccountGridStore = formPanel.down(&#39;gridpanel[itemId=jobAccountsGridPanel]&#39;).getStore();
+                var jobAccountProxy = jobAccountGridStore.getProxy();
+                jobAccountProxy.setExtraParam(&#39;chartofAccountId&#39;, record.get(&#39;chartOfAccountId&#39;));
+                jobAccountProxy.setExtraParam(&#39;jobId&#39;, record.get(&#39;jobId&#39;));
+                jobAccountGridStore.load();
+
+                var jobLocationsStore = formPanel.down(&#39;gridpanel[itemId=jobLocationsGridPanel]&#39;).getStore();
+                jobLocationsStore.getProxy().setExtraParam(&#39;jobId&#39;, record.get(&#39;jobId&#39;));
+                jobLocationsStore.load();
+
+                var poAllocationStore = formPanel.down(&#39;gridpanel[itemId=jobPurchaseOrderAllocation]&#39;).getStore();
+                poAllocationStore.getProxy().setExtraParam(&#39;jobId&#39;, record.get(&#39;jobId&#39;));
+                poAllocationStore.load();
+            }
+        }
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGridController-method-onProjectsCellClick'>    onProjectsCellClick: function(view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+</span>        var me = this,
+            grid = me.getView(),
+            columns = grid.getColumns(),
+            tabPanel = view.up(&#39;tabpanel&#39;);
+        if (e &amp;&amp; e.target &amp;&amp; tabPanel) {
+            var horizontalTabPanel = tabPanel.up(&#39;tabpanel&#39;);
+            var target = e.target,
+                nodeName = target.nodeName;
+            if (nodeName === &quot;DIV&quot; &amp;&amp; target.attributes.isHyperLink) {
+                nodeName = &quot;A&quot;;
+            }
+            var column = columns[cellIndex];
+            if (nodeName === &quot;A&quot; &amp;&amp; horizontalTabPanel&amp;&amp;column) {
+                var formView = undefined;
+                switch (column.dataIndex) {
+                    case &quot;jobNumber&quot;:
+                        formView = me.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, record);
+                        break;
+                    case &quot;caption&quot;:
+                        formView = me.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, record);
+                        if (formView) {
+                            formView.down(&#39;tabpanel&#39;).setActiveItem(3);
+                        }
+                        break;
+                    case &quot;detailTransactions&quot;:
+                        abp.notify.info(&#39;Comming sooooooooooon.....&#39;, &#39;Not available&#39;);
+                        break;
+                    case &quot;poLogCount&quot;:
+                        formView = me.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, record);
+                        if (formView) {
+                            formView.down(&#39;tabpanel&#39;).setActiveItem(5);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (formView) {
+                    formView.getForm().loadRecord(record);
+                }
+            }
+        }
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGridController-method-doPostSaveOperations'>    doPostSaveOperations: function(records, operation, success) {
+</span>        var deferred = new Ext.Deferred();
+        if (records) {
+            var record = records[0];
+            if (record.get(&#39;agencyEmail&#39;) === &quot;&quot;) record.data.agencyEmail = null;
+            Ext.Ajax.request({
+                url: abp.appPath + &#39;api/services/app/jobCommercial/UpdateJobDetailUnit&#39;,
+                jsonData: Ext.encode(record.data),
+                success: function(response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        deferred.resolve(response.responseText);
+                    } else {
+                        deferred.reject(response.responseText);
+                    }
+                },
+                failure: function(response, opts) {
+                    deferred.reject(response.responseText);
+                }
+            });
+        }
+        return deferred.promise;
+    }
+});
+</pre>
+</body>
+</html>

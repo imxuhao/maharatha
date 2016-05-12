@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.projects.projectmaintenance.ContractsView&#39;,{
+    extend: &#39;Ext.panel.Panel&#39;,
+    alias: [&#39;widget.projects.projectmaintenance.contracts&#39;],
+    requires: [
+        &#39;Chaching.view.projects.projectmaintenance.ContractsViewController&#39;
+    ],
+
+    controller: &#39;projects-projectmaintenance-contractsview&#39;,    
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Contracts&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Contracts.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Contracts.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Contracts.Delete&#39;),
+    },
+    html: &#39;Hello, World!!&#39;
+});
+</pre>
+</body>
+</html>

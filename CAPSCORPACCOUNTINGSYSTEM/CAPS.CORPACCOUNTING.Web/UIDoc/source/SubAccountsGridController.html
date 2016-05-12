@@ -17,8 +17,14 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGridController&#39;, {
     extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
-    alias: &#39;controller.financials-accounts-subaccountsgrid&#39;
-    
+    alias: &#39;controller.financials-accounts-subaccountsgrid&#39;,
+    doAfterCreateAction: function (createMode, formView, isEdit) {
+        if (formView &amp;&amp; isEdit) {
+            var viewModel = formView.getViewModel();
+            var typeOfSubAccount = viewModel.getStore(&#39;typeOfSubAccountList&#39;);
+            typeOfSubAccount.load();
+        }
+    }
 });
 </pre>
 </body>

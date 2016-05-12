@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.projects-projectmaintenance-linenumbersgrid&#39;,
+    doAfterCreateAction: function (createMode, formView, isEdit) {      
+        var viewModel = formView.getViewModel();
+        var form = formView.getForm();
+        form.findField(&quot;chartOfAccountId&quot;).setValue(formView.parentGrid.coaId);
+        if (isEdit) {
+            var typeOfCurrency = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
+            typeOfCurrency.load();
+            var typeOfAccount = viewModel.getStore(&#39;typeOfAccountList&#39;);
+            typeOfAccount.load();
+            var typeofConsolidation = viewModel.getStore(&#39;typeofConsolidationList&#39;);
+            typeofConsolidation.load();
+            var rollupAccountList = form.findField(&#39;rollupAccountId&#39;).getStore();
+            var coaId = form.findField(&#39;chartOfAccountId&#39;).value;
+            rollupAccountList.getProxy().setExtraParam(&#39;Id&#39;, coaId);
+            rollupAccountList.load();
+            var rollupDivisionList = viewModel.getStore(&#39;rollupDivisionList&#39;);
+            rollupDivisionList.load();
+        }
+    }
+
+});
+</pre>
+</body>
+</html>

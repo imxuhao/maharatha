@@ -70,15 +70,15 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         if (widgetRec && grid) {
             var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, widgetRec);
 
-            var modelField = gridStore.getModel().getFields();
-            if (modelField) {
-                Ext.each(modelField, function(field) {
-                    if (field.isPrimaryKey) {
-                        widgetRec.set('id', widgetRec.get(field.name));
-                        return;
-                    }
-                });
-            }
+            //var modelField = gridStore.getModel().getFields();
+            //if (modelField) {
+            //    Ext.each(modelField, function(field) {
+            //        if (field.isPrimaryKey) {
+            //            widgetRec.set('id', widgetRec.get(field.name));
+            //            return;
+            //        }
+            //    });
+            //}
 
             var form, formPanel;
             if (formView && formView.isWindow) {
@@ -216,7 +216,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     handleFulFillResponse: function (records, operation, success) {
         if (success) {
             var action = operation.getAction();
-            if (action === "create" || action === "destroy") {
+            if (action === "create" || action === "destroy"||action==="update") {
                 var controller = operation.controller;
                 controller.doReloadGrid();
             }

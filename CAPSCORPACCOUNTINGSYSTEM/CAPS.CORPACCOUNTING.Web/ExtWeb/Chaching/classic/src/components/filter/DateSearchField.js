@@ -20,7 +20,11 @@ Ext.define('Chaching.components.filter.DateSearchField', {
     alias: 'widget.dateSearchField',
     uses: ['Ext.picker.Date', 'Ext.menu.DatePicker'],
     displayField: 'FilterValue',
-    valueField:'FilterValue',
+    valueField: 'FilterValue',
+    listConfig: {
+        minWidth: 300
+        ,width:350
+    },
     initComponent: function () {
         var me = this;
         var gridStore = Ext.create('Ext.data.ArrayStore', {

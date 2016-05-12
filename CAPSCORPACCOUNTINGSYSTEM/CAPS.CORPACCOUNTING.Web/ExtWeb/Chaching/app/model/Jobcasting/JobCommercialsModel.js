@@ -4,8 +4,8 @@ Ext.define('Chaching.model.Jobcasting.JobCommercialsModel', {
     //    searchEntityName: ''
     //},
     fields: [
-            { name: 'jobCommercialId', type: 'int' ,isPrimaryKey: true},
-            { name: 'jobId', type: 'int' },
+            { name: 'jobCommercialId', type: 'int', defaultValue: null, convert: nullHandler },
+            { name: 'jobId', type: 'int', isPrimaryKey: true },
             { name: 'bidDate', type: 'date'},
             { name: 'awardDate', type: 'date'},
             { name: 'shootingDate', type: 'date'},
@@ -74,8 +74,7 @@ Ext.define('Chaching.model.Jobcasting.JobCommercialsModel', {
             { name: 'isFringeAccountSeparate', type: 'boolean'},
             { name: 'isOTon', type: 'boolean'},
             { name: 'agencyEmail', type: 'string' },
-            {name:'directorName',type:'string'},
-            { name: 'organizationUnitId', type: 'int', defaultValue: null, convert: nullHandler }
+            {name:'directorName',type:'string'}
     ]
 });
 

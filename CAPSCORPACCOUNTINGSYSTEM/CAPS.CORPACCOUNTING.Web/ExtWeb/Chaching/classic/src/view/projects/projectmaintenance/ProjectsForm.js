@@ -96,11 +96,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         itemId: 'typeofProjectId',
                                         allowBlank: false,
                                         queryMode: 'local',
-                                        bind: {
-                                            store: '{getProjectTypeList}'
-                                        },
-                                        valueField: 'value',
-                                        displayField: 'name',
+                                        store:'utilities.ProjectTypeStore',
+                                        valueField: 'typeofProjectId',
+                                        displayField: 'typeofProjectName',
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         fieldLabel: app.localize('ProjectType') + Chaching.utilities.ChachingGlobals.mandatoryFlag,
@@ -199,11 +197,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         name: 'typeOfJobStatusId',
                                         itemId: 'typeOfJobStatusId',
                                         queryMode: 'local',
-                                        bind: {
-                                            store: '{projectStatusList}'
-                                        },
-                                        valueField: 'value',
-                                        displayField: 'name',
+                                        store:'utilities.ProjectStatusStore',
+                                        valueField: 'typeOfJobStatusId',
+                                        displayField: 'jobStatusName',
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         fieldLabel: app.localize('Status'),
@@ -350,9 +346,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             name: 'agencyId',
                             itemId: 'agencyId',
                             fieldLabel: app.localize('Agency'),
-                            bind: {
-                                store: '{getCustomersList}'
-                            },
+                            store:'customers.CustomersStore',
                             valueField: 'customerId',
                             displayField: 'firstName',
                             queryMode: 'local',
@@ -375,9 +369,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'combobox',
                             name: 'thirdPartyCustomerId',
                             itemId: 'thirdPartyCustomerId',
-                            bind: {
-                                store: '{getCustomersList}'
-                            },
+                            store: 'customers.CustomersStore',
                             valueField: 'customerId',
                             displayField: 'firstName',
                             queryMode: 'local',
@@ -582,10 +574,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'combobox',
                             name: 'directorEmployeeId',
                             itemId: 'directorEmployeeId',
-                            bind: {
-                                store: '{getDirectorsList}'
-                            },
-                            valueField: 'employeeId',
+                            store: new Chaching.store.employee.EmployeeStore(),
+                            valueField: 'directorEmployeeId',
                             displayField: 'firstName',
                             queryMode:'local',
                             fieldLabel: app.localize('Director'),
@@ -598,10 +588,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'combobox',
                             name: 'executiveProducerId',
                             itemId: 'executiveProducerId',
-                            bind: {
-                                store: '{getProducersList}'
-                            },
-                            valueField: 'employeeId',
+                            store: new Chaching.store.employee.EmployeeStore(),
+                            valueField: 'executiveProducerId',
                             displayField: 'firstName',
                             queryMode: 'local',
                             listConfig: {
@@ -615,10 +603,11 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'combobox',
                             name: 'dirOfPhotoEmployeeId',
                             itemId: 'dirOfPhotoEmployeeId',
-                            bind: {
-                                store: '{getDirofPhotoList}'
-                            },
-                            valueField: 'employeeId',
+                            store: new Chaching.store.employee.EmployeeStore(),
+                            //bind: {
+                            //    store: '{getDirofPhotoList}'
+                            //},
+                            valueField: 'dirOfPhotoEmployeeId',
                             displayField: 'firstName',
                             queryMode: 'local',
                             listConfig: {

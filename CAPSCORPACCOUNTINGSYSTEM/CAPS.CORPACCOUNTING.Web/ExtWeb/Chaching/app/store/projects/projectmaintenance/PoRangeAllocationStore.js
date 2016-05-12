@@ -17,13 +17,13 @@ Ext.define('Chaching.store.projects.projectmaintenance.PoRangeAllocationStore', 
         extraParams: {
             jobId: 0
         },
-        api: {///TODO : update urls once service is ready
-            read: abp.appPath + '',
-            destroy:abp.appPath+''
+        api: {
+            read: abp.appPath + 'api/services/app/jobPORangeAllocationUnit/GetJobPORangeAllocationByJobId',
+            destroy: abp.appPath + 'api/services/app/jobPORangeAllocationUnit/DeleteJobPORangeAllocationUnit'
         },
         reader: {
             type: 'json',
-            rootProperty: 'result'
+            rootProperty: 'result.items'
         }
     },
     idPropertyField: 'poRangeId'//important to set for add/update of records

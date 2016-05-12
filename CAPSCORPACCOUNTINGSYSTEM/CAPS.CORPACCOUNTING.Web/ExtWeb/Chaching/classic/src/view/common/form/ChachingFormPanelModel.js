@@ -342,19 +342,6 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }
         },
-        projectStatusList: {
-            fields: [{ name: 'name' }, { name: 'value' }],
-            xtype: 'ajax',
-            proxy: {
-                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-                type: 'chachingProxy',
-                url: abp.appPath + 'api/services/app/jobUnit/GetProjectStatusList',
-                reader: {
-                    type: 'json',
-                    rootProperty: 'result'
-                }
-            }
-        },
         genericRollupAccountList: {
             fields: [{ name: 'name' }, { name: 'value' }],
             xtype: 'ajax',
@@ -365,105 +352,6 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 reader: {
                     type: 'json',
                     rootProperty: 'result'
-                }
-            }
-        },
-        getProjectTypeList: {
-            fields: [{ name: 'name' }, { name: 'value' }],
-            xtype: 'ajax',
-            proxy: {
-                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-                type: 'chachingProxy',
-                url: abp.appPath + 'api/services/app/jobUnit/GetProjectTypeList',
-                reader: {
-                    type: 'json',
-                    rootProperty: 'result'
-                }
-            }
-        },
-        getCustomersList: {
-            model: 'Chaching.model.customers.CustomersModel',
-            xtype: 'ajax',
-            pageSize: 1000,
-            proxy: {
-                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-                type: 'chachingProxy',
-                url: abp.appPath + 'api/services/app/customerUnit/GetCustomerUnits',
-                reader: {
-                    type: 'json',
-                    rootProperty: 'result.items'
-                }
-            }
-        },
-        getDirectorsList: {
-            model: 'Chaching.model.employee.EmployeeModel',
-            xtype: 'ajax',
-            pageSize: 1000,
-            proxy: {
-                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-                type: 'chachingProxy',
-                extraParams: {
-                    filters: [{
-                        entity: 'Employee',
-                        searchTerm: true,
-                        comparator: 1,
-                        dataType: 3,
-                        property: 'isDirector',
-                        value: true
-                    }]
-                },
-                url: abp.appPath + 'api/services/app/employeeUnit/GetEmployeeUnits',
-                reader: {
-                    type: 'json',
-                    rootProperty: 'result.items'
-                }
-            }
-        },
-        getProducersList: {
-            model: 'Chaching.model.employee.EmployeeModel',
-            xtype: 'ajax',
-            pageSize: 1000,
-            proxy: {
-                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-                type: 'chachingProxy',
-                extraParams: {
-                    filters: [{
-                        entity: 'Employee',
-                        searchTerm: true,
-                        comparator: 1,
-                        dataType: 3,
-                        property: 'isProducer',
-                        value: true
-                    }]
-                },
-                url: abp.appPath + 'api/services/app/employeeUnit/GetEmployeeUnits',
-                reader: {
-                    type: 'json',
-                    rootProperty: 'result.items'
-                }
-            }
-        },
-        getDirofPhotoList: {
-            model: 'Chaching.model.employee.EmployeeModel',
-            xtype: 'ajax',
-            pageSize: 1000,
-            proxy: {
-                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-                type: 'chachingProxy',
-                extraParams: {
-                    filters: [{
-                        entity: 'Employee',
-                        searchTerm: true,
-                        comparator: 1,
-                        dataType: 3,
-                        property: 'isDirPhoto',
-                        value: true
-                    }]
-                },
-                url: abp.appPath + 'api/services/app/employeeUnit/GetEmployeeUnits',
-                reader: {
-                    type: 'json',
-                    rootProperty: 'result.items'
                 }
             }
         },

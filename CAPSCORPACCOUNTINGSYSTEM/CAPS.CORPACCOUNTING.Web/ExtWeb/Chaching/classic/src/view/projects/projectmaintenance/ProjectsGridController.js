@@ -32,10 +32,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
             var currencyStore = viewModel.getStore('typeOfCurrencyList');
             currencyStore.load();
 
-            var projectStatusStore = viewModel.getStore('projectStatusList');
+            var projectStatusStore = form.findField('typeOfJobStatusId').getStore();
             projectStatusStore.load();
 
-            var projectTypeStore = viewModel.getStore('getProjectTypeList');
+            var projectTypeStore = form.findField('typeofProjectId').getStore();
             projectTypeStore.load();
 
             var taxCreditStore = viewModel.getStore('getTaxCreditList');
@@ -56,16 +56,49 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
                 var lineNumberTab = formPanel.down('*[itemId=LineNumbersTab]');
                 if (lineNumberTab) lineNumberTab.setDisabled(false);
 
-                var customerStore = viewModel.getStore('getCustomersList');
+                var customerStore = form.findField('agencyId').getStore();//viewModel.getStore('getCustomersList');
                 customerStore.load();
 
-                var directorsStore = viewModel.getStore('getDirectorsList');
+                var directorsStore = form.findField('directorEmployeeId').getStore();
+                var filters = [
+                    {
+                        entity: 'Employee',
+                        searchTerm: true,
+                        comparator: 1,
+                        dataType: 3,
+                        property: 'isDirector',
+                        value: true
+                    }
+                ];
+                directorsStore.filter(filters);
                 directorsStore.load();
 
-                var producersStore = viewModel.getStore('getProducersList');
+                var producersStore = form.findField('executiveProducerId').getStore();//viewModel.getStore('getProducersList');
+                filters = [
+                    {
+                        entity: 'Employee',
+                        searchTerm: true,
+                        comparator: 1,
+                        dataType: 3,
+                        property: 'isProducer',
+                        value: true
+                    }
+                ];
+                producersStore.filter(filters);
                 producersStore.load();
 
-                var dirOfPhotStore = viewModel.getStore('getDirofPhotoList');
+                var dirOfPhotStore = form.findField('dirOfPhotoEmployeeId').getStore();
+                filters = [
+                   {
+                       entity: 'Employee',
+                       searchTerm: true,
+                       comparator: 1,
+                       dataType: 3,
+                       property: 'isDirPhoto',
+                       value: true
+                   }
+                ];
+                dirOfPhotStore.filter(filters);
                 dirOfPhotStore.load();
 
                 var jobAccountGridStore = formPanel.down('gridpanel[itemId=jobAccountsGridPanel]').getStore();

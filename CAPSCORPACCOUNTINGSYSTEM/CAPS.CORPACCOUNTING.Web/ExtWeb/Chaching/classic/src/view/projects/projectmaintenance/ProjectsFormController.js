@@ -76,7 +76,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
             view = me.getView(),
             parentGrid = view.parentGrid,
             values = view.getValues();
-        var jobLocations = [];
+        var jobLocations = [],
+            poRanges = [];
+        
         if (parentGrid) {
             var gridStore = parentGrid.getStore(),
                idPropertyField = gridStore.idPropertyField,
@@ -110,6 +112,22 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
                     jobLocations.push(record);
                 });
                 values.jobLocations = jobLocations;
+            }
+
+            var poAllocationStore = view.down('gridpanel[itemId=jobPurchaseOrderAllocation]').getStore();
+            var modifiedPoRangeRecords = poAllocationStore.getModifiedRecords();
+            if (modifiedPoRangeRecords && modifiedPoRangeRecords.length>0) {
+                Ext.each(modifiedPoRangeRecords, function (rec) {
+                    var record = {
+                        poRangeId: rec.get('poRangeId'),
+                        jobId: values.jobId,
+                        poRangeStartNumber: rec.get('poRangeStartNumber'),
+                        poRangeEndNumber: rec.get('poRangeEndNumber'),
+                        organizationUnitId: rec.get('organizationUnitId')
+                    };
+                    poRanges.push(record);
+                });
+                values.poAllocations = poRanges;
             }
             //fire save request
             Ext.Ajax.request({

@@ -89,7 +89,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  width: '100%',
                  emptyText: app.localize('ToolTipJobName')
              }, editor: {
-                 xtype: 'textfield'
+                 xtype: 'textfield',
+                 allowBlank:false
              }
          },{
              xtype: 'gridcolumn',
@@ -123,7 +124,24 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
+                 entityName:'',
                  emptyText: app.localize('ToolTipDirector')
+             }, editor: {
+                 xtype: 'combobox',
+                 store: new Chaching.store.employee.EmployeeStore({
+                     filters: [
+                     {
+                         entity: 'Employee',
+                         searchTerm: true,
+                         comparator: 1,
+                         dataType: 3,
+                         property: 'isDirector',
+                         value: true
+                     }]
+                 }),
+                 valueField: 'directorEmployeeId',
+                 displayField: 'directorName',
+                 queryMode:'local'
              }
          }, {
              xtype: 'gridcolumn',
@@ -135,9 +153,14 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
+                 entityName: '',
                  emptyText: app.localize('ToolTipAgency')
              }, editor: {
-                 xtype: 'textfield'
+                 xtype: 'combobox',
+                 store: 'customers.CustomersStore',
+                 valueField: 'agencyId',
+                 displayField: 'agency',
+                 queryMode: 'local'
              }
          }, {
              xtype: 'gridcolumn',
@@ -158,6 +181,14 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  xtype: 'textfield',
                  width: '100%',
                  emptyText: app.localize('ToolTipProjectType')
+             },
+             editor: {
+                 xtype: 'combobox',
+                 allowBlank: false,
+                 queryMode: 'local',
+                 store:'utilities.ProjectTypeStore',
+                 valueField: 'typeofProjectId',
+                 displayField: 'typeofProjectName'
              }
          }, {
              xtype: 'gridcolumn',
@@ -166,7 +197,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              sortable: true,
              groupable: true,
              width: '20%',
-             renderer: Chaching.utilities.ChachingRenderers.renderDateTime,
+             renderer: Chaching.utilities.ChachingRenderers.renderDateOnly,
              filterField: {
                  xtype: 'dateSearchField',
                  dataIndex: 'shootingDate',
@@ -209,6 +240,13 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
                  xtype: 'textfield',
                  width: '100%',
                  emptyText: app.localize('ToolTipStatus')
+             },
+             editor: {
+                 xtype: 'combobox',
+                 queryMode: 'local',
+                 store: 'utilities.ProjectStatusStore',
+                 valueField: 'typeOfJobStatusId',
+                 displayField: 'jobStatusName'
              }
          },
          ////TODO : dummy columns for default manage view

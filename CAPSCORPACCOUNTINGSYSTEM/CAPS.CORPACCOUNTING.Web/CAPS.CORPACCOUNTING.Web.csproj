@@ -1852,6 +1852,7 @@
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\customers\CustomersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\RollupAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />
@@ -1874,7 +1875,10 @@
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\AddressListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\employee\EmployeeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\LocationListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\ProjectStatusStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\ProjectTypeStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingGlobals.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingRenderers.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\Prototypes.js" />

@@ -584,6 +584,12 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             //}
 
             field = Ext.widget(cfg);
+            if ((field.xtype==="combo"||field.xtype==="combobox")&&field.queryMode==="local") {
+                var fieldStore = field.getStore();
+                if (fieldStore && field.loadStoreOnCreate) {
+                    fieldStore.load();
+                }
+            }
             if (item.hidden) {
                 field.hidden = true;
             }
@@ -974,7 +980,9 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         if (!v) {
             return { value: '' };
         }
-
+        if (typeof(v)==='number') {
+            v = v.toString();
+        }
         va = v.split(re);
         if (2 > va.length) {
             return { value: v };

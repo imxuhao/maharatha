@@ -1,4 +1,13 @@
-﻿Ext.define('Chaching.store.utilities.LocationListStore', {
+﻿/**
+ * This class is created as a utility store to load locations list
+ * Author: Krishna Garad
+ * Date Created: 12/05/2016
+ */
+/**
+ * @class Chaching.store.utilities.LocationListStore
+ * Utility Store for LocationList
+ */
+Ext.define('Chaching.store.utilities.LocationListStore', {
     extend: 'Chaching.store.base.BaseStore',
     fields: [{ name: 'name' }, { name: 'value' }, {
         name: 'locationName', convert: function (value, record) {

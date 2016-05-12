@@ -22,6 +22,50 @@ Ext.define('Chaching.model.employee.EmployeeModel', {
         { name: 'isEditor', type: 'boolean' },
         { name: 'isArtDirector', type: 'boolean' },
         { name: 'isApproved', type: 'boolean' },
-        { name: 'isActive', type: 'boolean' }
+        { name: 'isActive', type: 'boolean' },
+        //fields are used to provide employeeId with different names like directorEmployeeId, producerEmpId etc..
+        {
+            name: 'directorEmployeeId',
+            type: 'int',
+            convert: function(val, record) {
+                val = record.get('employeeId');
+                if (val) {
+                    return val;
+                }
+                return null;
+            }
+        },
+        {
+            name: 'directorName',
+            type: 'string',
+            convert: function(val, record) {
+                val = record.get('lastName');
+                if (val) {
+                    return val;
+                }
+                return null;
+            }
+        },
+        {
+            name: 'executiveProducerId',
+            type: 'int',
+            convert: function(val, record) {
+                val = record.get('employeeId');
+                if (val) {
+                    return val;
+                }
+                return null;
+            }
+        }, {
+            name: 'dirOfPhotoEmployeeId',
+            type: 'int',
+            convert: function(val, record) {
+                val = record.get('employeeId');
+                if (val) {
+                    return val;
+                }
+                return null;
+            }
+        }
     ]
 });

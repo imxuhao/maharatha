@@ -1,4 +1,12 @@
-
+/**
+ * This class is created as a base window.
+ * Author: Krishna Garad
+ * Date Created: 12/05/2016
+ */
+/**
+ * @class Chaching.view.common.window.ChachingWindowPanel
+ * Base Window class.
+ */
 Ext.define('Chaching.view.common.window.ChachingWindowPanel',{
     extend: 'Ext.window.Window',
 

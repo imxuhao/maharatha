@@ -531,7 +531,7 @@
     <text name="ProductName" value="Product name" />
     <text name="ToolTipProductName" value="Enter product name" />
     <text name="Director" value="Director" />
-    <text name="ToolTipDirector" value="Select director" />
+    <text name="ToolTipDirector" value="Enter director" />
     <text name="Agency" value="Agency" />
     <text name="ToolTipAgency" value="Enter agency" />
     <text name="POLog" value="PO log details" />

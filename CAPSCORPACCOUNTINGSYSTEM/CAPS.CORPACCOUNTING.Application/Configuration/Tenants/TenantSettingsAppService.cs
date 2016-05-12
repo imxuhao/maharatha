@@ -6,11 +6,13 @@ using Abp.Configuration.Startup;
 using Abp.Extensions;
 using Abp.Net.Mail;
 using Abp.Runtime.Session;
+using Abp.Timing;
 using Abp.Zero.Configuration;
 using Abp.Zero.Ldap.Configuration;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
 using CAPS.CORPACCOUNTING.Configuration.Tenants.Dto;
+using CAPS.CORPACCOUNTING.Timing;
 
 namespace CAPS.CORPACCOUNTING.Configuration.Tenants
 {
@@ -19,11 +21,16 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
     {
         private readonly IMultiTenancyConfig _multiTenancyConfig;
         private readonly IAbpZeroLdapModuleConfig _ldapModuleConfig;
+        private readonly ITimeZoneService _timeZoneService;
 
-        public TenantSettingsAppService(IMultiTenancyConfig multiTenancyConfig, IAbpZeroLdapModuleConfig ldapModuleConfig)
+        public TenantSettingsAppService(
+            IMultiTenancyConfig multiTenancyConfig,
+            IAbpZeroLdapModuleConfig ldapModuleConfig,
+            ITimeZoneService timeZoneService)
         {
             _multiTenancyConfig = multiTenancyConfig;
             _ldapModuleConfig = ldapModuleConfig;
+            _timeZoneService = timeZoneService;
         }
 
         public async Task<TenantSettingsEditDto> GetAllSettings()
@@ -39,14 +46,33 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
                 }
             };
 
-            if (!_multiTenancyConfig.IsEnabled)
+            if (!_multiTenancyConfig.IsEnabled || Clock.SupportsMultipleTimezone())
             {
                 //General
-                settings.General = new GeneralSettingsEditDto
+                settings.General = new GeneralSettingsEditDto();
+                if (!_multiTenancyConfig.IsEnabled)
                 {
-                    WebSiteRootAddress = await SettingManager.GetSettingValueAsync(AppSettings.General.WebSiteRootAddress)
-                };
+                    settings.General.WebSiteRootAddress = await SettingManager.GetSettingValueAsync(AppSettings.General.WebSiteRootAddress);
+                }
 
+                if (Clock.SupportsMultipleTimezone())
+                {
+                    var timezone = await SettingManager.GetSettingValueForTenantAsync(TimingSettingNames.TimeZone, AbpSession.GetTenantId());
+
+                    settings.General.Timezone = timezone;
+                    settings.General.TimezoneForComparison = timezone;
+                }
+
+                var defaultTimeZoneId = await _timeZoneService.GetDefaultTimezoneAsync(SettingScopes.Tenant, AbpSession.TenantId);
+                if (settings.General.Timezone == defaultTimeZoneId)
+                {
+                    settings.General.Timezone = string.Empty;
+                }
+            }
+
+
+            if (!_multiTenancyConfig.IsEnabled)
+            {
                 //Email
                 settings.Email = new EmailSettingsEditDto
                 {
@@ -92,6 +118,19 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
             await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), AppSettings.UserManagement.IsNewRegisteredUserActiveByDefault, input.UserManagement.IsNewRegisteredUserActiveByDefault.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin, input.UserManagement.IsEmailConfirmationRequiredForLogin.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), AppSettings.UserManagement.UseCaptchaOnRegistration, input.UserManagement.UseCaptchaOnRegistration.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
+
+            if (Clock.SupportsMultipleTimezone())
+            {
+                if (input.General.Timezone.IsNullOrEmpty())
+                {
+                    var defaultValue = await _timeZoneService.GetDefaultTimezoneAsync(SettingScopes.Tenant, AbpSession.TenantId);
+                    await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), TimingSettingNames.TimeZone, defaultValue);
+                }
+                else
+                {
+                    await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), TimingSettingNames.TimeZone, input.General.Timezone);
+                }
+            }
 
             if (!_multiTenancyConfig.IsEnabled)
             {

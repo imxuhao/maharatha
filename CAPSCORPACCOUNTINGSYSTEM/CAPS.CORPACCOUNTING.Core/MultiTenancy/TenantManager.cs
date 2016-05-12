@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
+using Abp;
 using Abp.Application.Features;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
@@ -12,6 +14,7 @@ using CAPS.CORPACCOUNTING.Editions;
 using CAPS.CORPACCOUNTING.MultiTenancy.Demo;
 using Abp.Extensions;
 using Abp.Notifications;
+using Abp.Runtime.Security;
 using CAPS.CORPACCOUNTING.Notifications;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
@@ -28,6 +31,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly TenantDemoDataBuilder _demoDataBuilder;
         private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
         private readonly IAppNotifier _appNotifier;
+        private readonly IAbpZeroDbMigrator _abpZeroDbMigrator;
 
         public TenantManager(
             IRepository<Tenant> tenantRepository,
@@ -40,7 +44,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             UserManager userManager, 
             INotificationSubscriptionManager notificationSubscriptionManager, 
             IAppNotifier appNotifier,
-            IAbpZeroFeatureValueStore featureValueStore) :
+            IAbpZeroFeatureValueStore featureValueStore,
+            IAbpZeroDbMigrator abpZeroDbMigrator) :
             base(tenantRepository,tenantFeatureRepository,editionManager, featureValueStore)
         {
             _unitOfWorkManager = unitOfWorkManager;
@@ -50,22 +55,32 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _userManager = userManager;
             _notificationSubscriptionManager = notificationSubscriptionManager;
             _appNotifier = appNotifier;
+            _abpZeroDbMigrator = abpZeroDbMigrator;
         }
 
-        public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
+        public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
             int newTenantId;
             long newAdminId;
 
-            using (var uow = _unitOfWorkManager.Begin())
+            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 //Create tenant
-                var tenant = new Tenant(tenancyName, name) { IsActive = isActive, EditionId = editionId };
+                var tenant = new Tenant(tenancyName, name)
+                {
+                    IsActive = isActive,
+                    EditionId = editionId,
+                    ConnectionString = connectionString.IsNullOrWhiteSpace() ? null : SimpleStringCipher.Instance.Encrypt(connectionString)
+                };
+
                 CheckErrors(await CreateAsync(tenant));
                 await _unitOfWorkManager.Current.SaveChangesAsync(); //To get new tenant's id.
 
+                //Create tenant database
+                _abpZeroDbMigrator.CreateOrMigrateForTenant(tenant);
+
                 //We are working entities of new tenant, so changing tenant filter
-                using (_unitOfWorkManager.Current.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, tenant.Id))
+                using (_unitOfWorkManager.Current.SetTenantId(tenant.Id))
                 {
                     //Create static roles for new tenant
                     CheckErrors(await _roleManager.CreateStaticRoles(tenant.Id));
@@ -118,15 +133,14 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             }
 
             //Used a second UOW since UOW above sets some permissions and _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync needs these permissions to be saved.
-            using (var uow = _unitOfWorkManager.Begin())
+            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
-                using (_unitOfWorkManager.Current.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, newTenantId))
+                using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                 {
-                    await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(newTenantId, newAdminId);
+                    await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(new UserIdentifier(newTenantId, newAdminId));
                     await _unitOfWorkManager.Current.SaveChangesAsync();
+                    await uow.CompleteAsync();
                 }
-
-                await uow.CompleteAsync();
             }
 
             return newTenantId;

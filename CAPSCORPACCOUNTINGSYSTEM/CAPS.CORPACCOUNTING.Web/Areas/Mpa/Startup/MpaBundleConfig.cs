@@ -41,6 +41,7 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Startup
                         ScriptPaths.SweetAlert,
                         ScriptPaths.Toastr,
                         ScriptPaths.MomentJs,
+                        ScriptPaths.MomentTimezoneJs,
                         ScriptPaths.Bootstrap_DateRangePicker,
                         ScriptPaths.Bootstrap_Select,
                         ScriptPaths.Underscore,
@@ -50,6 +51,7 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Startup
                         ScriptPaths.Abp_BlockUi,
                         ScriptPaths.Abp_SpinJs,
                         ScriptPaths.Abp_SweetAlert,
+                        ScriptPaths.Abp_Moment,
                         ScriptPaths.Abp_jTable,
                         ScriptPaths.MustacheJs
                     ).ForceOrdered()

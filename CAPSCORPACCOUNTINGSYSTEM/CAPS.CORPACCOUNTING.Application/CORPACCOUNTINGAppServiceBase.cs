@@ -49,12 +49,18 @@ namespace CAPS.CORPACCOUNTING
 
         protected virtual Task<Tenant> GetCurrentTenantAsync()
         {
-            return TenantManager.GetByIdAsync(AbpSession.GetTenantId());
+            using (CurrentUnitOfWork.SetTenantId(null))
+            {
+                return TenantManager.GetByIdAsync(AbpSession.GetTenantId());
+            }
         }
 
         protected virtual Tenant GetCurrentTenant()
         {
-            return TenantManager.GetById(AbpSession.GetTenantId());
+            using (CurrentUnitOfWork.SetTenantId(null))
+            {
+                return TenantManager.GetById(AbpSession.GetTenantId());
+            }
         }
 
         protected virtual void CheckErrors(IdentityResult identityResult)

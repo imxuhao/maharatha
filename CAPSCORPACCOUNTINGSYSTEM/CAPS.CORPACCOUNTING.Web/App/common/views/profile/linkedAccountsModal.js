@@ -36,8 +36,6 @@
                         field: 'username',
                         cellTemplate:
                             '<div class=\"ui-grid-cell-contents\">' +
-                            '  <img ng-if="row.entity.profilePictureId" ng-src="' + abp.appPath + 'Profile/GetProfilePictureById?id={{row.entity.profilePictureId}}" width="22" height="22" class="img-rounded img-profile-picture-in-grid" />' +
-                            '  <img ng-if="!row.entity.profilePictureId" src="' + abp.appPath + 'Common/Images/default-profile-picture.png" width="22" height="22" class="img-rounded" />' +
                             ' {{ grid.appScope.getShownLinkedUserName(row.entity)}} &nbsp;' +
                             '</div>',
                         minWidth: 140
@@ -109,7 +107,8 @@
                     function (isConfirmed) {
                         if (isConfirmed) {
                             userLinkService.unlinkUser({
-                                userId: linkedUser.id
+                                userId: linkedUser.id,
+                                tenantId: linkedUser.tenantId
                             }).success(function () {
                                 vm.getLinkedUsers();
                                 abp.notify.success(app.localize('SuccessfullyUnlinked'));
@@ -123,7 +122,8 @@
                 abp.ajax({
                     url: abp.appPath + 'Account/SwitchToLinkedAccount',
                     data: JSON.stringify({
-                        targetUserId: linkedUser.id
+                        targetUserId: linkedUser.id,
+                        targetTenantId: linkedUser.tenantId
                     })
                 });
             };

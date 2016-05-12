@@ -1,28 +1,19 @@
 ﻿using System.Reflection;
-using Abp.AutoMapper;
 using Abp.Modules;
 using CAPS.CORPACCOUNTING.Authorization;
-using CAPS.CORPACCOUNTING.Interceptors;
 
 namespace CAPS.CORPACCOUNTING
 {
     /// <summary>
     /// Application layer module of the application.
     /// </summary>
-    [DependsOn(typeof(CORPACCOUNTINGCoreModule), typeof(AbpAutoMapperModule))]
+    [DependsOn(typeof(CORPACCOUNTINGCoreModule))]
     public class CORPACCOUNTINGApplicationModule : AbpModule
     {
         public override void PreInitialize()
         {
             //Adding authorization providers
             Configuration.Authorization.Providers.Add<AppAuthorizationProvider>();
-
-            //Measuring the Duration of each Method
-            MeasureDurationInterceptorRegistrar.Initialize(IocManager.IocContainer.Kernel);
-
-            ///TBD:This needs to be worked upon
-           // DTOInterceptorRegistrar.Initialize(IocManager);
-
         }
 
         public override void Initialize()
@@ -31,8 +22,6 @@ namespace CAPS.CORPACCOUNTING
 
             //Custom DTO auto-mappings
             CustomDtoMapper.CreateMappings();
-
-
         }
     }
 }

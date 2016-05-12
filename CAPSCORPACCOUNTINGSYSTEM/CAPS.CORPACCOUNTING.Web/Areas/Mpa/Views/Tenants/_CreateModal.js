@@ -22,6 +22,8 @@
                 }
             });
 
+            //Show/Hide password inputs when "random password" checkbox is changed.
+
             var passwordInputs = _modalManager.getModal().find('input[name=AdminPassword],input[name=AdminPasswordRepeat]');
             var passwordInputGroups = passwordInputs.closest('.form-group');
 
@@ -32,6 +34,21 @@
                 } else {
                     passwordInputGroups.slideDown('fast');
                     passwordInputs.attr('required', 'required');
+                }
+            });
+
+            //Show/Hide connection string input when "use host db" checkbox is changed.
+
+            var connStringInput = _modalManager.getModal().find('input[name=ConnectionString]');
+            var connStringInputGroup = connStringInput.closest('.form-group');
+
+            $('#CreateTenant_UseHostDb').change(function () {
+                if ($(this).is(':checked')) {
+                    connStringInputGroup.slideUp('fast');
+                    connStringInput.removeAttr('required');
+                } else {
+                    connStringInputGroup.slideDown('fast');
+                    connStringInput.attr('required', 'required');
                 }
             });
         };
@@ -45,6 +62,10 @@
 
             if (tenant.SetRandomPassword) {
                 tenant.Password = null;
+            }
+
+            if (tenant.UseHostDb) {
+                tenant.ConnectionString = null;
             }
 
             _modalManager.setBusy(true);

@@ -316,7 +316,5 @@
     <text name="ThereIsNoNotification" value="Non ci sono notifiche." />
     <text name="Unread" value="Non lette" />
     <text name="YouCanNotDeleteOwnAccount" value="Non puoi cancellare il tuo account!" />
-    <text name="Export" value="Esporta" />
-    <text name="ExportToPDF" value="Esporta in PDF" />
   </texts>
 </localizationDictionary>

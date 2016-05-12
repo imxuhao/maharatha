@@ -57,12 +57,6 @@
                     width: '70%',
                     display: function (data) {
                         var $div = $('<div></div>');
-
-                        var profilePicture = app.getUserProfilePicturePath(data.record.profilePictureId);
-
-                        $('<img src=' + profilePicture + '  width="22" height="22" class="img-rounded"/>')
-                            .appendTo($div);
-
                         $('<span>' + app.getShownLinkedUserName(data.record) + '</span>').appendTo($div);
                         return $div;
                     }
@@ -89,7 +83,8 @@
             abp.ajax({
                 url: abp.appPath + 'Account/SwitchToLinkedAccount',
                 data: JSON.stringify({
-                    targetUserId: linkedUser.id
+                    targetUserId: linkedUser.id,
+                    targetTenantId: linkedUser.tenantId
                 })
             });
         }
@@ -100,7 +95,8 @@
                function (isConfirmed) {
                    if (isConfirmed) {
                        _userLinkService.unlinkUser({
-                           userId: linkedUser.id
+                           userId: linkedUser.id,
+                           tenantId: linkedUser.tenantId
                        }).done(function () {
                            getLinkedUsers();
                            abp.notify.success(app.localize('SuccessfullyUnlinked'));

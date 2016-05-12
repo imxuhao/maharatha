@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Abp.Collections.Extensions;
+using Abp.Runtime.Session;
+using Abp.Timing.Timezone;
 using CAPS.CORPACCOUNTING.Authorization.Users.Dto;
 using CAPS.CORPACCOUNTING.DataExporting.Excel.EpPlus;
 using CAPS.CORPACCOUNTING.Dto;
@@ -9,6 +11,17 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Exporting
 {
     public class UserListExcelExporter : EpPlusExcelExporterBase, IUserListExcelExporter
     {
+        private readonly ITimeZoneConverter _timeZoneConverter;
+        private readonly IAbpSession _abpSession;
+
+        public UserListExcelExporter(
+            ITimeZoneConverter timeZoneConverter, 
+            IAbpSession abpSession)
+        {
+            _timeZoneConverter = timeZoneConverter;
+            _abpSession = abpSession;
+        }
+
         public FileDto ExportToFile(List<UserListDto> userListDtos)
         {
             return CreateExcelPackage(
@@ -39,18 +52,18 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Exporting
                         _ => _.EmailAddress,
                         _ => _.IsEmailConfirmed,
                         _ => _.Roles.Select(r => r.RoleName).JoinAsString(", "),
-                        _ => _.LastLoginTime,
+                        _ => _timeZoneConverter.Convert(_.LastLoginTime, _abpSession.TenantId, _abpSession.GetUserId()),
                         _ => _.IsActive,
-                        _ => _.CreationTime
+                        _ => _timeZoneConverter.Convert(_.CreationTime, _abpSession.TenantId, _abpSession.GetUserId())
                         );
 
                     //Formatting cells
 
                     var lastLoginTimeColumn = sheet.Column(7);
-                    lastLoginTimeColumn.Style.Numberformat.Format = "mm-dd-yy";
+                    lastLoginTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
 
                     var creationTimeColumn = sheet.Column(9);
-                    creationTimeColumn.Style.Numberformat.Format = "mm-dd-yy";
+                    creationTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
 
                     for (var i = 1; i <= 7; i++)
                     {

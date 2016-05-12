@@ -1,36 +1,54 @@
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
-using Abp.Auditing;
 using Abp.Authorization;
 using Abp.AutoMapper;
+using Abp.Configuration;
+using Abp.Extensions;
 using Abp.IO;
 using Abp.Runtime.Session;
+using Abp.Timing;
 using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto;
 using CAPS.CORPACCOUNTING.Storage;
-using System;
+using CAPS.CORPACCOUNTING.Timing;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
 {
     [AbpAuthorize]
     public class ProfileAppService : CORPACCOUNTINGAppServiceBase, IProfileAppService
     {
-        private readonly AppFolders _appFolders;
+        private readonly IAppFolders _appFolders;
         private readonly IBinaryObjectManager _binaryObjectManager;
+        private readonly ITimeZoneService _timeZoneService;
 
         public ProfileAppService(
-            AppFolders appFolders,
-            IBinaryObjectManager binaryObjectManager)
+            IAppFolders appFolders,
+            IBinaryObjectManager binaryObjectManager, 
+            ITimeZoneService timezoneService)
         {
             _appFolders = appFolders;
             _binaryObjectManager = binaryObjectManager;
+            _timeZoneService = timezoneService;
         }
 
         public async Task<CurrentUserProfileEditDto> GetCurrentUserProfileForEdit()
         {
             var user = await GetCurrentUserAsync();
-            return user.MapTo<CurrentUserProfileEditDto>();
+            var userProfileEditDto = user.MapTo<CurrentUserProfileEditDto>();
+
+            if (Clock.SupportsMultipleTimezone())
+            {
+                userProfileEditDto.Timezone = await SettingManager.GetSettingValueAsync(TimingSettingNames.TimeZone);
+
+                var defaultTimeZoneId = await _timeZoneService.GetDefaultTimezoneAsync(SettingScopes.User, AbpSession.TenantId);
+                if (userProfileEditDto.Timezone == defaultTimeZoneId)
+                {
+                    userProfileEditDto.Timezone = string.Empty;
+                }
+            }
+
+            return userProfileEditDto;
         }
 
         public async Task UpdateCurrentUserProfile(CurrentUserProfileEditDto input)
@@ -38,22 +56,30 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
             var user = await GetCurrentUserAsync();
             input.MapTo(user);
             CheckErrors(await UserManager.UpdateAsync(user));
+
+            if(Clock.SupportsMultipleTimezone())
+            {
+                if (input.Timezone.IsNullOrEmpty())
+                {
+                    var defaultValue = await _timeZoneService.GetDefaultTimezoneAsync(SettingScopes.User, AbpSession.TenantId);
+                    await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(), TimingSettingNames.TimeZone, defaultValue);
+                }
+                else
+                {
+                    await SettingManager.ChangeSettingForUserAsync(AbpSession.GetUserId(), TimingSettingNames.TimeZone, input.Timezone);
+                }
+            }
         }
 
-        [DisableAuditing]
         public async Task ChangePassword(ChangePasswordInput input)
         {
             var user = await GetCurrentUserAsync();
             CheckErrors(await UserManager.ChangePasswordAsync(user.Id, input.CurrentPassword, input.NewPassword));
         }
 
-        public async Task<byte[]> UpdateProfilePicture(UpdateProfilePictureInput input)
+        public async Task UpdateProfilePicture(UpdateProfilePictureInput input)
         {
-            string tempProfilePicturePath;
-            if (ReferenceEquals(_appFolders.TempFileDownloadFolder, null))
-                tempProfilePicturePath = input.TempFilePath;
-            else
-                tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
+            var tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
 
             byte[] byteArray;
 
@@ -86,13 +112,12 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
                 await _binaryObjectManager.DeleteAsync(user.ProfilePictureId.Value);
             }
 
-            var storedFile = new BinaryObject(byteArray);
+            var storedFile = new BinaryObject(AbpSession.TenantId, byteArray);
             await _binaryObjectManager.SaveAsync(storedFile);
 
             user.ProfilePictureId = storedFile.Id;
 
             FileHelper.DeleteIfExists(tempProfilePicturePath);
-            return byteArray;
         }
     }
 }

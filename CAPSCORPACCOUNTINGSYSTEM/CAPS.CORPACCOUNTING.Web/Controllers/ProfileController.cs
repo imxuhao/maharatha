@@ -31,7 +31,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         public ProfileController(
             UserManager userManager,
             IBinaryObjectManager binaryObjectManager,
-            AppFolders appFolders)
+            IAppFolders appFolders)
         {
             _userManager = userManager;
             _binaryObjectManager = binaryObjectManager;
@@ -89,7 +89,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 }
 
                 //Save new picture
-                var storedFile = new BinaryObject(file.InputStream.GetAllBytes());
+                var storedFile = new BinaryObject(AbpSession.TenantId, file.InputStream.GetAllBytes());
                 await _binaryObjectManager.SaveAsync(storedFile);
 
                 //Update new picture on the user
@@ -128,10 +128,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 {
                     throw new ApplicationException("Uploaded file is not an accepted image file !");
                 }
-                
 
                 //Delete old temp profile pictures
-                if(!ReferenceEquals(_appFolders.TempFileDownloadFolder,null))
                 AppFileHelper.DeleteFilesInFolderIfExists(_appFolders.TempFileDownloadFolder, "userProfileImage_" + AbpSession.GetUserId());
 
                 //Save new picture
@@ -142,7 +140,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                 using (var bmpImage = new Bitmap(tempFilePath))
                 {
-                    return Json(new MvcAjaxResponse(new { tempFilePath= tempFilePath,fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
+                    return Json(new MvcAjaxResponse(new { fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
                 }
             }
             catch (UserFriendlyException ex)

@@ -44,6 +44,7 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
         public const string Toastr = "~/libs/toastr/toastr.min.js";
 
         public const string MomentJs = "~/Scripts/moment-with-locales.min.js";
+        public const string MomentTimezoneJs = "~/Scripts/moment-timezone-with-data.min.js";
         public const string Underscore = "~/Scripts/underscore.min.js";
 
         public const string MustacheJs = "~/libs/mustachejs/mustache.min.js";
@@ -67,6 +68,7 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
         public const string Abp_BlockUi = "~/Abp/Framework/scripts/libs/abp.blockUI.js";
         public const string Abp_SpinJs = "~/Abp/Framework/scripts/libs/abp.spin.js";
         public const string Abp_SweetAlert = "~/Abp/Framework/scripts/libs/abp.sweet-alert.js";
+        public const string Abp_Moment = "~/Abp/Framework/scripts/libs/abp.moment.js";
         public const string Abp_Angular = "~/Abp/Framework/scripts/libs/angularjs/abp.ng.js";
         public const string Abp_jTable = "~/Abp/Framework/scripts/libs/abp.jtable.js";
 

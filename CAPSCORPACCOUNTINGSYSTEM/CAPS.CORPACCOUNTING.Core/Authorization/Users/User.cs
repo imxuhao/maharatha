@@ -1,30 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Authorization.Users;
 using Abp.Extensions;
 using Abp.Organizations;
-using CAPS.CORPACCOUNTING.Authorization.Roles;
-using CAPS.CORPACCOUNTING.Masters;
 using Microsoft.AspNet.Identity;
-using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
     /// <summary>
     /// Represents a user in the system.
     /// </summary>
-    public class User : AbpUser<Tenant, User>
+    public class User : AbpUser<User>
     {
         public const int MinPlainPasswordLength = 6;
 
         public virtual Guid? ProfilePictureId { get; set; }
 
         public virtual bool ShouldChangePasswordOnNextLogin { get; set; }
-        
+
         public virtual long? UserLinkId { get; set; }
 
         public virtual int? LajitId { get; set; }
+
+        //Can add application specific user properties here
 
         /// <summary>
         /// Creates admin <see cref="User"/> for a tenant.
@@ -51,10 +49,9 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             return Guid.NewGuid().ToString("N").Truncate(16);
         }
 
-        
         public long? DefaultOrganizationId { get; set; }
 
         [ForeignKey("DefaultOrganizationId")]
-        public OrganizationUnit  DefaultOrganization { get; set; }
+        public OrganizationUnit DefaultOrganization { get; set; }
     }
 }

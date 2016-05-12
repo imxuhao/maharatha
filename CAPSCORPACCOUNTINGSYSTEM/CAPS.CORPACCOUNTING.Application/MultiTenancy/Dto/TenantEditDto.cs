@@ -15,6 +15,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
         [StringLength(Tenant.MaxNameLength)]
         public string Name { get; set; }
 
+        public string ConnectionString { get; set; }
+
         public int? EditionId { get; set; }
 
         public bool IsActive { get; set; }

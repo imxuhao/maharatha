@@ -13,6 +13,5 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto
         public int Width { get; set; }
 
         public int Height { get; set; }
-        public string TempFilePath { get; set; }
     }
 }

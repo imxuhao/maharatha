@@ -49,8 +49,8 @@
         });
 
         $loginForm.submit(function (e) {
-            calculate_time_zone();
             e.preventDefault();
+
             if (!$('.login-form').valid()) {
                 return;
             }

@@ -1,4 +1,6 @@
-﻿@using CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Common.Modals
+﻿@using Abp.Application.Services.Dto
+@using Abp.Timing;
+@using CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Common.Modals
 @model CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.Profile.MySettingsViewModel
 
 @Html.Partial("~/Areas/Mpa/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("MySettings")))
@@ -28,6 +30,14 @@
                 <span class="help-block">@L("CanNotChangeAdminUserName")</span>
             }
         </div>
+        @if (Clock.SupportsMultipleTimezone())
+            {
+            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                @Html.DropDownList("Timezone", Model.TimezoneItems.Select(i => i.ToSelectListItem()), new { @class = "form-control edited" })
+                <label>@L("Timezone")</label>
+            </div>
+        }
+
     </form>
 </div>
 

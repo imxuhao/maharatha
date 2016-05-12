@@ -1,15 +1,15 @@
 ﻿using Abp.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users;
-using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Roles
 {
     /// <summary>
     /// Represents a role in the system.
     /// </summary>
-    public class Role : AbpRole<Tenant, User>
+    public class Role : AbpRole<User>
     {
-        public virtual int? LajitId { get; set; }
+        //Can add application specific role properties here
+
         public Role()
         {
             

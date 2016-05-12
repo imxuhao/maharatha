@@ -5,7 +5,7 @@
 @Html.IncludeStyle("~/Areas/Mpa/Views/Users/_LoginAttemptsModal.min.css")
 @Html.Partial("~/Areas/Mpa/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("LoginAttempts")))
 <div class="modal-body">
-    <form class="form-horizontal">
+    <form id="loginAttemptsModalForm" class="form-horizontal">
         <div class="form-body">
             <div class="row">
                 <div class="col-xs-12">
@@ -56,7 +56,7 @@
                                     <div class="row">
                                         <label class="control-label col-sm-3 text-right">@L("Time")</label>
                                         <div class="col-sm-9">
-                                            <p class="form-control-static login-attempt-date" data-date="@loginAttempt.CreationTime.ToString("yyyy-MM-dd HH:mm:ss")">
+                                            <p class="form-control-static login-attempt-date" data-date="@loginAttempt.CreationTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")">
                                                 
                                             </p>
                                         </div>

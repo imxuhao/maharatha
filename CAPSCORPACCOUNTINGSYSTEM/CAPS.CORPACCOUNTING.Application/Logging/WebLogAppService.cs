@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.Logging
             var lastLogFile = directory.GetFiles("*.txt", SearchOption.AllDirectories)
                                         .OrderByDescending(f => f.LastWriteTime)
                                         .FirstOrDefault();
-
+            
             if (lastLogFile == null)
             {
                 return new GetLatestWebLogsOutput();

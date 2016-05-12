@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
+using Abp.Auditing;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.AutoMapper;
@@ -22,6 +23,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             _userLoginAttemptRepository = userLoginAttemptRepository;
         }
 
+        [DisableAuditing]
         public async Task<ListResultOutput<UserLoginAttemptDto>> GetRecentUserLoginAttempts()
         {
             var userId = AbpSession.GetUserId();

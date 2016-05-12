@@ -21,6 +21,23 @@
                 <label>@L("Name")</label>
             </div>
 
+            <div class="md-checkbox-list">
+                <div class="md-checkbox">
+                    <input id="CreateTenant_UseHostDb" class="md-check" type="checkbox" name="UseHostDb" ng-model="vm.useHostDb">
+                    <label for="CreateTenant_UseHostDb">
+                        <span class="inc"></span>
+                        <span class="check"></span>
+                        <span class="box"></span>
+                        @L("UseHostDatabase")
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="!vm.useHostDb">
+                <input type="text" name="ConnectionString" class="form-control" ng-model="vm.tenant.connectionString" required maxlength="@Tenant.MaxConnectionStringLength">
+                <label>@L("DatabaseConnectionString")</label>
+            </div>
+
             <div class="form-group form-md-line-input form-md-floating-label no-hint">
                 <input type="email" name="AdminEmailAddress" class="form-control" ng-model="vm.tenant.adminEmailAddress" required maxlength="@CAPS.CORPACCOUNTING.Authorization.Users.User.MaxEmailAddressLength">
                 <label>@L("AdminEmailAddress")</label>

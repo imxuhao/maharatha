@@ -8,14 +8,12 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.AutoMapper;
 using Abp.Domain.Uow;
+using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.Runtime.Security;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Editions.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
-using Abp.Domain.Repositories;
-using CAPS.CORPACCOUNTING.Authorization.Users;
-using CAPS.CORPACCOUNTING.GenericSearch.Dto;
-using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
@@ -23,54 +21,32 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
     public class TenantAppService : CORPACCOUNTINGAppServiceBase, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
-        private readonly IRepository<User,long> _userRepository;
-        private readonly IRepository<Tenant> _tenantRepository;
 
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
         public TenantAppService(
-            TenantManager tenantManager, IRepository<User, long> userRepository, IUnitOfWorkManager unitOfWorkManager, IRepository<Tenant> tenantRepository)
+            TenantManager tenantManager)
         {
             _tenantManager = tenantManager;
-            _userRepository = userRepository;
-            _tenantRepository = tenantRepository;
-            _unitOfWorkManager = unitOfWorkManager;
         }
 
-
-        public async Task<PagedResultOutput<TenantListDto>> GetTenants(SearchInputDto input)
+        public async Task<PagedResultOutput<TenantListDto>> GetTenants(GetTenantsInput input)
         {
-            string userName = "admin";
-            using (_unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MayHaveTenant))
-            {
-                var query = from tenant in TenantManager.Tenants.Include(t => t.Edition)
-                            join user in _userRepository.GetAll() on tenant.Id equals user.TenantId
-                            into tentnuser
-                            from users in tentnuser.DefaultIfEmpty()
-                            select new { Tenant=tenant,User= users };
+            var query = TenantManager.Tenants
+                .Include(t => t.Edition)
+                .WhereIf(
+                    !input.Filter.IsNullOrWhiteSpace(),
+                    t =>
+                        t.Name.Contains(input.Filter) ||
+                        t.TenancyName.Contains(input.Filter)
+                );
 
-                if (!ReferenceEquals(input.Filters, null))
-                {
-                    SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
-                    if (!ReferenceEquals(mapSearchFilters, null))
-                        query = Helper.CreateFilters(query, mapSearchFilters);
-                }
+            var tenantCount = await query.CountAsync();
+            var tenants = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
 
-                query = query.Where(item => item.User.Name== userName);
-
-                var tenantCount = await query.CountAsync();                
-                var tenants = await query.OrderBy(Helper.GetSort("Tenant.TenancyName ASC", input.Sorting)).PageBy(input).ToListAsync();
-               
-
-                return new PagedResultOutput<TenantListDto>(tenantCount, tenants.Select(item =>
-                {
-                    var dto = item.Tenant.MapTo<TenantListDto>();
-                    dto.AdminEmailAddress = item.User.EmailAddress;
-                    return dto;
-                }).ToList());
-
-               
-            }
-        }       
+            return new PagedResultOutput<TenantListDto>(
+                tenantCount,
+                tenants.MapTo<List<TenantListDto>>()
+                );
+        }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Create)]
         [UnitOfWork(IsDisabled = true)]
@@ -80,6 +56,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 input.Name,
                 input.AdminPassword,
                 input.AdminEmailAddress,
+                input.ConnectionString,
                 input.IsActive,
                 input.EditionId,
                 input.ShouldChangePasswordOnNextLogin,
@@ -89,12 +66,15 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]
         public async Task<TenantEditDto> GetTenantForEdit(EntityRequestInput input)
         {
-            return (await TenantManager.GetByIdAsync(input.Id)).MapTo<TenantEditDto>();
+            var tenantEditDto = (await TenantManager.GetByIdAsync(input.Id)).MapTo<TenantEditDto>();
+            tenantEditDto.ConnectionString = SimpleStringCipher.Instance.Decrypt(tenantEditDto.ConnectionString);
+            return tenantEditDto;
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]
         public async Task UpdateTenant(TenantEditDto input)
         {
+            input.ConnectionString = SimpleStringCipher.Instance.Encrypt(input.ConnectionString);
             var tenant = await TenantManager.GetByIdAsync(input.Id);
             input.MapTo(tenant);
             CheckErrors(await TenantManager.UpdateAsync(tenant));

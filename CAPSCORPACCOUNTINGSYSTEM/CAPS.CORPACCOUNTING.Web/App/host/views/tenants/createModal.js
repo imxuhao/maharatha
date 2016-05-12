@@ -6,6 +6,7 @@
 
             vm.saving = false;
             vm.setRandomPassword = true;
+            vm.useHostDb = true;
             vm.editions = [];
             vm.tenant = {
                 isActive: true,

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp;
 using Abp.Collections;
 using Abp.Configuration.Startup;
+using Abp.Domain.Uow;
 using Abp.Modules;
 using Abp.Runtime.Session;
 using Abp.TestBase;
@@ -14,7 +17,8 @@ using EntityFramework.DynamicFilters;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.EntityFramework;
-using CAPS.CORPACCOUNTING.Migrations.Seed;
+using CAPS.CORPACCOUNTING.Migrations.Seed.Host;
+using CAPS.CORPACCOUNTING.Migrations.Seed.Tenants;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Tests.TestDatas;
 
@@ -28,13 +32,25 @@ namespace CAPS.CORPACCOUNTING.Tests
     /// </summary>
     public abstract class AppTestBase : AbpIntegratedTestBase
     {
+        private DbConnection _hostDb;
+        private Dictionary<int, DbConnection> _tenantDbs; //only used for db per tenant architecture
+
         protected AppTestBase()
         {
-            //Seed initial data
+            //Seed initial data for host
+            AbpSession.TenantId = null;
             UsingDbContext(context =>
             {
-                new InitialDbBuilder(context).Create();
-                new TestDataBuilder(context).Create();
+                new InitialHostDbBuilder(context).Create();
+                new DefaultTenantBuilder(context).Create();
+            });
+
+            //Seed initial data for default tenant
+            AbpSession.TenantId = 1;
+            UsingDbContext(context =>
+            {
+                new TenantRoleAndUserBuilder(context, 1).Create();
+                new TestDataBuilder(context, 1).Create();
             });
 
             LoginAsDefaultTenantAdmin();
@@ -44,11 +60,56 @@ namespace CAPS.CORPACCOUNTING.Tests
         {
             base.PreInitialize();
 
-            //Fake DbConnection using Effort!
+            //UseSingleDatabase();
+            UseDatabasePerTenant();
+        }
+
+        /* Uses single database for host and all tenants.
+         */
+        private void UseSingleDatabase()
+        {
+            _hostDb = DbConnectionFactory.CreateTransient();
+
             LocalIocManager.IocContainer.Register(
                 Component.For<DbConnection>()
-                    .UsingFactoryMethod(DbConnectionFactory.CreateTransient)
+                    .UsingFactoryMethod(() => _hostDb)
                     .LifestyleSingleton()
+                );
+        }
+
+        /* Uses single database for host and Default tenant,
+         * but dedicated databases for all other tenants.
+         */
+        private void UseDatabasePerTenant()
+        {
+            _hostDb = DbConnectionFactory.CreateTransient();
+            _tenantDbs = new Dictionary<int, DbConnection>();
+
+            LocalIocManager.IocContainer.Register(
+                Component.For<DbConnection>()
+                    .UsingFactoryMethod((kernel) =>
+                    {
+                        lock (_tenantDbs)
+                        {
+                            var currentUow = kernel.Resolve<ICurrentUnitOfWorkProvider>().Current;
+                            var abpSession = kernel.Resolve<IAbpSession>();
+
+                            var tenantId = currentUow != null ? currentUow.GetTenantId() : abpSession.TenantId;
+
+                            if (tenantId == null || tenantId == 1) //host and default tenant are stored in host db
+                            {
+                                return _hostDb;
+                            }
+
+                            if (!_tenantDbs.ContainsKey(tenantId.Value))
+                            {
+                                _tenantDbs[tenantId.Value] = DbConnectionFactory.CreateTransient();
+                            }
+
+                            return _tenantDbs[tenantId.Value];
+                        }
+                    }, true)
+                    .LifestyleTransient()
                 );
         }
 
@@ -62,49 +123,88 @@ namespace CAPS.CORPACCOUNTING.Tests
 
         #region UsingDbContext
 
-        protected void UsingDbContext(Action<CORPACCOUNTINGDbContext> action)
+        protected IDisposable UsingTenantId(int? tenantId)
         {
-            using (var context = LocalIocManager.Resolve<CORPACCOUNTINGDbContext>())
-            {
-                context.DisableAllFilters();
-                action(context);
-                context.SaveChanges();
-            }
+            var previousTenantId = AbpSession.TenantId;
+            AbpSession.TenantId = tenantId;
+            return new DisposeAction(() => AbpSession.TenantId = previousTenantId);
         }
 
-        protected async Task UsingDbContextAsync(Action<CORPACCOUNTINGDbContext> action)
+        protected void UsingDbContext(Action<CORPACCOUNTINGDbContext> action)
         {
-            using (var context = LocalIocManager.Resolve<CORPACCOUNTINGDbContext>())
-            {
-                context.DisableAllFilters();
-                action(context);
-                await context.SaveChangesAsync();
-            }
+            UsingDbContext(AbpSession.TenantId, action);
+        }
+
+        protected Task UsingDbContextAsync(Action<CORPACCOUNTINGDbContext> action)
+        {
+            return UsingDbContextAsync(AbpSession.TenantId, action);
         }
 
         protected T UsingDbContext<T>(Func<CORPACCOUNTINGDbContext, T> func)
         {
+            return UsingDbContext(AbpSession.TenantId, func);
+        }
+
+        protected Task<T> UsingDbContextAsync<T>(Func<CORPACCOUNTINGDbContext, Task<T>> func)
+        {
+            return UsingDbContextAsync(AbpSession.TenantId, func);
+        }
+
+        protected void UsingDbContext(int? tenantId, Action<CORPACCOUNTINGDbContext> action)
+        {
+            using (UsingTenantId(tenantId))
+            {
+                using (var context = LocalIocManager.Resolve<CORPACCOUNTINGDbContext>())
+                {
+                    context.DisableAllFilters();
+                    action(context);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        protected async Task UsingDbContextAsync(int? tenantId, Action<CORPACCOUNTINGDbContext> action)
+        {
+            using (UsingTenantId(tenantId))
+            {
+                using (var context = LocalIocManager.Resolve<CORPACCOUNTINGDbContext>())
+                {
+                    context.DisableAllFilters();
+                    action(context);
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
+
+        protected T UsingDbContext<T>(int? tenantId, Func<CORPACCOUNTINGDbContext, T> func)
+        {
             T result;
 
-            using (var context = LocalIocManager.Resolve<CORPACCOUNTINGDbContext>())
+            using (UsingTenantId(tenantId))
             {
-                context.DisableAllFilters();
-                result = func(context);
-                context.SaveChanges();
+                using (var context = LocalIocManager.Resolve<CORPACCOUNTINGDbContext>())
+                {
+                    context.DisableAllFilters();
+                    result = func(context);
+                    context.SaveChanges();
+                }
             }
 
             return result;
         }
 
-        protected async Task<T> UsingDbContextAsync<T>(Func<CORPACCOUNTINGDbContext, Task<T>> func)
+        protected async Task<T> UsingDbContextAsync<T>(int? tenantId, Func<CORPACCOUNTINGDbContext, Task<T>> func)
         {
             T result;
 
-            using (var context = LocalIocManager.Resolve<CORPACCOUNTINGDbContext>())
+            using (UsingTenantId(tenantId))
             {
-                context.DisableAllFilters();
-                result = await func(context);
-                await context.SaveChangesAsync();
+                using (var context = LocalIocManager.Resolve<CORPACCOUNTINGDbContext>())
+                {
+                    context.DisableAllFilters();
+                    result = await func(context);
+                    await context.SaveChangesAsync();
+                }
             }
 
             return result;
@@ -141,6 +241,8 @@ namespace CAPS.CORPACCOUNTING.Tests
 
         protected void LoginAsTenant(string tenancyName, string userName)
         {
+            AbpSession.TenantId = null;
+
             var tenant = UsingDbContext(context => context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName));
             if (tenant == null)
             {
@@ -193,7 +295,7 @@ namespace CAPS.CORPACCOUNTING.Tests
         protected Tenant GetCurrentTenant()
         {
             var tenantId = AbpSession.GetTenantId();
-            return UsingDbContext(context => context.Tenants.Single(t => t.Id == tenantId));
+            return UsingDbContext(null, context => context.Tenants.Single(t => t.Id == tenantId));
         }
 
         /// <summary>
@@ -203,7 +305,7 @@ namespace CAPS.CORPACCOUNTING.Tests
         protected async Task<Tenant> GetCurrentTenantAsync()
         {
             var tenantId = AbpSession.GetTenantId();
-            return await UsingDbContext(context => context.Tenants.SingleAsync(t => t.Id == tenantId));
+            return await UsingDbContext(null, context => context.Tenants.SingleAsync(t => t.Id == tenantId));
         }
 
         #endregion
@@ -212,22 +314,22 @@ namespace CAPS.CORPACCOUNTING.Tests
 
         protected Tenant GetTenant(string tenancyName)
         {
-            return UsingDbContext(context => context.Tenants.Single(t => t.TenancyName == tenancyName));
+            return UsingDbContext(null, context => context.Tenants.Single(t => t.TenancyName == tenancyName));
         }
 
         protected async Task<Tenant> GetTenantAsync(string tenancyName)
         {
-            return await UsingDbContext(async context => await context.Tenants.SingleAsync(t => t.TenancyName == tenancyName));
+            return await UsingDbContext(null, async context => await context.Tenants.SingleAsync(t => t.TenancyName == tenancyName));
         }
 
         protected Tenant GetTenantOrNull(string tenancyName)
         {
-            return UsingDbContext(context => context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName));
+            return UsingDbContext(null, context => context.Tenants.FirstOrDefault(t => t.TenancyName == tenancyName));
         }
 
         protected async Task<Tenant> GetTenantOrNullAsync(string tenancyName)
         {
-            return await UsingDbContext(async context => await context.Tenants.FirstOrDefaultAsync(t => t.TenancyName == tenancyName));
+            return await UsingDbContext(null, async context => await context.Tenants.FirstOrDefaultAsync(t => t.TenancyName == tenancyName));
         }
 
         #endregion

@@ -10,7 +10,6 @@ using Abp.WebApi;
 using Abp.WebApi.Controllers.Dynamic.Builders;
 using Abp.WebApi.OData;
 using Abp.WebApi.OData.Configuration;
-using CAPS.CORPACCOUNTING.Masters;
 using Swashbuckle.Application;
 
 namespace CAPS.CORPACCOUNTING.WebApi
@@ -35,13 +34,14 @@ namespace CAPS.CORPACCOUNTING.WebApi
                 .ForAll<IApplicationService>(typeof(CORPACCOUNTINGApplicationModule).Assembly, "app")
                 .Build();
 
-            ///Automatically create Web API controllers for a particular service
+            //Automatically create Web API controllers for a particular service
 
             //DynamicApiControllerBuilder.For<IAccountUnitAppService>("app/accountUnit").Build();
 
-            ///Overriding the methods you don't want to expose as web API
+            //Overriding the methods you don't want to expose as web API
 
             //DynamicApiControllerBuilder.For<IAccountUnitAppService>("app/accountUnit").ForMethod("UpdateAccountUnit").DontCreateAction().Build();
+
             Configuration.Modules.AbpWebApi().HttpConfiguration.Filters.Add(new HostAuthenticationFilter("Bearer"));
 
             ConfigureSwaggerUi(); //Remove this line to disable swagger UI.
@@ -53,7 +53,6 @@ namespace CAPS.CORPACCOUNTING.WebApi
 
             //Configure your entities here... see documentation: http://www.aspnetboilerplate.com/Pages/Documents/OData-Integration
             //builder.EntitySet<YourEntity>("YourEntities");
-            builder.EntitySet<CoaUnit>("COA");
         }
 
         private void ConfigureSwaggerUi()

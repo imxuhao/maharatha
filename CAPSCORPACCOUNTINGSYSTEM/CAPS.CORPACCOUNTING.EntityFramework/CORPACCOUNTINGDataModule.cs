@@ -1,6 +1,8 @@
-﻿using System.Reflection;
+﻿using System.Data.Entity;
+using System.Reflection;
 using Abp.Modules;
 using Abp.Zero.EntityFramework;
+using CAPS.CORPACCOUNTING.EntityFramework;
 
 namespace CAPS.CORPACCOUNTING
 {
@@ -12,9 +14,10 @@ namespace CAPS.CORPACCOUNTING
     {
         public override void PreInitialize()
         {
-            //web.config (or app.config for non-web projects) file should containt a connection string named "Default".
+            Database.SetInitializer(new CreateDatabaseIfNotExists<CORPACCOUNTINGDbContext>());
+
+            //web.config (or app.config for non-web projects) file should contain a connection string named "Default".
             Configuration.DefaultNameOrConnectionString = "Default";
-          
         }
 
         public override void Initialize()

@@ -1,7 +1,16 @@
-﻿namespace CAPS.CORPACCOUNTING.Web.Models.Account
+﻿using Abp;
+
+namespace CAPS.CORPACCOUNTING.Web.Models.Account
 {
     public class SwitchToLinkedAccountModel
     {
+        public int? TargetTenantId { get; set; }
+
         public long TargetUserId { get; set; }
+
+        public UserIdentifier ToUserIdentifier()
+        {
+            return new UserIdentifier(TargetTenantId, TargetUserId);
+        }
     }
 }

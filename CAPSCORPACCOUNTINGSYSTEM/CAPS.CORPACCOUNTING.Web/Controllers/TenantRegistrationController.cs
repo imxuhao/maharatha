@@ -105,11 +105,14 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                     defaultEditionId = Convert.ToInt32(defaultEditionIdValue);
                 }
 
+                CurrentUnitOfWork.SetTenantId(null);
+
                 var tenantId = await _tenantManager.CreateWithAdminUserAsync(
                   model.TenancyName,
                   model.Name,
                   model.AdminPassword,
                   model.AdminEmailAddress,
+                  null,
                   isNewRegisteredTenantActiveByDefault,
                   defaultEditionId,
                   false,
@@ -120,8 +123,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 var tenant = await _tenantManager.GetByIdAsync(tenantId);
                 await _appNotifier.NewTenantRegisteredAsync(tenant);
 
-                CurrentUnitOfWork.EnableFilter(AbpDataFilters.MayHaveTenant);
-                CurrentUnitOfWork.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, tenant.Id);
+                CurrentUnitOfWork.SetTenantId(tenant.Id);
 
                 var user = await _userManager.FindByNameAsync(Authorization.Users.User.AdminUserName);
 

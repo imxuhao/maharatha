@@ -5,10 +5,12 @@ using Abp.Authorization;
 using Abp.Configuration;
 using Abp.Extensions;
 using Abp.Net.Mail;
+using Abp.Timing;
 using Abp.Zero.Configuration;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
 using CAPS.CORPACCOUNTING.Editions;
+using CAPS.CORPACCOUNTING.Timing;
 
 namespace CAPS.CORPACCOUNTING.Configuration.Host
 {
@@ -17,22 +19,28 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
     {
         private readonly IEmailSender _emailSender;
         private readonly EditionManager _editionManager;
+        private readonly ITimeZoneService _timeZoneService;
 
         public HostSettingsAppService(
             IEmailSender emailSender,
-            EditionManager editionManager)
+            EditionManager editionManager,
+            ITimeZoneService timeZoneService)
         {
             _emailSender = emailSender;
             _editionManager = editionManager;
+            _timeZoneService = timeZoneService;
         }
 
         public async Task<HostSettingsEditDto> GetAllSettings()
         {
+            var timezone = await SettingManager.GetSettingValueForApplicationAsync(TimingSettingNames.TimeZone);
             var hostSettings = new HostSettingsEditDto
             {
                 General = new GeneralSettingsEditDto
                 {
-                    WebSiteRootAddress = await SettingManager.GetSettingValueAsync(AppSettings.General.WebSiteRootAddress)
+                    WebSiteRootAddress = await SettingManager.GetSettingValueAsync(AppSettings.General.WebSiteRootAddress),
+                    Timezone = timezone,
+                    TimezoneForComparison = timezone
                 },
                 TenantManagement = new TenantManagementSettingsEditDto
                 {
@@ -64,6 +72,12 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
                 hostSettings.TenantManagement.DefaultEditionId = Convert.ToInt32(defaultTenantId);
             }
 
+            var defaultTimeZoneId = await _timeZoneService.GetDefaultTimezoneAsync(SettingScopes.Application, AbpSession.TenantId);
+            if (hostSettings.General.Timezone == defaultTimeZoneId)
+            {
+                hostSettings.General.Timezone = string.Empty;
+            }
+
             return hostSettings;
         }
 
@@ -72,12 +86,26 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
             //General
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.General.WebSiteRootAddress, input.General.WebSiteRootAddress.EnsureEndsWith('/'));
 
+            if (Clock.SupportsMultipleTimezone())
+            {
+                if (input.General.Timezone.IsNullOrEmpty())
+                {
+                    var defaultValue = await _timeZoneService.GetDefaultTimezoneAsync(SettingScopes.Application, AbpSession.TenantId);
+                    await SettingManager.ChangeSettingForApplicationAsync(TimingSettingNames.TimeZone, defaultValue);
+                }
+                else
+                {
+                    await SettingManager.ChangeSettingForApplicationAsync(TimingSettingNames.TimeZone, input.General.Timezone);
+                }
+            }
+
             //Tenant management
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.TenantManagement.AllowSelfRegistration, input.TenantManagement.AllowSelfRegistration.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault, input.TenantManagement.IsNewRegisteredTenantActiveByDefault.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.TenantManagement.UseCaptchaOnRegistration, input.TenantManagement.UseCaptchaOnRegistration.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
 
             var defaultEditionId = (input.TenantManagement.DefaultEditionId == null ? null : input.TenantManagement.DefaultEditionId.Value.ToString()) ?? "";
+
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.TenantManagement.DefaultEdition, defaultEditionId);
 
             //User management

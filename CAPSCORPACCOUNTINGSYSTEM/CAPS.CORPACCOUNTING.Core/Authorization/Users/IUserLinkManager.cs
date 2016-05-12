@@ -1,19 +1,17 @@
 using System.Threading.Tasks;
+using Abp;
+using Abp.Authorization.Users;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
     public interface IUserLinkManager
     {
-        Task Link(long userId, long targetUserId);
+        Task Link(User firstUser, User secondUser);
 
-        /// <summary>
-        /// returns true if user1 is linked to user2
-        /// </summary>
-        /// <param name="firstUserId"></param>
-        /// <param name="secondUserId"></param>
-        /// <returns></returns>
-        Task<bool> AreUsersLinked(long firstUserId, long secondUserId);
+        Task<bool> AreUsersLinked(UserIdentifier firstUserIdentifier, UserIdentifier secondUserIdentifier);
 
-        Task Unlink(long userId);
+        Task Unlink(UserIdentifier userIdentifier);
+
+        Task<UserAccount> GetUserAccountAsync(UserIdentifier userIdentifier);
     }
 }

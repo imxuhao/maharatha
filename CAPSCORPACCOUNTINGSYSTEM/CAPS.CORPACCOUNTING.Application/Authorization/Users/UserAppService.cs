@@ -245,7 +245,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
 
             //Notifications
-            await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.TenantId, user.Id);
+            await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.ToUserIdentifier());
             await _appNotifier.WelcomeToTheApplicationAsync(user);
 
             //Send activation email

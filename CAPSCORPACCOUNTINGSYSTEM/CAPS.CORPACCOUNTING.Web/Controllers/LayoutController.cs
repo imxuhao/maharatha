@@ -2,6 +2,7 @@
 using Abp.Application.Navigation;
 using Abp.Configuration;
 using Abp.Configuration.Startup;
+using Abp.Runtime.Session;
 using Abp.Threading;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Sessions;
@@ -39,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             headerModel.Languages = LocalizationManager.GetAllLanguages();
             headerModel.CurrentLanguage = LocalizationManager.CurrentLanguage;
             
-            headerModel.Menu = AsyncHelper.RunSync(() => _userNavigationManager.GetMenuAsync(FrontEndNavigationProvider.MenuName, AbpSession.UserId));
+            headerModel.Menu = AsyncHelper.RunSync(() => _userNavigationManager.GetMenuAsync(FrontEndNavigationProvider.MenuName, AbpSession.ToUserIdentifier()));
             headerModel.CurrentPageName = currentPageName;
 
             headerModel.IsMultiTenancyEnabled = _multiTenancyConfig.IsEnabled;

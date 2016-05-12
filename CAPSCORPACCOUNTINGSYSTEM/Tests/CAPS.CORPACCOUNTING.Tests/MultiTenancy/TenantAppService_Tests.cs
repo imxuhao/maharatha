@@ -1,7 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
+using Abp.MultiTenancy;
 using Abp.Zero.Configuration;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.MultiTenancy;
@@ -9,7 +11,6 @@ using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 using CAPS.CORPACCOUNTING.Notifications;
 using Shouldly;
 using Xunit;
-using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Tests.MultiTenancy
 {
@@ -27,7 +28,7 @@ namespace CAPS.CORPACCOUNTING.Tests.MultiTenancy
         public async Task GetTenants_Test()
         {
             //Act
-            var output = await _tenantAppService.GetTenants(new SearchInputDto());
+            var output = await _tenantAppService.GetTenants(new GetTenantsInput());
 
             //Assert
             output.TotalCount.ShouldBe(1);
@@ -48,7 +49,8 @@ namespace CAPS.CORPACCOUNTING.Tests.MultiTenancy
                     Name = "Tenant for test purpose",
                     AdminEmailAddress = "admin@testtenant.com",
                     AdminPassword = "123qwe",
-                    IsActive = true
+                    IsActive = true,
+                    ConnectionString = "Server=localhost; Database=CORPACCOUNTINGTest_" + Guid.NewGuid().ToString("N") + "; Trusted_Connection=True;"
                 });
 
             //Assert
@@ -57,23 +59,22 @@ namespace CAPS.CORPACCOUNTING.Tests.MultiTenancy
             tenant.Name.ShouldBe("Tenant for test purpose");
             tenant.IsActive.ShouldBe(true);
 
-            await UsingDbContext(
-                async context =>
+            await UsingDbContext(tenant.Id, async context =>
+            {
+                //Check static roles
+                var staticRoleNames = Resolve<IRoleManagementConfig>().StaticRoles.Where(r => r.Side == MultiTenancySides.Tenant).Select(role => role.RoleName).ToList();
+                foreach (var staticRoleName in staticRoleNames)
                 {
-                    //Check static roles
-                    var staticRoleNames = Resolve<IRoleManagementConfig>().StaticRoles.Select(role => role.RoleName).ToList();
-                    foreach (var staticRoleName in staticRoleNames)
-                    {
-                        (await context.Roles.CountAsync(r => r.TenantId == tenant.Id && r.Name == staticRoleName)).ShouldBe(1);
-                    }
+                    (await context.Roles.CountAsync(r => r.TenantId == tenant.Id &&  r.Name == staticRoleName)).ShouldBe(1);
+                }
 
-                    //Check default admin user
-                    var adminUser = await context.Users.FirstOrDefaultAsync(u => u.TenantId == tenant.Id && u.UserName == User.AdminUserName);
-                    adminUser.ShouldNotBeNull();
-                    
-                    //Check notification registration
-                    (await context.NotificationSubscriptions.FirstOrDefaultAsync(ns => ns.UserId == adminUser.Id && ns.NotificationName == AppNotificationNames.NewUserRegistered)).ShouldNotBeNull();
-                });
+                //Check default admin user
+                var adminUser = await context.Users.FirstOrDefaultAsync(u => u.TenantId == tenant.Id && u.UserName == User.AdminUserName);
+                adminUser.ShouldNotBeNull();
+
+                //Check notification registration
+                (await context.NotificationSubscriptions.FirstOrDefaultAsync(ns => ns.UserId == adminUser.Id && ns.NotificationName == AppNotificationNames.NewUserRegistered)).ShouldNotBeNull();
+            });
 
             //GET FOR EDIT -----------------------------
 

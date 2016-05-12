@@ -21,11 +21,5 @@ namespace CAPS.CORPACCOUNTING.Localization.Dto
         [Required(AllowEmptyStrings = true)]
         [StringLength(ApplicationLanguageText.MaxValueLength)]
         public string Value { get; set; }
-        public virtual string RegularExpression { get; set; }
-        public virtual bool IsActive { get; set; }
-        public virtual bool IsMandatory { get; set; }
-        public virtual long? OrganizationUnitId { get; set; }
-
-
     }
 }

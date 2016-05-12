@@ -213,7 +213,5 @@
     <text name="Last30Days" value="Letzte 30 Tage" />
     <text name="ThisMonth" value="Dieser Monat" />
     <text name="LastMonth" value="Letzter Monat" />
-    <text name="Export" value="Export" />
-    <text name="ExportToPDF" value="Als PDF-Datei" />
   </texts>
 </localizationDictionary>

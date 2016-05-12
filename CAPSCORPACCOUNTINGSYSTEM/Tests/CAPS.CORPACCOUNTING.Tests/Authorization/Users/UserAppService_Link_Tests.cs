@@ -11,10 +11,16 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
     public class UserAppService_Link_Tests : UserAppServiceTestBase
     {
         private readonly IUserLinkAppService _userLinkAppService;
+        private readonly IUserLinkManager _userLinkManager;
+        private readonly UserManager _userManager;
+        private readonly TenantManager _tenantManager;
 
         public UserAppService_Link_Tests()
         {
             _userLinkAppService = Resolve<IUserLinkAppService>();
+            _userLinkManager = Resolve<IUserLinkManager>();
+            _userManager = Resolve<UserManager>();
+            _tenantManager = Resolve<TenantManager>();
         }
 
         [Fact]
@@ -50,13 +56,16 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
             await UsingDbContextAsync(async context =>
             {
                 var linkedUser = await context.Users.FirstOrDefaultAsync(u => u.UserName == "test");
+                var linkedUserAccount = await _userLinkManager.GetUserAccountAsync(linkedUser.ToUserIdentifier());
+
                 var currentUser = await context.Users.FirstOrDefaultAsync(u => u.Id == AbpSession.UserId);
+                var currentUserAccount = await _userLinkManager.GetUserAccountAsync(currentUser.ToUserIdentifier());
 
-                currentUser.UserLinkId.HasValue.ShouldBe(true);
-                currentUser.UserLinkId.Value.ShouldBe(currentUser.Id);
+                currentUserAccount.UserLinkId.HasValue.ShouldBe(true);
+                currentUserAccount.UserLinkId.Value.ShouldBe(currentUser.Id);
 
-                linkedUser.UserLinkId.HasValue.ShouldBe(true);
-                linkedUser.UserLinkId.Value.ShouldBe(currentUser.Id);
+                linkedUserAccount.UserLinkId.HasValue.ShouldBe(true);
+                linkedUserAccount.UserLinkId.Value.ShouldBe(currentUser.Id);
             });
         }
 
@@ -68,7 +77,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
             await CreateTestTenantAndTestUser();
 
             LoginAsDefaultTenantAdmin();
-            CreateTestUsers();
+            await CreateTestUsersForAccountLinkingAsync();
 
             var linkToTestTenantUserInput = new LinkToUserInput
             {
@@ -89,42 +98,41 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
             await UsingDbContextAsync(async context =>
             {
                 var defaultTenantAdmin = await context.Users.FirstOrDefaultAsync(u => u.Id == AbpSession.UserId);
-                var jnash = await context.Users.FirstOrDefaultAsync(u => u.UserName == "jnash");
-                var testTenantUser = await context.Users.FirstOrDefaultAsync(u => u.UserName == "test");
+                var defaultTenantAdminAccount = await _userLinkManager.GetUserAccountAsync(defaultTenantAdmin.ToUserIdentifier());
 
-                jnash.UserLinkId.ShouldBe(jnash.Id);
-                defaultTenantAdmin.UserLinkId.ShouldBe(jnash.Id);
-                testTenantUser.UserLinkId.ShouldBe(jnash.Id);
+                var jnash = await context.Users.FirstOrDefaultAsync(u => u.UserName == "jnash");
+                var jnashAccount = await _userLinkManager.GetUserAccountAsync(jnash.ToUserIdentifier());
+
+                var testTenantUser = await context.Users.FirstOrDefaultAsync(u => u.UserName == "test");
+                var testTenantUserAccount = await _userLinkManager.GetUserAccountAsync(testTenantUser.ToUserIdentifier());
+
+                jnashAccount.UserLinkId.ShouldBe(jnash.Id);
+                defaultTenantAdminAccount.UserLinkId.ShouldBe(jnash.Id);
+                testTenantUserAccount.UserLinkId.ShouldBe(jnash.Id);
             });
         }
 
         private async Task CreateTestTenantAndTestUser()
         {
-            await UsingDbContextAsync(async context =>
+            Tenant testTenant = new Tenant("Test", "test");
+            await _tenantManager.CreateAsync(testTenant);
+
+            await _userManager.CreateAsync(new User
             {
-                var testTenant = new Tenant("Test", "test");
-                context.Tenants.Add(testTenant);
-                await context.SaveChangesAsync();
-
-                context.Users.Add(new User
-                {
-                    EmailAddress = "test@test.com",
-                    IsEmailConfirmed = true,
-                    Name = "Test",
-                    Surname = "User",
-                    UserName = "test",
-                    Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", //123qwe
-                    TenantId = testTenant.Id
-                });
-
-                await context.SaveChangesAsync();
+                EmailAddress = "test@test.com",
+                IsEmailConfirmed = true,
+                Name = "Test",
+                Surname = "User",
+                UserName = "test",
+                Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", //123qwe
+                TenantId = testTenant.Id
             });
         }
 
         private async Task LinkUserAndTestAsync(string tenancyName)
         {
             //Arrange
-            CreateTestUsers();
+            await CreateTestUsersForAccountLinkingAsync();
 
             //Act
             await _userLinkAppService.LinkToUser(new LinkToUserInput
@@ -138,14 +146,24 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
             await UsingDbContextAsync(async context =>
             {
                 var linkedUser = await context.Users.FirstOrDefaultAsync(u => u.UserName == "jnash");
+                var linkedUserAccount = await _userLinkManager.GetUserAccountAsync(linkedUser.ToUserIdentifier());
+
                 var currentUser = await context.Users.FirstOrDefaultAsync(u => u.Id == AbpSession.UserId);
+                var currentUserAccount = await _userLinkManager.GetUserAccountAsync(currentUser.ToUserIdentifier());
 
-                currentUser.UserLinkId.HasValue.ShouldBe(true);
-                currentUser.UserLinkId.Value.ShouldBe(currentUser.Id);
+                linkedUserAccount.UserLinkId.HasValue.ShouldBe(true);
+                linkedUserAccount.UserLinkId.Value.ShouldBe(currentUser.Id);
 
-                linkedUser.UserLinkId.HasValue.ShouldBe(true);
-                linkedUser.UserLinkId.Value.ShouldBe(currentUser.Id);
+                currentUserAccount.UserLinkId.HasValue.ShouldBe(true);
+                currentUserAccount.UserLinkId.Value.ShouldBe(currentUser.Id);
             });
+        }
+
+        private async Task CreateTestUsersForAccountLinkingAsync()
+        {
+            await _userManager.CreateAsync(CreateUserEntity("jnash", "John", "Nash", "jnsh2000@testdomain.com"));
+            await _userManager.CreateAsync(CreateUserEntity("adams_d", "Douglas", "Adams", "adams_d@gmail.com"));
+            await _userManager.CreateAsync(CreateUserEntity("artdent", "Arthur", "Dent", "ArthurDent@yahoo.com"));
         }
     }
 }

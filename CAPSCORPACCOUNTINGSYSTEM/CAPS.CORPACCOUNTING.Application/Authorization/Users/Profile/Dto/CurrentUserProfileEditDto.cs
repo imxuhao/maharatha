@@ -22,5 +22,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto
         [Required]
         [StringLength(User.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
+
+        public string Timezone { get; set; }
     }
 }

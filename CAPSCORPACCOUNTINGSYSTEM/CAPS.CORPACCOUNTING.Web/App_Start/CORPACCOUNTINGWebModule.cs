@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -9,6 +8,7 @@ using Abp.Hangfire.Configuration;
 using Abp.IO;
 using Abp.Modules;
 using Abp.Runtime.Caching.Redis;
+using Abp.Timing;
 using Abp.Web.Mvc;
 using Abp.Web.SignalR;
 using Abp.Zero.Configuration;
@@ -40,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Web
     {
         public override void PreInitialize()
         {
-            //Use database as language management
+            //Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             //Configure navigation/menu
@@ -48,20 +48,14 @@ namespace CAPS.CORPACCOUNTING.Web
             Configuration.Navigation.Providers.Add<FrontEndNavigationProvider>();
             Configuration.Navigation.Providers.Add<MpaNavigationProvider>();
 
-            // Comment these lines to stop using HangFire as background job manager.
-            Configuration.BackgroundJobs.UseHangfire(configuration =>
-            {
-                configuration.GlobalConfiguration.UseSqlServerStorage("Default");
-            });
+            //Uncomment these lines to use HangFire as background job manager.
+            //Configuration.BackgroundJobs.UseHangfire(configuration =>
+            //{
+            //    configuration.GlobalConfiguration.UseSqlServerStorage("Default");
+            //});
 
-            //Comment this line to not use Redis cache instead of in-memory cache.
+            //Uncomment this line to use Redis cache instead of in-memory cache.
             //Configuration.Caching.UseRedis();
-
-            //Set the Caching Time as 2 hours
-            Configuration.Caching.ConfigureAll(cache =>
-            {
-                cache.DefaultSlidingExpireTime = TimeSpan.FromHours(2);
-            });
         }
 
         public override void Initialize()
@@ -97,7 +91,7 @@ namespace CAPS.CORPACCOUNTING.Web
             appFolders.SampleProfileImagesFolder = server.MapPath("~/Common/Images/SampleProfilePics");
             appFolders.TempFileDownloadFolder = server.MapPath("~/Temp/Downloads");
             appFolders.WebLogsFolder = server.MapPath("~/Logs");
-
+            
             try { DirectoryHelper.CreateIfNotExists(appFolders.TempFileDownloadFolder); } catch { }
         }
     }

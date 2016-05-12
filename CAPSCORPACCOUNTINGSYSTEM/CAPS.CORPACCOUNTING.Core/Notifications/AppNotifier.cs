@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Abp;
 using Abp.Localization;
 using Abp.Notifications;
 using CAPS.CORPACCOUNTING.Authorization.Users;
@@ -21,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Notifications
                 AppNotificationNames.WelcomeToTheApplication,
                 new MessageNotificationData(L("WelcomeToTheApplicationNotificationMessage")),
                 severity: NotificationSeverity.Success,
-                userIds: new[] { user.Id }
+                userIds: new[] { user.ToUserIdentifier() }
                 );
         }
 
@@ -54,13 +55,13 @@ namespace CAPS.CORPACCOUNTING.Notifications
         }
 
         //This is for test purposes
-        public async Task SendMessageAsync(long userId, string message, NotificationSeverity severity = NotificationSeverity.Info)
+        public async Task SendMessageAsync(UserIdentifier user, string message, NotificationSeverity severity = NotificationSeverity.Info)
         {
             await _notificationPublisher.PublishAsync(
                 "App.SimpleMessage",
                 new MessageNotificationData(message),
                 severity: severity,
-                userIds: new[] { userId }
+                userIds: new[] { user }
                 );
         }
     }

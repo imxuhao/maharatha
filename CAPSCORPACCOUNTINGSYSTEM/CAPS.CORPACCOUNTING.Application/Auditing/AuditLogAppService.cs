@@ -78,7 +78,7 @@ namespace CAPS.CORPACCOUNTING.Auditing
             var query = from auditLog in _auditLogRepository.GetAll()
                 join user in _userRepository.GetAll() on auditLog.UserId equals user.Id into userJoin
                 from joinedUser in userJoin.DefaultIfEmpty()
-                where auditLog.ExecutionTime >= input.StartDate && auditLog.ExecutionTime < input.EndDate
+                where auditLog.ExecutionTime >= input.StartDate && auditLog.ExecutionTime <= input.EndDate
                 select new AuditLogAndUser {AuditLog = auditLog, User = joinedUser};
 
             query = query

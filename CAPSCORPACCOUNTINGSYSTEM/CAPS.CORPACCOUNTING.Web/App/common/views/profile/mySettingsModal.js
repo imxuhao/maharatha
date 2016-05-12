@@ -4,9 +4,12 @@
         function ($scope, appSession, $uibModalInstance, profileService) {
             var vm = this;
 
+            var initialTimezone = null;
+
             vm.saving = false;
             vm.user = null;
             vm.canChangeUserName = true;
+            vm.showTimezoneSelection = abp.clock.provider.supportsMultipleTimezone;
 
             vm.save = function () {
                 vm.saving = true;
@@ -20,6 +23,13 @@
                         abp.notify.info(app.localize('SavedSuccessfully'));
 
                         $uibModalInstance.close();
+                        
+                        if (abp.clock.provider.supportsMultipleTimezone && initialTimezone !== vm.user.timezone) {
+                            abp.message.info(app.localize('TimeZoneSettingChangedRefreshPageNotification')).done(function() {
+                                window.location.reload();
+                            });
+                        }
+
                     }).finally(function () {
                         vm.saving = false;
                     });
@@ -35,6 +45,7 @@
                 }).success(function (result) {
                     vm.user = result;
                     vm.canChangeUserName = vm.user.userName != app.consts.userManagement.defaultAdminUserName;
+                    initialTimezone = vm.user.timezone;
                 });
             }
 

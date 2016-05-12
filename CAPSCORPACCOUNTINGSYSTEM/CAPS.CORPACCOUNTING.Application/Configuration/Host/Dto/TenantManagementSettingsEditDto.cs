@@ -11,5 +11,6 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
         public bool UseCaptchaOnRegistration { get; set; }
 
         public int? DefaultEditionId { get; set; }
+        
     }
 }

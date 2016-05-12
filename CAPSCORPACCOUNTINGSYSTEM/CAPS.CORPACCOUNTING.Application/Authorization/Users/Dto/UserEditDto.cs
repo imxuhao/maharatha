@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Abp.Authorization.Users;
 using Abp.Domain.Entities;
 using Abp.Runtime.Validation;
 
@@ -21,12 +22,12 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
         public string Surname { get; set; }
 
         [Required]
-        [StringLength(User.MaxUserNameLength)]
+        [StringLength(AbpUserBase.MaxUserNameLength)]
         public string UserName { get; set; }
 
         [Required]
         [EmailAddress]
-        [StringLength(User.MaxEmailAddressLength)]
+        [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
 
         // Not used "Required" attribute since empty value is used to 'not change password'

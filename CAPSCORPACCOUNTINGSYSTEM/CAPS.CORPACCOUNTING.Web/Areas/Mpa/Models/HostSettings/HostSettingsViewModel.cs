@@ -9,5 +9,7 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.HostSettings
         public HostSettingsEditDto Settings { get; set; }
 
         public List<ComboboxItemDto> EditionItems { get; set; }
+
+        public List<ComboboxItemDto> TimezoneItems { get; set; }
     }
 }

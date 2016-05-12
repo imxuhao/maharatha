@@ -7,7 +7,5 @@ namespace CAPS.CORPACCOUNTING.Sessions.Dto
         public UserLoginInfoDto User { get; set; }
 
         public TenantLoginInfoDto Tenant { get; set; }
-
-        public long  UserOrganizationId {get; set; }
     }
 }

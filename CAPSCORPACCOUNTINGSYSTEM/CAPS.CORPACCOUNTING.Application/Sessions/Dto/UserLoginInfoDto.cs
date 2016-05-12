@@ -16,7 +16,5 @@ namespace CAPS.CORPACCOUNTING.Sessions.Dto
         public string EmailAddress { get; set; }
 
         public string ProfilePictureId { get; set; }
-
-        public long DefaultOrganizationId { get; set; }
     }
 }

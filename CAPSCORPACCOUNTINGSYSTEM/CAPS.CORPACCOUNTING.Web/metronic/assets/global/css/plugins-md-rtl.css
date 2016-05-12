@@ -1,8 +1,11 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /******************************
  3RD PARTY PLUGIN CUSTOMIZATION 
 ******************************/
 /* Cubic Bezier Transition */
+/***
+Bootstrap Colorpicker
+***/
 .input-group.color .input-group-btn i {
   position: absolute;
   display: block;
@@ -13,8 +16,14 @@
 
 .colorpicker.dropdown-menu {
   padding: 5px; }
+
+/* change z-index when opened in modal */
 .modal-open .colorpicker {
   z-index: 10055 !important; }
+
+/***
+Bootstrap Datepaginator
+***/
 .datepaginator a {
   font-family: 'Open Sans';
   font-size: 13px;
@@ -32,6 +41,10 @@
 
 .datepaginator .fa-angle-left:before {
   content: ""; }
+
+/***
+Bootstrap Datepicker
+***/
 .datepicker.dropdown-menu {
   padding: 5px; }
 
@@ -52,6 +65,8 @@
 
 .datepicker .input-daterange input {
   text-align: right; }
+
+/* change z-index when opened in modal */
 .modal-open .datepicker {
   z-index: 10055 !important; }
 
@@ -74,6 +89,10 @@
 
 .datepicker .fa-angle-right:before {
   content: ""; }
+
+/***
+Bootstrap Daterangepicker
+***/
 .modal-open .daterangepicker {
   z-index: 10055 !important; }
 
@@ -107,11 +126,11 @@
 .daterangepicker .ranges {
   width: 170px; }
   .daterangepicker .ranges ul > li.active {
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px; }
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px; }
 
 .daterangepicker .ranges .btn {
   margin-top: 10px; }
@@ -136,6 +155,10 @@
 
 .daterangepicker .fa-angle-left:before {
   content: ""; }
+
+/***
+Bootstrap  Datetimepicker
+***/
 .datetimepicker table td {
   color: #000;
   font-weight: 300  !important;
@@ -163,8 +186,14 @@
 
 .datetimepicker .fa-angle-right:before {
   content: ""; }
+
+/* change z-index when opened in modal */
 .modal-open .datetimepicker {
   z-index: 10055; }
+
+/***
+Bootstrap Editable
+***/
 .editable-input table,
 .editable-input table th,
 .editable-input table td,
@@ -173,6 +202,10 @@
 
 .editable-input .combodate select {
   margin-bottom: 5px; }
+
+/***
+Jansy File Input plugin css changes
+***/
 .fileinput {
   margin-bottom: 0; }
   .fileinput .close {
@@ -180,28 +213,32 @@
   .fileinput .input-group {
     white-space: nowrap;
     overflow: hidden; }
+
+/***
+Bootstrap Markdown
+***/
 .md-input {
   padding: 5px !important;
   border-bottom: 0 !important;
-  -webkit-border-radius: 0 0 4px 4px;
-  -moz-border-radius: 0 0 4px 4px;
-  -ms-border-radius: 0 0 4px 4px;
-  -o-border-radius: 0 0 4px 4px;
-  border-radius: 0 0 4px 4px; }
+  -webkit-border-radius: 0 0 2px 2px;
+  -moz-border-radius: 0 0 2px 2px;
+  -ms-border-radius: 0 0 2px 2px;
+  -o-border-radius: 0 0 2px 2px;
+  border-radius: 0 0 2px 2px; }
 
 .md-editor {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px; }
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px; }
   .md-editor .btn-toolbar {
     margin-right: 0px;
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    -ms-border-radius: 4px 4px 0 0;
-    -o-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0; }
+    -webkit-border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    -ms-border-radius: 2px 2px 0 0;
+    -o-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0; }
     .md-editor .btn-toolbar .btn-group .btn-sm.btn {
       padding-bottom: 3px; }
     .md-editor .btn-toolbar .btn-group .btn-primary {
@@ -213,6 +250,10 @@
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   box-shadow: none !important; }
+
+/***
+Error state for WYSIWYG Editors
+***/
 .has-error .md-editor {
   border: 1px solid #fbe1e3 !important; }
 
@@ -225,6 +266,7 @@
 /***
 Bootstrap Modal
 ***/
+/* fix: content shifting to the right on modal open */
 .modal-open.page-overflow .page-container,
 .modal-open.page-overflow .page-container .navbar-fixed-top,
 .modal-open.page-overflow .page-container .navbar-fixed-bottom,
@@ -233,6 +275,8 @@ Bootstrap Modal
 
 .modal-scrollable {
   overflow: hidden !important; }
+
+/* BS 3.3.1 fix */
 .modal-backdrop {
   position: fixed;
   bottom: 0; }
@@ -241,6 +285,34 @@ Bootstrap Modal
   overflow: hidden !important;
   z-index: 10051;
   overflow-y: scroll !important; }
+
+.modal {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  border: 0 !important; }
+  .modal .modal-body {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    border: 0; }
+  .modal .modal-title {
+    font-weight: 400; }
+  .modal .modal-footer {
+    border: 0 !important; }
+
+.modal-backdrop,
+.modal-backdrop.fade.in {
+  opacity: 0.2 ;
+  filter: alpha(opacity=20) ; }
+
+/***
+Bootstrap Select
+***/
 .bootstrap-select .btn {
   border-color: #c2cad8; }
 
@@ -293,11 +365,19 @@ Bootstrap Modal
 
 .bootstrap-select .dropdown-menu {
   z-index: 9999 !important; }
+
+/***
+Bootstrap Switch 
+***/
 .bootstrap-switch {
   border-color: #c2cad8; }
   .bootstrap-switch.bootstrap-switch-focused {
     box-shadow: none;
     border-color: #c2cad8; }
+
+/***
+Color variants
+***/
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary {
   color: #fff;
@@ -327,9 +407,15 @@ Bootstrap Modal
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default {
   color: #444;
   background: #e8eaef; }
+
+/* Bootstrap switch on portlet headers */
 .portlet:not(.light) > .portlet-title > .actions > .bootstrap-switch {
   border-color: transparent;
   margin-top: 0px; }
+
+/***
+Bootstrap Time Picker
+***/
 .bootstrap-timepicker-widget table td a {
   padding: 4px 0; }
 
@@ -344,6 +430,10 @@ Bootstrap Modal
 .bootstrap-timepicker-widget.timepicker-orient-bottom:before,
 .bootstrap-timepicker-widget.timepicker-orient-bottom:after {
   top: auto; }
+
+/***
+Toastr Notifications
+***/
 .toast {
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
@@ -389,6 +479,10 @@ Bootstrap Modal
   margin-right: -150px; }
   .toast-bottom-center .toast {
     margin: 0 !important; }
+
+/***
+Bootstrap Wizard
+***/
 .form-wizard .progress {
   margin-bottom: 30px; }
 
@@ -444,13 +538,19 @@ Bootstrap Modal
       display: inline-block; }
 
 @media (min-width: 768px) and (max-width: 1200px) {
+  /* 768px & 1200px */
   .form-wizard .step .desc {
     margin-top: 10px;
     display: block; } }
 
 @media (max-width: 768px) {
+  /* 768px */
   .form-wizard .steps > li > a {
     text-align: right; } }
+
+/*!
+ * Tab drop for Bootstrap
+ */
 .tabbable-tabdrop .nav-tabs,
 .tabbable-tabdrop .nav-pills {
   position: relative; }
@@ -468,6 +568,10 @@ Bootstrap Modal
 .tabbable-tabdrop .dropdown-menu:before {
   left: 9px;
   right: auto; }
+
+/***
+wysihtml5
+***/
 .wysihtml5-sandbox {
   width: 100% !important; }
 
@@ -477,6 +581,10 @@ Bootstrap Modal
 
 .wysihtml5-toolbar li .dropdown-menu {
   margin-top: 5px; }
+
+/***
+Error state for WYSIWYG Editors
+***/
 .has-error .wysihtml5-sandbox {
   border: 1px solid #fbe1e3 !important; }
 
@@ -485,30 +593,34 @@ Bootstrap Modal
 
 .has-warning .wysihtml5-sandbox {
   border: 1px solid #f9e491 !important; }
+
+/***
+Error state for WYSIWYG Editors
+***/
 .note-editor {
   border: 1px solid #c2cad8;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px; }
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px; }
   .note-editor .note-toolbar {
     border-bottom: 1px solid #c2cad8;
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    -ms-border-radius: 4px 4px 0 0;
-    -o-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0; }
+    -webkit-border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    -ms-border-radius: 2px 2px 0 0;
+    -o-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0; }
   .note-editor .note-statusbar {
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
-    -ms-border-radius: 0 0 4px 4px;
-    -o-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px; }
+    -webkit-border-radius: 0 0 2px 2px;
+    -moz-border-radius: 0 0 2px 2px;
+    -ms-border-radius: 0 0 2px 2px;
+    -o-border-radius: 0 0 2px 2px;
+    border-radius: 0 0 2px 2px; }
     .note-editor .note-statusbar .note-resizebar {
       border-top: 1px solid #c2cad8; }
-  .note-editor.fullscreen {
-    z-index: 11000;
+  .note-editor.note-frame.fullscreen {
+    z-index: 10050;
     width: 100% !important; }
   .note-editor .dropdown-menu:before {
     right: 9px;
@@ -528,10 +640,13 @@ Bootstrap Modal
 
 .has-warning .note-editor {
   border: 1px solid #f9e491 !important; }
+
+/***
+Bootstrap GtreeTable
+***/
 .gtreetable .dropdown-menu {
   margin-top: 0px; }
-  .gtreetable .dropdown-menu:after,
-  .gtreetable .dropdown-menu:before {
+  .gtreetable .dropdown-menu:after, .gtreetable .dropdown-menu:before {
     display: none !important; }
 
 .gtreetable .node-action .form-control {
@@ -545,6 +660,10 @@ Bootstrap Modal
 .gtreetable .node-icon-type {
   opacity: 0.6 ;
   filter: alpha(opacity=60) ; }
+
+/***
+Modify bootstrap-tagsinput plugin's css
+***/
 .bootstrap-tagsinput .tag [data-role="remove"] {
   box-shadow: none;
   font-family: arial; }
@@ -553,8 +672,30 @@ Bootstrap Modal
   .bootstrap-tagsinput .tag [data-role="remove"]:hover {
     text-decoration: none;
     box-shadow: none; }
+
+.mt-bootstrap-tables .mt-btm-transform .bars {
+  height: auto; }
+
+.fixed-table-toolbar .columns label {
+  margin: 10px;
+  padding: 0 30px 0 0; }
+
+.fixed-table-header th.bs-checkbox {
+  outline: none; }
+  .fixed-table-header th.bs-checkbox .th-inner {
+    overflow: visible; }
+    .fixed-table-header th.bs-checkbox .th-inner .mt-checkbox {
+      left: -5px; }
+
+/***
+Bootbox
+***/
 .bootbox .bootbox-close-button {
   margin-top: 0px !important; }
+
+/*--------------------------------------------------
+    [CSS Animation Amchart]
+----------------------------------------------------*/
 .CSSAnimationChart {
   width: 100%;
   height: 500px; }
@@ -598,14 +739,14 @@ Bootstrap Modal
     stroke-width: 50px; } }
 
 .amcharts-graph-column-front {
-  -webkit-transition: all 0.3s 0.3s ease-out;
-  transition: all 0.3s 0.3s ease-out; }
+  -webkit-transition: all .3s .3s ease-out;
+  transition: all .3s .3s ease-out; }
 
 .amcharts-graph-column-front:hover {
   fill: #496375;
   stroke: #496375;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out; }
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out; }
 
 .amcharts-graph-g3 {
   stroke-linejoin: round;
@@ -629,12 +770,20 @@ Bootstrap Modal
     stroke-dashoffset: 500%; }
   100% {
     stroke-dashoffset: 0px; } }
+
+/*--------------------------------------------------
+    [Mao Amchart]
+----------------------------------------------------*/
 .mapChart {
   width: 100%;
   height: 500px; }
   .mapChart a {
     color: #bbb !important;
     font-size: 12px !important; }
+
+/*--------------------------------------------------
+    [Column Line]
+----------------------------------------------------*/
 .columnLine {
   width: 100%;
   height: 350px;
@@ -654,28 +803,36 @@ Bootstrap Modal
 @keyframes am-moving-dashes {
   100% {
     stroke-dashoffset: -28px; } }
+
+/*--------------------------------------------------
+    [Animated Pie Chart]
+----------------------------------------------------*/
 .animated-pie-chart {
   width: 100%;
   height: 350px;
   font-size: 11px; }
+
+/***
+CKEditor css changes
+***/
 .cke {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px; }
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px; }
   .cke .cke-top {
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    -ms-border-radius: 4px 4px 0 0;
-    -o-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0; }
+    -webkit-border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    -ms-border-radius: 2px 2px 0 0;
+    -o-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0; }
   .cke .cke-bottom {
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
-    -ms-border-radius: 0 0 4px 4px;
-    -o-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px; }
+    -webkit-border-radius: 0 0 2px 2px;
+    -moz-border-radius: 0 0 2px 2px;
+    -ms-border-radius: 0 0 2px 2px;
+    -o-border-radius: 0 0 2px 2px;
+    border-radius: 0 0 2px 2px; }
 
 .cke_bottom,
 .cke_inner,
@@ -746,6 +903,10 @@ Bootstrap Modal
   -moz-box-shadow: none !important;
   -ms-box-shadow: none !important;
   -o-box-shadow: none !important; }
+
+/***
+Error state for WYSIWYG Editors
+***/
 .has-error .cke {
   border: 1px solid #fbe1e3 !important; }
 
@@ -754,6 +915,10 @@ Bootstrap Modal
 
 .has-warning .cke {
   border: 1px solid #f9e491 !important; }
+
+/***
+Clockface
+***/
 .modal-open .clockface {
   z-index: 10055 !important; }
 
@@ -762,6 +927,10 @@ Bootstrap Modal
   background-color: #4b8df8 !important;
   background-image: none;
   filter: none; }
+
+/***
+Datatables general customization
+***/
 .table-checkable tr > th:first-child,
 .table-checkable tr > td:first-child {
   text-align: center;
@@ -781,13 +950,15 @@ table.dataTable.no-footer {
 table.dataTable tr.heading > th {
   background-color: #fbfcfd; }
 
-table.dataTable td.sorting_1,
-table.dataTable td.sorting_2,
-table.dataTable td.sorting_3,
+table.dataTable td.sorting_1, table.dataTable td.sorting_2, table.dataTable td.sorting_3,
 table.dataTable th.sorting_1,
 table.dataTable th.sorting_2,
 table.dataTable th.sorting_3 {
   background: #fbfcfd !important; }
+
+/***
+Extended pagination
+***/
 .paging_bootstrap_extended {
   margin: 5px 0 0 0 !important;
   padding: 0 !important;
@@ -829,6 +1000,10 @@ table.dataTable th.sorting_3 {
 
 .table-container .table-actions-wrapper {
   display: none; }
+
+/***
+Scroller Extension
+***/
 .dataTables_scroll {
   margin-bottom: 10px; }
 
@@ -842,6 +1017,10 @@ table.dataTable th.sorting_3 {
 
 .table-both-scroll .dataTables_scrollBody {
   border-bottom: 0 !important; }
+
+/***
+Datatables processing
+***/
 .dataTables_wrapper .dataTables_processing {
   width: 200px;
   display: inline-block;
@@ -857,6 +1036,10 @@ table.dataTable th.sorting_3 {
   -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1); }
+
+/***
+Tool Buttons
+***/
 .dt-button-background {
   display: none !important; }
 
@@ -898,11 +1081,19 @@ a.dt-button {
     margin-top: -64px; }
   .portlet.box .dataTables_wrapper .dt-buttons {
     margin-top: -50px; }
+
+/***
+Rot Details
+***/
 .dataTable .row-details.row-details-close {
-  background: url("../img/datatable-row-openclose.png") no-repeat 100% 0; }
+  background: url("../img/datatable-row-openclose.png") no-repeat 0 0; }
 
 .dataTable .row-details.row-details-open {
-  background: url("../img/datatable-row-openclose.png") no-repeat 100% -23px; }
+  background: url("../img/datatable-row-openclose.png") no-repeat 0 -23px; }
+
+/***
+Sorting
+***/
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
 table.dataTable thead .sorting_desc,
@@ -933,6 +1124,10 @@ table.dataTable thead .sorting_desc_disabled {
 
 table.dataTable th:active {
   outline: none; }
+
+/***
+Fixed Header
+***/
 table.dataTable.fixedHeader-floating {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -950,6 +1145,10 @@ table.dataTable.fixedHeader-floating {
   padding: 10px 18px;
   border-top: 1px solid #e7ecf1;
   font-weight: 600; }
+
+/***
+Responsive Datatables
+***/
 .table.dataTable.dt-responsive
 .table.dataTable.responsive {
   width: 100%; }
@@ -1002,15 +1201,23 @@ table.dataTable > tbody > tr.child ul li {
     padding: 0 2px !important; } }
 
 @media (max-width: 767px) {
+  /* 767px */
   .portlet.box .dataTables_wrapper .dt-buttons,
   .portlet.light .dataTables_wrapper .dt-buttons {
     margin-top: 0;
-    margin-bottom: 20px; } }
+    margin-bottom: 20px; }
+    .portlet.box .dataTables_wrapper .dt-buttons > .dt-button,
+    .portlet.light .dataTables_wrapper .dt-buttons > .dt-button {
+      margin-top: 5px; } }
 
 .table-scrollable .dataTable th .btn-group,
 .table-scrollable .dataTable td .btn-group {
   position: absolute;
   margin-top: -2px; }
+
+/***
+Dropzone css changes(new in v1.1.1)
+***/
 .dropzone {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -1027,13 +1234,22 @@ table.dataTable > tbody > tr.child ul li {
   right: 0; }
 
 @media (max-width: 768px) {
+  /* 768px */
   .dropzone-file-area {
     width: auto; } }
+
+/***
+Fancy box fix overlay fix
+***/
 .fancybox-overlay {
   z-index: 100000; }
 
 .fancybox-opened {
   z-index: 100001; }
+
+/***
+FuelUX Spinners
+***/
 .spinner-buttons.btn-group-vertical .btn {
   text-align: center;
   margin: 0;
@@ -1044,14 +1260,15 @@ table.dataTable > tbody > tr.child ul li {
   padding-top: 0px; }
   .page-style-rounded .spinner-buttons.btn-group-vertical .btn.spinner-up {
     border-radius: 0;
-    border-top-left-radius: 4px !important; }
+    border-top-left-radius: 2px !important; }
   .page-style-rounded .spinner-buttons.btn-group-vertical .btn.spinner-down {
     border-radius: 0;
-    border-bottom-left-radius: 4px; }
+    border-bottom-left-radius: 2px; }
 
 /***
 Fullcalendar
 ***/
+/* External events */
 .external-event {
   display: inline-block;
   cursor: move;
@@ -1089,11 +1306,11 @@ Fullcalendar
   color: #fff;
   top: -48px;
   outline: none !important;
-  -webkit-border-radius: 4px 4px 0 0;
-  -moz-border-radius: 4px 4px 0 0;
-  -ms-border-radius: 4px 4px 0 0;
-  -o-border-radius: 4px 4px 0 0;
-  border-radius: 4px 4px 0 0; }
+  -webkit-border-radius: 2px 2px 0 0;
+  -moz-border-radius: 2px 2px 0 0;
+  -ms-border-radius: 2px 2px 0 0;
+  -o-border-radius: 2px 2px 0 0;
+  border-radius: 2px 2px 0 0; }
 
 .portlet.calendar .fc-toolbar {
   margin-bottom: 0px; }
@@ -1116,32 +1333,31 @@ Fullcalendar
   height: 20px;
   top: -5px; }
 
-.portlet.calendar .fc-button.fc-state-active,
-.portlet.calendar .fc-button.fc-state-hover {
+.portlet.calendar .fc-button.fc-state-active, .portlet.calendar .fc-button.fc-state-hover {
   color: #666;
   background-color: #fff; }
 
 .portlet.calendar .fc-button.fc-state-disabled {
   color: #ddd; }
 
-.portlet.calendar .fc-button .fc-icon-right-single-arrow {
-  font-family: FontAwesome;
-  display: inline-block;
-  font-size: 16px; }
-  .portlet.calendar .fc-button .fc-icon-right-single-arrow:after {
-    content: "";
-    margin: 0; }
-  .portlet.calendar .fc-button .fc-icon-right-single-arrow:before {
-    content: "\f104"; }
-
 .portlet.calendar .fc-button .fc-icon-left-single-arrow {
   font-family: FontAwesome;
   display: inline-block;
   font-size: 16px; }
   .portlet.calendar .fc-button .fc-icon-left-single-arrow:after {
+    content: "";
+    margin: 0; }
+  .portlet.calendar .fc-button .fc-icon-left-single-arrow:before {
+    content: "\f104"; }
+
+.portlet.calendar .fc-button .fc-icon-right-single-arrow {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: 16px; }
+  .portlet.calendar .fc-button .fc-icon-right-single-arrow:after {
     margin: 0;
     content: ""; }
-  .portlet.calendar .fc-button .fc-icon-left-single-arrow:before {
+  .portlet.calendar .fc-button .fc-icon-right-single-arrow:before {
     content: "\f105"; }
 
 .portlet.calendar .fc-text-arrow {
@@ -1192,8 +1408,7 @@ Fullcalendar
   .portlet.calendar.light .fc-button .fc-text-arrow {
     margin-top: -6px;
     display: inline-block; }
-  .portlet.calendar.light .fc-button.fc-state-active,
-  .portlet.calendar.light .fc-button.fc-state-hover {
+  .portlet.calendar.light .fc-button.fc-state-active, .portlet.calendar.light .fc-button.fc-state-hover {
     color: #333;
     border-bottom: 2px solid #36c6d3; }
   .portlet.calendar.light .fc-button.fc-state-disabled {
@@ -1214,8 +1429,7 @@ Fullcalendar
   color: #000;
   text-shadow: none;
   text-align: center; }
-  .portlet.calendar .mobile .fc-button.fc-state-hover,
-  .portlet.calendar .mobile .fc-button.fc-state-active {
+  .portlet.calendar .mobile .fc-button.fc-state-hover, .portlet.calendar .mobile .fc-button.fc-state-active {
     background-color: #eee; }
   .portlet.calendar .mobile .fc-button.fc-state-disabled {
     color: #bbb; }
@@ -1233,20 +1447,27 @@ Fullcalendar
   padding: 0px;
   width: 0px; }
 
-.portlet.calendar .mobile .fc-header-right {
+.portlet.calendar .mobile .fc-header-left {
   position: absolute;
   z-index: 10; }
-  .portlet.calendar .mobile .fc-header-right .fc-button {
+  .portlet.calendar .mobile .fc-header-left .fc-button {
     top: -2px; }
 
 .portlet.calendar .mobile .fc-header-right {
   position: relative;
   left: 0; }
-  .portlet.calendar .mobile .fc-header-left .fc-button {
+  .portlet.calendar .mobile .fc-header-right .fc-button {
     top: 35px; }
 
 .portlet.calendar .mobile .fc-content {
   margin-top: 53px; }
+
+.portlet.calendar.light .fc-button {
+  top: -47px; }
+
+/***
+Google Maps
+***/
 .gmaps {
   height: 300px;
   width: 100%;
@@ -1264,6 +1485,10 @@ Fullcalendar
 #gmap_routes_instructions {
   margin-top: 10px;
   margin-bottom: 0px; }
+
+/***
+Gritter notification modify
+***/
 #gritter-notice-wrapper {
   left: 1px !important; }
 
@@ -1275,6 +1500,10 @@ Fullcalendar
   font-family: 'Open Sans';
   font-size: 18px;
   font-weight: 300; }
+
+/***
+Dashboard Charts(new in v1.2.1)
+***/
 .easy-pie-chart,
 .sparkline-chart {
   text-align: center; }
@@ -1320,6 +1549,10 @@ Fullcalendar
 .sparkline-chart .title > i,
 .easy-pie-chart .title > i {
   margin-top: 5px; }
+
+/***
+jQuery File Upload
+***/
 .blueimp-gallery .close {
   background-image: url("../img/portlet-remove-icon-white.png") !important;
   margin-top: -2px; }
@@ -1327,6 +1560,10 @@ Fullcalendar
 .blueimp-gallery .prev,
 .blueimp-gallery .next {
   border-radius: 23px !important; }
+
+/***
+jQuery Multi Select
+***/
 .ms-container .ms-list {
   border: 1px solid #e5e5e5;
   -webkit-box-shadow: none;
@@ -1353,6 +1590,10 @@ Fullcalendar
 
 .ms-container .form-control {
   margin-bottom: 5px; }
+
+/***
+jQuery Notific8 Plugin
+***/
 .jquery-notific8-message {
   font-size: 13px; }
 
@@ -1363,13 +1604,17 @@ Fullcalendar
   -moz-box-sizing: content-box;
   box-sizing: content-box; }
 
-.left .jquery-notific8-close-sticky span,
-.right .jquery-notific8-close-sticky span {
+.right .jquery-notific8-close-sticky span,
+.left .jquery-notific8-close-sticky span {
   font-size: 10px; }
 
 .jquery-notific8-heading {
   font-weight: 300;
   font-size: 16px; }
+
+/***
+Password Strength(in v1.4)
+***/
 .password-strength .password-verdict {
   display: inline-block;
   margin-top: 6px;
@@ -1381,6 +1626,10 @@ Fullcalendar
 
 .password-strength .progress-bar {
   padding: 2px; }
+
+/***
+jQuery Slimscroll
+***/
 .scroller {
   padding: 0px;
   margin: 0px;
@@ -1389,8 +1638,7 @@ Fullcalendar
 
 .scroller-footer {
   margin-top: 10px; }
-  .scroller-footer:before,
-  .scroller-footer:after {
+  .scroller-footer:before, .scroller-footer:after {
     content: " ";
     display: table; }
   .scroller-footer:after {
@@ -1398,6 +1646,10 @@ Fullcalendar
 
 .portlet-body .slimScrollBar {
   margin-left: 0px; }
+
+/***
+jQuery Sparkline
+***/
 .jqstooltip {
   width: auto !important;
   height: auto !important; }
@@ -1439,6 +1691,10 @@ Fullcalendar
 .sparkline-chart .title > i,
 .easy-pie-chart .title > i {
   margin-top: 5px; }
+
+/***
+jQuery UI Sliders(new in v1.1.1)
+***/
 .slider {
   border: 0;
   padding: 0;
@@ -1459,6 +1715,10 @@ Fullcalendar
 .ui-slider-handle {
   filter: none !important;
   background-image: none !important; }
+
+/***
+JQVMAP Plugin
+***/
 .jqvmap-zoomout,
 .jqvmap-zoomin {
   height: 16px;
@@ -1469,6 +1729,10 @@ Fullcalendar
   position: relative;
   overflow: hidden;
   height: 300px; }
+
+/***
+Jstree
+***/
 .jstree-default .jstree-clicked {
   border: 0;
   background-color: #e1e1e1;
@@ -1499,7 +1763,7 @@ Fullcalendar
   margin-right: 2px;
   content: "\f07c"; }
 
-.jstree-default.jstree-ltr .jstree-last {
+.jstree-default.jstree-rtl .jstree-last {
   background: transparent;
   background-repeat: no-repeat; }
 
@@ -1541,7 +1805,7 @@ Fullcalendar
   border: 0 !important; }
 
 .vakata-context .vakata-context-separator a,
-.vakata-context-ltr .vakata-context-separator a {
+.vakata-context-rtl .vakata-context-separator a {
   margin: 0;
   border: 0; }
 
@@ -1551,8 +1815,16 @@ Fullcalendar
   outline: none !important;
   padding: 2px 6px !important;
   margin-left: -4px !important; }
+
+/***
+NoUIRangeSlider
+***/
 .noUi-horizontal {
   margin: 9px 0; }
+
+/***
+Color variants
+***/
 .noUi-primary .noUi-connect {
   background: #337ab7; }
 
@@ -1572,18 +1844,28 @@ Fullcalendar
   background: #bac3d0; }
 
 /* Conect slider */
+/* For this slider, disable the 'origin' size. */
 .noui-connect .noUi-origin {
   left: auto;
   width: 0; }
+
+/* Position the bar and color it. */
 .noui-connect .connect {
   position: absolute;
   top: 0;
   bottom: 0;
   background: #80C9F5;
   box-shadow: inset 0 0 3px rgba(51, 51, 51, 0.45); }
+
+/* When the slider is moved by tap,
+   transition the connect bar like the handle. */
 .noui-connect.noUi-state-tap .connect {
   -webkit-transition: right 300ms, left 300ms;
   transition: right 300ms, left 300ms; }
+
+/**
+noUI Tooltips
+**/
 .noUi-handle .noUi-tooltip {
   display: block;
   position: absolute;
@@ -1599,6 +1881,10 @@ Fullcalendar
   .noUi-handle .noUi-tooltip strong {
     display: block;
     padding: 2px; }
+
+/***
+Google reCaptcha
+***/
 .form-recaptcha-img {
   margin-bottom: 10px;
   clear: both;
@@ -1682,36 +1968,20 @@ iframe[src="about:blank"] {
 
 .select2-results__option--highlighted .select2-result-repository__forks, .select2-results__option--highlighted .select2-result-repository__stargazers, .select2-results__option--highlighted .select2-result-repository__description, .select2-results__option--highlighted .select2-result-repository__watchers {
   color: #c1d7e9; }
-.checker {
-  margin-top: -2px !important;
-  margin-left: 2px !important; }
 
-.checker input,
-.radio input {
-  outline: none !important; }
-
-div.checker.disabled span,
-div.checker.disabled.active span {
-  background-position: -152px -260px; }
-
-div.checker.disabled:hover,
-div.radio.disabled:hover {
-  cursor: not-allowed; }
-
-div.radio,
-div.checker {
-  margin-left: 0;
-  margin-right: 3px; }
+/***
+Morris Charts
+***/
 .portlet-body-morris-fit {
   margin-left: -20px;
   margin-right: -20px;
   margin-bottom: -15px; }
   .portlet-body-morris-fit > svg {
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
-    -ms-border-radius: 0 0 4px 4px;
-    -o-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px; }
+    -webkit-border-radius: 0 0 2px 2px;
+    -moz-border-radius: 0 0 2px 2px;
+    -ms-border-radius: 0 0 2px 2px;
+    -o-border-radius: 0 0 2px 2px;
+    border-radius: 0 0 2px 2px; }
 
 .morris-hover.morris-default-style .morris-hover-row-label {
   text-align: right;
@@ -1725,6 +1995,10 @@ div.checker {
   font-size: 14px;
   font-weight: 400;
   font-family: "Open Sans", sans-serif; }
+
+/***
+iCheck
+***/
 .icheck-list > label {
   display: block;
   margin-bottom: 8px; }
@@ -1788,15 +2062,27 @@ div[class*='iradio_'] {
       background: #ff66b5; }
     .icheck-colors > li.purple {
       background: #6a5a8c; }
+
+/***
+AngularJS UI-select
+***/
 .ui-select-match-close {
   margin-top: 5px !important;
   margin-right: 5px !important; }
 
 .minicolors-swatch {
   border: 0; }
+
+/***
+Codemirror Plugin
+***/
 .CodeMirror {
   border: 1px solid #eee;
   height: auto; }
+
+/***
+Prism Plugin
+***/
 pre[class*="language-"] {
   padding: 10px;
   background: none !important;

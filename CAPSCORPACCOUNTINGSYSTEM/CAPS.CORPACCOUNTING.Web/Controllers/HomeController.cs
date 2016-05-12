@@ -14,5 +14,5 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             return View();
         }
-	}
+    }
 }

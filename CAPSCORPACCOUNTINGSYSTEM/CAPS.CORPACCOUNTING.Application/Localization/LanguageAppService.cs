@@ -14,8 +14,6 @@ using Abp.Localization;
 using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Localization.Dto;
-using System.Data.Entity;
-using Abp.Domain.Uow;
 
 namespace CAPS.CORPACCOUNTING.Localization
 {
@@ -25,21 +23,16 @@ namespace CAPS.CORPACCOUNTING.Localization
         private readonly IApplicationLanguageManager _applicationLanguageManager;
         private readonly IApplicationLanguageTextManager _applicationLanguageTextManager;
         private readonly IRepository<ApplicationLanguage> _languageRepository;
-        private  IRepository<CustomLanguageTextsUnit, long> _customLanguageTextsUnitrepository;
-        private readonly CustomLanguageTextsUnitManager _customLanguageTextsUnitManager;
+
         public LanguageAppService(
             IApplicationLanguageManager applicationLanguageManager,
             IApplicationLanguageTextManager applicationLanguageTextManager,
-            IRepository<ApplicationLanguage> languageRepository,
-            IRepository<CustomLanguageTextsUnit, long> customLanguageTextsUnitrepository,
-            CustomLanguageTextsUnitManager customLanguageTextsUnitManager)
+            IRepository<ApplicationLanguage> languageRepository)
         {
             _applicationLanguageManager = applicationLanguageManager;
             _languageRepository = languageRepository;
             _applicationLanguageTextManager = applicationLanguageTextManager;
-            _customLanguageTextsUnitrepository = customLanguageTextsUnitrepository;
-            _customLanguageTextsUnitManager=customLanguageTextsUnitManager;
-    }
+        }
 
         public async Task<GetLanguagesOutput> GetLanguages()
         {
@@ -136,24 +129,14 @@ namespace CAPS.CORPACCOUNTING.Localization
             var source = LocalizationManager.GetSource(input.SourceName);
             var baseCulture = CultureInfo.GetCultureInfo(input.BaseLanguageName);
             var targetCulture = CultureInfo.GetCultureInfo(input.TargetLanguageName);
-            var res =await _customLanguageTextsUnitrepository.GetAllListAsync();
 
-            var querry = from lang in source.GetAllStrings()
-                         join customlang in res on lang.Name equals customlang.Key
-                         into templang
-                         from custlanguage in templang.DefaultIfEmpty()
-                         select new { lang, custlanguage };
-
-            var languageTexts = querry
+            var languageTexts = source
+                .GetAllStrings()
                 .Select(localizedString => new LanguageTextListDto
                 {
-                    Key = localizedString.lang.Name,
-                    BaseValue = _applicationLanguageTextManager.GetStringOrNull(AbpSession.TenantId, source.Name, baseCulture, localizedString.lang.Name),
-                    TargetValue = _applicationLanguageTextManager.GetStringOrNull(AbpSession.TenantId, source.Name, targetCulture, localizedString.lang.Name, false),
-                    RegularExpression = !ReferenceEquals(localizedString.custlanguage,null)?localizedString.custlanguage.RegularExpression:"",
-                    IsActive = !ReferenceEquals(localizedString.custlanguage, null) ? localizedString.custlanguage.IsActive:false,
-                    IsMandatory = !ReferenceEquals(localizedString.custlanguage, null) ? localizedString.custlanguage.IsMandatory : false,
-                    OrganizationUnitId = !ReferenceEquals(localizedString.custlanguage, null) ? localizedString.custlanguage.OrganizationUnitId : null
+                    Key = localizedString.Name,
+                    BaseValue = _applicationLanguageTextManager.GetStringOrNull(AbpSession.TenantId, source.Name, baseCulture, localizedString.Name),
+                    TargetValue = _applicationLanguageTextManager.GetStringOrNull(AbpSession.TenantId, source.Name, targetCulture, localizedString.Name, false)
                 })
                 .AsQueryable();
 
@@ -197,14 +180,11 @@ namespace CAPS.CORPACCOUNTING.Localization
                 );
         }
 
-        [UnitOfWork]
         public async Task UpdateLanguageText(UpdateLanguageTextInput input)
         {
             var culture = GetCultureInfoByChecking(input.LanguageName);
             var source = LocalizationManager.GetSource(input.SourceName);
             await _applicationLanguageTextManager.UpdateStringAsync(AbpSession.TenantId, source.Name, culture, input.Key, input.Value);
-            await _customLanguageTextsUnitManager.UpdateAsync(tenantId:AbpSession.TenantId, key:input.Key,regularexpression:input.RegularExpression,
-                isactive:input.IsActive,ismandatory:input.IsMandatory,organizationunitid:input.OrganizationUnitId);
         }
 
         [AbpAuthorize(AppPermissions.Pages_Administration_Languages_Create)]

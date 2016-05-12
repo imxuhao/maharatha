@@ -13,6 +13,15 @@
                 <label>@L("Name")</label>
             </div>
 
+            <div class="form-group form-md-line-input form-md-floating-label no-hint" ng-if="vm.currentConnectionString">
+                <input type="text" name="ConnectionString" class="form-control edited" ng-model="vm.tenant.connectionString" required maxlength="@Tenant.MaxConnectionStringLength">
+                <label>@L("DatabaseConnectionString")</label>
+            </div>
+
+            <div ng-if="vm.currentConnectionString">
+                <span class="help-block text-warning">@L("TenantDatabaseConnectionStringChangeWarningMessage")</span>
+            </div>
+
             <div class="form-group form-md-line-input form-md-floating-label has-info">
                 <select id="TenantEditionSelectionCombobox" class="form-control" ng-class="{'edited':vm.tenant.editionId != null}" ng-options="vm.getEditionValue(item) as item.displayText for item in vm.editions" ng-model="vm.tenant.editionId"></select>
                 <label for="TenantEditionSelectionCombobox">@L("Edition")</label>

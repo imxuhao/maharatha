@@ -5,11 +5,13 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
     public class LinkedUserDto : EntityDto<long>
     {
+        public int? TenantId { get; set; }
+
         public string TenancyName { get; set; }
 
         public string Username { get; set; }
 
-        public Guid? ProfilePictureId { get; set; }
+        public DateTime? LastLoginTime { get; set; }
 
         public object GetShownLoginName(bool multiTenancyEnabled)
         {

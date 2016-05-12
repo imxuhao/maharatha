@@ -13,7 +13,6 @@
             _modalManager.getModal().find('p.login-attempt-date').each(function (index, p) {
                 var $p = $(p);
                 var date = $p.attr("data-date");
-                console.log(date);
                 var formattedDate = getCreationTime(date);
                 $p.html(formattedDate);
             });

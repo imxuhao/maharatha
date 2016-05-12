@@ -23,8 +23,8 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
                     context.Users.Add(CreateUserEntity("artdent", "Arthur", "Dent", "ArthurDent@yahoo.com"));
                 });
         }
-        
-        private User CreateUserEntity(string userName, string name, string surname, string emailAddress)
+
+        protected User CreateUserEntity(string userName, string name, string surname, string emailAddress)
         {
             return new User
                    {

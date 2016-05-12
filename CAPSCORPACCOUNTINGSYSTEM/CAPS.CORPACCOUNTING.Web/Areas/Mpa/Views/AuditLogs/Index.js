@@ -5,17 +5,18 @@
         var _$filterForm = $('#AuditLogFilterForm');
         var _auditLogService = abp.services.app.auditLog;
 
-        var _todayAsString = moment().format('YYYY-MM-DD');
+        var _todayStartAsString = moment().format('YYYY-MM-DDT00:00:00Z');
+        var _todayEndAsString = moment().format('YYYY-MM-DDT23:59:59.999Z');
         var _selectedDateRange = {
-            startDate: _todayAsString,
-            endDate: _todayAsString
+            startDate: _todayStartAsString,
+            endDate: _todayEndAsString
         };
 
         _$filterForm.find('input.date-range-picker').daterangepicker(
             $.extend(true, app.createDateRangePickerOptions(), _selectedDateRange),
             function(start, end, label) {
-                _selectedDateRange.startDate = start.format('YYYY-MM-DD');
-                _selectedDateRange.endDate = end.format('YYYY-MM-DD');
+                _selectedDateRange.startDate = start.format('YYYY-MM-DDT00:00:00Z');
+                _selectedDateRange.endDate = end.format('YYYY-MM-DDT23:59:59.999Z');
             });
 
         _$auditLogsTable.jtable({

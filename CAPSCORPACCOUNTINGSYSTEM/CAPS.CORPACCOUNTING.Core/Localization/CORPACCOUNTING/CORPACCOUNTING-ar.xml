@@ -133,7 +133,7 @@
     <text name="ConfirmationMailSentPleaseClickLinkInTheEmail">تم إرسال تأكيد البريد الإلكتروني إلى  {0} الرجاء الضغط على الرابط في الرسالة لتأكيد بريدك الإلكتروني</text>
     <text name="YourAccountIsWaitingToBeActivatedByAdmin">حسابك بإنتظار أن يتم تفعيله من قبل مشرف النظام.</text>
     <text name="NameSurname">الإسم</text>
-    <text name="UserManagement">إدارةالمستخدمين</text>
+    <text name="UserManagement">إدارة المستخدمين</text>
     <text name="AllowUsersToRegisterThemselves">السماح للمستخدمين بالإشتراك الذاتي على النظام.</text>
     <text name="AllowUsersToRegisterThemselves_Hint">إذا قمت بتعطيل هذه الخاصية, لا يمكن إضافة المستخدمين إلا من قبل المشرف باستخدام صفحة إدارة المستخدمين</text>
     <text name="NewRegisteredUsersIsActiveByDefault">المستخدمين الجدد المسجلين هم مغعّلين افتراضيا</text>
@@ -211,7 +211,7 @@
     <text name="TenantSelection">اختيار العميل</text>
     <text name="TenantSelection_Detail">الرجاء اختيار واحد من العملاء</text>
     <text name="LoginWith">تسجيل الدخول مع:</text>
-    <text name="PasswordChangeDontRememberMessage">إذا كنت لا تتذكر كلمة المرور {0} {</text>
+    <text name="PasswordChangeDontRememberMessage">إذا كنت لا تتذكر كلمة المرور {0}.</text>
     <text name="ClickHere">إضغط هنا</text>
     <text name="Apply">تطبيق</text>
     <text name="CustomRange">مدى مخصص</text>
@@ -345,7 +345,27 @@
     <text name="CacheSuccessfullyCleared">تم مسح ذاكرة التخزين المؤقت بنجاح.</text>
     <text name="AllCachesSuccessfullyCleared">تم مسح كل ذاكرة التخزين المؤقت بنجاح.</text>
     <text name="ClearAll">مسح الكل</text>
-    <text name="Export" value="تصدير" />
-    <text name="ExportToPDF" value="تصدير إلى PDF" />
+    <text name="Clear">مسح</text>
+    <text name="CachesHeaderInfo">بهذة الصفحة يمكنك مسح الذاكرة المؤقتة للنظام.</text>
+    <text name="TestEmailSettingsHeader">تجربة إعدادات البريد الإلكتروني</text>
+    <text name="SendTestEmail">تجربة إرسال بريد</text>
+    <text name="TestEmail_Subject">تجربة بريد قالب أي بي بي زيرو</text>
+    <text name="TestEmail_Body">هذا بريد للتجربة فقط.</text>
+    <text name="TestEmailSentSuccessfully">تم إرسال بريد التجربة بنجاح.</text>
+    <text name="WebSiteLogs">سجلات الموقع</text>
+    <text name="WebSiteLogsHeaderInfo">يمكنك ان ترى كل السجلات في هذه الصفحة أو تحميل جميع السجلات في ملف مضغوط واحد.</text>
+    <text name="DownloadAll">تحميل الكل</text>
+    <text name="TenantManagement">إدارة العملاء</text>
+    <text name="AllowTenantsToRegisterThemselves" value="السماح للعملاء بالتسجيل بالنظام." />
+    <text name="AllowTenantsToRegisterThemselves_Hint" value="إذا قمت بتعطيل هذا, يمكن فقط إضافة العملاء من قبل المشرف من خلال صفحة إدارة العملاء." />
+    <text name="NewRegisteredTenantsIsActiveByDefault" value="العملاء المسشتركين جديدا سيتم تفعيلهم إفتراضيا." />
+    <text name="NewRegisteredTenantsIsActiveByDefault_Hint" value="إذا قمت بتعطيل هذا، العملاء الجدد لن يكونوا مفعلين (ولا يمكن تسجيل الدخول) حتى يقوم المشرف بتفعيل الحساب يدويا." />
+    <text name="TenantSignUp">إشتراك العميل</text>
+    <text name="NewTenantRegisteredNotificationDefinition" value="عند إشتراك عميل جديد بالنظام." />
+    <text name="NewTenantRegisteredNotificationMessage" value="تم إشتراك عميل جديد بالنظام. إسم العميل : {tenancyName}." />
+    <text name="LoginAttempts">محاولات الدخول</text>
+    <text name="Failed">فشل</text>
+    <text name="NewTenant">إشتراك العملاء</text>
+    <text name="ResizedProfilePicture_Warn_SizeLimit" value="حجم الصورة بعد التصغير يجب أن يكون أقل من 100 كيلوبايت. قم بتصغير الصورة وحاول مرة اخرى." />
   </texts>
 </localizationDictionary>

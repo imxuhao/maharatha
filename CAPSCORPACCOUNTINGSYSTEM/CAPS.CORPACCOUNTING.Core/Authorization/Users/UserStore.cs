@@ -2,16 +2,13 @@
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
-using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
     /// <summary>
-    /// User store.
     /// Used to perform database operations for <see cref="UserManager"/>.
-    /// Extends <see cref="AbpUserStore{TTenant,TRole,TUser}"/>.
     /// </summary>
-    public class UserStore : AbpUserStore<Tenant, Role, User>
+    public class UserStore : AbpUserStore<Role, User>
     {
         public UserStore(
             IRepository<User, long> userRepository,

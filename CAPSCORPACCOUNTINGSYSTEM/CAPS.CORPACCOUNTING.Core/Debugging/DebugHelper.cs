@@ -6,10 +6,12 @@
         {
             get
             {
+#pragma warning disable
 #if DEBUG
                 return true;
 #endif
                 return false;
+#pragma warning restore
             }
         }
     }

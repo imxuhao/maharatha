@@ -38,7 +38,7 @@
                 var formatted = {
                     userNotificationId: userNotification.id,
                     text: abp.notifications.getFormattedMessageFromUserNotification(userNotification),
-                    time: userNotification.notification.creationTime,
+                    time: moment(userNotification.notification.creationTime).format("YYYY-MM-DD HH:mm:ss"),
                     icon: app.notification.getUiIconBySeverity(userNotification.notification.severity),
                     state: abp.notifications.getUserNotificationStateAsString(userNotification.state),
                     data: userNotification.notification.data,

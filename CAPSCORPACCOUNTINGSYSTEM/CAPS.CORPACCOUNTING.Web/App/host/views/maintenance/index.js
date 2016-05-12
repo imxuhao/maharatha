@@ -54,7 +54,7 @@
             vm.getFormattedLogs = function (logLines) {
                 var resultHtml = '';
                 angular.forEach(logLines, function (logLine) {
-                    resultHtml += '<span class="log-line">' + logLine
+                    resultHtml += '<span class="log-line">' + _.escape(logLine)
                     .replace('DEBUG', '<span class="label label-default">DEBUG</span>')
                     .replace('INFO', '<span class="label label-info">INFO</span>')
                     .replace('WARN', '<span class="label label-warning">WARN</span>')

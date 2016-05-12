@@ -19,9 +19,26 @@
             <label>@L("Name")</label>
         </div>
 
+        <div class="md-checkbox-list">
+            <div class="md-checkbox">
+                <input id="CreateTenant_UseHostDb" class="md-check" type="checkbox" name="UseHostDb" value="true" checked="checked">
+                <label for="CreateTenant_UseHostDb">
+                    <span class="inc"></span>
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    @L("UseHostDatabase")
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group form-md-line-input form-md-floating-label no-hint" style="display:none">
+            <input type="text" name="ConnectionString" class="form-control" required maxlength="@Tenant.MaxConnectionStringLength">
+            <label>@L("DatabaseConnectionString")</label>
+        </div>
+
         <div class="form-group form-md-line-input form-md-floating-label">
             <input type="email" name="AdminEmailAddress" class="form-control" required maxlength="@CAPS.CORPACCOUNTING.Authorization.Users.User.MaxEmailAddressLength">
-            <label>@L("EmailAddress")</label>
+            <label>@L("AdminEmailAddress")</label>
         </div>
 
         <div class="md-checkbox-list">

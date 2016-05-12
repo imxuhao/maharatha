@@ -6,6 +6,7 @@
 
             vm.saving = false;
             vm.tenant = null;
+            vm.currentConnectionString = null;
             vm.editions = [];
 
             vm.save = function () {
@@ -41,6 +42,7 @@
                     id: tenantId
                 }).success(function (result) {
                     vm.tenant = result;
+                    vm.currentConnectionString = result.connectionString;
                     vm.tenant.editionId = vm.tenant.editionId || 0;
                 });
             }

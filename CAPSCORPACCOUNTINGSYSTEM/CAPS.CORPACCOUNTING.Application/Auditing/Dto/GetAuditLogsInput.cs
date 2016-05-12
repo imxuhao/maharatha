@@ -41,20 +41,6 @@ namespace CAPS.CORPACCOUNTING.Auditing.Dto
             {
                 Sorting = "AuditLog." + Sorting;
             }
-
-            if (StartDate == DateTime.MinValue)
-            {
-                StartDate = Clock.Now;
-            }
-
-            StartDate = StartDate.Date;
-
-            if (EndDate == DateTime.MinValue)
-            {
-                EndDate = Clock.Now;
-            }
-
-            EndDate = EndDate.AddDays(1).Date;
         }
     }
 }

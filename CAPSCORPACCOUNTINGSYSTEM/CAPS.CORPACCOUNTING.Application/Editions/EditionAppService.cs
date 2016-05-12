@@ -9,7 +9,6 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
-using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Editions.Dto;
 
 namespace CAPS.CORPACCOUNTING.Editions
@@ -122,12 +121,6 @@ namespace CAPS.CORPACCOUNTING.Editions
 
             var edition = await _editionManager.GetByIdAsync(input.Edition.Id.Value);
             edition.DisplayName = input.Edition.DisplayName;
-            List<NameValue> featureValues;
-            if (ReferenceEquals(input.FeatureValues, null))
-            {
-                featureValues = (await _editionManager.GetFeatureValuesAsync(input.Edition.Id.Value)).ToList();
-                input.FeatureValues = featureValues.Select(t => new NameValueDto  {Value = t.Value,Name=t.Name }).ToList();
-            }  
 
             await SetFeatureValues(edition, input.FeatureValues);
         }

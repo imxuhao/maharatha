@@ -114,7 +114,8 @@
                 abp.ajax({
                     url: abp.appPath + 'Account/SwitchToLinkedAccount',
                     data: JSON.stringify({
-                        targetUserId: linkedUser.id
+                        targetUserId: linkedUser.id,
+                        targetTenantId: linkedUser.tenantId
                     })
                 });
             };

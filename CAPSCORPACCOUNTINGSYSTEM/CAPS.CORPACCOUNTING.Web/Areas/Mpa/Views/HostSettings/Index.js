@@ -1,7 +1,9 @@
 ﻿(function ($) {
     $(function () {
         var _hostSettingsService = abp.services.app.hostSettings;
-
+        var _initialTimeZone = $('#GeneralSettingsForm [name=Timezone]').val();
+        var _usingDefaultTimeZone = $('#GeneralSettingsForm [name=TimezoneForComparison]').val() === abp.setting.values["Abp.Timing.TimeZone"];
+        
         var _$tabPanel = $('#SettingsTabPanel');
 
         var _$smtpCredentialFormGroups = _$tabPanel
@@ -47,6 +49,15 @@
                 email: $('#EmailSmtpSettingsForm').serializeFormToObject()
             }).done(function () {
                 abp.notify.info(app.localize('SavedSuccessfully'));
+
+                var newTimezone = $('#GeneralSettingsForm [name=Timezone]').val();
+                if (abp.clock.provider.supportsMultipleTimezone &&
+                        _usingDefaultTimeZone &&
+                        _initialTimeZone !== newTimezone) {
+                    abp.message.info(app.localize('TimeZoneSettingChangedRefreshPageNotification')).done(function () {
+                        window.location.reload();
+                    });
+                }
             });
         });
 

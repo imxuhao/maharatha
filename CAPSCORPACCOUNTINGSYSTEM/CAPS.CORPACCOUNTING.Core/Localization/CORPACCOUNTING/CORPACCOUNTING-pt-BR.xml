@@ -345,7 +345,5 @@
     <text name="YouCanNotDeleteOwnAccount" value="Você não pode deletar sua própria conta de usuário!" />
     <text name="On" value="Ligado" />
     <text name="Off" value="Desligado" />`
-    <text name="Export" value="Exportar" />
-    <text name="ExportToPDF" value="Exportar para pdf" />
   </texts>
 </localizationDictionary>

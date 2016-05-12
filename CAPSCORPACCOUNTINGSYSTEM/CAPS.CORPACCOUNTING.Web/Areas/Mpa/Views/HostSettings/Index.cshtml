@@ -1,6 +1,7 @@
 ﻿@using Abp.Application.Services.Dto
 @using Abp.Extensions
 @using Abp.Web.Mvc.Extensions
+@using Abp.Timing;
 @using CAPS.CORPACCOUNTING.Web.Navigation
 @model CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.HostSettings.HostSettingsViewModel
 @{
@@ -52,7 +53,7 @@
             </ul>
 
             <div class="tab-content">
-                
+
                 <div class="tab-pane active" id="SettingsGeneralTab">
                     <form id="GeneralSettingsForm">
                         <div class="form-group form-md-line-input form-md-floating-label">
@@ -60,6 +61,16 @@
                             <label>@L("ThisWebSiteRootAddress")</label>
                             <span class="help-block">@L("ThisWebSiteRootAddress_Hint")</span>
                         </div>
+                        @if (Clock.SupportsMultipleTimezone())
+                        {
+                            <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                                @Html.DropDownList("Timezone", Model.TimezoneItems.Select(i => i.ToSelectListItem()), new {@class = "form-control edited"})
+                                <label>@L("Timezone")</label>
+                            </div>
+                            <div>
+                                @Html.Hidden("TimezoneForComparison", Model.Settings.General.TimezoneForComparison)
+                            </div>
+                        }
                     </form>
                 </div>
 

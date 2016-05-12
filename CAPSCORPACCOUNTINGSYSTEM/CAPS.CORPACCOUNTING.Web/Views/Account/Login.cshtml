@@ -7,8 +7,6 @@
 
 @section Scripts
 {
-    @Html.IncludeScript("~/Views/Account/TimeZoneList.js")
-    @Html.IncludeScript("~/Views/Account/detect_timezone.js")
     @Html.IncludeScript("~/Views/Account/Login.js")
 }
 
@@ -76,7 +74,7 @@
         {
             return "googleplus";
         }
-
+        
         return provider;
     };
 }
@@ -89,16 +87,16 @@
             @using (Html.BeginForm("ExternalLogin", "Account", method: FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-
+                
                 <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
                 <input type="hidden" name="provider" value="" />
-
+                
                 foreach (AuthenticationDescription p in loginProviders)
                 {
                     <li>
                         <a class="social-login-icon social-icon-color @getSocialIconClass(p.AuthenticationType)"
                            title="@p.AuthenticationType"
-                           data-provider="@p.AuthenticationType"
+                           data-provider="@p.AuthenticationType" 
                            href="javascript:;"></a>
                     </li>
                 }

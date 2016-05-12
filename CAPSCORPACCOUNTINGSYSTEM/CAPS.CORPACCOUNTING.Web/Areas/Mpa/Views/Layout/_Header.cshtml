@@ -97,8 +97,7 @@
 <script id="linkedAccountsSubMenuTemplate" type="x-tmpl-mustache">
     {{#items}}
     <li>
-        <a href="" data-user-id="{{id}}" class="recently-linked-user">
-            <img src="{{profilePictureUrl}}" width="22" height="22" class="img-rounded" />
+        <a href="" data-user-id="{{id}}" data-tenant-id="{{tenantId}}" class="recently-linked-user">
             {{shownUserName}}
         </a>
     </li>
@@ -139,7 +138,8 @@
                         <div>
                             <span class="notification-time" title="{{time}}">{{timeAgo}}</span>
                             {{#isUnread}}
-                            <span> - 
+                            <span>
+                                -
                                 <span data-notification-id="{{userNotificationId}}" class="set-as-read-text set-notification-as-read">@L("SetAsRead")</span>
                             </span>
                             {{/isUnread}}

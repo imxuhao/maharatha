@@ -27,12 +27,14 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
                         ScriptPaths.SweetAlert,
                         ScriptPaths.Toastr,
                         ScriptPaths.MomentJs,
+                        ScriptPaths.MomentTimezoneJs,
                         ScriptPaths.Abp,
                         ScriptPaths.Abp_JQuery,
                         ScriptPaths.Abp_Toastr,
                         ScriptPaths.Abp_BlockUi,
                         ScriptPaths.Abp_SpinJs,
-                        ScriptPaths.Abp_SweetAlert
+                        ScriptPaths.Abp_SweetAlert,
+                        ScriptPaths.Abp_Moment
                     ).ForceOrdered()
                 );
 

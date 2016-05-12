@@ -17,7 +17,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
         public async Task Update_User_Basic_Tests()
         {
             //Arrange
-            var managerRole = await CreateRoleAsync("Manager");
+            var managerRole = CreateRole("Manager");
             var adminUser = await GetUserByUserNameOrNullAsync(User.AdminUserName);
 
             //Act
@@ -144,9 +144,9 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
             });
         }
 
-        protected async Task<Role> CreateRoleAsync(string roleName)
+        protected Role CreateRole(string roleName)
         {
-            return await UsingDbContextAsync(async context => context.Roles.Add(new Role(AbpSession.TenantId, roleName, roleName)));
+            return UsingDbContext(context => context.Roles.Add(new Role(AbpSession.TenantId, roleName, roleName)));
         }
     }
 }

@@ -1,71 +1,69 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Abp;
+using Abp.Authorization.Users;
+using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
     public class UserLinkManager : CORPACCOUNTINGDomainServiceBase, IUserLinkManager
     {
-        private readonly UserManager _userManager;
+        private readonly IRepository<UserAccount, long> _userAccountRepository;
 
-        public UserLinkManager(
-            UserManager userManager)
+        public UserLinkManager(IRepository<UserAccount, long> userAccountRepository)
         {
-            _userManager = userManager;
-        }
-
-
-        [UnitOfWork]
-        public virtual async Task Link(long userId, long targetUserId)
-        {
-            using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
-            {
-                var user = await _userManager.GetUserByIdAsync(userId);
-                var targetUser = await _userManager.GetUserByIdAsync(targetUserId);
-
-                var userLinkId = user.UserLinkId ?? user.Id;
-                user.UserLinkId = userLinkId;
-
-                var usersToLink = targetUser.UserLinkId.HasValue
-                    ? _userManager.Users.Where(u => u.UserLinkId == targetUser.UserLinkId.Value).ToList()
-                    : new List<User> { targetUser };
-
-                usersToLink.ForEach(u =>
-                {
-                    u.UserLinkId = userLinkId;
-                });
-
-                await CurrentUnitOfWork.SaveChangesAsync();
-            }
-        }
-
-        public async Task<bool> AreUsersLinked(long firstUserId, long secondUserId)
-        {
-            using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
-            {
-                var user1 = await _userManager.GetUserByIdAsync(firstUserId);
-                var user2 = await _userManager.GetUserByIdAsync(secondUserId);
-
-                if (!user1.UserLinkId.HasValue || !user2.UserLinkId.HasValue)
-                {
-                    return false;
-                }
-
-                return user1.UserLinkId == user2.UserLinkId;
-            }
+            _userAccountRepository = userAccountRepository;
         }
 
         [UnitOfWork]
-        public virtual async Task Unlink(long userId)
+        public virtual async Task Link(User firstUser, User secondUser)
         {
-            using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
-            {
-                var targetUser = await _userManager.GetUserByIdAsync(userId);
-                targetUser.UserLinkId = null;
+            var firstUserAccount = await GetUserAccountAsync(firstUser.ToUserIdentifier());
+            var secondUserAccount = await GetUserAccountAsync(secondUser.ToUserIdentifier());
 
-                await CurrentUnitOfWork.SaveChangesAsync();
+            var userLinkId = firstUserAccount.UserLinkId ?? firstUserAccount.Id;
+            firstUserAccount.UserLinkId = userLinkId;
+
+            var userAccountsToLink = secondUserAccount.UserLinkId.HasValue
+                ? _userAccountRepository.GetAllList(ua => ua.UserLinkId == secondUserAccount.UserLinkId.Value)
+                : new List<UserAccount> { secondUserAccount };
+
+            userAccountsToLink.ForEach(u =>
+            {
+                u.UserLinkId = userLinkId;
+            });
+
+            await CurrentUnitOfWork.SaveChangesAsync();
+        }
+
+        [UnitOfWork]
+        public virtual async Task<bool> AreUsersLinked(UserIdentifier firstUserIdentifier, UserIdentifier secondUserIdentifier)
+        {
+            var firstUserAccount = await GetUserAccountAsync(firstUserIdentifier);
+            var secondUserAccount = await GetUserAccountAsync(secondUserIdentifier);
+
+            if (!firstUserAccount.UserLinkId.HasValue || !secondUserAccount.UserLinkId.HasValue)
+            {
+                return false;
             }
+
+            return firstUserAccount.UserLinkId == secondUserAccount.UserLinkId;
+        }
+
+        [UnitOfWork]
+        public virtual async Task Unlink(UserIdentifier userIdentifier)
+        {
+            var targetUserAccount = await GetUserAccountAsync(userIdentifier);
+            targetUserAccount.UserLinkId = null;
+
+            await CurrentUnitOfWork.SaveChangesAsync();
+        }
+
+        [UnitOfWork]
+        public virtual async Task<UserAccount> GetUserAccountAsync(UserIdentifier userIdentifier)
+        {
+            return await _userAccountRepository.FirstOrDefaultAsync(ua => ua.TenantId == userIdentifier.TenantId && ua.UserId == userIdentifier.UserId);
         }
     }
 }

@@ -54,7 +54,11 @@
                     },
                     {
                         name: app.localize('TenancyCodeName'),
-                        field: 'tenancyName'
+                        field: 'tenancyName',
+                        cellTemplate:
+                            '<div class=\"ui-grid-cell-contents\">' +
+                            '  <i ng-show="row.entity.connectionString" title="' + app.localize('HasOwnDatabase') + '" class="fa fa-database"></i> {{row.entity.tenancyName}}' +
+                            '</div>'
                     },
                     {
                         name: app.localize('Name'),

@@ -80,14 +80,16 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Demo
             "hotmail.com",
             "outlook.com",
             "live.com",
-            "yandex.com"
+            "yandex.com",
+            "aspnetzero.com",
+            "aspnetboilerplate.com"
         };
 
         public List<User> GetRandomUsers(int userCount, int tenantId)
         {
             var users = new List<User>();
 
-            var randomNames = MyRandomHelper.GenerateRandomizedList(Names);
+            var randomNames = RandomHelper.GenerateRandomizedList(Names);
             for (var i = 0; i < userCount && i < randomNames.Count; i++)
             {
                 users.Add(CreateUser(tenantId, randomNames[i]));

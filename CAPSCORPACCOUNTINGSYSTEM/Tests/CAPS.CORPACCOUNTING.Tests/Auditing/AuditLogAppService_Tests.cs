@@ -69,7 +69,11 @@ namespace CAPS.CORPACCOUNTING.Tests.Auditing
                 });
 
             //Act
-            var output = await _auditLogAppService.GetAuditLogs(new GetAuditLogsInput());
+            var output = await _auditLogAppService.GetAuditLogs(new GetAuditLogsInput
+            {
+                StartDate = Clock.Now.AddMinutes(-10),
+                EndDate = Clock.Now.AddMinutes(10)
+            });
 
             output.TotalCount.ShouldBe(2);
             

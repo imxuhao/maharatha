@@ -405,38 +405,5 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return taxCreditList;
         }
-
-
-        /// <summary>
-        /// Get JobPORange Numbers by JobId
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<ListResultOutput<JobPORangeAllocationUnitDto>> GetJobPORangeAllocationsUnits(GetJobInput input)
-        {
-            var query = _jobPORangeAllocationUnitRepository.GetAll().Where(u => u.JobId == input.JobId);
-
-            var resultCount = await query.CountAsync();
-            var results = await query
-                .AsNoTracking()
-                .ToListAsync();
-
-            return new ListResultOutput<JobPORangeAllocationUnitDto>(results.Select(item =>
-            {
-                var dto = item.MapTo<JobPORangeAllocationUnitDto>();
-                dto.PORangeAllocationId = item.Id;
-                return dto;
-            }).ToList());
-        }
-
-        /// <summary>
-        ///  Delete the JobPORangeAllocation based on PORangeAllocationId.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task DeleteJobPORangeAllocationUnit(IdInput input)
-        {
-            await _jobPORangeAllocationUnitRepository.DeleteAsync(input.Id);
-        }
     }
 }

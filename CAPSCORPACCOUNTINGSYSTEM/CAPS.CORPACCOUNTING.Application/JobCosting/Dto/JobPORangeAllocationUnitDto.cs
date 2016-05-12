@@ -20,10 +20,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public virtual int JobId { get; set; }
 
         /// <summary>Gets or sets the poRangeStartNumber field. </summary>
-        public virtual string PoRangeStartNumber { get; set; }
+        public virtual long PoRangeStartNumber { get; set; }
 
         /// <summary>Gets or sets the poRangeEndNumber field. </summary>
-        public virtual string PoRangeEndNumber { get; set; }
+        public virtual long PoRangeEndNumber { get; set; }
 
         /// <summary>Gets or sets the Company field. </summary>
         public virtual long OrganizationUnitId { get; set; }

@@ -1171,6 +1171,10 @@
     <Compile Include="Migrations\201605120727230_Add_SystemViewSettings_Table.Designer.cs">
       <DependentUpon>201605120727230_Add_SystemViewSettings_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605121056415_Modify_JobPORangeAllocationUnit_Table.cs" />
+    <Compile Include="Migrations\201605121056415_Modify_JobPORangeAllocationUnit_Table.Designer.cs">
+      <DependentUpon>201605121056415_Modify_JobPORangeAllocationUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultSystemViewSettingsCreator.cs" />
@@ -1989,6 +1993,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605120727230_Add_SystemViewSettings_Table.resx">
       <DependentUpon>201605120727230_Add_SystemViewSettings_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605121056415_Modify_JobPORangeAllocationUnit_Table.resx">
+      <DependentUpon>201605121056415_Modify_JobPORangeAllocationUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

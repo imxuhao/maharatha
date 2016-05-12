@@ -235,12 +235,16 @@
     <Compile Include="Interceptors\MeasureDurationInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\MeasureDurationWithPostAsyncActionInterceptor.cs" />
     <Compile Include="IO\AppFileHelper.cs" />
+    <Compile Include="JobCosting\Dto\CreateJobPORangeAllocationInput.cs" />
     <Compile Include="JobCosting\Dto\GetJobAccountInputDto.cs" />
     <Compile Include="JobCosting\Dto\JobPORangeAllocationUnitDto.cs" />
+    <Compile Include="JobCosting\Dto\UpdateJobPORangeAllocationInput.cs" />
     <Compile Include="JobCosting\IDivisionUnitAppService.cs" />
     <Compile Include="JobCosting\DivisionUnitAppService.cs" />
     <Compile Include="JobCosting\IJobLocationAppService.cs" />
+    <Compile Include="JobCosting\IJobPORangeAllocationUnitAppService.cs" />
     <Compile Include="JobCosting\JobLocationAppService.cs" />
+    <Compile Include="JobCosting\JobPORangeAllocationUnitAppService.cs" />
     <Compile Include="JobCosting\ProjectCoaUnitAppService.cs" />
     <Compile Include="JobCosting\IProjectCoaUnitAppService.cs" />
     <Compile Include="JobCosting\LinesUnitAppService.cs" />

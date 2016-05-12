@@ -1145,6 +1145,18 @@
             Gets or sets Sorting Order
             </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobPORangeAllocationInput.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobPORangeAllocationInput.PoRangeStartNumber">
+            <summary>Gets or sets the poRangeStartNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobPORangeAllocationInput.PoRangeEndNumber">
+            <summary>Gets or sets the poRangeEndNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobPORangeAllocationInput.OrganizationUnitId">
+            <summary>Gets or sets the Company field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobAccountInputDto.ChartofAccountId">
             <summary>Gets or sets the AccountId field. </summary>
         </member>
@@ -1164,6 +1176,21 @@
             <summary>Gets or sets the poRangeEndNumber field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobPORangeAllocationUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the Company field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobPORangeAllocationInput.PORangeAllocationId">
+            <summary>Gets or sets the  PORangeAllocationId</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobPORangeAllocationInput.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobPORangeAllocationInput.PoRangeStartNumber">
+            <summary>Gets or sets the poRangeStartNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobPORangeAllocationInput.PoRangeEndNumber">
+            <summary>Gets or sets the poRangeEndNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobPORangeAllocationInput.OrganizationUnitId">
             <summary>Gets or sets the Company field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.ARBillingTypeDto.ARBillingTypeId">
@@ -1597,8 +1624,9 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.JobLocations">
             <summary>Gets or Sets the JobLocations. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.LocationNames">
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobCommercialUnitDto.POAllocations">
             <summary>Gets or Sets LocationNames Field.  </summary>
+            <summary>Gets or Sets the POAllocations of the Job </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.JobId">
             <summary>Gets or Sets JobId Field.  </summary>
@@ -1809,6 +1837,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.JobLocations">
             <summary>Gets or Sets the JobLocations of the Job. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.POAllocations">
+            <summary>Gets or Sets the POAllocations of the Job </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobCommercialnput.LocationNames">
             <summary>Gets or Sets LocationNames Field.  </summary>
@@ -2029,6 +2060,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.JobLocations">
             <summary>Gets or Sets the JobLocations of the Job </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.POAllocations">
+            <summary>Gets or Sets the POAllocations of the Job </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.LocationNames">
             <summary>Gets or Sets LocationNames Field.  </summary>
@@ -2407,6 +2441,67 @@
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobLocationAppService.DeleteJobLocationUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Delete the JobLocation based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobPORangeAllocationUnitAppService.CreateJobPORangeAllocationUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobPORangeAllocationInput)">
+            <summary>
+            Create the JobPORangeAllocation.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobPORangeAllocationUnitAppService.UpdateJobPORangeAllocationUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobPORangeAllocationInput)">
+            <summary>
+            Update the JobPORangeAllocation based on JobLocationId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobPORangeAllocationUnitAppService.GetJobPORangeAllocationByJobId(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
+            <summary>
+            Get the list of all JobPORangeAllocation based on PORangeAllocationId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobPORangeAllocationUnitAppService.DeleteJobPORangeAllocationUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the JobPORangeAllocation based on JobId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.JobPORangeAllocationUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobPORangeAllocationUnitAppService.CreateJobPORangeAllocationUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobPORangeAllocationInput)">
+            <summary>
+            Create the JobPORangeAllocation.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobPORangeAllocationUnitAppService.UpdateJobPORangeAllocationUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobPORangeAllocationInput)">
+            <summary>
+            Update the JobPORangeAllocation based on JobLocationId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobPORangeAllocationUnitAppService.GetJobPORangeAllocationByJobId(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
+            <summary>
+            Get the list of all JobPORangeAllocation based on PORangeAllocationId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobPORangeAllocationUnitAppService.DeleteJobPORangeAllocationUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the JobPORangeAllocation based on JobId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -2839,20 +2934,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetJobPORangeAllocationsUnits(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
-            <summary>
-            Get JobPORangeAllocation based on JobId.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.DeleteJobPORangeAllocationUnit(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Delete the JobPORangeAllocation based on PORangeAllocationId.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService">
             <summary>
             
@@ -2987,20 +3068,6 @@
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetTaxCreditList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get TaxCreditList
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetJobPORangeAllocationsUnits(CAPS.CORPACCOUNTING.JobCosting.Dto.GetJobInput)">
-            <summary>
-            Get JobPORange Numbers by JobId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.DeleteJobPORangeAllocationUnit(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-             Delete the JobPORangeAllocation based on PORangeAllocationId.
             </summary>
             <param name="input"></param>
             <returns></returns>

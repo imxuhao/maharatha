@@ -185,6 +185,7 @@
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="JobCosting\JobLocationUnitManager.cs" />
     <Compile Include="JobCosting\JobPORangeAllocationUnit.cs" />
+    <Compile Include="JobCosting\JobPORangeAllocationUnitManager.cs" />
     <Compile Include="Localization\CustomLanguageTextsUnit.cs" />
     <Compile Include="Localization\CustomLanguageTextsUnitManager.cs" />
     <Compile Include="Masters\CountryUnit.cs" />

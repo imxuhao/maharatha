@@ -115,20 +115,5 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input);
 
-
-        /// <summary>
-        /// Get JobPORangeAllocation based on JobId.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<ListResultOutput<JobPORangeAllocationUnitDto>> GetJobPORangeAllocationsUnits(GetJobInput input);
-
-        /// <summary>
-        /// Delete the JobPORangeAllocation based on PORangeAllocationId.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task DeleteJobPORangeAllocationUnit(IdInput input);
-
     }
 }

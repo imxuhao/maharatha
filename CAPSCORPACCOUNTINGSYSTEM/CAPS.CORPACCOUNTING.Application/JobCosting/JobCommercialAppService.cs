@@ -19,16 +19,22 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IRepository<JobCommercialUnit> _jobDetailUnitRepository;
         private readonly IJobLocationAppService _jobLocationAppService;
         private readonly IRepository<JobLocationUnit> _jobLocationRepository;
+        private readonly IJobPORangeAllocationUnitAppService _poRangeAllocationAppService;
+        private readonly IRepository<JobPORangeAllocationUnit> _jobPORangeAllocationRepository;
+
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public JobCommercialAppService(JobCommercialUnitManager jobDetailUnitManager, IRepository<JobCommercialUnit> jobDetailUnitRepository, IUnitOfWorkManager unitOfWorkManager,
-            IJobLocationAppService jobLocationAppService, IRepository<JobLocationUnit> jobLocationRepository)
+        public JobCommercialAppService(JobCommercialUnitManager jobDetailUnitManager, IRepository<JobCommercialUnit> jobDetailUnitRepository,
+            IUnitOfWorkManager unitOfWorkManager,IJobLocationAppService jobLocationAppService, IRepository<JobLocationUnit> jobLocationRepository,
+            IJobPORangeAllocationUnitAppService poRangeAllocationAppService, IRepository<JobPORangeAllocationUnit> jobPORangeAllocationRepository)
         {
             _jobDetailUnitManager = jobDetailUnitManager;
             _jobDetailUnitRepository = jobDetailUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _jobLocationAppService = jobLocationAppService;
             _jobLocationRepository = jobLocationRepository;
+            _poRangeAllocationAppService = poRangeAllocationAppService;
+            _jobPORangeAllocationRepository = jobPORangeAllocationRepository;
 
         }
         /// <summary>
@@ -171,6 +177,25 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     {
                         AutoMapper.Mapper.CreateMap<UpdateJobLocationInput, CreateJobLocationInput>();
                          await _jobLocationAppService.CreateJobLocationUnit(AutoMapper.Mapper.Map<UpdateJobLocationInput, CreateJobLocationInput>(location));
+                        await CurrentUnitOfWork.SaveChangesAsync();
+                    }
+                    await CurrentUnitOfWork.SaveChangesAsync();
+                }
+            }
+
+            //PO Ranges
+            if (!ReferenceEquals(input.POAllocations, null))
+            {
+                foreach (var poallocations in input.POAllocations)
+                {
+                    if (poallocations.PORangeAllocationId != 0)
+                    {
+                        await _poRangeAllocationAppService.UpdateJobPORangeAllocationUnit(poallocations);
+                    }
+                    else
+                    {
+                        AutoMapper.Mapper.CreateMap<UpdateJobPORangeAllocationInput, CreateJobPORangeAllocationInput>();
+                        await _poRangeAllocationAppService.CreateJobPORangeAllocationUnit(AutoMapper.Mapper.Map<UpdateJobPORangeAllocationInput, CreateJobPORangeAllocationInput>(poallocations));
                         await CurrentUnitOfWork.SaveChangesAsync();
                     }
                     await CurrentUnitOfWork.SaveChangesAsync();

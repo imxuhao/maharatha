@@ -29,13 +29,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         /// <summary>Gets or sets the poRangeStartNumber field. </summary>
         [Required]
-        [MaxLength(MaxPoRangeStartNumberLength)]
-        public virtual string PoRangeStartNumber { get; set; }
+        //[MaxLength(MaxPoRangeStartNumberLength)]
+        public virtual long PoRangeStartNumber { get; set; }
 
         /// <summary>Gets or sets the poRangeEndNumber field. </summary>
         [Required]
-        [MaxLength(MaxPoRangeEndNumberLength)]
-        public virtual string PoRangeEndNumber { get; set; }
+        //[MaxLength(MaxPoRangeEndNumberLength)]
+        public virtual long PoRangeEndNumber { get; set; }
 
         /// <summary>Gets or sets the Company field. </summary>
         public virtual long OrganizationUnitId { get; set; }

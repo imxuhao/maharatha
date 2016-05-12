@@ -42,10 +42,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         public SystemViewSettingsUnit(int viewId, string viewSettingName, string viewSettings)
         {
             ViewId = viewId;
-            ViewSettings= viewSettingName;
+            ViewName= viewSettingName;
             ViewSettings = viewSettings;
             IsDefault = false;
-           
+            CreationTime = System.DateTime.Now;
+
         }
 
     }

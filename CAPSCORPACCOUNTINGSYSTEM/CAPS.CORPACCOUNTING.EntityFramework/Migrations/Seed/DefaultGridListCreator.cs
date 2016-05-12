@@ -15,23 +15,23 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         {
             InitialGridList = new List<GridListUnit>
             {
-                new GridListUnit(gridid:1,name:"Tenants",description:"Tenants Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:2,name:"Editions",description:"Editions Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:3,name:"Languages",description:"Languages Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:4,name:"LanguageTexts",description:"LanguageTexts Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:5,name:"AuditLogs",description:"AuditLogs Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:6,name:"Roles",description:"Roles Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:7,name:"Users",description:"Users Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:8,name:"LinkedAccounts",description:"LinkedAccounts Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:9,name:"ChartOfAccounts",description:"Chart Of Accounts Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:10,name:"SubAccounts",description:"Sub Accounts Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:11,name:"FinancialAccounts",description:"Financial Accounts Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:12,name:"Divisions",description:"Divisions Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:13,name:"ProjectCoas",description:"Project Coas Information Showing in Grid",isactive:true),
-                new GridListUnit(gridid:14,name:"LineNumbers",description:"Line Numbers Information Showing in Grid",isactive:true),
-                 new GridListUnit(gridid:15,name:"Vendors",description:"Vendors Information Showing in Grid",isactive:true),
-                  new GridListUnit(gridid:16,name:"Projects",description:"Projects or job information Showing in Grid",isactive:true),
-                   new GridListUnit(gridid:17,name:"Address",description:"Address Information Showing in Grid",isactive:true)
+                new GridListUnit(gridid:1,name:"Tenants",description:@"Chaching\classic\src\view\tenants\TenantsGrid",isactive:true),
+                new GridListUnit(gridid:2,name:"Editions",description:@"Chaching\classic\src\view\editions\EditionsGrid",isactive:true),
+                new GridListUnit(gridid:3,name:"Languages",description:@"Chaching\classic\src\view\languages\LanguagesGrid",isactive:true),
+                new GridListUnit(gridid:4,name:"LanguageTexts",description:@"Chaching\classic\src\view\languages\LanguageTextsGrid",isactive:true),
+                new GridListUnit(gridid:5,name:"AuditLogs",description:@"\Chaching\classic\src\view\auditlogs\AuditLogsGrid",isactive:true),
+                new GridListUnit(gridid:6,name:"Roles",description:@"Chaching\classic\src\view\roles\RolesGrid\UsersGrid",isactive:true),
+                new GridListUnit(gridid:7,name:"Users",description:@"Chaching\classic\src\view\users",isactive:true),
+                new GridListUnit(gridid:8,name:"LinkedAccounts",description:@"Chaching\classic\src\view\profile\linkedaccounts\AccountsGrid",isactive:true),
+                new GridListUnit(gridid:9,name:"ChartOfAccounts",description:@"Chaching\classic\src\view\financials\accounts\ChartOfAccountsGrid",isactive:true),
+                new GridListUnit(gridid:10,name:"SubAccounts",description:@"Chaching\classic\src\view\financials\accounts\SubAccountsGrid",isactive:true),
+                new GridListUnit(gridid:11,name:"FinancialAccounts",description:@"Chaching\classic\src\view\financials\accounts\AccountsGrid",isactive:true),
+                new GridListUnit(gridid:12,name:"Divisions",description:@"Chaching\classic\src\view\financials\accounts\DivisionsGrid",isactive:true),
+                new GridListUnit(gridid:13,name:"ProjectCoas",description:@"Chaching\classic\src\view\projects\projectmaintenance\ProjectCOAsGrid",isactive:true),
+                new GridListUnit(gridid:14,name:"LineNumbers",description:@"Chaching\classic\src\view\projects\projectmaintenance\LineNumbersGrid",isactive:true),
+                new GridListUnit(gridid:15,name:"Vendors",description:@"Chaching\classic\src\view\payables\vendors\VendorsGrid",isactive:true),
+                new GridListUnit(gridid:16,name:"Projects",description:@"Chaching\classic\src\view\projects\projectmaintenance\ProjectsGrid",isactive:true),
+                new GridListUnit(gridid:17,name:"Address",description:@"Chaching\classic\src\view\address\AddressGrid",isactive:true)
             };
         }
 

@@ -18,9 +18,9 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         {
             InitialSystemViewSettingsList = new List<SystemViewSettingsUnit>
             {
-                new SystemViewSettingsUnit(viewId: 16,viewSettingName:  "System Default 1",viewSettings:
+                new SystemViewSettingsUnit(viewId: 16,viewSettingName:  "System Default1",viewSettings:
                     "{'column':[{'hidden':false,'width':'10%','dataIndex':'jobNumber'},{'hidden':false,'width':'15%','dataIndex':'caption'},{'hidden':false,'width':'13%','dataIndex':'detailTransactions'},{'hidden':false,'width':'15%','dataIndex':'productName'},{'hidden':false,'width':'10%','dataIndex':'directorName'},{'hidden':false,'width':'10%','dataIndex':'agency'},{'hidden':false,'width':'15%','dataIndex':'poLogCount'},{'hidden':false,'width':'15%','dataIndex':'typeofProjectName'},{'hidden':false,'width':'20%','dataIndex':'shootingDate'},{'hidden':false,'width':'14%','dataIndex':'shootLocations'},{'hidden':false,'width':'15%','dataIndex':'isWrapUpInsurance'},{'hidden':false,'width':'10%','dataIndex':'jobStatusName'},{'hidden':true,'width':'10%','dataIndex':'totalCost'},{'hidden':true,'width':'12%','dataIndex':'bidContractTotal'},{'hidden':true,'width':'13%','dataIndex':'producersActual'},{'hidden':true,'width':'13%','dataIndex':'billedAmount'},{'hidden':true,'width':'13%','dataIndex':'recievedAmount'},{'hidden':true,'width':'11%','dataIndex':'variance'},{'hidden':true,'width':'13%','dataIndex':'agencyProducer'}],'groupInfo':{'isGrouped':false,'groupField':'','groupDir':'ASC'}}"),
-                new SystemViewSettingsUnit(viewId: 16,viewSettingName:  "System Default 2",viewSettings:
+                new SystemViewSettingsUnit(viewId: 16,viewSettingName:  "System Default2",viewSettings:
                   "{'column':[{'hidden':false,'width':'10%','dataIndex':'agency'},{'hidden':false,'width':'10%','dataIndex':'jobNumber'},{'hidden':false,'width':'15%','dataIndex':'caption'},{'hidden':true,'width':'13%','dataIndex':'detailTransactions'},{'hidden':true,'width':'15%','dataIndex':'productName'},{'hidden':true,'width':'10%','dataIndex':'directorName'},{'hidden':true,'width':'15%','dataIndex':'poLogCount'},{'hidden':true,'width':'15%','dataIndex':'typeofProjectName'},{'hidden':false,'width':'10%','dataIndex':'totalCost'},{'hidden':false,'width':'12%','dataIndex':'bidContractTotal'},{'hidden':false,'width':'13%','dataIndex':'producersActual'},{'hidden':false,'width':'13%','dataIndex':'billedAmount'},{'hidden':false,'width':'13%','dataIndex':'recievedAmount'},{'hidden':false,'width':'11%','dataIndex':'variance'},{'hidden':false,'width':'10%','dataIndex':'jobStatusName'},{'hidden':false,'width':'20%','dataIndex':'shootingDate'},{'hidden':false,'width':'14%','dataIndex':'shootLocations'},{'hidden':true,'width':'15%','dataIndex':'isWrapUpInsurance'},{'hidden':false,'width':'13%','dataIndex':'agencyProducer'}],'groupInfo':{ 'isGrouped':false,'groupField':'','groupDir':'ASC'}}")
             };
         }
@@ -40,39 +40,21 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         {
             foreach (var systemSetting in InitialSystemViewSettingsList)
             {
-                _context.SystemViewSettingsUnit.Add(systemSetting);
-
-                try
-                {
-                    // doing here my logic
-                    _context.SaveChanges();
-                }
-                catch (DbEntityValidationException dbEx)
-                {
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            Trace.TraceInformation("Property: {0} Error: {1}", validationError.
-              PropertyName, validationError.ErrorMessage);
-                        }
-                    }
-                }
-                // AddSystemViewSettingsListIfNotExists(systemSetting);
+               AddSystemViewSettingsListIfNotExists(systemSetting);
             }
         }
-        //private void AddSystemViewSettingsListIfNotExists(SystemViewSettingsUnit userSettingsList)
-        //{
-            
-        //    if (_context.SystemViewSettingsUnit.Any(l => l.ViewId == userSettingsList.ViewId && l.ViewName == userSettingsList.ViewName))
-        //    {
-        //        return;
-        //    }
+        private void AddSystemViewSettingsListIfNotExists(SystemViewSettingsUnit userSettingsList)
+        {
 
-        //    _context.SystemViewSettingsUnit.Add(userSettingsList);
+            if (_context.SystemViewSettingsUnit.Any(l => l.ViewId == userSettingsList.ViewId && l.ViewName == userSettingsList.ViewName))
+            {
+                return;
+            }
 
-        //    _context.SaveChanges();
-        //}
+            _context.SystemViewSettingsUnit.Add(userSettingsList);
+
+            _context.SaveChanges();
+        }
 
 
     }

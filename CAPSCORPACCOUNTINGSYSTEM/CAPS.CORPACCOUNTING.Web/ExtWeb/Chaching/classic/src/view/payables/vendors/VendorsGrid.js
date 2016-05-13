@@ -39,7 +39,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
-    isEditable: false,
+    isEditable: true,
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
@@ -65,6 +65,8 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
             xtype: 'textfield',
             width: '100%',
             emptyText: app.localize('VendorSearch')
+        }, editor: {
+            xtype: 'textfield'
         }
     }, {
 
@@ -81,7 +83,11 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
             width: '100%',
             entityName: 'Address',
             emptyText: app.localize('AddressSearch')
-        }, renderer: Chaching.utilities.ChachingRenderers.renderFirstAddress
+        },
+        renderer: Chaching.utilities.ChachingRenderers.renderFirstAddress,
+        editor: {
+            xtype: 'textfield'
+        }
     }
     , {
         xtype: 'gridcolumn',
@@ -97,6 +103,8 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
             width: '100%',
             entityName: "Address",
             emptyText: app.localize('TelephoneSearch')
+        }, editor: {
+            xtype: 'textfield'
         }
     }
     , {
@@ -112,6 +120,8 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
             xtype: 'textfield',
             width: '100%',
             emptyText: app.localize('EmailSearch')
+        }, editor: {
+            xtype: 'textfield'
         }
     }
     , {
@@ -125,9 +135,17 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
             xtype: 'combobox',
             valueField: 'typeof1099BoxId',
             displayField: 'typeof1099Box',
-            bind: {
-                store: '{typeof1099BoxList}'
-            }
+            forceSelection: true,
+            searchProperty: 'typeof1099BoxId',
+            isEnum: true,
+            width: '100%',
+            store: 'utilities.TypeOf1099BoxListStore'
+        }, editor: {
+            xtype: 'combobox',
+            valueField: 'typeof1099BoxId',
+            displayField: 'typeof1099Box',
+            queryMode: 'local',
+            store: 'utilities.TypeOf1099BoxListStore'
         }
     }
     , {
@@ -141,10 +159,19 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
             xtype: 'combobox',
             valueField: 'paymentTermsId',
             displayField: 'paymentTerms',
-            bind: {
-                store: '{paymentTermsList}'
-            }
+            forceSelection: true,
+            width: '100%',
+            searchProperty: 'paymentTermsId',
+            store: 'utilities.PaymentTermsListStore'
+        },
+        editor: {
+            xtype: 'combobox',
+            valueField: 'paymentTermsId',
+            displayField: 'paymentTerms',
+            queryMode: 'local',
+            store: 'utilities.PaymentTermsListStore'
         }
+
     }
     , {
         xtype: 'gridcolumn',
@@ -169,11 +196,14 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
          width: '13%',
          renderer: Chaching.utilities.ChachingRenderers.renderCity,
          hidden: true,
+         isAssociationField: true,
          filterField: {
              xtype: 'textfield',
              width: '100%',
              entityName: "Address",
              emptyText: app.localize('CitySearch')
+         }, editor: {
+             xtype: 'textfield'
          }
      }
        , {
@@ -183,11 +213,18 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
            width: '13%',
            renderer: Chaching.utilities.ChachingRenderers.renderState,
            hidden: true,
+           isAssociationField: true,
            filterField: {
                xtype: 'textfield',
                width: '100%',
                entityName: "Address",
                emptyText: app.localize('StateSearch')
+           }, editor: {
+               xtype: 'combobox',
+               width: '100%',
+               valueField: 'stateId',
+               displayField: 'state',
+               store: 'utilities.StateOrRegionListStore'
            }
        }
          , {
@@ -197,11 +234,15 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.renderPostalCode,
              width: '13%',
              hidden: true,
+             isAssociationField: true,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
                  entityName: "Address",
                  emptyText: app.localize('ZipCodeSearch')
+             }, editor: {
+                 width: '100%',
+                 xtype: 'textfield'
              }
          }
      , {
@@ -235,6 +276,9 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
                xtype: 'textfield',
                width: '100%',
                emptyText: app.localize('SSNSearch')
+           }, editor: {
+               width: '100%',
+               xtype: 'textfield'
            }
        }
       , {
@@ -247,6 +291,9 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
               xtype: 'textfield',
               width: '100%',
               emptyText: app.localize('FedralTaxSearch')
+          }, editor: {
+              width: '100%',
+              xtype: 'textfield'
           }
       }
        , {
@@ -259,9 +306,17 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
                xtype: 'combobox',
                valueField: 'typeofTaxId',
                displayField: 'typeofTax',
-               bind: {
-                   store: '{typeOfTaxList}'
-               }
+               forceSelection: true,
+               searchProperty: 'typeofTaxId',
+               isEnum: true,
+               width: '100%',
+               store: 'utilities.TypeOfTaxListStore'
+           }, editor: {
+               xtype: 'combobox',
+               valueField: 'typeofTaxId',
+               displayField: 'typeofTax',
+               queryMode: 'local',
+               store: 'utilities.TypeOfTaxListStore'
            }
        }
          , {
@@ -277,6 +332,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
                  xtype: 'combobox',
                  valueField: 'value',
                  displayField: 'text',
+                 width: '100%',
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
                      data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]

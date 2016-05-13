@@ -647,26 +647,25 @@ Ext.define('Ext.saki.grid.MultiSearch', {
 
     } // eo function doFieldChange
     , customizeFilters: function (filter, field) {
+        var fieldName = field.getItemId();
         var me = this,
             gridStore = me.getStore(),
             model = gridStore.getModel(),
-            entityName = model.$config.values.searchEntityName,
-            dataField = model.getField(field.getItemId());
-        if (!dataField) {
-            var references = model.references;
-            if (references) {
-                for (var k = 0; k < references.length; k++) {
-                    var associatationModel = model.references[k].reference.getReader().getModel();
-                    if (associatationModel) {
-                        dataField = associatationModel.getField(field.getItemId());
-                    }
-                }
-            }
-           
-        }
+            entityName = model.$config.values.searchEntityName;
+        var isEnum = field.isEnum;;
         if ((field.xtype === "combo" || field.xtype === "combobox") && field.forceSelection) {
             filter.operator = "=";
+            if (field && field.searchProperty) {
+                filter.property = field.searchProperty;
+                fieldName = field.searchProperty;
+            }
+
         }
+        var dataField = model.getField(fieldName);       
+        if (!dataField) {
+            dataField = me.getDataField(model,field);           
+        }
+       
         if (filter && field&&dataField) {
             if (typeof(field.entityName) !== "undefined") {
                 filter.entity = field.entityName;
@@ -707,7 +706,9 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                     if (dataField.type === "date") filter.dataType = 2;
                     else if (dataField.type === "decimal" || dataField.type === "float") filter.dataType = 5;
                     else if (dataField.type === "number" || dataField.type === "integer" || dataField.type === "int") filter.dataType = 0;
-                    
+                    if (isEnum) {
+                        filter.dataType = 4;
+                    }
                     if (filter.operator) {
                         switch (filter.operator) {
                             case "<":
@@ -752,6 +753,21 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             }
 
         }
+        
+    },
+    getDataField: function (model,field) {
+        var dataField = undefined;
+        var references = model.references;
+        if (references) {
+            for (var k = 0; k < references.length; k++) {
+                var associatationModel = model.references[k].reference.getReader().getModel();
+                if (associatationModel) {
+                    dataField = associatationModel.getField(field.getItemId());
+                    return dataField;
+                }
+            }
+        }
+        return dataField;
     }
 
     /**

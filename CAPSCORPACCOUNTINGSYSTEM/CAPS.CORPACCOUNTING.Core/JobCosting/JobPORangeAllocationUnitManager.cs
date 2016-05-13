@@ -42,7 +42,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual async Task UpdateAsync(JobPORangeAllocationUnit jobporangeallocationunit)
         {
             await ValidateJobPORangeAllocationUnitAsync(jobporangeallocationunit);
-            await JobPORangeAllocationUnitRepository.UpdateAsync(jobporangeallocationunit);
+            // await JobPORangeAllocationUnitRepository.UpdateAsync(jobporangeallocationunit);
         }
 
         /// <summary>
@@ -65,37 +65,44 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         protected virtual async Task ValidateJobPORangeAllocationUnitAsync(JobPORangeAllocationUnit jobporangeallocation)
         {
             //Validating if Duplicate JobPORangeAllocation exists
-            if (jobporangeallocation.PoRangeStartNumber>=jobporangeallocation.PoRangeEndNumber)
+            if (jobporangeallocation.PoRangeStartNumber >= jobporangeallocation.PoRangeEndNumber)
             { throw new UserFriendlyException(L("PoRangeStartNumbershouldalwayslessthanPoRangeEndNumber", jobporangeallocation.PoRangeStartNumber)); }
             else
             if (JobPORangeAllocationUnitRepository != null)
             {
                 var JobPORangeAllocationUnit = await JobPORangeAllocationUnitRepository.GetAll()
                                         .Where(u =>
-                                        ((u.PoRangeStartNumber <=jobporangeallocation.PoRangeStartNumber && u.PoRangeEndNumber >= jobporangeallocation.PoRangeStartNumber) && u.OrganizationUnitId == jobporangeallocation.OrganizationUnitId)
+                                        ((u.PoRangeStartNumber <= jobporangeallocation.PoRangeStartNumber && u.PoRangeEndNumber >= jobporangeallocation.PoRangeStartNumber)
                                         ||
-                                         ((u.PoRangeStartNumber <= jobporangeallocation.PoRangeEndNumber && u.PoRangeEndNumber >= jobporangeallocation.PoRangeEndNumber) && u.OrganizationUnitId == jobporangeallocation.OrganizationUnitId)
-                                         
+                                         (u.PoRangeStartNumber <= jobporangeallocation.PoRangeEndNumber && u.PoRangeEndNumber >= jobporangeallocation.PoRangeEndNumber)
+                                         ||
+                                         (u.PoRangeStartNumber >= jobporangeallocation.PoRangeStartNumber && u.PoRangeEndNumber <= jobporangeallocation.PoRangeEndNumber))
+                                         && u.OrganizationUnitId == jobporangeallocation.OrganizationUnitId
                                          ).ToListAsync();
 
-
+                var poRangeCount = JobPORangeAllocationUnit.Count;
 
                 if (jobporangeallocation.Id == 0)
                 {
-                    if (JobPORangeAllocationUnit.Count > 0)
+                    if (poRangeCount > 0)
                     {
                         throw new UserFriendlyException(L("PoRangeAlreadyExist", jobporangeallocation.PoRangeStartNumber));
                     }
                 }
                 else
                 {
-                    if (JobPORangeAllocationUnit.FirstOrDefault(p => p.Id != jobporangeallocation.Id
-                    && p.PoRangeStartNumber == jobporangeallocation.PoRangeStartNumber
-                    && p.PoRangeEndNumber == jobporangeallocation.PoRangeEndNumber
-                    && p.OrganizationUnitId == jobporangeallocation.OrganizationUnitId) != null)
+                    if (poRangeCount == 1)
                     {
-                        throw new UserFriendlyException(L("PoRangeAlreadyExist", jobporangeallocation.PoRangeStartNumber));
+                        if (JobPORangeAllocationUnit.FirstOrDefault(p => p.Id == jobporangeallocation.Id
+                            && p.PoRangeStartNumber == jobporangeallocation.PoRangeStartNumber
+                            && p.PoRangeEndNumber == jobporangeallocation.PoRangeEndNumber
+                            && p.OrganizationUnitId == jobporangeallocation.OrganizationUnitId) == null)
+                        {
+                            throw new UserFriendlyException(L("PoRangeAlreadyExist", jobporangeallocation.PoRangeStartNumber));
+                        }
                     }
+                    else if (poRangeCount > 1)
+                    { throw new UserFriendlyException(L("PoRangeAlreadyExist", jobporangeallocation.PoRangeStartNumber)); }
                 }
             }
         }

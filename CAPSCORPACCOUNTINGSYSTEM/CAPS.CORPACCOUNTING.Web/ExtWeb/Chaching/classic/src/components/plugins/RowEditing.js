@@ -93,7 +93,24 @@ Ext.define('Chaching.components.plugins.RowEditing', {
                 if (me.lockingPartner) {
                     me.lockingPartner.cancelEdit();
                 }
+                if (context.record.associations) {
+                    var associationInfo = context.record.associations;
+                    for (var associationKey in associationInfo) {
+                        if (associationInfo.hasOwnProperty(associationKey)) {
+                            var association = associationInfo[associationKey];
+                            var associationRecord = record[association.instanceName];
+                            if (associationRecord && editor.form) {
+                                for (var key in associationRecord.data) {
+                                    if (associationRecord.data.hasOwnProperty(key) && key !== "id") {
+                                        context.record.data[key] = associationRecord.data[key];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 editor.startEdit(context.record, context.column, context);
+                
                 //set value and rawValue for combos
                 if (editor.form) {
                     var formFields = editor.form.getFields();
@@ -123,20 +140,38 @@ Ext.define('Chaching.components.plugins.RowEditing', {
         }
         return false;
     },
-    updateEditingContextRecord:function(context) {
+    updateEditingContextRecord: function (context) {
         var me = this,
             editor = me.editor,
             form = editor.form,
-            fields = form.getFields();
+            fields = form.getFields(),
+            grid = me.grid,
+            columns = grid.getColumns();
         if (context && fields) {
             var record = context.record;
-            for (var i = 0; i < fields.items.length; i++) {
-                var field = fields.items[i];
+            var fieldItems = fields.items;
+            for (var i = 0; i < fieldItems.length; i++) {
+                var field = fieldItems[i];
                 if (field.xtype==="combo"||field.xtype==="combobox") {
                     record.set(field.valueField, field.getValue());
                     record.set(field.displayField, field.getRawValue());
+                } else if (me.isAsscociationModelField(field, columns)) {
+                    record.set(field.name, field.getValue());
+                }
+
+            }
+        }
+    },
+    isAsscociationModelField: function (field, columns) {
+        if (field && columns) {
+            var length = columns.length;
+            for (var i = 0; i < length; i++) {
+                var column = columns[i];
+                if ((column.dataIndex === field.name || column.dataIndex === field.itemId) && column.isAssociationField) {
+                    return true;
                 }
             }
         }
+        return false;
     }
 });

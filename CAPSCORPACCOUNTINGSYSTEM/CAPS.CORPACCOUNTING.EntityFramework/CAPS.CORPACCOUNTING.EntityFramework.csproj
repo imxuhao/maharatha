@@ -1189,11 +1189,27 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
+    <Compile Include="Migrations\Seed\DefaultCountryCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultCurrencyCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultGridListCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultRegionCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultSettingsCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultSystemViewSettingsCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTenantRoleAndUserCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeOfAccountClassificationCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeOfAccountCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeOfCountryCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeOfCurrencyRateCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultValueAddedTaxRecoveryCreator.cs" />
+    <Compile Include="Migrations\Seed\DefaultValueAddedTaxTypeCreator.cs" />
+    <Compile Include="Migrations\Seed\EnumGenerator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultSettingsCreator.cs" />
     <Compile Include="Migrations\Seed\Host\HostRoleAndUserCreator.cs" />
     <Compile Include="Migrations\Seed\Host\InitialHostDbBuilder.cs" />
+    <Compile Include="Migrations\Seed\InitialDbBuilder.cs" />
     <Compile Include="Migrations\Seed\Tenants\DefaultTenantBuilder.cs" />
     <Compile Include="Migrations\Seed\Tenants\TenantRoleAndUserBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,16 +1,16 @@
-
+/**
+ * The class is created to as host for accounts submenu items
+ * Author: Krishna Garad
+ * Date: 28/04/2016
+ */
+/**
+ * @class Chaching.view.financials.AccountsTabPanel
+ * Host for accounts subMenuItems
+ * @alias financials.accounts
+ */
 Ext.define('Chaching.view.financials.AccountsTabPanel', {
     extend: 'Chaching.view.common.tab.ChachingTabPanel',
-
-    requires: [
-        'Chaching.view.financials.AccountsTabPanelController',
-        'Chaching.view.financials.AccountsTabPanelModel'
-    ],
     xtype:'financials.accounts',
-    controller: 'financials-accountstabpanel',
-    viewModel: {
-        type: 'financials-accountstabpanel'
-    },
     name: 'Financials.Accounts',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Financials.Accounts')

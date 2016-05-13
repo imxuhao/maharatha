@@ -31,7 +31,8 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 new GridListUnit(gridid:14,name:"LineNumbers",description:@"Chaching\classic\src\view\projects\projectmaintenance\LineNumbersGrid",isactive:true),
                 new GridListUnit(gridid:15,name:"Vendors",description:@"Chaching\classic\src\view\payables\vendors\VendorsGrid",isactive:true),
                 new GridListUnit(gridid:16,name:"Projects",description:@"Chaching\classic\src\view\projects\projectmaintenance\ProjectsGrid",isactive:true),
-                new GridListUnit(gridid:17,name:"Address",description:@"Chaching\classic\src\view\address\AddressGrid",isactive:true)
+                new GridListUnit(gridid:17,name:"Address",description:@"Chaching\classic\src\view\address\AddressGrid",isactive:true),
+                 new GridListUnit(gridid:18,name:"Address",description:@"Chaching\classic\src\view\financials\JournalEntryGrid",isactive:true)
             };
         }
 

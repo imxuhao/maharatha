@@ -1925,6 +1925,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\JournalsTabPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalEntryGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalEntryGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalEntryGridModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextForm.js" />
@@ -1936,8 +1940,6 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\common\tab\ChachingTabPanelController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\tab\ChachingTabPanelModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\AccountsTabPanel.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\financials\AccountsTabPanelController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\financials\AccountsTabPanelModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\ChartOfAccountsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\ChartOfAccountsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\ChartOfAccountsGrid.js" />
@@ -2032,7 +2034,6 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanelController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanelModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />

@@ -1,4 +1,54 @@
-
+/**
+ * Grids are an excellent way of showing large amounts of tabular data on the client side.
+ * Essentially a supercharged `<table>`, GridPanel makes it easy to fetch, sort and filter
+ * large amounts of data.
+ *
+ * Grids are composed of two main pieces - a {@link Ext.data.Store Store} full of data and
+ * a set of columns to render.
+ *
+ * ## Basic GridPanel
+ *
+ *     @example
+ *     Ext.create('Ext.data.Store', {
+ *         storeId: 'simpsonsStore',
+ *         fields:[ 'name', 'email', 'phone'],
+ *         data: [
+ *             { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
+ *             { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
+ *             { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
+ *             { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+ *         ]
+ *     });
+ *
+ *     Ext.create('Chaching.view.common.grid.ChachingGridPanel', {
+ *         title: 'Simpsons',
+ *         store: Ext.data.StoreManager.lookup('simpsonsStore'),
+ *         columns: [
+ *             { text: 'Name', dataIndex: 'name' },
+ *             { text: 'Email', dataIndex: 'email', flex: 1 },
+ *             { text: 'Phone', dataIndex: 'phone' }
+ *         ],
+ *         height: 200,
+ *         width: 400,
+ *         renderTo: Ext.getBody()
+ *     });
+ *
+ * The code above produces a simple grid with three columns. We specified a Store which
+ * will load JSON data inline.
+ * In most apps we would be placing the grid inside another container and wouldn't need to
+ * use the {@link #height}, {@link #width} and {@link #renderTo} configurations but they
+ * are included here to make it easy to get up and running.
+ *
+ * The grid we created above will contain a header bar with a title ('Simpsons'), a row of
+ * column headers directly underneath and finally the grid rows under the headers.
+ *
+ * **Height config with bufferedRenderer: true**
+ *
+ * The {@link #height} config must be set when creating a grid using
+ * {@link #bufferedRenderer bufferedRenderer}: true _and_ the grid's height is not managed
+ * by an owning container layout.  In Ext JS 5.x bufferedRendering is true by default.
+ *
+ */
 Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     extend: 'Ext.grid.Panel',
 
@@ -101,7 +151,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     manageViewSetting: true,
     activeUserViewId: null,
     isSubMenuItemTab: false,
-    hideClearFilter:true,
+    hideClearFilter: true,
+    /**
+   * @cfg {boolean} requireSummary
+   * Set to true if summary row is required at bottom
+   */
+    requireSummary:false,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -207,6 +262,14 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 startCollapsed: true
             };
             features.push(groupingFeature);
+        }
+        //add summary feature
+        if (me.requireSummary) {
+            var summaryFeature = {
+                ftype: 'summary',
+                dock: 'bottom'
+            };
+            features.push(summaryFeature);
         }
         if (me.requireMultiSearch) {
             var mutisearch = {

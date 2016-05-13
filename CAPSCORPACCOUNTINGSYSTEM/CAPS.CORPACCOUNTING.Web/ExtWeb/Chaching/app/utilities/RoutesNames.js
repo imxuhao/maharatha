@@ -16,6 +16,7 @@
         'auditlogs',
         'financials.accounts',
         'projects.projectmaintenance',
-         'payables.vendors'
+         'payables.vendors',
+         'financials.journals'
     ]
 });

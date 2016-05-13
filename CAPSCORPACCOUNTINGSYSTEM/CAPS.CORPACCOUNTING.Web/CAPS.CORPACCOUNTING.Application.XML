@@ -991,6 +991,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Configuration.Host.Dto.GeneralSettingsEditDto.TimezoneForComparison">
+            <summary>
+            This value is only used for comparing user's timezone to default timezone
+            </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.Dto.TenantSettingsEditDto.ValidateHostSettings">
             <summary>
             This validation is done for single-tenant applications.

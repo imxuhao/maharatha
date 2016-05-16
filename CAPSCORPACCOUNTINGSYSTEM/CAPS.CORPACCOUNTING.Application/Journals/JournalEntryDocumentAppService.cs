@@ -1,9 +1,21 @@
-﻿using CAPS.CORPACCOUNTING.Authorization.Users;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Dynamic;
+using CAPS.CORPACCOUNTING.Authorization.Users;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Uow;
 using Abp.Domain.Repositories;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
+using Abp.Linq.Extensions;
+using System.Linq.Dynamic;
+using Abp.AutoMapper;
+using CAPS.CORPACCOUNTING.Banking;
+using CAPS.CORPACCOUNTING.Masters.Dto;
+
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -11,17 +23,20 @@ namespace CAPS.CORPACCOUNTING.Journals
     public class JournalEntryDocumentAppService : CORPACCOUNTINGServiceBase, IJournalEntryDocumentAppService
     {
         private readonly JournalEntryDocumentUnitManager _journalEntryDocumentUnitManager;
-        private readonly IRepository<JournalEntryDocumentUnit,long> _journalEntryDocumentUnitRepository;
+        private readonly IRepository<JournalEntryDocumentUnit, long> _journalEntryDocumentUnitRepository;
+        private readonly IRepository<BatchUnit> _batchUnitRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private IdOutputDto<long> _response = null;
 
-        public JournalEntryDocumentAppService(JournalEntryDocumentUnitManager journalEntryDocumentUnitManager, IRepository<JournalEntryDocumentUnit,long> journalEntryDocumentUnitRepository,
-            UserManager userManager, IUnitOfWorkManager unitOfWorkManager)
+        public JournalEntryDocumentAppService(JournalEntryDocumentUnitManager journalEntryDocumentUnitManager, IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitRepository,
+            UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BatchUnit> batchUnitRepository)
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
             _journalEntryDocumentUnitRepository = journalEntryDocumentUnitRepository;
             _userManager = userManager;
             _unitOfWorkManager = unitOfWorkManager;
+            _batchUnitRepository = batchUnitRepository;
         }
 
         /// <summary>
@@ -29,23 +44,13 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task CreateJournalEntryDocumentUnit(CreateJournalEntryDocumentInputUnit input)
+        public async Task<IdOutputDto<long>> CreateJournalEntryDocumentUnit(CreateJournalEntryDocumentInputUnit input)
         {
-            var journalEntryDocumentUnit = new JournalEntryDocumentUnit(batchid: input.BatchId, isreversingentry: input.IsReversingEntry, dateofreversal: input.DateOfReversal, isrecurringentry: input.IsRecurringEntry,
-                datetorecur: input.DateToRecur, finaldate: input.FinalDate, lastpostdate: input.LastPostDate, batchinfo: input.BatchInfo, isbatchremoved: input.IsBatchRemoved,
-                     description: input.Description, typeofaccountingdocumentid: input.TypeOfAccountingDocumentId, typeofobjectid: input.TypeOfObjectId, recurdocid: input.RecurDocId, reversedocid: input.ReverseDocId,
-                     documentdate: input.DocumentDate, transactiondate: input.TransactionDate, dateposted: input.DatePosted, originaldocumentid: input.OriginalDocumentId,
-                     controltotal: input.ControlTotal, documentreference: input.DocumentReference, voucherreference: input.VoucherReference, typeofcurrencyid: input.TypeOfCurrencyId,
-                     currencyadjustmentid: input.CurrencyAdjustmentId, postbatchdescription: input.PostBatchDescription, isposted: input.IsPosted, isautoposted: input.IsAutoPosted,
-                     ischanged: input.IsChanged, postedbyuserid: input.PostedByUserId, bankreccontrolid: input.BankRecControlId, isselected: input.IsSelected,
-                     isactive: input.IsActive, isapproved: input.IsApproved, typeofinactivestatusid: input.TypeOfInactiveStatusId, isbankrecomitted: input.IsBankRecOmitted,
-                     isictjournal: input.IsICTJournal, ictcompanyid: input.ICTCompanyId, ictaccountingdocumentid: input.ICTAccountingDocumentId, currencyoverriderate: input.CurrencyOverrideRate,
-                     functionalcurrencycontroltotal: input.FunctionalCurrencyControlTotal, typeofcurrencyrateid: input.TypeOfCurrencyRateId, memoline: input.MemoLine, is13period: input.Is13Period,
-                    homecurrencyamount: input.HomeCurrencyAmount, customforexrate: input.CustomForexRate, isposubmitforapproval: input.IsPOSubmitForApproval, iscpastran: input.IsCPASTran,
-                    cpasprojcloseid: input.CPASProjCloseId, cpasprojid: input.CPASProjId, organizationunitid: input.OrganizationUnitId);
-
-            await _journalEntryDocumentUnitManager.CreateAsync(journalEntryDocumentUnit);
+            var journalEntryDocumentUnit = input.MapTo<JournalEntryDocumentUnit>();
+            _response = new IdOutputDto<long>();
+            _response.Id = await _journalEntryDocumentUnitManager.CreateAsync(journalEntryDocumentUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
+            return _response;
         }
 
         /// <summary>
@@ -56,7 +61,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         [UnitOfWork]
         public async Task UpdateJournalEntryDocumentUnit(UpdateJournalEntryDocumentInputUnit input)
         {
-            var journalEntryDocumentUnit = await _journalEntryDocumentUnitRepository.GetAsync(input.AHTID);
+            var journalEntryDocumentUnit = await _journalEntryDocumentUnitRepository.GetAsync(input.AccountingDocumentId);
 
             #region Setting the values to be updated
             journalEntryDocumentUnit.BatchId = input.BatchId;
@@ -74,7 +79,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             journalEntryDocumentUnit.RecurDocId = input.RecurDocId;
             journalEntryDocumentUnit.ReverseDocId = input.ReverseDocId;
             journalEntryDocumentUnit.DocumentDate = input.DocumentDate;
-            journalEntryDocumentUnit.TransactionDate = input.TransactionDate;
+            journalEntryDocumentUnit.TransactionDate = input.TransactionDate.Value;
             journalEntryDocumentUnit.DatePosted = input.DatePosted;
             journalEntryDocumentUnit.OriginalDocumentId = input.OriginalDocumentId;
             journalEntryDocumentUnit.ControlTotal = input.ControlTotal;
@@ -108,6 +113,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             journalEntryDocumentUnit.CPASProjCloseId = input.CPASProjCloseId;
             journalEntryDocumentUnit.CPASProjId = input.CPASProjId;
             journalEntryDocumentUnit.OrganizationUnitId = input.OrganizationUnitId;
+            journalEntryDocumentUnit.JournalTypeId = input.JournalTypeId;
             #endregion
 
             await _journalEntryDocumentUnitManager.UpdateAsync(journalEntryDocumentUnit);
@@ -123,6 +129,48 @@ namespace CAPS.CORPACCOUNTING.Journals
         {
             await _journalEntryDocumentUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();
+        }
+
+        public async Task<PagedResultOutput<JournalEntryDocumentUnitDto>> GetJournalEntryDocumentUnits(SearchInputDto input)
+        {
+
+            var query = from journals in _journalEntryDocumentUnitRepository.GetAll()
+                        join batch in _batchUnitRepository.GetAll() on journals.BatchId equals batch.Id
+                into batchunit
+                        from batchunits in batchunit.DefaultIfEmpty()
+                        select new { Journals = journals, BatchName = batchunits.Description };
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.Journals.OrganizationUnitId == input.OrganizationUnitId);
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("Journals.Description ASC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+
+            return new PagedResultOutput<JournalEntryDocumentUnitDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.Journals.MapTo<JournalEntryDocumentUnitDto>();
+                dto.BatchName = item.BatchName;
+                dto.JournalType = item.Journals.JournalTypeId.ToDisplayName();
+                dto.AccountingDocumentId = item.Journals.Id;
+                return dto;
+            }).ToList());
+        }
+
+        /// <summary>
+        /// Get JournalTypeList
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetJournalTypeList()
+        {
+            return EnumList.GetTypeOfTaxList();
         }
     }
 }

@@ -13,9 +13,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
     {
 
         /// <summary>Gets or sets the AHTID field.</summary>
-        public int AHTID { get; set; }
+        public int AccountingDocumentId { get; set; }
 
         /// <summary>Get Sets the Description Date </summary>
+        [Required]
         public virtual string Description { get; set; }
 
         /// <summary>Get Sets the TypeOfAccountingDocumentID Date </summary>
@@ -41,7 +42,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual DateTime? DocumentDate { get; set; }
 
         /// <summary>Get Sets the TransactionDate field.</summary>      
-        public virtual DateTime TransactionDate { get; set; }
+        [Required(ErrorMessage = "TransactionDate is Required.")]
+        [DataType(DataType.Date)]
+        public virtual DateTime? TransactionDate { get; set; }
 
         // [Column(TypeName = "smalldatetime")]
         //  public virtual DateTime? DateCreated { get; set; }
@@ -154,6 +157,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int? CPASProjId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
+        [Required]
         public virtual long OrganizationUnitId { get; set; }
     }
 }

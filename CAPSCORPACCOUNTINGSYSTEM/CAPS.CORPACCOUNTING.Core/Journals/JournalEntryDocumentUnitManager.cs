@@ -19,9 +19,9 @@ namespace CAPS.CORPACCOUNTING.Journals
         }
 
         [UnitOfWork]
-        public virtual async Task CreateAsync(JournalEntryDocumentUnit accountUnit)
+        public virtual async Task<long> CreateAsync(JournalEntryDocumentUnit accountUnit)
         {
-            await JournalEntryDocumentUnitRepository.InsertAsync(accountUnit);
+          return  await JournalEntryDocumentUnitRepository.InsertAndGetIdAsync(accountUnit);
         }
 
 

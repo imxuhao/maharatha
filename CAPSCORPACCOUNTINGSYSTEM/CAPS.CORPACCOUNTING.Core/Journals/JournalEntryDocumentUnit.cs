@@ -2,11 +2,23 @@
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
+    public enum JournalType
+    {
+        [Display(Name = "Standard Journal")]
+        StandardJournal = 1,
+        [Display(Name = "Intercompany Journals")]
+        IntercompanyJournals = 2,
+        [Display(Name = "Reversing Entries")]
+        ReversingEntries = 3,
+        [Display(Name = "Recurring Entries")]
+        RecurringEntries = 4
+    }
 
     /// <summary>
     /// JournalEntryDocument is the table name in lajit
@@ -48,6 +60,9 @@ namespace CAPS.CORPACCOUNTING.Journals
         ///<summary>Get Sets the IsBatchRemoved field.</summary>
         public virtual bool? IsBatchRemoved { get; set; }
 
+        //Gets or sets JournalType field.
+        public virtual JournalType JournalTypeId { get; set; }
+
         public JournalEntryDocumentUnit() { }
 
         public JournalEntryDocumentUnit(int? batchid, bool isreversingentry, DateTime? dateofreversal, bool isrecurringentry, DateTime? datetorecur, DateTime? finaldate,
@@ -57,7 +72,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                                          int? postedbyuserid, int? bankreccontrolid, bool isselected, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
                                          bool? isbankrecomitted, bool? isictjournal, int? ictcompanyid, long? ictaccountingdocumentid, double? currencyoverriderate,
                                          decimal? functionalcurrencycontroltotal, short? typeofcurrencyrateid, string memoline, bool? is13period, decimal? homecurrencyamount, decimal? customforexrate,
-                                         bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid, long organizationunitid)
+                                         bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid, long organizationunitid, JournalType journaltypeid)
             : base(description: description, typeofaccountingdocumentid: typeofaccountingdocumentid, typeofobjectid: typeofobjectid, recurdocid: recurdocid, reversedocid: reversedocid, documentdate: documentdate,
                                         transactiondate: transactiondate, dateposted: dateposted, originaldocumentid: organizationunitid, controltotal: controltotal, documentreference: documentreference,
                                         voucherreference: voucherreference, typeofcurrencyid: typeofcurrencyid, currencyadjustmentid: currencyadjustmentid,
@@ -78,6 +93,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             LastPostDate = lastpostdate;
             BatchInfo = batchinfo;
             IsBatchRemoved = isbatchremoved;
+            JournalTypeId = journaltypeid;
         }
     }
 }

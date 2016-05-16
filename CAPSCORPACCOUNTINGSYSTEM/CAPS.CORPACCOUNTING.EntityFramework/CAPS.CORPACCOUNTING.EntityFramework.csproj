@@ -1199,6 +1199,10 @@
     <Compile Include="Migrations\201605121536510_Abp_ModuleZero_10_Upgrade.Designer.cs">
       <DependentUpon>201605121536510_Abp_ModuleZero_10_Upgrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605160958082_Modify_JournalEntryDocument_Table.cs" />
+    <Compile Include="Migrations\201605160958082_Modify_JournalEntryDocument_Table.Designer.cs">
+      <DependentUpon>201605160958082_Modify_JournalEntryDocument_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultCountryCreator.cs" />
@@ -2029,6 +2033,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605121536510_Abp_ModuleZero_10_Upgrade.resx">
       <DependentUpon>201605121536510_Abp_ModuleZero_10_Upgrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605160958082_Modify_JournalEntryDocument_Table.resx">
+      <DependentUpon>201605160958082_Modify_JournalEntryDocument_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

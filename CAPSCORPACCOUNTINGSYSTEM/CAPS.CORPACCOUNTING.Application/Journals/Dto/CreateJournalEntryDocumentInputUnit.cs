@@ -1,14 +1,12 @@
 ﻿using CAPS.CORPACCOUNTING.Accounting;
-using CAPS.CORPACCOUNTING.Banking;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Abp.AutoMapper;
+
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
+    [AutoMapTo(typeof(JournalEntryDocumentUnit))]
     public class CreateJournalEntryDocumentInputUnit : CreateAccountingHeaderTransactionInputUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>
@@ -32,11 +30,15 @@ namespace CAPS.CORPACCOUNTING.Journals
         ///<summary>Get Sets the LastPostDate field.</summary>
         public virtual DateTime? LastPostDate { get; set; }
 
-        [Required]
+
         ///<summary>Get Sets the BatchInfo field.</summary>
         public virtual string BatchInfo { get; set; }
 
         ///<summary>Get Sets the IsBatchRemoved field.</summary>
         public virtual bool? IsBatchRemoved { get; set; }
+
+        //Gets or sets JournalTypeId field.
+        [EnumDataType(typeof(JournalType))]
+        public JournalType JournalTypeId { get; set; }
     }
 }

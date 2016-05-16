@@ -312,6 +312,7 @@
     <Compile Include="Masters\Dto\CreateUserViewSettingsUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateVendorAliasUnitInput.cs" />
     <Compile Include="Masters\Dto\GetUserViewSettingsUnitDto.cs" />
+    <Compile Include="Masters\Dto\IdOutputDto.cs" />
     <Compile Include="Masters\Dto\LocationSetUnitDto.cs" />
     <Compile Include="Masters\Dto\TaxCreditUnitDto.cs" />
     <Compile Include="Masters\Dto\UpdateLocationSetUnitInput.cs" />

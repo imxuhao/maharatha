@@ -7,6 +7,7 @@ using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.JobCosting;
+using CAPS.CORPACCOUNTING.Journals;
 
 namespace CAPS.CORPACCOUNTING.Helpers
 {
@@ -139,6 +140,13 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public static List<NameValueDto> GetTypeOfTaxList()
         {
             var listEnums = (from TypeofTax n in Enum.GetValues(typeof(TypeofTax))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
+
+        public static List<NameValueDto> GetJournalTypeList()
+        {
+            var listEnums = (from JournalType n in Enum.GetValues(typeof(JournalType))
                              select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
             return listEnums;
         }

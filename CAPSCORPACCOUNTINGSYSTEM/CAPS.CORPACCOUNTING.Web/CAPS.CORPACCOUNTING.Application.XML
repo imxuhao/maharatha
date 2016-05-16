@@ -4,7 +4,7 @@
         <name>CAPS.CORPACCOUNTING.Application</name>
     </assembly>
     <members>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto.AHTID">
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto.AccountingDocumentId">
             <summary>Gets or sets the AHTID field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto.Description">
@@ -356,7 +356,7 @@
             Updates UpdateAccountingHeaderTransactionInputUnit
             </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.UpdateAccountingHeaderTransactionInputUnit.AHTID">
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.UpdateAccountingHeaderTransactionInputUnit.AccountingDocumentId">
             <summary>Gets or sets the AHTID field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.UpdateAccountingHeaderTransactionInputUnit.Description">
@@ -3098,6 +3098,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Journals.CreateJournalEntryDocumentInputUnit.LastPostDate">
             <summary>Get Sets the LastPostDate field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.CreateJournalEntryDocumentInputUnit.BatchInfo">
+            <summary>Get Sets the BatchInfo field.</summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.CreateJournalEntryDocumentInputUnit.IsBatchRemoved">
             <summary>Get Sets the IsBatchRemoved field.</summary>
         </member>
@@ -3127,6 +3130,19 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.GetJournalEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get Journal Entry Document List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.GetJournalTypeList">
+            <summary>
+            Get JournalTypeList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.CreateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.CreateJournalEntryDocumentInputUnit)">
             <summary>
             Create Journal Entry Document
@@ -3146,6 +3162,12 @@
             Delete Journal Entry Document
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.GetJournalTypeList">
+            <summary>
+            Get JournalTypeList
+            </summary>
             <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto.BatchId">
@@ -3175,6 +3197,16 @@
         <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto.IsBatchRemoved">
             <summary>Get Sets the IsBatchRemoved field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto.BatchName">
+            <summary>
+            Gets or sets BatchName
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto.JournalType">
+            <summary>
+            Gets or sets JournalType
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.UpdateJournalEntryDocumentInputUnit.BatchId">
             <summary>Get Sets the BatchId field.</summary>
         </member>
@@ -3195,6 +3227,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.UpdateJournalEntryDocumentInputUnit.LastPostDate">
             <summary>Get Sets the LastPostDate field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.UpdateJournalEntryDocumentInputUnit.BatchInfo">
+            <summary>Get Sets the BatchInfo field.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.UpdateJournalEntryDocumentInputUnit.IsBatchRemoved">
             <summary>Get Sets the IsBatchRemoved field.</summary>
@@ -3360,6 +3395,11 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.GetUserViewSettingsUnitDto.GridId">
             <summary>Gets or sets the GridId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.Dto.IdOutputDto`1">
+            <summary>
+            This dto contains ID which is for sending ID as output for Service
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto.LocationSetId">
             <summary>>Gets or sets the LocationSetId field.</summary>       

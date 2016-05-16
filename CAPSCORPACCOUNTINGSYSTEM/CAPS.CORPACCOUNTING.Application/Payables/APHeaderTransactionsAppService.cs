@@ -39,7 +39,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                 generatedaccountingdocumentid: input.GeneratedAccountingDocumentId, uploaddocumentlogid: input.UploadDocumentLogID,
                 batchinfo: input.BatchInfo, paymentselectedbyuserid: input.PaymentSelectedByUserId, description: input.Description,
                 typeofaccountingdocumentid: input.TypeOfAccountingDocumentId, typeofobjectid: input.TypeOfObjectId, recurdocid: input.RecurDocId, reversedocid: input.ReverseDocId,
-                documentdate: input.DocumentDate, transactiondate: input.TransactionDate, dateposted: input.DatePosted, originaldocumentid: input.OriginalDocumentId,
+                documentdate: input.DocumentDate, transactiondate: input.TransactionDate.Value, dateposted: input.DatePosted, originaldocumentid: input.OriginalDocumentId,
                 controltotal: input.ControlTotal, documentreference: input.DocumentReference, voucherreference: input.VoucherReference, typeofcurrencyid: input.TypeOfCurrencyId,
                 currencyadjustmentid: input.CurrencyAdjustmentId, postbatchdescription: input.PostBatchDescription, isposted: input.IsPosted, isautoposted: input.IsAutoPosted,
                 ischanged: input.IsChanged, postedbyuserid: input.PostedByUserId, bankreccontrolid: input.BankRecControlId, isselected: input.IsSelected,
@@ -59,7 +59,7 @@ namespace CAPS.CORPACCOUNTING.Payables
         /// <returns></returns>
         public async Task UpdateAPHeaderTransactionUnit(UpdateAPHeaderTransactionsInputUnit input)
         {
-            var aPHeaderTransactionsInput = await _apHeaderTransactionsUnitRepository.GetAsync(input.AHTID);
+            var aPHeaderTransactionsInput = await _apHeaderTransactionsUnitRepository.GetAsync(input.AccountingDocumentId);
             aPHeaderTransactionsInput.BatchId = input.BatchId;
             aPHeaderTransactionsInput.VendorId = input.VendorId;
             aPHeaderTransactionsInput.TypeOfInvoiceId = input.TypeOfInvoiceId;
@@ -84,7 +84,7 @@ namespace CAPS.CORPACCOUNTING.Payables
             aPHeaderTransactionsInput.RecurDocId = input.RecurDocId;
             aPHeaderTransactionsInput.ReverseDocId = input.ReverseDocId;
             aPHeaderTransactionsInput.DocumentDate = input.DocumentDate;
-            aPHeaderTransactionsInput.TransactionDate = input.TransactionDate;
+            aPHeaderTransactionsInput.TransactionDate = input.TransactionDate.Value;
             aPHeaderTransactionsInput.DatePosted = input.DatePosted;
             aPHeaderTransactionsInput.OriginalDocumentId = input.OriginalDocumentId;
             aPHeaderTransactionsInput.ControlTotal = input.ControlTotal;

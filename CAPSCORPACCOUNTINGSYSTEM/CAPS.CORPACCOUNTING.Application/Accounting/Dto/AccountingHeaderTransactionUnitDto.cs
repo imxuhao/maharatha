@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     public class AccountingHeaderTransactionUnitDto : IOutputDto
     {
         /// <summary>Gets or sets the AHTID field.</summary>
-        public int AHTID { get; set; }
+        public long AccountingDocumentId { get; set; }
 
         /// <summary>Get Sets the Description Date </summary>
         public virtual string Description { get; set; }

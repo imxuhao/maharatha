@@ -12,6 +12,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     public class CreateAccountingHeaderTransactionInputUnit :IInputDto
     {
         /// <summary>Get Sets the Description Date </summary>
+        [Required]
         public virtual string Description { get; set; }
 
         /// <summary>Get Sets the TypeOfAccountingDocumentID Date </summary>
@@ -37,12 +38,15 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual DateTime? DocumentDate { get; set; }
 
         /// <summary>Get Sets the TransactionDate field.</summary>      
-        public virtual DateTime TransactionDate { get; set; }
+        [Required(ErrorMessage = "TransactionDate is Required.")]
+        [DataType(DataType.Date)]
+        public virtual DateTime? TransactionDate { get; set; }
 
         // [Column(TypeName = "smalldatetime")]
         //  public virtual DateTime? DateCreated { get; set; }
 
         /// <summary>Get Sets the DatePosted field.</summary>
+
        
         public virtual DateTime? DatePosted { get; set; }
 
@@ -147,9 +151,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int? CPASProjCloseId { get; set; }
 
         /// <summary>Get Sets the CPASProjId field.</summary>
-        public virtual int? CPASProjId { get; set; }     
+        public virtual int? CPASProjId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
+        [Required]
         public virtual long OrganizationUnitId { get; set; }
     }
 }

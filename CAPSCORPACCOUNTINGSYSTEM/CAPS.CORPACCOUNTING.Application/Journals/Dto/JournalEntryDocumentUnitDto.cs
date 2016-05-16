@@ -34,5 +34,18 @@ namespace CAPS.CORPACCOUNTING.Journals
         ///<summary>Get Sets the IsBatchRemoved field.</summary>
         public virtual bool? IsBatchRemoved { get; set; }
 
+        //Gets or sets JournalTypeId field.
+        public JournalType JournalTypeId { get; set; }
+
+        /// <summary>
+        /// Gets or sets BatchName
+        /// </summary>
+        public string BatchName { get; set; }
+
+        /// <summary>
+        /// Gets or sets JournalType
+        /// </summary>
+        public string JournalType { get; set; }
+
     }
 }

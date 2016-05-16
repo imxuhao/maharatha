@@ -1929,6 +1929,9 @@
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSelectionModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingTransactionFormPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingTransactionFormPanelController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingTransactionFormPanelModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGrid.js" />

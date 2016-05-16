@@ -9,7 +9,6 @@
             return record.get('value');
         }
     }],
-    xtype: 'ajax',
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',

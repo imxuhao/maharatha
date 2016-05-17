@@ -50,7 +50,7 @@ namespace CAPS.CORPACCOUNTING.Web
             app.MapSignalR();
 
             //Enable it to use HangFire dashboard (uncomment only if it's enabled in CORPACCOUNTINGWebModule)
-            //app.UseHangfireDashboard();
+            app.UseHangfireDashboard();
         }
 
         private static FacebookAuthenticationOptions CreateFacebookAuthOptions()

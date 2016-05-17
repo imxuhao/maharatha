@@ -28,7 +28,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
           scale: 'small',
           ui: 'actionButton',
           action: 'create',
-          text: abp.localization.localize("CreateNewLine").toUpperCase(),
+          text: abp.localization.localize("Add").toUpperCase(),
           checkPermission: true,
           iconCls: 'fa fa-plus',
           iconAlign: 'left'

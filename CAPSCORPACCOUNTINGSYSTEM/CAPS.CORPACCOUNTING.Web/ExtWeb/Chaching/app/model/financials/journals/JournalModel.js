@@ -1,0 +1,19 @@
+﻿Ext.define('Chaching.model.financials.journals.JournalModel', {
+    extend: 'Chaching.model.financials.AccountingDocumentModel',
+    config: {
+        searchEntityName: ''
+    },
+    fields: [
+{ name: 'batchId', type: 'int', defaultValue: null, convert: nullHandler },
+{ name: 'isReversingEntry', type: 'boolean' },
+{ name: 'dateOfReversal', type: 'date', defaultValue: null, convert: nullHandler },
+{ name: 'isRecurringEntry', type: 'boolean' },
+{ name: 'dateToRecur', type: 'date', defaultValue: null, convert: nullHandler },
+{ name: 'finalDate', type: 'date', defaultValue: null, convert: nullHandler },
+{ name: 'lastPostDate', type: 'date', defaultValue: null, convert: nullHandler },
+{ name: 'batchInfo', type: 'string' },
+{ name: 'isBatchRemoved', type: 'boolean' },
+{ name: 'journalTypeId', type: 'int', defaultValue: null, convert: nullHandler },
+{ name: 'journalType', type: 'string' }
+    ]
+});

@@ -29,7 +29,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
           scale: 'small',
           ui: 'actionButton',
           action: 'create',
-          text: abp.localization.localize("CreateNewSubAccounts").toUpperCase(),
+          text: abp.localization.localize("Add").toUpperCase(),
           checkPermission: true,
           iconCls: 'fa fa-plus',
           iconAlign: 'left'

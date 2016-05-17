@@ -26,7 +26,7 @@
           scale: 'small',
           ui: 'actionButton',
           action: 'create',
-          text: abp.localization.localize("CreateNewAccount").toUpperCase(),
+          text: abp.localization.localize("Add").toUpperCase(),
           checkPermission: true,
           iconCls: 'fa fa-plus',
           iconAlign: 'left'

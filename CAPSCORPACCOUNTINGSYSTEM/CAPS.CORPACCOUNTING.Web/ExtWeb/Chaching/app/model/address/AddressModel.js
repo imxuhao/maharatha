@@ -6,7 +6,7 @@
     fields: [
         { name: 'addressId', type: 'int', isPrimaryKey: true },
         { name: 'objectId', type: 'int' },
-        { name: 'typeofObjectId', type: 'auto' },
+        { name: 'typeofObjectId', type: "int", defaultVaule: null, convert: nullHandler },
            { name: 'TypeofObject', type: 'string' },
         { name: 'addressTypeId', type: 'auto' },
          { name: 'AddressType', type: 'string' },

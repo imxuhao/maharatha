@@ -26,7 +26,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
           scale: 'small',
           ui: 'actionButton',
           action: 'create',
-          text: abp.localization.localize("CreateNewDivision").toUpperCase(),
+          text: abp.localization.localize("Add").toUpperCase(),
           checkPermission: true,
           iconCls: 'fa fa-plus',
           iconAlign: 'left'

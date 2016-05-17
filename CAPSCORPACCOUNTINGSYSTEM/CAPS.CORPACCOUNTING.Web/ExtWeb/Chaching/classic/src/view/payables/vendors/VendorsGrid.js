@@ -29,7 +29,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
           scale: 'small',
           ui: 'actionButton',
           action: 'create',
-          text: abp.localization.localize("CreatingNewVendors").toUpperCase(),
+          text: abp.localization.localize("Add").toUpperCase(),
           tooltip: app.localize('CreatingNewVendors'),
           checkPermission: true,
           iconCls: 'fa fa-plus',

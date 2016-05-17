@@ -17,7 +17,7 @@
             { name: 'ssnTaxId', type: 'string' },
             { name: 'creditLimit', type: 'float' },
             { name: 'typeofPaymentMethod', type: "string" },
-            { name: 'typeofPaymentMethodId', type: "auto" },
+            { name: 'typeofPaymentMethodId', type: "int", defaultVaule: null, convert: nullHandler },
             { name: 'paymentTermsId', type: "int",defaultVaule:null,convert:nullHandler },
             { name: 'typeofCurrency', type: "string" },
             { name: 'typeofCurrencyId', type: "int", defaultVaule: null, convert: nullHandler },

@@ -170,7 +170,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <returns></returns>
         public List<NameValueDto> GetJournalTypeList()
         {
-            return EnumList.GetTypeOfTaxList();
+            return EnumList.GetJournalTypeList();
         }
     }
 }

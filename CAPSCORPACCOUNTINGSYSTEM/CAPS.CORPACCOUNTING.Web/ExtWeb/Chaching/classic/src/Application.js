@@ -50,6 +50,7 @@ Ext.define('Chaching.Application', {
         'projects.projectmaintenance.PoRangeAllocationStore',
         'employee.EmployeeStore',
         'customers.CustomersStore',
+         'financials.journals.JournalStore',
         'utilities.ProjectTypeStore',
         'utilities.ProjectStatusStore',
         'utilities.CountryListStore',
@@ -57,8 +58,8 @@ Ext.define('Chaching.Application', {
           'utilities.TypeOfAddressListStore',
           'utilities.PaymentTermsListStore',
           'utilities.TypeOf1099BoxListStore',
-          'utilities.TypeOfTaxListStore'
-
+          'utilities.TypeOfTaxListStore', 
+            'utilities.JournalTypeListStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

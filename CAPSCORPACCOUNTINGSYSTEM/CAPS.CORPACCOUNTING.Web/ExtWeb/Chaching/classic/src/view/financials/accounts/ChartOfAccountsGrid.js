@@ -29,7 +29,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
           scale: 'small',
           ui: 'actionButton',
           action: 'create',
-          text: abp.localization.localize("CreatingNewCOA").toUpperCase(),
+          text: abp.localization.localize("Add").toUpperCase(),
           tooltip: app.localize('CreatingNewCOA'),
           checkPermission: true,
           iconCls: 'fa fa-plus',

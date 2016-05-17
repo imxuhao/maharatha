@@ -4,7 +4,7 @@ Ext.define('Chaching.model.base.BaseModel', {
         namespace: 'Chaching.model'
     },
     config: {
-        searchEntityName:''
+        searchEntityName: ''
     },
     fields: [
         //common fields in all entities
@@ -15,8 +15,9 @@ Ext.define('Chaching.model.base.BaseModel', {
         { name: 'deleterUserId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'lastModificationTime', type: 'date', dateFormat: 'c' },
         { name: 'lastModifierUserId', type: 'int', defaultValue: null, convert: nullHandler },
-        { name: 'creationTime', type: 'date',dateFormat:'c'},
+        { name: 'creationTime', type: 'date', dateFormat: 'c' },
         { name: 'creatorUserId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'createdUser', type: 'string' },
 
         //custom fields required for all entities
         { name: 'allowEdit', type: 'boolean', defaultValue: true },

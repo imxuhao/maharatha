@@ -726,8 +726,21 @@
     <text name="EndingPo" value="Ending PO#" />
     <text name="DuplicateTaxCredit" value="Tax Credit already exist" />
     <text name="SaveVendor" value="Save Vendor" />
-
-
     <text name="MultiplechartofAccounts" value="Cannot create multiple chartofAccounts" />
+    <text name="JournalEntry" value="Journal Entry" />
+    <text name="CreateNewJournalEntry" value="Create New Journal Entry" />
+    <text name="EditJournalEntry" value="Edit Journal Entry" />
+    <text name="Post" value="Post" />
+    <text name="CreatedBy" value="Created By" />
+    <text name="UserSearch" value="User Search" />
+    <text name="JournalType" value="Journal Type" />
+    <text name="Journal#" value="Journal #" />
+    <text name="Journal#Search" value="Journal Number Search" />
+    <text name="TransactionDate" value="Trans Date" />
+    <text name="ControlTotal" value="Control Total" />
+    <text name="ControlTotalSearch" value="Control Total Search" />
+    <text name="Transaction#" value="Transaction #" />
+    <text name="Transaction#Search" value="Transaction Number Search" />
+   <text name="BatchName" value="Batch Name" />
   </texts>
 </localizationDictionary>

@@ -527,7 +527,7 @@
     <text name="Lines" value="Lines" />
     <text name="CreateNewLine" value="Create New Line" />
     <text name="EditLine" value="Edit Line" />
-    <text name="LineNumber" value="LineNumber" />
+    <text name="LineNumber" value="Line#" />
     <text name="LineNumbers" value="Lines" />
     <text name="LineSearch" value="Enter Line to Search" />
     <text name="AddNew" value="Add" />
@@ -742,5 +742,61 @@
     <text name="Transaction#" value="Transaction #" />
     <text name="Transaction#Search" value="Transaction Number Search" />
    <text name="BatchName" value="Batch Name" />
+  <text name="JournalDetails" value="Journal details" />
+  <text name="JournalNumber" value="Journal#" />
+<text name="Is13Period" value="Is 13 Period" />
+<text name="Standard" value="Standard" />
+<text name="Intercompany" value="Intercompany" />
+<text name="Reversing" value="Reversing" />
+<text name="Recurring" value="Recurring" />
+<text name="DistributionDetails" value="Distribution details" />
+<text name="JobDivision" value="Job/Division" />
+<text name="SubAccount1" value="Sub Acc-1" />
+<text name="SubAccount2" value="Sub Acc-2" />
+<text name="SubAccount3" value="Sub Acc-3" />
+<text name="SubAccount4" value="Sub Acc-4" />
+<text name="SubAccount5" value="Sub Acc-5" />
+<text name="SubAccount6" value="Sub Acc-6" />
+<text name="SubAccount7" value="Sub Acc-7" />
+<text name="SubAccount8" value="Sub Acc-8" />
+<text name="SubAccount9" value="Sub Acc-9" />
+<text name="SubAccount10" value="Sub Acc-10" />
+<text name="Ten99Code" value="1099 Code" />
+<text name="ItemMemo" value="Item Memo" />
+    <text name="ToolTipItemMemo" value="Enter item memo" />
+<text name="AccountRef1" value="Ref-1" />
+<text name="AccountRef2" value="Ref-2" />
+<text name="AccountRef3" value="Ref-3" />
+<text name="AccountRef4" value="Ref-4" />
+<text name="AccountRef5" value="Ref-5" />
+  <text name="AccountRef6" value="Ref-6" />
+<text name="AccountRef7" value="Ref-7" />
+<text name="AccountRef8" value="Ref-8" />
+<text name="AccountRef9" value="Ref-9" />
+<text name="AccountRef10" value="Ref-10" />
+  <text name="ToolTipAccountRef1" value="Enter reference-1" />
+<text name="ToolTipAccountRef2" value="Enter reference-2" />
+<text name="ToolTipAccountRef3" value="Enter reference-3" />
+<text name="ToolTipAccountRef4" value="Enter reference-4" />
+<text name="ToolTipAccountRef5" value="Enter reference-5" />
+  <text name="ToolTipAccountRef6" value="Enter reference-6" />
+<text name="ToolTipAccountRef7" value="Enter reference-7" />
+<text name="ToolTipAccountRef8" value="Enter reference-8" />
+<text name="ToolTipAccountRef9" value="Enter reference-9" />
+<text name="ToolTipAccountRef10" value="Enter reference-10" />
+  <text name="InvoiceRef" value="Invoice ref" />
+<text name="ToolTipInvoiceRef" value="Enter invoice reference" />
+<text name="IsAsset" value="Asset" />
+<text name="TaxRebate" value="Tax/Rebate" />
+<text name="Vendor" value="Vendor" />
+  <text name="SearchText" value="Search..." />
+  <text name="Credits" value="Credits" />
+  <text name="Debits" value="Debits" />
+  <text name="InsertRecord" value="Insert new record" />
+<text name="DeleteRecord" value="Delete selected records" />
+<text name="RefreshData" value="Refresh data" />
+  <text name="SaveContinue" value="Save &amp; Continue" />
+<text name="SaveClone" value="Save &amp; Clone" />
+  <text name="Attachment" value="Attachment" />
   </texts>
 </localizationDictionary>

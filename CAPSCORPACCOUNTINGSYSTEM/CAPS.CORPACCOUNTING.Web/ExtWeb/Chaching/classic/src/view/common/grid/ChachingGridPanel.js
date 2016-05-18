@@ -55,7 +55,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     requires: [
         'Chaching.view.common.grid.ChachingGridPanelController',
         'Chaching.view.common.grid.ChachingGridPanelModel',
-        'Chaching.components.plugins.RowEditing'
+        'Chaching.components.plugins.RowEditing',
+        'Chaching.components.plugins.CellEditing'
     ],
 
     controller: 'common-grid-chachinggridpanel',

@@ -171,26 +171,24 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
     initComponent: function() {
         var me = this,
             controller = me.getController();
-        var actionToolBar = me.getActionToolbar(me.formButtons),
-            infoToolBar = me.getInfoToolBar();
-        var bottomToolBar = {
-            xtype: 'toolbar',
-            dock: 'bottom',
-            layout: {
-                type: 'hbox',
-                pack: 'left'
-            },
-            items: [actionToolBar,'->', infoToolBar]
-        };
-        me.bbar = bottomToolBar;
-
+        var defaultActionToolBar = me.getDefaultActionToolbar(),
+            formSpecificActionToolBar = me.getFormSpecificActionToolbar(me.formButtons);
+       
+        me.dockedItems = [
+            {
+                xtype: 'panel',
+                dock: 'bottom',
+                items: [defaultActionToolBar, formSpecificActionToolBar]
+            }
+        ];
        
         me.callParent(arguments);
+        me.on('resize', controller.onFormResize, this);
         if (me.defaultValuesToLoad) {
             controller.setDefaultValues();
         }
     },
-    getActionToolbar: function(formButtons) {
+    getDefaultActionToolbar: function() {
         var me = this;
         var buttons = [];
        
@@ -272,33 +270,8 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
             }
 
         });
-        var defaultButtons = {
-            xtype: 'panel',
-            border: false,
-            layout: 'hbox',
-            items: buttons
-        };
-        var userDefinedButtons = {
-            xtype: 'panel',
-            border: false,
-            layout: 'hbox',
-            padding: '5 0 0 0',
-            items: formButtons
-        };
-        var actionGroup = Ext.create('Ext.panel.Panel', {
-            layout: {
-                type: 'vbox'
-            },
-            items: [defaultButtons, userDefinedButtons],
-            border: false,
-            frame: false
-        });
-        me.actionGroup = actionGroup;
-        return actionGroup;
-    },
-    getInfoToolBar: function () {
-        var me = this;
-        var history= {
+        buttons.push('->');
+        buttons.push({
             xtype: 'button',
             scale: 'small',
             iconCls: 'fa fa-history',
@@ -307,10 +280,30 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
             name: 'History',
             itemId: 'BtnHistory',
             reference: 'BtnHistory',
-            handler: function () {
+            handler: function() {
                 abp.message.info('Transaction # : 100', 'Transaction History');
             }
+        });
+        var defaultButtons = {
+            xtype: 'toolbar',
+            border: false,
+            layout: 'hbox',
+            items: buttons
+        };
+        me.defaultActionGroup = defaultButtons;
+        return defaultButtons;
+    },
+    getFormSpecificActionToolbar: function (formButtons) {
+        var me = this;
+        if (formButtons) {
+            var userDefinedButtons = {
+                xtype: 'toolbar',
+                border: false,
+                layout: 'hbox',
+                items: formButtons
+            };
+            return userDefinedButtons;
         }
-        return history;
+        return null;
     }
 });

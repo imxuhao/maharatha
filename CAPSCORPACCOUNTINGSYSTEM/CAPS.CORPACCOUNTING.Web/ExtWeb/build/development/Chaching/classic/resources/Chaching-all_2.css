@@ -9910,6 +9910,21 @@ body.x-ios.x-webview.x-portrait {
     border-radius: 5px 5px 0 0 !important;
     background-color: #3598dc !important;
 }
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:173 */
+.chaching-transactiongrid .x-column-header {
+    background-color: #dfe8f6 !important;
+    font: 700 11px/19px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    cursor: pointer !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:178 */
+.chaching-transactiongrid .x-column-header-last {
+    background-color: #dfe8f6 !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:181 */
+.chaching-transactiongrid .x-grid-header-ct {
+    border-radius: 5px 5px 0 0 !important;
+    background-color: #dfe8f6 !important;
+}
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:187 */
 .x-btn-clearFilter-small {
     -webkit-border-radius: 2px;
@@ -10479,7 +10494,7 @@ body.x-ios.x-webview.x-portrait {
 .x-button-clearFilter-small-cell > .x-grid-cell-inner >.x-btn-clearFilter-small {
     vertical-align: top;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:186 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:199 */
 .x-btn-icon-el-clearFilter-small {
     font-weight: 700 !important;
     font-size: 20px !important;
@@ -12108,6 +12123,10 @@ body.x-ios.x-webview.x-portrait {
     display: inline-block !important;
     margin-top: 8px !important;
     font-size: 13px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:42 */
+.x-form-item-fieldLabelTop.x-item-disabled {
+    opacity: 0.8 !important;
 }
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:187 */
 .x-tab-submenuTabs-top {
@@ -15023,21 +15042,5 @@ body.x-ios.x-webview.x-portrait {
 }
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3030 */
 .x-tab-formTabPanels.x-tab-focus .x-tab-close-btn {
-    color: #fff;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3034 */
-.x-tab-bar-plain .x-tab-formTabPanels.x-tab-focus .x-tab-close-btn {
-    color: #919191;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3044 */
-.x-tab-formTabPanels.x-tab-over .x-tab-close-btn {
-    color: #fff;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3048 */
-.x-tab-bar-plain .x-tab-formTabPanels.x-tab-over .x-tab-close-btn {
-    color: #919191;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3058 */
-.x-tab-formTabPanels.x-tab-focus.x-tab-over .x-tab-close-btn {
     color: #fff;
 }

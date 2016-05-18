@@ -486,7 +486,10 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         var me = this,
             items = me.items;
         if (items && items.length > 0) {
-            var item = items.get(column.dataIndex);
+            var item = undefined;
+            if (column.itemId) {
+                item = items.get(column.itemId);
+            } else item = items.get(column.dataIndex);
             if (item) {
                 mode === "show" ? item.show() : item.hide();
             }
@@ -1266,7 +1269,8 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             , field
         ;
         for (i = 0; i < cols.length; i++) {
-            field = me.items.get(cols[i].dataIndex);
+            if (cols[i].itemId) field = me.items.get(cols[i].itemId);
+            else field = me.items.get(cols[i].dataIndex);
             if (field) {
                 me.items.insert(i, field);
             }

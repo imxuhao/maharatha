@@ -1,5 +1,5 @@
 Ext.define('Chaching.view.financials.journals.JournalEntryGridController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.financials-journals-journalentrygrid'
     
 });

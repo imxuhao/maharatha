@@ -2,8 +2,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
     xtype: 'widget.financials.journals.entry',
     requires: [
-        'Chaching.view.financials.journals.JournalEntryGridController',
-        'Chaching.view.financials.journals.JournalEntryGridModel'
+        'Chaching.view.financials.journals.JournalEntryGridController'
     ],
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Financials.Journals.Entry'),
@@ -12,9 +11,6 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
         destroy: abp.auth.isGranted('Pages.Financials.Journals.Entry.Delete')
     },
     controller: 'financials-journals-journalentrygrid',
-    viewModel: {
-        type: 'financials-journals-journalentrygrid'
-    },
     gridId: 18,
     headerButtonsConfig: [
     {

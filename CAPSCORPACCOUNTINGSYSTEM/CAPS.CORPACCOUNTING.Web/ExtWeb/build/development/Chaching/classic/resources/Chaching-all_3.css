@@ -1,3 +1,19 @@
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3034 */
+.x-tab-bar-plain .x-tab-formTabPanels.x-tab-focus .x-tab-close-btn {
+    color: #919191;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3044 */
+.x-tab-formTabPanels.x-tab-over .x-tab-close-btn {
+    color: #fff;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3048 */
+.x-tab-bar-plain .x-tab-formTabPanels.x-tab-over .x-tab-close-btn {
+    color: #919191;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3058 */
+.x-tab-formTabPanels.x-tab-focus.x-tab-over .x-tab-close-btn {
+    color: #fff;
+}
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3062 */
 .x-tab-bar-plain .x-tab-formTabPanels.x-tab-focus.x-tab-over .x-tab-close-btn {
     color: #919191;

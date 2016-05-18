@@ -169,6 +169,19 @@ $border-color-focus:#1f78b5
     background-color:#3598DC !important;
 }
 
+
+.chaching-transactiongrid .x-column-header{
+    background-color:#dfe8f6 !important;
+    font:700 11px/19px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    cursor:pointer !important;
+}
+.chaching-transactiongrid .x-column-header-last{
+    background-color:#dfe8f6 !important;
+}
+.chaching-transactiongrid .x-grid-header-ct{
+    border-radius:5px 5px 0 0 !important;
+    background-color:#dfe8f6 !important;
+}
 @include extjs-button-small-ui(
     $ui: 'clearFilter',
     $color: #FFFFFF,

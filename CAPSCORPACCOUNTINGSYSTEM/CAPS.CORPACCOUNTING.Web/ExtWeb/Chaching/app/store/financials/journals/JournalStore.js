@@ -4,10 +4,6 @@
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-        extraParams: {
-            organizationUnitId: 0,
-            coaId: 0
-        },
         api: {
             create: abp.appPath + 'api/services/app/journalEntryDocument/CreateJournalEntryDocumentUnit',
             read: abp.appPath + 'api/services/app/journalEntryDocument/GetJournalEntryDocumentUnits',

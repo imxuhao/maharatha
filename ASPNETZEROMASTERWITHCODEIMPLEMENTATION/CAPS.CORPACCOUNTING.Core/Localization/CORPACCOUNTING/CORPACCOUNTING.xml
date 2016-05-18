@@ -372,6 +372,13 @@
     <text name="Failed">Failed</text>
     <text name="NewTenant">New tenant</text>
     <text name="ResizedProfilePicture_Warn_SizeLimit" value="Resized picture size must be smalled than 100KB. Please resize down and try again." />
-    <text name="RegisterFormUserNameInvalidMessage">Please dont enter an email address for username.</text>
+    <text name="RegisterFormUserNameInvalidMessage">Please do not enter an email address for username.</text>
+    <text name="UseHostDatabase" value="Use host database" />
+    <text name="DatabaseConnectionString" value="Database connection string" />
+    <text name="TenantDatabaseConnectionStringChangeWarningMessage" value="Notice: Before changing the database connection string for a tenant, you should move the tenant database to the new location. Changing connection string does not move the tenant database." />
+    <text name="Timezone">Timezone</text>
+    <text name="HasOwnDatabase">HasOwnDatabase</text>
+    <text name="TimeZoneSettingChangedRefreshPageNotification">Timezone setting changed. Click OK button to refresh page and changes to take effect.</text>
+    <text name="Ok">Ok</text>
   </texts>
 </localizationDictionary>

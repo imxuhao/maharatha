@@ -23,11 +23,12 @@
                 sorting: null
             };
 
-            var todayAsString = moment().format('YYYY-MM-DD');
+            var todayStartAsString = moment().format('YYYY-MM-DDT00:00:00Z');
+            var todayEndAsString = moment().format('YYYY-MM-DDT23:59:59.999Z');
             vm.dateRangeOptions = app.createDateRangePickerOptions();
             vm.dateRangeModel = {
-                startDate: todayAsString,
-                endDate: todayAsString
+                startDate: todayStartAsString,
+                endDate: todayEndAsString
             };
 
             vm.gridOptions = {
@@ -144,7 +145,7 @@
             };
 
             vm.exportToExcel = function () {
-                auditLogService.getAuditLogsToExcel(vm.requestParams)
+                auditLogService.getAuditLogsToExcel($.extend({}, vm.requestParams, vm.dateRangeModel))
                     .success(function (result) {
                         app.downloadTempFile(result);
                     });

@@ -2,14 +2,13 @@
 using Abp.Authorization.Users;
 using Abp.Extensions;
 using Microsoft.AspNet.Identity;
-using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
     /// <summary>
     /// Represents a user in the system.
     /// </summary>
-    public class User : AbpUser<Tenant, User>
+    public class User : AbpUser<User>
     {
         public const int MinPlainPasswordLength = 6;
 
@@ -17,8 +16,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
 
         public virtual bool ShouldChangePasswordOnNextLogin { get; set; }
         
-        public virtual long? UserLinkId { get; set; }
-
+        //Can add application specific user properties here
+        
         /// <summary>
         /// Creates admin <see cref="User"/> for a tenant.
         /// </summary>

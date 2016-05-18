@@ -151,7 +151,11 @@
                     title: app.localize('LastLoginTime'),
                     width: '8%',
                     display: function (data) {
-                        return moment(data.record.creationTime).format('L');
+                        if (data.record.lastLoginTime) {
+                            return moment(data.record.lastLoginTime).format('L');
+                        }
+
+                        return '-';
                     }
                 },
                 creationTime: {

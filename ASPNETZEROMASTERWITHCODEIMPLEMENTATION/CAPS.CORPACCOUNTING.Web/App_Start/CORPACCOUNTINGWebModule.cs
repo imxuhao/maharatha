@@ -8,6 +8,7 @@ using Abp.Hangfire.Configuration;
 using Abp.IO;
 using Abp.Modules;
 using Abp.Runtime.Caching.Redis;
+using Abp.Timing;
 using Abp.Web.Mvc;
 using Abp.Web.SignalR;
 using Abp.Zero.Configuration;
@@ -39,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Web
     {
         public override void PreInitialize()
         {
-            //Use database as language management
+            //Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             //Configure navigation/menu
@@ -90,7 +91,7 @@ namespace CAPS.CORPACCOUNTING.Web
             appFolders.SampleProfileImagesFolder = server.MapPath("~/Common/Images/SampleProfilePics");
             appFolders.TempFileDownloadFolder = server.MapPath("~/Temp/Downloads");
             appFolders.WebLogsFolder = server.MapPath("~/Logs");
-
+            
             try { DirectoryHelper.CreateIfNotExists(appFolders.TempFileDownloadFolder); } catch { }
         }
     }

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Abp;
 using Abp.Dependency;
-using Abp.Domain.Uow;
 using Abp.Organizations;
 using Microsoft.AspNet.Identity;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
@@ -57,10 +56,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Demo
                 return;
             }
 
-            using (CurrentUnitOfWork.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, tenant.Id))
+            using (CurrentUnitOfWork.SetTenantId(tenant.Id))
             {
                 await BuildForInternalAsync(tenant);
-
                 await CurrentUnitOfWork.SaveChangesAsync();
             }
         }
@@ -106,7 +104,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Demo
                 _userManager.AddToRole(user.Id, StaticRoleNames.Tenants.User);
 
                 //Add to OUs
-                var randomOus = MyRandomHelper.GenerateRandomizedList(organizationUnits).Take(RandomHelper.GetRandom(0, 3));
+                var randomOus = RandomHelper.GenerateRandomizedList(organizationUnits).Take(RandomHelper.GetRandom(0, 3));
                 foreach (var ou in randomOus)
                 {
                     await _userManager.AddToOrganizationUnitAsync(user, ou);
@@ -141,7 +139,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Demo
             try
             {
                 //Save a random profile picture
-                var storedFile = new BinaryObject(GetRandomProfilePictureBytes());
+                var storedFile = new BinaryObject(user.TenantId, GetRandomProfilePictureBytes());
                 await _binaryObjectManager.SaveAsync(storedFile);
 
                 //Update new picture on the user

@@ -3,11 +3,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Dependency;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Net.Mail;
+using Abp.Runtime.Security;
 using CAPS.CORPACCOUNTING.Emailing;
 using CAPS.CORPACCOUNTING.MultiTenancy;
-using CAPS.CORPACCOUNTING.Security;
 using CAPS.CORPACCOUNTING.Web;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
@@ -21,13 +22,19 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         private readonly IEmailSender _emailSender;
         private readonly IWebUrlService _webUrlService;
         private readonly IRepository<Tenant> _tenantRepository;
+        private readonly ICurrentUnitOfWorkProvider _unitOfWorkProvider;
 
-        public UserEmailer(IEmailTemplateProvider emailTemplateProvider, IEmailSender emailSender,IWebUrlService webUrlService, IRepository<Tenant> tenantRepository)
+        public UserEmailer(IEmailTemplateProvider emailTemplateProvider, 
+            IEmailSender emailSender,
+            IWebUrlService webUrlService, 
+            IRepository<Tenant> tenantRepository,
+            ICurrentUnitOfWorkProvider unitOfWorkProvider)
         {
             _emailTemplateProvider = emailTemplateProvider;
             _emailSender = emailSender;
             _webUrlService = webUrlService;
             _tenantRepository = tenantRepository;
+            _unitOfWorkProvider = unitOfWorkProvider;
         }
 
         /// <summary>
@@ -37,19 +44,19 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         /// <param name="plainPassword">
         /// Can be set to user's plain password to include it in the email.
         /// </param>
-        public async Task SendEmailActivationLinkAsync(User user, string plainPassword = null)
+        [UnitOfWork]
+        public virtual async Task SendEmailActivationLinkAsync(User user, string plainPassword = null)
         {
             if (user.EmailConfirmationCode.IsNullOrEmpty())
             {
                 throw new ApplicationException("EmailConfirmationCode should be set in order to send email activation link.");
             }
 
-            var tenancyName = user.TenantId.HasValue
-                ? _tenantRepository.Get(user.TenantId.Value).TenancyName
-                : null;
+            var tenancyName = GetTenancyNameOrNull(user.TenantId);
 
             var link = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/EmailConfirmation" +
-                       "?userId=" + Uri.EscapeDataString(SimpleStringCipher.Encrypt(user.Id.ToString())) +
+                       "?userId=" + Uri.EscapeDataString(SimpleStringCipher.Instance.Encrypt(user.Id.ToString())) +
+                       "&tenantId=" + (user.TenantId == null ? "" : Uri.EscapeDataString(SimpleStringCipher.Instance.Encrypt(user.TenantId.Value.ToString()))) +
                        "&confirmationCode=" + Uri.EscapeDataString(user.EmailConfirmationCode);
             
             var emailTemplate = new StringBuilder(_emailTemplateProvider.GetDefaultTemplate());
@@ -92,12 +99,10 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 throw new ApplicationException("PasswordResetCode should be set in order to send password reset link.");
             }
 
-            var tenancyName = user.TenantId.HasValue
-                ? _tenantRepository.Get(user.TenantId.Value).TenancyName
-                : null;
+            var tenancyName = GetTenancyNameOrNull(user.TenantId);
 
             var link = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/ResetPassword" +
-                       "?userId=" + Uri.EscapeDataString(SimpleStringCipher.Encrypt(user.Id.ToString())) +
+                       "?userId=" + Uri.EscapeDataString(SimpleStringCipher.Instance.Encrypt(user.Id.ToString())) +
                        "&resetCode=" + Uri.EscapeDataString(user.PasswordResetCode);
 
             var emailTemplate = new StringBuilder(_emailTemplateProvider.GetDefaultTemplate());
@@ -122,6 +127,19 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             emailTemplate.Replace("{EMAIL_BODY}", mailMessage.ToString());
 
             await _emailSender.SendAsync(user.EmailAddress, L("PasswordResetEmail_Subject"), emailTemplate.ToString());
+        }
+
+        private string GetTenancyNameOrNull(int? tenantId)
+        {
+            if (tenantId == null)
+            {
+                return null;
+            }
+
+            using (_unitOfWorkProvider.Current.SetTenantId(null))
+            {
+                return _tenantRepository.Get(tenantId.Value).TenancyName;
+            }
         }
     }
 }

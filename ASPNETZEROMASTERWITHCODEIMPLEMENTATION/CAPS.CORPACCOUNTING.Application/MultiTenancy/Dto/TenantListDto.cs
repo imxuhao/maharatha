@@ -15,6 +15,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
 
         public string EditionDisplayName { get; set; }
 
+        public string ConnectionString { get; set; }
+
         public bool IsActive { get; set; }
 
         public DateTime CreationTime { get; set; }

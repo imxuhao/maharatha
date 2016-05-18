@@ -2,11 +2,10 @@
 using Abp.Authorization.Users;
 using Abp.Domain.Repositories;
 using CAPS.CORPACCOUNTING.Authorization.Users;
-using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Roles
 {
-    public class RoleStore : AbpRoleStore<Tenant, Role, User>
+    public class RoleStore : AbpRoleStore<Role, User>
     {
         public RoleStore(
             IRepository<Role> roleRepository,

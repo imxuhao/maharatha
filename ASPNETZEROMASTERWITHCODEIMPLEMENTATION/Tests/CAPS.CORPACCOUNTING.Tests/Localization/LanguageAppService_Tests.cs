@@ -7,6 +7,7 @@ using Abp.Localization;
 using CAPS.CORPACCOUNTING.Localization;
 using CAPS.CORPACCOUNTING.Localization.Dto;
 using CAPS.CORPACCOUNTING.Migrations.Seed;
+using CAPS.CORPACCOUNTING.Migrations.Seed.Host;
 using Shouldly;
 using Xunit;
 

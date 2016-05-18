@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
+using Abp.MultiTenancy;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
@@ -7,7 +8,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
     public class CreateTenantInput : IInputDto
     {
         [Required]
-        [StringLength(Tenant.MaxTenancyNameLength)]
+        [StringLength(AbpTenantBase.MaxTenancyNameLength)]
         [RegularExpression(Tenant.TenancyNameRegex)]
         public string TenancyName { get; set; }
 
@@ -22,6 +23,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
 
         [StringLength(User.MaxPasswordLength)]
         public string AdminPassword { get; set; }
+
+        [MaxLength(AbpTenantBase.MaxConnectionStringLength)]
+        public string ConnectionString { get; set; }
 
         public bool ShouldChangePasswordOnNextLogin { get; set; }
         

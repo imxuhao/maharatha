@@ -20,7 +20,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public CORPACCOUNTINGDbContext()
             : base("Default")
         {
-
+            
         }
 
         /* This constructor is used by ABP to pass connection string defined in CORPACCOUNTINGDataModule.PreInitialize.

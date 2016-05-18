@@ -105,7 +105,7 @@
             Implements <see cref="T:Abp.Application.Features.IFeatureValueStore"/>.
             </summary>
         </member>
-        <member name="M:Abp.Application.Features.AbpFeatureValueStore`3.#ctor(Abp.Runtime.Caching.ICacheManager,Abp.Domain.Repositories.IRepository{Abp.MultiTenancy.TenantFeatureSetting,System.Int64},Abp.Domain.Repositories.IRepository{`0},Abp.Domain.Repositories.IRepository{Abp.Application.Features.EditionFeatureSetting,System.Int64},Abp.Application.Features.IFeatureManager)">
+        <member name="M:Abp.Application.Features.AbpFeatureValueStore`3.#ctor(Abp.Runtime.Caching.ICacheManager,Abp.Domain.Repositories.IRepository{Abp.MultiTenancy.TenantFeatureSetting,System.Int64},Abp.Domain.Repositories.IRepository{`0},Abp.Domain.Repositories.IRepository{Abp.Application.Features.EditionFeatureSetting,System.Int64},Abp.Application.Features.IFeatureManager,Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Abp.Application.Features.AbpFeatureValueStore`3"/> class.
             </summary>
@@ -148,40 +148,40 @@
             Role id.
             </summary>
         </member>
-        <member name="T:Abp.Authorization.Roles.IRolePermissionStore`3">
+        <member name="T:Abp.Authorization.Roles.IRolePermissionStore`2">
             <summary>
             Used to perform permission database operations for a role.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`3.AddPermissionAsync(`1,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`2.AddPermissionAsync(`0,Abp.Authorization.PermissionGrantInfo)">
             <summary>
             Adds a permission grant setting to a role.
             </summary>
             <param name="role">Role</param>
             <param name="permissionGrant">Permission grant setting info</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`3.RemovePermissionAsync(`1,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`2.RemovePermissionAsync(`0,Abp.Authorization.PermissionGrantInfo)">
             <summary>
             Removes a permission grant setting from a role.
             </summary>
             <param name="role">Role</param>
             <param name="permissionGrant">Permission grant setting info</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`3.GetPermissionsAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`2.GetPermissionsAsync(`0)">
             <summary>
             Gets permission grant setting informations for a role.
             </summary>
             <param name="role">Role</param>
             <returns>List of permission setting informations</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`3.GetPermissionsAsync(System.Int32)">
+        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`2.GetPermissionsAsync(System.Int32)">
             <summary>
             Gets permission grant setting informations for a role.
             </summary>
             <param name="roleId">Role id</param>
             <returns>List of permission setting informations</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`3.HasPermissionAsync(System.Int32,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`2.HasPermissionAsync(System.Int32,Abp.Authorization.PermissionGrantInfo)">
             <summary>
             Checks whether a role has a permission grant setting info.
             </summary>
@@ -189,7 +189,7 @@
             <param name="permissionGrant">Permission grant setting info</param>
             <returns></returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`3.RemoveAllPermissionSettingsAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.IRolePermissionStore`2.RemoveAllPermissionSettingsAsync(`0)">
             <summary>
             Deleted all permission settings for a role.
             </summary>
@@ -207,18 +207,18 @@
             TODO: This is not used yet!
             </summary>
         </member>
-        <member name="T:Abp.Authorization.Roles.AbpRoleManager`3">
+        <member name="T:Abp.Authorization.Roles.AbpRoleManager`2">
             <summary>
             Extends <see cref="T:Microsoft.AspNet.Identity.RoleManager`2"/> of ASP.NET Identity Framework.
             Applications should derive this class with appropriate generic arguments.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.#ctor(Abp.Authorization.Roles.AbpRoleStore{`0,`1,`2},Abp.Authorization.IPermissionManager,Abp.Zero.Configuration.IRoleManagementConfig,Abp.Runtime.Caching.ICacheManager)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.#ctor(Abp.Authorization.Roles.AbpRoleStore{`0,`1},Abp.Authorization.IPermissionManager,Abp.Zero.Configuration.IRoleManagementConfig,Abp.Runtime.Caching.ICacheManager,Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             Constructor.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.HasPermissionAsync(System.String,System.String)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.HasPermissionAsync(System.String,System.String)">
             <summary>
             Checks if a role has a permission.
             </summary>
@@ -226,7 +226,7 @@
             <param name="permissionName">Name of the permission</param>
             <returns>True, if the role has the permission</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.HasPermissionAsync(System.Int32,System.String)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.HasPermissionAsync(System.Int32,System.String)">
             <summary>
             Checks if a role has a permission.
             </summary>
@@ -234,7 +234,7 @@
             <param name="permissionName">Name of the permission</param>
             <returns>True, if the role has the permission</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.HasPermissionAsync(`1,Abp.Authorization.Permission)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.HasPermissionAsync(`0,Abp.Authorization.Permission)">
             <summary>
             Checks if a role has a permission.
             </summary>
@@ -242,7 +242,7 @@
             <param name="permission">The permission</param>
             <returns>True, if the role has the permission</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.HasPermissionAsync(System.Int32,Abp.Authorization.Permission)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.HasPermissionAsync(System.Int32,Abp.Authorization.Permission)">
             <summary>
             Checks if a role has a permission.
             </summary>
@@ -250,7 +250,7 @@
             <param name="permission">The permission</param>
             <returns>True, if the role has the permission</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.IsGrantedAsync(System.String,System.String)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.IsGrantedAsync(System.String,System.String)">
             <summary>
             Checks if a role is granted for a permission.
             </summary>
@@ -258,7 +258,7 @@
             <param name="permissionName">Name of the permission</param>
             <returns>True, if the role has the permission</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.IsGrantedAsync(System.Int32,System.String)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.IsGrantedAsync(System.Int32,System.String)">
             <summary>
             Checks if a role has a permission.
             </summary>
@@ -266,7 +266,7 @@
             <param name="permissionName">Name of the permission</param>
             <returns>True, if the role has the permission</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.IsGrantedAsync(`1,Abp.Authorization.Permission)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.IsGrantedAsync(`0,Abp.Authorization.Permission)">
             <summary>
             Checks if a role is granted for a permission.
             </summary>
@@ -274,7 +274,7 @@
             <param name="permission">The permission</param>
             <returns>True, if the role has the permission</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.IsGrantedAsync(System.Int32,Abp.Authorization.Permission)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.IsGrantedAsync(System.Int32,Abp.Authorization.Permission)">
             <summary>
             Checks if a role is granted for a permission.
             </summary>
@@ -282,28 +282,28 @@
             <param name="permission">The permission</param>
             <returns>True, if the role has the permission</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.GetGrantedPermissionsAsync(System.Int32)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.GetGrantedPermissionsAsync(System.Int32)">
             <summary>
             Gets granted permission names for a role.
             </summary>
             <param name="roleId">Role id</param>
             <returns>List of granted permissions</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.GetGrantedPermissionsAsync(System.String)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.GetGrantedPermissionsAsync(System.String)">
             <summary>
             Gets granted permission names for a role.
             </summary>
             <param name="roleName">Role name</param>
             <returns>List of granted permissions</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.GetGrantedPermissionsAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.GetGrantedPermissionsAsync(`0)">
             <summary>
             Gets granted permissions for a role.
             </summary>
             <param name="role">Role</param>
             <returns>List of granted permissions</returns>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.SetGrantedPermissionsAsync(System.Int32,System.Collections.Generic.IEnumerable{Abp.Authorization.Permission})">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.SetGrantedPermissionsAsync(System.Int32,System.Collections.Generic.IEnumerable{Abp.Authorization.Permission})">
             <summary>
             Sets all granted permissions of a role at once.
             Prohibits all other permissions.
@@ -311,7 +311,7 @@
             <param name="roleId">Role id</param>
             <param name="permissions">Permissions</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.SetGrantedPermissionsAsync(`1,System.Collections.Generic.IEnumerable{Abp.Authorization.Permission})">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.SetGrantedPermissionsAsync(`0,System.Collections.Generic.IEnumerable{Abp.Authorization.Permission})">
             <summary>
             Sets all granted permissions of a role at once.
             Prohibits all other permissions.
@@ -319,27 +319,27 @@
             <param name="role">The role</param>
             <param name="permissions">Permissions</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.GrantPermissionAsync(`1,Abp.Authorization.Permission)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.GrantPermissionAsync(`0,Abp.Authorization.Permission)">
             <summary>
             Grants a permission for a role.
             </summary>
             <param name="role">Role</param>
             <param name="permission">Permission</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.ProhibitPermissionAsync(`1,Abp.Authorization.Permission)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.ProhibitPermissionAsync(`0,Abp.Authorization.Permission)">
             <summary>
             Prohibits a permission for a role.
             </summary>
             <param name="role">Role</param>
             <param name="permission">Permission</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.ProhibitAllPermissionsAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.ProhibitAllPermissionsAsync(`0)">
             <summary>
             Prohibits all permissions for a role.
             </summary>
             <param name="role">Role</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.ResetAllPermissionsAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.ResetAllPermissionsAsync(`0)">
             <summary>
             Resets all permission settings for a role.
             It removes all permission settings for the role.
@@ -347,19 +347,19 @@
             </summary>
             <param name="role">Role</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.CreateAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.CreateAsync(`0)">
             <summary>
             Creates a role.
             </summary>
             <param name="role">Role</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.DeleteAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.DeleteAsync(`0)">
             <summary>
             Deletes a role.
             </summary>
             <param name="role">Role</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.GetRoleByIdAsync(System.Int32)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.GetRoleByIdAsync(System.Int32)">
             <summary>
             Gets a role by given id.
             Throws exception if no role with given id.
@@ -368,7 +368,7 @@
             <returns>Role</returns>
             <exception cref="T:Abp.AbpException">Throws exception if no role with given id</exception>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleManager`3.GetRoleByNameAsync(System.String)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleManager`2.GetRoleByNameAsync(System.String)">
             <summary>
             Gets a role by given name.
             Throws exception if no role with given roleName.
@@ -377,90 +377,85 @@
             <returns>Role</returns>
             <exception cref="T:Abp.AbpException">Throws exception if no role with given roleName</exception>
         </member>
-        <member name="T:Abp.Authorization.Roles.AbpRoleStore`3">
+        <member name="T:Abp.Authorization.Roles.AbpRoleStore`2">
             <summary>
             Implements 'Role Store' of ASP.NET Identity Framework.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleStore`3.#ctor(Abp.Domain.Repositories.IRepository{`1},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserRole,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Roles.RolePermissionSetting,System.Int64})">
+        <member name="M:Abp.Authorization.Roles.AbpRoleStore`2.#ctor(Abp.Domain.Repositories.IRepository{`0},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserRole,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Roles.RolePermissionSetting,System.Int64})">
             <summary>
             Constructor.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleStore`3.AddPermissionAsync(`1,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleStore`2.AddPermissionAsync(`0,Abp.Authorization.PermissionGrantInfo)">
             <inheritdoc/>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleStore`3.RemovePermissionAsync(`1,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleStore`2.RemovePermissionAsync(`0,Abp.Authorization.PermissionGrantInfo)">
             <inheritdoc/>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleStore`3.GetPermissionsAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleStore`2.GetPermissionsAsync(`0)">
             <inheritdoc/>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleStore`3.HasPermissionAsync(System.Int32,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleStore`2.HasPermissionAsync(System.Int32,Abp.Authorization.PermissionGrantInfo)">
             <inheritdoc/>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRoleStore`3.RemoveAllPermissionSettingsAsync(`1)">
+        <member name="M:Abp.Authorization.Roles.AbpRoleStore`2.RemoveAllPermissionSettingsAsync(`0)">
             <inheritdoc/>
         </member>
-        <member name="T:Abp.Authorization.Roles.AbpRole`2">
+        <member name="T:Abp.Authorization.Roles.AbpRole`1">
             <summary>
             Represents a role in an application. A role is used to group permissions.
             </summary>
             <remarks> 
             Application should use permissions to check if user is granted to perform an operation.
-            Checking 'if a user has a role' is not possible until the role is static (<see cref="P:Abp.Authorization.Roles.AbpRole`2.IsStatic"/>).
+            Checking 'if a user has a role' is not possible until the role is static (<see cref="P:Abp.Authorization.Roles.AbpRole`1.IsStatic"/>).
             Static roles can be used in the code and can not be deleted by users.
             Non-static (dynamic) roles can be added/removed by users and we can not know their name while coding.
             A user can have multiple roles. Thus, user will have all permissions of all assigned roles.
             </remarks>
         </member>
-        <member name="F:Abp.Authorization.Roles.AbpRole`2.MaxDisplayNameLength">
+        <member name="F:Abp.Authorization.Roles.AbpRole`1.MaxDisplayNameLength">
             <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Roles.AbpRole`2.DisplayName"/> property.
+            Maximum length of the <see cref="P:Abp.Authorization.Roles.AbpRole`1.DisplayName"/> property.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Roles.AbpRole`2.Tenant">
-            <summary>
-            The Tenant, if this role is a tenant-level role.
-            </summary>
-        </member>
-        <member name="P:Abp.Authorization.Roles.AbpRole`2.DisplayName">
+        <member name="P:Abp.Authorization.Roles.AbpRole`1.DisplayName">
             <summary>
             Display name of this role.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Roles.AbpRole`2.IsStatic">
+        <member name="P:Abp.Authorization.Roles.AbpRole`1.IsStatic">
             <summary>
             Is this a static role?
             Static roles can not be deleted, can not change their name.
             They can be used programmatically.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Roles.AbpRole`2.IsDefault">
+        <member name="P:Abp.Authorization.Roles.AbpRole`1.IsDefault">
             <summary>
             Is this role will be assigned to new users as default?
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Roles.AbpRole`2.Permissions">
+        <member name="P:Abp.Authorization.Roles.AbpRole`1.Permissions">
             <summary>
             List of permissions of the role.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRole`2.#ctor">
+        <member name="M:Abp.Authorization.Roles.AbpRole`1.#ctor">
             <summary>
-            Creates a new <see cref="T:Abp.Authorization.Roles.AbpRole`2"/> object.
+            Creates a new <see cref="!:AbpRole&lt;TTenant,TUser&gt;"/> object.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRole`2.#ctor(System.Nullable{System.Int32},System.String)">
+        <member name="M:Abp.Authorization.Roles.AbpRole`1.#ctor(System.Nullable{System.Int32},System.String)">
             <summary>
-            Creates a new <see cref="T:Abp.Authorization.Roles.AbpRole`2"/> object.
+            Creates a new <see cref="!:AbpRole&lt;TTenant,TUser&gt;"/> object.
             </summary>
             <param name="tenantId">TenantId or null (if this is not a tenant-level role)</param>
             <param name="displayName">Display name of the role</param>
         </member>
-        <member name="M:Abp.Authorization.Roles.AbpRole`2.#ctor(System.Nullable{System.Int32},System.String,System.String)">
+        <member name="M:Abp.Authorization.Roles.AbpRole`1.#ctor(System.Nullable{System.Int32},System.String,System.String)">
             <summary>
-            Creates a new <see cref="T:Abp.Authorization.Roles.AbpRole`2"/> object.
+            Creates a new <see cref="!:AbpRole&lt;TTenant,TUser&gt;"/> object.
             </summary>
             <param name="tenantId">TenantId or null (if this is not a tenant-level role)</param>
             <param name="name">Unique role name</param>
@@ -476,6 +471,11 @@
             Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUserBase.UserName"/> property.
             </summary>
         </member>
+        <member name="F:Abp.Authorization.Users.AbpUserBase.MaxEmailAddressLength">
+            <summary>
+            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUserBase.EmailAddress"/> property.
+            </summary>
+        </member>
         <member name="P:Abp.Authorization.Users.AbpUserBase.UserName">
             <summary>
             User name.
@@ -486,6 +486,55 @@
             <summary>
             Tenant Id of this user.
             </summary>
+        </member>
+        <member name="P:Abp.Authorization.Users.AbpUserBase.EmailAddress">
+            <summary>
+            Email address of the user.
+            Email address must be unique for it's tenant.
+            </summary>
+        </member>
+        <member name="P:Abp.Authorization.Users.AbpUserBase.LastLoginTime">
+            <summary>
+            The last time this user entered to the system.
+            </summary>
+        </member>
+        <member name="M:Abp.Authorization.Users.AbpUserBase.ToUserIdentifier">
+            <summary>
+            Creates <see cref="T:Abp.UserIdentifier"/> from this User.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Abp.Authorization.Users.UserAccount">
+            <summary>
+            Represents a summary user
+            </summary>
+        </member>
+        <member name="T:Abp.Authorization.Users.UserAccountSynchronizer">
+            <summary>
+            Synchronizes a user's information to user account.
+            </summary>
+        </member>
+        <member name="M:Abp.Authorization.Users.UserAccountSynchronizer.#ctor(Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserAccount,System.Int64},Abp.Domain.Uow.IUnitOfWorkManager)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Abp.Authorization.Users.UserAccountSynchronizer.HandleEvent(Abp.Events.Bus.Entities.EntityCreatedEventData{Abp.Authorization.Users.AbpUserBase})">
+            <summary>
+            Handles creation event of user
+            </summary>
+        </member>
+        <member name="M:Abp.Authorization.Users.UserAccountSynchronizer.HandleEvent(Abp.Events.Bus.Entities.EntityDeletedEventData{Abp.Authorization.Users.AbpUserBase})">
+            <summary>
+            Handles deletion event of user
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:Abp.Authorization.Users.UserAccountSynchronizer.HandleEvent(Abp.Events.Bus.Entities.EntityUpdatedEventData{Abp.Authorization.Users.AbpUserBase})">
+            <summary>
+            Handles update event of user
+            </summary>
+            <param name="eventData"></param>
         </member>
         <member name="T:Abp.Authorization.Users.UserLoginAttempt">
             <summary>
@@ -625,7 +674,7 @@
         <member name="P:Abp.Authorization.Users.IExternalAuthenticationSource`2.Name">
             <summary>
             Unique name of the authentication source.
-            This source name is set to <see cref="P:Abp.Authorization.Users.AbpUser`2.AuthenticationSource"/>
+            This source name is set to <see cref="!:AbpUser&lt;TTenant,TUser&gt;.AuthenticationSource"/>
             if the user authenticated by this authentication source
             </summary>
         </member>
@@ -655,33 +704,33 @@
             <param name="user">The user that can be updated</param>
             <param name="tenant">Tenant of the user or null (if user is a host user)</param>
         </member>
-        <member name="T:Abp.Authorization.Users.IUserPermissionStore`2">
+        <member name="T:Abp.Authorization.Users.IUserPermissionStore`1">
             <summary>
             Used to perform permission database operations for a user.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Users.IUserPermissionStore`2.AddPermissionAsync(`1,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Users.IUserPermissionStore`1.AddPermissionAsync(`0,Abp.Authorization.PermissionGrantInfo)">
             <summary>
             Adds a permission grant setting to a user.
             </summary>
             <param name="user">User</param>
             <param name="permissionGrant">Permission grant setting info</param>
         </member>
-        <member name="M:Abp.Authorization.Users.IUserPermissionStore`2.RemovePermissionAsync(`1,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Users.IUserPermissionStore`1.RemovePermissionAsync(`0,Abp.Authorization.PermissionGrantInfo)">
             <summary>
             Removes a permission grant setting from a user.
             </summary>
             <param name="user">User</param>
             <param name="permissionGrant">Permission grant setting info</param>
         </member>
-        <member name="M:Abp.Authorization.Users.IUserPermissionStore`2.GetPermissionsAsync(System.Int64)">
+        <member name="M:Abp.Authorization.Users.IUserPermissionStore`1.GetPermissionsAsync(System.Int64)">
             <summary>
             Gets permission grant setting informations for a user.
             </summary>
             <param name="userId">User id</param>
             <returns>List of permission setting informations</returns>
         </member>
-        <member name="M:Abp.Authorization.Users.IUserPermissionStore`2.HasPermissionAsync(System.Int64,Abp.Authorization.PermissionGrantInfo)">
+        <member name="M:Abp.Authorization.Users.IUserPermissionStore`1.HasPermissionAsync(System.Int64,Abp.Authorization.PermissionGrantInfo)">
             <summary>
             Checks whether a role has a permission grant setting info.
             </summary>
@@ -689,7 +738,7 @@
             <param name="permissionGrant">Permission grant setting info</param>
             <returns></returns>
         </member>
-        <member name="M:Abp.Authorization.Users.IUserPermissionStore`2.RemoveAllPermissionSettingsAsync(`1)">
+        <member name="M:Abp.Authorization.Users.IUserPermissionStore`1.RemoveAllPermissionSettingsAsync(`0)">
             <summary>
             Deleted all permission settings for a role.
             </summary>
@@ -810,26 +859,26 @@
             <returns>User</returns>
             <exception cref="T:Abp.AbpException">Throws exception if no user found with given id</exception>
         </member>
-        <member name="T:Abp.Authorization.Users.AbpUserStore`3">
+        <member name="T:Abp.Authorization.Users.AbpUserStore`2">
             <summary>
             Implements 'User Store' of ASP.NET Identity Framework.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Users.AbpUserStore`3.#ctor(Abp.Domain.Repositories.IRepository{`2,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserLogin,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserRole,System.Int64},Abp.Domain.Repositories.IRepository{`1},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserPermissionSetting,System.Int64},Abp.Domain.Uow.IUnitOfWorkManager)">
+        <member name="M:Abp.Authorization.Users.AbpUserStore`2.#ctor(Abp.Domain.Repositories.IRepository{`1,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserLogin,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserRole,System.Int64},Abp.Domain.Repositories.IRepository{`0},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserPermissionSetting,System.Int64},Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             Constructor.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Users.AbpUserStore`3.FindByNameOrEmailAsync(System.String)">
+        <member name="M:Abp.Authorization.Users.AbpUserStore`2.FindByNameOrEmailAsync(System.String)">
             <summary>
-            Tries to find a user with user name or email address.
+            Tries to find a user with user name or email address in current tenant.
             </summary>
             <param name="userNameOrEmailAddress">User name or email address</param>
             <returns>User or null</returns>
         </member>
-        <member name="M:Abp.Authorization.Users.AbpUserStore`3.FindByNameOrEmailAsync(System.Nullable{System.Int32},System.String)">
+        <member name="M:Abp.Authorization.Users.AbpUserStore`2.FindByNameOrEmailAsync(System.Nullable{System.Int32},System.String)">
             <summary>
-            Tries to find a user with user name or email address.
+            Tries to find a user with user name or email address in given tenant.
             </summary>
             <param name="tenantId">Tenant Id</param>
             <param name="userNameOrEmailAddress">User name or email address</param>
@@ -855,146 +904,125 @@
             Creates a new <see cref="T:Abp.Authorization.Users.UserRole"/> object.
             </summary>
         </member>
-        <member name="M:Abp.Authorization.Users.UserRole.#ctor(System.Int64,System.Int32)">
+        <member name="M:Abp.Authorization.Users.UserRole.#ctor(System.Nullable{System.Int32},System.Int64,System.Int32)">
             <summary>
             Creates a new <see cref="T:Abp.Authorization.Users.UserRole"/> object.
             </summary>
             <param name="userId">User id</param>
             <param name="roleId">Role id</param>
         </member>
-        <member name="T:Abp.Authorization.Users.AbpUser`2">
+        <member name="T:Abp.Authorization.Users.AbpUser`1">
             <summary>
             Represents a user.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.AdminUserName">
+        <member name="F:Abp.Authorization.Users.AbpUser`1.AdminUserName">
             <summary>
             UserName of the admin.
             admin can not be deleted and UserName of the admin can not be changed.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.MaxNameLength">
+        <member name="F:Abp.Authorization.Users.AbpUser`1.MaxNameLength">
             <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`2.Name"/> property.
+            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`1.Name"/> property.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.MaxSurnameLength">
+        <member name="F:Abp.Authorization.Users.AbpUser`1.MaxSurnameLength">
             <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`2.Surname"/> property.
+            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`1.Surname"/> property.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.MaxPasswordLength">
+        <member name="F:Abp.Authorization.Users.AbpUser`1.MaxPasswordLength">
             <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`2.Password"/> property.
+            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`1.Password"/> property.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.MaxPlainPasswordLength">
+        <member name="F:Abp.Authorization.Users.AbpUser`1.MaxPlainPasswordLength">
             <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`2.Password"/> without hashed.
+            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`1.Password"/> without hashed.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.MaxEmailAddressLength">
+        <member name="F:Abp.Authorization.Users.AbpUser`1.MaxEmailConfirmationCodeLength">
             <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`2.EmailAddress"/> property.
+            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`1.EmailConfirmationCode"/> property.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.MaxEmailConfirmationCodeLength">
+        <member name="F:Abp.Authorization.Users.AbpUser`1.MaxPasswordResetCodeLength">
             <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`2.EmailConfirmationCode"/> property.
+            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`1.PasswordResetCode"/> property.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.MaxPasswordResetCodeLength">
+        <member name="F:Abp.Authorization.Users.AbpUser`1.MaxAuthenticationSourceLength">
             <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`2.PasswordResetCode"/> property.
+            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`1.AuthenticationSource"/> property.
             </summary>
         </member>
-        <member name="F:Abp.Authorization.Users.AbpUser`2.MaxAuthenticationSourceLength">
-            <summary>
-            Maximum length of the <see cref="P:Abp.Authorization.Users.AbpUser`2.AuthenticationSource"/> property.
-            </summary>
-        </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.Tenant">
-            <summary>
-            Tenant of this user.
-            </summary>
-        </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.AuthenticationSource">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.AuthenticationSource">
             <summary>
             Authorization source name.
             It's set to external authentication source name if created by an external source.
             Default: null.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.Name">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.Name">
             <summary>
             Name of the user.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.Surname">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.Surname">
             <summary>
             Surname of the user.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.FullName">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.FullName">
             <summary>
             Return full name (Name Surname )
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.Password">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.Password">
             <summary>
             Password of the user.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.EmailAddress">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.IsEmailConfirmed">
             <summary>
-            Email address of the user.
-            Email address must be unique for it's tenant.
+            Is the <see cref="!:EmailAddress"/> confirmed.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.IsEmailConfirmed">
-            <summary>
-            Is the <see cref="P:Abp.Authorization.Users.AbpUser`2.EmailAddress"/> confirmed.
-            </summary>
-        </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.EmailConfirmationCode">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.EmailConfirmationCode">
             <summary>
             Confirmation code for email.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.PasswordResetCode">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.PasswordResetCode">
             <summary>
             Reset code for password.
             It's not valid if it's null.
             It's for one usage and must be set to null after reset.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.LastLoginTime">
-            <summary>
-            The last time this user entered to the system.
-            </summary>
-        </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.IsActive">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.IsActive">
             <summary>
             Is this user active?
             If as user is not active, he/she can not use the application.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.Logins">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.Logins">
             <summary>
             Login definitions for this user.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.Roles">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.Roles">
             <summary>
             Role definitions for this user.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.Permissions">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.Permissions">
             <summary>
             Permission definitions for this user.
             </summary>
         </member>
-        <member name="P:Abp.Authorization.Users.AbpUser`2.Settings">
+        <member name="P:Abp.Authorization.Users.AbpUser`1.Settings">
             <summary>
             Settings for this user.
             </summary>
@@ -1303,7 +1331,7 @@
             Implements <see cref="T:Abp.Localization.IMultiTenantLocalizationDictionary"/>.
             </summary>
         </member>
-        <member name="M:Abp.Localization.MultiTenantLocalizationDictionary.#ctor(System.String,Abp.Localization.Dictionaries.ILocalizationDictionary,Abp.Domain.Repositories.IRepository{Abp.Localization.ApplicationLanguageText,System.Int64},Abp.Runtime.Caching.ICacheManager,Abp.Runtime.Session.IAbpSession)">
+        <member name="M:Abp.Localization.MultiTenantLocalizationDictionary.#ctor(System.String,Abp.Localization.Dictionaries.ILocalizationDictionary,Abp.Domain.Repositories.IRepository{Abp.Localization.ApplicationLanguageText,System.Int64},Abp.Runtime.Caching.ICacheManager,Abp.Runtime.Session.IAbpSession,Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Abp.Localization.MultiTenantLocalizationDictionary"/> class.
             </summary>
@@ -1422,6 +1450,45 @@
             <param name="culture">Culture</param>
             <param name="tryDefaults">True: fallbacks to default languages if can not find in given culture</param>
         </member>
+        <member name="T:Abp.MultiTenancy.AbpTenantBase">
+            <summary>
+            Base class for tenants.
+            </summary>
+        </member>
+        <member name="F:Abp.MultiTenancy.AbpTenantBase.MaxTenancyNameLength">
+            <summary>
+            Max length of the <see cref="P:Abp.MultiTenancy.AbpTenantBase.TenancyName"/> property.
+            </summary>
+        </member>
+        <member name="F:Abp.MultiTenancy.AbpTenantBase.MaxConnectionStringLength">
+            <summary>
+            Max length of the <see cref="P:Abp.MultiTenancy.AbpTenantBase.ConnectionString"/> property.
+            </summary>
+        </member>
+        <member name="P:Abp.MultiTenancy.AbpTenantBase.TenancyName">
+            <summary>
+            Tenancy name. This property is the UNIQUE name of this Tenant.
+            It can be used as subdomain name in a web application.
+            </summary>
+        </member>
+        <member name="P:Abp.MultiTenancy.AbpTenantBase.ConnectionString">
+            <summary>
+            ENCRYPTED connection string of the tenant database.
+            Can be null if this tenant is stored in host database.
+            Use <see cref="T:Abp.Runtime.Security.SimpleStringCipher"/> to encrypt/decrypt this.
+            </summary>
+        </member>
+        <member name="T:Abp.MultiTenancy.IDbPerTenantConnectionStringResolver">
+            <summary>
+            Extends <see cref="T:Abp.Domain.Uow.IConnectionStringResolver"/> to
+            get connection string for given tenant.
+            </summary>
+        </member>
+        <member name="M:Abp.MultiTenancy.IDbPerTenantConnectionStringResolver.GetNameOrConnectionString(Abp.MultiTenancy.DbPerTenantConnectionStringResolveArgs)">
+            <summary>
+            Gets the connection string for given args.
+            </summary>
+        </member>
         <member name="T:Abp.MultiTenancy.TenantFeatureCacheItem">
             <summary>
             Used to store features of a Tenant in the cache.
@@ -1450,7 +1517,7 @@
         <member name="T:Abp.MultiTenancy.AbpTenantManager`3">
             <summary>
             Tenant manager.
-            Implements domain logic for <see cref="T:Abp.MultiTenancy.AbpTenant`2"/>.
+            Implements domain logic for <see cref="!:AbpTenant&lt;TTenant,TUser&gt;"/>.
             </summary>
             <typeparam name="TTenant">Type of the application Tenant</typeparam>
             <typeparam name="TRole">Type of the application Role</typeparam>
@@ -1462,26 +1529,6 @@
             Tenant will have features according to it's edition.
             </summary>
             <param name="tenantId">Tenant Id</param>
-        </member>
-        <member name="T:Abp.MultiTenancy.IMayHaveTenant`2">
-            <summary>
-            Implement this interface for an entity which may have Tenant.
-            </summary>
-        </member>
-        <member name="P:Abp.MultiTenancy.IMayHaveTenant`2.Tenant">
-            <summary>
-            Tenant.
-            </summary>
-        </member>
-        <member name="T:Abp.MultiTenancy.IMustHaveTenant`2">
-            <summary>
-            Implement this interface for an entity which must have Tenant.
-            </summary>
-        </member>
-        <member name="P:Abp.MultiTenancy.IMustHaveTenant`2.Tenant">
-            <summary>
-            Tenant.
-            </summary>
         </member>
         <member name="T:Abp.MultiTenancy.TenantFeatureCacheItemInvalidator">
             <summary>
@@ -1496,7 +1543,7 @@
         </member>
         <member name="T:Abp.MultiTenancy.TenantFeatureSetting">
             <summary>
-            Feature setting for a Tenant (<see cref="T:Abp.MultiTenancy.AbpTenant`2"/>).
+            Feature setting for a Tenant (<see cref="T:Abp.MultiTenancy.AbpTenant`1"/>).
             </summary>
         </member>
         <member name="P:Abp.MultiTenancy.TenantFeatureSetting.TenantId">
@@ -1517,64 +1564,63 @@
             <param name="name">Feature name.</param>
             <param name="value">Feature value.</param>
         </member>
-        <member name="T:Abp.MultiTenancy.AbpTenant`2">
+        <member name="T:Abp.MultiTenancy.AbpTenant`1">
             <summary>
             Represents a Tenant of the application.
             </summary>
         </member>
-        <member name="F:Abp.MultiTenancy.AbpTenant`2.DefaultTenantName">
+        <member name="F:Abp.MultiTenancy.AbpTenant`1.DefaultTenantName">
             <summary>
             "Default".
             </summary>
         </member>
-        <member name="F:Abp.MultiTenancy.AbpTenant`2.TenancyNameRegex">
+        <member name="F:Abp.MultiTenancy.AbpTenant`1.TenancyNameRegex">
             <summary>
             "^[a-zA-Z][a-zA-Z0-9_-]{1,}$".
             </summary>
         </member>
-        <member name="F:Abp.MultiTenancy.AbpTenant`2.MaxTenancyNameLength">
+        <member name="F:Abp.MultiTenancy.AbpTenant`1.MaxNameLength">
             <summary>
-            Max length of the <see cref="P:Abp.MultiTenancy.AbpTenant`2.TenancyName"/> property.
+            Max length of the <see cref="P:Abp.MultiTenancy.AbpTenant`1.Name"/> property.
             </summary>
         </member>
-        <member name="F:Abp.MultiTenancy.AbpTenant`2.MaxNameLength">
+        <member name="P:Abp.MultiTenancy.AbpTenant`1.Edition">
             <summary>
-            Max length of the <see cref="P:Abp.MultiTenancy.AbpTenant`2.Name"/> property.
+            Current <see cref="P:Abp.MultiTenancy.AbpTenant`1.Edition"/> of the Tenant.
             </summary>
         </member>
-        <member name="P:Abp.MultiTenancy.AbpTenant`2.TenancyName">
-            <summary>
-            Tenancy name. This property is the UNIQUE name of this Tenant.
-            It can be used as subdomain name in a web application.
-            </summary>
-        </member>
-        <member name="P:Abp.MultiTenancy.AbpTenant`2.Edition">
-            <summary>
-            Current <see cref="P:Abp.MultiTenancy.AbpTenant`2.Edition"/> of the Tenant.
-            </summary>
-        </member>
-        <member name="P:Abp.MultiTenancy.AbpTenant`2.Name">
+        <member name="P:Abp.MultiTenancy.AbpTenant`1.Name">
             <summary>
             Display name of the Tenant.
             </summary>
         </member>
-        <member name="P:Abp.MultiTenancy.AbpTenant`2.IsActive">
+        <member name="P:Abp.MultiTenancy.AbpTenant`1.IsActive">
             <summary>
             Is this tenant active?
             If as tenant is not active, no user of this tenant can use the application.
             </summary>
         </member>
-        <member name="P:Abp.MultiTenancy.AbpTenant`2.Settings">
+        <member name="P:Abp.MultiTenancy.AbpTenant`1.CreatorUser">
             <summary>
-            Defined settings for this tenant.
+            Reference to the creator user of this entity.
             </summary>
         </member>
-        <member name="M:Abp.MultiTenancy.AbpTenant`2.#ctor">
+        <member name="P:Abp.MultiTenancy.AbpTenant`1.LastModifierUser">
+            <summary>
+            Reference to the last modifier user of this entity.
+            </summary>
+        </member>
+        <member name="P:Abp.MultiTenancy.AbpTenant`1.DeleterUser">
+            <summary>
+            Reference to the deleter user of this entity.
+            </summary>
+        </member>
+        <member name="M:Abp.MultiTenancy.AbpTenant`1.#ctor">
             <summary>
             Creates a new tenant.
             </summary>
         </member>
-        <member name="M:Abp.MultiTenancy.AbpTenant`2.#ctor(System.String,System.String)">
+        <member name="M:Abp.MultiTenancy.AbpTenant`1.#ctor(System.String,System.String)">
             <summary>
             Creates a new tenant.
             </summary>
@@ -1784,7 +1830,7 @@
             Implements <see cref="T:Abp.Configuration.ISettingStore"/>.
             </summary>
         </member>
-        <member name="M:Abp.Configuration.SettingStore.#ctor(Abp.Domain.Repositories.IRepository{Abp.Configuration.Setting,System.Int64})">
+        <member name="M:Abp.Configuration.SettingStore.#ctor(Abp.Domain.Repositories.IRepository{Abp.Configuration.Setting,System.Int64},Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             Constructor.
             </summary>
@@ -1807,7 +1853,7 @@
             Implements <see cref="T:Abp.Notifications.INotificationStore"/> using repositories.
             </summary>
         </member>
-        <member name="M:Abp.Notifications.NotificationStore.#ctor(Abp.Domain.Repositories.IRepository{Abp.Notifications.NotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.UserNotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.NotificationSubscriptionInfo,System.Guid})">
+        <member name="M:Abp.Notifications.NotificationStore.#ctor(Abp.Domain.Repositories.IRepository{Abp.Notifications.NotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.TenantNotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.UserNotificationInfo,System.Guid},Abp.Domain.Repositories.IRepository{Abp.Notifications.NotificationSubscriptionInfo,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Abp.Notifications.NotificationStore"/> class.
             </summary>
@@ -2051,6 +2097,31 @@
         <member name="P:Abp.Zero.Configuration.IAbpZeroConfig.UserManagement">
             <summary>
             Gets user management config.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.Configuration.IAbpZeroConfig.LanguageManagement">
+            <summary>
+            Gets language management config.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.Configuration.IAbpZeroConfig.EntityTypes">
+            <summary>
+            Gets entity type config.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.Configuration.IAbpZeroEntityTypes.User">
+            <summary>
+            User type of the application.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.Configuration.IAbpZeroEntityTypes.Role">
+            <summary>
+            Role type of the application.
+            </summary>
+        </member>
+        <member name="P:Abp.Zero.Configuration.IAbpZeroEntityTypes.Tenant">
+            <summary>
+            Tenant type of the application.
             </summary>
         </member>
         <member name="T:Abp.Zero.Configuration.ILanguageManagementConfig">

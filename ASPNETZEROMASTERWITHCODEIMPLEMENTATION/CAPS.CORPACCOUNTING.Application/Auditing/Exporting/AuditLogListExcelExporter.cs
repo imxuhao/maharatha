@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Abp.Extensions;
+using Abp.Runtime.Session;
+using Abp.Timing.Timezone;
 using CAPS.CORPACCOUNTING.Auditing.Dto;
 using CAPS.CORPACCOUNTING.DataExporting.Excel.EpPlus;
 using CAPS.CORPACCOUNTING.Dto;
@@ -8,6 +10,17 @@ namespace CAPS.CORPACCOUNTING.Auditing.Exporting
 {
     public class AuditLogListExcelExporter : EpPlusExcelExporterBase, IAuditLogListExcelExporter
     {
+        private readonly ITimeZoneConverter _timeZoneConverter;
+        private readonly IAbpSession _abpSession;
+
+        public AuditLogListExcelExporter(
+            ITimeZoneConverter timeZoneConverter,
+            IAbpSession abpSession)
+        {
+            _timeZoneConverter = timeZoneConverter;
+            _abpSession = abpSession;
+        }
+
         public FileDto ExportToFile(List<AuditLogListDto> auditLogListDtos)
         {
             return CreateExcelPackage(
@@ -33,7 +46,7 @@ namespace CAPS.CORPACCOUNTING.Auditing.Exporting
 
                     AddObjects(
                         sheet, 2, auditLogListDtos,
-                        _ => _.ExecutionTime,
+                        _ => _timeZoneConverter.Convert(_.ExecutionTime, _abpSession.TenantId, _abpSession.GetUserId()),
                         _ => _.UserName,
                         _ => _.ServiceName,
                         _ => _.MethodName,
@@ -48,7 +61,7 @@ namespace CAPS.CORPACCOUNTING.Auditing.Exporting
                     //Formatting cells
 
                     var timeColumn = sheet.Column(1);
-                    timeColumn.Style.Numberformat.Format = "mm-dd-yy hh:mm:ss";
+                    timeColumn.Style.Numberformat.Format = "yyyy-mm-dd hh:mm:ss";
 
                     for (var i = 1; i <= 10; i++)
                     {

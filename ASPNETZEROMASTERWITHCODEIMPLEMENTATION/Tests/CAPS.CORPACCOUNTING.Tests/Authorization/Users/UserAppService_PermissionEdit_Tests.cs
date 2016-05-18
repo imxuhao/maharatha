@@ -63,6 +63,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
                 context => context.UserPermissions.Add(
                     new UserPermissionSetting
                     {
+                        TenantId = AbpSession.TenantId,
                         UserId = admin.Id,
                         Name = AppPermissions.Pages_Administration_Roles,
                         IsGranted = false

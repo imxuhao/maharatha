@@ -51,7 +51,7 @@
                                             <i class="{{notification.icon}}"></i> {{notification.text}}
                                         </span>
                                         <div>
-                                            <span class="notification-time" title="{{notification.time}}" am-time-ago="notification.time"></span>
+                                            <span class="notification-time" title="{{notification.time | momentFormat:'YYYY-MM-DD HH:mm:ss'}}" am-time-ago="notification.time"></span>
                                             <span ng-if="notification.state=='UNREAD'"> - <span class="set-as-read-text" ng-click="vm.setNotificationAsRead(notification); $event.preventDefault(); $event.stopPropagation();">@L("SetAsRead")</span></span>
                                         </div>
                                     </a>
@@ -87,8 +87,6 @@
                             <ul class="dropdown-menu" style="">
                                 <li ng-repeat="linkedUser in vm.recentlyUsedLinkedUsers">
                                     <a href="" ng-click="vm.switchToUser(linkedUser)">
-                                        <img ng-if="linkedUser.profilePictureId" ng-src="{{ abp.appPath + 'Profile/GetProfilePictureById?id=' + linkedUser.profilePictureId }}" width="22" height="22" class="img-rounded" />
-                                        <img ng-if="!linkedUser.profilePictureId" ng-src="{{ abp.appPath + 'Common/Images/default-profile-picture.png' }}" width="22" height="22" class="img-rounded" />
                                         {{vm.getShownLinkedUserName(linkedUser)}}
                                     </a>
                                 </li>

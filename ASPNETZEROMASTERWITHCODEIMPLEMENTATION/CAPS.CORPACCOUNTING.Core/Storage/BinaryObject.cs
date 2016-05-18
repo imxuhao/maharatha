@@ -6,19 +6,22 @@ using Abp.Domain.Entities;
 namespace CAPS.CORPACCOUNTING.Storage
 {
     [Table("AppBinaryObjects")]
-    public class BinaryObject : Entity<Guid>
+    public class BinaryObject : Entity<Guid>, IMayHaveTenant
     {
+        public virtual int? TenantId { get; set; }
+
         [Required]
-        public byte[] Bytes { get; set; }
+        public virtual byte[] Bytes { get; set; }
 
         public BinaryObject()
         {
             Id = Guid.NewGuid();
         }
 
-        public BinaryObject(byte[] bytes)
+        public BinaryObject(int? tenantId, byte[] bytes)
             : this()
         {
+            TenantId = tenantId;
             Bytes = bytes;
         }
     }

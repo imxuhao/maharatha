@@ -29,6 +29,11 @@
             Reference to GUID generator.
             </summary>
         </member>
+        <member name="P:Abp.EntityFramework.AbpDbContext.CurrentUnitOfWorkProvider">
+            <summary>
+            Reference to the current UOW provider.
+            </summary>
+        </member>
         <member name="M:Abp.EntityFramework.AbpDbContext.#ctor">
             <summary>
             Constructor.
@@ -65,9 +70,10 @@
             Constructor.
             </summary>
         </member>
-        <member name="T:Abp.EntityFramework.Dependency.EntityFrameworkConventionalRegistrar">
+        <member name="F:Abp.EntityFramework.Utils.DateTimePropertyInfoHelper.DateTimeProperties">
             <summary>
-            Registers classes derived from AbpDbContext with configurations.
+            Key: Entity type
+            Value: DateTime property infos
             </summary>
         </member>
         <member name="T:Abp.EntityFramework.Extensions.QueryableExtensions">
@@ -129,6 +135,16 @@
             </summary>
             <param name="dbContextProvider"></param>
         </member>
+        <member name="P:Abp.EntityFramework.EntityTypeInfo.EntityType">
+            <summary>
+            Type of the entity.
+            </summary>
+        </member>
+        <member name="P:Abp.EntityFramework.EntityTypeInfo.DeclaringType">
+            <summary>
+            DbContext type that has <see cref="T:System.Data.Entity.DbSet`1"/> property.
+            </summary>
+        </member>
         <member name="T:Abp.EntityFramework.IDbContextProvider`1">
             <summary>
             
@@ -158,7 +174,7 @@
             Implements Unit of work for Entity Framework.
             </summary>
         </member>
-        <member name="M:Abp.EntityFramework.Uow.EfUnitOfWork.#ctor(Abp.Dependency.IIocResolver,Abp.Domain.Uow.IUnitOfWorkDefaultOptions)">
+        <member name="M:Abp.EntityFramework.Uow.EfUnitOfWork.#ctor(Abp.Dependency.IIocResolver,Abp.Domain.Uow.IConnectionStringResolver,Abp.EntityFramework.IDbContextResolver,Abp.Domain.Uow.IUnitOfWorkDefaultOptions)">
             <summary>
             Creates a new <see cref="T:Abp.EntityFramework.Uow.EfUnitOfWork"/>.
             </summary>

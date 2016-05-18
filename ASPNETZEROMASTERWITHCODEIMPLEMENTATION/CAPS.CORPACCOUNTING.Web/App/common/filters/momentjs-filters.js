@@ -7,7 +7,7 @@
             if (!date) {
                 return '-';
             }
-
+            
             return moment(date).format(formatStr);
         };
     })

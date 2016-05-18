@@ -9,7 +9,6 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
-using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Editions.Dto;
 
 namespace CAPS.CORPACCOUNTING.Editions

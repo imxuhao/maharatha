@@ -18,17 +18,16 @@ namespace CAPS.CORPACCOUNTING.Tests.TestDatas
     public class TestOrganizationUnitsBuilder
     {
         private readonly CORPACCOUNTINGDbContext _context;
-        private Tenant _defaultTenant;
+        private readonly int _tenantId;
 
-        public TestOrganizationUnitsBuilder(CORPACCOUNTINGDbContext context)
+        public TestOrganizationUnitsBuilder(CORPACCOUNTINGDbContext context, int tenantId)
         {
             _context = context;
+            _tenantId = tenantId;
         }
 
         public void Create()
         {
-            _defaultTenant = _context.Tenants.Single(t => t.TenancyName == Tenant.DefaultTenantName);
-
             CreateOUs();
         }
 
@@ -45,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.Tests.TestDatas
 
         private OrganizationUnit CreateOU(string displayName, string code, long? parentId = null)
         {
-            var ou = _context.OrganizationUnits.Add(new OrganizationUnit(_defaultTenant.Id, displayName, parentId) { Code = code });
+            var ou = _context.OrganizationUnits.Add(new OrganizationUnit(_tenantId, displayName, parentId) { Code = code });
             _context.SaveChanges();
             return ou;
         }

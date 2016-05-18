@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Features;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.MultiTenancy;
 using Abp.Runtime.Caching;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
@@ -15,8 +16,14 @@ namespace CAPS.CORPACCOUNTING.Editions
             IRepository<TenantFeatureSetting, long> tenantFeatureSettingRepository,
             IRepository<Tenant> tenantRepository,
             IRepository<EditionFeatureSetting, long> editionFeatureSettingRepository,
-            IFeatureManager featureManager)
-            : base(cacheManager, tenantFeatureSettingRepository, tenantRepository, editionFeatureSettingRepository, featureManager)
+            IFeatureManager featureManager,
+            IUnitOfWorkManager unitOfWorkManager)
+            : base(cacheManager,
+                  tenantFeatureSettingRepository,
+                  tenantRepository,
+                  editionFeatureSettingRepository,
+                  featureManager,
+                  unitOfWorkManager)
         {
         }
     }

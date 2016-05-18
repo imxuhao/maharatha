@@ -220,3 +220,4 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEM
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.WebApi\obj\Debug\CAPS.CORPACCOUNTING.WebApi.csprojResolveAssemblyReference.cache
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.WebApi\obj\Debug\CAPS.CORPACCOUNTING.WebApi.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.WebApi\obj\Debug\CAPS.CORPACCOUNTING.WebApi.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.WebApi\bin\Debug\AutoMapper.Net4.dll

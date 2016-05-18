@@ -300,6 +300,21 @@
             Used to create client scripts for session.
             </summary>
         </member>
+        <member name="T:Abp.Web.Timing.ITimingScriptManager">
+            <summary>
+            Define interface to get timing scripts
+            </summary>
+        </member>
+        <member name="M:Abp.Web.Timing.ITimingScriptManager.GetScriptAsync">
+            <summary>
+            Gets Javascript that contains all feature information.
+            </summary>
+        </member>
+        <member name="T:Abp.Web.Timing.TimingScriptManager">
+            <summary>
+            This class is used to build timing script.
+            </summary>
+        </member>
         <member name="T:Abp.Web.WebAssemblyFinder">
             <summary>
             This class is used to get all assemblies in bin folder of a web application.

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Abp.Application.Services.Dto;
+using Abp.Auditing;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 
@@ -32,6 +33,7 @@ namespace CAPS.CORPACCOUNTING.Web.Models.Account
         public string EmailAddress { get; set; }
 
         [StringLength(User.MaxPlainPasswordLength)]
+        [DisableAuditing]
         public string Password { get; set; }
 
         public bool IsExternalLogin { get; set; }

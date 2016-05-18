@@ -83,3 +83,10 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEM
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.csprojResolveAssemblyReference.cache
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\obj\Debug\CAPS.CORPACCOUNTING.Core.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\AutoMapper.Net4.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Abp.AutoMapper.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\AutoMapper.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\Abp.AutoMapper.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\AutoMapper.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\AutoMapper.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Core\bin\Debug\AutoMapper.Net4.pdb

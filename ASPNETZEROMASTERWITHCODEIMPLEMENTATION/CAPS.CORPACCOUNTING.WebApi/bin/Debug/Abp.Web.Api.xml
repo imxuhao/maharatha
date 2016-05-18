@@ -132,6 +132,11 @@
             <param name="input">Input</param>
             <param name="timeout">Timeout as milliseconds</param>
         </member>
+        <member name="T:Abp.WebApi.Controllers.Dynamic.Binders.AbpApiDateTimeBinder">
+            <summary>
+            Binds datetime values from api requests to model
+            </summary>
+        </member>
         <member name="T:Abp.WebApi.Controllers.Dynamic.Builders.BatchApiControllerBuilder`1">
             <summary>
             This interface is used to define a dynamic api controllers.

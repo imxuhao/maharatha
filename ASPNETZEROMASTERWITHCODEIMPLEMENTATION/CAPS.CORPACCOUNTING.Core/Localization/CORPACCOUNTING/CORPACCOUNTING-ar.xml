@@ -211,7 +211,7 @@
     <text name="TenantSelection">اختيار العميل</text>
     <text name="TenantSelection_Detail">الرجاء اختيار واحد من العملاء</text>
     <text name="LoginWith">تسجيل الدخول مع:</text>
-    <text name="PasswordChangeDontRememberMessage">إذا كنت لا تتذكر كلمة المرور {0} {</text>
+    <text name="PasswordChangeDontRememberMessage">إذا كنت لا تتذكر كلمة المرور {0}.</text>
     <text name="ClickHere">إضغط هنا</text>
     <text name="Apply">تطبيق</text>
     <text name="CustomRange">مدى مخصص</text>

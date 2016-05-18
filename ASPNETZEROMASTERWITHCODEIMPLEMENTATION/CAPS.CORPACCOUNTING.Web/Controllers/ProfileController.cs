@@ -89,7 +89,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 }
 
                 //Save new picture
-                var storedFile = new BinaryObject(file.InputStream.GetAllBytes());
+                var storedFile = new BinaryObject(AbpSession.TenantId, file.InputStream.GetAllBytes());
                 await _binaryObjectManager.SaveAsync(storedFile);
 
                 //Update new picture on the user

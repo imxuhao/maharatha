@@ -113,6 +113,11 @@ namespace CAPS.CORPACCOUNTING.Tests.Organizations
             //Arrange
             var ou11 = GetOU("OU11");
 
+            UsingDbContext(context =>
+            {
+                context.Users.FirstOrDefault(u => u.Id == AbpSession.UserId.Value && u.TenantId == AbpSession.TenantId.Value).ShouldNotBeNull();
+            });
+
             //Act
             await _organizationUnitAppService.DeleteOrganizationUnit(new IdInput<long>(ou11.Id));
 

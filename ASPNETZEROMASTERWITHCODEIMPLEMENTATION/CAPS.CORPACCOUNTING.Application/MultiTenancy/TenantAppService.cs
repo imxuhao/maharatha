@@ -10,6 +10,7 @@ using Abp.AutoMapper;
 using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
+using Abp.Runtime.Security;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Editions.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
@@ -55,6 +56,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 input.Name,
                 input.AdminPassword,
                 input.AdminEmailAddress,
+                input.ConnectionString,
                 input.IsActive,
                 input.EditionId,
                 input.ShouldChangePasswordOnNextLogin,
@@ -64,12 +66,15 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]
         public async Task<TenantEditDto> GetTenantForEdit(EntityRequestInput input)
         {
-            return (await TenantManager.GetByIdAsync(input.Id)).MapTo<TenantEditDto>();
+            var tenantEditDto = (await TenantManager.GetByIdAsync(input.Id)).MapTo<TenantEditDto>();
+            tenantEditDto.ConnectionString = SimpleStringCipher.Instance.Decrypt(tenantEditDto.ConnectionString);
+            return tenantEditDto;
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]
         public async Task UpdateTenant(TenantEditDto input)
         {
+            input.ConnectionString = SimpleStringCipher.Instance.Encrypt(input.ConnectionString);
             var tenant = await TenantManager.GetByIdAsync(input.Id);
             input.MapTo(tenant);
             CheckErrors(await TenantManager.UpdateAsync(tenant));

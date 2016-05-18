@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
+using Abp.Auditing;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto
 {
@@ -7,10 +8,12 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto
     {
         [Required]
         [StringLength(User.MaxPlainPasswordLength)]
+        [DisableAuditing]
         public string CurrentPassword { get; set; }
 
         [Required]
         [StringLength(User.MaxPlainPasswordLength, MinimumLength = User.MinPlainPasswordLength)]
+        [DisableAuditing]
         public string NewPassword { get; set; }
     }
 }

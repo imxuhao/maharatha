@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Abp.AutoMapper;
 using Abp.Modules;
 using CAPS.CORPACCOUNTING.Authorization;
 
@@ -8,7 +7,7 @@ namespace CAPS.CORPACCOUNTING
     /// <summary>
     /// Application layer module of the application.
     /// </summary>
-    [DependsOn(typeof(CORPACCOUNTINGCoreModule), typeof(AbpAutoMapperModule))]
+    [DependsOn(typeof(CORPACCOUNTINGCoreModule))]
     public class CORPACCOUNTINGApplicationModule : AbpModule
     {
         public override void PreInitialize()

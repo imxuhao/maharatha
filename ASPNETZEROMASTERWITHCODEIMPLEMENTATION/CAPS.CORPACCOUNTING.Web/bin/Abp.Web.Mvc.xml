@@ -195,7 +195,7 @@
             to work with ABP.
             </summary>
         </member>
-        <member name="M:Abp.Web.Mvc.Controllers.AbpScriptsController.#ctor(Abp.Web.MultiTenancy.IMultiTenancyScriptManager,Abp.Web.Settings.ISettingScriptManager,Abp.Web.Navigation.INavigationScriptManager,Abp.Web.Localization.ILocalizationScriptManager,Abp.Web.Authorization.IAuthorizationScriptManager,Abp.Web.Features.IFeaturesScriptManager,Abp.Web.Sessions.ISessionScriptManager)">
+        <member name="M:Abp.Web.Mvc.Controllers.AbpScriptsController.#ctor(Abp.Web.MultiTenancy.IMultiTenancyScriptManager,Abp.Web.Settings.ISettingScriptManager,Abp.Web.Navigation.INavigationScriptManager,Abp.Web.Localization.ILocalizationScriptManager,Abp.Web.Authorization.IAuthorizationScriptManager,Abp.Web.Features.IFeaturesScriptManager,Abp.Web.Sessions.ISessionScriptManager,Abp.Web.Timing.ITimingScriptManager)">
             <summary>
             Constructor.
             </summary>
@@ -280,6 +280,11 @@
             </summary>
             <param name="html">Reference to the HtmlHelper object</param>
             <param name="url">URL of the style file</param>
+        </member>
+        <member name="T:Abp.Web.Mvc.ModelBinding.Binders.AbpMvcDateTimeBinder">
+            <summary>
+            Binds any browser request datetime to utc datetime
+            </summary>
         </member>
         <member name="T:Abp.Web.Mvc.Models.ModelStateExtensions">
             <summary>
@@ -387,6 +392,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Abp.Web.Mvc.AbpWebMvcModule.Initialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:Abp.Web.Mvc.AbpWebMvcModule.PostInitialize">
             <inheritdoc/>
         </member>
         <member name="T:Abp.Web.Mvc.Views.AbpWebViewPage">

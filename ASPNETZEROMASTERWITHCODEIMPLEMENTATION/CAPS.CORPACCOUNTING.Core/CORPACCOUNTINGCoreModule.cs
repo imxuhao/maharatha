@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using Abp.AutoMapper;
 using Abp.Dependency;
 using Abp.Localization.Dictionaries;
 using Abp.Localization.Dictionaries.Xml;
@@ -10,9 +12,11 @@ using Abp.Zero.Ldap;
 using Abp.Zero.Ldap.Configuration;
 using CAPS.CORPACCOUNTING.Authorization.Ldap;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
+using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Debugging;
 using CAPS.CORPACCOUNTING.Features;
+using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Notifications;
 
 namespace CAPS.CORPACCOUNTING
@@ -20,11 +24,18 @@ namespace CAPS.CORPACCOUNTING
     /// <summary>
     /// Core (domain) module of the application.
     /// </summary>
-    [DependsOn(typeof(AbpZeroCoreModule), typeof(AbpZeroLdapModule))]
+    [DependsOn(typeof(AbpZeroCoreModule), typeof(AbpZeroLdapModule), typeof(AbpAutoMapperModule))]
     public class CORPACCOUNTINGCoreModule : AbpModule
     {
         public override void PreInitialize()
         {
+            Configuration.Auditing.IsEnabledForAnonymousUsers = true;
+
+            //Declare entity types
+            Configuration.Modules.Zero().EntityTypes.Tenant = typeof (Tenant);
+            Configuration.Modules.Zero().EntityTypes.Role = typeof (Role);
+            Configuration.Modules.Zero().EntityTypes.User = typeof (User);
+
             //Add/remove localization sources
             Configuration.Localization.Sources.Add(
                 new DictionaryBasedLocalizationSource(

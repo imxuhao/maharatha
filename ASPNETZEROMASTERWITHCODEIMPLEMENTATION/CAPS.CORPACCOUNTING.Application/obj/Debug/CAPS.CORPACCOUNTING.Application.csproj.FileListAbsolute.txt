@@ -125,3 +125,4 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEM
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Application\obj\Debug\CAPS.CORPACCOUNTING.Application.csprojResolveAssemblyReference.cache
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Application\obj\Debug\CAPS.CORPACCOUNTING.Application.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Application\obj\Debug\CAPS.CORPACCOUNTING.Application.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\CAPS.CORPACCOUNTING.Application\bin\Debug\AutoMapper.Net4.dll

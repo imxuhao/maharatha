@@ -12,7 +12,6 @@
 
             vm.languageChanged = function () {
                 //Try to find related language's flag
-                console.log(vm.language);
                 if (!vm.language) {
                     return;
                 }

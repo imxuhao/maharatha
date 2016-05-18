@@ -23,14 +23,14 @@ namespace CAPS.CORPACCOUNTING.Tests.Configuration.Host
 
         private void InitializeTestSettings()
         {
-            _settingManager.ChangeSettingForApplicationAsync(EmailSettingNames.DefaultFromAddress, "test@mydomain.com");
-            _settingManager.ChangeSettingForApplicationAsync(EmailSettingNames.DefaultFromDisplayName, "");
-            _settingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.Host, "100.101.102.103");
-            _settingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.UserName, "myuser");
-            _settingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.Password, "123456");
-            _settingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.Domain, "mydomain");
-            _settingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.EnableSsl, "true");
-            _settingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.UseDefaultCredentials, "false");
+            _settingManager.ChangeSettingForApplication(EmailSettingNames.DefaultFromAddress, "test@mydomain.com");
+            _settingManager.ChangeSettingForApplication(EmailSettingNames.DefaultFromDisplayName, "");
+            _settingManager.ChangeSettingForApplication(EmailSettingNames.Smtp.Host, "100.101.102.103");
+            _settingManager.ChangeSettingForApplication(EmailSettingNames.Smtp.UserName, "myuser");
+            _settingManager.ChangeSettingForApplication(EmailSettingNames.Smtp.Password, "123456");
+            _settingManager.ChangeSettingForApplication(EmailSettingNames.Smtp.Domain, "mydomain");
+            _settingManager.ChangeSettingForApplication(EmailSettingNames.Smtp.EnableSsl, "true");
+            _settingManager.ChangeSettingForApplication(EmailSettingNames.Smtp.UseDefaultCredentials, "false");
         }
 
         [Fact]

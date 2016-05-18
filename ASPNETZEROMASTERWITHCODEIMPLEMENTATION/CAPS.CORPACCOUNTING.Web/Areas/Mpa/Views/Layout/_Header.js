@@ -84,8 +84,9 @@
                     $(".recently-linked-user").click(function (e) {
                         e.preventDefault();
                         var userId = $(this).attr("data-user-id");
+                        var tenantId = $(this).attr("data-tenant-id");
                         if (userId) {
-                            switchToUser(userId);
+                            switchToUser(userId, tenantId);
                         }
                     });
                 });
@@ -96,7 +97,6 @@
 
             $.each(result.items, function (index, linkedUser) {
                 linkedUser.shownUserName = app.getShownLinkedUserName(linkedUser);
-                linkedUser.profilePictureUrl = app.getUserProfilePicturePath(linkedUser.profilePictureId);
             });
 
             result.hasLinkedUsers = function () {
@@ -109,11 +109,12 @@
             $ul.html(rendered);
         }
 
-        function switchToUser(linkedUserId) {
+        function switchToUser(linkedUserId, linkedTenantId) {
             abp.ajax({
                 url: abp.appPath + 'Account/SwitchToLinkedAccount',
                 data: JSON.stringify({
-                    targetUserId: linkedUserId
+                    targetUserId: linkedUserId,
+                    targetTenantId: linkedTenantId
                 })
             });
         };

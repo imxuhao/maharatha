@@ -200,3 +200,7 @@ C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEM
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\Tests\CAPS.CORPACCOUNTING.Tests\obj\Debug\CAPS.CORPACCOUNTING.Tests.csprojResolveAssemblyReference.cache
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\Tests\CAPS.CORPACCOUNTING.Tests\obj\Debug\CAPS.CORPACCOUNTING.Tests.dll
 C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\Tests\CAPS.CORPACCOUNTING.Tests\obj\Debug\CAPS.CORPACCOUNTING.Tests.pdb
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\AutoMapper.Net4.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\NSubstitute.dll
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\NSubstitute.xml
+C:\Source Code\Cha-Ching\nextgen-commercial\trunk\ASPNETZEROMASTERWITHCODEIMPLEMENTATION\Tests\CAPS.CORPACCOUNTING.Tests\bin\Debug\Shouldly.pdb

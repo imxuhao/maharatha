@@ -1,12 +1,14 @@
-﻿(function() {
+﻿(function () {
     $(function () {
         var _tenantSettingsService = abp.services.app.tenantSettings;
+        var _initialTimeZone = $('#GeneralSettingsForm [name=Timezone]').val();
+        var _usingDefaultTimeZone = $('#GeneralSettingsForm [name=TimezoneForComparison]').val() === abp.setting.values["Abp.Timing.TimeZone"];
 
         //Toggle form based registration options
         var _$selfRegistrationOptions = $('#FormBasedRegistrationSettingsForm')
             .find('input[name=IsNewRegisteredUserActiveByDefault],input[name=UseCaptchaOnRegistration]')
             .closest('.md-checkbox');
-        
+
         function toggleSelfRegistrationOptions() {
             if ($('#Setting_AllowSelfRegistration').is(':checked')) {
                 _$selfRegistrationOptions.slideDown('fast');
@@ -68,6 +70,16 @@
                 ldap: $('#LdapSettingsForm').serializeFormToObject()
             }).done(function () {
                 abp.notify.info(app.localize('SavedSuccessfully'));
+                
+                var newTimezone = $('#GeneralSettingsForm [name=Timezone]').val();
+                if (abp.clock.provider.supportsMultipleTimezone &&
+                        _usingDefaultTimeZone &&
+                        _initialTimeZone !== newTimezone) {
+                    abp.message.info(app.localize('TimeZoneSettingChangedRefreshPageNotification')).done(function () {
+                        window.location.reload();
+                    });
+                }
+
             });
         });
     });

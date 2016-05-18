@@ -72,31 +72,27 @@ appModule.config([
         if (abp.auth.hasPermission('Pages.Administration.Roles')) {
             $stateProvider.state('roles', {
                 url: '/roles',
-                templateUrl: '~/App/common/views/roles/index.cshtml',
-                menu: 'Administration.Roles'
+                templateUrl: '~/App/common/views/roles/index.cshtml'
             });
         }
 
         if (abp.auth.hasPermission('Pages.Administration.Users')) {
             $stateProvider.state('users', {
                 url: '/users?filterText',
-                templateUrl: '~/App/common/views/users/index.cshtml',
-                menu: 'Administration.Users'
+                templateUrl: '~/App/common/views/users/index.cshtml'
             });
         }
 
         if (abp.auth.hasPermission('Pages.Administration.Languages')) {
             $stateProvider.state('languages', {
                 url: '/languages',
-                templateUrl: '~/App/common/views/languages/index.cshtml',
-                menu: 'Administration.Languages'
+                templateUrl: '~/App/common/views/languages/index.cshtml'
             });
 
             if (abp.auth.hasPermission('Pages.Administration.Languages.ChangeTexts')) {
                 $stateProvider.state('languageTexts', {
                     url: '/languages/texts/:languageName?sourceName&baseLanguageName&targetValueFilter&filterText',
-                    templateUrl: '~/App/common/views/languages/texts.cshtml',
-                    menu: 'Administration.Languages'
+                    templateUrl: '~/App/common/views/languages/texts.cshtml'
                 });
             }
         }
@@ -104,16 +100,14 @@ appModule.config([
         if (abp.auth.hasPermission('Pages.Administration.AuditLogs')) {
             $stateProvider.state('auditLogs', {
                 url: '/auditLogs',
-                templateUrl: '~/App/common/views/auditLogs/index.cshtml',
-                menu: 'Administration.AuditLogs'
+                templateUrl: '~/App/common/views/auditLogs/index.cshtml'
             });
         }
 
         if (abp.auth.hasPermission('Pages.Administration.OrganizationUnits')) {
             $stateProvider.state('organizationUnits', {
                 url: '/organizationUnits',
-                templateUrl: '~/App/common/views/organizationUnits/index.cshtml',
-                menu: 'Administration.OrganizationUnits'
+                templateUrl: '~/App/common/views/organizationUnits/index.cshtml'
             });
         }
 
@@ -134,32 +128,28 @@ appModule.config([
             $urlRouterProvider.otherwise("/host/tenants"); //Entrance page for the host
             $stateProvider.state('host.tenants', {
                 url: '/tenants?filterText',
-                templateUrl: '~/App/host/views/tenants/index.cshtml',
-                menu: 'Tenants'
+                templateUrl: '~/App/host/views/tenants/index.cshtml'
             });
         }
 
         if (abp.auth.hasPermission('Pages.Editions')) {
             $stateProvider.state('host.editions', {
                 url: '/editions',
-                templateUrl: '~/App/host/views/editions/index.cshtml',
-                menu: 'Editions'
+                templateUrl: '~/App/host/views/editions/index.cshtml'
             });
         }
 
         if (abp.auth.hasPermission('Pages.Administration.Host.Maintenance')) {
             $stateProvider.state('host.maintenance', {
                 url: '/maintenance',
-                templateUrl: '~/App/host/views/maintenance/index.cshtml',
-                menu: 'Administration.Maintenance'
+                templateUrl: '~/App/host/views/maintenance/index.cshtml'
             });
         }
 
         if (abp.auth.hasPermission('Pages.Administration.Host.Settings')) {
             $stateProvider.state('host.settings', {
                 url: '/settings',
-                templateUrl: '~/App/host/views/settings/index.cshtml',
-                menu: 'Administration.Settings.Host'
+                templateUrl: '~/App/host/views/settings/index.cshtml'
             });
         }
 
@@ -175,24 +165,26 @@ appModule.config([
             $urlRouterProvider.otherwise("/tenant/dashboard"); //Entrance page for a tenant
             $stateProvider.state('tenant.dashboard', {
                 url: '/dashboard',
-                templateUrl: '~/App/tenant/views/dashboard/index.cshtml',
-                menu: 'Dashboard.Tenant'
+                templateUrl: '~/App/tenant/views/dashboard/index.cshtml'
             });
         }
 
         if (abp.auth.hasPermission('Pages.Administration.Tenant.Settings')) {
             $stateProvider.state('tenant.settings', {
                 url: '/settings',
-                templateUrl: '~/App/tenant/views/settings/index.cshtml',
-                menu: 'Administration.Settings.Tenant'
+                templateUrl: '~/App/tenant/views/settings/index.cshtml'
             });
         }
     }
 ]);
 
-appModule.run(["$rootScope", "settings", "$state", 'i18nService', function ($rootScope, settings, $state, i18nService) {
+appModule.run(["$rootScope", "settings", "$state", 'i18nService', '$uibModalStack', function ($rootScope, settings, $state, i18nService, $uibModalStack) {
     $rootScope.$state = $state;
     $rootScope.$settings = settings;
+
+    $rootScope.$on('$stateChangeSuccess', function () {
+        $uibModalStack.dismissAll();
+    });
 
     //Set Ui-Grid language
     if (i18nService.get(abp.localization.currentCulture.name)) {

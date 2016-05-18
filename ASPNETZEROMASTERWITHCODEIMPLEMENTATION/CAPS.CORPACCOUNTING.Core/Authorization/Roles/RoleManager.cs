@@ -1,9 +1,9 @@
 ﻿using Abp.Authorization;
 using Abp.Authorization.Roles;
+using Abp.Domain.Uow;
 using Abp.Runtime.Caching;
 using Abp.Zero.Configuration;
 using CAPS.CORPACCOUNTING.Authorization.Users;
-using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Roles
 {
@@ -11,18 +11,20 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
     /// Role manager.
     /// Used to implement domain logic for roles.
     /// </summary>
-    public class RoleManager : AbpRoleManager<Tenant, Role, User>
+    public class RoleManager : AbpRoleManager<Role, User>
     {
         public RoleManager(
             RoleStore store,
             IPermissionManager permissionManager,
             IRoleManagementConfig roleManagementConfig,
-            ICacheManager cacheManager)
+            ICacheManager cacheManager,
+            IUnitOfWorkManager unitOfWorkManager)
             : base(
                 store,
                 permissionManager,
                 roleManagementConfig,
-                cacheManager)
+                cacheManager,
+                unitOfWorkManager)
         {
 
         }

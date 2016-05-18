@@ -328,7 +328,7 @@
     <text name="SuccessfullyUnlinked">Bağlantı başarıyla kaldırıldı.</text>
     <text name="LinkedUserDeleteWarningMessage">{0} kullanıcısına bağlantı silinecektir.</text>
     <text name="SwitchToLinkedAccountTokenErrorMessage" value="Bağlı hesaba geçme kodu geçersiz ya da süresi dolmuş!" />
-    <text name="WelcomeToTheApplicationNotificationMessage" value="CORPACCOUNTING uygulamasına Hoşgeldiniz! Bilgilendirme sistemi sizi ilgilendiğiniz olaylar hakkında anın bilgilendirmek için geliştirilmiştir. Bildirim ayarları kısmından ne tür bilgilendirme almak istediğinizi ayarlayabilirsiniz." />
+    <text name="WelcomeToTheApplicationNotificationMessage" value="CORPACCOUNTING uygulamasına Hoşgeldiniz! Bilgilendirme sistemi sizi ilgilendiğiniz olaylar hakkında anında bilgilendirmek için geliştirilmiştir. Bildirim ayarları kısmından ne tür bilgilendirme almak istediğinizi ayarlayabilirsiniz." />
     <text name="NewUserRegisteredNotificationDefinition" value="Yeni bir kullanıcı kaydolduğunda." />
     <text name="NewUserRegisteredNotificationMessage" value="Yeni bir kullanıcı kaydoldu. Kullanıcı adı: {userName}, e-posta adresi: {emailAddress}." />
     <text name="SeeAllNotifications" value="Tüm bildirimleri gör" />
@@ -369,5 +369,12 @@
     <text name="NewTenant">Yeni müşteri</text>
     <text name="ResizedProfilePicture_Warn_SizeLimit" value="Kırpılmış resim boyutu en fazla 100KB olabilir. Lütfen kırpılmış alanı küçültüp tekrar deneyin." />
     <text name="RegisterFormUserNameInvalidMessage">Lütfen kullanıcı adı alanına e-posta adresi girmeyin.</text>
+    <text name="UseHostDatabase" value="Host veritabanını kullan" />
+    <text name="DatabaseConnectionString" value="Veritabanı bağlantı cümlesi" />
+    <text name="TenantDatabaseConnectionStringChangeWarningMessage" value="Dikkat: Müşteri için veritabanı bağlantı cümlesini değiştirmeden önce veritabanını yeni konumuna taşımanız gerekir. Bağlantı cümlesini değiştirmek veritabanını otomatik olarak taşımayacaktır." />
+    <text name="Timezone">Zaman dilimi</text>
+    <text name="HasOwnDatabase">Kendi veritabanı var</text>
+    <text name="TimeZoneSettingChangedRefreshPageNotification">Zaman dilimi ayarı değişti. Değişiklikerin etkili olması için Tamam butonuna basarak sayfayı yenileyin.</text>
+    <text name="Ok">Tamam</text>
   </texts>
 </localizationDictionary>

@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Abp.Application.Navigation;
 using Abp.Configuration.Startup;
+using Abp.Runtime.Session;
 using Abp.Threading;
 using Abp.Web.Mvc.Authorization;
 using CAPS.CORPACCOUNTING.Authorization.Users;
@@ -49,7 +50,7 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
         {
             var sidebarModel = new SidebarViewModel
             {
-                Menu = AsyncHelper.RunSync(() => _userNavigationManager.GetMenuAsync(MpaNavigationProvider.MenuName, AbpSession.UserId)),
+                Menu = AsyncHelper.RunSync(() => _userNavigationManager.GetMenuAsync(MpaNavigationProvider.MenuName, AbpSession.ToUserIdentifier())),
                 CurrentPageName = currentPageName
             };
 

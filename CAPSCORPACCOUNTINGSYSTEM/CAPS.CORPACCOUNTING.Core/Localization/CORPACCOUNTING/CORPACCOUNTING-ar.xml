@@ -367,5 +367,13 @@
     <text name="Failed">فشل</text>
     <text name="NewTenant">إشتراك العملاء</text>
     <text name="ResizedProfilePicture_Warn_SizeLimit" value="حجم الصورة بعد التصغير يجب أن يكون أقل من 100 كيلوبايت. قم بتصغير الصورة وحاول مرة اخرى." />
+    <text name="RegisterFormUserNameInvalidMessage">من فضلك لاتدخل بريد إلكتروني كإسم مستخدم.</text>
+    <text name="UseHostDatabase" value="إستخدم قاعدة بيانات المضيف" />
+    <text name="DatabaseConnectionString" value="Database connection string" />
+    <text name="TenantDatabaseConnectionStringChangeWarningMessage" value="ملاحظة: قبل تغيير طريقة إتصال قاعدة بيانات العميل, عليك نقل قاعدة بيانات العميل الى الوجهة الجديدة. تغيير طريقة الإتصال لاتنقل قاعدة بيانات العميل." />
+    <text name="Timezone">منطقة زمنية</text>
+    <text name="HasOwnDatabase">لديه قاعدة بيانات خاصة</text>
+    <text name="TimeZoneSettingChangedRefreshPageNotification">تم تغيير إعدادات المنطقة الزمنية. انقر على زر موافق لتحديث الصفحة وسيتم تفعيل التغييرات.</text>
+    <text name="Ok">موافق</text>
   </texts>
 </localizationDictionary>

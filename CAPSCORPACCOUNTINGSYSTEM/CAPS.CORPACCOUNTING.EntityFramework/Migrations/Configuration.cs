@@ -1,4 +1,5 @@
 using System.Data.Entity.Migrations;
+using Abp.MultiTenancy;
 using Abp.Zero.EntityFramework;
 using EntityFramework.DynamicFilters;
 using CAPS.CORPACCOUNTING.Migrations.Seed;
@@ -7,22 +8,22 @@ using CAPS.CORPACCOUNTING.Migrations.Seed.Tenants;
 
 namespace CAPS.CORPACCOUNTING.Migrations
 {
-    public sealed class Configuration : DbMigrationsConfiguration<EntityFramework.CORPACCOUNTINGDbContext>, ISupportSeedMode
+    public sealed class Configuration : DbMigrationsConfiguration<EntityFramework.CORPACCOUNTINGDbContext>, IMultiTenantSeed
     {
-        public SeedMode SeedMode { get; set; }
+        public AbpTenantBase Tenant { get; set; }
 
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
             ContextKey = "CORPACCOUNTING";
-            SeedMode = SeedMode.Host;
+            
         }
 
         protected override void Seed(EntityFramework.CORPACCOUNTINGDbContext context)
         {
             context.DisableAllFilters();
 
-            if (SeedMode == SeedMode.Host)
+            if (Tenant == null)
             {
                 //Host seed
                 new InitialHostDbBuilder(context).Create();
@@ -31,9 +32,9 @@ namespace CAPS.CORPACCOUNTING.Migrations
                 new DefaultTenantBuilder(context).Create();
                 new TenantRoleAndUserBuilder(context, 1).Create();
             }
-            else if(SeedMode == SeedMode.Tenant)
+            else
             {
-                //You can add seed for tenant databases...
+                //You can add seed for tenant databases and use Tenant property...
             }
 
             context.SaveChanges();

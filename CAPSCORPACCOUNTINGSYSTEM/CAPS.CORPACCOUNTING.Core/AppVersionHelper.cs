@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING
         /// All project's assembly versions are changed when this value is changed.
         /// It's also shown in the web page.
         /// </summary>
-        public const string Version = "1.10.0.0";
+        public const string Version = "1.10.1.0";
 
         /// <summary>
         /// Gets release (last build) date of the application.

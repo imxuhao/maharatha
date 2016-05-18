@@ -61,7 +61,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Host
 
                 //Grant all permissions
                 var permissions = PermissionFinder
-                    .GetAllPermissions(new AppAuthorizationProvider())
+                    .GetAllPermissions(new AppAuthorizationProvider(true))
                     .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Host))
                     .ToList();
 

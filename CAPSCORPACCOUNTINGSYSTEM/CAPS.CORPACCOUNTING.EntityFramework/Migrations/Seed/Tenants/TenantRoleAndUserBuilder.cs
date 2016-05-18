@@ -38,7 +38,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Tenants
 
                 //Grant all permissions to admin role
                 var permissions = PermissionFinder
-                    .GetAllPermissions(new AppAuthorizationProvider())
+                    .GetAllPermissions(new AppAuthorizationProvider(false))
                     .Where(p => p.MultiTenancySides.HasFlag(MultiTenancySides.Tenant))
                     .ToList();
 

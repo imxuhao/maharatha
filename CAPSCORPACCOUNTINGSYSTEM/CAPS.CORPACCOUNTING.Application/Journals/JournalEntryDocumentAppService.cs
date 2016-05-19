@@ -11,14 +11,11 @@ using Abp.Domain.Repositories;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using Abp.Linq.Extensions;
-using System.Linq.Dynamic;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Auditing;
-using CAPS.CORPACCOUNTING.Auditing;
 using CAPS.CORPACCOUNTING.Sessions;
-using System;
 using Abp.Dependency;
 
 namespace CAPS.CORPACCOUNTING.Journals
@@ -33,7 +30,6 @@ namespace CAPS.CORPACCOUNTING.Journals
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IRepository<User, long> _userRepository;
         private IdOutputDto<long> _response = null;
-        private readonly IRepository<AuditLog, long> _auditLogRepository;
         private readonly CustomAppSession _CustomAppSession;
 
 
@@ -49,7 +45,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitRepository,
             IRepository<User, long> userRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BatchUnit> batchUnitRepository,
-            IRepository<AuditLog, long> auditLogRepository, CustomAppSession CustomAppSession
+            CustomAppSession CustomAppSession
             )
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
@@ -58,7 +54,6 @@ namespace CAPS.CORPACCOUNTING.Journals
             _unitOfWorkManager = unitOfWorkManager;
             _batchUnitRepository = batchUnitRepository;
             _userRepository = userRepository;
-            _auditLogRepository = auditLogRepository;
             _CustomAppSession = CustomAppSession;
         }
 

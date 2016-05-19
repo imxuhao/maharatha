@@ -46,6 +46,10 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// Gets or sets JournalType
         /// </summary>
         public string JournalType { get; set; }
-
+        /// <summary>
+        /// Gets or sets CreatedUser
+        /// </summary>
+        public string CreatedUser { get; set; }
+        
     }
 }

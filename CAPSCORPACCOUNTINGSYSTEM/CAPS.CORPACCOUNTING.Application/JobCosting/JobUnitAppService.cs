@@ -11,12 +11,19 @@ using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
 using Abp.Authorization;
 using System.Collections.Generic;
+using System.Text;
+using Abp.Collections.Extensions;
+using Abp.Events.Bus;
+using Abp.Events.Bus.Entities;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using Abp.Organizations;
 using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using Abp.Runtime.Caching;
+using CAPS.CORPACCOUNTING.Helpers;
+using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -40,14 +47,18 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IJobAccountUnitAppService _jobAccountUnitAppService;
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
         private readonly IRepository<JobPORangeAllocationUnit> _jobPORangeAllocationUnitRepository;
-
+        private readonly ICacheManager _cacheManager;
+        private readonly CustomAppSession _customAppSession;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
+        public IEventBus EventBus { get; set; }
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService,
             IRepository<OrganizationUnit, long> organizationUnitRepository, IRepository<JobAccountUnit, long> jobAccountUnitRepository,
             IRepository<CoaUnit> coaUnitRepository, IRepository<AccountUnit, long> accountUnitRepository, IRepository<ValueAddedTaxRecoveryUnit> valueAddedTaxRecoveryUnitRepository,
         IRepository<ValueAddedTaxTypeUnit> valueAddedTaxTypeUnitRepository, IRepository<TypeOfCountryUnit, short> typeOfCountryUnitRepository,
         IRepository<CountryUnit> countryUnitRepository, IJobAccountUnitAppService jobAccountUnitAppService, IRepository<TaxCreditUnit> taxCreditUnitRepository,
-             IRepository<JobPORangeAllocationUnit> jobPORangeAllocationUnitRepository)
+             IRepository<JobPORangeAllocationUnit> jobPORangeAllocationUnitRepository, ICacheManager cacheManager, CustomAppSession customAppSession,
+             IUnitOfWorkManager unitOfWorkManager)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -66,6 +77,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _jobAccountUnitAppService = jobAccountUnitAppService;
             _taxCreditUnitRepository = taxCreditUnitRepository;
             _jobPORangeAllocationUnitRepository = jobPORangeAllocationUnitRepository;
+            _cacheManager = cacheManager;
+            _customAppSession = customAppSession;
+            _unitOfWorkManager = unitOfWorkManager;
 
         }
         /// <summary>
@@ -119,6 +133,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 await _jobAccountUnitAppService.CreateJobAccountUnit(jobAccount);
             }
             #endregion
+
+            _unitOfWorkManager.Current.Completed += (sender, args) =>
+            {
+                StringBuilder sb = new StringBuilder();
+                sb = sb.Append(ReferenceEquals(_customAppSession.TenantId, null) ? "0" : _customAppSession.TenantId).Append("#")
+                 .Append(ReferenceEquals(_customAppSession.OrganizationId, null) ? "0" : _customAppSession.OrganizationId).Append("#Divisions");
+
+                _cacheManager.GetDivisionsCache().Remove(sb.ToString());
+            };
+
             return result.MapTo<JobUnitDto>();
         }
 
@@ -190,7 +214,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             }
             #endregion
 
-            var xx = _accountUnitRepository.GetAll().ToList();
+
 
             #region updating all JobAccounts of Job
             //bulk update
@@ -282,19 +306,44 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         select new { account };
             var divisions = await query
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.account.Caption.Contains(input.Query))
-                 .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.account.OrganizationUnitId == input.OrganizationId)
+                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.account.OrganizationUnitId == input.OrganizationUnitId)
                  .Select(u => new NameValueDto { Name = u.account.Caption, Value = u.account.Id.ToString() }).ToListAsync();
             return divisions;
 
         }
 
-        public async Task<List<NameValueDto>> GetProjectCoaList(AutoSearchInput input)
+        private async Task<List<NameValueDto>> GetDivisionsFromDb(AutoSearchInput input)
         {
-            var divisions = await _coaUnitRepository.GetAll().Where(p => p.IsCorporate == false)
-                 .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
-                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
+            var divisions = await _jobUnitRepository.GetAll().Where(p => p.IsDivision == true)
+                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
                  .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
             return divisions;
+        }
+
+        private async Task<DivisionCacheItem> GetDivisionCacheItemAsync(string divisionkey,AutoSearchInput input)
+        {
+            return await _cacheManager.GetDivisionsCache().GetAsync(divisionkey, async () =>
+            {
+                var newCacheItem = new DivisionCacheItem(divisionkey);
+                var divList = await GetDivisionsFromDb(input);
+                foreach (var div in divList)
+                {
+                    newCacheItem.DivisionList.Add(div);
+                }
+                return newCacheItem;
+            });
+        }
+
+        public async Task<List<NameValueDto>> GetProjectCoaList(AutoSearchInput input)
+        {
+            
+            var divisions = await _coaUnitRepository.GetAll().Where(p => p.IsCorporate == false)
+               .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+               .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
+               .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
+            return divisions;
+
 
         }
 
@@ -304,12 +353,18 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetDivisionList(AutoSearchInput input)
         {
-            var divisions = await _jobUnitRepository.GetAll().Where(p => p.IsDivision == true)
-                .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
-                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
-                 .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
-            return divisions;
+            StringBuilder sb=new StringBuilder();
+            sb=sb.Append(ReferenceEquals(_customAppSession.TenantId, null) ? "0" : _customAppSession.TenantId).Append("#")
+             .Append(ReferenceEquals(_customAppSession.OrganizationId, null) ? "0":_customAppSession.OrganizationId ).Append("#Divisions");
+
+            var cacheItem = await GetDivisionCacheItemAsync(sb.ToString(),input);
+
+            var result = cacheItem.DivisionList.ToList();
+            result = result.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+            return result;
         }
+
+       
         /// <summary>
         ///  Get BudgetSoftwareList
         /// </summary>
@@ -347,7 +402,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         select new { au, coa };
             var accounts = await query.Where(p => p.au.IsRollupAccount == true && p.coa.IsCorporate == true)
                             .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.au.Caption.Contains(input.Query))
-                             .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.au.OrganizationUnitId == input.OrganizationId)
+                             .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.au.OrganizationUnitId == input.OrganizationUnitId.Value)
                             .Select(u => new NameValueDto { Name = u.au.Caption, Value = u.au.Id.ToString() }).ToListAsync();
 
             return accounts;
@@ -400,7 +455,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input)
         {
             var taxCreditList = await _taxCreditUnitRepository.GetAll()
-                 .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
+                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return taxCreditList;

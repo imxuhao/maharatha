@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
+
     public class UpdateJournalEntryDocumentInputUnit : UpdateAccountingHeaderTransactionInputUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>

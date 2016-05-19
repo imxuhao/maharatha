@@ -125,8 +125,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounting\Dto\AccountingItemUnitDto.cs" />
     <Compile Include="Accounting\Dto\AccountingHeaderTransactionUnitDto.cs" />
     <Compile Include="Accounting\Dto\CreateAccountingHeaderTransactionInputUnit.cs" />
+    <Compile Include="Accounting\Dto\UpdateAccountingItemInputUnit.cs" />
+    <Compile Include="Accounting\Dto\CreateAccountingItemInputUnit.cs" />
     <Compile Include="Accounting\Dto\CreateSubAccountUnitInput.cs" />
     <Compile Include="Accounting\Dto\SubAccountUnitDto.cs" />
     <Compile Include="Accounting\Dto\UpdateAccountingHeaderTransactionInputUnit.cs" />
@@ -231,6 +234,8 @@
     <Compile Include="GenericSearch\SearchExtensions.cs" />
     <Compile Include="GenericSearch\Dto\SearchInputDto.cs" />
     <Compile Include="GenericSearch\TextSearch.cs" />
+    <Compile Include="Helper\CacheExtensionHelper.cs" />
+    <Compile Include="Helper\DivisionCacheItem.cs" />
     <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Helper\EnumList.cs" />
     <Compile Include="Helper\Helper.cs" />
@@ -289,8 +294,14 @@
     <Compile Include="JobCosting\JobCommercialAppService.cs" />
     <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\JobUnitAppService.cs" />
+    <Compile Include="Journals\Dto\GetTransactionList.cs" />
+    <Compile Include="Journals\Dto\JournalEntryDocDetailUnitDto.cs" />
+    <Compile Include="Journals\Dto\UpdateJournalEntryDocDetailInputUnit.cs" />
+    <Compile Include="Journals\Dto\CreateJournalEntryDocDetailInputUnit.cs" />
     <Compile Include="Journals\Dto\CreateJournalEntryDocumentInputUnit.cs" />
+    <Compile Include="Journals\IJournalEntryDocDetailAppService.cs" />
     <Compile Include="Journals\IJournalEntryDocumentAppService.cs" />
+    <Compile Include="Journals\JournalEntryDocDetailAppService.cs" />
     <Compile Include="Journals\JournalEntryDocumentAppService.cs" />
     <Compile Include="Journals\Dto\JournalEntryDocumentUnitDto.cs" />
     <Compile Include="Journals\Dto\UpdateJournalEntryDocumentInputUnit.cs" />

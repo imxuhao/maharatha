@@ -265,7 +265,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             return await (from au in _accountUnitRepository.GetAll()
                          .Where( p => p.IsRollupAccount ==true && p.ChartOfAccountId==input.Id)
                          .WhereIf(!string.IsNullOrEmpty(input.Query),p=>p.Caption.Contains(input.Query))
-                         .WhereIf(! ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
+                         .WhereIf(! ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
                           select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
         }
 

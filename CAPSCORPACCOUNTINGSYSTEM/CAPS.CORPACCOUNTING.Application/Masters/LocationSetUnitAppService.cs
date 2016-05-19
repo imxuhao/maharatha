@@ -95,7 +95,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             var locationSets = await _locationSetUnitRepository.GetAll()
                  .Where(p=>p.TypeOfLocationSetId== input.LocationSetTypeId)
-                 .WhereIf(!ReferenceEquals(input.OrganizationId, null), p => p.OrganizationUnitId == input.OrganizationId)
+                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return locationSets;

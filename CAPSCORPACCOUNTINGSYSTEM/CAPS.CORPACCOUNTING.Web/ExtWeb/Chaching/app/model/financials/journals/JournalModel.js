@@ -1,7 +1,7 @@
 ﻿Ext.define('Chaching.model.financials.journals.JournalModel', {
     extend: 'Chaching.model.financials.AccountingDocumentModel',
     config: {
-        searchEntityName: ''
+        searchEntityName: 'journals'
     },
     fields: [
 { name: 'batchId', type: 'int', defaultValue: null, convert: nullHandler },

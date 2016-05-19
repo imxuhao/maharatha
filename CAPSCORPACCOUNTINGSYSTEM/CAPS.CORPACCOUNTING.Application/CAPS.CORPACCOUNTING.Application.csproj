@@ -147,9 +147,14 @@
     <Compile Include="Banking\BankAccountUnitAppService.cs" />
     <Compile Include="Banking\Dto\BankAccountAndAddressDto.cs" />
     <Compile Include="Banking\Dto\BankAccountUnitDto.cs" />
+    <Compile Include="Banking\BatchUnitAppService.cs" />
+    <Compile Include="Banking\Dto\BatchUnitDto.cs" />
     <Compile Include="Banking\Dto\CreateBankAccountUnitInput.cs" />
+    <Compile Include="Banking\Dto\CreateBatchUnitInput.cs" />
     <Compile Include="Banking\Dto\UpdateBankAccountUnitInput.cs" />
+    <Compile Include="Banking\Dto\UpdateBatchUnitInput.cs" />
     <Compile Include="Banking\IBankAccountUnitAppService.cs" />
+    <Compile Include="Banking\IBatchUnitAppService.cs" />
     <Compile Include="Caching\CachingAppService.cs" />
     <Compile Include="Caching\Dto\CacheDto.cs" />
     <Compile Include="Caching\ICachingAppService.cs" />

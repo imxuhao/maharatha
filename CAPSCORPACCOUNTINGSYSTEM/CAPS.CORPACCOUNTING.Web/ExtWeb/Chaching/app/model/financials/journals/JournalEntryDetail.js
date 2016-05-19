@@ -1,7 +1,7 @@
 ﻿Ext.define('Chaching.model.financials.journals.JournalEntryDetail', {
     extend: 'Chaching.model.financials.AccountingItemModel',
     config: {
-        searchEntityName: ''
+        searchEntityName: 'journals'
     },
     fields:
         [{ name: 'vendorId ', type: 'int' },

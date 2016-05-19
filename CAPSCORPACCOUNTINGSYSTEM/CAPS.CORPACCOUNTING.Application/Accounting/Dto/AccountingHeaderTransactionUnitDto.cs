@@ -16,12 +16,17 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Get Sets the Description Date </summary>
         public virtual string Description { get; set; }
 
-        /// <summary>Get Sets the TypeOfAccountingDocumentID Date </summary>
-        [EnumDataType(typeof(TypeOfAccountingDocument))]
+        /// <summary>Get Sets the TypeOfAccountingDocumentID  </summary>
         public virtual TypeOfAccountingDocument TypeOfAccountingDocumentId { get; set; }
+
+        /// <summary>Get Sets the TypeOfAccountingDocument  </summary>
+        public virtual string TypeOfAccountingDocument { get; set; }
 
         /// <summary>Get Sets the TypeOfObjectId field. </summary>
         public virtual TypeofObject? TypeOfObjectId { get; set; }
+
+        /// <summary>Get Sets the TypeOfObject field. </summary>
+        public virtual string TypeOfObject { get; set; }
 
         /////// <summary>Get Sets the DocumentLinkId field. </summary>
         ////public virtual long? DocumentLinkId { get; set; }
@@ -32,8 +37,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Get Sets the RecurDocId field.</summary>
         public virtual long? RecurDocId { get; set; }
 
+        /// <summary>Get Sets the RecurDoc field.</summary>
+        public virtual string RecurDoc { get; set; }
+
         /// <summary>Get Sets the ReverseDocId field.</summary>
         public virtual long? ReverseDocId { get; set; }
+
+        /// <summary>Get Sets the ReverseDoc field.</summary>
+        public virtual string ReverseDoc { get; set; }
 
         /// <summary>Get Sets the DocumentDate field.</summary>        
         public virtual DateTime? DocumentDate { get; set; }
@@ -54,6 +65,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Get Sets the OriginalDocumentId field.</summary>
         public virtual long? OriginalDocumentId { get; set; }
 
+        /// <summary>Get Sets the OriginalDocument field.</summary>
+        public virtual long? OriginalDocument { get; set; }
+
         /// <summary>Get Sets the ControlTotal field.</summary>
         public virtual decimal? ControlTotal { get; set; }
 
@@ -68,14 +82,17 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Get Sets the TypeOfCurrencyId field.</summary>
         public virtual short? TypeOfCurrencyId { get; set; }
 
+        /// <summary>Get Sets the TypeOfCurrency field.</summary>
+        public virtual string TypeOfCurrency { get; set; }
+
         /// <summary>Get Sets the CurrencyAdjustmentId field.</summary>
         public virtual int? CurrencyAdjustmentId { get; set; }
 
-        /// <summary>Get Sets the PostBatchDescription field.</summary>
-        [StringLength(AccountingHeaderTransactionsUnit.MaxLength)]
-        public virtual string PostBatchDescription { get; set; }
+        /// <summary>Get Sets the CurrencyAdjustment field.</summary>
+        public virtual string CurrencyAdjustment { get; set; }
 
-        ////public virtual bool IsNewActivityPrinted { get; set; }
+        /// <summary>Get Sets the PostBatchDescription field.</summary>
+        public virtual string PostBatchDescription { get; set; }
 
         /// <summary>Get Sets the IsPosted field.</summary>
         public bool IsPosted { get; set; }
@@ -93,6 +110,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         // <summary>Get Sets the BankRecControlId field.</summary>
         public virtual int? BankRecControlId { get; set; }
 
+        // <summary>Get Sets the BankRecControl field.</summary>
+        public virtual string BankRecControl { get; set; }
+
         // <summary>Get Sets the IsSelected field.</summary>
         public virtual bool IsSelected { get; set; }
 
@@ -105,6 +125,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Get Sets the TypeOfInactiveStatusId field.</summary>
         public virtual TypeOfInactiveStatus? TypeOfInactiveStatusId { get; set; }
 
+        /// <summary>Get Sets the TypeOfInactiveStatus field.</summary>
+        public virtual string TypeOfInactiveStatus { get; set; }
+
         /// <summary>Get Sets the IsBankRecOmitted field.</summary>
         public virtual bool? IsBankRecOmitted { get; set; }
 
@@ -114,8 +137,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
         ///<summary>Get Sets the ICTCompanyId field.</summary>
         public virtual int? ICTCompanyId { get; set; }
 
+        ///<summary>Get Sets the ICTCompany field.</summary>
+        public virtual string ICTCompany { get; set; }
+
         /// <summary>Get Sets the ICTAccountingDocumentId field.</summary>
         public virtual long? ICTAccountingDocumentId { get; set; }
+
+        /// <summary>Get Sets the ICTAccountingDocument field.</summary>
+        public virtual string ICTAccountingDocument { get; set; }
 
         /// <summary>Get Sets the CurrencyOverrideRate field.</summary>
         public virtual double? CurrencyOverrideRate { get; set; }
@@ -126,8 +155,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Get Sets the TypeOfCurrencyRateId field.</summary>
         public virtual short? TypeOfCurrencyRateId { get; set; }
 
+        /// <summary>Get Sets the TypeOfCurrencyRate field.</summary>
+        public virtual string TypeOfCurrencyRate { get; set; }
+
         /// <summary>Get Sets the MemoLine field.</summary>
-        [StringLength(AccountingHeaderTransactionsUnit.MaxLength)]
         public virtual string MemoLine { get; set; }
 
         /// <summary>Get Sets the Is13Period field.</summary>

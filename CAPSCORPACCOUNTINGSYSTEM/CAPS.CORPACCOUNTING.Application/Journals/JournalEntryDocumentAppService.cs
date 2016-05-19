@@ -15,28 +15,51 @@ using System.Linq.Dynamic;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters.Dto;
-
+using Abp.Auditing;
+using CAPS.CORPACCOUNTING.Auditing;
+using CAPS.CORPACCOUNTING.Sessions;
+using System;
+using Abp.Dependency;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
     [AbpAuthorize] //This is to ensure only logged in user has access to this module.
-    public class JournalEntryDocumentAppService : CORPACCOUNTINGServiceBase, IJournalEntryDocumentAppService
+    public class JournalEntryDocumentAppService : CORPACCOUNTINGServiceBase, IJournalEntryDocumentAppService, ITransientDependency
     {
         private readonly JournalEntryDocumentUnitManager _journalEntryDocumentUnitManager;
         private readonly IRepository<JournalEntryDocumentUnit, long> _journalEntryDocumentUnitRepository;
         private readonly IRepository<BatchUnit> _batchUnitRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly IRepository<User, long> _userRepository;
         private IdOutputDto<long> _response = null;
+        private readonly IRepository<AuditLog, long> _auditLogRepository;
+        private readonly CustomAppSession _CustomAppSession;
 
-        public JournalEntryDocumentAppService(JournalEntryDocumentUnitManager journalEntryDocumentUnitManager, IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitRepository,
-            UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BatchUnit> batchUnitRepository)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="journalEntryDocumentUnitManager"></param>
+        /// <param name="journalEntryDocumentUnitRepository"></param>
+        /// <param name="userManager"></param>
+        /// <param name="unitOfWorkManager"></param>
+        /// <param name="batchUnitRepository"></param>
+        public JournalEntryDocumentAppService(JournalEntryDocumentUnitManager journalEntryDocumentUnitManager,
+            IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitRepository,
+            IRepository<User, long> userRepository,
+            UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BatchUnit> batchUnitRepository,
+            IRepository<AuditLog, long> auditLogRepository, CustomAppSession CustomAppSession
+            )
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
             _journalEntryDocumentUnitRepository = journalEntryDocumentUnitRepository;
             _userManager = userManager;
             _unitOfWorkManager = unitOfWorkManager;
             _batchUnitRepository = batchUnitRepository;
+            _userRepository = userRepository;
+            _auditLogRepository = auditLogRepository;
+            _CustomAppSession = CustomAppSession;
         }
 
         /// <summary>
@@ -130,15 +153,18 @@ namespace CAPS.CORPACCOUNTING.Journals
             await _journalEntryDocumentUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
-
+        [UnitOfWork]
         public async Task<PagedResultOutput<JournalEntryDocumentUnitDto>> GetJournalEntryDocumentUnits(SearchInputDto input)
         {
 
+
+
             var query = from journals in _journalEntryDocumentUnitRepository.GetAll()
                         join batch in _batchUnitRepository.GetAll() on journals.BatchId equals batch.Id
-                into batchunit
+                        into batchunit
                         from batchunits in batchunit.DefaultIfEmpty()
                         select new { Journals = journals, BatchName = batchunits.Description };
+
             if (!ReferenceEquals(input.Filters, null))
             {
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
@@ -154,6 +180,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                 .PageBy(input)
                 .ToListAsync();
 
+
             return new PagedResultOutput<JournalEntryDocumentUnitDto>(resultCount, results.Select(item =>
             {
                 var dto = item.Journals.MapTo<JournalEntryDocumentUnitDto>();
@@ -162,6 +189,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                 dto.AccountingDocumentId = item.Journals.Id;
                 return dto;
             }).ToList());
+
         }
 
         /// <summary>

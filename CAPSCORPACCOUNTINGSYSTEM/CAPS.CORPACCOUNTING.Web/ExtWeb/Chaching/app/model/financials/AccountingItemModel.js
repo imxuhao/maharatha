@@ -40,7 +40,7 @@
 { name: 'amount', type: 'float', defaultValue: null, convert: nullHandler },
 { name: 'companyCurrencyAmount', type: 'float', defaultValue: null, convert: nullHandler },
 { name: 'currencyAdjustmentAmount', type: 'float', defaultValue: null, convert: nullHandler },
-{ name: 'OriginalItemId', type: 'int', defaultValue: null, convert: nullHandler },
+{ name: 'originalItemId', type: 'int', defaultValue: null, convert: nullHandler },
 { name: ' AccountingItemIdLink', type: 'int', defaultValue: null, convert: nullHandler },
 { name: 'isChanged', type: 'boolean' },
 { name: 'isActive', type: 'boolean' },

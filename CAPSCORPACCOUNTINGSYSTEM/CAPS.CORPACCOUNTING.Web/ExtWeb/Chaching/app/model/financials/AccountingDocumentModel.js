@@ -7,7 +7,9 @@
 { name: 'accountingDocumentId', type: 'int', isPrimaryKey: true },
 { name: 'description', type: 'string' },
 { name: 'typeOfAccountingDocumentId', type: 'int', defaultVaule: null, convert: nullHandler },
+{ name: 'typeOfAccountingDocument', type: 'string' },
 { name: 'typeOfObjectId', type: 'int', defaultVaule: null, convert: nullHandler },
+{ name: 'typeOfObject', type: 'string' },
 { name: 'recurDocId', type: 'int', defaultValue: null, convert: nullHandler },
 { name: 'reverseDocId', type: 'int', defaultValue: null, convert: nullHandler },
 { name: 'documentDate', type: 'date', dateFormat: 'c' },
@@ -43,8 +45,17 @@
 { name: 'ispoSubmitForApproval', type: 'boolean' },
 { name: 'iscpasTran', type: 'boolean' },
 { name: 'cpasProjCloseId', type: 'int', defaultValue: null, convert: nullHandler },
-{ name: 'cpasProjId', type: 'int', defaultValue: null, convert: nullHandler }
-]
+{ name: 'cpasProjId', type: 'int', defaultValue: null, convert: nullHandler },
+{ name: 'recurDoc', type: 'string' },
+{ name: 'reverseDoc', type: 'string' },
+{ name: 'typeOfCurrency', type: 'string' },
+{ name: 'currencyAdjustment', type: 'string' },
+{ name: 'bankRecControl', type: 'string' },
+{ name: 'typeOfInactiveStatus', type: 'string' },
+{ name: 'ictCompany', type: 'string' },
+{ name: 'ictAccountingDocument', type: 'string' },
+{ name: 'typeOfCurrencyRate', type: 'string' }
+    ]
 });
 
 

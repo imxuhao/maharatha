@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
@@ -13,9 +14,12 @@ using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using Abp.Collections.Extensions;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Sessions;
+using Abp.Runtime.Caching;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -38,6 +42,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly VendorAliasUnitManager _vendorAliasUnitManager;
+        private readonly CustomAppSession _customAppSession;
+        private readonly ICacheManager _cacheManager;
 
         /// <summary>
         /// 
@@ -61,7 +67,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             IRepository<TypeOfCountryUnit, short> typeOfCountryRepository, IRepository<RegionUnit> regionRepository,
             IRepository<CountryUnit> countryRepository, IRepository<VendorAliasUnit> vendorAliasUnitRepository,
             IRepository<AccountUnit, long> accountUnitRepository, IRepository<CoaUnit> coaUnitRepository,
-            VendorAliasUnitManager vendorAliasUnitManager
+            VendorAliasUnitManager vendorAliasUnitManager, CustomAppSession customAppSession, ICacheManager cacheManager
             )
         {
             _vendorUnitManager = vendorUnitManager;
@@ -77,6 +83,8 @@ namespace CAPS.CORPACCOUNTING.Masters
             _accountUnitRepository = accountUnitRepository;
             _coaUnitRepository = coaUnitRepository;
             _vendorAliasUnitManager = vendorAliasUnitManager;
+            _customAppSession = customAppSession;
+            _cacheManager = cacheManager;
         }
 
         /// <summary>
@@ -541,6 +549,42 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task DeleteVendorAliasUnit(IdInput input)
         {
             await _vendorAliasUnitManager.DeleteAsync(input.Id);
+        }
+
+        /// <summary>
+        /// Get Vendors
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetVendorList(AutoSearchInput input)
+        {
+            var cacheItem = await GetVendorsCacheItemAsync(
+               CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+        }
+
+        private async Task<List<NameValueDto>> GetVendorsFromDb(AutoSearchInput input)
+        {
+            var query = from vendors in _vendorUnitRepository.GetAll()
+                        select new { vendors };
+            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.vendors.OrganizationUnitId == input.OrganizationUnitId.Value)
+                            //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.customers.Caption.Contains(input.Query))
+                            .Select(u => new NameValueDto { Name = u.vendors.LastName, Value = u.vendors.Id.ToString() }).ToListAsync();
+
+        }
+
+        private async Task<CacheItem> GetVendorsCacheItemAsync(string vendorkey, AutoSearchInput input)
+        {
+            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore).GetAsync(vendorkey, async () =>
+            {
+                var newCacheItem = new CacheItem(vendorkey);
+                var vendorList = await GetVendorsFromDb(input);
+                foreach (var vendors in vendorList)
+                {
+                    newCacheItem.ItemList.Add(vendors);
+                }
+                return newCacheItem;
+            });
         }
     }
 

@@ -114,6 +114,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <returns></returns>
         Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input);
-
+        /// <summary>
+        /// Get Customers
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetCustomersList(AutoSearchInput input);
     }
 }

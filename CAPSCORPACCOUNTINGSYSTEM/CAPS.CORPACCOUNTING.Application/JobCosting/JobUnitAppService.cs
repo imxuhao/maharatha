@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Domain.Repositories;
@@ -13,8 +14,6 @@ using Abp.Authorization;
 using System.Collections.Generic;
 using System.Text;
 using Abp.Collections.Extensions;
-using Abp.Events.Bus;
-using Abp.Events.Bus.Entities;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using Abp.Organizations;
@@ -22,7 +21,6 @@ using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Runtime.Caching;
-using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
@@ -50,7 +48,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly ICacheManager _cacheManager;
         private readonly CustomAppSession _customAppSession;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-        public IEventBus EventBus { get; set; }
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService,
             IRepository<OrganizationUnit, long> organizationUnitRepository, IRepository<JobAccountUnit, long> jobAccountUnitRepository,
@@ -136,11 +133,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
-                StringBuilder sb = new StringBuilder();
-                sb = sb.Append(ReferenceEquals(_customAppSession.TenantId, null) ? "0" : _customAppSession.TenantId).Append("#")
-                 .Append(ReferenceEquals(_customAppSession.OrganizationId, null) ? "0" : _customAppSession.OrganizationId).Append("#Divisions");
-
-                _cacheManager.GetDivisionsCache().Remove(sb.ToString());
+                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).
+                Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId),input.OrganizationUnitId));
             };
 
             return result.MapTo<JobUnitDto>();
@@ -226,6 +220,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 }
             }
             #endregion
+
+
+            _unitOfWorkManager.Current.Completed += (sender, args) =>
+            {
+                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).
+                Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId));
+            };
             return jobUnit.MapTo<JobUnitDto>();
         }
 
@@ -311,25 +312,37 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             return divisions;
 
         }
+        /// <summary>
+        /// Get DivisionsList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetDivisionList(AutoSearchInput input)
+        {
+            var cacheItem = await GetDivisionCacheItemAsync(
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+
+        }
+
 
         private async Task<List<NameValueDto>> GetDivisionsFromDb(AutoSearchInput input)
         {
             var divisions = await _jobUnitRepository.GetAll().Where(p => p.IsDivision == true)
                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
+               // .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query)) ****activate when we are not using RedisCache***
                  .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
             return divisions;
         }
 
-        private async Task<DivisionCacheItem> GetDivisionCacheItemAsync(string divisionkey,AutoSearchInput input)
+        private async Task<CacheItem> GetDivisionCacheItemAsync(string divisionkey,AutoSearchInput input)
         {
-            return await _cacheManager.GetDivisionsCache().GetAsync(divisionkey, async () =>
+            return await _cacheManager.GetCacheItem(CacheStoreName:CacheKeyStores.CacheDivisionStore).GetAsync(divisionkey, async () =>
             {
-                var newCacheItem = new DivisionCacheItem(divisionkey);
+                var newCacheItem = new CacheItem(divisionkey);
                 var divList = await GetDivisionsFromDb(input);
                 foreach (var div in divList)
                 {
-                    newCacheItem.DivisionList.Add(div);
+                    newCacheItem.ItemList.Add(div);
                 }
                 return newCacheItem;
             });
@@ -337,34 +350,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         public async Task<List<NameValueDto>> GetProjectCoaList(AutoSearchInput input)
         {
-            
             var divisions = await _coaUnitRepository.GetAll().Where(p => p.IsCorporate == false)
                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
                .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
             return divisions;
-
-
         }
-
-        /// <summary>
-        /// Get DivisionsList
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetDivisionList(AutoSearchInput input)
-        {
-            StringBuilder sb=new StringBuilder();
-            sb=sb.Append(ReferenceEquals(_customAppSession.TenantId, null) ? "0" : _customAppSession.TenantId).Append("#")
-             .Append(ReferenceEquals(_customAppSession.OrganizationId, null) ? "0":_customAppSession.OrganizationId ).Append("#Divisions");
-
-            var cacheItem = await GetDivisionCacheItemAsync(sb.ToString(),input);
-
-            var result = cacheItem.DivisionList.ToList();
-            result = result.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
-            return result;
-        }
-
-       
         /// <summary>
         ///  Get BudgetSoftwareList
         /// </summary>
@@ -397,15 +388,36 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetGenericRollupAccountsList(AutoSearchInput input)
         {
+            var cacheItem = await GetGenericRollupAccountsCacheItemAsync(
+               CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+        }
+
+        private async Task<List<NameValueDto>> GetGenericRollupAccountsFromDb(AutoSearchInput input)
+        {
             var query = from au in _accountUnitRepository.GetAll()
                         join coa in _coaUnitRepository.GetAll() on au.ChartOfAccountId equals coa.Id
                         select new { au, coa };
             var accounts = await query.Where(p => p.au.IsRollupAccount == true && p.coa.IsCorporate == true)
-                            .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.au.Caption.Contains(input.Query))
+                             //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.au.Caption.Contains(input.Query)) ****activate when we are not using RedisCache***
                              .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.au.OrganizationUnitId == input.OrganizationUnitId.Value)
                             .Select(u => new NameValueDto { Name = u.au.Caption, Value = u.au.Id.ToString() }).ToListAsync();
 
             return accounts;
+        }
+
+        private async Task<CacheItem> GetGenericRollupAccountsCacheItemAsync(string accountkey, AutoSearchInput input)
+        {
+            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore).GetAsync(accountkey, async () =>
+            {
+                var newCacheItem = new CacheItem(accountkey);
+                var accountList = await GetGenericRollupAccountsFromDb(input);
+                foreach (var account in accountList)
+                {
+                    newCacheItem.ItemList.Add(account);
+                }
+                return newCacheItem;
+            });
         }
         /// <summary>
         /// Get JobAccounts by CoaId and JobId
@@ -460,5 +472,44 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return taxCreditList;
         }
+
+        /// <summary>
+        /// Get Customers
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetCustomersList(AutoSearchInput input)
+        {
+            var cacheItem = await GetCustomersCacheItemAsync(
+               CacheKeyStores.CalculateCacheKey(CacheKeyStores.CustomerKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+        }
+
+        private async Task<List<NameValueDto>> GetCustomersFromDb(AutoSearchInput input)
+        {
+            var query = from customers in _customerUnitRepository.GetAll()
+                        select new { customers };
+            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.customers.OrganizationUnitId == input.OrganizationUnitId.Value)
+                            //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.customers.Caption.Contains(input.Query))
+                            .Select(u => new NameValueDto { Name = u.customers.LastName, Value = u.customers.Id.ToString() }).ToListAsync();
+            
+        }
+
+        private async Task<CacheItem> GetCustomersCacheItemAsync(string customerkey, AutoSearchInput input)
+        {
+            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheCustomerStore).GetAsync(customerkey, async () =>
+            {
+                var newCacheItem = new CacheItem(customerkey);
+                var customerList = await GetCustomersFromDb(input);
+                foreach (var customers in customerList)
+                {
+                    newCacheItem.ItemList.Add(customers);
+                }
+                return newCacheItem;
+            });
+        }
+
+       
+
     }
 }

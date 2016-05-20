@@ -130,7 +130,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         xtype: 'combobox',
                                         name: 'rollupAccountId',
                                         itemId: 'rollupAccountId',
-                                        queryMode: 'local',
+                                        queryMode: 'remote',
                                         bind: {
                                             store: '{genericRollupAccountList}'
                                         },

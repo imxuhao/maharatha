@@ -44,6 +44,25 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <returns></returns>
         Task<PagedResultOutput<JournalEntryDocDetailUnitDto>> GetJournalEntryDocDetailsByAccountingDocId(GetTransactionList input);
 
-       
+        /// <summary>
+        /// Get Jobs or Divisions List based on OrganizationUnitId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetJobOrDivisionList(AutoSearchInput input);
+
+        /// <summary>
+        /// Get accounts List based on JobId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GeAccountsList(AutoSearchInput input);
+
+        /// <summary>
+        ///  Get SubAccounts List based on OrganizationUnitId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+         Task<List<NameValueDto>> GetSubAccountList(AutoSearchInput input);
     }
 }

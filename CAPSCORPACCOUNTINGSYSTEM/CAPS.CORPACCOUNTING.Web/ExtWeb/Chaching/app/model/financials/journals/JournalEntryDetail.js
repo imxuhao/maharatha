@@ -4,8 +4,11 @@
         searchEntityName: 'journals'
     },
     fields:
-        [{ name: 'vendorId ', type: 'int' },
-        { name: 'purchaseOrderItemId ', type: 'int' },
-          { name: 'batchName ', type: 'string' }
-    ]
+        [
+            { name: 'vendorId ', type: 'int' },
+            { name: 'vendor ', type: 'string' },
+            { name: 'purchaseOrderItemId ', type: 'int' },
+            { name: 'purchaseOrderItem ', type: 'string' },
+            { name: 'batchName ', type: 'string' }
+        ]
 });

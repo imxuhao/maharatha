@@ -9,7 +9,8 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using AutoMapper;
-
+using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
@@ -128,6 +129,29 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
             return result;
         }
 
+        /// <summary>
+        /// Get Batch Type
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetBatchTypeList()
+        {
+            return EnumList.GetBatchTypeList();
+        }
 
+
+        /// <summary>
+        /// Get Batch List based on OrganizationUnitId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetBatchList(AutoSearchInput input)
+        {
+            var batchList = await (from subaccount in _batchUnitRepository.GetAll()
+                                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
+                                    .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
+                                        select new NameValueDto { Name = subaccount.Description, Value = subaccount.Id.ToString() })
+                              .ToListAsync();
+            return batchList;
+        }
     }
 }

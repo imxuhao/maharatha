@@ -2,6 +2,8 @@
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Masters.Dto;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.Banking
@@ -42,5 +44,14 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         Task<BatchUnitDto> GetBatchUnitsById(IdInput input);
+
+
+
+        /// <summary>
+        /// Get BatchUnit List for AutoSearch
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetBatchList(AutoSearchInput input);
     }
 }

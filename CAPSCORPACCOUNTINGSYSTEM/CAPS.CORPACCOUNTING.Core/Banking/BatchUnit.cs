@@ -40,6 +40,9 @@ namespace CAPS.CORPACCOUNTING.Banking
         Revaluation = 13,
         [Display(Name = "A/P Check Cycle")]
         APCheckCycle = 14,
+        [Display(Name = "Generic Transaction")]
+        GenericTransaction = 15,
+
 
     }
 

@@ -53,5 +53,13 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetBatchList(AutoSearchInput input);
+
+        /// <summary>
+               /// Get BatchType List 
+               /// </summary>
+               /// <param name="input"></param>
+               /// <returns></returns>
+        List<NameValueDto> GetBatchTypeList();
+
     }
 }

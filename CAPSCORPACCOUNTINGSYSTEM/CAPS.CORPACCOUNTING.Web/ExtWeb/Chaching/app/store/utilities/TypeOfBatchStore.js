@@ -12,7 +12,7 @@
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',
-        url: abp.appPath + 'api/services/app/batchUnit/GetBatchList',
+        url: abp.appPath + 'api/services/app/batchUnit/GetBatchTypeList',
         reader: {
             type: 'json',
             rootProperty: 'result'

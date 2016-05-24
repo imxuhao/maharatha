@@ -809,6 +809,8 @@
     <text name="CommunityBatch" value="Community Batch" />
     <text name="FinalizedtoPost" value="Finalized to Post" />
     <text name="ShowAllModules" value="Show All Modules" />
+    <text name="Module" value="Module" />
+    <text name="SelectModule" value="Select Module" />
     <text name="Journal" value="Journal" />
     <text name="AccountsPayable" value="Accounts Payable" />
   </texts>

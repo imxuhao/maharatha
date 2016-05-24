@@ -24,7 +24,7 @@
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1989,6 +1989,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewListController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\InvoiceTabPanel.js" />

@@ -1070,6 +1070,41 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.UpdateAccountingHeaderTransactionInputUnit.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Jobs or Divisions List based on OrganizationUnitId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GeAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get accounts List based on JobId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetSubAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+             Get SubAccounts List based on OrganizationUnitId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetVendorList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+             Get VendorList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetTaxCreditList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+             Get TaxCreditList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
             <summary>
             Create the SubAccount.
@@ -1109,6 +1144,48 @@
             <summary>
             Get GetTypeofSubAccount List
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Jobs or Divisions List by using OrganizationUnitId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GeAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get accounts 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetSubAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts List based on OrganizationUnitId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetSubAcoountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts From DataBase
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetVendorList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Vendors
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetTaxCreditList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get TaxCreditList
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
@@ -1825,6 +1902,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:CAPS.CORPACCOUNTING.Banking.IBatchUnitAppService.GetBatchTypeList" -->
         <member name="P:CAPS.CORPACCOUNTING.Configuration.Host.Dto.GeneralSettingsEditDto.TimezoneForComparison">
             <summary>
             This value is only used for comparing user's timezone to default timezone
@@ -4019,27 +4097,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get Jobs or Divisions List based on OrganizationUnitId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.GeAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get accounts List based on JobId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.GetSubAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-             Get SubAccounts List based on OrganizationUnitId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService">
             <summary>
              Provide all CRUD operations for JournalEntryDocument.
@@ -4103,34 +4160,6 @@
         <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.GetJournalEntryDocDetailsByAccountingDocId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             Get Journal Entry Document List.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get Jobs or Divisions List by using OrganizationUnitId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.GeAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get accounts List based on JobId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.GetSubAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get SubAccounts List based on OrganizationUnitId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.GetSubAcoountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get SubAccounts From DataBase
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -6739,13 +6768,6 @@
             <param name="search"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get Vendors
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.CreateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateLocationSetUnitInput)">
             <summary>
             Create the LocationSet.
@@ -7282,13 +7304,6 @@
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.DeleteVendorAliasUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
             delete vendoralias
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetVendorList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get Vendors
             </summary>
             <param name="input"></param>
             <returns></returns>

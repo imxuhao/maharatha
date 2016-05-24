@@ -47,8 +47,7 @@ Ext.define('Chaching.view.payables.invoices.BatchForm', {
             readOnly: true,
             fieldLabel: app.localize('BatchOwner').initCap(),
             width: '100%',
-            ui: 'fieldLabelTop',
-            emptyText: app.localize('MandatoryField')
+            ui: 'fieldLabelTop'
         }, {
             xtype: 'datefield',
             name: 'postingDate',
@@ -56,7 +55,7 @@ Ext.define('Chaching.view.payables.invoices.BatchForm', {
             fieldLabel: app.localize('PostingDate').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('MandatoryField')
+            emptyText: app.localize('ToolTipPostingDate')
         }, {
             xtype: 'textfield',
             name: 'controlTotal',
@@ -64,7 +63,7 @@ Ext.define('Chaching.view.payables.invoices.BatchForm', {
             fieldLabel: app.localize('ControlTotal').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('MandatoryField')
+            emptyText: app.localize('ToolTipControlTotal')
         }]
     }, {
         columnWidth: .5,
@@ -81,15 +80,14 @@ Ext.define('Chaching.view.payables.invoices.BatchForm', {
             readOnly : true,
             fieldLabel: app.localize('BatchAmount').initCap(),
             width: '100%',
-            ui: 'fieldLabelTop',
-            emptyText: app.localize('MandatoryField')
+            ui: 'fieldLabelTop'
         }, {
             xtype: 'combobox',
             name: 'typeOfBatchId',
             fieldLabel: app.localize('Module').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('SelectModule'),
+            emptyText: app.localize('SelectOption'),
             displayField: 'typeOfBatch',
             valueField: 'typeOfBatchId',
             queryMode : 'local',

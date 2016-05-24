@@ -299,7 +299,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     },
     //Do module specific tasks 
     doBeforeCreateAction: function (createNewMode) { },
-    doAfterCreateAction: function (createNewMode, form,isEdit) { },
+    doAfterCreateAction: function (createNewMode, form,isEdit,record) { },
     createNewRecord: function (type, createMode, isEdit, titleConfig,record) {
         var me = this,
             view = me.getView(),
@@ -337,8 +337,27 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         }
         me.setParentControl(formView, createMode);
         me.doAfterCreateAction(createMode, formView, isEdit, record);
+        if (formView.isTransactionForm) {
+            me.loadDetailsStore(record, formView);
+        }
         return formView;
 
+    },
+    loadDetailsStore: function (record, formPanel) {
+        if (formPanel) {
+            var detailsGrid = formPanel.down('gridpanel[isTransactionDetailsGrid=true]'),
+                detailsStore = detailsGrid.getStore(),
+                transactionId = undefined;
+            if (record) {
+                transactionId = record.get('accountingDocumentId');
+            }
+            if (transactionId && transactionId > 0) {
+                detailsStore.getProxy().setExtraParam('accountingDocumentId', transactionId);
+                detailsStore.load();
+            } else {
+                detailsStore.loadDefaultRecords(15);
+            }
+        }
     },
     setParentControl: function (formView, createMode) {
         var me = this,

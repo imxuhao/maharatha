@@ -7,7 +7,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
     ],
 
     controller: 'financials-journals-journaltransactiondetailgrid',
-    store: 'financials.journals.JournalStore',
+    store: 'financials.journals.JournalDetailsStore',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Financials.Journals.Entry'),
         create: abp.auth.isGranted('Pages.Financials.Journals.Entry.Create'),
@@ -17,52 +17,99 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
     groupedHeaderBaseConfig: [{
         groupHeaderText: app.localize('Credits'),
         columnName:'credits',
-        childColumnNames: ['jobId', 'accountId', 'subAccountId1'],
-        childColumnWidths:[100,80,100]
+        childColumnNames: ['job', 'account', 'subAccount1'],
+        childColumnWidths:[100,100,100]
     }],
-    isGroupedHeader:true,
+    isGroupedHeader: true,
     moduleColumns:[
     {
         text: app.localize('Debits'),
         name: 'debits',
         columns: [{
             xtype: 'gridcolumn',
-            dataIndex: 'jobId',///TODO: change to jobName once field is available
-            name: 'jobId',
+            dataIndex: 'job',///TODO: change to jobName once field is available
+            name: 'job',
             text: app.localize('JobDivision'),
-            itemId: 'duplicateJobId',
+            itemId: 'duplicateJob',
             width: 100,
+            hideable: false,
             filterField: {
-                xtype: 'textfield',
+                xtype: 'combobox',
+                store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                valueField: 'job',
+                displayField: 'job',
+                queryMode: 'remote',
+                minChars: 2,
+                useDisplayFieldToSearch: true,
+                listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
                 emptyText: app.localize('SearchText')
             }, editor: {
-                xtype: 'textfield'
+                xtype: 'combobox',
+                store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                valueField: 'jobId',
+                displayField: 'job',
+                queryMode: 'remote',
+                minChars: 2,
+                listConfig: Chaching.utilities.ChachingGlobals.comboListConfig
             }
         }, {
             xtype: 'gridcolumn',
-            dataIndex: 'accountId',///TODO: change to combo
-            name: 'accountId',
-            itemId: 'duplicateAccountId',
+            dataIndex: 'account',
+            name: 'account',
+            itemId: 'duplicateAccount',
             text: app.localize('LineNumber'),
-            width: 80,
+            width: 100,
+            hideable: false,
             filterField: {
-                xtype: 'textfield',
+                xtype: 'combobox',
+                store: new Chaching.store.utilities.autofill.AccountsStore(),
+                valueField: 'account',
+                displayField: 'account',
+                queryMode: 'remote',
+                minChars: 2,
+                useDisplayFieldToSearch:true,
+                listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
                 emptyText: app.localize('SearchText')
             }, editor: {
-                xtype: 'textfield'
+                xtype: 'combobox',
+                store: new Chaching.store.utilities.autofill.AccountsStore(),
+                valueField: 'accountId',
+                displayField: 'account',
+                queryMode: 'remote',
+                minChars: 2,
+                listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
+                listeners: {
+                    beforequery: 'beforeAccountQuery'
+                }
             }
         }, {
             xtype: 'gridcolumn',
-            dataIndex: 'subAccountId1',///TODO: change to combo
-            name: 'subAccountId1',
+            dataIndex: 'subAccount1',///TODO: change to combo
+            name: 'subAccount1',
             text: app.localize('SubAccount1'),
-            itemId: 'duplicateSubAccountId1',
+            itemId: 'duplicateSubAccount1',
             width: 100,
             filterField: {
-                xtype: 'textfield',
+                xtype: 'combobox',
+                store: new Chaching.store.utilities.autofill.SubAccountsStore(),
+                valueField: 'subAccount1',
+                displayField: 'subAccount1',
+                queryMode: 'remote',
+                minChars: 2,
+                useDisplayFieldToSearch: true,
+                listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
                 emptyText: app.localize('SearchText')
             }, editor: {
-                xtype: 'textfield'
+                xtype: 'combobox',
+                store: new Chaching.store.utilities.autofill.SubAccountsStore(),
+                valueField: 'subAccountId1',
+                displayField: 'subAccount1',
+                queryMode: 'remote',
+                minChars: 2,
+                listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
+                listeners: {
+                    beforequery: 'beforeAccountQuery'
+                }
             }
         }]
     }, {

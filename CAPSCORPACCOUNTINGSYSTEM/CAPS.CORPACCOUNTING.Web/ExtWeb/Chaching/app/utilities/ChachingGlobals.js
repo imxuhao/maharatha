@@ -16,5 +16,9 @@
     defaultDateTimeSecFormat: 'MM/DD/YYYY hh:mm:ss a',
     usersDefaultGridViewSettings: null,
     mandatoryFlag: '&nbsp;<font color=red>*</font>',
-    defaultExtDateFieldFormat:'m/d/Y'
+    defaultExtDateFieldFormat: 'm/d/Y',
+    comboListConfig: {
+        minWidth: 250,
+        width: 250
+    }
 });

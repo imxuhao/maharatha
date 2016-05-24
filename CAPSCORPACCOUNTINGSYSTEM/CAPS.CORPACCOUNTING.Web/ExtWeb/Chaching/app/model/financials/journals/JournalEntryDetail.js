@@ -1,5 +1,5 @@
 ﻿Ext.define('Chaching.model.financials.journals.JournalEntryDetail', {
-    extend: 'Chaching.model.financials.AccountingItemModel',
+    extend: 'Chaching.model.base.TransactionDetailsModel',
     config: {
         searchEntityName: 'journals'
     },

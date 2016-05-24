@@ -152,7 +152,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
     * @cfg {true} default values to be loaded when the form loads
     * Returns the function which can be handled in respective controller class to load default values.
     */
-    defaultValuesToLoad: null,
+    defaultValuesToLoad: true,
     /**
     * @cfg {boolean} open this form in window panel.
     * if set to true then popup window will be opened containing this form
@@ -167,7 +167,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
     frame: false,
     showFormTitle: false,
     titleConfig: null,
-    //xtype: 'widget.financials.journals.entry',
+    isTransactionForm:true,
     initComponent: function() {
         var me = this,
             controller = me.getController();
@@ -183,6 +183,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
         ];
        
         me.callParent(arguments);
+        me.defaultActionGroup = me.dockedItems[0];
         me.on('resize', controller.onFormResize, this);
         if (me.defaultValuesToLoad) {
             controller.setDefaultValues();
@@ -290,7 +291,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
             layout: 'hbox',
             items: buttons
         };
-        me.defaultActionGroup = defaultButtons;
+        
         return defaultButtons;
     },
     getFormSpecificActionToolbar: function (formButtons) {

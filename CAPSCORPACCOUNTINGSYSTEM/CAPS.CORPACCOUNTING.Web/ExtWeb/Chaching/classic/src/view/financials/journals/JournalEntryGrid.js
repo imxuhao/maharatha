@@ -51,14 +51,13 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
              xtype: 'checkcolumn',
              dataIndex: 'isPosted',
              checked: true,
-             disabled: true,
              listeners: {
                  checkchange: function (column, recordIndex, checked) {
                      var store = this.up('grid').getStore();
-                     Ext.each(store, function (record) {
-                         if (record.set('batchName').trim().length() != 0)
-                             record.set('isPrimary', false);
-                     });
+                     //Ext.each(store, function (record) {
+                     //    if (record.set('batchName').trim().length() != 0)
+                     //        record.set('isPrimary', false);
+                     //});
                  }
              }
          },
@@ -124,7 +123,11 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
                   xtype: 'dateSearchField',
                   width: '100%',
                   dataIndex: 'transactionDate'
+              },editor: {
+                  xtype: 'datefield',
+                  format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat
               }
+
           },
           {
               xtype: 'gridcolumn',
@@ -137,6 +140,8 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
                   xtype: 'textfield',
                   width: '100%',
                   emptyText: app.localize('DescriptionSearch')
+              },editor: {
+                  xtype:'textfield'
               }
           },
           {
@@ -158,23 +163,6 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
               sortable: true,
               groupable: true,
               width: '10%'
-              //,
-              //filterField: {
-              //    xtype: 'combobox',
-              //    valueField: 'journalTypeId',
-              //    displayField: 'journalType',
-              //    forceSelection: true,
-              //    searchProperty: 'journalTypeId',
-              //    isEnum: true,
-              //    width: '100%',
-              //    store: 'utilities.JournalTypeListStore'
-              //}, editor: {
-              //    xtype: 'combobox',
-              //    valueField: 'journalTypeId',
-              //    displayField: 'journalType',
-              //    queryMode: 'local',
-              //    store: 'utilities.JournalTypeListStore'
-              //}
           },
           {
               xtype: 'gridcolumn',

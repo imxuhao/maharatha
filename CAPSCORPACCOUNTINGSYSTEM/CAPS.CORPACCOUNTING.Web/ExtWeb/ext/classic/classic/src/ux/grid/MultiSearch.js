@@ -633,18 +633,22 @@ Ext.define('Ext.saki.grid.MultiSearch', {
     , doFieldChange: function (field) {
         var me = this
             , value = field.getSubmitValue()
-            , property = field.getItemId()
+            , property = undefined
             , parse = me.parseOperator
             , filter
         ;
+        if (field.useDisplayFieldToSearch)
+            property = field.displayField;
+        else property = field.getItemId();
 
         filter = parse ? me.parseUserValue(value) : { value: value };
         filter.property = property;
         // Ext 4 compat
         filter.id = property;
-
+       
         ///*******************Chaching code to convert default filters into expected filter
-        me.customizeFilters(filter, field);
+        if (me.getStore().remoteFilter)
+            me.customizeFilters(filter, field);
         me.setFilter(filter);
         me.updateClearIcon(field);
 

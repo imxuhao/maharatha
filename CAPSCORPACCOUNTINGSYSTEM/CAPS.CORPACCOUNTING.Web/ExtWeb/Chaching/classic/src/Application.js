@@ -18,12 +18,12 @@ Ext.define('Chaching.Application', {
     ],
     stores: [
         // TODO: add global / shared stores here
-         'NavigationTree',
-         'tenants.TenantsStore',
-         'users.UsersStore',
-         'roles.RolesStore',
-         'editions.EditionsStore',
-         'languages.LanguagesStore',
+        'NavigationTree',
+        'tenants.TenantsStore',
+        'users.UsersStore',
+        'roles.RolesStore',
+        'editions.EditionsStore',
+        'languages.LanguagesStore',
         'auditlogs.AuditLogsStore',
         'languages.LanguageTextsStore',
         'profile.linkedaccounts.LinkedAccountsStore',
@@ -34,7 +34,7 @@ Ext.define('Chaching.Application', {
         'financials.accounts.DivisionsStore',
         'manageView.ManageViewStore',
         'roles.RolesTreeStore',
-         'financials.accounts.AccountsStore',
+        'financials.accounts.AccountsStore',
         'languages.LanguagesDataStore',
         'projects.projectmaintenance.LinesStore',
         'financials.accounts.RollupAccountStore',
@@ -42,7 +42,7 @@ Ext.define('Chaching.Application', {
         'languages.LanguagesDataStore',
         'projects.projectmaintenance.ProjectsStore',
         'projects.projectmaintenance.ProjectCoaStore',
-         'address.AddressStore',
+        'address.AddressStore',
         'projects.projectmaintenance.ProjectCoaStore',
         'projects.projectmaintenance.JobAccountsStore',
         'projects.projectmaintenance.ProjectLocationsStore',
@@ -54,19 +54,22 @@ Ext.define('Chaching.Application', {
         'utilities.ProjectTypeStore',
         'utilities.ProjectStatusStore',
         'utilities.CountryListStore',
-         'utilities.StateOrRegionListStore',
-          'utilities.TypeOfAddressListStore',
-          'utilities.PaymentTermsListStore',
-          'utilities.TypeOf1099BoxListStore',
-          'utilities.TypeOfTaxListStore', 
-            'utilities.JournalTypeListStore',
-             'utilities.EmployeeListStore',
-             'utilities.CustomerListStore',
-        
-        'payables.invoices.BatchStore'
+        'utilities.StateOrRegionListStore',
+        'utilities.TypeOfAddressListStore',
+        'utilities.PaymentTermsListStore',
+        'utilities.TypeOf1099BoxListStore',
+        'utilities.TypeOfTaxListStore',
+        'utilities.JournalTypeListStore',
+        'utilities.EmployeeListStore',
+        'utilities.CustomerListStore',
+        'financials.journals.JournalDetailsStore',
+        'payables.invoices.BatchStore',
+        'utilities.autofill.JobDivisionStore',
+        'utilities.autofill.AccountsStore',
+        'utilities.autofill.SubAccountsStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
-    launch: function () {
+    launch: function() {
         var me = this;
         ///****Load usersDefaultView Settings
         var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');
@@ -91,11 +94,11 @@ Ext.define('Chaching.Application', {
         filters.push(filter);
         defaultViewSettingStore.filter(filters);
         defaultViewSettingStore.load({
-            callback: function (records, operation, success) {
+            callback: function(records, operation, success) {
                 if (success && records && records.length > 0) {
                     var usersDefaultGridViewSettings = [];
                     var rec;
-                    Ext.each(records, function (record) {
+                    Ext.each(records, function(record) {
                         if (record.get('isDefault')) {
                             rec = {
                                 gridId: record.get('viewId'),
@@ -126,9 +129,9 @@ Ext.define('Chaching.Application', {
             }
         });
     },
-    onAppUpdate: function () {
+    onAppUpdate: function() {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
-            function (choice) {
+            function(choice) {
                 if (choice === 'yes') {
                     window.location.reload();
                 }

@@ -113,6 +113,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         type: 'fit'
     },
     cls: 'chaching-transactiongrid',
+    isTransactionDetailsGrid: true,
     initComponent:function() {
         var me = this,
             controller = me.getController();
@@ -176,7 +177,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             plugins.push({
                 ptype: 'clipboard'
             });
-
+            plugins.push({
+                ptype: 'selectionreplicator'
+            });
             var editingModel = {
                 ptype: 'chachingCellediting',
                 pluginId: 'editingPlugin',
@@ -219,7 +222,10 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 itemId: 'AddNewRecord',
                 iconCls: 'fa fa-plus-square',
                 ui: 'actionButton',
-                tooltip: app.localize('InsertRecord')
+                tooltip: app.localize('InsertRecord'),
+                listeners: {
+                    click:'onNewClicked'
+                }
             };
             buttons.push(addNew);
         }
@@ -231,7 +237,10 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 itemId: 'DeleteRecord',
                 iconCls: 'fa fa-trash',
                 ui: 'actionButton',
-                tooltip: app.localize('DeleteRecord')
+                tooltip: app.localize('DeleteRecord'),
+                listeners: {
+                    click: 'onDeleteClicked'
+                }
             };
             buttons.push(deleteBtn);
         }
@@ -242,7 +251,10 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             itemId: 'RefreshData',
             iconCls: 'fa fa-refresh',
             ui: 'actionButton',
-            tooltip: app.localize('RefreshData')
+            tooltip: app.localize('RefreshData'),
+            listeners: {
+                click: 'onRefreshClicked'
+            }
         };
         buttons.push(refreshBtn);
         return buttons;
@@ -274,6 +286,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 xtype: 'gridcolumn',
                 dataIndex: 'amount',
                 name: 'amount',
+                hideable:false,
                 text: app.localize('Amount').initCap(),
                 filterField: {
                     xtype: 'numberfield',
@@ -283,39 +296,86 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 }
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'jobId',///TODO: change to jobName once field is available
-                name: 'jobId',
+                dataIndex: 'job',
+                name: 'job',
                 text: app.localize('JobDivision'),
-                width:'10%',
+                width: '10%',
+                hideable: false,
                 filterField: {
-                    xtype: 'textfield',
+                    xtype: 'combobox',
+                    store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                    valueField: 'job',
+                    displayField: 'job',
+                    queryMode: 'remote',
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
                     emptyText: app.localize('SearchText')
-                },editor: {
-                    xtype:'textfield'
+                }, editor: {
+                    xtype: 'combobox',
+                    store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                    valueField: 'jobId',
+                    displayField: 'job',
+                    queryMode: 'remote',
+                    minChars: 2,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig
                 }
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'accountId',///TODO: change to combo
-                name: 'accountId',
+                dataIndex: 'account',///TODO: change to combo
+                name: 'account',
+                hideable: false,
                 text: app.localize('LineNumber').initCap(),
                 width:'10%',
                 filterField: {
-                    xtype: 'textfield',
+                    xtype: 'combobox',
+                    store: new Chaching.store.utilities.autofill.AccountsStore(),
+                    valueField: 'account',
+                    displayField: 'account',
+                    queryMode: 'remote',
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
                     emptyText: app.localize('SearchText')
-                },editor: {
-                    xtype:'textfield'
+                }, editor: {
+                    xtype: 'combobox',
+                    store: new Chaching.store.utilities.autofill.AccountsStore(),
+                    valueField: 'accountId',
+                    displayField: 'account',
+                    queryMode: 'remote',
+                    minChars: 2,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
+                    listeners: {
+                        beforequery: 'beforeAccountQuery'
+                    }
                 }
             },{
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccountId1',///TODO: change to combo
-                name: 'subAccountId1',
+                dataIndex: 'subAccount1',
+                name: 'subAccount1',
                 text: app.localize('SubAccount1').initCap(),
                 width: '10%',
                 filterField: {
-                    xtype: 'textfield',
+                    xtype: 'combobox',
+                    store: new Chaching.store.utilities.autofill.SubAccountsStore(),
+                    valueField: 'subAccount1',
+                    displayField: 'subAccount1',
+                    queryMode: 'remote',
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
                     emptyText: app.localize('SearchText')
-                },editor: {
-                    xtype:'textfield'
+                }, editor: {
+                    xtype: 'combobox',
+                    store: new Chaching.store.utilities.autofill.SubAccountsStore(),
+                    valueField: 'subAccountId1',
+                    displayField: 'subAccount1',
+                    queryMode: 'remote',
+                    minChars: 2,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
+                    listeners: {
+                        beforequery: 'beforeAccountQuery'
+                    }
                 }
             },{
                 xtype: 'gridcolumn',
@@ -443,6 +503,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 name: 'itemMemo',
                 text: app.localize('ItemMemo').initCap(),
                 width: '10%',
+                hideable: false,
                 filterField: {
                     xtype: 'textfield',
                     emptyText: app.localize('ToolTipItemMemo')

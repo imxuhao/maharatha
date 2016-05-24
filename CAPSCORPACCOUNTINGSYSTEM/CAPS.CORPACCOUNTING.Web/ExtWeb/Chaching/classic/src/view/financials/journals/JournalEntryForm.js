@@ -29,6 +29,10 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
             ui: 'transparentFieldSet',
             width: '100%',
             collapsible: true,
+            listeners: {
+                beforecollapse: 'onHeaderCollapse',
+                beforeexpand:'onHeaderExpand'
+            },
             items: [{
                 xtype: 'hiddenfield',
                 name: 'accountingDocumentId',
@@ -63,8 +67,8 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                     emptyText: app.localize('MandatoryField')
                 }, {
                     xtype: 'textfield',
-                    name: 'journalNumber',
-                    itemId: 'journalNumber',
+                    name: 'documentReference',
+                    itemId: 'documentReference',
                     allowBlank: false,
                     fieldLabel: app.localize('JournalNumber'),
                     emptyText: app.localize('MandatoryField')
@@ -127,6 +131,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
             layout: 'column',
             ui: 'transparentFieldSet',
             collapsible: true,
+            isTransactionDetailContainer:true,//set true to autoheight details grid
             items: [{
                 columnWidth: 1,
                 items: [{

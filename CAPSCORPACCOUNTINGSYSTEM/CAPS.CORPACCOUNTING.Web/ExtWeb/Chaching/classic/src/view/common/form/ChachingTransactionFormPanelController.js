@@ -90,7 +90,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
     disableActionGroup:function() {
         var me = this,
             view = me.getView(),
-            actionGroup = view.actionGroup;
+            actionGroup = view.defaultActionGroup;
         if (actionGroup) {
             actionGroup.disable(true);
         }
@@ -98,7 +98,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
     enableActionGroup:function() {
         var me = this,
            view = me.getView(),
-           actionGroup = view.actionGroup;
+           actionGroup = view.defaultActionGroup;
         if (actionGroup) {
             actionGroup.disable(false);
         }
@@ -159,9 +159,11 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
             autoSave = operation.autoSave;
         controller.enableActionGroup();
         if (success) {
+            var gridController = operation.parentGrid.getController();
+            gridController.doReloadGrid();
+
             var action = operation.getAction();
-            if (action === "create" || action === "destroy" || action === "update") {
-                controller.doReloadGrid();
+            if ((action === "create" || action === "destroy" || action === "update") && !saveContinue && !saveClone && !autoSave) {
                 if (view && view.openInPopupWindow) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
@@ -195,6 +197,22 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
     },
     onFormResize:function(formPanel, width, height, oldWidth, oldHeight, eOpts) {
         if (formPanel) {
+            var fieldSets = formPanel.query('fieldset');
+            if (fieldSets && fieldSets.length > 1) {
+                var allFieldSetsHeight = 0,
+                    length = fieldSets.length,
+                    transactionDetailContainer = undefined;
+                for (var i = 0; i < length; i++) {
+                    var fieldSet = fieldSets[i];
+                    if (!fieldSet.isTransactionDetailContainer) {
+                        allFieldSetsHeight += fieldSet.getHeight();
+                    } else transactionDetailContainer = fieldSet;
+                }
+                if (allFieldSetsHeight > 0 && transactionDetailContainer) {
+                    var heightForDetailGrid = height - (allFieldSetsHeight + 95);
+                    transactionDetailContainer.down('gridpanel').setHeight(heightForDetailGrid);
+                }
+            }
             formPanel.updateLayout();
         }
     }

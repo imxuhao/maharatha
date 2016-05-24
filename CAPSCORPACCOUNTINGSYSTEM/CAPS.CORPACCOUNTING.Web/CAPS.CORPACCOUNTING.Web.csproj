@@ -1845,10 +1845,10 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\base\TransactionDetailsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\base\TransactionHeaderModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\employee\EmployeeModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\financials\AccountingDocumentModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\financials\AccountingItemModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\ChartOfAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\DivisionsModel.js" />
@@ -1875,11 +1875,13 @@
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\base\TransactionDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\customers\CustomersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\RollupAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
@@ -1899,7 +1901,10 @@
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\SubAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\CustomerListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\JobDivisionStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\JournalTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\PaymentTermsListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOf1099BoxListStore.js" />

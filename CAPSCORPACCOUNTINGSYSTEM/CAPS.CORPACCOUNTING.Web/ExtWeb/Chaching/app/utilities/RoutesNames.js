@@ -17,6 +17,7 @@
         'financials.accounts',
         'projects.projectmaintenance',
          'payables.vendors',
-         'financials.journals'
+         'financials.journals',
+         'payables.invoices'
     ]
 });

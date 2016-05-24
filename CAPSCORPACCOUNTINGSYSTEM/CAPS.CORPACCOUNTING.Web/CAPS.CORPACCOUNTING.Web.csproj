@@ -1863,6 +1863,7 @@
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\payables\invoices\BatchModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorAliasModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
@@ -1882,6 +1883,7 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\payables\invoices\BatchStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsAliasStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\linkedaccounts\LinkedAccountsStore.js" />
@@ -1907,6 +1909,7 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\ProjectStatusStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\ProjectTypeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\StateOrRegionListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOfBatchStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOfTaxListStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingGlobals.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingRenderers.js" />
@@ -1979,6 +1982,9 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewListController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\InvoiceTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorAliasGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorAliasGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsForm.js" />

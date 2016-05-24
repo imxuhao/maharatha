@@ -74,7 +74,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     /**
     * @cfg {boolean} requireGrouping
     */
-    requireGrouping:true,
+    requireGrouping: true,
+    groupingConfig:null,
     /**
     * @cfg {object} headerButtonsConfig
     */
@@ -257,11 +258,17 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         }
         //add grouping if required
         if (me.requireGrouping) {
-            var groupingFeature = {
-                ftype: 'grouping',
-                hideGroupedHeader: true,
-                startCollapsed: true
-            };
+            var groupingFeature = undefined;
+            if (me.groupingConfig) {
+                groupingFeature = me.groupingConfig;              
+                
+            } else {
+                 groupingFeature = {
+                    ftype: 'grouping',
+                    hideGroupedHeader: true,
+                    startCollapsed: false
+                };
+            }
             features.push(groupingFeature);
         }
         //add summary feature

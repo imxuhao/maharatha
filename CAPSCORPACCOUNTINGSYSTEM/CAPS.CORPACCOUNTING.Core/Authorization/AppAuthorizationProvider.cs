@@ -217,6 +217,11 @@ namespace CAPS.CORPACCOUNTING.Authorization
 
             var payablesInvoices = payables.CreateChildPermission(AppPermissions.Pages_Payables_Invoices, L("Invoices"));
             var batch = payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch, L("Batch"));
+            batch.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch_Create, L("Create"));
+            batch.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch_Edit, L("Edit"));
+            batch.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch_Delete, L("Delete"));
+
+
 
             var payablesInquiry = payables.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry, L("Inquiry"));
             var aPInvoiceInquiry = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_APInvoiceInquiry, L("APInvoiceInquiry"));

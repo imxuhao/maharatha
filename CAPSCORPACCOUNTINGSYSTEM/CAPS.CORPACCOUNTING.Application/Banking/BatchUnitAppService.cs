@@ -88,7 +88,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
             var resultCount = await batchUnitQuery.CountAsync();
             var results = await batchUnitQuery
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("Description ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 

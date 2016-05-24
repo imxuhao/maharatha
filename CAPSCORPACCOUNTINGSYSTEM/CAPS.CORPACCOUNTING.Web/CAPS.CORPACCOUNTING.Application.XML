@@ -1867,7 +1867,7 @@
             A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
             </summary>
         </member>
-        <member name="F:CAPS.CORPACCOUNTING.Helpers.DivisionCacheItem.CacheStoreName">
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItem.Key">
             <summary>
             The cache name.
             </summary>
@@ -3778,6 +3778,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetCustomersList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Customers
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService">
             <summary>
             
@@ -3912,6 +3919,13 @@
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetTaxCreditList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get TaxCreditList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetCustomersList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Customers
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -6706,6 +6720,13 @@
             <param name="search"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorUnitAppService.GetVendorList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Vendors
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.CreateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateLocationSetUnitInput)">
             <summary>
             Create the LocationSet.
@@ -7106,7 +7127,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.#ctor(CAPS.CORPACCOUNTING.Masters.VendorUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCountryUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorAliasUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Masters.VendorAliasUnitManager)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.#ctor(CAPS.CORPACCOUNTING.Masters.VendorUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCountryUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorAliasUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Masters.VendorAliasUnitManager,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Runtime.Caching.ICacheManager)">
             <summary>
             
             </summary>
@@ -7242,6 +7263,13 @@
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.DeleteVendorAliasUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
             delete vendoralias
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetVendorList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Vendors
             </summary>
             <param name="input"></param>
             <returns></returns>

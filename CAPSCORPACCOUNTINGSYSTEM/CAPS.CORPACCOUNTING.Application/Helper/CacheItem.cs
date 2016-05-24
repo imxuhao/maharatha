@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.Helpers
 {
@@ -16,6 +17,11 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
         public HashSet<NameValueDto> ItemList { get; set; }
 
+        /// <summary>
+        /// Gets or Sets Employee List
+        /// </summary>
+        public HashSet<EmployeeUnitDto> EmployeeItemList { get; set; }
+
         public static TimeSpan CacheExpireTime { get; private set; }
         static CacheItem()
         {
@@ -24,13 +30,15 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
         public CacheItem()
         {
-            ItemList = new HashSet<NameValueDto>();
-
         }
         public CacheItem(string key)
-            : this()
         {
+            if (key.Contains(CacheKeyStores.EmployeeKey))
+                EmployeeItemList = new HashSet<EmployeeUnitDto>();
+            else
+                ItemList = new HashSet<NameValueDto>();
             Key = key;
+
         }
     }
 }

@@ -32,7 +32,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task DeleteJobUnit(IdInput input);
+        Task DeleteJobUnit(IdInputExtensionDto input);
 
         /// <summary>
         /// Get the list of all Jobs and also provided with Sorting,Paging and Searching functionality.

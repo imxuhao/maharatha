@@ -63,6 +63,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual decimal? ControlTotal { get; set; }
 
         /// <summary>Get Sets the DocumentReference field.</summary>
+        [Required]
         [StringLength(AccountingHeaderTransactionsUnit.MaxLength)]
         public virtual string DocumentReference { get; set; }
 

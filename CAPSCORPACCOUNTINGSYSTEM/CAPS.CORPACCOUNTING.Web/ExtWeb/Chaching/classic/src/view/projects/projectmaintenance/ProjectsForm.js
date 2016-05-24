@@ -346,10 +346,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             name: 'agencyId',
                             itemId: 'agencyId',
                             fieldLabel: app.localize('Agency'),
-                            store:'customers.CustomersStore',
+                            store: 'utilities.CustomerListStore',
                             valueField: 'customerId',
-                            displayField: 'firstName',
-                            queryMode: 'local',
+                            displayField: 'name',
+                            queryMode: 'remote',
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
                             },
@@ -369,10 +369,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'combobox',
                             name: 'thirdPartyCustomerId',
                             itemId: 'thirdPartyCustomerId',
-                            store: 'customers.CustomersStore',
+                            store: 'utilities.CustomerListStore',
                             valueField: 'customerId',
-                            displayField: 'firstName',
-                            queryMode: 'local',
+                            displayField: 'name',
+                            queryMode: 'remote',
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
                             },
@@ -574,10 +574,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'combobox',
                             name: 'directorEmployeeId',
                             itemId: 'directorEmployeeId',
-                            store: new Chaching.store.employee.EmployeeStore(),
-                            valueField: 'directorEmployeeId',
-                            displayField: 'firstName',
-                            queryMode:'local',
+                            store: new Chaching.store.utilities.EmployeeListStore(),
+                            valueField: 'employeeId',
+                            displayField: 'employeeName',
+                            queryMode:'remote',
                             fieldLabel: app.localize('Director'),
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderEmployeeInnerTpl
@@ -588,10 +588,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'combobox',
                             name: 'executiveProducerId',
                             itemId: 'executiveProducerId',
-                            store: new Chaching.store.employee.EmployeeStore(),
-                            valueField: 'executiveProducerId',
-                            displayField: 'firstName',
-                            queryMode: 'local',
+                            store: new Chaching.store.utilities.EmployeeListStore(),
+                            valueField: 'employeeId',
+                            displayField: 'employeeName',
+                            queryMode: 'remote',
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderEmployeeInnerTpl
                             },
@@ -603,13 +603,13 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'combobox',
                             name: 'dirOfPhotoEmployeeId',
                             itemId: 'dirOfPhotoEmployeeId',
-                            store: new Chaching.store.employee.EmployeeStore(),
+                            store: new Chaching.store.utilities.EmployeeListStore(),
                             //bind: {
                             //    store: '{getDirofPhotoList}'
                             //},
-                            valueField: 'dirOfPhotoEmployeeId',
-                            displayField: 'firstName',
-                            queryMode: 'local',
+                            valueField: 'employeeId',
+                            displayField: 'employeeName',
+                            queryMode: 'remote',
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderEmployeeInnerTpl
                             },
@@ -851,3 +851,4 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
     }]
     
 });
+

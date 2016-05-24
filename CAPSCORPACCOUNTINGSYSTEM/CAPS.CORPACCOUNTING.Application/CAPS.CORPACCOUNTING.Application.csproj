@@ -323,6 +323,7 @@
     <Compile Include="Logging\WebLogAppService.cs" />
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
+    <Compile Include="Masters\Dto\IdInputExtensionDto.cs" />
     <Compile Include="Masters\Dto\CreateTaxCreditUnitInput.cs" />
     <Compile Include="Masters\Dto\GetLocationsInput.cs" />
     <Compile Include="Masters\Dto\AutoSearchInput.cs" />

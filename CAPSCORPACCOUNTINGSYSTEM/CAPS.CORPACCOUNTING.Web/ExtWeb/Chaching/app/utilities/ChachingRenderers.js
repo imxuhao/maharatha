@@ -236,23 +236,23 @@
         return val;
     },
     renderEmployeeInnerTpl: function () {
-        return '{firstName} {lastName}';
+        return '{employeeName}';
     },
     renderEmployeeDispalyTpl: function () {
         var xtemplate = Ext.create('Ext.XTemplate', [
             '<tpl for=".">',
-            '{firstName} {lastName}',
+            '{employeeName}',
             '</tpl>'
         ]);
         return xtemplate;
     },
     renderCustomerInnerTpl: function() {
-        return '{firstName} {lastName} {{customerNumber}}';
+        return '{name}}';
     },
     renderCustomerDispalyTpl: function () {
         var xtemplate = Ext.create('Ext.XTemplate', [
             '<tpl for=".">',
-            '{firstName} {lastName} {{customerNumber}}',
+            '{name}}',
             '</tpl>'
         ]);
         return xtemplate;

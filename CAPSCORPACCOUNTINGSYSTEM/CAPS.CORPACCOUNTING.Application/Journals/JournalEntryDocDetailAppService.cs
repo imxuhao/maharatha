@@ -8,6 +8,7 @@ using Abp.Domain.Repositories;
 using CAPS.CORPACCOUNTING.Helpers;
 using Abp.Linq.Extensions;
 using Abp.AutoMapper;
+using Abp.Runtime.Caching;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.Journals.dto;
 using CAPS.CORPACCOUNTING.Journals.Dto;
@@ -15,6 +16,9 @@ using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Common;
+using System;
+using Abp.Collections.Extensions;
+using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -29,6 +33,8 @@ namespace CAPS.CORPACCOUNTING.Journals
         private readonly IRepository<VendorUnit, int> _vendorUnitRepository;
         private readonly IRepository<TaxRebateUnit, int> _taxRebateUnitRepository;
         private IdOutputDto<long> _response = null;
+        private readonly ICacheManager _cacheManager;
+        private readonly CustomAppSession _customAppSession;
 
         public JournalEntryDocDetailAppService(JournalEntryDocumentDetailUnitManager journalEntryDocumentDetailUnitManager,
             IRepository<JournalEntryDocumentDetailUnit, long> journalEntryDocumentDetailUnitRepository,
@@ -36,8 +42,8 @@ namespace CAPS.CORPACCOUNTING.Journals
             IRepository<AccountUnit, long> accountUnitRepository,
             IRepository<SubAccountUnit, long> subAccountUnitRepository,
             IRepository<CoaUnit, int> coaUnitRepository,
-             IRepository<VendorUnit, int> vendorUnitRepository,
-               IRepository<TaxRebateUnit, int> taxRebateUnitRepository
+             IRepository<VendorUnit, int> vendorUnitRepository, CustomAppSession customAppSession,
+               IRepository<TaxRebateUnit, int> taxRebateUnitRepository, ICacheManager cacheManager
             )
 
         {
@@ -49,6 +55,8 @@ namespace CAPS.CORPACCOUNTING.Journals
             _coaUnitRepository = coaUnitRepository;
             _vendorUnitRepository = vendorUnitRepository;
             _taxRebateUnitRepository = taxRebateUnitRepository;
+            _customAppSession = customAppSession;
+            _cacheManager = cacheManager;
         }
 
         /// <summary>
@@ -141,7 +149,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                             account = Lines.AccountNumber + " (" + Jobs.Caption + ")",
                             subAccount = subAccounts.Description,
                             vendor = vendors.LastName,
-                            taxRebate= taxRebates.Description
+                            taxRebate = taxRebates.Description
                         };
 
 
@@ -224,16 +232,42 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetSubAccountList(AutoSearchInput input)
         {
-            var subAccountlist = await (from subaccount in _subAccountUnitRepository.GetAll()
-                                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
-                                    .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                                        select new NameValueDto { Name = subaccount.Description, Value = subaccount.Id.ToString() })
-                              .ToListAsync();
-            return subAccountlist;
+            var cacheItem = await GetSubAccountsCacheItemAsync(
+              CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+        }
+        /// <summary>
+        /// Get SubAccounts From DataBase
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private async Task<List<NameValueDto>> GetSubAcoountsFromDb(AutoSearchInput input)
+        {
+            var query = from subaccounts in _subAccountUnitRepository.GetAll()
+                        select new { subaccounts };
+            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.subaccounts.OrganizationUnitId == input.OrganizationUnitId.Value)
+                            //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.subaccounts.Description.Contains(input.Query))
+                            .Select(u => new NameValueDto { Name = u.subaccounts.Description, Value = u.subaccounts.Id.ToString() }).ToListAsync();
+
         }
 
-
-
+        private async Task<CacheItem> GetSubAccountsCacheItemAsync(string subaccountkey, AutoSearchInput input)
+        {
+            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).GetAsync(subaccountkey, async () =>
+            {
+                var newCacheItem = new CacheItem(subaccountkey);
+                var subaccountList = await GetSubAcoountsFromDb(input);
+                foreach (var subaccount in subaccountList)
+                {
+                    newCacheItem.ItemList.Add(subaccount);
+                }
+                return newCacheItem;
+            });
+        }
 
     }
+
+
+
 }
+

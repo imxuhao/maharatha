@@ -58,47 +58,19 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
 
                 var customerStore = form.findField('agencyId').getStore();//viewModel.getStore('getCustomersList');
                 customerStore.load();
-
+               
                 var directorsStore = form.findField('directorEmployeeId').getStore();
-                var filters = [
-                    {
-                        entity: 'Employee',
-                        searchTerm: true,
-                        comparator: 1,
-                        dataType: 3,
-                        property: 'isDirector',
-                        value: true
-                    }
-                ];
-                directorsStore.filter(filters);
+                directorsStore.getProxy().setExtraParam('property', 'isDirector');
+                
                 directorsStore.load();
 
                 var producersStore = form.findField('executiveProducerId').getStore();//viewModel.getStore('getProducersList');
-                filters = [
-                    {
-                        entity: 'Employee',
-                        searchTerm: true,
-                        comparator: 1,
-                        dataType: 3,
-                        property: 'isProducer',
-                        value: true
-                    }
-                ];
-                producersStore.filter(filters);
+                producersStore.getProxy().setExtraParam('property', 'isProducer');
+                
                 producersStore.load();
 
                 var dirOfPhotStore = form.findField('dirOfPhotoEmployeeId').getStore();
-                filters = [
-                   {
-                       entity: 'Employee',
-                       searchTerm: true,
-                       comparator: 1,
-                       dataType: 3,
-                       property: 'isDirPhoto',
-                       value: true
-                   }
-                ];
-                dirOfPhotStore.filter(filters);
+                dirOfPhotStore.getProxy().setExtraParam('property', 'isDirPhoto');
                 dirOfPhotStore.load();
 
                 var jobAccountGridStore = formPanel.down('gridpanel[itemId=jobAccountsGridPanel]').getStore();

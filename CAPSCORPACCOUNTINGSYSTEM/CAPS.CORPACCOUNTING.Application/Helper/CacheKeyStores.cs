@@ -19,6 +19,14 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public const string CacheVendorStore = "SUMITVENDOR";
         public const string VendorKey = "VENDOR";
 
+        //SubAccountsKeys
+        public const string CacheSubAccountStore = "SUMITSUBACCOUNT";
+        public const string SubAccountKey = "SUBACCOUNT";
+
+        //Employee Keys
+        public const string CachEmployeeStore = "SUMITEMPLOYEE";
+        public const string EmployeeKey = "EMPLOYEE";
+
 
 
         public static string CalculateCacheKey(string sourceName, int tenantId, long? OrganizationUnitId)

@@ -14,5 +14,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public  int VendorAliasId { get; set; }
         public  int VendorId { get; set; }
         public int JobId { get; set; }
+
+        public string Property { get; set; }
     }
 }

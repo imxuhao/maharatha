@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 {
     public enum TypeOfAccountingDocument
     {
-        [Display(Name = "GeneralLedger")]
+        [Display(Name = "General Ledger")]
         GeneralLedger = 1,
         [Display(Name = " Cash Receipts")]
         CashReceipts = 2,

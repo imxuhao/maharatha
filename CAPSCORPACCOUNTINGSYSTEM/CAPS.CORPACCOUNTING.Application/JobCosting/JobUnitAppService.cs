@@ -12,7 +12,6 @@ using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.Masters;
 using Abp.Authorization;
 using System.Collections.Generic;
-using System.Text;
 using Abp.Collections.Extensions;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
@@ -222,11 +221,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             #endregion
 
 
-            _unitOfWorkManager.Current.Completed += (sender, args) =>
-            {
-                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).
-                Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId));
-            };
+            await RemoveItemfromCache(input.OrganizationUnitId);
             return jobUnit.MapTo<JobUnitDto>();
         }
 
@@ -237,9 +232,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Delete)]
-        public async Task DeleteJobUnit(IdInput input)
+        public async Task DeleteJobUnit(IdInputExtensionDto input)
         {
             await _jobUnitManager.DeleteAsync(input.Id);
+            await RemoveItemfromCache(input.OrganizationUnitId);
         }
         /// <summary>
         /// To Get the Job with JobDetails to show in the Grid With searching and sorting
@@ -491,7 +487,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         select new { customers };
             return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.customers.OrganizationUnitId == input.OrganizationUnitId.Value)
                             //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.customers.Caption.Contains(input.Query))
-                            .Select(u => new NameValueDto { Name = u.customers.LastName, Value = u.customers.Id.ToString() }).ToListAsync();
+                            .Select(u => new NameValueDto { Name = u.customers.FirstName + " "+ u.customers.LastName+" "+u.customers.CustomerNumber , Value = u.customers.Id.ToString() }).ToListAsync();
             
         }
 
@@ -509,7 +505,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             });
         }
 
-       
+        private async Task RemoveItemfromCache(long? OrganizationUnitId)
+        {
+            _unitOfWorkManager.Current.Completed += (sender, args) =>
+            {
+                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).
+                Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), OrganizationUnitId));
+            };
+        }
 
     }
 }

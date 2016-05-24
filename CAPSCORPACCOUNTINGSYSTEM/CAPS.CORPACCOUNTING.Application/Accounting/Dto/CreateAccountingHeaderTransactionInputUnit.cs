@@ -61,6 +61,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Get Sets the DocumentReference field.</summary>
         [StringLength(AccountingHeaderTransactionsUnit.MaxLength)]
+        [Required]
         public virtual string DocumentReference { get; set; }
 
         /// <summary>Get Sets the VoucherReference field.</summary>

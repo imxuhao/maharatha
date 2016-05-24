@@ -5,13 +5,17 @@ using Abp.Zero;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Uow;
 using System;
+using System.Linq;
+using Abp.UI;
+using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
     public class JournalEntryDocumentUnitManager : DomainService
     {
-        protected IRepository<JournalEntryDocumentUnit,long> JournalEntryDocumentUnitRepository { get; }
-        public JournalEntryDocumentUnitManager(IRepository<JournalEntryDocumentUnit,long> journalEntryDocumentUnitrepository)
+        protected IRepository<JournalEntryDocumentUnit, long> JournalEntryDocumentUnitRepository { get; }
+        public JournalEntryDocumentUnitManager(IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitrepository)
         {
             JournalEntryDocumentUnitRepository = journalEntryDocumentUnitrepository;
 
@@ -21,12 +25,14 @@ namespace CAPS.CORPACCOUNTING.Journals
         [UnitOfWork]
         public virtual async Task<long> CreateAsync(JournalEntryDocumentUnit accountUnit)
         {
-          return  await JournalEntryDocumentUnitRepository.InsertAndGetIdAsync(accountUnit);
+            await ValidateJournalUnitAsync(accountUnit);
+            return await JournalEntryDocumentUnitRepository.InsertAndGetIdAsync(accountUnit);
         }
 
 
         public virtual async Task UpdateAsync(JournalEntryDocumentUnit accountUnit)
         {
+            await ValidateJournalUnitAsync(accountUnit);
             await JournalEntryDocumentUnitRepository.UpdateAsync(accountUnit);
         }
 
@@ -34,6 +40,33 @@ namespace CAPS.CORPACCOUNTING.Journals
         {
             await JournalEntryDocumentUnitRepository.DeleteAsync(input.Id);
         }
+        protected virtual async Task ValidateJournalUnitAsync(JournalEntryDocumentUnit journalunit)
+        {
+            //Validating if Duplicate DocumentReference(Journal#) exists
+            if (JournalEntryDocumentUnitRepository != null)
+            {
 
+                var journals = (await JournalEntryDocumentUnitRepository.
+                    GetAllListAsync(
+                        p => p.DocumentReference == journalunit.DocumentReference && p.OrganizationUnitId == journalunit.OrganizationUnitId
+                        && p.TypeOfAccountingDocumentId==TypeOfAccountingDocument.GeneralLedger));
+
+                if (journalunit.Id == 0)
+                {
+                    if (journals.Count > 0)
+                    {
+                        throw new UserFriendlyException(L("Duplicate Journal#", journalunit.DocumentReference));
+                    }
+                }
+                else
+                {
+                    if (journals.FirstOrDefault(p => p.Id != journalunit.Id && p.DocumentReference == journalunit.DocumentReference) != null)
+                    {
+                        throw new UserFriendlyException(L("Duplicate Journal#", journalunit.DocumentReference));
+                    }
+                }
+
+            }
+        }
     }
 }

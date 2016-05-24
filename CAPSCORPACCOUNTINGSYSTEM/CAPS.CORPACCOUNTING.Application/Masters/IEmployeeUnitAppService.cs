@@ -51,6 +51,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetEmployeeList(SearchInputDto input);
+        Task<List<NameValueDto>> GetEmployeeList(AutoSearchInput input);
     }
 }

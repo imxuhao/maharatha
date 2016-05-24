@@ -1899,9 +1899,11 @@
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\CustomerListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\JournalTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\PaymentTermsListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOf1099BoxListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\EmployeeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOfAddressListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\employee\EmployeeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\CountryListStore.js" />

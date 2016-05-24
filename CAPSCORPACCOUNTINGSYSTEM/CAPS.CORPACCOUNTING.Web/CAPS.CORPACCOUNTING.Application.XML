@@ -1872,6 +1872,11 @@
             The cache name.
             </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItem.EmployeeItemList">
+            <summary>
+            Gets or Sets Employee List
+            </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumHelper.GetEnumValue``1(System.Int32)">
             
              Method to get enumeration value from int value.
@@ -3687,7 +3692,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.DeleteJobUnit(Abp.Application.Services.Dto.IdInput)">
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.DeleteJobUnit(CAPS.CORPACCOUNTING.Masters.Dto.IdInputExtensionDto)">
             <summary>
             Delete the Job based on JobId.
             </summary>
@@ -3860,7 +3865,7 @@
              <param name="input"></param>
              <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.DeleteJobUnit(Abp.Application.Services.Dto.IdInput)">
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.DeleteJobUnit(CAPS.CORPACCOUNTING.Masters.Dto.IdInputExtensionDto)">
             <summary>
             To Delete the Job
             </summary>
@@ -4119,6 +4124,13 @@
         <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.GetSubAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get SubAccounts List based on OrganizationUnitId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.GetSubAcoountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts From DataBase
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -6330,6 +6342,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.EmployeeUnitAppService.GetEmployeesFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts From DataBase
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService">
             <summary>
             This service will provide all CRUD operations on Employee.
@@ -6370,7 +6389,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.GetEmployeeList(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IEmployeeUnitAppService.GetEmployeeList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get Empolyee list based on IsDirector or IsProducer or Is ArtDirector Flags
             </summary>

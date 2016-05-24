@@ -55,7 +55,7 @@ namespace CAPS.CORPACCOUNTING.Web
             });
 
             //Uncomment this line to use Redis cache instead of in-memory cache.
-            //Configuration.Caching.UseRedis();
+            Configuration.Caching.UseRedis();
         }
 
         public override void Initialize()

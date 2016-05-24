@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Domain.Repositories;
@@ -11,8 +12,11 @@ using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using Abp.Collections.Extensions;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using Abp.Runtime.Caching;
+using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -23,18 +27,23 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<EmployeeUnit> _employeeUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IAddressUnitAppService _addressAppService;
-        private readonly IRepository<AddressUnit, long> _addressUnitRepository;       
+        private readonly IRepository<AddressUnit, long> _addressUnitRepository;
+        private readonly ICacheManager _cacheManager;
+        private readonly CustomAppSession _customAppSession;
 
         public EmployeeUnitAppService(EmployeeUnitManager employeeUnitManager,
             IRepository<EmployeeUnit> employeeUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService, 
-            IRepository<AddressUnit, long> addressRepository)
+            IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService,
+            IRepository<AddressUnit, long> addressRepository,
+            CustomAppSession customAppSession, ICacheManager cacheManager)
         {
             _employeeUnitManager = employeeUnitManager;
             _employeeUnitRepository = employeeUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _addressAppService = addressAppService;
-            _addressUnitRepository = addressRepository;            
+            _addressUnitRepository = addressRepository;
+            _customAppSession = customAppSession;
+            _cacheManager = cacheManager;
         }
         /// <summary>
         /// Delete the Employee abd EmployeeAddresses
@@ -61,7 +70,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<EmployeeUnitDto> CreateEmployeeUnit(CreateEmployeeUnitInput input)
         {
-            var employeeUnit = input.MapTo<EmployeeUnit>();            
+            var employeeUnit = input.MapTo<EmployeeUnit>();
             await _employeeUnitManager.CreateAsync(employeeUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -137,7 +146,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId,null),item=>item.Employee.OrganizationUnitId==input.OrganizationUnitId);
+            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Employee.OrganizationUnitId == input.OrganizationUnitId);
             return query;
         }
 
@@ -243,5 +252,56 @@ namespace CAPS.CORPACCOUNTING.Masters
             return employeeList;
         }
 
+        public async Task<List<NameValueDto>> GetEmployeeList(AutoSearchInput input)
+        {
+            var cacheItem = await GetEmployeeCacheItemAsync(
+              CacheKeyStores.CalculateCacheKey(CacheKeyStores.EmployeeKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            var res= cacheItem.EmployeeItemList.ToList()
+                    .WhereIf(input.Property == "isDirector", p => p.IsDirector == true)
+                    .WhereIf(input.Property == "isProducer", p => p.IsProducer == true)
+                    .WhereIf(input.Property == "isDirPhoto", p => p.IsArtDirector == true)
+                    .WhereIf(input.Property == "isArtDirector", p => p.IsArtDirector == true)
+                    .WhereIf(input.Property == "isSetDesigner", p => p.IsSetDesigner == true)
+                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.ToUpper().Contains(input.Query.ToUpper()))
+                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.FirstName.ToUpper().Contains(input.Query.ToUpper()))
+                    .Select(u => new NameValueDto { Name = u.FirstName+" "+ u.LastName, Value = u.EmployeeId.ToString() }).ToList();
+            return res;
+        }
+        /// <summary>
+        /// Get SubAccounts From DataBase
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private async Task<List<EmployeeUnitDto>> GetEmployeesFromDb(AutoSearchInput input)
+        {
+            var query = from employees in _employeeUnitRepository.GetAll()
+                        select new { employees };
+            var results = await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.employees.OrganizationUnitId == input.OrganizationUnitId.Value).ToListAsync();
+            return results.Select(
+                              result =>
+                              {
+                                  var dto = result.employees.MapTo<EmployeeUnitDto>();
+                                  dto.EmployeeId = result.employees.Id;
+                                  return dto;
+                              }).ToList();
+
+        }
+
+        private async Task<CacheItem> GetEmployeeCacheItemAsync(string employee, AutoSearchInput input)
+        {
+            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CachEmployeeStore).GetAsync(employee, async () =>
+            {
+                var newCacheItem = new CacheItem(employee);
+                var employeeList = await GetEmployeesFromDb(input);
+
+                foreach (var emp in employeeList)
+                {
+                    newCacheItem.EmployeeItemList.Add(emp);
+                }
+                return newCacheItem;
+            });
+        }
+
     }
 }
+

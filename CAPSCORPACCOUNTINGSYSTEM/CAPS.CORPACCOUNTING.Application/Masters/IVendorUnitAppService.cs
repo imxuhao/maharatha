@@ -130,12 +130,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="search"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetAccountsList(AutoSearchInput search);
-
-        /// <summary>
-        /// Get Vendors
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<List<NameValueDto>> GetVendorList(AutoSearchInput input);
+       
     }
 }

@@ -550,42 +550,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             await _vendorAliasUnitManager.DeleteAsync(input.Id);
         }
-
-        /// <summary>
-        /// Get Vendors
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetVendorList(AutoSearchInput input)
-        {
-            var cacheItem = await GetVendorsCacheItemAsync(
-               CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
-        }
-
-        private async Task<List<NameValueDto>> GetVendorsFromDb(AutoSearchInput input)
-        {
-            var query = from vendors in _vendorUnitRepository.GetAll()
-                        select new { vendors };
-            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.vendors.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.customers.Caption.Contains(input.Query))
-                            .Select(u => new NameValueDto { Name = u.vendors.LastName, Value = u.vendors.Id.ToString() }).ToListAsync();
-
-        }
-
-        private async Task<CacheItem> GetVendorsCacheItemAsync(string vendorkey, AutoSearchInput input)
-        {
-            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore).GetAsync(vendorkey, async () =>
-            {
-                var newCacheItem = new CacheItem(vendorkey);
-                var vendorList = await GetVendorsFromDb(input);
-                foreach (var vendors in vendorList)
-                {
-                    newCacheItem.ItemList.Add(vendors);
-                }
-                return newCacheItem;
-            });
-        }
+       
     }
 
 }

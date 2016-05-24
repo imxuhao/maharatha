@@ -262,8 +262,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                     .WhereIf(input.Property == "isDirPhoto", p => p.IsArtDirector == true)
                     .WhereIf(input.Property == "isArtDirector", p => p.IsArtDirector == true)
                     .WhereIf(input.Property == "isSetDesigner", p => p.IsSetDesigner == true)
-                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.ToUpper().Contains(input.Query.ToUpper()))
-                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.FirstName.ToUpper().Contains(input.Query.ToUpper()))
+                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.ToUpper().Contains(input.Query.ToUpper()) || p.FirstName.ToUpper().Contains(input.Query.ToUpper()))
                     .Select(u => new NameValueDto { Name = u.FirstName+" "+ u.LastName, Value = u.EmployeeId.ToString() }).ToList();
             return res;
         }

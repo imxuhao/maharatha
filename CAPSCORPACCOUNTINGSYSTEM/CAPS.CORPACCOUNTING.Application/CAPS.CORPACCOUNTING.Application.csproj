@@ -134,7 +134,9 @@
     <Compile Include="Accounting\Dto\SubAccountUnitDto.cs" />
     <Compile Include="Accounting\Dto\UpdateAccountingHeaderTransactionInputUnit.cs" />
     <Compile Include="Accounting\Dto\UpdateSubAccountUnitInput.cs" />
+    <Compile Include="Accounting\IListAppService.cs" />
     <Compile Include="Accounting\ISubAccountUnitAppService.cs" />
+    <Compile Include="Accounting\ListAppService.cs" />
     <Compile Include="Accounting\SubAccountUnitAppService.cs" />
     <Compile Include="Authorization\AbpLoginResultTypeHelper.cs" />
     <Compile Include="Authorization\Users\Dto\GetLinkedUsersInput.cs" />

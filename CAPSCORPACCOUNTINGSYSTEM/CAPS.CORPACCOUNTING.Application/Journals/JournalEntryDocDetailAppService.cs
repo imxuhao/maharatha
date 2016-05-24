@@ -36,14 +36,15 @@ namespace CAPS.CORPACCOUNTING.Journals
         private readonly ICacheManager _cacheManager;
         private readonly CustomAppSession _customAppSession;
 
-        public JournalEntryDocDetailAppService(JournalEntryDocumentDetailUnitManager journalEntryDocumentDetailUnitManager,
+        public JournalEntryDocDetailAppService(
+            JournalEntryDocumentDetailUnitManager journalEntryDocumentDetailUnitManager,
             IRepository<JournalEntryDocumentDetailUnit, long> journalEntryDocumentDetailUnitRepository,
             IRepository<JobUnit> jobUnitRepository,
             IRepository<AccountUnit, long> accountUnitRepository,
             IRepository<SubAccountUnit, long> subAccountUnitRepository,
             IRepository<CoaUnit, int> coaUnitRepository,
-             IRepository<VendorUnit, int> vendorUnitRepository, CustomAppSession customAppSession,
-               IRepository<TaxRebateUnit, int> taxRebateUnitRepository, ICacheManager cacheManager
+            IRepository<VendorUnit, int> vendorUnitRepository, CustomAppSession customAppSession,
+            IRepository<TaxRebateUnit, int> taxRebateUnitRepository, ICacheManager cacheManager
             )
 
         {
@@ -98,7 +99,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                 }
                 else if (journaldocDetails.AccountingItemId < 0)
                 {
-                    IdInput<long> idInput = new IdInput<long>() { Id = (journaldocDetails.AccountingItemId * (-1)) };
+                    IdInput<long> idInput = new IdInput<long>() {Id = (journaldocDetails.AccountingItemId*(-1))};
                     await _journalEntryDocumentDetailUnitManager.DeleteAsync(idInput);
                 }
                 else
@@ -129,28 +130,31 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<JournalEntryDocDetailUnitDto>> GetJournalEntryDocDetailsByAccountingDocId(GetTransactionList input)
+        public async Task<PagedResultOutput<JournalEntryDocDetailUnitDto>> GetJournalEntryDocDetailsByAccountingDocId(
+            GetTransactionList input)
         {
             var query = from journals in _journalEntryDocumentDetailUnitRepository.GetAll()
-                        join Job in _jobUnitRepository.GetAll() on journals.JobId equals Job.Id into Job
-                        from Jobs in Job.DefaultIfEmpty()
-                        join Line in _accountUnitRepository.GetAll() on journals.AccountId equals Line.Id into Line
-                        from Lines in Line.DefaultIfEmpty()
-                        join subAccount in _subAccountUnitRepository.GetAll() on journals.SubAccountId1 equals subAccount.Id into subAccount
-                        from subAccounts in subAccount.DefaultIfEmpty()
-                        join vendor in _vendorUnitRepository.GetAll() on journals.VendorId equals vendor.Id into vendor
-                        from vendors in vendor.DefaultIfEmpty()
-                        join taxRebate in _taxRebateUnitRepository.GetAll() on journals.VendorId equals taxRebate.Id into taxRebate
-                        from taxRebates in taxRebate.DefaultIfEmpty()
-                        select new
-                        {
-                            JournalDetails = journals,
-                            Job = Jobs.JobNumber + " (" + Jobs.Caption + ")",
-                            account = Lines.AccountNumber + " (" + Jobs.Caption + ")",
-                            subAccount = subAccounts.Description,
-                            vendor = vendors.LastName,
-                            taxRebate = taxRebates.Description
-                        };
+                join Job in _jobUnitRepository.GetAll() on journals.JobId equals Job.Id into Job
+                from Jobs in Job.DefaultIfEmpty()
+                join Line in _accountUnitRepository.GetAll() on journals.AccountId equals Line.Id into Line
+                from Lines in Line.DefaultIfEmpty()
+                join subAccount in _subAccountUnitRepository.GetAll() on journals.SubAccountId1 equals subAccount.Id
+                    into subAccount
+                from subAccounts in subAccount.DefaultIfEmpty()
+                join vendor in _vendorUnitRepository.GetAll() on journals.VendorId equals vendor.Id into vendor
+                from vendors in vendor.DefaultIfEmpty()
+                join taxRebate in _taxRebateUnitRepository.GetAll() on journals.VendorId equals taxRebate.Id into
+                    taxRebate
+                from taxRebates in taxRebate.DefaultIfEmpty()
+                select new
+                {
+                    JournalDetails = journals,
+                    Job = Jobs.JobNumber + " (" + Jobs.Caption + ")",
+                    account = Lines.AccountNumber + " (" + Jobs.Caption + ")",
+                    subAccount = subAccounts.Description,
+                    vendor = vendors.LastName,
+                    taxRebate = taxRebates.Description
+                };
 
 
 
@@ -161,7 +165,8 @@ namespace CAPS.CORPACCOUNTING.Journals
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
             query = query.Where(p => p.JournalDetails.AccountingDocumentId.Value == input.AccountingDocumentId)
-                         .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.JournalDetails.OrganizationUnitId == input.OrganizationUnitId);
+                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
+                    p => p.JournalDetails.OrganizationUnitId == input.OrganizationUnitId);
 
             var resultCount = await query.CountAsync();
             var results = await query
@@ -182,92 +187,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                 return dto;
             }).ToList());
         }
-
-
-
-        /// <summary>
-        /// Get Jobs or Divisions List by using OrganizationUnitId
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetJobOrDivisionList(AutoSearchInput input)
-        {
-            var Joblist = await (from job in _jobUnitRepository.GetAll()
-                                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
-                                    .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                                 select new NameValueDto { Name = job.Caption, Value = job.Id.ToString() })
-                              .ToListAsync();
-
-            return Joblist;
-        }
-
-        /// <summary>
-        /// Get accounts List based on JobId
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GeAccountsList(AutoSearchInput input)
-        {
-
-            var chartOfAccountId = (from job in _jobUnitRepository.GetAll().WhereIf(!ReferenceEquals(input.JobId, null), p => p.Id == input.JobId)
-                                    select job.ChartOfAccountId).FirstOrDefault();
-
-            var Accountlist = await (from account in _accountUnitRepository.GetAll()
-                                         .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
-                                         .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                                         .Where(p => p.ChartOfAccountId == chartOfAccountId)
-                                     select new NameValueDto
-                                     {
-                                         Name = account.Caption,
-                                         Value = account.Id.ToString()
-                                     }
-                         ).ToListAsync();
-            return Accountlist;
-        }
-
-        /// <summary>
-        /// Get SubAccounts List based on OrganizationUnitId
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetSubAccountList(AutoSearchInput input)
-        {
-            var cacheItem = await GetSubAccountsCacheItemAsync(
-              CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
-        }
-        /// <summary>
-        /// Get SubAccounts From DataBase
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        private async Task<List<NameValueDto>> GetSubAcoountsFromDb(AutoSearchInput input)
-        {
-            var query = from subaccounts in _subAccountUnitRepository.GetAll()
-                        select new { subaccounts };
-            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.subaccounts.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.subaccounts.Description.Contains(input.Query))
-                            .Select(u => new NameValueDto { Name = u.subaccounts.Description, Value = u.subaccounts.Id.ToString() }).ToListAsync();
-
-        }
-
-        private async Task<CacheItem> GetSubAccountsCacheItemAsync(string subaccountkey, AutoSearchInput input)
-        {
-            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).GetAsync(subaccountkey, async () =>
-            {
-                var newCacheItem = new CacheItem(subaccountkey);
-                var subaccountList = await GetSubAcoountsFromDb(input);
-                foreach (var subaccount in subaccountList)
-                {
-                    newCacheItem.ItemList.Add(subaccount);
-                }
-                return newCacheItem;
-            });
-        }
-
     }
-
-
 
 }
 

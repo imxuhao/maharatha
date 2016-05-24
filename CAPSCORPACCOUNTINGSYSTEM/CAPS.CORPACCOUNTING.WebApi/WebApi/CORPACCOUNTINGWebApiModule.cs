@@ -44,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.WebApi
 
             Configuration.Modules.AbpWebApi().HttpConfiguration.Filters.Add(new HostAuthenticationFilter("Bearer"));
 
-            ConfigureSwaggerUi(); //Remove this line to disable swagger UI.
+           // ConfigureSwaggerUi(); //Remove this line to disable swagger UI.
         }
 
         private void ConfigureOData()

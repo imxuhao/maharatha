@@ -2,6 +2,10 @@ using System.Web.Http;
 using WebActivatorEx;
 using CAPS.CORPACCOUNTING.Web;
 using Swashbuckle.Application;
+using System;
+using System.IO;
+using System.Linq;
+using CAPS.CORPACCOUNTING.WebApi;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -9,10 +13,13 @@ namespace CAPS.CORPACCOUNTING.Web
 {
     public class SwaggerConfig
     {
+      
         public static void Register()
         {
+            var commentsFileName = "CAPS.CORPACCOUNTING.Application" + ".XML";
             var thisAssembly = typeof(SwaggerConfig).Assembly;
-
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var commentsFile = Path.Combine(baseDirectory, commentsFileName);
             GlobalConfiguration.Configuration 
                 .EnableSwagger(c =>
                     {
@@ -146,21 +153,21 @@ namespace CAPS.CORPACCOUNTING.Web
                         // the Swagger 2.0 spec. - https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
                         // before using this option.
                         //
-                        //c.DocumentFilter<ApplyDocumentVendorExtensions>();
+                        c.DocumentFilter<FilterRoutesDocumentFilter>();
 
                         // If you annonate Controllers and API Types with
                         // Xml comments (http://msdn.microsoft.com/en-us/library/b2s063f7(v=vs.110).aspx), you can incorporate
                         // those comments into the generated docs and UI. You can enable this by providing the path to one or
                         // more Xml comment files.
                         //
-                        //c.IncludeXmlComments(GetXmlCommentsPath());
+                        c.IncludeXmlComments(commentsFile);
 
                         // In contrast to WebApi, Swagger 2.0 does not include the query string component when mapping a URL
                         // to an action. As a result, Swashbuckle will raise an exception if it encounters multiple actions
                         // with the same path (sans query string) and HTTP method. You can workaround this by providing a
                         // custom strategy to pick a winner or merge the descriptions for the purposes of the Swagger docs 
                         //
-                        //c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+                        c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                     })
                 .EnableSwaggerUi(c =>
                     {
@@ -209,5 +216,5 @@ namespace CAPS.CORPACCOUNTING.Web
                         //c.EnableOAuth2Support("test-client-id", "test-realm", "Swagger UI");
                     });
         }
-    }
+}
 }

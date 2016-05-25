@@ -1480,6 +1480,14 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitAppService.GetBatchAmount(System.Nullable{System.Int32},CAPS.CORPACCOUNTING.Banking.TypeOfBatch)">
+            <summary>
+            
+            </summary>
+            <param name="batchId"></param>
+            <param name="TypeOfBatchId"></param>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitDto.BatchId">
             <summary>Gets or sets the BatchId field</summary>
         </member>
@@ -1530,6 +1538,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitDto.BatchAmount">
+            <summary>Gets or sets the BatchAmount field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>

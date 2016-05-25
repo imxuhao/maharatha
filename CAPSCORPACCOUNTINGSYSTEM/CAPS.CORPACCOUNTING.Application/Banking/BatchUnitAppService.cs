@@ -11,6 +11,8 @@ using Abp.Linq.Extensions;
 using AutoMapper;
 using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using CAPS.CORPACCOUNTING.Journals;
+using CAPS.CORPACCOUNTING.Accounting.Dto;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
@@ -19,11 +21,16 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
 
         private readonly BatchUnitManager _batchUnitManager;
         private readonly IRepository<BatchUnit, int> _batchUnitRepository;
+        private readonly IRepository<JournalEntryDocumentUnit, long> _journalEntryDocumentUnitRepository;
+      
 
-        public BatchUnitAppService(BatchUnitManager batchUnitManager, IRepository<BatchUnit, int> batchUnitRepository)
+        public BatchUnitAppService(BatchUnitManager batchUnitManager, 
+                        IRepository<BatchUnit, int> batchUnitRepository,
+                         IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitRepository)
         {
             _batchUnitManager = batchUnitManager;
             _batchUnitRepository = batchUnitRepository;
+            _journalEntryDocumentUnitRepository = journalEntryDocumentUnitRepository;
         }
 
         /// <summary>
@@ -110,8 +117,12 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
                                       TypeOfBatchId=value.TypeOfBatchId,
                                       TypeOfInactiveStatusId=value.TypeOfInactiveStatusId,
                                       TypeOfBatch = value.TypeOfBatchId.ToDisplayName(),
-                                      TypeOfInactiveStatus = value.TypeOfInactiveStatusId != null ? value.TypeOfInactiveStatusId.ToDisplayName() : ""
+                                      TypeOfInactiveStatus = value.TypeOfInactiveStatusId != null ? value.TypeOfInactiveStatusId.ToDisplayName() : "",
+                                      BatchAmount= GetBatchAmount(value.Id,value.TypeOfBatchId)
                                   }).ToList();
+
+
+
 
             return new PagedResultOutput<BatchUnitDto>(resultCount, mapEnumResults);
         }
@@ -153,5 +164,61 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
                               .ToListAsync();
             return batchList;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="batchId"></param>
+        /// <param name="TypeOfBatchId"></param>
+        /// <returns></returns>
+        private string GetBatchAmount(int? batchId,TypeOfBatch TypeOfBatchId)
+        {
+            string batchAmount = string.Empty;
+            if (TypeOfBatchId == TypeOfBatch.GeneralJournal || TypeOfBatchId == TypeOfBatch.CashJournal || TypeOfBatchId == TypeOfBatch.RecurringJournal || TypeOfBatchId == TypeOfBatch.ReversingJournal)
+            {
+                var sumOfControlTotal = (from journal in _journalEntryDocumentUnitRepository.GetAll()
+                             where journal.BatchId == batchId
+                             group journal.ControlTotal by journal.BatchId into g
+                             select new { ControlTotal = g.Sum() }).FirstOrDefault();
+
+                batchAmount = sumOfControlTotal != null ? sumOfControlTotal.ControlTotal.ToString() : "";
+            }
+            else if (TypeOfBatchId == TypeOfBatch.AccountsPayable)
+            {
+
+
+            }
+            else if (TypeOfBatchId == TypeOfBatch.AccountsReceivable)
+            {
+
+
+
+
+            } else if (TypeOfBatchId == TypeOfBatch.Payroll)
+            {
+
+
+
+
+            }
+            else if (TypeOfBatchId == TypeOfBatch.PettyCash)
+            {
+
+
+
+
+            }
+            else if (TypeOfBatchId == TypeOfBatch.CreditCard)
+            {
+
+
+
+
+            }
+
+
+            return batchAmount;
+        }
+
     }
 }

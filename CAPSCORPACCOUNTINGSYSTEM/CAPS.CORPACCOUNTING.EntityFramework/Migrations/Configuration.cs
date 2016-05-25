@@ -35,6 +35,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
             else
             {
                 //You can add seed for tenant databases and use Tenant property...
+              new  InitialTenantDbBuilder(context, Tenant.Id).Create();
             }
 
             context.SaveChanges();

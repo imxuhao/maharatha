@@ -642,12 +642,6 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 new ValueAddedTaxRecoveryUnit(valueaddedtaxtypeid: 29,
                     typeofvatrecoveryid: TypeOfVatRecovery.ExportGoods, isactive: true),
                 new ValueAddedTaxRecoveryUnit(valueaddedtaxtypeid: 30,
-                    typeofvatrecoveryid: TypeOfVatRecovery.GeneralSalesTax, isactive: true),
-                new ValueAddedTaxRecoveryUnit(valueaddedtaxtypeid: 31,
-                    typeofvatrecoveryid: TypeOfVatRecovery.GeneralSalesTax, isactive: true),
-                new ValueAddedTaxRecoveryUnit(valueaddedtaxtypeid: 32,
-                    typeofvatrecoveryid: TypeOfVatRecovery.GeneralSalesTax, isactive: true),
-                new ValueAddedTaxRecoveryUnit(valueaddedtaxtypeid: 33,
                     typeofvatrecoveryid: TypeOfVatRecovery.GeneralSalesTax, isactive: true)
             };
         }

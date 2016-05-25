@@ -10,21 +10,19 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         public static List<TypeOfCurrencyUnit> InitialTypeOfCurrencyList { get; private set; }
 
         private readonly CORPACCOUNTINGDbContext _context;
+        private readonly int _tenantId;
 
-        static DefaultCurrencyCreator()
-        {
-            InitialTypeOfCurrencyList = new List<TypeOfCurrencyUnit>
-            {
-                new TypeOfCurrencyUnit(description:"US Dollar",caption:"",isocurrencycode:"USD",currencysymbol:"$",tenantid:1,organizationunitid:null),
-                new TypeOfCurrencyUnit(description:"Canadian Dollar",caption:"",isocurrencycode:"CAD",currencysymbol:"C$",tenantid:1,organizationunitid:null),
-                new TypeOfCurrencyUnit(description:"Australian Dollar",caption:"",isocurrencycode:"AUD",currencysymbol:"AU$",tenantid:1,organizationunitid:null),
-                new TypeOfCurrencyUnit(description:"Belize Dollar",caption:"",isocurrencycode:"BZD",currencysymbol:"BZ$",tenantid:1,organizationunitid:null) 
-            };
-        }
-
-        public DefaultCurrencyCreator(CORPACCOUNTINGDbContext context)
+        public DefaultCurrencyCreator(CORPACCOUNTINGDbContext context, int tenantId)
         {
             _context = context;
+
+            InitialTypeOfCurrencyList = new List<TypeOfCurrencyUnit>
+            {
+                new TypeOfCurrencyUnit(description:"US Dollar", caption:"", isocurrencycode:"USD", currencysymbol:"$", tenantid:tenantId, organizationunitid:null),
+                new TypeOfCurrencyUnit(description:"Canadian Dollar", caption:"", isocurrencycode:"CAD", currencysymbol:"C$", tenantid:tenantId, organizationunitid:null),
+                new TypeOfCurrencyUnit(description:"Australian Dollar", caption:"", isocurrencycode:"AUD", currencysymbol:"AU$", tenantid:tenantId, organizationunitid:null),
+                new TypeOfCurrencyUnit(description:"Belize Dollar", caption:"", isocurrencycode:"BZD", currencysymbol:"BZ$", tenantid:tenantId, organizationunitid:null)
+            };
         }
 
 
@@ -43,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         private void AddCurrencyListIfNotExists(TypeOfCurrencyUnit currencyList)
         {
-            if (_context.TypeOfCurrencyUnit.Any(l =>l.Description == currencyList.Description))
+            if (_context.TypeOfCurrencyUnit.Any(l => l.Description == currencyList.Description))
             {
                 return;
             }

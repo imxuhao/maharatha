@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using CAPS.CORPACCOUNTING.Accounting;
 using System;
 
 
@@ -60,6 +61,10 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public  long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the BatchAmount field. </summary>
+        public string BatchAmount { get; set; }
+
 
     }
 }

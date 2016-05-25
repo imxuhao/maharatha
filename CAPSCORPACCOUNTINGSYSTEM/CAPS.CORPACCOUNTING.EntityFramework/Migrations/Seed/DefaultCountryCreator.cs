@@ -10,26 +10,25 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         public static List<CountryUnit> InitialCountryList { get; private set; }
 
         private readonly CORPACCOUNTINGDbContext _context;
+        private readonly int _tenantId;
 
-        static DefaultCountryCreator()
-        {
-            InitialCountryList = new List<CountryUnit>
-            {
-                new CountryUnit(6,1),
-                 new CountryUnit(8,1),
-                  new CountryUnit(39,1),
-                   new CountryUnit(169,1),
-                    new CountryUnit(225,1),
-                     new CountryUnit(99,1),
-                      new CountryUnit(74,1),
-                       new CountryUnit(81,1)
-
-            };
-        }
-
-        public DefaultCountryCreator(CORPACCOUNTINGDbContext context)
+        public DefaultCountryCreator(CORPACCOUNTINGDbContext context, int tenantId)
         {
             _context = context;
+            _tenantId = tenantId;
+
+            InitialCountryList = new List<CountryUnit>
+            {
+                new CountryUnit(6,tenantId),
+                 new CountryUnit(8,tenantId),
+                  new CountryUnit(39,tenantId),
+                   new CountryUnit(169,tenantId),
+                    new CountryUnit(225,tenantId),
+                     new CountryUnit(99,tenantId),
+                      new CountryUnit(74,tenantId),
+                       new CountryUnit(81,tenantId)
+
+            };
         }
 
 

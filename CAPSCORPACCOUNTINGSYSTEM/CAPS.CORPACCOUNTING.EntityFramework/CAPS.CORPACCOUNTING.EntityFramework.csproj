@@ -1230,6 +1230,7 @@
     <Compile Include="Migrations\Seed\Host\InitialHostDbBuilder.cs" />
     <Compile Include="Migrations\Seed\InitialDbBuilder.cs" />
     <Compile Include="Migrations\Seed\Tenants\DefaultTenantBuilder.cs" />
+    <Compile Include="Migrations\Seed\Tenants\InitialTenantDbBuilder.cs" />
     <Compile Include="Migrations\Seed\Tenants\TenantRoleAndUserBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

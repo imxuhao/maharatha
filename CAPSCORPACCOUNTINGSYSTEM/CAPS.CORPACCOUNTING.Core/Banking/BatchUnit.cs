@@ -42,6 +42,8 @@ namespace CAPS.CORPACCOUNTING.Banking
         APCheckCycle = 14,
         [Display(Name = "Generic Transaction")]
         GenericTransaction = 15,
+        [Display(Name = "Credit Card")]
+        CreditCard = 16,
 
 
     }

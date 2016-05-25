@@ -52,13 +52,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         public RegionUnit()
         { }
 
-        public RegionUnit(string description,string regionAbbreviation,string stateCode)
+        public RegionUnit(string description,string regionAbbreviation,string stateCode,int tenantId)
         {
             Description = description;
             RegionAbbreviation = regionAbbreviation;
             TypeOfCountryId = null;
             StateCode = StateCode;
-            TenantId = 1;
+            TenantId = tenantId;
         }
     }
 }

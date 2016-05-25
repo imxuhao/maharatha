@@ -28,7 +28,7 @@ Ext.define('Chaching.view.payables.invoices.BatchForm', {
         padding: '20 10 0 20',
         //bodyStyle: { 'background-color': '#F3F5F9' },
         defaults: {
-            labelAlign: 'top',
+           // labelAlign: 'top',
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [{
@@ -70,7 +70,7 @@ Ext.define('Chaching.view.payables.invoices.BatchForm', {
         padding: '20 10 0 20',
         //bodyStyle: { 'background-color': '#F3F5F9' },
         defaults: {
-            labelAlign: 'top',
+           // labelAlign: 'top',
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [ {

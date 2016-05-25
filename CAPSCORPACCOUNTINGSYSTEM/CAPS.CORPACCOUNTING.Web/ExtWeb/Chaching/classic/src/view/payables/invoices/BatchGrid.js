@@ -36,62 +36,81 @@
             inputValue: 'true',
             uncheckedValue: 'false',
             boxLabelAlign: 'before',
-            width:110
+            width: 110
             //ui: 'default',
             //boxLabelCls: 'checkboxLabel'
+        },
+        listeners: {
+            change : 'onModuleChange'
         },
 
         items: [
     {
         //xtype: 'checkboxfield',
         name: 'BatchType',
+        itemId : 'allModuleId',
         boxLabel: app.localize('ShowAllModules') + ":",
-        inputValue: 'All'
+        inputValue: 'All',
+        width: 130,
+        listeners: {
+            change: 'showAllModule'
+        }
     },
       {
           //xtype: 'checkboxfield',
           name: 'BatchType',
+          itemId: 'journalModuleId',
           boxLabel: app.localize('Journal') + ":",
           inputValue: '1,2,10,11',
-          padding: '0 0 0 5px'
+          width: 70,
+          padding: '0 0 0 10px'
       },
       {
           //xtype: 'checkboxfield',
           name: 'BatchType',
+          itemId: 'accountsPayableModuleId',
           boxLabel: app.localize('AccountsPayable') + ":",
           inputValue: '3',
-          padding: '0 0 0 5px'
+          width: 130,
+          padding: '0 0 0 10px'
       }
       ,
       {
           //xtype: 'checkboxfield',
           name: 'BatchType',
+          itemId: 'receivablesModuleId',
           boxLabel: app.localize('Receivables') + ":",
           inputValue: '4',
-          padding: '0 0 0 5px'
+          width: 100,
+          padding: '0 0 0 10px'
       }
       ,
       {
           //xtype: 'checkboxfield',
           name: 'BatchType',
+          itemId: 'pettyCashModuleId',
           boxLabel: app.localize('PettyCash') + ":",
           inputValue: '6,7,9',
-          labelWidth:100,
-          padding: '0 0 0 5px'
+          width: 90,
+          padding: '0 0 0 10px'
       },
       {
           //xtype: 'checkboxfield',
           name: 'BatchType',
+          itemId: 'payrollModuleId',
           boxLabel: app.localize('Payroll') + ":",
           inputValue: '5',
-          padding: '0 0 0 5px'
+          width: 70,
+          padding: '0 0 0 10px'
       },
       {
           //xtype: 'checkboxfield',
           name: 'BatchType',
+          itemId: 'creditCardModuleId',
           boxLabel: app.localize('CreditCard') + ":",
           inputValue: '',
-          padding: '0 0 0 5px'
+          width: 100,
+          padding: '0 0 0 10px'
       }
 
         ]

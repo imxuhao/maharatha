@@ -14,7 +14,7 @@ Ext.define('Chaching.view.languages.LanguagesForm', {
     defferedValueSetDelay: 5,
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
-        labelAlign: 'top',
+        //labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
     defaultFocus: 'textfield#tenancyName',

@@ -14,7 +14,7 @@ Ext.define('Chaching.view.users.UsersForm', {
     autoScroll: true,
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
-        labelAlign: 'top'
+        labelAlign: 'left'
     },
     defaultFocus: 'textfield#name',
     items: [{

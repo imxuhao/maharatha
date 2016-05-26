@@ -39,7 +39,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                 itemId: 'subAccountNumber',
                 allowBlank: false,
                 labelWidth : 150,
-                fieldLabel: app.localize('SubAccountNumber').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                fieldLabel: app.localize('SubAccountNumber').initCap() ,
                 width: '100%',
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('MandatoryField')
@@ -61,7 +61,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
         , {
             xtype: 'combobox',
             name: 'typeofSubAccountId',
-            fieldLabel: app.localize('TypeofSubAccount').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('TypeofSubAccount').initCap() ,
             width: '100%',
             allowBlank: false,
             labelWidth: 150,
@@ -102,7 +102,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                  name: 'description',
                  itemId: 'description',
                  allowBlank: false,
-                 fieldLabel: app.localize('Description').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                 fieldLabel: app.localize('Description').initCap(),
                  width: '100%',
                  ui: 'fieldLabelTop',
                  emptyText: app.localize('MandatoryField')

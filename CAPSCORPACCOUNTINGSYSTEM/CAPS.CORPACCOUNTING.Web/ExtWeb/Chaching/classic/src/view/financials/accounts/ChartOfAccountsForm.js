@@ -39,7 +39,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'caption',
             itemId: 'caption',
             allowBlank: false,
-            fieldLabel: app.localize('Caption').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('Caption').initCap() ,
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')
@@ -48,7 +48,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'description',
             itemId: 'description',
             allowBlank: false,
-            fieldLabel: app.localize('description').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('description').initCap() ,
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')

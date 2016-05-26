@@ -32,7 +32,8 @@
                     columnWidth: .33,
                     padding: '20 10 0 20',
                     defaults: {
-                        labelAlign: 'top',
+                        // labelAlign: 'top',
+                        labelWidth : 120,
                         blankText: app.localize('MandatoryToolTipText')
                     },
                     items: [{
@@ -44,7 +45,7 @@
                         name: 'lastName',
                         itemId: 'lastName',
                         allowBlank: false,
-                        fieldLabel: app.localize('CompanyName').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                        fieldLabel: app.localize('CompanyName').initCap(),
                         width: '100%',
                         ui: 'fieldLabelTop',
                         emptyText: app.localize('MandatoryField')
@@ -63,7 +64,7 @@
                     columnWidth: .33,
                     padding: '20 10 0 20',
                     defaults: {
-                        labelAlign: 'top',
+                       // labelAlign: 'top',
                         blankText: app.localize('MandatoryToolTipText')
                     },
                     items: [{
@@ -86,13 +87,14 @@
                                 columnWidth: .33,
                                 padding: '20 10 0 20',
                                 defaults: {
-                                    labelAlign: 'top',
+                                   // labelAlign: 'top',
                                     blankText: app.localize('MandatoryToolTipText')
                                 },
                                 items: [{
                                     xtype: 'combobox',
                                     name: 'typeofVendorId',
-                                    fieldLabel: app.localize('Type').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                    fieldLabel: app.localize('Type').initCap(),
+                                    labelWidth : 70,
                                     width: '100%',
                                     ui: 'fieldLabelTop',
                                     displayField: 'typeofvendor',
@@ -137,7 +139,7 @@
                        columnWidth: .4,
                        padding: '20 10 0 20',
                        defaults: {
-                           labelAlign: 'top',
+                           //labelAlign: 'top',
                            blankText: app.localize('MandatoryToolTipText')
                        },
                        items: [
@@ -166,7 +168,7 @@
                        columnWidth: .3,
                        padding: '20 10 0 20',
                        defaults: {
-                           labelAlign: 'top',
+                          // labelAlign: 'top',
                            blankText: app.localize('MandatoryToolTipText')
                        },
                        items: [
@@ -196,7 +198,7 @@
                        columnWidth: .3,
                        padding: '20 10 0 20',
                        defaults: {
-                           labelAlign: 'top',
+                          // labelAlign: 'top',
                            blankText: app.localize('MandatoryToolTipText')
                        },
                        items: [

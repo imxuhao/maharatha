@@ -13,6 +13,6 @@
         }
     },
     idPropertyField: 'batchId',//important to set for add/update of records
-    groupField: 'typeOfBatch',
-    //groupHeaderTpl: '{ typeOfBatch }'
+    groupField: 'typeOfBatchDummy',
+    groupHeaderTpl: '{ typeOfBatch }'
  });

@@ -660,8 +660,10 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             model = gridStore.getModel(),
             entityName = model.$config.values.searchEntityName;
         var isEnum = field.isEnum;;
-        if ((field.xtype === "combo" || field.xtype === "combobox") && field.forceSelection) {
-            filter.operator = "=";
+        if ((field.xtype === "combo" || field.xtype === "combobox"||field.xtype==="tagfield") && field.forceSelection) {
+            if (field.xtype==="tagfield")
+                filter.operator = "in";
+            else filter.operator = "=";
             if (field && field.searchProperty) {
                 filter.property = field.searchProperty;
                 fieldName = field.searchProperty;
@@ -1003,7 +1005,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         if (!v) {
             return { value: '' };
         }
-        if (typeof(v)==='number') {
+        if (typeof (v) === 'number' || typeof (v)==="object") {
             v = v.toString();
         }
         va = v.split(re);

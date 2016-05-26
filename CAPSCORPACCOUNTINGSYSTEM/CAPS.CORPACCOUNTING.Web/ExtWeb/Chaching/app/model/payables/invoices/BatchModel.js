@@ -19,6 +19,12 @@
         { name: 'typeOfInactiveStatusId', type: "int", defaultVaule: null, convert: nullHandler },
         { name: 'typeOfInactiveStatus', type: 'string' },
         { name: 'isBatchFinalized', type: 'boolean' },
-        { name: 'isUniversal', type: 'boolean' }
+        { name: 'isUniversal', type: 'boolean' },
+        { name: 'post', type: 'boolean' },
+        {
+             name: 'typeOfBatchDummy', type: 'string', convert: function (value, record) {
+                 return record.get('typeOfBatch');
+             }
+         }
     ]
 });

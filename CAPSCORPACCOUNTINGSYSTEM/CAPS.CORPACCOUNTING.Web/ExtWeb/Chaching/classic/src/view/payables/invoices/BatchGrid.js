@@ -22,99 +22,12 @@
         startCollapsed: false
     },
     headerButtonsConfig: [
-        //{
-        //xtype: 'displayfield',
-        //value: abp.localization.localize("BatchPosting"),
-        //ui: 'headerTitle'
-        //},
-    {
-        xtype: 'checkboxgroup',
-        border: false,
-        columns: 7,
-        vertical: false,
-        defaults: {
-            inputValue: 'true',
-            uncheckedValue: 'false',
-            boxLabelAlign: 'before',
-            width: 110
-            //ui: 'default',
-            //boxLabelCls: 'checkboxLabel'
+        {
+        xtype: 'displayfield',
+        value: abp.localization.localize("BatchPosting"),
+        ui: 'headerTitle'
         },
-        listeners: {
-            change : 'onModuleChange'
-        },
-
-        items: [
-    {
-        //xtype: 'checkboxfield',
-        name: 'BatchType',
-        itemId : 'allModuleId',
-        boxLabel: app.localize('ShowAllModules') + ":",
-        inputValue: 'All',
-        width: 130,
-        listeners: {
-            change: 'showAllModule'
-        }
-    },
-      {
-          //xtype: 'checkboxfield',
-          name: 'BatchType',
-          itemId: 'journalModuleId',
-          boxLabel: app.localize('Journal') + ":",
-          inputValue: '1,2,10,11',
-          width: 70,
-          padding: '0 0 0 10px'
-      },
-      {
-          //xtype: 'checkboxfield',
-          name: 'BatchType',
-          itemId: 'accountsPayableModuleId',
-          boxLabel: app.localize('AccountsPayable') + ":",
-          inputValue: '3',
-          width: 130,
-          padding: '0 0 0 10px'
-      }
-      ,
-      {
-          //xtype: 'checkboxfield',
-          name: 'BatchType',
-          itemId: 'receivablesModuleId',
-          boxLabel: app.localize('Receivables') + ":",
-          inputValue: '4',
-          width: 100,
-          padding: '0 0 0 10px'
-      }
-      ,
-      {
-          //xtype: 'checkboxfield',
-          name: 'BatchType',
-          itemId: 'pettyCashModuleId',
-          boxLabel: app.localize('PettyCash') + ":",
-          inputValue: '6,7,9',
-          width: 90,
-          padding: '0 0 0 10px'
-      },
-      {
-          //xtype: 'checkboxfield',
-          name: 'BatchType',
-          itemId: 'payrollModuleId',
-          boxLabel: app.localize('Payroll') + ":",
-          inputValue: '5',
-          width: 70,
-          padding: '0 0 0 10px'
-      },
-      {
-          //xtype: 'checkboxfield',
-          name: 'BatchType',
-          itemId: 'creditCardModuleId',
-          boxLabel: app.localize('CreditCard') + ":",
-          inputValue: '',
-          width: 100,
-          padding: '0 0 0 10px'
-      }
-
-        ]
-    }, '->', {
+        '->', {
         xtype: 'button',
         scale: 'small',
         ui: 'actionButton',
@@ -144,6 +57,10 @@
     columns: [
          {
              text: app.localize('Posting'),
+             dataIndex: 'post',
+             sortable: false,
+             groupable: false,
+             hideable: false,
              width: '13%',
              xtype: 'checkcolumn'
 
@@ -174,11 +91,10 @@
               renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
               filterField: {
                   xtype: 'dateSearchField',
-                  dataIndex: 'postingDate',
                   width: '100%'
               },
               editor: {
-                  xtype: 'textfield',
+                  xtype: 'datefield',
                   name: 'postingDate'
               }
           }
@@ -207,8 +123,37 @@
               sortable: false,
               groupable: false,
               width: '13%',
-          }
-           , {
+          } , {
+              xtype: 'gridcolumn',
+              text: app.localize('Module'),
+              dataIndex: 'typeOfBatch',
+              sortable: true,
+              groupable: false,
+              hidden:false,
+              width: '18%',
+              filterField: {
+                  xtype: 'tagfield',
+                  valueField: 'typeOfBatchId',
+                  displayField: 'typeOfBatch',
+                  queryMode : 'local',
+                  width: '100%',
+                  isEnum: true,
+                  forceSelection: true,
+                  searchProperty : 'typeOfBatchId',
+                  store: {
+                      fields: [{ name: 'typeOfBatchId' }, { name: 'typeOfBatch' }],
+                      data: [
+                          //{ typeOfBatch: app.localize('ShowAllModules'), typeOfBatchId: '0' }
+                          { typeOfBatch: app.localize('Journal'), typeOfBatchId: '1,2,10,11' }
+                          , { typeOfBatch: app.localize('AccountsPayable'), typeOfBatchId: '3' }
+                          , { typeOfBatch: app.localize('Receivables'), typeOfBatchId: '4' }
+                          , { typeOfBatch: app.localize('PettyCash'), typeOfBatchId: '6,7,9' }
+                          , { typeOfBatch: app.localize('Payroll'), typeOfBatchId: '5' }
+                          , { typeOfBatch: app.localize('CreditCard'), typeOfBatchId: '16' }
+                      ]
+                  }
+              }
+          } , {
                xtype: 'gridcolumn',
                text: app.localize('RetainBatch'),
                dataIndex: 'isRetained',

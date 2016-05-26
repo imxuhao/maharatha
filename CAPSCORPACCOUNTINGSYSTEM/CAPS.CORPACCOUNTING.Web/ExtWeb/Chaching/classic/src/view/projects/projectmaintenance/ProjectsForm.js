@@ -68,7 +68,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 columnWidth: .33,
                                 padding: '20 10 0 20',
                                 defaults: {
-                                    labelAlign: 'top',
+                                   // labelAlign: 'top',
                                     blankText: app.localize('MandatoryToolTipText')
                                 },
                                 items: [
@@ -77,7 +77,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         name: 'jobNumber',
                                         itemId: 'jobNumber',
                                         allowBlank: false,
-                                        fieldLabel: app.localize('JobNumber').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                        fieldLabel: app.localize('JobNumber').initCap(),
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         emptyText: app.localize('MandatoryField')
@@ -86,7 +86,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         name: 'caption',
                                         itemId: 'caption',
                                         allowBlank: false,
-                                        fieldLabel: app.localize('JobName') + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                        fieldLabel: app.localize('JobName'),
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         emptyText: app.localize('MandatoryField')
@@ -101,7 +101,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         displayField: 'typeofProjectName',
                                         width: '100%',
                                         ui: 'fieldLabelTop',
-                                        fieldLabel: app.localize('ProjectType') + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                        fieldLabel: app.localize('ProjectType') ,
                                         emptyText: app.localize('MandatoryField')
                                     }
                                 ]
@@ -109,7 +109,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 columnWidth: .33,
                                 padding: '20 10 0 20',
                                 defaults: {
-                                    labelAlign: 'top',
+                                    //labelAlign: 'top',
+                                    labelWidth : 120,
                                     blankText: app.localize('MandatoryToolTipText')
                                 },
                                 items: [
@@ -124,7 +125,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         allowBlank: false,
-                                        fieldLabel: app.localize('BudgetFormat') + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                        fieldLabel: app.localize('BudgetFormat') ,
                                         emptyText: app.localize('MandatoryField')
                                     }, {
                                         xtype: 'combobox',
@@ -157,7 +158,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 columnWidth: .33,
                                 padding: '20 10 0 20',
                                 defaults: {
-                                    labelAlign: 'top',
+                                   // labelAlign: 'top',
                                     blankText: app.localize('MandatoryToolTipText')
                                 },
                                 items: [
@@ -260,14 +261,15 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
-                            ui: 'fieldLabelTop',
-                            labelAlign: 'top'
+                            ui: 'fieldLabelTop'//,
+                           // labelAlign: 'top'
                         },
                         items:[
                         {
                             xtype: 'datefield',
                             name: 'bidDate',
                             itemId: 'bidDate',
+                            labelWidth : 80,
                             format:Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                             emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                             fieldLabel: app.localize('BidDate')
@@ -277,14 +279,15 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
-                            ui: 'fieldLabelTop',
-                            labelAlign: 'top'
+                            ui: 'fieldLabelTop'//,
+                            //labelAlign: 'top'
                         },
                         items: [
                             {
                                 xtype: 'datefield',
                                 name: 'awardDate',
                                 itemId: 'awardDate',
+                                labelWidth: 80,
                                 format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                                 emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                                 fieldLabel: app.localize('AwardDate')
@@ -294,7 +297,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         columnWidth: .25,
                         padding: '0 10 0 20',
                         defaults: {
-                            labelAlign: 'top',
+                           // labelAlign: 'top',
                             blankText: app.localize('MandatoryToolTipText')
                         },
                         items: [
@@ -302,6 +305,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             xtype: 'textfield',
                             name: 'productOwner',
                             itemId: 'productOwner',
+                            labelWidth: 80,
                             ui: 'fieldLabelTop',
                             width:'100%',
                             fieldLabel: app.localize('Bidder'),
@@ -337,8 +341,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
-                            ui: 'fieldLabelTop',
-                            labelAlign: 'top'
+                            labelWidth : 150,
+                            ui: 'fieldLabelTop'//,
+                           // labelAlign: 'top'
                         },
                         items:[
                         {
@@ -392,8 +397,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
-                            ui: 'fieldLabelTop',
-                            labelAlign: 'top'
+                            labelWidth : 120,
+                            ui: 'fieldLabelTop'//,
+                           // labelAlign: 'top'
                         },
                         items: [
                             {
@@ -407,7 +413,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 name: 'agencyAddress',
                                 itemId: 'agencyAddress',
                                 resizable: false,
-                                height:134,
+                              //  height:134,
                                 fieldLabel: app.localize('Address'),
                                 emptyText: app.localize('ToolTipAgencyAddress')
                             }, {
@@ -424,7 +430,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop',
-                            labelAlign: 'top'
+                            labelWidth : 170
+                            //labelAlign: 'top'
                         },
                         items: [{
                             xtype: 'hiddenfield',
@@ -476,7 +483,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             defaults: {
                                 width: '100%',
                                 ui: 'fieldLabelTop',
-                                labelAlign: 'top',
+                                //labelAlign: 'top',
+                                labelWidth : 150,
                                 xtype: 'numberfield',
                                 hideTrigger: true,
                                 minValue: 0,
@@ -499,8 +507,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             padding: '0 10 0 20',
                             defaults: {
                                 width: '100%',
-                                ui: 'fieldLabelTop',
-                                labelAlign: 'top'
+                                ui: 'fieldLabelTop'//,
+                               // labelAlign: 'top'
                             },
                             items: [
                                 {///TODO: Rplace with combo once terms section is completed on contracts tab
@@ -567,7 +575,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop',
-                            labelAlign: 'top'
+                            labelWidth : 180
+                            //labelAlign: 'top'
                         },
                         items:[
                         {
@@ -631,7 +640,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop',
-                            labelAlign: 'top'
+                            labelWidth : 150
+                            //labelAlign: 'top'
                         },
                         items: [
                             {
@@ -672,8 +682,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop',
-
-                            labelAlign: 'top'
+                            labelWidth : 150
+                           // labelAlign: 'top'
                         },
                         items:[
                        {
@@ -727,8 +737,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
-                            ui: 'fieldLabelTop',
-                            labelAlign: 'top'
+                            ui: 'fieldLabelTop'//,
+                            //labelAlign: 'top'
                         },
                         items:[
                         {

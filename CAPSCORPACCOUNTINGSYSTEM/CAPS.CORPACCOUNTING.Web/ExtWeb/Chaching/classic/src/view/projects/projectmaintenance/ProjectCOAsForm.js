@@ -26,7 +26,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
         padding: '20 10 0 20',
         //bodyStyle: { 'background-color': '#F3F5F9' },
         defaults: {
-            labelAlign: 'top',
+           // labelAlign: 'top',
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [{
@@ -71,7 +71,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
         padding: '20 10 0 20',
         //bodyStyle: { 'background-color': '#F3F5F9' },
         defaults: {
-            labelAlign: 'top',
+            //labelAlign: 'top',
+            labelWidth : 160,
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [{

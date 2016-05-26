@@ -26,7 +26,8 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
         columnWidth: .5,
         padding: '20 10 0 20',     
         defaults: {
-            labelAlign: 'top',
+            //labelAlign: 'top',
+            labelWidth : 120,
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [{
@@ -56,7 +57,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
             columnWidth: .5,
             padding: '20 10 0 20',          
             defaults: {
-                labelAlign: 'top',
+               // labelAlign: 'top',
                 blankText: app.localize('MandatoryToolTipText')
             },
             items: [

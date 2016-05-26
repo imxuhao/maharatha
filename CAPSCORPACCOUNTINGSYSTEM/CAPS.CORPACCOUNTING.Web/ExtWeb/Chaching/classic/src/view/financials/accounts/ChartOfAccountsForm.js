@@ -31,7 +31,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
         padding: '20 10 0 20',
         //bodyStyle: { 'background-color': '#F3F5F9' },
         defaults: {
-            labelAlign: 'top',
+           // labelAlign: 'top',
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [{
@@ -76,7 +76,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
         padding: '20 10 0 20',
         //bodyStyle: { 'background-color': '#F3F5F9' },
         defaults: {
-            labelAlign: 'top',
+           // labelAlign: 'top',
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [{
@@ -84,6 +84,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'standardGroupTotalId',
             fieldLabel: app.localize('StdGroupTotal').initCap(),
             width: '100%',
+            labelWidth: 140,
             ui: 'fieldLabelTop',
             emptyText: app.localize('StdGroupTotal'),
             displayField: 'standardGroupTotal',
@@ -96,6 +97,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'linkChartOfAccountID',
             fieldLabel: app.localize('ConvertToNewCOA').initCap(),
             width: '100%',
+            labelWidth: 140,
             ui: 'fieldLabelTop',
             emptyText: app.localize('ConvertToNewCOA'),
             displayField: 'linkChartOfAccount',

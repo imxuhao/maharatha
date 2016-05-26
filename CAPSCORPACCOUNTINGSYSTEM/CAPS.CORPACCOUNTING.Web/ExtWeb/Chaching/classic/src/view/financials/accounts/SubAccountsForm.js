@@ -29,7 +29,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
         columnWidth: .5,
         padding: '20 10 0 20',
         defaults: {
-            labelAlign: 'top',
+            //labelAlign: 'top',
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [
@@ -38,6 +38,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                 name: 'subAccountNumber',
                 itemId: 'subAccountNumber',
                 allowBlank: false,
+                labelWidth : 150,
                 fieldLabel: app.localize('SubAccountNumber').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
                 width: '100%',
                 ui: 'fieldLabelTop',
@@ -50,6 +51,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
             name: 'caption',
             itemId: 'caption',
             allowBlank: false,
+            labelWidth: 150,
             fieldLabel: app.localize('Caption').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
@@ -62,6 +64,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
             fieldLabel: app.localize('TypeofSubAccount').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
             width: '100%',
             allowBlank: false,
+            labelWidth: 150,
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField'),
             displayField: 'typeofSubAccount',
@@ -90,7 +93,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
         padding: '20 10 0 20',
         //bodyStyle: { 'background-color': '#F3F5F9' },
         defaults: {
-            labelAlign: 'top',
+            //labelAlign: 'top',
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [

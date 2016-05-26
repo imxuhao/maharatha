@@ -194,6 +194,8 @@
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
+    <Compile Include="Financials\Preferences\FiscalPeriodUnitManager.cs" />
+    <Compile Include="Financials\Preferences\FiscalYearUnitManager.cs" />
     <Compile Include="JobCosting\JobLocationUnitManager.cs" />
     <Compile Include="JobCosting\JobPORangeAllocationUnit.cs" />
     <Compile Include="JobCosting\JobPORangeAllocationUnitManager.cs" />
@@ -236,8 +238,8 @@
     <Compile Include="Common\ErrorMessageUnit.cs" />
     <Compile Include="Preferencees\PreferenceChoiceGroupUnit.cs" />
     <Compile Include="Preferencees\SystemPreferenceUnit.cs" />
-    <Compile Include="JobCosting\FiscalPeriodUnit.cs" />
-    <Compile Include="JobCosting\FiscalYearUnit.cs" />
+    <Compile Include="Financials\Preferences\FiscalPeriodUnit.cs" />
+    <Compile Include="Financials\Preferences\FiscalYearUnit.cs" />
     <Compile Include="JobCosting\JobEFCUnit.cs" />
     <Compile Include="JobCosting\JobTypeUnit.cs" />
     <Compile Include="JobCosting\JobWrapAmexLogUnit.cs" />

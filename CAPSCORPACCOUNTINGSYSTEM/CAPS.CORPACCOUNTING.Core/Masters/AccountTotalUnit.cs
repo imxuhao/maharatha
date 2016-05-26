@@ -5,6 +5,7 @@ using Abp.Organizations;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Accounting;
 using System;
+using CAPS.CORPACCOUNTING.Financials.Preferences;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {

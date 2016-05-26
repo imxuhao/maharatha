@@ -435,6 +435,16 @@
     <Compile Include="Payables\Dto\CreateAPHeaderTransactionsInputUnit.cs" />
     <Compile Include="Payables\Dto\UpdateAPHeaderTransactionsInputUnit.cs" />
     <Compile Include="Payables\IAPHeaderTransactionsAppService.cs" />
+    <Compile Include="Financials\Preferences\Dto\CreateFiscalPeriodUnitInput.cs" />
+    <Compile Include="Financials\Preferences\Dto\FiscalPeriodUnitDto.cs" />
+    <Compile Include="Financials\Preferences\Dto\FiscalYearUnitDto.cs" />
+    <Compile Include="Financials\Preferences\Dto\UpdateFiscalPeriodUnitInput.cs" />
+    <Compile Include="Financials\Preferences\Dto\UpdateFiscalYearUnitInput.cs" />
+    <Compile Include="Financials\Preferences\Dto\CreateFiscalYearUnitInput.cs" />
+    <Compile Include="Financials\Preferences\FiscalPeriodAppService.cs" />
+    <Compile Include="Financials\Preferences\FiscalYearAppService.cs" />
+    <Compile Include="Financials\Preferences\IFiscalPeriodAppService.cs" />
+    <Compile Include="Financials\Preferences\IFiscalYearAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sessions\CustomAppSession.cs" />
     <Compile Include="Sessions\Dto\GetCurrentLoginInformationsOutput.cs" />

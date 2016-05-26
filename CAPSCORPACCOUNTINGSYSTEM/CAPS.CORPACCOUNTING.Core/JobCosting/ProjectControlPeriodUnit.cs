@@ -4,6 +4,7 @@ using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 using System;
 using CAPS.CORPACCOUNTING.Banking;
+using CAPS.CORPACCOUNTING.Financials.Preferences;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {

@@ -3,15 +3,16 @@ using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 using System;
+using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Banking;
 
-namespace CAPS.CORPACCOUNTING.JobCosting
+namespace CAPS.CORPACCOUNTING.Financials.Preferences
 {
     /// <summary>
     /// FiscalYear is the table name in lajit
     /// </summary>
     [Table("CAPS_FiscalYear")]
-    public class FiscalYearUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class FiscalYearUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
     {
         #region Class Property Declarations
 
@@ -61,9 +62,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long? OrganizationUnitId { get; set; }
+        public virtual long OrganizationUnitId { get; set; }
 
         #endregion
+        public List<FiscalPeriodUnit> FiscalPeriodList { get; set; }
         public FiscalYearUnit()
         {
             IsYearOpen = false;

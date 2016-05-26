@@ -17,6 +17,7 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Auditing;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Dependency;
+using CAPS.CORPACCOUNTING.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -62,6 +63,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry_Create)]
         public async Task<IdOutputDto<long>> CreateJournalEntryDocumentUnit(CreateJournalEntryDocumentInputUnit input)
         {
             var journalEntryDocumentUnit = input.MapTo<JournalEntryDocumentUnit>();
@@ -77,6 +79,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
+        [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry_Edit)]
         public async Task UpdateJournalEntryDocumentUnit(UpdateJournalEntryDocumentInputUnit input)
         {
             var journalEntryDocumentUnit = await _journalEntryDocumentUnitRepository.GetAsync(input.AccountingDocumentId);
@@ -143,47 +146,55 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry_Delete)]
         public async Task DeleteJournalEntryDocumentUnit(IdInput input)
         {
             await _journalEntryDocumentUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
         [UnitOfWork]
+        [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry)]
         public async Task<PagedResultOutput<JournalEntryDocumentUnitDto>> GetJournalEntryDocumentUnits(SearchInputDto input)
         {
 
+            using (_unitOfWorkManager.Current.SetTenantId(1))
+            {
 
 
-            var query = from journals in _journalEntryDocumentUnitRepository.GetAll()
-                        join batch in _batchUnitRepository.GetAll() on journals.BatchId equals batch.Id
+                var query = from journals in _journalEntryDocumentUnitRepository.GetAll()
+                    join batch in _batchUnitRepository.GetAll() on journals.BatchId equals batch.Id
                         into batchunit
-                        from batchunits in batchunit.DefaultIfEmpty()
-                        select new { Journals = journals, BatchName = batchunits.Description };
+                    from batchunits in batchunit.DefaultIfEmpty()
+                    join user in _userRepository.GetAll() on journals.CreatorUserId equals user.Id
+                    select new {Journals = journals, BatchName = batchunits.Description, UserName = user.Name};
 
-            if (!ReferenceEquals(input.Filters, null))
-            {
-                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
-                if (!ReferenceEquals(mapSearchFilters, null))
-                    query = Helper.CreateFilters(query, mapSearchFilters);
+                if (!ReferenceEquals(input.Filters, null))
+                {
+                    SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                    if (!ReferenceEquals(mapSearchFilters, null))
+                        query = Helper.CreateFilters(query, mapSearchFilters);
+                }
+                query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
+                    p => p.Journals.OrganizationUnitId == input.OrganizationUnitId);
+
+                var resultCount = await query.CountAsync();
+                var results = await query
+                    .AsNoTracking()
+                    .OrderBy(Helper.GetSort("Journals.Description ASC", input.Sorting))
+                    .PageBy(input)
+                    .ToListAsync();
+
+
+
+                return new PagedResultOutput<JournalEntryDocumentUnitDto>(resultCount, results.Select(item =>
+                {
+                    var dto = item.Journals.MapTo<JournalEntryDocumentUnitDto>();
+                    dto.BatchName = item.BatchName;
+                    dto.JournalType = item.Journals.JournalTypeId.ToDisplayName();
+                    dto.AccountingDocumentId = item.Journals.Id;
+                    return dto;
+                }).ToList());
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.Journals.OrganizationUnitId == input.OrganizationUnitId);
-
-            var resultCount = await query.CountAsync();
-            var results = await query
-                .AsNoTracking()
-                .OrderBy(Helper.GetSort("Journals.Description ASC", input.Sorting))
-                .PageBy(input)
-                .ToListAsync();
-
-
-            return new PagedResultOutput<JournalEntryDocumentUnitDto>(resultCount, results.Select(item =>
-            {
-                var dto = item.Journals.MapTo<JournalEntryDocumentUnitDto>();
-                dto.BatchName = item.BatchName;
-                dto.JournalType = item.Journals.JournalTypeId.ToDisplayName();
-                dto.AccountingDocumentId = item.Journals.Id;
-                return dto;
-            }).ToList());
 
         }
 

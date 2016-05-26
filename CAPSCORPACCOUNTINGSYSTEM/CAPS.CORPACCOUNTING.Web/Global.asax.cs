@@ -25,6 +25,7 @@ namespace CAPS.CORPACCOUNTING.Web
                 );
             
             base.Application_Start(sender, e);
+            
         }
     }
 }

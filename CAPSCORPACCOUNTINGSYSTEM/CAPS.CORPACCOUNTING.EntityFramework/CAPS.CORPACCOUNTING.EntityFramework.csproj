@@ -1207,6 +1207,10 @@
     <Compile Include="Migrations\201605160958082_Modify_JournalEntryDocument_Table.Designer.cs">
       <DependentUpon>201605160958082_Modify_JournalEntryDocument_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605260849454_Modify_FiscalYear_FiscalPeriod_Table.cs" />
+    <Compile Include="Migrations\201605260849454_Modify_FiscalYear_FiscalPeriod_Table.Designer.cs">
+      <DependentUpon>201605260849454_Modify_FiscalYear_FiscalPeriod_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultCountryCreator.cs" />
@@ -2040,6 +2044,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605160958082_Modify_JournalEntryDocument_Table.resx">
       <DependentUpon>201605160958082_Modify_JournalEntryDocument_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605260849454_Modify_FiscalYear_FiscalPeriod_Table.resx">
+      <DependentUpon>201605260849454_Modify_FiscalYear_FiscalPeriod_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

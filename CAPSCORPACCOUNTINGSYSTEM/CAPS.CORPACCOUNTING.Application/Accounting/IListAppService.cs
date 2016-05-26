@@ -42,5 +42,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
        /// <param name="input"></param>
        /// <returns></returns>
        Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input);
+        /// <summary>
+        /// GetTypeof1099List
+        /// </summary>
+        /// <returns></returns>
+       List<NameValueDto> GetTypeof1099T4List();
     }
 }

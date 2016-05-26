@@ -21,6 +21,7 @@ using CAPS.CORPACCOUNTING.ChargeEntry;
 using CAPS.CORPACCOUNTING.AccountReceivable;
 using CAPS.CORPACCOUNTING.Preferencees;
 using CAPS.CORPACCOUNTING.Common;
+using CAPS.CORPACCOUNTING.Financials.Preferences;
 using CAPS.CORPACCOUNTING.Localization;
 using CAPS.CORPACCOUNTING.Security;
 

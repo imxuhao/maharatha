@@ -53,6 +53,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<NameValueDto>> GetJobOrDivisionList(AutoSearchInput input)
         {
             var Joblist = await (from job in _jobUnitRepository.GetAll()
+                                 .Where(p=>p.TypeOfJobStatusId != ProjectStatus.Closed)
                                     .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.JobNumber.Contains(input.Query))
                                     .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
                                  select new NameValueDto { Name = job.Caption + " " + job.JobNumber, Value = job.Id.ToString() })
@@ -173,6 +174,16 @@ namespace CAPS.CORPACCOUNTING.Accounting
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return taxCreditList;
+        }
+
+
+        /// <summary>
+        /// Get Typeof1099T4
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeof1099T4List()
+        {
+            return EnumList.GetTypeof1099T4List();
         }
     }
 }

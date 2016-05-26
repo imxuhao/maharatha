@@ -7,10 +7,9 @@ using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
-using Abp.UI;
+using AutoMapper;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
-using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Financials.Preferences.Dto;
 
 namespace CAPS.CORPACCOUNTING.Financials.Preferences
@@ -90,12 +89,16 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         /// <returns></returns>
         public async Task UpdateFiscalPeriodUnit(UpdateFiscalPeriodUnitInput input)
         {
-            var fiscalPeriodUnit = input.MapTo<FiscalPeriodUnit>();
-            fiscalPeriodUnit.Id = input.FiscalPeriodId;
+            var fiscalPeriodUnit = await _fiscalPeriodUnitRepository.GetAsync(input.FiscalPeriodId);
+            Mapper.CreateMap<UpdateFiscalPeriodUnitInput, FiscalPeriodUnit>()
+                    .ForMember(u => u.Id, ap => ap.MapFrom(src => src.FiscalPeriodId));
+            Mapper.Map(input, fiscalPeriodUnit);
+
             #region Convering Month and Year to StartDateof Period and EndDate of Period
-            input.PeriodStartDate = new DateTime(input.Year, input.Month, 1);
-            input.PeriodEndDate = new DateTime(input.Year, input.Month, DateTime.DaysInMonth(input.Year, input.Month));
+            fiscalPeriodUnit.PeriodStartDate = new DateTime(input.Year, input.Month, 1);
+            fiscalPeriodUnit.PeriodEndDate = new DateTime(input.Year, input.Month, DateTime.DaysInMonth(input.Year, input.Month));
             #endregion
+
             await _fiscalPeriodUnitManager.UpdateAsync(fiscalPeriodUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }

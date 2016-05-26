@@ -12,6 +12,7 @@ using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Financials.Preferences.Dto;
 using Abp.UI;
+using AutoMapper;
 
 
 namespace CAPS.CORPACCOUNTING.Financials.Preferences
@@ -128,10 +129,15 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             if (input.UpdateFiscalPeriodUnits.Count != input.UpdateFiscalPeriodUnits.Select(c => new { c.Month, c.Year }).Distinct().Count())
                 throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
 
-            var fiscalYearUnit = input.MapTo<FiscalYearUnit>();
-            fiscalYearUnit.Id = input.FiscalYearId;
+            var fiscalYearUnit = await _fiscalYearUnitRepository.GetAsync(input.FiscalYearId);
+            Mapper.CreateMap<UpdateFiscalPeriodUnitInput, FiscalYearUnit>()
+                    .ForMember(u => u.Id, ap => ap.MapFrom(src => src.FiscalYearId));
+            Mapper.Map(input, fiscalYearUnit);
+
             await _fiscalYearUnitManager.UpdateAsync(fiscalYearUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
+
+            
             foreach (var updateFiscalPeriodUnit in input.UpdateFiscalPeriodUnits)
             {
                 //updating FiscalPeriod

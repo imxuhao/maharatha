@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Dynamic;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
-using CAPS.CORPACCOUNTING.Helpers;
 using Abp.Linq.Extensions;
 using Abp.AutoMapper;
 using Abp.Runtime.Caching;
@@ -17,12 +15,10 @@ using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Common;
 using System;
-using Abp.Collections.Extensions;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.UI;
 using Abp.Domain.Uow;
 using AutoMapper;
-using CAPS.CORPACCOUNTING.Journals;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -74,16 +70,15 @@ namespace CAPS.CORPACCOUNTING.Journals
             foreach (var journaldocList in input.CreateJournalEntryDocDetailList)
             {
                 var journalDetails = MapJournalDetails(journaldocList);
-
-                long debitParentId = 0;
+                long creditParentId = 0;
                 foreach (var item in journalDetails)
                 {
-                    if (debitParentId != 0)
-                        item.AccountingItemOrigId = debitParentId;
+                    if (creditParentId != 0)
+                        item.AccountingItemOrigId = creditParentId;
 
                     await _journalEntryDocumentDetailUnitManager.CreateAsync(item);
                     await CurrentUnitOfWork.SaveChangesAsync();
-                    debitParentId = item.Id;
+                    creditParentId = item.Id;
                 }
             }
         }
@@ -100,64 +95,47 @@ namespace CAPS.CORPACCOUNTING.Journals
 
             foreach (var journaldocDetails in input.UpdateJournalEntryDocDetailList)
             {
+                long debitParentId = 0;
+                var jouranlDetailsList = await MapJournalDetails(journaldocDetails);
 
-                if (Math.Sign(journaldocDetails.AccountingItemId) == 1)
+                foreach (var jouranlDetail in jouranlDetailsList)
                 {
 
-
-                    long debitParentId = 0;
-                    var jouranlDetailsList = MapJournalDetails(journaldocDetails);
-
-                    foreach (var jouranlDetail in jouranlDetailsList)
+                    //If AccountingItemId > 0 records will updated
+                    //If AccountingItemId < 0 records will deleted
+                    //Otherwise journal Details Added.
+                    if (jouranlDetail.Id > 0)
                     {
+                        var journalEntryDocDetailUnit = await _journalEntryDocumentDetailUnitRepository.GetAsync(jouranlDetail.Id);
+                        Mapper.CreateMap<JournalEntryDocumentDetailUnit, JournalEntryDocumentDetailUnit>()
+                                .ForMember(u => u.Id, ap => ap.Ignore())
+                                .ForMember(u => u.TenantId, ap => ap.Ignore());
+                        Mapper.Map(jouranlDetail, journalEntryDocDetailUnit);
 
-                        //If AccountingItemId > 0 records will updated
-                        //If AccountingItemId < 0 records will deleted
-                        //Otherwise journal Details Added.
-                        if (jouranlDetail.Id > 0)
-                        {
-                            var journalEntryDocDetailUnit = _journalEntryDocumentDetailUnitRepository.Get(jouranlDetail.Id);
-                            Mapper.CreateMap<JournalEntryDocumentDetailUnit, JournalEntryDocumentDetailUnit>()
-                                    .ForMember(u => u.Id, ap => ap.Ignore())
-                                    .ForMember(u => u.TenantId, ap => ap.Ignore());
-                            Mapper.Map(jouranlDetail, journalEntryDocDetailUnit);
+                        if (debitParentId != 0)
+                            journalEntryDocDetailUnit.AccountingItemOrigId = debitParentId;
 
-                            if (debitParentId != 0)
-                                journalEntryDocDetailUnit.AccountingItemOrigId = debitParentId;
+                        await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalEntryDocDetailUnit);
 
-                            await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalEntryDocDetailUnit);
-
-                            await CurrentUnitOfWork.SaveChangesAsync();
-                        }
-                        else if (jouranlDetail.Id < 0)
-                        {
-                            IdInput<long> idInput = new IdInput<long>() { Id = (jouranlDetail.Id * (-1)) };
-                            var creditJournalDetailId = _journalEntryDocumentDetailUnitRepository.GetAsync(idInput.Id).Result.AccountingItemOrigId.Value;
-                            if (!ReferenceEquals(creditJournalDetailId, null))
-                                await _journalEntryDocumentDetailUnitManager.DeleteAsync(new IdInput<long>() { Id = creditJournalDetailId });
-
-
-                            await _journalEntryDocumentDetailUnitManager.DeleteAsync(idInput);
-                        }
-                        else
-                        {
-                            var journalEntryDocDetailUnit = jouranlDetail.MapTo<JournalEntryDocumentDetailUnit>();
-                            await _journalEntryDocumentDetailUnitManager.CreateAsync(journalEntryDocDetailUnit);
-                            await CurrentUnitOfWork.SaveChangesAsync();
-                            debitParentId = journalEntryDocDetailUnit.Id;
-                        }
+                        await CurrentUnitOfWork.SaveChangesAsync();
                     }
+                    else if (jouranlDetail.Id < 0)
+                    {
+                        IdInput<long> idInput = new IdInput<long>() { Id = (jouranlDetail.Id * (-1)) };
+                        var creditJournalDetailId = _journalEntryDocumentDetailUnitRepository.GetAsync(idInput.Id).Result.AccountingItemOrigId.Value;
+                        if (!ReferenceEquals(creditJournalDetailId, null))
+                            await _journalEntryDocumentDetailUnitManager.DeleteAsync(new IdInput<long>() { Id = creditJournalDetailId });
 
-                }
-                else
-                {
 
-                    IdInput<long> idInput = new IdInput<long>() { Id = (journaldocDetails.AccountingItemId * (-1)) };
-                    var creditJournalDetailId = _journalEntryDocumentDetailUnitRepository.GetAsync(idInput.Id).Result.AccountingItemOrigId.Value;
-                    if (!ReferenceEquals(creditJournalDetailId, null))
-                        await _journalEntryDocumentDetailUnitManager.DeleteAsync(new IdInput<long>() { Id = creditJournalDetailId });
-                    await _journalEntryDocumentDetailUnitManager.DeleteAsync(idInput);
-
+                        await _journalEntryDocumentDetailUnitManager.DeleteAsync(idInput);
+                    }
+                    else
+                    {
+                        var journalEntryDocDetailUnit = jouranlDetail.MapTo<JournalEntryDocumentDetailUnit>();
+                        await _journalEntryDocumentDetailUnitManager.CreateAsync(journalEntryDocDetailUnit);
+                        await CurrentUnitOfWork.SaveChangesAsync();
+                        debitParentId = journalEntryDocDetailUnit.Id;
+                    }
                 }
             }
         }
@@ -183,8 +161,6 @@ namespace CAPS.CORPACCOUNTING.Journals
         public async Task<PagedResultOutput<JournalEntryDocDetailUnitDto>> GetJournalEntryDocDetailsByAccountingDocId(GetTransactionList input)
         {
             var query = from journals in _journalEntryDocumentDetailUnitRepository.GetAll()
-                            //join creditJournal in _journalEntryDocumentDetailUnitRepository.GetAll() on journals.AccountingItemOrigId equals creditJournal.Id into creditJournals
-                            //from creditJournal in creditJournals.DefaultIfEmpty()
                         join Job in _jobUnitRepository.GetAll() on journals.JobId equals Job.Id into Job
                         from Jobs in Job.DefaultIfEmpty()
                         join Line in _accountUnitRepository.GetAll() on journals.AccountId equals Line.Id into Line
@@ -239,248 +215,231 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="JournalEntryDocDetail"></param>
+        /// <param name="journalEntryDocDetail"></param>
         /// <returns></returns>
-        private List<JournalEntryDocumentDetailUnit> MapJournalDetails(CreateJournalEntryDocDetailInputUnit JournalEntryDocDetail)
+        private List<JournalEntryDocumentDetailUnit> MapJournalDetails(CreateJournalEntryDocDetailInputUnit journalEntryDocDetail)
         {
 
-            List<JournalEntryDocumentDetailUnit> JournalEntryDetailUnitList = new List<JournalEntryDocumentDetailUnit>();
+            List<JournalEntryDocumentDetailUnit> journalEntryDetailUnitList = new List<JournalEntryDocumentDetailUnit>();
             JournalEntryDocumentDetailUnit debitJournalEntryDetailUnit = null;
-            JournalEntryDocumentDetailUnit CreditjournalEntryDetailUnit = null;
+            JournalEntryDocumentDetailUnit creditjournalEntryDetailUnit = null;
             bool isMinusAmmount = false;
 
             //validate Amount value is zero 
-            if (JournalEntryDocDetail.Amount.Value == 0)
+            if (journalEntryDocDetail.Amount.Value == 0)
             {
-                throw new UserFriendlyException(L("Error - Input Required"));
+                throw new UserFriendlyException(L("Amount is Required"));
             }
             else
             //check amount is +/- IVE
-            if (Math.Sign(JournalEntryDocDetail.Amount.Value) == 1)
+            if (Math.Sign(journalEntryDocDetail.Amount.Value) == 1)
             {
-                debitJournalEntryDetailUnit = JournalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
-                JournalEntryDetailUnitList.Add(debitJournalEntryDetailUnit);
+                debitJournalEntryDetailUnit = journalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
+                journalEntryDetailUnitList.Add(debitJournalEntryDetailUnit);
                 isMinusAmmount = true;
             }
-            if (Math.Sign(JournalEntryDocDetail.Amount.Value) == -1 || isMinusAmmount)
+            if (Math.Sign(journalEntryDocDetail.Amount.Value) == -1 || isMinusAmmount)
             {
                 if (!isMinusAmmount)
                 {
-                    debitJournalEntryDetailUnit = JournalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
-                    debitJournalEntryDetailUnit.Amount = Math.Sign(JournalEntryDocDetail.Amount.Value);
-                    JournalEntryDetailUnitList.Add(debitJournalEntryDetailUnit);
+                    debitJournalEntryDetailUnit = journalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
+                    debitJournalEntryDetailUnit.Amount = Math.Abs(journalEntryDocDetail.Amount.Value);
+                    journalEntryDetailUnitList.Add(debitJournalEntryDetailUnit);
                 }
 
-                CreditjournalEntryDetailUnit = JournalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
-                CreditjournalEntryDetailUnit.JobId = JournalEntryDocDetail.CreditJobId;
-                CreditjournalEntryDetailUnit.AccountId = JournalEntryDocDetail.CreditAccountId;
-                CreditjournalEntryDetailUnit.SubAccountId1 = JournalEntryDocDetail.CreditSubAccountId1;
-                CreditjournalEntryDetailUnit.SubAccountId2 = JournalEntryDocDetail.CreditSubAccountId2;
-                CreditjournalEntryDetailUnit.SubAccountId3 = JournalEntryDocDetail.CreditSubAccountId3;
-                CreditjournalEntryDetailUnit.SubAccountId4 = JournalEntryDocDetail.CreditSubAccountId4;
-                CreditjournalEntryDetailUnit.SubAccountId5 = JournalEntryDocDetail.CreditSubAccountId5;
-                CreditjournalEntryDetailUnit.SubAccountId6 = JournalEntryDocDetail.CreditSubAccountId6;
-                CreditjournalEntryDetailUnit.SubAccountId7 = JournalEntryDocDetail.CreditSubAccountId7;
-                CreditjournalEntryDetailUnit.SubAccountId8 = JournalEntryDocDetail.CreditSubAccountId8;
-                CreditjournalEntryDetailUnit.SubAccountId9 = JournalEntryDocDetail.CreditSubAccountId9;
-                CreditjournalEntryDetailUnit.SubAccountId10 = JournalEntryDocDetail.CreditSubAccountId10;
+                creditjournalEntryDetailUnit = journalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
+                creditjournalEntryDetailUnit.JobId = journalEntryDocDetail.CreditJobId;
+                creditjournalEntryDetailUnit.AccountId = journalEntryDocDetail.CreditAccountId;
+                creditjournalEntryDetailUnit.SubAccountId1 = journalEntryDocDetail.CreditSubAccountId1;
+                creditjournalEntryDetailUnit.SubAccountId2 = journalEntryDocDetail.CreditSubAccountId2;
+                creditjournalEntryDetailUnit.SubAccountId3 = journalEntryDocDetail.CreditSubAccountId3;
+                creditjournalEntryDetailUnit.SubAccountId4 = journalEntryDocDetail.CreditSubAccountId4;
+                creditjournalEntryDetailUnit.SubAccountId5 = journalEntryDocDetail.CreditSubAccountId5;
+                creditjournalEntryDetailUnit.SubAccountId6 = journalEntryDocDetail.CreditSubAccountId6;
+                creditjournalEntryDetailUnit.SubAccountId7 = journalEntryDocDetail.CreditSubAccountId7;
+                creditjournalEntryDetailUnit.SubAccountId8 = journalEntryDocDetail.CreditSubAccountId8;
+                creditjournalEntryDetailUnit.SubAccountId9 = journalEntryDocDetail.CreditSubAccountId9;
+                creditjournalEntryDetailUnit.SubAccountId10 = journalEntryDocDetail.CreditSubAccountId10;
                 if (isMinusAmmount)
-                    CreditjournalEntryDetailUnit.Amount = -Math.Abs(JournalEntryDocDetail.Amount.Value);
-                JournalEntryDetailUnitList.Add(CreditjournalEntryDetailUnit);
+                    creditjournalEntryDetailUnit.Amount = -Math.Abs(journalEntryDocDetail.Amount.Value);
+                journalEntryDetailUnitList.Add(creditjournalEntryDetailUnit);
             }
 
 
-            if (!ReferenceEquals(debitJournalEntryDetailUnit, null) && !ReferenceEquals(CreditjournalEntryDetailUnit, null))
+            if (!ReferenceEquals(debitJournalEntryDetailUnit, null) && !ReferenceEquals(creditjournalEntryDetailUnit, null))
             {
-                //validate JobId and AccountId
                 if ((debitJournalEntryDetailUnit.JobId != 0 && debitJournalEntryDetailUnit.AccountId == 0) || (debitJournalEntryDetailUnit.JobId == 0 && debitJournalEntryDetailUnit.AccountId != 0))
                 {
-                    throw new UserFriendlyException(L("Error - Input Required"));
+                    throw new UserFriendlyException(L("Debit Job and Account are Required"));
                 }
-                if ((CreditjournalEntryDetailUnit.JobId != 0 && CreditjournalEntryDetailUnit.AccountId == 0) || (CreditjournalEntryDetailUnit.JobId == 0 && CreditjournalEntryDetailUnit.AccountId != 0))
+                if ((creditjournalEntryDetailUnit.JobId != 0 && creditjournalEntryDetailUnit.AccountId == 0) || (creditjournalEntryDetailUnit.JobId == 0 && creditjournalEntryDetailUnit.AccountId != 0))
                 {
-                    throw new UserFriendlyException(L("Error - Input Required"));
+                    throw new UserFriendlyException(L("Credit Job and Account are Required"));
                 }
 
-
-                //remove debit/credit details from List
                 if (debitJournalEntryDetailUnit.JobId == 0 && debitJournalEntryDetailUnit.AccountId == 0)
                 {
-                    JournalEntryDetailUnitList.Remove(debitJournalEntryDetailUnit);
+                    journalEntryDetailUnitList.Remove(debitJournalEntryDetailUnit);
                 }
-                if (CreditjournalEntryDetailUnit.JobId == 0 && CreditjournalEntryDetailUnit.AccountId == 0)
+                if (creditjournalEntryDetailUnit.JobId == 0 && creditjournalEntryDetailUnit.AccountId == 0)
                 {
-                    JournalEntryDetailUnitList.Remove(CreditjournalEntryDetailUnit);
+                    journalEntryDetailUnitList.Remove(creditjournalEntryDetailUnit);
                 }
             }
-            return JournalEntryDetailUnitList;
+            return journalEntryDetailUnitList;
 
         }
 
         /// <summary>
-        /// 
+        /// update
         /// </summary>
-        /// <param name="JournalEntryDocDetail"></param>
+        /// <param name="journalEntryDocDetail"></param>
         /// <returns></returns>
-        private List<JournalEntryDocumentDetailUnit> MapJournalDetails(UpdateJournalEntryDocDetailInputUnit JournalEntryDocDetail)
+        private async Task<List<JournalEntryDocumentDetailUnit>> MapJournalDetails(UpdateJournalEntryDocDetailInputUnit journalEntryDocDetail)
         {
 
-            List<JournalEntryDocumentDetailUnit> JournalEntryDetailUnitList = new List<JournalEntryDocumentDetailUnit>();
+            List<JournalEntryDocumentDetailUnit> journalEntryDetailUnitList = new List<JournalEntryDocumentDetailUnit>();
             JournalEntryDocumentDetailUnit debitJournalEntryDetailUnit = null;
-            JournalEntryDocumentDetailUnit CreditjournalEntryDetailUnit = null;
+            JournalEntryDocumentDetailUnit creditjournalEntryDetailUnit = null;
             bool isMinusAmmount = false;
 
-            var JournalDetailItem = _journalEntryDocumentDetailUnitRepository.GetAll().Where(u => u.Id == JournalEntryDocDetail.AccountingItemId).FirstOrDefault();
-
+            var journalDetailItem = await _journalEntryDocumentDetailUnitRepository.GetAsync(journalEntryDocDetail.AccountingItemId);
 
             //validate Amount value is zero 
-            if (JournalEntryDocDetail.Amount.Value == 0)
+            if (journalEntryDocDetail.Amount.Value == 0)
             {
-                throw new UserFriendlyException(L("Error - Input Required"));
+                throw new UserFriendlyException(L("Amount is Required"));
             }
             else
             //check amount is +/- IVE
-            if (Math.Sign(JournalDetailItem.Amount.Value) == 1)
+            if (Math.Sign(journalDetailItem.Amount.Value) == 1)
             {
-                debitJournalEntryDetailUnit = JournalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
+                debitJournalEntryDetailUnit = journalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
 
-                if (JournalEntryDocDetail.AccountingItemId != 0 && Math.Sign(JournalDetailItem.Amount.Value) == 1)
+                if (journalEntryDocDetail.AccountingItemId != 0)
                 {
-                    debitJournalEntryDetailUnit.Id = JournalDetailItem.Id;
+                    debitJournalEntryDetailUnit.Id = journalDetailItem.Id;
                 }
 
                 Mapper.CreateMap<JournalEntryDocumentDetailUnit, JournalEntryDocumentDetailUnit>()
-                .ForMember(u => u.Id, ap => ap.Ignore())
-                .ForMember(u => u.TenantId, ap => ap.Ignore());
-                Mapper.Map(debitJournalEntryDetailUnit, JournalDetailItem);
-
-                JournalDetailItem.Amount = Math.Abs(debitJournalEntryDetailUnit.Amount.Value);
-                JournalDetailItem.AccountingDocumentId = debitJournalEntryDetailUnit.AccountingDocumentId;
-                JournalEntryDetailUnitList.Add(JournalDetailItem);
-
-                var CreditJournalDetailItem = _journalEntryDocumentDetailUnitRepository.GetAll().Where(u => u.AccountingItemOrigId == JournalDetailItem.Id).FirstOrDefault();
+                              .ForMember(u => u.Id, ap => ap.Ignore())
+                              .ForMember(u => u.TenantId, ap => ap.Ignore());
 
 
-                //check whether journal record have credit record
-                if (!ReferenceEquals(CreditJournalDetailItem, null))
+                Mapper.Map(debitJournalEntryDetailUnit, journalDetailItem);
+                journalDetailItem.Amount = Math.Abs(debitJournalEntryDetailUnit.Amount.Value);
+                journalDetailItem.AccountingDocumentId = debitJournalEntryDetailUnit.AccountingDocumentId;
+                journalEntryDetailUnitList.Add(journalDetailItem);
+
+                var creditJournalDetailItem = await _journalEntryDocumentDetailUnitRepository.FirstOrDefaultAsync(u => u.AccountingItemOrigId == journalDetailItem.Id);
+
+                if (!ReferenceEquals(creditJournalDetailItem, null))
                 {
-                    long debitParentId = CreditJournalDetailItem.AccountingItemOrigId.Value;
-                    CreditjournalEntryDetailUnit = JournalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
+                    long creditParentId = creditJournalDetailItem.AccountingItemOrigId.Value;
+                    creditjournalEntryDetailUnit = journalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
                     Mapper.CreateMap<JournalEntryDocumentDetailUnit, JournalEntryDocumentDetailUnit>()
                             .ForMember(u => u.Id, ap => ap.Ignore())
                             .ForMember(u => u.TenantId, ap => ap.Ignore());
-                    Mapper.Map(CreditjournalEntryDetailUnit, CreditJournalDetailItem);
+                    Mapper.Map(creditjournalEntryDetailUnit, creditJournalDetailItem);
 
-                    CreditJournalDetailItem.JobId = JournalEntryDocDetail.CreditJobId;
-                    CreditJournalDetailItem.AccountId = JournalEntryDocDetail.CreditAccountId;
-                    CreditJournalDetailItem.SubAccountId1 = JournalEntryDocDetail.CreditSubAccountId1;
-                    CreditJournalDetailItem.SubAccountId2 = JournalEntryDocDetail.CreditSubAccountId2;
-                    CreditJournalDetailItem.SubAccountId3 = JournalEntryDocDetail.CreditSubAccountId3;
-                    CreditJournalDetailItem.SubAccountId4 = JournalEntryDocDetail.CreditSubAccountId4;
-                    CreditJournalDetailItem.SubAccountId5 = JournalEntryDocDetail.CreditSubAccountId5;
-                    CreditJournalDetailItem.SubAccountId6 = JournalEntryDocDetail.CreditSubAccountId6;
-                    CreditJournalDetailItem.SubAccountId7 = JournalEntryDocDetail.CreditSubAccountId7;
-                    CreditJournalDetailItem.SubAccountId8 = JournalEntryDocDetail.CreditSubAccountId8;
-                    CreditJournalDetailItem.SubAccountId9 = JournalEntryDocDetail.CreditSubAccountId9;
-                    CreditJournalDetailItem.SubAccountId10 = JournalEntryDocDetail.CreditSubAccountId10;
-                    CreditJournalDetailItem.AccountingDocumentId = JournalEntryDocDetail.AccountingDocumentId;
-                    CreditJournalDetailItem.AccountingItemOrigId = debitParentId;
-                    CreditJournalDetailItem.Amount = -Math.Abs(JournalEntryDocDetail.Amount.Value);
-                    JournalEntryDetailUnitList.Add(CreditJournalDetailItem);
+                    creditJournalDetailItem.JobId = journalEntryDocDetail.CreditJobId;
+                    creditJournalDetailItem.AccountId = journalEntryDocDetail.CreditAccountId;
+                    creditJournalDetailItem.SubAccountId1 = journalEntryDocDetail.CreditSubAccountId1;
+                    creditJournalDetailItem.SubAccountId2 = journalEntryDocDetail.CreditSubAccountId2;
+                    creditJournalDetailItem.SubAccountId3 = journalEntryDocDetail.CreditSubAccountId3;
+                    creditJournalDetailItem.SubAccountId4 = journalEntryDocDetail.CreditSubAccountId4;
+                    creditJournalDetailItem.SubAccountId5 = journalEntryDocDetail.CreditSubAccountId5;
+                    creditJournalDetailItem.SubAccountId6 = journalEntryDocDetail.CreditSubAccountId6;
+                    creditJournalDetailItem.SubAccountId7 = journalEntryDocDetail.CreditSubAccountId7;
+                    creditJournalDetailItem.SubAccountId8 = journalEntryDocDetail.CreditSubAccountId8;
+                    creditJournalDetailItem.SubAccountId9 = journalEntryDocDetail.CreditSubAccountId9;
+                    creditJournalDetailItem.SubAccountId10 = journalEntryDocDetail.CreditSubAccountId10;
+                    creditJournalDetailItem.AccountingDocumentId = journalEntryDocDetail.AccountingDocumentId;
+                    creditJournalDetailItem.AccountingItemOrigId = creditParentId;
+
+                    creditJournalDetailItem.Amount = -Math.Abs(journalEntryDocDetail.Amount.Value);
+                    journalEntryDetailUnitList.Add(creditJournalDetailItem);
                 }
                 else
                     isMinusAmmount = true;
 
 
             }
-            if (Math.Sign(JournalDetailItem.Amount.Value) == -1 || isMinusAmmount)
+            if (Math.Sign(journalDetailItem.Amount.Value) == -1 || isMinusAmmount)
             {
 
                 if (!isMinusAmmount)
                 {
-                    debitJournalEntryDetailUnit = JournalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
+                    debitJournalEntryDetailUnit = journalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
 
-                    if (JournalEntryDocDetail.AccountingItemId != 0 && Math.Sign(JournalDetailItem.Amount.Value) == 1)
+                    if (journalEntryDocDetail.AccountingItemId != 0 && Math.Sign(journalDetailItem.Amount.Value) == 1)
                     {
-                        debitJournalEntryDetailUnit.Id = JournalDetailItem.Id;
-                        debitJournalEntryDetailUnit.AccountingDocumentId = JournalDetailItem.AccountingDocumentId;
+                        debitJournalEntryDetailUnit.Id = journalDetailItem.Id;
+                        debitJournalEntryDetailUnit.AccountingDocumentId = journalDetailItem.AccountingDocumentId;
                     }
 
-                    debitJournalEntryDetailUnit.Amount = Math.Abs(JournalEntryDocDetail.Amount.Value);
-                    JournalEntryDetailUnitList.Add(debitJournalEntryDetailUnit);
+                    debitJournalEntryDetailUnit.Amount = Math.Abs(journalEntryDocDetail.Amount.Value);
+                    journalEntryDetailUnitList.Add(debitJournalEntryDetailUnit);
                 }
 
-
-
-                CreditjournalEntryDetailUnit = JournalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
+                creditjournalEntryDetailUnit = journalEntryDocDetail.MapTo<JournalEntryDocumentDetailUnit>();
                 Mapper.CreateMap<JournalEntryDocumentDetailUnit, JournalEntryDocumentDetailUnit>()
                         .ForMember(u => u.Id, ap => ap.Ignore())
                         .ForMember(u => u.TenantId, ap => ap.Ignore());
-                Mapper.Map(CreditjournalEntryDetailUnit, JournalDetailItem);
-
-
-                JournalDetailItem.JobId = JournalEntryDocDetail.CreditJobId;
-                JournalDetailItem.AccountId = JournalEntryDocDetail.CreditAccountId;
-                JournalDetailItem.SubAccountId1 = JournalEntryDocDetail.CreditSubAccountId1;
-                JournalDetailItem.SubAccountId2 = JournalEntryDocDetail.CreditSubAccountId2;
-                JournalDetailItem.SubAccountId3 = JournalEntryDocDetail.CreditSubAccountId3;
-                JournalDetailItem.SubAccountId4 = JournalEntryDocDetail.CreditSubAccountId4;
-                JournalDetailItem.SubAccountId5 = JournalEntryDocDetail.CreditSubAccountId5;
-                JournalDetailItem.SubAccountId6 = JournalEntryDocDetail.CreditSubAccountId6;
-                JournalDetailItem.SubAccountId7 = JournalEntryDocDetail.CreditSubAccountId7;
-                JournalDetailItem.SubAccountId8 = JournalEntryDocDetail.CreditSubAccountId8;
-                JournalDetailItem.SubAccountId9 = JournalEntryDocDetail.CreditSubAccountId9;
-                JournalDetailItem.SubAccountId10 = JournalEntryDocDetail.CreditSubAccountId10;
-                JournalDetailItem.AccountingDocumentId = JournalEntryDocDetail.AccountingDocumentId;
+                Mapper.Map(creditjournalEntryDetailUnit, journalDetailItem);
+                journalDetailItem.JobId = journalEntryDocDetail.CreditJobId;
+                journalDetailItem.AccountId = journalEntryDocDetail.CreditAccountId;
+                journalDetailItem.SubAccountId1 = journalEntryDocDetail.CreditSubAccountId1;
+                journalDetailItem.SubAccountId2 = journalEntryDocDetail.CreditSubAccountId2;
+                journalDetailItem.SubAccountId3 = journalEntryDocDetail.CreditSubAccountId3;
+                journalDetailItem.SubAccountId4 = journalEntryDocDetail.CreditSubAccountId4;
+                journalDetailItem.SubAccountId5 = journalEntryDocDetail.CreditSubAccountId5;
+                journalDetailItem.SubAccountId6 = journalEntryDocDetail.CreditSubAccountId6;
+                journalDetailItem.SubAccountId7 = journalEntryDocDetail.CreditSubAccountId7;
+                journalDetailItem.SubAccountId8 = journalEntryDocDetail.CreditSubAccountId8;
+                journalDetailItem.SubAccountId9 = journalEntryDocDetail.CreditSubAccountId9;
+                journalDetailItem.SubAccountId10 = journalEntryDocDetail.CreditSubAccountId10;
+                journalDetailItem.AccountingDocumentId = journalEntryDocDetail.AccountingDocumentId;
                 if (isMinusAmmount)
-                    JournalDetailItem.Amount = -Math.Sign(JournalEntryDocDetail.Amount.Value);
-                JournalEntryDetailUnitList.Add(JournalDetailItem);
-
+                    journalDetailItem.Amount = -Math.Abs(journalEntryDocDetail.Amount.Value);
+                journalEntryDetailUnitList.Add(journalDetailItem);
             }
-
-
-            if (!ReferenceEquals(debitJournalEntryDetailUnit, null) && !ReferenceEquals(CreditjournalEntryDetailUnit, null))
+            if (!ReferenceEquals(debitJournalEntryDetailUnit, null) && !ReferenceEquals(creditjournalEntryDetailUnit, null))
             {
-
-                //validate JobId and AccountId
                 if ((debitJournalEntryDetailUnit.JobId != 0 && debitJournalEntryDetailUnit.AccountId == 0) || (debitJournalEntryDetailUnit.JobId == 0 && debitJournalEntryDetailUnit.AccountId != 0))
                 {
-                    throw new UserFriendlyException(L("Error - Input Required"));
+                    throw new UserFriendlyException(L("Debit Job and Account are Required"));
                 }
-                if ((CreditjournalEntryDetailUnit.JobId != 0 && CreditjournalEntryDetailUnit.AccountId == 0) || (CreditjournalEntryDetailUnit.JobId == 0 && CreditjournalEntryDetailUnit.AccountId != 0))
+                if ((creditjournalEntryDetailUnit.JobId != 0 && creditjournalEntryDetailUnit.AccountId == 0) || (creditjournalEntryDetailUnit.JobId == 0 && creditjournalEntryDetailUnit.AccountId != 0))
                 {
-                    throw new UserFriendlyException(L("Error - Input Required"));
+                    throw new UserFriendlyException(L("Credit Job and Account are Required"));
                 }
 
-
-                //remove debit/credit details from List
                 if (debitJournalEntryDetailUnit.JobId == 0 && debitJournalEntryDetailUnit.AccountId == 0)
                 {
-                    JournalEntryDetailUnitList.Remove(debitJournalEntryDetailUnit);
+                    journalEntryDetailUnitList.Remove(debitJournalEntryDetailUnit);
                 }
-                if (CreditjournalEntryDetailUnit.JobId == 0 && CreditjournalEntryDetailUnit.AccountId == 0)
+                if (creditjournalEntryDetailUnit.JobId == 0 && creditjournalEntryDetailUnit.AccountId == 0)
                 {
-                    JournalEntryDetailUnitList.Remove(CreditjournalEntryDetailUnit);
+                    journalEntryDetailUnitList.Remove(creditjournalEntryDetailUnit);
                 }
             }
-            return JournalEntryDetailUnitList;
+            return journalEntryDetailUnitList;
 
         }
 
-        private List<JournalEntryDocDetailUnitDto> MapJournalsDetailsOutPutDto(List<JournalEntryDocDetailUnitDto> JournalEntryDocDetailList)
+        private List<JournalEntryDocDetailUnitDto> MapJournalsDetailsOutPutDto(List<JournalEntryDocDetailUnitDto> journalEntryDocDetailList)
         {
-
-            List<JournalEntryDocDetailUnitDto> JournaList = new List<JournalEntryDocDetailUnitDto>();
-
-            for (int i = 0; i < JournalEntryDocDetailList.Count; i++)
+            List<JournalEntryDocDetailUnitDto> journaList = new List<JournalEntryDocDetailUnitDto>();
+            for (int i = 0; i < journalEntryDocDetailList.Count; i++)
             {
                 JournalEntryDocDetailUnitDto journalDetail = new JournalEntryDocDetailUnitDto();
                 Mapper.CreateMap<JournalEntryDocDetailUnitDto, JournalEntryDocDetailUnitDto>();
-                Mapper.Map(JournalEntryDocDetailList[i], journalDetail);
+                Mapper.Map(journalEntryDocDetailList[i], journalDetail);
 
-                if (Math.Sign(JournalEntryDocDetailList[i].Amount.Value) == 1)
+                if (Math.Sign(journalEntryDocDetailList[i].Amount.Value) == 1)
                 {
-                    var creditJournalItem = JournalEntryDocDetailList.Find(u => u.AccountingItemOrigId == JournalEntryDocDetailList[i].AccountingItemId);
+                    var creditJournalItem = journalEntryDocDetailList.Find(u => u.AccountingItemOrigId == journalEntryDocDetailList[i].AccountingItemId);
                     if (!ReferenceEquals(creditJournalItem, null))
                     {
                         journalDetail.CreditAccount = creditJournalItem.Account;
@@ -507,40 +466,38 @@ namespace CAPS.CORPACCOUNTING.Journals
                         journalDetail.CreditSubAccountId7 = creditJournalItem.SubAccountId7;
                         journalDetail.CreditSubAccountId8 = creditJournalItem.SubAccountId8;
                         journalDetail.CreditSubAccountId9 = creditJournalItem.SubAccountId9;
-                        JournalEntryDocDetailList.Remove(creditJournalItem);
+                        journalEntryDocDetailList.Remove(creditJournalItem);
                     }
-                    JournaList.Add(journalDetail);
+                    journaList.Add(journalDetail);
                 }
                 else
-                if (Math.Sign(JournalEntryDocDetailList[i].Amount.Value) == -1)
+                if (Math.Sign(journalEntryDocDetailList[i].Amount.Value) == -1)
                 {
 
-                    journalDetail.CreditAccount = JournalEntryDocDetailList[i].Account;
-                    journalDetail.CreditAccountId = JournalEntryDocDetailList[i].AccountId;
-                    journalDetail.CreditJob = JournalEntryDocDetailList[i].Job;
-                    journalDetail.CreditJobId = JournalEntryDocDetailList[i].JobId;
-                    journalDetail.CreditSubAccount1 = JournalEntryDocDetailList[i].SubAccount1;
-                    journalDetail.CreditSubAccount10 = JournalEntryDocDetailList[i].SubAccount10;
-                    journalDetail.CreditSubAccount2 = JournalEntryDocDetailList[i].SubAccount2;
-                    journalDetail.CreditSubAccount3 = JournalEntryDocDetailList[i].SubAccount3;
-                    journalDetail.CreditSubAccount4 = JournalEntryDocDetailList[i].SubAccount4;
-                    journalDetail.CreditSubAccount5 = JournalEntryDocDetailList[i].SubAccount5;
-                    journalDetail.CreditSubAccount6 = JournalEntryDocDetailList[i].SubAccount6;
-                    journalDetail.CreditSubAccount7 = JournalEntryDocDetailList[i].SubAccount7;
-                    journalDetail.CreditSubAccount8 = JournalEntryDocDetailList[i].SubAccount8;
-                    journalDetail.CreditSubAccount9 = JournalEntryDocDetailList[i].SubAccount9;
-                    journalDetail.CreditSubAccountId1 = JournalEntryDocDetailList[i].SubAccountId1;
-                    journalDetail.CreditSubAccountId10 = JournalEntryDocDetailList[i].SubAccountId10;
-                    journalDetail.CreditSubAccountId2 = JournalEntryDocDetailList[i].SubAccountId2;
-                    journalDetail.CreditSubAccountId3 = JournalEntryDocDetailList[i].SubAccountId3;
-                    journalDetail.CreditSubAccountId4 = JournalEntryDocDetailList[i].SubAccountId4;
-                    journalDetail.CreditSubAccountId5 = JournalEntryDocDetailList[i].SubAccountId5;
-                    journalDetail.CreditSubAccountId6 = JournalEntryDocDetailList[i].SubAccountId6;
-                    journalDetail.CreditSubAccountId7 = JournalEntryDocDetailList[i].SubAccountId7;
-                    journalDetail.CreditSubAccountId8 = JournalEntryDocDetailList[i].SubAccountId8;
-                    journalDetail.CreditSubAccountId9 = JournalEntryDocDetailList[i].SubAccountId9;
-
-
+                    journalDetail.CreditAccount = journalEntryDocDetailList[i].Account;
+                    journalDetail.CreditAccountId = journalEntryDocDetailList[i].AccountId;
+                    journalDetail.CreditJob = journalEntryDocDetailList[i].Job;
+                    journalDetail.CreditJobId = journalEntryDocDetailList[i].JobId;
+                    journalDetail.CreditSubAccount1 = journalEntryDocDetailList[i].SubAccount1;
+                    journalDetail.CreditSubAccount10 = journalEntryDocDetailList[i].SubAccount10;
+                    journalDetail.CreditSubAccount2 = journalEntryDocDetailList[i].SubAccount2;
+                    journalDetail.CreditSubAccount3 = journalEntryDocDetailList[i].SubAccount3;
+                    journalDetail.CreditSubAccount4 = journalEntryDocDetailList[i].SubAccount4;
+                    journalDetail.CreditSubAccount5 = journalEntryDocDetailList[i].SubAccount5;
+                    journalDetail.CreditSubAccount6 = journalEntryDocDetailList[i].SubAccount6;
+                    journalDetail.CreditSubAccount7 = journalEntryDocDetailList[i].SubAccount7;
+                    journalDetail.CreditSubAccount8 = journalEntryDocDetailList[i].SubAccount8;
+                    journalDetail.CreditSubAccount9 = journalEntryDocDetailList[i].SubAccount9;
+                    journalDetail.CreditSubAccountId1 = journalEntryDocDetailList[i].SubAccountId1;
+                    journalDetail.CreditSubAccountId10 = journalEntryDocDetailList[i].SubAccountId10;
+                    journalDetail.CreditSubAccountId2 = journalEntryDocDetailList[i].SubAccountId2;
+                    journalDetail.CreditSubAccountId3 = journalEntryDocDetailList[i].SubAccountId3;
+                    journalDetail.CreditSubAccountId4 = journalEntryDocDetailList[i].SubAccountId4;
+                    journalDetail.CreditSubAccountId5 = journalEntryDocDetailList[i].SubAccountId5;
+                    journalDetail.CreditSubAccountId6 = journalEntryDocDetailList[i].SubAccountId6;
+                    journalDetail.CreditSubAccountId7 = journalEntryDocDetailList[i].SubAccountId7;
+                    journalDetail.CreditSubAccountId8 = journalEntryDocDetailList[i].SubAccountId8;
+                    journalDetail.CreditSubAccountId9 = journalEntryDocDetailList[i].SubAccountId9;
                     journalDetail.Account = string.Empty;
                     journalDetail.AccountId = null;
                     journalDetail.Job = string.Empty;
@@ -565,11 +522,10 @@ namespace CAPS.CORPACCOUNTING.Journals
                     journalDetail.SubAccountId7 = null;
                     journalDetail.SubAccountId8 = null;
                     journalDetail.SubAccountId9 = null;
-                    JournaList.Add(journalDetail);
+                    journaList.Add(journalDetail);
                 }
             }
-
-            return JournaList;
+            return journaList;
         }
 
     }

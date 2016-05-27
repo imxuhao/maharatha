@@ -1863,6 +1863,7 @@
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionHeaderModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\customers\CustomerModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\employee\EmployeeModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountsModel.js" />
@@ -1871,6 +1872,7 @@
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\SubAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalEntryDetail.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\financials\preferences\FiscalPeriodModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobLocationsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobCommercialsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageMainModel.js" />
@@ -1899,6 +1901,7 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\preferences\FiscalPeriodStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\invoices\BatchStore.js" />
@@ -1947,6 +1950,7 @@
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesStore.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\dragdrop\GridToGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\filter\DateSearchField.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\form\AutoFillCombo.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Basic.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Panel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\CellEditing.js" />
@@ -1983,6 +1987,9 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalEntryGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalTransactionDetailGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalTransactionDetailGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\PreferencesTabPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextForm.js" />

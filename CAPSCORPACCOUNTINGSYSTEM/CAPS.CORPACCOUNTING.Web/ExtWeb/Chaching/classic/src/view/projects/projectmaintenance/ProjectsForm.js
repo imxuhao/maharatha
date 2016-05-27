@@ -347,7 +347,32 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         },
                         items:[
                         {
-                            xtype: 'combobox',
+                            //xtype: 'combobox',
+                            //name: 'agencyId',
+                            //itemId: 'agencyId',
+                            //fieldLabel: app.localize('Agency'),
+                            //store: 'utilities.CustomerListStore',
+                            //valueField: 'customerId',
+                            //displayField: 'name',
+                            //queryMode: 'remote',
+                            //listConfig: {
+                            //    getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
+                            //},
+                            //anyMatch: true,
+                            //displayTpl: Chaching.utilities.ChachingRenderers.renderCustomerDispalyTpl(),//using XTemplate
+                            //emptyText: app.localize('SelectOption'),
+                            //listeners: {
+                            //    change:'onAgencyChange'
+                            //}
+
+                            xtype: 'autofillcombo',
+                            //plugins:[{
+                            //               ptype:'saki-ficn'
+                            //              ,iconCls:'fa-smile-o'
+                            //               ,qtip:'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. '
+                            //                    +'Cras mattis consectetur purus sit amet fermentum. Cum sociis natoque '
+                            //                  +'penatibus et magnis dis parturient montes, nascetur ridiculus mus.'
+                            //           }],
                             name: 'agencyId',
                             itemId: 'agencyId',
                             fieldLabel: app.localize('Agency'),
@@ -355,15 +380,14 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             valueField: 'customerId',
                             displayField: 'name',
                             queryMode: 'remote',
+                            entityType: 'payables.vendors',
+                            entityPermission: 'Payables.Vendors',
                             listConfig: {
-                                getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
-                            },
-                            anyMatch: true,
-                            displayTpl: Chaching.utilities.ChachingRenderers.renderCustomerDispalyTpl(),//using XTemplate
-                            emptyText: app.localize('SelectOption'),
-                            listeners: {
-                                change:'onAgencyChange'
+                                minWidth : 300
                             }
+
+
+                            
                         }, {
                             xtype: 'textfield',
                             name: 'productName',

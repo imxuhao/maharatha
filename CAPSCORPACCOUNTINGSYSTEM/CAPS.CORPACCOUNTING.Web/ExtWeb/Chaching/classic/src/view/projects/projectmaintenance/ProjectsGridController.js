@@ -56,8 +56,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
                 var lineNumberTab = formPanel.down('*[itemId=LineNumbersTab]');
                 if (lineNumberTab) lineNumberTab.setDisabled(false);
 
-                var customerStore = form.findField('agencyId').getStore();//viewModel.getStore('getCustomersList');
-                customerStore.load();
+                //var customerStore = form.findField('agencyId').getStore();//viewModel.getStore('getCustomersList');
+                //customerStore.load();
                
                 var directorsStore = form.findField('directorEmployeeId').getStore();
                 directorsStore.getProxy().setExtraParam('property', 'isDirector');

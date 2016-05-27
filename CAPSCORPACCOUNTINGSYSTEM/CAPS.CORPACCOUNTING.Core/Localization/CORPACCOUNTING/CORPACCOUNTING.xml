@@ -815,13 +815,21 @@
     <text name="SelectModule" value="Select Module" />
     <text name="Journal" value="Journal" />
     <text name="AccountsPayable" value="Accounts Payable" />
-      <text name="AddNewValidationMessage" value="Minimum 1 and maximum 100 records can be added." />
-      <text name="SelectRecordToDelete" value="Please select record(s) to delete.', 'Select Records" />
+    <text name="CreateNewFiscalPeriod" value="Create new fiscal period" />
+    <text name="EditFiscalPeriod" value="Edit Fiscal Period" />
+    <text name="FiscalStartDate" value="Fiscal Start Date" />
+    <text name="FiscalEndDate" value="Fiscal End Date" />
+    <text name="FiscalYearOpen" value="Year Open" />
+    <text name="ToolTipFiscalStartDate" value="Enter fiscal start date" />
+    <text name="ToolTipFiscalEndDate" value="Enter fiscal end date" />
+    <text name="AddNewValidationMessage" value="Minimum 1 and maximum 100 records can be added." />
+    <text name="SelectRecordToDelete" value="Please select record(s) to delete.', 'Select Records" />
     <text name="SplitRecordSelect" value="Please select the record to split." />
     <text name="SingleSplit" value="Only one record can be split at a time." />
-  <text name="AlreadySplit" value="Cannot split already splitted record." />
-  <text name="ValidationFailed" value="Validation fail" />
-   <text name="EnterAmountToSplit" value="Please enter amount to split." />
-  <text name="SplitRecord" value="Split selected record" />
+    <text name="AlreadySplit" value="Cannot split already splitted record." />
+    <text name="ValidationFailed" value="Validation fail" />
+    <text name="EnterAmountToSplit" value="Please enter amount to split." />
+    <text name="SplitRecord" value="Split selected record" />
+
   </texts>
 </localizationDictionary>

@@ -50,15 +50,19 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetJobOrDivisionList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GetJobOrDivisionList(AutoSearchInput input)
         {
             var Joblist = await (from job in _jobUnitRepository.GetAll()
-                                 .Where(p=>p.TypeOfJobStatusId != ProjectStatus.Closed)
-                                    .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.JobNumber.Contains(input.Query))
-                                    .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                                 select new NameValueDto { Name = job.Caption + " " + job.JobNumber, Value = job.Id.ToString() })
+                                 .Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed)
+                                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.JobNumber.Contains(input.Query))
+                                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
+                                 select new AutoFillDto
+                                 {
+                                     Name = job.Caption,
+                                     Value = job.Id.ToString(),
+                                     Column1 = job.JobNumber
+                                 })
                               .ToListAsync();
-
             return Joblist;
         }
 
@@ -67,22 +71,24 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GeAccountsList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GeAccountsList(AutoSearchInput input)
         {
 
             var chartOfAccountId = (from job in _jobUnitRepository.GetAll().WhereIf(!ReferenceEquals(input.JobId, null), p => p.Id == input.JobId)
                                     select job.ChartOfAccountId).FirstOrDefault();
 
             var Accountlist = await (from account in _accountUnitRepository.GetAll()
-                                         .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.AccountNumber.Contains(input.Query))
+                                         .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query)
+                                         || p.AccountNumber.Contains(input.Query) || p.Description.Contains(input.Query))
                                          .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
                                          .WhereIf(chartOfAccountId != 0, p => p.ChartOfAccountId == chartOfAccountId)
-                                     select new NameValueDto
+                                     select new AutoFillDto
                                      {
-                                         Name = account.Caption + " " + account.AccountNumber,
-                                         Value = account.Id.ToString()
-                                     }
-                         ).ToListAsync();
+                                         Name = account.Caption,
+                                         Value = account.Id.ToString(),
+                                         Column1 = account.Description,
+                                         Column2 = account.AccountNumber
+                                     }).ToListAsync();
             return Accountlist;
         }
 
@@ -91,24 +97,33 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetSubAccountList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GetSubAccountList(AutoSearchInput input)
         {
             var cacheItem = await GetSubAccountsCacheItemAsync(
               CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
             return cacheItem.ItemList.ToList()
-                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper()) ||
+                p.Column1.ToUpper().Contains(input.Query.ToUpper()) || p.Column2.ToUpper().Contains(input.Query.ToUpper()) ||
+                p.Column3.ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
         /// <summary>
         /// Get SubAccounts From DataBase
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<List<NameValueDto>> GetSubAcoountsFromDb(AutoSearchInput input)
+        private async Task<List<AutoFillDto>> GetSubAcoountsFromDb(AutoSearchInput input)
         {
             var query = from subaccounts in _subAccountUnitRepository.GetAll()
                         select new { subaccounts };
             return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.subaccounts.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new NameValueDto { Name = u.subaccounts.Caption + " " + u.subaccounts.SubAccountNumber, Value = u.subaccounts.Id.ToString() }).ToListAsync();
+                            .Select(u => new AutoFillDto
+                            {
+                                Name = u.subaccounts.Caption,
+                                Value = u.subaccounts.Id.ToString(),
+                                Column2 = u.subaccounts.Description,
+                                Column1 = u.subaccounts.SubAccountNumber,
+                                Column3 = u.subaccounts.SearchNo
+                            }).ToListAsync();
 
         }
 
@@ -132,19 +147,29 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetVendorList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GetVendorList(AutoSearchInput input)
         {
             var cacheItem = await GetVendorsCacheItemAsync(
                CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())
+            || p.Column1.ToUpper().Contains(input.Query.ToUpper())
+            || p.Column2.ToUpper().Contains(input.Query.ToUpper())
+            || p.Column3.ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
 
-        private async Task<List<NameValueDto>> GetVendorsFromDb(AutoSearchInput input)
+        private async Task<List<AutoFillDto>> GetVendorsFromDb(AutoSearchInput input)
         {
             var query = from vendors in _vendorUnitRepository.GetAll()
                         select new { vendors };
             return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.vendors.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new NameValueDto { Name = u.vendors.FirstName + " " + u.vendors.LastName, Value = u.vendors.Id.ToString() }).ToListAsync();
+                            .Select(u => new AutoFillDto
+                            {
+                                Name = u.vendors.LastName,
+                                Value = u.vendors.Id.ToString(),
+                                Column1 = u.vendors.FirstName,
+                                Column2 = u.vendors.VendorNumber,
+                                Column3 = u.vendors.VendorAccountInfo
+                            }).ToListAsync();
 
         }
 
@@ -167,12 +192,12 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GetTaxCreditList(AutoSearchInput input)
         {
             var taxCreditList = await _taxCreditUnitRepository.GetAll()
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
-                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query)|| p.Number.Contains(input.Query))
+                 .Select(u => new AutoFillDto { Name = u.Description, Value = u.Id.ToString(),Column1 = u.Number}).ToListAsync();
             return taxCreditList;
         }
 

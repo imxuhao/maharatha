@@ -14,10 +14,12 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         public int FiscalYearId { get; set; }
 
         /// <summary>Gets or sets the PeriodStartDate field. </summary>
-        public DateTime PeriodStartDate { get; set; }
+        [Required]
+        public DateTime? PeriodStartDate { get; set; }
 
         /// <summary>Gets or sets the PeriodEndDate field. </summary>
-        public DateTime PeriodEndDate { get; set; }
+        [Required]
+        public DateTime? PeriodEndDate { get; set; }
 
         /// <summary>Gets or sets the IsPeriodOpen field. </summary>
         public bool IsPeriodOpen { get; set; }
@@ -48,10 +50,8 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         [Range(1, Int64.MaxValue)]
         public long OrganizationUnitId { get; set; }
 
-        [Range(1,12)]
-        public int Month { get; set; }
-        [Range(1, int.MaxValue)]
-        public int Year { get; set; }
+        /// <summary>Gets or sets the MonthYear field. </summary>
+        public string MonthYear { get; set; }
 
 
     }

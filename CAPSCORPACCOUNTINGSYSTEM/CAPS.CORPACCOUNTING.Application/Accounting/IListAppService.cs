@@ -14,34 +14,34 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetJobOrDivisionList(AutoSearchInput input);
+        Task<List<AutoFillDto>> GetJobOrDivisionList(AutoSearchInput input);
 
         /// <summary>
         /// Get accounts List based on JobId
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GeAccountsList(AutoSearchInput input);
+        Task<List<AutoFillDto>> GeAccountsList(AutoSearchInput input);
 
         /// <summary>
         ///  Get SubAccounts List based on OrganizationUnitId
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetSubAccountList(AutoSearchInput input);
+        Task<List<AutoFillDto>> GetSubAccountList(AutoSearchInput input);
         /// <summary>
         ///  Get VendorList
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetVendorList(AutoSearchInput input);
+        Task<List<AutoFillDto>> GetVendorList(AutoSearchInput input);
 
        /// <summary>
        ///  Get TaxCreditList
        /// </summary>
        /// <param name="input"></param>
        /// <returns></returns>
-       Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input);
+       Task<List<AutoFillDto>> GetTaxCreditList(AutoSearchInput input);
         /// <summary>
         /// GetTypeof1099List
         /// </summary>

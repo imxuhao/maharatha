@@ -15,7 +15,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
       
         public string Key { get; set; }
 
-        public HashSet<NameValueDto> ItemList { get; set; }
+        public HashSet<AutoFillDto> ItemList { get; set; }
 
         /// <summary>
         /// Gets or Sets Employee List
@@ -36,7 +36,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
             if (key.Contains(CacheKeyStores.EmployeeKey))
                 EmployeeItemList = new HashSet<EmployeeUnitDto>();
             else
-                ItemList = new HashSet<NameValueDto>();
+                ItemList = new HashSet<AutoFillDto>();
             Key = key;
 
         }

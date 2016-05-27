@@ -34,10 +34,6 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         public async Task CreateFiscalPeriodUnit(CreateFiscalPeriodUnitInput input)
         {
             var fiscalPeriodUnit = input.MapTo<FiscalPeriodUnit>();
-            #region Convering Month and Year to StartDateof Period and EndDate of Period
-            input.PeriodStartDate = new DateTime(input.Year, input.Month, 1);
-            input.PeriodEndDate = new DateTime(input.Year, input.Month, DateTime.DaysInMonth(input.Year, input.Month));
-            #endregion
             await _fiscalPeriodUnitManager.CreateAsync(fiscalPeriodUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
@@ -93,12 +89,6 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             Mapper.CreateMap<UpdateFiscalPeriodUnitInput, FiscalPeriodUnit>()
                     .ForMember(u => u.Id, ap => ap.MapFrom(src => src.FiscalPeriodId));
             Mapper.Map(input, fiscalPeriodUnit);
-
-            #region Convering Month and Year to StartDateof Period and EndDate of Period
-            fiscalPeriodUnit.PeriodStartDate = new DateTime(input.Year, input.Month, 1);
-            fiscalPeriodUnit.PeriodEndDate = new DateTime(input.Year, input.Month, DateTime.DaysInMonth(input.Year, input.Month));
-            #endregion
-
             await _fiscalPeriodUnitManager.UpdateAsync(fiscalPeriodUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }

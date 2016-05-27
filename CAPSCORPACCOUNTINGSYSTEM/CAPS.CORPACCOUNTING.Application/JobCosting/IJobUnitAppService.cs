@@ -59,7 +59,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// Get DivisionsList
         /// </summary>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetDivisionList(AutoSearchInput input);
+        Task<List<AutoFillDto>> GetDivisionList(AutoSearchInput input);
 
         /// <summary>
         /// Get ProjectStatusList
@@ -90,7 +90,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetGenericRollupAccountsList(AutoSearchInput input);
+        Task<List<AutoFillDto>> GetGenericRollupAccountsList(AutoSearchInput input);
         /// <summary>
         /// Get ProjectTypeList
         /// </summary>
@@ -113,12 +113,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// Get TaxCreditList
         /// </summary>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input);
+        Task<List<AutoFillDto>> GetTaxCreditList(AutoSearchInput input);
         /// <summary>
         /// Get Customers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetCustomersList(AutoSearchInput input);
+        Task<List<AutoFillDto>> GetCustomersList(AutoSearchInput input);
     }
 }

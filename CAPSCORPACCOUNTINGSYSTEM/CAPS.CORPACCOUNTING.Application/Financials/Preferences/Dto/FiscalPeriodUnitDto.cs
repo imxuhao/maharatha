@@ -47,6 +47,9 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+        
+        /// <summary>Gets or sets the MonthYear field. </summary>
+        public string MonthYear { get; set; }
 
     }
 }

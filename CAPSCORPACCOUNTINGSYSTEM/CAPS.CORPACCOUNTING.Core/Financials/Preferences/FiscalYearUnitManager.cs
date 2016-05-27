@@ -26,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
 
         public virtual async Task UpdateAsync(FiscalYearUnit input)
         {
-            await Validate(input);
+           await Validate(input);
             await _fiscalYearUnitRepository.UpdateAsync(input);
         }
 

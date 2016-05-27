@@ -43,10 +43,15 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         {
             if (input.YearStartDate > input.YearEndDate)
                 throw new UserFriendlyException(L("FiscalStartDate should not greaterthan FiscalEndDate"));
-            
-            //validating FiscalPeriod Overlaping
-            if (input.CreateFiscalPeriodUnits.Count != input.CreateFiscalPeriodUnits.Select(c => new { c.Month, c.Year }).Distinct().Count())
-                throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
+            //validating FiscalPeriod overlap
+            if (!ReferenceEquals(input.CreateFiscalPeriodUnits, null))
+            {
+                //validating FiscalPeriod Overlaping
+                if (input.CreateFiscalPeriodUnits.Count !=
+                    input.CreateFiscalPeriodUnits.Select(c => new { c.PeriodStartDate, c.PeriodEndDate })
+                        .Distinct().Count())
+                    throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
+            }
 
             #region Inserting FiscalPeriod
             var fiscalYearUnit = input.MapTo<FiscalYearUnit>();
@@ -55,11 +60,16 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             #endregion
 
             #region Inserting Fiscal Periods
-            foreach (CreateFiscalPeriodUnitInput createFiscalPeriodUnit in input.CreateFiscalPeriodUnits)
+
+            if (!ReferenceEquals(input.CreateFiscalPeriodUnits, null))
             {
-                createFiscalPeriodUnit.FiscalYearId = fiscalYearUnit.Id;
-                await _fiscalPeriodUnitAppService.CreateFiscalPeriodUnit(createFiscalPeriodUnit);
+                foreach (CreateFiscalPeriodUnitInput createFiscalPeriodUnit in input.CreateFiscalPeriodUnits)
+                {
+                    createFiscalPeriodUnit.FiscalYearId = fiscalYearUnit.Id;
+                    await _fiscalPeriodUnitAppService.CreateFiscalPeriodUnit(createFiscalPeriodUnit);
+                }
             }
+
             #endregion
         }
 
@@ -74,7 +84,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         {
             await _fiscalYearUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();
-           
+
             //Deleting FiscalPeriods By FiscalYearId
             await _fiscalPeriodUnitRepository.DeleteAsync(p => p.FiscalYearId == input.Id);
         }
@@ -126,31 +136,41 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
                 throw new UserFriendlyException(L("FiscalStartDate should not greaterthan FiscalEndDate"));
 
             //validating FiscalPeriod overlap
-            if (input.UpdateFiscalPeriodUnits.Count != input.UpdateFiscalPeriodUnits.Select(c => new { c.Month, c.Year }).Distinct().Count())
-                throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
+            if (!ReferenceEquals(input.UpdateFiscalPeriodUnits, null))
+            {
+                if (input.UpdateFiscalPeriodUnits.Count !=
+                    input.UpdateFiscalPeriodUnits.Select(c => new { c.PeriodStartDate, c.PeriodEndDate })
+                        .Distinct().Count())
+                    throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
+            }
 
             var fiscalYearUnit = await _fiscalYearUnitRepository.GetAsync(input.FiscalYearId);
             Mapper.CreateMap<UpdateFiscalPeriodUnitInput, FiscalYearUnit>()
-                    .ForMember(u => u.Id, ap => ap.MapFrom(src => src.FiscalYearId));
+                .ForMember(u => u.Id, ap => ap.MapFrom(src => src.FiscalYearId));
             Mapper.Map(input, fiscalYearUnit);
 
             await _fiscalYearUnitManager.UpdateAsync(fiscalYearUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            
-            foreach (var updateFiscalPeriodUnit in input.UpdateFiscalPeriodUnits)
+            if (!ReferenceEquals(input.UpdateFiscalPeriodUnits, null))
             {
-                //updating FiscalPeriod
-                if (updateFiscalPeriodUnit.FiscalPeriodId > 0)
+                foreach (var updateFiscalPeriodUnit in input.UpdateFiscalPeriodUnits)
                 {
-                    await _fiscalPeriodUnitAppService.UpdateFiscalPeriodUnit(updateFiscalPeriodUnit);
-                }
-                else
-                {
-                    //Inserting FiscalPeriod
-                    AutoMapper.Mapper.CreateMap<UpdateFiscalPeriodUnitInput, CreateFiscalPeriodUnitInput>();
-                    await _fiscalPeriodUnitAppService.CreateFiscalPeriodUnit(AutoMapper.Mapper.Map<UpdateFiscalPeriodUnitInput, CreateFiscalPeriodUnitInput>(updateFiscalPeriodUnit));
+                    //updating FiscalPeriod
+                    if (updateFiscalPeriodUnit.FiscalPeriodId > 0)
+                    {
+                        await _fiscalPeriodUnitAppService.UpdateFiscalPeriodUnit(updateFiscalPeriodUnit);
+                    }
+                    else
+                    {
+                        //Inserting FiscalPeriod
+                        AutoMapper.Mapper.CreateMap<UpdateFiscalPeriodUnitInput, CreateFiscalPeriodUnitInput>();
+                        await
+                            _fiscalPeriodUnitAppService.CreateFiscalPeriodUnit(
+                                AutoMapper.Mapper.Map<UpdateFiscalPeriodUnitInput, CreateFiscalPeriodUnitInput>(
+                                    updateFiscalPeriodUnit));
 
+                    }
                 }
             }
 

@@ -7909,6 +7909,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.MonthYear">
+            <summary>Gets or sets the MonthYear field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.FiscalPeriodId">
             <summary>Gets or sets the FiscalPeriodId field. </summary>
         </member>
@@ -7947,6 +7950,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.MonthYear">
+            <summary>Gets or sets the MonthYear field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.YearEndDate">
             <summary>Gets or sets the YearEndDate field. </summary>
@@ -8017,11 +8023,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.Month">
-            <summary>Gets or sets the Month field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.Year">
-            <summary>Gets or sets the Year field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.MonthYear">
+            <summary>Gets or sets the MonthYear field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.YearEndDate">
             <summary>Gets or sets the YearEndDate field. </summary>

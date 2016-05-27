@@ -181,22 +181,22 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             using (UnitOfWorkManager.Current.DisableFilter(AbpDataFilters.SoftDelete))
             {
                 //get all jobaccounts and Lines 
-                var joblocations = (from lines in _accountUnitRepository.GetAll().Where(p => p.ChartOfAccountId == input.ChartOfAccountId
+                var jobaccountsList = (from lines in _accountUnitRepository.GetAll().Where(p => p.ChartOfAccountId == input.ChartOfAccountId
                                     && p.OrganizationUnitId == input.OrganizationUnitId)
                                     join jobacc in _jobAccountUnitRepository.GetAll() on lines.Id equals jobacc.AccountId into jobaccount
                                     from jobaccounts in jobaccount.DefaultIfEmpty()
                                     select new { lines, jobaccounts }).ToList();
                 //bulkinsertion
-                foreach (var joblocation in joblocations)
+                foreach (var jobaccount in jobaccountsList)
                 {
-                    if (ReferenceEquals(joblocation.jobaccounts, null) && !joblocation.lines.IsDeleted)
+                    if (ReferenceEquals(jobaccount.jobaccounts, null) && !jobaccount.lines.IsDeleted)
                     {
                         CreateJobAccountUnitInput jobAccount = new CreateJobAccountUnitInput
                         {
                             JobId = input.JobId,
-                            AccountId = joblocation.lines.Id,
+                            AccountId = jobaccount.lines.Id,
                             OrganizationUnitId = input.OrganizationUnitId,
-                            Description = joblocation.lines.Caption
+                            Description = jobaccount.lines.Caption
                         };
 
                         await _jobAccountUnitAppService.CreateJobAccountUnit(jobAccount);
@@ -312,21 +312,22 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// Get DivisionsList
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetDivisionList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GetDivisionList(AutoSearchInput input)
         {
             var cacheItem = await GetDivisionCacheItemAsync(
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())||
+            p.Column1.ToUpper().Contains(input.Query.ToUpper())).ToList();
 
         }
 
 
-        private async Task<List<NameValueDto>> GetDivisionsFromDb(AutoSearchInput input)
+        private async Task<List<AutoFillDto>> GetDivisionsFromDb(AutoSearchInput input)
         {
             var divisions = await _jobUnitRepository.GetAll().Where(p => p.IsDivision == true)
                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                // .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query)) ****activate when we are not using RedisCache***
-                 .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
+                 .Select(u => new AutoFillDto { Name = u.Caption, Value = u.Id.ToString(),Column1 = u.JobNumber}).ToListAsync();
             return divisions;
         }
 
@@ -382,14 +383,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// Get AllFinancialRollupAccountList 
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetGenericRollupAccountsList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GetGenericRollupAccountsList(AutoSearchInput input)
         {
             var cacheItem = await GetGenericRollupAccountsCacheItemAsync(
                CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
             return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
 
-        private async Task<List<NameValueDto>> GetGenericRollupAccountsFromDb(AutoSearchInput input)
+        private async Task<List<AutoFillDto>> GetGenericRollupAccountsFromDb(AutoSearchInput input)
         {
             var query = from au in _accountUnitRepository.GetAll()
                         join coa in _coaUnitRepository.GetAll() on au.ChartOfAccountId equals coa.Id
@@ -397,7 +398,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             var accounts = await query.Where(p => p.au.IsRollupAccount == true && p.coa.IsCorporate == true)
                              //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.au.Caption.Contains(input.Query)) ****activate when we are not using RedisCache***
                              .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.au.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new NameValueDto { Name = u.au.Caption, Value = u.au.Id.ToString() }).ToListAsync();
+                            .Select(u => new AutoFillDto { Name = u.au.Caption, Value = u.au.Id.ToString(),Column1 = u.au.Description,Column2 = u.au.AccountNumber}).ToListAsync();
 
             return accounts;
         }
@@ -460,12 +461,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetTaxCreditList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GetTaxCreditList(AutoSearchInput input)
         {
             var taxCreditList = await _taxCreditUnitRepository.GetAll()
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
-                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Number.Contains(input.Query))
+                 .Select(u => new AutoFillDto { Name = u.Description, Value = u.Id.ToString(),Column1 = u.Number}).ToListAsync();
             return taxCreditList;
         }
 
@@ -474,20 +475,21 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetCustomersList(AutoSearchInput input)
+        public async Task<List<AutoFillDto>> GetCustomersList(AutoSearchInput input)
         {
             var cacheItem = await GetCustomersCacheItemAsync(
                CacheKeyStores.CalculateCacheKey(CacheKeyStores.CustomerKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())).ToList();
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())
+            || p.Column1.ToUpper().Contains(input.Query.ToUpper()) || p.Column2.ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
 
-        private async Task<List<NameValueDto>> GetCustomersFromDb(AutoSearchInput input)
+        private async Task<List<AutoFillDto>> GetCustomersFromDb(AutoSearchInput input)
         {
             var query = from customers in _customerUnitRepository.GetAll()
                         select new { customers };
             return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.customers.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.customers.Caption.Contains(input.Query))
-                            .Select(u => new NameValueDto { Name = u.customers.FirstName + " "+ u.customers.LastName+" "+u.customers.CustomerNumber , Value = u.customers.Id.ToString() }).ToListAsync();
+                            .Select(u => new AutoFillDto { Name = u.customers.LastName,Value = u.customers.Id.ToString(),
+                           Column1 = u.customers.FirstName ,Column2 = u.customers.CustomerNumber}).ToListAsync();
             
         }
 

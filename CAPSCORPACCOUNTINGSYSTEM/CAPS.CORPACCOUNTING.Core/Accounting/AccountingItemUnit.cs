@@ -282,7 +282,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int? AccountingItemTypeOfModificationId { get; set; }
 
         /// <summary>Gets or sets the AccountingItemOrigID field. </summary>
-        public virtual long? AccountingItemOrigId { get; set; }    
+        public virtual long? AccountingItemOrigId { get; set; }
+
+        [ForeignKey("AccountingItemOrigId")]
+        public virtual AccountingItemUnit AccountingItem { get; set; }
 
         /// <summary>Gets or sets the ICTJobID field. </summary>
         public virtual int? IctJobId { get; set; }
@@ -317,6 +320,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the IsAccountingItemSplit field. </summary>
+        public virtual bool IsAccountingItemSplit { get; set; }
 
         #endregion
 

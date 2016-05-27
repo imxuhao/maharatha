@@ -32,6 +32,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         private readonly IRepository<User, long> _userRepository;
         private IdOutputDto<long> _response = null;
         private readonly CustomAppSession _CustomAppSession;
+        private readonly IRepository<User, long> _userUnitRepository;
 
 
         /// <summary>
@@ -46,7 +47,8 @@ namespace CAPS.CORPACCOUNTING.Journals
             IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitRepository,
             IRepository<User, long> userRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BatchUnit> batchUnitRepository,
-            CustomAppSession CustomAppSession
+            CustomAppSession CustomAppSession,
+            IRepository<User, long> userUnitRepository
             )
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
@@ -56,6 +58,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             _batchUnitRepository = batchUnitRepository;
             _userRepository = userRepository;
             _CustomAppSession = CustomAppSession;
+            _userUnitRepository = userUnitRepository;
         }
 
         /// <summary>
@@ -158,6 +161,8 @@ namespace CAPS.CORPACCOUNTING.Journals
         {
 
             var query = from journals in _journalEntryDocumentUnitRepository.GetAll()
+                        //join user in _userUnitRepository.GetAll() on journals.CreatorUserId equals user.Id
+                        //into users
                         join batch in _batchUnitRepository.GetAll() on journals.BatchId equals batch.Id
                         into batchunit
                         from batchunits in batchunit.DefaultIfEmpty()

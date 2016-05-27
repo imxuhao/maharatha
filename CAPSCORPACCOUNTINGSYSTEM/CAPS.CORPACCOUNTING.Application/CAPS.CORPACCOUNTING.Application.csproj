@@ -297,8 +297,10 @@
     <Compile Include="JobCosting\JobCommercialAppService.cs" />
     <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\JobUnitAppService.cs" />
+    <Compile Include="Journals\Dto\CreateJournalEntryDocDetailInputList.cs" />
     <Compile Include="Journals\Dto\GetTransactionList.cs" />
     <Compile Include="Journals\Dto\JournalEntryDocDetailUnitDto.cs" />
+    <Compile Include="Journals\Dto\UpdateJournalEntryDocDetailInputList.cs" />
     <Compile Include="Journals\Dto\UpdateJournalEntryDocDetailInputUnit.cs" />
     <Compile Include="Journals\Dto\CreateJournalEntryDocDetailInputUnit.cs" />
     <Compile Include="Journals\Dto\CreateJournalEntryDocumentInputUnit.cs" />

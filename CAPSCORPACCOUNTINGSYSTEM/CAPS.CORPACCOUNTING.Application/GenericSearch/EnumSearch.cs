@@ -64,6 +64,9 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
                     }
                     searchExpression2 = searchExpression1;
                 }
+                if (ReferenceEquals(combinedExpression, null))
+                    combinedExpression = searchExpression2;
+
                 return combinedExpression;
             }
             else {

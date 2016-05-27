@@ -34,12 +34,21 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public int? LedgerYyyymm { get; set; }
 
         /// <summary>Gets or sets the AccountID field. </summary>
-        [Range(1, Int32.MaxValue)]
+        //[Range(1, Int32.MaxValue)]
         public long AccountId { get; set; }
 
         /// <summary>Gets or sets the JobID field. </summary>
-        [Range(1, Int32.MaxValue)]
+        //[Range(1, Int32.MaxValue)]
         public int JobId { get; set; }
+
+
+        /// <summary>Gets or sets the CreditAccountId field. </summary>
+        //[Range(1, Int32.MaxValue)]
+        public long CreditAccountId { get; set; }
+
+        /// <summary>Gets or sets the CreditJobId field. </summary>
+        //[Range(1, Int32.MaxValue)]
+        public int CreditJobId { get; set; }
 
         /// <summary>Gets or sets the ItemMemo field. </summary>   
         public string ItemMemo { get; set; }
@@ -107,10 +116,41 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the SubAccountID10 field. </summary>
         public long? SubAccountId10 { get; set; }
 
+        /// <summary>Gets or sets the CreditSubAccountID1 field. </summary>
+        public long? CreditSubAccountId1 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID2 field. </summary>
+        public long? CreditSubAccountId2 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID3 field. </summary>
+        public long? CreditSubAccountId3 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID4 field. </summary>
+        public long? CreditSubAccountId4 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID5 field. </summary>
+        public long? CreditSubAccountId5 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID6 field. </summary>
+        public long? CreditSubAccountId6 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID7 field. </summary>
+        public long? CreditSubAccountId7 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID8 field. </summary>
+        public long? CreditSubAccountId8 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID9 field. </summary>
+        public long? CreditSubAccountId9 { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID10 field. </summary>
+        public long? CreditSubAccountId10 { get; set; }
+
         /// <summary>Gets or sets the TypeOf1099T4ID field. </summary>
         public Typeof1099T4? TypeOf1099T4Id { get; set; }
 
         /// <summary>Gets or sets the Amount field. </summary>
+        [Range(Double.MinValue, Double.MaxValue)]
         public decimal? Amount { get; set; }
 
         /// <summary>Gets or sets the CompanyCurrencyAmount field. </summary>
@@ -180,5 +220,8 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         [Range(1, Int64.MaxValue)]
         public long OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the IsAccountingItemSplit field. </summary>
+        public  bool IsAccountingItemSplit { get; set; }
     }
 }

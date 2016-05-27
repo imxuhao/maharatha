@@ -259,6 +259,46 @@
     },
     renderMailToTag:function(email) {
         return '<a href="mailto:' + email + '" style="text-decoration:underline !important;color:#477EBF !important;font-size:15px;">' + email + '</a>';
+    },
+    amountsRenderer:function(value, meta, record, rowIndex, colIndex, store, view) {
+        var isANegativeValue = false, newValue = "";
+        var me = this;
+        if (value) {
+            value = Chaching.utilities.ChachingRenderers.unformattedNumber(value);
+            if (Chaching.utilities.ChachingGlobals.displayNegAmtInBrackets === true && value < 0) {
+                newValue = Math.abs(value);
+                isANegativeValue = true;
+                newValue = $.trim(Ext.util.Format.currency(newValue, ' '));
+            } else {
+                newValue = $.trim(Ext.util.Format.currency(value, ' '));
+            }
+
+            if (isANegativeValue === true) {
+                newValue = Ext.String.format("(" + newValue + ")");
+            }
+        }
+        newValue = newValue.replace(' ', '');
+        return newValue;
+    },
+    unformattedNumber:function(value) {
+        var newValue = "0.00";
+        var close = ")";
+        if (value != undefined) {
+            value = value.toString();
+            if (value !== null && value !== '') {
+                newValue = value.replace("(", '-');
+                newValue = newValue.replace(close, '');
+                newValue = newValue.replace(/,/g, "");
+            }
+        }
+        return newValue;
+    },
+    amountSummaryRenderer: function (value, summaryData, dataIndex) {
+        var me = this.getView();
+        var val = 0;
+        var store = me.getStore();
+        val = store.sum('amount');
+        return '<b>' + Chaching.utilities.ChachingRenderers.amountsRenderer(val, null, null) + '</b>';
     }
 
 });

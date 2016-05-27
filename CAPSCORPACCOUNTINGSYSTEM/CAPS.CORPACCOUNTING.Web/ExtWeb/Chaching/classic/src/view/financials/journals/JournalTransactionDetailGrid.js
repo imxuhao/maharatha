@@ -27,12 +27,14 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
         name: 'debits',
         columns: [{
             xtype: 'gridcolumn',
-            dataIndex: 'job',///TODO: change to jobName once field is available
+            dataIndex: 'job',
             name: 'job',
             text: app.localize('JobDivision'),
-            itemId: 'duplicateJob',
+            itemId: 'duplicatejob',
             width: 100,
             hideable: false,
+            valueField: 'jobId',///NOTE: Important to update record idField when replicating like excel
+            dataLoadClass: 'Chaching.store.utilities.autofill.JobDivisionStore',
             filterField: {
                 xtype: 'combobox',
                 store: new Chaching.store.utilities.autofill.JobDivisionStore(),
@@ -43,7 +45,8 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                 useDisplayFieldToSearch: true,
                 listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
                 emptyText: app.localize('SearchText')
-            }, editor: {
+            },
+            editor: {
                 xtype: 'combobox',
                 store: new Chaching.store.utilities.autofill.JobDivisionStore(),
                 valueField: 'jobId',
@@ -56,10 +59,12 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             xtype: 'gridcolumn',
             dataIndex: 'account',
             name: 'account',
-            itemId: 'duplicateAccount',
+            itemId: 'duplicateaccount',
             text: app.localize('LineNumber'),
             width: 100,
             hideable: false,
+            valueField: 'accountId',
+            dataLoadClass: 'Chaching.store.utilities.autofill.AccountsStore',
             filterField: {
                 xtype: 'combobox',
                 store: new Chaching.store.utilities.autofill.AccountsStore(),
@@ -84,46 +89,46 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             }
         }, {
             xtype: 'gridcolumn',
-            dataIndex: 'subAccount1',///TODO: change to combo
+            dataIndex: 'subAccount1',
             name: 'subAccount1',
             text: app.localize('SubAccount1'),
-            itemId: 'duplicateSubAccount1',
+            itemId: 'duplicatesubAccount1',
             width: 100,
-            filterField: {
-                xtype: 'combobox',
-                store: new Chaching.store.utilities.autofill.SubAccountsStore(),
-                valueField: 'subAccount1',
-                displayField: 'subAccount1',
-                queryMode: 'remote',
-                minChars: 2,
-                useDisplayFieldToSearch: true,
-                listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                emptyText: app.localize('SearchText')
-            }, editor: {
-                xtype: 'combobox',
-                store: new Chaching.store.utilities.autofill.SubAccountsStore(),
-                valueField: 'subAccountId1',
-                displayField: 'subAccount1',
-                queryMode: 'remote',
-                minChars: 2,
-                listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                listeners: {
-                    beforequery: 'beforeAccountQuery'
-                }
-            }
+            valueField: 'subAccountId1',
+            dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount1', 'subAccount1'),
+            editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccount1')
+            ////TODO: add remaining combo once accounting field configuration is done
         }]
     }, {
         xtype: 'gridcolumn',
         text: app.localize('Vendor'),
-        dataIndex: 'vendorId',
-        name: 'vendorId',//TODO: Change to combo
+        dataIndex: 'vendor',
+        name: 'vendor',
         width: '10%',
+        valueField: 'vendorId',
+        dataLoadClass: 'Chaching.store.utilities.autofill.VendorsStore',
         filterField: {
-            xtype: 'textfield',
+            xtype: 'combobox',
+            store: new Chaching.store.utilities.autofill.VendorsStore(),
+            valueField: 'vendor',
+            displayField: 'vendor',
+            queryMode: 'remote',
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
             emptyText: app.localize('SearchText')
         },editor: {
-            xtype:'textfield'
+            xtype: 'combobox',
+            store: new Chaching.store.utilities.autofill.VendorsStore(),
+            valueField: 'vendorId',
+            displayField: 'vendor',
+            queryMode: 'remote',
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
+            emptyText: app.localize('SearchText')
         }
     }],
-    columnOrder: ['amount', 'debits', 'credits', 'itemMemo', 'vendorId', 'accountRef1','taxRebateId','isAsset']
+    columnOrder: ['amount', 'debits', 'credits', 'itemMemo', 'vendor', 'accountRef1', 'taxRebate', 'isAsset']
 });

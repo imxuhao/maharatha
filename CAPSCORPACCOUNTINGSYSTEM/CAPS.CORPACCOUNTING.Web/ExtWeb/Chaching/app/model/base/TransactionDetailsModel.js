@@ -53,7 +53,7 @@ Ext.define('Chaching.model.base.TransactionDetailsModel', {
         { name: 'subAccount10', type: 'string' },
         { name: 'typeOf1099T4Id', type: 'int', defaultVaule: null, convert: nullHandler },
         { name: 'typeOf1099T4', type: 'string' },
-        { name: 'amount', type: 'float', defaultValue: null, convert: nullHandler },
+        { name: 'amount', type: 'float', defaultValue: 0.00 },
         { name: 'companyCurrencyAmount', type: 'float', defaultValue: null, convert: nullHandler },
         { name: 'currencyAdjustmentAmount', type: 'float', defaultValue: null, convert: nullHandler },
         { name: 'originalItemId', type: 'int', defaultValue: null, convert: nullHandler },
@@ -84,6 +84,7 @@ Ext.define('Chaching.model.base.TransactionDetailsModel', {
         { name: 'typeOfCurrencyId', type: 'int', defaultVaule: null, convert: nullHandler },
         { name: 'typeOfCurrency', type: 'string' },
         { name: 'homeCurAmount', type: 'float', defaultValue: null, convert: nullHandler },
-        { name: 'customForexRate', type: 'float', defaultValue: null, convert: nullHandler }
+        { name: 'customForexRate', type: 'float', defaultValue: null, convert: nullHandler },
+        { name: 'isSplit', type: 'boolean' }
     ]
 });

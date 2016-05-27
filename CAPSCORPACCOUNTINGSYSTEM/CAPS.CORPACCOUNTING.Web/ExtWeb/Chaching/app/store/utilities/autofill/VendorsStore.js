@@ -1,19 +1,19 @@
-﻿Ext.define('Chaching.store.utilities.autofill.JobDivisionStore', {
+﻿Ext.define('Chaching.store.utilities.autofill.VendorsStore', {
     extend: 'Chaching.store.base.BaseStore',
     pageSize: 1000,
     fields: [{ name: 'name' }, { name: 'value' }, {
-        name: 'job', convert: function (value, record) {
+        name: 'vendor', convert: function (value, record) {
             return record.get('name');
         }
     }, {
-        name: 'jobId', convert: function (value, record) {
+        name: 'vendorId', convert: function (value, record) {
             return record.get('value');
         }
     }],
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',
-        url: abp.appPath + 'api/services/app/list/GetJobOrDivisionList',
+        url: abp.appPath + 'api/services/app/list/GetVendorList',
         reader: {
             type: 'json',
             rootProperty: 'result'

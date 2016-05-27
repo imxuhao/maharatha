@@ -1,5 +1,6 @@
 ﻿Ext.define('Chaching.store.utilities.autofill.AccountsStore', {
     extend: 'Chaching.store.base.BaseStore',
+    pageSize:1000,
     fields: [{ name: 'name' }, { name: 'value' }, {
         name: 'account', convert: function (value, record) {
             return record.get('name');

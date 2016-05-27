@@ -340,3 +340,10 @@
 .famfamfam-flag-ad { background-position: -208px -121px !important; width: 16px; height: 11px; }
 .famfamfam-flag-np { background-position: -208px -132px !important; width: 9px; height: 11px; }
 .famfamfam-flag-ch { background-position: -208px -143px !important; width: 11px; height: 11px; }
+
+
+.x-invalid-cell-value {
+    /*border-bottom-color: red !important;
+    border-bottom-width: 1px !important;*/
+    color: red !important;
+}

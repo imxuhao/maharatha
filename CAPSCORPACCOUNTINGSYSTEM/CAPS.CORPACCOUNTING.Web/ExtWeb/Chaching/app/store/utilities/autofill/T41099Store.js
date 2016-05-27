@@ -1,19 +1,19 @@
-﻿Ext.define('Chaching.store.utilities.autofill.JobDivisionStore', {
+﻿Ext.define('Chaching.store.utilities.autofill.T41099Store', {
     extend: 'Chaching.store.base.BaseStore',
     pageSize: 1000,
     fields: [{ name: 'name' }, { name: 'value' }, {
-        name: 'job', convert: function (value, record) {
+        name: 'typeOf1099T4', convert: function (value, record) {
             return record.get('name');
         }
     }, {
-        name: 'jobId', convert: function (value, record) {
+        name: 'typeOf1099T4Id', convert: function (value, record) {
             return record.get('value');
         }
     }],
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',
-        url: abp.appPath + 'api/services/app/list/GetJobOrDivisionList',
+        url: abp.appPath + 'api/services/app/list/GetTypeof1099T4List',
         reader: {
             type: 'json',
             rootProperty: 'result'

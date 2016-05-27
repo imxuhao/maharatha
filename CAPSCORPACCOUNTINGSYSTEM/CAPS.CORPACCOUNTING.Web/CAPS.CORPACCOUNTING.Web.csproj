@@ -1919,6 +1919,9 @@
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\SubAccountsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\T41099Store.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\TaxRebateStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\CustomerListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\JobDivisionStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\JournalTypeListStore.js" />
@@ -1947,6 +1950,7 @@
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Basic.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Panel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\CellEditing.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\plugins\Clipboard.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\RowEditing.js" />
     <Content Include="ExtWeb\Chaching\app\data\proxy\BaseProxy.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\BaseModel.js" />
@@ -1958,6 +1962,7 @@
     <Content Include="ExtWeb\Chaching\app\store\tenants\TenantsStore.js" />
     <Content Include="ExtWeb\Chaching\classic\src\Application.js" />
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingReplicator.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSelectionModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGridController.js" />

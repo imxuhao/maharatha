@@ -50,7 +50,7 @@ Ext.define('Chaching.Application', {
         'projects.projectmaintenance.PoRangeAllocationStore',
         'employee.EmployeeStore',
         'customers.CustomersStore',
-         'financials.journals.JournalStore',
+        'financials.journals.JournalStore',
         'utilities.ProjectTypeStore',
         'utilities.ProjectStatusStore',
         'utilities.CountryListStore',
@@ -69,7 +69,8 @@ Ext.define('Chaching.Application', {
         'utilities.autofill.SubAccountsStore',
         'utilities.autofill.TaxRebateStore',
         'utilities.autofill.VendorsStore',
-        'utilities.autofill.T41099Store'
+        'utilities.autofill.T41099Store',
+        'financials.preferences.FiscalPeriodStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function() {

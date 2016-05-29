@@ -1990,8 +1990,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\PreferencesTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\BankSetupGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\BankSetupGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextForm.js" />

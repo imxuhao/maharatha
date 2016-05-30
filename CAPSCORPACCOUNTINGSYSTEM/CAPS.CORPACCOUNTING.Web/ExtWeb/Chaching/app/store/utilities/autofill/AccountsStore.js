@@ -9,6 +9,14 @@
         name: 'accountId', convert: function (value, record) {
             return record.get('value');
         }
+    }, {
+        name: 'creditAccount', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditAccountId', convert: function (value, record) {
+            return record.get('value');
+        }
     }],
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

@@ -25,8 +25,12 @@
             var idealCount = 15, actualCount = store.getCount();
             remainingCount = idealCount - actualCount;
         }
+        var modelClass = store.getModel(),
+            className = modelClass.$className;
         for (var i = 0; i < remainingCount; i++) {
-            store.add({ jobId: null, accountingItemId :0}); //AP, JE, PR, PC, CC, PO
+            var record = Ext.create(className);
+            store.add(record);
+            //store.add({ jobId: null, accountingItemId :0}); //AP, JE, PR, PC, CC, PO
         }
     }
 });

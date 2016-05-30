@@ -9,6 +9,14 @@
         name: 'jobId', convert: function (value, record) {
             return record.get('value');
         }
+    }, {
+        name: 'creditJob', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditJobId', convert: function (value, record) {
+            return record.get('name');
+        }
     }],
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

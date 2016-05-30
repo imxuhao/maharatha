@@ -347,3 +347,6 @@
     border-bottom-width: 1px !important;*/
     color: red !important;
 }
+.x-mandatory-cell-value {
+    background-color: red !important;
+}

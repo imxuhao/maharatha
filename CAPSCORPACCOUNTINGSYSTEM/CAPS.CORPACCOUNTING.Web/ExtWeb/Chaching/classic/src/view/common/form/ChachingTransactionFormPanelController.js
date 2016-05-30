@@ -109,25 +109,29 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                 view = controller.getView();
         var mask = operation.operationMask;
         if (mask) mask.hide();
-        var promise = controller.doDistributionSaveOperations(records, operation, success);
-        var runner = new Ext.util.TaskRunner(),
-            task = undefined;
+        if (success) {
+            var promise = controller.doDistributionSaveOperations(records, operation, success);
+            var runner = new Ext.util.TaskRunner(),
+                task = undefined;
 
-        task = runner.newTask({
-            run: function () {
-                if (promise && promise.owner.completed) {
-                    task.stop();
-                    if (promise.owner.completionAction === "fulfill") {
-                        controller.handleFulFillResponse(records, operation, success);
-                    } else if (promise.owner.completionAction === "reject") {
-                        controller.handleRejectResponse(records, operation, success, promise.owner.completionValue);
+            task = runner.newTask({
+                run: function() {
+                    if (promise && promise.owner.completed) {
+                        task.stop();
+                        if (promise.owner.completionAction === "fulfill") {
+                            controller.handleFulFillResponse(records, operation, success);
+                        } else if (promise.owner.completionAction === "reject") {
+                            controller.handleRejectResponse(records, operation, success, promise.owner.completionValue);
+                        }
                     }
-                }
-            },
-            interval: 1000
-        });
+                },
+                interval: 1000
+            });
 
-        task.start();
+            task.start();
+        } else {
+            controller.handleFulFillResponse(records, operation, success);
+        }
     },
     handleRejectResponse: function (records, operation, success, rejectResponseValue) {
         var controller = operation.controller;
@@ -189,11 +193,63 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
             abp.message.warn(message, title);
         }
     },
-    doDistributionSaveOperations: function (records, operation, success) {
-        ///TODO: IMplement 
+    doDistributionSaveOperations: function(records, operation, success) {
         var deferred = new Ext.Deferred();
-        deferred.resolve('{success:true}');
+
+        var controller = operation.controller,
+            view = controller.getView(),
+            saveContinue = operation.saveContinue,
+            saveClone = operation.saveClone,
+            autoSave = operation.autoSave,
+            detailGrid = view.down('gridpanel[isTransactionDetailGrid=true]'),
+            detailsStore = detailGrid.getStore();
+        if (controller.validateDetails(controller, view, detailGrid, detailsStore)) {
+            ///TODO: Collect modified and deleted records and fire details save request.
+            deferred.resolve('{success:true}');
+        } else {
+            deferred.reject('{success:false,error:{message:"Validation fail"}}');
+        }
+
         return deferred.promise;
+    },
+    validateDetails: function (controller, view, detailGrid, detailsStore) {
+        var detailColumns = detailGrid.getColumns(),
+            modifiedRecords = detailsStore.getModifiedRecords(),
+            isValid = true;
+        if (modifiedRecords && modifiedRecords.length > 0) {
+            var rowLength = modifiedRecords.length;
+            for (var i = 0; i < rowLength; i++) {
+                var record = modifiedRecords[i],
+                    columnCount = detailColumns.length;
+                if (record.dirty) {
+                    for (var j = 0; j < columnCount; j++) {
+                        var column=detailColumns[j],
+                        dataIndex = column.dataIndex;
+                        if (!dataIndex) dataIndex = column.name;
+                        if (column.isMandatory) {
+                            var columnValue = record.get(dataIndex);
+                            if (columnValue===null||columnValue===undefined||columnValue==="") {
+                                var cell = detailGrid.getView().getCell(record, column);
+                                if (cell) controller.invalidateCell(cell, column.text);
+                                isValid = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (!isValid)break;
+            }
+            return isValid;
+        } else return true;
+    },
+    invalidateCell: function (invalidCell, dataIndex) {
+        invalidCell.removeCls("x-invalid-cell-value");//
+        invalidCell.removeCls("x-mandatory-cell-value");
+        invalidCell.set({ 'data-errorqtip': '' });
+
+        //add again back
+        invalidCell.addCls("x-mandatory-cell-value");
+        invalidCell.set({ 'data-errorqtip': dataIndex.initCap()+': '+app.localize('MandatoryField').initCap() });
     },
     onFormResize:function(formPanel, width, height, oldWidth, oldHeight, eOpts) {
         if (formPanel) {

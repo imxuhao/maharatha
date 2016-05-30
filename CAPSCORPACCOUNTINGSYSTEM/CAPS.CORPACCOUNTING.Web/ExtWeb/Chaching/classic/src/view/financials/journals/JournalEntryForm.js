@@ -135,7 +135,8 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
             items: [{
                 columnWidth: 1,
                 items: [{
-                    xtype: 'financials.journals.entry.transactionDetails'
+                    xtype: 'financials.journals.entry.transactionDetails',
+                    isTransactionDetailGrid:true
                 }]
             }]
         }]

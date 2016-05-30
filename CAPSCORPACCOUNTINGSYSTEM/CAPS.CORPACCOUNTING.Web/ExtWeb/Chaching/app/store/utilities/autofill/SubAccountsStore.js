@@ -81,7 +81,90 @@
         name: 'subAccountId10', convert: function (value, record) {
             return record.get('value');
         }
-    }],
+    },
+    /////////////
+    {
+        name: 'creditSubAccount1', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId1', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount2', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId2', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount3', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId3', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount4', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId4', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount5', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId5', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount6', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId6', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount7', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId7', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount8', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId8', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount9', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId9', convert: function (value, record) {
+            return record.get('value');
+        }
+    }, {
+        name: 'creditSubAccount10', convert: function (value, record) {
+            return record.get('name');
+        }
+    }, {
+        name: 'creditSubAccountId10', convert: function (value, record) {
+            return record.get('value');
+        }
+    }
+    ],
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',

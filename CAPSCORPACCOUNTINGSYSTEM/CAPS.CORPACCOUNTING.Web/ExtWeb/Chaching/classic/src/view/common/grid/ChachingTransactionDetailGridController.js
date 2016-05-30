@@ -125,6 +125,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         var cell = view.getView().getCell(context.record, context.column);
         if (cell) {
             cell.removeCls("x-invalid-cell-value");
+            cell.removeCls("x-mandatory-cell-value");
             cell.set({ 'data-errorqtip': '' });
         }
         return true;

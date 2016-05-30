@@ -196,6 +196,7 @@ Ext.define('Chaching.components.plugins.Clipboard', {
      applyCssOnInvalidCells: function (invalidCell, dataIndex) {
          //remove first if existing classes has been applied. Needs to remove else multiple times cls-class and tooltip will get added
          invalidCell.removeCls("x-invalid-cell-value");
+         invalidCell.removeCls("x-mandatory-cell-value");
          invalidCell.set({ 'data-errorqtip': '' });
 
          //add again back

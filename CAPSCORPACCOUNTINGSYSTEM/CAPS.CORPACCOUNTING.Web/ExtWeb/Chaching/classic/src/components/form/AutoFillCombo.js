@@ -1,5 +1,6 @@
 ﻿Ext.define('Chaching.components.form.AutoFillCombo', {
-    extend: 'Ext.form.field.Picker',
+    //extend: 'Ext.form.field.Picker',
+    extend: 'Ext.form.field.ComboBox',
     xtype: 'autofillcombo',
     requires: ['Ext.grid.Panel'],
 
@@ -33,6 +34,7 @@
         me.on('iconclick', me.onIconClick, me);
         me.callParent(arguments);
     },
+    
     onIconClick: function () {
         var me = this;
         var entityType = me.entityType;
@@ -46,6 +48,7 @@
             columnList = me.createGridColumns();
 	        opts = Ext.apply({
 	            shrinkWrapDock: 2,
+                id: me.id + '-picker',
 	            manageHeight: false,
 	            store: me.store,
 	            displayField: me.displayField,
@@ -55,7 +58,7 @@
 	            forceFit: true,
 	            layout: 'fit',
 	            floating: true,
-	            multiSelect: true,
+	            multiSelect: false,
 	            cls: 'chaching-transactiongrid',
 	            selModel: {
 	                selType: 'rowmodel', // rowmodel is the default selection model
@@ -73,9 +76,53 @@
         return picker;
     },
 
+    doQuery: function (queryString, forceAll, rawQuery) {
+        var me = this,
+            store = me.getStore(),
+            filters = store.getFilters(),
+            // if we have a queryString and the queryFilter is not filtering the store, we should do a localQuery
+            refreshFilters = !!queryString && me.queryFilter && (filters.indexOf(me.queryFilter) < 0),
+            // Decide if, and how we are going to query the store
+            queryPlan = me.beforeQuery({
+                lastQuery: me.lastQuery || '',
+                query: queryString || '',
+                rawQuery: rawQuery,
+                forceAll: forceAll,
+                combo: me,
+                cancel: false
+            });
+        // Allow veto.
+        if (queryPlan !== false && !queryPlan.cancel) {
+            // If they're using the same value as last time (and not being asked to query all), 
+            // and the filters don't need to be refreshed, just show the dropdown
+            if (me.queryCaching && !refreshFilters && queryPlan.query === me.lastQuery) {
+                // The filter changing was done with events suppressed, so
+                // refresh the picker DOM while hidden and it will layout on show.
+                me.getPicker().getView().refresh();
+                me.expand();
+                me.afterQuery(queryPlan);
+            } else // Otherwise filter or load the store
+            {
+                me.lastQuery = queryPlan.query;
+                if (me.queryMode === 'local') {
+                    me.doLocalQuery(queryPlan);
+                } else {
+                    me.doRemoteQuery(queryPlan);
+                }
+            }
+            return true;
+        } else // If the query was vetoed we still need to check the change
+            // in case custom validators are used
+        {
+            me.startCheckChangeTask();
+        }
+        return false;
+    },
+
     createGridColumns: function () {
         var me = this,
-            store = Ext.create('Chaching.store.' + me.store),
+            //store = Ext.create('Chaching.store.' + me.store),
+             store = me.store,
            // model = me.store.model.create(),
             fileds = store.model.fields.items,
             count = fileds.length,
@@ -84,7 +131,7 @@
             if (fileds[i].hidden == false) {
                 var column = {
                     text: fileds[i].headerText == null ? fileds[i].name : fileds[i].headerText,
-                    sortable: true,
+                    sortable: false,
                     hideable: false,
                     menuDisabled: true,
                     filterable: true,
@@ -142,64 +189,16 @@
             actionColumn = {
                 xtype: 'actioncolumn',
                 width: '8%',
-                minWidth : 30,
+                minWidth: 30,
+                sortable: false,
+                hideable: false,
+                menuDisabled: true,
+                filterable: true,
                 items: actionColumnItems
             }
             columns.push(actionColumn);
         } 
-        
-
-
-
-        //for (var i = 0; i < count; i++) {
-        //    if (fileds[i].name == 'id'  || fileds[i].hidden == true)
-        //        continue;
-
-        //    var newItem = new Object({
-        //        text: fileds[i].alias == null ? fileds[i].name : fileds[i].alias,
-        //        sortable: true,
-        //        hideable: false,
-        //        menuDisabled: false,
-        //        filterable: true,
-        //        width: fileds[i].width,
-        //        hidden: fileds[i].hidden,
-        //        dataIndex: fileds[i].name,
-        //        flex: fileds[i].width > 0 ? null : fileds[i].flex
-        //        //,
-        //        //renderer: fileds[i].renderer || function (v) {
-        //        //    var srch = me.isFiltering();
-        //        //    if (srch == null)
-        //        //        return v;
-        //        //    if (me.ignoreFormat) {
-        //        //        srch = me.autoFormat(srch, v);
-        //        //    }
-        //        //    var pattern = new RegExp(srch, "gi");
-        //        //    var spanClass = 'mark-combo-match';
-        //        //    var replacement = "<span class='" + spanClass + "'>$&</span>";
-        //        //    v = v.toString().replace(pattern, replacement);
-        //        //    return '<span class="mark-combo-notmatch">' + v + '</span>';
-        //        //}
-        //    });
-        //    var column = Ext.create('Ext.grid.column.Column', newItem);
-        //    columns.push(column);
-        //}
-
-        //if (me.columnOrder) {
-        //    var dummyColumns = columns;
-        //    columns = [];
-        //    var order = me.columnOrder;
-        //    for (var j = 0; j < order.length; j++) {
-        //        var columnName = order[j];
-        //        for (var k = 0; k < dummyColumns.length; k++) {
-        //            if (dummyColumns[k].dataIndex === columnName) {
-        //                columns.push(dummyColumns[k]);
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-
-        return columns;
+       return columns;
     },
     createWindow: function (xtype, operation) {
         var xtypeOfView = "";

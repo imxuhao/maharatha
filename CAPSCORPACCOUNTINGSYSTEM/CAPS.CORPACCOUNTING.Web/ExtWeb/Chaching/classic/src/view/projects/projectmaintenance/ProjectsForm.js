@@ -1,4 +1,4 @@
-/**
+﻿/**
  * The class is created to design project/job UI
  * Author: Krishna Garad
  * Date: 29/04/2016
@@ -366,13 +366,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             //}
 
                             xtype: 'autofillcombo',
-                            //plugins:[{
-                            //               ptype:'saki-ficn'
-                            //              ,iconCls:'fa-smile-o'
-                            //               ,qtip:'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. '
-                            //                    +'Cras mattis consectetur purus sit amet fermentum. Cum sociis natoque '
-                            //                  +'penatibus et magnis dis parturient montes, nascetur ridiculus mus.'
-                            //           }],
                             name: 'agencyId',
                             itemId: 'agencyId',
                             fieldLabel: app.localize('Agency'),
@@ -380,13 +373,20 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             valueField: 'customerId',
                             displayField: 'name',
                             queryMode: 'remote',
+                            typeAhead: true,
+                            editable : true,
                             entityType: 'payables.vendors',
                             entityPermission: 'Payables.Vendors',
+                            // We're forcing the query to run every time by setting minChars to 0
+                            // (default is 4)
+                            minChars: 0,
+                            queryParam: 'query',
+                            queryMode: 'remote',
                             listConfig: {
                                 minWidth : 300
                             }
 
-
+                        
                             
                         }, {
                             xtype: 'textfield',

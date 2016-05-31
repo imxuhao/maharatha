@@ -11,7 +11,7 @@
     //    entityType : null,
     //    permissions : null
     //},
-
+    autoSelect:false,
     initComponent: function () {
         var me = this;
         //add create icon based upon permission
@@ -201,22 +201,26 @@
        return columns;
     },
     createWindow: function (xtype, operation) {
+        var me = this,
+            picker = me.picker;
+        if (!picker) me.picker = me.getPicker();
         var xtypeOfView = "";
         if (operation === 'create') {
             xtypeOfView = xtype + ".create";
         } else if (operation === 'edit') {
             xtypeOfView = xtype + ".edit";
         }
-
-        Ext.create('Ext.window.Window', {
-            title: operation.toUpperCase(),
-            height: 600,
-            width: 800,
+        var window = Ext.create('Chaching.view.common.window.ChachingWindowPanel', {
             layout: 'fit',
             autoShow: true,
             modal: true,
-            items: [{ 
-                xtype: xtypeOfView
+            height: '90%',
+            width:'90%',
+            items: [{
+                xtype: xtypeOfView,
+                openInPopupWindow: true,
+                parentGrid: me.picker,
+                showFormTitle:false
             }]
         });
 

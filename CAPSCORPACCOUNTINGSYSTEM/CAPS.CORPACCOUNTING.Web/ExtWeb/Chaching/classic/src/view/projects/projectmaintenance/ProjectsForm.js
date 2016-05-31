@@ -372,14 +372,13 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             store: 'utilities.CustomerListStore',
                             valueField: 'customerId',
                             displayField: 'name',
-                            queryMode: 'remote',
                             typeAhead: true,
                             editable : true,
                             entityType: 'payables.vendors',
                             entityPermission: 'Payables.Vendors',
                             // We're forcing the query to run every time by setting minChars to 0
                             // (default is 4)
-                            minChars: 0,
+                            minChars: 2,
                             queryParam: 'query',
                             queryMode: 'remote',
                             listConfig: {

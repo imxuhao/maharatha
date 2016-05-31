@@ -15,19 +15,13 @@ namespace CAPS.CORPACCOUNTING.Journals
     /// </summary>
     public interface IJournalEntryDocDetailAppService : IApplicationService
     {
+      
         /// <summary>
-        /// Create Journal Entry Document Detail.
+        ///Add or Update or delete Journal Entry Document.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task CreateJournalEntryDocDetailUnit(CreateJournalEntryDocDetailInputList input);
-
-        /// <summary>
-        /// Update Journal Entry Document.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task UpdateJournalEntryDocumentUnit(UpdateJournalEntryDocDetailInputList input);
+        Task JournalEntryDocumentTransactionUnit(JournalEntryDocDetailInputList input);
 
         /// <summary>
         /// Delete Journal Entry Document.

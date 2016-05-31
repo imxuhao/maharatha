@@ -300,7 +300,7 @@
     <Compile Include="Journals\Dto\CreateJournalEntryDocDetailInputList.cs" />
     <Compile Include="Journals\Dto\GetTransactionList.cs" />
     <Compile Include="Journals\Dto\JournalEntryDocDetailUnitDto.cs" />
-    <Compile Include="Journals\Dto\UpdateJournalEntryDocDetailInputList.cs" />
+    <Compile Include="Journals\Dto\JournalEntryDocDetailInputList.cs" />
     <Compile Include="Journals\Dto\UpdateJournalEntryDocDetailInputUnit.cs" />
     <Compile Include="Journals\Dto\CreateJournalEntryDocDetailInputUnit.cs" />
     <Compile Include="Journals\Dto\CreateJournalEntryDocumentInputUnit.cs" />

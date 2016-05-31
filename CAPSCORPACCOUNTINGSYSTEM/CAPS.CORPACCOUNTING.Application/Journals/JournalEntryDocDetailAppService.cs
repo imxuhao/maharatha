@@ -60,44 +60,41 @@ namespace CAPS.CORPACCOUNTING.Journals
         }
 
         /// <summary>
-        ///  Create Journal Entry Document Detail.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [UnitOfWork]
-        public async Task CreateJournalEntryDocDetailUnit(CreateJournalEntryDocDetailInputList input)
-        {
-            foreach (var journaldocList in input.CreateJournalEntryDocDetailList)
-            {
-                var journalDetails = await MapJournalDetails(journaldocList);
-                long creditParentId = 0;
-                foreach (var item in journalDetails)
-                {
-                    if (creditParentId != 0)
-                        item.AccountingItemOrigId = creditParentId;
-
-                    await _journalEntryDocumentDetailUnitManager.CreateAsync(item);
-                    await CurrentUnitOfWork.SaveChangesAsync();
-                    creditParentId = item.Id;
-                }
-            }
-        }
-
-
-        /// <summary>
         /// Update Journal Entry Document.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public async Task UpdateJournalEntryDocumentUnit(UpdateJournalEntryDocDetailInputList input)
+        public async Task JournalEntryDocumentTransactionUnit(JournalEntryDocDetailInputList input)
         {
 
+
+            //adding journalDocDetails
             foreach (var journaldocDetails in input.UpdateJournalEntryDocDetailList)
             {
-                if (Math.Sign(journaldocDetails.AccountingItemId) == 1)
-                {
 
+                if (Math.Sign(journaldocDetails.AccountingItemId) == 0)
+                {
+                    CreateJournalEntryDocDetailInputUnit createJournalDocDetails = new CreateJournalEntryDocDetailInputUnit();
+
+                    Mapper.CreateMap<UpdateJournalEntryDocDetailInputUnit, CreateJournalEntryDocDetailInputUnit>();
+                    Mapper.Map(journaldocDetails, createJournalDocDetails);
+
+                    var journalDetails = await MapJournalDetails(createJournalDocDetails);
+                    long creditParentId = 0;
+                    foreach (var item in journalDetails)
+                    {
+                        if (creditParentId != 0)
+                            item.AccountingItemOrigId = creditParentId;
+
+                        await _journalEntryDocumentDetailUnitManager.CreateAsync(item);
+                        await CurrentUnitOfWork.SaveChangesAsync();
+                        creditParentId = item.Id;
+                    }
+
+                }//updating journalDocdetails
+                else if (Math.Sign(journaldocDetails.AccountingItemId) == 1)
+                {
                     long debitParentId = 0;
                     var jouranlDetailsList = await MapJournalDetails(journaldocDetails);
 
@@ -107,9 +104,11 @@ namespace CAPS.CORPACCOUNTING.Journals
                         //If AccountingItemId > 0 records will updated
                         //If AccountingItemId < 0 records will deleted
                         //Otherwise journal Details Added.
+
                         if (jouranlDetail.Id > 0)
                         {
                             var journalEntryDocDetailUnit = await _journalEntryDocumentDetailUnitRepository.GetAsync(jouranlDetail.Id);
+
                             Mapper.CreateMap<JournalEntryDocumentDetailUnit, JournalEntryDocumentDetailUnit>()
                                     .ForMember(u => u.Id, ap => ap.Ignore())
                                     .ForMember(u => u.TenantId, ap => ap.Ignore());
@@ -122,23 +121,6 @@ namespace CAPS.CORPACCOUNTING.Journals
 
                             await CurrentUnitOfWork.SaveChangesAsync();
                         }
-                        else if (jouranlDetail.Id < 0)
-                        {
-                            IdInput<long> idInput = new IdInput<long>() { Id = (jouranlDetail.Id * (-1)) };
-                            var journalDetail = await _journalEntryDocumentDetailUnitRepository.GetAsync(idInput.Id);
-                            if (!ReferenceEquals(journalDetail, null))
-                            {
-                                await _journalEntryDocumentDetailUnitManager.DeleteAsync(new IdInput<long>() { Id = journalDetail.Id });
-                                await _journalEntryDocumentDetailUnitManager.DeleteAsync(idInput);
-
-                                var creditJournal = await _journalEntryDocumentDetailUnitRepository.FirstOrDefaultAsync(u => u.AccountingItemOrigId == jouranlDetail.Id);
-                                if (!ReferenceEquals(creditJournal, null))
-                                {
-                                    await _journalEntryDocumentDetailUnitManager.DeleteAsync(new IdInput<long>() { Id = creditJournal.Id });
-                                    await _journalEntryDocumentDetailUnitManager.DeleteAsync(idInput);
-                                }
-                            }
-                        }
                         else
                         {
                             var journalEntryDocDetailUnit = jouranlDetail.MapTo<JournalEntryDocumentDetailUnit>();
@@ -147,7 +129,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                             debitParentId = journalEntryDocDetailUnit.Id;
                         }
                     }
-                }
+                }//delete JournalDocDetails 
                 else
                 {
 
@@ -400,8 +382,9 @@ namespace CAPS.CORPACCOUNTING.Journals
             List<JournalEntryDocumentDetailUnit> journalEntryDetailUnitList = new List<JournalEntryDocumentDetailUnit>();
             JournalEntryDocumentDetailUnit debitJournalEntryDetailUnit = null;
             JournalEntryDocumentDetailUnit creditjournalEntryDetailUnit = null;
-
+             
             bool isMinusAmmount = false;
+            bool isParentDelte = false;
 
             var journalDetailItem = await _journalEntryDocumentDetailUnitRepository.GetAsync(journalEntryDocDetail.AccountingItemId);
 
@@ -430,7 +413,10 @@ namespace CAPS.CORPACCOUNTING.Journals
 
                 //delete Debit Journal Entry Detail
                 if (debitJournalEntryDetailUnit.JobId == 0 && debitJournalEntryDetailUnit.AccountId == 0 && debitJournalEntryDetailUnit.Id != 0 && !ValidateJobAndAccount(debitJournalEntryDetailUnit))
+                {
+                    isParentDelte = true;
                     await _journalEntryDocumentDetailUnitRepository.DeleteAsync(debitJournalEntryDetailUnit.Id);
+                }
 
 
                 //get credit information on accountItemOrgId
@@ -460,7 +446,8 @@ namespace CAPS.CORPACCOUNTING.Journals
                     creditJournalDetailItem.SubAccountId9 = journalEntryDocDetail.CreditSubAccountId9;
                     creditJournalDetailItem.SubAccountId10 = journalEntryDocDetail.CreditSubAccountId10;
                     creditJournalDetailItem.AccountingDocumentId = journalEntryDocDetail.AccountingDocumentId;
-                    creditJournalDetailItem.AccountingItemOrigId = creditParentId;
+                    if (!isParentDelte)
+                        creditJournalDetailItem.AccountingItemOrigId = creditParentId;
                     creditJournalDetailItem.Amount = -Math.Abs(journalEntryDocDetail.Amount.Value);
                     creditjournalEntryDetailUnit = creditJournalDetailItem;
 

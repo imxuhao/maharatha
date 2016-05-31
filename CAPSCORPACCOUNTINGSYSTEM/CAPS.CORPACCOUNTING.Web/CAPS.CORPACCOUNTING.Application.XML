@@ -4269,19 +4269,12 @@
              Provide all CRUD operations for JournalEntryDocument.
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.CreateJournalEntryDocDetailUnit(CAPS.CORPACCOUNTING.Journals.Dto.CreateJournalEntryDocDetailInputList)">
-            <summary>
-            Create Journal Entry Document Detail.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.UpdateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.Dto.UpdateJournalEntryDocDetailInputList)">
-            <summary>
-            Update Journal Entry Document.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.JournalEntryDocumentTransactionUnit(CAPS.CORPACCOUNTING.Journals.Dto.JournalEntryDocDetailInputList)">
+             <summary>
+            Add or Update or delete Journal Entry Document.
+             </summary>
+             <param name="input"></param>
+             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.DeleteJournalEntryDocDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
@@ -4336,14 +4329,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.CreateJournalEntryDocDetailUnit(CAPS.CORPACCOUNTING.Journals.Dto.CreateJournalEntryDocDetailInputList)">
-            <summary>
-             Create Journal Entry Document Detail.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.UpdateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.Dto.UpdateJournalEntryDocDetailInputList)">
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.JournalEntryDocumentTransactionUnit(CAPS.CORPACCOUNTING.Journals.Dto.JournalEntryDocDetailInputList)">
             <summary>
             Update Journal Entry Document.
             </summary>

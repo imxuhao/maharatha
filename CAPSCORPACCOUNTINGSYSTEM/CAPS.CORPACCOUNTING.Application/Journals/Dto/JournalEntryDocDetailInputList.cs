@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Journals.Dto
 {
-   public class UpdateJournalEntryDocDetailInputList : IInputDto
+   public class JournalEntryDocDetailInputList : IInputDto
     {
         public List<UpdateJournalEntryDocDetailInputUnit> UpdateJournalEntryDocDetailList { get; set; }
     }

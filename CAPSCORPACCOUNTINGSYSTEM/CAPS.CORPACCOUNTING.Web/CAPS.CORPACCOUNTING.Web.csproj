@@ -1863,7 +1863,6 @@
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionHeaderModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\customers\CustomerModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\employee\EmployeeModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountsModel.js" />
@@ -1927,7 +1926,6 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\T41099Store.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\TaxRebateStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\VendorsStore.js" />
-    <Content Include="ExtWeb\Chaching\app\store\utilities\CustomerListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\JobDivisionStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\JournalTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\PaymentTermsListStore.js" />

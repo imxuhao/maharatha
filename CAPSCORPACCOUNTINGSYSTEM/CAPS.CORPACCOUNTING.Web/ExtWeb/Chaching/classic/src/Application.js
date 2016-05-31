@@ -61,7 +61,7 @@ Ext.define('Chaching.Application', {
         'utilities.TypeOfTaxListStore',
         'utilities.JournalTypeListStore',
         'utilities.EmployeeListStore',
-        'utilities.CustomerListStore',
+        'utilities.autofill.CustomerListStore',
         'financials.journals.JournalDetailsStore',
         'payables.invoices.BatchStore',
         'utilities.autofill.JobDivisionStore',

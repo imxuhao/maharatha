@@ -6,7 +6,8 @@
 
     modulePermissions: undefined,
     entityType: null,
-    entityPermission : null,
+    entityPermission: null,
+    entityGridController : null,
     //config : {
     //    entityType : null,
     //    permissions : null
@@ -38,7 +39,7 @@
     onIconClick: function () {
         var me = this;
         var entityType = me.entityType;
-        me.createWindow(entityType, 'create');
+        me.createWindow(entityType, 'create', null);
     },
     /**
      * Creates and returns the tree panel to be used as this field's picker.
@@ -48,7 +49,6 @@
             columnList = me.createGridColumns();
 	        opts = Ext.apply({
 	            shrinkWrapDock: 2,
-                id: me.id + '-picker',
 	            manageHeight: false,
 	            store: me.store,
 	            displayField: me.displayField,
@@ -60,6 +60,7 @@
 	            floating: true,
 	            multiSelect: false,
 	            cls: 'chaching-transactiongrid',
+	            controller : me.entityGridController,
 	            selModel: {
 	                selType: 'rowmodel', // rowmodel is the default selection model
 	            },
@@ -144,16 +145,7 @@
                 columns.push(column);
             }
         }
-        //add action column based upon permission
-        //if (!me.modulePermissions) {
-        //    me.modulePermissions = {
-        //        read: abp.auth.isGranted('Pages.' + me.entityPermission),
-        //        create: abp.auth.isGranted('Pages.' + me.entityPermission + '.Create'),
-        //        edit: abp.auth.isGranted('Pages.' + me.entityPermission + '.Edit'),
-        //        destroy: abp.auth.isGranted('Pages.' + me.entityPermission + '.Delete')
-        //    };
-        //}
-
+      
         var actionColumn = {};
         var actionColumnItems = [];
         var editActionItem = {
@@ -163,8 +155,9 @@
             tooltip: app.localize('Edit'),
             handler : function(grid, rowIndex, colIndex) {
                 var entityType = me.entityType;
-                me.createWindow(entityType, 'edit');
                 var rec = grid.getStore().getAt(rowIndex);
+                me.createWindow(entityType, 'edit', rec);
+               
             }
         };
         var deleteActionItem = {
@@ -175,6 +168,7 @@
             handler : function(grid, rowIndex, colIndex) {
                 var entityType = me.entityType;
                 var rec = grid.getStore().getAt(rowIndex);
+                me.createWindow(entityType, 'delete', rec);
             }
         };
         if (me.modulePermissions.edit) {
@@ -200,7 +194,7 @@
         } 
        return columns;
     },
-    createWindow: function (xtype, operation) {
+    createWindow: function (xtype, operation, record) {
         var me = this,
             picker = me.picker;
         if (!picker) me.picker = me.getPicker();
@@ -210,21 +204,78 @@
         } else if (operation === 'edit') {
             xtypeOfView = xtype + ".edit";
         }
+      
+        var recordByIdUrl = me.store.proxy.urlToGetRecordById;
+        if (operation === 'edit') {
+            Ext.Ajax.request({
+                url: recordByIdUrl,
+                jsonData: Ext.encode({ id: 2 }),  //record.get(me.valueField)
+                success: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        var popupWindow = me.createPopupWindow(xtypeOfView, me);
+                        var formView = popupWindow.down('form');
+                        var recordToLoad = me.getStore().model.create();
+                        Ext.apply(recordToLoad.data, res.result);
+                        var entityTypeController = me.picker.getController();
+                        entityTypeController.doAfterCreateAction('popup', formView, true, recordToLoad);
+                        formView.loadRecord(recordToLoad);
+                    } else {
+                        abp.message.error(res.error.message, 'Error');
+                    }
+                },
+                failure: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+        } else if (operation === 'delete') {
+            Ext.Ajax.request({
+                url: me.store.proxy.api.destroy,
+                jsonData: Ext.encode({ id: 2 }),
+                success: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        abp.notify.success('Operation completed successfully.', 'Success');
+                    } else {
+                        abp.message.error(res.error.message, 'Error');
+                    }
+                },
+                failure: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+        }
+        else if (operation === 'create') {
+            var popupWindow = me.createPopupWindow(xtypeOfView, me);
+            var formView = popupWindow.down('form');
+            var entityTypeController = me.picker.getController();
+            entityTypeController.doAfterCreateAction('popup', formView, false, null);
+        }
+    },
+
+    createPopupWindow: function (xtypeOfView, me) {
         var window = Ext.create('Chaching.view.common.window.ChachingWindowPanel', {
             layout: 'fit',
             autoShow: true,
             modal: true,
             height: '90%',
-            width:'90%',
+            width: '90%',
             items: [{
                 xtype: xtypeOfView,
                 openInPopupWindow: true,
                 parentGrid: me.picker,
-                showFormTitle:false
+                showFormTitle: false
             }]
         });
 
+        return window;
     },
+
+
 
     onItemClick: function (view, record, node, rowIndex, e) {
 

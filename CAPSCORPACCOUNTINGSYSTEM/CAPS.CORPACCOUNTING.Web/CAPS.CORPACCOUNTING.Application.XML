@@ -4462,7 +4462,7 @@
             <param name="journalEntryDocDetail"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},CAPS.CORPACCOUNTING.Authorization.Users.UserManager,Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnit,System.Int64},CAPS.CORPACCOUNTING.Authorization.Users.UserManager,Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64})">
             <summary>
             
             </summary>

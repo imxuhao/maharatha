@@ -2,7 +2,7 @@
     extend: 'Chaching.store.base.BaseStore',
     pageSize: 1000,
     fields: [{ name: 'name' }, { name: 'value' }, {
-        name: 'job', convert: function (value, record) {
+        name: 'jobDesc', convert: function (value, record) {
             return record.get('name');
         }
     }, {
@@ -10,12 +10,12 @@
             return record.get('value');
         }
     }, {
-        name: 'creditJob', convert: function (value, record) {
+        name: 'creditJobDesc', convert: function (value, record) {
             return record.get('name');
         }
     }, {
         name: 'creditJobId', convert: function (value, record) {
-            return record.get('name');
+            return record.get('value');
         }
     }],
     proxy: {

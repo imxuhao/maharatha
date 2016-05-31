@@ -26,7 +26,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
         }
         Ext.destroy(view);
     },
-    doSaveAction:function(saveContinue, saveClone,autoSave) {
+    doSaveAction: function (saveContinue, saveClone, autoSave) {
         var me = this,
            view = me.getView(),
            parentGrid = view.parentGrid,
@@ -107,9 +107,12 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
     onOperationCompleteCallBack: function (records, operation, success) {
         var controller = operation.controller,
                 view = controller.getView();
-        var mask = operation.operationMask;
-        if (mask) mask.hide();
         if (success) {
+            if (operation.getAction() === "create") {
+                var response = Ext.decode(operation.getResponse().responseText);
+                if (response && response.result)
+                    view.getForm().findField('accountingDocumentId').setValue(response.result.id);
+            }
             var promise = controller.doDistributionSaveOperations(records, operation, success);
             var runner = new Ext.util.TaskRunner(),
                 task = undefined;
@@ -136,6 +139,8 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
     handleRejectResponse: function (records, operation, success, rejectResponseValue) {
         var controller = operation.controller;
         controller.enableActionGroup();
+        var mask = operation.operationMask;
+        if (mask) mask.hide();
         if (records && rejectResponseValue) {
             var record = records[0],
                 rejectResponse = Ext.decode(rejectResponseValue);
@@ -162,9 +167,29 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
             saveClone = operation.saveClone,
             autoSave = operation.autoSave;
         controller.enableActionGroup();
+        var mask = operation.operationMask;
+        if (mask) mask.hide();
         if (success) {
             var gridController = operation.parentGrid.getController();
             gridController.doReloadGrid();
+
+           
+            var detailGrid = view.down('gridpanel[isTransactionDetailGrid=true]'),
+                detailsStore = detailGrid.getStore(),
+                form = view.getForm();
+            if (saveContinue) {
+                detailsStore.getProxy().setExtraParam('accountingDocumentId', 0);
+                detailsStore.load();
+                form.reset(true);
+            } else if (saveClone) {
+                form.findField('accountingDocumentId').setValue(0);
+                var detailsRecords = detailsStore.getRange();
+                for (var i = 0; i < detailsRecords.length; i++) {
+                    var rec = detailsRecords[i];
+                    rec.set('accountingDocumentId', 0);
+                    rec.set('accountingItemId', 0);
+                }
+            }
 
             var action = operation.getAction();
             if ((action === "create" || action === "destroy" || action === "update") && !saveContinue && !saveClone && !autoSave) {
@@ -175,7 +200,8 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                     Ext.destroy(view);
                 }
             }
-            abp.notify.success('Operation completed successfully.', 'Success');
+            if (!autoSave)
+                abp.notify.success('Operation completed successfully.', 'Success');
         } else {
             var response = Ext.decode(operation.getResponse().responseText);
             var message = '',
@@ -202,15 +228,67 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
             saveClone = operation.saveClone,
             autoSave = operation.autoSave,
             detailGrid = view.down('gridpanel[isTransactionDetailGrid=true]'),
-            detailsStore = detailGrid.getStore();
+            detailsStore = detailGrid.getStore(),
+            serverKeyName = detailsStore.serverKeyName;
         if (controller.validateDetails(controller, view, detailGrid, detailsStore)) {
-            ///TODO: Collect modified and deleted records and fire details save request.
-            deferred.resolve('{success:true}');
+            var modifiedRecords = controller.getDetailsModifiedRecords(controller, view, detailGrid, detailsStore);
+            if (modifiedRecords.data.length > 0) {
+                var params = new Object();
+                params[serverKeyName] = modifiedRecords.data;
+                var detailsOperation = Ext.data.Operation({
+                    params: params,
+                    records: modifiedRecords.records,
+                    controller: controller,
+                    saveContinue: saveContinue,
+                    saveClone: saveClone,
+                    autoSave: autoSave,
+                    promise: deferred,
+                    callback: controller.onDetailsOperationCompleteCallBack
+                });
+                detailsStore.update(detailsOperation);
+            } else//default resolve the promise if no changes in distribution grid
+                deferred.resolve('{success:true}');
         } else {
             deferred.reject('{success:false,error:{message:"Validation fail"}}');
         }
 
         return deferred.promise;
+    },
+    onDetailsOperationCompleteCallBack: function(records, detailsOperation, success) {
+        var deferred = detailsOperation.promise;
+        if (success) {
+            deferred.resolve('{success:true}');
+        } else {
+            deferred.reject(detailsOperation.getResponse().responseText);
+        }
+    },
+    getDetailsModifiedRecords: function(controller, view, detailGrid, detailsStore) {
+        var modifiedRecords = detailsStore.getModifiedRecords(),
+            removedRecords=detailsStore.getRemovedRecords(),
+            records = [],
+            data = [],
+            modifiedRecs={records:records,data:data},
+            transactionId = view.getForm().findField('accountingDocumentId').getValue();
+        if (modifiedRecords&&modifiedRecords.length>0) {
+            var rowLength = modifiedRecords.length;
+            for (var i = 0; i < rowLength; i++) {
+                var rec = modifiedRecords[i];
+                if (rec.dirty) {
+                    if (rec.get('accountingDocumentId') === 0 || !rec.get('accountingDocumentId')) rec.set('accountingDocumentId', transactionId);
+                    records.push(rec);
+                    data.push(rec.data);
+                }
+            }
+        }
+
+        //add removed records
+        if (removedRecords&&removedRecords.length>0) {
+            for (var j = 0; j < removedRecords.length; j++) {
+                records.push(removedRecords[j]);
+                data.push(removedRecords[j].data);
+            }
+        }
+        return modifiedRecs;
     },
     validateDetails: function (controller, view, detailGrid, detailsStore) {
         var detailColumns = detailGrid.getColumns(),

@@ -2,7 +2,7 @@
     extend: 'Chaching.store.base.BaseStore',
     pageSize:1000,
     fields: [{ name: 'name' }, { name: 'value' }, {
-        name: 'account', convert: function (value, record) {
+        name: 'accountDesc', convert: function (value, record) {
             return record.get('name');
         }
     }, {
@@ -10,7 +10,7 @@
             return record.get('value');
         }
     }, {
-        name: 'creditAccount', convert: function (value, record) {
+        name: 'creditAccountDesc', convert: function (value, record) {
             return record.get('name');
         }
     }, {

@@ -10,10 +10,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             if (multiplyOfField.validate()) {
                 Ext.suspendLayouts();
                 for (var i = 0; i < multiplyOf; i++) {
-                    var rec = Ext.create(className, {
-                        jobId: null,
-                        accountingItemId: 0
-                    });
+                    var rec = Ext.create(className);
                     detailStore.insert(0, rec);
                 }
                 Ext.resumeLayouts();
@@ -110,7 +107,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             comboStore = combo.getStore();
         if (editingPlugin&&editingPlugin.activeRecord) {
             var activeRec = editingPlugin.activeRecord,
-                jobId = activeRec.get('jobId');
+                jobId = activeRec.get(combo.valueField);
             if (jobId > 0) {
                 comboStore.getProxy().setExtraParam('jobId', jobId);
             } else comboStore.getProxy().setExtraParam('jobId', null);

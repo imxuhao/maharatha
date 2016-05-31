@@ -356,8 +356,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 }
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'job',
-                name: 'job',
+                dataIndex: 'jobDesc',
+                name: 'jobDesc',
                 text: app.localize('JobDivision'),
                 width: '10%',
                 hideable: false,
@@ -367,8 +367,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 filterField: {
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.JobDivisionStore(),
-                    valueField: 'job',
-                    displayField: 'job',
+                    valueField: 'jobDesc',
+                    displayField: 'jobDesc',
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
@@ -378,7 +378,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.JobDivisionStore(),
                     valueField: 'jobId',
-                    displayField: 'job',
+                    displayField: 'jobDesc',
                     queryMode: 'remote',
                     minChars: 2,
                     listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
@@ -386,8 +386,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 }
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'account',
-                name: 'account',
+                dataIndex: 'accountDesc',
+                name: 'accountDesc',
                 hideable: false,
                 text: app.localize('LineNumber').initCap(),
                 width: '10%',
@@ -397,8 +397,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 filterField: {
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.AccountsStore(),
-                    valueField: 'account',
-                    displayField: 'account',
+                    valueField: 'accountDesc',
+                    displayField: 'accountDesc',
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
@@ -408,7 +408,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.AccountsStore(),
                     valueField: 'accountId',
-                    displayField: 'account',
+                    displayField: 'accountDesc',
                     queryMode: 'remote',
                     minChars: 2,
                     listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,

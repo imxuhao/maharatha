@@ -5,9 +5,12 @@ using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
+using AutoMapper;
+using Abp.AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Accounting.Dto
 {
+   
     public class CreateAccountingItemInputUnit : IInputDto
     {
         /// <summary>Gets or sets the AccountingDocumentID field. </summary>
@@ -37,18 +40,34 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         //[Range(1, Int32.MaxValue)]
         public long AccountId { get; set; }
 
+        /// <summary>Gets or sets the Account field. </summary>
+     
+        public string AccountDesc { get; set; }
+
         /// <summary>Gets or sets the JobID field. </summary>
         //[Range(1, Int32.MaxValue)]
         public int JobId { get; set; }
+
+
+        /// <summary>Gets or sets the Job field. </summary>
+       
+        public string JobDesc { get; set; }
 
 
         /// <summary>Gets or sets the CreditAccountId field. </summary>
         //[Range(1, Int32.MaxValue)]
         public long CreditAccountId { get; set; }
 
+        /// <summary>Gets or sets the Account field. </summary>
+        public string CreditAccountDesc { get; set; }
+
         /// <summary>Gets or sets the CreditJobId field. </summary>
         //[Range(1, Int32.MaxValue)]
         public int CreditJobId { get; set; }
+       
+
+        /// <summary>Gets or sets the Job field. </summary>
+        public string CreditJobDesc { get; set; }
 
         /// <summary>Gets or sets the ItemMemo field. </summary>   
         public string ItemMemo { get; set; }

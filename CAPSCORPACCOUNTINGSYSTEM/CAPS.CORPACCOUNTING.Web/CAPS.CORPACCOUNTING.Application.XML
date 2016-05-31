@@ -37,25 +37,25 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountId">
             <summary>Gets or sets the AccountID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.Account">
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountDesc">
             <summary>Gets or sets the Account field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditAccountId">
             <summary>Gets or sets the AccountID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditAccount">
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditAccountDesc">
             <summary>Gets or sets the Account field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.JobId">
             <summary>Gets or sets the JobID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.Job">
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.JobDesc">
             <summary>Gets or sets the Job field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditJobId">
             <summary>Gets or sets the JobID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditJob">
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditJobDesc">
             <summary>Gets or sets the Job field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.ItemMemo">
@@ -349,14 +349,26 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.AccountId">
             <summary>Gets or sets the AccountID field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.AccountDesc">
+            <summary>Gets or sets the Account field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.JobId">
             <summary>Gets or sets the JobID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.JobDesc">
+            <summary>Gets or sets the Job field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditAccountId">
             <summary>Gets or sets the CreditAccountId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditAccountDesc">
+            <summary>Gets or sets the Account field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditJobId">
             <summary>Gets or sets the CreditJobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditJobDesc">
+            <summary>Gets or sets the Job field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.ItemMemo">
             <summary>Gets or sets the ItemMemo field. </summary>   
@@ -550,14 +562,26 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.AccountId">
             <summary>Gets or sets the AccountID field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.AccountDesc">
+            <summary>Gets or sets the Account field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.JobId">
             <summary>Gets or sets the JobID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.JobDesc">
+            <summary>Gets or sets the Job field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditAccountId">
             <summary>Gets or sets the CreditAccountId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditAccountDesc">
+            <summary>Gets or sets the Account field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditJobId">
             <summary>Gets or sets the CreditJobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditJobDesc">
+            <summary>Gets or sets the Job field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.ItemMemo">
             <summary>Gets or sets the ItemMemo field. </summary>   

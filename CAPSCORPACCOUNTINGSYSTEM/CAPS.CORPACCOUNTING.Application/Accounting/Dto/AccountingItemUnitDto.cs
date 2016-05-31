@@ -48,25 +48,25 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public long? AccountId { get; set; }
 
         /// <summary>Gets or sets the Account field. </summary>
-        public string Account { get; set; }
+        public string AccountDesc { get; set; }
 
         /// <summary>Gets or sets the AccountID field. </summary>
         public long? CreditAccountId { get; set; }
 
         /// <summary>Gets or sets the Account field. </summary>
-        public string CreditAccount { get; set; }
+        public string CreditAccountDesc { get; set; }
 
         /// <summary>Gets or sets the JobID field. </summary>
         public int? JobId { get; set; }
 
         /// <summary>Gets or sets the Job field. </summary>
-        public string Job { get; set; }
+        public string JobDesc { get; set; }
 
         /// <summary>Gets or sets the JobID field. </summary>
         public int? CreditJobId { get; set; }
 
         /// <summary>Gets or sets the Job field. </summary>
-        public string CreditJob { get; set; }
+        public string CreditJobDesc { get; set; }
 
         /// <summary>Gets or sets the ItemMemo field. </summary>   
         public string ItemMemo { get; set; }

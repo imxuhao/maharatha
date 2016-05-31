@@ -1,8 +1,10 @@
-﻿using Abp.Application.Services;
+﻿using System.Collections.Generic;
+using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Threading.Tasks;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
@@ -14,14 +16,14 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<BankAccountUnitDto> CreateBankAccountUnit(CreateBankAccountUnitInput input);
+        Task CreateBankAccountUnit(CreateBankAccountUnitInput input);
 
         /// <summary>
         ///  Update the BankAccount based on BankAccountId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<BankAccountUnitDto> UpdateBankAccountUnit(UpdateBankAccountUnitInput input);
+        Task UpdateBankAccountUnit(UpdateBankAccountUnitInput input);
 
         /// <summary>
         /// Delete the BankAccount based on BankAccountId.
@@ -35,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<BankAccountAndAddressDto>> GetBankAccountUnits(SearchInputDto input);
+        Task<PagedResultOutput<BankAccountUnitDto>> GetBankAccountUnits(SearchInputDto input);
 
         /// <summary>
         /// Get BankAccount based on BankAccountId.
@@ -43,6 +45,24 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         Task<BankAccountUnitDto> GetBankAccountUnitsById(IdInput input);
+
+        /// <summary>
+        /// Get BankAccountTypeList
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetBankAccountTypeList();
+
+        /// <summary>
+        /// Get AccountType as Bank of all Corporate AccountList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<AutoFillDto>> GetCorporateAccountList(AutoSearchInput input);
+
+        /// <summary>
+        /// Get CheckStoockList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetCheckStoockList(AutoSearchInput input);
 
     }
 }

@@ -57,17 +57,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         }
 
         /// <summary>
-        /// Delete the Jobdetails
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task DeleteJobDetailUnit(IdInput input)
-        {
-            await _jobLocationRepository.DeleteAsync(p => p.JobId == input.Id);
-            await _jobDetailUnitManager.DeleteAsync(input);
-        }
-
-        /// <summary>
         /// Update Job Details
         /// </summary>
         /// <param name="input"></param>

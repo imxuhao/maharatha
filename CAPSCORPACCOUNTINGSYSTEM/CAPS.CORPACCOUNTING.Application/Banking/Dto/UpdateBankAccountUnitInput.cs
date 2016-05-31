@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using System;
+using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public virtual short? DisplaySequence { get; set; }
 
         /// <summary>Gets or sets the TypeOfBankAccountId field. </summary>
+        [EnumDataType(typeof(TypeOfBankAccount))]
         public virtual TypeOfBankAccount TypeOfBankAccountId { get; set; }
 
         /// <summary>Gets or sets the AccountId field. </summary>
@@ -126,6 +128,19 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
 
         /// <summary>Gets or Sets Addresses of the Employee. </summary>
         public List<UpdateAddressUnitInput> Addresses { get; set; }
+
+        /// <summary>Gets or Sets StartingPaymentNumber. </summary>
+        [Range(1, Int32.MaxValue)]
+        public int StartingPaymentNumber { get; set; }
+        /// <summary>Gets or Sets EndingPaymentNumber. </summary>
+
+        [Range(1, Int32.MaxValue)]
+        public int EndingPaymentNumber { get; set; }
+
+        /// <summary>Gets or Sets BankAccountPaymentRangeId. </summary>
+
+        [Range(1, Int32.MaxValue)]
+        public int BankAccountPaymentRangeId { get; set; }
 
     }
 }

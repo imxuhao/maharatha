@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
 using Abp.Domain.Uow;
 using Abp.Zero;
 using Abp.Application.Services.Dto;
+using Abp.UI;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -39,17 +41,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             await ValidateJobDetailUnitAsync(jobDetailUnit);
             await JobDetailUnitRepository.UpdateAsync(jobDetailUnit);
         }
-
-        /// <summary>
-        /// Deleting Job Entity 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [UnitOfWork]
-        public virtual async Task DeleteAsync(IdInput input)
-        {
-           // await JobDetailUnitRepository.DeleteAsync(p=>p.JobId==input.Id);
-        }
+       
 
         /// <summary>
         /// Validating the Job
@@ -58,26 +50,26 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         protected virtual async Task ValidateJobDetailUnitAsync(JobCommercialUnit jobUnit)
         {
-            //Validating if Duplicate Caption exists
-            //if (JobDetailUnitRepository != null)
-            //{
-            //    var jobUnits = (await JobDetailUnitRepository.GetAllListAsync(p => p.Caption == jobUnit.Caption && p.OrganizationUnitId == jobUnit.OrganizationUnitId));
+           // Validating if Duplicate Caption exists
+            if (JobDetailUnitRepository != null)
+            {
+                var jobUnits = (await JobDetailUnitRepository.GetAllListAsync(p => p.Caption == jobUnit.Caption && p.OrganizationUnitId == jobUnit.OrganizationUnitId));
 
-            //    if (jobUnit.Id == 0)
-            //    {
-            //        if (jobUnits.Count > 0)
-            //        {
-            //            throw new UserFriendlyException(L("Duplicate Caption", jobUnit.Caption));
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (jobUnits.FirstOrDefault(p => p.Id != jobUnit.Id && p.Caption == jobUnit.Caption) != null)
-            //        {
-            //            throw new UserFriendlyException(L("Duplicate Caption", jobUnit.Caption));
-            //        }
-            //    }
-            //}
+                if (jobUnit.Id == 0)
+                {
+                    if (jobUnits.Count > 0)
+                    {
+                        throw new UserFriendlyException(L("Duplicate Caption", jobUnit.Caption));
+                    }
+                }
+                else
+                {
+                    if (jobUnits.FirstOrDefault(p => p.Id != jobUnit.Id && p.Caption == jobUnit.Caption) != null)
+                    {
+                        throw new UserFriendlyException(L("Duplicate Caption", jobUnit.Caption));
+                    }
+                }
+            }
         }
 
        

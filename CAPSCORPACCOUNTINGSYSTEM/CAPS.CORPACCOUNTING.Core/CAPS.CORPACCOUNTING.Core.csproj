@@ -141,6 +141,7 @@
     <Compile Include="AccountReceivable\ReceiptHistoryUnit.cs" />
     <Compile Include="AccountReceivable\TypeOfArInvoiceBuildUnit.cs" />
     <Compile Include="AppFolders.cs" />
+    <Compile Include="Banking\BankAccountPaymentRangeUnitManager.cs" />
     <Compile Include="Banking\BankAccountUnitManager.cs" />
     <Compile Include="Banking\BankRecAdjustmentUnit.cs" />
     <Compile Include="Banking\BankRecClearedUnit.cs" />

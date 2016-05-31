@@ -5,7 +5,6 @@ using System;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
-    [AutoMapFrom(typeof(BankAccountUnit))]
    public class BankAccountAndAddressDto : IOutputDto
     {
             /// <summary>Gets or sets the BankAccount.</summary>
@@ -18,7 +17,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
             public string TypeOfBankAccount { get; set; }
 
             /// <summary>Gets or sets the Account.</summary>
-            public string Account { get; set; }
+            public string LedgerAccount { get; set; }
 
             /// <summary>Gets or sets the Job.</summary>
             public string Job { get; set; }
@@ -53,5 +52,8 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
             /// <summary>Gets or sets the Batch.</summary>
             public string Batch { get; set; }
 
-        }
+           /// <summary>Gets or sets the AddressUnit.</summary>
+           public BankAccountPaymentRangeUnit BankAccountPaymentRange{ get; set; }
+
+    }
 }

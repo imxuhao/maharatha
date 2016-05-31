@@ -157,5 +157,12 @@ namespace CAPS.CORPACCOUNTING.Helpers
                              select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
             return listEnums;
         }
+
+        public static List<NameValueDto> GetBankAccountTypeList()
+        {
+            var listEnums = (from TypeOfBankAccount n in Enum.GetValues(typeof(TypeOfBankAccount))
+                             select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
+            return listEnums;
+        }
     }
 }

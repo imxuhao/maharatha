@@ -23,13 +23,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         Task<JobCommercialUnitDto> UpdateJobDetailUnit(UpdateJobCommercialnput input);
-
-        /// <summary>
-        /// Delete the JobBudget based on JobId.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task DeleteJobDetailUnit(IdInput input);
        
     }
 }

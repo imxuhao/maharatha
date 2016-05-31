@@ -1467,11 +1467,36 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.ConvertToBankAccountDtos(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto})">
+            <summary>
+            Converting Customer to outputdto of a CustomerUnitDto List
+            </summary>
+            <param name="results"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.GetBankAccountUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Get the BankAccount Details By BankAccountId
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.GetBankAccountTypeList">
+            <summary>
+            Get BankAccountTypeList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.GetCorporateAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get AccountType as Bank of all Corporate AccountList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.GetCheckStoockList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get CheckStoockList
+            </summary>
             <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.BankAccount">
@@ -1483,7 +1508,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.TypeOfBankAccount">
             <summary>Gets or sets the TypeOfBankAccount.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.Account">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.LedgerAccount">
             <summary>Gets or sets the Account.</summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.Job">
@@ -1518,6 +1543,21 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.Batch">
             <summary>Gets or sets the Batch.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.BankAccountPaymentRange">
+            <summary>Gets or sets the AddressUnit.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeDto.BankAccountId">
+            <summary>Gets or sets the BankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeDto.StartingPaymentNumber">
+            <summary>Gets or sets the StartingPaymentNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeDto.EndingPaymentNumber">
+            <summary>Gets or sets the EndingPaymentNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeDto.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.BankAccountId">
             <summary>Overriding the Id column with BankAccountId</summary>
@@ -1620,6 +1660,45 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeOfBankAccount">
+            <summary>Gets or sets the TypeOfBankAccount.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.LedgerAccount">
+            <summary>Gets or sets the Account.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.Job">
+            <summary>Gets or sets the Job.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeofCheckStock">
+            <summary>Gets or sets the TypeofCheckStock.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ClearingAccount">
+            <summary>Gets or sets the ClearingAccount.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ClearingJob">
+            <summary>Gets or sets the ClearingJob.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeOfUploadFile">
+            <summary>Gets or sets the TypeOfUploadFile.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.Vendor">
+            <summary>Gets or sets the Vendor.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.ControllingBankAccounts">
+            <summary>Gets or sets the ControllingBankAccounts.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.TypeOfInactiveStatus">
+            <summary>Gets or sets the TypeOfInactiveStatus.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.PositivePayTypeOfUploadFile">
+            <summary>Gets or sets the PositivePayTypeOfUploadFile.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.PettyCashAccount">
+            <summary>Gets or sets the PettyCashAccount.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountUnitDto.Batch">
+            <summary>Gets or sets the Batch.</summary>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitAppService.CreateBatchUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBatchUnitInput)">
             <summary>
@@ -1833,6 +1912,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput.Addresses">
             <summary>Gets or Sets Addresses of the Employee. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput.StartingPaymentNumber">
+            <summary>Gets or Sets StartingPaymentNumber. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput.EndingPaymentNumber">
+            <summary>Gets or Sets EndingPaymentNumber. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBatchUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>
         </member>
@@ -1980,6 +2065,15 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput.Addresses">
             <summary>Gets or Sets Addresses of the Employee. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput.StartingPaymentNumber">
+            <summary>Gets or Sets StartingPaymentNumber. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput.EndingPaymentNumber">
+            <summary>Gets or Sets EndingPaymentNumber. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput.BankAccountPaymentRangeId">
+            <summary>Gets or Sets BankAccountPaymentRangeId. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBatchUnitInput.BatchId">
             <summary>Gets or sets the BatchId field. </summary>
         </member>
@@ -2058,6 +2152,24 @@
             Get BankAccount based on BankAccountId.
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.IBankAccountUnitAppService.GetBankAccountTypeList">
+            <summary>
+            Get BankAccountTypeList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.IBankAccountUnitAppService.GetCorporateAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get AccountType as Bank of all Corporate AccountList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.IBankAccountUnitAppService.GetCheckStoockList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get CheckStoockList
+            </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Banking.IBatchUnitAppService.CreateBatchUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBatchUnitInput)">
@@ -3904,13 +4016,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobCommercialAppService.DeleteJobDetailUnit(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Delete the JobBudget based on JobId.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:CAPS.CORPACCOUNTING.JobCosting.IRollupCenterUnitAppService">
             <summary>
             This service will provide all CRUD operations on RollupCenter.
@@ -4076,13 +4181,6 @@
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService.CreateJobDetailUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput)">
             <summary>
             Creating JobDetails
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService.DeleteJobDetailUnit(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Delete the Jobdetails
             </summary>
             <param name="input"></param>
             <returns></returns>

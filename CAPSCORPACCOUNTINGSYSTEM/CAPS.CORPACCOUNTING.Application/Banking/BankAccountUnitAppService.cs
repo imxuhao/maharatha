@@ -1,4 +1,5 @@
-﻿using Abp.Authorization;
+﻿using System.Collections.Generic;
+using Abp.Authorization;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
@@ -15,7 +16,9 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using System.Collections.ObjectModel;
+using Abp.UI;
 using AutoMapper;
+using CAPS.CORPACCOUNTING.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
@@ -33,6 +36,9 @@ namespace CAPS.CORPACCOUNTING.Banking
         private readonly IRepository<TypeOfCheckStockUnit, int> _typeOfCheckStockUnitRepository;
         private readonly IRepository<VendorUnit, int> _vendorUnitRepository;
         private readonly IRepository<BatchUnit, int> _batchUnitRepository;
+        private readonly IRepository<CoaUnit> _coaUnitRepository;
+        private readonly IRepository<BankAccountPaymentRangeUnit> _bankAccountPaymentRangeUnit;
+        private readonly BankAccountPaymentRangeUnitManager _bankAccountPaymentRangeUnitManager;
 
 
 
@@ -42,7 +48,8 @@ namespace CAPS.CORPACCOUNTING.Banking
         public BankAccountUnitAppService(BankAccountUnitManager bankAccountUnitManager, IRepository<BankAccountUnit, long> bankAccountUnitRepository, IUnitOfWorkManager unitOfWorkManager,
                                         IAddressUnitAppService addressAppService, IRepository<AddressUnit, long> addressUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
                                          IRepository<JobUnit, int> jobUnitRepository, IRepository<TypeOfUploadFileUnit, int> typeOfUploadFileUnitRepository, IRepository<TypeOfCheckStockUnit, int> typeOfCheckStockUnitRepository,
-                                         IRepository<VendorUnit, int> vendorUnitRepository, IRepository<BatchUnit, int> batchUnitRepository)
+                                         IRepository<VendorUnit, int> vendorUnitRepository, IRepository<BatchUnit, int> batchUnitRepository, IRepository<CoaUnit> coaUnitRepository,
+                                         IRepository<BankAccountPaymentRangeUnit> bankAccountPaymentRangeUnit, BankAccountPaymentRangeUnitManager bankAccountPaymentRangeUnitManager)
         {
             _bankAccountUnitManager = bankAccountUnitManager;
             _bankAccountUnitRepository = bankAccountUnitRepository;
@@ -55,6 +62,9 @@ namespace CAPS.CORPACCOUNTING.Banking
             _typeOfUploadFileUnitRepository = typeOfUploadFileUnitRepository;
             _vendorUnitRepository = vendorUnitRepository;
             _batchUnitRepository = batchUnitRepository;
+            _coaUnitRepository = coaUnitRepository;
+            _bankAccountPaymentRangeUnit = bankAccountPaymentRangeUnit;
+            _bankAccountPaymentRangeUnitManager = bankAccountPaymentRangeUnitManager;
         }
 
 
@@ -64,7 +74,8 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public async Task<BankAccountUnitDto> CreateBankAccountUnit(CreateBankAccountUnitInput input)
+        [AbpAuthorize(AppPermissions.Pages_Financials_Preferences_BankSetup_Create)]
+        public async Task CreateBankAccountUnit(CreateBankAccountUnitInput input)
         {
             var bankAccountUnit = input.MapTo<BankAccountUnit>();
             await _bankAccountUnitManager.CreateAsync(bankAccountUnit);
@@ -85,9 +96,15 @@ namespace CAPS.CORPACCOUNTING.Banking
                     }
                 }
             }
-            return bankAccountUnit.MapTo<BankAccountUnitDto>();
 
-
+            BankAccountPaymentRangeUnit bankaccpayrange = new BankAccountPaymentRangeUnit()
+            {
+                StartingPaymentNumber = input.StartingPaymentNumber,
+                EndingPaymentNumber = input.EndingPaymentNumber,
+                BankAccountId = bankAccountUnit.Id
+            };
+            await _bankAccountPaymentRangeUnitManager.CreateAsync(bankaccpayrange);
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
 
 
@@ -97,15 +114,18 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public async Task<BankAccountUnitDto> UpdateBankAccountUnit(UpdateBankAccountUnitInput input)
+        [AbpAuthorize(AppPermissions.Pages_Financials_Preferences_BankSetup_Edit)]
+        public async Task UpdateBankAccountUnit(UpdateBankAccountUnitInput input)
         {
+            if(input.StartingPaymentNumber>input.EndingPaymentNumber)
+                throw new UserFriendlyException(L("StartingCheck# must be lessthan EndingCheck#"));
+
             var bankAccountUnit = await _bankAccountUnitRepository.GetAsync(input.BankAccountId);
             Mapper.CreateMap<UpdateBankAccountUnitInput, BankAccountUnit>()
                           .ForMember(u => u.Id, ap => ap.MapFrom(src => src.BankAccountId));
             Mapper.Map(input, bankAccountUnit);
             await _bankAccountUnitManager.UpdateAsync(bankAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
-
             if (!ReferenceEquals(input.Addresses, null))
             {
                 foreach (var address in input.Addresses)
@@ -121,6 +141,7 @@ namespace CAPS.CORPACCOUNTING.Banking
                         {
                             address.TypeofObjectId = TypeofObject.Bank;
                             address.ObjectId = input.BankAccountId;
+                            AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                             await
                                 _addressAppService.CreateAddressUnit(
                                     AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
@@ -130,14 +151,20 @@ namespace CAPS.CORPACCOUNTING.Banking
 
                 }
             }
+            var bankaccpayrange =await _bankAccountPaymentRangeUnit.GetAsync(input.BankAccountPaymentRangeId);
 
+            bankaccpayrange.Id = input.BankAccountPaymentRangeId;
+            bankaccpayrange.StartingPaymentNumber = input.StartingPaymentNumber;
+            bankaccpayrange.EndingPaymentNumber = input.EndingPaymentNumber;
+            bankaccpayrange.BankAccountId = bankAccountUnit.Id;
+
+            await _bankAccountPaymentRangeUnitManager.UpdateAsync(bankaccpayrange);
+            await CurrentUnitOfWork.SaveChangesAsync();
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
                 /*Do Something when the Chart of employee is Added*/
             };
-
-            return bankAccountUnit.MapTo<BankAccountUnitDto>();
 
         }
 
@@ -148,12 +175,13 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
+        [AbpAuthorize(AppPermissions.Pages_Financials_Preferences_BankSetup_Delete)]
         public async Task DeleteBankAccountUnit(IdInput input)
         {
             await _bankAccountUnitManager.DeleteAsync(input);
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
-                TypeofObjectId = TypeofObject.Emp,
+                TypeofObjectId = TypeofObject.Bank,
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnit(dto);
@@ -164,28 +192,58 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<PagedResultOutput<BankAccountAndAddressDto>> GetBankAccountUnits(SearchInputDto input)
+        [AbpAuthorize(AppPermissions.Pages_Financials_Preferences_BankSetup)]
+        public async Task<PagedResultOutput<BankAccountUnitDto>> GetBankAccountUnits(SearchInputDto input)
         {
 
             var bankAccountUnitQuery = CreateBankAccountQuery(input);
-            bankAccountUnitQuery = bankAccountUnitQuery.Where(item => item.BankAccount.OrganizationUnitId == input.OrganizationUnitId || item.BankAccount.OrganizationUnitId == null);
+            bankAccountUnitQuery = bankAccountUnitQuery
+                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.BankAccount.OrganizationUnitId == input.OrganizationUnitId);
             var resultCount = await bankAccountUnitQuery.CountAsync();
             var results = await bankAccountUnitQuery
                 .AsNoTracking()
-                .OrderBy(input.Sorting)
+                .OrderBy(Helper.GetSort("BankAccount.BankAccountName ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 
-            var mapEnumResults = (from value in results
-                                 select new BankAccountAndAddressDto
-                                 {
-                                     BankAccount = value.BankAccount,
-                                     Address = value.Address,
-                                     TypeOfBankAccount = value.BankAccount.TypeOfBankAccountId.ToDisplayName(),
-                                     TypeOfInactiveStatus = value.BankAccount.TypeOfInactiveStatusId != null? value.BankAccount.TypeOfInactiveStatusId.ToDisplayName():""
-                                 }).ToList();
+            var response = ConvertToBankAccountDtos(results);
 
-            return new PagedResultOutput<BankAccountAndAddressDto>(resultCount, mapEnumResults);
+            return new PagedResultOutput<BankAccountUnitDto>(resultCount, response);
+        }
+
+        /// <summary>
+        /// Converting Customer to outputdto of a CustomerUnitDto List
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns></returns>
+        private List<BankAccountUnitDto> ConvertToBankAccountDtos(List<BankAccountAndAddressDto> results)
+        {
+            return results.Select(
+                result =>
+                {
+                    var dto = result.BankAccount.MapTo<BankAccountUnitDto>();
+                    dto.BankAccountId = result.BankAccount.Id;
+                    dto.LedgerAccount = result.LedgerAccount;
+                    dto.Job = result.Job;
+                    dto.ClearingAccount = result.ClearingAccount;
+                    dto.ClearingJob = result.ClearingJob;
+                    dto.Vendor = result.Vendor;
+                    dto.TypeOfUploadFile = result.TypeOfUploadFile;
+                    dto.TypeofCheckStock = result.TypeofCheckStock;
+                    dto.Batch = result.Batch;
+                    dto.TypeOfBankAccount = result.BankAccount.TypeOfBankAccountId.ToDisplayName();
+                    dto.BankAccountPaymentRange = result.BankAccountPaymentRange.MapTo<BankAccountPaymentRangeDto>();
+                    if (!ReferenceEquals(dto.BankAccountPaymentRange, null))
+                        dto.BankAccountPaymentRange.BankAccountPaymentRangeId = result.BankAccountPaymentRange.Id;
+
+                    dto.TypeOfInactiveStatus = result.BankAccount.TypeOfInactiveStatusId != null ? result.BankAccount.TypeOfInactiveStatusId.ToDisplayName() : "";                    
+                    if (result.Address != null)
+                    {
+                        dto.Address.Add(result.Address.MapTo<AddressUnitDto>());
+                        dto.Address[0].AddressId = result.Address.Id;
+                    }
+                    return dto;
+                }).ToList();
         }
 
         /// <summary>
@@ -229,18 +287,21 @@ namespace CAPS.CORPACCOUNTING.Banking
                                        from typcacc in typeOfCheckStock.DefaultIfEmpty()
                                        join batch in _batchUnitRepository.GetAll() on bankAccount.BatchId equals batch.Id into batch
                                        from batchacc in batch.DefaultIfEmpty()
+                                       join bankaccpayrange in _bankAccountPaymentRangeUnit.GetAll() on bankAccount.Id equals bankaccpayrange.BankAccountId into bankaccpayranges
+                                       from bankaccountpayrange in bankaccpayranges.DefaultIfEmpty()
                                        select new BankAccountAndAddressDto
                                        {
                                            BankAccount = bankAccount,
                                            Address = addr,
-                                           Account = pt.Caption,
-                                           Job = jobacc.Caption,
-                                           ClearingAccount = clearAcc.Caption,
-                                           ClearingJob = clearjobacc.Caption,
+                                           LedgerAccount = pt.AccountNumber,
+                                           Job = jobacc.JobNumber,
+                                           ClearingAccount = clearAcc.AccountNumber,
+                                           ClearingJob = clearjobacc.JobNumber,
                                            Vendor = vendoracc.VendorNumber,
                                            TypeOfUploadFile = typfacc.Description,
                                            TypeofCheckStock = typcacc.Description,
-                                           Batch = batchacc.Description
+                                           Batch = batchacc.Description,
+                                           BankAccountPaymentRange = bankaccountpayrange
                                        };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -250,6 +311,48 @@ namespace CAPS.CORPACCOUNTING.Banking
                     bankAccountUnitQuery = Helper.CreateFilters(bankAccountUnitQuery, mapSearchFilters);
             }
             return bankAccountUnitQuery;
+        }
+
+        /// <summary>
+        /// Get BankAccountTypeList
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetBankAccountTypeList()
+        {
+            return Helpers.EnumList.GetBankAccountTypeList();
+        }
+
+        /// <summary>
+        /// Get AccountType as Bank of all Corporate AccountList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<AutoFillDto>> GetCorporateAccountList(AutoSearchInput input)
+        {
+            var query = from account in _accountUnitRepository.GetAll()
+                        join coa in _coaUnitRepository.GetAll() on account.ChartOfAccountId equals coa.Id
+                        where coa.IsCorporate == true && account.TypeOfAccountId == 17 //Checking the typeofAccount is Bank 
+                        select account;
+            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
+                             .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.Description.Contains(input.Query)
+                             || p.AccountNumber.Contains(input.Query))
+                            .Select(u => new AutoFillDto
+                            {
+                                Name = u.Caption,
+                                Value = u.Id.ToString(),
+                                Column2 = u.Description,
+                                Column1 = u.AccountNumber
+                            }).ToListAsync();
+        }
+
+        /// <summary>
+        /// Get CheckStoockList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetCheckStoockList(AutoSearchInput input)
+        {
+            return await (from checkstock in _typeOfCheckStockUnitRepository.GetAll()
+                .WhereIf(!string.IsNullOrEmpty(input.Query),p => p.Description.Contains(input.Query) || p.Notes.Contains(input.Query))
+                          select new NameValueDto { Name = checkstock.Description, Value = checkstock.Id.ToString() }).ToListAsync();
         }
 
     }

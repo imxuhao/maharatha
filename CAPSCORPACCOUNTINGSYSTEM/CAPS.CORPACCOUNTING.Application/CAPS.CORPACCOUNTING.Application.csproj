@@ -151,6 +151,7 @@
     <Compile Include="Authorization\Users\UserLoginAppService.cs" />
     <Compile Include="Banking\BankAccountUnitAppService.cs" />
     <Compile Include="Banking\Dto\BankAccountAndAddressDto.cs" />
+    <Compile Include="Banking\Dto\BankAccountPaymentRangeDto.cs" />
     <Compile Include="Banking\Dto\BankAccountUnitDto.cs" />
     <Compile Include="Banking\BatchUnitAppService.cs" />
     <Compile Include="Banking\Dto\BatchUnitDto.cs" />

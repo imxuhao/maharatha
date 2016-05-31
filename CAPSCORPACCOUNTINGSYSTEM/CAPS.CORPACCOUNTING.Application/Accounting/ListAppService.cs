@@ -58,9 +58,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
                                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
                                  select new AutoFillDto
                                  {
-                                     Name = job.Caption,
+                                     Name = job.JobNumber,
                                      Value = job.Id.ToString(),
-                                     Column1 = job.JobNumber
+                                     Column1 = job.Caption
                                  })
                               .ToListAsync();
             return Joblist;
@@ -118,10 +118,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
             return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.subaccounts.OrganizationUnitId == input.OrganizationUnitId.Value)
                             .Select(u => new AutoFillDto
                             {
-                                Name = u.subaccounts.Caption,
+                                Name = u.subaccounts.SubAccountNumber,
                                 Value = u.subaccounts.Id.ToString(),
                                 Column2 = u.subaccounts.Description,
-                                Column1 = u.subaccounts.SubAccountNumber,
+                                Column1 = u.subaccounts.Caption,
                                 Column3 = u.subaccounts.SearchNo
                             }).ToListAsync();
 
@@ -197,7 +197,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var taxCreditList = await _taxCreditUnitRepository.GetAll()
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query)|| p.Number.Contains(input.Query))
-                 .Select(u => new AutoFillDto { Name = u.Description, Value = u.Id.ToString(),Column1 = u.Number}).ToListAsync();
+                 .Select(u => new AutoFillDto { Name = u.Description, Value = u.Id.ToString(),Column1 = u.Number }).ToListAsync();
             return taxCreditList;
         }
 

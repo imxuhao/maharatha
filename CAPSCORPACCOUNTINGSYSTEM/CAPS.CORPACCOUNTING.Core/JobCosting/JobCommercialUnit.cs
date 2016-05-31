@@ -1,11 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Abp.Domain.Entities;
-using Abp.Domain.Entities.Auditing;
-using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
-using System.Collections.Generic;
+
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {

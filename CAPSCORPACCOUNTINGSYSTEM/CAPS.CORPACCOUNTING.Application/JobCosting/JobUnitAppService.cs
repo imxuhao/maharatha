@@ -47,6 +47,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly ICacheManager _cacheManager;
         private readonly CustomAppSession _customAppSession;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly IRepository<JobLocationUnit> _jobLocationRepository;
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService,
             IRepository<OrganizationUnit, long> organizationUnitRepository, IRepository<JobAccountUnit, long> jobAccountUnitRepository,
@@ -54,7 +55,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         IRepository<ValueAddedTaxTypeUnit> valueAddedTaxTypeUnitRepository, IRepository<TypeOfCountryUnit, short> typeOfCountryUnitRepository,
         IRepository<CountryUnit> countryUnitRepository, IJobAccountUnitAppService jobAccountUnitAppService, IRepository<TaxCreditUnit> taxCreditUnitRepository,
              IRepository<JobPORangeAllocationUnit> jobPORangeAllocationUnitRepository, ICacheManager cacheManager, CustomAppSession customAppSession,
-             IUnitOfWorkManager unitOfWorkManager)
+             IUnitOfWorkManager unitOfWorkManager, IRepository<JobLocationUnit> jobLocationRepository)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -76,6 +77,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _cacheManager = cacheManager;
             _customAppSession = customAppSession;
             _unitOfWorkManager = unitOfWorkManager;
+            _jobLocationRepository = jobLocationRepository;
 
         }
         /// <summary>
@@ -234,6 +236,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Delete)]
         public async Task DeleteJobUnit(IdInputExtensionDto input)
         {
+            await _jobLocationRepository.DeleteAsync(p => p.JobId == input.Id);
+            await _jobAccountUnitRepository.DeleteAsync(p => p.JobId == input.Id);
             await _jobUnitManager.DeleteAsync(input.Id);
             await RemoveItemfromCache(input.OrganizationUnitId);
         }
@@ -327,7 +331,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             var divisions = await _jobUnitRepository.GetAll().Where(p => p.IsDivision == true)
                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                // .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query)) ****activate when we are not using RedisCache***
-                 .Select(u => new AutoFillDto { Name = u.Caption, Value = u.Id.ToString(),Column1 = u.JobNumber}).ToListAsync();
+                 .Select(u => new AutoFillDto { Name = u.JobNumber, Value = u.Id.ToString(),Column1 = u.Caption }).ToListAsync();
             return divisions;
         }
 
@@ -398,7 +402,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             var accounts = await query.Where(p => p.au.IsRollupAccount == true && p.coa.IsCorporate == true)
                              //.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.au.Caption.Contains(input.Query)) ****activate when we are not using RedisCache***
                              .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.au.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new AutoFillDto { Name = u.au.Caption, Value = u.au.Id.ToString(),Column1 = u.au.Description,Column2 = u.au.AccountNumber}).ToListAsync();
+                            .Select(u => new AutoFillDto { Name = u.au.AccountNumber, Value = u.au.Id.ToString(),Column1 = u.au.Description,Column2 = u.au.Caption }).ToListAsync();
 
             return accounts;
         }
@@ -488,8 +492,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             var query = from customers in _customerUnitRepository.GetAll()
                         select new { customers };
             return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.customers.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new AutoFillDto { Name = u.customers.LastName,Value = u.customers.Id.ToString(),
-                           Column1 = u.customers.FirstName ,Column2 = u.customers.CustomerNumber}).ToListAsync();
+                            .Select(u => new AutoFillDto { Name = u.customers.CustomerNumber,Value = u.customers.Id.ToString(),
+                           Column1 = u.customers.FirstName ,Column2 = u.customers.LastName}).ToListAsync();
             
         }
 

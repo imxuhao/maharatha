@@ -74,22 +74,22 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<AutoFillDto>> GeAccountsList(AutoSearchInput input)
         {
 
-            var chartOfAccountId = (from job in _jobUnitRepository.GetAll().WhereIf(!ReferenceEquals(input.JobId, null), p => p.Id == input.JobId)
+            var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where( p => p.Id == input.JobId)
                                     select job.ChartOfAccountId).FirstOrDefault();
 
-            var Accountlist = await (from account in _accountUnitRepository.GetAll()
+            var accountlist = await (from account in _accountUnitRepository.GetAll()
                                          .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query)
                                          || p.AccountNumber.Contains(input.Query) || p.Description.Contains(input.Query))
                                          .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
                                          .WhereIf(chartOfAccountId != 0, p => p.ChartOfAccountId == chartOfAccountId)
                                      select new AutoFillDto
                                      {
-                                         Name = account.Caption,
+                                         Name = account.AccountNumber,
                                          Value = account.Id.ToString(),
                                          Column1 = account.Description,
-                                         Column2 = account.AccountNumber
+                                         Column2 = account.Caption
                                      }).ToListAsync();
-            return Accountlist;
+            return accountlist;
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var taxCreditList = await _taxCreditUnitRepository.GetAll()
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query)|| p.Number.Contains(input.Query))
-                 .Select(u => new AutoFillDto { Name = u.Description, Value = u.Id.ToString(),Column1 = u.Number }).ToListAsync();
+                 .Select(u => new AutoFillDto { Name = u.Number, Value = u.Id.ToString(),Column1 = u.Description }).ToListAsync();
             return taxCreditList;
         }
 

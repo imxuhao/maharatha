@@ -343,7 +343,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                     } else transactionDetailContainer = fieldSet;
                 }
                 if (allFieldSetsHeight > 0 && transactionDetailContainer) {
-                    var heightForDetailGrid = height - (allFieldSetsHeight + 95);
+                    var heightForDetailGrid = height - (allFieldSetsHeight + 85);
                     transactionDetailContainer.down('gridpanel').setHeight(heightForDetailGrid);
                 }
             }

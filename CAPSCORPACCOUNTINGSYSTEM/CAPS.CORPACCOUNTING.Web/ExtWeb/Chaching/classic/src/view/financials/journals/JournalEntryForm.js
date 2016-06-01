@@ -43,7 +43,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                 value: null
             }, {
                 columnWidth: .33,
-                padding: '20 10 0 20',
+                padding: '0 10 0 20',
                 defaults: {
                     //labelAlign: 'top',
                     ui: 'fieldLabelTop',
@@ -65,17 +65,10 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                     allowBlank: false,
                     fieldLabel: app.localize('Description'),
                     emptyText: app.localize('MandatoryField')
-                }, {
-                    xtype: 'textfield',
-                    name: 'documentReference',
-                    itemId: 'documentReference',
-                    allowBlank: false,
-                    fieldLabel: app.localize('JournalNumber'),
-                    emptyText: app.localize('MandatoryField')
                 }]
             }, {
                 columnWidth: .33,
-                padding: '20 10 0 20',
+                padding: '0 10 0 20',
                 defaults: {
                     //labelAlign: 'top',
                     width: '100%',
@@ -83,12 +76,44 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                     blankText: app.localize('MandatoryToolTipText')
                 },
                 items: [{
+                    xtype: 'textfield',
+                    name: 'documentReference',
+                    itemId: 'documentReference',
+                    allowBlank: false,
+                    fieldLabel: app.localize('JournalNumber'),
+                    emptyText: app.localize('MandatoryField')
+                },{
                     xtype: 'numberfield',
                     name: 'controlTotal',
                     itemId: 'controlTotal',
                     fieldLabel: app.localize('ControlTotal'),
                     disabled: true,
                     hideTrigger: true
+                }]
+            }, {
+                columnWidth: .33,
+                padding: '0 10 0 20',
+                defaults: {
+                    width: '100%',
+                    ui: 'fieldLabelTop',
+                    blankText: app.localize('MandatoryToolTipText')
+                },
+                items:[
+                {
+                    xtype: 'combobox',
+                    name: 'journalTypeId',
+                    fieldLabel: app.localize('JournalType'),
+                    itemId: 'journalTypeId',
+                    valueField: 'value',
+                    displayField:'name',
+                    store: {
+                        fields: [{ name: 'name' }, { name: 'value' }],
+                        data: [{ name: app.localize('Standard'), value: 1 },
+                            { name: app.localize('Intercompany'), value: 2 },
+                            { name: app.localize('Reversing'), value: 3 },
+                            { name: app.localize('Recurring'), value: 4 }
+                        ]
+                    }
                 }, {////TODO: Replace with combo once batch is ready
                     xtype: 'textfield',
                     name: 'batchId',
@@ -103,16 +128,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                     boxLabelCls: 'checkboxLabel',
                     ui: 'default'
                 }]
-            }, {
-                columnWidth: .33,
-                padding: '20 10 0 20',
-                defaults: {
-                    labelAlign: 'top',
-                    width: '100%',
-                    ui: 'fieldLabelTop',
-                    blankText: app.localize('MandatoryToolTipText')
-                },
-                items: [{
+                /*items: [{
                     xtype: 'radiogroup',
                     fieldLabel: app.localize('JournalType'),
                     columns: 2,
@@ -123,7 +139,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                         { boxLabel: app.localize('Reversing'), name: 'journalTypeId', inputValue: '3', padding: '0 0 0 10' },
                         { boxLabel: app.localize('Recurring'), name: 'journalTypeId', inputValue: '4', padding: '0 0 0 10' }
                     ]
-                }]
+                }]*/
             }]
         }, {
             xtype: 'fieldset',

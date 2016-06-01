@@ -66,7 +66,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 value: null
                             }, {
                                 columnWidth: .33,
-                                padding: '20 10 0 20',
+                                padding: '0 10 0 20',
                                 defaults: {
                                    // labelAlign: 'top',
                                     blankText: app.localize('MandatoryToolTipText')
@@ -107,7 +107,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 ]
                             }, {
                                 columnWidth: .33,
-                                padding: '20 10 0 20',
+                                padding: '0 10 0 20',
                                 defaults: {
                                     //labelAlign: 'top',
                                     labelWidth : 120,
@@ -156,7 +156,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                     }]
                             }, {
                                 columnWidth: .33,
-                                padding: '20 10 0 20',
+                                padding: '0 10 0 20',
                                 defaults: {
                                    // labelAlign: 'top',
                                     blankText: app.localize('MandatoryToolTipText')
@@ -257,7 +257,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                     collapsible :true,
                     items:[
                     {
-                        columnWidth: .25,
+                        columnWidth: .33,
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
@@ -275,7 +275,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             fieldLabel: app.localize('BidDate')
                         }]
                     }, {
-                        columnWidth: .25,
+                        columnWidth: .33,
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
@@ -294,7 +294,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             }
                         ]
                     }, {
-                        columnWidth: .25,
+                        columnWidth: .33,
                         padding: '0 10 0 20',
                         defaults: {
                            // labelAlign: 'top',
@@ -310,14 +310,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             width:'100%',
                             fieldLabel: app.localize('Bidder'),
                             emptyText: app.localize('ToolTipBidder')
-                        }]
-                    }, {
-                        columnWidth: .25,
-                        padding: '0 10 0 20',
-                        defaults: {
-                            width: '100%'
-                        },
-                        items: [{
+                        }, {
                             xtype: 'checkbox',
                             name: 'isOTon',
                             itemId: 'isOTon',

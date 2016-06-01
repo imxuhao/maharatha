@@ -116,39 +116,18 @@ namespace CAPS.CORPACCOUNTING.Authorization
             entry.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry_Edit, L("Edit"));
             entry.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry_Delete, L("Delete"));
 
-            var banking = financials.CreateChildPermission(AppPermissions.Pages_Financials_Banking, L("Banking"));
-            var receiptsOrTransfers = banking.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ReceiptsOrTransfers, L("ReceiptsOrTransfers"));
-            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ReceiptsOrTransfers_Create, L("Create"));
-            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ReceiptsOrTransfers_Edit, L("Edit"));
-            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ReceiptsOrTransfers_Delete, L("Delete"));
-
-            var ach = banking.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ACH, L("ACH"));
-            ach.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ACH_Create, L("Create"));
-            ach.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ACH_Edit, L("Edit"));
-            ach.CreateChildPermission(AppPermissions.Pages_Financials_Banking_ACH_Delete, L("Delete"));
-
-            var reconciliation = banking.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation, L("BankReconciliation"));
-            reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Create, L("Create"));
-            reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Edit, L("Edit"));
-            reconciliation.CreateChildPermission(AppPermissions.Pages_Financials_Banking_Reconciliation_Delete, L("Delete"));
             var inquiry = financials.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry, L("Inquiry"));
             var searchTransactions = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_SearchTransactions, L("SearchTransactions"));
             var inquiryFinancials = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_Financials, L("Financials"));
             var journalHistory = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_JournalHistory, L("JournalHistory"));
             var assetTracking = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_AssetTracking, L("AssetTracking"));
-            var financialsPosting = financials.CreateChildPermission(AppPermissions.Pages_Financials_Posting, L("Posting"));
-            var batched = financialsPosting.CreateChildPermission(AppPermissions.Pages_Financials_Posting_Batched, L("Batched"));
-            var unBatched = financialsPosting.CreateChildPermission(AppPermissions.Pages_Financials_Posting_UnBatched, L("UnBatched"));
-            var preferences = financials.CreateChildPermission(AppPermissions.Pages_Financials_Preferences, L("Preferences"));
-            var fiscalPeriod = preferences.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_FiscalPeriod, L("FiscalPeriod"));
-            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_FiscalPeriod_Create, L("Create"));
-            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_FiscalPeriod_Edit, L("Edit"));
-            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_FiscalPeriod_Delete, L("Delete"));
 
-            var bankSetup = preferences.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_BankSetup, L("BankSetup"));
-            bankSetup.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_BankSetup_Create, L("Create"));
-            bankSetup.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_BankSetup_Edit, L("Edit"));
-            bankSetup.CreateChildPermission(AppPermissions.Pages_Financials_Preferences_BankSetup_Delete, L("Delete"));
+            var fiscalPeriod = financials.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod, L("FiscalPeriod"));
+            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Create, L("Create"));
+            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Edit, L("Edit"));
+            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Delete, L("Delete"));
+
+           
             #endregion
 
             #region Projects Tab
@@ -216,12 +195,6 @@ namespace CAPS.CORPACCOUNTING.Authorization
             vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Delete, L("Delete"));
 
             var payablesInvoices = payables.CreateChildPermission(AppPermissions.Pages_Payables_Invoices, L("Invoices"));
-            var batch = payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch, L("Batch"));
-            batch.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch_Create, L("Create"));
-            batch.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch_Edit, L("Edit"));
-            batch.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Batch_Delete, L("Delete"));
-
-
 
             var payablesInquiry = payables.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry, L("Inquiry"));
             var aPInvoiceInquiry = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_APInvoiceInquiry, L("APInvoiceInquiry"));
@@ -277,14 +250,46 @@ namespace CAPS.CORPACCOUNTING.Authorization
             var payrollPreferences = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Preferences, L("Preferences"));
             #endregion
 
-            #region Posting Tab
-            var posting = pages.CreateChildPermission(AppPermissions.Pages_Posting, L("Posting"));
+            #region Batch Posting Tab
+            var batchPosting = pages.CreateChildPermission(AppPermissions.Pages_BatchPosting, L("BatchPosting"));
+            var batched = batchPosting.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches, L("Batches"));
+            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Create, L("Create"));
+            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Edit, L("Edit"));
+            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Delete, L("Delete"));
+            #endregion
+
+            #region Banking
+            var banking = pages.CreateChildPermission(AppPermissions.Pages_Banking, L("Banking"));
+            var receiptsOrTransfers = banking.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers, L("ReceiptsOrTransfers"));
+            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Create, L("Create"));
+            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Edit, L("Edit"));
+            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Delete, L("Delete"));
+
+            var ach = banking.CreateChildPermission(AppPermissions.Pages_Banking_ACH, L("ACH"));
+            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Create, L("Create"));
+            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Edit, L("Edit"));
+            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Delete, L("Delete"));
+
+            var reconciliation = banking.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation, L("BankReconciliation"));
+            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Create, L("Create"));
+            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Edit, L("Edit"));
+            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Delete, L("Delete"));
+
+            var postivepay= banking.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay, L("PostivePay"));
+            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Create, L("Create"));
+            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Edit, L("Edit"));
+            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Delete, L("Delete"));
+
+            var bankSetup = banking.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup, L("BankSetup"));
+            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Create, L("Create"));
+            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Edit, L("Edit"));
+            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Delete, L("Delete"));
             #endregion
 
 
-    }
+        }
 
-    private static ILocalizableString L(string name)
+        private static ILocalizableString L(string name)
         {
             return new LocalizableString(name, CORPACCOUNTINGConsts.LocalizationSourceName);
         }

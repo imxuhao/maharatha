@@ -1,4 +1,4 @@
-﻿Ext.define('Chaching.model.payables.invoices.BatchModel', {
+﻿Ext.define('Chaching.model.batchposting.batches.BatchesModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: ''

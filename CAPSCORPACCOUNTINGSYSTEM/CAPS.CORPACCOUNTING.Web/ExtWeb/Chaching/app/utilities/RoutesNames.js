@@ -18,6 +18,8 @@
         'projects.projectmaintenance',
          'payables.vendors',
          'financials.journals',
-         'payables.invoices'
+         'payables.invoices',
+          'batchposting.batches',
+           'banking.banksetup'
     ]
 });

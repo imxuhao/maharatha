@@ -1,12 +1,12 @@
 ﻿
-Ext.define('Chaching.view.payables.invoices.BatchForm', {
+Ext.define('Chaching.view.batchposting.batches.BatchesForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
-    alias: ['widget.payables.invoices.batch.create', 'widget.payables.invoices.batch.edit'],
+    alias: ['widget.batchposting.batches.create', 'widget.batchposting.batches.edit'],
     requires: [
-        'Chaching.view.payables.invoices.BatchFormController'
+        'Chaching.view.batchposting.batches.BatchesFormController'
     ],
 
-    controller: 'payables-invoices-batchform',
+    controller: 'batchposting-batches-batchesform',
     name: 'batch',
     openInPopupWindow: false,
     hideDefaultButtons: false,

@@ -1,6 +1,6 @@
-﻿Ext.define('Chaching.store.payables.invoices.BatchStore', {
+﻿Ext.define('Chaching.store.batchposting.batches.BatchesStore', {
     extend: 'Chaching.store.base.BaseStore',
-    model: 'Chaching.model.payables.invoices.BatchModel',
+    model: 'Chaching.model.batchposting.batches.BatchesModel',
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

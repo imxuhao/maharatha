@@ -4,28 +4,28 @@
  * Date: 26/05/2016
  */
 /**
- * @class Chaching.view.financials.preferences.BankSetupGrid
+ * @class Chaching.view.banking.BankSetupGrid
  * UI design for preference.
- * @alias widget.financials.preferences.banksetup
+ * @alias widget.financialsbanking.banksetup
  */
-Ext.define('Chaching.view.financials.preferences.BankSetupGrid', {
+Ext.define('Chaching.view.banking.BankSetupGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.financials.preferences.BankSetupGridController'
+        'Chaching.view.banking.BankSetupGridController'
     ],
-    xtype: 'widget.financials.preferences.banksetup',
-    name: 'Financials.Preferences.BankSetup',
-    controller: 'financials.preferences.banksetupgrid',
+    xtype: 'widget.banking.banksetup',
+    name: 'Banking.BankSetup',
+    controller: 'banking.banksetupgrid',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Financials.Preferences.BankSetup'),
-        create: abp.auth.isGranted('Pages.Financials.Preferences.BankSetup.Create'),
-        edit: abp.auth.isGranted('Pages.Financials.Preferences.BankSetup.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Preferences.BankSetup.Delete')
+        read: abp.auth.isGranted('Pages.Banking.BankSetup'),
+        create: abp.auth.isGranted('Pages.Banking.BankSetup.Create'),
+        edit: abp.auth.isGranted('Pages.Banking.BankSetup.Edit'),
+        destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete')
     },
     padding: 5,
     gridId: 21,
-    store: 'financials.preferences.FiscalPeriodStore',
+    store: 'financials.fiscalperiod.FiscalPeriodStore',
     headerButtonsConfig: [
       {
           xtype: 'displayfield',
@@ -40,7 +40,7 @@ Ext.define('Chaching.view.financials.preferences.BankSetupGrid', {
           tooltip: app.localize('CreateNewFiscalPeriod'),
           checkPermission: true,
           iconCls: 'fa fa-plus',
-          routeName: 'financials.preferences.BankSetup.create',
+          routeName: 'banking.BankSetup.create',
           iconAlign: 'left'
       }],
     requireExport: true,

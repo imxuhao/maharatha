@@ -830,6 +830,7 @@
     <text name="ValidationFailed" value="Validation fail" />
     <text name="EnterAmountToSplit" value="Please enter amount to split." />
     <text name="SplitRecord" value="Split selected record" />
-
+    <text name="Batches" value="Batches" />
+    <text name="PostivePay" value="Postive Pay" />
   </texts>
 </localizationDictionary>

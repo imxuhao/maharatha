@@ -41,10 +41,10 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string FinancialsJournals = "Financials.Journals";
                 public const string FinancialsJournalsEntry = "Financials.Journals.Entry";
 
-                public const string FinancialsBanking = "Financials.Banking";
-                public const string FinancialsBankingReceiptsOrTransfers = "Financials.Banking.Receipts/Transfers";
-                public const string FinancialsBankingAch = "Financials.Banking.ACH";
-                public const string FinancialsBankingReconciliation = "Financials.Banking.BankReconciliation";
+                //public const string FinancialsBanking = "Financials.Banking";
+                //public const string FinancialsBankingReceiptsOrTransfers = "Financials.Banking.Receipts/Transfers";
+                //public const string FinancialsBankingAch = "Financials.Banking.ACH";
+                //public const string FinancialsBankingReconciliation = "Financials.Banking.BankReconciliation";
 
                 public const string FinancialsInquiry = "Financials.Inquiry";
                 public const string FinancialsInquirySearchTransactions = "Financials.Inquiry.SearchTransactions";
@@ -52,13 +52,17 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string FinancialsInquiryJournalHistory = "Financials.Inquiry.JournalHistory";
                 public const string FinancialsInquiryAssetTracking = "Financials.Inquiry.AssetTracking";
 
-                public const string FinancialsPosting = "Financials.Posting";
-                public const string FinancialsPostingBatched = "Financials.Posting.Batched";
-                public const string FinancialsPostingUnBatched = "Financials.Posting.UnBatched";
 
-                public const string FinancialsPreferences = "Financials.Preferences";
-                public const string FinancialsPreferencesFiscalPeriod = "Financials.Preferences.FiscalPeriod";
-                public const string FinancialsPreferencesBankSetup = "Financials.Preferences.BankSetup";
+                public const string FinancialsFiscalPeriod = "Financials.FiscalPeriod";
+                //public const string FinancialsPosting = "Financials.Posting";
+                //public const string FinancialsPostingBatched = "Financials.Posting.Batched";
+                //public const string FinancialsPostingUnBatched = "Financials.Posting.UnBatched";
+
+                //public const string FinancialsPreferences = "Financials.Preferences";
+                //public const string FinancialsPreferencesFiscalPeriod = "Financials.Preferences.FiscalPeriod";
+                //public const string FinancialsPreferencesBankSetup = "Financials.Preferences.BankSetup";
+
+
 
                 #endregion
 
@@ -97,7 +101,7 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string Payables = "Payables";
                 public const string PayablesVendors = "Payables.Vendors";
                 public const string PayablesInvoices = "Payables.Invoices";
-                public const string PayablesInvoicesBatch = "Payables.Invoices.Batch";
+                //public const string PayablesInvoicesBatch = "Payables.Invoices.Batch";
                 public const string PayablesInquiry = "Payables.Inquiry";
                 public const string PayablesInquiryAPInvoiceInquiry = "Payables.Inquiry.APInvoiceInquiry";
                 public const string PayablesInquiryPaymentHistory = "Payables.Inquiry.PaymentHistory";
@@ -167,9 +171,21 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
 
                 #endregion
 
-                #region Posting Tab
+                #region BatchPosting Tab
 
-                public const string Posting = "Posting";
+                public const string BatchPosting = "BatchPosting";
+                public const string BatchPostingBatches = "BatchPosting.Batches";
+
+                #endregion
+
+                #region Banking Tab
+
+                public const string Banking = "Banking";
+                public const string BankingReceiptsOrTransfers = "Banking.Receipts/Transfers";
+                public const string BankingAch = "Banking.ACH";
+                public const string BankingPostivePay = "Banking.PostivePay";
+                public const string BankingBankSetup = "Banking.BankSetup";
+                public const string BankingReconciliation = "Banking.BankReconciliation";
 
                 #endregion
             }

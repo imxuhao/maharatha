@@ -1,6 +1,6 @@
-﻿Ext.define('Chaching.view.payables.invoices.BatchGridController', {
+﻿Ext.define('Chaching.view.batchposting.batches.BatchesGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
-    alias: 'controller.payables-invoices-batchgrid',
+    alias: 'controller.batchposting-batches-batchesgrid',
     doAfterCreateAction: function (createNewMode, form, isEdit, record) {
         var form = form.getForm();
         var typeOfBatchCombo = form.findField('typeOfBatchId');

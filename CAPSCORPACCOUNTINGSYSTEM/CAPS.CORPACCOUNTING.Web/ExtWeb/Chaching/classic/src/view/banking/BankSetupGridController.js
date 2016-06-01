@@ -4,13 +4,13 @@
  * Date: 28/04/2016
  */
 /**
- * @class Chaching.view.financials.preferences.BankSetupGridController
+ * @class Chaching.view.banking.BankSetupGridController
  * ViewController class for bank set up.
- * @alias controller.financials.preferences.banksetupgrid
+ * @alias controller.banking.banksetupgrid
  */
-Ext.define('Chaching.view.financials.preferences.BankSetupGridController', {
+Ext.define('Chaching.view.banking.BankSetupGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
-    alias: 'controller.financials.preferences.banksetupgrid',
+    alias: 'controller.banking.banksetupgrid',
     doAfterCreateAction: function (createMode, formPanel, isEdit, record) {
     }
 });

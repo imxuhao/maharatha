@@ -4,13 +4,13 @@
  * Date: 28/04/2016
  */
 /**
- * @class Chaching.view.financials.preferences.FiscalPeriodGridController
+ * @class Chaching.view.financials.fiscalperiod.FiscalPeriodGridController
  * ViewController class for fiscal period.
- * @alias controller.financials.preferences.fiscalperiodgrid
+ * @alias controller.financials.fiscalperiodgrid
  */
-Ext.define('Chaching.view.financials.preferences.FiscalPeriodGridController', {
+Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
-    alias: 'controller.financials.preferences.fiscalperiodgrid',
+    alias: 'controller.financials.fiscalperiodgrid',
     doAfterCreateAction: function (createMode, formPanel, isEdit, record) {
     }
 });

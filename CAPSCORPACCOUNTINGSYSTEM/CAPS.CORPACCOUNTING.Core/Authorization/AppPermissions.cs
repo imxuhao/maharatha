@@ -98,27 +98,6 @@
         public const string Pages_Financials_Journals_Entry_Edit = "Pages.Financials.Journals.Entry.Edit";
         public const string Pages_Financials_Journals_Entry_Delete = "Pages.Financials.Journals.Entry.Delete";
 
-        // PERMISSIONS FOR BANKING RECEIPTS/TRANSFERS
-        public const string Pages_Financials_Banking = "Pages.Financials.Banking";
-        public const string Pages_Financials_Banking_ReceiptsOrTransfers = "Pages.Financials.Banking.ReceiptsOrTransfers";
-        public const string Pages_Financials_Banking_ReceiptsOrTransfers_Create = "Pages.Financials.Banking.ReceiptsOrTransfers.Create";
-        public const string Pages_Financials_Banking_ReceiptsOrTransfers_Edit = "Pages.Financials.Banking.ReceiptsOrTransfers.Edit";
-        public const string Pages_Financials_Banking_ReceiptsOrTransfers_Delete = "Pages.Financials.Banking.ReceiptsOrTransfers.Delete";
-
-        // PERMISSIONS FOR BANKING ACH
-        public const string Pages_Financials_Banking_ACH = "Pages.Financials.Banking.ACH";
-        public const string Pages_Financials_Banking_ACH_Create = "Pages.Financials.Banking.ACH.Create";
-        public const string Pages_Financials_Banking_ACH_Edit = "Pages.Financials.Banking.ACH.Edit";
-        public const string Pages_Financials_Banking_ACH_Delete = "Pages.Financials.Banking.ACH.Delete";
-
-        // PERMISSIONS FOR BANKING RECONCILIATION
-        public const string Pages_Financials_Banking_Reconciliation = "Pages.Financials.Banking.Reconciliation";
-        public const string Pages_Financials_Banking_Reconciliation_Create = "Pages.Financials.Banking.Reconciliation.Create";
-        public const string Pages_Financials_Banking_Reconciliation_Edit = "Pages.Financials.Banking.Reconciliation.Edit";
-        public const string Pages_Financials_Banking_Reconciliation_Delete = "Pages.Financials.Banking.Reconciliation.Delete";
-
-
-
         // PERMISSIONS FOR BANKING SEARCHTRANSACTIONS
         public const string Pages_Financials_Inquiry = "Pages.Financials.Inquiry";
         public const string Pages_Financials_Inquiry_SearchTransactions = "Pages.Financials.Inquiry.SearchTransactions";
@@ -144,33 +123,11 @@
         public const string Pages_Financials_Inquiry_AssetTracking_Edit = "Pages.Financials.Inquiry.AssetTracking.Edit";
         public const string Pages_Financials_Inquiry_AssetTracking_Delete = "Pages.Financials.Inquiry.AssetTracking.Delete";
 
-        // PERMISSIONS FOR POSTING BATCHED
-        public const string Pages_Financials_Posting = "Pages.Financials.Posting";
-        public const string Pages_Financials_Posting_Batched = "Pages.Financials.Posting.Batched";
-        public const string Pages_Financials_Posting_Batched_Create = "Pages.Financials.Posting.Batched.Create";
-        public const string Pages_Financials_Posting_Batched_Edit = "Pages.Financials.Posting.Batched.Edit";
-        public const string Pages_Financials_Posting_Batched_Delete = "Pages.Financials.Posting.Batched.Delete";
-
-        // PERMISSIONS FOR POSTING UNBATCHED
-
-        public const string Pages_Financials_Posting_UnBatched = "Pages.Financials.Posting.UnBatched";
-        public const string Pages_Financials_Posting_UnBatched_Create = "Pages.Financials.Posting.UnBatched.Create";
-        public const string Pages_Financials_Posting_UnBatched_Edit = "Pages.Financials.Posting.UnBatched.Edit";
-        public const string Pages_Financials_Posting_UnBatched_Delete = "Pages.Financials.Posting.UnBatched.Delete";
-
-        // PERMISSIONS FOR PREFERENCES FISCALPERIOD
-        public const string Pages_Financials_Preferences = "Pages.Financials.Preferences";
-        public const string Pages_Financials_Preferences_FiscalPeriod = "Pages.Financials.Preferences.FiscalPeriod";
-        public const string Pages_Financials_Preferences_FiscalPeriod_Create = "Pages.Financials.Preferences.FiscalPeriod.Create";
-        public const string Pages_Financials_Preferences_FiscalPeriod_Edit = "Pages.Financials.Preferences.FiscalPeriod.Edit";
-        public const string Pages_Financials_Preferences_FiscalPeriod_Delete = "Pages.Financials.Preferences.FiscalPeriod.Delete";
-
-        // PERMISSIONS FOR PREFERENCES BANKSETUP
-
-        public const string Pages_Financials_Preferences_BankSetup = "Pages.Financials.Preferences.BankSetup";
-        public const string Pages_Financials_Preferences_BankSetup_Create = "Pages.Financials.Preferences.BankSetup.Create";
-        public const string Pages_Financials_Preferences_BankSetup_Edit = "Pages.Financials.Preferences.BankSetup.Edit";
-        public const string Pages_Financials_Preferences_BankSetup_Delete = "Pages.Financials.Preferences.BankSetup.Delete";
+        // PERMISSIONS FOR INQUIRY FISCALPERIOD
+        public const string Pages_Financials_FiscalPeriod = "Pages.Financials.FiscalPeriod";
+        public const string Pages_Financials_FiscalPeriod_Create = "Pages.Financials.FiscalPeriod.Create";
+        public const string Pages_Financials_FiscalPeriod_Edit = "Pages.Financials.FiscalPeriod.Edit";
+        public const string Pages_Financials_FiscalPeriod_Delete = "Pages.Financials.FiscalPeriod.Delete";
         #endregion
 
         #region Projects Tab
@@ -251,11 +208,8 @@
         public const string Pages_Payables_Vendors_Create = "Pages.Payables.Vendors.Create";
         public const string Pages_Payables_Vendors_Edit = "Pages.Payables.Vendors.Edit";
         public const string Pages_Payables_Vendors_Delete = "Pages.Payables.Vendors.Delete";
+
         public const string Pages_Payables_Invoices = "Pages.Payables.Invoices";
-        public const string Pages_Payables_Invoices_Batch = "Pages.Payables.Invoices.Batch";
-        public const string Pages_Payables_Invoices_Batch_Create = "Pages.Payables.Invoices.Batch.Create";
-        public const string Pages_Payables_Invoices_Batch_Edit = "Pages.Payables.Invoices.Batch.Edit";
-        public const string Pages_Payables_Invoices_Batch_Delete = "Pages.Payables.Invoices.Batch.Delete";
 
         public const string Pages_Payables_Inquiry = "Pages.Payables.Inquiry";
         public const string Pages_Payables_Inquiry_APInvoiceInquiry = "Pages.Payables.Inquiry.APInvoiceInquiry";
@@ -320,8 +274,49 @@
         public const string Pages_Payroll_Preferences_PayrollFringeReallocation = "Pages.Payroll.Preferences.PayrollFringeReallocation";
         #endregion
 
-        #region Posting Tab
-        public const string Pages_Posting = "Pages.Posting";
+        #region Batch Posting Tab
+        public const string Pages_BatchPosting = "Pages.BatchPosting";
+
+        public const string Pages_BatchPosting_Batches = "Pages.BatchPosting.Batches";
+        public const string Pages_BatchPosting_Batches_Create = "Pages.BatchPosting.Batches.Create";
+        public const string Pages_BatchPosting_Batches_Edit = "Pages.BatchPosting.Batches.Edit";
+        public const string Pages_BatchPosting_Batches_Delete = "Pages.BatchPosting.Batches.Delete";
+
+       
+        #endregion
+
+        #region Banking Tab
+        public const string Pages_Banking = "Pages.Banking";
+        // PERMISSIONS FOR BANKING RECEIPTS/TRANSFERS
+        public const string Pages_Banking_ReceiptsOrTransfers = "Pages.Banking.ReceiptsOrTransfers";
+        public const string Pages_Banking_ReceiptsOrTransfers_Create = "Pages.Banking.ReceiptsOrTransfers.Create";
+        public const string Pages_Banking_ReceiptsOrTransfers_Edit = "Pages.Banking.ReceiptsOrTransfers.Edit";
+        public const string Pages_Banking_ReceiptsOrTransfers_Delete = "Pages.Banking.ReceiptsOrTransfers.Delete";
+
+        // PERMISSIONS FOR BANKING ACH
+        public const string Pages_Banking_ACH = "Pages.Banking.ACH";
+        public const string Pages_Banking_ACH_Create = "Pages.Banking.ACH.Create";
+        public const string Pages_Banking_ACH_Edit = "Pages.Banking.ACH.Edit";
+        public const string Pages_Banking_ACH_Delete = "Pages.Banking.ACH.Delete";
+
+        // PERMISSIONS FOR BANKING RECONCILIATION
+        public const string Pages_Banking_Reconciliation = "Pages.Banking.Reconciliation";
+        public const string Pages_Banking_Reconciliation_Create = "Pages.Banking.Reconciliation.Create";
+        public const string Pages_Banking_Reconciliation_Edit = "Pages.Banking.Reconciliation.Edit";
+        public const string Pages_Banking_Reconciliation_Delete = "Pages.Banking.Reconciliation.Delete";
+
+        // PERMISSIONS FOR BANKING POSTIVE PAY
+        public const string Pages_Banking_PostivePay = "Pages.Banking.PostivePay";
+        public const string Pages_Banking_PostivePay_Create = "Pages.Banking.PostivePay.Create";
+        public const string Pages_Banking_PostivePay_Edit = "Pages.Banking.PostivePay.Edit";
+        public const string Pages_Banking_PostivePay_Delete = "Pages.Banking.PostivePay.Delete";
+
+        // PERMISSIONS FOR BANKING BANK SETUP
+        public const string Pages_Banking_BankSetup = "Pages.Banking.BankSetup";
+        public const string Pages_Banking_BankSetup_Create = "Pages.Banking.BankSetup.Create";
+        public const string Pages_Banking_BankSetup_Edit = "Pages.Banking.BankSetup.Edit";
+        public const string Pages_Banking_BankSetup_Delete = "Pages.Banking.BankSetup.Delete";
+
         #endregion
 
     }

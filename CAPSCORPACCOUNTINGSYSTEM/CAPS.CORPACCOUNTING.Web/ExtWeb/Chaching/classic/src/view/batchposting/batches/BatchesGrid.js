@@ -1,17 +1,17 @@
-﻿Ext.define('Chaching.view.invoices.BatchGrid', {
+﻿Ext.define('Chaching.view.batchposting.batches.BatchesGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
     requires: [
-        'Chaching.view.payables.invoices.BatchGridController'
+        'Chaching.view.batchposting.batches.BatchesGridController'
     ],
-    controller: 'payables-invoices-batchgrid',
-    xtype: 'widget.payables.invoices.batch',
-    store: 'payables.invoices.BatchStore',
-    name: 'invoices.Batch',
+    controller: 'batchposting-batches-batchesgrid',
+    xtype: 'widget.batchposting.batches',
+    store: 'batchposting.batches.BatchesStore',
+    name: 'BatchPosting.Batches',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Payables.Invoices.Batch'),
-        create: abp.auth.isGranted('Pages.Payables.Invoices.Batch.Create'),
-        edit: abp.auth.isGranted('Pages.Payables.Invoices.Batch.Edit'),
-        destroy: abp.auth.isGranted('Pages.Payables.Invoices.Batch.Delete'),
+        read: abp.auth.isGranted('Pages.BatchPosting.Batches'),
+        create: abp.auth.isGranted('Pages.BatchPosting.Batches.Create'),
+        edit: abp.auth.isGranted('Pages.BatchPosting.Batches.Edit'),
+        destroy: abp.auth.isGranted('Pages.BatchPosting.Batches.Delete'),
     },
     padding: 5,
     gridId: 19,

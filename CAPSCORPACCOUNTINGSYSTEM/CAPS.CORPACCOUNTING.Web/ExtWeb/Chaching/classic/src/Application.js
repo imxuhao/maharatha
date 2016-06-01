@@ -63,14 +63,14 @@ Ext.define('Chaching.Application', {
         'utilities.EmployeeListStore',
         'utilities.autofill.CustomerListStore',
         'financials.journals.JournalDetailsStore',
-        'payables.invoices.BatchStore',
+        'batchposting.batches.BatchesStore',
         'utilities.autofill.JobDivisionStore',
         'utilities.autofill.AccountsStore',
         'utilities.autofill.SubAccountsStore',
         'utilities.autofill.TaxRebateStore',
         'utilities.autofill.VendorsStore',
         'utilities.autofill.T41099Store',
-        'financials.preferences.FiscalPeriodStore'
+        'financials.fiscalperiod.FiscalPeriodStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function() {

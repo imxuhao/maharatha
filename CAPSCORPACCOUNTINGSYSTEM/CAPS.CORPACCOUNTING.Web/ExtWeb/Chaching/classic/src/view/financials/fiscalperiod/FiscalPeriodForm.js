@@ -1,9 +1,9 @@
 ﻿
-Ext.define('Chaching.view.financials.preferences.FiscalPeriodForm', {
+Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
-    alias: ['widget.financials.preferences.fiscalperiod.create', 'widget.financials.preferences.fiscalperiod.edit'],
+    alias: ['widget.financials.fiscalperiod.fiscalperiod.create', 'widget.financials.fiscalperiod.fiscalperiod.edit'],
     requires: [
-        'Chaching.view.financials.preferences.FiscalPeriodFormController'
+        'Chaching.view.financials.fiscalperiod.FiscalPeriodFormController'
     ],
 
     /**
@@ -11,12 +11,12 @@ Ext.define('Chaching.view.financials.preferences.FiscalPeriodForm', {
     * permissions to access fiscal period.
     */
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Financials.Preferences.FiscalPeriod'),
-        create: abp.auth.isGranted('Pages.Financials.Preferences.FiscalPeriod.Create'),
-        edit: abp.auth.isGranted('Pages.Financials.Preferences.FiscalPeriod.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Preferences.FiscalPeriod.Delete')
+        read: abp.auth.isGranted('Pages.Financials.FiscalPeriod'),
+        create: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Create'),
+        edit: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Edit'),
+        destroy: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Delete')
     },
-    controller: 'financials.preferences.fiscalperiodform',
+    controller: 'financials-fiscalperiod-fiscalperiodform',
     name: 'fiscalperiod',
     openInPopupWindow: false,
     hideDefaultButtons: false,

@@ -155,7 +155,11 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             #endregion
 
-            return vendorUnit.MapTo<VendorUnitDto>();
+
+          var  VendorUnitDto= vendorUnit.MapTo<VendorUnitDto>();
+            VendorUnitDto.VendorId = vendorUnit.Id;
+            return VendorUnitDto;
+
         }
 
         /// <summary>
@@ -414,7 +418,10 @@ namespace CAPS.CORPACCOUNTING.Masters
                     //Do something when Vendor is added
                 });
 
-            return vendorUnit.MapTo<VendorUnitDto>();
+
+            var VendorUnitDto = vendorUnit.MapTo<VendorUnitDto>();
+            VendorUnitDto.VendorId = vendorUnit.Id;
+            return VendorUnitDto;
         }
 
         /// <summary>

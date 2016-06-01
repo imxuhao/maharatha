@@ -8,24 +8,24 @@
  * UI design for Fical Period.
  * @alias widget.financials.preferences.fiscalperiod
  */
-Ext.define('Chaching.view.financials.preferences.FiscalPeriodGrid', {
+Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.financials.preferences.FiscalPeriodGridController'
+        'Chaching.view.financials.fiscalperiod.FiscalPeriodGridController'
     ],
-    xtype: 'widget.financials.preferences.fiscalperiod',
-    name : 'Financials.Preferences.FiscalPeriod',
-    controller: 'financials.preferences.fiscalperiodgrid',
+    xtype: 'widget.financials.fiscalperiod',
+    name : 'Financials.FiscalPeriod',
+    controller: 'financials.fiscalperiodgrid',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Financials.Preferences.FiscalPeriod'),
-        create: abp.auth.isGranted('Pages.Financials.Preferences.FiscalPeriod.Create'),
-        edit: abp.auth.isGranted('Pages.Financials.Preferences.FiscalPeriod.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Preferences.FiscalPeriod.Delete')
+        read: abp.auth.isGranted('Pages.Financials.FiscalPeriod'),
+        create: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Create'),
+        edit: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Edit'),
+        destroy: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Delete')
     },
     padding: 5,
     gridId: 20,
-    store: 'financials.preferences.FiscalPeriodStore',
+    store: 'financials.fiscalperiod.FiscalPeriodStore',
     headerButtonsConfig: [
       {
           xtype: 'displayfield',
@@ -40,7 +40,7 @@ Ext.define('Chaching.view.financials.preferences.FiscalPeriodGrid', {
           tooltip: app.localize('CreateNewFiscalPeriod'),
           checkPermission: true,
           iconCls: 'fa fa-plus',
-          routeName: 'financials.preferences.fiscalperiod.create',
+          routeName: 'financials.fiscalperiod.create',
           iconAlign: 'left'
       }],
     requireExport: true,

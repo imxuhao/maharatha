@@ -74,7 +74,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        [AbpAuthorize(AppPermissions.Pages_Financials_Preferences_BankSetup_Create)]
+        [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Create)]
         public async Task CreateBankAccountUnit(CreateBankAccountUnitInput input)
         {
             var bankAccountUnit = input.MapTo<BankAccountUnit>();
@@ -114,7 +114,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        [AbpAuthorize(AppPermissions.Pages_Financials_Preferences_BankSetup_Edit)]
+        [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Edit)]
         public async Task UpdateBankAccountUnit(UpdateBankAccountUnitInput input)
         {
             if(input.StartingPaymentNumber>input.EndingPaymentNumber)
@@ -175,7 +175,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        [AbpAuthorize(AppPermissions.Pages_Financials_Preferences_BankSetup_Delete)]
+        [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Delete)]
         public async Task DeleteBankAccountUnit(IdInput input)
         {
             await _bankAccountUnitManager.DeleteAsync(input);
@@ -192,7 +192,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [AbpAuthorize(AppPermissions.Pages_Financials_Preferences_BankSetup)]
+        [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup)]
         public async Task<PagedResultOutput<BankAccountUnitDto>> GetBankAccountUnits(SearchInputDto input)
         {
 

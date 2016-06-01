@@ -1,4 +1,4 @@
-﻿Ext.define('Chaching.model.financials.preferences.FiscalPeriodModel', {
+﻿Ext.define('Chaching.model.financials.fiscalperiod.FiscalPeriodModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: ''

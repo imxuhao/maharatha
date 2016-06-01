@@ -1871,7 +1871,7 @@
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\SubAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalEntryDetail.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\financials\preferences\FiscalPeriodModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\financials\fiscalperiod\FiscalPeriodModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobLocationsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobCommercialsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageMainModel.js" />
@@ -1880,7 +1880,7 @@
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\payables\invoices\BatchModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\batchposting\batches\BatchesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorAliasModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
@@ -1901,10 +1901,10 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalStore.js" />
-    <Content Include="ExtWeb\Chaching\app\store\financials\preferences\FiscalPeriodStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\fiscalperiod\FiscalPeriodStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
-    <Content Include="ExtWeb\Chaching\app\store\payables\invoices\BatchStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\batchposting\batches\BatchesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsAliasStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\linkedaccounts\LinkedAccountsStore.js" />
@@ -1989,12 +1989,12 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalTransactionDetailGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalTransactionDetailGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\PreferencesTabPanel.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\BankSetupGrid.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\BankSetupGridController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodFormController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodGrid.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodGridController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\financials\preferences\FiscalPeriodForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\banking\BankSetupGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\banking\BankSetupGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesTextForm.js" />
@@ -2022,10 +2022,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewListController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewViewController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchForm.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchFormController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchGrid.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\BatchGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\InvoiceTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorAliasGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorAliasGridController.js" />
@@ -20994,6 +20994,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ExtWeb\Chaching\app\model\financials\preferences\" />
+    <Folder Include="ExtWeb\Chaching\app\model\payables\invoices\" />
+    <Folder Include="ExtWeb\Chaching\app\store\financials\preferences\" />
+    <Folder Include="ExtWeb\Chaching\app\store\payables\invoices\" />
+    <Folder Include="ExtWeb\Chaching\classic\src\view\financials\preferences\" />
+    <Folder Include="ExtWeb\Chaching\classic\src\view\payables\invoices\" />
     <Folder Include="ExtWeb\Chaching\overrides\" />
     <Folder Include="ExtWeb\LoginApp\overrides\" />
     <Folder Include="ExtWeb\LoginApp\sass\src\" />

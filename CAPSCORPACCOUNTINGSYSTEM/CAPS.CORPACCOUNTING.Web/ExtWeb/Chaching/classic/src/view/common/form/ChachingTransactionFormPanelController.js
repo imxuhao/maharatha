@@ -306,7 +306,8 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                         if (!dataIndex) dataIndex = column.name;
                         if (column.isMandatory) {
                             var columnValue = record.get(dataIndex);
-                            if (columnValue===null||columnValue===undefined||columnValue==="") {
+                            if (dataIndex === "amount" && columnValue === 0) columnValue = null;
+                            if (columnValue === null || columnValue === undefined || columnValue === "") {
                                 var cell = detailGrid.getView().getCell(record, column);
                                 if (cell) controller.invalidateCell(cell, column.text);
                                 isValid = false;

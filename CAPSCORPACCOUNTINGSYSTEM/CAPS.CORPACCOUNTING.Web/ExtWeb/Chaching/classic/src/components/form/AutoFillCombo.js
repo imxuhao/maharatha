@@ -142,15 +142,17 @@
                 destroy: abp.auth.isGranted('Pages.' + me.entityPermission + '.Delete')
             };
         }
-        // check permission to create view
-        if (me.modulePermissions.create) {
-            me.plugins = [{
-                  ptype: 'saki-ficn'
-                , iconCls: 'fa-plus-square'
-                , qtip: app.localize('Create')
-            }];
-        }
-        me.on('iconclick', me.onIconClick, me);
+
+        //// check permission to create view
+        //if (me.modulePermissions.create) {
+        //    me.plugins = [{
+        //          ptype: 'saki-ficn'
+        //        , iconCls: 'fa-plus-square'
+        //        , qtip: app.localize('Create')
+        //    }];
+        //}
+        //me.on('iconclick', me.onIconClick, me);
+
         me.callParent(arguments);
         //key events
         me.on('keyup', me.baseKeyUp, this);
@@ -306,107 +308,107 @@
                 me.getStore().clearFilter();
                 model.deselectAll();
                 break;
-            case 'btnNew':
-                //try to disable parent window's formpanel once child window is oepned see #1522
-                //once child window is opened then the controls taborder of child windows coflict with parent windows controls.
-                me.setDisabled(true);
-                if (parentWindow) {
-                    parentWindow.down('form').setDisabled(true);
-                }
-                var wndEdit = this.getEditWnd(me.opts);
-                //wndEdit.opts = this.opts;
-                //add destroy event handler for child window to enable parent again
-                wndEdit.on("destroy", me.enableParent, this);
-                wndEdit.parent = parentWindow;
-                wndEdit.requestor = me;
-                wndEdit.show();
-                wndEdit.bindParent(me); //grid.pickerObj
-                var emptyRec = {
-                    AllowDelete: false
-                };
-                wndEdit.getController().setDetails(emptyRec);
-                if (parentWindow == null && me.up('grid').id != null) {
-                    var formId = me.up('grid').id;
-                    var isDefault = this.store.findRecord('IsDefault', true);
-                    var records = [];
-                    if (isDefault) {
-                        records['IsDefault'] = isDefault.data.IsDefault;
-                        records['IsFirstRec'] = false;
-                    } else {
-                        records['IsDefault'] = true;
-                        records['IsFirstRec'] = true;
-                    }
-                    records['FormName'] = formId;
-                    me.setDisabled(false);
-                    if (wndEdit.setDefaultValues) {
-                        wndEdit.setDefaultValues(records);
-                    }
-                } else {
-                    if (wndEdit.setDefaultValues) {
-                        wndEdit.setDefaultValues();
-                    }
-                }
-                break;
-            case 'btnEdit':
-                if (record == null) {
-                    Ext.Msg.show({
-                        title: Aliaces.FormValidationFailure,
-                        msg: 'Please select record to edit',
-                        buttons: Ext.Msg.OK,
-                        icon: Ext.Msg.ERROR
-                    });
-                    return;
-                }
-                //try to disable parent window's formpanel once child window is oepned
-                //once child window is opened then the controls taborder of child windows coflict with parent windows controls.
-                me.setDisabled(true);
-                if (parentWindow) {
-                    parentWindow.down('form').setDisabled(true);
-                }
-                var wndEdit = this.getEditWnd(me.opts);
-                //add destroy event handler for child window to enable parent again
-                wndEdit.on("destroy", me.enableParent, this);
-                wndEdit.parent = parentWindow;
-                wndEdit.requestor = me;
-                if (me.loadOnEdit) {
-                    // If not retrieving all information... then retrieve 
-                    var store = Ext.create('NextGen.store.' + me.originalWndClass + '.' + me.originalWndClass + 'Store');
-                    store.proxy.url = global_url + me.originalWndClass + '/GetDetailsById';
-                    if (wndEdit.isTransactionWindow)//for transaction windows always primary key is accounttransactionid
-                        store.proxy.extraParams.pkId = record.get('AccountTransactionId');
-                    else
-                        store.proxy.extraParams.pkId = record.get(me.valueField);
-                    store.load(function (records, operation, success) {
-                        wndEdit.show();
-                        wndEdit.bindParent(me);
-                        wndEdit.getController().setDetails(records[0].data);
-                    });
-                } else {
-                    // IF retrieving all information.
-                    wndEdit.show();
-                    wndEdit.bindParent(me);
-                    wndEdit.getController().setDetails(record.data);
-                }
+            //case 'btnNew':
+            //    //try to disable parent window's formpanel once child window is oepned see #1522
+            //    //once child window is opened then the controls taborder of child windows coflict with parent windows controls.
+            //    me.setDisabled(true);
+            //    if (parentWindow) {
+            //        parentWindow.down('form').setDisabled(true);
+            //    }
+            //    var wndEdit = this.getEditWnd(me.opts);
+            //    //wndEdit.opts = this.opts;
+            //    //add destroy event handler for child window to enable parent again
+            //    wndEdit.on("destroy", me.enableParent, this);
+            //    wndEdit.parent = parentWindow;
+            //    wndEdit.requestor = me;
+            //    wndEdit.show();
+            //    wndEdit.bindParent(me); //grid.pickerObj
+            //    var emptyRec = {
+            //        AllowDelete: false
+            //    };
+            //    wndEdit.getController().setDetails(emptyRec);
+            //    if (parentWindow == null && me.up('grid').id != null) {
+            //        var formId = me.up('grid').id;
+            //        var isDefault = this.store.findRecord('IsDefault', true);
+            //        var records = [];
+            //        if (isDefault) {
+            //            records['IsDefault'] = isDefault.data.IsDefault;
+            //            records['IsFirstRec'] = false;
+            //        } else {
+            //            records['IsDefault'] = true;
+            //            records['IsFirstRec'] = true;
+            //        }
+            //        records['FormName'] = formId;
+            //        me.setDisabled(false);
+            //        if (wndEdit.setDefaultValues) {
+            //            wndEdit.setDefaultValues(records);
+            //        }
+            //    } else {
+            //        if (wndEdit.setDefaultValues) {
+            //            wndEdit.setDefaultValues();
+            //        }
+            //    }
+            //    break;
+            //case 'btnEdit':
+            //    if (record == null) {
+            //        Ext.Msg.show({
+            //            title: Aliaces.FormValidationFailure,
+            //            msg: 'Please select record to edit',
+            //            buttons: Ext.Msg.OK,
+            //            icon: Ext.Msg.ERROR
+            //        });
+            //        return;
+            //    }
+            //    //try to disable parent window's formpanel once child window is oepned
+            //    //once child window is opened then the controls taborder of child windows coflict with parent windows controls.
+            //    me.setDisabled(true);
+            //    if (parentWindow) {
+            //        parentWindow.down('form').setDisabled(true);
+            //    }
+            //    var wndEdit = this.getEditWnd(me.opts);
+            //    //add destroy event handler for child window to enable parent again
+            //    wndEdit.on("destroy", me.enableParent, this);
+            //    wndEdit.parent = parentWindow;
+            //    wndEdit.requestor = me;
+            //    if (me.loadOnEdit) {
+            //        // If not retrieving all information... then retrieve 
+            //        var store = Ext.create('NextGen.store.' + me.originalWndClass + '.' + me.originalWndClass + 'Store');
+            //        store.proxy.url = global_url + me.originalWndClass + '/GetDetailsById';
+            //        if (wndEdit.isTransactionWindow)//for transaction windows always primary key is accounttransactionid
+            //            store.proxy.extraParams.pkId = record.get('AccountTransactionId');
+            //        else
+            //            store.proxy.extraParams.pkId = record.get(me.valueField);
+            //        store.load(function (records, operation, success) {
+            //            wndEdit.show();
+            //            wndEdit.bindParent(me);
+            //            wndEdit.getController().setDetails(records[0].data);
+            //        });
+            //    } else {
+            //        // IF retrieving all information.
+            //        wndEdit.show();
+            //        wndEdit.bindParent(me);
+            //        wndEdit.getController().setDetails(record.data);
+            //    }
 
-                break;
-            case 'btnDelete':
-                Ext.Msg.show({
-                    title: NextGen.locale.messages.DeleteConfirmationTitle,
-                    msg: NextGen.locale.messages.DeleteConfirmation,
-                    buttons: Ext.Msg.YESNO,
-                    icon: Ext.Msg.QUESTION,
-                    //animateTarget: records[0].id,
-                    fn: function (btn) {
-                        switch (btn) {
-                            case "yes":
-                                me.doDeleteCurent(record);
-                                break;
-                            case "no":
-                                break;
-                        }
-                    }
-                });
-                break;
+            //    break;
+            //case 'btnDelete':
+            //    Ext.Msg.show({
+            //        title: NextGen.locale.messages.DeleteConfirmationTitle,
+            //        msg: NextGen.locale.messages.DeleteConfirmation,
+            //        buttons: Ext.Msg.YESNO,
+            //        icon: Ext.Msg.QUESTION,
+            //        //animateTarget: records[0].id,
+            //        fn: function (btn) {
+            //            switch (btn) {
+            //                case "yes":
+            //                    me.doDeleteCurent(record);
+            //                    break;
+            //                case "no":
+            //                    break;
+            //            }
+            //        }
+            //    });
+            //    break;
             case 'btnRefresh':
                 me.getPicker().getSelectionModel().deselectAll();
                 picker.down('button[itemId=btnDropDownEdit]').disable();
@@ -422,20 +424,39 @@
 
 
 
-    onIconClick: function () {
-        var me = this;
-        var entityType = me.entityType;
-        me.createWindow(entityType, 'create', null);
-    },
+    //onIconClick: function () {
+    //    var me = this;
+    //    var entityType = me.entityType;
+    //    me.createWindow(entityType, 'create', null);
+    //},
     /**
      * Creates and returns the tree panel to be used as this field's picker.
      */
     createPicker: function () {
         var me = this,
+            dockedItems = [{
+                 anchor: '100%',
+                 dock: 'bottom',
+                 ui: 'plainBottom',
+                 frame: false,
+                 xtype: 'toolbar',
+                 items: ['->', {
+                     xtype: 'button',
+                     text: 'Add',
+                     iconAlign: 'left',
+                     scale: 'small',
+                     iconCls: 'fa fa-plus-square',
+                     ui: 'actionButton',
+                     handler: function (btn) {
+                         var entityType = me.entityType;
+                         me.createWindow(entityType, 'create', null);
+                     }
+                 }]
+             }],
             columnList = me.createGridColumns();
 	        opts = Ext.apply({
 	            shrinkWrapDock: 2,
-	            manageHeight: false,
+	            manageHeight: true,
 	            store: me.store,
 	            displayField: me.displayField,
 	            columns: columnList,
@@ -444,9 +465,10 @@
 	            forceFit: true,
 	            layout: 'fit',
 	            floating: true,
+	            dockedItems: me.modulePermissions.create ? dockedItems : null,
 	            multiSelect: false,
 	            cls: 'chaching-transactiongrid',
-	            controller : me.entityGridController,
+	            controller: me.entityGridController,
 	            selModel: {
 	                selType: 'rowmodel', // rowmodel is the default selection model
 	            },
@@ -459,6 +481,7 @@
 	            //    itemclick: me.onItemClick,
 	            //}
 	        }, me.listConfig);
+	       
         var picker = me.picker = Ext.create('Ext.grid.Panel', opts);
 
         picker.on({
@@ -688,33 +711,56 @@
             iconCls: 'deleteCls',
            // ui: 'actionButton',
             tooltip: app.localize('Delete'),
-            handler : function(grid, rowIndex, colIndex) {
+            handler: function (grid, rowIndex, colIndex) {
                 var entityType = me.entityType;
                 var rec = grid.getStore().getAt(rowIndex);
                 me.createWindow(entityType, 'delete', rec);
             }
         };
         if (me.modulePermissions.edit) {
-            actionColumnItems.push(editActionItem);
-        }
+           // actionColumnItems.push(editActionItem);
 
-        if (me.modulePermissions.destroy) {
-            actionColumnItems.push(deleteActionItem);
-        }
-
-        if (actionColumnItems.length > 0) {
-            actionColumn = {
+            var editActionColumn = {
                 xtype: 'actioncolumn',
-                width: '8%',
-                minWidth: 30,
+                width: '5%',
+                minWidth: 15,
                 sortable: false,
                 hideable: false,
                 menuDisabled: true,
                 filterable: true,
-                items: actionColumnItems
+                items: [editActionItem]//actionColumnItems
             }
-            columns.push(actionColumn);
-        } 
+            columns.push(editActionColumn);
+        }
+
+        if (me.modulePermissions.destroy) {
+            //actionColumnItems.push(deleteActionItem);
+            var deleteActionColumn = {
+                xtype: 'actioncolumn',
+                width: '5%',
+                minWidth: 15,
+                sortable: false,
+                hideable: false,
+                menuDisabled: true,
+                filterable: true,
+                items: [deleteActionItem]//actionColumnItems
+            }
+            columns.push(deleteActionColumn);
+        }
+
+        //if (actionColumnItems.length > 0) {
+        //    actionColumn = {
+        //        xtype: 'actioncolumn',
+        //        width: '8%',
+        //        minWidth: 30,
+        //        sortable: false,
+        //        hideable: false,
+        //        menuDisabled: true,
+        //        filterable: true,
+        //        items: actionColumnItems
+        //    }
+        //    columns.push(actionColumn);
+        //} 
        return columns;
     },
     createWindow: function (xtype, operation, record) {

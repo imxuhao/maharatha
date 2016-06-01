@@ -368,7 +368,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             displayField: 'name',
                             entityGridController: 'payables-vendors-vendorsgrid',
                             typeAhead: false,
-                            editable : true,
+                            editable: true,
+                            entityName : 'Vendor',
                             entityType: 'payables.vendors',
                             entityPermission: 'Payables.Vendors',
                             // We're forcing the query to run every time by setting minChars to 0

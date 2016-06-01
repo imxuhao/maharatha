@@ -5,6 +5,7 @@
     requires: ['Ext.grid.Panel'],
 
     modulePermissions: undefined,
+    entityName : null,
     entityType: null,
     entityPermission: null,
     entityGridController : null,
@@ -118,7 +119,10 @@
     initComponent: function () {
         var me = this;
         if (me.entityGridController == null) {
-            Ext.raise('entityGridController config is required for add/update/delete of an entity for autofillcombo.');
+            Ext.raise('entityGridController config is required for add/update/delete of an entity for AutoFillCombo(' + me.entityName + ')');
+        }
+        if (me.entityName == null) {
+            Ext.raise('entityName config is required to open edit/create page in popup window for that entity.');
         }
         if (me.entityType == null ) {
             Ext.raise('entityType config is required to open edit/create page  in popup window for that entity.');
@@ -435,8 +439,8 @@
 	            store: me.store,
 	            displayField: me.displayField,
 	            columns: columnList,
-	            columnLines: true,
-	            rowLines: true,
+	            columnLines: false,
+	            rowLines: false,
 	            forceFit: true,
 	            layout: 'fit',
 	            floating: true,
@@ -723,7 +727,10 @@
         } else if (operation === 'edit') {
             xtypeOfView = xtype + ".edit";
         }
-      
+
+        if (me.store && me.store.proxy && (me.store.proxy.urlToGetRecordById == "" || me.store.proxy.urlToGetRecordById == undefined)) {
+            Ext.raise('urlToGetRecordById config is required in proxy config of ' + me.store.$className + ' to edit record in AutoFillCombo(' + me.entityName+')');
+        }
         var recordByIdUrl = me.store.proxy.urlToGetRecordById;
         if (operation === 'edit') {
             Ext.Ajax.request({
@@ -732,7 +739,7 @@
                 success: function (response, opts) {
                     var res = Ext.decode(response.responseText);
                     if (res.success) {
-                        var popupWindow = me.createPopupWindow(xtypeOfView, me);
+                        var popupWindow = me.createPopupWindow(xtypeOfView, me, operation);
                         var formView = popupWindow.down('form');
                         var recordToLoad = me.getStore().model.create();
                         Ext.apply(recordToLoad.data, res.result);
@@ -769,16 +776,18 @@
             });
         }
         else if (operation === 'create') {
-            var popupWindow = me.createPopupWindow(xtypeOfView, me);
+            var popupWindow = me.createPopupWindow(xtypeOfView, me, operation);
             var formView = popupWindow.down('form');
             var entityTypeController = me.picker.getController();
             entityTypeController.doAfterCreateAction('popup', formView, false, null);
         }
     },
 
-    createPopupWindow: function (xtypeOfView, me) {
+    createPopupWindow: function (xtypeOfView, me, operation) {
+        var windowTitle = operation + ' ' + me.entityName;
         var window = Ext.create('Chaching.view.common.window.ChachingWindowPanel', {
             layout: 'fit',
+            title: windowTitle.toUpperCase(),
             autoShow: true,
             modal: true,
             height: '90%',

@@ -36,18 +36,19 @@
     <link href="~/Content/themesChaching/chachingGlobalcss.css" rel="stylesheet"/>
     <link href="~/libs/sweetalert/sweet-alert.css" rel="stylesheet" />
     <link href="~/libs/toastr/toastr.min.css" rel="stylesheet" />
-    @*@Styles.Render("~/Bundles/Frontend/libs/css" + (CultureHelper.IsRtl ? "RTL" : ""))
-    @RenderSection("Styles", false)
-    @Styles.Render("~/Bundles/Frontend/metronic/css" + (CultureHelper.IsRtl ? "RTL" : ""))
-    @Styles.Render("~/Bundles/Common/css")
-
-    @Html.IncludeStyle("~/Views/Layout/layout.css")*@
+   
 
     <script type="text/javascript">
         @* This is used to get the application's root path from javascript.
         It's useful if you're running application in a virtual directory under IIS. *@
-        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
     </script>
+
+    @Scripts.Render("~/Bundles/Frontend/libs/js")
+    @Scripts.Render("~/Bundles/Frontend/metronic/js")
+
+    @Scripts.Render("~/Bundles/Common/js")
 
 </head>
 <body class="corporate">
@@ -66,7 +67,7 @@
         <script src="~/libs/respond/respond.min.js"></script>
     <![endif]-->
 
-    @Scripts.Render("~/Bundles/Frontend/libs/js")
+   
 
     <script type="text/javascript">
         abp.localization.defaultSourceName = '@LocalizationSourceName';
@@ -78,9 +79,7 @@
     <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
     <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
 
-    @Scripts.Render("~/Bundles/Frontend/metronic/js")
-
-    @Scripts.Render("~/Bundles/Common/js")
+   
 
     <script type="text/javascript">
         $(function () {

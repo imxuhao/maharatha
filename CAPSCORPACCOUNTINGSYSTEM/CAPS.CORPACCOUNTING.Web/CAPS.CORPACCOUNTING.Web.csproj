@@ -1968,6 +1968,7 @@
     <Content Include="ExtWeb\Chaching\app\store\Personnel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingReplicator.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSelectionModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSpreadsheetModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingTransactionFormPanel.js" />

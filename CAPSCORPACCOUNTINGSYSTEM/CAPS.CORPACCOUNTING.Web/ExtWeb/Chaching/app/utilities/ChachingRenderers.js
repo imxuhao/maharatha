@@ -299,6 +299,9 @@
         var store = me.getStore();
         val = store.sum('amount');
         return '<b>' + Chaching.utilities.ChachingRenderers.amountsRenderer(val, null, null) + '</b>';
+    },
+    summaryTotalTextRenderer:function(value, summaryData, dataIndex) {
+        return '<b>TOTAL</b>';
     }
 
 });

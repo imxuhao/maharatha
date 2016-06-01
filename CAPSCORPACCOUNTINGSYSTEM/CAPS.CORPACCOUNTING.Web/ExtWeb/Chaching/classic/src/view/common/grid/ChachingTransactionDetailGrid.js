@@ -61,7 +61,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         'Chaching.view.common.grid.ChachingTransactionDetailGridController',
         'Chaching.view.common.grid.ChachingTransactionDetailGridModel',
         'Chaching.components.plugins.CellEditing',
-        'Ext.grid.selection.SpreadsheetModel',
+        'Chaching.components.selection.ChachingSpreadsheetModel',
         'Chaching.components.plugins.Clipboard'
     ],
 
@@ -126,7 +126,11 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         if (!me.store) Ext.Error.raise('Please provide store configuration');
         if (me.getIsGroupedHeader() && !me.getGroupedHeaderBaseConfig())Ext.Error.raise('Please provide group header config to add columns in group');
         var columns = me.getColumnsForGrid();
+        var modulePermissions = me.getModulePermissions();
         if (columns) {
+            if (modulePermissions.destroy) {
+                columns.push(me.getDeleteActionColumn());
+            }
             me.columns = columns;
         }
         var gridStore = me.store;
@@ -166,13 +170,14 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             plugins.push(mutisearch);
         }
         me.selModel = {
-            type: 'spreadsheet',
+            type: 'chachingSpreadsheetSelectionModel',
             columnSelect: true,
             checkboxSelect: false,
             pruneRemoved: false,
+            rowNumbererHeaderWidth:55,
             extensible: 'y'
         };
-        var modulePermissions = me.getModulePermissions();
+       
         if (modulePermissions.edit || modulePermissions.create) {
             plugins.push({
                 ptype: 'chachingClipboard',
@@ -314,6 +319,34 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         };
         buttons.push(refreshBtn);
         return buttons;
+    },
+    getDeleteActionColumn: function () {
+        return {
+            xtype: 'actioncolumn',
+            name: 'Delete',
+            dataIndex:'Delete',
+            scale: 'small',
+            iconCls: 'deleteCls',
+            tooltip: app.localize('Delete'),
+            width: 50,
+            hideable: false,
+            movable: false,
+            resizable: false,
+            sortable: false,
+            groupable: false,
+            menuDisabled: true,
+            handler: function(grid, rowIndex, colIndex) {
+                var gridStore = grid.getStore();
+                var record = gridStore.getAt(rowIndex);
+                if (record) {
+                    var accountingItemId = record.get('accountingItemId');
+                    if (accountingItemId > 0) {
+                        record.set('accountingItemId', -accountingItemId);
+                    }
+                    gridStore.remove(record);
+                }
+            }
+        };
     },
     getColumnsForGrid:function() {
         var me = this,

@@ -7,13 +7,15 @@
 
 .editCls:before {
     font: 18px/1 FontAwesome;
-    color: #81cb31;
-    content: "\f058";
+    color: #05A521;
+    /*content: "\f058";*/
+    content: "\f044";
 }
 
 .deleteCls:before {
     font: 18px/1 FontAwesome;
-    color: #dd6550;
-    content: "\f056";
+    color: #CA0909;
+    /*content: "\f056";*/
+    content: "\f1f8";
 }
 

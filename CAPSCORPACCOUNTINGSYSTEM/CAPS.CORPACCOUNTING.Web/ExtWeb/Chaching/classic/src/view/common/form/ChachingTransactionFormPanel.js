@@ -192,7 +192,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
     getDefaultActionToolbar: function() {
         var me = this;
         var buttons = [];
-       
+        buttons.push('->');
         if (me.modulePermissions.create || me.modulePermissions.edit) {
             //save current
             buttons.push({
@@ -288,7 +288,10 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
         var defaultButtons = {
             xtype: 'toolbar',
             border: false,
-            layout: 'hbox',
+            layout: {
+                type: 'hbox',
+                pack:'center'
+            },
             items: buttons
         };
         
@@ -300,7 +303,10 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
             var userDefinedButtons = {
                 xtype: 'toolbar',
                 border: false,
-                layout: 'hbox',
+                layout: {
+                    type: 'hbox',
+                    pack: 'center'
+                },
                 items: formButtons
             };
             return userDefinedButtons;

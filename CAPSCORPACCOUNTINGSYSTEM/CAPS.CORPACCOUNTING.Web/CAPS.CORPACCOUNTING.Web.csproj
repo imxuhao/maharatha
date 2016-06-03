@@ -1861,6 +1861,8 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\banking\BankCheckRangesModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\banking\BankSetupModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionHeaderModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
@@ -1893,6 +1895,7 @@
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\CustomerModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\banking\BankSetupStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\TransactionDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\customers\CustomersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />

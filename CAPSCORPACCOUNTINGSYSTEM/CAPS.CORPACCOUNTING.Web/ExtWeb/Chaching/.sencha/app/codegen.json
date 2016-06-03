@@ -472,6 +472,42 @@
         "modelNamespace": "Chaching.model",
         "name": "base.TransactionDetailsModel"
       }
+    },
+    "app/model/banking/maintenance/BanksModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "banking/maintenance/BanksModel",
+        "modelNamespace": "Chaching.model",
+        "name": "banking.maintenance.BanksModel"
+      }
+    },
+    "app/model/banking/BankSetupModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "banking/BankSetupModel",
+        "modelNamespace": "Chaching.model",
+        "name": "banking.BankSetupModel"
+      }
+    },
+    "app/model/banking/BankCheckRanges.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "banking/BankCheckRanges",
+        "modelNamespace": "Chaching.model",
+        "name": "banking.BankCheckRanges"
+      }
     }
   }
 }

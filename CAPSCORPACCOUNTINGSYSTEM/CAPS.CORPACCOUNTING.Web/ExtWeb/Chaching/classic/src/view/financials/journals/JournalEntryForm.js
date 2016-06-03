@@ -128,18 +128,6 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                     boxLabelCls: 'checkboxLabel',
                     ui: 'default'
                 }]
-                /*items: [{
-                    xtype: 'radiogroup',
-                    fieldLabel: app.localize('JournalType'),
-                    columns: 2,
-                    vertical: true,
-                    items: [
-                        { boxLabel: app.localize('Standard'), name: 'journalTypeId', inputValue: '1', checked: true },
-                        { boxLabel: app.localize('Intercompany'), name: 'journalTypeId', inputValue: '2' },
-                        { boxLabel: app.localize('Reversing'), name: 'journalTypeId', inputValue: '3', padding: '0 0 0 10' },
-                        { boxLabel: app.localize('Recurring'), name: 'journalTypeId', inputValue: '4', padding: '0 0 0 10' }
-                    ]
-                }]*/
             }]
         }, {
             xtype: 'fieldset',

@@ -51,7 +51,7 @@ Ext.define('Chaching.view.main.ChachingViewport', {
                 'padding': '10px 20px 20px 20px'
             },
             border: false,
-            scrollable: false,
+            scrollable: true,
             items: [
                 {
                     xtype: 'treelist',

@@ -20993,6 +20993,7 @@
     <Content Include="Views\TenantRegistration\Index.cshtml" />
     <Content Include="Views\TenantRegistration\RegisterResult.cshtml" />
     <Content Include="Views\Error\_Layout.cshtml" />
+    <Content Include="Views\Home\Extjs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

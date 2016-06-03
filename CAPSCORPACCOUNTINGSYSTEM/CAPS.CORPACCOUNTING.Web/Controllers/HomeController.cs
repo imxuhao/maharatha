@@ -14,5 +14,11 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             return View();
         }
+
+        [Authorize]
+        public ActionResult Extjs()
+        {
+            return View();
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Abp.Application.Services.Dto;
+﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
+    [AutoMapTo(typeof(BankAccountUnit))]
     public class UpdateBankAccountUnitInput:IInputDto
     {
 
@@ -128,19 +128,10 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
 
         /// <summary>Gets or Sets Addresses of the Employee. </summary>
         public List<UpdateAddressUnitInput> Addresses { get; set; }
+      
+        /// <summary>Gets or Sets BankAccountPaymentRangeList. </summary>
+        public List<UpdateBankAccountPaymentRangeInput> BankAccountPaymentRangeList { get; set; }
 
-        /// <summary>Gets or Sets StartingPaymentNumber. </summary>
-        [Range(1, Int32.MaxValue)]
-        public int StartingPaymentNumber { get; set; }
-        /// <summary>Gets or Sets EndingPaymentNumber. </summary>
-
-        [Range(1, Int32.MaxValue)]
-        public int EndingPaymentNumber { get; set; }
-
-        /// <summary>Gets or Sets BankAccountPaymentRangeId. </summary>
-
-        [Range(1, Int32.MaxValue)]
-        public int BankAccountPaymentRangeId { get; set; }
 
     }
 }

@@ -177,7 +177,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnit(dto);
-            await _vendorAliasUnitManager.DeleteAsync(dto.ObjectId);
+            await _vendorAliasUnitManager.DeleteAsync(Convert.ToInt32(dto.ObjectId));
             await _vendorUnitManager.DeleteAsync(input.Id);
           
 

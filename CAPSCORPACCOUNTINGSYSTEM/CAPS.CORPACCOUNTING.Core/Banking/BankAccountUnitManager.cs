@@ -31,7 +31,7 @@ namespace CAPS.CORPACCOUNTING.Banking
             await BankAccountUnitRepository.UpdateAsync(bankAccountUnit);
         }
 
-        public virtual async Task DeleteAsync(IdInput input)
+        public virtual async Task DeleteAsync(IdInput<long> input)
         {
             await BankAccountUnitRepository.DeleteAsync(p => p.Id == input.Id);
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using Abp.Application.Services.Dto;
+﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
@@ -127,14 +126,9 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         /// <summary>Gets or Sets Addresses of the Employee. </summary>
         public List<CreateAddressUnitInput> Addresses { get; set; }
 
-        /// <summary>Gets or Sets StartingPaymentNumber. </summary>
-        [Range(1,Int32.MaxValue)]
-        public int StartingPaymentNumber { get; set; }
-        /// <summary>Gets or Sets EndingPaymentNumber. </summary>
+        /// <summary>Gets or Sets BankAccountPaymentRangeList. </summary>
+        public List<CreateBankAccountPaymentRangeInput> BankAccountPaymentRangeList { get; set; }
 
-        [Range(1, Int32.MaxValue)]
-        public int EndingPaymentNumber { get; set; }
-        
 
     }
 }

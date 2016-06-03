@@ -1,7 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Masters;
 using System;
+
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
@@ -51,9 +51,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
 
             /// <summary>Gets or sets the Batch.</summary>
             public string Batch { get; set; }
-
-           /// <summary>Gets or sets the AddressUnit.</summary>
-           public BankAccountPaymentRangeUnit BankAccountPaymentRange{ get; set; }
+          
 
     }
 }

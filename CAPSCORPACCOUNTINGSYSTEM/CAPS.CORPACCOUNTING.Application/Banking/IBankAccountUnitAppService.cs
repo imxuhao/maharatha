@@ -30,7 +30,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task DeleteBankAccountUnit(IdInput input);
+        Task DeleteBankAccountUnit(IdInput<long> input);
 
         /// <summary>
         /// Get the list of all BankAccounts
@@ -44,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<BankAccountUnitDto> GetBankAccountUnitsById(IdInput input);
+        Task<BankAccountUnitDto> GetBankAccountUnitsById(IdInput<long> input);
 
         /// <summary>
         /// Get BankAccountTypeList
@@ -63,6 +63,20 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <returns></returns>
         Task<List<NameValueDto>> GetCheckStoockList(AutoSearchInput input);
+
+        /// <summary>
+        /// Get BankAccountPaymentRangeList By BankAccountId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<BankAccountPaymentRangeDto>> GetBankAccountPaymentRangeByBankAccountId(IdInput<long> input);
+
+        /// <summary>
+        /// Delete BankAccountPaymentRange By Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeleteBankAccountPaymentRange(IdInput input);
 
     }
 }

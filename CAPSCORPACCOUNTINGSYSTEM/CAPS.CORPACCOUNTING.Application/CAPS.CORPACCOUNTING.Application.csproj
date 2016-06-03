@@ -154,9 +154,12 @@
     <Compile Include="Banking\Dto\BankAccountPaymentRangeDto.cs" />
     <Compile Include="Banking\Dto\BankAccountUnitDto.cs" />
     <Compile Include="Banking\BatchUnitAppService.cs" />
+    <Compile Include="Banking\Dto\BankAccountPaymentRangDto.cs" />
     <Compile Include="Banking\Dto\BatchUnitDto.cs" />
+    <Compile Include="Banking\Dto\CreateBankAccountPaymentRangeInput.cs" />
     <Compile Include="Banking\Dto\CreateBankAccountUnitInput.cs" />
     <Compile Include="Banking\Dto\CreateBatchUnitInput.cs" />
+    <Compile Include="Banking\Dto\UpdateBankAccountPaymentRangeInput.cs" />
     <Compile Include="Banking\Dto\UpdateBankAccountUnitInput.cs" />
     <Compile Include="Banking\Dto\UpdateBatchUnitInput.cs" />
     <Compile Include="Banking\IBankAccountUnitAppService.cs" />

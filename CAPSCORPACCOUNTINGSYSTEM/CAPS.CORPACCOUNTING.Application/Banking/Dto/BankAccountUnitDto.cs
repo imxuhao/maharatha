@@ -149,7 +149,5 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         /// <summary>Gets or sets the Batch.</summary>
         public string Batch { get; set; }
 
-        public BankAccountPaymentRangeDto BankAccountPaymentRange { get; set; }
-
     }
 }

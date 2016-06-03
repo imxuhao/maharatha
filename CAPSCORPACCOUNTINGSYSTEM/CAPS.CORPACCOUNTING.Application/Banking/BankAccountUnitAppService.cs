@@ -37,13 +37,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         private readonly IRepository<VendorUnit, int> _vendorUnitRepository;
         private readonly IRepository<BatchUnit, int> _batchUnitRepository;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
-        private readonly IRepository<BankAccountPaymentRangeUnit> _bankAccountPaymentRangeUnit;
+        private readonly IRepository<BankAccountPaymentRangeUnit> _bankAccountPaymentRangeRepository;
         private readonly BankAccountPaymentRangeUnitManager _bankAccountPaymentRangeUnitManager;
 
 
-
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-
 
         public BankAccountUnitAppService(BankAccountUnitManager bankAccountUnitManager, IRepository<BankAccountUnit, long> bankAccountUnitRepository, IUnitOfWorkManager unitOfWorkManager,
                                         IAddressUnitAppService addressAppService, IRepository<AddressUnit, long> addressUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
@@ -63,7 +61,7 @@ namespace CAPS.CORPACCOUNTING.Banking
             _vendorUnitRepository = vendorUnitRepository;
             _batchUnitRepository = batchUnitRepository;
             _coaUnitRepository = coaUnitRepository;
-            _bankAccountPaymentRangeUnit = bankAccountPaymentRangeUnit;
+            _bankAccountPaymentRangeRepository = bankAccountPaymentRangeUnit;
             _bankAccountPaymentRangeUnitManager = bankAccountPaymentRangeUnitManager;
         }
 
@@ -77,6 +75,9 @@ namespace CAPS.CORPACCOUNTING.Banking
         [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Create)]
         public async Task CreateBankAccountUnit(CreateBankAccountUnitInput input)
         {
+            if (!CheckOverlapCheckRanges(input.BankAccountPaymentRangeList))
+                throw new UserFriendlyException(L("StartingCheck# and EndingCheck# should not be overlap"));
+
             var bankAccountUnit = input.MapTo<BankAccountUnit>();
             await _bankAccountUnitManager.CreateAsync(bankAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -97,14 +98,20 @@ namespace CAPS.CORPACCOUNTING.Banking
                 }
             }
 
-            BankAccountPaymentRangeUnit bankaccpayrange = new BankAccountPaymentRangeUnit()
+            //Inserting BankAccountPaymentRanges
+            if (!ReferenceEquals(input.BankAccountPaymentRangeList, null))
             {
-                StartingPaymentNumber = input.StartingPaymentNumber,
-                EndingPaymentNumber = input.EndingPaymentNumber,
-                BankAccountId = bankAccountUnit.Id
-            };
-            await _bankAccountPaymentRangeUnitManager.CreateAsync(bankaccpayrange);
-            await CurrentUnitOfWork.SaveChangesAsync();
+                foreach (var bankAccPayRange in input.BankAccountPaymentRangeList)
+                {
+                    bankAccPayRange.BankAccountId = bankAccountUnit.Id;
+                    if (bankAccPayRange.StartingPaymentNumber > bankAccPayRange.EndingPaymentNumber)
+                        throw new UserFriendlyException(L("StartingCheck# must be lessthan EndingCheck#"));
+
+                    await _bankAccountPaymentRangeUnitManager.CreateAsync(bankAccPayRange.MapTo<BankAccountPaymentRangeUnit>());
+                    await CurrentUnitOfWork.SaveChangesAsync();
+                }
+            }
+
         }
 
 
@@ -117,12 +124,12 @@ namespace CAPS.CORPACCOUNTING.Banking
         [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Edit)]
         public async Task UpdateBankAccountUnit(UpdateBankAccountUnitInput input)
         {
-            if(input.StartingPaymentNumber>input.EndingPaymentNumber)
-                throw new UserFriendlyException(L("StartingCheck# must be lessthan EndingCheck#"));
+            if (!CheckOverlapCheckRanges(null,input.BankAccountPaymentRangeList))
+                throw new UserFriendlyException(L("StartingCheck# and EndingCheck# should not be overlap"));
 
             var bankAccountUnit = await _bankAccountUnitRepository.GetAsync(input.BankAccountId);
-            Mapper.CreateMap<UpdateBankAccountUnitInput, BankAccountUnit>()
-                          .ForMember(u => u.Id, ap => ap.MapFrom(src => src.BankAccountId));
+
+
             Mapper.Map(input, bankAccountUnit);
             await _bankAccountUnitManager.UpdateAsync(bankAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -151,21 +158,33 @@ namespace CAPS.CORPACCOUNTING.Banking
 
                 }
             }
-            var bankaccpayrange =await _bankAccountPaymentRangeUnit.GetAsync(input.BankAccountPaymentRangeId);
 
-            bankaccpayrange.Id = input.BankAccountPaymentRangeId;
-            bankaccpayrange.StartingPaymentNumber = input.StartingPaymentNumber;
-            bankaccpayrange.EndingPaymentNumber = input.EndingPaymentNumber;
-            bankaccpayrange.BankAccountId = bankAccountUnit.Id;
-
-            await _bankAccountPaymentRangeUnitManager.UpdateAsync(bankaccpayrange);
-            await CurrentUnitOfWork.SaveChangesAsync();
-
-            _unitOfWorkManager.Current.Completed += (sender, args) =>
+            if (!ReferenceEquals(input.BankAccountPaymentRangeList, null))
             {
-                /*Do Something when the Chart of employee is Added*/
-            };
+                foreach (var bankAccPayRange in input.BankAccountPaymentRangeList)
+                {
+                    if (bankAccPayRange.StartingPaymentNumber > bankAccPayRange.EndingPaymentNumber)
+                        throw new UserFriendlyException(L("StartingCheck# must be lessthan EndingCheck#"));
 
+                    if (bankAccPayRange.BankAccountPaymentRangeId == 0)
+                    {
+                        AutoMapper.Mapper.CreateMap<UpdateBankAccountPaymentRangeInput, CreateBankAccountPaymentRangeInput>();
+                        BankAccountPaymentRangeUnit bankaccpayrangeinput =
+                            bankAccPayRange.MapTo<BankAccountPaymentRangeUnit>();
+
+                        await _bankAccountPaymentRangeUnitManager.CreateAsync(bankaccpayrangeinput);
+                    }
+                    else
+                    {
+                        var bankAccountPaymentRange = await _bankAccountPaymentRangeRepository.GetAsync(bankAccPayRange.BankAccountPaymentRangeId);
+
+                        Mapper.Map(bankAccPayRange, bankAccountPaymentRange);
+                        await _bankAccountPaymentRangeUnitManager.UpdateAsync(bankAccountPaymentRange);
+                        await CurrentUnitOfWork.SaveChangesAsync();
+                    }
+
+                }
+            }
         }
 
 
@@ -176,7 +195,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Delete)]
-        public async Task DeleteBankAccountUnit(IdInput input)
+        public async Task DeleteBankAccountUnit(IdInput<long> input)
         {
             await _bankAccountUnitManager.DeleteAsync(input);
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
@@ -185,6 +204,7 @@ namespace CAPS.CORPACCOUNTING.Banking
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnit(dto);
+            await _bankAccountPaymentRangeRepository.DeleteAsync(p => p.BankAccountId == input.Id);
         }
 
         /// <summary>
@@ -232,12 +252,8 @@ namespace CAPS.CORPACCOUNTING.Banking
                     dto.TypeofCheckStock = result.TypeofCheckStock;
                     dto.Batch = result.Batch;
                     dto.TypeOfBankAccount = result.BankAccount.TypeOfBankAccountId.ToDisplayName();
-                    dto.BankAccountPaymentRange = result.BankAccountPaymentRange.MapTo<BankAccountPaymentRangeDto>();
-                    if (!ReferenceEquals(dto.BankAccountPaymentRange, null))
-                        dto.BankAccountPaymentRange.BankAccountPaymentRangeId = result.BankAccountPaymentRange.Id;
-
-                    dto.TypeOfInactiveStatus = result.BankAccount.TypeOfInactiveStatusId != null ? result.BankAccount.TypeOfInactiveStatusId.ToDisplayName() : "";                    
-                    if (result.Address != null)
+                    dto.TypeOfInactiveStatus = result.BankAccount.TypeOfInactiveStatusId != null ? result.BankAccount.TypeOfInactiveStatusId.ToDisplayName() : "";
+                    if (!ReferenceEquals(result.Address, null))
                     {
                         dto.Address.Add(result.Address.MapTo<AddressUnitDto>());
                         dto.Address[0].AddressId = result.Address.Id;
@@ -251,7 +267,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<BankAccountUnitDto> GetBankAccountUnitsById(IdInput input)
+        public async Task<BankAccountUnitDto> GetBankAccountUnitsById(IdInput<long> input)
         {
             var bankAccountItem = await _bankAccountUnitRepository.GetAsync(input.Id);
             var addressitems = await _addressUnitRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Bank);
@@ -287,8 +303,6 @@ namespace CAPS.CORPACCOUNTING.Banking
                                        from typcacc in typeOfCheckStock.DefaultIfEmpty()
                                        join batch in _batchUnitRepository.GetAll() on bankAccount.BatchId equals batch.Id into batch
                                        from batchacc in batch.DefaultIfEmpty()
-                                       join bankaccpayrange in _bankAccountPaymentRangeUnit.GetAll() on bankAccount.Id equals bankaccpayrange.BankAccountId into bankaccpayranges
-                                       from bankaccountpayrange in bankaccpayranges.DefaultIfEmpty()
                                        select new BankAccountAndAddressDto
                                        {
                                            BankAccount = bankAccount,
@@ -301,7 +315,6 @@ namespace CAPS.CORPACCOUNTING.Banking
                                            TypeOfUploadFile = typfacc.Description,
                                            TypeofCheckStock = typcacc.Description,
                                            Batch = batchacc.Description,
-                                           BankAccountPaymentRange = bankaccountpayrange
                                        };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -351,9 +364,79 @@ namespace CAPS.CORPACCOUNTING.Banking
         public async Task<List<NameValueDto>> GetCheckStoockList(AutoSearchInput input)
         {
             return await (from checkstock in _typeOfCheckStockUnitRepository.GetAll()
-                .WhereIf(!string.IsNullOrEmpty(input.Query),p => p.Description.Contains(input.Query) || p.Notes.Contains(input.Query))
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Notes.Contains(input.Query))
                           select new NameValueDto { Name = checkstock.Description, Value = checkstock.Id.ToString() }).ToListAsync();
         }
 
+        /// <summary>
+        /// Get the BankAccount Details By BankAccountId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<BankAccountPaymentRangeDto>> GetBankAccountPaymentRangeByBankAccountId(IdInput<long> input)
+        {
+            var bankAccpayRangeList =
+                await _bankAccountPaymentRangeRepository.GetAllListAsync(p => p.BankAccountId == input.Id);
+            List<BankAccountPaymentRangeDto> bankAccountPaymentRangeList = new List<BankAccountPaymentRangeDto>();
+            BankAccountPaymentRangeDto result = null;
+            foreach (var bankAccpayRange in bankAccpayRangeList)
+            {
+                result = bankAccpayRange.MapTo<BankAccountPaymentRangeDto>();
+                result.BankAccountPaymentRangeId = bankAccpayRange.Id;
+                bankAccountPaymentRangeList.Add(result);
+            }
+            return bankAccountPaymentRangeList;
+        }
+
+        /// <summary>
+        /// Delete BankAccountRange
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task DeleteBankAccountPaymentRange(IdInput input)
+        {
+            await _bankAccountPaymentRangeUnitManager.DeleteAsync(input);
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+        }
+
+        private bool CheckOverlapCheckRanges(List<CreateBankAccountPaymentRangeInput> createinput=null, List<UpdateBankAccountPaymentRangeInput> updateinput=null)
+        {
+            if (ReferenceEquals(createinput, null))
+            {
+                for (int i = 0; i < updateinput.Count; i++)
+                {
+                    for (int j = i + 1; j < updateinput.Count; j++)
+                    {
+                        if ((updateinput[i].StartingPaymentNumber >= updateinput[j].StartingPaymentNumber
+                            && updateinput[i].StartingPaymentNumber <= updateinput[j].EndingPaymentNumber) ||
+                            (updateinput[i].EndingPaymentNumber >= updateinput[j].StartingPaymentNumber
+                            && updateinput[i].EndingPaymentNumber <= updateinput[j].EndingPaymentNumber))
+                            return false;
+
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                for (int i = 0; i < createinput.Count; i++)
+                {
+                    for (int j = i + 1; j < createinput.Count; j++)
+                    {
+                        if ((createinput[i].StartingPaymentNumber >= createinput[j].StartingPaymentNumber
+                            && createinput[i].StartingPaymentNumber <= createinput[j].EndingPaymentNumber)||
+                            (createinput[i].EndingPaymentNumber >= createinput[j].StartingPaymentNumber
+                            && createinput[i].EndingPaymentNumber <= createinput[j].EndingPaymentNumber))
+                            return false;
+
+                    }
+                }
+                return true;
+
+            }
+
+
+        }
     }
 }

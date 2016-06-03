@@ -2,7 +2,7 @@
     extend: 'Chaching.store.base.BaseStore',
     pageSize: 1000,
     fields: [{ name: 'name' }, { name: 'value' }, {
-        name: 'vendor', convert: function (value, record) {
+        name: 'vendorName', convert: function (value, record) {
             return record.get('name');
         }
     }, {

@@ -452,104 +452,104 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 }
             },{
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount1',
-                name: 'subAccount1',
+                dataIndex: 'subAccount1Desc',
+                name: 'subAccount1Desc',
                 text: app.localize('SubAccount1').initCap(),
                 width: '10%',
                 valueField: 'subAccountId1',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount1', 'subAccount1'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccount1')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount1Desc', 'subAccount1Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccount1Desc')
             },{
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount2',
-                name: 'subAccount2',
+                dataIndex: 'subAccount2Desc',
+                name: 'subAccount2Desc',
                 text: app.localize('SubAccount2').initCap(),
                 width: '10%',
                 valueField: 'subAccountId2',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount2', 'subAccount2'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId2', 'subAccount2')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount2Desc', 'subAccount2Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId2', 'subAccount2Desc')
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount3',
-                name: 'subAccount3',
+                dataIndex: 'subAccount3Desc',
+                name: 'subAccount3Desc',
                 text: app.localize('SubAccount3').initCap(),
                 width: '10%',
                 valueField: 'subAccountId3',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount3', 'subAccount3'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId3', 'subAccount3')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount3Desc', 'subAccount3Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId3', 'subAccount3Desc')
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount4',
-                name: 'subAccount4',
+                dataIndex: 'subAccount4Desc',
+                name: 'subAccount4Desc',
                 text: app.localize('SubAccount4').initCap(),
                 width: '10%',
                 valueField: 'subAccountId4',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount4', 'subAccount4'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId4', 'subAccount4')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount4Desc', 'subAccount4Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId4', 'subAccount4Desc')
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount5',
-                name: 'subAccount5',
+                dataIndex: 'subAccount5Desc',
+                name: 'subAccount5Desc',
                 text: app.localize('SubAccount5').initCap(),
                 width: '10%',
                 valueField: 'subAccountId5',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount5', 'subAccount5'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId5', 'subAccount5')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount5Desc', 'subAccount5Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId5', 'subAccount5Desc')
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount6',
-                name: 'subAccount6',
+                dataIndex: 'subAccount6Desc',
+                name: 'subAccount6Desc',
                 text: app.localize('SubAccount6').initCap(),
                 width: '10%',
                 valueField: 'subAccountId6',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount6', 'subAccount6'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId6', 'subAccount6')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount6Desc', 'subAccount6Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId6', 'subAccount6Desc')
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount7',
-                name: 'subAccount7',
+                dataIndex: 'subAccount7Desc',
+                name: 'subAccount7Desc',
                 text: app.localize('SubAccount7').initCap(),
                 width: '10%',
                 valueField: 'subAccountId7',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount7', 'subAccount7'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId7', 'subAccount7')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount7Desc', 'subAccount7Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId7', 'subAccount7Desc')
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount8',
-                name: 'subAccount8',
+                dataIndex: 'subAccount8Desc',
+                name: 'subAccount8Desc',
                 text: app.localize('SubAccount8').initCap(),
                 width: '10%',
                 valueField: 'subAccountId8',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount8', 'subAccount8'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId8', 'subAccount8')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount8Desc', 'subAccount8Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId8', 'subAccount8Desc')
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount9',
-                name: 'subAccount9',
+                dataIndex: 'subAccount9Desc',
+                name: 'subAccount9Desc',
                 text: app.localize('SubAccount9').initCap(),
                 width: '10%',
                 valueField: 'subAccountId9',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount9', 'subAccount9'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId9', 'subAccount9')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount9Desc', 'subAccount9Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId9', 'subAccount9Desc')
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'subAccount10',
-                name: 'subAccount10',
+                dataIndex: 'subAccount10Desc',
+                name: 'subAccount10Desc',
                 text: app.localize('SubAccount10').initCap(),
                 width: '10%',
                 valueField: 'subAccountId10',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount10', 'subAccount10'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId10', 'subAccount10')
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount10Desc', 'subAccount10Desc'),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId10', 'subAccount10Desc')
             }, {
                 xtype: 'gridcolumn',
                 dataIndex: 'typeOf1099T4',
@@ -690,8 +690,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 }
             }, {
                 xtype: 'gridcolumn',
-                dataIndex: 'taxRebate',
-                name: 'taxRebate',
+                dataIndex: 'taxRebateDesc',
+                name: 'taxRebateDesc',
                 text: app.localize('TaxRebate'),
                 width: '10%',
                 valueField: 'taxRebateId',
@@ -699,8 +699,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 filterField: {
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.TaxRebateStore(),
-                    valueField: 'taxRebate',
-                    displayField: 'taxRebate',
+                    valueField: 'taxRebateDesc',
+                    displayField: 'taxRebateDesc',
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
@@ -710,7 +710,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.TaxRebateStore(),
                     valueField: 'taxRebateId',
-                    displayField: 'taxRebate',
+                    displayField: 'taxRebateDesc',
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,

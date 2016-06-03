@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Journals.dto
         public int? VendorId { get; set; }
 
         /// <summary>Gets or sets the Vendor field. </summary>   
-        public string Vendor { get; set; }
+        public string VendorName { get; set; }
 
         /// <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
         public long? PurchaseOrderItemId { get; set; }

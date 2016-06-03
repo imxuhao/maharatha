@@ -218,6 +218,9 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the TaxRebateID field. </summary>
         public int? TaxRebateId { get; set; }
 
+        /// <summary>Gets or sets the TaxRebateDesc field. </summary>
+        public string TaxRebateDesc { get; set; }
+
         /// <summary>Gets or sets the CurrencyOverrideRate field. </summary>
         public double? CurrencyOverrideRate { get; set; }
 
@@ -242,5 +245,65 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
 
         /// <summary>Gets or sets the IsAccountingItemSplit field. </summary>
         public  bool IsAccountingItemSplit { get; set; }
+
+        /// <summary>Gets or sets the SubAccountId1Desc field. </summary>
+        public string SubAccountId1Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID2Desc field. </summary>
+        public string SubAccountId2Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID3Desc field. </summary>
+        public string SubAccountId3Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID4Desc field. </summary>
+        public string SubAccountId4Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID5Desc field. </summary>
+        public string SubAccountId5Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID6Desc field. </summary>
+        public string SubAccountId6Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID7Desc field. </summary>
+        public string SubAccountId7Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID8Desc field. </summary>
+        public string SubAccountId8Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID9Desc field. </summary>
+        public string SubAccountId9Desc { get; set; }
+
+        /// <summary>Gets or sets the SubAccountID10Desc field. </summary>
+        public string SubAccountId10Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID1Desc field. </summary>
+        public string CreditSubAccountId1Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID2Desc field. </summary>
+        public string CreditSubAccountId2Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID3Desc field. </summary>
+        public string CreditSubAccountId3Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID4Desc field. </summary>
+        public string CreditSubAccountId4Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID5Desc field. </summary>
+        public string CreditSubAccountId5Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID6Desc field. </summary>
+        public string CreditSubAccountId6Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID7Desc field. </summary>
+        public string CreditSubAccountId7Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID8Desc field. </summary>
+        public string CreditSubAccountId8Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID9Desc field. </summary>
+        public string CreditSubAccountId9Desc { get; set; }
+
+        /// <summary>Gets or sets the CreditSubAccountID10Desc field. </summary>
+        public string CreditSubAccountId10Desc { get; set; }
     }
 }

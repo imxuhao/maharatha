@@ -97,122 +97,122 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId1">
             <summary>Gets or sets the SubAccountID1 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount1">
-            <summary>Gets or sets the SubAccount1 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount1Desc">
+            <summary>Gets or sets the SubAccount1Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId2">
             <summary>Gets or sets the SubAccountID2 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount2">
-            <summary>Gets or sets the SubAccount2 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount2Desc">
+            <summary>Gets or sets the SubAccount2Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId3">
             <summary>Gets or sets the SubAccountID3 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount3">
-            <summary>Gets or sets the SubAccount3 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount3Desc">
+            <summary>Gets or sets the SubAccount3Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId4">
             <summary>Gets or sets the SubAccountID4 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount4">
-            <summary>Gets or sets the SubAccount4 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount4Desc">
+            <summary>Gets or sets the SubAccount4Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId5">
             <summary>Gets or sets the SubAccountID5 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount5">
-            <summary>Gets or sets the SubAccount5 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount5Desc">
+            <summary>Gets or sets the SubAccount5Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId6">
             <summary>Gets or sets the SubAccountID6 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount6">
-            <summary>Gets or sets the SubAccount6 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount6Desc">
+            <summary>Gets or sets the SubAccount6Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId7">
             <summary>Gets or sets the SubAccountID7 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount7">
-            <summary>Gets or sets the SubAccount7 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount7Desc">
+            <summary>Gets or sets the SubAccount7Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId8">
             <summary>Gets or sets the SubAccountID8 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount8">
-            <summary>Gets or sets the SubAccount8 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount8Desc">
+            <summary>Gets or sets the SubAccount8Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId9">
             <summary>Gets or sets the SubAccountID9 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount9">
-            <summary>Gets or sets the SubAccount9 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount9Desc">
+            <summary>Gets or sets the SubAccount9Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId10">
             <summary>Gets or sets the SubAccountID10 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount10">
-            <summary>Gets or sets the SubAccount10 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount10Desc">
+            <summary>Gets or sets the SubAccount10Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId1">
             <summary>Gets or sets the CreditSubAccountID1 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount1">
-            <summary>Gets or sets the CreditSubAccount1 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount1Desc">
+            <summary>Gets or sets the CreditSubAccount1Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId2">
             <summary>Gets or sets the CreditSubAccountID2 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount2">
-            <summary>Gets or sets the CreditSubAccount2 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount2Desc">
+            <summary>Gets or sets the CreditSubAccount2Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId3">
             <summary>Gets or sets the CreditSubAccountID3 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount3">
-            <summary>Gets or sets the CreditSubAccount3 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount3Desc">
+            <summary>Gets or sets the CreditSubAccount3Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId4">
             <summary>Gets or sets the CreditSubAccountID4 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount4">
-            <summary>Gets or sets the CreditSubAccount4 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount4Desc">
+            <summary>Gets or sets the CreditSubAccount4Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId5">
             <summary>Gets or sets the CreditSubAccountID5 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount5">
-            <summary>Gets or sets the CreditSubAccount5 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount5Desc">
+            <summary>Gets or sets the CreditSubAccount5Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId6">
             <summary>Gets or sets the CreditSubAccountID6 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount6">
-            <summary>Gets or sets the CreditSubAccount6 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount6Desc">
+            <summary>Gets or sets the CreditSubAccount6Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId7">
             <summary>Gets or sets the CreditSubAccountID7 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount7">
-            <summary>Gets or sets the CreditSubAccount7 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount7Desc">
+            <summary>Gets or sets the CreditSubAccount7Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId8">
             <summary>Gets or sets the CreditSubAccountID8 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount8">
-            <summary>Gets or sets the CreditSubAccount8 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount8Desc">
+            <summary>Gets or sets the CreditSubAccount8Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId9">
             <summary>Gets or sets the CreditSubAccountID9 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount9">
-            <summary>Gets or sets the CreditSubAccount9 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount9Desc">
+            <summary>Gets or sets the CreditSubAccount9Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId10">
             <summary>Gets or sets the CreditSubAccountID10 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount10">
-            <summary>Gets or sets the CreditSubAccount10 field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount10Desc">
+            <summary>Gets or sets the CreditSubAccount10Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.TypeOf1099T4Id">
             <summary>Gets or sets the TypeOf1099T4ID field. </summary>
@@ -292,8 +292,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.TaxRebateId">
             <summary>Gets or sets the TaxRebateID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.TaxRebate">
-            <summary>Gets or sets the TaxRebate field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.TaxRebateDesc">
+            <summary>Gets or sets the TaxRebateDesc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CurrencyOverrideRate">
             <summary>Gets or sets the CurrencyOverrideRate field. </summary>
@@ -517,6 +517,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.TaxRebateId">
             <summary>Gets or sets the TaxRebateID field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.TaxRebateDesc">
+            <summary>Gets or sets the TaxRebateDesc field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CurrencyOverrideRate">
             <summary>Gets or sets the CurrencyOverrideRate field. </summary>
         </member>
@@ -540,6 +543,66 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.IsAccountingItemSplit">
             <summary>Gets or sets the IsAccountingItemSplit field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId1Desc">
+            <summary>Gets or sets the SubAccountId1Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId2Desc">
+            <summary>Gets or sets the SubAccountID2Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId3Desc">
+            <summary>Gets or sets the SubAccountID3Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId4Desc">
+            <summary>Gets or sets the SubAccountID4Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId5Desc">
+            <summary>Gets or sets the SubAccountID5Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId6Desc">
+            <summary>Gets or sets the SubAccountID6Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId7Desc">
+            <summary>Gets or sets the SubAccountID7Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId8Desc">
+            <summary>Gets or sets the SubAccountID8Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId9Desc">
+            <summary>Gets or sets the SubAccountID9Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.SubAccountId10Desc">
+            <summary>Gets or sets the SubAccountID10Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId1Desc">
+            <summary>Gets or sets the CreditSubAccountID1Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId2Desc">
+            <summary>Gets or sets the CreditSubAccountID2Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId3Desc">
+            <summary>Gets or sets the CreditSubAccountID3Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId4Desc">
+            <summary>Gets or sets the CreditSubAccountID4Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId5Desc">
+            <summary>Gets or sets the CreditSubAccountID5Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId6Desc">
+            <summary>Gets or sets the CreditSubAccountID6Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId7Desc">
+            <summary>Gets or sets the CreditSubAccountID7Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId8Desc">
+            <summary>Gets or sets the CreditSubAccountID8Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId9Desc">
+            <summary>Gets or sets the CreditSubAccountID9Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateAccountingItemInputUnit.CreditSubAccountId10Desc">
+            <summary>Gets or sets the CreditSubAccountID10Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.AccountingDocumentId">
             <summary>Gets or sets the AccountingDocumentID field. </summary>
@@ -730,6 +793,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.TaxRebateId">
             <summary>Gets or sets the TaxRebateID field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.TaxRebateDesc">
+            <summary>Gets or sets the TaxRebateDesc field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CurrencyOverrideRate">
             <summary>Gets or sets the CurrencyOverrideRate field. </summary>
         </member>
@@ -753,6 +819,66 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.IsAccountingItemSplit">
             <summary>Gets or sets the IsAccountingItemSplit field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId1Desc">
+            <summary>Gets or sets the SubAccountId1Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId2Desc">
+            <summary>Gets or sets the SubAccountID2Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId3Desc">
+            <summary>Gets or sets the SubAccountID3Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId4Desc">
+            <summary>Gets or sets the SubAccountID4Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId5Desc">
+            <summary>Gets or sets the SubAccountID5Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId6Desc">
+            <summary>Gets or sets the SubAccountID6Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId7Desc">
+            <summary>Gets or sets the SubAccountID7Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId8Desc">
+            <summary>Gets or sets the SubAccountID8Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId9Desc">
+            <summary>Gets or sets the SubAccountID9Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.SubAccountId10Desc">
+            <summary>Gets or sets the SubAccountID10Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId1Desc">
+            <summary>Gets or sets the CreditSubAccountID1Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId2Desc">
+            <summary>Gets or sets the CreditSubAccountID2Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId3Desc">
+            <summary>Gets or sets the CreditSubAccountID3Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId4Desc">
+            <summary>Gets or sets the CreditSubAccountID4Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId5Desc">
+            <summary>Gets or sets the CreditSubAccountID5Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId6Desc">
+            <summary>Gets or sets the CreditSubAccountID6Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId7Desc">
+            <summary>Gets or sets the CreditSubAccountID7Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId8Desc">
+            <summary>Gets or sets the CreditSubAccountID8Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId9Desc">
+            <summary>Gets or sets the CreditSubAccountID9Desc field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateAccountingItemInputUnit.CreditSubAccountId10Desc">
+            <summary>Gets or sets the CreditSubAccountID10Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>
@@ -4372,7 +4498,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailUnitDto.VendorId">
             <summary>Gets or sets the VendorId field. </summary>   
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailUnitDto.Vendor">
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailUnitDto.VendorName">
             <summary>Gets or sets the Vendor field. </summary>   
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailUnitDto.PurchaseOrderItemId">
@@ -4384,10 +4510,16 @@
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.UpdateJournalEntryDocDetailInputUnit.VendorId">
             <summary>Gets or sets the VendorId field. </summary>   
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.UpdateJournalEntryDocDetailInputUnit.VendorName">
+            <summary>Gets or sets the VendorId field. </summary>   
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.UpdateJournalEntryDocDetailInputUnit.PurchaseOrderItemId">
             <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.CreateJournalEntryDocDetailInputUnit.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.CreateJournalEntryDocDetailInputUnit.VendorName">
             <summary>Gets or sets the VendorId field. </summary>   
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.CreateJournalEntryDocDetailInputUnit.PurchaseOrderItemId">
@@ -4506,18 +4638,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.MapJournalDetails(CAPS.CORPACCOUNTING.Journals.dto.CreateJournalEntryDocDetailInputUnit)">
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.MapJournalDetails(CAPS.CORPACCOUNTING.Journals.dto.UpdateJournalEntryDocDetailInputUnit,System.Boolean)">
             <summary>
             
             </summary>
             <param name="journalEntryDocDetail"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.MapJournalDetails(CAPS.CORPACCOUNTING.Journals.dto.UpdateJournalEntryDocDetailInputUnit)">
-            <summary>
-            update
-            </summary>
-            <param name="journalEntryDocDetail"></param>
+            <param name="isJournalAdd"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnit,System.Int64},CAPS.CORPACCOUNTING.Authorization.Users.UserManager,Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64})">

@@ -285,11 +285,6 @@ namespace CAPS.CORPACCOUNTING.Authorization
             bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Edit, L("Edit"));
             bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Delete, L("Delete"));
 
-
-            var bankingMaintenance = banking.CreateChildPermission(AppPermissions.Pages_Banking_Maintenance, L("Maintenance"));
-            bankingMaintenance.CreateChildPermission(AppPermissions.Pages_Banking_Maintenance_Create, L("Create"));
-            bankingMaintenance.CreateChildPermission(AppPermissions.Pages_Banking_Maintenance_Edit, L("Edit"));
-            bankingMaintenance.CreateChildPermission(AppPermissions.Pages_Banking_Maintenance_Delete, L("Delete"));
             #endregion
 
 

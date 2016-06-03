@@ -186,7 +186,6 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string BankingPostivePay = "Banking.PostivePay";
                 public const string BankingBankSetup = "Banking.BankSetup";
                 public const string BankingReconciliation = "Banking.BankReconciliation";
-                public const string BankingMaintenance = "Banking.Maintenance";
                 #endregion
             }
         }

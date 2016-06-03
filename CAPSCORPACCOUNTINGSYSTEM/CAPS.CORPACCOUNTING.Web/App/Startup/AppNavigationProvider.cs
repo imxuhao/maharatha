@@ -394,13 +394,8 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                 L("BankSetup"),
                 url: "banking.banksetup",
                 icon: "icon-briefcase",
-                requiredPermissionName: AppPermissions.Pages_Banking_BankSetup))
-            .AddItem(new MenuItemDefinition(
-                PageNames.App.Organization.BankingMaintenance,
-                L("Maintenance"),
-                url: "banking.maintenance",
-                icon: "icon-briefcase",
-                requiredPermissionName: AppPermissions.Pages_Banking_Maintenance));
+                requiredPermissionName: AppPermissions.Pages_Banking_BankSetup));
+           
         }
 
         public List<MenuItemDefinition> MenuItemsList(string ParentTab, string ChildTab)

@@ -33,8 +33,8 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
         var detailColumns = detailGrid.getColumns(),
             modifiedRecords = detailsStore.getModifiedRecords(),
             isValid = true,
-            debitDataIndexes = ['jobDesc', 'accountDesc', 'subAccount1', 'subAccount2', 'subAccount3', 'subAccount4', 'subAccount5', 'subAccount6', 'subAccount7', 'subAccount8', 'subAccount9', 'subAccount10'],
-            creditDataIndexes = ['creditJobDesc', 'creditAccountDesc', 'creditSubAccount1', 'creditSubAccount2', 'creditSubAccount3', 'creditSubAccount4', 'creditSubAccount5', 'creditSubAccount6', 'creditSubAccount7', 'creditSubAccount8', 'creditSubAccount9', 'creditSubAccount10'];
+            debitDataIndexes = ['jobDesc', 'accountDesc', 'subAccount1Desc', 'subAccount2Desc', 'subAccount3Desc', 'subAccount4Desc', 'subAccount5Desc', 'subAccount6Desc', 'subAccount7Desc', 'subAccount8Desc', 'subAccount9Desc', 'subAccount10Desc'],
+            creditDataIndexes = ['creditJobDesc', 'creditAccountDesc', 'creditSubAccount1Desc', 'creditSubAccount2Desc', 'creditSubAccount3Desc', 'creditSubAccount4Desc', 'creditSubAccount5Desc', 'creditSubAccount6Desc', 'creditSubAccount7Desc', 'creditSubAccount8Desc', 'creditSubAccount9Desc', 'creditSubAccount10Desc'];
         if (modifiedRecords && modifiedRecords.length > 0) {
             var rowLength = modifiedRecords.length;
             for (var i = 0; i < rowLength; i++) {

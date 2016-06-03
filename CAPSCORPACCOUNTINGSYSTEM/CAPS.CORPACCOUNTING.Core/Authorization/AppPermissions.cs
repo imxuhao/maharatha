@@ -317,11 +317,6 @@
         public const string Pages_Banking_BankSetup_Edit = "Pages.Banking.BankSetup.Edit";
         public const string Pages_Banking_BankSetup_Delete = "Pages.Banking.BankSetup.Delete";
 
-        // PERMISSIONS FOR BANKING BANK MAINTENANCE
-        public const string Pages_Banking_Maintenance = "Pages.Banking.Maintenance";
-        public const string Pages_Banking_Maintenance_Create = "Pages.Banking.Maintenance.Create";
-        public const string Pages_Banking_Maintenance_Edit = "Pages.Banking.Maintenance.Edit";
-        public const string Pages_Banking_Maintenance_Delete = "Pages.Banking.Maintenance.Delete";
 
         #endregion
 

@@ -17,7 +17,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
     groupedHeaderBaseConfig: [{
         groupHeaderText: app.localize('Debits'),
         columnName:'debits',
-        childColumnNames: ['jobDesc', 'accountDesc', 'subAccount1'],
+        childColumnNames: ['jobDesc', 'accountDesc', 'subAccount1Desc'],
         childColumnWidths:[100,100,100]
     }],
     isGroupedHeader: true,
@@ -91,30 +91,30 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             }
         }, {
             xtype: 'gridcolumn',
-            dataIndex: 'creditSubAccount1',
-            name: 'creditSubAccount1',
+            dataIndex: 'creditSubAccount1Desc',
+            name: 'creditSubAccount1Desc',
             text: app.localize('SubAccount1'),
             //itemId: 'duplicatesubAccount1',
             width: 100,
             valueField: 'creditSubAccountId1',
             dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccount1', 'creditSubAccount1'),
-            editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccount1')
+            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccount1Desc', 'creditSubAccount1Desc'),
+            editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccount1Desc')
             ////TODO: add remaining combo once accounting field configuration is done
         }]
     }, {
         xtype: 'gridcolumn',
         text: app.localize('Vendor'),
-        dataIndex: 'vendor',
-        name: 'vendor',
+        dataIndex: 'vendorName',
+        name: 'vendorName',
         width: '10%',
         valueField: 'vendorId',
         dataLoadClass: 'Chaching.store.utilities.autofill.VendorsStore',
         filterField: {
             xtype: 'combobox',
             store: new Chaching.store.utilities.autofill.VendorsStore(),
-            valueField: 'vendor',
-            displayField: 'vendor',
+            valueField: 'vendorName',
+            displayField: 'vendorName',
             queryMode: 'remote',
             minChars: 2,
             useDisplayFieldToSearch: true,
@@ -124,7 +124,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             xtype: 'combobox',
             store: new Chaching.store.utilities.autofill.VendorsStore(),
             valueField: 'vendorId',
-            displayField: 'vendor',
+            displayField: 'vendorName',
             queryMode: 'remote',
             minChars: 2,
             useDisplayFieldToSearch: true,
@@ -132,5 +132,5 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             emptyText: app.localize('SearchText')
         }
     }],
-    columnOrder: ['amount', 'debits', 'credits', 'itemMemo', 'vendor', 'accountRef1', 'taxRebate', 'isAsset']
+    columnOrder: ['amount', 'debits', 'credits', 'itemMemo', 'vendorName', 'accountRef1', 'taxRebateDesc', 'isAsset']
 });

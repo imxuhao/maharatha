@@ -832,5 +832,24 @@
     <text name="SplitRecord" value="Split selected record" />
     <text name="Batches" value="Batches" />
     <text name="PostivePay" value="Postive Pay" />
+   <text name="CreateBank" value="Create bank" />
+   <text name="EditBank" value="Edit bank" />
+ <text name="BankName" value="Bank name" />
+ <text name="ToolTipBankName" value="Enter bank name" />
+ <text name="ToolTipAccountNumber" value="Enter account number" />
+ <text name="AccountName" value="Account name" />
+ <text name="ToolTipAccountName" value="Enter account name" />
+   <text name="AccountType" value="Account type" />
+   <text name="ClosedAccount" value="Closed" />
+  <text name="DirectDeposit" value="Direct depo." />
+<text name="ACHDestinationCode" value="ACH dest. code" />
+    <text name="ToolTipACHDestinationCode" value="Enter ACH destination code" />
+<text name="ACHDestinationName" value="ACH dest. name" />
+    <text name="ToolTipACHDestinationName" value="Enter ACH destination name" />
+<text name="ACHOriginCode" value="ACH origin code" />
+    <text name="ToolTipACHOriginCode" value="ACH origin code" />
+<text name="ACHOriginName" value="ACH origin name" />
+  <text name="ToolTipACHOriginName" value="Enter ACH origin name" />
+  <text name="LedgerAccount" value="Ledger account" />
   </texts>
 </localizationDictionary>

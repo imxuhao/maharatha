@@ -1871,6 +1871,7 @@
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\ChartOfAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\DivisionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\SubAccountsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\financials\fiscalperiod\FiscalYearModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalEntryDetail.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\fiscalperiod\FiscalPeriodModel.js" />
@@ -1902,6 +1903,7 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\RollupAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\fiscalperiod\FiscalYearStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\fiscalperiod\FiscalPeriodStore.js" />
@@ -1984,6 +1986,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodChildGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodChildGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\JournalsTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalEntryForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalEntryFormController.js" />

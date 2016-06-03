@@ -851,5 +851,9 @@
 <text name="ACHOriginName" value="ACH origin name" />
   <text name="ToolTipACHOriginName" value="Enter ACH origin name" />
   <text name="LedgerAccount" value="Ledger account" />
+    <text name="PreClose" value="Pre-Close" />
+    <text name="MonthYear" value="Month-Year" />
+    <text name="ClosingReport" value="Closing Report" />
+    <text name="FiscalYearPeriod" value="Fiscal Year/Period" />
   </texts>
 </localizationDictionary>

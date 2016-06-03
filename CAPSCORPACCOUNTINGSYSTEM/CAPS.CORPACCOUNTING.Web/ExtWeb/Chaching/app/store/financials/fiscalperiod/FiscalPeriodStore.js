@@ -9,11 +9,11 @@
 
         },
         api: {
-            create: abp.appPath + 'api/services/app/fiscalYear/CreateFiscalYearUnit',
-            read: abp.appPath + 'api/services/app/fiscalYear/GetFiscalYearUnits',
-            update: abp.appPath + 'api/services/app/fiscalYear/UpdateFiscalYearUnit',
-            destroy: abp.appPath + 'api/services/app/fiscalYear/DeleteFiscalYearUnit'
+            create: abp.appPath + 'api/services/app/fiscalPeriod/CreateFiscalPeriodUnit',
+            read: abp.appPath + 'api/services/app/fiscalPeriod/GetFiscalPeriodUnits',
+            update: abp.appPath + 'api/services/app/fiscalPeriod/UpdateFiscalPeriodUnit',
+            destroy: abp.appPath + 'api/services/app/fiscalPeriod/DeleteFiscalPeriodUnit'
         }
     },
-    idPropertyField: 'fiscalYearId'//important to set for add/update of records
+    idPropertyField: 'fiscalPeriodId'//important to set for add/update of records
 });

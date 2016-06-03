@@ -25,7 +25,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
     },
     padding: 5,
     gridId: 20,
-    store: 'financials.fiscalperiod.FiscalPeriodStore',
+    store: 'financials.fiscalperiod.FiscalYearStore',
     headerButtonsConfig: [
       {
           xtype: 'displayfield',
@@ -51,7 +51,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
     columnLines: true,
     multiColumnSort: true,
     editWndTitleConfig: {
-        title: app.localize('EditProject').initCap(),
+        title: app.localize('EditFiscalPeriod').initCap(),
         iconCls: 'fa fa-pencil'
     },
     createWndTitleConfig: {
@@ -70,10 +70,11 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
              dataIndex: 'yearStartDate',
              sortable: true,
              groupable: true,
-             width: '10%',
+             width: '15%',
+             renderer : Chaching.utilities.ChachingRenderers.renderDateOnly,
             // renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              filterField: {
-                 xtype: 'datefield',
+                 xtype: 'dateSearchField',
                  width: '100%',
                  emptyText: app.localize('ToolTipFiscalStartDate')
              }, editor: {
@@ -87,6 +88,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
              sortable: true,
              groupable: true,
              width: '15%',
+             renderer: Chaching.utilities.ChachingRenderers.renderDateOnly,
             // renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              filterField: {
                  xtype: 'datefield',
@@ -102,6 +104,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
              dataIndex: 'isYearOpen',
              sortable: false,
              groupable: false,
+             flex : 1,
             // renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              width: '13%'
          }

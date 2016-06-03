@@ -19,7 +19,8 @@
          'payables.vendors',
          'financials.journals',
          'payables.invoices',
-          'batchposting.batches',
-           'banking.banksetup'
+         'batchposting.batches',
+         'banking.banksetup',
+         'financials.fiscalperiod'
     ]
 });

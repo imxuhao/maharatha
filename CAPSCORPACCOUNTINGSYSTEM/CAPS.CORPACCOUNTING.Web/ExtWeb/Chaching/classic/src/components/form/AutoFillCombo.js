@@ -464,6 +464,7 @@
 	            rowLines: false,
 	            forceFit: true,
 	            layout: 'fit',
+	            recordToSetInComboBox: null,
 	            floating: true,
 	            dockedItems: me.modulePermissions.create ? dockedItems : null,
 	            multiSelect: false,
@@ -843,7 +844,17 @@
                 openInPopupWindow: true,
                 parentGrid: me.picker,
                 showFormTitle: false
-            }]
+            }],
+            listeners: {
+                beforedestroy: function (cmp, eOpts) {
+                },
+                destroy : function(cmp, eOpts) {
+                    //set record in auto fill combo
+                    var record = me.picker.recordToSetInComboBox;
+                    if (record)
+                    me.onSelect(record);
+                }
+            }
         });
 
         return window;

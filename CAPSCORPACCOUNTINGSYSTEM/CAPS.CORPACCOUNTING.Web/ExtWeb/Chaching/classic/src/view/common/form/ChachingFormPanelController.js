@@ -29,7 +29,6 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             //if doPreSaveOperation returns false the saving will be cancel
             record = me.doPreSaveOperation(record, values, idPropertyField);
             if (!record) return record;
-
             myMask.show();
             if (values && parseInt(values[idPropertyField]) > 0) {
                 operation = Ext.data.Operation({
@@ -99,6 +98,13 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             var action = operation.getAction();
             if (action === "create" || action === "update") {
                 var gridController = operation.parentGrid.getController();
+                //this code is used to set the record in auto fill combo after create and update
+                if (view.openInPopupWindow) {
+                    operation.parentGrid.recordToSetInComboBox == null;
+                    if (operation.parentGrid.recordToSetInComboBox == null && records.length > 0) {
+                        operation.parentGrid.recordToSetInComboBox = records[0];
+                    }
+                }
                 gridController.doReloadGrid();
 
                 if (view && view.openInPopupWindow) {

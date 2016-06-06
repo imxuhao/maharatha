@@ -29,7 +29,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
     headerButtonsConfig: [
       {
           xtype: 'displayfield',
-          value: abp.localization.localize("FiscalPeriod"),
+          value: abp.localization.localize("FiscalYearPeriod"),
           ui: 'headerTitle'
       }, '->', {
           xtype: 'button',
@@ -89,7 +89,6 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
              groupable: true,
              width: '15%',
              renderer: Chaching.utilities.ChachingRenderers.renderDateOnly,
-            // renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              filterField: {
                  xtype: 'datefield',
                  width: '100%',
@@ -99,13 +98,14 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
                  allowBlank: false
              }
          }, {
-             xtype: 'checkcolumn',
+             xtype: 'gridcolumn',
              text: app.localize('FiscalYearOpen').initCap(),
              dataIndex: 'isYearOpen',
              sortable: false,
              groupable: false,
-             flex : 1,
-            // renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
+             flex: 1,
+             align : 'left',
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              width: '13%'
          }
 

@@ -430,7 +430,7 @@
     //    me.createWindow(entityType, 'create', null);
     //},
     /**
-     * Creates and returns the tree panel to be used as this field's picker.
+     * Creates and returns the grid panel to be used as this field's picker.
      */
     createPicker: function () {
         var me = this,
@@ -443,6 +443,7 @@
                  items: ['->', {
                      xtype: 'button',
                      text: 'Add',
+                     tooltip: 'Add' + " " + me.entityName,
                      iconAlign: 'left',
                      scale: 'small',
                      iconCls: 'fa fa-plus-square',
@@ -475,6 +476,7 @@
 	            },
 	            viewConfig: {
 	                stripeRows: true,
+                    emptyText : 'No Records Found'
 	            }
                 //,
 	            //listeners: {
@@ -699,7 +701,7 @@
             scale: 'small',
             iconCls: 'editCls',
           //  ui: 'actionButton',
-            tooltip: app.localize('Edit'),
+            tooltip: app.localize('Edit') + " " +me.entityName,
             handler : function(grid, rowIndex, colIndex) {
                 var entityType = me.entityType;
                 var rec = grid.getStore().getAt(rowIndex);
@@ -711,7 +713,7 @@
             scale: 'small',
             iconCls: 'deleteCls',
            // ui: 'actionButton',
-            tooltip: app.localize('Delete'),
+            tooltip: app.localize('Delete') + " " + me.entityName,
             handler: function (grid, rowIndex, colIndex) {
                 var entityType = me.entityType;
                 var rec = grid.getStore().getAt(rowIndex);

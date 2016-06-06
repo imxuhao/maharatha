@@ -49,7 +49,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             await CurrentUnitOfWork.SaveChangesAsync();
         }
 
-        public async Task<PagedResultOutput<FiscalPeriodUnitDto>> GetFiscalPeriodUnits(SearchInputDto input)
+        public async Task<PagedResultOutput<FiscalPeriodUnitDto>> GetFiscalPeriodUnits(GetFiscalPeriodDto input)
         {
             var query = from fiscalPeriod in _fiscalPeriodUnitRepository.GetAll()
                         select new { FiscalPeriod = fiscalPeriod };
@@ -60,7 +60,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.Where(p => p.FiscalPeriod.OrganizationUnitId == input.OrganizationUnitId);
+            query = query.Where(p => p.FiscalPeriod.OrganizationUnitId == input.OrganizationUnitId && p.FiscalPeriod.FiscalYearId==input.FiscalYearId);
 
             var resultCount = await query.CountAsync();
             var results = await query

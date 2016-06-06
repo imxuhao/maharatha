@@ -43,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         {
             if (input.YearStartDate > input.YearEndDate)
                 throw new UserFriendlyException(L("FiscalStartDate should not greaterthan FiscalEndDate"));
-            //validating FiscalPeriod overlap
+           
             if (!ReferenceEquals(input.CreateFiscalPeriodUnits, null))
             {
                 //validating FiscalPeriod Overlaping
@@ -53,7 +53,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
                     throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
             }
 
-            #region Inserting FiscalPeriod
+            #region Inserting FiscalYear
             var fiscalYearUnit = input.MapTo<FiscalYearUnit>();
             await _fiscalYearUnitManager.CreateAsync(fiscalYearUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -110,7 +110,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(Helper.GetSort("FiscalYear.YearStartDate ASC", input.Sorting))
+                .OrderBy(Helper.GetSort("FiscalYear.YearStartDate DESC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 

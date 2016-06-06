@@ -40,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             if (_fiscalYearUnitRepository != null)
             {
                 var fiscalYear = (await _fiscalYearUnitRepository.GetAllListAsync(p => p.OrganizationUnitId ==
-                                                                         input.OrganizationUnitId && p.YearStartDate.Year == input.YearStartDate.Year));
+                                        input.OrganizationUnitId &&(p.YearStartDate >= input.YearStartDate && p.YearStartDate <= input.YearEndDate || p.YearEndDate <= input.YearEndDate && p.YearStartDate >= input.YearEndDate)));
                 if (fiscalYear.Count > 0)
                 {
 
@@ -51,7 +51,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
 
                     }
                     else
-                    if (fiscalYear.FirstOrDefault(p => p.Id != input.Id && p.YearStartDate.Year == input.YearStartDate.Year) != null)
+                    if (fiscalYear.FirstOrDefault(p => p.Id != input.Id  && (p.YearStartDate >= input.YearStartDate && p.YearStartDate <= input.YearEndDate || p.YearEndDate <= input.YearEndDate && p.YearStartDate >= input.YearEndDate)) != null)
                     {
                         throw new UserFriendlyException(L("FiscalYear already exist"));
                     }

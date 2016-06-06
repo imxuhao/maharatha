@@ -236,6 +236,7 @@
     <Compile Include="Authorization\Users\Dto\UserEditDto.cs" />
     <Compile Include="Authorization\Users\Dto\UserRoleDto.cs" />
     <Compile Include="CustomDtoMapper.cs" />
+    <Compile Include="Financials\Preferences\Dto\GetFiscalPeriodDto.cs" />
     <Compile Include="GenericSearch\AbstractSearch.cs" />
     <Compile Include="GenericSearch\DecimalSearch.cs" />
     <Compile Include="GenericSearch\NumericSearch.cs" />
@@ -488,7 +489,9 @@
     <Content Include="CAPS.CORPACCOUNTING.Application.XML" />
     <Content Include="LinqKit.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Helper\CacheItems\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

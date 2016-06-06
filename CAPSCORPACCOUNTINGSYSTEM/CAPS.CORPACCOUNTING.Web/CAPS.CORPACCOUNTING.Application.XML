@@ -1639,6 +1639,18 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.GetUploadMethodList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get UploadMethodList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.GetPositivePayList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get PositivePayList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountAndAddressDto.BankAccount">
             <summary>Gets or sets the BankAccount.</summary>
         </member>
@@ -2356,6 +2368,20 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.IBankAccountUnitAppService.GetUploadMethodList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get UploadMethodList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Banking.IBankAccountUnitAppService.GetPositivePayList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get PositivePayList 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Banking.IBatchUnitAppService.CreateBatchUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBatchUnitInput)">
             <summary>
             Create the BatchUnit.
@@ -2440,6 +2466,348 @@
             <summary>
             A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
             </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.FiscalYearId">
+            <summary>Gets or sets the FiscalYearId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.PeriodStartDate">
+            <summary>Gets or sets the PeriodStartDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.PeriodEndDate">
+            <summary>Gets or sets the PeriodEndDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsPeriodOpen">
+            <summary>Gets or sets the IsPeriodOpen field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsCpaClosed">
+            <summary>Gets or sets the IsCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.DateCpaClosed">
+            <summary>Gets or sets the DateCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.CpaUserId">
+            <summary>Gets or sets the CPAUserID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsYearEndAdjustmentsAllowed">
+            <summary>Gets or sets the IsYearEndAdjustmentsAllowed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsPreClose">
+            <summary>Gets or sets the IsPreClose field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.MonthYear">
+            <summary>Gets or sets the MonthYear field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.FiscalPeriodId">
+            <summary>Gets or sets the FiscalPeriodId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.FiscalYearId">
+            <summary>Gets or sets the FiscalYearId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.PeriodStartDate">
+            <summary>Gets or sets the PeriodStartDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.PeriodEndDate">
+            <summary>Gets or sets the PeriodEndDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsPeriodOpen">
+            <summary>Gets or sets the IsPeriodOpen field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsCpaClosed">
+            <summary>Gets or sets the IsCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.DateCpaClosed">
+            <summary>Gets or sets the DateCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.CpaUserId">
+            <summary>Gets or sets the CPAUserID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsYearEndAdjustmentsAllowed">
+            <summary>Gets or sets the IsYearEndAdjustmentsAllowed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsPreClose">
+            <summary>Gets or sets the IsPreClose field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.MonthYear">
+            <summary>Gets or sets the MonthYear field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.YearEndDate">
+            <summary>Gets or sets the YearEndDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsYearOpen">
+            <summary>Gets or sets the IsYearOpen field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsApproved">
+            <summary>Gets or sets the IsApproved field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsCpaClosed">
+            <summary>Gets or sets the IsCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.DateCpaClosed">
+            <summary>Gets or sets the DateCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.CpaUserId">
+            <summary>Gets or sets the CPAUserID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsDefaultReportingYear">
+            <summary>Gets or sets the IsDefaultReportingYear field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.FiscalPeriodId">
+            <summary>Gets or sets the FiscalPeriodId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.FiscalYearId">
+            <summary>Gets or sets the FiscalYearId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.PeriodStartDate">
+            <summary>Gets or sets the PeriodStartDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.PeriodEndDate">
+            <summary>Gets or sets the PeriodEndDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsPeriodOpen">
+            <summary>Gets or sets the IsPeriodOpen field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsCpaClosed">
+            <summary>Gets or sets the IsCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.DateCpaClosed">
+            <summary>Gets or sets the DateCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.CpaUserId">
+            <summary>Gets or sets the CPAUserID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsYearEndAdjustmentsAllowed">
+            <summary>Gets or sets the IsYearEndAdjustmentsAllowed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsPreClose">
+            <summary>Gets or sets the IsPreClose field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.MonthYear">
+            <summary>Gets or sets the MonthYear field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.YearEndDate">
+            <summary>Gets or sets the YearEndDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsYearOpen">
+            <summary>Gets or sets the IsYearOpen field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsApproved">
+            <summary>Gets or sets the IsApproved field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsCpaClosed">
+            <summary>Gets or sets the IsCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.DateCpaClosed">
+            <summary>Gets or sets the DateCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.CpaUserId">
+            <summary>Gets or sets the CPAUserID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsDefaultReportingYear">
+            <summary>Gets or sets the IsDefaultReportingYear field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.YearEndDate">
+            <summary>Gets or sets the YearEndDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsYearOpen">
+            <summary>Gets or sets the IsYearOpen field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsApproved">
+            <summary>Gets or sets the IsApproved field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsCpaClosed">
+            <summary>Gets or sets the IsCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.DateCpaClosed">
+            <summary>Gets or sets the DateCPAClosed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.CpaUserId">
+            <summary>Gets or sets the CPAUserID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsDefaultReportingYear">
+            <summary>Gets or sets the IsDefaultReportingYear field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService">
+            <summary>
+            This service will provide all CRUD operations on COA.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService.CreateFiscalPeriodUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput)">
+            <summary>
+            Create the FiscalPeriod.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService.GetFiscalPeriodUnits(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.GetFiscalPeriodDto)">
+            <summary>
+            Get the list of all FiscalPeriod and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService.UpdateFiscalPeriodUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput)">
+            <summary>
+            Update the FiscalPeriod based on FiscalPeriodId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService.DeleteFiscalPeriodUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the FiscalPeriod based on FiscalPeriodId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService">
+            <summary>
+            This service will provide all CRUD operations on FiscalYear.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.CreateFiscalYearUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput)">
+            <summary>
+            Create the FiscalYear.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.GetFiscalYearUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all FiscalYear and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.UpdateFiscalYearUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput)">
+            <summary>
+            Update the FiscalYear based on FiscalYearId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.DeleteFiscalYearUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the FiscalYear based on FiscalYearId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.GetFiscalYearById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get the FiscalYear by Id
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalPeriodAppService.CreateFiscalPeriodUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput)">
+            <summary>
+            Creating FiscalPeriod
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalPeriodAppService.DeleteFiscalPeriodUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Deleting FiscalPeriof By FiscalPeriod By Id
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalPeriodAppService.UpdateFiscalPeriodUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput)">
+            <summary>
+            Updating FiscalPeriod
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.CreateFiscalYearUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput)">
+            <summary>
+            Creating FiscalYear
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.DeleteFiscalYearUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Deleting FiscalYear by FiscalYearId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.GetFiscalYearUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get All List of FiscalYears with Filters
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.UpdateFiscalYearUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput)">
+            <summary>
+            Update FiscalYear
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.GetFiscalYearById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get FiscalYear and Its FiscalPeriodList By FiscalPeriodId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItem.Key">
             <summary>
@@ -8328,348 +8696,6 @@
         <member name="M:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService.DeleteAPHeaderTransactionUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Delete ApHeader Transactions
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.FiscalYearId">
-            <summary>Gets or sets the FiscalYearId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.PeriodStartDate">
-            <summary>Gets or sets the PeriodStartDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.PeriodEndDate">
-            <summary>Gets or sets the PeriodEndDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsPeriodOpen">
-            <summary>Gets or sets the IsPeriodOpen field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.TypeOfInactiveStatusId">
-            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsCpaClosed">
-            <summary>Gets or sets the IsCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.DateCpaClosed">
-            <summary>Gets or sets the DateCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.CpaUserId">
-            <summary>Gets or sets the CPAUserID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsYearEndAdjustmentsAllowed">
-            <summary>Gets or sets the IsYearEndAdjustmentsAllowed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsPreClose">
-            <summary>Gets or sets the IsPreClose field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the CompanyId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.MonthYear">
-            <summary>Gets or sets the MonthYear field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.FiscalPeriodId">
-            <summary>Gets or sets the FiscalPeriodId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.FiscalYearId">
-            <summary>Gets or sets the FiscalYearId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.PeriodStartDate">
-            <summary>Gets or sets the PeriodStartDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.PeriodEndDate">
-            <summary>Gets or sets the PeriodEndDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsPeriodOpen">
-            <summary>Gets or sets the IsPeriodOpen field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.TypeOfInactiveStatusId">
-            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsCpaClosed">
-            <summary>Gets or sets the IsCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.DateCpaClosed">
-            <summary>Gets or sets the DateCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.CpaUserId">
-            <summary>Gets or sets the CPAUserID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsYearEndAdjustmentsAllowed">
-            <summary>Gets or sets the IsYearEndAdjustmentsAllowed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsPreClose">
-            <summary>Gets or sets the IsPreClose field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.OrganizationUnitId">
-            <summary>Gets or sets the CompanyId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.MonthYear">
-            <summary>Gets or sets the MonthYear field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.YearEndDate">
-            <summary>Gets or sets the YearEndDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsYearOpen">
-            <summary>Gets or sets the IsYearOpen field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsApproved">
-            <summary>Gets or sets the IsApproved field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.TypeOfInactiveStatusId">
-            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsCpaClosed">
-            <summary>Gets or sets the IsCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.DateCpaClosed">
-            <summary>Gets or sets the DateCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.CpaUserId">
-            <summary>Gets or sets the CPAUserID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.IsDefaultReportingYear">
-            <summary>Gets or sets the IsDefaultReportingYear field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalYearUnitDto.OrganizationUnitId">
-            <summary>Gets or sets the CompanyId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.FiscalPeriodId">
-            <summary>Gets or sets the FiscalPeriodId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.FiscalYearId">
-            <summary>Gets or sets the FiscalYearId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.PeriodStartDate">
-            <summary>Gets or sets the PeriodStartDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.PeriodEndDate">
-            <summary>Gets or sets the PeriodEndDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsPeriodOpen">
-            <summary>Gets or sets the IsPeriodOpen field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.TypeOfInactiveStatusId">
-            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsCpaClosed">
-            <summary>Gets or sets the IsCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.DateCpaClosed">
-            <summary>Gets or sets the DateCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.CpaUserId">
-            <summary>Gets or sets the CPAUserID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsYearEndAdjustmentsAllowed">
-            <summary>Gets or sets the IsYearEndAdjustmentsAllowed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsPreClose">
-            <summary>Gets or sets the IsPreClose field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the CompanyId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.MonthYear">
-            <summary>Gets or sets the MonthYear field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.YearEndDate">
-            <summary>Gets or sets the YearEndDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsYearOpen">
-            <summary>Gets or sets the IsYearOpen field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsApproved">
-            <summary>Gets or sets the IsApproved field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.TypeOfInactiveStatusId">
-            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsCpaClosed">
-            <summary>Gets or sets the IsCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.DateCpaClosed">
-            <summary>Gets or sets the DateCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.CpaUserId">
-            <summary>Gets or sets the CPAUserID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.IsDefaultReportingYear">
-            <summary>Gets or sets the IsDefaultReportingYear field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the CompanyId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.YearEndDate">
-            <summary>Gets or sets the YearEndDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsYearOpen">
-            <summary>Gets or sets the IsYearOpen field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsApproved">
-            <summary>Gets or sets the IsApproved field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.TypeOfInactiveStatusId">
-            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsCpaClosed">
-            <summary>Gets or sets the IsCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.DateCpaClosed">
-            <summary>Gets or sets the DateCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.CpaUserId">
-            <summary>Gets or sets the CPAUserID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.IsDefaultReportingYear">
-            <summary>Gets or sets the IsDefaultReportingYear field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the CompanyId field. </summary>
-        </member>
-        <member name="T:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService">
-            <summary>
-            This service will provide all CRUD operations on COA.
-            </summary>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService.CreateFiscalPeriodUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput)">
-            <summary>
-            Create the FiscalPeriod.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService.GetFiscalPeriodUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Get the list of all FiscalPeriod and also provided with Sorting,Paging and Searching functionality.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService.UpdateFiscalPeriodUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput)">
-            <summary>
-            Update the FiscalPeriod based on FiscalPeriodId.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalPeriodAppService.DeleteFiscalPeriodUnit(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Delete the FiscalPeriod based on FiscalPeriodId.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService">
-            <summary>
-            This service will provide all CRUD operations on FiscalYear.
-            </summary>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.CreateFiscalYearUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput)">
-            <summary>
-            Create the FiscalYear.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.GetFiscalYearUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Get the list of all FiscalYear and also provided with Sorting,Paging and Searching functionality.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.UpdateFiscalYearUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput)">
-            <summary>
-            Update the FiscalYear based on FiscalYearId.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.DeleteFiscalYearUnit(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Delete the FiscalYear based on FiscalYearId.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.IFiscalYearAppService.GetFiscalYearById(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Get the FiscalYear by Id
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalPeriodAppService.CreateFiscalPeriodUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput)">
-            <summary>
-            Creating FiscalPeriod
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalPeriodAppService.DeleteFiscalPeriodUnit(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Deleting FiscalPeriof By FiscalPeriod By Id
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalPeriodAppService.UpdateFiscalPeriodUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput)">
-            <summary>
-            Updating FiscalPeriod
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.CreateFiscalYearUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalYearUnitInput)">
-            <summary>
-            Creating FiscalYear
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.DeleteFiscalYearUnit(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Deleting FiscalYear by FiscalYearId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.GetFiscalYearUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Get All List of FiscalYears with Filters
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.UpdateFiscalYearUnit(CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalYearUnitInput)">
-            <summary>
-            Update FiscalYear
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Financials.Preferences.FiscalYearAppService.GetFiscalYearById(Abp.Application.Services.Dto.IdInput)">
-            <summary>
-            Get FiscalYear and Its FiscalPeriodList By FiscalPeriodId
             </summary>
             <param name="input"></param>
             <returns></returns>

@@ -39,6 +39,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly IRepository<BankAccountPaymentRangeUnit> _bankAccountPaymentRangeRepository;
         private readonly BankAccountPaymentRangeUnitManager _bankAccountPaymentRangeUnitManager;
+        
 
 
         private readonly IUnitOfWorkManager _unitOfWorkManager;
@@ -436,7 +437,28 @@ namespace CAPS.CORPACCOUNTING.Banking
 
             }
 
+        }
 
+        /// <summary>
+        /// Get UploadMethodList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetUploadMethodList(AutoSearchInput input)
+        {
+            return await (from uploadtype in _typeOfUploadFileUnitRepository.GetAll().Where(p=>p.TypeofUploadId==TyeofUpload.UploadMethod)
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Notes.Contains(input.Query))
+                          select new NameValueDto { Name = uploadtype.Description, Value = uploadtype.Id.ToString() }).ToListAsync();
+        }
+
+        /// <summary>
+        /// Get PositivePayList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetPositivePayList(AutoSearchInput input)
+        {
+            return await (from uploadtype in _typeOfUploadFileUnitRepository.GetAll().Where(p => p.TypeofUploadId == TyeofUpload.PositivePayFile)
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Notes.Contains(input.Query))
+                          select new NameValueDto { Name = uploadtype.Description, Value = uploadtype.Id.ToString() }).ToListAsync();
         }
     }
 }

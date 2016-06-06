@@ -78,5 +78,18 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// <returns></returns>
         Task DeleteBankAccountPaymentRange(IdInput input);
 
+        /// <summary>
+        /// Get UploadMethodList
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetUploadMethodList(AutoSearchInput input);
+        /// <summary>
+        /// Get PositivePayList 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetPositivePayList(AutoSearchInput input);
+
     }
 }

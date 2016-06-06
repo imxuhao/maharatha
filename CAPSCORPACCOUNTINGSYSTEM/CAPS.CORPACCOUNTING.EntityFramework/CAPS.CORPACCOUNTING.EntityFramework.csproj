@@ -1216,8 +1216,13 @@
     <Compile Include="Migrations\201605270742055_Modify_AccountingItem_FiscalPeriod_Table.Designer.cs">
       <DependentUpon>201605270742055_Modify_AccountingItem_FiscalPeriod_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606050602120_Modify_TypeOfUploadFile_Table.cs" />
+    <Compile Include="Migrations\201606050602120_Modify_TypeOfUploadFile_Table.Designer.cs">
+      <DependentUpon>201606050602120_Modify_TypeOfUploadFile_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
+    <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultCountryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultCurrencyCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultEditionCreator.cs" />
@@ -2055,6 +2060,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605270742055_Modify_AccountingItem_FiscalPeriod_Table.resx">
       <DependentUpon>201605270742055_Modify_AccountingItem_FiscalPeriod_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606050602120_Modify_TypeOfUploadFile_Table.resx">
+      <DependentUpon>201606050602120_Modify_TypeOfUploadFile_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

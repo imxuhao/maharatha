@@ -5,6 +5,14 @@ using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
+    public enum TyeofUpload
+    {
+        [Display(Name = "UploadMethod")]
+        UploadMethod = 1,
+        [Display(Name = "PositivePayFile")]
+        PositivePayFile = 2
+    }
+
     [Table("CAPS_TypeOfUploadFile")]
     public class TypeOfUploadFileUnit : CreationAuditedEntity
     {
@@ -17,6 +25,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         #region Class Property Declarations
 
         /// <summary>Overriding the ID column with TypeOfUploadFileId</summary>
+        
         [Column("TypeOfUploadFileId")]
         public override int Id { get; set; }
 
@@ -54,6 +63,9 @@ namespace CAPS.CORPACCOUNTING.Banking
         [ForeignKey("OverrideJobId")]
         public JobUnit Job { get; set; }
 
+        /// <summary>Gets or sets the TyeofUpload field.</summary>
+        public virtual TyeofUpload? TypeofUploadId { get; set; }
+
         /// <summary>Gets or sets the SecureAccessCategoryIdAssignedByUser field.</summary>
         public virtual short? SecureAccessCategoryIdAssignedByUser { get; set; }
 
@@ -65,5 +77,23 @@ namespace CAPS.CORPACCOUNTING.Banking
             UploadOptionC = false;
             UploadOptionD = false;
         }
+
+        public TypeOfUploadFileUnit( string description, int? displaysequence, string notes, string uploadfilename, bool? uploadoptiona,
+            bool? uploadoptionb, bool? uploadoptionc, bool? uploadoptiond, int? overridejobid, TyeofUpload? typeofuploadid)
+        {
+           
+            Description = description;
+            DisplaySequence = displaysequence;
+            Notes = notes;
+            UploadFileName = uploadfilename;
+            UploadOptionA = uploadoptiona;
+            UploadOptionB = uploadoptionb;
+            UploadOptionC = uploadoptionc;
+            UploadOptionD = uploadoptiond;
+            OverrideJobId = overridejobid;
+            TypeofUploadId = typeofuploadid;
+        }
     }
 }
+
+

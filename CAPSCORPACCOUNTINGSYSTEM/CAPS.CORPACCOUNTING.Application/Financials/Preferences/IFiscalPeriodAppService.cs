@@ -24,7 +24,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<FiscalPeriodUnitDto>> GetFiscalPeriodUnits(SearchInputDto input);
+        Task<PagedResultOutput<FiscalPeriodUnitDto>> GetFiscalPeriodUnits(GetFiscalPeriodDto input);
 
         /// <summary>
         /// Update the FiscalPeriod based on FiscalPeriodId.

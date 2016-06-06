@@ -368,6 +368,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             displayField: 'name',
                             entityGridController: 'payables-vendors-vendorsgrid',
                             typeAhead: false,
+                            emptyText: 'Type to search',
                             editable: true,
                             entityName : 'Vendor',
                             entityType: 'payables.vendors',

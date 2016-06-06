@@ -12,5 +12,21 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.financials.fiscalperiodgrid',
     doAfterCreateAction: function (createMode, formPanel, isEdit, record) {
+    var me = this;
+    if (isEdit) {
+        if (record) {
+            var fiscalPeriodGrid = formPanel.down('*[itemId=fiscalPeriodGrid]');
+            if (fiscalPeriodGrid) {
+                var fiscalPeriodStore = fiscalPeriodGrid.getStore();
+                Ext.apply(fiscalPeriodStore.getProxy().extraParams, {
+                    fiscalYearId: record.get('fiscalYearId')
+                });
+                fiscalPeriodStore.load();
+            }
+        }
     }
+    else {
+        //write code here to populate any store after view ready
+    }
+}
 });

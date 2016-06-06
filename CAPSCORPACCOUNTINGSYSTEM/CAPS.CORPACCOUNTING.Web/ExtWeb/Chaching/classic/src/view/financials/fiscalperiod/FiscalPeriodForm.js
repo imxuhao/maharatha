@@ -73,7 +73,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodForm', {
                 name: 'isYearOpen',
                 labelAlign: 'right',
                 inputValue: true,
-                checked: true,
+               // checked: true,
                 boxLabelCls: 'checkboxLabel',
                 hidden: false
             }]

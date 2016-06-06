@@ -6,9 +6,11 @@
     fields: [
         { name: 'fiscalPeriodId', type: 'int', isPrimaryKey: true },
         { name: 'fiscalYearId', type: 'int' },
-        { name: 'periodStartDate', type: 'date' },
-        { name: 'periodEndDate', type: 'date' },
-        { name: 'isPeriodOpen', type: 'boolean' },
+        { name: 'periodStartDate', type: 'date',dateFormat : 'c' },
+        { name: 'periodEndDate', type: 'date', dateFormat: 'c' },
+        {
+            name: 'isPeriodOpen', type: 'boolean', convert: nullHandler
+        },
         { name: 'isActive', type: 'boolean' },
         { name: 'isApproved', type: 'boolean'},
         { name: 'typeOfInactiveStatusId', type: 'int', defaultValue: null, convert: nullHandler },

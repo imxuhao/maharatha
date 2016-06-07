@@ -125,7 +125,11 @@ Ext.define('Chaching.components.form.Basic', {
         function setVal(fieldId, val) {
             var field = me.findField(fieldId);
             if (field) {
+                //isEditMode used to idenfiy the mode of form field during load record for event check like(change evnt on field)
+                field.isEditMode = true;
                 field.setValue(val);
+                //Reseting the isEditMode after setting value in field using load record
+                field.isEditMode = false;
                 if (me.trackResetOnLoad) {
                     field.resetOriginalValue();
                 }

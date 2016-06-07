@@ -9,7 +9,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodChildGrid', {
         destroy: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Delete')
     },
     padding: 5,
-    gridId: 22,
+    gridId: 20,
     itemId : 'fiscalPeriodGrid',
     controller: 'financials.fiscalperiodchildgrid',
     store: 'financials.fiscalperiod.FiscalPeriodStore',
@@ -106,7 +106,10 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodChildGrid', {
         sortable: false,
         groupable: false,
        // renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-        width: '15%'
+        width: '15%',
+        listeners: {
+            checkchange: 'onFiscalPeriodModeChange'
+        }
         //,
         //editor: {
         //    xtype: 'checkboxfield'
@@ -114,11 +117,14 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodChildGrid', {
     }, {
         xtype : 'checkcolumn',
         text: app.localize('Close').initCap(),
-        dataIndex: 'isPeriodOpen',
+        dataIndex: 'isClose',
         sortable: false,
         groupable: false,
        // renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-        width: '15%'
+        width: '15%',
+        listeners: {
+            checkchange: 'onFiscalPeriodModeChange'
+        }
         //,
         //editor: {
         //    xtype: 'checkboxfield'

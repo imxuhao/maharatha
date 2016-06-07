@@ -26,7 +26,7 @@
                     periodStartDate: moment(periodStartDate).format(Chaching.utilities.ChachingGlobals.defaultDateFormat),
                     periodEndDate: moment(periodEndDate).format(Chaching.utilities.ChachingGlobals.defaultDateFormat),
                     monthYear: rec.get('monthYear'),
-                    isPeriodOpen: rec.get('isPeriodOpen') ? false : true,
+                    isClose: rec.get('isClose'),
                     isActive: rec.get('isActive'),
                     isApproved: rec.get('isApproved'),
                     typeOfInactiveStatusId: rec.get('typeOfInactiveStatusId'),
@@ -46,6 +46,20 @@
             
         }
         return record;
+    },
+    onFiscalOpenYearChange: function (field, newVal, oldVal) {
+        var me = this,
+            view = me.getView();
+        if (field.isEditMode == false && !field.getValue()) {
+            abp.message.confirm('You are about to Close this fiscal year, no transactions will post to closed year', 'WARNING', function (btn) {
+                if (btn) {
+                    var fiscalPeriodStore = view.down('gridpanel[itemId=fiscalPeriodGrid]').getStore();
+                    fiscalPeriodStore.each(function (record) {
+                        record.set('isClose', true);
+                    });
+                }
+            });
+        }
     }
 
 });

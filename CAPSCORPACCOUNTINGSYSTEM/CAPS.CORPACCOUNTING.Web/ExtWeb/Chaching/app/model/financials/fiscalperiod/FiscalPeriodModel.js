@@ -8,9 +8,7 @@
         { name: 'fiscalYearId', type: 'int' },
         { name: 'periodStartDate', type: 'date',dateFormat : 'c' },
         { name: 'periodEndDate', type: 'date', dateFormat: 'c' },
-        {
-            name: 'isPeriodOpen', type: 'boolean', convert: nullHandler
-        },
+        {name: 'isClose', type: 'boolean', convert: nullHandler },
         { name: 'isActive', type: 'boolean' },
         { name: 'isApproved', type: 'boolean'},
         { name: 'typeOfInactiveStatusId', type: 'int', defaultValue: null, convert: nullHandler },

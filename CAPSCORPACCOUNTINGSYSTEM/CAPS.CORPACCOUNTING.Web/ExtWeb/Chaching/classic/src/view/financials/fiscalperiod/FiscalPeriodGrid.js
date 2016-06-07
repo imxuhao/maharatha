@@ -24,7 +24,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
         destroy: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Delete')
     },
     padding: 5,
-    gridId: 20,
+    gridId: 22,
     store: 'financials.fiscalperiod.FiscalYearStore',
     headerButtonsConfig: [
       {

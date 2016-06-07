@@ -2476,7 +2476,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.PeriodEndDate">
             <summary>Gets or sets the PeriodEndDate field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsPeriodOpen">
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsClose">
             <summary>Gets or sets the IsPeriodOpen field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsActive">
@@ -2518,7 +2518,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.PeriodEndDate">
             <summary>Gets or sets the PeriodEndDate field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsPeriodOpen">
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsClose">
             <summary>Gets or sets the IsPeriodOpen field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.IsActive">
@@ -2590,7 +2590,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.PeriodEndDate">
             <summary>Gets or sets the PeriodEndDate field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsPeriodOpen">
+        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsClose">
             <summary>Gets or sets the IsPeriodOpen field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.UpdateFiscalPeriodUnitInput.IsActive">

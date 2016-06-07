@@ -206,7 +206,6 @@ namespace CAPS.CORPACCOUNTING.Journals
             query = query.Where(p => p.JournalDetails.AccountingDocumentId.Value == input.AccountingDocumentId)
                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.JournalDetails.OrganizationUnitId == input.OrganizationUnitId);
 
-            //var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
                 .ToListAsync();
@@ -226,7 +225,6 @@ namespace CAPS.CORPACCOUNTING.Journals
             }).ToList();
 
             var creditMapResult = MapJournalsDetailsOutPutDto(mapResult.OrderByDescending(u => u.Amount).ToList());
-            //var creditMapResult = MapJournalsDetailsOutPutDto(results.OrderByDescending(u => u.JournalDetails.Amount.Value).ToList<JournalEntryDocDetailUnitDto>());
 
             return new PagedResultOutput<JournalEntryDocDetailUnitDto>(creditMapResult.Count, creditMapResult);
         }
@@ -549,62 +547,62 @@ namespace CAPS.CORPACCOUNTING.Journals
                         throw new UserFriendlyException(L("Credit Job and Account are Required"));
                     }
 
-                    if (journaldocDetails.SubAccountId1 == 0 && !string.IsNullOrEmpty(journaldocDetails.SubAccountId1Desc))
+                    if (journaldocDetails.SubAccountId1 == null && !string.IsNullOrEmpty(journaldocDetails.SubAccount1Desc))
                     {
-                        journaldocDetails.SubAccountId1 = await GetSubAccountId(journaldocDetails.SubAccountId1Desc, journaldocDetails.OrganizationUnitId);
+                        journaldocDetails.SubAccountId1 = await GetSubAccountId(journaldocDetails.SubAccount1Desc, journaldocDetails.OrganizationUnitId);
 
                         if (journaldocDetails.SubAccountId1 == 0)
-                            throw new UserFriendlyException(L("Debit SubAccount1 is Mismatching"));
+                            throw new UserFriendlyException(L("Debit SubAccount1 is not existed"));
                     }
-                    if (journaldocDetails.SubAccountId2 == 0 && !string.IsNullOrEmpty(journaldocDetails.SubAccountId2Desc))
+                    if (journaldocDetails.SubAccountId2 == null && !string.IsNullOrEmpty(journaldocDetails.SubAccount2Desc))
                     {
-                        journaldocDetails.SubAccountId2 = await GetSubAccountId(journaldocDetails.SubAccountId2Desc, journaldocDetails.OrganizationUnitId);
+                        journaldocDetails.SubAccountId2 = await GetSubAccountId(journaldocDetails.SubAccount2Desc, journaldocDetails.OrganizationUnitId);
 
                         if (journaldocDetails.JobId == 0)
-                            throw new UserFriendlyException(L("Debit SubAccount2 is Mismatching"));
+                            throw new UserFriendlyException(L("Debit SubAccount2 is not existed"));
                     }
-                    if (journaldocDetails.SubAccountId3 == 0 && !string.IsNullOrEmpty(journaldocDetails.SubAccountId3Desc))
+                    if (journaldocDetails.SubAccountId3 == null && !string.IsNullOrEmpty(journaldocDetails.SubAccount3Desc))
                     {
-                        journaldocDetails.SubAccountId3 = await GetSubAccountId(journaldocDetails.SubAccountId3Desc, journaldocDetails.OrganizationUnitId);
+                        journaldocDetails.SubAccountId3 = await GetSubAccountId(journaldocDetails.SubAccount3Desc, journaldocDetails.OrganizationUnitId);
 
                         if (journaldocDetails.SubAccountId3 == 0)
-                            throw new UserFriendlyException(L("Debit SubAccount3 is Mismatching"));
+                            throw new UserFriendlyException(L("Debit SubAccount3 is not existed"));
                     }
-                    if (journaldocDetails.CreditSubAccountId1 == 0 && !string.IsNullOrEmpty(journaldocDetails.CreditSubAccountId1Desc))
+                    if (journaldocDetails.CreditSubAccountId1 == null && !string.IsNullOrEmpty(journaldocDetails.CreditSubAccount1Desc))
                     {
-                        journaldocDetails.CreditSubAccountId1 = await GetSubAccountId(journaldocDetails.CreditSubAccountId1Desc, journaldocDetails.OrganizationUnitId);
+                        journaldocDetails.CreditSubAccountId1 = await GetSubAccountId(journaldocDetails.CreditSubAccount1Desc, journaldocDetails.OrganizationUnitId);
 
                         if (journaldocDetails.CreditSubAccountId1 == 0)
-                            throw new UserFriendlyException(L("Credit SubAccount1 is Mismatching"));
+                            throw new UserFriendlyException(L("Credit SubAccount1 is not existed"));
                     }
-                    if (journaldocDetails.CreditSubAccountId2 == 0 && !string.IsNullOrEmpty(journaldocDetails.CreditSubAccountId2Desc))
+                    if (journaldocDetails.CreditSubAccountId2 == null && !string.IsNullOrEmpty(journaldocDetails.CreditSubAccount2Desc))
                     {
-                        journaldocDetails.CreditSubAccountId2 = await GetSubAccountId(journaldocDetails.CreditSubAccountId2Desc, journaldocDetails.OrganizationUnitId);
+                        journaldocDetails.CreditSubAccountId2 = await GetSubAccountId(journaldocDetails.CreditSubAccount2Desc, journaldocDetails.OrganizationUnitId);
 
                         if (journaldocDetails.CreditSubAccountId2 == 0)
-                            throw new UserFriendlyException(L("Credit SubAccount2 is Mismatching"));
+                            throw new UserFriendlyException(L("Credit SubAccount2 is not existed"));
                     }
-                    if (journaldocDetails.CreditSubAccountId3 == 0 && !string.IsNullOrEmpty(journaldocDetails.CreditSubAccountId3Desc))
+                    if (journaldocDetails.CreditSubAccountId3 == null && !string.IsNullOrEmpty(journaldocDetails.CreditSubAccount3Desc))
                     {
-                        journaldocDetails.CreditSubAccountId3 = await GetSubAccountId(journaldocDetails.CreditSubAccountId3Desc, journaldocDetails.OrganizationUnitId);
+                        journaldocDetails.CreditSubAccountId3 = await GetSubAccountId(journaldocDetails.CreditSubAccount3Desc, journaldocDetails.OrganizationUnitId);
 
                         if (journaldocDetails.CreditSubAccountId3 == 0)
-                            throw new UserFriendlyException(L("Credit SubAccount3 is Mismatching"));
+                            throw new UserFriendlyException(L("Credit SubAccount3 is not existed"));
                     }
-                    if (journaldocDetails.VendorId == 0 && !string.IsNullOrEmpty(journaldocDetails.VendorName))
+                    if (journaldocDetails.VendorId == null && !string.IsNullOrEmpty(journaldocDetails.VendorName))
                     {
                         journaldocDetails.VendorId = await GetVendorId(journaldocDetails.VendorName, journaldocDetails.OrganizationUnitId);
 
                         if (journaldocDetails.VendorId == 0)
-                            throw new UserFriendlyException(L("Vendor Name is Mismatching"));
+                            throw new UserFriendlyException(L("Vendor Name is not existed"));
                     }
 
-                    if (journaldocDetails.TaxRebateId == 0 && !string.IsNullOrEmpty(journaldocDetails.TaxRebateDesc))
+                    if (journaldocDetails.TaxRebateId == null && !string.IsNullOrEmpty(journaldocDetails.TaxRebateDesc))
                     {
                         journaldocDetails.TaxRebateId = await TaxCreditId(journaldocDetails.TaxRebateDesc, journaldocDetails.OrganizationUnitId);
 
                         if (journaldocDetails.TaxRebateId == 0)
-                            throw new UserFriendlyException(L("TaxCredit Number is Mismatching"));
+                            throw new UserFriendlyException(L("TaxCredit Number is not existed"));
                     }
 
                 }

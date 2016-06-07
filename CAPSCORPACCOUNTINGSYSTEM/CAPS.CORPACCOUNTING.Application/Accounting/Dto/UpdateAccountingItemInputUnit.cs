@@ -243,63 +243,63 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public bool IsAccountingItemSplit { get; set; }
 
         /// <summary>Gets or sets the SubAccountId1Desc field. </summary>
-        public string SubAccountId1Desc { get; set; }
+        public string SubAccount1Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID2Desc field. </summary>
-        public string SubAccountId2Desc { get; set; }
+        public string SubAccount2Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID3Desc field. </summary>
-        public string SubAccountId3Desc { get; set; }
+        public string SubAccount3Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID4Desc field. </summary>
-        public string SubAccountId4Desc { get; set; }
+        public string SubAccount4Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID5Desc field. </summary>
-        public string SubAccountId5Desc { get; set; }
+        public string SubAccount5Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID6Desc field. </summary>
-        public string SubAccountId6Desc { get; set; }
+        public string SubAccount6Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID7Desc field. </summary>
-        public string SubAccountId7Desc { get; set; }
+        public string SubAccount7Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID8Desc field. </summary>
-        public string SubAccountId8Desc { get; set; }
+        public string SubAccount8Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID9Desc field. </summary>
-        public string SubAccountId9Desc { get; set; }
+        public string SubAccount9Desc { get; set; }
 
         /// <summary>Gets or sets the SubAccountID10Desc field. </summary>
-        public string SubAccountId10Desc { get; set; }
+        public string SubAccount10Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID1Desc field. </summary>
-        public string CreditSubAccountId1Desc { get; set; }
+        public string CreditSubAccount1Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID2Desc field. </summary>
-        public string CreditSubAccountId2Desc { get; set; }
+        public string CreditSubAccount2Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID3Desc field. </summary>
-        public string CreditSubAccountId3Desc { get; set; }
+        public string CreditSubAccount3Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID4Desc field. </summary>
-        public string CreditSubAccountId4Desc { get; set; }
+        public string CreditSubAccount4Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID5Desc field. </summary>
-        public string CreditSubAccountId5Desc { get; set; }
+        public string CreditSubAccount5Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID6Desc field. </summary>
-        public string CreditSubAccountId6Desc { get; set; }
+        public string CreditSubAccount6Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID7Desc field. </summary>
-        public string CreditSubAccountId7Desc { get; set; }
+        public string CreditSubAccount7Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID8Desc field. </summary>
-        public string CreditSubAccountId8Desc { get; set; }
+        public string CreditSubAccount8Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID9Desc field. </summary>
-        public string CreditSubAccountId9Desc { get; set; }
+        public string CreditSubAccount9Desc { get; set; }
 
         /// <summary>Gets or sets the CreditSubAccountID10Desc field. </summary>
-        public string CreditSubAccountId10Desc { get; set; }
+        public string CreditSubAccount10Desc { get; set; }
     }
 }

@@ -29,7 +29,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
             }
         }
     },
-    validateDetails: function (controller, view, detailGrid, detailsStore) {
+    validateDetails: function (controller, view, detailGrid, detailsStore,myMask) {
         var detailColumns = detailGrid.getColumns(),
             modifiedRecords = detailsStore.getModifiedRecords(),
             isValid = true,
@@ -62,6 +62,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
                                     var cell = detailGrid.getView().getCell(record, column);
                                     if (cell) controller.invalidateCell(cell, column.text);
                                     isValid = false;
+                                    myMask.hide();
                                     break;
                                 }
                             }

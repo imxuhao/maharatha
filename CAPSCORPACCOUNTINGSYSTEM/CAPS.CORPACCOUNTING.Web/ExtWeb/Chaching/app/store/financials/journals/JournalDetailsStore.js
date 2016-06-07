@@ -14,6 +14,6 @@
             destroy: abp.appPath + 'api/services/app/journalEntryDocDetail/DeleteJournalEntryDocDetailUnit'
         }
     },
-    serverKeyName:'updateJournalEntryDocDetailList',
+    serverKeyName: 'journalEntryDocDetailList',
     idPropertyField: 'accountingItemId'//important to set for add/update of records
 });

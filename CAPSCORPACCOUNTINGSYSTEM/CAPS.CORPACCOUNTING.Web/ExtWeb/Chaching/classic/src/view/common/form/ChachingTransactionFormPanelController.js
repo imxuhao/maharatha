@@ -68,9 +68,12 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
     },
     doSaveAction: function (saveContinue, saveClone, autoSave) {
         var me = this,
-           view = me.getView(),
-           parentGrid = view.parentGrid,
-           values = view.getValues();
+            view = me.getView(),
+            parentGrid = view.parentGrid,
+            values = view.getValues(),
+            detailGrid = view.down('gridpanel[isTransactionDetailGrid=true]'),
+            detailsStore = detailGrid.getStore(),
+            serverKeyName = detailsStore.serverKeyName;
         me.disableActionGroup();
         if (parentGrid) {
             var gridStore = parentGrid.getStore(),
@@ -95,6 +98,20 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
             if (!record) return record;
 
             myMask.show();
+            if (me.validateDetails(me, view, detailGrid, detailsStore,myMask)) {
+                var modifiedRecords = me.getDetailsModifiedRecords(me, view, detailGrid, detailsStore);
+                if (modifiedRecords.data.length > 0) {
+                    record.data[serverKeyName] = modifiedRecords.data;
+                    values[serverKeyName] = modifiedRecords.data;
+                } else {
+                    record.data[serverKeyName] = [];
+                    values[serverKeyName] = [];
+                }
+            } else {
+                me.enableActionGroup();
+                return abp.notify.warn(app.localize('DetailGridValidationFailMessage'), app.localize('DetailGridValidation'));
+            }
+            //return;
             if (values && parseInt(values[idPropertyField]) > 0) {
                 operation = Ext.data.Operation({
                     params: record.data,
@@ -111,6 +128,11 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
             } else if (values && parseInt(values[idPropertyField]) === 0) {
                 record.id = 0;
                 record.set('id', 0);
+                if (values[serverKeyName].length === 0) {
+                    me.enableActionGroup();
+                    myMask.hide();
+                    return abp.notify.warn(app.localize('DetailGridValidationLineCountMessage'), app.localize('DetailGridValidation'));
+                }
                 operation = Ext.data.Operation({
                     params: record.data,
                     parentGrid: parentGrid,
@@ -132,7 +154,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
             view = me.getView(),
             actionGroup = view.defaultActionGroup;
         if (actionGroup) {
-            actionGroup.disable(true);
+            actionGroup.setDisabled(true);
         }
     },
     enableActionGroup:function() {
@@ -140,7 +162,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
            view = me.getView(),
            actionGroup = view.defaultActionGroup;
         if (actionGroup) {
-            actionGroup.disable(false);
+            actionGroup.setDisabled(false);
         }
     },
     doPreSaveOperation: function (record, values, idPropertyField) { return record; },
@@ -153,7 +175,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                 if (response && response.result)
                     view.getForm().findField('accountingDocumentId').setValue(response.result.id);
             }
-            var promise = controller.doDistributionSaveOperations(records, operation, success);
+            var promise = controller.doPostSaveOperations(records, operation, success);
             var runner = new Ext.util.TaskRunner(),
                 task = undefined;
 
@@ -221,6 +243,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                 detailsStore.getProxy().setExtraParam('accountingDocumentId', 0);
                 detailsStore.load();
                 form.reset(true);
+                controller.changeViewTitle(view);
             } else if (saveClone) {
                 form.findField('accountingDocumentId').setValue(0);
                 var detailsRecords = detailsStore.getRange();
@@ -229,6 +252,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                     rec.set('accountingDocumentId', 0);
                     rec.set('accountingItemId', 0);
                 }
+                controller.changeViewTitle(view);
             }
 
             var action = operation.getAction();
@@ -259,49 +283,23 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
             abp.message.warn(message, title);
         }
     },
-    doDistributionSaveOperations: function(records, operation, success) {
-        var deferred = new Ext.Deferred();
-
-        var controller = operation.controller,
-            view = controller.getView(),
-            saveContinue = operation.saveContinue,
-            saveClone = operation.saveClone,
-            autoSave = operation.autoSave,
-            detailGrid = view.down('gridpanel[isTransactionDetailGrid=true]'),
-            detailsStore = detailGrid.getStore(),
-            serverKeyName = detailsStore.serverKeyName;
-        if (controller.validateDetails(controller, view, detailGrid, detailsStore)) {
-            var modifiedRecords = controller.getDetailsModifiedRecords(controller, view, detailGrid, detailsStore);
-            if (modifiedRecords.data.length > 0) {
-                var params = new Object();
-                params[serverKeyName] = modifiedRecords.data;
-                var detailsOperation = Ext.data.Operation({
-                    params: params,
-                    records: modifiedRecords.records,
-                    controller: controller,
-                    saveContinue: saveContinue,
-                    saveClone: saveClone,
-                    autoSave: autoSave,
-                    promise: deferred,
-                    callback: controller.onDetailsOperationCompleteCallBack
-                });
-                detailsStore.update(detailsOperation);
-            } else//default resolve the promise if no changes in distribution grid
-                deferred.resolve('{success:true}');
+    changeViewTitle: function (view) {
+        var parentGrid = view.parentGrid;
+        if (view.openInPopupWindow) {
+            var wnd = view.up('window');
+            wnd.setTitle(parentGrid.createWndTitleConfig.title);
+            wnd.setIconCls(parentGrid.createWndTitleConfig.iconCls);
         } else {
-            deferred.reject('{success:false,error:{message:"Validation fail"}}');
+            view.setTitle(parentGrid.createWndTitleConfig.title);
+            view.setIconCls(parentGrid.createWndTitleConfig.iconCls);
         }
-
+    },
+    doPostSaveOperations:function(records, operation, success) {
+        var deferred = new Ext.Deferred();
+        deferred.resolve('{success:true}');
         return deferred.promise;
     },
-    onDetailsOperationCompleteCallBack: function(records, detailsOperation, success) {
-        var deferred = detailsOperation.promise;
-        if (success) {
-            deferred.resolve('{success:true}');
-        } else {
-            deferred.reject(detailsOperation.getResponse().responseText);
-        }
-    },
+   
     getDetailsModifiedRecords: function(controller, view, detailGrid, detailsStore) {
         var modifiedRecords = detailsStore.getModifiedRecords(),
             removedRecords=detailsStore.getRemovedRecords(),
@@ -330,7 +328,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
         }
         return modifiedRecs;
     },
-    validateDetails: function (controller, view, detailGrid, detailsStore) {
+    validateDetails: function (controller, view, detailGrid, detailsStore,myMask) {
         var detailColumns = detailGrid.getColumns(),
             modifiedRecords = detailsStore.getModifiedRecords(),
             isValid = true;
@@ -351,6 +349,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                                 var cell = detailGrid.getView().getCell(record, column);
                                 if (cell) controller.invalidateCell(cell, column.text);
                                 isValid = false;
+                                myMask.hide();
                                 break;
                             }
                         }

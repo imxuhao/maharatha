@@ -144,7 +144,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
                 var gridController = operation.parentGrid.getController();
                 //this code is used to set the record in auto fill combo after create and update
                 if (view.openInPopupWindow) {
-                    operation.parentGrid.recordToSetInComboBox == null;
+                    operation.parentGrid.recordToSetInComboBox = null;
                     if (operation.parentGrid.recordToSetInComboBox == null && records.length > 0) {
                         operation.parentGrid.recordToSetInComboBox = records[0];
                     }

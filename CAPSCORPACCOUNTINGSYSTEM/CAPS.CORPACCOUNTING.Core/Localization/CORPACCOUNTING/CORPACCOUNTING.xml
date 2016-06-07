@@ -855,5 +855,22 @@
     <text name="MonthYear" value="Month-Year" />
     <text name="ClosingReport" value="Closing Report" />
     <text name="FiscalYearPeriod" value="Fiscal Year/Period" />
+   <text name="ViewTenant" value="View Tenant" />
+   <text name="ViewUser" value="View User" />
+ <text name="ViewRole" value="View Role" />
+ <text name="ViewProject" value="View Project" />
+ <text name="ViewProjectCOA" value="View Project COA" />
+ <text name="ViewLine" value="View Line" />
+ <text name="ViewVendor" value="View Vendor" />
+   <text name="ViewJournalEntry" value="View Journal" />
+ <text name="ViewFiscalPeriod" value="View Period" />
+ <text name="ViewAccount" value="View Account" />
+ <text name="ViewCOA" value="View COA" />
+ <text name="ViewDivision" value="View Division" />
+ <text name="ViewSubAccount" value="View Sub Account" />
+ <text name="ViewEdition" value="ViewEdition" />
+  <text name="ViewBatch" value="View Batch" />
+<text name="ViewBank" value="View Bank" />
+  <text name="ViewLanguage" value="View Language" />
   </texts>
 </localizationDictionary>

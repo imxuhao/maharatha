@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Threading.Tasks;
@@ -7,8 +6,8 @@ using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using Abp.UI;
 using AutoMapper;
-using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Financials.Preferences.Dto;
 
@@ -33,7 +32,10 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         /// <returns></returns>
         public async Task CreateFiscalPeriodUnit(CreateFiscalPeriodUnitInput input)
         {
+            if(input.IsClose == input.IsPreClose)
+             throw new UserFriendlyException(L("FiscalPeriod is either Close or Preclose only"));
             var fiscalPeriodUnit = input.MapTo<FiscalPeriodUnit>();
+            fiscalPeriodUnit.IsPeriodOpen = (!input.IsClose);
             await _fiscalPeriodUnitManager.CreateAsync(fiscalPeriodUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
@@ -74,6 +76,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             {
                 var dto = item.FiscalPeriod.MapTo<FiscalPeriodUnitDto>();
                 dto.FiscalPeriodId = item.FiscalPeriod.Id;
+                dto.IsClose =(!item.FiscalPeriod.IsPeriodOpen);
                 return dto;
             }).ToList());
         }
@@ -85,10 +88,13 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         /// <returns></returns>
         public async Task UpdateFiscalPeriodUnit(UpdateFiscalPeriodUnitInput input)
         {
+            if (input.IsClose == input.IsPreClose)
+                throw new UserFriendlyException(L("FiscalPeriod is either Close or Preclose only"));
             var fiscalPeriodUnit = await _fiscalPeriodUnitRepository.GetAsync(input.FiscalPeriodId);
             Mapper.CreateMap<UpdateFiscalPeriodUnitInput, FiscalPeriodUnit>()
-                    .ForMember(u => u.Id, ap => ap.MapFrom(src => src.FiscalPeriodId));
+                .ForMember(u => u.Id, ap => ap.MapFrom(src => src.FiscalPeriodId));
             Mapper.Map(input, fiscalPeriodUnit);
+            fiscalPeriodUnit.IsPeriodOpen = (!input.IsClose);
             await _fiscalPeriodUnitManager.UpdateAsync(fiscalPeriodUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }

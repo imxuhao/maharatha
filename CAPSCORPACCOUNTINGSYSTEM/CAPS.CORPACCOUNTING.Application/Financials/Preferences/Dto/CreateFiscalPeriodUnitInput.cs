@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         public DateTime? PeriodEndDate { get; set; }
 
         /// <summary>Gets or sets the IsPeriodOpen field. </summary>
-        public bool IsPeriodOpen { get; set; }
+        public bool IsClose { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
         public bool IsActive { get; set; }

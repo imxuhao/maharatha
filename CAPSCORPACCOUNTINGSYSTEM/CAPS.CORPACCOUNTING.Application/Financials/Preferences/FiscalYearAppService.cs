@@ -9,7 +9,6 @@ using Abp.Domain.Uow;
 using Abp.Linq.Extensions;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
-using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Financials.Preferences.Dto;
 using Abp.UI;
 using AutoMapper;
@@ -42,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         public async Task CreateFiscalYearUnit(CreateFiscalYearUnitInput input)
         {
             if (input.YearStartDate > input.YearEndDate)
-                throw new UserFriendlyException(L("FiscalStartDate should not greaterthan FiscalEndDate"));
+                throw new UserFriendlyException(L("FiscalStartDate should not be greaterthan FiscalEndDate"));
            
             if (!ReferenceEquals(input.CreateFiscalPeriodUnits, null))
             {
@@ -133,7 +132,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         {
             //validating startDate will be lessthan end date
             if (input.YearStartDate > input.YearEndDate)
-                throw new UserFriendlyException(L("FiscalStartDate should not greaterthan FiscalEndDate"));
+                throw new UserFriendlyException(L("FiscalStartDate should not be greaterthan FiscalEndDate"));
 
             //validating FiscalPeriod overlap
             if (!ReferenceEquals(input.UpdateFiscalPeriodUnits, null))

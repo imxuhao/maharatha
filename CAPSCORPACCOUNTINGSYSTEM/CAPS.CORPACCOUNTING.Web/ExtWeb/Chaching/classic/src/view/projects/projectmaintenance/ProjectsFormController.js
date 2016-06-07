@@ -172,5 +172,27 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
             });
         }
         
+    },
+    doModuleSpecificViewMode:function(formPanel) {
+        var view = formPanel,
+            controller = view.getController();
+        var defaultActionButtons = view.query('button[actionButton=true]');
+        if (defaultActionButtons && defaultActionButtons.length > 0) {
+            Ext.each(defaultActionButtons, function(button) {
+                if (button.name !== 'Cancel' && button.name !== "Edit" && typeof (button.hide) === "function") {
+                    button.hide();
+                }
+                if (button.name === "Edit") button.show();
+            });
+        }
+    },
+    doModuleSpecificEditAction:function(view) {
+        var actionButtons = view.query('button[actionButton=true]');
+        Ext.each(actionButtons, function (button) {
+            if (button.name !== 'Cancel' && button.name !== "Edit" && typeof (button.hide) === "function") {
+                button.show();
+            }
+            if (button.name === "Edit") button.hide();
+        });
     }
 });

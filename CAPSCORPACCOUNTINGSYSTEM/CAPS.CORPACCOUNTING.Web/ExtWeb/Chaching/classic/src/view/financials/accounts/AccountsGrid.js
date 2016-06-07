@@ -46,6 +46,10 @@
         title: app.localize('CreateNewAccount'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewAccount'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     columns: [

@@ -11,6 +11,12 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
     xtype: 'Languagetexts',
     store: 'languages.LanguageTextsStore',
     name: 'LanguageTexts',
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Administration.Languages'),
+        create: abp.auth.isGranted('Pages.Administration.Languages.Create'),
+        edit: abp.auth.isGranted('Pages.Administration.Languages.Edit'),
+        destroy: abp.auth.isGranted('Pages.Administration.Languages.Delete')
+    },
     padding: 5,
     gridId:4,
     headerButtonsConfig: [

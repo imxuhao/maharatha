@@ -51,6 +51,10 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         title: app.localize('CreatingNewVendors'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewVendor'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
 

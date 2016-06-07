@@ -50,6 +50,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
         title: app.localize('CreatingNewProjectCOA'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewProjectCOA'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     listeners: {

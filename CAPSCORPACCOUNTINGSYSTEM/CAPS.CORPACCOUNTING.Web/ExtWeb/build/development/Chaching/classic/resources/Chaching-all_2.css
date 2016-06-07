@@ -11944,6 +11944,108 @@ body.x-ios.x-webview.x-portrait {
     border-width: 0px !important;
 }
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:201 */
+.x-form-text-field-body-columnFilterField {
+    min-width: 170px;
+    max-width: 170px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:221 */
+.x-form-trigger-wrap-columnFilterField {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d0d0d0;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:229 */
+.x-form-trigger-wrap-columnFilterField.x-form-trigger-wrap-focus {
+    border-color: #3892d4;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:233 */
+.x-form-trigger-wrap-columnFilterField.x-form-trigger-wrap-invalid {
+    border-color: #cf4c35;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:258 */
+.x-form-text-columnFilterField {
+    color: #404040;
+    padding: 5px 10px 4px;
+    background-color: #fff;
+    font: 400 13px/21px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    min-height: 30px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:272 */
+.x-ie8 .x-form-text-columnFilterField {
+    min-height: 21px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:278 */
+.x-form-text-columnFilterField.x-form-textarea {
+    line-height: 20px;
+    min-height: 80px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:283 */
+.x-ie8 .x-form-text-columnFilterField.x-form-textarea {
+    min-height: 71px;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:290 */
+.x-form-text-columnFilterField.x-form-text-file {
+    color: gray;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:295 */
+.x-form-empty-field-columnFilterField {
+    color: gray;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:300 */
+.x-form-text-columnFilterField:-ms-input-placeholder {
+    color: gray;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:304 */
+.x-form-invalid-field-columnFilterField {
+    background-color: #fff;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:315 */
+.x-form-trigger-columnFilterField {
+    width: 32px;
+    font: 16px/30px FontAwesome;
+    background: #fff;
+    color: #919191;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
+.x-form-trigger-columnFilterField:before {
+    content: "\f0d7";
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:338 */
+.x-form-trigger-columnFilterField.x-form-trigger-over {
+    background-position: -32px center;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:344 */
+.x-form-trigger-columnFilterField.x-form-trigger-over.x-form-trigger-focus {
+    background-position: -128px center;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:349 */
+.x-form-trigger-columnFilterField.x-form-trigger-focus {
+    background-position: -96px center;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:358 */
+.x-form-trigger.x-form-trigger-columnFilterField.x-form-trigger-click {
+    background-position: -64px center;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:367 */
+.x-textfield-columnFilterField-cell > .x-grid-cell-inner {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:223 */
+.x-form-trigger-wrap-columnFilterField {
+    border-right-color: transparent !important;
+    border-right-width: 0px !important;
+    border-right-style: none !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:228 */
+.x-form-text-columnFilterField {
+    font-style: italic !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:231 */
+.x-form-text-field-body-columnFilterField {
+    margin-right: 3px !important;
+}
+/* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:201 */
 .x-form-text-field-body-fieldLabelTop {
     min-width: 170px;
     max-width: 170px;
@@ -12097,26 +12199,35 @@ body.x-ios.x-webview.x-portrait {
 /* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:17 */
 .x-form-text-fieldLabelTop {
     background-color: transparent !important;
+    padding: 12px 5px 0px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:20 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:21 */
 .x-form-invalid-field-fieldLabelTop {
     background-color: transparent !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:23 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:24 */
+.x-form-item-label-fieldLabelTop {
+    padding-top: 15px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:27 */
+.x-form-empty-field-fieldLabelTop {
+    font-style: italic;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:30 */
 .x-form-trigger-wrap-fieldLabelTop {
     border-top-color: transparent !important;
     border-left-color: transparent !important;
     border-right-color: transparent !important;
     border-bottom-color: #27e4e4 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:29 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:36 */
 .x-form-trigger-wrap-fieldLabelTop.x-form-trigger-wrap-invalid {
     border-top-color: transparent !important;
     border-left-color: transparent !important;
     border-right-color: transparent !important;
     border-bottom-color: #cf4c35 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:35 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:42 */
 .checkboxLabel {
     font-weight: 600 !important;
     padding-left: 22px !important;
@@ -12124,7 +12235,7 @@ body.x-ios.x-webview.x-portrait {
     margin-top: 8px !important;
     font-size: 13px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:42 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:49 */
 .x-form-item-fieldLabelTop.x-item-disabled {
     opacity: 0.8 !important;
 }
@@ -14969,78 +15080,4 @@ body.x-ios.x-webview.x-portrait {
 .x-tab.x-tab-active .x-tab-formTabPanels-left-mc {
     background-repeat: repeat-x;
     background-image: url(images/tab/tab-formTabPanels-left-active-fbg.gif);
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2957 */
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-tl,
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-bl,
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-tr,
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-br,
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-tc,
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-bc {
-    background-image: url(images/tab/tab-formTabPanels-left-focus-active-corners.gif);
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2966 */
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-ml,
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-mr {
-    background-image: url(images/tab/tab-formTabPanels-left-focus-active-sides.gif);
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2971 */
-.x-tab-focus.x-tab-active .x-tab-formTabPanels-left-mc {
-    background-repeat: repeat-x;
-    background-image: url(images/tab/tab-formTabPanels-left-focus-active-fbg.gif);
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2957 */
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-tl,
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-bl,
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-tr,
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-br,
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-tc,
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-bc {
-    background-image: url(images/tab/tab-formTabPanels-left-disabled-corners.gif);
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2966 */
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-ml,
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-mr {
-    background-image: url(images/tab/tab-formTabPanels-left-disabled-sides.gif);
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2971 */
-.x-tab.x-tab-disabled .x-tab-formTabPanels-left-mc {
-    background-repeat: repeat-x;
-    background-image: url(images/tab/tab-formTabPanels-left-disabled-fbg.gif);
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2981 */
-.x-tab-formTabPanels-tl,
-.x-tab-formTabPanels-bl,
-.x-tab-formTabPanels-tr,
-.x-tab-formTabPanels-br {
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF)";
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2991 */
-.x-tab-formTabPanels .x-tab-close-btn {
-    top: 0;
-    right: 0;
-    width: 16px;
-    height: 16px;
-    font: 12px/1 FontAwesome;
-    color: #fff;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/etc/mixins/font-icon.scss:126 */
-.x-tab-formTabPanels .x-tab-close-btn:before {
-    content: "\f00d";
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3001 */
-.x-tab-bar-plain .x-tab-formTabPanels .x-tab-close-btn {
-    color: #919191;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3013 */
-.x-tab-formTabPanels .x-tab-close-btn-over {
-    background-position: -16px 0;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3023 */
-.x-tab-formTabPanels .x-tab-close-btn-pressed {
-    background-position: -32px 0;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:3030 */
-.x-tab-formTabPanels.x-tab-focus .x-tab-close-btn {
-    color: #fff;
 }

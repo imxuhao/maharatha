@@ -46,6 +46,10 @@ Ext.define('Chaching.view.roles.RolesGrid', {
         title: app.localize('CreateNewRole'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewRole'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'popup',
     columns: [
         {

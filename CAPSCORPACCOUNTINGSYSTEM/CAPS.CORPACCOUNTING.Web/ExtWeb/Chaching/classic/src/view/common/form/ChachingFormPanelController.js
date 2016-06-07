@@ -56,6 +56,50 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             }
         }
     },
+    onEditButtonClicked: function (editBtn) {
+        var me = this,
+            view = me.getView(),
+            childGrids = view.query('gridpanel'),
+            form = view.getForm(),
+            fields = form.getFields().items;
+
+        Ext.each(fields, function (field) {
+            if (field.xtype !== "hiddenfield" && !field.isFilterField) {
+                field.setDisabled(false);
+                if (typeof (field.setEmptyText) === "function") {
+                    field.setEmptyText(field.originalEmptyText);
+                }
+            }
+        });
+
+        if (childGrids && childGrids.length > 0) {
+            Ext.each(childGrids, function (grid) {
+                grid.isInViewMode = false;
+                var dockedItems = grid.getDockedItems();
+                if (dockedItems && dockedItems.length > 0) {
+                    Ext.each(dockedItems, function (toolbar) {
+                        if (toolbar.isActionToolBar) toolbar.show();
+                    });
+                }
+            });
+        }
+        if (view.hideDefaultButtons) {
+            me.doModuleSpecificEditAction(view);
+        }
+        var defaultActionToolBar = view.defaultActionToolBar;
+        if (defaultActionToolBar) {
+            var defaultActionButtons = defaultActionToolBar.query('button');
+            if (defaultActionButtons && defaultActionButtons.length > 0) {
+                Ext.each(defaultActionButtons, function (button) {
+                    if (button.name !== 'Cancel' && button.name !== "Edit" && typeof (button.hide) === "function") {
+                        button.show();
+                    }
+                    if (button.name === "Edit") button.hide();
+                });
+            }
+        }
+
+    },
     //override in child classes if required to perform customOperation and return false to cancel save
     doPreSaveOperation:function(record,values,idPropertyField) { return record; },
     onCancelClicked:function(btn) {

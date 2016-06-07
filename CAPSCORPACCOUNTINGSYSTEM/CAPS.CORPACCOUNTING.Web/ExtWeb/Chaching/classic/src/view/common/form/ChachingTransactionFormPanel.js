@@ -183,7 +183,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
         ];
        
         me.callParent(arguments);
-        me.defaultActionGroup = me.dockedItems[0];
+        me.defaultActionGroup = me.getDockedItems()[0];
         me.on('resize', controller.onFormResize, this);
         if (me.defaultValuesToLoad) {
             controller.setDefaultValues();
@@ -253,6 +253,23 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
                 //listeners: {
                 //    click: 'onCancelClicked'
                 //}
+            });
+
+            //edit
+            buttons.push({
+                xtype: 'button',
+                scale: 'small',
+                iconCls: 'fa fa-edit',
+                iconAlign: 'left',
+                text: app.localize('Edit').toUpperCase(),
+                ui: 'actionButton',
+                name: 'Edit',
+                itemId: 'BtnEdit',
+                reference: 'BtnEdit',
+                hidden:true,
+                listeners: {
+                    click: 'onEditButtonClicked'
+                }
             });
         }
         //close/exist button

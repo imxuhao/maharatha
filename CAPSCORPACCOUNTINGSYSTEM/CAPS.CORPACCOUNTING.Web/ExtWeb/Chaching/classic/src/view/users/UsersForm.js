@@ -7,7 +7,7 @@ Ext.define('Chaching.view.users.UsersForm', {
     ],
 
     controller: 'users-usersform',
-    name: 'Users',
+    name: 'Administration.Users',
     openInPopupWindow: true,
     hideDefaultButtons: false,
     layout: 'vbox',

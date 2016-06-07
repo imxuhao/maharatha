@@ -7,7 +7,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
     ],
 
     controller: 'financials-accounts-divisionsform',
-    name: 'divisions',
+    name: 'Financials.Accounts.Divisions',
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: 'column',

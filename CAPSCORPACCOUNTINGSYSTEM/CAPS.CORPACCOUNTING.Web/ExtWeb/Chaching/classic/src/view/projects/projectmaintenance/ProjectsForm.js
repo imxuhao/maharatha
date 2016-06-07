@@ -223,18 +223,37 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                     {
                         xtype: 'button',
                         itemId: 'btnSaveSetup',
+                        name: 'Save',
                         ui: 'actionButton',
                         text: app.localize('SaveProject').toUpperCase(),
                         iconCls: 'fa fa-save',
+                        actionButton:true,
                         listeners: {
                             click: 'onSaveClicked'
                         }
                     }, {
                         xtype: 'button',
+                        scale: 'small',
+                        iconCls: 'fa fa-edit',
+                        iconAlign: 'left',
+                        text: app.localize('Edit').toUpperCase(),
+                        ui: 'actionButton',
+                        name: 'Edit',
+                        itemId: 'BtnEdit',
+                        reference: 'BtnEdit',
+                        hidden: true,
+                        actionButton: true,
+                        listeners: {
+                            click: 'onEditButtonClicked'
+                        }
+                    }, {
+                        xtype: 'button',
                         itemId: 'btnCancelSetup',
+                        name: 'Cancel',
                         ui: 'actionButton',
                         text: app.localize('Cancel').toUpperCase(),
                         iconCls: 'fa fa-close',
+                        actionButton: true,
                         listeners: {
                             click: 'onCancelClicked'
                         }
@@ -798,15 +817,34 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         ui: 'actionButton',
                         text: app.localize('SaveProjectDetails').toUpperCase(),
                         iconCls: 'fa fa-save',
+                        name:'SaveDetails',
+                        actionButton: true,
                         listeners: {
                             click: 'onProjectDetailsSave'
                         }
                     }, {
                         xtype: 'button',
+                        scale: 'small',
+                        iconCls: 'fa fa-edit',
+                        iconAlign: 'left',
+                        text: app.localize('Edit').toUpperCase(),
+                        ui: 'actionButton',
+                        name: 'Edit',
+                        itemId: 'BtnEdit',
+                        reference: 'BtnEdit',
+                        hidden: true,
+                        actionButton: true,
+                        listeners: {
+                            click: 'onEditButtonClicked'
+                        }
+                    }, {
+                        xtype: 'button',
                         itemId: 'btnCancelProjectDetails',
                         ui: 'actionButton',
+                        name:'Cancel',
                         text: app.localize('Cancel').toUpperCase(),
                         iconCls: 'fa fa-close',
+                        actionButton: true,
                         listeners: {
                             click: 'onCancelClicked'
                         }

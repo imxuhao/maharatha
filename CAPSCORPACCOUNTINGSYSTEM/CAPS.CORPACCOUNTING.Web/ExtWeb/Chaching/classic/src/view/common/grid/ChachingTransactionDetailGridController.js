@@ -3,6 +3,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
     alias: 'controller.common-grid-chachingtransactiondetailgrid',
     onNewClicked: function() {
         var me = this, view = me.getView(), detailStore = view.getStore();
+        if (view.isInViewMode)return;
         if (detailStore) {
             var multiplyOfField = view.down('numberfield[itemId=multiplyOf]'), multiplyOf = multiplyOfField.getValue();
             var modelClass = detailStore.getModel(),
@@ -24,6 +25,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             view = me.getView(),
             detailStore = view.getStore(),
             selectedRecords = view.getSelection();
+        if (view.isInViewMode) return;
         if (detailStore && selectedRecords && selectedRecords.length > 0) {
             Ext.each(selectedRecords, function(item) {
                 var accountingItemId = item.get('accountingItemId');
@@ -56,6 +58,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             selectionModel = view.getSelectionModel(),
             selectedRecords = selectionModel.getSelection(),
             gridStore = view.getStore();
+
+        if (view.isInViewMode) return;
+
         if (selectedRecords && selectedRecords.length === 1) {
             var parentRecord = selectedRecords[0],
                 parentIndex = gridStore.indexOf(parentRecord);
@@ -115,6 +120,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
     },
     onBeforeGridEdit: function (editor, context, eOpts) {
         var me = this, view = me.getView();
+
+        if (view.isInViewMode) return false;
         var moduleSpecificChecks = me.doModuleSpecificBeforeEdit(editor, context, eOpts);
         if (!moduleSpecificChecks) {
             return false;

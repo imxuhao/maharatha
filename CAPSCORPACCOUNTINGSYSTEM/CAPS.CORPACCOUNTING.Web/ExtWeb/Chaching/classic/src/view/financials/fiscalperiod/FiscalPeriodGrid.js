@@ -58,6 +58,10 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
         title: app.localize('CreateNewFiscalPeriod').initCap(),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewFiscalPeriod'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     //listeners: {

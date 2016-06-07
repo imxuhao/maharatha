@@ -7,7 +7,7 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
     ],
 
     controller: 'financials-accounts-accountsform',
-    name: 'accounts',
+    name: 'Financials.Accounts.Accounts',
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: 'column',

@@ -42,6 +42,10 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
         title: app.localize('CreateNewJournalEntry'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewJournalEntry'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     store: 'financials.journals.JournalStore',

@@ -18,6 +18,12 @@ Ext.define('Chaching.view.batchposting.batches.BatchesForm', {
     titleConfig: {
         title: abp.localization.localize("CreatingNewBatch").initCap()
     },
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.BatchPosting.Batches'),
+        create: abp.auth.isGranted('Pages.BatchPosting.Batches.Create'),
+        edit: abp.auth.isGranted('Pages.BatchPosting.Batches.Edit'),
+        destroy: abp.auth.isGranted('Pages.BatchPosting.Batches.Delete')
+    },
     //bodyStyle: { 'background-color': '#F3F5F9' },   
     items: [{
         xtype: 'hiddenfield',

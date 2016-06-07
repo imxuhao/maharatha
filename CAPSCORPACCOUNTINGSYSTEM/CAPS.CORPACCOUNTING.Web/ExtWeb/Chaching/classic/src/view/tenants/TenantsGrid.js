@@ -55,6 +55,10 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         title: app.localize('CreateNewTenant'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewTenant'),
+        iconCls: 'fa fa-th'
+    },
     columns: [
         {
             xtype: 'gridcolumn',

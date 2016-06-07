@@ -48,6 +48,10 @@ Ext.define('Chaching.view.users.UsersGrid', {
         title: app.localize('CreateNewUser'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewUser'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'popup',
     columns: [
         {

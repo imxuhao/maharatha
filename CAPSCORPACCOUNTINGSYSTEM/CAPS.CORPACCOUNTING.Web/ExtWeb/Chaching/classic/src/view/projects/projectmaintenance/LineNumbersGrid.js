@@ -48,6 +48,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
         title: app.localize('CreateNewLine'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewLine'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     columns: [

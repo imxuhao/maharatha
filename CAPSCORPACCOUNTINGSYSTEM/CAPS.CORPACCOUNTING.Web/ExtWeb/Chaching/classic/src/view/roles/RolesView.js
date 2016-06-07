@@ -18,7 +18,7 @@ Ext.define('Chaching.view.roles.RolesView',{
         var form = Ext.create('Chaching.view.roles.RolesForm', {
             height: '100%',
             width: '100%',
-            name: 'Roles'
+            name: 'Administration.Roles'
         });
         me.items = [form];
         me.callParent(arguments);

@@ -20,7 +20,7 @@ Ext.define('Chaching.view.users.UsersView', {
         var form = Ext.create('Chaching.view.users.UsersForm', {
             height: '100%',
             width: '100%',
-            name: 'Users'
+            name: 'Administration.Users'
         });
         me.items = [form];
 

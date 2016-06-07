@@ -19,6 +19,12 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
     titleConfig: {
         title: abp.localization.localize("CreateNewLine").initCap()
     },
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+        create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+        edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+    },
     items: [{
         xtype: 'hiddenfield',
         name: 'accountId',

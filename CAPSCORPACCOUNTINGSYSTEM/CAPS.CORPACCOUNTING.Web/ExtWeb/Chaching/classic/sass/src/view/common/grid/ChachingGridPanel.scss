@@ -213,3 +213,21 @@ $border-color-focus:transparent
     $ui-header-padding:6px,
     $ui-header-background-color:#3598DC
 );
+
+@include extjs-text-field-ui(
+$ui:'columnFilterField',
+$ui-font-size:13px,
+$ui-font-weight:400
+);
+
+.x-form-trigger-wrap-columnFilterField{
+    border-right-color:transparent !important;
+    border-right-width:0px !important;
+    border-right-style:none !important;
+}
+.x-form-text-columnFilterField{
+    font-style:italic !important;
+}
+.x-form-text-field-body-columnFilterField{
+    margin-right:3px !important;
+}

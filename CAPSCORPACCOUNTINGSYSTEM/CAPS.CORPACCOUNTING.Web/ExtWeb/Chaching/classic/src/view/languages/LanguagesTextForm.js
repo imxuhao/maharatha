@@ -9,6 +9,12 @@ Ext.define('Chaching.view.languages.LanguagesTextForm',{
     controller: 'languages-languagestextform',
     hideDefaultButtons: true,
     name: 'LanguageTextsForm',
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Administration.Languages'),
+        create: abp.auth.isGranted('Pages.Administration.Languages.Create'),
+        edit: abp.auth.isGranted('Pages.Administration.Languages.Edit'),
+        destroy: abp.auth.isGranted('Pages.Administration.Languages.Delete')
+    },
     openInPopupWindow: true,
     layout: 'vbox',
     defaults: {

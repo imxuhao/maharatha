@@ -49,6 +49,10 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
         title: app.localize('CreateNewSubAccounts'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewSubAccount'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
 

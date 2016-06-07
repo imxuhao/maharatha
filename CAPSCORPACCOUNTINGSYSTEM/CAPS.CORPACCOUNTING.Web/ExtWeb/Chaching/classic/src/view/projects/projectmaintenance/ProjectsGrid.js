@@ -57,6 +57,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
         title: app.localize('CreateNewProject').initCap(),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewProject'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     listeners: {

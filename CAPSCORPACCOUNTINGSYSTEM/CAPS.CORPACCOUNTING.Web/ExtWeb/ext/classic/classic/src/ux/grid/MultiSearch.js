@@ -577,12 +577,14 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                     };
                 }
             }
+            cfg.ui = 'columnFilterField';
             if ('iconCol' === item.itemId) {
                 Ext.apply(cfg, me.getIcon());
             } 
             //if('component' !== cfg.xtype) {
             Ext.apply(cfg, {
-                itemId: item.itemId ? item.itemId : item.dataIndex || 'item' + i
+                itemId: item.itemId ? item.itemId : item.dataIndex || 'item' + i,
+                isFilterField:true
             });
             //}
 

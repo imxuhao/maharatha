@@ -51,6 +51,10 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
         title: app.localize('CreatingNewCOA'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewCOA'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     listeners: {

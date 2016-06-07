@@ -100,7 +100,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             edit: true,
             destroy: true
         },
-        cls: 'chaching-transactiongrid'
+        cls: 'chaching-transactiongrid',
+        isInViewMode:false
     },
     /**
     * @cfg {string/object} Store for the grid.
@@ -208,6 +209,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 xtype: 'toolbar',
                 dock: 'bottom',
                 ui: 'plainBottom',
+                isActionToolBar:true,
                 layout: {
                     type: 'hbox',
                     pack: 'left'
@@ -335,7 +337,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             sortable: false,
             groupable: false,
             menuDisabled: true,
-            handler: function(grid, rowIndex, colIndex) {
+            handler: function (grid, rowIndex, colIndex) {
+                if (grid.ownerGrid.isInViewMode)return;
                 var gridStore = grid.getStore();
                 var record = gridStore.getAt(rowIndex);
                 if (record) {

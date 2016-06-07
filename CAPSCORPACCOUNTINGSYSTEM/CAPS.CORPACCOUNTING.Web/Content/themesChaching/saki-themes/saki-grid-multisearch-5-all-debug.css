@@ -154,11 +154,10 @@
   background-color: #f5f5f5;
   border-color: #cecece;
   border-width: 1px;
-  border-right-color: #cecece;
-  border-right-style: solid;
-  border-bottom-color: #cecece;
-  border-bottom-style: solid;
-  border-top-style: solid; }
+    border-right-color:transparent !important;
+    border-right-width:0px !important;
+    border-right-style: none !important;
+}
 
 /* line 79, ../../sass/src/grid/MultiSearch.scss */
 .saki-gms-clear {

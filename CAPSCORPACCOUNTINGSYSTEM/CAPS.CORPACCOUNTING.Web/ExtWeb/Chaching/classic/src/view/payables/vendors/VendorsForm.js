@@ -5,7 +5,7 @@
         'Chaching.view.payables.vendors.VendorsFormController'
     ],
     controller: 'payables-vendors-vendorsform',
-    name: 'vendors',
+    name: 'Payables.Vendors',
     openInPopupWindow: false,
     hideDefaultButtons: true,
     autoScroll: true,

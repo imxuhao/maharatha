@@ -49,6 +49,10 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
         title: app.localize('CreateNewEdition'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewEdition'),
+        iconCls: 'fa fa-th'
+    },
     columns: [             
          {
              xtype: 'gridcolumn',

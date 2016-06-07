@@ -43,7 +43,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
             grid = widgetCol.up('grid');
-
+        if (grid && grid.isInViewMode) return;
         //TODO start edit by checking row allowEdit property
         if (widgetRec && grid) {
             var editingPlugin = grid.getPlugin('editingPlugin');
@@ -58,17 +58,18 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         }
 
     },
-    editActionClicked: function(menu, item, e, eOpts) {
+    editActionClicked: function(menu, item, e, eOpts,isView) {
         var parentMenu = menu.parentMenu,
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
             grid = widgetCol.up('grid'),
             controller = grid.getController(),
             gridStore = grid.getStore();
-
+        if (grid && grid.isInViewMode) return;
         //TODO start edit by checking row allowEdit property
         if (widgetRec && grid) {
-            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, widgetRec);
+            var titleConfig = isView ? grid.viewWndTitleConfig : grid.editWndTitleConfig;
+            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, titleConfig, widgetRec);
 
             //var modelField = gridStore.getModel().getFields();
             //if (modelField) {
@@ -91,7 +92,80 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 //form.setValues(widgetRec.data);
                 form.loadRecord(widgetRec);
             }
+            if (form && isView) {
+                controller.openInViewMode(formView,controller);
+            }
         }
+    },
+    openInViewMode:function(formView,controller) {
+        var form = undefined, formPanel = undefined;
+        if (formView && formView.isWindow) {
+            formPanel = formView.down('form'),
+                form = formPanel.getForm();
+        } else if (formView) {
+            form = formView.getForm();
+            formPanel = formView;
+        }
+        if (!form) return;
+        var record = form.getRecord();
+        var fields = form.getFields().items;
+        Ext.each(fields, function(field) {
+            if (field.xtype !== "hiddenfield" && !field.isFilterField) {
+                field.setDisabled(true);
+                if (typeof (field.setEmptyText) === "function") {
+                    field.originalEmptyText = field.getEmptyText();
+                    field.setEmptyText('--');
+                }
+            }
+        });
+
+        //disabled child grids functionality
+        if (formPanel) {
+            var childGrids = formPanel.query('gridpanel');
+            if (childGrids&&childGrids.length>0) {
+                Ext.each(childGrids, function(grid) {
+                    grid.isInViewMode = true;
+                    var dockedItems = grid.getDockedItems();
+                    if (dockedItems&&dockedItems.length>0) {
+                        Ext.each(dockedItems, function(toolbar) {
+                            if (toolbar.isActionToolBar)toolbar.hide();
+                        });
+                    }
+                });
+            }
+            if (formPanel.isTransactionForm) {
+                var defaultActionGroup = formPanel.defaultActionGroup;
+                if (defaultActionGroup) {
+                    var actionButtons = defaultActionGroup.query('button');
+                    Ext.each(actionButtons, function(button) {
+                        if (button.name !== 'Cancel' && button.name !== "Edit"&&typeof(button.hide)==="function") {
+                            button.hide();
+                        }
+                        if (button.name === "Edit" && controller.validateEditRecordInViewMode(record)) button.show();
+                    });
+                }
+            }else if (formPanel.hideDefaultButtons) {
+                var viewController = formPanel.getController();
+                if (viewController)viewController.doModuleSpecificViewMode(formPanel);
+            }
+            else {
+                var defaultActionToolBar = formPanel.defaultActionToolBar;
+                if (defaultActionToolBar) {
+                    var defaultActionButtons = defaultActionToolBar.query('button');
+                    if (defaultActionButtons && defaultActionButtons.length > 0) {
+                        Ext.each(defaultActionButtons, function(button) {
+                            if (button.name !== 'Cancel' && button.name !== "Edit" && typeof (button.hide) === "function") {
+                                button.hide();
+                            }
+                            if (button.name === "Edit" && controller.validateEditRecordInViewMode(record)) button.show();
+                        });
+                    }
+                }
+            }
+        }
+    },
+    validateEditRecordInViewMode:function(record) {
+        return true;
     },
     deleteActionClicked: function (menu, item, e, eOpts) {
         //do delete based on operation of grid store
@@ -101,7 +175,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             grid = widgetCol.up('grid'),
             controller = grid.getController,
             gridStore = grid.getStore();
-
+        if (grid && grid.isInViewMode)return;
         //Delete record
         if (widgetRec && grid) {
             var modelField = gridStore.getModel().getFields();
@@ -246,6 +320,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     },
     //editing plugin listeners
     onBeforeGridEdit: function (editor, context, eOpts) {
+        //return false if isInViewMode
+        if (context && context.grid && context.grid.isInViewMode) {
+            return false;
+        }
         ///TODO cancel edit if restricted
         //cancel edit if is actioncolumn editing
         var record = context.record;
@@ -259,6 +337,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             className = model.$className,
             idPropertyField = gridStore.idPropertyField,
             editingPlugin = view.getPlugin('editingPlugin');
+
+        //do nothing if grid is opened in view mode.
+        if (view.isInViewMode) return;
 
         var modelInstance;
         if (view && view.createNewMode) {

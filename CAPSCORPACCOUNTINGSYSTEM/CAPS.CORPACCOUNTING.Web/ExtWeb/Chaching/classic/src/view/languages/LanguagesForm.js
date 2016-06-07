@@ -6,7 +6,13 @@ Ext.define('Chaching.view.languages.LanguagesForm', {
         'Chaching.view.languages.LanguagesFormController'
     ],
     controller: 'languages-languagesform',
-    name: 'Languages',
+    name: 'Administration.Languages',
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Administration.Languages'),
+        create: abp.auth.isGranted('Pages.Administration.Languages.Create'),
+        edit: abp.auth.isGranted('Pages.Administration.Languages.Edit'),
+        destroy: abp.auth.isGranted('Pages.Administration.Languages.Delete')
+    },
     openInPopupWindow: true,
     hideDefaultButtons: false,
     layout: 'vbox',

@@ -114,19 +114,27 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                             { name: app.localize('Recurring'), value: 4 }
                         ]
                     }
-                }, {////TODO: Replace with combo once batch is ready
-                    xtype: 'textfield',
-                    name: 'batchId',
-                    itemId: 'batchId',
-                    fieldLabel: app.localize('Batch'),
-                    emptyText: app.localize('SelectOption')
                 }, {
-                    xtype: 'checkbox',
-                    name: 'is13Period',
-                    itemId: 'is13Period',
-                    boxLabel: app.localize('Is13Period'),
-                    boxLabelCls: 'checkboxLabel',
-                    ui: 'default'
+                    xtype: 'fieldcontainer',
+                    layout: 'hbox',
+                    border: false,
+                    items: [{////TODO: Replace with combo once batch is ready
+                        xtype: 'textfield',
+                        name: 'batchId',
+                        itemId: 'batchId',
+                        ui: 'fieldLabelTop',
+                        width:220,
+                        fieldLabel: app.localize('Batch'),
+                        emptyText: app.localize('SelectOption')
+                    }, {
+                        xtype: 'checkbox',
+                        name: 'is13Period',
+                        itemId: 'is13Period',
+                        boxLabel: app.localize('Is13Period'),
+                        boxLabelCls: 'checkboxLabel',
+                        //width: '50%',
+                        ui: 'default'
+                    }]
                 }]
             }]
         }, {

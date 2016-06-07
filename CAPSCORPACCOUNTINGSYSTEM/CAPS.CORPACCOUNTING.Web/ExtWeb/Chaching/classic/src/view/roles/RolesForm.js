@@ -10,7 +10,7 @@ Ext.define('Chaching.view.roles.RolesForm',{
     controller: 'roles-rolesform',
   
 
-    name: 'Roles',
+    name: 'Administration.Roles',
     openInPopupWindow: true,
     hideDefaultButtons: false,
     layout: 'vbox',

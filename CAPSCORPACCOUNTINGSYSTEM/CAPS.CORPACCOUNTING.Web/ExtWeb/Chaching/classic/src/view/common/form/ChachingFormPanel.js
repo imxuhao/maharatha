@@ -188,23 +188,51 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
             ];
             me.dockedItems = dockedItems;
         }
+
+        if (!me.modulePermissions) {
+            me.modulePermissions = {
+                read: abp.auth.isGranted('Pages.' + me.name),
+                create: abp.auth.isGranted('Pages.' + me.name + '.Create'),
+                edit: abp.auth.isGranted('Pages.' + me.name + '.Edit'),
+                destroy: abp.auth.isGranted('Pages.' + me.name + '.Delete')
+            };
+        }
         if (!me.hideDefaultButtons) {
             buttons.push('->');
-            var saveButton= {
-                xtype: 'button',
-                scale: 'small',
-                iconCls: 'fa fa-save',
-                iconAlign: 'left',
-                text: app.localize('Save').toUpperCase(),
-                ui: 'actionButton',
-                name: 'Save',
-                itemId: 'BtnSave',
-                reference:'BtnSave',
-                listeners: {
-                    click:'onSaveClicked'
+            if (me.modulePermissions.create || me.modulePermissions.edit) {
+                var saveButton = {
+                    xtype: 'button',
+                    scale: 'small',
+                    iconCls: 'fa fa-save',
+                    iconAlign: 'left',
+                    text: app.localize('Save').toUpperCase(),
+                    ui: 'actionButton',
+                    name: 'Save',
+                    itemId: 'BtnSave',
+                    reference: 'BtnSave',
+                    listeners: {
+                        click: 'onSaveClicked'
+                    }
                 }
+                buttons.push(saveButton);
+
+                //edit
+                buttons.push({
+                    xtype: 'button',
+                    scale: 'small',
+                    iconCls: 'fa fa-edit',
+                    iconAlign: 'left',
+                    text: app.localize('Edit').toUpperCase(),
+                    ui: 'actionButton',
+                    name: 'Edit',
+                    itemId: 'BtnEdit',
+                    reference: 'BtnEdit',
+                    hidden: true,
+                    listeners: {
+                        click: 'onEditButtonClicked'
+                    }
+                });
             }
-            buttons.push(saveButton);
 
             var cancelButton= {
                 xtype: 'button',
@@ -230,6 +258,15 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
             me.defaultButton = 'BtnSave';
         }
         me.callParent(arguments);
+        var formDockedItems = me.getDockedItems();
+        if (formDockedItems&&formDockedItems.length>0) {
+            var actionToolBar=undefined;
+            for (var i = 0; i < formDockedItems.length;i++) {
+                if (formDockedItems[i].dock === 'bottom')actionToolBar = formDockedItems[i];
+            }
+            me.defaultActionToolBar = actionToolBar;
+        }
+        
     },
     findField: function (id) {
         return this.getFields().findBy(function (f) {

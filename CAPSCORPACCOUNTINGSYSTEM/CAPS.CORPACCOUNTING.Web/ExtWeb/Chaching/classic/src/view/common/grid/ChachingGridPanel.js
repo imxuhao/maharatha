@@ -146,6 +146,15 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     */
     createWndTitleConfig: null,
     /**
+   * @cfg {object} viewWndTitleConfig
+   * when record is opnened in view mode title and iconCls for tab/window
+   * ##Usage { 
+   * title:'View'
+   * iconCls:'fa fa-edit-o'
+   * }
+   */
+    viewWndTitleConfig:null,
+    /**
     * @cfg {object} modulePermissions
     * Override this config in child grid if has additional permissions
     */
@@ -158,7 +167,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
    * @cfg {boolean} requireSummary
    * Set to true if summary row is required at bottom
    */
-    requireSummary:false,
+    requireSummary: false,
+    /**
+  * @cfg {boolean} isInViewMode
+  * Set to true if need in view mode.
+  */
+    isInViewMode:false,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -171,7 +185,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         if (typeof(gridStore)==="string") {
             me.store = Ext.create('Chaching.store.'+gridStore);
         }
-       
+
         if (!me.modulePermissions) {
             me.modulePermissions = {
                 read: abp.auth.isGranted('Pages.' + me.name),
@@ -233,6 +247,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 xtype: 'toolbar',
                 ui: 'plain',
                 dock: 'top',
+                isActionToolBar:true,
                 layout: {
                     type: 'hbox',
                     pack: 'left'
@@ -480,12 +495,18 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                             items: menuItems
                         }),
                         listeners: {
-                            menushow: function (btn) {
+                            menushow: function (btn,menu) {
                                 btn.menu.widgetRecord = btn.widgetRec;
                                 btn.menu.widgetColumn = btn.widgetCol;
                             }
                         }
                     });
+                    if (button.widgetCol) {
+                        var grid = button.widgetCol.up('gridpanel');
+                        if (grid) {
+                            button.on('click', grid.doRowSpecificEditDelete, button, grid);
+                        }
+                    }
                     if (Ext.get(id)) {
                         button.render(Ext.get(id));
                     }
@@ -496,6 +517,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         }
 
         return actionCol;
+    },
+    doRowSpecificEditDelete:function(button,grid) {
     },
     applySettings: function (definedColumns, usersDefaultSetting, outValue) {
         var me = this,
@@ -543,6 +566,19 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         var me = this, controller = me.getController();
         var defaultMenuItems = [];
         //check for permission from abp
+        if (me.modulePermissions.read && (me.createNewMode === "popup" || me.createNewMode === "tab")) {
+            var viewMenuItem = {
+                text: app.localize('View'),
+                iconCls: 'fa fa-th',
+                eventListenerName: 'editActionClicked',
+                listeners: {
+                    click: function (menu, item, e, eOpts) {
+                        return controller.editActionClicked(menu, item, e, eOpts, true);
+                    }
+                }
+            };
+            defaultMenuItems.push(viewMenuItem);
+        }
         if (me.modulePermissions.edit) {
             //full editing is required only when create mode is popup/tab
             if (me.createNewMode === "popup" || me.createNewMode === "tab") {
@@ -552,7 +588,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     eventListenerName: 'editActionClicked',
                     listeners: {
                         click: function(menu, item, e, eOpts) {
-                            return controller.editActionClicked(menu, item, e, eOpts);
+                            return controller.editActionClicked(menu, item, e, eOpts,false);
                         }
                     }
                 };

@@ -10,7 +10,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
     //viewModel: {
     //    type: 'financials-accounts-chartofaccountsform'
     //},
-    name: 'coa',
+    name: 'Financials.Accounts.ChartOfAccounts',
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: 'column',

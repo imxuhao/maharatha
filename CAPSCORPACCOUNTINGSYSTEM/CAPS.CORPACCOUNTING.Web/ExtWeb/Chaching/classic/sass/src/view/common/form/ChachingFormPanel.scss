@@ -16,9 +16,16 @@ $ui-font-weight:600
 }
 .x-form-text-fieldLabelTop{
     background-color:transparent !important;
+    padding:12px 5px 0px !important;
 }
 .x-form-invalid-field-fieldLabelTop{
     background-color:transparent !important;
+}
+.x-form-item-label-fieldLabelTop{
+    padding-top:15px !important;
+}
+.x-form-empty-field-fieldLabelTop{
+    font-style:italic;
 }
 .x-form-trigger-wrap-fieldLabelTop{
     border-top-color:transparent !important;

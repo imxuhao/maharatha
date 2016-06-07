@@ -58,6 +58,10 @@ Ext.define('Chaching.view.banking.BankSetupGrid', {
         title: app.localize('CreateBank').initCap(),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewBank'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     //listeners: {

@@ -46,6 +46,10 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
         title: app.localize('CreateNewDivision'),
         iconCls: 'fa fa-plus'
     },
+    viewWndTitleConfig: {
+        title: app.localize('ViewDivision'),
+        iconCls: 'fa fa-th'
+    },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     columns: [

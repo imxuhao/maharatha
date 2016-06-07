@@ -135,7 +135,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual long AccountId { get; set; }
 
         [ForeignKey("AccountId")]
-       
         public virtual AccountUnit Account { get; set; }
 
         /// <summary>Gets or sets the JobID field. </summary>

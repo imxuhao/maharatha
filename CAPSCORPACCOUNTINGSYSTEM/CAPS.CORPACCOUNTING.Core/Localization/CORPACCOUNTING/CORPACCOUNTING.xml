@@ -872,5 +872,8 @@
   <text name="ViewBatch" value="View Batch" />
 <text name="ViewBank" value="View Bank" />
   <text name="ViewLanguage" value="View Language" />
+    <text name="DetailGridValidationFailMessage" value="Please enter valid data in distribution lines." />
+    <text name="DetailGridValidationLineCountMessage" value="In order to save this transaction there should be minimum one distribution detail line." />
+    <text name="DetailGridValidation" value="Invalid Distribution Data" />
   </texts>
 </localizationDictionary>

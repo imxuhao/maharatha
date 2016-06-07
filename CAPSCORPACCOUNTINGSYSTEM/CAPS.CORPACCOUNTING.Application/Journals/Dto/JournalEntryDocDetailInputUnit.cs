@@ -4,7 +4,7 @@ using CAPS.CORPACCOUNTING.Accounting.Dto;
 namespace CAPS.CORPACCOUNTING.Journals.dto
 {
     [AutoMapTo(typeof(JournalEntryDocumentDetailUnit))]
-    public class UpdateJournalEntryDocDetailInputUnit :  UpdateAccountingItemInputUnit
+    public class JournalEntryDocDetailInputUnit :  AccountingItemInputUnit
     {
         /// <summary>Gets or sets the VendorId field. </summary>   
         public int? VendorId { get; set; }

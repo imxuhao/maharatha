@@ -6,7 +6,7 @@ namespace CAPS.CORPACCOUNTING.Journals.Dto
 {
    public class JournalEntryDocDetailInputList : IInputDto
     {
-        public List<UpdateJournalEntryDocDetailInputUnit> UpdateJournalEntryDocDetailList { get; set; }
+        public List<JournalEntryDocDetailInputUnit> JournalEntryDocDetailList { get; set; }
     }
 }
 

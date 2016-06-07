@@ -18,14 +18,14 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<IdOutputDto<long>> CreateJournalEntryDocumentUnit(CreateJournalEntryDocumentInputUnit input);
+        Task<IdOutputDto<long>> CreateJournalEntryDocumentUnit(JournalEntryDocumentInputUnit input);
 
         /// <summary>
         /// Update Journal Entry Document.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task UpdateJournalEntryDocumentUnit(UpdateJournalEntryDocumentInputUnit input);
+        Task UpdateJournalEntryDocumentUnit(JournalEntryDocumentInputUnit input);
 
         /// <summary>
         /// Delete Journal Entry Document.

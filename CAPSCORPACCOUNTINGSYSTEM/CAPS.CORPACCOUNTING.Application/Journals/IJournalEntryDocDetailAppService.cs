@@ -21,7 +21,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task JournalEntryDocumentTransactionUnit(JournalEntryDocDetailInputList input);
+        Task JournalEntryDocumentTransactionUnit(List<JournalEntryDocDetailInputUnit> input);
 
         /// <summary>
         /// Delete Journal Entry Document.

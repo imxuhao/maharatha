@@ -1,11 +1,13 @@
 ﻿using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.Journals.dto;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
 
-    public class UpdateJournalEntryDocumentInputUnit : UpdateAccountingHeaderTransactionInputUnit
+    public class JournalEntryDocumentInputUnit : AccountingHeaderTransactionInputUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual int? BatchId { get; set; }
@@ -37,6 +39,8 @@ namespace CAPS.CORPACCOUNTING.Journals
         //Gets or sets JournalTypeId field.
         [EnumDataType(typeof(JournalType))]
         public JournalType JournalTypeId { get; set; }
+
+        public List<JournalEntryDocDetailInputUnit> JournalEntryDocDetailList { get; set; }
     }
 }
 

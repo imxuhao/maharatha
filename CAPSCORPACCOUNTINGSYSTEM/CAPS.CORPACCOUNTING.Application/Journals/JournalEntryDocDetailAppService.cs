@@ -68,12 +68,10 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public async Task JournalEntryDocumentTransactionUnit(JournalEntryDocDetailInputList input)
+        public async Task JournalEntryDocumentTransactionUnit(List<JournalEntryDocDetailInputUnit> input)
         {
-            await ValidateJournalDetails(input.UpdateJournalEntryDocDetailList);
-
             //adding journalDocDetails
-            foreach (var journaldocDetails in input.UpdateJournalEntryDocDetailList)
+            foreach (var journaldocDetails in input)
             {
                 if (Math.Sign(journaldocDetails.AccountingItemId) == 0)
                 {
@@ -235,7 +233,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <param name="journalEntryDocDetail"></param>
         /// <param name="isJournalAdd"></param>
         /// <returns></returns>
-        private async Task<List<JournalEntryDocumentDetailUnit>> MapJournalDetails(UpdateJournalEntryDocDetailInputUnit journalEntryDocDetail, bool isJournalAdd = true)
+        private async Task<List<JournalEntryDocumentDetailUnit>> MapJournalDetails(JournalEntryDocDetailInputUnit journalEntryDocDetail, bool isJournalAdd = true)
         {
             List<JournalEntryDocumentDetailUnit> journalEntryDetailUnitList = new List<JournalEntryDocumentDetailUnit>();
             JournalEntryDocumentDetailUnit debitJournalEntryDetailUnit = null;
@@ -360,7 +358,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             return journalEntryDetailUnitList;
         }
 
-        private JournalEntryDocumentDetailUnit CreditJournalDetailMapping(UpdateJournalEntryDocDetailInputUnit journalEntryDocDetail, JournalEntryDocumentDetailUnit creditjournalEntryDetailUnit)
+        private JournalEntryDocumentDetailUnit CreditJournalDetailMapping(JournalEntryDocDetailInputUnit journalEntryDocDetail, JournalEntryDocumentDetailUnit creditjournalEntryDetailUnit)
         {
             creditjournalEntryDetailUnit.JobId = journalEntryDocDetail.CreditJobId;
             creditjournalEntryDetailUnit.AccountId = journalEntryDocDetail.CreditAccountId;
@@ -483,7 +481,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             return journaList;
         }
 
-        private async Task ValidateJournalDetails(List<UpdateJournalEntryDocDetailInputUnit> journalEntryDocDetailList)
+        public async Task ValidateJournalDetails(List<JournalEntryDocDetailInputUnit> journalEntryDocDetailList)
         {
             foreach (var journaldocDetails in journalEntryDocDetailList)
             {
@@ -608,7 +606,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                 }
             }
         }
-        private bool ValidateJobAndAccount(UpdateJournalEntryDocDetailInputUnit journalDetailUnit, bool isDebit = true)
+        private bool ValidateJobAndAccount(JournalEntryDocDetailInputUnit journalDetailUnit, bool isDebit = true)
         {
             bool validateJobandAccount = false;
             if (isDebit)

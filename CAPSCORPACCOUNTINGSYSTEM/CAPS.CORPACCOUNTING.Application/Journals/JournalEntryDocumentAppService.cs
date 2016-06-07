@@ -18,6 +18,7 @@ using Abp.Auditing;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Dependency;
 using CAPS.CORPACCOUNTING.Authorization;
+using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -32,7 +33,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         private IdOutputDto<long> _response = null;
         private readonly CustomAppSession _CustomAppSession;
         private readonly IRepository<User, long> _userUnitRepository;
-
+        private readonly JournalEntryDocDetailAppService _journalEntryDocDetailAppService;
 
         /// <summary>
         /// 
@@ -46,7 +47,8 @@ namespace CAPS.CORPACCOUNTING.Journals
             IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BatchUnit> batchUnitRepository,
             CustomAppSession CustomAppSession,
-            IRepository<User, long> userUnitRepository
+            IRepository<User, long> userUnitRepository,
+            JournalEntryDocDetailAppService journalEntryDocDetailAppService
             )
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
@@ -56,6 +58,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             _batchUnitRepository = batchUnitRepository;
             _CustomAppSession = CustomAppSession;
             _userUnitRepository = userUnitRepository;
+            _journalEntryDocDetailAppService = journalEntryDocDetailAppService;
         }
 
         /// <summary>
@@ -64,11 +67,20 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry_Create)]
-        public async Task<IdOutputDto<long>> CreateJournalEntryDocumentUnit(CreateJournalEntryDocumentInputUnit input)
+        [UnitOfWork]
+        public async Task<IdOutputDto<long>> CreateJournalEntryDocumentUnit(JournalEntryDocumentInputUnit input)
         {
-            var journalEntryDocumentUnit = input.MapTo<JournalEntryDocumentUnit>();
+
+            await _journalEntryDocDetailAppService.ValidateJournalDetails(input.JournalEntryDocDetailList);
+
+            var journalEntryDocumentUnit = new JournalEntryDocumentUnit();
+            Mapper.CreateMap<JournalEntryDocumentInputUnit, JournalEntryDocumentUnit>();
+            Mapper.Map(input, journalEntryDocumentUnit);
             _response = new IdOutputDto<long>();
             _response.Id = await _journalEntryDocumentUnitManager.CreateAsync(journalEntryDocumentUnit);
+
+            input.JournalEntryDocDetailList.ForEach(u => u.AccountingDocumentId = _response.Id);
+            await _journalEntryDocDetailAppService.JournalEntryDocumentTransactionUnit(input.JournalEntryDocDetailList);
             await CurrentUnitOfWork.SaveChangesAsync();
             return _response;
         }
@@ -80,8 +92,10 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry_Edit)]
-        public async Task UpdateJournalEntryDocumentUnit(UpdateJournalEntryDocumentInputUnit input)
+        public async Task UpdateJournalEntryDocumentUnit(JournalEntryDocumentInputUnit input)
         {
+            await _journalEntryDocDetailAppService.ValidateJournalDetails(input.JournalEntryDocDetailList);
+
             var journalEntryDocumentUnit = await _journalEntryDocumentUnitRepository.GetAsync(input.AccountingDocumentId);
 
             #region Setting the values to be updated
@@ -138,6 +152,8 @@ namespace CAPS.CORPACCOUNTING.Journals
             #endregion
 
             await _journalEntryDocumentUnitManager.UpdateAsync(journalEntryDocumentUnit);
+
+            await _journalEntryDocDetailAppService.JournalEntryDocumentTransactionUnit(input.JournalEntryDocDetailList);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
 

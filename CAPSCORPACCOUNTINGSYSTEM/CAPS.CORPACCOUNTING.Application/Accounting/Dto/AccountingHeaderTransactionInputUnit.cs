@@ -7,10 +7,14 @@ using System.ComponentModel.DataAnnotations;
 namespace CAPS.CORPACCOUNTING.Accounting
 {
     /// <summary>
-    /// creates CreateAccountingHeaderTransactionputUnit
+    /// Updates UpdateAccountingHeaderTransactionInputUnit
     /// </summary>
-    public class CreateAccountingHeaderTransactionInputUnit :IInputDto
+    public class AccountingHeaderTransactionInputUnit : IInputDto
     {
+
+        /// <summary>Gets or sets the AHTID field.</summary>
+        public int AccountingDocumentId { get; set; }
+
         /// <summary>Get Sets the Description Date </summary>
         [Required]
         public virtual string Description { get; set; }
@@ -47,7 +51,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Get Sets the DatePosted field.</summary>
 
-       
         public virtual DateTime? DatePosted { get; set; }
 
         //[Column(TypeName = "smalldatetime")]
@@ -60,8 +63,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual decimal? ControlTotal { get; set; }
 
         /// <summary>Get Sets the DocumentReference field.</summary>
-        [StringLength(AccountingHeaderTransactionsUnit.MaxLength)]
         [Required]
+        [StringLength(AccountingHeaderTransactionsUnit.MaxLength)]
         public virtual string DocumentReference { get; set; }
 
         /// <summary>Get Sets the VoucherReference field.</summary>
@@ -81,17 +84,17 @@ namespace CAPS.CORPACCOUNTING.Accounting
         ////public virtual bool IsNewActivityPrinted { get; set; }
 
         /// <summary>Get Sets the IsPosted field.</summary>
-        public  bool IsPosted { get; set; }
+        public bool IsPosted { get; set; }
 
         /// <summary>Get Sets the IsAutoPosted field.</summary>
         public virtual bool IsAutoPosted { get; set; }
 
         /// <summary>Get Sets the IsChanged field.</summary>
-        public virtual bool IsChanged { get; set; }      
+        public virtual bool IsChanged { get; set; }
 
         /// <summary>Get Sets the PostedByUserId field.</summary>
         public virtual int? PostedByUserId { get; set; }
-      
+
 
         // <summary>Get Sets the BankRecControlId field.</summary>
         public virtual int? BankRecControlId { get; set; }

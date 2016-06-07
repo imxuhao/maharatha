@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Payables.Dto
 {
-    public class UpdateAPHeaderTransactionsInputUnit:UpdateAccountingHeaderTransactionInputUnit
+    public class UpdateAPHeaderTransactionsInputUnit:AccountingHeaderTransactionInputUnit
     {
         ///<summary>Get Sets the BatchId dfield.</summary>
         public virtual int? BatchId { get; set; }

@@ -132,12 +132,10 @@
   <ItemGroup>
     <Compile Include="Accounting\Dto\AccountingItemUnitDto.cs" />
     <Compile Include="Accounting\Dto\AccountingHeaderTransactionUnitDto.cs" />
-    <Compile Include="Accounting\Dto\CreateAccountingHeaderTransactionInputUnit.cs" />
-    <Compile Include="Accounting\Dto\UpdateAccountingItemInputUnit.cs" />
-    <Compile Include="Accounting\Dto\CreateAccountingItemInputUnit.cs" />
+    <Compile Include="Accounting\Dto\AccountingItemInputUnit.cs" />
     <Compile Include="Accounting\Dto\CreateSubAccountUnitInput.cs" />
     <Compile Include="Accounting\Dto\SubAccountUnitDto.cs" />
-    <Compile Include="Accounting\Dto\UpdateAccountingHeaderTransactionInputUnit.cs" />
+    <Compile Include="Accounting\Dto\AccountingHeaderTransactionInputUnit.cs" />
     <Compile Include="Accounting\Dto\UpdateSubAccountUnitInput.cs" />
     <Compile Include="Accounting\IListAppService.cs" />
     <Compile Include="Accounting\ISubAccountUnitAppService.cs" />
@@ -307,19 +305,15 @@
     <Compile Include="JobCosting\JobCommercialAppService.cs" />
     <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\JobUnitAppService.cs" />
-    <Compile Include="Journals\Dto\CreateJournalEntryDocDetailInputList.cs" />
-    <Compile Include="Journals\Dto\GetTransactionList.cs" />
+    <Compile Include="Accounting\Dto\GetTransactionList.cs" />
     <Compile Include="Journals\Dto\JournalEntryDocDetailUnitDto.cs" />
-    <Compile Include="Journals\Dto\JournalEntryDocDetailInputList.cs" />
-    <Compile Include="Journals\Dto\UpdateJournalEntryDocDetailInputUnit.cs" />
-    <Compile Include="Journals\Dto\CreateJournalEntryDocDetailInputUnit.cs" />
-    <Compile Include="Journals\Dto\CreateJournalEntryDocumentInputUnit.cs" />
+    <Compile Include="Journals\Dto\JournalEntryDocDetailInputUnit.cs" />
     <Compile Include="Journals\IJournalEntryDocDetailAppService.cs" />
     <Compile Include="Journals\IJournalEntryDocumentAppService.cs" />
     <Compile Include="Journals\JournalEntryDocDetailAppService.cs" />
     <Compile Include="Journals\JournalEntryDocumentAppService.cs" />
     <Compile Include="Journals\Dto\JournalEntryDocumentUnitDto.cs" />
-    <Compile Include="Journals\Dto\UpdateJournalEntryDocumentInputUnit.cs" />
+    <Compile Include="Journals\Dto\JournalEntryDocumentInputUnit.cs" />
     <Compile Include="Localization\Dto\CreateOrUpdateLanguageInput.cs" />
     <Compile Include="Localization\Dto\ApplicationLanguageEditDto.cs" />
     <Compile Include="Localization\Dto\ApplicationLanguageListDto.cs" />

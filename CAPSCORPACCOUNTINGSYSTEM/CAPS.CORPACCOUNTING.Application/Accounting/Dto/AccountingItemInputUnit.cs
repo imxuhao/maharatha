@@ -8,7 +8,7 @@ using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Accounting.Dto
 {
-    public class UpdateAccountingItemInputUnit : IInputDto
+    public class AccountingItemInputUnit : IInputDto
     {
         /// <summary>Gets or sets the AccountingItemId field. </summary>
        // [Range(1,Int64.MaxValue)]

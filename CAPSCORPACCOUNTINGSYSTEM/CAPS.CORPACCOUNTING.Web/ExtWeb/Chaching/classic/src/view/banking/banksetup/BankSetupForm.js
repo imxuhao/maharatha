@@ -69,7 +69,7 @@
                        // labelWidth: 70,
                         width: '100%',
                         ui: 'fieldLabelTop',
-                        displayField: 'accountType',
+                        displayField: 'typeOfBankAccount',
                         valueField: 'typeOfBankAccountId',
                         emptyText: app.localize('SelectOption'),
                         store: 'utilities.AccountTypeListStore'
@@ -104,25 +104,80 @@
                         width: '100%',
                         ui: 'fieldLabelTop'
                     }, {
-                        xtype: 'combobox',
+                        //xtype: 'combobox',
+                        //name: 'accountId',
+                        //fieldLabel: app.localize('LedgerAccount').initCap(),
+                        //width: '100%',
+                        //ui: 'fieldLabelTop',
+                        //displayField: 'name',
+                        //valueField: 'accountId',
+                        //emptyText: app.localize('SelectOption')//,
+                        ////store: 'vendorTypeList'
+
+                        xtype: 'autofillcombo',
+                        width: '100%',
+                        ui: 'fieldLabelTop',
                         name: 'accountId',
-                        fieldLabel: app.localize('LedgerAccount').initCap(),
-                        width: '100%',
-                        ui: 'fieldLabelTop',
-                        displayField: 'name',
+                        fieldLabel: app.localize('LedgerAccount'),
+                        store: 'utilities.autofill.ChartOfAccountListStore',
                         valueField: 'accountId',
-                        emptyText: app.localize('SelectOption')//,
-                        //store: 'vendorTypeList'
+                        autoSelect: false,
+                        displayField: 'description',
+                        entityGridController: 'financials-accounts-chartofaccountsgrid',
+                        typeAhead: false,
+                        emptyText: 'Type to search',
+                        editable: true,
+                        entityName: 'Chart of Account',
+                        entityType: 'financials.accounts.coa',
+                        entityPermission: 'Financials.Accounts.ChartOfAccounts',
+                        // We're forcing the query to run every time by setting minChars to 0
+                        // (default is 4)
+                        minChars: 2,
+                        queryParam: 'query',
+                        queryMode: 'remote',
+                        listConfig: {
+                            minWidth: 300
+                        }
+
+
+
                     }, {
-                        xtype: 'combobox',
+
+                        //xtype: 'combobox',
+                        //name: 'jobId',
+                        //fieldLabel: app.localize('Divisions').initCap(),
+                        //width: '100%',
+                        //ui: 'fieldLabelTop',
+                        //displayField: 'name',
+                        //valueField: 'jobId',
+                        //emptyText: app.localize('SelectOption')//,
+                        //// store: 'vendorTypeList'
+
+                        xtype: 'autofillcombo',
                         name: 'jobId',
-                        fieldLabel: app.localize('Divisions').initCap(),
                         width: '100%',
                         ui: 'fieldLabelTop',
-                        displayField: 'name',
+                        fieldLabel: app.localize('Divisions'),
+                        store: 'utilities.autofill.JobDivisionStore',
                         valueField: 'jobId',
-                        emptyText: app.localize('SelectOption')//,
-                       // store: 'vendorTypeList'
+                        autoSelect: false,
+                        displayField: 'jobNumber',
+                        entityGridController: 'financials-accounts-divisionsgrid',
+                        typeAhead: false,
+                        emptyText: 'Type to search',
+                        editable: true,
+                        entityName: 'Division',
+                        entityType: 'financials.accounts.divisions',
+                        entityPermission: 'Financials.Accounts.Divisions',
+                        // We're forcing the query to run every time by setting minChars to 0
+                        // (default is 4)
+                        minChars: 2,
+                        queryParam: 'query',
+                        queryMode: 'remote',
+                        listConfig: {
+                            minWidth: 300
+                        }
+
                     }]
                 },
                             {

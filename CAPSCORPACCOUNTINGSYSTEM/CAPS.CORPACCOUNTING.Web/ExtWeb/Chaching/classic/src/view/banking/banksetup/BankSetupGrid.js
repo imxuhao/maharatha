@@ -106,12 +106,25 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
              groupable: true,
              width: '15%',
              filterField: {
-                 xtype: 'textfield',
+                 xtype: 'combobox',
                  width: '100%',
-                 emptyText: app.localize('SelectOption')
+                 ui: 'fieldLabelTop',
+                 forceSelection: true,
+                 searchProperty: 'typeOfBankAccountId',
+                 isEnum: true,
+                 displayField: 'typeOfBankAccount',
+                 valueField: 'typeOfBankAccountId',
+                 emptyText: app.localize('SelectOption'),
+                 store: 'utilities.AccountTypeListStore'
+
              }, editor: {
-                 xtype: 'textfield',
-                 allowBlank: false
+                 xtype: 'combobox',
+                 width: '100%',
+                 ui: 'fieldLabelTop',
+                 displayField: 'typeOfBankAccount',
+                 valueField: 'typeOfBankAccountId',
+                 emptyText: app.localize('SelectOption'),
+                 store: 'utilities.AccountTypeListStore'
              }
          }, {
              xtype: 'gridcolumn',

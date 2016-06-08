@@ -5,8 +5,9 @@ Ext.define('Chaching.model.financials.accounts.ChartOfAccountsModel', {
     },
     fields: [
             { name: 'coaId', type: 'int', isPrimaryKey: true },
-            { name: 'caption', type: 'string' },
-            { name: 'description', type: 'string' },
+            { name: 'accountId', type: 'int', mapping: 'coaId'  },
+            { name: 'caption', type: 'string', headerText: 'Description', hidden: false, width : '8%' },
+            { name: 'description', type: 'string', headerText: 'Description', hidden: false, width: '8%' },
             { name: 'isApproved', type: 'boolean' },
             { name: 'isPrivate', type: 'boolean' },
             { name: 'isCorporate', type: 'boolean' },

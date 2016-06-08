@@ -65,6 +65,7 @@ Ext.define('Chaching.Application', {
         'utilities.JournalTypeListStore',
         'utilities.EmployeeListStore',
         'utilities.AccountTypeListStore',
+        'utilities.autofill.ChartOfAccountListStore',
         'utilities.autofill.CustomerListStore',
         'financials.journals.JournalDetailsStore',
         'batchposting.batches.BatchesStore',

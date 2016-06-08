@@ -1,7 +1,7 @@
 ﻿Ext.define('Chaching.store.utilities.AccountTypeListStore', {
     extend: 'Chaching.store.base.BaseStore',
     fields: [{ name: 'name' }, { name: 'value' }, {
-        name: 'accountType', convert: function (value, record) {
+        name: 'typeOfBankAccount', convert: function (value, record) {
             return record.get('name');
         }
     }, {

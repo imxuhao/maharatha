@@ -8,9 +8,10 @@
  * ViewController class for bank set up.
  * @alias controller.banking.banksetupgrid
  */
-Ext.define('Chaching.view.banking.BankSetupGridController', {
+Ext.define('Chaching.view.banking.banksetup.BankSetupGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.banking.banksetupgrid',
     doAfterCreateAction: function (createMode, formPanel, isEdit, record) {
+
     }
 });

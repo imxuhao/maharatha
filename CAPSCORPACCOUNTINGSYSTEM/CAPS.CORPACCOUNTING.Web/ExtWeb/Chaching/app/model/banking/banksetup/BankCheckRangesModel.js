@@ -1,4 +1,4 @@
-Ext.define('Chaching.model.banking.BankCheckRangesModel', {
+Ext.define('Chaching.model.banking.banksetup.BankCheckRangesModel', {
     extend: 'Chaching.model.base.BaseModel',
 
     fields: [

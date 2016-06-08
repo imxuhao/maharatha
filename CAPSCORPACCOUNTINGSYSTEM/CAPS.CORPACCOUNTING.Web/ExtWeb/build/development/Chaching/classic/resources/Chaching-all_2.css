@@ -12236,6 +12236,13 @@ body.x-ios.x-webview.x-portrait {
     font-size: 13px !important;
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:49 */
+.checkboxLabelLeftAlign {
+    font-weight: 600 !important;
+    display: inline-block !important;
+    margin-top: 8px !important;
+    font-size: 13px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:56 */
 .x-form-item-fieldLabelTop.x-item-disabled {
     opacity: 0.8 !important;
 }

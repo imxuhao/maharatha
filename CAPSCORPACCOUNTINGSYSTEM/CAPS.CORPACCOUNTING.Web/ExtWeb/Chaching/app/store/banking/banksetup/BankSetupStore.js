@@ -1,6 +1,6 @@
-﻿Ext.define('Chaching.store.banking.BankSetupStore', {
+﻿Ext.define('Chaching.store.banking.banksetup.BankSetupStore', {
     extend: 'Chaching.store.base.BaseStore',
-    model: 'Chaching.model.banking.BankSetupModel',
+    model: 'Chaching.model.banking.banksetup.BankSetupModel',
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

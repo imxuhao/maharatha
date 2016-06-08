@@ -832,46 +832,66 @@
     <text name="SplitRecord" value="Split selected record" />
     <text name="Batches" value="Batches" />
     <text name="PostivePay" value="Postive Pay" />
-   <text name="CreateBank" value="Create bank" />
-   <text name="EditBank" value="Edit bank" />
- <text name="BankName" value="Bank name" />
- <text name="ToolTipBankName" value="Enter bank name" />
- <text name="ToolTipAccountNumber" value="Enter account number" />
- <text name="AccountName" value="Account name" />
- <text name="ToolTipAccountName" value="Enter account name" />
-   <text name="AccountType" value="Account type" />
-   <text name="ClosedAccount" value="Closed" />
-  <text name="DirectDeposit" value="Direct depo." />
-<text name="ACHDestinationCode" value="ACH dest. code" />
+    <text name="CreateBank" value="Create bank" />
+    <text name="EditBank" value="Edit bank" />
+    <text name="SaveBank" value="Save bank" />
+    <text name="BankName" value="Bank name" />
+    <text name="ToolTipBankName" value="Enter bank name" />
+    <text name="ToolTipAccountNumber" value="Enter account number" />
+    <text name="AccountName" value="Account name" />
+    <text name="ToolTipAccountName" value="Enter account name" />
+    <text name="AccountType" value="Account type" />
+    <text name="ClosedAccount" value="Closed" />
+    <text name="DirectDeposit" value="Direct depo." />
+    <text name="ACHDestinationCode" value="ACH dest. code" />
+    <text name="ACHDestinationCodeLabel" value="ACH Destination Code" />
     <text name="ToolTipACHDestinationCode" value="Enter ACH destination code" />
-<text name="ACHDestinationName" value="ACH dest. name" />
+    <text name="ACHDestinationName" value="ACH dest. name" />
+    <text name="ACHDestinationNameLabel" value="ACH Destination Name" />
     <text name="ToolTipACHDestinationName" value="Enter ACH destination name" />
-<text name="ACHOriginCode" value="ACH origin code" />
+    <text name="ACHOriginCode" value="ACH origin code" />
+    <text name="ACHOriginCodeLabel" value="ACH Origin Code" />
     <text name="ToolTipACHOriginCode" value="ACH origin code" />
-<text name="ACHOriginName" value="ACH origin name" />
-  <text name="ToolTipACHOriginName" value="Enter ACH origin name" />
-  <text name="LedgerAccount" value="Ledger account" />
+    <text name="ACHOriginName" value="ACH origin name" />
+    <text name="ACHOriginNameLabel" value="ACH Origin Name" />
+    <text name="ToolTipACHOriginName" value="Enter ACH origin name" />
+    <text name="LedgerAccount" value="Ledger account" />
     <text name="PreClose" value="Pre-Close" />
     <text name="MonthYear" value="Month-Year" />
     <text name="ClosingReport" value="Closing Report" />
     <text name="FiscalYearPeriod" value="Fiscal Year/Period" />
-   <text name="ViewTenant" value="View Tenant" />
-   <text name="ViewUser" value="View User" />
- <text name="ViewRole" value="View Role" />
- <text name="ViewProject" value="View Project" />
- <text name="ViewProjectCOA" value="View Project COA" />
- <text name="ViewLine" value="View Line" />
- <text name="ViewVendor" value="View Vendor" />
-   <text name="ViewJournalEntry" value="View Journal" />
- <text name="ViewFiscalPeriod" value="View Period" />
- <text name="ViewAccount" value="View Account" />
- <text name="ViewCOA" value="View COA" />
- <text name="ViewDivision" value="View Division" />
- <text name="ViewSubAccount" value="View Sub Account" />
- <text name="ViewEdition" value="ViewEdition" />
-  <text name="ViewBatch" value="View Batch" />
-<text name="ViewBank" value="View Bank" />
-  <text name="ViewLanguage" value="View Language" />
+    <text name="ViewTenant" value="View Tenant" />
+    <text name="ViewUser" value="View User" />
+    <text name="ViewRole" value="View Role" />
+    <text name="ViewProject" value="View Project" />
+    <text name="ViewProjectCOA" value="View Project COA" />
+    <text name="ViewLine" value="View Line" />
+    <text name="ViewVendor" value="View Vendor" />
+    <text name="ViewJournalEntry" value="View Journal" />
+    <text name="ViewFiscalPeriod" value="View Period" />
+    <text name="ViewAccount" value="View Account" />
+    <text name="ViewCOA" value="View COA" />
+    <text name="ViewDivision" value="View Division" />
+    <text name="ViewSubAccount" value="View Sub Account" />
+    <text name="ViewEdition" value="ViewEdition" />
+    <text name="ViewBatch" value="View Batch" />
+    <text name="ViewBank" value="View Bank" />
+    <text name="ViewLanguage" value="View Language" />
+    <text name="ACHDirectDeposit" value="Direct Deposit" />
+    <text name="ACHDirectDepositTitle" value="ACH Direct Deposit" />
+    <text name="EnableACHDirectDeposit" value="Enable ACH Direct Deposit" />
+    <text name="CheckNumber" value="Bank Check Number" />
+    <text name="AddCheckNumber" value="Add Bank Check Number" />
+    <text name="StartingCheckNumber" value="Starting Check#" />
+    <text name="EndingCheckNumber" value="Ending Check#" />
+    <text name="RoutingNumber" value="Routing Number" />
+    <text name="PositivePayBankNumber" value="Positive Pay Bank#" />
+    <text name="CheckStock" value="Check Stock" />
+    <text name="LastCheckNumber" value="Last Check Number Used" />
+    <text name="UploadMethod" value="Upload Method" />
+    <text name="PositivePayFile" value="Positive Pay File" />
+    <text name="ClosedBankAccount" value="Closed Account" />
+    <text name="BankingInformation" value="Banking Information" />
     <text name="DetailGridValidationFailMessage" value="Please enter valid data in distribution lines." />
     <text name="DetailGridValidationLineCountMessage" value="In order to save this transaction there should be minimum one distribution detail line." />
     <text name="DetailGridValidation" value="Invalid Distribution Data" />

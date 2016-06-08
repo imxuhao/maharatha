@@ -8,11 +8,11 @@
  * UI design for preference.
  * @alias widget.financialsbanking.banksetup
  */
-Ext.define('Chaching.view.banking.BankSetupGrid', {
+Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.banking.BankSetupGridController'
+        'Chaching.view.banking.banksetup.BankSetupGridController'
     ],
     xtype: 'banking.banksetup',
     name: 'Banking.BankSetup',
@@ -25,7 +25,7 @@ Ext.define('Chaching.view.banking.BankSetupGrid', {
     },
     padding: 5,
     gridId: 21,
-    store: 'banking.BankSetupStore',
+    store: 'banking.banksetup.BankSetupStore',
     headerButtonsConfig: [
       {
           xtype: 'displayfield',
@@ -40,7 +40,7 @@ Ext.define('Chaching.view.banking.BankSetupGrid', {
           tooltip: app.localize('CreateBank'),
           checkPermission: true,
           iconCls: 'fa fa-plus',
-          routeName: 'banking.BankSetup.create',
+          routeName: 'banking.banksetup.create',
           iconAlign: 'left'
       }],
     requireExport: true,

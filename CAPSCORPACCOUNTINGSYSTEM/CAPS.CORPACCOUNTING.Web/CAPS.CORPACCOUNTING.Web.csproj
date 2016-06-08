@@ -1992,8 +1992,8 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\banking\BankCheckRangesModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\banking\BankSetupModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankCheckRangesModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankSetupModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionHeaderModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
@@ -2027,7 +2027,8 @@
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\CustomerModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
-    <Content Include="ExtWeb\Chaching\app\store\banking\BankSetupStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\TransactionDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\customers\CustomersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />
@@ -2107,6 +2108,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSpreadsheetModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupCheckNumberGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupCheckNumberGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingTransactionFormPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingTransactionFormPanelController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\common\form\ChachingTransactionFormPanelModel.js" />
@@ -2127,8 +2132,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalTransactionDetailGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\journals\JournalTransactionDetailGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\PreferencesTabPanel.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\banking\BankSetupGrid.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\banking\BankSetupGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGridController.js" />

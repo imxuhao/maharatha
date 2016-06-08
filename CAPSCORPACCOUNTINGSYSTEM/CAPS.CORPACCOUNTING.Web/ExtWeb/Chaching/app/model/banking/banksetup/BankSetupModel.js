@@ -1,4 +1,4 @@
-Ext.define('Chaching.model.banking.BankSetupModel', {
+Ext.define('Chaching.model.banking.banksetup.BankSetupModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: 'Banks'

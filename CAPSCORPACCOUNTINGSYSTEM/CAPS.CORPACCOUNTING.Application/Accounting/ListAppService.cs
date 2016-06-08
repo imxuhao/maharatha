@@ -10,6 +10,7 @@ using Abp.Linq.Extensions;
 using System.Collections.Generic;
 using Abp.Collections.Extensions;
 using Abp.Runtime.Caching;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
@@ -19,8 +20,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
 {
     public class ListAppService : CORPACCOUNTINGServiceBase, IListAppService
     {
-
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
         private readonly IRepository<JobUnit> _jobUnitRepository;
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
@@ -28,13 +27,12 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
         private readonly ICacheManager _cacheManager;
         private readonly CustomAppSession _customAppSession;
+        private readonly IVendorCache _vendorCache;
 
-        public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IUnitOfWorkManager unitOfWorkManager,
-            IRepository<JobUnit> jobUnitRepository, CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository,
-            ICacheManager cacheManager, IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository)
+        public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
+            CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
+            IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache)
         {
-
-            _unitOfWorkManager = unitOfWorkManager;
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
             _accountUnitRepository = accountUnitRepository;
@@ -42,6 +40,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _cacheManager = cacheManager;
             _vendorUnitRepository = vendorUnitRepository;
             _taxCreditUnitRepository = taxCreditUnitRepository;
+            _vendorCache = vendorCache;
         }
 
 
@@ -74,7 +73,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<AutoFillDto>> GeAccountsList(AutoSearchInput input)
         {
 
-            var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where( p => p.Id == input.JobId)
+            var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where(p => p.Id == input.JobId)
                                     select job.ChartOfAccountId).FirstOrDefault();
 
             var accountlist = await (from account in _accountUnitRepository.GetAll()
@@ -102,9 +101,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var cacheItem = await GetSubAccountsCacheItemAsync(
               CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
             return cacheItem.ItemList.ToList()
-                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper()) ||
-                p.Column1.ToUpper().Contains(input.Query.ToUpper()) || p.Column2.ToUpper().Contains(input.Query.ToUpper()) ||
-                p.Column3.ToUpper().Contains(input.Query.ToUpper())).ToList();
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                p.Column1.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.Column2.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                p.Column3.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
         /// <summary>
         /// Get SubAccounts From DataBase
@@ -149,14 +148,15 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<AutoFillDto>> GetVendorList(AutoSearchInput input)
         {
+            // return await _vendorCache.GetVendorList(input); ***CachingCode
             var cacheItem = await GetVendorsCacheItemAsync(
-               CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())
-            || p.Column1.ToUpper().Contains(input.Query.ToUpper())
-            || p.Column2.ToUpper().Contains(input.Query.ToUpper())
-            || p.Column3.ToUpper().Contains(input.Query.ToUpper())).ToList();
-        }
+              CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.Column1.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.Column2.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.Column3.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
 
+        }
         private async Task<List<AutoFillDto>> GetVendorsFromDb(AutoSearchInput input)
         {
             var query = from vendors in _vendorUnitRepository.GetAll()
@@ -196,8 +196,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             var taxCreditList = await _taxCreditUnitRepository.GetAll()
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query)|| p.Number.Contains(input.Query))
-                 .Select(u => new AutoFillDto { Name = u.Number, Value = u.Id.ToString(),Column1 = u.Description }).ToListAsync();
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Number.Contains(input.Query))
+                 .Select(u => new AutoFillDto { Name = u.Number, Value = u.Id.ToString(), Column1 = u.Description }).ToListAsync();
             return taxCreditList;
         }
 

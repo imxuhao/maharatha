@@ -10,9 +10,9 @@
         },
         api: {
             create: abp.appPath + 'api/services/app/fiscalPeriod/CreateFiscalPeriodUnit',
-            read: abp.appPath + 'api/services/app/fiscalPeriod/GetFiscalPeriodUnits',
+            read: abp.appPath + 'api/services/app/fiscalYear/GetFiscalPeriodUnits',
             update: abp.appPath + 'api/services/app/fiscalPeriod/UpdateFiscalPeriodUnit',
-            destroy: abp.appPath + 'api/services/app/fiscalPeriod/DeleteFiscalPeriodUnit'
+            destroy: abp.appPath + 'api/services/app/fiscalYear/DeleteFiscalPeriodUnit'
         }
     },
     idPropertyField: 'fiscalPeriodId'//important to set for add/update of records

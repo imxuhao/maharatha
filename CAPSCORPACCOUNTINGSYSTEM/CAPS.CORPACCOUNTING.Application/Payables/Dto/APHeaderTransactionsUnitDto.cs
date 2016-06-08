@@ -1,9 +1,7 @@
 ﻿using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Accounting;
 using System;
-using CAPS.CORPACCOUNTING.Payables;
 using System.ComponentModel.DataAnnotations;
-
 
 namespace CAPS.CORPACCOUNTING.Payables
 {
@@ -68,6 +66,14 @@ namespace CAPS.CORPACCOUNTING.Payables
 
         ///<summary>Get Sets the PaymentSelectedByUserId field.</summary>
         public virtual int? PaymentSelectedByUserId { get; set; }
+
+        ///<summary>Get Sets the BatchName field.</summary>
+        public virtual string BatchName { get; set; }
+        ///<summary>Get Sets the VendorName field.</summary>
+        public virtual string VendorName { get; set; }
+
+        ///<summary>Get Sets the VendorName field.</summary>
+        public virtual string CreatedBy { get; set; }
 
     }
 }

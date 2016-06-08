@@ -46,7 +46,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         [Range(1, Int64.MaxValue)]
         public long OrganizationUnitId { get; set; }
 
-        public List<CreateFiscalPeriodUnitInput> CreateFiscalPeriodUnits { get; set; }
+        public List<FiscalPeriodUnitInput> FiscalPeriodUnitList { get; set; }
 
 
     }

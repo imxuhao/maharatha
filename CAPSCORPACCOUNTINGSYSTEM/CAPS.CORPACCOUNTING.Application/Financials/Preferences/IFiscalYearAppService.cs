@@ -46,5 +46,19 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         /// <param name="input"></param>
         /// <returns></returns>
         Task<FiscalYearUnitDto> GetFiscalYearById(IdInput input);
+
+        /// <summary>
+        /// Get the FiscalPeriods by FiscalYearId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<FiscalPeriodUnitDto>> GetFiscalPeriodUnits(GetFiscalPeriodDto input);
+
+        /// <summary>
+        ///  Delete FiscalPeriod
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeleteFiscalPeriodUnit(IdInput input);
     }
 }

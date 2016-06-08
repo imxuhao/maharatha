@@ -10,6 +10,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
     [AutoMapTo(typeof(FiscalYearUnit))]
     public class    UpdateFiscalYearUnitInput : IInputDto
     {
+        [Required]
         public int FiscalYearId { get; set; }
         [Required]
         public DateTime? YearStartDate { get; set; }
@@ -45,7 +46,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         /// <summary>Gets or sets the CompanyId field. </summary>
         [Range(1,Int64.MaxValue)]
         public long OrganizationUnitId { get; set; }
-        public List<UpdateFiscalPeriodUnitInput> UpdateFiscalPeriodUnits { get; set; }
+        public List<FiscalPeriodUnitInput> FiscalPeriodUnitList { get; set; }
 
     }
 }

@@ -196,6 +196,15 @@ namespace CAPS.CORPACCOUNTING.Helpers
             else
                 return DateTime.Parse(date);
         }
+        /// <summary>
+        /// Extension Method to return Emptystring when we pass as Null
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static string EmptyIfNull(this string self)
+        {
+            return self ?? string.Empty;
+        }
     }
 
     /// <summary>

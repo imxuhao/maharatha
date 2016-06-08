@@ -195,6 +195,9 @@ namespace CAPS.CORPACCOUNTING.Authorization
             vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Delete, L("Delete"));
 
             var payablesInvoices = payables.CreateChildPermission(AppPermissions.Pages_Payables_Invoices, L("Invoices"));
+            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Create, L("Create"));
+            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Edit, L("Edit"));
+            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Delete, L("Delete"));
 
             var payablesInquiry = payables.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry, L("Inquiry"));
             var aPInvoiceInquiry = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_APInvoiceInquiry, L("APInvoiceInquiry"));

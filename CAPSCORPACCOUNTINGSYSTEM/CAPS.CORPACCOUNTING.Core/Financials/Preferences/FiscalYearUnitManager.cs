@@ -18,10 +18,10 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
-        public virtual async Task CreateAsync(FiscalYearUnit input)
+        public virtual async Task<int> CreateAsync(FiscalYearUnit input)
         {
             await Validate(input);
-            await _fiscalYearUnitRepository.InsertAsync(input);
+          return  await _fiscalYearUnitRepository.InsertAndGetIdAsync(input);
         }
 
         public virtual async Task UpdateAsync(FiscalYearUnit input)

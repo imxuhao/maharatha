@@ -8,7 +8,7 @@ using CAPS.CORPACCOUNTING.JobCosting;
 namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
 {
     [AutoMapTo(typeof(FiscalPeriodUnit))]
-    public class UpdateFiscalPeriodUnitInput : IInputDto
+    public class FiscalPeriodUnitInput : IInputDto
     {
         /// <summary>Gets or sets the FiscalPeriodId field. </summary>
         public int FiscalPeriodId { get; set; }

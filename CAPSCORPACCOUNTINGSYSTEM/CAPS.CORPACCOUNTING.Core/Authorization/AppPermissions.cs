@@ -210,6 +210,9 @@
         public const string Pages_Payables_Vendors_Delete = "Pages.Payables.Vendors.Delete";
 
         public const string Pages_Payables_Invoices = "Pages.Payables.Invoices";
+        public const string Pages_Payables_Invoices_Create = "Pages.Payables.Invoices.Create";
+        public const string Pages_Payables_Invoices_Edit = "Pages.Payables.Invoices.Edit";
+        public const string Pages_Payables_Invoices_Delete = "Pages.Payables.Invoices.Delete";
 
         public const string Pages_Payables_Inquiry = "Pages.Payables.Inquiry";
         public const string Pages_Payables_Inquiry_APInvoiceInquiry = "Pages.Payables.Inquiry.APInvoiceInquiry";

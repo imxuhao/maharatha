@@ -62,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// Get CheckStoockList
         /// </summary>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetCheckStoockList(AutoSearchInput input);
+        Task<List<NameValueDto>> GetCheckStockList(AutoSearchInput input);
 
         /// <summary>
         /// Get BankAccountPaymentRangeList By BankAccountId

@@ -359,10 +359,10 @@ namespace CAPS.CORPACCOUNTING.Banking
         }
 
         /// <summary>
-        /// Get CheckStoockList
+        /// Get CheckStockList
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetCheckStoockList(AutoSearchInput input)
+        public async Task<List<NameValueDto>> GetCheckStockList(AutoSearchInput input)
         {
             return await (from checkstock in _typeOfCheckStockUnitRepository.GetAll()
                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Notes.Contains(input.Query))

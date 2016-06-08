@@ -38,11 +38,12 @@
                 };
                 fiscalPeriods.push(fiscalPeriodRec);
             });
-            if (parseInt(record.get('fiscalYearId')) > 0) {
-                record.data.updateFiscalPeriodUnits = fiscalPeriods;
-            } else {
-                record.data.createFiscalPeriodUnits = fiscalPeriods;
-            }
+            record.data.fiscalPeriodUnitList = fiscalPeriods;
+            //if (parseInt(record.get('fiscalYearId')) > 0) {
+            //    record.data.fiscalPeriodUnits = fiscalPeriods;
+            //} else {
+            //    record.data.createFiscalPeriodUnits = fiscalPeriods;
+            //}
             
         }
         return record;

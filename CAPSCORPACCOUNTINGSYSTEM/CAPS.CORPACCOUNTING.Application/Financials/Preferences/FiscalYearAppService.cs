@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Threading.Tasks;
@@ -13,23 +15,23 @@ using CAPS.CORPACCOUNTING.Financials.Preferences.Dto;
 using Abp.UI;
 using AutoMapper;
 
-
 namespace CAPS.CORPACCOUNTING.Financials.Preferences
 {
     public class FiscalYearAppService : CORPACCOUNTINGServiceBase, IFiscalYearAppService
     {
         private readonly FiscalYearUnitManager _fiscalYearUnitManager;
         private readonly IRepository<FiscalYearUnit> _fiscalYearUnitRepository;
-        private readonly IFiscalPeriodAppService _fiscalPeriodUnitAppService;
         private readonly IRepository<FiscalPeriodUnit> _fiscalPeriodUnitRepository;
+        private readonly FiscalPeriodUnitManager _fiscalPeriodUnitManager;
+
 
         public FiscalYearAppService(FiscalYearUnitManager fiscalYearUnitManager, IRepository<FiscalYearUnit> fiscalYearUnitUnitRepository,
-          IFiscalPeriodAppService fiscalPeriodUnitAppService, IRepository<FiscalPeriodUnit> fiscalPeriodUnitRepository)
+         IRepository<FiscalPeriodUnit> fiscalPeriodUnitRepository,FiscalPeriodUnitManager fiscalPeriodUnitManager)
         {
             _fiscalYearUnitManager = fiscalYearUnitManager;
             _fiscalYearUnitRepository = fiscalYearUnitUnitRepository;
-            _fiscalPeriodUnitAppService = fiscalPeriodUnitAppService;
             _fiscalPeriodUnitRepository = fiscalPeriodUnitRepository;
+            _fiscalPeriodUnitManager = fiscalPeriodUnitManager;
         }
 
         /// <summary>
@@ -40,36 +42,37 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         [UnitOfWork]
         public async Task CreateFiscalYearUnit(CreateFiscalYearUnitInput input)
         {
-            if (input.YearStartDate > input.YearEndDate)
-                throw new UserFriendlyException(L("FiscalStartDate should not be greaterthan FiscalEndDate"));
-           
-            if (!ReferenceEquals(input.CreateFiscalPeriodUnits, null))
-            {
-                //validating FiscalPeriod Overlaping
-                if (input.CreateFiscalPeriodUnits.Count !=
-                    input.CreateFiscalPeriodUnits.Select(c => new { c.PeriodStartDate, c.PeriodEndDate })
-                        .Distinct().Count())
-                    throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
-            }
+            //UI Validation
+            Validate(input.YearStartDate, input.YearEndDate, input.FiscalPeriodUnitList);
 
             #region Inserting FiscalYear
             var fiscalYearUnit = input.MapTo<FiscalYearUnit>();
-            await _fiscalYearUnitManager.CreateAsync(fiscalYearUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();
+            int id= await _fiscalYearUnitManager.CreateAsync(fiscalYearUnit);
+           
             #endregion
 
-            #region Inserting Fiscal Periods
+            #region Bulk Insertion of Fiscal Period
 
-            if (!ReferenceEquals(input.CreateFiscalPeriodUnits, null))
+            if (!ReferenceEquals(input.FiscalPeriodUnitList, null))
             {
-                foreach (CreateFiscalPeriodUnitInput createFiscalPeriodUnit in input.CreateFiscalPeriodUnits)
+                foreach (FiscalPeriodUnitInput createFiscalPeriodUnit in input.FiscalPeriodUnitList)
                 {
-                    createFiscalPeriodUnit.FiscalYearId = fiscalYearUnit.Id;
-                    await _fiscalPeriodUnitAppService.CreateFiscalPeriodUnit(createFiscalPeriodUnit);
+                    if (createFiscalPeriodUnit.IsClose && createFiscalPeriodUnit.IsPreClose == true)
+                        throw new UserFriendlyException(L("You can select either Close or PreClose not both at a time"));
+                    createFiscalPeriodUnit.FiscalYearId = id;
+                    if (input.IsYearOpen == false)
+                    {
+                        createFiscalPeriodUnit.IsPreClose = false;
+                        createFiscalPeriodUnit.IsClose = true;
+                    }
+                    var fiscalPeriodUnit = createFiscalPeriodUnit.MapTo<FiscalPeriodUnit>();
+                    fiscalPeriodUnit.IsPeriodOpen = (!createFiscalPeriodUnit.IsClose);
+                    await _fiscalPeriodUnitManager.CreateAsync(fiscalPeriodUnit);
                 }
             }
-
             #endregion
+
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
 
 
@@ -82,10 +85,9 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         public async Task DeleteFiscalYearUnit(IdInput input)
         {
             await _fiscalYearUnitManager.DeleteAsync(input);
-            await CurrentUnitOfWork.SaveChangesAsync();
-
             //Deleting FiscalPeriods By FiscalYearId
             await _fiscalPeriodUnitRepository.DeleteAsync(p => p.FiscalYearId == input.Id);
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
 
         /// <summary>
@@ -98,6 +100,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             var query = from fiscalyear in _fiscalYearUnitRepository.GetAll()
                         select new { FiscalYear = fiscalyear };
 
+            //If  Isyearopen is false then closing the FiscalPeriods.
             if (!ReferenceEquals(input.Filters, null))
             {
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
@@ -130,48 +133,42 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         [UnitOfWork]
         public async Task UpdateFiscalYearUnit(UpdateFiscalYearUnitInput input)
         {
-            //validating startDate will be lessthan end date
-            if (input.YearStartDate > input.YearEndDate)
-                throw new UserFriendlyException(L("FiscalStartDate should not be greaterthan FiscalEndDate"));
+            //UI Validation
+            Validate(input.YearStartDate, input.YearEndDate, input.FiscalPeriodUnitList);
 
-            //validating FiscalPeriod overlap
-            if (!ReferenceEquals(input.UpdateFiscalPeriodUnits, null))
-            {
-                if (input.UpdateFiscalPeriodUnits.Count !=
-                    input.UpdateFiscalPeriodUnits.Select(c => new { c.PeriodStartDate, c.PeriodEndDate })
-                        .Distinct().Count())
-                    throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
-            }
-
-            var fiscalYearUnit = await _fiscalYearUnitRepository.GetAsync(input.FiscalYearId);
-            Mapper.CreateMap<UpdateFiscalPeriodUnitInput, FiscalYearUnit>()
-                .ForMember(u => u.Id, ap => ap.MapFrom(src => src.FiscalYearId));
+            var fiscalYearUnit = await _fiscalYearUnitRepository.GetAsync(input.FiscalYearId); ;
             Mapper.Map(input, fiscalYearUnit);
-
             await _fiscalYearUnitManager.UpdateAsync(fiscalYearUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();
 
-            if (!ReferenceEquals(input.UpdateFiscalPeriodUnits, null))
+            if (!ReferenceEquals(input.FiscalPeriodUnitList, null))
             {
-                foreach (var updateFiscalPeriodUnit in input.UpdateFiscalPeriodUnits)
+                foreach (var updateFiscalPeriodUnit in input.FiscalPeriodUnitList)
                 {
+                    if (updateFiscalPeriodUnit.IsClose && updateFiscalPeriodUnit.IsPreClose == true)
+                        throw new UserFriendlyException(L("You can select either Close or PreClose not both at a time"));
+                    //If  Isyearopen is false then closing the FiscalPeriods.
+                    if (input.IsYearOpen == false)
+                    {
+                        updateFiscalPeriodUnit.IsPreClose = false;
+                        updateFiscalPeriodUnit.IsClose = true;
+                    }
                     //updating FiscalPeriod
                     if (updateFiscalPeriodUnit.FiscalPeriodId > 0)
                     {
-                        await _fiscalPeriodUnitAppService.UpdateFiscalPeriodUnit(updateFiscalPeriodUnit);
+                        var fiscalPeriodUnit = await _fiscalPeriodUnitRepository.GetAsync(updateFiscalPeriodUnit.FiscalPeriodId);
+                        Mapper.Map(updateFiscalPeriodUnit, fiscalPeriodUnit);
+                        fiscalPeriodUnit.IsPeriodOpen = (!updateFiscalPeriodUnit.IsClose);
+                        await _fiscalPeriodUnitManager.UpdateAsync(fiscalPeriodUnit);
                     }
                     else
                     {
-                        //Inserting FiscalPeriod
-                        AutoMapper.Mapper.CreateMap<UpdateFiscalPeriodUnitInput, CreateFiscalPeriodUnitInput>();
-                        await
-                            _fiscalPeriodUnitAppService.CreateFiscalPeriodUnit(
-                                AutoMapper.Mapper.Map<UpdateFiscalPeriodUnitInput, CreateFiscalPeriodUnitInput>(
-                                    updateFiscalPeriodUnit));
-
+                        var fiscalPeriodUnit = updateFiscalPeriodUnit.MapTo<FiscalPeriodUnit>();
+                        fiscalPeriodUnit.IsPeriodOpen = (!updateFiscalPeriodUnit.IsClose);
+                        await _fiscalPeriodUnitManager.CreateAsync(fiscalPeriodUnit);
                     }
                 }
             }
+            await CurrentUnitOfWork.SaveChangesAsync();
 
         }
 
@@ -194,6 +191,61 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
 
             }
             return fiscalYearDto;
+        }
+
+
+        /// <summary>
+        /// Get the FiscalPeriods by FiscalYearId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<FiscalPeriodUnitDto>> GetFiscalPeriodUnits(GetFiscalPeriodDto input)
+        {
+            var query = from fiscalPeriod in _fiscalPeriodUnitRepository.GetAll()
+                        select new { FiscalPeriod = fiscalPeriod };
+           
+            query = query.Where(p => p.FiscalPeriod.FiscalYearId == input.FiscalYearId);
+           
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("FiscalPeriod.PeriodStartDate ASC", input.Sorting))
+                .ToListAsync();
+
+            return new PagedResultOutput<FiscalPeriodUnitDto>(results.Count, results.Select(item =>
+            {
+                var dto = item.FiscalPeriod.MapTo<FiscalPeriodUnitDto>();
+                dto.FiscalPeriodId = item.FiscalPeriod.Id;
+                dto.IsClose = (!item.FiscalPeriod.IsPeriodOpen);
+                return dto;
+            }).ToList());
+        }
+        /// <summary>
+        /// Deleting FiscalPeriof By FiscalPeriod By Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+
+        public async Task DeleteFiscalPeriodUnit(IdInput input)
+        {
+            await _fiscalPeriodUnitManager.DeleteAsync(input);
+            await CurrentUnitOfWork.SaveChangesAsync();
+        }
+
+
+        private void Validate(DateTime? startdate,DateTime? endDate,List<FiscalPeriodUnitInput> fiscalPeriodUnitList)
+        {
+            if (startdate > endDate)
+                throw new UserFriendlyException(L("FiscalStartDate should not be greaterthan FiscalEndDate"));
+
+            if (!ReferenceEquals(fiscalPeriodUnitList, null))
+            {
+                //validating FiscalPeriod Overlaping
+                if (fiscalPeriodUnitList.Count !=
+                    fiscalPeriodUnitList.Select(c => new { c.PeriodStartDate, c.PeriodEndDate })
+                        .Distinct().Count())
+                    throw new UserFriendlyException(L("FiscalPeriod should not be overlap"));
+            }
+
         }
 
     }

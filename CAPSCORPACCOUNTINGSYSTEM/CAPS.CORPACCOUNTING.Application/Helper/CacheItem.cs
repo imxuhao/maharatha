@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.Helpers
@@ -16,6 +17,8 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public string Key { get; set; }
 
         public HashSet<AutoFillDto> ItemList { get; set; }
+
+        public HashSet<VendorCacheItem> VendorCacheItemList { get; set; }
 
         /// <summary>
         /// Gets or Sets Employee List
@@ -35,6 +38,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
         {
             if (key.Contains(CacheKeyStores.EmployeeKey))
                 EmployeeItemList = new HashSet<EmployeeUnitDto>();
+            else
+            if (key.Contains(CacheKeyStores.VendorKey))
+                VendorCacheItemList = new HashSet<VendorCacheItem>();
             else
                 ItemList = new HashSet<AutoFillDto>();
             Key = key;

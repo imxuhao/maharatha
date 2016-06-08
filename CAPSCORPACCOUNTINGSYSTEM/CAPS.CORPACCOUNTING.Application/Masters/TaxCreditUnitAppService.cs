@@ -54,8 +54,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task UpdateTaxCreditUnit(UpdateTaxCreditUnitInput input)
         {
             var taxCreditUnit = await _taxCreditUnitRepository.GetAsync(input.TaxCreditId);
-            Mapper.CreateMap<UpdateTaxCreditUnitInput, TaxCreditUnit>()
-                      .ForMember(u => u.Id, ap => ap.MapFrom(src => src.TaxCreditId));
             Mapper.Map(input, taxCreditUnit);
             await _taxCreditUnitManager.UpdateAsync(taxCreditUnit);
             await CurrentUnitOfWork.SaveChangesAsync();

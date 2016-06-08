@@ -71,8 +71,8 @@
                         ui: 'fieldLabelTop',
                         displayField: 'accountType',
                         valueField: 'typeOfBankAccountId',
-                        emptyText: app.localize('SelectOption')//,
-                       // store: 'vendorTypeList'
+                        emptyText: app.localize('SelectOption'),
+                        store: 'utilities.AccountTypeListStore'
                        
                         }, {
                             xtype: 'textfield',
@@ -139,10 +139,10 @@
                                     fieldLabel: app.localize('CheckStock').initCap(),
                                     width: '100%',
                                     ui: 'fieldLabelTop',
-                                    displayField: 'name',
+                                    displayField: 'typeOfCheckStock',
                                     valueField: 'typeOfCheckStockId',
-                                    emptyText: app.localize('SelectOption')//,
-                                   // store: 'vendorTypeList'
+                                    emptyText: app.localize('SelectOption'),
+                                    store: 'utilities.CheckStockListStore'
                                 }, {
                                     xtype: 'textfield',
                                     name: 'lastCheckNumberGenerated',
@@ -155,20 +155,20 @@
                                     fieldLabel: app.localize('UploadMethod').initCap(),
                                     width: '100%',
                                     ui: 'fieldLabelTop',
-                                    displayField: 'name',
+                                    displayField: 'uploadFileName',
                                     valueField: 'typeOfUploadFileId',
-                                    emptyText: app.localize('SelectOption')//,
-                                   // store: 'vendorTypeList'
+                                    emptyText: app.localize('SelectOption'),
+                                    store: 'utilities.UploadMethodListStore'
                                 }, {
                                     xtype: 'combobox',
                                     name: 'positivePayTypeOfUploadFileId',
                                     fieldLabel: app.localize('PositivePayFile').initCap(),
                                     width: '100%',
                                     ui: 'fieldLabelTop',
-                                    displayField: 'name',
+                                    displayField: 'positivePayTypeOfUploadFile',
                                     valueField: 'positivePayTypeOfUploadFileId',
-                                    emptyText: app.localize('SelectOption')//,
-                                    //store: 'vendorTypeList'
+                                    emptyText: app.localize('SelectOption'),
+                                    store: 'utilities.PositivePayFileListStore'
                                 }, {
                                     xtype: 'checkbox',
                                     name: 'isClosed',

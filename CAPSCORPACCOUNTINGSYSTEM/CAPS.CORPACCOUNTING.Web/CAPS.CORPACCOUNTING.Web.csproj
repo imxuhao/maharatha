@@ -2057,6 +2057,7 @@
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\AccountTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\CustomerListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\SubAccountsStore.js" />
@@ -2064,8 +2065,10 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\TaxRebateStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\JobDivisionStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\CheckStockListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\JournalTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\PaymentTermsListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\PositivePayFileListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOf1099BoxListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\EmployeeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOfAddressListStore.js" />
@@ -2077,6 +2080,7 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\StateOrRegionListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOfBatchStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\TypeOfTaxListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\UploadMethodListStore.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingGlobals.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\ChachingRenderers.js" />
     <Content Include="ExtWeb\Chaching\app\utilities\Prototypes.js" />

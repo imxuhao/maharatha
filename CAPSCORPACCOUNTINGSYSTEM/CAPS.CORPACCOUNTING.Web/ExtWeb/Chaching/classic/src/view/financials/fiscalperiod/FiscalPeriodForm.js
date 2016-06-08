@@ -50,23 +50,45 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodForm', {
                 xtype: 'datefield',
                 name: 'yearStartDate',
                 itemId: 'yearStartDate',
+                vtype: 'daterange',
+               // vfield: 'yearStartDate',
                 labelWidth : 120,
                 allowBlank: false,
                 fieldLabel: app.localize('FiscalStartDate'),
                 format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                 emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                 // width: '100%',
-                ui: 'fieldLabelTop'
+                endDateField: 'yearEndDate',
+                ui: 'fieldLabelTop',
+                listeners: {
+                    scope: this,
+                    change: function (field, newValue, oldValue) {
+                        if (newValue === null) {
+                            Ext.form.field.VTypes.daterange(newValue, field);
+                        }
+                    }
+                }
             }, {
                 xtype: 'datefield',
                 name: 'yearEndDate',
                 itemId: 'yearEndDate',
+                vtype: 'daterange',
+               // vfield: 'yearEndDate',
                 allowBlank: false,
                 fieldLabel: app.localize('FiscalEndDate'),
                 format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                 emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                 // width: '100%',
-                ui: 'fieldLabelTop'
+                startDateField: 'yearStartDate',
+                ui: 'fieldLabelTop',
+                listeners: {
+                    scope: this,
+                    change: function (field, newValue, oldValue) {
+                        if (newValue === null) {
+                            Ext.form.field.VTypes.daterange(newValue, field);
+                        }
+                    }
+                }
             }, {
                 xtype: 'checkbox',
                 boxLabel: app.localize('FiscalYearOpen'),

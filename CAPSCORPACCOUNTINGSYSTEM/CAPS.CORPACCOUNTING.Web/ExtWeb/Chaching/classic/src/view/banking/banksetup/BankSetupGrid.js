@@ -154,25 +154,48 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
                  entityName: 'LedgerAccount',
                  emptyText: app.localize('SelectOption')
              }, editor: {
-                 xtype: 'textfield',
-                 allowBlank: false
+                 xtype: 'textfield'
              }
          }, {
-             xtype: 'checkcolumn',
+             xtype: 'gridcolumn',
              text: app.localize('ClosedAccount').initCap(),
              dataIndex: 'isClosed',
              sortable: false,
              groupable: false,
-             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-             width: '10%'
+             renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
+             width: '10%',
+             filterField: {
+                 xtype: 'combobox',
+                 valueField: 'value',
+                 displayField: 'text',
+                 store: {
+                     fields: [{ name: 'text' }, { name: 'value' }],
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                 }
+             },
+             editor: {
+                xtype: 'checkbox'
+             }
          }, {
-             xtype: 'checkcolumn',
+             xtype: 'gridcolumn',
              text: app.localize('DirectDeposit').initCap(),
              dataIndex: 'isachEnabled',
              sortable: false,
              groupable: false,
-             hidden:true,
-             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             hidden: true,
+             renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
+             filterField: {
+                 xtype: 'combobox',
+                 valueField: 'value',
+                 displayField: 'text',
+                 store: {
+                     fields: [{ name: 'text' }, { name: 'value' }],
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                 }
+             },
+             editor: {
+                 xtype: 'checkbox'
+             },
              width: '13%'
          }, {
              xtype: 'gridcolumn',
@@ -187,8 +210,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
                  width: '100%',
                  emptyText: app.localize('ToolTipACHDestinationCode')
              }, editor: {
-                 xtype: 'textfield',
-                 allowBlank: false
+                 xtype: 'textfield'
              }
          },
          {
@@ -204,8 +226,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
                  width: '100%',
                  emptyText: app.localize('ToolTipACHDestinationName')
              }, editor: {
-                 xtype: 'textfield',
-                 allowBlank: false
+                 xtype: 'textfield'
              }
          },
          {
@@ -221,8 +242,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
                  width: '100%',
                  emptyText: app.localize('ToolTipACHOriginCode')
              }, editor: {
-                 xtype: 'textfield',
-                 allowBlank: false
+                 xtype: 'textfield'
              }
          },
          {
@@ -238,8 +258,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
                  width: '100%',
                  emptyText: app.localize('ToolTipACHOriginName')
              }, editor: {
-                 xtype: 'textfield',
-                 allowBlank: false
+                 xtype: 'textfield'
              }
          }
 

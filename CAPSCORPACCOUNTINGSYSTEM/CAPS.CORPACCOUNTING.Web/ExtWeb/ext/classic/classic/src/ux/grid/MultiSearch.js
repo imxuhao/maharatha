@@ -562,7 +562,6 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                 cfg.cls = 'saki-gms-nofilter';
                 cfg.height = me.height;
                 if (item.name==="ActionColumn") {
-                    //debugger;
                     cfg =
                     {
                         xtype: 'button',
@@ -646,7 +645,12 @@ Ext.define('Ext.saki.grid.MultiSearch', {
         filter = parse ? me.parseUserValue(value) : { value: value };
         filter.property = property;
         // Ext 4 compat
-        filter.id = property;
+        if (field.isEnum) { // this is used for enum only
+            filter.id = field.searchProperty;
+        } else {
+            filter.id = property;
+        }
+       
        
         ///*******************Chaching code to convert default filters into expected filter
         if (me.getStore().remoteFilter)
@@ -857,6 +861,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                 }
                 else {
                     store.removeFilter(filter.property);
+                   // store.filters.removeAtKey(filter.property);
                 }
             }
             else {

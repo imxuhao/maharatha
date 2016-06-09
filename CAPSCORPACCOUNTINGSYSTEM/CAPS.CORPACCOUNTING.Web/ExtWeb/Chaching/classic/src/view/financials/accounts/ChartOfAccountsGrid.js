@@ -97,17 +97,14 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              groupable: true,
              width: '5%',
              hidden: true,
-             renderer: function (val) {
-                 if (val) return 'YES';
-                 else return 'NO';
-             },
+             renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
              filterField: {
                  xtype: 'combobox',
                  valueField: 'value',
                  displayField: 'text',
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }
          }, {
@@ -118,17 +115,14 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              groupable: true,
              hidden: true,
              width: '5%',
-             renderer: function (val) {
-                 if (val) return 'YES';
-                 else return 'NO';
-             },
+             renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
              filterField: {
                  xtype: 'combobox',
                  valueField: 'value',
                  displayField: 'text',
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }
          }, {
@@ -139,17 +133,14 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              groupable: true,
              width: '5%',
              hidden: true,
-             renderer: function (val) {
-                 if (val) return 'YES';
-                 else return 'NO';
-             },
+             renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
              filterField: {
                  xtype: 'combobox',
                  valueField: 'value',
                  displayField: 'text',
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
                  xtype: 'checkbox'
@@ -162,17 +153,14 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              groupable: true,
              width: '5%',
              hidden: true,
-             renderer: function (val) {
-                 if (val) return 'YES';
-                 else return 'NO';
-             },
+             renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
              filterField: {
                  xtype: 'combobox',
                  valueField: 'value',
                  displayField: 'text',
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
+                     data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
                  xtype: 'checkbox'

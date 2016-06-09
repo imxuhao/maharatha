@@ -48,7 +48,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
             else
             if (key.Contains(CacheKeyStores.DivisionKey))
                 DivisionCacheItemList = new HashSet<DivisionCacheItem>();
-            if (key.Contains(CacheKeyStores.DivisionKey))
+            if (key.Contains(CacheKeyStores.AccountKey))
                 AccountCacheItemList = new HashSet<AccountCacheItem>();
             
             else

@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<AutoFillDto>> GeAccountsList(AutoSearchInput input);
+        Task<List<AccountCacheItem>> GeAccountsList(AutoSearchInput input);
 
         /// <summary>
         ///  Get SubAccounts List based on OrganizationUnitId

@@ -38,6 +38,10 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         /// <summary> Gets or sets TypeOfAccountId </summary>
         public int? TypeOfAccountId { get; set; }
+        /// <summary> Gets or sets TypeOfAccountId </summary>
+        public int? ChartOfAccountId { get; set; }
+
+        
     }
 
     public interface IAccountCache : IEntityCache<AccountCacheItem>

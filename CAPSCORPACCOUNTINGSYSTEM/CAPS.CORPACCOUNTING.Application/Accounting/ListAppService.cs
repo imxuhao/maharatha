@@ -29,12 +29,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly CustomAppSession _customAppSession;
         private readonly IVendorCache _vendorCache;
         private readonly IDivisionCache _dividsCache;
+        private readonly IAccountCache _accountCache;
+
 
 
         public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
             CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
             IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
-            IDivisionCache dividsCache)
+            IDivisionCache dividsCache, IAccountCache accountCache)
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -45,6 +47,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _taxCreditUnitRepository = taxCreditUnitRepository;
             _vendorCache = vendorCache;
             _dividsCache = dividsCache;
+            _accountCache = accountCache;
         }
 
 
@@ -67,25 +70,20 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<AutoFillDto>> GeAccountsList(AutoSearchInput input)
+        public async Task<List<AccountCacheItem>> GeAccountsList(AutoSearchInput input)
         {
 
             var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where(p => p.Id == input.JobId)
                                     select job.ChartOfAccountId).FirstOrDefault();
 
-            var accountlist = await (from account in _accountUnitRepository.GetAll()
-                                         .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query)
-                                         || p.AccountNumber.Contains(input.Query) || p.Description.Contains(input.Query))
-                                         .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                                         .WhereIf(chartOfAccountId != 0, p => p.ChartOfAccountId == chartOfAccountId)
-                                     select new AutoFillDto
-                                     {
-                                         Name = account.AccountNumber,
-                                         Value = account.Id.ToString(),
-                                         Column1 = account.Description,
-                                         Column2 = account.Caption
-                                     }).ToListAsync();
-            return accountlist;
+            var accountList= await _accountCache.GetAccountCacheItemAsync(
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+
+            return  accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+                p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) 
+                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).WhereIf(chartOfAccountId != 0, p => p.ChartOfAccountId == chartOfAccountId).ToList();
+                                     
+            
         }
 
         /// <summary>
@@ -147,35 +145,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
              return await _vendorCache.GetVendorList(input);
 
-        }
-        private async Task<List<AutoFillDto>> GetVendorsFromDb(AutoSearchInput input)
-        {
-            var query = from vendors in _vendorUnitRepository.GetAll()
-                        select new { vendors };
-            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.vendors.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new AutoFillDto
-                            {
-                                Name = u.vendors.LastName,
-                                Value = u.vendors.Id.ToString(),
-                                Column1 = u.vendors.FirstName,
-                                Column2 = u.vendors.VendorNumber,
-                                Column3 = u.vendors.VendorAccountInfo
-                            }).ToListAsync();
-
-        }
-
-        private async Task<CacheItem> GetVendorsCacheItemAsync(string vendorkey, AutoSearchInput input)
-        {
-            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore).GetAsync(vendorkey, async () =>
-            {
-                var newCacheItem = new CacheItem(vendorkey);
-                var vendorList = await GetVendorsFromDb(input);
-                foreach (var vendors in vendorList)
-                {
-                    newCacheItem.ItemList.Add(vendors);
-                }
-                return newCacheItem;
-            });
         }
 
         /// <summary>

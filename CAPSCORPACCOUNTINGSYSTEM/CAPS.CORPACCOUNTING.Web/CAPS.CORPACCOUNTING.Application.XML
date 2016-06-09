@@ -2241,6 +2241,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.TypeOfAccountId">
             <summary> Gets or sets TypeOfAccountId </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.ChartOfAccountId">
+            <summary> Gets or sets TypeOfAccountId </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem">
             <summary>
             Vendor CacheItem Class

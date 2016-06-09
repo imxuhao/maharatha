@@ -378,7 +378,7 @@ namespace CAPS.CORPACCOUNTING.Banking
             return new PagedResultOutput<BankAccountPaymentRangeDto>(results.Count, results.Select(item =>
             {
                 var dto = item.MapTo<BankAccountPaymentRangeDto>();
-                dto.BankAccountId = item.Id;
+                dto.BankAccountPaymentRangeId = item.Id;
                 return dto;
             }).ToList());
         }

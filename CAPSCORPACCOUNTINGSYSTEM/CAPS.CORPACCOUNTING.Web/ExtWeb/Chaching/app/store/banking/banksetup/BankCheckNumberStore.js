@@ -9,10 +9,6 @@
             read: abp.appPath + 'api/services/app/bankAccountUnit/GetBankAccountPaymentRangeByBankAccountId',
             update: abp.appPath + '',
             destroy: abp.appPath + 'api/services/app/bankAccountUnit/DeleteBankAccountPaymentRange'
-        },
-        reader: {
-            type: 'json',
-            rootProperty: 'result'
         }
     },
     idPropertyField: 'bankAccountPaymentRangeId'//important to set for add/update of records

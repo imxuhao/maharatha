@@ -21,6 +21,9 @@
                 };
                 checkNumberArray.push(checkNumberRec);
             });
+            checkNumberArray.sort(function (a, b) {
+                return (b.bankAccountPaymentRangeId - a.bankAccountPaymentRangeId);
+            });
             record.data.bankAccountPaymentRangeList = checkNumberArray;
         }
         return record;

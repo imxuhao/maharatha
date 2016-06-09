@@ -2061,6 +2061,7 @@
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\ChartOfAccountListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\CustomerListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\DivisionListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\SubAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\T41099Store.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\TaxRebateStore.js" />

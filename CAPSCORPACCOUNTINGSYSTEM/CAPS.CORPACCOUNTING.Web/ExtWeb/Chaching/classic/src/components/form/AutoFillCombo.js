@@ -23,6 +23,7 @@
     listConfig: {
         minWidth: 300
     },
+    userDefinedColumns : null,
     onBindStore: function (store, initial) {
         var me = this,
             picker = me.picker,
@@ -422,9 +423,9 @@
             //    break;
             case 'btnRefresh':
                 me.getPicker().getSelectionModel().deselectAll();
-                picker.down('button[itemId=btnDropDownEdit]').disable();
-                picker.down('button[itemId=btnDropDownDelete]').disable();
-                picker.down('button[itemId=btnDropDownSelect]').disable();
+                //picker.down('button[itemId=btnDropDownEdit]').disable();
+                //picker.down('button[itemId=btnDropDownDelete]').disable();
+                //picker.down('button[itemId=btnDropDownSelect]').disable();
                 me.store.load({ params: me.store.params });
                 break;
         }
@@ -688,23 +689,46 @@
             fileds = store.model.fields.items,
             count = fileds.length,
             columns = [];
-        for (var i = 0; i < count; i++) {
-            if (fileds[i].hidden == false) {
-                var column = {
-                    text: fileds[i].headerText == null ? fileds[i].name : fileds[i].headerText,
-                    sortable: false,
-                    hideable: false,
-                    menuDisabled: true,
-                    filterable: true,
-                    minWidth : 50,
-                    width: fileds[i].width,
-                    hidden: fileds[i].hidden,
-                    dataIndex: fileds[i].name,
-                    flex: fileds[i].width > 0 ? null : fileds[i].flex
+
+        if (me.userDefinedColumns == null) {
+            for (var i = 0; i < count; i++) {
+                if (fileds[i].hidden == false) {
+                    var column = {
+                        text: fileds[i].headerText == null ? fileds[i].name : app.localize(fileds[i].headerText),
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        filterable: true,
+                        minWidth: 50,
+                        width: fileds[i].width,
+                        hidden: fileds[i].hidden,
+                        dataIndex: fileds[i].name,
+                        flex: fileds[i].width > 0 ? null : fileds[i].flex
+                    }
+                    columns.push(column);
                 }
-                columns.push(column);
+            }
+        } else {
+            count = me.userDefinedColumns.length;
+            for (var i = 0; i < count; i++) {
+                if (userDefinedColumns[i].hidden == false) {
+                    var column = {
+                        text: userDefinedColumns[i].headerText == null ? userDefinedColumns[i].name : app.localize(userDefinedColumns[i].headerText),
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        filterable: true,
+                        minWidth: 50,
+                        width: userDefinedColumns[i].width,
+                        hidden: userDefinedColumns[i].hidden,
+                        dataIndex: userDefinedColumns[i].name,
+                        flex: userDefinedColumns[i].width > 0 ? null : userDefinedColumns[i].flex
+                    }
+                    columns.push(column);
+                }
             }
         }
+       
       
         var actionColumn = {};
         var actionColumnItems = [];

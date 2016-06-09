@@ -855,7 +855,7 @@
     <text name="ACHOriginName" value="ACH origin name" />
     <text name="ACHOriginNameLabel" value="ACH Origin Name" />
     <text name="ToolTipACHOriginName" value="Enter ACH origin name" />
-    <text name="LedgerAccount" value="Ledger account" />
+    <text name="LedgerAccount" value="Ledger Account" />
     <text name="PreClose" value="Pre-Close" />
     <text name="MonthYear" value="Month-Year" />
     <text name="ClosingReport" value="Closing Report" />

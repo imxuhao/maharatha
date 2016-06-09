@@ -143,7 +143,7 @@
                         width: '100%',
                         ui: 'fieldLabelTop',
                         fieldLabel: app.localize('Divisions'),
-                        store: 'utilities.autofill.JobDivisionStore',
+                        store: 'utilities.autofill.DivisionListStore',
                         valueField: 'jobId',
                         displayField: 'jobNumber',
                         entityGridController: 'financials-accounts-divisionsgrid',

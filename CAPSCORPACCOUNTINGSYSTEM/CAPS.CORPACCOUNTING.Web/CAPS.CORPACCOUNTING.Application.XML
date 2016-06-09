@@ -4352,6 +4352,9 @@
             
             </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditAccountingItemId">
+            <summary>Gets or sets the AccountID field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditAccountId">
             <summary>Gets or sets the AccountID field. </summary>
         </member>
@@ -4436,11 +4439,19 @@
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailUnitDto.PurchaseOrderItem">
             <summary>Gets or sets the PurchaseOrderItem field. </summary>   
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit.VendorId">
             <summary>Gets or sets the VendorId field. </summary>   
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit.PurchaseOrderItemId">
             <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit.DebitCreditGroup">
+            <summary>Gets or sets the DebitCreditGroup field. </summary>   
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit">
             <summary>
@@ -4622,7 +4633,7 @@
             <summary>
             
             </summary>
-            <param name="input"></param>
+            <param name="journalEntryDetails"></param>
             <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto.BatchId">

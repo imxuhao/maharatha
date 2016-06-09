@@ -8,6 +8,9 @@ namespace CAPS.CORPACCOUNTING.Journals.Dto
     /// </summary>
    public class JournalCreditEntryDetailUnitDto: JournalEntryDetailUnitDto
     {
+
+        /// <summary>Gets or sets the AccountID field. </summary>
+        public long CreditAccountingItemId { get; set; }
         /// <summary>Gets or sets the AccountID field. </summary>
         public long? CreditAccountId { get; set; }
 

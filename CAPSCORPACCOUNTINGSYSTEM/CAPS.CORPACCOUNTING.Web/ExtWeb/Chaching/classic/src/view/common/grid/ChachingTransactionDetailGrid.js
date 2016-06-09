@@ -115,6 +115,14 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
     },
     cls: 'chaching-transactiongrid',
     isTransactionDetailsGrid: true,
+    viewConfig: {
+        getRowClass: function(record) {
+            if (record && record.get('isSplit')) {
+                return record.get('SplitGroupCls');
+            }
+            return '';
+        }
+    },
     initComponent: function() {
         var me = this,
             controller = me.getController();
@@ -388,7 +396,13 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     xtype: 'numberfield',
                     emptyText: app.localize('ToolTipAmount')
                 },editor: {
-                    xtype:'textfield'
+                    xtype: 'numberfield',
+                    hideTrigger:true,
+                    listeners: {
+                        change: 'onDetailsAmountChange',
+                        focus: 'onDetailsAmountFocus',
+                        scope:'controller'
+                    }
                 }
             }, {
                 xtype: 'gridcolumn',
@@ -462,7 +476,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 valueField: 'subAccountId1',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccount1Desc', 'subAccount1Desc'),
-                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccount1Desc')
+                //editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccount1Desc')
             },{
                 xtype: 'gridcolumn',
                 dataIndex: 'subAccount2Desc',

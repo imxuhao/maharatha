@@ -21,7 +21,8 @@
         minWidth: 250,
         width: 250
     },
-    displayNegAmtInBrackets:true,
+    displayNegAmtInBrackets: true,
+    splitGroupCls: ['split-group1', 'split-group2', 'split-group3', 'split-group4', 'split-group5', 'split-group6', 'split-group7', 'split-group8'],
     getSubAccountCombo: function (valueField, displayField) {
         var me = this;
         return {

@@ -76,32 +76,82 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             var modelClass = gridStore.getModel(),
                 className = modelClass.$className;
             if (multiplyOfField.validate()) {
-                var amount = parentRecord.get('amount') / multiplyOf,
-                firstValue = (Math.floor(amount * 100) / 100),
-                decimalAmount = (parentRecord.get('amount') - (firstValue * multiplyOf)).toFixed(2);
-                parentRecord.set('amount', +firstValue.toFixed(2));
+                //var amount = parentRecord.get('amount') / multiplyOf,
+                //firstValue = (Math.floor(amount * 100) / 100),
+                //decimalAmount = (parentRecord.get('amount') - (firstValue * multiplyOf)).toFixed(2);
+                //parentRecord.set('amount', +firstValue.toFixed(2));
                 parentRecord.set('isSplit', true);
+                var lastUsedSplitGroupCls = view.lastUsedSplitGroupCls,
+                    splitGroupsCls = Chaching.utilities.ChachingGlobals.splitGroupCls;
+
+                if (!lastUsedSplitGroupCls) {
+                    lastUsedSplitGroupCls = splitGroupsCls[0];
+                    view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                } else {
+                    var indexOfLastGroupCls = splitGroupsCls.indexOf(lastUsedSplitGroupCls);
+                    if (indexOfLastGroupCls+1 < splitGroupsCls.length) {
+                        lastUsedSplitGroupCls = splitGroupsCls[indexOfLastGroupCls+1];
+                        view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                    } else {
+                        lastUsedSplitGroupCls = splitGroupsCls[0];
+                        view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                    }
+                }
+                parentRecord.set('SplitGroupCls', lastUsedSplitGroupCls);
                 Ext.suspendLayouts();
                 for (var i = 1; i < multiplyOf; i++) {
                     var rec = Ext.create(className);
                     Ext.apply(rec.data, parentRecord.data);
-                    rec.set('accountingItemOrigId', parentRecord.get('accountingItemOrigId'));
+                    rec.set('accountingItemOrigId', parentRecord.get('accountingItemId'));
                     rec.set('accountingItemId', 0);
                     rec.set('isSplit', true);
+                    rec.set('amount', 0);
                     rec.set('creatorUserId', null);
                     rec.set('lastModifierUserId', null);
                     rec.set('creationTime', null);
                     rec.set('lastModificationTime', null);
+                    rec.set('parentRec', parentRecord);
                     gridStore.insert(parentIndex + 1, rec);
                 }
                 Ext.resumeLayouts();
-                parentRecord.set('amount', (firstValue + +decimalAmount).toFixed(2));
+                //parentRecord.set('amount', (firstValue + +decimalAmount).toFixed(2));
             }
         } else {
             if (selectedRecords&&selectedRecords.length === 0)
                 abp.notify.info(app.localize('SplitRecordSelect'), app.localize('ValidationFailed'));
             else if (selectedRecords && selectedRecords.length > 1)
                 abp.notify.info(app.localize('SingleSplit'), app.localize('ValidationFailed'));
+        }
+    },
+    onDetailsAmountChange: function(field, newValue, oldValue, eOpts) {
+        var value = 0,
+            plusMinus = "minus";
+        if (!oldValue)value = newValue;
+        else if (newValue > oldValue) {
+            value = newValue - oldValue;
+            plusMinus = "minus";
+        }
+        else if (newValue < oldValue) {
+            value = oldValue - newValue;
+            plusMinus = "plus";
+        }
+        var editor = field.up();
+        if (editor) {
+            var context = editor.context,
+                record = context.record;
+            if (record&&record.get('isSplit')) {
+                var parentRec = record.get('parentRec');
+                if (parentRec) {
+                    plusMinus === "minus" ? parentRec.set('amount', parseInt(parentRec.get('amount') - value)) : parentRec.set('amount', parseInt(parentRec.get('amount') + value));
+                }
+            }
+        }
+    },
+    onDetailsAmountFocus:function(field, e, eOpts) {
+        if (field.getValue() === 0) {
+            field.value = 0;
+            field.setRawValue(null);
+            return;
         }
     },
     beforeAccountQuery: function (queryPlan, eOpts) {

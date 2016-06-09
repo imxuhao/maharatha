@@ -19,3 +19,44 @@
     content: "\f1f8";
 }
 
+.split-group1 .x-grid-cell {
+    background-color: lavenderblush !important;
+    color: black;
+    font-weight: 500;
+}
+.split-group2 .x-grid-cell {
+    background-color: lemonchiffon !important;
+    color: black;
+    font-weight: 500;
+}
+
+.split-group3 .x-grid-cell {
+    background-color: lightcyan !important;
+    color: black;
+    font-weight: 500;
+}
+.split-group4 .x-grid-cell {
+    background-color: lightgreen !important;
+    color: black;
+    font-weight: 500;
+}
+.split-group5 .x-grid-cell {
+    background-color: lightgoldenrodyellow !important;
+    color: black;
+    font-weight: 500;
+}
+.split-group6 .x-grid-cell {
+    background-color: lightskyblue !important;
+    color: black;
+    font-weight: 500;
+}
+.split-group7 .x-grid-cell {
+    background-color: beige !important;
+    color: black;
+    font-weight: 500;
+}
+.split-group8 .x-grid-cell {
+    background-color: lavender !important;
+    color: black;
+    font-weight: 500;
+}

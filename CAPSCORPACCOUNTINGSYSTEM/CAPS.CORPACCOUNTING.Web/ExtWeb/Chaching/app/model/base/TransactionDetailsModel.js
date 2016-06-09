@@ -81,6 +81,7 @@ Ext.define('Chaching.model.base.TransactionDetailsModel', {
         { name: 'typeOfCurrency', type: 'string' },
         { name: 'homeCurAmount', type: 'float', defaultValue: null, convert: nullHandler },
         { name: 'customForexRate', type: 'float', defaultValue: null, convert: nullHandler },
-        { name: 'isSplit', type: 'boolean' }
+        { name: 'isSplit', type: 'boolean' },
+        { name: 'SplitGroupCls', type: 'string' }//Temporary field for row coloring
     ]
 });

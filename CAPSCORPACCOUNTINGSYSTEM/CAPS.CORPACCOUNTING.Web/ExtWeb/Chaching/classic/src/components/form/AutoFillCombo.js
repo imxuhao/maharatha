@@ -5,13 +5,24 @@
     requires: ['Ext.grid.Panel'],
 
     modulePermissions: undefined,
-    entityName : null,
+    nameOfEntity : null,
     entityType: null,
     entityPermission: null,
     entityGridController : null,
     autoSelect: false,
     selectOnFocus : true,
     enableKeyEvents: true,
+    typeAhead: false,
+    editable: true,
+    emptyText: 'Type to search',
+    // We're forcing the query to run every time by setting minChars to 0
+    // (default is 4)
+    minChars: 2,
+    queryParam: 'query',
+    queryMode: 'remote',
+    listConfig: {
+        minWidth: 300
+    },
     onBindStore: function (store, initial) {
         var me = this,
             picker = me.picker,
@@ -119,10 +130,10 @@
     initComponent: function () {
         var me = this;
         if (me.entityGridController == null) {
-            Ext.raise('entityGridController config is required for add/update/delete of an entity for AutoFillCombo(' + me.entityName + ')');
+            Ext.raise('entityGridController config is required for add/update/delete of an entity for AutoFillCombo(' + me.nameOfEntity + ')');
         }
-        if (me.entityName == null) {
-            Ext.raise('entityName config is required to open edit/create page in popup window for that entity.');
+        if (me.nameOfEntity == null) {
+            Ext.raise('nameOfEntity config is required to open edit/create page in popup window for that entity.');
         }
         if (me.entityType == null ) {
             Ext.raise('entityType config is required to open edit/create page  in popup window for that entity.');
@@ -443,7 +454,7 @@
                  items: ['->', {
                      xtype: 'button',
                      text: 'Add',
-                     tooltip: 'Add' + " " + me.entityName,
+                     tooltip: 'Add' + " " + me.nameOfEntity,
                      iconAlign: 'left',
                      scale: 'small',
                      iconCls: 'fa fa-plus-square',
@@ -701,7 +712,7 @@
             scale: 'small',
             iconCls: 'editCls',
           //  ui: 'actionButton',
-            tooltip: app.localize('Edit') + " " +me.entityName,
+            tooltip: app.localize('Edit') + " " +me.nameOfEntity,
             handler : function(grid, rowIndex, colIndex) {
                 var entityType = me.entityType;
                 var rec = grid.getStore().getAt(rowIndex);
@@ -713,7 +724,7 @@
             scale: 'small',
             iconCls: 'deleteCls',
            // ui: 'actionButton',
-            tooltip: app.localize('Delete') + " " + me.entityName,
+            tooltip: app.localize('Delete') + " " + me.nameOfEntity,
             handler: function (grid, rowIndex, colIndex) {
                 var entityType = me.entityType;
                 var rec = grid.getStore().getAt(rowIndex);
@@ -778,7 +789,7 @@
         }
 
         if (me.store && me.store.proxy && (me.store.proxy.urlToGetRecordById == "" || me.store.proxy.urlToGetRecordById == undefined)) {
-            Ext.raise('urlToGetRecordById config is required in proxy config of ' + me.store.$className + ' to edit record in AutoFillCombo(' + me.entityName+')');
+            Ext.raise('urlToGetRecordById config is required in proxy config of ' + me.store.$className + ' to edit record in AutoFillCombo(' + me.nameOfEntity+')');
         }
         var recordByIdUrl = me.store.proxy.urlToGetRecordById;
         if (operation === 'edit') {
@@ -833,7 +844,7 @@
     },
 
     createPopupWindow: function (xtypeOfView, me, operation) {
-        var windowTitle = operation + ' ' + me.entityName;
+        var windowTitle = operation + ' ' + me.nameOfEntity;
         var window = Ext.create('Chaching.view.common.window.ChachingWindowPanel', {
             layout: 'fit',
             title: windowTitle.toUpperCase(),

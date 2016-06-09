@@ -121,26 +121,11 @@
                         fieldLabel: app.localize('LedgerAccount'),
                         store: 'utilities.autofill.ChartOfAccountListStore',
                         valueField: 'accountId',
-                        autoSelect: false,
                         displayField: 'description',
                         entityGridController: 'financials-accounts-chartofaccountsgrid',
-                        typeAhead: false,
-                        emptyText: 'Type to search',
-                        editable: true,
-                        entityName: 'Chart of Account',
+                        nameOfEntity: 'Chart of Account',
                         entityType: 'financials.accounts.coa',
-                        entityPermission: 'Financials.Accounts.ChartOfAccounts',
-                        // We're forcing the query to run every time by setting minChars to 0
-                        // (default is 4)
-                        minChars: 2,
-                        queryParam: 'query',
-                        queryMode: 'remote',
-                        listConfig: {
-                            minWidth: 300
-                        }
-
-
-
+                        entityPermission: 'Financials.Accounts.ChartOfAccounts'
                     }, {
 
                         //xtype: 'combobox',
@@ -160,24 +145,11 @@
                         fieldLabel: app.localize('Divisions'),
                         store: 'utilities.autofill.JobDivisionStore',
                         valueField: 'jobId',
-                        autoSelect: false,
                         displayField: 'jobNumber',
                         entityGridController: 'financials-accounts-divisionsgrid',
-                        typeAhead: false,
-                        emptyText: 'Type to search',
-                        editable: true,
-                        entityName: 'Division',
+                        nameOfEntity: 'Division',
                         entityType: 'financials.accounts.divisions',
-                        entityPermission: 'Financials.Accounts.Divisions',
-                        // We're forcing the query to run every time by setting minChars to 0
-                        // (default is 4)
-                        minChars: 2,
-                        queryParam: 'query',
-                        queryMode: 'remote',
-                        listConfig: {
-                            minWidth: 300
-                        }
-
+                        entityPermission: 'Financials.Accounts.Divisions'
                     }]
                 },
                             {

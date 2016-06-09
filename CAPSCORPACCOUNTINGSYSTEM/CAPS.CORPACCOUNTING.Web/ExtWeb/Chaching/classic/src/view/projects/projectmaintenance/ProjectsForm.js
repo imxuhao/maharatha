@@ -383,25 +383,11 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             fieldLabel: app.localize('Agency'),
                             store: 'utilities.autofill.CustomerListStore',
                             valueField: 'customerId',
-                            autoSelect : false,
                             displayField: 'name',
                             entityGridController: 'payables-vendors-vendorsgrid',
-                            typeAhead: false,
-                            emptyText: 'Type to search',
-                            editable: true,
-                            entityName : 'Vendor',
+                            nameOfEntity: 'Vendor',
                             entityType: 'payables.vendors',
-                            entityPermission: 'Payables.Vendors',
-                            // We're forcing the query to run every time by setting minChars to 0
-                            // (default is 4)
-                            minChars: 2,
-                            queryParam: 'query',
-                            queryMode: 'remote',
-                            listConfig: {
-                                minWidth : 300
-                            }
-
-                        
+                            entityPermission: 'Payables.Vendors'
                             
                         }, {
                             xtype: 'textfield',

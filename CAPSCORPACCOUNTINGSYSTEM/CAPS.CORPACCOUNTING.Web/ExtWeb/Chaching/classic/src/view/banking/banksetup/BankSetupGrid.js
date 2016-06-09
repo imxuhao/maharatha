@@ -108,7 +108,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
              filterField: {
                  xtype: 'combobox',
                  width: '100%',
-                 ui: 'fieldLabelTop',
+                // ui: 'fieldLabelTop',
                  forceSelection: true,
                  searchProperty: 'typeOfBankAccountId',
                  isEnum: true,
@@ -120,7 +120,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
              }, editor: {
                  xtype: 'combobox',
                  width: '100%',
-                 ui: 'fieldLabelTop',
+                // ui: 'fieldLabelTop',
                  displayField: 'typeOfBankAccount',
                  valueField: 'typeOfBankAccountId',
                  emptyText: app.localize('SelectOption'),
@@ -149,12 +149,29 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
              groupable: true,
              width: '15%',
              filterField: {
-                 xtype: 'textfield',
+                 //xtype: 'textfield',
+                 //width: '100%',
+                 //entityName: 'LedgerAccount',
+                 //emptyText: app.localize('SelectOption')
+                 xtype: 'autofillcombo',
                  width: '100%',
-                 entityName: 'LedgerAccount',
-                 emptyText: app.localize('SelectOption')
+                 store: 'utilities.autofill.ChartOfAccountListStore',
+                 valueField: 'accountId',
+                 displayField: 'description',
+                 entityGridController: 'financials-accounts-chartofaccountsgrid',
+                 nameOfEntity: 'Chart of Account',
+                 entityType: 'financials.accounts.coa',
+                 entityPermission: 'Financials.Accounts.ChartOfAccounts'
              }, editor: {
-                 xtype: 'textfield'
+                 xtype: 'autofillcombo',
+                 width: '100%',
+                 store: 'utilities.autofill.ChartOfAccountListStore',
+                 valueField: 'accountId',
+                 displayField: 'description',
+                 entityGridController: 'financials-accounts-chartofaccountsgrid',
+                 nameOfEntity: 'Chart of Account',
+                 entityType: 'financials.accounts.coa',
+                 entityPermission: 'Financials.Accounts.ChartOfAccounts'
              }
          }, {
              xtype: 'gridcolumn',

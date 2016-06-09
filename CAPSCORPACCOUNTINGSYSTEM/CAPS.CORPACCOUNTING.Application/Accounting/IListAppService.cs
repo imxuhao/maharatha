@@ -15,7 +15,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<AutoFillDto>> GetJobOrDivisionList(AutoSearchInput input);
+        Task<List<DivisionCacheItem>> GetJobOrDivisionList(AutoSearchInput input);
 
         /// <summary>
         /// Get accounts List based on JobId
@@ -35,7 +35,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<AutoFillDto>> GetVendorList(AutoSearchInput input);
+        Task<List<VendorCacheItem>> GetVendorList(AutoSearchInput input);
 
        /// <summary>
        ///  Get TaxCreditList

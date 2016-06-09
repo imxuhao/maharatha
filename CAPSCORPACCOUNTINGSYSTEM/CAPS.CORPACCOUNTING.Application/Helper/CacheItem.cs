@@ -20,6 +20,10 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
         public HashSet<VendorCacheItem> VendorCacheItemList { get; set; }
 
+        public HashSet<DivisionCacheItem> DivisionCacheItemList { get; set; }
+
+        public HashSet<AccountCacheItem> AccountCacheItemList { get; set; }
+
         /// <summary>
         /// Gets or Sets Employee List
         /// </summary>
@@ -42,7 +46,14 @@ namespace CAPS.CORPACCOUNTING.Helpers
             if (key.Contains(CacheKeyStores.VendorKey))
                 VendorCacheItemList = new HashSet<VendorCacheItem>();
             else
+            if (key.Contains(CacheKeyStores.DivisionKey))
+                DivisionCacheItemList = new HashSet<DivisionCacheItem>();
+            if (key.Contains(CacheKeyStores.DivisionKey))
+                AccountCacheItemList = new HashSet<AccountCacheItem>();
+            
+            else
                 ItemList = new HashSet<AutoFillDto>();
+
             Key = key;
 
         }

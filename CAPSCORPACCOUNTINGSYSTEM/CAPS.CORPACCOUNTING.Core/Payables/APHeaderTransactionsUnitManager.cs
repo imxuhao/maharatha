@@ -24,11 +24,13 @@ namespace CAPS.CORPACCOUNTING.Payables
         [UnitOfWork]
         public virtual async Task<long> CreateAsync(ApHeaderTransactions input)
         {
+            await ValidateJournalUnitAsync(input);
            return await ApHeaderTransactionsUnitRepository.InsertAndGetIdAsync(input);
         }
 
         public virtual async Task UpdateAsync(ApHeaderTransactions input)
         {
+            await ValidateJournalUnitAsync(input);
             await ApHeaderTransactionsUnitRepository.UpdateAsync(input);
         }
 
@@ -43,10 +45,9 @@ namespace CAPS.CORPACCOUNTING.Payables
             if (ApHeaderTransactionsUnitRepository != null)
             {
 
-                var invoices = (await ApHeaderTransactionsUnitRepository.
-                    GetAllListAsync(
+                var invoices = (await ApHeaderTransactionsUnitRepository.GetAllListAsync(
                         p => p.DocumentReference == invoiceunit.DocumentReference && p.OrganizationUnitId == invoiceunit.OrganizationUnitId
-                        && p.TypeOfAccountingDocumentId == TypeOfAccountingDocument.GeneralLedger));
+                        && p.TypeOfAccountingDocumentId == TypeOfAccountingDocument.AccountsPayable));
 
                 if (invoiceunit.Id == 0)
                 {

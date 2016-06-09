@@ -159,10 +159,10 @@
     <Compile Include="Banking\BatchUnitAppService.cs" />
     <Compile Include="Banking\Dto\BankAccountPaymentRangDto.cs" />
     <Compile Include="Banking\Dto\BatchUnitDto.cs" />
-    <Compile Include="Banking\Dto\CreateBankAccountPaymentRangeInput.cs" />
     <Compile Include="Banking\Dto\CreateBankAccountUnitInput.cs" />
     <Compile Include="Banking\Dto\CreateBatchUnitInput.cs" />
-    <Compile Include="Banking\Dto\UpdateBankAccountPaymentRangeInput.cs" />
+    <Compile Include="Banking\Dto\GetBankAccoutPaymentRangeDto.cs" />
+    <Compile Include="Banking\Dto\BankAccountPaymentRangeInput.cs" />
     <Compile Include="Banking\Dto\UpdateBankAccountUnitInput.cs" />
     <Compile Include="Banking\Dto\UpdateBatchUnitInput.cs" />
     <Compile Include="Banking\IBankAccountUnitAppService.cs" />
@@ -245,6 +245,8 @@
     <Compile Include="GenericSearch\Dto\SearchInputDto.cs" />
     <Compile Include="GenericSearch\TextSearch.cs" />
     <Compile Include="Helper\CacheExtensionHelper.cs" />
+    <Compile Include="Helper\CacheItems\AccountCacheItem.cs" />
+    <Compile Include="Helper\CacheItems\DivisionCacheItem.cs" />
     <Compile Include="Helper\CacheItems\VendorCacheItem.cs" />
     <Compile Include="Helper\CacheKeyStores.cs" />
     <Compile Include="Helper\CacheItem.cs" />

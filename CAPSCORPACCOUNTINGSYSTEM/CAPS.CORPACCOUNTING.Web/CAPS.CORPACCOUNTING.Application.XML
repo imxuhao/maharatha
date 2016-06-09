@@ -1072,7 +1072,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.GetBankAccountPaymentRangeByBankAccountId(Abp.Application.Services.Dto.IdInput{System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.GetBankAccountPaymentRangeByBankAccountId(CAPS.CORPACCOUNTING.Banking.Dto.GetBankAccoutPaymentRangeDto)">
             <summary>
             Get the BankAccount Details By BankAccountId
             </summary>
@@ -1421,18 +1421,6 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BatchUnitDto.BatchAmount">
             <summary>Gets or sets the BatchAmount field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountPaymentRangeInput.StartingPaymentNumber">
-            <summary>Gets or Sets StartingPaymentNumber. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountPaymentRangeInput.EndingPaymentNumber">
-            <summary>Gets or Sets EndingPaymentNumber. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountPaymentRangeInput.BankAccountId">
-            <summary>Gets or sets the BankAccountId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountPaymentRangeInput.OrganizationUnitId">
-            <summary>Gets or sets the CompanyId field. </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>
         </member>
@@ -1580,19 +1568,22 @@
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.CreateBatchUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountPaymentRangeInput.BankAccountPaymentRangeId">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.GetBankAccoutPaymentRangeDto.BankAccountId">
             <summary>Gets or Sets BankAccountPaymentRangeId. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountPaymentRangeInput.StartingPaymentNumber">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeInput.BankAccountPaymentRangeId">
+            <summary>Gets or Sets BankAccountPaymentRangeId. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeInput.StartingPaymentNumber">
             <summary>Gets or Sets StartingPaymentNumber. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountPaymentRangeInput.EndingPaymentNumber">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeInput.EndingPaymentNumber">
             <summary>Gets or Sets EndingPaymentNumber. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountPaymentRangeInput.BankAccountId">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeInput.BankAccountId">
             <summary>Gets or sets the BankAccountId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountPaymentRangeInput.OrganizationUnitId">
+        <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.BankAccountPaymentRangeInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Banking.Dto.UpdateBankAccountUnitInput.BankAccountId">
@@ -1801,7 +1792,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Banking.IBankAccountUnitAppService.GetBankAccountPaymentRangeByBankAccountId(Abp.Application.Services.Dto.IdInput{System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.Banking.IBankAccountUnitAppService.GetBankAccountPaymentRangeByBankAccountId(CAPS.CORPACCOUNTING.Banking.Dto.GetBankAccoutPaymentRangeDto)">
             <summary>
             Get BankAccountPaymentRangeList By BankAccountId
             </summary>
@@ -2229,6 +2220,46 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem">
+            <summary>
+            AccountCacheItem Class
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.AccountId">
+            <summary> Gets or sets AccountId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.Caption">
+            <summary> Gets or sets Caption </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.Description">
+            <summary> Gets or sets Description </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.AccountNumber">
+            <summary> Gets or sets AccountNumber </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.TypeOfAccountId">
+            <summary> Gets or sets TypeOfAccountId </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem">
+            <summary>
+            Vendor CacheItem Class
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.JobId">
+            <summary> Gets or sets LastName </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.JobNumber">
+            <summary> Gets or sets LastName </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.Caption">
+            <summary> Gets or sets FirstName </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.IsDivision">
+            <summary> Gets or sets IsDivision </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.TypeOfJobStatusId">
+            <summary> Gets or sets IsDivision </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.VendorCacheItem">
             <summary>

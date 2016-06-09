@@ -4,6 +4,7 @@ using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Threading.Tasks;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.Banking
@@ -56,7 +57,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// Get AccountType as Bank of all Corporate AccountList
         /// </summary>
         /// <returns></returns>
-        Task<List<AutoFillDto>> GetCorporateAccountList(AutoSearchInput input);
+        Task<List<AccountCacheItem>> GetCorporateAccountList(AutoSearchInput input);
 
         /// <summary>
         /// Get CheckStoockList
@@ -69,7 +70,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<BankAccountPaymentRangeDto>> GetBankAccountPaymentRangeByBankAccountId(IdInput<long> input);
+        Task<PagedResultOutput<BankAccountPaymentRangeDto>> GetBankAccountPaymentRangeByBankAccountId(GetBankAccoutPaymentRangeDto input);
 
         /// <summary>
         /// Delete BankAccountPaymentRange By Id

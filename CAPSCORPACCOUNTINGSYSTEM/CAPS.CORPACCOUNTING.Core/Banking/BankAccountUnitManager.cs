@@ -21,9 +21,9 @@ namespace CAPS.CORPACCOUNTING.Banking
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
-        public virtual async Task CreateAsync(BankAccountUnit bankAccountUnit)
+        public virtual async Task<long> CreateAsync(BankAccountUnit bankAccountUnit)
         {
-            await BankAccountUnitRepository.InsertAsync(bankAccountUnit);
+          return  await BankAccountUnitRepository.InsertAndGetIdAsync(bankAccountUnit);
         }
 
         public virtual async Task UpdateAsync(BankAccountUnit bankAccountUnit)

@@ -45,8 +45,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             {
 
                 var journals = (await JournalEntryDocumentUnitRepository.
-                    GetAllListAsync(
-                        p => p.DocumentReference == journalunit.DocumentReference && p.OrganizationUnitId == journalunit.OrganizationUnitId
+                    GetAllListAsync(p => p.DocumentReference == journalunit.DocumentReference && p.OrganizationUnitId == journalunit.OrganizationUnitId
                         && p.TypeOfAccountingDocumentId==TypeOfAccountingDocument.GeneralLedger));
 
                 if (journalunit.Id == 0)

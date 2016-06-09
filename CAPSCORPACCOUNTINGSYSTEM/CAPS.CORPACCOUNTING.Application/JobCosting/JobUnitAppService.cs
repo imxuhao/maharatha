@@ -20,6 +20,7 @@ using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Runtime.Caching;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
@@ -48,6 +49,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly CustomAppSession _customAppSession;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IRepository<JobLocationUnit> _jobLocationRepository;
+        private readonly DivisionCache _divisioncache;
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService,
             IRepository<OrganizationUnit, long> organizationUnitRepository, IRepository<JobAccountUnit, long> jobAccountUnitRepository,
@@ -55,7 +57,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         IRepository<ValueAddedTaxTypeUnit> valueAddedTaxTypeUnitRepository, IRepository<TypeOfCountryUnit, short> typeOfCountryUnitRepository,
         IRepository<CountryUnit> countryUnitRepository, IJobAccountUnitAppService jobAccountUnitAppService, IRepository<TaxCreditUnit> taxCreditUnitRepository,
              IRepository<JobPORangeAllocationUnit> jobPORangeAllocationUnitRepository, ICacheManager cacheManager, CustomAppSession customAppSession,
-             IUnitOfWorkManager unitOfWorkManager, IRepository<JobLocationUnit> jobLocationRepository)
+             IUnitOfWorkManager unitOfWorkManager, IRepository<JobLocationUnit> jobLocationRepository, DivisionCache divisioncache)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -78,6 +80,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _customAppSession = customAppSession;
             _unitOfWorkManager = unitOfWorkManager;
             _jobLocationRepository = jobLocationRepository;
+            _divisioncache = divisioncache;
 
         }
         /// <summary>
@@ -95,23 +98,25 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 throw new UserFriendlyException(L("BudgetFormatisRequired"));
             }
-            CreateJobCommercialInput jobcommercialunit = new CreateJobCommercialInput();
-            jobcommercialunit.JobNumber = input.JobNumber;
-            jobcommercialunit.Caption = input.Caption;
-            jobcommercialunit.RollupCenterId = input.RollupCenterId;
-            jobcommercialunit.IsCorporateDefault = input.IsCorporateDefault;
-            jobcommercialunit.ChartOfAccountId = input.ChartOfAccountId;
-            jobcommercialunit.RollupAccountId = input.RollupAccountId;
-            jobcommercialunit.TypeOfCurrencyId = input.TypeOfCurrencyId;
-            jobcommercialunit.RollupJobId = input.RollupJobId;
-            jobcommercialunit.TypeOfJobStatusId = input.TypeOfJobStatusId;
-            jobcommercialunit.TypeOfBidSoftwareId = input.TypeOfBidSoftwareId;
-            jobcommercialunit.IsApproved = input.IsApproved;
-            jobcommercialunit.IsActive = input.IsActive;
-            jobcommercialunit.IsICTDivision = input.IsICTDivision;
-            jobcommercialunit.OrganizationUnitId = input.OrganizationUnitId;
-            jobcommercialunit.TypeofProjectId = input.TypeofProjectId;
-            jobcommercialunit.TaxRecoveryId = input.TaxRecoveryId;
+            CreateJobCommercialInput jobcommercialunit = new CreateJobCommercialInput
+            {
+                JobNumber = input.JobNumber,
+                Caption = input.Caption,
+                RollupCenterId = input.RollupCenterId,
+                IsCorporateDefault = input.IsCorporateDefault,
+                ChartOfAccountId = input.ChartOfAccountId,
+                RollupAccountId = input.RollupAccountId,
+                TypeOfCurrencyId = input.TypeOfCurrencyId,
+                RollupJobId = input.RollupJobId,
+                TypeOfJobStatusId = input.TypeOfJobStatusId,
+                TypeOfBidSoftwareId = input.TypeOfBidSoftwareId,
+                IsApproved = input.IsApproved,
+                IsActive = input.IsActive,
+                IsICTDivision = input.IsICTDivision,
+                OrganizationUnitId = input.OrganizationUnitId,
+                TypeofProjectId = input.TypeofProjectId,
+                TaxRecoveryId = input.TaxRecoveryId
+            };
             JobCommercialUnitDto result = await _jobCommercialAppService.CreateJobDetailUnit(jobcommercialunit);
 
             //Get the accounts of appropriate coa and constructing CreateJobAccountUnitInput
@@ -316,37 +321,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// Get DivisionsList
         /// </summary>
         /// <returns></returns>
-        public async Task<List<AutoFillDto>> GetDivisionList(AutoSearchInput input)
+        public async Task<List<DivisionCacheItem>> GetDivisionList(AutoSearchInput input)
         {
-            var cacheItem = await GetDivisionCacheItemAsync(
-                CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.ToUpper().Contains(input.Query.ToUpper())||
-            p.Column1.ToUpper().Contains(input.Query.ToUpper())).ToList();
-
-        }
-
-
-        private async Task<List<AutoFillDto>> GetDivisionsFromDb(AutoSearchInput input)
-        {
-            var divisions = await _jobUnitRepository.GetAll().Where(p => p.IsDivision == true)
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-               // .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query)) ****activate when we are not using RedisCache***
-                 .Select(u => new AutoFillDto { Name = u.JobNumber, Value = u.Id.ToString(),Column1 = u.Caption }).ToListAsync();
-            return divisions;
-        }
-
-        private async Task<CacheItem> GetDivisionCacheItemAsync(string divisionkey,AutoSearchInput input)
-        {
-            return await _cacheManager.GetCacheItem(CacheStoreName:CacheKeyStores.CacheDivisionStore).GetAsync(divisionkey, async () =>
-            {
-                var newCacheItem = new CacheItem(divisionkey);
-                var divList = await GetDivisionsFromDb(input);
-                foreach (var div in divList)
-                {
-                    newCacheItem.ItemList.Add(div);
-                }
-                return newCacheItem;
-            });
+             var cacheItem = await _divisioncache.GetDivisionCacheItemAsync(
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.DivisionCacheItemList.ToList().Where(p=>p.IsDivision==true)
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.ToUpper().Contains(input.Query.ToUpper()) ||
+            p.Caption.ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
 
         public async Task<List<NameValueDto>> GetProjectCoaList(AutoSearchInput input)

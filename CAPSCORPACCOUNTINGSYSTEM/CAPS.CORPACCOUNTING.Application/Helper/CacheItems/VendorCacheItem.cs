@@ -23,6 +23,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
     [AutoMapFrom(typeof(VendorUnit))]
     public class VendorCacheItem
     {
+        public int VendorId { get; set; }
+        
         /// <summary> Gets or sets LastName </summary>
         public string LastName { get; set; }
 
@@ -74,6 +76,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.vendors.OrganizationUnitId == input.OrganizationUnitId.Value)
                             .Select(u => new VendorCacheItem
                             {
+                                VendorId=u.vendors.Id,
                                 LastName =  u.vendors.LastName,
                                 FirstName = u.vendors.FirstName,
                                 VendorNumber = u.vendors.VendorNumber,

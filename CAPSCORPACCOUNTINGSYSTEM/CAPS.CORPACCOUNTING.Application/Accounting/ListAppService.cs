@@ -28,10 +28,13 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly ICacheManager _cacheManager;
         private readonly CustomAppSession _customAppSession;
         private readonly IVendorCache _vendorCache;
+        private readonly IDivisionCache _dividsCache;
+
 
         public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
             CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
-            IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache)
+            IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
+            IDivisionCache dividsCache)
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -41,6 +44,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _vendorUnitRepository = vendorUnitRepository;
             _taxCreditUnitRepository = taxCreditUnitRepository;
             _vendorCache = vendorCache;
+            _dividsCache = dividsCache;
         }
 
 
@@ -49,20 +53,13 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<AutoFillDto>> GetJobOrDivisionList(AutoSearchInput input)
+        public async Task<List<DivisionCacheItem>> GetJobOrDivisionList(AutoSearchInput input)
         {
-            var Joblist = await (from job in _jobUnitRepository.GetAll()
-                                 .Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed)
-                                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.JobNumber.Contains(input.Query))
-                                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                                 select new AutoFillDto
-                                 {
-                                     Name = job.JobNumber,
-                                     Value = job.Id.ToString(),
-                                     Column1 = job.Caption
-                                 })
-                              .ToListAsync();
-            return Joblist;
+            var cacheItem = await _dividsCache.GetDivisionCacheItemAsync(
+                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.DivisionCacheItemList.ToList().Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed).
+                WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+            p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
 
         /// <summary>
@@ -146,15 +143,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<AutoFillDto>> GetVendorList(AutoSearchInput input)
+        public async Task<List<VendorCacheItem>> GetVendorList(AutoSearchInput input)
         {
-            // return await _vendorCache.GetVendorList(input); ***CachingCode
-            var cacheItem = await GetVendorsCacheItemAsync(
-              CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-            || p.Column1.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-            || p.Column2.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-            || p.Column3.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+             return await _vendorCache.GetVendorList(input);
 
         }
         private async Task<List<AutoFillDto>> GetVendorsFromDb(AutoSearchInput input)

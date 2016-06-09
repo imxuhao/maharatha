@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Abp.Authorization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +17,12 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using System.Collections.ObjectModel;
+using Abp.Collections.Extensions;
 using Abp.UI;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
+using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.Banking
 {
@@ -36,24 +40,23 @@ namespace CAPS.CORPACCOUNTING.Banking
         private readonly IRepository<TypeOfCheckStockUnit, int> _typeOfCheckStockUnitRepository;
         private readonly IRepository<VendorUnit, int> _vendorUnitRepository;
         private readonly IRepository<BatchUnit, int> _batchUnitRepository;
-        private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly IRepository<BankAccountPaymentRangeUnit> _bankAccountPaymentRangeRepository;
         private readonly BankAccountPaymentRangeUnitManager _bankAccountPaymentRangeUnitManager;
-        
+        private readonly IRepository<CoaUnit>  _coaUnitRepository;
+        private readonly IAccountCache _accountCache;
+        private readonly CustomAppSession _customAppSession;
 
-
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
-
-        public BankAccountUnitAppService(BankAccountUnitManager bankAccountUnitManager, IRepository<BankAccountUnit, long> bankAccountUnitRepository, IUnitOfWorkManager unitOfWorkManager,
-                                        IAddressUnitAppService addressAppService, IRepository<AddressUnit, long> addressUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
-                                         IRepository<JobUnit, int> jobUnitRepository, IRepository<TypeOfUploadFileUnit, int> typeOfUploadFileUnitRepository, IRepository<TypeOfCheckStockUnit, int> typeOfCheckStockUnitRepository,
-                                         IRepository<VendorUnit, int> vendorUnitRepository, IRepository<BatchUnit, int> batchUnitRepository, IRepository<CoaUnit> coaUnitRepository,
-                                         IRepository<BankAccountPaymentRangeUnit> bankAccountPaymentRangeUnit, BankAccountPaymentRangeUnitManager bankAccountPaymentRangeUnitManager)
+        public BankAccountUnitAppService(BankAccountUnitManager bankAccountUnitManager, IRepository<BankAccountUnit, long> bankAccountUnitRepository,
+            IAddressUnitAppService addressAppService,IRepository<AddressUnit, long> addressUnitRepository, IRepository<AccountUnit, long> accountUnitRepository,
+            IRepository<JobUnit, int> jobUnitRepository,IRepository<TypeOfUploadFileUnit, int> typeOfUploadFileUnitRepository, 
+            IRepository<TypeOfCheckStockUnit, int> typeOfCheckStockUnitRepository,IRepository<VendorUnit, int> vendorUnitRepository, 
+            IRepository<BatchUnit, int> batchUnitRepository,IRepository<BankAccountPaymentRangeUnit> bankAccountPaymentRangeUnit,
+            BankAccountPaymentRangeUnitManager bankAccountPaymentRangeUnitManager,IAccountCache accountCache, CustomAppSession customAppSession, 
+            IRepository<CoaUnit> coaUnitRepository)
         {
             _bankAccountUnitManager = bankAccountUnitManager;
             _bankAccountUnitRepository = bankAccountUnitRepository;
             _addressUnitRepository = addressUnitRepository;
-            _unitOfWorkManager = unitOfWorkManager;
             _addressAppService = addressAppService;
             _accountUnitRepository = accountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -61,9 +64,11 @@ namespace CAPS.CORPACCOUNTING.Banking
             _typeOfUploadFileUnitRepository = typeOfUploadFileUnitRepository;
             _vendorUnitRepository = vendorUnitRepository;
             _batchUnitRepository = batchUnitRepository;
-            _coaUnitRepository = coaUnitRepository;
             _bankAccountPaymentRangeRepository = bankAccountPaymentRangeUnit;
             _bankAccountPaymentRangeUnitManager = bankAccountPaymentRangeUnitManager;
+            _accountCache = accountCache;
+            _customAppSession = customAppSession;
+            _coaUnitRepository = coaUnitRepository;
         }
 
 
@@ -76,13 +81,11 @@ namespace CAPS.CORPACCOUNTING.Banking
         [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Create)]
         public async Task CreateBankAccountUnit(CreateBankAccountUnitInput input)
         {
-            if (!CheckOverlapCheckRanges(input.BankAccountPaymentRangeList))
-                throw new UserFriendlyException(L("StartingCheck# and EndingCheck# should not be overlap"));
-
             var bankAccountUnit = input.MapTo<BankAccountUnit>();
-            await _bankAccountUnitManager.CreateAsync(bankAccountUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();
+            long id= await _bankAccountUnitManager.CreateAsync(bankAccountUnit);
+            
 
+            #region Address Insertion
             if (!ReferenceEquals(input.Addresses, null))
             {
                 foreach (var address in input.Addresses)
@@ -91,27 +94,24 @@ namespace CAPS.CORPACCOUNTING.Banking
                         address.Line4 != null || address.State != null ||
                         address.Country != null || address.Email != null || address.Phone1 != null || address.Website != null)
                     {
-                        address.ObjectId = bankAccountUnit.Id;
+                        address.ObjectId = id;
                         address.TypeofObjectId = TypeofObject.Bank;
                         await _addressAppService.CreateAddressUnit(address);
-                        await CurrentUnitOfWork.SaveChangesAsync();
                     }
                 }
             }
-
-            //Inserting BankAccountPaymentRanges
+            #endregion
+            //Bulk Insertion of BankAccountPaymentRanges
             if (!ReferenceEquals(input.BankAccountPaymentRangeList, null))
             {
                 foreach (var bankAccPayRange in input.BankAccountPaymentRangeList)
                 {
-                    bankAccPayRange.BankAccountId = bankAccountUnit.Id;
-                    if (bankAccPayRange.StartingPaymentNumber > bankAccPayRange.EndingPaymentNumber)
-                        throw new UserFriendlyException(L("StartingCheck# must be lessthan EndingCheck#"));
-
+                    bankAccPayRange.BankAccountId = id;
                     await _bankAccountPaymentRangeUnitManager.CreateAsync(bankAccPayRange.MapTo<BankAccountPaymentRangeUnit>());
                     await CurrentUnitOfWork.SaveChangesAsync();
                 }
             }
+            await CurrentUnitOfWork.SaveChangesAsync();
 
         }
 
@@ -125,15 +125,12 @@ namespace CAPS.CORPACCOUNTING.Banking
         [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Edit)]
         public async Task UpdateBankAccountUnit(UpdateBankAccountUnitInput input)
         {
-            if (!CheckOverlapCheckRanges(null,input.BankAccountPaymentRangeList))
-                throw new UserFriendlyException(L("StartingCheck# and EndingCheck# should not be overlap"));
-
             var bankAccountUnit = await _bankAccountUnitRepository.GetAsync(input.BankAccountId);
-
 
             Mapper.Map(input, bankAccountUnit);
             await _bankAccountUnitManager.UpdateAsync(bankAccountUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();
+
+            #region Address Insertion
             if (!ReferenceEquals(input.Addresses, null))
             {
                 foreach (var address in input.Addresses)
@@ -159,33 +156,28 @@ namespace CAPS.CORPACCOUNTING.Banking
 
                 }
             }
+            #endregion
 
             if (!ReferenceEquals(input.BankAccountPaymentRangeList, null))
             {
                 foreach (var bankAccPayRange in input.BankAccountPaymentRangeList)
                 {
-                    if (bankAccPayRange.StartingPaymentNumber > bankAccPayRange.EndingPaymentNumber)
-                        throw new UserFriendlyException(L("StartingCheck# must be lessthan EndingCheck#"));
-
                     if (bankAccPayRange.BankAccountPaymentRangeId == 0)
                     {
-                        AutoMapper.Mapper.CreateMap<UpdateBankAccountPaymentRangeInput, CreateBankAccountPaymentRangeInput>();
-                        BankAccountPaymentRangeUnit bankaccpayrangeinput =
-                            bankAccPayRange.MapTo<BankAccountPaymentRangeUnit>();
-
+                        BankAccountPaymentRangeUnit bankaccpayrangeinput = bankAccPayRange.MapTo<BankAccountPaymentRangeUnit>();
                         await _bankAccountPaymentRangeUnitManager.CreateAsync(bankaccpayrangeinput);
                     }
                     else
                     {
                         var bankAccountPaymentRange = await _bankAccountPaymentRangeRepository.GetAsync(bankAccPayRange.BankAccountPaymentRangeId);
-
                         Mapper.Map(bankAccPayRange, bankAccountPaymentRange);
                         await _bankAccountPaymentRangeUnitManager.UpdateAsync(bankAccountPaymentRange);
-                        await CurrentUnitOfWork.SaveChangesAsync();
+                       
                     }
-
+                    await CurrentUnitOfWork.SaveChangesAsync();
                 }
             }
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
 
 
@@ -198,14 +190,14 @@ namespace CAPS.CORPACCOUNTING.Banking
         [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup_Delete)]
         public async Task DeleteBankAccountUnit(IdInput<long> input)
         {
-            await _bankAccountUnitManager.DeleteAsync(input);
+            await _bankAccountPaymentRangeRepository.DeleteAsync(p => p.BankAccountId == input.Id);
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
             {
                 TypeofObjectId = TypeofObject.Bank,
                 ObjectId = input.Id
             };
             await _addressAppService.DeleteAddressUnit(dto);
-            await _bankAccountPaymentRangeRepository.DeleteAsync(p => p.BankAccountId == input.Id);
+            await _bankAccountUnitManager.DeleteAsync(input);
         }
 
         /// <summary>
@@ -216,7 +208,6 @@ namespace CAPS.CORPACCOUNTING.Banking
         [AbpAuthorize(AppPermissions.Pages_Banking_BankSetup)]
         public async Task<PagedResultOutput<BankAccountUnitDto>> GetBankAccountUnits(SearchInputDto input)
         {
-
             var bankAccountUnitQuery = CreateBankAccountQuery(input);
             bankAccountUnitQuery = bankAccountUnitQuery
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.BankAccount.OrganizationUnitId == input.OrganizationUnitId);
@@ -340,7 +331,7 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// Get AccountType as Bank of all Corporate AccountList
         /// </summary>
         /// <returns></returns>
-        public async Task<List<AutoFillDto>> GetCorporateAccountList(AutoSearchInput input)
+        public async Task<List<AccountCacheItem>> GetCorporateAccountList(AutoSearchInput input)
         {
             var query = from account in _accountUnitRepository.GetAll()
                         join coa in _coaUnitRepository.GetAll() on account.ChartOfAccountId equals coa.Id
@@ -349,12 +340,12 @@ namespace CAPS.CORPACCOUNTING.Banking
             return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
                              .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query) || p.Description.Contains(input.Query)
                              || p.AccountNumber.Contains(input.Query))
-                            .Select(u => new AutoFillDto
+                            .Select(u => new AccountCacheItem
                             {
-                                Name = u.Caption,
-                                Value = u.Id.ToString(),
-                                Column2 = u.Description,
-                                Column1 = u.AccountNumber
+                                Caption = u.Caption,
+                                AccountId = u.Id,
+                                Description = u.Description,
+                                AccountNumber = u.AccountNumber
                             }).ToListAsync();
         }
 
@@ -374,21 +365,23 @@ namespace CAPS.CORPACCOUNTING.Banking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<BankAccountPaymentRangeDto>> GetBankAccountPaymentRangeByBankAccountId(IdInput<long> input)
+        public async Task<PagedResultOutput<BankAccountPaymentRangeDto>> GetBankAccountPaymentRangeByBankAccountId(GetBankAccoutPaymentRangeDto input)
         {
-            var bankAccpayRangeList =
-                await _bankAccountPaymentRangeRepository.GetAllListAsync(p => p.BankAccountId == input.Id);
-            List<BankAccountPaymentRangeDto> bankAccountPaymentRangeList = new List<BankAccountPaymentRangeDto>();
-            BankAccountPaymentRangeDto result = null;
-            foreach (var bankAccpayRange in bankAccpayRangeList)
-            {
-                result = bankAccpayRange.MapTo<BankAccountPaymentRangeDto>();
-                result.BankAccountPaymentRangeId = bankAccpayRange.Id;
-                bankAccountPaymentRangeList.Add(result);
-            }
-            return bankAccountPaymentRangeList;
-        }
+            var query = from bankaccountpayrange in _bankAccountPaymentRangeRepository.GetAll()
+                        where bankaccountpayrange.BankAccountId == input.BankAccountId
+                        select bankaccountpayrange;
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("StartingPaymentNumber ASC", input.Sorting))
+                .ToListAsync();
 
+            return new PagedResultOutput<BankAccountPaymentRangeDto>(results.Count, results.Select(item =>
+            {
+                var dto = item.MapTo<BankAccountPaymentRangeDto>();
+                dto.BankAccountId = item.Id;
+                return dto;
+            }).ToList());
+        }
         /// <summary>
         /// Delete BankAccountRange
         /// </summary>
@@ -400,52 +393,13 @@ namespace CAPS.CORPACCOUNTING.Banking
             await CurrentUnitOfWork.SaveChangesAsync();
 
         }
-
-        private bool CheckOverlapCheckRanges(List<CreateBankAccountPaymentRangeInput> createinput=null, List<UpdateBankAccountPaymentRangeInput> updateinput=null)
-        {
-            if (ReferenceEquals(createinput, null))
-            {
-                for (int i = 0; i < updateinput.Count; i++)
-                {
-                    for (int j = i + 1; j < updateinput.Count; j++)
-                    {
-                        if ((updateinput[i].StartingPaymentNumber >= updateinput[j].StartingPaymentNumber
-                            && updateinput[i].StartingPaymentNumber <= updateinput[j].EndingPaymentNumber) ||
-                            (updateinput[i].EndingPaymentNumber >= updateinput[j].StartingPaymentNumber
-                            && updateinput[i].EndingPaymentNumber <= updateinput[j].EndingPaymentNumber))
-                            return false;
-
-                    }
-                }
-                return true;
-            }
-            else
-            {
-                for (int i = 0; i < createinput.Count; i++)
-                {
-                    for (int j = i + 1; j < createinput.Count; j++)
-                    {
-                        if ((createinput[i].StartingPaymentNumber >= createinput[j].StartingPaymentNumber
-                            && createinput[i].StartingPaymentNumber <= createinput[j].EndingPaymentNumber)||
-                            (createinput[i].EndingPaymentNumber >= createinput[j].StartingPaymentNumber
-                            && createinput[i].EndingPaymentNumber <= createinput[j].EndingPaymentNumber))
-                            return false;
-
-                    }
-                }
-                return true;
-
-            }
-
-        }
-
         /// <summary>
         /// Get UploadMethodList
         /// </summary>
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetUploadMethodList(AutoSearchInput input)
         {
-            return await (from uploadtype in _typeOfUploadFileUnitRepository.GetAll().Where(p=>p.TypeofUploadId==TyeofUpload.UploadMethod)
+            return await (from uploadtype in _typeOfUploadFileUnitRepository.GetAll().Where(p => p.TypeofUploadId == TyeofUpload.UploadMethod)
                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Notes.Contains(input.Query))
                           select new NameValueDto { Name = uploadtype.Description, Value = uploadtype.Id.ToString() }).ToListAsync();
         }

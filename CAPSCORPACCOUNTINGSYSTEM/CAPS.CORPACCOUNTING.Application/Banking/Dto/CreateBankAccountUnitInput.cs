@@ -127,7 +127,7 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public List<CreateAddressUnitInput> Addresses { get; set; }
 
         /// <summary>Gets or Sets BankAccountPaymentRangeList. </summary>
-        public List<CreateBankAccountPaymentRangeInput> BankAccountPaymentRangeList { get; set; }
+        public List<BankAccountPaymentRangeInput> BankAccountPaymentRangeList { get; set; }
 
 
     }

@@ -4,6 +4,7 @@ using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
@@ -59,7 +60,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// Get DivisionsList
         /// </summary>
         /// <returns></returns>
-        Task<List<AutoFillDto>> GetDivisionList(AutoSearchInput input);
+        Task<List<DivisionCacheItem>> GetDivisionList(AutoSearchInput input);
 
         /// <summary>
         /// Get ProjectStatusList

@@ -239,11 +239,11 @@ namespace CAPS.CORPACCOUNTING.Payables
             return new PagedResultOutput<InvoiceEntryDocumentDetailUnitDto>(results.Count, results.Select(item =>
             {
                 var dto = item.InvoiceDetails.MapTo<InvoiceEntryDocumentDetailUnitDto>();
-                dto.AccountDesc = item.accountDesc;
-                dto.SubAccount1Desc = item.subAccount1;
-                dto.SubAccount2Desc = item.subAccount2;
-                dto.SubAccount3Desc = item.subAccount3;
-                dto.TaxRebateDesc = item.taxCredit;
+                dto.AccountNumber = item.accountDesc;
+                dto.SubAccountNumber1 = item.subAccount1;
+                dto.SubAccountNumber2 = item.subAccount2;
+                dto.SubAccountNumber3 = item.subAccount3;
+                dto.TaxRebateNumber = item.taxCredit;
                 dto.AccountingDocumentId = item.InvoiceDetails.Id;
                 return dto;
             }).ToList());

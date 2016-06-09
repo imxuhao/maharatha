@@ -4,11 +4,9 @@ using Abp.Domain.Services;
 using Abp.Zero;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Uow;
-using System;
 using System.Linq;
 using Abp.UI;
 using CAPS.CORPACCOUNTING.Accounting;
-using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {

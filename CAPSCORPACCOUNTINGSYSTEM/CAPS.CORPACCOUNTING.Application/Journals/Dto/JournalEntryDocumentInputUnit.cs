@@ -1,12 +1,15 @@
-﻿using CAPS.CORPACCOUNTING.Accounting;
-using CAPS.CORPACCOUNTING.Journals.dto;
+﻿using Abp.AutoMapper;
+using CAPS.CORPACCOUNTING.Accounting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CAPS.CORPACCOUNTING.Journals
+namespace CAPS.CORPACCOUNTING.Journals.dto
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
+    [AutoMapTo(typeof(JournalEntryDocumentUnit))]
     public class JournalEntryDocumentInputUnit : AccountingHeaderTransactionInputUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>
@@ -36,11 +39,12 @@ namespace CAPS.CORPACCOUNTING.Journals
         ///<summary>Get Sets the IsBatchRemoved field.</summary>
         public virtual bool? IsBatchRemoved { get; set; }
 
-        //Gets or sets JournalTypeId field.
+        ///<summary>Gets or sets JournalTypeId field.</summary>
         [EnumDataType(typeof(JournalType))]
         public JournalType JournalTypeId { get; set; }
 
-        public List<JournalEntryDocDetailInputUnit> JournalEntryDocDetailList { get; set; }
+        ///<summary>Gets or sets JournalEntryDetailList field.</summary>
+        public List<JournalEntryDetailInputUnit> JournalEntryDetailList { get; set; }
     }
 }
 

@@ -1,17 +1,20 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Accounting.Dto
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class AccountingItemInputUnit : IInputDto
     {
         /// <summary>Gets or sets the AccountingItemId field. </summary>
-       // [Range(1,Int64.MaxValue)]
         public long AccountingItemId { get; set; }
 
         /// <summary>Gets or sets the AccountingDocumentID field. </summary>
@@ -31,39 +34,21 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the LedgerReference field. </summary>       
         public string LedgerReference { get; set; }
 
-        [Column(TypeName = "smalldatetime")]
+        /// <summary>Gets or sets the LedgerDate field. </summary>    
         public DateTime? LedgerDate { get; set; }
 
         /// <summary>Gets or sets the LedgerYYYYMM field. </summary>
         public int? LedgerYyyymm { get; set; }
 
         /// <summary>Gets or sets the AccountID field. </summary>
-        //[Range(1,Int32.MaxValue)]
+        [Required]
+        [Range(1, Int64.MaxValue)]
         public long AccountId { get; set; }
 
-        /// <summary>Gets or sets the Account field. </summary>
-        public string AccountDesc { get; set; }
-
         /// <summary>Gets or sets the JobID field. </summary>
-        //[Range(1, Int32.MaxValue)]
+        [Required]
+        [Range(1, Int32.MaxValue)]
         public int JobId { get; set; }
-
-        /// <summary>Gets or sets the Job field. </summary>
-        public string JobDesc { get; set; }
-
-        /// <summary>Gets or sets the CreditAccountId field. </summary>
-        //[Range(1, Int32.MaxValue)]
-        public long CreditAccountId { get; set; }
-
-        /// <summary>Gets or sets the Account field. </summary>
-        public string CreditAccountDesc { get; set; }
-
-        /// <summary>Gets or sets the CreditJobId field. </summary>
-        //[Range(1, Int32.MaxValue)]
-        public int CreditJobId { get; set; }
-
-        /// <summary>Gets or sets the Job field. </summary>
-        public string CreditJobDesc { get; set; }
 
         /// <summary>Gets or sets the ItemMemo field. </summary>   
         public string ItemMemo { get; set; }
@@ -131,41 +116,12 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the SubAccountID10 field. </summary>
         public long? SubAccountId10 { get; set; }
 
-        /// <summary>Gets or sets the CreditSubAccountID1 field. </summary>
-        public long? CreditSubAccountId1 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID2 field. </summary>
-        public long? CreditSubAccountId2 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID3 field. </summary>
-        public long? CreditSubAccountId3 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID4 field. </summary>
-        public long? CreditSubAccountId4 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID5 field. </summary>
-        public long? CreditSubAccountId5 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID6 field. </summary>
-        public long? CreditSubAccountId6 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID7 field. </summary>
-        public long? CreditSubAccountId7 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID8 field. </summary>
-        public long? CreditSubAccountId8 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID9 field. </summary>
-        public long? CreditSubAccountId9 { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID10 field. </summary>
-        public long? CreditSubAccountId10 { get; set; }
-
         /// <summary>Gets or sets the TypeOf1099T4ID field. </summary>
         public Typeof1099T4? TypeOf1099T4Id { get; set; }
 
         /// <summary>Gets or sets the Amount field. </summary>
         [Range(Double.MinValue, Double.MaxValue)]
+        [CustomAmount()]
         public decimal? Amount { get; set; }
 
         /// <summary>Gets or sets the CompanyCurrencyAmount field. </summary>
@@ -210,12 +166,8 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the ICTAccountingItemID field. </summary>
         public long? IctAccountingItemId { get; set; }
 
-
         /// <summary>Gets or sets the TaxRebateID field. </summary>
         public int? TaxRebateId { get; set; }
-
-        /// <summary>Gets or sets the TaxRebateDesc field. </summary>
-        public string TaxRebateDesc { get; set; }
 
         /// <summary>Gets or sets the CurrencyOverrideRate field. </summary>
         public double? CurrencyOverrideRate { get; set; }
@@ -242,64 +194,5 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the IsAccountingItemSplit field. </summary>
         public bool IsAccountingItemSplit { get; set; }
 
-        /// <summary>Gets or sets the SubAccountId1Desc field. </summary>
-        public string SubAccount1Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID2Desc field. </summary>
-        public string SubAccount2Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID3Desc field. </summary>
-        public string SubAccount3Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID4Desc field. </summary>
-        public string SubAccount4Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID5Desc field. </summary>
-        public string SubAccount5Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID6Desc field. </summary>
-        public string SubAccount6Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID7Desc field. </summary>
-        public string SubAccount7Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID8Desc field. </summary>
-        public string SubAccount8Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID9Desc field. </summary>
-        public string SubAccount9Desc { get; set; }
-
-        /// <summary>Gets or sets the SubAccountID10Desc field. </summary>
-        public string SubAccount10Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID1Desc field. </summary>
-        public string CreditSubAccount1Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID2Desc field. </summary>
-        public string CreditSubAccount2Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID3Desc field. </summary>
-        public string CreditSubAccount3Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID4Desc field. </summary>
-        public string CreditSubAccount4Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID5Desc field. </summary>
-        public string CreditSubAccount5Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID6Desc field. </summary>
-        public string CreditSubAccount6Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID7Desc field. </summary>
-        public string CreditSubAccount7Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID8Desc field. </summary>
-        public string CreditSubAccount8Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID9Desc field. </summary>
-        public string CreditSubAccount9Desc { get; set; }
-
-        /// <summary>Gets or sets the CreditSubAccountID10Desc field. </summary>
-        public string CreditSubAccount10Desc { get; set; }
     }
 }

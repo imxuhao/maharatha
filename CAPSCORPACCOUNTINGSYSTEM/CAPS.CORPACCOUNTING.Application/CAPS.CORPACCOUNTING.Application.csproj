@@ -248,6 +248,7 @@
     <Compile Include="Helper\CacheItems\VendorCacheItem.cs" />
     <Compile Include="Helper\CacheKeyStores.cs" />
     <Compile Include="Helper\CacheItem.cs" />
+    <Compile Include="Helper\CustomAmountAttribute.cs" />
     <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Helper\EnumList.cs" />
     <Compile Include="Helper\Helper.cs" />
@@ -307,11 +308,10 @@
     <Compile Include="JobCosting\RollupCenterUnitAppService.cs" />
     <Compile Include="JobCosting\JobUnitAppService.cs" />
     <Compile Include="Accounting\Dto\GetTransactionList.cs" />
-    <Compile Include="Journals\Dto\JournalEntryDocDetailUnitDto.cs" />
-    <Compile Include="Journals\Dto\JournalEntryDocDetailInputUnit.cs" />
-    <Compile Include="Journals\IJournalEntryDocDetailAppService.cs" />
+    <Compile Include="Journals\Dto\JournalCreditEntryDetailUnitDto.cs" />
+    <Compile Include="Journals\Dto\JournalEntryDetailUnitDto.cs" />
+    <Compile Include="Journals\Dto\JournalEntryDetailInputUnit.cs" />
     <Compile Include="Journals\IJournalEntryDocumentAppService.cs" />
-    <Compile Include="Journals\JournalEntryDocDetailAppService.cs" />
     <Compile Include="Journals\JournalEntryDocumentAppService.cs" />
     <Compile Include="Journals\Dto\JournalEntryDocumentUnitDto.cs" />
     <Compile Include="Journals\Dto\JournalEntryDocumentInputUnit.cs" />

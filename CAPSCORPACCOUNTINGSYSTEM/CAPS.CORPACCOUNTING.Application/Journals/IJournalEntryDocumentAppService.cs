@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Journals.dto;
+using CAPS.CORPACCOUNTING.Journals.Dto;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -34,6 +36,12 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <returns></returns>
         Task DeleteJournalEntryDocumentUnit(IdInput input);
 
+        /// <summary>
+        /// Delete Journal Detail Document.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeleteJournalDetailUnit(IdInput<long> input);
 
         /// <summary>
         /// Get Journal Entry Document List.
@@ -41,6 +49,25 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<JournalEntryDocumentUnitDto>> GetJournalEntryDocumentUnits(SearchInputDto input);
+
+
+
+
+        /// <summary>
+        /// Get Journal Details by AccountingDocumentId List.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+
+        Task<PagedResultOutput<JournalEntryDetailUnitDto>> GetJournalDetailsByDocumentId(GetTransactionList input);
+
+        /// <summary>
+        /// Get Journal Details by AccountingDocumentId List.
+        /// (This method is created for WEB UI
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<JournalCreditEntryDetailUnitDto>> GetJournalDetailsByAccountingDocumentId(GetTransactionList input);
 
         /// <summary>
         /// Get JournalTypeList

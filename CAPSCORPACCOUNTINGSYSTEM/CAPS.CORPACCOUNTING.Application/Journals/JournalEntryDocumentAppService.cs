@@ -14,51 +14,76 @@ using Abp.Linq.Extensions;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters.Dto;
-using Abp.Auditing;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Dependency;
 using CAPS.CORPACCOUNTING.Authorization;
 using AutoMapper;
+using CAPS.CORPACCOUNTING.Journals.dto;
+using System;
+using CAPS.CORPACCOUNTING.Journals.Dto;
+using CAPS.CORPACCOUNTING.JobCosting;
+using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.Common;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     [AbpAuthorize] //This is to ensure only logged in user has access to this module.
-    public class JournalEntryDocumentAppService : CORPACCOUNTINGServiceBase, IJournalEntryDocumentAppService, ITransientDependency
+    public class JournalEntryDocumentAppService : CORPACCOUNTINGServiceBase, IJournalEntryDocumentAppService
     {
         private readonly JournalEntryDocumentUnitManager _journalEntryDocumentUnitManager;
         private readonly IRepository<JournalEntryDocumentUnit, long> _journalEntryDocumentUnitRepository;
         private readonly IRepository<BatchUnit> _batchUnitRepository;
-        private readonly UserManager _userManager;
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private IdOutputDto<long> _response = null;
-        private readonly CustomAppSession _CustomAppSession;
         private readonly IRepository<User, long> _userUnitRepository;
-        private readonly JournalEntryDocDetailAppService _journalEntryDocDetailAppService;
+        private readonly IRepository<JournalEntryDocumentDetailUnit, long> _journalEntryDocumentDetailUnitRepository;
+        private readonly JournalEntryDocumentDetailUnitManager _journalEntryDocumentDetailUnitManager;
+        private readonly IRepository<JobUnit> _jobUnitRepository;
+        private readonly IRepository<AccountUnit, long> _accountUnitRepository;
+        private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
+        private readonly IRepository<VendorUnit, int> _vendorUnitRepository;
+        private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="journalEntryDocumentUnitManager"></param>
         /// <param name="journalEntryDocumentUnitRepository"></param>
-        /// <param name="userManager"></param>
-        /// <param name="unitOfWorkManager"></param>
         /// <param name="batchUnitRepository"></param>
+        /// <param name="userUnitRepository"></param>
+        /// <param name="journalEntryDocumentDetailUnitRepository"></param>
+        /// <param name="journalEntryDocumentDetailUnitManager"></param>
+        /// <param name="jobUnitRepository"></param>
+        /// <param name="accountUnitRepository"></param>
+        /// <param name="subAccountUnitRepository"></param>
+        /// <param name="vendorUnitRepository"></param>
+        /// <param name="taxCreditUnitRepository"></param>
         public JournalEntryDocumentAppService(JournalEntryDocumentUnitManager journalEntryDocumentUnitManager,
             IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitRepository,
-            UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<BatchUnit> batchUnitRepository,
-            CustomAppSession CustomAppSession,
+            IRepository<BatchUnit> batchUnitRepository,
             IRepository<User, long> userUnitRepository,
-            JournalEntryDocDetailAppService journalEntryDocDetailAppService
-            )
+            IRepository<JournalEntryDocumentDetailUnit, long> journalEntryDocumentDetailUnitRepository,
+            JournalEntryDocumentDetailUnitManager journalEntryDocumentDetailUnitManager,
+            IRepository<JobUnit> jobUnitRepository,
+            IRepository<AccountUnit, long> accountUnitRepository,
+            IRepository<SubAccountUnit, long> subAccountUnitRepository,
+            IRepository<VendorUnit, int> vendorUnitRepository,
+            IRepository<TaxCreditUnit> taxCreditUnitRepository)
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
             _journalEntryDocumentUnitRepository = journalEntryDocumentUnitRepository;
-            _userManager = userManager;
-            _unitOfWorkManager = unitOfWorkManager;
             _batchUnitRepository = batchUnitRepository;
-            _CustomAppSession = CustomAppSession;
             _userUnitRepository = userUnitRepository;
-            _journalEntryDocDetailAppService = journalEntryDocDetailAppService;
+            _journalEntryDocumentDetailUnitRepository = journalEntryDocumentDetailUnitRepository;
+            _journalEntryDocumentDetailUnitManager = journalEntryDocumentDetailUnitManager;
+            _jobUnitRepository = jobUnitRepository;
+            _accountUnitRepository = accountUnitRepository;
+            _subAccountUnitRepository = subAccountUnitRepository;
+            _vendorUnitRepository = vendorUnitRepository;
+            _taxCreditUnitRepository = taxCreditUnitRepository;
         }
 
         /// <summary>
@@ -71,18 +96,17 @@ namespace CAPS.CORPACCOUNTING.Journals
         public async Task<IdOutputDto<long>> CreateJournalEntryDocumentUnit(JournalEntryDocumentInputUnit input)
         {
 
-            await _journalEntryDocDetailAppService.ValidateJournalDetails(input.JournalEntryDocDetailList);
-
             var journalEntryDocumentUnit = new JournalEntryDocumentUnit();
-            Mapper.CreateMap<JournalEntryDocumentInputUnit, JournalEntryDocumentUnit>();
             Mapper.Map(input, journalEntryDocumentUnit);
-            _response = new IdOutputDto<long>();
-            _response.Id = await _journalEntryDocumentUnitManager.CreateAsync(journalEntryDocumentUnit);
+            var accountDocumentId = await _journalEntryDocumentUnitManager.CreateAsync(journalEntryDocumentUnit);
 
-            input.JournalEntryDocDetailList.ForEach(u => u.AccountingDocumentId = _response.Id);
-            await _journalEntryDocDetailAppService.JournalEntryDocumentTransactionUnit(input.JournalEntryDocDetailList);
+            if (!ReferenceEquals(input.JournalEntryDetailList, null))
+            {
+                input.JournalEntryDetailList.ForEach(u => u.AccountingDocumentId = accountDocumentId);
+                await JournalEntryDetails(input.JournalEntryDetailList);
+            }
             await CurrentUnitOfWork.SaveChangesAsync();
-            return _response;
+            return new IdOutputDto<long>() { Id = accountDocumentId };
         }
 
         /// <summary>
@@ -94,66 +118,12 @@ namespace CAPS.CORPACCOUNTING.Journals
         [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry_Edit)]
         public async Task UpdateJournalEntryDocumentUnit(JournalEntryDocumentInputUnit input)
         {
-            await _journalEntryDocDetailAppService.ValidateJournalDetails(input.JournalEntryDocDetailList);
-
             var journalEntryDocumentUnit = await _journalEntryDocumentUnitRepository.GetAsync(input.AccountingDocumentId);
-
-            #region Setting the values to be updated
-            journalEntryDocumentUnit.BatchId = input.BatchId;
-            journalEntryDocumentUnit.IsReversingEntry = input.IsReversingEntry;
-            journalEntryDocumentUnit.DateOfReversal = input.DateOfReversal;
-            journalEntryDocumentUnit.IsRecurringEntry = input.IsRecurringEntry;
-            journalEntryDocumentUnit.DateToRecur = input.DateToRecur;
-            journalEntryDocumentUnit.FinalDate = input.FinalDate;
-            journalEntryDocumentUnit.LastPostDate = input.LastPostDate;
-            journalEntryDocumentUnit.BatchInfo = input.BatchInfo;
-            journalEntryDocumentUnit.IsBatchRemoved = input.IsBatchRemoved;
-            journalEntryDocumentUnit.Description = input.Description;
-            journalEntryDocumentUnit.TypeOfAccountingDocumentId = input.TypeOfAccountingDocumentId;
-            journalEntryDocumentUnit.TypeOfObjectId = input.TypeOfObjectId;
-            journalEntryDocumentUnit.RecurDocId = input.RecurDocId;
-            journalEntryDocumentUnit.ReverseDocId = input.ReverseDocId;
-            journalEntryDocumentUnit.DocumentDate = input.DocumentDate;
-            journalEntryDocumentUnit.TransactionDate = input.TransactionDate.Value;
-            journalEntryDocumentUnit.DatePosted = input.DatePosted;
-            journalEntryDocumentUnit.OriginalDocumentId = input.OriginalDocumentId;
-            journalEntryDocumentUnit.ControlTotal = input.ControlTotal;
-            journalEntryDocumentUnit.DocumentReference = input.DocumentReference;
-            journalEntryDocumentUnit.VoucherReference = input.VoucherReference;
-            journalEntryDocumentUnit.TypeOfCurrencyId = input.TypeOfCurrencyId;
-            journalEntryDocumentUnit.CurrencyAdjustmentId = input.CurrencyAdjustmentId;
-            journalEntryDocumentUnit.PostBatchDescription = input.PostBatchDescription;
-            journalEntryDocumentUnit.IsPosted = input.IsPosted;
-            journalEntryDocumentUnit.IsAutoPosted = input.IsAutoPosted;
-            journalEntryDocumentUnit.IsChanged = input.IsChanged;
-            journalEntryDocumentUnit.PostedByUserId = input.PostedByUserId;
-            journalEntryDocumentUnit.BankRecControlId = input.BankRecControlId;
-            journalEntryDocumentUnit.IsSelected = input.IsSelected;
-            journalEntryDocumentUnit.IsActive = input.IsActive;
-            journalEntryDocumentUnit.IsApproved = input.IsApproved;
-            journalEntryDocumentUnit.TypeOfInactiveStatusId = input.TypeOfInactiveStatusId;
-            journalEntryDocumentUnit.IsBankRecOmitted = input.IsBankRecOmitted;
-            journalEntryDocumentUnit.IsICTJournal = input.IsICTJournal;
-            journalEntryDocumentUnit.ICTCompanyId = input.ICTCompanyId;
-            journalEntryDocumentUnit.ICTAccountingDocumentId = input.ICTAccountingDocumentId;
-            journalEntryDocumentUnit.CurrencyOverrideRate = input.CurrencyOverrideRate;
-            journalEntryDocumentUnit.FunctionalCurrencyControlTotal = input.FunctionalCurrencyControlTotal;
-            journalEntryDocumentUnit.TypeOfCurrencyRateId = input.TypeOfCurrencyRateId;
-            journalEntryDocumentUnit.MemoLine = input.MemoLine;
-            journalEntryDocumentUnit.Is13Period = input.Is13Period;
-            journalEntryDocumentUnit.HomeCurrencyAmount = input.HomeCurrencyAmount;
-            journalEntryDocumentUnit.CustomForexRate = input.CustomForexRate;
-            journalEntryDocumentUnit.IsPOSubmitForApproval = input.IsPOSubmitForApproval;
-            journalEntryDocumentUnit.IsCPASTran = input.IsCPASTran;
-            journalEntryDocumentUnit.CPASProjCloseId = input.CPASProjCloseId;
-            journalEntryDocumentUnit.CPASProjId = input.CPASProjId;
-            journalEntryDocumentUnit.OrganizationUnitId = input.OrganizationUnitId;
-            journalEntryDocumentUnit.JournalTypeId = input.JournalTypeId;
-            #endregion
-
+            Mapper.Map(input, journalEntryDocumentUnit);
             await _journalEntryDocumentUnitManager.UpdateAsync(journalEntryDocumentUnit);
 
-            await _journalEntryDocDetailAppService.JournalEntryDocumentTransactionUnit(input.JournalEntryDocDetailList);
+            if (!ReferenceEquals(input.JournalEntryDetailList, null))
+                await JournalEntryDetails(input.JournalEntryDetailList);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
 
@@ -163,11 +133,40 @@ namespace CAPS.CORPACCOUNTING.Journals
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry_Delete)]
+        [UnitOfWork]
         public async Task DeleteJournalEntryDocumentUnit(IdInput input)
         {
             await _journalEntryDocumentUnitManager.DeleteAsync(input);
+            await _journalEntryDocumentDetailUnitRepository.DeleteAsync(p => p.AccountingDocumentId == input.Id);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
+
+
+
+        /// <summary>
+        /// Delete Journal Details By Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry_Delete)]
+        [UnitOfWork]
+        public async Task DeleteJournalDetailUnit(IdInput<long> input)
+        {
+            await _journalEntryDocumentDetailUnitManager.DeleteAsync(input);
+            var creditJournal = await _journalEntryDocumentDetailUnitRepository.FirstOrDefaultAsync(u => u.AccountingItemOrigId == input.Id);
+            if (!ReferenceEquals(creditJournal, null))
+            {
+                await _journalEntryDocumentDetailUnitManager.DeleteAsync(new IdInput<long>() { Id = creditJournal.Id });
+            }
+
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Financials_Journals_Entry)]
         public async Task<PagedResultOutput<JournalEntryDocumentUnitDto>> GetJournalEntryDocumentUnits(SearchInputDto input)
@@ -182,13 +181,13 @@ namespace CAPS.CORPACCOUNTING.Journals
 
             if (!ReferenceEquals(input.Filters, null))
             {
-                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                var mapSearchFilters = Helper.MappingFilters(input.Filters);
                 if (!ReferenceEquals(mapSearchFilters, null))
-                    query = Helper.CreateFilters(query, mapSearchFilters);
+                    query = query.CreateFilters(mapSearchFilters);
             }
             query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
                 p => p.Journals.OrganizationUnitId == input.OrganizationUnitId);
-            var x = _userUnitRepository.GetAllList();
+
 
             var resultCount = await query.CountAsync();
             var results = await query
@@ -210,6 +209,197 @@ namespace CAPS.CORPACCOUNTING.Journals
         }
 
         /// <summary>
+        /// Get Journal Entry Details by AccountingDocumentId List.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<JournalEntryDetailUnitDto>> GetJournalDetailsByDocumentId(GetTransactionList input)
+        {
+            var query = from journals in _journalEntryDocumentDetailUnitRepository.GetAll()
+                        join job in _jobUnitRepository.GetAll() on journals.JobId equals job.Id into job
+                        from jobs in job.DefaultIfEmpty()
+                        join line in _accountUnitRepository.GetAll() on journals.AccountId equals line.Id into line
+                        from lines in line.DefaultIfEmpty()
+                        join subAccount1 in _subAccountUnitRepository.GetAll() on journals.SubAccountId1 equals subAccount1.Id
+                        into subAccount1
+                        from subAccounts1 in subAccount1.DefaultIfEmpty()
+                        join subAccount2 in _subAccountUnitRepository.GetAll() on journals.SubAccountId2 equals subAccount2.Id
+                        into subAccount2
+                        from subAccounts2 in subAccount2.DefaultIfEmpty()
+                        join subAccount3 in _subAccountUnitRepository.GetAll() on journals.SubAccountId3 equals subAccount3.Id
+                        into subAccount3
+                        from subAccounts3 in subAccount3.DefaultIfEmpty()
+                        join vendor in _vendorUnitRepository.GetAll() on journals.VendorId equals vendor.Id into vendor
+                        from vendors in vendor.DefaultIfEmpty()
+                        join taxCredit in _taxCreditUnitRepository.GetAll() on journals.TaxRebateId equals taxCredit.Id into
+                            taxCredit
+                        from taxCredits in taxCredit.DefaultIfEmpty()
+                        select new
+                        {
+                            JournalDetails = journals,
+                            jobs.JobNumber,
+                            lines.AccountNumber,
+                            SubAccountNumber1 = subAccounts1.SubAccountNumber,
+                            SubAccountNumber2 = subAccounts2.SubAccountNumber,
+                            SubAccountNumber3 = subAccounts3.SubAccountNumber,
+                            vendorLastName = vendors.LastName,
+                            taxCreditNumber = taxCredits.Number
+                        };
+
+
+            query = query.Where(p => p.JournalDetails.AccountingDocumentId.Value == input.AccountingDocumentId)
+                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.JournalDetails.OrganizationUnitId == input.OrganizationUnitId);
+
+            var results = await query
+                .AsNoTracking()
+                .ToListAsync();
+
+            var mapResult = results.Select(item =>
+            {
+                var dto = item.JournalDetails.MapTo<JournalEntryDetailUnitDto>();
+                dto.AccountingItemId = item.JournalDetails.Id;
+                dto.JobNumber = item.JobNumber;
+                dto.AccountNumber = item.AccountNumber;
+                dto.SubAccountNumber1 = item.SubAccountNumber1;
+                dto.SubAccountNumber2 = item.SubAccountNumber2;
+                dto.SubAccountNumber3 = item.SubAccountNumber3;
+                dto.VendorName = item.vendorLastName;
+                dto.TaxRebateNumber = item.taxCreditNumber;
+                return dto;
+            }).ToList();
+
+            return new PagedResultOutput<JournalEntryDetailUnitDto>(mapResult.Count, mapResult);
+        }
+
+
+        /// <summary>
+        /// Get Journal Entry Details by AccountingDocumentId List.
+        /// (This method is created for WEB UI
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<JournalCreditEntryDetailUnitDto>> GetJournalDetailsByAccountingDocumentId(GetTransactionList input)
+        {
+            var query = from journals in _journalEntryDocumentDetailUnitRepository.GetAll()
+                        join job in _jobUnitRepository.GetAll() on journals.JobId equals job.Id into job
+                        from jobs in job.DefaultIfEmpty()
+                        join line in _accountUnitRepository.GetAll() on journals.AccountId equals line.Id into line
+                        from lines in line.DefaultIfEmpty()
+                        join subAccount1 in _subAccountUnitRepository.GetAll() on journals.SubAccountId1 equals subAccount1.Id
+                        into subAccount1
+                        from subAccounts1 in subAccount1.DefaultIfEmpty()
+                        join subAccount2 in _subAccountUnitRepository.GetAll() on journals.SubAccountId2 equals subAccount2.Id
+                        into subAccount2
+                        from subAccounts2 in subAccount2.DefaultIfEmpty()
+                        join subAccount3 in _subAccountUnitRepository.GetAll() on journals.SubAccountId3 equals subAccount3.Id
+                        into subAccount3
+                        from subAccounts3 in subAccount3.DefaultIfEmpty()
+                        join vendor in _vendorUnitRepository.GetAll() on journals.VendorId equals vendor.Id into vendor
+                        from vendors in vendor.DefaultIfEmpty()
+                        join taxCredit in _taxCreditUnitRepository.GetAll() on journals.TaxRebateId equals taxCredit.Id into
+                            taxCredit
+                        from taxCredits in taxCredit.DefaultIfEmpty()
+                        select new
+                        {
+                            JournalDetails = journals,
+                            jobs.JobNumber,
+                            lines.AccountNumber,
+                            SubAccountNumber1 = subAccounts1.SubAccountNumber,
+                            SubAccountNumber2 = subAccounts2.SubAccountNumber,
+                            SubAccountNumber3 = subAccounts3.SubAccountNumber,
+                            vendorLastName = vendors.LastName,
+                            taxCreditNumber = taxCredits.Number
+                        };
+
+
+            query = query.Where(p => p.JournalDetails.AccountingDocumentId.Value == input.AccountingDocumentId)
+                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.JournalDetails.OrganizationUnitId == input.OrganizationUnitId);
+
+            var results = await query
+                .AsNoTracking()
+                .ToListAsync();
+
+            var mapResult = results.Select(item =>
+            {
+                var dto = item.JournalDetails.MapTo<JournalCreditEntryDetailUnitDto>();
+                dto.AccountingItemId = item.JournalDetails.Id;
+                dto.JobNumber = item.JobNumber;
+                dto.AccountNumber = item.AccountNumber;
+                dto.SubAccountNumber1 = item.SubAccountNumber1;
+                dto.SubAccountNumber2 = item.SubAccountNumber2;
+                dto.SubAccountNumber3 = item.SubAccountNumber3;
+                dto.VendorName = item.vendorLastName;
+                dto.TaxRebateNumber = item.taxCreditNumber;
+                return dto;
+            }).ToList();
+
+            var creditMapResult = MapJournalsDetailsOutPutDto(mapResult.OrderByDescending(u => u.Amount).ToList());
+
+            return new PagedResultOutput<JournalCreditEntryDetailUnitDto>(creditMapResult.Count, creditMapResult);
+        }
+
+        private List<JournalCreditEntryDetailUnitDto> MapJournalsDetailsOutPutDto(List<JournalCreditEntryDetailUnitDto> journalEntryDocDetailList)
+        {
+            var journaList = new List<JournalCreditEntryDetailUnitDto>();
+            for (int i = 0; i < journalEntryDocDetailList.Count; i++)
+            {
+                JournalCreditEntryDetailUnitDto journalDetail = new JournalCreditEntryDetailUnitDto();
+
+                Mapper.CreateMap<JournalCreditEntryDetailUnitDto, JournalCreditEntryDetailUnitDto>();
+                Mapper.Map(journalEntryDocDetailList[i], journalDetail);
+
+                switch (Math.Sign(journalEntryDocDetailList[i].Amount.Value))
+                {
+                    case 1:
+                        var creditJournalItem = journalEntryDocDetailList.Find(u => u.AccountingItemOrigId == journalEntryDocDetailList[i].AccountingItemId);
+                        if (!ReferenceEquals(creditJournalItem, null))
+                        {
+                            journalDetail.CreditJobId = creditJournalItem.JobId;
+                            journalDetail.CreditJobNumber = creditJournalItem.JobNumber;
+                            journalDetail.CreditAccountId = creditJournalItem.AccountId;
+                            journalDetail.CreditAccountNumber = creditJournalItem.AccountNumber;
+                            journalDetail.CreditSubAccountId1 = creditJournalItem.SubAccountId1;
+                            journalDetail.CreditSubAccountId2 = creditJournalItem.SubAccountId2;
+                            journalDetail.CreditSubAccountId3 = creditJournalItem.SubAccountId3;
+                            journalDetail.CreditSubAccountNumber1 = creditJournalItem.SubAccountNumber1;
+                            journalDetail.CreditSubAccountNumber2 = creditJournalItem.SubAccountNumber2;
+                            journalDetail.CreditSubAccountNumber3 = creditJournalItem.SubAccountNumber3;
+                            journalDetail.AccountingItemOrigId = creditJournalItem.AccountingItemOrigId;
+                            journalEntryDocDetailList.Remove(creditJournalItem);
+                        }
+                        journaList.Add(journalDetail);
+                        break;
+                    case -1:
+                        journalDetail.CreditJobId = journalEntryDocDetailList[i].JobId;
+                        journalDetail.CreditJobNumber = journalEntryDocDetailList[i].JobNumber;
+                        journalDetail.CreditAccountId = journalEntryDocDetailList[i].AccountId;
+                        journalDetail.CreditAccountNumber = journalEntryDocDetailList[i].AccountNumber;
+                        journalDetail.CreditSubAccountId1 = journalEntryDocDetailList[i].SubAccountId1;
+                        journalDetail.CreditSubAccountId2 = journalEntryDocDetailList[i].SubAccountId2;
+                        journalDetail.CreditSubAccountId3 = journalEntryDocDetailList[i].SubAccountId3;
+                        journalDetail.CreditSubAccountNumber1 = journalEntryDocDetailList[i].SubAccountNumber1;
+                        journalDetail.CreditSubAccountNumber2 = journalEntryDocDetailList[i].SubAccountNumber2;
+                        journalDetail.CreditSubAccountNumber3 = journalEntryDocDetailList[i].SubAccountNumber3;
+                        journalDetail.AccountingItemOrigId = journalEntryDocDetailList[i].AccountingItemOrigId;
+                        journalDetail.AccountId = null;
+                        journalDetail.AccountNumber = string.Empty;
+                        journalDetail.JobId = null;
+                        journalDetail.JobNumber = string.Empty;
+                        journalDetail.SubAccountNumber1 = string.Empty;
+                        journalDetail.SubAccountNumber2 = string.Empty;
+                        journalDetail.SubAccountNumber3 = string.Empty;
+                        journalDetail.SubAccountId1 = null;
+                        journalDetail.SubAccountId2 = null;
+                        journalDetail.SubAccountId3 = null;
+                        journaList.Add(journalDetail);
+                        break;
+                }
+            }
+            return journaList;
+        }
+
+
+        /// <summary>
         /// Get JournalTypeList
         /// </summary>
         /// <returns></returns>
@@ -217,5 +407,42 @@ namespace CAPS.CORPACCOUNTING.Journals
         {
             return EnumList.GetJournalTypeList();
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [UnitOfWork]
+        public async Task JournalEntryDetails(List<JournalEntryDetailInputUnit> input)
+        {
+            //adding/Update journalDocDetails
+            foreach (var journalDetails in input)
+            {
+                switch (Math.Sign(journalDetails.AccountingItemId))
+                {
+                    case 0:
+                        var journalDetail = journalDetails.MapTo<JournalEntryDocumentDetailUnit>();
+                        journalDetail.AccountingItemOrigAmount = journalDetail.Amount;
+                        await _journalEntryDocumentDetailUnitManager.CreateAsync(journalDetail);
+                        await CurrentUnitOfWork.SaveChangesAsync();
+
+                        break;
+                    case 1:
+                        long debitParentId = 0;
+                        var journalEntryDocDetailUnit = await _journalEntryDocumentDetailUnitRepository.GetAsync(journalDetails.AccountingItemId);
+                        Mapper.Map(journalDetails, journalEntryDocDetailUnit);
+                        if (debitParentId != 0)
+                            journalEntryDocDetailUnit.AccountingItemOrigId = debitParentId;
+
+                        await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalEntryDocDetailUnit);
+                        await CurrentUnitOfWork.SaveChangesAsync();
+
+                        break;
+                }
+            }
+        }
+
     }
 }

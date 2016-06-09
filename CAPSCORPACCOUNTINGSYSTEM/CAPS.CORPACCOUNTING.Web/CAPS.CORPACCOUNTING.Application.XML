@@ -4,6 +4,11 @@
         <name>CAPS.CORPACCOUNTING.Application</name>
     </assembly>
     <members>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountingItemId">
             <summary>Overriding the Id column with AccountingItemId </summary>
         </member>
@@ -31,32 +36,23 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.LedgerReference">
             <summary>Gets or sets the LedgerReference field. </summary>       
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.LedgerDate">
+            <summary>Gets or sets the LedgerDate field. </summary>    
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.LedgerYyyymm">
             <summary>Gets or sets the LedgerYYYYMM field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountId">
             <summary>Gets or sets the AccountID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountDesc">
-            <summary>Gets or sets the Account field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditAccountId">
-            <summary>Gets or sets the AccountID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditAccountDesc">
-            <summary>Gets or sets the Account field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountNumber">
+            <summary>Gets or sets the AccountNumber field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.JobId">
             <summary>Gets or sets the JobID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.JobDesc">
-            <summary>Gets or sets the Job field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditJobId">
-            <summary>Gets or sets the JobID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditJobDesc">
-            <summary>Gets or sets the Job field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.JobNumber">
+            <summary>Gets or sets the JobNumber field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.ItemMemo">
             <summary>Gets or sets the ItemMemo field. </summary>   
@@ -97,122 +93,62 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId1">
             <summary>Gets or sets the SubAccountID1 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount1Desc">
-            <summary>Gets or sets the SubAccount1Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber1">
+            <summary>Gets or sets the SubAccountNumber1 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId2">
             <summary>Gets or sets the SubAccountID2 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount2Desc">
-            <summary>Gets or sets the SubAccount2Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber2">
+            <summary>Gets or sets the SubAccountNumber2 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId3">
             <summary>Gets or sets the SubAccountID3 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount3Desc">
-            <summary>Gets or sets the SubAccount3Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber3">
+            <summary>Gets or sets the SubAccountNumber3 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId4">
             <summary>Gets or sets the SubAccountID4 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount4Desc">
-            <summary>Gets or sets the SubAccount4Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber4">
+            <summary>Gets or sets the SubAccountNumber4 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId5">
             <summary>Gets or sets the SubAccountID5 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount5Desc">
-            <summary>Gets or sets the SubAccount5Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber5">
+            <summary>Gets or sets the SubAccountNumber5 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId6">
             <summary>Gets or sets the SubAccountID6 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount6Desc">
-            <summary>Gets or sets the SubAccount6Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber6">
+            <summary>Gets or sets the SubAccountNumber6 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId7">
             <summary>Gets or sets the SubAccountID7 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount7Desc">
-            <summary>Gets or sets the SubAccount7Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber7">
+            <summary>Gets or sets the SubAccountNumber7 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId8">
             <summary>Gets or sets the SubAccountID8 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount8Desc">
-            <summary>Gets or sets the SubAccount8Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber8">
+            <summary>Gets or sets the SubAccountNumber8 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId9">
             <summary>Gets or sets the SubAccountID9 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount9Desc">
-            <summary>Gets or sets the SubAccount9Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber9">
+            <summary>Gets or sets the SubAccountNumber9 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountId10">
             <summary>Gets or sets the SubAccountID10 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccount10Desc">
-            <summary>Gets or sets the SubAccount10Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId1">
-            <summary>Gets or sets the CreditSubAccountID1 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount1Desc">
-            <summary>Gets or sets the CreditSubAccount1Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId2">
-            <summary>Gets or sets the CreditSubAccountID2 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount2Desc">
-            <summary>Gets or sets the CreditSubAccount2Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId3">
-            <summary>Gets or sets the CreditSubAccountID3 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount3Desc">
-            <summary>Gets or sets the CreditSubAccount3Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId4">
-            <summary>Gets or sets the CreditSubAccountID4 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount4Desc">
-            <summary>Gets or sets the CreditSubAccount4Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId5">
-            <summary>Gets or sets the CreditSubAccountID5 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount5Desc">
-            <summary>Gets or sets the CreditSubAccount5Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId6">
-            <summary>Gets or sets the CreditSubAccountID6 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount6Desc">
-            <summary>Gets or sets the CreditSubAccount6Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId7">
-            <summary>Gets or sets the CreditSubAccountID7 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount7Desc">
-            <summary>Gets or sets the CreditSubAccount7Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId8">
-            <summary>Gets or sets the CreditSubAccountID8 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount8Desc">
-            <summary>Gets or sets the CreditSubAccount8Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId9">
-            <summary>Gets or sets the CreditSubAccountID9 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount9Desc">
-            <summary>Gets or sets the CreditSubAccount9Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccountId10">
-            <summary>Gets or sets the CreditSubAccountID10 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CreditSubAccount10Desc">
-            <summary>Gets or sets the CreditSubAccount10Desc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SubAccountNumber10">
+            <summary>Gets or sets the SubAccountNumber10 field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.TypeOf1099T4Id">
             <summary>Gets or sets the TypeOf1099T4ID field. </summary>
@@ -292,8 +228,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.TaxRebateId">
             <summary>Gets or sets the TaxRebateID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.TaxRebateDesc">
-            <summary>Gets or sets the TaxRebateDesc field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.TaxRebateNumber">
+            <summary>Gets or sets the TaxRebateNumber field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CurrencyOverrideRate">
             <summary>Gets or sets the CurrencyOverrideRate field. </summary>
@@ -325,6 +261,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.IsAccountingItemSplit">
             <summary>Gets or sets the IsAccountingItemSplit field. </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.AccountingItemId">
             <summary>Gets or sets the AccountingItemId field. </summary>
         </member>
@@ -343,32 +284,17 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.LedgerReference">
             <summary>Gets or sets the LedgerReference field. </summary>       
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.LedgerDate">
+            <summary>Gets or sets the LedgerDate field. </summary>    
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.LedgerYyyymm">
             <summary>Gets or sets the LedgerYYYYMM field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.AccountId">
             <summary>Gets or sets the AccountID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.AccountDesc">
-            <summary>Gets or sets the Account field. </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.JobId">
             <summary>Gets or sets the JobID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.JobDesc">
-            <summary>Gets or sets the Job field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditAccountId">
-            <summary>Gets or sets the CreditAccountId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditAccountDesc">
-            <summary>Gets or sets the Account field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditJobId">
-            <summary>Gets or sets the CreditJobId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditJobDesc">
-            <summary>Gets or sets the Job field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.ItemMemo">
             <summary>Gets or sets the ItemMemo field. </summary>   
@@ -436,36 +362,6 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccountId10">
             <summary>Gets or sets the SubAccountID10 field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId1">
-            <summary>Gets or sets the CreditSubAccountID1 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId2">
-            <summary>Gets or sets the CreditSubAccountID2 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId3">
-            <summary>Gets or sets the CreditSubAccountID3 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId4">
-            <summary>Gets or sets the CreditSubAccountID4 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId5">
-            <summary>Gets or sets the CreditSubAccountID5 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId6">
-            <summary>Gets or sets the CreditSubAccountID6 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId7">
-            <summary>Gets or sets the CreditSubAccountID7 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId8">
-            <summary>Gets or sets the CreditSubAccountID8 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId9">
-            <summary>Gets or sets the CreditSubAccountID9 field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccountId10">
-            <summary>Gets or sets the CreditSubAccountID10 field. </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.TypeOf1099T4Id">
             <summary>Gets or sets the TypeOf1099T4ID field. </summary>
         </member>
@@ -517,9 +413,6 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.TaxRebateId">
             <summary>Gets or sets the TaxRebateID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.TaxRebateDesc">
-            <summary>Gets or sets the TaxRebateDesc field. </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CurrencyOverrideRate">
             <summary>Gets or sets the CurrencyOverrideRate field. </summary>
         </member>
@@ -543,66 +436,6 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.IsAccountingItemSplit">
             <summary>Gets or sets the IsAccountingItemSplit field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount1Desc">
-            <summary>Gets or sets the SubAccountId1Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount2Desc">
-            <summary>Gets or sets the SubAccountID2Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount3Desc">
-            <summary>Gets or sets the SubAccountID3Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount4Desc">
-            <summary>Gets or sets the SubAccountID4Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount5Desc">
-            <summary>Gets or sets the SubAccountID5Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount6Desc">
-            <summary>Gets or sets the SubAccountID6Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount7Desc">
-            <summary>Gets or sets the SubAccountID7Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount8Desc">
-            <summary>Gets or sets the SubAccountID8Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount9Desc">
-            <summary>Gets or sets the SubAccountID9Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SubAccount10Desc">
-            <summary>Gets or sets the SubAccountID10Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount1Desc">
-            <summary>Gets or sets the CreditSubAccountID1Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount2Desc">
-            <summary>Gets or sets the CreditSubAccountID2Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount3Desc">
-            <summary>Gets or sets the CreditSubAccountID3Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount4Desc">
-            <summary>Gets or sets the CreditSubAccountID4Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount5Desc">
-            <summary>Gets or sets the CreditSubAccountID5Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount6Desc">
-            <summary>Gets or sets the CreditSubAccountID6Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount7Desc">
-            <summary>Gets or sets the CreditSubAccountID7Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount8Desc">
-            <summary>Gets or sets the CreditSubAccountID8Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount9Desc">
-            <summary>Gets or sets the CreditSubAccountID9Desc field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CreditSubAccount10Desc">
-            <summary>Gets or sets the CreditSubAccountID10Desc field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>
@@ -2422,6 +2255,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItem.EmployeeItemList">
             <summary>
             Gets or Sets Employee List
+            </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CustomAmountAttribute">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumHelper.GetEnumValue``1(System.Int32)">
@@ -4475,66 +4313,152 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailUnitDto.VendorId">
+        <member name="T:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditAccountId">
+            <summary>Gets or sets the AccountID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditAccountNumber">
+            <summary>Gets or sets the CreditAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditJobId">
+            <summary>Gets or sets the JobID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditJobNumber">
+            <summary>Gets or sets the CreditJobNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId1">
+            <summary>Gets or sets the CreditSubAccountID1 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber1">
+            <summary>Gets or sets the CreditSubAccountNumber1 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId2">
+            <summary>Gets or sets the CreditSubAccountID2 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber2">
+            <summary>Gets or sets the CreditSubAccountNumber2 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId3">
+            <summary>Gets or sets the CreditSubAccountID3 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber3">
+            <summary>Gets or sets the CreditSubAccountNumber3 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId4">
+            <summary>Gets or sets the CreditSubAccountID4 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber4">
+            <summary>Gets or sets the CreditSubAccountNumber4 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId5">
+            <summary>Gets or sets the CreditSubAccountID5 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber5">
+            <summary>Gets or sets the CreditSubAccountNumber5 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId6">
+            <summary>Gets or sets the CreditSubAccountID6 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber6">
+            <summary>Gets or sets the CreditSubAccountNumber6 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId7">
+            <summary>Gets or sets the CreditSubAccountID7 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber7">
+            <summary>Gets or sets the CreditSubAccountNumber7 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId8">
+            <summary>Gets or sets the CreditSubAccountID8 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber8">
+            <summary>Gets or sets the CreditSubAccountNumber8 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId9">
+            <summary>Gets or sets the CreditSubAccountID9 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber9">
+            <summary>Gets or sets the CreditSubAccountNumber9 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountId10">
+            <summary>Gets or sets the CreditSubAccountID10 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto.CreditSubAccountNumber10">
+            <summary>Gets or sets the CreditSubAccountNumber10 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailUnitDto.VendorId">
             <summary>Gets or sets the VendorId field. </summary>   
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailUnitDto.VendorName">
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailUnitDto.VendorName">
             <summary>Gets or sets the Vendor field. </summary>   
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailUnitDto.PurchaseOrderItemId">
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailUnitDto.PurchaseOrderItemId">
             <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailUnitDto.PurchaseOrderItem">
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailUnitDto.PurchaseOrderItem">
             <summary>Gets or sets the PurchaseOrderItem field. </summary>   
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailInputUnit.VendorId">
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit.VendorId">
             <summary>Gets or sets the VendorId field. </summary>   
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailInputUnit.VendorName">
-            <summary>Gets or sets the VendorId field. </summary>   
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailInputUnit.PurchaseOrderItemId">
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit.PurchaseOrderItemId">
             <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
         </member>
-        <member name="T:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService">
+        <member name="T:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit">
             <summary>
-             Provide all CRUD operations for JournalEntryDocument.
+            
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.JournalEntryDocumentTransactionUnit(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailInputUnit})">
-             <summary>
-            Add or Update or delete Journal Entry Document.
-             </summary>
-             <param name="input"></param>
-             <returns></returns>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.BatchId">
+            <summary>Get Sets the BatchId field.</summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.DeleteJournalEntryDocDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
-            <summary>
-            Delete Journal Entry Document.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.IsReversingEntry">
+            <summary>Get Sets the IsReversingEntry field.</summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocDetailAppService.GetJournalEntryDocDetailsByAccountingDocId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
-            <summary>
-            Get Journal Entry Document List.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.DateOfReversal">
+            <summary>Get Sets the DateOfReversal field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.IsRecurringEntry">
+            <summary>Get Sets the IsRecurringEntry field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.DateToRecur">
+            <summary>Get Sets the DateToRecur field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.FinalDate">
+            <summary>Get Sets the FinalDate field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.LastPostDate">
+            <summary>Get Sets the LastPostDate field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.BatchInfo">
+            <summary>Get Sets the BatchInfo field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.IsBatchRemoved">
+            <summary>Get Sets the IsBatchRemoved field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.JournalTypeId">
+            <summary>Gets or sets JournalTypeId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit.JournalEntryDetailList">
+            <summary>Gets or sets JournalEntryDetailList field.</summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService">
             <summary>
              Provide all CRUD operations for JournalEntryDocument.
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.CreateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit)">
+        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.CreateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit)">
             <summary>
             Create Journal Entry Document.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.UpdateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit)">
+        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.UpdateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit)">
             <summary>
             Update Journal Entry Document.
             </summary>
@@ -4548,9 +4472,31 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.DeleteJournalDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete Journal Detail Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.GetJournalEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get Journal Entry Document List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.GetJournalDetailsByDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get Journal Details by AccountingDocumentId List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.IJournalEntryDocumentAppService.GetJournalDetailsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get Journal Details by AccountingDocumentId List.
+            (This method is created for WEB UI
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -4561,53 +4507,35 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.JournalEntryDocumentTransactionUnit(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailInputUnit})">
-            <summary>
-            Update Journal Entry Document.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.DeleteJournalEntryDocDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
-            <summary>
-            Delete Journal Entry Document.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.GetJournalEntryDocDetailsByAccountingDocId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
-            <summary>
-            Get Journal Entry Document List.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService.MapJournalDetails(CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocDetailInputUnit,System.Boolean)">
+        <member name="T:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService">
             <summary>
             
             </summary>
-            <param name="journalEntryDocDetail"></param>
-            <param name="isJournalAdd"></param>
-            <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnit,System.Int64},CAPS.CORPACCOUNTING.Authorization.Users.UserManager,Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},CAPS.CORPACCOUNTING.Journals.JournalEntryDocDetailAppService)">
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit})">
             <summary>
             
             </summary>
             <param name="journalEntryDocumentUnitManager"></param>
             <param name="journalEntryDocumentUnitRepository"></param>
-            <param name="userManager"></param>
-            <param name="unitOfWorkManager"></param>
             <param name="batchUnitRepository"></param>
+            <param name="userUnitRepository"></param>
+            <param name="journalEntryDocumentDetailUnitRepository"></param>
+            <param name="journalEntryDocumentDetailUnitManager"></param>
+            <param name="jobUnitRepository"></param>
+            <param name="accountUnitRepository"></param>
+            <param name="subAccountUnitRepository"></param>
+            <param name="vendorUnitRepository"></param>
+            <param name="taxCreditUnitRepository"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.CreateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit)">
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.CreateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit)">
             <summary>
             Create Journal Entry Document
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.UpdateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit)">
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.UpdateJournalEntryDocumentUnit(CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit)">
             <summary>
              Update Journal Entry Document
             </summary>
@@ -4621,10 +4549,46 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.DeleteJournalDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete Journal Details By Id
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.GetJournalEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.GetJournalDetailsByDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get Journal Entry Details by AccountingDocumentId List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.GetJournalDetailsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get Journal Entry Details by AccountingDocumentId List.
+            (This method is created for WEB UI
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.GetJournalTypeList">
             <summary>
             Get JournalTypeList
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentAppService.JournalEntryDetails(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit})">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitDto.BatchId">
@@ -4673,33 +4637,6 @@
             <summary>
             Gets or sets CreatedUser
             </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.BatchId">
-            <summary>Get Sets the BatchId field.</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.IsReversingEntry">
-            <summary>Get Sets the IsReversingEntry field.</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.DateOfReversal">
-            <summary>Get Sets the DateOfReversal field.</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.IsRecurringEntry">
-            <summary>Get Sets the IsRecurringEntry field.</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.DateToRecur">
-            <summary>Get Sets the DateToRecur field.</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.FinalDate">
-            <summary>Get Sets the FinalDate field.</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.LastPostDate">
-            <summary>Get Sets the LastPostDate field.</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.BatchInfo">
-            <summary>Get Sets the BatchInfo field.</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentInputUnit.IsBatchRemoved">
-            <summary>Get Sets the IsBatchRemoved field.</summary>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetAccountUnitsByCoaId(CAPS.CORPACCOUNTING.Masters.Dto.GetAccountInput)">
             <summary>

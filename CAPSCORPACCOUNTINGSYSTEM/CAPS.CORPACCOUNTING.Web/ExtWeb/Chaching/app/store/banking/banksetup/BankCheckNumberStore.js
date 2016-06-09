@@ -4,12 +4,16 @@
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-        //api: {
-        //    create: abp.appPath + 'api/services/app/bankAccountUnit/CreateBankAccountUnit',
-        //    read: abp.appPath + 'api/services/app/bankAccountUnit/GetBankAccountUnits',
-        //    update: abp.appPath + 'api/services/app/bankAccountUnit/UpdateBankAccountUnit',
-        //    destroy: abp.appPath + 'api/services/app/bankAccountUnit/DeleteBankAccountUnit'
-        //}
+        api: {
+            create: abp.appPath + '',
+            read: abp.appPath + 'api/services/app/bankAccountUnit/GetBankAccountPaymentRangeByBankAccountId',
+            update: abp.appPath + '',
+            destroy: abp.appPath + 'api/services/app/bankAccountUnit/DeleteBankAccountPaymentRange'
+        },
+        reader: {
+            type: 'json',
+            rootProperty: 'result'
+        }
     },
-    idPropertyField: 'bankAccountId'//important to set for add/update of records
+    idPropertyField: 'bankAccountPaymentRangeId'//important to set for add/update of records
 });

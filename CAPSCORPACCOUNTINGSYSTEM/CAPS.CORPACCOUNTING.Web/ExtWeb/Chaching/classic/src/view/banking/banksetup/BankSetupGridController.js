@@ -11,8 +11,8 @@
 Ext.define('Chaching.view.banking.banksetup.BankSetupGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.banking.banksetupgrid',
-    doAfterCreateAction: function (createNewMode, form, isEdit, record) {
-        var form = form.getForm();
+    doAfterCreateAction: function (createNewMode, formPanel, isEdit, record) {
+        var form = formPanel.getForm();
         // load accountTypecombo
         var accountTypeCombo = form.findField('typeOfBankAccountId');
         var accountTypeStore = accountTypeCombo.getStore();
@@ -29,6 +29,18 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGridController', {
         var positivePayFileCombo = form.findField('positivePayTypeOfUploadFileId');
         var positivePayFileStore = positivePayFileCombo.getStore();
         positivePayFileStore.load();
+        if (isEdit) {
+            if (record) {
+                var checkNumberGrid = formPanel.down('*[itemId=checkNumberGrid]');
+                if (checkNumberGrid) {
+                    var checkNumberGridStore = checkNumberGrid.getStore();
+                    Ext.apply(checkNumberGridStore.getProxy().extraParams, {
+                        bankAccountId: record.get('bankAccountId')
+                    });
+                    checkNumberGridStore.load();
+                }
+            }
+        }
 
     }
 });

@@ -76,7 +76,8 @@ Ext.define('Chaching.Application', {
         'utilities.autofill.VendorsStore',
         'utilities.autofill.T41099Store',
         'financials.fiscalperiod.FiscalPeriodStore',
-        'banking.banksetup.BankSetupStore'
+        'banking.banksetup.BankSetupStore',
+        'banking.banksetup.BankCheckNumberStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function() {

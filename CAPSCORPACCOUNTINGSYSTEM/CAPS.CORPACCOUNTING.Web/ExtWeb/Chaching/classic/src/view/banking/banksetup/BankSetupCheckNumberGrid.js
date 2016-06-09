@@ -25,7 +25,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupCheckNumberGrid', {
         tooltip: app.localize('AddCheckNumber'),
         checkPermission: true,
         iconCls: 'fa fa-plus',
-        //routeName: 'project.projectmaintenance.projects.create',
+        //routeName: '',
         iconAlign: 'left'
     }],
     requireExport: false,
@@ -42,8 +42,13 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupCheckNumberGrid', {
     columns: [{
         text: 'Bank Account Id',
         dataIndex: 'bankAccountId',
-        hidden : true,
+        hidden: true,
         hideable : false
+    }, {
+        text: 'bankAccountPaymentRangeId',
+        dataIndex: 'bankAccountPaymentRangeId',
+        hidden: true,
+        hideable: false
     }, {
         text: 'Organization Unit Id',
         dataIndex: 'organizationUnitId',

@@ -1,7 +1,7 @@
 Ext.define('Chaching.model.banking.banksetup.BankSetupModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
-        searchEntityName: 'Banks'
+        searchEntityName: 'BankAccount'
     },
     fields: [
         { name: 'bankAccountId', type: 'int', isPrimaryKey: true },
@@ -55,12 +55,13 @@ Ext.define('Chaching.model.banking.banksetup.BankSetupModel', {
             reference: {
                 parent: 'address.AddressModel'
             }
-        },
-        {
-            name: 'bankAccountPaymentRange',
-            reference: {
-                parent: 'banking.BankCheckRangesModel'
-            }
         }
+        //,
+        //{
+        //    name: 'bankAccountPaymentRange',
+        //    reference: {
+        //        parent: 'banking.BankCheckRangesModel'
+        //    }
+        //}
     ]
 });

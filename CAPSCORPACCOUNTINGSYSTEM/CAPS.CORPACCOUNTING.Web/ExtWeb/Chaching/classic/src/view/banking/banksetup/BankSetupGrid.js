@@ -151,6 +151,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
+                 entityName: 'LedgerAccount',
                  emptyText: app.localize('SelectOption')
              }, editor: {
                  xtype: 'textfield',

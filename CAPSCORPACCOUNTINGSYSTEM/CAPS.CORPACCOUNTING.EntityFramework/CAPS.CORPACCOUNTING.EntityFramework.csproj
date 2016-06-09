@@ -1224,6 +1224,10 @@
     <Compile Include="Migrations\201606050602120_Modify_TypeOfUploadFile_Table.Designer.cs">
       <DependentUpon>201606050602120_Modify_TypeOfUploadFile_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606091827407_AddAuditLog.cs" />
+    <Compile Include="Migrations\201606091827407_AddAuditLog.Designer.cs">
+      <DependentUpon>201606091827407_AddAuditLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2067,6 +2071,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606050602120_Modify_TypeOfUploadFile_Table.resx">
       <DependentUpon>201606050602120_Modify_TypeOfUploadFile_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606091827407_AddAuditLog.resx">
+      <DependentUpon>201606091827407_AddAuditLog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

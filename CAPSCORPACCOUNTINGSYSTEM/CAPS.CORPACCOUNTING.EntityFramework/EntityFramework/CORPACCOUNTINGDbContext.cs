@@ -1,5 +1,8 @@
 ﻿using System.Data.Common;
 using System.Data.Entity;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using System.Threading.Tasks;
 using Abp.Zero.EntityFramework;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
@@ -24,9 +27,12 @@ using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Financials.Preferences;
 using CAPS.CORPACCOUNTING.Localization;
 using CAPS.CORPACCOUNTING.Security;
+using Z.EntityFramework.Plus;
+using  CAPS.CORPACCOUNTING.EFAuditLog;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
+
     public class CORPACCOUNTINGDbContext : AbpZeroDbContext<Tenant, Role, User>
     {
         /* Define an IDbSet for each entity of the application */
@@ -271,7 +277,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> FiscalYearUnit Declaration</summary>
         public virtual IDbSet<FiscalYearUnit> FiscalYearUnit { get; set; }
-        
+
         /// <summary> FiscalPeriodUnit Declaration</summary>
         public virtual IDbSet<FiscalPeriodUnit> FiscalPeriodUnit { get; set; }
 
@@ -432,7 +438,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> NewCOATrimUnit Declaration</summary>
         public virtual IDbSet<NewCOATrimUnit> NewCOATrimUnit { get; set; }
-       
+
         /// <summary> ControlAccountUnit Declaration</summary>
         public virtual IDbSet<ControlAccountUnit> ControlAccountUnit { get; set; }
         /// <summary> ConsolidationGroupUnit Declaration</summary>
@@ -494,7 +500,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public virtual IDbSet<CurrencyTypeUnit> CurrencyTypeUnit { get; set; }
 
         /// <summary> CurrencyTypeOfRateUnit Declaration</summary>
-       public virtual IDbSet<CurrencyTypeOfRateUnit> CurrencyTypeOfRateUnit { get; set; }
+        public virtual IDbSet<CurrencyTypeOfRateUnit> CurrencyTypeOfRateUnit { get; set; }
 
         /// <summary> TypeOfAllocationStatusUnit Declaration</summary>
         public virtual IDbSet<TypeOfAllocationStatusUnit> TypeOfAllocationStatusUnit { get; set; }
@@ -540,10 +546,10 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> TypeOfImportUnit Declaration</summary>
         public virtual IDbSet<TypeOfImportUnit> TypeOfImportUnit { get; set; }
-        
+
         /// <summary> TypeOfGenericProcessUnit Declaration</summary>
         public virtual IDbSet<TypeOfGenericProcessUnit> TypeOfGenericProcessUnit { get; set; }
-        
+
         /// <summary> TypeOfDocumentConsolidationUnit Declaration</summary>
         public virtual IDbSet<TypeOfDocumentConsolidationUnit> TypeOfDocumentConsolidationUnit { get; set; }
 
@@ -553,9 +559,9 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> TypeOfPayrollUnit Declaration</summary>
         public virtual IDbSet<TypeOfPayrollUnit> TypeOfPayrollUnit { get; set; }
-        
+
         /// <summary> CurrencyRateUnit Declaration</summary>
-         public virtual IDbSet<CurrencyRateUnit> CurrencyRateUnit { get; set; }
+        public virtual IDbSet<CurrencyRateUnit> CurrencyRateUnit { get; set; }
         /// <summary> PCGridUnit Declaration</summary>
         public virtual IDbSet<PCGridUnit> PCGridUnit { get; set; }
 
@@ -567,7 +573,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         /// <summary> UserViewSettingsUnit Declaration</summary>
         public virtual IDbSet<UserViewSettingsUnit> UserViewSettingsUnit { get; set; }
-        
+
         /// <summary> CustomLanguageTextsUnit Declaration</summary>
         public virtual IDbSet<CustomLanguageTextsUnit> CustomLanguageTextsUnit { get; set; }
 
@@ -592,7 +598,59 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         public virtual IDbSet<JournalEntryDocumentUnit> JournalEntryDocumentUnit { get; set; }
 
+      
 
+        #region Modification Log
+
+        public DbSet<AuditEntry> AuditEntries { get; set; }
+        public DbSet<AuditEntryProperty> AuditEntryProperties { get; set; }
+
+        public override int SaveChanges()
+        {
+            var audit = new Audit();
+            var currentUser = System.Threading.Thread.CurrentPrincipal.Identity.Name;
+            audit.CreatedBy = string.IsNullOrEmpty(currentUser) ? "System" : currentUser;
+            audit.PreSaveChanges(this);
+            var rowAffecteds = base.SaveChanges();
+            audit.PostSaveChanges();
+            
+
+            if (audit.Configuration.AutoSavePreAction != null)
+            {
+                audit.Configuration.AutoSavePreAction(this, audit);
+                base.SaveChanges();
+            }
+
+            return rowAffecteds;
+        }
+
+        public override Task<int> SaveChangesAsync()
+        {
+            return SaveChangesAsync(CancellationToken.None);
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            var audit = new Audit();
+            var currentUser = System.Threading.Thread.CurrentPrincipal.Identity.Name;
+            audit.CreatedBy = string.IsNullOrEmpty(currentUser) ? "System" : currentUser;
+            audit.PreSaveChanges(this);
+            var rowAffecteds = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            audit.PostSaveChanges();
+
+            if (audit.Configuration.AutoSavePreAction != null)
+            {
+                audit.Configuration.AutoSavePreAction(this, audit);
+                await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            }
+
+            return rowAffecteds;
+        }
+
+        #endregion
+
+
+        
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 
          */
@@ -628,6 +686,11 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ChangeAbpTablePrefix<Tenant, Role, User>("CAPS_");
+            AuditManager.DefaultConfiguration.Exclude(x => true); // Exclude ALL
+            AuditManager.DefaultConfiguration.Include<INeedModLog>();
+            AuditManager.DefaultConfiguration.AutoSavePreAction = (context, audit) =>
+            // ADD "Where(x => x.AuditEntryID == 0)" to allow multiple SaveChanges with same Audit
+             ((CORPACCOUNTINGDbContext) context).AuditEntries.AddRange(audit.Entries);
         }
     }
 }

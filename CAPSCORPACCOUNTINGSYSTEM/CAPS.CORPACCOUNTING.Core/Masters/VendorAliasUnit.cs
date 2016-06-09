@@ -3,12 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.EFAuditLog;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
 
     [Table("CAPS_VendorAlias")]
-    public class VendorAliasUnit : FullAuditedEntity
+    public class VendorAliasUnit : FullAuditedEntity,INeedModLog
     {
         /// <summary>Overriding the ID column with VendorAliasId</summary>
         [Column("VendorAliasId")]

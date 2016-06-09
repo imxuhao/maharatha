@@ -6,6 +6,7 @@ using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
 using System.Collections;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.EFAuditLog;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -65,7 +66,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// Vendor is the table name in lajit
     /// </summary>
     [Table("CAPS_Vendor")]
-    public  class VendorUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public  class VendorUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit,INeedModLog
     {
         /// <summary>
         ///     Maximum length of the <see cref="MaxDisplayNameLength" /> property.

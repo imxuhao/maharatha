@@ -197,6 +197,7 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
+    <Compile Include="EFAuditLog\INeedModLog.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="Financials\Preferences\FiscalPeriodUnitManager.cs" />
     <Compile Include="Financials\Preferences\FiscalYearUnitManager.cs" />

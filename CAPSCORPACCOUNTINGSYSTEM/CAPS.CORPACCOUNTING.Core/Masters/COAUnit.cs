@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.EFAuditLog;
 using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.Masters
@@ -31,7 +32,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// ChartOfAccount  is the table name in lajit
     /// </summary>
     [Table("CAPS_ChartOfAccount")]
-    public class CoaUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class CoaUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit,INeedModLog
     {
         /// <summary>
         ///     Maximum length of the <see cref="Caption" /> property.

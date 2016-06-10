@@ -345,7 +345,8 @@ namespace CAPS.CORPACCOUNTING.Banking
                                 Caption = u.Caption,
                                 AccountId = u.Id,
                                 Description = u.Description,
-                                AccountNumber = u.AccountNumber
+                                AccountNumber = u.AccountNumber,
+                                ChartOfAccountId = u.ChartOfAccountId
                             }).ToListAsync();
         }
 

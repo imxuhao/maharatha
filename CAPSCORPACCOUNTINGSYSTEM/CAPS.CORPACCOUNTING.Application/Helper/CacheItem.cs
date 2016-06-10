@@ -40,15 +40,16 @@ namespace CAPS.CORPACCOUNTING.Helpers
         }
         public CacheItem(string key)
         {
-            if (key.Contains(CacheKeyStores.EmployeeKey))
+            int index = key.LastIndexOf("#", StringComparison.Ordinal);
+            if (key.Substring(index+1) ==CacheKeyStores.EmployeeKey)
                 EmployeeItemList = new HashSet<EmployeeUnitDto>();
             else
-            if (key.Contains(CacheKeyStores.VendorKey))
+            if (key.Substring(index + 1) ==CacheKeyStores.VendorKey)
                 VendorCacheItemList = new HashSet<VendorCacheItem>();
             else
-            if (key.Contains(CacheKeyStores.DivisionKey))
+            if (key.Substring(index + 1) == CacheKeyStores.DivisionKey)
                 DivisionCacheItemList = new HashSet<DivisionCacheItem>();
-            if (key.Contains(CacheKeyStores.AccountKey))
+            if (key.Substring(index + 1) == CacheKeyStores.AccountKey)
                 AccountCacheItemList = new HashSet<AccountCacheItem>();
             
             else

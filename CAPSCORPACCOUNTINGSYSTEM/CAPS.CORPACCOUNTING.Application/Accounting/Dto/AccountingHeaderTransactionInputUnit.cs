@@ -72,6 +72,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual string VoucherReference { get; set; }
 
         /// <summary>Get Sets the TypeOfCurrencyId field.</summary>
+        [Range(1,Int16.MaxValue,ErrorMessage = "Currency is Required.")]
         public virtual short? TypeOfCurrencyId { get; set; }
 
         /// <summary>Get Sets the CurrencyAdjustmentId field.</summary>

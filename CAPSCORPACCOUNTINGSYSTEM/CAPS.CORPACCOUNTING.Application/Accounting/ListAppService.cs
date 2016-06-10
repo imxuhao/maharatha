@@ -95,11 +95,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             var cacheItem = await GetSubAccountsCacheItemAsync(
               CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ItemList.ToList()
-                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
-                p.Column1.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.Column2.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
-                p.Column3.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+                return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                            p.Column1.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.Column2.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                            p.Column3.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
+
         /// <summary>
         /// Get SubAccounts From DataBase
         /// </summary>

@@ -827,7 +827,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GeAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get accounts List based on JobId
             </summary>
@@ -909,7 +909,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GeAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get accounts 
             </summary>
@@ -1904,45 +1904,6 @@
             <summary>
             A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
             </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.FiscalYearId">
-            <summary>Gets or sets the FiscalYearId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.PeriodStartDate">
-            <summary>Gets or sets the PeriodStartDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.PeriodEndDate">
-            <summary>Gets or sets the PeriodEndDate field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsClose">
-            <summary>Gets or sets the IsPeriodOpen field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsActive">
-            <summary>Gets or sets the IsActive field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.TypeOfInactiveStatusId">
-            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsCpaClosed">
-            <summary>Gets or sets the IsCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.DateCpaClosed">
-            <summary>Gets or sets the DateCPAClosed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.CpaUserId">
-            <summary>Gets or sets the CPAUserID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsYearEndAdjustmentsAllowed">
-            <summary>Gets or sets the IsYearEndAdjustmentsAllowed field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.IsPreClose">
-            <summary>Gets or sets the IsPreClose field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.OrganizationUnitId">
-            <summary>Gets or sets the CompanyId field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.CreateFiscalPeriodUnitInput.MonthYear">
-            <summary>Gets or sets the MonthYear field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.FiscalPeriodId">
             <summary>Gets or sets the FiscalPeriodId field. </summary>
@@ -4755,6 +4716,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetAccountById(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Get Account by Id
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get the Records for Grid with paging and  sorting
@@ -7321,6 +7289,13 @@
             <summary>
             Get TypeofCurrencyRate
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.GetAccountById(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Get Account by Id
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService">

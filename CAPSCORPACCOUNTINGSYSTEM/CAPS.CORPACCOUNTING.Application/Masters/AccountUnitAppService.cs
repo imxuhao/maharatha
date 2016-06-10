@@ -269,5 +269,18 @@ namespace CAPS.CORPACCOUNTING.Accounts
                           select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
         }
 
+        /// <summary>
+        /// Get Account by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<AccountUnitDto> GetAccountById(IdInput<long> input)
+        {
+            AccountUnit accountUnit = await _accountUnitRepository.GetAsync(input.Id);
+            AccountUnitDto result = accountUnit.MapTo<AccountUnitDto>();
+            result.AccountId = accountUnit.Id;
+            return result;
+        }
+
     }
 }

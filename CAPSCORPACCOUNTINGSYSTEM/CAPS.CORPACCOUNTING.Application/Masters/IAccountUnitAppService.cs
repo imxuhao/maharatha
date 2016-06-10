@@ -85,6 +85,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <returns></returns>
         Task<List<NameValueDto>> GetTypeOfCurrencyRateList();
+
+        /// <summary>
+        /// Get Account by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<AccountUnitDto> GetAccountById(IdInput<long> input);
     }
     
 }

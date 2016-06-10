@@ -446,7 +446,6 @@
     <Compile Include="Payables\Dto\InvoiceEntryDocumentDetailInputUnit.cs" />
     <Compile Include="Payables\Dto\InvoiceEntryDocumentDetailUnitDto.cs" />
     <Compile Include="Payables\IAPHeaderTransactionsAppService.cs" />
-    <Compile Include="Financials\Preferences\Dto\CreateFiscalPeriodUnitInput.cs" />
     <Compile Include="Financials\Preferences\Dto\FiscalPeriodUnitDto.cs" />
     <Compile Include="Financials\Preferences\Dto\FiscalYearUnitDto.cs" />
     <Compile Include="Financials\Preferences\Dto\FiscalPeriodUnitInput.cs" />

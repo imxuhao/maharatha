@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Banking;
-using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
 {
@@ -16,10 +15,12 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         public int FiscalYearId { get; set; }
 
         /// <summary>Gets or sets the PeriodStartDate field. </summary>
-        public DateTime PeriodStartDate { get; set; }
+        [Required]
+        public DateTime? PeriodStartDate { get; set; }
 
         /// <summary>Gets or sets the PeriodEndDate field. </summary>
-        public DateTime PeriodEndDate { get; set; }
+        [Required]
+        public DateTime? PeriodEndDate { get; set; }
 
         /// <summary>Gets or sets the IsPeriodOpen field. </summary>
         public bool IsClose { get; set; }

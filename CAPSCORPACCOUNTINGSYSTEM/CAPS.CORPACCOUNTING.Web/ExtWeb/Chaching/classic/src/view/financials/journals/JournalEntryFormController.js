@@ -29,12 +29,115 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
             }
         }
     },
+    getDetailsModifiedRecords: function (controller, view, detailGrid, detailsStore) {
+        var modifiedRecords = detailsStore.getModifiedRecords(),
+            me=this,
+            records = [],
+            data = [],
+            modifiedRecs = { records: records, data: data },
+            modelClass=detailsStore.getModel().$className,
+            transactionId = view.getForm().findField('accountingDocumentId').getValue();
+        if (modifiedRecords && modifiedRecords.length > 0) {
+            var rowLength = modifiedRecords.length;
+            for (var i = 0; i < rowLength; i++) {
+                var rec = modifiedRecords[i];
+                if (rec.dirty) {
+                    if (rec.get('accountingDocumentId') === 0 || !rec.get('accountingDocumentId')) {
+                        rec.set('accountingDocumentId', transactionId);
+                    }
+                    var modelRec = Ext.create(modelClass);
+                    var debitCreditGroup = me.numToChar(i + 1);
+                    //plain credit debit add
+                    if (!rec.get('accountingItemId') && !rec.get('creditAccountingItemId')) {
+                        if (rec.get('creditJobId') > 0 && rec.get('creditAccountId') > 0) {
+                            //create new credit record
+                            Ext.apply(modelRec.data, rec.data);
+                            me.traverseValues(modelRec, rec);
+                            if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //add debit and credit
+                                rec.set('debitCreditGroup', debitCreditGroup);
+                                modelRec.set('debitCreditGroup', debitCreditGroup);
+                                records.push(rec);
+                                data.push(rec.data);
+                            }
+                            records.push(modelRec);
+                            data.push(modelRec.data);
+                        } else if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //add debit
+                            records.push(rec);
+                            data.push(rec.data);
+                        }
+                    } else { //updating existing record
+                        if (rec.get('accountingItemId') > 0 && rec.get('creditAccountingItemId') > 0) {//update both record
+                            if (rec.get('creditJobId') > 0 && rec.get('creditAccountId') > 0 && rec.get('creditAccountingItemId')>0) {
+                                //create new credit record
+                                Ext.apply(modelRec.data, rec.data);
+                                me.traverseValues(modelRec, rec);
+                                if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit and add credit
+                                    rec.set('debitCreditGroup', debitCreditGroup);
+                                    modelRec.set('debitCreditGroup', debitCreditGroup);
+                                    rec.set('accountingItemOrigId', null);
+                                    records.push(rec);
+                                    data.push(rec.data);
+                                }
+                                records.push(modelRec);
+                                data.push(modelRec.data);
+                            } else if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit
+                                records.push(rec);
+                                data.push(rec.data);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //return {};
+        return modifiedRecs;
+    },
+    handleCreditDebitLines: function (record, modifiedRecs) {
+        
+    },
+    traverseValues: function (modelRec, rec) {
+        modelRec.set('accountingItemId', rec.get('creditAccountingItemId'));
+        modelRec.set('accountingItemOrigId', rec.get('accountingItemId'));
+        modelRec.set('amount', -(rec.get('amount')));
+        modelRec.set('jobId', rec.get('creditJobId'));
+        modelRec.set('jobNumber', rec.get('creditJobNumber'));
+        modelRec.set('accountId', rec.get('creditAccountId'));
+        modelRec.set('accountNumber', rec.get('creditAccountNumber'));
+        modelRec.set('subAccountId1', rec.get('creditSubAccountId1'));
+        modelRec.set('subAccountId2', rec.get('creditSubAccountId2'));
+        modelRec.set('subAccountId3', rec.get('creditSubAccountId3'));
+        modelRec.set('subAccountId4', rec.get('creditSubAccountId4'));
+        modelRec.set('subAccountId5', rec.get('creditSubAccountId5'));
+        modelRec.set('subAccountId6', rec.get('creditSubAccountId6'));
+        modelRec.set('subAccountId7', rec.get('creditSubAccountId7'));
+        modelRec.set('subAccountId8', rec.get('creditSubAccountId8'));
+        modelRec.set('subAccountId9', rec.get('creditSubAccountId9'));
+        modelRec.set('subAccountId10', rec.get('creditSubAccountId10'));
+    },
+    numToChar: function (number) {
+        var numeric = (number - 1) % 26;
+        var letter = this.chr(65 + numeric);
+        var number2 = parseInt((number - 1) / 26);
+        if (number2 > 0) {
+            return this.numToChar(number2) + letter;
+        } else {
+            return letter;
+        }
+    },
+
+    chr: function (codePt) {
+        if (codePt > 0xFFFF) {
+            codePt -= 0x10000;
+            return String.fromCharCode(0xD800 + (codePt >> 10), 0xDC00 + (codePt & 0x3FF));
+        }
+        return String.fromCharCode(codePt);
+    },
     validateDetails: function (controller, view, detailGrid, detailsStore,myMask) {
         var detailColumns = detailGrid.getColumns(),
             modifiedRecords = detailsStore.getModifiedRecords(),
             isValid = true,
-            debitDataIndexes = ['jobDesc', 'accountDesc', 'subAccount1Desc', 'subAccount2Desc', 'subAccount3Desc', 'subAccount4Desc', 'subAccount5Desc', 'subAccount6Desc', 'subAccount7Desc', 'subAccount8Desc', 'subAccount9Desc', 'subAccount10Desc'],
-            creditDataIndexes = ['creditJobDesc', 'creditAccountDesc', 'creditSubAccount1Desc', 'creditSubAccount2Desc', 'creditSubAccount3Desc', 'creditSubAccount4Desc', 'creditSubAccount5Desc', 'creditSubAccount6Desc', 'creditSubAccount7Desc', 'creditSubAccount8Desc', 'creditSubAccount9Desc', 'creditSubAccount10Desc'];
+            debitDataIndexes = ['jobNumber', 'accountNumber', 'subAccountNumber1', 'subAccountNumber2', 'subAccountNumber3', 'subAccountNumber4', 'subAccountNumber5', 'subAccountNumber6', 'subAccountNumber7', 'subAccountNumber8', 'subAccountNumber9', 'subAccountNumber10'],
+            creditDataIndexes = ['creditJobNumber', 'creditAccountNumber', 'creditSubAccountNumber1', 'creditSubAccountNumber2', 'creditSubAccountNumber3', 'creditSubAccountNumber4', 'creditSubAccountNumber5', 'creditSubAccountNumber6', 'creditSubAccountNumber7', 'creditSubAccountNumber8', 'creditSubAccountNumber9', 'creditSubAccountNumber10'];
         if (modifiedRecords && modifiedRecords.length > 0) {
             var rowLength = modifiedRecords.length;
             for (var i = 0; i < rowLength; i++) {

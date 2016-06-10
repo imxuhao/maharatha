@@ -302,7 +302,6 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
    
     getDetailsModifiedRecords: function(controller, view, detailGrid, detailsStore) {
         var modifiedRecords = detailsStore.getModifiedRecords(),
-            removedRecords=detailsStore.getRemovedRecords(),
             records = [],
             data = [],
             modifiedRecs={records:records,data:data},
@@ -316,14 +315,6 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                     records.push(rec);
                     data.push(rec.data);
                 }
-            }
-        }
-
-        //add removed records
-        if (removedRecords&&removedRecords.length>0) {
-            for (var j = 0; j < removedRecords.length; j++) {
-                records.push(removedRecords[j]);
-                data.push(removedRecords[j].data);
             }
         }
         return modifiedRecs;

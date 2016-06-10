@@ -20,23 +20,50 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             }
         }
     },
-    onDeleteClicked: function() {
+    onDeleteClicked: function (grid, rowIndex, colIndex) {
         var me = this,
             view = me.getView(),
-            detailStore = view.getStore(),
-            selectedRecords = view.getSelection();
+            detailStore = view.getStore();
         if (view.isInViewMode) return;
-        if (detailStore && selectedRecords && selectedRecords.length > 0) {
-            Ext.each(selectedRecords, function(item) {
-                var accountingItemId = item.get('accountingItemId');
-                if (accountingItemId > 0) {
-                    item.set('accountingItemId', -accountingItemId);
-                }
-                detailStore.remove(item);
-            });
-        } else {
-            abp.notify.info(app.localize('SelectRecordToDelete'), app.localize('ValidationFailed'));
+        var record = detailStore.getAt(rowIndex);
+        if (record) {
+            var accountingItemId = record.get('accountingItemId');
+            if (accountingItemId > 0 && me.allowDetailRowDelete(record)) {
+                record.set('id', accountingItemId);
+                var operation = Ext.data.Operation({
+                    params: {id:accountingItemId},
+                    controller: me,
+                    action: 'destroy',
+                    records: [record],
+                    callback: me.onDetailDeleteOperationCompleteCallBack
+                });
+                detailStore.erase(operation);
+            }
+            detailStore.remove(record);
         }
+    },
+    onDetailDeleteOperationCompleteCallBack:function(records, operation, success) {
+        if (success) {
+            abp.notify.success('Operation completed successfully.', 'Success');
+        } else {
+            var response = Ext.decode(operation.getResponse().responseText);
+            var message = '',
+                title = 'Error';
+            if (response && response.error) {
+                if (response.error.message && response.error.details) {
+                    title = response.error.message;
+                    message = response.error.details;
+                    abp.message.warn(message, title);
+                    return;
+                }
+                title = response.error.message;
+                message = response.error.details ? response.error.details : title;
+            }
+            abp.message.warn(message, title);
+        }
+    },
+    allowDetailRowDelete:function(record) {
+        return true;
     },
     onRefreshClicked:function() {
         var me = this,

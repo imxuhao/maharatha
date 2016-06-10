@@ -163,7 +163,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 },
                                 items: [
                                     {
-///TODO: Replace with combo box once tax credit service is ready
                                         xtype: 'combobox',
                                         name: 'taxCreditId',
                                         itemId: 'taxCreditId',

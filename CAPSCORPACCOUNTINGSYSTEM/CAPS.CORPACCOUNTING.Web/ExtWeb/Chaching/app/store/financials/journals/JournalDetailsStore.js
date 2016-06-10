@@ -8,12 +8,12 @@
             accountingDocumentId:null
         },
         api: {
-            create: abp.appPath + 'api/services/app/journalEntryDocDetail/JournalEntryDocumentTransactionUnit',
-            read: abp.appPath + 'api/services/app/journalEntryDocDetail/GetJournalEntryDocDetailsByAccountingDocId',
-            update: abp.appPath + 'api/services/app/journalEntryDocDetail/JournalEntryDocumentTransactionUnit',
-            destroy: abp.appPath + 'api/services/app/journalEntryDocDetail/DeleteJournalEntryDocDetailUnit'
+            //create: abp.appPath + 'api/services/app/journalEntryDocDetail/JournalEntryDocumentTransactionUnit',
+            read: abp.appPath + 'api/services/app/journalEntryDocument/GetJournalDetailsByAccountingDocumentId',
+            //update: abp.appPath + 'api/services/app/journalEntryDocDetail/JournalEntryDocumentTransactionUnit',
+            destroy: abp.appPath + 'api/services/app/journalEntryDocument/DeleteJournalDetailUnit'
         }
     },
-    serverKeyName: 'journalEntryDocDetailList',
+    serverKeyName: 'journalEntryDetailList',
     idPropertyField: 'accountingItemId'//important to set for add/update of records
 });

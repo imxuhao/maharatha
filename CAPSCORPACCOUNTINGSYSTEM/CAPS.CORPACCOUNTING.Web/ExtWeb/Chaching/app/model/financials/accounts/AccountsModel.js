@@ -10,6 +10,8 @@
             { name: 'description', type: 'string' },
             { name: 'chartOfAccountId', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'accountNumber', type: 'string' },
+            { name: 'creditAccountNumber', type: 'string', mapping: 'accountNumber' },
+            { name: 'creditAccountId', type: 'int', defaultValue: null, mapping: 'accountId' },
             { name: 'isAccountRevalued', type: 'boolean' },
             { name: 'isApproved', type: 'boolean' },
             { name: 'isDescriptionLocked', type: 'boolean' },

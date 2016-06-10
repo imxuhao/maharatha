@@ -17,7 +17,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
     groupedHeaderBaseConfig: [{
         groupHeaderText: app.localize('Debits'),
         columnName:'debits',
-        childColumnNames: ['jobDesc', 'accountDesc', 'subAccount1Desc'],
+        childColumnNames: ['jobNumber', 'accountNumber', 'subAccountNumber1'],
         childColumnWidths:[100,100,100]
     }],
     isGroupedHeader: true,
@@ -27,8 +27,8 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
         name: 'credits',
         columns: [{
             xtype: 'gridcolumn',
-            dataIndex: 'creditJobDesc',
-            name: 'creditJobDesc',
+            dataIndex: 'creditJobNumber',
+            name: 'creditJobNumber',
             text: app.localize('JobDivision'),
             //itemId: 'duplicatejob',
             width: 100,
@@ -39,8 +39,8 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             filterField: {
                 xtype: 'combobox',
                 store: new Chaching.store.utilities.autofill.JobDivisionStore(),
-                valueField: 'creditJobDesc',
-                displayField: 'creditJobDesc',
+                valueField: 'creditJobNumber',
+                displayField: 'creditJobNumber',
                 queryMode: 'remote',
                 minChars: 2,
                 useDisplayFieldToSearch: true,
@@ -51,15 +51,15 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                 xtype: 'combobox',
                 store: new Chaching.store.utilities.autofill.JobDivisionStore(),
                 valueField: 'creditJobId',
-                displayField: 'creditJobDesc',
+                displayField: 'creditJobNumber',
                 queryMode: 'remote',
                 minChars: 2,
                 listConfig: Chaching.utilities.ChachingGlobals.comboListConfig
             }
         }, {
             xtype: 'gridcolumn',
-            dataIndex: 'creditAccountDesc',
-            name: 'creditAccountDesc',
+            dataIndex: 'creditAccountNumber',
+            name: 'creditAccountNumber',
             //itemId: 'duplicateaccount',
             text: app.localize('LineNumber'),
             width: 100,
@@ -70,8 +70,8 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             filterField: {
                 xtype: 'combobox',
                 store: new Chaching.store.utilities.autofill.AccountsStore(),
-                valueField: 'creditAccountDesc',
-                displayField: 'creditAccountDesc',
+                valueField: 'creditAccountNumber',
+                displayField: 'creditAccountNumber',
                 queryMode: 'remote',
                 minChars: 2,
                 useDisplayFieldToSearch:true,
@@ -81,7 +81,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                 xtype: 'combobox',
                 store: new Chaching.store.utilities.autofill.AccountsStore(),
                 valueField: 'creditAccountId',
-                displayField: 'creditAccountDesc',
+                displayField: 'creditAccountNumber',
                 queryMode: 'remote',
                 minChars: 2,
                 listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
@@ -91,15 +91,15 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             }
         }, {
             xtype: 'gridcolumn',
-            dataIndex: 'creditSubAccount1Desc',
-            name: 'creditSubAccount1Desc',
+            dataIndex: 'creditSubAccountNumber1',
+            name: 'creditSubAccountNumber1',
             text: app.localize('SubAccount1'),
             //itemId: 'duplicatesubAccount1',
             width: 100,
             valueField: 'creditSubAccountId1',
             dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccount1Desc', 'creditSubAccount1Desc'),
-            editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccount1Desc')
+            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountNumber1', 'creditSubAccountNumber1'),
+            editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccountNumber1')
             ////TODO: add remaining combo once accounting field configuration is done
         }]
     }, {
@@ -132,5 +132,5 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             emptyText: app.localize('SearchText')
         }
     }],
-    columnOrder: ['amount', 'debits', 'credits', 'itemMemo', 'vendorName', 'accountRef1', 'taxRebateDesc', 'isAsset']
+    columnOrder: ['amount', 'debits', 'credits', 'itemMemo', 'vendorName', 'accountRef1', 'taxRebateNumber', 'isAsset']
 });

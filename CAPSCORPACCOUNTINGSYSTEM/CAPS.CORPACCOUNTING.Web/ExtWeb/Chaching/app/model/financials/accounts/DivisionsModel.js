@@ -9,7 +9,7 @@ Ext.define('Chaching.model.financials.accounts.DivisionsModel', {
             //    name: 'jobDesc', mapping: 'jobNumber', headerText: 'job Desc', hidden: true, width: '8%'
             //},
             {
-                name: 'creditJobDesc', mapping: 'jobNumber', headerText: 'Credit Job Desc', hidden: true, width: '8%'
+                name: 'creditJobNumber', mapping: 'jobNumber', headerText: 'job Desc', hidden: true, width: '8%'
             },
             {
                 name: 'creditJobId', mapping: 'jobId', headerText: 'Credit Job Id', hidden: true, width: '8%'

@@ -1,30 +1,14 @@
 ﻿Ext.define('Chaching.store.utilities.autofill.AccountsStore', {
     extend: 'Chaching.store.base.BaseStore',
-    pageSize:1000,
-    fields: [{ name: 'name' }, { name: 'value' }, {
-        name: 'accountDesc', convert: function (value, record) {
-            return record.get('name');
-        }
-    }, {
-        name: 'accountId', convert: function (value, record) {
-            return record.get('value');
-        }
-    }, {
-        name: 'creditAccountDesc', convert: function (value, record) {
-            return record.get('name');
-        }
-    }, {
-        name: 'creditAccountId', convert: function (value, record) {
-            return record.get('value');
-        }
-    }],
+    pageSize: 1000,
+    model: 'Chaching.model.financials.accounts.AccountsModel',
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',
         extraParams: {
             jobId:null
         },
-        url: abp.appPath + 'api/services/app/list/GeAccountsList',
+        url: abp.appPath + 'api/services/app/list/GetAccountsList',
         reader: {
             type: 'json',
             rootProperty: 'result'

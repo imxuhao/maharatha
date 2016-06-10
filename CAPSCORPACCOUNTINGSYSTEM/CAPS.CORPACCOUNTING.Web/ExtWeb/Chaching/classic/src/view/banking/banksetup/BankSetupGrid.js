@@ -155,7 +155,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
                  //emptyText: app.localize('SelectOption')
                  xtype: 'autofillcombo',
                  width: '100%',
-                 store: 'utilities.autofill.ChartOfAccountListStore',
+                 store: 'utilities.autofill.AccountListStore',
                  valueField: 'accountId',
                  displayField: 'description',
                  entityGridController: 'financials-accounts-chartofaccountsgrid',
@@ -165,7 +165,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
              }, editor: {
                  xtype: 'autofillcombo',
                  width: '100%',
-                 store: 'utilities.autofill.ChartOfAccountListStore',
+                 store: 'utilities.autofill.AccountListStore',
                  valueField: 'accountId',
                  displayField: 'description',
                  entityGridController: 'financials-accounts-chartofaccountsgrid',

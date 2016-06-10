@@ -6,10 +6,10 @@
     fields: [
             { name: 'accountId', type: 'int', isPrimaryKey: true },
             { name: 'parentId', type: 'int', defaultValue: null, convert: nullHandler },
-            { name: 'caption', type: 'string' },
+            { name: 'caption', type: 'string' , headerText : 'Caption', hidden : false, width : '8%' },
             { name: 'description', type: 'string' },
             { name: 'chartOfAccountId', type: 'int', defaultValue: null, convert: nullHandler },
-            { name: 'accountNumber', type: 'string' },
+            { name: 'accountNumber', type: 'string', headerText : 'AccountNumber', hidden : false, width : '8%' },
             { name: 'creditAccountNumber', type: 'string', mapping: 'accountNumber' },
             { name: 'creditAccountId', type: 'int', defaultValue: null, mapping: 'accountId' },
             { name: 'isAccountRevalued', type: 'boolean' },

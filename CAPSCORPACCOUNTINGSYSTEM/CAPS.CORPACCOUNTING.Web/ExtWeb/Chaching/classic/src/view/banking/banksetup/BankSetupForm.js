@@ -119,13 +119,13 @@
                         ui: 'fieldLabelTop',
                         name: 'accountId',
                         fieldLabel: app.localize('LedgerAccount'),
-                        store: 'utilities.autofill.ChartOfAccountListStore',
+                        store: 'utilities.autofill.AccountListStore',
                         valueField: 'accountId',
-                        displayField: 'description',
-                        entityGridController: 'financials-accounts-chartofaccountsgrid',
-                        nameOfEntity: 'Chart of Account',
-                        entityType: 'financials.accounts.coa',
-                        entityPermission: 'Financials.Accounts.ChartOfAccounts'
+                        displayField: 'accountNumber',
+                        entityGridController: 'financials-accounts-accountsgrid',
+                        nameOfEntity: 'Account',
+                        entityType: 'financials.accounts.accounts',
+                        entityPermission: 'Financials.Accounts.Accounts'
                     }, {
 
                         //xtype: 'combobox',

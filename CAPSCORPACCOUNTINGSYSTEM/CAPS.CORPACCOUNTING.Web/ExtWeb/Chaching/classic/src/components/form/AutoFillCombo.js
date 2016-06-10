@@ -169,6 +169,11 @@
         //key events
         me.on('keyup', me.baseKeyUp, this);
         me.on('specialkey', me.baseSpecialkey, this);
+       // me.on('change', me, idVal, record);
+       // me.on('change', me.setRecordOnLoad, this);
+    },
+
+    setRecordOnLoad : function(field, newVal, oldVal) {
     },
     
     baseKeyUp: function (obj, e, eOpts) {
@@ -627,6 +632,13 @@
             if (typeof (v) === "string") {
                 v = Ext.util.Format.htmlDecode(v);
             }
+           
+            //if (me.isEditMode) {
+            //    var record = me.store.findRecord(me.valueField, v);
+            //    if (record == null) {
+            //        record = me.store.findRecord(me.displayField, v);
+            //    }
+            //}
             me.value = v;
             me.setRawValue(v);
             me.checkChange();
@@ -819,7 +831,7 @@
         if (operation === 'edit') {
             Ext.Ajax.request({
                 url: recordByIdUrl,
-                jsonData: Ext.encode({ id: 2 }),  //record.get(me.valueField)
+                jsonData: Ext.encode({ id: record.get(me.valueField) }), 
                 success: function (response, opts) {
                     var res = Ext.decode(response.responseText);
                     if (res.success) {
@@ -841,23 +853,20 @@
                 }
             });
         } else if (operation === 'delete') {
-            Ext.Ajax.request({
-                url: me.store.proxy.api.destroy,
-                jsonData: Ext.encode({ id: 2 }),
-                success: function (response, opts) {
-                    var res = Ext.decode(response.responseText);
-                    if (res.success) {
-                        abp.notify.success('Operation completed successfully.', 'Success');
-                    } else {
-                        abp.message.error(res.error.message, 'Error');
+
+            Ext.Msg.show({
+                title: app.localize('Confirm'),
+                msg: app.localize('ConfirmMessage') + me.nameOfEntity,
+                buttons: Ext.Msg.YESNO,
+                icon: Ext.Msg.QUESTION,
+                fn: function (btn) {
+                    if (btn == "yes") {
+                        me.deleteEntity(me, record);
                     }
-                },
-                failure: function (response, opts) {
-                    var res = Ext.decode(response.responseText);
-                    Ext.toast(res.exceptionMessage);
-                    console.log(response);
                 }
             });
+
+           
         }
         else if (operation === 'create') {
             var popupWindow = me.createPopupWindow(xtypeOfView, me, operation);
@@ -865,6 +874,33 @@
             var entityTypeController = me.picker.getController();
             entityTypeController.doAfterCreateAction('popup', formView, false, null);
         }
+    },
+
+    deleteEntity: function (me, record) {
+        var me = this,
+           picker = me.getPicker();
+        if (record.get(me.displayField) == me.getTextValue()) {
+            me.setValue('');
+        }
+        Ext.Ajax.request({
+            url: me.store.proxy.api.destroy,
+            jsonData: Ext.encode({ id: record.get(me.valueField) }),
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    abp.notify.success('Operation completed successfully.', 'Success');
+                    picker.getSelectionModel().deselectAll();
+                    me.store.load({ params: me.store.params });
+                } else {
+                    abp.message.error(res.error.message, 'Error');
+                }
+            },
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+            }
+        });
     },
 
     createPopupWindow: function (xtypeOfView, me, operation) {

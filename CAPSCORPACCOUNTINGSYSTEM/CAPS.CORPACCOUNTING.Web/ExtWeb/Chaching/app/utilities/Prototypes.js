@@ -81,18 +81,18 @@ String.prototype.getDateString = function (monthName, year, isStartDateOfMonth) 
     if (monthName == "May") { noOfDays = 31, month = 05 };
     if (monthName == "Jun") { noOfDays = 30, month = 06 };
     if (monthName == "Jul") { noOfDays = 31, month = 07 };
-    if (monthName == "Aug") { noOfDays = 30, month = 08 };
-    if (monthName == "Sep") { noOfDays = 31, month = 09 };
-    if (monthName == "Oct") { noOfDays = 30, month = 10 };
-    if (monthName == "Nov") { noOfDays = 31, month = 11 };
-    if (monthName == "Dec") { noOfDays = 30, month = 12 };
+    if (monthName == "Aug") { noOfDays = 31, month = 08 };
+    if (monthName == "Sep") { noOfDays = 30, month = 09 };
+    if (monthName == "Oct") { noOfDays = 31, month = 10 };
+    if (monthName == "Nov") { noOfDays = 30, month = 11 };
+    if (monthName == "Dec") { noOfDays = 31, month = 12 };
    
     if (isStartDateOfMonth) {
         dateStr = month + '/' + '01/' + year;
     } else {
         dateStr = month + '/' + noOfDays + '/' + year;
     }
-    return dateStr;
+    return Ext.util.Format.date(dateStr, Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat);
 };
 
 Boolean.prototype.isLeapYear = function (year) {

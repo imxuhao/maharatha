@@ -895,5 +895,7 @@
     <text name="DetailGridValidationFailMessage" value="Please enter valid data in distribution lines." />
     <text name="DetailGridValidationLineCountMessage" value="In order to save this transaction there should be minimum one distribution detail line." />
     <text name="DetailGridValidation" value="Invalid Distribution Data" />
+    <text name="Confirm" value="Confirm?" />
+    <text name="ConfirmMessage" value="Are you sure? ,you want to delete this " />
   </texts>
 </localizationDictionary>

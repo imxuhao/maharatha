@@ -29,6 +29,11 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGridController', {
         var positivePayFileCombo = form.findField('positivePayTypeOfUploadFileId');
         var positivePayFileStore = positivePayFileCombo.getStore();
         positivePayFileStore.load();
+        // load divisions
+        var divisionCombo = form.findField('jobId');
+        var divisionStore = divisionCombo.getStore();
+        divisionStore.load();
+
         if (isEdit) {
             if (record) {
                 var checkNumberGrid = formPanel.down('*[itemId=checkNumberGrid]');

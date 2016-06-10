@@ -5,8 +5,8 @@
     },
     fields: [
         { name: 'fiscalYearId', type: 'int', isPrimaryKey: true },
-        { name: 'yearStartDate', type: 'date' },
-        { name: 'yearEndDate', type: 'date' },
+        { name: 'yearStartDate', type: 'date', dateFormat: 'c' },
+        { name: 'yearEndDate', type: 'date', dateFormat: 'c' },
         { name: 'isYearOpen', type: 'boolean' },
         { name: 'isActive', type: 'boolean' },
         { name: 'isApproved', type: 'boolean' },

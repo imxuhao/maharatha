@@ -32,7 +32,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         private void AddRegionListIfNotExists(RegionUnit region)
         {
-            if (_context.RegionUnit.Any(l => l.Description == region.Description))
+            if (_context.RegionUnit.Any(l => l.TenantId == region.TenantId &&  l.Description == region.Description))
             {
                 return;
             }

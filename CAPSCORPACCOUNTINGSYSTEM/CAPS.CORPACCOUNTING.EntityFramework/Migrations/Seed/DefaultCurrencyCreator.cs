@@ -28,10 +28,10 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         public void Create()
         {
-            CreateGridList();
+            CreatecurrencyList();
         }
 
-        private void CreateGridList()
+        private void CreatecurrencyList()
         {
             foreach (var currencyList in InitialTypeOfCurrencyList)
             {
@@ -41,7 +41,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         private void AddCurrencyListIfNotExists(TypeOfCurrencyUnit currencyList)
         {
-            if (_context.TypeOfCurrencyUnit.Any(l => l.Description == currencyList.Description))
+            if (_context.TypeOfCurrencyUnit.Any(l => l.TenantId == currencyList.TenantId &&  l.Description == currencyList.Description))
             {
                 return;
             }

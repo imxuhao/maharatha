@@ -34,7 +34,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         private void AddTypeOfAccountListIfNotExists(TypeOfAccountUnit typeOfAccount)
         {
-            if (_context.TypeOfAccountUnit.Any(l => l.Description == typeOfAccount.Description))
+            if (_context.TypeOfAccountUnit.Any(l => l.TenantId == typeOfAccount.TenantId  && l.Description == typeOfAccount.Description))
             {
                 return;
             }

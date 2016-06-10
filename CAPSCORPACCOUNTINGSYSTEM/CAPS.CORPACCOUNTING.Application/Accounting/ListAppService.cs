@@ -30,13 +30,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IVendorCache _vendorCache;
         private readonly IDivisionCache _dividsCache;
         private readonly IAccountCache _accountCache;
+        private readonly ISubAccountCache _subAccountCache;
 
 
 
         public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
             CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
             IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
-            IDivisionCache dividsCache, IAccountCache accountCache)
+            IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache)
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -48,6 +49,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _vendorCache = vendorCache;
             _dividsCache = dividsCache;
             _accountCache = accountCache;
+            _subAccountCache = subAccountCache;
         }
 
 
@@ -76,14 +78,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where(p => p.Id == input.JobId)
                                     select job.ChartOfAccountId).FirstOrDefault();
 
-            var accountList= await _accountCache.GetAccountCacheItemAsync(
+            var accountList = await _accountCache.GetAccountCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
 
-            return  accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
-                p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) 
+            return accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+                p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
                 || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).WhereIf(chartOfAccountId != 0, p => p.ChartOfAccountId == chartOfAccountId).ToList();
-                                     
-            
+
+
         }
 
         /// <summary>
@@ -91,50 +93,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<AutoFillDto>> GetSubAccountList(AutoSearchInput input)
+        public async Task<List<SubAccountCacheItem>> GetSubAccountList(AutoSearchInput input)
         {
-            var cacheItem = await GetSubAccountsCacheItemAsync(
+            var cacheItem = await _subAccountCache.GetSubAccountCacheItemAsync(
               CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-                return cacheItem.ItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Name.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
-                            p.Column1.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.Column2.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
-                            p.Column3.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+            return cacheItem.SubAccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                        p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.SubAccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                        p.SearchNo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
-
-        /// <summary>
-        /// Get SubAccounts From DataBase
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        private async Task<List<AutoFillDto>> GetSubAcoountsFromDb(AutoSearchInput input)
-        {
-            var query = from subaccounts in _subAccountUnitRepository.GetAll()
-                        select new { subaccounts };
-            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.subaccounts.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new AutoFillDto
-                            {
-                                Name = u.subaccounts.SubAccountNumber,
-                                Value = u.subaccounts.Id.ToString(),
-                                Column2 = u.subaccounts.Description,
-                                Column1 = u.subaccounts.Caption,
-                                Column3 = u.subaccounts.SearchNo
-                            }).ToListAsync();
-
-        }
-
-        private async Task<CacheItem> GetSubAccountsCacheItemAsync(string subaccountkey, AutoSearchInput input)
-        {
-            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).GetAsync(subaccountkey, async () =>
-            {
-                var newCacheItem = new CacheItem(subaccountkey);
-                var subaccountList = await GetSubAcoountsFromDb(input);
-                foreach (var subaccount in subaccountList)
-                {
-                    newCacheItem.ItemList.Add(subaccount);
-                }
-                return newCacheItem;
-            });
-        }
-
 
         /// <summary>
         /// Get Vendors
@@ -143,7 +109,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<VendorCacheItem>> GetVendorList(AutoSearchInput input)
         {
-             return await _vendorCache.GetVendorList(input);
+            var cacheItem = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return cacheItem.VendorCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.FirstName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.VendorAccountInfo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.VendorNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
 
         }
 

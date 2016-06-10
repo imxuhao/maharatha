@@ -246,6 +246,7 @@
     <Compile Include="GenericSearch\TextSearch.cs" />
     <Compile Include="Helper\CacheExtensionHelper.cs" />
     <Compile Include="Helper\CacheItems\AccountCacheItem.cs" />
+    <Compile Include="Helper\CacheItems\SubAccountCacheItem.cs" />
     <Compile Include="Helper\CacheItems\DivisionCacheItem.cs" />
     <Compile Include="Helper\CacheItems\VendorCacheItem.cs" />
     <Compile Include="Helper\CacheKeyStores.cs" />

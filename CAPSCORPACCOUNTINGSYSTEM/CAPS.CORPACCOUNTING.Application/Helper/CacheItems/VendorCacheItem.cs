@@ -35,11 +35,15 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <summary> Gets or sets VendorAccountInfo </summary>
         public string VendorAccountInfo { get; set; }
 
+        /// <summary> Gets or sets PaymentTermsId </summary>
+        public int? PaymentTermsId { get; set; }
+
+
     }
 
     public interface IVendorCache : IEntityCache<VendorCacheItem>
     {
-        Task<List<VendorCacheItem>> GetVendorList(AutoSearchInput input);
+        Task<CacheItem> GetVendorsCacheItemAsync(string vendorkey, AutoSearchInput input);
 
     }
 
@@ -58,17 +62,6 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
         }
 
-
-        public async Task<List<VendorCacheItem>> GetVendorList(AutoSearchInput input)
-        {
-            var cacheItem = await GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.VendorCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-            || p.FirstName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-            || p.VendorAccountInfo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-            || p.VendorNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
-           
-        }
-
         private async Task<List<VendorCacheItem>> GetVendorsFromDb(AutoSearchInput input)
         {
             var query = from vendors in Repository.GetAll()
@@ -85,7 +78,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         }
 
-        private async Task<CacheItem> GetVendorsCacheItemAsync(string vendorkey, AutoSearchInput input)
+        public async Task<CacheItem> GetVendorsCacheItemAsync(string vendorkey, AutoSearchInput input)
         {
             return await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore).GetAsync(vendorkey, async () =>
             {

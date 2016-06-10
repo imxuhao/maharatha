@@ -29,7 +29,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly IRepository<CoaUnit, int> _coaRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-      
+
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
@@ -67,9 +67,14 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 join currencyrate in _typeOfCurrencyRateRepository.GetAll() on au.TypeOfCurrencyRateId equals currencyrate.Id
                 into ratecurrency
                 from accountresults in ratecurrency.DefaultIfEmpty()
-                select new { Account = au, TypeOfAccount = coaunit.Description, TypeOfAccountRate = accountresults.Description,
-                    TypeOfCurrency = currency.Description, LinkAccount=linkAccounts.Caption
-                  
+                select new
+                {
+                    Account = au,
+                    TypeOfAccount = coaunit.Description,
+                    TypeOfAccountRate = accountresults.Description,
+                    TypeOfCurrency = currency.Description,
+                    LinkAccount = linkAccounts.Caption
+
                 };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -96,7 +101,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                      dto.TypeOfAccount = item.TypeOfAccount;
                      dto.TypeOfCurrency = item.TypeOfCurrency;
                      dto.TypeOfCurrencyRate = item.TypeOfAccountRate;
-                     dto.LinkAccount = item.LinkAccount;                    
+                     dto.LinkAccount = item.LinkAccount;
                      return dto;
                  }).ToList());
         }
@@ -108,14 +113,17 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Accounts_Create)]
-        public async Task<AccountUnitDto> CreateAccountUnit(CreateAccountUnitInput input)
+        public async Task<IdOutputDto<long>> CreateAccountUnit(CreateAccountUnitInput input)
         {
             var accountUnit = input.MapTo<AccountUnit>();
             accountUnit.ParentId = input.ParentId != 0 ? input.ParentId : null;
-            await _accountUnitManager.CreateAsync(accountUnit);
+            IdOutputDto<long> responseDto = new IdOutputDto<long>
+            {
+                AccountId = await _accountUnitManager.CreateAsync(accountUnit)
+            };
             await CurrentUnitOfWork.SaveChangesAsync();
             _unitOfWorkManager.Current.Completed += (sender, args) => { };
-            return accountUnit.MapTo<AccountUnitDto>();
+            return responseDto;
         }
         /// <summary>
         /// Updating the AccountUnit
@@ -123,7 +131,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Accounts_Edit)]
-        public async Task<AccountUnitDto> UpdateAccountUnit(UpdateAccountUnitInput input)
+        public async Task<IdOutputDto<long>> UpdateAccountUnit(UpdateAccountUnitInput input)
         {
             var accountUnit = await _accountUnitRepository.GetAsync(input.AccountId);
 
@@ -169,8 +177,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
             await _accountUnitManager.UpdateAsync(accountUnit);
 
             await CurrentUnitOfWork.SaveChangesAsync();
-
-            return accountUnit.MapTo<AccountUnitDto>();
+            IdOutputDto<long> responseDto = new IdOutputDto<long>
+            {
+                AccountId = accountUnit.Id
+            };
+            return responseDto;
         }
         /// <summary>
         /// Deleting the Account by Id
@@ -247,11 +258,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
         {
             var linkCoaId = _coaRepository.GetAll().Where(u => u.Id == input.Id).Select(u => u.LinkChartOfAccountID).FirstOrDefault();
 
-            var linkAccountList =  _accountUnitRepository.GetAll().Where(u => u.ChartOfAccountId == linkCoaId);
+            var linkAccountList = _accountUnitRepository.GetAll().Where(u => u.ChartOfAccountId == linkCoaId);
             if (!string.IsNullOrEmpty(input.Query))
                 linkAccountList = linkAccountList.Where(u => u.Caption.Contains(input.Query));
 
-            var result=await linkAccountList.Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() })
+            var result = await linkAccountList.Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() })
              .ToListAsync();
             return result;
         }
@@ -263,9 +274,9 @@ namespace CAPS.CORPACCOUNTING.Accounts
         public async Task<List<NameValueDto>> GetRollupAccountsList(AutoSearchInput input)
         {
             return await (from au in _accountUnitRepository.GetAll()
-                         .Where( p => p.IsRollupAccount ==true && p.ChartOfAccountId==input.Id)
-                         .WhereIf(!string.IsNullOrEmpty(input.Query),p=>p.Caption.Contains(input.Query))
-                         .WhereIf(! ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
+                         .Where(p => p.IsRollupAccount == true && p.ChartOfAccountId == input.Id)
+                         .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
+                         .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
                           select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
         }
 

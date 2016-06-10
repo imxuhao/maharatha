@@ -9,5 +9,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     public class IdOutputDto<T> :IOutputDto
     {
         public T Id { get; set; }
+        /// <summary>
+        /// Gets or sets AccountId
+        /// </summary>
+        public T AccountId { get; set; }
     }
 }

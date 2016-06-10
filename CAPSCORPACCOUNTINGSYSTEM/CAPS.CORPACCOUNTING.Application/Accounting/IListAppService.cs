@@ -29,7 +29,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<AutoFillDto>> GetSubAccountList(AutoSearchInput input);
+        Task<List<SubAccountCacheItem>> GetSubAccountList(AutoSearchInput input);
         /// <summary>
         ///  Get VendorList
         /// </summary>

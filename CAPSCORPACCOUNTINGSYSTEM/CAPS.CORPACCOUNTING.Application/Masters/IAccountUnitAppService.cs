@@ -20,14 +20,14 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
       
-        Task<AccountUnitDto> CreateAccountUnit(CreateAccountUnitInput input);
+        Task<IdOutputDto<long>> CreateAccountUnit(CreateAccountUnitInput input);
 
         /// <summary>
         /// Update the Account based on AccountId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<AccountUnitDto> UpdateAccountUnit(UpdateAccountUnitInput input);
+        Task<IdOutputDto<long>> UpdateAccountUnit(UpdateAccountUnitInput input);
 
         /// <summary>
         /// Get the list of all Accounts based on CoaId and also provided with Sorting,Paging and Searching functionality.

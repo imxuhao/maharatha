@@ -22,11 +22,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         protected IRepository<AccountUnit, long> AccountUnitRepository { get; }
 
         [UnitOfWork]
-        public virtual async Task CreateAsync(AccountUnit accountUnit)
+        public virtual async Task<long> CreateAsync(AccountUnit accountUnit)
         {
             accountUnit.Code = await GetNextChildCodeAsync(accountUnit.ParentId, accountUnit.ChartOfAccountId);
             await ValidateAccountUnitAsync(accountUnit);
-            await AccountUnitRepository.InsertAsync(accountUnit);
+           return await AccountUnitRepository.InsertAndGetIdAsync(accountUnit);
         }
 
         public virtual async Task UpdateAsync(AccountUnit accountUnit)

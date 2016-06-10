@@ -4,28 +4,28 @@ namespace CAPS.CORPACCOUNTING.Helpers
     public class CacheKeyStores
     {
         //Division Keys
-        public const string CacheDivisionStore = "SUMITDIVISION";
-        public const string DivisionKey = "DIVISION";
+        public const string CacheDivisionStore = "SumitDivision";
+        public const string DivisionKey = "Division";
 
         //AccountKeys
-        public const string CacheAccountStore = "SUMITACCOUNT";
-        public const string AccountKey = "ACCOUNT";
+        public const string CacheAccountStore = "SumitAccount";
+        public const string AccountKey = "Account";
         
         //CustomerKeys
-        public const string CacheCustomerStore = "SUMITCUSTOMER";
-        public const string CustomerKey = "CUSTOMER";
+        public const string CacheCustomerStore = "SumitCustomer";
+        public const string CustomerKey = "Customer";
 
         //VendorKeys
-        public const string CacheVendorStore = "SUMITVENDOR";
-        public const string VendorKey = "VENDOR";
+        public const string CacheVendorStore = "SumitVendor";
+        public const string VendorKey = "Vendor";
 
         //SubAccountsKeys
-        public const string CacheSubAccountStore = "SUMITSUBACCOUNT";
-        public const string SubAccountKey = "SUBACCOUNT";
+        public const string CacheSubAccountStore = "SumitSubAccount";
+        public const string SubAccountKey = "SubAccount";
 
         //Employee Keys
-        public const string CachEmployeeStore = "SUMITEMPLOYEE";
-        public const string EmployeeKey = "EMPLOYEE";
+        public const string CachEmployeeStore = "SumitEmployee";
+        public const string EmployeeKey = "Employee";
 
 
 

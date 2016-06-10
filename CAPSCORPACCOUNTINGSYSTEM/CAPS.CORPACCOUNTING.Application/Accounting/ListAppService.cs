@@ -70,7 +70,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<AccountCacheItem>> GeAccountsList(AutoSearchInput input)
+        public async Task<List<AccountCacheItem>> GetAccountsList(AutoSearchInput input)
         {
 
             var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where(p => p.Id == input.JobId)

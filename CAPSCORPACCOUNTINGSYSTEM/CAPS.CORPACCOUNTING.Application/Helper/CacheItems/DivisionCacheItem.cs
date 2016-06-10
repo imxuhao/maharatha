@@ -63,10 +63,6 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
         }
 
-
-
-      
-
         private async Task<List<DivisionCacheItem>> GetDivisionsFromDb(AutoSearchInput input)
         {
             var divisions = await Repository.GetAll()

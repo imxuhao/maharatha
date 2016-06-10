@@ -139,8 +139,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             _unitOfWorkManager.Current.Completed += (sender, args) =>
             {
-                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).
-                Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId),input.OrganizationUnitId));
+               
             };
 
             return result.MapTo<JobUnitDto>();
@@ -226,9 +225,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 }
             }
             #endregion
-
-
-            await RemoveItemfromCache(input.OrganizationUnitId);
             return jobUnit.MapTo<JobUnitDto>();
         }
 
@@ -244,7 +240,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             await _jobLocationRepository.DeleteAsync(p => p.JobId == input.Id);
             await _jobAccountUnitRepository.DeleteAsync(p => p.JobId == input.Id);
             await _jobUnitManager.DeleteAsync(input.Id);
-            await RemoveItemfromCache(input.OrganizationUnitId);
         }
         /// <summary>
         /// To Get the Job with JobDetails to show in the Grid With searching and sorting
@@ -326,8 +321,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
              var cacheItem = await _divisioncache.GetDivisionCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
             return cacheItem.DivisionCacheItemList.ToList().Where(p=>p.IsDivision==true)
-                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.ToUpper().Contains(input.Query.ToUpper()) ||
-            p.Caption.ToUpper().Contains(input.Query.ToUpper())).ToList();
+                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+            p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
 
         public async Task<List<NameValueDto>> GetProjectCoaList(AutoSearchInput input)
@@ -490,15 +485,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 }
                 return newCacheItem;
             });
-        }
-
-        private async Task RemoveItemfromCache(long? OrganizationUnitId)
-        {
-            _unitOfWorkManager.Current.Completed += (sender, args) =>
-            {
-                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).
-                Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), OrganizationUnitId));
-            };
         }
 
     }

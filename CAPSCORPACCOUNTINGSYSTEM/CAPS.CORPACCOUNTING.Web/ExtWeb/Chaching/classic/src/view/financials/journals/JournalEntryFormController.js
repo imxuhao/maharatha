@@ -84,6 +84,43 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
                                 records.push(rec);
                                 data.push(rec.data);
                             }
+                        }else if (rec.get('creditAccountingItemId')>0) {//updating credit record only
+                            if (rec.get('creditJobId') > 0 && rec.get('creditAccountId') > 0 && rec.get('creditAccountingItemId') > 0) {
+                                //create new debit record
+                                Ext.apply(modelRec.data, rec.data);
+                                me.traverseValuesDebit(modelRec, rec);
+                                if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit and add credit
+                                    rec.set('debitCreditGroup', debitCreditGroup);
+                                    modelRec.set('debitCreditGroup', debitCreditGroup);
+                                    rec.set('accountingItemOrigId', null);
+                                    rec.set('accountingItemId', rec.get('creditAccountingItemId'));
+                                    records.push(rec);
+                                    data.push(rec.data);
+                                }
+                                records.push(modelRec);
+                                data.push(modelRec.data);
+                            } else if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit
+                                records.push(rec);
+                                data.push(rec.data);
+                            }
+                        } if (rec.get('accountingItemId')) {//add credit record
+                            if (rec.get('creditJobId') > 0 && rec.get('creditAccountId') > 0) {
+                                //create new credit record
+                                Ext.apply(modelRec.data, rec.data);
+                                me.traverseValues(modelRec, rec);
+                                if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit and add credit
+                                    rec.set('debitCreditGroup', debitCreditGroup);
+                                    modelRec.set('debitCreditGroup', debitCreditGroup);
+                                    rec.set('accountingItemOrigId', null);
+                                    records.push(rec);
+                                    data.push(rec.data);
+                                }
+                                records.push(modelRec);
+                                data.push(modelRec.data);
+                            } else if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit
+                                records.push(rec);
+                                data.push(rec.data);
+                            }
                         }
                     }
                 }
@@ -92,8 +129,11 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
         //return {};
         return modifiedRecs;
     },
-    handleCreditDebitLines: function (record, modifiedRecs) {
-        
+    traverseValuesDebit: function (modelRec, rec) {
+        modelRec.set('accountingItemId', null);
+        modelRec.set('accountingItemOrigId', null);
+        modelRec.set('amount', Math.abs(rec.get('amount')));
+        modelRec.set('accountingItemOriAmount', modelRec.get('amount'));
     },
     traverseValues: function (modelRec, rec) {
         modelRec.set('accountingItemId', rec.get('creditAccountingItemId'));

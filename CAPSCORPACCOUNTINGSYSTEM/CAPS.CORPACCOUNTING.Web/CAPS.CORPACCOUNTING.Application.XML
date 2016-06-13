@@ -2198,9 +2198,24 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.ChartOfAccountId">
             <summary> Gets or sets TypeOfAccountId </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Accounts from Database
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Accounts
+            </summary>
+            <param name="subaccountkey"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCacheItem">
             <summary>
-            Vendor CacheItem Class
+            SubAccount CacheItem Class
             </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCacheItem.SubAccountId">
@@ -2217,6 +2232,21 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCacheItem.SearchNo">
             <summary> Gets or sets SearchNo </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache.GetSubAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts by key
+            </summary>
+            <param name="accountkey"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCache.GetSubAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts from Database
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCache.GetSubAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
@@ -7025,6 +7055,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IUserOrganizationAppService.GetOrganizationsByUserId(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Get Organization By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.IUserViewSettingsUnitAppService">
             <summary>
             This service will provide all CRUD operations on UserViewSettings.
@@ -7545,6 +7582,12 @@
              Delete the TaxCredit based on TaxCreditId.
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.UserOrganizationAppService.GetOrganizationsByUserId(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            
+            </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.UserViewSettingsUnitAppService.CreateUserViewSettingsUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput)">

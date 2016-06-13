@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
@@ -666,6 +667,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public CORPACCOUNTINGDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
+            
 
         }
 

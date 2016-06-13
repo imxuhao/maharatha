@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Abp;
@@ -15,6 +16,8 @@ using CAPS.CORPACCOUNTING.MultiTenancy.Demo;
 using Abp.Extensions;
 using Abp.Notifications;
 using Abp.Runtime.Security;
+using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Notifications;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
@@ -33,20 +36,31 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly IAppNotifier _appNotifier;
         private readonly IAbpZeroDbMigrator _abpZeroDbMigrator;
 
+        private readonly IRepository<TypeOfCurrencyUnit, short> _typeOfCurrencyUnit;
+        private readonly IRepository<TypeOfAccountUnit> _typeOfAccountUnit;
+        private readonly IRepository<RegionUnit> _regionUnit;
+        private readonly IRepository<CountryUnit> _countryUnit;
+
+
+
         public TenantManager(
-            IRepository<Tenant> tenantRepository,
-            IRepository<TenantFeatureSetting, long> tenantFeatureRepository,
-            EditionManager editionManager,
-            IUnitOfWorkManager unitOfWorkManager,
-            RoleManager roleManager,
-            IUserEmailer userEmailer,
-            TenantDemoDataBuilder demoDataBuilder, 
-            UserManager userManager, 
-            INotificationSubscriptionManager notificationSubscriptionManager, 
-            IAppNotifier appNotifier,
-            IAbpZeroFeatureValueStore featureValueStore,
-            IAbpZeroDbMigrator abpZeroDbMigrator) :
-            base(tenantRepository,tenantFeatureRepository,editionManager, featureValueStore)
+        IRepository<Tenant> tenantRepository,
+        IRepository<TenantFeatureSetting, long> tenantFeatureRepository,
+        EditionManager editionManager,
+        IUnitOfWorkManager unitOfWorkManager,
+        RoleManager roleManager,
+        IUserEmailer userEmailer,
+        TenantDemoDataBuilder demoDataBuilder,
+        UserManager userManager,
+        INotificationSubscriptionManager notificationSubscriptionManager,
+        IAppNotifier appNotifier,
+        IAbpZeroFeatureValueStore featureValueStore,
+        IAbpZeroDbMigrator abpZeroDbMigrator,
+        IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyUnit,
+        IRepository<TypeOfAccountUnit> typeOfAccountUnit,
+        IRepository<RegionUnit> regionUnit,
+        IRepository<CountryUnit> countryUnit) :
+        base(tenantRepository, tenantFeatureRepository, editionManager, featureValueStore)
         {
             _unitOfWorkManager = unitOfWorkManager;
             _roleManager = roleManager;
@@ -56,7 +70,12 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _notificationSubscriptionManager = notificationSubscriptionManager;
             _appNotifier = appNotifier;
             _abpZeroDbMigrator = abpZeroDbMigrator;
+            _typeOfCurrencyUnit = typeOfCurrencyUnit;
+            _typeOfAccountUnit = typeOfAccountUnit;
+            _regionUnit = regionUnit;
+            _countryUnit = countryUnit;
         }
+
 
         public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin, bool sendActivationEmail)
         {
@@ -128,6 +147,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     newTenantId = tenant.Id;
                     newAdminId = adminUser.Id;
                 }
+                if (string.IsNullOrEmpty(connectionString))
+                    await CustomTenantSeeding(newTenantId);
 
                 await uow.CompleteAsync();
             }
@@ -149,6 +170,62 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         protected virtual void CheckErrors(IdentityResult identityResult)
         {
             identityResult.CheckErrors(LocalizationManager);
+        }
+        /// <summary>
+        /// Chaching Method
+        /// Tenant based seeding
+        /// </summary>
+        /// <param name="newTenantId"></param>
+        /// <returns></returns>
+        public async Task CustomTenantSeeding(int newTenantId)
+        {
+            //Currency Seeding
+            if (await _typeOfCurrencyUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
+            {
+                var currencyList = await _typeOfCurrencyUnit.GetAll().Where(u => u.TenantId == 1).ToListAsync();
+
+                currencyList.ForEach(u => u.TenantId = newTenantId);
+                foreach (var currency in currencyList)
+                {
+                    await _typeOfCurrencyUnit.InsertAsync(currency);
+                }
+            }
+
+            //Account Seeding
+            if (await _typeOfAccountUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
+            {
+                var typeOfAccountList = await _typeOfAccountUnit.GetAll().Where(u => u.TenantId == 1).ToListAsync();
+
+                typeOfAccountList.ForEach(u => u.TenantId = newTenantId);
+                foreach (var typeOfAccount in typeOfAccountList)
+                {
+                    await _typeOfAccountUnit.InsertAsync(typeOfAccount);
+                }
+            }
+
+            //Region Seeding
+            if (await _regionUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
+            {
+                var regionList = await _regionUnit.GetAll().Where(u => u.TenantId == 1).ToListAsync();
+
+                regionList.ForEach(u => u.TenantId = newTenantId);
+                foreach (var region in regionList)
+                {
+                    await _regionUnit.InsertAsync(region);
+                }
+            }
+
+            //Country Seeding
+            if (await _countryUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
+            {
+                var countryList = await _countryUnit.GetAll().Where(u => u.TenantId == 1).ToListAsync();
+
+                countryList.ForEach(u => u.TenantId = newTenantId);
+                foreach (var country in countryList)
+                {
+                    await _countryUnit.InsertAsync(country);
+                }
+            }
         }
     }
 }

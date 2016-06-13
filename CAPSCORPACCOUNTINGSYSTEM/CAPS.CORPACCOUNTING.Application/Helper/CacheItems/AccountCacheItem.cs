@@ -79,7 +79,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         }
         public override void HandleEvent(EntityChangedEventData<AccountUnit> eventData)
         {
-            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
+            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
         }
         public AccountCacheItem Get(int id)
         {
@@ -90,6 +90,11 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Get Accounts from Database
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
 
         private async Task<List<AccountCacheItem>> GetAccountsFromDb(AutoSearchInput input)
         {
@@ -99,6 +104,12 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             return accounts;
         }
 
+        /// <summary>
+        /// Get Accounts
+        /// </summary>
+        /// <param name="subaccountkey"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<CacheItem> GetAccountCacheItemAsync(string accountkey, AutoSearchInput input)
         {
             return await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore).GetAsync(accountkey, async () =>

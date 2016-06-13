@@ -18,7 +18,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 {
 
     /// <summary>
-    /// Vendor CacheItem Class
+    /// SubAccount CacheItem Class
     /// </summary>
     [AutoMapFrom(typeof(SubAccountUnit))]
     public class SubAccountCacheItem
@@ -41,6 +41,12 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
     public interface ISubAccountCache : IEntityCache<SubAccountCacheItem>
     {
+        /// <summary>
+        /// Get SubAccounts by key
+        /// </summary>
+        /// <param name="accountkey"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<CacheItem> GetSubAccountCacheItemAsync(string accountkey, AutoSearchInput input);
 
     }
@@ -87,7 +93,11 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
         }
        
-
+        /// <summary>
+        /// Get SubAccounts from Database
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private async Task<List<SubAccountCacheItem>> GetSubAccountsFromDb(AutoSearchInput input)
         {
             var subaccounts = await Repository.GetAll()

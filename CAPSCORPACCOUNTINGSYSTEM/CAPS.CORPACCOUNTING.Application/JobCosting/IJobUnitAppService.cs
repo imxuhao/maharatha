@@ -47,7 +47,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<JobUnitDto> GetJobUnitById(IdInput input);
+        Task<JobCommercialUnitDto> GetJobUnitById(IdInputExtensionDto<bool,int> input);
 
         /// <summary>
         /// Get Organizations of Tenant except input Organization.

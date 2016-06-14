@@ -40,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         public int? TypeOfAccountId { get; set; }
         /// <summary> Gets or sets TypeOfAccountId </summary>
         public int? ChartOfAccountId { get; set; }
-
+        public bool IsCorporate { get; set; }
         
     }
 
@@ -54,6 +54,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
     {
 
         private readonly CustomAppSession _customAppSession;
+        private readonly IRepository<CoaUnit> _coaRepository;
 
         ITypedCache<int, AccountCacheItem> IEntityCache<AccountCacheItem, int>.InternalCache
         {
@@ -71,11 +72,12 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             }
         }
 
-        public AccountCache(ICacheManager cacheManager, IRepository<AccountUnit,long> repository, CustomAppSession customAppSession)
+        public AccountCache(ICacheManager cacheManager, IRepository<AccountUnit,long> repository, CustomAppSession customAppSession, IRepository<CoaUnit> coaRepository)
             : base(cacheManager, repository)
         {
 
             _customAppSession = customAppSession;
+            _coaRepository = coaRepository;
         }
         public override void HandleEvent(EntityChangedEventData<AccountUnit> eventData)
         {
@@ -98,10 +100,23 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         private async Task<List<AccountCacheItem>> GetAccountsFromDb(AutoSearchInput input)
         {
-            var accounts = await Repository.GetAll()
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .Select(u => new AccountCacheItem { AccountNumber = u.AccountNumber, AccountId = u.Id, Caption = u.Caption,Description = u.Description}).ToListAsync();
-            return accounts;
+            var querry = from account in Repository.GetAll()
+                           join coa in _coaRepository.GetAll() on account.ChartOfAccountId equals coa.Id
+                           into coaunits from coaunit in coaunits.DefaultIfEmpty()
+                           select new {account, coaunit };
+
+
+            var result=await querry.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.account.OrganizationUnitId == input.OrganizationUnitId).ToListAsync();
+            return result.Select(u => new AccountCacheItem
+            {
+                AccountNumber = u.account.AccountNumber,
+                AccountId = u.account.Id,
+                Caption = u.account.Caption,
+                Description = u.account.Description,
+                ChartOfAccountId = u.account.ChartOfAccountId,
+                IsCorporate = u.coaunit.IsCorporate
+            }).ToList();
+
         }
 
         /// <summary>

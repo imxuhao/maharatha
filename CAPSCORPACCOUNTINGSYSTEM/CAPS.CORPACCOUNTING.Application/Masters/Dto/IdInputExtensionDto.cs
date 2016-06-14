@@ -8,4 +8,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public long? OrganizationUnitId { get; set; }
       
     }
+
+    public class IdInputExtensionDto<T1, T2> : IdInput<T2>
+    {
+
+        public T1 Value { get; set; }
+    }
 }

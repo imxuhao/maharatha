@@ -23,6 +23,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
         private readonly IRepository<JobUnit> _jobUnitRepository;
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
+        private readonly IRepository<CoaUnit> _coaUnit;
         private readonly IRepository<VendorUnit> _vendorUnitRepository;
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
         private readonly ICacheManager _cacheManager;
@@ -37,7 +38,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
             CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
             IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
-            IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache)
+            IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache, IRepository<CoaUnit> coaUnit)
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -50,6 +51,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _dividsCache = dividsCache;
             _accountCache = accountCache;
             _subAccountCache = subAccountCache;
+            _coaUnit = coaUnit;
         }
 
 
@@ -74,7 +76,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<AccountCacheItem>> GetAccountsList(AutoSearchInput input)
         {
-
             var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where(p => p.Id == input.JobId)
                                     select job.ChartOfAccountId).FirstOrDefault();
 

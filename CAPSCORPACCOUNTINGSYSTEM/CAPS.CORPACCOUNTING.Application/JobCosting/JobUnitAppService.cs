@@ -20,6 +20,7 @@ using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Runtime.Caching;
+using AutoMapper;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 
@@ -118,6 +119,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 TaxRecoveryId = input.TaxRecoveryId
             };
             JobCommercialUnitDto result = await _jobCommercialAppService.CreateJobDetailUnit(jobcommercialunit);
+           
 
             //Get the accounts of appropriate coa and constructing CreateJobAccountUnitInput
             List<CreateJobAccountUnitInput> jobAccounts = await (from account in _accountUnitRepository.GetAll()
@@ -142,6 +144,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                
             };
 
+            await CurrentUnitOfWork.SaveChangesAsync();
             return result.MapTo<JobUnitDto>();
         }
 
@@ -225,7 +228,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 }
             }
             #endregion
-            return jobUnit.MapTo<JobUnitDto>();
+            JobUnitDto result= jobUnit.MapTo<JobUnitDto>();
+            result.JobId = jobUnit.Id;
+            return result;
+
         }
 
         /// <summary>
@@ -284,12 +290,27 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 return dto;
             }).ToList());
         }
-        public async Task<JobUnitDto> GetJobUnitById(IdInput input)
+        public async Task<JobCommercialUnitDto> GetJobUnitById(IdInputExtensionDto<bool,int> input)
         {
-            JobUnit jobitem = await _jobUnitRepository.GetAsync(input.Id);
-            JobUnitDto result = jobitem.MapTo<JobUnitDto>();
-            result.JobId = jobitem.Id;
-            return result;
+            if (input.Value)
+            {
+                var jobitem = await _jobUnitRepository.GetAsync(input.Id);
+                Mapper.CreateMap<JobUnit, JobCommercialUnitDto>()
+                    .ForMember(u => u.JobId, ap => ap.MapFrom(src => src.Id));
+
+                JobCommercialUnitDto result = new JobCommercialUnitDto();
+                Mapper.Map(jobitem, result);
+                return result;
+
+            }
+            else
+            {
+                var jobitem = await _jobDetailUnitRepository.GetAsync(input.Id);
+                JobCommercialUnitDto result = jobitem.MapTo<JobCommercialUnitDto>();
+                result.JobId = jobitem.Id;
+                return result;
+
+            }
 
         }
 

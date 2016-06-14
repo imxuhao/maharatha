@@ -1,11 +1,11 @@
 Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
     extend: 'Chaching.view.common.form.ChachingTransactionFormPanelController',
     alias: 'controller.financials-journals-journalentryform',
-    doPreSaveOperation: function(record, values, idPropertyField) {
+    doPreSaveOperation: function (record, values, idPropertyField) {
         record.set('typeOfAccountingDocumentId', 1);
         return record;
     },
-    onHeaderCollapse:function(fieldSet, eOpts) {
+    onHeaderCollapse: function (fieldSet, eOpts) {
         var me = this,
             view = me.getView(),
             detailContainer = view.down('fieldset[isTransactionDetailContainer=true]');
@@ -18,7 +18,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
             }
         }
     },
-    onHeaderExpand:function(fieldSet, eOpts) {
+    onHeaderExpand: function (fieldSet, eOpts) {
         var me = this,
            view = me.getView(),
            detailContainer = view.down('fieldset[isTransactionDetailContainer=true]');
@@ -31,11 +31,11 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
     },
     getDetailsModifiedRecords: function (controller, view, detailGrid, detailsStore) {
         var modifiedRecords = detailsStore.getModifiedRecords(),
-            me=this,
+            me = this,
             records = [],
             data = [],
             modifiedRecs = { records: records, data: data },
-            modelClass=detailsStore.getModel().$className,
+            modelClass = detailsStore.getModel().$className,
             transactionId = view.getForm().findField('accountingDocumentId').getValue();
         if (modifiedRecords && modifiedRecords.length > 0) {
             var rowLength = modifiedRecords.length;
@@ -67,7 +67,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
                         }
                     } else { //updating existing record
                         if (rec.get('accountingItemId') > 0 && rec.get('creditAccountingItemId') > 0) {//update both record
-                            if (rec.get('creditJobId') > 0 && rec.get('creditAccountId') > 0 && rec.get('creditAccountingItemId')>0) {
+                            if (rec.get('creditJobId') > 0 && rec.get('creditAccountId') > 0 && rec.get('creditAccountingItemId') > 0) {
                                 //create new credit record
                                 Ext.apply(modelRec.data, rec.data);
                                 me.traverseValues(modelRec, rec);
@@ -84,28 +84,35 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
                                 records.push(rec);
                                 data.push(rec.data);
                             }
-                        }else if (rec.get('creditAccountingItemId')>0) {//updating credit record only
+                        } else if (rec.get('creditAccountingItemId') > 0) {//updating credit record only
                             if (rec.get('creditJobId') > 0 && rec.get('creditAccountId') > 0 && rec.get('creditAccountingItemId') > 0) {
                                 //create new debit record
                                 Ext.apply(modelRec.data, rec.data);
-                                me.traverseValuesDebit(modelRec, rec);
-                                if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit and add credit
+                                me.traverseValuesDebit(rec, rec);
+                                if (rec.get('jobId') > 0 &&
+                                    rec.get('accountId') > 0) { //add debit and update credit
                                     rec.set('debitCreditGroup', debitCreditGroup);
                                     modelRec.set('debitCreditGroup', debitCreditGroup);
                                     rec.set('accountingItemOrigId', null);
-                                    rec.set('accountingItemId', rec.get('creditAccountingItemId'));
+                                    //rec.set('accountingItemId', rec.get('creditAccountingItemId'));
                                     records.push(rec);
                                     data.push(rec.data);
                                 }
+                                me.traverseValues(modelRec, rec);
                                 records.push(modelRec);
                                 data.push(modelRec.data);
                             } else if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit
+                                if (rec.get('creditAccountingItemId') > 0 && rec.get('creditJobId') === null && rec.get('creditAccountId') === null) {//update debit
+                                    me.traverseValuesDebit(rec, rec);
+                                    rec.set('accountingItemId', rec.get('creditAccountingItemId'));
+                                }
                                 records.push(rec);
                                 data.push(rec.data);
                             }
-                        } if (rec.get('accountingItemId')) {//add credit record
+                        } else if (rec.get('accountingItemId') > 0) {//add credit record
                             if (rec.get('creditJobId') > 0 && rec.get('creditAccountId') > 0) {
                                 //create new credit record
+                                var accountingItemId = rec.get('accountingItemId');
                                 Ext.apply(modelRec.data, rec.data);
                                 me.traverseValues(modelRec, rec);
                                 if (rec.get('jobId') > 0 && rec.get('accountId') > 0) { //update debit and add credit
@@ -114,6 +121,8 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
                                     rec.set('accountingItemOrigId', null);
                                     records.push(rec);
                                     data.push(rec.data);
+                                } else {
+                                    modelRec.set('accountingItemId', accountingItemId);
                                 }
                                 records.push(modelRec);
                                 data.push(modelRec.data);
@@ -133,12 +142,21 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
         modelRec.set('accountingItemId', null);
         modelRec.set('accountingItemOrigId', null);
         modelRec.set('amount', Math.abs(rec.get('amount')));
-        modelRec.set('accountingItemOriAmount', modelRec.get('amount'));
+        if (modelRec.get('accountingItemOrigAmount') === null)
+            modelRec.set('accountingItemOrigAmount', -(Math.abs(modelRec.get('amount'))));
+        else {
+            modelRec.set('accountingItemOrigAmount', modelRec.get('accountingItemOrigAmount'));
+        }
     },
     traverseValues: function (modelRec, rec) {
         modelRec.set('accountingItemId', rec.get('creditAccountingItemId'));
         modelRec.set('accountingItemOrigId', rec.get('accountingItemId'));
         modelRec.set('amount', -(rec.get('amount')));
+        if (modelRec.get('accountingItemOrigAmount')===null)
+            modelRec.set('accountingItemOrigAmount', -(Math.abs(modelRec.get('amount'))));
+        else {
+            modelRec.set('accountingItemOrigAmount', modelRec.get('accountingItemOrigAmount'));
+        }
         modelRec.set('jobId', rec.get('creditJobId'));
         modelRec.set('jobNumber', rec.get('creditJobNumber'));
         modelRec.set('accountId', rec.get('creditAccountId'));
@@ -172,7 +190,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
         }
         return String.fromCharCode(codePt);
     },
-    validateDetails: function (controller, view, detailGrid, detailsStore,myMask) {
+    validateDetails: function (controller, view, detailGrid, detailsStore, myMask) {
         var detailColumns = detailGrid.getColumns(),
             modifiedRecords = detailsStore.getModifiedRecords(),
             isValid = true,
@@ -193,8 +211,18 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
                             var isValidRec = true;
                             if (debitDataIndexes.indexOf(dataIndex) !== -1) {
                                 isValidRec = controller.validateRecord(dataIndex, debitDataIndexes, record, columnValue);
-                            }else if (creditDataIndexes.indexOf(dataIndex)!==-1) {
+                            } else if (creditDataIndexes.indexOf(dataIndex) !== -1) {
                                 isValidRec = controller.validateRecord(dataIndex, creditDataIndexes, record, columnValue);
+                            }
+                            if (isValidRec &&
+                                !record.get('jobNumber') &&
+                                !record.get('accountNumber') &&
+                               !record.get('creditJobNumber') &&
+                                !record.get('creditAccountNumber')) {
+
+                                isValidRec = false;
+                                columnValue = null;
+
                             }
                             if (dataIndex === "amount" && columnValue === 0) {
                                 isValidRec = false;
@@ -217,7 +245,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
             return isValid;
         } else return true;
     },
-    validateRecord: function (dataIndex, dataIndexes, record,columnValue) {
+    validateRecord: function (dataIndex, dataIndexes, record, columnValue) {
         var isValid = true, value = undefined;
         for (var i = 0; i < dataIndexes.length; i++) {
             if (dataIndexes[i] !== dataIndex) {
@@ -230,5 +258,5 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
         }
         return isValid;
     }
-    
+
 });

@@ -14,8 +14,6 @@ using Abp.Linq.Extensions;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters.Dto;
-using CAPS.CORPACCOUNTING.Sessions;
-using Abp.Dependency;
 using CAPS.CORPACCOUNTING.Authorization;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.Journals.dto;
@@ -24,7 +22,7 @@ using CAPS.CORPACCOUNTING.Journals.Dto;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Accounting;
-using CAPS.CORPACCOUNTING.Common;
+using Castle.Core.Logging;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -46,6 +44,8 @@ namespace CAPS.CORPACCOUNTING.Journals
         private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
         private readonly IRepository<VendorUnit, int> _vendorUnitRepository;
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
+        private readonly ILogger _logger;
+
 
         /// <summary>
         /// 
@@ -71,7 +71,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             IRepository<AccountUnit, long> accountUnitRepository,
             IRepository<SubAccountUnit, long> subAccountUnitRepository,
             IRepository<VendorUnit, int> vendorUnitRepository,
-            IRepository<TaxCreditUnit> taxCreditUnitRepository)
+            IRepository<TaxCreditUnit> taxCreditUnitRepository, ILogger logger)
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
             _journalEntryDocumentUnitRepository = journalEntryDocumentUnitRepository;
@@ -84,6 +84,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             _subAccountUnitRepository = subAccountUnitRepository;
             _vendorUnitRepository = vendorUnitRepository;
             _taxCreditUnitRepository = taxCreditUnitRepository;
+            _logger = logger;
         }
 
         /// <summary>
@@ -182,7 +183,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                         join batch in _batchUnitRepository.GetAll() on journals.BatchId equals batch.Id
                             into batchunit
                         from batchunits in batchunit.DefaultIfEmpty()
-                        select new { Journals = journals, BatchName = batchunits.Description, CreatedUser =userunits.UserName};
+                        select new { Journals = journals, BatchName = batchunits.Description, CreatedUser = userunits.UserName };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -329,7 +330,8 @@ namespace CAPS.CORPACCOUNTING.Journals
                 .AsNoTracking()
                 .ToListAsync();
 
-            var mapResult = results.Select(item =>
+            var mapResult = new List<JournalCreditEntryDetailUnitDto>();
+            foreach (var item in results)
             {
                 var dto = item.JournalDetails.MapTo<JournalCreditEntryDetailUnitDto>();
                 dto.AccountingItemId = item.JournalDetails.Id;
@@ -340,8 +342,8 @@ namespace CAPS.CORPACCOUNTING.Journals
                 dto.SubAccountNumber3 = item.SubAccountNumber3;
                 dto.VendorName = item.vendorLastName;
                 dto.TaxRebateNumber = item.taxCreditNumber;
-                return dto;
-            }).ToList();
+                mapResult.Add(dto);
+            }
 
             var creditMapResult = MapJournalsDetailsOutPutDto(mapResult.OrderByDescending(u => u.Amount).ToList());
 
@@ -483,32 +485,37 @@ namespace CAPS.CORPACCOUNTING.Journals
 
                     if (!ReferenceEquals(journalDetail, null) && journalDetail.Amount.Value > 0)
                     {
-                        debitParentId = 0;
                         if (journalEntryDetails[i].Amount.Value > 0)
                         {
-                           
+                            debitParentId = 0;
                             Mapper.Map(journalEntryDetails[i], journalDetail);
                             journalDetail.AccountingItemOrigId = null;
                             await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalDetail);
                             debitParentId = journalDetail.Id;
+
+                            JournalEntryDetailInputUnit creditJournalItem = !string.IsNullOrEmpty(journalEntryDetails[i].DebitCreditGroup)
+                                    ? journalEntryDetails.Find(u => u.DebitCreditGroup.Trim() == journalEntryDetails[i].DebitCreditGroup.Trim() && u.Amount < 0)
+                                    : null;
+
+                            //credit Journal Entry
+                            if (!ReferenceEquals(creditJournalItem, null))
+                            {
+                                await CreditEntry(journalEntryDetails, debitParentId, creditJournalItem);
+                            }
+                            else
+                            {
+                                //delete credit Entry
+                                if (journalDetail.Id != 0)
+                                    _journalEntryDocumentDetailUnitRepository.Delete(
+                                        u => u.AccountingItemOrigId == journalDetail.Id);
+
+                            }
                         }
-
-                        JournalEntryDetailInputUnit creditJournalItem = !string.IsNullOrEmpty(journalEntryDetails[i].DebitCreditGroup)
-                                ? journalEntryDetails.Find(u => u.DebitCreditGroup.Trim() == journalEntryDetails[i].DebitCreditGroup.Trim() && u.Amount < 0)
-                                : null;
-
-                        //credit Journal Entry
-                        if (!ReferenceEquals(creditJournalItem, null))
+                        else if(journalEntryDetails[i].Amount.Value < 0)
                         {
-                            await CreditEntry(journalEntryDetails,debitParentId, creditJournalItem);
-                        }
-                        else
-                        {
-                            //delete credit Entry
-                            if (journalDetail.Id != 0)
-                                _journalEntryDocumentDetailUnitRepository.Delete(
-                                    u => u.AccountingItemOrigId == journalDetail.Id);
-
+                            Mapper.Map(journalEntryDetails[i], journalDetail);
+                            journalDetail.AccountingItemOrigId = null;
+                            await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalDetail);
                         }
                     }
                     else if (!ReferenceEquals(journalDetail, null) && journalDetail.Amount.Value < 0)
@@ -539,7 +546,7 @@ namespace CAPS.CORPACCOUNTING.Journals
 
         private async Task<JournalEntryDocumentDetailUnit> CreditEntry(List<JournalEntryDetailInputUnit> journalEntryDetails, long debitParentId, JournalEntryDetailInputUnit creditJournalItem)
         {
-            JournalEntryDocumentDetailUnit journalDetail=new JournalEntryDocumentDetailUnit();
+            JournalEntryDocumentDetailUnit journalDetail = new JournalEntryDocumentDetailUnit();
             if (debitParentId != 0)
                 creditJournalItem.AccountingItemOrigId = debitParentId;
             else

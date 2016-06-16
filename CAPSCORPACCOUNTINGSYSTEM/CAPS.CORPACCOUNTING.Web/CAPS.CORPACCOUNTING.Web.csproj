@@ -1998,6 +1998,7 @@
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionHeaderModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\employee\EmployeeModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountRestrictionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\ChartOfAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\DivisionsModel.js" />
@@ -2031,6 +2032,8 @@
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\TransactionDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\customers\CustomersStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountRestrictionRightStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountRestrictionLeftStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\RollupAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />

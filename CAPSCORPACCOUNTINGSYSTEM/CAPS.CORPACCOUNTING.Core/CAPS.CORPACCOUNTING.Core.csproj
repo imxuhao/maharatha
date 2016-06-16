@@ -134,6 +134,8 @@
     <Compile Include="Accounting\AccountingLayoutUnit.cs" />
     <Compile Include="Accounting\AccountingLayoutItemUnit.cs" />
     <Compile Include="Accounting\ControlAccountUnit.cs" />
+    <Compile Include="Accounting\SubAccountRestrictionUnit.cs" />
+    <Compile Include="Accounting\SubAccountRestrictionUnitManager.cs" />
     <Compile Include="Accounting\SubAccountUnitManager.cs" />
     <Compile Include="Accounting\SubAccountUnit.cs" />
     <Compile Include="Accounting\TypeOfAccountClassificationUnit.cs" />
@@ -234,6 +236,8 @@
     <Compile Include="Payments\PaymentPrintHistoryUnit.cs" />
     <Compile Include="Payroll\TypeOfPayrollUnit.cs" />
     <Compile Include="PettyCash\PCGridUnit.cs" />
+    <Compile Include="PettyCash\PettyCashEntryDocumnetDetailManager.cs" />
+    <Compile Include="PettyCash\PettyCashEntryDocumnetManager.cs" />
     <Compile Include="Reports\BatchExecutionResultUnit.cs" />
     <Compile Include="Reports\BatchReportItemUnit.cs" />
     <Compile Include="Reports\ReportDistributionListUnit.cs" />

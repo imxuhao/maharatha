@@ -3,7 +3,10 @@ using CAPS.CORPACCOUNTING.Accounting.Dto;
 
 namespace CAPS.CORPACCOUNTING.Payables.Dto
 {
-    [AutoMapTo(typeof(InvoiceEntryDocumentDetailUnit))]
+    /// <summary>
+    /// InvoiceEntryDocumentDetailUnit OutputDto
+    /// </summary>
+    [AutoMapFrom(typeof(InvoiceEntryDocumentDetailUnit))]
     public class InvoiceEntryDocumentDetailUnitDto : AccountingItemUnitDto
     {
         /// <summary>Gets or sets the PurchaseOrderItemID field. </summary>   

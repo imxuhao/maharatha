@@ -24,8 +24,12 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public const string SubAccountKey = "SubAccount";
 
         //Employee Keys
-        public const string CachEmployeeStore = "SumitEmployee";
+        public const string CacheEmployeeStore = "SumitEmployee";
         public const string EmployeeKey = "Employee";
+
+        //SubAccountRestriction Keys
+        public const string CacheSubAccountRestrictionStore = "SumitSubAccountRestriction";
+        public const string SubAccountRestrictionKey = "SubAccountRestriction";
 
 
 

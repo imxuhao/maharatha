@@ -6,53 +6,51 @@ using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Journals.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.PettyCash.Dto;
 
-namespace CAPS.CORPACCOUNTING.Payables
+namespace CAPS.CORPACCOUNTING.PettyCash
 {
     /// <summary>
     /// Provide all CRUD operations on InvoiceEntryDocument.
     /// </summary>
-    public interface IAPHeaderTransactionsAppService : IApplicationService
+    public interface IPettyCashEntryDocumentAppService : IApplicationService
     {
         /// <summary>
         /// Create the APHeaderTransaction.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<IdOutputDto<long>> CreateAPHeaderTransactionUnit(APHeaderTransactionsInputUnit input);
+        Task<IdOutputDto<long>> CreatePettyCashEntryDocumentUnit(PettyCashEntryDocumentInput input);
 
         /// <summary>
         /// Update the APHeaderTransaction
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task UpdateAPHeaderTransactionUnit(APHeaderTransactionsInputUnit input);
+        Task UpdatePettyCashEntryDocumentUnit(PettyCashEntryDocumentInput input);
 
         /// <summary>
         /// Delete ApHeader Transactions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task DeleteAPHeaderTransactionUnit(IdInput<long> input);
+        Task DeletePettyCashEntryDocumentUnit(IdInput<long> input);
 
         /// <summary>
         /// Get all APHeaderTransactions with Paging and Sorting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<APHeaderTransactionsUnitDto>> GetAPHeaderTransactionUnits(SearchInputDto input);
+        Task<PagedResultOutput<PettyCashEntryDocumentUnitDto>> GetPettyCashEntryDocumentUnits(SearchInputDto input);
+
 
         /// <summary>
         /// GetInvoiceEntryDocumentDetails By AccountingDocumentID
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<InvoiceEntryDocumentDetailUnitDto>> GetAPHeaderTransactionDetailUnitsByAccountingDocumentId(GetTransactionList input);
+         Task<PagedResultOutput<PettyCashEntryDocumentDetailDto>> GetPettyCashEntryDocumentDetailsByAccountingDocumentId(GetTransactionList input);
 
-        /// <summary>
-        /// Get CheckGrouopList 
-        /// </summary>
-        /// <returns></returns>
-        Task<List<NameValueDto>> GetCheckGrouopList();
+
     }
 }

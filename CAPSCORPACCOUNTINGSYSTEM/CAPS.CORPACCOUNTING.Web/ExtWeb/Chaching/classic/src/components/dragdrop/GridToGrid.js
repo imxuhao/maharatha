@@ -147,10 +147,10 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
             }
         } else {
             if (typeof(leftStore)==="string") {
-                leftStore = Ext.create(singleStore);
+                leftStore = Ext.create(leftStore);
             }
             if (typeof(rightStore) === "string") {
-                rightStore = Ext.create(singleStore);
+                rightStore = Ext.create(rightStore);
             }
         }
         me.setLeftStore(leftStore);

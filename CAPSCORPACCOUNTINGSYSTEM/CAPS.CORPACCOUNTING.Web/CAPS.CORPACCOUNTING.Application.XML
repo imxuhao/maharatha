@@ -497,6 +497,62 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.TypeofSubAccountId">
             <summary>Gets or sets the TypeofSubAccountId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.SubAccountRestrictionList">
+             <summary>
+            Gets or sets the  AccountRestrictionList
+             </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput">
+            <summary>
+            InputDto to get SubAccountRestrictionList
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput.SubAccountId">
+            <summary>Gets or sets the SubAccountId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto">
+            <summary>
+            SubAccountResriction OutputDto
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.SubAccountRestrictionId">
+            <summary>Gets or sets the SubAccountRestrictionId</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.AccountId">
+            <summary>Gets or sets the AccountId</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.SubAccountId">
+            <summary>Gets or sets the SubAccountId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.IsActive">
+            <summary>Gets or sets the IsActive </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput">
+            <summary>
+            SubAccountRestriction InputDto
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.SubAccountRestrictionId">
+            <summary>Gets or sets the SubAccountRestrictionId</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.AccountId">
+            <summary>Gets or sets the AccountId</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.SubAccountId">
+            <summary>Gets or sets the SubAccountId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.IsActive">
+            <summary>Gets or sets the IsActive </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SubAccountId">
             <summary>Gets or sets the SubAccountId field. </summary>
         </member>
@@ -559,6 +615,11 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.TypeofSubAccountId">
             <summary>Gets or sets the TypeofSubAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SubAccountRestrictionList">
+             <summary>
+            Gets or sets the  AccountRestrictionList
+             </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto.AccountingDocumentId">
             <summary>Gets or sets the AHTID field.</summary>
@@ -902,6 +963,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.GetAccountRestrictionList(CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput)">
+            <summary>
+            Get SubAccountRestrictions By SubAccountId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.GetAccountList(CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput)">
+            <summary>
+            Get SubAccountRestrictions By SubAccountId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get Jobs or Divisions List by using OrganizationUnitId
@@ -943,6 +1018,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">
+            <summary>
+            SubAccount AppService
+            </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
             <summary>
             Create the Sub Account.
@@ -982,6 +1062,27 @@
             <summary>
             Get SubAccountTypes
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.GetAccountRestrictionList(CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput)">
+            <summary>
+            Get SubAccountRestrictions By SubAccountId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.GetAccountList(CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput)">
+            <summary>
+            Get SubAccountRestrictions By SubAccountId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput})">
+            <summary>
+            Create or Update SubAccountRestrictions
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService">
@@ -2532,6 +2633,45 @@
         <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get Accounts
+            </summary>
+            <param name="subaccountkey"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCacheItem">
+            <summary>
+            SubAccountRestriction CacheItem Class
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCacheItem.SubAccountId">
+            <summary> Gets or sets SubAccountId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCacheItem.AccountId">
+            <summary> Gets or sets AccountId </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts by key
+            </summary>
+            <param name="accountkey"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache">
+            <summary>
+            Implementing Cache for SubAccountRestriction.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache.GetSubAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts from Database
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SubAccounts
             </summary>
             <param name="subaccountkey"></param>
             <param name="input"></param>
@@ -8442,6 +8582,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.GetCheckGrouopList">
+            <summary>
+            Get CheckGrouopList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto.BatchId">
             <summary>Get Sets the BatchId dfield.</summary>
         </member>
@@ -8571,6 +8717,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit.VendorId">
             <summary>Gets or sets the VendorId field. </summary>   
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailUnitDto">
+            <summary>
+            InvoiceEntryDocumentDetailUnit OutputDto
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailUnitDto.PurchaseOrderItemId">
             <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
         </member>
@@ -8614,6 +8765,185 @@
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService.GetAPHeaderTransactionDetailUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            GetInvoiceEntryDocumentDetails By AccountingDocumentID
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService.GetCheckGrouopList">
+            <summary>
+            Get CheckGrouopList 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService">
+            <summary>
+            PettyCash AppService
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.CreatePettyCashEntryDocumentUnit(CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput)">
+            <summary>
+            Create APHeader Transactions
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.UpdatePettyCashEntryDocumentUnit(CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput)">
+            <summary>
+            Update ApHeader Transactions
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.DeletePettyCashEntryDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete ApHeader Transactions
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.GetPettyCashEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+             Get all APHeaderTransactions with Paging and Sorting
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.GetPettyCashEntryDocumentDetailsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get APHeaderDetailsByAccountingDocumentId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailDto">
+            <summary>
+            PettycashDocumentDetail OutputDto
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailDto.PettyCashId">
+            <summary>Gets or sets the PettyCashID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailDto.PurchaseOrderItemId">
+            <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailDto.PoHistoryItemId">
+            <summary>Gets or sets the PoHistoryItemId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailDto.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailInput">
+            <summary>
+            PettycashDocumentDetail InputDto
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailInput.PettyCashId">
+            <summary>Gets or sets the PettyCashID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailInput.PurchaseOrderItemId">
+            <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailInput.PoHistoryItemId">
+            <summary>Gets or sets the PoHistoryItemId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentDetailInput.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput">
+            <summary>
+            PettyCashEntryDocument InputDto
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.BatchId">
+            <summary>Gets or sets the BatchId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.PettyCashAccountId">
+            <summary>Gets or sets the PettyCashAccountId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.UploadDocumentLogId">
+            <summary>Gets or sets the UploadDocumentLogId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.ReimbursementAmount">
+            <summary>Gets or sets the ReimbursementAmount field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.BatchInfo">
+            <summary>Gets or sets the BatchInfo field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.AdvanceAmount">
+            <summary>Gets or sets the AdvanceAmount field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.BankAccountId">
+            <summary>Gets or sets the BankAccountId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.TypeOfPaymentMethodId">
+            <summary>Gets or sets the TypeOfPaymentMethodId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput.PettyCashEntryDocumentDetailList">
+            <summary>Get Sets the PettyCashEntryDocumentDetailList field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.BatchId">
+            <summary>Gets or sets the BatchId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.PettyCashAccountId">
+            <summary>Gets or sets the PettyCashAccountId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.UploadDocumentLogId">
+            <summary>Gets or sets the UploadDocumentLogId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.ReimbursementAmount">
+            <summary>Gets or sets the ReimbursementAmount field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.BatchInfo">
+            <summary>Gets or sets the BatchInfo field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.AdvanceAmount">
+            <summary>Gets or sets the AdvanceAmount field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.BankAccountId">
+            <summary>Gets or sets the BankAccountId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.TypeOfPaymentMethodId">
+            <summary>Gets or sets the TypeOfPaymentMethodId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentUnitDto.BatchName">
+            <summary>Gets or sets the BatchName field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PettyCash.IPettyCashEntryDocumentAppService">
+            <summary>
+            Provide all CRUD operations on InvoiceEntryDocument.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.IPettyCashEntryDocumentAppService.CreatePettyCashEntryDocumentUnit(CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput)">
+            <summary>
+            Create the APHeaderTransaction.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.IPettyCashEntryDocumentAppService.UpdatePettyCashEntryDocumentUnit(CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput)">
+            <summary>
+            Update the APHeaderTransaction
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.IPettyCashEntryDocumentAppService.DeletePettyCashEntryDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete ApHeader Transactions
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.IPettyCashEntryDocumentAppService.GetPettyCashEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get all APHeaderTransactions with Paging and Sorting
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PettyCash.IPettyCashEntryDocumentAppService.GetPettyCashEntryDocumentDetailsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             GetInvoiceEntryDocumentDetails By AccountingDocumentID
             </summary>

@@ -288,7 +288,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         private async Task<CacheItem> GetEmployeeCacheItemAsync(string employee, AutoSearchInput input)
         {
-            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CachEmployeeStore).GetAsync(employee, async () =>
+            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheEmployeeStore).GetAsync(employee, async () =>
             {
                 var newCacheItem = new CacheItem(employee);
                 var employeeList = await GetEmployeesFromDb(input);

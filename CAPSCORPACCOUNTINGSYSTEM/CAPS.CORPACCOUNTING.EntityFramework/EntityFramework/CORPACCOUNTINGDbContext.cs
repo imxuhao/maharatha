@@ -602,7 +602,10 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         public virtual IDbSet<JournalEntryDocumentUnit> JournalEntryDocumentUnit { get; set; }
 
-      
+
+        public virtual IDbSet<SubAccountRestrictionUnit> SubAccountRestrictionUnit { get; set; }
+
+
 
         #region Modification Log
 

@@ -1232,6 +1232,14 @@
     <Compile Include="Migrations\201606091827407_AddAuditLog.Designer.cs">
       <DependentUpon>201606091827407_AddAuditLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606160525387_Add_SubAccountRestriction_Table.cs" />
+    <Compile Include="Migrations\201606160525387_Add_SubAccountRestriction_Table.Designer.cs">
+      <DependentUpon>201606160525387_Add_SubAccountRestriction_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606160550196_Modify_ArInvoiceEntryDocument_Table.cs" />
+    <Compile Include="Migrations\201606160550196_Modify_ArInvoiceEntryDocument_Table.Designer.cs">
+      <DependentUpon>201606160550196_Modify_ArInvoiceEntryDocument_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2078,6 +2086,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606091827407_AddAuditLog.resx">
       <DependentUpon>201606091827407_AddAuditLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606160525387_Add_SubAccountRestriction_Table.resx">
+      <DependentUpon>201606160525387_Add_SubAccountRestriction_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606160550196_Modify_ArInvoiceEntryDocument_Table.resx">
+      <DependentUpon>201606160550196_Modify_ArInvoiceEntryDocument_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

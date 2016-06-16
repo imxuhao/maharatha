@@ -51,5 +51,21 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         List<NameValueDto> GetTypeofSubAccountList();
 
+       /// <summary>
+       /// Get SubAccountRestrictions By SubAccountId
+       /// </summary>
+       /// <param name="input"></param>
+       /// <returns></returns>
+
+       Task<List<SubAccountRestrictionUnitDto>> GetAccountRestrictionList(GetAccountRestrictionInput input);
+
+        /// <summary>
+        /// Get SubAccountRestrictions By SubAccountId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<SubAccountRestrictionUnitDto>> GetAccountList(GetAccountRestrictionInput input);
+
+    
     }
 }

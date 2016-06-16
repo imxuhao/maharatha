@@ -138,6 +138,9 @@
     <Compile Include="Accounting\Dto\AccountingHeaderTransactionUnitDto.cs" />
     <Compile Include="Accounting\Dto\AccountingItemInputUnit.cs" />
     <Compile Include="Accounting\Dto\CreateSubAccountUnitInput.cs" />
+    <Compile Include="Accounting\Dto\GetAccountRestrictionInput.cs" />
+    <Compile Include="Accounting\Dto\SubAccountRestrictionUnitDto.cs" />
+    <Compile Include="Accounting\Dto\SubAccountRestrictionUnitInput.cs" />
     <Compile Include="Accounting\Dto\SubAccountUnitDto.cs" />
     <Compile Include="Accounting\Dto\AccountingHeaderTransactionInputUnit.cs" />
     <Compile Include="Accounting\Dto\UpdateSubAccountUnitInput.cs" />
@@ -256,6 +259,7 @@
     <Compile Include="GenericSearch\TextSearch.cs" />
     <Compile Include="Helper\CacheExtensionHelper.cs" />
     <Compile Include="Helper\CacheItems\AccountCacheItem.cs" />
+    <Compile Include="Helper\CacheItems\SubAccountRestrictionCacheItem.cs" />
     <Compile Include="Helper\CacheItems\SubAccountCacheItem.cs" />
     <Compile Include="Helper\CacheItems\DivisionCacheItem.cs" />
     <Compile Include="Helper\CacheItems\VendorCacheItem.cs" />
@@ -464,6 +468,12 @@
     <Compile Include="Financials\Preferences\Dto\CreateFiscalYearUnitInput.cs" />
     <Compile Include="Financials\Preferences\FiscalYearAppService.cs" />
     <Compile Include="Financials\Preferences\IFiscalYearAppService.cs" />
+    <Compile Include="PettyCash\PettyCashEntryDocumentAppService.cs" />
+    <Compile Include="PettyCash\Dto\PettyCashEntryDocumentDetailDto.cs" />
+    <Compile Include="PettyCash\Dto\PettyCashEntryDocumentDetailInput.cs" />
+    <Compile Include="PettyCash\Dto\PettyCashEntryDocumentInput.cs" />
+    <Compile Include="PettyCash\Dto\PettyCashEntryDocumentUnitDto.cs" />
+    <Compile Include="PettyCash\IPettyCashEntryDocumentAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sessions\CustomAppSession.cs" />
     <Compile Include="Sessions\Dto\GetCurrentLoginInformationsOutput.cs" />

@@ -26,6 +26,8 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
         public HashSet<SubAccountCacheItem> SubAccountCacheItemList { get; set; }
 
+        public HashSet<SubAccountRestrictionCacheItem> SubAccountRestrictionCacheItemList { get; set; }
+
         /// <summary>
         /// Gets or Sets Employee List
         /// </summary>
@@ -60,28 +62,14 @@ namespace CAPS.CORPACCOUNTING.Helpers
                 case CacheKeyStores.SubAccountKey:
                     SubAccountCacheItemList = new HashSet<SubAccountCacheItem>();
                     break;
+                case CacheKeyStores.SubAccountRestrictionKey:
+                    SubAccountRestrictionCacheItemList = new HashSet<SubAccountRestrictionCacheItem>();
+                    break;
                 default:
                     ItemList = new HashSet<AutoFillDto>();
                     break;
 
             }
-            //if (key.Substring(index+1) ==CacheKeyStores.EmployeeKey)
-            //    EmployeeItemList = new HashSet<EmployeeUnitDto>();
-            //else
-            //if (key.Substring(index + 1) ==CacheKeyStores.VendorKey)
-            //    VendorCacheItemList = new HashSet<VendorCacheItem>();
-            //else
-            //if (key.Substring(index + 1) == CacheKeyStores.DivisionKey)
-            //    DivisionCacheItemList = new HashSet<DivisionCacheItem>();
-            //if (key.Substring(index + 1) == CacheKeyStores.AccountKey)
-            //    AccountCacheItemList = new HashSet<AccountCacheItem>();
-            //else
-            //if (key.Substring(index + 1) == CacheKeyStores.SubAccountKey)
-            //    SubAccountCacheItemList = new HashSet<SubAccountCacheItem>();
-
-            //else
-            //    ItemList = new HashSet<AutoFillDto>();
-
             Key = key;
 
         }

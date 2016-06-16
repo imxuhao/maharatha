@@ -16,5 +16,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int JobId { get; set; }
 
         public string Property { get; set; }
+
+        public long AccountId { get; set; }
     }
 }

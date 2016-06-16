@@ -3,6 +3,7 @@ using CAPS.CORPACCOUNTING.Banking;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
+using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.AccountReceivable
 {
@@ -49,7 +50,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
 
         ///<summary>Get Sets the BatchId field.</summary>
         [Column(TypeName = "smalldatetime")]
-        public virtual DateTime ReversalDate { get; set; }
+        public virtual DateTime? ReversalDate { get; set; }
        
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual long? GroupBillingAccountingDocumentId { get; set; }
@@ -65,6 +66,13 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
        
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual string PurchaseOrderReference { get; set; }
+
+        ///<summary>Get Sets the BatchId field.</summary>
+        public virtual int? LocationSetId { get; set; }
+
+        ///<summary>Get Sets the BatchId field.</summary>
+        [ForeignKey("LocationSetId")]
+        public virtual LocationSetUnit LocationSet { get; set; }
 
 
         public ArInvoiceEntryDocumentUnit()

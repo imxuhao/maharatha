@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Banking;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Accounting.Dto
@@ -75,5 +76,10 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the TypeofSubAccountId field. </summary>
         [EnumDataType(typeof(TypeofSubAccount))]
         public TypeofSubAccount TypeofSubAccountId { get; set; }
+
+        /// <summary>
+        ///Gets or sets the  AccountRestrictionList
+        /// </summary>
+        public List<SubAccountRestrictionUnitInput> SubAccountRestrictionList { get; set; }
     }
 }

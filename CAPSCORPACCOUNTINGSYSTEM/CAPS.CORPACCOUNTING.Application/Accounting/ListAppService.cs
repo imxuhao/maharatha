@@ -32,13 +32,15 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IDivisionCache _dividsCache;
         private readonly IAccountCache _accountCache;
         private readonly ISubAccountCache _subAccountCache;
-
+        private readonly ISubAccountRestrictionCache _subAccountRestrictionCache;
+        private readonly IRepository<SubAccountRestrictionUnit, long> _subAccountRestrictionRepository;
 
 
         public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
             CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
             IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
-            IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache, IRepository<CoaUnit> coaUnit)
+            IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache, IRepository<CoaUnit> coaUnit,
+            IRepository<SubAccountRestrictionUnit, long> subAccountRestrictionRepository, ISubAccountRestrictionCache subAccountRestrictionCache)
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -52,6 +54,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _accountCache = accountCache;
             _subAccountCache = subAccountCache;
             _coaUnit = coaUnit;
+            _subAccountRestrictionRepository = subAccountRestrictionRepository;
+            _subAccountRestrictionCache = subAccountRestrictionCache;
         }
 
 
@@ -97,10 +101,32 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<SubAccountCacheItem>> GetSubAccountList(AutoSearchInput input)
         {
             var cacheItem = await _subAccountCache.GetSubAccountCacheItemAsync(
-              CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.SubAccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
-                        p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.SubAccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
-                        p.SearchNo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            var subaccountRestrictioncacheItem = await _subAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            if (input.AccountId == 0 || subaccountRestrictioncacheItem.SubAccountRestrictionCacheItemList.Count == 0)
+            {
+                return
+                    cacheItem.SubAccountCacheItemList.ToList()
+                        .WhereIf(!string.IsNullOrEmpty(input.Query),
+                            p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                                 p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                                 p.SubAccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                                 p.SearchNo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+            }
+            else
+            {
+                var res = from subaccount in cacheItem.SubAccountCacheItemList.ToList()
+                          join subAccountRestriction in subaccountRestrictioncacheItem.SubAccountRestrictionCacheItemList.Where(p => p.AccountId == input.AccountId)
+                          on subaccount.SubAccountId equals subAccountRestriction.SubAccountId
+                          select subaccount;
+                return res.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+                            p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                                 p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                                 p.SubAccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
+                                 p.SearchNo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+
+            }
         }
 
         /// <summary>

@@ -170,8 +170,10 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                     }
                 }
             ],
-            store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
-            loadStoreOnCreate: true,
+           // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
+            loadStoreOnCreate: false,
+            leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
+            rightStore: 'Chaching.store.financials.accounts.AccountRestrictionRightStore',
             requireMultiSearch:true,
             selModelConfig: {
                 selType: 'chachingCheckboxSelectionModel',

@@ -177,6 +177,8 @@ namespace CAPS.CORPACCOUNTING.Journals
         public async Task<PagedResultOutput<JournalEntryDocumentUnitDto>> GetJournalEntryDocumentUnits(
             SearchInputDto input)
         {
+
+            bool unPosted = false;
             var query = from journals in _journalEntryDocumentUnitRepository.GetAll()
                         join user in _userUnitRepository.GetAll() on journals.CreatorUserId equals user.Id into users
                         from userunits in users.DefaultIfEmpty()
@@ -192,13 +194,15 @@ namespace CAPS.CORPACCOUNTING.Journals
                     query = query.CreateFilters(mapSearchFilters);
             }
             query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
-                p => p.Journals.OrganizationUnitId == input.OrganizationUnitId);
+                p => p.Journals.OrganizationUnitId == input.OrganizationUnitId)
+                 .Where(u => u.Journals.TypeOfAccountingDocumentId == TypeOfAccountingDocument.GeneralLedger &&
+                        u.Journals.IsPosted == unPosted);
 
 
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
-                .OrderBy(Helper.GetSort("Journals.Description ASC", input.Sorting))
+                .OrderBy(Helper.GetSort("Journals.DocumentReference ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
 
@@ -511,7 +515,7 @@ namespace CAPS.CORPACCOUNTING.Journals
 
                             }
                         }
-                        else if(journalEntryDetails[i].Amount.Value < 0)
+                        else if (journalEntryDetails[i].Amount.Value < 0)
                         {
                             Mapper.Map(journalEntryDetails[i], journalDetail);
                             journalDetail.AccountingItemOrigId = null;

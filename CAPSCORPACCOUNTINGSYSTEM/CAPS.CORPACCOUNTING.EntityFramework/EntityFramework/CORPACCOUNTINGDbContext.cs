@@ -273,6 +273,9 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         /// <summary> ArInvoiceEntryDocumentDetailUnit Declaration</summary>
         public virtual IDbSet<ArInvoiceEntryDocumentDetailUnit> ArInvoiceEntryDocumentDetailUnits { get; set; }
 
+        /// <summary> ArInvoiceEntryDocumentUnit Declaration</summary>
+        public virtual IDbSet<ArInvoiceEntryDocumentUnit> ArInvoiceEntryDocumentUnit { get; set; }
+
         /// <summary> BatchReportItemUnit Declaration</summary>
         public virtual IDbSet<BatchReportItemUnit> BatchReportItemUnit { get; set; }
 

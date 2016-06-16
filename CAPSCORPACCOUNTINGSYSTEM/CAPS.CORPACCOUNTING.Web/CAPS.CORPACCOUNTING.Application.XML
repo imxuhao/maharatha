@@ -984,6 +984,330 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.SalesRepUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.LocationSetUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnit})">
+            <summary>
+            
+            </summary>
+            <param name="arInvoiceEntryDocumentUnitManager"></param>
+            <param name="arInvoiceEntryDocumentUnitRepository"></param>
+            <param name="arInvoiceEntryDocumentDetailUnitRepository"></param>
+            <param name="arInvoiceEntryDocumentDetailUnitManager"></param>
+            <param name="jobUnitRepository"></param>
+            <param name="accountUnitRepository"></param>
+            <param name="subAccountUnitRepository"></param>
+            <param name="customerUnitRepository"></param>
+            <param name="currencyUnitRepository"></param>
+            <param name="customerPaymentTermRepository"></param>
+            <param name="salesRepUnitTermRepository"></param>
+            <param name="locationSetUnitRepository"></param>
+            <param name="aRBillingTypeUnitRepository"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.CreateArInvoiceEntryDocumentUnit(CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.UpdateArInvoiceEntryDocumentUnit(CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.DeleteArInvoiceEntryDocumentUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.DeleteArInvoiceDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.GetArInvoiceEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.GetArInvoiceByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.GetBillingTypeList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get GetArBillingTypeList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.GetCustomerPaymentTermsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get CustomerPaymentTermsList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.GetLocationsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get LocationsList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailInputUnit.CustomerId">
+            <summary>Gets or sets the CustomerID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailInputUnit.BillingTypeId">
+            <summary>Gets or sets the BillingTypeID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailInputUnit.BillToCustomerJobId">
+            <summary>Gets or sets the BillToCustomerJobID field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailUnitDto.CustomerId">
+            <summary>Gets or sets the CustomerID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailUnitDto.BillingTypeId">
+            <summary>Gets or sets the BillingTypeID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailUnitDto.BillingTypeDesc">
+            <summary>Gets or sets the BillingTypeDescription field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailUnitDto.BillToCustomerJobId">
+            <summary>Gets or sets the BillToCustomerJobID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailUnitDto.BillToCustomerJob">
+            <summary>Gets or sets the BillToCustomerJob field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.BatchId">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.CustomerId">
+            <summary>Get Sets the CustomerId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.ArytdInvoiceId">
+            <summary>Get Sets the ArytdInvoiceId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.InvoiceNotes">
+            <summary>Get Sets the InvoiceNotes field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.SalesRepId">
+            <summary>Get Sets the SalesRepId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.ArPaymentTermId">
+            <summary>Get Sets the ArPaymentTermId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.ContactAddressId">
+            <summary>Get Sets the ContactAddressId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.TypeOfInvoiceId">
+            <summary>Get Sets the TypeOfInvoiceId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.IsInvoiceHistory">
+            <summary>Get Sets the IsInvoiceHistory field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.IsEnterable">
+            <summary>Get Sets the IsEnterable field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.ReversedByUserId">
+            <summary>Get Sets the ReversedByUserId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.ReversalDate">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.GroupBillingAccountingDocumentId">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.GroupBillingSequence">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.IsProductionDetailsPrinted">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.BatchInfo">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.PurchaseOrderReference">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.InvoiceEntryDocumentDetailList">
+            <summary>Get Sets the InvoiceEntryDocumentDetailList field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.BatchId">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.BatchDescription">
+            <summary>Get Sets the BatchDescription field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.CustomerId">
+            <summary>Get Sets the CustomerId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.CustomerName">
+            <summary>Get Sets the CustomerName field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.ArytdInvoiceId">
+            <summary>Get Sets the ArytdInvoiceId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.InvoiceNotes">
+            <summary>Get Sets the InvoiceNotes field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.SalesRepId">
+            <summary>Get Sets the SalesRepId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.SalesRepName">
+            <summary>Gets or sets the SalesRepName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.ArPaymentTermId">
+            <summary>Get Sets the ArPaymentTermId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.ArPaymentTerm">
+            <summary>Get Sets the ArPaymentTerm field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.ContactAddressId">
+            <summary>Get Sets the ContactAddressId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.TypeOfInvoiceId">
+            <summary>Get Sets the TypeOfInvoiceId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.TypeOfInvoice">
+            <summary>Get Sets the TypeOfInvoiceId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.IsInvoiceHistory">
+            <summary>Get Sets the IsInvoiceHistory field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.IsEnterable">
+            <summary>Get Sets the IsEnterable field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.ReversedByUserId">
+            <summary>Get Sets the ReversedByUserId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.ReversalDate">
+            <summary>Get Sets the ReversalDate field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.GroupBillingAccountingDocumentId">
+            <summary>Get Sets the GroupBillingAccountingDocumentId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.GroupBillingSequence">
+            <summary>Get Sets the GroupBillingSequence field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.IsProductionDetailsPrinted">
+            <summary>Get Sets the IsProductionDetailsPrinted field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.BatchInfo">
+            <summary>Get Sets the BatchInfo field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.PurchaseOrderReference">
+            <summary>Get Sets the PurchaseOrderReference field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.JobNumber">
+            <summary>Get Sets the jobNumber field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.JobName">
+            <summary>Get Sets the jobName field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.CreateArInvoiceEntryDocumentUnit(CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit)">
+            <summary>
+            Create ArInvoice Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.UpdateArInvoiceEntryDocumentUnit(CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit)">
+            <summary>
+            Update ArInvoice Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.DeleteArInvoiceEntryDocumentUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete ArInvoice Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.DeleteArInvoiceDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete ArInvoice Detail Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.GetArInvoiceEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get ArInvoice Entry Document List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.GetArInvoiceByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+             <summary>
+            Get ArInvoice Details by AccountingDocumentId List.
+             </summary>
+             <param name="input"></param>
+             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.GetBillingTypeList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get GetArBillingTypeList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.GetCustomerPaymentTermsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get CustomerPaymentTermsList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.GetLocationsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get LocationsList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserEditDto.Id">
             <summary>
             Set null to create a new user. Set user's Id to update a user
@@ -7055,13 +7379,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.IUserOrganizationAppService.GetOrganizationsByUserId(Abp.Application.Services.Dto.IdInput{System.Int64})">
-            <summary>
-            Get Organization By UserId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.IUserViewSettingsUnitAppService">
             <summary>
             This service will provide all CRUD operations on UserViewSettings.
@@ -7582,12 +7899,6 @@
              Delete the TaxCredit based on TaxCreditId.
             </summary>
             <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.UserOrganizationAppService.GetOrganizationsByUserId(Abp.Application.Services.Dto.IdInput{System.Int64})">
-            <summary>
-            
-            </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.UserViewSettingsUnitAppService.CreateUserViewSettingsUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateUserViewSettingsUnitInput)">

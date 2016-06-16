@@ -141,7 +141,9 @@
     <Compile Include="Accounting\UploadDocumentLogUnit.cs" />
     <Compile Include="AccountReceivable\ArInvoiceBuildUnit.cs" />
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentDetailUnit.cs" />
+    <Compile Include="AccountReceivable\ArInvoiceEntryDocumentDetailUnitManager.cs" />
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentUnit.cs" />
+    <Compile Include="AccountReceivable\ArInvoiceEntryDocumentUnitManager.cs" />
     <Compile Include="AccountReceivable\ArStatementDetailUnit.cs" />
     <Compile Include="AccountReceivable\ArytdInvoiceUnit.cs" />
     <Compile Include="AccountReceivable\ReceiptHistoryDetailUnit.cs" />

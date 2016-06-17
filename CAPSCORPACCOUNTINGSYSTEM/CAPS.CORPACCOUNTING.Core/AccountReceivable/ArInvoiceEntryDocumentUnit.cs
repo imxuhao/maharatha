@@ -67,14 +67,6 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual string PurchaseOrderReference { get; set; }
 
-        ///<summary>Get Sets the BatchId field.</summary>
-        public virtual int? LocationSetId { get; set; }
-
-        ///<summary>Get Sets the BatchId field.</summary>
-        [ForeignKey("LocationSetId")]
-        public virtual LocationSetUnit LocationSet { get; set; }
-
-
         public ArInvoiceEntryDocumentUnit()
         {
         }

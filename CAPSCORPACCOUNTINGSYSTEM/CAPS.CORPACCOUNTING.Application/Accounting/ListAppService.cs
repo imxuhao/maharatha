@@ -167,5 +167,20 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             return EnumList.GetTypeof1099T4List();
         }
+
+        /// <summary>
+        /// Get All Locations List
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetLocationList(AutoSearchInput input)
+        {
+            var locationSets = await _subAccountUnitRepository.GetAll()
+                 .Where(p => p.TypeofSubAccountId == TypeofSubAccount.Locations || p.TypeofSubAccountId == TypeofSubAccount.Sets)
+                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
+                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return locationSets;
+        }
     }
 }

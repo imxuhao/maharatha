@@ -236,6 +236,8 @@
     <Compile Include="Payments\PaymentPrintHistoryUnit.cs" />
     <Compile Include="Payroll\TypeOfPayrollUnit.cs" />
     <Compile Include="PettyCash\PCGridUnit.cs" />
+    <Compile Include="PurchaseOrders\PurchaseOrderDetailUnitManager.cs" />
+    <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentUnitManager.cs" />
     <Compile Include="PettyCash\PettyCashEntryDocumnetDetailManager.cs" />
     <Compile Include="PettyCash\PettyCashEntryDocumnetManager.cs" />
     <Compile Include="Reports\BatchExecutionResultUnit.cs" />

@@ -352,7 +352,6 @@
     <Compile Include="Masters\Dto\AutoFillDto.cs" />
     <Compile Include="Masters\Dto\IdInputExtensionDto.cs" />
     <Compile Include="Masters\Dto\CreateTaxCreditUnitInput.cs" />
-    <Compile Include="Masters\Dto\GetLocationsInput.cs" />
     <Compile Include="Masters\Dto\AutoSearchInput.cs" />
     <Compile Include="Masters\Dto\CreateUserViewSettingsUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateVendorAliasUnitInput.cs" />
@@ -475,6 +474,12 @@
     <Compile Include="PettyCash\Dto\PettyCashEntryDocumentUnitDto.cs" />
     <Compile Include="PettyCash\IPettyCashEntryDocumentAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseOrders\Dto\PurchaseOrderDetailInputUnit.cs" />
+    <Compile Include="PurchaseOrders\Dto\PurchaseOrderDetailUnitDto.cs" />
+    <Compile Include="PurchaseOrders\Dto\PurchaseOrderEntryDocumentInputUnit.cs" />
+    <Compile Include="PurchaseOrders\Dto\PurchaseOrderEntryDocumentUnitDto.cs" />
+    <Compile Include="PurchaseOrders\IPurchaseOrderEntryDocumentAppService.cs" />
+    <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentAppService.cs" />
     <Compile Include="Sessions\CustomAppSession.cs" />
     <Compile Include="Sessions\Dto\GetCurrentLoginInformationsOutput.cs" />
     <Compile Include="Sessions\Dto\TenantLoginInfoDto.cs" />

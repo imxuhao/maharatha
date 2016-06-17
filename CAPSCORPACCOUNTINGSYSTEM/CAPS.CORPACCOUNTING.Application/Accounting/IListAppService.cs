@@ -48,5 +48,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <returns></returns>
        List<NameValueDto> GetTypeof1099T4List();
+
+        /// <summary>
+        /// GetLocationList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetLocationList(AutoSearchInput input);
     }
 }

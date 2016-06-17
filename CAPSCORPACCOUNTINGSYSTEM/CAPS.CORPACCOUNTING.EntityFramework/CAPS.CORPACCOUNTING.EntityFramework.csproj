@@ -1240,6 +1240,10 @@
     <Compile Include="Migrations\201606160550196_Modify_ArInvoiceEntryDocument_Table.Designer.cs">
       <DependentUpon>201606160550196_Modify_ArInvoiceEntryDocument_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.cs" />
+    <Compile Include="Migrations\201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.Designer.cs">
+      <DependentUpon>201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2092,6 +2096,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606160550196_Modify_ArInvoiceEntryDocument_Table.resx">
       <DependentUpon>201606160550196_Modify_ArInvoiceEntryDocument_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.resx">
+      <DependentUpon>201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

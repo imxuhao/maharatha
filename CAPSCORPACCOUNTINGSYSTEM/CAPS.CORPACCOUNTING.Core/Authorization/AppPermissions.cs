@@ -233,8 +233,11 @@
         #region Purchase Orders Tab
         public const string Pages_PurchaseOrders = "Pages.PurchaseOrders";
         public const string Pages_PurchaseOrders_Entry = "Pages.PurchaseOrders.Entry";
+        public const string Pages_PurchaseOrders_Entry_Create = "Pages.PurchaseOrders.Entry.Create";
+        public const string Pages_PurchaseOrders_Entry_Edit = "Pages.PurchaseOrders.Entry.Edit";
+        public const string Pages_PurchaseOrders_Entry_Delete = "Pages.PurchaseOrders.Entry.Delete";
         #endregion
-        
+
         #region Purchasing Tab
         public const string Pages_Purchasing = "Pages.Purchasing";
         public const string Pages_Purchasing_Inquiry = "Pages.Purchasing.Inquiry";

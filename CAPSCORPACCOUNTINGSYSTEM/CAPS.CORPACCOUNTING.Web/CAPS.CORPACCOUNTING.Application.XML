@@ -922,6 +922,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetLocationList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            GetLocationList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
             <summary>
             Create the SubAccount.
@@ -1016,6 +1022,13 @@
             <summary>
             Get Typeof1099T4
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetLocationList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get All Locations List
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">
@@ -7479,13 +7492,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService.GetLocationList(CAPS.CORPACCOUNTING.Masters.Dto.GetLocationsInput)">
-            <summary>
-            Get All Locationsets 
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ITaxCreditUnitAppService">
             <summary>
             This service will provide all CRUD operations on TaxCredit.
@@ -7691,13 +7697,6 @@
         <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.UpdateLocationSetUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput)">
             <summary>
             Update the LocationSet based on LocationSetId.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.LocationSetUnitAppService.GetLocationList(CAPS.CORPACCOUNTING.Masters.Dto.GetLocationsInput)">
-            <summary>
-            Get All Locations List
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -8946,6 +8945,387 @@
         <member name="M:CAPS.CORPACCOUNTING.PettyCash.IPettyCashEntryDocumentAppService.GetPettyCashEntryDocumentDetailsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             GetInvoiceEntryDocumentDetails By AccountingDocumentID
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailInputUnit.IsPrePaid">
+            <summary>Gets or sets the IsPrePaid field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailInputUnit.IsPoPurchase">
+            <summary>Gets or sets the IsPOPurchase field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailInputUnit.IsPoRental">
+            <summary>Gets or sets the IsPORental field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailInputUnit.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto.IsPrePaid">
+            <summary>Gets or sets the IsPrePaid field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto.IsPoPurchase">
+            <summary>Gets or sets the IsPOPurchase field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto.IsPoRental">
+            <summary>Gets or sets the IsPORental field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto.VendorName">
+            <summary>Gets or sets the VendorName field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.VendorId">
+            <summary>Gets or sets the VendorID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.PaymentTermId">
+            <summary>Gets or sets the PaymentTermID field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.BankAccountId">
+            <summary>Gets or sets the BankAccountID field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsCreditCard">
+            <summary>Gets or sets the IsCreditCard field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsShipping">
+            <summary>Gets or sets the IsShipping field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsPrintRequired">
+            <summary>Gets or sets the IsPrintRequired field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsEnterable">
+            <summary>Gets or sets the IsEnterable field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsHistory">
+            <summary>Gets or sets the IsHistory field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsRetired">
+            <summary>Gets or sets the IsRetired field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.SourcePoAccountingDocumentId">
+            <summary>Gets or sets the SourcePOAccountingDocumentID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.InvoiceAccountingDocumentId">
+            <summary>Gets or sets the InvoiceAccountingDocumentID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.UploadDocumentLogId">
+            <summary>Gets or sets the UploadDocumentLogID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsWillBill">
+            <summary>Gets or sets the IsWillBill field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsAdditionalBill">
+            <summary>Gets or sets the IsAdditionalBill field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsPettyCash">
+            <summary>Gets or sets the IsPettyCash field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsPaymentCheck">
+            <summary>Gets or sets the IsPaymentCheck field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsDepositCheck">
+            <summary>Gets or sets the IsDepositCheck field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.DateNeededBy">
+            <summary>Gets or sets the DateNeededBy field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.TimeNeededBy">
+            <summary>Gets or sets the TimeNeededBy field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsPartial">
+            <summary>Gets or sets the IsPartial field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsOverage">
+            <summary>Gets or sets the IsOverage field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsReimbursement">
+            <summary>Gets or sets the IsReimbursement field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsReinstated">
+            <summary>Gets or sets the IsReinstated field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.ReinstatedPoDocumentId">
+            <summary>Gets or sets the ReinstatedPODocumentID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.ControllingBankAccountId">
+            <summary>Gets or sets the ControllingBankAccountID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsApproveEmail">
+            <summary>Gets or sets the IsApproveEmail field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.PoOriginalAmount">
+            <summary>Gets or sets the POOriginalAmount field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.PurchaseOrderDetailList">
+            <summary>Get Sets the InvoiceEntryDocumentDetailList field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsClose">
+            <summary>Gets or sets the IsClose field. </summary> 
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.VendorId">
+            <summary>Gets or sets the VendorID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.VendorName">
+            <summary>Gets or sets the VendorName field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.PaymentTermId">
+            <summary>Gets or sets the PaymentTermID field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.PaymentTerms">
+            <summary>Gets or sets the PaymentTermID field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.BankAccountId">
+            <summary>Gets or sets the BankAccountID field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.BankAccountNumber">
+            <summary>Gets or sets the BankAccountNumber field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsCreditCard">
+            <summary>Gets or sets the IsCreditCard field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsShipping">
+            <summary>Gets or sets the IsShipping field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsPrintRequired">
+            <summary>Gets or sets the IsPrintRequired field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsEnterable">
+            <summary>Gets or sets the IsEnterable field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsHistory">
+            <summary>Gets or sets the IsHistory field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsRetired">
+            <summary>Gets or sets the IsRetired field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.SourcePoAccountingDocumentId">
+            <summary>Gets or sets the SourcePOAccountingDocumentID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.InvoiceAccountingDocumentId">
+            <summary>Gets or sets the InvoiceAccountingDocumentID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.UploadDocumentLogId">
+            <summary>Gets or sets the UploadDocumentLogID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.UploadDocumentLogDesc">
+            <summary>Gets or sets the UploadDocumentLogID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsWillBill">
+            <summary>Gets or sets the IsWillBill field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsAdditionalBill">
+            <summary>Gets or sets the IsAdditionalBill field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsPettyCash">
+            <summary>Gets or sets the IsPettyCash field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsPaymentCheck">
+            <summary>Gets or sets the IsPaymentCheck field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsDepositCheck">
+            <summary>Gets or sets the IsDepositCheck field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.DateNeededBy">
+            <summary>Gets or sets the DateNeededBy field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.TimeNeededBy">
+            <summary>Gets or sets the TimeNeededBy field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsPartial">
+            <summary>Gets or sets the IsPartial field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsOverage">
+            <summary>Gets or sets the IsOverage field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsReimbursement">
+            <summary>Gets or sets the IsReimbursement field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsReinstated">
+            <summary>Gets or sets the IsReinstated field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.ReinstatedPoDocumentId">
+            <summary>Gets or sets the ReinstatedPODocumentID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.ControllingBankAccountId">
+            <summary>Gets or sets the ControllingBankAccountID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.ControllingBankAccountNumber">
+            <summary>Gets or sets the ControllingBankAccountNumber field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsApproveEmail">
+            <summary>Gets or sets the IsApproveEmail field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.PoOriginalAmount">
+            <summary>Gets or sets the POOriginalAmount field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.JobNumber">
+            <summary>Gets or sets the JobNumber field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.AccountNumber">
+            <summary>Gets or sets the AccountNumber field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.CreatedUser">
+            <summary>
+            Gets or sets CreatedUser
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.ApprovedBy">
+            <summary>
+            Gets or sets ApprovedBy
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.RemainingBalance">
+            <summary>Get Sets the RemainingBalance field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.PendingTrans">
+            <summary>Get Sets the PendingTrans field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.CreatePurchaseOrderEntryDocumentUnit(CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit)">
+            <summary>
+            Create Purchase Order Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.UpdatePurchaseOrderEntryDocumentUnit(CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit)">
+            <summary>
+            Update Purchase Order  Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.DeletePurchaseOrderEntryDocumentUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete Purchase Order  Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.DeletePurchaseOrderDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete Purchase Order Detail Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.GetPurchaseOrderEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get Purchase Order Entry Document List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.GetPurchaseOrdersByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+             <summary>
+            Get Purchase Order Details by AccountingDocumentId List.
+             </summary>
+             <param name="input"></param>
+             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.GetCardInfoList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get CardHolder Information
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Common.ApprovedSoxUnit,System.Int64})">
+            <summary>
+            
+            </summary>
+            <param name="purchaseOrderEntryDocumentUnitManager"></param>
+            <param name="purchaseOrderEntryDocumentUnitRepository"></param>
+            <param name="purchaseOrderDetailUnitRepository"></param>
+            <param name="purchaseOrderDetailUnitManager"></param>
+            <param name="jobUnitRepository"></param>
+            <param name="accountUnitRepository"></param>
+            <param name="subAccountUnitRepository"></param>
+            <param name="customerUnitRepository"></param>
+            <param name="currencyUnitRepository"></param>
+            <param name="customerPaymentTermRepository"></param>
+            <param name="salesRepUnitTermRepository"></param>
+            <param name="locationSetUnitRepository"></param>
+            <param name="userUnitRepository"></param>
+            <param name="vendorUnitRepository"></param>
+            <param name="taxCreditUnitRepository"></param>
+            <param name="bankAccountUnitRepository"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.CreatePurchaseOrderEntryDocumentUnit(CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.UpdatePurchaseOrderEntryDocumentUnit(CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.DeletePurchaseOrderEntryDocumentUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.DeletePurchaseOrderDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrderEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrdersByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetCardInfoList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get CardHolder Information
             </summary>
             <param name="input"></param>
             <returns></returns>

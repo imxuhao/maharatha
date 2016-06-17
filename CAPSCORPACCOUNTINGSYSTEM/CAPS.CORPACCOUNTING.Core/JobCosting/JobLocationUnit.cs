@@ -23,9 +23,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <summary>Gets or sets the LocationId field. </summary>
         public virtual int LocationId { get; set; }
 
-        [ForeignKey("LocationId")]
-        public virtual LocationSetUnit Location { get; set; }
-
         /// <summary>Gets or sets the LocationSite1Date field. </summary>
         public virtual DateTime? LocationSiteDate { get; set; }
       

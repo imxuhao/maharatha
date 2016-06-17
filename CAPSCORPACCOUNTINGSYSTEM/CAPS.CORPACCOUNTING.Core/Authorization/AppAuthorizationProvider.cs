@@ -222,7 +222,9 @@ namespace CAPS.CORPACCOUNTING.Authorization
             #region  Purchase Orders Tab
             var purchaseOrders = pages.CreateChildPermission(AppPermissions.Pages_PurchaseOrders, L("PurchaseOrders"));
             var purchaseOrdersEntry = purchaseOrders.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry, L("Entry"));
-
+            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Create, L("Create"));
+            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Edit, L("Edit"));
+            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Delete, L("Delete"));
             #endregion
 
             #region Purchasing Tab

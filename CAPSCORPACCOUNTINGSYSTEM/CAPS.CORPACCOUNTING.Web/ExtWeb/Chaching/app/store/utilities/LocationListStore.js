@@ -21,7 +21,7 @@ Ext.define('Chaching.store.utilities.LocationListStore', {
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',
-        url: abp.appPath + 'api/services/app/locationSetUnit/GetLocationList',
+        url: abp.appPath + 'api/services/app/list/GetLocationList',
         extraParams: {
             locationSetTypeId: 1
         },

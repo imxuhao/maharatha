@@ -8,6 +8,7 @@ using System.Linq;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.Masters;
 using System.Data.Entity;
+using CAPS.CORPACCOUNTING.Accounting;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -16,16 +17,18 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     {
         private readonly JobLocationUnitManager _jobLocationUnitManager;
         private readonly IRepository<JobLocationUnit> _jobLocationUnitRepository;
-        private readonly IRepository<LocationSetUnit> _locationSetUnitRepository;
+        private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public JobLocationAppService(JobLocationUnitManager jobLocationUnitManager, IRepository<JobLocationUnit> jobLocationUnitRepository, 
-            IUnitOfWorkManager unitOfWorkManager, IRepository<LocationSetUnit> locationSetUnitRepository)
+        public JobLocationAppService(JobLocationUnitManager jobLocationUnitManager,
+            IRepository<JobLocationUnit> jobLocationUnitRepository,
+            IUnitOfWorkManager unitOfWorkManager,
+            IRepository<SubAccountUnit, long> subAccountUnitRepository)
         {
             _jobLocationUnitManager = jobLocationUnitManager;
             _jobLocationUnitRepository = jobLocationUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
-            _locationSetUnitRepository = locationSetUnitRepository;           
+            _subAccountUnitRepository = subAccountUnitRepository;
         }
 
         [UnitOfWork]
@@ -45,7 +48,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             #region Setting the values to be updated
             jobLocationUnit.LocationSiteDate = input.LocationSiteDate;
-            jobLocationUnit.LocationId = input.LocationId;            
+            jobLocationUnit.LocationId = input.LocationId;
             #endregion
             await _jobLocationUnitManager.UpdateAsync(jobLocationUnit);
 
@@ -57,12 +60,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<ListResultOutput<JobLocationUnitDto>> GetJobLocationUnitsByJobId(GetJobInput input)
         {
             var items = await (from joblocation in _jobLocationUnitRepository.GetAll()
-                join location in _locationSetUnitRepository.GetAll() on joblocation.LocationId equals location.Id
-                where joblocation.JobId == input.JobId
-                select new {JobLocation = joblocation, LocationName = location.Description}).ToListAsync();
+                               join location in _subAccountUnitRepository.GetAll()
+                               .Where(p => p.TypeofSubAccountId == TypeofSubAccount.Locations || p.TypeofSubAccountId == TypeofSubAccount.Sets)
+                               on joblocation.LocationId equals location.Id
+                               where joblocation.JobId == input.JobId
+                               select new { JobLocation = joblocation, LocationName = location.Description }).ToListAsync();
 
             return new ListResultOutput<JobLocationUnitDto>(
-                items.Select(item=>
+                items.Select(item =>
                 {
                     var dto = item.JobLocation.MapTo<JobLocationUnitDto>();
                     dto.JobLocationId = item.JobLocation.Id;

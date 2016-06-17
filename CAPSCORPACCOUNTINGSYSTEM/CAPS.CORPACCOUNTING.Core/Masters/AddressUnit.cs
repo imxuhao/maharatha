@@ -55,6 +55,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         User = 8,
         [Display(Name = "Director")]
         Director = 9,
+        [Display(Name = "PurchaseOrderEntryDocument ")]
+        PurchaseOrderEntryDocument =240,
     }
 
     /// <summary>

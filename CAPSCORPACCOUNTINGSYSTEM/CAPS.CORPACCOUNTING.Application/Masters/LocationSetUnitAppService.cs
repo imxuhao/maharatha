@@ -9,6 +9,7 @@ using Abp.AutoMapper;
 using Abp.Authorization;
 using System.Data.Entity;
 using Abp.Linq.Extensions;
+using CAPS.CORPACCOUNTING.Accounting;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -17,13 +18,18 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         private readonly LocationSetUnitManager _locationSetUnitManager;
         private readonly IRepository<LocationSetUnit> _locationSetUnitRepository;
+        private readonly IRepository<SubAccountUnit,long> _subAccountUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public LocationSetUnitAppService(LocationSetUnitManager locationSetUnitManager, IRepository<LocationSetUnit> locationSetUnitRepository, IUnitOfWorkManager unitOfWorkManager) {
+        public LocationSetUnitAppService(LocationSetUnitManager locationSetUnitManager,
+            IRepository<LocationSetUnit> locationSetUnitRepository, 
+            IUnitOfWorkManager unitOfWorkManager, 
+            IRepository<SubAccountUnit, long> subAccountUnitRepository) {
 
             _locationSetUnitManager = locationSetUnitManager;
             _locationSetUnitRepository = locationSetUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
+            _subAccountUnitRepository = subAccountUnitRepository;
         }
         /// <summary>
         /// Create the LocationSet.
@@ -85,20 +91,6 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             return locationSetUnit.MapTo<LocationSetUnitDto>();
         }
-
-        /// <summary>
-        /// Get All Locations List
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetLocationList(GetLocationsInput input)
-        {
-            var locationSets = await _locationSetUnitRepository.GetAll()
-                 .Where(p=>p.TypeOfLocationSetId== input.LocationSetTypeId)
-                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
-                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
-            return locationSets;
-        }
+      
     }
 }

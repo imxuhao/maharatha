@@ -1,9 +1,11 @@
 ﻿using CAPS.CORPACCOUNTING.Accounting;
+using CAPS.CORPACCOUNTING.JobCosting;
+using CAPS.CORPACCOUNTING.Masters;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.Payroll
-{  
+{
 
     /// <summary>
     /// CAPS_PayrollEntryDocumentDetail is the new table 
@@ -15,7 +17,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
         public virtual int? ValueAddedTaxRecoveryId { get; set; } // 
 
         /// <summary>Gets or sets the TaxGroupId field. </summary> 
-        public virtual int? TaxGroupId { get; set; } 
+        public virtual int? TaxGroupId { get; set; }
 
         /// <summary>Gets or sets the Quantity field. </summary> 
         public virtual decimal? Quantity { get; set; }
@@ -95,7 +97,27 @@ namespace CAPS.CORPACCOUNTING.Payroll
         /// <summary>Gets or sets the PayrollWeekEnding field. </summary> 
 
         [Column(TypeName = "smalldatetime")]
-        public virtual DateTime? PayrollWeekEnding { get; set; } 
+        public virtual DateTime? PayrollWeekEnding { get; set; }
+
+        /// <summary>Gets or sets the AccountID field.
+               /// This is the New Field from Lajit
+               /// This is useful when we are importing Payroll 
+               /// This will differentiate the original  AccountId and Modified AccountId
+               ///  </summary>
+        public virtual long? OriginalAccountId { get; set; }
+
+        [ForeignKey("OriginalAccountId")]
+        public virtual AccountUnit Accounts { get; set; }
+
+        ///<summary> This is the New Field from Lajit
+         /// This is useful when we are importing Payroll 
+        /// This will differentiate the original  JobID and Modified JobID
+         ///  </summary>
+        public virtual int? OriginalJobId { get; set; }
+
+        [ForeignKey("OriginalJobId")]
+        public virtual JobUnit Jobs { get; set; }
+
 
     }
 }

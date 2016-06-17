@@ -38,12 +38,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<LocationSetUnitDto> GetLocationSetUnitsById(IdInput input);
-
-        /// <summary>
-        /// Get All Locationsets 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<List<NameValueDto>> GetLocationList(GetLocationsInput input);
+    
     }
 }

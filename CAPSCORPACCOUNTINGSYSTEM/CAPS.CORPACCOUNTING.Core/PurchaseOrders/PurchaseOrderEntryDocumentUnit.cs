@@ -104,6 +104,11 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
        
         /// <summary>Gets or sets the POOriginalAmount field. </summary> 
         public virtual decimal? PoOriginalAmount { get; set; }
+
+
+        /// <summary>Gets or sets the IsColse field. </summary> 
+        public virtual bool? IsColse { get; set; }
+
         #endregion
         public PurchaseOrderEntryDocumentUnit()
         {

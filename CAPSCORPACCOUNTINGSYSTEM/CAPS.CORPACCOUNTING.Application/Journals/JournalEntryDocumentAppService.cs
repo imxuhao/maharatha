@@ -18,11 +18,14 @@ using CAPS.CORPACCOUNTING.Authorization;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.Journals.dto;
 using System;
+using Abp.BackgroundJobs;
 using CAPS.CORPACCOUNTING.Journals.Dto;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Accounting;
 using Castle.Core.Logging;
+using CAPS.CORPACCOUNTING.BackgroundJobs;
+using Hangfire;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -45,6 +48,7 @@ namespace CAPS.CORPACCOUNTING.Journals
         private readonly IRepository<VendorUnit, int> _vendorUnitRepository;
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
         private readonly ILogger _logger;
+        private readonly HangfireRecurringJobManager _recurringJobManager;
 
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             IRepository<AccountUnit, long> accountUnitRepository,
             IRepository<SubAccountUnit, long> subAccountUnitRepository,
             IRepository<VendorUnit, int> vendorUnitRepository,
-            IRepository<TaxCreditUnit> taxCreditUnitRepository, ILogger logger)
+            IRepository<TaxCreditUnit> taxCreditUnitRepository, ILogger logger, HangfireRecurringJobManager recurringJobManager)
         {
             _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
             _journalEntryDocumentUnitRepository = journalEntryDocumentUnitRepository;
@@ -85,6 +89,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             _vendorUnitRepository = vendorUnitRepository;
             _taxCreditUnitRepository = taxCreditUnitRepository;
             _logger = logger;
+            _recurringJobManager = recurringJobManager;
         }
 
         /// <summary>
@@ -107,6 +112,10 @@ namespace CAPS.CORPACCOUNTING.Journals
                 await JournalEntryDetails(input.JournalEntryDetailList.OrderByDescending(u => u.Amount).ToList());
             }
             await CurrentUnitOfWork.SaveChangesAsync();
+           // _recurringJobManager.AddOrUpdateAsync<>()
+            //_recurringJobManager.AddOrUpdateAsync<SimpleSendEmailJob, sim>(42);
+            //await
+            //    _recurringJobManager.AddOrUpdateAsync<JournalEntryBackGroundJob, JournalEntryDocumentInputUnit>("xxx"+System.DateTime.Now, input,Cron.Minutely(), BackgroundJobPriority.Normal);
             return new IdOutputDto<long>() { Id = accountDocumentId };
         }
 

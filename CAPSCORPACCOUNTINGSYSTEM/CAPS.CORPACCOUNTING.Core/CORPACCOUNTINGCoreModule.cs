@@ -13,6 +13,7 @@ using Abp.Zero.Ldap.Configuration;
 using CAPS.CORPACCOUNTING.Authorization.Ldap;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
 using CAPS.CORPACCOUNTING.Authorization.Users;
+using CAPS.CORPACCOUNTING.BackgroundJobs;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Debugging;
 using CAPS.CORPACCOUNTING.Features;
@@ -75,6 +76,11 @@ namespace CAPS.CORPACCOUNTING
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+        }
+
+        public override void PostInitialize()
+        {
+            IocManager.RegisterIfNot<IRecurringJobManager, HangfireRecurringJobManager>();
         }
     }
 }

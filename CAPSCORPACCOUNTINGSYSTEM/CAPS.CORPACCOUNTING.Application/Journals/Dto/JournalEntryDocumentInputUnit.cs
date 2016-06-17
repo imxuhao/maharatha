@@ -10,6 +10,7 @@ namespace CAPS.CORPACCOUNTING.Journals.dto
     /// 
     /// </summary>
     [AutoMapTo(typeof(JournalEntryDocumentUnit))]
+    [Serializable]
     public class JournalEntryDocumentInputUnit : AccountingHeaderTransactionInputUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>

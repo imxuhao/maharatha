@@ -42,6 +42,10 @@
       <HintPath>..\packages\Abp.AutoMapper.0.9.3.0\lib\net452\Abp.AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Abp.HangFire, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.HangFire.0.9.3.0\lib\net452\Abp.HangFire.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Abp.Zero, Version=0.9.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Abp.Zero.0.9.2.0\lib\net452\Abp.Zero.dll</HintPath>
       <Private>True</Private>
@@ -82,6 +86,10 @@
       <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Hangfire.Core, Version=1.5.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.5.7\lib\net45\Hangfire.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -107,6 +115,10 @@
     </Reference>
     <Reference Include="Nito.AsyncEx.Enlightenment, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -165,6 +177,9 @@
     <Compile Include="Authorization\Users\Profile\Dto\UpdateProfilePictureInput.cs" />
     <Compile Include="Authorization\Users\UserLinkAppService.cs" />
     <Compile Include="Authorization\Users\UserLoginAppService.cs" />
+    <Compile Include="BackgroundJobs\JournalEntryBackGroundJob.cs" />
+    <Compile Include="BackgroundJobs\SimpleSendEmailJob.cs" />
+    <Compile Include="BackgroundJobs\SimpleSendEmailJobArgs.cs" />
     <Compile Include="Banking\BankAccountUnitAppService.cs" />
     <Compile Include="Banking\Dto\BankAccountAndAddressDto.cs" />
     <Compile Include="Banking\Dto\BankAccountPaymentRangeDto.cs" />

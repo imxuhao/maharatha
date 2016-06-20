@@ -36,10 +36,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
     }, {
         columnWidth: .5,
         padding: '20 10 0 20',
-        defaults: {
-            labelAlign: 'top',
-            blankText: app.localize('MandatoryToolTipText')
-        },
+        //defaults: {
+        //    labelAlign: 'top',
+        //    blankText: app.localize('MandatoryToolTipText')
+        //},
         items: [{
             xtype: 'textfield',
             name: 'accountNumber',
@@ -88,10 +88,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
     }, {
         columnWidth: .5,
         padding: '20 10 0 20',
-        defaults: {
-            labelAlign: 'top',
-            blankText: app.localize('MandatoryToolTipText')
-        },
+        //defaults: {
+        //    labelAlign: 'top',
+        //    blankText: app.localize('MandatoryToolTipText')
+        //},
         items: [{
             xtype: 'textfield',
             name: 'caption',

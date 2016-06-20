@@ -13,7 +13,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
     layout: 'vbox',
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
-        labelAlign: 'top',
+      //  labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
     defaultFocus:'textfield#tenancyName',

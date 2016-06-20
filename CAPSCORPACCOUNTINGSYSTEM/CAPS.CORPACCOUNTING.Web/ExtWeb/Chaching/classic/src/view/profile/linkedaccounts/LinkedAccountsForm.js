@@ -12,8 +12,8 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsForm', {
     hideDefaultButtons: false,
     layout: 'vbox',
     defaults: {
-        bodyStyle: { 'background-color': 'trasparent' },
-        labelAlign: 'top'
+        bodyStyle: { 'background-color': 'trasparent' }//,
+        //labelAlign: 'top'
     },
     defaultFocus: 'textfield#usernameOrEmailAddress',
  

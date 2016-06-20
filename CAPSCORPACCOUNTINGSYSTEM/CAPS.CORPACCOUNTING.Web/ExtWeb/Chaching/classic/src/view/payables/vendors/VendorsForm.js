@@ -236,8 +236,9 @@
             columnWidth: .4,
             padding: '20 10 0 20',
             defaults: {
-                labelAlign: 'top',
-                blankText: app.localize('MandatoryToolTipText')
+                labelWidth : 120
+                //labelAlign: 'top',
+                //blankText: app.localize('MandatoryToolTipText')
             },
             items: [
               {
@@ -269,10 +270,10 @@
                   {
                       columnWidth: .3,
                       padding: '20 10 0 20',
-                      defaults: {
-                          labelAlign: 'top',
-                          blankText: app.localize('MandatoryToolTipText')
-                      },
+                      //defaults: {
+                      //    labelAlign: 'top',
+                      //    blankText: app.localize('MandatoryToolTipText')
+                      //},
                       items: [
               //{
               //    xtype: 'textfield',
@@ -316,10 +317,10 @@
                   {
                       columnWidth: .3,
                       padding: '20 10 0 20',
-                      defaults: {
-                          labelAlign: 'top',
-                          blankText: app.localize('MandatoryToolTipText')
-                      },
+                      //defaults: {
+                      //    labelAlign: 'top',
+                      //    blankText: app.localize('MandatoryToolTipText')
+                      //},
                       items: [{
                           xtype: 'combobox',
                           name: 'jobId',

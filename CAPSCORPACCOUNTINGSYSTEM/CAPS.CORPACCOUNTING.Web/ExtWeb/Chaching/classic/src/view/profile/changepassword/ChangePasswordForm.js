@@ -12,10 +12,15 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
     name: 'ChangePassword',
     openInPopupWindow: true,
     hideDefaultButtons: false,
+    
     layout: 'vbox',
+    titleConfig : {
+        title : app.localize('ChangePassword')
+    },
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
-        labelAlign: 'top',
+        // labelAlign: 'top',
+        labelWidth : 150,
         blankText: app.localize('MandatoryToolTipText')
     },
     //  defaultFocus: 'textfield#tenancyName',

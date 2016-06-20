@@ -15,6 +15,10 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
+    popupWndSize: {
+        height: '50%',
+        width: '60%'
+    },
     titleConfig: {
         title: abp.localization.localize("CreateNewFinancialAccount").initCap()
     },
@@ -30,22 +34,23 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
         columnWidth: .5,
         padding: '20 10 0 20',
         defaults: {
-            labelAlign: 'top',
-            blankText: app.localize('MandatoryToolTipText')
+            //labelAlign: 'top',
+            //blankText: app.localize('MandatoryToolTipText')
+            labelWidth : 120
         },
         items: [{
             xtype: 'textfield',
             name: 'accountNumber',
             itemId: 'accountNumber',
             allowBlank: false,
-            fieldLabel: app.localize('AccountNumber').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('AccountNumber').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')
         }, {
             xtype: 'combobox',
             name: 'typeOfAccountId',
-            fieldLabel: app.localize('Classification').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('Classification').initCap(),
             width: '100%',
             allowBlank: false,
             ui: 'fieldLabelTop',
@@ -96,15 +101,16 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
         columnWidth: .5,
         padding: '20 10 0 20',
         defaults: {
-            labelAlign: 'top',
-            blankText: app.localize('MandatoryToolTipText')
+            //labelAlign: 'top',
+            //blankText: app.localize('MandatoryToolTipText')
+            labelWidth: 130
         },
         items: [{
             xtype: 'textfield',
             name: 'caption',
             itemId: 'caption',
             allowBlank: false,
-            fieldLabel: app.localize('Description').initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize('Description').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')

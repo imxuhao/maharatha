@@ -407,7 +407,7 @@
 
     <text name="ConvertToNewCOA" value="Convert To New COA" />
     <text name="StdGroupTotal" value="Std Group Total" />
-    <text name="IsCorporate" value="IsCorporate" />
+    <text name="IsCorporate" value="Corporate" />
     <text name="IsNumeric" value="IsNumeric" />
     <text name="IsPrivate" value="IsPrivate" />
     <text name="IsApproved" value="IsApproved" />
@@ -567,6 +567,7 @@
     <text name="Contact" value="Contact" />
     <text name="Other" value="Other" />
     <text name="Company/LastName" value="Company/Last Name" />
+    <text name="LastName" value="Last Name" />
     <text name="FirstName" value="First Name" />
     <text name="PayToName" value="Pay to Name" />
     <text name="Type" value="Type" />
@@ -873,6 +874,7 @@
     <text name="ViewCOA" value="View COA" />
     <text name="ViewDivision" value="View Division" />
     <text name="ViewSubAccount" value="View Sub Account" />
+    <text name="SubAccount" value="Sub Account" />
     <text name="ViewEdition" value="ViewEdition" />
     <text name="ViewBatch" value="View Batch" />
     <text name="ViewBank" value="View Bank" />

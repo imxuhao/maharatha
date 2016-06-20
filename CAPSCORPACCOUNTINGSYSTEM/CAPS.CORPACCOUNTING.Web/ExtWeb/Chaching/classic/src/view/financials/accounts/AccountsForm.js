@@ -16,8 +16,8 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
     popupWndSize: {
-        height: '50%',
-        width: '60%'
+        height: '70%',
+        width: '70%'
     },
     titleConfig: {
         title: abp.localization.localize("CreateNewFinancialAccount").initCap()

@@ -26,15 +26,40 @@
     getSubAccountCombo: function (valueField, displayField) {
         var me = this;
         return {
-            xtype: 'combobox',
+            //xtype: 'combobox',
+            //store: new Chaching.store.utilities.autofill.SubAccountsStore(),
+            //valueField: valueField,
+            //displayField: displayField,
+            //queryMode: 'remote',
+            //minChars: 2,
+            //useDisplayFieldToSearch: true,
+            //listConfig: me.comboListConfig,
+            //emptyText: app.localize('SearchText')
+
+
+            xtype: 'chachingcombobox',
             store: new Chaching.store.utilities.autofill.SubAccountsStore(),
             valueField: valueField,
             displayField: displayField,
             queryMode: 'remote',
             minChars: 2,
             useDisplayFieldToSearch: true,
-            listConfig: me.comboListConfig,
-            emptyText: app.localize('SearchText')
+            modulePermissions: {
+                read: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts'),
+                create: false,//abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Create'),
+                edit: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Edit'),
+                destroy: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Delete')
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + 'api/services/app/list/GetSubAccountList',
+                create: abp.appPath + 'api/services/app/subAccountUnit/CreateSubAccountUnit',
+                update: abp.appPath + 'api/services/app/subAccountUnit/UpdateSubAccountUnit',
+                destroy: abp.appPath + 'api/services/app/subAccountUnit/DeleteBankAccountUnit'
+            },
+            createEditEntityType: 'financials.accounts.subaccounts',
+            createEditEntityGridController: 'financials-accounts-subaccountsgrid',
+            entityType: 'SubAccount',
+            isTwoEntityPicker: false
         };
     },
     getTextField: function (emptyText) {

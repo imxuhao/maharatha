@@ -16,6 +16,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
+    popupWndSize: {
+        height: '70%',
+        width: '70%'
+    },
     titleConfig: {
         title: abp.localization.localize("CreateNewLine").initCap()
     },

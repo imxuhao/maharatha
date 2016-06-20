@@ -5,13 +5,21 @@
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',
-        extraParams: {
-            jobId:null
+        //extraParams: {
+        //    jobId:null
+        //},
+       // url: abp.appPath + 'api/services/app/list/GetAccountsList',
+        urlToGetRecordById: abp.appPath + 'api/services/app/accountUnit/GetAccountUnitsById',
+        api: {
+            read: abp.appPath + 'api/services/app/list/GetAccountsList',
+            create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+            update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+            destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
         },
-        url: abp.appPath + 'api/services/app/list/GetAccountsList',
         reader: {
             type: 'json',
             rootProperty: 'result'
         }
-    }
+    },
+    idPropertyField: 'accountId'//important to set for add/update of records
 });

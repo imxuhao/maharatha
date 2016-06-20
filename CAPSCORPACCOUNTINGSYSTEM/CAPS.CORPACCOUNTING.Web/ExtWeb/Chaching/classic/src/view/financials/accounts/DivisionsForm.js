@@ -15,6 +15,10 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
+    popupWndSize: {
+        height: '40%',
+        width: '40%'
+    },
     titleConfig: {
         title: abp.localization.localize("CreateNewDivision").initCap()
     },

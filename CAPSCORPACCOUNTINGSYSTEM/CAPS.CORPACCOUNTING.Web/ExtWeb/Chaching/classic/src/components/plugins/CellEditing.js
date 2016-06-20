@@ -168,27 +168,29 @@ Ext.define('Chaching.components.plugins.CellEditing', {
             //set value and rawValue for comboboxes
             if (editor.field) {
                 var editorType = editor.field.xtype;
-                if (editorType === "combo" || editorType === "combobox") {
+                if (editorType === "combo" || editorType === "combobox" || editorType === "chachingcombobox" || editorType === "chachingcombo") {
                     var editorStore = editor.field.getStore();
                     if (editorStore && !editorStore.isDataLoaded) {
                         editorStore.load({
                             callback: function(records, operation, success) {
-                                editor.field.setValue(record.get(editor.field.valueField));
                                 editor.field.setRawValue(record.get(editor.field.displayField));
+                                editor.field.setValue(record.get(editor.field.valueField));
                             }
                         });
                         editorStore.isDataLoaded = true;
+                        editor.startEdit(cell, record.get(editor.field.valueField), doFocus || false);
                     } else {
-                        editor.field.setValue(record.get(editor.field.valueField));
                         editor.field.setRawValue(record.get(editor.field.displayField));
+                        editor.field.setValue(record.get(editor.field.valueField));
+                        editor.startEdit(cell, record.get(editor.field.valueField), doFocus || false);
                     }
-                }
+                } else editor.startEdit(cell, context.value, doFocus || false);
+            } else {
+                // Request that the editor start.
+                // Ensure that the focusing defaults to false.
+                // It may veto, and return with the editing flag false.
+                editor.startEdit(cell, context.value, doFocus || false);
             }
-            // Request that the editor start.
-            // Ensure that the focusing defaults to false.
-            // It may veto, and return with the editing flag false.
-            editor.startEdit(cell, context.value, doFocus || false);
-            
             // Set contextual information if we began editing (can be vetoed by events)
             if (editor.editing) {
                 me.setActiveEditor(editor);
@@ -214,11 +216,10 @@ Ext.define('Chaching.components.plugins.CellEditing', {
         // Only update the record if the new value is different than the
         // startValue. When the view refreshes its el will gain focus
         if (!record.isEqual(value, startValue)) {
-
             if (ed && ed.field) {
                 //update records key:value with combo keyValue
                 var editorField = ed.field;
-                if (editorField && (editorField.xtype === "combo" || editorField.xtype === "combobox")) {
+                if (editorField && (editorField.xtype === "combo" || editorField.xtype === "combobox" || editorField.xtype === "chachingcombobox" || editorField.xtype === "chachingcombo")) {
                     record.set(context.column.dataIndex, editorField.getRawValue());
                     record.set(editorField.valueField, editorField.getValue());
                 } else {

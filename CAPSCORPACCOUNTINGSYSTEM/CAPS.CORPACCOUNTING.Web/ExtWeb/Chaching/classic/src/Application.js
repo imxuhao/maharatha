@@ -83,7 +83,7 @@ Ext.define('Chaching.Application', {
         'financials.accounts.AccountRestrictionRightStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
-    launch: function() {
+    launch: function () {
         var me = this;
         ///****Load usersDefaultView Settings
         var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');

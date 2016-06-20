@@ -615,7 +615,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      * @private
      * @param {Ext.form.Field} field Field firing the event
      */
-    , onChange: function (field) {
+    , onChange: function(field) {
         var me = this;
 
         // do nothing if not dirty
@@ -638,9 +638,10 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             , parse = me.parseOperator
             , filter
         ;
-        if (field.useDisplayFieldToSearch)
+        if (field.useDisplayFieldToSearch) {
             property = field.displayField;
-        else property = field.getItemId();
+            value = field.getRawValue();
+        } else property = field.getItemId();
 
         filter = parse ? me.parseUserValue(value) : { value: value };
         filter.property = property;

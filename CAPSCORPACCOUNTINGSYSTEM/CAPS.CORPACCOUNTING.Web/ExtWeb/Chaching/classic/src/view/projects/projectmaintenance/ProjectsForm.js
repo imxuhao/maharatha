@@ -38,6 +38,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
     titleConfig: {
         title: abp.localization.localize("CreateNewProject").initCap()
     },
+    popupWndSize: {
+        height:'90%',
+        width:'90%'
+    },
     items:[
     {
         xtype: 'tabpanel',

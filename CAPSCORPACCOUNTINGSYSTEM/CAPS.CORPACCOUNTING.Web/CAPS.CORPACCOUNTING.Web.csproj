@@ -2098,6 +2098,7 @@
     <Content Include="ExtWeb\Chaching\classic\src\components\filter\DateSearchField.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\AutoFillCombo.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Basic.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\components\form\field\ComboBox.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\form\Panel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\CellEditing.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\plugins\Clipboard.js" />

@@ -231,3 +231,79 @@ $ui-font-weight:400
 .x-form-text-field-body-columnFilterField{
     margin-right:3px !important;
 }
+
+@include extjs-toolbar-ui(
+$ui:'combogridtoolbar',
+$background-color:#3598dc,
+$border-color:#3598dc,
+$border-width:0px,
+$text-font-weight:600
+);
+
+.x-toolbar-combogridtoolbar{
+    padding:5px;
+    border-radius:0 0 5px 5px;
+}
+
+@include extjs-button-small-ui(
+    $ui: 'combogridactionButton',
+    $color: #FFFFFF,
+    $icon-color: #FFFFFF,
+    $background-color: #3598dc,
+    $border-width: 0,
+$border-color:#3598dc,
+$border-radius:2px,
+$background-color-over:#217ebd,
+$background-color-focus:#217ebd,
+$border-color-over:#1f78b5,
+$border-color-focus:#1f78b5
+
+);
+.x-btn-combogridactionButton-small{
+    padding:0 !important;
+}
+
+.chaching-combogrid .x-column-header{
+    background-color: #3598dc !important;
+    color: white !important;
+    font:600 11px/19px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    cursor:pointer !important;
+}
+.chaching-combogrid .x-column-header-over{
+    color:black !important;
+     background-color: #3598dc !important;
+}
+.chaching-combogrid .x-column-header-last{
+    background-color: #3598dc !important;
+}
+.chaching-combogrid .x-grid-header-ct{
+    border-radius:5px 5px 0 0 !important;
+    background-color: #3598dc !important;
+}
+.chaching-combogrid .x-grid-item-over{
+   background-color:#7fb0da !important;
+    border-color:#7fb0da !important;
+    color: white !important;
+}
+.chaching-combogrid .x-grid-with-row-lines .x-grid-item .x-grid-item-selected{
+    background-color:#7fb0da !important;
+    border-color:#7fb0da !important;
+    color: white !important;
+}
+.chaching-combogrid .x-grid-with-col-lines .x-grid-item-selected .x-grid-cell{
+     background-color:#7fb0da !important;
+    border-color:#7fb0da !important;
+    color: white !important;
+}
+.chaching-combogrid .x-grid-item-focused{
+    color: white !important;
+}
+.chaching-combogrid .x-grid-item{
+    font-weight:600 !important;
+    font:600 11px/18px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+}
+.chaching-combogrid .x-grid-item-selected {
+     background-color:#7fb0da !important;
+    border-color:#7fb0da !important;
+    color: white !important;
+}

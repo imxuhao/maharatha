@@ -390,24 +390,91 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 dataLoadClass: 'Chaching.store.utilities.autofill.JobDivisionStore',
                 isMandatory: true,
                 filterField: {
-                    xtype: 'combobox',
-                    store: new Chaching.store.utilities.autofill.JobDivisionStore(),
-                    valueField: 'jobNumber',
-                    displayField: 'jobNumber',
-                    queryMode: 'remote',
-                    minChars: 2,
-                    useDisplayFieldToSearch: true,
-                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                    emptyText: app.localize('SearchText')
-                }, editor: {
-                    xtype: 'combobox',
+                    xtype: 'chachingcombobox',
                     store: new Chaching.store.utilities.autofill.JobDivisionStore(),
                     valueField: 'jobId',
                     displayField: 'jobNumber',
                     queryMode: 'remote',
                     minChars: 2,
-                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                    emptyText: app.localize('SearchText')
+                    useDisplayFieldToSearch: true,
+                    modulePermissions: {
+                        read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+                        create:false,//abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+                        edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+                        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+                    },
+                    primaryEntityCrudApi: {
+                        read: abp.appPath + 'api/services/app/list/GetJobOrDivisionList',
+                        create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
+                        update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
+                        destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
+                    },
+                    createEditEntityType: 'financials.accounts.divisions',
+                    createEditEntityGridController: 'financials-accounts-divisionsgrid',
+                    entityType: 'Division',
+                    isTwoEntityPicker: true,
+                    secondEntityDetails: {
+                        editCreateModelClass: 'Chaching.model.projects.projectmaintenance.ProjectModel',
+                        identificationKey: 'isDivision',
+                        entityType: 'Job',
+                        createEditEntityType: 'projects.projectmaintenance.projects',
+                        createEditEntityGridController: 'Chaching.view.projects.projectmaintenance.ProjectsGridController',
+                        modulePermissions: {
+                            read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
+                            create: false,//abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),
+                            edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Edit'),
+                            destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete')
+                        },
+                        secondoryEntityCrudApi: {
+                            read: abp.appPath + 'api/services/app/list/GetJobOrDivisionList',
+                            create: abp.appPath + 'api/services/app/jobUnit/CreateJobUnit',
+                            update: abp.appPath + 'api/services/app/jobUnit/UpdateJobUnit',
+                            destroy: abp.appPath + 'api/services/app/jobUnit/DeleteJobUnit'
+                        }
+                    }
+                }, editor: {
+                    xtype: 'chachingcombobox',
+                    store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                    valueField: 'jobId',
+                    displayField: 'jobNumber',
+                    queryMode: 'remote',
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    modulePermissions: {
+                        read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+                        create: false,//abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+                        edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+                        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+                    },
+                    primaryEntityCrudApi: {
+                        read: abp.appPath + 'api/services/app/list/GetJobOrDivisionList',
+                        create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
+                        update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
+                        destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
+                    },
+                    createEditEntityType: 'financials.accounts.divisions',
+                    createEditEntityGridController: 'financials-accounts-divisionsgrid',
+                    entityType: 'Division',
+                    isTwoEntityPicker: true,
+                    secondEntityDetails: {
+                        editCreateModelClass: 'Chaching.model.projects.projectmaintenance.ProjectModel',
+                        identificationKey: 'isDivision',
+                        entityType: 'Job',
+                        createEditEntityType: 'projects.projectmaintenance.projects',
+                        createEditEntityGridController: 'Chaching.view.projects.projectmaintenance.ProjectsGridController',
+                        modulePermissions: {
+                            read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
+                            create: false,//abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),
+                            edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Edit'),
+                            destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Delete')
+                        },
+                        secondoryEntityCrudApi: {
+                            read: abp.appPath + 'api/services/app/list/GetJobOrDivisionList',
+                            create: abp.appPath + 'api/services/app/jobUnit/CreateJobUnit',
+                            update: abp.appPath + 'api/services/app/jobUnit/UpdateJobUnit',
+                            destroy: abp.appPath + 'api/services/app/jobUnit/DeleteJobUnit'
+                        }
+                    }
                 }
             }, {
                 xtype: 'gridcolumn',

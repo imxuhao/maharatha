@@ -20,6 +20,7 @@
     minChars: 2,
     queryParam: 'query',
     queryMode: 'remote',
+    forceSelection:true,
     listConfig: {
         minWidth: 300
     },
@@ -139,7 +140,7 @@
         if (me.entityType == null ) {
             Ext.raise('entityType config is required to open edit/create page  in popup window for that entity.');
         }
-        if (me.entityPermission == null) {
+        if (me.entityPermission == null&&!me.modulePermissions) {
             Ext.raise('entityPermission config is required to show or hide action buttons in grid(autocompletecombo).');
         }
         if (me.selectOnFocus && !me.editable) {
@@ -154,23 +155,10 @@
                 destroy: abp.auth.isGranted('Pages.' + me.entityPermission + '.Delete')
             };
         }
-
-        //// check permission to create view
-        //if (me.modulePermissions.create) {
-        //    me.plugins = [{
-        //          ptype: 'saki-ficn'
-        //        , iconCls: 'fa-plus-square'
-        //        , qtip: app.localize('Create')
-        //    }];
-        //}
-        //me.on('iconclick', me.onIconClick, me);
-
         me.callParent(arguments);
         //key events
         me.on('keyup', me.baseKeyUp, this);
         me.on('specialkey', me.baseSpecialkey, this);
-       // me.on('change', me, idVal, record);
-       // me.on('change', me.setRecordOnLoad, this);
     },
 
     setRecordOnLoad : function(field, newVal, oldVal) {
@@ -184,9 +172,9 @@
        
         //Merged the code of #5135
         var me = this;
-        if (e.getKey() == e.ENTER || e.getKey() == e.TAB || (e.shiftKey && e.getKey() == e.TAB)) {
+        if (e.getKey() === e.ENTER || e.getKey() === e.TAB || (e.shiftKey && e.getKey() === e.TAB)) {
             me.handleKeyDown(obj, e, eOpts);
-        } else if (e.getKey() == e.DOWN) {
+        } else if (e.getKey() === e.DOWN) {
             // select the first record on down arrow.
             me.handleKeyUp(obj, e, eOpts);
             if (me.picker && me.isExpanded) {
@@ -199,14 +187,11 @@
             }
         }
     },
-
-    // Custom Action Handlers
-
     handleKeyUp: function (obj, key, eOpts) {
       
         var me = this;
         if (key && key.isNavKeyPress()) {
-            if (key.getKey() == key.DOWN) {
+            if (key.getKey() === key.DOWN) {
                 if (!me.isExpanded) return false;
                 var store = me.getStore();
                 var count = store.getCount();
@@ -224,7 +209,7 @@
             if (me.isExpanded) me.getPicker().toFront();
         }
 
-        if (key && (key.getKey() == key.ESC || key.getKey() == key.ENTER || key.getKey() == key.TAB)) {
+        if (key && (key.getKey() === key.ESC || key.getKey() === key.ENTER || key.getKey() === key.TAB)) {
             obj.collapse();
             return true;
         }
@@ -235,7 +220,7 @@
 
     handleKeyDown: function (obj, key, eOpts) {
         var me = this;
-        if (key && (key.getKey() == key.ENTER || key.getKey() == key.TAB)) {
+        if (key && (key.getKey() === key.ENTER || key.getKey() === key.TAB)) {
             var picker = me.getPicker();
             if (picker) {
                 picker.suspendEvents(true);
@@ -256,15 +241,14 @@
         return me.value;
     },
     onSelect: function (record) {
+        debugger;
         if (!this.preventSelectOnClick) {
             var me = this;
             var idVal = record.data[me.valueField];
             var nameVal = record.data[me.displayField];
-            me.setValue(nameVal);
-            me.hiddenValue = idVal;
+            me.setValue(idVal);
             me.fireEvent('change', me, idVal, record);
             me.collapse();
-            //me.focus();
             me.fireEvent('select', me, record);
         }
     },
@@ -325,127 +309,13 @@
                 me.getStore().clearFilter();
                 model.deselectAll();
                 break;
-            //case 'btnNew':
-            //    //try to disable parent window's formpanel once child window is oepned see #1522
-            //    //once child window is opened then the controls taborder of child windows coflict with parent windows controls.
-            //    me.setDisabled(true);
-            //    if (parentWindow) {
-            //        parentWindow.down('form').setDisabled(true);
-            //    }
-            //    var wndEdit = this.getEditWnd(me.opts);
-            //    //wndEdit.opts = this.opts;
-            //    //add destroy event handler for child window to enable parent again
-            //    wndEdit.on("destroy", me.enableParent, this);
-            //    wndEdit.parent = parentWindow;
-            //    wndEdit.requestor = me;
-            //    wndEdit.show();
-            //    wndEdit.bindParent(me); //grid.pickerObj
-            //    var emptyRec = {
-            //        AllowDelete: false
-            //    };
-            //    wndEdit.getController().setDetails(emptyRec);
-            //    if (parentWindow == null && me.up('grid').id != null) {
-            //        var formId = me.up('grid').id;
-            //        var isDefault = this.store.findRecord('IsDefault', true);
-            //        var records = [];
-            //        if (isDefault) {
-            //            records['IsDefault'] = isDefault.data.IsDefault;
-            //            records['IsFirstRec'] = false;
-            //        } else {
-            //            records['IsDefault'] = true;
-            //            records['IsFirstRec'] = true;
-            //        }
-            //        records['FormName'] = formId;
-            //        me.setDisabled(false);
-            //        if (wndEdit.setDefaultValues) {
-            //            wndEdit.setDefaultValues(records);
-            //        }
-            //    } else {
-            //        if (wndEdit.setDefaultValues) {
-            //            wndEdit.setDefaultValues();
-            //        }
-            //    }
-            //    break;
-            //case 'btnEdit':
-            //    if (record == null) {
-            //        Ext.Msg.show({
-            //            title: Aliaces.FormValidationFailure,
-            //            msg: 'Please select record to edit',
-            //            buttons: Ext.Msg.OK,
-            //            icon: Ext.Msg.ERROR
-            //        });
-            //        return;
-            //    }
-            //    //try to disable parent window's formpanel once child window is oepned
-            //    //once child window is opened then the controls taborder of child windows coflict with parent windows controls.
-            //    me.setDisabled(true);
-            //    if (parentWindow) {
-            //        parentWindow.down('form').setDisabled(true);
-            //    }
-            //    var wndEdit = this.getEditWnd(me.opts);
-            //    //add destroy event handler for child window to enable parent again
-            //    wndEdit.on("destroy", me.enableParent, this);
-            //    wndEdit.parent = parentWindow;
-            //    wndEdit.requestor = me;
-            //    if (me.loadOnEdit) {
-            //        // If not retrieving all information... then retrieve 
-            //        var store = Ext.create('NextGen.store.' + me.originalWndClass + '.' + me.originalWndClass + 'Store');
-            //        store.proxy.url = global_url + me.originalWndClass + '/GetDetailsById';
-            //        if (wndEdit.isTransactionWindow)//for transaction windows always primary key is accounttransactionid
-            //            store.proxy.extraParams.pkId = record.get('AccountTransactionId');
-            //        else
-            //            store.proxy.extraParams.pkId = record.get(me.valueField);
-            //        store.load(function (records, operation, success) {
-            //            wndEdit.show();
-            //            wndEdit.bindParent(me);
-            //            wndEdit.getController().setDetails(records[0].data);
-            //        });
-            //    } else {
-            //        // IF retrieving all information.
-            //        wndEdit.show();
-            //        wndEdit.bindParent(me);
-            //        wndEdit.getController().setDetails(record.data);
-            //    }
-
-            //    break;
-            //case 'btnDelete':
-            //    Ext.Msg.show({
-            //        title: NextGen.locale.messages.DeleteConfirmationTitle,
-            //        msg: NextGen.locale.messages.DeleteConfirmation,
-            //        buttons: Ext.Msg.YESNO,
-            //        icon: Ext.Msg.QUESTION,
-            //        //animateTarget: records[0].id,
-            //        fn: function (btn) {
-            //            switch (btn) {
-            //                case "yes":
-            //                    me.doDeleteCurent(record);
-            //                    break;
-            //                case "no":
-            //                    break;
-            //            }
-            //        }
-            //    });
-            //    break;
             case 'btnRefresh':
                 me.getPicker().getSelectionModel().deselectAll();
-                //picker.down('button[itemId=btnDropDownEdit]').disable();
-                //picker.down('button[itemId=btnDropDownDelete]').disable();
-                //picker.down('button[itemId=btnDropDownSelect]').disable();
+               
                 me.store.load({ params: me.store.params });
                 break;
         }
     },
-
-
-
-
-
-
-    //onIconClick: function () {
-    //    var me = this;
-    //    var entityType = me.entityType;
-    //    me.createWindow(entityType, 'create', null);
-    //},
     /**
      * Creates and returns the grid panel to be used as this field's picker.
      */
@@ -489,7 +359,7 @@
 	            cls: 'chaching-transactiongrid',
 	            controller: me.entityGridController,
 	            selModel: {
-	                selType: 'rowmodel', // rowmodel is the default selection model
+	                selType: 'rowmodel' // rowmodel is the default selection model
 	            },
 	            viewConfig: {
 	                stripeRows: true,
@@ -502,8 +372,8 @@
 	            //}
 	        }, me.listConfig);
 	       
-        var picker = me.picker = Ext.create('Ext.grid.Panel', opts);
-
+	        var picker = me.picker = Ext.create('Ext.grid.Panel', opts);
+        me.pickerSelectionModel = picker.getSelectionModel();
         picker.on({
            // select: me.onPickerSelect,
             blur: me.onPickerBlur,
@@ -520,12 +390,6 @@
         picker.getNode = function () {
             picker.getView().getNode(arguments);
         };
-
-        //picker.getSelectionModel().on({
-        //    beforeselect: me.onBeforeSelect,
-        //    beforedeselect: me.onBeforeDeselect,
-        //    scope: me
-        //});
 
         //To findout Mac System and Only for Mozilla.
         if (Ext.isGecko && Ext.isMac) {
@@ -610,7 +474,7 @@
             }
         }
     },
-    setValue: function (v) {
+    /*setValue: function (v) {
         var me = this;
         if (!me.preventClearOnBlur || v != "") {
             if (me.preventClearOnBlur) {
@@ -627,7 +491,6 @@
             if (v == null || v == 0 || v == "") {
                 me.value = "";
                 me.setRawValue("");
-                me.hiddenValue = null;
             }
             if (typeof (v) === "string") {
                 v = Ext.util.Format.htmlDecode(v);
@@ -647,9 +510,218 @@
             }
         }
         return me;
+    },*/
+    setValue: function (value) {
+        var me = this,
+            bind, valueBind;
+
+        // Here we check if the setValue is being called by bind getting synced
+        // if this is the case while the field has focus. If this is the case, we
+        // don't want to change the field value.
+        if (me.hasFocus) {
+            bind = me.getBind();
+            valueBind = bind && bind.value;
+            if (valueBind && valueBind.syncing) {
+                if ((Ext.isEmpty(value) && Ext.isEmpty(me.value)) || value === me.value) {
+                    return me;
+                } else if (Ext.isArray(value) && Ext.isArray(me.value) && Ext.Array.equals(value, me.value)) {
+                    return me;
+                }
+            }
+        } else {
+            // This is the value used to forceSelection in assertValue if 
+            // an invalid value is left in the field at completeEdit. Must be cleared so 
+            // that the next usage of the field is not affected, but only if we are setting
+            // a new value.
+            me.lastSelectedRecords = null;
+        }
+        if (value != null) {
+            if (!me.picker)me.picker = me.getPicker();
+            me.doSetValue(value);
+        }
+            // Clearing is a special, simpler case.
+        else {
+            me.suspendEvent('select');
+            me.valueCollection.beginUpdate();
+            me.pickerSelectionModel.deselectAll();
+            me.valueCollection.endUpdate();
+            me.resumeEvent('select');
+        }
+
+        return me;
     },
+    /**
+     * @private
+     * Sets or adds a value/values
+     */
+    doSetValue: function (value /* private for use by addValue */, add) {
 
+        debugger;
+        var me = this,
+            store = me.getStore(),
+            Model = store.getModel(),
+            matchedRecords = [],
+            valueArray = [],
+            autoLoadOnValue = me.autoLoadOnValue,
+            isLoaded = store.getCount() > 0 || store.isLoaded(),
+            pendingLoad = store.hasPendingLoad(),
+            unloaded = autoLoadOnValue && !isLoaded && !pendingLoad,
+            forceSelection = me.forceSelection,
+            selModel = me.pickerSelectionModel,
+            displayIsValue = me.displayField === me.valueField,
+            isEmptyStore = store.isEmptyStore,
+            lastSelection = me.lastSelection,
+            i, len, record, dataObj,
+            valueChanged, key;
 
+        //<debug>
+        if (add && !me.multiSelect) {
+            Ext.raise('Cannot add values to non multiSelect ComboBox');
+        }
+        //</debug>
+
+        // Called while the Store is loading or we don't have the real store bound yet.
+        // Ensure it is processed by the onLoad/bindStore.
+        // Even if displayField === valueField, we still MUST kick off a load because even though
+        // the value may be correct as the raw value, we must still load the store, and
+        // upon load, match the value and select a record sop we can publish the *selection* to
+        // a ViewModel.
+        if (pendingLoad || unloaded || !isLoaded || isEmptyStore) {
+
+            // If they are setting the value to a record instance, we can
+            // just add it to the valueCollection and continue with the setValue.
+            // We MUST do this before kicking off the load in case the load is synchronous;
+            // this.value must be available to the onLoad handler.
+            if (!value.isModel) {
+                if (add) {
+                    me.value = Ext.Array.from(me.value).concat(value);
+                } else {
+                    me.value = value;
+                }
+
+                me.setHiddenValue(me.value);
+
+                // If we know that the display value is the same as the value, then show it.
+                // A store load is still scheduled so that the matching record can be published.
+                me.setRawValue(displayIsValue ? value : '');
+                // if display is value, let's remove the empty text since the store might not be loaded yet
+                if (displayIsValue && !Ext.isEmpty(value) && me.inputEl && me.emptyText) {
+                    me.inputEl.removeCls(me.emptyUICls);
+                    me.valueContainsPlaceholder = false;
+                }
+            }
+
+            // Kick off a load. Doesn't matter whether proxy is remote - it needs loading
+            // so we can select the correct record for the value.
+            //
+            // Must do this *after* setting the value above in case the store loads synchronously
+            // and fires the load event, and therefore calls onLoad inline.
+            //
+            // If it is still the default empty store, then the real store must be arriving
+            // in a tick through binding. bindStore will call setValueOnData.
+            if (unloaded && !isEmptyStore) {
+                store.load();
+            }
+
+            // If they had set a string value, another setValue call is scheduled in the onLoad handler.
+            // If the store is the defauilt empty one, the setValueOnData call will be made in bindStore
+            // when the real store arrives.
+            if (!value.isModel || isEmptyStore) {
+                return me;
+            }
+        }
+
+        // This method processes multi-values, so ensure value is an array.
+        value = add ? Ext.Array.from(me.value).concat(value) : Ext.Array.from(value);
+
+        // Loop through values, matching each from the Store, and collecting matched records
+        for (i = 0, len = value.length; i < len; i++) {
+            record = value[i];
+
+            // Set value was a key, look up in the store by that key
+            if (!record || !record.isModel) {
+                record = me.findRecordByValue(key = record);
+
+                // The value might be in a new record created from an unknown value (if !me.forceSelection).
+                // Or it could be a picked record which is filtered out of the main store.
+                // Or it could be a setValue(record) passed to an empty store with autoLoadOnValue and aded above.
+                if (!record) {
+                    record = me.valueCollection.find(me.valueField, key);
+                }
+            }
+            // record was not found, this could happen because
+            // store is not loaded or they set a value not in the store
+            if (!record) {
+                // If we are allowing insertion of values not represented in the Store, then push the value and
+                // create a new record to push as a display value for use by the displayTpl
+                if (!forceSelection) {
+
+                    // We are allowing added values to create their own records.
+                    // Only if the value is not empty.
+                    if (!record && value[i]) {
+                        dataObj = {};
+                        dataObj[me.displayField] = value[i];
+                        if (me.valueField && me.displayField !== me.valueField) {
+                            dataObj[me.valueField] = value[i];
+                        }
+                        record = new Model(dataObj);
+                    }
+                }
+                    // Else, if valueNotFoundText is defined, display it, otherwise display nothing for this value
+                else if (me.valueNotFoundRecord) {
+                    record = me.valueNotFoundRecord;
+                }
+            }
+            // record found, select it.
+            if (record) {
+                matchedRecords.push(record);
+                valueArray.push(record.get(me.valueField));
+            }
+        }
+
+        // If the same set of records are selected, this setValue has been a no-op
+        if (lastSelection) {
+            len = lastSelection.length;
+            if (len === matchedRecords.length) {
+                for (i = 0; !valueChanged && i < len; i++) {
+                    if (Ext.Array.indexOf(me.lastSelection, matchedRecords[i]) === -1) {
+                        valueChanged = true;
+                    }
+                }
+            } else {
+                valueChanged = true;
+            }
+        } else {
+            valueChanged = matchedRecords.length;
+        }
+
+        if (valueChanged) {
+            // beginUpdate which means we only want to notify this.onValueCollectionEndUpdate after it's all changed.
+            me.suspendEvent('select');
+            me.valueCollection.beginUpdate();
+            if (matchedRecords.length) {
+                selModel.select(matchedRecords, false);
+            } else {
+                selModel.deselectAll();
+            }
+            me.valueCollection.endUpdate();
+            me.resumeEvent('select');
+        } else {
+            me.updateValue();
+        }
+
+        if (me.inputEl && me.emptyText) {
+            me.inputEl.removeCls(me.emptyCls);
+            me.valueContainsPlaceholder = false;
+        }
+        if (record) {
+            me.setRawValue(record.get(me.displayField));
+            me.value = record.get(me.valueField);
+        }
+        me.applyEmptyText();
+
+        return me;
+    },
     doQuery: function (queryString, forceAll, rawQuery) {
         var me = this,
             store = me.getStore(),

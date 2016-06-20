@@ -14,9 +14,9 @@ Ext.define('Chaching.model.financials.accounts.DivisionsModel', {
             {
                 name: 'creditJobId', mapping: 'jobId', headerText: 'Credit Job Id', hidden: true, width: '8%'
             },
-            { name: 'jobNumber', type: 'string', headerText: 'JobNumber', hidden: false, width: '8%' },
-            { name: 'caption', type: 'string', headerText: 'Caption', hidden: false, width: '8%' },
-            { name: 'isDivision', type: 'boolean', headerText: 'isDivision', hidden: false, width: '8%' },
+            { name: 'jobNumber', type: 'string', headerText: 'JobNumber', hidden: false, width: '7%' },
+            { name: 'caption', type: 'string', headerText: 'Caption', hidden: false, width:'15%',minWidth:110 },
+            { name: 'isDivision', type: 'boolean', headerText: 'Division', hidden: false, width: '11%', minWidth: 70 },
             //{ name: 'isCorporateDefault', type: 'boolean'},
             //{ name: 'rollupCenterId', type: 'int'},
             //{ name: 'chartOfAccountId', type: 'int'},

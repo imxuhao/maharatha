@@ -5,26 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.BackgroundJobs;
 using Abp.Dependency;
+using AutoMapper;
 using CAPS.CORPACCOUNTING.Journals;
 using CAPS.CORPACCOUNTING.Journals.dto;
 
 namespace CAPS.CORPACCOUNTING.BackgroundJobs
 {
-   public class JournalEntryBackGroundJob : BackgroundJob<JournalEntryDocumentInputUnit>, ITransientDependency
-    {
-        private  readonly  IJournalEntryDocumentAppService _journalEntryDocumentAppService;
-      
+   /// <summary>
+   /// You can pass anything instead of long. You pass objects as well like DTO where you can store and 
+   /// use it to generate report
+   /// </summary>
+   /// 
+   public class JournalEntryBackGroundJob : BackgroundJob<long>, ITransientDependency
+   {
+       private readonly JournalEntryDocumentUnitManager _journalEntryDocumentUnitManager;
 
-        public JournalEntryBackGroundJob(IJournalEntryDocumentAppService journalEntryDocumentAppService)
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="journalEntryDocumentUnitManager"></param>
+       public JournalEntryBackGroundJob(JournalEntryDocumentUnitManager journalEntryDocumentUnitManager)
        {
-           _journalEntryDocumentAppService = journalEntryDocumentAppService;
+           _journalEntryDocumentUnitManager = journalEntryDocumentUnitManager;
        }
 
 
-       public override  void Execute(JournalEntryDocumentInputUnit args)
-        {
-             _journalEntryDocumentAppService.CreateJournalEntryDocumentUnit(args);
-           
-        }
+       /// <summary>
+       /// Executes the job with the <see cref="!:args"/>.
+       /// </summary>
+      
+       /// <param name="journalId"></param>
+       public override async void Execute(long journalId)
+       {
+
+            await _journalEntryDocumentUnitManager.CreateRecurringAsync(journalId);
+
+
+       }
     }
 }

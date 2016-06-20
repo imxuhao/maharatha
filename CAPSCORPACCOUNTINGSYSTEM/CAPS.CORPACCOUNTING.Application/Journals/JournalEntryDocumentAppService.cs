@@ -159,7 +159,14 @@ namespace CAPS.CORPACCOUNTING.Journals
 
             if (journalEntryDocumentUnit.IsRecurringEntry && !journalEntryDocumentUnit.IsPosted)
             {
-                _recurringJobManager.DeleteJob($"RecurringJournalID{journalEntryDocumentUnit.OriginalDocumentId}");
+                if (journalEntryDocumentUnit.OriginalDocumentId != null)
+                {
+                    _recurringJobManager.DeleteJob($"RecurringJournalID{journalEntryDocumentUnit.OriginalDocumentId}");
+                }
+                else
+                {
+                    _recurringJobManager.DeleteJob($"RecurringJournalID{journalEntryDocumentUnit.Id}");
+                }
             }
 
 

@@ -2792,6 +2792,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.VendorCacheItem.PaymentTermsId">
             <summary> Gets or sets PaymentTermsId </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.VendorCacheItem.TypeofVendorId">
+            <summary> Gets or sets TypeofVendorId </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItem.Key">
             <summary>
             The cache name.
@@ -8802,6 +8805,347 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto">
+            <summary>
+            OutPutDto for PayrollEntryDocumentDetailUnit
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.ValueAddedTaxRecoveryId">
+            <summary>Gets or sets the ValueAddedTaxRecoveryID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.TaxGroupId">
+            <summary>Gets or sets the TaxGroupId field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.Quantity">
+            <summary>Gets or sets the Quantity field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.UnitPrice">
+            <summary>Gets or sets the UnitPrice field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.Weight">
+            <summary>Gets or sets the Weight field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.VendorId">
+            <summary>Gets or sets the VendorID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.EmployeeId">
+            <summary>Gets or sets the EmployeeID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.EmployeeTaxNumber">
+            <summary>Gets or sets the EmployeeTaxNumber field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.TypeOfPayrollId">
+            <summary>Gets or sets the TypeOfPayrollID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollTrxInfo">
+            <summary>Gets or sets the PayrollTrxInfo field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollWorkHours">
+            <summary>Gets or sets the PayrollWorkHours field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollDays">
+            <summary>Gets or sets the PayrollDays field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollRate">
+            <summary>Gets or sets the PayrollRate field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollCheckNumber">
+            <summary>Gets or sets the PayrollCheckNumber field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollCheckDate">
+            <summary>Gets or sets the PayrollCheckDate field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollWorkDate">
+            <summary>Gets or sets the PayrollWorkDate field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollOt">
+            <summary>Gets or sets the PayrollOT field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollFica">
+            <summary>Gets or sets the PayrollFICA field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollFui">
+            <summary>Gets or sets the PayrollFUI field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollSui">
+            <summary>Gets or sets the PayrollSUI field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollWc">
+            <summary>Gets or sets the PayrollWC field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollHf">
+            <summary>Gets or sets the PayrollHF field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollPhw">
+            <summary>Gets or sets the PayrollPHW field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollJob">
+            <summary>Gets or sets the PayrollJob field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollAccount">
+            <summary>Gets or sets the PayrollAccount field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.PayrollWeekEnding">
+            <summary>Gets or sets the PayrollWeekEnding field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto.JobLocation">
+            <summary>Gets or sets the JobLocation field. </summary> 
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit">
+            <summary>
+            InputDto for PayrollEntryDocumentDetailUnit
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.ValueAddedTaxRecoveryId">
+            <summary>Gets or sets the ValueAddedTaxRecoveryID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.TaxGroupId">
+            <summary>Gets or sets the TaxGroupId field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.Quantity">
+            <summary>Gets or sets the Quantity field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.UnitPrice">
+            <summary>Gets or sets the UnitPrice field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.Weight">
+            <summary>Gets or sets the Weight field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.VendorId">
+            <summary>Gets or sets the VendorID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.EmployeeId">
+            <summary>Gets or sets the EmployeeID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.EmployeeTaxNumber">
+            <summary>Gets or sets the EmployeeTaxNumber field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.TypeOfPayrollId">
+            <summary>Gets or sets the TypeOfPayrollID field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollTrxInfo">
+            <summary>Gets or sets the PayrollTrxInfo field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollWorkHours">
+            <summary>Gets or sets the PayrollWorkHours field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollDays">
+            <summary>Gets or sets the PayrollDays field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollCheckNumber">
+            <summary>Gets or sets the PayrollCheckNumber field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollCheckDate">
+            <summary>Gets or sets the PayrollCheckDate field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollWorkDate">
+            <summary>Gets or sets the PayrollWorkDate field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollOt">
+            <summary>Gets or sets the PayrollOT field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollFica">
+            <summary>Gets or sets the PayrollFICA field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollFui">
+            <summary>Gets or sets the PayrollFUI field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollSui">
+            <summary>Gets or sets the PayrollSUI field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollWc">
+            <summary>Gets or sets the PayrollWC field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollHf">
+            <summary>Gets or sets the PayrollHF field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollPhw">
+            <summary>Gets or sets the PayrollPHW field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollJob">
+            <summary>Gets or sets the PayrollJob field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollAccount">
+            <summary>Gets or sets the PayrollAccount field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailInputUnit.PayrollWeekEnding">
+            <summary>Gets or sets the PayrollWeekEnding field. </summary> 
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit">
+            <summary>
+            Create InputDto for PayrollEntryDocumentUnit
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.BatchId">
+            <summary>Gets or sets the BatchId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.TypeOfInvoiceId">
+            <summary>Gets or sets the TypeOfInvoiceId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.IsEnterable">
+            <summary>Gets or sets the IsEnterable field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.APInvoiceAccountingDocId">
+            <summary>Gets or sets the APInvoiceAccountingDocId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.UploadDocumentLogId">
+            <summary>Gets or sets the UploadDocumentLogId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.IsReversed">
+            <summary>Gets or sets the IsReversed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.ReversedByUserId">
+            <summary>Gets or sets the ReversedByUserId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.ReversalDate">
+            <summary>Gets or sets the ReversalDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.IsVoid">
+            <summary>Gets or sets the IsVoid field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.IsVoidDateOriginal">
+            <summary>Gets or sets the IsVoidDateOriginal field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.LinkedAccountingDocumentId">
+            <summary>Gets or sets the LinkedAccountingDocumentId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit.PayrollEntryDocumentDetailInputList">
+            <summary>Gets or sets the PayrollEntryDocumentDetailInputList field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto">
+            <summary>
+            OutputDto for PayrollEntryDocumentUnit
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.BatchId">
+            <summary>Gets or sets the BatchId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.TypeOfInvoiceId">
+            <summary>Gets or sets the TypeOfInvoiceId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.IsEnterable">
+            <summary>Gets or sets the IsEnterable field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.APInvoiceAccountingDocId">
+            <summary>Gets or sets the APInvoiceAccountingDocId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.UploadDocumentLogId">
+            <summary>Gets or sets the UploadDocumentLogId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.IsReversed">
+            <summary>Gets or sets the IsReversed field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.ReversedByUserId">
+            <summary>Gets or sets the ReversedByUserId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.ReversalDate">
+            <summary>Gets or sets the ReversalDate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.IsVoid">
+            <summary>Gets or sets the IsVoid field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.IsVoidDateOriginal">
+            <summary>Gets or sets the IsVoidDateOriginal field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.LinkedAccountingDocumentId">
+            <summary>Gets or sets the LinkedAccountingDocumentId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentUnitDto.VendorName">
+            <summary>Gets or sets the VendorName field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payroll.IPayrollEntryDocumentAppService">
+            <summary>
+            Provide all CRUD operations on PayrollEntryDocument.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.IPayrollEntryDocumentAppService.CreatePayrollEntryDocumentUnit(CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit)">
+            <summary>
+            Create the PayrollEntryDocument.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.IPayrollEntryDocumentAppService.UpdatePayrollEntryDocumentUnit(CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit)">
+            <summary>
+            Update the PayrollEntryDocument
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.IPayrollEntryDocumentAppService.DeletePayrollEntryDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete PayrollEntryDocument
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.IPayrollEntryDocumentAppService.GetPayrollEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get all PayrollEntryDocument with Paging and Sorting
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.IPayrollEntryDocumentAppService.GetPayrollEntryDocumentUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get PayrollEntryDocumentDetails By AccountingDocumentID
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService">
+            <summary>
+            PayrollEntryDocument AppService
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService.CreatePayrollEntryDocumentUnit(CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit)">
+            <summary>
+            Create the PayrollEntryDocument.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService.UpdatePayrollEntryDocumentUnit(CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentInputUnit)">
+            <summary>
+             Update the PayrollEntryDocument
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService.DeletePayrollEntryDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete PayrollEntryDocument
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService.GetPayrollEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get all PayrollEntryDocument with Paging and Sorting
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService.GetPayrollEntryDocumentUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get PayrollEntryDocumentDetails By AccountingDocumentID
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService.GetPayRollVendorList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Payroll Vendors
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService">
             <summary>
             PettyCash AppService
@@ -8809,35 +9153,35 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.CreatePettyCashEntryDocumentUnit(CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput)">
             <summary>
-            Create APHeader Transactions
+            Create PettyCashEntryDocument 
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.UpdatePettyCashEntryDocumentUnit(CAPS.CORPACCOUNTING.PettyCash.Dto.PettyCashEntryDocumentInput)">
             <summary>
-            Update ApHeader Transactions
+            Update PettyCashEntryDocument
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.DeletePettyCashEntryDocumentUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
-            Delete ApHeader Transactions
+            Delete PettyCashEntryDocument
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.GetPettyCashEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
-             Get all APHeaderTransactions with Paging and Sorting
+             Get all PettyCashEntryDocument with Paging and Sorting
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.PettyCash.PettyCashEntryDocumentAppService.GetPettyCashEntryDocumentDetailsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
-            Get APHeaderDetailsByAccountingDocumentId
+            Get PettyCashEntryDocumentDetails ByAccountingDocumentId
             </summary>
             <param name="input"></param>
             <returns></returns>

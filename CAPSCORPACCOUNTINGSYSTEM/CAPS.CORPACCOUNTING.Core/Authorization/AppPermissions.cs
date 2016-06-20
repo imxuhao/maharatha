@@ -270,6 +270,10 @@
         #region Payroll Tab
         public const string Pages_Payroll = "Pages.Payroll";
         public const string Pages_Payroll_Entry = "Pages.Payroll.Entry";
+        public const string Pages_Payroll_Entry_Create = "Pages.Payroll.Entry.Create";
+        public const string Pages_Payroll_Entry_Edit = "Pages.Payroll.Entry.Edit";
+        public const string Pages_Payroll_Entry_Delete = "Pages.Payroll.Entry.Delete";
+      
         public const string Pages_Payroll_Inquiry = "Pages.Payroll.Inquiry";
         public const string Pages_Payroll_Inquiry_PayrollHistory = "Pages.Payroll.Inquiry.PayrollHistory ";
         public const string Pages_Payroll_Inquiry_PayrollUploadInfo = "Pages.Payroll.Inquiry.PayrollUploadInfo";
@@ -278,6 +282,8 @@
         public const string Pages_Payroll_Preferences_PayrollCompanies = "Pages.Payroll.Preferences.PayrollCompanies";
         public const string Pages_Payroll_Preferences_PaychexControl = "Pages.Payroll.Preferences.PaychexControl";
         public const string Pages_Payroll_Preferences_PayrollFringeReallocation = "Pages.Payroll.Preferences.PayrollFringeReallocation";
+
+       
         #endregion
 
         #region Batch Posting Tab

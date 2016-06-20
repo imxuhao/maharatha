@@ -248,6 +248,7 @@
     <Compile Include="Masters\ValueAddedTaxTypeUnit.cs" />
     <Compile Include="Payables\InvoiceEntryDocumentDetailUnitManager.cs" />
     <Compile Include="Payments\PaymentPrintHistoryUnit.cs" />
+    <Compile Include="Payroll\PayrollEntryDocumentDetailUnitManager.cs" />
     <Compile Include="Payroll\TypeOfPayrollUnit.cs" />
     <Compile Include="PettyCash\PCGridUnit.cs" />
     <Compile Include="PurchaseOrders\PurchaseOrderDetailUnitManager.cs" />

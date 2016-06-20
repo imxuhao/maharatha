@@ -59,7 +59,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         }
 
         /// <summary>
-        /// Create APHeader Transactions
+        /// Create PettyCashEntryDocument 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -74,10 +74,10 @@ namespace CAPS.CORPACCOUNTING.PettyCash
                 Id = await _pettyCashEntryDocumnetManager.CreateAsync(pcEntryDocumnetUnit)
             };
 
-            //Null Checking of InvoiceEntryDocumentDetailList
+            //Null Checking of PettyCashEntryDocumentDetailList
             if (!ReferenceEquals(input.PettyCashEntryDocumentDetailList, null))
             {
-                //Bulk Insertion of InvoiceEntryDocumentDetails
+                //Bulk Insertion of PettyCashEntryDocumentDetail
                 foreach (var pcEntryDocumentDetail in input.PettyCashEntryDocumentDetailList)
                 {
                     pcEntryDocumentDetail.AccountingDocumentId = response.Id;
@@ -90,7 +90,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         }
 
         /// <summary>
-        /// Update ApHeader Transactions
+        /// Update PettyCashEntryDocument
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -105,7 +105,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
 
             if (!ReferenceEquals(input.PettyCashEntryDocumentDetailList, null))
             {
-                //Bulk CRUD operations of InvoiceEntryDocumentDetails
+                //Bulk CRUD operations of PettyCashEntryDocumentDetails
                 foreach (var pcEntryDocumnetDetail in input.PettyCashEntryDocumentDetailList)
                 {
                     if (pcEntryDocumnetDetail.AccountingItemId == 0)
@@ -136,7 +136,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         }
 
         /// <summary>
-        /// Delete ApHeader Transactions
+        /// Delete PettyCashEntryDocument
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -150,7 +150,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         }
 
         /// <summary>
-        ///  Get all APHeaderTransactions with Paging and Sorting
+        ///  Get all PettyCashEntryDocument with Paging and Sorting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -160,14 +160,11 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         public async Task<PagedResultOutput<PettyCashEntryDocumentUnitDto>> GetPettyCashEntryDocumentUnits(SearchInputDto input)
         {
             var query = from pcUnits in _pcEntryDocumnetUnitRepository.GetAll()
-                              //join user in _userUnitRepository.GetAll() on journals.CreatorUserId equals user.Id
-                            //  into users
+                        //join user in _userUnitRepository.GetAll() on journals.CreatorUserId equals user.Id
+                        //  into users
                         join batch in _batchUnitRepository.GetAll() on pcUnits.BatchId equals batch.Id
                            into batchunit
                         from batchunits in batchunit.DefaultIfEmpty()
-                        //join vendor in _vendorUnitRepository.GetAll() on pcUnits. equals vendor.Id
-                        //    into vendorunit
-                        //from vendors in vendorunit.DefaultIfEmpty()
                         select new { pcUnits = pcUnits, BatchName = batchunits.Description};
 
             if (!ReferenceEquals(input.Filters, null))
@@ -197,7 +194,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
 
         }
         /// <summary>
-        /// Get APHeaderDetailsByAccountingDocumentId
+        /// Get PettyCashEntryDocumentDetails ByAccountingDocumentId
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

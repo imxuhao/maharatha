@@ -496,6 +496,12 @@
     <Compile Include="Financials\Preferences\Dto\CreateFiscalYearUnitInput.cs" />
     <Compile Include="Financials\Preferences\FiscalYearAppService.cs" />
     <Compile Include="Financials\Preferences\IFiscalYearAppService.cs" />
+    <Compile Include="Payroll\Dto\PayrollEntryDocumentDetailUnitDto.cs" />
+    <Compile Include="Payroll\Dto\PayrollEntryDocumentDetailInputUnit.cs" />
+    <Compile Include="Payroll\Dto\PayrollEntryDocumentInputUnit.cs" />
+    <Compile Include="Payroll\Dto\PayrollEntryDocumentUnitDto.cs" />
+    <Compile Include="Payroll\IPayrollEntryDocumentAppService.cs" />
+    <Compile Include="Payroll\PayrollEntryDocumentAppService.cs" />
     <Compile Include="PettyCash\PettyCashEntryDocumentAppService.cs" />
     <Compile Include="PettyCash\Dto\PettyCashEntryDocumentDetailDto.cs" />
     <Compile Include="PettyCash\Dto\PettyCashEntryDocumentDetailInput.cs" />

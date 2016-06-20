@@ -7,7 +7,6 @@ using Abp.Zero;
 using Abp.Application.Services.Dto;
 using Abp.UI;
 using CAPS.CORPACCOUNTING.Accounting;
-using CAPS.CORPACCOUNTING.Journals;
 
 namespace CAPS.CORPACCOUNTING.Payables
 {

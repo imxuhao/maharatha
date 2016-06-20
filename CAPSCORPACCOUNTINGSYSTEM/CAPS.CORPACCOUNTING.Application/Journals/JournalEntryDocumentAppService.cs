@@ -26,6 +26,7 @@ using CAPS.CORPACCOUNTING.Accounting;
 using Castle.Core.Logging;
 using CAPS.CORPACCOUNTING.BackgroundJobs;
 using Hangfire;
+using System.Net.Http;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
@@ -112,10 +113,14 @@ namespace CAPS.CORPACCOUNTING.Journals
                 await JournalEntryDetails(input.JournalEntryDetailList.OrderByDescending(u => u.Amount).ToList());
             }
             await CurrentUnitOfWork.SaveChangesAsync();
-           // _recurringJobManager.AddOrUpdateAsync<>()
-            //_recurringJobManager.AddOrUpdateAsync<SimpleSendEmailJob, sim>(42);
-            //await
-            //    _recurringJobManager.AddOrUpdateAsync<JournalEntryBackGroundJob, JournalEntryDocumentInputUnit>("xxx"+System.DateTime.Now, input,Cron.Minutely(), BackgroundJobPriority.Normal);
+
+            if (journalEntryDocumentUnit.IsRecurringEntry)
+            {
+                //await Helper.GetCron("x");
+                await _recurringJobManager.AddOrUpdateAsync<JournalEntryBackGroundJob, long>(
+                    $"RecurringJournalID{accountDocumentId}", accountDocumentId, Cron.Minutely(),
+                    BackgroundJobPriority.Normal);
+            }
             return new IdOutputDto<long>() { Id = accountDocumentId };
         }
 
@@ -147,9 +152,17 @@ namespace CAPS.CORPACCOUNTING.Journals
         [UnitOfWork]
         public async Task DeleteJournalEntryDocumentUnit(IdInput input)
         {
+            JournalEntryDocumentUnit journalEntryDocumentUnit = _journalEntryDocumentUnitRepository.Get(input.Id);
             await _journalEntryDocumentUnitManager.DeleteAsync(input);
             await _journalEntryDocumentDetailUnitRepository.DeleteAsync(p => p.AccountingDocumentId == input.Id);
             await CurrentUnitOfWork.SaveChangesAsync();
+
+            if (journalEntryDocumentUnit.IsRecurringEntry && !journalEntryDocumentUnit.IsPosted)
+            {
+                _recurringJobManager.DeleteJob($"RecurringJournalID{journalEntryDocumentUnit.OriginalDocumentId}");
+            }
+
+
         }
 
 
@@ -163,6 +176,9 @@ namespace CAPS.CORPACCOUNTING.Journals
         [UnitOfWork]
         public async Task DeleteJournalDetailUnit(IdInput<long> input)
         {
+            
+            
+
             await _journalEntryDocumentDetailUnitManager.DeleteAsync(input);
             var creditJournal =
                 await
@@ -173,6 +189,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                 await _journalEntryDocumentDetailUnitManager.DeleteAsync(new IdInput<long>() { Id = creditJournal.Id });
             }
 
+            
         }
 
 

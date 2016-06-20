@@ -4,8 +4,11 @@ using CAPS.CORPACCOUNTING.GenericSearch;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.Helpers
 {
@@ -205,61 +208,35 @@ namespace CAPS.CORPACCOUNTING.Helpers
         {
             return self ?? string.Empty;
         }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Sort
-    {
-        /// <summary>
-        /// Gets or sets Column ParentTable Name
-        /// </summary>
-        public string Entity { get; set; }
 
         /// <summary>
-        /// Gets or sets Column Name
+        /// 
         /// </summary>
-        public string Property { get; set; }
+        /// <param name="strCronNeeded"></param>
+        /// <returns></returns>
+        public static async Task<string> GetCron(string strCronNeeded)
+        {
 
-        /// <summary>
-        /// Gets or sets Sorting Order
-        /// </summary>
-        public string Order { get; set; }
+            //use the required URL :http://www.cronmaker.com/help/rest-api-help.html
+            var client = new HttpClient();
+            string strCronReturned= string.Empty;
+            // Create the HttpContent for the form to be posted.
+            var requestContent = new FormUrlEncodedContent(new[] {new KeyValuePair<string, string>("SUMIT", "This is a block of text"),});
+
+            // Get the response.
+            HttpResponseMessage response = await client.PostAsync(" http://www.cronmaker.com/rest/hourly/every/1", requestContent);
+
+            // Get the response content.
+            HttpContent responseContent = response.Content;
+
+            // Get the stream of the content.
+            //using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
+            //{
+            //    // Write the output.
+            //    Console.WriteLine(await reader.ReadToEndAsync());
+            //}
+
+            return response.Content.ToString();
+        }
     }
-    public class SearchTypes
-    {
-        public IEnumerable<TextSearch> TextSearch { get; set; }
-        public IEnumerable<NumericSearch> NumericSearch { get; set; }
-        public IEnumerable<EnumSearch> EnumSearch { get; set; }
-        public IEnumerable<DateSearch> DateSearch { get; set; }
-        public IEnumerable<BooleanSearch> BooleanSearch { get; set; }
-
-        public IEnumerable<DecimalSearch> DecimalSearch { get; set; }
-
-
-    }
-    public enum DataTypes
-    {
-        Numeric = 0,
-        Text = 1,
-        Date = 2,
-        Bool = 3,
-        Enum = 4,
-        Decimal = 5
-    }
-    public class Filters
-    {
-        public string Entity { get; set; }
-
-        public string Property { get; set; }
-        public string SearchTerm { get; set; }
-        public int Comparator { get; set; }
-        public string SearchTerm2 { get; set; }
-
-        public DataTypes DataType { get; set; }
-    }
-
-
-
 }

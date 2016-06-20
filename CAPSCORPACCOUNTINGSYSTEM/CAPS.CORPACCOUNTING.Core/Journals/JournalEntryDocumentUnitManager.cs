@@ -12,7 +12,7 @@ namespace CAPS.CORPACCOUNTING.Journals
 {
     public class JournalEntryDocumentUnitManager : DomainService
     {
-        protected IRepository<JournalEntryDocumentUnit, long> JournalEntryDocumentUnitRepository { get; }
+        private readonly IRepository<JournalEntryDocumentUnit, long> JournalEntryDocumentUnitRepository;
         public JournalEntryDocumentUnitManager(IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitrepository)
         {
             JournalEntryDocumentUnitRepository = journalEntryDocumentUnitrepository;
@@ -21,17 +21,33 @@ namespace CAPS.CORPACCOUNTING.Journals
         }
 
         [UnitOfWork]
-        public virtual async Task<long> CreateAsync(JournalEntryDocumentUnit accountUnit)
+        public virtual async Task<long> CreateAsync(JournalEntryDocumentUnit journalUnit)
         {
-            await ValidateJournalUnitAsync(accountUnit);
-            return await JournalEntryDocumentUnitRepository.InsertAndGetIdAsync(accountUnit);
+
+            await ValidateJournalUnitAsync(journalUnit);
+            return await JournalEntryDocumentUnitRepository.InsertAndGetIdAsync(journalUnit);
         }
 
 
-        public virtual async Task UpdateAsync(JournalEntryDocumentUnit accountUnit)
+        [UnitOfWork]
+        public virtual async Task<long> CreateRecurringAsync(long journalId)
         {
-            await ValidateJournalUnitAsync(accountUnit);
-            await JournalEntryDocumentUnitRepository.UpdateAsync(accountUnit);
+            var newjournalDocumentunit = JournalEntryDocumentUnitRepository.Get(journalId);
+
+           // Adding the Parent Reference
+            newjournalDocumentunit.OriginalDocumentId = journalId;
+
+            // Changing the Description
+            newjournalDocumentunit.DocumentReference= newjournalDocumentunit.DocumentReference+"-"+
+            JournalEntryDocumentUnitRepository.GetAll().Count(p => p.OriginalDocumentId == journalId) + 1;
+
+           // await ValidateJournalUnitAsync(newjournalDocumentunit);
+            return await JournalEntryDocumentUnitRepository.InsertAndGetIdAsync(newjournalDocumentunit);
+        }
+        public virtual async Task UpdateAsync(JournalEntryDocumentUnit journalUnit)
+        {
+            await ValidateJournalUnitAsync(journalUnit);
+            await JournalEntryDocumentUnitRepository.UpdateAsync(journalUnit);
         }
 
         public virtual async Task DeleteAsync(IdInput input)
@@ -46,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.Journals
 
                 var journals = (await JournalEntryDocumentUnitRepository.
                     GetAllListAsync(p => p.DocumentReference == journalunit.DocumentReference && p.OrganizationUnitId == journalunit.OrganizationUnitId
-                        && p.TypeOfAccountingDocumentId==TypeOfAccountingDocument.GeneralLedger));
+                        && p.TypeOfAccountingDocumentId == TypeOfAccountingDocument.GeneralLedger));
 
                 if (journalunit.Id == 0)
                 {

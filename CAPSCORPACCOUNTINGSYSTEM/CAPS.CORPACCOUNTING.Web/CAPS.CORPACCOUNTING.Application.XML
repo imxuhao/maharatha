@@ -1443,6 +1443,25 @@
             Throws <see cref="T:Abp.Runtime.Validation.AbpValidationException"/> if can not find any of the permission names.
             </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.BackgroundJobs.JournalEntryBackGroundJob">
+            <summary>
+            You can pass anything instead of long. You pass objects as well like DTO where you can store and 
+            use it to generate report
+            </summary>
+            
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.BackgroundJobs.JournalEntryBackGroundJob.#ctor(CAPS.CORPACCOUNTING.Journals.JournalEntryDocumentUnitManager)">
+            <summary>
+            
+            </summary>
+            <param name="journalEntryDocumentUnitManager"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.BackgroundJobs.JournalEntryBackGroundJob.Execute(System.Int64)">
+            <summary>
+            Executes the job with the <see cref="!:args"/>.
+            </summary>
+            <param name="journalId"></param>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Banking.BankAccountUnitAppService.CreateBankAccountUnit(CAPS.CORPACCOUNTING.Banking.Dto.CreateBankAccountUnitInput)">
             <summary>
             Create the BankAccount.
@@ -2890,6 +2909,13 @@
             Extension Method to return Emptystring when we pass as Null
             </summary>
             <param name="self"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.Helper.GetCron(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="strCronNeeded"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.Sort">

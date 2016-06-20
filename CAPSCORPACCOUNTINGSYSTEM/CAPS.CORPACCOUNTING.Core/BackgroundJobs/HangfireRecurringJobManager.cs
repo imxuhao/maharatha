@@ -7,6 +7,7 @@ using Abp.BackgroundJobs;
 using Abp.Hangfire.Configuration;
 using Abp.Threading.BackgroundWorkers;
 using Hangfire;
+using Hangfire.Common;
 
 namespace CAPS.CORPACCOUNTING.BackgroundJobs
 {
@@ -53,6 +54,11 @@ namespace CAPS.CORPACCOUNTING.BackgroundJobs
         {
             RecurringJob.AddOrUpdate<TJob>(jobId,job => job.Execute(args), cronExpressions);
             return Task.FromResult(0);
+        }
+
+        public bool DeleteJob(string jobId)
+        {
+           return BackgroundJob.Delete(jobId);
         }
     }
 }

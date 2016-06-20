@@ -218,10 +218,10 @@ Ext.define('Chaching.components.form.field.ComboBox', {
             createEditEntityType: null,
             createEditEntityGridController: null,
             modulePermissions: {
-                read: true,
-                create: true,
-                edit: true,
-                destroy: true
+                read: false,
+                create: false,
+                edit: false,
+                destroy: false
             },
             secondoryEntityCrudApi: {
                 read:null,
@@ -242,7 +242,6 @@ Ext.define('Chaching.components.form.field.ComboBox', {
     forceSelection: false,
     listConfig: {
         minWidth: 350,
-        minHeight: 150,
         maxHeight: 250
     },
     defaultListConfig: {
@@ -381,7 +380,10 @@ Ext.define('Chaching.components.form.field.ComboBox', {
             recordToSetInComboBox: null,
             viewConfig: {
                 stripeRows: true,
-                emptyText: 'No Records Found'
+                emptyText: 'No Records Found',
+                alwaysOnTop: true,
+                loadingHeight: 100,
+                loadingText:'Loading data. Please wait'
             },
             dockedItems: actionToolBar,
             multiSelect: false,
@@ -432,16 +434,48 @@ Ext.define('Chaching.components.form.field.ComboBox', {
             columns = view.getColumnManager().columns,
             infoColumn = columns[columns.length - 1];
         switch (e.getKey()) {
+            case 9://select highligheted record and collapse the picker
+                if (record) {
+                    e.stopEvent();
+                    me.cleanUpPicker(me, view, selModel, true);
+                    if (me.nextSibling() && !e.shiftKey) me.nextSibling().focus();
+                    else if (me.previousSibling() && e.shiftKey) me.previousSibling().focus();
+                }
+                break;
             case 13://setValue of selected record when enter is pressed.
                 if (record && selModel) {
                     e.stopEvent();
-                    me.cleanUpPicker(me, view, selModel,true);
                     me.setValue(record);
+                    me.cleanUpPicker(me, view, selModel,true);
                 }
                 break;
             case 27://close picker when esc is pressed
                 e.stopEvent();
                 me.cleanUpPicker(me, view, selModel,true);
+                break;
+            case 35://end pressed navigate to last record
+                if (record && selModel) {
+                    e.stopEvent();
+                    e.preventDefault();
+                    selModel.deselectAll();
+                    selModel.select(me.store.getTotalCount() - 1, false);
+                    view.getCell(me.store.getTotalCount() - 1, 0).focus();
+                }
+                break;
+            case 36://home pressed navigate to first record
+                if (record && selModel) {
+                    e.stopEvent();
+                    e.preventDefault();
+                    selModel.deselectAll();
+                    selModel.select(0, false);
+                    view.getCell(0, 0).focus();
+                }
+                break;
+            case 38://when first record is selected and up arrow pressed move cursor to field
+                if (record && selModel && rowIdx === 0) {
+                    e.stopEvent();
+                    me.cleanUpPicker(me, view, selModel, false);
+                }
                 break;
             case 45://add new record if has primary entity permissions
                 if (!e.shiftKey && !e.ctrlKey && modulePermissions && modulePermissions.create) {
@@ -480,7 +514,12 @@ Ext.define('Chaching.components.form.field.ComboBox', {
                 break;
         }
     },
-    cleanUpPicker:function(me, view,selModel,collapse) {
+    cleanUpPicker: function (me, view, selModel, collapse) {
+        var navigationModel = undefined;
+        if (selModel) {
+            navigationModel = selModel.navigationModel;
+            if (navigationModel && navigationModel.cell)navigationModel.cell.blur();
+        }
         view.blur();
         me.picker.blur();
         me.focus();

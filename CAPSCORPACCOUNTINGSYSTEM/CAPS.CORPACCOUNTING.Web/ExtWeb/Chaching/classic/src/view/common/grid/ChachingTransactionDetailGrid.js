@@ -496,6 +496,11 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
+                    listConfig: {
+                        minWidth: 400,
+                        minHeight: 150,
+                        maxHeight: 250
+                    },
                     modulePermissions: {
                         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
                         create:false,//abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
@@ -539,6 +544,11 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
+                    listConfig: {
+                        minWidth: 400,
+                        minHeight: 150,
+                        maxHeight: 250
+                    },
                     modulePermissions: {
                         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
                         create: false,//abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),

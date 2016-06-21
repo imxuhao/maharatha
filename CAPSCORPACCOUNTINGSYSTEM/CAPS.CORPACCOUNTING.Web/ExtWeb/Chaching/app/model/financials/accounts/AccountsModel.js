@@ -6,7 +6,8 @@
     fields: [
             { name: 'accountId', type: 'int', isPrimaryKey: true },
             { name: 'parentId', type: 'int', defaultValue: null, convert: nullHandler },
-            { name: 'accountNumber', type: 'string', headerText: 'AccountNumber', hidden: false, width: '12%',minWidth:90 },
+            { name: 'accountNumber', type: 'string', headerText: 'AccountNumber', hidden: false, width: '12%', minWidth: 90 },
+            { name: 'ledgerAccount', type: 'string', mapping: 'accountNumber' },
             { name: 'caption', type: 'string', headerText: 'Caption', hidden: false, width: '8%', minWidth: 50 },
             { name: 'isCorporate', type: 'boolean', headerText: 'IsCorporate', hidden: false, width: '10%' },
             { name: 'description', type: 'string' },

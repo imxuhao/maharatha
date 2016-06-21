@@ -104,52 +104,61 @@
                         width: '100%',
                         ui: 'fieldLabelTop'
                     }, {
-                        //xtype: 'combobox',
-                        //name: 'accountId',
-                        //fieldLabel: app.localize('LedgerAccount').initCap(),
-                        //width: '100%',
-                        //ui: 'fieldLabelTop',
-                        //displayField: 'name',
-                        //valueField: 'accountId',
-                        //emptyText: app.localize('SelectOption')//,
-                        ////store: 'vendorTypeList'
-
-                        xtype: 'autofillcombo',
-                        width: '100%',
-                        ui: 'fieldLabelTop',
-                        name: 'accountId',
+                        xtype: 'chachingcombobox',
+                        store: new Chaching.store.utilities.autofill.AccountListStore(),
                         fieldLabel: app.localize('LedgerAccount'),
-                        store: 'utilities.autofill.AccountListStore',
+                        ui: 'fieldLabelTop',
+                        width: '100%',
+                       // name: 'accountId',
                         valueField: 'accountId',
                         displayField: 'accountNumber',
-                        entityGridController: 'financials-accounts-accountsgrid',
-                        nameOfEntity: 'Account',
-                        entityType: 'financials.accounts.accounts',
-                        entityPermission: 'Financials.Accounts.Accounts'
+                        queryMode: 'remote',
+                        minChars: 2,
+                        useDisplayFieldToSearch: true,
+                        modulePermissions: {
+                            read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                            create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                            edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                            destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+                        },
+                        primaryEntityCrudApi: {
+                            read: abp.appPath + 'api/services/app/bankAccountUnit/GetCorporateAccountList',
+                            create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                            update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                            destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                        },
+                        createEditEntityType: 'financials.accounts.accounts',
+                        createEditEntityGridController: 'financials-accounts-accountsgrid',
+                        entityType: 'Account',
+                        useDisplayFieldToSearch: true
                     }, {
-
-                        //xtype: 'combobox',
-                        //name: 'jobId',
-                        //fieldLabel: app.localize('Divisions').initCap(),
-                        //width: '100%',
-                        //ui: 'fieldLabelTop',
-                        //displayField: 'name',
-                        //valueField: 'jobId',
-                        //emptyText: app.localize('SelectOption')//,
-                        //// store: 'vendorTypeList'
-
-                        xtype: 'autofillcombo',
-                        name: 'jobId',
-                        width: '100%',
-                        ui: 'fieldLabelTop',
+                        xtype: 'chachingcombobox',
+                        store: new Chaching.store.utilities.autofill.DivisionListStore(),
                         fieldLabel: app.localize('Divisions'),
-                        store: 'utilities.autofill.DivisionListStore',
+                        ui: 'fieldLabelTop',
+                        width: '100%',
+                        name: 'jobId',
                         valueField: 'jobId',
                         displayField: 'jobNumber',
-                        entityGridController: 'financials-accounts-divisionsgrid',
-                        nameOfEntity: 'Division',
-                        entityType: 'financials.accounts.divisions',
-                        entityPermission: 'Financials.Accounts.Divisions'
+                        queryMode: 'remote',
+                        minChars: 2,
+                        useDisplayFieldToSearch: true,
+                        modulePermissions: {
+                            read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+                            create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+                            edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+                            destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+                        },
+                        primaryEntityCrudApi: {
+                            read: abp.appPath + 'api/services/app/jobUnit/GetDivisionList',
+                            create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
+                            update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
+                            destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
+                        },
+                        createEditEntityType: 'financials.accounts.divisions', 
+                        createEditEntityGridController: 'financials-accounts-divisionsgrid',
+                        entityType: 'Division',
+                        useDisplayFieldToSearch: true
                     }]
                 },
                             {

@@ -116,7 +116,7 @@ Ext.define('Chaching.components.plugins.RowEditing', {
                     var formFields = editor.form.getFields();
                     for (var i = 0; i < formFields.items.length; i++) {
                         var field = formFields.items[i];
-                        if (field.xtype === "combo" || field.xtype === "combobox") {
+                        if (field.xtype === "combo" || field.xtype === "combobox" || field.xtype === "chachingcombobox" || field.xtype === "chachingcombo") {
                             var editorStore = field.getStore();
                             if (editorStore && !editorStore.isDataLoaded) {
                                 editorStore.field = field;
@@ -152,7 +152,7 @@ Ext.define('Chaching.components.plugins.RowEditing', {
             var fieldItems = fields.items;
             for (var i = 0; i < fieldItems.length; i++) {
                 var field = fieldItems[i];
-                if (field.xtype==="combo"||field.xtype==="combobox") {
+                if (field.xtype === "combo" || field.xtype === "combobox" || field.xtype === "chachingcombobox" || field.xtype === "chachingcombo") {
                     record.set(field.valueField, field.getValue());
                     record.set(field.displayField, field.getRawValue());
                 } else if (me.isAsscociationModelField(field, columns)) {

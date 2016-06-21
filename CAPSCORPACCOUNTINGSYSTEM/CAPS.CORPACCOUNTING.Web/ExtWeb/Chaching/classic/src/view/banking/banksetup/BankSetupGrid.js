@@ -148,30 +148,60 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
              sortable: true,
              groupable: true,
              width: '15%',
+             valueField: 'accountId',///NOTE: Important to update record idField when replicating like excel
+             dataLoadClass: 'Chaching.store.utilities.autofill.AccountListStore',
+             isMandatory: true,
              filterField: {
-                 //xtype: 'textfield',
-                 //width: '100%',
-                 //entityName: 'LedgerAccount',
-                 //emptyText: app.localize('SelectOption')
-                 xtype: 'autofillcombo',
-                 width: '100%',
-                 store: 'utilities.autofill.AccountListStore',
+                 xtype: 'chachingcombobox',
+                 store: new Chaching.store.utilities.autofill.AccountListStore(),
                  valueField: 'accountId',
-                 displayField: 'description',
-                 entityGridController: 'financials-accounts-chartofaccountsgrid',
-                 nameOfEntity: 'Chart of Account',
-                 entityType: 'financials.accounts.coa',
-                 entityPermission: 'Financials.Accounts.ChartOfAccounts'
+                 displayField: 'ledgerAccount',
+                 queryMode: 'remote',
+                 minChars: 2,
+                 entityName: "",
+                 useDisplayFieldToSearch: true,
+                 modulePermissions: {
+                     read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                     create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                     edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                     destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+                 },
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + 'api/services/app/bankAccountUnit/GetCorporateAccountList',
+                     create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                     update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                     destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                 },
+                 createEditEntityType: 'financials.accounts.accounts',
+                 createEditEntityGridController: 'financials-accounts-accountsgrid',
+                 entityType: 'Account',
+                 useDisplayFieldToSearch: true
              }, editor: {
-                 xtype: 'autofillcombo',
-                 width: '100%',
-                 store: 'utilities.autofill.AccountListStore',
+                 xtype: 'chachingcombobox',
+                 store: new Chaching.store.utilities.autofill.AccountListStore(),
                  valueField: 'accountId',
-                 displayField: 'description',
-                 entityGridController: 'financials-accounts-chartofaccountsgrid',
-                 nameOfEntity: 'Chart of Account',
-                 entityType: 'financials.accounts.coa',
-                 entityPermission: 'Financials.Accounts.ChartOfAccounts'
+                 displayField: 'ledgerAccount',
+                 queryMode: 'remote',
+                 minChars: 2,
+                 name : 'accountId',
+                 useDisplayFieldToSearch: true,
+                 modulePermissions: {
+                     read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                     create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                     edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                     destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+                 },
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + 'api/services/app/bankAccountUnit/GetCorporateAccountList',
+                     create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                     update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                     destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                 },
+                 createEditEntityType: 'financials.accounts.accounts',
+                 createEditEntityGridController: 'financials-accounts-accountsgrid',
+                 entityType: 'Account',
+                 useDisplayFieldToSearch: true
+
              }
          }, {
              xtype: 'gridcolumn',

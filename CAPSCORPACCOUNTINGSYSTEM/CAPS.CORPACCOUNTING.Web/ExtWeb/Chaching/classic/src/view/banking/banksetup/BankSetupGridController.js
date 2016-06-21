@@ -33,6 +33,10 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGridController', {
         var divisionCombo = form.findField('jobId');
         var divisionStore = divisionCombo.getStore();
         divisionStore.load();
+        // load Ledger accounts
+        var ledgerAccountsCombo = form.findField('accountId');
+        var ledgerAccountsStore = ledgerAccountsCombo.getStore();
+        ledgerAccountsStore.load();
 
         if (isEdit) {
             if (record) {

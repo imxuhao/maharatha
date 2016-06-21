@@ -7,15 +7,23 @@ using Abp.Domain.Uow;
 using System.Linq;
 using Abp.UI;
 using CAPS.CORPACCOUNTING.Accounting;
+using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Journals
 {
     public class JournalEntryDocumentUnitManager : DomainService
     {
-        private readonly IRepository<JournalEntryDocumentUnit, long> JournalEntryDocumentUnitRepository;
-        public JournalEntryDocumentUnitManager(IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitrepository)
+        private readonly IRepository<JournalEntryDocumentUnit, long> _journalEntryDocumentUnitRepository;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly IRepository<JournalEntryDocumentDetailUnit, long> _journalEntryDocumentDetailUnitRepository;
+
+        public JournalEntryDocumentUnitManager(IRepository<JournalEntryDocumentUnit, long> journalEntryDocumentUnitrepository,
+            IUnitOfWorkManager unitOfWorkManager,
+            IRepository<JournalEntryDocumentDetailUnit, long> journalEntryDocumentDetailUnitRepository)
         {
-            JournalEntryDocumentUnitRepository = journalEntryDocumentUnitrepository;
+            _journalEntryDocumentUnitRepository = journalEntryDocumentUnitrepository;
+            _unitOfWorkManager = unitOfWorkManager;
+            _journalEntryDocumentDetailUnitRepository = journalEntryDocumentDetailUnitRepository;
 
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
@@ -25,42 +33,60 @@ namespace CAPS.CORPACCOUNTING.Journals
         {
 
             await ValidateJournalUnitAsync(journalUnit);
-            return await JournalEntryDocumentUnitRepository.InsertAndGetIdAsync(journalUnit);
+            return await _journalEntryDocumentUnitRepository.InsertAndGetIdAsync(journalUnit);
         }
-
 
         [UnitOfWork]
-        public virtual async Task<long> CreateRecurringAsync(long journalId)
+        public virtual async Task<long> CreateRecurringAsync(long journalId,int tenantId)
         {
-            var newjournalDocumentunit = JournalEntryDocumentUnitRepository.Get(journalId);
+            _unitOfWorkManager.Current.SetTenantId(tenantId);
+            {
+                JournalEntryDocumentUnit recurJournalDocument = new JournalEntryDocumentUnit();
+                var journalDocumentunit = _journalEntryDocumentUnitRepository.Get(journalId);
 
-           // Adding the Parent Reference
-            newjournalDocumentunit.OriginalDocumentId = journalId;
+                Mapper.CreateMap<JournalEntryDocumentUnit, JournalEntryDocumentUnit>()
+                    .ForMember(dto => dto.Id, options => options.Ignore());
+                Mapper.Map(journalDocumentunit, recurJournalDocument);
 
-            // Changing the Description
-            newjournalDocumentunit.DocumentReference= newjournalDocumentunit.DocumentReference+"-"+
-            JournalEntryDocumentUnitRepository.GetAll().Count(p => p.OriginalDocumentId == journalId) + 1;
+                // Adding the Parent Reference
+                recurJournalDocument.OriginalDocumentId = journalId;
+                recurJournalDocument.RecurDocId = journalId;
+                // Changing the Description
+                recurJournalDocument.DocumentReference = recurJournalDocument.DocumentReference + "-" +
+                                                           _journalEntryDocumentUnitRepository.GetAll()
+                                                               .Count(p => p.OriginalDocumentId == journalId) + 1;
 
-           // await ValidateJournalUnitAsync(newjournalDocumentunit);
-            return await JournalEntryDocumentUnitRepository.InsertAndGetIdAsync(newjournalDocumentunit);
+                // await ValidateJournalUnitAsync(newjournalDocumentunit);
+                var accountingDocumentId = await _journalEntryDocumentUnitRepository.InsertAndGetIdAsync(recurJournalDocument);
+
+                //Getting journal details by AccountingDocumentId
+                var newJournalDetails = await _journalEntryDocumentDetailUnitRepository.GetAllListAsync(u => u.AccountingDocumentId == journalId);
+                foreach (var journals in newJournalDetails)
+                {
+                    journals.AccountingDocumentId = accountingDocumentId;
+                    await _journalEntryDocumentDetailUnitRepository.InsertAsync(journals);
+                }
+                return accountingDocumentId;
+            }
         }
+
         public virtual async Task UpdateAsync(JournalEntryDocumentUnit journalUnit)
         {
             await ValidateJournalUnitAsync(journalUnit);
-            await JournalEntryDocumentUnitRepository.UpdateAsync(journalUnit);
+            await _journalEntryDocumentUnitRepository.UpdateAsync(journalUnit);
         }
 
         public virtual async Task DeleteAsync(IdInput input)
         {
-            await JournalEntryDocumentUnitRepository.DeleteAsync(input.Id);
+            await _journalEntryDocumentUnitRepository.DeleteAsync(input.Id);
         }
         protected virtual async Task ValidateJournalUnitAsync(JournalEntryDocumentUnit journalunit)
         {
             //Validating if Duplicate DocumentReference(Journal#) exists
-            if (JournalEntryDocumentUnitRepository != null)
+            if (_journalEntryDocumentUnitRepository != null)
             {
 
-                var journals = (await JournalEntryDocumentUnitRepository.
+                var journals = (await _journalEntryDocumentUnitRepository.
                     GetAllListAsync(p => p.DocumentReference == journalunit.DocumentReference && p.OrganizationUnitId == journalunit.OrganizationUnitId
                         && p.TypeOfAccountingDocumentId == TypeOfAccountingDocument.GeneralLedger));
 
@@ -81,5 +107,7 @@ namespace CAPS.CORPACCOUNTING.Journals
 
             }
         }
+
+
     }
 }

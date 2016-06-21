@@ -52,13 +52,16 @@ namespace CAPS.CORPACCOUNTING.BackgroundJobs
         public Task AddOrUpdateAsync<TJob, TArgs>(string jobId, TArgs args, string cronExpressions, BackgroundJobPriority priority = BackgroundJobPriority.Normal)
             where TJob : IBackgroundJob<TArgs>
         {
+            
             RecurringJob.AddOrUpdate<TJob>(jobId,job => job.Execute(args), cronExpressions);
+            Logger.Info("jobId :" + jobId + "is Created.");
             return Task.FromResult(0);
         }
 
-        public bool DeleteJob(string jobId)
+        public void DeleteJob(string jobId)
         {
-           return BackgroundJob.Delete(jobId);
+            RecurringJob.RemoveIfExists(jobId);
+            Logger.Info("jobId :" + jobId + "is deleted.");
         }
     }
 }

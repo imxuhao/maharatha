@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 
@@ -84,5 +85,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
        /// </summary>
        /// <returns></returns>
        Task<List<BankAccountCacheItem>> GetBankAccountList(AutoSearchInput input);
+
+
+
+        /// <summary>
+        /// Get Vendors, Accounts, Job or Division, Tax Credit and Sub Account List values by Type
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetListByNames(NameValueInputList input);
     }
 }

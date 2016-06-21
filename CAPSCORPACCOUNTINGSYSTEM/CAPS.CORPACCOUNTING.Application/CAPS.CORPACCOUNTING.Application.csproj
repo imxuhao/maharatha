@@ -187,6 +187,7 @@
     <Compile Include="Authorization\Users\Profile\Dto\UpdateProfilePictureInput.cs" />
     <Compile Include="Authorization\Users\UserLinkAppService.cs" />
     <Compile Include="Authorization\Users\UserLoginAppService.cs" />
+    <Compile Include="BackgroundJobs\Dto\BackgroundJobInput.cs" />
     <Compile Include="BackgroundJobs\JournalEntryBackGroundJob.cs" />
     <Compile Include="BackgroundJobs\SimpleSendEmailJob.cs" />
     <Compile Include="BackgroundJobs\SimpleSendEmailJobArgs.cs" />
@@ -388,6 +389,7 @@
     <Compile Include="Masters\Dto\GetUserViewSettingsUnitDto.cs" />
     <Compile Include="Masters\Dto\IdOutputDto.cs" />
     <Compile Include="Masters\Dto\LocationSetUnitDto.cs" />
+    <Compile Include="Masters\Dto\NameValueInputList.cs" />
     <Compile Include="Masters\Dto\TaxCreditUnitDto.cs" />
     <Compile Include="Masters\Dto\UpdateLocationSetUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateLocationSetUnitInput.cs" />

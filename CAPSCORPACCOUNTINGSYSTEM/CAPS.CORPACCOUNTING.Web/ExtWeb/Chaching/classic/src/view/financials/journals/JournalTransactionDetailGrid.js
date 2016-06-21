@@ -37,16 +37,6 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             dataLoadClass: 'Chaching.store.utilities.autofill.JobDivisionStore',
             isMandatory:true,
             filterField: {
-                //xtype: 'combobox',
-                //store: new Chaching.store.utilities.autofill.JobDivisionStore(),
-                //valueField: 'creditJobNumber',
-                //displayField: 'creditJobNumber',
-                //queryMode: 'remote',
-                //minChars: 2,
-                //useDisplayFieldToSearch: true,
-                //listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                //emptyText: app.localize('SearchText')
-
                 xtype: 'chachingcombobox',
                 store: new Chaching.store.utilities.autofill.JobDivisionStore(),
                 valueField: 'jobId',
@@ -89,18 +79,8 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                         destroy: abp.appPath + 'api/services/app/jobUnit/DeleteJobUnit'
                     }
                 }
-
-
             },
             editor: {
-                //xtype: 'combobox',
-                //store: new Chaching.store.utilities.autofill.JobDivisionStore(),
-                //valueField: 'creditJobId',
-                //displayField: 'creditJobNumber',
-                //queryMode: 'remote',
-                //minChars: 2,
-                //listConfig: Chaching.utilities.ChachingGlobals.comboListConfig
-
                 xtype: 'chachingcombobox',
                 store: new Chaching.store.utilities.autofill.JobDivisionStore(),
                 valueField: 'creditJobId',
@@ -142,8 +122,10 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                         update: abp.appPath + 'api/services/app/jobUnit/UpdateJobUnit',
                         destroy: abp.appPath + 'api/services/app/jobUnit/DeleteJobUnit'
                     }
+                },
+                listeners: {
+                    beforequery: 'beforeJobDivisionQuery'
                 }
-
             }
         }, {
             xtype: 'gridcolumn',
@@ -157,16 +139,6 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             isMandatory: true,
             dataLoadClass: 'Chaching.store.utilities.autofill.AccountsStore',
             filterField: {
-                //xtype: 'combobox',
-                //store: new Chaching.store.utilities.autofill.AccountsStore(),
-                //valueField: 'creditAccountNumber',
-                //displayField: 'creditAccountNumber',
-                //queryMode: 'remote',
-                //minChars: 2,
-                //useDisplayFieldToSearch:true,
-                //listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                //emptyText: app.localize('SearchText')
-
                 xtype: 'chachingcombobox',
                 store: new Chaching.store.utilities.autofill.AccountsStore(),
                 valueField: 'accountId',
@@ -174,11 +146,6 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                 queryMode: 'remote',
                 minChars: 2,
                 useDisplayFieldToSearch: true,
-                listConfig: {
-                    minWidth: 400,
-                    minHeight: 150,
-                    maxHeight: 250
-                },
                 modulePermissions: {
                     read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
                     create: false,//abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
@@ -214,21 +181,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                         destroy: abp.appPath + 'api/services/app/linesUnit/DeleteLineUnit'
                     }
                 }
-
-
             }, editor: {
-
-                //xtype: 'combobox',
-                //store: new Chaching.store.utilities.autofill.AccountsStore(),
-                //valueField: 'creditAccountId',
-                //displayField: 'creditAccountNumber',
-                //queryMode: 'remote',
-                //minChars: 2,
-                //listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                //listeners: {
-                //    beforequery: 'beforeAccountQuery'
-                //}
-
                 xtype: 'chachingcombobox',
                 store: new Chaching.store.utilities.autofill.AccountsStore(),
                 valueField: 'creditAccountId',
@@ -236,11 +189,6 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                 queryMode: 'remote',
                 minChars: 2,
                 useDisplayFieldToSearch: true,
-                listConfig: {
-                    minWidth: 400,
-                    minHeight: 150,
-                    maxHeight: 250
-                },
                 modulePermissions: {
                     read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
                     create: false,//abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
@@ -275,8 +223,10 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                         update: abp.appPath + 'api/services/app/linesUnit/UpdateLineUnit',
                         destroy: abp.appPath + 'api/services/app/linesUnit/DeleteLineUnit'
                     }
+                },
+                listeners: {
+                    beforequery: 'beforeAccountQuery'
                 }
-
             }
         }, {
             xtype: 'gridcolumn',
@@ -287,7 +237,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             width: 100,
             valueField: 'creditSubAccountId1',
             dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccountNumber1'),
+            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccountNumber1', true),
             editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccountNumber1')
             ////TODO: add remaining combo once accounting field configuration is done
         }, {
@@ -299,7 +249,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             width: 100,
             valueField: 'creditSubAccountId2',
             dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId2', 'creditSubAccountNumber2'),
+            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId2', 'creditSubAccountNumber2', true),
             editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId2', 'creditSubAccountNumber2')
             ////TODO: add remaining combo once accounting field configuration is done
         }]
@@ -312,17 +262,6 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
         valueField: 'vendorId',
         dataLoadClass: 'Chaching.store.utilities.autofill.VendorsStore',
         filterField: {
-
-            //xtype: 'combobox',
-            //store: new Chaching.store.utilities.autofill.VendorsStore(),
-            //valueField: 'vendorName',
-            //displayField: 'vendorName',
-            //queryMode: 'remote',
-            //minChars: 2,
-            //useDisplayFieldToSearch: true,
-            //listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-            //emptyText: app.localize('SearchText')
-
             xtype: 'chachingcombobox',
             store: new Chaching.store.utilities.autofill.VendorsStore(),
             valueField: 'vendorId',
@@ -330,14 +269,9 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             queryMode: 'remote',
             minChars: 2,
             useDisplayFieldToSearch: true,
-            listConfig: {
-                minWidth: 550,
-                minHeight: 150,
-                maxHeight: 250
-            },
             modulePermissions: {
                 read: abp.auth.isGranted('Pages.Payables.Vendors'),
-                create: false,//abp.auth.isGranted('Pages.Payables.Vendors.Create'),
+                create: abp.auth.isGranted('Pages.Payables.Vendors.Create'),
                 edit: abp.auth.isGranted('Pages.Payables.Vendors.Edit'),
                 destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete')
             },
@@ -353,19 +287,6 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             isTwoEntityPicker: false
 
         }, editor: {
-
-
-            //xtype: 'combobox',
-            //store: new Chaching.store.utilities.autofill.VendorsStore(),
-            //valueField: 'vendorId',
-            //displayField: 'vendorName',
-            //queryMode: 'remote',
-            //minChars: 2,
-            //useDisplayFieldToSearch: true,
-            //listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-            //emptyText: app.localize('SearchText')
-
-
             xtype: 'chachingcombobox',
             store: new Chaching.store.utilities.autofill.VendorsStore(),
             valueField: 'vendorId',
@@ -373,14 +294,9 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             queryMode: 'remote',
             minChars: 2,
             useDisplayFieldToSearch: true,
-            listConfig: {
-                minWidth: 550,
-                minHeight: 150,
-                maxHeight: 250
-            },
             modulePermissions: {
                 read: abp.auth.isGranted('Pages.Payables.Vendors'),
-                create: false,//abp.auth.isGranted('Pages.Payables.Vendors.Create'),
+                create: abp.auth.isGranted('Pages.Payables.Vendors.Create'),
                 edit: abp.auth.isGranted('Pages.Payables.Vendors.Edit'),
                 destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete')
             },
@@ -393,7 +309,10 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             createEditEntityType: 'payables.vendors',
             createEditEntityGridController: 'payables-vendors-vendorsgrid',
             entityType: 'Vendor',
-            isTwoEntityPicker: false
+            isTwoEntityPicker: false,
+            listeners: {
+                beforequery:'onBeforeVendorQuery'
+            }
         }
     }],
     columnOrder: ['amount', 'debits', 'credits', 'itemMemo', 'vendorName', 'accountRef1', 'taxRebateNumber', 'isAsset']

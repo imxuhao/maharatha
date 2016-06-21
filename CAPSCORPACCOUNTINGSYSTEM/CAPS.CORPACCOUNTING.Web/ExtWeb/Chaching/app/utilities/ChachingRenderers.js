@@ -122,6 +122,12 @@
         else
             return '<i class="fa fa-close font-yellow-gold"  style="color:#E00353"></i>';
     },
+    splitColumnMarkRenderer: function (val, meta, record, rowIndex) {
+        if (val || record.get('isSplit'))
+            return '<i class="fa fa-check font-green"  style="color:#32c5d2;" ></i>';
+        else
+            return '<i class="fa fa-unlink"  style="color:#2403a7;font-weight:600;"></i>';
+    },
     languagesTextsEditIcon: function (val, meta, record, rowIndex) {
         return '<i class="fa fa-edit" ></i>';
     },

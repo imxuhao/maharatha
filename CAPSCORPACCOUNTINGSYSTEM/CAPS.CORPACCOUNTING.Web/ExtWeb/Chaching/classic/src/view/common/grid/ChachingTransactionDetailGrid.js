@@ -137,6 +137,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         var columns = me.getColumnsForGrid();
         var modulePermissions = me.getModulePermissions();
         if (columns) {
+            if (modulePermissions.edit) {
+                columns.push(me.getSplitColumn());
+            }
             if (modulePermissions.destroy) {
                 columns.push(me.getDeleteActionColumn());
             }
@@ -233,30 +236,30 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         me.callParent(arguments);
 
         ///load all required data for copy/paste if column has combo as editor
-        var allColumns = me.columns,
-            length = allColumns.length;
-        for (var i = 0; i < length; i++) {
-            var col = allColumns[i];
-            if (col.valueField) { //if column has combo editor
-                var dataClassName = col.dataLoadClass;
-                if (!dataClassName) {
-                    Ext.Error.raise('Please specify dataLoadClass for column' + col.dataIndex);
-                }
-                var loadClass = Ext.create(dataClassName);
-                loadClass.column = col;
-                loadClass.load({
-                    callback: function(records, operation, success) {
-                        if (this.column) {
-                            var remoteData = [];
-                            Ext.each(records, function(record) {
-                                remoteData.push(record.data);
-                            });
-                            this.column.remoteData = remoteData;
-                        }
-                    }
-                });
-            }
-        }
+        //var allColumns = me.columns,
+        //    length = allColumns.length;
+        //for (var i = 0; i < length; i++) {
+        //    var col = allColumns[i];
+        //    if (col.valueField) { //if column has combo editor
+        //        var dataClassName = col.dataLoadClass;
+        //        if (!dataClassName) {
+        //            Ext.Error.raise('Please specify dataLoadClass for column' + col.dataIndex);
+        //        }
+        //        var loadClass = Ext.create(dataClassName);
+        //        loadClass.column = col;
+        //        loadClass.load({
+        //            callback: function(records, operation, success) {
+        //                if (this.column) {
+        //                    var remoteData = [];
+        //                    Ext.each(records, function(record) {
+        //                        remoteData.push(record.data);
+        //                    });
+        //                    this.column.remoteData = remoteData;
+        //                }
+        //            }
+        //        });
+        //    }
+        //}
     },
     getDefaultActionButtons:function() {
         var me = this,
@@ -333,6 +336,32 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             menuDisabled: true,
             handler: 'onDeleteClicked'
         };
+    },
+    getSplitColumn: function () {
+        return{
+            xtype: 'gridcolumn',
+            name: 'isSplit',
+            dataIndex: 'isSplit',
+            text: app.localize('Split'),
+            width: 50,
+            hideable: false,
+            movable: false,
+            resizable: false,
+            sortable: false,
+            groupable: false,
+            menuDisabled: true,
+            renderer: Chaching.utilities.ChachingRenderers.splitColumnMarkRenderer,
+            editor: {
+                xtype: 'numberfield',
+                hideTrigger:true,
+                lazyRender: true,
+                minValue: 1,
+                maxValue:100,
+                listeners: {
+                    specialkey: 'onSplitClicked'
+                }
+            }
+        }
     },
     getColumnsForGrid:function() {
         var me = this,
@@ -432,10 +461,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                             update: abp.appPath + 'api/services/app/jobUnit/UpdateJobUnit',
                             destroy: abp.appPath + 'api/services/app/jobUnit/DeleteJobUnit'
                         }
-                    },
-                    listeners: {
-                        beforequery:'beforeJobDivisionQuery'
                     }
+                   
                 }, editor: {
                     xtype: 'chachingcombobox',
                     store: new Chaching.store.utilities.autofill.JobDivisionStore(),
@@ -537,9 +564,6 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                             update: abp.appPath + 'api/services/app/linesUnit/UpdateLineUnit',
                             destroy: abp.appPath + 'api/services/app/linesUnit/DeleteLineUnit'
                         }
-                    },
-                    listeners: {
-                        beforequery: 'beforeAccountQuery'
                     }
                 }, editor: {
                     xtype: 'chachingcombobox',
@@ -589,43 +613,6 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     }
                 }
             },
-
-            //{
-            //    xtype: 'gridcolumn',
-            //    dataIndex: 'accountNumber',
-            //    name: 'accountNumber',
-            //    hideable: false,
-            //    text: app.localize('LineNumber').initCap(),
-            //    width: '10%',
-            //    valueField: 'accountId',
-            //    dataLoadClass: 'Chaching.store.utilities.autofill.AccountsStore',
-            //    isMandatory: true,
-            //    filterField: {
-            //        xtype: 'combobox',
-            //        store: new Chaching.store.utilities.autofill.AccountsStore(),
-            //        valueField: 'accountNumber',
-            //        displayField: 'accountNumber',
-            //        queryMode: 'remote',
-            //        minChars: 2,
-            //        useDisplayFieldToSearch: true,
-            //        listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-            //        emptyText: app.localize('SearchText')
-            //    }, editor: {
-            //        xtype: 'combobox',
-            //        store: new Chaching.store.utilities.autofill.AccountsStore(),
-            //        valueField: 'accountId',
-            //        displayField: 'accountNumber',
-            //        queryMode: 'remote',
-            //        minChars: 2,
-            //        listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-            //        emptyText: app.localize('SearchText'),
-            //        listeners: {
-            //            beforequery: 'beforeAccountQuery'
-            //        }
-            //    }
-            //},
-
-
             {
                 xtype: 'gridcolumn',
                 dataIndex: 'subAccountNumber1',
@@ -634,7 +621,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId1',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccountNumber1'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccountNumber1',true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccountNumber1')
             },{
                 xtype: 'gridcolumn',
@@ -644,7 +631,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId2',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId2', 'subAccountNumber2'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId2', 'subAccountNumber2',true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId2', 'subAccountNumber2')
             }, {
                 xtype: 'gridcolumn',
@@ -654,7 +641,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId3',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId3', 'subAccountNumber3'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId3', 'subAccountNumber3',true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId3', 'subAccountNumber3')
             }, {
                 xtype: 'gridcolumn',
@@ -664,7 +651,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId4',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId4', 'subAccountNumber4'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId4', 'subAccountNumber4',true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId4', 'subAccountNumber4')
             }, {
                 xtype: 'gridcolumn',
@@ -674,7 +661,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId5',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId5', 'subAccountNumber5'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId5', 'subAccountNumber5', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId5', 'subAccountNumber5')
             }, {
                 xtype: 'gridcolumn',
@@ -684,7 +671,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId6',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId6', 'subAccountNumber6'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId6', 'subAccountNumber6', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId6', 'subAccountNumber6')
             }, {
                 xtype: 'gridcolumn',
@@ -694,7 +681,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId7',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId7', 'subAccountNumber7'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId7', 'subAccountNumber7', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId7', 'subAccountNumber7')
             }, {
                 xtype: 'gridcolumn',
@@ -704,7 +691,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId8',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId8', 'subAccountNumber8'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId8', 'subAccountNumber8', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId8', 'subAccountNumber8')
             }, {
                 xtype: 'gridcolumn',
@@ -714,7 +701,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId9',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId9', 'subAccountNumber9'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId9', 'subAccountNumber9', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId9', 'subAccountNumber9')
             }, {
                 xtype: 'gridcolumn',
@@ -724,7 +711,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 valueField: 'subAccountId10',
                 dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
-                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId10', 'subAccountNumber10'),
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId10', 'subAccountNumber10', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId10', 'subAccountNumber10')
             }, {
                 xtype: 'gridcolumn',
@@ -742,8 +729,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
-                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                    emptyText: app.localize('SearchText')
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig
                 }, editor: {
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.T41099Store(),
@@ -752,8 +738,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
-                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
-                    emptyText: app.localize('SearchText')
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig
                 }
             }, {
                 xtype: 'gridcolumn',

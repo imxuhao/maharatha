@@ -79,13 +79,33 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         gridStore.getSorters().clear();
         gridStore.reload();
     },
-    onSplitClicked: function () {
+    onSplitClicked: function (field) {
         var me = this,
-            view = me.getView(),
-            selectionModel = view.getSelectionModel(),
-            selectedRecords = selectionModel.getSelection(),
-            gridStore = view.getStore();
-
+           view = me.getView(),
+           gridStore = view.getStore();
+        var isInlineSplit = false,
+            editor = undefined,
+            cellRecordIndex = undefined;
+        if (field.xtype === "numberfield") {
+            editor = field.up();
+            if (editor && editor.context) {
+                cellRecordIndex = editor.context.record;
+                isInlineSplit = true;
+            }
+        }
+       
+        var multiplyOfField = view.down('numberfield[itemId=multiplyOf]'), multiplyOf = multiplyOfField.getValue();
+        if (isInlineSplit && cellRecordIndex) {
+            view.getSelectionModel().select(cellRecordIndex);
+            multiplyOfField = field;
+            multiplyOf = multiplyOfField.getValue();
+            if (editor && editor.editingPlugin) {
+                var cellEditing = editor.editingPlugin;
+                cellEditing.completeEdit();
+            }
+        }
+        var selectionModel = view.getSelectionModel(),
+            selectedRecords = selectionModel.getSelection();
         if (view.isInViewMode) return;
 
         if (selectedRecords && selectedRecords.length === 1) {
@@ -99,7 +119,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
                 abp.notify.info(app.localize('EnterAmountToSplit'), app.localize('ValidationFailed'));
                 return;
             }
-            var multiplyOfField = view.down('numberfield[itemId=multiplyOf]'), multiplyOf = multiplyOfField.getValue();
+            
             var modelClass = gridStore.getModel(),
                 className = modelClass.$className;
             if (multiplyOfField.validate()) {
@@ -217,6 +237,35 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             if (this.combo) this.combo.focus();
         });
     },
+    onBeforeSubAccountQuery:function(queryPlan, eOpts) {
+        var me = this,
+            view = me.getView(),
+            combo = queryPlan.combo,
+            comboStore = combo.getStore();
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on('load', function () {
+            if (this.combo) this.combo.focus();
+        });
+    },
+    onBeforeVendorQuery: function (queryPlan, eOpts) {
+        var me = this,
+            view = me.getView(),
+            combo = queryPlan.combo,
+            comboStore = combo.getStore();
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on('load', function () {
+            if (this.combo) this.combo.focus();
+        });
+    },
+    emptyFunction:function(){},
     onBeforeGridEdit: function (editor, context, eOpts) {
         var me = this, view = me.getView();
 
@@ -225,6 +274,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         if (!moduleSpecificChecks) {
             return false;
         }
+        if (context.field === 'isSplit' && context.record.get('isSplit'))return false;
         var cell = view.getView().getCell(context.record, context.column);
         if (cell) {
             cell.removeCls("x-invalid-cell-value");

@@ -517,16 +517,19 @@ Ext.define('Chaching.components.form.field.ComboBox', {
     cleanUpPicker: function (me, view, selModel, collapse) {
         var navigationModel = undefined;
         if (selModel) {
+            selModel.deselectAll();
             navigationModel = selModel.navigationModel;
-            if (navigationModel && navigationModel.cell)navigationModel.cell.blur();
+            if (navigationModel && navigationModel.cell) {
+                navigationModel.cell.removeCls('x-grid-item-focused');
+            }
         }
         view.blur();
         me.picker.blur();
+        view.refresh();
         me.focus();
+        if (me.lastInfoPanel) me.lastInfoPanel.hide();
         if (collapse)
             me.collapse();
-        selModel.deselectAll();
-        if (me.lastInfoPanel) me.lastInfoPanel.hide();
     },
     getActionToolBar:function() {
         var me = this,
@@ -894,7 +897,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
         var me = this,
             entityTitle = '<h3>' + title + '</h3>',
             html = '<div class="leftarrowdiv" style="width:97% !important;left:11px !important;height:100% !important"><table style="height:100%; width:100%;">',
-            height = 15;
+            height = 40;
         if (response) {
             for (var key in response) {
                 if (response.hasOwnProperty(key)) {
@@ -1004,8 +1007,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
             var me = this;
             var idVal = record.data[me.valueField];
             var nameVal = record.data[me.displayField];
-            me.setValue(idVal);
-            me.setRawValue(nameVal);
+            me.setValue(record);
             me.fireEvent('change', me, idVal, record);
             me.collapse();
             me.fireEvent('select', me, record);

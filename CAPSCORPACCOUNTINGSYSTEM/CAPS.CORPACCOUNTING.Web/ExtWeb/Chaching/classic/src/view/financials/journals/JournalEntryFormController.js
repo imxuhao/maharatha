@@ -42,6 +42,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
             for (var i = 0; i < rowLength; i++) {
                 var rec = modifiedRecords[i];
                 if (rec.dirty) {
+                    rec.set('parentRec', null);
                     if (rec.get('accountingDocumentId') === 0 || !rec.get('accountingDocumentId')) {
                         rec.set('accountingDocumentId', transactionId);
                     }

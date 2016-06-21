@@ -23,20 +23,10 @@
     },
     displayNegAmtInBrackets: true,
     splitGroupCls: ['split-group1', 'split-group2', 'split-group3', 'split-group4', 'split-group5', 'split-group6', 'split-group7', 'split-group8'],
-    getSubAccountCombo: function (valueField, displayField) {
+    getSubAccountCombo: function (valueField, displayField,isFilter) {
         var me = this;
+        var beforeQuery = (isFilter ? 'emptyFunction' : 'onBeforeSubAccountQuery');
         return {
-            //xtype: 'combobox',
-            //store: new Chaching.store.utilities.autofill.SubAccountsStore(),
-            //valueField: valueField,
-            //displayField: displayField,
-            //queryMode: 'remote',
-            //minChars: 2,
-            //useDisplayFieldToSearch: true,
-            //listConfig: me.comboListConfig,
-            //emptyText: app.localize('SearchText')
-
-
             xtype: 'chachingcombobox',
             store: new Chaching.store.utilities.autofill.SubAccountsStore(),
             valueField: valueField,
@@ -46,7 +36,7 @@
             useDisplayFieldToSearch: true,
             modulePermissions: {
                 read: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts'),
-                create: false,//abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Create'),
+                create: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Create'),
                 edit: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Edit'),
                 destroy: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Delete')
             },
@@ -59,7 +49,10 @@
             createEditEntityType: 'financials.accounts.subaccounts',
             createEditEntityGridController: 'financials-accounts-subaccountsgrid',
             entityType: 'SubAccount',
-            isTwoEntityPicker: false
+            isTwoEntityPicker: false,
+            listeners: {
+                beforequery: beforeQuery
+            }
         };
     },
     getTextField: function (emptyText) {

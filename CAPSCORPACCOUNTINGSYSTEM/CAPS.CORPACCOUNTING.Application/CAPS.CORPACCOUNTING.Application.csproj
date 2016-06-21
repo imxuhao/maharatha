@@ -283,6 +283,7 @@
     <Compile Include="GenericSearch\Dto\SearchInputDto.cs" />
     <Compile Include="GenericSearch\TextSearch.cs" />
     <Compile Include="Helper\CacheExtensionHelper.cs" />
+    <Compile Include="Helper\CacheItems\BankAccountCacheItem.cs" />
     <Compile Include="Helper\CacheItems\AccountCacheItem.cs" />
     <Compile Include="Helper\CacheItems\SubAccountRestrictionCacheItem.cs" />
     <Compile Include="Helper\CacheItems\SubAccountCacheItem.cs" />

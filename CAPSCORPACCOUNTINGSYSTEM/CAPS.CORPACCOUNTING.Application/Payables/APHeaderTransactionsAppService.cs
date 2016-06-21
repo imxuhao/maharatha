@@ -21,10 +21,12 @@ using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Journals.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Authorization.Users;
+using CAPS.CORPACCOUNTING.PettyCash;
 
 namespace CAPS.CORPACCOUNTING.Payables
 {
-    [AbpAuthorize] //This is to ensure only logged in user has access to this module.
+    [AbpAuthorize(AppPermissions.Pages_Payables_Invoices)] //This is to ensure only logged in user has access to this module.
     public class APHeaderTransactionsAppService : CORPACCOUNTINGServiceBase, IAPHeaderTransactionsAppService
     {
         private readonly APHeaderTransactionsUnitManager _apHeaderTransactionsUnitManager;
@@ -37,13 +39,19 @@ namespace CAPS.CORPACCOUNTING.Payables
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
         private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
+        private readonly IRepository<User, long> _userUnitRepository;
+        private readonly IRepository<PettyCashAccountUnit, long> _pettyCashAccountUnitRepository;
+        private readonly IRepository<VendorPaymentTermUnit> _vendorPaymentTermUnitRepository;
+        private readonly IRepository<BankAccountUnit,long> _bankAccountUnitRepository;
+
+
 
         public APHeaderTransactionsAppService(APHeaderTransactionsUnitManager apHeaderTransactionsUnitManager,
             IRepository<ApHeaderTransactions, long> apHeaderTransactionsUnitRepository, IRepository<VendorUnit> vendorUnitRepository,
             IRepository<BatchUnit> batchUnitRepository, IRepository<InvoiceEntryDocumentDetailUnit, long> invoiceEntryDocumentDetailUnitRepository,
             InvoiceEntryDocumentDetailUnitManager invoiceEntryDocumentDetailUnitManager, IRepository<JobUnit> jobUnitRepository,
             IRepository<AccountUnit, long> accountUnitRepository, IRepository<SubAccountUnit, long> subAccountUnitRepository,
-            IRepository<TaxCreditUnit> taxCreditUnitRepository)
+            IRepository<TaxCreditUnit> taxCreditUnitRepository, IRepository<User, long> userUnitRepository, IRepository<PettyCashAccountUnit, long> pettyCashAccountUnitRepository, IRepository<BankAccountUnit, long> bankAccountUnitRepository, IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository)
         {
             _apHeaderTransactionsUnitManager = apHeaderTransactionsUnitManager;
             _apHeaderTransactionsUnitRepository = apHeaderTransactionsUnitRepository;
@@ -55,6 +63,10 @@ namespace CAPS.CORPACCOUNTING.Payables
             _jobUnitRepository = jobUnitRepository;
             _subAccountUnitRepository = subAccountUnitRepository;
             _taxCreditUnitRepository = taxCreditUnitRepository;
+            _userUnitRepository = userUnitRepository;
+            _pettyCashAccountUnitRepository = pettyCashAccountUnitRepository;
+            _bankAccountUnitRepository = bankAccountUnitRepository;
+            _vendorPaymentTermUnitRepository = vendorPaymentTermUnitRepository;
         }
 
         /// <summary>
@@ -80,7 +92,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                 foreach (var invoiceEntryDocumentDetail in input.InvoiceEntryDocumentDetailList)
                 {
                     invoiceEntryDocumentDetail.AccountingDocumentId = response.Id;
-                    var invoiceEntryDocumentDetailUnit =invoiceEntryDocumentDetail.MapTo<InvoiceEntryDocumentDetailUnit>();
+                    var invoiceEntryDocumentDetailUnit = invoiceEntryDocumentDetail.MapTo<InvoiceEntryDocumentDetailUnit>();
                     await _invoiceEntryDocumentDetailUnitManager.CreateAsync(invoiceEntryDocumentDetailUnit);
                 }
             }
@@ -116,7 +128,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                     }
                     else if (invoiceEntryDocumentDetail.AccountingItemId > 0)
                     {
-                        var invoiceEntryDocumentDetailUnit =await _invoiceEntryDocumentDetailUnitRepository.GetAsync(
+                        var invoiceEntryDocumentDetailUnit = await _invoiceEntryDocumentDetailUnitRepository.GetAsync(
                                     invoiceEntryDocumentDetail.AccountingItemId);
                         Mapper.Map(invoiceEntryDocumentDetail, invoiceEntryDocumentDetailUnit);
                         await _invoiceEntryDocumentDetailUnitManager.UpdateAsync(invoiceEntryDocumentDetailUnit);
@@ -125,7 +137,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                     {
                         IdInput<long> idInput = new IdInput<long>()
                         {
-                            Id = (invoiceEntryDocumentDetail.AccountingItemId*(-1))
+                            Id = (invoiceEntryDocumentDetail.AccountingItemId * (-1))
                         };
                         await _invoiceEntryDocumentDetailUnitManager.DeleteAsync(idInput);
                     }
@@ -158,16 +170,33 @@ namespace CAPS.CORPACCOUNTING.Payables
         [AbpAuthorize(AppPermissions.Pages_Payables_Invoices)]
         public async Task<PagedResultOutput<APHeaderTransactionsUnitDto>> GetAPHeaderTransactionUnits(SearchInputDto input)
         {
+            bool unPosted = false;
             var query = from invoices in _apHeaderTransactionsUnitRepository.GetAll()
-                            //  join user in _userUnitRepository.GetAll() on journals.CreatorUserId equals user.Id
-                            //  into users
+                        join user in _userUnitRepository.GetAll() on invoices.CreatorUserId equals user.Id
+                        into users from userunits in users.DefaultIfEmpty()
+                        join pcaccount in _pettyCashAccountUnitRepository.GetAll() on invoices.PettyCashAccountId equals pcaccount.Id
+                           into pcaccountunit from pcaccountunits in pcaccountunit.DefaultIfEmpty()
+                        join account in _accountUnitRepository.GetAll() on pcaccountunits.AccountId equals account.Id
+                           into accountunit
+                        from accountunits in accountunit.DefaultIfEmpty()
+                        join paymentterms in _vendorPaymentTermUnitRepository.GetAll() on invoices.PaymentTermId equals paymentterms.Id
+                          into paymenttermsunit from paymenttermunits in paymenttermsunit.DefaultIfEmpty()
                         join batch in _batchUnitRepository.GetAll() on invoices.BatchId equals batch.Id
-                           into batchunit
-                        from batchunits in batchunit.DefaultIfEmpty()
+                           into batchunit from batchunits in batchunit.DefaultIfEmpty()
                         join vendor in _vendorUnitRepository.GetAll() on invoices.VendorId equals vendor.Id
-                            into vendorunit
-                        from vendors in vendorunit.DefaultIfEmpty()
-                        select new { Invoices = invoices, BatchName = batchunits.Description, VendorName = vendors.LastName };
+                            into vendorunit from vendors in vendorunit.DefaultIfEmpty()
+                        join bankaccount in _bankAccountUnitRepository.GetAll() on invoices.BankAccountId equals bankaccount.Id
+                            into bankaccountunit
+                        from bankaccounts in bankaccountunit.DefaultIfEmpty()
+                        select new
+                        {
+                            Invoices = invoices, BatchName = batchunits.Description, VendorName = vendors.LastName,
+                            CreatedUser= userunits.UserName,
+                            PaymentTerm = paymenttermunits.Description,
+                            BankAccount=bankaccounts.BankAccountNumber,
+                            PettyCashAccount=accountunits.Caption
+
+                        };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -175,7 +204,9 @@ namespace CAPS.CORPACCOUNTING.Payables
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-            query = query.Where(p => p.Invoices.OrganizationUnitId == input.OrganizationUnitId);
+            query = query.Where(p => p.Invoices.OrganizationUnitId == input.OrganizationUnitId)
+                .Where(u => u.Invoices.TypeOfAccountingDocumentId == TypeOfAccountingDocument.AccountsPayable &&
+                       u.Invoices.IsPosted == unPosted); 
 
 
             var resultCount = await query.CountAsync();
@@ -191,6 +222,12 @@ namespace CAPS.CORPACCOUNTING.Payables
                 var dto = item.Invoices.MapTo<APHeaderTransactionsUnitDto>();
                 dto.BatchName = item.BatchName;
                 dto.VendorName = item.VendorName;
+                dto.CreatedUser = item.CreatedUser;
+                dto.PaymentTerm = item.PaymentTerm;
+                dto.BankAccount = item.BankAccount;
+                dto.PettyCashAccount = item.PettyCashAccount;
+                dto.TypeOfCheckGroup = item.Invoices.TypeOfCheckGroupId != null ? item.Invoices.TypeOfCheckGroupId.ToDisplayName() : "";
+                dto.TypeOfInvoice = item.Invoices.TypeOfInvoiceId.ToDisplayName();
                 dto.AccountingDocumentId = item.Invoices.Id;
                 return dto;
             }).ToList());
@@ -249,13 +286,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                 return dto;
             }).ToList());
         }
-        /// <summary>
-        /// Get CheckGrouopList
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetCheckGrouopList()
-        {
-            return EnumList.GetCheckGrouopList();
-        }
+
+       
     }
 }

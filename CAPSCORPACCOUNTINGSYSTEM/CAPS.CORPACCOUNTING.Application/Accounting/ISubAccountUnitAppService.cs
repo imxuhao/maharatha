@@ -29,7 +29,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task DeleteBankAccountUnit(IdInput input);
+        Task DeleteSubAccountUnit(IdInput<long> input);
 
         /// <summary>
         /// Get the list of all SubAccount

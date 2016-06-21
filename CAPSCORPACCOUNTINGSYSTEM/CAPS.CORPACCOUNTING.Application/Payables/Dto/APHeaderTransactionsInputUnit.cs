@@ -6,6 +6,9 @@ using Abp.AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Payables.Dto
 {
+    /// <summary>
+    /// InvoiceEntryDocument InputDto
+    /// </summary>
     [AutoMapTo(typeof(ApHeaderTransactions))]
     public class APHeaderTransactionsInputUnit :AccountingHeaderTransactionInputUnit
     {

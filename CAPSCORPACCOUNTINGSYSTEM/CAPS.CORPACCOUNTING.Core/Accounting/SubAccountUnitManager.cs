@@ -38,7 +38,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             await SubAccountUnitRepository.UpdateAsync(subAccountUnit);
         }
 
-        public virtual async Task DeleteAsync(IdInput input)
+        public virtual async Task DeleteAsync(IdInput<long> input)
         {
             await SubAccountUnitRepository.DeleteAsync(p => p.Id == input.Id);
         }

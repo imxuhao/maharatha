@@ -48,11 +48,5 @@ namespace CAPS.CORPACCOUNTING.Payables
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<InvoiceEntryDocumentDetailUnitDto>> GetAPHeaderTransactionDetailUnitsByAccountingDocumentId(GetTransactionList input);
-
-        /// <summary>
-        /// Get CheckGrouopList 
-        /// </summary>
-        /// <returns></returns>
-        Task<List<NameValueDto>> GetCheckGrouopList();
     }
 }

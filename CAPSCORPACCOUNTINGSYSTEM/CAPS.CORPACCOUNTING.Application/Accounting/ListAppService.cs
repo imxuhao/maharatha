@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
-using Abp.Domain.Uow;
 using CAPS.CORPACCOUNTING.Helpers;
 using System.Data.Entity;
 using Abp.Linq.Extensions;
@@ -14,6 +13,7 @@ using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using CAPS.CORPACCOUNTING.PettyCash;
 using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.Accounting
@@ -34,13 +34,18 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly ISubAccountCache _subAccountCache;
         private readonly ISubAccountRestrictionCache _subAccountRestrictionCache;
         private readonly IRepository<SubAccountRestrictionUnit, long> _subAccountRestrictionRepository;
+        private readonly IRepository<PettyCashAccountUnit, long> _pettyCashAccountUnitRepository;
+        private readonly IRepository<VendorPaymentTermUnit> _vendorPaymentTermUnitRepository;
+        private readonly IBankAccountCache _bankAccountCache;
 
 
         public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
             CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
             IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
             IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache, IRepository<CoaUnit> coaUnit,
-            IRepository<SubAccountRestrictionUnit, long> subAccountRestrictionRepository, ISubAccountRestrictionCache subAccountRestrictionCache)
+            IRepository<SubAccountRestrictionUnit, long> subAccountRestrictionRepository, ISubAccountRestrictionCache subAccountRestrictionCache,
+            IRepository<PettyCashAccountUnit, long> pettyCashAccountUnitRepository, IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository,
+            IBankAccountCache bankAccountCache)
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -56,6 +61,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _coaUnit = coaUnit;
             _subAccountRestrictionRepository = subAccountRestrictionRepository;
             _subAccountRestrictionCache = subAccountRestrictionCache;
+            _pettyCashAccountUnitRepository = pettyCashAccountUnitRepository;
+            _vendorPaymentTermUnitRepository = vendorPaymentTermUnitRepository;
+            _bankAccountCache = bankAccountCache;
         }
 
 
@@ -136,7 +144,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<VendorCacheItem>> GetVendorList(AutoSearchInput input)
         {
-            
+
             var vendorCacheItemList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
             return vendorCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.FirstName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
@@ -183,5 +191,71 @@ namespace CAPS.CORPACCOUNTING.Accounting
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return locationSets;
         }
+
+        /// <summary>
+        /// Get CheckGrouopList
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetCheckGroupList()
+        {
+            return EnumList.GetCheckGrouopList();
+        }
+
+        /// <summary>
+        /// Get TypeOfInvoiceList
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeOfInvoiceList()
+        {
+            return EnumList.GetTypeOfInvoiceList();
+        }
+
+        /// <summary>
+        /// Get PettyCashAccountList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<AutoFillDto>> GetPettyCashAccountList(AutoSearchInput input)
+        {
+            var query = from pcaccount in _pettyCashAccountUnitRepository.GetAll()
+                        join account in _accountUnitRepository.GetAll() on pcaccount.AccountId equals account.Id
+                        select new { pcaccount, Caption = account.Caption, Description = account.Description };
+            var pcAccountList = await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
+                        p => p.pcaccount.OrganizationUnitId == input.OrganizationUnitId)
+                        .WhereIf(!string.IsNullOrEmpty(input.Query),
+                            p => p.Caption.Contains(input.Query) || p.Caption.Contains(input.Query))
+                        .Select(u => new AutoFillDto
+                        {
+                            Name = u.Caption,
+                            Value = u.pcaccount.Id.ToString(),
+                            Column1 = u.Description,
+                            Column2 = u.Caption
+                        }).ToListAsync();
+            return pcAccountList;
+        }
+
+        /// <summary>
+        /// Get VendorPaymentTermsList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetVendorPaymentTermsList(AutoSearchInput input)
+        {
+            var paymentTermsList =await _vendorPaymentTermUnitRepository.GetAll().WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) )
+                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString()}).ToListAsync();
+            return paymentTermsList;
+        }
+
+        /// <summary>
+        /// Get GetBankAccountList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<BankAccountCacheItem>> GetBankAccountList(AutoSearchInput input)
+        {
+            var bankCacheItemList = await _bankAccountCache.GetBankAccountCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            return bankCacheItemList.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.BankAccountName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.BankAccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
+        }
+
     }
 }

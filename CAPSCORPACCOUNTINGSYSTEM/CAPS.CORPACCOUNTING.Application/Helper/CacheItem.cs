@@ -28,6 +28,8 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
         public HashSet<SubAccountRestrictionCacheItem> SubAccountRestrictionCacheItemList { get; set; }
 
+        public HashSet<BankAccountCacheItem> BankAccountCacheItemList { get; set; }
+
         /// <summary>
         /// Gets or Sets Employee List
         /// </summary>
@@ -64,6 +66,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
                     break;
                 case CacheKeyStores.SubAccountRestrictionKey:
                     SubAccountRestrictionCacheItemList = new HashSet<SubAccountRestrictionCacheItem>();
+                    break;
+                case CacheKeyStores.BankAccountKey:
+                    BankAccountCacheItemList = new HashSet<BankAccountCacheItem>();
                     break;
                 default:
                     ItemList = new HashSet<AutoFillDto>();

@@ -31,6 +31,10 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public const string CacheSubAccountRestrictionStore = "SumitSubAccountRestriction";
         public const string SubAccountRestrictionKey = "SubAccountRestriction";
 
+        //BankAccountKeys
+        public const string CacheBankAccountStore = "SumitBankAccount";
+        public const string BankAccountKey = "BankAccount";
+
 
 
         public static string CalculateCacheKey(string sourceName, int tenantId, long? OrganizationUnitId)

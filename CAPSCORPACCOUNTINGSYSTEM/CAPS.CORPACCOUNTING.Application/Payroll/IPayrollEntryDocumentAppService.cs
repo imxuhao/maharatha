@@ -46,6 +46,6 @@ namespace CAPS.CORPACCOUNTING.Payroll
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<PayrollEntryDocumentDetailUnitDto>> GetPayrollEntryDocumentUnitsByAccountingDocumentId(GetTransactionList input);
+        Task<PagedResultOutput<PayrollEntryDocumentDetailUnitDto>> GetPayrollEntryDocumentDetailsByAccountingDocumentId(GetTransactionList input);
     }
 }

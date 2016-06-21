@@ -928,6 +928,36 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetCheckGroupList">
+            <summary>
+            Get CheckGrouopList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetTypeOfInvoiceList">
+            <summary>
+            Get TypeOfInvoiceList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetPettyCashAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get PettyCashAccountList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetVendorPaymentTermsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get VendorPaymentTermsList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetBankAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get GetBankAccountList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
             <summary>
             Create the SubAccount.
@@ -942,7 +972,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.DeleteBankAccountUnit(Abp.Application.Services.Dto.IdInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.DeleteSubAccountUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
             Delete the SubAccount based on SubAccountId.
             </summary>
@@ -1031,6 +1061,36 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetCheckGroupList">
+            <summary>
+            Get CheckGrouopList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetTypeOfInvoiceList">
+            <summary>
+            Get TypeOfInvoiceList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetPettyCashAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get PettyCashAccountList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetVendorPaymentTermsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get VendorPaymentTermsList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetBankAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get GetBankAccountList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">
             <summary>
             SubAccount AppService
@@ -1050,7 +1110,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.DeleteBankAccountUnit(Abp.Application.Services.Dto.IdInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.DeleteSubAccountUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
              delete Sub Account.
             </summary>
@@ -2629,6 +2689,62 @@
             <summary>
             Deleting FiscalPeriof By FiscalPeriod By Id
             </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem">
+            <summary>
+            BankAccountCacheItem Class
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem.BankAccountId">
+            <summary> Gets or sets AccountId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem.BankAccountNumber">
+            <summary> Gets or sets Caption </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem.Description">
+            <summary> Gets or sets Description </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem.BankAccountName">
+            <summary> Gets or sets AccountNumber </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache">
+            <summary>
+            BankAccount CacheInterface
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache.GetBankAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get BankAccounts
+            </summary>
+            <param name="bankAccountkey"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache">
+            <summary>
+            BankAccount Implenentation
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache.HandleEvent(Abp.Events.Bus.Entities.EntityChangedEventData{CAPS.CORPACCOUNTING.Banking.BankAccountUnit})">
+            <summary>
+            when BankAccount Entity is modified this event will fire
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache.GetBankAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get BankAccounts from Database
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache.GetBankAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get BankAccounts
+            </summary>
+            <param name="bankaccountkey"></param>
             <param name="input"></param>
             <returns></returns>
         </member>
@@ -8610,11 +8726,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.GetCheckGrouopList">
+        <member name="T:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto">
             <summary>
-            Get CheckGrouopList
+            /// <summary>
+            InvoiceEntryDocument OutputDto
             </summary>
-            <returns></returns>
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto.BatchId">
             <summary>Get Sets the BatchId dfield.</summary>
@@ -8676,8 +8793,13 @@
         <member name="P:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto.VendorName">
             <summary>Get Sets the VendorName field.</summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto.CreatedBy">
+        <member name="P:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto.CreatedUser">
             <summary>Get Sets the VendorName field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payables.Dto.APHeaderTransactionsInputUnit">
+            <summary>
+            InvoiceEntryDocument InputDto
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.APHeaderTransactionsInputUnit.BatchId">
             <summary>Get Sets the BatchId dfield.</summary>
@@ -8797,12 +8919,6 @@
             GetInvoiceEntryDocumentDetails By AccountingDocumentID
             </summary>
             <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService.GetCheckGrouopList">
-            <summary>
-            Get CheckGrouopList 
-            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Payroll.Dto.PayrollEntryDocumentDetailUnitDto">
@@ -9092,7 +9208,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Payroll.IPayrollEntryDocumentAppService.GetPayrollEntryDocumentUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.IPayrollEntryDocumentAppService.GetPayrollEntryDocumentDetailsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             Get PayrollEntryDocumentDetails By AccountingDocumentID
             </summary>
@@ -9132,7 +9248,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService.GetPayrollEntryDocumentUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+        <member name="M:CAPS.CORPACCOUNTING.Payroll.PayrollEntryDocumentAppService.GetPayrollEntryDocumentDetailsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             Get PayrollEntryDocumentDetails By AccountingDocumentID
             </summary>

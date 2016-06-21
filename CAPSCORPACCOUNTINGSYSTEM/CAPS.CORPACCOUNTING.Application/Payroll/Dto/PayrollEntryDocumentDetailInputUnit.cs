@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Accounting.Dto;
@@ -90,6 +91,8 @@ namespace CAPS.CORPACCOUNTING.Payroll.Dto
         /// <summary>Gets or sets the PayrollWeekEnding field. </summary> 
        
         public  DateTime? PayrollWeekEnding { get; set; }
+
+       
 
     }
 }

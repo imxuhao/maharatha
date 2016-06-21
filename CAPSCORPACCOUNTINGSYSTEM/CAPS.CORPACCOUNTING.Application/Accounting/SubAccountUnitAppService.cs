@@ -13,6 +13,8 @@ using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using AutoMapper;
 using System.Collections.Generic;
+using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Accounting
@@ -20,6 +22,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// <summary>
     /// SubAccount AppService
     /// </summary>
+    [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts)]
     public class SubAccountUnitAppService : CORPACCOUNTINGServiceBase, ISubAccountUnitAppService
     {
 
@@ -49,6 +52,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Create)]
         [UnitOfWork]
         public async Task<SubAccountUnitDto> CreateSubAccountUnit(CreateSubAccountUnitInput input)
         {
@@ -74,6 +78,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Edit)]
         public async Task<SubAccountUnitDto> UpdateSubAccountUnit(UpdateSubAccountUnitInput input)
         {
             var subAccountUnit = await _subAccountUnitRepository.GetAsync(input.SubAccountId);
@@ -92,7 +97,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task DeleteBankAccountUnit(IdInput input)
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts_Delete)]
+        public async Task DeleteSubAccountUnit(IdInput<long> input)
         {
             await _subAccountUnitManager.DeleteAsync(input);
         }
@@ -103,6 +109,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_SubAccounts)]
         public async Task<PagedResultOutput<SubAccountUnitDto>> GetSubAccountUnits(SearchInputDto input)
         {
             var subAccountUnitQuery = CreateSubAccountQuery(input);

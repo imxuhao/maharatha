@@ -5,75 +5,90 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Payables
 {
+    /// <summary>
+    /// /// <summary>
+    /// InvoiceEntryDocument OutputDto
+    /// </summary>
+    /// </summary>
     [AutoMapFrom(typeof(ApHeaderTransactions))]
     public class APHeaderTransactionsUnitDto : AccountingHeaderTransactionUnitDto
     {
         ///<summary>Get Sets the BatchId dfield.</summary>
-        public virtual int? BatchId { get; set; }
+        public int? BatchId { get; set; }
 
         ///<summary>Get Sets the VendorId field.</summary>
-        public virtual int? VendorId { get; set; }
+        public int? VendorId { get; set; }
 
         ///<summary>Get Sets the TypeOfInvoiceId field.</summary>
         [EnumDataType(typeof(TypeOfInvoice))]
-        public virtual TypeOfInvoice TypeOfInvoiceId { get; set; }
+        public TypeOfInvoice TypeOfInvoiceId { get; set; }
 
         ///<summary>Get Sets the PettyCashAccountId field.</summary>
-        public virtual long? PettyCashAccountId { get; set; }
+        public long? PettyCashAccountId { get; set; }
 
 
         ///<summary>Get Sets the PaymentTermId field.</summary>
-        public virtual int? PaymentTermId { get; set; }
+        public int? PaymentTermId { get; set; }
 
 
         ///<summary>Get Sets the TypeOfCheckGroupId field.</summary>
-        public virtual TypeOfCheckGroup? TypeOfCheckGroupId { get; set; }
+        public TypeOfCheckGroup? TypeOfCheckGroupId { get; set; }
 
         ///<summary>Get Sets the BankAccountId field.</summary>
-        public virtual int? BankAccountId { get; set; }
+        public int? BankAccountId { get; set; }
 
         ///<summary>Get Sets the PaymentDate field.</summary>
 
-        public virtual DateTime? PaymentDate { get; set; }
+        public DateTime? PaymentDate { get; set; }
 
         ///<summary>Get Sets the PaymentNumber field.</summary>
-        public virtual string PaymentNumber { get; set; }
+        public string PaymentNumber { get; set; }
 
         ///<summary>Get Sets the PurchaseOrderReference field.</summary>
-        public virtual string PurchaseOrderReference { get; set; }
+        public string PurchaseOrderReference { get; set; }
 
         ///<summary>Get Sets the ReversedByUserId field.</summary>
-        public virtual int? ReversedByUserId { get; set; }
+        public int? ReversedByUserId { get; set; }
 
         ///<summary>Get Sets the ReversalDate field.</summary>
 
-        public virtual DateTime? ReversalDate { get; set; }
+        public DateTime? ReversalDate { get; set; }
 
         ///<summary>Get Sets the IsInvoiceHistory field.</summary>
-        public virtual bool IsInvoiceHistory { get; set; }
+        public bool IsInvoiceHistory { get; set; }
 
         ///<summary>Get Sets the IsEnterable field.</summary>
-        public virtual bool IsEnterable { get; set; }
+        public bool IsEnterable { get; set; }
 
         ///<summary>Get Sets the GeneratedAccountingDocumentId field.</summary>
-        public virtual long? GeneratedAccountingDocumentId { get; set; }
+        public long? GeneratedAccountingDocumentId { get; set; }
 
         ///<summary>Get Sets the UploadDocumentLogID field.</summary>
-        public virtual int? UploadDocumentLogID { get; set; }
+        public int? UploadDocumentLogID { get; set; }
 
         ///<summary>Get Sets the BatchInfo field.</summary>
-        public virtual string BatchInfo { get; set; }
+        public string BatchInfo { get; set; }
 
         ///<summary>Get Sets the PaymentSelectedByUserId field.</summary>
-        public virtual int? PaymentSelectedByUserId { get; set; }
-
+        public int? PaymentSelectedByUserId { get; set; }
+      
         ///<summary>Get Sets the BatchName field.</summary>
-        public virtual string BatchName { get; set; }
+        public string BatchName { get; set; }
         ///<summary>Get Sets the VendorName field.</summary>
-        public virtual string VendorName { get; set; }
+        public string VendorName { get; set; }
 
         ///<summary>Get Sets the VendorName field.</summary>
-        public virtual string CreatedBy { get; set; }
+        public string CreatedUser { get; set; }
+
+        public string PettyCashAccount { get; set; }
+
+        public string PaymentTerm { get; set; }
+
+        public string TypeOfCheckGroup { get; set; }
+
+        public string BankAccount { get; set; }
+
+        public string TypeOfInvoice { get; set; }
 
     }
 }

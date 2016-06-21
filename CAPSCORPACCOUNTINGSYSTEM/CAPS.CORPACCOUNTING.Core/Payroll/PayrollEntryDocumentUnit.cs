@@ -3,6 +3,7 @@ using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Payables;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
@@ -58,6 +59,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
         /// <summary>Gets or sets the LinkedAccountingDocumentId field. </summary>
         public virtual long? LinkedAccountingDocumentId { get; set; }
 
+        public List<PayrollEntryDocumentDetailUnit> PayrollEntryDocumentDetailList;
         public PayrollEntryDocumentUnit() { }
 
         public PayrollEntryDocumentUnit(int? batchid, int? vendorid, TypeOfInvoice typeofinvoiceid, bool isenterable, long? apinvoiceaccountingdocid, int? uploaddocumentlogid,

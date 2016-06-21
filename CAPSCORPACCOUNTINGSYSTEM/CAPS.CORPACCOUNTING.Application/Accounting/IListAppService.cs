@@ -54,5 +54,35 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <returns></returns>
         Task<List<NameValueDto>> GetLocationList(AutoSearchInput input);
+
+       /// <summary>
+       /// Get CheckGrouopList
+       /// </summary>
+       /// <returns></returns>
+       List<NameValueDto> GetCheckGroupList();
+
+        /// <summary>
+        /// Get TypeOfInvoiceList
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeOfInvoiceList();
+
+        /// <summary>
+        /// Get PettyCashAccountList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<AutoFillDto>> GetPettyCashAccountList(AutoSearchInput input);
+
+       /// <summary>
+       /// Get VendorPaymentTermsList
+       /// </summary>
+       /// <returns></returns>
+        Task<List<NameValueDto>> GetVendorPaymentTermsList(AutoSearchInput input);
+
+       /// <summary>
+       /// Get GetBankAccountList
+       /// </summary>
+       /// <returns></returns>
+       Task<List<BankAccountCacheItem>> GetBankAccountList(AutoSearchInput input);
     }
 }

@@ -30,6 +30,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
     /// <summary>
     /// PayrollEntryDocument AppService
     /// </summary>
+    [AbpAuthorize(AppPermissions.Pages_Payroll_Entry)]
     public class PayrollEntryDocumentAppService : CORPACCOUNTINGServiceBase, IPayrollEntryDocumentAppService
     {
 
@@ -88,11 +89,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
                 foreach (var payrollEntryDocumentDetail in input.PayrollEntryDocumentDetailInputList)
                 {
                     payrollEntryDocumentDetail.AccountingDocumentId = response.Id;
-                    
-                    var payrollEntryDocumentDetailUnit = payrollEntryDocumentDetail.MapTo<PayrollEntryDocumentDetailUnit>();
-                    payrollEntryDocumentDetailUnit.OriginalAccountId = payrollEntryDocumentDetail.AccountId;
-                    payrollEntryDocumentDetailUnit.OriginalJobId = payrollEntryDocumentDetail.JobId;
-                    await _payrollEntryDocumentDetailUnitManager.CreateAsync(payrollEntryDocumentDetailUnit);
+                    await CreatePayrollEntryDocumentDetailsUnit(payrollEntryDocumentDetail);
                 }
             }
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -119,17 +116,12 @@ namespace CAPS.CORPACCOUNTING.Payroll
                     if (payrollEntryDocumentDetail.AccountingItemId == 0)
                     {
                         payrollEntryDocumentDetail.AccountingDocumentId = input.AccountingDocumentId;
-                        var payrollEntryDocumentDetailUnit =
-                            payrollEntryDocumentDetail.MapTo<PayrollEntryDocumentDetailUnit>();
-                        payrollEntryDocumentDetailUnit.OriginalAccountId = payrollEntryDocumentDetail.AccountId;
-                        payrollEntryDocumentDetailUnit.OriginalJobId = payrollEntryDocumentDetail.JobId;
-                        await _payrollEntryDocumentDetailUnitManager.CreateAsync(payrollEntryDocumentDetailUnit);
+                        await CreatePayrollEntryDocumentDetailsUnit(payrollEntryDocumentDetail);
+                      
                     }
                     else if (payrollEntryDocumentDetail.AccountingItemId > 0)
                     {
-                        var payrollEntryDocumentDetailUnit = await _payrollEntryDocumentDetailUnitRepository.GetAsync(payrollEntryDocumentDetail.AccountingItemId);
-                        Mapper.Map(payrollEntryDocumentDetail, payrollEntryDocumentDetailUnit);
-                        await _payrollEntryDocumentDetailUnitManager.UpdateAsync(payrollEntryDocumentDetailUnit);
+                        await UpdatePayrollEntryDocumentDetailsUnit(payrollEntryDocumentDetail);
                     }
                     else
                     {
@@ -165,6 +157,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
         [AbpAuthorize(AppPermissions.Pages_Payroll_Entry)]
         public async Task<PagedResultOutput<PayrollEntryDocumentUnitDto>> GetPayrollEntryDocumentUnits(SearchInputDto input)
         {
+            bool unPosted = false;
             var query = from payrolls in _payrollEntryDocumentUnitRepository.GetAll()
                         join batch in _batchUnitRepository.GetAll() on payrolls.BatchId equals batch.Id
                            into batchunit
@@ -180,7 +173,9 @@ namespace CAPS.CORPACCOUNTING.Payroll
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-            query = query.Where(p => p.Payrolls.OrganizationUnitId == input.OrganizationUnitId);
+            query = query.Where(p => p.Payrolls.OrganizationUnitId == input.OrganizationUnitId)
+                 .Where(u => u.Payrolls.TypeOfAccountingDocumentId == TypeOfAccountingDocument.Payroll &&
+                       u.Payrolls.IsPosted == unPosted); ;
 
 
             var resultCount = await query.CountAsync();
@@ -207,7 +202,7 @@ namespace CAPS.CORPACCOUNTING.Payroll
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Payroll_Entry)]
-        public async Task<PagedResultOutput<PayrollEntryDocumentDetailUnitDto>> GetPayrollEntryDocumentUnitsByAccountingDocumentId(GetTransactionList input)
+        public async Task<PagedResultOutput<PayrollEntryDocumentDetailUnitDto>> GetPayrollEntryDocumentDetailsByAccountingDocumentId(GetTransactionList input)
         {
             var query = from payrolls in _payrollEntryDocumentDetailUnitRepository.GetAll()
                         join job in _jobUnitRepository.GetAll() on payrolls.JobId equals job.Id
@@ -266,6 +261,22 @@ namespace CAPS.CORPACCOUNTING.Payroll
             || p.VendorAccountInfo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.VendorNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
 
+        }
+
+
+        private async Task CreatePayrollEntryDocumentDetailsUnit(PayrollEntryDocumentDetailInputUnit payrollEntryDocumentDetail)
+        {
+            var payrollEntryDocumentDetailUnit = payrollEntryDocumentDetail.MapTo<PayrollEntryDocumentDetailUnit>();
+            payrollEntryDocumentDetailUnit.OriginalAccountId = payrollEntryDocumentDetail.AccountId;
+            payrollEntryDocumentDetailUnit.OriginalJobId = payrollEntryDocumentDetail.JobId;
+            await _payrollEntryDocumentDetailUnitManager.CreateAsync(payrollEntryDocumentDetailUnit);
+        }
+
+        private async Task UpdatePayrollEntryDocumentDetailsUnit(PayrollEntryDocumentDetailInputUnit payrollEntryDocumentDetail)
+        {
+            var payrollEntryDocumentDetailUnit = await _payrollEntryDocumentDetailUnitRepository.GetAsync(payrollEntryDocumentDetail.AccountingItemId);
+            Mapper.Map(payrollEntryDocumentDetail, payrollEntryDocumentDetailUnit);
+            await _payrollEntryDocumentDetailUnitManager.UpdateAsync(payrollEntryDocumentDetailUnit);
         }
 
     }

@@ -174,7 +174,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 filterOnEnter: false,
                 viewModel: {
                     type: 'common-grid-chachingtransactiondetailgrid'
-                }
+                },
+                controller: 'common-grid-chachingtransactiondetailgrid'
             };
             plugins.push(mutisearch);
         }
@@ -431,6 +432,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                             update: abp.appPath + 'api/services/app/jobUnit/UpdateJobUnit',
                             destroy: abp.appPath + 'api/services/app/jobUnit/DeleteJobUnit'
                         }
+                    },
+                    listeners: {
+                        beforequery:'beforeJobDivisionQuery'
                     }
                 }, editor: {
                     xtype: 'chachingcombobox',
@@ -474,6 +478,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                             update: abp.appPath + 'api/services/app/jobUnit/UpdateJobUnit',
                             destroy: abp.appPath + 'api/services/app/jobUnit/DeleteJobUnit'
                         }
+                    },
+                    listeners: {
+                        beforequery: 'beforeJobDivisionQuery'
                     }
                 }
             },
@@ -496,11 +503,6 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
-                    listConfig: {
-                        minWidth: 400,
-                        minHeight: 150,
-                        maxHeight: 250
-                    },
                     modulePermissions: {
                         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
                         create:false,//abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
@@ -535,6 +537,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                             update: abp.appPath + 'api/services/app/linesUnit/UpdateLineUnit',
                             destroy: abp.appPath + 'api/services/app/linesUnit/DeleteLineUnit'
                         }
+                    },
+                    listeners: {
+                        beforequery: 'beforeAccountQuery'
                     }
                 }, editor: {
                     xtype: 'chachingcombobox',
@@ -544,11 +549,6 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     queryMode: 'remote',
                     minChars: 2,
                     useDisplayFieldToSearch: true,
-                    listConfig: {
-                        minWidth: 400,
-                        minHeight: 150,
-                        maxHeight: 250
-                    },
                     modulePermissions: {
                         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
                         create: false,//abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
@@ -583,6 +583,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                             update: abp.appPath + 'api/services/app/linesUnit/UpdateLineUnit',
                             destroy: abp.appPath + 'api/services/app/linesUnit/DeleteLineUnit'
                         }
+                    },
+                    listeners: {
+                        beforequery: 'beforeAccountQuery'
                     }
                 }
             },

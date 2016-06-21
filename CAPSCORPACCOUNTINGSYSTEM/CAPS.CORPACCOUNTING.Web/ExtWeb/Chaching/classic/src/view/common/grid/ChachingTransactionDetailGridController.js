@@ -189,11 +189,33 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             comboStore = combo.getStore();
         if (editingPlugin&&editingPlugin.activeRecord) {
             var activeRec = editingPlugin.activeRecord,
-                jobId = activeRec.get(combo.valueField);
+                jobId = activeRec.get('jobId');
             if (jobId > 0) {
                 comboStore.getProxy().setExtraParam('jobId', jobId);
             } else comboStore.getProxy().setExtraParam('jobId', null);
         }
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on('load', function () {
+            if (this.combo) this.combo.focus();
+        });
+    },
+    beforeJobDivisionQuery:function(queryPlan, eOpts) {
+        var me = this,
+            view = me.getView(),
+            combo = queryPlan.combo,
+            comboStore = combo.getStore();
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on('load', function () {
+            if (this.combo) this.combo.focus();
+        });
     },
     onBeforeGridEdit: function (editor, context, eOpts) {
         var me = this, view = me.getView();

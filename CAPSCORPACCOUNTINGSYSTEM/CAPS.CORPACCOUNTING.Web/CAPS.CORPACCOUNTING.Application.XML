@@ -5499,6 +5499,11 @@
             Gets or sets AccountId
             </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.IdOutputDto`1.JobId">
+            <summary>
+            Gets or sets JobId
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto.LocationSetId">
             <summary>>Gets or sets the LocationSetId field.</summary>       
         </member>

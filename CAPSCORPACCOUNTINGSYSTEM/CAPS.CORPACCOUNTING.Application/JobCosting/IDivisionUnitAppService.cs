@@ -18,14 +18,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<JobUnitDto> CreateDivisionUnit(CreateJobUnitInput input);
+        Task<IdOutputDto<int>> CreateDivisionUnit(CreateJobUnitInput input);
 
         /// <summary>
         /// Update the Job Division on JobId.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<JobUnitDto> UpdateDivisionUnit(UpdateJobUnitInput input);
+        Task<IdOutputDto<int>> UpdateDivisionUnit(UpdateJobUnitInput input);
 
         /// <summary>
         /// Delete the Division based on JobId.

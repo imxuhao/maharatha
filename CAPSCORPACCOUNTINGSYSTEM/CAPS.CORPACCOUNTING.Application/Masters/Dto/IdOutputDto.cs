@@ -13,5 +13,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// Gets or sets AccountId
         /// </summary>
         public T AccountId { get; set; }
+
+        /// <summary>
+        /// Gets or sets JobId
+        /// </summary>
+        public T JobId { get; set; }
     }
 }

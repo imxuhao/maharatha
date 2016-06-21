@@ -14,6 +14,7 @@ using Abp.UI;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 
 namespace CAPS.CORPACCOUNTING.JobCosting
@@ -38,7 +39,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions_Create)]
-        public async Task<JobUnitDto> CreateDivisionUnit(CreateJobUnitInput input)
+        public async Task<IdOutputDto<int>> CreateDivisionUnit(CreateJobUnitInput input)
         {
             var chartofaccount = 
                 _coaUnitRepository.FirstOrDefault(
@@ -51,9 +52,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 typeofcurrencyid: input.TypeOfCurrencyId, rollupjobid: input.RollupJobId, typeofjobstatusid: input.TypeOfJobStatusId, typeofbidsoftwareid: input.TypeOfBidSoftwareId,
                 isapproved: input.IsApproved, isactive: input.IsActive, isictdivision: input.IsICTDivision, organizationunitid:input.OrganizationUnitId, typeofprojectid: input.TypeofProjectId,
                 taxrecoveryid: input.TaxRecoveryId, chartofaccountid: chartofaccount.Id, rollupcenterid: input.RollupCenterId,isdivision:true, taxcreditid:input.TaxCreditId);
-            await _jobUnitManager.CreateAsync(jobUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();            
-            return jobUnit.MapTo<JobUnitDto>();
+            IdOutputDto<int> response = new IdOutputDto<int>()
+            {
+                JobId = await _jobUnitManager.CreateAsync(jobUnit)
+            };
+            await CurrentUnitOfWork.SaveChangesAsync();
+            return response;
         }
 
         /// <summary>
@@ -62,7 +66,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions_Edit)]
-        public async Task<JobUnitDto> UpdateDivisionUnit(UpdateJobUnitInput input)
+        public async Task<IdOutputDto<int>> UpdateDivisionUnit(UpdateJobUnitInput input)
         {
             var jobUnit = await _jobUnitRepository.GetAsync(input.JobId);            
             #region Setting the values to be updated
@@ -79,8 +83,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             await _jobUnitManager.UpdateAsync(jobUnit);
 
             await CurrentUnitOfWork.SaveChangesAsync();
-           
-            return jobUnit.MapTo<JobUnitDto>();
+
+            IdOutputDto<int> response = new IdOutputDto<int>()
+            {
+                JobId = jobUnit.Id
+            };
+
+            return response;
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -25,7 +26,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public JobCommercialAppService(JobCommercialUnitManager jobDetailUnitManager, IRepository<JobCommercialUnit> jobDetailUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager,IJobLocationAppService jobLocationAppService, IRepository<JobLocationUnit> jobLocationRepository,
+            IUnitOfWorkManager unitOfWorkManager, IJobLocationAppService jobLocationAppService, IRepository<JobLocationUnit> jobLocationRepository,
             IJobPORangeAllocationUnitAppService poRangeAllocationAppService, IRepository<JobPORangeAllocationUnit> jobPORangeAllocationRepository)
         {
             _jobDetailUnitManager = jobDetailUnitManager;
@@ -43,15 +44,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public async Task<JobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input)
+        public async Task<IdOutputDto<int>> CreateJobDetailUnit(CreateJobCommercialInput input)
         {
             var jobDetailUnit = input.MapTo<JobCommercialUnit>();
 
-            await _jobDetailUnitManager.CreateAsync(jobDetailUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();
+            IdOutputDto<int> response = new IdOutputDto<int>()
+            {
+                JobId = await _jobDetailUnitManager.CreateAsync(jobDetailUnit)
+            };
 
-            JobCommercialUnitDto response = jobDetailUnit.MapTo<JobCommercialUnitDto>();
-            response.JobId = jobDetailUnit.Id;
+            await CurrentUnitOfWork.SaveChangesAsync();
             return response;
 
         }
@@ -65,14 +67,14 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<JobCommercialUnitDto> UpdateJobDetailUnit(UpdateJobCommercialnput input)
         {
             string locationNames = string.Empty;
-            if (!ReferenceEquals(input.JobLocations,null))
+            if (!ReferenceEquals(input.JobLocations, null))
             {
                 StringBuilder sb = new StringBuilder();
                 foreach (var joblocation in input.JobLocations)
                 {
-                    sb.Append(joblocation.LocationName+ ",");
+                    sb.Append(joblocation.LocationName + ",");
                 }
-                locationNames= sb.ToString().TrimEnd(',');
+                locationNames = sb.ToString().TrimEnd(',');
             }
             var jobDetailUnit = await _jobDetailUnitRepository.GetAsync(input.JobId);
 
@@ -165,7 +167,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     else
                     {
                         AutoMapper.Mapper.CreateMap<UpdateJobLocationInput, CreateJobLocationInput>();
-                         await _jobLocationAppService.CreateJobLocationUnit(AutoMapper.Mapper.Map<UpdateJobLocationInput, CreateJobLocationInput>(location));
+                        await _jobLocationAppService.CreateJobLocationUnit(AutoMapper.Mapper.Map<UpdateJobLocationInput, CreateJobLocationInput>(location));
                         await CurrentUnitOfWork.SaveChangesAsync();
                     }
                     await CurrentUnitOfWork.SaveChangesAsync();
@@ -193,6 +195,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             return jobDetailUnit.MapTo<JobCommercialUnitDto>();
 
         }
-       
+
     }
 }

@@ -25,10 +25,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="jobDetailUnit"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public virtual async Task CreateAsync(JobCommercialUnit jobDetailUnit)
+        public virtual async Task<int> CreateAsync(JobCommercialUnit jobDetailUnit)
         {
             await ValidateJobDetailUnitAsync(jobDetailUnit);
-            await JobDetailUnitRepository.InsertAsync(jobDetailUnit);
+          return await JobDetailUnitRepository.InsertAndGetIdAsync(jobDetailUnit);
         }
 
         /// <summary>

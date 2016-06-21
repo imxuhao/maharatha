@@ -82,7 +82,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         }
 
         /// <summary>
-        /// Get accounts 
+        /// Get accounts based on Job chartofAccountId
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -96,7 +96,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
             return accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).WhereIf(chartOfAccountId != 0, p => p.ChartOfAccountId == chartOfAccountId).ToList();
+                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where( p => p.ChartOfAccountId == chartOfAccountId).ToList();
 
 
         }

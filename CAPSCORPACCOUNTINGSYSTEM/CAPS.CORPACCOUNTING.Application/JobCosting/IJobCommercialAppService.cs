@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -15,7 +16,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<JobCommercialUnitDto> CreateJobDetailUnit(CreateJobCommercialInput input);
+       Task<IdOutputDto<int>> CreateJobDetailUnit(CreateJobCommercialInput input);
 
         /// <summary>
         /// Update the JobDetail based on JobDetailId.

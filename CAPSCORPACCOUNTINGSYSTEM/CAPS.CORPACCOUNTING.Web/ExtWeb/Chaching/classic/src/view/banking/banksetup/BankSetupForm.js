@@ -68,14 +68,12 @@
                         xtype: 'combobox',
                         name: 'typeOfBankAccountId',
                         fieldLabel: app.localize('AccountType').initCap(),
-                       // labelWidth: 70,
                         width: '100%',
                         ui: 'fieldLabelTop',
                         displayField: 'typeOfBankAccount',
                         valueField: 'typeOfBankAccountId',
                         emptyText: app.localize('SelectOption'),
                         queryMode: 'local',
-                        triggerAction : 'all',
                         store: 'utilities.AccountTypeListStore'
                        
                         }, {

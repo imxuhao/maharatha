@@ -899,5 +899,15 @@
     <text name="DetailGridValidation" value="Invalid Distribution Data" />
     <text name="Confirm" value="Confirm?" />
     <text name="ConfirmMessage" value="Are you sure? ,you want to delete this " />
+   <text name="EditInvoice" value="Edit Invoice" />
+ <text name="CreateNewInvoice" value="Create Invoice" />
+ <text name="ViewInvoice" value="View Invoice" />
+ <text name="PO#" value="PO#" />
+ <text name="Invoice#" value="Invoice#" />
+ <text name="InvoiceDate" value="Invoice date" />
+ <text name="InvoiceTotal" value="Invoice total" />
+ <text name="DueDate" value="Due date" />
+ <text name="CheckGroup" value="Check group" />
+ <text name="MemoLine" value="Memoline" />
   </texts>
 </localizationDictionary>

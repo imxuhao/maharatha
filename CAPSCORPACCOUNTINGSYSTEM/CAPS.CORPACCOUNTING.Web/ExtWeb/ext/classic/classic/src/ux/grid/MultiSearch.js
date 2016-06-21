@@ -583,7 +583,8 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             //if('component' !== cfg.xtype) {
             Ext.apply(cfg, {
                 itemId: item.itemId ? item.itemId : item.dataIndex || 'item' + i,
-                isFilterField:true
+                isFilterField: true,
+                emptyText:app.localize('Search')
             });
             //}
 

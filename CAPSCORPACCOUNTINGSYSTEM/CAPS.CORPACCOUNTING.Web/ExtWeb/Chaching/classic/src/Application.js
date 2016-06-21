@@ -80,10 +80,12 @@ Ext.define('Chaching.Application', {
         'banking.banksetup.BankCheckNumberStore',
         'utilities.autofill.DivisionListStore',
         'financials.accounts.AccountRestrictionLeftStore',
-        'financials.accounts.AccountRestrictionRightStore'
+        'financials.accounts.AccountRestrictionRightStore',
+        'payables.invoices.AccountsPayableStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {
+        //Ext.ariaWarn = Ext.emptyFn;
         var me = this;
         ///****Load usersDefaultView Settings
         var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');

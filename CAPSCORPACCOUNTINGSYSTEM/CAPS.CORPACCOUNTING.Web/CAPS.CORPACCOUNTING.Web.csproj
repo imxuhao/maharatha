@@ -2016,6 +2016,7 @@
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\batchposting\batches\BatchesModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\payables\invoices\AccountsPayableModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorAliasModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
@@ -2045,6 +2046,7 @@
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\batchposting\batches\BatchesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\payables\invoices\AccountsPayableStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsAliasStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\linkedaccounts\LinkedAccountsStore.js" />
@@ -2179,6 +2181,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\batchposting\batches\BatchesGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\AccountsPayableGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\payables\invoices\AccountsPayableGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\InvoiceTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorAliasGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorAliasGridController.js" />
@@ -19218,11 +19222,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ExtWeb\Chaching\app\model\financials\preferences\" />
-    <Folder Include="ExtWeb\Chaching\app\model\payables\invoices\" />
     <Folder Include="ExtWeb\Chaching\app\store\financials\preferences\" />
-    <Folder Include="ExtWeb\Chaching\app\store\payables\invoices\" />
     <Folder Include="ExtWeb\Chaching\classic\src\view\financials\preferences\" />
-    <Folder Include="ExtWeb\Chaching\classic\src\view\payables\invoices\" />
     <Folder Include="ExtWeb\Chaching\overrides\" />
     <Folder Include="ExtWeb\LoginApp\overrides\" />
     <Folder Include="ExtWeb\LoginApp\sass\src\" />

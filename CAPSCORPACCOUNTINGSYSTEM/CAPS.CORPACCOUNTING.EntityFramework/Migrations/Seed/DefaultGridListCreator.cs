@@ -36,7 +36,8 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 new GridListUnit(gridid:19,name:"Batch",description:@"Chaching\classic\src\view\payables\invoices\BatchGrid",isactive:true),
                 new GridListUnit(gridid:20,name:"Fiscal Period",description:@"Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodChildGrid",isactive:true),
                 new GridListUnit(gridid:21,name:"Bank Setup",description:@"Chaching\classic\src\view\financials\preferences\BankSetupGrid",isactive:true),
-                new GridListUnit(gridid:22,name:"Fiscal Year",description:@"Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid",isactive:true)
+                new GridListUnit(gridid:22,name:"Fiscal Year",description:@"Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid",isactive:true),
+                 new GridListUnit(gridid:23,name:"Accounts Payable",description:@"Chaching\classic\src\view\payables\invoices\AccountsPayableGrid",isactive:true)
             };
         }
 

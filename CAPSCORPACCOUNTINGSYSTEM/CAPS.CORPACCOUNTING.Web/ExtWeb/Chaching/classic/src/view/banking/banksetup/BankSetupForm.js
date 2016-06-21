@@ -61,6 +61,8 @@
                         name: 'bankAccountName',
                         fieldLabel: app.localize('AccountName').initCap(),
                         width: '100%',
+                        allowBlank: false,
+                        emptyText: app.localize('MandatoryField'),
                         ui: 'fieldLabelTop'
                     },{
                         xtype: 'combobox',
@@ -72,6 +74,8 @@
                         displayField: 'typeOfBankAccount',
                         valueField: 'typeOfBankAccountId',
                         emptyText: app.localize('SelectOption'),
+                        queryMode: 'local',
+                        triggerAction : 'all',
                         store: 'utilities.AccountTypeListStore'
                        
                         }, {
@@ -109,7 +113,7 @@
                         fieldLabel: app.localize('LedgerAccount'),
                         ui: 'fieldLabelTop',
                         width: '100%',
-                       // name: 'accountId',
+                        name: 'accountId',
                         valueField: 'accountId',
                         displayField: 'accountNumber',
                         queryMode: 'remote',

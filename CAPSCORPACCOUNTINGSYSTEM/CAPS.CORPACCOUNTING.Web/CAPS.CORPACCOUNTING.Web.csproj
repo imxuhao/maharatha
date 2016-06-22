@@ -19224,6 +19224,7 @@
     <Folder Include="ExtWeb\Chaching\app\model\financials\preferences\" />
     <Folder Include="ExtWeb\Chaching\app\store\financials\preferences\" />
     <Folder Include="ExtWeb\Chaching\classic\src\view\financials\preferences\" />
+    <Folder Include="ExtWeb\Chaching\classic\src\view\receivables\customers\" />
     <Folder Include="ExtWeb\Chaching\overrides\" />
     <Folder Include="ExtWeb\LoginApp\overrides\" />
     <Folder Include="ExtWeb\LoginApp\sass\src\" />

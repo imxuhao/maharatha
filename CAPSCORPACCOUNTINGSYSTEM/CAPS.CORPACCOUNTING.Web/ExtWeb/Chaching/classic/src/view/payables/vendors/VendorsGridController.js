@@ -28,8 +28,13 @@ Ext.define('Chaching.view.payables.vendors.VendorsGridController', {
         var paymentTermsList = viewModel.getStore('paymentTermsList');
         paymentTermsList.load();
 
-        var rollupDivisionList = viewModel.getStore('rollupDivisionList');
-        rollupDivisionList.load();
+        //var rollupDivisionList = viewModel.getStore('rollupDivisionList');
+        //rollupDivisionList.load();
+
+        // load Divisions
+        var divisionCombo = form.findField('jobId');
+        var divisionComboStore = divisionCombo.getStore();
+        divisionComboStore.load();
 
         var getTaxCreditList = viewModel.getStore('getTaxCreditList');
         getTaxCreditList.load();

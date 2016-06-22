@@ -325,17 +325,46 @@
                       //    blankText: app.localize('MandatoryToolTipText')
                       //},
                       items: [{
-                          xtype: 'combobox',
-                          name: 'jobId',
-                          fieldLabel: app.localize('Division').initCap(),
-                          width: '100%',
+                          //xtype: 'combobox',
+                          //name: 'jobId',
+                          //fieldLabel: app.localize('Division').initCap(),
+                          //width: '100%',
+                          //ui: 'fieldLabelTop',
+                          //displayField: 'rollupDivision',
+                          //valueField: 'rollupDivisionId',
+                          //emptyText: app.localize('SelectOption'),
+                          //bind: {
+                          //    store: '{rollupDivisionList}'
+                          //}
+
+                          xtype: 'chachingcombobox',
+                          store: new Chaching.store.utilities.autofill.DivisionListStore(),
+                          fieldLabel: app.localize('Division'),
                           ui: 'fieldLabelTop',
-                          displayField: 'rollupDivision',
-                          valueField: 'rollupDivisionId',
-                          emptyText: app.localize('SelectOption'),
-                          bind: {
-                              store: '{rollupDivisionList}'
-                          }
+                          width: '100%',
+                          name: 'jobId',
+                          valueField: 'jobId',
+                          displayField: 'jobNumber',
+                          queryMode: 'remote',
+                          minChars: 2,
+                          useDisplayFieldToSearch: true,
+                          modulePermissions: {
+                              read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+                              create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+                              edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+                              destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+                          },
+                          primaryEntityCrudApi: {
+                              read: abp.appPath + 'api/services/app/jobUnit/GetDivisionList',
+                              create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
+                              update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
+                              destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
+                          },
+                          createEditEntityType: 'financials.accounts.divisions',
+                          createEditEntityGridController: 'financials-accounts-divisionsgrid',
+                          entityType: 'Division',
+                          identificationKey: 'isDivision'
+
                       }]
                   },
                   {

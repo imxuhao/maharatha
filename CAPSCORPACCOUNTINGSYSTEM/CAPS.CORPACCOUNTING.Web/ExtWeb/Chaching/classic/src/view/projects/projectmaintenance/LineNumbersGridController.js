@@ -16,8 +16,14 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGridController'
         var coaId = form.findField('chartOfAccountId').value;
         rollupAccountList.getProxy().setExtraParam('Id', coaId);
         rollupAccountList.load();
-        var rollupDivisionList = viewModel.getStore('rollupDivisionList');
-        rollupDivisionList.load();
+
+        // load rollupDivisions
+        var rollupDivisionCombo = form.findField('rollupJobId');
+        var rollupDivisionStore = rollupDivisionCombo.getStore();
+        rollupDivisionStore.load();
+
+        //var rollupDivisionList = viewModel.getStore('rollupDivisionList');
+        //rollupDivisionList.load();
 
         if (isEdit) {
             //var typeOfCurrency = viewModel.getStore('typeOfCurrencyList');

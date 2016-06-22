@@ -118,16 +118,35 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
                 store: '{typeofConsolidationList}'
             }
         }, {
-            xtype: 'combobox',
+            xtype: 'chachingcombobox',
+            store: new Chaching.store.utilities.autofill.DivisionListStore(),
+            fieldLabel: app.localize('RollUpDivision'),
+            ui: 'fieldLabelTop',
+            width: '100%',
             name: 'rollupJobId',
-            fieldLabel: app.localize('RollUpDivision').initCap(),
-            width: '100%',           
-            ui: 'fieldLabelTop',           
-            displayField: 'rollupDivision',
-            valueField: 'rollupDivisionId',
-            bind: {
-                store: '{rollupDivisionList}'
-            }
+            valueField: 'rollupJobId',
+            displayField: 'caption',
+            queryMode: 'remote',
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+                create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+                edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+                destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + 'api/services/app/jobUnit/GetDivisionList',
+                create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
+                update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
+                destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
+            },
+            createEditEntityType: 'financials.accounts.divisions',
+            createEditEntityGridController: 'financials-accounts-divisionsgrid',
+            entityType: 'Division',
+            useDisplayFieldToSearch: true,
+            identificationKey: 'isDivision'
+
         }
         ,
         {

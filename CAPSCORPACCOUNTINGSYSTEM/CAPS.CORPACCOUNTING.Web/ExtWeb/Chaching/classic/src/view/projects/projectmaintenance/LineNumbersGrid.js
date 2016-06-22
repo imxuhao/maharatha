@@ -177,17 +177,36 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              itemId: 'rollupJobId',
              sortable: true,
              groupable: true,
-             width: '10%',             
+             width: '10%',
+             valueField: 'rollupJobId',
+             dataLoadClass: 'Chaching.store.utilities.autofill.DivisionListStore',
              filterField: {
-                 xtype: 'combobox',
-                 valueField: 'rollupDivisionId',
-                 displayField: 'rollupDivision',
+                 xtype: 'chachingcombobox',
+                 store: new Chaching.store.utilities.autofill.DivisionListStore(),
+                 valueField: 'rollupJobId',
+                 displayField: 'rollUpDivision',
                  queryMode: 'remote',
                  forceSelection: true,
-                 bind: {
-                     store: '{rollupDivisionList}'
-                 },              
-                 
+                 searchProperty : 'rollupJobId',
+                 minChars: 2,
+                 //useDisplayFieldToSearch: true,
+                 modulePermissions: {
+                     read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+                     create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+                     edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+                     destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+                 },
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + 'api/services/app/jobUnit/GetDivisionList',
+                     create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
+                     update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
+                     destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
+                 },
+                 createEditEntityType: 'financials.accounts.divisions',
+                 createEditEntityGridController: 'financials-accounts-divisionsgrid',
+                 entityType: 'Division',
+                 identificationKey: 'isDivision',
+                 isTwoEntityPicker: false
              }
          },
          {

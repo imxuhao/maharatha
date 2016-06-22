@@ -675,7 +675,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             model = gridStore.getModel(),
             entityName = model.$config.values.searchEntityName;
         var isEnum = field.isEnum;;
-        if ((field.xtype === "combo" || field.xtype === "combobox"||field.xtype==="tagfield") && field.forceSelection) {
+        if ((field.xtype === "combo" || field.xtype === "combobox" || field.xtype === "tagfield" || field.xtype === "chachingcombo" || field.xtype === "chachingcombobox") && field.forceSelection) {
             if (field.xtype==="tagfield")
                 filter.operator = "in";
             else filter.operator = "=";

@@ -534,6 +534,7 @@
     <text name="CreateNewProject" value="Create new project" />
     <text name="EditProject" value="Edit Project" />
     <text name="JobNumber" value="Job #" />
+    <text name="JobDivisionNumber" value="Number" />
     <text name="ToolTipJobNumber" value="Enter Job #" />
     <text name="ProjectName" value="Project name" />
     <text name="ToolTipProjectName" value="Enter project name" />

@@ -707,7 +707,8 @@ Ext.define('Chaching.components.form.field.ComboBox', {
         if (me.getModulePermissions().edit || (isTwoEntityPicker&&secondoryEntityDetails.modulePermissions.edit)) {
             var editActionColumn = {
                 xtype: 'actioncolumn',
-                width: '5%',
+                // width: '5%',
+                width : 20,
                 minWidth: 20,
                 sortable: false,
                 hideable: false,
@@ -721,7 +722,8 @@ Ext.define('Chaching.components.form.field.ComboBox', {
         if (me.getModulePermissions().destroy || (isTwoEntityPicker&&secondoryEntityDetails.modulePermissions.destroy)) {
             var deleteActionColumn = {
                 xtype: 'actioncolumn',
-                width: '5%',
+                //width: '5%',
+                width: 20,
                 minWidth: 20,
                 sortable: false,
                 hideable: false,
@@ -735,7 +737,8 @@ Ext.define('Chaching.components.form.field.ComboBox', {
         if (me.getModulePermissions().read || (isTwoEntityPicker && secondoryEntityDetails.modulePermissions.read)) {
             var infoActionColumn = {
                 xtype: 'actioncolumn',
-                width: '5%',
+                // width: '5%',
+                width: 20,
                 minWidth: 20,
                 sortable: false,
                 hideable: false,
@@ -809,7 +812,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
         // doQuery is called upon field mutation, so check for change after the query has done its thing
         me.startCheckChangeTask();
     },
-    doCRUDOperation: function (operation, record,isSecondEntityAdd,infoItem) {
+    doCRUDOperation: function (operation, record, isSecondEntityAdd, infoItem) {
         var me = this,
             picker = me.picker,
             xtype = me.getCreateEditEntityType(),
@@ -841,6 +844,12 @@ Ext.define('Chaching.components.form.field.ComboBox', {
                 storeApi = secondoryEntityDetails.secondoryEntityCrudApi;
             }
             if (storeApi) me.store.getProxy().setApi(storeApi);
+        } else {
+            var storeApi = me.getPrimaryEntityCrudApi();
+            if (storeApi) me.store.getProxy().setApi(storeApi);
+            if (me.identificationKey != undefined) {
+                identificationKey = me.identificationKey;
+            }
         }
         if (!picker) me.picker = me.getPicker();
         var xtypeOfView = "";
@@ -989,7 +998,8 @@ Ext.define('Chaching.components.form.field.ComboBox', {
             width: width,
             items: [createEditView],
             listeners: {
-                beforedestroy:function(cmp, eOpts) {
+                beforedestroy: function (cmp, eOpts) {
+
                     //set record in auto fill combo
                     var record = me.picker.recordToSetInComboBox;
                     if (!record) record = cmp.down('form').getRecord();

@@ -108,6 +108,12 @@
                  xtype: 'combobox',
                  valueField: 'typeofConsolidationId',
                  displayField: 'typeofConsolidation',
+                 queryMode: 'local',
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
+                 forceSelection: true,
+                 isEnum: true,
+                 searchProperty: 'typeofConsolidationId',
                  bind: {
                      store: '{typeofConsolidationList}'
                  }

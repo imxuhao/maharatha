@@ -123,6 +123,7 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
             emptyText: app.localize('MandatoryField'),
             displayField: 'typeofConsolidation',
             valueField: 'typeofConsolidationId',
+            queryMode : 'local',
             bind: {
                 store: '{typeofConsolidationList}'
             }

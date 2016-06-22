@@ -100,6 +100,7 @@
                                     displayField: 'typeofvendor',
                                     valueField: 'typeofvendorId',
                                     emptyText: app.localize('SelectOption'),
+                                    queryMode : 'local',
                                     bind: {
                                         store: '{vendorTypeList}'
                                     }
@@ -152,6 +153,7 @@
                                                     displayField: 'typeofTax',
                                                     valueField: 'typeofTaxId',
                                                     emptyText: app.localize('SelectOption'),
+                                                    queryMode : 'local',
                                                     bind: {
                                                         store: '{typeOfTaxList}'
                                                     }
@@ -189,6 +191,7 @@
                                displayField: 'typeof1099Box',
                                valueField: 'typeof1099BoxId',
                                emptyText: app.localize('SelectOption'),
+                               queryMode : 'local',
                                bind: {
                                    store: '{typeof1099BoxList}'
                                }

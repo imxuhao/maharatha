@@ -5,6 +5,15 @@
         var me = this;
         var viewModel = formView.getViewModel();
         var form = formView.getForm();
+        var typeOfCurrency = viewModel.getStore('typeOfCurrencyList');
+        typeOfCurrency.load();
+        var typeOfCurrencyRate = viewModel.getStore('typeOfCurrencyRateList');
+        typeOfCurrencyRate.load();
+        var typeOfAccount = viewModel.getStore('typeOfAccountList');
+        typeOfAccount.load();
+        var typeofConsolidation = viewModel.getStore('typeofConsolidationList');
+        typeofConsolidation.load();
+
         if (!isEdit) {
             if (formView.parentGrid.coaId != undefined) {
                 form.findField("chartOfAccountId").setValue(formView.parentGrid.coaId);
@@ -29,18 +38,11 @@
             }
             
         }
-        else {           
-            var typeOfCurrency = viewModel.getStore('typeOfCurrencyList');
-            typeOfCurrency.load();
-            var typeOfCurrencyRate = viewModel.getStore('typeOfCurrencyRateList');
-            typeOfCurrencyRate.load();
-            var typeOfAccount = viewModel.getStore('typeOfAccountList');
-            typeOfAccount.load();
-            var typeofConsolidation = viewModel.getStore('typeofConsolidationList');
-            typeofConsolidation.load();
+        else {
             me.loadLinkAccounts(viewModel, formView.parentGrid.coaId);
         }
     },
+
     loadLinkAccounts: function (viewModel, coaId) {
         var linkAccountStore = viewModel.getStore('linkAccountListByCoaId');
         linkAccountStore.getProxy().setExtraParam('id', coaId);

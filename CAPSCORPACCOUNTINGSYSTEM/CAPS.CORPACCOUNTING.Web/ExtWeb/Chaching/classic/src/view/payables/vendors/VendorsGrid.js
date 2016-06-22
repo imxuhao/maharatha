@@ -140,9 +140,11 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
             valueField: 'typeof1099BoxId',
             displayField: 'typeof1099Box',
             forceSelection: true,
+            loadStoreOnCreate: true,
             searchProperty: 'typeof1099BoxId',
             isEnum: true,
             width: '100%',
+            queryMode : 'local',
             store: 'utilities.TypeOf1099BoxListStore'
         }, editor: {
             xtype: 'combobox',
@@ -310,9 +312,11 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
                xtype: 'combobox',
                valueField: 'typeofTaxId',
                displayField: 'typeofTax',
+               loadStoreOnCreate: true,
                forceSelection: true,
                searchProperty: 'typeofTaxId',
                isEnum: true,
+               queryMode: 'local',
                width: '100%',
                store: 'utilities.TypeOfTaxListStore'
            }, editor: {

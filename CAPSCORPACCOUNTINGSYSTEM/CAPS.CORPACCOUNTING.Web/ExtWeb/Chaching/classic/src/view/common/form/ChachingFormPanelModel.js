@@ -124,6 +124,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
             }],
             xtype: 'ajax',
             autoLoad: false,
+            remoteSort: false,
+            remoteFilter : false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -148,6 +150,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter : false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -311,6 +315,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter : false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -332,6 +338,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -366,6 +374,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -387,6 +397,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteFilter: false,
+            remoteSort : false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',

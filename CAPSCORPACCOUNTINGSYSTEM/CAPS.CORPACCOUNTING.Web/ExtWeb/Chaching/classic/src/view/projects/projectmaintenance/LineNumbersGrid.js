@@ -110,7 +110,12 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
                 xtype: 'combobox',
                 valueField: 'typeofConsolidationId',
                 displayField: 'typeofConsolidation',
-                forceSelection:true,
+                loadStoreOnCreate: true,
+                forceSelection: true,
+                isViewmodelStore: true,
+                isEnum: true,
+                searchProperty: 'typeofConsolidationId',
+                queryMode: 'local',
                 bind: {
                     store: '{typeofConsolidationList}'
                 }

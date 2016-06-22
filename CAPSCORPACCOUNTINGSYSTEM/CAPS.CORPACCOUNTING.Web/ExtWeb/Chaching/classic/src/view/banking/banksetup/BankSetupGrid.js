@@ -115,6 +115,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
                  displayField: 'typeOfBankAccount',
                  valueField: 'typeOfBankAccountId',
                  emptyText: app.localize('SelectOption'),
+                 queryMode : 'local',
                  store: 'utilities.AccountTypeListStore'
 
              }, editor: {
@@ -124,6 +125,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
                  displayField: 'typeOfBankAccount',
                  valueField: 'typeOfBankAccountId',
                  emptyText: app.localize('SelectOption'),
+                 queryMode: 'local',
                  store: 'utilities.AccountTypeListStore'
              }
          }, {

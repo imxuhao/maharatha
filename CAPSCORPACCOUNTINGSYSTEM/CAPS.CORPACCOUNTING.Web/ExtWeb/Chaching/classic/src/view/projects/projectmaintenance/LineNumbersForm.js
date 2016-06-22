@@ -113,6 +113,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
             ui: 'fieldLabelTop',            
             displayField: 'typeofConsolidation',
             valueField: 'typeofConsolidationId',
+            queryMode: 'local',
             bind: {
                 store: '{typeofConsolidationList}'
             }

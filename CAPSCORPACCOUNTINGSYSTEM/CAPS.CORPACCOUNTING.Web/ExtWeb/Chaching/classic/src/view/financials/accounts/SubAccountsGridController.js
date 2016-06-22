@@ -4,11 +4,12 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGridController', {
     doAfterCreateAction: function (createMode, formView, isEdit,record) {
         var subAccountId = 0;
         if (formView && isEdit) {
-            var viewModel = formView.getViewModel();
-            var typeOfSubAccount = viewModel.getStore('typeOfSubAccountList');
-            typeOfSubAccount.load();
             subAccountId = record.data.subAccountId;
         }
+        var viewModel = formView.getViewModel();
+        var typeOfSubAccount = viewModel.getStore('typeOfSubAccountList');
+        typeOfSubAccount.load();
+
         var leftStore = formView.down('chachingGridDragDrop').getLeftStore();
         leftStore.proxy.setExtraParam('subAccountId', subAccountId);
         leftStore.load();

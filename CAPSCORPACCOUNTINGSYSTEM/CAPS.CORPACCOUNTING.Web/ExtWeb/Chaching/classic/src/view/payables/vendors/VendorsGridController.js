@@ -15,38 +15,38 @@ Ext.define('Chaching.view.payables.vendors.VendorsGridController', {
             view = me.getView();
         var viewModel = formPanel.getViewModel();
         var form = formPanel.getForm();
+
+        var vendorTypeList = viewModel.getStore('vendorTypeList');
+        vendorTypeList.load();
+
+        var typeOfTaxList = viewModel.getStore('typeOfTaxList');
+        typeOfTaxList.load();
+
+        var typeof1099BoxList = viewModel.getStore('typeof1099BoxList');
+        typeof1099BoxList.load();
+
+        var paymentTermsList = viewModel.getStore('paymentTermsList');
+        paymentTermsList.load();
+
+        var rollupDivisionList = viewModel.getStore('rollupDivisionList');
+        rollupDivisionList.load();
+
+        var getTaxCreditList = viewModel.getStore('getTaxCreditList');
+        getTaxCreditList.load();
+
+        var glAccountList = viewModel.getStore('getAccountsList');
+        glAccountList.getProxy().setExtraParams({
+            value: 'true'
+        });
+        glAccountList.load();
+
+        var getAccountsListLines = viewModel.getStore('getAccountsListLines');
+        getAccountsListLines.getProxy().setExtraParams({
+            value: 'false'
+        });
+        getAccountsListLines.load();
+
         if (isEdit) {
-
-            var vendorTypeList = viewModel.getStore('vendorTypeList');
-            vendorTypeList.load();
-
-            var typeOfTaxList = viewModel.getStore('typeOfTaxList');
-            typeOfTaxList.load();
-
-            var typeof1099BoxList = viewModel.getStore('typeof1099BoxList');
-            typeof1099BoxList.load();
-
-            var paymentTermsList = viewModel.getStore('paymentTermsList');
-            paymentTermsList.load();
-
-            var rollupDivisionList = viewModel.getStore('rollupDivisionList');
-            rollupDivisionList.load();
-
-            var getTaxCreditList = viewModel.getStore('getTaxCreditList');
-            getTaxCreditList.load();
-
-            var glAccountList = viewModel.getStore('getAccountsList');
-            glAccountList.getProxy().setExtraParams({
-                value: 'true'
-            });
-            glAccountList.load();
-
-            var getAccountsListLines = viewModel.getStore('getAccountsListLines');
-            getAccountsListLines.getProxy().setExtraParams({
-                value: 'false'
-            });
-            getAccountsListLines.load();
-
             if (record) {
 
                 var vendorAliasGrid = formPanel.down('*[itemId=vendorAliasGrid]');
@@ -70,17 +70,17 @@ Ext.define('Chaching.view.payables.vendors.VendorsGridController', {
             }
         }
         else {
-            var glAccountList = viewModel.getStore('getAccountsList');
-            glAccountList.getProxy().setExtraParams({
-                value: 'true'
-            });
-            glAccountList.load();
+            //var glAccountList = viewModel.getStore('getAccountsList');
+            //glAccountList.getProxy().setExtraParams({
+            //    value: 'true'
+            //});
+            //glAccountList.load();
 
-            var getAccountsListLines = viewModel.getStore('getAccountsListLines');
-            getAccountsListLines.getProxy().setExtraParams({
-                value: 'false'
-            });
-            getAccountsListLines.load();
+            //var getAccountsListLines = viewModel.getStore('getAccountsListLines');
+            //getAccountsListLines.getProxy().setExtraParams({
+            //    value: 'false'
+            //});
+            //getAccountsListLines.load();
 
         }
     }

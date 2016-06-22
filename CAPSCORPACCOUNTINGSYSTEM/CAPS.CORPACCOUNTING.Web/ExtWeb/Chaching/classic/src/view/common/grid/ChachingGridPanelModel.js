@@ -15,7 +15,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                     return record.get('value');
                 }
             }],
-            xtype: 'ajax',
+            //xtype: 'ajax',
             autoLoad: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
@@ -31,6 +31,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
         typeOfSubAccountList: {
             fields: [{ name: 'name' }, { name: 'value' }, {
                 name: 'typeofSubAccount', convert: function (value, record) {
+                    //debugger;
                     return record.get('name');
                 }
             }, {
@@ -38,7 +39,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                     return record.get('value');
                 }
             }],
-            xtype: 'ajax',
+            //xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -61,6 +64,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -225,6 +230,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -312,6 +319,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -333,6 +342,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteFilter: false,
+            remoteSort: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -419,6 +430,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                 }
             }],
             xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',

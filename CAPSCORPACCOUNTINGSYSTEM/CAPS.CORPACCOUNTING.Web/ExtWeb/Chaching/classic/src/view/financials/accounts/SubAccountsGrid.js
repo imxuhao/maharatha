@@ -98,6 +98,13 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
                   xtype: 'combobox',
                   valueField: 'typeofSubAccountId',
                   displayField: 'typeofSubAccount',
+                  queryMode: 'local',
+                  triggerAction: 'all',
+                  loadStoreOnCreate: true,
+                  isViewmodelStore: true,
+                  forceSelection: true,
+                  isEnum: true,
+                  searchProperty:'typeofSubAccountId',
                   bind: {
                       store: '{typeOfSubAccountList}'
                   }

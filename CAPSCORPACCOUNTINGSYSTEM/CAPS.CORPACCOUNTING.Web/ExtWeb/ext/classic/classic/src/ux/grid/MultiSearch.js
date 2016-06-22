@@ -589,10 +589,17 @@ Ext.define('Ext.saki.grid.MultiSearch', {
             //}
 
             field = Ext.widget(cfg);
-            if ((field.xtype==="combo"||field.xtype==="combobox")&&field.queryMode==="local") {
+            if ((field.xtype === "combo" || field.xtype === "combobox") && field.queryMode === "local") {
                 var fieldStore = field.getStore();
+                if (field.isViewmodelStore) {
+                    var bindName = field.getBind().store.stub.name,
+                        viewModel = me.getViewModel();
+                    fieldStore = viewModel.getStore(bindName);
+                }
                 if (fieldStore && field.loadStoreOnCreate) {
-                    fieldStore.load();
+                    fieldStore.load(function (records, success) {
+                        field.setStore(fieldStore);
+                    });
                 }
             }
             if (item.hidden) {

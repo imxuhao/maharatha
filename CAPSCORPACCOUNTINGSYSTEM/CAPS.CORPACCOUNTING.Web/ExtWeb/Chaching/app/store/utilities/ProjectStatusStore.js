@@ -20,6 +20,8 @@ Ext.define('Chaching.store.utilities.ProjectStatusStore', {
             return record.get('value');
         }
     }],
+    remoteSort: false,
+    remoteFilter : false,
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',

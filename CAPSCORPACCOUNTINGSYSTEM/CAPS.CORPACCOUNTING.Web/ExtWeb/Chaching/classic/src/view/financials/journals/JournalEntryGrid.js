@@ -89,16 +89,19 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
                   xtype: 'combobox',
                   valueField: 'journalTypeId',
                   displayField: 'journalType',
-                  forceSelection: true,
-                  searchProperty: 'journalTypeId',
-                  isEnum: true,
                   width: '100%',
+                  queryMode: 'local',
+                  loadStoreOnCreate: true,
+                  forceSelection: true,
+                  isEnum: true,
+                  searchProperty: 'journalTypeId',
                   store: 'utilities.JournalTypeListStore'
               }, editor: {
                   xtype: 'combobox',
                   valueField: 'journalTypeId',
                   displayField: 'journalType',
                   queryMode: 'local',
+                  forceSelection: true,
                   store: 'utilities.JournalTypeListStore'
               }
           },

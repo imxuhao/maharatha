@@ -69,6 +69,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
             emptyText: app.localize('MandatoryField'),
             displayField: 'typeofSubAccount',
             valueField: 'typeofSubAccountId',
+            queryMode : 'local',
             bind: {
                 store: '{typeOfSubAccountList}'
             }

@@ -8847,13 +8847,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionDetailUnit(CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit)">
-            <summary>
-            Creating InvoiceEntryDocumnetDetails
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto">
             <summary>
             /// <summary>

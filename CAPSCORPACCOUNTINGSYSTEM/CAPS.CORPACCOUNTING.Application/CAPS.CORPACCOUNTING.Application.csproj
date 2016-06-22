@@ -161,6 +161,8 @@
     <Compile Include="Accounting\Dto\AccountingItemInputUnit.cs" />
     <Compile Include="Accounting\Dto\CreateSubAccountUnitInput.cs" />
     <Compile Include="Accounting\Dto\GetAccountRestrictionInput.cs" />
+    <Compile Include="Accounting\Dto\GetPurchaseOrderInput.cs" />
+    <Compile Include="Accounting\Dto\PurchaseOrderEntyDocumnetwithDetailOutputDto.cs" />
     <Compile Include="Accounting\Dto\SubAccountRestrictionUnitDto.cs" />
     <Compile Include="Accounting\Dto\SubAccountRestrictionUnitInput.cs" />
     <Compile Include="Accounting\Dto\SubAccountUnitDto.cs" />

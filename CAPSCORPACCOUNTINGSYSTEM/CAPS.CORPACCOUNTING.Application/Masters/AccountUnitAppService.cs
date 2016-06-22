@@ -60,7 +60,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 from linkAccounts in linkAccount.DefaultIfEmpty()
                 join typeOfAccount in _typeOfAccountRepository.GetAll() on au.TypeOfAccountId equals typeOfAccount.Id
                 into accounts
-                from coaunit in accounts.DefaultIfEmpty()
+                from typeofaccounts in accounts.DefaultIfEmpty()
                 join currencytype in _typeOfCurrencyRepository.GetAll() on au.TypeOfCurrencyId equals currencytype.Id
                 into currencyt
                 from currency in currencyt.DefaultIfEmpty()
@@ -70,7 +70,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 select new
                 {
                     Account = au,
-                    TypeOfAccount = coaunit.Description,
+                    TypeOfAccount = typeofaccounts.Description,
                     TypeOfAccountRate = accountresults.Description,
                     TypeOfCurrency = currency.Description,
                     LinkAccount = linkAccounts.Caption

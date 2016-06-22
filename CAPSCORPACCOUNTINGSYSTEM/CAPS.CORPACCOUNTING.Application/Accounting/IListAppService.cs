@@ -2,9 +2,9 @@
 using Abp.Application.Services.Dto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using CAPS.CORPACCOUNTING.Accounting.Dto;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -94,5 +94,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetListByNames(NameValueInputList input);
+
+       /// <summary>
+       ///Get PurchaseOrders
+       /// </summary>
+       /// <returns></returns>
+       Task<List<PurchaseOrderEntyDocumnetwithDetailOutputDto>> GetPurchaseOrderList(GetPurchaseOrderInput input);
     }
 }

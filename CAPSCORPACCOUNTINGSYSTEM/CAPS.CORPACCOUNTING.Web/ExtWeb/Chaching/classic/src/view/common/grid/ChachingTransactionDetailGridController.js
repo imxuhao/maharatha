@@ -111,7 +111,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         if (selectedRecords && selectedRecords.length === 1) {
             var parentRecord = selectedRecords[0],
                 parentIndex = gridStore.indexOf(parentRecord);
-            if (parentRecord.get('isSplit')) {
+            if (parentRecord.get('isAccountingItemSplit')) {
                 abp.notify.info(app.localize('AlreadySplit'), app.localize('ValidationFailed'));
                 return;
             }
@@ -127,7 +127,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
                 //firstValue = (Math.floor(amount * 100) / 100),
                 //decimalAmount = (parentRecord.get('amount') - (firstValue * multiplyOf)).toFixed(2);
                 //parentRecord.set('amount', +firstValue.toFixed(2));
-                parentRecord.set('isSplit', true);
+                parentRecord.set('isAccountingItemSplit', true);
                 var lastUsedSplitGroupCls = view.lastUsedSplitGroupCls,
                     splitGroupsCls = Chaching.utilities.ChachingGlobals.splitGroupCls;
 
@@ -151,7 +151,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
                     Ext.apply(rec.data, parentRecord.data);
                     rec.set('accountingItemOrigId', parentRecord.get('accountingItemId'));
                     rec.set('accountingItemId', 0);
-                    rec.set('isSplit', true);
+                    rec.set('isAccountingItemSplit', true);
                     rec.set('amount', 0);
                     rec.set('creatorUserId', null);
                     rec.set('lastModifierUserId', null);
@@ -186,7 +186,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         if (editor) {
             var context = editor.context,
                 record = context.record;
-            if (record&&record.get('isSplit')) {
+            if (record && record.get('isAccountingItemSplit')) {
                 var parentRec = record.get('parentRec');
                 if (parentRec) {
                     plusMinus === "minus" ? parentRec.set('amount', parseInt(parentRec.get('amount') - value)) : parentRec.set('amount', parseInt(parentRec.get('amount') + value));
@@ -274,7 +274,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         if (!moduleSpecificChecks) {
             return false;
         }
-        if (context.field === 'isSplit' && context.record.get('isSplit'))return false;
+        if (context.field === 'isAccountingItemSplit' && context.record.get('isAccountingItemSplit')) return false;
         var cell = view.getView().getCell(context.record, context.column);
         if (cell) {
             cell.removeCls("x-invalid-cell-value");

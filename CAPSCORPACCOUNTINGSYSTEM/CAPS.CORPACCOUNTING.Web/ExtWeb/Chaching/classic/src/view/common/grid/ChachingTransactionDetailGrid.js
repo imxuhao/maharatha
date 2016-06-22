@@ -117,7 +117,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
     isTransactionDetailsGrid: true,
     viewConfig: {
         getRowClass: function(record) {
-            if (record && record.get('isSplit')) {
+            if (record && record.get('isAccountingItemSplit')) {
                 return record.get('SplitGroupCls');
             }
             return '';
@@ -340,8 +340,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
     getSplitColumn: function () {
         return{
             xtype: 'gridcolumn',
-            name: 'isSplit',
-            dataIndex: 'isSplit',
+            name: 'isAccountingItemSplit',
+            dataIndex: 'isAccountingItemSplit',
             text: app.localize('Split'),
             width: 50,
             hideable: false,

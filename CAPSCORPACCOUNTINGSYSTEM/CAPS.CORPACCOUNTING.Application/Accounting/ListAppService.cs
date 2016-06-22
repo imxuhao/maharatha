@@ -7,17 +7,17 @@ using CAPS.CORPACCOUNTING.Helpers;
 using System.Data.Entity;
 using Abp.Linq.Extensions;
 using System.Collections.Generic;
+using Abp.AutoMapper;
 using Abp.Collections.Extensions;
 using Abp.Runtime.Caching;
-using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Accounting.Dto;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.PettyCash;
+using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.Sessions;
-using OfficeOpenXml.FormulaParsing.ExpressionGraph;
-using CAPS.CORPACCOUNTING.GenericSearch;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -39,10 +39,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IAccountCache _accountCache;
         private readonly ISubAccountCache _subAccountCache;
         private readonly ISubAccountRestrictionCache _subAccountRestrictionCache;
-        private readonly IRepository<SubAccountRestrictionUnit, long> _subAccountRestrictionRepository;
         private readonly IRepository<PettyCashAccountUnit, long> _pettyCashAccountUnitRepository;
         private readonly IRepository<VendorPaymentTermUnit> _vendorPaymentTermUnitRepository;
         private readonly IBankAccountCache _bankAccountCache;
+        private readonly IRepository<PurchaseOrderEntryDocumentUnit, long> _purchaseOrderEntryDocumentUnitRepository;
+        private readonly IRepository<PurchaseOrderEntryDocumentDetailUnit, long> _purchaseOrderEntryDocumentDetailUnitRepository;
 
 
         /// <summary>
@@ -66,9 +67,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
             CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
             IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
             IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache, IRepository<CoaUnit> coaUnit,
-            IRepository<SubAccountRestrictionUnit, long> subAccountRestrictionRepository, ISubAccountRestrictionCache subAccountRestrictionCache,
+            ISubAccountRestrictionCache subAccountRestrictionCache,
             IRepository<PettyCashAccountUnit, long> pettyCashAccountUnitRepository, IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository,
-            IBankAccountCache bankAccountCache)
+            IBankAccountCache bankAccountCache, IRepository<PurchaseOrderEntryDocumentDetailUnit, long> purchaseOrderEntryDocumentDetailUnitRepository,
+            IRepository<PurchaseOrderEntryDocumentUnit, long> purchaseOrderEntryDocumentUnitRepository)
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -82,11 +84,12 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _accountCache = accountCache;
             _subAccountCache = subAccountCache;
             _coaUnit = coaUnit;
-            _subAccountRestrictionRepository = subAccountRestrictionRepository;
             _subAccountRestrictionCache = subAccountRestrictionCache;
             _pettyCashAccountUnitRepository = pettyCashAccountUnitRepository;
             _vendorPaymentTermUnitRepository = vendorPaymentTermUnitRepository;
             _bankAccountCache = bankAccountCache;
+            _purchaseOrderEntryDocumentDetailUnitRepository = purchaseOrderEntryDocumentDetailUnitRepository;
+            _purchaseOrderEntryDocumentUnitRepository = purchaseOrderEntryDocumentUnitRepository;
         }
 
 
@@ -119,7 +122,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
             return accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where( p => p.ChartOfAccountId == chartOfAccountId).ToList();
+                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.ChartOfAccountId == chartOfAccountId).ToList();
 
 
         }
@@ -422,23 +425,59 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetVendorPaymentTermsList(AutoSearchInput input)
         {
-            var paymentTermsList =await _vendorPaymentTermUnitRepository.GetAll().WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) )
-                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString()}).ToListAsync();
+            var paymentTermsList = await _vendorPaymentTermUnitRepository.GetAll().WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
+                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return paymentTermsList;
         }
 
         /// <summary>
-        /// Get GetBankAccountList
+        /// Get BankAccountList
         /// </summary>
         /// <returns></returns>
         public async Task<List<BankAccountCacheItem>> GetBankAccountList(AutoSearchInput input)
         {
+
             var bankCacheItemList = await _bankAccountCache.GetBankAccountCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
             return bankCacheItemList.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.BankAccountName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.BankAccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
+
+        /// <summary>
+        ///Get PurchaseOrders
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<PurchaseOrderEntyDocumnetwithDetailOutputDto>> GetPurchaseOrderList(GetPurchaseOrderInput input)
+        {
+            var purchaseOrderReferences = !string.IsNullOrEmpty(input.PurchaseOrderReferences)?input.PurchaseOrderReferences.Split(','):null;
+
+            var query = from pounit in _purchaseOrderEntryDocumentUnitRepository.GetAll()
+                        join podetails in _purchaseOrderEntryDocumentDetailUnitRepository.GetAll() on pounit.Id equals podetails.AccountingDocumentId.Value
+                        select new
+                        {
+                            Isclosed=pounit.IsColse,
+                            Description = pounit.Description,
+                            DocumentReference = pounit.DocumentReference,
+                            DocumentDate = pounit.DocumentDate,
+                            podetails
+                        };
+            var results = await query.Where(p=>p.podetails.Amount>0 && p.Isclosed != true)
+                .WhereIf(!string.IsNullOrEmpty(input.PurchaseOrderReferences), u => purchaseOrderReferences.Contains(u.DocumentReference))
+                .WhereIf(input.VendorId != 0, u => u.podetails.VendorId== input.VendorId).ToListAsync();
+
+            return results.Select(item =>
+            {
+                var dto = item.podetails.MapTo<PurchaseOrderEntyDocumnetwithDetailOutputDto>();
+                dto.AccountId = item.podetails.Id;
+                dto.Description = item.Description;
+                dto.DocumentDate = item.DocumentDate;
+                dto.DocumentReference = item.DocumentReference;
+                return dto;
+            }).ToList();
+
+        }
+
 
     }
 

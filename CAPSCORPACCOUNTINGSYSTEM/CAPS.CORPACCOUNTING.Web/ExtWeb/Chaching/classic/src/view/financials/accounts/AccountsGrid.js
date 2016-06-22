@@ -90,8 +90,13 @@
              width: '8%',
              filterField: {
                  xtype: 'combobox',
+                 forceSelection:true,
+                 searchProperty: 'typeOfAccountId',
                  valueField: 'typeOfAccountId',
                  displayField: 'typeOfAccount',
+                 listConfig: {
+                     minWidth:300
+                 },
                  bind: {
                      store: '{typeOfAccountList}'
                  }
@@ -192,6 +197,8 @@
                  xtype: 'combobox',
                  valueField: 'typeOfCurrencyId',
                  displayField: 'typeOfCurrency',
+                 forceSelection: true,
+                 searchProperty: 'typeOfCurrencyId',
                  bind: {
                      store: '{typeOfCurrencyList}'
                  }
@@ -269,7 +276,6 @@
                  itemId: 'linkAccountId',
                  valueField: 'linkAccountId',
                  displayField: 'linkAccount',
-                 typeAhead: true,
                  queryMode: 'remote',
                  forceSelection: true,
                  bind: {

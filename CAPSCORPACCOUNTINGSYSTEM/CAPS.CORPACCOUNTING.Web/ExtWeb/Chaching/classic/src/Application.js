@@ -82,7 +82,9 @@ Ext.define('Chaching.Application', {
         'financials.accounts.AccountRestrictionLeftStore',
         'financials.accounts.AccountRestrictionRightStore',
         'payables.invoices.AccountsPayableStore',
-        'utilities.autofill.RollupAccountListStore'
+        'utilities.autofill.RollupAccountListStore',
+        'utilities.autofill.LinesListStore',
+        'utilities.autofill.GLAccountListStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

@@ -259,17 +259,46 @@
                       store: '{paymentTermsList}'
                   }
               }, {
-                  xtype: 'combobox',
-                  name: 'glAccountId',
-                  fieldLabel: app.localize('GLAccount').initCap(),
-                  width: '100%',
+                  //xtype: 'combobox',
+                  //name: 'glAccountId',
+                  //fieldLabel: app.localize('GLAccount').initCap(),
+                  //width: '100%',
+                  //ui: 'fieldLabelTop',
+                  //displayField: 'account',
+                  //valueField: 'accountId',
+                  //emptyText: app.localize('SelectOption'),
+                  //bind: {
+                  //    store: '{getAccountsList}'
+                  //}
+
+                  xtype: 'chachingcombobox',
+                  store: new Chaching.store.utilities.autofill.GLAccountListStore(),
+                  fieldLabel: app.localize('GLAccount'),
                   ui: 'fieldLabelTop',
-                  displayField: 'account',
+                  width: '100%',
+                  name: 'glAccountId',
                   valueField: 'accountId',
-                  emptyText: app.localize('SelectOption'),
-                  bind: {
-                      store: '{getAccountsList}'
-                  }
+                  displayField: 'accountNumber',
+                  queryMode: 'remote',
+                  minChars: 2,
+                  useDisplayFieldToSearch: true,
+                  modulePermissions: {
+                      read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                      create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                      edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                      destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+                  },
+                  primaryEntityCrudApi: {
+                      read: abp.appPath + 'api/services/app/vendorUnit/GetAccountsList',
+                      create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                      update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                      destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                  },
+                  createEditEntityType: 'financials.accounts.accounts',
+                  createEditEntityGridController: 'financials-accounts-accountsgrid',
+                  entityType: 'Account',
+                  isTwoEntityPicker: false
+
               }]
         },
                   {
@@ -317,6 +346,35 @@
                   //bind: {
                   //    store: '{getAccountsListLines}'
                   //}
+
+                  xtype: 'chachingcombobox',
+                  store: new Chaching.store.utilities.autofill.LinesListStore(),
+                  fieldLabel: app.localize('Line#'),
+                  ui: 'fieldLabelTop',
+                  width: '100%',
+                  name: 'accountId',
+                  valueField: 'accountId',
+                  displayField: 'accountNumber',
+                  queryMode: 'remote',
+                  minChars: 2,
+                  useDisplayFieldToSearch: true,
+                  modulePermissions: {
+                      read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs'),
+                      create: false,//abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs.Create'),
+                      edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs.Edit'),
+                      destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete')
+                  },
+                  primaryEntityCrudApi: {
+                      read: abp.appPath + 'api/services/app/vendorUnit/GetAccountsList',
+                      create: abp.appPath + 'api/services/app/linesUnit/CreateLineUnit',
+                      update: abp.appPath + 'api/services/app/linesUnit/UpdateLineUnit',
+                      destroy: abp.appPath + 'api/services/app/linesUnit/DeleteLineUnit'
+                  },
+                  createEditEntityType: 'projects.projectmaintenance.linenumbers',
+                  createEditEntityGridController: 'projects-projectmaintenance-linenumbersgrid',
+                  entityType: 'Line',
+                  isTwoEntityPicker: false
+
               }
 
 

@@ -6805,7 +6805,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerUnitInput.InputAddresses">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateCustomerUnitInput.Addresses">
             <summary> Gets or Sets Address Units </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput.LastName">

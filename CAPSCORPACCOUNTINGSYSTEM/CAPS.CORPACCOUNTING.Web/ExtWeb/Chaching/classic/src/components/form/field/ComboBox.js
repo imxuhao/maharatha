@@ -116,6 +116,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
     enableKeyEvents: true,
     typeAhead: false,
     editable: true,
+    hideTrigger:true,
     config: {
         filters: null,
 

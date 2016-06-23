@@ -39,7 +39,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
             name: 'jobNumber',
             itemId: 'jobNumber',
             allowBlank: false,
-            fieldLabel: app.localize('DivisionNumber').initCap(),
+            fieldLabel: app.localize('Number').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')

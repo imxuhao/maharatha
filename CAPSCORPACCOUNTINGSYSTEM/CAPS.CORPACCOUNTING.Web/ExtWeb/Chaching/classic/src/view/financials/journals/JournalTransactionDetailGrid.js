@@ -33,8 +33,8 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             //itemId: 'duplicatejob',
             width: 100,
             hideable: false,
-            valueField: 'jobId',///NOTE: Important to update record idField when replicating like excel
-            dataLoadClass: 'Chaching.store.utilities.autofill.JobDivisionStore',
+            valueField: 'creditJobId',///NOTE: Important to update record idField when replicating like excel
+            entityType: 'jobordivision',
             isMandatory:true,
             filterField: {
                 xtype: 'chachingcombobox',
@@ -135,13 +135,13 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             text: app.localize('LineNumber'),
             width: 100,
             hideable: false,
-            valueField: 'accountId',
+            valueField: 'creditAccountId',
             isMandatory: true,
-            dataLoadClass: 'Chaching.store.utilities.autofill.AccountsStore',
+            entityType: 'accounts',
             filterField: {
                 xtype: 'chachingcombobox',
                 store: new Chaching.store.utilities.autofill.AccountsStore(),
-                valueField: 'accountId',
+                valueField: 'creditAccountId',
                 displayField: 'creditAccountNumber',
                 queryMode: 'remote',
                 minChars: 2,
@@ -236,7 +236,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             //itemId: 'duplicatesubAccount1',
             width: 100,
             valueField: 'creditSubAccountId1',
-            dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+            entityType: 'subaccounts',
             filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccountNumber1', true),
             editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId1', 'creditSubAccountNumber1')
             ////TODO: add remaining combo once accounting field configuration is done
@@ -248,7 +248,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             //itemId: 'duplicatesubAccount1',
             width: 100,
             valueField: 'creditSubAccountId2',
-            dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+            entityType: 'subaccounts',
             filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId2', 'creditSubAccountNumber2', true),
             editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('creditSubAccountId2', 'creditSubAccountNumber2')
             ////TODO: add remaining combo once accounting field configuration is done
@@ -260,7 +260,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
         name: 'vendorName',
         width: '10%',
         valueField: 'vendorId',
-        dataLoadClass: 'Chaching.store.utilities.autofill.VendorsStore',
+        entityType: 'vendors',
         filterField: {
             xtype: 'chachingcombobox',
             store: new Chaching.store.utilities.autofill.VendorsStore(),

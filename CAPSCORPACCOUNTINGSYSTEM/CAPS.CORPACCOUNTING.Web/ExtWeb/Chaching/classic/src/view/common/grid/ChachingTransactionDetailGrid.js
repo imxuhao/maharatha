@@ -194,12 +194,6 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         if (modulePermissions.edit || modulePermissions.create) {
             plugins.push({
                 ptype: 'chachingClipboard',
-                //formats: {
-                //    text: {
-                //        get: 'getTextData',
-                //        put: 'putTextData'
-                //    }
-                //},
                 memory: true
             });
             plugins.push({
@@ -234,32 +228,6 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         me.plugins = plugins;
         me.features = features;
         me.callParent(arguments);
-
-        ///load all required data for copy/paste if column has combo as editor
-        //var allColumns = me.columns,
-        //    length = allColumns.length;
-        //for (var i = 0; i < length; i++) {
-        //    var col = allColumns[i];
-        //    if (col.valueField) { //if column has combo editor
-        //        var dataClassName = col.dataLoadClass;
-        //        if (!dataClassName) {
-        //            Ext.Error.raise('Please specify dataLoadClass for column' + col.dataIndex);
-        //        }
-        //        var loadClass = Ext.create(dataClassName);
-        //        loadClass.column = col;
-        //        loadClass.load({
-        //            callback: function(records, operation, success) {
-        //                if (this.column) {
-        //                    var remoteData = [];
-        //                    Ext.each(records, function(record) {
-        //                        remoteData.push(record.data);
-        //                    });
-        //                    this.column.remoteData = remoteData;
-        //                }
-        //            }
-        //        });
-        //    }
-        //}
     },
     getDefaultActionButtons:function() {
         var me = this,
@@ -417,7 +385,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 hideable: false,
                 valueField: 'jobId',///***** Important to set ValueField for column to work copy/paste functionality.
-                dataLoadClass: 'Chaching.store.utilities.autofill.JobDivisionStore',
+                entityType:'jobordivision',
                 isMandatory: true,
                 filterField: {
                     xtype: 'chachingcombobox',
@@ -520,7 +488,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 width: '10%',
                 hideable: false,
                 valueField: 'accountId',///***** Important to set ValueField for column to work copy/paste functionality.
-                dataLoadClass: 'Chaching.store.utilities.autofill.AccountsStore',
+                entityType: 'accounts',
                 isMandatory: true,
                 filterField: {
                     xtype: 'chachingcombobox',
@@ -620,7 +588,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount1').initCap(),
                 width: '10%',
                 valueField: 'subAccountId1',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccountNumber1',true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId1', 'subAccountNumber1')
             },{
@@ -630,7 +598,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount2').initCap(),
                 width: '10%',
                 valueField: 'subAccountId2',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId2', 'subAccountNumber2',true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId2', 'subAccountNumber2')
             }, {
@@ -640,7 +608,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount3').initCap(),
                 width: '10%',
                 valueField: 'subAccountId3',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId3', 'subAccountNumber3',true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId3', 'subAccountNumber3')
             }, {
@@ -650,7 +618,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount4').initCap(),
                 width: '10%',
                 valueField: 'subAccountId4',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId4', 'subAccountNumber4',true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId4', 'subAccountNumber4')
             }, {
@@ -660,7 +628,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount5').initCap(),
                 width: '10%',
                 valueField: 'subAccountId5',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId5', 'subAccountNumber5', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId5', 'subAccountNumber5')
             }, {
@@ -670,7 +638,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount6').initCap(),
                 width: '10%',
                 valueField: 'subAccountId6',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId6', 'subAccountNumber6', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId6', 'subAccountNumber6')
             }, {
@@ -680,7 +648,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount7').initCap(),
                 width: '10%',
                 valueField: 'subAccountId7',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId7', 'subAccountNumber7', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId7', 'subAccountNumber7')
             }, {
@@ -690,7 +658,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount8').initCap(),
                 width: '10%',
                 valueField: 'subAccountId8',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId8', 'subAccountNumber8', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId8', 'subAccountNumber8')
             }, {
@@ -700,7 +668,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount9').initCap(),
                 width: '10%',
                 valueField: 'subAccountId9',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId9', 'subAccountNumber9', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId9', 'subAccountNumber9')
             }, {
@@ -710,7 +678,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('SubAccount10').initCap(),
                 width: '10%',
                 valueField: 'subAccountId10',
-                dataLoadClass: 'Chaching.store.utilities.autofill.SubAccountsStore',
+                entityType: 'subaccounts',
                 filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId10', 'subAccountNumber10', true),
                 editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo('subAccountId10', 'subAccountNumber10')
             }, {
@@ -720,7 +688,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('Ten99Code').initCap(),
                 width: '10%',
                 valueField: 'typeOf1099T4Id',
-                dataLoadClass: 'Chaching.store.utilities.autofill.T41099Store',
+                entityType: '1099T4',
                 filterField: {
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.T41099Store(),
@@ -856,7 +824,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('TaxRebate'),
                 width: '10%',
                 valueField: 'taxRebateId',
-                dataLoadClass: 'Chaching.store.utilities.autofill.TaxRebateStore',
+                entityType: 'taxcredit',
                 filterField: {
                     xtype: 'combobox',
                     store: new Chaching.store.utilities.autofill.TaxRebateStore(),

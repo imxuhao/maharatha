@@ -21,6 +21,7 @@
          'payables.invoices',
          'batchposting.batches',
          'banking.banksetup',
-         'financials.fiscalperiod'
+         'financials.fiscalperiod',
+         'receivables.customers'
     ]
 });

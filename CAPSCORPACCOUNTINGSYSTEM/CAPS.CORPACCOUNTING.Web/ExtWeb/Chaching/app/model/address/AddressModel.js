@@ -7,9 +7,9 @@
         { name: 'addressId', type: 'int', isPrimaryKey: true },
         { name: 'objectId', type: 'int' },
         { name: 'typeofObjectId', type: "int", defaultVaule: null, convert: nullHandler },
-           { name: 'TypeofObject', type: 'string' },
+        { name: 'TypeofObject', type: 'string' },
         { name: 'addressTypeId', type: 'auto' },
-         { name: 'AddressType', type: 'string' },
+        { name: 'AddressType', type: 'string' },
         { name: 'contactNumber', type: 'string' },
         { name: 'line1', type: 'string' },
         { name: 'line2', type: 'string' },
@@ -26,8 +26,10 @@
         { name: 'phone2', type: "string" },
         { name: 'phone2Extension', type: "string" },
         { name: 'website', type: "string" },
-        { name: 'isPrimary', type: "boolean" }
+        { name: 'isPrimary', type: "boolean" },
+        { name: 'tenantId', type: "int" },
+        { name: 'organizationUnitId', type: "int" }
 
-    ],
+    ]//,
     //belongsTo: 'Chaching.model.payables.vendors.VendorsModel'
 });

@@ -44,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public long? OrganizationUnitId { get; set; }
         
         /// <summary> Gets or Sets Address Units </summary>
-        public List<UpdateAddressUnitInput> InputAddresses { get; set; }
+        public List<UpdateAddressUnitInput> Addresses { get; set; }
     }
 
     

@@ -404,7 +404,12 @@
     <text name="EditingCOA" value="Editing Chart Of Account" />
     <text name="DeletingCOA" value="Deleting Chart Of Account" />
     <text name="EditCOA" value="Edit Chart Of Account" />
-
+    <text name="EditCustomer" value="Edit Customer" />
+    <text name="ViewCustomer" value="View Customer" />
+    <text name="CustomerName" value="Customer Name" />
+    <text name="CustomerSearch" value="Customer Search" />
+    <text name="CustomerNumber" value="Customer #" />
+    <text name="CreatingNewCustomers" value="Creating New Customers" />
     <text name="ConvertToNewCOA" value="Convert To New COA" />
     <text name="StdGroupTotal" value="Std Group Total" />
     <text name="IsCorporate" value="Corporate" />
@@ -432,6 +437,7 @@
     <text name="ProjectMaintenance" value="Project Maintenance" />
     <text name="Receivables" value="Receivables" />
     <text name="Customers" value="Customers" />
+    <text name="Customer" value="Customer" />
     <text name="Invoices" value="Invoices" />
     <text name="Preferences" value="Preferences" />
     <text name="Payables" value="Payables" />
@@ -448,6 +454,7 @@
     <text name="BillingTypes" value="Billing Types" />
     <text name="History" value="History" />
     <text name="PaymentTerms" value="Payment Terms" />
+    <text name="PaymentInformation" value="Payment Information" />
     <text name="Territories" value="Territories" />
     <text name="ARInvoiceInquiry" value="AR Invoice Inquiry" />
     <text name="CustomerSummary" value="Customer Summary" />
@@ -663,6 +670,7 @@
     <text name="Address3" value="Address3" />
     <text name="Address4" value="Address4" />
     <text name="CompanyName" value="Company Name" />
+    <text name="CompanyLastName" value="Company/Last Name" />
     <text name="BillingAccount#" value="Billing Account #" />
     <text name="TaxInformation" value="Tax Information" />
     <text name="TaxCredit" value="Tax Credit" />
@@ -910,5 +918,6 @@
  <text name="DueDate" value="Due date" />
  <text name="CheckGroup" value="Check group" />
  <text name="MemoLine" value="Memoline" />
+ <text name="PaymentMethods" value="Payment Methods" />
   </texts>
 </localizationDictionary>

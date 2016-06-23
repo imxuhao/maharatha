@@ -380,17 +380,44 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             //    change:'onAgencyChange'
                             //}
 
-                            xtype: 'autofillcombo',
-                            name: 'agencyId',
-                            itemId: 'agencyId',
+                            //xtype: 'autofillcombo',
+                            //name: 'agencyId',
+                            //itemId: 'agencyId',
+                            //fieldLabel: app.localize('Agency'),
+                            //store: 'utilities.autofill.CustomerListStore',
+                            //valueField: 'customerId',
+                            //displayField: 'name',
+                            //entityGridController: 'payables-vendors-vendorsgrid',
+                            //nameOfEntity: 'Vendor',
+                            //entityType: 'payables.vendors',
+                            //entityPermission: 'Payables.Vendors'
+
+                            xtype: 'chachingcombobox',
+                            store: new Chaching.store.utilities.autofill.CustomerListStore(),
                             fieldLabel: app.localize('Agency'),
-                            store: 'utilities.autofill.CustomerListStore',
+                            ui: 'fieldLabelTop',
+                            width: '100%',
+                            name: 'agencyId',
                             valueField: 'customerId',
-                            displayField: 'name',
-                            entityGridController: 'payables-vendors-vendorsgrid',
-                            nameOfEntity: 'Vendor',
-                            entityType: 'payables.vendors',
-                            entityPermission: 'Payables.Vendors'
+                            displayField: 'customerNumber',
+                            queryMode: 'remote',
+                            minChars: 2,
+                            useDisplayFieldToSearch: true,
+                            modulePermissions: {
+                                read: abp.auth.isGranted('Pages.Receivables.Customers'),
+                                create: true,//abp.auth.isGranted('Pages.Receivables.Customers.Create'),
+                                edit: true,//abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
+                                destroy: true//abp.auth.isGranted('Pages.Receivables.Customers.Delete'),
+                            },
+                            primaryEntityCrudApi: {
+                                read: abp.appPath + 'api/services/app/jobUnit/GetCustomersList',
+                                create: abp.appPath + 'api/services/app/customerUnit/CreateCustomerUnit',
+                                update: abp.appPath + 'api/services/app/customerUnit/UpdateCustomerUnit',
+                                destroy: abp.appPath + 'api/services/app/customerUnit/DeleteCustomerUnit'
+                            },
+                            createEditEntityType: 'receivables.customers',
+                            createEditEntityGridController: 'receivables-customers-customersgrid',
+                            entityType: 'Customer'
                             
                         }, {
                             xtype: 'textfield',

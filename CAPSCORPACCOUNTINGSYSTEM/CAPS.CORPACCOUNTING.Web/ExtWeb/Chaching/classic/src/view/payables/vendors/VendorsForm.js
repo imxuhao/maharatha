@@ -1,6 +1,8 @@
 ﻿Ext.define('Chaching.view.payables.vendors.VendorsForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
-    alias: ['widget.payables.vendors.create', 'widget.payables.vendors.edit'],
+    alias: ['widget.payables.vendors.create', 'widget.payables.vendors.edit'
+        //, 'widget.receivables.customers.edit', 'widget.receivables.customers.create'
+    ],
     requires: [
         'Chaching.view.payables.vendors.VendorsFormController'
     ],

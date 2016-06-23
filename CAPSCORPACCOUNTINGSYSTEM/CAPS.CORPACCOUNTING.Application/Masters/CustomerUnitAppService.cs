@@ -65,6 +65,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         address.Country != null || address.Email != null || address.Phone1!=null || address.Website !=null)
                     {
                         address.ObjectId = customerUnit.Id;
+                        address.TypeofObjectId = TypeofObject.Customer;
                         await _addressAppService.CreateAddressUnit(address);
                         await CurrentUnitOfWork.SaveChangesAsync();
                     }
@@ -172,26 +173,29 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<CustomerUnitDto> UpdateCustomerUnit(UpdateCustomerUnitInput input)
         {
             var customerUnit = await _customerUnitRepository.GetAsync(input.CustomerId);
-            foreach (var address in input.InputAddresses)
+            if (!ReferenceEquals(input.Addresses, null))
             {
-                if (address.AddressId != 0)
-                    await _addressAppService.UpdateAddressUnit(address);
-                else
+                foreach (var address in input.Addresses)
                 {
-                    if (address.Line1 != null || address.Line2 != null ||
-                        address.Line4 != null || address.Line4 != null ||
-                        address.State != null || address.Country != null ||
-                        address.Email != null || address.Phone1 != null || address.Website != null)
+                    if (address.AddressId != 0)
+                        await _addressAppService.UpdateAddressUnit(address);
+                    else
                     {
-                        address.TypeofObjectId = TypeofObject.Customer;
-                        address.ObjectId = input.CustomerId;
-                        await
-                            _addressAppService.CreateAddressUnit(
-                                AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
+                        if (address.Line1 != null || address.Line2 != null ||
+                            address.Line4 != null || address.Line4 != null ||
+                            address.State != null || address.Country != null ||
+                            address.Email != null || address.Phone1 != null || address.Website != null)
+                        {
+                            address.TypeofObjectId = TypeofObject.Customer;
+                            address.ObjectId = input.CustomerId;
+                            await
+                                _addressAppService.CreateAddressUnit(
+                                    AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
+                        }
                     }
-                }
-                await CurrentUnitOfWork.SaveChangesAsync();
+                    await CurrentUnitOfWork.SaveChangesAsync();
 
+                }
             }
 
             #region Setting the values to be updated

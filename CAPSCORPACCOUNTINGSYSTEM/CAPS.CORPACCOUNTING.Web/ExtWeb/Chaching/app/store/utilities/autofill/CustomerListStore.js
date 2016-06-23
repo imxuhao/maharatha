@@ -6,12 +6,12 @@
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',
-        urlToGetRecordById : abp.appPath + 'api/services/app/vendorUnit/GetVendorUnitsById',
+        urlToGetRecordById: abp.appPath + 'api/services/app/customerUnit/GetCustomerUnitsById',
         api : {
             read: abp.appPath + 'api/services/app/jobUnit/GetCustomersList',
-            create: abp.appPath + 'api/services/app/vendorUnit/CreateVendorUnit',
-            update: abp.appPath + 'api/services/app/vendorUnit/UpdateVendorUnit',
-            destroy: abp.appPath + 'api/services/app/vendorUnit/DeleteVendorUnit'
+            create: abp.appPath + 'api/services/app/customerUnit/CreateCustomerUnit',
+            update: abp.appPath + 'api/services/app/customerUnit/UpdateCustomerUnit',
+            destroy: abp.appPath + 'api/services/app/customerUnit/DeleteCustomerUnit'
         },
        // url: abp.appPath + 'api/services/app/jobUnit/GetCustomersList',
         reader: {
@@ -19,7 +19,7 @@
             rootProperty: 'result'
         }
     },
-    idPropertyField: 'vendorId'//important to set for add/update of records
+    idPropertyField: 'customerId'//important to set for add/update of records
 });
 
 

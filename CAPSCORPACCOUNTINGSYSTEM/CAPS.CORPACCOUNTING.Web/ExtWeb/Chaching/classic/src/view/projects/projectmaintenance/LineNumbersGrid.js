@@ -149,26 +149,32 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              sortable: true,
              groupable: true,
              width: '15%',
-             itemId: 'rollupAccountId',
+             itemId: 'rollupAccountId',            
              filterField: {
-                 xtype: 'combobox',
-                 valueField: 'rollupAccountId',
-                 displayField: 'rollupAccount',
-                 queryMode: 'remote',
-                 forceSelection:true,
-                 bind: {
-                     store: '{rollupAccountList}'
+                 xtype: 'chachingcombobox',
+                 store: new Chaching.store.financials.accounts.RollupAccountListStore(),
+                 width: '100%',
+                 searchProperty: 'rollupAccountId',
+                 valueField: 'accountId',
+                 displayField: 'accountNumber',
+                 forceSelection: true,
+                 minChars: 2,
+                 modulePermissions: {
+                     read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                     create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                     edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                     destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
                  },
-                 listeners: {
-                     beforequery: function (query, eOpts) {
-                         var grid = this.up().grid;
-                         if (grid) {
-                             var coaId = grid.coaId;
-                             var myStore = this.getStore();
-                             myStore.getProxy().setExtraParam('Id', coaId);
-                         }
-                     }
-                 }
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + 'api/services/app/accountUnit/GetRollupAccountsList',
+                     create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                     update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                     destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                 },
+                 createEditEntityType: 'financials.accounts.accounts',
+                 createEditEntityGridController: 'financials-accounts-accountsgrid',
+                 entityType: 'Account',
+                 isTwoEntityPicker: false
              }
          }, {
              xtype: 'gridcolumn',
@@ -178,13 +184,11 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              sortable: true,
              groupable: true,
              width: '10%',
-             valueField: 'rollupJobId',
-             dataLoadClass: 'Chaching.store.utilities.autofill.DivisionListStore',
              filterField: {
                  xtype: 'chachingcombobox',
                  store: new Chaching.store.utilities.autofill.DivisionListStore(),
-                 valueField: 'rollupJobId',
-                 displayField: 'rollUpDivision',
+                 valueField: 'jobId',
+                 displayField: 'jobNumber',
                  queryMode: 'remote',
                  forceSelection: true,
                  searchProperty : 'rollupJobId',

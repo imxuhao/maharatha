@@ -66,15 +66,34 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
             }
         }
         , {
-            xtype: 'combobox',
+
+            xtype: 'chachingcombobox',
+            store: new Chaching.store.financials.accounts.RollupAccountListStore(),
+            fieldLabel: app.localize('RollUpAccount'),
+            ui: 'fieldLabelTop',
+            width: '100%',
             name: 'rollupAccountId',
-            fieldLabel: app.localize('RollUpAccount').initCap(),
-            width: '100%',           
-            ui: 'fieldLabelTop',           
-            displayField: 'name',
-            valueField: 'value',
-            store: 'financials.accounts.RollupAccountStore',
-            queryMode:'local'           
+            valueField: 'accountId',
+            displayField: 'accountNumber',
+            queryMode: 'remote',
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + 'api/services/app/accountUnit/GetRollupAccountsList',
+                create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+            },
+            createEditEntityType: 'financials.accounts.accounts',
+            createEditEntityGridController: 'financials-accounts-accountsgrid',
+            entityType: 'Account',
+            isTwoEntityPicker: false
         }
         , {
             xtype: 'combobox',

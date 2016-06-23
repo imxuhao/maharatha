@@ -144,6 +144,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
         items:[
         {
             xtype: 'chachingGridDragDrop',
+            leftTitle: '',
+            rightTitle: '',
             columns: [
                 {
                     xtype: 'gridcolumn',

@@ -52,6 +52,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
             ui: 'fieldLabelTop',
             displayField: 'typeOfCurrency',
             valueField: 'typeOfCurrencyId',
+            queryMode:'local',
             bind: {
                 store: '{typeOfCurrencyList}'
             }

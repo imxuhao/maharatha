@@ -89,6 +89,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             emptyText: app.localize('StdGroupTotal'),
             displayField: 'standardGroupTotal',
             valueField: 'standardGroupTotalId',
+            queryMode:'local',
             bind: {
                 store: '{StandardGroupTotalList}'
             }
@@ -102,6 +103,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             emptyText: app.localize('ConvertToNewCOA'),
             displayField: 'linkChartOfAccount',
             valueField: 'linkChartOfAccountID',
+            queryMode: 'local',
             bind: {
                 store: '{linkChartOfAccountList}'
             }

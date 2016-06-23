@@ -36,14 +36,12 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
             }
         }
     },
-    doAfterCreateAction: function (createMode, formView, isEdit) {
-        if (formView && isEdit) {
-            var viewModel = formView.getViewModel();
-            var StandardGroupTotal = viewModel.getStore('StandardGroupTotalList');
-            StandardGroupTotal.load();
-            var linkChartOfAccount = viewModel.getStore('linkChartOfAccountList');
-            linkChartOfAccount.load();
-        }
+    doAfterCreateAction: function(createMode, formView, isEdit) {
+        var viewModel = formView.getViewModel();
+        var standardGroupTotal = viewModel.getStore('StandardGroupTotalList');
+        standardGroupTotal.load();
+        var linkChartOfAccount = viewModel.getStore('linkChartOfAccountList');
+        linkChartOfAccount.load();
     }
-    
+
 });

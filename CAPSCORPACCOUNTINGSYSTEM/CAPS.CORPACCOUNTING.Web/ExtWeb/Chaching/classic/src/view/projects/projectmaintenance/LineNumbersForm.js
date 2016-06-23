@@ -144,7 +144,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
             width: '100%',
             name: 'rollupJobId',
             valueField: 'rollupJobId',
-            displayField: 'caption',
+            displayField: 'jobNumber',
             queryMode: 'remote',
             minChars: 2,
             useDisplayFieldToSearch: true,

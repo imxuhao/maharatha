@@ -132,31 +132,92 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         fieldLabel: app.localize('BudgetFormat') ,
                                         emptyText: app.localize('MandatoryField')
                                     }, {
-                                        xtype: 'combobox',
-                                        name: 'rollupAccountId',
-                                        itemId: 'rollupAccountId',
-                                        queryMode: 'remote',
-                                        bind: {
-                                            store: '{genericRollupAccountList}'
-                                        },
-                                        valueField: 'value',
-                                        displayField: 'name',
-                                        width: '100%',
+                                        //xtype: 'combobox',
+                                        //name: 'rollupAccountId',
+                                        //itemId: 'rollupAccountId',
+                                        //queryMode: 'remote',
+                                        //bind: {
+                                        //    store: '{genericRollupAccountList}'
+                                        //},
+                                        //valueField: 'value',
+                                        //displayField: 'name',
+                                        //width: '100%',
+                                        //ui: 'fieldLabelTop',
+                                        //fieldLabel: app.localize('RollupAccount'),
+                                        //emptyText: app.localize('SelectOption')
+
+                                        xtype: 'chachingcombobox',
+                                        store: new Chaching.store.financials.accounts.RollupAccountListStore(),
+                                        fieldLabel: app.localize('RollUpAccount'),
                                         ui: 'fieldLabelTop',
-                                        fieldLabel: app.localize('RollupAccount'),
-                                        emptyText: app.localize('SelectOption')
+                                        width: '100%',
+                                        name: 'rollupAccountId',
+                                        valueField: 'accountId',
+                                        displayField: 'accountNumber',
+                                        queryMode: 'remote',
+                                        minChars: 2,
+                                        useDisplayFieldToSearch: true,
+                                        modulePermissions: {
+                                            read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
+                                            create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
+                                            edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
+                                            destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
+                                        },
+                                        primaryEntityCrudApi: {
+                                            read: abp.appPath + 'api/services/app/accountUnit/GetRollupAccountsList',
+                                            create: abp.appPath + 'api/services/app/accountUnit/CreateAccountUnit',
+                                            update: abp.appPath + 'api/services/app/accountUnit/UpdateAccountUnit',
+                                            destroy: abp.appPath + 'api/services/app/accountUnit/DeleteAccountUnit'
+                                        },
+                                        createEditEntityType: 'financials.accounts.accounts',
+                                        createEditEntityGridController: 'financials-accounts-accountsgrid',
+                                        entityType: 'Account',
+                                        isTwoEntityPicker: false
+
+
                                     }, {
-                                        xtype: 'combobox',
+                                        //xtype: 'combobox',
+                                        //name: 'rollupJobId',
+                                        //itemId: 'rollupJobId',
+                                        //queryMode: 'local',
+                                        //store: 'financials.accounts.DivisionsStore',
+                                        //valueField: 'jobId',
+                                        //displayField: 'caption',
+                                        //width: '100%',
+                                        //ui: 'fieldLabelTop',
+                                        //fieldLabel: app.localize('RollupDivision'),
+                                        //emptyText: app.localize('SelectOption')
+
+                                        xtype: 'chachingcombobox',
+                                        store: new Chaching.store.utilities.autofill.DivisionListStore(),
+                                        fieldLabel: app.localize('RollUpDivision'),
+                                        ui: 'fieldLabelTop',
+                                        width: '100%',
                                         name: 'rollupJobId',
                                         itemId: 'rollupJobId',
-                                        queryMode: 'local',
-                                        store: 'financials.accounts.DivisionsStore',
-                                        valueField: 'jobId',
-                                        displayField: 'caption',
-                                        width: '100%',
-                                        ui: 'fieldLabelTop',
-                                        fieldLabel: app.localize('RollupDivision'),
-                                        emptyText: app.localize('SelectOption')
+                                        valueField: 'rollupJobId',
+                                        displayField: 'jobNumber',
+                                        queryMode: 'remote',
+                                        minChars: 2,
+                                        useDisplayFieldToSearch: true,
+                                        modulePermissions: {
+                                            read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
+                                            create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
+                                            edit: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Edit'),
+                                            destroy: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Delete')
+                                        },
+                                        primaryEntityCrudApi: {
+                                            read: abp.appPath + 'api/services/app/jobUnit/GetDivisionList',
+                                            create: abp.appPath + 'api/services/app/divisionUnit/CreateDivisionUnit',
+                                            update: abp.appPath + 'api/services/app/divisionUnit/UpdateDivisionUnit',
+                                            destroy: abp.appPath + 'api/services/app/divisionUnit/DeleteDivisionUnit'
+                                        },
+                                        createEditEntityType: 'financials.accounts.divisions',
+                                        createEditEntityGridController: 'financials-accounts-divisionsgrid',
+                                        entityType: 'Division',
+                                        useDisplayFieldToSearch: true,
+                                        identificationKey: 'isDivision'
+
                                     }]
                             }, {
                                 columnWidth: .33,

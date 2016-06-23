@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
@@ -13,9 +14,12 @@ using System.Linq.Dynamic;
 using CAPS.CORPACCOUNTING.Helpers;
 using System.Collections.Generic;
 using Abp.Authorization;
+using Abp.Collections.Extensions;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Common;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
+using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -29,11 +33,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly IRepository<CoaUnit, int> _coaRepository;
         private readonly UserManager _userManager;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly CustomAppSession _customAppSession;
+        private readonly AccountCache _accountcache;
 
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
-            IRepository<CoaUnit, int> coaRepository)
+            IRepository<CoaUnit, int> coaRepository, AccountCache accountcache, CustomAppSession customAppSession)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
@@ -43,6 +49,8 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _typeOfCurrencyRateRepository = typeOfCurrencyRateRepository;
             _typeOfCurrencyRepository = typeOfCurrencyRepository;
             _coaRepository = coaRepository;
+            _accountcache = accountcache;
+            _customAppSession = customAppSession;
         }
 
         /// <summary>
@@ -268,16 +276,18 @@ namespace CAPS.CORPACCOUNTING.Accounts
         }
 
         /// <summary>
-        /// Get GetRollupAccountsList 
+        /// Get CorporateRollupAccountsList 
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetRollupAccountsList(AutoSearchInput input)
+        public async Task<List<AccountCacheItem>> GetRollupAccountsList(AutoSearchInput input)
         {
-            return await (from au in _accountUnitRepository.GetAll()
-                         .Where(p => p.IsRollupAccount == true && p.ChartOfAccountId == input.Id)
-                         .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
-                         .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                          select new NameValueDto { Name = au.Caption, Value = au.Id.ToString() }).ToListAsync();
+            var accountList = await _accountcache.GetAccountCacheItemAsync(
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+
+            return accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+                p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.IsCorporate == true && p.IsRollupAccount == true).ToList();
+
         }
 
         /// <summary>

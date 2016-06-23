@@ -4,6 +4,7 @@ using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -129,7 +130,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetAccountsList(AutoSearchInput search);
+        Task<List<AccountCacheItem>> GetAccountsList(AutoSearchInput search);
        
     }
 }

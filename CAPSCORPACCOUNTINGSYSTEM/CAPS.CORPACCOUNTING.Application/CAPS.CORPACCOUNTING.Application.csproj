@@ -291,6 +291,7 @@
     <Compile Include="Helper\CacheItems\SubAccountRestrictionCacheItem.cs" />
     <Compile Include="Helper\CacheItems\SubAccountCacheItem.cs" />
     <Compile Include="Helper\CacheItems\DivisionCacheItem.cs" />
+    <Compile Include="Helper\CacheItems\CustomerCacheItem.cs" />
     <Compile Include="Helper\CacheItems\VendorCacheItem.cs" />
     <Compile Include="Helper\CacheKeyStores.cs" />
     <Compile Include="Helper\CacheItem.cs" />

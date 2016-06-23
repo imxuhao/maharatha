@@ -5,6 +5,7 @@ using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
 using Castle.Core;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -79,7 +80,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// Get RollupAccountsList
         /// </summary>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetRollupAccountsList(AutoSearchInput input);
+        Task<List<AccountCacheItem>> GetRollupAccountsList(AutoSearchInput input);
         /// <summary>
         /// Get TypeofCurrencyRate
         /// </summary>

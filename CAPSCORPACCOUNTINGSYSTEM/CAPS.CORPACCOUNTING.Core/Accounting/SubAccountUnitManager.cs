@@ -26,10 +26,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
-        public virtual async Task CreateAsync(SubAccountUnit subAccountUnit)
+        public virtual async Task<long> CreateAsync(SubAccountUnit subAccountUnit)
         {
             await ValidateSubAccountUnitAsync(subAccountUnit);
-            await SubAccountUnitRepository.InsertAsync(subAccountUnit);
+           return await SubAccountUnitRepository.InsertAndGetIdAsync(subAccountUnit);
         }
 
         public virtual async Task UpdateAsync(SubAccountUnit subAccountUnit)

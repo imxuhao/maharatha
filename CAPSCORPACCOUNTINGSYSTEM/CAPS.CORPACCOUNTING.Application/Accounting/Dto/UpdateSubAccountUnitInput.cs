@@ -2,9 +2,12 @@
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking;
 using System.ComponentModel.DataAnnotations;
+using Abp.AutoMapper;
+
 namespace CAPS.CORPACCOUNTING.Accounting.Dto
 {
-   public class UpdateSubAccountUnitInput : IInputDto
+    [AutoMapTo(typeof(SubAccountUnit))]
+    public class UpdateSubAccountUnitInput : IInputDto
     {
         /// <summary>Gets or sets the SubAccountId field. </summary>
         public long SubAccountId { get; set; }

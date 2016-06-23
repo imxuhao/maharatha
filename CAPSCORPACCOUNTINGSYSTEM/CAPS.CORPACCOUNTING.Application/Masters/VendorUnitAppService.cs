@@ -20,6 +20,7 @@ using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Runtime.Caching;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -44,6 +45,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly VendorAliasUnitManager _vendorAliasUnitManager;
         private readonly CustomAppSession _customAppSession;
         private readonly ICacheManager _cacheManager;
+        private readonly IAccountCache _accountCache;
 
         /// <summary>
         /// 
@@ -67,8 +69,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             IRepository<TypeOfCountryUnit, short> typeOfCountryRepository, IRepository<RegionUnit> regionRepository,
             IRepository<CountryUnit> countryRepository, IRepository<VendorAliasUnit> vendorAliasUnitRepository,
             IRepository<AccountUnit, long> accountUnitRepository, IRepository<CoaUnit> coaUnitRepository,
-            VendorAliasUnitManager vendorAliasUnitManager, CustomAppSession customAppSession, ICacheManager cacheManager
-            )
+            VendorAliasUnitManager vendorAliasUnitManager, CustomAppSession customAppSession, ICacheManager cacheManager, IAccountCache accountCache)
         {
             _vendorUnitManager = vendorUnitManager;
             _vendorUnitRepository = vendorUnitRepository;
@@ -85,6 +86,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             _vendorAliasUnitManager = vendorAliasUnitManager;
             _customAppSession = customAppSession;
             _cacheManager = cacheManager;
+            _accountCache = accountCache;
         }
 
         /// <summary>
@@ -507,23 +509,25 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetRegionList()
         {
-            var RegionList = await _regionRepository.GetAll().Select(u => new NameValueDto { Name = u.Description + " (" + u.RegionAbbreviation + ")", Value = u.Id.ToString() }).ToListAsync();
-            return RegionList;
+            var regionList = await _regionRepository.GetAll().Select(u => new NameValueDto { Name = u.Description + " (" + u.RegionAbbreviation + ")", Value = u.Id.ToString() }).ToListAsync();
+            return regionList;
         }
 
 
         /// <summary>
-        /// 
+        /// Get the ProjectCoa AccountList
         /// </summary>
-        /// <param name="search"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetAccountsList(AutoSearchInput search)
+        public async Task<List<AccountCacheItem>> GetAccountsList(AutoSearchInput input)
         {
-            var accountList = await (from account in _accountUnitRepository.GetAll()
-                                     join coa in _coaUnitRepository.GetAll() on account.ChartOfAccountId equals coa.Id
-                                     where coa.IsCorporate == search.Value
-                                     select new NameValueDto { Name = account.Caption, Value = account.Id.ToString() }).ToListAsync();
-            return accountList;
+
+            var accountList = await _accountCache.GetAccountCacheItemAsync(
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+
+            return accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+                p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.IsCorporate == input.Value).ToList();
         }
 
         /// <summary>

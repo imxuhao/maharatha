@@ -15,7 +15,15 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the AccountId</summary>
         public long AccountId { get; set; }
 
+        /// <summary>Gets or sets the Caption</summary>
+
         public string Caption { get; set; }
+        /// <summary>Gets or sets the Description</summary>
+        /// 
+
+        public string AccountNumber { get; set; }
+        /// <summary>Gets or sets the AccountNumber</summary>
+        /// 
         public string Description { get; set; }
 
         /// <summary>Gets or sets the SubAccountId </summary>

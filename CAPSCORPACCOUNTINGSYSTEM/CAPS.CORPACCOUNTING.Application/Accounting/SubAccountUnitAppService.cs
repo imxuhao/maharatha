@@ -57,19 +57,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<SubAccountUnitDto> CreateSubAccountUnit(CreateSubAccountUnitInput input)
         {
             var subAccountUnit = input.MapTo<SubAccountUnit>();
-            await _subAccountUnitManager.CreateAsync(subAccountUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();
-
-            SubAccountRestrictionUnitInput x = new SubAccountRestrictionUnitInput()
-            {
-                AccountId = 1,
-                SubAccountId = 4,
-                SubAccountRestrictionId = 0,
-                OrganizationUnitId = 1
-            };
+            long subAccountId= await _subAccountUnitManager.CreateAsync(subAccountUnit);
             
             if(!ReferenceEquals(input.SubAccountRestrictionList,null))
-            await CreateorUpdateSubAccountRestrictions(input.SubAccountRestrictionList);
+            await CreateorUpdateSubAccountRestrictions(input: input.SubAccountRestrictionList, id:subAccountId);
+            await CurrentUnitOfWork.SaveChangesAsync();
             return subAccountUnit.MapTo<SubAccountUnitDto>();
         }
 
@@ -82,13 +74,12 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<SubAccountUnitDto> UpdateSubAccountUnit(UpdateSubAccountUnitInput input)
         {
             var subAccountUnit = await _subAccountUnitRepository.GetAsync(input.SubAccountId);
-            Mapper.CreateMap<UpdateSubAccountUnitInput, SubAccountUnit>()
-                          .ForMember(u => u.Id, ap => ap.MapFrom(src => src.SubAccountId));
             Mapper.Map(input, subAccountUnit);
             await _subAccountUnitManager.UpdateAsync(subAccountUnit);
-            await CurrentUnitOfWork.SaveChangesAsync();
+            
             if (!ReferenceEquals(input.SubAccountRestrictionList, null))
-                await CreateorUpdateSubAccountRestrictions(input.SubAccountRestrictionList);
+                await CreateorUpdateSubAccountRestrictions(input:input.SubAccountRestrictionList,id:input.SubAccountId);
+            await CurrentUnitOfWork.SaveChangesAsync();
             return subAccountUnit.MapTo<SubAccountUnitDto>();
         }
 
@@ -160,8 +151,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<SubAccountUnitDto> GetSubAccountUnitsById(IdInput input)
         {
-            var SubAccountUnitItem = await _subAccountUnitRepository.GetAsync(input.Id);
-            return SubAccountUnitItem.MapTo<SubAccountUnitDto>();
+            var subAccountUnitItem = await _subAccountUnitRepository.GetAsync(input.Id);
+            return subAccountUnitItem.MapTo<SubAccountUnitDto>();
         }
 
         private IQueryable<SubAccountUnitDto> CreateSubAccountQuery(SearchInputDto input)
@@ -220,14 +211,16 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             var query = from subaccountrestriction in _subAccountRestrictionUnitRepository.GetAll()
                         join account in _accountUnitRepository.GetAll() on subaccountrestriction.AccountId equals account.Id
-                        select new { subaccountrestriction, Caption = account.Caption };
+                        select new { subaccountrestriction, Caption = account.Caption,AccountNumber=account.AccountNumber,Description=account.Description };
 
             var subAccountRestrictionList = await query.Where(p => p.subaccountrestriction.SubAccountId == input.SubAccountId && p.subaccountrestriction.IsActive == true).ToListAsync();
             return subAccountRestrictionList.Select(item =>
             {
                 var dto = item.subaccountrestriction.MapTo<SubAccountRestrictionUnitDto>();
                 dto.SubAccountRestrictionId = item.subaccountrestriction.Id;
+                dto.AccountNumber = item.AccountNumber;
                 dto.Caption = item.Caption;
+                dto.Description = item.Description;
                 return dto;
             }).ToList();
 
@@ -283,7 +276,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <param name="input"></param>
         /// <returns></returns>
 
-        private async Task CreateorUpdateSubAccountRestrictions(List<SubAccountRestrictionUnitInput> input)
+        private async Task CreateorUpdateSubAccountRestrictions(List<SubAccountRestrictionUnitInput> input,long id)
         {
             foreach (var subaccountrestriction in input)
             {
@@ -291,22 +284,22 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 {
                     var subAccountRestrictionUnit = subaccountrestriction.MapTo<SubAccountRestrictionUnit>();
                     subAccountRestrictionUnit.IsActive = true;
+                    subAccountRestrictionUnit.SubAccountId = id;
                     await _subAccountRestrictionUnitManager.CreateAsync(subAccountRestrictionUnit);
-                    await CurrentUnitOfWork.SaveChangesAsync();
+                   
 
                 }
                 else
                 {
-                    var subrestrictionAccountUnit = await _subAccountRestrictionUnitRepository.GetAsync(subaccountrestriction.SubAccountRestrictionId);
-                    subaccountrestriction.IsActive = false;
-                    Mapper.Map(subaccountrestriction, subrestrictionAccountUnit);
-                    await _subAccountRestrictionUnitManager.UpdateAsync(subrestrictionAccountUnit);
-                    await CurrentUnitOfWork.SaveChangesAsync();
+                    var subAccountRestrictionUnit = await _subAccountRestrictionUnitRepository.GetAsync(subaccountrestriction.SubAccountRestrictionId);
+                    subAccountRestrictionUnit.IsActive = false;
+                    subAccountRestrictionUnit.SubAccountId = id;
+                    Mapper.Map(subaccountrestriction, subAccountRestrictionUnit);
+                    await _subAccountRestrictionUnitManager.UpdateAsync(subAccountRestrictionUnit);
+                  
 
                 }
             }
-
-
 
         }
     }

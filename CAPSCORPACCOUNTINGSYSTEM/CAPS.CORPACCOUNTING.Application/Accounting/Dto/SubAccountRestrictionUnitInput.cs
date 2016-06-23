@@ -17,11 +17,7 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the AccountId</summary>
         [Range(1, Int64.MaxValue, ErrorMessage = "Account is Required")]
         public long AccountId { get; set; }
-
-
-        /// <summary>Gets or sets the SubAccountId </summary>
-        [Range(1, Int64.MaxValue, ErrorMessage = "SubAccount is Required")]
-        public long SubAccountId { get; set; }
+       
 
         /// <summary>Gets or sets the IsActive </summary>
         public bool IsActive { get; set; }

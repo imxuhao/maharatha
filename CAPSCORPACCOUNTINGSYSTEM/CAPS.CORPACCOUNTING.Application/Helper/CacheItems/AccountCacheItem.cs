@@ -40,8 +40,13 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         public int? TypeOfAccountId { get; set; }
         /// <summary> Gets or sets TypeOfAccountId </summary>
         public int? ChartOfAccountId { get; set; }
+        /// <summary> Gets or sets IsCorporate </summary>
         public bool IsCorporate { get; set; }
-        
+
+        /// <summary> Gets or sets IsRollupAccount </summary>
+
+        public bool IsRollupAccount { get; set; }
+
     }
 
     public interface IAccountCache : IEntityCache<AccountCacheItem>
@@ -103,7 +108,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             var querry = from account in Repository.GetAll()
                            join coa in _coaRepository.GetAll() on account.ChartOfAccountId equals coa.Id
                            into coaunits from coaunit in coaunits.DefaultIfEmpty()
-                           select new {account, coaunit };
+                           select new {account, IsCorporate= coaunit.IsCorporate };
 
 
             var result=await querry.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.account.OrganizationUnitId == input.OrganizationUnitId).ToListAsync();
@@ -114,7 +119,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                 Caption = u.account.Caption,
                 Description = u.account.Description,
                 ChartOfAccountId = u.account.ChartOfAccountId,
-                IsCorporate = u.coaunit.IsCorporate
+                IsCorporate = u.IsCorporate,
+                IsRollupAccount = u.account.IsRollupAccount
             }).ToList();
 
         }
@@ -122,7 +128,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <summary>
         /// Get Accounts
         /// </summary>
-        /// <param name="subaccountkey"></param>
+        /// <param name="accountkey"></param>
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task<CacheItem> GetAccountCacheItemAsync(string accountkey, AutoSearchInput input)

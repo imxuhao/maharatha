@@ -553,6 +553,17 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.AccountId">
             <summary>Gets or sets the AccountId</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.Caption">
+            <summary>Gets or sets the Caption</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.AccountNumber">
+            <summary>Gets or sets the Description</summary>
+            
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.Description">
+            <summary>Gets or sets the AccountNumber</summary>
+            
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitDto.SubAccountId">
             <summary>Gets or sets the SubAccountId </summary>
         </member>
@@ -572,9 +583,6 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.AccountId">
             <summary>Gets or sets the AccountId</summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.SubAccountId">
-            <summary>Gets or sets the SubAccountId </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.IsActive">
             <summary>Gets or sets the IsActive </summary>
@@ -1076,7 +1084,6 @@
             <param name="accountCache"></param>
             <param name="subAccountCache"></param>
             <param name="coaUnit"></param>
-            <param name="subAccountRestrictionRepository"></param>
             <param name="subAccountRestrictionCache"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
@@ -1265,7 +1272,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput})">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput},System.Int64)">
             <summary>
             Create or Update SubAccountRestrictions
             </summary>
@@ -2885,6 +2892,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.ChartOfAccountId">
             <summary> Gets or sets TypeOfAccountId </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.IsCorporate">
+            <summary> Gets or sets IsCorporate </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.IsRollupAccount">
+            <summary> Gets or sets IsRollupAccount </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get Accounts from Database
@@ -2896,7 +2909,7 @@
             <summary>
             Get Accounts
             </summary>
-            <param name="subaccountkey"></param>
+            <param name="accountkey"></param>
             <param name="input"></param>
             <returns></returns>
         </member>
@@ -3001,6 +3014,39 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.TypeOfJobStatusId">
             <summary> Gets or sets IsDivision </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem">
+            <summary>
+            CustomerCustomer CacheItem Class
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem.CustomerId">
+            <summary> Gets or sets CustomerId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem.LastName">
+            <summary> Gets or sets LastName </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem.FirstName">
+            <summary> Gets or sets FirstName </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem.CustomerNumber">
+            <summary> Gets or sets CustomerNumber </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem.CustomerPayTermsId">
+            <summary> Gets or sets CustomerPayTermsId </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ICustomerCache.GetCustomersCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Customers
+            </summary>
+            <param name="customerkey"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCache">
+            <summary>
+            Implementing Icustomer Interface
+            </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.VendorCacheItem">
             <summary>
@@ -4922,13 +4968,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetGenericRollupAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get AllFinancialRollupAccountList 
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.GetProjectTypeList">
             <summary>
             Get ProjectTypeList
@@ -5014,6 +5053,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService">
+            <summary>
+            JobAppService
+            </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.CreateJobUnit(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput)">
             <summary>
             To create the Job.
@@ -5066,7 +5110,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetGenericRollupAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.GetRollupAccountList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get AllFinancialRollupAccountList 
             </summary>
@@ -5504,7 +5548,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.GetRollupAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
-            Get GetRollupAccountsList 
+            Get CorporateRollupAccountsList 
             </summary>
             <returns></returns>
         </member>
@@ -8339,7 +8383,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.#ctor(CAPS.CORPACCOUNTING.Masters.VendorUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCountryUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorAliasUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Masters.VendorAliasUnitManager,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Runtime.Caching.ICacheManager)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.#ctor(CAPS.CORPACCOUNTING.Masters.VendorUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCountryUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorAliasUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Masters.VendorAliasUnitManager,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Runtime.Caching.ICacheManager,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache)">
             <summary>
             
             </summary>
@@ -8460,9 +8504,9 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
-            
+            Get the ProjectCoa AccountList
             </summary>
-            <param name="search"></param>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetVendorAliasUnits(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">

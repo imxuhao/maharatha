@@ -219,9 +219,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
             //use the required URL :http://www.cronmaker.com/help/rest-api-help.html
             var client = new HttpClient();
-            string strCronReturned= string.Empty;
+            string strCronReturned = string.Empty;
             // Create the HttpContent for the form to be posted.
-            var requestContent = new FormUrlEncodedContent(new[] {new KeyValuePair<string, string>("SUMIT", "This is a block of text"),});
+            var requestContent = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("SUMIT", "This is a block of text"), });
 
             // Get the response.
             HttpResponseMessage response = await client.PostAsync(" http://www.cronmaker.com/rest/hourly/every/1", requestContent);
@@ -237,6 +237,26 @@ namespace CAPS.CORPACCOUNTING.Helpers
             //}
 
             return response.Content.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="keySelector"></param>
+        /// <returns></returns>
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        {
+            HashSet<TKey> seenKeys = new HashSet<TKey>();
+            foreach (TSource element in source)
+            {
+                if (seenKeys.Add(keySelector(element)))
+                {
+                    yield return element;
+                }
+            }
         }
     }
 }

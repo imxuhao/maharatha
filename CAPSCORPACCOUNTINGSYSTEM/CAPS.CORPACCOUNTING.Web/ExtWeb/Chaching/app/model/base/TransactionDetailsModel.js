@@ -65,7 +65,7 @@ Ext.define('Chaching.model.base.TransactionDetailsModel', {
         { name: 'accountingItemOrigAmount', type: 'float', defaultValue: null, convert: nullHandler },
         { name: 'accountingItemTypeOfModificationId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'accountingItemTypeOfModification', type: 'string' },
-        { name: 'accountingItemOrigId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'splitAccountingItemId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'accountingItemOrig', type: 'string' },
         { name: 'ictJobId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'ictJob', type: 'string' },

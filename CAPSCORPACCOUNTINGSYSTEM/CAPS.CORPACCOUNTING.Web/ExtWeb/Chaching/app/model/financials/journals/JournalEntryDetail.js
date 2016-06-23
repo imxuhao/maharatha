@@ -5,13 +5,13 @@
     },
     fields:
     [
-        { name: 'vendorId', type: 'int',defaultValue: null, convert: nullHandler },
+        { name: 'vendorId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'vendorName', type: 'string' },
         { name: 'purchaseOrderItemId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'purchaseOrderItem', type: 'string' },
         { name: 'batchName', type: 'string' },
         { name: 'debitCreditGroup', type: 'string' },
-        {name:'creditAccountingItemId',type:'auto'},
+        { name: 'creditAccountingItemId', type: 'auto' },
         { name: 'creditAccountNumber', type: 'string' },
         { name: 'creditAccountId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'creditJobNumber', type: 'string' },
@@ -39,6 +39,8 @@
         { name: 'typeOfTransactionId', type: 'int', defaultValue: 1 },
         { name: 'typeOfTransaction', type: 'string', defaultValue: 'APInvoice' },
          { name: 'typeOfAmountId', type: 'int', defaultValue: 1 },
-        { name: 'typeOfAmount', type: 'string', defaultValue: 'StandardEntry' }
+        { name: 'typeOfAmount', type: 'string', defaultValue: 'StandardEntry' },
+         { name: 'debitAccountingItemId', type: 'int', defaultValue: null, convert: nullHandler }
+
     ]
 });

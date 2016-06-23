@@ -18,5 +18,8 @@ namespace CAPS.CORPACCOUNTING.Journals.dto
 
         /// <summary>Gets or sets the PurchaseOrderItem field. </summary>   
         public string PurchaseOrderItem { get; set; }
+
+        /// <summary>Gets or sets the DebitAccountingItemId field. </summary>   
+        public virtual long? DebitAccountingItemId { get; set; }
     }
 }

@@ -161,5 +161,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Gets or sets the CompanyId field. </summary>
         [Range(1,Int64.MaxValue,ErrorMessage = "Please setup the Organization.")]
         public virtual long OrganizationUnitId { get; set; }
+
+        /// <summary>Get Sets the CronExpression field.</summary>
+
+        public virtual string CronExpression { get; set; }
     }
 }

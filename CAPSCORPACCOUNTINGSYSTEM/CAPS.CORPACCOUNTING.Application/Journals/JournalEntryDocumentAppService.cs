@@ -207,7 +207,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             var creditJournal =
                 await
                     _journalEntryDocumentDetailUnitRepository.FirstOrDefaultAsync(
-                        u => u.AccountingItemOrigId == input.Id);
+                        u => u.DebitAccountingItemId == input.Id);
             if (!ReferenceEquals(creditJournal, null))
             {
                 await _journalEntryDocumentDetailUnitManager.DeleteAsync(new IdInput<long>() { Id = creditJournal.Id });
@@ -419,7 +419,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                     case 1:
                         var creditJournalItem =
                             journalEntryDocDetailList.Find(
-                                u => u.AccountingItemOrigId == journalEntryDocDetailList[i].AccountingItemId);
+                                u => u.DebitAccountingItemId == journalEntryDocDetailList[i].AccountingItemId);
                         if (!ReferenceEquals(creditJournalItem, null))
                         {
                             journalDetail.CreditAccountingItemId = creditJournalItem.AccountingItemId;
@@ -433,7 +433,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                             journalDetail.CreditSubAccountNumber1 = creditJournalItem.SubAccountNumber1;
                             journalDetail.CreditSubAccountNumber2 = creditJournalItem.SubAccountNumber2;
                             journalDetail.CreditSubAccountNumber3 = creditJournalItem.SubAccountNumber3;
-                            journalDetail.AccountingItemOrigId = creditJournalItem.AccountingItemOrigId;
+                            journalDetail.DebitAccountingItemId = creditJournalItem.DebitAccountingItemId;
                             journalEntryDocDetailList.Remove(creditJournalItem);
                         }
                         journaList.Add(journalDetail);
@@ -450,7 +450,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                         journalDetail.CreditSubAccountNumber1 = journalEntryDocDetailList[i].SubAccountNumber1;
                         journalDetail.CreditSubAccountNumber2 = journalEntryDocDetailList[i].SubAccountNumber2;
                         journalDetail.CreditSubAccountNumber3 = journalEntryDocDetailList[i].SubAccountNumber3;
-                        journalDetail.AccountingItemOrigId = journalEntryDocDetailList[i].AccountingItemOrigId;
+                        journalDetail.DebitAccountingItemId = journalEntryDocDetailList[i].DebitAccountingItemId;
                         journalDetail.AccountId = null;
                         journalDetail.AccountNumber = string.Empty;
                         journalDetail.JobId = null;
@@ -501,7 +501,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                         journalDetail = journalEntryDetails[i].MapTo<JournalEntryDocumentDetailUnit>();
                         if (journalDetail.Id == 0)
                             journalDetail.AccountingItemOrigAmount = journalDetail.Amount;
-                        journalDetail.AccountingItemOrigId = null;
+                        journalDetail.DebitAccountingItemId = null;
                         await _journalEntryDocumentDetailUnitManager.CreateAsync(journalDetail);
                         debitParentId = journalDetail.Id;
 
@@ -519,7 +519,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                             //delete credit Entry
                             if (journalDetail.Id != 0)
                                 _journalEntryDocumentDetailUnitRepository.Delete(
-                                    u => u.AccountingItemOrigId == journalDetail.Id);
+                                    u => u.DebitAccountingItemId == journalDetail.Id);
                         }
                     }
                     else
@@ -543,7 +543,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                         {
                             debitParentId = 0;
                             Mapper.Map(journalEntryDetails[i], journalDetail);
-                            journalDetail.AccountingItemOrigId = null;
+                            journalDetail.DebitAccountingItemId = null;
                             await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalDetail);
                             debitParentId = journalDetail.Id;
 
@@ -561,14 +561,14 @@ namespace CAPS.CORPACCOUNTING.Journals
                                 //delete credit Entry
                                 if (journalDetail.Id != 0)
                                     _journalEntryDocumentDetailUnitRepository.Delete(
-                                        u => u.AccountingItemOrigId == journalDetail.Id);
+                                        u => u.DebitAccountingItemId == journalDetail.Id);
 
                             }
                         }
                         else if (journalEntryDetails[i].Amount.Value < 0)
                         {
                             Mapper.Map(journalEntryDetails[i], journalDetail);
-                            journalDetail.AccountingItemOrigId = null;
+                            journalDetail.DebitAccountingItemId = null;
                             await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalDetail);
                         }
                     }
@@ -578,17 +578,17 @@ namespace CAPS.CORPACCOUNTING.Journals
                         if (journalEntryDetails[i].Amount.Value < 0)
                         {
                             Mapper.Map(journalEntryDetails[i], journalDetail);
-                            if (journalDetail.AccountingItemOrigId != null && journalDetail.AccountingItemOrigId != 0)
+                            if (journalDetail.DebitAccountingItemId != null && journalDetail.DebitAccountingItemId != 0)
                             {
                                 _journalEntryDocumentDetailUnitRepository.Delete(
-                                    u => u.Id == journalDetail.AccountingItemOrigId);
-                                journalDetail.AccountingItemOrigId = null;
+                                    u => u.Id == journalDetail.DebitAccountingItemId);
+                                journalDetail.DebitAccountingItemId = null;
                             }
                             await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalDetail);
                         }
                         else
                         {
-                            journalDetail.AccountingItemOrigId = null;
+                            journalDetail.DebitAccountingItemId = null;
                             Mapper.Map(journalEntryDetails[i], journalDetail);
                             await _journalEntryDocumentDetailUnitManager.UpdateAsync(journalDetail);
                         }
@@ -602,9 +602,9 @@ namespace CAPS.CORPACCOUNTING.Journals
         {
             JournalEntryDocumentDetailUnit journalDetail = new JournalEntryDocumentDetailUnit();
             if (debitParentId != 0)
-                creditJournalItem.AccountingItemOrigId = debitParentId;
+                creditJournalItem.DebitAccountingItemId = debitParentId;
             else
-                creditJournalItem.AccountingItemOrigId = null;
+                creditJournalItem.DebitAccountingItemId = null;
 
             if (creditJournalItem.AccountingItemId != 0)
             {

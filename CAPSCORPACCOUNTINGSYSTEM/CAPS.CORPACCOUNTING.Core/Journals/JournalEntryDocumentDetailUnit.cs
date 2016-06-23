@@ -18,5 +18,11 @@ namespace CAPS.CORPACCOUNTING.Journals
 
         /// <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
         public virtual long? PurchaseOrderItemId { get; set; }
+
+        /// <summary>Gets or sets the DebitAccountingItemId field. </summary>   
+        public virtual long? DebitAccountingItemId { get; set; }
+
+        [ForeignKey("DebitAccountingItemId")]
+        public virtual AccountingItemUnit AccountingItem { get; set; }
     }
 }

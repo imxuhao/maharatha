@@ -207,8 +207,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountingItemTypeOfModification">
             <summary>Gets or sets the AccountingItemTypeOfModification field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountingItemOrigId">
-            <summary>Gets or sets the AccountingItemOrigID field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.SplitAccountingItemId">
+            <summary>Gets or sets the SplitAccountingItemId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountingItemOrig">
             <summary>Gets or sets the AccountingItemOrig field. </summary>
@@ -401,8 +401,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.AccountingItemTypeOfModificationId">
             <summary>Gets or sets the AccountingItemTypeOfModificationID field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.AccountingItemOrigId">
-            <summary>Gets or sets the AccountingItemOrigID field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.SplitAccountingItemId">
+            <summary>Gets or sets the SplitAccountingItemId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.IctJobId">
             <summary>Gets or sets the ICTJobID field. </summary>
@@ -918,6 +918,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionInputUnit.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionInputUnit.CronExpression">
+            <summary>Get Sets the CronExpression field.</summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get Jobs or Divisions List based on OrganizationUnitId
@@ -1084,6 +1087,7 @@
             <param name="accountCache"></param>
             <param name="subAccountCache"></param>
             <param name="coaUnit"></param>
+            <param name="subAccountRestrictionRepository"></param>
             <param name="subAccountRestrictionCache"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
@@ -1172,6 +1176,13 @@
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetTaxCreditListByNames(CAPS.CORPACCOUNTING.Masters.Dto.NameValueInputList)">
             <summary>
             Get TaxCredit List by using Numbers
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetTypeof1099T4ListByNames(CAPS.CORPACCOUNTING.Masters.Dto.NameValueInputList)">
+            <summary>
+            Get Typeof1099T4 List by using Numbers
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3195,6 +3206,16 @@
             
             </summary>
             <param name="strCronNeeded"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.Helper.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="source"></param>
+            <param name="keySelector"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.Sort">
@@ -5234,6 +5255,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailUnitDto.PurchaseOrderItem">
             <summary>Gets or sets the PurchaseOrderItem field. </summary>   
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailUnitDto.DebitAccountingItemId">
+            <summary>Gets or sets the DebitAccountingItemId field. </summary>   
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit">
             <summary>
             
@@ -5247,6 +5271,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit.DebitCreditGroup">
             <summary>Gets or sets the DebitCreditGroup field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDetailInputUnit.DebitAccountingItemId">
+            <summary>Gets or sets the DebitAccountingItemId field. </summary>   
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Journals.dto.JournalEntryDocumentInputUnit">
             <summary>
@@ -8887,13 +8914,6 @@
         <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.GetAPHeaderTransactionDetailUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             Get APHeaderDetailsByAccountingDocumentId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionDetailUnit(CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit)">
-            <summary>
-            Creating InvoiceEntryDocumnetDetails
             </summary>
             <param name="input"></param>
             <returns></returns>

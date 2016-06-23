@@ -246,6 +246,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 case "taxcredit":
                     list = await GetTaxCreditListByNames(input);
                     break;
+                case "1099T4":
+                    list = await GetTypeof1099T4ListByNames(input);
+                    break;
             }
             return list;
         }
@@ -262,12 +265,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
             var result = (from jobNames in input.NameValueList
                           join jobOrdivision in jobOrDivisionList.DivisionCacheItemList.ToList() on jobNames.Name equals jobOrdivision.JobNumber
-                              into jobOrdivisions
-                          from jobList in jobOrdivisions.DefaultIfEmpty()
                           select new NameValueDto()
                           {
                               Name = jobNames.Name,
-                              Value = jobList?.JobId.ToString()?? ""
+                              Value = jobOrdivision?.JobId.ToString() ?? ""
                           }).ToList();
             return result;
         }
@@ -284,8 +285,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
             var result = (from accNames in input.NameValueList
                           join account in accountList.AccountCacheItemList.ToList() on accNames.Name equals account.AccountNumber
-                              into accounts
-                          from account in accounts.DefaultIfEmpty()
                           select new NameValueDto()
                           {
                               Name = accNames.Name,
@@ -313,8 +312,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
             var result = (from subaccountNumber in input.NameValueList
                           join subAccount in subAccountRestrictionList.ToList() on subaccountNumber.Name equals subAccount.SubAccountNumber
-                              into subAccounts
-                          from subAccount in subAccounts.DefaultIfEmpty()
                           select new NameValueDto()
                           {
                               Name = subaccountNumber.Name,
@@ -333,16 +330,39 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private async Task<List<NameValueDto>> GetVendorsListByNames(NameValueInputList input)
         {
             var vendorsList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
+            var strVendorNames = input.NameValueList.Select(u => u.Name).ToArray();
+            //var result = (from vendorNames in input.NameValueList
+            //              join vendor in vendorsList.ToList()
+            //              on vendorNames.Name equals vendor.LastName
+            //              select new NameValueDto()
+            //              {
+            //                  Name = vendorNames.Name,
+            //                  Value = vendor?.VendorId.ToString() ?? ""
+            //              }).ToList();
 
+            var vendorFirstNameList = vendorsList.ToList().Where(u => strVendorNames.Contains(u.FirstName))
+            .Select(u => new NameValueDto()
+            {
+                Name = u.FirstName,
+                Value = u.VendorId.ToString()
+            }).ToList();
+
+            var vendorLastNameList = vendorsList.ToList().Where(u => strVendorNames.Contains(u.LastName))
+            .Select(u => new NameValueDto()
+            {
+                Name = u.LastName,
+                Value = u.VendorId.ToString()
+            }).ToList();
+
+            var vendorList = vendorFirstNameList.Union(vendorLastNameList).DistinctBy(u => u.Name);
             var result = (from vendorNames in input.NameValueList
-                          join vendor in vendorsList.ToList() on vendorNames.Name equals vendor.VendorNumber
-                              into vendors
-                          from vendor in vendors.DefaultIfEmpty()
+                          join vendors in vendorList on vendorNames.Name equals vendors.Name
                           select new NameValueDto()
                           {
                               Name = vendorNames.Name,
-                              Value = vendor?.VendorId.ToString() ?? ""
+                              Value = vendors?.Value ?? ""
                           }).ToList();
+
             return result;
         }
 
@@ -365,15 +385,31 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 .AsNoTracking()
                 .ToListAsync();
 
-            var result = (from jobNames in input.NameValueList
-                          join taxCredit in taxCreditList on jobNames.Name equals taxCredit.Name
-                              into taxCredit
-                          from taxCredits in taxCredit.DefaultIfEmpty()
+            var result = (from taxCreditNames in input.NameValueList
+                          join taxCredit in taxCreditList on taxCreditNames.Name equals taxCredit.Name
                           select new NameValueDto()
                           {
-                              Name = jobNames.Name,
-                              Value = taxCredits?.Value ?? ""
+                              Name = taxCreditNames.Name,
+                              Value = taxCredit?.Value ?? ""
                           }).ToList();
+            return result;
+        }
+
+        /// <summary>
+        /// Get Typeof1099T4 List by using Numbers
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private async Task<List<NameValueDto>> GetTypeof1099T4ListByNames(NameValueInputList input)
+        {
+            var result =
+                (from value in input.NameValueList
+                 join typeof1099T4 in EnumList.GetTypeof1099T4List() on value.Name equals typeof1099T4.Name
+                 select new NameValueDto()
+                 {
+                     Name = value.Name,
+                     Value = typeof1099T4?.Value ?? ""
+                 }).ToList();
             return result;
         }
 
@@ -450,21 +486,21 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<PurchaseOrderEntyDocumnetwithDetailOutputDto>> GetPurchaseOrderList(GetPurchaseOrderInput input)
         {
-            var purchaseOrderReferences = !string.IsNullOrEmpty(input.PurchaseOrderReferences)?input.PurchaseOrderReferences.Split(','):null;
+            var purchaseOrderReferences = !string.IsNullOrEmpty(input.PurchaseOrderReferences) ? input.PurchaseOrderReferences.Split(',') : null;
 
             var query = from pounit in _purchaseOrderEntryDocumentUnitRepository.GetAll()
                         join podetails in _purchaseOrderEntryDocumentDetailUnitRepository.GetAll() on pounit.Id equals podetails.AccountingDocumentId.Value
                         select new
                         {
-                            Isclosed=pounit.IsColse,
+                            Isclosed = pounit.IsColse,
                             Description = pounit.Description,
                             DocumentReference = pounit.DocumentReference,
                             DocumentDate = pounit.DocumentDate,
                             podetails
                         };
-            var results = await query.Where(p=>p.podetails.Amount>0 && p.Isclosed != true)
+            var results = await query.Where(p => p.podetails.Amount > 0 && p.Isclosed != true)
                 .WhereIf(!string.IsNullOrEmpty(input.PurchaseOrderReferences), u => purchaseOrderReferences.Contains(u.DocumentReference))
-                .WhereIf(input.VendorId != 0, u => u.podetails.VendorId== input.VendorId).ToListAsync();
+                .WhereIf(input.VendorId != 0, u => u.podetails.VendorId == input.VendorId).ToListAsync();
 
             return results.Select(item =>
             {

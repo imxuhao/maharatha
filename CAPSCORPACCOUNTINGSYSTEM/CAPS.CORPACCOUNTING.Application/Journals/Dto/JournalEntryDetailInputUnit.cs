@@ -18,5 +18,9 @@ namespace CAPS.CORPACCOUNTING.Journals.dto
 
         /// <summary>Gets or sets the DebitCreditGroup field. </summary>   
         public string DebitCreditGroup { get; set; }
+
+
+        /// <summary>Gets or sets the DebitAccountingItemId field. </summary>   
+        public virtual long? DebitAccountingItemId { get; set; }
     }
 }

@@ -219,8 +219,8 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the AccountingItemTypeOfModification field. </summary>
         public string AccountingItemTypeOfModification { get; set; }
 
-        /// <summary>Gets or sets the AccountingItemOrigID field. </summary>
-        public long? AccountingItemOrigId { get; set; }
+        /// <summary>Gets or sets the SplitAccountingItemId field. </summary>
+        public long? SplitAccountingItemId { get; set; }
 
         /// <summary>Gets or sets the AccountingItemOrig field. </summary>
         public string AccountingItemOrig { get; set; }

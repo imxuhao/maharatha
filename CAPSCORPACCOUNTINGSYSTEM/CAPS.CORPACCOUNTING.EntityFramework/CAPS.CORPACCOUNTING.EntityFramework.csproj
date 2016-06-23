@@ -1244,6 +1244,10 @@
     <Compile Include="Migrations\201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.Designer.cs">
       <DependentUpon>201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.cs" />
+    <Compile Include="Migrations\201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.Designer.cs">
+      <DependentUpon>201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2099,6 +2103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.resx">
       <DependentUpon>201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.resx">
+      <DependentUpon>201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

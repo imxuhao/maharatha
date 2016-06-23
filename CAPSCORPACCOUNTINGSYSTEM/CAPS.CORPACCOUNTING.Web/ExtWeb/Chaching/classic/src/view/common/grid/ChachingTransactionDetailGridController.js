@@ -149,7 +149,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
                 for (var i = 1; i < multiplyOf; i++) {
                     var rec = Ext.create(className);
                     Ext.apply(rec.data, parentRecord.data);
-                    rec.set('accountingItemOrigId', parentRecord.get('accountingItemId'));
+                    rec.set('SplitAccountingItemId', parentRecord.get('accountingItemId'));
                     rec.set('accountingItemId', 0);
                     rec.set('isAccountingItemSplit', true);
                     rec.set('amount', 0);

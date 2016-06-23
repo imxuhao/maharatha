@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
 using Abp.Zero;
@@ -39,8 +40,11 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         {
             if (_fiscalYearUnitRepository != null)
             {
-                var fiscalYear = (await _fiscalYearUnitRepository.GetAllListAsync(p => p.OrganizationUnitId ==
-                                        input.OrganizationUnitId &&(p.YearStartDate >= input.YearStartDate && p.YearStartDate <= input.YearEndDate || p.YearEndDate <= input.YearEndDate && p.YearStartDate >= input.YearEndDate)));
+                var fiscalYear = await _fiscalYearUnitRepository.GetAll().Where(
+                       u => (((u.YearStartDate <= input.YearStartDate && u.YearEndDate >= input.YearStartDate)||
+                             (u.YearStartDate <= input.YearEndDate && u.YearEndDate >= input.YearEndDate) ||
+                             (u.YearStartDate >= input.YearStartDate && u.YearEndDate <= input.YearEndDate))
+                            && u.OrganizationUnitId == input.OrganizationUnitId)).ToListAsync();
                 if (fiscalYear.Count > 0)
                 {
 
@@ -62,3 +66,5 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         }
     }
 }
+
+

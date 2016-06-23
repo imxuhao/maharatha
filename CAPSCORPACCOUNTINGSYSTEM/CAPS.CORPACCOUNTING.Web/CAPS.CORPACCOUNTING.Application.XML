@@ -4325,6 +4325,11 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TaxCreditId">
             <summary>Gets or sets the TaxCreditId field. </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput">
+            <summary>
+            InputDto for UpdateAccount
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.JobId">
             <summary>Gets or sets the JobId field. </summary>
         </member>
@@ -4393,6 +4398,11 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobUnitInput.TaxCreditId">
             <summary>Gets or sets the TaxCreditId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput">
+            /// <summary>
+            InputDto for CreateAccount
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobUnitInput.JobNumber">
             <summary>Gets or sets the JobNumber field. </summary>

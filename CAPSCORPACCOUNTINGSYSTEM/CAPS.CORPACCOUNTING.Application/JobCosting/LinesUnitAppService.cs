@@ -65,8 +65,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     Account = au,
                     TypeOfAccount = accunit.Description,
                     TypeOfCurrency = currency.Description,
-                    RollUpAccountCaption = rollupaccounts.Caption,
-                    RollUpDivision = rollupAccounts.Caption
+                    RollUpAccountCaption = rollupaccounts.AccountNumber,
+                    RollUpDivision = rollupAccounts.JobNumber
                 };
 
             if (!ReferenceEquals(input.Filters, null))

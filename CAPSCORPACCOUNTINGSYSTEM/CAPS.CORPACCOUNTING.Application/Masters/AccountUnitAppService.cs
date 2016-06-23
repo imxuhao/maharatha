@@ -81,7 +81,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     TypeOfAccount = typeofaccounts.Description,
                     TypeOfAccountRate = accountresults.Description,
                     TypeOfCurrency = currency.Description,
-                    LinkAccount = linkAccounts.Caption
+                    LinkAccount = linkAccounts.AccountNumber
 
                 };
 

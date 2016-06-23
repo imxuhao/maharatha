@@ -12,13 +12,13 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public long? ParentId { get; set; }
 
         /// <summary>Gets or sets the AccountNumber field. </summary>
-        [Required]
         [StringLength(AccountUnit.MaxAccountSize)]
+        [Required(ErrorMessage = "Number Field is required.")]
         public string AccountNumber { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>
-        [Required]
         [MaxLength(AccountUnit.MaxDisplayNameLength)]
+        [Required]
         public string Caption { get; set; }
 
         /// <summary>Gets or sets the ChartOfAccountId field. </summary>

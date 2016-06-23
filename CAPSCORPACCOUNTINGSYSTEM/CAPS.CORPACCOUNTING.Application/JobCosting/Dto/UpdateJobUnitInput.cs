@@ -5,19 +5,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
+    /// <summary>
+    /// InputDto for UpdateAccount
+    /// </summary>
     public class UpdateJobUnitInput : IInputDto
     {
         /// <summary>Gets or sets the JobId field. </summary>
         public int JobId { get; set; }
        
         /// <summary>Gets or sets the JobNumber field. </summary>
-        [Required]
+        [Required(ErrorMessage = "Number Field is required.")]
         [StringLength(JobUnit.MaxJobNumberLength)]
         public string JobNumber { get; set; }
 
         /// <summary>Gets or sets the Caption field. </summary>
         [StringLength(JobUnit.MaxCaptionLength)]
-        [Required]
+        [Required(ErrorMessage = "Description Field is required.")]
         public string Caption { get; set; }
 
         /// <summary>Gets or sets the RollupCenterId field. </summary>       

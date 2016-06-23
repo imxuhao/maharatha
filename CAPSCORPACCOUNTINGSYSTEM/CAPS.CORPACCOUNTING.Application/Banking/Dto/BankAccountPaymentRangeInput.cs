@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Abp.Runtime.Validation;
 
 namespace CAPS.CORPACCOUNTING.Banking.Dto
 {
     [AutoMapTo(typeof(BankAccountPaymentRangeUnit))]
-    public class BankAccountPaymentRangeInput : IInputDto
+    public class BankAccountPaymentRangeInput : IInputDto, ICustomValidate
     {
         /// <summary>Gets or Sets BankAccountPaymentRangeId. </summary>
         public int BankAccountPaymentRangeId { get; set; }
@@ -25,5 +27,13 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        public void AddValidationErrors(List<ValidationResult> results)
+        {
+            if (StartingPaymentNumber > EndingPaymentNumber)
+            {
+                results.Add(new ValidationResult("StartingCheck# must be lessthan EndingCheck#"));
+            }
+        }
     }
 }

@@ -2,12 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Abp.Runtime.Validation;
 using CAPS.CORPACCOUNTING.Banking;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
 {
     [AutoMapTo(typeof(FiscalPeriodUnit))]
-    public class FiscalPeriodUnitInput : IInputDto
+    public class FiscalPeriodUnitInput : IInputDto, ICustomValidate
     {
         /// <summary>Gets or sets the FiscalPeriodId field. </summary>
         public int FiscalPeriodId { get; set; }
@@ -54,6 +56,12 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         /// <summary>Gets or sets the MonthYear field. </summary>
         public string MonthYear { get; set; }
 
-
+        public void AddValidationErrors(List<ValidationResult> results)
+        {
+            if (IsClose && IsPreClose==true)
+            {
+                results.Add(new ValidationResult("FiscalStartDate should not be greaterthan FiscalEndDate"));
+            }
+        }
     }
 }

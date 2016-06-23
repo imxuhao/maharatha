@@ -38,9 +38,6 @@ namespace CAPS.CORPACCOUNTING.Banking
 
         protected virtual async Task ValidatePaymentRangeAsync(BankAccountPaymentRangeUnit input)
         {
-            if (input.StartingPaymentNumber > input.EndingPaymentNumber)
-                throw new UserFriendlyException(L("StartingCheck# must be lessthan EndingCheck#"));
-            
             if (BankAccountPaymentRangeUnitRepository != null)
             {
                 var paymentRangeUnit = await BankAccountPaymentRangeUnitRepository.GetAll()

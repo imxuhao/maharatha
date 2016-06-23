@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Banking;
 using System.ComponentModel.DataAnnotations;
@@ -74,10 +75,11 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public string SearchNo { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
+        [Range(1, Int64.MaxValue, ErrorMessage = "Please setup the Organization")]
         public virtual long OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the TypeofSubAccountId field. </summary>
-        [EnumDataType(typeof(TypeofSubAccount))]
+        [EnumDataType(typeof(TypeofSubAccount), ErrorMessage = "TypeofSubAccount Field is required.")]
         public TypeofSubAccount TypeofSubAccountId { get; set; }
 
         /// <summary>

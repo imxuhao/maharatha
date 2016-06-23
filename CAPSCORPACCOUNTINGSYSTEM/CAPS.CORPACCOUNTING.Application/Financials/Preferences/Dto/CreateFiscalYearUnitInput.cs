@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Abp.Runtime.Validation;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
 {
     [AutoMapTo(typeof(FiscalYearUnit))]
-    public class CreateFiscalYearUnitInput : IInputDto
+    public class CreateFiscalYearUnitInput : IInputDto, ICustomValidate
     {
         [Required]
         public DateTime? YearStartDate { get; set; }
@@ -48,6 +49,12 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
 
         public List<FiscalPeriodUnitInput> FiscalPeriodUnitList { get; set; }
 
-
+        public void AddValidationErrors(List<ValidationResult> results)
+        {
+            if (YearStartDate>YearEndDate )
+            {
+                results.Add(new ValidationResult("FiscalStartDate should not be greaterthan FiscalEndDate"));
+            }
+        }
     }
 }

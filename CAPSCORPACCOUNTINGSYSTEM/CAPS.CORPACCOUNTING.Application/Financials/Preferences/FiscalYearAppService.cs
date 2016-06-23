@@ -55,8 +55,6 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             {
                 foreach (FiscalPeriodUnitInput createFiscalPeriodUnit in input.FiscalPeriodUnitList)
                 {
-                    if (createFiscalPeriodUnit.IsClose && createFiscalPeriodUnit.IsPreClose == true)
-                        throw new UserFriendlyException(L("You can select either Close or PreClose not both at a time"));
                     createFiscalPeriodUnit.FiscalYearId = id;
                     if (input.IsYearOpen == false)
                     {
@@ -140,8 +138,6 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
             {
                 foreach (var updateFiscalPeriodUnit in input.FiscalPeriodUnitList.OrderByDescending(p => p.FiscalPeriodId))
                 {
-                    if (updateFiscalPeriodUnit.IsClose && updateFiscalPeriodUnit.IsPreClose == true)
-                        throw new UserFriendlyException(L("You can select either Close or PreClose not both at a time"));
                     //If  Isyearopen is false then closing the FiscalPeriods.
                     if (input.IsYearOpen == false)
                     {

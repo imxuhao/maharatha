@@ -10,13 +10,13 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGridController', {
         var typeOfSubAccount = viewModel.getStore('typeOfSubAccountList');
         typeOfSubAccount.load();
 
-        var leftStore = formView.down('chachingGridDragDrop').getLeftStore();
-        leftStore.proxy.setExtraParam('subAccountId', subAccountId);
-        leftStore.load();
+        //var leftStore = formView.down('chachingGridDragDrop').getLeftStore();
+        //leftStore.proxy.setExtraParam('subAccountId', subAccountId);
+        //leftStore.load();
         
-        var rightStore = formView.down('chachingGridDragDrop').getRightStore();
-        rightStore.proxy.setExtraParam('subAccountId', subAccountId);
-        rightStore.load();
+        //var rightStore = formView.down('chachingGridDragDrop').getRightStore();
+        //rightStore.proxy.setExtraParam('subAccountId', subAccountId);
+        //rightStore.load();
 
     }
 });

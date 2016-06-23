@@ -135,7 +135,10 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                labelAlign: 'right',
                inputValue: true,
                checked: false,
-               boxLabelCls: 'checkboxLabel'
+               boxLabelCls: 'checkboxLabel',
+               listeners: {
+                   change:'onAccountSpecificChange'
+               }
            }
         ]
     },
@@ -146,8 +149,20 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
             xtype: 'chachingGridDragDrop',
             leftTitle: '',
             rightTitle: '',
+            hidden:true,
             columns: [
                 {
+                    xtype: 'gridcolumn',
+                    text: app.localize('Number'),
+                    dataIndex: 'accountNumber',
+                    sortable: true,
+                    groupable: true,
+                    width: '47%',
+                    filterField: {
+                        xtype: 'textfield',
+                        width: '100%'
+                    }
+                },{
                     xtype: 'gridcolumn',
                     text:app.localize('Caption'),
                     dataIndex: 'caption',
@@ -156,20 +171,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                     width: '47%',
                     filterField: {
                         xtype: 'textfield',
-                        width: '15%',
-                        emptyText: app.localize('SubAccountNumberSearch')
-                    }
-                }, {
-                    xtype: 'gridcolumn',
-                    text: app.localize('Description'),
-                    dataIndex: 'description',
-                    sortable: true,
-                    groupable: true,
-                    width: '47%',
-                    filterField: {
-                        xtype: 'textfield',
-                        width: '100%',
-                        emptyText: app.localize('DescriptionSearch')
+                        width: '15%'
                     }
                 }
             ],
@@ -185,7 +187,15 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
                 mode: 'MULTI',
                 showHeaderCheckbox: false
             },
-            doSaveOperation: function (direction, records) {}
+            doSaveOperation: function(direction, records) {
+                var isActive = direction === "leftToRight" ? true : false,
+                    wasActive = direction === "rightToLeft" ? true : false;
+                for (var i = 0; i < records.length; i++) {
+                    var rec = records[i];
+                    rec.set('isActive', isActive);
+                    rec.set('wasActive', wasActive);
+                }
+            }
         }]
      }
     ]

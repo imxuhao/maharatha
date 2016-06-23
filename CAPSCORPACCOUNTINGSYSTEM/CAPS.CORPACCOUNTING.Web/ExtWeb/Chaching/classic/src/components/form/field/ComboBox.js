@@ -240,7 +240,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
     minChars: 2,
     queryParam: 'query',
     queryMode: 'remote',
-    forceSelection: false,
+    forceSelection: true,
     listConfig: {
         minWidth: 350,
         maxHeight: 250
@@ -289,7 +289,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
 
         if (!picker) picker = me.getPicker();
         if (picker) selModel = picker.getSelectionModel();
-        if (selModel)selectedRec = selModel.getSelection().length > 0 ? selModel.getSelection()[0] : undefined;
+        if (selModel) selectedRec = selModel.getSelection().length > 0 ? selModel.getSelection()[0] : undefined;
         switch (e.getKey()) {
             case 9://set value of selected record from picker
                 if (!e.shiftKey && !e.ctrlKey && selectOnTabPressed && selectedRec) {
@@ -301,7 +301,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
                 }
                 break;
             case 45://add new record if has primary entity permissions
-                if (!e.shiftKey && !e.ctrlKey && modulePermissions && modulePermissions.create) {
+                if (!e.shiftKey && !e.ctrlKey && modulePermissions && modulePermissions.create && e.browserEvent.key === "Insert") {
                     e.stopEvent();
                     me.doCRUDOperation('create', null);
                 }
@@ -479,7 +479,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
                 }
                 break;
             case 45://add new record if has primary entity permissions
-                if (!e.shiftKey && !e.ctrlKey && modulePermissions && modulePermissions.create) {
+                if (!e.shiftKey && !e.ctrlKey && modulePermissions && modulePermissions.create && e.browserEvent.key === "Insert") {
                     e.stopEvent();
                     me.cleanUpPicker(me, view, selModel,true);
                     me.doCRUDOperation('create', null);

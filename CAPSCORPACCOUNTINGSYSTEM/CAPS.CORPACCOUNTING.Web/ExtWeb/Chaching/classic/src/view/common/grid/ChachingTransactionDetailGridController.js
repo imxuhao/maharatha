@@ -111,10 +111,10 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         if (selectedRecords && selectedRecords.length === 1) {
             var parentRecord = selectedRecords[0],
                 parentIndex = gridStore.indexOf(parentRecord);
-            if (parentRecord.get('isAccountingItemSplit')) {
-                abp.notify.info(app.localize('AlreadySplit'), app.localize('ValidationFailed'));
-                return;
-            }
+            //if (parentRecord.get('isAccountingItemSplit')) {
+            //    abp.notify.info(app.localize('AlreadySplit'), app.localize('ValidationFailed'));
+            //    return;
+            //}
             if (!parentRecord.get('amount')) {
                 abp.notify.info(app.localize('EnterAmountToSplit'), app.localize('ValidationFailed'));
                 return;
@@ -185,11 +185,13 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         var editor = field.up();
         if (editor) {
             var context = editor.context,
-                record = context.record;
+                record = context.record,
+                detailStore = this.getView().getStore();
             if (record && record.get('isAccountingItemSplit')) {
                 var parentRec = record.get('parentRec');
+                if (!parentRec && record.get('splitAccountingItemId')) parentRec = detailStore.findRecord('accountingItemId', record.get('splitAccountingItemId'));
                 if (parentRec) {
-                    plusMinus === "minus" ? parentRec.set('amount', parseInt(parentRec.get('amount') - value)) : parentRec.set('amount', parseInt(parentRec.get('amount') + value));
+                    plusMinus === "minus" ? parentRec.set('amount', parseInt(Math.abs(parentRec.get('amount')) - value)) : parentRec.set('amount', parseInt(Math.abs(parentRec.get('amount')) + value));
                 }
             }
         }
@@ -274,7 +276,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         if (!moduleSpecificChecks) {
             return false;
         }
-        if (context.field === 'isAccountingItemSplit' && context.record.get('isAccountingItemSplit')) return false;
+        //if (context.field === 'isAccountingItemSplit' && context.record.get('isAccountingItemSplit')) return false;
         var cell = view.getView().getCell(context.record, context.column);
         if (cell) {
             cell.removeCls("x-invalid-cell-value");

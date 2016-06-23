@@ -247,6 +247,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
                             account.Caption,
                             account.Description,
+                            account.AccountNumber,
                             accountId = account.Id,
                             IsActive= subaccrestrictionunits!=null && subaccrestrictionunits.IsActive,
                             SubAccountId= subaccrestrictionunits != null ? subaccrestrictionunits.SubAccountId:0,
@@ -261,6 +262,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 var dto = new SubAccountRestrictionUnitDto();
                 dto.AccountId = item.accountId;
                 dto.SubAccountId = item.SubAccountId;
+                dto.AccountNumber = item.AccountNumber;
                 dto.OrganizationUnitId = item.OrganizationUnitId;
                 dto.SubAccountRestrictionId = item.SubAccountRestrictionId;
                 dto.IsActive = item.IsActive;

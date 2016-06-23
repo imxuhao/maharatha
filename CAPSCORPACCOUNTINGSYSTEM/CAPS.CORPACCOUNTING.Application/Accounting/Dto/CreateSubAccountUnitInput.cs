@@ -71,7 +71,7 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public string SearchNo { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long? OrganizationUnitId { get; set; }
+        public virtual long OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the TypeofSubAccountId field. </summary>
         [EnumDataType(typeof(TypeofSubAccount))]

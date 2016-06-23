@@ -15,7 +15,10 @@ using AutoMapper;
 using System.Collections.Generic;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.Masters.Dto;
+using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -33,9 +36,13 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IRepository<AccountUnit, long> _accountUnitRepository;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
         private readonly SubAccountRestrictionUnitManager _subAccountRestrictionUnitManager;
+        private readonly IAccountCache _accountCache;
+        private readonly ISubAccountRestrictionCache _subAccountRestrictionCache;
+        private readonly CustomAppSession _customAppSession;
         public SubAccountUnitAppService(SubAccountUnitManager subAccountUnitManager, IRepository<SubAccountUnit, long> subAccountUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, IRepository<SubAccountRestrictionUnit, long> subAccountRestrictionUnitRepository,
-            IRepository<AccountUnit, long> accountUnitRepository, IRepository<CoaUnit> coaUnitRepository, SubAccountRestrictionUnitManager subAccountRestrictionUnitManager)
+            IRepository<AccountUnit, long> accountUnitRepository, IRepository<CoaUnit> coaUnitRepository,
+            SubAccountRestrictionUnitManager subAccountRestrictionUnitManager, IAccountCache accountCache, ISubAccountRestrictionCache subAccountRestrictionCache, CustomAppSession customAppSession)
         {
             _subAccountUnitManager = subAccountUnitManager;
             _unitOfWorkManager = unitOfWorkManager;
@@ -43,6 +50,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _accountUnitRepository = accountUnitRepository;
             _coaUnitRepository = coaUnitRepository;
             _subAccountRestrictionUnitManager = subAccountRestrictionUnitManager;
+            _accountCache = accountCache;
+            _subAccountRestrictionCache = subAccountRestrictionCache;
+            _customAppSession = customAppSession;
             _subAccountUnitRepository = subAccountUnitRepository;
         }
 
@@ -60,7 +70,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             long subAccountId= await _subAccountUnitManager.CreateAsync(subAccountUnit);
             
             if(!ReferenceEquals(input.SubAccountRestrictionList,null))
-            await CreateorUpdateSubAccountRestrictions(input: input.SubAccountRestrictionList, id:subAccountId);
+            await CreateorUpdateSubAccountRestrictions(input: input.SubAccountRestrictionList, id:subAccountId,organizationId:input.OrganizationUnitId);
             await CurrentUnitOfWork.SaveChangesAsync();
             return subAccountUnit.MapTo<SubAccountUnitDto>();
         }
@@ -78,7 +88,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             await _subAccountUnitManager.UpdateAsync(subAccountUnit);
             
             if (!ReferenceEquals(input.SubAccountRestrictionList, null))
-                await CreateorUpdateSubAccountRestrictions(input:input.SubAccountRestrictionList,id:input.SubAccountId);
+                await CreateorUpdateSubAccountRestrictions(input:input.SubAccountRestrictionList,id:input.SubAccountId, organizationId: input.OrganizationUnitId);
             await CurrentUnitOfWork.SaveChangesAsync();
             return subAccountUnit.MapTo<SubAccountUnitDto>();
         }
@@ -213,7 +223,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
                         join account in _accountUnitRepository.GetAll() on subaccountrestriction.AccountId equals account.Id
                         select new { subaccountrestriction, Caption = account.Caption,AccountNumber=account.AccountNumber,Description=account.Description };
 
-            var subAccountRestrictionList = await query.Where(p => p.subaccountrestriction.SubAccountId == input.SubAccountId && p.subaccountrestriction.IsActive == true).ToListAsync();
+            var subAccountRestrictionList = await query.Where(p => p.subaccountrestriction.SubAccountId == input.SubAccountId
+            && p.subaccountrestriction.OrganizationUnitId == input.OrganizationUnitId && p.subaccountrestriction.IsActive == true).ToListAsync();
             return subAccountRestrictionList.Select(item =>
             {
                 var dto = item.subaccountrestriction.MapTo<SubAccountRestrictionUnitDto>();
@@ -234,38 +245,31 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<SubAccountRestrictionUnitDto>> GetAccountList(GetAccountRestrictionInput input)
         {
+            AutoSearchInput cacheinput = new AutoSearchInput() {OrganizationUnitId = input.OrganizationUnitId};
+            var cacheItem = await _accountCache.GetAccountCacheItemAsync(
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheinput);
 
-            var query = from account in _accountUnitRepository.GetAll()
-                        join coa in _coaUnitRepository.GetAll().Where(p => p.IsCorporate == true) on account.ChartOfAccountId equals coa.Id
-                        join subaccontrestriction in _subAccountRestrictionUnitRepository.GetAll() on account.Id equals
-                            subaccontrestriction.AccountId
-                            into subaccrestriction
-                        from subaccrestrictionunits in subaccrestriction.DefaultIfEmpty()
-                        where subaccrestrictionunits == null || subaccrestrictionunits.SubAccountId!=input.SubAccountId.Value 
-                        select new
-                        {
+            var subaccountRestrictioncacheItem = await _subAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheinput);
+            List<SubAccountRestrictionCacheItem> subaccountRestrictions=new List<SubAccountRestrictionCacheItem>();
 
-                            account.Caption,
-                            account.Description,
-                            account.AccountNumber,
-                            accountId = account.Id,
-                            IsActive= subaccrestrictionunits!=null && subaccrestrictionunits.IsActive,
-                            SubAccountId= subaccrestrictionunits != null ? subaccrestrictionunits.SubAccountId:0,
-                            SubAccountRestrictionId = subaccrestrictionunits != null ? subaccrestrictionunits.Id:0,
-                            account.OrganizationUnitId
-                        };
-          
-            var result = await query.ToListAsync();
+            if (!ReferenceEquals(subaccountRestrictioncacheItem.SubAccountRestrictionCacheItemList,null))
+            {
 
+                subaccountRestrictions = subaccountRestrictioncacheItem.SubAccountRestrictionCacheItemList.ToList().Where(
+                        p => p.IsActive == true && p.SubAccountId == input.SubAccountId.Value).ToList();
+            }
+
+            var result = cacheItem.AccountCacheItemList.ToList().Where(p => !subaccountRestrictions.Any(p2 => p2.AccountId == p.AccountId) && p.IsCorporate==true).ToList();
+
+            
             return result.Select(item =>
             {
                 var dto = new SubAccountRestrictionUnitDto();
-                dto.AccountId = item.accountId;
-                dto.SubAccountId = item.SubAccountId;
+                dto.AccountId = item.AccountId;
+                dto.SubAccountId = input.SubAccountId.Value;
                 dto.AccountNumber = item.AccountNumber;
-                dto.OrganizationUnitId = item.OrganizationUnitId;
-                dto.SubAccountRestrictionId = item.SubAccountRestrictionId;
-                dto.IsActive = item.IsActive;
+                dto.SubAccountRestrictionId = 0;
                 dto.Caption = item.Caption;
                 dto.Description = item.Description;
                 return dto;
@@ -276,19 +280,36 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// Create or Update SubAccountRestrictions
         /// </summary>
         /// <param name="input"></param>
+        /// <param name="id"></param>
+        /// <param name="organizationId"></param>
         /// <returns></returns>
 
-        private async Task CreateorUpdateSubAccountRestrictions(List<SubAccountRestrictionUnitInput> input,long id)
+        private async Task CreateorUpdateSubAccountRestrictions(List<SubAccountRestrictionUnitInput> input,long id,long organizationId)
         {
             foreach (var subaccountrestriction in input)
             {
-                if (subaccountrestriction.SubAccountRestrictionId == 0)
+               
+                if (subaccountrestriction.SubAccountRestrictionId == 0 )
                 {
-                    var subAccountRestrictionUnit = subaccountrestriction.MapTo<SubAccountRestrictionUnit>();
-                    subAccountRestrictionUnit.IsActive = true;
-                    subAccountRestrictionUnit.SubAccountId = id;
-                    await _subAccountRestrictionUnitManager.CreateAsync(subAccountRestrictionUnit);
-                   
+                    var subAccountRestrictionUnit = await _subAccountRestrictionUnitRepository.FirstOrDefaultAsync(p=>p.SubAccountId==id
+                    && p.AccountId==subaccountrestriction.AccountId && p.OrganizationUnitId==organizationId);
+                    if (!ReferenceEquals(subAccountRestrictionUnit, null))
+                    {
+                        subAccountRestrictionUnit.IsActive = true;
+                        Mapper.Map(subaccountrestriction, subAccountRestrictionUnit);
+                        subAccountRestrictionUnit.OrganizationUnitId = organizationId;
+                        await _subAccountRestrictionUnitManager.UpdateAsync(subAccountRestrictionUnit);
+
+                    }
+                    else
+                    {
+                        var subAccountRestriction = subaccountrestriction.MapTo<SubAccountRestrictionUnit>();
+                        subAccountRestriction.IsActive = true;
+                        subAccountRestriction.SubAccountId = id;
+                        subAccountRestriction.OrganizationUnitId = organizationId;
+                        await _subAccountRestrictionUnitManager.CreateAsync(subAccountRestriction);
+
+                    }
 
                 }
                 else
@@ -304,5 +325,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
             }
 
         }
+      
     }
 }

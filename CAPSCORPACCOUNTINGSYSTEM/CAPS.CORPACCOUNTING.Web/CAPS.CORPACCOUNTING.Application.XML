@@ -1087,7 +1087,6 @@
             <param name="accountCache"></param>
             <param name="subAccountCache"></param>
             <param name="coaUnit"></param>
-            <param name="subAccountRestrictionRepository"></param>
             <param name="subAccountRestrictionCache"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
@@ -1283,11 +1282,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput},System.Int64)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput},System.Int64,System.Int64)">
             <summary>
             Create or Update SubAccountRestrictions
             </summary>
             <param name="input"></param>
+            <param name="id"></param>
+            <param name="organizationId"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService">
@@ -2934,6 +2935,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCacheItem.AccountId">
             <summary> Gets or sets AccountId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCacheItem.IsActive">
+            <summary> Gets or sets IsActive </summary>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
@@ -8914,6 +8918,13 @@
         <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.GetAPHeaderTransactionDetailUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             Get APHeaderDetailsByAccountingDocumentId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionDetailUnit(CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit)">
+            <summary>
+            Creating InvoiceEntryDocumnetDetails
             </summary>
             <param name="input"></param>
             <returns></returns>

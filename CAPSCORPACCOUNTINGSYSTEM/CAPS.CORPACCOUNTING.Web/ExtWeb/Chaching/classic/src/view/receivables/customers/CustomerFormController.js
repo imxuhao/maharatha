@@ -19,7 +19,7 @@
                     addressId: rec.get('addressId'),
                     organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
                     objectId: values.customerId,
-                    typeofObjectId: rec.get('typeofObjectId'),
+                    typeofObjectId: 2,
                     addressTypeId: rec.get('addressTypeId'),
                     contactNumber: rec.get('contactNumber'),
                     line1: rec.get('line1'),

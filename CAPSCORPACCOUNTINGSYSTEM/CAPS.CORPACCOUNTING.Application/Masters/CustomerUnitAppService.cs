@@ -24,9 +24,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly AddressUnitAppService _addressUnitAppService;
         private readonly IAddressUnitAppService _addressAppService;
-        private readonly IRepository<AddressUnit,long> _addressRepository;
+        private readonly IRepository<AddressUnit, long> _addressRepository;
         private readonly IRepository<CustomerPaymentTermUnit> _customerPaymentTermRepository;
-        private readonly IRepository<SalesRepUnit> _salesRepRepository;       
+        private readonly IRepository<SalesRepUnit> _salesRepRepository;
 
         public CustomerUnitAppService(CustomerUnitManager customerUnitManager,
             IRepository<CustomerUnit> customerUnitRepository,
@@ -41,8 +41,8 @@ namespace CAPS.CORPACCOUNTING.Masters
             _addressAppService = addressAppService;
             _addressRepository = addressRepository;
             _customerPaymentTermRepository = customerPaymentTermRepository;
-            _salesRepRepository = salesRepRepository;            
-        }       
+            _salesRepRepository = salesRepRepository;
+        }
 
         /// <summary>
         /// Creating the Customer
@@ -51,24 +51,27 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         [UnitOfWork]
         public async Task<CustomerUnitDto> CreateCustomerUnit(CreateCustomerUnitInput input)
-        {         
-            var customerUnit = input.MapTo<CustomerUnit>();            
+        {
+            var customerUnit = input.MapTo<CustomerUnit>();
             await _customerUnitManager.CreateAsync(customerUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
-            if (input.Addresses != null)
+            //address Information
+            if (!ReferenceEquals(input.Addresses, null))
             {
                 foreach (var address in input.Addresses)
                 {
-                    if (address.Line1 != null || address.Line2 != null || address.Line4 != null ||
-                        address.Line4 != null || address.State != null ||
-                        address.Country != null || address.Email != null || address.Phone1!=null || address.Website !=null)
+                    if (address.Line1 != null || address.Line2 != null ||
+                        address.Line4 != null || address.Line4 != null ||
+                        address.State != null || address.Country != null ||
+                        address.Email != null || address.Phone1 != null ||
+                        address.ContactNumber != null)
                     {
-                        address.ObjectId = customerUnit.Id;
                         address.TypeofObjectId = TypeofObject.Customer;
+                        address.ObjectId = customerUnit.Id;
                         await _addressAppService.CreateAddressUnit(address);
-                        await CurrentUnitOfWork.SaveChangesAsync();
                     }
+                    await CurrentUnitOfWork.SaveChangesAsync();
                 }
             }
             return customerUnit.MapTo<CustomerUnitDto>();
@@ -87,7 +90,6 @@ namespace CAPS.CORPACCOUNTING.Masters
             };
             await _addressUnitAppService.DeleteAddressUnit(dto);
             await _customerUnitManager.DeleteAsync(input.Id);
-
         }
 
         /// <summary>
@@ -113,7 +115,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
-        private  List<CustomerUnitDto> ConvertToCustomerDtos(List<CustomerAndAddressDto> results)
+        private List<CustomerUnitDto> ConvertToCustomerDtos(List<CustomerAndAddressDto> results)
         {
             return results.Select(
                 result =>
@@ -135,23 +137,23 @@ namespace CAPS.CORPACCOUNTING.Masters
         private IQueryable<CustomerAndAddressDto> CreateCustomerQuery(SearchInputDto input)
         {
             var query = from customer in _customerUnitRepository.GetAll()
-                join addr in _addressRepository.GetAll() on customer.Id equals addr.ObjectId
-                    into temp
-                from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Customer).DefaultIfEmpty()
-                join payterms in _customerPaymentTermRepository.GetAll() on customer.Id equals payterms.Id
-                    into paymentperms
-                from pt in paymentperms.DefaultIfEmpty()
-                join salesrep in _salesRepRepository.GetAll() on customer.SalesRepId equals salesrep.Id
-                    into salesreps
-                from sr in salesreps.DefaultIfEmpty()
-                select
-                    new CustomerAndAddressDto
-                    {
-                        Customer = customer,
-                        Address = rt,
-                        PaymentTerms = pt.Description,
-                        SalesRepName = sr.LastName
-                    };
+                        join addr in _addressRepository.GetAll() on customer.Id equals addr.ObjectId
+                            into temp
+                        from rt in temp.Where(p => p.IsPrimary == true && p.TypeofObjectId == TypeofObject.Customer).DefaultIfEmpty()
+                        join payterms in _customerPaymentTermRepository.GetAll() on customer.Id equals payterms.Id
+                            into paymentperms
+                        from pt in paymentperms.DefaultIfEmpty()
+                        join salesrep in _salesRepRepository.GetAll() on customer.SalesRepId equals salesrep.Id
+                            into salesreps
+                        from sr in salesreps.DefaultIfEmpty()
+                        select
+                            new CustomerAndAddressDto
+                            {
+                                Customer = customer,
+                                Address = rt,
+                                PaymentTerms = pt.Description,
+                                SalesRepName = sr.LastName
+                            };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -159,7 +161,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Customer.OrganizationUnitId == input.OrganizationUnitId); 
+            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Customer.OrganizationUnitId == input.OrganizationUnitId);
             return query;
         }
 
@@ -173,6 +175,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<CustomerUnitDto> UpdateCustomerUnit(UpdateCustomerUnitInput input)
         {
             var customerUnit = await _customerUnitRepository.GetAsync(input.CustomerId);
+           
+            // update address Information
             if (!ReferenceEquals(input.Addresses, null))
             {
                 foreach (var address in input.Addresses)
@@ -188,6 +192,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         {
                             address.TypeofObjectId = TypeofObject.Customer;
                             address.ObjectId = input.CustomerId;
+                            AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                             await
                                 _addressAppService.CreateAddressUnit(
                                     AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));
@@ -235,8 +240,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             var customerUnit = await _customerUnitRepository.GetAsync(input.Id);
             var addressitems = await _addressRepository.GetAllListAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Customer);
-            
-            var result= customerUnit.MapTo<CustomerUnitDto>();
+
+            var result = customerUnit.MapTo<CustomerUnitDto>();
             result.CustomerId = customerUnit.Id;
             result.Addresses = new Collection<AddressUnitDto>();
             for (int i = 0; i < addressitems.Count; i++)
@@ -249,7 +254,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task<List<NameValueDto>> GetCustomerList(AutoSearchInput input)
         {
-            var divisions = await _customerUnitRepository.GetAll()                
+            var divisions = await _customerUnitRepository.GetAll()
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.Contains(input.Query))
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();

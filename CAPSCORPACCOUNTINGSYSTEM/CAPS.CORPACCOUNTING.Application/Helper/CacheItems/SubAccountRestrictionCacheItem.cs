@@ -29,6 +29,11 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <summary> Gets or sets AccountId </summary>
         public long AccountId { get; set; }
 
+        /// <summary> Gets or sets IsActive </summary>
+        public bool IsActive { get; set; }
+
+        public long SubAccountRestrictionId { get; set; }
+
     }
 
     public interface ISubAccountRestrictionCache : IEntityCache<SubAccountRestrictionCacheItem>
@@ -96,7 +101,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         {
             var subaccountRestrictions = await Repository.GetAll()
                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .Select(u => new SubAccountRestrictionCacheItem{ AccountId = u.AccountId, SubAccountId = u.Id}).ToListAsync();
+                 .Select(u => new SubAccountRestrictionCacheItem{ AccountId = u.AccountId, SubAccountId = u.SubAccountId,IsActive = u.IsActive,SubAccountRestrictionId = u.Id}).ToListAsync();
             return subaccountRestrictions;
         }
         
@@ -108,7 +113,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <returns></returns>
         public async Task<CacheItem> GetSubAccountRestrictionCacheItemAsync(string subaccountkey, AutoSearchInput input)
         {
-            return await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).GetAsync(subaccountkey, async () =>
+            return await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountRestrictionStore).GetAsync(subaccountkey, async () =>
             {
                 var newCacheItem = new CacheItem(subaccountkey);
                 var subaccountRestrictionsList = await GetSubAccountsFromDb(input);

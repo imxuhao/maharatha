@@ -23,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the OrganizationUnitId </summary>
-        [Range(1, Int64.MaxValue, ErrorMessage = "Organization is Required")]
+       
         public long OrganizationUnitId { get; set; }
     }
 }

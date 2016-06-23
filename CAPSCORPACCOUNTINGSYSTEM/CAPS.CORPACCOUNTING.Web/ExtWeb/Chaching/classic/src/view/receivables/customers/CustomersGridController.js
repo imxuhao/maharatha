@@ -93,8 +93,8 @@
             var addressRec = records[0];
             var address = {
                 addressId: addressRec.get('addressId'),
-                objectId: addressRec.get('vendorId'),
-                typeofObjectId: addressRec.get('typeofObjectId') === undefined ? 1 : addressRec.get('typeofObjectId'),
+                objectId: addressRec.get('customerId'),
+                typeofObjectId: addressRec.get('typeofObjectId') === undefined ? 2 : addressRec.get('typeofObjectId'),
                 addressTypeId: addressRec.get('addressTypeId') === undefined ? 5 : addressRec.get('addressTypeId'),
                 contactNumber: addressRec.get('contactNumber') === undefined ? "" : addressRec.get('contactNumber'),
                 line1: addressRec.get('line1') === undefined ? "" : addressRec.get('line1'),

@@ -152,7 +152,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              itemId: 'rollupAccountId',            
              filterField: {
                  xtype: 'chachingcombobox',
-                 store: new Chaching.store.financials.accounts.RollupAccountListStore(),
+                 store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
                  width: '100%',
                  searchProperty: 'rollupAccountId',
                  valueField: 'accountId',

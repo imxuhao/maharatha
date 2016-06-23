@@ -147,7 +147,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         //emptyText: app.localize('SelectOption')
 
                                         xtype: 'chachingcombobox',
-                                        store: new Chaching.store.financials.accounts.RollupAccountListStore(),
+                                        store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
                                         fieldLabel: app.localize('RollUpAccount'),
                                         ui: 'fieldLabelTop',
                                         width: '100%',

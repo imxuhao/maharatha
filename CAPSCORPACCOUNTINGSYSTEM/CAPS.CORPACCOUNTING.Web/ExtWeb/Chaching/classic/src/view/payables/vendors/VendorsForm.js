@@ -306,18 +306,21 @@
                     emptyText: app.localize('SelectOption')
                 },
               {
-                  xtype: 'combobox',
-                  name: 'accountId',
-                  fieldLabel: app.localize('Line#').initCap(),
-                  width: '100%',
-                  ui: 'fieldLabelTop',
-                  displayField: 'account',
-                  valueField: 'accountId',
-                  emptyText: app.localize('SelectOption'),
-                  bind: {
-                      store: '{getAccountsListLines}'
-                  }
-              }]
+                  //xtype: 'combobox',
+                  //name: 'accountId',
+                  //fieldLabel: app.localize('Line#').initCap(),
+                  //width: '100%',
+                  //ui: 'fieldLabelTop',
+                  //displayField: 'account',
+                  //valueField: 'accountId',
+                  //emptyText: app.localize('SelectOption'),
+                  //bind: {
+                  //    store: '{getAccountsListLines}'
+                  //}
+              }
+
+
+                      ]
                   },
                   {
                       columnWidth: .3,

@@ -459,11 +459,12 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             ui: 'fieldLabelTop',
                             width: '100%',
                             name: 'agencyId',
+                            //itemId: 'agencyId',
                             valueField: 'customerId',
                             displayField: 'customerNumber',
                             queryMode: 'remote',
                             minChars: 2,
-                            useDisplayFieldToSearch: true,
+                           // useDisplayFieldToSearch: true,
                             modulePermissions: {
                                 read: abp.auth.isGranted('Pages.Receivables.Customers'),
                                 create: true,//abp.auth.isGranted('Pages.Receivables.Customers.Create'),
@@ -487,20 +488,53 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             fieldLabel: app.localize('ProductName'),
                             emptyText: app.localize('ToolTipProductName')
                         }, {
-                            xtype: 'combobox',
+
+                            //xtype: 'combobox',
+                            //name: 'thirdPartyCustomerId',
+                            //itemId: 'thirdPartyCustomerId',
+                            //store: 'utilities.autofill.CustomerListStore',
+                            //valueField: 'customerId',
+                            //displayField: 'name',
+                            //queryMode: 'remote',
+                            //listConfig: {
+                            //    getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
+                            //},
+                            //anyMatch: true,
+                            //displayTpl: Chaching.utilities.ChachingRenderers.renderCustomerDispalyTpl(),
+                            //fieldLabel: app.localize('ThirdPartyCustomer'),
+                            //emptyText: app.localize('SelectOption')
+
+                            xtype: 'chachingcombobox',
+                            store: new Chaching.store.utilities.autofill.CustomerListStore(),
+                            fieldLabel: app.localize('ThirdPartyCustomer'),
+                            ui: 'fieldLabelTop',
+                            width: '100%',
                             name: 'thirdPartyCustomerId',
                             itemId: 'thirdPartyCustomerId',
-                            store: 'utilities.autofill.CustomerListStore',
                             valueField: 'customerId',
-                            displayField: 'name',
+                            displayField: 'customerNumber',
                             queryMode: 'remote',
-                            listConfig: {
-                                getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
+                            minChars: 2,
+                            // useDisplayFieldToSearch: true,
+                            modulePermissions: {
+                                read: abp.auth.isGranted('Pages.Receivables.Customers'),
+                                create: true,//abp.auth.isGranted('Pages.Receivables.Customers.Create'),
+                                edit: true,//abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
+                                destroy: true//abp.auth.isGranted('Pages.Receivables.Customers.Delete'),
                             },
-                            anyMatch: true,
-                            displayTpl: Chaching.utilities.ChachingRenderers.renderCustomerDispalyTpl(),
-                            fieldLabel: app.localize('ThirdPartyCustomer'),
-                            emptyText: app.localize('SelectOption')
+                            primaryEntityCrudApi: {
+                                read: abp.appPath + 'api/services/app/jobUnit/GetCustomersList',
+                                create: abp.appPath + 'api/services/app/customerUnit/CreateCustomerUnit',
+                                update: abp.appPath + 'api/services/app/customerUnit/UpdateCustomerUnit',
+                                destroy: abp.appPath + 'api/services/app/customerUnit/DeleteCustomerUnit'
+                            },
+                            createEditEntityType: 'receivables.customers',
+                            createEditEntityGridController: 'receivables-customers-customersgrid',
+                            entityType: 'Customer'
+
+
+
+
                         }, {
                             xtype: 'textfield',
                             name: 'agencyProducer',

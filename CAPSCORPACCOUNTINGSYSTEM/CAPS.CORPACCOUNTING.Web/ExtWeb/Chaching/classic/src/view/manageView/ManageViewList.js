@@ -91,7 +91,8 @@ Ext.define('Chaching.view.manageView.ManageViewList',{
         width: '15%',
         editor: {
             xtype: 'checkboxfield',
-            inputValue: true,
+            inputValue: 'true',
+            uncheckedValue: 'false',
             name: 'isDefault'
         }
     }, {

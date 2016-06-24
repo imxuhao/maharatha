@@ -437,9 +437,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                            // useDisplayFieldToSearch: true,
                             modulePermissions: {
                                 read: abp.auth.isGranted('Pages.Receivables.Customers'),
-                                create: true,//abp.auth.isGranted('Pages.Receivables.Customers.Create'),
-                                edit: true,//abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
-                                destroy: true//abp.auth.isGranted('Pages.Receivables.Customers.Delete'),
+                                create: abp.auth.isGranted('Pages.Receivables.Customers.Create'),
+                                edit: abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
+                                destroy: abp.auth.isGranted('Pages.Receivables.Customers.Delete')
                             },
                             primaryEntityCrudApi: {
                                 read: abp.appPath + 'api/services/app/jobUnit/GetCustomersList',
@@ -473,9 +473,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             // useDisplayFieldToSearch: true,
                             modulePermissions: {
                                 read: abp.auth.isGranted('Pages.Receivables.Customers'),
-                                create: true,//abp.auth.isGranted('Pages.Receivables.Customers.Create'),
-                                edit: true,//abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
-                                destroy: true//abp.auth.isGranted('Pages.Receivables.Customers.Delete'),
+                                create: abp.auth.isGranted('Pages.Receivables.Customers.Create'),
+                                edit: abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
+                                destroy: abp.auth.isGranted('Pages.Receivables.Customers.Delete')
                             },
                             primaryEntityCrudApi: {
                                 read: abp.appPath + 'api/services/app/jobUnit/GetCustomersList',
@@ -486,9 +486,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             createEditEntityType: 'receivables.customers',
                             createEditEntityGridController: 'receivables-customers-customersgrid',
                             entityType: 'Customer'
-
-
-
 
                         }, {
                             xtype: 'textfield',

@@ -128,7 +128,9 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
                      data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
-                 xtype: 'checkbox'
+                 xtype: 'checkbox',
+                 inputValue: 'true',
+                 uncheckedValue: 'false'
              }
          }, {
              xtype: 'gridcolumn',
@@ -147,7 +149,9 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
                      data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
-                 xtype: 'checkbox'
+                 xtype: 'checkbox',
+                 inputValue: 'true',
+                 uncheckedValue: 'false'
              }
          }, {
              xtype: 'gridcolumn',
@@ -166,7 +170,9 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
                      data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
-                 xtype: 'checkbox'
+                 xtype: 'checkbox',
+                 inputValue: 'true',
+                 uncheckedValue: 'false'
              }
          }, {
              xtype: 'gridcolumn',
@@ -185,7 +191,9 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
                      data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
-                 xtype: 'checkbox'
+                 xtype: 'checkbox',
+                 inputValue: 'true',
+                 uncheckedValue: 'false'
              }
          }
 

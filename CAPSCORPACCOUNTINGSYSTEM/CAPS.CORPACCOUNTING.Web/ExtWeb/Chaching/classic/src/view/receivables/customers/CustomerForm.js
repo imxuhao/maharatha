@@ -7,9 +7,9 @@
     controller: 'receivables-customers-customersform',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Receivables.Customers'),
-        create: true,//abp.auth.isGranted('Pages.Receivables.Customers.Create'),
-        edit: true,//abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
-        destroy: true//abp.auth.isGranted('Pages.Receivables.Customers.Delete'),
+        create: abp.auth.isGranted('Pages.Receivables.Customers.Create'),
+        edit: abp.auth.isGranted('Pages.Receivables.Customers.Edit'),
+        destroy: abp.auth.isGranted('Pages.Receivables.Customers.Delete')
     },
     name: 'Customers',
     openInPopupWindow: false,

@@ -75,7 +75,6 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
              groupable: true,
              width: '10%',
              hidden: false,
-            
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -86,7 +85,9 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
                      data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
-                 xtype: 'checkbox'
+                 xtype: 'checkbox',
+                 inputValue: 'true',
+                 uncheckedValue: 'false'
              }
          },
 

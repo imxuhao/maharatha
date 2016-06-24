@@ -231,7 +231,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              width: '15%',
              editor: {
-                 xtype: 'checkboxfield'
+                 xtype: 'checkboxfield',
+                 inputValue: 'true',
+                 uncheckedValue: 'false'
              }
          }, {
              xtype: 'gridcolumn',

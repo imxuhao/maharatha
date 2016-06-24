@@ -19,7 +19,7 @@
                     addressId: rec.get('addressId'),
                     organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
                     objectId: values.customerId,
-                    typeofObjectId: 2,
+                    typeofObjectId: 2, // typeofObjectId = 2 for customer
                     addressTypeId: rec.get('addressTypeId'),
                     contactNumber: rec.get('contactNumber'),
                     line1: rec.get('line1'),
@@ -44,19 +44,6 @@
             record.data.addresses = arrAddress;
         }
 
-        //var vendorAliasGridStore = view.down('gridpanel[itemId=vendorAliasGrid]').getStore();
-        //var vendorAliasModifyRecords = vendorAliasGridStore.getModifiedRecords();
-
-        //if (vendorAliasModifyRecords && vendorAliasModifyRecords.length > 0) {
-        //    arrVendoralias = new Array();
-        //    Ext.each(vendorAliasModifyRecords, function (rec) {
-        //        arrVendoralias.push(rec.data);
-        //    });
-        //    record.data.vendorAlias = arrVendoralias;
-        //}
-
         return record;
-
-
     }
 });

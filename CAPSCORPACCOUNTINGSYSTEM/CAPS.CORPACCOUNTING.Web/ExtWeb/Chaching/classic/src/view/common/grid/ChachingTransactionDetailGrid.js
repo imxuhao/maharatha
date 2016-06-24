@@ -816,7 +816,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
                 width: '7%',
                 editor: {
-                    xtype: 'checkboxfield'
+                    xtype: 'checkboxfield',
+                    inputValue: 'true',
+                    uncheckedValue: 'false'
                 }
             }, {
                 xtype: 'gridcolumn',

@@ -23,8 +23,12 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
             var budgetFormatFieldStore = form.findField('chartOfAccountId').getStore();
             budgetFormatFieldStore.load();
           
-            var rollUpAccountsStore = viewModel.getStore('genericRollupAccountList');
-            rollUpAccountsStore.load();
+            //var rollUpAccountsStore = viewModel.getStore('genericRollupAccountList');
+            //rollUpAccountsStore.load();
+
+            var rollupAccountCombo = form.findField('rollupAccountId');
+            var rollupAccountStore = rollupAccountCombo.getStore();
+            rollupAccountStore.load();
 
             var rollUpJobStore = form.findField('rollupJobId').getStore();
             rollUpJobStore.load();

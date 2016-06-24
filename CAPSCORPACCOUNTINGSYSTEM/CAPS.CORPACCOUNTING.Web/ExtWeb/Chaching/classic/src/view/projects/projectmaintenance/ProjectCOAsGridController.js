@@ -36,11 +36,21 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGridController'
     doAfterCreateAction: function (createMode, formView, isEdit) {        
         var viewModel = formView.getViewModel();
         var form = formView.getForm();
-        if (isEdit) {      
-            var rollupDivision = viewModel.getStore('rollupDivisionList');
-            rollupDivision.load();
-            var rollupAccount = viewModel.getStore('genericRollupAccountList');
-            rollupAccount.load();
+        var rollupDivisionCombo = form.findField('rollupDivisionId');
+        var rollupDivisionStore = rollupDivisionCombo.getStore();
+        rollupDivisionStore.load();
+
+        var rollupAccountCombo = form.findField('rollupAccountId');
+        var rollupAccountStore = rollupAccountCombo.getStore();
+        rollupAccountStore.load();
+        if (isEdit) {
+            //var rollupDivisionCombo = form.findField('rollupDivisionId');
+            //var rollupDivisionStore = rollupDivisionCombo.getStore();
+            //rollupDivisionStore.load();
+
+            //var rollupAccountCombo = form.findField('rollupAccountId');
+            //var rollupAccountStore = rollupAccountCombo.getStore();
+            //rollupAccountStore.load();
         }
         
     }

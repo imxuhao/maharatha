@@ -153,7 +153,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                     return record.get('value');
                 }
             }],
-            xtype: 'ajax',
+           // xtype: 'ajax',
             remoteSort: false,
             remoteFilter : false,
             proxy: {
@@ -178,7 +178,9 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                     return record.get('value');
                 }
             }],
-            xtype: 'ajax',
+           // xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter : false,
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
                 type: 'chachingProxy',
@@ -201,7 +203,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
                     return record.get('value');
                 }
             }],
-            xtype: 'ajax',
+           // xtype: 'ajax',
             remoteSort: false,
             remoteFilter:false,
             autoLoad: false,

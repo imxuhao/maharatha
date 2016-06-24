@@ -586,7 +586,6 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                 emptyText:app.localize('Search')
             });
             //}
-
             field = Ext.widget(cfg);
             if ((field.xtype === "combo" || field.xtype === "combobox") && field.queryMode === "local") {
                 var fieldStore = field.getStore();

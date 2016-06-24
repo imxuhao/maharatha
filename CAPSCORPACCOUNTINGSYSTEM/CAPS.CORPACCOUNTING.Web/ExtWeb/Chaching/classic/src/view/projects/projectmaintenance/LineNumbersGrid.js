@@ -89,11 +89,16 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
             dataIndex: 'typeOfAccount',
             sortable: true,
             groupable: true,
+            itemId: 'typeOfAccountId',
             width: '15%',
             filterField: {
                 xtype: 'combobox',
                 valueField: 'typeOfAccountId',
                 displayField: 'typeOfAccount',
+                searchProperty: 'typeOfAccountId',
+                queryMode: 'local',
+                loadStoreOnCreate: true,
+                isViewmodelStore: true,
                 forceSelection: true,
                 bind: {
                     store: '{typeOfAccountList}'
@@ -138,7 +143,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
                      data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                  }
              }, editor: {
-                 xtype: 'checkbox'
+                 xtype: 'checkbox',
+                 inputValue: true,
+                 uncheckedValue : false
              }
          }
          ,
@@ -225,19 +232,24 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
                  xtype: 'combobox',
                  valueField: 'typeOfCurrencyId',
                  displayField: 'typeOfCurrency',
-                 queryMode: 'remote',
+                 queryMode: 'local',
+                 searchProperty: 'typeOfCurrencyId',
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
                  forceSelection: true,
+                // isEnum: true,
                  bind: {
                      store: '{typeOfCurrencyList}'
-                 },
-                 listeners: {
-                     beforequery: function (query, eOpts) {
-                         var grid = this.up().grid;
-                         if (grid) {                           
-                             var myStore = this.getStore();                             
-                         }
-                     }
                  }
+                 //,
+                 //listeners: {
+                 //    beforequery: function (query, eOpts) {
+                 //        var grid = this.up().grid;
+                 //        if (grid) {                           
+                 //            var myStore = this.getStore();                             
+                 //        }
+                 //    }
+                 //}
              }
          },
     ]

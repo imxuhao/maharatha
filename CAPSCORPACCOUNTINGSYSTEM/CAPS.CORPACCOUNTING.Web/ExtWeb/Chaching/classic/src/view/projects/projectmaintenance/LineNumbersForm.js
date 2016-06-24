@@ -61,6 +61,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
             ui: 'fieldLabelTop',          
             displayField: 'typeOfAccount',
             valueField: 'typeOfAccountId',
+            queryMode : 'local',
             bind: {
                 store: '{typeOfAccountList}'
             }
@@ -103,6 +104,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
             ui: 'fieldLabelTop',
             displayField: 'typeOfCurrency',
             valueField: 'typeOfCurrencyId',
+            queryMode: 'local',
             bind: {
                 store: '{typeOfCurrencyList}'
             }

@@ -423,36 +423,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         },
                         items:[
                         {
-                            //xtype: 'combobox',
-                            //name: 'agencyId',
-                            //itemId: 'agencyId',
-                            //fieldLabel: app.localize('Agency'),
-                            //store: 'utilities.autofill.CustomerListStore',
-                            //valueField: 'customerId',
-                            //displayField: 'name',
-                            //queryMode: 'remote',
-                            //listConfig: {
-                            //    getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
-                            //},
-                            //anyMatch: true,
-                            //displayTpl: Chaching.utilities.ChachingRenderers.renderCustomerDispalyTpl(),//using XTemplate
-                            //emptyText: app.localize('SelectOption'),
-                            //listeners: {
-                            //    change:'onAgencyChange'
-                            //}
-
-                            //xtype: 'autofillcombo',
-                            //name: 'agencyId',
-                            //itemId: 'agencyId',
-                            //fieldLabel: app.localize('Agency'),
-                            //store: 'utilities.autofill.CustomerListStore',
-                            //valueField: 'customerId',
-                            //displayField: 'name',
-                            //entityGridController: 'payables-vendors-vendorsgrid',
-                            //nameOfEntity: 'Vendor',
-                            //entityType: 'payables.vendors',
-                            //entityPermission: 'Payables.Vendors'
-
                             xtype: 'chachingcombobox',
                             store: new Chaching.store.utilities.autofill.CustomerListStore(),
                             fieldLabel: app.localize('Agency'),
@@ -488,21 +458,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             fieldLabel: app.localize('ProductName'),
                             emptyText: app.localize('ToolTipProductName')
                         }, {
-
-                            //xtype: 'combobox',
-                            //name: 'thirdPartyCustomerId',
-                            //itemId: 'thirdPartyCustomerId',
-                            //store: 'utilities.autofill.CustomerListStore',
-                            //valueField: 'customerId',
-                            //displayField: 'name',
-                            //queryMode: 'remote',
-                            //listConfig: {
-                            //    getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
-                            //},
-                            //anyMatch: true,
-                            //displayTpl: Chaching.utilities.ChachingRenderers.renderCustomerDispalyTpl(),
-                            //fieldLabel: app.localize('ThirdPartyCustomer'),
-                            //emptyText: app.localize('SelectOption')
 
                             xtype: 'chachingcombobox',
                             store: new Chaching.store.utilities.autofill.CustomerListStore(),

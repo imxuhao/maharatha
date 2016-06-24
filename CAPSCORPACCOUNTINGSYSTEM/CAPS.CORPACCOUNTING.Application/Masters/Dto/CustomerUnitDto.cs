@@ -46,7 +46,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>
         /// Gets or Sets the Address of the Customer.
         /// </summary>
-        public Collection<AddressUnitDto> Addresses { get; set; }
+        public Collection<AddressUnitDto> Address { get; set; }
 
         /// <summary>Gets or sets the PaymentTermDescription field. </summary>
         public string PaymentTermDescription { get; set; }

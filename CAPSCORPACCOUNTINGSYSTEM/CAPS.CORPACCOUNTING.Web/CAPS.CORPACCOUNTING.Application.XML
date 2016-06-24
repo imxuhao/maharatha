@@ -6891,7 +6891,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.Addresses">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.Address">
             <summary>
             Gets or Sets the Address of the Customer.
             </summary>

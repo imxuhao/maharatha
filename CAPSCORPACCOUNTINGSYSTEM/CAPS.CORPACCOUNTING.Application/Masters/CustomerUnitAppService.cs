@@ -124,11 +124,11 @@ namespace CAPS.CORPACCOUNTING.Masters
                     dto.CustomerId = result.Customer.Id;
                     dto.PaymentTermDescription = result.PaymentTerms;
                     dto.SalesRepName = result.SalesRepName;
-                    dto.Addresses = new Collection<AddressUnitDto>();
+                    dto.Address = new Collection<AddressUnitDto>();
                     if (result.Address != null)
                     {
-                        dto.Addresses.Add(result.Address.MapTo<AddressUnitDto>());
-                        dto.Addresses[0].AddressId = result.Address.Id;
+                        dto.Address.Add(result.Address.MapTo<AddressUnitDto>());
+                        dto.Address[0].AddressId = result.Address.Id;
                     }
                     return dto;
                 }).ToList();
@@ -243,11 +243,11 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             var result = customerUnit.MapTo<CustomerUnitDto>();
             result.CustomerId = customerUnit.Id;
-            result.Addresses = new Collection<AddressUnitDto>();
+            result.Address = new Collection<AddressUnitDto>();
             for (int i = 0; i < addressitems.Count; i++)
             {
-                result.Addresses.Add(addressitems[i].MapTo<AddressUnitDto>());
-                result.Addresses[i].AddressId = addressitems[i].Id;
+                result.Address.Add(addressitems[i].MapTo<AddressUnitDto>());
+                result.Address[i].AddressId = addressitems[i].Id;
             }
             return result;
         }

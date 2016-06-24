@@ -76,7 +76,9 @@ namespace CAPS.CORPACCOUNTING.Masters
                     await CurrentUnitOfWork.SaveChangesAsync();
                 }
             }
-            return customerUnit.MapTo<CustomerUnitDto>();
+            var customerUnitDto = customerUnit.MapTo<CustomerUnitDto>();
+            customerUnitDto.CustomerId = customerUnit.Id;
+            return customerUnitDto;
         }
         /// <summary>
         /// Delete the Customer and CustomerAddresses
@@ -233,7 +235,9 @@ namespace CAPS.CORPACCOUNTING.Masters
                 /*Do Something when the Chart of Customer is Added*/
             };
 
-            return customerUnit.MapTo<CustomerUnitDto>();
+            var customerUnitDto = customerUnit.MapTo<CustomerUnitDto>();
+            customerUnitDto.CustomerId = customerUnit.Id;
+            return customerUnitDto;
         }
 
         /// <summary>

@@ -17,6 +17,7 @@ using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.AccountReceivable.Dto;
+using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Journals;
 
@@ -26,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
     /// <summary>
     /// 
     /// </summary>
-    [AbpAuthorize]
+    [AbpAuthorize(AppPermissions.Pages_Receivables_Invoices_Entry)]
     public class ArInvoiceEntryDocumentAppService : CORPACCOUNTINGServiceBase, IArInvoiceEntryDocumentAppService
     {
 
@@ -96,6 +97,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Receivables_Invoices_Entry_Create)]
         public async Task<IdOutputDto<long>> CreateArInvoiceEntryDocumentUnit(ArInvoiceEntryDocumentInputUnit input)
         {
             var arInvoiceTransactions = input.MapTo<ArInvoiceEntryDocumentUnit>();
@@ -125,6 +127,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Receivables_Invoices_Entry_Edit)]
         public async Task UpdateArInvoiceEntryDocumentUnit(ArInvoiceEntryDocumentInputUnit input)
         {
 
@@ -170,6 +173,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Receivables_Invoices_Entry_Delete)]
         public async Task DeleteArInvoiceEntryDocumentUnit(IdInput input)
         {
             await _arInvoiceEntryDocumentDetailUnitRepository.DeleteAsync(p => p.AccountingDocumentId == input.Id);

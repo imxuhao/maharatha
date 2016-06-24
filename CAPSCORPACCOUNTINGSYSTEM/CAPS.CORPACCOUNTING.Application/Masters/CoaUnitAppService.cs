@@ -14,13 +14,12 @@ using Abp.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using System.Collections.Generic;
-using CAPS.CORPACCOUNTING.Sessions;
-using System;
+using CAPS.CORPACCOUNTING.Authorization;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
 
-    [AbpAuthorize] ///This is to ensure only logged in user has access to this module. We will improvise accordingly
+    [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts)] ///This is to ensure only logged in user has access to this module. We will improvise accordingly
     public class CoaUnitAppService : CORPACCOUNTINGServiceBase, ICoaUnitAppService
     {
         private readonly CoaUnitManager _coaunitManager;
@@ -83,6 +82,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
 
         [UnitOfWork]
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Create)]
         public async Task<CoaUnitDto> CreateCoaUnit(CreateCoaUnitInput input)
         {
             var coaUnit = input.MapTo<CoaUnit>();
@@ -113,6 +113,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Edit)]
         public async Task<CoaUnitDto> UpdateCoaUnit(UpdateCoaUnitInput input)
         {
             var coaUnit = await _coaUnitRepository.GetAsync(input.CoaId);
@@ -156,6 +157,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Delete)]
         public async Task DeleteCoaUnit(IdInput input)
         {
             await _coaunitManager.DeleteAsync(input.Id);

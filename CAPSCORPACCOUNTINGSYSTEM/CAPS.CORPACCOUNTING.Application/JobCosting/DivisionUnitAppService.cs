@@ -19,7 +19,7 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
-    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
+    [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions)] ///This is to ensure only logged in user has access to this module.
     public class DivisionUnitAppService : CORPACCOUNTINGServiceBase, IDivisionUnitAppService
     {
         private readonly JobUnitManager _jobUnitManager;

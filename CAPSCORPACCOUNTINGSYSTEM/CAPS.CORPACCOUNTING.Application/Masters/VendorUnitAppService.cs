@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// <summary>
     /// 
     /// </summary>
-    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
+    [AbpAuthorize(AppPermissions.Pages_Payables_Vendors)]///This is to ensure only logged in user has access to this module.
     public class VendorUnitAppService : CORPACCOUNTINGServiceBase, IVendorUnitAppService
     {
         private readonly VendorUnitManager _vendorUnitManager;

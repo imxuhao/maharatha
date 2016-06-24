@@ -154,6 +154,10 @@ namespace CAPS.CORPACCOUNTING.Authorization
             #region Receivables Tab
             var receivables = pages.CreateChildPermission(AppPermissions.Pages_Receivables, L("Receivables"));
             var customers = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Customers, L("Customers"));
+            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Create, L("Create"));
+            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Edit, L("Edit"));
+            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Delete, L("Delete"));
+
             var history = customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History, L("History"));
             var invoices = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices, L("Invoices"));
             var invoicesEntry = invoices.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry, L("Entry"));

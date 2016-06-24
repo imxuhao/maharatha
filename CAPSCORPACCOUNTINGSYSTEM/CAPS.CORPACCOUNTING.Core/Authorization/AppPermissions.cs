@@ -160,6 +160,10 @@
 
         public const string Pages_Receivables = "Pages.Receivables";
         public const string Pages_Receivables_Customers = "Pages.Receivables.Customers";
+        public const string Pages_Receivables_Customers_Create = "Pages.Receivables.Customers.Create";
+        public const string Pages_Receivables_Customers_Edit = "Pages.Receivables.Customers.Edit";
+        public const string Pages_Receivables_Customers_Delete = "Pages.Receivables.Customers.Delete";
+
         public const string Pages_Receivables_Customers_History = "Pages.Receivables.Customers.History";
         public const string Pages_Receivables_Customers_History_Create = "Pages.Receivables.Customers.History.Create";
         public const string Pages_Receivables_Customers_History_Edit = "Pages.Receivables.Customers.History.Edit";

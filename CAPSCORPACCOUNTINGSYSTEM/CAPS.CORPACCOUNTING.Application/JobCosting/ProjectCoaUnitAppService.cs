@@ -9,6 +9,7 @@ using Abp.Domain.Uow;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Masters;
@@ -16,7 +17,7 @@ using CAPS.CORPACCOUNTING.Masters;
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
 
-    [AbpAuthorize] ///This is to ensure only logged in user has access to this module. We will improvise accordingly
+    [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs)] ///This is to ensure only logged in user has access to this module. We will improvise accordingly
     public class ProjectCoaUnitAppService : CORPACCOUNTINGServiceBase, IProjectCoaUnitAppService
     {
         private readonly CoaUnitManager _coaunitManager;
@@ -77,6 +78,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
 
         [UnitOfWork]
+        [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Create)]
         public async Task<CoaUnitDto> CreateProjectCoaUnit(CreateCoaUnitInput input)
         {
             var coaUnit = input.MapTo<CoaUnit>();
@@ -91,6 +93,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Edit)]
         public async Task<CoaUnitDto> UpdateProjectCoaUnit(UpdateCoaUnitInput input)
         {
             var coaUnit = await _coaUnitRepository.GetAsync(input.CoaId);
@@ -122,6 +125,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Delete)]
         public async Task DeleteProjectCoaUnit(IdInput input)
         {
             await _coaunitManager.DeleteAsync(input.Id);

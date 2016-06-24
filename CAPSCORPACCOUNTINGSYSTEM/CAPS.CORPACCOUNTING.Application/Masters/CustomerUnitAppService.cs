@@ -11,12 +11,13 @@ using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    [AbpAuthorize] ///This is to ensure only logged in user has access to this module.
+    [AbpAuthorize(AppPermissions.Pages_Receivables_Customers)] ///This is to ensure only logged in user has access to this module.
     public class CustomerUnitAppService : CORPACCOUNTINGServiceBase, ICustomerUnitAppService
     {
         private readonly CustomerUnitManager _customerUnitManager;
@@ -50,6 +51,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         [UnitOfWork]
+        [AbpAuthorize(AppPermissions.Pages_Receivables_Customers_Create)]
         public async Task<CustomerUnitDto> CreateCustomerUnit(CreateCustomerUnitInput input)
         {
             var customerUnit = input.MapTo<CustomerUnit>();
@@ -81,6 +83,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Delete)]
         public async Task DeleteCustomerUnit(IdInput input)
         {
             DeleteAddressUnitInput dto = new DeleteAddressUnitInput
@@ -97,6 +100,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        
         public async Task<PagedResultOutput<CustomerUnitDto>> GetCustomerUnits(SearchInputDto input)
         {
             var query = CreateCustomerQuery(input);
@@ -172,6 +176,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Receivables_Customers_Edit)]
         public async Task<CustomerUnitDto> UpdateCustomerUnit(UpdateCustomerUnitInput input)
         {
             var customerUnit = await _customerUnitRepository.GetAsync(input.CustomerId);

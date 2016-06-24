@@ -116,7 +116,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
     enableKeyEvents: true,
     typeAhead: false,
     editable: true,
-    hideTrigger:true,
+    triggerCls: 'searchComboTriggerCls',
     config: {
         filters: null,
 
@@ -272,12 +272,20 @@ Ext.define('Chaching.components.form.field.ComboBox', {
         me.callParent(arguments);
         me.mon(me, {
             specialkey: me.handleFieldEvents,
-            keypress:me.handleFieldEvents,
+            keypress: me.handleFieldEvents,
+            focus:me.handleComboFocus,
             scope: me
         });
         //key events
         //me.on('keyup', me.baseKeyUp, this);
         //me.on('specialkey', me.baseSpecialkey, this);
+    },
+    handleComboFocus:function(field, e) {
+        var me = this,
+            picker = me.picker ? me.picker : me.getPicker(),
+            view = picker.getView(),
+            selModel = me.picker.getSelectionModel();
+        me.cleanUpPicker(me, view, selModel, false);
     },
     handleFieldEvents:function(field, e) {
         var me = this,
@@ -325,7 +333,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
 
             // Don't call expand() directly as there may be additional processing involved before
             // expanding, e.g. in the case of a ComboBox query.
-            me.onTriggerClick();
+            //me.onTriggerClick();//TODO: un-comment if required to expand combo on down arrow.
 
             me.lastDownArrow = e.time;
         }
@@ -335,8 +343,7 @@ Ext.define('Chaching.components.form.field.ComboBox', {
         if (picker && me.isExpanded && recordsCount > 0) {
             var pickerView = picker.getView(),
                 selectionModel = pickerView.getSelectionModel();
-            selectionModel.deselectAll();
-            pickerView.focus();
+            me.cleanUpPicker(me, pickerView, selectionModel, false);
             selectionModel.select(0, false);
             pickerView.getCell(0, 0).focus();
             ///TODO: Handle scroll issue.

@@ -576,7 +576,6 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                     };
                 }
             }
-            cfg.ui = 'columnFilterField';
             if ('iconCol' === item.itemId) {
                 Ext.apply(cfg, me.getIcon());
             } 

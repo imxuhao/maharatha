@@ -576,6 +576,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                             destroy: abp.appPath + 'api/services/app/linesUnit/DeleteLineUnit'
                         }
                     },
+                    extraParams:[{paramName:"jobId",value:null}],
                     listeners: {
                         beforequery: 'beforeAccountQuery'
                     }

@@ -224,6 +224,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
                         destroy: abp.appPath + 'api/services/app/linesUnit/DeleteLineUnit'
                     }
                 },
+                extraParams: [{ paramName: "creditJobId", value: null }],
                 listeners: {
                     beforequery: 'beforeAccountQuery'
                 }

@@ -170,6 +170,15 @@ Ext.define('Chaching.components.plugins.CellEditing', {
                 var editorType = editor.field.xtype;
                 if (editorType === "combo" || editorType === "combobox" || editorType === "chachingcombobox" || editorType === "chachingcombo") {
                     var editorStore = editor.field.getStore();
+                    if (editor.field.extraParams) {
+                        var extraParams = editor.field.extraParams,
+                            paramsLength = extraParams.length,
+                            storeProxy = editorStore.getProxy();
+                        for (var i = 0; i < paramsLength; i++) {
+                            var param = extraParams[i];
+                            storeProxy.setExtraParam(param.paramName, record.get(param.paramName));
+                        }
+                    }
                     if (editorStore && !editorStore.isDataLoaded) {
                         editorStore.load({
                             callback: function(records, operation, success) {

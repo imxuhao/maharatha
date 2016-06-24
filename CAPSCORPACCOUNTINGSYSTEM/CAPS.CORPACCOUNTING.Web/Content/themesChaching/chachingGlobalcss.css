@@ -132,3 +132,9 @@ border-color: transparent transparent transparent black; /*border color should b
 border-style: solid;
 border-width: 10px;
 }
+
+.searchComboTriggerCls:before {
+    content: "\f002" !important;
+    font: 13px FontAwesome;
+    color: black;
+}

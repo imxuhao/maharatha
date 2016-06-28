@@ -37,6 +37,6 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureForm'
              xtype: 'label',             
              text: app.localize('ProfilePicture_Change_Info').initCap(),
              width: '100%'            
-         },
+         }
         ]
 });

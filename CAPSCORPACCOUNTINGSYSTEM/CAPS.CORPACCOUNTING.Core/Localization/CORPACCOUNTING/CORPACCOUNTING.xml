@@ -678,6 +678,7 @@
     <text name="GLAccount" value="GL Account" />
     <text name="Line#" value="Line #" />
     <text name="DateCreated" value="Date Created" />
+    <text name="DateModified" value="Date Modified" />
     <text name="Zip" value="Zip" />
     <text name="ZipCode" value="Zip Code" />
     <text name="PreviousYearPayments" value="Previous Year Payments" />
@@ -919,5 +920,46 @@
  <text name="CheckGroup" value="Check group" />
  <text name="MemoLine" value="Memoline" />
  <text name="PaymentMethods" value="Payment Methods" />
+ <text name="CompanySetup" value="Company Setup" />
+ <text name="CompanyPreferences" value="Company Preferences" />
+ <text name="CompanyMembers" value="Members" />
+ <text name="CompanyInformation" value="Company Information" />
+ <text name="CompanyState" value="State" />
+ <text name="Company1099And1096Form" value="For 1099 and 1096 forms" />
+ <text name="TransmitterContactName" value="Transmitter Contact Name" />
+ <text name="TransmitterEmailAddress" value="Transmitter Email Address" />
+ <text name="TransmitterCode" value="Transmitter Code" />
+ <text name="TransmitterControlCode" value="Transmitter Control Code" />
+    <text name="AllowDuplicateAPInvoices" value="Allow Duplicate AP invoice #s" />
+    <text name="AllowDuplicateARInvoices" value="Allow Duplicate AR invoice #s" />
+    <text name="SetDefaultAPTerms" value="Set Default AP Terms" />
+    <text name="SetDefaultARTerms" value="Set Default AR Terms" />
+    <text name="AllowAccountNumbersStartingWithZero" value="Allow Account numbers Starting with Zero (0)" />
+    <text name="ImportPOLogsFromProducersActualUploads" value="Import PO logs from Producers Actual uploads" />
+    <text name="BuildAPUponCCStatementPosting" value="Build AP upon CC statement Posting" />
+    <text name="BuildAPUponPayrollPosting" value="Build AP upon Payroll Posting" />
+    <text name="POAutoNumbering" value="PO Auto-Numbering" />
+    <text name="ARAgingDate" value="AR Aging Date" />
+    <text name="AgeByInvoiceDate" value="Age by Invoice Date" />
+    <text name="AgeByDueDate" value="Age by Due Date" />
+    <text name="APAgingDate" value="AP Aging Date" />
+    <text name="DepositGracePeriods" value="Deposit Grace Periods" />
+    <text name="PaymentGracePeriods" value="Payment Grace Periods" />
+    <text name="AllowTransactionsActionsThatHaveBeenCodedToJob+GLToAppearOnJobCost" value="Allow transactions actions that have been coded to Job + GL to appear on Job Cost???" />
+    <text name="APPostingDateDefault" value="AP Posting Date Default" />
+    <text name="DefaultBank" value="Default Bank" />
+    <text name="CompanyInvoiceDate" value="Invoice Date" />
+    <text name="CurrentDate" value="Current Date" />
+    <text name="CompanyLogo" value="Company Logo" />
+    <text name="CompanyLogo_Change_Info" value="Maximum 1MB size." />
+    <text name="CreateNewCompanySetup" value="Create New Company Setup" />
+    <text name="EditCompanySetup" value="Edit Company Setup" />
+    <text name="ViewCompanySetup" value="Create New Company Setup" />
+    <text name="CompanySearch" value="Company Search" />
+    <text name="MembersCount" value="No of Members" />
+    <text name="UpdatedBy" value="Updated By" />
+    <text name="CompanyId" value="Company Id" />
+    <text name="CompanyCode" value="Company Code" />
+    <text name="ParentOrganizationId" value="ParentOrganizationId" />
   </texts>
 </localizationDictionary>

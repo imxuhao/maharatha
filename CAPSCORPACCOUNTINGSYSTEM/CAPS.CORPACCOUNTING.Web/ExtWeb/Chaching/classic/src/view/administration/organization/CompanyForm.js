@@ -4,12 +4,12 @@
         'widget.organizationUnits.create', 'widget.organizationUnits.edit'
     ],
     requires: [
-       // 'Chaching.view.payables.vendors.VendorsFormController'
+       'Chaching.view.administration.organization.CompanyFormController',
        'Chaching.view.administration.organization.CompanySetupForm',
        'Chaching.view.administration.organization.CompanyPreferencesForm',
        'Chaching.view.administration.organization.MembersForm'
     ],
-   // controller: 'payables-vendors-vendorsform',
+    controller: 'administration-organization-companyform',
     name: 'companysetup',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Administration.OrganizationUnits'),
@@ -19,31 +19,33 @@
     },
     openInPopupWindow: false,
     hideDefaultButtons: false,
-    autoScroll: true,
+    autoScroll: false,
     border: false,
-    showFormTitle: true,
+    showFormTitle: false,
     displayDefaultButtonsCenter: true,
     titleConfig: {
         title: abp.localization.localize("CreateNewCompanySetup").initCap()
     },
+    layout : 'fit',
     items: {
         xtype: 'tabpanel',
-        ui: 'formTabPanels',
+       // ui: 'formTabPanels',
+        ui: 'submenuTabs',
+        tabPosition: 'left',
+        tabRotation: 2,
         items: [
             {
                 title: abp.localization.localize("CompanySetup").initCap(),
-                xtype: 'administration.organizationunits.companysetup',
-                iconCls: 'fa fa-gear'
+                xtype: 'administration.organizationunits.companysetup'
             },
             {
                 title: abp.localization.localize("CompanyPreferences").initCap(),
-                xtype: 'administration.organizationunits.companypreferences',
-                iconCls: 'fa fa-gear'
+                xtype: 'administration.organizationunits.companypreferences'
             },
             {
+                layout: 'fit',
                 title: abp.localization.localize("Members").initCap(),
-                xtype: 'administration.organizationunits.members',
-                iconCls: 'fa fa-gear'
+                xtype: 'administration.organizationunits.members'
             }
 
 

@@ -259,14 +259,15 @@
                                     ui: 'fieldLabelTop'
                                 },{
                                     xtype: 'combobox',
-                                    name: 'defaultBankId',
+                                    name: 'bankAccountId',
                                     fieldLabel: app.localize('DefaultBank').initCap(),
                                     width: '100%',
                                     ui: 'fieldLabelTop',
-                                    displayField: 'defaultBank',
-                                    valueField: 'defaultBankId',
-                                    emptyText: app.localize('SelectOption')//,
-                                    // store: 'utilities.PositivePayFileListStore'
+                                    displayField: 'bankAccountName',
+                                    valueField: 'bankAccountId',
+                                    //queryMode : 'local',
+                                    emptyText: app.localize('SelectOption'),
+                                    store: new Chaching.store.banking.banksetup.BankSetupStore()
                                 }, {
                                     xtype: 'checkbox',
                                     name: 'allowTransactionsActionsThatHaveBeenCodedToJobGLToAppearOnJobCost',

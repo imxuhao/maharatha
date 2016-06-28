@@ -11,10 +11,10 @@
         edit: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Edit'),
         destroy: true//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Delete')
     },
-    name: 'companysetup',
+    //name: 'companysetup',
     openInPopupWindow: false,
     hideDefaultButtons: true,
-    autoScroll: true,
+    //autoScroll: true,
     border: false,
     showFormTitle: false,
     displayDefaultButtonsCenter: true,
@@ -175,11 +175,14 @@
                         }, {
                             xtype: 'filefield',
                             name: 'companyLogo',
-                            ui: 'default',
+                            // ui: 'default',
+                            // ui: 'fieldLabelTop',
+                            labelStyle : "font: 600 13px/17px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;",
                             fieldLabel: app.localize('CompanyLogo'),
                             clearOnSubmit: false,
                             anchor: '100%',
                             width: '100%',
+                            buttonText: 'Select Logo...',
                             listeners: {
                                // change: 'filechange'
                             }

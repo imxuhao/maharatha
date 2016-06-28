@@ -219,6 +219,7 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
+    <Compile Include="Configuration\OrganizationSettingProvider.cs" />
     <Compile Include="EFAuditLog\INeedModLog.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="Financials\Preferences\FiscalPeriodUnitManager.cs" />
@@ -425,6 +426,7 @@
     <Compile Include="Security\SecureGroupMappingUnit.cs" />
     <Compile Include="Security\SimpleStringCipher.cs" />
     <Compile Include="Security\SubEntityAccessRestrictionUnit.cs" />
+    <Compile Include="Settings\SettingExtended.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />
     <Compile Include="Storage\IBinaryObjectManager.cs" />
     <Compile Include="Storage\BinaryObject.cs" />

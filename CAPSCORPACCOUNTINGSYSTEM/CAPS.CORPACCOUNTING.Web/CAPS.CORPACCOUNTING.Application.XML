@@ -1087,6 +1087,7 @@
             <param name="accountCache"></param>
             <param name="subAccountCache"></param>
             <param name="coaUnit"></param>
+            <param name="subAccountRestrictionRepository"></param>
             <param name="subAccountRestrictionCache"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
@@ -8897,6 +8898,15 @@
         <member name="F:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames.ApplicationZip">
             <summary>ZIP archive files; Registered[7]</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.Address">
+            <summary> Gets or sets Address of the Organization. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.Address">
+            <summary> Gets or sets eAddress of the Organization. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.Address">
+            <summary>Gets or sets the Address of the Organization. </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionUnit(CAPS.CORPACCOUNTING.Payables.Dto.APHeaderTransactionsInputUnit)">
             <summary>
             Create APHeader Transactions
@@ -8928,13 +8938,6 @@
         <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.GetAPHeaderTransactionDetailUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             Get APHeaderDetailsByAccountingDocumentId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionDetailUnit(CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit)">
-            <summary>
-            Creating InvoiceEntryDocumnetDetails
             </summary>
             <param name="input"></param>
             <returns></returns>

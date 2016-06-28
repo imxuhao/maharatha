@@ -12,6 +12,13 @@ using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Organizations.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using Abp.Domain.Uow;
+using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.Masters.Dto;
+using Abp.Configuration;
+using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
+using CAPS.CORPACCOUNTING.Configuration;
+using System;
+using System.Configuration;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
@@ -21,25 +28,54 @@ namespace CAPS.CORPACCOUNTING.Organizations
         private readonly OrganizationUnitManager _organizationUnitManager;
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
         private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitRepository;
-
+        private readonly IRepository<AddressUnit, long> _addressRepository;
+        private readonly ISettingDefinitionManager _settingDefinitionManager;
         public OrganizationUnitAppService(
             OrganizationUnitManager organizationUnitManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
-            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository)
+            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
+            IRepository<AddressUnit, long> addressRepository,
+            ISettingDefinitionManager settingDefinitionManager
+            )
         {
             _organizationUnitManager = organizationUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
             _userOrganizationUnitRepository = userOrganizationUnitRepository;
+            _addressRepository = addressRepository;
+            _settingDefinitionManager = settingDefinitionManager;
         }
 
         public async Task<ListResultOutput<OrganizationUnitDto>> GetOrganizationUnits()
         {
             var query =
                 from ou in _organizationUnitRepository.GetAll()
+                join address in _addressRepository.GetAll().Where(u=>u.TypeofObjectId==TypeofObject.Org) on ou.Id equals address.ObjectId
                 join uou in _userOrganizationUnitRepository.GetAll() on ou.Id equals uou.OrganizationUnitId into g
                 select new { ou, memberCount = g.Count() };
 
             var items = await query.ToListAsync();
+
+            //var hostSettings = new HostSettingsEditDto
+            //{
+            //    OrganizationManagement = new OrganizationManagementSettingsEditDto
+            //    {
+            //        IsAllowDuplicateAPInvoiceNos = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.AllowDuplicateAPInvoiceNos),
+            //        IsAllowDuplicateARInvoiceNos = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.AllowDuplicateARInvoiceNos),
+            //        AllowTransactionsJobWithGL = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.AllowTransactionsactionsJobWithGL),
+            //        APAgingDate = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.APAgingDate),
+            //        ARAgingDate = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.ARAgingDate),
+            //        BuildAPuponCCstatementPosting = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.BuildAPuponCCstatementPosting),
+            //        BuildAPuponPayrollPosting = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.BuildAPuponPayrollPosting),
+            //        DefaultAPPostingDate = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.APPostingDateDefault),
+            //        DefaultBank = await SettingManager.GetSettingValueAsync<long>(AppSettings.OrganizationManagement.DefaultBank),
+            //        DepositGracePeriods = await SettingManager.GetSettingValueAsync<int>(AppSettings.OrganizationManagement.DepositGracePeriods),
+            //        IsAllowAccountnumbersStartingwithZero = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.AllowAccountNumbersStartingWithZero),
+            //        IsImportPOlogsfromProducersActualUploads = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.ImportPOlogsfromProducersActualuploads),
+            //        PaymentsGracePeriods = await SettingManager.GetSettingValueAsync<int>(AppSettings.OrganizationManagement.PaymentGracePeriods),
+            //        POAutoNumbering = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.POAutoNumbering),
+            //    }
+
+            //};
 
             return new ListResultOutput<OrganizationUnitDto>(
                 items.Select(item =>
@@ -91,6 +127,27 @@ namespace CAPS.CORPACCOUNTING.Organizations
                 await CurrentUnitOfWork.SaveChangesAsync();
             }
 
+            //address Information
+            if (!ReferenceEquals(input.Address, null))
+            {
+               
+                    if (input.Address.Line1 != null || input.Address.Line2 != null ||
+                        input.Address.Line4 != null || input.Address.Line4 != null ||
+                        input.Address.State != null || input.Address.Country != null ||
+                        input.Address.Email != null || input.Address.Phone1 != null ||
+                        input.Address.ContactNumber != null)
+                    {
+                    input.Address.TypeofObjectId = TypeofObject.Org;
+                    input.Address.ObjectId = organizationUnit.Id;
+                        var addressUnit = input.Address.MapTo<AddressUnit>();
+                        await _addressRepository.InsertAsync(addressUnit);
+                    }
+                    await CurrentUnitOfWork.SaveChangesAsync();
+               
+            }
+
+            //Organization Settings
+
             return organizationUnit.MapTo<OrganizationUnitDto>();
         }
 
@@ -103,8 +160,34 @@ namespace CAPS.CORPACCOUNTING.Organizations
 
             await _organizationUnitManager.UpdateAsync(organizationUnit);
 
+
+            // update address Information
+
+            if (!ReferenceEquals(input.Address, null))
+            {
+                if (input.Address.AddressId != 0)
+                {
+                    var addressUnit = input.Address.MapTo<AddressUnit>();
+                    await _addressRepository.UpdateAsync(addressUnit);
+                }
+                else
+                {
+                    if (input.Address.Line1 != null || input.Address.Line2 != null ||
+                        input.Address.Line4 != null || input.Address.Line4 != null ||
+                        input.Address.State != null || input.Address.Country != null ||
+                        input.Address.Email != null || input.Address.Phone1 != null || input.Address.Website != null)
+                    {
+                        input.Address.TypeofObjectId = TypeofObject.Org;
+                        input.Address.ObjectId = input.Id;
+                        var addressUnit = input.Address.MapTo<AddressUnit>();
+                        await _addressRepository.InsertAsync(addressUnit);
+                    }
+                }
+            }
+            await CurrentUnitOfWork.SaveChangesAsync();
             return await CreateOrganizationUnitDto(organizationUnit);
         }
+
 
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task<OrganizationUnitDto> MoveOrganizationUnit(MoveOrganizationUnitInput input)
@@ -119,6 +202,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task DeleteOrganizationUnit(IdInput<long> input)
         {
+            await _addressRepository.DeleteAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Org);
             await _organizationUnitManager.DeleteAsync(input.Id);
         }
 
@@ -166,5 +250,6 @@ namespace CAPS.CORPACCOUNTING.Organizations
             dto.MemberCount = await _userOrganizationUnitRepository.CountAsync(uou => uou.OrganizationUnitId == organizationUnit.Id);
             return dto;
         }
+
     }
 }

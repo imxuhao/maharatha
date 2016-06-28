@@ -1248,6 +1248,14 @@
     <Compile Include="Migrations\201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.Designer.cs">
       <DependentUpon>201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606270829177_Modify_Settings_Table.cs" />
+    <Compile Include="Migrations\201606270829177_Modify_Settings_Table.Designer.cs">
+      <DependentUpon>201606270829177_Modify_Settings_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606271306243_Modify_Organization_Table.cs" />
+    <Compile Include="Migrations\201606271306243_Modify_Organization_Table.Designer.cs">
+      <DependentUpon>201606271306243_Modify_Organization_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2106,6 +2114,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.resx">
       <DependentUpon>201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606270829177_Modify_Settings_Table.resx">
+      <DependentUpon>201606270829177_Modify_Settings_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606271306243_Modify_Organization_Table.resx">
+      <DependentUpon>201606271306243_Modify_Organization_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

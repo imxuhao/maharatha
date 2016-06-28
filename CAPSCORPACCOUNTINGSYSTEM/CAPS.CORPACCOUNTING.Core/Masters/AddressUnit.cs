@@ -49,13 +49,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         PayrollCompany = 5,
         [Display(Name = "Employee")]
         Emp = 6,
-        [Display(Name = "Organization ")]
+        [Display(Name = "Organization")]
         Org = 7,
         [Display(Name = "User")]
         User = 8,
         [Display(Name = "Director")]
         Director = 9,
-        [Display(Name = "PurchaseOrderEntryDocument ")]
+        [Display(Name = "PurchaseOrderEntryDocument")]
         PurchaseOrderEntryDocument =240,
     }
 

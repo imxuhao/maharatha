@@ -57,6 +57,9 @@ namespace CAPS.CORPACCOUNTING
             //Adding notification providers
             Configuration.Notifications.Providers.Add<AppNotificationProvider>();
 
+            //Adding Organization settings
+            Configuration.Settings.Providers.Add<OrganizationSettingProvider>();
+
             //Enable this line to create a multi-tenant application.
             Configuration.MultiTenancy.IsEnabled = true;
 

@@ -2129,6 +2129,7 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\OrganizationTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyPreferencesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyPreferencesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanySetupForm.js" />

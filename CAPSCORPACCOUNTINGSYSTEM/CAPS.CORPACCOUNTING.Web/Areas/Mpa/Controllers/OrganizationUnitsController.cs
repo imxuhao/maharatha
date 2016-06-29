@@ -7,6 +7,15 @@ using Abp.Web.Mvc.Authorization;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Web.Areas.Mpa.Models.OrganizationUnits;
 using CAPS.CORPACCOUNTING.Web.Controllers;
+using Abp.Domain.Uow;
+using Abp.UI;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System;
+using CAPS.CORPACCOUNTING.IO;
+using System.IO;
+using Abp.Web.Mvc.Models;
+using Abp.Web.Models;
 
 namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
 {
@@ -14,10 +23,11 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
     public class OrganizationUnitsController : CORPACCOUNTINGControllerBase
     {
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
-
-        public OrganizationUnitsController(IRepository<OrganizationUnit, long> organizationUnitRepository)
+        private readonly IAppFolders _appFolders;
+        public OrganizationUnitsController(IRepository<OrganizationUnit, long> organizationUnitRepository, IAppFolders appFolders)
         {
             _organizationUnitRepository = organizationUnitRepository;
+            _appFolders = appFolders;
         }
 
         public ActionResult Index()
@@ -38,6 +48,51 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
             var model = organizationUnit.MapTo<EditOrganizationUnitModalViewModel>();
 
             return PartialView("_EditModal", model);
+        }
+
+
+        public JsonResult UploadProfilePicture()
+        {
+            try
+            {
+                //Check input
+                if (Request.Files.Count <= 0 || Request.Files[0] == null)
+                {
+                    throw new UserFriendlyException(L("ProfilePicture_Change_Error"));
+                }
+
+                var file = Request.Files[0];
+
+                if (file.ContentLength > 5242880) //1MB.
+                {
+                    throw new UserFriendlyException(L("ProfilePicture_Warn_SizeLimit"));
+                }
+
+                //Check file type & format
+                var fileImage = Image.FromStream(file.InputStream);
+                if (!fileImage.RawFormat.Equals(ImageFormat.Jpeg) && !fileImage.RawFormat.Equals(ImageFormat.Png))
+                {
+                    throw new ApplicationException("Uploaded file is not an accepted image file !");
+                }
+
+                //Delete old temp profile pictures
+                AppFileHelper.DeleteFilesInFolderIfExists(_appFolders.TempFileDownloadFolder, "sumitOrgImage");
+
+                //Save new picture
+                var fileInfo = new FileInfo(file.FileName);
+                var tempFileName = "sumitOrgImage" +  fileInfo.Extension;
+                var tempFilePath = Path.Combine(_appFolders.TempFileDownloadFolder, tempFileName);
+                file.SaveAs(tempFilePath);
+
+                using (var bmpImage = new Bitmap(tempFilePath))
+                {
+                    return Json(new MvcAjaxResponse(new { fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
+                }
+            }
+            catch (UserFriendlyException ex)
+            {
+                return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
+            }
         }
     }
 }

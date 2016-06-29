@@ -29,7 +29,8 @@ using CAPS.CORPACCOUNTING.Financials.Preferences;
 using CAPS.CORPACCOUNTING.Localization;
 using CAPS.CORPACCOUNTING.Security;
 using Z.EntityFramework.Plus;
-using  CAPS.CORPACCOUNTING.EFAuditLog;
+using CAPS.CORPACCOUNTING.EFAuditLog;
+using CAPS.CORPACCOUNTING.Organization;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -606,6 +607,8 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
         public virtual IDbSet<SubAccountRestrictionUnit> SubAccountRestrictionUnit { get; set; }
 
 
+        public virtual IDbSet<OrganizationExtended> OrganizationExtended { get; set; }
+        
 
         #region Modification Log
 

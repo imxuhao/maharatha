@@ -19,69 +19,59 @@ using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
 using CAPS.CORPACCOUNTING.Configuration;
 using System;
 using System.Configuration;
+using CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto;
+using System.IO;
+using System.Drawing;
+using Abp.UI;
+using Abp.IO;
+using CAPS.CORPACCOUNTING.Organization;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
     [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits)]
     public class OrganizationUnitAppService : CORPACCOUNTINGAppServiceBase, IOrganizationUnitAppService
     {
-        private readonly OrganizationUnitManager _organizationUnitManager;
+        private readonly OrganizationExtendedUnitManager _organizationExtendedUnitManager;
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
+        private readonly IRepository<OrganizationExtended, long> _organizationExtendedUnitRepository;
         private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitRepository;
         private readonly IRepository<AddressUnit, long> _addressRepository;
         private readonly ISettingDefinitionManager _settingDefinitionManager;
+        private readonly IAppFolders _appFolders;
         public OrganizationUnitAppService(
-            OrganizationUnitManager organizationUnitManager,
+            OrganizationExtendedUnitManager organizationExtendedUnitManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
             IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
             IRepository<AddressUnit, long> addressRepository,
-            ISettingDefinitionManager settingDefinitionManager
+            ISettingDefinitionManager settingDefinitionManager,
+            IAppFolders appFolders,
+            IRepository<OrganizationExtended, long> organizationExtendedUnitRepository
             )
         {
-            _organizationUnitManager = organizationUnitManager;
+            _organizationExtendedUnitManager = organizationExtendedUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
             _userOrganizationUnitRepository = userOrganizationUnitRepository;
             _addressRepository = addressRepository;
             _settingDefinitionManager = settingDefinitionManager;
+            _appFolders = appFolders;
+            _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
         }
 
         public async Task<ListResultOutput<OrganizationUnitDto>> GetOrganizationUnits()
         {
             var query =
-                from ou in _organizationUnitRepository.GetAll()
-                join address in _addressRepository.GetAll().Where(u=>u.TypeofObjectId==TypeofObject.Org) on ou.Id equals address.ObjectId
+                from ou in _organizationExtendedUnitRepository.GetAll()
+                join address in _addressRepository.GetAll().Where(u => u.TypeofObjectId == TypeofObject.Org) on ou.Id equals address.ObjectId
                 join uou in _userOrganizationUnitRepository.GetAll() on ou.Id equals uou.OrganizationUnitId into g
-                select new { ou, memberCount = g.Count() };
+                select new { ou, address, memberCount = g.Count() };
 
             var items = await query.ToListAsync();
-
-            //var hostSettings = new HostSettingsEditDto
-            //{
-            //    OrganizationManagement = new OrganizationManagementSettingsEditDto
-            //    {
-            //        IsAllowDuplicateAPInvoiceNos = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.AllowDuplicateAPInvoiceNos),
-            //        IsAllowDuplicateARInvoiceNos = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.AllowDuplicateARInvoiceNos),
-            //        AllowTransactionsJobWithGL = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.AllowTransactionsactionsJobWithGL),
-            //        APAgingDate = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.APAgingDate),
-            //        ARAgingDate = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.ARAgingDate),
-            //        BuildAPuponCCstatementPosting = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.BuildAPuponCCstatementPosting),
-            //        BuildAPuponPayrollPosting = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.BuildAPuponPayrollPosting),
-            //        DefaultAPPostingDate = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.APPostingDateDefault),
-            //        DefaultBank = await SettingManager.GetSettingValueAsync<long>(AppSettings.OrganizationManagement.DefaultBank),
-            //        DepositGracePeriods = await SettingManager.GetSettingValueAsync<int>(AppSettings.OrganizationManagement.DepositGracePeriods),
-            //        IsAllowAccountnumbersStartingwithZero = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.AllowAccountNumbersStartingWithZero),
-            //        IsImportPOlogsfromProducersActualUploads = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.ImportPOlogsfromProducersActualuploads),
-            //        PaymentsGracePeriods = await SettingManager.GetSettingValueAsync<int>(AppSettings.OrganizationManagement.PaymentGracePeriods),
-            //        POAutoNumbering = await SettingManager.GetSettingValueAsync<bool>(AppSettings.OrganizationManagement.POAutoNumbering),
-            //    }
-
-            //};
-
             return new ListResultOutput<OrganizationUnitDto>(
                 items.Select(item =>
                 {
                     var dto = item.ou.MapTo<OrganizationUnitDto>();
                     dto.MemberCount = item.memberCount;
+                    dto.Address = item.address.MapTo<AddressUnitDto>();
                     return dto;
                 }).ToList());
         }
@@ -112,9 +102,15 @@ namespace CAPS.CORPACCOUNTING.Organizations
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task<OrganizationUnitDto> CreateOrganizationUnit(CreateOrganizationUnitInput input)
         {
-            var organizationUnit = new OrganizationUnit(AbpSession.TenantId, input.DisplayName, input.ParentId);
+         
+            byte[] logo = null;
+            if (!ReferenceEquals(input.Logo, null))
+                logo = await UpdateProfilePicture(input.Logo);
 
-            await _organizationUnitManager.CreateAsync(organizationUnit);
+            var organizationUnit = new OrganizationExtended(AbpSession.TenantId, input.DisplayName, input.ParentId, input.TransmitterContactName,
+                input.TransmitterEmailAddress, input.TransmitterCode, input.TransmitterControlCode, input.FederalTaxId, logo);
+
+            await _organizationExtendedUnitManager.CreateAsync(organizationUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
 
 
@@ -130,20 +126,18 @@ namespace CAPS.CORPACCOUNTING.Organizations
             //address Information
             if (!ReferenceEquals(input.Address, null))
             {
-               
-                    if (input.Address.Line1 != null || input.Address.Line2 != null ||
-                        input.Address.Line4 != null || input.Address.Line4 != null ||
-                        input.Address.State != null || input.Address.Country != null ||
-                        input.Address.Email != null || input.Address.Phone1 != null ||
-                        input.Address.ContactNumber != null)
-                    {
+                if (input.Address.Line1 != null || input.Address.Line2 != null ||
+                    input.Address.Line4 != null || input.Address.Line4 != null ||
+                    input.Address.State != null || input.Address.Country != null ||
+                    input.Address.Email != null || input.Address.Phone1 != null ||
+                    input.Address.ContactNumber != null)
+                {
                     input.Address.TypeofObjectId = TypeofObject.Org;
                     input.Address.ObjectId = organizationUnit.Id;
-                        var addressUnit = input.Address.MapTo<AddressUnit>();
-                        await _addressRepository.InsertAsync(addressUnit);
-                    }
-                    await CurrentUnitOfWork.SaveChangesAsync();
-               
+                    var addressUnit = input.Address.MapTo<AddressUnit>();
+                    await _addressRepository.InsertAsync(addressUnit);
+                }
+                await CurrentUnitOfWork.SaveChangesAsync();
             }
 
             //Organization Settings
@@ -154,11 +148,20 @@ namespace CAPS.CORPACCOUNTING.Organizations
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task<OrganizationUnitDto> UpdateOrganizationUnit(UpdateOrganizationUnitInput input)
         {
-            var organizationUnit = await _organizationUnitRepository.GetAsync(input.Id);
+
+            byte[] logo = null;
+            if (!ReferenceEquals(input.Logo, null))
+                logo = await UpdateProfilePicture(input.Logo);
+
+            var organizationUnit = await _organizationExtendedUnitRepository.GetAsync(input.Id);
 
             organizationUnit.DisplayName = input.DisplayName;
-
-            await _organizationUnitManager.UpdateAsync(organizationUnit);
+            organizationUnit.TransmitterContactName = input.TransmitterContactName;
+            organizationUnit.TransmitterControlCode = input.TransmitterControlCode;
+            organizationUnit.TransmitterEmailAddress = input.TransmitterEmailAddress;
+            organizationUnit.TransmitterCode = input.TransmitterCode;
+            organizationUnit.FederalTaxId = input.FederalTaxId;
+            await _organizationExtendedUnitManager.UpdateAsync(organizationUnit);
 
 
             // update address Information
@@ -192,7 +195,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task<OrganizationUnitDto> MoveOrganizationUnit(MoveOrganizationUnitInput input)
         {
-            await _organizationUnitManager.MoveAsync(input.Id, input.NewParentId);
+            await _organizationExtendedUnitManager.MoveAsync(input.Id, input.NewParentId);
 
             return await CreateOrganizationUnitDto(
                 await _organizationUnitRepository.GetAsync(input.Id)
@@ -203,7 +206,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         public async Task DeleteOrganizationUnit(IdInput<long> input)
         {
             await _addressRepository.DeleteAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Org);
-            await _organizationUnitManager.DeleteAsync(input.Id);
+            await _organizationExtendedUnitManager.DeleteAsync(input.Id);
         }
 
         [UnitOfWork]
@@ -250,6 +253,45 @@ namespace CAPS.CORPACCOUNTING.Organizations
             dto.MemberCount = await _userOrganizationUnitRepository.CountAsync(uou => uou.OrganizationUnitId == organizationUnit.Id);
             return dto;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private async Task<byte[]> UpdateProfilePicture(UpdateProfilePictureInput input)
+        {
+            var tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
+
+            byte[] byteArray;
+
+            using (var fsTempProfilePicture = new FileStream(tempProfilePicturePath, FileMode.Open))
+            {
+                using (var bmpImage = new Bitmap(fsTempProfilePicture))
+                {
+                    var width = input.Width == 0 ? bmpImage.Width : input.Width;
+                    var height = input.Height == 0 ? bmpImage.Height : input.Height;
+                    var bmCrop = bmpImage.Clone(new Rectangle(input.X, input.Y, width, height), bmpImage.PixelFormat);
+
+                    using (var stream = new MemoryStream())
+                    {
+                        bmCrop.Save(stream, bmpImage.RawFormat);
+                        stream.Close();
+                        byteArray = stream.ToArray();
+                    }
+                }
+            }
+
+            if (byteArray.LongLength > 102400) //100 KB
+            {
+                throw new UserFriendlyException(L("ResizedProfilePicture_Warn_SizeLimit"));
+            }
+
+            FileHelper.DeleteIfExists(tempProfilePicturePath);
+            return byteArray;
+        }
+
+
 
     }
 }

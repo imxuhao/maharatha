@@ -18,8 +18,23 @@ namespace CAPS.CORPACCOUNTING.Organizations.Dto
 
         public int MemberCount { get; set; }
 
+        /// <summary>Gets or sets the TransmitterContactName field. </summary>
+        public string TransmitterContactName { get; set; }
+
+        /// <summary>Gets or sets the TransmitterEmailAddress field. </summary>
+        public string TransmitterEmailAddress { get; set; }
+
+        /// <summary>Gets or sets the TransmitterCode field. </summary>
+        public string TransmitterCode { get; set; }
+
+        /// <summary>Gets or sets the TransmitterControlCode field. </summary>
+        public string TransmitterControlCode { get; set; }
+
+        /// <summary>Gets or sets the FederalTaxID field. </summary>
+        public string FederalTaxId { get; set; }
+
         /// <summary>Gets or sets the Address of the Organization. </summary>
-        public List<AddressUnitDto> Address { get; set; }
+        public AddressUnitDto Address { get; set; }
 
         public OrganizationManagementSettingsEditDto OrganizationSettings { get; set; }
     }

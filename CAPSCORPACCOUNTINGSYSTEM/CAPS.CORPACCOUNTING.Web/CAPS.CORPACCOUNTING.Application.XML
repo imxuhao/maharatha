@@ -8898,14 +8898,84 @@
         <member name="F:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames.ApplicationZip">
             <summary>ZIP archive files; Registered[7]</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.DisplayName">
+            <summary>Gets or sets the Organization Name field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.TransmitterContactName">
+            <summary>Gets or sets the TransmitterContactName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.TransmitterEmailAddress">
+            <summary>Gets or sets the TransmitterEmailAddress field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.TransmitterCode">
+            <summary>Gets or sets the TransmitterCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.TransmitterControlCode">
+            <summary>Gets or sets the TransmitterControlCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.FederalTaxId">
+            <summary>Gets or sets the FederalTaxID field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.Address">
             <summary> Gets or sets Address of the Organization. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.OrganizationSettings">
+            <summary> Gets or sets Address of the OrganizationSettings. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.Logo">
+            <summary> Gets or sets Logo  </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.DisplayName">
+            <summary>Gets or sets the Organization Name field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.TransmitterContactName">
+            <summary>Gets or sets the TransmitterContactName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.TransmitterEmailAddress">
+            <summary>Gets or sets the TransmitterEmailAddress field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.TransmitterCode">
+            <summary>Gets or sets the TransmitterCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.TransmitterControlCode">
+            <summary>Gets or sets the TransmitterControlCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.FederalTaxId">
+            <summary>Gets or sets the FederalTaxID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.Logo">
+            <summary> Gets or sets Logo  </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.Address">
             <summary> Gets or sets eAddress of the Organization. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.OrganizationSettings">
+            <summary> Gets or sets eAddress of the OrganizationSettings. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.TransmitterContactName">
+            <summary>Gets or sets the TransmitterContactName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.TransmitterEmailAddress">
+            <summary>Gets or sets the TransmitterEmailAddress field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.TransmitterCode">
+            <summary>Gets or sets the TransmitterCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.TransmitterControlCode">
+            <summary>Gets or sets the TransmitterControlCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.FederalTaxId">
+            <summary>Gets or sets the FederalTaxID field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.Address">
             <summary>Gets or sets the Address of the Organization. </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateProfilePicture(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionUnit(CAPS.CORPACCOUNTING.Payables.Dto.APHeaderTransactionsInputUnit)">
             <summary>

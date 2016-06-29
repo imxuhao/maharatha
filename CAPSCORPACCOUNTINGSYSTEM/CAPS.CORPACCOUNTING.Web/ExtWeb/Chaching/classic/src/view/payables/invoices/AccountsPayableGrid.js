@@ -50,7 +50,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
         title: app.localize('ViewInvoice'),
         iconCls: 'fa fa-th'
     },
-    createNewMode: 'inline',
+    createNewMode: 'tab',
     isSubMenuItemTab: true,
     store: 'payables.invoices.AccountsPayableStore',
     columns: [

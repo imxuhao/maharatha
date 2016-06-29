@@ -90,6 +90,11 @@ Ext.define('Chaching.Application', {
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {
         //Ext.ariaWarn = Ext.emptyFn;
+        var docBody = document.body;
+        if (docBody) {
+            var loadingMask = document.getElementById('intialLoadinMask');
+            if (loadingMask)docBody.removeChild(loadingMask);
+        }
         var me = this;
         ///****Load usersDefaultView Settings
         var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');

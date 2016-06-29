@@ -63,21 +63,27 @@ Ext.define('Chaching.view.administration.organization.CompanySetupGrid', {
         text: app.localize('CompanyId'),
         hidden: true,
         hideable : false,
-        dataIndex: 'companyId',
+        dataIndex: 'id',
         width: '15%'
-    }, {
-        xtype: 'gridcolumn',
-        text: app.localize('ParentOrganizationId'),
-        hidden: true,
-        hideable: false,
-        dataIndex: 'parentId',
-        width: '15%'
-    }, {
-        xtype: 'gridcolumn',
-        text: app.localize('CompanyCode'),
-        dataIndex: 'code',
-        width: '15%'
-    }, {
+    },
+
+    //{
+    //    xtype: 'gridcolumn',
+    //    text: app.localize('ParentOrganizationId'),
+    //    hidden: true,
+    //    hideable: false,
+    //    dataIndex: 'parentId',
+    //    width: '15%'
+    //},
+
+    //{
+    //    xtype: 'gridcolumn',
+    //    text: app.localize('CompanyCode'),
+    //    dataIndex: 'code',
+    //    width: '15%'
+    //},
+
+    {
         xtype: 'gridcolumn',
         text: app.localize('CompanyName'),
         dataIndex: 'displayName',

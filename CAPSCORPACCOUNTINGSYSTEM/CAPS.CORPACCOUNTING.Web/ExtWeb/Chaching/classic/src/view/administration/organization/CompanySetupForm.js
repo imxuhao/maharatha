@@ -24,7 +24,12 @@
     items: [
         {
             xtype: 'hiddenfield',
-            name: 'companyId',
+            name: 'id', //companyId
+            value: 0
+        },
+        {
+            xtype: 'hiddenfield',
+            name: 'addressId', //companyId
             value: 0
         },
         //{
@@ -53,7 +58,7 @@
             },
             items: [{
                 xtype: 'textfield',
-                name: 'companyName',
+                name: 'displayName',
                 allowBlank: false,
                 fieldLabel: app.localize('CompanyName').initCap(),
                 width: '100%',
@@ -61,7 +66,7 @@
                 emptyText: app.localize('MandatoryField')
             }, {
                 xtype: 'textfield',
-                name: 'Address1',
+                name: 'line1',
                 allowBlank: false,
                 fieldLabel: app.localize('Address1').initCap(),
                 width: '100%',
@@ -70,7 +75,7 @@
             },
             {
                 xtype: 'textfield',
-                name: 'Address2',
+                name: 'line2',
                // allowBlank: false,
                 fieldLabel: app.localize('Address2').initCap(),
                 width: '100%',
@@ -78,7 +83,7 @@
             },
             {
                 xtype: 'textfield',
-                name: 'Address3',
+                name: 'line3',
                 //allowBlank: false,
                 fieldLabel: app.localize('Address3').initCap(),
                 width: '100%',
@@ -114,36 +119,36 @@
             },
             {
                 xtype: 'combobox',
-                name: 'cityId',
+                name: 'city',
                 fieldLabel: app.localize('City').initCap(),
                 width: '100%',
                 ui: 'fieldLabelTop',
                 displayField: 'city',
-                valueField: 'cityId',
+                valueField: 'city',
                 emptyText: app.localize('SelectOption'),
                 queryMode: 'local'//,
                 //store: ''
             },
             {
                 xtype: 'combobox',
-                name: 'stateId',
+                name: 'state',
                 fieldLabel: app.localize('CompanyState').initCap(),
                 width: '100%',
                 ui: 'fieldLabelTop',
                 displayField: 'state',
-                valueField: 'stateId',
+                valueField: 'state',
                 emptyText: app.localize('SelectOption'),
                 queryMode: 'local'//,
                 //store: ''
             },
              {
                  xtype: 'combobox',
-                 name: 'countryId',
+                 name: 'country',
                  fieldLabel: app.localize('Country').initCap(),
                  width: '100%',
                  ui: 'fieldLabelTop',
                  displayField: 'country',
-                 valueField: 'countryId',
+                 valueField: 'country',
                  emptyText: app.localize('SelectOption'),
                  queryMode: 'local'
              }
@@ -158,7 +163,7 @@
                         },
                         items: [{
                             xtype: 'textfield',
-                            name: 'telephone',
+                            name: 'phone1',
                             fieldLabel: app.localize('Telephone').initCap(),
                             width: '100%',
                             ui: 'fieldLabelTop'
@@ -171,7 +176,7 @@
                             ui: 'fieldLabelTop'
                         }, {
                             xtype: 'textfield',
-                            name: 'fedTaxId',
+                            name: 'federalTaxId',
                             fieldLabel: app.localize('FedTaxID').initCap(),
                             width: '100%',
                             ui: 'fieldLabelTop'

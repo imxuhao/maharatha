@@ -12,6 +12,7 @@
         destroy: true//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Delete')
     },
     name: 'companypreferences',
+    itemId: 'companyPreferencesFormId',
     openInPopupWindow: false,
     hideDefaultButtons: true,
     autoScroll: true,
@@ -22,11 +23,6 @@
         title: abp.localization.localize("CompanyPreferences").initCap()
     },
     items: [
-        {
-            xtype: 'hiddenfield',
-            name: 'organizationUnitId',
-            value: 0
-        },
         {
             xtype: 'fieldset',
             ui: 'transparentFieldSet',
@@ -42,7 +38,7 @@
                 },
                 items: [{
                     xtype: 'checkbox',
-                    name: 'allowDuplicateAPInvoices',
+                    name: 'isAllowDuplicateAPInvoiceNos',
                     labelAlign: 'right',
                     inputValue: true,
                     uncheckedValue: false,
@@ -53,7 +49,7 @@
                 },
                {
                     xtype: 'checkbox',
-                    name: 'allowDuplicateARInvoices',
+                    name: 'isAllowDuplicateARInvoiceNos',
                     labelAlign: 'right',
                     inputValue: true,
                     uncheckedValue: false,
@@ -64,31 +60,29 @@
 
                },
                  {
-                    xtype: 'checkbox',
+                    xtype: 'combobox',
                     name: 'setDefaultAPTerms',
-                    labelAlign: 'right',
-                    inputValue: true,
-                    uncheckedValue: false,
+                    emptyText: app.localize('SelectOption'),
                     width: '100%',
-                    ui: 'default',
-                    boxLabelCls: 'checkboxLabel',
-                    boxLabel: app.localize('SetDefaultAPTerms')
+                    ui: 'fieldLabelTop',
+                    displayField: 'setDefaultAPTerms',
+                    valueField: 'setDefaultAPTerms',
+                    fieldLabel: app.localize('SetDefaultAPTerms')
 
                  },
                 {
-                    xtype: 'checkbox',
+                    xtype: 'combobox',
                     name: 'setDefaultARTerms',
-                    labelAlign: 'right',
-                    inputValue: true,
-                    uncheckedValue: false,
+                    emptyText: app.localize('SelectOption'),
                     width: '100%',
-                    ui: 'default',
-                    boxLabelCls: 'checkboxLabel',
-                    boxLabel: app.localize('SetDefaultARTerms')
+                    ui: 'fieldLabelTop',
+                    displayField: 'setDefaultARTerms',
+                    valueField: 'setDefaultARTerms',
+                    fieldLabel: app.localize('SetDefaultARTerms')
 
                 }, {
                     xtype: 'checkbox',
-                    name: 'allowAccountNumbersStartingWithZero',
+                    name: 'isAllowAccountnumbersStartingwithZero',
                     labelAlign: 'right',
                     inputValue: true,
                     uncheckedValue: false,
@@ -99,7 +93,7 @@
 
                 }, {
                     xtype: 'checkbox',
-                    name: 'importPOLogsFromProducersActualUploads',
+                    name: 'isImportPOlogsfromProducersActualUploads',
                     labelAlign: 'right',
                     inputValue: true,
                     uncheckedValue: false,
@@ -111,7 +105,7 @@
                 },
                 {
                     xtype: 'checkbox',
-                    name: 'buildAPUponCCStatementPosting',
+                    name: 'buildAPuponCCstatementPosting',
                     labelAlign: 'right',
                     inputValue: true,
                     uncheckedValue: false,
@@ -133,7 +127,7 @@
                
                 {
                     xtype: 'checkbox',
-                    name: 'buildAPUponPayrollPosting',
+                    name: 'buildAPuponPayrollPosting',
                     labelAlign: 'right',
                     inputValue: true,
                     uncheckedValue: false,
@@ -144,7 +138,7 @@
                 },
                  {
                      xtype: 'checkbox',
-                     name: 'pOAutoNumbering',
+                     name: 'poAutoNumbering',
                      labelAlign: 'right',
                      inputValue: true,
                      uncheckedValue: false,
@@ -162,14 +156,14 @@
                      vertical: true,
                      items: [{
                          boxLabel: app.localize('AgeByInvoiceDate').initCap(),
-                         name: 'aRAgingDate',
+                         name: 'arAgingDate',
                          inputValue: '1',
                          ui: 'default',
                          boxLabelCls: 'checkboxLabel',
                          uncheckedValue: 'false'
                      }, {
                          boxLabel: app.localize('AgeByDueDate').initCap(),
-                         name: 'aRAgingDate',
+                         name: 'arAgingDate',
                          inputValue: '2',
                          ui: 'default',
                          boxLabelCls: 'checkboxLabel',
@@ -185,14 +179,14 @@
                      vertical: true,
                      items: [{
                          boxLabel: app.localize('AgeByInvoiceDate').initCap(),
-                         name: 'aPAgingDate',
+                         name: 'apAgingDate',
                          inputValue: '1',
                          ui: 'default',
                          boxLabelCls: 'checkboxLabel',
                          uncheckedValue: 'false'
                      }, {
                          boxLabel: app.localize('AgeByDueDate').initCap(),
-                         name: 'aPAgingDate',
+                         name: 'apAgingDate',
                          inputValue: '2',
                          ui: 'default',
                          boxLabelCls: 'checkboxLabel',
@@ -219,14 +213,14 @@
                       vertical: true,
                       items: [{
                           boxLabel: app.localize('CompanyInvoiceDate').initCap(),
-                          name: 'aPPostingDateDefault',
+                          name: 'defaultAPPostingDate',
                           inputValue: '1',
                           ui: 'default',
                           boxLabelCls: 'checkboxLabel',
                           uncheckedValue: 'false'
                       }, {
                           boxLabel: app.localize('CurrentDate').initCap(),
-                          name: 'aPPostingDateDefault',
+                          name: 'defaultAPPostingDate',
                           inputValue: '2',
                           ui: 'default',
                           boxLabelCls: 'checkboxLabel',
@@ -253,13 +247,13 @@
                                     allowDecimals: false,
                                     keyNavEnabled: false,
                                     mouseWheelEnabled: false,
-                                    name: 'paymentGracePeriods',
+                                    name: 'paymentsGracePeriods',
                                     fieldLabel: app.localize('PaymentGracePeriods').initCap(),
                                     width: '100%',
                                     ui: 'fieldLabelTop'
                                 },{
                                     xtype: 'combobox',
-                                    name: 'bankAccountId',
+                                    name: 'defaultBank',
                                     fieldLabel: app.localize('DefaultBank').initCap(),
                                     width: '100%',
                                     ui: 'fieldLabelTop',
@@ -270,7 +264,7 @@
                                     store: new Chaching.store.banking.banksetup.BankSetupStore()
                                 }, {
                                     xtype: 'checkbox',
-                                    name: 'allowTransactionsActionsThatHaveBeenCodedToJobGLToAppearOnJobCost',
+                                    name: 'allowTransactionsJobWithGL',
                                     labelAlign: 'right',
                                     inputValue: true,
                                     uncheckedValue: false,

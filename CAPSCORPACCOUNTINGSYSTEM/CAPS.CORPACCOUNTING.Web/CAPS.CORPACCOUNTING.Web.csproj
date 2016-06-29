@@ -1992,6 +1992,7 @@
     <Content Include="ExtWeb\Chaching\.sencha\app\watch-impl.xml" />
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanyModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanySettingsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankCheckRangesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankSetupModel.js" />

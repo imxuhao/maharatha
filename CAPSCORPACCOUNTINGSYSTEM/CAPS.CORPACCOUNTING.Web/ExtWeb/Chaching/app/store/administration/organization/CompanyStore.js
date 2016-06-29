@@ -11,5 +11,5 @@
             destroy: abp.appPath + 'api/services/app/organizationUnit/DeleteOrganizationUnit'
         }
     },
-    idPropertyField: 'companyId'//important to set for add/update of records
+    idPropertyField: 'id'//important to set for add/update of records
 });

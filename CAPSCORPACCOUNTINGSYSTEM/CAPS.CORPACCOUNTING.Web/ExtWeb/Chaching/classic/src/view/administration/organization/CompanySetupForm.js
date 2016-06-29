@@ -107,7 +107,10 @@
                 name: 'postalCode',
                 fieldLabel: app.localize('PostalCode').initCap(),
                 width: '100%',
-                ui: 'fieldLabelTop'
+                ui: 'fieldLabelTop',
+                listeners: {
+                    specialkey: 'onPostalCodeEnter'
+                }
             },
             {
                 xtype: 'combobox',

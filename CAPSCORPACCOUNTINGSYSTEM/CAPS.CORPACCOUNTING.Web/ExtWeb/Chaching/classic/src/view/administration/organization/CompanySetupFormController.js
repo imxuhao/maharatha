@@ -3,6 +3,30 @@
     alias: 'controller.administration-organization-companysetupform',
     doPreSaveOperation: function (record, values, idPropertyField) {
     },
+    onPostalCodeEnter: function (field,e) {
+        var clientKey = "js-9qZHzu2Flc59Eq5rx10JdKERovBlJp3TQ3ApyC4TOa3tA8U7aVRnFwf41RpLgtE7";
+        var url = "https://www.zipcodeapi.com/rest/" + clientKey + "/info.json/" + field.getValue() + "/radians";
+        if (13 == e.getKey()) {
+            var store = Ext.create('Ext.data.Store', {
+                fields: [{ name: 'id' }],
+                autoLoad: true,
+                proxy: {
+                    type: 'jsonp',
+                    url: url,//'http://maps.googleapis.com/maps/api/geocode/json?address=37779',
+                    reader: {
+                        type: 'json',
+                        rootProperty: 'results'
+                    }
+                },
+                listeners: {
+                    'load': function (records, operation, success) {
+                       
+                    }
+                }
+            });
+        }
+    },
+
     filechange: function (file, e, value) {
         var me = this;
         view = me.getView();

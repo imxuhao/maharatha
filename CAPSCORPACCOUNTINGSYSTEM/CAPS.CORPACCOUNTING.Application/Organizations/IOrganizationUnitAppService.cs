@@ -2,6 +2,9 @@
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Organizations.Dto;
+using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Masters.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
@@ -24,5 +27,28 @@ namespace CAPS.CORPACCOUNTING.Organizations
         Task RemoveUserFromOrganizationUnit(UserToOrganizationUnitInput input);
 
         Task<bool> IsInOrganizationUnit(UserToOrganizationUnitInput input);
+
+        /// <summary>
+        /// Get Organization List By UserId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetOrganizationsListByUserId(IdInput<long> input);
+
+
+        /// <summary>
+        /// Set Defalut Organization To User
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task SetDefaultOrganizationToUser(IdInputExtensionDto<long> input);
+
+
+        /// <summary>
+        /// Get Organization List
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<OrganizationUnitDto>> GetOrganizationUnits(SearchInputDto input);
     }
 }

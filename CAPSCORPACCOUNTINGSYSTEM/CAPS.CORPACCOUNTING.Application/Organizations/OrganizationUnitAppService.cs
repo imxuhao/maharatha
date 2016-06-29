@@ -15,16 +15,20 @@ using Abp.Domain.Uow;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Configuration;
-using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
-using CAPS.CORPACCOUNTING.Configuration;
 using System;
-using System.Configuration;
 using CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto;
 using System.IO;
 using System.Drawing;
 using Abp.UI;
 using Abp.IO;
 using CAPS.CORPACCOUNTING.Organization;
+using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Sessions;
+using System.Security.Claims;
+using System.Threading;
+using CAPS.CORPACCOUNTING.Helpers;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using System.Linq.Dynamic;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
@@ -38,6 +42,8 @@ namespace CAPS.CORPACCOUNTING.Organizations
         private readonly IRepository<AddressUnit, long> _addressRepository;
         private readonly ISettingDefinitionManager _settingDefinitionManager;
         private readonly IAppFolders _appFolders;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly CustomAppSession _customAppSession;
         public OrganizationUnitAppService(
             OrganizationExtendedUnitManager organizationExtendedUnitManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
@@ -45,8 +51,9 @@ namespace CAPS.CORPACCOUNTING.Organizations
             IRepository<AddressUnit, long> addressRepository,
             ISettingDefinitionManager settingDefinitionManager,
             IAppFolders appFolders,
-            IRepository<OrganizationExtended, long> organizationExtendedUnitRepository
-            )
+            IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
+            IUnitOfWorkManager unitOfWorkManager,
+            CustomAppSession customAppSession)
         {
             _organizationExtendedUnitManager = organizationExtendedUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
@@ -55,15 +62,16 @@ namespace CAPS.CORPACCOUNTING.Organizations
             _settingDefinitionManager = settingDefinitionManager;
             _appFolders = appFolders;
             _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
+            _unitOfWorkManager = unitOfWorkManager;
+            _customAppSession = customAppSession;
         }
 
         public async Task<ListResultOutput<OrganizationUnitDto>> GetOrganizationUnits()
         {
             var query =
                 from ou in _organizationExtendedUnitRepository.GetAll()
-                join address in _addressRepository.GetAll().Where(u => u.TypeofObjectId == TypeofObject.Org) on ou.Id equals address.ObjectId
                 join uou in _userOrganizationUnitRepository.GetAll() on ou.Id equals uou.OrganizationUnitId into g
-                select new { ou, address, memberCount = g.Count() };
+                select new { ou, memberCount = g.Count() };
 
             var items = await query.ToListAsync();
             return new ListResultOutput<OrganizationUnitDto>(
@@ -71,9 +79,46 @@ namespace CAPS.CORPACCOUNTING.Organizations
                 {
                     var dto = item.ou.MapTo<OrganizationUnitDto>();
                     dto.MemberCount = item.memberCount;
-                    dto.Address = item.address.MapTo<AddressUnitDto>();
                     return dto;
                 }).ToList());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<OrganizationUnitDto>> GetOrganizationUnits(SearchInputDto input)
+        {
+            var query = from organization in _organizationExtendedUnitRepository.GetAll()
+                        join address in _addressRepository.GetAll().Where(u => u.TypeofObjectId == TypeofObject.Org) on organization.Id equals address.ObjectId into addresss
+                        from address in addresss.DefaultIfEmpty()
+                        join uou in _userOrganizationUnitRepository.GetAll() on organization.Id equals uou.OrganizationUnitId into g
+                        select new { organization, address, memberCount = g.Count() };
+
+
+            var items = await query.ToListAsync();
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("organization.DisplayName ASC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+            return new PagedResultOutput<OrganizationUnitDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.organization.MapTo<OrganizationUnitDto>();
+                dto.TransmitterCode = item.organization.TransmitterCode;
+                dto.TransmitterControlCode = item.organization.TransmitterControlCode;
+                dto.TransmitterContactName = item.organization.TransmitterContactName;
+                dto.TransmitterEmailAddress = item.organization.TransmitterEmailAddress;
+                dto.FederalTaxId = item.organization.FederalTaxId;
+                dto.MemberCount = item.memberCount;
+                dto.Address = item.address.MapTo<AddressUnitDto>();
+                if (item.address != null)
+                    dto.Address.AddressId = item.address.Id;
+                return dto;
+            }).ToList());
         }
 
         public async Task<PagedResultOutput<OrganizationUnitUserListDto>> GetOrganizationUnitUsers(GetOrganizationUnitUsersInput input)
@@ -102,7 +147,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task<OrganizationUnitDto> CreateOrganizationUnit(CreateOrganizationUnitInput input)
         {
-         
+
             byte[] logo = null;
             if (!ReferenceEquals(input.Logo, null))
                 logo = await UpdateProfilePicture(input.Logo);
@@ -247,6 +292,8 @@ namespace CAPS.CORPACCOUNTING.Organizations
             return await UserManager.IsInOrganizationUnitAsync(input.UserId, input.OrganizationUnitId);
         }
 
+
+
         private async Task<OrganizationUnitDto> CreateOrganizationUnitDto(OrganizationUnit organizationUnit)
         {
             var dto = organizationUnit.MapTo<OrganizationUnitDto>();
@@ -291,7 +338,43 @@ namespace CAPS.CORPACCOUNTING.Organizations
             return byteArray;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetOrganizationsListByUserId(IdInput<long> input)
+        {
+            if (_customAppSession.TenantId != null)
+                _unitOfWorkManager.Current.SetTenantId(Convert.ToInt32(_customAppSession.TenantId));
 
+            var organizations = await
+                (from userOrg in _userOrganizationUnitRepository.GetAll()
+                 join org in _organizationUnitRepository.GetAll() on userOrg.OrganizationUnitId equals org.Id
+                 where userOrg.UserId == input.Id
+                 select new NameValueDto { Name = org.DisplayName, Value = org.Id.ToString() }).ToListAsync();
+            return organizations;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task SetDefaultOrganizationToUser(IdInputExtensionDto<long> input)
+        {
+            var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
+            // Set DefaultOrganizationId to the User
+            var user = await UserManager.GetUserByIdAsync(input.Id);
+            user.DefaultOrganizationId = input.OrganizationUnitId;
+            await UserManager.UpdateAsync(user);
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            var identity = claimsPrincipal.Identity as ClaimsIdentity;
+            var tenantClaim = claimsPrincipal?.Claims.
+                FirstOrDefault(c => c.Type == "Application_UserOrgID");
+            if (tenantClaim != null)
+                identity.RemoveClaim(tenantClaim);
+
+            identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(input.OrganizationUnitId)));
+        }
     }
 }

@@ -39,6 +39,7 @@ using CAPS.CORPACCOUNTING.Web.Models.Account;
 using CAPS.CORPACCOUNTING.Web.MultiTenancy;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
+using System.Threading;
 
 namespace CAPS.CORPACCOUNTING.Web.Controllers
 {
@@ -812,6 +813,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
             var result = await SaveImpersonationTokenAndGetTargetUrl(model.TenantId, model.UserId, false);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            OrganizationIdSetIntoClaim(model.UserId);
             return result;
         }
 
@@ -868,6 +870,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
             var result = await SaveImpersonationTokenAndGetTargetUrl(AbpSession.ImpersonatorTenantId, AbpSession.ImpersonatorUserId.Value, true);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            OrganizationIdSetIntoClaim(AbpSession.ImpersonatorUserId.Value);
             return result;
         }
 
@@ -1015,5 +1018,22 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         }
 
         #endregion
+
+
+        private async Task OrganizationIdSetIntoClaim(long userId)
+        {
+            var user = await _userManager.GetUserByIdAsync(userId);
+            var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+            var identity = claimsPrincipal.Identity as ClaimsIdentity;
+            var tenantClaim = claimsPrincipal?.Claims.
+                FirstOrDefault(c => c.Type == "Application_UserOrgID");
+            if (tenantClaim != null)
+                identity.RemoveClaim(tenantClaim);
+
+            if (user.DefaultOrganizationId.HasValue)
+            {
+                identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId.Value)));
+            }
+        }
     }
 }

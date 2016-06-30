@@ -25,7 +25,6 @@
                 var isImportPOlogsfromProducersActualUploads = abp.setting.get("Sumit.Org.ImportPOlogsfromProducersActualuploads");
                 var buildAPuponCCstatementPosting = abp.setting.get("Sumit.Org.BuildAPuponCCstatementPosting");
                 var buildAPuponPayrollPosting = abp.setting.get("Sumit.Org.BuildAPuponPayrollPosting");
-                var poAutoNumbering = abp.setting.get("Sumit.Org.POAutoNumbering");
                 var setDefaultAPTerms = abp.setting.get("Sumit.Org.SetDefaultAPTerms");
                 var setDefaultARTerms = abp.setting.get("Sumit.Org.SetDefaultARTerms");
                 var depositGracePeriods = abp.setting.get("Sumit.Org.DepositGracePeriods");
@@ -62,9 +61,6 @@
                 }
                 if (form.findField('buildAPuponPayrollPosting') && buildAPuponPayrollPosting) {
                     form.findField('buildAPuponPayrollPosting').setValue(buildAPuponPayrollPosting == "False" ? false : true);
-                }
-                if (form.findField('poAutoNumbering') && poAutoNumbering) {
-                    form.findField('poAutoNumbering').setValue(poAutoNumbering == "False" ? false : true);
                 }
                 if (form.findField('setDefaultAPTerms') && setDefaultAPTerms) {
                     form.findField('setDefaultAPTerms').setValue(dSetDefaultAPTerms == null ? '' : SetDefaultAPTerms);

@@ -125,17 +125,6 @@
                     boxLabelCls: 'checkboxLabel',
                     boxLabel: app.localize('BuildAPUponPayrollPosting')
                 },
-                 {
-                     xtype: 'checkbox',
-                     name: 'poAutoNumbering',
-                     labelAlign: 'right',
-                     inputValue: true,
-                     uncheckedValue: false,
-                     width: '100%',
-                     ui: 'default',
-                     boxLabelCls: 'checkboxLabel',
-                     boxLabel: app.localize('POAutoNumbering')
-                 },
                   {
                       xtype: 'checkbox',
                       name: 'pOAutoNumberingforDivisions',

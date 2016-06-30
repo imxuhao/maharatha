@@ -12,7 +12,6 @@
         { name: 'buildAPuponPayrollPosting', type: 'boolean' },
         { name: 'pOAutoNumberingforDivisions', type: "boolean" },
         { name: 'pOAutoNumberingforProjects', type: 'boolean' },
-        { name: 'poAutoNumbering', type: 'boolean' },
         { name: 'arAgingDate', type: 'boolean' },
         { name: 'apAgingDate', type: 'boolean' },
         { name: 'setDefaultAPTerms', type: 'int', defaultVaule: null, convert: nullHandler },

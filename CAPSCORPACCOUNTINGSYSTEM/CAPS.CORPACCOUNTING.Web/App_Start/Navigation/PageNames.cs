@@ -187,6 +187,17 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string BankingBankSetup = "Banking.BankSetup";
                 public const string BankingReconciliation = "Banking.BankReconciliation";
                 #endregion
+
+
+                #region Organization Tabs
+
+                public const string AdministrationOrganizationUnitsCompanySetup = "Administration.OrganizationUnits.CompanySetup";
+                public const string AdministrationOrganizationUnitsCompanyPreferences = "Administration.OrganizationUnits.CompanyPreferences";
+                public const string AdministrationOrganizationUnitsMembers = "Administration.OrganizationUnits.Members";
+
+
+                #endregion
+
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
 using CAPS.CORPACCOUNTING.Organizations.Dto;
 using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Masters.Dto;
@@ -50,5 +51,19 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<OrganizationUnitDto>> GetOrganizationUnits(SearchInputDto input);
+
+        /// <summary>
+        /// Update Default Settings of Organization
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task UpdateAllSettings(OrganizationManagementSettingsEditDto input);
+
+        /// <summary>
+        /// Get default Settings of Organization
+        /// </summary>
+        /// <param name="organizationUnitId"></param>
+        /// <returns></returns>
+        Task<OrganizationManagementSettingsEditDto> GetAllSettings(long organizationUnitId);
     }
 }

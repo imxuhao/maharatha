@@ -31,6 +31,7 @@ using CAPS.CORPACCOUNTING.Security;
 using Z.EntityFramework.Plus;
 using CAPS.CORPACCOUNTING.EFAuditLog;
 using CAPS.CORPACCOUNTING.Organization;
+using CAPS.CORPACCOUNTING.Settings;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
@@ -608,7 +609,9 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
 
         public virtual IDbSet<OrganizationExtended> OrganizationExtended { get; set; }
-        
+
+        public virtual IDbSet<SettingExtended> SettingExtended { get; set; }
+
 
         #region Modification Log
 

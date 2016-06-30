@@ -2512,6 +2512,47 @@
             This value is only used for comparing user's timezone to default timezone
             </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Organization.IOrganizationSettingManager.ChangeSettingForOrganizationAsync(System.Int64,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="organizationUnitId"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Configuration.Organization.OrganizationSettingManager.SettingStore">
+            <summary>
+            Reference to the setting store.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Organization.OrganizationSettingManager.ChangeSettingForOrganizationAsync(System.Int64,System.String,System.String)">
+            <summary>
+            Change the Settings of Organization
+            </summary>
+            <param name="organizationUnitId"></param>
+            <param name="name"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Organization.OrganizationSettingManager.GetSettingValueForOrganization(System.Int64,System.String)">
+            <summary>
+            Get the SettingValue of Organization
+            </summary>
+            <param name="OrganizationUnitId"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Configuration.Organization.SettingInfoExtended">
+            <summary>
+            Represents a setting information.
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Configuration.Organization.SettingInfoExtended.OrganizationUnitId">
+            <summary>
+            Gets sets OrganizationunitId
+            </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.Dto.TenantSettingsEditDto.ValidateHostSettings">
             <summary>
             This validation is done for single-tenant applications.
@@ -8991,6 +9032,20 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateAllSettings(CAPS.CORPACCOUNTING.Configuration.Host.Dto.OrganizationManagementSettingsEditDto)">
+            <summary>
+            Update Default Settings of Organization
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetAllSettings(System.Int64)">
+            <summary>
+            Get default Settings of Organization
+            </summary>
+            <param name="organizationUnitId"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             
@@ -9001,6 +9056,13 @@
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateOrganizationPicture(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
             <summary>
             
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateAllSettings(CAPS.CORPACCOUNTING.Configuration.Host.Dto.OrganizationManagementSettingsEditDto)">
+            <summary>
+            Update the OrganizationLevel Settings
             </summary>
             <param name="input"></param>
             <returns></returns>

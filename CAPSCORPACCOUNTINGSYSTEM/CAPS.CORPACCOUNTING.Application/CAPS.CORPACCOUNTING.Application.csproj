@@ -34,8 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.0.9.3.0\lib\net452\Abp.dll</HintPath>
+    <Reference Include="Abp, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.0.9.6.0\lib\net452\Abp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Abp.AutoMapper, Version=0.9.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -214,6 +214,9 @@
     <Compile Include="Configuration\Host\Dto\OrganizationManagementSettingsEditDto.cs" />
     <Compile Include="Configuration\Host\Dto\SendTestEmailInput.cs" />
     <Compile Include="Configuration\Host\Dto\TenantManagementSettingsEditDto.cs" />
+    <Compile Include="Configuration\Organization\IOrganizationSettingManager.cs" />
+    <Compile Include="Configuration\Organization\OrganizationSettingManager.cs" />
+    <Compile Include="Configuration\Organization\SettingInfoExtended.cs" />
     <Compile Include="CORPACCOUNTINGApplicationModule.cs" />
     <Compile Include="CORPACCOUNTINGAppServiceBase.cs" />
     <Compile Include="AppConsts.cs" />

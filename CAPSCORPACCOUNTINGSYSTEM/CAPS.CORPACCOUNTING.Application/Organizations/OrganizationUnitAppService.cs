@@ -10,12 +10,12 @@ using Abp.Linq.Extensions;
 using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Organizations.Dto;
-using CAPS.CORPACCOUNTING.Authorization.Users;
 using Abp.Domain.Uow;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Configuration;
 using System;
+using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto;
 using System.IO;
 using System.Drawing;
@@ -30,6 +30,10 @@ using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Linq.Dynamic;
 using AutoMapper;
+using CAPS.CORPACCOUNTING.Configuration.Organization;
+using Abp.Runtime.Session;
+using CAPS.CORPACCOUNTING.Configuration;
+using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
@@ -45,6 +49,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         private readonly IAppFolders _appFolders;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSession;
+        private readonly IOrganizationSettingManager _organizationSettingManager;
         public OrganizationUnitAppService(
             OrganizationExtendedUnitManager organizationExtendedUnitManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
@@ -52,14 +57,17 @@ namespace CAPS.CORPACCOUNTING.Organizations
             IRepository<AddressUnit, long> addressRepository,
             ISettingDefinitionManager settingDefinitionManager,
             IAppFolders appFolders,
-            IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
             IUnitOfWorkManager unitOfWorkManager,
-            CustomAppSession customAppSession)
+            CustomAppSession customAppSession,
+            IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
+           IOrganizationSettingManager organizationSettingManager)
         {
             _organizationExtendedUnitManager = organizationExtendedUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
             _userOrganizationUnitRepository = userOrganizationUnitRepository;
             _addressRepository = addressRepository;
+
+            _organizationSettingManager = organizationSettingManager;
             _settingDefinitionManager = settingDefinitionManager;
             _appFolders = appFolders;
             _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
@@ -245,6 +253,9 @@ namespace CAPS.CORPACCOUNTING.Organizations
                     }
                 }
             }
+
+            input.OrganizationSettings.OrganizationUnitId = input.Id;
+            await UpdateAllSettings(input.OrganizationSettings);
             await CurrentUnitOfWork.SaveChangesAsync();
             return await CreateOrganizationUnitDto(organizationUnit);
         }
@@ -351,6 +362,89 @@ namespace CAPS.CORPACCOUNTING.Organizations
             return byteArray;
         }
 
+        public async Task<OrganizationManagementSettingsEditDto> GetAllSettings(long organizationUnitId)
+        {
+
+            var settings = new OrganizationManagementSettingsEditDto
+            {
+
+                IsAllowDuplicateAPInvoiceNos =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.AllowDuplicateAPInvoiceNos)),
+                IsAllowDuplicateARInvoiceNos =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.AllowDuplicateARInvoiceNos)),
+                IsAllowAccountnumbersStartingwithZero =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.AllowAccountNumbersStartingWithZero)),
+                IsImportPOlogsfromProducersActualUploads =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.ImportPOlogsfromProducersActualuploads)),
+                BuildAPuponCCstatementPosting =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.BuildAPuponCCstatementPosting)),
+                BuildAPuponPayrollPosting =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.BuildAPuponPayrollPosting)),
+                POAutoNumbering =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.POAutoNumbering)),
+                ARAgingDate =await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                            AppSettings.OrganizationManagement.ARAgingDate),
+                APAgingDate =await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                            AppSettings.OrganizationManagement.APAgingDate),
+                DepositGracePeriods =Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.DepositGracePeriods)),
+                PaymentsGracePeriods =Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.PaymentGracePeriods)),
+                DefaultAPPostingDate =await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                            AppSettings.OrganizationManagement.APPostingDateDefault),
+                DefaultBank =Convert.ToInt64(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.DefaultBank)),
+                AllowTransactionsJobWithGL =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.AllowTransactionsactionsJobWithGL)),
+                SetDefaultAPTerms = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.SetDefaultAPTerms)),
+                SetDefaultARTerms = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.SetDefaultARTerms)),
+
+                OrganizationUnitId = organizationUnitId,
+
+            };
+            return settings;
+        }
+
+        /// <summary>
+        /// Update the OrganizationLevel Settings
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [UnitOfWork]
+        public async Task UpdateAllSettings(OrganizationManagementSettingsEditDto input)
+        {
+            //Tenant management
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                AppSettings.OrganizationManagement.AllowDuplicateAPInvoiceNos,input.IsAllowDuplicateAPInvoiceNos.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.AllowDuplicateARInvoiceNos,input.IsAllowDuplicateARInvoiceNos.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.AllowAccountNumbersStartingWithZero,input.IsAllowAccountnumbersStartingwithZero.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.ImportPOlogsfromProducersActualuploads,input.IsImportPOlogsfromProducersActualUploads.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.BuildAPuponCCstatementPosting,input.BuildAPuponCCstatementPosting.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.POAutoNumbering, input.POAutoNumbering.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.ARAgingDate, input.ARAgingDate);
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.APAgingDate, input.APAgingDate);
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.DepositGracePeriods, input.DepositGracePeriods.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.PaymentGracePeriods, input.PaymentsGracePeriods.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.APPostingDateDefault, input.DefaultAPPostingDate);
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.DefaultBank, input.DefaultBank.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.AllowTransactionsactionsJobWithGL,input.AllowTransactionsJobWithGL.ToString());
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -389,5 +483,6 @@ namespace CAPS.CORPACCOUNTING.Organizations
 
             identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(input.OrganizationUnitId)));
         }
+
     }
 }

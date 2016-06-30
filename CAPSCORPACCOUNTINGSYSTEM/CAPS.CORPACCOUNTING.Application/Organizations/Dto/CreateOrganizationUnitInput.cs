@@ -25,6 +25,7 @@ namespace CAPS.CORPACCOUNTING.Organizations.Dto
 
         /// <summary>Gets or sets the TransmitterEmailAddress field. </summary>
         [MaxLength(OrganizationExtended.MaxLength)]
+        [EmailAddress]
         public string TransmitterEmailAddress { get; set; }
 
         /// <summary>Gets or sets the TransmitterCode field. </summary>

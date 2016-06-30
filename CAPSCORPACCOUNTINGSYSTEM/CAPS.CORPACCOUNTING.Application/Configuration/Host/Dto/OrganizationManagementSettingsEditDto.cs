@@ -38,5 +38,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
         public long? DefaultBank { get; set; }
 
         public bool AllowTransactionsJobWithGL { get; set; }
-    }
+
+        public long? OrganizationUnitId { get; set; }
+    }	
 }

@@ -8998,7 +8998,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateProfilePicture(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateOrganizationPicture(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
             <summary>
             
             </summary>

@@ -29,6 +29,7 @@ using System.Threading;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Linq.Dynamic;
+using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
@@ -97,6 +98,14 @@ namespace CAPS.CORPACCOUNTING.Organizations
                         select new { organization, address, memberCount = g.Count() };
 
 
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                var mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = query.CreateFilters(mapSearchFilters);
+            }
+
             var items = await query.ToListAsync();
 
             var resultCount = await query.CountAsync();
@@ -150,7 +159,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
 
             byte[] logo = null;
             if (!ReferenceEquals(input.Logo, null))
-                logo = await UpdateProfilePicture(input.Logo);
+                logo = await UpdateOrganizationPicture(input.Logo);
 
             var organizationUnit = new OrganizationExtended(AbpSession.TenantId, input.DisplayName, input.ParentId, input.TransmitterContactName,
                 input.TransmitterEmailAddress, input.TransmitterCode, input.TransmitterControlCode, input.FederalTaxId, logo);
@@ -196,7 +205,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
 
             byte[] logo = null;
             if (!ReferenceEquals(input.Logo, null))
-                logo = await UpdateProfilePicture(input.Logo);
+                logo = await UpdateOrganizationPicture(input.Logo);
 
             var organizationUnit = await _organizationExtendedUnitRepository.GetAsync(input.Id);
 
@@ -215,7 +224,11 @@ namespace CAPS.CORPACCOUNTING.Organizations
             {
                 if (input.Address.AddressId != 0)
                 {
-                    var addressUnit = input.Address.MapTo<AddressUnit>();
+
+                    var addressUnit =
+              await _addressRepository.GetAsync(input.Address.AddressId);
+                    Mapper.Map(input.Address, addressUnit);
+                    //addressUnit.Id = input.Address.AddressId;
                     await _addressRepository.UpdateAsync(addressUnit);
                 }
                 else
@@ -306,7 +319,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<byte[]> UpdateProfilePicture(UpdateProfilePictureInput input)
+        private async Task<byte[]> UpdateOrganizationPicture(UpdateProfilePictureInput input)
         {
             var tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
 

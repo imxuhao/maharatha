@@ -36,7 +36,6 @@
         items: [
             {
                 title: abp.localization.localize("CompanySetup").initCap(),
-                itemId: 'ProjectDetailsTab',
                 xtype: 'administration.organizationunits.companysetup'
             },
             {

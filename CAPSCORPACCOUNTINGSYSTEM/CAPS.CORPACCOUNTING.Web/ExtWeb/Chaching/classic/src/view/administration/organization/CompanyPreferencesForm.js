@@ -12,7 +12,7 @@
         destroy: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree')
     },
     name: 'companypreferences',
-    itemId: 'companyPreferencesFormId',
+   // itemId: 'companyPreferencesFormId',
     openInPopupWindow: false,
     hideDefaultButtons: true,
     autoScroll: true,

@@ -38,10 +38,16 @@
             website: '',
             isPrimary: true
         }
+       
         var organizationSettings = "";
-        var preferernceView = Ext.ComponentQuery.query('#companyPreferencesFormId', me.getView());
+        var preferernceView = Ext.ComponentQuery.query('#companyPreferencesTab', me.getView());
         if (preferernceView[0] != undefined) {
-             organizationSettings = preferernceView[0].getValues();
+            organizationSettings = preferernceView[0].getValues();
+            organizationSettings.setDefaultAPTerms = organizationSettings.setDefaultAPTerms == "" ? null : organizationSettings.setDefaultAPTerms;
+            organizationSettings.setDefaultARTerms = organizationSettings.setDefaultARTerms == "" ? null : organizationSettings.setDefaultARTerms;
+            organizationSettings.depositGracePeriods = organizationSettings.depositGracePeriods == "" ? null : organizationSettings.depositGracePeriods;
+            organizationSettings.paymentsGracePeriods = organizationSettings.paymentsGracePeriods == "" ? null : organizationSettings.paymentsGracePeriods;
+            organizationSettings.defaultBank = organizationSettings.defaultBank == "" ? null : organizationSettings.defaultBank;
         }
 
         record.data.address = address;

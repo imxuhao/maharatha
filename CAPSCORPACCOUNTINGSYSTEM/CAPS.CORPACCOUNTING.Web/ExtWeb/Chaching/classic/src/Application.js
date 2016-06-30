@@ -85,7 +85,8 @@ Ext.define('Chaching.Application', {
         'utilities.autofill.RollupAccountListStore',
         'utilities.autofill.LinesListStore',
         'utilities.autofill.GLAccountListStore',
-        'administration.organization.CompanyStore'
+        'administration.organization.CompanyStore',
+        'utilities.autofill.BankAccountListStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

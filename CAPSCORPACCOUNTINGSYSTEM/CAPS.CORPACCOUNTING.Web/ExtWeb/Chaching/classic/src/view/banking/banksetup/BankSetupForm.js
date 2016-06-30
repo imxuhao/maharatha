@@ -79,6 +79,8 @@
                         }, {
                             xtype: 'textfield',
                             name: 'bankAccountNumber',
+                            allowBlank: false,
+                            emptyText: app.localize('MandatoryField'),
                             fieldLabel: app.localize('AccountNumber').initCap(),
                             width: '100%',
                             ui: 'fieldLabelTop'
@@ -254,23 +256,6 @@
             },
             items: [
                  {
-                     //xtype: 'checkbox',
-                     //name: 'isachEnabled',
-                     //itemId: 'isAchDirectDepositEnabled',
-                     ////labelAlign: 'left',
-                     //boxLabelAlign : 'before',
-                     //inputValue: true,
-                     //checked: false,
-                     //maxWidth : 200,
-                     //width: '100%',
-                     ////fieldLabel: app.localize('EnableACHDirectDeposit'),
-                     ////ui: 'fieldLabelTop',
-                     //ui: 'default',
-                     //style : 'padding-left:0px !important;',
-                     //boxLabelCls: 'checkboxLabel',
-                     //boxLabel: app.localize('EnableACHDirectDeposit')
-
-
                         xtype: 'checkbox',
                         name: 'isachEnabled',
                         boxLabelAlign: 'before',
@@ -282,17 +267,14 @@
                         ui: 'default',
                         boxLabelCls: 'checkboxLabelLeftAlign',
                         boxLabel: app.localize('EnableACHDirectDeposit')
-
-
                  },
                   {
                       xtype: 'textfield',
                       name: 'achDestinationCode',
-                      allowBlank: false,
+                     // allowBlank: false,
                       fieldLabel: app.localize('ACHDestinationCodeLabel'),
                       width: '100%',
-                      ui: 'fieldLabelTop',
-                      emptyText: app.localize('MandatoryField')
+                      ui: 'fieldLabelTop'
                   }
                     ]
         },
@@ -308,20 +290,18 @@
                 {
                     xtype: 'textfield',
                     name: 'achDestinationName',
-                    allowBlank: false,
+                   // allowBlank: false,
                     fieldLabel: app.localize('ACHDestinationNameLabel'),
                     width: '100%',
-                    ui: 'fieldLabelTop',
-                    emptyText: app.localize('MandatoryField')
+                    ui: 'fieldLabelTop'
                 },
                     {
                         xtype: 'textfield',
                         name: 'achOriginCode',
-                        allowBlank: false,
+                       // allowBlank: false,
                         fieldLabel: app.localize('ACHOriginCodeLabel'),
                         width: '100%',
-                        ui: 'fieldLabelTop',
-                        emptyText: app.localize('MandatoryField')
+                        ui: 'fieldLabelTop'
                     }]
                   },
                   {
@@ -335,45 +315,14 @@
                       items: [{
                           xtype: 'textfield',
                           name: 'achOriginName',
-                          allowBlank: false,
+                         // allowBlank: false,
                           fieldLabel: app.localize('ACHOriginNameLabel'),
                           width: '100%',
-                          ui: 'fieldLabelTop',
-                          emptyText: app.localize('MandatoryField')
+                          ui: 'fieldLabelTop'
                       }]
                   }]
               }]
         }]
 
-        //,
-        //dockedItems: [
-        //        {
-        //            xtype: 'toolbar',
-        //            dock: 'bottom',
-        //            layout: {
-        //                type: 'hbox',
-        //                pack: 'center'
-        //            },
-        //            items: [
-        //            {
-        //                xtype: 'button',
-        //                itemId: 'btnSaveSetup',
-        //                ui: 'actionButton',
-        //                text: app.localize('SaveBank').toUpperCase(),
-        //                iconCls: 'fa fa-save',
-        //                listeners: {
-        //                    click: 'onSaveClicked'
-        //                }
-        //            }, {
-        //                xtype: 'button',
-        //                itemId: 'btnCancelSetup',
-        //                ui: 'actionButton',
-        //                text: app.localize('Cancel').toUpperCase(),
-        //                iconCls: 'fa fa-close',
-        //                listeners: {
-        //                    click: 'onCancelClicked'
-        //                }
-        //            }]
-        //        }]
     }
 });

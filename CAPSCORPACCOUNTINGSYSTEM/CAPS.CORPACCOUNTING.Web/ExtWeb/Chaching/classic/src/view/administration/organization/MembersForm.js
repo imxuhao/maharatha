@@ -6,10 +6,10 @@
     ],
    // controller: 'administration-organization-membersform',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Administration.OrganizationUnits'),
-        create: abp.auth.isGranted('Pages.Administration.OrganizationUnits.Create'),
-        edit: abp.auth.isGranted('Pages.Administration.OrganizationUnits.Edit'),
-        destroy: abp.auth.isGranted('Pages.Administration.OrganizationUnits.Delete')
+        read: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageMembers'),
+        create: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageMembers.Create'),
+        edit: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageMembers.Edit'),
+        destroy: true//abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageMembers.Delete')
     },
     name: 'members',
     openInPopupWindow: false,

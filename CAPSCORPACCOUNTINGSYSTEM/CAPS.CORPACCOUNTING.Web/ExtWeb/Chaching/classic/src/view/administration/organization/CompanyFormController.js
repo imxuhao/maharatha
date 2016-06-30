@@ -8,7 +8,7 @@
         record = Ext.create('Chaching.model.administration.organization.CompanyModel');
         record.set('id', form.findField('id').getValue());
         record.set('displayName', form.findField('displayName').getValue());
-
+        record.set('federalTaxId', form.findField('federalTaxId').getValue());
         record.set('transmitterContactName', form.findField('transmitterContactName').getValue());
         record.set('transmitterEmailAddress', form.findField('transmitterEmailAddress').getValue());
         record.set('transmitterCode', form.findField('transmitterCode').getValue());

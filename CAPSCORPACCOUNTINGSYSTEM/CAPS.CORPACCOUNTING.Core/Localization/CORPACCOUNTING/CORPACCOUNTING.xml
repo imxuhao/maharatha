@@ -930,6 +930,12 @@
  <text name="TransmitterEmailAddress" value="Transmitter Email Address" />
  <text name="TransmitterCode" value="Transmitter Code" />
  <text name="TransmitterControlCode" value="Transmitter Control Code" />
+    
+    <text name="CompanyTransmitterContactName" value="Trans Contact Name" />
+    <text name="CompanyTransmitterEmailAddress" value="Trans Email" />
+    <text name="CompanyTransmitterCode" value="Trans Code" />
+    <text name="CompanyTransmitterControlCode" value="Trans Control Code" />
+    
     <text name="AllowDuplicateAPInvoices" value="Allow Duplicate AP invoice #s" />
     <text name="AllowDuplicateARInvoices" value="Allow Duplicate AR invoice #s" />
     <text name="SetDefaultAPTerms" value="Set Default AP Terms" />
@@ -961,5 +967,8 @@
     <text name="CompanyId" value="Company Id" />
     <text name="CompanyCode" value="Company Code" />
     <text name="ParentOrganizationId" value="ParentOrganizationId" />
+    <text name="BankAccountNumber" value="Bank Account Number" />
+    <text name="BankAccountDescription" value="Description" />
+    <text name="BankAccountName" value="Bank Account Name" />
   </texts>
 </localizationDictionary>

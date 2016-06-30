@@ -2,7 +2,7 @@
     extend: 'Chaching.model.base.BaseModel',
     requires: ['Chaching.model.address.AddressModel', 'Chaching.model.administration.organization.CompanySettingsModel'],
     config: {
-        searchEntityName: ''
+        searchEntityName: 'Organization'
     },
     fields: [
            // { name: 'companyId', type: 'int',  mapping: 'id', isPrimaryKey: true },

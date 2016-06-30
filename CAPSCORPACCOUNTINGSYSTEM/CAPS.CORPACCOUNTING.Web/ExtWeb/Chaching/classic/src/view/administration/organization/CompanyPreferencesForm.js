@@ -7,9 +7,9 @@
     controller: 'administration-organization-companypreferencesform',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Administration.OrganizationUnits'),
-        create: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Create'),
-        edit: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Edit'),
-        destroy: true//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Delete')
+        create: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
+        edit: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
+        destroy: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree')
     },
     name: 'companypreferences',
     itemId: 'companyPreferencesFormId',
@@ -59,28 +59,29 @@
                     boxLabel: app.localize('AllowDuplicateARInvoices')
 
                },
-                 {
-                    xtype: 'combobox',
-                    name: 'setDefaultAPTerms',
-                    emptyText: app.localize('SelectOption'),
-                    width: '100%',
-                    ui: 'fieldLabelTop',
-                    displayField: 'setDefaultAPTerms',
-                    valueField: 'setDefaultAPTerms',
-                    fieldLabel: app.localize('SetDefaultAPTerms')
+                // {
+                //    xtype: 'combobox',
+                //    name: 'setDefaultAPTerms',
+                //    emptyText: app.localize('SelectOption'),
+                //    width: '100%',
+                //    ui: 'fieldLabelTop',
+                //    displayField: 'setDefaultAPTerms',
+                //    valueField: 'setDefaultAPTerms',
+                //    fieldLabel: app.localize('SetDefaultAPTerms')
 
-                 },
+                // },
+                //{
+                //    xtype: 'combobox',
+                //    name: 'setDefaultARTerms',
+                //    emptyText: app.localize('SelectOption'),
+                //    width: '100%',
+                //    ui: 'fieldLabelTop',
+                //    displayField: 'setDefaultARTerms',
+                //    valueField: 'setDefaultARTerms',
+                //    fieldLabel: app.localize('SetDefaultARTerms')
+
+                //}, 
                 {
-                    xtype: 'combobox',
-                    name: 'setDefaultARTerms',
-                    emptyText: app.localize('SelectOption'),
-                    width: '100%',
-                    ui: 'fieldLabelTop',
-                    displayField: 'setDefaultARTerms',
-                    valueField: 'setDefaultARTerms',
-                    fieldLabel: app.localize('SetDefaultARTerms')
-
-                }, {
                     xtype: 'checkbox',
                     name: 'isAllowAccountnumbersStartingwithZero',
                     labelAlign: 'right',
@@ -113,19 +114,7 @@
                     ui: 'default',
                     boxLabelCls: 'checkboxLabel',
                     boxLabel: app.localize('BuildAPUponCCStatementPosting')
-                }
-                ]
-            },
-            {
-                columnWidth: .33,
-                padding: '20 10 0 20',
-                defaults: {
-                   // labelWidth: 140,
-                    blankText: app.localize('MandatoryToolTipText')
-                },
-                items: [ 
-               
-                {
+                }, {
                     xtype: 'checkbox',
                     name: 'buildAPuponPayrollPosting',
                     labelAlign: 'right',
@@ -146,7 +135,17 @@
                      ui: 'default',
                      boxLabelCls: 'checkboxLabel',
                      boxLabel: app.localize('POAutoNumbering')
-                 }, {
+                 }
+                ]
+            },
+            {
+                columnWidth: .33,
+                padding: '20 10 0 20',
+                defaults: {
+                    labelWidth: 160,
+                    blankText: app.localize('MandatoryToolTipText')
+                },
+                items: [  {
                      xtype: 'radiogroup',
                      labelStyle: 'padding-top: 8px !important;',
                      fieldLabel: app.localize('ARAgingDate'),
@@ -157,14 +156,14 @@
                      items: [{
                          boxLabel: app.localize('AgeByInvoiceDate').initCap(),
                          name: 'arAgingDate',
-                         inputValue: '1',
+                         inputValue: 'invoiceDate',
                          ui: 'default',
                          boxLabelCls: 'checkboxLabel',
                          uncheckedValue: 'false'
                      }, {
                          boxLabel: app.localize('AgeByDueDate').initCap(),
                          name: 'arAgingDate',
-                         inputValue: '2',
+                         inputValue: 'dueDate',
                          ui: 'default',
                          boxLabelCls: 'checkboxLabel',
                          uncheckedValue: 'false'
@@ -180,14 +179,37 @@
                      items: [{
                          boxLabel: app.localize('AgeByInvoiceDate').initCap(),
                          name: 'apAgingDate',
-                         inputValue: '1',
+                         inputValue: 'invoiceDate',
                          ui: 'default',
                          boxLabelCls: 'checkboxLabel',
                          uncheckedValue: 'false'
                      }, {
                          boxLabel: app.localize('AgeByDueDate').initCap(),
                          name: 'apAgingDate',
-                         inputValue: '2',
+                         inputValue: 'dueDate',
+                         ui: 'default',
+                         boxLabelCls: 'checkboxLabel',
+                         uncheckedValue: 'false'
+                     }]
+                 }, {
+                     xtype: 'radiogroup',
+                     fieldLabel: app.localize('APPostingDateDefault'),
+                     width: '100%',
+                     labelStyle: 'padding-top: 8px !important;',
+                     ui: 'fieldLabelTop',
+                     columns: 1,
+                     vertical: true,
+                     items: [{
+                         boxLabel: app.localize('CompanyInvoiceDate').initCap(),
+                         name: 'defaultAPPostingDate',
+                         inputValue: 'invoiceDate',
+                         ui: 'default',
+                         boxLabelCls: 'checkboxLabel',
+                         uncheckedValue: 'false'
+                     }, {
+                         boxLabel: app.localize('CurrentDate').initCap(),
+                         name: 'defaultAPPostingDate',
+                         inputValue: 'currentDate',
                          ui: 'default',
                          boxLabelCls: 'checkboxLabel',
                          uncheckedValue: 'false'
@@ -203,30 +225,28 @@
                                 blankText: app.localize('MandatoryToolTipText')
                             },
                             items: [
-                  {
-                      xtype: 'radiogroup',
-                      fieldLabel: app.localize('APPostingDateDefault'),
-                      width: '100%',
-                      labelStyle : 'padding-top: 8px !important;',
-                      ui: 'fieldLabelTop',
-                      columns: 1,
-                      vertical: true,
-                      items: [{
-                          boxLabel: app.localize('CompanyInvoiceDate').initCap(),
-                          name: 'defaultAPPostingDate',
-                          inputValue: '1',
-                          ui: 'default',
-                          boxLabelCls: 'checkboxLabel',
-                          uncheckedValue: 'false'
-                      }, {
-                          boxLabel: app.localize('CurrentDate').initCap(),
-                          name: 'defaultAPPostingDate',
-                          inputValue: '2',
-                          ui: 'default',
-                          boxLabelCls: 'checkboxLabel',
-                          uncheckedValue: 'false'
-                      }]
-                  },
+                        {
+                           xtype: 'combobox',
+                           name: 'setDefaultAPTerms',
+                           emptyText: app.localize('SelectOption'),
+                           width: '100%',
+                           ui: 'fieldLabelTop',
+                           displayField: 'setDefaultAPTerms',
+                           valueField: 'setDefaultAPTerms',
+                           fieldLabel: app.localize('SetDefaultAPTerms')
+
+                           },
+                        {
+                            xtype: 'combobox',
+                            name: 'setDefaultARTerms',
+                            emptyText: app.localize('SelectOption'),
+                            width: '100%',
+                            ui: 'fieldLabelTop',
+                            displayField: 'setDefaultARTerms',
+                            valueField: 'setDefaultARTerms',
+                            fieldLabel: app.localize('SetDefaultARTerms')
+
+                        },
                              {
                                     xtype: 'numberfield',
                                     maxValue: 99,
@@ -251,17 +271,33 @@
                                     fieldLabel: app.localize('PaymentGracePeriods').initCap(),
                                     width: '100%',
                                     ui: 'fieldLabelTop'
-                                },{
-                                    xtype: 'combobox',
-                                    name: 'defaultBank',
-                                    fieldLabel: app.localize('DefaultBank').initCap(),
-                                    width: '100%',
+                                }, {
+                                    xtype: 'chachingcombobox',
+                                    store: new Chaching.store.utilities.autofill.BankAccountListStore(),
+                                    fieldLabel: app.localize('DefaultBank'),
                                     ui: 'fieldLabelTop',
-                                    displayField: 'bankAccountName',
+                                    width: '100%',
+                                    name: 'defaultBank',
                                     valueField: 'bankAccountId',
-                                    //queryMode : 'local',
-                                    emptyText: app.localize('SelectOption'),
-                                    store: new Chaching.store.banking.banksetup.BankSetupStore()
+                                    displayField: 'bankAccountNumber',
+                                    queryMode: 'remote',
+                                    minChars: 2,
+                                    useDisplayFieldToSearch: true,
+                                    modulePermissions: {
+                                        read: abp.auth.isGranted('Pages.Banking.BankSetup'),
+                                        create: abp.auth.isGranted('Pages.Banking.BankSetup.Create'),
+                                        edit: abp.auth.isGranted('Pages.Banking.BankSetup.Edit'),
+                                        destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete')
+                                    },
+                                    primaryEntityCrudApi: {
+                                        read: abp.appPath + 'api/services/app/list/GetBankAccountList',
+                                        create: abp.appPath + 'api/services/app/bankAccountUnit/CreateBankAccountUnit',
+                                        update: abp.appPath + 'api/services/app/bankAccountUnit/UpdateBankAccountUnit',
+                                        destroy: abp.appPath + 'api/services/app/bankAccountUnit/DeleteBankAccountUnit'
+                                    },
+                                    createEditEntityType: 'banking.banksetup', 
+                                    createEditEntityGridController: 'banking.banksetupgrid',
+                                    entityType: 'Bank Account'
                                 }, {
                                     xtype: 'checkbox',
                                     name: 'allowTransactionsJobWithGL',

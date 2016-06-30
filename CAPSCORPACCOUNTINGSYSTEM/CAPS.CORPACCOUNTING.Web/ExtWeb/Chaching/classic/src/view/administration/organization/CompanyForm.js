@@ -13,9 +13,9 @@
     name: 'companysetup',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Administration.OrganizationUnits'),
-        create: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Create'),
-        edit: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Edit'),
-        destroy: true//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Delete')
+        create: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
+        edit: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
+        destroy: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree')
     },
     openInPopupWindow: false,
     hideDefaultButtons: false,

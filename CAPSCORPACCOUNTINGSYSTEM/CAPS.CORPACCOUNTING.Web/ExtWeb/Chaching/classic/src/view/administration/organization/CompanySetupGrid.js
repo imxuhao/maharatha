@@ -13,9 +13,9 @@ Ext.define('Chaching.view.administration.organization.CompanySetupGrid', {
     name: 'Administration.OrganizationUnits',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Administration.OrganizationUnits'),
-        create: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Create'),
-        edit: true,//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Edit'),
-        destroy: true//abp.auth.isGranted('Pages.Administration.OrganizationUnits.Delete')
+        create: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
+        edit: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
+        destroy: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree')
     },
     padding: 5,
     gridId: 25,
@@ -105,6 +105,62 @@ Ext.define('Chaching.view.administration.organization.CompanySetupGrid', {
         groupable: true,
         width: '15%'
     },
+        {
+            xtype: 'gridcolumn',
+            text: app.localize('CompanyTransmitterContactName'),
+            dataIndex: 'transmitterContactName',
+            sortable: true,
+            groupable: true,
+            width: '15%',
+            filterField: {
+                xtype: 'textfield',
+                width: '100%'
+            }, editor: {
+                xtype: 'textfield'
+            }
+        },
+            {
+                xtype: 'gridcolumn',
+                text: app.localize('CompanyTransmitterEmailAddress'),
+                dataIndex: 'transmitterEmailAddress',
+                sortable: true,
+                groupable: true,
+                width: '15%',
+                filterField: {
+                    xtype: 'textfield',
+                    width: '100%'
+                }, editor: {
+                    xtype: 'textfield'
+                }
+            },
+                {
+                    xtype: 'gridcolumn',
+                    text: app.localize('CompanyTransmitterCode'),
+                    dataIndex: 'transmitterCode',
+                    sortable: true,
+                    groupable: true,
+                    width: '15%',
+                    filterField: {
+                        xtype: 'textfield',
+                        width: '100%'
+                    }, editor: {
+                        xtype: 'textfield'
+                    }
+                },
+                    {
+                        xtype: 'gridcolumn',
+                        text: app.localize('CompanyTransmitterControlCode'),
+                        dataIndex: 'transmitterControlCode',
+                        sortable: true,
+                        groupable: true,
+                        width: '15%',
+                        filterField: {
+                            xtype: 'textfield',
+                            width: '100%'
+                        }, editor: {
+                            xtype: 'textfield'
+                        }
+                    },
     {
         xtype: 'gridcolumn',
         text: app.localize('DateModified'),
@@ -114,14 +170,14 @@ Ext.define('Chaching.view.administration.organization.CompanySetupGrid', {
         width: '10%',
         renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer
     },
-    {
-        xtype: 'gridcolumn',
-        text: app.localize('UpdatedBy'),
-        dataIndex: 'lastModifierUserId',
-        sortable: true,
-        groupable: true,
-        width: '10%'
-    },
+    //{
+    //    xtype: 'gridcolumn',
+    //    text: app.localize('UpdatedBy'),
+    //    dataIndex: 'lastModifierUserId',
+    //    sortable: true,
+    //    groupable: true,
+    //    width: '10%'
+    //},
     {
         xtype: 'gridcolumn',
         text: app.localize('DateCreated'),
@@ -130,14 +186,15 @@ Ext.define('Chaching.view.administration.organization.CompanySetupGrid', {
         groupable: true,
         width: '10%',
         renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer
-    },
-    {
-        xtype: 'gridcolumn',
-        text: app.localize('CreatedBy'),
-        dataIndex: 'creatorUserId',
-        sortable: true,
-        groupable: true,
-        width: '10%'
     }
+    //,
+    //{
+    //    xtype: 'gridcolumn',
+    //    text: app.localize('CreatedBy'),
+    //    dataIndex: 'creatorUserId',
+    //    sortable: true,
+    //    groupable: true,
+    //    width: '10%'
+    //}
     ]
 });

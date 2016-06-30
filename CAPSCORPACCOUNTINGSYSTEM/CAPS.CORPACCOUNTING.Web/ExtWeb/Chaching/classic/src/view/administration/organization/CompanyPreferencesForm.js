@@ -153,6 +153,7 @@
                      ui: 'fieldLabelTop',
                      columns: 1,
                      vertical: true,
+                     itemId : 'arAgingDateItemId',
                      items: [{
                          boxLabel: app.localize('AgeByInvoiceDate').initCap(),
                          name: 'arAgingDate',
@@ -176,6 +177,7 @@
                      ui: 'fieldLabelTop',
                      columns: 1,
                      vertical: true,
+                     itemId: 'apAgingDateItemId',
                      items: [{
                          boxLabel: app.localize('AgeByInvoiceDate').initCap(),
                          name: 'apAgingDate',
@@ -199,6 +201,7 @@
                      ui: 'fieldLabelTop',
                      columns: 1,
                      vertical: true,
+                     itemId: 'defaultAPPostingDateItemId',
                      items: [{
                          boxLabel: app.localize('CompanyInvoiceDate').initCap(),
                          name: 'defaultAPPostingDate',

@@ -13,11 +13,12 @@
         { name: 'poAutoNumbering', type: 'boolean' },
         { name: 'arAgingDate', type: 'boolean' },
         { name: 'apAgingDate', type: 'boolean' },
-        { name: 'depositGracePeriods', type: 'string' },
-        { name: 'paymentsGracePeriods', type: 'string' },
+        { name: 'setDefaultAPTerms', type: 'int', defaultVaule: null, convert: nullHandler },
+        { name: 'setDefaultARTerms', type: 'int', defaultVaule: null, convert: nullHandler },
+        { name: 'depositGracePeriods', type: 'int', defaultVaule: null, convert: nullHandler },
+        { name: 'paymentsGracePeriods', type: 'int', defaultVaule: null, convert: nullHandler },
         { name: 'defaultAPPostingDate', type: 'boolean' },
-        { name: 'defaultBank', type: 'int' },
+        { name: 'defaultBank', type: 'int', defaultVaule: null, convert: nullHandler },
         { name: 'allowTransactionsJobWithGL', type: "boolean" }
-    ]//,
-    //belongsTo: 'Chaching.model.payables.vendors.VendorsModel'
+    ]
 });

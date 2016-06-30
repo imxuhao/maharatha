@@ -36,15 +36,21 @@
         items: [
             {
                 title: abp.localization.localize("CompanySetup").initCap(),
+                itemId: 'ProjectDetailsTab',
                 xtype: 'administration.organizationunits.companysetup'
             },
             {
                 title: abp.localization.localize("CompanyPreferences").initCap(),
+                disabled: true,
+                itemId: 'companyPreferencesTab',
                 xtype: 'administration.organizationunits.companypreferences'
             },
             {
                 layout: 'fit',
                 title: abp.localization.localize("Members").initCap(),
+                disabled: true,
+                hidden : !abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageMembers'),
+                itemId: 'membersTab',
                 xtype: 'administration.organizationunits.members'
             }
 

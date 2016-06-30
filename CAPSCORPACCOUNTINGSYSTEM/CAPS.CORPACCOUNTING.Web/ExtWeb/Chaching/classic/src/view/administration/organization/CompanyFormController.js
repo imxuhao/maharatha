@@ -40,7 +40,7 @@
         }
         var organizationSettings = "";
         var preferernceView = Ext.ComponentQuery.query('#companyPreferencesFormId', me.getView());
-        if (preferernceView != undefined) {
+        if (preferernceView[0] != undefined) {
              organizationSettings = preferernceView[0].getValues();
         }
 

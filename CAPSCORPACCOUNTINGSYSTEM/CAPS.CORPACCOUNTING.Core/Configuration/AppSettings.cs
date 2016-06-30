@@ -36,14 +36,15 @@ namespace CAPS.CORPACCOUNTING.Configuration
             public const string ImportPOlogsfromProducersActualuploads = "Sumit.Org.ImportPOlogsfromProducersActualuploads";
             public const string BuildAPuponCCstatementPosting = "Sumit.Org.BuildAPuponCCstatementPosting";
             public const string BuildAPuponPayrollPosting = "Sumit.Org.BuildAPuponPayrollPosting";
-            public const string POAutoNumbering = "Sumit.Org.POAutoNumbering";
             public const string ARAgingDate = "Sumit.Org.ARAgingDate";
-            public const string APAgingDate = "Sumit.Org.ARAgingDate";
+            public const string APAgingDate = "Sumit.Org.APAgingDate";
             public const string DepositGracePeriods = "Sumit.Org.DepositGracePeriods";
             public const string PaymentGracePeriods = "Sumit.Org.PaymentGracePeriods";
             public const string AllowTransactionsactionsJobWithGL = "Sumit.Org.AllowtransactionsactionsJobWithGL";
             public const string APPostingDateDefault = "Sumit.Org.APpostingDateDefault";
             public const string DefaultBank = "Sumit.Org.DefaultBank";
+            public const string POAutoNumberingforProjects = "Sumit.Org.POAutoNumberingforProjects";
+            public const string POAutoNumberingforDivisions = "Sumit.Org.POAutoNumberingforDivisions";
         }
     }
 }

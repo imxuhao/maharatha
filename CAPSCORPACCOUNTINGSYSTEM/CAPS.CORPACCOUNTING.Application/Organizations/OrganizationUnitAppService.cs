@@ -381,8 +381,6 @@ namespace CAPS.CORPACCOUNTING.Organizations
                                 AppSettings.OrganizationManagement.BuildAPuponCCstatementPosting)),
                 BuildAPuponPayrollPosting =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
                                 AppSettings.OrganizationManagement.BuildAPuponPayrollPosting)),
-                POAutoNumbering =Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
-                                AppSettings.OrganizationManagement.POAutoNumbering)),
                 ARAgingDate =await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
                             AppSettings.OrganizationManagement.ARAgingDate),
                 APAgingDate =await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
@@ -401,6 +399,10 @@ namespace CAPS.CORPACCOUNTING.Organizations
                                 AppSettings.OrganizationManagement.SetDefaultAPTerms)),
                 SetDefaultARTerms = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
                                 AppSettings.OrganizationManagement.SetDefaultARTerms)),
+                POAutoNumberingforDivisions = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.POAutoNumberingforDivisions)),
+                POAutoNumberingforProjects = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                                AppSettings.OrganizationManagement.POAutoNumberingforProjects)),
 
                 OrganizationUnitId = organizationUnitId,
 
@@ -428,8 +430,6 @@ namespace CAPS.CORPACCOUNTING.Organizations
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
                     AppSettings.OrganizationManagement.BuildAPuponCCstatementPosting,input.BuildAPuponCCstatementPosting.ToString());
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
-                    AppSettings.OrganizationManagement.POAutoNumbering, input.POAutoNumbering.ToString());
-            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
                     AppSettings.OrganizationManagement.ARAgingDate, input.ARAgingDate);
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
                     AppSettings.OrganizationManagement.APAgingDate, input.APAgingDate);
@@ -443,6 +443,10 @@ namespace CAPS.CORPACCOUNTING.Organizations
                     AppSettings.OrganizationManagement.DefaultBank, input.DefaultBank.HasValue ? input.DefaultBank.ToString() : null);
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
                     AppSettings.OrganizationManagement.AllowTransactionsactionsJobWithGL,input.AllowTransactionsJobWithGL.ToString());
+             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                    AppSettings.OrganizationManagement.POAutoNumberingforDivisions,input.POAutoNumberingforDivisions.ToString());
+            await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
+                  AppSettings.OrganizationManagement.POAutoNumberingforProjects, input.POAutoNumberingforProjects.ToString());
 
         }
 

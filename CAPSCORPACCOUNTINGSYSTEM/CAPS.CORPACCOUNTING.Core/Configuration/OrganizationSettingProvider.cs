@@ -29,9 +29,10 @@ namespace CAPS.CORPACCOUNTING.Configuration
                         new SettingDefinition(name:AppSettings.OrganizationManagement.DepositGracePeriods, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.DepositGracePeriods],isVisibleToClients:true),
                         new SettingDefinition(name:AppSettings.OrganizationManagement.ImportPOlogsfromProducersActualuploads, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.ImportPOlogsfromProducersActualuploads] ?? "False",isVisibleToClients:true),
                         new SettingDefinition(name:AppSettings.OrganizationManagement.PaymentGracePeriods, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.PaymentGracePeriods] ,isVisibleToClients:true),
-                        new SettingDefinition(name:AppSettings.OrganizationManagement.POAutoNumbering, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.POAutoNumbering] ?? "False",isVisibleToClients:true),
                         new SettingDefinition(name:AppSettings.OrganizationManagement.SetDefaultAPTerms, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.SetDefaultAPTerms] ,isVisibleToClients:true),
-                        new SettingDefinition(name:AppSettings.OrganizationManagement.SetDefaultARTerms, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.SetDefaultARTerms])
+                        new SettingDefinition(name:AppSettings.OrganizationManagement.SetDefaultARTerms, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.SetDefaultARTerms],isVisibleToClients:true),
+                         new SettingDefinition(name:AppSettings.OrganizationManagement.POAutoNumberingforDivisions, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.POAutoNumberingforDivisions],isVisibleToClients:true),
+                          new SettingDefinition(name:AppSettings.OrganizationManagement.POAutoNumberingforProjects, defaultValue: ConfigurationManager.AppSettings[AppSettings.OrganizationManagement.POAutoNumberingforProjects],isVisibleToClients:true)
                    };
         }
     }

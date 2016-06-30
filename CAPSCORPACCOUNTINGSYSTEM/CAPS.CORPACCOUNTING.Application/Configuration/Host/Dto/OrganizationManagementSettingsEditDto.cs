@@ -23,8 +23,6 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
 
         public bool BuildAPuponPayrollPosting { get; set; }
 
-        public bool POAutoNumbering { get; set; }
-
         public string ARAgingDate { get; set; }
 
         public string APAgingDate { get; set; }
@@ -40,5 +38,10 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
         public bool AllowTransactionsJobWithGL { get; set; }
 
         public long? OrganizationUnitId { get; set; }
+         
+        public bool POAutoNumberingforDivisions { get; set; }
+        public bool POAutoNumberingforProjects { get; set; }
+
+       
     }	
 }

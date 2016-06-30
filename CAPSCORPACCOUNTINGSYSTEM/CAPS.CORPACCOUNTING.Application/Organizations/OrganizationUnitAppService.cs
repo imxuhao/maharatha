@@ -210,6 +210,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task<OrganizationUnitDto> UpdateOrganizationUnit(UpdateOrganizationUnitInput input)
         {
+            
 
             byte[] logo = null;
             if (!ReferenceEquals(input.Logo, null))
@@ -433,13 +434,13 @@ namespace CAPS.CORPACCOUNTING.Organizations
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
                     AppSettings.OrganizationManagement.APAgingDate, input.APAgingDate);
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
-                    AppSettings.OrganizationManagement.DepositGracePeriods, input.DepositGracePeriods.ToString());
+                    AppSettings.OrganizationManagement.DepositGracePeriods,  input.DepositGracePeriods.HasValue? input.DepositGracePeriods.ToString():null);
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
-                    AppSettings.OrganizationManagement.PaymentGracePeriods, input.PaymentsGracePeriods.ToString());
+                    AppSettings.OrganizationManagement.PaymentGracePeriods, input.PaymentsGracePeriods.HasValue ? input.PaymentsGracePeriods.ToString() : null);
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
                     AppSettings.OrganizationManagement.APPostingDateDefault, input.DefaultAPPostingDate);
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
-                    AppSettings.OrganizationManagement.DefaultBank, input.DefaultBank.ToString());
+                    AppSettings.OrganizationManagement.DefaultBank, input.DefaultBank.HasValue ? input.DefaultBank.ToString() : null);
             await _organizationSettingManager.ChangeSettingForOrganizationAsync(input.OrganizationUnitId.Value,
                     AppSettings.OrganizationManagement.AllowTransactionsactionsJobWithGL,input.AllowTransactionsJobWithGL.ToString());
 

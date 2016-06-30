@@ -54,7 +54,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Organization
         public async Task ChangeSettingForOrganizationAsync(long organizationUnitId, string name, string value)
         {
             await InsertOrUpdateOrDeleteSettingValueAsync(name, value, organizationUnitId);
-            await _organizationSettingCache.RemoveAsync(organizationUnitId.ToString());
+            await _organizationSettingCache.RemoveAsync(AbpSession.TenantId + "#" + organizationUnitId);
 
         }
 
@@ -65,7 +65,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Organization
            
             if (settingValue != null)
             {
-                if (settingValue.Value.ToLower() != value.ToLower())
+                if (settingValue.Value != value)
                     await _settingExtendedRepository.DeleteAsync(p => p.OrganizationUnitId == organizationUnitId && p.Name == settingValue.Name);
                 return null;
             }

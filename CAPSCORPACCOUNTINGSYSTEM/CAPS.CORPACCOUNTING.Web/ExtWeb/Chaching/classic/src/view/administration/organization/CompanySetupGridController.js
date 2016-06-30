@@ -34,6 +34,16 @@
                 var arAgingDate = abp.setting.get("Sumit.Org.ARAgingDate");
                 var apAgingDate = abp.setting.get("Sumit.Org.APAgingDate");
                 var defaultAPPostingDate = abp.setting.get("Sumit.Org.APpostingDateDefault");
+                var pOAutoNumberingforProjects = abp.setting.get("Sumit.Org.POAutoNumberingforProjects");
+                var pOAutoNumberingforDivisions = abp.setting.get("Sumit.Org.POAutoNumberingforDivisions");
+
+
+                if (form.findField('pOAutoNumberingforProjects') && pOAutoNumberingforProjects) {
+                    form.findField('pOAutoNumberingforProjects').setValue(pOAutoNumberingforProjects == "False" ? false : true);
+                }
+                if (form.findField('pOAutoNumberingforDivisions') && pOAutoNumberingforDivisions) {
+                    form.findField('pOAutoNumberingforDivisions').setValue(pOAutoNumberingforDivisions == "False" ? false : true);
+                }
 
                 if (form.findField('isAllowDuplicateAPInvoiceNos') && isAllowDuplicateAPInvoiceNos) {
                     form.findField('isAllowDuplicateAPInvoiceNos').setValue(isAllowDuplicateAPInvoiceNos == "False" ? false : true);

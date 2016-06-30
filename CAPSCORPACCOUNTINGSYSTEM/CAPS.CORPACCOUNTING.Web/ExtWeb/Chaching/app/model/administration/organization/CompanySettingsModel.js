@@ -10,6 +10,8 @@
         { name: 'isImportPOlogsfromProducersActualUploads', type: "boolean" },
         { name: 'buildAPuponCCstatementPosting', type: "boolean" },
         { name: 'buildAPuponPayrollPosting', type: 'boolean' },
+        { name: 'pOAutoNumberingforDivisions', type: "boolean" },
+        { name: 'pOAutoNumberingforProjects', type: 'boolean' },
         { name: 'poAutoNumbering', type: 'boolean' },
         { name: 'arAgingDate', type: 'boolean' },
         { name: 'apAgingDate', type: 'boolean' },

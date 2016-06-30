@@ -135,7 +135,29 @@
                      ui: 'default',
                      boxLabelCls: 'checkboxLabel',
                      boxLabel: app.localize('POAutoNumbering')
-                 }
+                 },
+                  {
+                      xtype: 'checkbox',
+                      name: 'pOAutoNumberingforDivisions',
+                      labelAlign: 'right',
+                      inputValue: true,
+                      uncheckedValue: false,
+                      width: '100%',
+                      ui: 'default',
+                      boxLabelCls: 'checkboxLabel',
+                      boxLabel: app.localize('POAutoNumberingforDivisions')
+                  },
+                   {
+                       xtype: 'checkbox',
+                       name: 'pOAutoNumberingforProjects',
+                       labelAlign: 'right',
+                       inputValue: true,
+                       uncheckedValue: false,
+                       width: '100%',
+                       ui: 'default',
+                       boxLabelCls: 'checkboxLabel',
+                       boxLabel: app.localize('POAutoNumberingforProjects')
+                   }
                 ]
             },
             {

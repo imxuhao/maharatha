@@ -82,6 +82,12 @@ Ext.define('Chaching.model.base.TransactionDetailsModel', {
         { name: 'homeCurAmount', type: 'float', defaultValue: null, convert: nullHandler },
         { name: 'customForexRate', type: 'float', defaultValue: null, convert: nullHandler },
         { name: 'isAccountingItemSplit', type: 'boolean' },
+        { name: 'purchaseOrderItemId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'purchaseOrderItem', type: 'string' },
+         { name: 'typeOfTransactionId', type: 'int', defaultValue: 1 },
+        { name: 'typeOfTransaction', type: 'string', defaultValue: 'APInvoice' },
+         { name: 'typeOfAmountId', type: 'int', defaultValue: 1 },
+        { name: 'typeOfAmount', type: 'string', defaultValue: 'StandardEntry' },
         { name: 'SplitGroupCls', type: 'string' }//Temporary field for row coloring
     ]
 });

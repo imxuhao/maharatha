@@ -55,10 +55,6 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGridContro
         if (selectedRecords && selectedRecords.length === 1) {
             var parentRecord = selectedRecords[0],
                 parentIndex = gridStore.indexOf(parentRecord);
-            if (parentRecord.get('isAccountingItemSplit')) {
-                abp.notify.info(app.localize('AlreadySplit'), app.localize('ValidationFailed'));
-                return;
-            }
             if (!parentRecord.get('amount')) {
                 abp.notify.info(app.localize('EnterAmountToSplit'), app.localize('ValidationFailed'));
                 return;
@@ -115,6 +111,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGridContro
             else if (selectedRecords && selectedRecords.length > 1)
                 abp.notify.info(app.localize('SingleSplit'), app.localize('ValidationFailed'));
         }
+        view.getView().refresh();
     },
     beforeAccountQuery: function (queryPlan, eOpts) {
         var me = this,

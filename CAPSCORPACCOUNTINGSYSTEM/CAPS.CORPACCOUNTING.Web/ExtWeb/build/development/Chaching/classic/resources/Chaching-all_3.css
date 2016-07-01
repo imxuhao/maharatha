@@ -1126,39 +1126,40 @@
 .x-form-trigger-fieldLabelTop {
     background-color: transparent !important;
     color: #080808 !important;
+    width: 20px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:17 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:18 */
 .x-form-text-fieldLabelTop {
     background-color: transparent !important;
     padding: 12px 5px 0px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:21 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:22 */
 .x-form-invalid-field-fieldLabelTop {
     background-color: transparent !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:24 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:25 */
 .x-form-item-label-fieldLabelTop {
     padding-top: 15px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:27 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:28 */
 .x-form-empty-field-fieldLabelTop {
     font-style: italic;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:30 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:31 */
 .x-form-trigger-wrap-fieldLabelTop {
     border-top-color: transparent !important;
     border-left-color: transparent !important;
     border-right-color: transparent !important;
     border-bottom-color: #27e4e4 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:36 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:37 */
 .x-form-trigger-wrap-fieldLabelTop.x-form-trigger-wrap-invalid {
     border-top-color: transparent !important;
     border-left-color: transparent !important;
     border-right-color: transparent !important;
     border-bottom-color: #cf4c35 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:42 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:43 */
 .checkboxLabel {
     font-weight: 600 !important;
     padding-left: 22px !important;
@@ -1166,14 +1167,14 @@
     margin-top: 8px !important;
     font-size: 13px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:49 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:50 */
 .checkboxLabelLeftAlign {
     font-weight: 600 !important;
     display: inline-block !important;
     margin-top: 8px !important;
     font-size: 13px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:56 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/form/ChachingFormPanel.scss:57 */
 .x-form-item-fieldLabelTop.x-item-disabled {
     opacity: 0.8 !important;
 }

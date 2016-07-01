@@ -1,6 +1,7 @@
 
 Ext.define('Chaching.view.payables.invoices.AccountsPayableDetailGrid',{
-    extend: 'Ext.panel.Panel',
+    extend: 'Chaching.view.common.grid.ChachingTransactionDetailGrid',
+    xtype: 'widget.payables.invoices.transactionDetails',
 
     requires: [
         'Chaching.view.payables.invoices.AccountsPayableDetailGridController'
@@ -13,5 +14,13 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableDetailGrid',{
         edit: abp.auth.isGranted('Pages.Payables.Invoices.Edit'),
         destroy: abp.auth.isGranted('Pages.Payables.Invoices.Delete')
     },
-    html: 'Hello, World!!'
+    store: 'payables.invoices.AccountsPayableDetailsStore',
+    moduleColumns:[
+    {
+        xtype: 'gridcolumn',
+        text: app.localize('PO#'),
+        dataIndex: 'referenceNumber',
+        name: 'referenceNumber'
+    }],
+    columnOrder: ['amount', 'jobNumber', 'accountNumber', 'subAccountNumber1', 'typeOf1099T4', 'itemMemo', 'taxRebateNumber', 'referenceNumber', 'isAsset']
 });

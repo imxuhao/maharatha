@@ -2,15 +2,6 @@
     extend: 'Chaching.store.base.BaseStore',
     pageSize: 1000,
     model: 'Chaching.model.payables.vendors.VendorsModel',
-    //fields: [{ name: 'name' }, { name: 'value' }, {
-    //    name: 'vendorName', convert: function (value, record) {
-    //        return record.get('name');
-    //    }
-    //}, {
-    //    name: 'vendorId', convert: function (value, record) {
-    //        return record.get('value');
-    //    }
-    //}],
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',

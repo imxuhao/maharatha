@@ -2022,6 +2022,7 @@
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\batchposting\batches\BatchesModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\payables\invoices\AccountsPayableDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\invoices\AccountsPayableModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorAliasModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
@@ -2057,6 +2058,7 @@
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\batchposting\batches\BatchesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\payables\invoices\AccountsPayableDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\invoices\AccountsPayableStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsAliasStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsStore.js" />

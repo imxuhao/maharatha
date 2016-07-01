@@ -268,6 +268,9 @@ Ext.define('Chaching.components.plugins.Clipboard', {
                 }
             }
         }
+        if (me.noofRequestsFired <= 0) {
+            deferred.resolve('{success:true}');
+        }
         return deferred.promise;
     },
     fetchData: function (column, deferred, params) {

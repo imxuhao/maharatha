@@ -447,3 +447,12 @@ body {
   -webkit-animation: lol 3s 500ms infinite ease-in-out;
   animation: lol 3s 500ms infinite ease-in-out;
 }
+
+.radioGroupboxLabel{
+    font-weight:600 !important;
+    padding-left:22px !important;
+    display:inline-block !important;
+    margin-top:8px !important;
+    font-size:15px !important;
+    color: #0404c5 !important;
+}

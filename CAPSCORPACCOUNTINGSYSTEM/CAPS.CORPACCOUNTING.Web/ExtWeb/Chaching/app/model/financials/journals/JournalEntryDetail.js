@@ -7,8 +7,6 @@
     [
         { name: 'vendorId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'vendorName', type: 'string' },
-        { name: 'purchaseOrderItemId', type: 'int', defaultValue: null, convert: nullHandler },
-        { name: 'purchaseOrderItem', type: 'string' },
         { name: 'batchName', type: 'string' },
         { name: 'debitCreditGroup', type: 'string' },
         { name: 'creditAccountingItemId', type: 'auto' },
@@ -36,11 +34,6 @@
         { name: 'creditSubAccountId8', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'creditSubAccountId9', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'creditSubAccountId10', type: 'int', defaultValue: null, convert: nullHandler },
-        { name: 'typeOfTransactionId', type: 'int', defaultValue: 1 },
-        { name: 'typeOfTransaction', type: 'string', defaultValue: 'APInvoice' },
-         { name: 'typeOfAmountId', type: 'int', defaultValue: 1 },
-        { name: 'typeOfAmount', type: 'string', defaultValue: 'StandardEntry' },
-         { name: 'debitAccountingItemId', type: 'int', defaultValue: null, convert: nullHandler }
-
+        { name: 'debitAccountingItemId', type: 'int', defaultValue: null, convert: nullHandler }
     ]
 });

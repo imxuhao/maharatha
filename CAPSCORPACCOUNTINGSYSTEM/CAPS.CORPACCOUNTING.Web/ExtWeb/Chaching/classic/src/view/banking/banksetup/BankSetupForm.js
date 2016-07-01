@@ -118,7 +118,6 @@
                         displayField: 'accountNumber',
                         queryMode: 'remote',
                         minChars: 2,
-                        useDisplayFieldToSearch: true,
                         modulePermissions: {
                             read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
                             create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
@@ -133,8 +132,7 @@
                         },
                         createEditEntityType: 'financials.accounts.accounts',
                         createEditEntityGridController: 'financials-accounts-accountsgrid',
-                        entityType: 'Account',
-                        useDisplayFieldToSearch: true
+                        entityType: 'Account'
                     }, {
                         xtype: 'chachingcombobox',
                         store: new Chaching.store.utilities.autofill.DivisionListStore(),
@@ -146,7 +144,6 @@
                         displayField: 'jobNumber',
                         queryMode: 'remote',
                         minChars: 2,
-                        useDisplayFieldToSearch: true,
                         modulePermissions: {
                             read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
                             create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),
@@ -161,8 +158,7 @@
                         },
                         createEditEntityType: 'financials.accounts.divisions', 
                         createEditEntityGridController: 'financials-accounts-divisionsgrid',
-                        entityType: 'Division',
-                        useDisplayFieldToSearch: true
+                        entityType: 'Division'
                     }]
                 },
                             {

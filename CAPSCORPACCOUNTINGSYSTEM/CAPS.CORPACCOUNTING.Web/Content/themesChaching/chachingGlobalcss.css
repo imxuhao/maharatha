@@ -138,3 +138,39 @@ border-width: 10px;
     font: 13px FontAwesome;
     color: black;
 }
+
+.purchaseOrderTriggerClsInactive:before {
+    content: "\f218" !important;
+    font: 25px FontAwesome;
+    color: red;
+    opacity: .5;
+    cursor: not-allowed;
+    vertical-align: bottom;
+}
+.purchaseOrderTriggerClsActive:before {
+    content: "\f218" !important;
+    font: 25px FontAwesome;
+    color: #02bd70;
+    cursor: pointer;
+    vertical-align: bottom;
+}
+.printTriggerClsInactive:before {
+    content: "\f02f" !important;
+    font: 25px FontAwesome;
+    color: red;
+    opacity: .5;
+    cursor: not-allowed;
+    vertical-align: bottom;
+}
+.printTriggerClsActive:before {
+    content: "\f02f" !important;
+    font: 25px FontAwesome;
+    color: #02bd70;
+    cursor: pointer;
+    vertical-align: bottom;
+}
+/*Global radiobuttons look */
+.x-form-cb-checked .x-form-radio-default:before {
+    content: "\f058" !important;
+    color: #3598dc !important;
+}

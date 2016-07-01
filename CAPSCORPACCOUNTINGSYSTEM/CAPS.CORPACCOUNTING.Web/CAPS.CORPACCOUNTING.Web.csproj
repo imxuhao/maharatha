@@ -2142,17 +2142,12 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\OrganizationTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyFormController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyPreferencesForm.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyPreferencesFormController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanySetupForm.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanySetupFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanySetupGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanySetupGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUserForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUserRolesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUsersGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUsersGridController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\MembersForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupCheckNumberGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupCheckNumberGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupForm.js" />

@@ -2039,6 +2039,7 @@
     <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\CustomerModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUserRoleListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\UserOrganizationListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUsersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
@@ -2148,6 +2149,7 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanySetupGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanySetupGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUserForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUserRolesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUsersGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUsersGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\MembersForm.js" />

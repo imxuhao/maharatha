@@ -51,7 +51,8 @@ namespace CAPS.CORPACCOUNTING.Web.Areas.Mpa.Controllers
         }
 
 
-        public JsonResult UploadProfilePicture()
+        [AbpMvcAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        public JsonResult UpdateOrganizationPicture()
         {
             try
             {

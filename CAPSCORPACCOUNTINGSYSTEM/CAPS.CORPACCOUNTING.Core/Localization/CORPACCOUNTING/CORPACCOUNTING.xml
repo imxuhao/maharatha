@@ -992,5 +992,7 @@
     <text name="BankSecurityTab" value="Bank (Financial Institution) Security" />
     <text name="UserPassword" value="Password" />
     <text name="CompanyUserInformation" value="User Information" />
+    <text name="SaveCompanySetup" value="Save Company Setup" />
+    <text name="SaveCompanyPreferences" value="Save Company Preferences" />
   </texts>
 </localizationDictionary>

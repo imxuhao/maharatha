@@ -1,5 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
+using Abp.Domain.Uow;
+using Abp.Runtime.Security;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Authorization.Users.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy;
@@ -14,6 +17,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
         private readonly IUserLinkManager _userLinkManager;
         private readonly UserManager _userManager;
         private readonly TenantManager _tenantManager;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
 
         public UserAppService_Link_Tests()
         {
@@ -21,6 +25,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
             _userLinkManager = Resolve<IUserLinkManager>();
             _userManager = Resolve<UserManager>();
             _tenantManager = Resolve<TenantManager>();
+            _unitOfWorkManager = Resolve<IUnitOfWorkManager>();
         }
 
         [Fact]
@@ -41,10 +46,11 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
         public async Task Should_Link_User_To_Different_Tenant_User()
         {
             //Arrange
-            LoginAsDefaultTenantAdmin();
+            LoginAsHostAdmin();
             await CreateTestTenantAndTestUser();
 
             //Act
+            LoginAsDefaultTenantAdmin();
             await _userLinkAppService.LinkToUser(new LinkToUserInput
             {
                 TenancyName = "Test",
@@ -61,11 +67,8 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
                 var currentUser = await context.Users.FirstOrDefaultAsync(u => u.Id == AbpSession.UserId);
                 var currentUserAccount = await _userLinkManager.GetUserAccountAsync(currentUser.ToUserIdentifier());
 
-                currentUserAccount.UserLinkId.HasValue.ShouldBe(true);
-                currentUserAccount.UserLinkId.Value.ShouldBe(currentUser.Id);
-
-                linkedUserAccount.UserLinkId.HasValue.ShouldBe(true);
-                linkedUserAccount.UserLinkId.Value.ShouldBe(currentUser.Id);
+                currentUserAccount.UserLinkId.ShouldBe(currentUser.Id);
+                linkedUserAccount.UserLinkId.ShouldBe(currentUser.Id);
             });
         }
 
@@ -114,19 +117,31 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
 
         private async Task CreateTestTenantAndTestUser()
         {
-            Tenant testTenant = new Tenant("Test", "test");
+            var testTenant = new Tenant("Test", "test")
+            {
+                ConnectionString = SimpleStringCipher.Instance.Encrypt("Server=localhost; Database=CORPACCOUNTINGTest_" + Guid.NewGuid().ToString("N") + "; Trusted_Connection=True;")
+            };
+
             await _tenantManager.CreateAsync(testTenant);
 
-            await _userManager.CreateAsync(new User
+            using (var uow = _unitOfWorkManager.Begin())
             {
-                EmailAddress = "test@test.com",
-                IsEmailConfirmed = true,
-                Name = "Test",
-                Surname = "User",
-                UserName = "test",
-                Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", //123qwe
-                TenantId = testTenant.Id
-            });
+                using (_unitOfWorkManager.Current.SetTenantId(testTenant.Id))
+                {
+                    await _userManager.CreateAsync(new User
+                    {
+                        EmailAddress = "test@test.com",
+                        IsEmailConfirmed = true,
+                        Name = "Test",
+                        Surname = "User",
+                        UserName = "test",
+                        Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==", //123qwe
+                        TenantId = testTenant.Id,
+                    });
+                }
+
+                await uow.CompleteAsync();
+            }
         }
 
         private async Task LinkUserAndTestAsync(string tenancyName)

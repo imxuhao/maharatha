@@ -52,7 +52,7 @@
         var me = this,
             view = me.getView();
         if (field.isEditMode == false && !field.getValue()) {
-            abp.message.confirm('You are about to Close this fiscal year, no transactions will post to closed year', 'WARNING', function (btn) {
+            abp.message.confirm(app.localize('FiscalYearCloseMsg'), app.localize('Warning'), function (btn) {
                 if (btn) {
                     var fiscalPeriodStore = view.down('gridpanel[itemId=fiscalPeriodGrid]').getStore();
                     fiscalPeriodStore.each(function (record) {

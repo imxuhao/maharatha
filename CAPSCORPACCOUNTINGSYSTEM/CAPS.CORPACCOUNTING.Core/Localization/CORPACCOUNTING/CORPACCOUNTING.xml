@@ -910,6 +910,10 @@
     <text name="Confirm" value="Confirm?" />
     <text name="ConfirmMessage" value="Are you sure? ,you want to delete this " />
    <text name="EditInvoice" value="Edit Invoice" />
+    
+ <text name="Warning" value="Warning" />
+ <text name="SwitchOrganizationMsg" value="Are you sure? ,you want to switch to another organization" />
+ <text name="FiscalYearCloseMsg" value="You are about to Close this fiscal year, no transactions will post to closed year" />
  <text name="CreateNewInvoice" value="Create Invoice" />
  <text name="ViewInvoice" value="View Invoice" />
  <text name="PO#" value="PO#" />
@@ -972,5 +976,6 @@
     <text name="BankAccountName" value="Bank Account Name" />
     <text name="POAutoNumberingforDivisions " value="PO Auto-Numbering for Divisions" />
     <text name="POAutoNumberingforProjects" value="PO Auto-Numbering for Projects" />
+    <text name="UserOrganizations" value="User Organizations" />
   </texts>
 </localizationDictionary>

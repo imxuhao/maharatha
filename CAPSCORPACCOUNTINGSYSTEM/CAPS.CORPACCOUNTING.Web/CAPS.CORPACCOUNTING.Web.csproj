@@ -2038,6 +2038,7 @@
     <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\CustomerModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\administration\organization\UserOrganizationListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\TransactionDetailsStore.js" />

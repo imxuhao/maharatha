@@ -9039,11 +9039,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetAllSettings(System.Int64)">
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetAllSettings(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
             Get default Settings of Organization
             </summary>
-            <param name="organizationUnitId"></param>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
@@ -9184,6 +9184,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto.CreatedUser">
             <summary>Get Sets the VendorName field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto.DueDate">
+            <summary>
+            Get Sets the DueDate field.
+            </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Payables.Dto.APHeaderTransactionsInputUnit">
             <summary>
             InvoiceEntryDocument InputDto
@@ -9246,6 +9251,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.APHeaderTransactionsInputUnit.InvoiceEntryDocumentDetailList">
             <summary>Get Sets the InvoiceEntryDocumentDetailList field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.APHeaderTransactionsInputUnit.DueDate">
+            <summary>
+            Get Sets the DueDate field.
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit.PurchaseOrderItemId">
             <summary>Gets or sets the PurchaseOrderItemID field. </summary>   
         </member>
@@ -9268,6 +9278,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailUnitDto.VendorId">
             <summary>Gets or sets the VendorId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailUnitDto.PurchaseOrderReference">
+            <summary>Gets or sets the PurchaseOrderReference field. </summary>   
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService">
             <summary>

@@ -75,5 +75,10 @@ namespace CAPS.CORPACCOUNTING.Payables.Dto
 
         ///<summary>Get Sets the InvoiceEntryDocumentDetailList field.</summary>
         public List<InvoiceEntryDocumentDetailInputUnit> InvoiceEntryDocumentDetailList { get; set; }
+
+        /// <summary>
+        /// Get Sets the DueDate field.
+        /// </summary>
+        public DateTime? DueDate { get; set; }
     }
 }

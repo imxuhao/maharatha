@@ -62,8 +62,8 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <summary>
         /// Get default Settings of Organization
         /// </summary>
-        /// <param name="organizationUnitId"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        Task<OrganizationManagementSettingsEditDto> GetAllSettings(long organizationUnitId);
+        Task<OrganizationManagementSettingsEditDto> GetAllSettings(IdInput<long> input);
     }
 }

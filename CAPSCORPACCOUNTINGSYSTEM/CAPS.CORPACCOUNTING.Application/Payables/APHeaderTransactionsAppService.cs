@@ -23,6 +23,7 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.PettyCash;
+using CAPS.CORPACCOUNTING.PurchaseOrders;
 
 namespace CAPS.CORPACCOUNTING.Payables
 {
@@ -42,7 +43,9 @@ namespace CAPS.CORPACCOUNTING.Payables
         private readonly IRepository<User, long> _userUnitRepository;
         private readonly IRepository<PettyCashAccountUnit, long> _pettyCashAccountUnitRepository;
         private readonly IRepository<VendorPaymentTermUnit> _vendorPaymentTermUnitRepository;
-        private readonly IRepository<BankAccountUnit,long> _bankAccountUnitRepository;
+        private readonly IRepository<BankAccountUnit, long> _bankAccountUnitRepository;
+        private readonly IRepository<PurchaseOrderEntryDocumentDetailUnit, long> _purchaseOrderEntryDocumentDetailUnitRepository;
+        private readonly IRepository<PurchaseOrderEntryDocumentUnit, long> _purchaseOrderEntryDocumentUnitRepository;
 
 
 
@@ -51,7 +54,7 @@ namespace CAPS.CORPACCOUNTING.Payables
             IRepository<BatchUnit> batchUnitRepository, IRepository<InvoiceEntryDocumentDetailUnit, long> invoiceEntryDocumentDetailUnitRepository,
             InvoiceEntryDocumentDetailUnitManager invoiceEntryDocumentDetailUnitManager, IRepository<JobUnit> jobUnitRepository,
             IRepository<AccountUnit, long> accountUnitRepository, IRepository<SubAccountUnit, long> subAccountUnitRepository,
-            IRepository<TaxCreditUnit> taxCreditUnitRepository, IRepository<User, long> userUnitRepository, IRepository<PettyCashAccountUnit, long> pettyCashAccountUnitRepository, IRepository<BankAccountUnit, long> bankAccountUnitRepository, IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository)
+            IRepository<TaxCreditUnit> taxCreditUnitRepository, IRepository<User, long> userUnitRepository, IRepository<PettyCashAccountUnit, long> pettyCashAccountUnitRepository, IRepository<BankAccountUnit, long> bankAccountUnitRepository, IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository, IRepository<PurchaseOrderEntryDocumentDetailUnit, long> purchaseOrderEntryDocumentDetailUnitRepository, IRepository<PurchaseOrderEntryDocumentUnit, long> purchaseOrderEntryDocumentUnitRepository)
         {
             _apHeaderTransactionsUnitManager = apHeaderTransactionsUnitManager;
             _apHeaderTransactionsUnitRepository = apHeaderTransactionsUnitRepository;
@@ -67,6 +70,8 @@ namespace CAPS.CORPACCOUNTING.Payables
             _pettyCashAccountUnitRepository = pettyCashAccountUnitRepository;
             _bankAccountUnitRepository = bankAccountUnitRepository;
             _vendorPaymentTermUnitRepository = vendorPaymentTermUnitRepository;
+            _purchaseOrderEntryDocumentDetailUnitRepository = purchaseOrderEntryDocumentDetailUnitRepository;
+            _purchaseOrderEntryDocumentUnitRepository = purchaseOrderEntryDocumentUnitRepository;
         }
 
         /// <summary>
@@ -173,28 +178,35 @@ namespace CAPS.CORPACCOUNTING.Payables
             bool unPosted = false;
             var query = from invoices in _apHeaderTransactionsUnitRepository.GetAll()
                         join user in _userUnitRepository.GetAll() on invoices.CreatorUserId equals user.Id
-                        into users from userunits in users.DefaultIfEmpty()
+                        into users
+                        from userunits in users.DefaultIfEmpty()
                         join pcaccount in _pettyCashAccountUnitRepository.GetAll() on invoices.PettyCashAccountId equals pcaccount.Id
-                           into pcaccountunit from pcaccountunits in pcaccountunit.DefaultIfEmpty()
+                           into pcaccountunit
+                        from pcaccountunits in pcaccountunit.DefaultIfEmpty()
                         join account in _accountUnitRepository.GetAll() on pcaccountunits.AccountId equals account.Id
                            into accountunit
                         from accountunits in accountunit.DefaultIfEmpty()
                         join paymentterms in _vendorPaymentTermUnitRepository.GetAll() on invoices.PaymentTermId equals paymentterms.Id
-                          into paymenttermsunit from paymenttermunits in paymenttermsunit.DefaultIfEmpty()
+                          into paymenttermsunit
+                        from paymenttermunits in paymenttermsunit.DefaultIfEmpty()
                         join batch in _batchUnitRepository.GetAll() on invoices.BatchId equals batch.Id
-                           into batchunit from batchunits in batchunit.DefaultIfEmpty()
+                           into batchunit
+                        from batchunits in batchunit.DefaultIfEmpty()
                         join vendor in _vendorUnitRepository.GetAll() on invoices.VendorId equals vendor.Id
-                            into vendorunit from vendors in vendorunit.DefaultIfEmpty()
+                            into vendorunit
+                        from vendors in vendorunit.DefaultIfEmpty()
                         join bankaccount in _bankAccountUnitRepository.GetAll() on invoices.BankAccountId equals bankaccount.Id
                             into bankaccountunit
                         from bankaccounts in bankaccountunit.DefaultIfEmpty()
                         select new
                         {
-                            Invoices = invoices, BatchName = batchunits.Description, VendorName = vendors.LastName,
-                            CreatedUser= userunits.UserName,
+                            Invoices = invoices,
+                            BatchName = batchunits.Description,
+                            VendorName = vendors.LastName,
+                            CreatedUser = userunits.UserName,
                             PaymentTerm = paymenttermunits.Description,
-                            BankAccount=bankaccounts.BankAccountNumber,
-                            PettyCashAccount=accountunits.Caption
+                            BankAccount = bankaccounts.BankAccountNumber,
+                            PettyCashAccount = accountunits.Caption
 
                         };
 
@@ -206,7 +218,7 @@ namespace CAPS.CORPACCOUNTING.Payables
             }
             query = query.Where(p => p.Invoices.OrganizationUnitId == input.OrganizationUnitId)
                 .Where(u => u.Invoices.TypeOfAccountingDocumentId == TypeOfAccountingDocument.AccountsPayable &&
-                       u.Invoices.IsPosted == unPosted); 
+                       u.Invoices.IsPosted == unPosted);
 
 
             var resultCount = await query.CountAsync();
@@ -260,15 +272,22 @@ namespace CAPS.CORPACCOUNTING.Payables
                         join taxCredit in _taxCreditUnitRepository.GetAll() on invoices.TaxRebateId equals taxCredit.Id
                         into taxCreditunit
                         from taxCredits in taxCreditunit.DefaultIfEmpty()
+                        join po in _purchaseOrderEntryDocumentDetailUnitRepository.GetAll() on invoices.PurchaseOrderItemId equals po.Id
+                       into pounit
+                        from purchaseorderdetails in pounit.DefaultIfEmpty()
+                        join podocument in _purchaseOrderEntryDocumentUnitRepository.GetAll() on purchaseorderdetails.AccountingDocumentId equals podocument.Id
+                        into poumentunit
+                        from purchaseorderdetailss in poumentunit.DefaultIfEmpty()
                         select new
                         {
                             InvoiceDetails = invoices,
-                            JobDesc = jobs.JobNumber,
+                            JobNumber = jobs.JobNumber,
                             accountDesc = lines.AccountNumber,
                             subAccount1 = subAccounts1.Description,
                             subAccount2 = subAccounts2.Description,
                             subAccount3 = subAccounts3.Description,
-                            taxCredit = taxCredits.Number
+                            taxCredit = taxCredits.Number,
+                            purchaseorderreference = purchaseorderdetailss.DocumentReference
                         };
 
             query = query.Where(p => p.InvoiceDetails.AccountingDocumentId.Value == input.AccountingDocumentId);
@@ -283,10 +302,12 @@ namespace CAPS.CORPACCOUNTING.Payables
                 dto.SubAccountNumber3 = item.subAccount3;
                 dto.TaxRebateNumber = item.taxCredit;
                 dto.AccountingDocumentId = item.InvoiceDetails.Id;
+                dto.PurchaseOrderReference = item.purchaseorderreference;
+                dto.JobNumber = item.JobNumber;
                 return dto;
             }).ToList());
         }
 
-       
+
     }
 }

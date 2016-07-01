@@ -90,5 +90,10 @@ namespace CAPS.CORPACCOUNTING.Payables
 
         public string TypeOfInvoice { get; set; }
 
+        /// <summary>
+        /// Get Sets the DueDate field.
+        /// </summary>
+        public DateTime? DueDate { get; set; }
+
     }
 }

@@ -368,48 +368,48 @@ namespace CAPS.CORPACCOUNTING.Organizations
             return byteArray;
         }
 
-        public async Task<OrganizationManagementSettingsEditDto> GetAllSettings(long organizationUnitId)
+        public async Task<OrganizationManagementSettingsEditDto> GetAllSettings(IdInput<long> input)
         {
 
             var settings = new OrganizationManagementSettingsEditDto
             {
 
-                IsAllowDuplicateAPInvoiceNos = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                IsAllowDuplicateAPInvoiceNos = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.AllowDuplicateAPInvoiceNos)),
-                IsAllowDuplicateARInvoiceNos = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                IsAllowDuplicateARInvoiceNos = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.AllowDuplicateARInvoiceNos)),
-                IsAllowAccountnumbersStartingwithZero = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                IsAllowAccountnumbersStartingwithZero = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.AllowAccountNumbersStartingWithZero)),
-                IsImportPOlogsfromProducersActualUploads = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                IsImportPOlogsfromProducersActualUploads = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.ImportPOlogsfromProducersActualuploads)),
-                BuildAPuponCCstatementPosting = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                BuildAPuponCCstatementPosting = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.BuildAPuponCCstatementPosting)),
-                BuildAPuponPayrollPosting = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                BuildAPuponPayrollPosting = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.BuildAPuponPayrollPosting)),
-                ARAgingDate = await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                ARAgingDate = await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                             AppSettings.OrganizationManagement.ARAgingDate),
-                APAgingDate = await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                APAgingDate = await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                             AppSettings.OrganizationManagement.APAgingDate),
-                DepositGracePeriods = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                DepositGracePeriods = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.DepositGracePeriods)),
-                PaymentsGracePeriods = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                PaymentsGracePeriods = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.PaymentGracePeriods)),
-                DefaultAPPostingDate = await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                DefaultAPPostingDate = await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                             AppSettings.OrganizationManagement.APPostingDateDefault),
-                DefaultBank = Convert.ToInt64(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                DefaultBank = Convert.ToInt64(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.DefaultBank)),
-                AllowTransactionsJobWithGL = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                AllowTransactionsJobWithGL = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.AllowTransactionsactionsJobWithGL)),
-                SetDefaultAPTerms = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                SetDefaultAPTerms = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.SetDefaultAPTerms)),
-                SetDefaultARTerms = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                SetDefaultARTerms = Convert.ToInt32(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.SetDefaultARTerms)),
-                POAutoNumberingforDivisions = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                POAutoNumberingforDivisions = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.POAutoNumberingforDivisions)),
-                POAutoNumberingforProjects = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(organizationUnitId,
+                POAutoNumberingforProjects = Convert.ToBoolean(await _organizationSettingManager.GetSettingValueForOrganization(input.Id,
                                 AppSettings.OrganizationManagement.POAutoNumberingforProjects)),
 
-                OrganizationUnitId = organizationUnitId,
+                OrganizationUnitId = input.Id
 
             };
             return settings;

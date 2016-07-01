@@ -91,6 +91,10 @@ namespace CAPS.CORPACCOUNTING.Payables
         public virtual int? PaymentSelectedByUserId { get; set; }
 
 
+        ///<summary>Get Sets the DueDate field.</summary>
+        public virtual DateTime? DueDate { get; set; }
+
+
         #endregion
 
         public ApHeaderTransactions() { }
@@ -103,7 +107,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                  int? postedbyuserid, int? bankreccontrolid, bool isselected, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
                  bool? isbankrecomitted, bool? isictjournal, int? ictcompanyid, long? ictaccountingdocumentid, double? currencyoverriderate,
                  decimal? functionalcurrencycontroltotal, short? typeofcurrencyrateid, string memoline, bool? is13period, decimal? homecurrencyamount, decimal? customforexrate,
-                 bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid, long organizationunitid) :
+                 bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid, long organizationunitid, DateTime? duedate) :
             base(description:description,typeofaccountingdocumentid:typeofaccountingdocumentid,typeofobjectid:typeofobjectid,recurdocid:recurdocid,
                 reversedocid:reversedocid,documentdate:documentdate,transactiondate:transactiondate,dateposted:dateposted,
                 originaldocumentid:organizationunitid,controltotal:controltotal,documentreference:documentreference,
@@ -134,6 +138,7 @@ namespace CAPS.CORPACCOUNTING.Payables
             UploadDocumentLogID = uploaddocumentlogid;
             BatchInfo = batchinfo;
             PaymentSelectedByUserId = paymentselectedbyuserid;
+            DueDate = duedate;
 
         }
 

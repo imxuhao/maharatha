@@ -17,5 +17,8 @@ namespace CAPS.CORPACCOUNTING.Payables.Dto
 
         /// <summary>Gets or sets the VendorId field. </summary>   
         public virtual int? VendorId { get; set; }
+
+        /// <summary>Gets or sets the PurchaseOrderReference field. </summary>   
+        public string PurchaseOrderReference { get; set; }
     }
 }

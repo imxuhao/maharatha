@@ -977,5 +977,20 @@
     <text name="POAutoNumberingforDivisions " value="PO Auto-Numbering for Divisions" />
     <text name="POAutoNumberingforProjects" value="PO Auto-Numbering for Projects" />
     <text name="UserOrganizations" value="User Organizations" />
+    <text name="FullName" value="Full Name" />
+    <text name="Logon" value="Logon" />
+    <text name="UserEmailAddress" value="Email" />
+    <text name="DefaultRole" value="Default Role" />
+    <text name="IsLocked" value="Is Locked" />
+    <text name="IsActive" value="Is Active" />
+    <text name="UserSettings" value="User Settings" />
+    <text name="UserDetailsTab" value="User Details" />
+    <text name="CorporateCOASecurityTab" value="Corporate COA Security" />
+    <text name="ProjectCOASecurityTab" value="Project COA Security" />
+    <text name="ProjectSecurityTab" value="Project Security" />
+    <text name="CreditCardSecurityTab" value="Credit Card Security" />
+    <text name="BankSecurityTab" value="Bank (Financial Institution) Security" />
+    <text name="UserPassword" value="Password" />
+    <text name="CompanyUserInformation" value="User Information" />
   </texts>
 </localizationDictionary>

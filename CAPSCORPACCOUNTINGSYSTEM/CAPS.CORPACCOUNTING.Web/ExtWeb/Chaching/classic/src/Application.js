@@ -87,7 +87,9 @@ Ext.define('Chaching.Application', {
         'utilities.autofill.GLAccountListStore',
         'administration.organization.CompanyStore',
         'utilities.autofill.BankAccountListStore',
-        'administration.organization.UserOrganizationListStore'
+        'administration.organization.UserOrganizationListStore',
+        'administration.organization.CompanyUsersStore',
+        'administration.organization.CompanyUserRoleListStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

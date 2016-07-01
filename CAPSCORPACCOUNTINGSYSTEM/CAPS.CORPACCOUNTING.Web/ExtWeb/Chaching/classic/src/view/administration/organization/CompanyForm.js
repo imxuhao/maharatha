@@ -48,9 +48,11 @@
                 layout: 'fit',
                 title: abp.localization.localize("Members").initCap(),
                 disabled: true,
+                hideDefaultButtons: true,
                 hidden : !abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageMembers'),
                 itemId: 'membersTab',
-                xtype: 'administration.organizationunits.members'
+                // xtype: 'administration.organizationunits.members'
+                xtype: 'administration.organizationunits.companyusersgrid'
             }
 
 

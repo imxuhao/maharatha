@@ -101,6 +101,15 @@
                 }
                 
             }
+
+            //load users of current organization
+            var usersGridStore = formPanel.down('gridpanel[itemId=membersTab]').getStore();
+            var usersGridProxy = usersGridStore.getProxy();
+            usersGridProxy.setExtraParams({'id': Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
+                'sorting': 'name'
+            });
+            usersGridStore.load();
+
         } else {
 
         }

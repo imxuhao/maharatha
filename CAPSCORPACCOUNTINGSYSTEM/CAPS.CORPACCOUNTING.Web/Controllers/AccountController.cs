@@ -40,6 +40,7 @@ using CAPS.CORPACCOUNTING.Web.MultiTenancy;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
 using System.Threading;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.Web.Controllers
 {
@@ -61,10 +62,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
         private IAuthenticationManager AuthenticationManager
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
+            get { return HttpContext.GetOwinContext().Authentication; }
         }
 
         public AccountController(
@@ -121,11 +119,14 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
         [HttpPost]
         [UnitOfWork]
-        public virtual async Task<JsonResult> Login(LoginViewModel loginModel, string returnUrl = "", string returnUrlHash = "")
+        public virtual async Task<JsonResult> Login(LoginViewModel loginModel, string returnUrl = "",
+            string returnUrlHash = "")
         {
             CheckModelState();
 
-            var loginResult = await GetLoginResultAsync(loginModel.UsernameOrEmailAddress, loginModel.Password, loginModel.TenancyName);
+            var loginResult =
+                await
+                    GetLoginResultAsync(loginModel.UsernameOrEmailAddress, loginModel.Password, loginModel.TenancyName);
 
             var tenantId = loginResult.Tenant == null ? (int?)null : loginResult.Tenant.Id;
 
@@ -141,7 +142,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                             "ResetPassword",
                             new ResetPasswordViewModel
                             {
-                                TenantId = SimpleStringCipher.Instance.Encrypt(tenantId == null ? null : tenantId.ToString()),
+                                TenantId =
+                                    SimpleStringCipher.Instance.Encrypt(tenantId == null ? null : tenantId.ToString()),
                                 UserId = SimpleStringCipher.Instance.Encrypt(loginResult.User.Id.ToString()),
                                 ResetCode = loginResult.User.PasswordResetCode
                             })
@@ -176,14 +178,15 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             {
                 identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             }
-
+            identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId)));
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = rememberMe }, identity);
 
-            identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId)));
+
         }
 
-        private async Task<AbpUserManager<Tenant, Role, User>.AbpLoginResult> GetLoginResultAsync(string usernameOrEmailAddress, string password, string tenancyName)
+        private async Task<AbpUserManager<Tenant, Role, User>.AbpLoginResult> GetLoginResultAsync(
+            string usernameOrEmailAddress, string password, string tenancyName)
         {
             var loginResult = await _userManager.LoginAsync(usernameOrEmailAddress, password, tenancyName);
 
@@ -192,7 +195,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 case AbpLoginResultType.Success:
                     return loginResult;
                 default:
-                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, usernameOrEmailAddress, tenancyName);
+                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result,
+                        usernameOrEmailAddress, tenancyName);
             }
         }
 
@@ -258,14 +262,23 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                 CurrentUnitOfWork.SetTenantId(tenant.Id);
 
-                if (!await SettingManager.GetSettingValueForTenantAsync<bool>(AppSettings.UserManagement.AllowSelfRegistration, tenant.Id))
+                if (
+                    !await
+                        SettingManager.GetSettingValueForTenantAsync<bool>(
+                            AppSettings.UserManagement.AllowSelfRegistration, tenant.Id))
                 {
                     throw new UserFriendlyException(L("SelfUserRegistrationIsDisabledMessage_Detail"));
                 }
 
                 //Getting tenant-specific settings
-                var isNewRegisteredUserActiveByDefault = await SettingManager.GetSettingValueForTenantAsync<bool>(AppSettings.UserManagement.IsNewRegisteredUserActiveByDefault, tenant.Id);
-                var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueForTenantAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin, tenant.Id);
+                var isNewRegisteredUserActiveByDefault =
+                    await
+                        SettingManager.GetSettingValueForTenantAsync<bool>(
+                            AppSettings.UserManagement.IsNewRegisteredUserActiveByDefault, tenant.Id);
+                var isEmailConfirmationRequiredForLogin =
+                    await
+                        SettingManager.GetSettingValueForTenantAsync<bool>(
+                            AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin, tenant.Id);
 
                 var user = new User
                 {
@@ -297,7 +310,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                     model.UserName = model.EmailAddress;
                     model.Password = Authorization.Users.User.CreateRandomPassword();
 
-                    if (string.Equals(externalLoginInfo.Email, model.EmailAddress, StringComparison.InvariantCultureIgnoreCase))
+                    if (string.Equals(externalLoginInfo.Email, model.EmailAddress,
+                        StringComparison.InvariantCultureIgnoreCase))
                     {
                         user.IsEmailConfirmed = true;
                     }
@@ -329,7 +343,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 }
 
                 //Notifications
-                await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.ToUserIdentifier());
+                await
+                    _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.ToUserIdentifier());
                 await _appNotifier.WelcomeToTheApplicationAsync(user);
                 await _appNotifier.NewUserRegisteredAsync(user);
 
@@ -352,7 +367,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                         return Redirect(Url.Action("Index", "Application"));
                     }
 
-                    Logger.Warn("New registered user could not be login. This should not be normally. login result: " + loginResult.Result);
+                    Logger.Warn("New registered user could not be login. This should not be normally. login result: " +
+                                loginResult.Result);
                 }
 
                 return View("RegisterResult", new RegisterResultViewModel
@@ -389,7 +405,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             }
 
             var tenant = AsyncHelper.RunSync(() => GetActiveTenantAsync(tenancyName));
-            return SettingManager.GetSettingValueForTenant<bool>(AppSettings.UserManagement.UseCaptchaOnRegistration, tenant.Id);
+            return SettingManager.GetSettingValueForTenant<bool>(AppSettings.UserManagement.UseCaptchaOnRegistration,
+                tenant.Id);
         }
 
         private void CheckSelfRegistrationIsEnabled()
@@ -409,7 +426,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             }
 
             var tenant = AsyncHelper.RunSync(() => GetActiveTenantAsync(tenancyName));
-            return SettingManager.GetSettingValueForTenant<bool>(AppSettings.UserManagement.AllowSelfRegistration, tenant.Id);
+            return SettingManager.GetSettingValueForTenant<bool>(AppSettings.UserManagement.AllowSelfRegistration,
+                tenant.Id);
         }
 
         #endregion
@@ -448,7 +466,9 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             CheckModelState();
 
-            var tenantId = model.TenantId.IsNullOrEmpty() ? (int?)null : SimpleStringCipher.Instance.Decrypt(model.TenantId).To<int>();
+            var tenantId = model.TenantId.IsNullOrEmpty()
+                ? (int?)null
+                : SimpleStringCipher.Instance.Decrypt(model.TenantId).To<int>();
             var userId = SimpleStringCipher.Instance.Decrypt(model.UserId).To<long>();
 
             _unitOfWorkManager.Current.SetTenantId(tenantId);
@@ -468,7 +488,9 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             CheckModelState();
 
-            var tenantId = model.TenantId.IsNullOrEmpty() ? (int?)null : SimpleStringCipher.Instance.Decrypt(model.TenantId).To<int>();
+            var tenantId = model.TenantId.IsNullOrEmpty()
+                ? (int?)null
+                : SimpleStringCipher.Instance.Decrypt(model.TenantId).To<int>();
             var userId = Convert.ToInt64(SimpleStringCipher.Instance.Decrypt(model.UserId));
 
             _unitOfWorkManager.Current.SetTenantId(tenantId);
@@ -530,15 +552,19 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             CheckModelState();
 
-            var tenantId = model.TenantId.IsNullOrEmpty() ? (int?)null : SimpleStringCipher.Instance.Decrypt(model.TenantId).To<int>();
+            var tenantId = model.TenantId.IsNullOrEmpty()
+                ? (int?)null
+                : SimpleStringCipher.Instance.Decrypt(model.TenantId).To<int>();
             var userId = Convert.ToInt64(SimpleStringCipher.Instance.Decrypt(model.UserId));
 
             _unitOfWorkManager.Current.SetTenantId(tenantId);
 
             var user = await _userManager.GetUserByIdAsync(userId);
-            if (user == null || user.EmailConfirmationCode.IsNullOrEmpty() || user.EmailConfirmationCode != model.ConfirmationCode)
+            if (user == null || user.EmailConfirmationCode.IsNullOrEmpty() ||
+                user.EmailConfirmationCode != model.ConfirmationCode)
             {
-                throw new UserFriendlyException(L("InvalidEmailConfirmationCode"), L("InvalidEmailConfirmationCode_Detail"));
+                throw new UserFriendlyException(L("InvalidEmailConfirmationCode"),
+                    L("InvalidEmailConfirmationCode_Detail"));
             }
 
             user.IsEmailConfirmed = true;
@@ -686,7 +712,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 case AbpLoginResultType.UnknownExternalLogin:
                     return await RegisterView(loginInfo, tenancyName);
                 default:
-                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result, loginInfo.Email ?? loginInfo.DefaultUserName, tenancyName);
+                    throw _abpLoginResultTypeHelper.CreateExceptionForFailedLoginAttempt(loginResult.Result,
+                        loginInfo.Email ?? loginInfo.DefaultUserName, tenancyName);
             }
         }
 
@@ -695,7 +722,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             var name = loginInfo.DefaultUserName;
             var surname = loginInfo.DefaultUserName;
 
-            var extractedNameAndSurname = TryExtractNameAndSurnameFromClaims(loginInfo.ExternalIdentity.Claims.ToList(), ref name, ref surname);
+            var extractedNameAndSurname = TryExtractNameAndSurnameFromClaims(
+                loginInfo.ExternalIdentity.Claims.ToList(), ref name, ref surname);
 
             var viewModel = new RegisterViewModel
             {
@@ -813,7 +841,6 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
             var result = await SaveImpersonationTokenAndGetTargetUrl(model.TenantId, model.UserId, false);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            OrganizationIdSetIntoClaim(model.UserId);
             return result;
         }
 
@@ -821,6 +848,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         public virtual async Task<ActionResult> ImpersonateSignIn(string tokenId)
         {
             var cacheItem = await _cacheManager.GetImpersonationCache().GetOrDefaultAsync(tokenId);
+            var userId = cacheItem.TargetUserId;
             if (cacheItem == null)
             {
                 throw new UserFriendlyException(L("ImpersonationTokenErrorMessage"));
@@ -840,12 +868,14 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 //Add claims for audit logging
                 if (cacheItem.ImpersonatorTenantId.HasValue)
                 {
-                    identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorTenantId, cacheItem.ImpersonatorTenantId.Value.ToString(CultureInfo.InvariantCulture)));
+                    identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorTenantId,
+                        cacheItem.ImpersonatorTenantId.Value.ToString(CultureInfo.InvariantCulture)));
                 }
 
-                identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorUserId, cacheItem.ImpersonatorUserId.ToString(CultureInfo.InvariantCulture)));
+                identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorUserId,
+                    cacheItem.ImpersonatorUserId.ToString(CultureInfo.InvariantCulture)));
             }
-
+            await OrganizationIdSetIntoClaim(userId, identity);
             //Sign in with the target user
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
@@ -868,13 +898,16 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 throw new UserFriendlyException(L("NotImpersonatedLoginErrorMessage"));
             }
 
-            var result = await SaveImpersonationTokenAndGetTargetUrl(AbpSession.ImpersonatorTenantId, AbpSession.ImpersonatorUserId.Value, true);
+            var result =
+                await
+                    SaveImpersonationTokenAndGetTargetUrl(AbpSession.ImpersonatorTenantId,
+                        AbpSession.ImpersonatorUserId.Value, true);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            OrganizationIdSetIntoClaim(AbpSession.ImpersonatorUserId.Value);
             return result;
         }
 
-        private async Task<JsonResult> SaveImpersonationTokenAndGetTargetUrl(int? tenantId, long userId, bool isBackToImpersonator)
+        private async Task<JsonResult> SaveImpersonationTokenAndGetTargetUrl(int? tenantId, long userId,
+            bool isBackToImpersonator)
         {
             //Create a cache item
             var cacheItem = new ImpersonationCacheItem(
@@ -903,7 +936,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             }
 
             //Create target URL
-            var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/ImpersonateSignIn?tokenId=" + tokenId;
+            var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/ImpersonateSignIn?tokenId=" +
+                            tokenId;
             return Json(new MvcAjaxResponse { TargetUrl = targetUrl });
         }
 
@@ -948,12 +982,14 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Add claims for audit logging
             if (cacheItem.ImpersonatorTenantId.HasValue)
             {
-                identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorTenantId, cacheItem.ImpersonatorTenantId.Value.ToString(CultureInfo.InvariantCulture)));
+                identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorTenantId,
+                    cacheItem.ImpersonatorTenantId.Value.ToString(CultureInfo.InvariantCulture)));
             }
 
             if (cacheItem.ImpersonatorUserId.HasValue)
             {
-                identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorUserId, cacheItem.ImpersonatorUserId.Value.ToString(CultureInfo.InvariantCulture)));
+                identity.AddClaim(new Claim(AbpClaimTypes.ImpersonatorUserId,
+                    cacheItem.ImpersonatorUserId.Value.ToString(CultureInfo.InvariantCulture)));
             }
 
             //Sign in with the target user
@@ -992,7 +1028,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             }
 
             //Create target URL
-            var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/SwitchToLinkedAccountSignIn?tokenId=" + tokenId;
+            var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) +
+                            "Account/SwitchToLinkedAccountSignIn?tokenId=" + tokenId;
             return Json(new MvcAjaxResponse { TargetUrl = targetUrl });
         }
 
@@ -1020,20 +1057,52 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         #endregion
 
 
-        private async Task OrganizationIdSetIntoClaim(long userId)
+        private async Task OrganizationIdSetIntoClaim(long userId, ClaimsIdentity identity)
         {
             var user = await _userManager.GetUserByIdAsync(userId);
-            var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
-            var identity = claimsPrincipal.Identity as ClaimsIdentity;
-            var tenantClaim = claimsPrincipal?.Claims.
-                FirstOrDefault(c => c.Type == "Application_UserOrgID");
-            if (tenantClaim != null)
-                identity.RemoveClaim(tenantClaim);
-
             if (user.DefaultOrganizationId.HasValue)
             {
                 identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId.Value)));
             }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [UnitOfWork]
+        [AbpMvcAuthorize]
+        [HttpPost]
+        public async Task<JsonResult> SetDefaultOrganizationToUser(IdInputExtensionDto<long> input)
+        {
+
+            var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+
+
+            // Set DefaultOrganizationId to the User
+            var user = await _userManager.FindByIdAsync(input.Id);
+            user.DefaultOrganizationId = input.OrganizationUnitId;
+            await _userManager.UpdateAsync(user);
+            if (claimsPrincipal != null)
+            {
+                var identity = claimsPrincipal.Identity as ClaimsIdentity;
+                var orgClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "Application_UserOrgID");
+                if (orgClaim != null)
+                {
+                    identity?.RemoveClaim(orgClaim);
+                }
+
+                identity?.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(input.OrganizationUnitId)));
+                var authenticationManager = System.Web.HttpContext.Current.GetOwinContext().Authentication;
+                authenticationManager.AuthenticationResponseGrant = new AuthenticationResponseGrant(new ClaimsPrincipal(identity), new AuthenticationProperties() { IsPersistent = false });
+
+            }
+            return Json(new MvcAjaxResponse
+            {
+
+            });
+
         }
     }
 }

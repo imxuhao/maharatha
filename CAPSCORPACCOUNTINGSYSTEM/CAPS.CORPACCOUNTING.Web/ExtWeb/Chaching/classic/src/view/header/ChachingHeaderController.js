@@ -4,7 +4,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
 
     setDefaultOrganizationOfCurrentUser : function(record) {
         Ext.Ajax.request({
-            url: abp.appPath + 'api/services/app/organizationUnit/SetDefaultOrganizationToUser',
+            url: abp.appPath + 'Account/SetDefaultOrganizationToUser',
             jsonData: Ext.encode({
                 organizationUnitId: record.get('value'),
                 id: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId

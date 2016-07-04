@@ -15,6 +15,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
 
                 var organizationClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "Application_UserOrgID");
                 if (string.IsNullOrEmpty(organizationClaim?.Value))
+
                 {
                     return null;
                 }
@@ -22,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
                 return organizationClaim.Value;
             }
         }
-
+      
         public string TenantId
         {
             get

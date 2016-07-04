@@ -19,6 +19,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
         [DisableAuditing]
         public async Task<GetCurrentLoginInformationsOutput> GetCurrentLoginInformations()
         {
+            var userOrganizationId = _customAppSessionSession.OrganizationId;
             var output = new GetCurrentLoginInformationsOutput
             {
                 User = (await GetCurrentUserAsync()).MapTo<UserLoginInfoDto>()
@@ -32,9 +33,9 @@ namespace CAPS.CORPACCOUNTING.Sessions
 
             }
 
-            if (_customAppSessionSession.OrganizationId != null)
+            if (userOrganizationId != null)
             {
-                output.UserOrganizationId = Convert.ToInt64(_customAppSessionSession.OrganizationId);
+                output.UserOrganizationId = Convert.ToInt64(userOrganizationId);
             }
 
             return output;

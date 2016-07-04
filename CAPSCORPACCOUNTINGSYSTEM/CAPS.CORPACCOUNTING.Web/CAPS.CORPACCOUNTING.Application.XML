@@ -9018,13 +9018,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.SetDefaultOrganizationToUser(CAPS.CORPACCOUNTING.Masters.Dto.IdInputExtensionDto{System.Int64})">
-            <summary>
-            Set Defalut Organization To User
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get Organization List
@@ -9068,12 +9061,6 @@
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetOrganizationsListByUserId(Abp.Application.Services.Dto.IdInput{System.Int64})">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.SetDefaultOrganizationToUser(CAPS.CORPACCOUNTING.Masters.Dto.IdInputExtensionDto{System.Int64})">
             <summary>
             
             </summary>

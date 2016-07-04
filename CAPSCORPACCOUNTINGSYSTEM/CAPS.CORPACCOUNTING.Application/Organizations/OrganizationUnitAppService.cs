@@ -34,6 +34,7 @@ using CAPS.CORPACCOUNTING.Configuration.Organization;
 using Abp.Runtime.Session;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
+using Microsoft.AspNet.Identity;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
@@ -471,31 +472,5 @@ namespace CAPS.CORPACCOUNTING.Organizations
                  select new NameValueDto { Name = org.DisplayName, Value = org.Id.ToString() }).ToListAsync();
             return organizations;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public async Task SetDefaultOrganizationToUser(IdInputExtensionDto<long> input)
-        {
-            if (_customAppSession.TenantId != null)
-                _unitOfWorkManager.Current.SetTenantId(Convert.ToInt32(_customAppSession.TenantId));
-
-            var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
-
-            // Set DefaultOrganizationId to the User
-            var user = await UserManager.GetUserByIdAsync(input.Id);
-            user.DefaultOrganizationId = input.OrganizationUnitId;
-            await UserManager.UpdateAsync(user);
-            await CurrentUnitOfWork.SaveChangesAsync();
-
-            var identity = claimsPrincipal.Identity as ClaimsIdentity;
-            var tenantClaim = claimsPrincipal?.Claims.
-                FirstOrDefault(c => c.Type == "Application_UserOrgID");
-            if (tenantClaim != null)
-                identity.RemoveClaim(tenantClaim);
-
-            identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(input.OrganizationUnitId)));
-        }
-
     }
 }

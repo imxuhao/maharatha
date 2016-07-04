@@ -24,7 +24,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         Task DeleteOrganizationUnit(IdInput<long> input);
 
         Task AddUserToOrganizationUnit(UserToOrganizationUnitInput input);
-        
+
         Task RemoveUserFromOrganizationUnit(UserToOrganizationUnitInput input);
 
         Task<bool> IsInOrganizationUnit(UserToOrganizationUnitInput input);
@@ -35,14 +35,6 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetOrganizationsListByUserId(IdInput<long> input);
-
-
-        /// <summary>
-        /// Set Defalut Organization To User
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task SetDefaultOrganizationToUser(IdInputExtensionDto<long> input);
 
 
         /// <summary>

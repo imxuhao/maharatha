@@ -994,5 +994,13 @@
     <text name="CompanyUserInformation" value="User Information" />
     <text name="SaveCompanySetup" value="Save Company Setup" />
     <text name="SaveCompanyPreferences" value="Save Company Preferences" />
+  <text name="CreditMemo" value="Credit Memo" />
+  <text name="QuickPay" value="Quick Pay" />
+  <text name="CheckDate" value="Check date" />
+  <text name="PayType" value="Pay type" />
+  <text name="PrintPDF" value="Print PDF" />
+  <text name="PrintWord" value="Print Word" />
+  <text name="Invoice" value="Invoice" />
+  <text name="VendorSnapshot" value="Vendor Snapshot" />
   </texts>
 </localizationDictionary>

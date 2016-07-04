@@ -29,6 +29,15 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGridController', {
                     bankStore.getProxy().setExtraParam('query', record.get('bankAccount'));
                     bankStore.load();
                 }
+
+                if (record.get('accountingDocumentId')) {
+                    if (!record.get('isPosted')) {
+                        var btnPost = formPanel.down('button[itemId=PostBtn]');
+                        btnPost.show();
+                    }
+                    var btnExport = formPanel.down('button[itemId=PrintBtn]');
+                    btnExport.show();
+                }
             }
         }
     }

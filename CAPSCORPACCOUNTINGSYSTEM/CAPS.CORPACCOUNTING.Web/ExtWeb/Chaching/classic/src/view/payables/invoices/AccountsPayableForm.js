@@ -19,9 +19,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
     autoScroll: false,
     border: false,
     frame: false,
-    //tbar: ['->', { xtype: 'button', text: 'Apply' }],
-   
-    rbar: [{ xtype: 'panel', layout: { type: 'vbox', pack: 'center' }, title: 'Vendor Snapshot', collapsed: true, collapsible: true, collapseDirection: 'right', headerPosition: 'top', flex: 1, width: 250 }],
+    rbar: [{ xtype: 'panel', layout: { type: 'vbox', pack: 'center' }, title: app.localize('VendorSnapshot'), collapsed: true, collapsible: true, collapseDirection: 'right', headerPosition: 'top', flex: 1, width: 250 }],
     initComponent: function () {
         var me = this;
         me.tbar=[
@@ -47,6 +45,8 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
                 xtype: 'button',
                 scale: 'small',
                 ui: 'actionButton',
+                itemId: 'PostBtn',
+                hidden:true,
                 text: abp.localization.localize("Post").toUpperCase(),
                 iconCls: 'fa  fa-files-o',
                 iconAlign: 'left'
@@ -55,6 +55,8 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
                 ui: 'actionButton',
                 iconCls: 'fa fa-download',
                 iconAlign: 'left',
+                itemId: 'PrintBtn',
+                hidden:true,
                 menu: new Ext.menu.Menu({
                     ui: 'accounts',
                     items: [

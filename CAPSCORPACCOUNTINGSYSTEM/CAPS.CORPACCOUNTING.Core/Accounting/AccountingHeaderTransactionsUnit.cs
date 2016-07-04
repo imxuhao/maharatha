@@ -84,7 +84,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [Display(Name = "Sales Log")]
         SalesLog = 16,
         [Display(Name = "AMEX Log")]
-        AMEXLog = 17
+        AMEXLog = 17,
+        [Display(Name = "QuickPay")]
+        QuickPay = 18
     }
     public enum TypeOfCheckGroup
     {

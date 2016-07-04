@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.AutoMapper;
+using Abp.Runtime.Validation;
 
 namespace CAPS.CORPACCOUNTING.Payables.Dto
 {
@@ -10,13 +11,13 @@ namespace CAPS.CORPACCOUNTING.Payables.Dto
     /// InvoiceEntryDocument InputDto
     /// </summary>
     [AutoMapTo(typeof(ApHeaderTransactions))]
-    public class APHeaderTransactionsInputUnit :AccountingHeaderTransactionInputUnit
+    public class APHeaderTransactionsInputUnit : AccountingHeaderTransactionInputUnit, ICustomValidate
     {
         ///<summary>Get Sets the BatchId dfield.</summary>
         public int? BatchId { get; set; }
 
         ///<summary>Get Sets the VendorId field.</summary>
-        [Range(1,Int32.MaxValue)]
+        [Range(1, Int32.MaxValue)]
         public int? VendorId { get; set; }
 
         ///<summary>Get Sets the TypeOfInvoiceId field.</summary>
@@ -80,5 +81,20 @@ namespace CAPS.CORPACCOUNTING.Payables.Dto
         /// Get Sets the DueDate field.
         /// </summary>
         public DateTime? DueDate { get; set; }
+
+        public void AddValidationErrors(List<ValidationResult> results)
+        {
+            if (TypeOfInvoiceId == TypeOfInvoice.QuickPay)
+            {
+                if (BankAccountId == null)
+                    results.Add(new ValidationResult("Bank field is required"));
+                else if (PaymentDate == null)
+                {
+                    results.Add(new ValidationResult("CheckDate field is required"));
+                }
+                else if (string.IsNullOrEmpty(PaymentNumber))
+                    results.Add(new ValidationResult("Check# field is required"));
+            }
+        }
     }
 }

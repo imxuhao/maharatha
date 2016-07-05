@@ -1002,5 +1002,15 @@
   <text name="PrintWord" value="Print Word" />
   <text name="Invoice" value="Invoice" />
   <text name="VendorSnapshot" value="Vendor Snapshot" />
+  <text name="EditPO" value="Edit PO" />
+  <text name="CreatePO" value="Create PO" />
+<text name="ViewPO" value="View PO" />
+<text name="TransDate" value="Trans date" />
+<text name="TotalOrder" value="Total order" />
+<text name="RemainingBalance" value="Rem. Balance" />
+<text name="PendingTrans" value="Pending Trans" />
+<text name="PurchaseOrder" value="Purchase Orders" />
+<text name="Print" value="Print" />
+<text name="ApprovedBy" value="Approved By" />
   </texts>
 </localizationDictionary>

@@ -22,6 +22,7 @@
          'batchposting.batches',
          'banking.banksetup',
          'financials.fiscalperiod',
-         'receivables.customers'
+         'receivables.customers',
+         'purchaseorders.entry'
     ]
 });

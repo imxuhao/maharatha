@@ -2030,6 +2030,7 @@
     <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\JobAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\PoRangeAllocationModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\ProjectModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\purchaseorders\entry\PurchaseOrderModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\receivables\customers\CustomersModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RoleEditModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolePermissionsModel.js" />
@@ -2074,6 +2075,7 @@
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectCoaStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\LinesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\purchaseorders\entry\PurchaseOrderStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\receivables\customers\CustomersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
@@ -2294,6 +2296,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\projectmaintenance\ProjectsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\projects\ProjectsTabPanelController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\purchaseorders\entry\PurchaseOrderGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\purchaseorders\entry\PurchaseOrderGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomerForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomerFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomersGrid.js" />

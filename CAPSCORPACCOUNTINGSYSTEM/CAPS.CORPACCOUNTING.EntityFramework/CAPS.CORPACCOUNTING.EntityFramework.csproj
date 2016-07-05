@@ -1264,6 +1264,10 @@
     <Compile Include="Migrations\201607010653557_Modify_InvoiceEntryDocument_Table.Designer.cs">
       <DependentUpon>201607010653557_Modify_InvoiceEntryDocument_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607051815477_Add-OrganizationColumn-Tenant-Table.cs" />
+    <Compile Include="Migrations\201607051815477_Add-OrganizationColumn-Tenant-Table.Designer.cs">
+      <DependentUpon>201607051815477_Add-OrganizationColumn-Tenant-Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2131,6 +2135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607010653557_Modify_InvoiceEntryDocument_Table.resx">
       <DependentUpon>201607010653557_Modify_InvoiceEntryDocument_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607051815477_Add-OrganizationColumn-Tenant-Table.resx">
+      <DependentUpon>201607051815477_Add-OrganizationColumn-Tenant-Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

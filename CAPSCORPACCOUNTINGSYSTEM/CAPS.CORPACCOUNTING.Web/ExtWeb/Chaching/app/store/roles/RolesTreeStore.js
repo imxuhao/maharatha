@@ -23,17 +23,13 @@
 Ext.define('Chaching.store.roles.RolesTreeStore', {
     extend: 'Chaching.store.base.BaseTreeStore',
     model: 'Chaching.model.roles.RolePermissionsModel',
-    autoLoad: true,
+   // autoLoad: true,
     clearOnLoad:false,
     remoteFilter: false,
     remoteSort: false,
     statefulFilters:true,
-    //groupField: 'parentName',
-   // groupDir: 'DESC',
-    //storeId : 'permissionTreeStore',
     root: {
         expanded: true
-
     },
     proxy: {
       
@@ -62,7 +58,8 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
                 expanded: true,
                 name: null,
                 url: null,
-                checked: false,
+                checked: true,
+               // parent.get('isPermissionGranted') ? true : false
                 displayName: 'Pages',
                 children: [],
                 leaf: false
@@ -72,7 +69,8 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
                 parents = [];
             for (var i = 0; i < length; i++) {
                 var item = records[i];
-                if (item.get('parentName')==="Pages") {
+                if (item.get('parentName') === "Pages") {
+                    //item.checked = false;
                     parents.push(item);
                 }
             }
@@ -89,11 +87,13 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
     },
     buildChilds: function (parent, records) {
         var me = this;
+        parent.set('checked', parent.get('isPermissionGranted') ? true : false);
         var parentName = parent.get('name');
         if (!parent.data.children) parent.data.children = [];
         for (var i = 0; i < records.length; i++) {
             var record = records[i];
             if (record.get('parentName') === parentName) {
+                record.set('checked', record.get('isPermissionGranted') ? true : false);
                 parent.appendChild(record);
                 record.set('loaded', true);
                 record.set('expanded', true);

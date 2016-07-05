@@ -47,13 +47,23 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
             {
                 roleEditDto = new RoleEditDto();
             }
+            var permissionList = permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList();
+            if (grantedPermissions.Length > 0)
+            {
+                foreach (var grantedPermission in grantedPermissions)
+                {
+                    permissionList.Where(w => w.Name == grantedPermission.Name)
+                    .ToList()
+                    .ForEach(s => s.IsPermissionGranted = true);
+                }
+            }
 
             return new GetRoleForEditOutput
-                   {
-                       Role = roleEditDto,
-                       Permissions = permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList(),
-                       GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
-                   };
+            {
+                Role = roleEditDto,
+                Permissions = permissionList,//permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList(),
+                GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
+            };
         }
 
         public async Task CreateOrUpdateRole(CreateOrUpdateRoleInput input)
@@ -83,7 +93,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
             var role = await _roleManager.GetRoleByIdAsync(input.Role.Id.Value);
             role.DisplayName = input.Role.DisplayName;
             role.IsDefault = input.Role.IsDefault;
-            
+
             await UpdateGrantedPermissionsAsync(role, input.GrantedPermissionNames);
         }
 

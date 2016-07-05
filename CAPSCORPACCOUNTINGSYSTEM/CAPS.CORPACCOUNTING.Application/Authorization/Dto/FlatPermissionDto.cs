@@ -16,5 +16,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Dto
         public string Description { get; set; }
         
         public bool IsGrantedByDefault { get; set; }
+        public bool IsPermissionGranted { get; set; }
     }
 }

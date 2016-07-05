@@ -72,21 +72,9 @@ Ext.define('Chaching.view.roles.RolesForm',{
             hideHeaders: true,
             columns: [{
                 xtype: 'treecolumn',
-                //text: 'Flight Endpoints',
                 dataIndex: 'displayName',
-                flex: 1,
-                //renderer: function (val, meta, rec) {
-                //    if (rec.get('isLayover')) {
-                //        meta.tdStyle = 'color: gray; font-style: italic;';
-                //    }
-                //    return val;
-                //}
+                flex: 1
             }
-            //, {
-            //    //text: 'Duration',
-            //    dataIndex: 'text',
-            //    width: 100
-            //}
             ]
         }
         

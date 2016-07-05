@@ -27,7 +27,7 @@ Ext.define('Chaching.view.roles.RolesForm',{
         ui: 'dashboard',       
         items: [
         {
-            title: 'Roles',                            
+            title: app.localize('Roles'),                            
             items: [{
                 xtype: 'hiddenfield',
                 name: 'id',
@@ -59,13 +59,35 @@ Ext.define('Chaching.view.roles.RolesForm',{
             ],          
         },
         {
-            title:'Permissions',
+            title: app.localize('Permissions'),
+            layout : 'fit',
             xtype: 'treepanel',
             name: 'permissions',
             store: 'roles.RolesTreeStore',
-            rootVisible: true,
+            rootVisible: false,
             width: 400,
-            height: 500
+            height: 500,
+            alwaysReload: false,
+            scrollable: true,
+            hideHeaders: true,
+            columns: [{
+                xtype: 'treecolumn',
+                //text: 'Flight Endpoints',
+                dataIndex: 'displayName',
+                flex: 1,
+                //renderer: function (val, meta, rec) {
+                //    if (rec.get('isLayover')) {
+                //        meta.tdStyle = 'color: gray; font-style: italic;';
+                //    }
+                //    return val;
+                //}
+            }
+            //, {
+            //    //text: 'Duration',
+            //    dataIndex: 'text',
+            //    width: 100
+            //}
+            ]
         }
         
         ]

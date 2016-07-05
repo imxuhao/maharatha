@@ -1,4 +1,5 @@
 ﻿using Abp.MultiTenancy;
+using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
@@ -8,7 +9,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
     /// A tenant is a isolated customer for the application
     /// which has it's own users, roles and other application entities.
     /// </summary>
-    public class Tenant : AbpTenant<User>
+    public class Tenant : AbpTenant<User>,IMayHaveOrganizationUnit
     {
         //Can add application specific tenant properties here
         public virtual int? LajitId { get; set; }
@@ -22,5 +23,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         {
 
         }
+
+        public long? OrganizationUnitId { get; set; }
     }
 }

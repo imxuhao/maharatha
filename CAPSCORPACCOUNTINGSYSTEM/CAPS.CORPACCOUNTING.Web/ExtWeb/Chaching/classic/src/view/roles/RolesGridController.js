@@ -1,10 +1,13 @@
 Ext.define('Chaching.view.roles.RolesGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.roles-rolesgrid',
-    doAfterCreateAction: function (createNewMode, form) {       
+    doAfterCreateAction: function (createNewMode, form, isEdit, record) {       
         var me = this;
         var currentform = form;
         var data = {};
+        if (isEdit) {
+            data.id = record.get('id');
+        }
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/role/GetRoleForEdit',
             jsonData: Ext.encode(data),

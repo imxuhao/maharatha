@@ -49,8 +49,6 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
     },
     listeners: {
         load: function (permissionStore, records, success) {
-           
-            var transformedItem = [];
             var me = this;
             var pages = Ext.create(me.getModel().$className,{
                 text: 'Pages',
@@ -58,8 +56,7 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
                 expanded: true,
                 name: null,
                 url: null,
-                checked: true,
-               // parent.get('isPermissionGranted') ? true : false
+                checked: false,
                 displayName: 'Pages',
                 children: [],
                 leaf: false
@@ -69,8 +66,10 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
                 parents = [];
             for (var i = 0; i < length; i++) {
                 var item = records[i];
-                if (item.get('parentName') === "Pages") {
-                    //item.checked = false;
+                if (item.get('name') === "Pages" && item.get('parentId') === "root") {
+                    pages.set('checked', item.get('isPermissionGranted') ? true : false);
+                }
+                else if (item.get('parentName') === "Pages") {
                     parents.push(item);
                 }
             }

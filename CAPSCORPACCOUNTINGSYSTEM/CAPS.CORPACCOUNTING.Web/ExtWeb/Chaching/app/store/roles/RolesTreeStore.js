@@ -1,26 +1,4 @@
-﻿//Ext.define('Chaching.store.roles.RolesTreeStore', {
-//    extend: 'Chaching.store.base.BaseTreeStore',
-//    model: 'Chaching.model.roles.RolePermissionsModel',
-//    //proxy: {
-//    //    type: 'chachingProxy',
-//    //    actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-//    //    api: {
-//    //       // create: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
-//    //        read: abp.appPath + 'api/services/app/role/GetRoleForEdit',
-//    //       // update: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
-//    //       // destroy: abp.appPath + 'api/services/app/role/DeleteRole'
-//    //    }
-//    //},
-//    //listeners: {
-//    //    load: function (records, operation, success) {
-
-//    //    }
-//    //}
-//   // idPropertyField: 'id'//important to set for add/update of records
-//});
-
-
-Ext.define('Chaching.store.roles.RolesTreeStore', {
+﻿Ext.define('Chaching.store.roles.RolesTreeStore', {
     extend: 'Chaching.store.base.BaseTreeStore',
     model: 'Chaching.model.roles.RolePermissionsModel',
    // autoLoad: true,
@@ -36,10 +14,10 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
        type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
-           // create: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
+            create: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
             read: abp.appPath + 'api/services/app/role/GetRoleForEdit',
-           // update: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
-           // destroy: abp.appPath + 'api/services/app/role/DeleteRole'
+            update: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
+            destroy: abp.appPath + 'api/services/app/role/DeleteRole'
         },
         reader: {
             type: 'json',
@@ -58,6 +36,7 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
                 url: null,
                 checked: false,
                 displayName: 'Pages',
+                name : 'Pages',
                 children: [],
                 leaf: false
             });

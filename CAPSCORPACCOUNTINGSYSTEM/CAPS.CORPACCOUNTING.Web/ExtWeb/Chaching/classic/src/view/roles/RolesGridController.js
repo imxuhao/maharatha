@@ -2,8 +2,7 @@ Ext.define('Chaching.view.roles.RolesGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.roles-rolesgrid',
     doAfterCreateAction: function (createNewMode, form, isEdit, record) {       
-        var me = this,
-         currentform = form;
+        var me = this;
         if (form.down('treepanel')) {
             var treeStore = form.down('treepanel').getStore();
             if (isEdit) {

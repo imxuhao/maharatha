@@ -44,7 +44,7 @@ Ext.define('Chaching.view.roles.RolesForm',{
             ,{
                 xtype: 'checkbox',
                 boxLabel: app.localize('Default'),
-                name: 'default',
+                name: 'isDefault',
                 labelAlign: 'right',
                 inputValue: true,
                 checked: true,
@@ -63,6 +63,7 @@ Ext.define('Chaching.view.roles.RolesForm',{
             layout : 'fit',
             xtype: 'treepanel',
             name: 'permissions',
+            itemId : 'permissionsItemId',
             store: 'roles.RolesTreeStore',
             rootVisible: false,
             width: 400,
@@ -75,7 +76,16 @@ Ext.define('Chaching.view.roles.RolesForm',{
                 dataIndex: 'displayName',
                 flex: 1
             }
-            ]
+            ],
+            listeners: {
+                checkchange: function (node, checked, e, eOpts) {
+                    var me = this;
+                    var parentNode = node.parentNode;
+                    node.cascadeBy(function (n) {
+                        n.set('checked', checked);
+                    });
+                }
+            }
         }
         
         ]

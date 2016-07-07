@@ -1012,5 +1012,12 @@
 <text name="PurchaseOrder" value="Purchase Orders" />
 <text name="Print" value="Print" />
 <text name="ApprovedBy" value="Approved By" />
+<text name="CreateNewOrganization" value="Create New Organization" />
+<text name="Organization" value="Organization" />
+<text name="EditOrganization" value="Edit Organization" />
+<text name="ViewOrganization" value="View Organization" />
+<text name="OrganizationId" value="Organization Id" />
+<text name="OrganizationName" value="Name" />
+<text name="ConnectionString" value="Connection String" />
   </texts>
 </localizationDictionary>

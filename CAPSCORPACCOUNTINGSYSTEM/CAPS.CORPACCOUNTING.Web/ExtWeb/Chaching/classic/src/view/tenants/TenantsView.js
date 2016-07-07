@@ -8,8 +8,8 @@ Ext.define('Chaching.view.tenants.TenantsView', {
     ],
 
     controller: 'tenants-tenantsview',
-    height: 500,
-    width: 450,
+    height: 550,
+    width: 500,
     layout: 'fit',
     title: app.localize("Tenants"),
     defaultFocus: 'tenancyName',

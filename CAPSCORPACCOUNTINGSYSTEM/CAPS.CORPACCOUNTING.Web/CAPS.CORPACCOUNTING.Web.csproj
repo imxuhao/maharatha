@@ -1997,6 +1997,7 @@
     <Content Include="ExtWeb\Chaching\app.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanyModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\administration\organization\CompanySettingsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\administration\organization\OrganizationModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\auditlogs\AuditLogsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankCheckRangesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\banking\banksetup\BankSetupModel.js" />
@@ -2041,6 +2042,7 @@
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUserRoleListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\administration\organization\OrganizationsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\UserOrganizationListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUsersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
@@ -2150,6 +2152,12 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUserRolesGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUsersGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\CompanyUsersGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\organization\OrganizationViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupCheckNumberGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupCheckNumberGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\banking\banksetup\BankSetupForm.js" />

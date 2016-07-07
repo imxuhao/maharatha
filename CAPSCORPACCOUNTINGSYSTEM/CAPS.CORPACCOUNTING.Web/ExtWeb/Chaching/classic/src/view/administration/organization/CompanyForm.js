@@ -1,7 +1,7 @@
 ﻿Ext.define('Chaching.view.administration.organization.CompanyForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: [
-        'widget.organizationUnits.create', 'widget.organizationUnits.edit'
+        'widget.companysetup.create', 'widget.companysetup.edit'
     ],
     requires: [
     ],

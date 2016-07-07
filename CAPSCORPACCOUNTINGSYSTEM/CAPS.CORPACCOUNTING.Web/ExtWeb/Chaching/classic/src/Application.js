@@ -91,7 +91,8 @@ Ext.define('Chaching.Application', {
         'administration.organization.CompanyUsersStore',
         'administration.organization.CompanyUserRoleListStore',
         'payables.invoices.AccountsPayableDetailsStore',
-        'purchaseorders.entry.PurchaseOrderStore'
+        'purchaseorders.entry.PurchaseOrderStore',
+        'administration.organization.OrganizationsStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

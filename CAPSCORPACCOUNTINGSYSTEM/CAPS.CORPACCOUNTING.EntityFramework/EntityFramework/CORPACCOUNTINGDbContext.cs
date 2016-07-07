@@ -612,6 +612,8 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         public virtual IDbSet<SettingExtended> SettingExtended { get; set; }
 
+        public virtual IDbSet<PurchaseOrderHistory> PurchaseOrderHistory { get; set; }
+        
 
         #region Modification Log
 

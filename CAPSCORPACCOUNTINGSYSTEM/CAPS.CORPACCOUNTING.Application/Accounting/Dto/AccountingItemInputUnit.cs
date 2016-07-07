@@ -188,8 +188,7 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public decimal? CustomForexRate { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        [Range(1, Int64.MaxValue)]
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the IsAccountingItemSplit field. </summary>
         public bool IsAccountingItemSplit { get; set; }

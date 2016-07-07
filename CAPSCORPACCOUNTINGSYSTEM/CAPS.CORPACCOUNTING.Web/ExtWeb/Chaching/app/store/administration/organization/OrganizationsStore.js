@@ -5,9 +5,9 @@
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
-            create: abp.appPath + 'api/services/app/organizationUnit/CreateOrganizationUnit',
-            read: abp.appPath + 'api/services/app/organizationUnit/GetOrganizationUnits',
-            update: abp.appPath + 'api/services/app/organizationUnit/UpdateOrganizationUnit',
+            create: abp.appPath + 'api/services/app/organizationUnit/CreateHostOrganizationUnit',
+            read: abp.appPath + 'api/services/app/organizationUnit/GetHostOrganizationUnits',
+            update: abp.appPath + 'api/services/app/organizationUnit/UpdateHostOrganizationUnit',
             destroy: abp.appPath + 'api/services/app/organizationUnit/DeleteOrganizationUnit'
         }
     },

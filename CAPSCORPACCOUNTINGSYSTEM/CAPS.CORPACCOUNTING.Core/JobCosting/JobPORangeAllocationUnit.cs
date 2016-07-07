@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
     [Table("CAPS_JobPORangeAllocation")]
-    public class JobPORangeAllocationUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class JobPORangeAllocationUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxPoRangeStartNumberLength = 50;
         public const int MaxPoRangeEndNumberLength = 50;
@@ -38,7 +38,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual long PoRangeEndNumber { get; set; }
 
         /// <summary>Gets or sets the Company field. </summary>
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public virtual int TenantId { get; set; }

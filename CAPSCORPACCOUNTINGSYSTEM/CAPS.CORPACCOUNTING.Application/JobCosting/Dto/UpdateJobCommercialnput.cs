@@ -242,7 +242,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public string AgencyEmail { get; set; }
 
         /// <summary>Gets or Sets Company Field.  </summary>
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or Sets the JobLocations of the Job. </summary>
         public List<UpdateJobLocationInput> JobLocations { get; set; }

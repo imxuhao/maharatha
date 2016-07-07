@@ -26,6 +26,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public virtual long PoRangeEndNumber { get; set; }
 
         /// <summary>Gets or sets the Company field. </summary>
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
     }
 }

@@ -48,6 +48,14 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             icon: "icon-layers",
             requiredPermissionName: AppPermissions.Pages_Administration_OrganizationUnits
             )
+            )
+            .AddItem(new MenuItemDefinition(
+            PageNames.App.Common.CompanySetup,
+            L("MenuCompanySetup"),
+            url: "companysetup",
+            icon: "icon-layers",
+            requiredPermissionName: AppPermissions.Pages_Administration_CompanySetUp
+            )
             ).AddItem(new MenuItemDefinition(
             PageNames.App.Common.Roles,
             L("Roles"),

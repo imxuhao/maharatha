@@ -183,6 +183,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int? CPASProjId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
     }
 }

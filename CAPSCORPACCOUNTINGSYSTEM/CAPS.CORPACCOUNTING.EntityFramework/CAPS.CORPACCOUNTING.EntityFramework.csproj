@@ -1268,6 +1268,14 @@
     <Compile Include="Migrations\201607051815477_Add-OrganizationColumn-Tenant-Table.Designer.cs">
       <DependentUpon>201607051815477_Add-OrganizationColumn-Tenant-Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607070841528_Remove_IMustHaveOrganizationColumn_FromTables.cs" />
+    <Compile Include="Migrations\201607070841528_Remove_IMustHaveOrganizationColumn_FromTables.Designer.cs">
+      <DependentUpon>201607070841528_Remove_IMustHaveOrganizationColumn_FromTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607071126576_Add_PurchaseOrderHistory_Table.cs" />
+    <Compile Include="Migrations\201607071126576_Add_PurchaseOrderHistory_Table.Designer.cs">
+      <DependentUpon>201607071126576_Add_PurchaseOrderHistory_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2138,6 +2146,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607051815477_Add-OrganizationColumn-Tenant-Table.resx">
       <DependentUpon>201607051815477_Add-OrganizationColumn-Tenant-Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607070841528_Remove_IMustHaveOrganizationColumn_FromTables.resx">
+      <DependentUpon>201607070841528_Remove_IMustHaveOrganizationColumn_FromTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607071126576_Add_PurchaseOrderHistory_Table.resx">
+      <DependentUpon>201607071126576_Add_PurchaseOrderHistory_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

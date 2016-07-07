@@ -24,6 +24,6 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
 
         /// <summary>Gets or sets the OrganizationUnitId </summary>
        
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
     }
 }

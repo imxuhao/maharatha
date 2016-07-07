@@ -12,7 +12,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
     /// FiscalYear is the table name in lajit
     /// </summary>
     [Table("CAPS_FiscalYear")]
-    public class FiscalYearUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class FiscalYearUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         #region Class Property Declarations
 
@@ -62,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         public virtual int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
 
         #endregion
         public List<FiscalPeriodUnit> FiscalPeriodList { get; set; }

@@ -11,6 +11,7 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string Users = "Administration.Users";
                 public const string AuditLogs = "Administration.AuditLogs";
                 public const string OrganizationUnits = "Administration.OrganizationUnits";
+                public const string CompanySetup = "Administration.CompanySetup";
                 public const string Languages = "Administration.Languages";
             }
 

@@ -72,8 +72,7 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public string SearchNo { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        [Range(1, Int64.MaxValue, ErrorMessage = "Please setup the Organization")]
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the TypeofSubAccountId field. </summary>
         [EnumDataType(typeof(TypeofSubAccount),ErrorMessage = "TypeofSubAccount Field is required.")]

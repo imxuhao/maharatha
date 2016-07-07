@@ -1,110 +1,54 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Abp.Organizations;
-using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.JobCosting;
+using CAPS.CORPACCOUNTING.Masters;
 
-namespace CAPS.CORPACCOUNTING.Accounting
+namespace CAPS.CORPACCOUNTING.PurchaseOrders
 {
-    /// <summary>
-    /// Enum for TypeOfAmount
-    /// </summary>
-    public enum TypeOfAmount
+    public enum ModificationType
     {
-
-        [Display(Name = "Standard Entry")]
-        StandardEntry = 1,
-        [Display(Name = "A/P Clearing")]
-        APClearing = 2,
-        [Display(Name = "A/P Discount")]
-        APDiscount = 3,
-        [Display(Name = "A/R Clearing")]
-        ARClearing = 4,
-        [Display(Name = "A/R Discount")]
-        ARDiscount = 5,
-        [Display(Name = "P/R Clearing")]
-        PRClearing = 6,
-        [Display(Name = "Autobalance")]
-        Autobalance = 7,
-        [Display(Name = "Credit Card Clearing")]
-        CreditCardClearing = 8,
-        [Display(Name = "P/R Straight Time")]
-        PRStraightTime = 9,
-        [Display(Name = "P/R Overtime")]
-        PROvertime = 10,
-        [Display(Name = "P/R Tax")]
-        PRTax = 11,
-        [Display(Name = "P/R Work Comp")]
-        PRWorkComp = 12,
-        [Display(Name = "Petty Cash Offset")]
-        PettyCashOffset = 13,
-        [Display(Name = "Cash Offset")]
-        CashOffset = 14,
-        [Display(Name = "Year End Closing")]
-        YearEndClosing = 15,
-        [Display(Name = "Use AICP Line Total")]
-        UseAICPLineTotal = 16,
-        [Display(Name = "Use AICP Group Total")]
-        UseAICPGroupTotal = 17,
-        [Display(Name = "Budget")]
-        Budget = 18,
-        [Display(Name = "Producer Actual")]
-        ProducerActual = 19,
-        [Display(Name = "Flat Amount")]
-        FlatAmount = 20,
-        [Display(Name = "YTD Total")]
-        YTDTotal = 21,
-        [Display(Name = "A to K Expense")]
-        AtoKExpense = 22,
-        [Display(Name = "A to K Overage")]
-        AtoKOverage = 23,
-        [Display(Name = "Production Expense")]
-        ProductionExpense = 24,
-        [Display(Name = "Production Fee Overage")]
-        ProductionFeeOverage = 25,
-        [Display(Name = "Production Fee")]
-        ProductionFee = 26,
-        [Display(Name = "Director Fee")]
-        DirectorFee = 27,
-        [Display(Name = "Other Expense")]
-        OtherExpense = 28,
-        [Display(Name = "Overhead Expense")]
-        OverheadExpense = 29,
-        [Display(Name = "Revenue")]
-        Revenue = 30,
-        [Display(Name = "Other Revenue")]
-        OtherRevenue = 31,
-        [Display(Name = "Include Values")]
-        IncludeValues = 32,
-        [Display(Name = "Exclude Values")]
-        ExcludeValues = 33,
-        [Display(Name = "Gross Profit")]
-        GrossProfit = 34,
-        [Display(Name = "Net Profit")]
-        NetProfit = 35
+        [Display(Name = "Created")]
+        Created = 1,
+        [Display(Name = "Reduced")]
+        Reduced = 2,
+        [Display(Name = "Increased Amount")]
+        IncreasedAmount = 3,
+        [Display(Name = "Decreased Amount")]
+        DecreasedAmount = 4,
+        [Display(Name = "Line # change")]
+        Linechange = 5,
+        [Display(Name = "New Row Added")]
+        NewRowAdded = 6
     }
 
     /// <summary>
-    /// AccountingItem is the table name in lajit
-    /// </summary>
-    [Table("CAPS_AccountingItem")]
-    public class AccountingItemUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
+        /// This is the New table to maintain the History of PurchaseOrders
+        /// </summary>
+        [Table("CAPS_PurchaseOrderHistory")]
+    public class PurchaseOrderHistory : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
     {
-               
+
         #region Class Property Declarations
 
         /// <summary>Overriding the Id column with AccountingItemId </summary>
-        [Column("AccountingItemId")]
+        [Column("CAPS_PurchaseOrderHistoryId")]
         public override long Id { get; set; }
 
-        /// <summary>
-        /// Reference of Lajit IdentityColumn 
-        /// </summary>
-        public virtual long? LajitId { get; set; }
+        public virtual long AccountingItemId { get; set; }
+
+        [ForeignKey("AccountingItemId")]
+        public virtual PurchaseOrderEntryDocumentDetailUnit PurchaseOrderEntryDocumentDetailUnit { get; set; }
+
 
         /// <summary>Gets or sets the AccountingDocumentID field. </summary>
         public virtual long? AccountingDocumentId { get; set; }
@@ -292,7 +236,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Gets or sets the ICTAccountingItemID field. </summary>
         public virtual long? IctAccountingItemId { get; set; }
-        
+
 
         /// <summary>Gets or sets the TaxRebateID field. </summary>
         public virtual int? TaxRebateId { get; set; }
@@ -319,20 +263,30 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long? OrganizationUnitId { get; set; }
+        public virtual long OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the IsAccountingItemSplit field. </summary>
         public virtual bool IsAccountingItemSplit { get; set; }
 
+
+        /// <summary>Gets or sets the IsPrePaid field. </summary>   
+        public virtual bool IsPrePaid { get; set; }
+
+        /// <summary>Gets or sets the IsPOPurchase field. </summary>   
+        public virtual bool? IsPoPurchase { get; set; }
+
+        /// <summary>Gets or sets the IsPORental field. </summary>   
+        public virtual bool? IsPoRental { get; set; }
+
+        /// <summary>Gets or sets the VendorId field. </summary>   
+        public virtual int? VendorId { get; set; }
+
+        [ForeignKey("VendorId")]
+        public virtual VendorUnit Vendor { get; set; }
+
+        public virtual ModificationType? ModificationTypeId { get; set; }
+
+
         #endregion
-
-
-        public AccountingItemUnit()
-        {          
-            IsAsset = false;           
-            IsChanged = false;
-            IsActive = true;
-            IsEnterable = false;           
-        }
     }
 }

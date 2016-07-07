@@ -34,6 +34,6 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         public bool IsActive { get; set; }
 
         /// <summary>Gets or sets the OrganizationUnitId </summary>
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
     }
 }

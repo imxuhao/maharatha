@@ -106,8 +106,11 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         public virtual decimal? PoOriginalAmount { get; set; }
 
 
-        /// <summary>Gets or sets the IsColse field. </summary> 
-        public virtual bool? IsColse { get; set; }
+        /// <summary>Gets or sets the IsClose field. </summary> 
+        public virtual bool? IsClose { get; set; }
+
+        /// <summary>Gets or sets the CloseDate field. </summary> 
+        public virtual DateTime? CloseDate { get; set; }
 
         #endregion
         public PurchaseOrderEntryDocumentUnit()

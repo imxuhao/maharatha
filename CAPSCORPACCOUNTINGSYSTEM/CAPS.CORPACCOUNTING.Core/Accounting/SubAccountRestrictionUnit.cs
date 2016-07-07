@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// </summary>
 
     [Table("CAPS_SubAccountRestriction")]
-    public class SubAccountRestrictionUnit : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class SubAccountRestrictionUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>Overriding the Id column with SubAccountRestrictionId </summary>
         [Column("SubAccountRestrictionId")]
@@ -35,7 +35,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual bool IsActive { get; set; }
 
         /// <summary>Gets or sets the OrganizationUnitId </summary>
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the TenantId </summary>
         public virtual int TenantId { get; set; }

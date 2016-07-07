@@ -28,7 +28,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
         public bool IsActive { get; set; }       

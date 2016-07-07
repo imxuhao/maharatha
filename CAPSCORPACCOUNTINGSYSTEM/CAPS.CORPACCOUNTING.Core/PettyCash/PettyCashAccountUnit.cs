@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
     /// PettyCashAccount is the Table name in Lajit
     /// </summary>
     [Table("CAPS_PettyCashAccount")]
-    public class PettyCashAccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class PettyCashAccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         /// <summary>
         ///     Maximum length 
@@ -68,7 +68,7 @@ namespace CAPS.CORPACCOUNTING.PettyCash
         public virtual bool IsApproved { get; set; } // IsApproved
       
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long OrganizationUnitId {  get;  set;}
+        public virtual long? OrganizationUnitId {  get;  set;}
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public virtual int TenantId { get; set; }

@@ -1283,7 +1283,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput},System.Int64,System.Int64)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService.CreateorUpdateSubAccountRestrictions(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput},System.Int64,System.Nullable{System.Int64})">
             <summary>
             Create or Update SubAccountRestrictions
             </summary>
@@ -9011,9 +9011,30 @@
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.Address">
             <summary>Gets or sets the Address of the Organization. </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.CreateOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
+            <summary>
+            Create Company
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
+            <summary>
+            Update Company
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.DeleteOrganizationUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete Company
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetOrganizationsListByUserId(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
-            Get Organization List By UserId
+            Get Company List By UserId
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -9027,7 +9048,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateAllSettings(CAPS.CORPACCOUNTING.Configuration.Host.Dto.OrganizationManagementSettingsEditDto)">
             <summary>
-            Update Default Settings of Organization
+            Update Default Settings of Company
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -9039,9 +9060,37 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.CreateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
+            <summary>
+            Creating HostOrganization
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
+            <summary>
+            UpdatingHostOrganization
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetHostOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            GetHostOrganization
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetHostOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get OrganizationList(HOST)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
-            
+            Get ComapnySetup (Tenant Organizations)
             </summary>
             <param name="input"></param>
             <returns></returns>

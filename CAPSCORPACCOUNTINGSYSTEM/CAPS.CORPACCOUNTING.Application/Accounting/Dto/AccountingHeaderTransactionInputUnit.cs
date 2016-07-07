@@ -159,8 +159,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int? CPASProjId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        [Range(1,Int64.MaxValue,ErrorMessage = "Please setup the Organization.")]
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
 
         /// <summary>Get Sets the CronExpression field.</summary>
 

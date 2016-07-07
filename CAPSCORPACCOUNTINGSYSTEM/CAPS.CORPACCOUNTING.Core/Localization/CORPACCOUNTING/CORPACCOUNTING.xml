@@ -1019,5 +1019,8 @@
 <text name="OrganizationId" value="Organization Id" />
 <text name="OrganizationName" value="Name" />
 <text name="ConnectionString" value="Connection String" />
+ <text name="MenuCompanySetup" value="Company Setup" />
+
+    
   </texts>
 </localizationDictionary>

@@ -32,7 +32,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// ChartOfAccount  is the table name in lajit
     /// </summary>
     [Table("CAPS_ChartOfAccount")]
-    public class CoaUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit,INeedModLog
+    public class CoaUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit,INeedModLog
     {
         /// <summary>
         ///     Maximum length of the <see cref="Caption" /> property.
@@ -54,7 +54,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <summary>
         ///     Initializes a new instance of the <see cref="CoaUnit" /> class.
         /// </summary>
-        public CoaUnit(string caption, long organizationid,string desc = null,
+        public CoaUnit(string caption, long? organizationid,string desc = null,
             int? displaysequence = null, bool isactive = true, 
             bool isapproved = false,bool isprivate = false)
         {
@@ -100,7 +100,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual  int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual  long OrganizationUnitId { get; set; }
+        public virtual  long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the IsActive field. </summary>
         public virtual  bool IsActive { get; set; }

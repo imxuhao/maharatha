@@ -97,7 +97,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     /// Job is the table name in lajit
     /// </summary>
     [Table("CAPS_Job")]
-    public class JobUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class JobUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxJobNumberLength = 50;
         public const int MaxCaptionLength = 200;
@@ -176,7 +176,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set;}
@@ -199,7 +199,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public JobUnit(string jobnumber, string caption, bool iscorporatedefault, int chartofaccountid,
             long? rollupaccountid, int? typeofcurrencyid, int? rollupjobid, ProjectStatus? typeofjobstatusid,
             BudgetSoftware? typeofbidsoftwareid, int? rollupcenterid, bool isapproved, bool isactive, bool isictdivision,
-            long organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid,bool isdivision, int? taxcreditid)
+            long? organizationunitid, TypeofProject? typeofprojectid, int? taxrecoveryid,bool isdivision, int? taxcreditid)
         {
             JobNumber = jobnumber;
             Caption = caption;

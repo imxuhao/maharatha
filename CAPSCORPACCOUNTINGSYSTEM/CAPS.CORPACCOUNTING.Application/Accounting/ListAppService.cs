@@ -492,7 +492,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                         join podetails in _purchaseOrderEntryDocumentDetailUnitRepository.GetAll() on pounit.Id equals podetails.AccountingDocumentId.Value
                         select new
                         {
-                            Isclosed = pounit.IsColse,
+                            Isclosed = pounit.IsClose,
                             Description = pounit.Description,
                             DocumentReference = pounit.DocumentReference,
                             DocumentDate = pounit.DocumentDate,

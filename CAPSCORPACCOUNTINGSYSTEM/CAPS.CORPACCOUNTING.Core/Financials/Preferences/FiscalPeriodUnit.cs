@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
     /// FiscalPeriod is the table name in lajit
     /// </summary>
     [Table("CAPS_FiscalPeriod")]
-    public class FiscalPeriodUnit : FullAuditedEntity, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class FiscalPeriodUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         #region Class Property Declarations
 
@@ -67,7 +67,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences
         public virtual int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
 
         /// <summary>Gets or sets the MonthYear field. </summary>
         public virtual string MonthYear { get; set; }

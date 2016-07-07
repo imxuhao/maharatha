@@ -94,10 +94,69 @@ namespace CAPS.CORPACCOUNTING.Organizations
         }
 
         /// <summary>
-        /// 
+        /// Get OrganizationList(HOST)
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits)]
+        public async Task<PagedResultOutput<OrganizationUnitDto>> GetHostOrganizationUnits(SearchInputDto input)
+        {
+            var query = from organization in _organizationExtendedUnitRepository.GetAll()
+                        select new { organization };
+
+
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                var mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = query.CreateFilters(mapSearchFilters);
+            }
+           
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("organization.DisplayName ASC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+            return new PagedResultOutput<OrganizationUnitDto>(resultCount, results.Select(item =>
+            {
+                var dto = item.organization.MapTo<OrganizationUnitDto>();
+                return dto;
+            }).ToList());
+        }
+
+        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        public async Task CreateHostOrganizationUnit(CreateOrganizationUnitInput input)
+        {
+
+
+            var organizationUnit = new OrganizationExtended(AbpSession.TenantId, input.DisplayName, input.ParentId, input.TransmitterContactName,
+                input.TransmitterEmailAddress, input.TransmitterCode, input.TransmitterControlCode, input.FederalTaxId, null);
+
+            await _organizationExtendedUnitManager.CreateAsync(organizationUnit);
+            await CurrentUnitOfWork.SaveChangesAsync();
+        }
+
+     
+        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        public async Task  UpdateHostOrganizationUnit(UpdateOrganizationUnitInput input)
+        {
+
+            var organizationUnit = await _organizationExtendedUnitRepository.GetAsync(input.Id);
+            organizationUnit.DisplayName = input.DisplayName;
+            await _organizationExtendedUnitManager.UpdateAsync(organizationUnit);
+        }
+
+
+        /// <summary>
+        /// Get ComapnySetup (Tenant Organizations)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+
+        [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp)]
         public async Task<PagedResultOutput<OrganizationUnitDto>> GetOrganizationUnits(SearchInputDto input)
         {
             var query = from organization in _organizationExtendedUnitRepository.GetAll()
@@ -114,8 +173,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-
-            var items = await query.ToListAsync();
+         
 
             var resultCount = await query.CountAsync();
             var results = await query
@@ -162,7 +220,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         }
 
         [UnitOfWork]
-        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Edit)]
         public async Task<OrganizationUnitDto> CreateOrganizationUnit(CreateOrganizationUnitInput input)
         {
 
@@ -208,7 +266,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
             return organizationUnit.MapTo<OrganizationUnitDto>();
         }
 
-        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Create)]
         public async Task<OrganizationUnitDto> UpdateOrganizationUnit(UpdateOrganizationUnitInput input)
         {
 

@@ -45,8 +45,7 @@ namespace CAPS.CORPACCOUNTING.Financials.Preferences.Dto
         public bool? IsDefaultReportingYear { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        [Range(1,Int64.MaxValue)]
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
         public List<FiscalPeriodUnitInput> FiscalPeriodUnitList { get; set; }
         public void AddValidationErrors(List<ValidationResult> results)
         {

@@ -151,7 +151,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// AccountingDocument is the table name in lajit
     /// </summary>
     [Table("CAPS_AccountingDocument")]
-    public class AccountingHeaderTransactionsUnit : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
+    public class AccountingHeaderTransactionsUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
 
         /// <summary> Maximum length of the  Description property.</summary>
@@ -330,7 +330,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual int TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public virtual long OrganizationUnitId { get; set; }
+        public virtual long? OrganizationUnitId { get; set; }
 
         #endregion
         public AccountingHeaderTransactionsUnit() { }        
@@ -340,7 +340,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                  int? postedbyuserid, int? bankreccontrolid, bool isselected, bool isactive, bool isapproved, TypeOfInactiveStatus? typeofinactivestatusid,
                  bool? isbankrecomitted, bool? isictjournal, int? ictcompanyid, long? ictaccountingdocumentid, double? currencyoverriderate,
                  decimal? functionalcurrencycontroltotal, short? typeofcurrencyrateid, string memoline, bool? is13period, decimal? homecurrencyamount, decimal? customforexrate,
-                 bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid,  long organizationunitid)
+                 bool isposubmitforapproval, bool? iscpastran, int? cpasprojcloseid, int? cpasprojid,  long? organizationunitid)
         {
             Description = description;
             TypeOfAccountingDocumentId = typeofaccountingdocumentid;

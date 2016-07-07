@@ -56,7 +56,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public int? TaxRecoveryId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
 
         /// <summary> Gets or sets the JobDetails.</summary>
         public List<JobCommercialUnitDto> JobDetails { get; set; }

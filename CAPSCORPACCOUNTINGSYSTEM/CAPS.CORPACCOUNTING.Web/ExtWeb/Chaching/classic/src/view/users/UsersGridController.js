@@ -1,7 +1,7 @@
 Ext.define('Chaching.view.users.UsersGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.users-usersgrid',
-    doAfterCreateAction: function (createMode, formView, isEdit) {
+    doAfterCreateAction: function (createMode, formView, isEdit, record) {
 
         var me = this,
          form = formView.down('form').getForm();
@@ -14,11 +14,18 @@ Ext.define('Chaching.view.users.UsersGridController', {
         var companyListGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
         var companyListStore = companyListGrid.getStore();
         companyListStore.load();
-
+        var companyListTab = formView.down('*[itemId=companyListTab]');
         if (formView && isEdit) {
             form.findField('userName').setReadOnly(true);
+            //disable tabs
+            if (companyListTab) {
+                companyListTab.setDisabled(true);
+            }
         } else {
-
+            //enable tabs
+            if (companyListTab) {
+                companyListTab.setDisabled(false);
+            }
         }
         //var organizationStore = form.findField('organizationId').getStore();
         //organizationStore.load();

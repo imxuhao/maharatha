@@ -138,6 +138,8 @@ Ext.define('Chaching.view.users.UsersForm', {
             store: Ext.create('Chaching.store.roles.RolesStore')
         }, {
             title: abp.localization.localize("CompanyList"),
+            itemId: 'companyListTab',
+            disabled : true,
             layout : 'column',
             items : [{
                 columnWidth: 0.5,
@@ -150,7 +152,10 @@ Ext.define('Chaching.view.users.UsersForm', {
                 columns: [
                    { text: app.localize('CompanyName'), dataIndex: 'tenantName', flex: 1 }
                 ],
-                store: Ext.create('Chaching.store.administration.organization.TenantListStore')
+                store: Ext.create('Chaching.store.administration.organization.TenantListStore'),
+                listeners: {
+                    itemclick: 'loadCompanyRoles'
+                }
             }, {
                 columnWidth: 0.5,
                 padding: '0 0 0 20',
@@ -162,10 +167,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 columns: [
                    { text: app.localize('RoleName'), dataIndex: 'displayName', flex: 1 }
                 ],
-                store: Ext.create('Chaching.store.roles.RolesStore'),
-                listeners: {
-                    itemclick : 'loadCompanyRoles'
-                }
+                store: Ext.create('Chaching.store.roles.RolesStore')
             }]
 
            

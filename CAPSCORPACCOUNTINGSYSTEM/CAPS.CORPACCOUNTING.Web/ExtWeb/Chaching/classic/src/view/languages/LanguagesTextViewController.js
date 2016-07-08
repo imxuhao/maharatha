@@ -1,5 +1,15 @@
 Ext.define('Chaching.view.languages.LanguagesTextViewController', {
-    extend: 'Ext.app.ViewController',
-    alias: 'controller.languages-languagestextview'
+    extend: 'Chaching.view.common.window.ChachingWindowPanelController',
+    alias: 'controller.languages-languagestextview',
+    onWindowResize: function (wnd, width, height, oldWidth, oldHeight) {
+        debugger;
+        var me = this,
+            view = me.getView(),
+            form = view.down('form'),
+            grid = form.down('Languagetexts');
+        grid.setWidth(width);
+        grid.setHeight(height - 150);
+            
+    }
     
 });

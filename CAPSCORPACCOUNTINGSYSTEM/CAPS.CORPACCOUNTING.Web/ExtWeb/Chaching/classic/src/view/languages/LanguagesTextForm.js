@@ -160,7 +160,9 @@ Ext.define('Chaching.view.languages.LanguagesTextForm',{
             items: [
                 {
                     xtype: 'Languagetexts',
-                    layout: 'fit'
+                    layout: 'fit',
+                    //height: '100%',
+                    //width: '100%'
                 }
             ]
         }

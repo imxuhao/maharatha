@@ -18,11 +18,10 @@ Ext.define('Chaching.view.languages.LanguageTextsGridController', {
                 xtype: 'Languagetexts.editView'
             });
             formView.show();
-            debugger;
             var form = grid.up('form');
-            var basicForm = form.getForm();
-            var baseLanguage = basicForm.findField('baseLanguage');
-            var targetLanguage = basicForm.findField('targetLanguage');
+            //var basicForm = form.getForm();
+            //var baseLanguage = basicForm.findField('baseLanguage');
+            //var targetLanguage = basicForm.findField('targetLanguage');
            
             form.loadRecord(record);
 

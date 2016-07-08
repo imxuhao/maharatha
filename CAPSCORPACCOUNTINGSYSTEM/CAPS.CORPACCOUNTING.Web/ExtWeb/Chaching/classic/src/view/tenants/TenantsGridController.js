@@ -10,9 +10,10 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
             record.set('editionId', newValue);
         }
     },
-    doAfterCreateAction: function (createMode, formView, isEdit) {
+    doAfterCreateAction: function (createMode, formView, isEdit, record) {
         var me = this,
          form = formView.down('form').getForm();
+        var copyFromTenantsTab = formView.down('*[itemId=moduleListGridItemId]');
         if (formView && isEdit) {
             form.findField('tenancyName').setReadOnly(true);
             form.findField('isUseHostDatabase').setHidden(true);
@@ -22,11 +23,28 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
             form.findField('adminPasswordRepeat').setHidden(true);
             form.findField('adminEmailAddress').setReadOnly(true);
             form.findField('organizationUnitId').setReadOnly(true);
+            form.findField('adminEmailAddress').setHidden(true);
+            form.findField('shouldChangePasswordOnNextLogin').setHidden(true);
+            form.findField('sendActivationEmail').setHidden(true);
+            if (copyFromTenantsTab) {
+                copyFromTenantsTab.setDisabled(true);
+            }
+        } else {
+            if (copyFromTenantsTab) {
+                copyFromTenantsTab.setDisabled(false);
+            }
         }
         var organizationStore = form.findField('organizationUnitId').getStore();
         organizationStore.load();
         var viewModel = formView.down('form').getViewModel();
         var editionStore = viewModel.getStore('editionsForComboBox');
         editionStore.load();
+        //if (record.get('editionId') == null) {
+        //    form.findField('editionId').setValue('null');
+            
+        //    form.findField('editionId').setRawValue("Not assigned");
+            
+        //}
+        
     }
 });

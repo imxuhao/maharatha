@@ -4,9 +4,9 @@ Ext.define('Chaching.model.tenants.TenantsModel', {
         searchEntityName: 'Tenant'
     },
     fields: [
-        { name: 'id', type: 'int' },
+        { name: 'id', type: 'int',isPrimaryKey : true },
         { name: 'editionDisplayName', type: 'string' },
-        { name: 'editionId', type: 'int',defaultValue:null },
+        { name: 'editionId', type: 'int',defaultValue:null, convert:nullHandler },
         { name: 'isActive', type: 'boolean' },
         { name: 'name', type: 'string' },
         { name: 'tenancyName', type: 'string' },

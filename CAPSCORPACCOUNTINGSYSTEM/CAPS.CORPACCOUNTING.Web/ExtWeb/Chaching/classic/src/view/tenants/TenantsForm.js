@@ -187,7 +187,8 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             xtype: 'grid',
             cls: 'chaching-grid',
             itemId : 'moduleListGridItemId',
-            height : 400,
+            height: 400,
+            disabled : true,
             scrollable: true,
             selType: 'checkboxmodel',
             columns: [

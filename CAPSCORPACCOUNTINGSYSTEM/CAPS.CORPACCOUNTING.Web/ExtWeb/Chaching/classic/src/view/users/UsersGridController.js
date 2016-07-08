@@ -1,6 +1,31 @@
 Ext.define('Chaching.view.users.UsersGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.users-usersgrid',
+    doAfterCreateAction: function (createMode, formView, isEdit) {
+
+        var me = this,
+         form = formView.down('form').getForm();
+        //load roles list
+        var rolesGrid = formView.down('gridpanel[itemId=rolesListGridItemId]');
+        var rolesStore = rolesGrid.getStore();
+        rolesStore.load();
+
+        //load company list
+        var companyListGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
+        var companyListStore = companyListGrid.getStore();
+        companyListStore.load();
+
+        if (formView && isEdit) {
+            form.findField('userName').setReadOnly(true);
+        } else {
+
+        }
+        //var organizationStore = form.findField('organizationId').getStore();
+        //organizationStore.load();
+        //var viewModel = formView.down('form').getViewModel();
+        //var editionStore = viewModel.getStore('editionsForComboBox');
+        //editionStore.load();
+    },
     onEditComplete: function (editor, e) {
         var me = this,
             view = this.getView();

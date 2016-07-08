@@ -1024,6 +1024,8 @@
 <text name="OrganizationTenants" value="Tenant" />
 <text name="SelectOrganizationTenant" value="--Select Tenant--" />
 <text name="SelectTenantToCopyModules" value="Please select tenant to Copy Modules." />
+<text name="ModuleName" value="Module Name" />
+<text name="CompanyList" value="Company List" />
 
     
   </texts>

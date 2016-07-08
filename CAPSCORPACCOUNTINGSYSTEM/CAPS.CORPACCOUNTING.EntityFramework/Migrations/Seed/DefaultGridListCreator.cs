@@ -39,8 +39,9 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 new GridListUnit(gridid:22,name:"Fiscal Year",description:@"Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid",isactive:true),
                 new GridListUnit(gridid:23,name:"Accounts Payable",description:@"Chaching\classic\src\view\payables\invoices\AccountsPayableGrid",isactive:true),
                 new GridListUnit(gridid:24,name:"Customers",description:@"Chaching\classic\src\view\receivables\customers\CustomersGrid",isactive:true),
-                new GridListUnit(gridid:25,name:"Organization Units",description:@"Chaching\classic\src\view\administration\organization\CompanySetupGrid",isactive:true),
-                 new GridListUnit(gridid:26,name:"Purchase Orders",description:@"Chaching\classic\src\view\purchaseorders\entry\PurchaseOrderGrid",isactive:true)
+                new GridListUnit(gridid:25,name:"Organization Units",description:@"Chaching\classic\src\view\administration\organization\OrganizationGrid",isactive:true),
+                new GridListUnit(gridid:26,name:"Purchase Orders",description:@"Chaching\classic\src\view\purchaseorders\entry\PurchaseOrderGrid",isactive:true),
+                new GridListUnit(gridid:27,name:"Company Setup",description:@"Chaching\classic\src\view\administration\organization\CompanySetupGrid",isactive:true)
             };
         }
 

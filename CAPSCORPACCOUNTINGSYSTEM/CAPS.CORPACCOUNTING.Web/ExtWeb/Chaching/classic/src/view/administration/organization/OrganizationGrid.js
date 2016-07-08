@@ -18,7 +18,7 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
         destroy: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree')
     },
     padding: 5,
-    gridId: 27,
+    gridId: 25,
     headerButtonsConfig: [
       {
           xtype: 'displayfield',

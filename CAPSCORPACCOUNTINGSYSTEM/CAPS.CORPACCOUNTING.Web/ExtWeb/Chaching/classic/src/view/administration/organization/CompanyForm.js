@@ -8,10 +8,10 @@
     controller: 'administration-organization-companyform',
     name: 'companysetup',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Administration.OrganizationUnits'),
-        create: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
-        edit: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
-        destroy: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree')
+        read: abp.auth.isGranted('Pages.Administration.CompanySetUp'),
+        create: abp.auth.isGranted('Pages.Administration.CompanySetUp.Create'),
+        edit: abp.auth.isGranted('Pages.Administration.CompanySetUp.Edit'),
+        destroy: abp.auth.isGranted('Pages.Administration.CompanySetUp.Delete')
     },
     openInPopupWindow: false,
     hideDefaultButtons: true,

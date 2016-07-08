@@ -9,7 +9,7 @@ Ext.define('Chaching.view.users.UsersView', {
 
     controller: 'users-usersview',
     height: 600,
-    width: 450,
+    width: 600,
     layout: 'fit',
     title: app.localize("Users"),
     //defaultFocus: 'tenancyName',

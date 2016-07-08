@@ -9,16 +9,16 @@ Ext.define('Chaching.view.administration.organization.CompanySetupGrid', {
     controller: 'administration-organization-companysetupgrid',
 
     xtype: 'widget.companysetup',
-    store: 'administration.organization.CompanyStore',
-    name: 'Administration.OrganizationUnits',
+    name: "Administration.CompanySetUp",
+    store: 'administration.organization.CompanyStore',   
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Administration.OrganizationUnits'),
-        create: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
-        edit: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree'),
-        destroy: abp.auth.isGranted('Pages.Administration.OrganizationUnits.ManageOrganizationTree')
+        read: abp.auth.isGranted('Pages.Administration.CompanySetUp'),
+        create: abp.auth.isGranted('Pages.Administration.CompanySetUp.Create'),
+        edit: abp.auth.isGranted('Pages.Administration.CompanySetUp.Edit'),
+        destroy: abp.auth.isGranted('Pages.Administration.CompanySetUp.Delete')
     },
     padding: 5,
-    gridId: 25,
+    gridId: 27,
     headerButtonsConfig: [
       {
           xtype: 'displayfield',

@@ -22,14 +22,14 @@
         var companyListGridStore = view.down('gridpanel[itemId=companyListGridItemId]').getStore();
         var companyRecords = companyListGridStore.getModifiedRecords();
         if (rolesRecords && rolesRecords.length > 0) {
-            rolesListArray = [];
+           var rolesListArray = [];
             Ext.each(rolesRecords, function (rec) {
                 rolesListArray.push(rec.get('id'));
             });
             record.data.roleList = rolesListArray;
         }
         if (companyRecords && companyRecords.length > 0) {
-            companyListArray = [];
+            var companyListArray = [];
             Ext.each(companyRecords, function (rec) {
                 companyListArray.push(rec.get('tenantId'));
             });

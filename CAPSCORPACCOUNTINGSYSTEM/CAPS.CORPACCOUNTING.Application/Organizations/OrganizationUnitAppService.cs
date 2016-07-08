@@ -530,5 +530,18 @@ namespace CAPS.CORPACCOUNTING.Organizations
                  select new NameValueDto { Name = org.DisplayName, Value = org.Id.ToString() }).ToListAsync();
             return organizations;
         }
+
+        /// <summary>
+        /// Get Host OrganizationsList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetHostOrganizationsList()
+        {
+            var organizations= await (from organization in _organizationExtendedUnitRepository.GetAll()
+                                            
+            select new NameValueDto { Name = organization.DisplayName, Value = organization.Id.ToString() }).ToListAsync();
+            return organizations;
+        }
+      
     }
 }

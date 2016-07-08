@@ -93,5 +93,10 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<OrganizationUnitDto>> GetHostOrganizationUnits(SearchInputDto input);
+        /// <summary>
+        /// Get OrganizationList
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetHostOrganizationsList();
     }
 }

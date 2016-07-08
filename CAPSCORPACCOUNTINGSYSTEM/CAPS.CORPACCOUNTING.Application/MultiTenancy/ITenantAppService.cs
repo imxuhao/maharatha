@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
@@ -22,5 +23,12 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         Task UpdateTenantFeatures(UpdateTenantFeaturesInput input);
 
         Task ResetTenantSpecificFeatures(EntityRequestInput input);
+
+        /// <summary>
+        /// Get TenantList(CompanyList) By OrganizationId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<TenantListOutputDto>> GetTenantListByOrganizationId(IdInput<long> input);
     }
 }

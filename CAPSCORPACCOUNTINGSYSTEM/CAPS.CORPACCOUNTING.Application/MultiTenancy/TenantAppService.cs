@@ -13,10 +13,13 @@ using Abp.Linq.Extensions;
 using Abp.Runtime.Security;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Editions.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
+   
+
     [AbpAuthorize(AppPermissions.Pages_Tenants)]
     public class TenantAppService : CORPACCOUNTINGAppServiceBase, ITenantAppService
     {
@@ -60,7 +63,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 input.IsActive,
                 input.EditionId,
                 input.ShouldChangePasswordOnNextLogin,
-                input.SendActivationEmail);
+                input.SendActivationEmail,
+                input.OrganizationUnitId,input.SourceTenantId,input.ModuleList);
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]
@@ -110,6 +114,14 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         public async Task ResetTenantSpecificFeatures(EntityRequestInput input)
         {
             await TenantManager.ResetAllFeaturesAsync(input.Id);
+        }
+        public async Task<List<TenantListOutputDto>> GetTenantListByOrganizationId(IdInput<long> input)
+        {
+            var tenantList = await (from tenant in TenantManager.Tenants
+                                    where tenant.OrganizationUnitId == input.Id
+                                    select new TenantListOutputDto { TenantName = tenant.TenancyName, TenantId = tenant.Id }).ToListAsync();
+          
+            return tenantList;
         }
     }
 }

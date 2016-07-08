@@ -21,9 +21,9 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
             form.findField('adminPassword').setHidden(true);
             form.findField('adminPasswordRepeat').setHidden(true);
             form.findField('adminEmailAddress').setReadOnly(true);
-            form.findField('organizationId').setReadOnly(true);
+            form.findField('organizationUnitId').setReadOnly(true);
         }
-        var organizationStore = form.findField('organizationId').getStore();
+        var organizationStore = form.findField('organizationUnitId').getStore();
         organizationStore.load();
         var viewModel = formView.down('form').getViewModel();
         var editionStore = viewModel.getStore('editionsForComboBox');

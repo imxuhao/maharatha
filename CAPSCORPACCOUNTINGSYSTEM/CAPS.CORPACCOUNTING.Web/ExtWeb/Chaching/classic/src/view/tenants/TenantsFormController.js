@@ -13,14 +13,15 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
         var me = this,
           view = me.getView();
         var tenantStore = view.down('combobox[itemId=tenantItemId]').getStore();
-        var tenantRecord = tenantStore.findRecord('tenantName', cmp.getValue());
+        var tenantRecord = tenantStore.findRecord('tenancyName', cmp.getValue());
         if (tenantRecord == undefined && tenantStore.getCount() > 0) {
             view.down('gridpanel[itemId=moduleListGridItemId]').setDisabled(false);
         } else {
             view.down('gridpanel[itemId=moduleListGridItemId]').setDisabled(true);
         }
     },
-    onModuleSelect: function (selModel , selected , eOpts) {
+    onTenantSelect: function (selModel, selected, eOpts) {
+        debugger;
         var me = this,
            view = me.getView();
         var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
@@ -32,7 +33,7 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
                    { name: 'Vendors' },
                    { name: 'Users' },
                    { name: 'Customers' },
-                    { name: 'Employees' },
+                   { name: 'Employees' },
                    { name: 'Roles' },
                    { name: 'ChartofAccounts' },
                    { name: 'ProjectChartofAccounts' }
@@ -53,7 +54,7 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
         record.set('organizationUnit', values.id);
         record.set('sourceTenantId', tenantListCombo.getValue());
         if (moduleRecords && moduleRecords.length > 0) {
-            moduleListArray = [];
+            var moduleListArray = [];
             Ext.each(moduleRecords, function (rec) {
                 moduleListArray.push(rec.get('name'));
             });

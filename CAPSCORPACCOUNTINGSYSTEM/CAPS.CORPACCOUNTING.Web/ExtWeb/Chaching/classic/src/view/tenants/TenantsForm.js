@@ -10,6 +10,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
     name: 'Tenants',
     openInPopupWindow: true,
     hideDefaultButtons: false,
+
     scrollable: true,
     border: false,
     showFormTitle: false,
@@ -37,7 +38,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             },
             {
                 xtype: 'combobox',
-                name: 'organizationId',
+                name: 'organizationUnitId',
                 itemId : 'organizationId',
                 fieldLabel: app.localize('Organization').initCap(),
                 width: '100%',
@@ -48,7 +49,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 valueField: 'value',
                 allowBlank: false,
                 forceSelection : true,
-                store: Ext.create('Chaching.store.administration.organization.UserOrganizationListStore'),
+                store: Ext.create('Chaching.store.administration.organization.OrganizationListStore'),
                 listeners: {
                     select : 'onOrganizationSelect'
                 }
@@ -190,8 +191,29 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             scrollable: true,
             selType: 'checkboxmodel',
             columns: [
-               { text: app.localize('ModuleName'), dataIndex: 'name', flex: 1 }
+               { text: 'Module Name', dataIndex: 'name', flex : 1 }
             ],
+            dockedItems : [{
+                xtype : 'toolbar',
+                dock : 'top',
+                items : ['->', {
+                    xtype: 'combobox',
+                    itemId : 'tenantItemId',
+                    valueField : 'tenantId',
+                    displayField : 'tenantName',
+                    fieldLabel : app.localize('OrganizationTenants'),
+                    width: '100%',
+                    ui: 'fieldLabelTop',
+                    queryMode: 'local',
+                    forceSelection : true,
+                    emptyText: app.localize('SelectOrganizationTenant'),
+                    store: Ext.create('Chaching.store.administration.organization.TenantListStore'),
+                    listeners: {
+                        select: 'onTenantSelect'
+                    }
+
+                }]
+            }],
             store: {
                 fields: ['name'],
                 data : []
@@ -204,6 +226,10 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 //    { name: 'ProjectChartofAccounts' }
                 //]
             }
+            //,
+            //listeners: {
+            //    selectionchange: 'onModuleSelect'
+            //}
         }]
     }]
 

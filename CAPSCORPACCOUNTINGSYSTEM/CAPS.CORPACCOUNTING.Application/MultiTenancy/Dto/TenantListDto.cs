@@ -20,5 +20,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
         public bool IsActive { get; set; }
 
         public DateTime CreationTime { get; set; }
+
+        public int EditionId { get; set; }
+
+        public long? OrganizationUnitId { get; set; }
     }
 }

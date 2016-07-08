@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 using Abp.MultiTenancy;
@@ -34,5 +35,14 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
         public int? EditionId { get; set; }
 
         public bool IsActive { get; set; }
+
+        public long OrganizationUnitId { get; set; }
+
+
+        public int? SourceTenantId { get; set; }
+
+        public List<string> ModuleList { get; set; }
+
+       
     }
 }

@@ -393,8 +393,11 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
             var purchaseOrderHistory = new PurchaseOrderHistory();
             var PurchaseOrderHistoryList = new List<PurchaseOrderHistory>();
 
-            Mapper.CreateMap<PurchaseOrderEntryDocumentDetailUnit, PurchaseOrderHistory>();
+            Mapper.CreateMap<PurchaseOrderEntryDocumentDetailUnit, PurchaseOrderHistory>()
+               .ForMember(u => u.Id, ap => ap.Ignore());
+
             newDetailEntity.MapTo(purchaseOrderHistory);
+            purchaseOrderHistory.AccountingItemId = newDetailEntity.Id;
 
             if (!isCreatePOrder)
             {

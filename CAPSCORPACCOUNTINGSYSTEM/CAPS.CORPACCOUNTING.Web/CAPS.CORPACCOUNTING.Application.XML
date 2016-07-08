@@ -8641,6 +8641,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService.GetTenantListByOrganizationId(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Get TenantList(CompanyList) By OrganizationId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames">
             <summary>
             Common mime types. 
@@ -9081,6 +9088,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetHostOrganizationsList">
+            <summary>
+            Get OrganizationList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetHostOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get OrganizationList(HOST)
@@ -9112,6 +9125,12 @@
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetOrganizationsListByUserId(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
             
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetHostOrganizationsList">
+            <summary>
+            Get Host OrganizationsList
             </summary>
             <returns></returns>
         </member>

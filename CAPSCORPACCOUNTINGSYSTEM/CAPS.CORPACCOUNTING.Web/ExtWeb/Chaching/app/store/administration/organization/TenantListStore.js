@@ -6,7 +6,7 @@
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-        url: abp.appPath + 'api/services/app/organizationUnit/GetOrganizationsListByUserId',
+        url: abp.appPath + 'api/services/app/tenant/GetTenantListByOrganizationId',
         reader: {
             type: 'json',
             rootProperty: 'result'

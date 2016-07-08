@@ -24,5 +24,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
         [ForeignKey("VendorId")]
         public virtual VendorUnit Vendor { get; set; }
+
+        /// <summary>Gets or sets the OverRelieveAmount field. </summary>
+        public virtual decimal? OverRelieveAmount { get; set; }
     }
 }

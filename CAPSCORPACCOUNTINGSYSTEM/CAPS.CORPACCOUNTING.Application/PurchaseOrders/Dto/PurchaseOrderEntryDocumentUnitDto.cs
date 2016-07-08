@@ -127,6 +127,12 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders.Dto
         /// <summary>Get Sets the PendingTrans field.</summary>
         public virtual decimal? PendingTrans { get; set; }
 
+        /// <summary>Gets or sets the IsClose field. </summary> 
+        public bool? IsClose { get; set; }
+
+        /// <summary>Gets or sets the CloseDate field. </summary> 
+        public DateTime? CloseDate { get; set; }
+
 
     }
 }

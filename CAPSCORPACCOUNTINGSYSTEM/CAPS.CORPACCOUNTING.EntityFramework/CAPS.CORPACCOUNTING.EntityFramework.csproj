@@ -1276,6 +1276,10 @@
     <Compile Include="Migrations\201607071126576_Add_PurchaseOrderHistory_Table.Designer.cs">
       <DependentUpon>201607071126576_Add_PurchaseOrderHistory_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.cs" />
+    <Compile Include="Migrations\201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.Designer.cs">
+      <DependentUpon>201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2152,6 +2156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607071126576_Add_PurchaseOrderHistory_Table.resx">
       <DependentUpon>201607071126576_Add_PurchaseOrderHistory_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.resx">
+      <DependentUpon>201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

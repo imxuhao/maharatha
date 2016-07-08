@@ -28,13 +28,15 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         [Display(Name = "Line # change")]
         Linechange = 5,
         [Display(Name = "New Row Added")]
-        NewRowAdded = 6
+        NewRowAdded = 6,
+        [Display(Name = "Closed")]
+        Closed = 7
     }
 
     /// <summary>
-        /// This is the New table to maintain the History of PurchaseOrders
-        /// </summary>
-        [Table("CAPS_PurchaseOrderHistory")]
+    /// This is the New table to maintain the History of PurchaseOrders
+    /// </summary>
+    [Table("CAPS_PurchaseOrderHistory")]
     public class PurchaseOrderHistory : FullAuditedEntity<long>, IMustHaveTenant, IMustHaveOrganizationUnit
     {
 
@@ -286,6 +288,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
         public virtual ModificationType? ModificationTypeId { get; set; }
 
+        /// <summary>Gets or sets the OverRelieveAmount field. </summary>
+        public virtual decimal? OverRelieveAmount { get; set; }
 
         #endregion
     }

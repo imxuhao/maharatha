@@ -9150,6 +9150,21 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionDetailUnit(CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit,System.Int64)">
+            <summary>
+            Creating InvoiceEntryDocumnetDetails
+            </summary>
+            <param name="input"></param>
+            /// <param name="accountingDocumnetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.UpdateAPHeaderTransactionDetailUnit(CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit)">
+            <summary>
+            Updating APDetails
+            </summary>
+            <param name="invoiceEntryDocumentDetail"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto">
             <summary>
             /// <summary>
@@ -9317,6 +9332,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailUnitDto.PurchaseOrderReference">
             <summary>Gets or sets the PurchaseOrderReference field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailUnitDto.ActualAmount">
+            <summary>Gets or sets the ActualAmount field. </summary>   
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService">
             <summary>
@@ -10001,6 +10019,15 @@
         <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.IsClose">
             <summary>Gets or sets the IsClose field. </summary> 
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.CloseDate">
+            <summary>Gets or sets the CloseDate field. </summary> 
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit.AddValidationErrors(System.Collections.Generic.List{System.ComponentModel.DataAnnotations.ValidationResult})">
+            <summary>
+            
+            </summary>
+            <param name="results"></param>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto">
             <summary>
             
@@ -10124,6 +10151,12 @@
         <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.PendingTrans">
             <summary>Get Sets the PendingTrans field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.IsClose">
+            <summary>Gets or sets the IsClose field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.CloseDate">
+            <summary>Gets or sets the CloseDate field. </summary> 
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService">
             <summary>
             
@@ -10183,7 +10216,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Common.ApprovedSoxUnit,System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Common.ApprovedSoxUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderHistory,System.Int64})">
             <summary>
             
             </summary>
@@ -10251,6 +10284,23 @@
             Get CardHolder Information
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.CreatePurchaseOrderHistory(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Boolean)">
+            <summary>
+            Checks the accounting fields.
+            </summary>
+            <param name="originalDetailEntity"></param>
+            <param name="newDetailEntity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType``1(``0,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="originalOrderDetails"></param>
+            <param name="newOrderDetails"></param>
             <returns></returns>
         </member>
     </members>

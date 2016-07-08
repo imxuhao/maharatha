@@ -8,7 +8,7 @@ Ext.define('Chaching.view.tenants.TenantsView', {
     ],
 
     controller: 'tenants-tenantsview',
-    height: 550,
+    height: 600,
     width: 500,
     layout: 'fit',
     title: app.localize("Tenants"),
@@ -17,8 +17,8 @@ Ext.define('Chaching.view.tenants.TenantsView', {
         var me = this,
             controller = me.getController();
         var form = Ext.create('Chaching.view.tenants.TenantsForm', {
-            height: '100%',
-            width: '100%',
+           // height: '100%',
+           // width: '100%',
             name:'Tenants'
         });
         me.items = [form];

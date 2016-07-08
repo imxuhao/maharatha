@@ -11,7 +11,8 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
         }
     },
     doAfterCreateAction: function (createMode, formView, isEdit) {
-        var form = formView.down('form').getForm();
+        var me = this,
+         form = formView.down('form').getForm();
         if (formView && isEdit) {
             form.findField('tenancyName').setReadOnly(true);
             form.findField('isUseHostDatabase').setHidden(true);

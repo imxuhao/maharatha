@@ -1018,8 +1018,12 @@
 <text name="ViewOrganization" value="View Organization" />
 <text name="OrganizationId" value="Organization Id" />
 <text name="OrganizationName" value="Name" />
-<text name="ConnectionString" value="Connection String" />
- <text name="MenuCompanySetup" value="Company Setup" />
+<text name="ConnectionString" value="Connection String" /> 
+<text name="CopyFromTenants" value="Copy From Tenants" />
+<text name="MenuCompanySetup" value="Company Setup" />
+<text name="OrganizationTenants" value="Tenant" />
+<text name="SelectOrganizationTenant" value="--Select Tenant--" />
+<text name="SelectTenantToCopyModules" value="Please select tenant to Copy Modules." />
 
     
   </texts>

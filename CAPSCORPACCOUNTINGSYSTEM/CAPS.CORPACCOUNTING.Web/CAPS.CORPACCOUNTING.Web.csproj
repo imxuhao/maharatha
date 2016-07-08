@@ -2043,6 +2043,7 @@
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUserRoleListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\OrganizationsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\administration\organization\TenantListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\UserOrganizationListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUsersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />

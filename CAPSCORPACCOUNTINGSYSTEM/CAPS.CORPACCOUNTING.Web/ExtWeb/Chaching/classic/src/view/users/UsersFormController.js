@@ -15,7 +15,6 @@
     doPreSaveOperation: function (record, values, idPropertyField) {
         var me = this,
              view = me.getView();
-        //record = Ext.create('Chaching.model.tenants.TenantsModel');
         record.data.user = values;
         Ext.apply(record.data, values);
         //get roles information
@@ -38,22 +37,14 @@
         }
         
         return record;
-    },
+    }
+    ,
     showRandomPassword: function () {
         var me = this;
-        setRandomPassword = me.lookupReference('setRandomPassword');
         password = me.lookupReference('password');
         passwordRepeat = me.lookupReference('passwordRepeat');
-        if (setRandomPassword.value) {
-            password.hide();
-            passwordRepeat.hide();
-        }
-        else {
-            password.show();
-            passwordRepeat.show();
-        }
         password.reset();
         passwordRepeat.reset();
-    },
+    }
 
 });

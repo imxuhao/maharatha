@@ -31,11 +31,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
                 companyListTab.setDisabled(false);
             }
         }
-        //var organizationStore = form.findField('organizationId').getStore();
-        //organizationStore.load();
-        //var viewModel = formView.down('form').getViewModel();
-        //var editionStore = viewModel.getStore('editionsForComboBox');
-        //editionStore.load();
+       
     },
     onEditComplete: function (editor, e) {
         var me = this,

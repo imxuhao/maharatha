@@ -21,11 +21,12 @@ Ext.define('Chaching.view.users.UsersForm', {
 
     items: [{
         xtype: 'tabpanel',
-        ui: 'formTabPanels',
+        //ui: 'formTabPanels',
+        ui: 'submenuTabs',
         items : [{
             title: abp.localization.localize("UserInformations").initCap(),
             scrollable: true,
-           // iconCls: 'fa fa-gear',
+            iconCls: 'fa fa-user',
             defaults: {
                 labelWidth: 140
             },
@@ -71,7 +72,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 xtype: 'checkbox',
                 boxLabel: app.localize('SetRandomPassword'),
                 name: 'setRandomPassword',
-                reference: 'setRandomPassword',
+                reference: 'isSetRandomPassword',
                 labelAlign: 'right',
                 inputvalue: true,
                 checked: true,
@@ -89,9 +90,9 @@ Ext.define('Chaching.view.users.UsersForm', {
                  width: '100%',
                  ui: 'fieldLabelTop',
                  emptyText: app.localize('Password'),
-                 hidden: true
-
-
+                 bind: {
+                     hidden: '{isSetRandomPassword.checked}'
+                 }
              },
 
               {
@@ -103,7 +104,17 @@ Ext.define('Chaching.view.users.UsersForm', {
                   width: '100%',
                   ui: 'fieldLabelTop',
                   emptyText: app.localize('PasswordRepeat'),
-                  hidden: true
+                  bind: {
+                      hidden: '{isSetRandomPassword.checked}'
+                  },
+                  /*
+                * Custom validator implementation - checks that the value matches what was entered into
+                * the password1 field.
+                */
+                  validator: function (value) {
+                      var password1 = this.previousSibling('[name=password]');
+                      return (value === password1.getValue()) ? true : 'Passwords do not match.'
+                  }
               },
 
             {
@@ -126,6 +137,7 @@ Ext.define('Chaching.view.users.UsersForm', {
             ]
         }, {
             title: abp.localization.localize("Roles"),
+            iconCls: 'fa fa-briefcase',
             xtype: 'grid',
             cls: 'chaching-grid',
             itemId : 'rolesListGridItemId',
@@ -138,6 +150,7 @@ Ext.define('Chaching.view.users.UsersForm', {
             store: Ext.create('Chaching.store.roles.RolesStore')
         }, {
             title: abp.localization.localize("CompanyList"),
+            iconCls: 'fa fa-list',
             itemId: 'companyListTab',
             disabled : true,
             layout : 'column',
@@ -158,7 +171,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 }
             }, {
                 columnWidth: 0.5,
-                padding: '0 0 0 20',
+                padding: '0 0 0 10',
                 xtype: 'grid',
                 cls: 'chaching-grid',
                 itemId: 'companyRolesListGridItemId',

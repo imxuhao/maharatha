@@ -65,7 +65,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('TTenancyCodeName'),
                 listeners: {
-                    blur : 'onTenancyNameEnter'
+                    change : 'onTenancyNameEnter'
                 }
             }, {
                 xtype: 'textfield',
@@ -203,7 +203,8 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                     itemId : 'tenantItemId',
                     valueField : 'tenantId',
                     displayField : 'tenantName',
-                    fieldLabel : app.localize('OrganizationTenants'),
+                    fieldLabel: app.localize('OrganizationTenants'),
+                    submitValue : false,
                     width: '100%',
                     ui: 'fieldLabelTop',
                     queryMode: 'local',

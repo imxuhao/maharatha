@@ -33,9 +33,9 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
                 record.set('editionId', "null");
             }
         } else {
-            if (copyFromTenantsTab) {
-                copyFromTenantsTab.setDisabled(false);
-            }
+            //if (copyFromTenantsTab) {
+            //    copyFromTenantsTab.setDisabled(false);
+            //}
         }
         var organizationStore = form.findField('organizationUnitId').getStore();
         organizationStore.load();

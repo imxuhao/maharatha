@@ -8,11 +8,21 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
         var tenantStore = tenantListCombo.getStore();
         tenantStore.getProxy().setExtraParams({ id: combo.getValue() });
         tenantStore.load();
-       // me.onTenancyNameEnter(view.down('combobox[itemId=tenantItemId]'));
+        var tenancyNameField = view.down('textfield[itemId=tenancyName]');
+        if (tenancyNameField) {
+            me.enableDisableCopyTenantsTab(tenancyNameField);
+        }
     },
     onTenancyNameEnter: function (cmp, event, eOpts) {
+        var me = this;
+        var task = new Ext.util.DelayedTask(function () {
+            me.enableDisableCopyTenantsTab(cmp);
+        });
+        task.delay(1000);
+    },
+    enableDisableCopyTenantsTab : function(cmp) {
         var me = this,
-          view = me.getView();
+         view = me.getView();
         var tenantStore = view.down('combobox[itemId=tenantItemId]').getStore();
         var tenantRecord = tenantStore.findRecord('tenancyName', cmp.getValue());
         if (tenantRecord == undefined && tenantStore.getCount() > 0) {

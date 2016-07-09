@@ -9,6 +9,8 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.AutoMapper;
+using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
 using Abp.Notifications;
@@ -21,6 +23,9 @@ using CAPS.CORPACCOUNTING.Authorization.Users.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Users.Exporting;
 using CAPS.CORPACCOUNTING.Dto;
 using CAPS.CORPACCOUNTING.Notifications;
+using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
+using CAPS.CORPACCOUNTING.MultiTenancy;
+using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
@@ -32,19 +37,25 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         private readonly IUserListExcelExporter _userListExcelExporter;
         private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
         private readonly IAppNotifier _appNotifier;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly TenantManager _tenantManager;
+
+
 
         public UserAppService(
             RoleManager roleManager,
             IUserEmailer userEmailer,
             IUserListExcelExporter userListExcelExporter,
-            INotificationSubscriptionManager notificationSubscriptionManager, 
-            IAppNotifier appNotifier)
+            INotificationSubscriptionManager notificationSubscriptionManager,
+            IAppNotifier appNotifier, IUnitOfWorkManager unitOfWorkManager, TenantManager tenantManager)
         {
             _roleManager = roleManager;
             _userEmailer = userEmailer;
             _userListExcelExporter = userListExcelExporter;
             _notificationSubscriptionManager = notificationSubscriptionManager;
             _appNotifier = appNotifier;
+            _unitOfWorkManager = unitOfWorkManager;
+            _tenantManager = tenantManager;
         }
 
         public async Task<PagedResultOutput<UserListDto>> GetUsers(GetUsersInput input)
@@ -254,7 +265,60 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 user.SetNewEmailConfirmationCode();
                 await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
             }
+            if(!ReferenceEquals(input.TenantList,null))
+                await CreateUserforLinkedTenantAsync(input);
         }
+
+        protected virtual async Task CreateUserforLinkedTenantAsync(CreateOrUpdateUserInput input)
+        {
+            foreach (int tenantId in input.TenantList)
+            {
+                using (_unitOfWorkManager.Current.SetTenantId(tenantId))
+                {
+
+                    var user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
+                    user.TenantId = tenantId;
+
+                    //Set password
+                    if (!input.User.Password.IsNullOrEmpty())
+                    {
+                        CheckErrors(await UserManager.PasswordValidator.ValidateAsync(input.User.Password));
+                    }
+                    else
+                    {
+                        input.User.Password = User.CreateRandomPassword();
+                    }
+
+                    user.Password = new PasswordHasher().HashPassword(input.User.Password);
+                    user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
+
+                    //Assign roles
+                    user.Roles = new Collection<UserRole>();
+                    foreach (var roleName in input.AssignedRoleNames)
+                    {
+                        var role = await _roleManager.GetRoleByNameAsync(roleName);
+                        user.Roles.Add(new UserRole {RoleId = role.Id});
+                    }
+
+                    CheckErrors(await UserManager.CreateAsync(user));
+                    await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
+
+                    //Notifications
+                    await
+                        _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(
+                            user.ToUserIdentifier());
+                    await _appNotifier.WelcomeToTheApplicationAsync(user);
+
+                    //Send activation email
+                    if (input.SendActivationEmail)
+                    {
+                        user.SetNewEmailConfirmationCode();
+                        await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
+                    }
+                }
+            }
+        }
+
 
         private async Task FillRoleNames(List<UserListDto> userListDtos)
         {
@@ -282,5 +346,32 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 userListDto.Roles = userListDto.Roles.OrderBy(r => r.RoleName).ToList();
             }
         }
+
+        public async Task<ListResultOutput<RoleListDto>> GetRolesByTenant(IdInput input)
+        {
+            using (_unitOfWorkManager.Current.SetTenantId(input.Id))
+            {
+                var roles = await _roleManager.Roles.ToListAsync();
+                return new ListResultOutput<RoleListDto>(roles.MapTo<List<RoleListDto>>());
+            }
+        }
+        /// <summary>
+        /// Input is TenantId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<List<TenantListOutputDto>> GetTenantListofOrganization(IdInput input)
+        {
+            //to get the OrganizationId from Tenant
+           var tenantUnit=  await TenantManager.GetByIdAsync(input.Id);
+
+            //Get The TenantList By OrganizationId
+            var tenantList = await (from tenant in TenantManager.Tenants
+                                    where tenant.OrganizationUnitId == tenantUnit.OrganizationUnitId
+                                    select new TenantListOutputDto { TenantName = tenant.TenancyName, TenantId = tenant.Id }).ToListAsync();
+
+            return tenantList;
+        }
+
     }
 }

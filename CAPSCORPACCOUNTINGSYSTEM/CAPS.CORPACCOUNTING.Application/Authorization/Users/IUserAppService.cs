@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Users.Dto;
 using CAPS.CORPACCOUNTING.Dto;
+using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
@@ -23,5 +26,19 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         Task CreateOrUpdateUser(CreateOrUpdateUserInput input);
 
         Task DeleteUser(IdInput<long> input);
+
+        /// <summary>
+        /// Get Roles byTenantId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<ListResultOutput<RoleListDto>> GetRolesByTenant(IdInput input);
+
+        /// <summary>
+        /// Get the TenantList of Organization By OrganizationId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<List<TenantListOutputDto>> GetTenantListofOrganization(IdInput input);
     }
 }

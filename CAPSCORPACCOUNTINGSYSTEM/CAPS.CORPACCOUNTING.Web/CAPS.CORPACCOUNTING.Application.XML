@@ -1621,6 +1621,13 @@
             Set null to create a new user. Set user's Id to update a user
             </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.UserAppService.GetTenantListofOrganization(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Input is TenantId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService">
             <summary>
             Application service that is used by 'role management' page.

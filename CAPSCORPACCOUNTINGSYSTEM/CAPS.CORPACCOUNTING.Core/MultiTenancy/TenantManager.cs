@@ -27,7 +27,7 @@ using CAPS.CORPACCOUNTING.Notifications;
 using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
-{   
+{
     /// <summary>
     /// Tenant manager.
     /// </summary>
@@ -364,18 +364,13 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                     if (await _vendorUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
                                         vendorList = await _vendorUnit.GetAll().Where(u => u.TenantId == sourceTenantId).ToListAsync();
-
-                                        vendorList.ForEach(u => { u.TenantId = newTenantId; });
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
-
                                     Mapper.CreateMap<VendorUnit, VendorUnit>()
                                         .ForMember(u => u.Id, ap => ap.Ignore());
                                     var vendorUnit = new VendorUnit();
-
-
                                     if (!ReferenceEquals(entityList, null))
                                     {
                                         foreach (var vendor in vendorList)
@@ -392,21 +387,16 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 List<User> userList = null;
                                 using (_unitOfWorkManager.Current.SetTenantId(sourceTenantId))
                                 {
-                                    if (await _vendorUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
+                                    if (await _userUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
-
                                         userList = await _userUnit.GetAll().Where(u => u.TenantId == sourceTenantId).ToListAsync();
-
-                                        userList.ForEach(u => u.TenantId = newTenantId);
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
-
                                     Mapper.CreateMap<User, User>()
                                       .ForMember(u => u.Id, ap => ap.Ignore());
                                     var userUnit = new User();
-
                                     if (!ReferenceEquals(entityList, null))
                                     {
                                         foreach (var user in userList)
@@ -427,11 +417,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 List<Role> rollList = null;
                                 using (_unitOfWorkManager.Current.SetTenantId(sourceTenantId))
                                 {
-                                    if (await _vendorUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
+                                    if (await _roleUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
                                         rollList = await _roleUnit.GetAll().Where(u => u.TenantId == sourceTenantId).ToListAsync();
-
-                                        rollList.ForEach(u => u.TenantId = newTenantId);
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
@@ -444,7 +432,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
                                         foreach (var role in rollList)
                                         {
-                                            if (role.Name != "Admin" || role.Name != "User")
+                                            if (role.Name != "Admin" && role.Name != "User")
                                             {
                                                 role.MapTo(roleUnit);
                                                 await _roleUnit.InsertAsync(roleUnit);
@@ -452,7 +440,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         }
                                     }
                                 }
-
                                 break;
                             }
                         case "ChartofAccounts":
@@ -462,17 +449,13 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (await _coaUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
-                                        coaList = await _coaUnit.GetAll().Where(u => u.TenantId == sourceTenantId && u.IsCorporate)
-                                                    .ToListAsync();
-                                        coaList.ForEach(u => u.TenantId = newTenantId);
+                                        coaList = await _coaUnit.GetAll().Where(u => u.TenantId == sourceTenantId && u.IsCorporate).ToListAsync();
                                     }
-
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-
                                         Mapper.CreateMap<CoaUnit, CoaUnit>().ForMember(u => u.Id, ap => ap.Ignore());
                                         var coaUnit = new CoaUnit();
                                         foreach (var coa in coaList)
@@ -492,20 +475,15 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (await _coaUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
-
-                                        coaList = await _coaUnit.GetAll().Where(u => u.TenantId == sourceTenantId && !u.IsCorporate)
-                                                    .ToListAsync();
-                                        coaList.ForEach(u => u.TenantId = newTenantId);
+                                        coaList = await _coaUnit.GetAll().Where(u => u.TenantId == sourceTenantId && !u.IsCorporate).ToListAsync();
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-
                                         Mapper.CreateMap<CoaUnit, CoaUnit>().ForMember(u => u.Id, ap => ap.Ignore());
                                         var coaUnit = new CoaUnit();
-
                                         foreach (var coa in coaList)
                                         {
                                             coa.MapTo(coaUnit);
@@ -518,23 +496,20 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
                         case "Employees":
                             {
-
-                                if (await _employeeUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
+                                List<EmployeeUnit> empList = null;
+                                using (_unitOfWorkManager.Current.SetTenantId(sourceTenantId))
                                 {
-                                    List<EmployeeUnit> empList;
-
-                                    using (_unitOfWorkManager.Current.SetTenantId(sourceTenantId))
+                                    if (await _employeeUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
-                                        empList = await _employeeUnit.GetAll().Where(u => u.TenantId == sourceTenantId)
-                                                    .ToListAsync();
-                                        empList.ForEach(u => u.TenantId = newTenantId);
+                                        empList = await _employeeUnit.GetAll().Where(u => u.TenantId == sourceTenantId).ToListAsync();
                                     }
+                                }
+                                using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
+                                {
                                     using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                     {
-
                                         Mapper.CreateMap<EmployeeUnit, EmployeeUnit>().ForMember(u => u.Id, ap => ap.Ignore());
                                         var employeeUnit = new EmployeeUnit();
-
                                         if (!ReferenceEquals(entityList, null))
                                         {
                                             foreach (var emp in empList)
@@ -545,7 +520,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         }
                                     }
                                 }
-
                                 break;
                             }
                         case "Customers":
@@ -555,20 +529,15 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (await _customerUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
-                                        customerList = await _customerUnit.GetAll().Where(u => u.TenantId == sourceTenantId)
-                                                    .ToListAsync();
-                                        customerList.ForEach(u => u.TenantId = newTenantId);
+                                        customerList = await _customerUnit.GetAll().Where(u => u.TenantId == sourceTenantId).ToListAsync();
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-
-
                                         Mapper.CreateMap<CustomerUnit, CustomerUnit>().ForMember(u => u.Id, ap => ap.Ignore());
                                         var customerUnit = new CustomerUnit();
-
                                         foreach (var customer in customerList)
                                         {
                                             customer.MapTo(customerUnit);
@@ -576,7 +545,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         }
                                     }
                                 }
-
                                 break;
                             }
                     }

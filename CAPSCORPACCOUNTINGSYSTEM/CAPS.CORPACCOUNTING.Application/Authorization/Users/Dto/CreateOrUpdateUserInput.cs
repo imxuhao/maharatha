@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
@@ -12,5 +13,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
         public string[] AssignedRoleNames { get; set; }
 
         public bool SendActivationEmail { get; set; }
+
+        public List<int> TenantList { get; set; }
     }
 }

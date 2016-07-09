@@ -117,7 +117,7 @@ Ext.define('Chaching.view.users.UsersForm', {
             }, {
                 xtype: 'checkbox',
                 boxLabel: app.localize('active'),
-                name: 'isactive',
+                name: 'isActive',
                 labelAlign: 'right',
                 inputValue: true,
                 checked: true,
@@ -154,7 +154,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 ],
                 store: Ext.create('Chaching.store.administration.organization.TenantListStore'),
                 listeners: {
-                    itemclick: 'loadCompanyRoles'
+                    rowdblclick: 'loadCompanyRoles'
                 }
             }, {
                 columnWidth: 0.5,

@@ -13,7 +13,11 @@ Ext.define('Chaching.view.users.UsersGridController', {
         //load company list
         var companyListGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
         var companyListStore = companyListGrid.getStore();
+        var proxy = companyListStore.getProxy();
+        proxy.url = abp.appPath + 'api/services/app/user/GetTenantListofOrganization',
+        companyListStore.getProxy().setExtraParams({ id: abp.session.tenantId});
         companyListStore.load();
+
         var companyListTab = formView.down('*[itemId=companyListTab]');
         if (formView && isEdit) {
             form.findField('userName').setReadOnly(true);

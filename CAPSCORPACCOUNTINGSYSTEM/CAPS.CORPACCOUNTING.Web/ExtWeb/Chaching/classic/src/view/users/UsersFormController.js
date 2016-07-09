@@ -6,6 +6,8 @@
             view = me.getView();
         var rolesGrid = view.down('gridpanel[itemId=companyRolesListGridItemId]');
         var rolesStore = rolesGrid.getStore();
+        var proxy = rolesStore.getProxy();
+        proxy.api.read = abp.appPath + 'api/services/app/user/GetRolesByTenant',
         rolesStore.removeAll();
         rolesStore.getProxy().setExtraParams({ id: record.get('tenantId') });
         rolesStore.load();
@@ -14,27 +16,27 @@
         var me = this,
              view = me.getView();
         //record = Ext.create('Chaching.model.tenants.TenantsModel');
+        record.data.user = values;
         Ext.apply(record.data, values);
         //get roles information
-        var rolesListGridStore = view.down('gridpanel[itemId=rolesListGridItemId]').getStore();
-        var rolesRecords = rolesListGridStore.getModifiedRecords();
+        var rolesListRecords = view.down('gridpanel[itemId=rolesListGridItemId]').getSelection();
         //get company information
-        var companyListGridStore = view.down('gridpanel[itemId=companyListGridItemId]').getStore();
-        var companyRecords = companyListGridStore.getModifiedRecords();
-        if (rolesRecords && rolesRecords.length > 0) {
+        var companyListRecords = view.down('gridpanel[itemId=companyListGridItemId]').getSelection();
+        if (rolesListRecords && rolesListRecords.length > 0) {
            var rolesListArray = [];
-            Ext.each(rolesRecords, function (rec) {
-                rolesListArray.push(rec.get('id'));
+           Ext.each(rolesListRecords, function (rec) {
+                rolesListArray.push(rec.get('displayName'));
             });
-            record.data.roleList = rolesListArray;
+            record.data.assignedRoleNames = rolesListArray;
         }
-        if (companyRecords && companyRecords.length > 0) {
-            var companyListArray = [];
-            Ext.each(companyRecords, function (rec) {
-                companyListArray.push(rec.get('tenantId'));
+        if (companyListRecords && companyListRecords.length > 0) {
+            var tenantListArray = [];
+            Ext.each(companyListRecords, function (rec) {
+                tenantListArray.push({ tenantId: rec.get('tenantId'), tenantName: rec.get('tenantName') });
             });
-            record.data.companyList = companyListArray;
+            record.data.tenantList = tenantListArray;
         }
+        
         return record;
     },
     showRandomPassword: function () {

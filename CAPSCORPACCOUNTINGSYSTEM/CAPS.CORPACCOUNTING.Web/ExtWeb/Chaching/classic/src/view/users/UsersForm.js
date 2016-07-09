@@ -116,18 +116,26 @@ Ext.define('Chaching.view.users.UsersForm', {
                       return (value === password1.getValue()) ? true : 'Passwords do not match.'
                   }
               },
-
+              {
+                  xtype: 'checkbox',
+                  boxLabel: app.localize('ShouldChangePasswordOnNextLogin'),
+                  name: 'shouldChangePasswordOnNextLogin',
+                  labelAlign: 'right',
+                  inputValue: true,
+                  checked: true,
+                  boxLabelCls: 'checkboxLabel'
+              },
             {
                 xtype: 'checkbox',
-                boxLabel: app.localize('sendactivationemail'),
-                name: 'sendactivationemail',
+                boxLabel: app.localize('SendActivationEmail'),
+                name: 'sendActivationEmail',
                 labelAlign: 'right',
                 inputValue: true,
                 checked: true,
                 boxLabelCls: 'checkboxLabel'
             }, {
                 xtype: 'checkbox',
-                boxLabel: app.localize('active'),
+                boxLabel: app.localize('Active'),
                 name: 'isActive',
                 labelAlign: 'right',
                 inputValue: true,

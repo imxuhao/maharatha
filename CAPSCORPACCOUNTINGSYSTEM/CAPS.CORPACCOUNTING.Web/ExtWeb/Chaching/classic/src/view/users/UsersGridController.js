@@ -2,23 +2,30 @@ Ext.define('Chaching.view.users.UsersGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.users-usersgrid',
     doAfterCreateAction: function (createMode, formView, isEdit, record) {
-
         var me = this,
          form = formView.down('form').getForm();
         //load roles list
         var rolesGrid = formView.down('gridpanel[itemId=rolesListGridItemId]');
         var rolesStore = rolesGrid.getStore();
-        rolesStore.load();
-
-        //load company list
-        var companyListGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
-        var companyListStore = companyListGrid.getStore();
-        var proxy = companyListStore.getProxy();
-        proxy.url = abp.appPath + 'api/services/app/user/GetTenantListofOrganization',
-        companyListStore.getProxy().setExtraParams({ id: abp.session.tenantId});
-        companyListStore.load();
-
+        rolesStore.load(function(records, operation, success) {
+            if (success) {
+                if (isEdit) {
+                    var roles = record.get('roles');
+                    if (roles && records && roles.length > 0 && records.length > 0) {
+                        Ext.each(records, function (rec) {
+                            Ext.each(roles, function (role) {
+                                if (rec.get('id') == role.roleId) {
+                                    rolesGrid.getSelectionModel().select(rec,true, true);
+                                }
+                            });
+                        });
+                    }
+                }
+            } 
+        });
+        //get company list tab
         var companyListTab = formView.down('*[itemId=companyListTab]');
+
         if (formView && isEdit) {
             form.findField('userName').setReadOnly(true);
             //disable tabs
@@ -26,6 +33,13 @@ Ext.define('Chaching.view.users.UsersGridController', {
                 companyListTab.setDisabled(true);
             }
         } else {
+            //load company list
+            var companyListGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
+            var companyListStore = companyListGrid.getStore();
+            var proxy = companyListStore.getProxy();
+            proxy.url = abp.appPath + 'api/services/app/user/GetTenantListofOrganization',
+            companyListStore.getProxy().setExtraParams({ id: abp.session.tenantId });
+            companyListStore.load();
             //enable tabs
             if (companyListTab) {
                 companyListTab.setDisabled(false);

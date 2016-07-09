@@ -48,21 +48,20 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
              view = me.getView();
 
         var organizationCombo = view.down('combobox[itemId=organizationId]');
-        if (organizationCombo) {
+        if (organizationCombo && organizationCombo.getValue() == null) {
             abp.message.error(app.localize('SelectOrganization'));
             return;
         }
 
         record = Ext.create('Chaching.model.tenants.TenantsModel');
         Ext.apply(record.data, values);
-        var moduleListGridStore = view.down('gridpanel[itemId=moduleListGridItemId]').getStore();
-        var moduleRecords = moduleListGridStore.getModifiedRecords();
+        var selectedRecords = view.down('gridpanel[itemId=moduleListGridItemId]').getSelection();
         var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
         record.set('organizationUnitId', values.organizationUnitId);
         record.set('sourceTenantId', tenantListCombo.getValue());
-        if (moduleRecords && moduleRecords.length > 0) {
+        if (selectedRecords && selectedRecords.length > 0) {
             var moduleListArray = [];
-            Ext.each(moduleRecords, function (rec) {
+            Ext.each(selectedRecords, function (rec) {
                 moduleListArray.push(rec.get('name'));
             });
             record.data.moduleList = moduleListArray;

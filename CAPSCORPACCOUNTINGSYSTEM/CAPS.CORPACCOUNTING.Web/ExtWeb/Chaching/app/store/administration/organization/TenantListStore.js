@@ -2,7 +2,8 @@
     extend: 'Chaching.store.base.BaseStore',
     fields: [{ name: 'tenantId' }, { name: 'tenantName' }],
     remoteSort : false,
-    remoteFilter : false,
+    remoteFilter: false,
+    pageSize : 1000,
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

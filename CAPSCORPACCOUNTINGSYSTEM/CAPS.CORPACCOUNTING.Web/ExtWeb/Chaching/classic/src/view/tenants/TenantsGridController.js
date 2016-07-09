@@ -29,6 +29,9 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
             if (copyFromTenantsTab) {
                 copyFromTenantsTab.setDisabled(true);
             }
+            if (record.get('editionId') == null) {
+                record.set('editionId', "null");
+            }
         } else {
             if (copyFromTenantsTab) {
                 copyFromTenantsTab.setDisabled(false);
@@ -39,8 +42,6 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
         var viewModel = formView.down('form').getViewModel();
         var editionStore = viewModel.getStore('editionsForComboBox');
         editionStore.load();
-        if (record.get('editionId') == null) {
-            record.set('editionId', "null");
-        }
+       
     }
 });

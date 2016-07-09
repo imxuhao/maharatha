@@ -31,6 +31,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             defaults: {
                 labelWidth: 140
             },
+            defaultFocus: 'combobox#organizationId',
             items: [{
                 xtype: 'hiddenfield',
                 name: 'id',

@@ -8,6 +8,7 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
         var tenantStore = tenantListCombo.getStore();
         tenantStore.getProxy().setExtraParams({ id: combo.getValue() });
         tenantStore.load();
+       // me.onTenancyNameEnter(view.down('combobox[itemId=tenantItemId]'));
     },
     onTenancyNameEnter: function (cmp, event, eOpts) {
         var me = this,
@@ -21,7 +22,6 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
         }
     },
     onTenantSelect: function (selModel, selected, eOpts) {
-        debugger;
         var me = this,
            view = me.getView();
         var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
@@ -46,12 +46,19 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
     doPreSaveOperation: function (record, values, idPropertyField) {
         var me = this,
              view = me.getView();
+
+        var organizationCombo = view.down('combobox[itemId=organizationId]');
+        if (organizationCombo) {
+            abp.message.error(app.localize('SelectOrganization'));
+            return;
+        }
+
         record = Ext.create('Chaching.model.tenants.TenantsModel');
         Ext.apply(record.data, values);
         var moduleListGridStore = view.down('gridpanel[itemId=moduleListGridItemId]').getStore();
         var moduleRecords = moduleListGridStore.getModifiedRecords();
         var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
-        record.set('organizationUnit', values.id);
+        record.set('organizationUnitId', values.organizationUnitId);
         record.set('sourceTenantId', tenantListCombo.getValue());
         if (moduleRecords && moduleRecords.length > 0) {
             var moduleListArray = [];

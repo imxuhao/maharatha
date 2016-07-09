@@ -20,7 +20,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
       //  labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
-    defaultFocus: 'textfield#tenancyName',
+    defaultFocus: 'combobox#organizationId',
     items: [{
         xtype: 'tabpanel',
         ui: 'formTabPanels',
@@ -48,7 +48,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 displayField: 'name',
                 valueField: 'value',
                 allowBlank: false,
-                forceSelection : true,
+               // forceSelection : true,
                 store: Ext.create('Chaching.store.administration.organization.OrganizationListStore'),
                 listeners: {
                     select : 'onOrganizationSelect'
@@ -152,6 +152,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 emptyText: app.localize('TEdition'),
                 displayField: 'editionDisplayName',
                 valueField: 'editionId',
+                queryMode : 'local',
                 bind: {
                     store: '{editionsForComboBox}'
                 }
@@ -188,7 +189,6 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             cls: 'chaching-grid',
             itemId : 'moduleListGridItemId',
             height: 400,
-            disabled : true,
             scrollable: true,
             selType: 'checkboxmodel',
             columns: [
@@ -218,19 +218,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             store: {
                 fields: ['name'],
                 data : []
-                //data: [
-                //    { name: 'Vendors'},
-                //    { name: 'Users' },
-                //    { name: 'Customers' },
-                //    { name: 'Roles'},
-                //    { name: 'ChartofAccounts' },
-                //    { name: 'ProjectChartofAccounts' }
-                //]
             }
-            //,
-            //listeners: {
-            //    selectionchange: 'onModuleSelect'
-            //}
         }]
     }]
 

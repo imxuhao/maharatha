@@ -7,7 +7,7 @@ using Abp.Application.Services.Dto;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
 {
-    public class TenantListOutputDto : IOutputDto
+    public class TenantListOutputDto : IDoubleWayDto
     {
         public int TenantId { get; set; }
         public string TenantName { get; set; }

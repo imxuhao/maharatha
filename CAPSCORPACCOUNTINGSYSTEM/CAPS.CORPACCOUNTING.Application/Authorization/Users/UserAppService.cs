@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -38,7 +39,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
         private readonly IAppNotifier _appNotifier;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly TenantManager _tenantManager;
 
 
 
@@ -47,7 +47,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             IUserEmailer userEmailer,
             IUserListExcelExporter userListExcelExporter,
             INotificationSubscriptionManager notificationSubscriptionManager,
-            IAppNotifier appNotifier, IUnitOfWorkManager unitOfWorkManager, TenantManager tenantManager)
+            IAppNotifier appNotifier, IUnitOfWorkManager unitOfWorkManager)
         {
             _roleManager = roleManager;
             _userEmailer = userEmailer;
@@ -55,7 +55,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             _notificationSubscriptionManager = notificationSubscriptionManager;
             _appNotifier = appNotifier;
             _unitOfWorkManager = unitOfWorkManager;
-            _tenantManager = tenantManager;
         }
 
         public async Task<PagedResultOutput<UserListDto>> GetUsers(GetUsersInput input)
@@ -176,7 +175,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
 
         public async Task CreateOrUpdateUser(CreateOrUpdateUserInput input)
         {
-            if (input.User.Id.HasValue)
+            if (input.User.Id.HasValue && input.User.Id !=0)
             {
                 await UpdateUserAsync(input);
             }
@@ -266,59 +265,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
             }
             if(!ReferenceEquals(input.TenantList,null))
-                await CreateUserforLinkedTenantAsync(input);
+                await CreateUserforLinkedTenantAsync(input,user.Id);
         }
-
-        protected virtual async Task CreateUserforLinkedTenantAsync(CreateOrUpdateUserInput input)
-        {
-            foreach (int tenantId in input.TenantList)
-            {
-                using (_unitOfWorkManager.Current.SetTenantId(tenantId))
-                {
-
-                    var user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
-                    user.TenantId = tenantId;
-
-                    //Set password
-                    if (!input.User.Password.IsNullOrEmpty())
-                    {
-                        CheckErrors(await UserManager.PasswordValidator.ValidateAsync(input.User.Password));
-                    }
-                    else
-                    {
-                        input.User.Password = User.CreateRandomPassword();
-                    }
-
-                    user.Password = new PasswordHasher().HashPassword(input.User.Password);
-                    user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
-
-                    //Assign roles
-                    user.Roles = new Collection<UserRole>();
-                    foreach (var roleName in input.AssignedRoleNames)
-                    {
-                        var role = await _roleManager.GetRoleByNameAsync(roleName);
-                        user.Roles.Add(new UserRole {RoleId = role.Id});
-                    }
-
-                    CheckErrors(await UserManager.CreateAsync(user));
-                    await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
-
-                    //Notifications
-                    await
-                        _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(
-                            user.ToUserIdentifier());
-                    await _appNotifier.WelcomeToTheApplicationAsync(user);
-
-                    //Send activation email
-                    if (input.SendActivationEmail)
-                    {
-                        user.SetNewEmailConfirmationCode();
-                        await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
-                    }
-                }
-            }
-        }
-
 
         private async Task FillRoleNames(List<UserListDto> userListDtos)
         {
@@ -367,10 +315,63 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
 
             //Get The TenantList By OrganizationId
             var tenantList = await (from tenant in TenantManager.Tenants
-                                    where tenant.OrganizationUnitId == tenantUnit.OrganizationUnitId
+                                    where tenant.OrganizationUnitId == tenantUnit.OrganizationUnitId && tenant.Id != input.Id
                                     select new TenantListOutputDto { TenantName = tenant.TenancyName, TenantId = tenant.Id }).ToListAsync();
 
             return tenantList;
+        }
+
+
+        protected virtual async Task CreateUserforLinkedTenantAsync(CreateOrUpdateUserInput input,long userlinkid)
+        {
+            foreach (var tenant in input.TenantList)
+            {
+                User user ;
+                using (_unitOfWorkManager.Current.SetTenantId(tenant.TenantId))
+                {
+
+                     user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
+                    user.TenantId = tenant.TenantId;
+                    user.UserLinkId = userlinkid;
+
+                    //Set password
+                    if (!input.User.Password.IsNullOrEmpty())
+                    {
+                        CheckErrors(await UserManager.PasswordValidator.ValidateAsync(input.User.Password));
+                    }
+                    else
+                    {
+                        input.User.Password = User.CreateRandomPassword();
+                    }
+
+                    user.Password = new PasswordHasher().HashPassword(input.User.Password);
+                    user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
+
+                    //Assign roles
+                    user.Roles = new Collection<UserRole>();
+                    foreach (var roleName in input.AssignedRoleNames)
+                    {
+                        var role = await _roleManager.GetRoleByNameAsync(roleName);
+                        user.Roles.Add(new UserRole { RoleId = role.Id });
+                    }
+
+                    CheckErrors(await UserManager.CreateAsync(user));
+                    await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
+
+                    //Notifications
+                    await
+                        _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(
+                            user.ToUserIdentifier());
+                    await _appNotifier.WelcomeToTheApplicationAsync(user);
+
+                    //Send activation email
+                    if (input.SendActivationEmail)
+                    {
+                        user.SetNewEmailConfirmationCode();
+                        await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
+                    }
+                }
+            }
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
 {
@@ -14,6 +15,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
 
         public bool SendActivationEmail { get; set; }
 
-        public List<int> TenantList { get; set; }
+        public List<TenantListOutputDto> TenantList { get; set; }
     }
 }

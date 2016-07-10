@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -10,7 +9,6 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.AutoMapper;
-using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Linq.Extensions;
@@ -25,7 +23,6 @@ using CAPS.CORPACCOUNTING.Authorization.Users.Exporting;
 using CAPS.CORPACCOUNTING.Dto;
 using CAPS.CORPACCOUNTING.Notifications;
 using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
-using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
@@ -39,8 +36,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
         private readonly IAppNotifier _appNotifier;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
-
-
 
         public UserAppService(
             RoleManager roleManager,
@@ -248,7 +243,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             foreach (var roleName in input.AssignedRoleNames)
             {
                 var role = await _roleManager.GetRoleByNameAsync(roleName);
-                user.Roles.Add(new UserRole { RoleId = role.Id });
+                user.Roles.Add(new UserRole { RoleId = role.Id, TenantId = user.TenantId });
             }
 
             CheckErrors(await UserManager.CreateAsync(user));
@@ -332,7 +327,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
 
                      user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
                     user.TenantId = tenant.TenantId;
-                    user.UserLinkId = userlinkid;
 
                     //Set password
                     if (!input.User.Password.IsNullOrEmpty())
@@ -352,7 +346,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                     foreach (var roleName in input.AssignedRoleNames)
                     {
                         var role = await _roleManager.GetRoleByNameAsync(roleName);
-                        user.Roles.Add(new UserRole { RoleId = role.Id });
+                       
+                        user.Roles.Add(new UserRole { RoleId = role.Id,TenantId = tenant.TenantId});
                     }
 
                     CheckErrors(await UserManager.CreateAsync(user));

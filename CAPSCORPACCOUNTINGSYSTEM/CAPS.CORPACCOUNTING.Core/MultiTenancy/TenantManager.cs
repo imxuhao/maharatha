@@ -347,7 +347,14 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         }
 
 
-
+        /// <summary>
+        /// Sumit Method to add Users when map the user to Tenant
+        /// Adding the newly created User in some other Tenanats of the same Organization
+        /// </summary>
+        /// <param name="newTenantId"></param>
+        /// <param name="sourceTenantId"></param>
+        /// <param name="entityList"></param>
+        /// <returns></returns>
         public async Task CloneTenantDate(int newTenantId, int? sourceTenantId, List<string> entityList)
         {
             if (!ReferenceEquals(entityList, null))
@@ -359,6 +366,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                         case "Vendors":
                             {
                                 List<VendorUnit> vendorList = null;
+                                //Get vendor data from Tenanat of Source
                                 using (_unitOfWorkManager.Current.SetTenantId(sourceTenantId))
                                 {
                                     if (await _vendorUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
@@ -366,6 +374,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         vendorList = await _vendorUnit.GetAll().Where(u => u.TenantId == sourceTenantId).ToListAsync();
                                     }
                                 }
+                                //Inserting Vendor Data in DestinationTenant
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
                                     Mapper.CreateMap<VendorUnit, VendorUnit>()

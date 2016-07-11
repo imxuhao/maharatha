@@ -1039,5 +1039,6 @@
   <text name="DepositCheck" value="Deposit check" />
 <text name="PaymentCheck" value="Payment check" />
   <text name="ChargeDate" value="Charge date" />
+  <text name="DateClose" value="Date close" />
   </texts>
 </localizationDictionary>

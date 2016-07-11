@@ -27,6 +27,7 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderFormController', {
             if (transactionDetailContainer) {
                 var heightForDetailGrid = height - (170 + 80);
                 transactionDetailContainer.down('gridpanel[isTransactionDetailGrid=true]').setHeight(heightForDetailGrid);
+                transactionDetailContainer.down('gridpanel[isHistoryGrid=true]').setHeight(heightForDetailGrid);
             }
             formPanel.updateLayout();
         }

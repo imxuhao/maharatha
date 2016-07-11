@@ -2083,6 +2083,7 @@
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectCoaStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\LinesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\projects\projectmaintenance\ProjectsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\purchaseorders\entry\PurchaseOrderDetailHistoryStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\purchaseorders\entry\PurchaseOrderDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\purchaseorders\entry\PurchaseOrderStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\receivables\customers\CustomersStore.js" />

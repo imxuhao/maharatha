@@ -1,5 +1,5 @@
 Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderDetailHistoryGridController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Chaching.view.common.grid.ChachingTransactionDetailGridController',
     alias: 'controller.purchaseorders-entry-purchaseorderdetailhistorygrid'
     
 });

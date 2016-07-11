@@ -18,7 +18,10 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderDetailGrid',{
         xtype: 'gridcolumn',
         text: app.localize('InvoiceRef'),
         dataIndex: 'invoiceReference',
-        name: 'invoiceReference'
+        name: 'invoiceReference',
+        editor: {
+            xtype:'textfield'
+        }
     }, {
         xtype: 'gridcolumn',
         text: app.localize('Vendor'),

@@ -223,7 +223,10 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderForm',{
                                 isTransactionDetailGrid: true
                             }, {
                                 title: app.localize('DetailHistory').initCap(),
-                                iconCls: 'fa fa-history'
+                                iconCls: 'fa fa-history',
+                                xtype: 'purchaseorders.entry.transactionDetailsHistory',
+                                isHistoryGrid: true,
+                                hidden:true
                             }
                         ]
                     }]

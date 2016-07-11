@@ -616,7 +616,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 xtype: 'gridcolumn',
                 dataIndex: 'subAccountNumber4',
                 name: 'subAccountNumber4',
-                text: app.localize('SubAccount4').initCap(),
+                text: app.localize('Location').initCap(),
                 width: '10%',
                 valueField: 'subAccountId4',
                 entityType: 'subaccounts',

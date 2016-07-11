@@ -1,8 +1,29 @@
 Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderGridController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.purchaseorders-entry-purchaseordergrid',
     onCloseSelectionClicked:function() {
         alert('Close');
+    },
+    doAfterCreateAction: function(createMode, formPanel, isEdit, record) {
+        var form = undefined;
+        var viewModel = undefined;
+        if (formPanel) {
+            form = formPanel.getForm();
+            viewModel = formPanel.getViewModel();
+        }
+        if (form && viewModel) {
+            var currencyStore = viewModel.getStore('typeOfCurrencyList');
+            currencyStore.load();
+
+            if (isEdit && record) {
+                var vendorField = form.findField('vendorId'),
+                    vendorStore = vendorField.getStore();
+                if (record.get('vendorId') || record.get('vendorName')) {
+                    vendorStore.getProxy().setExtraParam('query', record.get('vendorName'));
+                    vendorStore.load();
+                }
+            }
+        }
     }
-    
+
 });

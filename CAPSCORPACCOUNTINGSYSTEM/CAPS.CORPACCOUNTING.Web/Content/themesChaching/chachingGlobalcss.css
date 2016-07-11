@@ -174,3 +174,24 @@ border-width: 10px;
     content: "\f058" !important;
     color: #3598dc !important;
 }
+
+/*Check combo*/
+.x-boundlist-item img.chkCombo {
+    background: transparent url('../images/default-unchecked.gif');
+}
+.x-boundlist-selected img.chkCombo {
+    background: transparent url('../images/default-checked.gif');
+}
+
+.x-boundlist-item img.chkCombo {
+    width: 16px;
+    height: 16px;
+    /*background: transparent url('../../theme-aria/resources/images/menu/default-unchecked.png');*/
+    background: transparent url('../images/default-unchecked.gif');
+}
+.x-boundlist-selected img.chkCombo{
+    /*background: transparent url('../../resources/images/checked.gif');*/
+    width : 16px;
+       height : 16px;
+    background:transparent url('../images/default-checked.gif');
+}

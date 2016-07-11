@@ -9241,7 +9241,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionDetailUnit(CAPS.CORPACCOUNTING.Payables.Dto.InvoiceEntryDocumentDetailInputUnit,System.Int64)">
             <summary>
-            Creating InvoiceEntryDocumnetDetails
+            Creating InvoiceEntryDocumentDetails
             </summary>
             <param name="input"></param>
             /// <param name="accountingDocumnetId"></param>
@@ -9252,6 +9252,13 @@
             Updating APDetails
             </summary>
             <param name="invoiceEntryDocumentDetail"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.DeleteAPHeaderTransactionDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitDto">
@@ -9979,6 +9986,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.ClosePurchaseOrderInputDto.AccountDocumentList">
+            <summary>Gets or sets the AccountDocumentList field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.ClosePurchaseOrderInputDto.CloseDate">
+            <summary>Gets or sets the CloseDate field. </summary> 
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailInputUnit">
             <summary>
             
@@ -10015,6 +10028,12 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto.VendorName">
             <summary>Gets or sets the VendorName field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto.RemainingAmount">
+            <summary>Gets or sets the RemainingAmount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderDetailUnitDto.PendingAmount">
+            <summary>Gets or sets the PendingAmount field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentInputUnit">
             <summary>
@@ -10246,6 +10265,291 @@
         <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderEntryDocumentUnitDto.CloseDate">
             <summary>Gets or sets the CloseDate field. </summary> 
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.PurchaseOrderHistoryId">
+            <summary>Overriding the Id column with AccountingItemId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountingItemId">
+            <summary>Gets or sets the AccountingItemId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountingDocumentId">
+            <summary>Gets or sets the AccountingDocumentID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfTransactionId">
+            <summary>Gets or sets the TypeOfTransactionID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfTransaction">
+            <summary>Gets or sets the TypeOfTransaction field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfAmountId">
+            <summary>Gets or sets the TypeOfAmountID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfAmount">
+            <summary>Gets or sets the TypeOfAmount  field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.ItemLinkId">
+            <summary>Gets or sets the ItemLinkID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.ItemLink">
+            <summary>Gets or sets the ItemLink field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.LedgerReference">
+            <summary>Gets or sets the LedgerReference field. </summary>       
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.LedgerYyyymm">
+            <summary>Gets or sets the LedgerYYYYMM field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountId">
+            <summary>Gets or sets the AccountID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountNumber">
+            <summary>Gets or sets the AccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.JobId">
+            <summary>Gets or sets the JobID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.JobNumber">
+            <summary>Gets or sets the JobNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.ItemMemo">
+            <summary>Gets or sets the ItemMemo field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IsAsset">
+            <summary>Gets or sets the IsAsset field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef1">
+            <summary>Gets or sets the AccountRef1 field. </summary>        
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef2">
+            <summary>Gets or sets the AccountRef2 field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef3">
+            <summary>Gets or sets the AccountRef3 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef4">
+            <summary>Gets or sets the AccountRef4 field. </summary>       
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef5">
+            <summary>Gets or sets the AccountRef5 field. </summary>       
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef6">
+            <summary>Gets or sets the AccountRef6 field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef7">
+            <summary>Gets or sets the AccountRef7 field. </summary>       
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef8">
+            <summary>Gets or sets the AccountRef8 field. </summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef9">
+            <summary>Gets or sets the AccountRef9 field. </summary>        
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountRef10">
+            <summary>Gets or sets the AccountRef10 field. </summary>        
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId1">
+            <summary>Gets or sets the SubAccountID1 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber1">
+            <summary>Gets or sets the SubAccountNumber1 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId2">
+            <summary>Gets or sets the SubAccountID2 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber2">
+            <summary>Gets or sets the SubAccountNumber2 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId3">
+            <summary>Gets or sets the SubAccountID3 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber3">
+            <summary>Gets or sets the SubAccountNumber3 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId4">
+            <summary>Gets or sets the SubAccountID4 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber4">
+            <summary>Gets or sets the SubAccountNumber4 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId5">
+            <summary>Gets or sets the SubAccountID5 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber5">
+            <summary>Gets or sets the SubAccountNumber5 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId6">
+            <summary>Gets or sets the SubAccountID6 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber6">
+            <summary>Gets or sets the SubAccountNumber6 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId7">
+            <summary>Gets or sets the SubAccountID7 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber7">
+            <summary>Gets or sets the SubAccountNumber7 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId8">
+            <summary>Gets or sets the SubAccountID8 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber8">
+            <summary>Gets or sets the SubAccountNumber8 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId9">
+            <summary>Gets or sets the SubAccountID9 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber9">
+            <summary>Gets or sets the SubAccountNumber9 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountId10">
+            <summary>Gets or sets the SubAccountID10 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SubAccountNumber10">
+            <summary>Gets or sets the SubAccountNumber10 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOf1099T4Id">
+            <summary>Gets or sets the TypeOf1099T4ID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOf1099T4">
+            <summary>Gets or sets the TypeOf1099T4 field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.Amount">
+            <summary>Gets or sets the Amount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.CompanyCurrencyAmount">
+            <summary>Gets or sets the CompanyCurrencyAmount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.CurrencyAdjustmentAmount">
+            <summary>Gets or sets the CurrencyAdjustmentAmount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.OriginalItemId">
+            <summary>Gets or sets the OriginalItemID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.OriginalItem">
+            <summary>Gets or sets the OriginalItem field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountingItemIdLink">
+            <summary>Gets or sets the AccountingItemIDLink field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountingItemLink">
+            <summary>Gets or sets the AccountingItemLink field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IsChanged">
+            <summary>Gets or sets the IsChanged field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IsActive">
+            <summary>Gets or sets the IsActive field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfInactiveStatusId">
+            <summary>Gets or sets the TypeOfInactiveStatusID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfInactiveStatus">
+            <summary>Gets or sets the TypeOfInactiveStatus field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.ReconciliationId">
+            <summary>Gets or sets the ReconciliationID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.Reconciliation">
+            <summary>Gets or sets the Reconciliation field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IsEnterable">
+            <summary>Gets or sets the IsEnterable field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountingItemOrigAmount">
+            <summary>Gets or sets the AccountingItemOrigAmount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountingItemTypeOfModificationId">
+            <summary>Gets or sets the AccountingItemTypeOfModificationID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountingItemTypeOfModification">
+            <summary>Gets or sets the AccountingItemTypeOfModification field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SplitAccountingItemId">
+            <summary>Gets or sets the SplitAccountingItemId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IctJobId">
+            <summary>Gets or sets the ICTJobID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IctJob">
+            <summary>Gets or sets the IctJob field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IctAccountingItemId">
+            <summary>Gets or sets the ICTAccountingItemID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IctAccountingItem">
+            <summary>Gets or sets the IctAccountingItem field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.AccountingItemOrig">
+            <summary>Gets or sets the AccountingItemOrig field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TaxRebateId">
+            <summary>Gets or sets the TaxRebateID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TaxRebateNumber">
+            <summary>Gets or sets the TaxRebateNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.CurrencyOverrideRate">
+            <summary>Gets or sets the CurrencyOverrideRate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.FunctionalCurrencyAmount">
+            <summary>Gets or sets the FunctionalCurrencyAmount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfCurrencyRateId">
+            <summary>Gets or sets the TypeOfCurrencyRateID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfCurrencyRate">
+            <summary>Gets or sets the TypeOfCurrencyRate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfCurrencyId">
+            <summary>Gets or sets the TypeOfCurrencyID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TypeOfCurrency">
+            <summary>Gets or sets the TypeOfCurrency field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.HomeCurAmount">
+            <summary>Gets or sets the HomeCurAmount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.CustomForexRate">
+            <summary>Gets or sets the CustomForexRate field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.TenantId">
+            <summary>Gets or sets the TenantId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IsAccountingItemSplit">
+            <summary>Gets or sets the IsAccountingItemSplit field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IsPrePaid">
+            <summary>Gets or sets the IsPrePaid field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IsPoPurchase">
+            <summary>Gets or sets the IsPOPurchase field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.IsPoRental">
+            <summary>Gets or sets the IsPORental field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.VendorId">
+            <summary>Gets or sets the VendorId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.VendorName">
+            <summary>Gets or sets the VendorName field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.ModificationTypeId">
+            <summary>Gets or sets the ModificationTypeId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.ModificationType">
+            <summary>Gets or sets the ModificationTypeId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.OverRelieveAmount">
+            <summary>Gets or sets the OverRelieveAmount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.RemainingAmount">
+            <summary>Gets or sets the RemainingAmount field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.PendingAmount">
+            <summary>Gets or sets the PendingAmount field. </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService">
             <summary>
             
@@ -10300,6 +10604,19 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.GetPurchaseOrderHistoryByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get Purchase Order History Details by AccountingDocumentId List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService.ClosePurchaseOrders(CAPS.CORPACCOUNTING.PurchaseOrders.Dto.ClosePurchaseOrderInputDto)">
+            <summary>
+            Close Purchase Orders by Purchase Orders List
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService">
             <summary>
             
@@ -10316,12 +10633,10 @@
             <param name="jobUnitRepository"></param>
             <param name="accountUnitRepository"></param>
             <param name="subAccountUnitRepository"></param>
-            <param name="customerUnitRepository"></param>
             <param name="currencyUnitRepository"></param>
-            <param name="customerPaymentTermRepository"></param>
-            <param name="salesRepUnitTermRepository"></param>
-            <param name="locationSetUnitRepository"></param>
-            <param name="userUnitRepository"></param>
+            <param name="purchaseOrderHistoryRepository"></param>
+            <param name="approvedSoxUnitRepository"></param>
+            <param name="userUnitRepository"></param> 
             <param name="vendorUnitRepository"></param>
             <param name="taxCreditUnitRepository"></param>
             <param name="bankAccountUnitRepository"></param>
@@ -10361,13 +10676,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrderEntryDocumentUnitsNew(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrdersByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             
@@ -10382,12 +10690,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.CreatePurchaseOrderHistory(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Boolean)">
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.CreatePurchaseOrderHistory(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,CAPS.CORPACCOUNTING.Helpers.Helper.RecordType)">
             <summary>
             Checks the accounting fields.
             </summary>
             <param name="originalDetailEntity"></param>
             <param name="newDetailEntity"></param>
+            <param name="recordType"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType``1(``0,``0)">
@@ -10397,6 +10706,19 @@
             <typeparam name="T"></typeparam>
             <param name="originalOrderDetails"></param>
             <param name="newOrderDetails"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrderHistoryByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.ClosePurchaseOrders(CAPS.CORPACCOUNTING.PurchaseOrders.Dto.ClosePurchaseOrderInputDto)">
+            <summary>
+            Close Purchase Orders by Purchase Orders List
+            </summary>
             <returns></returns>
         </member>
     </members>

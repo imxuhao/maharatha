@@ -19,8 +19,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
     {
         [Display(Name = "Created")]
         Created = 1,
-        [Display(Name = "Reduced")]
-        Reduced = 2,
+        [Display(Name = "Deleted")]
+        Deleted = 2,
         [Display(Name = "Increased Amount")]
         IncreasedAmount = 3,
         [Display(Name = "Decreased Amount")]
@@ -30,7 +30,9 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         [Display(Name = "New Row Added")]
         NewRowAdded = 6,
         [Display(Name = "Closed")]
-        Closed = 7
+        Closed = 7,
+        [Display(Name = "Reopened")]
+        Reopened = 8
     }
 
     /// <summary>
@@ -290,6 +292,12 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
         /// <summary>Gets or sets the OverRelieveAmount field. </summary>
         public virtual decimal? OverRelieveAmount { get; set; }
+
+        /// <summary>Gets or sets the RemainingAmount field. </summary>
+        public virtual decimal? RemainingAmount { get; set; }
+
+        /// <summary>Gets or sets the PendingAmount field. </summary>
+        public virtual decimal? PendingAmount { get; set; }
 
         #endregion
     }

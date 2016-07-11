@@ -4,6 +4,7 @@ using CAPS.CORPACCOUNTING.GenericSearch;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -14,6 +15,16 @@ namespace CAPS.CORPACCOUNTING.Helpers
 {
     public static class Helper
     {
+
+        public enum RecordType
+        {
+            [Display(Name = "Created")]
+            Created = 1,
+            [Display(Name = "Deleted")]
+            Deleted = 2,
+            [Display(Name = "Updated")]
+            Updated = 3
+        }
 
 
         /// <summary>

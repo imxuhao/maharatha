@@ -7,6 +7,7 @@ using CAPS.CORPACCOUNTING.Journals.Dto;
 using CAPS.CORPACCOUNTING.AccountReceivable.Dto;
 using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.PurchaseOrders.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.PurchaseOrders
 {
@@ -65,9 +66,18 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         /// <returns></returns>
         Task<List<AutoFillDto>> GetCardInfoList(AutoSearchInput input);
 
-        Task<PagedResultOutput<PurchaseOrderEntryDocumentUnitDto>> GetPurchaseOrderEntryDocumentUnitsNew(SearchInputDto input);
+        /// <summary>
+        /// Get Purchase Order History Details by AccountingDocumentId List.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<PurchaseOrderHistoryUnitDto>> GetPurchaseOrderHistoryByAccountingDocumentId(GetTransactionList input);
 
-
+       /// <summary>
+       /// Close Purchase Orders by Purchase Orders List
+       /// </summary>
+       /// <returns></returns>
+        Task ClosePurchaseOrders(ClosePurchaseOrderInputDto AccountingDocumentList);
 
 
     }

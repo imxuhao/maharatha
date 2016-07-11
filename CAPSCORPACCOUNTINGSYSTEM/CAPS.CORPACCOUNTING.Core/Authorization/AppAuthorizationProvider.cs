@@ -56,9 +56,9 @@ namespace CAPS.CORPACCOUNTING.Authorization
             organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageMembers, L("ManagingMembers"));
 
             var organizationUnitsClient = administration.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp, L("MenuCompanySetup"), multiTenancySides: MultiTenancySides.Tenant);
-            organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Create, L("Create"));
-            organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Edit, L("Edit"));
-            organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Delete, L("Delete"));
+            organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
             //organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree, L("ManagingOrganizationTree"));
             //organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageMembers, L("ManagingMembers"));
 
@@ -88,218 +88,218 @@ namespace CAPS.CORPACCOUNTING.Authorization
             #region financials Tab
             // PERMISSIONS FOR CHARTOFACCOUNTS
 
-            var financials = pages.CreateChildPermission(AppPermissions.Pages_Financials, L("Financials"));
-            var accounts = financials.CreateChildPermission(AppPermissions.Pages_Financials_Accounts, L("Accounts"));
+            var financials = pages.CreateChildPermission(AppPermissions.Pages_Financials, L("Financials"), multiTenancySides: MultiTenancySides.Tenant);
+            var accounts = financials.CreateChildPermission(AppPermissions.Pages_Financials_Accounts, L("Accounts"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var chartOfAccounts = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts, L("ChartOfAccount"));
-            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Create, L("Create"));
-            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Edit, L("Edit"));
-            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Delete, L("Delete"));
+            var chartOfAccounts = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts, L("ChartOfAccount"), multiTenancySides: MultiTenancySides.Tenant);
+            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            chartOfAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_ChartOfAccounts_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
             // PERMISSIONS FOR SUBACCOUNTS
-            var subAccounts = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts, L("SubAccounts"));
-            subAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts_Create, L("Create"));
-            subAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts_Edit, L("Edit"));
-            subAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts_Delete, L("Delete"));
+            var subAccounts = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts, L("SubAccounts"), multiTenancySides: MultiTenancySides.Tenant);
+            subAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            subAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            subAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_SubAccounts_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
 
 
             #region Accounts
-            var financialsAccounts = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts, L("Accounts"));
-            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Create, L("Create"));
-            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Edit, L("Edit"));
-            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Delete, L("Delete"));
-        #endregion
+            var financialsAccounts = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts, L("Accounts"), multiTenancySides: MultiTenancySides.Tenant);
+            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            financialsAccounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Accounts_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
+            #endregion
 
-        // PERMISSIONS FOR DIVISIONS
-        var divisions = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions, L("Divisions"));
-            divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Create, L("Create"));
-            divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Edit, L("Edit"));
-            divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Delete, L("Delete"));
+            // PERMISSIONS FOR DIVISIONS
+            var divisions = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions, L("Divisions"), multiTenancySides: MultiTenancySides.Tenant);
+            divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var journals = financials.CreateChildPermission(AppPermissions.Pages_Financials_Journals, L("Journals"));
-            var entry = journals.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry, L("Entry"));
-            entry.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry_Create, L("Create"));
-            entry.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry_Edit, L("Edit"));
-            entry.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry_Delete, L("Delete"));
+            var journals = financials.CreateChildPermission(AppPermissions.Pages_Financials_Journals, L("Journals"), multiTenancySides: MultiTenancySides.Tenant);
+            var entry = journals.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
+            entry.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            entry.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            entry.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var inquiry = financials.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry, L("Inquiry"));
-            var searchTransactions = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_SearchTransactions, L("SearchTransactions"));
-            var inquiryFinancials = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_Financials, L("Financials"));
-            var journalHistory = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_JournalHistory, L("JournalHistory"));
-            var assetTracking = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_AssetTracking, L("AssetTracking"));
+            var inquiry = financials.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
+            var searchTransactions = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_SearchTransactions, L("SearchTransactions"), multiTenancySides: MultiTenancySides.Tenant);
+            var inquiryFinancials = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_Financials, L("Financials"), multiTenancySides: MultiTenancySides.Tenant);
+            var journalHistory = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_JournalHistory, L("JournalHistory"), multiTenancySides: MultiTenancySides.Tenant);
+            var assetTracking = inquiry.CreateChildPermission(AppPermissions.Pages_Financials_Inquiry_AssetTracking, L("AssetTracking"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var fiscalPeriod = financials.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod, L("FiscalPeriod"));
-            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Create, L("Create"));
-            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Edit, L("Edit"));
-            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Delete, L("Delete"));
+            var fiscalPeriod = financials.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod, L("FiscalPeriod"), multiTenancySides: MultiTenancySides.Tenant);
+            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            fiscalPeriod.CreateChildPermission(AppPermissions.Pages_Financials_FiscalPeriod_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-           
+
             #endregion
 
             #region Projects Tab
-            var projects = pages.CreateChildPermission(AppPermissions.Pages_Projects, L("Projects"));
-            var projectMaintenance = projects.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance, L("ProjectMaintenance"));
-            var projectMaintenanceProjects = projectMaintenance.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Projects, L("Projects"));
-            projectMaintenanceProjects.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Create, L("Create"));
-            projectMaintenanceProjects.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Edit, L("Edit"));
-            projectMaintenanceProjects.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Delete, L("Delete"));
+            var projects = pages.CreateChildPermission(AppPermissions.Pages_Projects, L("Projects"), multiTenancySides: MultiTenancySides.Tenant);
+            var projectMaintenance = projects.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance, L("ProjectMaintenance"), multiTenancySides: MultiTenancySides.Tenant);
+            var projectMaintenanceProjects = projectMaintenance.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Projects, L("Projects"), multiTenancySides: MultiTenancySides.Tenant);
+            projectMaintenanceProjects.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            projectMaintenanceProjects.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            projectMaintenanceProjects.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Projects_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var projectCOAs = projectMaintenance.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs, L("ProjectCOAs"));
-            projectCOAs.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Create, L("Create"));
-            projectCOAs.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Edit, L("Edit"));
-            projectCOAs.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Delete, L("Delete"));
+            var projectCOAs = projectMaintenance.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs, L("ProjectCOAs"), multiTenancySides: MultiTenancySides.Tenant);
+            projectCOAs.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            projectCOAs.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            projectCOAs.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_ProjectCOAs_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var contracts = projectMaintenance.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts, L("Contracts"));
-            contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Create, L("Create"));
-            contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Edit, L("Edit"));
-            contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Delete, L("Delete"));
+            var contracts = projectMaintenance.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts, L("Contracts"), multiTenancySides: MultiTenancySides.Tenant);
+            contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            contracts.CreateChildPermission(AppPermissions.Pages_Projects_ProjectMaintenance_Contracts_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var projectInquiry = projects.CreateChildPermission(AppPermissions.Pages_Projects_Inquiry, L("Inquiry"));
+            var projectInquiry = projects.CreateChildPermission(AppPermissions.Pages_Projects_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
             #region Receivables Tab
-            var receivables = pages.CreateChildPermission(AppPermissions.Pages_Receivables, L("Receivables"));
-            var customers = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Customers, L("Customers"));
-            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Create, L("Create"));
-            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Edit, L("Edit"));
-            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Delete, L("Delete"));
+            var receivables = pages.CreateChildPermission(AppPermissions.Pages_Receivables, L("Receivables"), multiTenancySides: MultiTenancySides.Tenant);
+            var customers = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Customers, L("Customers"), multiTenancySides: MultiTenancySides.Tenant);
+            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var history = customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History, L("History"));
-            var invoices = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices, L("Invoices"));
-            var invoicesEntry = invoices.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry, L("Entry"));
-            invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Create, L("Create"));
-            invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Edit, L("Edit"));
-            invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Delete, L("Delete"));
-            var receivablesInquiry = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry, L("Inquiry"));
-            var aRInvoiceInquiry = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_ARInvoiceInquiry, L("ARInvoiceInquiry"));
-            var customerSummary = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_CustomerSummary, L("CustomerSummary"));
-            var invoiceDetail = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_InvoiceDetail, L("InvoiceDetail"));
-            var receivablesPreferences = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences, L("Preferences"));
+            var history = customers.CreateChildPermission(AppPermissions.Pages_Receivables_Customers_History, L("History"), multiTenancySides: MultiTenancySides.Tenant);
+            var invoices = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices, L("Invoices"), multiTenancySides: MultiTenancySides.Tenant);
+            var invoicesEntry = invoices.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
+            invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            invoicesEntry.CreateChildPermission(AppPermissions.Pages_Receivables_Invoices_Entry_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
+            var receivablesInquiry = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
+            var aRInvoiceInquiry = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_ARInvoiceInquiry, L("ARInvoiceInquiry"), multiTenancySides: MultiTenancySides.Tenant);
+            var customerSummary = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_CustomerSummary, L("CustomerSummary"), multiTenancySides: MultiTenancySides.Tenant);
+            var invoiceDetail = receivablesInquiry.CreateChildPermission(AppPermissions.Pages_Receivables_Inquiry_InvoiceDetail, L("InvoiceDetail"), multiTenancySides: MultiTenancySides.Tenant);
+            var receivablesPreferences = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences, L("Preferences"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var billingTypes = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes, L("BillingTypes"));
-            billingTypes.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes_Create, L("Create"));
-            billingTypes.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes_Edit, L("Edit"));
-            billingTypes.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes_Delete, L("Delete"));
+            var billingTypes = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes, L("BillingTypes"), multiTenancySides: MultiTenancySides.Tenant);
+            billingTypes.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            billingTypes.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            billingTypes.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_BillingTypes_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var territories = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories, L("Territories"));
-            territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Create, L("Create"));
-            territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Edit, L("Edit"));
-            territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Delete, L("Delete"));
+            var territories = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories, L("Territories"), multiTenancySides: MultiTenancySides.Tenant);
+            territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            territories.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_Territories_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var paymentTerms = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms, L("PaymentTerms"));
-            paymentTerms.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms_Create, L("Create"));
-            paymentTerms.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms_Edit, L("Edit"));
-            paymentTerms.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms_Delete, L("Delete"));
+            var paymentTerms = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms, L("PaymentTerms"), multiTenancySides: MultiTenancySides.Tenant);
+            paymentTerms.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            paymentTerms.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            paymentTerms.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_PaymentTerms_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var aRInvoiceTemplate = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate, L("ARInvoiceTemplate"));
-            aRInvoiceTemplate.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate_Create, L("Create"));
-            aRInvoiceTemplate.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate_Edit, L("Edit"));
-            aRInvoiceTemplate.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate_Delete, L("Delete"));
+            var aRInvoiceTemplate = receivables.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate, L("ARInvoiceTemplate"), multiTenancySides: MultiTenancySides.Tenant);
+            aRInvoiceTemplate.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            aRInvoiceTemplate.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            aRInvoiceTemplate.CreateChildPermission(AppPermissions.Pages_Receivables_Preferences_ARInvoiceTemplate_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
             #endregion
             #region Payables Tab
-            var payables = pages.CreateChildPermission(AppPermissions.Pages_Payables, L("Payables"));
-            var vendors = payables.CreateChildPermission(AppPermissions.Pages_Payables_Vendors, L("Vendors"));
-            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Create, L("Create"));
-            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Edit, L("Edit"));
-            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Delete, L("Delete"));
+            var payables = pages.CreateChildPermission(AppPermissions.Pages_Payables, L("Payables"), multiTenancySides: MultiTenancySides.Tenant);
+            var vendors = payables.CreateChildPermission(AppPermissions.Pages_Payables_Vendors, L("Vendors"), multiTenancySides: MultiTenancySides.Tenant);
+            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            vendors.CreateChildPermission(AppPermissions.Pages_Payables_Vendors_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var payablesInvoices = payables.CreateChildPermission(AppPermissions.Pages_Payables_Invoices, L("Invoices"));
-            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Create, L("Create"));
-            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Edit, L("Edit"));
-            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Delete, L("Delete"));
+            var payablesInvoices = payables.CreateChildPermission(AppPermissions.Pages_Payables_Invoices, L("Invoices"), multiTenancySides: MultiTenancySides.Tenant);
+            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            payablesInvoices.CreateChildPermission(AppPermissions.Pages_Payables_Invoices_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var payablesInquiry = payables.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry, L("Inquiry"));
-            var aPInvoiceInquiry = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_APInvoiceInquiry, L("APInvoiceInquiry"));
-            var paymentHistory = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_PaymentHistory, L("PaymentHistory"));
-            var vendorSummary = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_VendorSummary, L("VendorSummary"));
-            var payablesInvoiceDetail = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_InvoiceDetail, L("InvoiceDetail"));
+            var payablesInquiry = payables.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
+            var aPInvoiceInquiry = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_APInvoiceInquiry, L("APInvoiceInquiry"), multiTenancySides: MultiTenancySides.Tenant);
+            var paymentHistory = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_PaymentHistory, L("PaymentHistory"), multiTenancySides: MultiTenancySides.Tenant);
+            var vendorSummary = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_VendorSummary, L("VendorSummary"), multiTenancySides: MultiTenancySides.Tenant);
+            var payablesInvoiceDetail = payablesInquiry.CreateChildPermission(AppPermissions.Pages_Payables_Inquiry_InvoiceDetail, L("InvoiceDetail"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var payablesPreferences = payables.CreateChildPermission(AppPermissions.Pages_Payables_Preferences, L("Preferences"));
-            var payables1099T4Codes = payablesPreferences.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_1099T4Codes, L("1099T4Codes"));
+            var payablesPreferences = payables.CreateChildPermission(AppPermissions.Pages_Payables_Preferences, L("Preferences"), multiTenancySides: MultiTenancySides.Tenant);
+            var payables1099T4Codes = payablesPreferences.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_1099T4Codes, L("1099T4Codes"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var vendorPaymentTerms = payablesPreferences.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms, L("VendorPaymentTerms"));
-            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Create, L("Create"));
-            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Edit, L("Edit"));
-            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Delete, L("Delete"));
+            var vendorPaymentTerms = payablesPreferences.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms, L("VendorPaymentTerms"), multiTenancySides: MultiTenancySides.Tenant);
+            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            vendorPaymentTerms.CreateChildPermission(AppPermissions.Pages_Payables_Preferences_VendorPaymentTerms_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var yEProcesses = payables.CreateChildPermission(AppPermissions.Pages_Payables_YEProcesses, L("YEProcesses"));
-            var yEProcessesVendor1099s = yEProcesses.CreateChildPermission(AppPermissions.Pages_Payables_YEProcesses_1099s, L("1099s"));
+            var yEProcesses = payables.CreateChildPermission(AppPermissions.Pages_Payables_YEProcesses, L("YEProcesses"), multiTenancySides: MultiTenancySides.Tenant);
+            var yEProcessesVendor1099s = yEProcesses.CreateChildPermission(AppPermissions.Pages_Payables_YEProcesses_1099s, L("1099s"), multiTenancySides: MultiTenancySides.Tenant);
 
 
             #endregion
 
             #region  Purchase Orders Tab
-            var purchaseOrders = pages.CreateChildPermission(AppPermissions.Pages_PurchaseOrders, L("PurchaseOrders"));
-            var purchaseOrdersEntry = purchaseOrders.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry, L("Entry"));
-            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Create, L("Create"));
-            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Edit, L("Edit"));
-            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Delete, L("Delete"));
+            var purchaseOrders = pages.CreateChildPermission(AppPermissions.Pages_PurchaseOrders, L("PurchaseOrders"), multiTenancySides: MultiTenancySides.Tenant);
+            var purchaseOrdersEntry = purchaseOrders.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
+            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            purchaseOrdersEntry.CreateChildPermission(AppPermissions.Pages_PurchaseOrders_Entry_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
             #region Purchasing Tab
-            var purchasing = pages.CreateChildPermission(AppPermissions.Pages_Purchasing, L("Purchasing"));
-            var purchasingInquiry = purchasing.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry, L("Inquiry"));
-            var purchaseOrderHistory = purchasingInquiry.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry_PurchaseOrderHistory, L("PurchaseOrderHistory"));
-            var searchPurchaseOrders = purchasingInquiry.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry_SearchPurchaseOrders, L("SearchPurchaseOrders"));
+            var purchasing = pages.CreateChildPermission(AppPermissions.Pages_Purchasing, L("Purchasing"), multiTenancySides: MultiTenancySides.Tenant);
+            var purchasingInquiry = purchasing.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
+            var purchaseOrderHistory = purchasingInquiry.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry_PurchaseOrderHistory, L("PurchaseOrderHistory"), multiTenancySides: MultiTenancySides.Tenant);
+            var searchPurchaseOrders = purchasingInquiry.CreateChildPermission(AppPermissions.Pages_Purchasing_Inquiry_SearchPurchaseOrders, L("SearchPurchaseOrders"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
             #region Petty Cash Tab
-            var pettyCash = pages.CreateChildPermission(AppPermissions.Pages_PettyCash, L("PettyCash"));
-            var pCVendors = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_PCVendors, L("PCVendors"));
-            var pettyCashEntry = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_Entry, L("Entry"));
-            var pettyCashInquiry = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_Inquiry, L("Inquiry"));
+            var pettyCash = pages.CreateChildPermission(AppPermissions.Pages_PettyCash, L("PettyCash"), multiTenancySides: MultiTenancySides.Tenant);
+            var pCVendors = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_PCVendors, L("PCVendors"), multiTenancySides: MultiTenancySides.Tenant);
+            var pettyCashEntry = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
+            var pettyCashInquiry = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
             #region Credit Card Tab
-            var creditCard = pages.CreateChildPermission(AppPermissions.Pages_CreditCard, L("CreditCard"));
-            var creditCardEntry = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Entry, L("Entry"));
-            var creditCardInquiry = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Inquiry, L("Inquiry"));
-            var creditCardPreferences = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Preferences, L("Preferences"));
+            var creditCard = pages.CreateChildPermission(AppPermissions.Pages_CreditCard, L("CreditCard"), multiTenancySides: MultiTenancySides.Tenant);
+            var creditCardEntry = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
+            var creditCardInquiry = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
+            var creditCardPreferences = creditCard.CreateChildPermission(AppPermissions.Pages_CreditCard_Preferences, L("Preferences"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
             #region Payroll Tab
-            var payroll = pages.CreateChildPermission(AppPermissions.Pages_Payroll, L("Payroll"));
-            var payrollEntry = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Entry, L("Entry"));
-            var payrollInquiry = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Inquiry, L("Inquiry"));
-            var payrollPreferences = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Preferences, L("Preferences"));
+            var payroll = pages.CreateChildPermission(AppPermissions.Pages_Payroll, L("Payroll"), multiTenancySides: MultiTenancySides.Tenant);
+            var payrollEntry = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
+            var payrollInquiry = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
+            var payrollPreferences = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Preferences, L("Preferences"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
             #region Batch Posting Tab
-            var batchPosting = pages.CreateChildPermission(AppPermissions.Pages_BatchPosting, L("BatchPosting"));
-            var batched = batchPosting.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches, L("Batches"));
-            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Create, L("Create"));
-            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Edit, L("Edit"));
-            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Delete, L("Delete"));
+            var batchPosting = pages.CreateChildPermission(AppPermissions.Pages_BatchPosting, L("BatchPosting"), multiTenancySides: MultiTenancySides.Tenant);
+            var batched = batchPosting.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches, L("Batches"), multiTenancySides: MultiTenancySides.Tenant);
+            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            batched.CreateChildPermission(AppPermissions.Pages_BatchPosting_Batches_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
             #region Banking
-            var banking = pages.CreateChildPermission(AppPermissions.Pages_Banking, L("Banking"));
-            var receiptsOrTransfers = banking.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers, L("ReceiptsOrTransfers"));
-            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Create, L("Create"));
-            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Edit, L("Edit"));
-            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Delete, L("Delete"));
+            var banking = pages.CreateChildPermission(AppPermissions.Pages_Banking, L("Banking"), multiTenancySides: MultiTenancySides.Tenant);
+            var receiptsOrTransfers = banking.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers, L("ReceiptsOrTransfers"), multiTenancySides: MultiTenancySides.Tenant);
+            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            receiptsOrTransfers.CreateChildPermission(AppPermissions.Pages_Banking_ReceiptsOrTransfers_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var ach = banking.CreateChildPermission(AppPermissions.Pages_Banking_ACH, L("ACH"));
-            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Create, L("Create"));
-            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Edit, L("Edit"));
-            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Delete, L("Delete"));
+            var ach = banking.CreateChildPermission(AppPermissions.Pages_Banking_ACH, L("ACH"), multiTenancySides: MultiTenancySides.Tenant);
+            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            ach.CreateChildPermission(AppPermissions.Pages_Banking_ACH_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var reconciliation = banking.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation, L("BankReconciliation"));
-            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Create, L("Create"));
-            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Edit, L("Edit"));
-            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Delete, L("Delete"));
+            var reconciliation = banking.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation, L("BankReconciliation"), multiTenancySides: MultiTenancySides.Tenant);
+            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            reconciliation.CreateChildPermission(AppPermissions.Pages_Banking_Reconciliation_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var postivepay= banking.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay, L("PostivePay"));
-            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Create, L("Create"));
-            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Edit, L("Edit"));
-            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Delete, L("Delete"));
+            var postivepay = banking.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay, L("PostivePay"), multiTenancySides: MultiTenancySides.Tenant);
+            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            postivepay.CreateChildPermission(AppPermissions.Pages_Banking_PostivePay_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
-            var bankSetup = banking.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup, L("BankSetup"));
-            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Create, L("Create"));
-            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Edit, L("Edit"));
-            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Delete, L("Delete"));
+            var bankSetup = banking.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup, L("BankSetup"), multiTenancySides: MultiTenancySides.Tenant);
+            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
             #endregion
 

@@ -1288,6 +1288,14 @@
     <Compile Include="Migrations\201607110908392_Update_Organization_POHistory_Tables.Designer.cs">
       <DependentUpon>201607110908392_Update_Organization_POHistory_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607111248590_Modify_PurchaseOrderEntryDocumentDetailUnit_Table1.cs" />
+    <Compile Include="Migrations\201607111248590_Modify_PurchaseOrderEntryDocumentDetailUnit_Table1.Designer.cs">
+      <DependentUpon>201607111248590_Modify_PurchaseOrderEntryDocumentDetailUnit_Table1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607111252560_Modify_UserViewSettingsUnit_Table.cs" />
+    <Compile Include="Migrations\201607111252560_Modify_UserViewSettingsUnit_Table.Designer.cs">
+      <DependentUpon>201607111252560_Modify_UserViewSettingsUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2175,6 +2183,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607110908392_Update_Organization_POHistory_Tables.resx">
       <DependentUpon>201607110908392_Update_Organization_POHistory_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607111248590_Modify_PurchaseOrderEntryDocumentDetailUnit_Table1.resx">
+      <DependentUpon>201607111248590_Modify_PurchaseOrderEntryDocumentDetailUnit_Table1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607111252560_Modify_UserViewSettingsUnit_Table.resx">
+      <DependentUpon>201607111252560_Modify_UserViewSettingsUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

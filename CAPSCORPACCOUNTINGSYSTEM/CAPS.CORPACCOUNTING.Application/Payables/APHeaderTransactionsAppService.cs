@@ -166,19 +166,13 @@ namespace CAPS.CORPACCOUNTING.Payables
         [AbpAuthorize(AppPermissions.Pages_Payables_Invoices_Delete)]
         public async Task DeleteAPHeaderTransactionUnit(IdInput<long> input)
         {
-            List<PurchaseOrderEntryDocumentDetailUnit> poList =
-                await _purchaseOrderEntryDocumentDetailUnitRepository.GetAllListAsync(
-                        p => p.AccountingDocumentId == input.Id);
-            if (!ReferenceEquals(poList, null))
+            var invoiceDetailsList = await _invoiceEntryDocumentDetailUnitRepository.GetAllListAsync(p => p.AccountingDocumentId == input.Id);
+
+            foreach (var invoiceDetail in invoiceDetailsList)
             {
-                foreach (PurchaseOrderEntryDocumentDetailUnit poUnit in poList)
-                {
-                    if (poUnit.OriginalItemId > 0)
-                    {
-                        // await UpdatePurchaseOrderDetailUnit(poUnit.OriginalItemId.Value, poUnit.Amount.Value * 2, poUnit.Amount.Value);
-                    }
-                }
+                await _purchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType(invoiceDetail, null);
             }
+
             await _invoiceEntryDocumentDetailUnitRepository.DeleteAsync(p => p.AccountingDocumentId == input.Id);
             await _apHeaderTransactionsUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -321,7 +315,7 @@ namespace CAPS.CORPACCOUNTING.Payables
 
 
         /// <summary>
-        /// Creating InvoiceEntryDocumnetDetails
+        /// Creating InvoiceEntryDocumentDetails
         /// </summary>
         /// <param name="input"></param>
         /// /// <param name="accountingDocumnetId"></param>
@@ -347,13 +341,27 @@ namespace CAPS.CORPACCOUNTING.Payables
             var invoiceEntryDocumentDetailUnit = await _invoiceEntryDocumentDetailUnitRepository.GetAsync(invoiceEntryDocumentDetail.AccountingItemId);
             if (invoiceEntryDocumentDetail.PurchaseOrderItemId.Value > 0)
             {
-               var newInvoiceDetails = new InvoiceEntryDocumentDetailUnit();
+                var newInvoiceDetails = new InvoiceEntryDocumentDetailUnit();
                 Mapper.CreateMap<InvoiceEntryDocumentDetailUnit, InvoiceEntryDocumentDetailUnit>();
                 invoiceEntryDocumentDetail.MapTo(newInvoiceDetails);
                 await _purchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType(invoiceEntryDocumentDetailUnit, newInvoiceDetails);
             }
             Mapper.Map(invoiceEntryDocumentDetail, invoiceEntryDocumentDetailUnit);
             await _invoiceEntryDocumentDetailUnitManager.UpdateAsync(invoiceEntryDocumentDetailUnit);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_PurchaseOrders_Entry_Delete)]
+        [UnitOfWork]
+        public async Task DeleteAPHeaderTransactionDetailUnit(IdInput<long> input)
+        {
+            var invoiceDetail = await _invoiceEntryDocumentDetailUnitRepository.GetAsync(input.Id);
+            await _purchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType(invoiceDetail, null);
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
     }
 }

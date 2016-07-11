@@ -27,5 +27,11 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
         /// <summary>Gets or sets the OverRelieveAmount field. </summary>
         public virtual decimal? OverRelieveAmount { get; set; }
+
+        /// <summary>Gets or sets the RemainingAmount field. </summary>
+        public virtual decimal? RemainingAmount { get; set; }
+
+        /// <summary>Gets or sets the PendingAmount field. </summary>
+        public virtual decimal? PendingAmount { get; set; }
     }
 }

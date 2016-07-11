@@ -9,7 +9,7 @@ using System;
 namespace CAPS.CORPACCOUNTING.Masters
 {
     [Table("CAPS_UserViewSettings")]
-    public class UserViewSettingsUnit : FullAuditedEntity, IMustHaveTenant,IMayHaveOrganizationUnit
+    public class UserViewSettingsUnit : FullAuditedEntity, IMayHaveTenant,IMayHaveOrganizationUnit
     {
         public const int ViewSettingNameLength= 300;
         #region Class Property Declarations
@@ -40,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual bool? IsDefault { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
-        public virtual int TenantId { get; set; }
+        public virtual int? TenantId { get; set; }
 
         public long? OrganizationUnitId {get; set; }
 

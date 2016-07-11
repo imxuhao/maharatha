@@ -23,7 +23,11 @@
     titleConfig: {
         title: abp.localization.localize("CreateNewOrganization").initCap()
     },
-   // layout: 'fit',
+    // layout: 'fit',
+    defaults : {
+        labelWidth: 120,
+    },
+   
     items: [
         {
             xtype: 'hiddenfield',
@@ -34,11 +38,24 @@
         {
             xtype: 'textfield',
             name: 'displayName',
+            itemId : 'organizationName',
             allowBlank: false,
             fieldLabel: app.localize('OrganizationName').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')
+        },
+        {
+            xtype: 'combobox',
+            name: 'connectionStringId',
+            fieldLabel: app.localize('ConnectionString'),
+            width: '100%',
+            ui: 'fieldLabelTop',
+            displayField: 'name',
+            valueField: 'value',
+            emptyText: app.localize('SelectConnectionString'),
+            queryMode: 'local',
+            store: Ext.create('Chaching.store.administration.organization.ConnectionStringListStore')
         }
     ]
 });

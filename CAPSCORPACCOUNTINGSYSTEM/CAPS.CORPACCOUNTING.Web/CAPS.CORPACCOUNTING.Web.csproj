@@ -2045,6 +2045,7 @@
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\CompanyUserRoleListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\administration\organization\ConnectionStringListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\OrganizationListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\OrganizationsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\administration\organization\TenantListStore.js" />

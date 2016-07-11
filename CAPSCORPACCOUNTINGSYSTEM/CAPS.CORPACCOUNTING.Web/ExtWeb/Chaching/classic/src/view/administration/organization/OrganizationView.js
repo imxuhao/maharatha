@@ -8,11 +8,11 @@ Ext.define('Chaching.view.administration.organization.OrganizationView', {
     ],
 
     controller: 'administration-organizationunits-organizationunitsview',
-    height: 200,
+    height: 250,
     width: 450,
     layout: 'fit',
+    defaultFocus: 'textfield#organizationName',
     initComponent: function (config) {
-
         var me = this,
             controller = me.getController();
         var form = Ext.create('Chaching.view.administration.organization.OrganizationForm', {

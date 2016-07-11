@@ -9,6 +9,8 @@ using Abp.Linq.Extensions;
 using Abp.MultiTenancy;
 using CAPS.CORPACCOUNTING.Common.Dto;
 using CAPS.CORPACCOUNTING.Editions;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Common
 {
@@ -21,7 +23,10 @@ namespace CAPS.CORPACCOUNTING.Common
         {
             _editionManager = editionManager;
         }
-
+        /// <summary>
+        /// Abp Method
+        /// </summary>
+        /// <returns></returns>
         public async Task<ListResultOutput<ComboboxItemDto>> GetEditionsForCombobox()
         {
             var editions = await _editionManager.Editions.ToListAsync();
@@ -50,6 +55,48 @@ namespace CAPS.CORPACCOUNTING.Common
                             u.EmailAddress.Contains(input.Filter)
                     );
 
+                var userCount = await query.CountAsync();
+                var users = await query
+                    .OrderBy(u => u.Name)
+                    .ThenBy(u => u.Surname)
+                    .PageBy(input)
+                    .ToListAsync();
+
+                return new PagedResultOutput<NameValueDto>(
+                    userCount,
+                    users.Select(u =>
+                        new NameValueDto(
+                            u.FullName + " (" + u.EmailAddress + ")",
+                            u.Id.ToString()
+                            )
+                        ).ToList()
+                    );
+            }
+        }
+
+
+        /// <summary>
+        /// Created by us for get the users by TenantId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<NameValueDto>> FindUsersByTenant(FindUsersInputDto input)
+        {
+            if (AbpSession.TenantId != null)
+            {
+                //Prevent tenants to get other tenant's users.
+                input.TenantId = AbpSession.TenantId;
+            }
+
+            using (CurrentUnitOfWork.SetTenantId(input.TenantId))
+            {
+                var query = UserManager.Users;
+                if (!ReferenceEquals(input.Filters, null))
+                {
+                    SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                    if (!ReferenceEquals(mapSearchFilters, null))
+                        query = Helper.CreateFilters(query, mapSearchFilters);
+                }
                 var userCount = await query.CountAsync();
                 var users = await query
                     .OrderBy(u => u.Name)

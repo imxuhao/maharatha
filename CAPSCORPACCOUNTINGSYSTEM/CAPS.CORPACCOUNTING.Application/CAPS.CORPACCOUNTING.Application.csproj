@@ -211,6 +211,7 @@
     <Compile Include="Caching\CachingAppService.cs" />
     <Compile Include="Caching\Dto\CacheDto.cs" />
     <Compile Include="Caching\ICachingAppService.cs" />
+    <Compile Include="Common\Dto\FindUsersInputDto.cs" />
     <Compile Include="Configuration\ConnectionString\ConnectionStringAppService.cs" />
     <Compile Include="Configuration\ConnectionString\Dto\ConnectionStringInput.cs" />
     <Compile Include="Configuration\ConnectionString\IConnectionStringAppService.cs" />

@@ -2528,6 +2528,26 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:CAPS.CORPACCOUNTING.Banking.IBatchUnitAppService.GetBatchTypeList" -->
+        <member name="M:CAPS.CORPACCOUNTING.Common.CommonLookupAppService.GetEditionsForCombobox">
+            <summary>
+            Abp Method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Common.CommonLookupAppService.FindUsersByTenant(CAPS.CORPACCOUNTING.Common.Dto.FindUsersInputDto)">
+            <summary>
+            Created by us for get the users by TenantId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Common.ICommonLookupAppService.FindUsersByTenant(CAPS.CORPACCOUNTING.Common.Dto.FindUsersInputDto)">
+            <summary>
+            Get Users By tenantId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Configuration.ConnectionString.ConnectionStringAppService.CreateConnectionStringUnit(CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput)">
             <summary>
             Create ConnectionStrings

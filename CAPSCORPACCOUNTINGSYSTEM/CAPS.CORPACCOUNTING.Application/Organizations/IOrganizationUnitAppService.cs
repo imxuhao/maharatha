@@ -53,11 +53,11 @@ namespace CAPS.CORPACCOUNTING.Organizations
 
 
         /// <summary>
-        /// Get Organization List
+        /// Get Comapny List
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<OrganizationUnitDto>> GetOrganizationUnits(SearchInputDto input);
+        Task<PagedResultOutput<OrganizationUnitDto>> GetComapnySetUpUnits(SearchInputDto input);
 
         /// <summary>
         /// Update Default Settings of Company
@@ -78,25 +78,39 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task CreateHostOrganizationUnit(CreateOrganizationUnitInput input);
+        Task CreateHostOrganizationUnit(CreateHostOrganizationUnitInput input);
 
         /// <summary>
         /// UpdatingHostOrganization
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task UpdateHostOrganizationUnit(UpdateOrganizationUnitInput input);
+        Task UpdateHostOrganizationUnit(UpdateHostOrganizationUnitInput input);
 
         /// <summary>
         /// GetHostOrganization
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<OrganizationUnitDto>> GetHostOrganizationUnits(SearchInputDto input);
+        Task<PagedResultOutput<HostOrganizationUnitDto>> GetHostOrganizationUnits(SearchInputDto input);
         /// <summary>
         /// Get OrganizationList
         /// </summary>
         /// <returns></returns>
         Task<List<NameValueDto>> GetHostOrganizationsList();
+
+        /// <summary>
+        /// Get ConnectionStringList
+        /// </summary>
+        /// <returns></returns>
+
+        Task<List<NameValueDto>> GetConnectionStrings();
+
+
+        /// <summary>
+        /// Get ConnectionStringList
+        /// </summary>
+        /// <returns></returns>
+        Task DeleteHostOrganizationUnit(IdInput<long> input);
     }
 }

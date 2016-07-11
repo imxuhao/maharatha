@@ -51,6 +51,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSession;
         private readonly IOrganizationSettingManager _organizationSettingManager;
+        private readonly IRepository<ConnectionStringUnit> _connectionStringRepository;
         public OrganizationUnitAppService(
             OrganizationExtendedUnitManager organizationExtendedUnitManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
@@ -61,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
             IUnitOfWorkManager unitOfWorkManager,
             CustomAppSession customAppSession,
             IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
-           IOrganizationSettingManager organizationSettingManager)
+           IOrganizationSettingManager organizationSettingManager, IRepository<ConnectionStringUnit> connectionStringRepository)
         {
             _organizationExtendedUnitManager = organizationExtendedUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
@@ -69,6 +70,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
             _addressRepository = addressRepository;
 
             _organizationSettingManager = organizationSettingManager;
+            _connectionStringRepository = connectionStringRepository;
             _settingDefinitionManager = settingDefinitionManager;
             _appFolders = appFolders;
             _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
@@ -76,6 +78,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
             _customAppSession = customAppSession;
         }
 
+        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits)]
         public async Task<ListResultOutput<OrganizationUnitDto>> GetOrganizationUnits()
         {
             var query =
@@ -99,7 +102,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits)]
-        public async Task<PagedResultOutput<OrganizationUnitDto>> GetHostOrganizationUnits(SearchInputDto input)
+        public async Task<PagedResultOutput<HostOrganizationUnitDto>> GetHostOrganizationUnits(SearchInputDto input)
         {
             var query = from organization in _organizationExtendedUnitRepository.GetAll()
                         select new { organization };
@@ -112,28 +115,26 @@ namespace CAPS.CORPACCOUNTING.Organizations
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-           
 
+            query = query.Where(p => p.organization.Id != 1);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
                 .OrderBy(Helper.GetSort("organization.DisplayName ASC", input.Sorting))
                 .PageBy(input)
                 .ToListAsync();
-            return new PagedResultOutput<OrganizationUnitDto>(resultCount, results.Select(item =>
+            return new PagedResultOutput<HostOrganizationUnitDto>(resultCount, results.Select(item =>
             {
-                var dto = item.organization.MapTo<OrganizationUnitDto>();
+                var dto = item.organization.MapTo<HostOrganizationUnitDto>();
                 return dto;
             }).ToList());
         }
 
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
-        public async Task CreateHostOrganizationUnit(CreateOrganizationUnitInput input)
+        public async Task CreateHostOrganizationUnit(CreateHostOrganizationUnitInput input)
         {
-
-
-            var organizationUnit = new OrganizationExtended(AbpSession.TenantId, input.DisplayName, input.ParentId, input.TransmitterContactName,
-                input.TransmitterEmailAddress, input.TransmitterCode, input.TransmitterControlCode, input.FederalTaxId, null);
+          
+            var organizationUnit = new OrganizationExtended(tenantid: AbpSession.TenantId, displayname:input.DisplayName,parentid: input.ParentId,connectionStringid:input.ConnectionStringId);
 
             await _organizationExtendedUnitManager.CreateAsync(organizationUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -141,14 +142,12 @@ namespace CAPS.CORPACCOUNTING.Organizations
 
      
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
-        public async Task  UpdateHostOrganizationUnit(UpdateOrganizationUnitInput input)
+        public async Task  UpdateHostOrganizationUnit(UpdateHostOrganizationUnitInput input)
         {
-
             var organizationUnit = await _organizationExtendedUnitRepository.GetAsync(input.Id);
             organizationUnit.DisplayName = input.DisplayName;
             await _organizationExtendedUnitManager.UpdateAsync(organizationUnit);
         }
-
 
         /// <summary>
         /// Get ComapnySetup (Tenant Organizations)
@@ -157,7 +156,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <returns></returns>
 
         [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp)]
-        public async Task<PagedResultOutput<OrganizationUnitDto>> GetOrganizationUnits(SearchInputDto input)
+        public async Task<PagedResultOutput<OrganizationUnitDto>> GetComapnySetUpUnits(SearchInputDto input)
         {
             var query = from organization in _organizationExtendedUnitRepository.GetAll()
                         join address in _addressRepository.GetAll().Where(u => u.TypeofObjectId == TypeofObject.Org) on organization.Id equals address.ObjectId into addresss
@@ -336,11 +335,22 @@ namespace CAPS.CORPACCOUNTING.Organizations
                 );
         }
 
-        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Delete)]
         public async Task DeleteOrganizationUnit(IdInput<long> input)
         {
-            await _addressRepository.DeleteAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Org);
-            await _organizationExtendedUnitManager.DeleteAsync(input.Id);
+            if (input.Id != 1)
+            {
+                await _addressRepository.DeleteAsync(p => p.ObjectId == input.Id && p.TypeofObjectId == TypeofObject.Org);
+                await _organizationExtendedUnitManager.DeleteAsync(input.Id);
+            }
+        }
+        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        public async Task DeleteHostOrganizationUnit(IdInput<long> input)
+        {
+            if (input.Id != 1)
+            {
+                await _organizationExtendedUnitManager.DeleteAsync(input.Id);
+            }
         }
 
         [UnitOfWork]
@@ -542,6 +552,17 @@ namespace CAPS.CORPACCOUNTING.Organizations
             select new NameValueDto { Name = organization.DisplayName, Value = organization.Id.ToString() }).ToListAsync();
             return organizations;
         }
-      
+
+        /// <summary>
+        /// Get ConnectionStringList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetConnectionStrings()
+        {
+            return await _connectionStringRepository.GetAll()
+                .Where(p => p.Name != "DefaultConnection").Select(u => new NameValueDto { Name = u.Name, Value = u.Id.ToString() }).ToListAsync();
+
+        }
+
     }
 }

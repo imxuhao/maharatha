@@ -211,6 +211,9 @@
     <Compile Include="Caching\CachingAppService.cs" />
     <Compile Include="Caching\Dto\CacheDto.cs" />
     <Compile Include="Caching\ICachingAppService.cs" />
+    <Compile Include="Configuration\ConnectionString\ConnectionStringAppService.cs" />
+    <Compile Include="Configuration\ConnectionString\Dto\ConnectionStringInput.cs" />
+    <Compile Include="Configuration\ConnectionString\IConnectionStringAppService.cs" />
     <Compile Include="Configuration\Host\Dto\OrganizationManagementSettingsEditDto.cs" />
     <Compile Include="Configuration\Host\Dto\SendTestEmailInput.cs" />
     <Compile Include="Configuration\Host\Dto\TenantManagementSettingsEditDto.cs" />
@@ -485,6 +488,9 @@
     <Compile Include="Notifications\Dto\UpdateNotificationSettingsInput.cs" />
     <Compile Include="Notifications\INotificationAppService.cs" />
     <Compile Include="Notifications\NotificationAppService.cs" />
+    <Compile Include="Organizations\Dto\HostOrganizationUnitDto.cs" />
+    <Compile Include="Organizations\Dto\UpdateHostOrganizationUnitInput.cs" />
+    <Compile Include="Organizations\Dto\CreateHostOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\UserToOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\CreateOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\GetOrganizationUnitUsersInput.cs" />

@@ -8,7 +8,7 @@
             create: abp.appPath + 'api/services/app/organizationUnit/CreateHostOrganizationUnit',
             read: abp.appPath + 'api/services/app/organizationUnit/GetHostOrganizationUnits',
             update: abp.appPath + 'api/services/app/organizationUnit/UpdateHostOrganizationUnit',
-            destroy: abp.appPath + 'api/services/app/organizationUnit/DeleteOrganizationUnit'
+            destroy: abp.appPath + 'api/services/app/organizationUnit/DeleteHostOrganizationUnit'
         }
     },
     idPropertyField: 'id'//important to set for add/update of records

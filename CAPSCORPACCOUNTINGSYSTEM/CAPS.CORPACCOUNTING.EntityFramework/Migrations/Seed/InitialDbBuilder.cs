@@ -1,5 +1,6 @@
 ﻿using EntityFramework.DynamicFilters;
 using CAPS.CORPACCOUNTING.EntityFramework;
+using CAPS.CORPACCOUNTING.Migrations.Seed.Host;
 
 namespace CAPS.CORPACCOUNTING.Migrations.Seed
 {
@@ -32,6 +33,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
             //new DefaultValueAddedTaxTypeCreator(_context).Create();
             //new DefaultValueAddedTaxRecoveryCreator(_context).Create();
             new DefaultSystemViewSettingsCreator(_context).Create();
+            
             _context.SaveChanges();
         }
         

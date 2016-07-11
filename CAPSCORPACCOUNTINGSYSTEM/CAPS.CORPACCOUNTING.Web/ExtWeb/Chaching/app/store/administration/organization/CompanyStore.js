@@ -6,7 +6,7 @@
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
             create: abp.appPath + 'api/services/app/organizationUnit/CreateOrganizationUnit',
-            read: abp.appPath + 'api/services/app/organizationUnit/GetOrganizationUnits',
+            read: abp.appPath + 'api/services/app/organizationUnit/GetComapnySetUpUnits',
             update: abp.appPath + 'api/services/app/organizationUnit/UpdateOrganizationUnit',
             destroy: abp.appPath + 'api/services/app/organizationUnit/DeleteOrganizationUnit'
         }

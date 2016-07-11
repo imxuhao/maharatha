@@ -2528,6 +2528,28 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:CAPS.CORPACCOUNTING.Banking.IBatchUnitAppService.GetBatchTypeList" -->
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.ConnectionString.ConnectionStringAppService.CreateConnectionStringUnit(CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput)">
+            <summary>
+            Create ConnectionStrings
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput.ConnectionString">
+            <summary>Gets or sets the Name field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Configuration.ConnectionString.IConnectionStringAppService">
+            <summary>
+            ConnectionString Service
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.ConnectionString.IConnectionStringAppService.CreateConnectionStringUnit(CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput)">
+            <summary>
+            Create ConnectionString
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Configuration.Host.Dto.GeneralSettingsEditDto.TimezoneForComparison">
             <summary>
             This value is only used for comparing user's timezone to default timezone
@@ -8967,6 +8989,15 @@
         <member name="F:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames.ApplicationZip">
             <summary>ZIP archive files; Registered[7]</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateHostOrganizationUnitInput.DisplayName">
+            <summary>Gets or sets the Organization Name field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateHostOrganizationUnitInput.DisplayName">
+            <summary>Gets or sets the Organization Name field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateHostOrganizationUnitInput.ConnectionStringId">
+            <summary>Gets or sets the ConnectionStringId Name field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.DisplayName">
             <summary>Gets or sets the Organization Name field. </summary>
         </member>
@@ -9067,9 +9098,9 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetComapnySetUpUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
-            Get Organization List
+            Get Comapny List
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -9088,14 +9119,14 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.CreateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.CreateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateHostOrganizationUnitInput)">
             <summary>
             Creating HostOrganization
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateHostOrganizationUnitInput)">
             <summary>
             UpdatingHostOrganization
             </summary>
@@ -9115,6 +9146,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetConnectionStrings">
+            <summary>
+            Get ConnectionStringList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.DeleteHostOrganizationUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Get ConnectionStringList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetHostOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get OrganizationList(HOST)
@@ -9122,7 +9165,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetComapnySetUpUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get ComapnySetup (Tenant Organizations)
             </summary>
@@ -9152,6 +9195,12 @@
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetHostOrganizationsList">
             <summary>
             Get Host OrganizationsList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetConnectionStrings">
+            <summary>
+            Get ConnectionStringList
             </summary>
             <returns></returns>
         </member>

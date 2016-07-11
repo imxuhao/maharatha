@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Organizations;
 using System.ComponentModel.DataAnnotations;
+using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Organization
 {
@@ -34,9 +35,29 @@ namespace CAPS.CORPACCOUNTING.Organization
 
         public virtual byte[] Logo { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the ConnectionSting
+        /// </summary>
+        public virtual int? ConnectionStringId { get; set; }
+
+        [ForeignKey("ConnectionStringId")]
+        public ConnectionStringUnit ConnectionString { get; set; }
+
         public OrganizationExtended()
         {
 
+        }
+
+        public OrganizationExtended(int  connectionstringid)
+        {
+            ConnectionStringId = connectionstringid;
+            DisplayName = "Default";
+            Code = "00001";
+
+        }
+        public OrganizationExtended(int? tenantid, string displayname, int connectionStringid, long? parentid = default(long?)) : base(tenantid, displayname, parentid)
+        {
+            ConnectionStringId = connectionStringid;
         }
 
         public OrganizationExtended(int? tenantid, string displayname, long? parentid = default(long?), string transmittercontactname="", string transmitteremailaddress = "",

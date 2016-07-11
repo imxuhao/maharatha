@@ -43,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         #region Class Property Declarations
 
         /// <summary>Overriding the Id column with AccountingItemId </summary>
-        [Column("CAPS_PurchaseOrderHistoryId")]
+        [Column("PurchaseOrderHistoryId")]
         public override long Id { get; set; }
 
         public virtual long AccountingItemId { get; set; }

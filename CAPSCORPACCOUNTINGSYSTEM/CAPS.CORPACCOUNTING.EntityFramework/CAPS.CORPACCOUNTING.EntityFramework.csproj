@@ -1280,6 +1280,14 @@
     <Compile Include="Migrations\201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.Designer.cs">
       <DependentUpon>201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607110819339_Add_ConnectionStrings_Table.cs" />
+    <Compile Include="Migrations\201607110819339_Add_ConnectionStrings_Table.Designer.cs">
+      <DependentUpon>201607110819339_Add_ConnectionStrings_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607110908392_Update_Organization_POHistory_Tables.cs" />
+    <Compile Include="Migrations\201607110908392_Update_Organization_POHistory_Tables.Designer.cs">
+      <DependentUpon>201607110908392_Update_Organization_POHistory_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -1297,6 +1305,8 @@
     <Compile Include="Migrations\Seed\DefaultValueAddedTaxRecoveryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultValueAddedTaxTypeCreator.cs" />
     <Compile Include="Migrations\Seed\EnumGenerator.cs" />
+    <Compile Include="Migrations\Seed\Host\DefaultConnectionStringCreator.cs" />
+    <Compile Include="Migrations\Seed\Host\DefaultOrganizationCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultSettingsCreator.cs" />
@@ -2159,6 +2169,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.resx">
       <DependentUpon>201607080725032_Modify_PurchaseOrderEntryDocumentDetailUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607110819339_Add_ConnectionStrings_Table.resx">
+      <DependentUpon>201607110819339_Add_ConnectionStrings_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607110908392_Update_Organization_POHistory_Tables.resx">
+      <DependentUpon>201607110908392_Update_Organization_POHistory_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

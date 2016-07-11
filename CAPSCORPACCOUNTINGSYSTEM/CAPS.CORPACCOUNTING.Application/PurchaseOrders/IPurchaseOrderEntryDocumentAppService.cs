@@ -65,6 +65,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         /// <returns></returns>
         Task<List<AutoFillDto>> GetCardInfoList(AutoSearchInput input);
 
+        Task<PagedResultOutput<PurchaseOrderEntryDocumentUnitDto>> GetPurchaseOrderEntryDocumentUnitsNew(SearchInputDto input);
+
 
 
 

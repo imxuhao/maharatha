@@ -120,6 +120,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         public async Task<IdOutputDto<long>> CreatePurchaseOrderEntryDocumentUnit(PurchaseOrderEntryDocumentInputUnit input)
         {
             var purchaseOrderTransactions = input.MapTo<PurchaseOrderEntryDocumentUnit>();
+            purchaseOrderTransactions.TypeOfAccountingDocumentId = TypeOfAccountingDocument.PurchaseOrders;
             IdOutputDto<long> response = new IdOutputDto<long>
             {
                 Id = await _purchaseOrderEntryDocumentUnitManager.CreateAsync(purchaseOrderTransactions)
@@ -154,6 +155,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
             var purchaseOrderTransactionsInput = await _purchaseOrderEntryDocumentUnitRepository.GetAsync(input.AccountingDocumentId);
             Mapper.Map(input, purchaseOrderTransactionsInput);
+            purchaseOrderTransactionsInput.TypeOfAccountingDocumentId = TypeOfAccountingDocument.PurchaseOrders;
             await _purchaseOrderEntryDocumentUnitManager.UpdateAsync(purchaseOrderTransactionsInput);
 
             if (!ReferenceEquals(input.PurchaseOrderDetailList, null))
@@ -176,7 +178,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
                         var PODetails = new PurchaseOrderEntryDocumentDetailUnit();
                         Mapper.Map(purchaseOrderDetail, PODetails);
-                        await CreatePurchaseOrderHistory(purchaseOrderDetailUnit, PODetails, true);
+                        await CreatePurchaseOrderHistory(purchaseOrderDetailUnit, PODetails, false);
 
                         Mapper.Map(purchaseOrderDetail, purchaseOrderDetailUnit);
                         await _purchaseOrderDetailUnitManager.UpdateAsync(purchaseOrderDetailUnit);
@@ -268,9 +270,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
             query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
                 p => p.purchaseOrder.OrganizationUnitId == input.OrganizationUnitId)
-                .Where(u =>
-                        u.purchaseOrder.TypeOfAccountingDocumentId == TypeOfAccountingDocument.PurchaseOrders &&
-                        u.purchaseOrder.IsPosted == unPosted);
+                .Where(u =>u.purchaseOrder.TypeOfAccountingDocumentId == TypeOfAccountingDocument.PurchaseOrders
+                        && u.purchaseOrder.IsPosted == unPosted);
 
 
 
@@ -294,6 +295,91 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                 return dto;
             }).ToList());
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<PurchaseOrderEntryDocumentUnitDto>> GetPurchaseOrderEntryDocumentUnitsNew(SearchInputDto input)
+        {
+
+            bool unPosted = false;
+            var query = from purchaseOrder in _purchaseOrderEntryDocumentUnitRepository.GetAll()
+                        join users in _userUnitRepository.GetAll() on purchaseOrder.CreatorUserId equals users.Id
+                        join vendor in _vendorUnitRepository.GetAll() on purchaseOrder.VendorId equals vendor.Id into vendor
+                        from vendors in vendor.DefaultIfEmpty()
+                        join approvedsox in
+                            _approvedSoxUnitRepository.GetAll()
+                                .Where(u => u.TypeOfObjectId == TypeofObject.PurchaseOrderEntryDocument) on purchaseOrder.Id
+                            equals approvedsox.ObjectId into approvedsoxs
+                        from approvedsox in approvedsoxs.DefaultIfEmpty()
+                        join approvedUser in _vendorUnitRepository.GetAll() on approvedsox.ApprovedByUserId equals
+                            approvedUser.Id into approvedUser
+                        from approvedUsers in approvedUser.DefaultIfEmpty()
+                        select new
+                        {
+                            purchaseOrder,
+                            VendorName = vendors.LastName,
+                            CreatedUser = users.UserName,
+                            ApprovedBy = approvedUser
+                        };
+
+            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
+                p => p.purchaseOrder.OrganizationUnitId == input.OrganizationUnitId)
+                .Where(u =>
+                        u.purchaseOrder.TypeOfAccountingDocumentId == TypeOfAccountingDocument.PurchaseOrders &&
+                        u.purchaseOrder.IsPosted == unPosted);
+
+
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                .OrderBy(Helper.GetSort("purchaseOrder.DocumentReference DESC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+
+            var poIdList = string.Join(",", results.Select(x => x.purchaseOrder.Id.ToString()).ToArray());
+
+            var poDetailsList = from poDetail in _purchaseOrderDetailUnitRepository.GetAll()
+                                join account in _accountUnitRepository.GetAll() on poDetail.AccountId equals account.Id
+                                join job in _jobUnitRepository.GetAll() on poDetail.AccountId equals job.Id
+                                select new
+                                {
+                                    AccountingDocumentId = poDetail.AccountingDocumentId,
+                                    Account = account.AccountNumber,
+                                    Job = job.JobNumber
+                                };
+
+            var poDetails = poDetailsList.Where(u => poIdList.Contains(u.AccountingDocumentId.ToString())).ToList();
+
+            var poOrders = (poDetails.GroupBy(i => i.AccountingDocumentId)
+                .Select(g => new
+                {
+                    g.Key,
+                    Jobs = string.Join(",", g.Select(kvp => kvp.Job)),
+                    Account = string.Join(",", g.Select(kvp => kvp.Account))
+                })).ToList();
+
+            var poList = from PO in results
+                         join details in poOrders on PO.purchaseOrder.Id equals details.Key
+                         select new { PurchaseOrder = PO, PODetails = details };
+
+
+            return new PagedResultOutput<PurchaseOrderEntryDocumentUnitDto>(resultCount, poList.Select(item =>
+            {
+                var dto = item.PurchaseOrder.MapTo<PurchaseOrderEntryDocumentUnitDto>();
+                dto.JobNumber = item.PODetails.Jobs;
+                // dto.TypeOfCurrency = item.TypeOfCurrency;
+                dto.AccountNumber = item.PODetails.Account;
+                dto.AccountingDocumentId = item.PurchaseOrder.purchaseOrder.Id;
+                dto.VendorName = item.PurchaseOrder.VendorName;
+                dto.CreatedUser = item.PurchaseOrder.CreatedUser;
+                return dto;
+            }).ToList());
+        }
+
 
         /// <summary>
         /// 
@@ -394,7 +480,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
             var PurchaseOrderHistoryList = new List<PurchaseOrderHistory>();
 
             Mapper.CreateMap<PurchaseOrderEntryDocumentDetailUnit, PurchaseOrderHistory>()
-               .ForMember(u => u.Id, ap => ap.Ignore());
+                .ForMember(u => u.Id, ap => ap.Ignore());
 
             newDetailEntity.MapTo(purchaseOrderHistory);
             purchaseOrderHistory.AccountingItemId = newDetailEntity.Id;
@@ -405,7 +491,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                 purchaseOrderHistory.ModificationTypeId = ModificationType.NewRowAdded;
                 PurchaseOrderHistoryList.Add(purchaseOrderHistory);
                 originalDetailEntity.MapTo(purchaseOrderHistory);
-
+                purchaseOrderHistory.AccountingItemId = originalDetailEntity.Id;
 
                 //if amount Changed
                 int value = decimal.Compare(originalDetailEntity.Amount.Value, newDetailEntity.Amount.Value);
@@ -437,7 +523,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                 ((originalDetailEntity.SubAccountId3 ?? 0) != (newDetailEntity.SubAccountId3 ?? 0)) ||
                 (originalDetailEntity.ItemMemo.Trim() != newDetailEntity.ItemMemo.Trim()) ||
                 ((originalDetailEntity.TaxRebateId ?? 0) != (newDetailEntity.TaxRebateId ?? 0)) ||
-                (originalDetailEntity.AccountRef3  != newDetailEntity.AccountRef3) ||
+                (originalDetailEntity.AccountRef3 != newDetailEntity.AccountRef3) ||
                 ((originalDetailEntity.VendorId ?? 0) != (newDetailEntity.VendorId ?? 0)))
                 {
                     originalDetailEntity.Amount = -purchaseOrderHistory.Amount;

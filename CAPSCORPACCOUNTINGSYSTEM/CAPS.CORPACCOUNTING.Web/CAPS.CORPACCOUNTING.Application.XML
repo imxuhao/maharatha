@@ -10312,6 +10312,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrderEntryDocumentUnitsNew(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrdersByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             

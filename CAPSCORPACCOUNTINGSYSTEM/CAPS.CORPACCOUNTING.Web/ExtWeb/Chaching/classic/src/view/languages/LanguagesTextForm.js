@@ -15,7 +15,8 @@ Ext.define('Chaching.view.languages.LanguagesTextForm',{
         edit: abp.auth.isGranted('Pages.Administration.Languages.Edit'),
         destroy: abp.auth.isGranted('Pages.Administration.Languages.Delete')
     },
-    openInPopupWindow: true,
+    //openInPopupWindow: true,
+    openInPopupWindow: false,
     layout: 'vbox',
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
@@ -38,6 +39,8 @@ Ext.define('Chaching.view.languages.LanguagesTextForm',{
                         {
                             xtype: 'combobox',
                             name: 'baseLanguage',
+                            itemId: 'baseLanguageItemId',
+                            reference: 'baseLanguageItemId',
                             fieldLabel: app.localize('BaseLanguage').initCap(),
                             width: '99%',
                             ui: 'fieldLabelTop',
@@ -77,6 +80,8 @@ Ext.define('Chaching.view.languages.LanguagesTextForm',{
                             displayField: 'displayName',
                             valueField: 'name',
                             labelAlign: 'top',
+                            itemId: 'targetLanguageItemId',
+                            reference: 'targetLanguageItemId',
                             listeners: {
                                 change: 'getLanguageTextsonChange'
                             },

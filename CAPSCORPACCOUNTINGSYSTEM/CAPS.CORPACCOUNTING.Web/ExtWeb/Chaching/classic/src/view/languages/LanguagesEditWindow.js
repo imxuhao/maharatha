@@ -9,7 +9,7 @@ Ext.define('Chaching.view.languages.LanguagesEditWindow', {
 
     controller: 'languages-languageseditwindow',
     height: 500,
-    width: 450,
+    width: 500,
     layout: 'fit',
     iconCls: 'fa fa-edit',
     title: app.localize("Edit text"),

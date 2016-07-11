@@ -8,8 +8,8 @@ Ext.define('Chaching.view.languages.LanguagesTextView',{
     ],
     controller: 'languages-languagestextview',
     columndata: null,
-    height: 600,
-    width: 900,
+    height: 680,
+    width: 1100,
     layout: 'fit',
     title: app.localize("LanguageTexts"),
     initComponent: function (config) {

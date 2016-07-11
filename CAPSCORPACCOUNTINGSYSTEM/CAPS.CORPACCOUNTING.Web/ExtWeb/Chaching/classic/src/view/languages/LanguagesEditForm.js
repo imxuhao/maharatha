@@ -26,9 +26,20 @@ Ext.define('Chaching.view.languages.LanguagesEditForm', {
     items: [
         {
             xtype: 'hiddenfield',
-            name: 'id',
-            value: 0
+            name: 'hiddenKey'
         },
+        {
+            xtype: 'hiddenfield',
+            name: 'rowNumber'
+        },
+         {
+             xtype: 'hiddenfield',
+             name: 'sourceName'
+         },
+         {
+             xtype: 'hiddenfield',
+             name: 'hiddenTargetLanguage'
+         },
         {
             xtype: 'displayfield',
             name: 'key',
@@ -36,25 +47,39 @@ Ext.define('Chaching.view.languages.LanguagesEditForm', {
             fieldLabel: app.localize('Key'),
             margin: '0 0 0 10'
         },
+         {
+             xtype: 'displayfield',
+             name: 'sourceLanguage',
+             // ui: 'fieldLabelTop',
+             //fieldLabel: app.localize('Key'),
+             margin: '0 0 0 10'
+         },
         {
              xtype: 'textareafield',
              //grow: true,
              name: 'baseValue',
-             itemId: 'baseValueId',
+             itemId: 'baseValue',
              disabled:true,
              ui: 'fieldLabelTop',
              width:'100%',
-             fieldLabel: app.localize('Base Value'),
+             //fieldLabel: app.localize('Base Value'),
              margin: '0 0 0 10',
              anchor: '100%'
-         },
+        },
+        {
+            xtype: 'displayfield',
+            name: 'targetLanguage',
+            // ui: 'fieldLabelTop',
+            //fieldLabel: app.localize('Key'),
+            margin: '0 0 0 10'
+        },
          {
               xtype: 'textareafield',
-              name: 'targetValue',
-              itemId: 'targetValueId',
+              name: 'value',
+              itemId: 'value',
               ui: 'fieldLabelTop',
               width: '100%',
-              fieldLabel: app.localize('Target Value'),
+              //fieldLabel: app.localize('Target Value'),
               margin: '0 0 0 10',
               anchor: '100%'
           }
@@ -63,7 +88,7 @@ Ext.define('Chaching.view.languages.LanguagesEditForm', {
         {
             xtype: 'button',
             scale: 'small',
-            iconCls: 'fa fa-save',
+            iconCls: 'fa fa-previous',
             iconAlign: 'left',
             text: app.localize('Previous').toUpperCase(),
             ui: 'actionButton',
@@ -71,7 +96,7 @@ Ext.define('Chaching.view.languages.LanguagesEditForm', {
             itemId: 'BtnPrevious',
             reference: 'BtnPrevious',
             listeners: {
-                click: 'onPreviousClicked'
+                click: 'onSaveClicked'
             }
         },
         {
@@ -93,7 +118,7 @@ Ext.define('Chaching.view.languages.LanguagesEditForm', {
             scale: 'small',
             iconCls: 'fa fa-save',
             iconAlign: 'left',
-            text: app.localize('Save').toUpperCase(),
+            text: app.localize('SaveAndClose').toUpperCase(),
             ui: 'actionButton',
             name: 'Save',
             itemId: 'BtnSave',
@@ -105,16 +130,15 @@ Ext.define('Chaching.view.languages.LanguagesEditForm', {
         {
             xtype: 'button',
             scale: 'small',
-            iconCls: 'fa fa-edit',
+            iconCls: 'fa fa-save',
             iconAlign: 'left',
-            text: app.localize('Edit').toUpperCase(),
+            text: app.localize('SaveAndNext').toUpperCase(),
             ui: 'actionButton',
-            name: 'Edit',
-            itemId: 'BtnEdit',
-            reference: 'BtnEdit',
-            hidden: true,
+            name: 'SaveNext',
+            itemId: 'BtnSaveNext',
+            reference: 'BtnSaveNext',
             listeners: {
-                click: 'onEditButtonClicked'
+                click: 'onSaveClicked'
             }
         }
         

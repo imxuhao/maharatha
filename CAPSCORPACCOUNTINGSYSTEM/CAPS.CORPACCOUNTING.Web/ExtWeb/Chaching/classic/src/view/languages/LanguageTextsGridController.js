@@ -13,29 +13,45 @@ Ext.define('Chaching.view.languages.LanguageTextsGridController', {
         var grid = me.getView();
         var columnName = grid.columns[cellIndex].dataIndex;
         if (columnName == 'isEdit') {
-            //me.createNewRecord('Languagetexts', 'popup', true, 'Edit text', record);
-            var formView = Ext.create({
-                xtype: 'Languagetexts.editView'
-            });
+            //var formView = Ext.create({
+            //    xtype: 'Languagetexts.editView'
+            //});
+            var formView = Ext.widget('Languagetexts.editView');
+            formView.parentGrid = grid;
             formView.show();
-            var form = grid.up('form');
-            //var basicForm = form.getForm();
-            //var baseLanguage = basicForm.findField('baseLanguage');
-            //var targetLanguage = basicForm.findField('targetLanguage');
-           
-            form.loadRecord(record);
-
+            var languageForm = grid.up('form'),
+                basicForm = languageForm.getForm(),
+                languageRecord = basicForm.getValues(),
+                baseLaguage = basicForm.findField('baseLanguage').getRawValue(),
+                targetLanguage = basicForm.findField('targetLanguage').getRawValue();
+            var newRecord = {
+                sourceName: languageRecord.source,
+                baseValue: record.get('baseValue'),
+                value: record.get('targetValue'),
+                key: record.get('key'),
+                hiddenKey: record.get('key'),
+                targetLanguage: targetLanguage,
+                hiddenTargetLanguage: basicForm.findField('targetLanguage').getValue(),
+                rowNumber: rowIndex
+            }
+            var languageEditForm = formView.down('form').getForm();
+            languageEditForm.setValues(newRecord);
+            languageEditForm.findField('sourceLanguage').setHtml('<i class="famfamfam-flag famfamfam-flag-' + languageRecord.baseLanguage + '">' + baseLaguage + '</i>');
+            var previousButton = formView.query("#BtnPrevious")[0];
+            if (rowIndex == 0) {
+                previousButton.setDisabled(true);
+            }
         }
         
     },
-    doAfterCreateAction: function (createNewMode, form, isEdit, record) {
-
-        var me = this;
-        debugger;
-        // Open a window on click of Edit in Grid
-        var grid = me.getView();
-        
-
-    }
+    doBeforeInlineAddUpdate: function (record) {
+        var me = this,
+            view = me.getView(),
+            gridStore = view.getStore(),
+            storeProxy = gridStore.getProxy();
+        record.set('languageName', storeProxy.extraParams.TargetLanguageName);
+        record.set('value', record.get('targetValue'));
+        return record;
+    },
 
 });

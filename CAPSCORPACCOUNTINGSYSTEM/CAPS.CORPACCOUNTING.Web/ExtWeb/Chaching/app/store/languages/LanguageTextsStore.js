@@ -19,7 +19,8 @@
         },
         api: {           
             read: abp.appPath + 'api/services/app/language/GetLanguageTexts',
-            update: abp.appPath + 'api/services/app/language/UpdateLanguageText',          
+            update: abp.appPath + 'api/services/app/language/UpdateLanguageText',
+            create: abp.appPath + 'api/services/app/language/UpdateLanguageText'
         },
         reader: {
             type: 'json',

@@ -36,6 +36,8 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
     editingMode: 'row',   
     columnLines: true,   
     multiColumnSort: true,
+    createNewMode: 'tab',
+
     listeners: {
         cellclick: 'onLanguageCellClick'
     },
@@ -45,14 +47,15 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
             text: app.localize('Key'),
             dataIndex: 'key',           
             sortable: true,
-            width: '28%',
+            width: '30%',
             groupable: true,
             filterField: {
                 xtype: 'textfield',
                 width: '100%'
             },
             editor: {
-                xtype: 'textfield'
+                xtype: 'textfield',
+                disabled:true
             }
         }, {
             xtype: 'gridcolumn',
@@ -60,13 +63,14 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
             dataIndex: 'baseValue',
             sortable: true,
             groupable: true,
-            width: '28%',
+            width: '31%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%'
             },
             editor: {
-                xtype: 'textfield'
+                xtype: 'textfield',
+                disabled: true
             }
         },
         {
@@ -75,7 +79,7 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
             dataIndex: 'targetValue',
             sortable: true,
             groupable: true,
-            width: '28%',
+            width: '32%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%'
@@ -86,7 +90,8 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
         },
         {
             xtype: 'gridcolumn',
-            width: '8%',
+            width: '0', //'8%',
+            hidden:true,
             text: app.localize('Edit'),
             dataIndex: 'isEdit',
             renderer: Chaching.utilities.ChachingRenderers.languagesTextsEditIcon

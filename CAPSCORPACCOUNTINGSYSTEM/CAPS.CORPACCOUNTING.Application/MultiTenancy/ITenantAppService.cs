@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
@@ -30,5 +31,20 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<TenantListOutputDto>> GetTenantListByOrganizationId(IdInput<long> input);
+
+        /// <summary>
+        /// Get TenantList
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<TenantListDto>> GetTenantUnits(SearchInputDto input);
+
+        /// <summary>
+        /// Create Tenant
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task CreateTenantUnit(CreateTenantInput input);
+
     }
 }

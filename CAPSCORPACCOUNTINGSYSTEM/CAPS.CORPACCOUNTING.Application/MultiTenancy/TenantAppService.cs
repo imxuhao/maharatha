@@ -15,20 +15,29 @@ using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Editions.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
+using Abp.Domain.Repositories;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Masters;
+using CAPS.CORPACCOUNTING.Organization;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
-   
+
 
     [AbpAuthorize(AppPermissions.Pages_Tenants)]
     public class TenantAppService : CORPACCOUNTINGAppServiceBase, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
+        private IRepository<ConnectionStringUnit> _connectionStringRepository;
+        private IRepository<OrganizationExtended, long> _organizationRepository;
 
         public TenantAppService(
-            TenantManager tenantManager)
+            TenantManager tenantManager, IRepository<ConnectionStringUnit> connectionStringRepository,
+            IRepository<OrganizationExtended, long> organizationRepository)
         {
             _tenantManager = tenantManager;
+            _connectionStringRepository = connectionStringRepository;
+            _organizationRepository = organizationRepository;
         }
 
         public async Task<PagedResultOutput<TenantListDto>> GetTenants(GetTenantsInput input)
@@ -41,6 +50,30 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                         t.Name.Contains(input.Filter) ||
                         t.TenancyName.Contains(input.Filter)
                 );
+
+            var tenantCount = await query.CountAsync();
+            var tenants = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
+
+            return new PagedResultOutput<TenantListDto>(
+                tenantCount,
+                tenants.MapTo<List<TenantListDto>>()
+                );
+        }
+
+        /// <summary>
+        /// SumitMethod to get TenantList
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<TenantListDto>> GetTenantUnits(SearchInputDto input)
+        {
+            var query = TenantManager.Tenants;
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
 
             var tenantCount = await query.CountAsync();
             var tenants = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
@@ -64,7 +97,41 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 input.EditionId,
                 input.ShouldChangePasswordOnNextLogin,
                 input.SendActivationEmail,
-                input.OrganizationUnitId,input.SourceTenantId,input.ModuleList);
+                input.OrganizationUnitId, input.SourceTenantId, input.ModuleList);
+        }
+
+        /// <summary>
+        /// This is Sumit Method To create the Tenants
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Tenants_Create)]
+        [UnitOfWork(IsDisabled = true)]
+        public async Task CreateTenantUnit(CreateTenantInput input)
+        {
+            ConnectionStringUnit connectionstring;
+            if (input.OrganizationUnitId != null)
+            {
+                connectionstring = await (from org in _organizationRepository.GetAll()
+                                          join constr in _connectionStringRepository.GetAll() on org.ConnectionStringId equals constr.Id
+                                          where org.Id == input.OrganizationUnitId.Value
+                                          select constr).FirstOrDefaultAsync();
+            }
+            else
+            {
+                connectionstring = await _connectionStringRepository.FirstOrDefaultAsync(p => p.Name == "DefaultConnection");
+            }
+
+            await _tenantManager.CreateWithAdminUserAsync(input.TenancyName,
+                input.Name,
+                input.AdminPassword,
+                input.AdminEmailAddress,
+                SimpleStringCipher.Instance.Decrypt(connectionstring.ConnectionString),
+                input.IsActive,
+                input.EditionId,
+                input.ShouldChangePasswordOnNextLogin,
+                input.SendActivationEmail,
+                input.OrganizationUnitId, input.SourceTenantId, input.ModuleList);
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]
@@ -120,7 +187,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             var tenantList = await (from tenant in TenantManager.Tenants
                                     where tenant.OrganizationUnitId == input.Id
                                     select new TenantListOutputDto { TenantName = tenant.TenancyName, TenantId = tenant.Id }).ToListAsync();
-          
+
             return tenantList;
         }
     }

@@ -36,7 +36,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
 
         public bool IsActive { get; set; }
 
-        public long OrganizationUnitId { get; set; }
+        public long? OrganizationUnitId { get; set; }
 
 
         public int? SourceTenantId { get; set; }

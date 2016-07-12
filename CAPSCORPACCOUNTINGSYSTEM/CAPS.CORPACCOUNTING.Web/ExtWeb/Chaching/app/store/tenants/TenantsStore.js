@@ -2,12 +2,15 @@
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.tenants.TenantsModel',
     autoLoad: false,
+    config : {
+        searchEntityName : 'tenant'
+    },
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
-            create: abp.appPath + 'api/services/app/tenant/CreateTenant',
-            read: abp.appPath+'api/services/app/tenant/GetTenants',
+            create: abp.appPath + 'api/services/app/tenant/CreateTenantUnit',
+            read: abp.appPath + 'api/services/app/tenant/GetTenantUnits',
             update: abp.appPath + 'api/services/app/tenant/UpdateTenant',
             destroy: abp.appPath + 'api/services/app/tenant/DeleteTenant'
         }

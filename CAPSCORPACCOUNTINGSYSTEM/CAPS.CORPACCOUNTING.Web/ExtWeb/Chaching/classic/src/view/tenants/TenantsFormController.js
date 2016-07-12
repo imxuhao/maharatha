@@ -62,20 +62,41 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
             abp.message.error(app.localize('SelectOrganization'));
             return;
         }
-
-        record = Ext.create('Chaching.model.tenants.TenantsModel');
-        Ext.apply(record.data, values);
-        var selectedRecords = view.down('gridpanel[itemId=moduleListGridItemId]').getSelection();
-        var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
-        record.set('organizationUnitId', values.organizationUnitId);
-        record.set('sourceTenantId', tenantListCombo.getValue());
-        if (selectedRecords && selectedRecords.length > 0) {
-            var moduleListArray = [];
-            Ext.each(selectedRecords, function (rec) {
-                moduleListArray.push(rec.get('name'));
+        if (organizationCombo && organizationCombo.getValue() == null) {
+            abp.message.confirm(app.localize('TenantCreationWarningMessage'), app.localize('Warning'), function (btn) {
+                if (btn) {
+                    record = Ext.create('Chaching.model.tenants.TenantsModel');
+                    Ext.apply(record.data, values);
+                    var selectedRecords = view.down('gridpanel[itemId=moduleListGridItemId]').getSelection();
+                    var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
+                    record.set('organizationUnitId', values.organizationUnitId);
+                    record.set('sourceTenantId', tenantListCombo.getValue());
+                    if (selectedRecords && selectedRecords.length > 0) {
+                        var moduleListArray = [];
+                        Ext.each(selectedRecords, function (rec) {
+                            moduleListArray.push(rec.get('name'));
+                        });
+                        record.data.moduleList = moduleListArray;
+                    }
+                } else {
+                    return false;
+                }
             });
-            record.data.moduleList = moduleListArray;
         }
+
+        //record = Ext.create('Chaching.model.tenants.TenantsModel');
+        //Ext.apply(record.data, values);
+        //var selectedRecords = view.down('gridpanel[itemId=moduleListGridItemId]').getSelection();
+        //var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
+        //record.set('organizationUnitId', values.organizationUnitId);
+        //record.set('sourceTenantId', tenantListCombo.getValue());
+        //if (selectedRecords && selectedRecords.length > 0) {
+        //    var moduleListArray = [];
+        //    Ext.each(selectedRecords, function (rec) {
+        //        moduleListArray.push(rec.get('name'));
+        //    });
+        //    record.data.moduleList = moduleListArray;
+        //}
         return record;
     }
     

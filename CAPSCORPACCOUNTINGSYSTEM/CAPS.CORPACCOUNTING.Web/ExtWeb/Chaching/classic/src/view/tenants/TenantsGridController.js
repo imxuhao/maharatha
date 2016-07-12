@@ -10,6 +10,22 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
     //        record.set('editionId', newValue);
     //    }
     //},
+    loginAsThisTenantClick: function (menu, e, eOpts) {
+        var parentMenu = menu.parentMenu,
+          widgetRec = parentMenu.widgetRecord
+       // create tenant user view
+        var tenantUsersView = Ext.widget('tenantusers');
+        var tenantUserGrid = tenantUsersView.down('grid');
+        //load tenant users
+        if (tenantUserGrid) {
+            tenantUsersView.tenantId = widgetRec.get('id');
+           var tenantUsersStore = tenantUserGrid.getStore();
+           var proxy = tenantUsersStore.getProxy();
+           proxy.setExtraParams({ tenantId: widgetRec.get('id') });
+           tenantUsersStore.load();
+        }
+
+    },
     doAfterCreateAction: function (createMode, formView, isEdit, record) {
         var me = this,
          form = formView.down('form').getForm();

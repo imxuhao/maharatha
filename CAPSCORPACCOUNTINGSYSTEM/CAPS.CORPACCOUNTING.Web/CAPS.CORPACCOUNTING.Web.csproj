@@ -2089,6 +2089,7 @@
     <Content Include="ExtWeb\Chaching\app\store\receivables\customers\CustomersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\tenants\TenantUserListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\AccountTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountListStore.js" />
@@ -2340,6 +2341,9 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsViewController.js" />
+
+    <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantUsersView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantUsersViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersForm.js" />

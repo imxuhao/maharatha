@@ -75,26 +75,31 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 width: '100%',
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('TName')
-            }, {
-                xtype: 'checkbox',
-                boxLabel: app.localize('UseHostDatabase'),
-                name: 'isUseHostDatabase',
-                reference: 'isUseHostDatabase',
-                labelAlign: 'right',
-                inputValue: true,
-                checked: true,
-                boxLabelCls: 'checkboxLabel'
-            }, {
-                xtype: 'textfield',
-                name: 'connectionString',
-                fieldLabel: app.localize('ConnectionString').initCap(),
-                width: '100%',
-                ui: 'fieldLabelTop',
-                bind: {
-                    hidden: '{isUseHostDatabase.checked}'
-                },
-                emptyText: app.localize('DatabaseConnectionString')
-            }, {
+            }
+            ,
+
+            //{
+            //    xtype: 'checkbox',
+            //    boxLabel: app.localize('UseHostDatabase'),
+            //    name: 'isUseHostDatabase',
+            //    reference: 'isUseHostDatabase',
+            //    labelAlign: 'right',
+            //    inputValue: true,
+            //    checked: true,
+            //    boxLabelCls: 'checkboxLabel'
+            //}, {
+            //    xtype: 'textfield',
+            //    name: 'connectionString',
+            //    fieldLabel: app.localize('ConnectionString').initCap(),
+            //    width: '100%',
+            //    ui: 'fieldLabelTop',
+            //    bind: {
+            //        hidden: '{isUseHostDatabase.checked}'
+            //    },
+            //    emptyText: app.localize('DatabaseConnectionString')
+            //},
+
+            {
                 xtype: 'textfield',
                 name: 'adminEmailAddress',
                 fieldLabel: app.localize('AdminEmailAddress').initCap(),

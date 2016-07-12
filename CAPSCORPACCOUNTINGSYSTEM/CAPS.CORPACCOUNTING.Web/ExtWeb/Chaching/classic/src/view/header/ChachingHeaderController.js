@@ -269,6 +269,24 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             }
         });
     },
+    backToMyAccountClick: function (menu, item, e, eOpts) {
+        Ext.Ajax.request({
+            url: abp.appPath + 'Account/BackToImpersonatorUser',
+            success: function (response) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    window.location.href = res.targetUrl;
+                } else {
+                    abp.message.error(res.error.message, 'Error');
+                }
+            },
+            failure: function (response) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.statusText);
+                console.log(response);
+            }
+        });
+    },
     manageActionClicked: function (menu, item, e, eOpts) {      
         var manageAction = Ext.create('Chaching.view.profile.linkedaccounts.LinkedAccountsView');
         var grid = manageAction.down('grid'),
@@ -324,7 +342,15 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         } else {
             var items = [
-                { text: abp.localization.localize("BackToMyAccount"), hidden: !btn.gotoMyAccount, name: 'BackToAccount', iconCls: 'icon-action-undo' },
+                {
+                    text: abp.localization.localize("BackToMyAccount"),
+                    hidden: !btn.gotoMyAccount,
+                    name: 'BackToAccount',
+                    iconCls: 'icon-action-undo',
+                    listeners: {
+                        click: me.backToMyAccountClick
+                    }
+                },
                 {
                     text: abp.localization.localize("LinkedAccounts"),
                     iconCls: 'icon-link',
@@ -375,7 +401,10 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                 {
                     text: abp.localization.localize("Logout"),
                     iconCls: 'icon-logout',
-                    name: 'Logout'
+                    name: 'Logout',
+                    listeners: {
+                        click: me.logoutClick
+                    }
                 }
             ];
             if (btn.gotoMyAccount) {
@@ -394,6 +423,19 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             btn.contextMenu = contextMenu;
             contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         }
+    },
+    logoutClick: function (menu, item, e, eOpts) {
+        Ext.Ajax.request({
+            url: abp.appPath + 'Account/Logout',
+            success: function (response) {
+               
+            },
+            failure: function (response) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.statusText);
+                console.log(response);
+            }
+        });
     },
     loginAttemptsClicked: function (menu, item, e, eOpts) {
         var loginAttemptView = Ext.create('Chaching.view.profile.loginAttempts.LoginAttemptView');

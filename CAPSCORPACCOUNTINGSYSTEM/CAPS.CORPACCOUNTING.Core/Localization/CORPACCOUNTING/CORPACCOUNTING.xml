@@ -1040,5 +1040,6 @@
 <text name="PaymentCheck" value="Payment check" />
   <text name="ChargeDate" value="Charge date" />
   <text name="DateClose" value="Date close" />
+  <text name="TenantCreationWarningMessage" value="You can not change organization of this tenant. Do you want to save this tenant in this organization?" />
   </texts>
 </localizationDictionary>

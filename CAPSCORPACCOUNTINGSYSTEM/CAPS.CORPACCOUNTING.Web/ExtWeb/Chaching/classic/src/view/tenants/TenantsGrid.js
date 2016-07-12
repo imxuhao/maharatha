@@ -39,6 +39,11 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         routeName: 'host.tenants.create',
         iconAlign: 'left'
     }],
+    actionColumnMenuItemsConfig: [{
+        text: app.localize('LoginAsThisTenant'),
+        iconCls: 'fa fa-user',
+        clickActionName: 'loginAsThisTenantClick'
+    }],
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
@@ -67,17 +72,13 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             stateId: 'tenancyName',
             sortable: true,
             width: '28%',
-            groupable:true,
+            groupable: true,
+            renderer: Chaching.utilities.ChachingRenderers.renderTenant,
             // simplest filter configuration
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
                 emptyText: app.localize('TTenancyCodeName')
-                //plugins: [{
-                //    ptype: 'saki-ficn'
-                //    , iconCls: 'fa fa-info'
-                //    , qtip: 'Enter name to search'
-                //}]
             }
         }, {
             xtype: 'gridcolumn',
@@ -152,12 +153,11 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
              sortable: true,
              groupable: true,
              width: '25%',
-             renderer: Chaching.utilities.ChachingRenderers.renderDateTime,
+             renderer: Chaching.utilities.ChachingRenderers.renderDateOnly,
              filterField: {
                  xtype: 'dateSearchField',
                  dataIndex: 'creationTime',
                  width: '100%'
-                 //emptyText: app.localize('TAdminEmailAddress')
              }
          }
     ]

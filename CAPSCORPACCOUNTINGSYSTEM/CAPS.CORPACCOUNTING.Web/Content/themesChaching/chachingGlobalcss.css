@@ -221,3 +221,69 @@ border-width: 10px;
     border-radius : 5px;
     font-family: "Open Sans", sans-serif;
 }
+
+/*Currency sign classes*/
+.chachingCurrency-USD:before {
+    content: "\f155" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+.chachingCurrency-GBP:before {
+    content: "\f154" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+.chachingCurrency-INR:before {
+    content: "\f156" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+.chachingCurrency-JPY:before {
+    content: "\f157" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+.chachingCurrency-CNY:before {
+    content: "\f157" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+.chachingCurrency-RUB:before {
+    content: "\f158" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+.chachingCurrency-WON:before {
+    content: "\f158" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+.chachingCurrency-EUR:before {
+    content: "\f153" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+.chachingCurrency-TLR:before {
+    content: "\f195" !important;
+    font: 20px FontAwesome;
+    color: #02bd70;
+    cursor: default;
+    vertical-align: bottom;
+}
+

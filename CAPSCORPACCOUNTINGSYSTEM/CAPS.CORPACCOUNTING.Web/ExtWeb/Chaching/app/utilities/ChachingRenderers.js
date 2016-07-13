@@ -100,9 +100,14 @@
     },
     renderTenant: function (value, metaData, record, rowIndex, colIndex) {
          if (record.get('connectionString') != undefined && record.get('connectionString') != null && record.get('connectionString') != "") {
-            return '<div class= "fa fa-database" title = "HasOwnDatabase"></div>' + " " + value;
+             return '<div class= "fa fa-database" title ='+ app.localize('HasOwnDatabase')+'></div>' + " " + value;
         } 
         return value;
+    },
+    renderRole: function (value, metaData, record, rowIndex, colIndex) {
+        return value + (record.get('isStatic') == true ?
+                '<span class="staticRoleLabel" title ="' + app.localize('StaticRole_Tooltip') + '">' + app.localize('Static') + '</span>' : '')
+                + (record.get('isDefault') == true ? '<span class="defaultRoleLabel" title ="' + app.localize('DefaultRole_Description') + '">' + app.localize('Default') + '</span>' : '');
     },
     renderDateTime: function (value) {
         if (value) {

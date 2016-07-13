@@ -43,8 +43,7 @@ Ext.define('Chaching.view.tenants.TenantUsersView', {
                 flex : 1,
                 filterField: {
                     xtype: 'textfield',
-                    width: '100%',
-                    emptyText: 'Enter Name to search'
+                    width: '100%'
                 }
             }],
             store: 'tenants.TenantUserListStore',

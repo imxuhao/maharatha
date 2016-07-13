@@ -60,10 +60,7 @@ Ext.define('Chaching.view.roles.RolesGrid', {
             sortable: true,
             width: '48%',
             groupable: true,
-            //renderer: function (val, meta, record, rowIndex) {
-            //    debugger;
-            //    return val + (record.get('isDefault') == true ? '<div style="background-color: blue;width:10%; color: white;text-align: center;padding: 1px; margin: 0cm 2cm 0cm 0cm;">' + app.localize('Default') + '</div>' : '') + (record.get('isStatic') == true ? '<div style="background-color: blue;color: white;width:10%;text-align: center;padding: 1px;float:right;">' + app.localize('Static') + '</div>' : '');
-            //},
+            renderer: Chaching.utilities.ChachingRenderers.renderRole,
             // simplest filter configuration
             filterField: {
                 xtype: 'textfield',

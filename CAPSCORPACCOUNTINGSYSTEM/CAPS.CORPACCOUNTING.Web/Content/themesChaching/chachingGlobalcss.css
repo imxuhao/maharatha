@@ -195,3 +195,29 @@ border-width: 10px;
        height : 16px;
     background:transparent url('../images/default-checked.gif');
 }
+
+.defaultRoleLabel {
+    display : inline;
+    text-transform: uppercase;
+    padding: 2px 6px 4px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    background-color : #bac3d0;
+    color : #fff;
+    margin-left: 2px;
+    border-radius : 5px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.staticRoleLabel {
+    display : inline;
+    text-transform: uppercase;
+    padding: 2px 6px 4px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    background-color : #659be0;
+    color : #fff;
+    margin-left: 2px;
+    border-radius : 5px;
+    font-family: "Open Sans", sans-serif;
+}

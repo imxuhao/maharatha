@@ -1,6 +1,6 @@
 ﻿Ext.define('Chaching.store.tenants.TenantUserListStore', {
     extend: 'Chaching.store.base.BaseStore',
-    fields: [{ name: 'name' }, { name: 'value' }],
+    model: 'Chaching.model.tenants.TenantUserModel',
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

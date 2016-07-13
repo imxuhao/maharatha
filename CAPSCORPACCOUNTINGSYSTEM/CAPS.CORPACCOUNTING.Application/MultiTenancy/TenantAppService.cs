@@ -71,7 +71,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         {
             var query = from tenant in TenantManager.Tenants
                 join org in _organizationRepository.GetAll() on tenant.OrganizationUnitId equals org.Id
-                select new {tenant, OrganizationName = org.DisplayName};
+                  into organization
+                        from organizations in organization.DefaultIfEmpty()
+                        select new {tenant, OrganizationName = organizations.DisplayName};
 
             if (!ReferenceEquals(input.Filters, null))
             {

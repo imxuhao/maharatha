@@ -2555,9 +2555,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput.ConnectionString">
-            <summary>Gets or sets the Name field. </summary>
-        </member>
         <member name="T:CAPS.CORPACCOUNTING.Configuration.ConnectionString.IConnectionStringAppService">
             <summary>
             ConnectionString Service
@@ -8707,6 +8704,34 @@
         <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService.GetTenantListByOrganizationId(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
             Get TenantList(CompanyList) By OrganizationId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService.GetTenantUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get TenantList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService.CreateTenantUnit(CAPS.CORPACCOUNTING.MultiTenancy.Dto.CreateTenantInputUnit)">
+            <summary>
+            Create Tenant
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.GetTenantUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            SumitMethod to get TenantList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.CreateTenantUnit(CAPS.CORPACCOUNTING.MultiTenancy.Dto.CreateTenantInputUnit)">
+            <summary>
+            This is Sumit Method To create the Tenants
             </summary>
             <param name="input"></param>
             <returns></returns>

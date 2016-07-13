@@ -24,5 +24,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
         public int EditionId { get; set; }
 
         public long? OrganizationUnitId { get; set; }
+
+        public string OrganizationName { get; set; }
     }
 }

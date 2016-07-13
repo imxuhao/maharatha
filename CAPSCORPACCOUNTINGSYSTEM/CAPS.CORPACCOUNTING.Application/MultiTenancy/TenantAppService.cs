@@ -30,6 +30,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly TenantManager _tenantManager;
         private IRepository<ConnectionStringUnit> _connectionStringRepository;
         private IRepository<OrganizationExtended, long> _organizationRepository;
+        
 
         public TenantAppService(
             TenantManager tenantManager, IRepository<ConnectionStringUnit> connectionStringRepository,
@@ -38,6 +39,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _tenantManager = tenantManager;
             _connectionStringRepository = connectionStringRepository;
             _organizationRepository = organizationRepository;
+            
         }
 
         public async Task<PagedResultOutput<TenantListDto>> GetTenants(GetTenantsInput input)
@@ -67,7 +69,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// <returns></returns>
         public async Task<PagedResultOutput<TenantListDto>> GetTenantUnits(SearchInputDto input)
         {
-            var query = TenantManager.Tenants;
+            var query = from tenant in TenantManager.Tenants
+                join org in _organizationRepository.GetAll() on tenant.OrganizationUnitId equals org.Id
+                select new {tenant, OrganizationName = org.DisplayName};
+
             if (!ReferenceEquals(input.Filters, null))
             {
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
@@ -76,12 +81,14 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             }
 
             var tenantCount = await query.CountAsync();
-            var tenants = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
+            var tenants = await query.OrderBy(Helper.GetSort("tenant.Name ASC", input.Sorting)).PageBy(input).ToListAsync();
 
-            return new PagedResultOutput<TenantListDto>(
-                tenantCount,
-                tenants.MapTo<List<TenantListDto>>()
-                );
+            return new PagedResultOutput<TenantListDto>(tenantCount, tenants.Select(item =>
+            {
+                var dto = item.tenant.MapTo<TenantListDto>();
+                dto.OrganizationName = item.OrganizationName;
+                return dto;
+            }).ToList());
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Create)]
@@ -96,8 +103,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 input.IsActive,
                 input.EditionId,
                 input.ShouldChangePasswordOnNextLogin,
-                input.SendActivationEmail,
-                input.OrganizationUnitId, input.SourceTenantId, input.ModuleList);
+                input.SendActivationEmail
+                );
         }
 
         /// <summary>
@@ -107,26 +114,12 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Tenants_Create)]
         [UnitOfWork(IsDisabled = true)]
-        public async Task CreateTenantUnit(CreateTenantInput input)
+        public async Task CreateTenantUnit(CreateTenantInputUnit input)
         {
-            ConnectionStringUnit connectionstring;
-            if (input.OrganizationUnitId != null)
-            {
-                connectionstring = await (from org in _organizationRepository.GetAll()
-                                          join constr in _connectionStringRepository.GetAll() on org.ConnectionStringId equals constr.Id
-                                          where org.Id == input.OrganizationUnitId.Value
-                                          select constr).FirstOrDefaultAsync();
-            }
-            else
-            {
-                connectionstring = await _connectionStringRepository.FirstOrDefaultAsync(p => p.Name == "DefaultConnection");
-            }
-
             await _tenantManager.CreateWithAdminUserAsync(input.TenancyName,
                 input.Name,
                 input.AdminPassword,
                 input.AdminEmailAddress,
-                SimpleStringCipher.Instance.Decrypt(connectionstring.ConnectionString),
                 input.IsActive,
                 input.EditionId,
                 input.ShouldChangePasswordOnNextLogin,

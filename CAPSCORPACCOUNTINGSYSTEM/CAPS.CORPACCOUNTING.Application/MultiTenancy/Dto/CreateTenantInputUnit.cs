@@ -6,7 +6,7 @@ using CAPS.CORPACCOUNTING.Authorization.Users;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
 {
-    public class CreateTenantInput : IInputDto
+    public class CreateTenantInputUnit : IInputDto
     {
         [Required]
         [StringLength(AbpTenantBase.MaxTenancyNameLength)]
@@ -35,5 +35,15 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
         public int? EditionId { get; set; }
 
         public bool IsActive { get; set; }
+
+        [Required]
+        public long? OrganizationUnitId { get; set; }
+
+
+        public int? SourceTenantId { get; set; }
+
+        public List<string> ModuleList { get; set; }
+
+       
     }
 }

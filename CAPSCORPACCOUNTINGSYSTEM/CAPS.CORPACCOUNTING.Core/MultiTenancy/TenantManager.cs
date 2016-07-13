@@ -25,6 +25,7 @@ using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Notifications;
 using AutoMapper;
+using CAPS.CORPACCOUNTING.Organization;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
@@ -52,6 +53,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly IRepository<CoaUnit> _coaUnit;
         private readonly IRepository<EmployeeUnit> _employeeUnit;
         private readonly IRepository<CustomerUnit> _customerUnit;
+        private IRepository<ConnectionStringUnit> _connectionStringRepository;
+        private IRepository<OrganizationExtended, long> _organizationRepository;
 
 
 
@@ -73,7 +76,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         IRepository<TypeOfAccountUnit> typeOfAccountUnit,
         IRepository<RegionUnit> regionUnit,
         IRepository<CountryUnit> countryUnit, IRepository<VendorUnit> vendorUnit, IRepository<User, long> userUnit, IRepository<Role> roleUnit,
-        IRepository<CoaUnit> coaUnit, IRepository<EmployeeUnit> employeeUnit, IRepository<CustomerUnit> customerUnit) :
+        IRepository<CoaUnit> coaUnit, IRepository<EmployeeUnit> employeeUnit, IRepository<CustomerUnit> customerUnit, IRepository<ConnectionStringUnit> connectionStringRepository, IRepository<OrganizationExtended, long> organizationRepository) :
         base(tenantRepository, tenantFeatureRepository, editionManager, featureValueStore)
         {
             _unitOfWorkManager = unitOfWorkManager;
@@ -94,6 +97,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _coaUnit = coaUnit;
             _employeeUnit = employeeUnit;
             _customerUnit = customerUnit;
+            _connectionStringRepository = connectionStringRepository;
+            _organizationRepository = organizationRepository;
         }
 
 
@@ -187,7 +192,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             return newTenantId;
         }
 
-        public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, string connectionString, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin,
+        public async Task<int> CreateWithAdminUserAsync(string tenancyName, string name, string adminPassword, string adminEmailAddress, bool isActive, int? editionId, bool shouldChangePasswordOnNextLogin,
             bool sendActivationEmail, long? organizationId, int? sourcetenantId, List<string> entityList)
         {
             int newTenantId;
@@ -195,15 +200,18 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
             using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
+
+                var connectionstringUnit = await (from org in _organizationRepository.GetAll()
+                                                  join constr in _connectionStringRepository.GetAll() on org.ConnectionStringId equals
+                                                      constr.Id where org.Id == organizationId
+                                                  select constr).FirstOrDefaultAsync();
+
                 //Create tenant
                 var tenant = new Tenant(tenancyName, name)
                 {
                     IsActive = isActive,
                     EditionId = editionId,
-                    ConnectionString =
-                        connectionString.IsNullOrWhiteSpace()
-                            ? null
-                            : SimpleStringCipher.Instance.Encrypt(connectionString),
+                    ConnectionString = ReferenceEquals(connectionstringUnit, null)?null: connectionstringUnit.ConnectionString,
                     OrganizationUnitId = organizationId
                 };
 
@@ -263,7 +271,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     newAdminId = adminUser.Id;
 
                 }
-                if (string.IsNullOrEmpty(connectionString))
+                if (ReferenceEquals(connectionstringUnit,null))
                     await CustomTenantSeeding(newTenantId);
                 if (sourcetenantId.HasValue)
                     await CloneTenantDate(newTenantId, sourcetenantId, entityList);

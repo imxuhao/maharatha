@@ -40,7 +40,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Host
         {
             foreach (var connectionString in InitialConnectionStrings)
             {
-                AddConnectionStringListIfNotExists(connectionString);
+               // AddConnectionStringListIfNotExists(connectionString);
             }
         }
 

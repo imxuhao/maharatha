@@ -24,7 +24,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Host
         
             InitialOrganization = new List<OrganizationExtended>
             {
-                new OrganizationExtended(1)
+                new OrganizationExtended(null)
 
             };
         }

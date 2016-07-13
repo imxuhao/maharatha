@@ -44,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task CreateTenantUnit(CreateTenantInput input);
+        Task CreateTenantUnit(CreateTenantInputUnit input);
 
     }
 }

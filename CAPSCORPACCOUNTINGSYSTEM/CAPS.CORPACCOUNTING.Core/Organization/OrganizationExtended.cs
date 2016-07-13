@@ -48,7 +48,7 @@ namespace CAPS.CORPACCOUNTING.Organization
 
         }
 
-        public OrganizationExtended(int  connectionstringid)
+        public OrganizationExtended(int?  connectionstringid)
         {
             ConnectionStringId = connectionstringid;
             DisplayName = "Default";

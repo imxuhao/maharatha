@@ -12,36 +12,16 @@ Ext.define('Chaching.view.roles.RolesGridController', {
             }
             treeStore.load();
         }
-
-        //var data = {};
-        //if (isEdit) {
-        //    data.id = record.get('id');
-        //}
-        //Ext.Ajax.request({
-        //    url: abp.appPath + 'api/services/app/role/GetRoleForEdit',
-        //    jsonData: Ext.encode(data),
-        //    success: function (response, opts) {
-        //        var res = Ext.decode(response.responseText);
-        //        if (res.success) {
-        //            debugger;
-        //            var data = res.result.permissions;
-        //            if (basicForm.findField('permissions')) {
-        //                var treeStore = basicForm.findField('permissions').getStore();
-        //                treeStore.getProxy().setExtraParams();
-        //            }
-        //           // var treePanel = basicFormpermissions
-
-        //        }
-        //        else {
-        //            Ext.toast(res.error.message);
-        //        }
-        //    },
-        //    failure: function (response) {
-        //        var res = Ext.decode(response.responseText);
-        //        Ext.toast(res.error.message);
-        //        console.log(response);
-        //    }
-        //})
+    },
+    doRowSpecificEditDelete: function (button, grid) {
+        if (button.menu) {
+            var deleteActionMenu = button.menu.down('menuitem#deleteActionMenu');
+            if (deleteActionMenu && button.widgetRec && button.widgetRec.get('isStatic')) {
+                deleteActionMenu.hide();
+            } else {
+                deleteActionMenu.show();
+            }
+        }
     }
 
 });

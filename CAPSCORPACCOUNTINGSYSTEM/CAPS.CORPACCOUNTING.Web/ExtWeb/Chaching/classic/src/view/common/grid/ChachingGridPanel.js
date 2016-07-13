@@ -504,7 +504,13 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     if (button.widgetCol) {
                         var grid = button.widgetCol.up('gridpanel');
                         if (grid) {
-                            button.on('click', grid.doRowSpecificEditDelete, button, grid);
+                            if (grid.getController()) {
+                                button.on('click', grid.getController().doRowSpecificEditDelete, button, grid);
+                            }
+                            ////old
+                            //if (grid) {
+                            //    button.on('click', grid.doRowSpecificEditDelete, button, grid);
+                            //}
                         }
                     }
                     if (Ext.get(id)) {
@@ -569,6 +575,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         if (me.modulePermissions.read && (me.createNewMode === "popup" || me.createNewMode === "tab")) {
             var viewMenuItem = {
                 text: app.localize('View'),
+                itemId : 'viewActionMenu',
                 iconCls: 'fa fa-th',
                 eventListenerName: 'editActionClicked',
                 listeners: {
@@ -584,6 +591,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             if (me.createNewMode === "popup" || me.createNewMode === "tab") {
                 var editMenuItem = {
                     text: app.localize('Edit'),
+                    itemId: 'editActionMenu',
                     iconCls: 'fa fa-pencil',
                     eventListenerName: 'editActionClicked',
                     listeners: {
@@ -598,6 +606,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             if (me.isEditable) {
                 var quickEditMenuItem= {
                     text: app.localize('QuickEdit'), iconCls: 'fa fa-pencil-square-o ',
+                    itemId: 'quickEditActionMenu',
                     eventListenerName: 'quickEditActionClicked',
                     listeners: {
                         click: function (menu, item, e, eOpts) {
@@ -611,6 +620,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         if (me.modulePermissions.destroy) {
             var deleteMenuItem = {
                 text: app.localize('Delete'), iconCls: 'fa fa-recycle',
+                itemId: 'deleteActionMenu',
                 eventListenerName: 'deleteActionClicked',
                 listeners: {
                     click: function (menu, item, e, eOpts) {

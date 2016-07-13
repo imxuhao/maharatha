@@ -36,6 +36,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         }
     },
     currentRedirectedRoute: null,
+    doRowSpecificEditDelete: function (button, grid) {
+        // do row specific work over here like hiding action menu based on some condition 
+    },
     //Event Listeners
     quickEditActionClicked: function (menu, item, e, eOpts) {
         //do edit based on editMode of grid
@@ -175,23 +178,30 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             grid = widgetCol.up('grid'),
             controller = grid.getController,
             gridStore = grid.getStore();
-        if (grid && grid.isInViewMode)return;
-        //Delete record
-        if (widgetRec && grid) {
-            var modelField = gridStore.getModel().getFields();
-            if (modelField) {
-                Ext.each(modelField, function (field) {
-                    if (field.isPrimaryKey) {
-                        widgetRec.set('id', widgetRec.get(field.name));
-                        return;
-                    }
-                });
-            }
-            gridStore.setAutoSync(true);
-            gridStore.remove(widgetRec);
-            gridStore.setAutoSync(false);
+        if (grid && grid.isInViewMode) return;
+        abp.message.confirm(
+               app.localize('DeleteWarningMessage'),
+               function (isConfirmed) {
+                   if (isConfirmed) {
+                       //Delete record
+                       if (widgetRec && grid) {
+                           var modelField = gridStore.getModel().getFields();
+                           if (modelField) {
+                               Ext.each(modelField, function (field) {
+                                   if (field.isPrimaryKey) {
+                                       widgetRec.set('id', widgetRec.get(field.name));
+                                       return;
+                                   }
+                               });
+                           }
+                           gridStore.setAutoSync(true);
+                           gridStore.remove(widgetRec);
+                           gridStore.setAutoSync(false);
 
-        }
+                       }
+                   }
+               }
+           );
     },
     onEditComplete: function (editor, e) {
         var me = this,

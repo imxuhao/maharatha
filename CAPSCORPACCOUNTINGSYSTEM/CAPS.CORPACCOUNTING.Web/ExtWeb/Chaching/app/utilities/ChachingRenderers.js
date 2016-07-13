@@ -100,7 +100,7 @@
     },
     renderTenant: function (value, metaData, record, rowIndex, colIndex) {
          if (record.get('connectionString') != undefined && record.get('connectionString') != null && record.get('connectionString') != "") {
-             return '<div class= "fa fa-database" title ='+ app.localize('HasOwnDatabase')+'></div>' + " " + value;
+             return '<div class= "fa fa-database" title ="'+ app.localize('HasOwnDatabase')+'"></div>' + " " + value;
         } 
         return value;
     },

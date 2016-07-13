@@ -2555,6 +2555,9 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput.ConnectionString">
+            <summary>Gets or sets the Name field. </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Configuration.ConnectionString.IConnectionStringAppService">
             <summary>
             ConnectionString Service

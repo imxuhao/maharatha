@@ -2040,6 +2040,7 @@
     <Content Include="ExtWeb\Chaching\app\model\roles\RolePermissionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\linkedaccounts\LinkedAccountsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\tenants\TenantUserModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\BankAccountModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\utilities\autofill\CustomerModel.js" />
     <Content Include="ExtWeb\Chaching\app\store\address\AddressStore.js" />
@@ -2341,7 +2342,6 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsViewController.js" />
-
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantUsersView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantUsersViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersView.js" />

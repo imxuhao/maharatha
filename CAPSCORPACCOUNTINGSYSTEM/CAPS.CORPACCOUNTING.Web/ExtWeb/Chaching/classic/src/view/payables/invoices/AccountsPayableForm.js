@@ -153,13 +153,12 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
                                 fieldLabel: app.localize('Description'),
                                 emptyText: app.localize('MandatoryField')
                             }, {
-                                xtype: 'numberfield',
+                                xtype: 'amountfield',
                                 name: 'controlTotal',
                                 itemId: 'controlTotal',
                                 fieldLabel: app.localize('InvoiceTotal'),
                                 allowBlank: false,
-                                emptyText: app.localize('MandatoryField'),
-                                hideTrigger: true
+                                emptyText: app.localize('MandatoryField')
                             }
                         ]
                     }, {
@@ -226,7 +225,10 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
                                 width: '100%',
                                 ui: 'fieldLabelTop',
                                 fieldLabel: app.localize('Currency'),
-                                emptyText: app.localize('SelectOption')
+                                emptyText: app.localize('SelectOption'),
+                                listeners: {
+                                    change: 'changeCurrency'
+                                }
                             }, {
                                 xtype: 'combobox',
                                 name: 'typeOfCheckGroupId',

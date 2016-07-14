@@ -32,5 +32,17 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderFormController', {
             formPanel.updateLayout();
         }
     },
+    changeCurrency: function (field, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            form = view.getForm(),
+            poOriginalAmount = form.findField('poOriginalAmount'),
+            controlTotal = form.findField('controlTotal'),
+            remBalance = form.findField('remainingBalance');
+        ///TODO: change based on currency code
+        poOriginalAmount.setCurrency('INR');
+        controlTotal.setCurrency('EUR');
+        remBalance.setCurrency('KGS');
+    }
     
 });

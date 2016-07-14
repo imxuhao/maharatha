@@ -83,12 +83,11 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
                     fieldLabel: app.localize('JournalNumber'),
                     emptyText: app.localize('MandatoryField')
                 },{
-                    xtype: 'numberfield',
+                    xtype: 'amountfield',
                     name: 'controlTotal',
                     itemId: 'controlTotal',
                     fieldLabel: app.localize('ControlTotal'),
-                    disabled: true,
-                    hideTrigger: true
+                    disabled: true
                 }]
             }, {
                 columnWidth: .33,

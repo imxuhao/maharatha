@@ -11,7 +11,7 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderDetailGridController
                 if (!record.get('invoiceReference')) returnVal = false;
                 break;
             case "amount":///TODO: Check based on remainig and pending amount
-                if (record.get('accountingItemOrigAmount') !== record.get('amount')) returnVal = false;
+                //if (record.get('accountingItemOrigAmount') !== record.get('amount')) returnVal = false;
                 break;
             default:
                 break;

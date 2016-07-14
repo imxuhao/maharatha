@@ -106,28 +106,26 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderForm',{
                         labelWidth: 90
                     },
                     items: [{
-                        xtype: 'numberfield',
-                        name: 'poOriginalAmount',
-                        itemId: 'poOriginalAmount',
-                        fieldLabel: app.localize('OrigAmount'),
-                        disabled:true,
-                        allowBlank: true,
-                        hideTrigger: true
-                    }, {
-                        xtype: 'numberfield',
+                            xtype: 'amountfield',
+                            name: 'poOriginalAmount',
+                            itemId: 'poOriginalAmount',
+                            fieldLabel: app.localize('OrigAmount'),
+                            disabled:true,
+                            allowBlank: true
+                        },
+                    {
+                        xtype: 'amountfield',
                         name: 'controlTotal',
                         itemId: 'controlTotal',
                         fieldLabel: app.localize('InvoiceTotal'),
                         allowBlank: false,
-                        emptyText: app.localize('MandatoryField'),
-                        hideTrigger: true
+                        emptyText: app.localize('MandatoryField')
                     }, {
-                        xtype: 'numberfield',
+                        xtype: 'amountfield',
                         name: 'remainingBalance',
                         itemId: 'remainingBalance',
                         fieldLabel: app.localize('RemainingBalance'),
-                        disabled:true,
-                        hideTrigger: true
+                        disabled:true
                     }, {
                         xtype: 'combobox',
                         name: 'typeOfCurrencyId',
@@ -141,7 +139,10 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderForm',{
                         width: '100%',
                         ui: 'fieldLabelTop',
                         fieldLabel: app.localize('Currency'),
-                        emptyText: app.localize('SelectOption')
+                        emptyText: app.localize('SelectOption'),
+                        listeners: {
+                            change:'changeCurrency'
+                        }
                     }]
                 }, {
                     columnWidth: .25,

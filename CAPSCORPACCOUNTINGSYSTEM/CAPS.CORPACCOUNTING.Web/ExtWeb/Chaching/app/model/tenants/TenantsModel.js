@@ -9,6 +9,7 @@ Ext.define('Chaching.model.tenants.TenantsModel', {
     fields: [
         { name: 'id', type: 'int',isPrimaryKey : true },
         { name: 'editionDisplayName', type: 'string' },
+        { name: 'organizationName', type: 'string' },
         { name: 'editionId', type: 'int',defaultValue:null, convert:nullHandler },
         { name: 'isActive', type: 'boolean' },
         { name: 'name', type: 'string' },

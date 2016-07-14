@@ -34,6 +34,7 @@ Ext.define('Chaching.Application', {
         'financials.accounts.DivisionsStore',
         'manageView.ManageViewStore',
         'roles.RolesTreeStore',
+        'roles.RolesTreeViewStore',
         'financials.accounts.AccountsStore',
         'languages.LanguagesDataStore',
         'projects.projectmaintenance.LinesStore',
@@ -97,7 +98,8 @@ Ext.define('Chaching.Application', {
         'purchaseorders.entry.PurchaseOrderDetailsStore',
         'administration.organization.ConnectionStringListStore',
         'purchaseorders.entry.PurchaseOrderDetailHistoryStore',
-        'tenants.TenantUserListStore'
+        'tenants.TenantUserListStore',
+        'users.CompanyRoleStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

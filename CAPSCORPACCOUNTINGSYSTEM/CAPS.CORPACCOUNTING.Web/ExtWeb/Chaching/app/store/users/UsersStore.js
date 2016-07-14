@@ -7,8 +7,6 @@ Ext.define('Chaching.store.users.UsersStore', {
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
-
-
         api: {
             create: abp.appPath + 'api/services/app/user/CreateOrUpdateUserUnit',
             read: abp.appPath + 'api/services/app/user/GetUsers',

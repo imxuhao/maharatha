@@ -7,12 +7,22 @@ Ext.define('Chaching.view.users.UsersGrid', {
     ],
 
     controller: 'users-usersgrid',
-
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Administration.Users'),
+        create: abp.auth.isGranted('Pages.Administration.Users.Create'),
+        edit: abp.auth.isGranted('Pages.Administration.Users.Edit'),
+        destroy: abp.auth.isGranted('Pages.Administration.Users.Delete')
+    },
     xtype: 'users',
     store: 'users.UsersStore',
     name: 'Administration.Users',
     padding: 5,
-    gridId:7,
+    gridId: 7,
+    actionColumnMenuItemsConfig: [{
+        text: app.localize('Permissions'),
+        iconCls: 'fa fa-pencil',
+        clickActionName: 'userPermissionsActionClick'
+    }],
     headerButtonsConfig: [
     {
         xtype: 'displayfield',
@@ -30,6 +40,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
         text: abp.localization.localize("CreateNewUser").toUpperCase(),
         tooltip: app.localize('CreateNewUser'),
         checkPermission: true,
+        routeName: 'users.create',
         iconCls: 'fa fa-plus',
         iconAlign: 'left'
     }],
@@ -52,7 +63,9 @@ Ext.define('Chaching.view.users.UsersGrid', {
         title: app.localize('ViewUser'),
         iconCls: 'fa fa-th'
     },
-    createNewMode: 'popup',
+    //createNewMode: 'popup',
+    createNewMode: 'tab',
+    isSubMenuItemTab: true,
     columns: [
         {
             xtype: 'gridcolumn',

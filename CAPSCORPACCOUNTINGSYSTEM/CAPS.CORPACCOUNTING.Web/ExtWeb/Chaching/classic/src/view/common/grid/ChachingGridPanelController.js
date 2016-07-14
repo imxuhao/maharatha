@@ -61,7 +61,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         }
 
     },
-    editActionClicked: function(menu, item, e, eOpts,isView) {
+    editActionClicked: function (menu, item, e, eOpts, isView) {
         var parentMenu = menu.parentMenu,
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,

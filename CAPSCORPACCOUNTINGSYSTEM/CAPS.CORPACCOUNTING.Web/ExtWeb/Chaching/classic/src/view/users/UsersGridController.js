@@ -1,9 +1,12 @@
 Ext.define('Chaching.view.users.UsersGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.users-usersgrid',
+    userPermissionsActionClick: function (menu, formView, isEdit) {
+        debugger;
+    },
     doAfterCreateAction: function (createMode, formView, isEdit, record) {
         var me = this,
-         form = formView.down('form').getForm();
+         form = formView.getForm();
         //get company list tab
         var companyListTab = formView.down('*[itemId=companyListTab]');
         var rolesGrid = formView.down('gridpanel[itemId=rolesListGridItemId]');
@@ -123,4 +126,5 @@ Ext.define('Chaching.view.users.UsersGridController', {
 
         }
     }
+    
 });

@@ -1044,5 +1044,8 @@
 <text name="DeleteWarningMessage" value="You want to delete." />
 <text name="TenantInformationMessage" value="Please select user to login as this tenant." />
 <text name="InformationMessage" value="Information" />
+<text name="LinkCompany" value="Link Company" />
+<text name="LinkCompanyRoles" value="Roles with company" />
+<text name="RowClickMessage" value="Please click on the row to see the granted permissions of the selected Role!" />    
 </texts>
 </localizationDictionary>

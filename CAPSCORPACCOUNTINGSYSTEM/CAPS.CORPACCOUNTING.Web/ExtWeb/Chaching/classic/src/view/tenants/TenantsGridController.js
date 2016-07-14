@@ -32,8 +32,8 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
         var copyFromTenantsTab = formView.down('*[itemId=moduleListGridItemId]');
         if (formView && isEdit) {
             form.findField('tenancyName').setReadOnly(true);
-            form.findField('isUseHostDatabase').setHidden(true);
-            form.findField('connectionString').setHidden(true);
+            //form.findField('isUseHostDatabase').setHidden(true);
+            //form.findField('connectionString').setHidden(true);
             form.findField('isSetRandomPassword').setHidden(true);
             form.findField('adminPassword').setHidden(true);
             form.findField('adminPasswordRepeat').setHidden(true);

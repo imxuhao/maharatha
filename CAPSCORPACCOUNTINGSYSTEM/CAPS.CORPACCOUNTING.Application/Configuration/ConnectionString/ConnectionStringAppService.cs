@@ -34,7 +34,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.ConnectionString
 
             var accountUnit = input.MapTo<ConnectionStringUnit>();
 
-            connectionstring = "Sever =" + input.ServerName;
+            connectionstring = "Server =" + input.ServerName;
             if (!string.IsNullOrEmpty(input.InstanceName))
                 connectionstring = connectionstring + @"\" + input.InstanceName;
             connectionstring = connectionstring + "; Database=" + input.Database +";";

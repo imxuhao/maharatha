@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.ConnectionString
         {
             _connectionStringRepository = connectionStringRepository;
         }
+
         /// <summary>
         /// Create ConnectionStrings
         /// </summary>
@@ -28,10 +30,28 @@ namespace CAPS.CORPACCOUNTING.Configuration.ConnectionString
         /// <returns></returns>
         public async Task CreateConnectionStringUnit(ConnectionStringInput input)
         {
+            string connectionstring = string.Empty;
+
             var accountUnit = input.MapTo<ConnectionStringUnit>();
-            accountUnit.ConnectionString=   SimpleStringCipher.Instance.Encrypt(input.ConnectionString);
+
+            connectionstring = "Sever =" + input.ServerName;
+            if (!string.IsNullOrEmpty(input.InstanceName))
+                connectionstring = connectionstring + @"\" + input.InstanceName;
+            connectionstring = connectionstring + "; Database=" + input.Database +";";
+            if (!input.TrustedConnection)
+            {
+                connectionstring = connectionstring + "; UserId=" + input.Database + "; Password =" + input.Password +
+                                   "Trusted_Connection=false";
+            }
+            else
+            {
+                connectionstring =connectionstring+ "Trusted_Connection=true";
+
+            }
+            accountUnit.ConnectionString = SimpleStringCipher.Instance.Encrypt(connectionstring);
             await _connectionStringRepository.InsertAsync(accountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
+
         }
     }
 }

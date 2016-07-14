@@ -179,8 +179,11 @@
     <Compile Include="AccountReceivable\Dto\ArInvoiceEntryDocumentUnitDto.cs" />
     <Compile Include="AccountReceivable\IArInvoiceEntryDocumentAppService.cs" />
     <Compile Include="Authorization\AbpLoginResultTypeHelper.cs" />
+    <Compile Include="Authorization\Users\Dto\TenanltListWithRolesInput.cs" />
     <Compile Include="Authorization\Users\Dto\GetLinkedUsersInput.cs" />
     <Compile Include="Authorization\Users\Dto\LinkToUserInput.cs" />
+    <Compile Include="Authorization\Users\Dto\RoleTenantInput.cs" />
+    <Compile Include="Authorization\Users\Dto\TenantwithRoleDto.cs" />
     <Compile Include="Authorization\Users\Dto\UnlinkUserInput.cs" />
     <Compile Include="Authorization\Users\Dto\UserLoginAttemptDto.cs" />
     <Compile Include="Authorization\Users\IUserLinkAppService.cs" />

@@ -39,6 +39,19 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<TenantListOutputDto>> GetTenantListofOrganization(IdInput input);
+        Task<List<TenantwithRoleDto>> GetTenantListofOrganization(IdInput input);
+
+        /// <summary>
+        /// Create or Update User
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task CreateOrUpdateUserUnit(CreateOrUpdateUserInput input);
+
+        Task<GetRoleForEditOutput> GetPermissionsForSelectedRole(RoleTenantInput input);
+
+
+
+
     }
 }

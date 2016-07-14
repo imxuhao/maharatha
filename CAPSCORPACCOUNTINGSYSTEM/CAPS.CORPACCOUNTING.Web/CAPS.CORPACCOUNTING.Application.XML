@@ -1635,6 +1635,20 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.IUserAppService.CreateOrUpdateUserUnit(CAPS.CORPACCOUNTING.Authorization.Users.Dto.CreateOrUpdateUserInput)">
+            <summary>
+            Create or Update User
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.UserAppService.CreateUserUnitAsync(CAPS.CORPACCOUNTING.Authorization.Users.Dto.CreateOrUpdateUserInput)">
+            <summary>
+            This is Sumit Method to Create User
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.UserAppService.GetTenantListofOrganization(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Input is TenantId
@@ -2554,9 +2568,6 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput.ConnectionString">
-            <summary>Gets or sets the Name field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Configuration.ConnectionString.IConnectionStringAppService">
             <summary>

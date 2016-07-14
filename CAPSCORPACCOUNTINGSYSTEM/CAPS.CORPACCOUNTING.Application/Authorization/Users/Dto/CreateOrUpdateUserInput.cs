@@ -15,6 +15,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
 
         public bool SendActivationEmail { get; set; }
 
-        public List<TenantListOutputDto> TenantList { get; set; }
+        public List<TenanltListWithRolesInput> TenantList { get; set; }
     }
 }

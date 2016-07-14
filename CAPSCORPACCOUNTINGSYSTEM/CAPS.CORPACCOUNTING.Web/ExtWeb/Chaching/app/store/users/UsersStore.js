@@ -7,9 +7,9 @@
 
 
         api: {
-            create: abp.appPath + 'api/services/app/user/CreateOrUpdateUser',
+            create: abp.appPath + 'api/services/app/user/CreateOrUpdateUserUnit',
             read: abp.appPath + 'api/services/app/user/GetUsers',
-            update: abp.appPath + 'api/services/app/user/CreateOrUpdateUser',
+            update: abp.appPath + 'api/services/app/user/CreateOrUpdateUserUnit',
             destroy: abp.appPath + 'api/services/app/user/DeleteUser'
         }
     },

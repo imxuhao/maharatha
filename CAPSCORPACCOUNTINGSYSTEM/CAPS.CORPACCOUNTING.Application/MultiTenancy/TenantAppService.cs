@@ -88,7 +88,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             return new PagedResultOutput<TenantListDto>(tenantCount, tenants.Select(item =>
             {
                 var dto = item.tenant.MapTo<TenantListDto>();
-                dto.OrganizationName = item.OrganizationName;
+                dto.OrganizationName = item.OrganizationName ?? "Default";
                 return dto;
             }).ToList());
         }

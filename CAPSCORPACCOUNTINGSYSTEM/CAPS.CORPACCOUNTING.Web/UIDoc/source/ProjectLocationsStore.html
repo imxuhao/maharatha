@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.projects.projectmaintenance.ProjectLocationsStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-projects-projectmaintenance-ProjectLocationsStore'>/**
+</span> * DataStore to perform CRUD operation on Job/Project Locations.
+ */
+Ext.define(&#39;Chaching.store.projects.projectmaintenance.ProjectLocationsStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.Jobcasting.JobLocationsModel&#39;,
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-projects-projectmaintenance-ProjectLocationsStore-property-model'>    model: &#39;Chaching.model.Jobcasting.JobLocationsModel&#39;,
+</span><span id='Chaching-store-projects-projectmaintenance-ProjectLocationsStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         extraParams: {
             jobId: 0
@@ -29,8 +32,8 @@
             destroy: abp.appPath + &#39;api/services/app/jobLocation/DeleteJobLocationUnit&#39;
         }
     },
-    idPropertyField: &#39;jobLocationId&#39;//important to set for add/update of records
-});
+<span id='Chaching-store-projects-projectmaintenance-ProjectLocationsStore-property-idPropertyField'>    idPropertyField: &#39;jobLocationId&#39;//important to set for add/update of records
+</span>});
 </pre>
 </body>
 </html>

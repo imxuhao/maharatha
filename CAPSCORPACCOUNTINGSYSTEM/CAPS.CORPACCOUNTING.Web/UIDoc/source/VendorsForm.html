@@ -17,12 +17,14 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.payables.vendors.VendorsForm&#39;, {
     extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
-    alias: [&#39;widget.payables.vendors.create&#39;, &#39;widget.payables.vendors.edit&#39;],
+    alias: [&#39;widget.payables.vendors.create&#39;, &#39;widget.payables.vendors.edit&#39;
+        //, &#39;widget.receivables.customers.edit&#39;, &#39;widget.receivables.customers.create&#39;
+    ],
     requires: [
         &#39;Chaching.view.payables.vendors.VendorsFormController&#39;
     ],
     controller: &#39;payables-vendors-vendorsform&#39;,
-    name: &#39;vendors&#39;,
+    name: &#39;Payables.Vendors&#39;,
     openInPopupWindow: false,
     hideDefaultButtons: true,
     autoScroll: true,
@@ -49,7 +51,8 @@
                     columnWidth: .33,
                     padding: &#39;20 10 0 20&#39;,
                     defaults: {
-                        labelAlign: &#39;top&#39;,
+                        // labelAlign: &#39;top&#39;,
+                        labelWidth : 120,
                         blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                     },
                     items: [{
@@ -61,7 +64,7 @@
                         name: &#39;lastName&#39;,
                         itemId: &#39;lastName&#39;,
                         allowBlank: false,
-                        fieldLabel: app.localize(&#39;CompanyName&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                        fieldLabel: app.localize(&#39;CompanyName&#39;).initCap(),
                         width: &#39;100%&#39;,
                         ui: &#39;fieldLabelTop&#39;,
                         emptyText: app.localize(&#39;MandatoryField&#39;)
@@ -80,7 +83,7 @@
                     columnWidth: .33,
                     padding: &#39;20 10 0 20&#39;,
                     defaults: {
-                        labelAlign: &#39;top&#39;,
+                       // labelAlign: &#39;top&#39;,
                         blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                     },
                     items: [{
@@ -103,18 +106,20 @@
                                 columnWidth: .33,
                                 padding: &#39;20 10 0 20&#39;,
                                 defaults: {
-                                    labelAlign: &#39;top&#39;,
+                                   // labelAlign: &#39;top&#39;,
                                     blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                                 },
                                 items: [{
                                     xtype: &#39;combobox&#39;,
                                     name: &#39;typeofVendorId&#39;,
-                                    fieldLabel: app.localize(&#39;Type&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                    fieldLabel: app.localize(&#39;Type&#39;).initCap(),
+                                    labelWidth : 70,
                                     width: &#39;100%&#39;,
                                     ui: &#39;fieldLabelTop&#39;,
                                     displayField: &#39;typeofvendor&#39;,
                                     valueField: &#39;typeofvendorId&#39;,
                                     emptyText: app.localize(&#39;SelectOption&#39;),
+                                    queryMode : &#39;local&#39;,
                                     bind: {
                                         store: &#39;{vendorTypeList}&#39;
                                     }
@@ -154,7 +159,7 @@
                        columnWidth: .4,
                        padding: &#39;20 10 0 20&#39;,
                        defaults: {
-                           labelAlign: &#39;top&#39;,
+                           //labelAlign: &#39;top&#39;,
                            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                        },
                        items: [
@@ -167,6 +172,7 @@
                                                     displayField: &#39;typeofTax&#39;,
                                                     valueField: &#39;typeofTaxId&#39;,
                                                     emptyText: app.localize(&#39;SelectOption&#39;),
+                                                    queryMode : &#39;local&#39;,
                                                     bind: {
                                                         store: &#39;{typeOfTaxList}&#39;
                                                     }
@@ -183,7 +189,7 @@
                        columnWidth: .3,
                        padding: &#39;20 10 0 20&#39;,
                        defaults: {
-                           labelAlign: &#39;top&#39;,
+                          // labelAlign: &#39;top&#39;,
                            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                        },
                        items: [
@@ -204,6 +210,7 @@
                                displayField: &#39;typeof1099Box&#39;,
                                valueField: &#39;typeof1099BoxId&#39;,
                                emptyText: app.localize(&#39;SelectOption&#39;),
+                               queryMode : &#39;local&#39;,
                                bind: {
                                    store: &#39;{typeof1099BoxList}&#39;
                                }
@@ -213,7 +220,7 @@
                        columnWidth: .3,
                        padding: &#39;20 10 0 20&#39;,
                        defaults: {
-                           labelAlign: &#39;top&#39;,
+                          // labelAlign: &#39;top&#39;,
                            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                        },
                        items: [
@@ -251,8 +258,9 @@
             columnWidth: .4,
             padding: &#39;20 10 0 20&#39;,
             defaults: {
-                labelAlign: &#39;top&#39;,
-                blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                labelWidth : 120
+                //labelAlign: &#39;top&#39;,
+                //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
             },
             items: [
               {
@@ -268,26 +276,55 @@
                       store: &#39;{paymentTermsList}&#39;
                   }
               }, {
-                  xtype: &#39;combobox&#39;,
-                  name: &#39;glAccountId&#39;,
-                  fieldLabel: app.localize(&#39;GLAccount&#39;).initCap(),
-                  width: &#39;100%&#39;,
+                  //xtype: &#39;combobox&#39;,
+                  //name: &#39;glAccountId&#39;,
+                  //fieldLabel: app.localize(&#39;GLAccount&#39;).initCap(),
+                  //width: &#39;100%&#39;,
+                  //ui: &#39;fieldLabelTop&#39;,
+                  //displayField: &#39;account&#39;,
+                  //valueField: &#39;accountId&#39;,
+                  //emptyText: app.localize(&#39;SelectOption&#39;),
+                  //bind: {
+                  //    store: &#39;{getAccountsList}&#39;
+                  //}
+
+                  xtype: &#39;chachingcombobox&#39;,
+                  store: new Chaching.store.utilities.autofill.GLAccountListStore(),
+                  fieldLabel: app.localize(&#39;GLAccount&#39;),
                   ui: &#39;fieldLabelTop&#39;,
-                  displayField: &#39;account&#39;,
+                  width: &#39;100%&#39;,
+                  name: &#39;glAccountId&#39;,
                   valueField: &#39;accountId&#39;,
-                  emptyText: app.localize(&#39;SelectOption&#39;),
-                  bind: {
-                      store: &#39;{getAccountsList}&#39;
-                  }
+                  displayField: &#39;accountNumber&#39;,
+                  queryMode: &#39;remote&#39;,
+                  minChars: 2,
+                  useDisplayFieldToSearch: true,
+                  modulePermissions: {
+                      read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                      create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Create&#39;),
+                      edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                      destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
+                  },
+                  primaryEntityCrudApi: {
+                      read: abp.appPath + &#39;api/services/app/vendorUnit/GetAccountsList&#39;,
+                      create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                      update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                      destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+                  },
+                  createEditEntityType: &#39;financials.accounts.accounts&#39;,
+                  createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+                  entityType: &#39;Account&#39;,
+                  isTwoEntityPicker: false
+
               }]
         },
                   {
                       columnWidth: .3,
                       padding: &#39;20 10 0 20&#39;,
-                      defaults: {
-                          labelAlign: &#39;top&#39;,
-                          blankText: app.localize(&#39;MandatoryToolTipText&#39;)
-                      },
+                      //defaults: {
+                      //    labelAlign: &#39;top&#39;,
+                      //    blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                      //},
                       items: [
               //{
               //    xtype: &#39;textfield&#39;,
@@ -315,38 +352,99 @@
                     emptyText: app.localize(&#39;SelectOption&#39;)
                 },
               {
-                  xtype: &#39;combobox&#39;,
-                  name: &#39;accountId&#39;,
-                  fieldLabel: app.localize(&#39;Line#&#39;).initCap(),
-                  width: &#39;100%&#39;,
+                  //xtype: &#39;combobox&#39;,
+                  //name: &#39;accountId&#39;,
+                  //fieldLabel: app.localize(&#39;Line#&#39;).initCap(),
+                  //width: &#39;100%&#39;,
+                  //ui: &#39;fieldLabelTop&#39;,
+                  //displayField: &#39;account&#39;,
+                  //valueField: &#39;accountId&#39;,
+                  //emptyText: app.localize(&#39;SelectOption&#39;),
+                  //bind: {
+                  //    store: &#39;{getAccountsListLines}&#39;
+                  //}
+
+                  xtype: &#39;chachingcombobox&#39;,
+                  store: new Chaching.store.utilities.autofill.LinesListStore(),
+                  fieldLabel: app.localize(&#39;Line#&#39;),
                   ui: &#39;fieldLabelTop&#39;,
-                  displayField: &#39;account&#39;,
+                  width: &#39;100%&#39;,
+                  name: &#39;accountId&#39;,
                   valueField: &#39;accountId&#39;,
-                  emptyText: app.localize(&#39;SelectOption&#39;),
-                  bind: {
-                      store: &#39;{getAccountsListLines}&#39;
-                  }
-              }]
+                  displayField: &#39;accountNumber&#39;,
+                  queryMode: &#39;remote&#39;,
+                  minChars: 2,
+                  useDisplayFieldToSearch: true,
+                  modulePermissions: {
+                      read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs&#39;),
+                      create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Create&#39;),
+                      edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Edit&#39;),
+                      destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete&#39;)
+                  },
+                  primaryEntityCrudApi: {
+                      read: abp.appPath + &#39;api/services/app/vendorUnit/GetAccountsList&#39;,
+                      create: abp.appPath + &#39;api/services/app/linesUnit/CreateLineUnit&#39;,
+                      update: abp.appPath + &#39;api/services/app/linesUnit/UpdateLineUnit&#39;,
+                      destroy: abp.appPath + &#39;api/services/app/linesUnit/DeleteLineUnit&#39;
+                  },
+                  createEditEntityType: &#39;projects.projectmaintenance.linenumbers&#39;,
+                  createEditEntityGridController: &#39;projects-projectmaintenance-linenumbersgrid&#39;,
+                  entityType: &#39;Line&#39;,
+                  isTwoEntityPicker: false
+
+              }
+
+
+                      ]
                   },
                   {
                       columnWidth: .3,
                       padding: &#39;20 10 0 20&#39;,
-                      defaults: {
-                          labelAlign: &#39;top&#39;,
-                          blankText: app.localize(&#39;MandatoryToolTipText&#39;)
-                      },
+                      //defaults: {
+                      //    labelAlign: &#39;top&#39;,
+                      //    blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                      //},
                       items: [{
-                          xtype: &#39;combobox&#39;,
-                          name: &#39;jobId&#39;,
-                          fieldLabel: app.localize(&#39;Division&#39;).initCap(),
-                          width: &#39;100%&#39;,
+                          //xtype: &#39;combobox&#39;,
+                          //name: &#39;jobId&#39;,
+                          //fieldLabel: app.localize(&#39;Division&#39;).initCap(),
+                          //width: &#39;100%&#39;,
+                          //ui: &#39;fieldLabelTop&#39;,
+                          //displayField: &#39;rollupDivision&#39;,
+                          //valueField: &#39;rollupDivisionId&#39;,
+                          //emptyText: app.localize(&#39;SelectOption&#39;),
+                          //bind: {
+                          //    store: &#39;{rollupDivisionList}&#39;
+                          //}
+
+                          xtype: &#39;chachingcombobox&#39;,
+                          store: new Chaching.store.utilities.autofill.DivisionListStore(),
+                          fieldLabel: app.localize(&#39;Division&#39;),
                           ui: &#39;fieldLabelTop&#39;,
-                          displayField: &#39;rollupDivision&#39;,
-                          valueField: &#39;rollupDivisionId&#39;,
-                          emptyText: app.localize(&#39;SelectOption&#39;),
-                          bind: {
-                              store: &#39;{rollupDivisionList}&#39;
-                          }
+                          width: &#39;100%&#39;,
+                          name: &#39;jobId&#39;,
+                          valueField: &#39;jobId&#39;,
+                          displayField: &#39;jobNumber&#39;,
+                          queryMode: &#39;remote&#39;,
+                          minChars: 2,
+                          useDisplayFieldToSearch: true,
+                          modulePermissions: {
+                              read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                              create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                              edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                              destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+                          },
+                          primaryEntityCrudApi: {
+                              read: abp.appPath + &#39;api/services/app/jobUnit/GetDivisionList&#39;,
+                              create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                              update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                              destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+                          },
+                          createEditEntityType: &#39;financials.accounts.divisions&#39;,
+                          createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+                          entityType: &#39;Division&#39;,
+                          identificationKey: &#39;isDivision&#39;
+
                       }]
                   },
                   {

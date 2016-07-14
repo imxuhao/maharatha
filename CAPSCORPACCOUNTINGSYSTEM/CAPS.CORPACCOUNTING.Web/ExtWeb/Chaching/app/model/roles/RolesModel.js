@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.roles.RolesModel', {
+﻿/**
+ * DataModel to represent entity schema for Roles.
+ */
+Ext.define('Chaching.model.roles.RolesModel', {
     extend: 'Chaching.model.base.BaseModel',
     
     fields: [
@@ -13,9 +16,6 @@
             { name: 'isStatic', type: 'boolean' },
             { name: 'isDefault', type: 'boolean' },
             { name: 'createTime', type: "date", format: 'Y-m-d' }
-           // { name: 'grantedPermissionNames', type: "auto" },
-          //  { name: 'Roles', reference: 'roles.RolesModel' },
-           // { name: 'permissions', reference: 'roles.RolesModel' }
     ],
     idProperty: 'id'
    

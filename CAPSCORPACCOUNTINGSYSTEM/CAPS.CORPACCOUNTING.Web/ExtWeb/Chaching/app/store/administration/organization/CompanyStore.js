@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.administration.organization.CompanyStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Company.
+ */
+Ext.define('Chaching.store.administration.organization.CompanyStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.administration.organization.CompanyModel',
     proxy: {

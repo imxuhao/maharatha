@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.projects.projectmaintenance.JobAccountsModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-projects-projectmaintenance-JobAccountsModel'>/**
+</span> * DataModel to represent entity schema for Job/Project Accounts.
+ */
+Ext.define(&#39;Chaching.model.projects.projectmaintenance.JobAccountsModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     
-    fields: [
-        { name: &#39;jobAccountId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+<span id='Chaching-model-projects-projectmaintenance-JobAccountsModel-property-fields'>    fields: [
+</span>        { name: &#39;jobAccountId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
         { name: &#39;description&#39;, type: &#39;string&#39; },
         { name: &#39;jobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
         { name: &#39;accountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },

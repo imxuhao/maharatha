@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-store-administration-organization-CompanyStore'>/**
+</span> * DataStore to perform CRUD operation on Company.
+ */
+Ext.define(&#39;Chaching.store.administration.organization.CompanyStore&#39;, {
+    extend: &#39;Chaching.store.base.BaseStore&#39;,
+<span id='Chaching-store-administration-organization-CompanyStore-property-model'>    model: &#39;Chaching.model.administration.organization.CompanyModel&#39;,
+</span><span id='Chaching-store-administration-organization-CompanyStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+        api: {
+            create: abp.appPath + &#39;api/services/app/organizationUnit/CreateOrganizationUnit&#39;,
+            read: abp.appPath + &#39;api/services/app/organizationUnit/GetComapnySetUpUnits&#39;,
+            update: abp.appPath + &#39;api/services/app/organizationUnit/UpdateOrganizationUnit&#39;,
+            destroy: abp.appPath + &#39;api/services/app/organizationUnit/DeleteOrganizationUnit&#39;
+        }
+    },
+<span id='Chaching-store-administration-organization-CompanyStore-property-idPropertyField'>    idPropertyField: &#39;id&#39;//important to set for add/update of records
+</span>});</pre>
+</body>
+</html>

@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Inter Linking of users accounts.
+ */
 Ext.define('Chaching.model.profile.linkedaccounts.LinkedAccountsModel', {
     extend: 'Chaching.model.base.BaseModel',
     

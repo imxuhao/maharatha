@@ -43,7 +43,7 @@
           scale: &#39;small&#39;,
           ui: &#39;actionButton&#39;,
           action: &#39;create&#39;,
-          text: abp.localization.localize(&quot;CreateNewAccount&quot;).toUpperCase(),
+          text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
           checkPermission: true,
           iconCls: &#39;fa fa-plus&#39;,
           iconAlign: &#39;left&#39;
@@ -62,6 +62,10 @@
     createWndTitleConfig: {
         title: app.localize(&#39;CreateNewAccount&#39;),
         iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewAccount&#39;),
+        iconCls: &#39;fa fa-th&#39;
     },
     createNewMode: &#39;tab&#39;,
     isSubMenuItemTab: true,
@@ -98,13 +102,22 @@
              xtype: &#39;gridcolumn&#39;,
              text: app.localize(&#39;Classification&#39;),
              dataIndex: &#39;typeOfAccount&#39;,
+             itemId: &#39;typeOfAccountId&#39;,
              sortable: true,
              groupable: true,
              width: &#39;8%&#39;,
              filterField: {
                  xtype: &#39;combobox&#39;,
+                 queryMode : &#39;local&#39;,
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
+                 forceSelection: true,
+                 searchProperty: &#39;typeOfAccountId&#39;,
                  valueField: &#39;typeOfAccountId&#39;,
                  displayField: &#39;typeOfAccount&#39;,
+                 listConfig: {
+                     minWidth:300
+                 },
                  bind: {
                      store: &#39;{typeOfAccountList}&#39;
                  }
@@ -121,6 +134,12 @@
                  xtype: &#39;combobox&#39;,
                  valueField: &#39;typeofConsolidationId&#39;,
                  displayField: &#39;typeofConsolidation&#39;,
+                 queryMode: &#39;local&#39;,
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
+                 forceSelection: true,
+                 isEnum: true,
+                 searchProperty: &#39;typeofConsolidationId&#39;,
                  bind: {
                      store: &#39;{typeofConsolidationList}&#39;
                  }
@@ -143,7 +162,9 @@
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }
          ,
@@ -164,7 +185,9 @@
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }
          ,
@@ -185,13 +208,16 @@
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }
          , {
              xtype: &#39;gridcolumn&#39;,
              text: app.localize(&#39;Currency&#39;),
              dataIndex: &#39;typeOfCurrency&#39;,
+             itemId: &#39;typeOfCurrencyId&#39;,
              sortable: true,
              groupable: true,
              width: &#39;8%&#39;,
@@ -199,6 +225,11 @@
                  xtype: &#39;combobox&#39;,
                  valueField: &#39;typeOfCurrencyId&#39;,
                  displayField: &#39;typeOfCurrency&#39;,
+                 queryMode: &#39;local&#39;,
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
+                 forceSelection: true,
+                 searchProperty: &#39;typeOfCurrencyId&#39;,
                  bind: {
                      store: &#39;{typeOfCurrencyList}&#39;
                  }
@@ -238,7 +269,9 @@
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }, {
              xtype: &#39;gridcolumn&#39;,
@@ -276,7 +309,6 @@
                  itemId: &#39;linkAccountId&#39;,
                  valueField: &#39;linkAccountId&#39;,
                  displayField: &#39;linkAccount&#39;,
-                 typeAhead: true,
                  queryMode: &#39;remote&#39;,
                  forceSelection: true,
                  bind: {

@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.projects.projectmaintenance.ProjectCoaStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Projects/Job COA.
+ */
+Ext.define('Chaching.store.projects.projectmaintenance.ProjectCoaStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.financials.accounts.ChartOfAccountsModel',
     //storeId:"coaStore",

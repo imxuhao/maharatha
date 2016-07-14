@@ -28,6 +28,12 @@ Ext.define(&#39;Chaching.view.languages.LanguagesGrid&#39;,{
     xtype: &#39;languages&#39;,
     store: &#39;languages.LanguagesStore&#39;,
     name: &#39;Administration.Languages&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Administration.Languages&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Administration.Languages.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Administration.Languages.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Administration.Languages.Delete&#39;)
+    },
     padding: 5,
     gridId:3,
     headerButtonsConfig: [
@@ -70,6 +76,10 @@ Ext.define(&#39;Chaching.view.languages.LanguagesGrid&#39;,{
     },
     createWndTitleConfig: {
         title: app.localize(&#39;CreateNewLanguage&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewLanguage&#39;),
         iconCls: &#39;fa fa-plus&#39;
     },
     columns: [

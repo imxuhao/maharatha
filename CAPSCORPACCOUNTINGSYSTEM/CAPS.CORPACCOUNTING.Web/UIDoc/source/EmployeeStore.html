@@ -15,12 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.employee.EmployeeStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-employee-EmployeeStore'>/**
+</span> * DataStore to perform Read operation on Employees.
+ */
+Ext.define(&#39;Chaching.store.employee.EmployeeStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model:&#39;Chaching.model.employee.EmployeeModel&#39;,
-    pageSize: 1000,
-    //storeId:&#39;directorsListStore&#39;,
-    proxy: {
+<span id='Chaching-store-employee-EmployeeStore-property-model'>    model:&#39;Chaching.model.employee.EmployeeModel&#39;,
+</span><span id='Chaching-store-employee-EmployeeStore-property-pageSize'>    pageSize: 1000,
+</span><span id='Chaching-store-employee-EmployeeStore-property-proxy'>    //storeId:&#39;directorsListStore&#39;,
+</span>    proxy: {
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         type: &#39;chachingProxy&#39;,
         url: abp.appPath + &#39;api/services/app/employeeUnit/GetEmployeeUnits&#39;,

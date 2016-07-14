@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.financials.journals.JournalDetailsStore', {
+﻿/**
+ * DataStore to perform Read/Delete operation on Journal Entry Details.
+ */
+Ext.define('Chaching.store.financials.journals.JournalDetailsStore', {
     extend: 'Chaching.store.base.TransactionDetailsStore',
     model: 'Chaching.model.financials.journals.JournalEntryDetail',
     proxy: {

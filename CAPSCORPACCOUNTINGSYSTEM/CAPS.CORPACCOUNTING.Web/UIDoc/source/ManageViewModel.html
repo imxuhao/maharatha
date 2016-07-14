@@ -15,13 +15,16 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.manageView.ManageViewModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-manageView-ManageViewModel'>/**
+</span> * DataModel to represent entity schema for User View Settings.
+ */
+Ext.define(&#39;Chaching.model.manageView.ManageViewModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;UserViewSettings&#39;
-    },
-    fields: [
-        { name: &#39;userViewId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+<span id='Chaching-model-manageView-ManageViewModel-cfg-searchEntityName'>        searchEntityName: &#39;UserViewSettings&#39;
+</span>    },
+<span id='Chaching-model-manageView-ManageViewModel-property-fields'>    fields: [
+</span>        { name: &#39;userViewId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
         { name: &#39;viewId&#39;, type: &#39;int&#39; },
         { name: &#39;userId&#39;, type: &#39;int&#39; },
         { name: &#39;viewSettings&#39;, type: &#39;string&#39; },

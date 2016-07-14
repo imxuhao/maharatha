@@ -46,7 +46,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
           scale: &#39;small&#39;,
           ui: &#39;actionButton&#39;,
           action: &#39;create&#39;,
-          text: abp.localization.localize(&quot;CreateNewSubAccounts&quot;).toUpperCase(),
+          text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
           checkPermission: true,
           iconCls: &#39;fa fa-plus&#39;,
           iconAlign: &#39;left&#39;
@@ -65,6 +65,10 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
     createWndTitleConfig: {
         title: app.localize(&#39;CreateNewSubAccounts&#39;),
         iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewSubAccount&#39;),
+        iconCls: &#39;fa fa-th&#39;
     },
     createNewMode: &#39;tab&#39;,
     isSubMenuItemTab: true,
@@ -111,6 +115,13 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
                   xtype: &#39;combobox&#39;,
                   valueField: &#39;typeofSubAccountId&#39;,
                   displayField: &#39;typeofSubAccount&#39;,
+                  queryMode: &#39;local&#39;,
+                  triggerAction: &#39;all&#39;,
+                  loadStoreOnCreate: true,
+                  isViewmodelStore: true,
+                  forceSelection: true,
+                  isEnum: true,
+                  searchProperty:&#39;typeofSubAccountId&#39;,
                   bind: {
                       store: &#39;{typeOfSubAccountList}&#39;
                   }
@@ -134,7 +145,9 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }, {
              xtype: &#39;gridcolumn&#39;,
@@ -153,7 +166,9 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }, {
              xtype: &#39;gridcolumn&#39;,
@@ -172,7 +187,9 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }, {
              xtype: &#39;gridcolumn&#39;,
@@ -191,7 +208,9 @@ Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGrid&#39;, {
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }
 

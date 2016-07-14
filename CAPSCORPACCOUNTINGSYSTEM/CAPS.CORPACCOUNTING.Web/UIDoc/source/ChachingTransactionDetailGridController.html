@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.common.grid.ChachingTransactionDetailGridController&#39;, {
+    extend: &#39;Ext.app.ViewController&#39;,
+    alias: &#39;controller.common-grid-chachingtransactiondetailgrid&#39;,
+    onNewClicked: function() {
+        var me = this, view = me.getView(), detailStore = view.getStore();
+        if (view.isInViewMode)return;
+        if (detailStore) {
+            var multiplyOfField = view.down(&#39;numberfield[itemId=multiplyOf]&#39;), multiplyOf = multiplyOfField.getValue();
+            var modelClass = detailStore.getModel(),
+                className = modelClass.$className;
+            if (multiplyOfField.validate()) {
+                Ext.suspendLayouts();
+                for (var i = 0; i &lt; multiplyOf; i++) {
+                    var rec = Ext.create(className);
+                    detailStore.insert(0, rec);
+                }
+                Ext.resumeLayouts();
+            } else {
+                abp.notify.info(app.localize(&#39;AddNewValidationMessage&#39;), app.localize(&#39;ValidationFailed&#39;));
+            }
+        }
+    },
+    onDeleteClicked: function (grid, rowIndex, colIndex) {
+        var me = this,
+            view = me.getView(),
+            detailStore = view.getStore();
+        if (view.isInViewMode) return;
+        var record = detailStore.getAt(rowIndex);
+        if (record) {
+            var accountingItemId = record.get(&#39;accountingItemId&#39;);
+            if (accountingItemId &gt; 0 &amp;&amp; me.allowDetailRowDelete(record)) {
+                record.set(&#39;id&#39;, accountingItemId);
+                var operation = Ext.data.Operation({
+                    params: {id:accountingItemId},
+                    controller: me,
+                    action: &#39;destroy&#39;,
+                    records: [record],
+                    callback: me.onDetailDeleteOperationCompleteCallBack
+                });
+                detailStore.erase(operation);
+            }
+            detailStore.remove(record);
+        }
+    },
+    onDetailDeleteOperationCompleteCallBack:function(records, operation, success) {
+        if (success) {
+            abp.notify.success(&#39;Operation completed successfully.&#39;, &#39;Success&#39;);
+        } else {
+            var response = Ext.decode(operation.getResponse().responseText);
+            var message = &#39;&#39;,
+                title = &#39;Error&#39;;
+            if (response &amp;&amp; response.error) {
+                if (response.error.message &amp;&amp; response.error.details) {
+                    title = response.error.message;
+                    message = response.error.details;
+                    abp.message.warn(message, title);
+                    return;
+                }
+                title = response.error.message;
+                message = response.error.details ? response.error.details : title;
+            }
+            abp.message.warn(message, title);
+        }
+    },
+    allowDetailRowDelete:function(record) {
+        return true;
+    },
+    onRefreshClicked:function() {
+        var me = this,
+           view = me.getView(),
+           multiSearchPlugin = view.getPlugin(&#39;gms&#39;),
+           gridStore = view.getStore();
+
+        if (multiSearchPlugin) {
+            multiSearchPlugin.clearValues(true);
+            gridStore.clearFilter();
+        } else gridStore.clearFilter();
+
+        gridStore.getSorters().clear();
+        gridStore.reload();
+    },
+    onSplitClicked: function (field) {
+        var me = this,
+           view = me.getView(),
+           gridStore = view.getStore();
+        var isInlineSplit = false,
+            editor = undefined,
+            cellRecordIndex = undefined;
+        if (field.xtype === &quot;numberfield&quot;) {
+            editor = field.up();
+            if (editor &amp;&amp; editor.context) {
+                cellRecordIndex = editor.context.record;
+                isInlineSplit = true;
+            }
+        }
+       
+        var multiplyOfField = view.down(&#39;numberfield[itemId=multiplyOf]&#39;), multiplyOf = multiplyOfField.getValue();
+        if (isInlineSplit &amp;&amp; cellRecordIndex) {
+            view.getSelectionModel().select(cellRecordIndex);
+            multiplyOfField = field;
+            multiplyOf = multiplyOfField.getValue();
+            if (editor &amp;&amp; editor.editingPlugin) {
+                var cellEditing = editor.editingPlugin;
+                cellEditing.completeEdit();
+            }
+        }
+        var selectionModel = view.getSelectionModel(),
+            selectedRecords = selectionModel.getSelection();
+        if (view.isInViewMode) return;
+
+        if (selectedRecords &amp;&amp; selectedRecords.length === 1) {
+            var parentRecord = selectedRecords[0],
+                parentIndex = gridStore.indexOf(parentRecord);
+            //if (parentRecord.get(&#39;isAccountingItemSplit&#39;)) {
+            //    abp.notify.info(app.localize(&#39;AlreadySplit&#39;), app.localize(&#39;ValidationFailed&#39;));
+            //    return;
+            //}
+            if (!parentRecord.get(&#39;amount&#39;)) {
+                abp.notify.info(app.localize(&#39;EnterAmountToSplit&#39;), app.localize(&#39;ValidationFailed&#39;));
+                return;
+            }
+            
+            var modelClass = gridStore.getModel(),
+                className = modelClass.$className;
+            if (multiplyOfField.validate()) {
+                //var amount = parentRecord.get(&#39;amount&#39;) / multiplyOf,
+                //firstValue = (Math.floor(amount * 100) / 100),
+                //decimalAmount = (parentRecord.get(&#39;amount&#39;) - (firstValue * multiplyOf)).toFixed(2);
+                //parentRecord.set(&#39;amount&#39;, +firstValue.toFixed(2));
+                parentRecord.set(&#39;isAccountingItemSplit&#39;, true);
+                var lastUsedSplitGroupCls = view.lastUsedSplitGroupCls,
+                    splitGroupsCls = Chaching.utilities.ChachingGlobals.splitGroupCls;
+
+                if (!lastUsedSplitGroupCls) {
+                    lastUsedSplitGroupCls = splitGroupsCls[0];
+                    view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                } else {
+                    var indexOfLastGroupCls = splitGroupsCls.indexOf(lastUsedSplitGroupCls);
+                    if (indexOfLastGroupCls+1 &lt; splitGroupsCls.length) {
+                        lastUsedSplitGroupCls = splitGroupsCls[indexOfLastGroupCls+1];
+                        view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                    } else {
+                        lastUsedSplitGroupCls = splitGroupsCls[0];
+                        view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                    }
+                }
+                parentRecord.set(&#39;SplitGroupCls&#39;, lastUsedSplitGroupCls);
+                Ext.suspendLayouts();
+                for (var i = 1; i &lt; multiplyOf; i++) {
+                    var rec = Ext.create(className);
+                    Ext.apply(rec.data, parentRecord.data);
+                    rec.set(&#39;SplitAccountingItemId&#39;, parentRecord.get(&#39;accountingItemId&#39;));
+                    rec.set(&#39;accountingItemId&#39;, 0);
+                    rec.set(&#39;isAccountingItemSplit&#39;, true);
+                    rec.set(&#39;amount&#39;, 0);
+                    rec.set(&#39;creatorUserId&#39;, null);
+                    rec.set(&#39;lastModifierUserId&#39;, null);
+                    rec.set(&#39;creationTime&#39;, null);
+                    rec.set(&#39;lastModificationTime&#39;, null);
+                    rec.set(&#39;parentRec&#39;, parentRecord);
+                    gridStore.insert(parentIndex + 1, rec);
+                }
+                Ext.resumeLayouts();
+                //parentRecord.set(&#39;amount&#39;, (firstValue + +decimalAmount).toFixed(2));
+            }
+        } else {
+            if (selectedRecords&amp;&amp;selectedRecords.length === 0)
+                abp.notify.info(app.localize(&#39;SplitRecordSelect&#39;), app.localize(&#39;ValidationFailed&#39;));
+            else if (selectedRecords &amp;&amp; selectedRecords.length &gt; 1)
+                abp.notify.info(app.localize(&#39;SingleSplit&#39;), app.localize(&#39;ValidationFailed&#39;));
+        }
+    },
+    onDetailsAmountChange: function(field, newValue, oldValue, eOpts) {
+        var value = 0,
+            plusMinus = &quot;minus&quot;;
+        if (!oldValue)value = newValue;
+        else if (newValue &gt; oldValue) {
+            value = newValue - oldValue;
+            plusMinus = &quot;minus&quot;;
+        }
+        else if (newValue &lt; oldValue) {
+            value = oldValue - newValue;
+            plusMinus = &quot;plus&quot;;
+        }
+        var editor = field.up();
+        if (editor) {
+            var context = editor.context,
+                record = context.record,
+                detailStore = this.getView().getStore();
+            if (record &amp;&amp; record.get(&#39;isAccountingItemSplit&#39;)) {
+                var parentRec = record.get(&#39;parentRec&#39;);
+                if (!parentRec &amp;&amp; record.get(&#39;splitAccountingItemId&#39;)) parentRec = detailStore.findRecord(&#39;accountingItemId&#39;, record.get(&#39;splitAccountingItemId&#39;));
+                if (parentRec) {
+                    plusMinus === &quot;minus&quot; ? parentRec.set(&#39;amount&#39;, parseInt(Math.abs(parentRec.get(&#39;amount&#39;)) - value)) : parentRec.set(&#39;amount&#39;, parseInt(Math.abs(parentRec.get(&#39;amount&#39;)) + value));
+                }
+            }
+        }
+    },
+    onDetailsAmountFocus:function(field, e, eOpts) {
+        if (field.getValue() === 0) {
+            field.value = 0;
+            field.setRawValue(null);
+            return;
+        }
+    },
+    beforeAccountQuery: function (queryPlan, eOpts) {
+        var me = this,
+            view = me.getView(),
+            editingPlugin = view.getPlugin(&#39;editingPlugin&#39;),
+            combo = queryPlan.combo,
+            comboStore = combo.getStore();
+        if (editingPlugin&amp;&amp;editingPlugin.activeRecord) {
+            var activeRec = editingPlugin.activeRecord,
+                jobId = activeRec.get(&#39;jobId&#39;);
+            if (jobId &gt; 0) {
+                comboStore.getProxy().setExtraParam(&#39;jobId&#39;, jobId);
+            } else comboStore.getProxy().setExtraParam(&#39;jobId&#39;, null);
+        }
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on(&#39;load&#39;, function () {
+            if (this.combo) this.combo.focus();
+        });
+    },
+    beforeJobDivisionQuery:function(queryPlan, eOpts) {
+        var me = this,
+            view = me.getView(),
+            combo = queryPlan.combo,
+            comboStore = combo.getStore();
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on(&#39;load&#39;, function () {
+            if (this.combo) this.combo.focus();
+        });
+    },
+    onBeforeSubAccountQuery:function(queryPlan, eOpts) {
+        var me = this,
+            view = me.getView(),
+            combo = queryPlan.combo,
+            comboStore = combo.getStore();
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on(&#39;load&#39;, function () {
+            if (this.combo) this.combo.focus();
+        });
+    },
+    onBeforeVendorQuery: function (queryPlan, eOpts) {
+        var me = this,
+            view = me.getView(),
+            combo = queryPlan.combo,
+            comboStore = combo.getStore();
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on(&#39;load&#39;, function () {
+            if (this.combo) this.combo.focus();
+        });
+    },
+    emptyFunction:function(){},
+    onBeforeGridEdit: function (editor, context, eOpts) {
+        var me = this, view = me.getView();
+
+        if (view.isInViewMode) return false;
+        var moduleSpecificChecks = me.doModuleSpecificBeforeEdit(editor, context, eOpts);
+        if (!moduleSpecificChecks) {
+            return false;
+        }
+        //if (context.field === &#39;isAccountingItemSplit&#39; &amp;&amp; context.record.get(&#39;isAccountingItemSplit&#39;)) return false;
+        var cell = view.getView().getCell(context.record, context.column);
+        if (cell) {
+            cell.removeCls(&quot;x-invalid-cell-value&quot;);
+            cell.removeCls(&quot;x-mandatory-cell-value&quot;);
+            cell.set({ &#39;data-errorqtip&#39;: &#39;&#39; });
+        }
+        return true;
+    },
+    doModuleSpecificBeforeEdit:function(editor, context, eOpts) {
+        return true;
+    }
+
+});
+</pre>
+</body>
+</html>

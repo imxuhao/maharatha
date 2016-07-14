@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.auditlogs.AuditLogsModel', {
+﻿/**
+ * Entity schema model for Audit Log.
+ */
+Ext.define('Chaching.model.auditlogs.AuditLogsModel', {
     extend: 'Chaching.model.base.BaseModel',
 
     fields: [

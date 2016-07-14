@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.auditlogs.AuditLogsStore', {
+﻿/**
+ * DataStore to perform Read operation on Audit Log.
+ */
+Ext.define('Chaching.store.auditlogs.AuditLogsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.auditlogs.AuditLogsModel',
     proxy: {

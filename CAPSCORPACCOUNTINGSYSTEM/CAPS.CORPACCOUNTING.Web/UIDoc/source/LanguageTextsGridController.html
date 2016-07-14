@@ -23,7 +23,54 @@
             var form = formView.down(&#39;form&#39;).getForm();
             form.findField(&#39;name&#39;).setReadOnly(true);
         }
-    }
+    },
+    onLanguageCellClick: function (view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+        var me = this;
+        // Open a window on click of Edit in Grid
+        var grid = me.getView();
+        var columnName = grid.columns[cellIndex].dataIndex;
+        if (columnName == &#39;isEdit&#39;) {
+            //var formView = Ext.create({
+            //    xtype: &#39;Languagetexts.editView&#39;
+            //});
+            var formView = Ext.widget(&#39;Languagetexts.editView&#39;);
+            formView.parentGrid = grid;
+            formView.show();
+            var languageForm = grid.up(&#39;form&#39;),
+                basicForm = languageForm.getForm(),
+                languageRecord = basicForm.getValues(),
+                baseLaguage = basicForm.findField(&#39;baseLanguage&#39;).getRawValue(),
+                targetLanguage = basicForm.findField(&#39;targetLanguage&#39;).getRawValue();
+            var newRecord = {
+                sourceName: languageRecord.source,
+                baseValue: record.get(&#39;baseValue&#39;),
+                value: record.get(&#39;targetValue&#39;),
+                key: record.get(&#39;key&#39;),
+                hiddenKey: record.get(&#39;key&#39;),
+                targetLanguage: targetLanguage,
+                hiddenTargetLanguage: basicForm.findField(&#39;targetLanguage&#39;).getValue(),
+                rowNumber: rowIndex
+            }
+            var languageEditForm = formView.down(&#39;form&#39;).getForm();
+            languageEditForm.setValues(newRecord);
+            languageEditForm.findField(&#39;sourceLanguage&#39;).setHtml(&#39;&lt;i class=&quot;famfamfam-flag famfamfam-flag-&#39; + languageRecord.baseLanguage + &#39;&quot;&gt;&#39; + baseLaguage + &#39;&lt;/i&gt;&#39;);
+            var previousButton = formView.query(&quot;#BtnPrevious&quot;)[0];
+            if (rowIndex == 0) {
+                previousButton.setDisabled(true);
+            }
+        }
+        
+    },
+    doBeforeInlineAddUpdate: function (record) {
+        var me = this,
+            view = me.getView(),
+            gridStore = view.getStore(),
+            storeProxy = gridStore.getProxy();
+        record.set(&#39;languageName&#39;, storeProxy.extraParams.TargetLanguageName);
+        record.set(&#39;value&#39;, record.get(&#39;targetValue&#39;));
+        return record;
+    },
+
 });
 </pre>
 </body>

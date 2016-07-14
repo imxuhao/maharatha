@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.administration.organization.TenantListStore', {
+﻿/**
+ * DataStore to perform Read operation on Tenants.
+ */
+Ext.define('Chaching.store.administration.organization.TenantListStore', {
     extend: 'Chaching.store.base.BaseStore',
     fields: [{ name: 'tenantId' }, { name: 'tenantName' }],
     remoteSort : false,

@@ -28,15 +28,15 @@
 Ext.define(&#39;Chaching.view.projects.projectmaintenance.PoRangeAllocationGrid&#39;,{
     extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
     xtype: &#39;widget.projects.projectmaintenance.porangeallocation&#39;,
-<span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-modulePermissions'>    modulePermissions: {
+<span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-modulePermissions'>    modulePermissions: {
 </span>        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
         create: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
         edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
         destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
     },
-<span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-padding'>    padding: 5,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-store'>    store: &#39;projects.projectmaintenance.PoRangeAllocationStore&#39;,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-headerButtonsConfig'>    headerButtonsConfig: [{
+<span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-padding'>    padding: 5,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-store'>    store: &#39;projects.projectmaintenance.PoRangeAllocationStore&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-headerButtonsConfig'>    headerButtonsConfig: [{
 </span>        xtype: &#39;displayfield&#39;,
         value: app.localize(&#39;POAllocation&#39;),
         ui: &#39;headerTitle&#39;
@@ -52,17 +52,17 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.PoRangeAllocationGrid&
         routeName: &#39;project.projectmaintenance.projects.create&#39;,
         iconAlign: &#39;left&#39;
     }],
-<span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-requireExport'>    requireExport: false,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-requireMultiSearch'>    requireMultiSearch: false,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-requireMultisort'>    requireMultisort: false,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-isEditable'>    isEditable: true,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-editingMode'>    editingMode: &#39;cell&#39;,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-columnLines'>    columnLines: true,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-multiColumnSort'>    multiColumnSort: false,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-createNewMode'>    createNewMode: &#39;inline&#39;,
+<span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-requireExport'>    requireExport: false,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-requireMultiSearch'>    requireMultiSearch: false,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-requireMultisort'>    requireMultisort: false,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-isEditable'>    isEditable: true,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-editingMode'>    editingMode: &#39;cell&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-columnLines'>    columnLines: true,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-multiColumnSort'>    multiColumnSort: false,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-createNewMode'>    createNewMode: &#39;inline&#39;,
 </span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-isSubMenuItemTab'>    isSubMenuItemTab: false,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-showPagingToolbar'>    showPagingToolbar: false,
-</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-property-columns'>    columns: [
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-showPagingToolbar'>    showPagingToolbar: false,
+</span><span id='Chaching-view-projects-projectmaintenance-PoRangeAllocationGrid-cfg-columns'>    columns: [
 </span>    {
         xtype: &#39;gridcolumn&#39;,
         dataIndex: &#39;poRangeStartNumber&#39;,

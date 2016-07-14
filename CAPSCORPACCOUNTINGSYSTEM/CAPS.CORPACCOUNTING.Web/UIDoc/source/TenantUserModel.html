@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-tenants-TenantUserModel'>/**
+</span> * DataModel to represent entity schema for Tenants users.
+ */
+Ext.define(&#39;Chaching.model.tenants.TenantUserModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+<span id='Chaching-model-tenants-TenantUserModel-cfg-searchEntityName'>        searchEntityName: &#39;&#39;
+</span>    },
+<span id='Chaching-model-tenants-TenantUserModel-property-fields'>    fields: [
+</span>        { name: &#39;name&#39;, type: &#39;string&#39; },
+        { name: &#39;value&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler }
+    ]
+});
+</pre>
+</body>
+</html>

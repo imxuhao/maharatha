@@ -15,14 +15,17 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.financials.accounts.SubAccountsModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-financials-accounts-SubAccountsModel'>/**
+</span> * DataModel to represent entity schema for Sub-Accounts.
+ */
+Ext.define(&#39;Chaching.model.financials.accounts.SubAccountsModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
-    fields: [
-        { name: &#39;subAccountId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+<span id='Chaching-model-financials-accounts-SubAccountsModel-property-fields'>    fields: [
+</span>        { name: &#39;subAccountId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
         { name: &#39;caption&#39;, type: &#39;string&#39; },
-        { name: &#39;description&#39;, type: &#39;string&#39; },
         { name: &#39;displaySequence&#39;, type: &#39;int&#39; },
-        { name: &#39;subAccountNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber&#39;, type: &#39;string&#39;, headerText: &#39;SubAccountNumber&#39;, hidden: false, width: &#39;10%&#39;, minWidth:110 },
+        { name: &#39;description&#39;, type: &#39;string&#39;, headerText: &#39;Description&#39;, hidden: false, width: &#39;10%&#39;, minWidth: 110 },
         { name: &#39;accountingLayoutItemId&#39;, type: &#39;int&#39; },
         { name: &#39;groupCopyLabel&#39;, type: &#39;string&#39; },
         { name: &#39;isAccountSpecific&#39;, type: &#39;boolean&#39; },
@@ -38,7 +41,93 @@
         { name: &#39;searchOrder&#39;, type: &#39;int&#39; },
         { name: &#39;searchNo&#39;, type: &#39;string&#39; },
         { name: &#39;typeofSubAccount&#39;, type: &#39;string&#39; },
-        { name: &#39;typeofSubAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler }
+        { name: &#39;typeofSubAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+
+
+         {
+             name: &#39;subAccountNumber1&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId1&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber2&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId2&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber3&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId3&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber4&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId4&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber5&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId5&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber6&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId6&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber7&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId7&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber8&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId8&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber9&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId9&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         }, {
+             name: &#39;subAccountNumber10&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+         }, {
+             name: &#39;subAccountId10&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+         },
+    /////////////
+    {
+        name: &#39;creditSubAccountNumber1&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId1&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber2&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId2&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber3&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId3&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber4&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId4&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber5&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId5&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber6&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId6&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber7&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId7&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber8&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId8&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber9&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId9&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }, {
+        name: &#39;creditSubAccountNumber10&#39;, type: &#39;string&#39;, mapping: &#39;subAccountNumber&#39;
+    }, {
+        name: &#39;creditSubAccountId10&#39;, type: &#39;int&#39;, mapping: &#39;subAccountId&#39;
+    }
+
     ]
 });
 </pre>

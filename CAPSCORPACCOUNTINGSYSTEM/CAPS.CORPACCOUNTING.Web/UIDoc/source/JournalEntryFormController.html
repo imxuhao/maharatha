@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.journals.JournalEntryFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingTransactionFormPanelController&#39;,
+    alias: &#39;controller.financials-journals-journalentryform&#39;,
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        record.set(&#39;typeOfAccountingDocumentId&#39;, 1);
+        return record;
+    },
+    onHeaderCollapse: function (fieldSet, eOpts) {
+        var me = this,
+            view = me.getView(),
+            detailContainer = view.down(&#39;fieldset[isTransactionDetailContainer=true]&#39;);
+        if (detailContainer) {
+            var detailGrid = detailContainer.down(&#39;gridpanel&#39;);
+            if (detailGrid) {
+                var gridHeight = detailGrid.getHeight();
+                detailGrid.originalHeight = gridHeight;
+                detailGrid.setHeight(gridHeight + (fieldSet.getHeight() - 80));
+            }
+        }
+    },
+    onHeaderExpand: function (fieldSet, eOpts) {
+        var me = this,
+           view = me.getView(),
+           detailContainer = view.down(&#39;fieldset[isTransactionDetailContainer=true]&#39;);
+        if (detailContainer) {
+            var detailGrid = detailContainer.down(&#39;gridpanel&#39;);
+            if (detailGrid) {
+                detailGrid.setHeight(detailGrid.originalHeight);
+            }
+        }
+    },
+    getDetailsModifiedRecords: function (controller, view, detailGrid, detailsStore) {
+        var modifiedRecords = detailsStore.getModifiedRecords(),
+            me = this,
+            records = [],
+            data = [],
+            modifiedRecs = { records: records, data: data },
+            modelClass = detailsStore.getModel().$className,
+            transactionId = view.getForm().findField(&#39;accountingDocumentId&#39;).getValue();
+        if (modifiedRecords &amp;&amp; modifiedRecords.length &gt; 0) {
+            var rowLength = modifiedRecords.length;
+            for (var i = 0; i &lt; rowLength; i++) {
+                var rec = modifiedRecords[i];
+                if (rec.dirty) {
+                    rec.set(&#39;parentRec&#39;, null);
+                    if (rec.get(&#39;accountingDocumentId&#39;) === 0 || !rec.get(&#39;accountingDocumentId&#39;)) {
+                        rec.set(&#39;accountingDocumentId&#39;, transactionId);
+                    }
+                    var modelRec = Ext.create(modelClass);
+                    var debitCreditGroup = me.numToChar(i + 1);
+                    //plain credit debit add
+                    if (!rec.get(&#39;accountingItemId&#39;) &amp;&amp; !rec.get(&#39;creditAccountingItemId&#39;)) {
+                        if (rec.get(&#39;creditJobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;creditAccountId&#39;) &gt; 0) {
+                            //create new credit record
+                            Ext.apply(modelRec.data, rec.data);
+                            me.traverseValues(modelRec, rec);
+                            if (rec.get(&#39;jobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;accountId&#39;) &gt; 0) { //add debit and credit
+                                rec.set(&#39;debitCreditGroup&#39;, debitCreditGroup);
+                                modelRec.set(&#39;debitCreditGroup&#39;, debitCreditGroup);
+                                records.push(rec);
+                                data.push(rec.data);
+                            }
+                            records.push(modelRec);
+                            data.push(modelRec.data);
+                        } else if (rec.get(&#39;jobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;accountId&#39;) &gt; 0) { //add debit
+                            records.push(rec);
+                            data.push(rec.data);
+                        }
+                    } else { //updating existing record
+                        if (rec.get(&#39;accountingItemId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;creditAccountingItemId&#39;) &gt; 0) {//update both record
+                            if (rec.get(&#39;creditJobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;creditAccountId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;creditAccountingItemId&#39;) &gt; 0) {
+                                //create new credit record
+                                Ext.apply(modelRec.data, rec.data);
+                                me.traverseValues(modelRec, rec);
+                                if (rec.get(&#39;jobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;accountId&#39;) &gt; 0) { //update debit and add credit
+                                    rec.set(&#39;debitCreditGroup&#39;, debitCreditGroup);
+                                    modelRec.set(&#39;debitCreditGroup&#39;, debitCreditGroup);
+                                    rec.set(&#39;debitAccountingItemId&#39;, null);
+                                    records.push(rec);
+                                    data.push(rec.data);
+                                }
+                                records.push(modelRec);
+                                data.push(modelRec.data);
+                            } else if (rec.get(&#39;jobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;accountId&#39;) &gt; 0) { //update debit
+                                records.push(rec);
+                                data.push(rec.data);
+                            }
+                        } else if (rec.get(&#39;creditAccountingItemId&#39;) &gt; 0) {//updating credit record only
+                            if (rec.get(&#39;creditJobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;creditAccountId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;creditAccountingItemId&#39;) &gt; 0) {
+                                //create new debit record
+                                Ext.apply(modelRec.data, rec.data);
+                                me.traverseValuesDebit(rec, rec);
+                                if (rec.get(&#39;jobId&#39;) &gt; 0 &amp;&amp;
+                                    rec.get(&#39;accountId&#39;) &gt; 0) { //add debit and update credit
+                                    rec.set(&#39;debitCreditGroup&#39;, debitCreditGroup);
+                                    modelRec.set(&#39;debitCreditGroup&#39;, debitCreditGroup);
+                                    rec.set(&#39;debitAccountingItemId&#39;, null);
+                                    //rec.set(&#39;accountingItemId&#39;, rec.get(&#39;creditAccountingItemId&#39;));
+                                    records.push(rec);
+                                    data.push(rec.data);
+                                }
+                                me.traverseValues(modelRec, rec);
+                                records.push(modelRec);
+                                data.push(modelRec.data);
+                            } else if (rec.get(&#39;jobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;accountId&#39;) &gt; 0) { //update debit
+                                if (rec.get(&#39;creditAccountingItemId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;creditJobId&#39;) === null &amp;&amp; rec.get(&#39;creditAccountId&#39;) === null) {//update debit
+                                    me.traverseValuesDebit(rec, rec);
+                                    rec.set(&#39;accountingItemId&#39;, rec.get(&#39;creditAccountingItemId&#39;));
+                                }
+                                records.push(rec);
+                                data.push(rec.data);
+                            }
+                        } else if (rec.get(&#39;accountingItemId&#39;) &gt; 0) {//add credit record
+                            if (rec.get(&#39;creditJobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;creditAccountId&#39;) &gt; 0) {
+                                //create new credit record
+                                var accountingItemId = rec.get(&#39;accountingItemId&#39;);
+                                Ext.apply(modelRec.data, rec.data);
+                                me.traverseValues(modelRec, rec);
+                                if (rec.get(&#39;jobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;accountId&#39;) &gt; 0) { //update debit and add credit
+                                    rec.set(&#39;debitCreditGroup&#39;, debitCreditGroup);
+                                    modelRec.set(&#39;debitCreditGroup&#39;, debitCreditGroup);
+                                    rec.set(&#39;debitAccountingItemId&#39;, null);
+                                    records.push(rec);
+                                    data.push(rec.data);
+                                } else {
+                                    modelRec.set(&#39;accountingItemId&#39;, accountingItemId);
+                                }
+                                records.push(modelRec);
+                                data.push(modelRec.data);
+                            } else if (rec.get(&#39;jobId&#39;) &gt; 0 &amp;&amp; rec.get(&#39;accountId&#39;) &gt; 0) { //update debit
+                                records.push(rec);
+                                data.push(rec.data);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //return {};
+        return modifiedRecs;
+    },
+    traverseValuesDebit: function (modelRec, rec) {
+        modelRec.set(&#39;accountingItemId&#39;, null);
+        modelRec.set(&#39;debitAccountingItemId&#39;, null);
+        modelRec.set(&#39;amount&#39;, Math.abs(rec.get(&#39;amount&#39;)));
+        if (modelRec.get(&#39;accountingItemOrigAmount&#39;) === null)
+            modelRec.set(&#39;accountingItemOrigAmount&#39;, -(Math.abs(modelRec.get(&#39;amount&#39;))));
+        else {
+            modelRec.set(&#39;accountingItemOrigAmount&#39;, modelRec.get(&#39;accountingItemOrigAmount&#39;));
+        }
+    },
+    traverseValues: function (modelRec, rec) {
+        modelRec.set(&#39;accountingItemId&#39;, rec.get(&#39;creditAccountingItemId&#39;));
+        modelRec.set(&#39;debitAccountingItemId&#39;, rec.get(&#39;accountingItemId&#39;));
+        modelRec.set(&#39;amount&#39;, -(rec.get(&#39;amount&#39;)));
+        if (modelRec.get(&#39;accountingItemOrigAmount&#39;)===null)
+            modelRec.set(&#39;accountingItemOrigAmount&#39;, -(Math.abs(modelRec.get(&#39;amount&#39;))));
+        else {
+            modelRec.set(&#39;accountingItemOrigAmount&#39;, modelRec.get(&#39;accountingItemOrigAmount&#39;));
+        }
+        modelRec.set(&#39;jobId&#39;, rec.get(&#39;creditJobId&#39;));
+        modelRec.set(&#39;jobNumber&#39;, rec.get(&#39;creditJobNumber&#39;));
+        modelRec.set(&#39;accountId&#39;, rec.get(&#39;creditAccountId&#39;));
+        modelRec.set(&#39;accountNumber&#39;, rec.get(&#39;creditAccountNumber&#39;));
+        modelRec.set(&#39;subAccountId1&#39;, rec.get(&#39;creditSubAccountId1&#39;));
+        modelRec.set(&#39;subAccountId2&#39;, rec.get(&#39;creditSubAccountId2&#39;));
+        modelRec.set(&#39;subAccountId3&#39;, rec.get(&#39;creditSubAccountId3&#39;));
+        modelRec.set(&#39;subAccountId4&#39;, rec.get(&#39;creditSubAccountId4&#39;));
+        modelRec.set(&#39;subAccountId5&#39;, rec.get(&#39;creditSubAccountId5&#39;));
+        modelRec.set(&#39;subAccountId6&#39;, rec.get(&#39;creditSubAccountId6&#39;));
+        modelRec.set(&#39;subAccountId7&#39;, rec.get(&#39;creditSubAccountId7&#39;));
+        modelRec.set(&#39;subAccountId8&#39;, rec.get(&#39;creditSubAccountId8&#39;));
+        modelRec.set(&#39;subAccountId9&#39;, rec.get(&#39;creditSubAccountId9&#39;));
+        modelRec.set(&#39;subAccountId10&#39;, rec.get(&#39;creditSubAccountId10&#39;));
+    },
+    numToChar: function (number) {
+        var numeric = (number - 1) % 26;
+        var letter = this.chr(65 + numeric);
+        var number2 = parseInt((number - 1) / 26);
+        if (number2 &gt; 0) {
+            return this.numToChar(number2) + letter;
+        } else {
+            return letter;
+        }
+    },
+
+    chr: function (codePt) {
+        if (codePt &gt; 0xFFFF) {
+            codePt -= 0x10000;
+            return String.fromCharCode(0xD800 + (codePt &gt;&gt; 10), 0xDC00 + (codePt &amp; 0x3FF));
+        }
+        return String.fromCharCode(codePt);
+    },
+    validateDetails: function (controller, view, detailGrid, detailsStore, myMask) {
+        var detailColumns = detailGrid.getColumns(),
+            modifiedRecords = detailsStore.getModifiedRecords(),
+            isValid = true,
+            debitDataIndexes = [&#39;jobNumber&#39;, &#39;accountNumber&#39;, &#39;subAccountNumber1&#39;, &#39;subAccountNumber2&#39;, &#39;subAccountNumber3&#39;, &#39;subAccountNumber4&#39;, &#39;subAccountNumber5&#39;, &#39;subAccountNumber6&#39;, &#39;subAccountNumber7&#39;, &#39;subAccountNumber8&#39;, &#39;subAccountNumber9&#39;, &#39;subAccountNumber10&#39;],
+            creditDataIndexes = [&#39;creditJobNumber&#39;, &#39;creditAccountNumber&#39;, &#39;creditSubAccountNumber1&#39;, &#39;creditSubAccountNumber2&#39;, &#39;creditSubAccountNumber3&#39;, &#39;creditSubAccountNumber4&#39;, &#39;creditSubAccountNumber5&#39;, &#39;creditSubAccountNumber6&#39;, &#39;creditSubAccountNumber7&#39;, &#39;creditSubAccountNumber8&#39;, &#39;creditSubAccountNumber9&#39;, &#39;creditSubAccountNumber10&#39;];
+        if (modifiedRecords &amp;&amp; modifiedRecords.length &gt; 0) {
+            var rowLength = modifiedRecords.length;
+            for (var i = 0; i &lt; rowLength; i++) {
+                var record = modifiedRecords[i],
+                    columnCount = detailColumns.length;
+                if (record.dirty) {
+                    for (var j = 0; j &lt; columnCount; j++) {
+                        var column = detailColumns[j],
+                        dataIndex = column.dataIndex;
+                        if (!dataIndex) dataIndex = column.name;
+                        if (column.isMandatory) {
+                            var columnValue = record.get(dataIndex);
+                            var isValidRec = true;
+                            if (debitDataIndexes.indexOf(dataIndex) !== -1) {
+                                isValidRec = controller.validateRecord(dataIndex, debitDataIndexes, record, columnValue);
+                            } else if (creditDataIndexes.indexOf(dataIndex) !== -1) {
+                                isValidRec = controller.validateRecord(dataIndex, creditDataIndexes, record, columnValue);
+                            }
+                            if (isValidRec &amp;&amp;
+                                !record.get(&#39;jobNumber&#39;) &amp;&amp;
+                                !record.get(&#39;accountNumber&#39;) &amp;&amp;
+                               !record.get(&#39;creditJobNumber&#39;) &amp;&amp;
+                                !record.get(&#39;creditAccountNumber&#39;)) {
+
+                                isValidRec = false;
+                                columnValue = null;
+
+                            }
+                            if (dataIndex === &quot;amount&quot; &amp;&amp; columnValue === 0) {
+                                isValidRec = false;
+                                columnValue = null;
+                            }
+                            if (columnValue === null || columnValue === undefined || columnValue === &quot;&quot;) {
+                                if (!isValidRec) {
+                                    var cell = detailGrid.getView().getCell(record, column);
+                                    if (cell) controller.invalidateCell(cell, column.text);
+                                    isValid = false;
+                                    myMask.hide();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!isValid) break;
+            }
+            return isValid;
+        } else return true;
+    },
+    validateRecord: function (dataIndex, dataIndexes, record, columnValue) {
+        var isValid = true, value = undefined;
+        for (var i = 0; i &lt; dataIndexes.length; i++) {
+            if (dataIndexes[i] !== dataIndex) {
+                value = record.get(dataIndexes[i]);
+                if (value &amp;&amp; (columnValue === null || columnValue === undefined || columnValue === &quot;&quot;)) {
+                    isValid = false;
+                    break;
+                } else isValid = true;
+            }
+        }
+        return isValid;
+    }
+
+});
+</pre>
+</body>
+</html>

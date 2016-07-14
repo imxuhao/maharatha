@@ -22,19 +22,39 @@
         var viewModel = formView.getViewModel();
         var form = formView.getForm();
         form.findField(&quot;chartOfAccountId&quot;).setValue(formView.parentGrid.coaId);
+
+        var typeOfCurrency = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
+        typeOfCurrency.load();
+        var typeOfAccount = viewModel.getStore(&#39;typeOfAccountList&#39;);
+        typeOfAccount.load();
+        var typeofConsolidation = viewModel.getStore(&#39;typeofConsolidationList&#39;);
+        typeofConsolidation.load();
+        var rollupAccountList = form.findField(&#39;rollupAccountId&#39;).getStore();
+        var coaId = form.findField(&#39;chartOfAccountId&#39;).value;
+        rollupAccountList.getProxy().setExtraParam(&#39;Id&#39;, coaId);
+        rollupAccountList.load();
+
+        // load rollupDivisions
+        var rollupDivisionCombo = form.findField(&#39;rollupJobId&#39;);
+        var rollupDivisionStore = rollupDivisionCombo.getStore();
+        rollupDivisionStore.load();
+
+        //var rollupDivisionList = viewModel.getStore(&#39;rollupDivisionList&#39;);
+        //rollupDivisionList.load();
+
         if (isEdit) {
-            var typeOfCurrency = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
-            typeOfCurrency.load();
-            var typeOfAccount = viewModel.getStore(&#39;typeOfAccountList&#39;);
-            typeOfAccount.load();
-            var typeofConsolidation = viewModel.getStore(&#39;typeofConsolidationList&#39;);
-            typeofConsolidation.load();
-            var rollupAccountList = form.findField(&#39;rollupAccountId&#39;).getStore();
-            var coaId = form.findField(&#39;chartOfAccountId&#39;).value;
-            rollupAccountList.getProxy().setExtraParam(&#39;Id&#39;, coaId);
-            rollupAccountList.load();
-            var rollupDivisionList = viewModel.getStore(&#39;rollupDivisionList&#39;);
-            rollupDivisionList.load();
+            //var typeOfCurrency = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
+            //typeOfCurrency.load();
+            //var typeOfAccount = viewModel.getStore(&#39;typeOfAccountList&#39;);
+            //typeOfAccount.load();
+            //var typeofConsolidation = viewModel.getStore(&#39;typeofConsolidationList&#39;);
+            //typeofConsolidation.load();
+            //var rollupAccountList = form.findField(&#39;rollupAccountId&#39;).getStore();
+            //var coaId = form.findField(&#39;chartOfAccountId&#39;).value;
+            //rollupAccountList.getProxy().setExtraParam(&#39;Id&#39;, coaId);
+            //rollupAccountList.load();
+            //var rollupDivisionList = viewModel.getStore(&#39;rollupDivisionList&#39;);
+            //rollupDivisionList.load();
         }
     }
 

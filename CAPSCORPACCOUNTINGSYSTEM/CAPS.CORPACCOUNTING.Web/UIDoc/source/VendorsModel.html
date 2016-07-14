@@ -15,26 +15,30 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.payables.vendors.VendorsModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-payables-vendors-VendorsModel'>/**
+</span> * DataModel to represent entity schema for Vendors.
+ */
+Ext.define(&#39;Chaching.model.payables.vendors.VendorsModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     requires:[&#39;Chaching.model.address.AddressModel&#39;],
     config: {
-        searchEntityName: &#39;Vendor&#39;
-    },
-    fields: [
-            { name: &#39;vendorId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
-            { name: &#39;lastName&#39;, type: &#39;string&#39; },
-            { name: &#39;firstName&#39;, type: &#39;string&#39; },
+<span id='Chaching-model-payables-vendors-VendorsModel-cfg-searchEntityName'>        searchEntityName: &#39;Vendor&#39;
+</span>    },
+<span id='Chaching-model-payables-vendors-VendorsModel-property-fields'>    fields: [
+</span>            { name: &#39;vendorId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+            { name: &#39;lastName&#39;, type: &#39;string&#39;, headerText: &#39;LastName&#39;, hidden : false, width : &#39;8%&#39;, minWidth : 80 },
+            { name: &#39;firstName&#39;, type: &#39;string&#39;, headerText: &#39;FirstName&#39;, hidden: false, width: &#39;8%&#39;, minWidth: 80 },
+            { name: &#39;vendorName&#39;, type: &#39;string&#39;, headerText: &#39;VendorName&#39;, hidden: false, width: &#39;8%&#39;, minWidth: 150, convert: function (v, rec) { return (rec.get(&#39;firstName&#39;) + &quot; &quot; + rec.get(&#39;lastName&#39;)) } },
             { name: &#39;payToName&#39;, type: &#39;string&#39; },
             { name: &#39;dbaName&#39;, type: &#39;string&#39; },
-            { name: &#39;vendorNumber&#39;, type: &#39;string&#39; },
+            { name: &#39;vendorNumber&#39;, type: &#39;string&#39;, headerText: &#39;VendorNumber&#39;, hidden: false, width: &#39;10%&#39;, minWidth: 110 },
              { name: &#39;contactNumber&#39;, type: &#39;string&#39; },
             { name: &#39;vendorAccountInfo&#39;, type: &#39;string&#39; },
             { name: &#39;fedralTaxId&#39;, type: &#39;string&#39; },
             { name: &#39;ssnTaxId&#39;, type: &#39;string&#39; },
             { name: &#39;creditLimit&#39;, type: &#39;float&#39; },
             { name: &#39;typeofPaymentMethod&#39;, type: &quot;string&quot; },
-            { name: &#39;typeofPaymentMethodId&#39;, type: &quot;auto&quot; },
+            { name: &#39;typeofPaymentMethodId&#39;, type: &quot;int&quot;, defaultVaule: null, convert: nullHandler },
             { name: &#39;paymentTermsId&#39;, type: &quot;int&quot;,defaultVaule:null,convert:nullHandler },
             { name: &#39;typeofCurrency&#39;, type: &quot;string&quot; },
             { name: &#39;typeofCurrencyId&#39;, type: &quot;int&quot;, defaultVaule: null, convert: nullHandler },
@@ -42,8 +46,8 @@
             { name: &#39;is1099&#39;, type: &quot;boolean&quot; },
             { name: &#39;isIndependentContractor&#39;, type: &quot;boolean&quot; },
             { name: &#39;isw9OnFile&#39;, type: &quot;boolean&quot; },
-            { name: &#39;typeofVendorId&#39;, type: &quot;auto&quot; },
-            { name: &#39;typeof1099BoxId&#39;, type: &quot;auto&quot; },
+            { name: &#39;typeofVendorId&#39;, type: &quot;int&quot;, defaultVaule: null, convert: nullHandler },
+            { name: &#39;typeof1099BoxId&#39;, type: &quot;int&quot;, defaultVaule: null, convert: nullHandler },
             { name: &#39;typeof1099Box&#39;, type: &quot;string&quot; },
             { name: &#39;eddContractStartDate&#39;, type: &quot;date&quot; },
             { name: &#39;eddContractStopDate&#39;, type: &quot;date&quot; },

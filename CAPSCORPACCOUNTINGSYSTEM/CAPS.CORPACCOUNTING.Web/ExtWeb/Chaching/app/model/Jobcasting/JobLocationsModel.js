@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Job Locations.
+ */
 Ext.define('Chaching.model.Jobcasting.JobLocationsModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

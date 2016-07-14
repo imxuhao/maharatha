@@ -15,13 +15,16 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.profile.loginAttempts.LoginAttemptModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-profile-loginAttempts-LoginAttemptModel'>/**
+</span> * DataModel to represent entity schema for Users Login Attempts.
+ */
+Ext.define(&#39;Chaching.model.profile.loginAttempts.LoginAttemptModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;LoginAttempts&#39;
-    },
-    fields: [
-        { name: &#39;browserInfo&#39;, type: &#39;string&#39; },
+<span id='Chaching-model-profile-loginAttempts-LoginAttemptModel-cfg-searchEntityName'>        searchEntityName: &#39;LoginAttempts&#39;
+</span>    },
+<span id='Chaching-model-profile-loginAttempts-LoginAttemptModel-property-fields'>    fields: [
+</span>        { name: &#39;browserInfo&#39;, type: &#39;string&#39; },
         { name: &#39;clientIpAddress&#39;, type: &#39;string&#39; },
         { name: &#39;clientName&#39;, type: &#39;string&#39; },
         { name: &#39;result&#39;, type: &#39;string&#39;,convert:function(value) {

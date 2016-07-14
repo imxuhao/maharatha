@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.financials.journals.JournalTransactionDetailGrid&#39;,{
+    extend: &#39;Chaching.view.common.grid.ChachingTransactionDetailGrid&#39;,
+    xtype:&#39;widget.financials.journals.entry.transactionDetails&#39;,
+    requires: [
+        &#39;Chaching.view.financials.journals.JournalTransactionDetailGridController&#39;
+    ],
+
+    controller: &#39;financials-journals-journaltransactiondetailgrid&#39;,
+    store: &#39;financials.journals.JournalDetailsStore&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Financials.Journals.Entry&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Financials.Journals.Entry.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Financials.Journals.Entry.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Financials.Journals.Entry.Delete&#39;)
+    },
+    groupedHeaderBaseConfig: [{
+        groupHeaderText: app.localize(&#39;Debits&#39;),
+        columnName:&#39;debits&#39;,
+        childColumnNames: [&#39;jobNumber&#39;, &#39;accountNumber&#39;, &#39;subAccountNumber1&#39;, &#39;subAccountNumber2&#39;],
+        childColumnWidths:[100,100,100]
+    }],
+    isGroupedHeader: true,
+    moduleColumns:[
+    {
+        text: app.localize(&#39;Credits&#39;),
+        name: &#39;credits&#39;,
+        columns: [{
+            xtype: &#39;gridcolumn&#39;,
+            dataIndex: &#39;creditJobNumber&#39;,
+            name: &#39;creditJobNumber&#39;,
+            text: app.localize(&#39;JobDivision&#39;),
+            //itemId: &#39;duplicatejob&#39;,
+            width: 100,
+            hideable: false,
+            valueField: &#39;creditJobId&#39;,///NOTE: Important to update record idField when replicating like excel
+            entityType: &#39;jobordivision&#39;,
+            isMandatory:true,
+            filterField: {
+                xtype: &#39;chachingcombobox&#39;,
+                store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                valueField: &#39;jobId&#39;,
+                displayField: &#39;creditJobNumber&#39;,
+                queryMode: &#39;remote&#39;,
+                minChars: 2,
+                useDisplayFieldToSearch: true,
+                modulePermissions: {
+                    read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                    create: false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                    edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                    destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+                },
+                primaryEntityCrudApi: {
+                    read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                    create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                    update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                    destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+                },
+                createEditEntityType: &#39;financials.accounts.divisions&#39;,
+                createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+                entityType: &#39;Division&#39;,
+                isTwoEntityPicker: true,
+                secondEntityDetails: {
+                    editCreateModelClass: &#39;Chaching.model.projects.projectmaintenance.ProjectModel&#39;,
+                    identificationKey: &#39;isDivision&#39;,
+                    entityType: &#39;Job&#39;,
+                    createEditEntityType: &#39;projects.projectmaintenance.projects&#39;,
+                    createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.ProjectsGridController&#39;,
+                    modulePermissions: {
+                        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
+                        create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
+                        edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
+                        destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
+                    },
+                    secondoryEntityCrudApi: {
+                        read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                        create: abp.appPath + &#39;api/services/app/jobUnit/CreateJobUnit&#39;,
+                        update: abp.appPath + &#39;api/services/app/jobUnit/UpdateJobUnit&#39;,
+                        destroy: abp.appPath + &#39;api/services/app/jobUnit/DeleteJobUnit&#39;
+                    }
+                }
+            },
+            editor: {
+                xtype: &#39;chachingcombobox&#39;,
+                store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                valueField: &#39;creditJobId&#39;,
+                displayField: &#39;creditJobNumber&#39;,
+                queryMode: &#39;remote&#39;,
+                minChars: 2,
+                useDisplayFieldToSearch: true,
+                modulePermissions: {
+                    read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                    create: false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                    edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                    destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+                },
+                primaryEntityCrudApi: {
+                    read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                    create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                    update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                    destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+                },
+                createEditEntityType: &#39;financials.accounts.divisions&#39;,
+                createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+                entityType: &#39;Division&#39;,
+                isTwoEntityPicker: true,
+                secondEntityDetails: {
+                    editCreateModelClass: &#39;Chaching.model.projects.projectmaintenance.ProjectModel&#39;,
+                    identificationKey: &#39;isDivision&#39;,
+                    entityType: &#39;Job&#39;,
+                    createEditEntityType: &#39;projects.projectmaintenance.projects&#39;,
+                    createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.ProjectsGridController&#39;,
+                    modulePermissions: {
+                        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
+                        create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
+                        edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
+                        destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
+                    },
+                    secondoryEntityCrudApi: {
+                        read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                        create: abp.appPath + &#39;api/services/app/jobUnit/CreateJobUnit&#39;,
+                        update: abp.appPath + &#39;api/services/app/jobUnit/UpdateJobUnit&#39;,
+                        destroy: abp.appPath + &#39;api/services/app/jobUnit/DeleteJobUnit&#39;
+                    }
+                },
+                listeners: {
+                    beforequery: &#39;beforeJobDivisionQuery&#39;
+                }
+            }
+        }, {
+            xtype: &#39;gridcolumn&#39;,
+            dataIndex: &#39;creditAccountNumber&#39;,
+            name: &#39;creditAccountNumber&#39;,
+            //itemId: &#39;duplicateaccount&#39;,
+            text: app.localize(&#39;LineNumber&#39;),
+            width: 100,
+            hideable: false,
+            valueField: &#39;creditAccountId&#39;,
+            isMandatory: true,
+            entityType: &#39;accounts&#39;,
+            filterField: {
+                xtype: &#39;chachingcombobox&#39;,
+                store: new Chaching.store.utilities.autofill.AccountsStore(),
+                valueField: &#39;creditAccountId&#39;,
+                displayField: &#39;creditAccountNumber&#39;,
+                queryMode: &#39;remote&#39;,
+                minChars: 2,
+                useDisplayFieldToSearch: true,
+                modulePermissions: {
+                    read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                    create: false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                    edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                    destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
+                },
+                primaryEntityCrudApi: {
+                    read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+                    create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                    update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                    destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+                },
+                createEditEntityType: &#39;financials.accounts.accounts&#39;,
+                createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+                entityType: &#39;Account&#39;,
+                isTwoEntityPicker: true,
+                secondEntityDetails: {
+                    editCreateModelClass: &#39;Chaching.model.financials.accounts.AccountsModel&#39;,
+                    identificationKey: &#39;isCorporate&#39;,
+                    entityType: &#39;Line&#39;,
+                    createEditEntityType: &#39;projects.projectmaintenance.linenumbers&#39;,
+                    createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.LineNumbersGridController&#39;,
+                    modulePermissions: {
+                        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs&#39;),
+                        create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Create&#39;),
+                        edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Edit&#39;),
+                        destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete&#39;)
+                    },
+                    secondoryEntityCrudApi: {
+                        read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+                        create: abp.appPath + &#39;api/services/app/linesUnit/CreateLineUnit&#39;,
+                        update: abp.appPath + &#39;api/services/app/linesUnit/UpdateLineUnit&#39;,
+                        destroy: abp.appPath + &#39;api/services/app/linesUnit/DeleteLineUnit&#39;
+                    }
+                }
+            }, editor: {
+                xtype: &#39;chachingcombobox&#39;,
+                store: new Chaching.store.utilities.autofill.AccountsStore(),
+                valueField: &#39;creditAccountId&#39;,
+                displayField: &#39;creditAccountNumber&#39;,
+                queryMode: &#39;remote&#39;,
+                minChars: 2,
+                useDisplayFieldToSearch: true,
+                modulePermissions: {
+                    read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                    create: false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Create&#39;),
+                    edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                    destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
+                },
+                primaryEntityCrudApi: {
+                    read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+                    create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                    update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                    destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+                },
+                createEditEntityType: &#39;financials.accounts.accounts&#39;,
+                createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+                entityType: &#39;Account&#39;,
+                isTwoEntityPicker: true,
+                secondEntityDetails: {
+                    editCreateModelClass: &#39;Chaching.model.financials.accounts.AccountsModel&#39;,
+                    identificationKey: &#39;isCorporate&#39;,
+                    entityType: &#39;Line&#39;,
+                    createEditEntityType: &#39;projects.projectmaintenance.linenumbers&#39;,
+                    createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.LineNumbersGridController&#39;,
+                    modulePermissions: {
+                        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs&#39;),
+                        create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Create&#39;),
+                        edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Edit&#39;),
+                        destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete&#39;)
+                    },
+                    secondoryEntityCrudApi: {
+                        read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+                        create: abp.appPath + &#39;api/services/app/linesUnit/CreateLineUnit&#39;,
+                        update: abp.appPath + &#39;api/services/app/linesUnit/UpdateLineUnit&#39;,
+                        destroy: abp.appPath + &#39;api/services/app/linesUnit/DeleteLineUnit&#39;
+                    }
+                },
+                extraParams: [{ paramName: &quot;creditJobId&quot;, value: null }],
+                listeners: {
+                    beforequery: &#39;beforeAccountQuery&#39;
+                }
+            }
+        }, {
+            xtype: &#39;gridcolumn&#39;,
+            dataIndex: &#39;creditSubAccountNumber1&#39;,
+            name: &#39;creditSubAccountNumber1&#39;,
+            text: app.localize(&#39;SubAccount1&#39;),
+            //itemId: &#39;duplicatesubAccount1&#39;,
+            width: 100,
+            valueField: &#39;creditSubAccountId1&#39;,
+            entityType: &#39;subaccounts&#39;,
+            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;creditSubAccountId1&#39;, &#39;creditSubAccountNumber1&#39;, true),
+            editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;creditSubAccountId1&#39;, &#39;creditSubAccountNumber1&#39;)
+            ////TODO: add remaining combo once accounting field configuration is done
+        }, {
+            xtype: &#39;gridcolumn&#39;,
+            dataIndex: &#39;creditSubAccountNumber2&#39;,
+            name: &#39;creditSubAccountNumber2&#39;,
+            text: app.localize(&#39;SubAccount2&#39;),
+            //itemId: &#39;duplicatesubAccount1&#39;,
+            width: 100,
+            valueField: &#39;creditSubAccountId2&#39;,
+            entityType: &#39;subaccounts&#39;,
+            filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;creditSubAccountId2&#39;, &#39;creditSubAccountNumber2&#39;, true),
+            editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;creditSubAccountId2&#39;, &#39;creditSubAccountNumber2&#39;)
+            ////TODO: add remaining combo once accounting field configuration is done
+        }]
+    }, {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;Vendor&#39;),
+        dataIndex: &#39;vendorName&#39;,
+        name: &#39;vendorName&#39;,
+        width: &#39;10%&#39;,
+        valueField: &#39;vendorId&#39;,
+        entityType: &#39;vendors&#39;,
+        filterField: {
+            xtype: &#39;chachingcombobox&#39;,
+            store: new Chaching.store.utilities.autofill.VendorsStore(),
+            valueField: &#39;vendorId&#39;,
+            displayField: &#39;vendorName&#39;,
+            queryMode: &#39;remote&#39;,
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted(&#39;Pages.Payables.Vendors&#39;),
+                create: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Create&#39;),
+                edit: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Edit&#39;),
+                destroy: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Delete&#39;)
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + &#39;api/services/app/list/GetVendorList&#39;,
+                create: abp.appPath + &#39;api/services/app/vendorUnit/CreateVendorUnit&#39;,
+                update: abp.appPath + &#39;api/services/app/vendorUnit/UpdateVendorUnit&#39;,
+                destroy: abp.appPath + &#39;api/services/app/vendorUnit/DeleteVendorUnit&#39;
+            },
+            createEditEntityType: &#39;payables.vendors&#39;,
+            createEditEntityGridController: &#39;payables-vendors-vendorsgrid&#39;,
+            entityType: &#39;Vendor&#39;,
+            isTwoEntityPicker: false
+
+        }, editor: {
+            xtype: &#39;chachingcombobox&#39;,
+            store: new Chaching.store.utilities.autofill.VendorsStore(),
+            valueField: &#39;vendorId&#39;,
+            displayField: &#39;vendorName&#39;,
+            queryMode: &#39;remote&#39;,
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted(&#39;Pages.Payables.Vendors&#39;),
+                create: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Create&#39;),
+                edit: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Edit&#39;),
+                destroy: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Delete&#39;)
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + &#39;api/services/app/list/GetVendorList&#39;,
+                create: abp.appPath + &#39;api/services/app/vendorUnit/CreateVendorUnit&#39;,
+                update: abp.appPath + &#39;api/services/app/vendorUnit/UpdateVendorUnit&#39;,
+                destroy: abp.appPath + &#39;api/services/app/vendorUnit/DeleteVendorUnit&#39;
+            },
+            createEditEntityType: &#39;payables.vendors&#39;,
+            createEditEntityGridController: &#39;payables-vendors-vendorsgrid&#39;,
+            entityType: &#39;Vendor&#39;,
+            isTwoEntityPicker: false,
+            listeners: {
+                beforequery:&#39;onBeforeVendorQuery&#39;
+            }
+        }
+    }],
+    columnOrder: [&#39;amount&#39;, &#39;debits&#39;, &#39;credits&#39;, &#39;itemMemo&#39;, &#39;vendorName&#39;, &#39;accountRef1&#39;, &#39;taxRebateNumber&#39;, &#39;isAsset&#39;]
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.journals.JournalEntryGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+    xtype: &#39;widget.financials.journals.entry&#39;,
+    requires: [
+        &#39;Chaching.view.financials.journals.JournalEntryGridController&#39;
+    ],
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Financials.Journals.Entry&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Financials.Journals.Entry.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Financials.Journals.Entry.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Financials.Journals.Entry.Delete&#39;)
+    },
+    controller: &#39;financials-journals-journalentrygrid&#39;,
+    gridId: 18,
+    headerButtonsConfig: [
+    {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;JournalEntry&quot;),
+        ui: &#39;headerTitle&#39;
+    }, &#39;-&gt;&#39;, {
+        xtype: &#39;button&#39;,
+        scale: &#39;small&#39;,
+        ui: &#39;actionButton&#39;,
+        action: &#39;create&#39;,
+        text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
+        checkPermission: true,
+        iconCls: &#39;fa fa-plus&#39;,
+        iconAlign: &#39;left&#39;
+    }],
+    requireExport: true,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable: true,
+    editingMode: &#39;row&#39;,
+    columnLines: true,
+    multiColumnSort: true,
+    editWndTitleConfig: {
+        title: app.localize(&#39;EditJournalEntry&#39;),
+        iconCls: &#39;fa fa-pencil&#39;
+    },
+    createWndTitleConfig: {
+        title: app.localize(&#39;CreateNewJournalEntry&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewJournalEntry&#39;),
+        iconCls: &#39;fa fa-th&#39;
+    },
+    createNewMode: &#39;tab&#39;,
+    isSubMenuItemTab: true,
+    store: &#39;financials.journals.JournalStore&#39;,
+    columns: [
+         {
+             text: app.localize(&#39;Post&#39;),
+             xtype: &#39;checkcolumn&#39;,
+             dataIndex: &#39;isPosted&#39;,
+             checked: true,
+             listeners: {
+                 checkchange: function (column, recordIndex, checked) {
+                     var store = this.up(&#39;grid&#39;).getStore();
+                     //Ext.each(store, function (record) {
+                     //    if (record.set(&#39;batchName&#39;).trim().length() != 0)
+                     //        record.set(&#39;isPrimary&#39;, false);
+                     //});
+                 }
+             }
+         },
+          {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;CreatedBy&#39;),
+              dataIndex: &#39;createdUser&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;15%&#39;,
+              filterField: {
+                  xtype: &#39;textfield&#39;,
+                  width: &#39;100%&#39;,
+                  entityName: &quot;&quot;,
+                  emptyText: app.localize(&#39;UserSearch&#39;)
+              }
+          }, {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;JournalType&#39;),
+              dataIndex: &#39;journalType&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;10%&#39;,
+              filterField: {
+                  xtype: &#39;combobox&#39;,
+                  valueField: &#39;journalTypeId&#39;,
+                  displayField: &#39;journalType&#39;,
+                  width: &#39;100%&#39;,
+                  queryMode: &#39;local&#39;,
+                  loadStoreOnCreate: true,
+                  forceSelection: true,
+                  isEnum: true,
+                  searchProperty: &#39;journalTypeId&#39;,
+                  store: &#39;utilities.JournalTypeListStore&#39;
+              }, editor: {
+                  xtype: &#39;combobox&#39;,
+                  valueField: &#39;journalTypeId&#39;,
+                  displayField: &#39;journalType&#39;,
+                  queryMode: &#39;local&#39;,
+                  forceSelection: true,
+                  store: &#39;utilities.JournalTypeListStore&#39;
+              }
+          },
+          {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;Journal#&#39;),
+              dataIndex: &#39;documentReference&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;15%&#39;,
+              filterField: {
+                  xtype: &#39;textfield&#39;,
+                  width: &#39;100%&#39;,
+                  emptyText: app.localize(&#39;Journal#Search&#39;)
+              }
+          },
+          {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;TransactionDate&#39;),
+              dataIndex: &#39;transactionDate&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;15%&#39;,
+              renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+              filterField: {
+                  xtype: &#39;dateSearchField&#39;,
+                  width: &#39;100%&#39;,
+                  dataIndex: &#39;transactionDate&#39;
+              },editor: {
+                  xtype: &#39;datefield&#39;,
+                  format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat
+              }
+
+          },
+          {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;Description&#39;),
+              dataIndex: &#39;description&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;15%&#39;,
+              filterField: {
+                  xtype: &#39;textfield&#39;,
+                  width: &#39;100%&#39;,
+                  emptyText: app.localize(&#39;DescriptionSearch&#39;)
+              },editor: {
+                  xtype:&#39;textfield&#39;
+              }
+          },
+          {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;ControlTotal&#39;),
+              dataIndex: &#39;controlTotal&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;15%&#39;,
+              filterField: {
+                  xtype: &#39;textfield&#39;,
+                  width: &#39;100%&#39;,
+                  emptyText: app.localize(&#39;ControlTotalSearch&#39;)
+              }
+          }, {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;BatchName&#39;),
+              dataIndex: &#39;batchName&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;10%&#39;
+          },
+          {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;Transaction#&#39;),
+              dataIndex: &#39;accountingDocumentId&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;15%&#39;,
+              filterField: {
+                  xtype: &#39;textfield&#39;,
+                  width: &#39;100%&#39;,
+                  emptyText: app.localize(&#39;Transaction#Search&#39;)
+              }
+          }
+
+    ]
+});
+</pre>
+</body>
+</html>

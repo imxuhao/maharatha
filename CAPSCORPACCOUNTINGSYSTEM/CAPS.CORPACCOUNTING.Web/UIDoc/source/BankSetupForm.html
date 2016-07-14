@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.banking.banksetup.BankSetupForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [&#39;widget.banking.banksetup.create&#39;, &#39;widget.banking.banksetup.edit&#39;],
+    requires: [
+        &#39;Chaching.view.banking.banksetup.BankSetupFormController&#39;
+    ],
+    controller: &#39;banking-banksetup-banksetupform&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Banking.BankSetup&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Delete&#39;)
+    },
+    name: &#39;banksetup&#39;,
+    openInPopupWindow: false,
+    hideDefaultButtons: false,
+    autoScroll: true,
+    border: false,
+    showFormTitle: false,
+    displayDefaultButtonsCenter: true,
+    titleConfig: {
+        title: abp.localization.localize(&quot;CreateBank&quot;).initCap()
+    },
+    items: {
+        xtype: &#39;tabpanel&#39;,
+        //tabPosition : &#39;left&#39;,
+        ui: &#39;formTabPanels&#39;,
+        items: [
+        {
+            title: abp.localization.localize(&quot;BankSetup&quot;).initCap(),
+            iconCls: &#39;fa fa-gear&#39;,
+            items: [{
+                xtype: &#39;fieldset&#39;,
+                ui: &#39;transparentFieldSet&#39;,
+                title: abp.localization.localize(&quot;BankingInformation&quot;).initCap(),
+                collapsible: true,
+                layout: &#39;column&#39;,
+                items: [{
+                    columnWidth: .33,
+                    padding: &#39;20 10 0 20&#39;,
+                    defaults: {
+                        // labelAlign: &#39;top&#39;,
+                        labelWidth: 120,
+                        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                    },
+                    items: [{
+                        xtype: &#39;hiddenfield&#39;,
+                        name: &#39;bankAccountId&#39;,
+                        value: 0
+                    }, {
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;description&#39;,
+                        allowBlank: false,
+                        fieldLabel: app.localize(&#39;BankName&#39;).initCap(),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;,
+                        emptyText: app.localize(&#39;MandatoryField&#39;)
+                    },
+                    {
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;bankAccountName&#39;,
+                        fieldLabel: app.localize(&#39;AccountName&#39;).initCap(),
+                        width: &#39;100%&#39;,
+                        allowBlank: false,
+                        emptyText: app.localize(&#39;MandatoryField&#39;),
+                        ui: &#39;fieldLabelTop&#39;
+                    },{
+                        xtype: &#39;combobox&#39;,
+                        name: &#39;typeOfBankAccountId&#39;,
+                        fieldLabel: app.localize(&#39;AccountType&#39;).initCap(),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;,
+                        displayField: &#39;typeOfBankAccount&#39;,
+                        valueField: &#39;typeOfBankAccountId&#39;,
+                        emptyText: app.localize(&#39;SelectOption&#39;),
+                        queryMode: &#39;local&#39;,
+                        store: &#39;utilities.AccountTypeListStore&#39;
+                       
+                        }, {
+                            xtype: &#39;textfield&#39;,
+                            name: &#39;bankAccountNumber&#39;,
+                            allowBlank: false,
+                            emptyText: app.localize(&#39;MandatoryField&#39;),
+                            fieldLabel: app.localize(&#39;AccountNumber&#39;).initCap(),
+                            width: &#39;100%&#39;,
+                            ui: &#39;fieldLabelTop&#39;
+                        }
+                    ]
+                },
+                {
+                    columnWidth: .33,
+                    padding: &#39;20 10 0 20&#39;,
+                    defaults: {
+                        // labelAlign: &#39;top&#39;,
+                        labelWidth: 140,
+                        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                    },
+                    items: [{
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;routingNumber&#39;,
+                        fieldLabel: app.localize(&#39;RoutingNumber&#39;).initCap(),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;
+                    }, {
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;positivePayTransmitterInfo&#39;,
+                        fieldLabel: app.localize(&#39;PositivePayBankNumber&#39;).initCap(),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;
+                    }, {
+                        xtype: &#39;chachingcombobox&#39;,
+                        store: new Chaching.store.utilities.autofill.AccountListStore(),
+                        fieldLabel: app.localize(&#39;LedgerAccount&#39;),
+                        ui: &#39;fieldLabelTop&#39;,
+                        width: &#39;100%&#39;,
+                        name: &#39;accountId&#39;,
+                        valueField: &#39;accountId&#39;,
+                        displayField: &#39;accountNumber&#39;,
+                        queryMode: &#39;remote&#39;,
+                        minChars: 2,
+                        modulePermissions: {
+                            read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                            create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Create&#39;),
+                            edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                            destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
+                        },
+                        primaryEntityCrudApi: {
+                            read: abp.appPath + &#39;api/services/app/bankAccountUnit/GetCorporateAccountList&#39;,
+                            create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                            update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                            destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+                        },
+                        createEditEntityType: &#39;financials.accounts.accounts&#39;,
+                        createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+                        entityType: &#39;Account&#39;
+                    }, {
+                        xtype: &#39;chachingcombobox&#39;,
+                        store: new Chaching.store.utilities.autofill.DivisionListStore(),
+                        fieldLabel: app.localize(&#39;Divisions&#39;),
+                        ui: &#39;fieldLabelTop&#39;,
+                        width: &#39;100%&#39;,
+                        name: &#39;jobId&#39;,
+                        valueField: &#39;jobId&#39;,
+                        displayField: &#39;jobNumber&#39;,
+                        queryMode: &#39;remote&#39;,
+                        minChars: 2,
+                        modulePermissions: {
+                            read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                            create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                            edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                            destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+                        },
+                        primaryEntityCrudApi: {
+                            read: abp.appPath + &#39;api/services/app/jobUnit/GetDivisionList&#39;,
+                            create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                            update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                            destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+                        },
+                        createEditEntityType: &#39;financials.accounts.divisions&#39;, 
+                        createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+                        entityType: &#39;Division&#39;
+                    }]
+                },
+                            {
+                                columnWidth: .33,
+                                padding: &#39;20 10 0 20&#39;,
+                                defaults: {
+                                    // labelAlign: &#39;top&#39;,
+                                    labelWidth: 180,
+                                    blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                                },
+                                items: [{
+                                    xtype: &#39;combobox&#39;,
+                                    name: &#39;typeOfCheckStockId&#39;,
+                                    fieldLabel: app.localize(&#39;CheckStock&#39;).initCap(),
+                                    width: &#39;100%&#39;,
+                                    ui: &#39;fieldLabelTop&#39;,
+                                    displayField: &#39;typeOfCheckStock&#39;,
+                                    valueField: &#39;typeOfCheckStockId&#39;,
+                                    emptyText: app.localize(&#39;SelectOption&#39;),
+                                    store: &#39;utilities.CheckStockListStore&#39;
+                                }, {
+                                    xtype: &#39;textfield&#39;,
+                                    name: &#39;lastCheckNumberGenerated&#39;,
+                                    fieldLabel: app.localize(&#39;LastCheckNumber&#39;).initCap(),
+                                    width: &#39;100%&#39;,
+                                    ui: &#39;fieldLabelTop&#39;
+                                }, {
+                                    xtype: &#39;combobox&#39;,
+                                    name: &#39;typeOfUploadFileId&#39;,
+                                    fieldLabel: app.localize(&#39;UploadMethod&#39;).initCap(),
+                                    width: &#39;100%&#39;,
+                                    ui: &#39;fieldLabelTop&#39;,
+                                    displayField: &#39;uploadFileName&#39;,
+                                    valueField: &#39;typeOfUploadFileId&#39;,
+                                    emptyText: app.localize(&#39;SelectOption&#39;),
+                                    store: &#39;utilities.UploadMethodListStore&#39;
+                                }, {
+                                    xtype: &#39;combobox&#39;,
+                                    name: &#39;positivePayTypeOfUploadFileId&#39;,
+                                    fieldLabel: app.localize(&#39;PositivePayFile&#39;).initCap(),
+                                    width: &#39;100%&#39;,
+                                    ui: &#39;fieldLabelTop&#39;,
+                                    displayField: &#39;positivePayTypeOfUploadFile&#39;,
+                                    valueField: &#39;positivePayTypeOfUploadFileId&#39;,
+                                    emptyText: app.localize(&#39;SelectOption&#39;),
+                                    store: &#39;utilities.PositivePayFileListStore&#39;
+                                }, {
+                                    xtype: &#39;checkbox&#39;,
+                                    name: &#39;isClosed&#39;,
+                                    labelAlign: &#39;right&#39;,
+                                    inputValue: true,
+                                    checked: true,
+                                    width: &#39;100%&#39;,
+                                    ui: &#39;default&#39;,
+                                    boxLabelCls: &#39;checkboxLabel&#39;,
+                                    boxLabel: app.localize(&#39;ClosedBankAccount&#39;)
+                                }]
+                            }]
+            }, {
+               // columnWidth: 1,
+                padding: &#39;20 10 0 20&#39;,
+                items: [{
+                    xtype: &#39;banking.banksetup.checknumbergrid&#39;,
+                    itemId: &#39;checkNumberGrid&#39;,
+                    anchor: &#39;100% 80%&#39;,
+                    autoScroll: true
+                    //,
+                    //layout: &#39;fit&#39;,
+                    //width: &#39;100%&#39;
+                }]
+            }]
+        },
+        {
+            title: abp.localization.localize(&quot;ACHDirectDepositTitle&quot;),
+            iconCls: &#39;fa fa-gear&#39;,
+            items: [
+              {
+                  xtype: &#39;fieldset&#39;,
+                  ui: &#39;transparentFieldSet&#39;,
+                  collapsible: true,
+                  title: abp.localization.localize(&quot;ACHDirectDeposit&quot;),
+                  layout: &#39;column&#39;,
+                  items: [
+        {
+            columnWidth: .4,
+            padding: &#39;20 10 0 20&#39;,
+            defaults: {
+                // labelAlign: &#39;top&#39;,
+                labelWidth: 150//,
+                //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+            },
+            items: [
+                 {
+                        xtype: &#39;checkbox&#39;,
+                        name: &#39;isachEnabled&#39;,
+                        boxLabelAlign: &#39;before&#39;,
+                        inputValue: true,
+                        checked: false,
+                        width: &#39;100%&#39;,
+                        maxWidth: 200,
+                        //labelStyle : &#39;padding-left : 0px !important;&#39;,
+                        ui: &#39;default&#39;,
+                        boxLabelCls: &#39;checkboxLabelLeftAlign&#39;,
+                        boxLabel: app.localize(&#39;EnableACHDirectDeposit&#39;)
+                 },
+                  {
+                      xtype: &#39;textfield&#39;,
+                      name: &#39;achDestinationCode&#39;,
+                     // allowBlank: false,
+                      fieldLabel: app.localize(&#39;ACHDestinationCodeLabel&#39;),
+                      width: &#39;100%&#39;,
+                      ui: &#39;fieldLabelTop&#39;
+                  }
+                    ]
+        },
+                  {
+                      columnWidth: .3,
+                      padding: &#39;20 10 0 20&#39;,
+                      defaults: {
+                          // labelAlign: &#39;top&#39;,
+                          labelWidth: 150//,
+                          //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                      },
+                      items: [
+                {
+                    xtype: &#39;textfield&#39;,
+                    name: &#39;achDestinationName&#39;,
+                   // allowBlank: false,
+                    fieldLabel: app.localize(&#39;ACHDestinationNameLabel&#39;),
+                    width: &#39;100%&#39;,
+                    ui: &#39;fieldLabelTop&#39;
+                },
+                    {
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;achOriginCode&#39;,
+                       // allowBlank: false,
+                        fieldLabel: app.localize(&#39;ACHOriginCodeLabel&#39;),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;
+                    }]
+                  },
+                  {
+                      columnWidth: .3,
+                      padding: &#39;20 10 0 20&#39;,
+                      defaults: {
+                          // labelAlign: &#39;top&#39;,
+                          labelWidth: 120//,
+                          //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                      },
+                      items: [{
+                          xtype: &#39;textfield&#39;,
+                          name: &#39;achOriginName&#39;,
+                         // allowBlank: false,
+                          fieldLabel: app.localize(&#39;ACHOriginNameLabel&#39;),
+                          width: &#39;100%&#39;,
+                          ui: &#39;fieldLabelTop&#39;
+                      }]
+                  }]
+              }]
+        }]
+
+    }
+});</pre>
+</body>
+</html>

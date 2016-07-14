@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.financials.journals.JournalEntryDetail', {
+﻿/**
+ * DataModel to represent entity schema for Journal Entry Distribution.
+ */
+Ext.define('Chaching.model.financials.journals.JournalEntryDetail', {
     extend: 'Chaching.model.base.TransactionDetailsModel',
     config: {
         searchEntityName: 'journals'

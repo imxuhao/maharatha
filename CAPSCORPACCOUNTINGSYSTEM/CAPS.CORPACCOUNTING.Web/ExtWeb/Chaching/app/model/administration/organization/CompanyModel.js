@@ -1,11 +1,13 @@
-﻿Ext.define('Chaching.model.administration.organization.CompanyModel', {
+﻿/**
+ * Company model used by Company creation,edition,delete.
+ */
+Ext.define('Chaching.model.administration.organization.CompanyModel', {
     extend: 'Chaching.model.base.BaseModel',
     requires: ['Chaching.model.address.AddressModel', 'Chaching.model.administration.organization.CompanySettingsModel'],
     config: {
         searchEntityName: 'Organization'
     },
     fields: [
-           // { name: 'companyId', type: 'int',  mapping: 'id', isPrimaryKey: true },
             { name: 'id', type: 'int', isPrimaryKey: true },
             { name: 'parentId', type: 'int', defaultVaule: null, convert: nullHandler },
             { name: 'code', type: 'string' },

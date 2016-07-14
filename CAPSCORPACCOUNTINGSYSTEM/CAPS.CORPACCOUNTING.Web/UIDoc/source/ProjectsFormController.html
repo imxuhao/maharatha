@@ -189,6 +189,28 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsFormController
             });
         }
         
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsFormController-method-doModuleSpecificViewMode'>    doModuleSpecificViewMode:function(formPanel) {
+</span>        var view = formPanel,
+            controller = view.getController();
+        var defaultActionButtons = view.query(&#39;button[actionButton=true]&#39;);
+        if (defaultActionButtons &amp;&amp; defaultActionButtons.length &gt; 0) {
+            Ext.each(defaultActionButtons, function(button) {
+                if (button.name !== &#39;Cancel&#39; &amp;&amp; button.name !== &quot;Edit&quot; &amp;&amp; typeof (button.hide) === &quot;function&quot;) {
+                    button.hide();
+                }
+                if (button.name === &quot;Edit&quot;) button.show();
+            });
+        }
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsFormController-method-doModuleSpecificEditAction'>    doModuleSpecificEditAction:function(view) {
+</span>        var actionButtons = view.query(&#39;button[actionButton=true]&#39;);
+        Ext.each(actionButtons, function (button) {
+            if (button.name !== &#39;Cancel&#39; &amp;&amp; button.name !== &quot;Edit&quot; &amp;&amp; typeof (button.hide) === &quot;function&quot;) {
+                button.show();
+            }
+            if (button.name === &quot;Edit&quot;) button.hide();
+        });
     }
 });
 </pre>

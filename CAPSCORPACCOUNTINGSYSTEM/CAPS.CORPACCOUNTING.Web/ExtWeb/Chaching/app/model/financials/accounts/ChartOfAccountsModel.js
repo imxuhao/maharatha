@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for COA.
+ */
 Ext.define('Chaching.model.financials.accounts.ChartOfAccountsModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

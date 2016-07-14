@@ -23,7 +23,13 @@ Ext.define(&#39;Chaching.view.languages.LanguagesForm&#39;, {
         &#39;Chaching.view.languages.LanguagesFormController&#39;
     ],
     controller: &#39;languages-languagesform&#39;,
-    name: &#39;Languages&#39;,
+    name: &#39;Administration.Languages&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Administration.Languages&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Administration.Languages.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Administration.Languages.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Administration.Languages.Delete&#39;)
+    },
     openInPopupWindow: true,
     hideDefaultButtons: false,
     layout: &#39;vbox&#39;,
@@ -31,7 +37,7 @@ Ext.define(&#39;Chaching.view.languages.LanguagesForm&#39;, {
     defferedValueSetDelay: 5,
     defaults: {
         bodyStyle: { &#39;background-color&#39;: &#39;trasparent&#39; },
-        labelAlign: &#39;top&#39;,
+        //labelAlign: &#39;top&#39;,
         blankText: app.localize(&#39;MandatoryToolTipText&#39;)
     },
     defaultFocus: &#39;textfield#tenancyName&#39;,

@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.receivables.customers.CustomersModel', {
+﻿/**
+ * DataModel to represent entity schema for Customers.
+ */
+Ext.define('Chaching.model.receivables.customers.CustomersModel', {
     extend: 'Chaching.model.base.BaseModel',
     requires: ['Chaching.model.address.AddressModel'],
     config: {

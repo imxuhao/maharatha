@@ -19,10 +19,12 @@
     extend: &#39;Chaching.model.base.BaseModel&#39;,
 
     fields: [
-        { name: &#39;id&#39;, type: &#39;int&#39; },
+        { name: &#39;id&#39;, type: &#39;int&#39;, isPrimaryKey: true  },
         { name: &#39;key&#39;, type: &#39;string&#39; },
          { name: &#39;baseValue&#39;, type: &#39;string&#39; },
-         { name: &#39;targetValue&#39;, type: &#39;string&#39; }
+         { name: &#39;targetValue&#39;, type: &#39;string&#39; },
+         { name: &#39;languageName&#39;, type: &#39;string&#39; },
+         { name: &#39;value&#39;, type: &#39;string&#39; }
 
     ]
 });

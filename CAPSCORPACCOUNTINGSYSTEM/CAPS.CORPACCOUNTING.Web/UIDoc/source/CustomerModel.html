@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-utilities-autofill-CustomerModel'>/**
+</span> * DataModel to represent entity schema for Autofill Customers.
+ */
+Ext.define(&#39;Chaching.model.utilities.autofill.CustomerModel&#39;, {
+    extend: &#39;Ext.data.Model&#39;,
+<span id='Chaching-model-utilities-autofill-CustomerModel-property-fields'>    fields: [
+</span>        { name: &#39;name&#39;, hidden: true, width: &#39;8%&#39; },
+        { name: &#39;customerId&#39;, hidden: true, isPrimaryKey: true },
+        { name: &#39;agencyId&#39;, type: &#39;int&#39;, hidden: true, mapping: &#39;customerId&#39; },
+        { name: &#39;thirdPartyCustomerId&#39;, type: &#39;int&#39;, hidden: true, mapping: &#39;customerId&#39; },
+        { name: &#39;lastName&#39;, headerText: &#39;LastName&#39;, hidden: false, width: &#39;8%&#39;, minWidth : 90 },
+        { name: &#39;firstName&#39;, headerText: &#39;FirstName&#39;, hidden: false, width: &#39;8%&#39; , minWidth : 90},
+        { name: &#39;customerNumber&#39;, headerText: &#39;CustomerNumber&#39;, hidden: false, width: &#39;8%&#39;, minWidth : 90 }
+    ]
+});
+
+
+</pre>
+</body>
+</html>

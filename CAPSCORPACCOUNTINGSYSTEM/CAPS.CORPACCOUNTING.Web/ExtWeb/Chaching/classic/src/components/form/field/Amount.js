@@ -4,7 +4,7 @@
  * Date:11/07/2016
  */
 /**
- * A basic text field.  Can be used as a direct replacement for traditional text inputs,
+ * A basic amount field inherited from {@link Ext.form.field.Text}.  Can be used as a direct replacement for traditional text inputs,
  * or as the base class for more sophisticated input controls (like {@link Ext.form.field.TextArea}
  * and {@link Ext.form.field.ComboBox}). Has support for empty-field placeholder values (see {@link #emptyText}).
  *
@@ -103,6 +103,9 @@ Ext.define('Chaching.components.form.field.Amount', {
     /**
     * @private
     * Internal function to change currency.
+     * @param {String/Number/Float} value
+     * @param {String} currencySign
+     * @param {Number} precision
     */
     changeCurrency:function(value, currencySign, precision,currency) {
         var me = this;
@@ -111,7 +114,7 @@ Ext.define('Chaching.components.form.field.Amount', {
     },
     /**
     * Set given currency to the amount entered
-    * @param {String} currency code
+    * @param {String} currency
     */
     setCurrency:function(currency) {
         var me = this,
@@ -123,7 +126,7 @@ Ext.define('Chaching.components.form.field.Amount', {
     },
     /**
     * Returns the currency sign
-    * @param {String} currency code
+    * @param {String} currency
     * @return {Currency Symbol}
     */
     getCurrencySign: function (currency) {
@@ -140,6 +143,7 @@ Ext.define('Chaching.components.form.field.Amount', {
     /**
    * @private
    * Internal function to unformat the value.
+   * @param {Number/Float/String} value.
    */
     unFormatValue:function(value) {
         var newValue = "0.00",

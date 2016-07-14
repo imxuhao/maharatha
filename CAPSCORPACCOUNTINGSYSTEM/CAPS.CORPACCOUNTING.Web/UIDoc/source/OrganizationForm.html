@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.administration.organization.OrganizationForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [
+        &#39;widget.organizationUnits.create&#39;, &#39;widget.organizationUnits.edit&#39;
+    ],
+    requires: [
+        &#39;Chaching.view.administration.organization.OrganizationFormController&#39;
+    ],
+    controller: &#39;administration-organizationunits-organizationform&#39;,
+    name: &#39;organization&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits.ManageOrganizationTree&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits.ManageOrganizationTree&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits.ManageOrganizationTree&#39;)
+    },
+    openInPopupWindow: true,
+    hideDefaultButtons: false,
+    autoScroll: false,
+    border: false,
+    showFormTitle: false,
+    displayDefaultButtonsCenter: true,
+    titleConfig: {
+        title: abp.localization.localize(&quot;CreateNewOrganization&quot;).initCap()
+    },
+    // layout: &#39;fit&#39;,
+    defaults : {
+        labelWidth: 120,
+    },
+   
+    items: [
+        {
+            xtype: &#39;hiddenfield&#39;,
+            itemId: &#39;organizationItemId&#39;,
+            name: &#39;id&#39;, //organizationId
+            value: 0
+        },
+        {
+            xtype: &#39;textfield&#39;,
+            name: &#39;displayName&#39;,
+            itemId : &#39;organizationName&#39;,
+            allowBlank: false,
+            fieldLabel: app.localize(&#39;OrganizationName&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;MandatoryField&#39;)
+        },
+        {
+            xtype: &#39;combobox&#39;,
+            name: &#39;connectionStringId&#39;,
+            fieldLabel: app.localize(&#39;ConnectionString&#39;),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            displayField: &#39;name&#39;,
+            valueField: &#39;value&#39;,
+            emptyText: app.localize(&#39;SelectConnectionString&#39;),
+            queryMode: &#39;local&#39;,
+            store: Ext.create(&#39;Chaching.store.administration.organization.ConnectionStringListStore&#39;)
+        }
+    ]
+});</pre>
+</body>
+</html>

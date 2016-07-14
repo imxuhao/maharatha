@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Editions.
+ */
 Ext.define('Chaching.model.editions.EditionsModel', {
     extend: 'Chaching.model.base.BaseModel',
 

@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.financials.accounts.AccountRestrictionsModel', {
+﻿/**
+ * DataModel to represent entity schema for Account Restrictions.
+ */
+Ext.define('Chaching.model.financials.accounts.AccountRestrictionsModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
     

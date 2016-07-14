@@ -60,6 +60,20 @@ Ext.define(&#39;Chaching.view.header.ChachingHeader&#39;, {
             }
         }, &#39;-&gt;&#39;,
         {
+            xtype: &#39;combobox&#39;,
+            itemId: &#39;userOrganizationListItemId&#39;,
+            fieldLabel: app.localize(&#39;UserOrganizations&#39;),
+            queryMode: &#39;local&#39;,
+            displayField: &#39;name&#39;,
+            valueField: &#39;value&#39;,
+            labelWidth : 150,
+            ui: &#39;fieldLabelTop&#39;,
+            store: Ext.create(&#39;Chaching.store.administration.organization.UserOrganizationListStore&#39;),
+            listeners: {
+                select: &#39;onUserOrganizationChange&#39;
+            }
+        },
+        {
             xtype: &#39;button&#39;,
             scale: &#39;small&#39;,
             ui: &#39;countryMenu&#39;,

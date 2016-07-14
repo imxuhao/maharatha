@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.financials.fiscalperiod.FiscalPeriodStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Fiscal Periods.
+ */
+Ext.define('Chaching.store.financials.fiscalperiod.FiscalPeriodStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.financials.fiscalperiod.FiscalPeriodModel',
     proxy: {

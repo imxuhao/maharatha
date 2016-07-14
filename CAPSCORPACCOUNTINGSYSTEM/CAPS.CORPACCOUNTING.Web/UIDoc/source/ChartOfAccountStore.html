@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.financials.accounts.ChartOfAccountStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-financials-accounts-ChartOfAccountStore'>/**
+</span> * DataStore to perform CRUD operation on COA.
+ */
+Ext.define(&#39;Chaching.store.financials.accounts.ChartOfAccountStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.financials.accounts.ChartOfAccountsModel&#39;,
-    //storeId:&quot;coaStore&quot;,
-    proxy: {
+<span id='Chaching-store-financials-accounts-ChartOfAccountStore-property-model'>    model: &#39;Chaching.model.financials.accounts.ChartOfAccountsModel&#39;,
+</span><span id='Chaching-store-financials-accounts-ChartOfAccountStore-property-proxy'>    //storeId:&quot;coaStore&quot;,
+</span>    proxy: {
         type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         api: {
@@ -29,9 +32,9 @@
             destroy: abp.appPath + &#39;api/services/app/coaUnit/DeleteCoaUnit&#39;
         }
     },
-    statefulFilters:true,
-    idPropertyField: &#39;coaId&#39;//important to set for add/update of records
-});
+<span id='Chaching-store-financials-accounts-ChartOfAccountStore-property-statefulFilters'>    statefulFilters:true,
+</span><span id='Chaching-store-financials-accounts-ChartOfAccountStore-property-idPropertyField'>    idPropertyField: &#39;coaId&#39;//important to set for add/update of records
+</span>});
 </pre>
 </body>
 </html>

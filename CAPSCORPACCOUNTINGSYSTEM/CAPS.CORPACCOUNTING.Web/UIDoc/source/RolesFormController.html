@@ -17,7 +17,24 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.roles.RolesFormController&#39;, {
     extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
-    alias: &#39;controller.roles-rolesform&#39;
+    alias: &#39;controller.roles-rolesform&#39;,
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        var me = this,
+             view = me.getView(),
+        treePanel = view.down(&#39;treepanel[itemId=permissionsItemId]&#39;),
+        grantedPermissionNames = [];
+        var selectedPermissions = treePanel.getChecked();
+        Ext.Array.each(selectedPermissions, function (rec) {
+            grantedPermissionNames.push(rec.get(&#39;name&#39;));
+        });
+        record.data.role = {
+            id: values.id == &quot;0&quot; ? null : values.id,
+            displayName: values.displayName,
+            isDefault: values.isDefault
+        };
+        record.data.grantedPermissionNames = grantedPermissionNames;
+        return record;
+    }
     
 });
 </pre>

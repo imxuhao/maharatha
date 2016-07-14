@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-store-administration-organization-OrganizationListStore'>/**
+</span> * DataStore to perform Read operation on Organization.
+ */
+Ext.define(&#39;Chaching.store.administration.organization.OrganizationListStore&#39;, {
+    extend: &#39;Chaching.store.base.BaseStore&#39;,
+<span id='Chaching-store-administration-organization-OrganizationListStore-property-fields'>    fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }],
+</span><span id='Chaching-store-administration-organization-OrganizationListStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+        url: abp.appPath + &#39;api/services/app/organizationUnit/GetHostOrganizationsList&#39;,
+        reader: {
+            type: &#39;json&#39;,
+            rootProperty: &#39;result&#39;
+        }
+    }
+});</pre>
+</body>
+</html>

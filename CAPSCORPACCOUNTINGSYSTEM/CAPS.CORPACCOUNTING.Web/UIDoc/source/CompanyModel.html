@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-administration-organization-CompanyModel'>/**
+</span> * Company model used by Company creation,edition,delete.
+ */
+Ext.define(&#39;Chaching.model.administration.organization.CompanyModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    requires: [&#39;Chaching.model.address.AddressModel&#39;, &#39;Chaching.model.administration.organization.CompanySettingsModel&#39;],
+    config: {
+<span id='Chaching-model-administration-organization-CompanyModel-cfg-searchEntityName'>        searchEntityName: &#39;Organization&#39;
+</span>    },
+<span id='Chaching-model-administration-organization-CompanyModel-property-fields'>    fields: [
+</span>            { name: &#39;id&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+            { name: &#39;parentId&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+            { name: &#39;code&#39;, type: &#39;string&#39; },
+            { name: &#39;displayName&#39;, type: &#39;string&#39; },
+            { name: &#39;memberCount&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+            { name: &#39;lastModificationTime&#39;, type: &#39;date&#39; },
+            { name: &#39;lastModifierUserId&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+            { name: &#39;creationTime&#39;, type: &#39;date&#39; },
+            { name: &#39;creatorUserId&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+            { name: &#39;transmitterContactName&#39;, type: &#39;string&#39; },
+            { name: &#39;transmitterEmailAddress&#39;, type: &#39;string&#39; },
+            { name: &#39;transmitterCode&#39;, type: &#39;string&#39; },
+            { name: &#39;transmitterControlCode&#39;, type: &#39;string&#39; },
+            { name: &#39;federalTaxId&#39;, type: &#39;string&#39; },
+            { name: &#39;transmitterContactName&#39;, type: &#39;string&#39; },
+            {
+                name: &#39;address&#39;,
+                reference: {
+                    parent: &#39;address.AddressModel&#39;
+                }
+            },
+            {
+                name: &#39;organizationSettings&#39;,
+                reference: {
+                    parent: &#39;organizationSettings.CompanySettingsModel&#39;
+                }
+            }
+            
+    ]
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</body>
+</html>

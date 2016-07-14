@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.payables.vendors.VendorsModel', {
+﻿/**
+ * DataModel to represent entity schema for Vendors.
+ */
+Ext.define('Chaching.model.payables.vendors.VendorsModel', {
     extend: 'Chaching.model.base.BaseModel',
     requires:['Chaching.model.address.AddressModel'],
     config: {

@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Sub-Accounts.
+ */
 Ext.define('Chaching.model.financials.accounts.SubAccountsModel', {
     extend: 'Chaching.model.base.BaseModel',
     fields: [

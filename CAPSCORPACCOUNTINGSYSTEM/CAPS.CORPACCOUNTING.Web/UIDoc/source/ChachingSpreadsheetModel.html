@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * This file contains the custom component for speadsheet selection model.
+ * Author: Krishna Garad
+ * Date:06/01/2016
+ */
+
+<span id='Chaching-components-selection-ChachingSpreadsheetModel'>/**
+</span> * A selection model for {@link Ext.grid.Panel grids} which allows you to select data in
+ * a spreadsheet-like manner.
+ *
+ * Supported features:
+ *
+ *  - Single / Range / Multiple individual row selection.
+ *  - Single / Range cell selection.
+ *  - Column selection by click selecting column headers.
+ *  - Select / deselect all by clicking in the top-left, header.
+ *  - Adds row number column to enable row selection.
+ *  - Optionally you can enable row selection using checkboxes
+ *
+ * # Example usage
+ *
+ *     @example
+ *     var store = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
+ *         data: [
+ *             { name: &#39;Lisa&#39;, email: &#39;lisa@simpsons.com&#39;, phone: &#39;555-111-1224&#39; },
+ *             { name: &#39;Bart&#39;, email: &#39;bart@simpsons.com&#39;, phone: &#39;555-222-1234&#39; },
+ *             { name: &#39;Homer&#39;, email: &#39;homer@simpsons.com&#39;, phone: &#39;555-222-1244&#39; },
+ *             { name: &#39;Marge&#39;, email: &#39;marge@simpsons.com&#39;, phone: &#39;555-222-1254&#39; }
+ *         ]
+ *     });
+ *
+ *     Ext.create(&#39;Ext.grid.Panel&#39;, {
+ *         title: &#39;Simpsons&#39;,
+ *         store: store,
+ *         width: 400,
+ *         renderTo: Ext.getBody(),
+ *         columns: [
+ *             { text: &#39;Name&#39;, dataIndex: &#39;name&#39; },
+ *             { text: &#39;Email&#39;, dataIndex: &#39;email&#39;, flex: 1 },
+ *             { text: &#39;Phone&#39;, dataIndex: &#39;phone&#39; }
+ *         ],
+ *         selModel: {
+ *            type: &#39;chachingSpreadsheetSelectionModel&#39;
+ *         }
+ *     });
+ *
+ * @since 5.1.0
+ */
+Ext.define(&#39;Chaching.components.selection.ChachingSpreadsheetModel&#39;, {
+    extend: &#39;Ext.grid.selection.SpreadsheetModel&#39;,
+    alias: &#39;selection.chachingSpreadsheetSelectionModel&#39;,
+<span id='Chaching-components-selection-ChachingSpreadsheetModel-property-privates'>    privates: {
+</span>        getNumbererColumnConfig: function () {
+            var me = this;
+
+            return {
+                xtype: &#39;rownumberer&#39;,
+                width: me.rowNumbererHeaderWidth,
+                editRenderer: &#39;&amp;#160;&#39;,
+                tdCls: me.rowNumbererTdCls,
+                cls: me.rowNumbererHeaderCls,
+                locked: me.hasLockedHeader,
+                summaryRenderer: Chaching.utilities.ChachingRenderers.summaryTotalTextRenderer
+            };
+        }
+    }
+});</pre>
+</body>
+</html>

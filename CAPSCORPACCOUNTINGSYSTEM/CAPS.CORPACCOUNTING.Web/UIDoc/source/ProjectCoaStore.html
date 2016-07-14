@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.projects.projectmaintenance.ProjectCoaStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-projects-projectmaintenance-ProjectCoaStore'>/**
+</span> * DataStore to perform CRUD operation on Projects/Job COA.
+ */
+Ext.define(&#39;Chaching.store.projects.projectmaintenance.ProjectCoaStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.financials.accounts.ChartOfAccountsModel&#39;,
-    //storeId:&quot;coaStore&quot;,
-    proxy: {
+<span id='Chaching-store-projects-projectmaintenance-ProjectCoaStore-property-model'>    model: &#39;Chaching.model.financials.accounts.ChartOfAccountsModel&#39;,
+</span><span id='Chaching-store-projects-projectmaintenance-ProjectCoaStore-property-proxy'>    //storeId:&quot;coaStore&quot;,
+</span>    proxy: {
         type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         api: {
@@ -29,8 +32,8 @@
             destroy: abp.appPath + &#39;api/services/app/projectCoaUnit/DeleteProjectCoaUnit&#39;
         }
     },
-    idPropertyField: &#39;coaId&#39;//important to set for add/update of records
-});
+<span id='Chaching-store-projects-projectmaintenance-ProjectCoaStore-property-idPropertyField'>    idPropertyField: &#39;coaId&#39;//important to set for add/update of records
+</span>});
 </pre>
 </body>
 </html>

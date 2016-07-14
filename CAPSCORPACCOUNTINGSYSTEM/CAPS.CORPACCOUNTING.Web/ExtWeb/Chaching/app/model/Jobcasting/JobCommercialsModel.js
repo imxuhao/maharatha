@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Job Details.
+ */
 Ext.define('Chaching.model.Jobcasting.JobCommercialsModel', {
     extend: 'Chaching.model.projects.projectmaintenance.ProjectModel',
     //config: {

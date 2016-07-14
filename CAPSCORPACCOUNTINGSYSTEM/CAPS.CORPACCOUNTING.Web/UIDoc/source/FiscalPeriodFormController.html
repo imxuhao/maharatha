@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.fiscalperiod.FiscalPeriodFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.financials-fiscalperiod-fiscalperiodform&#39;,
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        var me = this,
+             view = me.getView();
+        record = Ext.create(&#39;Chaching.model.financials.fiscalperiod.FiscalYearModel&#39;);
+        Ext.apply(record.data, values);
+        var fiscalPeriodStore = view.down(&#39;gridpanel[itemId=fiscalPeriodGrid]&#39;).getStore();
+        var fiscalPeriodModifyRecords = fiscalPeriodStore.getModifiedRecords();
+       // record.set(&#39;id&#39;, values.fiscalYearId);
+        if (fiscalPeriodModifyRecords &amp;&amp; fiscalPeriodModifyRecords.length &gt; 0) {
+            var fiscalPeriods = [];
+            Ext.each(fiscalPeriodModifyRecords, function (rec) {
+                var periodStartDate = &quot;&quot;;
+                var periodEndDate = &quot;&quot;;
+                var monthYear = rec.get(&#39;monthYear&#39;);
+                var month = monthYear.substr(0, 3);
+                var year = monthYear.substr(4, 4);
+                periodStartDate = periodStartDate.getDateString(month, year, true);
+                periodEndDate = periodEndDate.getDateString(month, year, false);
+                var fiscalPeriodRec = {
+                    fiscalYearId: record.get(&#39;fiscalYearId&#39;),
+                    fiscalPeriodId: rec.get(&#39;fiscalPeriodId&#39;),
+                    organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
+                    periodStartDate: moment(periodStartDate).format(Chaching.utilities.ChachingGlobals.defaultDateFormat),
+                    periodEndDate: moment(periodEndDate).format(Chaching.utilities.ChachingGlobals.defaultDateFormat),
+                    monthYear: rec.get(&#39;monthYear&#39;),
+                    isClose: rec.get(&#39;isClose&#39;),
+                    isActive: rec.get(&#39;isActive&#39;),
+                    isApproved: rec.get(&#39;isApproved&#39;),
+                    typeOfInactiveStatusId: rec.get(&#39;typeOfInactiveStatusId&#39;),
+                    isCpaClosed: rec.get(&#39;isCpaClosed&#39;),
+                    dateCpaClosed: rec.get(&#39;dateCpaClosed&#39;),
+                    cpaUserId: rec.get(&#39;cpaUserId&#39;),
+                    isYearEndAdjustmentsAllowed: rec.get(&#39;isYearEndAdjustmentsAllowed&#39;),
+                    isPreClose: rec.get(&#39;isPreClose&#39;)
+                };
+                fiscalPeriods.push(fiscalPeriodRec);
+            });
+            record.data.fiscalPeriodUnitList = fiscalPeriods;
+            //if (parseInt(record.get(&#39;fiscalYearId&#39;)) &gt; 0) {
+            //    record.data.fiscalPeriodUnits = fiscalPeriods;
+            //} else {
+            //    record.data.createFiscalPeriodUnits = fiscalPeriods;
+            //}
+            
+        }
+        return record;
+    },
+    onFiscalOpenYearChange: function (field, newVal, oldVal) {
+        var me = this,
+            view = me.getView();
+        if (field.isEditMode == false &amp;&amp; !field.getValue()) {
+            abp.message.confirm(app.localize(&#39;FiscalYearCloseMsg&#39;), app.localize(&#39;Warning&#39;), function (btn) {
+                if (btn) {
+                    var fiscalPeriodStore = view.down(&#39;gridpanel[itemId=fiscalPeriodGrid]&#39;).getStore();
+                    fiscalPeriodStore.each(function (record) {
+                        record.set(&#39;isClose&#39;, true);
+                    });
+                }
+            });
+        }
+    }
+
+});
+</pre>
+</body>
+</html>

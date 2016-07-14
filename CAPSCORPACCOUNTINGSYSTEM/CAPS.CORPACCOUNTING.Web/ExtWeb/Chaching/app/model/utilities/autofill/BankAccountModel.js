@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.utilities.autofill.BankAccountModel', {
+﻿/**
+ * DataModel to represent entity schema for Autofill Bank Accounts.
+ */
+Ext.define('Chaching.model.utilities.autofill.BankAccountModel', {
     extend: 'Ext.data.Model',
     fields: [
         { name: 'bankAccountId', hidden: true, isPrimaryKey: true },

@@ -16,8 +16,16 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.languages.LanguagesTextViewController&#39;, {
-    extend: &#39;Ext.app.ViewController&#39;,
-    alias: &#39;controller.languages-languagestextview&#39;
+    extend: &#39;Chaching.view.common.window.ChachingWindowPanelController&#39;,
+    alias: &#39;controller.languages-languagestextview&#39;,
+    onWindowResize: function (wnd, width, height, oldWidth, oldHeight) {
+        var me = this,
+            view = me.getView(),
+            form = view.down(&#39;form&#39;),
+            grid = form.down(&#39;Languagetexts&#39;);
+        grid.setWidth(width);
+        grid.setHeight(height - 120);
+    }
     
 });
 </pre>

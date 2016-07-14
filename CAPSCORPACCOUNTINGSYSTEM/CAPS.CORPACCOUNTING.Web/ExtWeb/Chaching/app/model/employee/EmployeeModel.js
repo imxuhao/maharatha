@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Employees.
+ */
 Ext.define('Chaching.model.employee.EmployeeModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

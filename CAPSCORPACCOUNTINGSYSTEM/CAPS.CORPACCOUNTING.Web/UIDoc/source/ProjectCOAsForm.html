@@ -34,6 +34,12 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectCOAsForm&#39;,{
     titleConfig: {
         title: abp.localization.localize(&quot;CreatingNewProjectCOA&quot;).initCap()
     },
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete&#39;)
+    },
     items: [{
         xtype: &#39;hiddenfield&#39;,
         name: &#39;coaId&#39;,
@@ -43,7 +49,7 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectCOAsForm&#39;,{
         padding: &#39;20 10 0 20&#39;,
         //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; },
         defaults: {
-            labelAlign: &#39;top&#39;,
+           // labelAlign: &#39;top&#39;,
             blankText: app.localize(&#39;MandatoryToolTipText&#39;)
         },
         items: [{
@@ -88,33 +94,112 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectCOAsForm&#39;,{
         padding: &#39;20 10 0 20&#39;,
         //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; },
         defaults: {
-            labelAlign: &#39;top&#39;,
+            //labelAlign: &#39;top&#39;,
+            labelWidth : 160,
             blankText: app.localize(&#39;MandatoryToolTipText&#39;)
         },
         items: [{
-            xtype: &#39;combobox&#39;,
+            //xtype: &#39;combobox&#39;,
+            //name: &#39;rollupDivisionId&#39;,
+            //fieldLabel: app.localize(&#39;DefaultRollupJob&#39;).initCap(),
+            //width: &#39;100%&#39;,
+            //ui: &#39;fieldLabelTop&#39;,
+            //emptyText: app.localize(&#39;DefaultRollupJob&#39;),
+            //displayField: &#39;rollupDivision&#39;,
+            //valueField: &#39;rollupDivisionId&#39;,
+            //bind: {
+            //    store: &#39;{rollupDivisionList}&#39;
+            //}
+
+            xtype: &#39;chachingcombobox&#39;,
             name: &#39;rollupDivisionId&#39;,
             fieldLabel: app.localize(&#39;DefaultRollupJob&#39;).initCap(),
-            width: &#39;100%&#39;,
+            store: new Chaching.store.utilities.autofill.JobDivisionStore(),
             ui: &#39;fieldLabelTop&#39;,
-            emptyText: app.localize(&#39;DefaultRollupJob&#39;),
-            displayField: &#39;rollupDivision&#39;,
-            valueField: &#39;rollupDivisionId&#39;,
-            bind: {
-                store: &#39;{rollupDivisionList}&#39;
+            width: &#39;100%&#39;,
+            valueField: &#39;jobId&#39;,
+            displayField: &#39;jobNumber&#39;,
+            queryMode: &#39;remote&#39;,
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                create: false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+            },
+            createEditEntityType: &#39;financials.accounts.divisions&#39;,
+            createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+            entityType: &#39;Division&#39;,
+            isTwoEntityPicker: true,
+            secondEntityDetails: {
+                editCreateModelClass: &#39;Chaching.model.projects.projectmaintenance.ProjectModel&#39;,
+                identificationKey: &#39;isDivision&#39;,
+                entityType: &#39;Job&#39;,
+                createEditEntityType: &#39;projects.projectmaintenance.projects&#39;,
+                createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.ProjectsGridController&#39;,
+                modulePermissions: {
+                    read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
+                    create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
+                    edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
+                    destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
+                },
+                secondoryEntityCrudApi: {
+                    read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                    create: abp.appPath + &#39;api/services/app/jobUnit/CreateJobUnit&#39;,
+                    update: abp.appPath + &#39;api/services/app/jobUnit/UpdateJobUnit&#39;,
+                    destroy: abp.appPath + &#39;api/services/app/jobUnit/DeleteJobUnit&#39;
+                }
             }
+
         }, {
-            xtype: &#39;combobox&#39;,
-            name: &#39;rollupAccountId&#39;,
-            fieldLabel: app.localize(&#39;DefaultRollupAccount&#39;).initCap(),
-            width: &#39;100%&#39;,
+
+            //xtype: &#39;combobox&#39;,
+            //name: &#39;rollupAccountId&#39;,
+            //fieldLabel: app.localize(&#39;DefaultRollupAccount&#39;).initCap(),
+            //width: &#39;100%&#39;,
+            //ui: &#39;fieldLabelTop&#39;,
+            //emptyText: app.localize(&#39;DefaultRollupAccount&#39;),
+            //displayField: &#39;name&#39;,
+            //valueField: &#39;value&#39;,
+            //bind: {
+            //    store: &#39;{genericRollupAccountList}&#39;
+            //}
+
+            xtype: &#39;chachingcombobox&#39;,
+            store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
+            fieldLabel: app.localize(&#39;DefaultRollupAccount&#39;),
             ui: &#39;fieldLabelTop&#39;,
-            emptyText: app.localize(&#39;DefaultRollupAccount&#39;),
-            displayField: &#39;name&#39;,
-            valueField: &#39;value&#39;,
-            bind: {
-                store: &#39;{genericRollupAccountList}&#39;
-            }
+            width: &#39;100%&#39;,
+            name: &#39;rollupAccountId&#39;,
+            valueField: &#39;accountId&#39;,
+            displayField: &#39;accountNumber&#39;,
+            queryMode: &#39;remote&#39;,
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Create&#39;),
+                edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + &#39;api/services/app/accountUnit/GetRollupAccountsList&#39;,
+                create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+            },
+            createEditEntityType: &#39;financials.accounts.accounts&#39;,
+            createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+            entityType: &#39;Account&#39;,
+            isTwoEntityPicker: false
+
         }, {
             xtype: &#39;checkbox&#39;,
             boxLabel: app.localize(&#39;IsCorporate&#39;),

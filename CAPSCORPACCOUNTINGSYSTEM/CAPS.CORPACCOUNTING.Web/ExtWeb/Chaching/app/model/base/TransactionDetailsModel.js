@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Accounting Transaction Distribution.
+ */
 Ext.define('Chaching.model.base.TransactionDetailsModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

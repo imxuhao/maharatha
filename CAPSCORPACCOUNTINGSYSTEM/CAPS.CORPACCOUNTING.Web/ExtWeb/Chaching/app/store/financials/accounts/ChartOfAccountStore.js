@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.financials.accounts.ChartOfAccountStore', {
+﻿/**
+ * DataStore to perform CRUD operation on COA.
+ */
+Ext.define('Chaching.store.financials.accounts.ChartOfAccountStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.financials.accounts.ChartOfAccountsModel',
     //storeId:"coaStore",

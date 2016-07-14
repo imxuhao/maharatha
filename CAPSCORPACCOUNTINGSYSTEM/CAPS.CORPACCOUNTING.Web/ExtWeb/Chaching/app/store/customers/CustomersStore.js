@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.customers.CustomersStore', {
+﻿/**
+ * DataStore to perform Read operation on Customers.
+ */
+Ext.define('Chaching.store.customers.CustomersStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.customers.CustomersModel',
     pageSize: 1000,

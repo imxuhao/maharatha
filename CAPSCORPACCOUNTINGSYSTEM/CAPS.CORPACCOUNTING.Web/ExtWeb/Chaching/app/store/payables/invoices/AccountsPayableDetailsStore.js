@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.payables.invoices.AccountsPayableDetailsStore', {
+﻿/**
+ * DataStore to perform Read/Delete operation on Accounts Payable Details.
+ */
+Ext.define('Chaching.store.payables.invoices.AccountsPayableDetailsStore', {
     extend: 'Chaching.store.base.TransactionDetailsStore',
     model: 'Chaching.model.payables.invoices.AccountsPayableDetailsModel',
     proxy: {

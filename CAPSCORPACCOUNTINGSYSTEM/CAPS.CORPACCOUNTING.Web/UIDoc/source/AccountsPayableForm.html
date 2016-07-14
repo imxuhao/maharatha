@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.payables.invoices.AccountsPayableForm&#39;,{
+    extend: &#39;Chaching.view.common.form.ChachingTransactionFormPanel&#39;,
+    alias: [&#39;widget.payables.invoices.create&#39;, &#39;widget.payables.invoices.edit&#39;],
+    requires: [
+        &#39;Chaching.view.payables.invoices.AccountsPayableFormController&#39;,
+        &#39;Chaching.view.payables.invoices.AccountsPayableDetailGrid&#39;
+    ],
+
+    controller: &#39;payables-invoices-accountspayableform&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Payables.Invoices&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Payables.Invoices.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Payables.Invoices.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Payables.Invoices.Delete&#39;)
+    },
+    openInPopupWindow: false,
+    layout: &#39;fit&#39;,
+    autoScroll: false,
+    border: false,
+    frame: false,
+    rbar: [{ xtype: &#39;panel&#39;, layout: { type: &#39;vbox&#39;, pack: &#39;center&#39; }, title: app.localize(&#39;VendorSnapshot&#39;), collapsed: true, collapsible: true, collapseDirection: &#39;right&#39;, headerPosition: &#39;top&#39;, flex: 1, width: 250 }],
+    initComponent: function () {
+        var me = this;
+        me.tbar=[
+            {
+                xtype: &#39;radiogroup&#39;,
+                columns: 3,
+                layout: {
+                    type: &#39;hbox&#39;
+                },
+                vertical: false,
+                defaults: {
+                    boxLabelCls: &#39;radioGroupboxLabel&#39;
+                },
+                items: [
+                    { boxLabel: app.localize(&#39;Invoice&#39;), name: &#39;typeOfInvoiceId&#39;, inputValue: &#39;1&#39;, checked: true },
+                    { boxLabel: app.localize(&#39;CreditMemo&#39;), name: &#39;typeOfInvoiceId&#39;, inputValue: &#39;2&#39;, padding: &#39;0 0 0 20&#39; },
+                    { boxLabel: app.localize(&#39;QuickPay&#39;), name: &#39;typeOfInvoiceId&#39;, inputValue: &#39;3&#39;, padding: &#39;0 0 0 20&#39; }
+                ],
+                listeners: {
+                    change: &#39;onInvoiceTypeChange&#39;
+                }
+            }, &#39;-&gt;&#39;, {
+                xtype: &#39;button&#39;,
+                scale: &#39;small&#39;,
+                ui: &#39;actionButton&#39;,
+                itemId: &#39;PostBtn&#39;,
+                hidden:true,
+                text: abp.localization.localize(&quot;Post&quot;).toUpperCase(),
+                iconCls: &#39;fa  fa-files-o&#39;,
+                iconAlign: &#39;left&#39;
+            }, {
+                xtype: &#39;button&#39;,
+                ui: &#39;actionButton&#39;,
+                iconCls: &#39;fa fa-download&#39;,
+                iconAlign: &#39;left&#39;,
+                itemId: &#39;PrintBtn&#39;,
+                hidden:true,
+                menu: new Ext.menu.Menu({
+                    ui: &#39;accounts&#39;,
+                    items: [
+                        { text: abp.localization.localize(&quot;PrintPDF&quot;).toUpperCase(), iconCls: &#39;fa fa-file-pdf-o&#39;, itemId: &#39;PrintPdf&#39; },
+                        { text: abp.localization.localize(&quot;PrintWord&quot;).toUpperCase(), iconCls: &#39;fa fa-file-word-o&#39;, itemId: &#39;PrintWord&#39; },
+                        { text: abp.localization.localize(&quot;Email&quot;).toUpperCase(), iconCls: &#39;fa fa-envelope-square&#39;, itemId: &#39;Email&#39; }
+                    ]
+                })
+            }
+        ];
+        me.items=[
+            {
+                xtype: &#39;hiddenfield&#39;,
+                name: &#39;accountingDocumentId&#39;,
+                value: 0
+            }, {
+                xtype: &#39;hiddenfield&#39;,
+                name: &#39;organizationUnitId&#39;,
+                value: null
+            }, {
+                xtype: &#39;hiddenfield&#39;,
+                name: &#39;typeOfAccountingDocumentId&#39;,
+                value: 3
+            }, {
+                xtype: &#39;container&#39;,
+                layout: {
+                    type: &#39;column&#39;,
+                    columns: 4
+                },
+                items: [
+                    {
+                        columnWidth: .25,
+                        padding: &#39;0 5 0 10&#39;,
+                        defaults: {
+                            ui: &#39;fieldLabelTop&#39;,
+                            width: &#39;100%&#39;,
+                            labelWidth: 90
+                        },
+                        items: [
+                            {
+                                xtype: &#39;textfield&#39;,
+                                name: &#39;purchaseOrderReference&#39;,
+                                itemId: &#39;purchaseOrderReference&#39;,
+                                ui: &#39;fieldLabelTop&#39;,
+                                width: &#39;100%&#39;,
+                                fieldLabel: app.localize(&#39;PO#&#39;),
+                                emptyText: app.localize(&#39;SearchText&#39;),
+                                triggers: {
+                                    poRelief: {
+                                        cls: &#39;purchaseOrderTriggerClsInactive&#39;,
+                                        handler: function() {
+                                            console.log(&#39;poRelief trigger clicked&#39;);
+                                        }
+                                    }
+                                },
+                                listeners: {
+                                    change: function(field, newValue, oldValue) {
+                                        ///TODO: Change to enter key press once poo flow work starts
+                                        if (field.getValue().length &gt; 3) {
+                                            var poRel = field.getTrigger(&#39;poRelief&#39;);
+                                            poRel.getEl().removeCls(&#39;x-form-trigger x-form-trigger-fieldLabelTop purchaseOrderTriggerClsInactive purchaseOrderTriggerClsInactive-fieldLabelTop&#39;);
+                                            poRel.getEl().setCls(&#39;x-form-trigger x-form-trigger-fieldLabelTop purchaseOrderTriggerClsActive purchaseOrderTriggerClsActive-fieldLabelTop&#39;);
+                                            //poRel.getEl().setCls(&#39;x-form-trigger-fieldLabelTop purchaseOrderTriggerClsActive&#39;);
+                                            field.updateLayout();
+                                        }
+                                    }
+                                }
+                            }, {
+                                xtype: &#39;chachingcombobox&#39;,
+                                store: new Chaching.store.utilities.autofill.VendorsStore(),
+                                fieldLabel: app.localize(&#39;Vendor&#39;),
+                                ui: &#39;fieldLabelTop&#39;,
+                                width: &#39;100%&#39;,
+                                name: &#39;vendorId&#39;,
+                                valueField: &#39;vendorId&#39;,
+                                displayField: &#39;vendorName&#39;,
+                                queryMode: &#39;remote&#39;,
+                                minChars: 2,
+                                modulePermissions: {
+                                    read: abp.auth.isGranted(&#39;Pages.Payables.Vendors&#39;),
+                                    create: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Create&#39;),
+                                    edit: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Edit&#39;),
+                                    destroy: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Delete&#39;)
+                                },
+                                primaryEntityCrudApi: null,
+                                createEditEntityType: &#39;payables.vendors&#39;,
+                                createEditEntityGridController: &#39;payables-vendors-vendorsgrid&#39;,
+                                entityType: &#39;Vendor&#39;
+                            }, {
+                                xtype: &#39;textfield&#39;,
+                                name: &#39;description&#39;,
+                                itemId: &#39;description&#39;,
+                                allowBlank: false,
+                                fieldLabel: app.localize(&#39;Description&#39;),
+                                emptyText: app.localize(&#39;MandatoryField&#39;)
+                            }, {
+                                xtype: &#39;amountfield&#39;,
+                                name: &#39;controlTotal&#39;,
+                                itemId: &#39;controlTotal&#39;,
+                                fieldLabel: app.localize(&#39;InvoiceTotal&#39;),
+                                allowBlank: false,
+                                emptyText: app.localize(&#39;MandatoryField&#39;)
+                            }
+                        ]
+                    }, {
+                        columnWidth: .25,
+                        padding: &#39;0 5 0 10&#39;,
+                        defaults: {
+                            ui: &#39;fieldLabelTop&#39;,
+                            width: &#39;100%&#39;,
+                            labelWidth: 90
+                        },
+                        items: [
+                            {
+                                xtype: &#39;textfield&#39;,
+                                name: &#39;documentReference&#39;,
+                                itemId: &#39;documentReference&#39;,
+                                allowBlank: false,
+                                fieldLabel: app.localize(&#39;Invoice#&#39;),
+                                emptyText: app.localize(&#39;MandatoryField&#39;)
+                            }, {
+                                xtype: &#39;datefield&#39;,
+                                name: &#39;transactionDate&#39;,
+                                itemId: &#39;transactionDate&#39;,
+                                allowBlank: false,
+                                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                                emptyText: app.localize(&#39;MandatoryField&#39;),
+                                fieldLabel: app.localize(&#39;InvoiceDate&#39;)
+                            }, {
+                                xtype: &#39;datefield&#39;,
+                                name: &#39;datePosted&#39;,
+                                itemId: &#39;datePosted&#39;,
+                                allowBlank: true,
+                                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                                emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
+                                fieldLabel: app.localize(&#39;PostingDate&#39;)
+                            }, {
+                                xtype: &#39;datefield&#39;,
+                                name: &#39;dueDate&#39;,
+                                itemId: &#39;dueDate&#39;,
+                                allowBlank: true,
+                                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                                emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
+                                fieldLabel: app.localize(&#39;DueDate&#39;)
+                            }
+                        ]
+                    }, {
+                        columnWidth: .25,
+                        padding: &#39;0 5 0 10&#39;,
+                        defaults: {
+                            ui: &#39;fieldLabelTop&#39;,
+                            width: &#39;100%&#39;,
+                            labelWidth: 90
+                        },
+                        items: [
+                            {
+                                xtype: &#39;combobox&#39;,
+                                name: &#39;typeOfCurrencyId&#39;,
+                                itemId: &#39;typeOfCurrencyId&#39;,
+                                queryMode: &#39;local&#39;,
+                                bind: {
+                                    store: &#39;{typeOfCurrencyList}&#39;
+                                },
+                                valueField: &#39;typeOfCurrencyId&#39;,
+                                displayField: &#39;typeOfCurrency&#39;,
+                                width: &#39;100%&#39;,
+                                ui: &#39;fieldLabelTop&#39;,
+                                fieldLabel: app.localize(&#39;Currency&#39;),
+                                emptyText: app.localize(&#39;SelectOption&#39;),
+                                listeners: {
+                                    change: &#39;changeCurrency&#39;
+                                }
+                            }, {
+                                xtype: &#39;combobox&#39;,
+                                name: &#39;typeOfCheckGroupId&#39;,
+                                itemId: &#39;typeOfCheckGroupId&#39;,
+                                queryMode: &#39;local&#39;,
+                                bind: {
+                                    store: &#39;{typeOfCheckGroup}&#39;
+                                },
+                                valueField: &#39;typeOfCheckGroupId&#39;,
+                                displayField: &#39;typeOfCheckGroup&#39;,
+                                width: &#39;100%&#39;,
+                                ui: &#39;fieldLabelTop&#39;,
+                                fieldLabel: app.localize(&#39;CheckGroup&#39;),
+                                emptyText: app.localize(&#39;SelectOption&#39;)
+                            }, {
+////TODO: Replace with combo once batch is ready
+                                xtype: &#39;textfield&#39;,
+                                name: &#39;batchId&#39;,
+                                itemId: &#39;batchId&#39;,
+                                ui: &#39;fieldLabelTop&#39;,
+                                fieldLabel: app.localize(&#39;Batch&#39;),
+                                emptyText: app.localize(&#39;SelectOption&#39;)
+                            }, {
+                                xtype: &#39;textfield&#39;,
+                                name: &#39;memoLine&#39;,
+                                itemId: &#39;memoLine&#39;,
+                                allowBlank: true,
+                                fieldLabel: app.localize(&#39;MemoLine&#39;)
+                            }
+                        ]
+                    }, {
+                        columnWidth: .25,
+                        padding: &#39;0 5 0 10&#39;,
+                        itemId: &#39;quickPaySection&#39;,
+                        defaults: {
+                            ui: &#39;fieldLabelTop&#39;,
+                            width: &#39;100%&#39;,
+                            labelWidth: 80,
+                            listeners: {
+                                change: &#39;onQuickPayFieldChanged&#39;
+                            }
+                        },
+                        items: [
+                            {
+                                xtype: &#39;textfield&#39;,
+                                name: &#39;adjustInvoice&#39;,
+                                itemId: &#39;adjustInvoice&#39;,
+                                allowBlank: true,
+                                hidden: true,
+                                fieldLabel: app.localize(&#39;AdjustInvoice&#39;)
+                            }, {
+                                xtype: &#39;chachingcombobox&#39;,
+                                store: new Chaching.store.utilities.autofill.BankAccountListStore(),
+                                fieldLabel: app.localize(&#39;Bank&#39;),
+                                ui: &#39;fieldLabelTop&#39;,
+                                width: &#39;100%&#39;,
+                                name: &#39;bankAccountId&#39;,
+                                valueField: &#39;bankAccountId&#39;,
+                                displayField: &#39;description&#39;,
+                                queryMode: &#39;remote&#39;,
+                                minChars: 2,
+                                hidden: true,
+                                modulePermissions: {
+                                    read: abp.auth.isGranted(&#39;Pages.Banking.BankSetup&#39;),
+                                    create: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Create&#39;),
+                                    edit: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Edit&#39;),
+                                    destroy: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Delete&#39;)
+                                },
+                                primaryEntityCrudApi: null,
+                                createEditEntityType: &#39;banking.banksetup&#39;,
+                                createEditEntityGridController: &#39;banking.banksetupgrid&#39;,
+                                entityType: &#39;Bank&#39;
+                            }, {
+                                xtype: &#39;datefield&#39;,
+                                name: &#39;paymentDate&#39;,
+                                itemId: &#39;paymentDate&#39;,
+                                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                                emptyText: app.localize(&#39;MandatoryField&#39;),
+                                hidden: true,
+                                fieldLabel: app.localize(&#39;CheckDate&#39;)
+                            }, {
+////TODO: Replace with combo once payType is clarified
+                                xtype: &#39;textfield&#39;,
+                                name: &#39;payType&#39;,
+                                itemId: &#39;payType&#39;,
+                                ui: &#39;fieldLabelTop&#39;,
+                                fieldLabel: app.localize(&#39;PayType&#39;),
+                                emptyText: app.localize(&#39;SelectOption&#39;),
+                                hidden: true
+                            }, {
+                                xtype: &#39;textfield&#39;,
+                                name: &#39;paymentNumber&#39;,
+                                itemId: &#39;paymentNumber&#39;,
+                                ui: &#39;fieldLabelTop&#39;,
+                                fieldLabel: app.localize(&#39;Check#&#39;),
+                                emptyText: app.localize(&#39;MandatoryField&#39;),
+                                hidden: true,
+                                triggers: {
+                                    printCheck: {
+                                        cls: &#39;printTriggerClsInactive&#39;,
+                                        handler: function(tri) {
+                                            if (tri.allowAction) {
+                                                abp.notify.success(&#39;Check Printing Comming Sooooooon...&#39;);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }, {
+                        columnWidth: 1,
+                        itemId: &#39;transactionDetails&#39;,
+                        items: [
+                            {
+                                xtype: &#39;payables.invoices.transactionDetails&#39;,
+                                isTransactionDetailGrid: true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+        me.callParent(arguments);
+    }
+    
+});
+</pre>
+</body>
+</html>

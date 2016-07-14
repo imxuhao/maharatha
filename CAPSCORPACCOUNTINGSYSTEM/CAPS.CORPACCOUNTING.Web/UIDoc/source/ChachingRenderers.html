@@ -115,6 +115,17 @@
         }
         return &#39;&#39;;
     },
+    renderTenant: function (value, metaData, record, rowIndex, colIndex) {
+         if (record.get(&#39;connectionString&#39;) != undefined &amp;&amp; record.get(&#39;connectionString&#39;) != null &amp;&amp; record.get(&#39;connectionString&#39;) != &quot;&quot;) {
+             return &#39;&lt;div class= &quot;fa fa-database&quot; title =&quot;&#39;+ app.localize(&#39;HasOwnDatabase&#39;)+&#39;&quot;&gt;&lt;/div&gt;&#39; + &quot; &quot; + value;
+        } 
+        return value;
+    },
+    renderRole: function (value, metaData, record, rowIndex, colIndex) {
+        return value + (record.get(&#39;isStatic&#39;) == true ?
+                &#39;&lt;span class=&quot;staticRoleLabel&quot; title =&quot;&#39; + app.localize(&#39;StaticRole_Tooltip&#39;) + &#39;&quot;&gt;&#39; + app.localize(&#39;Static&#39;) + &#39;&lt;/span&gt;&#39; : &#39;&#39;)
+                + (record.get(&#39;isDefault&#39;) == true ? &#39;&lt;span class=&quot;defaultRoleLabel&quot; title =&quot;&#39; + app.localize(&#39;DefaultRole_Description&#39;) + &#39;&quot;&gt;&#39; + app.localize(&#39;Default&#39;) + &#39;&lt;/span&gt;&#39; : &#39;&#39;);
+    },
     renderDateTime: function (value) {
         if (value) {
             return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeFormat);
@@ -139,6 +150,12 @@
         else
             return &#39;&lt;i class=&quot;fa fa-close font-yellow-gold&quot;  style=&quot;color:#E00353&quot;&gt;&lt;/i&gt;&#39;;
     },
+    splitColumnMarkRenderer: function (val, meta, record, rowIndex) {
+        if (val || record.get(&#39;isAccountingItemSplit&#39;))
+            return &#39;&lt;i class=&quot;fa fa-check font-green&quot;  style=&quot;color:#32c5d2;&quot; &gt;&lt;/i&gt;&#39;;
+        else
+            return &#39;&lt;i class=&quot;fa fa-unlink&quot;  style=&quot;color:#2403a7;font-weight:600;&quot;&gt;&lt;/i&gt;&#39;;
+    },
     languagesTextsEditIcon: function (val, meta, record, rowIndex) {
         return &#39;&lt;i class=&quot;fa fa-edit&quot; &gt;&lt;/i&gt;&#39;;
     },
@@ -147,9 +164,10 @@
     },
     rendererHyperLink: function (val, meta, record, rowIndex, colIndex, store, view) {
         if (val) {
-            var a = &#39;&lt;a style=&quot;padding-left:10px;text-decoration:underline !important;&quot;&gt;&#39; + val + &#39;&lt;/a&gt;&#39;;
-            var div = &#39;&lt;div class=&quot;fa fa-th&quot; isHyperLink=&quot;true&quot; style=&quot;overflow:hidden; text-overflow:ellipsis; color:white; cursor:pointer; width:98%; color:#3598DC !important;&quot; title=&quot;&#39; + val + &#39;&quot;&gt;&#39; + a + &#39;&lt;/div&gt;&#39;;
-            return div;
+            var a = &#39;&lt;a style=&quot;padding-left:2px;text-decoration:underline !important;cursor:pointer;&quot;&gt;&#39; + val + &#39;&lt;/a&gt;&#39;;
+            return a;
+            ///var div = &#39;&lt;div class=&quot;fa fa-th&quot; isHyperLink=&quot;true&quot; style=&quot;overflow:hidden; text-overflow:ellipsis; color:white; cursor:pointer; width:98%; color:#3598DC !important;&quot; title=&quot;&#39; + val + &#39;&quot;&gt;&#39; + a + &#39;&lt;/div&gt;&#39;;
+            // return div;
         }
         return val;
     },
@@ -253,29 +271,72 @@
         return val;
     },
     renderEmployeeInnerTpl: function () {
-        return &#39;{firstName} {lastName}&#39;;
+        return &#39;{employeeName}&#39;;
     },
     renderEmployeeDispalyTpl: function () {
         var xtemplate = Ext.create(&#39;Ext.XTemplate&#39;, [
             &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
-            &#39;{firstName} {lastName}&#39;,
+            &#39;{employeeName}&#39;,
             &#39;&lt;/tpl&gt;&#39;
         ]);
         return xtemplate;
     },
     renderCustomerInnerTpl: function() {
-        return &#39;{firstName} {lastName} {{customerNumber}}&#39;;
+        return &#39;{name}}&#39;;
     },
     renderCustomerDispalyTpl: function () {
         var xtemplate = Ext.create(&#39;Ext.XTemplate&#39;, [
             &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
-            &#39;{firstName} {lastName} {{customerNumber}}&#39;,
+            &#39;{name}}&#39;,
             &#39;&lt;/tpl&gt;&#39;
         ]);
         return xtemplate;
     },
     renderMailToTag:function(email) {
         return &#39;&lt;a href=&quot;mailto:&#39; + email + &#39;&quot; style=&quot;text-decoration:underline !important;color:#477EBF !important;font-size:15px;&quot;&gt;&#39; + email + &#39;&lt;/a&gt;&#39;;
+    },
+    amountsRenderer:function(value, meta, record, rowIndex, colIndex, store, view) {
+        var isANegativeValue = false, newValue = &quot;&quot;;
+        var me = this;
+        if (value) {
+            value = Chaching.utilities.ChachingRenderers.unformattedNumber(value);
+            if (Chaching.utilities.ChachingGlobals.displayNegAmtInBrackets === true &amp;&amp; value &lt; 0) {
+                newValue = Math.abs(value);
+                isANegativeValue = true;
+                newValue = $.trim(Ext.util.Format.currency(newValue, &#39; &#39;));
+            } else {
+                newValue = $.trim(Ext.util.Format.currency(value, &#39; &#39;));
+            }
+
+            if (isANegativeValue === true) {
+                newValue = Ext.String.format(&quot;(&quot; + newValue + &quot;)&quot;);
+            }
+        }
+        newValue = newValue.replace(&#39; &#39;, &#39;&#39;);
+        return newValue;
+    },
+    unformattedNumber:function(value) {
+        var newValue = &quot;0.00&quot;;
+        var close = &quot;)&quot;;
+        if (value != undefined) {
+            value = value.toString();
+            if (value !== null &amp;&amp; value !== &#39;&#39;) {
+                newValue = value.replace(&quot;(&quot;, &#39;-&#39;);
+                newValue = newValue.replace(close, &#39;&#39;);
+                newValue = newValue.replace(/,/g, &quot;&quot;);
+            }
+        }
+        return newValue;
+    },
+    amountSummaryRenderer: function (value, summaryData, dataIndex) {
+        var me = this.getView();
+        var val = 0;
+        var store = me.getStore();
+        val = store.sum(&#39;amount&#39;);
+        return &#39;&lt;b&gt;&#39; + Chaching.utilities.ChachingRenderers.amountsRenderer(val, null, null) + &#39;&lt;/b&gt;&#39;;
+    },
+    summaryTotalTextRenderer:function(value, summaryData, dataIndex) {
+        return &#39;&lt;b&gt;TOTAL&lt;/b&gt;&#39;;
     }
 
 });</pre>

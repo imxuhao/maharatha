@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.payables.invoices.AccountsPayableGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.payables-invoices-accountspayablegrid&#39;,
+    doAfterCreateAction: function(createMode, formPanel, isEdit, record) {
+        var form = undefined;
+        var viewModel = undefined;
+        if (formPanel) {
+            form = formPanel.getForm();
+            viewModel = formPanel.getViewModel();
+        }
+        if (form&amp;&amp;viewModel) {
+            var currencyStore = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
+            currencyStore.load();
+
+            var checkGroupStore = viewModel.getStore(&#39;typeOfCheckGroup&#39;);
+            checkGroupStore.load();
+
+            if (isEdit&amp;&amp;record) {
+                var vendorField = form.findField(&#39;vendorId&#39;),
+                    vendorStore = vendorField.getStore();
+                if (record.get(&#39;vendorId&#39;) || record.get(&#39;vendorName&#39;)) {
+                    vendorStore.getProxy().setExtraParam(&#39;query&#39;, record.get(&#39;vendorName&#39;));
+                    vendorStore.load();
+                }
+
+                var bankField = form.findField(&#39;bankAccountId&#39;),
+                    bankStore = bankField.getStore();
+                if (record.get(&#39;bankAccountId&#39;)) {
+                    bankStore.getProxy().setExtraParam(&#39;query&#39;, record.get(&#39;bankAccount&#39;));
+                    bankStore.load();
+                }
+
+                if (record.get(&#39;accountingDocumentId&#39;)) {
+                    if (!record.get(&#39;isPosted&#39;)) {
+                        var btnPost = formPanel.down(&#39;button[itemId=PostBtn]&#39;);
+                        btnPost.show();
+                    }
+                    var btnExport = formPanel.down(&#39;button[itemId=PrintBtn]&#39;);
+                    btnExport.show();
+                }
+            }
+        }
+    }
+
+});
+</pre>
+</body>
+</html>

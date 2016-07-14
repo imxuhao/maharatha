@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Bank Check Ranges.
+ */
 Ext.define('Chaching.model.banking.banksetup.BankCheckRangesModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

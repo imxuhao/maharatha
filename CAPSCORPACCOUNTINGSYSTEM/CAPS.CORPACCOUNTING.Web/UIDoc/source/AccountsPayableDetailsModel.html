@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-payables-invoices-AccountsPayableDetailsModel'>/**
+</span> * DataModel to represent entity schema for Accounts Payable Distribution.
+ */
+Ext.define(&#39;Chaching.model.payables.invoices.AccountsPayableDetailsModel&#39;, {
+    extend: &#39;Chaching.model.base.TransactionDetailsModel&#39;,
+    config: {
+<span id='Chaching-model-payables-invoices-AccountsPayableDetailsModel-cfg-searchEntityName'>        searchEntityName: &#39;invoices&#39;
+</span>    },
+<span id='Chaching-model-payables-invoices-AccountsPayableDetailsModel-property-fields'>    fields: [
+</span>        { name: &#39;vendorId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;vendorName&#39;, type: &#39;string&#39; },
+        { name: &#39;poHistoryItemId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+    ]
+});
+</pre>
+</body>
+</html>

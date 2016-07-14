@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.payables.vendors.VendorsStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-payables-vendors-VendorsStore'>/**
+</span> * DataStore to perform CRUD operation on Vendors.
+ */
+Ext.define(&#39;Chaching.store.payables.vendors.VendorsStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.payables.vendors.VendorsModel&#39;,
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-payables-vendors-VendorsStore-property-model'>    model: &#39;Chaching.model.payables.vendors.VendorsModel&#39;,
+</span><span id='Chaching-store-payables-vendors-VendorsStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         //extraParams: {
         //    organizationUnitId: 0
@@ -31,7 +34,7 @@
             destroy: abp.appPath + &#39;api/services/app/vendorUnit/DeleteVendorUnit&#39;
         }
     },
-    idPropertyField: &#39;vendorId&#39;//important to set for add/update of records
-});</pre>
+<span id='Chaching-store-payables-vendors-VendorsStore-property-idPropertyField'>    idPropertyField: &#39;vendorId&#39;//important to set for add/update of records
+</span>});</pre>
 </body>
 </html>

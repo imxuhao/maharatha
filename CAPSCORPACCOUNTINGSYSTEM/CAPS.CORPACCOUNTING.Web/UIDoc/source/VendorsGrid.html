@@ -46,7 +46,7 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
           scale: &#39;small&#39;,
           ui: &#39;actionButton&#39;,
           action: &#39;create&#39;,
-          text: abp.localization.localize(&quot;CreatingNewVendors&quot;).toUpperCase(),
+          text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
           tooltip: app.localize(&#39;CreatingNewVendors&#39;),
           checkPermission: true,
           iconCls: &#39;fa fa-plus&#39;,
@@ -56,7 +56,7 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
-    isEditable: false,
+    isEditable: true,
     editingMode: &#39;row&#39;,
     columnLines: true,
     multiColumnSort: true,
@@ -67,6 +67,10 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
     createWndTitleConfig: {
         title: app.localize(&#39;CreatingNewVendors&#39;),
         iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewVendor&#39;),
+        iconCls: &#39;fa fa-th&#39;
     },
     createNewMode: &#39;tab&#39;,
     isSubMenuItemTab: true,
@@ -82,6 +86,8 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
             xtype: &#39;textfield&#39;,
             width: &#39;100%&#39;,
             emptyText: app.localize(&#39;VendorSearch&#39;)
+        }, editor: {
+            xtype: &#39;textfield&#39;
         }
     }, {
 
@@ -98,7 +104,11 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
             width: &#39;100%&#39;,
             entityName: &#39;Address&#39;,
             emptyText: app.localize(&#39;AddressSearch&#39;)
-        }, renderer: Chaching.utilities.ChachingRenderers.renderFirstAddress
+        },
+        renderer: Chaching.utilities.ChachingRenderers.renderFirstAddress,
+        editor: {
+            xtype: &#39;textfield&#39;
+        }
     }
     , {
         xtype: &#39;gridcolumn&#39;,
@@ -114,6 +124,8 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
             width: &#39;100%&#39;,
             entityName: &quot;Address&quot;,
             emptyText: app.localize(&#39;TelephoneSearch&#39;)
+        }, editor: {
+            xtype: &#39;textfield&#39;
         }
     }
     , {
@@ -129,6 +141,8 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
             xtype: &#39;textfield&#39;,
             width: &#39;100%&#39;,
             emptyText: app.localize(&#39;EmailSearch&#39;)
+        }, editor: {
+            xtype: &#39;textfield&#39;
         }
     }
     , {
@@ -142,9 +156,19 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
             xtype: &#39;combobox&#39;,
             valueField: &#39;typeof1099BoxId&#39;,
             displayField: &#39;typeof1099Box&#39;,
-            bind: {
-                store: &#39;{typeof1099BoxList}&#39;
-            }
+            forceSelection: true,
+            loadStoreOnCreate: true,
+            searchProperty: &#39;typeof1099BoxId&#39;,
+            isEnum: true,
+            width: &#39;100%&#39;,
+            queryMode : &#39;local&#39;,
+            store: &#39;utilities.TypeOf1099BoxListStore&#39;
+        }, editor: {
+            xtype: &#39;combobox&#39;,
+            valueField: &#39;typeof1099BoxId&#39;,
+            displayField: &#39;typeof1099Box&#39;,
+            queryMode: &#39;local&#39;,
+            store: &#39;utilities.TypeOf1099BoxListStore&#39;
         }
     }
     , {
@@ -158,10 +182,19 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
             xtype: &#39;combobox&#39;,
             valueField: &#39;paymentTermsId&#39;,
             displayField: &#39;paymentTerms&#39;,
-            bind: {
-                store: &#39;{paymentTermsList}&#39;
-            }
+            forceSelection: true,
+            width: &#39;100%&#39;,
+            searchProperty: &#39;paymentTermsId&#39;,
+            store: &#39;utilities.PaymentTermsListStore&#39;
+        },
+        editor: {
+            xtype: &#39;combobox&#39;,
+            valueField: &#39;paymentTermsId&#39;,
+            displayField: &#39;paymentTerms&#39;,
+            queryMode: &#39;local&#39;,
+            store: &#39;utilities.PaymentTermsListStore&#39;
         }
+
     }
     , {
         xtype: &#39;gridcolumn&#39;,
@@ -186,11 +219,14 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
          width: &#39;13%&#39;,
          renderer: Chaching.utilities.ChachingRenderers.renderCity,
          hidden: true,
+         isAssociationField: true,
          filterField: {
              xtype: &#39;textfield&#39;,
              width: &#39;100%&#39;,
              entityName: &quot;Address&quot;,
              emptyText: app.localize(&#39;CitySearch&#39;)
+         }, editor: {
+             xtype: &#39;textfield&#39;
          }
      }
        , {
@@ -200,11 +236,18 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
            width: &#39;13%&#39;,
            renderer: Chaching.utilities.ChachingRenderers.renderState,
            hidden: true,
+           isAssociationField: true,
            filterField: {
                xtype: &#39;textfield&#39;,
                width: &#39;100%&#39;,
                entityName: &quot;Address&quot;,
                emptyText: app.localize(&#39;StateSearch&#39;)
+           }, editor: {
+               xtype: &#39;combobox&#39;,
+               width: &#39;100%&#39;,
+               valueField: &#39;stateId&#39;,
+               displayField: &#39;state&#39;,
+               store: &#39;utilities.StateOrRegionListStore&#39;
            }
        }
          , {
@@ -214,11 +257,15 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
              renderer: Chaching.utilities.ChachingRenderers.renderPostalCode,
              width: &#39;13%&#39;,
              hidden: true,
+             isAssociationField: true,
              filterField: {
                  xtype: &#39;textfield&#39;,
                  width: &#39;100%&#39;,
                  entityName: &quot;Address&quot;,
                  emptyText: app.localize(&#39;ZipCodeSearch&#39;)
+             }, editor: {
+                 width: &#39;100%&#39;,
+                 xtype: &#39;textfield&#39;
              }
          }
      , {
@@ -252,6 +299,9 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
                xtype: &#39;textfield&#39;,
                width: &#39;100%&#39;,
                emptyText: app.localize(&#39;SSNSearch&#39;)
+           }, editor: {
+               width: &#39;100%&#39;,
+               xtype: &#39;textfield&#39;
            }
        }
       , {
@@ -264,6 +314,9 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
               xtype: &#39;textfield&#39;,
               width: &#39;100%&#39;,
               emptyText: app.localize(&#39;FedralTaxSearch&#39;)
+          }, editor: {
+              width: &#39;100%&#39;,
+              xtype: &#39;textfield&#39;
           }
       }
        , {
@@ -276,9 +329,19 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
                xtype: &#39;combobox&#39;,
                valueField: &#39;typeofTaxId&#39;,
                displayField: &#39;typeofTax&#39;,
-               bind: {
-                   store: &#39;{typeOfTaxList}&#39;
-               }
+               loadStoreOnCreate: true,
+               forceSelection: true,
+               searchProperty: &#39;typeofTaxId&#39;,
+               isEnum: true,
+               queryMode: &#39;local&#39;,
+               width: &#39;100%&#39;,
+               store: &#39;utilities.TypeOfTaxListStore&#39;
+           }, editor: {
+               xtype: &#39;combobox&#39;,
+               valueField: &#39;typeofTaxId&#39;,
+               displayField: &#39;typeofTax&#39;,
+               queryMode: &#39;local&#39;,
+               store: &#39;utilities.TypeOfTaxListStore&#39;
            }
        }
          , {
@@ -294,6 +357,7 @@ Ext.define(&#39;Chaching.view.payables.vendors.VendorsGrid&#39;, {
                  xtype: &#39;combobox&#39;,
                  valueField: &#39;value&#39;,
                  displayField: &#39;text&#39;,
+                 width: &#39;100%&#39;,
                  store: {
                      fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]

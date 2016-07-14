@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.financials.accounts.AccountRestrictionRightStore', {
+﻿/**
+ * DataStore to perform Read operation on Accounts Restricted.
+ */
+Ext.define('Chaching.store.financials.accounts.AccountRestrictionRightStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.financials.accounts.AccountRestrictionsModel',
     proxy: {

@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.financials.accounts.RollupAccountStore', {
+﻿/**
+ * DataStore to perform Read operation on Roll-up-accounts.
+ */
+Ext.define('Chaching.store.financials.accounts.RollupAccountStore', {
     extend: 'Chaching.store.base.BaseStore',   
     fields: [{ name: 'name',type:'string' }, { name: 'value',type:'int' }],
     proxy: {

@@ -63,6 +63,10 @@ Ext.define(&#39;Chaching.view.roles.RolesGrid&#39;, {
         title: app.localize(&#39;CreateNewRole&#39;),
         iconCls: &#39;fa fa-plus&#39;
     },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewRole&#39;),
+        iconCls: &#39;fa fa-th&#39;
+    },
     createNewMode: &#39;popup&#39;,
     columns: [
         {
@@ -73,10 +77,7 @@ Ext.define(&#39;Chaching.view.roles.RolesGrid&#39;, {
             sortable: true,
             width: &#39;48%&#39;,
             groupable: true,
-            //renderer: function (val, meta, record, rowIndex) {
-            //    debugger;
-            //    return val + (record.get(&#39;isDefault&#39;) == true ? &#39;&lt;div style=&quot;background-color: blue;width:10%; color: white;text-align: center;padding: 1px; margin: 0cm 2cm 0cm 0cm;&quot;&gt;&#39; + app.localize(&#39;Default&#39;) + &#39;&lt;/div&gt;&#39; : &#39;&#39;) + (record.get(&#39;isStatic&#39;) == true ? &#39;&lt;div style=&quot;background-color: blue;color: white;width:10%;text-align: center;padding: 1px;float:right;&quot;&gt;&#39; + app.localize(&#39;Static&#39;) + &#39;&lt;/div&gt;&#39; : &#39;&#39;);
-            //},
+            renderer: Chaching.utilities.ChachingRenderers.renderRole,
             // simplest filter configuration
             filterField: {
                 xtype: &#39;textfield&#39;,

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-banking-banksetup-BankSetupModel'>/**
+</span> * Model to represent entity schema for Bank Setup.
+ */
+Ext.define(&#39;Chaching.model.banking.banksetup.BankSetupModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+<span id='Chaching-model-banking-banksetup-BankSetupModel-cfg-searchEntityName'>        searchEntityName: &#39;BankAccount&#39;
+</span>    },
+<span id='Chaching-model-banking-banksetup-BankSetupModel-property-fields'>    fields: [
+</span>        { name: &#39;bankAccountId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+        { name: &#39;displaySequence&#39;, type: &#39;string&#39; },
+        { name: &#39;typeOfBankAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;accountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;jobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;bankAccountNumber&#39;, type: &#39;string&#39;, headerText: &#39;Account#&#39;, hidden: false, width: &#39;30%&#39;, minWidth: 80 },
+        { name: &#39;description&#39;, type: &#39;string&#39;, headerText: &#39;BankName&#39;, hidden: false, width: &#39;31%&#39;, minWidth: 80 },
+        { name: &#39;bankAccountName&#39;, type: &#39;string&#39;, headerText: &#39;AccountName&#39;, hidden: false, width: &#39;31%&#39;, minWidth: 80 },
+        { name: &#39;routingNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;typeOfCheckStockId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;lastCheckNumberGenerated&#39;, type: &#39;string&#39; },
+        { name: &#39;controlAccount&#39;, type: &#39;string&#39; },
+        { name: &#39;clearingAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;clearingJobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;expirationMMYYYY&#39;, type: &#39;date&#39;, dateFormat: &#39;c&#39; },
+        { name: &#39;typeOfUploadFileId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;vendorId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;controllingBankAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;isClosed&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isActive&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isApproved&#39;, type: &#39;boolean&#39; },
+        { name: &#39;typeOfInactiveStatusId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;positivePayTypeOfUploadFileId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;positivePayTransmitterInfo&#39;, type: &#39;string&#39; },
+        { name: &#39;pettyCashAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;isachEnabled&#39;, type: &#39;boolean&#39; },
+        { name: &#39;achDestinationCode&#39;, type: &#39;string&#39; },
+        { name: &#39;achDestinationName&#39;, type: &#39;string&#39; },
+        { name: &#39;achOriginCode&#39;, type: &#39;string&#39; },
+        { name: &#39;achOriginName&#39;, type: &#39;string&#39; },
+        { name: &#39;batchId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;ccFullAccountNO&#39;, type: &#39;string&#39; },
+        { name: &#39;ccFootNote&#39;, type: &#39;string&#39; },
+        { name: &#39;typeOfBankAccount&#39;, type: &#39;string&#39; },
+        { name: &#39;ledgerAccount&#39;, type: &#39;string&#39; },
+        { name: &#39;job&#39;, type: &#39;string&#39; },
+        { name: &#39;typeofCheckStock&#39;, type: &#39;string&#39; },
+        { name: &#39;clearingAccount&#39;, type: &#39;string&#39; },
+        { name: &#39;clearingJob&#39;, type: &#39;string&#39; },
+        { name: &#39;typeOfUploadFile&#39;, type: &#39;string&#39; },
+        { name: &#39;vendor&#39;, type: &#39;string&#39; },
+        { name: &#39;controllingBankAccounts&#39;, type: &#39;string&#39; },
+        { name: &#39;typeOfInactiveStatus&#39;, type: &#39;string&#39; },
+        { name: &#39;positivePayTypeOfUploadFile&#39;, type: &#39;string&#39; },
+        { name: &#39;pettyCashAccount&#39;, type: &#39;string&#39; },
+        { name: &#39;batch&#39;, type: &#39;string&#39; },
+        {
+            name: &#39;address&#39;,
+            reference: {
+                parent: &#39;address.AddressModel&#39;
+            }
+        }
+        //,
+        //{
+        //    name: &#39;bankAccountPaymentRange&#39;,
+        //    reference: {
+        //        parent: &#39;banking.BankCheckRangesModel&#39;
+        //    }
+        //}
+    ]
+});
+</pre>
+</body>
+</html>

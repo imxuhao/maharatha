@@ -37,7 +37,9 @@ Ext.define(&#39;Chaching.store.utilities.ProjectStatusStore&#39;, {
             return record.get(&#39;value&#39;);
         }
     }],
-<span id='Chaching-store-utilities-ProjectStatusStore-property-proxy'>    proxy: {
+<span id='Chaching-store-utilities-ProjectStatusStore-property-remoteSort'>    remoteSort: false,
+</span><span id='Chaching-store-utilities-ProjectStatusStore-property-remoteFilter'>    remoteFilter : false,
+</span><span id='Chaching-store-utilities-ProjectStatusStore-property-proxy'>    proxy: {
 </span>        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         type: &#39;chachingProxy&#39;,
         url: abp.appPath + &#39;api/services/app/jobUnit/GetProjectStatusList&#39;,

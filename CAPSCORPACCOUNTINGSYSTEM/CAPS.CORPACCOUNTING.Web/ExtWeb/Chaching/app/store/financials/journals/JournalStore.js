@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.financials.journals.JournalStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Journal Entry Header.
+ */
+Ext.define('Chaching.store.financials.journals.JournalStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.financials.journals.JournalModel',
     proxy: {

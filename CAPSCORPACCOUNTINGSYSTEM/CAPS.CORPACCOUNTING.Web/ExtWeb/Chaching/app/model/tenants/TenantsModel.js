@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Tenants/Company.
+ */
 Ext.define('Chaching.model.tenants.TenantsModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

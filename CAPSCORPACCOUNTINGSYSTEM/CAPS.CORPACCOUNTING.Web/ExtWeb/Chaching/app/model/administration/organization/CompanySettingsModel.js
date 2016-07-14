@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.administration.organization.CompanySettingsModel', {
+﻿/**
+ * CompanySettings model used represent settings company/tenant wize.
+ */
+Ext.define('Chaching.model.administration.organization.CompanySettingsModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: ''

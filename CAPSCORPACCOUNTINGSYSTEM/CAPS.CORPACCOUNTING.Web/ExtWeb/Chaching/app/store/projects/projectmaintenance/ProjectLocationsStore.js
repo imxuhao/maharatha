@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.projects.projectmaintenance.ProjectLocationsStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Job/Project Locations.
+ */
+Ext.define('Chaching.store.projects.projectmaintenance.ProjectLocationsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.Jobcasting.JobLocationsModel',
     proxy: {

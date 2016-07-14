@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-store-base-TransactionDetailsStore'>/**
+</span> * Base DataStore for all common functionality involved in distribution lines entities.
+ */
+Ext.define(&#39;Chaching.store.base.TransactionDetailsStore&#39;, {
+    extend: &#39;Chaching.store.base.BaseStore&#39;,
+<span id='Chaching-store-base-TransactionDetailsStore-property-autoLoad'><span id='Chaching-store-base-TransactionDetailsStore-property-pageSize'>    pageSize: 50,//Number.MAX_SAFE_INTEGER, // items per page
+</span></span>    autoLoad: false,
+<span id='Chaching-store-base-TransactionDetailsStore-property-remoteSort'>    remoteSort: false,
+</span><span id='Chaching-store-base-TransactionDetailsStore-property-remoteFilter'>    remoteFilter: false,
+</span><span id='Chaching-store-base-TransactionDetailsStore-property-idPropertyField'>    idPropertyField:&#39;accountingItemId&#39;,
+</span><span id='Chaching-store-base-TransactionDetailsStore-property-listeners'>    listeners: {
+</span>        beforeload: function (store, operation, eOpts) {
+            if (store.isLoading()) return false;
+            // do not hit the server if no param (transactionId) exists
+            //if (operation.getProxy().getExtraParams() &amp;&amp; operation.getProxy().getExtraParams().accountingDocumentId &gt; 0)
+            //    return true;
+            //else
+            //    return false;
+        },
+        load:function(me, records, successful, eOpts) {
+            if (!successful) return;
+            me.loadDefaultRecords();
+        }
+    },
+<span id='Chaching-store-base-TransactionDetailsStore-method-loadDefaultRecords'>    loadDefaultRecords: function (remainingCount) {
+</span>        var store = this;
+        if (!remainingCount) {
+            var idealCount = 15, actualCount = store.getCount();
+            remainingCount = idealCount - actualCount;
+        }
+        var modelClass = store.getModel(),
+            className = modelClass.$className;
+        for (var i = 0; i &lt; remainingCount; i++) {
+            var record = Ext.create(className);
+            record.set(&#39;organizationUnitId&#39;, Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId);
+            record.commit();
+            store.add(record);
+            //store.add({ jobId: null, accountingItemId :0}); //AP, JE, PR, PC, CC, PO
+        }
+    }
+});</pre>
+</body>
+</html>

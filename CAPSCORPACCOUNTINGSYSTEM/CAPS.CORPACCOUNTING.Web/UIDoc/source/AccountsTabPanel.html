@@ -15,25 +15,25 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The class is created to as host for accounts submenu items
+ * Author: Krishna Garad
+ * Date: 28/04/2016
+ */
+<span id='Chaching-view-financials-AccountsTabPanel'>/**
+</span> * @class Chaching.view.financials.AccountsTabPanel
+ * Host for accounts subMenuItems
+ * @alias financials.accounts
+ */
 Ext.define(&#39;Chaching.view.financials.AccountsTabPanel&#39;, {
     extend: &#39;Chaching.view.common.tab.ChachingTabPanel&#39;,
-
-    requires: [
-        &#39;Chaching.view.financials.AccountsTabPanelController&#39;,
-        &#39;Chaching.view.financials.AccountsTabPanelModel&#39;
-    ],
     xtype:&#39;financials.accounts&#39;,
-    controller: &#39;financials-accountstabpanel&#39;,
-    viewModel: {
-        type: &#39;financials-accountstabpanel&#39;
+<span id='Chaching-view-financials-AccountsTabPanel-property-name'>    name: &#39;Financials.Accounts&#39;,
+</span><span id='Chaching-view-financials-AccountsTabPanel-property-modulePermissions'>    modulePermissions: {
+</span>        read: abp.auth.isGranted(&#39;Pages.Financials.Accounts&#39;)
     },
-    name: &#39;Financials.Accounts&#39;,
-    modulePermissions: {
-        read: abp.auth.isGranted(&#39;Pages.Financials.Accounts&#39;)
-    },
-    staticTabItems: null
-});
+<span id='Chaching-view-financials-AccountsTabPanel-property-staticTabItems'>    staticTabItems: null
+</span>});
 </pre>
 </body>
 </html>

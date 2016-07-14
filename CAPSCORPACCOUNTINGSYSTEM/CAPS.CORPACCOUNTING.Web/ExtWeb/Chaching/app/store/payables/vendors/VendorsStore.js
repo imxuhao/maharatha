@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.payables.vendors.VendorsStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Vendors.
+ */
+Ext.define('Chaching.store.payables.vendors.VendorsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.payables.vendors.VendorsModel',
     proxy: {

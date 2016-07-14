@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.purchaseorders.entry.PurchaseOrderStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Purchase Order Header.
+ */
+Ext.define('Chaching.store.purchaseorders.entry.PurchaseOrderStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.purchaseorders.entry.PurchaseOrderModel',
     proxy: {

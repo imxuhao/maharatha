@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.address.AddressModel', {
+﻿/**
+ * Address model used by vendors,banks,companies.
+ */
+Ext.define('Chaching.model.address.AddressModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: 'Address'
@@ -30,6 +33,5 @@
         { name: 'tenantId', type: "int" },
         { name: 'organizationUnitId', type: "int" }
 
-    ]//,
-    //belongsTo: 'Chaching.model.payables.vendors.VendorsModel'
+    ]
 });

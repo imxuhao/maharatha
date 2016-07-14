@@ -15,14 +15,17 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.manageView.ManageViewStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-manageView-ManageViewStore'>/**
+</span> * DataStore to perform CRUD operation on User View Settings.
+ */
+Ext.define(&#39;Chaching.store.manageView.ManageViewStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.manageView.ManageViewModel&#39;,
-    autoLoad: false,
-    storeId: &#39;manageView.ManageViewStore&#39;,
-    pageSize:1000,
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-manageView-ManageViewStore-property-model'>    model: &#39;Chaching.model.manageView.ManageViewModel&#39;,
+</span><span id='Chaching-store-manageView-ManageViewStore-property-autoLoad'>    autoLoad: false,
+</span><span id='Chaching-store-manageView-ManageViewStore-property-storeId'>    storeId: &#39;manageView.ManageViewStore&#39;,
+</span><span id='Chaching-store-manageView-ManageViewStore-property-pageSize'>    pageSize:1000,
+</span><span id='Chaching-store-manageView-ManageViewStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         api: {
             read: abp.appPath + &#39;api/services/app/userViewSettingsUnit/GetUserViewSettingsUnitsByUserId&#39;,
@@ -31,7 +34,7 @@
             destroy: abp.appPath + &#39;api/services/app/userViewSettingsUnit/DeleteUserViewSettingsUnit&#39;
         }
     },
-    idPropertyField: &#39;userViewId&#39;//important to set for add/update of records
-});</pre>
+<span id='Chaching-store-manageView-ManageViewStore-property-idPropertyField'>    idPropertyField: &#39;userViewId&#39;//important to set for add/update of records
+</span>});</pre>
 </body>
 </html>

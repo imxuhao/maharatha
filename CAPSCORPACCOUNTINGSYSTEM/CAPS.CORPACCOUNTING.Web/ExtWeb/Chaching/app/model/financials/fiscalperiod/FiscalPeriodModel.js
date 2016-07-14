@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.financials.fiscalperiod.FiscalPeriodModel', {
+﻿/**
+ * DataModel to represent entity schema for Fiscal Periods.
+ */
+Ext.define('Chaching.model.financials.fiscalperiod.FiscalPeriodModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: ''

@@ -27,79 +27,226 @@ Ext.define(&#39;Chaching.view.tenants.TenantsForm&#39;,{
     name: &#39;Tenants&#39;,
     openInPopupWindow: true,
     hideDefaultButtons: false,
-    layout: &#39;vbox&#39;,
+
+    scrollable: true,
+    border: false,
+    showFormTitle: false,
+    displayDefaultButtonsCenter: true,
     defaults: {
         bodyStyle: { &#39;background-color&#39;: &#39;trasparent&#39; },
-        labelAlign: &#39;top&#39;,
+      //  labelAlign: &#39;top&#39;,
         blankText: app.localize(&#39;MandatoryToolTipText&#39;)
     },
-    defaultFocus:&#39;textfield#tenancyName&#39;,
+    defaultFocus: &#39;combobox#organizationId&#39;,
     items: [{
-        xtype: &#39;hiddenfield&#39;,
-        name: &#39;id&#39;,
-        value:0
-    }, {
-        xtype: &#39;textfield&#39;,
-        name: &#39;tenancyName&#39;,
-        itemId: &#39;tenancyName&#39;,
-        allowBlank:false,
-        fieldLabel: app.localize(&#39;TenancyName&#39;).initCap(),
-        width: &#39;100%&#39;,
-        ui:&#39;fieldLabelTop&#39;,
-        emptyText: app.localize(&#39;TTenancyCodeName&#39;)
-    }, {
-        xtype: &#39;textfield&#39;,
-        name: &#39;name&#39;,
-        allowBlank: false,
-        fieldLabel: app.localize(&#39;Name&#39;).initCap(),
-        width: &#39;100%&#39;,
-        ui: &#39;fieldLabelTop&#39;,
-        emptyText: app.localize(&#39;TName&#39;)
-    }, {
-        xtype: &#39;textfield&#39;,
-        name: &#39;adminEmailAddress&#39;,
-        fieldLabel: app.localize(&#39;AdminEmailAddress&#39;).initCap(),
-        width: &#39;100%&#39;,
-        allowBlank: false,
-        ui: &#39;fieldLabelTop&#39;,
-        emptyText: app.localize(&#39;TAdminEmailAddress&#39;)
-    }, {
-        xtype: &#39;combobox&#39;,
-        name: &#39;editionId&#39;,
-        fieldLabel: app.localize(&#39;Edition&#39;).initCap(),
-        width: &#39;100%&#39;,
-        ui: &#39;fieldLabelTop&#39;,
-        emptyText: app.localize(&#39;TEdition&#39;),
-        displayField: &#39;editionDisplayName&#39;,
-        valueField: &#39;editionId&#39;,
-        bind: {
-            store: &#39;{editionsForComboBox}&#39;
-        }
-    },{
-        xtype: &#39;checkbox&#39;,
-        boxLabel: app.localize(&#39;ShouldChangePasswordOnNextLogin&#39;),
-        name: &#39;shouldChangePasswordOnNextLogin&#39;,
-        labelAlign: &#39;right&#39;,
-        inputValue: true,
-        checked: true,
-        boxLabelCls: &#39;checkboxLabel&#39;
-    }, {
-        xtype: &#39;checkbox&#39;,
-        boxLabel: app.localize(&#39;SendActivationEmail&#39;),
-        name: &#39;sendActivationEmail&#39;,
-        labelAlign: &#39;right&#39;,
-        inputValue: true,
-        checked: true,
-        boxLabelCls: &#39;checkboxLabel&#39;
-    }, {
-        xtype: &#39;checkbox&#39;,
-        boxLabel: app.localize(&#39;Active&#39;),
-        name: &#39;isActive&#39;,
-        labelAlign: &#39;right&#39;,
-        inputValue: true,
-        checked: true,
-        boxLabelCls: &#39;checkboxLabel&#39;
+        xtype: &#39;tabpanel&#39;,
+        ui: &#39;formTabPanels&#39;,
+        items : [{
+            title: abp.localization.localize(&quot;GeneralInformation&quot;).initCap(),
+            scrollable: true,
+            iconCls: &#39;fa fa-gear&#39;,
+            defaults: {
+                labelWidth: 140
+            },
+            defaultFocus: &#39;combobox#organizationId&#39;,
+            items: [{
+                xtype: &#39;hiddenfield&#39;,
+                name: &#39;id&#39;,
+                value: 0
+            },
+            {
+                xtype: &#39;combobox&#39;,
+                name: &#39;organizationUnitId&#39;,
+                itemId : &#39;organizationId&#39;,
+                fieldLabel: app.localize(&#39;Organization&#39;).initCap(),
+                width: &#39;100%&#39;,
+                ui: &#39;fieldLabelTop&#39;,
+                emptyText: app.localize(&#39;SelectOption&#39;),
+                queryMode: &#39;local&#39;,
+                displayField: &#39;name&#39;,
+                valueField: &#39;value&#39;,
+                allowBlank: false,
+               // forceSelection : true,
+                store: Ext.create(&#39;Chaching.store.administration.organization.OrganizationListStore&#39;),
+                listeners: {
+                    select : &#39;onOrganizationSelect&#39;
+                }
+            },
+            {
+                xtype: &#39;textfield&#39;,
+                name: &#39;tenancyName&#39;,
+                itemId: &#39;tenancyName&#39;,
+                allowBlank: false,
+                fieldLabel: app.localize(&#39;TenancyName&#39;).initCap(),
+                width: &#39;100%&#39;,
+                ui: &#39;fieldLabelTop&#39;,
+                emptyText: app.localize(&#39;TTenancyCodeName&#39;),
+                listeners: {
+                    change : &#39;onTenancyNameEnter&#39;
+                }
+            }, {
+                xtype: &#39;textfield&#39;,
+                name: &#39;name&#39;,
+                allowBlank: false,
+                fieldLabel: app.localize(&#39;Name&#39;).initCap(),
+                width: &#39;100%&#39;,
+                ui: &#39;fieldLabelTop&#39;,
+                emptyText: app.localize(&#39;TName&#39;)
+            }
+            ,
+
+            //{
+            //    xtype: &#39;checkbox&#39;,
+            //    boxLabel: app.localize(&#39;UseHostDatabase&#39;),
+            //    name: &#39;isUseHostDatabase&#39;,
+            //    reference: &#39;isUseHostDatabase&#39;,
+            //    labelAlign: &#39;right&#39;,
+            //    inputValue: true,
+            //    checked: true,
+            //    boxLabelCls: &#39;checkboxLabel&#39;
+            //}, {
+            //    xtype: &#39;textfield&#39;,
+            //    name: &#39;connectionString&#39;,
+            //    fieldLabel: app.localize(&#39;ConnectionString&#39;).initCap(),
+            //    width: &#39;100%&#39;,
+            //    ui: &#39;fieldLabelTop&#39;,
+            //    bind: {
+            //        hidden: &#39;{isUseHostDatabase.checked}&#39;
+            //    },
+            //    emptyText: app.localize(&#39;DatabaseConnectionString&#39;)
+            //},
+
+            {
+                xtype: &#39;textfield&#39;,
+                name: &#39;adminEmailAddress&#39;,
+                fieldLabel: app.localize(&#39;AdminEmailAddress&#39;).initCap(),
+                width: &#39;100%&#39;,
+                allowBlank: false,
+                ui: &#39;fieldLabelTop&#39;,
+                emptyText: app.localize(&#39;TAdminEmailAddress&#39;)
+            }, {
+                xtype: &#39;checkbox&#39;,
+                boxLabel: app.localize(&#39;SetRandomPassword&#39;),
+                name: &#39;isSetRandomPassword&#39;,
+                reference: &#39;isSetRandomPassword&#39;,
+                labelAlign: &#39;right&#39;,
+                inputValue: true,
+                checked: true,
+                boxLabelCls: &#39;checkboxLabel&#39;
+            }, {
+                xtype: &#39;textfield&#39;,
+                name: &#39;adminPassword&#39;,
+                fieldLabel: app.localize(&#39;AdminPassword&#39;).initCap(),
+                width: &#39;100%&#39;,
+                // allowBlank: false,
+                ui: &#39;fieldLabelTop&#39;,
+                inputType: &#39;password&#39;,
+                bind: {
+                    hidden: &#39;{isSetRandomPassword.checked}&#39;
+                },
+                emptyText: app.localize(&#39;AdminPassword&#39;)
+            }, {
+                xtype: &#39;textfield&#39;,
+                name: &#39;adminPasswordRepeat&#39;,
+                submitValue: false,
+                fieldLabel: app.localize(&#39;AdminPasswordRepeat&#39;).initCap(),
+                width: &#39;100%&#39;,
+                // allowBlank: false,
+                ui: &#39;fieldLabelTop&#39;,
+                inputType: &#39;password&#39;,
+                bind: {
+                    hidden: &#39;{isSetRandomPassword.checked}&#39;
+                },
+                emptyText: app.localize(&#39;AdminPasswordRepeat&#39;),
+                /*
+                * Custom validator implementation - checks that the value matches what was entered into
+                * the password1 field.
+                */
+                validator: function (value) {
+                    var password1 = this.previousSibling(&#39;[name=adminPassword]&#39;);
+                    return (value === password1.getValue()) ? true : &#39;Passwords do not match.&#39;
+                }
+            }, {
+                xtype: &#39;combobox&#39;,
+                name: &#39;editionId&#39;,
+                fieldLabel: app.localize(&#39;Edition&#39;).initCap(),
+                width: &#39;100%&#39;,
+                ui: &#39;fieldLabelTop&#39;,
+                emptyText: app.localize(&#39;TEdition&#39;),
+                displayField: &#39;editionDisplayName&#39;,
+                valueField: &#39;editionId&#39;,
+                queryMode : &#39;local&#39;,
+                bind: {
+                    store: &#39;{editionsForComboBox}&#39;
+                }
+            }, {
+                xtype: &#39;checkbox&#39;,
+                boxLabel: app.localize(&#39;ShouldChangePasswordOnNextLogin&#39;),
+                name: &#39;shouldChangePasswordOnNextLogin&#39;,
+                labelAlign: &#39;right&#39;,
+                inputValue: true,
+                checked: true,
+                boxLabelCls: &#39;checkboxLabel&#39;
+            }, {
+                xtype: &#39;checkbox&#39;,
+                boxLabel: app.localize(&#39;SendActivationEmail&#39;),
+                name: &#39;sendActivationEmail&#39;,
+                labelAlign: &#39;right&#39;,
+                inputValue: true,
+                checked: true,
+                boxLabelCls: &#39;checkboxLabel&#39;
+            }, {
+                xtype: &#39;checkbox&#39;,
+                boxLabel: app.localize(&#39;Active&#39;),
+                name: &#39;isActive&#39;,
+                labelAlign: &#39;right&#39;,
+                inputValue: true,
+                checked: true,
+                boxLabelCls: &#39;checkboxLabel&#39;
+            }]
+        }, {
+            title: abp.localization.localize(&quot;CopyFromTenants&quot;),
+            iconCls: &#39;fa fa-gear&#39;,
+            disabled : true,
+            xtype: &#39;grid&#39;,
+            cls: &#39;chaching-grid&#39;,
+            itemId : &#39;moduleListGridItemId&#39;,
+            height: 400,
+            scrollable: true,
+            selType: &#39;checkboxmodel&#39;,
+            columns: [
+               { text: &#39;Module Name&#39;, dataIndex: &#39;name&#39;, flex : 1 }
+            ],
+            dockedItems : [{
+                xtype : &#39;toolbar&#39;,
+                dock : &#39;top&#39;,
+                items : [&#39;-&gt;&#39;, {
+                    xtype: &#39;combobox&#39;,
+                    itemId : &#39;tenantItemId&#39;,
+                    valueField : &#39;tenantId&#39;,
+                    displayField : &#39;tenantName&#39;,
+                    fieldLabel: app.localize(&#39;OrganizationTenants&#39;),
+                    submitValue : false,
+                    width: &#39;100%&#39;,
+                    ui: &#39;fieldLabelTop&#39;,
+                    queryMode: &#39;local&#39;,
+                    forceSelection : true,
+                    emptyText: app.localize(&#39;SelectOrganizationTenant&#39;),
+                    store: Ext.create(&#39;Chaching.store.administration.organization.TenantListStore&#39;),
+                    listeners: {
+                        select: &#39;onTenantSelect&#39;
+                    }
+
+                }]
+            }],
+            store: {
+                fields: [&#39;name&#39;],
+                data : []
+            }
+        }]
     }]
+
+    
     
 });
 </pre>

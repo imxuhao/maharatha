@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.utilities.autofill.CustomerModel', {
+﻿/**
+ * DataModel to represent entity schema for Autofill Customers.
+ */
+Ext.define('Chaching.model.utilities.autofill.CustomerModel', {
     extend: 'Ext.data.Model',
     fields: [
         { name: 'name', hidden: true, width: '8%' },

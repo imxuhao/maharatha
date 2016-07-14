@@ -40,8 +40,12 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsGridController
             var budgetFormatFieldStore = form.findField(&#39;chartOfAccountId&#39;).getStore();
             budgetFormatFieldStore.load();
           
-            var rollUpAccountsStore = viewModel.getStore(&#39;genericRollupAccountList&#39;);
-            rollUpAccountsStore.load();
+            //var rollUpAccountsStore = viewModel.getStore(&#39;genericRollupAccountList&#39;);
+            //rollUpAccountsStore.load();
+
+            var rollupAccountCombo = form.findField(&#39;rollupAccountId&#39;);
+            var rollupAccountStore = rollupAccountCombo.getStore();
+            rollupAccountStore.load();
 
             var rollUpJobStore = form.findField(&#39;rollupJobId&#39;).getStore();
             rollUpJobStore.load();
@@ -73,49 +77,21 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsGridController
                 var lineNumberTab = formPanel.down(&#39;*[itemId=LineNumbersTab]&#39;);
                 if (lineNumberTab) lineNumberTab.setDisabled(false);
 
-                var customerStore = form.findField(&#39;agencyId&#39;).getStore();//viewModel.getStore(&#39;getCustomersList&#39;);
-                customerStore.load();
-
+                //var customerStore = form.findField(&#39;agencyId&#39;).getStore();//viewModel.getStore(&#39;getCustomersList&#39;);
+                //customerStore.load();
+               
                 var directorsStore = form.findField(&#39;directorEmployeeId&#39;).getStore();
-                var filters = [
-                    {
-                        entity: &#39;Employee&#39;,
-                        searchTerm: true,
-                        comparator: 1,
-                        dataType: 3,
-                        property: &#39;isDirector&#39;,
-                        value: true
-                    }
-                ];
-                directorsStore.filter(filters);
+                directorsStore.getProxy().setExtraParam(&#39;property&#39;, &#39;isDirector&#39;);
+                
                 directorsStore.load();
 
                 var producersStore = form.findField(&#39;executiveProducerId&#39;).getStore();//viewModel.getStore(&#39;getProducersList&#39;);
-                filters = [
-                    {
-                        entity: &#39;Employee&#39;,
-                        searchTerm: true,
-                        comparator: 1,
-                        dataType: 3,
-                        property: &#39;isProducer&#39;,
-                        value: true
-                    }
-                ];
-                producersStore.filter(filters);
+                producersStore.getProxy().setExtraParam(&#39;property&#39;, &#39;isProducer&#39;);
+                
                 producersStore.load();
 
                 var dirOfPhotStore = form.findField(&#39;dirOfPhotoEmployeeId&#39;).getStore();
-                filters = [
-                   {
-                       entity: &#39;Employee&#39;,
-                       searchTerm: true,
-                       comparator: 1,
-                       dataType: 3,
-                       property: &#39;isDirPhoto&#39;,
-                       value: true
-                   }
-                ];
-                dirOfPhotStore.filter(filters);
+                dirOfPhotStore.getProxy().setExtraParam(&#39;property&#39;, &#39;isDirPhoto&#39;);
                 dirOfPhotStore.load();
 
                 var jobAccountGridStore = formPanel.down(&#39;gridpanel[itemId=jobAccountsGridPanel]&#39;).getStore();

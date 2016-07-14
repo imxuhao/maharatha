@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-components-plugins-Clipboard'>/**
+</span> * This {@link Ext.grid.Panel grid} plugin adds clipboard support to a grid.
+ *
+ * *Note that the grid must use the {@link Ext.grid.selection.SpreadsheetModel spreadsheet selection model} to utilize this plugin.*
+ *
+ * This class supports the following `{@link Ext.plugin.AbstractClipboard#formats formats}`
+ * for grid data:
+ *
+ *  * `cell` - Complete field data that can be matched to other grids using the same
+ *    {@link Ext.data.Model model} regardless of column order.
+ *  * `text` - Cell content stripped of HTML tags.
+ *  * `html` - Complete cell content, including any rendered HTML tags.
+ *  * `raw` - Underlying field values based on `dataIndex`.
+ *
+ * The `cell` format is not valid for the `{@link Ext.plugin.AbstractClipboard#system system}`
+ * clipboard format.
+ */
+Ext.define(&#39;Chaching.components.plugins.Clipboard&#39;, {
+    extend: &#39;Ext.grid.plugin.Clipboard&#39;,
+
+    alias: &#39;plugin.chachingClipboard&#39;,
+<span id='Chaching-components-plugins-Clipboard-property-noofRequestsFired'>    noofRequestsFired:0,
+</span><span id='Chaching-components-plugins-Clipboard-method-getCellData'>    getCellData: function (format, erase) {
+</span>        var cmp = this.getCmp(),
+            selModel = cmp.getSelectionModel(),
+            ret = [],
+            isRaw = format === &#39;raw&#39;,
+            isText = format === &#39;text&#39;,
+            viewNode,
+            cell, data, dataIndex, lastRecord, column, record, row, view;
+
+        selModel.getSelected().eachCell(function (cellContext) {
+            column = cellContext.column,
+            view = cellContext.column.getView();
+            record = cellContext.record;
+
+            // Do not copy the check column or row numberer column
+            if (column.ignoreExport) {
+                return;
+            }
+
+            if (lastRecord !== record) {
+                lastRecord = record;
+                ret.push(row = []);
+            }
+
+            dataIndex = column.dataIndex;
+
+            if (isRaw) {
+                data = record.data[dataIndex];
+            } else {
+                // Try to access the view node.
+                viewNode = view.all.item(cellContext.rowIdx);
+                // If we could not, it&#39;s because it&#39;s outside of the rendered block - recreate it.
+                if (!viewNode) {
+                    viewNode = Ext.fly(view.createRowElement(record, cellContext.rowIdx));
+                }
+                cell = viewNode.down(column.getCellInnerSelector());
+                data = cell.dom.innerHTML;
+                if (isText) {
+                    data = Ext.util.Format.stripTags(data);
+                    //if is empty cell do not copy space html chars &amp;nbsp
+                    if (!record.get(dataIndex)) {
+                        data = &quot;&quot;;
+                    }
+                    if (dataIndex===&quot;amount&quot;) {
+                        data = Chaching.utilities.ChachingRenderers.unformattedNumber(data);
+                    }
+                }
+            }
+
+            row.push(data);
+
+            if (erase &amp;&amp; dataIndex) {
+                record.set(dataIndex, null);
+            }
+        });
+
+        return Ext.util.TSV.encode(ret);
+    },
+<span id='Chaching-components-plugins-Clipboard-method-putCellData'>    putCellData: function (data, format) {
+</span>        var values = Ext.util.TSV.decode(data),
+            row,
+            recCount = values.length,
+            colCount = recCount ? values[0].length : 0,
+            sourceRowIdx,
+            sourceColIdx,
+            grid=this.getCmp(),
+            view = grid.getView(),
+            maxRowIdx = view.dataSource.getCount() - 1,
+            visibleColumns = view.getVisibleColumnManager().getColumns(),
+            maxColIdx = visibleColumns.length - 1,
+            navModel = view.getNavigationModel(),
+            destination = navModel.getPosition(),
+            dataIndex,
+            destinationStartColumn,
+            dataObject = {},
+            me = this,
+            cols = [];
+        grid.mask(&#39;Please wait!... While we are validating your inputs.&#39;);
+        if (recCount &amp;&amp; colCount) {
+            if (colCount &gt; 1) {
+                var startFrom = destination.colIdx;
+                cols.push(visibleColumns[startFrom]);
+                for (var i = startFrom; i &lt; maxColIdx; i++) {
+                    if (i &lt;= colCount)
+                        cols.push(visibleColumns[i + 1]);
+                    else
+                        break;
+                }
+            } else {
+                cols.push(destination.column);
+            }
+        }
+        var promise = me.loadRequiredDataForKeyValuePairColumns(cols, values);
+        var runner = new Ext.util.TaskRunner(),
+            task = undefined;
+
+        task = runner.newTask({
+            run: function () {
+                if (promise &amp;&amp; promise.owner.completed) {
+                    task.stop();
+                    grid.unmask();
+                    me.noofRequestsFired = 0;
+                    if (promise.owner.completionAction === &quot;fulfill&quot;||promise.owner.completionAction === &quot;reject&quot;) {
+                        // If the view is not focused, use the first cell of the selection as the destination.
+                        if (!destination) {
+                            view.getSelectionModel().getSelected().eachCell(function (c) {
+                                destination = c;
+                                return false;
+                            });
+                        }
+
+                        if (destination) {
+                            // Create a new Context based upon the outermost View.
+                            // NavigationModel works on local views. TODO: remove this step when NavModel is fixed to use outermost view in locked grid.
+                            // At that point, we can use navModel.getPosition()
+                            destination = new Ext.grid.CellContext(view).setPosition(destination.record, destination.column);
+                        } else {
+                            destination = new Ext.grid.CellContext(view).setPosition(0, 0);
+                        }
+                        destinationStartColumn = destination.colIdx;
+
+                        for (sourceRowIdx = 0; sourceRowIdx &lt; recCount; sourceRowIdx++) {
+                            row = values[sourceRowIdx];
+                            var invalidCells = [];
+                            // Collect new values in dataObject
+                            for (sourceColIdx = 0; sourceColIdx &lt; colCount; sourceColIdx++) {
+                                dataIndex = destination.column.dataIndex;
+                                var columnValueField = destination.column.valueField,
+                                    remoteData,
+                                    cell;
+
+                                if (dataIndex) {
+                                    switch (format) {
+                                        // Raw field values
+                                        case &#39;raw&#39;:
+                                            dataObject[dataIndex] = row[sourceColIdx];
+                                            if (columnValueField &amp;&amp; dataObject[dataIndex]) {
+                                                remoteData = me.getValueByText(destination.column.remoteData, dataObject[dataIndex], dataIndex);
+                                                if (remoteData) {
+                                                    dataObject[columnValueField] = remoteData[columnValueField];
+                                                } else {
+                                                    cell = view.getCell(destination.record, destination.column);
+                                                    if (cell) {
+                                                        invalidCells.push({ cell: cell, dataIndex: destination.column.text });
+                                                    }
+                                                }
+                                            }
+                                            break;
+
+                                            // Textual data with HTML tags stripped    
+                                        case &#39;text&#39;:
+                                            dataObject[dataIndex] = row[sourceColIdx];
+                                            if (columnValueField &amp;&amp; dataObject[dataIndex]) {
+                                                remoteData = me.getValueByText(destination.column.remoteData, dataObject[dataIndex], dataIndex);
+                                                if (remoteData) {
+                                                    dataObject[columnValueField] = remoteData[columnValueField];
+                                                } else {
+                                                    cell = view.getCell(destination.record, destination.column);
+                                                    if (cell) {
+                                                        invalidCells.push({ cell: cell, dataIndex: destination.column.text });
+                                                    }
+                                                }
+                                            }
+                                            break;
+
+                                            // innerHTML from the cell inner
+                                        case &#39;html&#39;:
+                                            break;
+                                    }
+                                }
+                                // If we are at the end of the destination row, break the column loop.
+                                if (destination.colIdx === maxColIdx) {
+                                    break;
+                                }
+                                destination.setColumn(destination.colIdx + 1);
+                            }
+
+                            // Update the record in one go.
+                            destination.record.set(dataObject);
+                            if (invalidCells.length &gt; 0) {
+                                for (var c = 0; c &lt; invalidCells.length; c++) {
+                                    me.applyCssOnInvalidCells(invalidCells[c].cell, invalidCells[c].dataIndex);
+                                }
+                            }
+
+                            // If we are at the end of the destination store, break the row loop.
+                            if (destination.rowIdx === maxRowIdx) {
+                                break;
+                            }
+
+                            // Jump to next row in destination
+                            destination.setPosition(destination.rowIdx + 1, destinationStartColumn);
+                        }
+                    } 
+                }
+            },
+            interval: 1000
+        });
+
+        task.start();
+    },
+<span id='Chaching-components-plugins-Clipboard-method-getValueByText'>     getValueByText: function(arr, value, property) {
+</span>        if (!arr)return undefined;
+        for (var i = 0, iLen = arr.length; i &lt; iLen; i++) {
+
+            if (arr[i][property] === value) return arr[i];
+        }
+        return undefined;
+     },
+<span id='Chaching-components-plugins-Clipboard-method-applyCssOnInvalidCells'>     applyCssOnInvalidCells: function (invalidCell, dataIndex) {
+</span>         //remove first if existing classes has been applied. Needs to remove else multiple times cls-class and tooltip will get added
+         invalidCell.removeCls(&quot;x-invalid-cell-value&quot;);
+         invalidCell.removeCls(&quot;x-mandatory-cell-value&quot;);
+         invalidCell.set({ &#39;data-errorqtip&#39;: &#39;&#39; });
+
+         //add again back
+         invalidCell.addCls(&quot;x-invalid-cell-value&quot;);
+         invalidCell.set({ &#39;data-errorqtip&#39;: &#39;Invalid value for &#39; + dataIndex.initCap() });
+     },
+<span id='Chaching-components-plugins-Clipboard-method-loadRequiredDataForKeyValuePairColumns'>    loadRequiredDataForKeyValuePairColumns:function(columns, values) {
+</span>        var deferred = new Ext.Deferred(), me = this;
+        var columnLength = columns.length,
+            rowLength = values.length,
+            entityValueCollection = undefined;
+        if (columns) {
+            for (var i = 0; i &lt; columnLength; i++) {
+                var column = columns[i];
+                if (column.valueField) {
+                    if (!column.entityType)continue;
+                    var nameValueCollection = [];
+                    for (var j = 0; j &lt; rowLength; j++) {
+                        var obj = {
+                            name: values[j].length&gt;1?values[j][i]:values[j][0]
+                        };
+                        if (!me.getValueByText(nameValueCollection, obj.name, &#39;name&#39;) &amp;&amp; obj.name)
+                            nameValueCollection.push(obj);
+                    }
+                    if (nameValueCollection.length &gt; 0) {
+                        entityValueCollection = {
+                            type: column.entityType,
+                            nameValueList: nameValueCollection,
+                            organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId
+                        };
+                        me.fetchData(column, deferred, entityValueCollection);
+                    }
+                }
+            }
+        }
+        if (me.noofRequestsFired &lt;= 0) {
+            deferred.resolve(&#39;{success:true}&#39;);
+        }
+        return deferred.promise;
+    },
+<span id='Chaching-components-plugins-Clipboard-method-fetchData'>    fetchData: function (column, deferred, params) {
+</span>        var me = this;
+        me.noofRequestsFired += 1;
+            
+        Ext.Ajax.request({
+            method: &#39;POST&#39;,
+            headers: {
+                &#39;Accept&#39;: &#39;application/json&#39;
+            },
+            url: abp.appPath + &#39;api/services/app/list/GetListByNames&#39;,
+            jsonData:Ext.encode(params),
+            success: function (response, opts) {
+                me.noofRequestsFired -= 1;
+                var obj = Ext.decode(response.responseText);
+                if (obj &amp;&amp; obj.success) {
+                    var valueField = column.valueField,
+                        displayField = column.dataIndex,
+                        result = obj.result;
+                    if (result.length&gt;0) {
+                        var remoteData = [];
+                        for (var i = 0; i &lt; result.length; i++) {
+                            var rData = {};
+                            rData[valueField] = result[i].value;
+                            rData[displayField] = result[i].name;
+                            remoteData.push(rData);
+                        }
+                        column.remoteData = remoteData;
+                    }
+                }
+                if (me.noofRequestsFired&lt;=0) {
+                    deferred.resolve(&#39;{success:true}&#39;);
+                }
+            },
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+                me.noofRequestsFired -= 1;
+                if (me.noofRequestsFired &lt;= 0) {
+                    deferred.resolve(&#39;{success:true}&#39;);
+                }
+            }
+        });
+    }
+});</pre>
+</body>
+</html>

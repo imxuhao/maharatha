@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.languages.LanguagesDataStore', {
+﻿/**
+ * DataStore to perform Read operation on Languages Data.
+ */
+Ext.define('Chaching.store.languages.LanguagesDataStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.languages.LanguageMainModel',
     proxy: {

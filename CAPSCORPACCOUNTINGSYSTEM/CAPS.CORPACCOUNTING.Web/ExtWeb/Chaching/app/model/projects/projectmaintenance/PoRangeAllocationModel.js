@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Purchase Order range allocation.
+ */
 Ext.define('Chaching.model.projects.projectmaintenance.PoRangeAllocationModel', {
     extend: 'Chaching.model.base.BaseModel',
     

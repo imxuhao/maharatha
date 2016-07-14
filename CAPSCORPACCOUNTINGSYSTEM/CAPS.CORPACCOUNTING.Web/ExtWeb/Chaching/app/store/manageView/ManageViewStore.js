@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.manageView.ManageViewStore', {
+﻿/**
+ * DataStore to perform CRUD operation on User View Settings.
+ */
+Ext.define('Chaching.store.manageView.ManageViewStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.manageView.ManageViewModel',
     autoLoad: false,

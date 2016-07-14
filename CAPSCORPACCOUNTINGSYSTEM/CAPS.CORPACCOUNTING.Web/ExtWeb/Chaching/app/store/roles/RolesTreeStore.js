@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.roles.RolesTreeStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Roles Permissions.
+ */
+Ext.define('Chaching.store.roles.RolesTreeStore', {
     extend: 'Chaching.store.base.BaseTreeStore',
     model: 'Chaching.model.roles.RolePermissionsModel',
    // autoLoad: true,

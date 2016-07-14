@@ -503,7 +503,10 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
 </span>        var me = this,
             items = me.items;
         if (items &amp;&amp; items.length &gt; 0) {
-            var item = items.get(column.dataIndex);
+            var item = undefined;
+            if (column.itemId) {
+                item = items.get(column.itemId);
+            } else item = items.get(column.dataIndex);
             if (item) {
                 mode === &quot;show&quot; ? item.show() : item.hide();
             }
@@ -576,7 +579,6 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
                 cfg.cls = &#39;saki-gms-nofilter&#39;;
                 cfg.height = me.height;
                 if (item.name===&quot;ActionColumn&quot;) {
-                    //debugger;
                     cfg =
                     {
                         xtype: &#39;button&#39;,
@@ -596,15 +598,23 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
             } 
             //if(&#39;component&#39; !== cfg.xtype) {
             Ext.apply(cfg, {
-                itemId: item.itemId ? item.itemId : item.dataIndex || &#39;item&#39; + i
+                itemId: item.itemId ? item.itemId : item.dataIndex || &#39;item&#39; + i,
+                isFilterField: true,
+                emptyText:app.localize(&#39;Search&#39;)
             });
             //}
-
             field = Ext.widget(cfg);
-            if ((field.xtype===&quot;combo&quot;||field.xtype===&quot;combobox&quot;)&amp;&amp;field.queryMode===&quot;local&quot;) {
+            if ((field.xtype === &quot;combo&quot; || field.xtype === &quot;combobox&quot;) &amp;&amp; field.queryMode === &quot;local&quot;) {
                 var fieldStore = field.getStore();
+                if (field.isViewmodelStore) {
+                    var bindName = field.getBind().store.stub.name,
+                        viewModel = me.getViewModel();
+                    fieldStore = viewModel.getStore(bindName);
+                }
                 if (fieldStore &amp;&amp; field.loadStoreOnCreate) {
-                    fieldStore.load();
+                    fieldStore.load(function (records, success) {
+                        field.setStore(fieldStore);
+                    });
                 }
             }
             if (item.hidden) {
@@ -628,7 +638,7 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
      * @private
      * @param {Ext.form.Field} field Field firing the event
      */
-    , onChange: function (field) {
+    , onChange: function(field) {
         var me = this;
 
         // do nothing if not dirty
@@ -647,43 +657,54 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
     , doFieldChange: function (field) {
         var me = this
             , value = field.getSubmitValue()
-            , property = field.getItemId()
+            , property = undefined
             , parse = me.parseOperator
             , filter
         ;
+        if (field.useDisplayFieldToSearch) {
+            property = field.displayField;
+            value = field.getRawValue();
+        } else property = field.getItemId();
 
         filter = parse ? me.parseUserValue(value) : { value: value };
         filter.property = property;
         // Ext 4 compat
-        filter.id = property;
-
+        if (field.isEnum) { // this is used for enum only
+            filter.id = field.searchProperty;
+        } else {
+            filter.id = property;
+        }
+       
+       
         ///*******************Chaching code to convert default filters into expected filter
-        me.customizeFilters(filter, field);
+        if (me.getStore().remoteFilter)
+            me.customizeFilters(filter, field);
         me.setFilter(filter);
         me.updateClearIcon(field);
 
 <span id='Ext-saki-grid-MultiSearch-method-customizeFilters'>    } // eo function doFieldChange
 </span>    , customizeFilters: function (filter, field) {
+        var fieldName = field.getItemId();
         var me = this,
             gridStore = me.getStore(),
             model = gridStore.getModel(),
-            entityName = model.$config.values.searchEntityName,
-            dataField = model.getField(field.getItemId());
-        if (!dataField) {
-            var references = model.references;
-            if (references) {
-                for (var k = 0; k &lt; references.length; k++) {
-                    var associatationModel = model.references[k].reference.getReader().getModel();
-                    if (associatationModel) {
-                        dataField = associatationModel.getField(field.getItemId());
-                    }
-                }
+            entityName = model.$config.values.searchEntityName;
+        var isEnum = field.isEnum;;
+        if ((field.xtype === &quot;combo&quot; || field.xtype === &quot;combobox&quot; || field.xtype === &quot;tagfield&quot; || field.xtype === &quot;chachingcombo&quot; || field.xtype === &quot;chachingcombobox&quot;) &amp;&amp; field.forceSelection) {
+            if (field.xtype === &quot;tagfield&quot;)
+                filter.operator = &quot;in&quot;;
+            else filter.operator = &quot;=&quot;;
+            if (field &amp;&amp; field.searchProperty) {
+                filter.property = field.searchProperty;
+                fieldName = field.searchProperty;
             }
-           
+
         }
-        if ((field.xtype === &quot;combo&quot; || field.xtype === &quot;combobox&quot;) &amp;&amp; field.forceSelection) {
-            filter.operator = &quot;=&quot;;
+        var dataField = model.getField(fieldName);       
+        if (!dataField) {
+            dataField = me.getDataField(model,field);           
         }
+       
         if (filter &amp;&amp; field&amp;&amp;dataField) {
             if (typeof(field.entityName) !== &quot;undefined&quot;) {
                 filter.entity = field.entityName;
@@ -724,7 +745,9 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
                     if (dataField.type === &quot;date&quot;) filter.dataType = 2;
                     else if (dataField.type === &quot;decimal&quot; || dataField.type === &quot;float&quot;) filter.dataType = 5;
                     else if (dataField.type === &quot;number&quot; || dataField.type === &quot;integer&quot; || dataField.type === &quot;int&quot;) filter.dataType = 0;
-                    
+                    if (isEnum) {
+                        filter.dataType = 4;
+                    }
                     if (filter.operator) {
                         switch (filter.operator) {
                             case &quot;&lt;&quot;:
@@ -769,6 +792,21 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
             }
 
         }
+        
+    },
+<span id='Ext-saki-grid-MultiSearch-method-getDataField'>    getDataField: function (model,field) {
+</span>        var dataField = undefined;
+        var references = model.references;
+        if (references) {
+            for (var k = 0; k &lt; references.length; k++) {
+                var associatationModel = model.references[k].reference.getReader().getModel();
+                if (associatationModel) {
+                    dataField = associatationModel.getField(field.getItemId());
+                    return dataField;
+                }
+            }
+        }
+        return dataField;
     }
 
 <span id='Ext-saki-grid-MultiSearch-method-getFilters'>    /**
@@ -847,6 +885,7 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
                 }
                 else {
                     store.removeFilter(filter.property);
+                   // store.filters.removeAtKey(filter.property);
                 }
             }
             else {
@@ -997,7 +1036,7 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
         if (!v) {
             return { value: &#39;&#39; };
         }
-        if (typeof(v)===&#39;number&#39;) {
+        if (typeof (v) === &#39;number&#39; || typeof (v)===&quot;object&quot;) {
             v = v.toString();
         }
         va = v.split(re);
@@ -1267,7 +1306,8 @@ Ext.define(&#39;Ext.saki.grid.MultiSearch&#39;, {
             , field
         ;
         for (i = 0; i &lt; cols.length; i++) {
-            field = me.items.get(cols[i].dataIndex);
+            if (cols[i].itemId) field = me.items.get(cols[i].itemId);
+            else field = me.items.get(cols[i].dataIndex);
             if (field) {
                 me.items.insert(i, field);
             }

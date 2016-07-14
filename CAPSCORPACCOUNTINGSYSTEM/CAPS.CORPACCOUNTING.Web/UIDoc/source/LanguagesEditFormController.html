@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.languages.LanguagesEditFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.languages-languageseditform&#39;,
+    onSaveClicked: function (btn, e, eOpts) {
+        var me = this;
+        switch (btn.name) {
+            case &#39;Previous&#39;:
+                me.onSave(btn, false);
+                break;
+            case &#39;Save&#39;:
+                me.onSave(btn);
+                break;
+            case &#39;SaveNext&#39;:
+                me.onSave(btn, true);
+                break;
+        }
+
+    },
+    onCancelClicked: function (btn, e, eOpts) {
+        var me = this,
+            view = me.getView();
+        if (view) {
+            var window = view.up(&#39;window&#39;);
+            Ext.destroy(window);
+            return;
+        }
+        Ext.destroy(view);
+
+    },
+    onSave: function (btn, IsNext) {
+        var me = this;
+        var formPanel = btn.up(&#39;form&#39;);
+        var id = formPanel.getValues().rowNumber;
+        var grid = me.getView().up().parentGrid;
+        if (!IsNext) {
+            if (id != 0) {
+                var previousRecord = {
+                    sourceName: formPanel.getValues().sourceName,
+                    baseValue: grid.getStore().getAt(id - 1).data.baseValue,
+                    value: grid.getStore().getAt(id - 1).data.targetValue,
+                    key: grid.getStore().getAt(id - 1).data.key,
+                    hiddenKey: grid.getStore().getAt(id - 1).data.key,
+                    targetLanguage: formPanel.getValues().hiddenTargetLanguage,
+                    hiddenTargetLanguage: formPanel.getValues().hiddenTargetLanguage,
+                    rowNumber: formPanel.getValues().rowNumber - 1
+                };
+            }
+            me.getView().up().down(&#39;form&#39;).getForm().setValues(previousRecord);
+            id = formPanel.getValues().rowNumber;
+            if (id == 0) {
+                var previousButton = formPanel.query(&quot;#BtnPrevious&quot;)[0];
+                previousButton.setDisabled(true);
+            }
+            //formPanel.setValues(previousRecord);
+        }
+        else
+        {
+            var record = Ext.encode({
+                &quot;languageName&quot;: formPanel.getValues().hiddenTargetLanguage,
+                &quot;sourceName&quot;: formPanel.getValues().sourceName,
+                &quot;key&quot;: formPanel.getValues().hiddenKey,
+                &quot;value&quot;: formPanel.getValues().value
+            });
+
+            Ext.Ajax.request({
+                url: abp.appPath + &#39;api/services/app/language/UpdateLanguageText&#39;,
+                method: &#39;POST&#39;,
+                headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },
+                jsonData: record,
+                //useDefaultXhrHeader: false,
+                //params: record,
+                success: function (conn, response, options, eOpts) {
+                    me.onSuccessOfSave(conn, response, IsNext);
+                },
+                failure: function (conn, response, options, eOpts) {
+                    var respObj = Ext.JSON.decode(conn.responseText);
+                    Ext.Msg.alert(&quot;Error&quot;, respObj.status.statusMessage);
+                }
+            });
+        }
+
+    },
+    onSuccessOfSave: function (conn, response, IsNext) {
+        var me = this,
+            formPanel = me.getView(),
+            grid = formPanel.up().parentGrid,
+            id = formPanel.getValues().rowNumber;
+        var result = Ext.JSON.decode(conn.responseText);
+        if (result.success) {
+            //Ext.Msg.alert(&#39;Success!&#39;, &#39;Stock was saved.&#39;);
+            if (IsNext) {
+                id=id+1;
+                var nextRecord = {
+                    sourceName: formPanel.getValues().sourceName,
+                    baseValue: grid.getStore().getAt(id).data.baseValue,
+                    value: grid.getStore().getAt(id).data.targetValue,
+                    key: grid.getStore().getAt(id).data.key,
+                    hiddenKey: grid.getStore().getAt(id).data.key,
+                    targetLanguage: formPanel.getValues().hiddenTargetLanguage,
+                    hiddenTargetLanguage: formPanel.getValues().hiddenTargetLanguage,
+                    rowNumber: formPanel.getValues().rowNumber + 1
+                };
+                formPanel.setValues(nextRecord);
+            }
+            else{
+                // Save and Close
+                me.doPostSaveOperations(null, null, result.success);
+                grid.getStore().reload();
+                me.onCancelClicked();
+               
+            }
+
+        } else {
+            Ext.Msg.alert(&#39;Error!&#39;,result.error.message);
+        }
+
+    }
+
+});
+</pre>
+</body>
+</html>

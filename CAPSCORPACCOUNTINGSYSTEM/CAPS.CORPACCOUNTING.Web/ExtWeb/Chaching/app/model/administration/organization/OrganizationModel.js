@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.administration.organization.OrganizationModel', {
+﻿/**
+ * Organization model used to group tenants/companies.
+ */
+Ext.define('Chaching.model.administration.organization.OrganizationModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: 'Organization'

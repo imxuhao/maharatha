@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The class is created to as host for organizations submenu items
+ * Author: Krishna Garad
+ * Date: 28/04/2016
+ */
+<span id='Chaching-view-financials-AccountsTabPanel'>/**
+</span> * @class Chaching.view.financials.AccountsTabPanel
+ * Host for accounts subMenuItems
+ * @alias financials.accounts
+ */
+Ext.define(&#39;Chaching.view.administration.OrganizationTabPanel&#39;, {
+    extend: &#39;Chaching.view.common.tab.ChachingTabPanel&#39;,
+<span id='Chaching-view-financials-AccountsTabPanel-property-modulePermissions'>   // xtype: &#39;organizationUnits&#39;,
+</span>   // name: &#39;Administration.OrganizationUnits&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits&#39;)
+    },
+<span id='Chaching-view-financials-AccountsTabPanel-property-staticTabItems'>    staticTabItems: null
+</span>});
+</pre>
+</body>
+</html>

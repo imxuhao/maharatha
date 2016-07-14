@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.batchposting.batches.BatchesModel', {
+﻿/**
+ * DataModel to represent entity schema for Transaction Batches.
+ */
+Ext.define('Chaching.model.batchposting.batches.BatchesModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: ''

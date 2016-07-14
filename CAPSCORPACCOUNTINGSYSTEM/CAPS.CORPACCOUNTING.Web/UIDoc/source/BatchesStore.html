@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-store-batchposting-batches-BatchesStore'>/**
+</span> * DataStore to perform CRUD operation on Transaction Batches.
+ */
+Ext.define(&#39;Chaching.store.batchposting.batches.BatchesStore&#39;, {
+    extend: &#39;Chaching.store.base.BaseStore&#39;,
+<span id='Chaching-store-batchposting-batches-BatchesStore-property-model'>    model: &#39;Chaching.model.batchposting.batches.BatchesModel&#39;,
+</span><span id='Chaching-store-batchposting-batches-BatchesStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+      
+        api: {
+            create: abp.appPath + &#39;api/services/app/batchUnit/CreateBatchUnit&#39;,
+            read: abp.appPath + &#39;api/services/app/batchUnit/GetBatchUnits&#39;,
+            update: abp.appPath + &#39;api/services/app/batchUnit/UpdateBatchUnit&#39;,
+            destroy: abp.appPath + &#39;api/services/app/batchUnit/DeleteBatchUnitt&#39;
+        }
+    },
+<span id='Chaching-store-batchposting-batches-BatchesStore-property-groupField'><span id='Chaching-store-batchposting-batches-BatchesStore-property-idPropertyField'>    idPropertyField: &#39;batchId&#39;,//important to set for add/update of records
+</span></span>    groupField: &#39;typeOfBatchDummy&#39;,
+<span id='Chaching-store-batchposting-batches-BatchesStore-property-groupHeaderTpl'>    groupHeaderTpl: &#39;{ typeOfBatch }&#39;
+</span> });</pre>
+</body>
+</html>

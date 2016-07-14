@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.financials.accounts.SubAccountsStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Sub-Accounts.
+ */
+Ext.define('Chaching.store.financials.accounts.SubAccountsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.financials.accounts.SubAccountsModel',
     proxy: {

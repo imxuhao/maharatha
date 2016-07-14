@@ -110,13 +110,30 @@ Ext.define(&#39;Chaching.components.plugins.RowEditing&#39;, {
                 if (me.lockingPartner) {
                     me.lockingPartner.cancelEdit();
                 }
+                if (context.record.associations) {
+                    var associationInfo = context.record.associations;
+                    for (var associationKey in associationInfo) {
+                        if (associationInfo.hasOwnProperty(associationKey)) {
+                            var association = associationInfo[associationKey];
+                            var associationRecord = record[association.instanceName];
+                            if (associationRecord &amp;&amp; editor.form) {
+                                for (var key in associationRecord.data) {
+                                    if (associationRecord.data.hasOwnProperty(key) &amp;&amp; key !== &quot;id&quot;) {
+                                        context.record.data[key] = associationRecord.data[key];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 editor.startEdit(context.record, context.column, context);
+                
                 //set value and rawValue for combos
                 if (editor.form) {
                     var formFields = editor.form.getFields();
                     for (var i = 0; i &lt; formFields.items.length; i++) {
                         var field = formFields.items[i];
-                        if (field.xtype === &quot;combo&quot; || field.xtype === &quot;combobox&quot;) {
+                        if (field.xtype === &quot;combo&quot; || field.xtype === &quot;combobox&quot; || field.xtype === &quot;chachingcombobox&quot; || field.xtype === &quot;chachingcombo&quot;) {
                             var editorStore = field.getStore();
                             if (editorStore &amp;&amp; !editorStore.isDataLoaded) {
                                 editorStore.field = field;
@@ -140,21 +157,39 @@ Ext.define(&#39;Chaching.components.plugins.RowEditing&#39;, {
         }
         return false;
     },
-<span id='Chaching-components-plugins-RowEditing-method-updateEditingContextRecord'>    updateEditingContextRecord:function(context) {
+<span id='Chaching-components-plugins-RowEditing-method-updateEditingContextRecord'>    updateEditingContextRecord: function (context) {
 </span>        var me = this,
             editor = me.editor,
             form = editor.form,
-            fields = form.getFields();
+            fields = form.getFields(),
+            grid = me.grid,
+            columns = grid.getColumns();
         if (context &amp;&amp; fields) {
             var record = context.record;
-            for (var i = 0; i &lt; fields.items.length; i++) {
-                var field = fields.items[i];
-                if (field.xtype===&quot;combo&quot;||field.xtype===&quot;combobox&quot;) {
+            var fieldItems = fields.items;
+            for (var i = 0; i &lt; fieldItems.length; i++) {
+                var field = fieldItems[i];
+                if (field.xtype === &quot;combo&quot; || field.xtype === &quot;combobox&quot; || field.xtype === &quot;chachingcombobox&quot; || field.xtype === &quot;chachingcombo&quot;) {
                     record.set(field.valueField, field.getValue());
                     record.set(field.displayField, field.getRawValue());
+                } else if (me.isAsscociationModelField(field, columns)) {
+                    record.set(field.name, field.getValue());
+                }
+
+            }
+        }
+    },
+<span id='Chaching-components-plugins-RowEditing-method-isAsscociationModelField'>    isAsscociationModelField: function (field, columns) {
+</span>        if (field &amp;&amp; columns) {
+            var length = columns.length;
+            for (var i = 0; i &lt; length; i++) {
+                var column = columns[i];
+                if ((column.dataIndex === field.name || column.dataIndex === field.itemId) &amp;&amp; column.isAssociationField) {
+                    return true;
                 }
             }
         }
+        return false;
     }
 });</pre>
 </body>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The viewController class for bank set up.
+ * Author: kamal
+ * Date: 28/04/2016
+ */
+<span id='Chaching-view-banking-BankSetupGridController'>/**
+</span> * @class Chaching.view.banking.BankSetupGridController
+ * ViewController class for bank set up.
+ * @alias controller.banking.banksetupgrid
+ */
+Ext.define(&#39;Chaching.view.banking.banksetup.BankSetupGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.banking.banksetupgrid&#39;,
+<span id='Chaching-view-banking-BankSetupGridController-method-doAfterCreateAction'>    doAfterCreateAction: function (createNewMode, formPanel, isEdit, record) {
+</span>        var form = formPanel.getForm();
+        // load accountTypecombo
+        var accountTypeCombo = form.findField(&#39;typeOfBankAccountId&#39;);
+        var accountTypeStore = accountTypeCombo.getStore();
+        accountTypeStore.load();
+        //load check stock combo
+        var checkStockCombo = form.findField(&#39;typeOfCheckStockId&#39;);
+        var checkStockStore = checkStockCombo.getStore();
+        checkStockStore.load();
+        //load upload methods
+        var uploadMethodCombo = form.findField(&#39;typeOfUploadFileId&#39;);
+        var uploadMethodStore = uploadMethodCombo.getStore();
+        uploadMethodStore.load();
+        //load positive pay files
+        var positivePayFileCombo = form.findField(&#39;positivePayTypeOfUploadFileId&#39;);
+        var positivePayFileStore = positivePayFileCombo.getStore();
+        positivePayFileStore.load();
+        // load divisions
+        var divisionCombo = form.findField(&#39;jobId&#39;);
+        var divisionStore = divisionCombo.getStore();
+        divisionStore.load();
+        // load Ledger accounts
+        var ledgerAccountsCombo = form.findField(&#39;accountId&#39;);
+        var ledgerAccountsStore = ledgerAccountsCombo.getStore();
+        ledgerAccountsStore.load();
+
+        if (isEdit) {
+            if (record) {
+                var checkNumberGrid = formPanel.down(&#39;*[itemId=checkNumberGrid]&#39;);
+                if (checkNumberGrid) {
+                    var checkNumberGridStore = checkNumberGrid.getStore();
+                    Ext.apply(checkNumberGridStore.getProxy().extraParams, {
+                        bankAccountId: record.get(&#39;bankAccountId&#39;)
+                    });
+                    checkNumberGridStore.load();
+                }
+            }
+        }
+
+    }
+});
+</pre>
+</body>
+</html>

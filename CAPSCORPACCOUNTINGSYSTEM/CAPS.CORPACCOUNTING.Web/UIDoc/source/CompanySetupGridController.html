@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.administration.organization.CompanySetupGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.administration-organization-companysetupgrid&#39;,
+    doAfterCreateAction: function (createMode, formPanel, isEdit, record) {
+        var form = formPanel.getForm();
+        var membersTab = formPanel.down(&#39;*[itemId=membersTab]&#39;);
+        if (isEdit) {
+            if (record._address)
+            form.findField(&#39;addressId&#39;).setValue(record._address.get(&#39;addressId&#39;));
+            //enable tabs
+            var companyPreferencesTab = formPanel.down(&#39;*[itemId=companyPreferencesTab]&#39;);
+            if (companyPreferencesTab) {
+                companyPreferencesTab.setDisabled(false);
+            }
+            if (membersTab) {
+                membersTab.setDisabled(false);
+            }
+          
+            //default preference settings
+            if(abp.setting.values) {
+                var isAllowDuplicateAPInvoiceNos = abp.setting.get(&quot;Sumit.Org.AllowDuplicateAPinvoiceNos&quot;);
+                var isAllowDuplicateARInvoiceNos = abp.setting.get(&quot;Sumit.Org.AllowDuplicateARinvoiceNos&quot;);
+                var isAllowAccountnumbersStartingwithZero = abp.setting.get(&quot;Sumit.Org.AllowAccountnumbersStartingwithZero&quot;);
+                var allowTransactionsJobWithGL = abp.setting.get(&quot;Sumit.Org.AllowtransactionsactionsJobWithGL&quot;);
+                var isImportPOlogsfromProducersActualUploads = abp.setting.get(&quot;Sumit.Org.ImportPOlogsfromProducersActualuploads&quot;);
+                var buildAPuponCCstatementPosting = abp.setting.get(&quot;Sumit.Org.BuildAPuponCCstatementPosting&quot;);
+                var buildAPuponPayrollPosting = abp.setting.get(&quot;Sumit.Org.BuildAPuponPayrollPosting&quot;);
+                var setDefaultAPTerms = abp.setting.get(&quot;Sumit.Org.SetDefaultAPTerms&quot;);
+                var setDefaultARTerms = abp.setting.get(&quot;Sumit.Org.SetDefaultARTerms&quot;);
+                var depositGracePeriods = abp.setting.get(&quot;Sumit.Org.DepositGracePeriods&quot;);
+                var paymentsGracePeriods = abp.setting.get(&quot;Sumit.Org.PaymentGracePeriods&quot;);
+                var defaultBank = abp.setting.get(&quot;Sumit.Org.DefaultBank&quot;);
+                var arAgingDate = abp.setting.get(&quot;Sumit.Org.ARAgingDate&quot;);
+                var apAgingDate = abp.setting.get(&quot;Sumit.Org.APAgingDate&quot;);
+                var defaultAPPostingDate = abp.setting.get(&quot;Sumit.Org.APpostingDateDefault&quot;);
+                var pOAutoNumberingforProjects = abp.setting.get(&quot;Sumit.Org.POAutoNumberingforProjects&quot;);
+                var pOAutoNumberingforDivisions = abp.setting.get(&quot;Sumit.Org.POAutoNumberingforDivisions&quot;);
+
+
+                if (form.findField(&#39;pOAutoNumberingforProjects&#39;) &amp;&amp; pOAutoNumberingforProjects) {
+                    form.findField(&#39;pOAutoNumberingforProjects&#39;).setValue(pOAutoNumberingforProjects == &quot;False&quot; ? false : true);
+                }
+                if (form.findField(&#39;pOAutoNumberingforDivisions&#39;) &amp;&amp; pOAutoNumberingforDivisions) {
+                    form.findField(&#39;pOAutoNumberingforDivisions&#39;).setValue(pOAutoNumberingforDivisions == &quot;False&quot; ? false : true);
+                }
+
+                if (form.findField(&#39;isAllowDuplicateAPInvoiceNos&#39;) &amp;&amp; isAllowDuplicateAPInvoiceNos) {
+                    form.findField(&#39;isAllowDuplicateAPInvoiceNos&#39;).setValue(isAllowDuplicateAPInvoiceNos == &quot;False&quot; ? false : true);
+                }
+                if (form.findField(&#39;isAllowDuplicateARInvoiceNos&#39;) &amp;&amp; isAllowDuplicateARInvoiceNos) {
+                    form.findField(&#39;isAllowDuplicateARInvoiceNos&#39;).setValue(isAllowDuplicateARInvoiceNos == &quot;False&quot; ? false : true);
+                }
+                if (form.findField(&#39;isAllowAccountnumbersStartingwithZero&#39;) &amp;&amp; isAllowAccountnumbersStartingwithZero) {
+                    form.findField(&#39;isAllowAccountnumbersStartingwithZero&#39;).setValue(isAllowAccountnumbersStartingwithZero == &quot;False&quot; ? false : true);
+                }
+                if (form.findField(&#39;isImportPOlogsfromProducersActualUploads&#39;) &amp;&amp; isImportPOlogsfromProducersActualUploads) {
+                    form.findField(&#39;isImportPOlogsfromProducersActualUploads&#39;).setValue(isImportPOlogsfromProducersActualUploads == &quot;False&quot; ? false : true);
+                }
+                if (form.findField(&#39;buildAPuponCCstatementPosting&#39;) &amp;&amp; buildAPuponCCstatementPosting) {
+                    form.findField(&#39;buildAPuponCCstatementPosting&#39;).setValue(buildAPuponCCstatementPosting == &quot;False&quot; ? false : true);
+                }
+                if (form.findField(&#39;buildAPuponPayrollPosting&#39;) &amp;&amp; buildAPuponPayrollPosting) {
+                    form.findField(&#39;buildAPuponPayrollPosting&#39;).setValue(buildAPuponPayrollPosting == &quot;False&quot; ? false : true);
+                }
+                if (form.findField(&#39;setDefaultAPTerms&#39;) &amp;&amp; setDefaultAPTerms) {
+                    form.findField(&#39;setDefaultAPTerms&#39;).setValue(dSetDefaultAPTerms == null ? &#39;&#39; : SetDefaultAPTerms);
+                }
+                if (form.findField(&#39;setDefaultARTerms&#39;) &amp;&amp; setDefaultARTerms) {
+                    form.findField(&#39;setDefaultARTerms&#39;).setValue(setDefaultARTerms == null ? &#39;&#39; : setDefaultARTerms);
+                }
+                if (form.findField(&#39;depositGracePeriods&#39;) &amp;&amp; depositGracePeriods) {
+                    form.findField(&#39;depositGracePeriods&#39;).setValue(depositGracePeriods == null ? &#39;&#39; : depositGracePeriods);
+                }
+                if (form.findField(&#39;paymentsGracePeriods&#39;) &amp;&amp; paymentsGracePeriods) {
+                    form.findField(&#39;paymentsGracePeriods&#39;).setValue(paymentsGracePeriods == null ? &#39;&#39; : paymentsGracePeriods);
+                }
+                if (form.findField(&#39;defaultBank&#39;) &amp;&amp; defaultBank) {
+                    form.findField(&#39;defaultBank&#39;).setValue(defaultBank == null ? &#39;&#39; : defaultBank);
+                }
+                if (form.findField(&#39;allowTransactionsJobWithGL&#39;) &amp;&amp; allowTransactionsJobWithGL) {
+                    form.findField(&#39;allowTransactionsJobWithGL&#39;).setValue(allowTransactionsJobWithGL == &quot;False&quot; ? false : true);
+                }
+
+                var arAgingDateRadioGroup = formPanel.down(&#39;*[itemId=arAgingDateItemId]&#39;);
+                if (arAgingDateRadioGroup) {
+                    arAgingDateRadioGroup.setValue({arAgingDate: arAgingDate});
+                }
+                
+
+                var aPAgingDateRadioGroup = formPanel.down(&#39;*[itemId=apAgingDateItemId]&#39;);
+                if (aPAgingDateRadioGroup) {
+                    aPAgingDateRadioGroup.setValue({
+                        apAgingDate: apAgingDate
+                    });
+                }
+                var defaultAPPostingDateRadioGroup = formPanel.down(&#39;*[itemId=defaultAPPostingDateItemId]&#39;);
+                if (defaultAPPostingDateRadioGroup) {
+                    defaultAPPostingDateRadioGroup.setValue({
+                        defaultAPPostingDate: defaultAPPostingDate
+                    });
+                }
+                
+            }
+
+            //load users of current organization
+            var usersGridStore = formPanel.down(&#39;gridpanel[itemId=membersTab]&#39;).getStore();
+            var usersGridProxy = usersGridStore.getProxy();
+            usersGridProxy.setExtraParams({&#39;id&#39;: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
+                &#39;sorting&#39;: &#39;name&#39;
+            });
+            usersGridStore.load();
+
+        } else {
+
+        }
+        //load default combo
+        var defaultBankCombo = form.findField(&#39;defaultBank&#39;);
+        defaultBankCombo.getStore().load();
+    }
+});
+</pre>
+</body>
+</html>

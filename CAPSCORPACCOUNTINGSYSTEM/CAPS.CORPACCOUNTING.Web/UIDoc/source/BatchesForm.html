@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.batchposting.batches.BatchesForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [&#39;widget.batchposting.batches.create&#39;, &#39;widget.batchposting.batches.edit&#39;],
+    requires: [
+        &#39;Chaching.view.batchposting.batches.BatchesFormController&#39;
+    ],
+
+    controller: &#39;batchposting-batches-batchesform&#39;,
+    name: &#39;batch&#39;,
+    openInPopupWindow: false,
+    hideDefaultButtons: false,
+    layout: &#39;column&#39;,
+    autoScroll: true,
+    border: false,
+    showFormTitle: true,
+    displayDefaultButtonsCenter: true,
+    titleConfig: {
+        title: abp.localization.localize(&quot;CreatingNewBatch&quot;).initCap()
+    },
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.BatchPosting.Batches&#39;),
+        create: abp.auth.isGranted(&#39;Pages.BatchPosting.Batches.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.BatchPosting.Batches.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.BatchPosting.Batches.Delete&#39;)
+    },
+    //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; },   
+    items: [{
+        xtype: &#39;hiddenfield&#39;,
+        name: &#39;batchId&#39;,
+        value: 0
+    }, {
+        columnWidth: .5,
+        padding: &#39;20 10 0 20&#39;,
+        //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; },
+        defaults: {
+           // labelAlign: &#39;top&#39;,
+            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+        },
+        items: [{
+            xtype: &#39;textfield&#39;,
+            name: &#39;description&#39;,
+            itemId: &#39;batchName&#39;,
+            allowBlank: false,
+            fieldLabel: app.localize(&#39;BatchName&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;MandatoryField&#39;)
+        }, {
+            xtype: &#39;textfield&#39;,
+            name: &#39;batchOwner&#39;,
+            itemId: &#39;batchOwner&#39;,
+            readOnly: true,
+            fieldLabel: app.localize(&#39;BatchOwner&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;
+        }, {
+            xtype: &#39;datefield&#39;,
+            name: &#39;postingDate&#39;,
+            itemId: &#39;postingDate&#39;,
+            fieldLabel: app.localize(&#39;PostingDate&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;ToolTipPostingDate&#39;)
+        }, {
+            xtype: &#39;textfield&#39;,
+            name: &#39;controlTotal&#39;,
+            itemId: &#39;controlTotal&#39;,
+            fieldLabel: app.localize(&#39;ControlTotal&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;ToolTipControlTotal&#39;)
+        }]
+    }, {
+        columnWidth: .5,
+        padding: &#39;20 10 0 20&#39;,
+        //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; },
+        defaults: {
+           // labelAlign: &#39;top&#39;,
+            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+        },
+        items: [ {
+            xtype: &#39;textfield&#39;,
+            name: &#39;batchAmount&#39;,
+            itemId: &#39;batchAmount&#39;,
+            readOnly : true,
+            fieldLabel: app.localize(&#39;BatchAmount&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;
+        }, {
+            xtype: &#39;combobox&#39;,
+            name: &#39;typeOfBatchId&#39;,
+            fieldLabel: app.localize(&#39;Module&#39;).initCap(),
+            width: &#39;100%&#39;,
+            ui: &#39;fieldLabelTop&#39;,
+            emptyText: app.localize(&#39;SelectOption&#39;),
+            displayField: &#39;typeOfBatch&#39;,
+            valueField: &#39;typeOfBatchId&#39;,
+            queryMode : &#39;local&#39;,
+            store: Ext.create(&#39;Chaching.store.utilities.TypeOfBatchStore&#39;),
+        }, {
+            xtype: &#39;checkbox&#39;,
+            boxLabel: app.localize(&#39;RetainBatch&#39;),
+            name: &#39;isRetained&#39;,
+            labelAlign: &#39;right&#39;,
+            inputValue: false,
+            checked: false,
+            boxLabelCls: &#39;checkboxLabel&#39;
+        }, {
+            xtype: &#39;checkbox&#39;,
+            boxLabel: app.localize(&#39;CommunityBatch&#39;),
+            name: &#39;isUniversal&#39;,
+            labelAlign: &#39;right&#39;,
+            inputValue: false,
+            checked: false,
+            boxLabelCls: &#39;checkboxLabel&#39;
+        }, {
+            xtype: &#39;checkbox&#39;,
+            boxLabel: app.localize(&#39;FinalizedtoPost&#39;),
+            name: &#39;isBatchFinalized&#39;,
+            labelAlign: &#39;right&#39;,
+            inputValue: false,
+            checked: false,
+            boxLabelCls: &#39;checkboxLabel&#39;
+        }]
+    }]
+});
+</pre>
+</body>
+</html>

@@ -15,17 +15,20 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.payables.vendors.VendorAliasModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-payables-vendors-VendorAliasModel'>/**
+</span> * DataModel to represent entity schema for Vendor Alias.
+ */
+Ext.define(&#39;Chaching.model.payables.vendors.VendorAliasModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;VendorAlias&#39;
-    }, fields: [
-        { name: &#39;vendorAliasId&#39;, type: &#39;int&#39;,isPrimaryKey:true },
+<span id='Chaching-model-payables-vendors-VendorAliasModel-cfg-searchEntityName'>        searchEntityName: &#39;VendorAlias&#39;
+</span><span id='Chaching-model-payables-vendors-VendorAliasModel-property-fields'>    }, fields: [
+</span>        { name: &#39;vendorAliasId&#39;, type: &#39;int&#39;,isPrimaryKey:true },
         { name: &#39;vendorId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
         { name: &#39;aliasName&#39;, type: &#39;string&#39; },
          //{ name: &#39;vendorId&#39;, reference: &#39;vendors.VendorsModel&#39; }
     ],
-    belongsTo: &#39;payables.vendors.VendorsModel&#39;
-});</pre>
+<span id='Chaching-model-payables-vendors-VendorAliasModel-property-belongsTo'>    belongsTo: &#39;payables.vendors.VendorsModel&#39;
+</span>});</pre>
 </body>
 </html>

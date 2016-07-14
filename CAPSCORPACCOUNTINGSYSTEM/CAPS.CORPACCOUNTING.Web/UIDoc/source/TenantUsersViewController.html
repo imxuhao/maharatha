@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.tenants.TenantUsersViewController&#39;, {
+    extend: &#39;Chaching.view.common.window.ChachingWindowPanelController&#39;,
+    alias: &#39;controller.tenants-tenantusersview&#39;,
+    onLogInThisUserClick: function (btn) {
+        var me = this,
+          view = me.getView(),
+        grid = view.down(&#39;grid&#39;);
+        if (grid) {
+            var selectedUsers = grid.getSelection();
+            if (selectedUsers.length == 1) {
+                Ext.Ajax.request({
+                    url: abp.appPath + &#39;Account/ImpersonateUser&#39;,
+                    jsonData: Ext.encode({ tenantId: view.tenantId, userId: selectedUsers[0].get(&#39;value&#39;) }),
+                    success: function (response) {
+                        var res = Ext.decode(response.responseText);
+                        if (res.success) {
+                            window.location.href = res.targetUrl;
+                        } else {
+                            abp.message.error(res.error.message, &#39;Error&#39;);
+                        }
+                    },
+                    failure: function(response) {
+                        var res = Ext.decode(response.responseText);
+                        Ext.toast(res.error.message);
+                        console.log(response);
+                    }
+                });
+            }
+        }
+    },
+
+    onTenantUsersCancel: function (btn) {
+        var me = this,
+           view = me.getView();
+        Ext.destroy(view);
+    }
+
+});
+</pre>
+</body>
+</html>

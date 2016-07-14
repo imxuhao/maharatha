@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-base-TransactionDetailsModel'>/**
+</span> * DataModel to represent entity schema for Accounting Transaction Distribution.
+ */
+Ext.define(&#39;Chaching.model.base.TransactionDetailsModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+<span id='Chaching-model-base-TransactionDetailsModel-cfg-searchEntityName'>        searchEntityName: &#39;&#39;
+</span>    },
+<span id='Chaching-model-base-TransactionDetailsModel-property-fields'>    fields: [
+</span>        { name: &#39;accountingItemId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+        { name: &#39;accountingDocumentId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;itemLinkId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;itemLink&#39;, type: &#39;string&#39; },
+        { name: &#39;ledgerReference&#39;, type: &#39;string&#39; },
+        { name: &#39;ledgerDate&#39;, type: &#39;date&#39; },
+        { name: &#39;ledgerYyyymm&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;accountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;accountNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;jobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;jobNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;itemMemo&#39;, type: &#39;string&#39; },
+        { name: &#39;isAsset&#39;, type: &#39;boolean&#39; },
+        { name: &#39;accountRef1&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef2&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef3&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef4&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef5&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef6&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef7&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef8&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef9&#39;, type: &#39;string&#39; },
+        { name: &#39;accountRef10&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountId1&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId2&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId3&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId4&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId5&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId6&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId7&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId8&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId9&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountId10&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;subAccountNumber1&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber2&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber3&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber4&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber5&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber6&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber7&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber8&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber9&#39;, type: &#39;string&#39; },
+        { name: &#39;subAccountNumber10&#39;, type: &#39;string&#39; },
+        { name: &#39;typeOf1099T4Id&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;typeOf1099T4&#39;, type: &#39;string&#39; },
+        { name: &#39;amount&#39;, type: &#39;float&#39;, defaultValue: 0.00 },
+        { name: &#39;companyCurrencyAmount&#39;, type: &#39;float&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;currencyAdjustmentAmount&#39;, type: &#39;float&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;originalItemId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;originalItem&#39;, type: &#39;string&#39; },
+        { name: &#39;accountingItemIdLink&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;originalItemaccountingItemLink&#39;, type: &#39;string&#39; },
+        { name: &#39;isChanged&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isActive&#39;, type: &#39;boolean&#39; },
+        { name: &#39;typeOfInactiveStatusId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;typeOfInactiveStatus&#39;, type: &#39;string&#39; },
+        { name: &#39;reconciliationId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;reconciliation&#39;, type: &#39;string&#39; },
+        { name: &#39;accountingItemOrigAmount&#39;, type: &#39;float&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;accountingItemTypeOfModificationId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;accountingItemTypeOfModification&#39;, type: &#39;string&#39; },
+        { name: &#39;splitAccountingItemId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;accountingItemOrig&#39;, type: &#39;string&#39; },
+        { name: &#39;ictJobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;ictJob&#39;, type: &#39;string&#39; },
+        { name: &#39;ictAccountingItemId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;ictAccountingItem&#39;, type: &#39;string&#39; },
+        { name: &#39;taxRebateId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;taxRebateNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;currencyOverrideRate&#39;, type: &#39;float&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;functionalCurrencyAmount&#39;, type: &#39;float&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;typeOfCurrencyRateId&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;typeOfCurrencyRate&#39;, type: &#39;string&#39; },
+        { name: &#39;typeOfCurrencyId&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;typeOfCurrency&#39;, type: &#39;string&#39; },
+        { name: &#39;homeCurAmount&#39;, type: &#39;float&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;customForexRate&#39;, type: &#39;float&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;isAccountingItemSplit&#39;, type: &#39;boolean&#39; },
+        { name: &#39;purchaseOrderItemId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;purchaseOrderItem&#39;, type: &#39;string&#39; },
+         { name: &#39;typeOfTransactionId&#39;, type: &#39;int&#39;, defaultValue: 1 },
+        { name: &#39;typeOfTransaction&#39;, type: &#39;string&#39;, defaultValue: &#39;APInvoice&#39; },
+         { name: &#39;typeOfAmountId&#39;, type: &#39;int&#39;, defaultValue: 1 },
+        { name: &#39;typeOfAmount&#39;, type: &#39;string&#39;, defaultValue: &#39;StandardEntry&#39; },
+        { name: &#39;SplitGroupCls&#39;, type: &#39;string&#39; }//Temporary field for row coloring
+    ]
+});
+</pre>
+</body>
+</html>

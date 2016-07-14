@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for User View Settings.
+ */
 Ext.define('Chaching.model.manageView.ManageViewModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

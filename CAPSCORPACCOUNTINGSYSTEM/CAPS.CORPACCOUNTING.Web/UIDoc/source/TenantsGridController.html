@@ -19,23 +19,63 @@
     extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
     alias: &#39;controller.tenants-tenantsgrid&#39;,
     //TODO convert this function in component(editing) so for every combo we need not to write
-    onEditionChange:function(combo, newValue, oldValue, e) {
-        var grid = combo.up();
-        if (grid) {
-            var context = grid.context,
-                record = context.record;
-            record.set(&#39;editionId&#39;, newValue);
+    //onEditionChange: function (combo, newValue, oldValue, e) {
+    //    var grid = combo.up();
+    //    if (grid) {
+    //        var context = grid.context,
+    //            record = context.record;
+    //        record.set(&#39;editionId&#39;, newValue);
+    //    }
+    //},
+    loginAsThisTenantClick: function (menu, e, eOpts) {
+        var parentMenu = menu.parentMenu,
+          widgetRec = parentMenu.widgetRecord
+       // create tenant user view
+        var tenantUsersView = Ext.widget(&#39;tenantusers&#39;);
+        var tenantUserGrid = tenantUsersView.down(&#39;grid&#39;);
+        //load tenant users
+        if (tenantUserGrid) {
+            tenantUsersView.tenantId = widgetRec.get(&#39;id&#39;);
+           var tenantUsersStore = tenantUserGrid.getStore();
+           var proxy = tenantUsersStore.getProxy();
+           proxy.setExtraParams({ tenantId: widgetRec.get(&#39;id&#39;) });
+           tenantUsersStore.load();
         }
+
     },
-    doAfterCreateAction:function(createMode, formView,isEdit) {
+    doAfterCreateAction: function (createMode, formView, isEdit, record) {
+        var me = this,
+         form = formView.down(&#39;form&#39;).getForm();
+        var copyFromTenantsTab = formView.down(&#39;*[itemId=moduleListGridItemId]&#39;);
         if (formView &amp;&amp; isEdit) {
-            var form = formView.down(&#39;form&#39;).getForm();
             form.findField(&#39;tenancyName&#39;).setReadOnly(true);
+            form.findField(&#39;isUseHostDatabase&#39;).setHidden(true);
+            form.findField(&#39;connectionString&#39;).setHidden(true);
+            form.findField(&#39;isSetRandomPassword&#39;).setHidden(true);
+            form.findField(&#39;adminPassword&#39;).setHidden(true);
+            form.findField(&#39;adminPasswordRepeat&#39;).setHidden(true);
             form.findField(&#39;adminEmailAddress&#39;).setReadOnly(true);
-            var viewModel = formView.down(&#39;form&#39;).getViewModel();
-            var editionStore = viewModel.getStore(&#39;editionsForComboBox&#39;);
-            editionStore.load();
+            form.findField(&#39;organizationUnitId&#39;).setReadOnly(true);
+            form.findField(&#39;adminEmailAddress&#39;).setHidden(true);
+            form.findField(&#39;shouldChangePasswordOnNextLogin&#39;).setHidden(true);
+            form.findField(&#39;sendActivationEmail&#39;).setHidden(true);
+            if (copyFromTenantsTab) {
+                copyFromTenantsTab.setDisabled(true);
+            }
+            if (record.get(&#39;editionId&#39;) == null) {
+                record.set(&#39;editionId&#39;, &quot;null&quot;);
+            }
+        } else {
+            //if (copyFromTenantsTab) {
+            //    copyFromTenantsTab.setDisabled(false);
+            //}
         }
+        var organizationStore = form.findField(&#39;organizationUnitId&#39;).getStore();
+        organizationStore.load();
+        var viewModel = formView.down(&#39;form&#39;).getViewModel();
+        var editionStore = viewModel.getStore(&#39;editionsForComboBox&#39;);
+        editionStore.load();
+       
     }
 });
 </pre>

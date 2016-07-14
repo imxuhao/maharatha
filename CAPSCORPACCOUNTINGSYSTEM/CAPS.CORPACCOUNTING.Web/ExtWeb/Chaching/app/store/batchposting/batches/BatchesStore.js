@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.batchposting.batches.BatchesStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Transaction Batches.
+ */
+Ext.define('Chaching.store.batchposting.batches.BatchesStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.batchposting.batches.BatchesModel',
     proxy: {

@@ -19,23 +19,50 @@
     extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
     alias: &#39;controller.financials-accounts-accountsgrid&#39;,
     doAfterCreateAction: function (createMode, formView, isEdit) {
+        var me = this;
         var viewModel = formView.getViewModel();
         var form = formView.getForm();
-        if (!isEdit) {            
-            form.findField(&quot;chartOfAccountId&quot;).setValue(formView.parentGrid.coaId);
+        var typeOfCurrency = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
+        typeOfCurrency.load();
+        var typeOfCurrencyRate = viewModel.getStore(&#39;typeOfCurrencyRateList&#39;);
+        typeOfCurrencyRate.load();
+        var typeOfAccount = viewModel.getStore(&#39;typeOfAccountList&#39;);
+        typeOfAccount.load();
+        var typeofConsolidation = viewModel.getStore(&#39;typeofConsolidationList&#39;);
+        typeofConsolidation.load();
+
+        if (!isEdit) {
+            if (formView.parentGrid.coaId != undefined) {
+                form.findField(&quot;chartOfAccountId&quot;).setValue(formView.parentGrid.coaId);
+            } else {
+                var chartOfAcountStore = Ext.create(&#39;Chaching.store.financials.accounts.ChartOfAccountStore&#39;);
+                    chartOfAcountStore.load({
+                    scope: this,
+                    callback: function (records, operation, success) {
+                        if (success) {
+                            var res = Ext.decode(operation._response.responseText);
+                            var items = Ext.decode(operation._response.responseText).result.items;
+                            if (items.length &gt; 0) {
+                                formView.parentGrid.coaId = items[0].coaId;
+                                form.findField(&quot;chartOfAccountId&quot;).setValue(formView.parentGrid.coaId);
+                                me.loadLinkAccounts(viewModel, formView.parentGrid.coaId);
+                            }
+                        } else {
+                            console.log(&#39;Error in getting chart of account&#39;);
+                        }
+                    }
+                });
+            }
+            
         }
-        else {           
-            var typeOfCurrency = viewModel.getStore(&#39;typeOfCurrencyList&#39;);
-            typeOfCurrency.load();
-            var typeOfCurrencyRate = viewModel.getStore(&#39;typeOfCurrencyRateList&#39;);
-            typeOfCurrencyRate.load();
-            var typeOfAccount = viewModel.getStore(&#39;typeOfAccountList&#39;);
-            typeOfAccount.load();
-            var typeofConsolidation = viewModel.getStore(&#39;typeofConsolidationList&#39;);
-            typeofConsolidation.load();
+        else {
+            me.loadLinkAccounts(viewModel, formView.parentGrid.coaId);
         }
+    },
+
+    loadLinkAccounts: function (viewModel, coaId) {
         var linkAccountStore = viewModel.getStore(&#39;linkAccountListByCoaId&#39;);
-        linkAccountStore.getProxy().setExtraParam(&#39;id&#39;, formView.parentGrid.coaId);
+        linkAccountStore.getProxy().setExtraParam(&#39;id&#39;, coaId);
         linkAccountStore.load();
     }
 });

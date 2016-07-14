@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.projects.projectmaintenance.ProjectsStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Projects/Jobs.
+ */
+Ext.define('Chaching.store.projects.projectmaintenance.ProjectsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.Jobcasting.JobCommercialsModel',
     proxy: {

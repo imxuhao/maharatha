@@ -55,6 +55,10 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
 </span><span id='Chaching-view-projects-projectmaintenance-ProjectsForm-property-titleConfig'>    titleConfig: {
 </span>        title: abp.localization.localize(&quot;CreateNewProject&quot;).initCap()
     },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsForm-property-popupWndSize'>    popupWndSize: {
+</span>        height:&#39;90%&#39;,
+        width:&#39;90%&#39;
+    },
 <span id='Chaching-view-projects-projectmaintenance-ProjectsForm-property-items'>    items:[
 </span>    {
         xtype: &#39;tabpanel&#39;,
@@ -83,9 +87,9 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                                 value: null
                             }, {
                                 columnWidth: .33,
-                                padding: &#39;20 10 0 20&#39;,
+                                padding: &#39;0 10 0 20&#39;,
                                 defaults: {
-                                    labelAlign: &#39;top&#39;,
+                                   // labelAlign: &#39;top&#39;,
                                     blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                                 },
                                 items: [
@@ -94,7 +98,7 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                                         name: &#39;jobNumber&#39;,
                                         itemId: &#39;jobNumber&#39;,
                                         allowBlank: false,
-                                        fieldLabel: app.localize(&#39;JobNumber&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                        fieldLabel: app.localize(&#39;JobNumber&#39;).initCap(),
                                         width: &#39;100%&#39;,
                                         ui: &#39;fieldLabelTop&#39;,
                                         emptyText: app.localize(&#39;MandatoryField&#39;)
@@ -103,7 +107,7 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                                         name: &#39;caption&#39;,
                                         itemId: &#39;caption&#39;,
                                         allowBlank: false,
-                                        fieldLabel: app.localize(&#39;JobName&#39;) + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                        fieldLabel: app.localize(&#39;JobName&#39;),
                                         width: &#39;100%&#39;,
                                         ui: &#39;fieldLabelTop&#39;,
                                         emptyText: app.localize(&#39;MandatoryField&#39;)
@@ -118,15 +122,16 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                                         displayField: &#39;typeofProjectName&#39;,
                                         width: &#39;100%&#39;,
                                         ui: &#39;fieldLabelTop&#39;,
-                                        fieldLabel: app.localize(&#39;ProjectType&#39;) + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                        fieldLabel: app.localize(&#39;ProjectType&#39;) ,
                                         emptyText: app.localize(&#39;MandatoryField&#39;)
                                     }
                                 ]
                             }, {
                                 columnWidth: .33,
-                                padding: &#39;20 10 0 20&#39;,
+                                padding: &#39;0 10 0 20&#39;,
                                 defaults: {
-                                    labelAlign: &#39;top&#39;,
+                                    //labelAlign: &#39;top&#39;,
+                                    labelWidth : 120,
                                     blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                                 },
                                 items: [
@@ -141,45 +146,105 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                                         width: &#39;100%&#39;,
                                         ui: &#39;fieldLabelTop&#39;,
                                         allowBlank: false,
-                                        fieldLabel: app.localize(&#39;BudgetFormat&#39;) + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+                                        fieldLabel: app.localize(&#39;BudgetFormat&#39;) ,
                                         emptyText: app.localize(&#39;MandatoryField&#39;)
                                     }, {
-                                        xtype: &#39;combobox&#39;,
-                                        name: &#39;rollupAccountId&#39;,
-                                        itemId: &#39;rollupAccountId&#39;,
-                                        queryMode: &#39;local&#39;,
-                                        bind: {
-                                            store: &#39;{genericRollupAccountList}&#39;
-                                        },
-                                        valueField: &#39;value&#39;,
-                                        displayField: &#39;name&#39;,
-                                        width: &#39;100%&#39;,
+                                        //xtype: &#39;combobox&#39;,
+                                        //name: &#39;rollupAccountId&#39;,
+                                        //itemId: &#39;rollupAccountId&#39;,
+                                        //queryMode: &#39;remote&#39;,
+                                        //bind: {
+                                        //    store: &#39;{genericRollupAccountList}&#39;
+                                        //},
+                                        //valueField: &#39;value&#39;,
+                                        //displayField: &#39;name&#39;,
+                                        //width: &#39;100%&#39;,
+                                        //ui: &#39;fieldLabelTop&#39;,
+                                        //fieldLabel: app.localize(&#39;RollupAccount&#39;),
+                                        //emptyText: app.localize(&#39;SelectOption&#39;)
+
+                                        xtype: &#39;chachingcombobox&#39;,
+                                        store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
+                                        fieldLabel: app.localize(&#39;RollUpAccount&#39;),
                                         ui: &#39;fieldLabelTop&#39;,
-                                        fieldLabel: app.localize(&#39;RollupAccount&#39;),
-                                        emptyText: app.localize(&#39;SelectOption&#39;)
+                                        width: &#39;100%&#39;,
+                                        name: &#39;rollupAccountId&#39;,
+                                        valueField: &#39;accountId&#39;,
+                                        displayField: &#39;accountNumber&#39;,
+                                        queryMode: &#39;remote&#39;,
+                                        minChars: 2,
+                                        useDisplayFieldToSearch: true,
+                                        modulePermissions: {
+                                            read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                                            create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Create&#39;),
+                                            edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                                            destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
+                                        },
+                                        primaryEntityCrudApi: {
+                                            read: abp.appPath + &#39;api/services/app/accountUnit/GetRollupAccountsList&#39;,
+                                            create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                                            update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                                            destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+                                        },
+                                        createEditEntityType: &#39;financials.accounts.accounts&#39;,
+                                        createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+                                        entityType: &#39;Account&#39;,
+                                        isTwoEntityPicker: false
+
+
                                     }, {
-                                        xtype: &#39;combobox&#39;,
+                                        //xtype: &#39;combobox&#39;,
+                                        //name: &#39;rollupJobId&#39;,
+                                        //itemId: &#39;rollupJobId&#39;,
+                                        //queryMode: &#39;local&#39;,
+                                        //store: &#39;financials.accounts.DivisionsStore&#39;,
+                                        //valueField: &#39;jobId&#39;,
+                                        //displayField: &#39;caption&#39;,
+                                        //width: &#39;100%&#39;,
+                                        //ui: &#39;fieldLabelTop&#39;,
+                                        //fieldLabel: app.localize(&#39;RollupDivision&#39;),
+                                        //emptyText: app.localize(&#39;SelectOption&#39;)
+
+                                        xtype: &#39;chachingcombobox&#39;,
+                                        store: new Chaching.store.utilities.autofill.DivisionListStore(),
+                                        fieldLabel: app.localize(&#39;RollUpDivision&#39;),
+                                        ui: &#39;fieldLabelTop&#39;,
+                                        width: &#39;100%&#39;,
                                         name: &#39;rollupJobId&#39;,
                                         itemId: &#39;rollupJobId&#39;,
-                                        queryMode: &#39;local&#39;,
-                                        store: &#39;financials.accounts.DivisionsStore&#39;,
-                                        valueField: &#39;jobId&#39;,
-                                        displayField: &#39;caption&#39;,
-                                        width: &#39;100%&#39;,
-                                        ui: &#39;fieldLabelTop&#39;,
-                                        fieldLabel: app.localize(&#39;RollupDivision&#39;),
-                                        emptyText: app.localize(&#39;SelectOption&#39;)
+                                        valueField: &#39;rollupJobId&#39;,
+                                        displayField: &#39;jobNumber&#39;,
+                                        queryMode: &#39;remote&#39;,
+                                        minChars: 2,
+                                        useDisplayFieldToSearch: true,
+                                        modulePermissions: {
+                                            read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                                            create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                                            edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                                            destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+                                        },
+                                        primaryEntityCrudApi: {
+                                            read: abp.appPath + &#39;api/services/app/jobUnit/GetDivisionList&#39;,
+                                            create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                                            update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                                            destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+                                        },
+                                        createEditEntityType: &#39;financials.accounts.divisions&#39;,
+                                        createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+                                        entityType: &#39;Division&#39;,
+                                        useDisplayFieldToSearch: true,
+                                        identificationKey: &#39;isDivision&#39;
+
                                     }]
                             }, {
                                 columnWidth: .33,
-                                padding: &#39;20 10 0 20&#39;,
+                                padding: &#39;0 10 0 20&#39;,
                                 defaults: {
-                                    labelAlign: &#39;top&#39;,
+                                   // labelAlign: &#39;top&#39;,
                                     blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                                 },
                                 items: [
                                     {
-///TODO: Replace with combo box once tax credit service is ready
                                         xtype: &#39;combobox&#39;,
                                         name: &#39;taxCreditId&#39;,
                                         itemId: &#39;taxCreditId&#39;,
@@ -239,18 +304,37 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                     {
                         xtype: &#39;button&#39;,
                         itemId: &#39;btnSaveSetup&#39;,
+                        name: &#39;Save&#39;,
                         ui: &#39;actionButton&#39;,
                         text: app.localize(&#39;SaveProject&#39;).toUpperCase(),
                         iconCls: &#39;fa fa-save&#39;,
+                        actionButton:true,
                         listeners: {
                             click: &#39;onSaveClicked&#39;
                         }
                     }, {
                         xtype: &#39;button&#39;,
+                        scale: &#39;small&#39;,
+                        iconCls: &#39;fa fa-edit&#39;,
+                        iconAlign: &#39;left&#39;,
+                        text: app.localize(&#39;Edit&#39;).toUpperCase(),
+                        ui: &#39;actionButton&#39;,
+                        name: &#39;Edit&#39;,
+                        itemId: &#39;BtnEdit&#39;,
+                        reference: &#39;BtnEdit&#39;,
+                        hidden: true,
+                        actionButton: true,
+                        listeners: {
+                            click: &#39;onEditButtonClicked&#39;
+                        }
+                    }, {
+                        xtype: &#39;button&#39;,
                         itemId: &#39;btnCancelSetup&#39;,
+                        name: &#39;Cancel&#39;,
                         ui: &#39;actionButton&#39;,
                         text: app.localize(&#39;Cancel&#39;).toUpperCase(),
                         iconCls: &#39;fa fa-close&#39;,
+                        actionButton: true,
                         listeners: {
                             click: &#39;onCancelClicked&#39;
                         }
@@ -273,45 +357,47 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                     collapsible :true,
                     items:[
                     {
-                        columnWidth: .25,
+                        columnWidth: .33,
                         padding: &#39;0 10 0 20&#39;,
                         defaults: {
                             width: &#39;100%&#39;,
-                            ui: &#39;fieldLabelTop&#39;,
-                            labelAlign: &#39;top&#39;
+                            ui: &#39;fieldLabelTop&#39;//,
+                           // labelAlign: &#39;top&#39;
                         },
                         items:[
                         {
                             xtype: &#39;datefield&#39;,
                             name: &#39;bidDate&#39;,
                             itemId: &#39;bidDate&#39;,
+                            labelWidth : 80,
                             format:Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                             emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                             fieldLabel: app.localize(&#39;BidDate&#39;)
                         }]
                     }, {
-                        columnWidth: .25,
+                        columnWidth: .33,
                         padding: &#39;0 10 0 20&#39;,
                         defaults: {
                             width: &#39;100%&#39;,
-                            ui: &#39;fieldLabelTop&#39;,
-                            labelAlign: &#39;top&#39;
+                            ui: &#39;fieldLabelTop&#39;//,
+                            //labelAlign: &#39;top&#39;
                         },
                         items: [
                             {
                                 xtype: &#39;datefield&#39;,
                                 name: &#39;awardDate&#39;,
                                 itemId: &#39;awardDate&#39;,
+                                labelWidth: 80,
                                 format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                                 emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                                 fieldLabel: app.localize(&#39;AwardDate&#39;)
                             }
                         ]
                     }, {
-                        columnWidth: .25,
+                        columnWidth: .33,
                         padding: &#39;0 10 0 20&#39;,
                         defaults: {
-                            labelAlign: &#39;top&#39;,
+                           // labelAlign: &#39;top&#39;,
                             blankText: app.localize(&#39;MandatoryToolTipText&#39;)
                         },
                         items: [
@@ -319,18 +405,12 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                             xtype: &#39;textfield&#39;,
                             name: &#39;productOwner&#39;,
                             itemId: &#39;productOwner&#39;,
+                            labelWidth: 80,
                             ui: &#39;fieldLabelTop&#39;,
                             width:&#39;100%&#39;,
                             fieldLabel: app.localize(&#39;Bidder&#39;),
                             emptyText: app.localize(&#39;ToolTipBidder&#39;)
-                        }]
-                    }, {
-                        columnWidth: .25,
-                        padding: &#39;0 10 0 20&#39;,
-                        defaults: {
-                            width: &#39;100%&#39;
-                        },
-                        items: [{
+                        }, {
                             xtype: &#39;checkbox&#39;,
                             name: &#39;isOTon&#39;,
                             itemId: &#39;isOTon&#39;,
@@ -354,28 +434,40 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                         padding: &#39;0 10 0 20&#39;,
                         defaults: {
                             width: &#39;100%&#39;,
-                            ui: &#39;fieldLabelTop&#39;,
-                            labelAlign: &#39;top&#39;
+                            labelWidth : 150,
+                            ui: &#39;fieldLabelTop&#39;//,
+                           // labelAlign: &#39;top&#39;
                         },
                         items:[
                         {
-                            xtype: &#39;combobox&#39;,
-                            name: &#39;agencyId&#39;,
-                            itemId: &#39;agencyId&#39;,
+                            xtype: &#39;chachingcombobox&#39;,
+                            store: new Chaching.store.utilities.autofill.CustomerListStore(),
                             fieldLabel: app.localize(&#39;Agency&#39;),
-                            store:&#39;customers.CustomersStore&#39;,
+                            ui: &#39;fieldLabelTop&#39;,
+                            width: &#39;100%&#39;,
+                            name: &#39;agencyId&#39;,
+                            //itemId: &#39;agencyId&#39;,
                             valueField: &#39;customerId&#39;,
-                            displayField: &#39;firstName&#39;,
-                            queryMode: &#39;local&#39;,
-                            listConfig: {
-                                getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
+                            displayField: &#39;customerNumber&#39;,
+                            queryMode: &#39;remote&#39;,
+                            minChars: 2,
+                           // useDisplayFieldToSearch: true,
+                            modulePermissions: {
+                                read: abp.auth.isGranted(&#39;Pages.Receivables.Customers&#39;),
+                                create: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Create&#39;),
+                                edit: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Edit&#39;),
+                                destroy: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Delete&#39;)
                             },
-                            anyMatch: true,
-                            displayTpl: Chaching.utilities.ChachingRenderers.renderCustomerDispalyTpl(),//using XTemplate
-                            emptyText: app.localize(&#39;SelectOption&#39;),
-                            listeners: {
-                                change:&#39;onAgencyChange&#39;
-                            }
+                            primaryEntityCrudApi: {
+                                read: abp.appPath + &#39;api/services/app/jobUnit/GetCustomersList&#39;,
+                                create: abp.appPath + &#39;api/services/app/customerUnit/CreateCustomerUnit&#39;,
+                                update: abp.appPath + &#39;api/services/app/customerUnit/UpdateCustomerUnit&#39;,
+                                destroy: abp.appPath + &#39;api/services/app/customerUnit/DeleteCustomerUnit&#39;
+                            },
+                            createEditEntityType: &#39;receivables.customers&#39;,
+                            createEditEntityGridController: &#39;receivables-customers-customersgrid&#39;,
+                            entityType: &#39;Customer&#39;
+                            
                         }, {
                             xtype: &#39;textfield&#39;,
                             name: &#39;productName&#39;,
@@ -383,20 +475,35 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                             fieldLabel: app.localize(&#39;ProductName&#39;),
                             emptyText: app.localize(&#39;ToolTipProductName&#39;)
                         }, {
-                            xtype: &#39;combobox&#39;,
+
+                            xtype: &#39;chachingcombobox&#39;,
+                            store: new Chaching.store.utilities.autofill.CustomerListStore(),
+                            fieldLabel: app.localize(&#39;ThirdPartyCustomer&#39;),
+                            ui: &#39;fieldLabelTop&#39;,
+                            width: &#39;100%&#39;,
                             name: &#39;thirdPartyCustomerId&#39;,
                             itemId: &#39;thirdPartyCustomerId&#39;,
-                            store: &#39;customers.CustomersStore&#39;,
                             valueField: &#39;customerId&#39;,
-                            displayField: &#39;firstName&#39;,
-                            queryMode: &#39;local&#39;,
-                            listConfig: {
-                                getInnerTpl: Chaching.utilities.ChachingRenderers.renderCustomerInnerTpl
+                            displayField: &#39;customerNumber&#39;,
+                            queryMode: &#39;remote&#39;,
+                            minChars: 2,
+                            // useDisplayFieldToSearch: true,
+                            modulePermissions: {
+                                read: abp.auth.isGranted(&#39;Pages.Receivables.Customers&#39;),
+                                create: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Create&#39;),
+                                edit: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Edit&#39;),
+                                destroy: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Delete&#39;)
                             },
-                            anyMatch: true,
-                            displayTpl: Chaching.utilities.ChachingRenderers.renderCustomerDispalyTpl(),
-                            fieldLabel: app.localize(&#39;ThirdPartyCustomer&#39;),
-                            emptyText: app.localize(&#39;SelectOption&#39;)
+                            primaryEntityCrudApi: {
+                                read: abp.appPath + &#39;api/services/app/jobUnit/GetCustomersList&#39;,
+                                create: abp.appPath + &#39;api/services/app/customerUnit/CreateCustomerUnit&#39;,
+                                update: abp.appPath + &#39;api/services/app/customerUnit/UpdateCustomerUnit&#39;,
+                                destroy: abp.appPath + &#39;api/services/app/customerUnit/DeleteCustomerUnit&#39;
+                            },
+                            createEditEntityType: &#39;receivables.customers&#39;,
+                            createEditEntityGridController: &#39;receivables-customers-customersgrid&#39;,
+                            entityType: &#39;Customer&#39;
+
                         }, {
                             xtype: &#39;textfield&#39;,
                             name: &#39;agencyProducer&#39;,
@@ -409,8 +516,9 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                         padding: &#39;0 10 0 20&#39;,
                         defaults: {
                             width: &#39;100%&#39;,
-                            ui: &#39;fieldLabelTop&#39;,
-                            labelAlign: &#39;top&#39;
+                            labelWidth : 120,
+                            ui: &#39;fieldLabelTop&#39;//,
+                           // labelAlign: &#39;top&#39;
                         },
                         items: [
                             {
@@ -424,7 +532,7 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                                 name: &#39;agencyAddress&#39;,
                                 itemId: &#39;agencyAddress&#39;,
                                 resizable: false,
-                                height:134,
+                              //  height:134,
                                 fieldLabel: app.localize(&#39;Address&#39;),
                                 emptyText: app.localize(&#39;ToolTipAgencyAddress&#39;)
                             }, {
@@ -441,7 +549,8 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                         defaults: {
                             width: &#39;100%&#39;,
                             ui: &#39;fieldLabelTop&#39;,
-                            labelAlign: &#39;top&#39;
+                            labelWidth : 170
+                            //labelAlign: &#39;top&#39;
                         },
                         items: [{
                             xtype: &#39;hiddenfield&#39;,
@@ -493,7 +602,8 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                             defaults: {
                                 width: &#39;100%&#39;,
                                 ui: &#39;fieldLabelTop&#39;,
-                                labelAlign: &#39;top&#39;,
+                                //labelAlign: &#39;top&#39;,
+                                labelWidth : 150,
                                 xtype: &#39;numberfield&#39;,
                                 hideTrigger: true,
                                 minValue: 0,
@@ -516,8 +626,8 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                             padding: &#39;0 10 0 20&#39;,
                             defaults: {
                                 width: &#39;100%&#39;,
-                                ui: &#39;fieldLabelTop&#39;,
-                                labelAlign: &#39;top&#39;
+                                ui: &#39;fieldLabelTop&#39;//,
+                               // labelAlign: &#39;top&#39;
                             },
                             items: [
                                 {///TODO: Rplace with combo once terms section is completed on contracts tab
@@ -584,17 +694,18 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                         defaults: {
                             width: &#39;100%&#39;,
                             ui: &#39;fieldLabelTop&#39;,
-                            labelAlign: &#39;top&#39;
+                            labelWidth : 180
+                            //labelAlign: &#39;top&#39;
                         },
                         items:[
                         {
                             xtype: &#39;combobox&#39;,
                             name: &#39;directorEmployeeId&#39;,
                             itemId: &#39;directorEmployeeId&#39;,
-                            store: new Chaching.store.employee.EmployeeStore(),
-                            valueField: &#39;directorEmployeeId&#39;,
-                            displayField: &#39;firstName&#39;,
-                            queryMode:&#39;local&#39;,
+                            store: new Chaching.store.utilities.EmployeeListStore(),
+                            valueField: &#39;employeeId&#39;,
+                            displayField: &#39;employeeName&#39;,
+                            queryMode:&#39;remote&#39;,
                             fieldLabel: app.localize(&#39;Director&#39;),
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderEmployeeInnerTpl
@@ -605,10 +716,10 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                             xtype: &#39;combobox&#39;,
                             name: &#39;executiveProducerId&#39;,
                             itemId: &#39;executiveProducerId&#39;,
-                            store: new Chaching.store.employee.EmployeeStore(),
-                            valueField: &#39;executiveProducerId&#39;,
-                            displayField: &#39;firstName&#39;,
-                            queryMode: &#39;local&#39;,
+                            store: new Chaching.store.utilities.EmployeeListStore(),
+                            valueField: &#39;employeeId&#39;,
+                            displayField: &#39;employeeName&#39;,
+                            queryMode: &#39;remote&#39;,
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderEmployeeInnerTpl
                             },
@@ -620,13 +731,13 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                             xtype: &#39;combobox&#39;,
                             name: &#39;dirOfPhotoEmployeeId&#39;,
                             itemId: &#39;dirOfPhotoEmployeeId&#39;,
-                            store: new Chaching.store.employee.EmployeeStore(),
+                            store: new Chaching.store.utilities.EmployeeListStore(),
                             //bind: {
                             //    store: &#39;{getDirofPhotoList}&#39;
                             //},
-                            valueField: &#39;dirOfPhotoEmployeeId&#39;,
-                            displayField: &#39;firstName&#39;,
-                            queryMode: &#39;local&#39;,
+                            valueField: &#39;employeeId&#39;,
+                            displayField: &#39;employeeName&#39;,
+                            queryMode: &#39;remote&#39;,
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderEmployeeInnerTpl
                             },
@@ -648,7 +759,8 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                         defaults: {
                             width: &#39;100%&#39;,
                             ui: &#39;fieldLabelTop&#39;,
-                            labelAlign: &#39;top&#39;
+                            labelWidth : 150
+                            //labelAlign: &#39;top&#39;
                         },
                         items: [
                             {
@@ -689,8 +801,8 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                         defaults: {
                             width: &#39;100%&#39;,
                             ui: &#39;fieldLabelTop&#39;,
-
-                            labelAlign: &#39;top&#39;
+                            labelWidth : 150
+                           // labelAlign: &#39;top&#39;
                         },
                         items:[
                        {
@@ -744,8 +856,8 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                         padding: &#39;0 10 0 20&#39;,
                         defaults: {
                             width: &#39;100%&#39;,
-                            ui: &#39;fieldLabelTop&#39;,
-                            labelAlign: &#39;top&#39;
+                            ui: &#39;fieldLabelTop&#39;//,
+                            //labelAlign: &#39;top&#39;
                         },
                         items:[
                         {
@@ -785,15 +897,34 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
                         ui: &#39;actionButton&#39;,
                         text: app.localize(&#39;SaveProjectDetails&#39;).toUpperCase(),
                         iconCls: &#39;fa fa-save&#39;,
+                        name:&#39;SaveDetails&#39;,
+                        actionButton: true,
                         listeners: {
                             click: &#39;onProjectDetailsSave&#39;
                         }
                     }, {
                         xtype: &#39;button&#39;,
+                        scale: &#39;small&#39;,
+                        iconCls: &#39;fa fa-edit&#39;,
+                        iconAlign: &#39;left&#39;,
+                        text: app.localize(&#39;Edit&#39;).toUpperCase(),
+                        ui: &#39;actionButton&#39;,
+                        name: &#39;Edit&#39;,
+                        itemId: &#39;BtnEdit&#39;,
+                        reference: &#39;BtnEdit&#39;,
+                        hidden: true,
+                        actionButton: true,
+                        listeners: {
+                            click: &#39;onEditButtonClicked&#39;
+                        }
+                    }, {
+                        xtype: &#39;button&#39;,
                         itemId: &#39;btnCancelProjectDetails&#39;,
                         ui: &#39;actionButton&#39;,
+                        name:&#39;Cancel&#39;,
                         text: app.localize(&#39;Cancel&#39;).toUpperCase(),
                         iconCls: &#39;fa fa-close&#39;,
+                        actionButton: true,
                         listeners: {
                             click: &#39;onCancelClicked&#39;
                         }
@@ -868,6 +999,7 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsForm&#39;,{
     }]
     
 });
+
 </pre>
 </body>
 </html>

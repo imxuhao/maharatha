@@ -15,18 +15,25 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.financials.accounts.AccountsModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-financials-accounts-AccountsModel'>/**
+</span> * DataModel to represent entity schema for Accounts.
+ */
+Ext.define(&#39;Chaching.model.financials.accounts.AccountsModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;Account&#39;
-    },
-    fields: [
-            { name: &#39;accountId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+<span id='Chaching-model-financials-accounts-AccountsModel-cfg-searchEntityName'>        searchEntityName: &#39;Account&#39;
+</span>    },
+<span id='Chaching-model-financials-accounts-AccountsModel-property-fields'>    fields: [
+</span>            { name: &#39;accountId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
             { name: &#39;parentId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
-            { name: &#39;caption&#39;, type: &#39;string&#39; },
+            { name: &#39;accountNumber&#39;, type: &#39;string&#39;, headerText: &#39;AccountNumber&#39;, hidden: false, width: &#39;12%&#39;, minWidth: 90 },
+            { name: &#39;ledgerAccount&#39;, type: &#39;string&#39;, mapping: &#39;accountNumber&#39; },
+            { name: &#39;caption&#39;, type: &#39;string&#39;, headerText: &#39;Caption&#39;, hidden: false, width: &#39;8%&#39;, minWidth: 50 },
+            { name: &#39;isCorporate&#39;, type: &#39;boolean&#39;, headerText: &#39;IsCorporate&#39;, hidden: false, width: &#39;10%&#39; },
             { name: &#39;description&#39;, type: &#39;string&#39; },
             { name: &#39;chartOfAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
-            { name: &#39;accountNumber&#39;, type: &#39;string&#39; },
+            { name: &#39;creditAccountNumber&#39;, type: &#39;string&#39;, mapping: &#39;accountNumber&#39; },
+            { name: &#39;creditAccountId&#39;, type: &#39;int&#39;, defaultValue: null, mapping: &#39;accountId&#39; },
             { name: &#39;isAccountRevalued&#39;, type: &#39;boolean&#39; },
             { name: &#39;isApproved&#39;, type: &#39;boolean&#39; },
             { name: &#39;isDescriptionLocked&#39;, type: &#39;boolean&#39; },
@@ -35,17 +42,17 @@
             { name: &#39;isRollupAccount&#39;, type: &#39;boolean&#39; },
             { name: &#39;isRollupOverridable&#39;, type: &#39;boolean&#39; },
             { name: &#39;linkAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
-             { name: &#39;linkAccount&#39;, type: &#39;string&#39; },
+            { name: &#39;linkAccount&#39;, type: &#39;string&#39; },
             { name: &#39;linkJobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;rollupAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;rollupJobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;typeOfAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;typeOfAccount&#39;, type: &#39;string&#39; },
-            { name: &#39;typeofConsolidationId&#39;, type: &#39;auto&#39; },
+            { name: &#39;typeofConsolidationId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;typeofConsolidation&#39;, type: &#39;string&#39; },
-             { name: &#39;typeOfCurrencyId&#39;, type: &#39;auto&#39; },
+            { name: &#39;typeOfCurrencyId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;typeOfCurrency&#39;, type: &#39;string&#39; },
-             { name: &#39;typeOfCurrencyRateId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+            { name: &#39;typeOfCurrencyRateId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
             { name: &#39;typeOfCurrencyRate&#39;, type: &#39;string&#39; },
             { name: &#39;isDocControlled&#39;, type: &#39;boolean&#39; },
             { name: &#39;isSummaryAccount&#39;, type: &#39;boolean&#39; },

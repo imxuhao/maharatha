@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.roles.RolePermissionsModel', {
+﻿/**
+ * DataModel to represent entity schema for Roles Permissions.
+ */
+Ext.define('Chaching.model.roles.RolePermissionsModel', {
     extend: 'Chaching.model.base.BaseModel',
     
     fields: [          

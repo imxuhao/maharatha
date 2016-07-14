@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.base.TransactionDetailsStore', {
+﻿/**
+ * Base DataStore for all common functionality involved in distribution lines entities.
+ */
+Ext.define('Chaching.store.base.TransactionDetailsStore', {
     extend: 'Chaching.store.base.BaseStore',
     pageSize: 50,//Number.MAX_SAFE_INTEGER, // items per page
     autoLoad: false,

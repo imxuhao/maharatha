@@ -32,7 +32,7 @@
                     return record.get(&#39;value&#39;);
                 }
             }],
-            xtype: &#39;ajax&#39;,
+            //xtype: &#39;ajax&#39;,
             autoLoad: false,
             proxy: {
                 actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
@@ -48,6 +48,7 @@
         typeOfSubAccountList: {
             fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
                 name: &#39;typeofSubAccount&#39;, convert: function (value, record) {
+                    //debugger;
                     return record.get(&#39;name&#39;);
                 }
             }, {
@@ -55,7 +56,9 @@
                     return record.get(&#39;value&#39;);
                 }
             }],
-            xtype: &#39;ajax&#39;,
+            //xtype: &#39;ajax&#39;,
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
                 type: &#39;chachingProxy&#39;,
@@ -78,6 +81,8 @@
                 }
             }],
             xtype: &#39;ajax&#39;,
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
                 type: &#39;chachingProxy&#39;,
@@ -182,6 +187,56 @@
                 }
             }
         },
+        StandardGroupTotalList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;standardGroupTotal&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;standardGroupTotalId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            remoteSort: false,
+            remoteFilter:false,
+            autoLoad: false,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/coaUnit/StandardGroupTotalList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;,
+                    totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        },
+
+        linkChartOfAccountList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;linkChartOfAccount&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;linkChartOfAccountID&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            xtype: &#39;ajax&#39;,
+            remoteSort: false,
+            remoteFilter: false,
+            autoLoad: false,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/coaUnit/GetCoaList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;,
+                    totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        },
 
         rollupAccountList: {
             fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
@@ -242,6 +297,8 @@
                 }
             }],
             xtype: &#39;ajax&#39;,
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
                 type: &#39;chachingProxy&#39;,
@@ -329,6 +386,8 @@
                 }
             }],
             xtype: &#39;ajax&#39;,
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
                 type: &#39;chachingProxy&#39;,
@@ -350,6 +409,8 @@
                 }
             }],
             xtype: &#39;ajax&#39;,
+            remoteFilter: false,
+            remoteSort: false,
             proxy: {
                 actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
                 type: &#39;chachingProxy&#39;,
@@ -436,6 +497,8 @@
                 }
             }],
             xtype: &#39;ajax&#39;,
+            remoteSort: false,
+            remoteFilter: false,
             proxy: {
                 actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
                 type: &#39;chachingProxy&#39;,

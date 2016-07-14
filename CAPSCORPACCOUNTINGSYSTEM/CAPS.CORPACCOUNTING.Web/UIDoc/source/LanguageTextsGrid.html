@@ -28,6 +28,12 @@ Ext.define(&#39;Chaching.view.languages.LanguageTextsGrid&#39;, {
     xtype: &#39;Languagetexts&#39;,
     store: &#39;languages.LanguageTextsStore&#39;,
     name: &#39;LanguageTexts&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Administration.Languages&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Administration.Languages.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Administration.Languages.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Administration.Languages.Delete&#39;)
+    },
     padding: 5,
     gridId:4,
     headerButtonsConfig: [
@@ -47,6 +53,11 @@ Ext.define(&#39;Chaching.view.languages.LanguageTextsGrid&#39;, {
     editingMode: &#39;row&#39;,   
     columnLines: true,   
     multiColumnSort: true,
+    createNewMode: &#39;tab&#39;,
+
+    listeners: {
+        cellclick: &#39;onLanguageCellClick&#39;
+    },
     columns: [
         {
             xtype: &#39;gridcolumn&#39;,
@@ -60,7 +71,8 @@ Ext.define(&#39;Chaching.view.languages.LanguageTextsGrid&#39;, {
                 width: &#39;100%&#39;
             },
             editor: {
-                xtype: &#39;textfield&#39;
+                xtype: &#39;textfield&#39;,
+                disabled:true
             }
         }, {
             xtype: &#39;gridcolumn&#39;,
@@ -68,13 +80,14 @@ Ext.define(&#39;Chaching.view.languages.LanguageTextsGrid&#39;, {
             dataIndex: &#39;baseValue&#39;,
             sortable: true,
             groupable: true,
-            width: &#39;30%&#39;,
+            width: &#39;31%&#39;,
             filterField: {
                 xtype: &#39;textfield&#39;,
                 width: &#39;100%&#39;
             },
             editor: {
-                xtype: &#39;textfield&#39;
+                xtype: &#39;textfield&#39;,
+                disabled: true
             }
         },
         {
@@ -83,7 +96,7 @@ Ext.define(&#39;Chaching.view.languages.LanguageTextsGrid&#39;, {
             dataIndex: &#39;targetValue&#39;,
             sortable: true,
             groupable: true,
-            width: &#39;30%&#39;,
+            width: &#39;32%&#39;,
             filterField: {
                 xtype: &#39;textfield&#39;,
                 width: &#39;100%&#39;
@@ -94,8 +107,10 @@ Ext.define(&#39;Chaching.view.languages.LanguageTextsGrid&#39;, {
         },
         {
             xtype: &#39;gridcolumn&#39;,
-            width: &#39;8%&#39;,
+            width: &#39;0&#39;, //&#39;8%&#39;,
+            hidden:true,
             text: app.localize(&#39;Edit&#39;),
+            dataIndex: &#39;isEdit&#39;,
             renderer: Chaching.utilities.ChachingRenderers.languagesTextsEditIcon
         }, ]
 });

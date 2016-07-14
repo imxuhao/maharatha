@@ -53,16 +53,14 @@
             }
         }
     },
-    doAfterCreateAction: function (createMode, formView, isEdit) {
-        if (formView &amp;&amp; isEdit) {
-            var viewModel = formView.getViewModel();
-            var StandardGroupTotal = viewModel.getStore(&#39;StandardGroupTotalList&#39;);
-            StandardGroupTotal.load();
-            var linkChartOfAccount = viewModel.getStore(&#39;linkChartOfAccountList&#39;);
-            linkChartOfAccount.load();
-        }
+    doAfterCreateAction: function(createMode, formView, isEdit) {
+        var viewModel = formView.getViewModel();
+        var standardGroupTotal = viewModel.getStore(&#39;StandardGroupTotalList&#39;);
+        standardGroupTotal.load();
+        var linkChartOfAccount = viewModel.getStore(&#39;linkChartOfAccountList&#39;);
+        linkChartOfAccount.load();
     }
-    
+
 });
 </pre>
 </body>

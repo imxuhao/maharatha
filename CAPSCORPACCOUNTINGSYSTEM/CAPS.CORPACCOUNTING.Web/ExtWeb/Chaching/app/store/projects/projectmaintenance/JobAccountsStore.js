@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.projects.projectmaintenance.JobAccountsStore', {
+﻿/**
+ * DataStore to perform Read operation on Job/Projects Accounts.
+ */
+Ext.define('Chaching.store.projects.projectmaintenance.JobAccountsStore', {
     extend: 'Chaching.store.base.BaseStore',
     pageSize:1000,
     model: 'Chaching.model.projects.projectmaintenance.JobAccountsModel',

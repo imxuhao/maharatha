@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.tenants.TenantUsersView&#39;, {
+    extend: &#39;Chaching.view.common.window.ChachingWindowPanel&#39;,
+    alias: [&#39;widget.tenantusers&#39;, &#39;widget.tenantusers.createView&#39;, &#39;widget.tenantusers.editView&#39;],
+    requires: [
+       &#39;Chaching.view.tenants.TenantUsersViewController&#39;
+    ],
+
+    controller: &#39;tenants-tenantusersview&#39;,
+    height: 600,
+    width: 600,
+    layout: &#39;fit&#39;,
+    title: app.localize(&quot;SelectAUser&quot;),
+    buttonAlign: &#39;right&#39;,
+    autoShow: true,
+    tenantId : null,
+    initComponent: function (config) {
+        var me = this,
+            controller = me.getController();
+        var tenantUserGrid = Ext.create(&#39;Ext.grid.Panel&#39;, {
+            cls: &#39;chaching-grid&#39;,
+            height: &#39;100%&#39;,
+            width: &#39;100%&#39;,
+            selModel: {
+                selType: &#39;checkboxmodel&#39;,
+                mode : &#39;SINGLE&#39;
+            },
+            plugins: [{
+                ptype: &#39;saki-gms&#39;,
+                iconColumn: false,
+                clearItemIconCls: &#39;icon-settings&#39;,
+                pluginId: &#39;gms&#39;,
+                height: 32,
+                filterOnEnter: false
+            }],
+            columns: [{
+                xtype: &#39;gridcolumn&#39;,
+                text: app.localize(&#39;Name&#39;),
+                dataIndex: &#39;name&#39;,
+                sortable: true,
+                groupable: true,
+                width: &#39;20%&#39;,
+                flex : 1,
+                filterField: {
+                    xtype: &#39;textfield&#39;,
+                    width: &#39;100%&#39;
+                }
+            }],
+            store: &#39;tenants.TenantUserListStore&#39;,
+            dockedItems: [{
+                xtype: &#39;pagingtoolbar&#39;,
+                store: &#39;tenants.TenantUserListStore&#39;,
+                displayInfo: true,
+                dock: &#39;bottom&#39;,
+                width: &#39;100%&#39;,
+                tabIndex: -1,
+                ui: &#39;plainBottom&#39;
+            }]
+        });
+
+        me.items = [tenantUserGrid];
+        me.buttons = [{ text: app.localize(&#39;LoginAsThisUser&#39;), handler: &#39;onLogInThisUserClick&#39; },
+                      { text: app.localize(&#39;Cancel&#39;), handler: &#39;onTenantUsersCancel&#39; }
+        ];
+
+        me.callParent(arguments);
+    }
+});
+</pre>
+</body>
+</html>

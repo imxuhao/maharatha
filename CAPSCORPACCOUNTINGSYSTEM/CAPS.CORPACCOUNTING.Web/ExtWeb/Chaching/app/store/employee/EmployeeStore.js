@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.employee.EmployeeStore', {
+﻿/**
+ * DataStore to perform Read operation on Employees.
+ */
+Ext.define('Chaching.store.employee.EmployeeStore', {
     extend: 'Chaching.store.base.BaseStore',
     model:'Chaching.model.employee.EmployeeModel',
     pageSize: 1000,

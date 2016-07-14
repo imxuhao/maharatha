@@ -15,12 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.customers.CustomersStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-customers-CustomersStore'>/**
+</span> * DataStore to perform Read operation on Customers.
+ */
+Ext.define(&#39;Chaching.store.customers.CustomersStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.customers.CustomersModel&#39;,
-    pageSize: 1000,
-    proxy: {
-        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+<span id='Chaching-store-customers-CustomersStore-property-model'>    model: &#39;Chaching.model.customers.CustomersModel&#39;,
+</span><span id='Chaching-store-customers-CustomersStore-property-pageSize'>    pageSize: 1000,
+</span><span id='Chaching-store-customers-CustomersStore-property-proxy'>    proxy: {
+</span>        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         type: &#39;chachingProxy&#39;,
         url: abp.appPath + &#39;api/services/app/customerUnit/GetCustomerUnits&#39;,
         reader: {

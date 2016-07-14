@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.administration.organization.CompanyUsersStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Company Users.
+ */
+Ext.define('Chaching.store.administration.organization.CompanyUsersStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.users.UsersModel',
     pageSize : 100,

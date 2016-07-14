@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Customers.
+ */
 Ext.define('Chaching.model.customers.CustomersModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

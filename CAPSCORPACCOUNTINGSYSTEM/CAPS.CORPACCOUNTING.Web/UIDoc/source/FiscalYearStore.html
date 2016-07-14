@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-store-financials-fiscalperiod-FiscalYearStore'>/**
+</span> * DataStore to perform CRUD operation on Fiscal Years.
+ */
+Ext.define(&#39;Chaching.store.financials.fiscalperiod.FiscalYearStore&#39;, {
+    extend: &#39;Chaching.store.base.BaseStore&#39;,
+<span id='Chaching-store-financials-fiscalperiod-FiscalYearStore-property-model'>    model: &#39;Chaching.model.financials.fiscalperiod.FiscalYearModel&#39;,
+</span><span id='Chaching-store-financials-fiscalperiod-FiscalYearStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+        extraParams: {
+            organizationUnitId: null
+        },
+        api: {
+            create: abp.appPath + &#39;api/services/app/fiscalYear/CreateFiscalYearUnit&#39;,
+            read: abp.appPath + &#39;api/services/app/fiscalYear/GetFiscalYearUnits&#39;,
+            update: abp.appPath + &#39;api/services/app/fiscalYear/UpdateFiscalYearUnit&#39;,
+            destroy: abp.appPath + &#39;api/services/app/fiscalYear/DeleteFiscalYearUnit&#39;
+        }
+    },
+<span id='Chaching-store-financials-fiscalperiod-FiscalYearStore-property-idPropertyField'>    idPropertyField: &#39;fiscalYearId&#39;//important to set for add/update of records
+</span>});
+</pre>
+</body>
+</html>

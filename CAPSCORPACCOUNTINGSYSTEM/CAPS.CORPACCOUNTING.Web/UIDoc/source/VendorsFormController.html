@@ -34,6 +34,7 @@
                 rec.set(&#39;objectId&#39;, values.vendorId);
                 var addRec = {
                     addressId: rec.get(&#39;addressId&#39;),
+                    organizationUnitId : Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
                     objectId: values.vendorId,
                     typeofObjectId: rec.get(&#39;typeofObjectId&#39;),
                     addressTypeId: rec.get(&#39;addressTypeId&#39;),

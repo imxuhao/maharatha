@@ -18,12 +18,23 @@
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsGridController&#39;, {
     extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
     alias: &#39;controller.financials-accounts-subaccountsgrid&#39;,
-    doAfterCreateAction: function (createMode, formView, isEdit) {
+    doAfterCreateAction: function (createMode, formView, isEdit,record) {
+        var subAccountId = 0;
         if (formView &amp;&amp; isEdit) {
-            var viewModel = formView.getViewModel();
-            var typeOfSubAccount = viewModel.getStore(&#39;typeOfSubAccountList&#39;);
-            typeOfSubAccount.load();
+            subAccountId = record.data.subAccountId;
         }
+        var viewModel = formView.getViewModel();
+        var typeOfSubAccount = viewModel.getStore(&#39;typeOfSubAccountList&#39;);
+        typeOfSubAccount.load();
+
+        //var leftStore = formView.down(&#39;chachingGridDragDrop&#39;).getLeftStore();
+        //leftStore.proxy.setExtraParam(&#39;subAccountId&#39;, subAccountId);
+        //leftStore.load();
+        
+        //var rightStore = formView.down(&#39;chachingGridDragDrop&#39;).getRightStore();
+        //rightStore.proxy.setExtraParam(&#39;subAccountId&#39;, subAccountId);
+        //rightStore.load();
+
     }
 });
 </pre>

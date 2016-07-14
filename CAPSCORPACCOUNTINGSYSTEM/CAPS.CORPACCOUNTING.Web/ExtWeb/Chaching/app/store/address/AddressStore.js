@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.address.AddressStore', {
+﻿/**
+ * DataStore to perform CRUD operation on address.
+ */
+Ext.define('Chaching.store.address.AddressStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.address.AddressModel',
     proxy: {

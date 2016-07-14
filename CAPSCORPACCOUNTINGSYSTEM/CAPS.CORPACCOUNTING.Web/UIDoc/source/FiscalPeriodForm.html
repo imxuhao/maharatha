@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.financials.fiscalperiod.FiscalPeriodForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [&#39;widget.financials.fiscalperiod.create&#39;, &#39;widget.financials.fiscalperiod.edit&#39;],
+    requires: [
+        &#39;Chaching.view.financials.fiscalperiod.FiscalPeriodFormController&#39;
+    ],
+
+<span id='global-cfg-modulePermissions'>    /**
+</span>    * @cfg {object}
+    * permissions to access fiscal period.
+    */
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Financials.FiscalPeriod&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Financials.FiscalPeriod.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Financials.FiscalPeriod.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Financials.FiscalPeriod.Delete&#39;)
+    },
+    controller: &#39;financials-fiscalperiod-fiscalperiodform&#39;,
+    name: &#39;fiscalperiod&#39;,
+    openInPopupWindow: false,
+    hideDefaultButtons: false,
+    //layout: &#39;column&#39;,
+    autoScroll: false,
+    border: false,
+    showFormTitle: true,
+    displayDefaultButtonsCenter: true,
+    titleConfig: {
+        title: abp.localization.localize(&quot;CreateNewFiscalPeriod&quot;).initCap()
+    },
+    //bodyStyle: { &#39;background-color&#39;: &#39;#F3F5F9&#39; }, 
+    defaults : {
+        labelWidth: 120,
+        padding: &#39;20 10 0 20&#39;,
+        width: &#39;20%&#39;,
+        minWidth : 280
+    },
+    items: [
+        {
+            xtype : &#39;fieldcontainer&#39;,
+            layout: &#39;hbox&#39;,
+            defaults : {
+                padding : &#39;0 5 0 20&#39;
+            },
+            items: [{
+                xtype: &#39;hiddenfield&#39;,
+                name: &#39;fiscalYearId&#39;,
+                value: 0
+            }, {
+                xtype: &#39;datefield&#39;,
+                name: &#39;yearStartDate&#39;,
+                itemId: &#39;yearStartDate&#39;,
+                vtype: &#39;daterange&#39;,
+               // vfield: &#39;yearStartDate&#39;,
+                labelWidth : 120,
+                allowBlank: false,
+                fieldLabel: app.localize(&#39;FiscalStartDate&#39;),
+                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
+                // width: &#39;100%&#39;,
+                endDateField: &#39;yearEndDate&#39;,
+                ui: &#39;fieldLabelTop&#39;,
+                listeners: {
+                    scope: this,
+                    change: function (field, newValue, oldValue) {
+                        if (newValue === null) {
+                            Ext.form.field.VTypes.daterange(newValue, field);
+                        }
+                    }
+                }
+            }, {
+                xtype: &#39;datefield&#39;,
+                name: &#39;yearEndDate&#39;,
+                itemId: &#39;yearEndDate&#39;,
+                vtype: &#39;daterange&#39;,
+               // vfield: &#39;yearEndDate&#39;,
+                allowBlank: false,
+                fieldLabel: app.localize(&#39;FiscalEndDate&#39;),
+                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
+                // width: &#39;100%&#39;,
+                startDateField: &#39;yearStartDate&#39;,
+                ui: &#39;fieldLabelTop&#39;,
+                listeners: {
+                    scope: this,
+                    change: function (field, newValue, oldValue) {
+                        if (newValue === null) {
+                            Ext.form.field.VTypes.daterange(newValue, field);
+                        }
+                    }
+                }
+            }, {
+                xtype: &#39;checkbox&#39;,
+                boxLabel: app.localize(&#39;FiscalYearOpen&#39;),
+                name: &#39;isYearOpen&#39;,
+                labelAlign: &#39;right&#39;,
+                inputValue: true,
+                checked: true,
+                boxLabelCls: &#39;checkboxLabel&#39;,
+                hidden: false,
+                listeners: {
+                    change : &#39;onFiscalOpenYearChange&#39;
+                }
+            }]
+        }
+        , {
+            xtype: &#39;financials.fiscalperiodchildgrid&#39;,
+             anchor : &#39;100% 80%&#39;,
+            autoScroll : true
+     }]
+});
+</pre>
+</body>
+</html>

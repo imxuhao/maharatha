@@ -15,14 +15,17 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.customers.CustomersModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-customers-CustomersModel'>/**
+</span> * DataModel to represent entity schema for Customers.
+ */
+Ext.define(&#39;Chaching.model.customers.CustomersModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;Customers&#39;
-    },
+<span id='Chaching-model-customers-CustomersModel-cfg-searchEntityName'>        searchEntityName: &#39;Customers&#39;
+</span>    },
 
-    fields: [
-        { name: &#39;customerId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+<span id='Chaching-model-customers-CustomersModel-property-fields'>    fields: [
+</span>        { name: &#39;customerId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
         { name: &#39;lastName&#39;, type: &#39;string&#39; },
         { name: &#39;firstName&#39;, type: &#39;string&#39; },
         { name: &#39;customerNumber&#39;, type: &#39;string&#39; },

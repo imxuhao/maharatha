@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.banking.banksetup.BankSetupStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Banks.
+ */
+Ext.define('Chaching.store.banking.banksetup.BankSetupStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.banking.banksetup.BankSetupModel',
     proxy: {

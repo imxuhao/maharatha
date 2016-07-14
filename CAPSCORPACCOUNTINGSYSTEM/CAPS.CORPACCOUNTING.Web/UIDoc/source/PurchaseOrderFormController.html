@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.purchaseorders.entry.PurchaseOrderFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingTransactionFormPanelController&#39;,
+    alias: &#39;controller.purchaseorders-entry-purchaseorderform&#39;,
+    onCloseCheckChange:function(field, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            form = view.getForm(),
+            closeDate = form.findField(&#39;closeDate&#39;),
+            documentId = form.findField(&#39;accountingDocumentId&#39;).getValue();
+        if (newValue&amp;&amp;(!documentId || documentId === &quot;0&quot; || documentId == 0)) {
+            
+            field.setValue(false);
+            //abp.notify.info(&#39;Cannot close po.&#39;,&#39;Invalid Operation&#39;);
+            return false;
+        }
+        if (newValue&amp;&amp;parseInt(documentId)&gt;0) {
+            closeDate.show();
+            closeDate.allowBlank = false;
+        } else {
+            closeDate.hide();
+            closeDate.allowBlank = true;
+        }
+    },
+    onFormResize: function (formPanel, width, height, oldWidth, oldHeight, eOpts) {
+        if (formPanel) {
+            var transactionDetailContainer = formPanel.down(&#39;*[itemId=transactionDetails]&#39;);
+            if (transactionDetailContainer) {
+                var heightForDetailGrid = height - (170 + 80);
+                transactionDetailContainer.down(&#39;gridpanel[isTransactionDetailGrid=true]&#39;).setHeight(heightForDetailGrid);
+                transactionDetailContainer.down(&#39;gridpanel[isHistoryGrid=true]&#39;).setHeight(heightForDetailGrid);
+            }
+            formPanel.updateLayout();
+        }
+    },
+    changeCurrency: function (field, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            form = view.getForm(),
+            poOriginalAmount = form.findField(&#39;poOriginalAmount&#39;),
+            controlTotal = form.findField(&#39;controlTotal&#39;),
+            remBalance = form.findField(&#39;remainingBalance&#39;);
+        ///TODO: change based on currency code
+        poOriginalAmount.setCurrency(&#39;INR&#39;);
+        controlTotal.setCurrency(&#39;EUR&#39;);
+        remBalance.setCurrency(&#39;KGS&#39;);
+    }
+    
+});
+</pre>
+</body>
+</html>

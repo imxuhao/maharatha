@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-administration-organization-CompanySettingsModel'>/**
+</span> * CompanySettings model used represent settings company/tenant wize.
+ */
+Ext.define(&#39;Chaching.model.administration.organization.CompanySettingsModel&#39;, {
+    extend: &#39;Chaching.model.base.BaseModel&#39;,
+    config: {
+<span id='Chaching-model-administration-organization-CompanySettingsModel-cfg-searchEntityName'>        searchEntityName: &#39;&#39;
+</span>    },
+<span id='Chaching-model-administration-organization-CompanySettingsModel-property-fields'>    fields: [
+</span>        { name: &#39;isAllowDuplicateAPInvoiceNos&#39;, type: &#39;boolean&#39;},
+        { name: &#39;isAllowDuplicateARInvoiceNos&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isAllowAccountnumbersStartingwithZero&#39;, type: &quot;boolean&quot;},
+        { name: &#39;isImportPOlogsfromProducersActualUploads&#39;, type: &quot;boolean&quot; },
+        { name: &#39;buildAPuponCCstatementPosting&#39;, type: &quot;boolean&quot; },
+        { name: &#39;buildAPuponPayrollPosting&#39;, type: &#39;boolean&#39; },
+        { name: &#39;pOAutoNumberingforDivisions&#39;, type: &quot;boolean&quot; },
+        { name: &#39;pOAutoNumberingforProjects&#39;, type: &#39;boolean&#39; },
+        { name: &#39;arAgingDate&#39;, type: &#39;boolean&#39; },
+        { name: &#39;apAgingDate&#39;, type: &#39;boolean&#39; },
+        { name: &#39;setDefaultAPTerms&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;setDefaultARTerms&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;depositGracePeriods&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;paymentsGracePeriods&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;defaultAPPostingDate&#39;, type: &#39;boolean&#39; },
+        { name: &#39;defaultBank&#39;, type: &#39;int&#39;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;allowTransactionsJobWithGL&#39;, type: &quot;boolean&quot; }
+    ]
+});</pre>
+</body>
+</html>

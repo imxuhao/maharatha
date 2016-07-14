@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.utilities.autofill.SubAccountsStore&#39;, {
+    extend: &#39;Chaching.store.base.BaseStore&#39;,
+    pageSize: 1000,
+    model : &#39;Chaching.model.financials.accounts.SubAccountsModel&#39;,
+    //fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+    //    name: &#39;subAccount1Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId1&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount2Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId2&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount3Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId3&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount4Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId4&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount5Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId5&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount6Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId6&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount7Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId7&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount8Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId8&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount9Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId9&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccount10Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;subAccountId10&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //},
+    ///////////////
+    //{
+    //    name: &#39;creditSubAccount1Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId1&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount2Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId2&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount3Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId3&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount4Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId4&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount5Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId5&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount6Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId6&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount7Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId7&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount8Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId8&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount9Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId9&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccount10Desc&#39;, convert: function (value, record) {
+    //        return record.get(&#39;name&#39;);
+    //    }
+    //}, {
+    //    name: &#39;creditSubAccountId10&#39;, convert: function (value, record) {
+    //        return record.get(&#39;value&#39;);
+    //    }
+    //}
+    //],
+    proxy: {
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+        type: &#39;chachingProxy&#39;,
+        //extraParams: {
+        //    jobId: null
+        //},
+        // url: abp.appPath + &#39;api/services/app/list/GetSubAccountList&#39;,
+        urlToGetRecordById: abp.appPath + &#39;api/services/app/subAccountUnit/GetSubAccountUnitsById&#39;,
+        api: {
+            read: abp.appPath + &#39;api/services/app/list/GetSubAccountList&#39;,
+            create: abp.appPath + &#39;api/services/app/subAccountUnit/CreateSubAccountUnit&#39;,
+            update: abp.appPath + &#39;api/services/app/subAccountUnit/UpdateSubAccountUnit&#39;,
+            destroy: abp.appPath + &#39;api/services/app/subAccountUnit/DeleteSubAccountUnit&#39;
+        },
+        reader: {
+            type: &#39;json&#39;,
+            rootProperty: &#39;result&#39;
+        }
+    },
+    idPropertyField: &#39;subAccountId&#39;//important to set for add/update of records
+});
+</pre>
+</body>
+</html>

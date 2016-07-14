@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.administration.organization.CompanyUserRoleListStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Roles.
+ */
+Ext.define('Chaching.store.administration.organization.CompanyUserRoleListStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.roles.RolesModel',
     proxy: {

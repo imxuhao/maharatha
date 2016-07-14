@@ -15,21 +15,27 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.tenants.TenantsStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-tenants-TenantsStore'>/**
+</span> * DataStore to perform CRUD operation on Tenants/Company.
+ */
+Ext.define(&#39;Chaching.store.tenants.TenantsStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.tenants.TenantsModel&#39;,
-    autoLoad: false,
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-tenants-TenantsStore-property-model'>    model: &#39;Chaching.model.tenants.TenantsModel&#39;,
+</span><span id='Chaching-store-tenants-TenantsStore-property-autoLoad'>    autoLoad: false,
+</span>    config : {
+<span id='Chaching-store-tenants-TenantsStore-cfg-searchEntityName'>        searchEntityName : &#39;tenant&#39;
+</span>    },
+<span id='Chaching-store-tenants-TenantsStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         api: {
-            create: abp.appPath + &#39;api/services/app/tenant/CreateTenant&#39;,
-            read: abp.appPath+&#39;api/services/app/tenant/GetTenants&#39;,
+            create: abp.appPath + &#39;api/services/app/tenant/CreateTenantUnit&#39;,
+            read: abp.appPath + &#39;api/services/app/tenant/GetTenantUnits&#39;,
             update: abp.appPath + &#39;api/services/app/tenant/UpdateTenant&#39;,
             destroy: abp.appPath + &#39;api/services/app/tenant/DeleteTenant&#39;
         }
     },
-    idPropertyField:&#39;id&#39;//important to set for add/update of records
-});</pre>
+<span id='Chaching-store-tenants-TenantsStore-property-idPropertyField'>    idPropertyField:&#39;id&#39;//important to set for add/update of records
+</span>});</pre>
 </body>
 </html>

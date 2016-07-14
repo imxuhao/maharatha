@@ -27,7 +27,7 @@ Ext.define(&#39;Chaching.view.roles.RolesForm&#39;,{
     controller: &#39;roles-rolesform&#39;,
   
 
-    name: &#39;Roles&#39;,
+    name: &#39;Administration.Roles&#39;,
     openInPopupWindow: true,
     hideDefaultButtons: false,
     layout: &#39;vbox&#39;,
@@ -44,7 +44,7 @@ Ext.define(&#39;Chaching.view.roles.RolesForm&#39;,{
         ui: &#39;dashboard&#39;,       
         items: [
         {
-            title: &#39;Roles&#39;,                            
+            title: app.localize(&#39;Roles&#39;),                            
             items: [{
                 xtype: &#39;hiddenfield&#39;,
                 name: &#39;id&#39;,
@@ -61,7 +61,7 @@ Ext.define(&#39;Chaching.view.roles.RolesForm&#39;,{
             ,{
                 xtype: &#39;checkbox&#39;,
                 boxLabel: app.localize(&#39;Default&#39;),
-                name: &#39;default&#39;,
+                name: &#39;isDefault&#39;,
                 labelAlign: &#39;right&#39;,
                 inputValue: true,
                 checked: true,
@@ -76,13 +76,33 @@ Ext.define(&#39;Chaching.view.roles.RolesForm&#39;,{
             ],          
         },
         {
-            title:&#39;Permissions&#39;,
+            title: app.localize(&#39;Permissions&#39;),
+            layout : &#39;fit&#39;,
             xtype: &#39;treepanel&#39;,
             name: &#39;permissions&#39;,
+            itemId : &#39;permissionsItemId&#39;,
             store: &#39;roles.RolesTreeStore&#39;,
-            rootVisible: true,
+            rootVisible: false,
             width: 400,
-            height: 500
+            height: 500,
+            alwaysReload: false,
+            scrollable: true,
+            hideHeaders: true,
+            columns: [{
+                xtype: &#39;treecolumn&#39;,
+                dataIndex: &#39;displayName&#39;,
+                flex: 1
+            }
+            ],
+            listeners: {
+                checkchange: function (node, checked, e, eOpts) {
+                    var me = this;
+                    var parentNode = node.parentNode;
+                    node.cascadeBy(function (n) {
+                        n.set(&#39;checked&#39;, checked);
+                    });
+                }
+            }
         }
         
         ]

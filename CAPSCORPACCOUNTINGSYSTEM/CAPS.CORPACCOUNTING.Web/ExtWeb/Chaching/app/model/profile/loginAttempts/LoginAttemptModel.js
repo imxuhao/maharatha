@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Users Login Attempts.
+ */
 Ext.define('Chaching.model.profile.loginAttempts.LoginAttemptModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

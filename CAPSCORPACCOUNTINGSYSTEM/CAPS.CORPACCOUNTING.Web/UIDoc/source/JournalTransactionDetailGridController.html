@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.journals.JournalTransactionDetailGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingTransactionDetailGridController&#39;,
+    alias: &#39;controller.financials-journals-journaltransactiondetailgrid&#39;,
+    onDeleteClicked: function (grid, rowIndex, colIndex) {
+        var me = this,
+            view = me.getView(),
+            detailStore = view.getStore();
+        if (view.isInViewMode) return;
+        var record = detailStore.getAt(rowIndex);
+        if (record) {
+            var accountingItemId = record.get(&#39;accountingItemId&#39;) || record.get(&#39;creditAccountingItemId&#39;);
+            if (accountingItemId &gt; 0 &amp;&amp; me.allowDetailRowDelete(record)) {
+                record.set(&#39;id&#39;, accountingItemId);
+                var operation = Ext.data.Operation({
+                    params: { id: accountingItemId },
+                    controller: me,
+                    action: &#39;destroy&#39;,
+                    records: [record],
+                    callback: me.onDetailDeleteOperationCompleteCallBack
+                });
+                detailStore.erase(operation);
+            }
+            detailStore.remove(record);
+        }
+    },
+    onSplitClicked: function (field) {
+        var me = this,
+           view = me.getView(),
+           gridStore = view.getStore();
+        var isInlineSplit = false,
+            editor = undefined,
+            cellRecordIndex = undefined;
+        if (field.xtype === &quot;numberfield&quot;) {
+            editor = field.up();
+            if (editor &amp;&amp; editor.context) {
+                cellRecordIndex = editor.context.record;
+                isInlineSplit = true;
+            }
+        }
+
+        var multiplyOfField = view.down(&#39;numberfield[itemId=multiplyOf]&#39;), multiplyOf = multiplyOfField.getValue();
+        if (isInlineSplit &amp;&amp; cellRecordIndex) {
+            view.getSelectionModel().select(cellRecordIndex);
+            multiplyOfField = field;
+            multiplyOf = multiplyOfField.getValue();
+            if (editor &amp;&amp; editor.editingPlugin) {
+                var cellEditing = editor.editingPlugin;
+                cellEditing.completeEdit();
+            }
+        }
+        var selectionModel = view.getSelectionModel(),
+            selectedRecords = selectionModel.getSelection();
+        if (view.isInViewMode) return;
+
+        if (selectedRecords &amp;&amp; selectedRecords.length === 1) {
+            var parentRecord = selectedRecords[0],
+                parentIndex = gridStore.indexOf(parentRecord);
+            if (!parentRecord.get(&#39;amount&#39;)) {
+                abp.notify.info(app.localize(&#39;EnterAmountToSplit&#39;), app.localize(&#39;ValidationFailed&#39;));
+                return;
+            }
+
+            var modelClass = gridStore.getModel(),
+                className = modelClass.$className;
+            if (multiplyOfField.validate()) {
+                //var amount = parentRecord.get(&#39;amount&#39;) / multiplyOf,
+                //firstValue = (Math.floor(amount * 100) / 100),
+                //decimalAmount = (parentRecord.get(&#39;amount&#39;) - (firstValue * multiplyOf)).toFixed(2);
+                //parentRecord.set(&#39;amount&#39;, +firstValue.toFixed(2));
+                parentRecord.set(&#39;isAccountingItemSplit&#39;, true);
+                var lastUsedSplitGroupCls = view.lastUsedSplitGroupCls,
+                    splitGroupsCls = Chaching.utilities.ChachingGlobals.splitGroupCls;
+
+                if (!lastUsedSplitGroupCls) {
+                    lastUsedSplitGroupCls = splitGroupsCls[0];
+                    view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                } else {
+                    var indexOfLastGroupCls = splitGroupsCls.indexOf(lastUsedSplitGroupCls);
+                    if (indexOfLastGroupCls + 1 &lt; splitGroupsCls.length) {
+                        lastUsedSplitGroupCls = splitGroupsCls[indexOfLastGroupCls + 1];
+                        view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                    } else {
+                        lastUsedSplitGroupCls = splitGroupsCls[0];
+                        view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                    }
+                }
+                parentRecord.set(&#39;SplitGroupCls&#39;, lastUsedSplitGroupCls);
+                Ext.suspendLayouts();
+                for (var i = 1; i &lt; multiplyOf; i++) {
+                    var rec = Ext.create(className);
+                    Ext.apply(rec.data, parentRecord.data);
+                    parentRecord.get(&#39;accountingItemId&#39;) === 0 ? rec.set(&#39;SplitAccountingItemId&#39;, parentRecord.get(&#39;creditAccountingItemId&#39;)) : rec.set(&#39;SplitAccountingItemId&#39;, parentRecord.get(&#39;accountingItemId&#39;));
+                    rec.set(&#39;accountingItemId&#39;, 0);
+                    rec.set(&#39;creditAccountingItemId&#39;, 0);
+                    rec.set(&#39;debitAccountingItemId&#39;, null);
+                    rec.set(&#39;isAccountingItemSplit&#39;, true);
+                    rec.set(&#39;amount&#39;, 0);
+                    rec.set(&#39;creatorUserId&#39;, null);
+                    rec.set(&#39;lastModifierUserId&#39;, null);
+                    rec.set(&#39;creationTime&#39;, null);
+                    rec.set(&#39;lastModificationTime&#39;, null);
+                    rec.set(&#39;parentRec&#39;, parentRecord);
+                    gridStore.insert(parentIndex + 1, rec);
+                }
+                Ext.resumeLayouts();
+                //parentRecord.set(&#39;amount&#39;, (firstValue + +decimalAmount).toFixed(2));
+            }
+        } else {
+            if (selectedRecords &amp;&amp; selectedRecords.length === 0)
+                abp.notify.info(app.localize(&#39;SplitRecordSelect&#39;), app.localize(&#39;ValidationFailed&#39;));
+            else if (selectedRecords &amp;&amp; selectedRecords.length &gt; 1)
+                abp.notify.info(app.localize(&#39;SingleSplit&#39;), app.localize(&#39;ValidationFailed&#39;));
+        }
+        view.getView().refresh();
+    },
+    beforeAccountQuery: function (queryPlan, eOpts) {
+        var me = this,
+            view = me.getView(),
+            editingPlugin = view.getPlugin(&#39;editingPlugin&#39;),
+            combo = queryPlan.combo,
+            comboStore = combo.getStore();
+        if (editingPlugin &amp;&amp; editingPlugin.activeRecord) {
+            var activeRec = editingPlugin.activeRecord,
+                jobId = activeRec.get(&#39;jobId&#39;);
+            if (combo.valueField === &quot;creditAccountId&quot;)jobId = activeRec.get(&quot;creditJobId&quot;);
+            if (jobId &gt; 0) {
+                comboStore.getProxy().setExtraParam(&#39;jobId&#39;, jobId);
+            } else comboStore.getProxy().setExtraParam(&#39;jobId&#39;, null);
+        }
+        if (queryPlan.lastQuery === queryPlan.query) {
+            queryPlan.cancel = true;
+            combo.expand();
+        }
+        comboStore.combo = combo;
+        comboStore.on(&#39;load&#39;, function () {
+            if (this.combo) this.combo.focus();
+        });
+    }
+});
+</pre>
+</body>
+</html>

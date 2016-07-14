@@ -25,8 +25,8 @@ Ext.define(&#39;Chaching.view.languages.LanguagesTextView&#39;,{
     ],
     controller: &#39;languages-languagestextview&#39;,
     columndata: null,
-    height: 655,
-    width: 900,
+    height: 680,
+    width: 1100,
     layout: &#39;fit&#39;,
     title: app.localize(&quot;LanguageTexts&quot;),
     initComponent: function (config) {
@@ -40,6 +40,9 @@ Ext.define(&#39;Chaching.view.languages.LanguagesTextView&#39;,{
         me.items = [form];
 
         me.callParent(arguments);
+    },
+    listeners: {
+        resize:&#39;onWindowResize&#39;
     }
 });
 </pre>

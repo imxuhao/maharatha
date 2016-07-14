@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.profile.loginAttempts.LoginAttemptStore', {
+﻿/**
+ * DataStore to perform Read operation on Users Login Attempts.
+ */
+Ext.define('Chaching.store.profile.loginAttempts.LoginAttemptStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.profile.loginAttempts.LoginAttemptModel',
     autoLoad:false,

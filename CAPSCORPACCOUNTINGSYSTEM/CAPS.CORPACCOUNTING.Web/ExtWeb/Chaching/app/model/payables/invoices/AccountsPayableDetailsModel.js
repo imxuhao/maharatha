@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Accounts Payable Distribution.
+ */
 Ext.define('Chaching.model.payables.invoices.AccountsPayableDetailsModel', {
     extend: 'Chaching.model.base.TransactionDetailsModel',
     config: {

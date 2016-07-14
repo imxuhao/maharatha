@@ -43,7 +43,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsGrid&#39;, {
           scale: &#39;small&#39;,
           ui: &#39;actionButton&#39;,
           action: &#39;create&#39;,
-          text: abp.localization.localize(&quot;CreateNewDivision&quot;).toUpperCase(),
+          text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
           checkPermission: true,
           iconCls: &#39;fa fa-plus&#39;,
           iconAlign: &#39;left&#39;
@@ -62,6 +62,10 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsGrid&#39;, {
     createWndTitleConfig: {
         title: app.localize(&#39;CreateNewDivision&#39;),
         iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewDivision&#39;),
+        iconCls: &#39;fa fa-th&#39;
     },
     createNewMode: &#39;tab&#39;,
     isSubMenuItemTab: true,
@@ -88,7 +92,6 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsGrid&#39;, {
              groupable: true,
              width: &#39;10%&#39;,
              hidden: false,
-            
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: &#39;combobox&#39;,
@@ -99,7 +102,9 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsGrid&#39;, {
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          },
 

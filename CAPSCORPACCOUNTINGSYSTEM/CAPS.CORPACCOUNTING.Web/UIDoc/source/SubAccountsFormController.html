@@ -17,7 +17,64 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.financials.accounts.SubAccountsFormController&#39;, {
     extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
-    alias: &#39;controller.financials-accounts-subaccountsform&#39;
+    alias: &#39;controller.financials-accounts-subaccountsform&#39;,
+    onAccountSpecificChange:function(check, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            dragDropControl = view.down(&#39;chachingGridDragDrop&#39;),
+            leftStore = dragDropControl.getLeftStore(),
+            rightStore = dragDropControl.getRightStore(),
+            values = view.getForm().getValues();
+        if (newValue) {
+            leftStore.getProxy().setExtraParam(&#39;subAccountId&#39;, values.subAccountId);
+            leftStore.load();
+
+            rightStore.getProxy().setExtraParam(&#39;subAccountId&#39;, values.subAccountId);
+            rightStore.load();
+            dragDropControl.show();
+        } else dragDropControl.hide();
+    },
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        var me = this,
+            view = me.getView(),
+            dragDropControl = view.down(&#39;chachingGridDragDrop&#39;),
+            leftStore = dragDropControl.getLeftStore(),
+            rightStore = dragDropControl.getRightStore(),
+            subAccountRestrictionList = [],
+            rightRecords = rightStore.getRange(),
+            leftRecords = leftStore.getRange(),
+            rightLength = rightRecords.length,
+            leftLength = leftRecords.length;
+        if (rightLength &gt; 0) {
+            for (var i = 0; i &lt; rightLength; i++) {
+                var rightRec = rightRecords[i];
+                if (rightRec.get(&#39;subAccountRestrictionId&#39;) === 0) {
+                    subAccountRestrictionList.push({
+                        subAccountRestrictionId: rightRec.get(&#39;subAccountRestrictionId&#39;),
+                        accountId: rightRec.get(&#39;accountId&#39;),
+                        isActive: rightRec.get(&#39;isActive&#39;),
+                        organizationUnitId: rightRec.get(&#39;organizationUnitId&#39;)
+                    });
+                }
+            }
+        }
+        if (leftLength&gt;0) {
+            for (var j = 0; j &lt; leftLength; j++) {
+                var leftRec = leftRecords[j];
+                if (leftRec.get(&#39;wasActive&#39;) &amp;&amp; !leftRec.get(&#39;isActive&#39;) &amp;&amp; leftRec.get(&#39;subAccountRestrictionId&#39;)&gt;0) {
+                    subAccountRestrictionList.push({
+                        subAccountRestrictionId: leftRec.get(&#39;subAccountRestrictionId&#39;),
+                        accountId: leftRec.get(&#39;accountId&#39;),
+                        isActive: leftRec.get(&#39;isActive&#39;),
+                        organizationUnitId: leftRec.get(&#39;organizationUnitId&#39;)
+                    });
+                }
+            }
+        }
+        record.data.subAccountRestrictionList = subAccountRestrictionList;
+        values.subAccountRestrictionList = subAccountRestrictionList;
+        return record;
+    }
     
 });
 </pre>

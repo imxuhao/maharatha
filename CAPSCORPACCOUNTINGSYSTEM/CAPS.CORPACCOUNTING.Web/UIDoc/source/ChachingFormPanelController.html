@@ -20,6 +20,7 @@
     alias: &#39;controller.common-form-chachingformpanel&#39;,
     //default buttons action handler
     onSaveClicked: function (btn) {
+       
         var me = this,
             view = me.getView(),
             parentGrid = view.parentGrid,
@@ -46,7 +47,6 @@
             //if doPreSaveOperation returns false the saving will be cancel
             record = me.doPreSaveOperation(record, values, idPropertyField);
             if (!record) return record;
-
             myMask.show();
             if (values &amp;&amp; parseInt(values[idPropertyField]) &gt; 0) {
                 operation = Ext.data.Operation({
@@ -73,6 +73,50 @@
                 myMask.hide();
             }
         }
+    },
+    onEditButtonClicked: function (editBtn) {
+        var me = this,
+            view = me.getView(),
+            childGrids = view.query(&#39;gridpanel&#39;),
+            form = view.getForm(),
+            fields = form.getFields().items;
+
+        Ext.each(fields, function (field) {
+            if (field.xtype !== &quot;hiddenfield&quot; &amp;&amp; !field.isFilterField) {
+                field.setDisabled(false);
+                if (typeof (field.setEmptyText) === &quot;function&quot;) {
+                    field.setEmptyText(field.originalEmptyText);
+                }
+            }
+        });
+
+        if (childGrids &amp;&amp; childGrids.length &gt; 0) {
+            Ext.each(childGrids, function (grid) {
+                grid.isInViewMode = false;
+                var dockedItems = grid.getDockedItems();
+                if (dockedItems &amp;&amp; dockedItems.length &gt; 0) {
+                    Ext.each(dockedItems, function (toolbar) {
+                        if (toolbar.isActionToolBar) toolbar.show();
+                    });
+                }
+            });
+        }
+        if (view.hideDefaultButtons) {
+            me.doModuleSpecificEditAction(view);
+        }
+        var defaultActionToolBar = view.defaultActionToolBar;
+        if (defaultActionToolBar) {
+            var defaultActionButtons = defaultActionToolBar.query(&#39;button&#39;);
+            if (defaultActionButtons &amp;&amp; defaultActionButtons.length &gt; 0) {
+                Ext.each(defaultActionButtons, function (button) {
+                    if (button.name !== &#39;Cancel&#39; &amp;&amp; button.name !== &quot;Edit&quot; &amp;&amp; typeof (button.hide) === &quot;function&quot;) {
+                        button.show();
+                    }
+                    if (button.name === &quot;Edit&quot;) button.hide();
+                });
+            }
+        }
+
     },
     //override in child classes if required to perform customOperation and return false to cancel save
     doPreSaveOperation:function(record,values,idPropertyField) { return record; },
@@ -116,6 +160,13 @@
             var action = operation.getAction();
             if (action === &quot;create&quot; || action === &quot;update&quot;) {
                 var gridController = operation.parentGrid.getController();
+                //this code is used to set the record in auto fill combo after create and update
+                if (view.openInPopupWindow) {
+                    operation.parentGrid.recordToSetInComboBox = null;
+                    if (operation.parentGrid.recordToSetInComboBox == null &amp;&amp; records.length &gt; 0) {
+                        operation.parentGrid.recordToSetInComboBox = records[0];
+                    }
+                }
                 gridController.doReloadGrid();
 
                 if (view &amp;&amp; view.openInPopupWindow) {

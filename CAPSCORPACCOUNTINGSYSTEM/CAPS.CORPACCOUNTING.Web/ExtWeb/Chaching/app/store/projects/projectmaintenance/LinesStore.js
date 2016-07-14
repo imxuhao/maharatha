@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.projects.projectmaintenance.LinesStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Job/Projects lines.
+ */
+Ext.define('Chaching.store.projects.projectmaintenance.LinesStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.financials.accounts.AccountsModel',
     proxy: {

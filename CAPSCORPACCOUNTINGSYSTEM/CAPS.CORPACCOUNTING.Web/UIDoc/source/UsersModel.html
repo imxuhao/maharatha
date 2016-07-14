@@ -15,18 +15,32 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.users.UsersModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-users-UsersModel'>/**
+</span> * DataModel to represent entity schema for Users.
+ */
+Ext.define(&#39;Chaching.model.users.UsersModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
-
-    fields: [
-        { name: &#39;id&#39;, type: &#39;int&#39; },
+    config: {
+<span id='Chaching-model-users-UsersModel-cfg-searchEntityName'>        searchEntityName: &#39;User&#39;
+</span>    },
+<span id='Chaching-model-users-UsersModel-property-fields'>    fields: [
+</span>        { name: &#39;id&#39;, type: &#39;int&#39;, isPrimaryKey: true, defaultValue: null, convert: nullHandler },
         { name: &#39;name&#39;, type: &#39;string&#39; },
         { name: &#39;surname&#39;, type: &#39;string&#39; },
+        {
+            name: &#39;fullName&#39;, type: &#39;string&#39;, convert: function (val, record) {
+                return record.get(&#39;name&#39;) + &quot; &quot; + record.get(&#39;surname&#39;)
+            }
+        },
         { name: &#39;userName&#39;, type: &#39;string&#39; },
         { name: &#39;emailAddress&#39;, type: &#39;string&#39; },
+        { name: &#39;defaultRoleId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;defaultRole&#39;, type: &#39;string&#39; },
         { name: &#39;isEmailConfirmed&#39;, type: &#39;boolean&#39; },
         { name: &#39;isActive&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isLocked&#39;, type: &#39;boolean&#39; },
         { name: &#39;lastLoginTime&#39;, type: &quot;date&quot;, format: &#39;Y-m-d&#39; },
+        { name: &#39;addedTime&#39;, type: &quot;date&quot;, format: &#39;Y-m-d&#39; },
         { name: &#39;createTime&#39;, type: &quot;date&quot;, format: &#39;Y-m-d&#39; }
     ]
 });

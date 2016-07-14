@@ -26,7 +26,14 @@ Ext.define(&#39;Chaching.view.languages.LanguagesTextForm&#39;,{
     controller: &#39;languages-languagestextform&#39;,
     hideDefaultButtons: true,
     name: &#39;LanguageTextsForm&#39;,
-    openInPopupWindow: true,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Administration.Languages&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Administration.Languages.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Administration.Languages.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Administration.Languages.Delete&#39;)
+    },
+    //openInPopupWindow: true,
+    openInPopupWindow: false,
     layout: &#39;vbox&#39;,
     defaults: {
         bodyStyle: { &#39;background-color&#39;: &#39;trasparent&#39; },
@@ -49,6 +56,8 @@ Ext.define(&#39;Chaching.view.languages.LanguagesTextForm&#39;,{
                         {
                             xtype: &#39;combobox&#39;,
                             name: &#39;baseLanguage&#39;,
+                            itemId: &#39;baseLanguageItemId&#39;,
+                            reference: &#39;baseLanguageItemId&#39;,
                             fieldLabel: app.localize(&#39;BaseLanguage&#39;).initCap(),
                             width: &#39;99%&#39;,
                             ui: &#39;fieldLabelTop&#39;,
@@ -88,6 +97,8 @@ Ext.define(&#39;Chaching.view.languages.LanguagesTextForm&#39;,{
                             displayField: &#39;displayName&#39;,
                             valueField: &#39;name&#39;,
                             labelAlign: &#39;top&#39;,
+                            itemId: &#39;targetLanguageItemId&#39;,
+                            reference: &#39;targetLanguageItemId&#39;,
                             listeners: {
                                 change: &#39;getLanguageTextsonChange&#39;
                             },
@@ -171,7 +182,9 @@ Ext.define(&#39;Chaching.view.languages.LanguagesTextForm&#39;,{
             items: [
                 {
                     xtype: &#39;Languagetexts&#39;,
-                    layout: &#39;fit&#39;
+                    layout: &#39;fit&#39;,
+                    //height: &#39;100%&#39;,
+                    //width: &#39;100%&#39;
                 }
             ]
         }

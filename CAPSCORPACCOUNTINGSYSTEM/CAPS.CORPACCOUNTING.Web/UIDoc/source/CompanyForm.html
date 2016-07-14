@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.administration.organization.CompanyForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [
+        &#39;widget.companysetup.create&#39;, &#39;widget.companysetup.edit&#39;
+    ],
+    requires: [
+    ],
+    controller: &#39;administration-organization-companyform&#39;,
+    name: &#39;companysetup&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Administration.CompanySetUp&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Administration.CompanySetUp.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Administration.CompanySetUp.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Administration.CompanySetUp.Delete&#39;)
+    },
+    openInPopupWindow: false,
+    hideDefaultButtons: true,
+    autoScroll: false,
+    border: false,
+    showFormTitle: false,
+    displayDefaultButtonsCenter: true,
+    titleConfig: {
+        title: abp.localization.localize(&quot;CreateNewCompanySetup&quot;).initCap()
+    },
+    layout : &#39;fit&#39;,
+    items: [{
+        xtype: &#39;tabpanel&#39;,
+       // ui: &#39;formTabPanels&#39;,
+        ui: &#39;submenuTabs&#39;,
+        tabPosition: &#39;left&#39;,
+        tabRotation: 2,
+        items: [
+            {
+                title: abp.localization.localize(&quot;CompanySetup&quot;).initCap(),
+                itemId : &#39;companySetupTab&#39;,
+                items: [
+     {
+         xtype: &#39;hiddenfield&#39;,
+         itemId : &#39;companyItemId&#39;,
+         name: &#39;id&#39;, //companyId
+         value: 0
+     },
+     {
+         xtype: &#39;hiddenfield&#39;,
+         name: &#39;addressId&#39;, //companyId
+         value: 0
+     },
+     {
+         xtype: &#39;fieldset&#39;,
+         ui: &#39;transparentFieldSet&#39;,
+         title: abp.localization.localize(&quot;CompanyInformation&quot;).initCap(),
+         collapsible: true,
+         layout: &#39;column&#39;,
+         items: [{
+             columnWidth: .33,
+             padding: &#39;20 10 0 20&#39;,
+             defaults: {
+                 labelWidth: 110,
+                 blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+             },
+             items: [{
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;displayName&#39;,
+                 allowBlank: false,
+                 fieldLabel: app.localize(&#39;CompanyName&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;,
+                 emptyText: app.localize(&#39;MandatoryField&#39;)
+             }, {
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;line1&#39;,
+                 allowBlank: false,
+                 fieldLabel: app.localize(&#39;Address1&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;,
+                 emptyText: app.localize(&#39;MandatoryField&#39;)
+             },
+             {
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;line2&#39;,
+                 // allowBlank: false,
+                 fieldLabel: app.localize(&#39;Address2&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;
+             },
+             {
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;line3&#39;,
+                 //allowBlank: false,
+                 fieldLabel: app.localize(&#39;Address3&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;
+             }
+             ]
+         },
+         {
+             columnWidth: .33,
+             padding: &#39;20 10 0 20&#39;,
+             defaults: {
+                 //labelWidth: 140,
+                 blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+             },
+             items: [{
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;postalCode&#39;,
+                 fieldLabel: app.localize(&#39;PostalCode&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;,
+                 listeners: {
+                     specialkey: &#39;onPostalCodeEnter&#39;
+                 }
+             },
+             {
+                 xtype: &#39;combobox&#39;,
+                 name: &#39;city&#39;,
+                 fieldLabel: app.localize(&#39;City&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;,
+                 displayField: &#39;city&#39;,
+                 valueField: &#39;city&#39;,
+                 emptyText: app.localize(&#39;SelectOption&#39;),
+                 queryMode: &#39;local&#39;//,
+                 //store: &#39;&#39;
+             },
+             {
+                 xtype: &#39;combobox&#39;,
+                 name: &#39;state&#39;,
+                 fieldLabel: app.localize(&#39;CompanyState&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;,
+                 displayField: &#39;state&#39;,
+                 valueField: &#39;state&#39;,
+                 emptyText: app.localize(&#39;SelectOption&#39;),
+                 queryMode: &#39;local&#39;//,
+                 //store: &#39;&#39;
+             },
+              {
+                  xtype: &#39;combobox&#39;,
+                  name: &#39;country&#39;,
+                  fieldLabel: app.localize(&#39;Country&#39;).initCap(),
+                  width: &#39;100%&#39;,
+                  ui: &#39;fieldLabelTop&#39;,
+                  displayField: &#39;country&#39;,
+                  valueField: &#39;country&#39;,
+                  emptyText: app.localize(&#39;SelectOption&#39;),
+                  queryMode: &#39;local&#39;
+              }
+             ]
+         },
+                     {
+                         columnWidth: .33,
+                         padding: &#39;20 10 0 20&#39;,
+                         defaults: {
+                             // labelWidth: 180,
+                             blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                         },
+                         items: [{
+                             xtype: &#39;textfield&#39;,
+                             name: &#39;phone1&#39;,
+                             fieldLabel: app.localize(&#39;Telephone&#39;).initCap(),
+                             width: &#39;100%&#39;,
+                             ui: &#39;fieldLabelTop&#39;
+                         }, {
+                             xtype: &#39;textfield&#39;,
+                             name: &#39;email&#39;,
+                             fieldLabel: app.localize(&#39;Email&#39;).initCap(),
+                             vtype: &#39;email&#39;,
+                             width: &#39;100%&#39;,
+                             ui: &#39;fieldLabelTop&#39;
+                         }, {
+                             xtype: &#39;textfield&#39;,
+                             name: &#39;federalTaxId&#39;,
+                             fieldLabel: app.localize(&#39;FedTaxID&#39;).initCap(),
+                             width: &#39;100%&#39;,
+                             ui: &#39;fieldLabelTop&#39;
+                         }, {
+                             xtype: &#39;filefield&#39;,
+                             name: &#39;companyLogo&#39;,
+                             // ui: &#39;default&#39;,
+                             // ui: &#39;fieldLabelTop&#39;,
+                             labelStyle: &quot;font: 600 13px/17px &#39;Open Sans&#39;, &#39;Helvetica Neue&#39;, helvetica, arial, verdana, sans-serif !important;&quot;,
+                             fieldLabel: app.localize(&#39;CompanyLogo&#39;),
+                             clearOnSubmit: false,
+                             anchor: &#39;100%&#39;,
+                             width: &#39;100%&#39;,
+                             buttonText: &#39;Select Logo...&#39;,
+                             listeners: {
+                                  change: &#39;onFileChange&#39;
+                             }
+                         }, {
+                             xtype: &#39;label&#39;,
+                             text: app.localize(&#39;CompanyLogo_Change_Info&#39;).initCap(),
+                             width: &#39;100%&#39;
+                         }]
+                     }]
+     }, {
+         xtype: &#39;fieldset&#39;,
+         ui: &#39;transparentFieldSet&#39;,
+         title: abp.localization.localize(&quot;Company1099And1096Form&quot;).initCap(),
+         collapsible: true,
+         layout: &#39;column&#39;,
+         items: [{
+             columnWidth: .5,
+             padding: &#39;20 10 0 20&#39;,
+             defaults: {
+                 labelWidth: 180,
+                 blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+             },
+             items: [{
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;transmitterContactName&#39;,
+                 fieldLabel: app.localize(&#39;TransmitterContactName&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;
+             },
+             {
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;transmitterEmailAddress&#39;,
+                 vtype: &#39;email&#39;,
+                 // allowBlank: false,
+                 fieldLabel: app.localize(&#39;TransmitterEmailAddress&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;
+             }
+             ]
+         },
+         {
+             columnWidth: .5,
+             padding: &#39;20 10 0 20&#39;,
+             defaults: {
+                 labelWidth: 180,
+                 blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+             },
+             items: [{
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;transmitterCode&#39;,
+                 //allowBlank: false,
+                 fieldLabel: app.localize(&#39;TransmitterCode&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;
+             },
+             {
+                 xtype: &#39;textfield&#39;,
+                 name: &#39;transmitterControlCode&#39;,
+                 // allowBlank: false,
+                 fieldLabel: app.localize(&#39;TransmitterControlCode&#39;).initCap(),
+                 width: &#39;100%&#39;,
+                 ui: &#39;fieldLabelTop&#39;
+             }]
+         }]
+     }],
+                dockedItems: [
+                           {
+                               xtype: &#39;toolbar&#39;,
+                               dock: &#39;bottom&#39;,
+                               layout: {
+                                   type: &#39;hbox&#39;,
+                                   pack: &#39;center&#39;
+                               },
+                               items: [
+                               {
+                                   xtype: &#39;button&#39;,
+                                   itemId: &#39;btnSaveSetup&#39;,
+                                   name: &#39;Save&#39;,
+                                   ui: &#39;actionButton&#39;,
+                                   text: app.localize(&#39;SaveCompanySetup&#39;).toUpperCase(),
+                                   iconCls: &#39;fa fa-save&#39;,
+                                   actionButton: true,
+                                   listeners: {
+                                       click: &#39;onSaveClicked&#39;
+                                   }
+                               },
+
+                               //{
+                               //    xtype: &#39;button&#39;,
+                               //    scale: &#39;small&#39;,
+                               //    iconCls: &#39;fa fa-edit&#39;,
+                               //    iconAlign: &#39;left&#39;,
+                               //    text: app.localize(&#39;Edit&#39;).toUpperCase(),
+                               //    ui: &#39;actionButton&#39;,
+                               //    name: &#39;Edit&#39;,
+                               //    itemId: &#39;BtnEdit&#39;,
+                               //    reference: &#39;BtnEdit&#39;,
+                               //    hidden: true,
+                               //    actionButton: true,
+                               //    listeners: {
+                               //        click: &#39;onEditButtonClicked&#39;
+                               //    }
+                               //},
+
+
+                               {
+                                   xtype: &#39;button&#39;,
+                                   itemId: &#39;btnCancelSetup&#39;,
+                                   name: &#39;Cancel&#39;,
+                                   ui: &#39;actionButton&#39;,
+                                   text: app.localize(&#39;Cancel&#39;).toUpperCase(),
+                                   iconCls: &#39;fa fa-close&#39;,
+                                   actionButton: true,
+                                   listeners: {
+                                       click: &#39;onCancelClicked&#39;
+                                   }
+                               }]
+                           }]
+            },
+            {
+                title: abp.localization.localize(&quot;CompanyPreferences&quot;).initCap(),
+                disabled: true,
+                xtype : &#39;form&#39;,
+                itemId: &#39;companyPreferencesTab&#39;,
+                items: [
+       {
+           xtype: &#39;fieldset&#39;,
+           ui: &#39;transparentFieldSet&#39;,
+           title: abp.localization.localize(&quot;CompanyPreferences&quot;).initCap(),
+           collapsible: true,
+           layout: &#39;column&#39;,
+           items: [{
+               columnWidth: .33,
+               padding: &#39;20 10 0 20&#39;,
+               defaults: {
+                   //labelWidth: 120//,
+                   //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+               },
+               items: [{
+                   xtype: &#39;checkbox&#39;,
+                   name: &#39;isAllowDuplicateAPInvoiceNos&#39;,
+                   labelAlign: &#39;right&#39;,
+                   inputValue: true,
+                   uncheckedValue: false,
+                   width: &#39;100%&#39;,
+                   ui: &#39;default&#39;,
+                   boxLabelCls: &#39;checkboxLabel&#39;,
+                   boxLabel: app.localize(&#39;AllowDuplicateAPInvoices&#39;)
+               },
+              {
+                  xtype: &#39;checkbox&#39;,
+                  name: &#39;isAllowDuplicateARInvoiceNos&#39;,
+                  labelAlign: &#39;right&#39;,
+                  inputValue: true,
+                  uncheckedValue: false,
+                  width: &#39;100%&#39;,
+                  ui: &#39;default&#39;,
+                  boxLabelCls: &#39;checkboxLabel&#39;,
+                  boxLabel: app.localize(&#39;AllowDuplicateARInvoices&#39;)
+
+              },
+               {
+                   xtype: &#39;checkbox&#39;,
+                   name: &#39;isAllowAccountnumbersStartingwithZero&#39;,
+                   labelAlign: &#39;right&#39;,
+                   inputValue: true,
+                   uncheckedValue: false,
+                   width: &#39;100%&#39;,
+                   ui: &#39;default&#39;,
+                   boxLabelCls: &#39;checkboxLabel&#39;,
+                   boxLabel: app.localize(&#39;AllowAccountNumbersStartingWithZero&#39;)
+
+               }, {
+                   xtype: &#39;checkbox&#39;,
+                   name: &#39;isImportPOlogsfromProducersActualUploads&#39;,
+                   labelAlign: &#39;right&#39;,
+                   inputValue: true,
+                   uncheckedValue: false,
+                   width: &#39;100%&#39;,
+                   ui: &#39;default&#39;,
+                   boxLabelCls: &#39;checkboxLabel&#39;,
+                   boxLabel: app.localize(&#39;ImportPOLogsFromProducersActualUploads&#39;)
+
+               },
+               {
+                   xtype: &#39;checkbox&#39;,
+                   name: &#39;buildAPuponCCstatementPosting&#39;,
+                   labelAlign: &#39;right&#39;,
+                   inputValue: true,
+                   uncheckedValue: false,
+                   width: &#39;100%&#39;,
+                   ui: &#39;default&#39;,
+                   boxLabelCls: &#39;checkboxLabel&#39;,
+                   boxLabel: app.localize(&#39;BuildAPUponCCStatementPosting&#39;)
+               }, {
+                   xtype: &#39;checkbox&#39;,
+                   name: &#39;buildAPuponPayrollPosting&#39;,
+                   labelAlign: &#39;right&#39;,
+                   inputValue: true,
+                   uncheckedValue: false,
+                   width: &#39;100%&#39;,
+                   ui: &#39;default&#39;,
+                   boxLabelCls: &#39;checkboxLabel&#39;,
+                   boxLabel: app.localize(&#39;BuildAPUponPayrollPosting&#39;)
+               },
+                 {
+                     xtype: &#39;checkbox&#39;,
+                     name: &#39;pOAutoNumberingforDivisions&#39;,
+                     labelAlign: &#39;right&#39;,
+                     inputValue: true,
+                     uncheckedValue: false,
+                     width: &#39;100%&#39;,
+                     ui: &#39;default&#39;,
+                     boxLabelCls: &#39;checkboxLabel&#39;,
+                     boxLabel: app.localize(&#39;POAutoNumberingforDivisions&#39;)
+                 },
+                  {
+                      xtype: &#39;checkbox&#39;,
+                      name: &#39;pOAutoNumberingforProjects&#39;,
+                      labelAlign: &#39;right&#39;,
+                      inputValue: true,
+                      uncheckedValue: false,
+                      width: &#39;100%&#39;,
+                      ui: &#39;default&#39;,
+                      boxLabelCls: &#39;checkboxLabel&#39;,
+                      boxLabel: app.localize(&#39;POAutoNumberingforProjects&#39;)
+                  }
+               ]
+           },
+           {
+               columnWidth: .33,
+               padding: &#39;20 10 0 20&#39;,
+               defaults: {
+                   labelWidth: 160,
+                   blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+               },
+               items: [{
+                   xtype: &#39;radiogroup&#39;,
+                   labelStyle: &#39;padding-top: 8px !important;&#39;,
+                   fieldLabel: app.localize(&#39;ARAgingDate&#39;),
+                   width: &#39;100%&#39;,
+                   ui: &#39;fieldLabelTop&#39;,
+                   columns: 1,
+                   vertical: true,
+                   itemId: &#39;arAgingDateItemId&#39;,
+                   items: [{
+                       boxLabel: app.localize(&#39;AgeByInvoiceDate&#39;).initCap(),
+                       name: &#39;arAgingDate&#39;,
+                       inputValue: &#39;invoiceDate&#39;,
+                       ui: &#39;default&#39;,
+                       boxLabelCls: &#39;checkboxLabel&#39;,
+                       uncheckedValue: &#39;false&#39;
+                   }, {
+                       boxLabel: app.localize(&#39;AgeByDueDate&#39;).initCap(),
+                       name: &#39;arAgingDate&#39;,
+                       inputValue: &#39;dueDate&#39;,
+                       ui: &#39;default&#39;,
+                       boxLabelCls: &#39;checkboxLabel&#39;,
+                       uncheckedValue: &#39;false&#39;
+                   }]
+               }, {
+                   xtype: &#39;radiogroup&#39;,
+                   labelStyle: &#39;padding-top: 8px !important;&#39;,
+                   fieldLabel: app.localize(&#39;APAgingDate&#39;),
+                   width: &#39;100%&#39;,
+                   ui: &#39;fieldLabelTop&#39;,
+                   columns: 1,
+                   vertical: true,
+                   itemId: &#39;apAgingDateItemId&#39;,
+                   items: [{
+                       boxLabel: app.localize(&#39;AgeByInvoiceDate&#39;).initCap(),
+                       name: &#39;apAgingDate&#39;,
+                       inputValue: &#39;invoiceDate&#39;,
+                       ui: &#39;default&#39;,
+                       boxLabelCls: &#39;checkboxLabel&#39;,
+                       uncheckedValue: &#39;false&#39;
+                   }, {
+                       boxLabel: app.localize(&#39;AgeByDueDate&#39;).initCap(),
+                       name: &#39;apAgingDate&#39;,
+                       inputValue: &#39;dueDate&#39;,
+                       ui: &#39;default&#39;,
+                       boxLabelCls: &#39;checkboxLabel&#39;,
+                       uncheckedValue: &#39;false&#39;
+                   }]
+               }, {
+                   xtype: &#39;radiogroup&#39;,
+                   fieldLabel: app.localize(&#39;APPostingDateDefault&#39;),
+                   width: &#39;100%&#39;,
+                   labelStyle: &#39;padding-top: 8px !important;&#39;,
+                   ui: &#39;fieldLabelTop&#39;,
+                   columns: 1,
+                   vertical: true,
+                   itemId: &#39;defaultAPPostingDateItemId&#39;,
+                   items: [{
+                       boxLabel: app.localize(&#39;CompanyInvoiceDate&#39;).initCap(),
+                       name: &#39;defaultAPPostingDate&#39;,
+                       inputValue: &#39;invoiceDate&#39;,
+                       ui: &#39;default&#39;,
+                       boxLabelCls: &#39;checkboxLabel&#39;,
+                       uncheckedValue: &#39;false&#39;
+                   }, {
+                       boxLabel: app.localize(&#39;CurrentDate&#39;).initCap(),
+                       name: &#39;defaultAPPostingDate&#39;,
+                       inputValue: &#39;currentDate&#39;,
+                       ui: &#39;default&#39;,
+                       boxLabelCls: &#39;checkboxLabel&#39;,
+                       uncheckedValue: &#39;false&#39;
+                   }]
+               }
+               ]
+           },
+                       {
+                           columnWidth: .33,
+                           padding: &#39;20 10 0 20&#39;,
+                           defaults: {
+                               labelWidth: 160,
+                               blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                           },
+                           items: [
+                       {
+                           xtype: &#39;combobox&#39;,
+                           name: &#39;setDefaultAPTerms&#39;,
+                           emptyText: app.localize(&#39;SelectOption&#39;),
+                           width: &#39;100%&#39;,
+                           ui: &#39;fieldLabelTop&#39;,
+                           displayField: &#39;setDefaultAPTerms&#39;,
+                           valueField: &#39;setDefaultAPTerms&#39;,
+                           fieldLabel: app.localize(&#39;SetDefaultAPTerms&#39;)
+
+                       },
+                       {
+                           xtype: &#39;combobox&#39;,
+                           name: &#39;setDefaultARTerms&#39;,
+                           emptyText: app.localize(&#39;SelectOption&#39;),
+                           width: &#39;100%&#39;,
+                           ui: &#39;fieldLabelTop&#39;,
+                           displayField: &#39;setDefaultARTerms&#39;,
+                           valueField: &#39;setDefaultARTerms&#39;,
+                           fieldLabel: app.localize(&#39;SetDefaultARTerms&#39;)
+
+                       },
+                            {
+                                xtype: &#39;numberfield&#39;,
+                                maxValue: 99,
+                                minValue: 0,
+                                hideTrigger: true,
+                                allowDecimals: false,
+                                keyNavEnabled: false,
+                                mouseWheelEnabled: false,
+                                name: &#39;depositGracePeriods&#39;,
+                                fieldLabel: app.localize(&#39;DepositGracePeriods&#39;).initCap(),
+                                width: &#39;100%&#39;,
+                                ui: &#39;fieldLabelTop&#39;
+                            }, {
+                                xtype: &#39;numberfield&#39;,
+                                maxValue: 99,
+                                minValue: 0,
+                                hideTrigger: true,
+                                allowDecimals: false,
+                                keyNavEnabled: false,
+                                mouseWheelEnabled: false,
+                                name: &#39;paymentsGracePeriods&#39;,
+                                fieldLabel: app.localize(&#39;PaymentGracePeriods&#39;).initCap(),
+                                width: &#39;100%&#39;,
+                                ui: &#39;fieldLabelTop&#39;
+                            }, {
+                                xtype: &#39;chachingcombobox&#39;,
+                                store: new Chaching.store.utilities.autofill.BankAccountListStore(),
+                                fieldLabel: app.localize(&#39;DefaultBank&#39;),
+                                ui: &#39;fieldLabelTop&#39;,
+                                width: &#39;100%&#39;,
+                                name: &#39;defaultBank&#39;,
+                                valueField: &#39;bankAccountId&#39;,
+                                displayField: &#39;bankAccountNumber&#39;,
+                                queryMode: &#39;remote&#39;,
+                                minChars: 2,
+                                useDisplayFieldToSearch: true,
+                                modulePermissions: {
+                                    read: abp.auth.isGranted(&#39;Pages.Banking.BankSetup&#39;),
+                                    create: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Create&#39;),
+                                    edit: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Edit&#39;),
+                                    destroy: abp.auth.isGranted(&#39;Pages.Banking.BankSetup.Delete&#39;)
+                                },
+                                primaryEntityCrudApi: {
+                                    read: abp.appPath + &#39;api/services/app/list/GetBankAccountList&#39;,
+                                    create: abp.appPath + &#39;api/services/app/bankAccountUnit/CreateBankAccountUnit&#39;,
+                                    update: abp.appPath + &#39;api/services/app/bankAccountUnit/UpdateBankAccountUnit&#39;,
+                                    destroy: abp.appPath + &#39;api/services/app/bankAccountUnit/DeleteBankAccountUnit&#39;
+                                },
+                                createEditEntityType: &#39;banking.banksetup&#39;,
+                                createEditEntityGridController: &#39;banking.banksetupgrid&#39;,
+                                entityType: &#39;Bank Account&#39;
+                            }, {
+                                xtype: &#39;checkbox&#39;,
+                                name: &#39;allowTransactionsJobWithGL&#39;,
+                                labelAlign: &#39;right&#39;,
+                                inputValue: true,
+                                uncheckedValue: false,
+                                width: &#39;100%&#39;,
+                                ui: &#39;default&#39;,
+                                boxLabelCls: &#39;checkboxLabel&#39;,
+                                boxLabel: app.localize(&#39;AllowTransactionsActionsThatHaveBeenCodedToJob+GLToAppearOnJobCost&#39;)
+
+                            }]
+                       }
+           ]
+       }], dockedItems: [
+                {
+                    xtype: &#39;toolbar&#39;,
+                    dock: &#39;bottom&#39;,
+                    layout: {
+                        type: &#39;hbox&#39;,
+                        pack: &#39;center&#39;
+                    },
+                    items: [
+                    {
+                        xtype: &#39;button&#39;,
+                        itemId: &#39;btnSaveSetup&#39;,
+                        name: &#39;Save&#39;,
+                        ui: &#39;actionButton&#39;,
+                        text: app.localize(&#39;SaveCompanyPreferences&#39;).toUpperCase(),
+                        iconCls: &#39;fa fa-save&#39;,
+                        actionButton: true,
+                        listeners: {
+                            click: &#39;onSaveCompanyPreferences&#39;//&#39;onSaveClicked&#39;
+                        }
+                    },
+
+                    //{
+                    //    xtype: &#39;button&#39;,
+                    //    scale: &#39;small&#39;,
+                    //    iconCls: &#39;fa fa-edit&#39;,
+                    //    iconAlign: &#39;left&#39;,
+                    //    text: app.localize(&#39;Edit&#39;).toUpperCase(),
+                    //    ui: &#39;actionButton&#39;,
+                    //    name: &#39;Edit&#39;,
+                    //    itemId: &#39;BtnEdit&#39;,
+                    //    reference: &#39;BtnEdit&#39;,
+                    //    hidden: true,
+                    //    actionButton: true,
+                    //    listeners: {
+                    //        click: &#39;onEditButtonClicked&#39;
+                    //    }
+                    //},
+
+                    {
+                        xtype: &#39;button&#39;,
+                        itemId: &#39;btnCancelSetup&#39;,
+                        name: &#39;Cancel&#39;,
+                        ui: &#39;actionButton&#39;,
+                        text: app.localize(&#39;Cancel&#39;).toUpperCase(),
+                        iconCls: &#39;fa fa-close&#39;,
+                        actionButton: true,
+                        listeners: {
+                            click: &#39;onCancelClicked&#39;
+                        }
+                    }]
+                }]
+             },
+            {
+                layout: &#39;fit&#39;,
+                title: abp.localization.localize(&quot;Members&quot;).initCap(),
+                disabled: true,
+                hideDefaultButtons: true,
+                hidden : !abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits.ManageMembers&#39;),
+                itemId: &#39;membersTab&#39;,
+                xtype: &#39;administration.organizationunits.companyusersgrid&#39;
+            }
+            ]
+
+    }]
+});</pre>
+</body>
+</html>

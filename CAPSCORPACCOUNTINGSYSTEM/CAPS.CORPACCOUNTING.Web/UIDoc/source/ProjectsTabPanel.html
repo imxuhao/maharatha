@@ -15,25 +15,30 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The class is created to as host for projects submenu items
+ * Author: Krishna Garad
+ * Date: 28/04/2016
+ */
+<span id='Chaching-view-projects-ProjectsTabPanel'>/**
+</span> * @class Chaching.view.projects.ProjectsTabPanel
+ * Host for projects subMenuItems
+ * @alias projects.projectmaintenance
+ */
 Ext.define(&#39;Chaching.view.projects.ProjectsTabPanel&#39;,{
     extend: &#39;Chaching.view.common.tab.ChachingTabPanel&#39;,
 
     requires: [
-        &#39;Chaching.view.projects.ProjectsTabPanelController&#39;,
-        &#39;Chaching.view.projects.ProjectsTabPanelModel&#39;
+        &#39;Chaching.view.projects.ProjectsTabPanelController&#39;
     ],
     xtype: &#39;projects.projectmaintenance&#39;,
-    controller: &#39;projects-projectstabpanel&#39;,
-    viewModel: {
-        type: &#39;projects-projectstabpanel&#39;
+<span id='Chaching-view-projects-ProjectsTabPanel-property-controller'>    controller: &#39;projects-projectstabpanel&#39;,
+</span><span id='Chaching-view-projects-ProjectsTabPanel-property-name'>    name: &#39;Projects.ProjectMaintenance&#39;,
+</span><span id='Chaching-view-projects-ProjectsTabPanel-property-modulePermissions'>    modulePermissions: {
+</span>        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance&#39;)
     },
-    name: &#39;Projects.ProjectMaintenance&#39;,
-    modulePermissions: {
-        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance&#39;)
-    },
-    staticTabItems: null
-   
+<span id='Chaching-view-projects-ProjectsTabPanel-property-staticTabItems'>    staticTabItems: null
+</span>   
 });
 </pre>
 </body>

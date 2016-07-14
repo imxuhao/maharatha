@@ -18,22 +18,51 @@
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.users.UsersFormController&#39;, {
     extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
     alias: &#39;controller.users-usersform&#39;,
+    loadCompanyRoles : function(view , record , item , index , e , eOpts) {
+        var me = this,
+            view = me.getView();
+        var rolesGrid = view.down(&#39;gridpanel[itemId=companyRolesListGridItemId]&#39;);
+        var rolesStore = rolesGrid.getStore();
+        var proxy = rolesStore.getProxy();
+        proxy.api.read = abp.appPath + &#39;api/services/app/user/GetRolesByTenant&#39;,
+        rolesStore.removeAll();
+        rolesStore.getProxy().setExtraParams({ id: record.get(&#39;tenantId&#39;) });
+        rolesStore.load();
+    },
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        var me = this,
+             view = me.getView();
+        record.data.user = values;
+        Ext.apply(record.data, values);
+        //get roles information
+        var rolesListRecords = view.down(&#39;gridpanel[itemId=rolesListGridItemId]&#39;).getSelection();
+        //get company information
+        var companyListRecords = view.down(&#39;gridpanel[itemId=companyListGridItemId]&#39;).getSelection();
+        if (rolesListRecords &amp;&amp; rolesListRecords.length &gt; 0) {
+           var rolesListArray = [];
+           Ext.each(rolesListRecords, function (rec) {
+                rolesListArray.push(rec.get(&#39;displayName&#39;));
+            });
+            record.data.assignedRoleNames = rolesListArray;
+        }
+        if (companyListRecords &amp;&amp; companyListRecords.length &gt; 0) {
+            var tenantListArray = [];
+            Ext.each(companyListRecords, function (rec) {
+                tenantListArray.push({ tenantId: rec.get(&#39;tenantId&#39;), tenantName: rec.get(&#39;tenantName&#39;) });
+            });
+            record.data.tenantList = tenantListArray;
+        }
+        
+        return record;
+    }
+    ,
     showRandomPassword: function () {
         var me = this;
-        setRandomPassword = me.lookupReference(&#39;setRandomPassword&#39;);
         password = me.lookupReference(&#39;password&#39;);
         passwordRepeat = me.lookupReference(&#39;passwordRepeat&#39;);
-        if (setRandomPassword.value) {
-            password.hide();
-            passwordRepeat.hide();
-        }
-        else {
-            password.show();
-            passwordRepeat.show();
-        }
         password.reset();
         passwordRepeat.reset();
-    },
+    }
 
 });
 </pre>

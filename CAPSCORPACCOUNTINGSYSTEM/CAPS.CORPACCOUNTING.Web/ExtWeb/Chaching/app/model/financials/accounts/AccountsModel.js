@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.financials.accounts.AccountsModel', {
+﻿/**
+ * DataModel to represent entity schema for Accounts.
+ */
+Ext.define('Chaching.model.financials.accounts.AccountsModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: 'Account'

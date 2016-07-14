@@ -24,7 +24,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.AccountsForm&#39;, {
     ],
 
     controller: &#39;financials-accounts-accountsform&#39;,
-    name: &#39;accounts&#39;,
+    name: &#39;Financials.Accounts.Accounts&#39;,
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: &#39;column&#39;,
@@ -32,6 +32,10 @@ Ext.define(&#39;Chaching.view.financials.accounts.AccountsForm&#39;, {
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
+    popupWndSize: {
+        height: &#39;70%&#39;,
+        width: &#39;70%&#39;
+    },
     titleConfig: {
         title: abp.localization.localize(&quot;CreateNewFinancialAccount&quot;).initCap()
     },
@@ -47,28 +51,30 @@ Ext.define(&#39;Chaching.view.financials.accounts.AccountsForm&#39;, {
         columnWidth: .5,
         padding: &#39;20 10 0 20&#39;,
         defaults: {
-            labelAlign: &#39;top&#39;,
-            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+            //labelAlign: &#39;top&#39;,
+            //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+            labelWidth : 120
         },
         items: [{
             xtype: &#39;textfield&#39;,
             name: &#39;accountNumber&#39;,
             itemId: &#39;accountNumber&#39;,
             allowBlank: false,
-            fieldLabel: app.localize(&#39;AccountNumber&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize(&#39;AccountNumber&#39;).initCap(),
             width: &#39;100%&#39;,
             ui: &#39;fieldLabelTop&#39;,
             emptyText: app.localize(&#39;MandatoryField&#39;)
         }, {
             xtype: &#39;combobox&#39;,
             name: &#39;typeOfAccountId&#39;,
-            fieldLabel: app.localize(&#39;Classification&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize(&#39;Classification&#39;).initCap(),
             width: &#39;100%&#39;,
             allowBlank: false,
             ui: &#39;fieldLabelTop&#39;,
             emptyText: app.localize(&#39;MandatoryField&#39;),
             displayField: &#39;typeOfAccount&#39;,
             valueField: &#39;typeOfAccountId&#39;,
+            queryMode: &#39;local&#39;,
             bind: {
                 store: &#39;{typeOfAccountList}&#39;
             }
@@ -81,6 +87,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.AccountsForm&#39;, {
             ui: &#39;fieldLabelTop&#39;,
             displayField: &#39;typeOfCurrency&#39;,
             valueField: &#39;typeOfCurrencyId&#39;,
+            queryMode: &#39;local&#39;,
             bind: {
                 store: &#39;{typeOfCurrencyList}&#39;
             }
@@ -113,15 +120,16 @@ Ext.define(&#39;Chaching.view.financials.accounts.AccountsForm&#39;, {
         columnWidth: .5,
         padding: &#39;20 10 0 20&#39;,
         defaults: {
-            labelAlign: &#39;top&#39;,
-            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+            //labelAlign: &#39;top&#39;,
+            //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+            labelWidth: 130
         },
         items: [{
             xtype: &#39;textfield&#39;,
             name: &#39;caption&#39;,
             itemId: &#39;caption&#39;,
             allowBlank: false,
-            fieldLabel: app.localize(&#39;Description&#39;).initCap() + Chaching.utilities.ChachingGlobals.mandatoryFlag,
+            fieldLabel: app.localize(&#39;Description&#39;).initCap(),
             width: &#39;100%&#39;,
             ui: &#39;fieldLabelTop&#39;,
             emptyText: app.localize(&#39;MandatoryField&#39;)
@@ -134,6 +142,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.AccountsForm&#39;, {
             emptyText: app.localize(&#39;MandatoryField&#39;),
             displayField: &#39;typeofConsolidation&#39;,
             valueField: &#39;typeofConsolidationId&#39;,
+            queryMode : &#39;local&#39;,
             bind: {
                 store: &#39;{typeofConsolidationList}&#39;
             }

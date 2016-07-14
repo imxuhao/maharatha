@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.purchaseorders.entry.PurchaseOrderDetailGrid&#39;,{
+    extend: &#39;Chaching.view.common.grid.ChachingTransactionDetailGrid&#39;,
+    xtype: &#39;widget.purchaseorders.entry.transactionDetails&#39;,
+    requires: [
+        &#39;Chaching.view.purchaseorders.entry.PurchaseOrderDetailGridController&#39;
+    ],
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.PurchaseOrders.Entry&#39;),
+        create: abp.auth.isGranted(&#39;Pages.PurchaseOrders.Entry.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.PurchaseOrders.Entry.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.PurchaseOrders.Entry.Delete&#39;)
+    },
+    controller: &#39;purchaseorders-entry-purchaseorderdetailgrid&#39;,
+    store: &#39;purchaseorders.entry.PurchaseOrderDetailsStore&#39;,
+    moduleColumns: [
+    {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;InvoiceRef&#39;),
+        dataIndex: &#39;invoiceReference&#39;,
+        name: &#39;invoiceReference&#39;,
+        editor: {
+            xtype:&#39;textfield&#39;
+        }
+    }, {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;Vendor&#39;),
+        dataIndex: &#39;vendorName&#39;,
+        name: &#39;vendorName&#39;,
+        width: &#39;10%&#39;,
+        valueField: &#39;vendorId&#39;,
+        entityType: &#39;vendors&#39;,
+        filterField: {
+            xtype: &#39;chachingcombobox&#39;,
+            store: new Chaching.store.utilities.autofill.VendorsStore(),
+            valueField: &#39;vendorId&#39;,
+            displayField: &#39;vendorName&#39;,
+            queryMode: &#39;remote&#39;,
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted(&#39;Pages.Payables.Vendors&#39;),
+                create: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Create&#39;),
+                edit: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Edit&#39;),
+                destroy: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Delete&#39;)
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + &#39;api/services/app/list/GetVendorList&#39;,
+                create: abp.appPath + &#39;api/services/app/vendorUnit/CreateVendorUnit&#39;,
+                update: abp.appPath + &#39;api/services/app/vendorUnit/UpdateVendorUnit&#39;,
+                destroy: abp.appPath + &#39;api/services/app/vendorUnit/DeleteVendorUnit&#39;
+            },
+            createEditEntityType: &#39;payables.vendors&#39;,
+            createEditEntityGridController: &#39;payables-vendors-vendorsgrid&#39;,
+            entityType: &#39;Vendor&#39;,
+            isTwoEntityPicker: false
+
+        }, editor: {
+            xtype: &#39;chachingcombobox&#39;,
+            store: new Chaching.store.utilities.autofill.VendorsStore(),
+            valueField: &#39;vendorId&#39;,
+            displayField: &#39;vendorName&#39;,
+            queryMode: &#39;remote&#39;,
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted(&#39;Pages.Payables.Vendors&#39;),
+                create: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Create&#39;),
+                edit: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Edit&#39;),
+                destroy: abp.auth.isGranted(&#39;Pages.Payables.Vendors.Delete&#39;)
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + &#39;api/services/app/list/GetVendorList&#39;,
+                create: abp.appPath + &#39;api/services/app/vendorUnit/CreateVendorUnit&#39;,
+                update: abp.appPath + &#39;api/services/app/vendorUnit/UpdateVendorUnit&#39;,
+                destroy: abp.appPath + &#39;api/services/app/vendorUnit/DeleteVendorUnit&#39;
+            },
+            createEditEntityType: &#39;payables.vendors&#39;,
+            createEditEntityGridController: &#39;payables-vendors-vendorsgrid&#39;,
+            entityType: &#39;Vendor&#39;,
+            isTwoEntityPicker: false
+        }
+    }, {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;ChargeDate&#39;).initCap(),
+        dataIndex: &#39;ledgerDate&#39;,
+        name: &#39;ledgerDate&#39;,
+        width: &#39;8%&#39;,
+        filterField: {
+            xtype: &#39;dateSearchField&#39;,
+            width: &#39;100%&#39;
+        },editor: {
+            xtype: &#39;datefield&#39;,
+            format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat
+        }
+    }, {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;CheckType&#39;).initCap(),
+        dataIndex: &#39;typeOfCheck&#39;,
+        name: &#39;typeOfCheck&#39;,
+        valueField: &#39;typeOfCheckId&#39;,
+        width: &#39;10%&#39;,
+        editor: {
+            xtype: &#39;combobox&#39;,
+            multiSelect:false,
+            store: {
+                fields: [{ name: &#39;typeOfCheck&#39; }, { name: &#39;typeOfCheckId&#39; }],
+                data:[
+                {
+                    typeOfCheck: app.localize(&#39;DepositCheck&#39;),
+                    typeOfCheckId:1
+                }, {
+                    typeOfCheck: app.localize(&#39;PaymentCheck&#39;),
+                    typeOfCheckId: 2
+                }]
+            },
+            listConfig : {   
+                minWidth : 200,
+                getInnerTpl : function() {
+                    return &#39;&lt;div class=&quot;x-combo-list-item&quot;&gt;&lt;img src=&quot;&#39; + Ext.BLANK_IMAGE_URL + &#39;&quot; class=&quot;chkCombo-default-icon chkCombo&quot; /&gt; {typeOfCheck} &lt;/div&gt;&#39;;
+                }
+            },
+            displayField: &#39;typeOfCheck&#39;,
+            valueField: &#39;typeOfCheckId&#39;,
+            queryMode: &#39;local&#39;,
+            filterPickList: false
+        }
+    }],
+    columnOrder: [&#39;amount&#39;, &#39;jobNumber&#39;, &#39;accountNumber&#39;, &#39;subAccountNumber1&#39;, &#39;typeOf1099T4&#39;, &#39;itemMemo&#39;, &#39;subAccountNumber4&#39;, &#39;taxRebateNumber&#39;, &#39;vendorName&#39;, &#39;invoiceReference&#39;, &#39;ledgerDate&#39;, &#39;typeOfCheck&#39;]
+});
+</pre>
+</body>
+</html>

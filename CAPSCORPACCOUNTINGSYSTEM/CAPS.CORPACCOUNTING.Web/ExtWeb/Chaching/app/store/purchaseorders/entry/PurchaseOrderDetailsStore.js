@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.purchaseorders.entry.PurchaseOrderDetailsStore', {
+﻿/**
+ * DataStore to perform Read/Delete operation on Purchase Order Details.
+ */
+Ext.define('Chaching.store.purchaseorders.entry.PurchaseOrderDetailsStore', {
     extend: 'Chaching.store.base.TransactionDetailsStore',
     model: 'Chaching.model.purchaseorders.entry.PurchaseOrderDetailModel',
     proxy: {

@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.payables.vendors.VendorsAliasStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-payables-vendors-VendorsAliasStore'>/**
+</span> * DataStore to perform CRUD operation on Vendor Alias.
+ */
+Ext.define(&#39;Chaching.store.payables.vendors.VendorsAliasStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.payables.vendors.VendorAliasModel&#39;,
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-payables-vendors-VendorsAliasStore-property-model'>    model: &#39;Chaching.model.payables.vendors.VendorAliasModel&#39;,
+</span><span id='Chaching-store-payables-vendors-VendorsAliasStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         extParams: {
             vendorId: 0
         },
@@ -29,8 +32,8 @@
             destroy: abp.appPath + &#39;api/services/app/vendorUnit/DeleteVendorAliasUnit&#39;
         }
     },
-    idPropertyField: &#39;vendorAliasId&#39;
-
+<span id='Chaching-store-payables-vendors-VendorsAliasStore-property-idPropertyField'>    idPropertyField: &#39;vendorAliasId&#39;
+</span>
 });</pre>
 </body>
 </html>

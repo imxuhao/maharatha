@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.payables.vendors.VendorAliasModel', {
+﻿/**
+ * DataModel to represent entity schema for Vendor Alias.
+ */
+Ext.define('Chaching.model.payables.vendors.VendorAliasModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: 'VendorAlias'

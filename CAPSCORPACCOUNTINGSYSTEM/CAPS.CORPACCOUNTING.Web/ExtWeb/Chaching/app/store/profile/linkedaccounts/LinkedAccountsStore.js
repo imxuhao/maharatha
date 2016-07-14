@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.profile.linkedaccounts.LinkedAccountsStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Users Account Linking.
+ */
+Ext.define('Chaching.store.profile.linkedaccounts.LinkedAccountsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.profile.linkedaccounts.LinkedAccountsModel',
     proxy: {

@@ -1,3 +1,6 @@
+/**
+ * Model to represent entity schema for Bank Setup.
+ */
 Ext.define('Chaching.model.banking.banksetup.BankSetupModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

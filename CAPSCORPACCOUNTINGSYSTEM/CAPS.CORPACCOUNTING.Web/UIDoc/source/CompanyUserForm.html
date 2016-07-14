@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.administration.organization.CompanyUserForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [
+        &#39;widget.administration.organizationunits.companyusersgrid.create&#39;, &#39;widget.administration.organizationunits.companyusersgrid.edit&#39;
+    ],
+    requires: [
+        &#39;Chaching.view.roles.RolesGrid&#39;,
+       //&#39;Chaching.view.administration.organization.CompanyFormController&#39;,
+       //&#39;Chaching.view.administration.organization.CompanySetupForm&#39;,
+       //&#39;Chaching.view.administration.organization.CompanyPreferencesForm&#39;,
+       //&#39;Chaching.view.administration.organization.MembersForm&#39;
+    ],
+   // controller: &#39;administration-organization-companyform&#39;,
+   // name: &#39;companysetup&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits.ManageOrganizationTree&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits.ManageOrganizationTree&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Administration.OrganizationUnits.ManageOrganizationTree&#39;)
+    },
+    openInPopupWindow: false,
+    hideDefaultButtons: false,
+    autoScroll: false,
+    border: false,
+    showFormTitle: false,
+    displayDefaultButtonsCenter: true,
+    titleConfig: {
+        title: abp.localization.localize(&quot;UserSettings&quot;).initCap()
+    },
+    layout: &#39;fit&#39;,
+    items: [{
+        xtype: &#39;tabpanel&#39;,
+        // ui: &#39;formTabPanels&#39;,
+        ui: &#39;submenuTabs&#39;,
+        tabPosition: &#39;left&#39;,
+        tabRotation: 2,
+        items: [{
+            title: abp.localization.localize(&quot;UserDetailsTab&quot;).initCap(),
+            iconCls: &#39;fa fa-gear&#39;,
+            items: [{
+                xtype: &#39;fieldset&#39;,
+                ui: &#39;transparentFieldSet&#39;,
+                title: abp.localization.localize(&quot;CompanyUserInformation&quot;),
+                collapsible: true,
+                layout: &#39;column&#39;,
+                items: [{
+                    columnWidth: 0.5,
+                    padding: &#39;20 10 0 20&#39;,
+                    defaults: {
+                        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                    },
+                    items: [{
+                        xtype: &#39;hiddenfield&#39;,
+                        name: &#39;userId&#39;,
+                        value: 0
+                    }, {
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;fullName&#39;,
+                        itemId: &#39;fullName&#39;,
+                        allowBlank: false,
+                        fieldLabel: app.localize(&#39;FullName&#39;),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;,
+                        emptyText: app.localize(&#39;MandatoryField&#39;)
+                    }, {
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;userName&#39;,
+                        itemId: &#39;userName&#39;,
+                        allowBlank: false,
+                        fieldLabel: app.localize(&#39;Logon&#39;),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;,
+                        emptyText: app.localize(&#39;MandatoryField&#39;)
+                    }, {
+                        xtype: &#39;checkbox&#39;,
+                        name: &#39;isActive&#39;,
+                        labelAlign: &#39;right&#39;,
+                        inputValue: true,
+                        ui: &#39;default&#39;,
+                        boxLabelCls: &#39;checkboxLabel&#39;,
+                        boxLabel: app.localize(&#39;Active&#39;)
+                    }
+                    ]
+                },
+                {
+                    columnWidth: 0.5,
+                    padding: &#39;20 10 0 20&#39;,
+                    defaults: {
+                        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                    },
+                    items: [{
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;password&#39;,
+                        allowBlank: false,
+                        fieldLabel: app.localize(&#39;UserPassword&#39;),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;,
+                        emptyText: app.localize(&#39;MandatoryField&#39;)
+                    }, {
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;emailAddress&#39;,
+                        allowBlank: false,
+                        fieldLabel: app.localize(&#39;UserEmailAddress&#39;),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;,
+                        emptyText: app.localize(&#39;MandatoryField&#39;)
+                    }, {
+                        xtype: &#39;checkbox&#39;,
+                        name: &#39;isLocked&#39;,
+                        labelAlign: &#39;right&#39;,
+                        inputValue: true,
+                        ui: &#39;default&#39;,
+                        boxLabelCls: &#39;checkboxLabel&#39;,
+                        boxLabel: app.localize(&#39;IsLocked&#39;)
+                    }]
+                }]
+            }, {
+                // columnWidth: 1,
+                padding: &#39;20 10 0 20&#39;,
+                items: [{
+                    xtype: &#39;roles&#39;,
+                    requireExport: false,
+                    requireMultiSearch: false,
+                    requireMultisort: false,
+                    isEditable: false,
+                    columnLines: true,
+                    multiColumnSort: false,
+                    showPagingToolbar : false,
+                   // isEditable: true,
+                   // editingMode: &#39;cell&#39;,
+                    itemId: &#39;rolesGridItemId&#39;,
+                    anchor: &#39;100% 80%&#39;,
+                    autoScroll: true
+                    //,
+                    //layout: &#39;fit&#39;,
+                    //width: &#39;100%&#39;
+                }]
+            }]
+        }
+          ,
+           {
+               xtype: &#39;container&#39;,
+               title: abp.localization.localize(&quot;CorporateCOASecurityTab&quot;).initCap(),
+               items: [{
+                   html: &#39;CorporateCOASecurityTab&#39;
+               }]
+           },
+           {
+               xtype: &#39;container&#39;,
+               title: abp.localization.localize(&quot;ProjectCOASecurityTab&quot;).initCap(),
+               items: [{
+                   html: &#39;ProjectCOASecurityTab&#39;
+               }]
+           }, {
+               xtype: &#39;container&#39;,
+               title: abp.localization.localize(&quot;ProjectSecurityTab&quot;).initCap(),
+               items: [{
+                   html: &#39;ProjectSecurityTab&#39;
+               }]
+           }, {
+               xtype: &#39;container&#39;,
+               title: abp.localization.localize(&quot;CreditCardSecurityTab&quot;).initCap(),
+               items: [{
+                   html: &#39;CreditCardSecurityTab&#39;
+               }]
+           },
+           {
+               xtype: &#39;container&#39;,
+               title: abp.localization.localize(&quot;BankSecurityTab&quot;).initCap(),
+               items: [{
+                   html: &#39;BankSecurityTab&#39;
+               }]
+           }
+            ]
+    }]
+});</pre>
+</body>
+</html>

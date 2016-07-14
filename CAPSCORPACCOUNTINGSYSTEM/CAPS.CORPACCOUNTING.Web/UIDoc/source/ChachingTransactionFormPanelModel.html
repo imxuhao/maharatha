@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.common.form.ChachingTransactionFormPanelModel&#39;, {
+    extend: &#39;Ext.app.ViewModel&#39;,
+    alias: &#39;viewmodel.common-form-chachingtransactionformpanel&#39;,
+    data: {
+        name: &#39;Chaching&#39;
+    },
+    stores: {
+        typeOfCurrencyList: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeOfCurrency&#39;, convert: function (value, record) {
+                    return record.get(&#39;name&#39;);
+                }
+            }, {
+                name: &#39;typeOfCurrencyId&#39;, convert: function (value, record) {
+                    return record.get(&#39;value&#39;);
+                }
+            }],
+            // xtype: &#39;ajax&#39;,
+            remoteSort: false,
+            remoteFilter: false,
+            autoLoad: false,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/accountUnit/GetTypeOfCurrencyList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;,
+                    totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        },
+        typeOfCheckGroup: {
+            fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
+                name: &#39;typeOfCheckGroup&#39;, mapping:&#39;name&#39;
+            }, {
+                name: &#39;typeOfCheckGroupId&#39;, mapping:&#39;value&#39;
+            }],
+            remoteSort: false,
+            remoteFilter: false,
+            autoLoad: false,
+            proxy: {
+                actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+                type: &#39;chachingProxy&#39;,
+                url: abp.appPath + &#39;api/services/app/list/GetCheckGroupList&#39;,
+                reader: {
+                    type: &#39;json&#39;,
+                    rootProperty: &#39;result&#39;,
+                    totalProperty: &#39;result.totalCount&#39;
+                }
+            }
+        }
+    }
+
+});
+</pre>
+</body>
+</html>

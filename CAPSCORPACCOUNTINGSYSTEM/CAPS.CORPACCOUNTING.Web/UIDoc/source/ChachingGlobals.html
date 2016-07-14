@@ -18,22 +18,98 @@
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.utilities.ChachingGlobals&#39;, {
     singleton: true,
     loggedInUserInfo: {
-        defaultOrganizationId:null,
+        defaultOrganizationId: null,
         emailAddress: null,
         userId: null,
         name: null,
         profilePictureId: null,
         surname: null,
-        userName:null,
+        userName: null,
         userOrganizationId: null,
-        gotoMyAccount:false
+        gotoMyAccount: false
     },
     defaultDateFormat: &#39;MM/DD/YYYY&#39;,
     defaultDateTimeFormat: &#39;MM/DD/YYYY hh:mm a&#39;,
     defaultDateTimeSecFormat: &#39;MM/DD/YYYY hh:mm:ss a&#39;,
     usersDefaultGridViewSettings: null,
     mandatoryFlag: &#39;&amp;nbsp;&lt;font color=red&gt;*&lt;/font&gt;&#39;,
-    defaultExtDateFieldFormat:&#39;m/d/Y&#39;
+    defaultExtDateFieldFormat: &#39;m/d/Y&#39;,
+    comboListConfig: {
+        minWidth: 250,
+        width: 250
+    },
+    displayNegAmtInBrackets: true,
+    splitGroupCls: [&#39;split-group1&#39;, &#39;split-group2&#39;, &#39;split-group3&#39;, &#39;split-group4&#39;, &#39;split-group5&#39;, &#39;split-group6&#39;, &#39;split-group7&#39;, &#39;split-group8&#39;],
+    getSubAccountCombo: function(valueField, displayField, isFilter) {
+        var me = this;
+        var beforeQuery = (isFilter ? &#39;emptyFunction&#39; : &#39;onBeforeSubAccountQuery&#39;);
+        return {
+            xtype: &#39;chachingcombobox&#39;,
+            store: new Chaching.store.utilities.autofill.SubAccountsStore(),
+            valueField: valueField,
+            displayField: displayField,
+            queryMode: &#39;remote&#39;,
+            minChars: 2,
+            useDisplayFieldToSearch: true,
+            modulePermissions: {
+                read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.SubAccounts&#39;),
+                create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.SubAccounts.Create&#39;),
+                edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.SubAccounts.Edit&#39;),
+                destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.SubAccounts.Delete&#39;)
+            },
+            primaryEntityCrudApi: {
+                read: abp.appPath + &#39;api/services/app/list/GetSubAccountList&#39;,
+                create: abp.appPath + &#39;api/services/app/subAccountUnit/CreateSubAccountUnit&#39;,
+                update: abp.appPath + &#39;api/services/app/subAccountUnit/UpdateSubAccountUnit&#39;,
+                destroy: abp.appPath + &#39;api/services/app/subAccountUnit/DeleteBankAccountUnit&#39;
+            },
+            createEditEntityType: &#39;financials.accounts.subaccounts&#39;,
+            createEditEntityGridController: &#39;financials-accounts-subaccountsgrid&#39;,
+            entityType: &#39;SubAccount&#39;,
+            isTwoEntityPicker: false,
+            listeners: {
+                beforequery: beforeQuery
+            }
+        };
+    },
+    getTextField: function(emptyText) {
+        return {
+            xtype: &#39;textfield&#39;,
+            emptyText: emptyText
+        };
+
+    },
+    currencyCodesAndSymbols: [
+         { code: &#39;ALL&#39;, symbol: &#39;Lek&#39; },{ code: &#39;AFN&#39;, symbol: &#39;؋&#39; },{ code: &#39;ARS&#39;, symbol: &#39;$&#39; },{ code: &#39;AWG&#39;, symbol: &#39;ƒ&#39; },
+         { code: &#39;AUD&#39;, symbol: &#39;$&#39; },{ code: &#39;AZN&#39;, symbol: &#39;₼&#39; },{ code: &#39;BSD&#39;, symbol: &#39;$&#39; },{ code: &#39;BBD&#39;, symbol: &#39;$&#39; },
+         { code: &#39;BYR&#39;, symbol: &#39;p.&#39; },{ code: &#39;BZD&#39;, symbol: &#39;BZ$&#39; },{ code: &#39;BMD&#39;, symbol: &#39;$&#39; },{ code: &#39;BOB&#39;, symbol: &#39;$b&#39; },
+         { code: &#39;BAM&#39;, symbol: &#39;KM&#39; },{ code: &#39;BWP&#39;, symbol: &#39;P&#39; },{ code: &#39;BGN&#39;, symbol: &#39;лв&#39; },{ code: &#39;BRL&#39;, symbol: &#39;R$&#39; },
+         { code: &#39;BND&#39;, symbol: &#39;$&#39; },{ code: &#39;KHR&#39;, symbol: &#39;៛&#39; },{ code: &#39;CAD&#39;, symbol: &#39;$&#39; },{ code: &#39;LRD&#39;, symbol: &#39;$&#39; },
+         { code: &#39;KYD&#39;, symbol: &#39;$&#39; },{ code: &#39;CLP&#39;, symbol: &#39;$&#39; },{ code: &#39;CNY&#39;, symbol: &#39;¥&#39; },{ code: &#39;COP&#39;, symbol: &#39;$&#39; },
+         { code: &#39;CRC&#39;, symbol: &#39;₡&#39; },{ code: &#39;HRK&#39;, symbol: &#39;kn&#39; },{ code: &#39;CUP&#39;, symbol: &#39;₱&#39; },{ code: &#39;CZK&#39;, symbol: &#39;Kč&#39; },
+         { code: &#39;DKK&#39;, symbol: &#39;kr&#39; },{ code: &#39;DOP&#39;, symbol: &#39;RD$&#39; },{ code: &#39;XCD&#39;, symbol: &#39;$&#39; },{ code: &#39;EGP&#39;, symbol: &#39;£&#39; },
+         { code: &#39;SVC&#39;, symbol: &#39;$&#39; },{ code: &#39;EEK&#39;, symbol: &#39;kr&#39; },{ code: &#39;FKP&#39;, symbol: &#39;£&#39; },{ code: &#39;EUR&#39;, symbol: &#39;€&#39; },
+         { code: &#39;FJD&#39;, symbol: &#39;$&#39; },{ code: &#39;GEL&#39;, symbol: &#39;₾&#39; },{ code: &#39;GHC&#39;, symbol: &#39;¢&#39; },{ code: &#39;GIP&#39;, symbol: &#39;£&#39; },
+         { code: &#39;GTQ&#39;, symbol: &#39;Q&#39; },{ code: &#39;GGP&#39;, symbol: &#39;£&#39; },{ code: &#39;GYD&#39;, symbol: &#39;$&#39; },{ code: &#39;HNL&#39;, symbol: &#39;L&#39; },
+         { code: &#39;HKD&#39;, symbol: &#39;$&#39; },{ code: &#39;HUF&#39;, symbol: &#39;Ft&#39; },{ code: &#39;ISK&#39;, symbol: &#39;kr&#39; },{ code: &#39;INR&#39;, symbol: &#39;₹&#39; },
+         { code: &#39;IDR&#39;, symbol: &#39;Rp&#39; },{ code: &#39;IRR&#39;, symbol: &#39;﷼&#39; },{ code: &#39;IMP&#39;, symbol: &#39;£&#39; },{ code: &#39;ILS&#39;, symbol: &#39;₪&#39; },
+         { code: &#39;JMD&#39;, symbol: &#39;J$&#39; },{ code: &#39;JPY&#39;, symbol: &#39;¥&#39; },{ code: &#39;JEP&#39;, symbol: &#39;£&#39; },{ code: &#39;KZT&#39;, symbol: &#39;лв&#39; },
+         { code: &#39;KPW&#39;, symbol: &#39;₩&#39; },{ code: &#39;KRW&#39;, symbol: &#39;₩&#39; },{ code: &#39;KGS&#39;, symbol: &#39;лв&#39; },{ code: &#39;LAK&#39;, symbol: &#39;₭&#39; },
+         { code: &#39;LVL&#39;, symbol: &#39;Ls&#39; },{ code: &#39;LBP&#39;, symbol: &#39;£&#39; },{ code: &#39;LRD&#39;, symbol: &#39;$&#39; },{ code: &#39;LTL&#39;, symbol: &#39;Lt&#39; },
+         { code: &#39;MKD&#39;, symbol: &#39;ден&#39; },{ code: &#39;MYR&#39;, symbol: &#39;RM&#39; },{ code: &#39;MUR&#39;, symbol: &#39;₨&#39; },{ code: &#39;MXN&#39;, symbol: &#39;$&#39; },
+         { code: &#39;MNT&#39;, symbol: &#39;₮&#39; },{ code: &#39;MZN&#39;, symbol: &#39;MT&#39; },{ code: &#39;NAD&#39;, symbol: &#39;$&#39; },{ code: &#39;NPR&#39;, symbol: &#39;₨&#39; },
+         { code: &#39;ANG&#39;, symbol: &#39;ƒ&#39; },{ code: &#39;NZD&#39;, symbol: &#39;$&#39; },{ code: &#39;NIO&#39;, symbol: &#39;C$&#39; },{ code: &#39;NGN&#39;, symbol: &#39;₦&#39; },
+         { code: &#39;NOK&#39;, symbol: &#39;kr&#39; },{ code: &#39;OMR&#39;, symbol: &#39;﷼&#39; },{ code: &#39;PKR&#39;, symbol: &#39;₨&#39; },{ code: &#39;PAB&#39;, symbol: &#39;B/.&#39; },
+         { code: &#39;PYG&#39;, symbol: &#39;Gs&#39; },{ code: &#39;PEN&#39;, symbol: &#39;S/.&#39; },{ code: &#39;PHP&#39;, symbol: &#39;₱&#39; },{ code: &#39;PLN&#39;, symbol: &#39;zł&#39; },
+         { code: &#39;QAR&#39;, symbol: &#39;﷼&#39; },{ code: &#39;RON&#39;, symbol: &#39;lei&#39; },{ code: &#39;RUB&#39;, symbol: &#39;₽&#39; },{ code: &#39;SHP&#39;, symbol: &#39;£&#39; },
+         { code: &#39;SAR&#39;, symbol: &#39;﷼&#39; },{ code: &#39;RSD&#39;, symbol: &#39;Дин.&#39; },{ code: &#39;SCR&#39;, symbol: &#39;₨&#39; },{ code: &#39;SGD&#39;, symbol: &#39;$&#39; },
+         { code: &#39;SBD&#39;, symbol: &#39;$&#39; },{ code: &#39;SOS&#39;, symbol: &#39;S&#39; },{ code: &#39;ZAR&#39;, symbol: &#39;S&#39; },{ code: &#39;LKR&#39;, symbol: &#39;₨&#39; },
+         { code: &#39;SEK&#39;, symbol: &#39;kr&#39; },{ code: &#39;CHF&#39;, symbol: &#39;CHF&#39; },{ code: &#39;SRD&#39;, symbol: &#39;$&#39; },{ code: &#39;SYP&#39;, symbol: &#39;£&#39; },
+         { code: &#39;TWD&#39;, symbol: &#39;NT$&#39; },{ code: &#39;THB&#39;, symbol: &#39;฿&#39; },{ code: &#39;TTD&#39;, symbol: &#39;TT$&#39; },{ code: &#39;TRL&#39;, symbol: &#39;₺&#39; },
+         { code: &#39;TVD&#39;, symbol: &#39;$&#39; },{ code: &#39;UAH&#39;, symbol: &#39;₴&#39; },{ code: &#39;GBP&#39;, symbol: &#39;£&#39; },{ code: &#39;USD&#39;, symbol: &#39;$&#39; },
+         { code: &#39;UYU&#39;, symbol: &#39;$U&#39; },{ code: &#39;UZS&#39;, symbol: &#39;лв&#39; },{ code: &#39;VEF&#39;, symbol: &#39;Bs&#39; },{ code: &#39;VND&#39;, symbol: &#39;₫&#39; },
+         { code: &#39;YER&#39;, symbol: &#39;﷼&#39; },{ code: &#39;ZWD&#39;, symbol: &#39;Z$&#39; }
+     ]
 });</pre>
 </body>
 </html>

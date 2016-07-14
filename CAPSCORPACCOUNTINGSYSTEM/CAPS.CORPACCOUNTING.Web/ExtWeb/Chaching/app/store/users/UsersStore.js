@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.users.UsersStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Users.
+ */
+Ext.define('Chaching.store.users.UsersStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.users.UsersModel',
     proxy: {

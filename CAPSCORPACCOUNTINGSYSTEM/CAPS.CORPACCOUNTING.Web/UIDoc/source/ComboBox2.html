@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * This file contains the custom combobox containing grid as picker field.
+ * Author: Krishna Garad
+ * Date:14/06/2016
+ */
+<span id='Chaching-components-form-field-ComboBox'>/**
+</span> * A combobox control with support for autocomplete, remote loading, and many other features.
+ *
+ * A ComboBox is like a combination of a traditional HTML text `&lt;input&gt;` field and a `&lt;select&gt;`
+ * field; the user is able to type freely into the field, and/or pick values from a dropdown selection
+ * list. The user can input any value by default, even if it does not appear in the selection list;
+ * to prevent free-form values and restrict them to items in the list, set {@link #forceSelection} to `true`.
+ *
+ * The selection list&#39;s options are populated from any {@link Ext.data.Store}, including remote
+ * stores. The data items in the store are mapped to each option&#39;s displayed text and backing value via
+ * the {@link #valueField} and {@link #displayField} configurations, respectively.
+ *
+ * If your store is not remote, i.e. it depends only on local data and is loaded up front, you should be
+ * sure to set the {@link #queryMode} to `&#39;local&#39;`, as this will improve responsiveness for the user.
+ *
+ * # Example usage:
+ *
+ *     @example
+ *     // The data store containing the list of states
+ *     var states = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;abbr&#39;, &#39;name&#39;],
+ *         data : [
+ *             {&quot;abbr&quot;:&quot;AL&quot;, &quot;name&quot;:&quot;Alabama&quot;},
+ *             {&quot;abbr&quot;:&quot;AK&quot;, &quot;name&quot;:&quot;Alaska&quot;},
+ *             {&quot;abbr&quot;:&quot;AZ&quot;, &quot;name&quot;:&quot;Arizona&quot;}
+ *         ]
+ *     });
+ *
+ *     // Create the combo box, attached to the states data store
+ *     Ext.create(&#39;Ext.form.ComboBox&#39;, {
+ *         fieldLabel: &#39;Choose State&#39;,
+ *         store: states,
+ *         queryMode: &#39;local&#39;,
+ *         displayField: &#39;name&#39;,
+ *         valueField: &#39;abbr&#39;,
+ *         renderTo: Ext.getBody()
+ *     });
+ *
+ * # Events
+ *
+ * To do something when something in ComboBox is selected, configure the select event:
+ *
+ *     var cb = Ext.create(&#39;Ext.form.ComboBox&#39;, {
+ *         // all of your config options
+ *         listeners:{
+ *              scope: yourScope,
+ *              &#39;select&#39;: yourFunction
+ *         }
+ *     });
+ *
+ *     // Alternatively, you can assign events after the object is created:
+ *     var cb = new Ext.form.field.ComboBox(yourOptions);
+ *     cb.on(&#39;select&#39;, yourFunction, yourScope);
+ *
+ * # Multiple Selection
+ * The {@link #multiSelect} config is deprecated.  For multiple selection use 
+ * {@link Ext.form.field.Tag} or {@link Ext.view.MultiSelector}.
+ *
+ * # Filtered Stores
+ *
+ * If you have a local store that is already filtered, you can use the {@link #lastQuery} config option
+ * to prevent the store from having the filter being cleared on first expand.
+ *
+ * ## Customized combobox
+ *
+ * Both the text shown in dropdown menu and text field can be easily customized:
+ *
+ *     @example
+ *     var states = Ext.create(&#39;Ext.data.Store&#39;, {
+ *         fields: [&#39;abbr&#39;, &#39;name&#39;],
+ *         data : [
+ *             {&quot;abbr&quot;:&quot;AL&quot;, &quot;name&quot;:&quot;Alabama&quot;},
+ *             {&quot;abbr&quot;:&quot;AK&quot;, &quot;name&quot;:&quot;Alaska&quot;},
+ *             {&quot;abbr&quot;:&quot;AZ&quot;, &quot;name&quot;:&quot;Arizona&quot;}
+ *         ]
+ *     });
+ *
+ *     Ext.create(&#39;Chaching.components.form.field.ComboBox&#39;, {
+ *         fieldLabel: &#39;Choose State&#39;,
+ *         store: states,
+ *         queryMode: &#39;local&#39;,
+ *         valueField: &#39;abbr&#39;,
+ *         renderTo: Ext.getBody(),
+ *         modulePermissions: {
+                        read: true,
+                        create:true,
+                        edit: true,
+                        destroy: true
+                    },
+                    primaryEntityCrudApi: {
+                        read: abp.appPath + &#39;...&#39;,
+                        create: abp.appPath + &#39;..&#39;,
+                        update: abp.appPath + &#39;..&#39;,
+                        destroy: abp.appPath + &#39;..&#39;
+                    },
+                    createEditEntityType: &#39;xtype of edit/create entity&#39;,
+                    createEditEntityGridController: &#39;grid controller&#39;,
+                    entityType: &#39;type of entity&#39;,
+ *     });
+ *
+ * See also the {@link #listConfig} option for additional configuration of the dropdown.
+ *
+ */
+Ext.define(&#39;Chaching.components.form.field.ComboBox&#39;, {
+    extend: &#39;Ext.form.field.ComboBox&#39;,
+    requires: [&#39;Ext.grid.Panel&#39;],
+    alias: [&#39;widget.chachingcombobox&#39;, &#39;widget.chachingcombo&#39;],
+<span id='Chaching-components-form-field-ComboBox-cfg-emptyText'>    emptyText: app.localize(&#39;SearchText&#39;),
+</span><span id='Chaching-components-form-field-ComboBox-cfg-autoSelect'>    autoSelect: false,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-selectOnFocus'>    selectOnFocus: false,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-enableKeyEvents'>    enableKeyEvents: true,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-typeAhead'>    typeAhead: false,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-editable'>    editable: true,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-triggerCls'>    triggerCls: &#39;searchComboTriggerCls&#39;,
+</span>    config: {
+<span id='Chaching-components-form-field-ComboBox-cfg-filters'>        filters: null,
+</span>
+<span id='Chaching-components-form-field-ComboBox-cfg-selection'>        /**
+</span>         * @cfg {Ext.data.Model} selection
+         * The selected model. Typically used with {@link #bind binding}.
+         */
+        selection: null,
+
+<span id='Chaching-components-form-field-ComboBox-cfg-valueNotFoundText'>        /**
+</span>         * @cfg {String} [valueNotFoundText]
+         * When using a name/value combo, if the value passed to setValue is not found in the store, valueNotFoundText will
+         * be displayed as the field text if defined. If this default text is used, it means there
+         * is no value set and no validation will occur on this field.
+         */
+        valueNotFoundText: null,
+
+<span id='Chaching-components-form-field-ComboBox-cfg-displayTpl'>        /**
+</span>         * @cfg {String/String[]/Ext.XTemplate} [displayTpl]
+         * The template to be used to display selected records inside the text field. An array of the selected records&#39; data
+         * will be passed to the template. Defaults to:
+         *
+         *     &#39;&lt;tpl for=&quot;.&quot;&gt;&#39; +
+         *         &#39;{[typeof values === &quot;string&quot; ? values : values[&quot;&#39; + me.displayField + &#39;&quot;]]}&#39; +
+         *         &#39;&lt;tpl if=&quot;xindex &lt; xcount&quot;&gt;&#39; + me.delimiter + &#39;&lt;/tpl&gt;&#39; +
+         *     &#39;&lt;/tpl&gt;&#39;
+         *
+         * By default only the immediate data of the record is passed (no associated data). The {@link #getRecordDisplayData} can
+         * be overridden to extend this.
+         */
+        displayTpl: null,
+
+        //&lt;locale&gt;
+<span id='Chaching-components-form-field-ComboBox-cfg-delimiter'>        /**
+</span>         * @cfg {String} delimiter
+         * The character(s) used to separate the {@link #displayField display values} of multiple selected items when
+         * `{@link #multiSelect} = true`.
+         * @deprecated 5.1.0 For multiple selection use {@link Ext.form.field.Tag} or 
+         * {@link Ext.view.MultiSelector}
+         */
+        delimiter: &#39;, &#39;,
+        //&lt;/locale&gt;
+
+<span id='Chaching-components-form-field-ComboBox-cfg-displayField'>        /**
+</span>         * @cfg {String} displayField
+         * The underlying {@link Ext.data.Field#name data field name} to bind to this ComboBox.
+         *
+         * See also `{@link #valueField}`.
+         */
+        displayField: &#39;text&#39;,
+<span id='Chaching-components-form-field-ComboBox-cfg-modulePermissions'>        /**
+</span>        * @cfg {Object} modulePermissions
+        * Entity permissions to access this combo data
+        */
+        modulePermissions: {
+            read: true,
+            create: true,
+            edit: true,
+            destroy:true
+        },
+<span id='Chaching-components-form-field-ComboBox-cfg-createEditEntityType'>        /**
+</span>       * @cfg {String} createEditEntityType
+       * Entity to be opened when editing/creating new from combo.
+       */
+        createEditEntityType: null,
+<span id='Chaching-components-form-field-ComboBox-cfg-createEditEntityGridController'>        /**
+</span>        * @cfg {String} createEditEntityGridController
+        * Create/Edit entity grid controller aliase name.
+        */
+        createEditEntityGridController: null,
+<span id='Chaching-components-form-field-ComboBox-cfg-userDefinedColumns'>        /**
+</span>        * @cfg {Object/Array} userDefinedColumns
+        * Columns for grid picker. If provided default columns will be ignored.
+        */
+        userDefinedColumns: null,
+<span id='Chaching-components-form-field-ComboBox-cfg-entityType'>        /**
+</span>        * @cfg {String} entityType
+        * Target entity type/data is populated from the entity type.
+        */
+        entityType: null,
+<span id='Chaching-components-form-field-ComboBox-cfg-crudApi'>        /**
+</span>       * @cfg {Object} crudApi
+       * Primary entities crud server api.
+       */
+        primaryEntityCrudApi: {
+            read:null,
+            create: null,
+            destroy: null,
+            update:null
+        },
+<span id='Chaching-components-form-field-ComboBox-cfg-isTwoEntityPicker'>        /**
+</span>       * @cfg {boolean} isTwoEntityPicker
+       * Does picker contains data from two different entities.
+       */
+        isTwoEntityPicker: false,
+<span id='Chaching-components-form-field-ComboBox-cfg-secondEntityDetails'>        secondEntityDetails: {
+</span>            editCreateModelClass: null,
+            identificationKey: null,
+            entityType: null,
+            createEditEntityType: null,
+            createEditEntityGridController: null,
+            modulePermissions: {
+                read: false,
+                create: false,
+                edit: false,
+                destroy: false
+            },
+            secondoryEntityCrudApi: {
+                read:null,
+                create: null,
+                destroy: null,
+                update:null
+            }
+        },
+<span id='Chaching-components-form-field-ComboBox-cfg-selectOnTabPressed'>        /**
+</span>       * @cfg {boolean} selectOnTabPressed
+       * Select item when picker has selection and tab is pressed.
+       */
+        selectOnTabPressed:true
+    },
+<span id='Chaching-components-form-field-ComboBox-cfg-minChars'>    minChars: 2,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-queryParam'>    queryParam: &#39;query&#39;,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-queryMode'>    queryMode: &#39;remote&#39;,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-forceSelection'>    forceSelection: true,
+</span><span id='Chaching-components-form-field-ComboBox-cfg-listConfig'>    listConfig: {
+</span>        minWidth: 350,
+        maxHeight: 250
+    },
+<span id='Chaching-components-form-field-ComboBox-cfg-defaultListConfig'>    defaultListConfig: {
+</span>        loadingHeight: 210,
+        minWidth: 70,
+        maxHeight: 300,
+        shadow: &#39;sides&#39;
+    },
+<span id='Chaching-components-form-field-ComboBox-method-initComponent'>    initComponent: function () {
+</span>        var me = this;
+        if (me.getCreateEditEntityGridController() == null) {
+            Ext.raise(&#39;createEditEntityGridController config is required for add/update/delete of an entity for AutoFillCombo(&#39; + me.geEntityType() + &#39;)&#39;);
+        }
+        if (me.getIsTwoEntityPicker() &amp;&amp; me.getSecondEntityDetails()== null) {
+            Ext.raise(&#39;Please spcify secondEntityDetails if picker has data from two different entities.&#39;);
+        }
+        //if (me.entityType == null) {
+        //    Ext.raise(&#39;entityType config is required to open edit/create page  in popup window for that entity.&#39;);
+        //}
+        //if (me.entityPermission == null &amp;&amp; !me.modulePermissions) {
+        //    Ext.raise(&#39;entityPermission config is required to show or hide action buttons in grid(autocompletecombo).&#39;);
+        //}
+        if (me.selectOnFocus &amp;&amp; !me.editable) {
+            Ext.raise(&#39;If selectOnFocus is enabled the combo must be editable: true -- please change one of those settings.&#39;);
+        }
+        me.autoSelect = false;
+        me.callParent(arguments);
+        me.mon(me, {
+            specialkey: me.handleFieldEvents,
+            keypress: me.handleFieldEvents,
+            focus:me.handleComboFocus,
+            scope: me
+        });
+        //key events
+        //me.on(&#39;keyup&#39;, me.baseKeyUp, this);
+        //me.on(&#39;specialkey&#39;, me.baseSpecialkey, this);
+    },
+<span id='Chaching-components-form-field-ComboBox-method-handleComboFocus'>    handleComboFocus:function(field, e) {
+</span>        var me = this,
+            picker = me.picker ? me.picker : me.getPicker(),
+            view = picker.getView(),
+            selModel = me.picker.getSelectionModel();
+        me.cleanUpPicker(me, view, selModel, false);
+    },
+<span id='Chaching-components-form-field-ComboBox-method-handleFieldEvents'>    handleFieldEvents:function(field, e) {
+</span>        var me = this,
+            selectOnTabPressed = me.getSelectOnTabPressed(),
+            picker = me.picker,
+            selModel = undefined,
+            selectedRec = undefined,
+            modulePermissions = me.getModulePermissions();
+
+        if (!picker) picker = me.getPicker();
+        if (picker) selModel = picker.getSelectionModel();
+        if (selModel) selectedRec = selModel.getSelection().length &gt; 0 ? selModel.getSelection()[0] : undefined;
+        switch (e.getKey()) {
+            case 9://set value of selected record from picker
+                if (!e.shiftKey &amp;&amp; !e.ctrlKey &amp;&amp; selectOnTabPressed &amp;&amp; selectedRec) {
+                    e.stopEvent();
+                    me.setValue(selectedRec);
+                    me.collapse();
+                    selModel.deselectAll();
+                    me.focus();
+                }
+                break;
+            case 45://add new record if has primary entity permissions
+                if (!e.shiftKey &amp;&amp; !e.ctrlKey &amp;&amp; modulePermissions &amp;&amp; modulePermissions.create &amp;&amp; e.browserEvent.key === &quot;Insert&quot;) {
+                    e.stopEvent();
+                    me.doCRUDOperation(&#39;create&#39;, null);
+                }
+                break;
+            default:
+                break;
+        }
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onDownArrow'>    onDownArrow: function (e) {
+</span>        var me = this,
+            picker = me.picker,
+            recordsCount = me.getStore().getCount();
+
+        if ((e.time - me.lastDownArrow) &gt; 150) {
+            delete me.lastDownArrow;
+        }
+
+        if (!me.isExpanded) {
+            // Do not let the down arrow event propagate into the picker
+            e.stopEvent();
+
+            // Don&#39;t call expand() directly as there may be additional processing involved before
+            // expanding, e.g. in the case of a ComboBox query.
+            //me.onTriggerClick();//TODO: un-comment if required to expand combo on down arrow.
+
+            me.lastDownArrow = e.time;
+        }
+        else if (!e.isStopped &amp;&amp; (e.time - me.lastDownArrow) &lt; 150) {
+            delete me.lastDownArrow;
+        }
+        if (picker &amp;&amp; me.isExpanded &amp;&amp; recordsCount &gt; 0) {
+            var pickerView = picker.getView(),
+                selectionModel = pickerView.getSelectionModel();
+            me.cleanUpPicker(me, pickerView, selectionModel, false);
+            selectionModel.select(0, false);
+            pickerView.getCell(0, 0).focus();
+            ///TODO: Handle scroll issue.
+            //var scrollTask = new Ext.util.DelayedTask(function () {
+            //    var dom = pickerView.getTargetEl().dom;
+            //    if (dom) {
+            //        dom.scrollTop = 0;
+            //        var scroller = pickerView.getScrollable();
+            //        if (scroller) scroller.scrollBy(0, 0, false);
+            //    }
+            //});
+            //scrollTask.delay(100);
+        }
+    },
+<span id='Chaching-components-form-field-ComboBox-method-createPicker'>    createPicker: function() {
+</span>        var me = this,
+            picker,
+            columnList = me.createGridColumns(),
+            actionToolBar = me.getActionToolBar();
+
+        var pickerCfg = Ext.apply({
+            xtype: &#39;boundlist&#39;,
+            pickerField: me,
+            selModel: {
+                mode: &#39;SINGLE&#39;
+            },
+            floating: true,
+            hidden: true,
+            store: me.store,
+            displayField: me.displayField,
+            focusOnToFront: false,
+            preserveScrollOnRefresh: true,
+            pageSize: me.pageSize,
+            tpl: me.tpl,
+
+            columns: columnList,
+            columnLines: false,
+            rowLines: false,
+            headerBorders: false,
+            forceFit: true,
+            layout: &#39;fit&#39;,
+            recordToSetInComboBox: null,
+            viewConfig: {
+                stripeRows: true,
+                emptyText: &#39;No Records Found&#39;,
+                alwaysOnTop: true,
+                loadingHeight: 100,
+                loadingText:&#39;Loading data. Please wait&#39;
+            },
+            dockedItems: actionToolBar,
+            multiSelect: false,
+            cls: &#39;chaching-combogrid&#39;,
+            controller: me.getCreateEditEntityGridController()
+        }, me.listConfig, me.defaultListConfig);
+
+
+        picker = me.picker = Ext.create(&#39;Ext.grid.Panel&#39;, pickerCfg);
+
+        // hack: pass getNode() to the view
+        picker.getNode = function() {
+            picker.getView().getNode(arguments);
+        };
+
+        if (me.pageSize) {
+            picker.pagingToolbar.on(&#39;beforechange&#39;, me.onPageChange, me);
+        }
+
+        me.mon(picker, {
+            itemdblclick: me.onItemClick,
+            refresh: me.onListRefresh,
+            scope: me
+        });
+
+        me.mon(picker.getView(), {
+            itemkeydown: me.handlePickerEvents,
+            scope: me
+        });
+
+        me.mon(picker.getSelectionModel(), {
+            beforeselect: me.onBeforeSelect,
+            beforedeselect: me.onBeforeDeselect,
+            selectionchange: me.onListSelectionChange,
+            scope: me
+        });
+
+        return picker;
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onListSelectionChange'>    onListSelectionChange: function () {
+</span>        var me = this;
+        if (me.lastInfoPanel) me.lastInfoPanel.hide();
+    },
+<span id='Chaching-components-form-field-ComboBox-method-handlePickerEvents'>    handlePickerEvents:function(view,record,tableView,rowIdx,e,eOpts) {
+</span>        var me = this,
+            selModel = view.getSelectionModel(),
+            modulePermissions = me.getModulePermissions(),
+            columns = view.getColumnManager().columns,
+            infoColumn = columns[columns.length - 1];
+        switch (e.getKey()) {
+            case 9://select highligheted record and collapse the picker
+                if (record) {
+                    e.stopEvent();
+                    me.cleanUpPicker(me, view, selModel, true);
+                    if (me.nextSibling() &amp;&amp; !e.shiftKey) me.nextSibling().focus();
+                    else if (me.previousSibling() &amp;&amp; e.shiftKey) me.previousSibling().focus();
+                }
+                break;
+            case 13://setValue of selected record when enter is pressed.
+                if (record &amp;&amp; selModel) {
+                    e.stopEvent();
+                    me.setValue(record);
+                    me.cleanUpPicker(me, view, selModel,true);
+                }
+                break;
+            case 27://close picker when esc is pressed
+                e.stopEvent();
+                me.cleanUpPicker(me, view, selModel,true);
+                break;
+            case 35://end pressed navigate to last record
+                if (record &amp;&amp; selModel) {
+                    e.stopEvent();
+                    e.preventDefault();
+                    selModel.deselectAll();
+                    selModel.select(me.store.getTotalCount() - 1, false);
+                    view.getCell(me.store.getTotalCount() - 1, 0).focus();
+                }
+                break;
+            case 36://home pressed navigate to first record
+                if (record &amp;&amp; selModel) {
+                    e.stopEvent();
+                    e.preventDefault();
+                    selModel.deselectAll();
+                    selModel.select(0, false);
+                    view.getCell(0, 0).focus();
+                }
+                break;
+            case 38://when first record is selected and up arrow pressed move cursor to field
+                if (record &amp;&amp; selModel &amp;&amp; rowIdx === 0) {
+                    e.stopEvent();
+                    me.cleanUpPicker(me, view, selModel, false);
+                }
+                break;
+            case 45://add new record if has primary entity permissions
+                if (!e.shiftKey &amp;&amp; !e.ctrlKey &amp;&amp; modulePermissions &amp;&amp; modulePermissions.create &amp;&amp; e.browserEvent.key === &quot;Insert&quot;) {
+                    e.stopEvent();
+                    me.cleanUpPicker(me, view, selModel,true);
+                    me.doCRUDOperation(&#39;create&#39;, null);
+                }
+                break;
+            case 69://edit selected record if has permissions
+                if (record &amp;&amp; selModel &amp;&amp; modulePermissions.edit) {
+                    e.stopEvent();
+                    me.cleanUpPicker(me, view, selModel,true);
+                    me.doCRUDOperation(&#39;edit&#39;, record);
+                }
+                break;
+            case 46://delete selected Record is has permissions.
+                if (record &amp;&amp; selModel &amp;&amp; modulePermissions.destroy) {
+                    e.stopEvent();
+                    me.cleanUpPicker(me, view, selModel,false);
+                    me.doCRUDOperation(&#39;delete&#39;, record);
+                }
+                break;
+            case 73://info if has read permission
+                if (record &amp;&amp; selModel &amp;&amp; modulePermissions.read) {
+                    e.stopEvent();
+                    //me.cleanUpPicker(me, view, selModel,false);
+                    me.doCRUDOperation(&#39;info&#39;, record, false, view.getCell(record, infoColumn));
+                }
+                break;
+            case 82://refresh grid
+                e.stopEvent();
+                me.cleanUpPicker(me, view, selModel,false);
+                me.doRefreshList();
+                break;
+            default:
+                break;
+        }
+    },
+<span id='Chaching-components-form-field-ComboBox-method-cleanUpPicker'>    cleanUpPicker: function (me, view, selModel, collapse) {
+</span>        var navigationModel = undefined;
+        if (selModel) {
+            selModel.deselectAll();
+            navigationModel = selModel.navigationModel;
+            if (navigationModel &amp;&amp; navigationModel.cell) {
+                navigationModel.cell.removeCls(&#39;x-grid-item-focused&#39;);
+            }
+        }
+        view.blur();
+        me.picker.blur();
+        view.refresh();
+        me.focus();
+        if (me.lastInfoPanel) me.lastInfoPanel.hide();
+        if (collapse)
+            me.collapse();
+    },
+<span id='Chaching-components-form-field-ComboBox-method-getActionToolBar'>    getActionToolBar:function() {
+</span>        var me = this,
+            secondoryEntityDetails = me.getSecondEntityDetails(),
+            isTwoEntityPicker = me.getIsTwoEntityPicker(),
+            actionButtons = [&#39;-&gt;&#39;];
+
+        if (me.getModulePermissions().create) {
+            actionButtons.push({
+                xtype: &#39;button&#39;,
+                tooltip: abp.localization.localize(&quot;Add&quot;) + &quot; &quot; + me.getEntityType(),
+                iconAlign: &#39;left&#39;,
+                scale: &#39;small&#39;,
+                iconCls: &#39;fa fa-plus-square&#39;,
+                ui: &#39;combogridactionButton&#39;,
+                height: 20,
+                width: 20,
+                handler: function (btn) {
+                    me.doCRUDOperation(&#39;create&#39;, null);
+                }
+            });
+        }
+        if (isTwoEntityPicker &amp;&amp; secondoryEntityDetails.modulePermissions.create) {
+            actionButtons.push({
+                xtype: &#39;button&#39;,
+                tooltip: abp.localization.localize(&quot;Add&quot;) + &quot; &quot; + secondoryEntityDetails.entityType,
+                iconAlign: &#39;left&#39;,
+                scale: &#39;small&#39;,
+                iconCls: &#39;fa fa-plus-square&#39;,
+                height: 20,
+                width: 20,
+                ui: &#39;combogridactionButton&#39;,
+                handler: function (btn) {
+                    me.doCRUDOperation(&#39;create&#39;, null, true);
+                }
+            });
+        }
+        actionButtons.push({
+            xtype: &#39;button&#39;,
+            scale: &#39;small&#39;,
+            name: &#39;RefreshData&#39;,
+            itemId: &#39;RefreshData&#39;,
+            iconCls: &#39;fa fa-refresh&#39;,
+            height: 20,
+            width: 20,
+            ui: &#39;combogridactionButton&#39;,
+            tooltip: app.localize(&#39;RefreshData&#39;),
+            handler: function (btn) {
+                me.doRefreshList();
+            }
+        });
+        var actionToolBar = {
+            xtype: &#39;toolbar&#39;,
+            dock: &#39;bottom&#39;,
+            ui:&#39;combogridtoolbar&#39;,
+            layout: {
+                type: &#39;hbox&#39;,
+                pack: &#39;center&#39;
+            },
+            items: actionButtons
+        };
+        return actionToolBar;
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onBeforeSelect'>    onBeforeSelect: function (list, record, recordIndex) {
+</span>        return this.fireEvent(&#39;beforeselect&#39;, this, record, recordIndex);
+    },
+
+<span id='Chaching-components-form-field-ComboBox-method-onBeforeDeselect'>    onBeforeDeselect: function (list, record, recordIndex) {
+</span>        return this.fireEvent(&#39;beforedeselect&#39;, this, record, recordIndex);
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onFocusChange'>    onFocusChange: function (selModel, prevRecord, newRecord) {
+</span>        var picker = this.picker,
+            el;
+
+        if (newRecord) {
+            // Ext.get is to ensure the node has an id
+            el = Ext.get(picker.getView().getNodeByRecord(newRecord));
+
+            if (el) {
+                this.ariaEl.dom.setAttribute(&#39;aria-activedescendant&#39;, el.id);
+            }
+        }
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onItemClick'>    onItemClick: function(view, record, item, index, e, eOpts) {
+</span>        var me = this;
+        if (!view.ownerCt.multiSelect) {
+            me.setValue(record);
+            me.collapse();
+        }
+    },
+   
+<span id='Chaching-components-form-field-ComboBox-method-createGridColumns'>    createGridColumns: function () {
+</span>        var me = this,
+            //store = Ext.create(&#39;Chaching.store.&#39; + me.store),
+            store = me.store,
+            model = store.getModel(),
+            fields = model.getFields(),
+            count = fields.length,
+            columns = [],
+            secondoryEntityDetails = me.getSecondEntityDetails(),
+            isTwoEntityPicker = me.getIsTwoEntityPicker();
+
+        if (me.userDefinedColumns == null) {
+            for (var i = 0; i &lt; count; i++) {
+                if (fields[i].hidden === false) {
+                    var field = fields[i];
+                    var column = {
+                        text: field.headerText == null ? field.name : app.localize(field.headerText),
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        filterable: true,
+                        minWidth: field.minWidth?field.minWidth:50,
+                        width: field.width,
+                        hidden: field.hidden,
+                        dataIndex: field.name,
+                        flex: field.width &gt; 0 ? null : field.flex
+                    }
+                    if (field.type === &quot;boolean&quot;) {
+                        column.renderer = Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer;
+                        column.align = &#39;center&#39;;
+                    }
+                    columns.push(column);
+                }
+            }
+        } else {
+            count = me.userDefinedColumns.length;
+            for (var i = 0; i &lt; count; i++) {
+                if (userDefinedColumns[i].hidden === false) {
+                    var column = {
+                        text: userDefinedColumns[i].headerText == null ? userDefinedColumns[i].name : app.localize(userDefinedColumns[i].headerText),
+                        sortable: false,
+                        hideable: false,
+                        menuDisabled: true,
+                        filterable: true,
+                        minWidth: 50,
+                        width: userDefinedColumns[i].width,
+                        hidden: userDefinedColumns[i].hidden,
+                        dataIndex: userDefinedColumns[i].name,
+                        flex: userDefinedColumns[i].width &gt; 0 ? null : userDefinedColumns[i].flex
+                    }
+                    columns.push(column);
+                }
+            }
+        }
+
+        var editActionItem = {
+            scale: &#39;small&#39;,
+            iconCls: &#39;editCls&#39;,
+            tooltip: app.localize(&#39;Edit&#39;),
+            handler: function (grid, rowIndex, colIndex) {
+                var rec = grid.getStore().getAt(rowIndex);
+                me.doCRUDOperation(&#39;edit&#39;, rec);
+            }
+        };
+        var deleteActionItem = {
+            scale: &#39;small&#39;,
+            iconCls: &#39;deleteCls&#39;,
+            tooltip: app.localize(&#39;Delete&#39;),
+            handler: function (grid, rowIndex, colIndex) {
+                var rec = grid.getStore().getAt(rowIndex);
+                me.doCRUDOperation(&#39;delete&#39;, rec);
+            }
+        };
+        var infoActionItem = {
+            xtype:&#39;button&#39;,
+            scale: &#39;small&#39;,
+            iconCls: &#39;infoCls&#39;,
+            tooltip: app.localize(&#39;Info&#39;),
+            handler: function (grid, rowIndex, colIndex,item,target,record) {
+                var rec = grid.getStore().getAt(rowIndex);
+                me.doCRUDOperation(&#39;info&#39;, rec, false, grid.getCell(record, this));
+            }
+        };
+        if (me.getModulePermissions().edit || (isTwoEntityPicker&amp;&amp;secondoryEntityDetails.modulePermissions.edit)) {
+            var editActionColumn = {
+                xtype: &#39;actioncolumn&#39;,
+                // width: &#39;5%&#39;,
+                width : 20,
+                minWidth: 20,
+                sortable: false,
+                hideable: false,
+                menuDisabled: true,
+                filterable: true,
+                items: [editActionItem]
+            }
+            columns.push(editActionColumn);
+        }
+
+        if (me.getModulePermissions().destroy || (isTwoEntityPicker&amp;&amp;secondoryEntityDetails.modulePermissions.destroy)) {
+            var deleteActionColumn = {
+                xtype: &#39;actioncolumn&#39;,
+                //width: &#39;5%&#39;,
+                width: 20,
+                minWidth: 20,
+                sortable: false,
+                hideable: false,
+                menuDisabled: true,
+                filterable: true,
+                items: [deleteActionItem]
+            }
+            columns.push(deleteActionColumn);
+        }
+
+        if (me.getModulePermissions().read || (isTwoEntityPicker &amp;&amp; secondoryEntityDetails.modulePermissions.read)) {
+            var infoActionColumn = {
+                xtype: &#39;actioncolumn&#39;,
+                // width: &#39;5%&#39;,
+                width: 20,
+                minWidth: 20,
+                sortable: false,
+                hideable: false,
+                menuDisabled: true,
+                filterable: true,
+                items: [infoActionItem]
+            }
+            columns.push(infoActionColumn);
+        }
+        return columns;
+    },
+<span id='Chaching-components-form-field-ComboBox-method-doQuery'>    doQuery: function (queryString, forceAll, rawQuery) {
+</span>        var me = this,
+            store = me.getStore(),
+            filters = store.getFilters(),
+            // if we have a queryString and the queryFilter is not filtering the store, we should do a localQuery
+            refreshFilters = !!queryString &amp;&amp; me.queryFilter &amp;&amp; (filters.indexOf(me.queryFilter) &lt; 0),
+            // Decide if, and how we are going to query the store
+            queryPlan = me.beforeQuery({
+                lastQuery: me.lastQuery || &#39;&#39;,
+                query: queryString || &#39;&#39;,
+                rawQuery: rawQuery,
+                forceAll: forceAll,
+                combo: me,
+                cancel: false
+            });
+        // Allow veto.
+        if (queryPlan !== false &amp;&amp; !queryPlan.cancel) {
+            // If they&#39;re using the same value as last time (and not being asked to query all), 
+            // and the filters don&#39;t need to be refreshed, just show the dropdown
+            if (me.queryCaching &amp;&amp; !refreshFilters &amp;&amp; queryPlan.query === me.lastQuery) {
+                // The filter changing was done with events suppressed, so
+                // refresh the picker DOM while hidden and it will layout on show.
+                me.getPicker().getView().refresh();
+                me.expand();
+                me.afterQuery(queryPlan);
+            } else // Otherwise filter or load the store
+            {
+                me.lastQuery = queryPlan.query;
+                if (me.queryMode === &#39;local&#39;) {
+                    me.doLocalQuery(queryPlan);
+                } else {
+                    me.doRemoteQuery(queryPlan);
+                }
+            }
+            return true;
+        } else // If the query was vetoed we still need to check the change
+            // in case custom validators are used
+        {
+            me.startCheckChangeTask();
+        }
+        return false;
+    },
+<span id='Chaching-components-form-field-ComboBox-method-afterQuery'>    afterQuery: function (queryPlan) {
+</span>        var me = this;
+
+        if (me.store.getCount()) {
+            if (me.typeAhead) {
+                me.doTypeAhead(queryPlan);
+            }
+
+            if (queryPlan.rawQuery) {
+                if (me.picker &amp;&amp; !me.picker.getSelectionModel().hasSelection()) {
+                    me.doAutoSelect();
+                }
+            } else {
+                me.doAutoSelect();
+            }
+        }
+
+        // doQuery is called upon field mutation, so check for change after the query has done its thing
+        me.startCheckChangeTask();
+    },
+<span id='Chaching-components-form-field-ComboBox-method-doCRUDOperation'>    doCRUDOperation: function (operation, record, isSecondEntityAdd, infoItem) {
+</span>        var me = this,
+            picker = me.picker,
+            xtype = me.getCreateEditEntityType(),
+            secondoryEntityDetails,
+            isTwoEntityPicker = me.getIsTwoEntityPicker(),
+            identificationKey,
+            secondEntityType,
+            secondCreateEditEntityType,
+            secondCreateEditEntityGridController,
+            secondEntityModelClass,
+            entityType = me.getEntityType();
+
+        var recordToLoad = me.getStore().model.create();
+        var entityTypeController = me.picker.getController();
+        
+        if ((record &amp;&amp; isTwoEntityPicker) || isSecondEntityAdd) {
+            secondoryEntityDetails = me.getSecondEntityDetails();
+            identificationKey = secondoryEntityDetails.identificationKey;
+            secondCreateEditEntityType = secondoryEntityDetails.createEditEntityType;
+            secondEntityType = secondoryEntityDetails.entityType;
+            secondCreateEditEntityGridController = secondoryEntityDetails.createEditEntityGridController;
+            secondEntityModelClass = secondoryEntityDetails.editCreateModelClass;
+            var storeApi = me.getPrimaryEntityCrudApi();
+            if ((record &amp;&amp; !record.get(identificationKey)) || isSecondEntityAdd) {
+                xtype = secondCreateEditEntityType;
+                recordToLoad = Ext.create(secondEntityModelClass);
+                entityTypeController = Ext.create(secondCreateEditEntityGridController);
+                entityType = secondEntityType;
+                storeApi = secondoryEntityDetails.secondoryEntityCrudApi;
+            }
+            if (storeApi) me.store.getProxy().setApi(storeApi);
+        } else {
+            var storeApi = me.getPrimaryEntityCrudApi();
+            if (storeApi) me.store.getProxy().setApi(storeApi);
+            if (me.identificationKey != undefined) {
+                identificationKey = me.identificationKey;
+            }
+        }
+        if (!picker) me.picker = me.getPicker();
+        var xtypeOfView = &quot;&quot;;
+        if (operation === &#39;create&#39;) {
+            xtypeOfView = xtype + &quot;.create&quot;;
+        } else if (operation === &#39;edit&#39;) {
+            xtypeOfView = xtype + &quot;.edit&quot;;
+        }
+
+        if (me.store &amp;&amp; me.store.proxy &amp;&amp; (me.store.proxy.urlToGetRecordById === &quot;&quot; || me.store.proxy.urlToGetRecordById == undefined)) {
+            Ext.raise(&#39;urlToGetRecordById config is required in proxy config of &#39; + me.store.$className + &#39; to edit record in AutoFillCombo(&#39; + me.nameOfEntity + &#39;)&#39;);
+        }
+        var recordByIdUrl = me.store.proxy.urlToGetRecordById;
+        if (operation === &#39;edit&#39; || operation === &quot;info&quot;) {
+            Ext.Ajax.request({
+                url: recordByIdUrl,
+                jsonData: Ext.encode({ id: record.get(me.valueField), value: record.get(identificationKey) }),
+                success: function(response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        if (operation === &quot;edit&quot;) {
+                            var popupWindow = me.createPopupWindow(xtypeOfView, me, operation, entityType);
+                            var formView = popupWindow.down(&#39;form&#39;);
+                            Ext.apply(recordToLoad.data, res.result);
+                            entityTypeController.doAfterCreateAction(&#39;popup&#39;, formView, true, recordToLoad);
+                            formView.loadRecord(recordToLoad);
+                        } else {
+                            var floatingPanel = me.createDynamicPanel(res.result,entityType);
+                            floatingPanel.showBy(infoItem,&#39;tr&#39;);
+                        }
+                    } else {
+                        abp.message.error(res.error.message, &#39;Error&#39;);
+                    }
+                },
+                failure: function(response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+        } else if (operation === &#39;delete&#39;) {
+            abp.message.confirm(app.localize(&#39;ConfirmMessage&#39;) + &quot; &quot; + entityType, app.localize(&#39;Confirm&#39;), function(actionResult) {
+                if (actionResult) {
+                    me.deleteEntity(me, record);
+                }
+            });
+        } else if (operation === &#39;create&#39;) {
+            var popupWindow = me.createPopupWindow(xtypeOfView, me, operation, entityType);
+            var formView = popupWindow.down(&#39;form&#39;);
+            entityTypeController.doAfterCreateAction(&#39;popup&#39;, formView, false, null);
+        }
+    },
+<span id='Chaching-components-form-field-ComboBox-method-createDynamicPanel'>    createDynamicPanel: function (response,title) {
+</span>        var me = this,
+            entityTitle = &#39;&lt;h3&gt;&#39; + title + &#39;&lt;/h3&gt;&#39;,
+            html = &#39;&lt;div class=&quot;leftarrowdiv&quot; style=&quot;width:97% !important;left:11px !important;height:100% !important&quot;&gt;&lt;table style=&quot;height:100%; width:100%;&quot;&gt;&#39;,
+            height = 40;
+        if (response) {
+            for (var key in response) {
+                if (response.hasOwnProperty(key)) {
+                    var value = response[key];
+                    if (value &amp;&amp; typeof(value) === &quot;string&quot;) {
+                        html += &#39;&lt;tr&gt;&lt;td style=&quot;height:25px; width:35%;&quot;&gt;&#39; + key.initCap() + &#39;:&lt;/td&gt;&lt;td style=&quot;height:25px; width:65%; padding-left:10px;&quot;&gt;&#39; + value.initCap() + &#39;&lt;/td&gt;&lt;/tr&gt;&#39;;
+                        height += 25;
+                    }
+                }
+            }
+        }
+        html += &quot;&lt;/table&gt;&lt;/div&gt;&quot;;
+        var panel = undefined;
+        if (me.lastInfoPanel) {
+            panel = me.lastInfoPanel;
+            panel.update(html);
+            panel.setHeight(height);
+            me.lastInfoPanel = panel;
+            return panel;
+        }
+        panel = Ext.widget({
+            xtype: &#39;panel&#39;,
+            floating: true,
+            shadow: false,
+            width: 350,
+            baseCls: &#39;&#39;,
+            styleHtmlContent:true,
+            html: html,
+            border: false,
+            frame: false,
+            bodyStyle: {
+                &#39;background-color&#39;: &#39;transparent&#39;,
+                &#39;box-shadow&#39;:&#39;transparent&#39;
+            }
+        });
+        me.lastInfoPanel = panel;
+        panel.setHeight(height);
+        return panel;
+    },
+<span id='Chaching-components-form-field-ComboBox-method-getTextValue'>    getTextValue: function () {
+</span>        var me = this;
+        return me.rawValue;
+    },
+<span id='Chaching-components-form-field-ComboBox-method-deleteEntity'>    deleteEntity: function (me, record) {
+</span>        var picker = me.getPicker();
+        if (record.get(me.displayField) === me.getTextValue()) {
+            me.setValue(&#39;&#39;);
+        }
+        Ext.Ajax.request({
+            url: me.store.proxy.api.destroy,
+            jsonData: Ext.encode({ id: record.get(me.valueField) }),
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    abp.notify.success(&#39;Operation completed successfully.&#39;, &#39;Success&#39;);
+                    picker.getSelectionModel().deselectAll();
+                    me.store.load({ params: me.store.params });
+                } else {
+                    abp.message.error(res.error.message, &#39;Error&#39;);
+                }
+            },
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+            }
+        });
+    },
+<span id='Chaching-components-form-field-ComboBox-method-createPopupWindow'>    createPopupWindow: function (xtypeOfView, me, operation, entityType) {
+</span>        var windowTitle = operation + &#39; &#39; + entityType;
+        var createEditView = Ext.widget({
+            xtype: xtypeOfView,
+            openInPopupWindow: true,
+            parentGrid: me.picker,
+            showFormTitle: false
+        });
+        var popupWndSize = createEditView.popupWndSize;
+        var height = &#39;90%&#39;, width = &#39;90%&#39;;
+        if (popupWndSize) {
+            height = popupWndSize.height;
+            width = popupWndSize.width;
+        }
+        var window = Ext.create(&#39;Chaching.view.common.window.ChachingWindowPanel&#39;, {
+            layout: &#39;fit&#39;,
+            title: windowTitle.toUpperCase(),
+            autoShow: true,
+            modal: true,
+            height: height,
+            width: width,
+            items: [createEditView],
+            listeners: {
+                beforedestroy: function (cmp, eOpts) {
+
+                    //set record in auto fill combo
+                    var record = me.picker.recordToSetInComboBox;
+                    if (!record) record = cmp.down(&#39;form&#39;).getRecord();
+                    if (!record) record = cmp.down(&#39;form&#39;).getValues();
+                    if (record)
+                        me.onSelect(record);
+                }
+            }
+        });
+
+        return window;
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onSelect'>    onSelect: function (record) {
+</span>        if (record &amp;&amp; record.data) {
+            var me = this;
+            var idVal = record.data[me.valueField];
+            var nameVal = record.data[me.displayField];
+            me.setValue(record);
+            me.fireEvent(&#39;change&#39;, me, idVal, record);
+            me.collapse();
+            me.fireEvent(&#39;select&#39;, me, record);
+            me.doRefreshList();
+        }
+    },
+<span id='Chaching-components-form-field-ComboBox-method-doRefreshList'>    doRefreshList:function() {
+</span>        var me = this,
+            store = me.getStore();
+        store.reload();
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onExpand'>    onExpand: function () {
+</span>        var keyNav = this.getPicker().getNavigationModel();
+        if (keyNav) {
+            keyNav.enable();
+        }
+        this.doAutoSelect();
+        this.focus();
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onCollapse'>    /**
+</span>     * @private
+     * Disables the key navs for the BoundList when it is collapsed.
+     */
+    onCollapse: function () {
+        var picker = this.getPicker(),
+            keyNav = picker.getNavigationModel(),
+            selModel = picker.getSelectionModel();
+        if (keyNav) {
+            keyNav.disable();
+        }
+        if (this.updatingValue) {
+            this.doQueryTask.cancel();
+        }
+        if (selModel)selModel.deselectAll();
+        picker.blur();
+        this.focus();
+        if (this.lastInfoPanel) this.lastInfoPanel.hide();
+    },
+<span id='Chaching-components-form-field-ComboBox-method-onListRefresh'>    onListRefresh: function () {
+</span>        this.alignPicker();
+        this.syncSelection();
+        if (this.lastInfoPanel) this.lastInfoPanel.hide();
+    },
+<span id='Chaching-components-form-field-ComboBox-method-alignPicker'>    alignPicker: function () {
+</span>        var me = this,
+            picker = me.getPicker(),
+            heightAbove = me.getPosition()[1] - Ext.getBody().getScroll().top,
+            heightBelow = Ext.Element.getViewportHeight() - heightAbove - me.getHeight(),
+            space = Math.max(heightAbove, heightBelow);
+
+        if (picker.height) {
+            delete picker.height;
+            picker.updateLayout();
+        }
+
+        if (picker &amp;&amp; picker.getHeight() &gt; space - 5) {
+            picker.setHeight(space - 5);
+        }
+        else if (me.store.isLoading()) {
+            //set loading height
+            picker.setHeight(me.defaultListConfig.loadingHeight);
+            me.store.pickerField = picker;
+            me.store.on(&#39;load&#39;, function (storeObj) {
+                if (storeObj &amp;&amp; storeObj.pickerField) {
+                    //refresh to autoHeight based on records available in store
+                    storeObj.pickerField.refresh(1);
+                    storeObj.pickerField.updateLayout();
+                }
+            });
+        }
+        me.callParent();
+    },
+
+<span id='Chaching-components-form-field-ComboBox-method-syncSelection'>    syncSelection: function () {
+</span>        var me = this,
+            picker = me.picker,
+            selection, selModel,
+            values = me.valueModels || [],
+            vLen = values.length, v, value;
+
+        if (picker) {
+
+            selection = [];
+            for (v = 0; v &lt; vLen; v++) {
+                value = values[v];
+
+                if (value &amp;&amp; value.isModel &amp;&amp; me.store.indexOf(value) &gt;= 0) {
+                    selection.push(value);
+                }
+            }
+
+
+            me.ignoreSelection++;
+            selModel = picker.getSelectionModel();
+            selModel.deselectAll();
+            if (selection.length) {
+                selModel.select(selection, undefined, true);
+            }
+            me.ignoreSelection--;
+        }
+    }
+});</pre>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * This file contains the custom amount field considering amount seperator and currency symbols.
+ * Author: Krishna Garad
+ * Date:11/07/2016
+ */
+<span id='Chaching-components-form-field-Amount'>/**
+</span> * A basic amount field inherited from {@link Ext.form.field.Text}.  Can be used as a direct replacement for traditional text inputs,
+ * or as the base class for more sophisticated input controls (like {@link Ext.form.field.TextArea}
+ * and {@link Ext.form.field.ComboBox}). Has support for empty-field placeholder values (see {@link #emptyText}).
+ *
+ * # Validation
+ *
+ * The Text field has a useful set of validations built in:
+ *
+ * - {@link #allowBlank} for making the field required
+ * - {@link #minLength} for requiring a minimum value length
+ * - {@link #maxLength} for setting a maximum value length (with {@link #enforceMaxLength} to add it
+ *   as the `maxlength` attribute on the input element)
+ * - {@link #regex} to specify a custom regular expression for validation
+ *
+ * In addition, custom validations may be added:
+ *
+ * - {@link #vtype} specifies a virtual type implementation from {@link Ext.form.field.VTypes} which can contain
+ *   custom validation logic
+ * - {@link #validator} allows a custom arbitrary function to be called during validation
+ *
+ * The details around how and when each of these validation options get used are described in the
+ * documentation for {@link #getErrors}.
+ *
+ * By default, the field value is checked for validity immediately while the user is typing in the
+ * field. This can be controlled with the {@link #validateOnChange}, {@link #checkChangeEvents}, and
+ * {@link #checkChangeBuffer} configurations. Also see the details on Form Validation in the
+ * {@link Ext.form.Panel} class documentation.
+ *
+ * # Masking and Character Stripping
+ *
+ * Text fields can be configured with custom regular expressions to be applied to entered values before
+ * validation: see {@link #maskRe} and {@link #stripCharsRe} for details.
+ *
+ * # Example usage
+ *
+ *     @example
+ *     Ext.create(&#39;Ext.form.Panel&#39;, {
+ *         title: &#39;Amount Field Demo&#39;,
+ *         width: 300,
+ *         bodyPadding: 10,
+ *         renderTo: Ext.getBody(),
+ *         items: [{
+ *             xtype: &#39;amountfield&#39;,
+ *             name: &#39;amount&#39;,
+ *             fieldLabel: &#39;Balance&#39;,
+ *             allowBlank: false ,
+ *             currency:&#39;USD&#39;,
+ *             precision:2
+ *         }]
+ *     });
+ *
+ */
+Ext.define(&#39;Chaching.components.form.field.Amount&#39;, {
+    extend: &#39;Ext.form.field.Text&#39;,
+    alias: [&#39;widget.amountfield&#39;],
+    config: {
+<span id='Chaching-components-form-field-Amount-cfg-currency'>        /**
+</span>        * @cfg {string} currency
+        * Any valid currency code.
+        */
+        currency: &#39;USD&#39;,
+<span id='Chaching-components-form-field-Amount-cfg-precision'>        /**
+</span>        * @cfg {int/Number} precision
+        * Digits to be shown after decimal point.
+        */
+        precision:2
+    },
+<span id='Chaching-components-form-field-Amount-cfg-maskRe'>    maskRe: /[0-9.]/,
+</span><span id='Chaching-components-form-field-Amount-method-initComponent'>    initComponent: function () {
+</span>        var me = this,
+            currency = me.getCurrency();
+        me.callParent(arguments);
+        me.mon(me,{
+            scope: me,
+            blur: me.onAmountBlur,
+            focus: me.onAmountFocus
+        });
+        me.setCurrency(currency);
+    },
+<span id='Chaching-components-form-field-Amount-method-onAmountBlur'>    /**
+</span>    * @private
+    * Event handler when field is blured out.
+    */
+    onAmountBlur: function () {
+        var me = this;
+        me.setCurrency(me.getCurrency());
+    },
+<span id='Chaching-components-form-field-Amount-method-onAmountFocus'>    /**
+</span>    * @private
+    * Event handler when field is focused.
+    */
+    onAmountFocus: function () {
+        var me = this,
+           value = me.getValue();
+        me.setValue(value);
+    },
+<span id='Chaching-components-form-field-Amount-method-changeCurrency'>    /**
+</span>    * @private
+    * Internal function to change currency.
+     * @param {String/Number/Float} value
+     * @param {String} currencySign
+     * @param {Number} precision
+    */
+    changeCurrency:function(value, currencySign, precision,currency) {
+        var me = this;
+        value = me.unFormatValue(value);
+        me.setValue(Ext.util.Format.currency(value, currencySign, precision));
+    },
+<span id='Chaching-components-form-field-Amount-method-setCurrency'>    /**
+</span>    * Set given currency to the amount entered
+    * @param {String} currency
+    */
+    setCurrency:function(currency) {
+        var me = this,
+            value = me.getValue(),
+            currencySign = me.getCurrencySign(currency),
+            precision = me.getPrecision();
+        me.changeCurrency(value, currencySign, precision, currency);
+        me.currency = currency;
+    },
+<span id='Chaching-components-form-field-Amount-method-getCurrencySign'>    /**
+</span>    * Returns the currency sign
+    * @param {String} currency
+    * @return {Currency Symbol}
+    */
+    getCurrencySign: function (currency) {
+        var me = this,
+            currencyCodes = Chaching.utilities.ChachingGlobals.currencyCodesAndSymbols,
+            currencySymbol = &#39;$&#39;;
+        if (currency) {
+            var result = currencyCodes.filter(function (rec) { return rec.code === currency; });
+
+            currencySymbol = result &amp;&amp; result.length &gt; 0 ? result[0].symbol : &#39;$&#39;; // or default symbol
+        }
+        return currencySymbol;
+    },
+<span id='Chaching-components-form-field-Amount-method-unFormatValue'>    /**
+</span>   * @private
+   * Internal function to unformat the value.
+   * @param {Number/Float/String} value.
+   */
+    unFormatValue:function(value) {
+        var newValue = &quot;0.00&quot;,
+            me = this;
+        if (value != undefined) {
+            value = value.toString();
+            if (value !== null &amp;&amp; value !== &#39;&#39;) {
+                newValue = value.replace(&quot;(&quot;, &#39;-&#39;);
+                newValue = newValue.replace(&quot;)&quot;, &#39;&#39;);
+                newValue = newValue.replace(/,/g, &quot;&quot;);
+                newValue = newValue.replace(me.getCurrencySign(me.getCurrency()),&#39;&#39;);
+            }
+        }
+        return newValue;
+    },
+<span id='Chaching-components-form-field-Amount-method-getValue'>    getValue: function () {
+</span>        var me = this,
+            val = me.rawToValue(me.processRawValue(me.getRawValue()));
+        if (val)
+            val = me.unFormatValue(val);
+        me.value = val;
+        return val;
+    },
+<span id='Chaching-components-form-field-Amount-method-getSubmitData'>    getSubmitData: function () {
+</span>        var me = this,
+            data = null,
+            val;
+        if (!me.disabled &amp;&amp; me.submitValue) {
+            val = me.getSubmitValue();
+            if (val !== null) {
+                val = me.unFormatValue(val);
+                data = {};
+                data[me.getName()] = val;
+            }
+        }
+        return data;
+    }
+});</pre>
+</body>
+</html>

@@ -15,26 +15,27 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.roles.RolesModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-roles-RolesModel'>/**
+</span> * DataModel to represent entity schema for Roles.
+ */
+Ext.define(&#39;Chaching.model.roles.RolesModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     
-    fields: [
+<span id='Chaching-model-roles-RolesModel-property-fields'>    fields: [
+</span>            {
+                name: &#39;id&#39;, type: &#39;int&#39;,defaultValue : null, convert : nullHandler, isPrimaryKey : true
+            },
             {
-                name: &#39;id&#39;, type: &#39;int&#39;, convert: function (value, record) {
-                    return value;
-                }
+                name: &#39;roleId&#39;, type: &#39;int&#39;, defaultValue : null, convert : nullHandler, mapping : &#39;id&#39;
             },
             { name: &#39;name&#39;, type: &#39;string&#39; },
             { name: &#39;displayName&#39;, type: &#39;string&#39; },
             { name: &#39;isStatic&#39;, type: &#39;boolean&#39; },
             { name: &#39;isDefault&#39;, type: &#39;boolean&#39; },
-            { name: &#39;createTime&#39;, type: &quot;date&quot;, format: &#39;Y-m-d&#39; },
-           // { name: &#39;grantedPermissionNames&#39;, type: &quot;auto&quot; },
-          //  { name: &#39;Roles&#39;, reference: &#39;roles.RolesModel&#39; },
-           // { name: &#39;permissions&#39;, reference: &#39;roles.RolesModel&#39; }
+            { name: &#39;createTime&#39;, type: &quot;date&quot;, format: &#39;Y-m-d&#39; }
     ],
-    idProperty: &#39;id&#39;
-   
+<span id='Chaching-model-roles-RolesModel-property-idProperty'>    idProperty: &#39;id&#39;
+</span>   
 });
 
 </pre>

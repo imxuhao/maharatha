@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.tenants.TenantUserListStore', {
+﻿/**
+ * DataStore to perform Read operation on Tenant users.
+ */
+Ext.define('Chaching.store.tenants.TenantUserListStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.tenants.TenantUserModel',
     proxy: {

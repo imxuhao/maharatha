@@ -15,15 +15,18 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.tenants.TenantsModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-tenants-TenantsModel'>/**
+</span> * DataModel to represent entity schema for Tenants/Company.
+ */
+Ext.define(&#39;Chaching.model.tenants.TenantsModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;Tenant&#39;
-    },
-    fields: [
-        { name: &#39;id&#39;, type: &#39;int&#39; },
+<span id='Chaching-model-tenants-TenantsModel-cfg-searchEntityName'>        searchEntityName: &#39;Tenant&#39;
+</span>    },
+<span id='Chaching-model-tenants-TenantsModel-property-fields'>    fields: [
+</span>        { name: &#39;id&#39;, type: &#39;int&#39;,isPrimaryKey : true },
         { name: &#39;editionDisplayName&#39;, type: &#39;string&#39; },
-        { name: &#39;editionId&#39;, type: &#39;int&#39;,defaultValue:null },
+        { name: &#39;editionId&#39;, type: &#39;int&#39;,defaultValue:null, convert:nullHandler },
         { name: &#39;isActive&#39;, type: &#39;boolean&#39; },
         { name: &#39;name&#39;, type: &#39;string&#39; },
         { name: &#39;tenancyName&#39;, type: &#39;string&#39; },

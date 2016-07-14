@@ -53,6 +53,9 @@
         }
     },
     currentRedirectedRoute: null,
+    doRowSpecificEditDelete: function (button, grid) {
+        // do row specific work over here like hiding action menu based on some condition 
+    },
     //Event Listeners
     quickEditActionClicked: function (menu, item, e, eOpts) {
         //do edit based on editMode of grid
@@ -60,7 +63,7 @@
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
             grid = widgetCol.up(&#39;grid&#39;);
-
+        if (grid &amp;&amp; grid.isInViewMode) return;
         //TODO start edit by checking row allowEdit property
         if (widgetRec &amp;&amp; grid) {
             var editingPlugin = grid.getPlugin(&#39;editingPlugin&#39;);
@@ -75,17 +78,18 @@
         }
 
     },
-    editActionClicked: function(menu, item, e, eOpts) {
+    editActionClicked: function(menu, item, e, eOpts,isView) {
         var parentMenu = menu.parentMenu,
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
             grid = widgetCol.up(&#39;grid&#39;),
             controller = grid.getController(),
             gridStore = grid.getStore();
-
+        if (grid &amp;&amp; grid.isInViewMode) return;
         //TODO start edit by checking row allowEdit property
         if (widgetRec &amp;&amp; grid) {
-            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, grid.editWndTitleConfig, widgetRec);
+            var titleConfig = isView ? grid.viewWndTitleConfig : grid.editWndTitleConfig;
+            var formView = controller.createNewRecord(grid.xtype, grid.createNewMode, true, titleConfig, widgetRec);
 
             //var modelField = gridStore.getModel().getFields();
             //if (modelField) {
@@ -108,7 +112,80 @@
                 //form.setValues(widgetRec.data);
                 form.loadRecord(widgetRec);
             }
+            if (form &amp;&amp; isView) {
+                controller.openInViewMode(formView,controller);
+            }
         }
+    },
+    openInViewMode:function(formView,controller) {
+        var form = undefined, formPanel = undefined;
+        if (formView &amp;&amp; formView.isWindow) {
+            formPanel = formView.down(&#39;form&#39;),
+                form = formPanel.getForm();
+        } else if (formView) {
+            form = formView.getForm();
+            formPanel = formView;
+        }
+        if (!form) return;
+        var record = form.getRecord();
+        var fields = form.getFields().items;
+        Ext.each(fields, function(field) {
+            if (field.xtype !== &quot;hiddenfield&quot; &amp;&amp; !field.isFilterField) {
+                field.setDisabled(true);
+                if (typeof (field.setEmptyText) === &quot;function&quot;) {
+                    field.originalEmptyText = field.getEmptyText();
+                    field.setEmptyText(&#39;--&#39;);
+                }
+            }
+        });
+
+        //disabled child grids functionality
+        if (formPanel) {
+            var childGrids = formPanel.query(&#39;gridpanel&#39;);
+            if (childGrids&amp;&amp;childGrids.length&gt;0) {
+                Ext.each(childGrids, function(grid) {
+                    grid.isInViewMode = true;
+                    var dockedItems = grid.getDockedItems();
+                    if (dockedItems&amp;&amp;dockedItems.length&gt;0) {
+                        Ext.each(dockedItems, function(toolbar) {
+                            if (toolbar.isActionToolBar)toolbar.hide();
+                        });
+                    }
+                });
+            }
+            if (formPanel.isTransactionForm) {
+                var defaultActionGroup = formPanel.defaultActionGroup;
+                if (defaultActionGroup) {
+                    var actionButtons = defaultActionGroup.query(&#39;button&#39;);
+                    Ext.each(actionButtons, function(button) {
+                        if (button.name !== &#39;Cancel&#39; &amp;&amp; button.name !== &quot;Edit&quot;&amp;&amp;typeof(button.hide)===&quot;function&quot;) {
+                            button.hide();
+                        }
+                        if (button.name === &quot;Edit&quot; &amp;&amp; controller.validateEditRecordInViewMode(record)) button.show();
+                    });
+                }
+            }else if (formPanel.hideDefaultButtons) {
+                var viewController = formPanel.getController();
+                if (viewController)viewController.doModuleSpecificViewMode(formPanel);
+            }
+            else {
+                var defaultActionToolBar = formPanel.defaultActionToolBar;
+                if (defaultActionToolBar) {
+                    var defaultActionButtons = defaultActionToolBar.query(&#39;button&#39;);
+                    if (defaultActionButtons &amp;&amp; defaultActionButtons.length &gt; 0) {
+                        Ext.each(defaultActionButtons, function(button) {
+                            if (button.name !== &#39;Cancel&#39; &amp;&amp; button.name !== &quot;Edit&quot; &amp;&amp; typeof (button.hide) === &quot;function&quot;) {
+                                button.hide();
+                            }
+                            if (button.name === &quot;Edit&quot; &amp;&amp; controller.validateEditRecordInViewMode(record)) button.show();
+                        });
+                    }
+                }
+            }
+        }
+    },
+    validateEditRecordInViewMode:function(record) {
+        return true;
     },
     deleteActionClicked: function (menu, item, e, eOpts) {
         //do delete based on operation of grid store
@@ -118,23 +195,30 @@
             grid = widgetCol.up(&#39;grid&#39;),
             controller = grid.getController,
             gridStore = grid.getStore();
+        if (grid &amp;&amp; grid.isInViewMode) return;
+        abp.message.confirm(
+               app.localize(&#39;DeleteWarningMessage&#39;),
+               function (isConfirmed) {
+                   if (isConfirmed) {
+                       //Delete record
+                       if (widgetRec &amp;&amp; grid) {
+                           var modelField = gridStore.getModel().getFields();
+                           if (modelField) {
+                               Ext.each(modelField, function (field) {
+                                   if (field.isPrimaryKey) {
+                                       widgetRec.set(&#39;id&#39;, widgetRec.get(field.name));
+                                       return;
+                                   }
+                               });
+                           }
+                           gridStore.setAutoSync(true);
+                           gridStore.remove(widgetRec);
+                           gridStore.setAutoSync(false);
 
-        //Delete record
-        if (widgetRec &amp;&amp; grid) {
-            var modelField = gridStore.getModel().getFields();
-            if (modelField) {
-                Ext.each(modelField, function (field) {
-                    if (field.isPrimaryKey) {
-                        widgetRec.set(&#39;id&#39;, widgetRec.get(field.name));
-                        return;
-                    }
-                });
-            }
-            gridStore.setAutoSync(true);
-            gridStore.remove(widgetRec);
-            gridStore.setAutoSync(false);
-
-        }
+                       }
+                   }
+               }
+           );
     },
     onEditComplete: function (editor, e) {
         var me = this,
@@ -263,6 +347,10 @@
     },
     //editing plugin listeners
     onBeforeGridEdit: function (editor, context, eOpts) {
+        //return false if isInViewMode
+        if (context &amp;&amp; context.grid &amp;&amp; context.grid.isInViewMode) {
+            return false;
+        }
         ///TODO cancel edit if restricted
         //cancel edit if is actioncolumn editing
         var record = context.record;
@@ -276,6 +364,9 @@
             className = model.$className,
             idPropertyField = gridStore.idPropertyField,
             editingPlugin = view.getPlugin(&#39;editingPlugin&#39;);
+
+        //do nothing if grid is opened in view mode.
+        if (view.isInViewMode) return;
 
         var modelInstance;
         if (view &amp;&amp; view.createNewMode) {
@@ -316,7 +407,7 @@
     },
     //Do module specific tasks 
     doBeforeCreateAction: function (createNewMode) { },
-    doAfterCreateAction: function (createNewMode, form,isEdit) { },
+    doAfterCreateAction: function (createNewMode, form,isEdit,record) { },
     createNewRecord: function (type, createMode, isEdit, titleConfig,record) {
         var me = this,
             view = me.getView(),
@@ -354,8 +445,27 @@
         }
         me.setParentControl(formView, createMode);
         me.doAfterCreateAction(createMode, formView, isEdit, record);
+        if (formView.isTransactionForm) {
+            me.loadDetailsStore(record, formView);
+        }
         return formView;
 
+    },
+    loadDetailsStore: function (record, formPanel) {
+        if (formPanel) {
+            var detailsGrid = formPanel.down(&#39;gridpanel[isTransactionDetailsGrid=true]&#39;),
+                detailsStore = detailsGrid.getStore(),
+                transactionId = undefined;
+            if (record) {
+                transactionId = record.get(&#39;accountingDocumentId&#39;);
+            }
+            if (transactionId &amp;&amp; transactionId &gt; 0) {
+                detailsStore.getProxy().setExtraParam(&#39;accountingDocumentId&#39;, transactionId);
+                detailsStore.load();
+            } else {
+                detailsStore.loadDefaultRecords(15);
+            }
+        }
     },
     setParentControl: function (formView, createMode) {
         var me = this,

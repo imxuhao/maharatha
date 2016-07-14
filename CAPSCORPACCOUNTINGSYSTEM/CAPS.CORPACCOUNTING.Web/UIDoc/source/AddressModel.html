@@ -15,18 +15,21 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.address.AddressModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-address-AddressModel'>/**
+</span> * Address model used by vendors,banks,companies.
+ */
+Ext.define(&#39;Chaching.model.address.AddressModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;Address&#39;
-    },
-    fields: [
-        { name: &#39;addressId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+<span id='Chaching-model-address-AddressModel-cfg-searchEntityName'>        searchEntityName: &#39;Address&#39;
+</span>    },
+<span id='Chaching-model-address-AddressModel-property-fields'>    fields: [
+</span>        { name: &#39;addressId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
         { name: &#39;objectId&#39;, type: &#39;int&#39; },
-        { name: &#39;typeofObjectId&#39;, type: &#39;auto&#39; },
-           { name: &#39;TypeofObject&#39;, type: &#39;string&#39; },
+        { name: &#39;typeofObjectId&#39;, type: &quot;int&quot;, defaultVaule: null, convert: nullHandler },
+        { name: &#39;TypeofObject&#39;, type: &#39;string&#39; },
         { name: &#39;addressTypeId&#39;, type: &#39;auto&#39; },
-         { name: &#39;AddressType&#39;, type: &#39;string&#39; },
+        { name: &#39;AddressType&#39;, type: &#39;string&#39; },
         { name: &#39;contactNumber&#39;, type: &#39;string&#39; },
         { name: &#39;line1&#39;, type: &#39;string&#39; },
         { name: &#39;line2&#39;, type: &#39;string&#39; },
@@ -43,10 +46,11 @@
         { name: &#39;phone2&#39;, type: &quot;string&quot; },
         { name: &#39;phone2Extension&#39;, type: &quot;string&quot; },
         { name: &#39;website&#39;, type: &quot;string&quot; },
-        { name: &#39;isPrimary&#39;, type: &quot;boolean&quot; }
+        { name: &#39;isPrimary&#39;, type: &quot;boolean&quot; },
+        { name: &#39;tenantId&#39;, type: &quot;int&quot; },
+        { name: &#39;organizationUnitId&#39;, type: &quot;int&quot; }
 
-    ],
-    //belongsTo: &#39;Chaching.model.payables.vendors.VendorsModel&#39;
+    ]
 });</pre>
 </body>
 </html>

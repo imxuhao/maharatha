@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.receivables.customers.CustomerFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.receivables-customers-customersform&#39;,
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        var me = this,
+             view = me.getView();
+        record = Ext.create(&#39;Chaching.model.receivables.customers.CustomersModel&#39;);
+        Ext.apply(record.data, values);
+
+        addressStore = view.down(&#39;grid&#39;).getStore();
+        var addressGridStore = view.down(&#39;gridpanel[itemId=addressGrid]&#39;).getStore();
+        var addressModifyRecords = addressGridStore.getModifiedRecords();
+        record.set(&#39;id&#39;, values.customerId);
+        if (addressModifyRecords &amp;&amp; addressModifyRecords.length &gt; 0) {
+            arrAddress = [];
+            Ext.each(addressModifyRecords, function (rec) {
+                rec.set(&#39;objectId&#39;, values.customerId);
+                var addRec = {
+                    addressId: rec.get(&#39;addressId&#39;),
+                    organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
+                    objectId: values.customerId,
+                    typeofObjectId: 2, // typeofObjectId = 2 for customer
+                    addressTypeId: rec.get(&#39;addressTypeId&#39;),
+                    contactNumber: rec.get(&#39;contactNumber&#39;),
+                    line1: rec.get(&#39;line1&#39;),
+                    line2: rec.get(&#39;line2&#39;),
+                    line3: rec.get(&#39;line3&#39;),
+                    line4: rec.get(&#39;line4&#39;),
+                    city: rec.get(&#39;city&#39;),
+                    state: rec.get(&#39;state&#39;),
+                    country: rec.get(&#39;country&#39;),
+                    postalCode: rec.get(&#39;postalCode&#39;),
+                    fax: rec.get(&#39;fax&#39;),
+                    email: rec.get(&#39;email&#39;),
+                    phone1: rec.get(&#39;phone1&#39;),
+                    phone1Extension: rec.get(&#39;phone1Extension&#39;),
+                    phone2: rec.get(&#39;phone2&#39;),
+                    phone2Extension: rec.get(&#39;phone2Extension&#39;),
+                    website: rec.get(&#39;website&#39;),
+                    isPrimary: rec.get(&#39;isPrimary&#39;)
+                };
+                arrAddress.push(addRec);
+            });
+            record.data.addresses = arrAddress;
+        }
+
+        return record;
+    }
+});
+</pre>
+</body>
+</html>

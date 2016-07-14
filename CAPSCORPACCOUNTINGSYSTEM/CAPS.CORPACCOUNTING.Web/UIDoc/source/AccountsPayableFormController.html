@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.payables.invoices.AccountsPayableFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingTransactionFormPanelController&#39;,
+    alias: &#39;controller.payables-invoices-accountspayableform&#39;,
+    onFormResize:function(formPanel, width, height, oldWidth, oldHeight, eOpts) {
+        if (formPanel) {
+            var transactionDetailContainer = formPanel.down(&#39;*[itemId=transactionDetails]&#39;);
+            if (transactionDetailContainer) {
+                var heightForDetailGrid = height - (170 + 80);
+                transactionDetailContainer.down(&#39;gridpanel&#39;).setHeight(heightForDetailGrid);
+            }
+            formPanel.updateLayout();
+        }
+    },
+    onInvoiceTypeChange:function(field, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            form=view.getForm(),
+            quickPayCol = view.down(&#39;*[itemId=quickPaySection]&#39;);
+
+        if (quickPayCol &amp;&amp; newValue &amp;&amp; newValue.typeOfInvoiceId) {
+            var bank = form.findField(&#39;bankAccountId&#39;),
+                checkDate = form.findField(&#39;paymentDate&#39;),
+                payType = form.findField(&#39;payType&#39;),
+                checkNumber = form.findField(&#39;paymentNumber&#39;),
+                invoiceTotal = form.findField(&#39;controlTotal&#39;),
+                checkGroup = form.findField(&#39;typeOfCheckGroupId&#39;),
+                adjustInv = form.findField(&#39;adjustInvoice&#39;);
+            switch (newValue.typeOfInvoiceId) {
+                case &quot;1&quot;:
+                    invoiceTotal.setFieldLabel(app.localize(&#39;InvoiceTotal&#39;));
+                    bank.allowBlank = true;
+                    bank.hide();
+                    bank.reset();
+                    checkDate.allowBlank = true;
+                    checkDate.hide();
+                    checkDate.reset();
+                    payType.allowBlank = true;
+                    payType.hide();
+                    payType.reset();
+                    checkNumber.allowBlank = true;
+                    checkNumber.hide();
+                    checkNumber.reset();
+                    checkGroup.setDisabled(false);
+                    adjustInv.hide();
+                break;
+                case &quot;2&quot;:
+                    invoiceTotal.setFieldLabel(app.localize(&#39;CreditTotal&#39;));
+                    bank.allowBlank = true;
+                    bank.hide();
+                    bank.reset();
+                    checkDate.allowBlank = true;
+                    checkDate.hide();
+                    checkDate.reset();
+                    payType.allowBlank = true;
+                    payType.hide();
+                    payType.reset();
+                    checkNumber.allowBlank = true;
+                    checkNumber.hide();
+                    checkNumber.reset();
+                    checkGroup.setDisabled(false);
+                    adjustInv.show();
+                break;
+                case &quot;3&quot;:
+                    invoiceTotal.setFieldLabel(app.localize(&#39;InvoiceTotal&#39;));
+                    bank.show();
+                    bank.allowBlank = false;
+                    checkDate.show();
+                    checkDate.allowBlank = false;
+                    payType.show();
+                    payType.allowBlank = false;
+                    checkNumber.show();
+                    checkNumber.allowBlank = false;
+                    checkGroup.setDisabled(true);
+                    adjustInv.hide();
+                break;
+                default:
+                break;
+            }
+            form.clearInvalid();
+        }
+
+    },
+    onQuickPayFieldChanged:function(field, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            form = view.getForm(),
+            bank = form.findField(&#39;bankAccountId&#39;).getValue(),
+            checkDate = form.findField(&#39;paymentDate&#39;).getValue(),
+            payType = form.findField(&#39;payType&#39;).getValue(),
+            checkNumber = form.findField(&#39;paymentNumber&#39;);
+        var printCheck = checkNumber.getTrigger(&#39;printCheck&#39;);
+        if (bank &amp;&amp; checkDate &amp;&amp; payType &amp;&amp; checkNumber.getValue()) {
+            printCheck.getEl().removeCls(&#39;x-form-trigger x-form-trigger-fieldLabelTop printTriggerClsInactive printTriggerClsInactive-fieldLabelTop&#39;);
+            printCheck.getEl().setCls(&#39;x-form-trigger x-form-trigger-fieldLabelTop printTriggerClsActive printTriggerClsActive-fieldLabelTop&#39;);
+            checkNumber.updateLayout();
+            checkNumber.allowAction = true;
+        } else {
+            printCheck.getEl().removeCls(&#39;x-form-trigger x-form-trigger-fieldLabelTop printTriggerClsActive printTriggerClsActive-fieldLabelTop&#39;);
+            printCheck.getEl().setCls(&#39;x-form-trigger x-form-trigger-fieldLabelTop printTriggerClsInactive printTriggerClsInactive-fieldLabelTop&#39;);
+            checkNumber.updateLayout();
+            checkNumber.allowAction = false;
+        }
+    },
+    changeCurrency: function (field, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            form = view.getForm(),
+            controlTotal = form.findField(&#39;controlTotal&#39;);
+        ///TODO: change based on currency code
+        controlTotal.setCurrency(&#39;INR&#39;);
+    }
+    
+});
+</pre>
+</body>
+</html>

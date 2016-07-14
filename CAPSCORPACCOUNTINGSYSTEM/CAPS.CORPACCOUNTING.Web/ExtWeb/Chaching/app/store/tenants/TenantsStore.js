@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.tenants.TenantsStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Tenants/Company.
+ */
+Ext.define('Chaching.store.tenants.TenantsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.tenants.TenantsModel',
     autoLoad: false,

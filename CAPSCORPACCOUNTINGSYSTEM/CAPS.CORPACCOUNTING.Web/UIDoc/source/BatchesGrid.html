@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.batchposting.batches.BatchesGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+    requires: [
+        &#39;Chaching.view.batchposting.batches.BatchesGridController&#39;
+    ],
+    controller: &#39;batchposting-batches-batchesgrid&#39;,
+    xtype: &#39;widget.batchposting.batches&#39;,
+    store: &#39;batchposting.batches.BatchesStore&#39;,
+    name: &#39;BatchPosting.Batches&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.BatchPosting.Batches&#39;),
+        create: abp.auth.isGranted(&#39;Pages.BatchPosting.Batches.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.BatchPosting.Batches.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.BatchPosting.Batches.Delete&#39;),
+    },
+    padding: 5,
+    gridId: 19,
+    groupingConfig: {
+        ftype: &#39;grouping&#39;,
+        groupHeaderTpl: &#39;&lt;b&gt;TransactionType: {name} ({rows.length} Item{[values.rows.length &gt; 1 ? &quot;s&quot; : &quot;&quot;]})&lt;/b&gt;&#39;,
+        hideGroupedHeader: true,
+        startCollapsed: false
+    },
+    headerButtonsConfig: [
+        {
+        xtype: &#39;displayfield&#39;,
+        value: abp.localization.localize(&quot;BatchPosting&quot;),
+        ui: &#39;headerTitle&#39;
+        },
+        &#39;-&gt;&#39;, {
+        xtype: &#39;button&#39;,
+        scale: &#39;small&#39;,
+        ui: &#39;actionButton&#39;,
+        action: &#39;create&#39;,
+        text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
+        checkPermission: false,
+        iconCls: &#39;fa fa-plus&#39;,
+        iconAlign: &#39;left&#39;
+    }],
+    requireExport: true,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable: true,
+    editingMode: &#39;row&#39;,
+    columnLines: true,
+    multiColumnSort: true,
+    editWndTitleConfig: {
+        title: app.localize(&#39;EditBatch&#39;),
+        iconCls: &#39;fa fa-pencil&#39;
+    },
+    createWndTitleConfig: {
+        title: app.localize(&#39;CreatingNewBatch&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewBatch&#39;),
+        iconCls: &#39;fa fa-th&#39;
+    },
+    createNewMode: &#39;tab&#39;,
+    isSubMenuItemTab: true,
+    columns: [
+         {
+             text: app.localize(&#39;Posting&#39;),
+             dataIndex: &#39;post&#39;,
+             sortable: false,
+             groupable: false,
+             hideable: false,
+             width: &#39;13%&#39;,
+             xtype: &#39;checkcolumn&#39;
+
+         },
+          {
+              text: app.localize(&#39;BatchName&#39;),
+              dataIndex: &#39;description&#39;,
+              xtype: &#39;gridcolumn&#39;,
+              sortable: false,
+              groupable: false,
+              width: &#39;13%&#39;,
+              editor: {
+                  xtype: &#39;textfield&#39;,
+                  name: &#39;description&#39;
+              },
+              filterField: {
+                  xtype: &#39;textfield&#39;
+
+              }
+          },
+          {
+              text: app.localize(&#39;PostingDate&#39;),
+              dataIndex: &#39;postingDate&#39;,
+              xtype: &#39;gridcolumn&#39;,
+              sortable: false,
+              groupable: false,
+              width: &#39;13%&#39;,
+              renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+              filterField: {
+                  xtype: &#39;dateSearchField&#39;,
+                  width: &#39;100%&#39;
+              },
+              editor: {
+                  xtype: &#39;datefield&#39;,
+                  name: &#39;postingDate&#39;
+              }
+          }
+          ,
+          {
+              text: app.localize(&#39;ControlTotal&#39;),
+              dataIndex: &#39;controlTotal&#39;,
+              xtype: &#39;gridcolumn&#39;,
+              sortable: false,
+              groupable: false,
+              width: &#39;13%&#39;,
+              editor: {
+                  xtype: &#39;textfield&#39;,
+                  name: &#39;controlTotal&#39;
+              },
+              filterField: {
+                  xtype: &#39;textfield&#39;
+
+              }
+          }
+           ,
+          {
+              text: app.localize(&#39;BatchAmount&#39;),
+              dataIndex: &#39;batchAmount&#39;,
+              xtype: &#39;gridcolumn&#39;,
+              sortable: false,
+              groupable: false,
+              width: &#39;13%&#39;,
+          } , {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;Module&#39;),
+              dataIndex: &#39;typeOfBatch&#39;,
+              sortable: true,
+              groupable: false,
+              hidden:false,
+              width: &#39;18%&#39;,
+              filterField: {
+                  xtype: &#39;tagfield&#39;,
+                  valueField: &#39;typeOfBatchId&#39;,
+                  displayField: &#39;typeOfBatch&#39;,
+                  queryMode : &#39;local&#39;,
+                  width: &#39;100%&#39;,
+                  isEnum: true,
+                  forceSelection: true,
+                  searchProperty : &#39;typeOfBatchId&#39;,
+                  store: {
+                      fields: [{ name: &#39;typeOfBatchId&#39; }, { name: &#39;typeOfBatch&#39; }],
+                      data: [
+                          //{ typeOfBatch: app.localize(&#39;ShowAllModules&#39;), typeOfBatchId: &#39;0&#39; }
+                          { typeOfBatch: app.localize(&#39;Journal&#39;), typeOfBatchId: &#39;1,2,10,11&#39; }
+                          , { typeOfBatch: app.localize(&#39;AccountsPayable&#39;), typeOfBatchId: &#39;3&#39; }
+                          , { typeOfBatch: app.localize(&#39;Receivables&#39;), typeOfBatchId: &#39;4&#39; }
+                          , { typeOfBatch: app.localize(&#39;PettyCash&#39;), typeOfBatchId: &#39;6,7,9&#39; }
+                          , { typeOfBatch: app.localize(&#39;Payroll&#39;), typeOfBatchId: &#39;5&#39; }
+                          , { typeOfBatch: app.localize(&#39;CreditCard&#39;), typeOfBatchId: &#39;16&#39; }
+                      ]
+                  }
+              }
+          } , {
+               xtype: &#39;gridcolumn&#39;,
+               text: app.localize(&#39;RetainBatch&#39;),
+               dataIndex: &#39;isRetained&#39;,
+               sortable: true,
+               groupable: true,
+               width: &#39;18%&#39;,
+               renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+               filterField: {
+                   xtype: &#39;combobox&#39;,
+                   valueField: &#39;value&#39;,
+                   displayField: &#39;text&#39;,
+                   width: &#39;100%&#39;,
+                   store: {
+                       fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                       data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                   }
+               }
+           }, {
+               xtype: &#39;gridcolumn&#39;,
+               text: app.localize(&#39;PostingStatus&#39;),
+               dataIndex: &#39;postingStatus&#39;,
+               sortable: true,
+               groupable: true,
+               width: &#39;18%&#39;,
+               renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+               filterField: {
+                   xtype: &#39;combobox&#39;,
+                   valueField: &#39;value&#39;,
+                   displayField: &#39;text&#39;,
+                   width: &#39;100%&#39;,
+                   store: {
+                       fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                       data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                   }
+               }
+           },
+          {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;BatchOwner&#39;),
+              dataIndex: &#39;createdUser&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;15%&#39;,
+              hidden: true,
+              filterField: {
+                  xtype: &#39;textfield&#39;,
+                  width: &#39;100%&#39;,
+                  entityName: &quot;&quot;,
+                  emptyText: app.localize(&#39;BatchOwnerSearch&#39;)
+              }
+          }, {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;CommunityBatch&#39;),
+              dataIndex: &#39;isUniversal&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;18%&#39;,
+              hidden: true,
+              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+              filterField: {
+                  xtype: &#39;combobox&#39;,
+                  valueField: &#39;value&#39;,
+                  displayField: &#39;text&#39;,
+                  width: &#39;100%&#39;,
+                  store: {
+                      fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                  }
+              }
+          }, {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;FinalizedtoPost&#39;),
+              dataIndex: &#39;isBatchFinalized&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;18%&#39;,
+              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+              filterField: {
+                  xtype: &#39;combobox&#39;,
+                  valueField: &#39;value&#39;,
+                  displayField: &#39;text&#39;,
+                  width: &#39;100%&#39;,
+                  store: {
+                      fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                  }
+              }
+          }
+    ]
+});</pre>
+</body>
+</html>

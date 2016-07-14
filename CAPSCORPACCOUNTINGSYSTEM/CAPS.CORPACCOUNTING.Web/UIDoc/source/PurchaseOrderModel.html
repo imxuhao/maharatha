@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-purchaseorders-entry-PurchaseOrderModel'>/**
+</span> * DataModel to represent entity schema for Purchase Order Header.
+ */
+Ext.define(&#39;Chaching.model.purchaseorders.entry.PurchaseOrderModel&#39;, {
+    extend: &#39;Chaching.model.base.TransactionHeaderModel&#39;,
+    config: {
+<span id='Chaching-model-purchaseorders-entry-PurchaseOrderModel-cfg-searchEntityName'>        searchEntityName: &#39;PurchaseOrders&#39;
+</span>    },
+
+<span id='Chaching-model-purchaseorders-entry-PurchaseOrderModel-property-fields'>    fields: [
+</span>        { name: &#39;vendorId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;vendorName&#39;, type: &#39;string&#39; },
+        { name: &#39;paymentTermId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;paymentTerms&#39;, type: &#39;string&#39; },
+        { name: &#39;bankAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;bankAccountNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;isCreditCard&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isShipping&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isPrintRequired&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isEnterable&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isHistory&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isRetired&#39;, type: &#39;boolean&#39; },
+        { name: &#39;sourcePoAccountingDocumentId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;invoiceAccountingDocumentId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;uploadDocumentLogId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;uploadDocumentLogDesc&#39;, type: &#39;string&#39; },
+        { name: &#39;isWillBill&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isAdditionalBill&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isPettyCash&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isPaymentCheck&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isDepositCheck&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isPartial&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isOverage&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isReimbursement&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isReinstated&#39;, type: &#39;boolean&#39; },
+        { name: &#39;dateNeededBy&#39;, type: &#39;date&#39;, dateFormat: &#39;c&#39; },
+        { name: &#39;timeNeededBy&#39;, type: &#39;string&#39; },
+        { name: &#39;reinstatedPoDocumentId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;controllingBankAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;controllingBankAccountNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;isApproveEmail&#39;, type: &#39;boolean&#39; },
+        { name: &#39;poOriginalAmount&#39;, type: &#39;float&#39; },
+        { name: &#39;jobNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;accountNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;approvedBy&#39;, type: &#39;string&#39; },
+        { name: &#39;remainingBalance&#39;, type: &#39;float&#39; },
+        { name: &#39;pendingTrans&#39;, type: &#39;string&#39; }
+    ]
+});
+</pre>
+</body>
+</html>

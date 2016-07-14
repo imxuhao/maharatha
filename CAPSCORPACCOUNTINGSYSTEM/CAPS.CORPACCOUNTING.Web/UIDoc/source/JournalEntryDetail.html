@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-financials-journals-JournalEntryDetail'>/**
+</span> * DataModel to represent entity schema for Journal Entry Distribution.
+ */
+Ext.define(&#39;Chaching.model.financials.journals.JournalEntryDetail&#39;, {
+    extend: &#39;Chaching.model.base.TransactionDetailsModel&#39;,
+    config: {
+<span id='Chaching-model-financials-journals-JournalEntryDetail-cfg-searchEntityName'>        searchEntityName: &#39;journals&#39;
+</span>    },
+<span id='Chaching-model-financials-journals-JournalEntryDetail-property-fields'>    fields:
+</span>    [
+        { name: &#39;vendorId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;vendorName&#39;, type: &#39;string&#39; },
+        { name: &#39;batchName&#39;, type: &#39;string&#39; },
+        { name: &#39;debitCreditGroup&#39;, type: &#39;string&#39; },
+        { name: &#39;creditAccountingItemId&#39;, type: &#39;auto&#39; },
+        { name: &#39;creditAccountNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;creditAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditJobNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;creditJobId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountNumber1&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber2&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber3&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber4&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber5&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber6&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber7&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber8&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber9&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountNumber10&#39;, type: &#39;string&#39; },
+        { name: &#39;creditSubAccountId1&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId2&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId3&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId4&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId5&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId6&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId7&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId8&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId9&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;creditSubAccountId10&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;debitAccountingItemId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler }
+    ]
+});</pre>
+</body>
+</html>

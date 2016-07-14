@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.receivables.customers.CustomersGrid&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
+
+    requires: [
+        &#39;Chaching.view.receivables.customers.CustomersGridController&#39;
+    ],
+
+    controller: &#39;receivables-customers-customersgrid&#39;,
+
+    xtype: &#39;widget.receivables.customers&#39;,
+    store: &#39;receivables.customers.CustomersStore&#39;,
+    name: &#39;Receivables.Customers&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Receivables.Customers&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Delete&#39;)
+    },
+    padding: 5,
+    gridId: 24,
+    headerButtonsConfig: [
+      {
+          xtype: &#39;displayfield&#39;,
+          value: abp.localization.localize(&quot;Customers&quot;),
+          ui: &#39;headerTitle&#39;
+      }, &#39;-&gt;&#39;, {
+          xtype: &#39;button&#39;, 
+          scale: &#39;small&#39;,
+          ui: &#39;actionButton&#39;,
+          action: &#39;create&#39;,
+          text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
+          tooltip: app.localize(&#39;CreatingNewCustomers&#39;),
+          checkPermission: true,
+          iconCls: &#39;fa fa-plus&#39;,
+         // routeName: &#39;coa.create&#39;,
+          iconAlign: &#39;left&#39;
+      }],
+    requireExport: true,
+    requireMultiSearch: true,
+    requireMultisort: true,
+    isEditable: true,
+    editingMode: &#39;row&#39;,
+    columnLines: true,
+    multiColumnSort: true,
+    editWndTitleConfig: {
+        title: app.localize(&#39;EditCustomer&#39;),
+        iconCls: &#39;fa fa-pencil&#39;
+    },
+    createWndTitleConfig: {
+        title: app.localize(&#39;CreatingNewCustomers&#39;),
+        iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewCustomer&#39;),
+        iconCls: &#39;fa fa-th&#39;
+    },
+    createNewMode: &#39;tab&#39;,
+    isSubMenuItemTab: true,
+
+    columns: [{
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;CustomerName&#39;),
+        dataIndex: &#39;lastName&#39;,
+        sortable: true,
+        groupable: true,
+        width: &#39;15%&#39;,
+        filterField: {
+            xtype: &#39;textfield&#39;,
+            width: &#39;100%&#39;,
+            emptyText: app.localize(&#39;CustomerSearch&#39;)
+        }, editor: {
+            xtype: &#39;textfield&#39;
+        }
+    }, {
+
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;Address1&#39;),
+        dataIndex: &#39;line1&#39;,
+        sortable: true,
+        groupable: true,
+        isAssociationField: true,
+
+        width: &#39;15%&#39;,
+        filterField: {
+            xtype: &#39;textfield&#39;,
+            width: &#39;100%&#39;,
+            entityName: &#39;Address&#39;,
+            emptyText: app.localize(&#39;AddressSearch&#39;)
+        },
+        renderer: Chaching.utilities.ChachingRenderers.renderFirstAddress,
+        editor: {
+            xtype: &#39;textfield&#39;
+        }
+    }
+    , {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;Telephone&#39;),
+        dataIndex: &#39;phone1&#39;,
+        sortable: true,
+        groupable: true,
+        isAssociationField: true,
+        width: &#39;10%&#39;,
+        renderer: Chaching.utilities.ChachingRenderers.renderPhone1,
+        filterField: {
+            xtype: &#39;textfield&#39;,
+            width: &#39;100%&#39;,
+            entityName: &quot;Address&quot;,
+            emptyText: app.localize(&#39;TelephoneSearch&#39;)
+        }, editor: {
+            xtype: &#39;textfield&#39;
+        }
+    }
+    , {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;Email&#39;),
+        dataIndex: &#39;email&#39;,
+        sortable: true,
+        groupable: true,
+        width: &#39;15%&#39;,
+        isAssociationField: true,
+        renderer: Chaching.utilities.ChachingRenderers.renderEmail,
+        filterField: {
+            xtype: &#39;textfield&#39;,
+            width: &#39;100%&#39;,
+            emptyText: app.localize(&#39;EmailSearch&#39;)
+        }, editor: {
+            xtype: &#39;textfield&#39;
+        }
+    }
+    //, {
+    //    xtype: &#39;gridcolumn&#39;,
+    //    text: app.localize(&#39;1099Code&#39;),
+    //    dataIndex: &#39;typeof1099Box&#39;,
+    //    sortable: true,
+    //    groupable: true,
+    //    width: &#39;10%&#39;,
+    //    filterField: {
+    //        xtype: &#39;combobox&#39;,
+    //        valueField: &#39;typeof1099BoxId&#39;,
+    //        displayField: &#39;typeof1099Box&#39;,
+    //        forceSelection: true,
+    //        loadStoreOnCreate: true,
+    //        searchProperty: &#39;typeof1099BoxId&#39;,
+    //        isEnum: true,
+    //        width: &#39;100%&#39;,
+    //        queryMode: &#39;local&#39;,
+    //        store: &#39;utilities.TypeOf1099BoxListStore&#39;
+    //    }, editor: {
+    //        xtype: &#39;combobox&#39;,
+    //        valueField: &#39;typeof1099BoxId&#39;,
+    //        displayField: &#39;typeof1099Box&#39;,
+    //        queryMode: &#39;local&#39;,
+    //        store: &#39;utilities.TypeOf1099BoxListStore&#39;
+    //    }
+    //}
+    , {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;PaymentTerms&#39;),
+        dataIndex: &#39;paymentTerms&#39;,
+        sortable: true,
+        groupable: true,
+        width: &#39;15%&#39;,
+        filterField: {
+            xtype: &#39;combobox&#39;,
+            valueField: &#39;paymentTermsId&#39;,
+            displayField: &#39;paymentTerms&#39;,
+            forceSelection: true,
+            width: &#39;100%&#39;,
+            searchProperty: &#39;paymentTermsId&#39;,
+            store: &#39;utilities.PaymentTermsListStore&#39;
+        },
+        editor: {
+            xtype: &#39;combobox&#39;,
+            valueField: &#39;paymentTermsId&#39;,
+            displayField: &#39;paymentTerms&#39;,
+            queryMode: &#39;local&#39;,
+            store: &#39;utilities.PaymentTermsListStore&#39;
+        }
+
+    }
+
+    //, {
+    //    xtype: &#39;gridcolumn&#39;,
+    //    text: app.localize(&#39;TotalOutstandingInvoices&#39;),
+    //    dataIndex: &#39;TotalOutstandingInvoices&#39;,
+    //    width: &#39;18%&#39;
+    //}
+    ,
+    {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;DateCreated&#39;),
+        dataIndex: &#39;creationTime&#39;,
+        sortable: true,
+        groupable: true,
+        width: &#39;10%&#39;,
+        renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer
+    }
+     , {
+         xtype: &#39;gridcolumn&#39;,
+         text: app.localize(&#39;City&#39;),
+         dataIndex: &#39;city&#39;,
+         width: &#39;13%&#39;,
+         renderer: Chaching.utilities.ChachingRenderers.renderCity,
+         hidden: true,
+         isAssociationField: true,
+         filterField: {
+             xtype: &#39;textfield&#39;,
+             width: &#39;100%&#39;,
+             entityName: &quot;Address&quot;,
+             emptyText: app.localize(&#39;CitySearch&#39;)
+         }, editor: {
+             xtype: &#39;textfield&#39;
+         }
+     }
+       , {
+           xtype: &#39;gridcolumn&#39;,
+           text: app.localize(&#39;State&#39;),
+           dataIndex: &#39;state&#39;,
+           width: &#39;13%&#39;,
+           renderer: Chaching.utilities.ChachingRenderers.renderState,
+           hidden: true,
+           isAssociationField: true,
+           filterField: {
+               xtype: &#39;textfield&#39;,
+               width: &#39;100%&#39;,
+               entityName: &quot;Address&quot;,
+               emptyText: app.localize(&#39;StateSearch&#39;)
+           }, editor: {
+               xtype: &#39;combobox&#39;,
+               width: &#39;100%&#39;,
+               valueField: &#39;stateId&#39;,
+               displayField: &#39;state&#39;,
+               store: &#39;utilities.StateOrRegionListStore&#39;
+           }
+       }
+         , {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;Zip&#39;),
+             dataIndex: &#39;postalCode&#39;,
+             renderer: Chaching.utilities.ChachingRenderers.renderPostalCode,
+             width: &#39;13%&#39;,
+             hidden: true,
+             isAssociationField: true,
+             filterField: {
+                 xtype: &#39;textfield&#39;,
+                 width: &#39;100%&#39;,
+                 entityName: &quot;Address&quot;,
+                 emptyText: app.localize(&#39;ZipCodeSearch&#39;)
+             }, editor: {
+                 width: &#39;100%&#39;,
+                 xtype: &#39;textfield&#39;
+             }
+         }
+     , {
+         xtype: &#39;gridcolumn&#39;,
+         text: app.localize(&#39;PreviousYearPayments&#39;),
+         dataIndex: &#39;PreviousYearPayments&#39;,
+         width: &#39;18%&#39;,
+         hidden: true
+     }
+      , {
+          xtype: &#39;gridcolumn&#39;,
+          text: app.localize(&#39;CurrentYearPayments&#39;),
+          dataIndex: &#39;CurrentYearPayments&#39;,
+          width: &#39;18%&#39;,
+          hidden: true
+      }
+      , {
+          xtype: &#39;gridcolumn&#39;,
+          text: app.localize(&#39;OpenPurchaseOrders&#39;),
+          dataIndex: &#39;OpenPurchaseOrders&#39;,
+          width: &#39;18%&#39;,
+          hidden: true
+      }
+       , {
+           xtype: &#39;gridcolumn&#39;,
+           text: app.localize(&#39;SSN&#39;),
+           dataIndex: &#39;ssnTaxId&#39;,
+           width: &#39;13%&#39;,
+           hidden: true,
+           filterField: {
+               xtype: &#39;textfield&#39;,
+               width: &#39;100%&#39;,
+               emptyText: app.localize(&#39;SSNSearch&#39;)
+           }, editor: {
+               width: &#39;100%&#39;,
+               xtype: &#39;textfield&#39;
+           }
+       }
+      , {
+          xtype: &#39;gridcolumn&#39;,
+          text: app.localize(&#39;FederalTaxID&#39;),
+          dataIndex: &#39;fedralTaxId&#39;,
+          width: &#39;13%&#39;,
+          hidden: true,
+          filterField: {
+              xtype: &#39;textfield&#39;,
+              width: &#39;100%&#39;,
+              emptyText: app.localize(&#39;FedralTaxSearch&#39;)
+          }, editor: {
+              width: &#39;100%&#39;,
+              xtype: &#39;textfield&#39;
+          }
+      }
+       , {
+           xtype: &#39;gridcolumn&#39;,
+           text: app.localize(&#39;Corporation&#39;),
+           dataIndex: &#39;typeofTax&#39;,
+           width: &#39;13%&#39;,
+           hidden: true,
+           filterField: {
+               xtype: &#39;combobox&#39;,
+               valueField: &#39;typeofTaxId&#39;,
+               displayField: &#39;typeofTax&#39;,
+               loadStoreOnCreate: true,
+               forceSelection: true,
+               searchProperty: &#39;typeofTaxId&#39;,
+               isEnum: true,
+               queryMode: &#39;local&#39;,
+               width: &#39;100%&#39;,
+               store: &#39;utilities.TypeOfTaxListStore&#39;
+           }, editor: {
+               xtype: &#39;combobox&#39;,
+               valueField: &#39;typeofTaxId&#39;,
+               displayField: &#39;typeofTax&#39;,
+               queryMode: &#39;local&#39;,
+               store: &#39;utilities.TypeOfTaxListStore&#39;
+           }
+       }
+         , {
+             xtype: &#39;gridcolumn&#39;,
+             text: app.localize(&#39;IndependentContractor&#39;),
+             dataIndex: &#39;isIndependentContractor&#39;,
+             sortable: true,
+             groupable: true,
+             width: &#39;18%&#39;,
+             hidden: true,
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+             filterField: {
+                 xtype: &#39;combobox&#39;,
+                 valueField: &#39;value&#39;,
+                 displayField: &#39;text&#39;,
+                 width: &#39;100%&#39;,
+                 store: {
+                     fields: [{ name: &#39;text&#39; }, { name: &#39;value&#39; }],
+                     data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
+                 }
+             }
+         }
+    ]
+});
+</pre>
+</body>
+</html>

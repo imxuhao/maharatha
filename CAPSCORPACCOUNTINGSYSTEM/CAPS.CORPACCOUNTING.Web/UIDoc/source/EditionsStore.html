@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.editions.EditionsStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-editions-EditionsStore'>/**
+</span> * DataStore to perform CRUD operation on Editions.
+ */
+Ext.define(&#39;Chaching.store.editions.EditionsStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.editions.EditionsModel&#39;,   
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-editions-EditionsStore-property-model'>    model: &#39;Chaching.model.editions.EditionsModel&#39;,   
+</span><span id='Chaching-store-editions-EditionsStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         headers: {
             &#39;Accept&#39;: &#39;application/json, text/plain, */*&#39;,
@@ -40,7 +43,7 @@
             totalProperty: &#39;result.totalCount&#39;
         }
     },
-    idPropertyField:&#39;id&#39;
-});</pre>
+<span id='Chaching-store-editions-EditionsStore-property-idPropertyField'>    idPropertyField:&#39;id&#39;
+</span>});</pre>
 </body>
 </html>

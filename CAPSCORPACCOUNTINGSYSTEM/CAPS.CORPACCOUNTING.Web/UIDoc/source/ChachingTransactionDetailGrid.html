@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * The base class for all transaction details/distribution grids
+ * Author: Krishna Garad
+ * Date : 17/05/2016
+ */
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid'>/**
+</span> * Grids are an excellent way of showing large amounts of tabular data on the client side.
+ * Essentially a supercharged `&lt;table&gt;`, GridPanel makes it easy to fetch, sort and filter
+ * large amounts of data.
+ *
+ * Grids are composed of two main pieces - a {@link Ext.data.Store Store} full of data and
+ * a set of columns to render.
+ *
+ * ## Basic GridPanel
+ *
+ *     @example
+ *     Ext.create(&#39;Ext.data.Store&#39;, {
+ *         storeId: &#39;simpsonsStore&#39;,
+ *         fields:[ &#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
+ *         data: [
+ *             { name: &#39;Lisa&#39;, email: &#39;lisa@simpsons.com&#39;, phone: &#39;555-111-1224&#39; },
+ *             { name: &#39;Bart&#39;, email: &#39;bart@simpsons.com&#39;, phone: &#39;555-222-1234&#39; },
+ *             { name: &#39;Homer&#39;, email: &#39;homer@simpsons.com&#39;, phone: &#39;555-222-1244&#39; },
+ *             { name: &#39;Marge&#39;, email: &#39;marge@simpsons.com&#39;, phone: &#39;555-222-1254&#39; }
+ *         ]
+ *     });
+ *
+ *     Ext.create(&#39;Chaching.view.common.grid.ChachingTransactionDetailGrid&#39;, {
+ *         title: &#39;Simpsons&#39;,
+ *         store: Ext.data.StoreManager.lookup(&#39;simpsonsStore&#39;),
+ *         columns: [
+ *             { text: &#39;Name&#39;, dataIndex: &#39;name&#39; },
+ *             { text: &#39;Email&#39;, dataIndex: &#39;email&#39;, flex: 1 },
+ *             { text: &#39;Phone&#39;, dataIndex: &#39;phone&#39; }
+ *         ],
+ *         height: 200,
+ *         width: 400,
+ *         renderTo: Ext.getBody()
+ *     });
+ *
+ * The code above produces a simple grid with three columns. We specified a Store which
+ * will load JSON data inline.
+ * In most apps we would be placing the grid inside another container and wouldn&#39;t need to
+ * use the {@link #height}, {@link #width} and {@link #renderTo} configurations but they
+ * are included here to make it easy to get up and running.
+ *
+ * The grid we created above will contain a header bar with a title (&#39;Simpsons&#39;), a row of
+ * column headers directly underneath and finally the grid rows under the headers.
+ *
+ * **Height config with bufferedRenderer: true**
+ *
+ * The {@link #height} config must be set when creating a grid using
+ * {@link #bufferedRenderer bufferedRenderer}: true _and_ the grid&#39;s height is not managed
+ * by an owning container layout.  In Ext JS 5.x bufferedRendering is true by default.
+ *
+ */
+Ext.define(&#39;Chaching.view.common.grid.ChachingTransactionDetailGrid&#39;,{
+    extend: &#39;Ext.grid.Panel&#39;,
+
+    requires: [
+        &#39;Chaching.view.common.grid.ChachingTransactionDetailGridController&#39;,
+        &#39;Chaching.view.common.grid.ChachingTransactionDetailGridModel&#39;,
+        &#39;Chaching.components.plugins.CellEditing&#39;,
+        &#39;Chaching.components.selection.ChachingSpreadsheetModel&#39;,
+        &#39;Chaching.components.plugins.Clipboard&#39;
+    ],
+
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-property-controller'>    controller: &#39;common-grid-chachingtransactiondetailgrid&#39;,
+</span><span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-property-viewModel'>    viewModel: {
+</span>        type: &#39;common-grid-chachingtransactiondetailgrid&#39;
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-config'>    /**
+</span>    * @cfg {object} config object for the grid.
+    */
+    config: {
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-requireMultiSearch'>        //Set true to use multisearch on grid columns.
+</span>        requireMultiSearch: true,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-requireMultisort'>        //Set true to allow multiple column sorting
+</span>        requireMultisort: true,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-requireGrouping'>        //Set true to allow data display in groups.
+</span>        requireGrouping: true,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-moduleColumns'>        //Module specific columns list. Those columns will be combined with base columns.
+</span>        moduleColumns: null,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-columnOrder'>        //Array of columns names to order the columns. To hide any base column just ignore to add in this list
+</span>        columnOrder: null,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-isGroupedHeader'>        //Set this property to true if having grouped header.
+</span>        isGroupedHeader: false,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-groupedHeaderBaseConfig'>        //Object grouped header base config
+</span>        groupedHeaderBaseConfig: null,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-groupedHeaderModuleConfig'>        //Object grouped header module columns config
+</span>        groupedHeaderModuleConfig:null,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-moduleButtons'>        //Provide module specific buttons object array to add in the grid&#39;s toolbar
+</span>        moduleButtons: null,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-requireSummary'>        //Set to tru if summary is required for grid. Defaults to true
+</span>        requireSummary: true,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-modulePermissions'>        //Set module permissions of parent.
+</span>        modulePermissions: {
+            read: true,
+            create: true,
+            edit: true,
+            destroy: true
+        },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-cls'>        cls: &#39;chaching-transactiongrid&#39;,
+</span><span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-isInViewMode'>        isInViewMode:false
+</span>    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-Store'>    /**
+</span>    * @cfg {string/object} Store for the grid.
+    */
+    store: null,
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-columnLines'>    columnLines: true,
+</span><span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-padding'>    padding: 5,
+</span><span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-frame'>    frame: false,
+</span><span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-layout'>    layout: {
+</span>        type: &#39;fit&#39;
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-cls'>    cls: &#39;chaching-transactiongrid&#39;,
+</span><span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-property-isTransactionDetailsGrid'>    isTransactionDetailsGrid: true,
+</span><span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-cfg-viewConfig'>    viewConfig: {
+</span>        getRowClass: function(record) {
+            if (record &amp;&amp; record.get(&#39;isAccountingItemSplit&#39;)) {
+                return record.get(&#39;SplitGroupCls&#39;);
+            }
+            return &#39;&#39;;
+        }
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-method-initComponent'>    initComponent: function() {
+</span>        var me = this,
+            controller = me.getController();
+        var features = [],
+            plugins = [],
+            dockedItems = [];
+        //verify grid configuration first
+        if (!me.getModuleColumns()) Ext.Error.raise(&#39;Please provide module columns for the grid&#39;);
+        if (!me.getColumnOrder()) Ext.Error.raise(&#39;Please provide column order.&#39;);
+        if (!me.store) Ext.Error.raise(&#39;Please provide store configuration&#39;);
+        if (me.getIsGroupedHeader() &amp;&amp; !me.getGroupedHeaderBaseConfig())Ext.Error.raise(&#39;Please provide group header config to add columns in group&#39;);
+        var columns = me.getColumnsForGrid();
+        var modulePermissions = me.getModulePermissions();
+        if (columns) {
+            if (modulePermissions.edit) {
+                columns.push(me.getSplitColumn());
+            }
+            if (modulePermissions.destroy) {
+                columns.push(me.getDeleteActionColumn());
+            }
+            me.columns = columns;
+        }
+        var gridStore = me.store;
+        if (typeof (gridStore) === &quot;string&quot;) {
+            me.store = Ext.create(&#39;Chaching.store.&#39; + gridStore);
+        }
+
+        //add grouping if required
+        if (me.getRequireGrouping()) {
+            var groupingFeature = {
+                ftype: &#39;grouping&#39;,
+                hideGroupedHeader: true,
+                startCollapsed: true
+            };
+            features.push(groupingFeature);
+        }
+        //add summary feature
+        if (me.getRequireSummary()) {
+            var summaryFeature = {
+                ftype: &#39;summary&#39;,
+                dock: &#39;bottom&#39;
+            };
+            features.push(summaryFeature);
+        }
+        if (me.getRequireMultiSearch()) {
+            var mutisearch = {
+                ptype: &#39;saki-gms&#39;,
+                iconColumn: false,
+                clearItemIconCls: &#39;icon-settings&#39;,
+                pluginId: &#39;gms&#39;,
+                height: 32,
+                filterOnEnter: false,
+                viewModel: {
+                    type: &#39;common-grid-chachingtransactiondetailgrid&#39;
+                },
+                controller: &#39;common-grid-chachingtransactiondetailgrid&#39;
+            };
+            plugins.push(mutisearch);
+        }
+        me.selModel = {
+            type: &#39;chachingSpreadsheetSelectionModel&#39;,
+            columnSelect: true,
+            checkboxSelect: false,
+            pruneRemoved: false,
+            rowNumbererHeaderWidth:55,
+            extensible: &#39;y&#39;
+        };
+       
+        if (modulePermissions.edit || modulePermissions.create) {
+            plugins.push({
+                ptype: &#39;chachingClipboard&#39;,
+                memory: true
+            });
+            plugins.push({
+                ptype: &#39;chachingselectionreplicator&#39;
+            });
+            var editingModel = {
+                ptype: &#39;chachingCellediting&#39;,
+                pluginId: &#39;editingPlugin&#39;,
+                clicksToEdit: 2,
+                listeners: {
+                    beforeedit: &#39;onBeforeGridEdit&#39;
+                }
+            }
+            plugins.push(editingModel);
+        }
+        var defaultButtons = me.getDefaultActionButtons();
+        if (defaultButtons &amp;&amp; defaultButtons.length &gt; 0) {
+            var toolBar = {
+                xtype: &#39;toolbar&#39;,
+                dock: &#39;bottom&#39;,
+                ui: &#39;plainBottom&#39;,
+                isActionToolBar:true,
+                layout: {
+                    type: &#39;hbox&#39;,
+                    pack: &#39;left&#39;
+                },
+                items: defaultButtons
+            };
+            dockedItems.push(toolBar);
+        }
+        me.dockedItems = dockedItems;
+        me.plugins = plugins;
+        me.features = features;
+        me.callParent(arguments);
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-method-getDefaultActionButtons'>    getDefaultActionButtons:function() {
+</span>        var me = this,
+            modulePermissions = me.getModulePermissions(),
+            buttons = [];
+        buttons.push(&#39;-&gt;&#39;);
+        if (modulePermissions.create || modulePermissions.edit) {
+            var numberField = {
+                xtype: &#39;numberfield&#39;,
+                width: 70,
+                itemId:&#39;multiplyOf&#39;,
+                value: 1,
+                minValue: 1,
+                maxValue:100
+            };
+            buttons.push(numberField);
+            var addNew = {
+                xtype: &#39;button&#39;,
+                scale: &#39;small&#39;,
+                name: &#39;AddNewRecord&#39;,
+                itemId: &#39;AddNewRecord&#39;,
+                iconCls: &#39;fa fa-plus-square&#39;,
+                ui: &#39;actionButton&#39;,
+                tooltip: app.localize(&#39;InsertRecord&#39;),
+                listeners: {
+                    click:&#39;onNewClicked&#39;
+                }
+            };
+            buttons.push(addNew);
+
+            var splitBtn = {
+                xtype: &#39;button&#39;,
+                scale: &#39;small&#39;,
+                name: &#39;SplitRecord&#39;,
+                itemId: &#39;SplitRecord&#39;,
+                iconCls: &#39;fa fa-unlink&#39;,
+                ui: &#39;actionButton&#39;,
+                tooltip: app.localize(&#39;SplitRecord&#39;),
+                listeners: {
+                    click: &#39;onSplitClicked&#39;
+                }
+            };
+            buttons.push(splitBtn);
+        }
+        var refreshBtn = {
+            xtype: &#39;button&#39;,
+            scale: &#39;small&#39;,
+            name: &#39;RefreshData&#39;,
+            itemId: &#39;RefreshData&#39;,
+            iconCls: &#39;fa fa-refresh&#39;,
+            ui: &#39;actionButton&#39;,
+            tooltip: app.localize(&#39;RefreshData&#39;),
+            listeners: {
+                click: &#39;onRefreshClicked&#39;
+            }
+        };
+        buttons.push(refreshBtn);
+        return buttons;
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-method-getDeleteActionColumn'>    getDeleteActionColumn: function () {
+</span>        return {
+            xtype: &#39;actioncolumn&#39;,
+            name: &#39;Delete&#39;,
+            dataIndex:&#39;Delete&#39;,
+            scale: &#39;small&#39;,
+            iconCls: &#39;deleteCls&#39;,
+            tooltip: app.localize(&#39;Delete&#39;),
+            width: 50,
+            hideable: false,
+            movable: false,
+            resizable: false,
+            sortable: false,
+            groupable: false,
+            menuDisabled: true,
+            handler: &#39;onDeleteClicked&#39;
+        };
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-method-getSplitColumn'>    getSplitColumn: function () {
+</span>        return{
+            xtype: &#39;gridcolumn&#39;,
+            name: &#39;isAccountingItemSplit&#39;,
+            dataIndex: &#39;isAccountingItemSplit&#39;,
+            text: app.localize(&#39;Split&#39;),
+            width: 50,
+            hideable: false,
+            movable: false,
+            resizable: false,
+            sortable: false,
+            groupable: false,
+            menuDisabled: true,
+            renderer: Chaching.utilities.ChachingRenderers.splitColumnMarkRenderer,
+            editor: {
+                xtype: &#39;numberfield&#39;,
+                hideTrigger:true,
+                lazyRender: true,
+                minValue: 1,
+                maxValue:100,
+                listeners: {
+                    specialkey: &#39;onSplitClicked&#39;
+                }
+            }
+        }
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-method-getColumnsForGrid'>    getColumnsForGrid:function() {
+</span>        var me = this,
+            columns = undefined,
+            columnOrder = me.getColumnOrder();
+        var baseColumns = me.getBaseColumns(),
+            moduleColumns = me.getModuleColumns();
+        if (me.getIsGroupedHeader()) baseColumns = me.groupBaseColumns(baseColumns);
+        if (columnOrder &amp;&amp; columnOrder.length &gt; 0 &amp;&amp; (baseColumns || moduleColumns)) {
+            columns = [];
+            var length = columnOrder.length;
+            for (var i = 0; i &lt; length; i++) {
+                var colName = columnOrder[i];
+                //find the column in baseColumns or moduleColumns
+                var resultColumn = baseColumns.filter(function (col) { return col.name === colName });
+                if (!resultColumn||resultColumn.length===0) resultColumn = moduleColumns.filter(function (col) { return col.name === colName });
+                if (!resultColumn||resultColumn.length===0) Ext.Error.raise(colName + &#39; does not belongs to baseColumns as well as in moduleColumns. Please verify column name exists.&#39;);
+                else columns.push(resultColumn[0]);///TODO: check visible columns preferences and add column to columns list.
+            }
+        }
+        return columns;
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-method-getBaseColumns'>    getBaseColumns: function () {
+</span>        var me = this;
+        var baseColumns = [
+            {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;amount&#39;,
+                name: &#39;amount&#39;,
+                hideable:false,
+                text: app.localize(&#39;Amount&#39;).initCap(),
+                renderer: Chaching.utilities.ChachingRenderers.amountsRenderer,
+                summaryRenderer: Chaching.utilities.ChachingRenderers.amountSummaryRenderer,
+                isMandatory:true,
+                filterField: {
+                    xtype: &#39;numberfield&#39;,
+                    hideTrigger: true,
+                    emptyText: app.localize(&#39;ToolTipAmount&#39;)
+                },editor: {
+                    xtype: &#39;numberfield&#39;,
+                    hideTrigger:true,
+                    listeners: {
+                        change: &#39;onDetailsAmountChange&#39;,
+                        focus: &#39;onDetailsAmountFocus&#39;,
+                        scope:&#39;controller&#39;
+                    }
+                }
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;jobNumber&#39;,
+                name: &#39;jobNumber&#39;,
+                text: app.localize(&#39;JobDivision&#39;),
+                width: &#39;10%&#39;,
+                hideable: false,
+                valueField: &#39;jobId&#39;,///***** Important to set ValueField for column to work copy/paste functionality.
+                entityType:&#39;jobordivision&#39;,
+                isMandatory: true,
+                filterField: {
+                    xtype: &#39;chachingcombobox&#39;,
+                    store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                    valueField: &#39;jobId&#39;,
+                    displayField: &#39;jobNumber&#39;,
+                    queryMode: &#39;remote&#39;,
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    modulePermissions: {
+                        read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                        create:false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                        edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                        destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+                    },
+                    primaryEntityCrudApi: {
+                        read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                        create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                        update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                        destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+                    },
+                    createEditEntityType: &#39;financials.accounts.divisions&#39;,
+                    createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+                    entityType: &#39;Division&#39;,
+                    isTwoEntityPicker: true,
+                    secondEntityDetails: {
+                        editCreateModelClass: &#39;Chaching.model.projects.projectmaintenance.ProjectModel&#39;,
+                        identificationKey: &#39;isDivision&#39;,
+                        entityType: &#39;Job&#39;,
+                        createEditEntityType: &#39;projects.projectmaintenance.projects&#39;,
+                        createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.ProjectsGridController&#39;,
+                        modulePermissions: {
+                            read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
+                            create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
+                            edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
+                            destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
+                        },
+                        secondoryEntityCrudApi: {
+                            read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                            create: abp.appPath + &#39;api/services/app/jobUnit/CreateJobUnit&#39;,
+                            update: abp.appPath + &#39;api/services/app/jobUnit/UpdateJobUnit&#39;,
+                            destroy: abp.appPath + &#39;api/services/app/jobUnit/DeleteJobUnit&#39;
+                        }
+                    }
+                   
+                }, editor: {
+                    xtype: &#39;chachingcombobox&#39;,
+                    store: new Chaching.store.utilities.autofill.JobDivisionStore(),
+                    valueField: &#39;jobId&#39;,
+                    displayField: &#39;jobNumber&#39;,
+                    queryMode: &#39;remote&#39;,
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    modulePermissions: {
+                        read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                        create: false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                        edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                        destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+                    },
+                    primaryEntityCrudApi: {
+                        read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                        create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                        update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                        destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+                    },
+                    createEditEntityType: &#39;financials.accounts.divisions&#39;,
+                    createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+                    entityType: &#39;Division&#39;,
+                    isTwoEntityPicker: true,
+                    secondEntityDetails: {
+                        editCreateModelClass: &#39;Chaching.model.projects.projectmaintenance.ProjectModel&#39;,
+                        identificationKey: &#39;isDivision&#39;,
+                        entityType: &#39;Job&#39;,
+                        createEditEntityType: &#39;projects.projectmaintenance.projects&#39;,
+                        createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.ProjectsGridController&#39;,
+                        modulePermissions: {
+                            read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
+                            create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
+                            edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
+                            destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
+                        },
+                        secondoryEntityCrudApi: {
+                            read: abp.appPath + &#39;api/services/app/list/GetJobOrDivisionList&#39;,
+                            create: abp.appPath + &#39;api/services/app/jobUnit/CreateJobUnit&#39;,
+                            update: abp.appPath + &#39;api/services/app/jobUnit/UpdateJobUnit&#39;,
+                            destroy: abp.appPath + &#39;api/services/app/jobUnit/DeleteJobUnit&#39;
+                        }
+                    },
+                    listeners: {
+                        beforequery: &#39;beforeJobDivisionQuery&#39;
+                    }
+                }
+            },
+
+            {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountNumber&#39;,
+                name: &#39;accountNumber&#39;,
+                text: app.localize(&#39;LineNumber&#39;),
+                width: &#39;10%&#39;,
+                hideable: false,
+                valueField: &#39;accountId&#39;,///***** Important to set ValueField for column to work copy/paste functionality.
+                entityType: &#39;accounts&#39;,
+                isMandatory: true,
+                filterField: {
+                    xtype: &#39;chachingcombobox&#39;,
+                    store: new Chaching.store.utilities.autofill.AccountsStore(),
+                    valueField: &#39;accountId&#39;,
+                    displayField: &#39;accountNumber&#39;,
+                    queryMode: &#39;remote&#39;,
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    modulePermissions: {
+                        read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                        create:false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                        edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                        destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
+                    },
+                    primaryEntityCrudApi: {
+                        read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+                        create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                        update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                        destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+                    },
+                    createEditEntityType: &#39;financials.accounts.accounts&#39;,
+                    createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+                    entityType: &#39;Account&#39;,
+                    isTwoEntityPicker: true,
+                    secondEntityDetails: {
+                        editCreateModelClass: &#39;Chaching.model.financials.accounts.AccountsModel&#39;,
+                        identificationKey: &#39;isCorporate&#39;,
+                        entityType: &#39;Line&#39;,
+                        createEditEntityType: &#39;projects.projectmaintenance.linenumbers&#39;,
+                        createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.LineNumbersGridController&#39;,
+                        modulePermissions: {
+                            read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs&#39;),
+                            create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Create&#39;),
+                            edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Edit&#39;),
+                            destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete&#39;)
+                        },
+                        secondoryEntityCrudApi: {
+                            read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+                            create: abp.appPath + &#39;api/services/app/linesUnit/CreateLineUnit&#39;,
+                            update: abp.appPath + &#39;api/services/app/linesUnit/UpdateLineUnit&#39;,
+                            destroy: abp.appPath + &#39;api/services/app/linesUnit/DeleteLineUnit&#39;
+                        }
+                    }
+                }, editor: {
+                    xtype: &#39;chachingcombobox&#39;,
+                    store: new Chaching.store.utilities.autofill.AccountsStore(),
+                    valueField: &#39;accountId&#39;,
+                    displayField: &#39;accountNumber&#39;,
+                    queryMode: &#39;remote&#39;,
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    modulePermissions: {
+                        read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                        create: false,//abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Create&#39;),
+                        edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                        destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
+                    },
+                    primaryEntityCrudApi: {
+                        read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+                        create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                        update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                        destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+                    },
+                    createEditEntityType: &#39;financials.accounts.accounts&#39;,
+                    createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+                    entityType: &#39;Account&#39;,
+                    isTwoEntityPicker: true,
+                    secondEntityDetails: {
+                        editCreateModelClass: &#39;Chaching.model.financials.accounts.AccountsModel&#39;,
+                        identificationKey: &#39;isCorporate&#39;,
+                        entityType: &#39;Line&#39;,
+                        createEditEntityType: &#39;projects.projectmaintenance.linenumbers&#39;,
+                        createEditEntityGridController: &#39;Chaching.view.projects.projectmaintenance.LineNumbersGridController&#39;,
+                        modulePermissions: {
+                            read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs&#39;),
+                            create: false,//abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Create&#39;),
+                            edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Edit&#39;),
+                            destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete&#39;)
+                        },
+                        secondoryEntityCrudApi: {
+                            read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+                            create: abp.appPath + &#39;api/services/app/linesUnit/CreateLineUnit&#39;,
+                            update: abp.appPath + &#39;api/services/app/linesUnit/UpdateLineUnit&#39;,
+                            destroy: abp.appPath + &#39;api/services/app/linesUnit/DeleteLineUnit&#39;
+                        }
+                    },
+                    extraParams:[{paramName:&quot;jobId&quot;,value:null}],
+                    listeners: {
+                        beforequery: &#39;beforeAccountQuery&#39;
+                    }
+                }
+            },
+            {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber1&#39;,
+                name: &#39;subAccountNumber1&#39;,
+                text: app.localize(&#39;SubAccount1&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId1&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId1&#39;, &#39;subAccountNumber1&#39;,true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId1&#39;, &#39;subAccountNumber1&#39;)
+            },{
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber2&#39;,
+                name: &#39;subAccountNumber2&#39;,
+                text: app.localize(&#39;SubAccount2&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId2&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId2&#39;, &#39;subAccountNumber2&#39;,true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId2&#39;, &#39;subAccountNumber2&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber3&#39;,
+                name: &#39;subAccountNumber3&#39;,
+                text: app.localize(&#39;SubAccount3&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId3&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId3&#39;, &#39;subAccountNumber3&#39;,true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId3&#39;, &#39;subAccountNumber3&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber4&#39;,
+                name: &#39;subAccountNumber4&#39;,
+                text: app.localize(&#39;Location&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId4&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId4&#39;, &#39;subAccountNumber4&#39;,true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId4&#39;, &#39;subAccountNumber4&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber5&#39;,
+                name: &#39;subAccountNumber5&#39;,
+                text: app.localize(&#39;SubAccount5&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId5&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId5&#39;, &#39;subAccountNumber5&#39;, true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId5&#39;, &#39;subAccountNumber5&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber6&#39;,
+                name: &#39;subAccountNumber6&#39;,
+                text: app.localize(&#39;SubAccount6&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId6&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId6&#39;, &#39;subAccountNumber6&#39;, true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId6&#39;, &#39;subAccountNumber6&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber7&#39;,
+                name: &#39;subAccountNumber7&#39;,
+                text: app.localize(&#39;SubAccount7&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId7&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId7&#39;, &#39;subAccountNumber7&#39;, true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId7&#39;, &#39;subAccountNumber7&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber8&#39;,
+                name: &#39;subAccountNumber8&#39;,
+                text: app.localize(&#39;SubAccount8&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId8&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId8&#39;, &#39;subAccountNumber8&#39;, true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId8&#39;, &#39;subAccountNumber8&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber9&#39;,
+                name: &#39;subAccountNumber9&#39;,
+                text: app.localize(&#39;SubAccount9&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId9&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId9&#39;, &#39;subAccountNumber9&#39;, true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId9&#39;, &#39;subAccountNumber9&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;subAccountNumber10&#39;,
+                name: &#39;subAccountNumber10&#39;,
+                text: app.localize(&#39;SubAccount10&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;subAccountId10&#39;,
+                entityType: &#39;subaccounts&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId10&#39;, &#39;subAccountNumber10&#39;, true),
+                editor: Chaching.utilities.ChachingGlobals.getSubAccountCombo(&#39;subAccountId10&#39;, &#39;subAccountNumber10&#39;)
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;typeOf1099T4&#39;,
+                name: &#39;typeOf1099T4&#39;,
+                text: app.localize(&#39;Ten99Code&#39;).initCap(),
+                width: &#39;10%&#39;,
+                valueField: &#39;typeOf1099T4Id&#39;,
+                entityType: &#39;1099T4&#39;,
+                filterField: {
+                    xtype: &#39;combobox&#39;,
+                    store: new Chaching.store.utilities.autofill.T41099Store(),
+                    valueField: &#39;typeOf1099T4&#39;,
+                    displayField: &#39;typeOf1099T4&#39;,
+                    queryMode: &#39;remote&#39;,
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig
+                }, editor: {
+                    xtype: &#39;combobox&#39;,
+                    store: new Chaching.store.utilities.autofill.T41099Store(),
+                    valueField: &#39;typeOf1099T4Id&#39;,
+                    displayField: &#39;typeOf1099T4&#39;,
+                    queryMode: &#39;remote&#39;,
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig
+                }
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;itemMemo&#39;,
+                name: &#39;itemMemo&#39;,
+                text: app.localize(&#39;ItemMemo&#39;).initCap(),
+                width: &#39;10%&#39;,
+                hideable: false,
+                filterField:Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipItemMemo&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipItemMemo&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef1&#39;,
+                name: &#39;accountRef1&#39;,
+                text: app.localize(&#39;AccountRef1&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef1&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef1&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef2&#39;,
+                name: &#39;accountRef2&#39;,
+                text: app.localize(&#39;AccountRef2&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef2&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef2&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef3&#39;,
+                name: &#39;accountRef3&#39;,
+                text: app.localize(&#39;AccountRef3&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef3&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef3&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef4&#39;,
+                name: &#39;accountRef4&#39;,
+                text: app.localize(&#39;AccountRef4&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef4&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef4&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef5&#39;,
+                name: &#39;accountRef5&#39;,
+                text: app.localize(&#39;AccountRef5&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef5&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef5&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef6&#39;,
+                name: &#39;accountRef6&#39;,
+                text: app.localize(&#39;AccountRef6&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef6&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef6&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef7&#39;,
+                name: &#39;accountRef7&#39;,
+                text: app.localize(&#39;AccountRef7&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef7&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef7&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef8&#39;,
+                name: &#39;accountRef8&#39;,
+                text: app.localize(&#39;AccountRef8&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef8&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef8&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef9&#39;,
+                name: &#39;accountRef9&#39;,
+                text: app.localize(&#39;AccountRef9&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef9&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef9&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;accountRef10&#39;,
+                name: &#39;accountRef10&#39;,
+                text: app.localize(&#39;AccountRef10&#39;).initCap(),
+                width: &#39;9%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef10&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipAccountRef10&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;ledgerReference&#39;,
+                name: &#39;ledgerReference&#39;,
+                text: app.localize(&#39;InvoiceRef&#39;).initCap(),
+                width: &#39;10%&#39;,
+                filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipInvoiceRef&#39;)),
+                editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize(&#39;ToolTipInvoiceRef&#39;))
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;isAsset&#39;,
+                name: &#39;isAsset&#39;,
+                text: app.localize(&#39;IsAsset&#39;).initCap(),
+                sortable: false,
+                groupable: false,
+                renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+                width: &#39;7%&#39;,
+                editor: {
+                    xtype: &#39;checkboxfield&#39;,
+                    inputValue: &#39;true&#39;,
+                    uncheckedValue: &#39;false&#39;
+                }
+            }, {
+                xtype: &#39;gridcolumn&#39;,
+                dataIndex: &#39;taxRebateNumber&#39;,
+                name: &#39;taxRebateNumber&#39;,
+                text: app.localize(&#39;TaxRebate&#39;),
+                width: &#39;10%&#39;,
+                valueField: &#39;taxRebateId&#39;,
+                entityType: &#39;taxcredit&#39;,
+                filterField: {
+                    xtype: &#39;combobox&#39;,
+                    store: new Chaching.store.utilities.autofill.TaxRebateStore(),
+                    valueField: &#39;taxRebateNumber&#39;,
+                    displayField: &#39;taxRebateNumber&#39;,
+                    queryMode: &#39;remote&#39;,
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
+                    emptyText: app.localize(&#39;SearchText&#39;)
+                },editor: {
+                    xtype: &#39;combobox&#39;,
+                    store: new Chaching.store.utilities.autofill.TaxRebateStore(),
+                    valueField: &#39;taxRebateId&#39;,
+                    displayField: &#39;taxRebateNumber&#39;,
+                    queryMode: &#39;remote&#39;,
+                    minChars: 2,
+                    useDisplayFieldToSearch: true,
+                    listConfig: Chaching.utilities.ChachingGlobals.comboListConfig,
+                    emptyText: app.localize(&#39;SearchText&#39;)
+                }
+            }
+        ];
+        return baseColumns;
+    },
+<span id='Chaching-view-common-grid-ChachingTransactionDetailGrid-method-groupBaseColumns'>    groupBaseColumns:function(baseColumns) {
+</span>        var me = this,
+            groupedBaseColumns = [],
+            groupHeaderConfig = me.getGroupedHeaderBaseConfig();
+        if (groupHeaderConfig&amp;&amp;groupHeaderConfig.length&gt;0) {
+            var groupLength = groupHeaderConfig.length;
+            for (var i = 0; i &lt; groupLength; i++) {
+                var group = groupHeaderConfig[i],
+                    groupHeaderText = group.groupHeaderText,
+                    childColumns = group.childColumnNames,
+                    childWidths = group.childColumnWidths,
+                    childColumnItems = [];
+                if (childColumns &amp;&amp; childColumns.length &gt; 1) {
+                    if (!childWidths &amp;&amp; childWidths.length !== childColumns.length) {
+                        Ext.Error.raise(&#39;Child column name length must be equals to child columns width length&#39;);
+                        return false;
+                    }
+                    var childLength = childColumns.length;
+                    for (var j = 0; j &lt; childLength; j++) {
+                        var cColName = childColumns[j];
+                        var columnInBase = baseColumns.filter(function (o) { return o.name === cColName; });
+                        if (!columnInBase||columnInBase.length===0) {
+                            Ext.Error.raise(cColName + &#39; not exists in baseColumns. Please provide a valid name&#39;);
+                            return false;
+                        }
+                        columnInBase[0].width = childWidths[j];
+                        childColumnItems.push(columnInBase[0]);
+                    }
+                    var groupedCol = {
+                        text: groupHeaderText,
+                        name: group.columnName,
+                        columns: childColumnItems
+                    };
+                    groupedBaseColumns.push(groupedCol);
+                }
+            }
+        }
+        if (groupedBaseColumns.length &gt; 0) {
+            for (var k = 0; k &lt; baseColumns.length; k++) {
+                groupedBaseColumns.push(baseColumns[k]);
+            }
+             return groupedBaseColumns;
+        }
+        return baseColumns;
+    }
+});
+</pre>
+</body>
+</html>

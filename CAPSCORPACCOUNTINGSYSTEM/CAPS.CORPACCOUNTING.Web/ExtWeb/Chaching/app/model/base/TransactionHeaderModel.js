@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Transaction Headers.
+ */
 Ext.define('Chaching.model.base.TransactionHeaderModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

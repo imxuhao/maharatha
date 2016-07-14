@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.banking.banksetup.BankSetupFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.banking-banksetup-banksetupform&#39;,
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        var me = this,
+        view = me.getView();
+        record = Ext.create(&#39;Chaching.model.banking.banksetup.BankSetupModel&#39;);
+        Ext.apply(record.data, values);
+        var checkNumberGridStore = view.down(&#39;gridpanel[itemId=checkNumberGrid]&#39;).getStore();
+        var checkNumberModifyRecords = checkNumberGridStore.getModifiedRecords();
+        record.set(&#39;id&#39;, values.bankAccountId);
+        if (checkNumberModifyRecords &amp;&amp; checkNumberModifyRecords.length &gt; 0) {
+            var checkNumberArray = [];
+            Ext.each(checkNumberModifyRecords, function (rec) {
+                var checkNumberRec = {
+                    organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
+                    bankAccountId: values.bankAccountId,
+                    bankAccountPaymentRangeId : rec.get(&#39;bankAccountPaymentRangeId&#39;),
+                    startingPaymentNumber: rec.get(&#39;startingPaymentNumber&#39;),
+                    endingPaymentNumber: rec.get(&#39;endingPaymentNumber&#39;)
+                };
+                checkNumberArray.push(checkNumberRec);
+            });
+            checkNumberArray.sort(function (a, b) {
+                return (b.bankAccountPaymentRangeId - a.bankAccountPaymentRangeId);
+            });
+            record.data.bankAccountPaymentRangeList = checkNumberArray;
+        }
+        return record;
+    }
+});
+</pre>
+</body>
+</html>

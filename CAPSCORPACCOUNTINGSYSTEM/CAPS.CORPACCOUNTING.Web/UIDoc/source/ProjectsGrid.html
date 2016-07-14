@@ -33,16 +33,16 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsGrid&#39;,{
     ],
     xtype:&#39;widget.projects.projectmaintenance.projects&#39;,
 <span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-controller'>    controller: &#39;projects-projectmaintenance-projectsgrid&#39;,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-modulePermissions'>    modulePermissions: {
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-modulePermissions'>    modulePermissions: {
 </span>        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
         create: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
         edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
         destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
     },
-<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-padding'>    padding: 5,
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-padding'>    padding: 5,
 </span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-gridId'>    gridId:16,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-store'>    store:&#39;projects.projectmaintenance.ProjectsStore&#39;,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-headerButtonsConfig'>    headerButtonsConfig: [
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-store'>    store:&#39;projects.projectmaintenance.ProjectsStore&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-headerButtonsConfig'>    headerButtonsConfig: [
 </span>      {
           xtype: &#39;displayfield&#39;,
           value: abp.localization.localize(&quot;Projects&quot;),
@@ -59,27 +59,31 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsGrid&#39;,{
           routeName: &#39;project.projectmaintenance.projects.create&#39;,
           iconAlign: &#39;left&#39;
       }],
-<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-requireExport'>    requireExport: true,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-requireMultiSearch'>    requireMultiSearch: true,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-requireMultisort'>    requireMultisort: true,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-isEditable'>    isEditable: true,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-editingMode'>    editingMode: &#39;row&#39;,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-columnLines'>    columnLines: true,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-multiColumnSort'>    multiColumnSort: true,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-editWndTitleConfig'>    editWndTitleConfig: {
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-requireExport'>    requireExport: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-requireMultiSearch'>    requireMultiSearch: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-requireMultisort'>    requireMultisort: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-isEditable'>    isEditable: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-editingMode'>    editingMode: &#39;row&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-columnLines'>    columnLines: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-multiColumnSort'>    multiColumnSort: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-editWndTitleConfig'>    editWndTitleConfig: {
 </span>        title: app.localize(&#39;EditProject&#39;).initCap(),
         iconCls: &#39;fa fa-pencil&#39;
     },
-<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-createWndTitleConfig'>    createWndTitleConfig: {
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-createWndTitleConfig'>    createWndTitleConfig: {
 </span>        title: app.localize(&#39;CreateNewProject&#39;).initCap(),
         iconCls: &#39;fa fa-plus&#39;
     },
-<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-createNewMode'>    createNewMode: &#39;tab&#39;,
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-viewWndTitleConfig'>    viewWndTitleConfig: {
+</span>        title: app.localize(&#39;ViewProject&#39;),
+        iconCls: &#39;fa fa-th&#39;
+    },
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-createNewMode'>    createNewMode: &#39;tab&#39;,
 </span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-isSubMenuItemTab'>    isSubMenuItemTab: true,
 </span><span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-listeners'>    listeners: {
 </span>        cellclick:&#39;onProjectsCellClick&#39;
     },
-<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-property-columns'>    columns: [
+<span id='Chaching-view-projects-projectmaintenance-ProjectsGrid-cfg-columns'>    columns: [
 </span>         {
              xtype: &#39;gridcolumn&#39;,
              text: app.localize(&#39;JobNumber&#39;),
@@ -244,7 +248,9 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectsGrid&#39;,{
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              width: &#39;15%&#39;,
              editor: {
-                 xtype: &#39;checkboxfield&#39;
+                 xtype: &#39;checkboxfield&#39;,
+                 inputValue: &#39;true&#39;,
+                 uncheckedValue: &#39;false&#39;
              }
          }, {
              xtype: &#39;gridcolumn&#39;,

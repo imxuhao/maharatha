@@ -35,12 +35,12 @@ Ext.define(&#39;Chaching.Application&#39;, {
     ],
     stores: [
         // TODO: add global / shared stores here
-         &#39;NavigationTree&#39;,
-         &#39;tenants.TenantsStore&#39;,
-         &#39;users.UsersStore&#39;,
-         &#39;roles.RolesStore&#39;,
-         &#39;editions.EditionsStore&#39;,
-         &#39;languages.LanguagesStore&#39;,
+        &#39;NavigationTree&#39;,
+        &#39;tenants.TenantsStore&#39;,
+        &#39;users.UsersStore&#39;,
+        &#39;roles.RolesStore&#39;,
+        &#39;editions.EditionsStore&#39;,
+        &#39;languages.LanguagesStore&#39;,
         &#39;auditlogs.AuditLogsStore&#39;,
         &#39;languages.LanguageTextsStore&#39;,
         &#39;profile.linkedaccounts.LinkedAccountsStore&#39;,
@@ -51,7 +51,7 @@ Ext.define(&#39;Chaching.Application&#39;, {
         &#39;financials.accounts.DivisionsStore&#39;,
         &#39;manageView.ManageViewStore&#39;,
         &#39;roles.RolesTreeStore&#39;,
-         &#39;financials.accounts.AccountsStore&#39;,
+        &#39;financials.accounts.AccountsStore&#39;,
         &#39;languages.LanguagesDataStore&#39;,
         &#39;projects.projectmaintenance.LinesStore&#39;,
         &#39;financials.accounts.RollupAccountStore&#39;,
@@ -59,7 +59,7 @@ Ext.define(&#39;Chaching.Application&#39;, {
         &#39;languages.LanguagesDataStore&#39;,
         &#39;projects.projectmaintenance.ProjectsStore&#39;,
         &#39;projects.projectmaintenance.ProjectCoaStore&#39;,
-         &#39;address.AddressStore&#39;,
+        &#39;address.AddressStore&#39;,
         &#39;projects.projectmaintenance.ProjectCoaStore&#39;,
         &#39;projects.projectmaintenance.JobAccountsStore&#39;,
         &#39;projects.projectmaintenance.ProjectLocationsStore&#39;,
@@ -67,12 +67,63 @@ Ext.define(&#39;Chaching.Application&#39;, {
         &#39;projects.projectmaintenance.PoRangeAllocationStore&#39;,
         &#39;employee.EmployeeStore&#39;,
         &#39;customers.CustomersStore&#39;,
+        &#39;financials.journals.JournalStore&#39;,
         &#39;utilities.ProjectTypeStore&#39;,
-        &#39;utilities.ProjectStatusStore&#39;
-      
+        &#39;utilities.ProjectStatusStore&#39;,
+        &#39;utilities.CountryListStore&#39;,
+        &#39;utilities.StateOrRegionListStore&#39;,
+        &#39;utilities.TypeOfAddressListStore&#39;,
+        &#39;utilities.PaymentTermsListStore&#39;,
+        &#39;utilities.CheckStockListStore&#39;,
+        &#39;utilities.UploadMethodListStore&#39;,
+        &#39;utilities.PositivePayFileListStore&#39;,
+        &#39;utilities.TypeOf1099BoxListStore&#39;,
+        &#39;utilities.TypeOfTaxListStore&#39;,
+        &#39;utilities.JournalTypeListStore&#39;,
+        &#39;utilities.EmployeeListStore&#39;,
+        &#39;utilities.AccountTypeListStore&#39;,
+        &#39;utilities.autofill.AccountListStore&#39;,
+        &#39;utilities.autofill.CustomerListStore&#39;,
+        &#39;financials.journals.JournalDetailsStore&#39;,
+        &#39;batchposting.batches.BatchesStore&#39;,
+        &#39;utilities.autofill.JobDivisionStore&#39;,
+        &#39;utilities.autofill.AccountsStore&#39;,
+        &#39;utilities.autofill.SubAccountsStore&#39;,
+        &#39;utilities.autofill.TaxRebateStore&#39;,
+        &#39;utilities.autofill.VendorsStore&#39;,
+        &#39;utilities.autofill.T41099Store&#39;,
+        &#39;financials.fiscalperiod.FiscalPeriodStore&#39;,
+        &#39;banking.banksetup.BankSetupStore&#39;,
+        &#39;banking.banksetup.BankCheckNumberStore&#39;,
+        &#39;utilities.autofill.DivisionListStore&#39;,
+        &#39;financials.accounts.AccountRestrictionLeftStore&#39;,
+        &#39;financials.accounts.AccountRestrictionRightStore&#39;,
+        &#39;payables.invoices.AccountsPayableStore&#39;,
+        &#39;utilities.autofill.RollupAccountListStore&#39;,
+        &#39;utilities.autofill.LinesListStore&#39;,
+        &#39;utilities.autofill.GLAccountListStore&#39;,
+        &#39;administration.organization.CompanyStore&#39;,
+        &#39;utilities.autofill.BankAccountListStore&#39;,
+        &#39;administration.organization.UserOrganizationListStore&#39;,
+        &#39;administration.organization.CompanyUsersStore&#39;,
+        &#39;administration.organization.CompanyUserRoleListStore&#39;,
+        &#39;payables.invoices.AccountsPayableDetailsStore&#39;,
+        &#39;purchaseorders.entry.PurchaseOrderStore&#39;,
+        &#39;administration.organization.OrganizationsStore&#39;,
+        &#39;administration.organization.TenantListStore&#39;,
+        &#39;purchaseorders.entry.PurchaseOrderDetailsStore&#39;,
+        &#39;administration.organization.ConnectionStringListStore&#39;,
+        &#39;purchaseorders.entry.PurchaseOrderDetailHistoryStore&#39;,
+        &#39;tenants.TenantUserListStore&#39;
     ],
     mainView: &#39;Chaching.view.main.ChachingViewport&#39;,
     launch: function () {
+        //Ext.ariaWarn = Ext.emptyFn;
+        var docBody = document.body;
+        if (docBody) {
+            var loadingMask = document.getElementById(&#39;intialLoadinMask&#39;);
+            if (loadingMask)docBody.removeChild(loadingMask);
+        }
         var me = this;
         ///****Load usersDefaultView Settings
         var defaultViewSettingStore = Ext.create(&#39;Chaching.store.manageView.ManageViewStore&#39;);
@@ -97,11 +148,11 @@ Ext.define(&#39;Chaching.Application&#39;, {
         filters.push(filter);
         defaultViewSettingStore.filter(filters);
         defaultViewSettingStore.load({
-            callback: function (records, operation, success) {
+            callback: function(records, operation, success) {
                 if (success &amp;&amp; records &amp;&amp; records.length &gt; 0) {
                     var usersDefaultGridViewSettings = [];
                     var rec;
-                    Ext.each(records, function (record) {
+                    Ext.each(records, function(record) {
                         if (record.get(&#39;isDefault&#39;)) {
                             rec = {
                                 gridId: record.get(&#39;viewId&#39;),
@@ -132,9 +183,9 @@ Ext.define(&#39;Chaching.Application&#39;, {
             }
         });
     },
-    onAppUpdate: function () {
+    onAppUpdate: function() {
         Ext.Msg.confirm(&#39;Application Update&#39;, &#39;This application has an update, reload?&#39;,
-            function (choice) {
+            function(choice) {
                 if (choice === &#39;yes&#39;) {
                     window.location.reload();
                 }

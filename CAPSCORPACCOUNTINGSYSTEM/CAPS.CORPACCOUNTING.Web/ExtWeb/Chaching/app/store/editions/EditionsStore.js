@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.editions.EditionsStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Editions.
+ */
+Ext.define('Chaching.store.editions.EditionsStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.editions.EditionsModel',   
     proxy: {

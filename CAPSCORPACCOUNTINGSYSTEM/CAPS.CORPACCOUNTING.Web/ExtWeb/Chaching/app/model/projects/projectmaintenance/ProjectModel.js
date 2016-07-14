@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Job/Projects.
+ */
 Ext.define('Chaching.model.projects.projectmaintenance.ProjectModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {

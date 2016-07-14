@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.utilities.autofill.AccountsStore&#39;, {
+    extend: &#39;Chaching.store.base.BaseStore&#39;,
+    pageSize: 1000,
+    model: &#39;Chaching.model.financials.accounts.AccountsModel&#39;,
+    proxy: {
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+        type: &#39;chachingProxy&#39;,
+        //extraParams: {
+        //    jobId:null
+        //},
+       // url: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+        urlToGetRecordById: abp.appPath + &#39;api/services/app/accountUnit/GetAccountUnitsById&#39;,
+        api: {
+            read: abp.appPath + &#39;api/services/app/list/GetAccountsList&#39;,
+            create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+            update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+            destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+        },
+        reader: {
+            type: &#39;json&#39;,
+            rootProperty: &#39;result&#39;
+        }
+    },
+    idPropertyField: &#39;accountId&#39;//important to set for add/update of records
+});
+</pre>
+</body>
+</html>

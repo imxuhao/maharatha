@@ -45,7 +45,7 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGrid&#39;,{
           scale: &#39;small&#39;,
           ui: &#39;actionButton&#39;,
           action: &#39;create&#39;,
-          text: abp.localization.localize(&quot;CreateNewLine&quot;).toUpperCase(),
+          text: abp.localization.localize(&quot;Add&quot;).toUpperCase(),
           checkPermission: true,
           iconCls: &#39;fa fa-plus&#39;,
           iconAlign: &#39;left&#39;
@@ -64,6 +64,10 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGrid&#39;,{
     createWndTitleConfig: {
         title: app.localize(&#39;CreateNewLine&#39;),
         iconCls: &#39;fa fa-plus&#39;
+    },
+    viewWndTitleConfig: {
+        title: app.localize(&#39;ViewLine&#39;),
+        iconCls: &#39;fa fa-th&#39;
     },
     createNewMode: &#39;tab&#39;,
     isSubMenuItemTab: true,
@@ -102,11 +106,16 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGrid&#39;,{
             dataIndex: &#39;typeOfAccount&#39;,
             sortable: true,
             groupable: true,
+            itemId: &#39;typeOfAccountId&#39;,
             width: &#39;15%&#39;,
             filterField: {
                 xtype: &#39;combobox&#39;,
                 valueField: &#39;typeOfAccountId&#39;,
                 displayField: &#39;typeOfAccount&#39;,
+                searchProperty: &#39;typeOfAccountId&#39;,
+                queryMode: &#39;local&#39;,
+                loadStoreOnCreate: true,
+                isViewmodelStore: true,
                 forceSelection: true,
                 bind: {
                     store: &#39;{typeOfAccountList}&#39;
@@ -123,7 +132,12 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGrid&#39;,{
                 xtype: &#39;combobox&#39;,
                 valueField: &#39;typeofConsolidationId&#39;,
                 displayField: &#39;typeofConsolidation&#39;,
-                forceSelection:true,
+                loadStoreOnCreate: true,
+                forceSelection: true,
+                isViewmodelStore: true,
+                isEnum: true,
+                searchProperty: &#39;typeofConsolidationId&#39;,
+                queryMode: &#39;local&#39;,
                 bind: {
                     store: &#39;{typeofConsolidationList}&#39;
                 }
@@ -146,7 +160,9 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGrid&#39;,{
                      data: [{ text: &#39;YES&#39;, value: &#39;true&#39; }, { text: &#39;NO&#39;, value: &#39;false&#39; }]
                  }
              }, editor: {
-                 xtype: &#39;checkbox&#39;
+                 xtype: &#39;checkbox&#39;,
+                 inputValue: true,
+                 uncheckedValue : false
              }
          }
          ,
@@ -157,26 +173,32 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGrid&#39;,{
              sortable: true,
              groupable: true,
              width: &#39;15%&#39;,
-             itemId: &#39;rollupAccountId&#39;,
+             itemId: &#39;rollupAccountId&#39;,            
              filterField: {
-                 xtype: &#39;combobox&#39;,
-                 valueField: &#39;rollupAccountId&#39;,
-                 displayField: &#39;rollupAccount&#39;,
-                 queryMode: &#39;remote&#39;,
-                 forceSelection:true,
-                 bind: {
-                     store: &#39;{rollupAccountList}&#39;
+                 xtype: &#39;chachingcombobox&#39;,
+                 store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
+                 width: &#39;100%&#39;,
+                 searchProperty: &#39;rollupAccountId&#39;,
+                 valueField: &#39;accountId&#39;,
+                 displayField: &#39;accountNumber&#39;,
+                 forceSelection: true,
+                 minChars: 2,
+                 modulePermissions: {
+                     read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts&#39;),
+                     create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Create&#39;),
+                     edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Edit&#39;),
+                     destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Accounts.Delete&#39;)
                  },
-                 listeners: {
-                     beforequery: function (query, eOpts) {
-                         var grid = this.up().grid;
-                         if (grid) {
-                             var coaId = grid.coaId;
-                             var myStore = this.getStore();
-                             myStore.getProxy().setExtraParam(&#39;Id&#39;, coaId);
-                         }
-                     }
-                 }
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + &#39;api/services/app/accountUnit/GetRollupAccountsList&#39;,
+                     create: abp.appPath + &#39;api/services/app/accountUnit/CreateAccountUnit&#39;,
+                     update: abp.appPath + &#39;api/services/app/accountUnit/UpdateAccountUnit&#39;,
+                     destroy: abp.appPath + &#39;api/services/app/accountUnit/DeleteAccountUnit&#39;
+                 },
+                 createEditEntityType: &#39;financials.accounts.accounts&#39;,
+                 createEditEntityGridController: &#39;financials-accounts-accountsgrid&#39;,
+                 entityType: &#39;Account&#39;,
+                 isTwoEntityPicker: false
              }
          }, {
              xtype: &#39;gridcolumn&#39;,
@@ -185,17 +207,34 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGrid&#39;,{
              itemId: &#39;rollupJobId&#39;,
              sortable: true,
              groupable: true,
-             width: &#39;10%&#39;,             
+             width: &#39;10%&#39;,
              filterField: {
-                 xtype: &#39;combobox&#39;,
-                 valueField: &#39;rollupDivisionId&#39;,
-                 displayField: &#39;rollupDivision&#39;,
+                 xtype: &#39;chachingcombobox&#39;,
+                 store: new Chaching.store.utilities.autofill.DivisionListStore(),
+                 valueField: &#39;jobId&#39;,
+                 displayField: &#39;jobNumber&#39;,
                  queryMode: &#39;remote&#39;,
                  forceSelection: true,
-                 bind: {
-                     store: &#39;{rollupDivisionList}&#39;
-                 },              
-                 
+                 searchProperty : &#39;rollupJobId&#39;,
+                 minChars: 2,
+                 //useDisplayFieldToSearch: true,
+                 modulePermissions: {
+                     read: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions&#39;),
+                     create: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Create&#39;),
+                     edit: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Edit&#39;),
+                     destroy: abp.auth.isGranted(&#39;Pages.Financials.Accounts.Divisions.Delete&#39;)
+                 },
+                 primaryEntityCrudApi: {
+                     read: abp.appPath + &#39;api/services/app/jobUnit/GetDivisionList&#39;,
+                     create: abp.appPath + &#39;api/services/app/divisionUnit/CreateDivisionUnit&#39;,
+                     update: abp.appPath + &#39;api/services/app/divisionUnit/UpdateDivisionUnit&#39;,
+                     destroy: abp.appPath + &#39;api/services/app/divisionUnit/DeleteDivisionUnit&#39;
+                 },
+                 createEditEntityType: &#39;financials.accounts.divisions&#39;,
+                 createEditEntityGridController: &#39;financials-accounts-divisionsgrid&#39;,
+                 entityType: &#39;Division&#39;,
+                 identificationKey: &#39;isDivision&#39;,
+                 isTwoEntityPicker: false
              }
          },
          {
@@ -210,19 +249,24 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.LineNumbersGrid&#39;,{
                  xtype: &#39;combobox&#39;,
                  valueField: &#39;typeOfCurrencyId&#39;,
                  displayField: &#39;typeOfCurrency&#39;,
-                 queryMode: &#39;remote&#39;,
+                 queryMode: &#39;local&#39;,
+                 searchProperty: &#39;typeOfCurrencyId&#39;,
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
                  forceSelection: true,
+                // isEnum: true,
                  bind: {
                      store: &#39;{typeOfCurrencyList}&#39;
-                 },
-                 listeners: {
-                     beforequery: function (query, eOpts) {
-                         var grid = this.up().grid;
-                         if (grid) {                           
-                             var myStore = this.getStore();                             
-                         }
-                     }
                  }
+                 //,
+                 //listeners: {
+                 //    beforequery: function (query, eOpts) {
+                 //        var grid = this.up().grid;
+                 //        if (grid) {                           
+                 //            var myStore = this.getStore();                             
+                 //        }
+                 //    }
+                 //}
              }
          },
     ]

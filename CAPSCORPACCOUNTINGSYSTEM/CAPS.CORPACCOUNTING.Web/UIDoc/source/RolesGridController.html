@@ -18,31 +18,28 @@
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.roles.RolesGridController&#39;, {
     extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
     alias: &#39;controller.roles-rolesgrid&#39;,
-    doAfterCreateAction: function (createNewMode, form) {       
+    doAfterCreateAction: function (createNewMode, form, isEdit, record) {       
         var me = this;
-        var currentform = form;
-        var data = {};
-        Ext.Ajax.request({
-            url: abp.appPath + &#39;api/services/app/role/GetRoleForEdit&#39;,
-            jsonData: Ext.encode(data),
-            success: function (response, opts) {
-                var res = Ext.decode(response.responseText);
-                if (res.success) {
-                    var data = res.result.permissions;
-                  
-
-                }
-                else {
-                    Ext.toast(res.error.message);
-                }
-            },
-            failure: function (response) {
-                var res = Ext.decode(response.responseText);
-                Ext.toast(res.error.message);
-                console.log(response);
+        if (form.down(&#39;treepanel&#39;)) {
+            var treeStore = form.down(&#39;treepanel&#39;).getStore();
+            if (isEdit) {
+                treeStore.getProxy().setExtraParams({ id: record.get(&#39;id&#39;) });
+            } else {
+                treeStore.getProxy().setExtraParams({});
             }
-        })
+            treeStore.load();
+        }
     },
+    doRowSpecificEditDelete: function (button, grid) {
+        if (button.menu) {
+            var deleteActionMenu = button.menu.down(&#39;menuitem#deleteActionMenu&#39;);
+            if (deleteActionMenu &amp;&amp; button.widgetRec &amp;&amp; button.widgetRec.get(&#39;isStatic&#39;)) {
+                deleteActionMenu.hide();
+            } else {
+                deleteActionMenu.show();
+            }
+        }
+    }
 
 });
 </pre>

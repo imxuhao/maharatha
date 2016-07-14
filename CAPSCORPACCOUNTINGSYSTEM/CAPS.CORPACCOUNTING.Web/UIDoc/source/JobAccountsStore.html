@@ -15,12 +15,15 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.projects.projectmaintenance.JobAccountsStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-projects-projectmaintenance-JobAccountsStore'>/**
+</span> * DataStore to perform Read operation on Job/Projects Accounts.
+ */
+Ext.define(&#39;Chaching.store.projects.projectmaintenance.JobAccountsStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    pageSize:1000,
-    model: &#39;Chaching.model.projects.projectmaintenance.JobAccountsModel&#39;,
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-projects-projectmaintenance-JobAccountsStore-property-pageSize'>    pageSize:1000,
+</span><span id='Chaching-store-projects-projectmaintenance-JobAccountsStore-property-model'>    model: &#39;Chaching.model.projects.projectmaintenance.JobAccountsModel&#39;,
+</span><span id='Chaching-store-projects-projectmaintenance-JobAccountsStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         extraParams: {
             chartofAccountId: 0,
@@ -34,8 +37,8 @@
             rootProperty: &#39;result&#39;
         }
     },
-    idPropertyField: &#39;jobAccountId&#39;//important to set for add/update of records
-});
+<span id='Chaching-store-projects-projectmaintenance-JobAccountsStore-property-idPropertyField'>    idPropertyField: &#39;jobAccountId&#39;//important to set for add/update of records
+</span>});
 </pre>
 </body>
 </html>

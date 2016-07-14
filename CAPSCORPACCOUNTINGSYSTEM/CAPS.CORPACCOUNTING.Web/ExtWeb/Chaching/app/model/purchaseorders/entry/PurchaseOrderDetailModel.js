@@ -1,3 +1,6 @@
+/**
+ * DataModel to represent entity schema for Purchase Order Distribution.
+ */
 Ext.define('Chaching.model.purchaseorders.entry.PurchaseOrderDetailModel', {
     extend: 'Chaching.model.base.TransactionDetailsModel',
 

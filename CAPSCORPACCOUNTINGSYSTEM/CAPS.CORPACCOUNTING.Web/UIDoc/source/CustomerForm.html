@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.receivables.customers.CustomerForm&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanel&#39;,
+    alias: [&#39;widget.receivables.customers.create&#39;, &#39;widget.receivables.customers.edit&#39;],
+    requires: [
+        &#39;Chaching.view.receivables.customers.CustomerFormController&#39;
+    ],
+    controller: &#39;receivables-customers-customersform&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Receivables.Customers&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Receivables.Customers.Delete&#39;)
+    },
+    name: &#39;Customers&#39;,
+    openInPopupWindow: false,
+    hideDefaultButtons: false,
+    autoScroll: true,
+    border: false,
+    showFormTitle: true,
+    displayDefaultButtonsCenter: true,
+
+
+    titleConfig: {
+        title: abp.localization.localize(&quot;CreatingNewCustomers&quot;).initCap()
+    },
+    items: [{
+        xtype: &#39;tabpanel&#39;,
+        ui: &#39;formTabPanels&#39;,
+        items: [
+        {
+            title: abp.localization.localize(&quot;General&quot;).initCap(),
+            iconCls: &#39;fa fa-gear&#39;,
+            items: [{
+                xtype: &#39;fieldset&#39;,
+                ui: &#39;transparentFieldSet&#39;,
+                title: abp.localization.localize(&quot;GeneralInformation&quot;).initCap(),
+                collapsible: true,
+                layout: &#39;column&#39;,
+                items: [{
+                    columnWidth: .5,
+                    padding: &#39;20 10 0 20&#39;,
+                    defaults: {
+                        // labelAlign: &#39;top&#39;,
+                        labelWidth: 140,
+                        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                    },
+                    items: [{
+                        xtype: &#39;hiddenfield&#39;,
+                        name: &#39;customerId&#39;,
+                        value: 0
+                    }, {
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;lastName&#39;,
+                        itemId: &#39;lastName&#39;,
+                        allowBlank: false,
+                        fieldLabel: app.localize(&#39;CompanyLastName&#39;).initCap(),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;,
+                        emptyText: app.localize(&#39;MandatoryField&#39;)
+                    },
+                         {
+                             xtype: &#39;textfield&#39;,
+                             name: &#39;customerNumber&#39;,
+                             itemId: &#39;customerNumber&#39;,
+                             fieldLabel: app.localize(&#39;CustomerNumber&#39;).initCap(),
+                             width: &#39;100%&#39;,
+                             ui: &#39;fieldLabelTop&#39;
+                         }
+                    ]
+                },
+                {
+                    columnWidth: .5,
+                    padding: &#39;20 10 0 20&#39;,
+                    defaults: {
+                        // labelAlign: &#39;top&#39;,
+                        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                    },
+                    items: [{
+                        xtype: &#39;textfield&#39;,
+                        name: &#39;firstName&#39;,
+                        itemId: &#39;firstName&#39;,
+                        fieldLabel: app.localize(&#39;FirstName&#39;).initCap(),
+                        width: &#39;100%&#39;,
+                        ui: &#39;fieldLabelTop&#39;
+                    },
+                    {
+                        xtype: &#39;checkbox&#39;,
+                        name: &#39;isActive&#39;,
+                        itemId: &#39;isActive&#39;,
+                        labelAlign: &#39;right&#39;,
+                        inputValue: true,
+                        checked: true,
+                        ui: &#39;default&#39;,
+                        boxLabelCls: &#39;checkboxLabel&#39;,
+                        boxLabel: app.localize(&#39;Active&#39;)
+                    }
+                    //, {
+                    //    xtype: &#39;textfield&#39;,
+                    //    name: &#39;billingAccount&#39;,
+                    //    itemId: &#39;billingAccount&#39;,
+                    //    fieldLabel: app.localize(&#39;BillingAccount&#39;).initCap(),
+                    //    width: &#39;100%&#39;,
+                    //    ui: &#39;fieldLabelTop&#39;
+                    //}
+
+                    ]
+                }
+
+                ,
+                    //{
+                    //    columnWidth: .33,
+                    //    padding: &#39;20 10 0 20&#39;,
+                    //    defaults: {
+                    //        // labelAlign: &#39;top&#39;,
+                    //        blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                    //    },
+                    //    items: [
+                    //    {
+                    //        xtype: &#39;checkbox&#39;,
+                    //        name: &#39;isActive&#39;,
+                    //        itemId: &#39;isActive&#39;,
+                    //        labelAlign: &#39;right&#39;,
+                    //        inputValue: true,
+                    //        checked: true,
+                    //        ui: &#39;default&#39;,
+                    //        boxLabelCls: &#39;checkboxLabel&#39;,
+                    //        boxLabel: app.localize(&#39;Active&#39;)
+                    //    }
+                    //    ]
+                    //},
+
+
+                    {
+                        columnWidth: 1,
+                        padding: &#39;20 10 0 20&#39;,
+                        defaults: {
+                            labelAlign: &#39;top&#39;,
+                            blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                        },
+                        items: [{
+                            xtype: &#39;address&#39;,
+                            itemId: &#39;addressGrid&#39;,
+                            layout: &#39;fit&#39;,
+                            width: &#39;100%&#39;
+                        }]
+                    }]
+            }
+            ]
+        },
+        {
+            title: abp.localization.localize(&quot;Other&quot;).initCap(),
+            iconCls: &#39;fa fa-gear&#39;,
+            items: [
+              {
+                  xtype: &#39;fieldset&#39;,
+                  collapsible: true,
+                  title: abp.localization.localize(&quot;PaymentInformation&quot;).initCap(),
+                  ui: &#39;transparentFieldSet&#39;,
+                  layout: &#39;column&#39;,
+                  items: [
+        {
+            columnWidth: .5,
+            padding: &#39;20 10 0 20&#39;,
+            defaults: {
+                labelWidth: 120
+                //labelAlign: &#39;top&#39;,
+                //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+            },
+            items: [
+                 {
+                     xtype: &#39;textfield&#39;,
+                     name: &#39;creditLimit&#39;,
+                     itemId: &#39;creditLimit&#39;,
+                     fieldLabel: app.localize(&#39;CreditLimit&#39;).initCap(),
+                     width: &#39;100%&#39;,
+                     ui: &#39;fieldLabelTop&#39;
+                 },
+
+              {
+                  xtype: &#39;combobox&#39;,
+                  name: &#39;customerPayTermsId&#39;,
+                  fieldLabel: app.localize(&#39;PaymentTerms&#39;).initCap(),
+                  width: &#39;100%&#39;,
+                  ui: &#39;fieldLabelTop&#39;,
+                  displayField: &#39;paymentTerms&#39;,
+                  valueField: &#39;paymentTermsId&#39;,
+                  emptyText: app.localize(&#39;SelectOption&#39;)
+
+              }]
+        },
+                  {
+                      columnWidth: .5,
+                      padding: &#39;20 10 0 20&#39;,
+                      defaults: {
+                          labelWidth: 120
+                          //labelAlign: &#39;top&#39;,
+                          //blankText: app.localize(&#39;MandatoryToolTipText&#39;)
+                      },
+                      items: [
+                 {
+                     xtype: &#39;combobox&#39;,
+                     name: &#39;typeofPaymentMethodId&#39;,
+                     fieldLabel: app.localize(&#39;PaymentMethods&#39;).initCap(),
+                     width: &#39;100%&#39;,
+                     ui: &#39;fieldLabelTop&#39;,
+                     displayField: &#39;typeofPaymentMethod&#39;,
+                     valueField: &#39;typeofPaymentMethodId&#39;,
+                     emptyText: app.localize(&#39;SelectOption&#39;)
+                     //,
+                     //bind: {
+                     //    store: &#39;{paymentTermsList}&#39;
+                     //}
+                 },
+              {
+                  xtype: &#39;combobox&#39;,
+                  name: &#39;salesRepId&#39;,
+                  fieldLabel: app.localize(&#39;SalesRep&#39;).initCap(),
+                  width: &#39;100%&#39;,
+                  ui: &#39;fieldLabelTop&#39;,
+                  displayField: &#39;salesRepName&#39;,
+                  valueField: &#39;salesRepId&#39;,
+                  emptyText: app.localize(&#39;SelectOption&#39;)
+
+              }]
+                  }
+
+                  ]
+              }]
+
+
+        }]
+
+    }]
+});</pre>
+</body>
+</html>

@@ -17,7 +17,6 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.address.AddressGrid&#39;, {
     extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
-
     requires: [
         &#39;Chaching.view.address.AddressGridController&#39;
     ],
@@ -86,68 +85,10 @@
              xtype: &#39;combobox&#39;,
              valueField: &#39;addressTypeId&#39;,
              displayField: &#39;addressType&#39;,
-             bind: {
-                 store: {
-                     fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
-                         name: &#39;addressType&#39;, convert: function (value, record) {
-                             return record.get(&#39;name&#39;);
-                         }
-                     }, {
-                         name: &#39;addressTypeId&#39;, convert: function (value, record) {
-                             return record.get(&#39;value&#39;);
-                         }
-                     }],
-                     xtype: &#39;ajax&#39;,
-                     proxy: {
-                         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
-                         type: &#39;chachingProxy&#39;,
-                         url: abp.appPath + &#39;api/services/app/vendorUnit/GetTypeofAddressList&#39;,
-                         reader: {
-                             type: &#39;json&#39;,
-                             rootProperty: &#39;result&#39;
-                         }
-                     }
-                 }
-             }
+             queryMode: &#39;local&#39;,
+             store: &#39;utilities.TypeOfAddressListStore&#39;
          }
-     }
-     , {
-         xtype: &#39;gridcolumn&#39;,
-         text: app.localize(&#39;Country&#39;),
-         dataIndex: &#39;country&#39;,
-         sortable: true,
-         groupable: true,
-         width: &#39;8%&#39;,
-         editor: {
-             xtype: &#39;combobox&#39;,
-             valueField: &#39;countryId&#39;,
-             displayField: &#39;country&#39;,
-             bind: {
-                 store: {
-                     fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
-                         name: &#39;country&#39;, convert: function (value, record) {
-                             return record.get(&#39;name&#39;);
-                         }
-                     }, {
-                         name: &#39;countryId&#39;, convert: function (value, record) {
-                             return record.get(&#39;value&#39;);
-                         }
-                     }],
-                     xtype: &#39;ajax&#39;,
-                     proxy: {
-                         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
-                         type: &#39;chachingProxy&#39;,
-                         url: abp.appPath + &#39;api/services/app/vendorUnit/GetCountryList&#39;,
-                         reader: {
-                             type: &#39;json&#39;,
-                             rootProperty: &#39;result&#39;
-                         }
-                     }
-                 }
-             }
-         }
-     }
-        ,
+     },
          {
              text: app.localize(&#39;Address1&#39;),
              dataIndex: &#39;line1&#39;,
@@ -227,44 +168,21 @@
                   xtype: &#39;textfield&#39;,
                   name: &#39;city&#39;
               }
-          }
-
-           , {
-               xtype: &#39;gridcolumn&#39;,
-               text: app.localize(&#39;State/Region&#39;),
-               dataIndex: &#39;state&#39;,
-               sortable: true,
-               groupable: true,
-               width: &#39;12%&#39;,
-               editor: {
-                   xtype: &#39;combobox&#39;,
-                   valueField: &#39;stateId&#39;,
-                   displayField: &#39;state&#39;,
-                   store: {
-                       fields: [{ name: &#39;name&#39; }, { name: &#39;value&#39; }, {
-                           name: &#39;state&#39;, convert: function (value, record) {
-                               return record.get(&#39;name&#39;);
-                           }
-                       }, {
-                           name: &#39;stateId&#39;, convert: function (value, record) {
-                               return record.get(&#39;value&#39;);
-                           }
-                       }],
-                       xtype: &#39;ajax&#39;,
-                       proxy: {
-                           actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
-                           type: &#39;chachingProxy&#39;,
-                           url: abp.appPath + &#39;api/services/app/vendorUnit/GetRegionList&#39;,
-                           reader: {
-                               type: &#39;json&#39;,
-                               rootProperty: &#39;result&#39;
-                           }
-                       }
-                   }
-               }
-
-
-           },
+          }, {
+              xtype: &#39;gridcolumn&#39;,
+              text: app.localize(&#39;State/Region&#39;),
+              dataIndex: &#39;state&#39;,
+              sortable: true,
+              groupable: true,
+              width: &#39;12%&#39;,
+              editor: {
+                  xtype: &#39;combobox&#39;,
+                  valueField: &#39;stateId&#39;,
+                  displayField: &#39;state&#39;,
+                  //queryMode: &#39;local&#39;,
+                  store: &#39;utilities.StateOrRegionListStore&#39;
+              }
+          },
 
            {
                text: abp.localization.localize(&quot;Telephone&quot;),
@@ -293,21 +211,21 @@
                    name: &#39;email&#39;
                }
            }
-           //,
-           //{
-           //    text: abp.localization.localize(&quot;Website&quot;),
-           //    dataIndex: &#39;website&#39;,
-           //    xtype: &#39;gridcolumn&#39;,
-           //    sortable: false,
-           //    groupable: false,
-           //    //flex:1,
-           //    width: &#39;10%&#39;,
-           //    editor: {
-           //        xtype: &#39;textfield&#39;,
-           //        name: &#39;website&#39;
-           //    }
-           //}
-
+              , {
+                  xtype: &#39;gridcolumn&#39;,
+                  text: app.localize(&#39;Country&#39;),
+                  dataIndex: &#39;country&#39;,
+                  sortable: true,
+                  groupable: true,
+                  width: &#39;8%&#39;,
+                  editor: {
+                      xtype: &#39;combobox&#39;,
+                      valueField: &#39;countryId&#39;,
+                      displayField: &#39;country&#39;,
+                      queryMode: &#39;local&#39;,
+                      store: &#39;utilities.CountryListStore&#39;
+                  }
+              }
     ]
 });
 </pre>

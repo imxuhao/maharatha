@@ -15,32 +15,33 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.financials.accounts.DivisionsModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-financials-accounts-DivisionsModel'>/**
+</span> * DataModel to represent entity schema for Divisions.
+ */
+Ext.define(&#39;Chaching.model.financials.accounts.DivisionsModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;Job&#39;
-    },
-    fields: [
-            { name: &#39;jobId&#39;, type: &#39;int&#39; ,isPrimaryKey: true},
-            { name: &#39;jobNumber&#39;, type: &#39;string&#39; },
-            { name: &#39;caption&#39;, type: &#39;string&#39; },
-            //{ name: &#39;isCorporateDefault&#39;, type: &#39;boolean&#39;},
-            //{ name: &#39;rollupCenterId&#39;, type: &#39;int&#39;},
-            //{ name: &#39;chartOfAccountId&#39;, type: &#39;int&#39;},
-            //{ name: &#39;rollupAccountId&#39;, type: &#39;int&#39;},
-            { name: &#39;typeOfCurrencyId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
-            //{ name: &#39;rollupJobId&#39;, type: &#39;int&#39;},
-            //{ name: &#39;typeOfJobStatusId&#39;, type: &#39;int&#39;},
-            //{ name: &#39;typeOfBidSoftwareId&#39;, type: &#39;int&#39;},
-            //{ name: &#39;isApproved&#39;, type: &#39;boolean&#39;},
-            { name: &#39;isActive&#39;, type: &#39;boolean&#39;}
-            //{ name: &#39;isICTDivision&#39;, type: &#39;boolean&#39;},
-            //{ name: &#39;typeofProjectId&#39;, type: &#39;int&#39;},
-            //{ name: &#39;taxRecoveryId&#39;, type: &#39;int&#39;},
-            //{ name: &#39;organizationUnitId&#39;, type: &#39;int&#39;},
-            //{ name: &#39;detailReport&#39;, type: &#39;int&#39;},
-            //{ name: &#39;director&#39;, type: &#39;string&#39;},
-            //{ name: &#39;agency&#39;, type: &#39;string&#39;}
+<span id='Chaching-model-financials-accounts-DivisionsModel-cfg-searchEntityName'>        searchEntityName: &#39;Job&#39;
+</span>    },
+<span id='Chaching-model-financials-accounts-DivisionsModel-property-fields'>    fields: [
+</span>            { name: &#39;jobId&#39;, type: &#39;int&#39;, isPrimaryKey: true, headerText: &#39;Job Id&#39;, hidden: true, width: &#39;8%&#39; },
+            {
+                name: &#39;creditJobNumber&#39;, mapping: &#39;jobNumber&#39;, headerText: &#39;job Desc&#39;, hidden: true, width: &#39;8%&#39;
+            },
+            {
+                name: &#39;creditJobId&#39;, mapping: &#39;jobId&#39;, headerText: &#39;Credit Job Id&#39;, hidden: true, width: &#39;8%&#39;
+            },
+            { name: &#39;jobNumber&#39;, type: &#39;string&#39;, headerText: &#39;JobDivisionNumber&#39;, hidden: false, width: &#39;10%&#39;, minWidth: 90 },
+
+            { name: &#39;rollupJobId&#39;, type: &#39;int&#39;, mapping: &#39;jobId&#39; },
+
+            { name: &#39;caption&#39;, type: &#39;string&#39;, headerText: &#39;Caption&#39;, hidden: false, width:&#39;15%&#39;,minWidth:110 },
+            { name: &#39;isDivision&#39;, type: &#39;boolean&#39;, headerText: &#39;Division&#39;, hidden: false, width: &#39;11%&#39;, minWidth: 70 },
+          
+            { name: &#39;typeOfCurrencyId&#39;, type: &#39;int&#39;, hidden: true, defaultValue: null, convert: nullHandler },
+           
+            { name: &#39;isActive&#39;, type: &#39;boolean&#39;,hidden: true}
+          
     ]
 });</pre>
 </body>

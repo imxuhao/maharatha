@@ -28,15 +28,15 @@
 Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectLocations&#39;,{
     extend: &#39;Chaching.view.common.grid.ChachingGridPanel&#39;,
     xtype: &#39;widget.projects.projectmaintenance.projectLocations&#39;,
-<span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-modulePermissions'>    modulePermissions: {
+<span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-modulePermissions'>    modulePermissions: {
 </span>        read: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects&#39;),
         create: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Create&#39;),
         edit: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Edit&#39;),
         destroy: abp.auth.isGranted(&#39;Pages.Projects.ProjectMaintenance.Projects.Delete&#39;)
     },
-<span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-padding'>    padding: 5,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-store'>    store: &#39;projects.projectmaintenance.ProjectLocationsStore&#39;,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-headerButtonsConfig'>    headerButtonsConfig: [{
+<span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-padding'>    padding: 5,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-store'>    store: &#39;projects.projectmaintenance.ProjectLocationsStore&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-headerButtonsConfig'>    headerButtonsConfig: [{
 </span>        xtype: &#39;displayfield&#39;,
         value: app.localize(&#39;JobLocations&#39;),
         ui: &#39;headerTitle&#39;
@@ -52,17 +52,17 @@ Ext.define(&#39;Chaching.view.projects.projectmaintenance.ProjectLocations&#39;,
           routeName: &#39;project.projectmaintenance.projects.create&#39;,
           iconAlign: &#39;left&#39;
       }],
-<span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-requireExport'>    requireExport: false,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-requireMultiSearch'>    requireMultiSearch: false,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-requireMultisort'>    requireMultisort: false,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-isEditable'>    isEditable: true,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-editingMode'>    editingMode: &#39;cell&#39;,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-columnLines'>    columnLines: true,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-multiColumnSort'>    multiColumnSort: false,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-createNewMode'>    createNewMode: &#39;inline&#39;,
+<span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-requireExport'>    requireExport: false,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-requireMultiSearch'>    requireMultiSearch: false,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-requireMultisort'>    requireMultisort: false,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-isEditable'>    isEditable: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-editingMode'>    editingMode: &#39;cell&#39;,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-columnLines'>    columnLines: true,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-multiColumnSort'>    multiColumnSort: false,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-createNewMode'>    createNewMode: &#39;inline&#39;,
 </span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-isSubMenuItemTab'>    isSubMenuItemTab: false,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-showPagingToolbar'>    showPagingToolbar:false,
-</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-property-columns'>    columns:[
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-showPagingToolbar'>    showPagingToolbar:false,
+</span><span id='Chaching-view-projects-projectmaintenance-ProjectLocations-cfg-columns'>    columns:[
 </span>    {
         xtype: &#39;gridcolumn&#39;,
         dataIndex: &#39;locationName&#39;,

@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.payables.invoices.AccountsPayableStore', {
+﻿/**
+ * DataStore to perform CRUD operation on Accounts Payable Header.
+ */
+Ext.define('Chaching.store.payables.invoices.AccountsPayableStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.payables.invoices.AccountsPayableModel',
     proxy: {

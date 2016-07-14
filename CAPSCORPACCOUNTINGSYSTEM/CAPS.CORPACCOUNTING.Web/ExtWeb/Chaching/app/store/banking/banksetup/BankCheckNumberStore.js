@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.store.banking.banksetup.BankCheckNumberStore', {
+﻿/**
+ * DataStore to perform Read/Delete operation on Bank Check Numbers.
+ */
+Ext.define('Chaching.store.banking.banksetup.BankCheckNumberStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.banking.banksetup.BankCheckRangesModel',
     proxy: {

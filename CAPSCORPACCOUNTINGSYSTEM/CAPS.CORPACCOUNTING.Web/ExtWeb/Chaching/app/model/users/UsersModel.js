@@ -1,4 +1,7 @@
-﻿Ext.define('Chaching.model.users.UsersModel', {
+﻿/**
+ * DataModel to represent entity schema for Users.
+ */
+Ext.define('Chaching.model.users.UsersModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
         searchEntityName: 'User'

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.receivables.customers.CustomersGridController&#39;, {
+    extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
+    alias: &#39;controller.receivables-customers-customersgrid&#39;,
+    doBeforeInlineAddUpdate: function (record) {
+        if (record) {
+            var address = record._address;
+            if (address) {
+                record.set(&#39;address&#39;, Ext.apply(address.data, record.address));
+            }
+        }
+        return true;
+    },
+    doAfterCreateAction: function (createMode, formPanel, isEdit, record) {
+        var me = this,
+            view = me.getView();
+        var viewModel = formPanel.getViewModel();
+        var form = formPanel.getForm();
+        if (isEdit) {
+            if (record) {
+                var vendoraddressGrid = formPanel.down(&#39;*[itemId=addressGrid]&#39;);
+                if (vendoraddressGrid) {
+                    var addressStore = vendoraddressGrid.getStore();
+                    Ext.apply(addressStore.getProxy().extraParams, {
+                        typeofObjectId: 2,
+                        objectId: record.get(&#39;customerId&#39;)
+                    });
+                    addressStore.load();
+                }
+            }
+        }
+        else {
+
+        }
+    }
+
+    , doPostSaveOperations: function (records, operation, success) {
+        var deferred = new Ext.Deferred();
+        if (records) {
+            var addressRec = records[0];
+            var address = {
+                addressId: addressRec.get(&#39;addressId&#39;),
+                objectId: addressRec.get(&#39;customerId&#39;),
+                typeofObjectId: addressRec.get(&#39;typeofObjectId&#39;) === undefined ? 2 : addressRec.get(&#39;typeofObjectId&#39;), // typeofObjectId = 2 for customer
+                addressTypeId: addressRec.get(&#39;addressTypeId&#39;) === undefined ? 5 : addressRec.get(&#39;addressTypeId&#39;),
+                contactNumber: addressRec.get(&#39;contactNumber&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;contactNumber&#39;),
+                line1: addressRec.get(&#39;line1&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;line1&#39;),
+                line2: addressRec.get(&#39;line2&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;line2&#39;),
+                line3: addressRec.get(&#39;line3&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;line3&#39;),
+                line4: addressRec.get(&#39;line4&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;line4&#39;),
+                city: addressRec.get(&#39;city&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;city&#39;),
+                state: addressRec.get(&#39;state&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;state&#39;),
+                country: addressRec.get(&#39;country&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;country&#39;),
+                postalCode: addressRec.get(&#39;postalCode&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;postalCode&#39;),
+                fax: addressRec.get(&#39;fax&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;fax&#39;),
+                email: addressRec.get(&#39;email&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;email&#39;),
+                phone1: addressRec.get(&#39;phone1&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;phone1&#39;),
+                phone1Extension: addressRec.get(&#39;phone1Extension&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;phone1Extension&#39;),
+                phone2: addressRec.get(&#39;phone2&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;phone2&#39;),
+                phone2Extension: addressRec.get(&#39;phone2Extension&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;phone2Extension&#39;),
+                website: addressRec.get(&#39;website&#39;) === undefined ? &quot;&quot; : addressRec.get(&#39;website&#39;),
+                isPrimary: addressRec.get(&#39;isPrimary&#39;) === undefined ? true : addressRec.get(&#39;isPrimary&#39;),
+            };
+
+            var url = &quot;&quot;;
+            if (address.addressId === undefined) {
+                url = &quot;api/services/app/addressUnit/CreateAddressUnit&quot;;
+            }
+            else
+                url = &quot;api/services/app/addressUnit/UpdateAddressUnit&quot;;
+
+            Ext.Ajax.request({
+                url: abp.appPath + url,
+                jsonData: Ext.encode(address),
+                success: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        deferred.resolve(response.responseText);
+                    } else {
+                        deferred.reject(response.responseText);
+                    }
+                },
+                failure: function (response, opts) {
+                    deferred.reject(response.responseText);
+                }
+            });
+        }
+        return deferred.promise;
+    }
+});
+</pre>
+</body>
+</html>

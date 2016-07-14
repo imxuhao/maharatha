@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Chaching-model-payables-invoices-AccountsPayableModel'>/**
+</span> * DataModel to represent entity schema for Accounts Payable Header.
+ */
+Ext.define(&#39;Chaching.model.payables.invoices.AccountsPayableModel&#39;, {
+    extend: &#39;Chaching.model.base.TransactionHeaderModel&#39;,
+    config: {
+<span id='Chaching-model-payables-invoices-AccountsPayableModel-cfg-searchEntityName'>        searchEntityName: &#39;Invoices&#39;
+</span>    },
+<span id='Chaching-model-payables-invoices-AccountsPayableModel-property-fields'>    fields: [
+</span>        { name: &#39;batchId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;vendorId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;typeOfInvoiceId&#39;, type: &#39;int&#39;, defaultValue: 1, convert: nullHandler },
+        { name: &#39;pettyCashAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;paymentTermId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;typeOfCheckGroupId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;bankAccountId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;bankAccount&#39;, type: &#39;string&#39; },
+        { name: &#39;paymentDate&#39;, type: &#39;date&#39;, dateFormat: &#39;c&#39; },
+        { name: &#39;paymentNumber&#39;, type: &#39;string&#39; },
+        { name: &#39;dueDate&#39;, type: &#39;date&#39;, dateFormat: &#39;c&#39; },
+        { name: &#39;purchaseOrderReference&#39;, type: &#39;string&#39; },
+        { name: &#39;reversedByUserId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;reversalDate&#39;, type: &#39;date&#39;, dateFormat: &#39;c&#39; },
+        { name: &#39;isInvoiceHistory&#39;, type: &#39;boolean&#39; },
+        { name: &#39;isEnterable&#39;, type: &#39;boolean&#39; },
+        { name: &#39;generatedAccountingDocumentId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;uploadDocumentLogID&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;batchInfo&#39;, type: &#39;string&#39; },
+        { name: &#39;paymentSelectedByUserId&#39;, type: &#39;int&#39;, defaultValue: null, convert: nullHandler },
+        { name: &#39;batchName&#39;, type: &#39;string&#39; },
+        { name: &#39;vendorName&#39;, type: &#39;string&#39; },
+        {name:&#39;adjustInvoice&#39;,type:&#39;string&#39;}
+    ]
+});
+</pre>
+</body>
+</html>

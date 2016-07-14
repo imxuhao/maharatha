@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">
+Ext.define(&#39;Chaching.view.payables.invoices.AccountsPayableDetailGrid&#39;,{
+    extend: &#39;Chaching.view.common.grid.ChachingTransactionDetailGrid&#39;,
+    xtype: &#39;widget.payables.invoices.transactionDetails&#39;,
+
+    requires: [
+        &#39;Chaching.view.payables.invoices.AccountsPayableDetailGridController&#39;
+    ],
+
+    controller: &#39;payables-invoices-accountspayabledetailgrid&#39;,
+    modulePermissions: {
+        read: abp.auth.isGranted(&#39;Pages.Payables.Invoices&#39;),
+        create: abp.auth.isGranted(&#39;Pages.Payables.Invoices.Create&#39;),
+        edit: abp.auth.isGranted(&#39;Pages.Payables.Invoices.Edit&#39;),
+        destroy: abp.auth.isGranted(&#39;Pages.Payables.Invoices.Delete&#39;)
+    },
+    store: &#39;payables.invoices.AccountsPayableDetailsStore&#39;,
+    moduleColumns:[
+    {
+        xtype: &#39;gridcolumn&#39;,
+        text: app.localize(&#39;PO#&#39;),
+        dataIndex: &#39;referenceNumber&#39;,
+        name: &#39;referenceNumber&#39;
+    }],
+    columnOrder: [&#39;amount&#39;, &#39;jobNumber&#39;, &#39;accountNumber&#39;, &#39;subAccountNumber1&#39;, &#39;typeOf1099T4&#39;, &#39;itemMemo&#39;, &#39;taxRebateNumber&#39;, &#39;referenceNumber&#39;, &#39;isAsset&#39;]
+});
+</pre>
+</body>
+</html>

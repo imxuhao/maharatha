@@ -15,25 +15,94 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.roles.RolesTreeStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-roles-RolesTreeStore'>/**
+</span> * DataStore to perform CRUD operation on Roles Permissions.
+ */
+Ext.define(&#39;Chaching.store.roles.RolesTreeStore&#39;, {
     extend: &#39;Chaching.store.base.BaseTreeStore&#39;,
-    model: &#39;Chaching.model.roles.RolePermissionsModel&#39;,
-    //proxy: {
-    //    type: &#39;chachingProxy&#39;,
-    //    actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
-    //    api: {
-    //       // create: abp.appPath + &#39;api/services/app/role/CreateOrUpdateRole&#39;,
-    //        read: abp.appPath + &#39;api/services/app/role/GetRoleForEdit&#39;,
-    //       // update: abp.appPath + &#39;api/services/app/role/CreateOrUpdateRole&#39;,
-    //       // destroy: abp.appPath + &#39;api/services/app/role/DeleteRole&#39;
-    //    }
-    //},
-    //listeners: {
-    //    load: function (records, operation, success) {
+<span id='Chaching-store-roles-RolesTreeStore-property-model'>    model: &#39;Chaching.model.roles.RolePermissionsModel&#39;,
+</span><span id='Chaching-store-roles-RolesTreeStore-property-clearOnLoad'>   // autoLoad: true,
+</span>    clearOnLoad:false,
+<span id='Chaching-store-roles-RolesTreeStore-property-remoteFilter'>    remoteFilter: false,
+</span><span id='Chaching-store-roles-RolesTreeStore-property-remoteSort'>    remoteSort: false,
+</span><span id='Chaching-store-roles-RolesTreeStore-property-statefulFilters'>    statefulFilters:true,
+</span><span id='Chaching-store-roles-RolesTreeStore-property-root'>    root: {
+</span>        expanded: true
+    },
+<span id='Chaching-store-roles-RolesTreeStore-property-proxy'>    proxy: {
+</span>      
+       type: &#39;chachingProxy&#39;,
+        actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
+        api: {
+            create: abp.appPath + &#39;api/services/app/role/CreateOrUpdateRole&#39;,
+            read: abp.appPath + &#39;api/services/app/role/GetRoleForEdit&#39;,
+            update: abp.appPath + &#39;api/services/app/role/CreateOrUpdateRole&#39;,
+            destroy: abp.appPath + &#39;api/services/app/role/DeleteRole&#39;
+        },
+        reader: {
+            type: &#39;json&#39;,
+            rootProperty : &#39;result.permissions&#39;
+        }
+        
+    },
+<span id='Chaching-store-roles-RolesTreeStore-property-listeners'>    listeners: {
+</span>        load: function (permissionStore, records, success) {
+            var me = this;
+            var pages = Ext.create(me.getModel().$className,{
+                text: &#39;Pages&#39;,
+                iconCls: null,
+                expanded: true,
+                name: null,
+                url: null,
+                checked: false,
+                displayName: &#39;Pages&#39;,
+                name : &#39;Pages&#39;,
+                children: [],
+                leaf: false
+            });
 
-    //    }
-    //}
-   // idPropertyField: &#39;id&#39;//important to set for add/update of records
+            var length = records.length,
+                parents = [];
+            for (var i = 0; i &lt; length; i++) {
+                var item = records[i];
+                if (item.get(&#39;name&#39;) === &quot;Pages&quot; &amp;&amp; item.get(&#39;parentId&#39;) === &quot;root&quot;) {
+                    pages.set(&#39;checked&#39;, item.get(&#39;isPermissionGranted&#39;) ? true : false);
+                }
+                else if (item.get(&#39;parentName&#39;) === &quot;Pages&quot;) {
+                    parents.push(item);
+                }
+            }
+            var root = me.getRoot();
+            root.removeAll();
+            for (var j = 0; j &lt; parents.length; j++) {
+                var parent = parents[j];
+                pages.appendChild(me.buildChilds(parent, records));
+            }
+            if (!root.data.children) root.data.children = [];
+            root.appendChild(pages);
+          
+        }
+    },
+<span id='Chaching-store-roles-RolesTreeStore-method-buildChilds'>    buildChilds: function (parent, records) {
+</span>        var me = this;
+        parent.set(&#39;checked&#39;, parent.get(&#39;isPermissionGranted&#39;) ? true : false);
+        var parentName = parent.get(&#39;name&#39;);
+        if (!parent.data.children) parent.data.children = [];
+        for (var i = 0; i &lt; records.length; i++) {
+            var record = records[i];
+            if (record.get(&#39;parentName&#39;) === parentName) {
+                record.set(&#39;checked&#39;, record.get(&#39;isPermissionGranted&#39;) ? true : false);
+                parent.appendChild(record);
+                record.set(&#39;loaded&#39;, true);
+                record.set(&#39;expanded&#39;, true);
+                me.buildChilds(record, records);
+               
+            }
+        }
+        parent.set(&#39;loaded&#39;, true);
+        parent.set(&#39;expanded&#39;, true);
+        return parent;
+    }
 });</pre>
 </body>
 </html>

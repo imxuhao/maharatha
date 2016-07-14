@@ -15,84 +15,136 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">
+  <pre class="prettyprint lang-js"><span id='Chaching-view-common-grid-ChachingGridPanel'>/**
+</span> * Grids are an excellent way of showing large amounts of tabular data on the client side.
+ * Essentially a supercharged `&lt;table&gt;`, GridPanel makes it easy to fetch, sort and filter
+ * large amounts of data.
+ *
+ * Grids are composed of two main pieces - a {@link Ext.data.Store Store} full of data and
+ * a set of columns to render.
+ *
+ * ## Basic GridPanel
+ *
+ *     @example
+ *     Ext.create(&#39;Ext.data.Store&#39;, {
+ *         storeId: &#39;simpsonsStore&#39;,
+ *         fields:[ &#39;name&#39;, &#39;email&#39;, &#39;phone&#39;],
+ *         data: [
+ *             { name: &#39;Lisa&#39;, email: &#39;lisa@simpsons.com&#39;, phone: &#39;555-111-1224&#39; },
+ *             { name: &#39;Bart&#39;, email: &#39;bart@simpsons.com&#39;, phone: &#39;555-222-1234&#39; },
+ *             { name: &#39;Homer&#39;, email: &#39;homer@simpsons.com&#39;, phone: &#39;555-222-1244&#39; },
+ *             { name: &#39;Marge&#39;, email: &#39;marge@simpsons.com&#39;, phone: &#39;555-222-1254&#39; }
+ *         ]
+ *     });
+ *
+ *     Ext.create(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
+ *         title: &#39;Simpsons&#39;,
+ *         store: Ext.data.StoreManager.lookup(&#39;simpsonsStore&#39;),
+ *         columns: [
+ *             { text: &#39;Name&#39;, dataIndex: &#39;name&#39; },
+ *             { text: &#39;Email&#39;, dataIndex: &#39;email&#39;, flex: 1 },
+ *             { text: &#39;Phone&#39;, dataIndex: &#39;phone&#39; }
+ *         ],
+ *         height: 200,
+ *         width: 400,
+ *         renderTo: Ext.getBody()
+ *     });
+ *
+ * The code above produces a simple grid with three columns. We specified a Store which
+ * will load JSON data inline.
+ * In most apps we would be placing the grid inside another container and wouldn&#39;t need to
+ * use the {@link #height}, {@link #width} and {@link #renderTo} configurations but they
+ * are included here to make it easy to get up and running.
+ *
+ * The grid we created above will contain a header bar with a title (&#39;Simpsons&#39;), a row of
+ * column headers directly underneath and finally the grid rows under the headers.
+ *
+ * **Height config with bufferedRenderer: true**
+ *
+ * The {@link #height} config must be set when creating a grid using
+ * {@link #bufferedRenderer bufferedRenderer}: true _and_ the grid&#39;s height is not managed
+ * by an owning container layout.  In Ext JS 5.x bufferedRendering is true by default.
+ *
+ */
 Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
     extend: &#39;Ext.grid.Panel&#39;,
 
     requires: [
         &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
         &#39;Chaching.view.common.grid.ChachingGridPanelModel&#39;,
-        &#39;Chaching.components.plugins.RowEditing&#39;
+        &#39;Chaching.components.plugins.RowEditing&#39;,
+        &#39;Chaching.components.plugins.CellEditing&#39;
     ],
 
-    controller: &#39;common-grid-chachinggridpanel&#39;,
-    viewModel: {
-        type: &#39;common-grid-chachinggridpanel&#39;
+<span id='Chaching-view-common-grid-ChachingGridPanel-property-controller'>    controller: &#39;common-grid-chachinggridpanel&#39;,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-property-viewModel'>    viewModel: {
+</span>        type: &#39;common-grid-chachinggridpanel&#39;
     },
-<span id='global-cfg-requireMultiSearch'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-requireMultiSearch'>    /**
 </span>    * @cfg {boolean} requireMultiSearch
     */
     requireMultiSearch: true,
-<span id='global-cfg-requireMultisort'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-requireMultisort'>    /**
 </span>    * @cfg {boolean} requireMultisort
     */
     requireMultisort: true,
-<span id='global-cfg-requireGrouping'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-requireGrouping'>    /**
 </span>    * @cfg {boolean} requireGrouping
     */
-    requireGrouping:true,
-<span id='global-cfg-headerButtonsConfig'>    /**
+    requireGrouping: true,
+<span id='Chaching-view-common-grid-ChachingGridPanel-property-groupingConfig'>    groupingConfig:null,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-headerButtonsConfig'>    /**
 </span>    * @cfg {object} headerButtonsConfig
     */
     headerButtonsConfig: null,
-<span id='global-cfg-requireExport'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-requireExport'>    /**
 </span>    * @cfg {boolean} requireExport
     */
     requireExport: false,
-<span id='global-cfg-selModelConfig'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-selModelConfig'>    /**
 </span>    * @cfg {object} selModelConfig
     */
     selModelConfig: null,
-<span id='global-cfg-isEditable'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-isEditable'>    /**
 </span>    * @cfg {boolean} isEditable
     */
     isEditable: false,
-<span id='global-cfg-editingMode'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-editingMode'>    /**
 </span>    * @cfg {string} editingMode
     * values are cell and row.
     */
     editingMode: null,
-<span id='global-cfg-createNewMode'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-createNewMode'>    /**
 </span>    * @cfg {string} createNewMode
     * values are inline(default based on editing mode), popup and tab
     */
     createNewMode:&#39;inline&#39;,
-    columnLines: true,
-    padding: 5,
-    frame: false,
-    layout: {
-        type: &#39;fit&#39;
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-columnLines'>    columnLines: true,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-padding'>    padding: 5,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-frame'>    frame: false,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-layout'>    layout: {
+</span>        type: &#39;fit&#39;
     },
-<span id='global-cfg-showPagingToolbar'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-showPagingToolbar'>    /**
 </span>    * @cfg {boolean} showPagingToolbar
     * show paging toolbar for grid. Defaults to &#39;true&#39;
     */
     showPagingToolbar: true,
-    ignoreCellDblClick: false,
-    cls: &#39;chaching-grid&#39;,
-<span id='global-cfg-actionColumnMenuItemsConfig'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-property-ignoreCellDblClick'>    ignoreCellDblClick: false,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-cls'>    cls: &#39;chaching-grid&#39;,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-actionColumnMenuItemsConfig'>    /**
 </span>    * @cfg {object[]} actionColumnMenuItemsConfig
     */
     actionColumnMenuItemsConfig: null,//grid related action columns menu items
-<span id='global-cfg-requireActionColumn'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-requireActionColumn'>    /**
 </span>    * @cfg {boolean} requireActionColumn
     */
     requireActionColumn: true,
-    name: &#39;&#39;,
-    enableLocking:false,
-    syncRowHeight: false,
-    editingModel: null,
-<span id='global-cfg-editWndTitleConfig'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-property-name'>    name: &#39;&#39;,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-enableLocking'>    enableLocking:false,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-syncRowHeight'>    syncRowHeight: false,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-property-editingModel'>    editingModel: null,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-editWndTitleConfig'>    /**
 </span>    * @cfg {object} editWndTitleConfig
     * when editing record title and iconCls for window/tab
     * ##Usage { 
@@ -101,7 +153,7 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
     * }
     */
     editWndTitleConfig: null,
-<span id='global-cfg-createWndTitleConfig'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-createWndTitleConfig'>    /**
 </span>    * @cfg {object} createWndTitleConfig
     * when creating new record title and iconCls for window/tab
     * ##Usage { 
@@ -110,17 +162,36 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
     * }
     */
     createWndTitleConfig: null,
-<span id='global-cfg-modulePermissions'>    /**
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-viewWndTitleConfig'>    /**
+</span>   * @cfg {object} viewWndTitleConfig
+   * when record is opnened in view mode title and iconCls for tab/window
+   * ##Usage { 
+   * title:&#39;View&#39;
+   * iconCls:&#39;fa fa-edit-o&#39;
+   * }
+   */
+    viewWndTitleConfig:null,
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-modulePermissions'>    /**
 </span>    * @cfg {object} modulePermissions
     * Override this config in child grid if has additional permissions
     */
     modulePermissions: undefined,
-    manageViewSetting: true,
-    activeUserViewId: null,
-    isSubMenuItemTab: false,
-    hideClearFilter:true,
-    initComponent: function () {
-        var me = this,
+<span id='Chaching-view-common-grid-ChachingGridPanel-property-manageViewSetting'>    manageViewSetting: true,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-property-activeUserViewId'>    activeUserViewId: null,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-property-isSubMenuItemTab'>    isSubMenuItemTab: false,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-property-hideClearFilter'>    hideClearFilter: true,
+</span><span id='Chaching-view-common-grid-ChachingGridPanel-cfg-requireSummary'>    /**
+</span>   * @cfg {boolean} requireSummary
+   * Set to true if summary row is required at bottom
+   */
+    requireSummary: false,
+<span id='Chaching-view-common-grid-ChachingGridPanel-cfg-isInViewMode'>    /**
+</span>  * @cfg {boolean} isInViewMode
+  * Set to true if need in view mode.
+  */
+    isInViewMode:false,
+<span id='Chaching-view-common-grid-ChachingGridPanel-method-initComponent'>    initComponent: function () {
+</span>        var me = this,
             controller = me.getController(),
             headerTbButtons = [],
             plugins = [],
@@ -131,7 +202,7 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
         if (typeof(gridStore)===&quot;string&quot;) {
             me.store = Ext.create(&#39;Chaching.store.&#39;+gridStore);
         }
-       
+
         if (!me.modulePermissions) {
             me.modulePermissions = {
                 read: abp.auth.isGranted(&#39;Pages.&#39; + me.name),
@@ -193,6 +264,7 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
                 xtype: &#39;toolbar&#39;,
                 ui: &#39;plain&#39;,
                 dock: &#39;top&#39;,
+                isActionToolBar:true,
                 layout: {
                     type: &#39;hbox&#39;,
                     pack: &#39;left&#39;
@@ -218,12 +290,26 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
         }
         //add grouping if required
         if (me.requireGrouping) {
-            var groupingFeature = {
-                ftype: &#39;grouping&#39;,
-                hideGroupedHeader: true,
-                startCollapsed: true
-            };
+            var groupingFeature = undefined;
+            if (me.groupingConfig) {
+                groupingFeature = me.groupingConfig;              
+                
+            } else {
+                 groupingFeature = {
+                    ftype: &#39;grouping&#39;,
+                    hideGroupedHeader: true,
+                    startCollapsed: false
+                };
+            }
             features.push(groupingFeature);
+        }
+        //add summary feature
+        if (me.requireSummary) {
+            var summaryFeature = {
+                ftype: &#39;summary&#39;,
+                dock: &#39;bottom&#39;
+            };
+            features.push(summaryFeature);
         }
         if (me.requireMultiSearch) {
             var mutisearch = {
@@ -320,8 +406,8 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
         }
         me.callParent(arguments);
     },
-    applyGridViewSetting:function(defaultSetting,apply,settingsToApply) {
-        var me = this,
+<span id='Chaching-view-common-grid-ChachingGridPanel-method-applyGridViewSetting'>    applyGridViewSetting:function(defaultSetting,apply,settingsToApply) {
+</span>        var me = this,
             controller = me.getController();
         var actCol = me.getActionMenuColumn();
         ///TODO change according to userViewSetting if any else continue with default columns
@@ -372,8 +458,8 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
         }
         return columns;
     },
-    getActionMenuColumn: function () {
-        var me = this, controller = me.getController();
+<span id='Chaching-view-common-grid-ChachingGridPanel-method-getActionMenuColumn'>    getActionMenuColumn: function () {
+</span>        var me = this, controller = me.getController();
         var menuItems = [];
         var defaultMenuItems = me.getDefaultActionColumnMenuItems();
         var userMenuItems = me.actionColumnMenuItemsConfig;
@@ -426,12 +512,24 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
                             items: menuItems
                         }),
                         listeners: {
-                            menushow: function (btn) {
+                            menushow: function (btn,menu) {
                                 btn.menu.widgetRecord = btn.widgetRec;
                                 btn.menu.widgetColumn = btn.widgetCol;
                             }
                         }
                     });
+                    if (button.widgetCol) {
+                        var grid = button.widgetCol.up(&#39;gridpanel&#39;);
+                        if (grid) {
+                            if (grid.getController()) {
+                                button.on(&#39;click&#39;, grid.getController().doRowSpecificEditDelete, button, grid);
+                            }
+                            ////old
+                            //if (grid) {
+                            //    button.on(&#39;click&#39;, grid.doRowSpecificEditDelete, button, grid);
+                            //}
+                        }
+                    }
                     if (Ext.get(id)) {
                         button.render(Ext.get(id));
                     }
@@ -443,8 +541,10 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
 
         return actionCol;
     },
-    applySettings: function (definedColumns, usersDefaultSetting, outValue) {
-        var me = this,
+<span id='Chaching-view-common-grid-ChachingGridPanel-method-doRowSpecificEditDelete'>    doRowSpecificEditDelete:function(button,grid) {
+</span>    },
+<span id='Chaching-view-common-grid-ChachingGridPanel-method-applySettings'>    applySettings: function (definedColumns, usersDefaultSetting, outValue) {
+</span>        var me = this,
             myStore = me.getStore();
         var defaultSettingColumns = usersDefaultSetting.column;
         //loop setting object to get in order
@@ -471,8 +571,8 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
         }
         return outValue;
     },
-    getDefaultSettingForMe: function (usersDefaultGridViewSettings) {
-        var me = this,
+<span id='Chaching-view-common-grid-ChachingGridPanel-method-getDefaultSettingForMe'>    getDefaultSettingForMe: function (usersDefaultGridViewSettings) {
+</span>        var me = this,
             returnVal = undefined,
             gridId = me.gridId;
         for (var i = 0; i &lt; usersDefaultGridViewSettings.length; i++) {
@@ -485,20 +585,35 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
         }
         return returnVal;
     },
-    getDefaultActionColumnMenuItems: function () {
-        var me = this, controller = me.getController();
+<span id='Chaching-view-common-grid-ChachingGridPanel-method-getDefaultActionColumnMenuItems'>    getDefaultActionColumnMenuItems: function () {
+</span>        var me = this, controller = me.getController();
         var defaultMenuItems = [];
         //check for permission from abp
+        if (me.modulePermissions.read &amp;&amp; (me.createNewMode === &quot;popup&quot; || me.createNewMode === &quot;tab&quot;)) {
+            var viewMenuItem = {
+                text: app.localize(&#39;View&#39;),
+                itemId : &#39;viewActionMenu&#39;,
+                iconCls: &#39;fa fa-th&#39;,
+                eventListenerName: &#39;editActionClicked&#39;,
+                listeners: {
+                    click: function (menu, item, e, eOpts) {
+                        return controller.editActionClicked(menu, item, e, eOpts, true);
+                    }
+                }
+            };
+            defaultMenuItems.push(viewMenuItem);
+        }
         if (me.modulePermissions.edit) {
             //full editing is required only when create mode is popup/tab
             if (me.createNewMode === &quot;popup&quot; || me.createNewMode === &quot;tab&quot;) {
                 var editMenuItem = {
                     text: app.localize(&#39;Edit&#39;),
+                    itemId: &#39;editActionMenu&#39;,
                     iconCls: &#39;fa fa-pencil&#39;,
                     eventListenerName: &#39;editActionClicked&#39;,
                     listeners: {
                         click: function(menu, item, e, eOpts) {
-                            return controller.editActionClicked(menu, item, e, eOpts);
+                            return controller.editActionClicked(menu, item, e, eOpts,false);
                         }
                     }
                 };
@@ -508,6 +623,7 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
             if (me.isEditable) {
                 var quickEditMenuItem= {
                     text: app.localize(&#39;QuickEdit&#39;), iconCls: &#39;fa fa-pencil-square-o &#39;,
+                    itemId: &#39;quickEditActionMenu&#39;,
                     eventListenerName: &#39;quickEditActionClicked&#39;,
                     listeners: {
                         click: function (menu, item, e, eOpts) {
@@ -521,6 +637,7 @@ Ext.define(&#39;Chaching.view.common.grid.ChachingGridPanel&#39;, {
         if (me.modulePermissions.destroy) {
             var deleteMenuItem = {
                 text: app.localize(&#39;Delete&#39;), iconCls: &#39;fa fa-recycle&#39;,
+                itemId: &#39;deleteActionMenu&#39;,
                 eventListenerName: &#39;deleteActionClicked&#39;,
                 listeners: {
                     click: function (menu, item, e, eOpts) {

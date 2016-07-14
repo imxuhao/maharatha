@@ -18,6 +18,72 @@
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.users.UsersGridController&#39;, {
     extend: &#39;Chaching.view.common.grid.ChachingGridPanelController&#39;,
     alias: &#39;controller.users-usersgrid&#39;,
+    doAfterCreateAction: function (createMode, formView, isEdit, record) {
+        var me = this,
+         form = formView.down(&#39;form&#39;).getForm();
+        //get company list tab
+        var companyListTab = formView.down(&#39;*[itemId=companyListTab]&#39;);
+        var rolesGrid = formView.down(&#39;gridpanel[itemId=rolesListGridItemId]&#39;);
+        if (formView &amp;&amp; isEdit) {
+            form.findField(&#39;userName&#39;).setReadOnly(true);
+            //disable tabs
+            if (companyListTab) {
+                companyListTab.setDisabled(true);
+            }
+            Ext.Ajax.request({
+                url: abp.appPath + &#39;api/services/app/user/GetUserForEdit&#39;,
+                jsonData: Ext.encode({ id: record.get(&#39;id&#39;) }),
+                success: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        if (isEdit &amp;&amp; res.result != undefined) {
+                            var roles = res.result.roles;
+                            Ext.apply(record.data, res.result.user);
+                            if (roles &amp;&amp; roles.length &gt; 0 ) {
+                                Ext.each(roles, function (role) {
+                                    var roleModel = Ext.create(&#39;Chaching.model.roles.RolesModel&#39;);
+                                    roleModel.set(&#39;id&#39;, role.roleId);
+                                    roleModel.set(&#39;name&#39;, role.roleName);
+                                    roleModel.set(&#39;displayName&#39;, role.roleDisplayName);
+                                    roleModel.commit();
+                                    if (role.isAssigned) {
+                                        rolesGrid.getStore().add(roleModel);
+                                        rolesGrid.getSelectionModel().select(roleModel,true);
+                                    } else {
+                                        rolesGrid.getStore().add(roleModel);
+                                    }
+                                });
+                            }
+                        }
+                    } else {
+                        abp.message.error(res.error.message, &#39;Error&#39;);
+                    }
+                },
+                failure: function (response, opts) {
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+
+        } else {
+            //load roles list
+            var rolesStore = rolesGrid.getStore();
+            rolesStore.load();
+            //load company list
+            var companyListGrid = formView.down(&#39;gridpanel[itemId=companyListGridItemId]&#39;);
+            var companyListStore = companyListGrid.getStore();
+            var proxy = companyListStore.getProxy();
+            proxy.url = abp.appPath + &#39;api/services/app/user/GetTenantListofOrganization&#39;,
+            companyListStore.getProxy().setExtraParams({ id: abp.session.tenantId });
+            companyListStore.load();
+            //enable tabs
+            if (companyListTab) {
+                companyListTab.setDisabled(false);
+            }
+        }
+       
+    },
     onEditComplete: function (editor, e) {
         var me = this,
             view = this.getView();
@@ -36,16 +102,16 @@
                 });
 
                 var input = new Object();
-                var User = {
-                    Id: e.record.data.id,
-                    Name: e.record.data.name,
-                    Surname: e.record.data.surname,
-                    UserName: e.record.data.userName,
-                    EmailAddress: e.record.data.emailAddress,
-                    IsActive: e.record.data.isActive
+                var user = {
+                    id: e.record.data.id,
+                    name: e.record.data.name,
+                    surname: e.record.data.surname,
+                    userName: e.record.data.userName,
+                    emailAddress: e.record.data.emailAddress,
+                    isActive: e.record.data.isActive
                 };
-                input.User = User;
-                input.AssignedRoleNames = AssignedRoleNames;
+                input.user = user;
+                input.assignedRoleNames = AssignedRoleNames;
                 //input.sendActivationEmail = e.record.data.isEmailConfirmed;
 
                 Ext.Ajax.request({
@@ -56,6 +122,7 @@
                         &#39;Accept&#39;: &#39;application/json&#39;
                     },
                     success: function (response) {
+                        gridStore.reload();
                     },
                     failure: function (response) {
                     }

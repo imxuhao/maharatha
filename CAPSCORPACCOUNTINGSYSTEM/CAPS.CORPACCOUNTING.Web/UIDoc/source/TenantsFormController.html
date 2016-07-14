@@ -17,7 +17,105 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.tenants.TenantsFormController&#39;, {
     extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
-    alias: &#39;controller.tenants-tenantsform&#39;
+    alias: &#39;controller.tenants-tenantsform&#39;,
+    onOrganizationSelect: function (combo, record, eOpts) {
+        var me = this,
+            view = me.getView();
+        var tenantListCombo = view.down(&#39;combobox[itemId=tenantItemId]&#39;);
+        var tenantStore = tenantListCombo.getStore();
+        tenantStore.getProxy().setExtraParams({ id: combo.getValue() });
+        tenantStore.load();
+        var tenancyNameField = view.down(&#39;textfield[itemId=tenancyName]&#39;);
+        if (tenancyNameField) {
+            me.enableDisableCopyTenantsTab(tenancyNameField);
+        }
+    },
+    onTenancyNameEnter: function (cmp, event, eOpts) {
+        var me = this;
+        var task = new Ext.util.DelayedTask(function () {
+            me.enableDisableCopyTenantsTab(cmp);
+        });
+        task.delay(1000);
+    },
+    enableDisableCopyTenantsTab : function(cmp) {
+        var me = this,
+         view = me.getView();
+        var tenantStore = view.down(&#39;combobox[itemId=tenantItemId]&#39;).getStore();
+        var tenantRecord = tenantStore.findRecord(&#39;tenancyName&#39;, cmp.getValue());
+        if (tenantRecord == undefined &amp;&amp; tenantStore.getCount() &gt; 0) {
+            view.down(&#39;gridpanel[itemId=moduleListGridItemId]&#39;).setDisabled(false);
+        } else {
+            view.down(&#39;gridpanel[itemId=moduleListGridItemId]&#39;).setDisabled(true);
+        }
+    },
+    onTenantSelect: function (selModel, selected, eOpts) {
+        var me = this,
+           view = me.getView();
+        var tenantListCombo = view.down(&#39;combobox[itemId=tenantItemId]&#39;);
+        if (tenantListCombo.getValue() == undefined) {
+            abp.message.info(app.localize(&#39;SelectTenantToCopyModules&#39;));
+            return;
+        } else {
+            var modules = [
+                   { name: &#39;Vendors&#39; },
+                   { name: &#39;Users&#39; },
+                   { name: &#39;Customers&#39; },
+                   { name: &#39;Employees&#39; },
+                   { name: &#39;Roles&#39; },
+                   { name: &#39;ChartofAccounts&#39; },
+                   { name: &#39;ProjectChartofAccounts&#39; }
+            ];
+            var moduleListGridStore = view.down(&#39;gridpanel[itemId=moduleListGridItemId]&#39;).getStore();
+            moduleListGridStore.loadData(modules);
+            
+        }
+    },
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        var me = this,
+             view = me.getView();
+
+        var organizationCombo = view.down(&#39;combobox[itemId=organizationId]&#39;);
+        if (organizationCombo &amp;&amp; organizationCombo.getValue() == null) {
+            abp.message.error(app.localize(&#39;SelectOrganization&#39;));
+            return;
+        }
+        if (organizationCombo &amp;&amp; organizationCombo.getValue() == null) {
+            abp.message.confirm(app.localize(&#39;TenantCreationWarningMessage&#39;), app.localize(&#39;Warning&#39;), function (btn) {
+                if (btn) {
+                    record = Ext.create(&#39;Chaching.model.tenants.TenantsModel&#39;);
+                    Ext.apply(record.data, values);
+                    var selectedRecords = view.down(&#39;gridpanel[itemId=moduleListGridItemId]&#39;).getSelection();
+                    var tenantListCombo = view.down(&#39;combobox[itemId=tenantItemId]&#39;);
+                    record.set(&#39;organizationUnitId&#39;, values.organizationUnitId);
+                    record.set(&#39;sourceTenantId&#39;, tenantListCombo.getValue());
+                    if (selectedRecords &amp;&amp; selectedRecords.length &gt; 0) {
+                        var moduleListArray = [];
+                        Ext.each(selectedRecords, function (rec) {
+                            moduleListArray.push(rec.get(&#39;name&#39;));
+                        });
+                        record.data.moduleList = moduleListArray;
+                    }
+                } else {
+                    return false;
+                }
+            });
+        }
+
+        //record = Ext.create(&#39;Chaching.model.tenants.TenantsModel&#39;);
+        //Ext.apply(record.data, values);
+        //var selectedRecords = view.down(&#39;gridpanel[itemId=moduleListGridItemId]&#39;).getSelection();
+        //var tenantListCombo = view.down(&#39;combobox[itemId=tenantItemId]&#39;);
+        //record.set(&#39;organizationUnitId&#39;, values.organizationUnitId);
+        //record.set(&#39;sourceTenantId&#39;, tenantListCombo.getValue());
+        //if (selectedRecords &amp;&amp; selectedRecords.length &gt; 0) {
+        //    var moduleListArray = [];
+        //    Ext.each(selectedRecords, function (rec) {
+        //        moduleListArray.push(rec.get(&#39;name&#39;));
+        //    });
+        //    record.data.moduleList = moduleListArray;
+        //}
+        return record;
+    }
     
 });
 </pre>

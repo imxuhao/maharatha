@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.address.AddressStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-address-AddressStore'>/**
+</span> * DataStore to perform CRUD operation on address.
+ */
+Ext.define(&#39;Chaching.store.address.AddressStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,
-    model: &#39;Chaching.model.address.AddressModel&#39;,
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-address-AddressStore-property-model'>    model: &#39;Chaching.model.address.AddressModel&#39;,
+</span><span id='Chaching-store-address-AddressStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         extParams:{
             typeofObjectId: 0,
             objectId:0
@@ -30,8 +33,8 @@
         destroy: abp.appPath + &#39;api/services/app/addressUnit/DeleteAddressUnit&#39;
         }
     },
-    idPropertyField: &#39;addressId&#39;
-   
+<span id='Chaching-store-address-AddressStore-property-idPropertyField'>    idPropertyField: &#39;addressId&#39;
+</span>   
 });</pre>
 </body>
 </html>

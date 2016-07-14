@@ -53,11 +53,21 @@
     doAfterCreateAction: function (createMode, formView, isEdit) {        
         var viewModel = formView.getViewModel();
         var form = formView.getForm();
-        if (isEdit) {      
-            var rollupDivision = viewModel.getStore(&#39;rollupDivisionList&#39;);
-            rollupDivision.load();
-            var rollupAccount = viewModel.getStore(&#39;genericRollupAccountList&#39;);
-            rollupAccount.load();
+        var rollupDivisionCombo = form.findField(&#39;rollupDivisionId&#39;);
+        var rollupDivisionStore = rollupDivisionCombo.getStore();
+        rollupDivisionStore.load();
+
+        var rollupAccountCombo = form.findField(&#39;rollupAccountId&#39;);
+        var rollupAccountStore = rollupAccountCombo.getStore();
+        rollupAccountStore.load();
+        if (isEdit) {
+            //var rollupDivisionCombo = form.findField(&#39;rollupDivisionId&#39;);
+            //var rollupDivisionStore = rollupDivisionCombo.getStore();
+            //rollupDivisionStore.load();
+
+            //var rollupAccountCombo = form.findField(&#39;rollupAccountId&#39;);
+            //var rollupAccountStore = rollupAccountCombo.getStore();
+            //rollupAccountStore.load();
         }
         
     }

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.view.administration.organization.CompanyFormController&#39;, {
+    extend: &#39;Chaching.view.common.form.ChachingFormPanelController&#39;,
+    alias: &#39;controller.administration-organization-companyform&#39;,
+
+    onPostalCodeEnter: function (field,e) {
+        var clientKey = &quot;js-9qZHzu2Flc59Eq5rx10JdKERovBlJp3TQ3ApyC4TOa3tA8U7aVRnFwf41RpLgtE7&quot;;
+        var url = &quot;https://www.zipcodeapi.com/rest/&quot; + clientKey + &quot;/info.json/&quot; + field.getValue() + &quot;/radians&quot;;
+        if (13 == e.getKey()) {
+            var store = Ext.create(&#39;Ext.data.Store&#39;, {
+                fields: [{ name: &#39;id&#39; }],
+                autoLoad: true,
+                proxy: {
+                    type: &#39;jsonp&#39;,
+                    url: url,//&#39;http://maps.googleapis.com/maps/api/geocode/json?address=37779&#39;,
+                    reader: {
+                        type: &#39;json&#39;,
+                        rootProperty: &#39;results&#39;
+                    }
+                },
+                listeners: {
+                    &#39;load&#39;: function (records, operation, success) {
+                       
+                    }
+                }
+            });
+        }
+    },
+
+    onFileChange: function (file, e, value) {
+        var me = this;
+        view = me.getView();
+        if (file.value == &quot;&quot;) {
+            return;
+        }
+        var newvalue = file.value.replace(/^c:\\fakepath\\/i, &#39;&#39;);
+        file.setRawValue(newvalue);
+        if (file.value &amp;&amp; !/^.*\.(Png|gif|jpg|jpeg|jfif|tiff|bmp)$/i.test(file.value)) {
+            abp.message.error(app.localize(&#39;ProfilePicture_Warn_FileType&#39;).initCap(), &#39;Error&#39;);
+            return;
+        };
+        if (file.fileInputEl &amp;&amp; file.fileInputEl.dom &amp;&amp; file.fileInputEl.dom.files &amp;&amp; file.fileInputEl.dom.files[0].size &gt; 2097152) {
+            abp.message.error(app.localize(&#39;ProfilePicture_Warn_SizeLimit&#39;).initCap(), &#39;Error&#39;);
+            return;
+        }
+        view.submit({
+            url: abp.appPath + &#39;OrganizationUnits/UpdateOrganizationPicture&#39;,
+            success: function (form, response) {
+                if (response.result) {
+                    form.findField(&#39;companyLogo&#39;).value = &quot;gjhsagjd&quot;
+                    var data = response.result.result;
+                    if (response.success) {
+                        view.filePath = data.tempFilePath;
+                        view.dataobject = data;
+                        abp.notify.success(app.localize(&#39;UploadSuccess&#39;).initCap(), &#39;Success&#39;);
+                    }
+                }
+            },
+            failure: function (form, action) {
+                abp.notify.success(app.localize(&#39;Failed&#39;).initCap(), &#39;Error&#39;);
+            }
+        });
+
+    },
+    doPreSaveOperation: function (record, values, idPropertyField) {
+        var me = this,
+        view = me.getView(),
+        form = view.getForm();
+        record = Ext.create(&#39;Chaching.model.administration.organization.CompanyModel&#39;);
+        record.set(&#39;id&#39;, form.findField(&#39;id&#39;).getValue());
+        record.set(&#39;displayName&#39;, form.findField(&#39;displayName&#39;).getValue());
+        record.set(&#39;federalTaxId&#39;, form.findField(&#39;federalTaxId&#39;).getValue());
+        record.set(&#39;transmitterContactName&#39;, form.findField(&#39;transmitterContactName&#39;).getValue());
+        record.set(&#39;transmitterEmailAddress&#39;, form.findField(&#39;transmitterEmailAddress&#39;).getValue());
+        record.set(&#39;transmitterCode&#39;, form.findField(&#39;transmitterCode&#39;).getValue());
+        record.set(&#39;transmitterControlCode&#39;, form.findField(&#39;transmitterControlCode&#39;).getValue());
+       
+        var address = {
+            addressId: form.findField(&#39;addressId&#39;).getValue(),//rec.get(&#39;addressId&#39;),
+            organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
+            objectId: values.id,
+            typeofObjectId: 7, // for organization
+            addressTypeId: 5, // for organization
+            contactNumber: &#39;&#39;,
+            line1: form.findField(&#39;line1&#39;).getValue(),
+            line2: form.findField(&#39;line2&#39;).getValue(),
+            line3: form.findField(&#39;line3&#39;).getValue(),
+            line4: &#39;&#39;,
+            city: form.findField(&#39;city&#39;).getValue(),
+            state: form.findField(&#39;state&#39;).getValue(),
+            country: form.findField(&#39;state&#39;).getValue(),
+            postalCode: form.findField(&#39;postalCode&#39;).getValue(),
+            fax: &#39;&#39;,
+            email: form.findField(&#39;email&#39;).getValue(),
+            phone1: form.findField(&#39;phone1&#39;).getValue(),
+            phone1Extension: &#39;&#39;,
+            phone2: &#39;&#39;,
+            phone2Extension: &#39;&#39;,
+            website: &#39;&#39;,
+            isPrimary: true
+        }
+        record.data.address = address;
+        record.data.logo = view.dataobject == null ? null : view.dataobject;
+        return record;
+    },
+    onSaveCompanyPreferences: function () {
+        var me = this, view = me.getView(), form = view.getForm(), parentGrid = view.parentGrid;
+        var organizationSettings = &quot;&quot;;
+        var preferernceView = Ext.ComponentQuery.query(&#39;#companyPreferencesTab&#39;, view);
+        if (preferernceView[0] != undefined) {
+            organizationSettings = preferernceView[0].getValues();
+            organizationSettings.setDefaultAPTerms = organizationSettings.setDefaultAPTerms == &quot;&quot; ? null : organizationSettings.setDefaultAPTerms;
+            organizationSettings.setDefaultARTerms = organizationSettings.setDefaultARTerms == &quot;&quot; ? null : organizationSettings.setDefaultARTerms;
+            organizationSettings.depositGracePeriods = organizationSettings.depositGracePeriods == &quot;&quot; ? null : organizationSettings.depositGracePeriods;
+            organizationSettings.paymentsGracePeriods = organizationSettings.paymentsGracePeriods == &quot;&quot; ? null : organizationSettings.paymentsGracePeriods;
+            organizationSettings.defaultBank = organizationSettings.defaultBank == &quot;&quot; ? null : organizationSettings.defaultBank;
+            organizationSettings.organizationUnitId = view.down(&#39;hiddenfield[itemId=companyItemId]&#39;).getValue();
+        }
+
+        if (parentGrid) {
+            var target;
+            if (view.openInPopupWindow) {
+                target = view.up(&#39;window&#39;);
+            } else {
+                target = view;
+            }
+            var myMask = new Ext.LoadMask({
+                msg: &#39;Please wait...&#39;,
+                target: target
+            });
+            myMask.show();
+            //fire save request
+            Ext.Ajax.request({
+                url: abp.appPath + &#39;api/services/app/organizationUnit/UpdateAllSettings&#39;,
+                jsonData: Ext.encode(organizationSettings),
+                success: function (response, opts) {
+                    myMask.hide();
+                    var res = Ext.decode(response.responseText);
+                    if (res.success) {
+                        var gridController = parentGrid.getController();
+                        gridController.doReloadGrid();
+
+                        if (view &amp;&amp; view.openInPopupWindow) {
+                            var wnd = view.up(&#39;window&#39;);
+                            Ext.destroy(wnd);
+                        } else if (view) {
+                            Ext.destroy(view);
+                        }
+                        abp.notify.success(&#39;Operation completed successfully.&#39;, &#39;Success&#39;);
+                    } else {
+                        var message = &#39;&#39;,
+                            title = &#39;Error&#39;;
+                        if (res &amp;&amp; res.error) {
+                            if (res.error.message &amp;&amp; res.error.details) {
+                                title = res.error.message;
+                                message = res.error.details;
+                                abp.message.warn(message, title);
+                                return;
+                            }
+                            title = res.error.message;
+                            message = res.error.details ? res.error.details : title;
+                        }
+                        abp.message.error(message, title);
+                    }
+                },
+                failure: function (response, opts) {
+                    myMask.hide();
+                    var res = Ext.decode(response.responseText);
+                    Ext.toast(res.exceptionMessage);
+                    console.log(response);
+                }
+            });
+        }
+    }
+});
+</pre>
+</body>
+</html>

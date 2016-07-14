@@ -15,11 +15,14 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.store.financials.accounts.RollupAccountStore&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-store-financials-accounts-RollupAccountStore'>/**
+</span> * DataStore to perform Read operation on Roll-up-accounts.
+ */
+Ext.define(&#39;Chaching.store.financials.accounts.RollupAccountStore&#39;, {
     extend: &#39;Chaching.store.base.BaseStore&#39;,   
-    fields: [{ name: &#39;name&#39;,type:&#39;string&#39; }, { name: &#39;value&#39;,type:&#39;int&#39; }],
-    proxy: {
-        type: &#39;chachingProxy&#39;,
+<span id='Chaching-store-financials-accounts-RollupAccountStore-property-fields'>    fields: [{ name: &#39;name&#39;,type:&#39;string&#39; }, { name: &#39;value&#39;,type:&#39;int&#39; }],
+</span><span id='Chaching-store-financials-accounts-RollupAccountStore-property-proxy'>    proxy: {
+</span>        type: &#39;chachingProxy&#39;,
         actionMethods: { create: &#39;POST&#39;, read: &#39;POST&#39;, update: &#39;POST&#39;, destroy: &#39;POST&#39; },
         extraParams: {
             Id: null
@@ -32,8 +35,8 @@
             rootProperty:&#39;result&#39;
         }
     },
-    idPropertyField: &#39;Id&#39;
-});
+<span id='Chaching-store-financials-accounts-RollupAccountStore-property-idPropertyField'>    idPropertyField: &#39;Id&#39;
+</span>});
 </pre>
 </body>
 </html>

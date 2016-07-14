@@ -15,15 +15,19 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js">Ext.define(&#39;Chaching.model.financials.accounts.ChartOfAccountsModel&#39;, {
+  <pre class="prettyprint lang-js"><span id='Chaching-model-financials-accounts-ChartOfAccountsModel'>/**
+</span> * DataModel to represent entity schema for COA.
+ */
+Ext.define(&#39;Chaching.model.financials.accounts.ChartOfAccountsModel&#39;, {
     extend: &#39;Chaching.model.base.BaseModel&#39;,
     config: {
-        searchEntityName: &#39;COA&#39;
-    },
-    fields: [
-            { name: &#39;coaId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
-            { name: &#39;caption&#39;, type: &#39;string&#39; },
-            { name: &#39;description&#39;, type: &#39;string&#39; },
+<span id='Chaching-model-financials-accounts-ChartOfAccountsModel-cfg-searchEntityName'>        searchEntityName: &#39;COA&#39;
+</span>    },
+<span id='Chaching-model-financials-accounts-ChartOfAccountsModel-property-fields'>    fields: [
+</span>            { name: &#39;coaId&#39;, type: &#39;int&#39;, isPrimaryKey: true },
+            { name: &#39;accountId&#39;, type: &#39;int&#39;, mapping: &#39;coaId&#39;  },
+            { name: &#39;caption&#39;, type: &#39;string&#39;, headerText: &#39;Description&#39;, hidden: false, width : &#39;8%&#39; },
+            { name: &#39;description&#39;, type: &#39;string&#39;, headerText: &#39;Description&#39;, hidden: false, width: &#39;8%&#39; },
             { name: &#39;isApproved&#39;, type: &#39;boolean&#39; },
             { name: &#39;isPrivate&#39;, type: &#39;boolean&#39; },
             { name: &#39;isCorporate&#39;, type: &#39;boolean&#39; },

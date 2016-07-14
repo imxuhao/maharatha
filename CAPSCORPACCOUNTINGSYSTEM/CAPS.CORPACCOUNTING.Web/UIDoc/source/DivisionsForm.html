@@ -24,7 +24,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsForm&#39;, {
     ],
 
     controller: &#39;financials-accounts-divisionsform&#39;,
-    name: &#39;divisions&#39;,
+    name: &#39;Financials.Accounts.Divisions&#39;,
     openInPopupWindow: false,
     hideDefaultButtons: false,
     layout: &#39;column&#39;,
@@ -32,6 +32,10 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsForm&#39;, {
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
+    popupWndSize: {
+        height: &#39;40%&#39;,
+        width: &#39;50%&#39;
+    },
     titleConfig: {
         title: abp.localization.localize(&quot;CreateNewDivision&quot;).initCap()
     },
@@ -43,7 +47,8 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsForm&#39;, {
         columnWidth: .5,
         padding: &#39;20 10 0 20&#39;,     
         defaults: {
-            labelAlign: &#39;top&#39;,
+            //labelAlign: &#39;top&#39;,
+            labelWidth : 120,
             blankText: app.localize(&#39;MandatoryToolTipText&#39;)
         },
         items: [{
@@ -51,7 +56,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsForm&#39;, {
             name: &#39;jobNumber&#39;,
             itemId: &#39;jobNumber&#39;,
             allowBlank: false,
-            fieldLabel: app.localize(&#39;DivisionNumber&#39;).initCap(),
+            fieldLabel: app.localize(&#39;Number&#39;).initCap(),
             width: &#39;100%&#39;,
             ui: &#39;fieldLabelTop&#39;,
             emptyText: app.localize(&#39;MandatoryField&#39;)
@@ -64,6 +69,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsForm&#39;, {
             ui: &#39;fieldLabelTop&#39;,
             displayField: &#39;typeOfCurrency&#39;,
             valueField: &#39;typeOfCurrencyId&#39;,
+            queryMode:&#39;local&#39;,
             bind: {
                 store: &#39;{typeOfCurrencyList}&#39;
             }
@@ -73,7 +79,7 @@ Ext.define(&#39;Chaching.view.financials.accounts.DivisionsForm&#39;, {
             columnWidth: .5,
             padding: &#39;20 10 0 20&#39;,          
             defaults: {
-                labelAlign: &#39;top&#39;,
+               // labelAlign: &#39;top&#39;,
                 blankText: app.localize(&#39;MandatoryToolTipText&#39;)
             },
             items: [

@@ -25,6 +25,8 @@
                         console.log(response);
                     }
                 });
+            } else {
+                abp.message.warn(app.localize('TenantInformationMessage'), app.localize('InformationMessage'));
             }
         }
     },

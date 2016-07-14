@@ -70,7 +70,6 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
         xtype: 'gridcolumn',
         text: app.localize('OrganizationName'),
         hideable: false,
-        flex : 1,
         dataIndex: 'displayName',
         width: '15%',
         filterField: {
@@ -80,6 +79,14 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
             xtype: 'textfield'
         }
     },
+     {
+         xtype: 'gridcolumn',
+         text: app.localize('ConnectionString'),
+         hideable: false,
+         flex: 1,
+         dataIndex: 'connectionStringName',
+         width: '15%'
+     },
     {
         xtype: 'gridcolumn',
         text: app.localize('DateModified'),

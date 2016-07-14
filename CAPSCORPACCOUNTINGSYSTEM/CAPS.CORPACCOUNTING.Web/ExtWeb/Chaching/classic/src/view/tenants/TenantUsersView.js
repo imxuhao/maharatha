@@ -13,7 +13,8 @@ Ext.define('Chaching.view.tenants.TenantUsersView', {
     title: app.localize("SelectAUser"),
     buttonAlign: 'right',
     autoShow: true,
-    tenantId : null,
+    tenantId: null,
+    defaultButton: 'loginAsThisUser',
     initComponent: function (config) {
         var me = this,
             controller = me.getController();
@@ -59,8 +60,8 @@ Ext.define('Chaching.view.tenants.TenantUsersView', {
         });
 
         me.items = [tenantUserGrid];
-        me.buttons = [{ text: app.localize('LoginAsThisUser'), handler: 'onLogInThisUserClick' },
-                      { text: app.localize('Cancel'), handler: 'onTenantUsersCancel' }
+        me.buttons = [{ text: app.localize('LoginAsThisUser').toUpperCase(), reference: 'loginAsThisUser', ui: 'actionButton', iconCls: 'fa fa-user', scale: 'small', handler: 'onLogInThisUserClick' },
+                      { text: app.localize('Cancel').toUpperCase(), ui: 'actionButton', iconCls: 'fa fa-close', scale: 'small', handler: 'onTenantUsersCancel' }
         ];
 
         me.callParent(arguments);

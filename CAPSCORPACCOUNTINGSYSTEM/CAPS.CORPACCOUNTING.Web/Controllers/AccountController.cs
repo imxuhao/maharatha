@@ -953,7 +953,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Remove the cache item to prevent re-use
             await _cacheManager.GetImpersonationCache().RemoveAsync(tokenId);
 
-            return RedirectToAction("Home", "Home");
+            return RedirectToAction("Extjs", "Home");
         }
 
         public virtual JsonResult IsImpersonatedLogin()

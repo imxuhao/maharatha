@@ -428,12 +428,10 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         Ext.Ajax.request({
             url: abp.appPath + 'Account/Logout',
             success: function (response) {
-               
+                document.location.href = abp.appPath + "Account/Login";
             },
             failure: function (response) {
-                var res = Ext.decode(response.responseText);
-                Ext.toast(res.statusText);
-                console.log(response);
+                document.location.href = abp.appPath + "Account/Login";
             }
         });
     },

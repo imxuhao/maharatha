@@ -1042,5 +1042,7 @@
 <text name="DateClose" value="Date close" />
 <text name="TenantCreationWarningMessage" value="You can not change organization of this tenant. Do you want to save this tenant in this organization?" />
 <text name="DeleteWarningMessage" value="You want to delete." />
+<text name="TenantInformationMessage" value="Please select user to login as this tenant." />
+<text name="InformationMessage" value="Information" />
 </texts>
 </localizationDictionary>

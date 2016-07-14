@@ -9,7 +9,7 @@ Ext.define('Chaching.view.administration.organization.OrganizationView', {
 
     controller: 'administration-organizationunits-organizationunitsview',
     height: 250,
-    width: 450,
+    width: 550,
     layout: 'fit',
     defaultFocus: 'textfield#organizationName',
     initComponent: function (config) {

@@ -5,10 +5,16 @@
         var me = this,
             form = formPanel.down('form'),
             basicForm = null;
+        
         if (form) {
             basicForm = form.getForm();
             var connectionStringCombo = basicForm.findField('connectionStringId');
             if (connectionStringCombo) {
+                if (isEdit) {
+                    connectionStringCombo.setReadOnly(true);
+                } else {
+                    connectionStringCombo.setReadOnly(false);
+                }
                 var connectionStore = connectionStringCombo.getStore();
                 connectionStore.load();
             }

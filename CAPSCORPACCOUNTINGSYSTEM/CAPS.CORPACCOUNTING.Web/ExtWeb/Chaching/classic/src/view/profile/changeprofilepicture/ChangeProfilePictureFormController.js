@@ -25,11 +25,12 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
                             button.setIcon(src);
                         else
                             img.setSrc(src);
-                        Ext.toast(app.localize('YourProfilePictureHasChangedSuccessfully').initCap());
+                        abp.notify.success(app.localize('YourProfilePictureHasChangedSuccessfully').initCap());
                     }
                 }
                 else {
-                    Ext.toast(res.error.message);
+                    abp.message.error(res.error.message);
+                    //Ext.toast(res.error.message);
                 }
             },
             failure: function (response) {
@@ -82,7 +83,7 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
                     if (response.success) {
                         view.filePath = data.tempFilePath;
                         view.dataobject = data;
-                        Ext.toast(app.localize('UploadSuccess').initCap());
+                        abp.notify.success(app.localize('UploadSuccess').initCap());
                     }
                 }
             },

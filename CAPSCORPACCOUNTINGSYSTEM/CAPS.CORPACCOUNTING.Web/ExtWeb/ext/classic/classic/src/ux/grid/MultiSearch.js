@@ -727,7 +727,13 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                 case "int":
                     if (dataField.type === "date") filter.dataType = 2;
                     else if (dataField.type === "decimal" || dataField.type === "float") filter.dataType = 5;
-                    else if (dataField.type === "number" || dataField.type === "integer" || dataField.type === "int") filter.dataType = 0;
+                    else if (dataField.type === "number" || dataField.type === "integer" || dataField.type === "int") {
+                        filter.dataType = 0;
+                        filter.operator = "=";
+                    }
+                    //else if (dataField.type === "number" || dataField.type === "integer" || dataField.type === "int") {
+                    //    filter.dataType = 0;
+                    //}
                     if (isEnum) {
                         filter.dataType = 4;
                     }

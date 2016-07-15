@@ -20,7 +20,15 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         //    }
         //}
     },
-
+    onGridItemsPerPageChange : function(combo, record, eOpts) {
+        var me = this,
+         pagingtoolbar = combo.up('pagingtoolbar'),
+         store = pagingtoolbar.getStore();
+        if (combo.getValue() && store) {
+            store.pageSize = combo.getValue();
+            store.load();
+        }
+    },
     createEditRecordInTab: function (hash) {
         if (!hash) {
             hash = this.currentRedirectedRoute;

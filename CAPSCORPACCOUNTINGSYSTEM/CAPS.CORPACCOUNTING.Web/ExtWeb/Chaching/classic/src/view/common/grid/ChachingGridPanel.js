@@ -324,6 +324,28 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                         iconAlign: 'left',
                         ui: 'actionButton',
                         handler:'onManageViewClicked'
+                    },
+                    {
+                        xtype: 'combobox',
+                        fieldLabel: app.localize('GridItemsPerPage'),
+                        labelAlign: 'right',
+                        ui: 'fieldLabelTop',
+                        displayField: 'pageSize',
+                        valueField: 'pageSize',
+                        value : '10',
+                        queryMode: 'local',
+                        allowBlank : false,
+                        store: {
+                            fields: [{ name: 'pageSize', type: 'int' }],
+                            data: [{ pageSize: 10 },
+                                    { pageSize: 20 },
+                                    { pageSize: 50 },
+                                    { pageSize: 100 }
+                            ]
+                        },
+                        listeners: {
+                            select : 'onGridItemsPerPageChange'
+                        }
                     }
                 ];
             }

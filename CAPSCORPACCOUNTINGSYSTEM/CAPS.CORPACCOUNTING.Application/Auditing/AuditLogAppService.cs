@@ -15,6 +15,8 @@ using CAPS.CORPACCOUNTING.Auditing.Exporting;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Auditing
 {
@@ -102,6 +104,49 @@ namespace CAPS.CORPACCOUNTING.Auditing
 
             var lastDotIndex = serviceName.LastIndexOf('.');
             return serviceName.Substring(lastDotIndex + 1);
+        }
+
+
+        /// <summary>
+        /// Sumit Method to get AuditLogs
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<AuditLogListDto>> GetAuditLogUnits(SearchInputDto input)
+        {
+            var query = CreateAuditLogAndUsersQueryUnit(input);
+
+            var resultCount = await query.CountAsync();
+            var results = await query
+                .AsNoTracking()
+                 .OrderBy(Helper.GetSort("AuditLog.ExecutionTime DESC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+
+            var auditLogListDtos = ConvertToAuditLogListDtos(results);
+
+            return new PagedResultOutput<AuditLogListDto>(resultCount, auditLogListDtos);
+        }
+
+        /// <summary>
+        /// sumit Method to create AuditLogQuerry
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private IQueryable<AuditLogAndUser> CreateAuditLogAndUsersQueryUnit(SearchInputDto input)
+        {
+            var query = from auditLog in _auditLogRepository.GetAll()
+                        join user in _userRepository.GetAll() on auditLog.UserId equals user.Id into userJoin
+                        from joinedUser in userJoin.DefaultIfEmpty()
+                        select new AuditLogAndUser { AuditLog = auditLog, User = joinedUser };
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            return query;
         }
     }
 }

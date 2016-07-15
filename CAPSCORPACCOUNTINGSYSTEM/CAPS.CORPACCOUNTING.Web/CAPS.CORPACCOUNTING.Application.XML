@@ -2679,6 +2679,27 @@
             A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
             </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Auditing.AuditLogAppService.GetAuditLogUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Sumit Method to get AuditLogs
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Auditing.AuditLogAppService.CreateAuditLogAndUsersQueryUnit(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            sumit Method to create AuditLogQuerry
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Auditing.IAuditLogAppService.GetAuditLogUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get all AuditLogList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.FiscalPeriodId">
             <summary>Gets or sets the FiscalPeriodId field. </summary>
         </member>

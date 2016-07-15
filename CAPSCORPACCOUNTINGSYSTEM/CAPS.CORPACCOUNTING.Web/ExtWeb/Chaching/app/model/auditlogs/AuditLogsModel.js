@@ -15,7 +15,7 @@ Ext.define('Chaching.model.auditlogs.AuditLogsModel', {
             { name: 'methodName', type: 'string' },
             { name: 'parameters', type: 'string' },
             { name: 'executionTime', type: "date", format: 'Y/m/d H:i:s' },
-            { name: 'executionDuration', type: 'string' },
+            { name: 'executionDuration', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'clientIpAddress', type: 'string' },
             { name: 'clientName', type: 'string' },
             { name: 'browserInfo', type: 'string' },

@@ -3,12 +3,14 @@
  */
 Ext.define('Chaching.model.auditlogs.AuditLogsModel', {
     extend: 'Chaching.model.base.BaseModel',
-
+    config : {
+        searchEntityName: 'AuditLog'
+    },
     fields: [
-            { name: 'userId', type: 'int' },
+            { name: 'userId', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'userName', type: 'string' },
-            { name: 'impersonatorTenantId', type: 'int' },
-            { name: 'impersonatorUserId', type: 'int' },
+            { name: 'impersonatorTenantId', type: 'int', defaultValue : null, convert : nullHandler },
+            { name: 'impersonatorUserId', type: 'int', defaultValue: null, convert: nullHandler },
             { name: 'serviceName', type: 'string' },
             { name: 'methodName', type: 'string' },
             { name: 'parameters', type: 'string' },

@@ -1,7 +1,7 @@
 ﻿Ext.define('Chaching.store.roles.RolesTreeViewStore', {
     extend: 'Chaching.store.base.BaseTreeStore',
     model: 'Chaching.model.roles.RolePermissionsModel',
-    // autoLoad: true,
+    autoLoad: false,
     clearOnLoad: false,
     remoteFilter: false,
     remoteSort: false,

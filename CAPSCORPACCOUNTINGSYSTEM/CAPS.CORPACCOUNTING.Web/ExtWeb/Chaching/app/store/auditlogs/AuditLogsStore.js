@@ -8,7 +8,7 @@ Ext.define('Chaching.store.auditlogs.AuditLogsStore', {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
-            read: abp.appPath + 'api/services/app/auditLog/GetAuditLogs'
+            read: abp.appPath + 'api/services/app/auditLog/GetAuditLogUnits'
         }
     },
     idPropertyField: 'id'//important to set for add/update of records

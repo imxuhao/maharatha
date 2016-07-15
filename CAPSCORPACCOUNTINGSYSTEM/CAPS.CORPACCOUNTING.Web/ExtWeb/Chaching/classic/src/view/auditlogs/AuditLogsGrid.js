@@ -62,6 +62,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
+                 entityName: 'User',
                  emptyText: 'Enter User Name to search'
              }
          }

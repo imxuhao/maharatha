@@ -82,6 +82,9 @@ Ext.define('Chaching.view.main.ChachingViewport', {
                 type: 'card',
                 anchor: '100%'
             },
+            plugins : [{
+                ptype : 'tabclosemenu'
+            }],
             listeners: {
                 tabchange: 'onTabItemChange'
             },

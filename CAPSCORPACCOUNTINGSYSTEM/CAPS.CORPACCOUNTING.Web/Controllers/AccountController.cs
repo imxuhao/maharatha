@@ -101,7 +101,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
-                returnUrl = Url.Action("Index", "Application");
+                // returnUrl = Url.Action("Index", "Application");
+                returnUrl = Url.Action("Extjs", "Home");
             }
 
             ViewBag.ReturnUrl = returnUrl;
@@ -155,7 +156,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
-                returnUrl = Url.Action("Index", "Application");
+                //returnUrl = Url.Action("Index", "Application");
+                returnUrl = Url.Action("Extjs", "Home");
             }
 
             if (!string.IsNullOrWhiteSpace(returnUrlHash))
@@ -165,6 +167,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
             return Json(new MvcAjaxResponse { TargetUrl = returnUrl });
         }
+
 
         public ActionResult Logout()
         {

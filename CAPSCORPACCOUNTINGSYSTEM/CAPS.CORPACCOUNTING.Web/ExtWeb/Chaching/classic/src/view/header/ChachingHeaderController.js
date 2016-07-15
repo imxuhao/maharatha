@@ -223,8 +223,8 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                     if (result.tenant) {
                         userName = result.tenant.tenancyName + '\\' + result.user.userName;
                     } else userName = '.\\' + result.user.userName;
-
-                    if (userName && abp.session.impersonatorUserId !== abp.session.userId && abp.session.impersonatorUserId !== null) {
+                   // if (userName && abp.session.impersonatorUserId !== abp.session.userId && abp.session.impersonatorUserId !== null) {
+                     if (userName && abp.session.impersonatorUserId !== null) {
                         userName = '&#xf112 ' + userName;
                         btn.gotoMyAccount = true;//to get go to my account menu item
                         btn.setTooltip(abp.localization.localize("YouCanBackToYourAccount"));

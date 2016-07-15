@@ -60,6 +60,12 @@
         return '<div id="' + id + '"></div>';
 
     },
+    renderInMiliSeconds: function (value, cell) {
+        if (value) {
+            return value + " ms";
+        }
+        return '0 ms';
+    },
     auditLogView: function (value, cell) {
         var gridController = this.getController(),
             view = gridController.getView();
@@ -69,7 +75,10 @@
         Ext.Function.defer(function () {
             var button = Ext.create('Ext.button.Button', {
                 scale: 'small',
-                width: '40%',
+                width: 20,
+                height : 20,
+                // width: '40%',
+                padding: '3px 7px 3px 7px;',
                 iconCls: 'fa fa-search',
                 iconAlign: 'left',
                 widgetRec: widgetRec,
@@ -118,6 +127,12 @@
     renderDateTimeSeconds: function (value) {
         if (value) {
             return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormat);
+        }
+        return '';
+    },
+    renderDateTimeSecondsWithoutAmPm: function (value) {
+        if (value) {
+            return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeSecFormatWithoutAmPm);
         }
         return '';
     },

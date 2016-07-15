@@ -23,6 +23,16 @@
     content: "\f05a";
 }
 
+.font-green {
+    font: 18px/1 FontAwesome;
+    color: #32c5d2;
+}
+
+.font-yellow-gold {
+    font: 18px/1 FontAwesome;
+    color: #E87E04 !important;
+}
+
 .split-group1 .x-grid-cell {
     background-color: lavenderblush !important;
     color: black;

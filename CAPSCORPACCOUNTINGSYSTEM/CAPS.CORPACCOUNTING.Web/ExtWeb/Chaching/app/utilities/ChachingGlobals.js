@@ -14,6 +14,7 @@
     defaultDateFormat: 'MM/DD/YYYY',
     defaultDateTimeFormat: 'MM/DD/YYYY hh:mm a',
     defaultDateTimeSecFormat: 'MM/DD/YYYY hh:mm:ss a',
+    defaultDateTimeSecFormatWithoutAmPm: 'MM/DD/YYYY hh:mm:ss',
     usersDefaultGridViewSettings: null,
     mandatoryFlag: '&nbsp;<font color=red>*</font>',
     defaultExtDateFieldFormat: 'm/d/Y',

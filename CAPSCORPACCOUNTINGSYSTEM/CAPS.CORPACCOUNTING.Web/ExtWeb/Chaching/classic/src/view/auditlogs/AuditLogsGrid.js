@@ -17,7 +17,20 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
           xtype: 'displayfield',
           value: abp.localization.localize("AuditLogs"),
           ui: 'headerTitle'
-      }, '->'],
+      }, '->', {
+          xtype: 'button',
+          scale: 'small',
+          ui: 'actionButton',
+          text: abp.localization.localize("Refresh").toUpperCase(),
+          tooltip: app.localize('Refresh'),
+          iconCls: 'fa fa-refresh',
+          //routeName: 'coa.create',
+          iconAlign: 'left',
+          listeners: {
+              click : 'onRefreshClick'
+          }
+      }],
+    requireActionColumn : false,
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
@@ -26,14 +39,15 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
     columns: [
           {
               xtype: 'gridcolumn',
-              width: '8%',
-              text: app.localize('Actions'),
+              width: '5%',
+              maxWidth : 40,
               renderer: Chaching.utilities.ChachingRenderers.auditLogView
           },
         {
             xtype: 'gridcolumn',
             dataIndex: 'exception',
             width: '5%',
+            maxWidth: 30,
             renderer: Chaching.utilities.ChachingRenderers.auditLogExceptionIcon
         },
         {
@@ -44,7 +58,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
             sortable: true,
             width: '15%',
             groupable: true,
-            renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+            renderer: Chaching.utilities.ChachingRenderers.renderDateTimeSecondsWithoutAmPm,
             filterField: {
                 xtype: 'dateSearchField',
                 dataIndex: 'executionTime',
@@ -74,6 +88,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
              sortable: true,
              groupable: true,
              width: '10%',
+             flex : 1,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -88,6 +103,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
              sortable: true,
              groupable: true,
              width: '10%',
+             flex: 1,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -102,6 +118,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
              sortable: true,
              groupable: true,
              width: '10%',
+             renderer: Chaching.utilities.ChachingRenderers.renderInMiliSeconds,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',

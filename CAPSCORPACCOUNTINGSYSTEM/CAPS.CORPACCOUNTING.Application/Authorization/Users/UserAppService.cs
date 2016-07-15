@@ -25,6 +25,7 @@ using CAPS.CORPACCOUNTING.Notifications;
 using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 using Abp.Domain.Repositories;
+using Castle.Core.Internal;
 
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
@@ -39,6 +40,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         private readonly IAppNotifier _appNotifier;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IRepository<Role> _rolesUnitRepository;
+        private readonly IRepository<User, long> _userUnitRepository;
+        private readonly IRepository<UserRole, long> _userRoleRepository;
 
 
         public UserAppService(
@@ -46,7 +49,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             IUserEmailer userEmailer,
             IUserListExcelExporter userListExcelExporter,
             INotificationSubscriptionManager notificationSubscriptionManager,
-            IAppNotifier appNotifier, IUnitOfWorkManager unitOfWorkManager, IRepository<Role> roletUnitRepository)
+            IAppNotifier appNotifier, IUnitOfWorkManager unitOfWorkManager, IRepository<Role> roletUnitRepository, IRepository<UserRole, long> userRoleRepository, IRepository<User, long> userUnitRepository)
         {
             _roleManager = roleManager;
             _userEmailer = userEmailer;
@@ -55,6 +58,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             _appNotifier = appNotifier;
             _unitOfWorkManager = unitOfWorkManager;
             _rolesUnitRepository = roletUnitRepository;
+            _userRoleRepository = userRoleRepository;
+            _userUnitRepository = userUnitRepository;
         }
 
         public async Task<PagedResultOutput<UserListDto>> GetUsers(GetUsersInput input)
@@ -196,6 +201,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             {
                 await CreateUserUnitAsync(input);
             }
+
+
         }
 
         [AbpAuthorize(AppPermissions.Pages_Administration_Users_Delete)]
@@ -309,7 +316,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             foreach (var roleName in input.AssignedRoleNames)
             {
                 var role = await _roleManager.GetRoleByNameAsync(roleName);
-                user.Roles.Add(new UserRole { RoleId = role.Id });
+                user.Roles.Add(new UserRole { RoleId = role.Id, TenantId = user.TenantId });
             }
 
             CheckErrors(await UserManager.CreateAsync(user));
@@ -406,7 +413,12 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             return rolewithrenant;
         }
 
-
+        /// <summary>
+        /// Creating  theNew user in other tenants of Organization 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="userlinkid"></param>
+        /// <returns></returns>
         protected virtual async Task CreateUserforLinkedTenantAsync(CreateOrUpdateUserInput input, long userlinkid)
         {
             foreach (var tenant in input.TenantList)
@@ -431,67 +443,77 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                     user.Password = new PasswordHasher().HashPassword(input.User.Password);
                     user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
 
-                    //Assign roles
-                    user.Roles = new Collection<UserRole>();
-                    foreach (var roleId in tenant.RoleIds)
+                    ///Checking the USer exist 
+                    var userUnit =
+                        await _userUnitRepository.FirstOrDefaultAsync(p => p.UserName == user.UserName);
+                    if (ReferenceEquals(userUnit, null))
                     {
-                        user.Roles.Add(new UserRole { RoleId = roleId, TenantId = tenant.TenantId });
+                        //Assign roles
+                        user.Roles = new Collection<UserRole>();
+                        foreach (var roleId in tenant.RoleIds)
+                        {
+                            user.Roles.Add(new UserRole { RoleId = roleId, TenantId = tenant.TenantId });
+                        }
+
+                        CheckErrors(await UserManager.CreateAsync(user));
+                        await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
+
+                        //Notifications
+                        await
+                            _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(
+                                user.ToUserIdentifier());
+                        await _appNotifier.WelcomeToTheApplicationAsync(user);
+
+                        //Send activation email
+                        if (input.SendActivationEmail)
+                        {
+                            user.SetNewEmailConfirmationCode();
+                            await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
+                        }
+
                     }
-
-                    CheckErrors(await UserManager.CreateAsync(user));
-                    await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
-
-                    //Notifications
-                    await
-                        _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(
-                            user.ToUserIdentifier());
-                    await _appNotifier.WelcomeToTheApplicationAsync(user);
-
-                    //Send activation email
-                    if (input.SendActivationEmail)
+                    else
                     {
-                        user.SetNewEmailConfirmationCode();
-                        await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
+                        var existedUserRole = await _userRoleRepository.GetAllListAsync(p => p.TenantId == tenant.TenantId && p.UserId == userUnit.Id);
+                        foreach (var roleId in tenant.RoleIds)
+                        {
+                            if (!ReferenceEquals(existedUserRole, null))
+                            {
+                                foreach (var userroleunit in existedUserRole)
+                                {
+                                    if (userroleunit.RoleId != roleId)
+                                    {
+                                        var userRole = new UserRole { RoleId = roleId, TenantId = tenant.TenantId };
+                                        await _userRoleRepository.InsertAsync(userRole);
+                                    }
+                                }
+                            }
+                        }
+                        await CurrentUnitOfWork.SaveChangesAsync();
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Get the Permissions for selected roles of a Tenant
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<GetRoleForEditOutput> GetPermissionsForSelectedRole(RoleTenantInput input)
         {
             using (_unitOfWorkManager.Current.SetTenantId(input.TenantId))
             {
-                var permissions = PermissionManager.GetAllPermissions();
                 var grantedPermissions = new Permission[0];
-                RoleEditDto roleEditDto;
-
-                if (input.RoleId !=0) //Editing existing role?
-                {
-                    var role = await _roleManager.GetRoleByIdAsync(input.RoleId);
-                    grantedPermissions = (await _roleManager.GetGrantedPermissionsAsync(role)).ToArray();
-                    roleEditDto = role.MapTo<RoleEditDto>();
-                }
-                else
-                {
-                    roleEditDto = new RoleEditDto();
-                }
-                var permissionList = permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList();
-                if (grantedPermissions.Length > 0)
-                {
-                    foreach (var grantedPermission in grantedPermissions)
-                    {
-                        permissionList.Where(w => w.Name == grantedPermission.Name)
-                            .ToList()
-                            .ForEach(s => s.IsPermissionGranted = true);
-                    }
-                }
-
+                var role = await _roleManager.GetRoleByIdAsync(input.RoleId);
+                grantedPermissions = (await _roleManager.GetGrantedPermissionsAsync(role)).ToArray();
+               
+                var grantedpermissionList = grantedPermissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName)
+                    .Select(c => { c.IsPermissionGranted = true; return c; }).ToList();
+                
                 return new GetRoleForEditOutput
                 {
-                    Role = roleEditDto,
-                    Permissions = permissionList,
-                    //permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList(),
-                    GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
+                    Permissions = grantedpermissionList
                 };
             }
         }

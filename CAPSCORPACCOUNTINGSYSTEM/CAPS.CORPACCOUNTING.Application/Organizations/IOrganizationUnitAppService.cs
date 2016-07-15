@@ -16,14 +16,14 @@ namespace CAPS.CORPACCOUNTING.Organizations
         Task<PagedResultOutput<OrganizationUnitUserListDto>> GetOrganizationUnitUsers(GetOrganizationUnitUsersInput input);
 
         /// <summary>
-        /// Create Company
+        /// Create OrganizationUnits
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<OrganizationUnitDto> CreateOrganizationUnit(CreateOrganizationUnitInput input);
 
         /// <summary>
-        /// Update Company
+        /// Update OrganizationUnits
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -112,5 +112,19 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// </summary>
         /// <returns></returns>
         Task DeleteHostOrganizationUnit(IdInput<long> input);
+
+        /// <summary>
+        /// Create CompanySetup
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<OrganizationUnitDto> CreateComapnyUnit(CreateOrganizationUnitInput input);
+        
+        /// <summary>
+        /// Update CompanySetUp
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<OrganizationUnitDto> UpdateComapnyUnit(UpdateOrganizationUnitInput input);
     }
 }

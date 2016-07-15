@@ -20,6 +20,8 @@ namespace CAPS.CORPACCOUNTING.Organizations.Dto
 
         public int ConnectionStringId { get; set; }
 
+        public string ConnectionStringName { get; set; }
+
 
     }
 }

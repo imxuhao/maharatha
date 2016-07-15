@@ -8,9 +8,9 @@ Ext.define('Chaching.store.administration.organization.CompanyStore', {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
-            create: abp.appPath + 'api/services/app/organizationUnit/CreateOrganizationUnit',
+            create: abp.appPath + 'api/services/app/organizationUnit/CreateComapnyUnit',
             read: abp.appPath + 'api/services/app/organizationUnit/GetComapnySetUpUnits',
-            update: abp.appPath + 'api/services/app/organizationUnit/UpdateOrganizationUnit',
+            update: abp.appPath + 'api/services/app/organizationUnit/UpdateComapnyUnit',
             destroy: abp.appPath + 'api/services/app/organizationUnit/DeleteOrganizationUnit'
         }
     },

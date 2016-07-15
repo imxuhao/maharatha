@@ -44,6 +44,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         private readonly OrganizationExtendedUnitManager _organizationExtendedUnitManager;
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
         private readonly IRepository<OrganizationExtended, long> _organizationExtendedUnitRepository;
+        private readonly OrganizationUnitManager _organizationUnitManager;
         private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitRepository;
         private readonly IRepository<AddressUnit, long> _addressRepository;
         private readonly ISettingDefinitionManager _settingDefinitionManager;
@@ -62,7 +63,8 @@ namespace CAPS.CORPACCOUNTING.Organizations
             IUnitOfWorkManager unitOfWorkManager,
             CustomAppSession customAppSession,
             IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
-           IOrganizationSettingManager organizationSettingManager, IRepository<ConnectionStringUnit> connectionStringRepository)
+           IOrganizationSettingManager organizationSettingManager, IRepository<ConnectionStringUnit> connectionStringRepository,
+           OrganizationUnitManager organizationUnitManager)
         {
             _organizationExtendedUnitManager = organizationExtendedUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
@@ -71,6 +73,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
 
             _organizationSettingManager = organizationSettingManager;
             _connectionStringRepository = connectionStringRepository;
+            _organizationUnitManager = organizationUnitManager;
             _settingDefinitionManager = settingDefinitionManager;
             _appFolders = appFolders;
             _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
@@ -105,7 +108,8 @@ namespace CAPS.CORPACCOUNTING.Organizations
         public async Task<PagedResultOutput<HostOrganizationUnitDto>> GetHostOrganizationUnits(SearchInputDto input)
         {
             var query = from organization in _organizationExtendedUnitRepository.GetAll()
-                        select new { organization };
+                        join constr in _connectionStringRepository.GetAll() on organization.ConnectionStringId equals constr.Id
+                        select new { organization, ConnectionStringName=constr.Name };
 
 
 
@@ -126,10 +130,51 @@ namespace CAPS.CORPACCOUNTING.Organizations
             return new PagedResultOutput<HostOrganizationUnitDto>(resultCount, results.Select(item =>
             {
                 var dto = item.organization.MapTo<HostOrganizationUnitDto>();
+                dto.ConnectionStringId = item.organization.ConnectionStringId.Value;
+                dto.ConnectionStringName = item.ConnectionStringName;
                 return dto;
             }).ToList());
         }
 
+        /// <summary>
+        /// Abp Method to create Organization
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        public async Task<OrganizationUnitDto> CreateOrganizationUnit(CreateOrganizationUnitInput input)
+        {
+            var organizationUnit = new OrganizationUnit(AbpSession.TenantId, input.DisplayName, input.ParentId);
+
+            await _organizationUnitManager.CreateAsync(organizationUnit);
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            return organizationUnit.MapTo<OrganizationUnitDto>();
+        }
+
+        /// <summary>
+        /// Abp Method to update Organization
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
+        public async Task<OrganizationUnitDto> UpdateOrganizationUnit(UpdateOrganizationUnitInput input)
+        {
+            var organizationUnit = await _organizationUnitRepository.GetAsync(input.Id);
+
+            organizationUnit.DisplayName = input.DisplayName;
+
+            await _organizationUnitManager.UpdateAsync(organizationUnit);
+
+            return await CreateOrganizationUnitDto(organizationUnit);
+        }
+
+
+        /// <summary>
+        /// Sumit Method to Create HostOrganization(CompanyGroup)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task CreateHostOrganizationUnit(CreateHostOrganizationUnitInput input)
         {
@@ -141,6 +186,12 @@ namespace CAPS.CORPACCOUNTING.Organizations
         }
 
      
+        /// <summary>
+        /// Sumit Method
+        /// Update Host Organization (CompanyGroup)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task  UpdateHostOrganizationUnit(UpdateHostOrganizationUnitInput input)
         {
@@ -218,9 +269,16 @@ namespace CAPS.CORPACCOUNTING.Organizations
                 }).ToList());
         }
 
+
+        /// <summary>
+        /// Sumit Method to Create CompanySetup
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+
         [UnitOfWork]
         [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Edit)]
-        public async Task<OrganizationUnitDto> CreateOrganizationUnit(CreateOrganizationUnitInput input)
+        public async Task<OrganizationUnitDto> CreateComapnyUnit(CreateOrganizationUnitInput input)
         {
 
             byte[] logo = null;
@@ -265,8 +323,13 @@ namespace CAPS.CORPACCOUNTING.Organizations
             return organizationUnit.MapTo<OrganizationUnitDto>();
         }
 
+        /// <summary>
+        /// Sumit Method to update Comapny Setup
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Create)]
-        public async Task<OrganizationUnitDto> UpdateOrganizationUnit(UpdateOrganizationUnitInput input)
+        public async Task<OrganizationUnitDto> UpdateComapnyUnit(UpdateOrganizationUnitInput input)
         {
 
 

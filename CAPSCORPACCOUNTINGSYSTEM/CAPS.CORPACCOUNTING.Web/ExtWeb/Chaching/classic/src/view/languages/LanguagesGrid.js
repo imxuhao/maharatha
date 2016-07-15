@@ -90,7 +90,7 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
             sortable: true,
             groupable: true,
             width: '30%',
-            renderer: Chaching.utilities.ChachingRenderers.renderDateTime
+            renderer: Chaching.utilities.ChachingRenderers.renderDateOnly
         }
     ]
 });

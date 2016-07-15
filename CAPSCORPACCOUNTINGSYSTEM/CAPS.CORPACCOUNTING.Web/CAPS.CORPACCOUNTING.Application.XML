@@ -1656,6 +1656,21 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.UserAppService.CreateUserforLinkedTenantAsync(CAPS.CORPACCOUNTING.Authorization.Users.Dto.CreateOrUpdateUserInput,System.Int64)">
+            <summary>
+            Creating  theNew user in other tenants of Organization 
+            </summary>
+            <param name="input"></param>
+            <param name="userlinkid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.UserAppService.GetPermissionsForSelectedRole(CAPS.CORPACCOUNTING.Authorization.Users.Dto.RoleTenantInput)">
+            <summary>
+            Get the Permissions for selected roles of a Tenant
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService">
             <summary>
             Application service that is used by 'role management' page.
@@ -9131,14 +9146,14 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.CreateOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
             <summary>
-            Create Company
+            Create OrganizationUnits
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
             <summary>
-            Update Company
+            Update OrganizationUnits
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -9217,6 +9232,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.CreateComapnyUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
+            <summary>
+            Create CompanySetup
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateComapnyUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
+            <summary>
+            Update CompanySetUp
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetHostOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get OrganizationList(HOST)
@@ -9224,9 +9253,52 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.CreateOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
+            <summary>
+            Abp Method to create Organization
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
+            <summary>
+            Abp Method to update Organization
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.CreateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateHostOrganizationUnitInput)">
+            <summary>
+            Sumit Method to Create HostOrganization(CompanyGroup)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateHostOrganizationUnitInput)">
+            <summary>
+            Sumit Method
+            Update Host Organization (CompanyGroup)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetComapnySetUpUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get ComapnySetup (Tenant Organizations)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.CreateComapnyUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
+            <summary>
+            Sumit Method to Create CompanySetup
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateComapnyUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
+            <summary>
+            Sumit Method to update Comapny Setup
             </summary>
             <param name="input"></param>
             <returns></returns>

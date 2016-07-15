@@ -1,6 +1,21 @@
 Ext.define('Chaching.view.roles.RolesFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.roles-rolesform',
+    onRolesFormResize: function (form, newWidth, newHeight, oldWidth, oldHeight) {
+        var me = this,
+           view = me.getView();
+        var treePanel = view.down('treepanel[itemId=permissionsItemId]');
+        if (treePanel) {
+            treePanel.setHeight(newHeight - 100);
+        }
+    },
+    onTreeCheckChange:function (node, checked, e, eOpts) {
+        var me = this;
+        var parentNode = node.parentNode;
+        node.cascadeBy(function (n) {
+            n.set('checked', checked);
+        });
+    },
     doPreSaveOperation: function (record, values, idPropertyField) {
         var me = this,
              view = me.getView(),

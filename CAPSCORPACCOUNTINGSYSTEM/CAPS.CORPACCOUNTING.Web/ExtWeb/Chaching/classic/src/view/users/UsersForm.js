@@ -163,25 +163,24 @@ Ext.define('Chaching.view.users.UsersForm', {
             title: abp.localization.localize("Roles"),
             padding: '0 10 0 10',
             iconCls: 'fa fa-briefcase',
-            itemId: 'rolesListGridItemId',
             layout: 'column',
             height: '100%',
             items: [
             {
-            columnWidth: .5,
-            xtype: 'grid',
-            cls: 'chaching-grid',
-            itemId: 'rolesListGridItemId',
-            height: '100%',
-            scrollable: true,
-            selType: 'checkboxmodel',
-            columns: [
-               { text: app.localize('RoleName'), dataIndex: 'displayName', flex: 1 }
-            ],
-            store: Ext.create('Chaching.store.roles.RolesStore'),
-            listeners: {
-                rowclick: 'reloadPermissionsTree'
-            }
+                columnWidth: .5,
+                xtype: 'grid',
+                cls: 'chaching-grid',
+                itemId: 'rolesListGridItemId',
+                height: '100%',
+                scrollable: true,
+                selType: 'checkboxmodel',
+                columns: [
+                   { text: app.localize('RoleName'), dataIndex: 'displayName', flex: 1 }
+                ],
+                store: Ext.create('Chaching.store.roles.RolesStore'),
+                listeners: {
+                    rowclick: 'reloadPermissionsTree'
+                }
             },
             {
                 columnWidth: .5,
@@ -192,37 +191,27 @@ Ext.define('Chaching.view.users.UsersForm', {
                 text: abp.localization.localize("RowClickMessage"),
             },
             {
-            columnWidth: .5,
-            //title: abp.localization.localize("Permissions"),
-            cls: 'chaching-grid',
-            hidden : true,
-            xtype: 'treepanel',
-            name: 'permissions',
-            itemId: 'permissionsListItemId',
-            store: new Chaching.store.roles.RolesTreeViewStore(),
-            rootVisible: false,
-            width: '100%',
-            height: '100%',
-            alwaysReload: false,
-            scrollable: true,
-            border: false,
-            hideHeaders: false,
-            columns: [{
-                xtype: 'treecolumn',
-                text: abp.localization.localize("Permissions"),
-                dataIndex: 'displayName',
-                flex: 1
-            }
-            ],
-            listeners: {
-                checkchange: function (node, checked, e, eOpts) {
-                    var me = this;
-                    var parentNode = node.parentNode;
-                    node.cascadeBy(function (n) {
-                        n.set('checked', checked);
-                    });
-                }
-            }
+                columnWidth: .5,
+                //title: abp.localization.localize("Permissions"),
+                cls: 'chaching-grid',
+                hidden : true,
+                xtype: 'treepanel',
+                name: 'permissions',
+                itemId: 'permissionsListItemId',
+                store: Ext.create('Chaching.store.roles.RolesTreeViewStore'),
+                rootVisible: false,
+                width: '100%',
+                height: '100%',
+                alwaysReload: false,
+                scrollable: true,
+                border: false,
+                hideHeaders: false,
+                columns: [{
+                    xtype: 'treecolumn',
+                    text: abp.localization.localize("Permissions"),
+                    dataIndex: 'displayName',
+                    flex: 1
+                }]
         }]
         }
         , {
@@ -260,37 +249,28 @@ Ext.define('Chaching.view.users.UsersForm', {
                 text: abp.localization.localize("RowClickMessage"),
             },
             {
-            columnWidth: 0.5,
-            cls: 'chaching-grid',
-            hidden: true,
-            //padding: '0 0 0 10',
-            xtype: 'treepanel',
-            name: 'permissions',
-            itemId: 'permissionsCompanyListItemId',
-            store: new Chaching.store.roles.RolesTreeStore(),
-            rootVisible: false,
-            width: '100%',
-            height: '100%',
-            alwaysReload: false,
-            scrollable: true,
-            border: false,
-            hideHeaders: false,
-            columns: [{
-                xtype: 'treecolumn',
-                text: abp.localization.localize("Permissions"),
-                dataIndex: 'displayName',
-                flex: 1
-            }
-            ],
-            listeners: {
-                checkchange: function (node, checked, e, eOpts) {
-                    var me = this;
-                    var parentNode = node.parentNode;
-                    node.cascadeBy(function (n) {
-                        n.set('checked', checked);
-                    });
+                columnWidth: 0.5,
+                cls: 'chaching-grid',
+                hidden: true,
+                //padding: '0 0 0 10',
+                xtype: 'treepanel',
+                name: 'permissions',
+                itemId: 'permissionsCompanyListItemId',
+                store: new Chaching.store.roles.RolesTreeViewStore(),
+                rootVisible: false,
+                width: '100%',
+                height: '100%',
+                alwaysReload: false,
+                scrollable: true,
+                border: false,
+                hideHeaders: false,
+                columns: [{
+                    xtype: 'treecolumn',
+                    text: abp.localization.localize("Permissions"),
+                    dataIndex: 'displayName',
+                    flex: 1
                 }
-            }
+                ]
 
             }
 

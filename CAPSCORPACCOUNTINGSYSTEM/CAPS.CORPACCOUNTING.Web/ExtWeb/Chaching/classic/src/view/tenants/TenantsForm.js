@@ -26,6 +26,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
         ui: 'formTabPanels',
         items : [{
             title: abp.localization.localize("GeneralInformation").initCap(),
+            padding: '0 0 0 10',
             scrollable: true,
             iconCls: 'fa fa-gear',
             defaults: {
@@ -189,12 +190,14 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             }]
         }, {
             title: abp.localization.localize("CopyFromTenants"),
+            padding: '0 0 0 10',
             iconCls: 'fa fa-gear',
             disabled : true,
             xtype: 'grid',
             cls: 'chaching-grid',
-            itemId : 'moduleListGridItemId',
-            height: 400,
+            itemId: 'moduleListGridItemId',
+            width:'100%',
+            //height: 400,
             scrollable: true,
             selType: 'checkboxmodel',
             columns: [

@@ -43,7 +43,6 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
                 children: [],
                 leaf: false
             });
-
             var length = records.length,
                 parents = [];
             for (var i = 0; i < length; i++) {

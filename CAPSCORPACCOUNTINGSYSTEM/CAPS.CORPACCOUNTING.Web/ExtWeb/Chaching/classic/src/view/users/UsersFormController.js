@@ -12,9 +12,9 @@
             treePanel.setHidden(false);
             var treeStore = treePanel.getStore();
             var proxy = treeStore.getProxy();
-            proxy.api.read = abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole',
-            treeStore.getProxy().setExtraParams({ id: record.get('id') });
-            //treeStore.getProxy().setExtraParams({});
+            proxy.api.read = abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole';
+            treeStore.getProxy().setExtraParam('tenantId', abp.session.tenantId);
+            treeStore.getProxy().setExtraParam('roleId', record.get('id'));
             treeStore.reload();
         }
     },
@@ -22,15 +22,16 @@
         var me = this,
             view = me.getView();
         var treePanel = view.down('treepanel[itemId=permissionsCompanyListItemId]');
-        var linkCompanyMessageLabel = view.down('label[itemId=LinkCompanyMessageItemId]')
+        var linkCompanyMessageLabel = view.down('label[itemId=LinkCompanyMessageItemId]');
         if (treePanel) {
             if (linkCompanyMessageLabel)
                 linkCompanyMessageLabel.setHidden(true);
             treePanel.setHidden(false);
             var treeStore = treePanel.getStore();
             var proxy = treeStore.getProxy();
-            proxy.api.read = abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole',
-            treeStore.getProxy().setExtraParams({ id: record.get('id') });
+            proxy.api.read = abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole';
+            treeStore.getProxy().setExtraParam('tenantId', record.get('tenantId'));
+            treeStore.getProxy().setExtraParam('roleId', record.get('roleId'));
             treeStore.reload();
         }
     },
@@ -74,18 +75,41 @@
         if (rolesListRecords && rolesListRecords.length > 0) {
            var rolesListArray = [];
            Ext.each(rolesListRecords, function (rec) {
-                rolesListArray.push(rec.get('displayName'));
+               //rolesListArray.push(rec.get('displayName'));
+               rolesListArray.push(rec.get('name'));
             });
             record.data.assignedRoleNames = rolesListArray;
         }
+        
         if (companyListRecords && companyListRecords.length > 0) {
-            var tenantListArray = [];
+            var tempList = [],
+                roleId =[],
+                tenantListArray=[];
+            var isNewItem = false;
             Ext.each(companyListRecords, function (rec) {
-                tenantListArray.push({ tenantId: rec.get('tenantId'), tenantName: rec.get('tenantName') });
+                tempList.push({ tenantId: rec.get('tenantId'), tenantName: rec.get('tenantName'), roleIds: [rec.get('roleId')] });
+                if (tenantListArray.length > 0) {
+                    for (var i = 0; i < tenantListArray.length; i++) {
+                        if (tempList[0].tenantId == tenantListArray[i].tenantId) {
+                            tenantListArray[i].roleIds.push(tempList[0].roleIds);
+                            isNewItem = false;
+                            break;
+                        }
+                        else {
+                            isNewItem = true;
+                        }
+                    }
+                }
+                else {
+                    tenantListArray = tempList;
+                }
+                if (isNewItem) {
+                    tenantListArray.push({ tenantId: tempList[0].tenantId, tenantName: tempList[0].tenantName, roleIds: tempList[0].roleIds });
+                }
+                tempList = []; roleId = [];
             });
             record.data.tenantList = tenantListArray;
         }
-        
         return record;
     }
     ,

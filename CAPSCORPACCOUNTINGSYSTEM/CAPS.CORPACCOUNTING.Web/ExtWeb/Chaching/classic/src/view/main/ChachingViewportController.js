@@ -108,7 +108,6 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
 
             me.lastView = newView;
         //} catch (e) {
-           // debugger;
             //Ext.toast('Please create view for the menuitem you clicked');
         //}
     },

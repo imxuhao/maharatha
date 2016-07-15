@@ -1,9 +1,6 @@
 Ext.define('Chaching.view.users.UsersGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.users-usersgrid',
-    userPermissionsActionClick: function (menu, formView, isEdit) {
-        debugger;
-    },
     doAfterCreateAction: function (createMode, formView, isEdit, record) {
         var me = this,
          form = formView.getForm();
@@ -57,15 +54,22 @@ Ext.define('Chaching.view.users.UsersGridController', {
             var rolesStore = rolesGrid.getStore();
             rolesStore.load();
             //load company list
-            var companyListGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
-            var companyListStore = companyListGrid.getStore();
-            var proxy = companyListStore.getProxy();
-            proxy.url = abp.appPath + 'api/services/app/user/GetTenantListofOrganization',
-            companyListStore.getProxy().setExtraParams({ id: abp.session.tenantId });
-            companyListStore.load();
-            //enable tabs
-            if (companyListTab) {
-                companyListTab.setDisabled(false);
+            if (abp.session.tenantId) {
+                var companyListGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
+                var companyListStore = companyListGrid.getStore();
+                var proxy = companyListStore.getProxy();
+                proxy.url = abp.appPath + 'api/services/app/user/GetTenantListofOrganization',
+                companyListStore.getProxy().setExtraParams({ id: abp.session.tenantId });
+                companyListStore.load();
+                //enable tabs
+                if (companyListTab) {
+                    companyListTab.setDisabled(false);
+                }
+            }
+            else {
+                if (companyListTab) {
+                    companyListTab.setDisabled(true);
+                }
             }
         }
        

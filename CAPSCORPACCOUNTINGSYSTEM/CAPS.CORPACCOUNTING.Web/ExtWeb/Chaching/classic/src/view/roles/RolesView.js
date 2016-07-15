@@ -7,8 +7,8 @@ Ext.define('Chaching.view.roles.RolesView',{
         'Chaching.view.roles.RolesForm'
     ],
     controller: 'roles-rolesview',    
-    height: 500,
-    width: 450,
+    height: 600,
+    width: 550,
     layout: 'fit',
     title: app.localize("Editrole"),
     defaultFocus: 'roleName',

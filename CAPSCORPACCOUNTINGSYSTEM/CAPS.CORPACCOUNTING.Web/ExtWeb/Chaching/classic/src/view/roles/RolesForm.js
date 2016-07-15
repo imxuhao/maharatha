@@ -2,14 +2,10 @@
 Ext.define('Chaching.view.roles.RolesForm',{
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['host.roles.create', 'host.roles.edit'],
-
     requires: [
         'Chaching.view.roles.RolesFormController'       
     ],
-
     controller: 'roles-rolesform',
-  
-
     name: 'Administration.Roles',
     openInPopupWindow: true,
     hideDefaultButtons: false,
@@ -20,6 +16,9 @@ Ext.define('Chaching.view.roles.RolesForm',{
         blankText: app.localize('MandatoryToolTipText')
     },
     defaultFocus: 'textfield#displayName',
+    listeners: {
+        resize: 'onRolesFormResize'
+    },
     items: {
         xtype: 'tabpanel',
         width:'100%',
@@ -67,8 +66,9 @@ Ext.define('Chaching.view.roles.RolesForm',{
             //store: 'roles.RolesTreeStore',
             store: new Chaching.store.roles.RolesTreeStore(),
             rootVisible: false,
-            width: 400,
-            height: 500,
+            //width: 400,
+            //height: 500,
+            width:'100%',
             alwaysReload: false,
             scrollable: true,
             hideHeaders: true,
@@ -79,13 +79,7 @@ Ext.define('Chaching.view.roles.RolesForm',{
             }
             ],
             listeners: {
-                checkchange: function (node, checked, e, eOpts) {
-                    var me = this;
-                    var parentNode = node.parentNode;
-                    node.cascadeBy(function (n) {
-                        n.set('checked', checked);
-                    });
-                }
+                checkchange: 'onTreeCheckChange'
             }
         }
         

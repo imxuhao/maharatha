@@ -18,11 +18,6 @@ Ext.define('Chaching.view.users.UsersGrid', {
     name: 'Administration.Users',
     padding: 5,
     gridId: 7,
-    actionColumnMenuItemsConfig: [{
-        text: app.localize('Permissions'),
-        iconCls: 'fa fa-pencil',
-        clickActionName: 'userPermissionsActionClick'
-    }],
     headerButtonsConfig: [
     {
         xtype: 'displayfield',

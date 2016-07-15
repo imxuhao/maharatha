@@ -10,21 +10,15 @@
         expanded: true
     },
     proxy: {
-
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
-            //create: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
-            //read: abp.appPath + 'api/services/app/role/GetRoleForEdit',
-            read: abp.appPath + 'api/services/app/role/GetPermissionsForSelectedRole',
-            //update: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
-            //destroy: abp.appPath + 'api/services/app/role/DeleteRole'
+            read: abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole'
         },
         reader: {
             type: 'json',
-            rootProperty: 'result.grantedPermissionNames'
+            rootProperty: 'result.permissions'
         }
-
     },
     listeners: {
         load: function (permissionStore, records, success) {
@@ -48,10 +42,7 @@
             var parents = [];
             for (var i = 0; i < length; i++) {
                 var item = records[i];
-                if (item.get('name') === "Pages" && item.get('parentId') === "root") {
-                    pages.set('checked', item.get('isPermissionGranted') ? true : false);
-                }
-                else if (item.get('parentName') === "Pages") {
+                if (item.get('parentName') === "Pages") {
                     parents.push(item);
                 }
             }
@@ -68,13 +59,11 @@
     },
     buildChilds: function (parent, records) {
         var me = this;
-        //parent.set('checked', parent.get('isPermissionGranted') ? true : false);
         var parentName = parent.get('name');
         if (!parent.data.children) parent.data.children = [];
         for (var i = 0; i < records.length; i++) {
             var record = records[i];
             if (record.get('parentName') === parentName) {
-                //record.set('checked', record.get('isPermissionGranted') ? true : false);
                 parent.appendChild(record);
                 record.set('loaded', true);
                 record.set('expanded', true);

@@ -1,6 +1,14 @@
 Ext.define('Chaching.view.tenants.TenantsFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.tenants-tenantsform',
+    onFormResize: function (form, newWidth, newHeight, oldWidth, oldHeight) {
+        var me = this,
+           view = me.getView();
+        var gridPanel = view.down('grid[itemId=moduleListGridItemId]');
+        if (gridPanel) {
+            gridPanel.setHeight(newHeight - 100);
+        }
+    },
     onOrganizationSelect: function (combo, record, eOpts) {
         var me = this,
             view = me.getView();

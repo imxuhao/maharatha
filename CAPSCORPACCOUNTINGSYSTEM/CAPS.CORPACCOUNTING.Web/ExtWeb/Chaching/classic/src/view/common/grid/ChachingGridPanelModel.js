@@ -31,7 +31,6 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
         typeOfSubAccountList: {
             fields: [{ name: 'name' }, { name: 'value' }, {
                 name: 'typeofSubAccount', convert: function (value, record) {
-                    //debugger;
                     return record.get('name');
                 }
             }, {

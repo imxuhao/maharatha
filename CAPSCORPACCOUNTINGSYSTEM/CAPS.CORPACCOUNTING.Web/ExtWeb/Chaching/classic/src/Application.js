@@ -10,6 +10,7 @@ Ext.define('Chaching.Application', {
 
     name: 'Chaching',
     requires: [
+        'Chaching.utilities.ChachingGlobals',
         'Chaching.view.common.grid.ChachingGridPanel',
         'Ext.saki.grid.MultiSearch',
         'Ext.ux.grid.MultiSort',
@@ -99,7 +100,8 @@ Ext.define('Chaching.Application', {
         'administration.organization.ConnectionStringListStore',
         'purchaseorders.entry.PurchaseOrderDetailHistoryStore',
         'tenants.TenantUserListStore',
-        'users.CompanyRoleStore'
+        'users.CompanyRoleStore',
+        'Chaching.store.ItemsPerPageStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

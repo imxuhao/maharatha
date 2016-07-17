@@ -20,13 +20,25 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         //    }
         //}
     },
-    onGridItemsPerPageChange : function(combo, record, eOpts) {
+    onGridItemsPerPageChange: function (combo, record, eOpts) {
         var me = this,
          pagingtoolbar = combo.up('pagingtoolbar'),
          store = pagingtoolbar.getStore();
         if (combo.getValue() && store) {
             store.pageSize = combo.getValue();
             store.load();
+        }
+    },
+    onGridItemsPerPageComboRender: function (combo) {
+        var me = this,
+         pagingtoolbar = combo.up('pagingtoolbar'),
+         store = pagingtoolbar.getStore(),
+         pageSize = store.pageSize;
+        if (store && pageSize) {
+            var gridPageSize = combo.getStore().findRecord('pageSize', pageSize);
+            if (gridPageSize) {
+                combo.setValue(gridPageSize);
+            }
         }
     },
     createEditRecordInTab: function (hash) {

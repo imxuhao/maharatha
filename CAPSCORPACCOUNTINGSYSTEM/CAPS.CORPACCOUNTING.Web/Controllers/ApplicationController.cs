@@ -15,5 +15,11 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
             return View("~/App/common/views/layout/layout.cshtml"); //Layout of the angular application.
         }
+
+        [DisableAuditing]
+        public ActionResult App()
+        {
+            return View();
+        }
     }
 }

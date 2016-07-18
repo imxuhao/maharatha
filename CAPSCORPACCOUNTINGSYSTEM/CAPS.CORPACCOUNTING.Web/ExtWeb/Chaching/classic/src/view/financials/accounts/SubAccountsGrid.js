@@ -8,7 +8,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
 
     controller: 'financials-accounts-subaccountsgrid',
 
-    xtype: 'widget.financials.accounts.subaccounts',
+    xtype: 'financials.accounts.subaccounts',
     store: 'financials.accounts.SubAccountsStore',
     name: 'Financials.Accounts.SubAccounts',
     modulePermissions: {

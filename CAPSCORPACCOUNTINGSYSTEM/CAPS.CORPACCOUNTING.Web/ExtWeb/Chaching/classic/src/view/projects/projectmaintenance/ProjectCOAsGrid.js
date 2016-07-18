@@ -7,7 +7,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
     ],
     controller: 'projects-projectmaintenance-projectcoasgrid',
     
-    xtype: 'widget.projects.projectmaintenance.projectcoas',
+    xtype: 'projects.projectmaintenance.projectcoas',
     store: 'projects.projectmaintenance.ProjectCoaStore',
     name: 'Financials.Accounts.ChartOfAccounts',
     modulePermissions: {

@@ -1,7 +1,7 @@
 
 Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
     extend: 'Chaching.view.common.grid.ChachingTransactionDetailGrid',
-    xtype:'widget.financials.journals.entry.transactionDetails',
+    xtype:'financials.journals.entry.transactionDetails',
     requires: [
         'Chaching.view.financials.journals.JournalTransactionDetailGridController'
     ],

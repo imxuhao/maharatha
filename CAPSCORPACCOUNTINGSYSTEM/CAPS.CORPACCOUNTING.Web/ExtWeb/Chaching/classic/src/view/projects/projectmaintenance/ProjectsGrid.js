@@ -14,7 +14,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
     requires: [
         'Chaching.view.projects.projectmaintenance.ProjectsGridController'
     ],
-    xtype:'widget.projects.projectmaintenance.projects',
+    xtype:'projects.projectmaintenance.projects',
     controller: 'projects-projectmaintenance-projectsgrid',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),

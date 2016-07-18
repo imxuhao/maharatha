@@ -7,7 +7,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
     ],
     controller: 'projects-projectmaintenance-linenumbersgrid',
 
-    xtype: 'widget.projects.projectmaintenance.linenumbers',
+    xtype: 'projects.projectmaintenance.linenumbers',
     store: 'projects.projectmaintenance.LinesStore',
     name: 'Projects.Projectmaintenance.Lines',
     modulePermissions: {

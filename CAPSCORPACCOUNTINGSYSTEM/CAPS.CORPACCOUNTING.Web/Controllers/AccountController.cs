@@ -102,7 +102,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
                 // returnUrl = Url.Action("Index", "Application");
-                returnUrl = Url.Action("Extjs", "Home");
+                returnUrl = Url.Action("App", "Application");
             }
 
             ViewBag.ReturnUrl = returnUrl;
@@ -157,7 +157,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             if (string.IsNullOrWhiteSpace(returnUrl))
             {
                 //returnUrl = Url.Action("Index", "Application");
-                returnUrl = Url.Action("Extjs", "Home");
+                returnUrl = Url.Action("App", "Application");
             }
 
             if (!string.IsNullOrWhiteSpace(returnUrlHash))
@@ -367,7 +367,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                     if (loginResult.Result == AbpLoginResultType.Success)
                     {
                         await SignInAsync(loginResult.User, loginResult.Identity);
-                        return Redirect(Url.Action("Index", "Application"));
+                        //return Redirect(Url.Action("Index", "Application"));
+                        return Redirect(Url.Action("App", "Application"));
                     }
 
                     Logger.Warn("New registered user could not be login. This should not be normally. login result: " +
@@ -516,7 +517,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 await SignInAsync(user);
             }
 
-            return RedirectToAction("Index", "Application");
+            //return RedirectToAction("Index", "Application");
+            return RedirectToAction("App", "Application");
         }
 
         #endregion
@@ -708,7 +710,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                     if (string.IsNullOrWhiteSpace(returnUrl))
                     {
-                        returnUrl = Url.Action("Index", "Application");
+                        //returnUrl = Url.Action("Index", "Application");
+                        returnUrl = Url.Action("App", "Application");
                     }
 
                     return Redirect(returnUrl);
@@ -914,7 +917,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Remove the cache item to prevent re-use
             await _cacheManager.GetImpersonationCache().RemoveAsync(tokenId);
 
-            return RedirectToAction("Index", "Application");
+            //return RedirectToAction("Index", "Application");
+            return RedirectToAction("App", "Application");
         }
 
         [UnitOfWork]
@@ -956,7 +960,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Remove the cache item to prevent re-use
             await _cacheManager.GetImpersonationCache().RemoveAsync(tokenId);
 
-            return RedirectToAction("Extjs", "Home");
+            return RedirectToAction("App", "Application");
         }
 
         public virtual JsonResult IsImpersonatedLogin()
@@ -1125,7 +1129,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Remove the cache item to prevent re-use
             await _cacheManager.GetSwitchToLinkedAccountCache().RemoveAsync(tokenId);
 
-            return RedirectToAction("Index", "Application");
+            //return RedirectToAction("Index", "Application");
+            return RedirectToAction("App", "Application");
         }
 
         private async Task<JsonResult> SaveAccountSwitchTokenAndGetTargetUrl(int? targetTenantId, long targetUserId)

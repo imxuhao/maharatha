@@ -320,8 +320,8 @@
     /**
      * Settings specific to testing builds.
      */
-    "testing": {
-    },
+  "testing": { 
+  },
     
     /**
      * Settings specific to development builds.
@@ -412,20 +412,23 @@
      *      }
      *
      */
-    
-    "output": {
-        "base": "${workspace.build.dir}/${build.environment}/${app.name}",
-        "page": "index.html",
-        "manifest": "${build.id}.json",
-        "js": "${build.id}/app.js",
-        "appCache": {
-            "enable": false
-        },
-        "resources": {
-            "path": "${build.id}/resources",
-            "shared": "resources"
-        }
+  /*****Do Not touch this part*****/
+  "output": {
+    "base": "${workspace.build.dir}/${build.environment}/${app.name}",
+    "page": {
+        "path": "../../../../Views/index.html",
+        "enable": false
     },
+    "manifest": "${build.id}.json",
+    "js": "${build.id}/app.js",
+    "appCache": {
+      "enable": false
+    },
+    "resources": {
+      "path": "${build.id}/resources",
+      "shared": "resources"
+    }
+  },
     
     
     /**

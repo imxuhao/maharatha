@@ -25,7 +25,7 @@ Ext.define('Chaching.Application', {
     ],
     mainView:'Chaching.view.main.Main',
     launch: function () {
-       
+
     },
   
 
@@ -39,3 +39,7 @@ Ext.define('Chaching.Application', {
         );
     }
 });
+var nullHandler = function (val) {
+    if (val) return val;
+    else return null;
+};

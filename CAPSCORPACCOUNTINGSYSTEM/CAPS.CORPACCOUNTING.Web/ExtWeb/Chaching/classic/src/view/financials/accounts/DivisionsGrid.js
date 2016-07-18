@@ -1,7 +1,7 @@
 
 Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
-    xtype: 'widget.financials.accounts.divisions',
+    xtype: 'financials.accounts.divisions',
     requires: [
         'Chaching.view.financials.accounts.DivisionsGridController'
     ],

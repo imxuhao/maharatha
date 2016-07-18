@@ -14,7 +14,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
     requires: [
         'Chaching.view.financials.fiscalperiod.FiscalPeriodGridController'
     ],
-    xtype: 'widget.financials.fiscalperiod',
+    xtype: 'financials.fiscalperiod',
     name : 'Financials.FiscalPeriod',
     controller: 'financials.fiscalperiodgrid',
     modulePermissions: {

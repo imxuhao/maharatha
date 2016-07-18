@@ -5,7 +5,7 @@
     ],
     controller: 'financials-accounts-accountsgrid',
 
-    xtype: 'widget.financials.accounts.accounts',
+    xtype: 'financials.accounts.accounts',
     store: 'financials.accounts.AccountsStore',
     name: 'Financials.Accounts.Accounts',
     modulePermissions: {

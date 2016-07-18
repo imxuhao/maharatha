@@ -290,11 +290,11 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                 .PageBy(input)
                 .ToListAsync();
 
-            var poIdList = string.Join(",", results.Select(x => x.purchaseOrder.Id.ToString()).ToArray());
+            var poIdList = string.Join(",", results.Select(x => x.purchaseOrder.Id).ToArray());
 
             var poDetailsList = from poDetail in _purchaseOrderDetailUnitRepository.GetAll()
                                 join account in _accountUnitRepository.GetAll() on poDetail.AccountId equals account.Id
-                                join job in _jobUnitRepository.GetAll() on poDetail.AccountId equals job.Id
+                                join job in _jobUnitRepository.GetAll() on poDetail.JobId equals job.Id
                                 select new
                                 {
                                     AccountingDocumentId = poDetail.AccountingDocumentId,

@@ -822,7 +822,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         },
                         items:[
                         {
-                            xtype: 'widget.projects.projectmaintenance.projectLocations',
+                            xtype: 'projects.projectmaintenance.projectLocations',
                             itemId: 'jobLocationsGridPanel'
                         }]
                     }]
@@ -860,7 +860,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         },
                         items:[
                         {
-                            xtype: 'widget.projects.projectmaintenance.porangeallocation',
+                            xtype: 'projects.projectmaintenance.porangeallocation',
                             itemId: 'jobPurchaseOrderAllocation'
                         }]
                     }]

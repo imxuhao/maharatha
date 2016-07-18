@@ -1,7 +1,7 @@
 
 Ext.define('Chaching.view.payables.invoices.AccountsPayableDetailGrid',{
     extend: 'Chaching.view.common.grid.ChachingTransactionDetailGrid',
-    xtype: 'widget.payables.invoices.transactionDetails',
+    xtype: 'payables.invoices.transactionDetails',
 
     requires: [
         'Chaching.view.payables.invoices.AccountsPayableDetailGridController'

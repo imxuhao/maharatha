@@ -10,7 +10,7 @@
  */
 Ext.define('Chaching.view.projects.projectmaintenance.PoRangeAllocationGrid',{
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
-    xtype: 'widget.projects.projectmaintenance.porangeallocation',
+    xtype: 'projects.projectmaintenance.porangeallocation',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),

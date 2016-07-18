@@ -8,7 +8,7 @@ Ext.define('Chaching.view.administration.organization.CompanySetupGrid', {
 
     controller: 'administration-organization-companysetupgrid',
 
-    xtype: 'widget.companysetup',
+    xtype: 'companysetup',
     name: "Administration.CompanySetUp",
     store: 'administration.organization.CompanyStore',   
     modulePermissions: {

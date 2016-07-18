@@ -4,14 +4,14 @@
         'Chaching.view.batchposting.batches.BatchesGridController'
     ],
     controller: 'batchposting-batches-batchesgrid',
-    xtype: 'widget.batchposting.batches',
+    xtype: 'batchposting.batches',
     store: 'batchposting.batches.BatchesStore',
     name: 'BatchPosting.Batches',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.BatchPosting.Batches'),
         create: abp.auth.isGranted('Pages.BatchPosting.Batches.Create'),
         edit: abp.auth.isGranted('Pages.BatchPosting.Batches.Edit'),
-        destroy: abp.auth.isGranted('Pages.BatchPosting.Batches.Delete'),
+        destroy: abp.auth.isGranted('Pages.BatchPosting.Batches.Delete')
     },
     padding: 5,
     gridId: 19,

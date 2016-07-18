@@ -1,6 +1,6 @@
 Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
-    xtype: 'widget.financials.journals.entry',
+    xtype: 'financials.journals.entry',
     requires: [
         'Chaching.view.financials.journals.JournalEntryGridController'
     ],

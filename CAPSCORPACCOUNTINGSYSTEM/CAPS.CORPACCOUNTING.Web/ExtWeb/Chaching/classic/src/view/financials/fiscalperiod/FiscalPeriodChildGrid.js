@@ -1,7 +1,7 @@
 ﻿
 Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodChildGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
-    xtype: 'widget.financials.fiscalperiodchildgrid',
+    xtype: 'financials.fiscalperiodchildgrid',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Financials.FiscalPeriod'),
         create: abp.auth.isGranted('Pages.Financials.FiscalPeriod.Create'),

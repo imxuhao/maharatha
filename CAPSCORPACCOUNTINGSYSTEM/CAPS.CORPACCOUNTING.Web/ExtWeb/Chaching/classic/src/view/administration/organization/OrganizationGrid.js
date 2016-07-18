@@ -8,7 +8,7 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
 
     controller: 'administration-organization-organizationgrid',
 
-    xtype: 'widget.organizationUnits',
+    xtype: 'organizationUnits',
     store: 'administration.organization.OrganizationsStore',
     name: 'Administration.OrganizationUnits',
     modulePermissions: {

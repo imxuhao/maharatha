@@ -1,7 +1,7 @@
 
 Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderDetailHistoryGrid',{
     extend: 'Chaching.view.common.grid.ChachingTransactionDetailGrid',
-    xtype: 'widget.purchaseorders.entry.transactionDetailsHistory',
+    xtype: 'purchaseorders.entry.transactionDetailsHistory',
 
     requires: [
         'Chaching.view.purchaseorders.entry.PurchaseOrderDetailHistoryGridController'

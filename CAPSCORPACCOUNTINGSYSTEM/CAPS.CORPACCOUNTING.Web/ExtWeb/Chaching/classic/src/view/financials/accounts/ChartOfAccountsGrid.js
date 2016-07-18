@@ -8,7 +8,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
 
     controller: 'financials-accounts-chartofaccountsgrid',
 
-    xtype: 'widget.financials.accounts.coa',
+    xtype: 'financials.accounts.coa',
     store: 'financials.accounts.ChartOfAccountStore',
     name: 'Financials.Accounts.ChartOfAccounts',
     modulePermissions: {

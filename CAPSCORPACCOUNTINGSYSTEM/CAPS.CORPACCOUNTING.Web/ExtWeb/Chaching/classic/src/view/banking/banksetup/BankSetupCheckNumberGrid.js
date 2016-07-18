@@ -1,7 +1,7 @@
 ﻿
 Ext.define('Chaching.view.banking.banksetup.BankSetupCheckNumberGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
-    xtype: 'widget.banking.banksetup.checknumbergrid',
+    xtype: 'banking.banksetup.checknumbergrid',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Banking.BankSetup'),
         create: abp.auth.isGranted('Pages.Banking.BankSetup.Create'),

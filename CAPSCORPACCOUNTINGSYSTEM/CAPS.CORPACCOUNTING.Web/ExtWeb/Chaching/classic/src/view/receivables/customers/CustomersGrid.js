@@ -8,7 +8,7 @@ Ext.define('Chaching.view.receivables.customers.CustomersGrid', {
 
     controller: 'receivables-customers-customersgrid',
 
-    xtype: 'widget.receivables.customers',
+    xtype: 'receivables.customers',
     store: 'receivables.customers.CustomersStore',
     name: 'Receivables.Customers',
     modulePermissions: {

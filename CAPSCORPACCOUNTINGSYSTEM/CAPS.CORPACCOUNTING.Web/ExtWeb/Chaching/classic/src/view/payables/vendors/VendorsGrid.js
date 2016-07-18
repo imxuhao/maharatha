@@ -8,7 +8,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
 
     controller: 'payables-vendors-vendorsgrid',
 
-    xtype: 'widget.payables.vendors',
+    xtype: 'payables.vendors',
     store: 'payables.vendors.VendorsStore',
     name: 'Payables.Vendors',
     modulePermissions: {

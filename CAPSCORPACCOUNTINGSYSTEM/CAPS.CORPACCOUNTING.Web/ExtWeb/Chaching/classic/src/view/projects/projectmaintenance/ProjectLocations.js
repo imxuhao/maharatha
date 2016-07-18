@@ -10,7 +10,7 @@
  */
 Ext.define('Chaching.view.projects.projectmaintenance.ProjectLocations',{
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
-    xtype: 'widget.projects.projectmaintenance.projectLocations',
+    xtype: 'projects.projectmaintenance.projectLocations',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Projects.Create'),

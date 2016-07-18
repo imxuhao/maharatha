@@ -21354,6 +21354,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Auth\ApplicationSignInManager.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Results\ChallengeResult.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -21588,6 +21589,7 @@
     <Content Include="Views\TenantRegistration\Index.cshtml" />
     <Content Include="Views\TenantRegistration\RegisterResult.cshtml" />
     <Content Include="Views\Error\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Application\App.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

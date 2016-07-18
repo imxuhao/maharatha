@@ -13,6 +13,11 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGridController', {
             auditLogGridStore.load();
         }
         
+    },
+    showAuditLogDetailView: function (grid, rowIndex, colIndex) {
+        var rec = grid.getStore().getAt(rowIndex);
+        var detailView = Ext.create('Chaching.view.auditlogs.AuditLogDetailView', { autoShow: true });
+        detailView.down('dataview').getStore().add(rec);
     }
     
 });

@@ -38,10 +38,17 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
     multiColumnSort: true,
     columns: [
           {
-              xtype: 'gridcolumn',
+              xtype: 'actioncolumn',
               width: '5%',
-              maxWidth : 40,
-              renderer: Chaching.utilities.ChachingRenderers.auditLogView
+              maxWidth: 30,
+              items: [{
+                  iconCls: 'searchCls',
+                  tooltip: app.localize('ShowAuditLogDetailView_Tooltip'),
+                  handler: 'showAuditLogDetailView'
+              }],
+             
+
+              //renderer: Chaching.utilities.ChachingRenderers.auditLogView
           },
         {
             xtype: 'gridcolumn',
@@ -167,6 +174,9 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
                  emptyText: 'Enter Browser to search'
              }
          }
-    ]
+    ],
+    listeners: {
+        cellclick : 'showAuditLogDetailView'
+    }
 });
 

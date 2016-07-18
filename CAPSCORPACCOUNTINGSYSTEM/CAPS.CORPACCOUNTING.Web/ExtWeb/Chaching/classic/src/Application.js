@@ -101,7 +101,9 @@ Ext.define('Chaching.Application', {
         'purchaseorders.entry.PurchaseOrderDetailHistoryStore',
         'tenants.TenantUserListStore',
         'users.CompanyRoleStore',
-        'Chaching.store.ItemsPerPageStore'
+        'Chaching.store.ItemsPerPageStore',
+        'maintenance.CacheStore',
+        'maintenance.WebLogStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

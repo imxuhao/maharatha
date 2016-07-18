@@ -3661,6 +3661,8 @@
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguagesFlagModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguagesNamesModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageTextsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\maintenance\CacheModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\maintenance\WebLogModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\manageView\ManageViewModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\address\AddressModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\batchposting\batches\BatchesModel.js" />
@@ -3708,6 +3710,8 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\fiscalperiod\FiscalPeriodStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\ItemsPerPageStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\maintenance\CacheStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\maintenance\WebLogStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\manageView\ManageViewStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\batchposting\batches\BatchesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\invoices\AccountsPayableDetailsStore.js" />
@@ -3868,6 +3872,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\SubAccountsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\SubAccountsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\SubAccountsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\maintenance\MaintenanceFormPanel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\maintenance\MaintenanceFormPanelController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewList.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewListController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\manageView\ManageViewView.js" />

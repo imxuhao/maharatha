@@ -23,6 +23,7 @@
          'banking.banksetup',
          'financials.fiscalperiod',
          'receivables.customers',
-         'purchaseorders.entry'
+         'purchaseorders.entry',
+         'host.maintenance'
     ]
 });

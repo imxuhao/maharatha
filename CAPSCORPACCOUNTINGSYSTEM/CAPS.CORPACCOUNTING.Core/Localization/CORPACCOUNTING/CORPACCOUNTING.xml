@@ -349,7 +349,7 @@
     <text name="Caches">Caches</text>
     <text name="CacheSuccessfullyCleared">Cache successfully cleared.</text>
     <text name="AllCachesSuccessfullyCleared">All caches successfully cleared.</text>
-    <text name="ClearAll">Clear all</text>
+    <text name="ClearAll">Clear All</text>
     <text name="Clear">Clear</text>
     <text name="CachesHeaderInfo">You can clear caches in application on this page.</text>
     <text name="TestEmailSettingsHeader">Test Email Settings</text>
@@ -359,7 +359,7 @@
     <text name="TestEmailSentSuccessfully">Test e-mail sent successfully.</text>
     <text name="WebSiteLogs">Website Logs</text>
     <text name="WebSiteLogsHeaderInfo">You can see latest logs in this page or download all logs in a single zip file.</text>
-    <text name="DownloadAll">Download all</text>
+    <text name="DownloadAll">Download All</text>
     <text name="TenantManagement">Tenant management</text>
     <text name="AllowTenantsToRegisterThemselves" value="Allow tenants to register to the system." />
     <text name="AllowTenantsToRegisterThemselves_Hint" value="If you disable this, tenants will only be added by admin using tenant management page." />

@@ -9,7 +9,7 @@ Ext.define('Chaching.view.profile.loginAttempts.LoginAttemptView',{
 
     controller: 'profile-loginattempts-loginattemptview',
     height: 600,
-    width: 550,
+    width: 600,
     layout: 'fit',
     title: app.localize("LoginAttempts"),
     initComponent: function (config) {

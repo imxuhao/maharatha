@@ -4,15 +4,19 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGridController', {
     onRefreshClick: function (btn) {
         var me = this,
         auditLogGrid = me.getView(),
-        plugin = auditLogGrid.getPlugin('gms'),
+        multiSearchPlugin = auditLogGrid.getPlugin('gms'),
         auditLogGridStore = auditLogGrid.getStore();
+        auditLogGridStore.currentPage = 1;
         if (auditLogGridStore.getFilters().length > 0) {
-            plugin.clearValues(true);
+            multiSearchPlugin.clearValues(true);
             auditLogGridStore.clearFilter();
         } else {
-            auditLogGridStore.load();
+            auditLogGridStore.loadPage(1);
         }
-        
+        auditLogGridStore.getSorters().clear();
+        if (auditLogGridStore.remoteSort)
+            auditLogGridStore.loadPage(1,{ sortList: null, filters: null });
+
     },
     showAuditLogDetailView: function (grid, rowIndex, colIndex) {
         var rec = grid.getStore().getAt(rowIndex);

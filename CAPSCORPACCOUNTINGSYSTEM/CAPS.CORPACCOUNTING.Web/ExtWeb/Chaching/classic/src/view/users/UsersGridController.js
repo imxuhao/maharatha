@@ -1,6 +1,24 @@
 Ext.define('Chaching.view.users.UsersGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.users-usersgrid',
+    PermissionsClicked: function () {
+        //alert('asd');
+    },
+    doRowSpecificEditDelete: function (button, grid) {
+        var menu = button.menu;
+        var permissionButton = menu.items.get('permissions');
+        var separatorButton = menu.items.get('actionMenuSeparator');
+        
+        if (permissionButton && abp.session.tenantId == null) {
+            permissionButton.show();
+            separatorButton.show();
+        }
+        else if(permissionButton) {
+            permissionButton.hide();
+            separatorButton.hide();
+        }
+        
+    },
     doAfterCreateAction: function (createMode, formView, isEdit, record) {
         var me = this,
          form = formView.getForm();

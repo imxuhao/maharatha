@@ -1050,5 +1050,8 @@
 <text name="GridItemsPerPage" value="Items per page" />
 <text name="ShowAuditLogDetailView_Tooltip" value="Show Audit Log Detail View" />
     <text name="Status" value="Status" />
+<text name="ViewPermissions" value="View Permissions" />
+<text name="View" value="View" />
+    
   </texts>
 </localizationDictionary>

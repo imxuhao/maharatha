@@ -7,6 +7,8 @@ Ext.define('Chaching.view.roles.RolesView',{
         'Chaching.view.roles.RolesForm'
     ],
     controller: 'roles-rolesview',    
+    //height: 'setComponentHeight',
+    //cls: "expand-panel",
     height: 600,
     width: 550,
     layout: 'fit',

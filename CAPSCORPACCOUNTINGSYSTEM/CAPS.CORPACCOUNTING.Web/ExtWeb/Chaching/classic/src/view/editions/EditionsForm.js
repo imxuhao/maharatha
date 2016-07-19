@@ -22,10 +22,12 @@ Ext.define('Chaching.view.editions.EditionsForm',{
     items: [{
         xtype: 'tabpanel',
         region: 'center',      
-        ui: 'dashboard',       
+        ui: 'formTabPanels',
+        //ui: 'dashboard',
         items: [
         {
-            title: 'Editions',                
+            title: 'Editions',
+            padding: '0 0 0 10',
             iconCls: 'icon-grid',
             items: [{
                 xtype: 'hiddenfield',
@@ -44,8 +46,18 @@ Ext.define('Chaching.view.editions.EditionsForm',{
         },
         {
             title: 'Features',
-            ui: 'dashboard',          
-            iconCls: 'icon-home'
+            padding: '0 0 0 10',        
+            iconCls: 'icon-home',
+            items: [{
+                xtype: 'textfield',
+                name: 'displayName',
+                itemId: 'displayFeatures',
+                fieldLabel: app.localize('Name'),
+                width: '100%',
+                ui: 'fieldLabelTop',
+                emptyText: app.localize('Edition Name')
+            }
+            ]
         }
         ]
     }

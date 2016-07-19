@@ -22,11 +22,12 @@ Ext.define('Chaching.view.roles.RolesForm',{
     items: {
         xtype: 'tabpanel',
         width:'100%',
-        //region: 'center',      
-        ui: 'dashboard',       
+        ui: 'formTabPanels',
+        //ui: 'dashboard',       
         items: [
         {
             title: app.localize('Roles'),                            
+            padding:'0 0 0 10',
             items: [{
                 xtype: 'hiddenfield',
                 name: 'id',
@@ -59,15 +60,15 @@ Ext.define('Chaching.view.roles.RolesForm',{
         },
         {
             title: app.localize('Permissions'),
+            padding: '0 0 0 10',
             layout : 'fit',
             xtype: 'treepanel',
             name: 'permissions',
-            itemId : 'permissionsItemId',
+            itemId: 'permissionsItemId',
+            cls: 'chaching-grid',
             //store: 'roles.RolesTreeStore',
             store: new Chaching.store.roles.RolesTreeStore(),
             rootVisible: false,
-            //width: 400,
-            //height: 500,
             width:'100%',
             alwaysReload: false,
             scrollable: true,

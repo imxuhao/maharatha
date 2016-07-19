@@ -7,6 +7,32 @@
         if (val) return 'YES';
         else return 'NO';
     },
+    addButtonRenderer: function (value, cell) {
+        var id = Ext.id();
+        var widgetRec = cell.record;
+        var widgetCol = cell.column;
+        Ext.Function.defer(function () {
+            var button = Ext.create('Ext.button.Button', {
+                ui: 'actionMenuButton',
+                pressed : false,
+                scale: 'small',
+                width: '35%',
+                text: app.localize('Permissions'),
+                iconCls: 'fa fa-sign-in',
+                iconAlign: 'left',
+                widgetRec: widgetRec,
+                widgetCol: widgetCol,
+                listeners: {
+                    //click: gridController.ViewPermissions
+                },
+            });
+            if (Ext.get(id)) {
+                button.render(Ext.get(id));
+            }
+        }, 1);
+        return '<div id="' + id + '"></div>';
+        
+    },
     unlinkedaccount: function (value, cell) {
         var gridController = this.getController(),
             view = gridController.getView();

@@ -39,6 +39,12 @@ Ext.define('Chaching.view.users.UsersGrid', {
         iconCls: 'fa fa-plus',
         iconAlign: 'left'
     }],
+    actionColumnMenuItemsConfig: [{
+        text: app.localize('Permissions'),
+        itemId: 'permissions',
+        iconCls: 'fa fa-pencil',
+        clickActionName: 'PermissionsClicked'
+    }],
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
@@ -46,6 +52,8 @@ Ext.define('Chaching.view.users.UsersGrid', {
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
+    scrollable : true,
+    //forceFit: true,
     editWndTitleConfig: {
         title: app.localize('EditUser'),
         iconCls: 'fa fa-pencil'
@@ -134,6 +142,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
              dataIndex: 'emailAddress',
              sortable: true,
              groupable: true,
+             flex: 1,
              width: '20%',
              filterField: {
                  xtype: 'textfield',
@@ -151,7 +160,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
             dataIndex: 'isEmailConfirmed',
             sortable: true,
             groupable: true,
-            width: '5%',
+            width: '8%',
             renderer: function (val) {
                 if (val) return 'YES';
                 else return 'NO';
@@ -173,7 +182,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
              dataIndex: 'lastLoginTime',
              sortable: true,
              groupable: true,
-             width: '15%',
+             width: '10%',
              renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
                  xtype: 'dateSearchField',
@@ -213,7 +222,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
              dataIndex: 'creationTime',
              sortable: true,
              groupable: true,
-             width: '20%',
+             width: '10%',
              renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
                  xtype: 'dateSearchField',

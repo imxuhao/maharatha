@@ -114,10 +114,18 @@ $ui-tab-border-color-active:transparent
     margin-left:30px !important;
     margin-right:5px !important;
     line-height:35px !important;
+    cursor:pointer !important;
 }
 .x-treelist-nav .x-treelist-row{
     padding-right:5px !important;
 }
 .x-treelist-nav{
     border-radius:5px !important;
+}
+
+.x-treelist-nav .x-treelist-item-icon, .x-treelist-nav .x-treelist-item-tool {
+    /*color: #83b2db;
+    font-size: 20px;
+    width: 24px;*/
+    cursor:pointer !important;
 }

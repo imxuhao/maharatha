@@ -7,7 +7,12 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureForm'
     ],
 
     controller: 'profile-changeprofilepicture-changeprofilepictureform',
-
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Administration.Users'),
+        create: abp.auth.isGranted('Pages.Administration.Users.Create'),
+        edit: abp.auth.isGranted('Pages.Administration.Users.Edit'),
+        destroy: abp.auth.isGranted('Pages.Administration.Users.Delete')
+    },
     name: 'ChangeProfilePicture',
     openInPopupWindow: true,
     hideDefaultButtons: false,

@@ -100,7 +100,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
                 }
             }
 
-            if (byteArray.LongLength > 102400) //100 KB
+            if (byteArray.LongLength > 1024000) //1000 KB
             {
                 throw new UserFriendlyException(L("ResizedProfilePicture_Warn_SizeLimit"));
             }

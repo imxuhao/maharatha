@@ -41,6 +41,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         [DisableAuditing]
         public async Task<FileResult> GetProfilePicture()
         {
+
             var user = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
             if (user.ProfilePictureId == null)
             {
@@ -48,6 +49,30 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             }
 
             return await GetProfilePictureById(user.ProfilePictureId.Value);
+        }
+
+        /// <summary>
+        ///  Dont delete this code (to get the profile picture of user)
+        /// </summary>
+        /// <returns></returns>
+       
+        [DisableAuditing]
+        public async Task<ActionResult> GetProfilePictureToShow()
+        {
+            FileResult picture = null;
+            var user = await _userManager.GetUserByIdAsync(AbpSession.GetUserId());
+            if (user.ProfilePictureId == null)
+            {
+                picture = GetDefaultProfilePicture();
+            }
+            else
+            {
+                picture = await GetProfilePictureById(user.ProfilePictureId.Value);
+            }
+            var contentType = picture.ContentType;
+            var fileContent = ((System.Web.Mvc.FileContentResult)picture).FileContents;
+            var base64String = Convert.ToBase64String(fileContent);
+            return Json((new { image = base64String, contentType = contentType, success = true }), JsonRequestBehavior.AllowGet);
         }
 
         [DisableAuditing]

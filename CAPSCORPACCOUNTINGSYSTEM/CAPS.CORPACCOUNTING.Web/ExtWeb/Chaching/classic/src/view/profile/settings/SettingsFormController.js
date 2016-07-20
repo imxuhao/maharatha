@@ -2,10 +2,10 @@ Ext.define('Chaching.view.profile.settings.SettingsFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.profile-settings-settingsform',
     onSaveClicked: function (btn) {      
-        var me = this;
-        view = me.getView();
-        var data = view.getValues();        
-        var input = new Object();
+        var me = this,
+        view = me.getView(),
+        data = view.getValues(),        
+        input = new Object();
         input.Name = data.name,
         input.Surname = data.surname,
         input.UserName = data.userName,
@@ -19,6 +19,7 @@ Ext.define('Chaching.view.profile.settings.SettingsFormController', {
                 if (res.success) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
+                    abp.notify.info(app.localize('SavedSuccessfully'));
                 }
             },
             failure: function (response, opts) {

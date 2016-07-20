@@ -54,14 +54,31 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
              fieldLabel: app.localize('UserName').initCap(),
              width: '100%',
              ui: 'fieldLabelTop',
-             reference: "username",
+             reference: "userName",
              readOnly: true,
              emptyText: app.localize('UserName')
          },
          {
              xtype: 'label',
+             bind : {
+                 hidden: '{!userName.readOnly}'
+             },
              text: app.localize('CanNotChangeAdminUserName').initCap(),
              width: '100%',
          },
+         {
+             xtype: 'combobox',
+             name: 'timezone',
+             allowBlank: false,
+             fieldLabel: app.localize('Timezone').initCap(),
+             valueField: 'value',
+             displayField: 'name',
+             queryMode : 'local',
+             width: '100%',
+             ui: 'fieldLabelTop',
+             itemId: "timezone",
+             store: Ext.create('Chaching.store.TimezoneStore'),
+             editable : false
+         }
     ]
 });

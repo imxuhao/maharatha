@@ -299,17 +299,16 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         changepasswordAction.show();
     },
     mySettings: function (menu, item, e, eOpts) {
-        var changepasswordAction = Ext.create('Chaching.view.profile.settings.SettingsView');
-
+        var headerView = Ext.ComponentQuery.query('chachingheader')[0];
+        var me = headerView != undefined ? headerView.getController() : null;
+        var mySettingView = Ext.create('Chaching.view.profile.settings.SettingsView');
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/profile/GetCurrentUserProfileForEdit',
             jsonData: {},
             success: function (response, opts) {
                 var res = Ext.decode(response.responseText);
-                if (res.success) {
-                    var form = changepasswordAction.down('form');
-                    form.getForm().setValues(res.result);
-                    changepasswordAction.show();
+                if (res.success && me) {
+                    me.loadTimeZones(mySettingView, res.result);
                 }
             },
             failure: function (response, opts) {
@@ -320,6 +319,22 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         });
 
     },
+
+    loadTimeZones: function (mySettingView, settingDetail) {
+        var mySettingForm = mySettingView.down('form'),
+         timezoneCombo = mySettingForm.down('combobox[itemId=timezone]'),
+         timezoneStore = timezoneCombo.getStore();
+        timezoneStore.getProxy().setExtraParams({ defaultTimezoneScope: ChachingGlobals.settingsScope.user });
+        timezoneStore.load(function (records, operation, success) {
+            if (success && mySettingForm && mySettingView && settingDetail) {
+                mySettingForm.getForm().setValues(settingDetail);
+                mySettingView.show();
+            } else {
+                abp.message.error(app.localize('Failed'));
+            }
+        });
+    },
+
     changeProfilePicture: function (menu, item, e, eOpts) {
         var changeProfilePicture = Ext.create('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureView');
         changeProfilePicture.show();

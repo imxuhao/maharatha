@@ -3737,6 +3737,7 @@
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeViewStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\tenants\TenantUserListStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\TimezoneStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\users\CompanyRoleStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\AccountTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountsStore.js" />

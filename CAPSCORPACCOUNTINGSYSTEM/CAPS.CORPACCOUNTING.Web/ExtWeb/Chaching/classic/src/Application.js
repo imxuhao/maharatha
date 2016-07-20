@@ -103,7 +103,8 @@ Ext.define('Chaching.Application', {
         'users.CompanyRoleStore',
         'Chaching.store.ItemsPerPageStore',
         'maintenance.CacheStore',
-        'maintenance.WebLogStore'
+        'maintenance.WebLogStore',
+        'Chaching.store.TimezoneStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

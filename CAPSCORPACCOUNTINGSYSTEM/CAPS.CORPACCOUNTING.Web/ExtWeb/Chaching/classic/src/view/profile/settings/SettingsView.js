@@ -12,7 +12,7 @@ Ext.define('Chaching.view.profile.settings.SettingsView',{
     width: 450,
     layout: 'fit',
     title: app.localize("MySettings"),
-    defaultFocus: 'admin',
+    defaultFocus: 'textfield#name',
     initComponent: function (config) {     
         var me = this,
             controller = me.getController();

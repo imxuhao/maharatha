@@ -1052,6 +1052,7 @@
     <text name="Status" value="Status" />
 <text name="ViewPermissions" value="View Permissions" />
 <text name="View" value="View" />
+<text name="SuccessMessage" value="Operation completed successfully." />
     
   </texts>
 </localizationDictionary>

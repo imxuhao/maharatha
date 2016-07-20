@@ -1,15 +1,22 @@
 Ext.define('Chaching.view.profile.settings.SettingsFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.profile-settings-settingsform',
-    onSaveClicked: function (btn) {      
+    initialTimezone: null,
+    onSaveClicked: function (btn) {
         var me = this,
         view = me.getView(),
+        timezoneCombo = view.down('combobox[itemId=timezone]'),
         data = view.getValues(),        
         input = new Object();
         input.Name = data.name,
         input.Surname = data.surname,
         input.UserName = data.userName,
         input.EmailAddress = data.emailAddress;
+        if (timezoneCombo.getValue() && !timezoneCombo.isHidden()) {
+            input.timezone = data.timezone;
+        } else {
+            input.timezone = me.initialTimezone;
+        }
             
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/profile/UpdateCurrentUserProfile',
@@ -19,12 +26,19 @@ Ext.define('Chaching.view.profile.settings.SettingsFormController', {
                 if (res.success) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
-                    abp.notify.info(app.localize('SavedSuccessfully'));
+                    abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                    if (abp.clock.provider.supportsMultipleTimezone && me.initialTimezone !== input.timezone) {
+                       
+                        abp.message.info(app.localize('TimeZoneSettingChangedRefreshPageNotification')).done(function () {
+                            window.location.reload();
+                        });
+                    }
                 }
             },
             failure: function (response, opts) {
                 var res = Ext.decode(response.responseText);
-                Ext.toast(res.exceptionMessage);
+                abp.message.error(app.localize('Failed'));
+               // Ext.toast(res.exceptionMessage);
                 console.log(response);
             }
 

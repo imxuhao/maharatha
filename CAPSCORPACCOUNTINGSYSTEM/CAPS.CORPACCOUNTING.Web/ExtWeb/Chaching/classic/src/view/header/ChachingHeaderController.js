@@ -327,6 +327,20 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         timezoneStore.getProxy().setExtraParams({ defaultTimezoneScope: ChachingGlobals.settingsScope.user });
         timezoneStore.load(function (records, operation, success) {
             if (success && mySettingForm && mySettingView && settingDetail) {
+                // show/hide user my settings
+                var mySettingFormController = mySettingForm.getController();
+                mySettingFormController.initialTimezone = settingDetail.timezone;
+                var canChangeUserName = settingDetail.userName != app.consts.userManagement.defaultAdminUserName;
+                mySettingFormController.lookupReference('userName').setReadOnly(!canChangeUserName);
+                mySettingFormController.lookupReference('infoLabel').setHidden(canChangeUserName);
+                var showTimezoneSelection = abp.clock.provider.supportsMultipleTimezone;
+                if (showTimezoneSelection) {
+                    mySettingFormController.lookupReference('timezone').setHidden(false);
+                } else {
+                    mySettingFormController.lookupReference('timezone').setHidden(true);
+                }
+                //End
+                //load user setting details
                 mySettingForm.getForm().setValues(settingDetail);
                 mySettingView.show();
             } else {

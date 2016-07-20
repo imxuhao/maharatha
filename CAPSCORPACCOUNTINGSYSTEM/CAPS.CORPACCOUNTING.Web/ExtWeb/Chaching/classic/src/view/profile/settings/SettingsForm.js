@@ -7,22 +7,25 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
     ],
 
     controller: 'profile-settings-settingsform',
-
+    modulePermissions: {
+        //read: abp.auth.isGranted('Pages.Administration.Users'),
+        create: true,//abp.auth.isGranted('Pages.Administration.Users.Create'),
+        edit: true//abp.auth.isGranted('Pages.Administration.Users.Edit'),
+        // destroy: abp.auth.isGranted('Pages.Administration.Users.Delete')
+    },
     name: 'MySettings',
     openInPopupWindow: true,
     hideDefaultButtons: false,
     layout: 'vbox',
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
-       // labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
-    //  defaultFocus: 'textfield#tenancyName',
-
     items: [
         {
             xtype: 'textfield',
             name: 'name',
+            itemId : 'name',
             allowBlank: false,
             fieldLabel: app.localize('Name').initCap(),
             width: '100%',
@@ -60,9 +63,11 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
          },
          {
              xtype: 'label',
+             reference : 'infoLabel',
              bind : {
                  hidden: '{!userName.readOnly}'
              },
+             cls: 'helpText',
              text: app.localize('CanNotChangeAdminUserName').initCap(),
              width: '100%',
          },
@@ -77,8 +82,9 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
              width: '100%',
              ui: 'fieldLabelTop',
              itemId: "timezone",
+             reference: 'timezone',
              store: Ext.create('Chaching.store.TimezoneStore'),
-             editable : false
+             editable: false
          }
     ]
 });

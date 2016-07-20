@@ -9,10 +9,10 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
 
     controller: 'changepassword-changepasswordform',
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Administration.Users'),
-        create: abp.auth.isGranted('Pages.Administration.Users.Create'),
-        edit: abp.auth.isGranted('Pages.Administration.Users.Edit'),
-        destroy: abp.auth.isGranted('Pages.Administration.Users.Delete')
+        //read: abp.auth.isGranted('Pages.Administration.Users'),
+        create: true,//abp.auth.isGranted('Pages.Administration.Users.Create'),
+        edit: true//abp.auth.isGranted('Pages.Administration.Users.Edit'),
+       // destroy: abp.auth.isGranted('Pages.Administration.Users.Delete')
     },
     name: 'ChangePassword',
     openInPopupWindow: true,

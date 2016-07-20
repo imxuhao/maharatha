@@ -65,35 +65,18 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
     filechange: function (file,e,value) {             
         var me = this;
         view = me.getView();
-        if (file.value=="")
+        if (file.value == "")
         {
             return;
         }
         var newvalue = file.value.replace(/^c:\\fakepath\\/i, '');
         file.setRawValue(newvalue);
         if (file.value && !/^.*\.(Png|gif|jpg|jpeg|jfif|tiff|bmp)$/i.test(file.value)) {
-            var myMsg = Ext.create('Ext.window.MessageBox', {
-                closeAction: 'destroy',
-                ui: 'chachingWindow'
-            }).show({
-                title: "Error",
-                message: app.localize('ProfilePicture_Warn_FileType').initCap(),
-                buttons: Ext.Msg.OKCANCEL,
-                icon: Ext.Msg.INFO
-            });
+            abp.message.error(app.localize('ProfilePicture_Warn_FileType').initCap(), app.localize('Error'));
             return;
         };
         if (file.fileInputEl && file.fileInputEl.dom && file.fileInputEl.dom.files && file.fileInputEl.dom.files[0].size > 2097152) {
-
-            var myMsg = Ext.create('Ext.window.MessageBox', {                
-                closeAction: 'destroy',
-                ui: 'chachingWindow'
-            }).show({
-                title: "Error",
-                message: app.localize('ProfilePicture_Warn_SizeLimit').initCap(),
-                buttons: Ext.Msg.OKCANCEL,
-                icon: Ext.Msg.INFO
-            });          
+            abp.message.error(app.localize('ProfilePicture_Warn_SizeLimit').initCap(), app.localize('Error'));
             return;
         }       
         view.submit({
@@ -109,16 +92,8 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
                     }
                 }
             },
-            failure: function (form, action) {                
-                var myMsg = Ext.create('Ext.window.MessageBox', {
-                    closeAction: 'destroy',
-                    ui: 'chachingWindow'
-                }).show({
-                    title: "Error",
-                    message: app.localize('Failed').initCap(),
-                    buttons: Ext.Msg.OKCANCEL,
-                    icon: Ext.Msg.INFO
-                });              
+            failure: function (form, action) {
+                abp.message.error(app.localize('Failed').initCap(), app.localize('Error'));
             }
         });
 

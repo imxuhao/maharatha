@@ -7,6 +7,12 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
     ],
 
     controller: 'linkedaccounts-linkedaccountsgrid',
+    modulePermissions: {
+        read: true, //abp.auth.isGranted(''),
+        create: true,//abp.auth.isGranted(''),
+        edit: true, //abp.auth.isGranted(''),
+        destroy: true //abp.auth.isGranted('')
+    },
     xtype: 'manageaccounts',
     headerButtonsConfig: [
        '->', {

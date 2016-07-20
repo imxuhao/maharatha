@@ -7,7 +7,12 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsForm', {
     ],
 
     controller: 'linkedaccounts-linkedaccountsform',
-   
+    modulePermissions: {
+        read: true, //abp.auth.isGranted(''),
+        create: true,//abp.auth.isGranted(''),
+        edit: true, //abp.auth.isGranted(''),
+        destroy: true //abp.auth.isGranted('')
+    },
     openInPopupWindow: true,
     hideDefaultButtons: false,
     layout: 'vbox',

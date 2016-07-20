@@ -161,7 +161,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
 
 
             }
-            abp.notify.success('Operation completed successfully.', 'Success');
+            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
             ///TODO: Uncomment extjs toast if needed.
             //Ext.toast({
             //    html: 'Operation completed successfully.',

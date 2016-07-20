@@ -28,12 +28,11 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordFormController', 
             url: abp.appPath + 'api/services/app/profile/ChangePassword',
             jsonData: Ext.encode(input),
             success: function (response, opts) {
-                debugger;
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
-                    abp.notify.info(app.localize('YourPasswordHasChangedSuccessfully'));
+                    abp.notify.success(app.localize('YourPasswordHasChangedSuccessfully'), app.localize('Success'));
                 }
             },
             failure: function (response, opts) {

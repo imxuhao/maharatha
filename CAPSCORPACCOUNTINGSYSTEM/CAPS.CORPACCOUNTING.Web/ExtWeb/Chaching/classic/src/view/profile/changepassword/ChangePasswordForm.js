@@ -8,7 +8,12 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
     ],
 
     controller: 'changepassword-changepasswordform',
-
+    modulePermissions: {
+        read: abp.auth.isGranted('Pages.Administration.Users'),
+        create: abp.auth.isGranted('Pages.Administration.Users.Create'),
+        edit: abp.auth.isGranted('Pages.Administration.Users.Edit'),
+        destroy: abp.auth.isGranted('Pages.Administration.Users.Delete')
+    },
     name: 'ChangePassword',
     openInPopupWindow: true,
     hideDefaultButtons: false,
@@ -23,8 +28,6 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
         labelWidth : 150,
         blankText: app.localize('MandatoryToolTipText')
     },
-    //  defaultFocus: 'textfield#tenancyName',
-
     items: [
         {
             xtype: 'textfield',
@@ -32,30 +35,29 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
             itemId: 'password',
             allowBlank: false,
             inputType: 'password',
-            fieldLabel: app.localize('ChangePassword').initCap(),
+            fieldLabel: app.localize('CurrentPassword').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
             reference: "password",
-            emptyText: app.localize('ChangePassword'),
+            maxLength : 6,
+            emptyText: app.localize('CurrentPassword'),
             listeners: {
-                focuseneter: 'passwordenter',
+                focusenter: 'passwordenter',
                 focusleave: 'passwordleave'
             }
         },
-    {
-        xtype: 'label',
-        name: 'newpassword',
-        text: app.localize('PasswordChangeDontRememberMessage', '').initCap(),
-        width: '100%',
-        reference: "lablepassword"
-    },
+    //{
+    //    xtype: 'label',
+    //    name: 'newpassword',
+    //    text: app.localize('PasswordChangeDontRememberMessage', '').initCap(),
+    //    width: '100%',
+    //    reference: "lablepassword"
+    //},
     {
         xtype: 'component',
-        autoEl: {
-            tag: 'a',
-            href: abp.appPath + 'Account/ForgotPassword',
-            html: app.localize('ClickHere').initCap(),
-        }
+        reference: "labelPassword",
+        html: '<span class= "helpText">' + app.localize('PasswordChangeDontRememberMessage', '') + '</span>' + '<a class= "forgotPassword" href="' + abp.appPath + 'Account/ForgotPassword' + '"> ' + app.localize('ClickHere').initCap() + '.</a>'
+       
     },
     {
         xtype: 'textfield',
@@ -65,6 +67,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
         reference: "newpassword",
         fieldLabel: app.localize('NewPassword').initCap(),
         width: '100%',
+        maxLength: 6,
         ui: 'fieldLabelTop',
         emptyText: app.localize('NewPassword')
     },
@@ -76,7 +79,16 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
         reference: "newpasswordrepeat",
         fieldLabel: app.localize('NewPasswordRepeat').initCap(),
         width: '100%',
+        maxLength: 6,
         ui: 'fieldLabelTop',
-        emptyText: app.localize('NewPasswordRepeat')
-    }, ]
+        emptyText: app.localize('NewPasswordRepeat'),
+        /*
+        * Custom validator implementation - checks that the value matches what was entered into
+        * the password1 field.
+        */
+        validator: function (value) {
+            var password1 = this.previousSibling('[name=newpassword]');
+            return (value === password1.getValue()) ? true : 'Passwords do not match.'
+        }
+    }]
 });

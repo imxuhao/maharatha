@@ -13,7 +13,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordView', {
     width: 450,
     layout: 'fit',
     title: app.localize("ChangePassword"),
-    defaultFocus: 'tenancyName',
+    defaultFocus: 'textfield#password',
     initComponent: function (config) {      
         var me = this,
             controller = me.getController();

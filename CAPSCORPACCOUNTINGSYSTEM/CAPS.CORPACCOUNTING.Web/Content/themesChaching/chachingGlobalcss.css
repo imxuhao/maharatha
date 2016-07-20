@@ -391,3 +391,16 @@ h1, h2, h3, h4, h5, h6 {
 .treePanelCursor{
     cursor: pointer !important;
 }
+
+.forgotPassword {
+    color: #0000FF; 
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.helpText {
+    color: #56CFDA;
+    font-weight:600; 
+}
+
+

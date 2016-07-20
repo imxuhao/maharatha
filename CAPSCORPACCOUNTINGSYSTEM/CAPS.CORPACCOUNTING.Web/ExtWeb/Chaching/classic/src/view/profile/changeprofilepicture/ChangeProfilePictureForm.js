@@ -35,8 +35,6 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureForm'
             listeners: {
                 change: 'filechange'
             }
-          
-
         },
          {
              xtype: 'label',             

@@ -216,7 +216,7 @@
     <text name="TenantSelection" value="Tenant Selection" />
     <text name="TenantSelection_Detail" value="Please select one of the following tenants." />
     <text name="LoginWith" value="Login with:" />
-    <text name="PasswordChangeDontRememberMessage" value="If you can not remember your password, {0}." />
+    <text name="PasswordChangeDontRememberMessage" value="If you can not remember your password, {0}" />
     <text name="ClickHere" value="click here" />
     <text name="Apply" value="Apply" />
     <text name="CustomRange" value="Custom range" />

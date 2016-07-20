@@ -26,7 +26,7 @@
             tpl: [                     
                    '<div class="row margin-bottom-10" style=" padding-left: 35px !important; padding-right: 35px !important; padding-top: 10px; padding-bottom: 10px; color: #9eacb4;">',
                           abp.localization.localize('CachesHeaderInfo'),
-                          '<button name="clearAllCache" class="button-icon" style="float: right; height: 35px !important; width: 100px;"><i class="fa fa-refresh" style="margin-right: 10px; color:#FFFFFF"></i>',
+                          '<button name="clearAllCache" class="button-icon" style="float: right; height: 35px !important;"><i class="fa fa-refresh" style="margin-right: 10px; color:#FFFFFF"></i>',
                           abp.localization.localize('ClearAll'),
                           '</button>',
                  '</div>',
@@ -72,7 +72,7 @@
                             abp.localization.localize('WebSiteLogsHeaderInfo'),
                         '</div>',
                         '<div class="col-xs-6 text-right">',
-                            '<button class="button-icon" name="downloadAllButton" style="height:35px; width:140px; margin-right: 10px;"><i class="fa fa-download" style="margin-right: 10px;"></i>',
+                            '<button class="button-icon" name="downloadAllButton" style="height:35px; margin-right: 10px;"><i class="fa fa-download" style="margin-right: 10px;"></i>',
                               abp.localization.localize('DownloadAll'),
                             '</button>',
                             '<button class="button-icon" name="refreshButton" style="height: 35px; width: 100px;"><i class="fa fa-refresh" style="margin-right: 10px;"></i>',

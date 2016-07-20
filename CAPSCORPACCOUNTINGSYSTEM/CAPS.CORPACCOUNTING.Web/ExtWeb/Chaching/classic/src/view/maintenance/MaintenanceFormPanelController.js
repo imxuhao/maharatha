@@ -2,27 +2,35 @@
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.maintenance-maintenanceFormPanelController',
     loadCacheAndWeblogs: function () {
-        var me = this,
+        var me = this,            
         view = me.getView();
         cacheView = view.down('dataview[itemId=cacheDataView]');
         if (cacheView) {
             cacheView.getStore().load();
         }
         weblogView = view.down('dataview[itemId=webLogView]');
-        if (weblogView) {
-            weblogView.getStore().load(function (records, operation, success) {
-                Ext.each(records, function (record) {
-                    record.data = '<span class="log-line">' + record.data
-                    .replace('DEBUG', '<span class="label label-default">DEBUG</span>')
-                    .replace('INFO', '<span class="label label-info">INFO</span>')
-                    .replace('WARN', '<span class="label label-warning">WARN</span>')
-                    .replace('ERROR', '<span class="label label-danger">ERROR</span>')
-                    .replace('FATAL', '<span class="label label-danger">FATAL</span>') + '</span>'
-
-                });
-            });
+        if (weblogView) {            
+            this.loadWebLogView(weblogView);
         }
     },
+
+    loadWebLogView: function (view) {
+        view.getStore().load(function (records, operation, success) {
+            Ext.each(records, function (record) {
+                record.data = '<span class="log-line">' + record.data
+                .replace('DEBUG', '<span class="label" style="background-color:#777;">DEBUG</span>')
+                .replace('INFO', '<span class="label" style="background-color:#5bc0de;">INFO</span>')
+                .replace('WARN', '<span class="label" style="background-color:#f0ad4e;">WARN</span>')
+                .replace('ERROR', '<span class="label" style="background-color:#d9534f;">ERROR</span>')
+                .replace('FATAL', '<span class="label" style="background-color:#1ef7b8;">FATAL</span>') + '</span>'
+
+            });
+            view.getStore().removeAll();
+            view.getStore().loadData(records);
+
+        });
+    },
+
     onMaintenanceResize: function (formPanel, newWidth, newHeight, oldWidth, oldHeight) {
         var me = this,
             view = me.getView(),
@@ -32,16 +40,21 @@
         if (cachesDataView) cachesDataView.setHeight(height);
         if (webLogsDataView) webLogsDataView.setHeight(height);
     },
+
     clearCache: function (view, record, item, index, e, eOpts) {
-            var clickTarget = e.getTarget(),
-            button = clickTarget.nodeName;
+        var clickTarget = e.getTarget(),
+        button = clickTarget.nodeName;        
+
         if (button == "BUTTON" && clickTarget.name === "clearSingle") {
+           var parentNode = clickTarget.parentNode,
+           cacheName = parentNode.getElementsByTagName('span')[0].textContent;
+
+            var data = {
+                id: cacheName
+            };
             Ext.Ajax.request({
                 url: '/api/services/app/caching/ClearCache',
-                params: {
-                    'input': record.get('name')
-                },
-
+                jsonData : Ext.encode(data),      
                 success: function () {
                     abp.notify.success(app.localize('CacheSuccessfullyCleared'));
                 },
@@ -85,11 +98,10 @@
                     }
             });
         }
-        else {         
-            Ext.Ajax.request({
-                url: '/api/services/app/webLog/GetLatestWebLogs',
-                method: 'POST'
-            });
+        else {       
+           if (item.name == "refreshButton") {
+               this.loadWebLogView(view);
+            }
         }
     }
 

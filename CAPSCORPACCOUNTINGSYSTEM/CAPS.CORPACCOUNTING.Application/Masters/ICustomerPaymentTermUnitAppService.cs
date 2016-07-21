@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
@@ -45,5 +46,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<CustomerPaymentTermUnitDto> GetCustomerPayTermUnitsById(IdInput input);
+
+        /// <summary>
+        /// Get All CustomerPaymentTerms
+        /// </summary>
+        /// <returns></returns>
+        Task<List<CustomerPaymentTermUnitDto>> GetVendorPayTerms();
     }
 }

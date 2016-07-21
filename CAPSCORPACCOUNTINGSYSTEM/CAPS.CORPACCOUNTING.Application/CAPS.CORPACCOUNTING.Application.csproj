@@ -221,9 +221,7 @@
     <Compile Include="Configuration\Host\Dto\OrganizationManagementSettingsEditDto.cs" />
     <Compile Include="Configuration\Host\Dto\SendTestEmailInput.cs" />
     <Compile Include="Configuration\Host\Dto\TenantManagementSettingsEditDto.cs" />
-    <Compile Include="Configuration\Organization\IOrganizationSettingManager.cs" />
-    <Compile Include="Configuration\Organization\OrganizationSettingManager.cs" />
-    <Compile Include="Configuration\Organization\SettingInfoExtended.cs" />
+    <Compile Include="Configuration\Tenants\Dto\CompanySettingsEditDto.cs" />
     <Compile Include="CORPACCOUNTINGApplicationModule.cs" />
     <Compile Include="CORPACCOUNTINGAppServiceBase.cs" />
     <Compile Include="AppConsts.cs" />
@@ -475,8 +473,10 @@
     <Compile Include="Masters\UserViewSettingsUnitAppService.cs" />
     <Compile Include="Masters\VendorUnitAppService.cs" />
     <Compile Include="Masters\VendorPaymentTermUnitAppService.cs" />
+    <Compile Include="MultiTenancy\Dto\ComapnyPreferenceDto.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInputUnit.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />
+    <Compile Include="MultiTenancy\Dto\TenantExtendedUnitInput.cs" />
     <Compile Include="MultiTenancy\Dto\TenantListOutputDto.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantsInput.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantFeaturesForEditOutput.cs" />
@@ -497,10 +497,10 @@
     <Compile Include="Organizations\Dto\HostOrganizationUnitDto.cs" />
     <Compile Include="Organizations\Dto\UpdateHostOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\CreateHostOrganizationUnitInput.cs" />
+    <Compile Include="Organizations\Dto\UpdateOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\UserToOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\CreateOrganizationUnitInput.cs" />
     <Compile Include="Organizations\Dto\GetOrganizationUnitUsersInput.cs" />
-    <Compile Include="Organizations\Dto\UpdateOrganizationUnitInput.cs" />
     <Compile Include="Organizations\IOrganizationUnitAppService.cs" />
     <Compile Include="Organizations\Dto\OrganizationUnitDto.cs" />
     <Compile Include="Organizations\Dto\MoveOrganizationUnitInput.cs" />

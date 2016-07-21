@@ -201,8 +201,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             {
                 await CreateUserUnitAsync(input);
             }
-
-
         }
 
         [AbpAuthorize(AppPermissions.Pages_Administration_Users_Delete)]

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
@@ -152,6 +153,17 @@ namespace CAPS.CORPACCOUNTING.Masters
             VendorPaymentTermUnitDto result = vendorPayTerms.MapTo<VendorPaymentTermUnitDto>();
             result.VendorPaymentTermId = vendorPayTerms.Id;
             return result;
+        }
+
+        public async Task<List<VendorPaymentTermUnitDto>> GetVendorPayTerms()
+        {
+            var vendorPayTerms = await _vendorPaymentTermUnitRepository.GetAllListAsync();
+            return new List<VendorPaymentTermUnitDto>(vendorPayTerms.Select(item =>
+            {
+                var dto = item.MapTo<VendorPaymentTermUnitDto>();
+                dto.VendorPaymentTermId = item.Id;
+                return dto;
+            }).ToList());
         }
     }
 }

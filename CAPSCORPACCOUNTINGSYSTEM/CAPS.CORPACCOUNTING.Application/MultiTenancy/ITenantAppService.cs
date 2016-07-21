@@ -46,5 +46,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// <returns></returns>
         Task CreateTenantUnit(CreateTenantInputUnit input);
 
+
+        Task<ComapnyPreferenceDto> GetCompanySettingsForEdit();
+        Task UpdateComapnyUnit(TenantExtendedUnitInput input);
+
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Abp.Configuration;
 using Abp.Runtime.Caching;
-using CAPS.CORPACCOUNTING.Configuration.Organization;
+//using CAPS.CORPACCOUNTING.Configuration.Organization;
 
 namespace CAPS.CORPACCOUNTING.Helpers
 {
@@ -11,11 +11,11 @@ namespace CAPS.CORPACCOUNTING.Helpers
         {
             return cacheManager.GetCache<string, CacheItem>(CacheStoreName);
         }
-        public static ITypedCache<string, Dictionary<string, SettingInfoExtended>> GetOrganizationSettingsCache(this ICacheManager cacheManager)
-        {
-            return cacheManager
-                .GetCache<string, Dictionary<string, SettingInfoExtended>>(OrganizationSettingManager.OrganizationSettings);
-        }
+        //public static ITypedCache<string, Dictionary<string, SettingInfoExtended>> GetOrganizationSettingsCache(this ICacheManager cacheManager)
+        //{
+        //    return cacheManager
+        //        .GetCache<string, Dictionary<string, SettingInfoExtended>>(OrganizationSettingManager.OrganizationSettings);
+        //}
 
 
     }

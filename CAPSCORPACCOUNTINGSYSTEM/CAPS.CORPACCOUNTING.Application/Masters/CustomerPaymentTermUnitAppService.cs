@@ -11,6 +11,7 @@ using Abp.Linq.Extensions;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -113,6 +114,21 @@ namespace CAPS.CORPACCOUNTING.Masters
             CustomerPaymentTermUnitDto result = customerPaytermUnit.MapTo<CustomerPaymentTermUnitDto>();
             result.CustomerPaymentTermId = customerPaytermUnit.Id;
             return result;
+        }
+
+        /// <summary>
+        /// Get All CustomerPaymentTerms
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<CustomerPaymentTermUnitDto>> GetVendorPayTerms()
+        {
+            var customerPayTerms = await _customerPaymentTermUnitRepository.GetAllListAsync();
+            return new List<CustomerPaymentTermUnitDto>(customerPayTerms.Select(item =>
+            {
+                var dto = item.MapTo<CustomerPaymentTermUnitDto>();
+                dto.CustomerPaymentTermId = item.Id;
+                return dto;
+            }).ToList());
         }
     }
 }

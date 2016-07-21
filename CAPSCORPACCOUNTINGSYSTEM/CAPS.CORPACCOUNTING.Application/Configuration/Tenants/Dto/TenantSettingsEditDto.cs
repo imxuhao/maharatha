@@ -14,6 +14,9 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants.Dto
         [Required]
         public TenantUserManagementSettingsEditDto UserManagement { get; set; }
 
+      
+        public CompanySettingsEditDto CompanySettings { get; set; }
+
         public EmailSettingsEditDto Email { get; set; }
 
         public LdapSettingsEditDto Ldap { get; set; }

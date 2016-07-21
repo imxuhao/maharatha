@@ -53,8 +53,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly IRepository<CoaUnit> _coaUnit;
         private readonly IRepository<EmployeeUnit> _employeeUnit;
         private readonly IRepository<CustomerUnit> _customerUnit;
-        private IRepository<ConnectionStringUnit> _connectionStringRepository;
-        private IRepository<OrganizationExtended, long> _organizationRepository;
+        private readonly IRepository<ConnectionStringUnit> _connectionStringRepository;
+        private readonly IRepository<OrganizationExtended, long> _organizationRepository;
 
 
 

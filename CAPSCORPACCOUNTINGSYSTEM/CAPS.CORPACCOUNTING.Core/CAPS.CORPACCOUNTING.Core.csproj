@@ -220,7 +220,6 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
-    <Compile Include="Configuration\OrganizationSettingProvider.cs" />
     <Compile Include="EFAuditLog\INeedModLog.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="Financials\Preferences\FiscalPeriodUnitManager.cs" />
@@ -239,9 +238,8 @@
     <Compile Include="Masters\SystemViewSettingsUnit.cs" />
     <Compile Include="Masters\VendorAliasUnit.cs" />
     <Compile Include="Masters\VendorAliasUnitManager.cs" />
-    <Compile Include="Organization\OrganizationCacheItem.cs" />
-    <Compile Include="Organization\OrganizationCacheItemManager.cs" />
-    <Compile Include="Organization\OrganizationExtended.cs" />
+    <Compile Include="MultiTenancy\TenantExtendedUnitManager.cs" />
+    <Compile Include="MultiTenancy\TenantExtendedUnit.cs" />
     <Compile Include="JobCosting\TypeOfJobUnit.cs" />
     <Compile Include="Masters\GridListUnit.cs" />
     <Compile Include="Masters\NewCOATrimUnit.cs" />
@@ -249,6 +247,7 @@
     <Compile Include="Masters\UserViewSettingsUnitManager.cs" />
     <Compile Include="Masters\ValueAddedTaxRecoveryUnit.cs" />
     <Compile Include="Masters\ValueAddedTaxTypeUnit.cs" />
+    <Compile Include="Organization\OrganizationExtended.cs" />
     <Compile Include="Organization\OrganizationExtendedUnitManager.cs" />
     <Compile Include="Payables\InvoiceEntryDocumentDetailUnitManager.cs" />
     <Compile Include="Payments\PaymentPrintHistoryUnit.cs" />
@@ -430,7 +429,6 @@
     <Compile Include="Security\SecureGroupMappingUnit.cs" />
     <Compile Include="Security\SimpleStringCipher.cs" />
     <Compile Include="Security\SubEntityAccessRestrictionUnit.cs" />
-    <Compile Include="Settings\SettingExtended.cs" />
     <Compile Include="Storage\DbBinaryObjectManager.cs" />
     <Compile Include="Storage\IBinaryObjectManager.cs" />
     <Compile Include="Storage\BinaryObject.cs" />

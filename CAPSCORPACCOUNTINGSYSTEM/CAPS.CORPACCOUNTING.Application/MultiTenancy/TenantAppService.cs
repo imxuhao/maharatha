@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Threading.Tasks;
@@ -19,27 +21,50 @@ using Abp.Domain.Repositories;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Organization;
+using System.IO;
+using Abp.Authorization.Users;
+using Abp.IO;
+using Abp.Runtime.Session;
+using Abp.UI;
+using AutoMapper;
+using CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto;
+using CAPS.CORPACCOUNTING.Configuration.Tenants;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
 
 
-    [AbpAuthorize(AppPermissions.Pages_Tenants)]
+    // [AbpAuthorize(AppPermissions.Pages_Tenants)]
     public class TenantAppService : CORPACCOUNTINGAppServiceBase, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
-        private IRepository<ConnectionStringUnit> _connectionStringRepository;
-        private IRepository<OrganizationExtended, long> _organizationRepository;
-        
+        private readonly IRepository<UserAccount, long> _userAccountRepository;
+        private readonly IRepository<OrganizationExtended, long> _organizationRepository;
+        private readonly IRepository<TenantExtendedUnit> _tenantExtendedUnitRepository;
+        private readonly IRepository<AddressUnit, long> _addressRepository;
+        private readonly IAddressUnitAppService _addressAppService;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly IAppFolders _appFolders;
+        private readonly TenantExtendedUnitManager _tenantExtendedManager;
+        private readonly TenantSettingsAppService _tenantSettingsAppService;
+
 
         public TenantAppService(
-            TenantManager tenantManager, IRepository<ConnectionStringUnit> connectionStringRepository,
-            IRepository<OrganizationExtended, long> organizationRepository)
+            TenantManager tenantManager, IRepository<UserAccount, long> userAccountRepository,
+            IRepository<OrganizationExtended, long> organizationRepository, IRepository<TenantExtendedUnit> tenantExtendedUnitRepository,
+            IUnitOfWorkManager unitOfWorkManager, IAppFolders appFolders, IRepository<AddressUnit, long> addressRepository, TenantExtendedUnitManager tenantExtendedManager, IAddressUnitAppService addressAppService, TenantSettingsAppService tenantSettingsAppService)
         {
             _tenantManager = tenantManager;
-            _connectionStringRepository = connectionStringRepository;
+            _userAccountRepository = userAccountRepository;
             _organizationRepository = organizationRepository;
-            
+            _tenantExtendedUnitRepository = tenantExtendedUnitRepository; ;
+            _unitOfWorkManager = unitOfWorkManager;
+            _appFolders = appFolders;
+            _addressRepository = addressRepository;
+            _tenantExtendedManager = tenantExtendedManager;
+            _addressAppService = addressAppService;
+            _tenantSettingsAppService = tenantSettingsAppService;
         }
 
         public async Task<PagedResultOutput<TenantListDto>> GetTenants(GetTenantsInput input)
@@ -70,10 +95,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         public async Task<PagedResultOutput<TenantListDto>> GetTenantUnits(SearchInputDto input)
         {
             var query = from tenant in TenantManager.Tenants
-                join org in _organizationRepository.GetAll() on tenant.OrganizationUnitId equals org.Id
-                  into organization
+                        join org in _organizationRepository.GetAll() on tenant.OrganizationUnitId equals org.Id
+                          into organization
                         from organizations in organization.DefaultIfEmpty()
-                        select new {tenant, OrganizationName = organizations.DisplayName};
+                        select new { tenant, OrganizationName = organizations.DisplayName };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -127,6 +152,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 input.ShouldChangePasswordOnNextLogin,
                 input.SendActivationEmail,
                 input.OrganizationUnitId, input.SourceTenantId, input.ModuleList);
+
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]
@@ -184,6 +210,156 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                     select new TenantListOutputDto { TenantName = tenant.TenancyName, TenantId = tenant.Id }).ToListAsync();
 
             return tenantList;
+        }
+
+
+        /// <summary>
+        /// Updating Sumit settings with comapnyAddress,Logo,Transmitter Fields
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+
+        [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Create)]
+        public async Task UpdateComapnyUnit(TenantExtendedUnitInput input)
+        {
+            int tenantid = AbpSession.TenantId.Value;
+            using (_unitOfWorkManager.Current.SetTenantId(tenantid))
+            {
+                if (input.TenantExtendedId > 0)
+                {
+
+                    byte[] logo = null;
+                    if (!ReferenceEquals(input.ComapanyLogo, null))
+                        logo = await UpdateOrganizationPicture(input.ComapanyLogo);
+
+                    var tenant = await _tenantExtendedUnitRepository.GetAsync(input.TenantExtendedId);
+                    await _tenantExtendedManager.UpdateAsync(tenant);
+
+                    // update address Information
+                    if (!ReferenceEquals(input.Address, null))
+                    {
+                        if (input.Address.AddressId != 0)
+                        {
+                            await _addressAppService.UpdateAddressUnit(input.Address);
+                        }
+                        else
+                        {
+                            if (input.Address.Line1 != null || input.Address.Line2 != null ||
+                                input.Address.Line3 != null || input.Address.Line4 != null ||
+                                input.Address.State != null || input.Address.Country != null ||
+                                input.Address.Email != null || input.Address.Phone1 != null ||
+                                input.Address.Website != null)
+                            {
+                                input.Address.TypeofObjectId = TypeofObject.Org;
+                                input.Address.ObjectId = input.TenantExtendedId;
+                                AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                                await
+                                    _addressAppService.CreateAddressUnit(
+                                        AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(input.Address));
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    var tenantExtended = input.MapTo<TenantExtendedUnit>();
+                    int id = await _tenantExtendedManager.CreateAsync(tenantExtended);
+                    //address Information
+                    if (!ReferenceEquals(input.Address, null))
+                    {
+
+                        if (input.Address.Line1 != null || input.Address.Line2 != null ||
+                            input.Address.Line3 != null || input.Address.Line4 != null ||
+                            input.Address.State != null || input.Address.Country != null ||
+                            input.Address.Email != null || input.Address.Phone1 != null ||
+                            input.Address.ContactNumber != null)
+                        {
+                            input.Address.TypeofObjectId = TypeofObject.Org;
+                            input.Address.ObjectId = id;
+                            AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            await
+                                _addressAppService.CreateAddressUnit(
+                                    AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(input.Address));
+                        }
+                    }
+
+                }
+                await CurrentUnitOfWork.SaveChangesAsync();
+            }
+        }
+
+
+        /// <summary>
+        /// Get CompanySettings with comapnyAddress,Logo,Transmitter Fields for Editing in TenantLevel
+        /// </summary>
+        /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp)]
+        public async Task<ComapnyPreferenceDto> GetCompanySettingsForEdit()
+        {
+            int tenantid = AbpSession.GetTenantId();
+            using (_unitOfWorkManager.Current.SetTenantId(tenantid))
+            {
+
+                var teanants = await (from tenant in _tenantExtendedUnitRepository.GetAll()
+                                      join address in _addressRepository.GetAll().Where(u => u.TypeofObjectId == TypeofObject.Org) on
+                                          tenant.Id equals address.ObjectId into addresss
+                                      from address in addresss.DefaultIfEmpty()
+                                      select new { tenant, address }).ToListAsync();
+
+                if (teanants.Count > 0)
+                {
+                    var dto = teanants[0].tenant.MapTo<ComapnyPreferenceDto>();
+                    if (!ReferenceEquals(teanants[0].address, null))
+                    {
+                        dto.Address = teanants[0].address.MapTo<AddressUnitDto>();
+                        dto.Address.AddressId = teanants[0].address.Id;
+                    }
+                    dto.CompanySettings = await _tenantSettingsAppService.GetAllTenantSettings();
+                    return dto;
+                }
+                ComapnyPreferenceDto comapnyPreferenceDto = new ComapnyPreferenceDto();
+                comapnyPreferenceDto.CompanySettings = await _tenantSettingsAppService.GetAllTenantSettings();
+                return comapnyPreferenceDto;
+            }
+        }
+
+
+        /// <summary>
+        /// Updating the Logo of Company
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private async Task<byte[]> UpdateOrganizationPicture(UpdateProfilePictureInput input)
+        {
+            var tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
+
+            byte[] byteArray;
+
+            using (var fsTempProfilePicture = new FileStream(tempProfilePicturePath, FileMode.Open))
+            {
+                using (var bmpImage = new Bitmap(fsTempProfilePicture))
+                {
+                    var width = input.Width == 0 ? bmpImage.Width : input.Width;
+                    var height = input.Height == 0 ? bmpImage.Height : input.Height;
+                    var bmCrop = bmpImage.Clone(new Rectangle(input.X, input.Y, width, height), bmpImage.PixelFormat);
+
+                    using (var stream = new MemoryStream())
+                    {
+                        bmCrop.Save(stream, bmpImage.RawFormat);
+                        stream.Close();
+                        byteArray = stream.ToArray();
+                    }
+                }
+            }
+
+            if (byteArray.LongLength > 102400) //100 KB
+            {
+                throw new UserFriendlyException(L("ResizedProfilePicture_Warn_SizeLimit"));
+            }
+
+            FileHelper.DeleteIfExists(tempProfilePicturePath);
+            return byteArray;
         }
     }
 }

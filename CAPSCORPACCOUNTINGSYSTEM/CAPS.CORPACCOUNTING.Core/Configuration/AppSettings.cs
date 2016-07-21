@@ -24,10 +24,8 @@ namespace CAPS.CORPACCOUNTING.Configuration
             public const string AllowSelfRegistration = "App.UserManagement.AllowSelfRegistration";
             public const string IsNewRegisteredUserActiveByDefault = "App.UserManagement.IsNewRegisteredUserActiveByDefault";
             public const string UseCaptchaOnRegistration = "App.UserManagement.UseCaptchaOnRegistration";
-        }
 
-        public static class OrganizationManagement
-        {
+            //Sumit Comapny Settings
             public const string AllowDuplicateAPInvoiceNos = "Sumit.Org.AllowDuplicateAPinvoiceNos";
             public const string AllowDuplicateARInvoiceNos = "Sumit.Org.AllowDuplicateARinvoiceNos";
             public const string SetDefaultAPTerms = "Sumit.Org.SetDefaultAPTerms";

@@ -1296,6 +1296,14 @@
     <Compile Include="Migrations\201607111252560_Modify_UserViewSettingsUnit_Table.Designer.cs">
       <DependentUpon>201607111252560_Modify_UserViewSettingsUnit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607190736118_Remove_TransmitterrelatedFieldsfrom_organization.cs" />
+    <Compile Include="Migrations\201607190736118_Remove_TransmitterrelatedFieldsfrom_organization.Designer.cs">
+      <DependentUpon>201607190736118_Remove_TransmitterrelatedFieldsfrom_organization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607201716181_Add_TenantExtended_table.cs" />
+    <Compile Include="Migrations\201607201716181_Add_TenantExtended_table.Designer.cs">
+      <DependentUpon>201607201716181_Add_TenantExtended_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -2189,6 +2197,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607111252560_Modify_UserViewSettingsUnit_Table.resx">
       <DependentUpon>201607111252560_Modify_UserViewSettingsUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607190736118_Remove_TransmitterrelatedFieldsfrom_organization.resx">
+      <DependentUpon>201607190736118_Remove_TransmitterrelatedFieldsfrom_organization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607201716181_Add_TenantExtended_table.resx">
+      <DependentUpon>201607201716181_Add_TenantExtended_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

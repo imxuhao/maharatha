@@ -2601,52 +2601,41 @@
             This value is only used for comparing user's timezone to default timezone
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Configuration.Organization.IOrganizationSettingManager.ChangeSettingForOrganizationAsync(System.Int64,System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="organizationUnitId"></param>
-            <param name="name"></param>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Configuration.Organization.OrganizationSettingManager.SettingStore">
-            <summary>
-            Reference to the setting store.
-            </summary>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Configuration.Organization.OrganizationSettingManager.ChangeSettingForOrganizationAsync(System.Int64,System.String,System.String)">
-            <summary>
-            Change the Settings of Organization
-            </summary>
-            <param name="organizationUnitId"></param>
-            <param name="name"></param>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Configuration.Organization.OrganizationSettingManager.GetSettingValueForOrganization(System.Int64,System.String)">
-            <summary>
-            Get the SettingValue of Organization
-            </summary>
-            <param name="OrganizationUnitId"></param>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="T:CAPS.CORPACCOUNTING.Configuration.Organization.SettingInfoExtended">
-            <summary>
-            Represents a setting information.
-            </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Configuration.Organization.SettingInfoExtended.OrganizationUnitId">
-            <summary>
-            Gets sets OrganizationunitId
-            </summary>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.Dto.TenantSettingsEditDto.ValidateHostSettings">
             <summary>
             This validation is done for single-tenant applications.
             Because, these settings can only be set by tenant in a single-tenant application.
             </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.ITenantSettingsAppService.GetAllTenantSettings">
+            <summary>
+            Sumit Method to GetAllSettings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.ITenantSettingsAppService.UpdateAllTenantSettings(CAPS.CORPACCOUNTING.Configuration.Tenants.Dto.TenantSettingsEditDto)">
+            <summary>
+            Sumit Method to  Update AllSettings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.TenantSettingsAppService.GetAllSettings">
+            <summary>
+            Abp Method to GetAllSettings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.TenantSettingsAppService.GetAllTenantSettings">
+            <summary>
+            Sumit Method to GetAllSettings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.TenantSettingsAppService.UpdateAllTenantSettings(CAPS.CORPACCOUNTING.Configuration.Tenants.Dto.TenantSettingsEditDto)">
+            <summary>
+            Sumit Method to  Update AllSettings
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.CORPACCOUNTINGApplicationModule">
             <summary>
@@ -8455,6 +8444,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.GetVendorPayTerms">
+            <summary>
+            Get All CustomerPaymentTerms
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService">
             <summary>
             This service will provide all CRUD operations on VendorPaymentTerms.
@@ -8495,11 +8490,23 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IVendorPaymentTermUnitAppService.GetVendorPayTerms">
+            <summary>
+            Get All Vendor PaymentTerms
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerPaymentTermUnitAppService.GetCustomerPayTermUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Get the CustomerPaymentTerms Details By CustomerPaymentTermsId
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerPaymentTermUnitAppService.GetVendorPayTerms">
+            <summary>
+            Get All CustomerPaymentTerms
+            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.TaxCreditUnitAppService">
@@ -8751,6 +8758,51 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TransmitterContactName">
+            <summary>Gets or sets the TransmitterContactName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TransmitterEmailAddress">
+            <summary>Gets or sets the TransmitterEmailAddress field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TransmitterCode">
+            <summary>Gets or sets the TransmitterCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TransmitterControlCode">
+            <summary>Gets or sets the TransmitterControlCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.FederalTaxId">
+            <summary>Gets or sets the FederalTaxID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.Address">
+            <summary>Gets or sets the Address of the Organization. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.TenantExtendedId">
+            <summary>Gets or sets the TenantExtendedUnitId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.TransmitterContactName">
+            <summary>Gets or sets the TransmitterContactName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.TransmitterEmailAddress">
+            <summary>Gets or sets the TransmitterEmailAddress field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.TransmitterCode">
+            <summary>Gets or sets the TransmitterCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.TransmitterControlCode">
+            <summary>Gets or sets the TransmitterControlCode field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.FederalTaxId">
+            <summary>Gets or sets the FederalTaxID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.ComapanyLogo">
+            <summary> Gets or sets Logo  </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.Address">
+            <summary> Gets or sets eAddress of the Organization. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.CompanySettings">
+            <summary> Gets or sets eAddress of the OrganizationSettings. </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService.GetTenantListByOrganizationId(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
             Get TenantList(CompanyList) By OrganizationId
@@ -8782,6 +8834,26 @@
         <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.CreateTenantUnit(CAPS.CORPACCOUNTING.MultiTenancy.Dto.CreateTenantInputUnit)">
             <summary>
             This is Sumit Method To create the Tenants
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.UpdateComapnyUnit(CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput)">
+            <summary>
+            Updating Sumit settings with comapnyAddress,Logo,Transmitter Fields
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.GetCompanySettingsForEdit">
+            <summary>
+            Get CompanySettings with comapnyAddress,Logo,Transmitter Fields for Editing in TenantLevel
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.UpdateOrganizationPicture(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
+            <summary>
+            Updating the Logo of Company
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -9093,59 +9165,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateHostOrganizationUnitInput.ConnectionStringId">
             <summary>Gets or sets the ConnectionStringId Name field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.DisplayName">
-            <summary>Gets or sets the Organization Name field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.TransmitterContactName">
-            <summary>Gets or sets the TransmitterContactName field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.TransmitterEmailAddress">
-            <summary>Gets or sets the TransmitterEmailAddress field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.TransmitterCode">
-            <summary>Gets or sets the TransmitterCode field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.TransmitterControlCode">
-            <summary>Gets or sets the TransmitterControlCode field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.FederalTaxId">
-            <summary>Gets or sets the FederalTaxID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.Address">
-            <summary> Gets or sets Address of the Organization. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.OrganizationSettings">
-            <summary> Gets or sets Address of the OrganizationSettings. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.Logo">
-            <summary> Gets or sets Logo  </summary>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.DisplayName">
             <summary>Gets or sets the Organization Name field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.TransmitterContactName">
-            <summary>Gets or sets the TransmitterContactName field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.TransmitterEmailAddress">
-            <summary>Gets or sets the TransmitterEmailAddress field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.TransmitterCode">
-            <summary>Gets or sets the TransmitterCode field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.TransmitterControlCode">
-            <summary>Gets or sets the TransmitterControlCode field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.FederalTaxId">
-            <summary>Gets or sets the FederalTaxID field. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.Logo">
-            <summary> Gets or sets Logo  </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.Address">
-            <summary> Gets or sets eAddress of the Organization. </summary>
-        </member>
-        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput.OrganizationSettings">
-            <summary> Gets or sets eAddress of the OrganizationSettings. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput.DisplayName">
+            <summary>Gets or sets the Organization Name field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.OrganizationUnitDto.TransmitterContactName">
             <summary>Gets or sets the TransmitterContactName field. </summary>
@@ -9193,27 +9217,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetComapnySetUpUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Get Comapny List
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateAllSettings(CAPS.CORPACCOUNTING.Configuration.Host.Dto.OrganizationManagementSettingsEditDto)">
-            <summary>
-            Update Default Settings of Company
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.GetAllSettings(Abp.Application.Services.Dto.IdInput{System.Int64})">
-            <summary>
-            Get default Settings of Organization
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.CreateHostOrganizationUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateHostOrganizationUnitInput)">
             <summary>
             Creating HostOrganization
@@ -9249,22 +9252,8 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.DeleteHostOrganizationUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
-            Get ConnectionStringList
+            Get DeleteHostOrganizationUnit
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.CreateComapnyUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
-            <summary>
-            Create CompanySetup
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.IOrganizationUnitAppService.UpdateComapnyUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
-            <summary>
-            Update CompanySetUp
-            </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetHostOrganizationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
@@ -9299,41 +9288,6 @@
             <summary>
             Sumit Method
             Update Host Organization (CompanyGroup)
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.GetComapnySetUpUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Get ComapnySetup (Tenant Organizations)
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.CreateComapnyUnit(CAPS.CORPACCOUNTING.Organizations.Dto.CreateOrganizationUnitInput)">
-            <summary>
-            Sumit Method to Create CompanySetup
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateComapnyUnit(CAPS.CORPACCOUNTING.Organizations.Dto.UpdateOrganizationUnitInput)">
-            <summary>
-            Sumit Method to update Comapny Setup
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateOrganizationPicture(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Organizations.OrganizationUnitAppService.UpdateAllSettings(CAPS.CORPACCOUNTING.Configuration.Host.Dto.OrganizationManagementSettingsEditDto)">
-            <summary>
-            Update the OrganizationLevel Settings
             </summary>
             <param name="input"></param>
             <returns></returns>

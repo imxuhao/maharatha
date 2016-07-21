@@ -9,5 +9,18 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
         Task<TenantSettingsEditDto> GetAllSettings();
 
         Task UpdateAllSettings(TenantSettingsEditDto input);
+
+        /// <summary>
+        /// Sumit Method to GetAllSettings
+        /// </summary>
+        /// <returns></returns>
+        Task<TenantSettingsEditDto> GetAllTenantSettings();
+        
+
+        /// <summary>
+        /// Sumit Method to  Update AllSettings
+        /// </summary>
+        /// <returns></returns>
+       Task UpdateAllTenantSettings(TenantSettingsEditDto input);
     }
 }

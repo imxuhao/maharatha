@@ -1,10 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
 using CAPS.CORPACCOUNTING.Organizations.Dto;
 using System.Collections.Generic;
-using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Organizations
@@ -50,29 +48,6 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetOrganizationsListByUserId(IdInput<long> input);
-
-
-        /// <summary>
-        /// Get Comapny List
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<PagedResultOutput<OrganizationUnitDto>> GetComapnySetUpUnits(SearchInputDto input);
-
-        /// <summary>
-        /// Update Default Settings of Company
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task UpdateAllSettings(OrganizationManagementSettingsEditDto input);
-
-        /// <summary>
-        /// Get default Settings of Organization
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<OrganizationManagementSettingsEditDto> GetAllSettings(IdInput<long> input);
-
         /// <summary>
         /// Creating HostOrganization
         /// </summary>
@@ -108,23 +83,11 @@ namespace CAPS.CORPACCOUNTING.Organizations
 
 
         /// <summary>
-        /// Get ConnectionStringList
+        /// Get DeleteHostOrganizationUnit
         /// </summary>
         /// <returns></returns>
         Task DeleteHostOrganizationUnit(IdInput<long> input);
 
-        /// <summary>
-        /// Create CompanySetup
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<OrganizationUnitDto> CreateComapnyUnit(CreateOrganizationUnitInput input);
         
-        /// <summary>
-        /// Update CompanySetUp
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<OrganizationUnitDto> UpdateComapnyUnit(UpdateOrganizationUnitInput input);
     }
 }

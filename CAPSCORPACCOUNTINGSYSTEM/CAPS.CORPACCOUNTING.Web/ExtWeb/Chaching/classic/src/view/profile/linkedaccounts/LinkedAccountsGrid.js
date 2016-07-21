@@ -37,7 +37,8 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
     createNewMode: 'popup',
     columnLines: true,
     multiColumnSort: true,
-    manageViewSetting:false,
+    manageViewSetting: false,
+    requireActionColumn: false,
     createWndTitleConfig: {
         title: app.localize('LinkNewAccount'),
         iconCls: 'fa fa-plus'
@@ -45,29 +46,33 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
     columns: [
         {
             xtype: 'gridcolumn',           
-            width: '20%',           
+            width: '15%',
+            maxWidth: 150,
             text: app.localize('Actions'),        
             renderer: Chaching.utilities.ChachingRenderers.loginaccount
-        },
-
-         {
+        }, {
              xtype: 'gridcolumn',
              text: app.localize('UserName'),
-             dataIndex: 'username',
+             dataIndex: 'tenantUser',
              sortable: true,
              groupable: true,
              width: '60%',
-             filterField: {
-                 xtype: 'textfield',
-                 width: '100%',
-                 emptyText: app.localize('UUserName')
-             }            
+             flex : 1      
          },
          {
-             xtype: 'gridcolumn',       
+             xtype: 'actioncolumn',       
              text: app.localize('Delete'),
-             width: '20%',
-             renderer: Chaching.utilities.ChachingRenderers.unlinkedaccount
+             width: '15%',
+             maxWidth: 70,
+             cls : 'actionColumn',
+             items: [{
+                 iconCls: 'deleteCls',
+                 tooltip: app.localize('Delete'),
+                 handler: 'unlinkUser'
+             }]
+             
+            // maxWidth: 50,
+             //renderer: Chaching.utilities.ChachingRenderers.unlinkedaccount
             
          }
 

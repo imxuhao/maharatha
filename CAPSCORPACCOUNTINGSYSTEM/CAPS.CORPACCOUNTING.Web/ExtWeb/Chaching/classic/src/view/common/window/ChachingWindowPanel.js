@@ -19,11 +19,15 @@ Ext.define('Chaching.view.common.window.ChachingWindowPanel',{
     viewModel: {
         type: 'common-window-chachingwindowpanel'
     },
+    monitorResize : true,
     modal: true,
     padding:5,
     closeAction: 'destroy',
     ui:'chachingWindow',
     name: null,
     border: false,
-    frame: false
+    frame: false,
+    listeners: {
+        resize : 'onWindowViewResize'
+    }
 });

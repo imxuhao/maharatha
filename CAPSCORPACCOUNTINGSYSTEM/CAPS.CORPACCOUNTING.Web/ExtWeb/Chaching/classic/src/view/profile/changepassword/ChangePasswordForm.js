@@ -39,7 +39,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
             width: '100%',
             ui: 'fieldLabelTop',
             reference: "password",
-            maxLength : 6,
+            minLength : 6,
             emptyText: app.localize('CurrentPassword'),
             listeners: {
                 focusenter: 'passwordenter',
@@ -67,7 +67,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
         reference: "newpassword",
         fieldLabel: app.localize('NewPassword').initCap(),
         width: '100%',
-        maxLength: 6,
+        minLength: 6,
         ui: 'fieldLabelTop',
         emptyText: app.localize('NewPassword')
     },
@@ -79,7 +79,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
         reference: "newpasswordrepeat",
         fieldLabel: app.localize('NewPasswordRepeat').initCap(),
         width: '100%',
-        maxLength: 6,
+        minLength: 6,
         ui: 'fieldLabelTop',
         emptyText: app.localize('NewPasswordRepeat'),
         /*

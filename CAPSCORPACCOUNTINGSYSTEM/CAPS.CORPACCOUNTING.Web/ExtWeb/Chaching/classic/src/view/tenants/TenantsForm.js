@@ -20,7 +20,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
       //  labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
-    defaultFocus: 'combobox#organizationId',
+   
     items: [{
         xtype: 'tabpanel',
         ui: 'formTabPanels',

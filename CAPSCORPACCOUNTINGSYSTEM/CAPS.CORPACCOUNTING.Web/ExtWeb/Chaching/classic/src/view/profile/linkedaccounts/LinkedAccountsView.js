@@ -8,8 +8,8 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsView', {
     ],
 
     controller: 'linkedaccounts-linkedaccountsview',
-    height: 600,
-    width: 550,
+    height: '90%', //600,
+    width: '70%',//750,
     layout: 'fit',
     title: app.localize("LinkedAccounts"),   
     initComponent: function (config) {
@@ -21,7 +21,20 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsView', {
             name: 'LinkedAccounts'
         });
         me.items = [form];
-
+        me.buttons = [
+            {
+                xtype: 'button',
+                scale: 'small',
+                iconCls: 'fa fa-close',
+                iconAlign: 'left',
+                text: app.localize('Close').toUpperCase(),
+                ui: 'actionButton',
+                name: 'Cancel',
+                itemId: 'btnCancel',
+                reference: 'btnCancel',
+                handler: 'onLinkAccountsWindowClose'
+            }];
+        me.buttonAlign = 'right';
         me.callParent(arguments);
     }
 });

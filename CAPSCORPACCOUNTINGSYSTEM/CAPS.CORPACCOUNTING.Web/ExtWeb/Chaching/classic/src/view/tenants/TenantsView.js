@@ -8,11 +8,11 @@ Ext.define('Chaching.view.tenants.TenantsView', {
     ],
 
     controller: 'tenants-tenantsview',
-    height: 570,
-    width: 570,
+    height: '90%', //570,
+    width: '50%',//570,
     layout: 'fit',
     title: app.localize("Tenants"),
-    defaultFocus: 'tenancyName',
+    defaultFocus: 'combobox#organizationId',
     initComponent: function(config) {
         var me = this,
             controller = me.getController();

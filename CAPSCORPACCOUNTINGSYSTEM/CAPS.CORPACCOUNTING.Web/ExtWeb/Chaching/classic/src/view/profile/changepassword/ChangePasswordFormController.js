@@ -37,7 +37,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordFormController', 
             },
             failure: function (response, opts) {
                 var res = Ext.decode(response.responseText);
-                Ext.toast(res.exceptionMessage);
+                abp.message.error(res.error.message);
                 console.log(response);
             }
 

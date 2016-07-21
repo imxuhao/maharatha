@@ -9,6 +9,7 @@ Ext.define('Chaching.model.profile.linkedaccounts.LinkedAccountsModel', {
         { name: 'username', type: 'string' },
         { name: 'password', type: 'string' },
         { name: 'tenancyName', type: 'string' },
+        { name: 'tenantUser', type: 'string', convert: function (val, record) { return record.get('tenancyName') + '/' + record.get('username') } },
         { name: 'usernameOrEmailAddress', type: 'string' }
     ]
 });

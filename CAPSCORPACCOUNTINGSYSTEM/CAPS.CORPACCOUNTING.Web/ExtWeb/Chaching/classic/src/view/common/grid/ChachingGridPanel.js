@@ -310,42 +310,41 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         }
 
         if (me.showPagingToolbar) {
-            var manageViewSettingsItem;
+            var manageViewSettingsItem = [];
             if (me.manageViewSetting) {
                 if (!me.gridId) {
                     Ext.Error.raise('Please provide gridId');
                 }
-                manageViewSettingsItem = [
-                    {
-                        xtype: 'button',
-                        scale: 'small',
-                        text: app.localize('ManageUsersViewSetting'),
-                        iconCls: 'fa fa-gears',
-                        iconAlign: 'left',
-                        ui: 'actionButton',
-                        handler:'onManageViewClicked'
-                    },
-                    {
-                        xtype: 'combobox',
-                        fieldLabel: app.localize('GridItemsPerPage'),
-                        labelAlign: 'right',
-                       // ui: 'fieldLabelTop',
-                        displayField: 'pageSize',
-                        valueField: 'pageSize',
-                        forceSelection: true,
-                        editable : false,
-                        //value: me.store.pageSize == null ? ChachingGlobals.defaultGridPageSize : me.store.pageSize,
-                        queryMode: 'local',
-                        allowBlank: false,
-                        maxWidth : 200,
-                        store: Ext.create('Chaching.store.ItemsPerPageStore'),
-                        listeners: {
-                            select: 'onGridItemsPerPageChange',
-                            afterrender: 'onGridItemsPerPageComboRender'
-                        }
-                    }
-                ];
+                manageViewSettingsItem.push({
+                    xtype: 'button',
+                    scale: 'small',
+                    text: app.localize('ManageUsersViewSetting'),
+                    iconCls: 'fa fa-gears',
+                    iconAlign: 'left',
+                    ui: 'actionButton',
+                    handler: 'onManageViewClicked'
+                });
             }
+            //items per page combo
+            manageViewSettingsItem.push({
+                xtype: 'combobox',
+                fieldLabel: app.localize('GridItemsPerPage'),
+                labelAlign: 'right',
+                // ui: 'fieldLabelTop',
+                displayField: 'pageSize',
+                valueField: 'pageSize',
+                forceSelection: true,
+                editable: false,
+                //value: me.store.pageSize == null ? ChachingGlobals.defaultGridPageSize : me.store.pageSize,
+                queryMode: 'local',
+                allowBlank: false,
+                maxWidth: 200,
+                store: Ext.create('Chaching.store.ItemsPerPageStore'),
+                listeners: {
+                    select: 'onGridItemsPerPageChange',
+                    afterrender: 'onGridItemsPerPageComboRender'
+                }
+            });
             var pagingToolBar = {
                 xtype: 'pagingtoolbar',
                 store: me.store,

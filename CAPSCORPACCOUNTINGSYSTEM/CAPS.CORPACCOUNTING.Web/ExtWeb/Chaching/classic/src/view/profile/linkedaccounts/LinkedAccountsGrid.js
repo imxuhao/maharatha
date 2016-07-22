@@ -58,7 +58,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
              dataIndex: 'tenantUser',
              hideable: false,
              sortable: true,
-             groupable: true,
+             groupable: false,
             // width: '60%',
              flex : 1      
          },
@@ -71,7 +71,6 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
              hideable: false,
              items: [{
                  iconCls: 'unlinkUserCls',
-                 scale : 'large',
                  tooltip: app.localize('UnlinkUser_Tooltip'),
                  handler: 'unlinkUser'
              }]

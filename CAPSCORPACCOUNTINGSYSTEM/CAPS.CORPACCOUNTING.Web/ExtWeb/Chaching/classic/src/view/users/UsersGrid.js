@@ -43,7 +43,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
         text: app.localize('Permissions'),
         itemId: 'permissions',
         iconCls: 'fa fa-pencil',
-        clickActionName: 'PermissionsClicked'
+        clickActionName: 'permissionsClicked'
     }],
     requireExport: true,
     requireMultiSearch: true,

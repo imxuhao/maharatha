@@ -8175,12 +8175,21 @@
     margin-left: 30px !important;
     margin-right: 5px !important;
     line-height: 35px !important;
+    cursor: pointer !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/main/ChachingViewport.scss:118 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/main/ChachingViewport.scss:119 */
 .x-treelist-nav .x-treelist-row {
     padding-right: 5px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/main/ChachingViewport.scss:121 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/main/ChachingViewport.scss:122 */
 .x-treelist-nav {
     border-radius: 5px !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/main/ChachingViewport.scss:126 */
+.x-treelist-nav .x-treelist-item-icon,
+.x-treelist-nav .x-treelist-item-tool {
+    /*color: #83b2db;
+    font-size: 20px;
+    width: 24px;*/
+    cursor: pointer !important;
 }

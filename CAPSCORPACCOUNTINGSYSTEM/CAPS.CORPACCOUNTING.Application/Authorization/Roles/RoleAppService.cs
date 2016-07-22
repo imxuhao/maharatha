@@ -111,5 +111,28 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
             var grantedPermissions = PermissionManager.GetPermissionsFromNamesByValidating(grantedPermissionNames);
             await _roleManager.SetGrantedPermissionsAsync(role, grantedPermissions);
         }
+
+        public async Task CreateNewRoleForUser(CreateOrUpdateRoleInput input)
+        {
+            if (input.Role.Id.HasValue)
+            {
+                await UpdateRoleAsync(input);
+            }
+            else
+            {
+                await CreateRoleAsync(input);
+            }
+        }
+
+        [AbpAuthorize(AppPermissions.Pages_Administration_Roles_Create)]
+        public async Task<int> CreateRoleForUserAsync(CreateOrUpdateRoleInput input)
+        {
+            var role = new Role(AbpSession.TenantId, input.Role.DisplayName) { IsDefault = input.Role.IsDefault };
+            CheckErrors(await _roleManager.CreateAsync(role));
+            await CurrentUnitOfWork.SaveChangesAsync(); //It's done to get Id of the role.
+            await UpdateGrantedPermissionsAsync(role, input.GrantedPermissionNames);
+            return role.Id;
+        }
+
     }
 }

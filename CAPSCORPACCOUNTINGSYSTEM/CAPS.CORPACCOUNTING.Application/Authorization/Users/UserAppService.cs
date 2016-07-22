@@ -42,6 +42,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         private readonly IRepository<Role> _rolesUnitRepository;
         private readonly IRepository<User, long> _userUnitRepository;
         private readonly IRepository<UserRole, long> _userRoleRepository;
+        private readonly RoleAppService _roleAppService;
 
 
         public UserAppService(
@@ -49,7 +50,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             IUserEmailer userEmailer,
             IUserListExcelExporter userListExcelExporter,
             INotificationSubscriptionManager notificationSubscriptionManager,
-            IAppNotifier appNotifier, IUnitOfWorkManager unitOfWorkManager, IRepository<Role> roletUnitRepository, IRepository<UserRole, long> userRoleRepository, IRepository<User, long> userUnitRepository)
+            IAppNotifier appNotifier, IUnitOfWorkManager unitOfWorkManager, IRepository<Role> roletUnitRepository,
+            IRepository<UserRole, long> userRoleRepository, IRepository<User, long> userUnitRepository, RoleAppService roleAppService)
         {
             _roleManager = roleManager;
             _userEmailer = userEmailer;
@@ -60,6 +62,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             _rolesUnitRepository = roletUnitRepository;
             _userRoleRepository = userRoleRepository;
             _userUnitRepository = userUnitRepository;
+            _roleAppService = roleAppService;
         }
 
         public async Task<PagedResultOutput<UserListDto>> GetUsers(GetUsersInput input)
@@ -515,6 +518,53 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 };
             }
         }
+
+        [AbpAuthorize(AppPermissions.Pages_Administration_Users_ChangePermissions)]
+        public async Task<GetUserPermissionsForEditOutput> GetUserAllPermissionsForEdit(IdInput<long> input)
+        {
+            var user = await UserManager.GetUserByIdAsync(input.Id);
+            var permissions = PermissionManager.GetAllPermissions();
+            var grantedPermissions = await UserManager.GetGrantedPermissionsAsync(user);
+            var permissionList = permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList();
+            if (grantedPermissions.Count > 0)
+            {
+                foreach (var grantedPermission in grantedPermissions)
+                {
+                    permissionList.Where(w => w.Name == grantedPermission.Name)
+                    .ToList()
+                    .ForEach(s => s.IsPermissionGranted = true);
+                }
+            }
+
+
+            return new GetUserPermissionsForEditOutput
+            {
+                Permissions = permissionList.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList(),
+                GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
+            };
+        }
+
+        public async Task UpdateUserPermissionsUnit(UserPermissionsInput input)
+        {
+            await _userRoleRepository.DeleteAsync(p => p.UserId == input.UserId);
+
+            CreateOrUpdateRoleInput request = new CreateOrUpdateRoleInput();
+            request.Role = input.Role;
+            request.GrantedPermissionNames = input.GrantedPermissionNames;
+
+            int roleId = await _roleAppService.CreateRoleForUserAsync(request);
+
+            UserRole userrole = new UserRole
+            {
+                RoleId = roleId,
+                UserId = input.UserId.Value
+            };
+
+            await _userRoleRepository.InsertAsync(userrole);
+            await _unitOfWorkManager.Current.SaveChangesAsync();
+
+        }
+
 
     }
 }

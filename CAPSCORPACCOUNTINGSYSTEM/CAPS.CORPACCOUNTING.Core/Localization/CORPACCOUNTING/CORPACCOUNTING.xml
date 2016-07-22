@@ -34,8 +34,7 @@
     <text name="Delete" value="Delete" />
     <text name="SavedSuccessfully" value="Saved successfully." />
     <text name="AreYouSure" value="Are you sure?" />
-    <text name="YesDelete" value="Yes, delete!" />
-    <text name="DeletingUser" value="Deleting user" />
+    <text name="YesDelete" value="Yes, delete!" /><text name="DeletingUser" value="Deleting user" />
     <text name="UsersHeaderInfo" value="Manage users and permissions." />
     <text name="CreateNewUser" value="Create new user" />
     <text name="UserName" value="User name" />
@@ -1055,5 +1054,7 @@
 <text name="SuccessMessage" value="Operation completed successfully." />
 <text name="UnlinkUser_Tooltip" value="unlink User" />
     
+<text name="PermissionsSaveMessage" value=" Changes were made to this user's Role. Name the new Role to create and Press Save or Cancel to assign selected permissions for this User." />
+   
   </texts>
 </localizationDictionary>

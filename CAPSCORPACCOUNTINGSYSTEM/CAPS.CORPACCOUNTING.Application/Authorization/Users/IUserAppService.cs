@@ -50,8 +50,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
 
         Task<GetRoleForEditOutput> GetPermissionsForSelectedRole(RoleTenantInput input);
 
+        Task<GetUserPermissionsForEditOutput> GetUserAllPermissionsForEdit(IdInput<long> input);
 
-
-
+        Task UpdateUserPermissionsUnit(UserPermissionsInput input);
     }
 }

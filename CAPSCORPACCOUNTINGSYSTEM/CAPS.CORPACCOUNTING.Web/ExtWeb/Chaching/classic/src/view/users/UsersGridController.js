@@ -1,22 +1,43 @@
 Ext.define('Chaching.view.users.UsersGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.users-usersgrid',
-    PermissionsClicked: function () {
-        //alert('asd');
+    permissionsClicked: function (menu, item, e, eOpts, isView) {
+        var me = this, id=0, userName ='',
+            parentMenu = menu.parentMenu,
+            widgetRec = parentMenu.widgetRecord;
+        if (widgetRec){
+            id = widgetRec.get('id');
+            userName = widgetRec.get('userName');
+        }
+
+        var form = Ext.create('Chaching.view.users.UsersPermissionView', {
+            height: '80%',
+            width: '30%',
+            iconCls: 'fa fa-pencil',
+            name: 'Administration.Users'
+        });
+        var treePanel = form.down('treepanel[itemId=usersPermissionsItemId]');
+        var treeStore = treePanel.getStore();
+        //proxy.api.read = abp.appPath + 'api/services/app/user/GetUserPermissionsForEdit';
+        treeStore.getProxy().api.read = abp.appPath + 'api/services/app/user/GetUserAllPermissionsForEdit';
+        treeStore.getProxy().setExtraParam('id', id);
+        treeStore.reload();
+        form.setTitle(form.getTitle() + ' - ' + userName);
+        form.show();
     },
     doRowSpecificEditDelete: function (button, grid) {
-        var menu = button.menu;
-        var permissionButton = menu.items.get('permissions');
-        var separatorButton = menu.items.get('actionMenuSeparator');
+        //var menu = button.menu;
+        //var permissionButton = menu.items.get('permissions');
+        //var separatorButton = menu.items.get('actionMenuSeparator');
         
-        if (permissionButton && abp.session.tenantId == null) {
-            permissionButton.show();
-            separatorButton.show();
-        }
-        else if(permissionButton) {
-            permissionButton.hide();
-            separatorButton.hide();
-        }
+        //if (permissionButton && abp.session.tenantId == null) {
+        //    permissionButton.show();
+        //    separatorButton.show();
+        //}
+        //else if(permissionButton) {
+        //    permissionButton.hide();
+        //    separatorButton.hide();
+        //}
         
     },
     doAfterCreateAction: function (createMode, formView, isEdit, record) {

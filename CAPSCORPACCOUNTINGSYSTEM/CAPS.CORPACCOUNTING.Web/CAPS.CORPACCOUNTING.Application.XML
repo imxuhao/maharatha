@@ -1616,6 +1616,34 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Authorization.Custom.UserAppService">
+            <summary>
+            Partial class for UserAppService
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Custom.UserAppService.UpdateUserUnit">
+            <summary>
+            CreateOrUpdateUserUnit from User Permissions
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserPermissionsInput">
+            <summary>
+            UserPermissionsInput
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserPermissionsInput.UserId">
+            <summary>
+            UserId
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserPermissionsInput.Role">
+            <summary>
+            Role 
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserPermissionsInput.GrantedPermissionNames" -->
         <member name="P:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserEditDto.Id">
             <summary>
             Set null to create a new user. Set user's Id to update a user

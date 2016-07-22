@@ -1049,10 +1049,11 @@
 <text name="RowClickMessage" value="Please click on the row to see the granted permissions of the selected Role!" />
 <text name="GridItemsPerPage" value="Items per page" />
 <text name="ShowAuditLogDetailView_Tooltip" value="Show Audit Log Detail View" />
-    <text name="Status" value="Status" />
+<text name="Status" value="Status" />
 <text name="ViewPermissions" value="View Permissions" />
 <text name="View" value="View" />
 <text name="SuccessMessage" value="Operation completed successfully." />
+<text name="UnlinkUser_Tooltip" value="unlink User" />
     
   </texts>
 </localizationDictionary>

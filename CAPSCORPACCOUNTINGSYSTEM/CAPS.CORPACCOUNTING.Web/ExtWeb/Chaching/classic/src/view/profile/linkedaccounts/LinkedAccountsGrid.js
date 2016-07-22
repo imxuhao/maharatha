@@ -47,27 +47,32 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
         {
             xtype: 'gridcolumn',           
             width: '15%',
-            maxWidth: 150,
+            align: 'center',
+            hideable : false,
+            maxWidth: 100,
             text: app.localize('Actions'),        
             renderer: Chaching.utilities.ChachingRenderers.loginaccount
         }, {
              xtype: 'gridcolumn',
              text: app.localize('UserName'),
              dataIndex: 'tenantUser',
+             hideable: false,
              sortable: true,
              groupable: true,
-             width: '60%',
+            // width: '60%',
              flex : 1      
          },
          {
              xtype: 'actioncolumn',       
              text: app.localize('Delete'),
-             width: '15%',
-             maxWidth: 70,
-             cls : 'actionColumn',
+             //width: '15%',
+             width: 70,
+             align: 'center',
+             hideable: false,
              items: [{
-                 iconCls: 'deleteCls',
-                 tooltip: app.localize('Delete'),
+                 iconCls: 'unlinkUserCls',
+                 scale : 'large',
+                 tooltip: app.localize('UnlinkUser_Tooltip'),
                  handler: 'unlinkUser'
              }]
              

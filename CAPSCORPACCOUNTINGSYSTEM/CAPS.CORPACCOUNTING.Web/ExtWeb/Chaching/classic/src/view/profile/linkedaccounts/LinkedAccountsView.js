@@ -9,7 +9,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsView', {
 
     controller: 'linkedaccounts-linkedaccountsview',
     height: '90%', //600,
-    width: '70%',//750,
+    width: '60%',//750,
     layout: 'fit',
     title: app.localize("LinkedAccounts"),   
     initComponent: function (config) {

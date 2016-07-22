@@ -17,6 +17,12 @@
     content: "\f1f8";
 }
 
+.unlinkUserCls:before {
+    font: 22px/1 FontAwesome;
+    color: #CA0909;
+    content: "\f1f8";
+}
+
 .infoCls:before {
     font: 18px/1 FontAwesome;
     color: #279803;

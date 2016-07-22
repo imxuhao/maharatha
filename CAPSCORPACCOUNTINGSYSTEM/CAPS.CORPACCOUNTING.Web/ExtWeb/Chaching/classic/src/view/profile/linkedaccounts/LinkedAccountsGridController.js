@@ -35,7 +35,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', 
         if (rec.get('id') > 0) {
             var input = new Object();
             input.UserId = rec.get('id');
-            input.tenantId = rec.get('tenantId');
+            input.tenantId = rec.get('tenantId') == 0 ? null : rec.get('tenantId');
             abp.message.confirm(
               app.localize('LinkedUserDeleteWarningMessage', rec.get('username')),
               function (isConfirmed) {
@@ -45,7 +45,15 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', 
                           url: abp.appPath + 'api/services/app/userLink/unlinkUser',
                           jsonData: Ext.encode(input),
                           success: function (response) {
-                              grid.getStore().reload();
+                              var result = Ext.decode(response.responseText);
+                              if (result.success) {
+                                  grid.getStore().reload();
+                                  //reload profile account menu
+                                  me.reloadProfileAccountMenu();
+                              } else {
+                                  abp.message.error(result.error.message);
+                              }
+                             
                           },
                           failure: function (response, opts) {
                               var res = Ext.decode(response.responseText);
@@ -59,6 +67,16 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', 
         }
     },
 
+    reloadProfileAccountMenu: function () {
+        var headerView = Ext.ComponentQuery.query('chachingheader')[0];
+        if (headerView) {
+            var accountButton = headerView.down('#AccountBtn');
+            if (accountButton) {
+                accountButton.contextMenu = null;
+            }
+           
+        }
+    },
 
     login: function (editor, e, rowIndex) {
         var me = this,
@@ -77,7 +95,9 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', 
                     var res = Ext.decode(response.responseText);
                     if (res.success) {
                         document.location = res.targetUrl;
-                    }                    
+                    } else {
+                        abp.message.error(res.error.message);
+                    }
                 },
                 failure: function (response, opts) {
                     var res = Ext.decode(response.responseText);

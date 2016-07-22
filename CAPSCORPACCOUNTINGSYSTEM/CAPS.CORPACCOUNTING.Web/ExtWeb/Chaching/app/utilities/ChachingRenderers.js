@@ -69,6 +69,7 @@
             var button = Ext.create('Ext.button.Button', {
                 ui: 'actionMenuButton',
                 scale: 'small',
+                height : 22,
                 width: '100%',
                 text: app.localize('Login'),
                 iconCls: 'fa fa-sign-in',

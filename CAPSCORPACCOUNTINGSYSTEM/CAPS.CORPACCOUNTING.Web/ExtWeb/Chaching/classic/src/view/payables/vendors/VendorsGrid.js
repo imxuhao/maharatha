@@ -15,7 +15,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         read: abp.auth.isGranted('Pages.Payables.Vendors'),
         create: abp.auth.isGranted('Pages.Payables.Vendors.Create'),
         edit: abp.auth.isGranted('Pages.Payables.Vendors.Edit'),
-        destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete'),
+        destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete')
     },
     padding: 5,
     gridId: 15,

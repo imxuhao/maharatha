@@ -52,6 +52,5 @@ Ext.define('Chaching.view.languages.LanguageTextsGridController', {
         record.set('languageName', storeProxy.extraParams.TargetLanguageName);
         record.set('value', record.get('targetValue'));
         return record;
-    },
-
+    }
 });

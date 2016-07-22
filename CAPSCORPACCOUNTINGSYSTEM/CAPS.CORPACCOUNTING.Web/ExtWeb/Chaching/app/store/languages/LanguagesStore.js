@@ -26,6 +26,6 @@ Ext.define('Chaching.store.languages.LanguagesStore', {
             totalProperty: 'result.totalCount'
         }
     },
-    idPropertyField: 'id',
+    idPropertyField: 'id'
    
 });

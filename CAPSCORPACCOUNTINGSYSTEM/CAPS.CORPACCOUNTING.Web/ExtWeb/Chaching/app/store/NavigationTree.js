@@ -74,5 +74,5 @@
         }
         transformedItem.push(newItem);
         return newItem;
-    },
+    }
 });

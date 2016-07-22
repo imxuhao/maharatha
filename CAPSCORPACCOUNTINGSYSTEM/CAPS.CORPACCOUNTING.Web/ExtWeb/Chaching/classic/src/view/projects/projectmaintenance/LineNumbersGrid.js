@@ -14,7 +14,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
         create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
         edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete'),
+        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
     },
     padding: 5,
     gridId: 14,
@@ -67,7 +67,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
                 width: '15%',
                 emptyText: app.localize('LineSearch')
             }, editor: {
-                xtype: 'textfield',
+                xtype: 'textfield'
             }
         }, {
             xtype: 'gridcolumn',
@@ -79,9 +79,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
-                emptyText: app.localize('DescriptionSearch'),
+                emptyText: app.localize('DescriptionSearch')
             }, editor: {
-                xtype: 'textfield',
+                xtype: 'textfield'
             }
         }, {
             xtype: 'gridcolumn',
@@ -251,6 +251,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
                  //    }
                  //}
              }
-         },
+         }
     ]
 });

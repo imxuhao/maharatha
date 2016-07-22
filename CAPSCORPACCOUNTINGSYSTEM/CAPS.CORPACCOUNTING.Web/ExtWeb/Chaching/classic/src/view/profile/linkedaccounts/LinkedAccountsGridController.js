@@ -107,5 +107,5 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', 
 
             });
         }
-    },
+    }
 });

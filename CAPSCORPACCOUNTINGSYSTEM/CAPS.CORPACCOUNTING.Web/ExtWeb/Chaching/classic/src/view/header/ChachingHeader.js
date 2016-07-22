@@ -42,20 +42,20 @@ Ext.define('Chaching.view.header.ChachingHeader', {
                 click: 'onToggleClick'
             }
         }, '->',
-        {
-            xtype: 'combobox',
-            itemId: 'userOrganizationListItemId',
-            fieldLabel: app.localize('UserOrganizations'),
-            queryMode: 'local',
-            displayField: 'name',
-            valueField: 'value',
-            labelWidth : 150,
-            ui: 'fieldLabelTop',
-            store: Ext.create('Chaching.store.administration.organization.UserOrganizationListStore'),
-            listeners: {
-                select: 'onUserOrganizationChange'
-            }
-        },
+        //{
+        //    xtype: 'combobox',
+        //    itemId: 'userOrganizationListItemId',
+        //    fieldLabel: app.localize('UserOrganizations'),
+        //    queryMode: 'local',
+        //    displayField: 'name',
+        //    valueField: 'value',
+        //    labelWidth : 150,
+        //    ui: 'fieldLabelTop',
+        //    store: Ext.create('Chaching.store.administration.organization.UserOrganizationListStore'),
+        //    listeners: {
+        //        select: 'onUserOrganizationChange'
+        //    }
+        //},
         {
             xtype: 'button',
             scale: 'small',

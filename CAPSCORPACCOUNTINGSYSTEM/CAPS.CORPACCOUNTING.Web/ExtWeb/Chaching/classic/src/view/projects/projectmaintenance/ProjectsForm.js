@@ -937,7 +937,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         read: true,
                         create: false,
                         edit: true,
-                        destroy: false,
+                        destroy: false
                     },
                     columns:[
                     {

@@ -25,7 +25,7 @@
     },
     // layout: 'fit',
     defaults : {
-        labelWidth: 120,
+        labelWidth: 120
     },
    
     items: [

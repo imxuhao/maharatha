@@ -83,11 +83,8 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
                  xtype: 'datefield',
                  width: '100%',
                  emptyText: 'Enter creation time to search'
-             },                      
-         },
-        
-       
-       
+             }                      
+         }
     ]
    
 });

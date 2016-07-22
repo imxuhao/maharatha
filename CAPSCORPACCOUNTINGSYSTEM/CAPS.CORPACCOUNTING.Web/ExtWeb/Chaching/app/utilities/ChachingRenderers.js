@@ -24,7 +24,7 @@
                 widgetCol: widgetCol,
                 listeners: {
                     //click: gridController.ViewPermissions
-                },
+                }
             });
             if (Ext.get(id)) {
                 button.render(Ext.get(id));
@@ -50,7 +50,7 @@
                 gridControl: view,
                 listeners: {
                     click: gridController.unlinkUser
-                },
+                }
             });
             if (Ext.get(id)) {
                 button.render(Ext.get(id));
@@ -78,7 +78,7 @@
                 widgetCol: widgetCol,
                 listeners: {
                     click: gridController.login
-                },
+                }
             });
             if (Ext.get(id)) {
                 button.render(Ext.get(id));
@@ -110,7 +110,7 @@
                 iconAlign: 'left',
                 widgetRec: widgetRec,
                 widgetCol: widgetCol,
-                gridControl: view,
+                gridControl: view
                 //listeners: {
                 //    click: gridController.auditLogView
                 //},

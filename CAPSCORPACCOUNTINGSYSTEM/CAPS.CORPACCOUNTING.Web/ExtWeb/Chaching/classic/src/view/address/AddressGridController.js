@@ -1,6 +1,6 @@
 ﻿Ext.define('Chaching.view.address.AddressGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
-    alias: 'controller.address-addressgrid',
+    alias: 'controller.address-addressgrid'
     //doBeforeInlineAddUpdate: function (record) {
     //    var me = this,
     //        view = me.getView(),

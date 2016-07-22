@@ -45,7 +45,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
                   iconCls: 'searchCls',
                   tooltip: app.localize('ShowAuditLogDetailView_Tooltip'),
                   handler: 'showAuditLogDetailView'
-              }],
+              }]//,
              
 
               //renderer: Chaching.utilities.ChachingRenderers.auditLogView

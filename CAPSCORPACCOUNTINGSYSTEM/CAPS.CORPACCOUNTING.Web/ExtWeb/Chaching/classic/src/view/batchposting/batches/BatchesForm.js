@@ -97,7 +97,7 @@ Ext.define('Chaching.view.batchposting.batches.BatchesForm', {
             displayField: 'typeOfBatch',
             valueField: 'typeOfBatchId',
             queryMode : 'local',
-            store: Ext.create('Chaching.store.utilities.TypeOfBatchStore'),
+            store: Ext.create('Chaching.store.utilities.TypeOfBatchStore')
         }, {
             xtype: 'checkbox',
             boxLabel: app.localize('RetainBatch'),

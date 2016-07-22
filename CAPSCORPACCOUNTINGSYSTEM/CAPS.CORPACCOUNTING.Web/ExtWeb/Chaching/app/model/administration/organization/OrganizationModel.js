@@ -10,7 +10,7 @@ Ext.define('Chaching.model.administration.organization.OrganizationModel', {
             { name: 'id', type: 'int', isPrimaryKey: true,defaultVaule: null, convert: nullHandler },
             { name: 'displayName', type: 'string' },
             { name: 'lastModificationTime', type: 'date' },
-            { name: 'creationTime', type: 'date' },
+            { name: 'creationTime', type: 'date' }
     ]
 });
 

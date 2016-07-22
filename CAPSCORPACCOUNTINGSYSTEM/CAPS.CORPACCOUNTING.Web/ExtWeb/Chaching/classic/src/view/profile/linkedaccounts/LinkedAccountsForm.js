@@ -53,7 +53,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsForm', {
         width: '100%',
         ui: 'fieldLabelTop',
         emptyText: app.localize('Password')
-    },
+    }
     ]
     
     

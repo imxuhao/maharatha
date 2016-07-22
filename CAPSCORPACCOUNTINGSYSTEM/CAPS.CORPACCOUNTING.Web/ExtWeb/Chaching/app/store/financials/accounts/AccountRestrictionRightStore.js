@@ -20,7 +20,7 @@ Ext.define('Chaching.store.financials.accounts.AccountRestrictionRightStore', {
             type: 'json',
             rootProperty: 'result',
             totalProperty: 'result.totalCount'
-        },
+        }
     },
     idPropertyField: 'SubAccountRestrictionId'//important to set for add/update of records
 });

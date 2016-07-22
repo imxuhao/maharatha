@@ -221,7 +221,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 style:{color:'#cacaca', fontSize: '15px'},
                 css:"grayLabelText",
                 itemId: 'RolesMessageItemId',
-                text: abp.localization.localize("RowClickMessage"),
+                text: abp.localization.localize("RowClickMessage")
             },
             {
                 columnWidth: .51,
@@ -281,7 +281,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 //style: { color: '#cacaca', fontSize: '15px' },
                 css: "grayLabelText",
                 itemId: 'LinkCompanyMessageItemId',
-                text: abp.localization.localize("RowClickMessage"),
+                text: abp.localization.localize("RowClickMessage")
             },
             {
                 columnWidth: 0.51,

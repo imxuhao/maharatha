@@ -14,7 +14,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs.Create'),
         edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs.Edit'),
-        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete'),
+        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs.Delete')
     },
     padding: 5,
     gridId: 13,
@@ -71,9 +71,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
-                 emptyText: app.localize('DescriptionSearch'),
+                 emptyText: app.localize('DescriptionSearch')
              }, editor: {
-                 xtype: 'textfield',
+                 xtype: 'textfield'
              }
          },
           {
@@ -83,7 +83,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
               groupable: true,
               width: '39%',
               hidden: false            
-          },
+          }
         ]
     
 });

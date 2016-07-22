@@ -407,5 +407,5 @@ Ext.define('Chaching.view.main.MainController', {
                 }
             }
         }
-    },
+    }
 });

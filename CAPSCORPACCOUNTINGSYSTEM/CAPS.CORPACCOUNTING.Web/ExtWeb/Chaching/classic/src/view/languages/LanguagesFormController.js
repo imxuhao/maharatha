@@ -11,6 +11,5 @@ Ext.define('Chaching.view.languages.LanguagesFormController', {
         }
         record.data = data;
         return record;
-    },
-    
+    }
 });

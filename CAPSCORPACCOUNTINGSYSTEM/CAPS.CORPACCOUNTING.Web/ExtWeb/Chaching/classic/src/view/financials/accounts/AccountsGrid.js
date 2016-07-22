@@ -12,7 +12,7 @@
         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
         create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
         edit: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete'),
+        destroy: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Delete')
     },
     padding: 5,
     gridId: 11,
@@ -65,7 +65,7 @@
                  width: '15%',
                  emptyText: app.localize('AccountSearch')
              }, editor: {
-                 xtype: 'textfield',
+                 xtype: 'textfield'
              }
          }, {
              xtype: 'gridcolumn',
@@ -77,9 +77,9 @@
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
-                 emptyText: app.localize('DescriptionSearch'),
+                 emptyText: app.localize('DescriptionSearch')
              }, editor: {
-                 xtype: 'textfield',
+                 xtype: 'textfield'
              }
          }, {
              xtype: 'gridcolumn',

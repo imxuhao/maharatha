@@ -64,14 +64,14 @@ Ext.define('Chaching.model.payables.vendors.VendorsModel', {
                 reference: {
                     parent: 'address.AddressModel'
                 }
-            },
+            }//,
             //{
             //    name: 'vendorAlias',
             //    reference: {
             //        parent: 'payables.vendors.VendorAliasModel'
             //    }
             //}
-    ],
+    ]
 });
 
 

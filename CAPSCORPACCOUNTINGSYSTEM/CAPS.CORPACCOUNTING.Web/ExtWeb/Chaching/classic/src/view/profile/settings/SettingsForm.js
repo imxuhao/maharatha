@@ -69,7 +69,7 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
              },
              cls: 'helpText',
              text: app.localize('CanNotChangeAdminUserName').initCap(),
-             width: '100%',
+             width: '100%'
          },
          {
              xtype: 'combobox',

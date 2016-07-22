@@ -10,7 +10,6 @@ Ext.define('Chaching.model.roles.RolePermissionsModel', {
             { name: 'displayName', type: 'string' },
             { name: 'description', type: 'string' },
             { name: 'isGrantedByDefault', type: 'boolean' }
-    ],
-   
+    ]
 });
 

@@ -15,7 +15,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
         read: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts'),
         create: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Create'),
         edit: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Edit'),
-        destroy: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Delete'),
+        destroy: abp.auth.isGranted('Pages.Financials.Accounts.SubAccounts.Delete')
     },
     padding: 5,
     gridId: 10,
@@ -70,7 +70,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
                  width: '15%',
                  emptyText: app.localize('SubAccountNumberSearch')
              }, editor: {
-                 xtype: 'textfield',
+                 xtype: 'textfield'
              }
          }, {
              xtype: 'gridcolumn',
@@ -84,7 +84,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
                  width: '100%',
                  emptyText: app.localize('DescriptionSearch')
              }, editor: {
-                 xtype: 'textfield',
+                 xtype: 'textfield'
              }
          },
           {

@@ -9,6 +9,6 @@ Ext.define('Chaching.model.payables.invoices.AccountsPayableDetailsModel', {
     fields: [
         { name: 'vendorId', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'vendorName', type: 'string' },
-        { name: 'poHistoryItemId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'poHistoryItemId', type: 'int', defaultValue: null, convert: nullHandler }
     ]
 });

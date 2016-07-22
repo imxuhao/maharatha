@@ -55,8 +55,8 @@ Ext.define('Chaching.view.roles.RolesForm',{
                 text: app.localize('DefaultRole_Description').initCap(),
                 width: '100%',
                 reference: "lablepassword"
-            },
-            ],          
+            }
+            ]         
         },
         {
             title: app.localize('Permissions'),

@@ -95,5 +95,5 @@ Ext.define('Chaching.view.languages.LanguageTextsGrid', {
             text: app.localize('Edit'),
             dataIndex: 'isEdit',
             renderer: Chaching.utilities.ChachingRenderers.languagesTextsEditIcon
-        }, ]
+        } ]
 });

@@ -249,7 +249,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanel',{
                 ui: 'actionButton',
                 name: 'Attachment',
                 itemId: 'BtnAttachment',
-                reference: 'BtnAttachment',
+                reference: 'BtnAttachment'
                 //listeners: {
                 //    click: 'onCancelClicked'
                 //}

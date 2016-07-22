@@ -5,6 +5,5 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsViewController', 
         var me = this,
            view = me.getView();
         Ext.destroy(view);
-    },
-    
+    }
 });

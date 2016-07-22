@@ -11,7 +11,7 @@ Ext.define('Chaching.store.financials.accounts.RollupAccountStore', {
             Id: null
         },
         api: {
-            read: abp.appPath + 'api/services/app/accountUnit/GetRollupAccountsList',
+            read: abp.appPath + 'api/services/app/accountUnit/GetRollupAccountsList'
         },
         reader: {
             type: 'json',

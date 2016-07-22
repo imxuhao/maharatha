@@ -89,7 +89,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
                  inputValue: 'true',
                  uncheckedValue: 'false'
              }
-         },
+         }
 
     ]
 });

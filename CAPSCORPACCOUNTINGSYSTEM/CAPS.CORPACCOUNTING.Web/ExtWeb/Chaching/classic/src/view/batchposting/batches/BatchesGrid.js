@@ -126,7 +126,7 @@
               xtype: 'gridcolumn',
               sortable: false,
               groupable: false,
-              width: '13%',
+              width: '13%'
           } , {
               xtype: 'gridcolumn',
               text: app.localize('Module'),

@@ -8,8 +8,7 @@ Ext.define('Chaching.model.payables.vendors.VendorAliasModel', {
     }, fields: [
         { name: 'vendorAliasId', type: 'int',isPrimaryKey:true },
         { name: 'vendorId', type: 'int', defaultValue: null, convert: nullHandler },
-        { name: 'aliasName', type: 'string' },
-         //{ name: 'vendorId', reference: 'vendors.VendorsModel' }
+        { name: 'aliasName', type: 'string' }
     ],
     belongsTo: 'payables.vendors.VendorsModel'
 });

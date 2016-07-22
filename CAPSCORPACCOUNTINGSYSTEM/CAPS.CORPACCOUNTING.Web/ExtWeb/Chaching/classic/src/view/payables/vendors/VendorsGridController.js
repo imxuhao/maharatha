@@ -115,7 +115,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGridController', {
                 phone2: addressRec.get('phone2') === undefined ? "" : addressRec.get('phone2'),
                 phone2Extension: addressRec.get('phone2Extension') === undefined ? "" : addressRec.get('phone2Extension'),
                 website: addressRec.get('website') === undefined ? "" : addressRec.get('website'),
-                isPrimary: addressRec.get('isPrimary') === undefined ? true : addressRec.get('isPrimary'),
+                isPrimary: addressRec.get('isPrimary') === undefined ? true : addressRec.get('isPrimary')
             };
 
             var url = "";

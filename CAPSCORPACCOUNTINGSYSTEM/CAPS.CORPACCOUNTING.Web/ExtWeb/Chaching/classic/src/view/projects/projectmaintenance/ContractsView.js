@@ -11,7 +11,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ContractsView',{
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Contracts'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Contracts.Create'),
         edit: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Contracts.Edit'),
-        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Contracts.Delete'),
+        destroy: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.Contracts.Delete')
     },
     html: 'Hello, World!!'
 });

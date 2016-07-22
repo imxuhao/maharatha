@@ -11,7 +11,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     routes: {
         'host.tenants.create': {
             action: 'createEditRecordInTab'
-        },
+        }//,
         //'host.tenants.edit': {
         //    action: 'showUser',
         //    before: 'beforeShowUser',

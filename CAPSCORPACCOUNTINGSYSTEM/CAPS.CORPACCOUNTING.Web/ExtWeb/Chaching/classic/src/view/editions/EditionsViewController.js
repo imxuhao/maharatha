@@ -43,6 +43,6 @@ Ext.define('Chaching.view.editions.EditionsViewController', {
                 myMask.hide();
             }
         }
-    },
+    }
     
 });

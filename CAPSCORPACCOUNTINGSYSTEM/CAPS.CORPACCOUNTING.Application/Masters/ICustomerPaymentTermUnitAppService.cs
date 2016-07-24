@@ -51,6 +51,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// Get All CustomerPaymentTerms
         /// </summary>
         /// <returns></returns>
-        Task<List<CustomerPaymentTermUnitDto>> GetVendorPayTerms();
+        Task<List<CustomerPaymentTermUnitDto>> GetCustomerPayTerms();
     }
 }

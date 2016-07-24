@@ -3,7 +3,7 @@
     singleton: true,
     settingsScope : {
         application: 1, //Represents a setting that can be configured/changed for the application level.
-        Tenant: 2, //Represents a setting that can be configured/changed for each Tenant. This is reserved
+        tenant: 2, //Represents a setting that can be configured/changed for each Tenant. This is reserved
         user: 4 // Represents a setting that can be configured/changed for each User.
     },
     loggedInUserInfo: {

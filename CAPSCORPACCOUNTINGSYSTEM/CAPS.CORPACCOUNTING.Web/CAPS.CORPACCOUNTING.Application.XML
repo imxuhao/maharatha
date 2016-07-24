@@ -8472,7 +8472,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.GetVendorPayTerms">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerPaymentTermUnitAppService.GetCustomerPayTerms">
             <summary>
             Get All CustomerPaymentTerms
             </summary>
@@ -8531,7 +8531,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerPaymentTermUnitAppService.GetVendorPayTerms">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerPaymentTermUnitAppService.GetCustomerPayTerms">
             <summary>
             Get All CustomerPaymentTerms
             </summary>

@@ -2,6 +2,22 @@
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.administration-companysetup-companyform',
 
+    onCompanySetupRender: function () {
+        var me = this,
+        view = me.getView(),
+        timezoneCombo = me.lookupReference('timezone'),
+        setDefaultAPTermsCombo = me.lookupReference('setDefaultAPTerms'),
+        setDefaultARTermsCombo = me.lookupReference('setDefaultARTerms'),
+        timezoneStore = timezoneCombo.getStore();
+        //load time zone combo
+        timezoneStore.getProxy().setExtraParams({ defaultTimezoneScope: ChachingGlobals.settingsScope.tenant });
+        timezoneStore.load();
+        //load ap default terms
+        setDefaultAPTermsCombo.getStore().load();
+        // load ar default terms
+        setDefaultARTermsCombo.getStore().load();
+    },
+
     onPostalCodeEnter: function (field,e) {
         var clientKey = "js-9qZHzu2Flc59Eq5rx10JdKERovBlJp3TQ3ApyC4TOa3tA8U7aVRnFwf41RpLgtE7";
         var url = "https://www.zipcodeapi.com/rest/" + clientKey + "/info.json/" + field.getValue() + "/radians";

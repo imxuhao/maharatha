@@ -30,28 +30,18 @@ namespace CAPS.CORPACCOUNTING.Configuration.ConnectionString
         /// <returns></returns>
         public async Task CreateConnectionStringUnit(ConnectionStringInput input)
         {
-            string connectionstring = string.Empty;
-
-            var accountUnit = input.MapTo<ConnectionStringUnit>();
-
-            connectionstring = "Server =" + input.ServerName;
+            StringBuilder connectionString = new StringBuilder();
+            var connectionStringUnit = input.MapTo<ConnectionStringUnit>();
+            connectionString = connectionString.Append("Server" + input.ServerName);
             if (!string.IsNullOrEmpty(input.InstanceName))
-                connectionstring = connectionstring + @"\" + input.InstanceName;
-            connectionstring = connectionstring + "; Database=" + input.Database +";";
-            if (!input.TrustedConnection)
-            {
-                connectionstring = connectionstring + "; UserId=" + input.Database + "; Password =" + input.Password +
-                                   "Trusted_Connection=false";
-            }
-            else
-            {
-                connectionstring =connectionstring+ "Trusted_Connection=true";
-
-            }
-            accountUnit.ConnectionString = SimpleStringCipher.Instance.Encrypt(connectionstring);
-            await _connectionStringRepository.InsertAsync(accountUnit);
+                connectionString = connectionString.Append(@"\" + input.InstanceName);
+            connectionString = connectionString.Append("; Database=" + input.Database + ";");
+            connectionString = input.TrustedConnection ? connectionString.Append("Trusted_Connection=true") :
+                connectionString.Append("; UserId=" + input.Database + "; Password =" + input.Password +
+                                        "Trusted_Connection=false");
+            connectionStringUnit.ConnectionString = SimpleStringCipher.Instance.Encrypt(connectionString.ToString());
+            await _connectionStringRepository.InsertAsync(connectionStringUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
-
         }
     }
 }

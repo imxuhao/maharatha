@@ -12,8 +12,10 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
         public int TenantId { get; set; }
         public string TenantName { get; set; }
         public string RoleDisplayName { get; set; }
+        public string RoleName { get; set; }
         public int RoleId { get; set; }
 
+        public bool IsRoleSelected { get; set; }
 
     }
 

@@ -19,7 +19,7 @@ namespace CAPS.CORPACCOUNTING.Organizations.Dto
 
         /// <summary>Gets or sets the ConnectionStringId Name field. </summary>
 
-        [Range(1,Int32.MaxValue)]
-        public int  ConnectionStringId { get; set; }
+        
+        public int? ConnectionStringId { get; set; }
     }
 }

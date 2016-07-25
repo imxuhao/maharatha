@@ -81,7 +81,9 @@ namespace CAPS.CORPACCOUNTING.Organizations
         {
             var query = from organization in _organizationExtendedUnitRepository.GetAll()
                         join constr in _connectionStringRepository.GetAll() on organization.ConnectionStringId equals constr.Id
-                        select new { organization, ConnectionStringName=constr.Name };
+                         into constring
+                        from construnits in constring.DefaultIfEmpty()
+                        select new { organization, ConnectionStringName= construnits.Name };
 
 
 
@@ -92,7 +94,6 @@ namespace CAPS.CORPACCOUNTING.Organizations
                     query = query.CreateFilters(mapSearchFilters);
             }
 
-            query = query.Where(p => p.organization.Id != 1);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
@@ -102,8 +103,11 @@ namespace CAPS.CORPACCOUNTING.Organizations
             return new PagedResultOutput<HostOrganizationUnitDto>(resultCount, results.Select(item =>
             {
                 var dto = item.organization.MapTo<HostOrganizationUnitDto>();
-                dto.ConnectionStringId = item.organization.ConnectionStringId.Value;
-                dto.ConnectionStringName = item.ConnectionStringName;
+                if (item.organization.ConnectionStringId != null)
+                {
+                    dto.ConnectionStringId = item.organization.ConnectionStringId.Value;
+                    dto.ConnectionStringName = item.ConnectionStringName;
+                }
                 return dto;
             }).ToList());
         }

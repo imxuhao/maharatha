@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -10,9 +11,11 @@ using Abp.Authorization;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
+using Abp.Linq.Extensions;
 using Abp.Localization;
 using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Localization.Dto;
 
 namespace CAPS.CORPACCOUNTING.Localization
@@ -180,6 +183,7 @@ namespace CAPS.CORPACCOUNTING.Localization
                 );
         }
 
+        
         public async Task UpdateLanguageText(UpdateLanguageTextInput input)
         {
             var culture = GetCultureInfoByChecking(input.LanguageName);
@@ -251,6 +255,85 @@ namespace CAPS.CORPACCOUNTING.Localization
             }
 
             throw new UserFriendlyException(L("ThisLanguageAlreadyExists"));
+        }
+
+
+        [AbpAuthorize(AppPermissions.Pages_Administration_Languages_ChangeTexts)]
+        public async Task<PagedResultOutput<LanguageTextListDto>> GetLanguageTextUnits(GetLanguageTextsInputUnit input)
+        {
+            /* Note: This method is used by SPA without paging, MPA with paging.
+             * So, it can both usable with paging or not */
+
+            //Normalize base language name
+            if (input.BaseLanguageName.IsNullOrEmpty())
+            {
+                var defaultLanguage = await _applicationLanguageManager.GetDefaultLanguageOrNullAsync(AbpSession.TenantId);
+                if (defaultLanguage == null)
+                {
+                    defaultLanguage = (await _applicationLanguageManager.GetLanguagesAsync(AbpSession.TenantId)).FirstOrDefault();
+                    if (defaultLanguage == null)
+                    {
+                        throw new ApplicationException("No language found in the application!");
+                    }
+                }
+
+                input.BaseLanguageName = defaultLanguage.Name;
+            }
+
+            var source = LocalizationManager.GetSource(input.SourceName);
+            var baseCulture = CultureInfo.GetCultureInfo(input.BaseLanguageName);
+            var targetCulture = CultureInfo.GetCultureInfo(input.TargetLanguageName);
+
+            var languageTexts = source
+                .GetAllStrings()
+                .Select(localizedString => new LanguageTextListDto
+                {
+                    Key = localizedString.Name,
+                    BaseValue = _applicationLanguageTextManager.GetStringOrNull(AbpSession.TenantId, source.Name, baseCulture, localizedString.Name),
+                    TargetValue = _applicationLanguageTextManager.GetStringOrNull(AbpSession.TenantId, source.Name, targetCulture, localizedString.Name, false)
+                })
+                .AsQueryable();
+
+            //Filters
+            if (input.TargetValueFilter == "EMPTY")
+            {
+                languageTexts = languageTexts.Where(s => s.TargetValue.IsNullOrEmpty());
+            }
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    languageTexts = Helper.CreateFilters(languageTexts, mapSearchFilters);
+            }
+
+            var totalCount = languageTexts.Count();
+            //Ordering
+            if (!input.Sorting.IsNullOrEmpty())
+            {
+                languageTexts = languageTexts.OrderBy(input.Sorting);
+            }
+
+            //Paging
+            if (input.SkipCount > 0)
+            {
+                languageTexts = languageTexts.Skip(input.SkipCount);
+            }
+
+            if (input.MaxResultCount > 0)
+            {
+                languageTexts = languageTexts.Take(input.MaxResultCount);
+            }
+           
+          
+            if (input.MaxResultCount > 0)
+            {
+                languageTexts = languageTexts.Take(input.MaxResultCount);
+            }
+
+            return new PagedResultOutput<LanguageTextListDto>(
+                totalCount,
+                languageTexts.ToList()
+                );
         }
     }
 }

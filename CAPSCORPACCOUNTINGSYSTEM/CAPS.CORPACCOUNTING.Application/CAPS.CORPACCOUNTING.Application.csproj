@@ -386,6 +386,7 @@
     <Compile Include="Localization\Dto\GetLanguageForEditOutput.cs" />
     <Compile Include="Localization\Dto\LanguageTextListDto.cs" />
     <Compile Include="Localization\FamFamFamFlagsHelper.cs" />
+    <Compile Include="Localization\GetLanguageTextsInputUnit.cs" />
     <Compile Include="Localization\GetLanguageTextsInput.cs" />
     <Compile Include="Localization\ILanguageAppService.cs" />
     <Compile Include="Localization\LanguageAppService.cs" />

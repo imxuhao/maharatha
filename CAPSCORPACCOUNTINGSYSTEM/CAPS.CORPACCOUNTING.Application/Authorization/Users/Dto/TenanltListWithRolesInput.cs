@@ -11,5 +11,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
         public string TenantName { get; set; }
 
         public int[] RoleIds { get; set; }
+
+        public string[] RoleNames { get; set; }
     }
 }

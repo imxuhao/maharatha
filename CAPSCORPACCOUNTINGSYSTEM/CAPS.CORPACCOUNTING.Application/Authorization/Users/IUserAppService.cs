@@ -48,10 +48,19 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         /// <returns></returns>
         Task CreateOrUpdateUserUnit(CreateOrUpdateUserInput input);
 
+        /// <summary>
+        /// Get Permissions for selected Role
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<GetRoleForEditOutput> GetPermissionsForSelectedRole(RoleTenantInput input);
+
+
+        Task<GetUserForEditOutput> GetUserUnitForEdit(NullableIdInput<long> input);
 
         Task<GetUserPermissionsForEditOutput> GetUserAllPermissionsForEdit(IdInput<long> input);
 
         Task UpdateUserPermissionsUnit(UserPermissionsInput input);
+
     }
 }

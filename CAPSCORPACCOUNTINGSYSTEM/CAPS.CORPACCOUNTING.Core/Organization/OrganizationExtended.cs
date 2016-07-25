@@ -31,7 +31,7 @@ namespace CAPS.CORPACCOUNTING.Organization
             Code = "00001";
 
         }
-        public OrganizationExtended(int? tenantid, string displayname, int connectionStringid, long? parentid = default(long?)) : base(tenantid, displayname, parentid)
+        public OrganizationExtended(int? tenantid, string displayname, int? connectionStringid, long? parentid = default(long?)) : base(tenantid, displayname, parentid)
         {
             ConnectionStringId = connectionStringid;
         }

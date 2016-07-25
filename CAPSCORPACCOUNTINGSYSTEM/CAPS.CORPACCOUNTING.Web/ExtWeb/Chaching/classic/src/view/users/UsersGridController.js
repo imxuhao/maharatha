@@ -50,10 +50,10 @@ Ext.define('Chaching.view.users.UsersGridController', {
             form.findField('userName').setReadOnly(true);
             //disable tabs
             if (companyListTab) {
-                companyListTab.setDisabled(true);
+                companyListTab.setDisabled(false);
             }
             Ext.Ajax.request({
-                url: abp.appPath + 'api/services/app/user/GetUserForEdit',
+                url: abp.appPath + 'api/services/app/user/GetUserUnitForEdit',
                 jsonData: Ext.encode({ id: record.get('id') }),
                 success: function (response, opts) {
                     var res = Ext.decode(response.responseText);

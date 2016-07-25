@@ -20,5 +20,7 @@ namespace CAPS.CORPACCOUNTING.Localization
         Task<PagedResultOutput<LanguageTextListDto>> GetLanguageTexts(GetLanguageTextsInput input);
 
         Task UpdateLanguageText(UpdateLanguageTextInput input);
+
+        Task<PagedResultOutput<LanguageTextListDto>> GetLanguageTextUnits(GetLanguageTextsInputUnit input);
     }
 }

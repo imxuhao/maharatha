@@ -220,7 +220,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// <returns></returns>
 
         [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Create)]
-        public async Task UpdateComapnyUnit(TenantExtendedUnitInput input)
+        public async Task UpdateCompanyUnit(TenantExtendedUnitInput input)
         {
             int tenantid = AbpSession.TenantId.Value;
             using (_unitOfWorkManager.Current.SetTenantId(tenantid))
@@ -230,7 +230,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
                     byte[] logo = null;
                     if (!ReferenceEquals(input.ComapanyLogo, null))
-                        logo = await UpdateOrganizationPicture(input.ComapanyLogo);
+                        logo = await UpdateCompanyLogo(input.ComapanyLogo);
 
                     var tenant = await _tenantExtendedUnitRepository.GetAsync(input.TenantExtendedId);
                     await _tenantExtendedManager.UpdateAsync(tenant);
@@ -330,7 +330,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<byte[]> UpdateOrganizationPicture(UpdateProfilePictureInput input)
+        private async Task<byte[]> UpdateCompanyLogo(UpdateProfilePictureInput input)
         {
             var tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
 

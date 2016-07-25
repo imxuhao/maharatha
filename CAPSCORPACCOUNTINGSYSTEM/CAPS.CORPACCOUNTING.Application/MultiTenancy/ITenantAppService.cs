@@ -48,7 +48,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
 
         Task<ComapnyPreferenceDto> GetCompanySettingsForEdit();
-        Task UpdateComapnyUnit(TenantExtendedUnitInput input);
+        Task UpdateCompanyUnit(TenantExtendedUnitInput input);
 
 
     }

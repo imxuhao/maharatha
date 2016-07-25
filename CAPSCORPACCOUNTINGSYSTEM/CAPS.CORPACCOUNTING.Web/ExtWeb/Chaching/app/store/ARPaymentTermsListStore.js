@@ -5,6 +5,7 @@
     autoLoad: false,
     fields: [
         { name: 'customerPaymentTermId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'setDefaultARTerms', mapping: 'customerPaymentTermId' },
         { name: 'paymentInstruction', type: 'string' },
         { name: 'description', type: 'string' },
         { name: 'discountPercent', type: 'string' },

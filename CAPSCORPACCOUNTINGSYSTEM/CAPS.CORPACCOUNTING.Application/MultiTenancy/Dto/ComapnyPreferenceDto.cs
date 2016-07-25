@@ -14,6 +14,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
     [AutoMapFrom(typeof(TenantExtendedUnit))]
     public  class ComapnyPreferenceDto: IOutputDto
     {
+        /// <summary>Gets or sets the TenantExtendedId field. </summary>
+        public int TenantExtendedId { get; set; }
+
         /// <summary>Gets or sets the TransmitterContactName field. </summary>
         public string TransmitterContactName { get; set; }
 

@@ -973,7 +973,7 @@
     <text name="BankAccountNumber" value="Bank Account Number" />
     <text name="BankAccountDescription" value="Description" />
     <text name="BankAccountName" value="Bank Account Name" />
-    <text name="POAutoNumberingforDivisions " value="PO Auto-Numbering for Divisions" />
+    <text name="POAutoNumberingforDivisions" value="PO Auto-Numbering for Divisions" />
     <text name="POAutoNumberingforProjects" value="PO Auto-Numbering for Projects" />
     <text name="UserOrganizations" value="User Organizations" />
     <text name="FullName" value="Full Name" />

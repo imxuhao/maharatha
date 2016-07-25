@@ -24,22 +24,23 @@
     titleConfig: {
         title: abp.localization.localize("CreateNewCompanySetup").initCap()
     },
-    layout : 'fit',
+    layout: 'fit',
     items: [{
         xtype: 'tabpanel',
-       // ui: 'formTabPanels',
+        // ui: 'formTabPanels',
         ui: 'submenuTabs',
         tabPosition: 'left',
         tabRotation: 2,
         items: [
             {
                 title: abp.localization.localize("CompanySetup").initCap(),
-                itemId : 'companySetupTab',
+                itemId: 'companySetupTab',
+                xtype: 'form',
                 items: [
                      {
                          xtype: 'hiddenfield',
-                         itemId : 'companyItemId',
-                         name: 'id', //companyId
+                         itemId: 'companyItemId',
+                         name: 'tenantExtendedId', //companyId
                          value: 0
                      },
                      {
@@ -63,11 +64,11 @@
                              items: [{
                                  xtype: 'textfield',
                                  name: 'displayName',
-                                 allowBlank: false,
+                                 //allowBlank: false,
                                  fieldLabel: app.localize('CompanyName').initCap(),
                                  width: '100%',
-                                 ui: 'fieldLabelTop',
-                                 emptyText: app.localize('MandatoryField')
+                                 ui: 'fieldLabelTop'//,
+                                 //emptyText: app.localize('MandatoryField')
                              }, {
                                  xtype: 'textfield',
                                  name: 'line1',
@@ -187,7 +188,7 @@
                                              width: '100%',
                                              buttonText: 'Select Logo...',
                                              listeners: {
-                                                  change: 'onFileChange'
+                                                 change: 'onFileChange'
                                              }
                                          }, {
                                              xtype: 'label',
@@ -290,26 +291,28 @@
             {
                 title: abp.localization.localize("CompanyPreferences").initCap(),
                 disabled: false,
-               // xtype : 'form',
+                // xtype : 'form',
                 itemId: 'companyPreferencesTab',
-                items : [{
-                    xtype : 'tabpanel',
+                items: [{
+                    xtype: 'tabpanel',
                     ui: 'formTabPanels',
-                    items : [
+                    items: [
                         {
                             title: abp.localization.localize("General").initCap(),
+                            xtype: 'form',
+                            itemId: 'companyPreferencesGeneralTab',
                             padding: '20 10 0 20',
                             items: [
                                 {
                                     xtype: 'combobox',
                                     name: 'timezone',
-                                    allowBlank: false,
+                                    //allowBlank: false,
                                     fieldLabel: app.localize('Timezone').initCap(),
                                     valueField: 'value',
                                     displayField: 'name',
                                     queryMode: 'local',
                                     width: '100%',
-                                   // maxWidth : 500,
+                                    // maxWidth : 500,
                                     ui: 'fieldLabelTop',
                                     itemId: "timezone",
                                     reference: 'timezone',
@@ -320,14 +323,16 @@
                         },
                     {
                         title: abp.localization.localize("UserManagement").initCap(),
+                        itemId: 'companyPreferencesUserManagementTab',
+                        xtype: 'form',
                         //layout: 'column',
                         padding: '20 10 0 20',
-                        items : [{
-                            xtype : 'fieldset',
+                        items: [{
+                            xtype: 'fieldset',
                             ui: 'transparentFieldSet',
                             title: abp.localization.localize("FormBasedRegistration").initCap(),
                             collapsible: true,
-                            items : [{
+                            items: [{
                                 xtype: 'checkbox',
                                 name: 'allowSelfRegistration',
                                 labelAlign: 'right',
@@ -344,7 +349,7 @@
                               reference: "allowSelfRegistrationLabel",
                               html: '<span class= "helpText">' + app.localize('AllowUsersToRegisterThemselves_Hint') + '</span>'
 
-                          },{
+                          }, {
                               xtype: 'checkbox',
                               name: 'isNewRegisteredUserActiveByDefault',
                               labelAlign: 'right',
@@ -352,8 +357,8 @@
                               uncheckedValue: false,
                               width: '100%',
                               ui: 'default',
-                              bind : {
-                                  hidden : '{!allowSelfRegistration.checked}'
+                              bind: {
+                                  hidden: '{!allowSelfRegistration.checked}'
                               },
                               boxLabelCls: 'checkboxLabel',
                               boxLabel: app.localize('NewRegisteredUsersIsActiveByDefault')
@@ -366,13 +371,13 @@
                               reference: "isNewRegisteredUserActiveByDefaultLabel",
                               html: '<span class= "helpText">' + app.localize('NewRegisteredUsersIsActiveByDefault_Hint') + '</span>'
 
-                          },{
+                          }, {
                               xtype: 'checkbox',
                               name: 'useCaptchaOnRegistration',
                               labelAlign: 'right',
                               inputValue: true,
                               uncheckedValue: false,
-                              checked : true,
+                              checked: true,
                               width: '100%',
                               ui: 'default',
                               bind: {
@@ -382,12 +387,12 @@
                               boxLabel: app.localize('UseCaptchaOnRegistration')
                           }]
 
-                        },{
-                            xtype : 'fieldset',
+                        }, {
+                            xtype: 'fieldset',
                             ui: 'transparentFieldSet',
                             title: abp.localization.localize("OtherSettings").initCap(),
                             collapsible: true,
-                            items : [{
+                            items: [{
                                 xtype: 'checkbox',
                                 name: 'isEmailConfirmationRequiredForLogin',
                                 labelAlign: 'right',
@@ -403,7 +408,9 @@
                     },
                     {
                         title: abp.localization.localize("CompanyPreferences").initCap(),
-                        layout : 'column',
+                        itemId: 'companySettingsTab',
+                        xtype: 'form',
+                        layout: 'column',
                         items: [{
                             columnWidth: .33,
                             padding: '20 10 0 20',
@@ -480,7 +487,7 @@
                             },
                               {
                                   xtype: 'checkbox',
-                                  name: 'pOAutoNumberingforDivisions',
+                                  name: 'poAutoNumberingforDivisions',
                                   labelAlign: 'right',
                                   inputValue: true,
                                   uncheckedValue: false,
@@ -491,7 +498,7 @@
                               },
                                {
                                    xtype: 'checkbox',
-                                   name: 'pOAutoNumberingforProjects',
+                                   name: 'poAutoNumberingforProjects',
                                    labelAlign: 'right',
                                    inputValue: true,
                                    uncheckedValue: false,
@@ -521,14 +528,14 @@
                    items: [{
                        boxLabel: app.localize('AgeByInvoiceDate').initCap(),
                        name: 'arAgingDate',
-                       inputValue: 'invoiceDate',
+                       inputValue: '1',
                        ui: 'default',
                        boxLabelCls: 'checkboxLabel',
                        uncheckedValue: 'false'
                    }, {
                        boxLabel: app.localize('AgeByDueDate').initCap(),
                        name: 'arAgingDate',
-                       inputValue: 'dueDate',
+                       inputValue: '2',
                        ui: 'default',
                        boxLabelCls: 'checkboxLabel',
                        uncheckedValue: 'false'
@@ -545,14 +552,14 @@
                    items: [{
                        boxLabel: app.localize('AgeByInvoiceDate').initCap(),
                        name: 'apAgingDate',
-                       inputValue: 'invoiceDate',
+                       inputValue: '1',
                        ui: 'default',
                        boxLabelCls: 'checkboxLabel',
                        uncheckedValue: 'false'
                    }, {
                        boxLabel: app.localize('AgeByDueDate').initCap(),
                        name: 'apAgingDate',
-                       inputValue: 'dueDate',
+                       inputValue: '2',
                        ui: 'default',
                        boxLabelCls: 'checkboxLabel',
                        uncheckedValue: 'false'
@@ -569,14 +576,14 @@
                    items: [{
                        boxLabel: app.localize('CompanyInvoiceDate').initCap(),
                        name: 'defaultAPPostingDate',
-                       inputValue: 'invoiceDate',
+                       inputValue: '1',
                        ui: 'default',
                        boxLabelCls: 'checkboxLabel',
                        uncheckedValue: 'false'
                    }, {
                        boxLabel: app.localize('CurrentDate').initCap(),
                        name: 'defaultAPPostingDate',
-                       inputValue: 'currentDate',
+                       inputValue: '2',
                        ui: 'default',
                        boxLabelCls: 'checkboxLabel',
                        uncheckedValue: 'false'
@@ -594,7 +601,7 @@
                            items: [
                        {
                            xtype: 'combobox',
-                           name: 'vendorPaymentTermId',
+                           name: 'setDefaultAPTerms',
                            emptyText: app.localize('SelectOption'),
                            width: '100%',
                            ui: 'fieldLabelTop',
@@ -602,14 +609,14 @@
                            displayField: 'description',
                            valueField: 'vendorPaymentTermId',
                            fieldLabel: app.localize('SetDefaultAPTerms'),
-                           queryMode : 'local',
+                           queryMode: 'local',
                            store: Ext.create('Chaching.store.APPaymentTermsListStore')
 
                        },
                        {
                            xtype: 'combobox',
-                           name: 'customerPaymentTermId',
-                           reference : 'setDefaultARTerms',
+                           name: 'setDefaultARTerms',
+                           reference: 'setDefaultARTerms',
                            emptyText: app.localize('SelectOption'),
                            width: '100%',
                            ui: 'fieldLabelTop',
@@ -687,41 +694,41 @@
                         ]
                     }
                     ]
-                }], 
-                    dockedItems: [
+                }],
+                dockedItems: [
+            {
+                xtype: 'toolbar',
+                dock: 'bottom',
+                layout: {
+                    type: 'hbox',
+                    pack: 'center'
+                },
+                items: [
                 {
-                    xtype: 'toolbar',
-                    dock: 'bottom',
-                    layout: {
-                        type: 'hbox',
-                        pack: 'center'
-                    },
-                    items: [
-                    {
-                        xtype: 'button',
-                        itemId: 'btnSaveSetup',
-                        name: 'Save',
-                        ui: 'actionButton',
-                        text: app.localize('SaveCompanyPreferences').toUpperCase(),
-                        iconCls: 'fa fa-save',
-                        actionButton: true,
-                        listeners: {
-                            click: 'onSaveCompanyPreferences'
-                        }
-                    },
-                    {
-                        xtype: 'button',
-                        itemId: 'btnCancelSetup',
-                        name: 'Cancel',
-                        ui: 'actionButton',
-                        text: app.localize('Cancel').toUpperCase(),
-                        iconCls: 'fa fa-close',
-                        actionButton: true,
-                        listeners: {
-                            click: 'onCancelClicked'
-                        }
-                    }]
+                    xtype: 'button',
+                    itemId: 'btnSaveSetup',
+                    name: 'Save',
+                    ui: 'actionButton',
+                    text: app.localize('SaveCompanyPreferences').toUpperCase(),
+                    iconCls: 'fa fa-save',
+                    actionButton: true,
+                    listeners: {
+                        click: 'onSaveCompanyPreferences'
+                    }
+                },
+                {
+                    xtype: 'button',
+                    itemId: 'btnCancelSetup',
+                    name: 'Cancel',
+                    ui: 'actionButton',
+                    text: app.localize('Cancel').toUpperCase(),
+                    iconCls: 'fa fa-close',
+                    actionButton: true,
+                    listeners: {
+                        click: 'onCancelClicked'
+                    }
                 }]
+            }]
             },
             {
                 title: abp.localization.localize("Intercompany").initCap(),
@@ -729,225 +736,225 @@
                 hideDefaultButtons: true,
                 itemId: 'membersTab'
             }]
-                
-       //         items: [
-       //{
-       //    xtype: 'fieldset',
-       //    ui: 'transparentFieldSet',
-       //    title: abp.localization.localize("CompanyPreferences").initCap(),
-       //    collapsible: true,
-       //    layout: 'column',
-       //    items: [{
-       //        columnWidth: .33,
-       //        padding: '20 10 0 20',
-       //        defaults: {
-       //            //labelWidth: 120//,
-       //            //blankText: app.localize('MandatoryToolTipText')
-       //        },
-       //        items: [{
-       //            xtype: 'checkbox',
-       //            name: 'isAllowDuplicateAPInvoiceNos',
-       //            labelAlign: 'right',
-       //            inputValue: true,
-       //            uncheckedValue: false,
-       //            width: '100%',
-       //            ui: 'default',
-       //            boxLabelCls: 'checkboxLabel',
-       //            boxLabel: app.localize('AllowDuplicateAPInvoices')
-       //        },
-       //       {
-       //           xtype: 'checkbox',
-       //           name: 'isAllowDuplicateARInvoiceNos',
-       //           labelAlign: 'right',
-       //           inputValue: true,
-       //           uncheckedValue: false,
-       //           width: '100%',
-       //           ui: 'default',
-       //           boxLabelCls: 'checkboxLabel',
-       //           boxLabel: app.localize('AllowDuplicateARInvoices')
 
-       //       },
-       //        {
-       //            xtype: 'checkbox',
-       //            name: 'isAllowAccountnumbersStartingwithZero',
-       //            labelAlign: 'right',
-       //            inputValue: true,
-       //            uncheckedValue: false,
-       //            width: '100%',
-       //            ui: 'default',
-       //            boxLabelCls: 'checkboxLabel',
-       //            boxLabel: app.localize('AllowAccountNumbersStartingWithZero')
+        //         items: [
+        //{
+        //    xtype: 'fieldset',
+        //    ui: 'transparentFieldSet',
+        //    title: abp.localization.localize("CompanyPreferences").initCap(),
+        //    collapsible: true,
+        //    layout: 'column',
+        //    items: [{
+        //        columnWidth: .33,
+        //        padding: '20 10 0 20',
+        //        defaults: {
+        //            //labelWidth: 120//,
+        //            //blankText: app.localize('MandatoryToolTipText')
+        //        },
+        //        items: [{
+        //            xtype: 'checkbox',
+        //            name: 'isAllowDuplicateAPInvoiceNos',
+        //            labelAlign: 'right',
+        //            inputValue: true,
+        //            uncheckedValue: false,
+        //            width: '100%',
+        //            ui: 'default',
+        //            boxLabelCls: 'checkboxLabel',
+        //            boxLabel: app.localize('AllowDuplicateAPInvoices')
+        //        },
+        //       {
+        //           xtype: 'checkbox',
+        //           name: 'isAllowDuplicateARInvoiceNos',
+        //           labelAlign: 'right',
+        //           inputValue: true,
+        //           uncheckedValue: false,
+        //           width: '100%',
+        //           ui: 'default',
+        //           boxLabelCls: 'checkboxLabel',
+        //           boxLabel: app.localize('AllowDuplicateARInvoices')
 
-       //        }, {
-       //            xtype: 'checkbox',
-       //            name: 'isImportPOlogsfromProducersActualUploads',
-       //            labelAlign: 'right',
-       //            inputValue: true,
-       //            uncheckedValue: false,
-       //            width: '100%',
-       //            ui: 'default',
-       //            boxLabelCls: 'checkboxLabel',
-       //            boxLabel: app.localize('ImportPOLogsFromProducersActualUploads')
+        //       },
+        //        {
+        //            xtype: 'checkbox',
+        //            name: 'isAllowAccountnumbersStartingwithZero',
+        //            labelAlign: 'right',
+        //            inputValue: true,
+        //            uncheckedValue: false,
+        //            width: '100%',
+        //            ui: 'default',
+        //            boxLabelCls: 'checkboxLabel',
+        //            boxLabel: app.localize('AllowAccountNumbersStartingWithZero')
 
-       //        },
-       //        {
-       //            xtype: 'checkbox',
-       //            name: 'buildAPuponCCstatementPosting',
-       //            labelAlign: 'right',
-       //            inputValue: true,
-       //            uncheckedValue: false,
-       //            width: '100%',
-       //            ui: 'default',
-       //            boxLabelCls: 'checkboxLabel',
-       //            boxLabel: app.localize('BuildAPUponCCStatementPosting')
-       //        }, {
-       //            xtype: 'checkbox',
-       //            name: 'buildAPuponPayrollPosting',
-       //            labelAlign: 'right',
-       //            inputValue: true,
-       //            uncheckedValue: false,
-       //            width: '100%',
-       //            ui: 'default',
-       //            boxLabelCls: 'checkboxLabel',
-       //            boxLabel: app.localize('BuildAPUponPayrollPosting')
-       //        },
-       //          {
-       //              xtype: 'checkbox',
-       //              name: 'pOAutoNumberingforDivisions',
-       //              labelAlign: 'right',
-       //              inputValue: true,
-       //              uncheckedValue: false,
-       //              width: '100%',
-       //              ui: 'default',
-       //              boxLabelCls: 'checkboxLabel',
-       //              boxLabel: app.localize('POAutoNumberingforDivisions')
-       //          },
-       //           {
-       //               xtype: 'checkbox',
-       //               name: 'pOAutoNumberingforProjects',
-       //               labelAlign: 'right',
-       //               inputValue: true,
-       //               uncheckedValue: false,
-       //               width: '100%',
-       //               ui: 'default',
-       //               boxLabelCls: 'checkboxLabel',
-       //               boxLabel: app.localize('POAutoNumberingforProjects')
-       //           }
-       //        ]
-       //    },
-       //    {
-       //        columnWidth: .33,
-       //        padding: '20 10 0 20',
-       //        defaults: {
-       //            labelWidth: 160,
-       //            blankText: app.localize('MandatoryToolTipText')
-       //        },
-       //        items: [{
-       //            xtype: 'radiogroup',
-       //            labelStyle: 'padding-top: 8px !important;',
-       //            fieldLabel: app.localize('ARAgingDate'),
-       //            width: '100%',
-       //            ui: 'fieldLabelTop',
-       //            columns: 1,
-       //            vertical: true,
-       //            itemId: 'arAgingDateItemId',
-       //            items: [{
-       //                boxLabel: app.localize('AgeByInvoiceDate').initCap(),
-       //                name: 'arAgingDate',
-       //                inputValue: 'invoiceDate',
-       //                ui: 'default',
-       //                boxLabelCls: 'checkboxLabel',
-       //                uncheckedValue: 'false'
-       //            }, {
-       //                boxLabel: app.localize('AgeByDueDate').initCap(),
-       //                name: 'arAgingDate',
-       //                inputValue: 'dueDate',
-       //                ui: 'default',
-       //                boxLabelCls: 'checkboxLabel',
-       //                uncheckedValue: 'false'
-       //            }]
-       //        }, {
-       //            xtype: 'radiogroup',
-       //            labelStyle: 'padding-top: 8px !important;',
-       //            fieldLabel: app.localize('APAgingDate'),
-       //            width: '100%',
-       //            ui: 'fieldLabelTop',
-       //            columns: 1,
-       //            vertical: true,
-       //            itemId: 'apAgingDateItemId',
-       //            items: [{
-       //                boxLabel: app.localize('AgeByInvoiceDate').initCap(),
-       //                name: 'apAgingDate',
-       //                inputValue: 'invoiceDate',
-       //                ui: 'default',
-       //                boxLabelCls: 'checkboxLabel',
-       //                uncheckedValue: 'false'
-       //            }, {
-       //                boxLabel: app.localize('AgeByDueDate').initCap(),
-       //                name: 'apAgingDate',
-       //                inputValue: 'dueDate',
-       //                ui: 'default',
-       //                boxLabelCls: 'checkboxLabel',
-       //                uncheckedValue: 'false'
-       //            }]
-       //        }, {
-       //            xtype: 'radiogroup',
-       //            fieldLabel: app.localize('APPostingDateDefault'),
-       //            width: '100%',
-       //            labelStyle: 'padding-top: 8px !important;',
-       //            ui: 'fieldLabelTop',
-       //            columns: 1,
-       //            vertical: true,
-       //            itemId: 'defaultAPPostingDateItemId',
-       //            items: [{
-       //                boxLabel: app.localize('CompanyInvoiceDate').initCap(),
-       //                name: 'defaultAPPostingDate',
-       //                inputValue: 'invoiceDate',
-       //                ui: 'default',
-       //                boxLabelCls: 'checkboxLabel',
-       //                uncheckedValue: 'false'
-       //            }, {
-       //                boxLabel: app.localize('CurrentDate').initCap(),
-       //                name: 'defaultAPPostingDate',
-       //                inputValue: 'currentDate',
-       //                ui: 'default',
-       //                boxLabelCls: 'checkboxLabel',
-       //                uncheckedValue: 'false'
-       //            }]
-       //        }
-       //        ]
-       //    },
-       //                {
-       //                    columnWidth: .33,
-       //                    padding: '20 10 0 20',
-       //                    defaults: {
-       //                        labelWidth: 160,
-       //                        blankText: app.localize('MandatoryToolTipText')
-       //                    },
-       //                    items: [
-       //                {
-       //                    xtype: 'combobox',
-       //                    name: 'setDefaultAPTerms',
-       //                    emptyText: app.localize('SelectOption'),
-       //                    width: '100%',
-       //                    ui: 'fieldLabelTop',
-       //                    displayField: 'setDefaultAPTerms',
-       //                    valueField: 'setDefaultAPTerms',
-       //                    fieldLabel: app.localize('SetDefaultAPTerms')
+        //        }, {
+        //            xtype: 'checkbox',
+        //            name: 'isImportPOlogsfromProducersActualUploads',
+        //            labelAlign: 'right',
+        //            inputValue: true,
+        //            uncheckedValue: false,
+        //            width: '100%',
+        //            ui: 'default',
+        //            boxLabelCls: 'checkboxLabel',
+        //            boxLabel: app.localize('ImportPOLogsFromProducersActualUploads')
 
-       //                },
-       //                {
-       //                    xtype: 'combobox',
-       //                    name: 'setDefaultARTerms',
-       //                    emptyText: app.localize('SelectOption'),
-       //                    width: '100%',
-       //                    ui: 'fieldLabelTop',
-       //                    displayField: 'setDefaultARTerms',
-       //                    valueField: 'setDefaultARTerms',
-       //                    fieldLabel: app.localize('SetDefaultARTerms')
+        //        },
+        //        {
+        //            xtype: 'checkbox',
+        //            name: 'buildAPuponCCstatementPosting',
+        //            labelAlign: 'right',
+        //            inputValue: true,
+        //            uncheckedValue: false,
+        //            width: '100%',
+        //            ui: 'default',
+        //            boxLabelCls: 'checkboxLabel',
+        //            boxLabel: app.localize('BuildAPUponCCStatementPosting')
+        //        }, {
+        //            xtype: 'checkbox',
+        //            name: 'buildAPuponPayrollPosting',
+        //            labelAlign: 'right',
+        //            inputValue: true,
+        //            uncheckedValue: false,
+        //            width: '100%',
+        //            ui: 'default',
+        //            boxLabelCls: 'checkboxLabel',
+        //            boxLabel: app.localize('BuildAPUponPayrollPosting')
+        //        },
+        //          {
+        //              xtype: 'checkbox',
+        //              name: 'pOAutoNumberingforDivisions',
+        //              labelAlign: 'right',
+        //              inputValue: true,
+        //              uncheckedValue: false,
+        //              width: '100%',
+        //              ui: 'default',
+        //              boxLabelCls: 'checkboxLabel',
+        //              boxLabel: app.localize('POAutoNumberingforDivisions')
+        //          },
+        //           {
+        //               xtype: 'checkbox',
+        //               name: 'pOAutoNumberingforProjects',
+        //               labelAlign: 'right',
+        //               inputValue: true,
+        //               uncheckedValue: false,
+        //               width: '100%',
+        //               ui: 'default',
+        //               boxLabelCls: 'checkboxLabel',
+        //               boxLabel: app.localize('POAutoNumberingforProjects')
+        //           }
+        //        ]
+        //    },
+        //    {
+        //        columnWidth: .33,
+        //        padding: '20 10 0 20',
+        //        defaults: {
+        //            labelWidth: 160,
+        //            blankText: app.localize('MandatoryToolTipText')
+        //        },
+        //        items: [{
+        //            xtype: 'radiogroup',
+        //            labelStyle: 'padding-top: 8px !important;',
+        //            fieldLabel: app.localize('ARAgingDate'),
+        //            width: '100%',
+        //            ui: 'fieldLabelTop',
+        //            columns: 1,
+        //            vertical: true,
+        //            itemId: 'arAgingDateItemId',
+        //            items: [{
+        //                boxLabel: app.localize('AgeByInvoiceDate').initCap(),
+        //                name: 'arAgingDate',
+        //                inputValue: 'invoiceDate',
+        //                ui: 'default',
+        //                boxLabelCls: 'checkboxLabel',
+        //                uncheckedValue: 'false'
+        //            }, {
+        //                boxLabel: app.localize('AgeByDueDate').initCap(),
+        //                name: 'arAgingDate',
+        //                inputValue: 'dueDate',
+        //                ui: 'default',
+        //                boxLabelCls: 'checkboxLabel',
+        //                uncheckedValue: 'false'
+        //            }]
+        //        }, {
+        //            xtype: 'radiogroup',
+        //            labelStyle: 'padding-top: 8px !important;',
+        //            fieldLabel: app.localize('APAgingDate'),
+        //            width: '100%',
+        //            ui: 'fieldLabelTop',
+        //            columns: 1,
+        //            vertical: true,
+        //            itemId: 'apAgingDateItemId',
+        //            items: [{
+        //                boxLabel: app.localize('AgeByInvoiceDate').initCap(),
+        //                name: 'apAgingDate',
+        //                inputValue: 'invoiceDate',
+        //                ui: 'default',
+        //                boxLabelCls: 'checkboxLabel',
+        //                uncheckedValue: 'false'
+        //            }, {
+        //                boxLabel: app.localize('AgeByDueDate').initCap(),
+        //                name: 'apAgingDate',
+        //                inputValue: 'dueDate',
+        //                ui: 'default',
+        //                boxLabelCls: 'checkboxLabel',
+        //                uncheckedValue: 'false'
+        //            }]
+        //        }, {
+        //            xtype: 'radiogroup',
+        //            fieldLabel: app.localize('APPostingDateDefault'),
+        //            width: '100%',
+        //            labelStyle: 'padding-top: 8px !important;',
+        //            ui: 'fieldLabelTop',
+        //            columns: 1,
+        //            vertical: true,
+        //            itemId: 'defaultAPPostingDateItemId',
+        //            items: [{
+        //                boxLabel: app.localize('CompanyInvoiceDate').initCap(),
+        //                name: 'defaultAPPostingDate',
+        //                inputValue: 'invoiceDate',
+        //                ui: 'default',
+        //                boxLabelCls: 'checkboxLabel',
+        //                uncheckedValue: 'false'
+        //            }, {
+        //                boxLabel: app.localize('CurrentDate').initCap(),
+        //                name: 'defaultAPPostingDate',
+        //                inputValue: 'currentDate',
+        //                ui: 'default',
+        //                boxLabelCls: 'checkboxLabel',
+        //                uncheckedValue: 'false'
+        //            }]
+        //        }
+        //        ]
+        //    },
+        //                {
+        //                    columnWidth: .33,
+        //                    padding: '20 10 0 20',
+        //                    defaults: {
+        //                        labelWidth: 160,
+        //                        blankText: app.localize('MandatoryToolTipText')
+        //                    },
+        //                    items: [
+        //                {
+        //                    xtype: 'combobox',
+        //                    name: 'setDefaultAPTerms',
+        //                    emptyText: app.localize('SelectOption'),
+        //                    width: '100%',
+        //                    ui: 'fieldLabelTop',
+        //                    displayField: 'setDefaultAPTerms',
+        //                    valueField: 'setDefaultAPTerms',
+        //                    fieldLabel: app.localize('SetDefaultAPTerms')
+
+        //                },
+        //                {
+        //                    xtype: 'combobox',
+        //                    name: 'setDefaultARTerms',
+        //                    emptyText: app.localize('SelectOption'),
+        //                    width: '100%',
+        //                    ui: 'fieldLabelTop',
+        //                    displayField: 'setDefaultARTerms',
+        //                    valueField: 'setDefaultARTerms',
+        //                    fieldLabel: app.localize('SetDefaultARTerms')
 
     }],
     listeners: {
-        afterrender : 'onCompanySetupRender'
+        afterrender: 'onCompanySetupRender'
     }
 });

@@ -8839,6 +8839,9 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TenantExtendedId">
+            <summary>Gets or sets the TenantExtendedId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TransmitterContactName">
             <summary>Gets or sets the TransmitterContactName field. </summary>
         </member>
@@ -8919,7 +8922,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.UpdateComapnyUnit(CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput)">
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.UpdateCompanyUnit(CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput)">
             <summary>
             Updating Sumit settings with comapnyAddress,Logo,Transmitter Fields
             </summary>
@@ -8932,7 +8935,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.UpdateOrganizationPicture(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.UpdateCompanyLogo(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
             <summary>
             Updating the Logo of Company
             </summary>

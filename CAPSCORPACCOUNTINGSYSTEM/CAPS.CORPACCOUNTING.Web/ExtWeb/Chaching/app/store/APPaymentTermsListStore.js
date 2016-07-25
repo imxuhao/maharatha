@@ -6,6 +6,7 @@
     fields: [
         { name: 'id', type: 'int', defaultValue: null, convert: nullHandler },
         { name: 'vendorPaymentTermId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'setDefaultAPTerms', mapping: 'vendorPaymentTermId' },
         { name: 'description', type: 'string' },
         { name: 'dueDays', type: 'int', defaultValue : null, convert : nullHandler },
         { name: 'discountDays',  type: 'int', defaultValue : null, convert : nullHandler },

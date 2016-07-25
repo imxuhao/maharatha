@@ -3741,6 +3741,7 @@
     <Content Include="ExtWeb\Chaching\app\store\tenants\TenantUserListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\TimezoneStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\users\CompanyRoleStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\users\PermissionsTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\AccountTypeListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\utilities\autofill\AccountListStore.js" />
@@ -3999,6 +4000,14 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantUsersView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantUsersViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\PermissionsSaveForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\PermissionsSaveFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\PermissionsSaveView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\PermissionsSaveViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersPermissionForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersPermissionFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersPermissionView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersPermissionViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\users\UsersForm.js" />

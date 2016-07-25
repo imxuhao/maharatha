@@ -31,7 +31,7 @@
             treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
             treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissionsUnit';
             treeStore.update();
-            //me.doPostSaveOperations(null, null, '{ success: true }');
+            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
         }
         me.CloseWindow();
     },
@@ -52,12 +52,11 @@
                 treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
                 treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissions';
                 treeStore.update();
-                //me.doPostSaveOperations(null, null, '{ success: true }');
+                abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
             }
             me.CloseWindow();
     },
     CloseWindow: function () {
-        debugger;
         var me = this,
            view = me.getView(),
            parentWindow = me.ParentWindowObj,

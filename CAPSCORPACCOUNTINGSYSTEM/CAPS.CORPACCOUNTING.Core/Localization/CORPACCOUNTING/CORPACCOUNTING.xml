@@ -1055,6 +1055,6 @@
 <text name="UnlinkUser_Tooltip" value="unlink User" />
     
 <text name="PermissionsSaveMessage" value=" Changes were made to this user's Role. Name the new Role to create and Press Save or Cancel to assign selected permissions for this User." />
-   
+<text name="Skip" value="Skip" />   
   </texts>
 </localizationDictionary>

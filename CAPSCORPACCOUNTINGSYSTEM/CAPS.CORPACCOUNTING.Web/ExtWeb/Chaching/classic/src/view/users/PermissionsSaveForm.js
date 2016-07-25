@@ -34,9 +34,9 @@ Ext.define('Chaching.view.users.PermissionsSaveForm', {
     bbar: ['->', {
         xtype: 'button',
         scale: 'small',
-        iconCls: 'fa fa-save',
+        //iconCls: 'fa fa-save',
         iconAlign: 'left',
-        text: app.localize('Save').toUpperCase(),
+        text: app.localize('CreateNewRole').toUpperCase(),
         ui: 'actionButton',
         name: 'Save',
         itemId: 'BtnSave',
@@ -48,9 +48,9 @@ Ext.define('Chaching.view.users.PermissionsSaveForm', {
     {
         xtype: 'button',
         scale: 'small',
-        iconCls: 'fa fa-close',
+        //iconCls: 'fa fa-close',
         iconAlign: 'left',
-        text: app.localize('Cancel').toUpperCase(),
+        text: app.localize('Skip').toUpperCase(),
         ui: 'actionButton',
         name: 'Cancel',
         itemId: 'BtnCancel',

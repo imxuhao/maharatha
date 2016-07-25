@@ -16,21 +16,6 @@
             n.set('checked', checked);
         });
     },
-    //doPreSaveOperation: function (record, values, idPropertyField) {
-    //    debugger;
-    //    var me = this,
-    //         view = me.getView(),
-    //    treePanel = view.down('treepanel[itemId=usersPermissionsItemId]'),
-    //    grantedPermissionNames = [];
-    //    var selectedPermissions = treePanel.getChecked();
-    //    Ext.Array.each(selectedPermissions, function (rec) {
-    //        grantedPermissionNames.push(rec.get('name'));
-    //    });
-    //    record.data.id = values.id,
-    //    record.data.grantedPermissionNames = grantedPermissionNames;
-
-    //    return record;
-    //},
     onPermissionsSaveClicked: function (btn) {
         var me = this,
              view = me.getView(),
@@ -42,58 +27,65 @@
             msg: 'Please wait...',
             target: view.up('window')
         });
-        myMask.show();
-        // Open popup message to create new Role
-        var permissionWindow = Ext.create('Chaching.view.users.PermissionsSaveView', {
-            height: '30%',
-            width: '20%',
-            autoShow : true,
-            iconCls: 'fa fa-plus',
-            name: 'Administration.Users'
-        });
-        var permissionsSaveFormController = permissionWindow.down('form').getController();
-        permissionsSaveFormController.ParentWindowObj = me;
-        //Ext.Msg.prompt(app.localize('CreateNewRole'), " \"Changes were made to this user\'s Role\". Press YES to create and name the new Role or NO to cancel.", function (btn, text) {
-        //    if (btn == 'ok') {
-        //        debugger;
-        //        var role = {};
-        //        //var userInput = {};
-        //        role.id = null;
-        //        role.displayName = text;
-        //        role.isDefault = false;
-        //        //userInput.User.id = treeStore.getProxy().extraParams.id;
-        //        //userInput.User.name = treeStore.getProxy().extraParams.name;
-        //        //userInput.User.id = treeStore.getProxy().extraParams.Surname;
-        //        //userInput.User.id = treeStore.getProxy().extraParams.EmailAddress;
-        //        //userInput.User.id = treeStore.getProxy().extraParams.Password;
-        //        //userInput.User.id = treeStore.getProxy().extraParams.IsActive;
-        //        //userInput.User.id = treeStore.getProxy().extraParams.ShouldChangePasswordOnNextLogin;
-        //        //userInput.SendActivationEmail = false;
-        //        //userInput.TenantList = null;
-        //        //treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
-        //        //treeStore.getProxy().setExtraParam('Role', role);
+        var selectedPermissionsCount = treePanel.getChecked();
+        var originalNodeCount = treeStore.selectedNodeCount;
 
-        //        userId = treeStore.getProxy().extraParams.id;
-        //        treeStore.getProxy().setExtraParam('userId', userId);
-        //        treeStore.getProxy().setExtraParam('role', role);
-        //        treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
-        //        treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissionsUnit';
-        //        treeStore.update();
-        //    }
-        //    else {
-        //        treeStore.getProxy().setExtraParam('id', treeStore.getProxy().extraParams.id);
-        //        treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
-        //        treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissions';
-        //        treeStore.update();
-        //    }
-        //});
-        // END
+        if (originalNodeCount != selectedPermissionsCount.length) {
+            myMask.show();
+            // Open popup message to create new Role
+            var permissionWindow = Ext.create('Chaching.view.users.PermissionsSaveView', {
+                height: '30%',
+                width: '20%',
+                autoShow: true,
+                iconCls: 'fa fa-plus',
+                name: 'Administration.Users'
+            });
+            var permissionsSaveFormController = permissionWindow.down('form').getController();
+            permissionsSaveFormController.ParentWindowObj = me;
+            myMask.hide();
+            //Ext.Msg.prompt(app.localize('CreateNewRole'), " \"Changes were made to this user\'s Role\". Press YES to create and name the new Role or NO to cancel.", function (btn, text) {
+            //    if (btn == 'ok') {
+            //        debugger;
+            //        var role = {};
+            //        //var userInput = {};
+            //        role.id = null;
+            //        role.displayName = text;
+            //        role.isDefault = false;
+            //        //userInput.User.id = treeStore.getProxy().extraParams.id;
+            //        //userInput.User.name = treeStore.getProxy().extraParams.name;
+            //        //userInput.User.id = treeStore.getProxy().extraParams.Surname;
+            //        //userInput.User.id = treeStore.getProxy().extraParams.EmailAddress;
+            //        //userInput.User.id = treeStore.getProxy().extraParams.Password;
+            //        //userInput.User.id = treeStore.getProxy().extraParams.IsActive;
+            //        //userInput.User.id = treeStore.getProxy().extraParams.ShouldChangePasswordOnNextLogin;
+            //        //userInput.SendActivationEmail = false;
+            //        //userInput.TenantList = null;
+            //        //treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
+            //        //treeStore.getProxy().setExtraParam('Role', role);
 
-        myMask.hide();
-        //me.onCancelClicked();
+            //        userId = treeStore.getProxy().extraParams.id;
+            //        treeStore.getProxy().setExtraParam('userId', userId);
+            //        treeStore.getProxy().setExtraParam('role', role);
+            //        treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
+            //        treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissionsUnit';
+            //        treeStore.update();
+            //    }
+            //    else {
+            //        treeStore.getProxy().setExtraParam('id', treeStore.getProxy().extraParams.id);
+            //        treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
+            //        treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissions';
+            //        treeStore.update();
+            //    }
+            //});
+            // END
+        }
+        else {
+            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+            me.onCancelClicked();
+        }
+            //me.onCancelClicked();
     },
     onResetPermissionsClicked: function (btn) {
-        debugger;
         var me = this,
             view = me.getView(),
             values = view.getValues(),
@@ -110,7 +102,8 @@
                 if (result.success) {
                     treeStore.getProxy().setExtraParam('id', treeStore.getProxy().extraParams.id);
                     treeStore.reload();
-                    me.doPostSaveOperations(null, null, result.success);
+                    abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                    //me.doPostSaveOperations(null, null, result.success);
                 }
                 else {
                     Ext.Msg.alert('Error!', result.error.message);

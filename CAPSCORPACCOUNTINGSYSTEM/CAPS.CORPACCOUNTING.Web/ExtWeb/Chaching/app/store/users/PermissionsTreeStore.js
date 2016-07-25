@@ -6,6 +6,7 @@
     remoteFilter: false,
     remoteSort: false,
     statefulFilters: true,
+    selectedNodeCount:0,
     root: {
         expanded: true
     },
@@ -38,6 +39,7 @@
             });
             var length = records.length,
                 parents = [];
+            me.selectedNodeCount = 0;
             for (var i = 0; i < length; i++) {
                 var item = records[i];
                 if (item.get('name') === "Pages" && item.get('parentId') === "root") {
@@ -45,6 +47,9 @@
                 }
                 else if (item.get('parentName') === "Pages") {
                     parents.push(item);
+                }
+                if (item.get('isPermissionGranted')) {
+                    me.selectedNodeCount = me.selectedNodeCount + 1;
                 }
             }
             var root = me.getRoot();
@@ -55,7 +60,6 @@
             }
             if (!root.data.children) root.data.children = [];
             root.appendChild(pages);
-          
         }
     },
     buildChilds: function (parent, records) {

@@ -1,7 +1,7 @@
 ﻿
 Ext.define('Chaching.view.users.UsersPermissionView', {
     extend: 'Chaching.view.common.window.ChachingWindowPanel',
-    alias: ['widget.users.createView', 'widget.users.editView'],
+    alias: ['widget.users.userspermissionview'],
     requires: [
         'Chaching.view.users.UsersPermissionViewController',
         'Chaching.view.users.UsersPermissionForm'

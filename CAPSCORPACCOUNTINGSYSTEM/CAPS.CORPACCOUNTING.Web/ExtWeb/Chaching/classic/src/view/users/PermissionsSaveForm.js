@@ -1,7 +1,7 @@
 ﻿
 Ext.define('Chaching.view.users.PermissionsSaveForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
-    alias: ['host.users.create', 'host.users.edit'],
+    alias: ['host.users.permissionssaveform'],
     requires: [
         'Chaching.view.users.PermissionsSaveFormController'
     ],
@@ -13,7 +13,7 @@ Ext.define('Chaching.view.users.PermissionsSaveForm', {
     listeners: {
         resize: 'onPermissionsSaveFormResize'
     },
-    defaultFocus: 'textfield#newRole',
+    //defaultFocus: 'textfield#newRole',
     items:[
         {
             xtype: 'label',

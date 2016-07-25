@@ -1,7 +1,7 @@
 ﻿
 Ext.define('Chaching.view.users.PermissionsSaveView', {
     extend: 'Chaching.view.common.window.ChachingWindowPanel',
-    alias: ['widget.users.createView', 'widget.users.editView'],
+    alias: ['widget.users.userpermissionssaveview'],
     requires: [
         'Chaching.view.users.PermissionsSaveViewController',
         'Chaching.view.users.PermissionsSaveForm'
@@ -11,6 +11,7 @@ Ext.define('Chaching.view.users.PermissionsSaveView', {
     width: 250,
     layout: 'fit',
     title: app.localize('CreateNewRole'),
+    defaultFocus: 'textfield#newRole',
     initComponent: function (config) {
         var me = this,
             controller = me.getController();

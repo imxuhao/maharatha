@@ -6,7 +6,7 @@ using Abp.Runtime.Validation;
 namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
 {
     //Mapped to/from User in CustomDtoMapper
-    public class UserEditDto : IValidate, IPassivable
+    public class UserEditDto :  IPassivable
     {
         /// <summary>
         /// Set null to create a new user. Set user's Id to update a user

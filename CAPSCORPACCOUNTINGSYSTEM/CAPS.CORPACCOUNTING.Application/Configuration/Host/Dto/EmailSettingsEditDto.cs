@@ -2,7 +2,7 @@
 
 namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
 {
-    public class EmailSettingsEditDto : IValidate
+    public class EmailSettingsEditDto 
     {
         //No validation is done, since we may don't want to use email system.
 

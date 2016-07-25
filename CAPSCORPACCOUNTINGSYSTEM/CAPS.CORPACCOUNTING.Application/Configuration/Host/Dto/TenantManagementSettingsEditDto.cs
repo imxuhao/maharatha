@@ -2,7 +2,7 @@ using Abp.Runtime.Validation;
 
 namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
 {
-    public class TenantManagementSettingsEditDto: IValidate
+    public class TenantManagementSettingsEditDto
     {
         public bool AllowSelfRegistration { get; set; }
 

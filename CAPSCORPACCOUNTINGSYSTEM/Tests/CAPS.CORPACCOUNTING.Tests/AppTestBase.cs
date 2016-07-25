@@ -30,7 +30,7 @@ namespace CAPS.CORPACCOUNTING.Tests
     /// Seeds database with initial data.
     /// Provides methods to easily work with <see cref="CORPACCOUNTINGDbContext"/>.
     /// </summary>
-    public abstract class AppTestBase : AbpIntegratedTestBase
+    public abstract class AppTestBase : AbpIntegratedTestBase<CORPACCOUNTINGTestModule>
     {
         private DbConnection _hostDb;
         private Dictionary<int, DbConnection> _tenantDbs; //only used for db per tenant architecture
@@ -113,13 +113,13 @@ namespace CAPS.CORPACCOUNTING.Tests
                 );
         }
 
-        protected override void AddModules(ITypeList<AbpModule> modules)
-        {
-            base.AddModules(modules);
+        //protected override void AddModules(ITypeList<AbpModule> modules)
+        //{
+        //    base.AddModules(modules);
 
-            //Adding testing modules. Depended modules of these modules are automatically added.
-            modules.Add<CORPACCOUNTINGTestModule>();
-        }
+        //    //Adding testing modules. Depended modules of these modules are automatically added.
+        //    modules.Add<CORPACCOUNTINGTestModule>();
+        //}
 
         #region UsingDbContext
 

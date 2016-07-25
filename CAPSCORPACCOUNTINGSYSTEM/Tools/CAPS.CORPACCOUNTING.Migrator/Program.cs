@@ -14,7 +14,7 @@ namespace CAPS.CORPACCOUNTING.Migrator
         {
             ParseArgs(args);
 
-            using (var bootstrapper = new AbpBootstrapper())
+            using (var bootstrapper = AbpBootstrapper.Create<CORPACCOUNTINGMigratorModule>())
             {
                 bootstrapper.IocManager.IocContainer
                     .AddFacility<LoggingFacility>(f => f.UseLog4Net()

@@ -2,7 +2,7 @@
 
 namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
 {
-    public class HostUserManagementSettingsEditDto : IValidate
+    public class HostUserManagementSettingsEditDto 
     {
         public bool IsEmailConfirmationRequiredForLogin { get; set; }
     }

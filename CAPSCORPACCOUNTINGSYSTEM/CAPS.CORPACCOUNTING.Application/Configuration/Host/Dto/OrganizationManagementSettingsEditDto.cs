@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
 {
-    public class OrganizationManagementSettingsEditDto : IValidate
+    public class OrganizationManagementSettingsEditDto 
     {
         public bool IsAllowDuplicateAPInvoiceNos { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace CAPS.CORPACCOUNTING.Configuration.Tenants.Dto
 {
-    public class CompanySettingsEditDto : IValidate
+    public class CompanySettingsEditDto 
     {
         public bool IsAllowDuplicateAPInvoiceNos { get; set; }
 

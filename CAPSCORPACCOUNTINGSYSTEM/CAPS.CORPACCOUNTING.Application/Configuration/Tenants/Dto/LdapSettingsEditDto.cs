@@ -2,7 +2,7 @@ using Abp.Runtime.Validation;
 
 namespace CAPS.CORPACCOUNTING.Configuration.Tenants.Dto
 {
-    public class LdapSettingsEditDto : IValidate
+    public class LdapSettingsEditDto 
     {
         public bool IsModuleEnabled { get; set; }
 

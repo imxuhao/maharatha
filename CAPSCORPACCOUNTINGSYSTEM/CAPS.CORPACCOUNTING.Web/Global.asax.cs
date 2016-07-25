@@ -7,7 +7,7 @@ using Castle.Facilities.Logging;
 
 namespace CAPS.CORPACCOUNTING.Web
 {
-    public class MvcApplication : AbpWebApplication
+    public class MvcApplication : AbpWebApplication<CORPACCOUNTINGWebModule>
     {
         protected override void Application_Start(object sender, EventArgs e)
         {
@@ -16,7 +16,7 @@ namespace CAPS.CORPACCOUNTING.Web
 
             /* This line provides better startup performance for the application by disabling detailed assembly investigation.
              * If you need deeper assembly investigation, remove it. */
-            AbpBootstrapper.IocManager.RegisterIfNot<IAssemblyFinder, CurrentDomainAssemblyFinder>();
+           // AbpBootstrapper.IocManager.RegisterIfNot<IAssemblyFinder, CurrentDomainAssemblyFinder>();
 
             //Log4Net configuration
             AbpBootstrapper.IocManager.IocContainer

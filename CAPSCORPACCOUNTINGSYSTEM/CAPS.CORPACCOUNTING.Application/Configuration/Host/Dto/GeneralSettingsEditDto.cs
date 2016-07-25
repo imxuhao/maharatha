@@ -3,7 +3,7 @@ using Abp.Runtime.Validation;
 
 namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
 {
-    public class GeneralSettingsEditDto : IValidate
+    public class GeneralSettingsEditDto 
     {
         [MaxLength(128)]
         public string WebSiteRootAddress { get; set; }

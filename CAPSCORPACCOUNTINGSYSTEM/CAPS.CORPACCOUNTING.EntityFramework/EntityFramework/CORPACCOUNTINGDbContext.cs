@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Common;
 using System.Data.Entity;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using Abp.Zero.EntityFramework;
@@ -31,13 +30,19 @@ using CAPS.CORPACCOUNTING.Security;
 using Z.EntityFramework.Plus;
 using CAPS.CORPACCOUNTING.EFAuditLog;
 using CAPS.CORPACCOUNTING.Organization;
-
-
+using System.Reflection;
+using System.Collections.Generic;
+using Abp.Configuration;
+using CAPS.CORPACCOUNTING.Configuration;
+using CAPS.CORPACCOUNTING.CoreHelper;
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
 
     public class CORPACCOUNTINGDbContext : AbpZeroDbContext<Tenant, Role, User>
     {
+
+        private readonly ISettingManager _settingManager;
+
         /* Define an IDbSet for each entity of the application */
 
         public virtual IDbSet<BinaryObject> BinaryObjects { get; set; }
@@ -610,20 +615,19 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         public virtual IDbSet<OrganizationExtended> OrganizationExtended { get; set; }
 
-        public virtual IDbSet<PurchaseOrderHistory> PurchaseOrderHistory { get; set; }
+        public virtual IDbSet<PurchaseOrderHistoryUnit> PurchaseOrderHistory { get; set; }
 
         public virtual IDbSet<ConnectionStringUnit> ConnectionStrings { get; set; }
 
         public virtual IDbSet<TenantExtendedUnit> TenantExtended { get; set; }
 
-
+        public DbSet<AuditEntry> AuditEntries { get; set; }
+        public DbSet<AuditEntryProperty> AuditEntryProperties { get; set; }
 
 
 
         #region Modification Log
 
-        public DbSet<AuditEntry> AuditEntries { get; set; }
-        public DbSet<AuditEntryProperty> AuditEntryProperties { get; set; }
 
         public override int SaveChanges()
         {
@@ -633,7 +637,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
             audit.PreSaveChanges(this);
             var rowAffecteds = base.SaveChanges();
             audit.PostSaveChanges();
-            
+
 
             if (audit.Configuration.AutoSavePreAction != null)
             {
@@ -651,51 +655,107 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            var audit = new Audit();
-            var currentUser = System.Threading.Thread.CurrentPrincipal.Identity.Name;
-            audit.CreatedBy = string.IsNullOrEmpty(currentUser) ? "System" : currentUser;
-            audit.PreSaveChanges(this);
-            var rowAffecteds = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-            audit.PostSaveChanges();
-
-            if (audit.Configuration.AutoSavePreAction != null)
+            try
             {
-                audit.Configuration.AutoSavePreAction(this, audit);
-                await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+                var audit = new Audit();
+                var currentUser = System.Threading.Thread.CurrentPrincipal.Identity.Name;
+                audit.CreatedBy = string.IsNullOrEmpty(currentUser) ? "System" : currentUser;
+
+                audit.PreSaveChanges(this);
+                var rowAffecteds = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+                audit.PostSaveChanges();
+
+                if (audit.Configuration.AutoSavePreAction != null)
+                {
+                    var isAduitSaveToDb = await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.AuditSaveToDB);
+                    if (isAduitSaveToDb)
+                    {
+                        audit.Configuration.AutoSavePreAction(this, audit);
+                        await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+                    }
+
+                    var entries = audit.Entries;
+                    var accountingItemLog = entries.Find(u => u.EntitySetName == "AccountingItemUnits" && u.EntityTypeName.Contains("PurchaseOrderEntryDo"));
+                    if (!ReferenceEquals(accountingItemLog, null))
+                    {
+                        await CreatePurchaseOrderHistory(cancellationToken, accountingItemLog);
+                    }
+                }
+
+
+                return rowAffecteds;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
 
-            return rowAffecteds;
+
         }
+
+
+
+
 
         #endregion
 
 
-        
+
         /* Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          * But it may cause problems when working Migrate.exe of EF. ABP works either way.         * 
          */
+
+
         public CORPACCOUNTINGDbContext()
+       : base("Default")
+        {
+
+        }
+
+        public CORPACCOUNTINGDbContext(ISettingManager settingManager)
             : base("Default")
         {
+            _settingManager = settingManager;
+        }
+
+
+        /* This constructor is used by ABP to pass connection string defined in CORPACCOUNTINGDataModule.PreInitialize.
+       * Notice that, actually you will not directly create an instance of CORPACCOUNTINGDbContext since ABP automatically handles it.
+       */
+        public CORPACCOUNTINGDbContext(string nameOrConnectionString)
+            : base(nameOrConnectionString)
+        {
+
 
         }
 
         /* This constructor is used by ABP to pass connection string defined in CORPACCOUNTINGDataModule.PreInitialize.
          * Notice that, actually you will not directly create an instance of CORPACCOUNTINGDbContext since ABP automatically handles it.
          */
-        public CORPACCOUNTINGDbContext(string nameOrConnectionString)
+        public CORPACCOUNTINGDbContext(string nameOrConnectionString, ISettingManager settingManager)
             : base(nameOrConnectionString)
         {
-            
+            _settingManager = settingManager;
+
+        }
+
+        /* This constructor is used in tests to pass a fake/mock connection.
+        */
+        public CORPACCOUNTINGDbContext(DbConnection dbConnection)
+            : base(dbConnection, true)
+        {
 
         }
 
         /* This constructor is used in tests to pass a fake/mock connection.
          */
-        public CORPACCOUNTINGDbContext(DbConnection dbConnection)
+        public CORPACCOUNTINGDbContext(DbConnection dbConnection, ISettingManager settingManager)
             : base(dbConnection, true)
         {
-
+            _settingManager = settingManager;
         }
 
         /// <summary>
@@ -707,11 +767,134 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ChangeAbpTablePrefix<Tenant, Role, User>("CAPS_");
+            AuditManager.DefaultConfiguration.IgnorePropertyUnchanged = false;
             AuditManager.DefaultConfiguration.Exclude(x => true); // Exclude ALL
             AuditManager.DefaultConfiguration.Include<INeedModLog>();
             AuditManager.DefaultConfiguration.AutoSavePreAction = (context, audit) =>
             // ADD "Where(x => x.AuditEntryID == 0)" to allow multiple SaveChanges with same Audit
-             ((CORPACCOUNTINGDbContext) context).AuditEntries.AddRange(audit.Entries);
+             ((CORPACCOUNTINGDbContext)context).AuditEntries.AddRange(audit.Entries);
         }
+
+
+        #region PO Logging
+        /// <summary>
+        /// Tracking purchaseOrderHistory
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <param name="accountingItemLog"></param>
+        /// <returns></returns>
+        private async Task CreatePurchaseOrderHistory(CancellationToken cancellationToken, AuditEntry accountingItemLog)
+        {
+            try
+            {
+
+                var poNewHistory = new PurchaseOrderHistoryUnit();
+                var poOldHistory = new PurchaseOrderHistoryUnit();
+
+                var PropertiesList = accountingItemLog.Properties.FindAll(u => u.PropertyName != "LajitId" && u.PropertyName != "Id");
+                var propAccountingItemId = accountingItemLog.Properties.Find(u => u.PropertyName == "Id");
+                var isClose = accountingItemLog.Properties.Find(u => u.PropertyName == "IsClose");
+
+                if (accountingItemLog.StateName == AuditEntryState.EntityAdded.ToString())
+                {
+                    poNewHistory = GetPoNewValues(PropertiesList);
+                    poNewHistory.AccountingItemId = Convert.ToInt64(propAccountingItemId.NewValue);
+                    poNewHistory.ModificationTypeId = ModificationType.Created;
+                    PurchaseOrderHistory.Add(poNewHistory);
+                    await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+                }
+                else if (accountingItemLog.StateName == AuditEntryState.EntityModified.ToString())
+                {
+                    poNewHistory = GetPoNewValues(PropertiesList);
+                    poOldHistory = GetPoOldValues(PropertiesList);
+
+                    poNewHistory.AccountingItemId = Convert.ToInt64(propAccountingItemId.NewValue);
+                    poOldHistory.AccountingItemId = Convert.ToInt64(propAccountingItemId.OldValue);
+
+
+
+                    //If Job OR Line Changed
+                    if (poOldHistory.JobId != poNewHistory.JobId || poOldHistory.AccountId != poNewHistory.AccountId)
+                    {
+                        poOldHistory.Amount = -poOldHistory.Amount;
+                        poOldHistory.ModificationTypeId = ModificationType.Linechange;
+                        if (poNewHistory.SourceTypeId != SourceType.PO)
+                            poOldHistory.SourceTypeId = poNewHistory.SourceTypeId;
+
+                        PurchaseOrderHistory.Add(poOldHistory);
+                        await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+                        poOldHistory.Amount = Math.Abs(poOldHistory.Amount.Value);
+
+                        poNewHistory.Amount = Math.Abs(poOldHistory.Amount.Value);
+                        poNewHistory.ModificationTypeId = ModificationType.Linechange;
+                        PurchaseOrderHistory.Add(poNewHistory);
+                        await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+                    }
+
+                    //if amount Changed
+                    poNewHistory = GetPoNewValues(PropertiesList);
+                    int value = decimal.Compare(poNewHistory.Amount.Value, poOldHistory.Amount.Value);
+                    if (value != 0)
+                    {
+                        poNewHistory.AccountingItemId = Convert.ToInt64(propAccountingItemId.NewValue);
+                        poNewHistory.ChangeInAmount = poNewHistory.Amount.Value - poOldHistory.Amount.Value;
+                        poNewHistory.ModificationTypeId = poNewHistory.SourceTypeId == SourceType.PO ? (value > 0 ? ModificationType.IncreasedAmount : ModificationType.DecreasedAmount) : ModificationType.Reduced;
+                        PurchaseOrderHistory.Add(poNewHistory);
+                        await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+                    }
+
+                    //if PO is Closed
+                    if (isClose.NewValue.ToString().Length > 0 && Convert.ToBoolean(isClose.NewValue))
+                    {
+                        poNewHistory = GetPoNewValues(PropertiesList);
+                        poNewHistory.AccountingItemId = Convert.ToInt64(propAccountingItemId.NewValue);
+                        poNewHistory.ModificationTypeId = ModificationType.Closed;
+                        PurchaseOrderHistory.Add(poNewHistory);
+                        await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+                    }
+
+                }
+                else if (accountingItemLog.StateName == AuditEntryState.EntityDeleted.ToString())
+                {
+                    poOldHistory = GetPoOldValues(PropertiesList);
+                    poOldHistory.ModificationTypeId = ModificationType.Deleted;
+                    poOldHistory.AccountingItemId = Convert.ToInt64(propAccountingItemId.OldValue);
+                    PurchaseOrderHistory.Add(poOldHistory);
+                    await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        private PurchaseOrderHistoryUnit GetPoOldValues(List<AuditEntryProperty> PropertiesList)
+        {
+            PurchaseOrderHistoryUnit poHistory = new PurchaseOrderHistoryUnit();
+            Type poHistoryType = poHistory.GetType();
+            foreach (var item in PropertiesList)
+            {
+                PropertyInfo poPropertyInfo = poHistoryType.GetProperty(item.PropertyName);
+                if (item.OldValue.ToString().Length > 0 && CoreHelpers.HasProperty(poHistoryType, item.PropertyName))
+                    poPropertyInfo.SetValue(poHistory, CoreHelper.CoreHelpers.ChangeType(item.OldValue, poPropertyInfo.PropertyType), null);
+            }
+            return poHistory;
+        }
+        private PurchaseOrderHistoryUnit GetPoNewValues(List<AuditEntryProperty> PropertiesList)
+        {
+            PurchaseOrderHistoryUnit poHistory = new PurchaseOrderHistoryUnit();
+            Type poHistoryType = poHistory.GetType();
+            foreach (var item in PropertiesList)
+            {
+                PropertyInfo poPropertyInfo = poHistoryType.GetProperty(item.PropertyName);
+                if (item.NewValue.ToString().Length > 0 && CoreHelpers.HasProperty(poHistoryType, item.PropertyName))
+                    poPropertyInfo.SetValue(poHistory, CoreHelper.CoreHelpers.ChangeType(item.NewValue, poPropertyInfo.PropertyType), null);
+            }
+            return poHistory;
+        }
+
+        #endregion
+
     }
 }

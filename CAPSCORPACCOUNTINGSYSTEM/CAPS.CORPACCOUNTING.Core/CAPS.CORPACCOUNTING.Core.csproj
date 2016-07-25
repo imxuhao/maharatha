@@ -138,6 +138,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Z.EntityFramework.Plus.Audit.EF6">
+      <HintPath>..\CAPS.CORPACCOUNTING.Web\Bin\Z.EntityFramework.Plus.Audit.EF6.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\AccountingCacheItem.cs" />
@@ -220,6 +223,7 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
+    <Compile Include="CoreHelper\CoreHelpers.cs" />
     <Compile Include="EFAuditLog\INeedModLog.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="Financials\Preferences\FiscalPeriodUnitManager.cs" />
@@ -258,7 +262,7 @@
     <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentUnitManager.cs" />
     <Compile Include="PettyCash\PettyCashEntryDocumnetDetailManager.cs" />
     <Compile Include="PettyCash\PettyCashEntryDocumnetManager.cs" />
-    <Compile Include="PurchaseOrders\PurchaseOrderHistory.cs" />
+    <Compile Include="PurchaseOrders\PurchaseOrderHistoryUnit.cs" />
     <Compile Include="Reports\BatchExecutionResultUnit.cs" />
     <Compile Include="Reports\BatchReportItemUnit.cs" />
     <Compile Include="Reports\ReportDistributionListUnit.cs" />

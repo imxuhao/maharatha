@@ -7,6 +7,8 @@ using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.JobCosting;
+using CAPS.CORPACCOUNTING.EFAuditLog;
+using Abp.Events.Bus;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -88,13 +90,38 @@ namespace CAPS.CORPACCOUNTING.Accounting
         NetProfit = 35
     }
 
+    public enum CheckType
+    {
+        [Display(Name = "Deposit Check")]
+        DepositCheck = 1,
+        [Display(Name = "Payment Check")]
+        PaymentCheck = 2
+
+    }
+
+    public enum SourceType
+    {
+        [Display(Name = "AP")]
+        AP = 1,
+        [Display(Name = "CC")]
+        CC = 2,
+        [Display(Name = "PC")]
+        PC = 3,
+        [Display(Name = "MC")]
+        MC = 4,
+        [Display(Name = "JE")]
+        JE = 5,
+        [Display(Name = "PO")]
+        PO = 6
+    }
+
     /// <summary>
     /// AccountingItem is the table name in lajit
     /// </summary>
     [Table("CAPS_AccountingItem")]
-    public class AccountingItemUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class AccountingItemUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit, INeedModLog
     {
-               
+
         #region Class Property Declarations
 
         /// <summary>Overriding the Id column with AccountingItemId </summary>
@@ -155,7 +182,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Gets or sets the AccountRef2 field. </summary>      
         public virtual string AccountRef2 { get; set; }
 
-        /// <summary>Gets or sets the AccountRef3 field. </summary>
+        /// <summary>Gets or sets the AccountRef3 field.
+        /// AccountRef3 referred as Invoice Ref
+        ///</summary>
         public virtual string AccountRef3 { get; set; }
 
         /// <summary>Gets or sets the AccountRef4 field. </summary>       
@@ -197,13 +226,17 @@ namespace CAPS.CORPACCOUNTING.Accounting
         [ForeignKey("SubAccountId3")]
         public virtual SubAccountUnit SubAccount3 { get; set; }
 
-        /// <summary>Gets or sets the SubAccountID4 field. </summary>
+        /// <summary>Gets or sets the SubAccountID4 field.
+        /// SubAccountID4 referred as Locations
+        /// </summary>
         public virtual long? SubAccountId4 { get; set; }
 
         [ForeignKey("SubAccountId4")]
         public virtual SubAccountUnit SubAccount4 { get; set; }
 
-        /// <summary>Gets or sets the SubAccountID5 field. </summary>
+        /// <summary>Gets or sets the SubAccountID5 field. 
+        /// SubAccountID4 referred as Sets
+        /// </summary>
         public virtual long? SubAccountId5 { get; set; }
 
         [ForeignKey("SubAccountId5")]
@@ -251,8 +284,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Gets or sets the CurrencyAdjustmentAmount field. </summary>
         public virtual decimal? CurrencyAdjustmentAmount { get; set; }
 
-        /// <summary>Gets or sets the OriginalItemID field. </summary>
-        public virtual long? OriginalItemId { get; set; }
+        /// <summary>Gets or sets the OriginalItemID field.[OriginalItemID renamed to PoAccountingItemId] </summary>
+        public virtual long? PoAccountingItemId { get; set; }
 
         /// <summary>Gets or sets the AccountingItemIDLink field. </summary>
         public virtual long? AccountingItemIdLink { get; set; }
@@ -280,8 +313,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Gets or sets the AccountingItemTypeOfModificationID field. </summary>
         public virtual int? AccountingItemTypeOfModificationId { get; set; }
-
-        /// <summary>Gets or sets the SplitAccountingItemId field. </summary>
+        
+        /// <summary>Gets or sets the SplitAccountingItemId field.[AccountingItemOrigID renamed to SplitAccountingItemId] </summary>
         public virtual long? SplitAccountingItemId { get; set; }
 
         [ForeignKey("SplitAccountingItemId")]
@@ -292,7 +325,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         /// <summary>Gets or sets the ICTAccountingItemID field. </summary>
         public virtual long? IctAccountingItemId { get; set; }
-        
+
 
         /// <summary>Gets or sets the TaxRebateID field. </summary>
         public virtual int? TaxRebateId { get; set; }
@@ -324,15 +357,23 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <summary>Gets or sets the IsAccountingItemSplit field. </summary>
         public virtual bool IsAccountingItemSplit { get; set; }
 
+        /// <summary>
+        /// Gets or sets the CheckType field
+        /// </summary>
+        public virtual CheckType? CheckTypeId { get; set; }
+
+        /// <summary>Gets or sets the RowNumber field. </summary>
+        public virtual long? RowNumber { get; set; }
+
         #endregion
 
 
         public AccountingItemUnit()
-        {          
-            IsAsset = false;           
+        {
+            IsAsset = false;
             IsChanged = false;
             IsActive = true;
-            IsEnterable = false;           
+            IsEnterable = false;
         }
     }
 }

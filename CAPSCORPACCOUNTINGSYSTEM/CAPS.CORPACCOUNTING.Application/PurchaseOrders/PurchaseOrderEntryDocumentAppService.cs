@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -17,12 +15,8 @@ using CAPS.CORPACCOUNTING.Journals.Dto;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Accounting;
-using CAPS.CORPACCOUNTING.AccountReceivable;
-using CAPS.CORPACCOUNTING.AccountReceivable.Dto;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Helpers;
-using CAPS.CORPACCOUNTING.Journals;
-using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.PurchaseOrders.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Banking;
@@ -30,6 +24,8 @@ using CAPS.CORPACCOUNTING.Common;
 using Abp.Domain.Uow;
 using CAPS.CORPACCOUNTING.Payables;
 using static CAPS.CORPACCOUNTING.Helpers.Helper;
+using CAPS.CORPACCOUNTING.CoreHelper;
+using System;
 
 namespace CAPS.CORPACCOUNTING.PurchaseOrders
 {
@@ -54,7 +50,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         private readonly IRepository<TaxCreditUnit> _taxCreditUnitRepository;
         private readonly IRepository<BankAccountUnit, long> _bankAccountUnitRepository;
         private readonly IRepository<ApprovedSoxUnit, long> _approvedSoxUnitRepository;
-        private readonly IRepository<PurchaseOrderHistory, long> _purchaseOrderHistoryRepository;
+        private readonly IRepository<PurchaseOrderHistoryUnit, long> _purchaseOrderHistoryRepository;
+        private readonly IRepository<AccountingItemUnit, long> _accountingItemUnitRepository;
 
 
 
@@ -89,7 +86,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
             IRepository<TaxCreditUnit> taxCreditUnitRepository,
             IRepository<BankAccountUnit, long> bankAccountUnitRepository,
             IRepository<ApprovedSoxUnit, long> approvedSoxUnitRepository,
-            IRepository<PurchaseOrderHistory, long> purchaseOrderHistoryRepository
+            IRepository<PurchaseOrderHistoryUnit, long> purchaseOrderHistoryRepository,
+            IRepository<AccountingItemUnit, long> accountingItemUnitRepository
 
             )
         {
@@ -107,6 +105,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
             _bankAccountUnitRepository = bankAccountUnitRepository;
             _approvedSoxUnitRepository = approvedSoxUnitRepository;
             _purchaseOrderHistoryRepository = purchaseOrderHistoryRepository;
+            _accountingItemUnitRepository = accountingItemUnitRepository;
         }
 
 
@@ -133,17 +132,16 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
             //Null Checking of PurchaseOrderDetailList
             if (!ReferenceEquals(input.PurchaseOrderDetailList, null))
             {
+
+                var source = CoreHelpers.GetSourceType(typeof(PurchaseOrderEntryDocumentDetailUnit).Name);
                 //Bulk Insertion of PurchaseOrderDetail
                 foreach (var purchaseOrderDetail in input.PurchaseOrderDetailList)
                 {
                     purchaseOrderDetail.AccountingDocumentId = response.Id;
                     var purchaseOrderDetailUnit = purchaseOrderDetail.MapTo<PurchaseOrderEntryDocumentDetailUnit>();
                     purchaseOrderDetailUnit.AccountingItemOrigAmount = purchaseOrderDetail.Amount;
+                    purchaseOrderDetailUnit.SourceTypeId = SourceType.PO;
                     await _purchaseOrderDetailUnitManager.CreateAsync(purchaseOrderDetailUnit);
-                    if (!input.CloseDate.HasValue)
-                        await CreatePurchaseOrderHistory(null, purchaseOrderDetailUnit, RecordType.Created);
-                    else
-                        await CreatePurchaseOrderHistory(new List<PurchaseOrderEntryDocumentDetailUnit>() { purchaseOrderDetailUnit }, ModificationType.Closed);
                 }
 
             }
@@ -169,7 +167,6 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
             if (purchaseOrderTransactionsInput.CloseDate.HasValue && !input.CloseDate.HasValue)
             {
                 var PoDetailsList = await _purchaseOrderDetailUnitRepository.GetAllListAsync(u => u.AccountingDocumentId == input.AccountingDocumentId);
-                await CreatePurchaseOrderHistory(PoDetailsList, ModificationType.Reopened);
             }
 
 
@@ -179,6 +176,7 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
             if (!ReferenceEquals(input.PurchaseOrderDetailList, null))
             {
+                var source = CoreHelpers.GetSourceType(typeof(PurchaseOrderEntryDocumentDetailUnit).Name);
                 //Bulk CRUD operations of PurchaseOrderDetail
                 foreach (var purchaseOrderDetail in input.PurchaseOrderDetailList)
                 {
@@ -187,29 +185,31 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                         purchaseOrderDetail.AccountingDocumentId = input.AccountingDocumentId;
                         var purchaseOrderDetailUnit = purchaseOrderDetail.MapTo<PurchaseOrderEntryDocumentDetailUnit>();
                         purchaseOrderDetailUnit.AccountingItemOrigAmount = purchaseOrderDetail.Amount;
+                        purchaseOrderDetailUnit.SourceTypeId = SourceType.PO;
                         await _purchaseOrderDetailUnitManager.CreateAsync(purchaseOrderDetailUnit);
-                        await CreatePurchaseOrderHistory(null, purchaseOrderDetailUnit, RecordType.Created);
                     }
                     else if (purchaseOrderDetail.AccountingItemId > 0)
                     {
 
                         var purchaseOrderDetailUnit = await _purchaseOrderDetailUnitRepository.GetAsync(purchaseOrderDetail.AccountingItemId);
-
-                        var PODetails = new PurchaseOrderEntryDocumentDetailUnit();
-                        Mapper.Map(purchaseOrderDetail, PODetails);
-                        await CreatePurchaseOrderHistory(purchaseOrderDetailUnit, PODetails, RecordType.Updated);
-
+                        //If PO is Not releaving changing OrignalAmount
+                        if (purchaseOrderDetailUnit.AccountingItemOrigAmount == purchaseOrderDetailUnit.Amount && purchaseOrderDetailUnit.Amount != purchaseOrderDetail.Amount)
+                        {
+                            purchaseOrderDetailUnit.AccountingItemOrigAmount = purchaseOrderDetail.Amount;
+                        }
                         Mapper.Map(purchaseOrderDetail, purchaseOrderDetailUnit);
+                        purchaseOrderDetailUnit.SourceTypeId = SourceType.PO;
+                        if (purchaseOrderDetailUnit.IsClose.Value)
+                            purchaseOrderDetailUnit.RemainingAmount = 0;
                         await _purchaseOrderDetailUnitManager.UpdateAsync(purchaseOrderDetailUnit);
                     }
                 }
             }
 
             //Tracking Purchase Order Lines into Purchase Order History Table when PO is closed
-            if (!purchaseOrderTransactionsInput.CloseDate.HasValue &&  input.CloseDate.HasValue)
+            if (!purchaseOrderTransactionsInput.CloseDate.HasValue && input.CloseDate.HasValue)
             {
                 var PoDetailsList = await _purchaseOrderDetailUnitRepository.GetAllListAsync(u => u.AccountingDocumentId == input.AccountingDocumentId);
-                await CreatePurchaseOrderHistory(PoDetailsList, ModificationType.Closed);
             }
             await CurrentUnitOfWork.SaveChangesAsync();
 
@@ -224,8 +224,6 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         [UnitOfWork]
         public async Task DeletePurchaseOrderEntryDocumentUnit(IdInput input)
         {
-            var PoDetailsList = await _purchaseOrderDetailUnitRepository.GetAllListAsync(u => u.AccountingDocumentId == input.Id);
-            await CreatePurchaseOrderHistory(PoDetailsList, ModificationType.Deleted);
             await _purchaseOrderDetailUnitRepository.DeleteAsync(p => p.AccountingDocumentId == input.Id);
             await _purchaseOrderEntryDocumentUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();
@@ -240,8 +238,6 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
         [UnitOfWork]
         public async Task DeletePurchaseOrderDetailUnit(IdInput<long> input)
         {
-            var PoDetailsList = await _purchaseOrderDetailUnitRepository.GetAllListAsync(u => u.Id == input.Id);
-            await CreatePurchaseOrderHistory(PoDetailsList, ModificationType.Deleted);
             await _purchaseOrderDetailUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
@@ -303,8 +299,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                                     Amount = poDetail.Amount
                                 };
 
-            var poDetails = poDetailsList.Where(u => poIdList.Contains(u.AccountingDocumentId.ToString())).ToList();
-
+            var poDetails = await poDetailsList.Where(u => poIdList.Contains(u.AccountingDocumentId.ToString())).ToListAsync();
+            // var poDetails = poDetailsList.ToListAsync();
             var poOrders = (poDetails.GroupBy(i => i.AccountingDocumentId)
                 .Select(g => new
                 {
@@ -389,6 +385,69 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<PurchaseOrderHistoryUnitDto>> GetPurchaseOrderHistoryByAccountingDocumentId(GetTransactionList input)
+        {
+
+            var query = from pODetail in _purchaseOrderHistoryRepository.GetAll()
+                        join user in _userUnitRepository.GetAll() on pODetail.CreatorUserId equals user.Id into users
+                        from userunits in users.DefaultIfEmpty()
+                        join job in _jobUnitRepository.GetAll() on pODetail.JobId equals job.Id
+                        into jobunit
+                        from jobs in jobunit.DefaultIfEmpty()
+                        join line in _accountUnitRepository.GetAll() on pODetail.AccountId equals line.Id
+                        into account
+                        from lines in account.DefaultIfEmpty()
+                        join subAccount1 in _subAccountUnitRepository.GetAll() on pODetail.SubAccountId1 equals subAccount1.Id
+                            into subAccount1
+                        from subAccounts1 in subAccount1.DefaultIfEmpty()
+                        join subAccount2 in _subAccountUnitRepository.GetAll() on pODetail.SubAccountId2 equals subAccount2.Id
+                           into subAccount2
+                        from subAccounts2 in subAccount2.DefaultIfEmpty()
+                        join vendor in _vendorUnitRepository.GetAll() on pODetail.VendorId equals vendor.Id into vendor
+                        from vendors in vendor.DefaultIfEmpty()
+                        join taxCredit in _taxCreditUnitRepository.GetAll() on pODetail.TaxRebateId equals taxCredit.Id into
+                            taxCredit
+                        from taxCredits in taxCredit.DefaultIfEmpty()
+                        select new
+                        {
+                            POHDetails = pODetail,
+                            jobs.JobNumber,
+                            lines.AccountNumber,
+                            subAccount1 = subAccounts1.Description,
+                            taxCreditNumber = taxCredits.Number,
+                            VendorName = vendors.LastName,
+                            CreatedUser= userunits.Name
+                        };
+
+            query = query.Where(p => p.POHDetails.AccountingDocumentId.Value == input.AccountingDocumentId);
+
+            var results = await query
+                .AsNoTracking()
+                 .OrderBy(Helper.GetSort("POHDetails.CreationTime DESC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+            return new PagedResultOutput<PurchaseOrderHistoryUnitDto>(results.Count, results.Select(item =>
+            {
+                var dto = item.POHDetails.MapTo<PurchaseOrderHistoryUnitDto>();
+                dto.SubAccountNumber1 = item.subAccount1;
+                dto.JobNumber = item.JobNumber;
+                dto.AccountNumber = item.AccountNumber;
+                dto.TaxRebateNumber = item.taxCreditNumber;
+                dto.TypeOf1099T4 = item.POHDetails.TypeOf1099T4Id != null ? item.POHDetails.TypeOf1099T4Id.ToDisplayName() : "";
+                dto.VendorName = item.VendorName;
+                dto.AccountingItemId = item.POHDetails.Id;
+                dto.ModificationType = item.POHDetails.ModificationTypeId != null ? item.POHDetails.ModificationTypeId.ToDisplayName() : "";
+                dto.SourceType=item.POHDetails.SourceTypeId != null ? item.POHDetails.SourceTypeId.ToDisplayName() : "";
+                dto.CreatedUser = item.CreatedUser;
+                return dto;
+            }).ToList());
+        }
+
+        /// <summary>
         /// Get CardHolder Information
         /// </summary>
         /// <param name="input"></param>
@@ -420,220 +479,104 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
             return cardHolders;
         }
 
-        /// <summary>
-        /// Checks the accounting fields.
-        /// </summary>
-        /// <param name="originalDetailEntity"></param>
-        /// <param name="newDetailEntity"></param>
-        /// <param name="recordType"></param>
-        /// <returns></returns>
-        [UnitOfWork]
-        public async Task CreatePurchaseOrderHistory(PurchaseOrderEntryDocumentDetailUnit originalDetailEntity, PurchaseOrderEntryDocumentDetailUnit newDetailEntity, RecordType recordType)
-        {
-            var purchaseOrderHistory = new PurchaseOrderHistory();
-            var PurchaseOrderHistoryList = new List<PurchaseOrderHistory>();
-
-            Mapper.CreateMap<PurchaseOrderEntryDocumentDetailUnit, PurchaseOrderHistory>()
-                .ForMember(u => u.Id, ap => ap.Ignore());
-
-            newDetailEntity.MapTo(purchaseOrderHistory);
-            purchaseOrderHistory.AccountingItemId = newDetailEntity.Id;
-
-            if (RecordType.Updated == recordType)
-            {
-                purchaseOrderHistory.Id = 0;
-                purchaseOrderHistory.ModificationTypeId = ModificationType.NewRowAdded;
-                PurchaseOrderHistoryList.Add(purchaseOrderHistory);
-                originalDetailEntity.MapTo(purchaseOrderHistory);
-                purchaseOrderHistory.AccountingItemId = originalDetailEntity.Id;
-
-                //if amount Changed
-                int value = decimal.Compare(originalDetailEntity.Amount.Value, newDetailEntity.Amount.Value);
-                if (value > 0)
-                {
-                    purchaseOrderHistory.Amount = -purchaseOrderHistory.Amount;
-                    purchaseOrderHistory.ModificationTypeId = ModificationType.DecreasedAmount;
-                    PurchaseOrderHistoryList.Add(purchaseOrderHistory);
-                }
-                else if (value < 0)
-                {
-                    purchaseOrderHistory.Amount = -purchaseOrderHistory.Amount;
-                    purchaseOrderHistory.ModificationTypeId = ModificationType.IncreasedAmount;
-                    PurchaseOrderHistoryList.Add(purchaseOrderHistory);
-                }
-
-                //If Job OR Line Changed
-                if (originalDetailEntity.JobId != newDetailEntity.JobId || originalDetailEntity.AccountId != newDetailEntity.AccountId)
-                {
-                    purchaseOrderHistory.Amount = -purchaseOrderHistory.Amount;
-                    purchaseOrderHistory.ModificationTypeId = ModificationType.Linechange;
-                    PurchaseOrderHistoryList.Add(purchaseOrderHistory);
-                }
-
-
-                //if changed values Except Job,Line and Amount
-                if (((originalDetailEntity.SubAccountId1 ?? 0) != (newDetailEntity.SubAccountId1 ?? 0)) ||
-                ((originalDetailEntity.SubAccountId2 ?? 0) != (newDetailEntity.SubAccountId2 ?? 0)) ||
-                ((originalDetailEntity.SubAccountId3 ?? 0) != (newDetailEntity.SubAccountId3 ?? 0)) ||
-                (originalDetailEntity.ItemMemo.Trim() != newDetailEntity.ItemMemo.Trim()) ||
-                ((originalDetailEntity.TaxRebateId ?? 0) != (newDetailEntity.TaxRebateId ?? 0)) ||
-                (originalDetailEntity.AccountRef3 != newDetailEntity.AccountRef3) ||
-                ((originalDetailEntity.VendorId ?? 0) != (newDetailEntity.VendorId ?? 0)))
-                {
-                    originalDetailEntity.Amount = -purchaseOrderHistory.Amount;
-                    purchaseOrderHistory.ModificationTypeId = ModificationType.NewRowAdded;
-                    originalDetailEntity.MapTo(purchaseOrderHistory);
-                    PurchaseOrderHistoryList.Add(purchaseOrderHistory);
-                }
-            }
-            else if (RecordType.Created == recordType)
-            {
-                purchaseOrderHistory.ModificationTypeId = ModificationType.Created;
-                PurchaseOrderHistoryList.Add(purchaseOrderHistory);
-            }
-            else if (RecordType.Deleted == recordType)
-            {
-                purchaseOrderHistory.ModificationTypeId = ModificationType.Deleted;
-                PurchaseOrderHistoryList.Add(purchaseOrderHistory);
-            }
-
-            foreach (var POHistory in PurchaseOrderHistoryList)
-            {
-                await _purchaseOrderHistoryRepository.InsertAsync(POHistory);
-            }
-        }
 
         /// <summary>
-        /// 
+        /// PO Processing By AP/CC/PC/MC/JE
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="originalOrderDetails"></param>
         /// <param name="newOrderDetails"></param>
         /// <returns></returns>
         [UnitOfWork]
-        public async Task UpdatePurchaseOrderDetailUnitByPayType<T>(T originalOrderDetails, T newOrderDetails) where T : InvoiceEntryDocumentDetailUnit, new()
+        public async Task PoProcessingByPayType<T>(T originalOrderDetails, T newOrderDetails) where T : InvoiceEntryDocumentDetailUnit, new()
         {
             decimal resultAmount;
-            var poDetail = _purchaseOrderDetailUnitRepository.Get(newOrderDetails.PurchaseOrderItemId.Value);
-            var newPoOrder = new PurchaseOrderEntryDocumentDetailUnit();
+            decimal? amount = 0;
 
+            var poAccountingItemId = !ReferenceEquals(newOrderDetails, null) ? newOrderDetails.PoAccountingItemId.Value : originalOrderDetails.PoAccountingItemId.Value;
 
+            //get poDetails by poAccountingItemId
+            var poDetail = await _purchaseOrderDetailUnitRepository.GetAsync(poAccountingItemId);
+
+            //Get Source Type based on class name
+            //ex InvoiceEntryDocumentDetailUnit class returns source='AP'
+            poDetail.SourceTypeId = CoreHelpers.GetSourceType(typeof(T).Name);
+           
             if (!ReferenceEquals(newOrderDetails, null))
             {
-                Mapper.CreateMap<T, PurchaseOrderEntryDocumentDetailUnit>();
-                newOrderDetails.MapTo(newPoOrder);
-                newPoOrder.Id = newOrderDetails.PurchaseOrderItemId.Value;
 
-                //new invoice Entry 
-                if (newOrderDetails.Id == 0)
+                // PO is first Time releaving if job or account changes in AP/CC/PC/MC/JE
+                //if po amount and AccountingItemOrigAmount is same they allow to change job or account in AP/CC/PC/MC/JE
+                if (poDetail.Amount == poDetail.AccountingItemOrigAmount)
                 {
+                    poDetail.JobId = newOrderDetails.JobId;
+                    poDetail.AccountId = newOrderDetails.AccountId;
+                    poDetail.SubAccountId1 = newOrderDetails.SubAccountId1;
+                    poDetail.SubAccountId2 = newOrderDetails.SubAccountId2;
+                    poDetail.SubAccountId3 = newOrderDetails.SubAccountId3;
+                    poDetail.ItemMemo = newOrderDetails.ItemMemo;
+                    poDetail.AccountRef3 = newOrderDetails.AccountRef3;
+                    poDetail.TaxRebateId = newOrderDetails.TaxRebateId;
+                    poDetail.VendorId = newOrderDetails.VendorId;
+                }
+                poDetail.DocumentReference = newOrderDetails.AccountRef3;
+                //new invoice Entry 
+                if (ReferenceEquals(originalOrderDetails, null) && newOrderDetails.Id == 0)
+                {
+
+                    //1000 - 100=900
+                    //POAmount - releavingamount from AP/CC/PC/MC/JE
                     resultAmount = poDetail.Amount.Value - newOrderDetails.Amount.Value;
                 }// Update invoice Entry
                 else
                 {
+                    //900+100-200=800
+                    //POAmount + Existing releavingamount - newly changing releavingamount  from AP/CC/PC/MC/JE
                     resultAmount = poDetail.Amount.Value + originalOrderDetails.Amount.Value - newOrderDetails.Amount.Value;
+
+                    ////history tracking purpose
+                    //oldPoOrder.Amount = originalOrderDetails.Amount.Value;
+                    //changeInAmount = -newOrderDetails.Amount.Value;// - oldPoOrder.Amount.Value;
+
                 }
 
+                //set OverRelieveAmount based on resultAmount
                 if (resultAmount >= 0)
                 {
-                    newPoOrder.Amount = resultAmount;
-                    newPoOrder.OverRelieveAmount = 0;
+                    poDetail.OverRelieveAmount = 0;
+                    amount = resultAmount;
                 }
                 else
                 {
-                    newPoOrder.Amount = 0;
-                    newPoOrder.OverRelieveAmount = resultAmount;
+                    poDetail.OverRelieveAmount = resultAmount;
+                    amount = 0;
                 }
 
-                poDetail.JobId = newOrderDetails.JobId;
-                poDetail.AccountId = newOrderDetails.AccountId;
-                poDetail.SubAccountId1 = newOrderDetails.SubAccountId1;
-                poDetail.SubAccountId2 = newOrderDetails.SubAccountId2;
-                poDetail.SubAccountId3 = newOrderDetails.SubAccountId3;
-                poDetail.ItemMemo = newOrderDetails.ItemMemo;
-                poDetail.TaxRebateId = newOrderDetails.TaxRebateId;
-                poDetail.AccountRef3 = newOrderDetails.AccountRef3;
                 poDetail.RemainingAmount = resultAmount;
-                poDetail.PendingAmount = newOrderDetails.Amount.Value;
-                await CreatePurchaseOrderHistory(poDetail, newPoOrder, newOrderDetails.Id == 0 ? RecordType.Created : RecordType.Updated);
+                //PO AccountingItemOrigAmount-resultAmount(Calculated amount)
+                poDetail.PendingAmount = poDetail.AccountingItemOrigAmount.Value - resultAmount;
+                poDetail.Amount = amount;
 
-                poDetail.Amount = newPoOrder.Amount;
-                poDetail.OverRelieveAmount = newPoOrder.OverRelieveAmount;
-            }
+            }//while deleting details from AP/CC/PC/MC/JE
             else if (!ReferenceEquals(originalOrderDetails, null))
             {
+                //900+100=1000
+                //POAmount + Existing releavingamount
                 poDetail.Amount = poDetail.Amount + originalOrderDetails.Amount;
-                if (poDetail.OverRelieveAmount.HasValue)
 
+                //set OverRelieveAmount value
+                if (poDetail.OverRelieveAmount.HasValue)
+                {
                     if (poDetail.OverRelieveAmount - originalOrderDetails.Amount > 0)
                         poDetail.OverRelieveAmount = poDetail.OverRelieveAmount - originalOrderDetails.Amount;
                     else
                         poDetail.OverRelieveAmount = 0;
-                await CreatePurchaseOrderHistory(null, poDetail, RecordType.Deleted);
-
+                }
+                poDetail.DocumentReference = newOrderDetails.AccountRef3;
             }
-
             await _purchaseOrderDetailUnitRepository.UpdateAsync(poDetail);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<PagedResultOutput<PurchaseOrderHistoryUnitDto>> GetPurchaseOrderHistoryByAccountingDocumentId(GetTransactionList input)
-        {
-
-            var query = from pODetail in _purchaseOrderHistoryRepository.GetAll()
-                        join job in _jobUnitRepository.GetAll() on pODetail.JobId equals job.Id
-                        into jobunit
-                        from jobs in jobunit.DefaultIfEmpty()
-                        join line in _accountUnitRepository.GetAll() on pODetail.AccountId equals line.Id
-                        into account
-                        from lines in account.DefaultIfEmpty()
-                        join subAccount1 in _subAccountUnitRepository.GetAll() on pODetail.SubAccountId1 equals subAccount1.Id
-                            into subAccount1
-                        from subAccounts1 in subAccount1.DefaultIfEmpty()
-                        join subAccount2 in _subAccountUnitRepository.GetAll() on pODetail.SubAccountId2 equals subAccount2.Id
-                           into subAccount2
-                        from subAccounts2 in subAccount2.DefaultIfEmpty()
-                        join vendor in _vendorUnitRepository.GetAll() on pODetail.VendorId equals vendor.Id into vendor
-                        from vendors in vendor.DefaultIfEmpty()
-                        join taxCredit in _taxCreditUnitRepository.GetAll() on pODetail.TaxRebateId equals taxCredit.Id into
-                            taxCredit
-                        from taxCredits in taxCredit.DefaultIfEmpty()
-                        select new
-                        {
-                            POHDetails = pODetail,
-                            jobs.JobNumber,
-                            lines.AccountNumber,
-                            subAccount1 = subAccounts1.Description,
-                            taxCreditNumber = taxCredits.Number,
-                            VendorName = vendors.LastName
-
-                        };
-
-            query = query.Where(p => p.POHDetails.AccountingDocumentId.Value == input.AccountingDocumentId);
-
-            var results = await query
-                .AsNoTracking()
-                 .OrderBy(Helper.GetSort("POHDetails.CreationTime DESC", input.Sorting))
-                .PageBy(input)
-                .ToListAsync();
-            return new PagedResultOutput<PurchaseOrderHistoryUnitDto>(results.Count, results.Select(item =>
-            {
-                var dto = item.POHDetails.MapTo<PurchaseOrderHistoryUnitDto>();
-                dto.SubAccountNumber1 = item.subAccount1;
-                dto.JobNumber = item.JobNumber;
-                dto.AccountNumber = item.AccountNumber;
-                dto.TaxRebateNumber = item.taxCreditNumber;
-                dto.TypeOf1099T4 = item.POHDetails.TypeOf1099T4Id != null ? item.POHDetails.TypeOf1099T4Id.ToDisplayName() : "";
-                dto.VendorName = item.VendorName;
-                dto.AccountingItemId = item.POHDetails.Id;
-                dto.ModificationType = item.POHDetails.ModificationTypeId != null ? item.POHDetails.ModificationTypeId.ToDisplayName() : "";
-                return dto;
-            }).ToList());
-        }
 
         /// <summary>
         /// Close Purchase Orders by Purchase Orders List
@@ -652,28 +595,8 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
                     purchaseOrder.IsClose = true;
                     purchaseOrder.CloseDate = input.CloseDate;
                     await _purchaseOrderEntryDocumentUnitManager.UpdateAsync(purchaseOrder);
-
-                    //Tracking Purchase Order Lines into Purchase Order History Table
-                    var PoDetailsList = await _purchaseOrderDetailUnitRepository.GetAllListAsync(u => u.AccountingDocumentId == accountDocumentId);
-                    await CreatePurchaseOrderHistory(PoDetailsList, ModificationType.Closed);
                 }
-
             }
         }
-
-        private async Task CreatePurchaseOrderHistory(List<PurchaseOrderEntryDocumentDetailUnit> poDetailsList, ModificationType modModificationType)
-        {
-            var purchaseOrderHistory = new PurchaseOrderHistory();
-            Mapper.CreateMap<PurchaseOrderEntryDocumentDetailUnit, PurchaseOrderHistory>().ForMember(u => u.Id, ap => ap.Ignore());
-
-            foreach (var PoDetail in poDetailsList)
-            {
-                PoDetail.MapTo(purchaseOrderHistory);
-                purchaseOrderHistory.AccountingItemId = PoDetail.Id;
-                purchaseOrderHistory.ModificationTypeId = modModificationType;
-                await _purchaseOrderHistoryRepository.InsertAsync(purchaseOrderHistory);
-            }
-        }
-
     }
 }

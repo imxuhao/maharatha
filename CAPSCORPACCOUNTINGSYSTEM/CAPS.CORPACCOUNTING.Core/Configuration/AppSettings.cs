@@ -9,6 +9,7 @@ namespace CAPS.CORPACCOUNTING.Configuration
         public static class General
         {
             public const string WebSiteRootAddress = "App.General.WebSiteRootAddress";
+            public const string AuditSaveToDB = "Sumit.General.AuditSaveToDB";
         }
 
         public static class TenantManagement

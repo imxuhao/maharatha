@@ -171,6 +171,7 @@
     <Compile Include="Accounting\IListAppService.cs" />
     <Compile Include="Accounting\ISubAccountUnitAppService.cs" />
     <Compile Include="Accounting\ListAppService.cs" />
+    <Compile Include="Accounting\PoProcessing.cs" />
     <Compile Include="Accounting\SubAccountUnitAppService.cs" />
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentAppService.cs" />
     <Compile Include="AccountReceivable\Dto\ArInvoiceEntryDetailInputUnit.cs" />

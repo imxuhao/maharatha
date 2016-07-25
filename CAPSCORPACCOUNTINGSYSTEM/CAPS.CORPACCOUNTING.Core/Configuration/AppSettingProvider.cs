@@ -16,6 +16,7 @@ namespace CAPS.CORPACCOUNTING.Configuration
                    {
                        //Host settings
                        new SettingDefinition(AppSettings.General.WebSiteRootAddress, "http://localhost:6240/"),
+                        new SettingDefinition(AppSettings.General.AuditSaveToDB,ConfigurationManager.AppSettings[AppSettings.General.AuditSaveToDB] ?? "false"),
                        new SettingDefinition(AppSettings.TenantManagement.AllowSelfRegistration, ConfigurationManager.AppSettings[AppSettings.TenantManagement.UseCaptchaOnRegistration] ?? "true"),
                        new SettingDefinition(AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault, ConfigurationManager.AppSettings[AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault] ?? "false"),
                        new SettingDefinition(AppSettings.TenantManagement.UseCaptchaOnRegistration, ConfigurationManager.AppSettings[AppSettings.TenantManagement.UseCaptchaOnRegistration] ?? "true"),

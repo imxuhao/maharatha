@@ -1,5 +1,7 @@
 ﻿using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Masters;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CAPS.CORPACCOUNTING.PurchaseOrders
@@ -10,8 +12,9 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
     [Table("CAPS_PurchaseOrderEntryDocumentDetail")]
     public class PurchaseOrderEntryDocumentDetailUnit : AccountingItemUnit
     {
+        public const int MaxLength = 100;
         /// <summary>Gets or sets the IsPrePaid field. </summary>   
-        public virtual bool IsPrePaid { get; set; } 
+        public virtual bool IsPrePaid { get; set; }
 
         /// <summary>Gets or sets the IsPOPurchase field. </summary>   
         public virtual bool? IsPoPurchase { get; set; }
@@ -33,5 +36,24 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders
 
         /// <summary>Gets or sets the PendingAmount field. </summary>
         public virtual decimal? PendingAmount { get; set; }
+
+        /// <summary>Gets or sets the IsClose field. </summary> 
+        public virtual bool? IsClose { get; set; }
+
+        /// <summary>Gets or sets the CloseDate field. </summary> 
+        public virtual DateTime? CloseDate { get; set; }
+
+        /// <summary>Get Sets the SourceTypeId field.</summary>
+        public virtual SourceType? SourceTypeId { get; set; }
+
+        /// <summary>Get Sets the DocumentReference field.</summary>
+        [StringLength(MaxLength)]
+        public virtual string DocumentReference { get; set; }
+
+        /// <summary>Get Sets the SourceId field.</summary>
+        public virtual long? SourceId { get; set; }
+
+        [ForeignKey("SourceId")]
+        public virtual AccountingHeaderTransactionsUnit AccountingDocument { get; set; }
     }
 }

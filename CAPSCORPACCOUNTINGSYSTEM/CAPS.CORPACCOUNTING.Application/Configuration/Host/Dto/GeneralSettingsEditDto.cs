@@ -8,6 +8,10 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host.Dto
         [MaxLength(128)]
         public string WebSiteRootAddress { get; set; }
 
+        /// <summary>
+        /// This value is only used for Audit is tracking to Data Base
+        /// </summary>
+        public bool AuditSaveToDB { get; set; }
         public string Timezone { get; set; }
 
         /// <summary>

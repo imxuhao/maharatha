@@ -61,15 +61,21 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <param name="accountCache"></param>
         /// <param name="subAccountCache"></param>
         /// <param name="coaUnit"></param>
-        /// <param name="subAccountRestrictionRepository"></param>
         /// <param name="subAccountRestrictionCache"></param>
+        /// <param name="pettyCashAccountUnitRepository"></param>
+        /// <param name="vendorPaymentTermUnitRepository"></param>
+        /// <param name="bankAccountCache"></param>
+        /// <param name="purchaseOrderEntryDocumentDetailUnitRepository"></param>
+        /// <param name="purchaseOrderEntryDocumentUnitRepository"></param>
         public ListAppService(IRepository<SubAccountUnit, long> subAccountUnitRepository, IRepository<JobUnit> jobUnitRepository,
             CustomAppSession customAppSession, IRepository<AccountUnit, long> accountUnitRepository, ICacheManager cacheManager,
             IRepository<VendorUnit> vendorUnitRepository, IRepository<TaxCreditUnit> taxCreditUnitRepository, IVendorCache vendorCache,
             IDivisionCache dividsCache, IAccountCache accountCache, ISubAccountCache subAccountCache, IRepository<CoaUnit> coaUnit,
             ISubAccountRestrictionCache subAccountRestrictionCache,
-            IRepository<PettyCashAccountUnit, long> pettyCashAccountUnitRepository, IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository,
-            IBankAccountCache bankAccountCache, IRepository<PurchaseOrderEntryDocumentDetailUnit, long> purchaseOrderEntryDocumentDetailUnitRepository,
+            IRepository<PettyCashAccountUnit, long> pettyCashAccountUnitRepository,
+            IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository,
+            IBankAccountCache bankAccountCache,
+            IRepository<PurchaseOrderEntryDocumentDetailUnit, long> purchaseOrderEntryDocumentDetailUnitRepository,
             IRepository<PurchaseOrderEntryDocumentUnit, long> purchaseOrderEntryDocumentUnitRepository)
         {
             _subAccountUnitRepository = subAccountUnitRepository;
@@ -247,7 +253,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                     list = await GetTaxCreditListByNames(input);
                     break;
                 case "1099T4":
-                    list = await GetTypeof1099T4ListByNames(input);
+                    list = GetTypeof1099T4ListByNames(input);
                     break;
             }
             return list;
@@ -331,14 +337,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             var vendorsList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
             var strVendorNames = input.NameValueList.Select(u => u.Name).ToArray();
-            //var result = (from vendorNames in input.NameValueList
-            //              join vendor in vendorsList.ToList()
-            //              on vendorNames.Name equals vendor.LastName
-            //              select new NameValueDto()
-            //              {
-            //                  Name = vendorNames.Name,
-            //                  Value = vendor?.VendorId.ToString() ?? ""
-            //              }).ToList();
 
             var vendorFirstNameList = vendorsList.ToList().Where(u => strVendorNames.Contains(u.FirstName))
             .Select(u => new NameValueDto()
@@ -400,7 +398,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<List<NameValueDto>> GetTypeof1099T4ListByNames(NameValueInputList input)
+        private List<NameValueDto> GetTypeof1099T4ListByNames(NameValueInputList input)
         {
             var result =
                 (from value in input.NameValueList
@@ -514,6 +512,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
         }
 
+        /// <summary>
+        /// Get CheckType List
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetCheckTypeList()
+        {
+            return EnumList.GetCheckTypeList();
+        }
 
     }
 

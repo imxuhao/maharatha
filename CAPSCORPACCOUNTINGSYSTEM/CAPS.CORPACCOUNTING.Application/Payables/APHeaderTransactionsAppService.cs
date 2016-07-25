@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Domain.Repositories;
@@ -20,14 +19,17 @@ using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.JobCosting;
 using CAPS.CORPACCOUNTING.Journals.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
-using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.PettyCash;
 using CAPS.CORPACCOUNTING.PurchaseOrders;
-using Glimpse.Core.Framework;
+using Abp.Events.Bus;
 
 namespace CAPS.CORPACCOUNTING.Payables
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     [AbpAuthorize(AppPermissions.Pages_Payables_Invoices)] //This is to ensure only logged in user has access to this module.
     public class APHeaderTransactionsAppService : CORPACCOUNTINGServiceBase, IAPHeaderTransactionsAppService
     {
@@ -48,8 +50,29 @@ namespace CAPS.CORPACCOUNTING.Payables
         private readonly IRepository<PurchaseOrderEntryDocumentDetailUnit, long> _purchaseOrderEntryDocumentDetailUnitRepository;
         private readonly PurchaseOrderEntryDocumentAppService _purchaseOrderEntryDocumentAppService;
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEventBus EventBus { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="apHeaderTransactionsUnitManager"></param>
+        /// <param name="apHeaderTransactionsUnitRepository"></param>
+        /// <param name="vendorUnitRepository"></param>
+        /// <param name="batchUnitRepository"></param>
+        /// <param name="invoiceEntryDocumentDetailUnitRepository"></param>
+        /// <param name="invoiceEntryDocumentDetailUnitManager"></param>
+        /// <param name="jobUnitRepository"></param>
+        /// <param name="accountUnitRepository"></param>
+        /// <param name="subAccountUnitRepository"></param>
+        /// <param name="taxCreditUnitRepository"></param>
+        /// <param name="userUnitRepository"></param>
+        /// <param name="pettyCashAccountUnitRepository"></param>
+        /// <param name="bankAccountUnitRepository"></param>
+        /// <param name="vendorPaymentTermUnitRepository"></param>
+        /// <param name="purchaseOrderEntryDocumentDetailUnitRepository"></param>
+        /// <param name="purchaseOrderEntryDocumentAppService"></param>
         public APHeaderTransactionsAppService(APHeaderTransactionsUnitManager apHeaderTransactionsUnitManager,
             IRepository<ApHeaderTransactions, long> apHeaderTransactionsUnitRepository, IRepository<VendorUnit> vendorUnitRepository,
             IRepository<BatchUnit> batchUnitRepository, IRepository<InvoiceEntryDocumentDetailUnit, long> invoiceEntryDocumentDetailUnitRepository,
@@ -132,28 +155,14 @@ namespace CAPS.CORPACCOUNTING.Payables
                     if (invoiceEntryDocumentDetail.AccountingItemId == 0)
                     {
                         await CreateAPHeaderTransactionDetailUnit(invoiceEntryDocumentDetail, input.AccountingDocumentId);
-                        // UpdatePurchaseOrderAmount(long id, decimal amount)
                     }
                     else if (invoiceEntryDocumentDetail.AccountingItemId > 0)
                     {
                         await UpdateAPHeaderTransactionDetailUnit(invoiceEntryDocumentDetail);
                     }
-                    else
-                    {
-                        var invoiceEntryDocumentDetailUnit = await _invoiceEntryDocumentDetailUnitRepository.GetAsync(invoiceEntryDocumentDetail.AccountingItemId);
-                        if (invoiceEntryDocumentDetailUnit.OriginalItemId > 0)
-                        {
-                            //await UpdatePurchaseOrderDetailUnit(invoiceEntryDocumentDetailUnit.OriginalItemId.Value,
-                            //    invoiceEntryDocumentDetailUnit.Amount.Value * 2, invoiceEntryDocumentDetailUnit.Amount.Value);
-                        }
-                        IdInput<long> idInput = new IdInput<long>()
-                        {
-                            Id = (invoiceEntryDocumentDetail.AccountingItemId * (-1))
-                        };
-                        await _invoiceEntryDocumentDetailUnitManager.DeleteAsync(idInput);
-                    }
                 }
             }
+           
             await CurrentUnitOfWork.SaveChangesAsync();
         }
 
@@ -170,7 +179,10 @@ namespace CAPS.CORPACCOUNTING.Payables
 
             foreach (var invoiceDetail in invoiceDetailsList)
             {
-                await _purchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType(invoiceDetail, null);
+                if (invoiceDetail.PoAccountingItemId.Value > 0)
+                {
+                    await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(invoiceDetail, null);
+                }
             }
 
             await _invoiceEntryDocumentDetailUnitRepository.DeleteAsync(p => p.AccountingDocumentId == input.Id);
@@ -325,9 +337,10 @@ namespace CAPS.CORPACCOUNTING.Payables
             input.AccountingDocumentId = accountingDocumnetId;
             var invoiceEntryDocumentDetailUnit = input.MapTo<InvoiceEntryDocumentDetailUnit>();
             await _invoiceEntryDocumentDetailUnitManager.CreateAsync(invoiceEntryDocumentDetailUnit);
-            if (input.PurchaseOrderItemId.Value > 0)
+
+            if (input.PoAccountingItemId.Value > 0)
             {
-                await _purchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType(null, invoiceEntryDocumentDetailUnit);
+                await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(null, invoiceEntryDocumentDetailUnit);
             }
         }
 
@@ -339,15 +352,19 @@ namespace CAPS.CORPACCOUNTING.Payables
         private async Task UpdateAPHeaderTransactionDetailUnit(InvoiceEntryDocumentDetailInputUnit invoiceEntryDocumentDetail)
         {
             var invoiceEntryDocumentDetailUnit = await _invoiceEntryDocumentDetailUnitRepository.GetAsync(invoiceEntryDocumentDetail.AccountingItemId);
-            if (invoiceEntryDocumentDetail.PurchaseOrderItemId.Value > 0)
+
+            if (invoiceEntryDocumentDetail.PoAccountingItemId.Value > 0)
             {
                 var newInvoiceDetails = new InvoiceEntryDocumentDetailUnit();
                 Mapper.CreateMap<InvoiceEntryDocumentDetailUnit, InvoiceEntryDocumentDetailUnit>();
                 invoiceEntryDocumentDetail.MapTo(newInvoiceDetails);
-                await _purchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType(invoiceEntryDocumentDetailUnit, newInvoiceDetails);
+                newInvoiceDetails.Id = invoiceEntryDocumentDetail.AccountingItemId;
+                await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(invoiceEntryDocumentDetailUnit, newInvoiceDetails);
             }
             Mapper.Map(invoiceEntryDocumentDetail, invoiceEntryDocumentDetailUnit);
+           
             await _invoiceEntryDocumentDetailUnitManager.UpdateAsync(invoiceEntryDocumentDetailUnit);
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
 
         /// <summary>
@@ -360,7 +377,11 @@ namespace CAPS.CORPACCOUNTING.Payables
         public async Task DeleteAPHeaderTransactionDetailUnit(IdInput<long> input)
         {
             var invoiceDetail = await _invoiceEntryDocumentDetailUnitRepository.GetAsync(input.Id);
-            await _purchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType(invoiceDetail, null);
+
+            if(invoiceDetail.PoAccountingItemId.Value>0)
+            await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(invoiceDetail, null);
+
+            await _invoiceEntryDocumentDetailUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
     }

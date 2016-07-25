@@ -40,7 +40,8 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
                 {
                     WebSiteRootAddress = await SettingManager.GetSettingValueAsync(AppSettings.General.WebSiteRootAddress),
                     Timezone = timezone,
-                    TimezoneForComparison = timezone
+                    TimezoneForComparison = timezone,
+                    AuditSaveToDB = await SettingManager.GetSettingValueAsync<bool>(AppSettings.General.AuditSaveToDB)
                 },
                 TenantManagement = new TenantManagementSettingsEditDto
                 {
@@ -98,6 +99,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
                     await SettingManager.ChangeSettingForApplicationAsync(TimingSettingNames.TimeZone, input.General.Timezone);
                 }
             }
+            await SettingManager.ChangeSettingForApplicationAsync(AppSettings.General.AuditSaveToDB, input.General.AuditSaveToDB.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
 
             //Tenant management
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.TenantManagement.AllowSelfRegistration, input.TenantManagement.AllowSelfRegistration.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));

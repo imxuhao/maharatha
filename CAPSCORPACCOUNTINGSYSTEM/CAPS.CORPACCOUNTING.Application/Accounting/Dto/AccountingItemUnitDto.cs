@@ -177,11 +177,11 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
         /// <summary>Gets or sets the CurrencyAdjustmentAmount field. </summary>
         public decimal? CurrencyAdjustmentAmount { get; set; }
 
-        /// <summary>Gets or sets the OriginalItemID field. </summary>
-        public long? OriginalItemId { get; set; }
+        /// <summary>Gets or sets the OriginalItemID field.[OriginalItemID renamed to PoAccountingItemId] </summary>
+        public long? PoAccountingItemId { get; set; }
 
         /// <summary>Gets or sets the OriginalItem field. </summary>
-        public string OriginalItem { get; set; }
+        public string PoAccountingItem { get; set; }
 
         /// <summary>Gets or sets the AccountingItemIDLink field. </summary>
         public long? AccountingItemIdLink { get; set; }
@@ -273,6 +273,17 @@ namespace CAPS.CORPACCOUNTING.Accounting.Dto
 
         /// <summary>Gets or sets the IsAccountingItemSplit field. </summary>
         public bool IsAccountingItemSplit { get; set; }
+
+        /// <summary>
+        /// Gets or sets the CheckTypeId field
+        /// </summary>
+        public virtual CheckType? CheckTypeId { get; set; }
+
+        /// <summary>Gets or sets the CheckType field. </summary>
+        public virtual string CheckType { get; set; }
+
+        /// <summary>Gets or sets the RowNumber field. </summary>
+        public virtual long? RowNumber { get; set; }
 
 
     }

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Accounting.Dto;
+using Abp.Events.Bus;
 
 namespace CAPS.CORPACCOUNTING.Payables.Dto
 {

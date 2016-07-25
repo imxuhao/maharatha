@@ -235,7 +235,7 @@ namespace CAPS.CORPACCOUNTING.Journals
                         join batch in _batchUnitRepository.GetAll() on journals.BatchId equals batch.Id
                             into batchunit
                         from batchunits in batchunit.DefaultIfEmpty()
-                        select new { Journals = journals, BatchName = batchunits.Description, CreatedUser = userunits.UserName };
+                        select new { Journals = journals, BatchName = batchunits.Description, CreatedUser = userunits.Name };
 
             if (!ReferenceEquals(input.Filters, null))
             {

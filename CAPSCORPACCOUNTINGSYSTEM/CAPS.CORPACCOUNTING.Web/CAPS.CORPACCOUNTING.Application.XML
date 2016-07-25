@@ -165,10 +165,10 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CurrencyAdjustmentAmount">
             <summary>Gets or sets the CurrencyAdjustmentAmount field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.OriginalItemId">
-            <summary>Gets or sets the OriginalItemID field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.PoAccountingItemId">
+            <summary>Gets or sets the OriginalItemID field.[OriginalItemID renamed to PoAccountingItemId] </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.OriginalItem">
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.PoAccountingItem">
             <summary>Gets or sets the OriginalItem field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.AccountingItemIdLink">
@@ -260,6 +260,17 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.IsAccountingItemSplit">
             <summary>Gets or sets the IsAccountingItemSplit field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CheckTypeId">
+            <summary>
+            Gets or sets the CheckTypeId field
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.CheckType">
+            <summary>Gets or sets the CheckType field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemUnitDto.RowNumber">
+            <summary>Gets or sets the RowNumber field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit">
             <summary>
@@ -374,8 +385,8 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CurrencyAdjustmentAmount">
             <summary>Gets or sets the CurrencyAdjustmentAmount field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.OriginalItemId">
-            <summary>Gets or sets the OriginalItemID field. </summary>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.PoAccountingItemId">
+            <summary>Gets or sets the OriginalItemID field.[OriginalItemID renamed to PoAccountingItemId] </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.AccountingItemIdLink">
             <summary>Gets or sets the AccountingItemIDLink field. </summary>
@@ -436,6 +447,14 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.IsAccountingItemSplit">
             <summary>Gets or sets the IsAccountingItemSplit field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.CheckTypeId">
+            <summary>
+            Gets or sets the CheckTypeId field
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.AccountingItemInputUnit.RowNumber">
+            <summary>Gets or sets the RowNumber field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput.Description">
             <summary>Gets or sets the Description field. </summary>
@@ -1087,8 +1106,12 @@
             <param name="accountCache"></param>
             <param name="subAccountCache"></param>
             <param name="coaUnit"></param>
-            <param name="subAccountRestrictionRepository"></param>
             <param name="subAccountRestrictionCache"></param>
+            <param name="pettyCashAccountUnitRepository"></param>
+            <param name="vendorPaymentTermUnitRepository"></param>
+            <param name="bankAccountCache"></param>
+            <param name="purchaseOrderEntryDocumentDetailUnitRepository"></param>
+            <param name="purchaseOrderEntryDocumentUnitRepository"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
@@ -1222,6 +1245,12 @@
             Get PurchaseOrders
              </summary>
              <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetCheckTypeList">
+            <summary>
+            Get CheckType List
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">
             <summary>
@@ -2623,6 +2652,11 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Configuration.Host.Dto.GeneralSettingsEditDto.AuditSaveToDB">
+            <summary>
+            This value is only used for Audit is tracking to Data Base
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Configuration.Host.Dto.GeneralSettingsEditDto.TimezoneForComparison">
             <summary>
@@ -9338,6 +9372,37 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.EventBus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.#ctor(CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Payables.ApHeaderTransactions,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BatchUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Payables.InvoiceEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.Payables.InvoiceEntryDocumentDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PettyCash.PettyCashAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService)">
+            <summary>
+            
+            </summary>
+            <param name="apHeaderTransactionsUnitManager"></param>
+            <param name="apHeaderTransactionsUnitRepository"></param>
+            <param name="vendorUnitRepository"></param>
+            <param name="batchUnitRepository"></param>
+            <param name="invoiceEntryDocumentDetailUnitRepository"></param>
+            <param name="invoiceEntryDocumentDetailUnitManager"></param>
+            <param name="jobUnitRepository"></param>
+            <param name="accountUnitRepository"></param>
+            <param name="subAccountUnitRepository"></param>
+            <param name="taxCreditUnitRepository"></param>
+            <param name="userUnitRepository"></param>
+            <param name="pettyCashAccountUnitRepository"></param>
+            <param name="bankAccountUnitRepository"></param>
+            <param name="vendorPaymentTermUnitRepository"></param>
+            <param name="purchaseOrderEntryDocumentDetailUnitRepository"></param>
+            <param name="purchaseOrderEntryDocumentAppService"></param>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Payables.APHeaderTransactionsAppService.CreateAPHeaderTransactionUnit(CAPS.CORPACCOUNTING.Payables.Dto.APHeaderTransactionsInputUnit)">
             <summary>
             Create APHeader Transactions
@@ -9602,6 +9667,13 @@
         <member name="M:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService.GetAPHeaderTransactionDetailUnitsByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             GetInvoiceEntryDocumentDetails By AccountingDocumentID
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Payables.IAPHeaderTransactionsAppService.DeleteAPHeaderTransactionDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete ApHeader Transactions Detail by Id
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -10684,6 +10756,28 @@
         <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.PendingAmount">
             <summary>Gets or sets the PendingAmount field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.RowNumber">
+            <summary>Gets or sets the RowNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SourceTypeId">
+            <summary>Gets or sets the SourceTypeId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.SourceType">
+            <summary>Gets or sets the ModificationTypeId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.DocumentReference">
+            <summary>Get Sets the DocumentReference field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.CreatedUser">
+            <summary>
+            Gets or sets CreatedUser
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.PurchaseOrders.Dto.PurchaseOrderHistoryUnitDto.creationTime">
+            <summary>
+            Gets or sets creationTime
+            </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.PurchaseOrders.IPurchaseOrderEntryDocumentAppService">
             <summary>
             
@@ -10756,7 +10850,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Common.ApprovedSoxUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderHistory,System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.#ctor(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderDetailUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Common.ApprovedSoxUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderHistoryUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.AccountingItemUnit,System.Int64})">
             <summary>
             
             </summary>
@@ -10817,6 +10911,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrderHistoryByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetCardInfoList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get CardHolder Information
@@ -10824,29 +10925,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.CreatePurchaseOrderHistory(CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,CAPS.CORPACCOUNTING.Helpers.Helper.RecordType)">
+        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.PoProcessingByPayType``1(``0,``0)">
             <summary>
-            Checks the accounting fields.
-            </summary>
-            <param name="originalDetailEntity"></param>
-            <param name="newDetailEntity"></param>
-            <param name="recordType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.UpdatePurchaseOrderDetailUnitByPayType``1(``0,``0)">
-            <summary>
-            
+            PO Processing By AP/CC/PC/MC/JE
             </summary>
             <typeparam name="T"></typeparam>
             <param name="originalOrderDetails"></param>
             <param name="newOrderDetails"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.GetPurchaseOrderHistoryByAccountingDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentAppService.ClosePurchaseOrders(CAPS.CORPACCOUNTING.PurchaseOrders.Dto.ClosePurchaseOrderInputDto)">

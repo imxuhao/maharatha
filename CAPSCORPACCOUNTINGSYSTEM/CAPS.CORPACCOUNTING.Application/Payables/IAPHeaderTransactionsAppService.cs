@@ -48,5 +48,12 @@ namespace CAPS.CORPACCOUNTING.Payables
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<InvoiceEntryDocumentDetailUnitDto>> GetAPHeaderTransactionDetailUnitsByAccountingDocumentId(GetTransactionList input);
+
+        /// <summary>
+        /// Delete ApHeader Transactions Detail by Id
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeleteAPHeaderTransactionDetailUnit(IdInput<long> input);
     }
 }

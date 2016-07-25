@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.PurchaseOrders.Dto
 {
-    [AutoMapFrom(typeof(PurchaseOrderHistory))]
+    [AutoMapFrom(typeof(PurchaseOrderHistoryUnit))]
     public class PurchaseOrderHistoryUnitDto : IOutputDto
     {
         /// <summary>Overriding the Id column with AccountingItemId </summary>
@@ -315,6 +315,27 @@ namespace CAPS.CORPACCOUNTING.PurchaseOrders.Dto
         public virtual decimal? PendingAmount { get; set; }
 
 
+        /// <summary>Gets or sets the RowNumber field. </summary>
+        public virtual long? RowNumber { get; set; }
 
+        /// <summary>Gets or sets the SourceTypeId field. </summary>
+        public virtual SourceType? SourceTypeId { get; set; }
+
+        /// <summary>Gets or sets the ModificationTypeId field. </summary>
+        public string SourceType { get; set; }
+
+        /// <summary>Get Sets the DocumentReference field.</summary>
+        public virtual string DocumentReference { get; set; }
+
+        /// <summary>
+        /// Gets or sets CreatedUser
+        /// </summary>
+        public string CreatedUser { get; set; }
+
+        /// <summary>
+        /// Gets or sets creationTime
+        /// </summary>
+        public DateTime creationTime { get; set; }
+    
     }
 }

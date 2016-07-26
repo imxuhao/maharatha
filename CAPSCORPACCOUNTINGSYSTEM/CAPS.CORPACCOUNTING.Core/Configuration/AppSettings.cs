@@ -10,6 +10,7 @@ namespace CAPS.CORPACCOUNTING.Configuration
         {
             public const string WebSiteRootAddress = "App.General.WebSiteRootAddress";
             public const string AuditSaveToDB = "Sumit.General.AuditSaveToDB";
+            public const string UseRedisCacheByDefault = "Sumit.General.UseRedisCacheByDefault";
         }
 
         public static class TenantManagement

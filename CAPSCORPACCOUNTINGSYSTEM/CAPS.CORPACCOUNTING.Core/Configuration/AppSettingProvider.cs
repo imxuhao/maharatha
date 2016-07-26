@@ -15,12 +15,18 @@ namespace CAPS.CORPACCOUNTING.Configuration
             return new[]
                    {
                        //Host settings
-                       new SettingDefinition(AppSettings.General.WebSiteRootAddress, "http://localhost:6240/"),
-                        new SettingDefinition(AppSettings.General.AuditSaveToDB,ConfigurationManager.AppSettings[AppSettings.General.AuditSaveToDB] ?? "false"),
-                       new SettingDefinition(AppSettings.TenantManagement.AllowSelfRegistration, ConfigurationManager.AppSettings[AppSettings.TenantManagement.UseCaptchaOnRegistration] ?? "true"),
-                       new SettingDefinition(AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault, ConfigurationManager.AppSettings[AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault] ?? "false"),
-                       new SettingDefinition(AppSettings.TenantManagement.UseCaptchaOnRegistration, ConfigurationManager.AppSettings[AppSettings.TenantManagement.UseCaptchaOnRegistration] ?? "true"),
-                       new SettingDefinition(AppSettings.TenantManagement.DefaultEdition, ConfigurationManager.AppSettings[AppSettings.TenantManagement.DefaultEdition] ?? ""),
+                    new SettingDefinition(AppSettings.General.WebSiteRootAddress, "http://localhost:6240/"),
+                    //Based on AuditSaveToDB  setting TrackedAudit is Saved to Database 
+                    //if we set this setting as true the Audit will be saved to Database
+                    new SettingDefinition(AppSettings.General.AuditSaveToDB,ConfigurationManager.AppSettings[AppSettings.General.AuditSaveToDB] ?? "false"),
+                    new SettingDefinition(AppSettings.TenantManagement.AllowSelfRegistration, ConfigurationManager.AppSettings[AppSettings.TenantManagement.UseCaptchaOnRegistration] ?? "true"),
+                    new SettingDefinition(AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault, ConfigurationManager.AppSettings[AppSettings.TenantManagement.IsNewRegisteredTenantActiveByDefault] ?? "false"),
+                    new SettingDefinition(AppSettings.TenantManagement.UseCaptchaOnRegistration, ConfigurationManager.AppSettings[AppSettings.TenantManagement.UseCaptchaOnRegistration] ?? "true"),
+                   
+                    //RedisCacheFlag By Default Apllication Uses Redis Cache if we don't want to Use RedisCache we can set this setting as false
+                    new SettingDefinition(AppSettings.General.UseRedisCacheByDefault, ConfigurationManager.AppSettings[AppSettings.General.UseRedisCacheByDefault] ?? "true"),
+
+                    new SettingDefinition(AppSettings.TenantManagement.DefaultEdition, ConfigurationManager.AppSettings[AppSettings.TenantManagement.DefaultEdition] ?? ""),
 
                        //Tenant settings
                        new SettingDefinition(AppSettings.UserManagement.AllowSelfRegistration, ConfigurationManager.AppSettings[AppSettings.UserManagement.UseCaptchaOnRegistration] ?? "true", scopes: SettingScopes.Tenant),

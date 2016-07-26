@@ -41,7 +41,9 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
                     WebSiteRootAddress = await SettingManager.GetSettingValueAsync(AppSettings.General.WebSiteRootAddress),
                     Timezone = timezone,
                     TimezoneForComparison = timezone,
-                    AuditSaveToDB = await SettingManager.GetSettingValueAsync<bool>(AppSettings.General.AuditSaveToDB)
+                    AuditSaveToDB = await SettingManager.GetSettingValueAsync<bool>(AppSettings.General.AuditSaveToDB),
+                    //Get RedisCache
+                    UseRedisCacheByDefault = await SettingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault)
                 },
                 TenantManagement = new TenantManagementSettingsEditDto
                 {
@@ -86,6 +88,9 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
         {
             //General
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.General.WebSiteRootAddress, input.General.WebSiteRootAddress.EnsureEndsWith('/'));
+            
+            //RedisCacheFlag By Default Apllication Uses Redis Cache if we don't want to Use RedisCache we can set this setting as false
+            await SettingManager.ChangeSettingForApplicationAsync(AppSettings.General.UseRedisCacheByDefault, input.General.UseRedisCacheByDefault.ToString());
 
             if (Clock.SupportsMultipleTimezone())
             {
@@ -124,6 +129,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
             await SettingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.EnableSsl, input.Email.SmtpEnableSsl.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.UseDefaultCredentials, input.Email.SmtpUseDefaultCredentials.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
         }
+        
 
         public async Task SendTestEmail(SendTestEmailInput input)
         {

@@ -13,5 +13,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
         public int[] RoleIds { get; set; }
 
         public string[] RoleNames { get; set; }
+
+        public bool IsEmptyRoles{ get; set; }
     }
 }

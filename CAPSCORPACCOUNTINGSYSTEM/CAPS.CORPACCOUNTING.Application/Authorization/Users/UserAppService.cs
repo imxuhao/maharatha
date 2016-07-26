@@ -514,40 +514,47 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                     //Checking the User exist 
                     var userUnit =
                         await _userUnitRepository.FirstOrDefaultAsync(p => p.UserName == user.UserName);
-                    if (ReferenceEquals(userUnit, null))
+                    if (!tenant.IsEmptyRoles)
                     {
-                        //Assign roles
-                        user.Roles = new Collection<UserRole>();
-                        foreach (var roleId in tenant.RoleIds)
+                        if (ReferenceEquals(userUnit, null))
                         {
-                            user.Roles.Add(new UserRole { RoleId = roleId, TenantId = tenant.TenantId });
+                            //Assign roles
+                            user.Roles = new Collection<UserRole>();
+                            foreach (var roleId in tenant.RoleIds)
+                            {
+                                user.Roles.Add(new UserRole { RoleId = roleId, TenantId = tenant.TenantId });
+                            }
+
+                            CheckErrors(await UserManager.CreateAsync(user));
+                            await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
+
+                            userList.Add(user);
+                            //Notifications
+                            await
+                                _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(
+                                    user.ToUserIdentifier());
+                            await _appNotifier.WelcomeToTheApplicationAsync(user);
+
+                            //Send activation email
+                            if (input.SendActivationEmail)
+                            {
+                                user.SetNewEmailConfirmationCode();
+                                await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
+                            }
+
                         }
-
-                        CheckErrors(await UserManager.CreateAsync(user));
-                        await CurrentUnitOfWork.SaveChangesAsync(); //To get new user's Id.
-
-                        userList.Add(user);
-                        //Notifications
-                        await
-                            _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(
-                                user.ToUserIdentifier());
-                        await _appNotifier.WelcomeToTheApplicationAsync(user);
-
-                        //Send activation email
-                        if (input.SendActivationEmail)
+                        else
                         {
-                            user.SetNewEmailConfirmationCode();
-                            await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
-                        }
+                            //Update roles
+                            CheckErrors(await UserManager.SetRoles(userUnit, tenant.RoleNames));
 
+                            userList.Add(userUnit);
+                            await CurrentUnitOfWork.SaveChangesAsync();
+                        }
                     }
                     else
                     {
-                        //Update roles
                         CheckErrors(await UserManager.SetRoles(userUnit, tenant.RoleNames));
-                       
-                        userList.Add(userUnit);
-                        await CurrentUnitOfWork.SaveChangesAsync();
                     }
                 }
             }

@@ -53,7 +53,7 @@
                 id: cacheName
             };
             Ext.Ajax.request({
-                url: '/api/services/app/caching/ClearCache',
+                url: abp.appPath + 'api/services/app/caching/ClearCache',
                 jsonData : Ext.encode(data),      
                 success: function () {
                     abp.notify.success(app.localize('CacheSuccessfullyCleared'));
@@ -71,7 +71,7 @@
 
     clearAllCaches: function () {      
         Ext.Ajax.request({
-            url: '/api/services/app/caching/ClearAllCaches',
+            url: abp.appPath + 'api/services/app/caching/ClearAllCaches',
             method: 'POST',
 
             success: function () {
@@ -84,11 +84,11 @@
     },
 
     buttonClicked: function (view, record, item, index, e, eOpts) {        
-        if (item.name == "downloadAllButton") {           
+        if (item.name == "downloadAllButton") {
             Ext.Ajax.request({                
-                    url: '/api/services/app/webLog/DownloadWebLogs',
+                    url: abp.appPath + 'api/services/app/webLog/DownloadWebLogs',
                     method: 'POST',
-                    success: function (result) {                       
+                    success: function (result) {
                         var res = Ext.decode(result.responseText);
                         if (res.success && res.result) {
                             location.href = abp.appPath + 'File/DownloadTempFile?fileType=' + res.result.fileType + '&fileToken=' + res.result.fileToken + '&fileName=' + res.result.fileName;

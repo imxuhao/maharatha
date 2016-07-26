@@ -197,7 +197,7 @@
                                                 xtype: 'button',
                                                 itemId: 'buttonPanelId',
                                                 ui: 'actionButton',
-                                                margin: '20px 0px 0px 20px',
+                                                margin: '10px 0px 0px 20px',
                                                 scale: 'small',
                                                 text: app.localize('ChangeLogo').toUpperCase(),
                                                 actionButton: true,
@@ -704,34 +704,53 @@
                                 fieldLabel: app.localize('PaymentGracePeriods').initCap(),
                                 width: '100%',
                                 ui: 'fieldLabelTop'
-                            }, {
-                                xtype: 'chachingcombobox',
-                                store: new Chaching.store.utilities.autofill.BankAccountListStore(),
-                                fieldLabel: app.localize('DefaultBank'),
-                                ui: 'fieldLabelTop',
-                                width: '100%',
-                                name: 'defaultBank',
-                                valueField: 'bankAccountId',
-                                displayField: 'bankAccountNumber',
-                                queryMode: 'remote',
-                                minChars: 2,
-                                useDisplayFieldToSearch: true,
-                                modulePermissions: {
-                                    read: abp.auth.isGranted('Pages.Banking.BankSetup'),
-                                    create: abp.auth.isGranted('Pages.Banking.BankSetup.Create'),
-                                    edit: abp.auth.isGranted('Pages.Banking.BankSetup.Edit'),
-                                    destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete')
-                                },
-                                primaryEntityCrudApi: {
-                                    read: abp.appPath + 'api/services/app/list/GetBankAccountList',
-                                    create: abp.appPath + 'api/services/app/bankAccountUnit/CreateBankAccountUnit',
-                                    update: abp.appPath + 'api/services/app/bankAccountUnit/UpdateBankAccountUnit',
-                                    destroy: abp.appPath + 'api/services/app/bankAccountUnit/DeleteBankAccountUnit'
-                                },
-                                createEditEntityType: 'banking.banksetup',
-                                createEditEntityGridController: 'banking.banksetupgrid',
-                                entityType: 'Bank Account'
-                            }, {
+                            },
+
+                             {
+                                 xtype: 'combobox',
+                                 name: 'defaultBank',
+                                 reference: 'defaultBankCombo',
+                                 emptyText: app.localize('SelectOption'),
+                                 width: '100%',
+                                 ui: 'fieldLabelTop',
+                                 displayField: 'bankAccountNumber',
+                                 valueField: 'bankAccountId',
+                                 queryMode: 'local',
+                                 fieldLabel: app.localize('DefaultBank'),
+                                 store: Ext.create('Chaching.store.utilities.autofill.BankAccountListStore', {remoteSort : false, remoteFilter : false})
+
+                             },
+
+                            //{
+                            //    xtype: 'chachingcombobox',
+                            //    store: new Chaching.store.utilities.autofill.BankAccountListStore(),
+                            //    fieldLabel: app.localize('DefaultBank'),
+                            //    ui: 'fieldLabelTop',
+                            //    width: '100%',
+                            //    name: 'defaultBank',
+                            //    valueField: 'bankAccountId',
+                            //    displayField: 'bankAccountNumber',
+                            //    queryMode: 'remote',
+                            //    minChars: 2,
+                            //    useDisplayFieldToSearch: true,
+                            //    modulePermissions: {
+                            //        read: abp.auth.isGranted('Pages.Banking.BankSetup'),
+                            //        create: abp.auth.isGranted('Pages.Banking.BankSetup.Create'),
+                            //        edit: abp.auth.isGranted('Pages.Banking.BankSetup.Edit'),
+                            //        destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete')
+                            //    },
+                            //    primaryEntityCrudApi: {
+                            //        read: abp.appPath + 'api/services/app/list/GetBankAccountList',
+                            //        create: abp.appPath + 'api/services/app/bankAccountUnit/CreateBankAccountUnit',
+                            //        update: abp.appPath + 'api/services/app/bankAccountUnit/UpdateBankAccountUnit',
+                            //        destroy: abp.appPath + 'api/services/app/bankAccountUnit/DeleteBankAccountUnit'
+                            //    },
+                            //    createEditEntityType: 'banking.banksetup',
+                            //    createEditEntityGridController: 'banking.banksetupgrid',
+                            //    entityType: 'Bank Account'
+                            //},
+
+                            {
                                 xtype: 'checkbox',
                                 name: 'allowTransactionsJobWithGL',
                                 labelAlign: 'right',

@@ -18,6 +18,10 @@ using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.IO;
 using CAPS.CORPACCOUNTING.Net.MimeTypes;
 using CAPS.CORPACCOUNTING.Storage;
+using Abp.Domain.Repositories;
+using CAPS.CORPACCOUNTING.MultiTenancy;
+using CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto;
+using Abp.IO;
 
 namespace CAPS.CORPACCOUNTING.Web.Controllers
 {
@@ -27,15 +31,127 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         private readonly UserManager _userManager;
         private readonly IBinaryObjectManager _binaryObjectManager;
         private readonly IAppFolders _appFolders;
+        protected IRepository<TenantExtendedUnit> _tenantExtendedUnitRepository { get; private set; }
 
         public ProfileController(
             UserManager userManager,
             IBinaryObjectManager binaryObjectManager,
-            IAppFolders appFolders)
+            IAppFolders appFolders,
+            IRepository<TenantExtendedUnit> tenantExtendedUnitRepository)
         {
             _userManager = userManager;
             _binaryObjectManager = binaryObjectManager;
             _appFolders = appFolders;
+            _tenantExtendedUnitRepository = tenantExtendedUnitRepository;
+        }
+
+        public JsonResult UploadCompanyLogo()
+        {
+            try
+            {
+                //Check input
+                if (Request.Files.Count <= 0 || Request.Files[0] == null)
+                {
+                    throw new UserFriendlyException(L("ProfilePicture_Change_Error"));
+                }
+
+                var file = Request.Files[0];
+
+                if (file.ContentLength > 5242880) //1MB.
+                {
+                    throw new UserFriendlyException(L("ProfilePicture_Warn_SizeLimit"));
+                }
+
+                //Check file type & format
+                var fileImage = Image.FromStream(file.InputStream);
+                if (!fileImage.RawFormat.Equals(ImageFormat.Jpeg) && !fileImage.RawFormat.Equals(ImageFormat.Png))
+                {
+                    throw new ApplicationException("Uploaded file is not an accepted image file !");
+                }
+
+                //Delete old temp profile pictures
+                AppFileHelper.DeleteFilesInFolderIfExists(_appFolders.TempFileDownloadFolder, "sumitOrgImage");
+
+                //Save new picture
+                var fileInfo = new FileInfo(file.FileName);
+                var tempFileName = "sumitOrgImage" + fileInfo.Extension;
+                var tempFilePath = Path.Combine(_appFolders.TempFileDownloadFolder, tempFileName);
+                file.SaveAs(tempFilePath);
+
+                using (var bmpImage = new Bitmap(tempFilePath))
+                {
+                    return Json(new MvcAjaxResponse(new { fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
+                }
+            }
+            catch (UserFriendlyException ex)
+            {
+                return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
+            }
+        }
+
+        [DisableAuditing]
+        public JsonResult ShowCompanyLogo(UpdateProfilePictureInput input)
+        {
+            try
+            {
+                //FileResult picture;
+                //var tenantExtenedUnit = await _tenantExtendedUnitRepository.FirstOrDefaultAsync(p => p.TenantId == AbpSession.GetTenantId());
+                //if (ReferenceEquals(tenantExtenedUnit.Logo, null))
+                //{
+                //    picture = GetDefaultCompanyLogo();
+                //}
+                //else
+                //{
+                //    picture = tenantExtenedUnit.Logo != null ? File(tenantExtenedUnit.Logo, MimeTypeNames.ImageJpeg) : GetDefaultCompanyLogo();
+                //}
+                //var contentType = picture.ContentType;
+                //var fileContent = ((System.Web.Mvc.FileContentResult)picture).FileContents;
+
+                //var base64String = Convert.ToBase64String(fileContent);
+                //return Json((new { image = base64String, contentType = contentType, success = true }), JsonRequestBehavior.AllowGet);
+
+
+                var tempProfilePicturePath = Path.Combine(_appFolders.TempFileDownloadFolder, input.FileName);
+
+            byte[] byteArray;
+
+            using (var fsTempProfilePicture = new FileStream(tempProfilePicturePath, FileMode.Open))
+            {
+                using (var bmpImage = new Bitmap(fsTempProfilePicture))
+                {
+                    var width = input.Width == 0 ? bmpImage.Width : input.Width;
+                    var height = input.Height == 0 ? bmpImage.Height : input.Height;
+                    var bmCrop = bmpImage.Clone(new Rectangle(input.X, input.Y, width, height), bmpImage.PixelFormat);
+
+                    using (var stream = new MemoryStream())
+                    {
+                        bmCrop.Save(stream, bmpImage.RawFormat);
+                        stream.Close();
+                        byteArray = stream.ToArray();
+                    }
+                }
+            }
+
+            if (byteArray.LongLength > 1024000) //1000 KB
+            {
+                throw new UserFriendlyException(L("ResizedProfilePicture_Warn_SizeLimit"));
+            }
+
+           
+            //return byteArray;
+            var base64String = Convert.ToBase64String(byteArray);
+            return Json(new MvcAjaxResponse(new { image = base64String, success = true }), JsonRequestBehavior.AllowGet);
+        } catch (UserFriendlyException ex)
+            {
+                return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
+            }
+            //return Json((new { image = base64String, success = true }), JsonRequestBehavior.AllowGet);
+        }
+
+
+        private FileResult GetDefaultCompanyLogo()
+        {
+            return File(Server.MapPath("~/Common/Images/default-profile-picture.png"), MimeTypeNames.ImagePng);
         }
 
         [DisableAuditing]

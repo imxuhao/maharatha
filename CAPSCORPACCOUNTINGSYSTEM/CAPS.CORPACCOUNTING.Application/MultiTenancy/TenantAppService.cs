@@ -222,17 +222,18 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Create)]
         public async Task UpdateCompanyUnit(TenantExtendedUnitInput input)
         {
+            byte[] logo = null;
             int tenantid = AbpSession.TenantId.Value;
             using (_unitOfWorkManager.Current.SetTenantId(tenantid))
             {
                 if (input.TenantExtendedId > 0)
                 {
 
-                    byte[] logo = null;
                     if (!ReferenceEquals(input.ComapanyLogo, null))
                         logo = await UpdateCompanyLogo(input.ComapanyLogo);
 
                     var tenant = await _tenantExtendedUnitRepository.GetAsync(input.TenantExtendedId);
+                    tenant.Logo = logo;
                     await _tenantExtendedManager.UpdateAsync(tenant);
 
                     // update address Information
@@ -263,7 +264,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 }
                 else
                 {
+                    if (!ReferenceEquals(input.ComapanyLogo, null))
+                        logo = await UpdateCompanyLogo(input.ComapanyLogo);
                     var tenantExtended = input.MapTo<TenantExtendedUnit>();
+                    tenantExtended.Logo = logo;
                     int id = await _tenantExtendedManager.CreateAsync(tenantExtended);
                     //address Information
                     if (!ReferenceEquals(input.Address, null))
@@ -353,7 +357,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 }
             }
 
-            if (byteArray.LongLength > 102400) //100 KB
+            if (byteArray.LongLength > 1024000) //100 KB
             {
                 throw new UserFriendlyException(L("ResizedProfilePicture_Warn_SizeLimit"));
             }

@@ -3804,6 +3804,9 @@
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSpreadsheetModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\companysetup\CompanyLogoForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\companysetup\CompanyLogoFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\administration\companysetup\CompanyLogoView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\OrganizationTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\companysetup\CompanyForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\companysetup\CompanyFormController.js" />

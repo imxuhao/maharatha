@@ -136,7 +136,7 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
             treeList.originalState = treeList.getMicro();
             treeList.setMicro(true);
             westPanel.setWidth(80);
-            logo = northPanel.down('image[itemId=CapsLogo]');
+            logo = northPanel.down('image[itemId=companyLogoImage]');
             logo.setWidth(0);
 
         } else if (westPanel && northPanel) {
@@ -144,7 +144,7 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
             var originalState = treeList.originalState === undefined ? false : treeList.originalState;
             treeList.setMicro(originalState);
             westPanel.setWidth(!originalState ? 250 : 80);
-            logo = northPanel.down('image[itemId=CapsLogo]');
+            logo = northPanel.down('image[itemId=companyLogoImage]');
             logo.setWidth(!originalState ? 110 : 0);
         }
     },

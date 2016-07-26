@@ -960,6 +960,7 @@
     <text name="CompanyInvoiceDate" value="Invoice Date" />
     <text name="CurrentDate" value="Current Date" />
     <text name="CompanyLogo" value="Company Logo" />
+    <text name="ChangeLogo" value="Change Logo" />
     <text name="CompanyLogo_Change_Info" value="Maximum 1MB size." />
     <text name="CreateNewCompanySetup" value="Create New Company Setup" />
     <text name="EditCompanySetup" value="Edit Company Setup" />

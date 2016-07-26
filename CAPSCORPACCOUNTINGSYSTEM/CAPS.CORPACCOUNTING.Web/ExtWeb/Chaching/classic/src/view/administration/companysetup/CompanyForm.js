@@ -176,25 +176,78 @@
                                              fieldLabel: app.localize('FedTaxID').initCap(),
                                              width: '100%',
                                              ui: 'fieldLabelTop'
-                                         }, {
-                                             xtype: 'filefield',
-                                             name: 'companyLogo',
-                                             // ui: 'default',
-                                             // ui: 'fieldLabelTop',
-                                             labelStyle: "font: 600 13px/17px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;",
-                                             fieldLabel: app.localize('CompanyLogo'),
-                                             clearOnSubmit: false,
-                                             anchor: '100%',
+                                         },
+
+                                         {
+                                             xtype: 'fieldcontainer',
                                              width: '100%',
-                                             buttonText: 'Select Logo...',
-                                             listeners: {
-                                                 change: 'onFileChange'
-                                             }
-                                         }, {
-                                             xtype: 'label',
-                                             text: app.localize('CompanyLogo_Change_Info').initCap(),
-                                             width: '100%'
-                                         }]
+                                             layout: {
+                                                 type: 'hbox'//,
+                                                // align : 'stretch'
+                                             },
+                                             items : [{
+                                                 xtype: 'image',
+                                                 width: 90,
+                                                 height: 60,
+                                                 itemId: 'companyLogo',
+                                                 flex : 1,
+                                                 src: abp.appPath + 'Content/images/capslogo.png'
+                                             },
+                                             {
+                                                xtype: 'button',
+                                                itemId: 'buttonPanelId',
+                                                ui: 'actionButton',
+                                                margin: '20px 0px 0px 20px',
+                                                scale: 'small',
+                                                text: app.localize('ChangeLogo').toUpperCase(),
+                                                actionButton: true,
+                                                handler: 'onCompanyLogoClick'
+                                               }
+
+                                             //{
+                                             //    xtype: 'panel',
+                                             //    cls: 'buttonPanelCls',
+                                             //    itemId: 'buttonPanel',
+                                             //    margin: '20px 0px 0px 20px',
+                                             //    items: [{
+                                             //        xtype: 'button',
+                                             //        itemId: 'buttonPanelId',
+                                             //        ui: 'actionButton',
+                                             //        scale: 'small',
+                                             //        text: app.localize('ChangeLogo').toUpperCase(),
+                                             //        actionButton: true,
+                                             //        handler: 'onCompanyLogoClick'
+                                             //    }]
+                                             //}
+
+
+                                             ]
+
+                                            
+                                         }
+
+                                         //{
+                                         //    xtype: 'filefield',
+                                         //    name: 'companyLogo',
+                                         //    // ui: 'default',
+                                         //    // ui: 'fieldLabelTop',
+                                         //    labelStyle: "font: 600 13px/17px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif !important;",
+                                         //    fieldLabel: app.localize('CompanyLogo'),
+                                         //    clearOnSubmit: false,
+                                         //    anchor: '100%',
+                                         //    width: '100%',
+                                         //    buttonText: 'Select Logo...',
+                                         //    listeners: {
+                                         //        change: 'onFileChange'
+                                         //    }
+                                         //}, {
+                                         //    xtype: 'label',
+                                         //    text: app.localize('CompanyLogo_Change_Info').initCap(),
+                                         //    width: '100%'
+                                         //}
+
+
+]
                                      }]
                      },
                      {

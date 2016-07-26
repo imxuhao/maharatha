@@ -67,7 +67,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             var micro = treeList.getMicro();
             treeList.setMicro(!micro);
             westPanel.setWidth(micro ? 250 : 85);
-            var logo = view.down('image[itemId=CapsLogo]');
+            var logo = view.down('image[itemId=companyLogoImage]');
             logo.setWidth(micro ? 110 : 0);
         }
     },

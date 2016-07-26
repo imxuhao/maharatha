@@ -3,6 +3,7 @@
     alias: 'controller.administration-companysetup-companyform',
     initialTimezone: null,
     usingDefaultTimeZone: null,
+    companyLogo : null,
     onCompanySetupRender: function () {
         var me = this,
         view = me.getView(),
@@ -98,42 +99,50 @@
         }
     },
 
-    onFileChange: function (file, e, value) {
-        var me = this,
-        view = me.getView(),
-        companySetupForm = view.down('#companySetupTab');
-        if (file.value == "") {
-            return;
-        }
-        var newvalue = file.value.replace(/^c:\\fakepath\\/i, '');
-        file.setRawValue(newvalue);
-        if (file.value && !/^.*\.(Png|gif|jpg|jpeg|jfif|tiff|bmp)$/i.test(file.value)) {
-            abp.message.error(app.localize('ProfilePicture_Warn_FileType').initCap(), 'Error');
-            return;
-        };
-        if (file.fileInputEl && file.fileInputEl.dom && file.fileInputEl.dom.files && file.fileInputEl.dom.files[0].size > 2097152) {
-            abp.message.error(app.localize('ProfilePicture_Warn_SizeLimit').initCap(), 'Error');
-            return;
-        }
-        companySetupForm.submit({
-            url: abp.appPath + 'OrganizationUnits/UpdateOrganizationPicture',
-            success: function (form, response) {
-                if (response.result) {
-                    form.findField('companyLogo').value = "gjhsagjd"
-                    var data = response.result.result;
-                    if (response.success) {
-                        view.filePath = data.tempFilePath;
-                        view.dataobject = data;
-                        abp.notify.success(app.localize('UploadSuccess').initCap(), 'Success');
-                    }
-                }
-            },
-            failure: function (form, action) {
-                abp.notify.success(app.localize('Failed').initCap(), 'Error');
-            }
-        });
-
+    onCompanyLogoClick: function (btn) {
+        var me = this;
+        var companyLogoView = Ext.create('Chaching.view.administration.companysetup.CompanyLogoView');
+        var companyLogoForm = companyLogoView.down('form');
+        companyLogoForm.getController().parentController = me;
     },
+
+    //onFileChange: function (file, e, value) {
+    //    var me = this,
+    //    view = me.getView(),
+    //    companySetupForm = view.down('#companySetupTab');
+    //    if (file.value == "") {
+    //        return;
+    //    }
+    //    var newvalue = file.value.replace(/^c:\\fakepath\\/i, '');
+    //    file.setRawValue(newvalue);
+    //    if (file.value && !/^.*\.(Png|gif|jpg|jpeg|jfif|tiff|bmp)$/i.test(file.value)) {
+    //        abp.message.error(app.localize('ProfilePicture_Warn_FileType').initCap(), 'Error');
+    //        return;
+    //    };
+    //    if (file.fileInputEl && file.fileInputEl.dom && file.fileInputEl.dom.files && file.fileInputEl.dom.files[0].size > 2097152) {
+    //        abp.message.error(app.localize('ProfilePicture_Warn_SizeLimit').initCap(), 'Error');
+    //        return;
+    //    }
+    //    companySetupForm.submit({
+    //        url: abp.appPath + 'OrganizationUnits/UpdateOrganizationPicture',
+    //        success: function (form, response) {
+    //            if (response.result) {
+    //                form.findField('companyLogo').value = "gjhsagjd"
+    //                var data = response.result.result;
+    //                if (response.success) {
+    //                    view.filePath = data.tempFilePath;
+    //                    view.dataobject = data;
+    //                    abp.notify.success(app.localize('UploadSuccess').initCap(), 'Success');
+    //                }
+    //            }
+    //        },
+    //        failure: function (form, action) {
+    //            abp.notify.success(app.localize('Failed').initCap(), 'Error');
+    //        }
+    //    });
+
+    //},
+
     onSaveClicked: function (btn) {
         var me = this,
         view = me.getView(),
@@ -172,7 +181,7 @@
             isPrimary: true
         }
         record.data.address = address;
-        record.data.comapanyLogo = view.dataobject == null ? null : view.dataobject;
+        record.data.comapanyLogo = me.companyLogo == null ? null : me.companyLogo;
         // var timezoneCombo = view.down('combobox[itemId=timezone]');
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/tenant/UpdateCompanyUnit',
@@ -190,12 +199,9 @@
                 if (!Ext.isEmpty(result.exceptionMessage)) {
                     abp.message.error(result.exceptionMessage);
                 } else {
-                    abp.message.error(result.message);
+                    abp.message.error(result.error.details);
                 }
             }
-
-
-
         })
     },
     onSaveCompanyPreferences: function () {

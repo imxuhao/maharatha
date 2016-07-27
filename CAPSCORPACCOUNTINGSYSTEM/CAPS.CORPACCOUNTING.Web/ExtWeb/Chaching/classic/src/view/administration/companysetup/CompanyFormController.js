@@ -80,6 +80,55 @@
         });
     },
 
+    getDefaultCompanySettings : function(form) {
+        var me = this,
+           view = me.getView();
+        Ext.Ajax.request({
+            url: abp.appPath + 'api/services/app/tenantSettings/GetAllTenantSettings',
+            method: 'POST',
+            success: function (response) {
+                var result = Ext.decode(response.responseText);
+                if (result.success) {
+                    //load company setup information
+                    var record = Ext.create('Ext.data.Model');
+                    // load company settings
+                    if (result.result.companySettings) {
+                        Ext.apply(record.data, result.result.companySettings);
+                    }
+                    // load general information
+                    if (result.result.companySettings) {
+                        Ext.apply(record.data, result.result.general);
+                        me.initialTimezone = result.result.general.timezone;
+                        me.usingDefaultTimeZone = result.result.general.timezoneForComparison === abp.setting.values["Abp.Timing.TimeZone"];
+                    }
+                    // load userManagement information
+                    if (result.result.companySettings) {
+                        Ext.apply(record.data, result.result.userManagement);
+                    }
+                    //load company preferences
+                    form.loadRecord(record);
+                } else {
+                    abp.message.error(result.error.message);
+                }
+            },
+
+            failure: function (response) {
+                var result = Ext.decode(response.responseText);
+                if (!Ext.isEmpty(result.exceptionMessage)) {
+                    abp.message.error(result.exceptionMessage);
+                } else {
+                    abp.message.error(result.message);
+                }
+            }
+        });
+    },
+
+    onCompanySetUpTabChange : function(tabPanel, newCard,oldCard) {
+        var me = this;
+        if (newCard.itemId == 'companyPreferencesTab') {
+            me.getDefaultCompanySettings(newCard.getForm());
+        }
+    },
 
     onPostalCodeEnter: function (field, e) {
         //var zip = 12345;

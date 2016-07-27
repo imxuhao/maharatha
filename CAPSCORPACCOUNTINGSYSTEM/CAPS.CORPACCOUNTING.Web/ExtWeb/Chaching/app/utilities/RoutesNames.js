@@ -24,6 +24,7 @@
          'financials.fiscalperiod',
          'receivables.customers',
          'purchaseorders.entry',
-         'host.maintenance'
+         'host.maintenance',
+         'host.settings'
     ]
 });

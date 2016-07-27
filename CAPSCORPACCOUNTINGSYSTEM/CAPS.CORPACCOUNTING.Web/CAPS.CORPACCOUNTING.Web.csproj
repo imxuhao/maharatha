@@ -3995,6 +3995,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesViewController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\settings\Settings.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\settings\SettingsController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\tenants\TenantsGrid.js" />

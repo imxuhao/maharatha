@@ -196,7 +196,6 @@
             success: function (response, opts) {
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
-                    debugger;
                     var src = 'data:image/jpeg;base64,' + res.result.companyLogo;
                     var companyLogo = view.down('image[itemId=companyLogo]');
                     var main = null;

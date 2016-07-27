@@ -32,7 +32,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.ConnectionString
         {
             StringBuilder connectionString = new StringBuilder();
             var connectionStringUnit = input.MapTo<ConnectionStringUnit>();
-            connectionString = connectionString.Append("Server" + input.ServerName);
+            connectionString = connectionString.Append("Server=" + input.ServerName);
             if (!string.IsNullOrEmpty(input.InstanceName))
                 connectionString = connectionString.Append(@"\" + input.InstanceName);
             connectionString = connectionString.Append("; Database=" + input.Database + ";");

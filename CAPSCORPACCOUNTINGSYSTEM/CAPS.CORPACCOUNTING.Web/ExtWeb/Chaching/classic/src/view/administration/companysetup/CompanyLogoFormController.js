@@ -8,27 +8,23 @@
         var me = this,
         view = me.getView(),
         data = me.dataObject;
-        debugger;
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/tenant/UpdateCompanyLogo',
             jsonData: Ext.encode(data),
-            success: function (response, opts) {
-                debugger;
+            success: function(response, opts) {
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
-                    debugger;
                     //me.getProfilePicture();
-                }
-                else {
+                } else {
                     abp.message.error(res.error.message);
                 }
             },
-            failure: function (response) {
+            failure: function(response) {
                 var res = Ext.decode(response.responseText);
                 Ext.toast(res.error.message);
                 console.log(response);
             }
-        })
+        });
     },
 
     getCompanyLogo: function () {

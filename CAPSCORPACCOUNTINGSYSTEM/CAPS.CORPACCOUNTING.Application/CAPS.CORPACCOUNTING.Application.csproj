@@ -480,6 +480,7 @@
     <Compile Include="MultiTenancy\Dto\ComapnyPreferenceDto.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInputUnit.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />
+    <Compile Include="MultiTenancy\Dto\CompanyImageOutputDto.cs" />
     <Compile Include="MultiTenancy\Dto\TenantExtendedUnitInput.cs" />
     <Compile Include="MultiTenancy\Dto\TenantListOutputDto.cs" />
     <Compile Include="MultiTenancy\Dto\GetTenantsInput.cs" />

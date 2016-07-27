@@ -2682,6 +2682,9 @@
             This value is only used for comparing user's timezone to default timezone
             </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Configuration.Host.Dto.GeneralSettingsEditDto.UseRedisCacheByDefault">
+            RedisCacheFlag By Default Apllication Uses Redis Cache if we don't want to Use RedisCache we can set this setting as false
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.Dto.TenantSettingsEditDto.ValidateHostSettings">
             <summary>
             This validation is done for single-tenant applications.
@@ -8857,6 +8860,19 @@
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.FederalTaxId">
             <summary>Gets or sets the FederalTaxID field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.CompanyLogo">
+            <summary>
+            Gets or Sets  CompanyLogo
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.CompanyLogoId">
+             <summary>
+            Gets or Sets  CompanyLogoId
+             </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.CompanyName">
+            <summary>Gets or sets the TenantExtendedId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.Address">
             <summary>Gets or sets the Address of the Organization. </summary>
         </member>
@@ -8884,9 +8900,6 @@
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.Address">
             <summary> Gets or sets eAddress of the Organization. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.CompanySettings">
-            <summary> Gets or sets eAddress of the OrganizationSettings. </summary>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService.GetTenantListByOrganizationId(Abp.Application.Services.Dto.IdInput{System.Int64})">
             <summary>
             Get TenantList(CompanyList) By OrganizationId
@@ -8906,6 +8919,12 @@
             Create Tenant
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService.GetCompanyLogo">
+            <summary>
+            Get CompanyLogo
+            </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.GetTenantUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
@@ -8931,15 +8950,14 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.GetCompanySettingsForEdit">
             <summary>
-            Get CompanySettings with comapnyAddress,Logo,Transmitter Fields for Editing in TenantLevel
+            Get  comapnyAddress,Logo,Transmitter Fields for Editing in TenantLevel
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.UpdateCompanyLogo(CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto.UpdateProfilePictureInput)">
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.GetCompanyLogo">
             <summary>
-            Updating the Logo of Company
+            Get CompanyLogo
             </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames">

@@ -9,16 +9,16 @@
         view = me.getView(),
         form = view.getForm(),
         timezoneCombo = me.lookupReference('timezone'),
-        setDefaultAPTermsCombo = me.lookupReference('setDefaultAPTerms'),
-        setDefaultARTermsCombo = me.lookupReference('setDefaultARTerms'),
+        setDefaultApTermsCombo = me.lookupReference('setDefaultAPTerms'),
+        setDefaultArTermsCombo = me.lookupReference('setDefaultARTerms'),
         timezoneStore = timezoneCombo.getStore();
         //load time zone combo
         timezoneStore.getProxy().setExtraParams({ defaultTimezoneScope: ChachingGlobals.settingsScope.tenant });
         timezoneStore.load();
         //load ap default terms
-        setDefaultAPTermsCombo.getStore().load();
+        setDefaultApTermsCombo.getStore().load();
         // load ar default terms
-        setDefaultARTermsCombo.getStore().load();
+        setDefaultArTermsCombo.getStore().load();
         //load default combo
         var defaultBankCombo = form.findField('defaultBank');
         defaultBankCombo.getStore().load();
@@ -28,13 +28,19 @@
     },
 
     getCompanySetupInformation: function (form) {
-        var me = this;
+        var me = this,
+            view = me.getView();
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/tenant/GetCompanySettingsForEdit',
             method: 'POST',
             success: function (response) {
                 var result = Ext.decode(response.responseText);
                 if (result.success) {
+                    var src = 'data:image/jpeg;base64,' + result.result.companyLogo;
+                    var companyLogo = view.down('image[itemId=companyLogo]');
+                    if (companyLogo) {
+                        companyLogo.setSrc(src);
+                    }
                     //load company setup information
                     var record = Ext.create('Ext.data.Model');
                     if (result.result.address) {
@@ -146,10 +152,11 @@
     onSaveClicked: function (btn) {
         var me = this,
         view = me.getView(),
-        form = view.getForm();
+        form = view.getForm(),
         record = Ext.create('Chaching.model.administration.organization.CompanyModel');
         record.set('tenantExtendedId', form.findField('tenantExtendedId').getValue());
         // record.set('displayName', form.findField('displayName').getValue());
+        record.set('companyLogoId', form.findField('companyLogoId').getValue());
         record.set('federalTaxId', form.findField('federalTaxId').getValue());
         record.set('transmitterContactName', form.findField('transmitterContactName').getValue());
         record.set('transmitterEmailAddress', form.findField('transmitterEmailAddress').getValue());
@@ -159,7 +166,7 @@
         var address = {
             addressId: form.findField('addressId').getValue(),//rec.get('addressId'),
             organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
-            objectId: abp.session.tenantId,
+            objectId: form.findField('tenantExtendedId').getValue(),
             typeofObjectId: 10, // for company(tenant)
             addressTypeId: 5, // for primary
             contactNumber: '',
@@ -189,6 +196,23 @@
             success: function (response, opts) {
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
+                    debugger;
+                    var src = 'data:image/jpeg;base64,' + res.result.companyLogo;
+                    var companyLogo = view.down('image[itemId=companyLogo]');
+                    var main = null;
+                    var headerView = null;
+                    if (Chaching.app)
+                        main = Chaching.app.getMainView();
+                    if (main)
+                        headerView = main.down('chachingheader');
+                    if (headerView) {
+                        var headerCompanyLogo = headerView.down('image[itemId=companyLogoImage]');
+                        headerCompanyLogo.setSrc(src);
+                    }
+                    if (companyLogo && form.findField('companyLogoId')) {
+                        companyLogo.setSrc(src);
+                        form.findField('companyLogoId').setValue(res.result.companyLogoId);
+                    }
                     abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
                 } else {
                     abp.message.error(res.error.message);

@@ -32,7 +32,9 @@ namespace CAPS.CORPACCOUNTING.Masters
             var addressUnit = input.MapTo<AddressUnit>();
             await _addressUnitManager.CreateAsync(addressUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
-            return addressUnit.MapTo<AddressUnitDto>();
+            var addr = addressUnit.MapTo<AddressUnitDto>();
+            addr.AddressId = addressUnit.Id;
+            return addr;
         }
 
         public async Task DeleteAddressUnit(DeleteAddressUnitInput input)
@@ -43,7 +45,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<ListResultOutput<AddressUnitDto>> GetAddressUnits(GetAddressUnitInput input)
         {
             var query = _addressUnitRepository.GetAll()
-                    .Where(au => au.TypeofObjectId == input.TypeofObjectId && au.ObjectId==input.ObjectId
+                    .Where(au => au.TypeofObjectId == input.TypeofObjectId && au.ObjectId == input.ObjectId
                     && (input.OrganizationUnitId == null || au.OrganizationUnitId == input.OrganizationUnitId))
                     .Select(au => new { au });
             var items = await query.ToListAsync();
@@ -61,7 +63,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task<AddressUnitDto> UpdateAddressUnit(UpdateAddressUnitInput input)
         {
-            
+
             var addressUnit = await _addressUnitRepository.GetAsync(input.AddressId);
 
             #region Setting the values to be updated

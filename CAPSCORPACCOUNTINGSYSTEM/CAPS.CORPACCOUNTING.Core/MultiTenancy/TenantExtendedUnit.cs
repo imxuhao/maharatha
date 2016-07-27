@@ -38,7 +38,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         [StringLength(MaxTaxIdLength)]
         public string FederalTaxId { get; set; }
 
-        public virtual byte[] Logo { get; set; }
+        public virtual Guid? CompanyLogoId { get; set; }
 
         public int TenantId { get; set; }
     }

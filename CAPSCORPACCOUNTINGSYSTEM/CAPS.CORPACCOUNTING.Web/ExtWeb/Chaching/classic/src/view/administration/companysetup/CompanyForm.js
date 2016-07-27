@@ -194,6 +194,10 @@
                                                  src: abp.appPath + 'Content/images/capslogo.png'
                                              },
                                              {
+                                                 xtype: 'hiddenfield',
+                                                 name : 'companyLogoId'
+                                             },
+                                             {
                                                 xtype: 'button',
                                                 itemId: 'buttonPanelId',
                                                 ui: 'actionButton',

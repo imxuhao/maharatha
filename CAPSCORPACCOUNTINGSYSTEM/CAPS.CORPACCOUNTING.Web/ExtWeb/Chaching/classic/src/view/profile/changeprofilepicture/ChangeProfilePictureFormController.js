@@ -8,21 +8,20 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/profile/UpdateProfilePicture',
             jsonData: Ext.encode(data),
-            success: function (response, opts) {
+            success: function(response, opts) {
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
                     me.getProfilePicture();
-                }
-                else {
+                } else {
                     abp.message.error(res.error.message);
                 }
             },
-            failure: function (response) {
+            failure: function(response) {
                 var res = Ext.decode(response.responseText);
                 Ext.toast(res.error.message);
                 console.log(response);
             }
-        })
+        });
     },
 
     getProfilePicture: function () {

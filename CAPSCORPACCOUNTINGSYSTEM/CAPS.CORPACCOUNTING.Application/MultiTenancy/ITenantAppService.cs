@@ -48,7 +48,13 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
 
         Task<ComapnyPreferenceDto> GetCompanySettingsForEdit();
-        Task UpdateCompanyUnit(TenantExtendedUnitInput input);
+        Task<CompanyImageOutputDto> UpdateCompanyUnit(TenantExtendedUnitInput input);
+
+        /// <summary>
+        /// Get CompanyLogo
+        /// </summary>
+        /// <returns></returns>
+        Task<CompanyImageOutputDto> GetCompanyLogo();
 
 
     }

@@ -12,7 +12,7 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
 {
     [AutoMapFrom(typeof(TenantExtendedUnit))]
-    public  class ComapnyPreferenceDto: IOutputDto
+    public class ComapnyPreferenceDto : IOutputDto
     {
         /// <summary>Gets or sets the TenantExtendedId field. </summary>
         public int TenantExtendedId { get; set; }
@@ -32,9 +32,21 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
         /// <summary>Gets or sets the FederalTaxID field. </summary>
         public string FederalTaxId { get; set; }
 
+        /// <summary>
+        /// Gets or Sets  CompanyLogo
+        /// </summary>
+        public string CompanyLogo { get; set; }
+
+        /// <summary>
+        ///Gets or Sets  CompanyLogoId
+        /// </summary>
+        public Guid? CompanyLogoId { get; set; }
+
+        /// <summary>Gets or sets the TenantExtendedId field. </summary>
+        public string CompanyName { get; set; }
+
+
         /// <summary>Gets or sets the Address of the Organization. </summary>
         public AddressUnitDto Address { get; set; }
-
-        public TenantSettingsEditDto CompanySettings { get; set; }
     }
 }

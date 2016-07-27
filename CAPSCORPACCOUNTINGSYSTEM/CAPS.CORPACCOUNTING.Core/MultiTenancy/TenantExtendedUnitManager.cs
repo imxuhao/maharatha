@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
@@ -33,7 +34,14 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         [UnitOfWork]
         public virtual async Task<int> CreateAsync(TenantExtendedUnit input)
         {
-           return await _tenantExtendedUnitRepository.InsertAndGetIdAsync(input);
+            try
+            {
+                return await _tenantExtendedUnitRepository.InsertAndGetIdAsync(input);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>

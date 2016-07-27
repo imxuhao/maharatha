@@ -570,7 +570,7 @@
                columnWidth: .33,
                padding: '20 10 0 20',
                defaults: {
-                   labelWidth: 160,
+                   labelWidth: 110,
                    blankText: app.localize('MandatoryToolTipText')
                },
                items: [{

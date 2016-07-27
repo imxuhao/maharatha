@@ -17,6 +17,7 @@
         userOrganizationId: null,
         gotoMyAccount: false
     },
+
     defaultCompanyLogoImage : abp.appPath + 'Content/images/capslogo.png',
     defaultGridPageSize : 10,
     defaultDateFormat: 'MM/DD/YYYY',
@@ -32,6 +33,17 @@
     },
     displayNegAmtInBrackets: true,
     splitGroupCls: ['split-group1', 'split-group2', 'split-group3', 'split-group4', 'split-group5', 'split-group6', 'split-group7', 'split-group8'],
+    isUserAuthorized : function(modulePermissions) {
+        if (modulePermissions.create) {
+            abp.message.error(app.localize('YouDontHaveSufficientPermission'));
+        } else if (modulePermissions.read) {
+            abp.message.error(app.localize('YouDontHaveSufficientPermission'));
+        } else if (modulePermissions.destroy) {
+            abp.message.error(app.localize('YouDontHaveSufficientPermission'));
+        } else if (modulePermissions.edit) {
+            abp.message.error(app.localize('YouDontHaveSufficientPermission'));
+        }
+    },
     getSubAccountCombo: function(valueField, displayField, isFilter) {
         var me = this;
         var beforeQuery = (isFilter ? 'emptyFunction' : 'onBeforeSubAccountQuery');

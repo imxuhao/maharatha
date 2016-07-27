@@ -63,7 +63,8 @@
                              },
                              items: [{
                                  xtype: 'textfield',
-                                 name: 'displayName',
+                                 name: 'companyName',
+                                 readOnly : true,
                                  //allowBlank: false,
                                  fieldLabel: app.localize('CompanyName').initCap(),
                                  width: '100%',

@@ -111,7 +111,8 @@
                                  width: '100%',
                                  ui: 'fieldLabelTop',
                                  listeners: {
-                                     specialkey: 'onPostalCodeEnter'
+                                     specialkey: 'onPostalCodeEnter',
+                                     change: 'onPostalCodeEnter'
                                  }
                              },
                              {
@@ -120,11 +121,14 @@
                                  fieldLabel: app.localize('City').initCap(),
                                  width: '100%',
                                  ui: 'fieldLabelTop',
-                                 displayField: 'city',
+                                 displayField: 'name',
                                  valueField: 'city',
                                  emptyText: app.localize('SelectOption'),
-                                 queryMode: 'local'//,
-                                 //store: ''
+                                 queryMode: 'local',
+                                 store: {
+                                     fields: [{ name: 'name' }, { name: 'value' }, { name: 'city', mapping: 'value' }],
+                                     data : []
+                                 }
                              },
                              {
                                  xtype: 'combobox',
@@ -132,11 +136,14 @@
                                  fieldLabel: app.localize('CompanyState').initCap(),
                                  width: '100%',
                                  ui: 'fieldLabelTop',
-                                 displayField: 'state',
+                                 displayField: 'name',
                                  valueField: 'state',
                                  emptyText: app.localize('SelectOption'),
-                                 queryMode: 'local'//,
-                                 //store: ''
+                                 queryMode: 'local',
+                                 store: {
+                                     fields: [{ name: 'name' }, { name: 'value' }, { name: 'state', mapping: 'value' }],
+                                    data : []
+                                 }
                              },
                               {
                                   xtype: 'combobox',
@@ -144,10 +151,14 @@
                                   fieldLabel: app.localize('Country').initCap(),
                                   width: '100%',
                                   ui: 'fieldLabelTop',
-                                  displayField: 'country',
+                                  displayField: 'name',
                                   valueField: 'country',
                                   emptyText: app.localize('SelectOption'),
-                                  queryMode: 'local'
+                                  queryMode: 'local',
+                                  store: {
+                                      fields: [{ name: 'name' }, { name: 'value' }, { name: 'country', mapping: 'value' }],
+                                      data: []
+                                  }
                               }
                              ]
                          },

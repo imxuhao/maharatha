@@ -130,34 +130,61 @@
         }
     },
 
-    onPostalCodeEnter: function (field, e) {
-        //var zip = 12345;
-        //var lat;
-        //var lng;
-        //var geocoder = new google.maps.Geocoder();
-        //geocoder.geocode({ 'address': zip }, function (results, status) {
-        //    debugger;
-        //    if (status == google.maps.GeocoderStatus.OK) {
-        //        geocoder.geocode({'latLng': results[0].geometry.location}, function(results, status) {
-        //            if (status == google.maps.GeocoderStatus.OK) {
-        //                if (results[1]) {
-        //                    //var loc = getCityState(results);
-        //                }
-        //            }
-        //        });
-        //    }
-        //});
+    loadCityStateAndCountry: function (zip) {
+        var me = this,
+           view = me.getView(),
+           form = view.getForm(),
+           cityCombo = form.findField('city'),
+           stateCombo = form.findField('state'),
+           countryCombo = form.findField('country');
+           cityCombo.reset();
+           stateCombo.reset();
+           countryCombo.reset();
+        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + zip).success(function (response) {
+            var city = [],
+                state = [],
+                country = [];
+            //find the city , state and country
+            if (response.results[0]) {
+                var address_components = response.results[0].address_components;
+                Ext.each(address_components, function (component) {
+                    var types = component.types;
+                    Ext.each(types, function (type) {
+                        if (type == 'locality') {
+                            city.push({ name: component.long_name, value: component.short_name });
+                        }
+                        if (type == 'administrative_area_level_1') {
+                            state.push({ name: component.long_name, value: component.short_name });
+                        }
+                        if (type == 'country') {
+                            country.push({ name: component.long_name, value: component.short_name });
+                        }
 
-        Ext.data.JsonP.request({
-            url: 'http://maps.googleapis.com/maps/api/geocode/json?address=37779',
-            success: function (result) {
-            },
-            failure: function (result) {
-            },
-            callback : function (result) {
+                    });
+                });
+                if (cityCombo && city.length > 0) {
+                    cityCombo.getStore().loadData(city);
+                    cityCombo.select(cityCombo.getStore().first());
+                }
+                if (stateCombo && state.length > 0) {
+                    stateCombo.getStore().loadData(state);
+                    stateCombo.select(stateCombo.getStore().first());
+                }
+                if (countryCombo && country.length > 0) {
+                    countryCombo.getStore().loadData(country);
+                    countryCombo.select(countryCombo.getStore().first());
+                }
             }
-
+            
         });
+    },
+
+    onPostalCodeEnter: function (field, e) {
+        var me = this;
+        var task = new Ext.util.DelayedTask(function () {
+            me.loadCityStateAndCountry(field.getValue());
+        });
+        task.delay(500);
     },
 
     onCompanyLogoClick: function (btn) {

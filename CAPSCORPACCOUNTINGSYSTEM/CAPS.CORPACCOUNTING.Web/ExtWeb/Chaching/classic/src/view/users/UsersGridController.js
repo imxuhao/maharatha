@@ -96,7 +96,6 @@ Ext.define('Chaching.view.users.UsersGridController', {
                                     tenantModel.set('tenantName', role.tenantName);
                                     tenantModel.commit();
                                     tenantRolesGrid.getStore().add(tenantModel);
-                                    debugger;
                                     if (role.isRoleSelected) {
                                         tenantRolesGrid.getSelectionModel().select(tenantModel, true);
                                     }
@@ -125,7 +124,6 @@ Ext.define('Chaching.view.users.UsersGridController', {
                 callback: function (response, records, success) {
                     if (success) {
                         Ext.each(response, function (rec) {
-                            debugger;
                             var isDefault = rec.get('isDefault');
                             var isStatic = rec.get('isStatic');
 

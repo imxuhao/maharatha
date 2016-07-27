@@ -22,7 +22,7 @@
         //load default combo
         var defaultBankCombo = form.findField('defaultBank');
         defaultBankCombo.getStore().load();
-
+        //load company set up
         me.getCompanySetupInformation(form);
 
     },
@@ -82,27 +82,33 @@
 
 
     onPostalCodeEnter: function (field, e) {
-        var clientKey = "js-9qZHzu2Flc59Eq5rx10JdKERovBlJp3TQ3ApyC4TOa3tA8U7aVRnFwf41RpLgtE7";
-        var url = "https://www.zipcodeapi.com/rest/" + clientKey + "/info.json/" + field.getValue() + "/radians";
-        if (13 == e.getKey()) {
-            var store = Ext.create('Ext.data.Store', {
-                fields: [{ name: 'id' }],
-                autoLoad: true,
-                proxy: {
-                    type: 'jsonp',
-                    url: url,//'http://maps.googleapis.com/maps/api/geocode/json?address=37779',
-                    reader: {
-                        type: 'json',
-                        rootProperty: 'results'
-                    }
-                },
-                listeners: {
-                    'load': function (records, operation, success) {
+        //var zip = 12345;
+        //var lat;
+        //var lng;
+        //var geocoder = new google.maps.Geocoder();
+        //geocoder.geocode({ 'address': zip }, function (results, status) {
+        //    debugger;
+        //    if (status == google.maps.GeocoderStatus.OK) {
+        //        geocoder.geocode({'latLng': results[0].geometry.location}, function(results, status) {
+        //            if (status == google.maps.GeocoderStatus.OK) {
+        //                if (results[1]) {
+        //                    //var loc = getCityState(results);
+        //                }
+        //            }
+        //        });
+        //    }
+        //});
 
-                    }
-                }
-            });
-        }
+        Ext.data.JsonP.request({
+            url: 'http://maps.googleapis.com/maps/api/geocode/json?address=37779',
+            success: function (result) {
+            },
+            failure: function (result) {
+            },
+            callback : function (result) {
+            }
+
+        });
     },
 
     onCompanyLogoClick: function (btn) {
@@ -111,44 +117,6 @@
         var companyLogoForm = companyLogoView.down('form');
         companyLogoForm.getController().parentController = me;
     },
-
-    //onFileChange: function (file, e, value) {
-    //    var me = this,
-    //    view = me.getView(),
-    //    companySetupForm = view.down('#companySetupTab');
-    //    if (file.value == "") {
-    //        return;
-    //    }
-    //    var newvalue = file.value.replace(/^c:\\fakepath\\/i, '');
-    //    file.setRawValue(newvalue);
-    //    if (file.value && !/^.*\.(Png|gif|jpg|jpeg|jfif|tiff|bmp)$/i.test(file.value)) {
-    //        abp.message.error(app.localize('ProfilePicture_Warn_FileType').initCap(), 'Error');
-    //        return;
-    //    };
-    //    if (file.fileInputEl && file.fileInputEl.dom && file.fileInputEl.dom.files && file.fileInputEl.dom.files[0].size > 2097152) {
-    //        abp.message.error(app.localize('ProfilePicture_Warn_SizeLimit').initCap(), 'Error');
-    //        return;
-    //    }
-    //    companySetupForm.submit({
-    //        url: abp.appPath + 'OrganizationUnits/UpdateOrganizationPicture',
-    //        success: function (form, response) {
-    //            if (response.result) {
-    //                form.findField('companyLogo').value = "gjhsagjd"
-    //                var data = response.result.result;
-    //                if (response.success) {
-    //                    view.filePath = data.tempFilePath;
-    //                    view.dataobject = data;
-    //                    abp.notify.success(app.localize('UploadSuccess').initCap(), 'Success');
-    //                }
-    //            }
-    //        },
-    //        failure: function (form, action) {
-    //            abp.notify.success(app.localize('Failed').initCap(), 'Error');
-    //        }
-    //    });
-
-    //},
-
     onSaveClicked: function (btn) {
         var me = this,
         view = me.getView(),
@@ -162,7 +130,11 @@
         record.set('transmitterEmailAddress', form.findField('transmitterEmailAddress').getValue());
         record.set('transmitterCode', form.findField('transmitterCode').getValue());
         record.set('transmitterControlCode', form.findField('transmitterControlCode').getValue());
-
+        var myMask = new Ext.LoadMask({
+            msg: 'Please wait...',
+            target: view
+        });
+        myMask.show();
         var address = {
             addressId: form.findField('addressId').getValue(),//rec.get('addressId'),
             organizationUnitId: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId,
@@ -194,21 +166,30 @@
             url: abp.appPath + 'api/services/app/tenant/UpdateCompanyUnit',
             jsonData: Ext.encode(record.data),
             success: function (response, opts) {
+                myMask.hide();
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
-                    var src = 'data:image/jpeg;base64,' + res.result.companyLogo;
+                    var src = "";
                     var companyLogo = view.down('image[itemId=companyLogo]');
+                    var addressField = form.findField('addressId');
+                    var tenantExtendedId = form.findField('tenantExtendedId');
                     var main = null;
                     var headerView = null;
-                    if (Chaching.app)
-                        main = Chaching.app.getMainView();
-                    if (main)
-                        headerView = main.down('chachingheader');
-                    if (headerView) {
+                    if (res.result.companyLogo) {
+                        src = 'data:image/jpeg;base64,' + res.result.companyLogo;
+                    }
+                    if (addressField) {
+                        addressField.setValue(res.result.addressId);
+                    }
+                    if (tenantExtendedId) {
+                        tenantExtendedId.setValue(res.result.tenantExtendedId);
+                    }
+                    headerView = Ext.ComponentQuery.query('chachingheader')[0];
+                    if (headerView && res.result.companyLogo) {
                         var headerCompanyLogo = headerView.down('image[itemId=companyLogoImage]');
                         headerCompanyLogo.setSrc(src);
                     }
-                    if (companyLogo && form.findField('companyLogoId')) {
+                    if (companyLogo && form.findField('companyLogoId') && res.result.companyLogoId) {
                         companyLogo.setSrc(src);
                         form.findField('companyLogoId').setValue(res.result.companyLogoId);
                     }
@@ -218,6 +199,7 @@
                 }
             },
             failure: function (response, opts) {
+                myMask.hide();
                 var result = Ext.decode(response.responseText);
                 if (!Ext.isEmpty(result.exceptionMessage)) {
                     abp.message.error(result.exceptionMessage);

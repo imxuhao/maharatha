@@ -45,7 +45,7 @@
                      },
                      {
                          xtype: 'hiddenfield',
-                         name: 'addressId', //companyId
+                         name: 'addressId', //addressId
                          value: 0
                      },
                      {

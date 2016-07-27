@@ -25,10 +25,10 @@ Ext.define('Chaching.view.header.ChachingHeader', {
     items: [
         {
             xtype: 'image',
-            height: 30,
+            height: 50,
             itemId: 'companyLogoImage',
             width: 110,
-            src: abp.appPath + 'Content/images/capslogo.png',
+            src: ChachingGlobals.defaultCompanyLogoImage,
             margin: '2px'
         }, {
             xtype: 'button',

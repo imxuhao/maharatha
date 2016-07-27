@@ -17,6 +17,7 @@
         userOrganizationId: null,
         gotoMyAccount: false
     },
+    defaultCompanyLogoImage : abp.appPath + 'Content/images/capslogo.png',
     defaultGridPageSize : 10,
     defaultDateFormat: 'MM/DD/YYYY',
     defaultDateTimeFormat: 'MM/DD/YYYY hh:mm a',

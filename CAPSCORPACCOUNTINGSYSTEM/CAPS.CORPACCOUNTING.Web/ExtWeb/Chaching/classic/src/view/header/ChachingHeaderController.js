@@ -2,62 +2,6 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.header-chachingheader',
 
-    //setDefaultOrganizationOfCurrentUser : function(record) {
-    //    Ext.Ajax.request({
-    //        url: abp.appPath + 'Account/SetDefaultOrganizationToUser',
-    //        jsonData: Ext.encode({
-    //            organizationUnitId: record.get('value'),
-    //            id: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId
-    //        }),
-    //        success: function (response, opts) {
-    //            var res = Ext.decode(response.responseText);
-    //            if (res.success) {
-    //                var locationUrl = window.location.href.replace(window.location.hash, '');
-    //                window.location.href = locationUrl;
-    //            }
-    //        },
-    //        failure: function (response, opts) {
-    //            var res = Ext.decode(response.responseText);
-    //            abp.message.success(res.exceptionMessage, 'Error');
-    //            console.log(response);
-    //        }
-    //    });
-    //},
-
-    //onUserOrganizationChange: function (combo, record, eOpts) {
-    //    var me = this;
-    //    abp.message.confirm(app.localize('SwitchOrganizationMsg'), app.localize('Warning'), function (btn) {
-    //        if (btn) {
-    //            me.setDefaultOrganizationOfCurrentUser(record);
-    //        }
-    //    });
-    //},
-
-    //loadUserOrganizationList: function (userId) {
-    //    var me = this,
-    //        view = me.getView();
-    //    var userOrganizationsCombo = view.down('combobox[itemId=userOrganizationListItemId]');
-    //    if (userOrganizationsCombo) {
-    //        var userOrganizationsStore = userOrganizationsCombo.getStore();
-    //        userOrganizationsStore.getProxy().setExtraParams({ id: userId });
-    //        userOrganizationsStore.load(function (records, operation, success) {
-    //            if (success) {
-    //                //setting user organization for header combo
-    //                if (!Ext.isEmpty(Chaching.utilities.ChachingGlobals.loggedInUserInfo.defaultOrganizationId)) {
-    //                    userOrganizationsCombo.setValue(Chaching.utilities.ChachingGlobals.loggedInUserInfo.defaultOrganizationId);
-    //                } else {
-    //                    if (userOrganizationsStore.getCount() == 1) {
-    //                        userOrganizationsCombo.setValue(userOrganizationsStore.first().data.value);
-    //                    } else {
-    //                        userOrganizationsCombo.setValue(Chaching.utilities.ChachingGlobals.loggedInUserInfo.userOrganizationId);
-    //                    }
-                       
-    //                }
-    //            }
-    //        });
-    //    }
-    //},
-
     onToggleClick: function (btn) {
         var me = this,
             view = me.getView();
@@ -206,8 +150,8 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
     },
     onAccountsReady: function (btn) {
         var me = this,
-            view = me.getView();
-        var userName = '';
+            view = me.getView(),
+            userName = '';
         //get user's login information
         Ext.Ajax.request({
             method: 'POST',
@@ -255,13 +199,41 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                     }
                  
                     Chaching.utilities.ChachingGlobals.loggedInUserInfo = loggedInUserInfo;
-                    //load users organization list
-                   // me.loadUserOrganizationList(result.user.id);
                 } else {
-                    Ext.toast(obj.error.message);
+                    abp.message.error(obj.error.message);
                 }
             },
 
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+            }
+        });
+
+        //set company logo
+        me.getCompanyLogo();
+    },
+    getCompanyLogo : function() {
+        Ext.Ajax.request({
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            url: abp.appPath + 'api/services/app/tenant/GetCompanyLogo',
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res && res.success) {
+                    var headerView = Ext.ComponentQuery.query('chachingheader')[0];
+                    if (headerView && res.result.companyLogo) {
+                        var headerCompanyLogo = headerView.down('image[itemId=companyLogoImage]');
+                        var src = 'data:image/jpeg;base64,' + res.result.companyLogo;
+                        headerCompanyLogo.setSrc(src);
+                    }
+                } else {
+                    abp.message.error(res.error.message);
+                }
+            },
             failure: function (response, opts) {
                 var res = Ext.decode(response.responseText);
                 Ext.toast(res.exceptionMessage);

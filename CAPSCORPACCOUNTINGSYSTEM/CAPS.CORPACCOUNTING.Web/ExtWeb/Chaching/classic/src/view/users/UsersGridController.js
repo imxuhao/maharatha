@@ -18,6 +18,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
         });
         var treePanel = form.down('treepanel[itemId=usersPermissionsItemId]');
         var treeStore = treePanel.getStore();
+
         //proxy.api.read = abp.appPath + 'api/services/app/user/GetUserPermissionsForEdit';
         treeStore.getProxy().api.read = abp.appPath + 'api/services/app/user/GetUserAllPermissionsForEdit';
         treeStore.getProxy().setExtraParam('id', id);
@@ -46,11 +47,17 @@ Ext.define('Chaching.view.users.UsersGridController', {
         //get company list tab
         var companyListTab = formView.down('*[itemId=companyListTab]');
         var rolesGrid = formView.down('gridpanel[itemId=rolesListGridItemId]');
+        var tenantRolesGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
         if (formView && isEdit) {
             form.findField('userName').setReadOnly(true);
             //disable tabs
             if (companyListTab) {
-                companyListTab.setDisabled(false);
+                if (abp.session.tenantId != null) {
+                    companyListTab.setDisabled(false);
+                }
+                else {
+                    companyListTab.setDisabled(true);
+                }
             }
             Ext.Ajax.request({
                 url: abp.appPath + 'api/services/app/user/GetUserUnitForEdit',
@@ -76,6 +83,29 @@ Ext.define('Chaching.view.users.UsersGridController', {
                                     }
                                 });
                             }
+                            if (abp.session.tenantId != null) {
+                                // bind Link Company Grid
+                                tenantRolesGrid.getStore().removeAll();
+                                var tenantwithRoles = res.result.tenantwithRoles;
+                                Ext.each(tenantwithRoles, function (role) {
+                                    var tenantModel = Ext.create('Chaching.model.users.CompanyRoleModel');
+                                    tenantModel.set('id', role.tenantId);
+                                    tenantModel.set('roleId', role.roleId);
+                                    tenantModel.set('roleName', role.roleName);
+                                    tenantModel.set('roleDisplayName', role.roleDisplayName);
+                                    tenantModel.set('tenantName', role.tenantName);
+                                    tenantModel.commit();
+                                    tenantRolesGrid.getStore().add(tenantModel);
+                                    debugger;
+                                    if (role.isRoleSelected) {
+                                        tenantRolesGrid.getSelectionModel().select(tenantModel, true);
+                                    }
+                                    //else {
+                                    //    tenantRolesGrid.getStore().add(tenantModel);
+                                    //}
+                                });
+                                // End bind grid
+                            }
                         }
                     } else {
                         abp.message.error(res.error.message, 'Error');
@@ -91,9 +121,29 @@ Ext.define('Chaching.view.users.UsersGridController', {
         } else {
             //load roles list
             var rolesStore = rolesGrid.getStore();
-            rolesStore.load();
+            rolesStore.load({
+                callback: function (response, records, success) {
+                    if (success) {
+                        Ext.each(response, function (rec) {
+                            debugger;
+                            var isDefault = rec.get('isDefault');
+                            var isStatic = rec.get('isStatic');
+
+                            var roleModel = Ext.create('Chaching.model.roles.RolesModel');
+                            roleModel.set('id', rec.get('id'));
+                            roleModel.set('name', rec.get('name'));
+                            roleModel.set('displayName', rec.get('displayName'));
+                            roleModel.commit();
+                            if (isDefault) {
+                                rolesGrid.getSelectionModel().select(roleModel, true);
+                            }
+
+                        });
+                    }
+                }
+            });
             //load company list
-            if (abp.session.tenantId) {
+            if (abp.session.tenantId != null) {
                 var companyListGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
                 var companyListStore = companyListGrid.getStore();
                 var proxy = companyListStore.getProxy();

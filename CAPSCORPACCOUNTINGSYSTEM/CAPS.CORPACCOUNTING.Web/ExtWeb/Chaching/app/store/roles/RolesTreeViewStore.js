@@ -5,9 +5,8 @@
     clearOnLoad: false,
     remoteFilter: false,
     remoteSort: false,
-    statefulFilters: true,
     root: {
-        expanded: true
+        //expanded: true
     },
     proxy: {
         type: 'chachingProxy',

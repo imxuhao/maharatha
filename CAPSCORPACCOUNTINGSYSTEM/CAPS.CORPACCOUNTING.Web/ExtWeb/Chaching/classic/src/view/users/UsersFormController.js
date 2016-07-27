@@ -80,18 +80,22 @@
             });
             record.data.assignedRoleNames = rolesListArray;
         }
-        
+        var tenantListArray=[];
         if (companyListRecords && companyListRecords.length > 0) {
             var tempList = [],
-                roleId =[],
-                tenantListArray=[];
+                roleId = [],
+                roleName = [];
+                //tenantListArray=[];
             var isNewItem = false;
             Ext.each(companyListRecords, function (rec) {
-                tempList.push({ tenantId: rec.get('tenantId'), tenantName: rec.get('tenantName'), roleIds: [rec.get('roleId')] });
+                roleId.push(rec.get('roleId'));
+                roleName.push(rec.get('roleName'));
+                tempList.push({ tenantId: rec.get('tenantId'), tenantName: rec.get('tenantName'), roleIds: roleId, roleNames: roleName });
                 if (tenantListArray.length > 0) {
                     for (var i = 0; i < tenantListArray.length; i++) {
                         if (tempList[0].tenantId == tenantListArray[i].tenantId) {
-                            tenantListArray[i].roleIds.push(tempList[0].roleIds);
+                            tenantListArray[i].roleIds.push(tempList[0].roleIds[0]);
+                            tenantListArray[i].roleNames.push(tempList[0].roleNames[0]);
                             isNewItem = false;
                             break;
                         }
@@ -104,12 +108,23 @@
                     tenantListArray = tempList;
                 }
                 if (isNewItem) {
-                    tenantListArray.push({ tenantId: tempList[0].tenantId, tenantName: tempList[0].tenantName, roleIds: tempList[0].roleIds });
+                    tenantListArray.push({ tenantId: tempList[0].tenantId, tenantName: tempList[0].tenantName, roleIds: tempList[0].roleIds, roleNames: tempList[0].roleNames });
                 }
-                tempList = []; roleId = [];
+                tempList = []; roleId = []; roleName = [];
             });
-            record.data.tenantList = tenantListArray;
         }
+        // Add tenantId when no selection happen
+        if (tenantListArray.length <= 0) {
+            record.data.isEmptyRoles = true;
+            var gridPanel = view.down('gridpanel[itemId=companyListGridItemId]');
+            var gridStore = gridPanel.getStore();
+            var data = gridStore.data;
+            Ext.each(data.items, function (rec) {
+                tenantListArray.push(rec.get('tenantId'));
+            });
+        }
+        record.data.tenantList = tenantListArray;
+
         return record;
     }
     ,

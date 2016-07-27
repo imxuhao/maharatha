@@ -1,7 +1,7 @@
 ﻿
 Ext.define('Chaching.view.users.UsersPermissionForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
-    alias: ['host.users.create', 'host.users.edit'],
+    //alias: ['host.users.create', 'host.users.edit'],
     requires: [
         'Chaching.view.users.UsersPermissionFormController'
     ],

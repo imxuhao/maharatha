@@ -1,18 +1,17 @@
 ﻿Ext.define('Chaching.store.users.PermissionsTreeStore', {
     extend: 'Chaching.store.base.BaseTreeStore',
     model: 'Chaching.model.roles.RolePermissionsModel',
-    autoLoad: false,
     clearOnLoad: false,
+    selectedNodeCount: 0,
     remoteFilter: false,
     remoteSort: false,
-    statefulFilters: true,
-    selectedNodeCount:0,
+    //statefulFilters: true,
     root: {
-        expanded: true
+       // expanded: true
     },
     proxy: {
         type: 'chachingProxy',
-        actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+        actionMethods: {read: 'POST', update: 'POST'},
         api: {
             read: abp.appPath + 'api/services/app/user/GetUserAllPermissionsForEdit',
             update: abp.appPath + 'api/services/app/user/UpdateUserPermissions'

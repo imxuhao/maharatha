@@ -136,7 +136,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
         task.start();
     },
     handleMainThreadResponse: function (records, operation, success) {
-        var controller = operation.controller,
+               var controller = operation.controller,
                view = controller.getView();
         if (success) {
             var action = operation.getAction();
@@ -173,32 +173,8 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             //});
 
         } else {
-            var response = Ext.decode(operation.getResponse().responseText);
-            var message = '',
-                title = 'Error';
-            if (response && response.error) {
-                if (response.error.message && response.error.details) {
-                    title = response.error.message;
-                    message = response.error.details;//.replaceAll(' - ', '</br>-');
-                    abp.message.warn(message, title);
-                    return;
-                    /* var myMsg = Ext.create('Ext.window.MessageBox', {
-                         // set closeAction to 'destroy' if this instance is not
-                         // intended to be reused by the application
-                         closeAction: 'destroy',
-                         ui: 'chachingWindow'
-                     }).show({
-                         title: title,
-                         message: message,
-                         buttons: Ext.Msg.OKCANCEL,
-                         icon: Ext.Msg.INFO
-                     });
-                     return;*/
-                }
-                title = response.error.message;
-                message = response.error.details ? response.error.details : title;
-            }
-            abp.message.error(message, title);
+            // function in Chaching.utilities.ChachingGlobals to show error message
+            ChachingGlobals.showErrorMessage(operation);
         }
     },   
     doPostSaveOperations: function (records, operation, success) {

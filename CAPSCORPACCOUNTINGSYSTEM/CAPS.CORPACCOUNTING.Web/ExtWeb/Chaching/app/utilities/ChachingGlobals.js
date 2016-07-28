@@ -44,6 +44,40 @@
             abp.message.error(app.localize('YouDontHaveSufficientPermission'));
         }
     },
+    showErrorMessage: function (operation) {
+        if (operation.exception && operation.error && operation.error.response) {
+            var response = Ext.decode(operation.error.response.responseText);
+            var message = '',
+                title = 'Error';
+            if (response && response.error) {
+                if (response.error.message && response.error.details) {
+                    title = response.error.message;
+                    message = response.error.details;//.replaceAll(' - ', '</br>-');
+                    //abp.message.warn(message, title);
+                    abp.message.error(message, title);
+                    return;
+                }
+                title = response.error.message;
+                message = response.error.details ? response.error.details : title;
+            }
+            abp.message.error(message, title);
+        } else {
+            var response = Ext.decode(operation.getResponse().responseText);
+            var message = '',
+                title = 'Error';
+            if (response && response.error) {
+                if (response.error.message && response.error.details) {
+                    title = response.error.message;
+                    message = response.error.details;//.replaceAll(' - ', '</br>-');
+                    abp.message.error(message, title);
+                    return;
+                }
+                title = response.error.message;
+                message = response.error.details ? response.error.details : title;
+            }
+            abp.message.error(message, title);
+        }
+    },
     getSubAccountCombo: function(valueField, displayField, isFilter) {
         var me = this;
         var beforeQuery = (isFilter ? 'emptyFunction' : 'onBeforeSubAccountQuery');

@@ -16,15 +16,24 @@ Ext.define('Chaching.view.users.UsersGridController', {
             iconCls: 'fa fa-pencil',
             name: 'Administration.Users'
         });
+        form.setTitle(form.getTitle() + ' - ' + userName);
+        form.show();
+        var windowMask = new Ext.LoadMask({
+            msg: 'Please wait...',
+            target: form
+        });
+        windowMask.show();
         var treePanel = form.down('treepanel[itemId=usersPermissionsItemId]');
         var treeStore = treePanel.getStore();
-
         //proxy.api.read = abp.appPath + 'api/services/app/user/GetUserPermissionsForEdit';
         treeStore.getProxy().api.read = abp.appPath + 'api/services/app/user/GetUserAllPermissionsForEdit';
         treeStore.getProxy().setExtraParam('id', id);
-        treeStore.reload();
-        form.setTitle(form.getTitle() + ' - ' + userName);
-        form.show();
+        treeStore.load({
+            callback: function (records, response, success) {
+                windowMask.hide();
+            }
+        });
+        
     },
     doRowSpecificEditDelete: function (button, grid) {
         //var menu = button.menu;

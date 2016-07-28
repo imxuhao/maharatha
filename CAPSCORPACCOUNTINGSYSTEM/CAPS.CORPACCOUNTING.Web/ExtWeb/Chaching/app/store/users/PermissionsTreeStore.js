@@ -7,7 +7,7 @@
     remoteSort: false,
     //statefulFilters: true,
     root: {
-       // expanded: true
+        //expanded: true
     },
     proxy: {
         type: 'chachingProxy',
@@ -52,6 +52,7 @@
                 }
             }
             var root = me.getRoot();
+            //root.set('expanded', true);
             root.removeAll();
             for (var j = 0; j < parents.length; j++) {
                 var parent = parents[j];
@@ -59,6 +60,7 @@
             }
             if (!root.data.children) root.data.children = [];
             root.appendChild(pages);
+            root.expand(true);
         }
     },
     buildChilds: function (parent, records) {

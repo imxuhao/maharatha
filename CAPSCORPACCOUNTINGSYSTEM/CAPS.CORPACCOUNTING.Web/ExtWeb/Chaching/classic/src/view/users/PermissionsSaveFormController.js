@@ -14,26 +14,47 @@
             treePanel = parentView.down('treepanel[itemId=usersPermissionsItemId]'),
             roleTextfield = view.down('textfield[itemId=newRole]'),
             grantedPermissionNames = [];
+
+        if (roleTextfield && roleTextfield.getValue().trim() == '') {
+            abp.message.error(app.localize('SelectRoleName')).done(function(){
+                roleTextfield.focus(true,100);
+            });
+            return;
+        }
+        else{
             var role = {};
             role.id = null;
-            role.displayName = (roleTextfield ? roleTextfield.getValue() : '');
+            role.displayName = roleTextfield.getValue();
             role.isDefault = false;
             if (treePanel) {
-            var selectedPermissions = treePanel.getChecked();
-            Ext.Array.each(selectedPermissions, function (rec) {
-                grantedPermissionNames.push(rec.get('name'));
-            });
-            var treeStore = treePanel.getStore();
-            treeStore.removeAll();
-            var userId = treeStore.getProxy().extraParams.id;
-            treeStore.getProxy().setExtraParam('userId', userId);
-            treeStore.getProxy().setExtraParam('role', role);
-            treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
-            treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissionsUnit';
-            treeStore.update();
-            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                var selectedPermissions = treePanel.getChecked();
+                Ext.Array.each(selectedPermissions, function (rec) {
+                    grantedPermissionNames.push(rec.get('name'));
+                });
+                var treeStore = treePanel.getStore();
+                treeStore.removeAll();
+                var userId = treeStore.getProxy().extraParams.id;
+                treeStore.getProxy().setExtraParam('userId', userId);
+                treeStore.getProxy().setExtraParam('role', role);
+                treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
+                treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissionsUnit';
+                treeStore.update();//{
+                //    callback: function (records, response, success) {
+                //        if (success) {
+                //            //ChachingGlobals.showErrorMessage(response);
+                //            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                //        }
+                //        else {
+                //            //ChachingGlobals.showErrorMessage(response);
+                //            abp.message.error(response.error.message, app.localize('Error'));
+                //        }
+                //    }
+                //});
+                abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+            }
+            me.CloseWindow();
         }
-        me.CloseWindow();
+        
     },
     onCancelClicked: function () {
         var me = this,

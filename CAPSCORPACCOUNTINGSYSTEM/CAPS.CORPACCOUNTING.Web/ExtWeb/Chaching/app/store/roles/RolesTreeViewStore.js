@@ -53,7 +53,7 @@
             }
             if (!root.data.children) root.data.children = [];
             root.appendChild(pages);
-
+            root.expand(true);
         }
     },
     buildChilds: function (parent, records) {

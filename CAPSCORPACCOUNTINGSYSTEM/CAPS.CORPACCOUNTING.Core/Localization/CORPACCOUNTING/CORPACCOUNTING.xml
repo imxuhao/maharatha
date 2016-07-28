@@ -1062,5 +1062,7 @@
 <text name="Skip" value="Skip" />  
 <text name="YouDontHaveSufficientPermission" value="You don't have sufficient permission to perform this operation. Please contact administrator." />
 <text name="SelectUserProfilePicture" value="Select Profile Picture before saving." />
+
+<text name="SelectRoleName" value="Please select role name." />
   </texts>
 </localizationDictionary>

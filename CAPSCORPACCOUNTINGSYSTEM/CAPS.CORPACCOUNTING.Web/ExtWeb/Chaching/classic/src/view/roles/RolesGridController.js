@@ -12,6 +12,15 @@ Ext.define('Chaching.view.roles.RolesGridController', {
             }
             treeStore.load();
         }
+        if (isEdit) {
+            if (record.data.displayName.toLowerCase() == 'admin') {
+                if (form.down('checkbox')) {
+                    var chkbox = form.down('checkbox[name=isDefault]');
+                    chkbox.checked = false;
+                    chkbox.setDisabled(true);
+                }
+            }
+        }
     },
     doRowSpecificEditDelete: function (button, grid) {
         if (button.menu) {

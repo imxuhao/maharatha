@@ -16,6 +16,38 @@ Ext.define('Chaching.view.roles.RolesFormController', {
             n.set('checked', checked);
         });
     },
+    onEditButtonClicked: function (editBtn) {
+        var me = this,
+            view = me.getView(),
+            childGrids = view.query('gridpanel'),
+            form = view.getForm(),
+            fields = form.getFields().items;
+        //form.title = form.title.replace('View', 'Edit');
+
+        Ext.each(fields, function (field) {
+            if (field.name !== 'isDefault')
+            if (field.xtype !== "hiddenfield" && !field.isFilterField) {
+                field.setDisabled(false);
+                if (typeof (field.setEmptyText) === "function") {
+                    field.setEmptyText(field.originalEmptyText);
+                }
+            }
+        });
+
+        var defaultActionToolBar = view.defaultActionToolBar;
+        if (defaultActionToolBar) {
+            var defaultActionButtons = defaultActionToolBar.query('button');
+            if (defaultActionButtons && defaultActionButtons.length > 0) {
+                Ext.each(defaultActionButtons, function (button) {
+                    if (button.name !== 'Cancel' && button.name !== "Edit" && typeof (button.hide) === "function") {
+                        button.show();
+                    }
+                    if (button.name === "Edit") button.hide();
+                });
+            }
+        }
+
+    },
     doPreSaveOperation: function (record, values, idPropertyField) {
         var me = this,
              view = me.getView(),

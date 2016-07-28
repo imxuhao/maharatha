@@ -28,7 +28,6 @@ Ext.define('Chaching.view.profile.settings.SettingsFormController', {
                     Ext.destroy(wnd);
                     abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
                     if (abp.clock.provider.supportsMultipleTimezone && me.initialTimezone !== input.timezone) {
-                       
                         abp.message.info(app.localize('TimeZoneSettingChangedRefreshPageNotification')).done(function () {
                             window.location.reload();
                         });
@@ -36,10 +35,8 @@ Ext.define('Chaching.view.profile.settings.SettingsFormController', {
                 }
             },
             failure: function (response, opts) {
-                var res = Ext.decode(response.responseText);
-                abp.message.error(app.localize('Failed'));
-               // Ext.toast(res.exceptionMessage);
-                console.log(response);
+                //function to show error details (Chaching.utilities.ChachingGlobals)
+                ChachingGlobals.showPageSpecificErrors(response);
             }
 
 

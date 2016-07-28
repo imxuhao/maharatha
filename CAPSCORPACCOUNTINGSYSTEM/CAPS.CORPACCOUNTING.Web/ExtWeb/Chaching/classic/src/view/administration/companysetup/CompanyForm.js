@@ -199,6 +199,7 @@
                                              },
                                              items : [{
                                                  xtype: 'image',
+                                                 alt : '',
                                                  width: 90,
                                                  height: 60,
                                                  itemId: 'companyLogo',

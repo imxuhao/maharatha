@@ -375,7 +375,7 @@ Ext.define('Chaching.view.main.MainController', {
                 fullscreen: true,
                 ownerElement: btn,
                 itemTpl: '<table>' +
-                    '<tr><td><img  class="{iconCls}"/></td><td style="padding-left:10px;">{text}</td></tr></table>',
+                    '<tr><td><img  class="{iconCls}" alt= ""/></td><td style="padding-left:10px;">{text}</td></tr></table>',
                 data: items,
                 listeners: {
                     itemtap: me.changeLocale,

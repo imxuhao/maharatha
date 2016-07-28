@@ -26,6 +26,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
         {
             xtype: 'image',
             height: 50,
+            alt : '',
             itemId: 'companyLogoImage',
             width: 110,
             src: ChachingGlobals.defaultCompanyLogoImage,
@@ -112,6 +113,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             }
         }, {
             xtype: 'image',
+            alt: '',
             userCls:'img-circle',
             height: 50,
             width: 50,

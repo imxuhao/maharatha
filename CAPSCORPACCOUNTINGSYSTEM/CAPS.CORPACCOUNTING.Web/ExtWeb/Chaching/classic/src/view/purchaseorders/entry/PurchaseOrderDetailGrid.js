@@ -117,7 +117,7 @@ Ext.define('Chaching.view.purchaseorders.entry.PurchaseOrderDetailGrid',{
             listConfig : {   
                 minWidth : 200,
                 getInnerTpl : function() {
-                    return '<div class="x-combo-list-item"><img src="' + Ext.BLANK_IMAGE_URL + '" class="chkCombo-default-icon chkCombo" /> {typeOfCheck} </div>';
+                    return '<div class="x-combo-list-item"><img src="' + Ext.BLANK_IMAGE_URL + '" class="chkCombo-default-icon chkCombo" alt="" /> {typeOfCheck} </div>';
                 }
             },
             displayField: 'typeOfCheck',

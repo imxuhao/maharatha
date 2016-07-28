@@ -140,43 +140,46 @@
            cityCombo.reset();
            stateCombo.reset();
            countryCombo.reset();
-        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + zip).success(function (response) {
-            var city = [],
-                state = [],
-                country = [];
-            //find the city , state and country
-            if (response.results[0]) {
-                var address_components = response.results[0].address_components;
-                Ext.each(address_components, function (component) {
-                    var types = component.types;
-                    Ext.each(types, function (type) {
-                        if (type == 'locality') {
-                            city.push({ name: component.long_name, value: component.short_name });
-                        }
-                        if (type == 'administrative_area_level_1') {
-                            state.push({ name: component.long_name, value: component.short_name });
-                        }
-                        if (type == 'country') {
-                            country.push({ name: component.long_name, value: component.short_name });
-                        }
+           if (zip.trim().length > 2) {
+               $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + zip).success(function (response) {
+                   var city = [],
+                       state = [],
+                       country = [];
+                   //find the city , state and country
+                   if (response.results[0]) {
+                       var address_components = response.results[0].address_components;
+                       Ext.each(address_components, function (component) {
+                           var types = component.types;
+                           Ext.each(types, function (type) {
+                               if (type == 'locality') {
+                                   city.push({ name: component.long_name, value: component.short_name });
+                               }
+                               if (type == 'administrative_area_level_1') {
+                                   state.push({ name: component.long_name, value: component.short_name });
+                               }
+                               if (type == 'country') {
+                                   country.push({ name: component.long_name, value: component.short_name });
+                               }
 
-                    });
-                });
-                if (cityCombo && city.length > 0) {
-                    cityCombo.getStore().loadData(city);
-                    cityCombo.select(cityCombo.getStore().first());
-                }
-                if (stateCombo && state.length > 0) {
-                    stateCombo.getStore().loadData(state);
-                    stateCombo.select(stateCombo.getStore().first());
-                }
-                if (countryCombo && country.length > 0) {
-                    countryCombo.getStore().loadData(country);
-                    countryCombo.select(countryCombo.getStore().first());
-                }
-            }
-            
-        });
+                           });
+                       });
+                       if (cityCombo && city.length > 0) {
+                           cityCombo.getStore().loadData(city);
+                           cityCombo.select(cityCombo.getStore().first());
+                       }
+                       if (stateCombo && state.length > 0) {
+                           stateCombo.getStore().loadData(state);
+                           stateCombo.select(stateCombo.getStore().first());
+                       }
+                       if (countryCombo && country.length > 0) {
+                           countryCombo.getStore().loadData(country);
+                           countryCombo.select(countryCombo.getStore().first());
+                       }
+                   }
+
+               });
+           }
+        
     },
 
     onPostalCodeEnter: function (field, e) {
@@ -185,6 +188,16 @@
             me.loadCityStateAndCountry(field.getValue());
         });
         task.delay(500);
+
+        //var task = new Ext.util.DelayedTask(function () {
+        //    me.loadCityStateAndCountry(field.getValue());
+        //});
+
+        //// Wait 500ms before calling our function. If the user presses another key
+        //// during that 500ms, it will be cancelled and we'll wait another 500ms.
+        //field.on('keypress', function () {
+        //    task.delay(1000);
+        //});
     },
 
     onCompanyLogoClick: function (btn) {

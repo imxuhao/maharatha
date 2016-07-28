@@ -39,13 +39,13 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
                     if (main)
                         headerview = main.down('chachingheader');
                     if (headerview) {
-                        var img = headerview.down('image[itemId=AccountPic]');
+                        var profilePic = headerview.down('image[itemId=AccountPic]');
                         var button = headerview.down('*[itemId=AccountBtn]');
                         var src = 'data:image/jpeg;base64,' + res.result.image;
                         if (button.icon)
                             button.setIcon(src);
                         else
-                            img.setSrc(src);
+                            profilePic.setSrc(src);
                         abp.notify.success(app.localize('YourProfilePictureHasChangedSuccessfully').initCap());
                     }
                 }

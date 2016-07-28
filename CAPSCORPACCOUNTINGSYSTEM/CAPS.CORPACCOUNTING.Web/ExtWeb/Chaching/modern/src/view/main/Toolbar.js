@@ -9,7 +9,7 @@ Ext.define('Chaching.view.main.Toolbar', {
             xtype: 'component',
             reference: 'logo',
             userCls: 'main-logo',
-            html: '<img src="'+abp.appPath+'Content/images/capslogo.png" height=30px width=80px style="margin-top:5px;"/>'
+            html: '<img src="'+abp.appPath+'Content/images/capslogo.png" height=30px width=80px style="margin-top:5px;" alt= ""/>'
         },
         {
             xtype: 'button',
@@ -64,6 +64,7 @@ Ext.define('Chaching.view.main.Toolbar', {
         },
         {
             xtype: 'image',
+            alt: '',
             userCls: 'main-user-image small-image circular',
             alt: 'Current user image',
             href:'profile',

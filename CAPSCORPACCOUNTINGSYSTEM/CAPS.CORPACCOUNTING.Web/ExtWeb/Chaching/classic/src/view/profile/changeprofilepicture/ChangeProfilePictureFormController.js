@@ -5,6 +5,10 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
         var me = this;
         view = me.getView();
         data = view.dataobject;
+        if (Ext.isEmpty(view.getForm().findField('changeProfilePicture').getValue())) {
+            abp.message.error(app.localize('SelectUserProfilePicture'), app.localize('Error'));
+            return;
+        }
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/profile/UpdateProfilePicture',
             jsonData: Ext.encode(data),
@@ -16,10 +20,9 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
                     abp.message.error(res.error.message);
                 }
             },
-            failure: function(response) {
-                var res = Ext.decode(response.responseText);
-                Ext.toast(res.error.message);
-                console.log(response);
+            failure: function (response) {
+                //function to show error details (Chaching.utilities.ChachingGlobals)
+                ChachingGlobals.showPageSpecificErrors(response);
             }
         });
     },
@@ -34,19 +37,16 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
                 if (res.success) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
-                    if (Chaching.app)
-                        main = Chaching.app.getMainView();
-                    if (main)
-                        headerview = main.down('chachingheader');
-                    if (headerview) {
-                        var profilePic = headerview.down('image[itemId=AccountPic]');
-                        var button = headerview.down('*[itemId=AccountBtn]');
+                    var headerView = Ext.ComponentQuery.query('chachingheader')[0];
+                    if (headerView) {
+                        var profilePic = headerView.down('image[itemId=AccountPic]');
+                        var button = headerView.down('*[itemId=AccountBtn]');
                         var src = 'data:image/jpeg;base64,' + res.result.image;
                         if (button.icon)
                             button.setIcon(src);
                         else
                             profilePic.setSrc(src);
-                        abp.notify.success(app.localize('YourProfilePictureHasChangedSuccessfully').initCap());
+                        abp.notify.success(app.localize('YourProfilePictureHasChangedSuccessfully'));
                     }
                 }
                 else {
@@ -54,9 +54,8 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
                 }
             },
             failure: function (response) {
-                var res = Ext.decode(response.responseText);
-                Ext.toast(res.error.message);
-                console.log(response);
+                //function to show error details (Chaching.utilities.ChachingGlobals)
+                ChachingGlobals.showPageSpecificErrors(response);
             }
         });
     },
@@ -82,12 +81,12 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
             url: abp.appPath + 'Profile/UploadProfilePicture',
             success: function (form, response) {
                 if (response.result) {
-                    form.findField('changeprofilepicture').value = "gjhsagjd"
+                    form.findField('changeProfilePicture').value = "gjhsagjd"
                     var data = response.result.result;
                     if (response.success) {
                         view.filePath = data.tempFilePath;
                         view.dataobject = data;
-                        abp.notify.success(app.localize('UploadSuccess').initCap());
+                       // abp.notify.success(app.localize('UploadSuccess').initCap());
                     }
                 }
             },

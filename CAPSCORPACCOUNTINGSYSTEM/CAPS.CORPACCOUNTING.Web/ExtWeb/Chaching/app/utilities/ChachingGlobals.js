@@ -45,10 +45,11 @@
         }
     },
     showErrorMessage: function (operation) {
+        var response = null,
+            message = '',
+            title = app.localize('Error');
         if (operation.exception && operation.error && operation.error.response) {
-            var response = Ext.decode(operation.error.response.responseText);
-            var message = '',
-                title = 'Error';
+             response = Ext.decode(operation.error.response.responseText);
             if (response && response.error) {
                 if (response.error.message && response.error.details) {
                     title = response.error.message;
@@ -62,9 +63,7 @@
             }
             abp.message.error(message, title);
         } else {
-            var response = Ext.decode(operation.getResponse().responseText);
-            var message = '',
-                title = 'Error';
+             response = Ext.decode(operation.getResponse().responseText);
             if (response && response.error) {
                 if (response.error.message && response.error.details) {
                     title = response.error.message;
@@ -78,6 +77,24 @@
             abp.message.error(message, title);
         }
     },
+
+    showPageSpecificErrors: function (response) {
+        var message = '',
+           title = app.localize('Error'),
+           result = Ext.decode(response.responseText);
+        if (result && result.error) {
+            if (result.error.message && result.error.details) {
+                title = result.error.message;
+                message = result.error.details;
+                abp.message.error(message, title);
+                return;
+            }
+            title = result.error.message;
+            message = result.error.details ? result.error.details : title;
+        }
+        abp.message.error(message, title);
+    },
+
     getSubAccountCombo: function(valueField, displayField, isFilter) {
         var me = this;
         var beforeQuery = (isFilter ? 'emptyFunction' : 'onBeforeSubAccountQuery');

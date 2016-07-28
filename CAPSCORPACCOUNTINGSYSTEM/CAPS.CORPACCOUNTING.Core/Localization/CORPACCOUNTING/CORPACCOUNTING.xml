@@ -1060,6 +1060,7 @@
     
 <text name="PermissionsSaveMessage" value=" Changes were made to this user's Role. Name the new Role to create and Press Save or Cancel to assign selected permissions for this User." />
 <text name="Skip" value="Skip" />  
-<text name="YouDontHaveSufficientPermission" value="You don't have sufficient permission to perform this operation. Please contact administrator." /> 
+<text name="YouDontHaveSufficientPermission" value="You don't have sufficient permission to perform this operation. Please contact administrator." />
+<text name="SelectUserProfilePicture" value="Select Profile Picture before saving." />
   </texts>
 </localizationDictionary>

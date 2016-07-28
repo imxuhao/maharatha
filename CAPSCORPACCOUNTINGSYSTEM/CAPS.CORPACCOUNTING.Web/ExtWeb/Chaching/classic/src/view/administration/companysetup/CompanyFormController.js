@@ -47,21 +47,6 @@
                         Ext.apply(record.data, result.result.address);
                     }
                     Ext.apply(record.data, result.result);
-                    // load company settings
-                    if (result.result.companySettings) {
-                        Ext.apply(record.data, result.result.companySettings.companySettings);
-                    }
-                    // load general information
-                    if (result.result.companySettings) {
-                        Ext.apply(record.data, result.result.companySettings.general);
-                        me.initialTimezone = result.result.companySettings.general.timezone;
-                        me.usingDefaultTimeZone = result.result.companySettings.general.timezoneForComparison === abp.setting.values["Abp.Timing.TimeZone"];
-                    }
-                    // load userManagement information
-                    if (result.result.companySettings) {
-                        Ext.apply(record.data, result.result.companySettings.userManagement);
-                    }
-
                     //load company preferences
                     form.loadRecord(record);
                 } else {
@@ -70,12 +55,8 @@
             },
 
             failure: function (response) {
-                var result = Ext.decode(response.responseText);
-                if (!Ext.isEmpty(result.exceptionMessage)) {
-                    abp.message.error(result.exceptionMessage);
-                } else {
-                    abp.message.error(result.message);
-                }
+                //function to show error details (Chaching.utilities.ChachingGlobals)
+                ChachingGlobals.showPageSpecificErrors(response);
             }
         });
     },
@@ -113,12 +94,8 @@
             },
 
             failure: function (response) {
-                var result = Ext.decode(response.responseText);
-                if (!Ext.isEmpty(result.exceptionMessage)) {
-                    abp.message.error(result.exceptionMessage);
-                } else {
-                    abp.message.error(result.message);
-                }
+                //function to show error details (Chaching.utilities.ChachingGlobals)
+                ChachingGlobals.showPageSpecificErrors(response);
             }
         });
     },
@@ -188,16 +165,6 @@
             me.loadCityStateAndCountry(field.getValue());
         });
         task.delay(500);
-
-        //var task = new Ext.util.DelayedTask(function () {
-        //    me.loadCityStateAndCountry(field.getValue());
-        //});
-
-        //// Wait 500ms before calling our function. If the user presses another key
-        //// during that 500ms, it will be cancelled and we'll wait another 500ms.
-        //field.on('keypress', function () {
-        //    task.delay(1000);
-        //});
     },
 
     onCompanyLogoClick: function (btn) {
@@ -250,7 +217,6 @@
         }
         record.data.address = address;
         record.data.comapanyLogo = me.companyLogo == null ? null : me.companyLogo;
-        // var timezoneCombo = view.down('combobox[itemId=timezone]');
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/tenant/UpdateCompanyUnit',
             jsonData: Ext.encode(record.data),
@@ -289,12 +255,8 @@
             },
             failure: function (response, opts) {
                 myMask.hide();
-                var result = Ext.decode(response.responseText);
-                if (!Ext.isEmpty(result.exceptionMessage)) {
-                    abp.message.error(result.exceptionMessage);
-                } else {
-                    abp.message.error(result.error.details);
-                }
+                //function to show error details (Chaching.utilities.ChachingGlobals)
+                ChachingGlobals.showPageSpecificErrors(response);
             }
         })
     },
@@ -343,29 +305,14 @@
                         });
                     }
                 } else {
-                    var message = '',
-                        title = 'Error';
-                    if (res && res.error) {
-                        if (res.error.message && res.error.details) {
-                            title = res.error.message;
-                            message = res.error.details;
-                            abp.message.warn(message, title);
-                            return;
-                        }
-                        title = res.error.message;
-                        message = res.error.details ? res.error.details : title;
-                    }
-                    abp.message.error(message, title);
+                    //function to show error details (Chaching.utilities.ChachingGlobals)
+                    ChachingGlobals.showPageSpecificErrors(response);
                 }
             },
             failure: function (response, opts) {
                 myMask.hide();
-                var result = Ext.decode(response.responseText);
-                if (!Ext.isEmpty(result.exceptionMessage)) {
-                    abp.message.error(result.exceptionMessage);
-                } else {
-                    abp.message.error(result.message);
-                }
+                //function to show error details (Chaching.utilities.ChachingGlobals)
+                ChachingGlobals.showPageSpecificErrors(response);
             }
         });
     }

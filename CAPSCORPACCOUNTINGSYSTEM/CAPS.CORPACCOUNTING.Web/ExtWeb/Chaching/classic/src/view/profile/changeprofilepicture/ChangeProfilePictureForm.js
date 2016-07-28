@@ -28,7 +28,7 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureForm'
     items: [       
         {
             xtype: 'filefield',
-            name: 'changeprofilepicture',            
+            name: 'changeProfilePicture',            
             clearOnSubmit :false,
             anchor: '100%',
             width: '100%',

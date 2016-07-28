@@ -611,7 +611,14 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
     loginAttemptsClicked: function (menu, item, e, eOpts) {
         var loginAttemptView = Ext.create('Chaching.view.profile.loginAttempts.LoginAttemptView');
         var listStore = loginAttemptView.down('dataview').getStore();
-        listStore.load();
+        var ticks = new Date().valueOf();
+        listStore.load(function () {
+            listStore.each(function (record) {
+                    record.set('profileImageUrl', (record.get('result') === 'Success' ?
+                                                (abp.appPath + 'Profile/GetProfilePicture?v=' + ticks) : ChachingGlobals.defaultProfilePictureImage));
+                    record.commit();
+            });
+        });
         loginAttemptView.show();
     }
 

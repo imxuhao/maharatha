@@ -94,9 +94,9 @@ Ext.define('Chaching.view.header.ChachingHeader', {
         {
             scale: 'small',
             ui: 'badgeBtnBack',
-            width: 100,
-            height:50,
-            iconAlign: 'right',
+           // width: 100,
+           // height:50,
+            //iconAlign: 'right',
             text:'',//set dynamically based on login info of user
             gotoMyAccount: false,
             textAlign: 'right',
@@ -105,7 +105,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             contextMenu: undefined,
             menu: undefined,
             style: {
-                'top':'3px !important'
+                'top': '3px !important'
             },
             listeners: {
                 click: 'onAccountsHover',
@@ -118,7 +118,16 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             height: 50,
             width: 50,
             itemId: 'AccountPic',
-            hidden:true
+            hidden: true,
+            style : {
+                cursor: 'pointer !important;'
+            },
+            listeners: {
+                el: {
+                    click: 'onAccountsHover'
+                }
+            }
+            
         }
     ]
 });

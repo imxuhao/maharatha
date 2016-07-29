@@ -173,16 +173,18 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                         btn.gotoMyAccount = true;//to get go to my account menu item
                         btn.setTooltip(abp.localization.localize("YouCanBackToYourAccount"));
                     }
-                    var image = view.down('image[itemId=AccountPic]');
+                    var profilePicImage = view.down('image[itemId=AccountPic]');
                     var ticks = new Date().getTime();
                     var profilePic = abp.appPath + 'Profile/GetProfilePicture?t=' + ticks;
                     if (result.user.profilePictureId) {
-                        btn.gotoMyAccount ? btn.setWidth(180) : btn.setWidth(130);
-                        btn.setIcon(profilePic);
-                        image.hide();
+                        //btn.gotoMyAccount ? btn.setWidth(180) : btn.setWidth(130);
+                       // btn.setIcon(profilePic);
+                        //image.hide();
+                        profilePicImage.show();
+                        profilePicImage.setSrc(profilePic);
                     } else {
-                        image.show();
-                        image.setSrc(profilePic);
+                        profilePicImage.show();
+                        profilePicImage.setSrc(profilePic);
                     }
                     btn.setText(userName);
 
@@ -327,7 +329,8 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
     },
     onAccountsHover: function (btn) {
         var me = this,
-           view = me.getView();
+           view = me.getView(),
+           btn = view.down('#AccountBtn');
         var contextMenu = btn.contextMenu;
         var position = btn.getPosition();
 

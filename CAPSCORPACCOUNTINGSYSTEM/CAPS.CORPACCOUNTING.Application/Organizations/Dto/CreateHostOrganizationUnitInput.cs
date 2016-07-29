@@ -13,7 +13,7 @@ namespace CAPS.CORPACCOUNTING.Organizations.Dto
         public long? ParentId { get; set; }
 
         /// <summary>Gets or sets the Organization Name field. </summary>
-        [Required]
+        [Required(ErrorMessage = "Name field is required.")]
         [StringLength(OrganizationUnit.MaxDisplayNameLength)]
         public string DisplayName { get; set; }
 

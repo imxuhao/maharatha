@@ -628,6 +628,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 {
                     userRoleDto.IsAssigned = await UserManager.IsInRoleAsync(input.Id.Value, userRoleDto.RoleName);
                 }
+                if(!ReferenceEquals(AbpSession.TenantId,null))
                 output.TenantwithRoles = await GetTenantListofOrganizationforEdit(user.UserName);
             }
             return output;

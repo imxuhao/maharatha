@@ -351,7 +351,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     }
                     return dto;
                 }
-                ComapnyPreferenceDto comapnyPreferenceDto = new ComapnyPreferenceDto();
+                ComapnyPreferenceDto comapnyPreferenceDto = new ComapnyPreferenceDto {CompanyName = tenancyName};
                 return comapnyPreferenceDto;
             }
         }

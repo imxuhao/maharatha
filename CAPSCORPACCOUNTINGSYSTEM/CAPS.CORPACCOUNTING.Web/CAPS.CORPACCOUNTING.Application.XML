@@ -8927,6 +8927,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.ITenantAppService.UpdateTenantUnit(CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantEditDto)">
+            <summary>
+            Update TenantUnit By TenantId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.GetTenantUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             SumitMethod to get TenantList
@@ -8958,6 +8965,13 @@
             <summary>
             Get CompanyLogo
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.UpdateTenantUnit(CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantEditDto)">
+            <summary>
+            Sumit Method to Update TenantUnit
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames">

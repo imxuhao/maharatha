@@ -56,6 +56,13 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// <returns></returns>
         Task<CompanyImageOutputDto> GetCompanyLogo();
 
+        /// <summary>
+        /// Update TenantUnit By TenantId
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task UpdateTenantUnit(TenantEditDto input);
+
 
     }
 }

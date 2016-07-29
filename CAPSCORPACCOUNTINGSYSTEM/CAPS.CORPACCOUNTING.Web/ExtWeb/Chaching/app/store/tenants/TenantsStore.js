@@ -14,7 +14,7 @@ Ext.define('Chaching.store.tenants.TenantsStore', {
         api: {
             create: abp.appPath + 'api/services/app/tenant/CreateTenantUnit',
             read: abp.appPath + 'api/services/app/tenant/GetTenantUnits',
-            update: abp.appPath + 'api/services/app/tenant/UpdateTenant',
+            update: abp.appPath + 'api/services/app/tenant/UpdateTenantUnit',
             destroy: abp.appPath + 'api/services/app/tenant/DeleteTenant'
         }
     },

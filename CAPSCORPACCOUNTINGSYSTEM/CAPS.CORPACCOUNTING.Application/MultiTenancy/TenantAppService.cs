@@ -412,5 +412,19 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             
         }
 
+        /// <summary>
+        /// Sumit Method to Update TenantUnit
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Tenants_Edit)]
+        public async Task UpdateTenantUnit(TenantEditDto input)
+        {
+            var tenant = await TenantManager.GetByIdAsync(input.Id);
+            input.ConnectionString = tenant.ConnectionString;
+            input.MapTo(tenant);
+            CheckErrors(await TenantManager.UpdateAsync(tenant));
+        }
+
     }
 }

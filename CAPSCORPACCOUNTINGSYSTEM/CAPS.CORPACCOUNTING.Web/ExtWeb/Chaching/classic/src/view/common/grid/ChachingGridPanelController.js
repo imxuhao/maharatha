@@ -302,7 +302,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             var record = records[0],
                 rejectResponse = Ext.decode(rejectResponseValue);
             var message = '',
-               title = 'Error';
+               title = app.localize('Error');
             record.reject();
             if (rejectResponse && rejectResponse.error) {
                 if (rejectResponse.error.message && rejectResponse.error.details) {
@@ -324,22 +324,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 var controller = operation.controller;
                 controller.doReloadGrid();
             }
-            abp.notify.success('Operation completed successfully.', 'Success');
+            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
         } else {
-            var response = Ext.decode(operation.getResponse().responseText);
-            var message = '',
-                title = 'Error';
-            if (response && response.error) {
-                if (response.error.message && response.error.details) {
-                    title = response.error.message;
-                    message = response.error.details;
-                    abp.message.warn(message, title);
-                    return;
-                }
-                title = response.error.message;
-                message = response.error.details ? response.error.details : title;
-            }
-            abp.message.warn(message, title);
+            // show error validation if any 
+            ChachingGlobals.showErrorMessage(operation);
         }
     },
   

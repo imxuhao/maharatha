@@ -37,12 +37,14 @@
                         xtype: 'textfield',                        
                         itemId: 'localAddress',
                         fieldLabel: abp.localization.localize('ThisWebSiteRootAddress'),
-                        width: '100%',
+                        width: '80%',
+                        labelAlign: 'left',
+                        labelWidth:150,
                         ui: 'fieldLabelTop',
                         style: {
                             color: '#9eacb4',
                             right: '50px'
-                        }                        
+                        }
                     },
                     {
                         xtype: 'label',
@@ -57,7 +59,7 @@
                         valueField: 'value',
                         displayField: 'name',
                         queryMode: 'local',
-                        width: '100%',
+                        width: '80%',
                         ui: 'fieldLabelTop',
                         reference: 'timezone',
                         
@@ -123,14 +125,15 @@
                             name: 'allowTenantsToRegisterToSystem',
                             itemId:'allowTenantsToRegisterToSystem',
                             labelAlign: 'right',
-                            inputValue: true,
-                            checked: true,
+                            inputValue: false,
+                            checked: false,
                             width: '100%',
                             ui: 'default',
+                            readOnly: true,
                             boxLabelCls: 'checkboxLabel',
                             boxLabel: app.localize('AllowTenantsToRegisterThemselves'),
                             listeners: {
-                                'change': 'addTenantByAdmin'
+                                'beforerender': 'addTenantByAdmin'
                             }
                     
                 },
@@ -180,7 +183,7 @@
                     xtype: 'combobox',
                     itemId: 'editions',
                     fieldLabel: app.localize('Editions').initCap(),
-                    width: '100%',
+                    width: '80%',
                     ui: 'fieldLabelTop',
                     emptyText: app.localize('TEdition'),
                     displayField: 'editionDisplayName',
@@ -225,8 +228,10 @@
                     {
                         xtype: 'textfield',
                         itemId: 'defaultFromAddress',
+                        labelAlign: 'left',
+                        labelWidth: 230,
                         fieldLabel: abp.localization.localize('DefaultFromAddress'),
-                        width: '100%',
+                        width: '80%',
                         ui: 'fieldLabelTop',
                         style: {
                             color: '#9eacb4'
@@ -236,7 +241,9 @@
                         xtype: 'textfield',
                         itemId: 'defaultFromDisplayName',
                         fieldLabel: abp.localization.localize('DefaultFromDisplayName'),
-                        width: '100%',
+                        labelAlign: 'left',
+                        labelWidth: 230,
+                        width: '80%',
                         ui: 'fieldLabelTop',
                         style: {
                             color: '#9eacb4'
@@ -247,7 +254,9 @@
                         xtype: 'textfield',
                         itemId: 'smtpHost',
                         fieldLabel: abp.localization.localize('SmtpHost'),
-                        width: '100%',
+                        labelAlign: 'left',
+                        labelWidth: 75,
+                        width: '80%',
                         ui: 'fieldLabelTop',
                         style: {
                             color: '#9eacb4'
@@ -258,7 +267,9 @@
                         xtype: 'textfield',
                         itemId: 'smtpPort',
                         fieldLabel: abp.localization.localize('SmtpPort'),
-                        width: '100%',
+                        labelAlign: 'left',
+                        labelWidth: 75,
+                        width: '80%',
                         ui: 'fieldLabelTop',
                         style: {
                             color: '#9eacb4'
@@ -295,7 +306,9 @@
                         itemId: 'domainName',
                         reference: 'domainName',
                         fieldLabel: abp.localization.localize('DomainName'),
-                        width: '100%',
+                        labelAlign: 'left',
+                        labelWidth: 150,
+                        width: '80%',
                         hidden: true,
                         ui: 'fieldLabelTop'
                     },
@@ -304,8 +317,10 @@
                         itemId: 'userName',
                         reference: 'userName',
                         fieldLabel: abp.localization.localize('UserName'),
+                        labelAlign: 'left',
+                        labelWidth: 150,
                         hidden: true,
-                        width: '100%',
+                        width: '80%',
                         ui: 'fieldLabelTop'
                     },
                     {
@@ -314,16 +329,20 @@
                         reference: 'password',
                         inputType: 'password',
                         fieldLabel: abp.localization.localize('Password'),
+                        labelAlign: 'left',
+                        labelWidth: 150,
                         hidden: true,
-                        width: '100%',
+                        width: '80%',
                         ui: 'fieldLabelTop'
                     },
                     {
                         xtype: 'textfield',
                         itemId: 'testEmailSettings',
                         fieldLabel: abp.localization.localize('TestEmailSettingsHeader'),
+                        labelAlign: 'left',
+                        labelWidth: 130,
                         value: abp.localization.localize('TestEmailSettings'),
-                        width: '100%',
+                        width: '80%',
                         ui: 'fieldLabelTop',
                         style: {
                             color: '#9eacb4'
@@ -332,7 +351,7 @@
                     {
                         xtype: 'button',
                         scale: 'small',
-                        ui: 'actionMenuButton',
+                        ui: 'actionButton',
                         text: abp.localization.localize("SendTestEmail").toUpperCase(),
                         iconAlign: 'left',
                         listeners: {

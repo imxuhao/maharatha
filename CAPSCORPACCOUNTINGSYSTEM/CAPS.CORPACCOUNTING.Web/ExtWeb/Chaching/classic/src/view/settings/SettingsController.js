@@ -84,9 +84,9 @@
 
                 var tm = view.down('panel[itemId=tenantManagementView]');
                 if (tm) {
-
                     var allowTenantsToRegisterToSystemCheckBox = tm.down('checkbox[itemId=allowTenantsToRegisterToSystem]');
-                    allowTenantsToRegisterToSystemCheckBox.setValue(data.tenantManagement.allowSelfRegistration);
+                    //allowTenantsToRegisterToSystemCheckBox.setValue(data.tenantManagement.allowSelfRegistration);
+                    //allowTenantsToRegisterToSystemCheckBox.disable();
 
                     var newRegisterTenantsAreActiveByDefaultCheckBox = tm.down('checkbox[itemId=newRegisterTenantsAreActiveByDefault]');
                     newRegisterTenantsAreActiveByDefaultCheckBox.setValue(data.tenantManagement.isNewRegisteredTenantActiveByDefault);
@@ -148,7 +148,7 @@
                 newRegisteredTenantHintLabel = me.lookupReference('newRegisteredTenantHint'),
                 useCaptchaOnRegistrationCheckBox = me.lookupReference('useCaptchaOnRegistration');
 
-            if (isAllowTenantsToRegisterToSystem.checked) {
+            if (isAllowTenantsToRegisterToSystem.readOnly == false) {
                 newRegisteredTenantCheckBox.show();
                 newRegisteredTenantHintLabel.show();
                 useCaptchaOnRegistrationCheckBox.show();

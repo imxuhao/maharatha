@@ -93,8 +93,8 @@
     <text name="DomainName" value="Domain name" />
     <text name="UseSsl" value="Use SSL" />
     <text name="ThisWebSiteRootAddress" value="Web site root address" />
-    <text name="EnableModificationsToDB" value="Enable modifications"/>
-    <text name="UseRedisCache" value="Use Redis Cache"/>
+    <text name="EnableModificationsToDB" value="Enable modifications log"/>
+    <text name="UseRedisCache" value="Use Redis cache"/>
     <text name="ThisWebSiteRootAddress_Hint" value="It will be used when building links to this web site. It's needed for some tasks like building password reset links. Ex: http://mydomain.com/" />
     <text name="General" value="General" />
     <text name="SendPasswordResetLink_Information" value="A password reset link will be sent to your email to reset your password. If you don't get an email within a few minutes, please re-try." />

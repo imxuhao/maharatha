@@ -320,7 +320,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     handleFulFillResponse: function (records, operation, success) {
         if (success) {
             var action = operation.getAction();
-            if (action === "create" || action === "destroy"||action==="update") {
+            if (action === "create" || action === "update") {
+                var controller = operation.controller;
+                //controller.doReloadGrid();
+            } else if (action === "destroy") {
                 var controller = operation.controller;
                 controller.doReloadGrid();
             }

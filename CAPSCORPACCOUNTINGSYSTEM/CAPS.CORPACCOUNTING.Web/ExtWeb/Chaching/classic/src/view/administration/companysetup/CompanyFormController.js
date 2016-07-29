@@ -38,7 +38,7 @@
                 if (result.success) {
                     var src = 'data:image/jpeg;base64,' + result.result.companyLogo;
                     var companyLogo = view.down('image[itemId=companyLogo]');
-                    if (companyLogo) {
+                    if (companyLogo && result.result.companyLogo) {
                         companyLogo.setSrc(src);
                     }
                     //load company setup information

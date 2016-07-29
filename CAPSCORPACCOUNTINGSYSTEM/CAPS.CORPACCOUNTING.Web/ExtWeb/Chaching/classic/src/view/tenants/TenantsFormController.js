@@ -22,13 +22,15 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
         }
     },
     onTenancyNameEnter: function (cmp, event, eOpts) {
-        var me = this;
-        var task = new Ext.util.DelayedTask(function () {
-            me.enableDisableCopyTenantsTab(cmp);
-        });
-        task.delay(1000);
+        if (!cmp.isEditMode) {
+            var me = this;
+            var task = new Ext.util.DelayedTask(function () {
+                me.enableDisableCopyTenantsTab(cmp);
+            });
+            task.delay(1000);
+        }
     },
-    enableDisableCopyTenantsTab : function(cmp) {
+    enableDisableCopyTenantsTab: function (cmp) {
         var me = this,
          view = me.getView();
         var tenantStore = view.down('combobox[itemId=tenantItemId]').getStore();
@@ -61,50 +63,93 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
             
         }
     },
-    doPreSaveOperation: function (record, values, idPropertyField) {
-        var me = this,
-             view = me.getView();
 
-        var organizationCombo = view.down('combobox[itemId=organizationId]');
+    onSaveClicked: function (btn) {
+        var me = this,
+            view = me.getView(),
+            parentGrid = view.parentGrid,
+            values = view.getValues(),
+            organizationCombo = view.down('combobox[itemId=organizationId]');
         if (organizationCombo && organizationCombo.getValue() == null) {
             abp.message.error(app.localize('SelectOrganization'));
             return;
         }
-        if (organizationCombo && organizationCombo.getValue() == null) {
-            abp.message.confirm(app.localize('TenantCreationWarningMessage'), app.localize('Warning'), function (btn) {
-                if (btn) {
-                    record = Ext.create('Chaching.model.tenants.TenantsModel');
-                    Ext.apply(record.data, values);
-                    var selectedRecords = view.down('gridpanel[itemId=moduleListGridItemId]').getSelection();
-                    var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
-                    record.set('organizationUnitId', values.organizationUnitId);
-                    record.set('sourceTenantId', tenantListCombo.getValue());
-                    if (selectedRecords && selectedRecords.length > 0) {
-                        var moduleListArray = [];
-                        Ext.each(selectedRecords, function (rec) {
-                            moduleListArray.push(rec.get('name'));
-                        });
-                        record.data.moduleList = moduleListArray;
-                    }
-                } else {
-                    return false;
-                }
+        if (parentGrid) {
+            var gridStore = parentGrid.getStore(),
+                idPropertyField = gridStore.idPropertyField,
+                operation;
+            var record = Ext.create(gridStore.model.$className);
+            Ext.apply(record.data, values);
+            var target;
+            if (view.openInPopupWindow) {
+                target = view.up('window');
+            } else {
+                target = view;
+            }
+            var myMask = new Ext.LoadMask({
+                msg: 'Please wait...',
+                target: target
             });
+            if (values && parseInt(values[idPropertyField]) > 0) {
+                record = me.prepareRequest(record, values, view);
+                me.saveTenant(record, values, idPropertyField, operation, parentGrid, me, gridStore, myMask);
+            } else {
+                abp.message.confirm(app.localize('TenantCreationWarningMessage'), app.localize('Warning'), function (isConfirmed) {
+                    if (isConfirmed) {
+                        record = me.prepareRequest(record, values, view);
+                        me.saveTenant(record, values, idPropertyField, operation, parentGrid, me, gridStore, myMask);
+                    } else {
+                        myMask.hide();
+                        return false;
+                    }
+                });
+            }
         }
+    },
 
-        //record = Ext.create('Chaching.model.tenants.TenantsModel');
-        //Ext.apply(record.data, values);
-        //var selectedRecords = view.down('gridpanel[itemId=moduleListGridItemId]').getSelection();
-        //var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
-        //record.set('organizationUnitId', values.organizationUnitId);
-        //record.set('sourceTenantId', tenantListCombo.getValue());
-        //if (selectedRecords && selectedRecords.length > 0) {
-        //    var moduleListArray = [];
-        //    Ext.each(selectedRecords, function (rec) {
-        //        moduleListArray.push(rec.get('name'));
-        //    });
-        //    record.data.moduleList = moduleListArray;
-        //}
+    saveTenant: function (record, values, idPropertyField, operation, parentGrid, me, gridStore, myMask) {
+        var me = this;
+        if (!record) return record;
+        myMask.show();
+        if (values && parseInt(values[idPropertyField]) > 0) {
+            operation = Ext.data.Operation({
+                params: record.data,
+                parentGrid: parentGrid,
+                records: [record],
+                controller: me,
+                operationMask: myMask,
+                callback: me.onOperationCompleteCallBack
+            });
+            gridStore.update(operation);
+        } else if (values && parseInt(values[idPropertyField]) === 0) {
+            record.id = 0;
+            record.set('id', 0);
+            operation = Ext.data.Operation({
+                params: record.data,
+                parentGrid: parentGrid,
+                controller: me,
+                operationMask: myMask,
+                callback: me.onOperationCompleteCallBack
+            });
+            gridStore.create(values, operation);
+        } else {
+            myMask.hide();
+        }
+    },
+    prepareRequest: function (record, values, view) {
+        var record = Ext.create('Chaching.model.tenants.TenantsModel');
+        Ext.apply(record.data, values);
+        var selectedRecords = view.down('gridpanel[itemId=moduleListGridItemId]').getSelection();
+        var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
+        record.set('organizationUnitId', values.organizationUnitId);
+        record.set('sourceTenantId', tenantListCombo.getValue());
+        if (selectedRecords && selectedRecords.length > 0) {
+            var moduleListArray = [];
+            Ext.each(selectedRecords, function (rec) {
+                moduleListArray.push(rec.get('name'));
+            });
+            record.data.moduleList = moduleListArray;
+        }
         return record;
     }
     

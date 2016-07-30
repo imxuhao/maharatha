@@ -108,7 +108,8 @@ Ext.define('Chaching.Application', {
         'Chaching.store.TimezoneStore',
         'users.PermissionsTreeStore',
         'Chaching.store.ARPaymentTermsListStore',
-        'Chaching.store.APPaymentTermsListStore'
+        'Chaching.store.APPaymentTermsListStore',
+        'editions.EditionsTreeStore'
     ],
     mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

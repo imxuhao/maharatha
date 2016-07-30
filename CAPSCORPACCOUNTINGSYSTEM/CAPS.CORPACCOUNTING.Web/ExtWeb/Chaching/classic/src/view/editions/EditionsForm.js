@@ -12,7 +12,7 @@ Ext.define('Chaching.view.editions.EditionsForm',{
     name: 'Editions',
     openInPopupWindow: true,
     hideDefaultButtons: false,
-    layout: 'vbox',
+    layout: 'fit',
     defaults: {
         bodyStyle: { 'background-color': 'trasparent' },
         labelAlign: 'top'
@@ -45,19 +45,32 @@ Ext.define('Chaching.view.editions.EditionsForm',{
             ]
         },
         {
-            title: 'Features',
-            padding: '0 0 0 10',        
+                
+            title: app.localize('Features'),
+            padding: '0 0 0 10',
             iconCls: 'icon-home',
-            items: [{
-                xtype: 'textfield',
-                name: 'displayName',
-                itemId: 'displayFeatures',
-                fieldLabel: app.localize('Name'),
-                width: '100%',
-                ui: 'fieldLabelTop',
-                emptyText: app.localize('Edition Name')
+            layout: 'fit',
+            xtype: 'treepanel',
+            name: 'features',
+            itemId: 'features',
+            cls: 'chaching-grid',
+            store: 'editions.EditionsTreeStore',
+            rootVisible: false,
+            width: '100%',
+            alwaysReload: true,
+            hideHeaders: true,
+            columns: [{
+                xtype: 'treecolumn',
+                dataIndex: 'displayName',
+                flex: 1
             }
+            ],
+            plugins: [
+                Ext.create('Ext.grid.plugin.CellEditing', {
+                    clicksToEdit: 2
+                })
             ]
+
         }
         ]
     }

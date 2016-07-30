@@ -45,7 +45,22 @@ Ext.define('Chaching.view.editions.EditionsGridController', {
             }
 
         }
+    },
+
+
+    doAfterCreateAction: function (createNewMode, form, isEdit, record) {
+        var me = this;
+        if (form.down('treepanel')) {
+            var treeStore = form.down('treepanel').getStore();
+            if (isEdit) {
+                treeStore.getProxy().setExtraParams({ id: record.get('id') });
+            } else {
+                treeStore.getProxy().setExtraParams({id: null});
+            }
+            treeStore.load();
+        }
     }
+
     //TODO convert this function in component(editing) so for every combo we need not to write
     //onEditionChange:function(combo, newValue, oldValue, e) {
     //    var grid = combo.up();

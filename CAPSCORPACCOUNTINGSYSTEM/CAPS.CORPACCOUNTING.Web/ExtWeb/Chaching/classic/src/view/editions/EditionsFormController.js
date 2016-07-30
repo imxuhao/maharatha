@@ -12,16 +12,10 @@ Ext.define('Chaching.view.editions.EditionsFormController', {
             
         var editionTitle = view.el.component.title;
 
-        if (editionTitle === "Edit edition") {
-            var records = gridStore.getData().items;
-            for (i = 0; i < records.length; i++) {
-                if (records[i].data.displayName === displayName) {
-                    editionId = records[i].id;
-                    widgetRec = records[i];
-                    }
-                }
+        if (editionTitle === "Edit edition" || editionTitle === "ViewEdition") {
+            var recordClicked = this.getView().getValues();
                 var edition = {
-                    id: editionId,
+                    id: recordClicked.id,
                     displayName: displayName
                 };
             

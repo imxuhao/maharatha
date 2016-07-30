@@ -19,11 +19,42 @@ Ext.define('Chaching.view.editions.EditionsGridController', {
                     Id: e.record.data.id,
                     DisplayName: e.record.data.displayName                 
                 };
-                input.Edition = Edition;
+
+                var features = [
+                    //{
+                    //    name: a.down('treepanel').items.features,
+                    //    value: a.down('treepanel').items.features
+                    //},
+                      {
+                          name: "MyApplication.SampleBooleanFeature",
+                          value: false
+                      },
+                      {
+                          name: "MyApplication.SampleSelectionFeature",
+                          value: "B"
+                      },
+                      {
+                          name: "MyApplication.SampleNumericFeature",
+                          value: 10
+                      }
+                ];
+
+                var input = {
+                    edition: Edition,
+                    featureValues: features
+                };
 
                 Ext.Ajax.request({
                     url: abp.appPath + 'api/services/app/edition/CreateOrUpdateEdition',
-                    jsonData: Ext.encode(input)
+                    jsonData: Ext.encode(input),
+                    success: function(){
+                        abp.notify.info(app.localize('Success'));
+                        me.doPostSaveOperations();
+                        
+                    },
+                failure: function(){
+                    abp.notify.error(app.localize('Error'));
+                }
                 });
 
 
@@ -59,6 +90,14 @@ Ext.define('Chaching.view.editions.EditionsGridController', {
             }
             treeStore.load();
         }
+    },
+
+    doPostSaveOperations: function () {
+        var me = this,
+            view = this.getView();
+        var grid = view.ownerGrid,
+        gridStore = grid.getStore();
+        grid.getStore().load();
     }
 
     //TODO convert this function in component(editing) so for every combo we need not to write

@@ -18,7 +18,7 @@ Ext.define('Chaching.store.languages.LanguagesStore', {
             create: abp.appPath + 'api/services/app/language/CreateOrUpdateLanguage',
             read: abp.appPath + 'api/services/app/language/GetLanguages',
             update: abp.appPath + 'api/services/app/language/CreateOrUpdateLanguage',
-            destroy: abp.appPath + 'api / services / app / language / DeleteLanguage'
+            destroy: abp.appPath + 'api/services/app/language/DeleteLanguage'
         },
         reader: {
             type: 'json',

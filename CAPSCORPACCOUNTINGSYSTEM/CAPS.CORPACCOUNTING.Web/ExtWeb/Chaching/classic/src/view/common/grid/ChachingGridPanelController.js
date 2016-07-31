@@ -196,6 +196,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     },
     deleteActionClicked: function (menu, item, e, eOpts) {
         //do delete based on operation of grid store
+        var me = this;
         var parentMenu = menu.parentMenu,
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
@@ -219,6 +220,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                                });
                            }
                            gridStore.setAutoSync(true);
+                           gridStore.addListener('datachanged', me.onStoreRecordDelete);
                            gridStore.remove(widgetRec);
                            gridStore.setAutoSync(false);
 
@@ -226,6 +228,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                    }
                }
            );
+    },
+    onStoreRecordDelete : function(store,eOpts) {
+        var removedRecords = store.getRemovedRecords()
+        if (removedRecords != undefined && removedRecords.length > 0) {
+            abp.notify.success(app.localize('SuccessfullyDeleted'), app.localize('Success'));
+        }
     },
     onEditComplete: function (editor, e) {
         var me = this,
@@ -328,6 +336,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 var controller = operation.controller;
                 controller.doReloadGrid();
             } else if (action === "update") {
+
                 //var controller = operation.controller;
                 //controller.doReloadGrid();
             } else if (action === "destroy") {

@@ -17,6 +17,7 @@ using Abp.UI;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Localization.Dto;
+using LinqKit;
 
 namespace CAPS.CORPACCOUNTING.Localization
 {
@@ -299,11 +300,31 @@ namespace CAPS.CORPACCOUNTING.Localization
             {
                 languageTexts = languageTexts.Where(s => s.TargetValue.IsNullOrEmpty());
             }
+            
             if (!ReferenceEquals(input.Filters, null))
             {
-                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
-                if (!ReferenceEquals(mapSearchFilters, null))
-                    languageTexts = Helper.CreateFilters(languageTexts, mapSearchFilters);
+                foreach (var filter in input.Filters)
+                {
+                    if (filter.Property == "key")
+                    {
+                        languageTexts = languageTexts.Where(
+                            l =>(l.Key != null &&
+                                 l.Key.IndexOf(filter.SearchTerm, StringComparison.CurrentCultureIgnoreCase) >= 0));
+                    }
+
+                    if (filter.Property == "targetValue")
+                    {
+                        languageTexts= languageTexts.Where(
+                            l =>(l.TargetValue != null &&
+                                 l.TargetValue.IndexOf(filter.SearchTerm, StringComparison.CurrentCultureIgnoreCase) >= 0));
+                    }
+                    if (filter.Property == "baseValue")
+                    {
+                        languageTexts= languageTexts.Where(
+                            l =>(l.BaseValue != null &&
+                                 l.BaseValue.IndexOf(filter.SearchTerm, StringComparison.CurrentCultureIgnoreCase) >= 0));
+                    }
+                }
             }
 
             var totalCount = languageTexts.Count();

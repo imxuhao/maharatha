@@ -6,6 +6,7 @@ Ext.define('Chaching.view.languages.LanguagesView',{
     height:300,
     width: 400,
     layout: 'fit',
+    defaultFocus: 'combobox#language',
     initComponent: function (config) {
         var me = this,
             controller = me.getController();

@@ -23,7 +23,7 @@ Ext.define('Chaching.view.languages.LanguagesForm', {
         //labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
-    defaultFocus: 'textfield#tenancyName',
+    
     items: [
         {
             xtype: 'hiddenfield',
@@ -37,6 +37,7 @@ Ext.define('Chaching.view.languages.LanguagesForm', {
         }, {
             xtype: 'combobox',
             name: 'name',
+            itemId: 'language',
             reference : 'languageCombo',
             fieldLabel: app.localize('Language').initCap(),
             width: '100%',

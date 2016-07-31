@@ -29,9 +29,15 @@ Ext.define('Chaching.view.languages.LanguagesForm', {
             xtype: 'hiddenfield',
             name: 'id',
             value: 0
+        },
+        {
+            xtype: 'hiddenfield',
+            name: 'tenantId',
+            value: null
         }, {
             xtype: 'combobox',
             name: 'name',
+            reference : 'languageCombo',
             fieldLabel: app.localize('Language').initCap(),
             width: '100%',
             ui: 'fieldLabelTop',
@@ -49,9 +55,13 @@ Ext.define('Chaching.view.languages.LanguagesForm', {
             store: {
                 model: 'Chaching.model.languages.LanguagesNamesModel',
                 data: []
+            },
+            listeners: {
+                change : 'onLanguageSelect'
             }
         }, {
             xtype: 'combobox',
+            reference : 'flagCombo',
             name: 'icon',
             fieldLabel: app.localize('Flag').initCap(),
             width: '100%',

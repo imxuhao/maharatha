@@ -274,7 +274,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 if (ReferenceEquals(connectionstringUnit,null))
                     await CustomTenantSeeding(newTenantId);
                 if (sourcetenantId.HasValue)
-                    await CloneTenantDate(newTenantId, sourcetenantId, entityList);
+                    await CloneTenantData(newTenantId, sourcetenantId, entityList);
 
                 await uow.CompleteAsync();
             }
@@ -363,7 +363,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// <param name="sourceTenantId"></param>
         /// <param name="entityList"></param>
         /// <returns></returns>
-        public async Task CloneTenantDate(int newTenantId, int? sourceTenantId, List<string> entityList)
+        public async Task CloneTenantData(int newTenantId, int? sourceTenantId, List<string> entityList)
         {
             if (!ReferenceEquals(entityList, null))
             {
@@ -393,6 +393,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         foreach (var vendor in vendorList)
                                         {
                                             vendor.MapTo(vendorUnit);
+                                            vendorUnit.TenantId = newTenantId;
+                                            vendorUnit.CreatorUserId = null;
+                                            vendorUnit.CreatorUserId = null;
                                             await _vendorUnit.InsertAsync(vendorUnit);
                                         }
                                     }
@@ -421,6 +424,11 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                             if (user.Name != "admin")
                                             {
                                                 user.MapTo(userUnit);
+                                                userUnit.TenantId = newTenantId;
+                                                userUnit.CreatorUser = null ;
+                                                userUnit.CreatorUserId = null;
+                                                userUnit.LastModifierUser = null;
+                                                userUnit.LastModifierUserId = null;
                                                 await _userUnit.InsertAsync(userUnit);
                                             }
                                         }
@@ -451,7 +459,13 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         {
                                             if (role.Name != "Admin" && role.Name != "User")
                                             {
+                                                
                                                 role.MapTo(roleUnit);
+                                                roleUnit.TenantId = newTenantId;
+                                                roleUnit.CreatorUser = null;
+                                                roleUnit.CreatorUserId = null;
+                                                roleUnit.LastModifierUserId = null;
+                                                roleUnit.LastModifierUser = null;
                                                 await _roleUnit.InsertAsync(roleUnit);
                                             }
                                         }
@@ -477,7 +491,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         var coaUnit = new CoaUnit();
                                         foreach (var coa in coaList)
                                         {
+                                            
                                             coa.MapTo(coaUnit);
+                                            coa.TenantId = newTenantId;
+                                            coa.CreatorUserId = null;
                                             await _coaUnit.InsertAsync(coaUnit);
                                         }
                                     }
@@ -504,6 +521,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         foreach (var coa in coaList)
                                         {
                                             coa.MapTo(coaUnit);
+                                            coaUnit.TenantId = newTenantId;
+                                            coaUnit.CreatorUserId = null;
                                             await _coaUnit.InsertAsync(coaUnit);
                                         }
                                     }
@@ -532,6 +551,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                             foreach (var emp in empList)
                                             {
                                                 emp.MapTo(employeeUnit);
+                                                employeeUnit.TenantId = newTenantId;
+                                                employeeUnit.CreatorUserId = null;
                                                 await _employeeUnit.InsertAsync(employeeUnit);
                                             }
                                         }
@@ -557,7 +578,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         var customerUnit = new CustomerUnit();
                                         foreach (var customer in customerList)
                                         {
-                                            customer.MapTo(customerUnit);
+                                           customer.MapTo(customerUnit);
+                                            customerUnit.TenantId = newTenantId;
+                                            customerUnit.CreatorUserId = null;
                                             await _customerUnit.InsertAsync(customerUnit);
                                         }
                                     }

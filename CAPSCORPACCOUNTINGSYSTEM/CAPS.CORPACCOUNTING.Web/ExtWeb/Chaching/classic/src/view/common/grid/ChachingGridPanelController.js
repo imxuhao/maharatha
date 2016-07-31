@@ -144,6 +144,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
 
         //disabled child grids functionality
         if (formPanel) {
+            // assign gridController to form's (viewable form on view mode) parentGrid controller
+            // this assignment is used to change the title of form view when moving from view to edit mode in action button click
+            formPanel.parentGridController = controller;
+            // end of assignment
             var childGrids = formPanel.query('gridpanel');
             if (childGrids&&childGrids.length>0) {
                 Ext.each(childGrids, function(grid) {
@@ -320,8 +324,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     handleFulFillResponse: function (records, operation, success) {
         if (success) {
             var action = operation.getAction();
-            if (action === "create" || action === "update") {
+            if (action === "create") {
                 var controller = operation.controller;
+                controller.doReloadGrid();
+            } else if (action === "update") {
+                //var controller = operation.controller;
                 //controller.doReloadGrid();
             } else if (action === "destroy") {
                 var controller = operation.controller;

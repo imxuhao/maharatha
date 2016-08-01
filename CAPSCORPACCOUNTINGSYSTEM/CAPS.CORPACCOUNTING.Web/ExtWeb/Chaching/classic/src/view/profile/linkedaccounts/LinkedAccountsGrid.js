@@ -46,10 +46,10 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
     columns: [
         {
             xtype: 'gridcolumn',           
-            width: '15%',
+            width: '19%',
             align: 'center',
             hideable : false,
-            maxWidth: 100,
+            //maxWidth: 100,
             text: app.localize('Actions'),        
             renderer: Chaching.utilities.ChachingRenderers.loginaccount
         }, {
@@ -59,14 +59,15 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
              hideable: false,
              sortable: true,
              groupable: false,
-            // width: '60%',
-             flex : 1      
+             width: '60%',
+             //flex : 1      
          },
          {
              xtype: 'actioncolumn',       
              text: app.localize('Delete'),
-             //width: '15%',
-             width: 70,
+             width: '19%',
+             //width: 70,
+
              align: 'center',
              hideable: false,
              items: [{

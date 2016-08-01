@@ -7,7 +7,10 @@
         if (val) return 'YES';
         else return 'NO';
     },
-    addButtonRenderer: function (value, cell) {
+    addViewUsersRole: function (value, cell) {
+        var gridController = this.up().up().up().getController(),
+            view = gridController.getView(),
+            grid = this;    
         var id = Ext.id();
         var widgetRec = cell.record;
         var widgetCol = cell.column;
@@ -16,14 +19,15 @@
                 ui: 'actionMenuButton',
                 pressed : false,
                 scale: 'small',
-                width: '35%',
-                text: app.localize('Permissions'),
-                iconCls: 'fa fa-sign-in',
-                iconAlign: 'left',
+                width: '100%',
+                text: app.localize('View'),
+                //iconCls: 'fa fa-sign-in',
+                //iconAlign: 'left',
                 widgetRec: widgetRec,
                 widgetCol: widgetCol,
+                currentView: view,
                 listeners: {
-                    //click: gridController.ViewPermissions
+                    click: gridController.reloadPermissionsTree
                 }
             });
             if (Ext.get(id)) {
@@ -32,6 +36,36 @@
         }, 1);
         return '<div id="' + id + '"></div>';
         
+    },
+    addViewUsersLinkComp: function (value, cell) {
+        var gridController = this.up().up().up().getController(),
+            view = gridController.getView(),
+            grid = this;
+        var id = Ext.id();
+        var widgetRec = cell.record;
+        var widgetCol = cell.column;
+        Ext.Function.defer(function () {
+            var button = Ext.create('Ext.button.Button', {
+                ui: 'actionMenuButton',
+                pressed: false,
+                scale: 'small',
+                width: '100%',
+                text: app.localize('View'),
+                //iconCls: 'fa fa-sign-in',
+                //iconAlign: 'left',
+                widgetRec: widgetRec,
+                widgetCol: widgetCol,
+                currentView: view,
+                listeners: {
+                    click: gridController.reloadPermissionsTreeLinkCompany
+                }
+            });
+            if (Ext.get(id)) {
+                button.render(Ext.get(id));
+            }
+        }, 1);
+        return '<div id="' + id + '"></div>';
+
     },
     unlinkedaccount: function (value, cell) {
         var gridController = this.getController(),

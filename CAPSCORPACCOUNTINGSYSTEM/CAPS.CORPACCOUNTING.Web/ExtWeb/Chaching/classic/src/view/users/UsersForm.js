@@ -206,12 +206,12 @@ Ext.define('Chaching.view.users.UsersForm', {
                 selType: 'checkboxmodel',
                 columns: [
                    { text: app.localize('RoleName'), dataIndex: 'displayName', flex: 1 }
-                   //{ text: app.localize('View'), width: '15%', renderer: Chaching.utilities.ChachingRenderers.addButtonRenderer }
+                   , { text: app.localize('View'), width: 80, renderer: Chaching.utilities.ChachingRenderers.addViewUsersRole }
                    //{ text: app.localize('RoleName'), dataIndex: 'displayName', flex: 1, renderer: Chaching.utilities.ChachingRenderers.addButtonRenderer },
                 ],
                 store: Ext.create('Chaching.store.roles.RolesStore'),
                 listeners: {
-                    rowclick: 'reloadPermissionsTree'
+                    //rowclick: 'reloadPermissionsTree'
                 }
             },
             {
@@ -268,11 +268,12 @@ Ext.define('Chaching.view.users.UsersForm', {
                 },
                 columns: [
                    { text: abp.localization.localize("LinkCompanyRoles"), dataIndex: 'roleDisplayName', flex: 1 }
+                   , { text: app.localize('View'), width: 80, renderer: Chaching.utilities.ChachingRenderers.addViewUsersLinkComp }
                 ],
                 store: Ext.create('Chaching.store.users.CompanyRoleStore'),
                 features: [{ ftype: 'grouping' }],
                 listeners: {
-                    rowclick: 'reloadPermissionsTreeLinkCompany'
+                    //rowclick: 'reloadPermissionsTreeLinkCompany'
                 }
             },
             {

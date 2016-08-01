@@ -1,26 +1,45 @@
 ﻿Ext.define('Chaching.view.users.UsersFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.users-usersform',
-    reloadPermissionsTree: function (grid , record , tr , rowIndex , e , eOpts )  {
-        var me = this,
-            view = me.getView();
-        var treePanel = view.down('treepanel[itemId=permissionsListItemId]');
-        var rolesMessageLabel = view.down('label[itemId=RolesMessageItemId]')
-        if (treePanel) {
-            if (rolesMessageLabel)
-                rolesMessageLabel.setHidden(true);
-            treePanel.setHidden(false);
-            var treeStore = treePanel.getStore();
-            var proxy = treeStore.getProxy();
-            proxy.api.read = abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole';
-            treeStore.getProxy().setExtraParam('tenantId', abp.session.tenantId);
-            treeStore.getProxy().setExtraParam('roleId', record.get('id'));
-            treeStore.reload();
-        }
+    //reloadPermissionsTree: function (grid , record , tr , rowIndex , e , eOpts )  {
+    //    debugger;
+    //    var me = this,
+    //        view = me.getView();
+    //    var treePanel = view.down('treepanel[itemId=permissionsListItemId]');
+    //    var rolesMessageLabel = view.down('label[itemId=RolesMessageItemId]')
+    //    if (treePanel) {
+    //        if (rolesMessageLabel)
+    //            rolesMessageLabel.setHidden(true);
+    //        treePanel.setHidden(false);
+    //        var treeStore = treePanel.getStore();
+    //        var proxy = treeStore.getProxy();
+    //        proxy.api.read = abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole';
+    //        treeStore.getProxy().setExtraParam('tenantId', abp.session.tenantId);
+    //        treeStore.getProxy().setExtraParam('roleId', record.get('id'));
+    //        treeStore.reload();
+    //    }
+    //},
+    reloadPermissionsTree: function (btn, event, e) {
+        var view = btn.currentView,
+            record = btn.widgetRec;
+            var treePanel = view.down('treepanel[itemId=permissionsListItemId]');
+            var rolesMessageLabel = view.down('label[itemId=RolesMessageItemId]')
+            if (treePanel) {
+                if (rolesMessageLabel)
+                    rolesMessageLabel.setHidden(true);
+                treePanel.setHidden(false);
+                var treeStore = treePanel.getStore();
+                var proxy = treeStore.getProxy();
+                proxy.api.read = abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole';
+                treeStore.getProxy().setExtraParam('tenantId', abp.session.tenantId);
+                treeStore.getProxy().setExtraParam('roleId', record.get('id'));
+                treeStore.reload();
+            }
+
     },
-    reloadPermissionsTreeLinkCompany: function (grid, record, tr, rowIndex, e, eOpts) {
-        var me = this,
-            view = me.getView();
+    reloadPermissionsTreeLinkCompany: function (btn, event, e) {
+        var view = btn.currentView,
+            record = btn.widgetRec;
         var treePanel = view.down('treepanel[itemId=permissionsCompanyListItemId]');
         var linkCompanyMessageLabel = view.down('label[itemId=LinkCompanyMessageItemId]');
         if (treePanel) {

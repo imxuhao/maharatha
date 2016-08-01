@@ -11,7 +11,8 @@ Ext.define('Chaching.view.users.UsersGrid', {
         read: abp.auth.isGranted('Pages.Administration.Users'),
         create: abp.auth.isGranted('Pages.Administration.Users.Create'),
         edit: abp.auth.isGranted('Pages.Administration.Users.Edit'),
-        destroy: abp.auth.isGranted('Pages.Administration.Users.Delete')
+        destroy: abp.auth.isGranted('Pages.Administration.Users.Delete'),
+        impersonation: abp.auth.isGranted('Pages.Administration.Users.Impersonation')
     },
     xtype: 'users',
     store: 'users.UsersStore',
@@ -44,6 +45,11 @@ Ext.define('Chaching.view.users.UsersGrid', {
         itemId: 'permissions',
         iconCls: 'fa fa-pencil',
         clickActionName: 'permissionsClicked'
+    }, {
+        text: app.localize('LoginAsThisUser'),
+        itemId: 'loginAsThisUserActionMenu',
+        iconCls: 'fa fa-user',
+        clickActionName: 'loginAsThisUserClicked'
     }],
     requireExport: true,
     requireMultiSearch: true,

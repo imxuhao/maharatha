@@ -36,20 +36,41 @@ Ext.define('Chaching.view.users.UsersGridController', {
         
     },
     doRowSpecificEditDelete: function (button, grid) {
-        //var menu = button.menu;
-        //var permissionButton = menu.items.get('permissions');
-        //var separatorButton = menu.items.get('actionMenuSeparator');
-        
-        //if (permissionButton && abp.session.tenantId == null) {
-        //    permissionButton.show();
-        //    separatorButton.show();
-        //}
-        //else if(permissionButton) {
-        //    permissionButton.hide();
-        //    separatorButton.hide();
-        //}
+        var me = this,
+            view = Ext.ComponentQuery.query('users')[0];
+        if (button.menu) {
+            var loginAsThisUserActionMenu = button.menu.down('menuitem#loginAsThisUserActionMenu');
+            if (view && loginAsThisUserActionMenu && button.widgetRec && view.modulePermissions.impersonation && button.widgetRec.get('id') != abp.session.userId) {
+                loginAsThisUserActionMenu.show();
+            } else {
+                loginAsThisUserActionMenu.hide();
+            }
+        }
         
     },
+    loginAsThisUserClicked: function (menu, item, e, eOpts, isView) {
+        var me = this,
+           parentMenu = menu.parentMenu,
+           widgetRec = parentMenu.widgetRecord;
+        Ext.Ajax.request({
+            url: abp.appPath + 'Account/ImpersonateUser',
+            jsonData: Ext.encode({ tenantId: abp.session.tenantId, userId: widgetRec.get('id') }),
+            success: function (response) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    window.location.href = res.targetUrl;
+                } else {
+                    abp.message.error(res.error.message, 'Error');
+                }
+            },
+            failure: function (response) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.error.message);
+                console.log(response);
+            }
+        });
+    },
+
     doAfterCreateAction: function (createMode, formView, isEdit, record) {
         var me = this,
          form = formView.getForm();

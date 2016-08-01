@@ -14,6 +14,12 @@ Ext.define('Chaching.view.languages.LanguagesGridController', {
             form.findField('targetLanguage').setValue(data.name);
             languageTextView.show();
     },
+    onCreateNewLanguageButtonRender: function () {
+        var me = this;
+        if (abp.session.tenantId != null && me.lookupReference('createNewLanguageButton')) {
+            me.lookupReference('createNewLanguageButton').hide();
+        }
+    },
     doRowSpecificEditDelete: function (button, grid) {
         if (button.menu) {
             var editActionMenu = button.menu.down('menuitem#editActionMenu');

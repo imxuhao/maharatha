@@ -32,12 +32,16 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
         xtype: 'button',
         scale: 'small',
         ui: 'actionButton',
+        reference : 'createNewLanguageButton',
         action: 'create',
         text: abp.localization.localize("CreateNewLanguage").toUpperCase(),
         tooltip: app.localize('CreateNewLanguage'),
         checkPermission: true,
         iconCls: 'fa fa-plus',
-        iconAlign: 'left'
+        iconAlign: 'left',
+        listeners: {
+            boxready : 'onCreateNewLanguageButtonRender'
+        }
     }],
     actionColumnMenuItemsConfig: [{
         text: app.localize('ChangeTexts'),

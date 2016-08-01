@@ -31,14 +31,34 @@
                 Ext.Array.each(selectedPermissions, function (rec) {
                     grantedPermissionNames.push(rec.get('name'));
                 });
-                var treeStore = treePanel.getStore();
-                treeStore.removeAll();
+                //var treeStore = treePanel.getStore();
+                //treeStore.removeAll();
+                //var userId = treeStore.getProxy().extraParams.id;
+                //treeStore.getProxy().setExtraParam('userId', userId);
+                //treeStore.getProxy().setExtraParam('role', role);
+                //treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
+                //treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissionsUnit';
+                //treeStore.update();
+                var input = new Object();
                 var userId = treeStore.getProxy().extraParams.id;
-                treeStore.getProxy().setExtraParam('userId', userId);
-                treeStore.getProxy().setExtraParam('role', role);
-                treeStore.getProxy().setExtraParam('grantedPermissionNames', grantedPermissionNames);
-                treeStore.getProxy().api.update = abp.appPath + 'api/services/app/user/UpdateUserPermissionsUnit';
-                treeStore.update();//{
+                input.role = role;
+                input.userId = userId;
+                input.grantedPermissionNames = grantedPermissionNames;
+                Ext.Ajax.request({
+                    url: abp.appPath + 'api/services/app/user/UpdateUserPermissionsUnit',
+                    jsonData: Ext.encode(input),
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    success: function (response,a,b) {
+                        abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                    },
+                    failure: function (response) {
+                        abp.message.error(response.error.message, app.localize('Error'));
+                    }
+                });
+                //{
                 //    callback: function (records, response, success) {
                 //        if (success) {
                 //            //ChachingGlobals.showErrorMessage(response);
@@ -50,7 +70,7 @@
                 //        }
                 //    }
                 //});
-                abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                
             }
             me.CloseWindow();
         }

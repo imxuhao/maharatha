@@ -72,20 +72,19 @@
         var rolesListRecords = view.down('gridpanel[itemId=rolesListGridItemId]').getSelection();
         //get company information
         var companyListRecords = view.down('gridpanel[itemId=companyListGridItemId]').getSelection();
-        if (rolesListRecords && rolesListRecords.length > 0) {
-           var rolesListArray = [];
-           Ext.each(rolesListRecords, function (rec) {
-               //rolesListArray.push(rec.get('displayName'));
-               rolesListArray.push(rec.get('name'));
-            });
-            record.data.assignedRoleNames = rolesListArray;
-        }
+        //if (rolesListRecords && rolesListRecords.length > 0) {
+        var rolesListArray = [];
+        Ext.each(rolesListRecords, function (rec) {
+            //rolesListArray.push(rec.get('displayName'));
+            rolesListArray.push(rec.get('name'));
+        });
+        record.data.assignedRoleNames = rolesListArray;
+        //}
         var tenantListArray=[];
         if (companyListRecords && companyListRecords.length > 0) {
             var tempList = [],
                 roleId = [],
                 roleName = [];
-                //tenantListArray=[];
             var isNewItem = false;
             Ext.each(companyListRecords, function (rec) {
                 roleId.push(rec.get('roleId'));

@@ -11,7 +11,8 @@ Ext.define('Chaching.view.roles.RolesGrid', {
     store: 'roles.RolesStore',
     name: 'Administration.Roles',
     padding: 5,
-    gridId:6,
+    gridId: 6,
+    forceFit: true,
     headerButtonsConfig: [
     {
         xtype: 'displayfield',
@@ -58,7 +59,7 @@ Ext.define('Chaching.view.roles.RolesGrid', {
             dataIndex: 'displayName',
             stateId: 'displayName',
             sortable: true,
-            width: '48%',
+            width: '50%',
             groupable: true,
             renderer: Chaching.utilities.ChachingRenderers.renderRole,
             // simplest filter configuration
@@ -75,7 +76,7 @@ Ext.define('Chaching.view.roles.RolesGrid', {
              dataIndex: 'creationTime',
              sortable: true,
              groupable: true,
-             width: '46%',
+             width: '50%',
              renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
                  xtype: 'dateSearchField',

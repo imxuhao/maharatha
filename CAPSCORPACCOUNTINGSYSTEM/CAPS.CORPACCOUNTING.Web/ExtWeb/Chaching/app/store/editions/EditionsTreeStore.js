@@ -7,7 +7,7 @@
     remoteSort: false,
     statefulFilters: true,
     root: {
-        expanded: true
+        expanded: false
     },
 
     proxy: {
@@ -28,7 +28,7 @@
             var length = record.length;
             var root = me.getRoot();
             root.removeAll();
-
+            root.set('expanded', true);
             for (var i = 0; i < length; i++) {
                 var item = record[i];
                 if (item.data.parentName == null) {
@@ -59,7 +59,6 @@
                     this.buildParent(record, item, root);
                 }
             }
-          
         }
         
     },
@@ -71,6 +70,9 @@
                 parentRoot = records[i];
             }
         }
+        if (parentRoot.data.inputType.name === "CHECKBOX") {
+            parentRoot.set('checked', true);
+        }
         parentRoot.set('expanded', true);
         parentRoot.insertChild(0,{
             displayName: child.data.displayName,
@@ -78,6 +80,7 @@
         });
 
         root.removeAll();
+        root.set('expanded', true);
         root.appendChild(parentRoot);
     }
 

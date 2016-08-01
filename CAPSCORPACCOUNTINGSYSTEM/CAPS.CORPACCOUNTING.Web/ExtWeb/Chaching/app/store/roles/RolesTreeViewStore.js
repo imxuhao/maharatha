@@ -6,7 +6,7 @@
     remoteFilter: false,
     remoteSort: false,
     root: {
-        //expanded: true
+        expanded: false
     },
     proxy: {
         type: 'chachingProxy',

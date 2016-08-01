@@ -10,7 +10,7 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
     remoteSort: false,
     statefulFilters:true,
     root: {
-        expanded: true
+        expanded: false
     },
     proxy: {
       
@@ -56,6 +56,7 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
             }
             var root = me.getRoot();
             root.removeAll();
+            root.expand(true);
             for (var j = 0; j < parents.length; j++) {
                 var parent = parents[j];
                 pages.appendChild(me.buildChilds(parent, records));

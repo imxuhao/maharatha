@@ -145,6 +145,13 @@
                 '<span class="staticRoleLabel" title ="' + app.localize('StaticRole_Tooltip') + '">' + app.localize('Static') + '</span>' : '')
                 + (record.get('isDefault') == true ? '<span class="defaultRoleLabel" title ="' + app.localize('DefaultRole_Description') + '">' + app.localize('Default') + '</span>' : '');
     },
+    renderUserName: function (value, metaData, record, rowIndex, colIndex) {
+        return (record.get('profilePictureId') != null ? 
+            '<span> <img alt="" width="22" height="22" class="img-rounded img-profile-picture-in-grid" src="'+ abp.appPath + 'Profile/GetProfilePictureById?id='+record.get('profilePictureId')+'" /></span>' : 
+            '<span> <img alt="" src="' + abp.appPath + 'Common/Images/default-profile-picture.png" width="22" height="22" class="img-rounded" /></span>'
+           
+            ) + value;
+    },
     renderDateTime: function (value) {
         if (value) {
             return moment(value).format(Chaching.utilities.ChachingGlobals.defaultDateTimeFormat);

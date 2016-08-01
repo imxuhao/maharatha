@@ -78,6 +78,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
             sortable: true,
             width: '10%',
             groupable: true,
+            renderer: Chaching.utilities.ChachingRenderers.renderUserName,
             // simplest filter configuration
             filterField: {
                 xtype: 'textfield',

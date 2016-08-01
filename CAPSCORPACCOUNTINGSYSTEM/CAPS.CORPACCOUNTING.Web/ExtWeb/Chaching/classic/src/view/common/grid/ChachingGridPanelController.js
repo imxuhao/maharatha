@@ -219,21 +219,21 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                                    }
                                });
                            }
-                           gridStore.setAutoSync(true);
-                           gridStore.addListener('datachanged', me.onStoreRecordDelete);
+                          // gridStore.setAutoSync(true);
                            gridStore.remove(widgetRec);
-                           gridStore.setAutoSync(false);
+                          // gridStore.setAutoSync(false);
+
+                           gridStore.sync({
+                               callback: function (batch, opts) {
+                                   abp.notify.success(app.localize('SuccessfullyDeleted'), app.localize('Success'));
+                                   gridStore.reload();
+                               }
+                           });
 
                        }
                    }
                }
            );
-    },
-    onStoreRecordDelete : function(store,eOpts) {
-        var removedRecords = store.getRemovedRecords()
-        if (removedRecords != undefined && removedRecords.length > 0) {
-            abp.notify.success(app.localize('SuccessfullyDeleted'), app.localize('Success'));
-        }
     },
     onEditComplete: function (editor, e) {
         var me = this,

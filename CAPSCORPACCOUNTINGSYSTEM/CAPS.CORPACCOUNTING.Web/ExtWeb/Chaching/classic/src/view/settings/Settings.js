@@ -366,7 +366,7 @@
     ],
 
     listeners: {
-        'beforeshow': 'loadAllSettings'
+        'beforerender': 'loadAllSettings'
     }
 
 });

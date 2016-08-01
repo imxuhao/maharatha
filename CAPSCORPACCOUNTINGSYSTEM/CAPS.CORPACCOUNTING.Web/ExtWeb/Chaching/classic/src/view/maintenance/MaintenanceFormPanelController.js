@@ -25,8 +25,10 @@
                 .replace('FATAL', '<span class="label" style="background-color:#1ef7b8;">FATAL</span>') + '</span>'
 
             });
-            view.getStore().removeAll();
-            view.getStore().loadData(records);
+            if (view.getStore()) {
+                view.getStore().removeAll();
+                view.getStore().loadData(records);
+            }
 
         });
     },

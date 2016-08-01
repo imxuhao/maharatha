@@ -61,7 +61,7 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
              dataIndex: 'displayName',
              sortable: true,
              groupable: true,
-             width: '50%',
+             width: '46%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -78,14 +78,14 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
              dataIndex: 'creationTime',
              sortable: true,
              groupable: true,
-             width: '50%',
+             width: '46%',
              renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
                  xtype: 'datefield',
                  width: '100%',
                  emptyText: 'Enter creation time to search'
              }                      
-         }
+          }        
     ]
-   
+    
 });

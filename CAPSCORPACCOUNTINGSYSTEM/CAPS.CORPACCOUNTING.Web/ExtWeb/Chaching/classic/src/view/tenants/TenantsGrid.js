@@ -51,6 +51,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     editingMode: 'row',
     createNewMode:'popup',
     columnLines: true,
+    forceFit: true,
     multiColumnSort: true,
     editWndTitleConfig: {
         title: app.localize('EditTenant'),

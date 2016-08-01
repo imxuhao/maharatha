@@ -12,7 +12,8 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
     store: 'editions.EditionsStore',
     name: 'Editions',
     padding: 5,
-    gridId:2,
+    gridId: 2,
+    forceFit:true,
     headerButtonsConfig: [
     {
         xtype: 'displayfield',
@@ -60,7 +61,7 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
              dataIndex: 'displayName',
              sortable: true,
              groupable: true,
-             width: '47%',
+             width: '50%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -77,7 +78,7 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
              dataIndex: 'creationTime',
              sortable: true,
              groupable: true,
-             width: '47%',
+             width: '50%',
              renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
                  xtype: 'datefield',

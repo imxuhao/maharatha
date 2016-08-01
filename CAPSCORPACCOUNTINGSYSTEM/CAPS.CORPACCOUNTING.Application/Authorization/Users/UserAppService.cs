@@ -469,7 +469,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 }
             }
             //Get The TenantList with Rols except loginUser By OrganizationId
-            var rolewithrenant = (from tenant in tenantList
+            var roleWithTenant = (from tenant in tenantList
                                   join role in rollList on tenant.TenantId equals role.TenantId
                                   select
                                       new TenantwithRoleDto
@@ -479,7 +479,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                                           TenantName = tenant.TenantName,
                                           RoleDisplayName = role.DisplayName
                                       }).ToList();
-            return rolewithrenant;
+            return roleWithTenant;
         }
 
         /// <summary>
@@ -494,26 +494,26 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 User user;
                 using (_unitOfWorkManager.Current.SetTenantId(tenant.TenantId))
                 {
+                    
+                        user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
+                        user.TenantId = tenant.TenantId;
 
-                    user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
-                    user.TenantId = tenant.TenantId;
+                        //Set password
+                        if (!input.User.Password.IsNullOrEmpty())
+                        {
+                            CheckErrors(await UserManager.PasswordValidator.ValidateAsync(input.User.Password));
+                        }
+                        else
+                        {
+                            input.User.Password = User.CreateRandomPassword();
+                        }
 
-                    //Set password
-                    if (!input.User.Password.IsNullOrEmpty())
-                    {
-                        CheckErrors(await UserManager.PasswordValidator.ValidateAsync(input.User.Password));
-                    }
-                    else
-                    {
-                        input.User.Password = User.CreateRandomPassword();
-                    }
+                        user.Password = new PasswordHasher().HashPassword(input.User.Password);
+                        user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
 
-                    user.Password = new PasswordHasher().HashPassword(input.User.Password);
-                    user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
-
-                    //Checking the User exist 
-                    var userUnit =
-                        await _userUnitRepository.FirstOrDefaultAsync(p => p.UserName == user.UserName);
+                        //Checking the User exist 
+                        var userUnit =
+                            await _userUnitRepository.FirstOrDefaultAsync(p => p.UserName == user.UserName);
                     if (!tenant.IsEmptyRoles)
                     {
                         if (ReferenceEquals(userUnit, null))
@@ -554,7 +554,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                     }
                     else
                     {
-                        CheckErrors(await UserManager.SetRoles(userUnit, tenant.RoleNames));
+                        if (!ReferenceEquals(userUnit, null))
+                            CheckErrors(await UserManager.SetRoles(userUnit, tenant.RoleNames));
                     }
                 }
             }
@@ -628,8 +629,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 {
                     userRoleDto.IsAssigned = await UserManager.IsInRoleAsync(input.Id.Value, userRoleDto.RoleName);
                 }
-                if(!ReferenceEquals(AbpSession.TenantId,null))
-                output.TenantwithRoles = await GetTenantListofOrganizationforEdit(user.UserName);
+                if (!ReferenceEquals(AbpSession.TenantId, null))
+                    output.TenantwithRoles = await GetTenantListofOrganizationforEdit(user.UserName);
             }
             return output;
         }

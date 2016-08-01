@@ -86,7 +86,8 @@ Ext.define('Chaching.view.users.UsersGridController', {
                                     roleModel.commit();
                                     if (role.isAssigned) {
                                         rolesGrid.getStore().add(roleModel);
-                                        rolesGrid.getSelectionModel().select(roleModel,true);
+                                        rolesGrid.getSelectionModel().select(roleModel, true);
+                                       // rolesGrid.getSelectionModel().select(roleModel);
                                     } else {
                                         rolesGrid.getStore().add(roleModel);
                                     }
@@ -98,13 +99,14 @@ Ext.define('Chaching.view.users.UsersGridController', {
                                 var tenantwithRoles = res.result.tenantwithRoles;
                                 Ext.each(tenantwithRoles, function (role) {
                                     var tenantModel = Ext.create('Chaching.model.users.CompanyRoleModel');
-                                    tenantModel.set('id', role.tenantId);
+                                    tenantModel.set('tenantId', role.tenantId);
                                     tenantModel.set('roleId', role.roleId);
                                     tenantModel.set('roleName', role.roleName);
                                     tenantModel.set('roleDisplayName', role.roleDisplayName);
                                     tenantModel.set('tenantName', role.tenantName);
                                     tenantModel.commit();
                                     tenantRolesGrid.getStore().add(tenantModel);
+                                   
                                     if (role.isRoleSelected) {
                                         tenantRolesGrid.getSelectionModel().select(tenantModel, true);
                                     }
@@ -112,6 +114,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
                                     //    tenantRolesGrid.getStore().add(tenantModel);
                                     //}
                                 });
+                                
                                 // End bind grid
                             }
                         }
@@ -133,17 +136,18 @@ Ext.define('Chaching.view.users.UsersGridController', {
                 callback: function (response, records, success) {
                     if (success) {
                         Ext.each(response, function (rec) {
-                            var isDefault = rec.get('isDefault');
-                            var isStatic = rec.get('isStatic');
+                            //var isDefault = rec.get('isDefault');
+                            //var isStatic = rec.get('isStatic');
 
                             var roleModel = Ext.create('Chaching.model.roles.RolesModel');
                             roleModel.set('id', rec.get('id'));
                             roleModel.set('name', rec.get('name'));
                             roleModel.set('displayName', rec.get('displayName'));
                             roleModel.commit();
-                            if (isDefault) {
-                                rolesGrid.getSelectionModel().select(roleModel, true);
-                            }
+                            //if (isDefault) {
+                            //   // rolesGrid.getSelectionModel().select(roleModel, true);
+                            //    rolesGrid.getSelectionModel().select(roleModel);
+                            //}
 
                         });
                     }

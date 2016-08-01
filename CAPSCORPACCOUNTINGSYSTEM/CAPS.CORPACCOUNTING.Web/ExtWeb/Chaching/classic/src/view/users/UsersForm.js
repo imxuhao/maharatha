@@ -219,7 +219,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 xtype: 'label',
                 padding: '10 0 0 20',
                 style:{color:'#cacaca', fontSize: '15px'},
-                css:"grayLabelText",
+                //cls: "grayLabelText",
                 itemId: 'RolesMessageItemId',
                 text: abp.localization.localize("RowClickMessage")
             },
@@ -262,6 +262,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 cls: 'chaching-grid',
                 itemId: 'companyListGridItemId',
                 scrollable: true,
+                height: '100%',
                 selModel: {
                     selType: 'checkboxmodel'
                 },
@@ -278,8 +279,8 @@ Ext.define('Chaching.view.users.UsersForm', {
                 columnWidth: .51,
                 xtype: 'label',
                 padding: '10 0 0 20',
-                //style: { color: '#cacaca', fontSize: '15px' },
-                css: "grayLabelText",
+                style: { color: '#cacaca', fontSize: '15px' },
+               // cls: "grayLabelText",
                 itemId: 'LinkCompanyMessageItemId',
                 text: abp.localization.localize("RowClickMessage")
             },

@@ -78,7 +78,7 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
              sortable: true,
              groupable: true,
              width: '47%',
-             renderer: Chaching.utilities.ChachingRenderers.renderDateTime,
+             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
                  xtype: 'datefield',
                  width: '100%',

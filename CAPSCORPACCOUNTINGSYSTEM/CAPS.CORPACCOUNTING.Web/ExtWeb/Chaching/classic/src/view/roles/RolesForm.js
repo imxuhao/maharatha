@@ -27,7 +27,8 @@ Ext.define('Chaching.view.roles.RolesForm',{
         items: [
         {
             title: app.localize('Roles'),                            
-            padding:'0 0 0 10',
+            padding: '0 0 0 10',
+            iconCls: 'fa fa-object-group',
             items: [{
                 xtype: 'hiddenfield',
                 name: 'id',
@@ -66,6 +67,7 @@ Ext.define('Chaching.view.roles.RolesForm',{
             name: 'permissions',
             itemId: 'permissionsItemId',
             cls: 'chaching-grid',
+            iconCls:'fa fa-ticket',
             //store: 'roles.RolesTreeStore',
             store: new Chaching.store.roles.RolesTreeStore(),
             rootVisible: false,

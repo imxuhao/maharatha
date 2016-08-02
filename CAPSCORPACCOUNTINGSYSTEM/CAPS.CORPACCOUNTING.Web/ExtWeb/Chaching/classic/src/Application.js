@@ -111,15 +111,47 @@ Ext.define('Chaching.Application', {
         'Chaching.store.APPaymentTermsListStore',
         'editions.EditionsTreeStore'
     ],
-    mainView: 'Chaching.view.main.ChachingViewport',
+    //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {
-        var docBody = document.body;
-        if (docBody) {
-            var loadingMask = document.getElementById('intialLoadinMask');
-            if (loadingMask)docBody.removeChild(loadingMask);
-        }
+        
         var me = this;
+        var promise = me.loadInitialSetup();
+        var runner = new Ext.util.TaskRunner(),
+           task = undefined;
 
+        task = runner.newTask({
+            run: function () {
+                if (promise && promise.owner.completed) {
+                    task.stop();
+
+                    var docBody = document.body;
+                    if (docBody) {
+                        var loadingMask = document.getElementById('intialLoadinMask');
+                        if (loadingMask) docBody.removeChild(loadingMask);
+                    }
+                    //create viewPort once all dependencies are loaded
+                    var mainView = Ext.create('Chaching.view.main.ChachingViewport');
+                    if (me && window.location.hash && window.location.hash !== "#dashboard" && mainView) {
+                        var mainViewController = mainView.getController(),
+                            refs = mainViewController.getReferences(),
+                            mainCardPanel = refs.mainCardPanel,
+                            hashTag = window.location.hash.replace('#', ''),
+                            hasComponent = mainCardPanel.child('component[routeId=' + hashTag + ']');
+                        if (!hasComponent) {
+                            mainViewController.setCurrentView(hashTag);
+                            hasComponent = mainCardPanel.child('component[routeId=' + hashTag + ']');
+                        }
+                        if (hasComponent && typeof (hasComponent.applyGridViewSetting) === 'function') {
+                            var cols = hasComponent.getColumns();
+                            hasComponent.applyGridViewSetting(cols, true);
+                        }
+                    }
+                }
+            },
+            interval: 1000
+        });
+
+        task.start();
         //load company level settings
         if (abp.session.tenantId != null) {
             Ext.Ajax.request({
@@ -142,64 +174,104 @@ Ext.define('Chaching.Application', {
             });
         }
        
+       
+    },
+    loadInitialSetup: function () {
+        var me = this;
+        var deferred = new Ext.Deferred();
+        Ext.Ajax.request({
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            url: abp.appPath + 'api/services/app/session/GetCurrentLoginInformations',
 
-        ///****Load usersDefaultView Settings
-        var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');
-        var filters = [];
-        var filter = new Ext.util.Filter({
-            entity: '',
-            searchTerm: true,
-            comparator: 1,
-            dataType: 3,
-            property: 'isDefault',
-            value: true
-        });
-        filters.push(filter);
-        filter = new Ext.util.Filter({
-            entity: '',
-            searchTerm: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId,
-            comparator: 2,
-            dataType: 0,
-            property: 'userId',
-            value: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId
-        });
-        filters.push(filter);
-        defaultViewSettingStore.filter(filters);
-        defaultViewSettingStore.load({
-            callback: function(records, operation, success) {
-                if (success && records && records.length > 0) {
-                    var usersDefaultGridViewSettings = [];
-                    var rec;
-                    Ext.each(records, function(record) {
-                        if (record.get('isDefault')) {
-                            rec = {
-                                gridId: record.get('viewId'),
-                                userViewId: record.get('userViewId'),
-                                viewSettingName: record.get('viewName'),
-                                viewSettings: record.get('viewSettings'),
-                                isDefault: record.get('isDefault')
+            success: function (response, opts) {
+                var obj = Ext.decode(response.responseText),
+                    userName = '',
+                    gotoMyAccount = false;
+                if (obj && obj.success) {
+                    var result = obj.result;
+                    if (result.tenant) {
+                        userName = result.tenant.tenancyName + '\\' + result.user.userName;
+                    } else userName = '.\\' + result.user.userName;
+                    if (userName && abp.session.impersonatorUserId !== null) {
+                        userName = '&#xf112 ' + userName;
+                        gotoMyAccount = true;
+                    }
+                    var loggedInUserInfo = {
+                        userName: userName,
+                        defaultOrganizationId: result.user.defaultOrganizationId,
+                        emailAddress: result.user.emailAddress,
+                        userId: result.user.id,
+                        name: result.user.name,
+                        profilePictureId: result.user.profilePictureId,
+                        surname: result.user.surname,
+                        userOrganizationId: result.userOrganizationId,
+                        gotoMyAccount: gotoMyAccount
+                    }
+
+                    Chaching.utilities.ChachingGlobals.loggedInUserInfo = loggedInUserInfo;
+
+                    ///****Load usersDefaultView Settings
+                    var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');
+                    var filters = [];
+                    var filter = new Ext.util.Filter({
+                        entity: '',
+                        searchTerm: true,
+                        comparator: 1,
+                        dataType: 3,
+                        property: 'isDefault',
+                        value: true
+                    });
+                    filters.push(filter);
+                    filter = new Ext.util.Filter({
+                        entity: '',
+                        searchTerm: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId,
+                        comparator: 2,
+                        dataType: 0,
+                        property: 'userId',
+                        value: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId
+                    });
+                    filters.push(filter);
+                    defaultViewSettingStore.filter(filters);
+                    defaultViewSettingStore.load({
+                        callback: function (records, operation, success) {
+                            if (success && records && records.length > 0) {
+                                var usersDefaultGridViewSettings = [];
+                                var rec;
+                                Ext.each(records, function (record) {
+                                    if (record.get('isDefault')) {
+                                        rec = {
+                                            gridId: record.get('viewId'),
+                                            userViewId: record.get('userViewId'),
+                                            viewSettingName: record.get('viewName'),
+                                            viewSettings: record.get('viewSettings'),
+                                            isDefault: record.get('isDefault')
+                                        }
+                                        usersDefaultGridViewSettings.push(rec);
+                                    }
+                                });
+                                Chaching.utilities.ChachingGlobals.usersDefaultGridViewSettings = usersDefaultGridViewSettings;
+                                
                             }
-                            usersDefaultGridViewSettings.push(rec);
+                            deferred.resolve('{success:true}');
                         }
                     });
-                    Chaching.utilities.ChachingGlobals.usersDefaultGridViewSettings = usersDefaultGridViewSettings;
-
-                    if (me && window.location.hash && window.location.hash !== "#dashboard") {
-                        var mainView = me.getMainView();
-                        if (mainView) {
-                            var mainViewController = mainView.getController(),
-                                refs = mainViewController.getReferences(),
-                                mainCardPanel = refs.mainCardPanel,
-                                hasComponent = mainCardPanel.child('component[routeId=' + window.location.hash.replace('#', '') + ']');
-                            if (hasComponent && typeof (hasComponent.applyGridViewSetting) === 'function') {
-                                var cols = hasComponent.getColumns();
-                                hasComponent.applyGridViewSetting(cols, true);
-                            }
-                        }
-                    }
+                } else {
+                    abp.message.error(obj.error.message);
+                    deferred.resolve('{success:true}');
                 }
+            },
+
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                Ext.toast(res.exceptionMessage);
+                console.log(response);
+                deferred.resolve('{success:true}');
             }
         });
+        return deferred.promise;
     },
     onAppUpdate: function() {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',

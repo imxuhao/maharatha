@@ -12,7 +12,7 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
     //},
     loginAsThisTenantClick: function (menu, e, eOpts) {
         var parentMenu = menu.parentMenu,
-          widgetRec = parentMenu.widgetRecord
+            widgetRec = parentMenu.widgetRecord;
        // create tenant user view
         var tenantUsersView = Ext.widget('tenantusers');
         var tenantUserGrid = tenantUsersView.down('grid');

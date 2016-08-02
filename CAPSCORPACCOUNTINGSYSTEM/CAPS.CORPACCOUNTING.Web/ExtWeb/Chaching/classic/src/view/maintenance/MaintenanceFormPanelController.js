@@ -4,33 +4,41 @@
     loadCacheAndWeblogs: function () {
         var me = this,            
         view = me.getView();
-        cacheView = view.down('dataview[itemId=cacheDataView]');
+        var cacheView = view.down('dataview[itemId=cacheDataView]');
         if (cacheView) {
-            cacheView.getStore().load();
+            var cashStore = cacheView.getStore();
+            if (cashStore && !cashStore.isLoaded())
+                cashStore.load();
         }
-        weblogView = view.down('dataview[itemId=webLogView]');
+        var weblogView = view.down('dataview[itemId=webLogView]');
         if (weblogView) {            
             this.loadWebLogView(weblogView);
         }
     },
 
     loadWebLogView: function (view) {
-        view.getStore().load(function (records, operation, success) {
-            Ext.each(records, function (record) {
-                record.data = '<span class="log-line">' + record.data
-                .replace('DEBUG', '<span class="label" style="background-color:#777;">DEBUG</span>')
-                .replace('INFO', '<span class="label" style="background-color:#5bc0de;">INFO</span>')
-                .replace('WARN', '<span class="label" style="background-color:#f0ad4e;">WARN</span>')
-                .replace('ERROR', '<span class="label" style="background-color:#d9534f;">ERROR</span>')
-                .replace('FATAL', '<span class="label" style="background-color:#1ef7b8;">FATAL</span>') + '</span>'
+        var webLogStore = view.getStore();
+        if (webLogStore && !webLogStore.isLoaded()) {
+            webLogStore.load(function(records, operation, success) {
+                    Ext.each(records,
+                        function(record) {
+                            record.data = '<span class="log-line">' +
+                                record.data
+                                .replace('DEBUG', '<span class="label" style="background-color:#777;">DEBUG</span>')
+                                .replace('INFO', '<span class="label" style="background-color:#5bc0de;">INFO</span>')
+                                .replace('WARN', '<span class="label" style="background-color:#f0ad4e;">WARN</span>')
+                                .replace('ERROR', '<span class="label" style="background-color:#d9534f;">ERROR</span>')
+                                .replace('FATAL',
+                                    '<span class="label" style="background-color:#1ef7b8;">FATAL</span>') +
+                                '</span>';
+                        });
+                    if (view.getStore()) {
+                        view.getStore().removeAll();
+                        view.getStore().loadData(records);
+                    }
 
-            });
-            if (view.getStore()) {
-                view.getStore().removeAll();
-                view.getStore().loadData(records);
-            }
-
-        });
+                });
+        }
     },
 
     onMaintenanceResize: function (formPanel, newWidth, newHeight, oldWidth, oldHeight) {

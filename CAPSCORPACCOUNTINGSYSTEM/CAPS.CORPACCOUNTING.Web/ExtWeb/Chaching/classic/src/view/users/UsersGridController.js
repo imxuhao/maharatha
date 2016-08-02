@@ -11,7 +11,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
         }
 
         var form = Ext.create('Chaching.view.users.UsersPermissionView', {
-            iconCls: 'fa fa-pencil',
+            iconCls: 'fa fa-ticket',
             name: 'Administration.Users'
         });
         form.setTitle(form.getTitle() + ' - ' + userName);

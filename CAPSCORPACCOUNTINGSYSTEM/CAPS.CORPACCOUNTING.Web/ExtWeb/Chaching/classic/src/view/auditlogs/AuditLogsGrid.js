@@ -41,6 +41,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
               xtype: 'actioncolumn',
               width: '5%',
               maxWidth: 30,
+              dataIndex: 'search',
               items: [{
                   iconCls: 'searchCls',
                   tooltip: app.localize('ShowAuditLogDetailView_Tooltip'),
@@ -61,7 +62,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
             xtype: 'gridcolumn',
             text: app.localize('Time'),
             dataIndex: 'executionTime',
-            stateId: 'executionTime',
+            //stateId: 'executionTime',
             sortable: true,
             width: '15%',
             groupable: true,
@@ -176,7 +177,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
          }
     ],
     listeners: {
-        cellclick : 'showAuditLogDetailView'
+        cellclick : 'auditLogCellClick'
     }
 });
 

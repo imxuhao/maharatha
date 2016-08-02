@@ -152,67 +152,25 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         var me = this,
             view = me.getView(),
             userName = '';
-        //get user's login information
-        Ext.Ajax.request({
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
-            url: abp.appPath + 'api/services/app/session/GetCurrentLoginInformations',
-
-            success: function (response, opts) {
-                var obj = Ext.decode(response.responseText);
-                if (obj && obj.success) {
-                    var result = obj.result;
-                    if (result.tenant) {
-                        userName = result.tenant.tenancyName + '\\' + result.user.userName;
-                    } else userName = '.\\' + result.user.userName;
-                   // if (userName && abp.session.impersonatorUserId !== abp.session.userId && abp.session.impersonatorUserId !== null) {
-                     if (userName && abp.session.impersonatorUserId !== null) {
-                        userName = '&#xf112 ' + userName;
-                        btn.gotoMyAccount = true;//to get go to my account menu item
-                        btn.setTooltip(abp.localization.localize("YouCanBackToYourAccount"));
-                    }
-                    var profilePicImage = view.down('image[itemId=AccountPic]');
-                    var ticks = new Date().getTime();
-                    var profilePic = abp.appPath + 'Profile/GetProfilePicture?t=' + ticks;
-                    if (result.user.profilePictureId) {
-                        //btn.gotoMyAccount ? btn.setWidth(180) : btn.setWidth(130);
-                       // btn.setIcon(profilePic);
-                        //image.hide();
-                        profilePicImage.show();
-                        profilePicImage.setSrc(profilePic);
-                    } else {
-                        profilePicImage.show();
-                        profilePicImage.setSrc(profilePic);
-                    }
-                    btn.setText(userName);
-
-                    var loggedInUserInfo = {
-                        userName: userName,
-                        defaultOrganizationId: result.user.defaultOrganizationId,
-                        emailAddress: result.user.emailAddress,
-                        userId: result.user.id,
-                        name: result.user.name,
-                        profilePictureId: result.user.profilePictureId,
-                        surname: result.user.surname,
-                        userOrganizationId: result.userOrganizationId,
-                        gotoMyAccount: btn.gotoMyAccount
-                    }
-                 
-                    Chaching.utilities.ChachingGlobals.loggedInUserInfo = loggedInUserInfo;
-                } else {
-                    abp.message.error(obj.error.message);
-                }
-            },
-
-            failure: function (response, opts) {
-                var res = Ext.decode(response.responseText);
-                Ext.toast(res.exceptionMessage);
-                console.log(response);
+        if (ChachingGlobals.loggedInUserInfo) {
+            var loggedInUserInfo = ChachingGlobals.loggedInUserInfo;
+            userName = loggedInUserInfo.userName;
+            if (loggedInUserInfo.gotoMyAccount) {
+                btn.gotoMyAccount = true;
+                btn.setTooltip(abp.localization.localize("YouCanBackToYourAccount"));
             }
-        });
-
+            var profilePicImage = view.down('image[itemId=AccountPic]');
+            var ticks = new Date().getTime();
+            var profilePic = abp.appPath + 'Profile/GetProfilePicture?t=' + ticks;
+            if (loggedInUserInfo.profilePictureId) {
+                profilePicImage.show();
+                profilePicImage.setSrc(profilePic);
+            } else {
+                profilePicImage.show();
+                profilePicImage.setSrc(profilePic);
+            }
+            btn.setText(userName);
+        }
         //set company logo
         me.getCompanyLogo();
     },

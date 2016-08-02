@@ -21,11 +21,12 @@ Ext.define('Chaching.view.manageView.ManageViewListController', {
                 var viewColumns = [];
                 for (var i = 0; i < parentGridColumns.length; i++) {
                     var gridCol = parentGridColumns[i];
-                    if (gridCol.name !== "ActionColumn" && gridCol.xtype !== "actioncolumn") {
+                    if (gridCol.name !== "ActionColumn") {
                         var column = {
                             hidden: gridCol.hidden,
                             width: gridCol.width,
-                            dataIndex: gridCol.dataIndex
+                            dataIndex: gridCol.dataIndex,
+                            items:gridCol.items
                         };
                         viewColumns.push(column);
                     }

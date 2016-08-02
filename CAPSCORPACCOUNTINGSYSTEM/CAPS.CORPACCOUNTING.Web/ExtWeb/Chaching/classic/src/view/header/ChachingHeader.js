@@ -67,7 +67,8 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             textAlign:'right',
             baseCls: '',
             itemId:'LocalizationBtn',
-            contextMenu:undefined,
+            contextMenu: undefined,
+            ui: 'countryMenu',
             listeners: {
                 click: 'onLocalizationHover',
                 beforerender:'onBeforeLocalizationRender'
@@ -92,10 +93,8 @@ Ext.define('Chaching.view.header.ChachingHeader', {
          },
         {
             scale: 'small',
-           // width: 100,
-           // height:50,
-            //iconAlign: 'right',
-            text:'',//set dynamically based on login info of user
+            text: '',
+            ui: 'badgeBtnBack',
             gotoMyAccount: false,
             textAlign: 'right',
             baseCls: '',

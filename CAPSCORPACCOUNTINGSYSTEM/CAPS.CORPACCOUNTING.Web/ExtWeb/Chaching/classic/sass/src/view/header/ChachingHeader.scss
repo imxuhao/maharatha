@@ -46,6 +46,7 @@ $font-weight:400
 }
 .x-btn-inner-countryMenu-small{
     font-family:FontAwesome !important;
+    font-weight:600 !important;
 }
 @include extjs-menu-ui(
 $ui:'countryMenu',

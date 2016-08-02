@@ -43,7 +43,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
     actionColumnMenuItemsConfig: [{
         text: app.localize('Permissions'),
         itemId: 'permissions',
-        iconCls: 'fa fa-pencil',
+        iconCls: 'fa fa-ticket',
         clickActionName: 'permissionsClicked'
     }, {
         text: app.localize('LoginAsThisUser'),

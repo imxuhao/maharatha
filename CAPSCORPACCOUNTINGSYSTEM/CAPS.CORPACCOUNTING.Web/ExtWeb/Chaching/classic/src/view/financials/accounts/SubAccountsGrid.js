@@ -67,8 +67,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
 
              filterField: {
                  xtype: 'textfield',
-                 width: '15%',
-                 emptyText: app.localize('SubAccountNumberSearch')
+                 width: '100%'
              }, editor: {
                  xtype: 'textfield'
              }
@@ -78,7 +77,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              dataIndex: 'description',
              sortable: true,
              groupable: true,
-             width: '20%',
+             width: '15%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -93,7 +92,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
               dataIndex: 'typeofSubAccount',
               sortable: true,
               groupable: true,
-              width: '15%',
+              width: '13%',
               filterField: {
                   xtype: 'combobox',
                   valueField: 'typeofSubAccountId',
@@ -117,7 +116,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              dataIndex: 'isActive',
              sortable: true,
              groupable: true,
-             width: '14%',
+             width: '11%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -196,15 +195,5 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
                  uncheckedValue: 'false'
              }
          }
-
-         //, {
-         //    xtype: 'gridcolumn',
-         //    text: app.localize('Trans#'),
-         //    dataIndex: 'subAccountId',
-         //    sortable: true,
-         //    groupable: true,
-         //    width: '10%',
-         //    hidden: true
-         //}
     ]
 });

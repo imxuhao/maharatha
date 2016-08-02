@@ -20,9 +20,7 @@
                         }
                     },
                     failure: function(response) {
-                        var res = Ext.decode(response.responseText);
-                        Ext.toast(res.error.message);
-                        console.log(response);
+                        abp.message.error(app.localize('CascadeImpersonationErrorMessage'), app.localize('Error'));
                     }
                 });
             } else {

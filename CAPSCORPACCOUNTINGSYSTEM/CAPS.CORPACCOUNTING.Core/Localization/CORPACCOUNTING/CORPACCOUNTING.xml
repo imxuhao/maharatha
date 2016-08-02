@@ -1065,5 +1065,11 @@
 
 <text name="SelectRoleName" value="Please select role name." />
 <text name="CompanyGroup" value="Company Groups" />
+<text name="CreateNewTenantGroup" value="Create new tenant group" />
+<text name="EditTenantGroup" value="Edit tenant group" />
+<text name="ViewTenantGroup" value="View tenant group" />
+<text name="SelectDatabase" value="Select database" />
+<text name="TenantGroupMessage" value="Please select database or Tenant will be created in Host database." />
+    
   </texts>
 </localizationDictionary>

@@ -37,7 +37,7 @@ Ext.define('Chaching.view.users.UsersForm', {
         ui: 'formTabPanels',
         //ui: 'submenuTabs',
         items : [{
-            title: abp.localization.localize("UserInformations").initCap(),
+            title: abp.localization.localize("UserInformations"),
             padding: '0 10 0 10',
             scrollable: true,
             iconCls: 'fa fa-user',

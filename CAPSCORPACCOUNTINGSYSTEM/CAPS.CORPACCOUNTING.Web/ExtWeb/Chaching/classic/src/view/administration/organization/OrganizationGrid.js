@@ -44,15 +44,15 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
     columnLines: true,
     multiColumnSort: true,
     editWndTitleConfig: {
-        title: app.localize('EditOrganization'),
+        title: app.localize('EditTenantGroup'),
         iconCls: 'fa fa-pencil'
     },
     createWndTitleConfig: {
-        title: app.localize('CreateNewOrganization'),
+        title: app.localize('CreateNewTenantGroup'),
         iconCls: 'fa fa-plus'
     },
     viewWndTitleConfig: {
-        title: app.localize('ViewOrganization'),
+        title: app.localize('ViewTenantGroup'),
         iconCls: 'fa fa-th'
     },
     createNewMode: 'popup',

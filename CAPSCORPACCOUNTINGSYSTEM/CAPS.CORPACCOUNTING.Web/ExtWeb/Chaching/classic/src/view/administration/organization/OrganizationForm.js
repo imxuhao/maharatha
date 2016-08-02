@@ -21,7 +21,7 @@
     showFormTitle: false,
     displayDefaultButtonsCenter: true,
     titleConfig: {
-        title: abp.localization.localize("CreateNewOrganization").initCap()
+        title: abp.localization.localize("CreateNewTenantGroup")
     },
     // layout: 'fit',
     defaults : {
@@ -48,14 +48,22 @@
         {
             xtype: 'combobox',
             name: 'connectionStringId',
-            fieldLabel: app.localize('ConnectionString'),
+            fieldLabel: app.localize('SelectDatabase'),
             width: '100%',
             ui: 'fieldLabelTop',
             displayField: 'name',
             valueField: 'value',
-            emptyText: app.localize('SelectConnectionString'),
+            emptyText: app.localize('SelectDatabase'),
             queryMode: 'local',
             store: Ext.create('Chaching.store.administration.organization.ConnectionStringListStore')
+        },
+        {
+            xtype: 'label',
+            padding: '10 0 0 0',
+            style: { color: '#cacaca', fontSize: '15px' },
+            // cls: "grayLabelText",
+            //itemId: 'LinkCompanyMessageItemId',
+            text: abp.localization.localize("TenantGroupMessage")
         }
     ]
 });

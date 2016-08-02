@@ -23,14 +23,11 @@ using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Organization;
 using System.IO;
 using Abp.Authorization.Users;
-using Abp.IO;
 using Abp.Runtime.Session;
 using Abp.UI;
 using AutoMapper;
-using CAPS.CORPACCOUNTING.Authorization.Users.Profile.Dto;
 using CAPS.CORPACCOUNTING.Configuration.Tenants;
 using CAPS.CORPACCOUNTING.Masters.Dto;
-using CAPS.CORPACCOUNTING.Net.MimeTypes;
 using CAPS.CORPACCOUNTING.Storage;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
@@ -41,7 +38,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
     public class TenantAppService : CORPACCOUNTINGAppServiceBase, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
-        private readonly IRepository<UserAccount, long> _userAccountRepository;
         private readonly IRepository<OrganizationExtended, long> _organizationRepository;
         private readonly IRepository<TenantExtendedUnit> _tenantExtendedUnitRepository;
         private readonly IRepository<AddressUnit, long> _addressRepository;
@@ -49,18 +45,17 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IAppFolders _appFolders;
         private readonly TenantExtendedUnitManager _tenantExtendedManager;
-        private readonly TenantSettingsAppService _tenantSettingsAppService;
         private readonly IBinaryObjectManager _binaryObjectManager;
         private readonly IRepository<BinaryObject,Guid> _binaryObjectRepository;
 
 
         public TenantAppService(
-            TenantManager tenantManager, IRepository<UserAccount, long> userAccountRepository,
+            TenantManager tenantManager, 
             IRepository<OrganizationExtended, long> organizationRepository, IRepository<TenantExtendedUnit> tenantExtendedUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, IAppFolders appFolders, IRepository<AddressUnit, long> addressRepository, TenantExtendedUnitManager tenantExtendedManager, IAddressUnitAppService addressAppService, TenantSettingsAppService tenantSettingsAppService, IBinaryObjectManager binaryObjectManager, IRepository<BinaryObject, Guid> binaryObjectRepository)
+            IUnitOfWorkManager unitOfWorkManager, IAppFolders appFolders, IRepository<AddressUnit, long> addressRepository, TenantExtendedUnitManager tenantExtendedManager,
+            IAddressUnitAppService addressAppService, IBinaryObjectManager binaryObjectManager, IRepository<BinaryObject, Guid> binaryObjectRepository)
         {
             _tenantManager = tenantManager;
-            _userAccountRepository = userAccountRepository;
             _organizationRepository = organizationRepository;
             _tenantExtendedUnitRepository = tenantExtendedUnitRepository; ;
             _unitOfWorkManager = unitOfWorkManager;
@@ -68,7 +63,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _addressRepository = addressRepository;
             _tenantExtendedManager = tenantExtendedManager;
             _addressAppService = addressAppService;
-            _tenantSettingsAppService = tenantSettingsAppService;
             _binaryObjectManager = binaryObjectManager;
             _binaryObjectRepository = binaryObjectRepository;
         }
@@ -227,7 +221,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// <param name="input"></param>
         /// <returns></returns>
 
-        [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp_Create)]
+        [AbpAuthorize(AppPermissions.Pages_Administration_Tenant_Settings)]
         public async Task<CompanyImageOutputDto> UpdateCompanyUnit(TenantExtendedUnitInput input)
         {
             int tenantid = AbpSession.GetTenantId();
@@ -315,7 +309,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// Get  comapnyAddress,Logo,Transmitter Fields for Editing in TenantLevel
         /// </summary>
         /// <returns></returns>
-        [AbpAuthorize(AppPermissions.Pages_Administration_CompanySetUp)]
+        [AbpAuthorize(AppPermissions.Pages_Administration_Tenant_Settings)]
         public async Task<ComapnyPreferenceDto> GetCompanySettingsForEdit()
         {
             string tenancyName;

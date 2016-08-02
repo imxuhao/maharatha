@@ -3067,6 +3067,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem.BankAccountName">
             <summary> Gets or sets AccountNumber </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache">
             <summary>
             BankAccount CacheInterface
@@ -3135,6 +3138,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.IsRollupAccount">
             <summary> Gets or sets IsRollupAccount </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get Accounts from Database
@@ -3177,7 +3183,7 @@
             Implementing Cache for SubAccountRestriction.
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache.GetSubAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache.GetSubAccountRestrictionsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get SubAccounts from Database
             </summary>
@@ -3254,6 +3260,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.TypeOfJobStatusId">
             <summary> Gets or sets IsDivision </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem">
             <summary>
@@ -5873,6 +5882,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CountryListDto.CountryId">
+            <summary>
+            Gets or Sets CountryId
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CountryListDto.Description">
+            <summary>
+            Gets or Sets Description
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CountryListDto.IsoCode">
+            <summary>
+            Gets or Sets TwoLetterAbbreviation
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput.Number">
             <summary>Gets or sets the Number field. </summary>
         </member>
@@ -5944,6 +5968,21 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.LocationSetUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.RegionListDto.RegionId">
+            <summary>
+            Gets or Sets CountryId
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.RegionListDto.Description">
+            <summary>
+            Gets or Sets Description
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.RegionListDto.StateCode">
+            <summary>
+            Gets or Sets RegionAbbreviation
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TaxCreditUnitDto.TaxCreditId">
             <summary>Gets or sets the TaxCreditId field. </summary>

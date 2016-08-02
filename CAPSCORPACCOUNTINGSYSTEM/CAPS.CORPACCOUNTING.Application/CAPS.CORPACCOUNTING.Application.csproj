@@ -398,6 +398,7 @@
     <Compile Include="Masters\AccountUnitAppService.cs" />
     <Compile Include="Masters\CoaUnitAppService.cs" />
     <Compile Include="Masters\Dto\AutoFillDto.cs" />
+    <Compile Include="Masters\Dto\CountryListDto.cs" />
     <Compile Include="Masters\Dto\IdInputExtensionDto.cs" />
     <Compile Include="Masters\Dto\CreateTaxCreditUnitInput.cs" />
     <Compile Include="Masters\Dto\AutoSearchInput.cs" />
@@ -407,6 +408,7 @@
     <Compile Include="Masters\Dto\IdOutputDto.cs" />
     <Compile Include="Masters\Dto\LocationSetUnitDto.cs" />
     <Compile Include="Masters\Dto\NameValueInputList.cs" />
+    <Compile Include="Masters\Dto\RegionListDto.cs" />
     <Compile Include="Masters\Dto\TaxCreditUnitDto.cs" />
     <Compile Include="Masters\Dto\UpdateLocationSetUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateLocationSetUnitInput.cs" />

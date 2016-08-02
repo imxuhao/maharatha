@@ -40,7 +40,11 @@ using CAPS.CORPACCOUNTING.Web.MultiTenancy;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
 using System.Threading;
+using Abp.Domain.Repositories;
+using CAPS.CORPACCOUNTING.Helpers;
+using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 
 namespace CAPS.CORPACCOUNTING.Web.Controllers
 {
@@ -59,6 +63,11 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper;
         private readonly IUserLinkManager _userLinkManager;
         private readonly INotificationSubscriptionManager _notificationSubscriptionManager;
+        private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitRepository;
+        private readonly IAccountCache _accountCache;
+        private readonly IDivisionCache _projectCache;
+        private readonly IBankAccountCache _bankCache;
+
 
         private IAuthenticationManager AuthenticationManager
         {
@@ -78,7 +87,9 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             IWebUrlService webUrlService,
             AbpLoginResultTypeHelper abpLoginResultTypeHelper,
             IUserLinkManager userLinkManager,
-            INotificationSubscriptionManager notificationSubscriptionManager)
+            INotificationSubscriptionManager notificationSubscriptionManager, 
+            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository, 
+            IAccountCache accountCache, IDivisionCache projectCache, IBankAccountCache bankCache)
         {
             _userManager = userManager;
             _multiTenancyConfig = multiTenancyConfig;
@@ -93,6 +104,10 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
             _userLinkManager = userLinkManager;
             _notificationSubscriptionManager = notificationSubscriptionManager;
+            _userOrganizationUnitRepository = userOrganizationUnitRepository;
+            _accountCache = accountCache;
+            _projectCache = projectCache;
+            _bankCache = bankCache;
         }
 
         #region Login / Logout
@@ -181,10 +196,91 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             {
                 identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             }
+            //await AddSecurityFlagsToClaims(identity,user);
             identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId)));
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = rememberMe }, identity);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        private async Task AddSecurityFlagsToClaims(ClaimsIdentity identity, User user)
+        {
+            using (_unitOfWorkManager.Current.SetTenantId(user.TenantId))
+            {
+                
+                AutoSearchInput input = new AutoSearchInput();
+                
+                //Get Accounts from cache
+                var accountList = await _accountCache.GetAccountCacheItemAsync(
+                    CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(user.TenantId), null),
+                    input);
+              
+                //Get Projects from cache
+                var projectList = await _projectCache.GetDivisionCacheItemAsync(
+                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(user.TenantId), null),
+                   input);
+
+                //Get Projects from cache
+                var bankList = await _bankCache.GetBankAccountCacheItemAsync(
+                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(user.TenantId), null),
+                   input);
+
+                //Get userOrganizations from database
+                var userorganizationList =
+                    await _userOrganizationUnitRepository.GetAllListAsync(p => p.UserId == user.Id);
+
+                //setting the security flag for AccountSecurity
+                //if the loggedin user is assigned any accountSecurity(CorporateCOA) this flag will be true
+                bool accountSecurityFlag =
+                    (from account in accountList.ToList().Where(p => p.IsCorporate == true)
+                        join userorganization in userorganizationList on account.OrganizationUnitId equals
+                            userorganization.OrganizationUnitId
+                        select account).Any();
+
+                //setting the security flag for LineSecurity
+                //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
+                bool lineSecurityFlag =
+                   (from account in projectList.ToList().Where(p => p.IsDivision == false)
+                    join userorganization in userorganizationList on account.OrganizationUnitId equals
+                         userorganization.OrganizationUnitId
+                    select account).Any();
+
+                //setting the security flag for ProjectSecurity
+                //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
+                bool projectSecurityFlag =
+                  (from project in projectList.ToList().Where(p => p.IsDivision == false)
+                   join userorganization in userorganizationList on project.OrganizationUnitId equals
+                        userorganization.OrganizationUnitId
+                   select project).Any();
+
+                //setting the security flag for ProjectSecurity
+                //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
+                bool divisionSecurityFlag =
+                  (from project in projectList.ToList().Where(p => p.IsDivision == true)
+                   join userorganization in userorganizationList on project.OrganizationUnitId equals
+                        userorganization.OrganizationUnitId
+                   select project).Any();
+
+                //setting the security flag for ProjectSecurity
+                //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
+                bool bankSecurityFlag =
+                  (from bankAccount in bankList.ToList()
+                   join userorganization in userorganizationList on bankAccount.OrganizationUnitId equals
+                        userorganization.OrganizationUnitId
+                   select bankAccount).Any();
+
+                //adding Security flags to claims
+                identity.AddClaim(new Claim("HasGLRestrictions", Convert.ToString(accountSecurityFlag)));
+                identity.AddClaim(new Claim("HasLineRestrictions", Convert.ToString(lineSecurityFlag)));
+                identity.AddClaim(new Claim("HasProjectRestriction", Convert.ToString(projectSecurityFlag)));
+                identity.AddClaim(new Claim("HasDivisionRestriction", Convert.ToString(divisionSecurityFlag)));
+                identity.AddClaim(new Claim("HasBankRestriction", Convert.ToString(bankSecurityFlag)));
+            }
 
         }
 
@@ -1032,7 +1128,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                             tokenId;
             return Json(new MvcAjaxResponse { TargetUrl = targetUrl });
         }
-       
+
         private async Task<JsonResult> SaveImpersonationTokenAndGetTargetUrlForThisUser(int? tenantId, long userId,
            bool isBackToImpersonator)
         {
@@ -1065,7 +1161,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Create target URL
             var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/ImpersonateSignInUser?tokenId=" +
                             tokenId;
-            return Json((new MvcAjaxResponse { TargetUrl = targetUrl }),JsonRequestBehavior.AllowGet);
+            return Json((new MvcAjaxResponse { TargetUrl = targetUrl }), JsonRequestBehavior.AllowGet);
             //return Json( targetUrl,JsonRequestBehavior.AllowGet);
         }
 
@@ -1193,6 +1289,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             {
                 identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId.Value)));
             }
+           // await  AddSecurityFlagsToClaims(identity, user);
         }
 
 

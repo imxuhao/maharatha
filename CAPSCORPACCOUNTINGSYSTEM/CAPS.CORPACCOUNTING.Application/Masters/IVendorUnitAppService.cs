@@ -117,13 +117,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// Get Country list
         /// </summary>
         /// <returns></returns>
-         Task<List<NameValueDto>> GetCountryList();
+         Task<List<CountryListDto>> GetCountryList();
 
         /// <summary>
         /// Get Country list
         /// </summary>
         /// <returns></returns>
-        Task<List<NameValueDto>> GetRegionList();
+        Task<List<RegionListDto>> GetRegionList();
 
         /// <summary>
         /// 

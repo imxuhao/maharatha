@@ -34,6 +34,9 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         /// <summary> Gets or sets AccountNumber </summary>
         public string BankAccountName { get; set; }
+
+        /// <summary>Gets or sets the CompanyId field. </summary>
+        public long? OrganizationUnitId { get; set; }
     }
     /// <summary>
     /// BankAccount CacheInterface
@@ -112,7 +115,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                       Description = u.Description,
                       BankAccountId = u.Id,
                       BankAccountNumber = u.BankAccountNumber,
-                      BankAccountName = u.BankAccountName
+                      BankAccountName = u.BankAccountName,
+                      OrganizationUnitId = u.OrganizationUnitId
                   }).ToListAsync();
             return bankAccounts;
 

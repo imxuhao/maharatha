@@ -253,14 +253,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheinput);
             List<SubAccountRestrictionCacheItem> subaccountRestrictions=new List<SubAccountRestrictionCacheItem>();
 
-            if (!ReferenceEquals(subaccountRestrictioncacheItem.SubAccountRestrictionCacheItemList,null))
+            if (!ReferenceEquals(subaccountRestrictioncacheItem,null))
             {
 
-                subaccountRestrictions = subaccountRestrictioncacheItem.SubAccountRestrictionCacheItemList.ToList().Where(
+                subaccountRestrictions = subaccountRestrictioncacheItem.ToList().Where(
                         p => p.IsActive == true && p.SubAccountId == input.SubAccountId.Value).ToList();
             }
 
-            var result = cacheItem.AccountCacheItemList.ToList().Where(p => !subaccountRestrictions.Any(p2 => p2.AccountId == p.AccountId) && p.IsCorporate==true).ToList();
+            var result = cacheItem.ToList().Where(p => !subaccountRestrictions.Any(p2 => p2.AccountId == p.AccountId) && p.IsCorporate==true).ToList();
 
             
             return result.Select(item =>

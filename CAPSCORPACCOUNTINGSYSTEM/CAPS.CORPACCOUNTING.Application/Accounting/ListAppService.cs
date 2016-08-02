@@ -108,7 +108,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             var cacheItem = await _divisionCache.GetDivisionCacheItemAsync(
                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.DivisionCacheItemList.ToList().Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed).
+            return cacheItem.ToList().Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed).
                 WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
             p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
@@ -126,7 +126,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var accountList = await _accountCache.GetAccountCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
 
-            return accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+            return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
                 || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.ChartOfAccountId == chartOfAccountId).ToList();
 
@@ -144,10 +144,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
             var subaccountRestrictioncacheItem = await _subAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            if (input.AccountId == 0 || subaccountRestrictioncacheItem.SubAccountRestrictionCacheItemList.Count == 0)
+            if (input.AccountId == 0 || subaccountRestrictioncacheItem.Count == 0)
             {
                 return
-                    cacheItem.SubAccountCacheItemList.ToList()
+                    cacheItem.ToList()
                         .WhereIf(!string.IsNullOrEmpty(input.Query),
                             p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
                                  p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
@@ -156,8 +156,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
             }
             else
             {
-                var res = from subaccount in cacheItem.SubAccountCacheItemList.ToList()
-                          join subAccountRestriction in subaccountRestrictioncacheItem.SubAccountRestrictionCacheItemList.Where(p => p.AccountId == input.AccountId)
+                var res = from subaccount in cacheItem.ToList()
+                          join subAccountRestriction in subaccountRestrictioncacheItem.Where(p => p.AccountId == input.AccountId)
                           on subaccount.SubAccountId equals subAccountRestriction.SubAccountId
                           select subaccount;
                 return res.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
@@ -270,7 +270,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
 
             var result = (from jobNames in input.NameValueList
-                          join jobOrdivision in jobOrDivisionList.DivisionCacheItemList.ToList() on jobNames.Name equals jobOrdivision.JobNumber
+                          join jobOrdivision in jobOrDivisionList.ToList() on jobNames.Name equals jobOrdivision.JobNumber
                           select new NameValueDto()
                           {
                               Name = jobNames.Name,
@@ -290,7 +290,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
 
             var result = (from accNames in input.NameValueList
-                          join account in accountList.AccountCacheItemList.ToList() on accNames.Name equals account.AccountNumber
+                          join account in accountList.ToList() on accNames.Name equals account.AccountNumber
                           select new NameValueDto()
                           {
                               Name = accNames.Name,
@@ -311,8 +311,8 @@ namespace CAPS.CORPACCOUNTING.Accounting
             var subAccountRestrictioncacheItem = await _subAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
 
-            var subAccountRestrictionList = from subaccount in cacheItem.SubAccountCacheItemList.ToList()
-                                            join subAccountRestriction in subAccountRestrictioncacheItem.SubAccountRestrictionCacheItemList
+            var subAccountRestrictionList = from subaccount in cacheItem.ToList()
+                                            join subAccountRestriction in subAccountRestrictioncacheItem
                                             on subaccount.SubAccountId equals subAccountRestriction.SubAccountId
                                             select subaccount;
 

@@ -71,7 +71,8 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
                 });
                 var modulePermission = abp.auth.hasPermission('Pages.' + newView.name);
                 if (!modulePermission) {
-                    Ext.toast('Requested resource by you is restricted due to security reason. Please contact support or clear #' + hashTag + ' from your browser url');
+                    abp.message.error('Requested resource by you is restricted due to security reason. Please contact support or clear #' + hashTag + ' from your browser url');
+                    //Ext.toast('Requested resource by you is restricted due to security reason. Please contact support or clear #' + hashTag + ' from your browser url');
                     return;
                 }
                 if (typeof(newView.getStore) === 'function') {

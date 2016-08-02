@@ -284,7 +284,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             var accountList = await _accountcache.GetAccountCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
 
-            return accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+            return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
                 || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.IsCorporate == true && p.IsRollupAccount == true).ToList();
 

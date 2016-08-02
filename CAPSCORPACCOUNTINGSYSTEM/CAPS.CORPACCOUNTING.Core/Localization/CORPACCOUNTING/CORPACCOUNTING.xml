@@ -1064,5 +1064,6 @@
 <text name="SelectUserProfilePicture" value="Select Profile Picture before saving." />
 
 <text name="SelectRoleName" value="Please select role name." />
+<text name="CompanyGroup" value="Company Groups" />
   </texts>
 </localizationDictionary>

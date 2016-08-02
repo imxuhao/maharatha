@@ -1,19 +1,14 @@
 ﻿Ext.define('Chaching.view.administration.companysetup.CompanyForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     requires: ['Chaching.view.administration.companysetup.CompanyFormController'],
-    //alias: [
-    //    'widget.companysetup.create', 'widget.companysetup.edit'
-    //],
-    requires: [
-    ],
     controller: 'administration-companysetup-companyform',
     xtype: 'companysetup',
-    name: "Administration.CompanySetUp",
+    name: "Administration.Tenant.Settings",
     modulePermissions: {
-        read: abp.auth.isGranted('Pages.Administration.CompanySetUp'),
-        create: abp.auth.isGranted('Pages.Administration.CompanySetUp.Create'),
-        edit: abp.auth.isGranted('Pages.Administration.CompanySetUp.Edit'),
-        destroy: abp.auth.isGranted('Pages.Administration.CompanySetUp.Delete')
+        read: abp.auth.isGranted('Pages.Administration.Tenant.Settings'),
+        create: abp.auth.isGranted('Pages.Administration.Tenant.Settings'),
+        edit: abp.auth.isGranted('Pages.Administration.Tenant.Settings'),
+        destroy: abp.auth.isGranted('Pages.Administration.Tenant.Settings')
     },
     openInPopupWindow: false,
     hideDefaultButtons: true,

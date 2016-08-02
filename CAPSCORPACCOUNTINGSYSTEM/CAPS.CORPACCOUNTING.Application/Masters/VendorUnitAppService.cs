@@ -492,11 +492,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// Get PaymentTerms
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetCountryList()
+        public async Task<List<CountryListDto>> GetCountryList()
         {
             var countryList = await (from country in _countryRepository.GetAll()
                                      join typeOfCountry in _typeOfCountryRepository.GetAll() on country.TypeOfCountryId equals typeOfCountry.Id
-                                     select new NameValueDto { Name = typeOfCountry.Description, Value = typeOfCountry.Id.ToString() }).ToListAsync();
+                                     select new CountryListDto { Description = typeOfCountry.Description, CountryId = typeOfCountry.Id,
+                                         IsoCode = typeOfCountry.TwoLetterAbbreviation}).ToListAsync();
 
             return countryList;
         }
@@ -505,9 +506,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// Get PaymentTerms
         /// </summary>
         /// <returns></returns>
-        public async Task<List<NameValueDto>> GetRegionList()
+        public async Task<List<RegionListDto>> GetRegionList()
         {
-            var regionList = await _regionRepository.GetAll().Select(u => new NameValueDto { Name = u.Description + " (" + u.RegionAbbreviation + ")", Value = u.Id.ToString() }).ToListAsync();
+            var regionList = await _regionRepository.GetAll().Select(u => new RegionListDto { Description = u.Description + " (" + u.RegionAbbreviation + ")",
+                RegionId = u.Id,StateCode = u.RegionAbbreviation}).ToListAsync();
             return regionList;
         }
 
@@ -523,7 +525,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             var accountList = await _accountCache.GetAccountCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
 
-            return accountList.AccountCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
+            return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
                 || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.IsCorporate == input.Value).ToList();
         }

@@ -10,9 +10,11 @@ using Abp.Runtime.Caching;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Linq.Extensions;
 using System.Data.Entity;
+using Abp.Configuration;
 using Abp.Events.Bus.Entities;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Sessions;
+using CAPS.CORPACCOUNTING.Configuration;
 
 namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 {
@@ -47,7 +49,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <param name="accountkey"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<CacheItem> GetSubAccountCacheItemAsync(string accountkey, AutoSearchInput input);
+        Task<List<SubAccountCacheItem>> GetSubAccountCacheItemAsync(string accountkey, AutoSearchInput input);
 
     }
 
@@ -55,6 +57,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
     {
 
         private readonly CustomAppSession _customAppSession;
+        private readonly ISettingManager _settingManager;
 
         ITypedCache<int, SubAccountCacheItem> IEntityCache<SubAccountCacheItem, int>.InternalCache
         {
@@ -82,17 +85,18 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             throw new NotImplementedException();
         }
 
-        public SubAccountCache(ICacheManager cacheManager, IRepository<SubAccountUnit, long> repository, CustomAppSession customAppSession)
+        public SubAccountCache(ICacheManager cacheManager, IRepository<SubAccountUnit, long> repository, CustomAppSession customAppSession, ISettingManager settingManager)
             : base(cacheManager, repository)
         {
-
             _customAppSession = customAppSession;
+            _settingManager = settingManager;
         }
+
         public override void HandleEvent(EntityChangedEventData<SubAccountUnit> eventData)
         {
             CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
         }
-       
+
         /// <summary>
         /// Get SubAccounts from Database
         /// </summary>
@@ -102,20 +106,29 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         {
             var subaccounts = await Repository.GetAll()
                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .Select(u => new SubAccountCacheItem { Description = u.Description, SubAccountId = u.Id, Caption = u.Caption,
-                     SubAccountNumber = u.SubAccountNumber,SearchNo = u.SearchNo}).ToListAsync();
+                 .Select(u => new SubAccountCacheItem
+                 {
+                     Description = u.Description,
+                     SubAccountId = u.Id,
+                     Caption = u.Caption,
+                     SubAccountNumber = u.SubAccountNumber,
+                     SearchNo = u.SearchNo
+                 }).ToListAsync();
             return subaccounts;
         }
-        
+
         /// <summary>
         /// Get SubAccounts
         /// </summary>
         /// <param name="subaccountkey"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<CacheItem> GetSubAccountCacheItemAsync(string subaccountkey, AutoSearchInput input)
+        public async Task<List<SubAccountCacheItem>> GetSubAccountCacheItemAsync(string subaccountkey, AutoSearchInput input)
         {
-            return await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).GetAsync(subaccountkey, async () =>
+            if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
+            {
+                var subAccountCacheItem =
+             await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).GetAsync(subaccountkey, async () =>
             {
                 var newCacheItem = new CacheItem(subaccountkey);
                 var subaccountList = await GetSubAccountsFromDb(input);
@@ -124,7 +137,12 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                     newCacheItem.SubAccountCacheItemList.Add(subaccount);
                 }
                 return newCacheItem;
-            });
+            }); return subAccountCacheItem.SubAccountCacheItemList.ToList();
+            }
+            else
+            {
+                return await GetSubAccountsFromDb(input);
+            }
         }
 
     }

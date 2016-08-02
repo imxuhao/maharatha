@@ -11,7 +11,9 @@ using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Linq.Extensions;
 using System.Data.Entity;
+using Abp.Configuration;
 using Abp.Events.Bus.Entities;
+using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
@@ -57,12 +59,14 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
     {
 
         private readonly CustomAppSession _customAppSession;
-        public CustomerCache(ICacheManager cacheManager, IRepository<CustomerUnit> repository, CustomAppSession customAppSession)
+        private readonly ISettingManager _settingManager;
+        public CustomerCache(ICacheManager cacheManager, IRepository<CustomerUnit> repository, CustomAppSession customAppSession, ISettingManager settingManager)
             : base(cacheManager, repository)
         {
-
             _customAppSession = customAppSession;
+            _settingManager = settingManager;
         }
+
         public override void HandleEvent(EntityChangedEventData<CustomerUnit> eventData)
         {
             CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheCustomerStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.CustomerKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
@@ -88,8 +92,10 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         public async Task<List<CustomerCacheItem>> GetCustomersCacheItemAsync(string customerkey, AutoSearchInput input)
         {
-            var cacheItem =
-                await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheCustomerStore)
+            if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
+            {
+                var cacheItem =
+                    await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheCustomerStore)
                         .GetAsync(customerkey, async () =>
                         {
                             var newCacheItem = new CacheItem(customerkey);
@@ -100,7 +106,12 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                             }
                             return newCacheItem;
                         });
-            return cacheItem.CustomerCacheItemList.ToList();
+                return cacheItem.CustomerCacheItemList.ToList();
+            }
+            else
+            {
+                return await GetCustomersFromDb(input);
+            }
         }
 
     }

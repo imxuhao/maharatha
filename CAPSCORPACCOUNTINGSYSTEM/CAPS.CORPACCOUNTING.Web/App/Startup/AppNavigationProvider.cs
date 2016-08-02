@@ -43,20 +43,13 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             L("Administration"), "icon-wrench"
             ).AddItem(new MenuItemDefinition(
             PageNames.App.Common.OrganizationUnits,
-            L("OrganizationUnits"),
+            L("CompanyGroup"),
             url: "organizationUnits",
             icon: "icon-layers",
             requiredPermissionName: AppPermissions.Pages_Administration_OrganizationUnits
             )
             )
             .AddItem(new MenuItemDefinition(
-            PageNames.App.Common.CompanySetup,
-            L("MenuCompanySetup"),
-            url: "companysetup",
-            icon: "icon-layers",
-            requiredPermissionName: AppPermissions.Pages_Administration_CompanySetUp
-            )
-            ).AddItem(new MenuItemDefinition(
             PageNames.App.Common.Roles,
             L("Roles"),
             url: "roles",
@@ -99,11 +92,12 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             icon: "icon-settings",
             requiredPermissionName: AppPermissions.Pages_Administration_Host_Settings
             )
-            ).AddItem(new MenuItemDefinition(
+            )
+            .AddItem(new MenuItemDefinition(
             PageNames.App.Tenant.Settings,
             L("Settings"),
-            url: "tenant.settings",
-            icon: "icon-settings",
+            url: "companysetup",
+            icon: "icon-layers",
             requiredPermissionName: AppPermissions.Pages_Administration_Tenant_Settings
             )
             ))
@@ -131,7 +125,7 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             )
             .AddItem(new MenuItemDefinition(
             PageNames.App.Organization.ProjectsProjectMaintenance,
-            L("ProjectMaintenance"), "icon-wrench", "projects.projectmaintenance",
+            L("Maintenance"), "icon-wrench", "projects.projectmaintenance",
             requiredPermissionName: AppPermissions.Pages_Projects_ProjectMaintenance,
             customData: MenuItemsList("Projects", "ProjectMaintenance")
             ))

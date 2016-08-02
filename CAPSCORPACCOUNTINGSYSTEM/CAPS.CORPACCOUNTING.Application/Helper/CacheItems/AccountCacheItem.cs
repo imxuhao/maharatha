@@ -12,7 +12,9 @@ using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using Abp.Linq.Extensions;
 using System.Data.Entity;
+using Abp.Configuration;
 using Abp.Events.Bus.Entities;
+using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Sessions;
 
 
@@ -21,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
     /// <summary>
     /// AccountCacheItem Class
     /// </summary>
-    [AutoMapFrom(typeof (AccountUnit))]
+    [AutoMapFrom(typeof(AccountUnit))]
     public class AccountCacheItem
     {
         /// <summary> Gets or sets AccountId </summary>
@@ -44,23 +46,27 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         public bool IsCorporate { get; set; }
 
         /// <summary> Gets or sets IsRollupAccount </summary>
-
         public bool IsRollupAccount { get; set; }
+
+        /// <summary>Gets or sets the CompanyId field. </summary>
+        public long? OrganizationUnitId { get; set; }
+
+
 
     }
 
     public interface IAccountCache : IEntityCache<AccountCacheItem>
     {
-        Task<CacheItem> GetAccountCacheItemAsync(string accountkey, AutoSearchInput input);
+        Task<List<AccountCacheItem>> GetAccountCacheItemAsync(string accountkey, AutoSearchInput input);
 
     }
 
-    public class AccountCache : EntityCache<AccountUnit, AccountCacheItem,long>, IAccountCache, ITransientDependency
+    public class AccountCache : EntityCache<AccountUnit, AccountCacheItem, long>, IAccountCache, ITransientDependency
     {
 
         private readonly CustomAppSession _customAppSession;
         private readonly IRepository<CoaUnit> _coaRepository;
-
+        private readonly ISettingManager _settingManager;
         ITypedCache<int, AccountCacheItem> IEntityCache<AccountCacheItem, int>.InternalCache
         {
             get
@@ -77,12 +83,14 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             }
         }
 
-        public AccountCache(ICacheManager cacheManager, IRepository<AccountUnit,long> repository, CustomAppSession customAppSession, IRepository<CoaUnit> coaRepository)
+        public AccountCache(ICacheManager cacheManager, IRepository<AccountUnit, long> repository, CustomAppSession customAppSession,
+            IRepository<CoaUnit> coaRepository, ISettingManager settingManager)
             : base(cacheManager, repository)
         {
 
             _customAppSession = customAppSession;
             _coaRepository = coaRepository;
+            _settingManager = settingManager;
         }
         public override void HandleEvent(EntityChangedEventData<AccountUnit> eventData)
         {
@@ -106,12 +114,13 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         private async Task<List<AccountCacheItem>> GetAccountsFromDb(AutoSearchInput input)
         {
             var querry = from account in Repository.GetAll()
-                           join coa in _coaRepository.GetAll() on account.ChartOfAccountId equals coa.Id
-                           into coaunits from coaunit in coaunits.DefaultIfEmpty()
-                           select new {account, IsCorporate= coaunit.IsCorporate };
+                         join coa in _coaRepository.GetAll() on account.ChartOfAccountId equals coa.Id
+                         into coaunits
+                         from coaunit in coaunits.DefaultIfEmpty()
+                         select new { account, IsCorporate = coaunit.IsCorporate };
 
 
-            var result=await querry.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.account.OrganizationUnitId == input.OrganizationUnitId).ToListAsync();
+            var result = await querry.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.account.OrganizationUnitId == input.OrganizationUnitId).ToListAsync();
             return result.Select(u => new AccountCacheItem
             {
                 AccountNumber = u.account.AccountNumber,
@@ -120,7 +129,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                 Description = u.account.Description,
                 ChartOfAccountId = u.account.ChartOfAccountId,
                 IsCorporate = u.IsCorporate,
-                IsRollupAccount = u.account.IsRollupAccount
+                IsRollupAccount = u.account.IsRollupAccount,
+                OrganizationUnitId = u.account.OrganizationUnitId
             }).ToList();
 
         }
@@ -131,18 +141,29 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <param name="accountkey"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<CacheItem> GetAccountCacheItemAsync(string accountkey, AutoSearchInput input)
+        public async Task<List<AccountCacheItem>> GetAccountCacheItemAsync(string accountkey, AutoSearchInput input)
         {
-            return await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore).GetAsync(accountkey, async () =>
+            if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
             {
-                var newCacheItem = new CacheItem(accountkey);
-                var accountList = await GetAccountsFromDb(input);
-                foreach (var account in accountList)
-                {
-                    newCacheItem.AccountCacheItemList.Add(account);
-                }
-                return newCacheItem;
-            });
+                var cacheAccountList =
+                    await
+                        CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore)
+                            .GetAsync(accountkey, async () =>
+                            {
+                                var newCacheItem = new CacheItem(accountkey);
+                                var accountList = await GetAccountsFromDb(input);
+                                foreach (var account in accountList)
+                                {
+                                    newCacheItem.AccountCacheItemList.Add(account);
+                                }
+                                return newCacheItem;
+                            });
+                return cacheAccountList.AccountCacheItemList.ToList();
+            }
+            else
+            {
+                return await GetAccountsFromDb(input);
+            }
         }
     }
 }

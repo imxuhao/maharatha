@@ -29,6 +29,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
 
         public bool IsActive { get; set; }
 
+        public bool ShouldChangePasswordOnNextLogin { get; set; }
+
         public DateTime CreationTime { get; set; }
 
         [AutoMapFrom(typeof(UserRole))]

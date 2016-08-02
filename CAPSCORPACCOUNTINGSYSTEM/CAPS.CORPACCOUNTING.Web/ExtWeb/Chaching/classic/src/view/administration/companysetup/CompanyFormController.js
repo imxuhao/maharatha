@@ -133,10 +133,10 @@
                            var types = component.types;
                            Ext.each(types, function (type) {
                                if (type == 'locality') {
-                                   city.push({ name: component.long_name, value: component.short_name });
+                                   city.push({ name: component.long_name, city: component.short_name });
                                }
                                if (type == 'administrative_area_level_1') {
-                                   state.push({ name: component.long_name, value: component.short_name });
+                                   state.push({ name: component.long_name, state: component.short_name });
                                }
                                //if (type == 'country') {
                                //    country.push({ name: component.long_name, value: component.short_name });
@@ -208,7 +208,7 @@
             line4: '',
             city: form.findField('city').getValue(),
             state: form.findField('state').getValue(),
-            country: form.findField('state').getValue(),
+            country: form.findField('country').getValue(),
             postalCode: form.findField('postalCode').getValue(),
             fax: '',
             email: form.findField('email').getValue(),

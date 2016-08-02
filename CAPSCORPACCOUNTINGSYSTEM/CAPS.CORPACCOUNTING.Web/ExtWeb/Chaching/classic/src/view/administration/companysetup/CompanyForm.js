@@ -93,7 +93,7 @@
                              columnWidth: .33,
                              padding: '20 10 0 20',
                              defaults: {
-                                 //labelWidth: 140,
+                                 labelWidth: 80,
                                  blankText: app.localize('MandatoryToolTipText')
                              },
                              items: [
@@ -130,7 +130,7 @@
                                   fieldLabel: app.localize('Country').initCap(),
                                   width: '100%',
                                   ui: 'fieldLabelTop',
-                                  displayField: 'name',
+                                  displayField: 'description',
                                   valueField: 'country',
                                   emptyText: app.localize('SelectOption'),
                                   queryMode: 'local',
@@ -172,7 +172,7 @@
                                  emptyText: app.localize('SelectOption'),
                                  queryMode: 'local',
                                  store: {
-                                     fields: [{ name: 'name' }, { name: 'value' }, { name: 'city', mapping: 'value' }],
+                                     fields: [{ name: 'name' }, { name: 'city' }],
                                      data: []
                                  }
                              },
@@ -187,7 +187,7 @@
                                  emptyText: app.localize('SelectOption'),
                                  queryMode: 'local',
                                  store: {
-                                     fields: [{ name: 'name' }, { name: 'value' }, { name: 'state', mapping: 'value' }],
+                                     fields: [{ name: 'name' }, { name: 'state' }],
                                      data: []
                                  }
                              },

@@ -1,14 +1,10 @@
 ﻿Ext.define('Chaching.store.utilities.CountryListStore', {
     extend: 'Chaching.store.base.BaseStore',
-    fields: [{ name: 'name' }, { name: 'value' }, {
-        name: 'country', convert: function (value, record) {
-            return record.get('name');
-        }
-    }, {
-        name: 'countryId', convert: function (value, record) {
-            return record.get('value');
-        }
-    }],
+    remoteSort: false,
+    remoteFilter : false,
+    fields: [{ name: 'name' }, { name: 'value' }, { name: 'isoCode' }, { name: 'description' }, { name: 'countryId' }, {
+        name: 'country', mapping : 'isoCode'
+        }],
     proxy: {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         type: 'chachingProxy',

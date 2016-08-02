@@ -354,7 +354,7 @@
     <text name="Clear">Clear</text>
     <text name="CachesHeaderInfo">You can clear caches in application on this page.</text>
     <text name="TestEmailSettingsHeader">Test Email Settings</text>
-    <text name="TestEmailSettings">admin@aspnetzero.com</text>
+    <text name="TestEmailSettings">sumit@capspayroll.com</text>
     <text name="SendTestEmail">Send Test Email</text>
     <text name="TestEmail_Subject">CORPACCOUNTING test email</text>
     <text name="TestEmail_Body">This is a test email.</text>

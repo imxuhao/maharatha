@@ -62,7 +62,7 @@
                         width: '80%',
                         ui: 'fieldLabelTop',
                         reference: 'timezone',
-                        
+                        labelWidth: 70,
                         store: 'Chaching.store.TimezoneStore',
                         editable: false,
                         autoLoadOnValue: true,
@@ -189,9 +189,11 @@
                     displayField: 'editionDisplayName',
                     valueField: 'editionId',
                     queryMode: 'local',
+                    labelWidth: 60,
                     bind: {
                         store: '{editionsForComboBox}'
-                    }
+                    },
+                   maxWidth: 300
                 }
                 ]
             },

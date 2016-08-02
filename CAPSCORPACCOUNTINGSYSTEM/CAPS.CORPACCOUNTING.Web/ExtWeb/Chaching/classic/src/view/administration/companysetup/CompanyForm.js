@@ -371,6 +371,7 @@
                             title: abp.localization.localize("General").initCap(),
                             xtype: 'form',
                             itemId: 'companyPreferencesGeneralTab',
+                            iconCls: 'fa fa-cogs',
                             padding: '20 10 0 20',
                             items: [
                                 {
@@ -395,6 +396,7 @@
                         title: abp.localization.localize("UserManagement").initCap(),
                         itemId: 'companyPreferencesUserManagementTab',
                         xtype: 'form',
+                        iconCls: 'fa fa-folder-open-o',
                         //layout: 'column',
                         padding: '20 10 0 20',
                         items: [{
@@ -480,6 +482,7 @@
                         title: abp.localization.localize("CompanyPreferences").initCap(),
                         itemId: 'companySettingsTab',
                         xtype: 'form',
+                        iconCls: 'fa fa-list-alt',
                         layout: 'column',
                         items: [{
                             columnWidth: .33,

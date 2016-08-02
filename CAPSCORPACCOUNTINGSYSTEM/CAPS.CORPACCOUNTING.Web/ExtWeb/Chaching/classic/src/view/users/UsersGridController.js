@@ -76,6 +76,9 @@ Ext.define('Chaching.view.users.UsersGridController', {
         var tenantRolesGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
         if (formView && isEdit) {
             form.findField('userName').setReadOnly(true);
+            form.findField('setRandomPassword').setValue(false);
+            form.findField('sendActivationEmail').setValue(false);
+            
             //disable tabs
             if (companyListTab) {
                 if (abp.session.tenantId != null) {
@@ -93,7 +96,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
                     if (res.success) {
                         if (isEdit && res.result != undefined) {
                             var roles = res.result.roles;
-                            Ext.apply(record.data, res.result.user);
+                            //Ext.apply(record.data, res.result.user);
                             if (roles && roles.length > 0 ) {
                                 Ext.each(roles, function (role) {
                                     var roleModel = Ext.create('Chaching.model.roles.RolesModel');

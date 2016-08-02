@@ -20,6 +20,7 @@
                 pressed : false,
                 scale: 'small',
                 width: '100%',
+                height: 22,
                 text: app.localize('View'),
                 //iconCls: 'fa fa-sign-in',
                 //iconAlign: 'left',
@@ -48,6 +49,7 @@
             var button = Ext.create('Ext.button.Button', {
                 ui: 'actionMenuButton',
                 pressed: false,
+                height: 22,
                 scale: 'small',
                 width: '100%',
                 text: app.localize('View'),
@@ -77,6 +79,7 @@
             var button = Ext.create('Ext.button.Button', {
                 scale: 'small',
                 width: '100%',
+                height: 22,
                 iconCls: 'fa fa-trash',
                 iconAlign: 'left',
                 widgetRec: widgetRec,

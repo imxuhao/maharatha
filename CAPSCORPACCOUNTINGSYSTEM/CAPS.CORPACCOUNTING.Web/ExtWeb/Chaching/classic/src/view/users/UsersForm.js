@@ -44,7 +44,7 @@ Ext.define('Chaching.view.users.UsersForm', {
             defaultFocus: 'textfield#name',
             layout: 'column',
             defaults: {
-                labelWidth: 140
+                labelWidth: 100
             },
             items: [
                 {
@@ -61,6 +61,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                     xtype: 'textfield',
                     name: 'name',
                     itemId: 'name',
+                    labelWidth: 70,
                     fieldLabel: app.localize('Name'),
                     width: '100%',
                     ui: 'fieldLabelTop',
@@ -71,6 +72,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 {
                     xtype: 'textfield',
                     name: 'surname',
+                    labelWidth: 70,
                     fieldLabel: app.localize('Surname'),
                     width: '100%',
                     ui: 'fieldLabelTop',
@@ -96,6 +98,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                          columnWidth:.5,
                          xtype: 'textfield',
                          name: 'password',
+                         labelWidth: 70,
                          reference: 'password',
                          inputType: 'password',
                          fieldLabel: app.localize('Password'),
@@ -115,7 +118,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                          inputType: 'password',
                          fieldLabel: app.localize('PasswordRepeat'),
                          width: '100%',
-                         labelWidth : 150, 
+                         labelWidth : 120, 
                          ui: 'fieldLabelTop',
                          emptyText: app.localize('PasswordRepeat'),
                          bind: {
@@ -138,6 +141,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                       name: 'shouldChangePasswordOnNextLogin',
                       labelAlign: 'right',
                       inputValue: true,
+                      uncheckedValue : false,
                       checked: true,
                       boxLabelCls: 'checkboxLabel'
                   }
@@ -177,7 +181,6 @@ Ext.define('Chaching.view.users.UsersForm', {
                             }, {
                                 xtype: 'checkbox',
                                 boxLabel: app.localize('Active'),
-                                
                                 name: 'isActive',
                                 labelAlign: 'right',
                                 inputValue: true,
@@ -206,7 +209,7 @@ Ext.define('Chaching.view.users.UsersForm', {
                 selType: 'checkboxmodel',
                 columns: [
                    { text: app.localize('RoleName'), dataIndex: 'displayName', flex: 1 }
-                   , { text: app.localize('View'), width: 80, renderer: Chaching.utilities.ChachingRenderers.addViewUsersRole }
+                   , { text: app.localize('View'), align : 'center', width: 80, renderer: Chaching.utilities.ChachingRenderers.addViewUsersRole }
                    //{ text: app.localize('RoleName'), dataIndex: 'displayName', flex: 1, renderer: Chaching.utilities.ChachingRenderers.addButtonRenderer },
                 ],
                 store: Ext.create('Chaching.store.roles.RolesStore'),

@@ -185,15 +185,6 @@
         return record;
     },
 
-    checkObjectExistsOrNot: function (arr, record) {
-        var i = arr.length;
-        while (i--) {
-            if (arr[i].tenantId === record.get('tenantId')) {
-                return true;
-            }
-        }
-        return false;
-    },
     isTenantIdExists: function (arr, record) {
         var i = arr.length;
         while (i--) {

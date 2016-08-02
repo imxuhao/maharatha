@@ -91,6 +91,7 @@
                     }
                     //load company preferences
                     form.loadRecord(record);
+                    
                 } else {
                     abp.message.error(result.error.message);
                 }
@@ -301,6 +302,8 @@
                 myMask.hide();
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
+                    //update Comnpany settings after override
+                    Ext.apply(ChachingGlobals.companySettings, requestObj);
                     abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
                     if (abp.clock.provider.supportsMultipleTimezone && me.usingDefaultTimeZone && me.initialTimezone !== timezoneCombo.getValue()) {
                         abp.message.info(app.localize('TimeZoneSettingChangedRefreshPageNotification')).done(function () {

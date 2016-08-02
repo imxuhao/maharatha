@@ -119,6 +119,31 @@ Ext.define('Chaching.Application', {
             if (loadingMask)docBody.removeChild(loadingMask);
         }
         var me = this;
+
+        //load company level settings
+        if (abp.session.tenantId != null) {
+            Ext.Ajax.request({
+                url: abp.appPath + 'api/services/app/tenantSettings/GetAllTenantSettings',
+                method: 'POST',
+                success: function (response, opts) {
+                    var result = Ext.decode(response.responseText);
+                    if (result.success) {
+                        debugger;
+                        //update Comnpany settings after override
+                        Ext.apply(ChachingGlobals.companySettings, result.result);
+                    } else {
+                        //function to show error details (Chaching.utilities.ChachingGlobals)
+                        ChachingGlobals.showPageSpecificErrors(response);
+                    }
+                },
+                failure: function (response, opts) {
+                    //function to show error details (Chaching.utilities.ChachingGlobals)
+                    ChachingGlobals.showPageSpecificErrors(response);
+                }
+            });
+        }
+       
+
         ///****Load usersDefaultView Settings
         var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');
         var filters = [];

@@ -6,6 +6,8 @@
         tenant: 2, //Represents a setting that can be configured/changed for each Tenant. This is reserved
         user: 4 // Represents a setting that can be configured/changed for each User.
     },
+    //default company settings
+    companySettings : {},
     loggedInUserInfo: {
         defaultOrganizationId: null,
         emailAddress: null,

@@ -39,12 +39,14 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
             width: '100%',
             ui: 'fieldLabelTop',
             reference: "password",
-            minLength : 6,
-            emptyText: app.localize('CurrentPassword'),
-            listeners: {
-                focusenter: 'passwordenter',
-                focusleave: 'passwordleave'
-            }
+            minLength: 6,
+            tabIndex : 1,
+            emptyText: app.localize('CurrentPassword')
+            //,
+            //listeners: {
+            //    focusenter: 'passwordEnter',
+            //    blur: 'passwordLeave'
+            //}
         },
     //{
     //    xtype: 'label',
@@ -61,10 +63,11 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
     },
     {
         xtype: 'textfield',
-        name: 'newpassword',
+        name: 'newPassword',
+        tabIndex: 2,
         allowBlank: false,
         inputType: 'password',
-        reference: "newpassword",
+        reference: "newPassword",
         fieldLabel: app.localize('NewPassword').initCap(),
         width: '100%',
         minLength: 6,
@@ -73,10 +76,11 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
     },
     {
         xtype: 'textfield',
-        name: 'newpasswordrepeat',
+        tabIndex: 2,
+        name: 'newPasswordRepeat',
         allowBlank: false,
         inputType: 'password',
-        reference: "newpasswordrepeat",
+        reference: "newPasswordRepeat",
         fieldLabel: app.localize('NewPasswordRepeat').initCap(),
         width: '100%',
         minLength: 6,
@@ -87,7 +91,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordForm', {
         * the password1 field.
         */
         validator: function (value) {
-            var password1 = this.previousSibling('[name=newpassword]');
+            var password1 = this.previousSibling('[name=newPassword]');
             return (value === password1.getValue()) ? true : 'Passwords do not match.'
         }
     }]

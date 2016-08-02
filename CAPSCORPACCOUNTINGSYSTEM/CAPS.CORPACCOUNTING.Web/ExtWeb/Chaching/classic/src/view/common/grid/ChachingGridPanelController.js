@@ -26,7 +26,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
          store = pagingtoolbar.getStore();
         if (combo.getValue() && store) {
             store.pageSize = combo.getValue();
-            store.load();
+            store.loadPage(1);
         }
     },
     onGridItemsPerPageComboRender: function (combo) {

@@ -25,6 +25,7 @@
         title: abp.localization.localize("CreateNewCompanySetup").initCap()
     },
     layout: 'fit',
+    defaultFocus : 'textfield#phone1',
     items: [{
         xtype: 'tabpanel',
         // ui: 'formTabPanels',
@@ -36,6 +37,7 @@
                 title: abp.localization.localize("CompanySetup").initCap(),
                 itemId: 'companySetupTab',
                 xtype: 'form',
+               
                 items: [
                      {
                          xtype: 'hiddenfield',
@@ -65,20 +67,50 @@
                                  xtype: 'textfield',
                                  name: 'companyName',
                                  readOnly : true,
-                                 //allowBlank: false,
                                  fieldLabel: app.localize('CompanyName').initCap(),
                                  width: '100%',
-                                 ui: 'fieldLabelTop'//,
-                                 //emptyText: app.localize('MandatoryField')
+                                 ui: 'fieldLabelTop'
+                             },
+                             {
+                                 xtype: 'textfield',
+                                 name: 'phone1',
+                                 itemId : 'phone1',
+                                 fieldLabel: app.localize('Telephone').initCap(),
+                                 width: '100%',
+                                 ui: 'fieldLabelTop'
                              }, {
                                  xtype: 'textfield',
-                                 name: 'line1',
-                                 allowBlank: false,
-                                 fieldLabel: app.localize('Address1').initCap(),
+                                 name: 'email',
+                                 fieldLabel: app.localize('Email').initCap(),
+                                 vtype: 'email',
                                  width: '100%',
-                                 ui: 'fieldLabelTop',
-                                 emptyText: app.localize('MandatoryField')
+                                 ui: 'fieldLabelTop'
+                             }, {
+                                 xtype: 'textfield',
+                                 name: 'federalTaxId',
+                                 fieldLabel: app.localize('FedTaxID').initCap(),
+                                 width: '100%',
+                                 ui: 'fieldLabelTop'
+                             }
+                             ]
+                         },
+                         {
+                             columnWidth: .33,
+                             padding: '20 10 0 20',
+                             defaults: {
+                                 //labelWidth: 140,
+                                 blankText: app.localize('MandatoryToolTipText')
                              },
+                             items: [
+                                 {
+                                     xtype: 'textfield',
+                                     name: 'line1',
+                                     allowBlank: false,
+                                     fieldLabel: app.localize('Address1').initCap(),
+                                     width: '100%',
+                                     ui: 'fieldLabelTop',
+                                     emptyText: app.localize('MandatoryField')
+                                 },
                              {
                                  xtype: 'textfield',
                                  name: 'line2',
@@ -94,27 +126,46 @@
                                  fieldLabel: app.localize('Address3').initCap(),
                                  width: '100%',
                                  ui: 'fieldLabelTop'
-                             }
+                             },
+                                
+                              {
+                                  xtype: 'combobox',
+                                  name: 'country',
+                                  reference : 'countryCombo',
+                                  fieldLabel: app.localize('Country').initCap(),
+                                  width: '100%',
+                                  ui: 'fieldLabelTop',
+                                  displayField: 'name',
+                                  valueField: 'country',
+                                  emptyText: app.localize('SelectOption'),
+                                  queryMode: 'local',
+                                  store: Ext.create('Chaching.store.utilities.CountryListStore')
+                                  //,
+                                  //store: {
+                                  //    fields: [{ name: 'name' }, { name: 'value' }, { name: 'country', mapping: 'value' }],
+                                  //    data: []
+                                  //}
+                              }
                              ]
                          },
-                         {
-                             columnWidth: .33,
-                             padding: '20 10 0 20',
-                             defaults: {
-                                 //labelWidth: 140,
-                                 blankText: app.localize('MandatoryToolTipText')
-                             },
-                             items: [{
-                                 xtype: 'textfield',
-                                 name: 'postalCode',
-                                 fieldLabel: app.localize('PostalCode').initCap(),
-                                 width: '100%',
-                                 ui: 'fieldLabelTop',
-                                 listeners: {
-                                     specialkey: 'onPostalCodeEnter',
-                                     change: 'onPostalCodeEnter'
-                                 }
-                             },
+                                     {
+                                         columnWidth: .33,
+                                         padding: '20 10 0 20',
+                                         defaults: {
+                                             // labelWidth: 180,
+                                             blankText: app.localize('MandatoryToolTipText')
+                                         },
+                                         items: [{
+                                             xtype: 'textfield',
+                                             name: 'postalCode',
+                                             fieldLabel: app.localize('PostalCode').initCap(),
+                                             width: '100%',
+                                             ui: 'fieldLabelTop',
+                                             listeners: {
+                                                 specialkey: 'onPostalCodeEnter',
+                                                 change: 'onPostalCodeEnter'
+                                             }
+                                         },
                              {
                                  xtype: 'combobox',
                                  name: 'city',
@@ -127,7 +178,7 @@
                                  queryMode: 'local',
                                  store: {
                                      fields: [{ name: 'name' }, { name: 'value' }, { name: 'city', mapping: 'value' }],
-                                     data : []
+                                     data: []
                                  }
                              },
                              {
@@ -142,53 +193,9 @@
                                  queryMode: 'local',
                                  store: {
                                      fields: [{ name: 'name' }, { name: 'value' }, { name: 'state', mapping: 'value' }],
-                                    data : []
+                                     data: []
                                  }
                              },
-                              {
-                                  xtype: 'combobox',
-                                  name: 'country',
-                                  fieldLabel: app.localize('Country').initCap(),
-                                  width: '100%',
-                                  ui: 'fieldLabelTop',
-                                  displayField: 'name',
-                                  valueField: 'country',
-                                  emptyText: app.localize('SelectOption'),
-                                  queryMode: 'local',
-                                  store: {
-                                      fields: [{ name: 'name' }, { name: 'value' }, { name: 'country', mapping: 'value' }],
-                                      data: []
-                                  }
-                              }
-                             ]
-                         },
-                                     {
-                                         columnWidth: .33,
-                                         padding: '20 10 0 20',
-                                         defaults: {
-                                             // labelWidth: 180,
-                                             blankText: app.localize('MandatoryToolTipText')
-                                         },
-                                         items: [{
-                                             xtype: 'textfield',
-                                             name: 'phone1',
-                                             fieldLabel: app.localize('Telephone').initCap(),
-                                             width: '100%',
-                                             ui: 'fieldLabelTop'
-                                         }, {
-                                             xtype: 'textfield',
-                                             name: 'email',
-                                             fieldLabel: app.localize('Email').initCap(),
-                                             vtype: 'email',
-                                             width: '100%',
-                                             ui: 'fieldLabelTop'
-                                         }, {
-                                             xtype: 'textfield',
-                                             name: 'federalTaxId',
-                                             fieldLabel: app.localize('FedTaxID').initCap(),
-                                             width: '100%',
-                                             ui: 'fieldLabelTop'
-                                         },
 
                                          {
                                              xtype: 'fieldcontainer',
@@ -199,9 +206,10 @@
                                              },
                                              items : [{
                                                  xtype: 'image',
-                                                 alt : '',
-                                                 width: 90,
-                                                 height: 60,
+                                                 alt: '',
+                                                 margin: '10px 0px 0px 0px',
+                                                 width: 110,
+                                                 height: 30,
                                                  itemId: 'companyLogo',
                                                  flex : 1,
                                                  src: abp.appPath + 'Content/images/capslogo.png'

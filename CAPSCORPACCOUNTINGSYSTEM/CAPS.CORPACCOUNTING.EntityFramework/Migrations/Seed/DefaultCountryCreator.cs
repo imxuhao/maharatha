@@ -26,7 +26,8 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                     new CountryUnit(225,tenantId),
                      new CountryUnit(99,tenantId),
                       new CountryUnit(74,tenantId),
-                       new CountryUnit(81,tenantId)
+                       new CountryUnit(81,tenantId),
+                        new CountryUnit(226,tenantId)
 
             };
         }

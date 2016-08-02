@@ -11,10 +11,13 @@
         timezoneCombo = me.lookupReference('timezone'),
         setDefaultApTermsCombo = me.lookupReference('setDefaultAPTerms'),
         setDefaultArTermsCombo = me.lookupReference('setDefaultARTerms'),
+        countryCombo = me.lookupReference('countryCombo'),
         timezoneStore = timezoneCombo.getStore();
         //load time zone combo
         timezoneStore.getProxy().setExtraParams({ defaultTimezoneScope: ChachingGlobals.settingsScope.tenant });
         timezoneStore.load();
+        //load country
+        countryCombo.getStore().load();
         //load ap default terms
         setDefaultApTermsCombo.getStore().load();
         // load ar default terms
@@ -116,7 +119,7 @@
            countryCombo = form.findField('country');
            cityCombo.reset();
            stateCombo.reset();
-           countryCombo.reset();
+          // countryCombo.reset();
            if (zip.trim().length > 2) {
                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + zip).success(function (response) {
                    var city = [],
@@ -134,9 +137,9 @@
                                if (type == 'administrative_area_level_1') {
                                    state.push({ name: component.long_name, value: component.short_name });
                                }
-                               if (type == 'country') {
-                                   country.push({ name: component.long_name, value: component.short_name });
-                               }
+                               //if (type == 'country') {
+                               //    country.push({ name: component.long_name, value: component.short_name });
+                               //}
 
                            });
                        });
@@ -148,10 +151,10 @@
                            stateCombo.getStore().loadData(state);
                            stateCombo.select(stateCombo.getStore().first());
                        }
-                       if (countryCombo && country.length > 0) {
-                           countryCombo.getStore().loadData(country);
-                           countryCombo.select(countryCombo.getStore().first());
-                       }
+                       //if (countryCombo && country.length > 0) {
+                       //    countryCombo.getStore().loadData(country);
+                       //    countryCombo.select(countryCombo.getStore().first());
+                       //}
                    }
 
                });

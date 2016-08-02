@@ -138,6 +138,7 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
     },
     prepareRequest: function (record, values, view) {
         var record = Ext.create('Chaching.model.tenants.TenantsModel');
+        values.name = values.tenancyName;
         Ext.apply(record.data, values);
         var selectedRecords = view.down('gridpanel[itemId=moduleListGridItemId]').getSelection();
         var tenantListCombo = view.down('combobox[itemId=tenantItemId]');

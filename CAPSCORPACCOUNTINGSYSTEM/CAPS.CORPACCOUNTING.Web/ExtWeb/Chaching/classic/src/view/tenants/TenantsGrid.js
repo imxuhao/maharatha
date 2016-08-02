@@ -71,7 +71,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     columns: [
         {
             xtype: 'gridcolumn',
-            text: app.localize('TenancyCodeName'),
+            text: app.localize('TenancyName'),
             dataIndex: 'tenancyName',
             stateId: 'tenancyName',
             sortable: true,
@@ -90,6 +90,8 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             dataIndex: 'name',
             sortable: true,
             groupable: true,
+            hideable: false,
+            hidden : true,
             width: '30%'
             // equivalent to filterField:true
             // as textfield is created by default
@@ -98,10 +100,11 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                 xtype: 'textfield',
                 width: '100%',
                 emptyText: app.localize('TName')
-            },
-            editor: {
-                xtype: 'textfield'
             }
+            //,
+            //editor: {
+            //    xtype: 'textfield'
+            //}
         },
         /*{//uncomment if required
             xtype: 'gridcolumn',

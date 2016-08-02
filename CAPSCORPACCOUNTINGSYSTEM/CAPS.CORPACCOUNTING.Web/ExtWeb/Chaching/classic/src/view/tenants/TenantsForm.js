@@ -71,6 +71,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             }, {
                 xtype: 'textfield',
                 name: 'name',
+                hidden : true,
                 allowBlank: false,
                 fieldLabel: app.localize('Name').initCap(),
                 width: '100%',

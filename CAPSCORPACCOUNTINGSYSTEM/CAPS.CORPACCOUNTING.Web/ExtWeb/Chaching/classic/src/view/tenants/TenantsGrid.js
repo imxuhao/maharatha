@@ -149,8 +149,9 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
                 }
             },editor: {
                 xtype: 'checkboxfield',
-                inputValue:true,
-                name: 'isActive'
+                inputValue: true,
+                uncheckedValue : false//,
+                //name: 'isActive'
             }
         },
          {

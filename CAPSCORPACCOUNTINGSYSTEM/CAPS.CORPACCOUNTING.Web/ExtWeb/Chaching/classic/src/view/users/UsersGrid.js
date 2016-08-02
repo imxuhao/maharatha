@@ -219,7 +219,10 @@ Ext.define('Chaching.view.users.UsersGrid', {
                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
                 }
             }, editor: {
-                xtype: 'checkbox'
+                xtype: 'checkboxfield',
+                inputValue: true,
+                uncheckedValue: false//,
+                //name: 'isActive'
             }
         }
          ,

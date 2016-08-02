@@ -60,11 +60,10 @@ Ext.define('Chaching.view.header.ChachingHeader', {
         {
             xtype: 'button',
             scale: 'small',
-            ui: 'countryMenu',
             width: 120,
             iconCls: 'famfamfam-flag-gb',
             iconAlign: 'left',
-            text: 'English' + ' &#xf107;',
+            text: 'English', 
             textAlign:'right',
             baseCls: '',
             itemId:'LocalizationBtn',
@@ -93,7 +92,6 @@ Ext.define('Chaching.view.header.ChachingHeader', {
          },
         {
             scale: 'small',
-            ui: 'badgeBtnBack',
            // width: 100,
            // height:50,
             //iconAlign: 'right',

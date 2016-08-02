@@ -13,6 +13,7 @@ Ext.define('Chaching.view.languages.LanguagesTextView',{
     height: '90%',
     width: '80%',
     layout: 'fit',
+    iconCls: 'fa fa-pencil',
     title: app.localize("LanguageTexts"),
     initComponent: function (config) {
         var me = this,

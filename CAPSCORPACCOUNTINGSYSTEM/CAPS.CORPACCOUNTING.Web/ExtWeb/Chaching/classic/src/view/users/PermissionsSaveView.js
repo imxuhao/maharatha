@@ -7,8 +7,10 @@ Ext.define('Chaching.view.users.PermissionsSaveView', {
         'Chaching.view.users.PermissionsSaveForm'
     ],
     controller: 'users-permissionssaveview',
-    height: 200,
-    width: 250,
+    //height: 200,
+    //width: 250,
+    height: '45%',
+    width: '30%',
     layout: 'fit',
     title: app.localize('CreateNewRole'),
     defaultFocus: 'textfield#newRole',

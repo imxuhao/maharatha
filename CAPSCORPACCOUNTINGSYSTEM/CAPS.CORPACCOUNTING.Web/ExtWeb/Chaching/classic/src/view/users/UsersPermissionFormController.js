@@ -34,8 +34,6 @@
             myMask.show();
             // Open popup message to create new Role
             var permissionWindow = Ext.create('Chaching.view.users.PermissionsSaveView', {
-                height: '30%',
-                width: '20%',
                 autoShow: true,
                 iconCls: 'fa fa-plus',
                 name: 'Administration.Users'

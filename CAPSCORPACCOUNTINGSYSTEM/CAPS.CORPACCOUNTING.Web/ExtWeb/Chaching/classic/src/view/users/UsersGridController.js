@@ -11,8 +11,6 @@ Ext.define('Chaching.view.users.UsersGridController', {
         }
 
         var form = Ext.create('Chaching.view.users.UsersPermissionView', {
-            height: '80%',
-            width: '30%',
             iconCls: 'fa fa-pencil',
             name: 'Administration.Users'
         });
@@ -60,13 +58,11 @@ Ext.define('Chaching.view.users.UsersGridController', {
                 if (res.success) {
                     window.location.href = res.targetUrl;
                 } else {
-                    abp.message.error(res.error.message, 'Error');
+                    abp.message.error(res.error.message, app.localize('Error'));
                 }
             },
-            failure: function (response) {
-                var res = Ext.decode(response.responseText);
-                Ext.toast(res.error.message);
-                console.log(response);
+            failure: function (response,a,b) {
+                abp.message.error(app.localize('CascadeImpersonationErrorMessage'), app.localize('Error'));
             }
         });
     },
@@ -140,7 +136,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
                             }
                         }
                     } else {
-                        abp.message.error(res.error.message, 'Error');
+                        abp.message.error(res.error.message, app.localize('Error'));
                     }
                 },
                 failure: function (response, opts) {

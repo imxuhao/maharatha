@@ -1,6 +1,16 @@
 Ext.define('Chaching.view.languages.LanguageTextsGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.languages-languagetextsgrid',
+    doRowSpecificEditDelete: function (button, grid) {
+        if (button.menu) {
+            var editActionMenu = button.menu.down('menuitem#editActionMenu');
+            if (editActionMenu && button.widgetRec) {
+                editActionMenu.hide();
+            } else {
+                editActionMenu.show();
+            }
+        }
+    },
     doAfterCreateAction: function (createMode, formView, isEdit) {      
         if (formView && isEdit) {
             var form = formView.down('form').getForm();

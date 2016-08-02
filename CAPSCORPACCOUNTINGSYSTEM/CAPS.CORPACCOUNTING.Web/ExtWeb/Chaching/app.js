@@ -3,6 +3,15 @@
  * needed for your application, but these edits will have to be merged by
  * Sencha Cmd when upgrading.
  */
+
+////This will remove _dc cache param from requests that are getting files.
+//Ext.Loader.setConfig({
+//    disableCaching: false
+//});
+
+////For disabling _dc on XHR Ext.Ajax requests use
+//Ext.Ajax.disableCaching = false;
+
 Ext.application({
     name: 'Chaching',
 

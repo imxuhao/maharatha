@@ -29,6 +29,7 @@ Ext.define('Chaching.view.languages.LanguagesTextForm',{
             height: 70,
             width: '100%',
             layout: 'column',
+            padding: '0 0 0 10',
             items: [
                 {
                     columnWidth: .25,

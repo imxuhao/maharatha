@@ -59,5 +59,23 @@ Ext.define('Chaching.view.tenants.TenantsGridController', {
         var editionStore = viewModel.getStore('editionsForComboBox');
         editionStore.load();
        
+    },
+    doRowSpecificEditDelete: function (button, grid) {
+        var menu = button.menu;
+        var tenantsGrid = Ext.ComponentQuery.query('*[name = Tenants]')[0];
+        var separatorButton = menu.items.get('actionMenuSeparator');
+        if (button.menu) {
+         var loginAsThisTenantActionMenu = button.menu.down('menuitem#loginAsThisTenantActionMenu');
+         if (tenantsGrid && tenantsGrid.modulePermissions.impersonation && loginAsThisTenantActionMenu && button.widgetRec ) {
+            loginAsThisTenantActionMenu.show();
+            separatorButton.show();
+        } else {
+             loginAsThisTenantActionMenu.hide();
+             separatorButton.hide();
+         }
+
+        }
+
     }
+
 });

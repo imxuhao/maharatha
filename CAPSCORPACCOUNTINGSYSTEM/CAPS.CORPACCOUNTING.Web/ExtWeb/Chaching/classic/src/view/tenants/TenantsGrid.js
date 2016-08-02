@@ -17,7 +17,8 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         create: abp.auth.isGranted('Pages.Tenants.Create'),
         edit: abp.auth.isGranted('Pages.Tenants.Edit'),
         destroy: abp.auth.isGranted('Pages.Tenants.Delete'),
-        changeFeature: abp.auth.isGranted('Pages.Tenants.ChangeFeatures')
+        changeFeature: abp.auth.isGranted('Pages.Tenants.ChangeFeatures'),
+        impersonation: abp.auth.isGranted('Pages.Tenants.Impersonation')
     },
     headerButtonsConfig: [
     {
@@ -42,8 +43,10 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     actionColumnMenuItemsConfig: [{
         text: app.localize('LoginAsThisTenant'),
         iconCls: 'fa fa-user',
-        clickActionName: 'loginAsThisTenantClick'
-    }],
+        clickActionName: 'loginAsThisTenantClick',
+        itemId: 'loginAsThisTenantActionMenu'
+    }
+    ],
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,

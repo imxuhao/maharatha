@@ -59,7 +59,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
              hideable: false,
              sortable: true,
              groupable: false,
-             width: '60%',
+             width: '60%'
              //flex : 1      
          },
          {
@@ -67,7 +67,6 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
              text: app.localize('Delete'),
              width: '19%',
              //width: 70,
-
              align: 'center',
              hideable: false,
              items: [{

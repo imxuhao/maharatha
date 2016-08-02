@@ -128,7 +128,6 @@ Ext.define('Chaching.Application', {
                 success: function (response, opts) {
                     var result = Ext.decode(response.responseText);
                     if (result.success) {
-                        debugger;
                         //update Comnpany settings after override
                         Ext.apply(ChachingGlobals.companySettings, result.result);
                     } else {

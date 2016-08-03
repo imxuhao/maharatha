@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
+using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Configuration;
 using Abp.Extensions;
@@ -8,27 +9,31 @@ using Abp.Net.Mail;
 using Abp.Timing;
 using Abp.Zero.Configuration;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Caching;
 using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
 using CAPS.CORPACCOUNTING.Editions;
+using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Timing;
 
 namespace CAPS.CORPACCOUNTING.Configuration.Host
 {
-    [AbpAuthorize(AppPermissions.Pages_Administration_Host_Settings)]
+    
     public class HostSettingsAppService : CORPACCOUNTINGAppServiceBase, IHostSettingsAppService
     {
         private readonly IEmailSender _emailSender;
         private readonly EditionManager _editionManager;
         private readonly ITimeZoneService _timeZoneService;
+        private readonly ICachingAppService _cachingAppService;
 
         public HostSettingsAppService(
             IEmailSender emailSender,
             EditionManager editionManager,
-            ITimeZoneService timeZoneService)
+            ITimeZoneService timeZoneService, ICachingAppService cachingAppService)
         {
             _emailSender = emailSender;
             _editionManager = editionManager;
             _timeZoneService = timeZoneService;
+            _cachingAppService = cachingAppService;
         }
 
         public async Task<HostSettingsEditDto> GetAllSettings()
@@ -83,7 +88,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
 
             return hostSettings;
         }
-
+        [AbpAuthorize(AppPermissions.Pages_Administration_Host_Settings)]
         public async Task UpdateAllSettings(HostSettingsEditDto input)
         {
             //General
@@ -128,6 +133,10 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
             await SettingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.Domain, input.Email.SmtpDomain);
             await SettingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.EnableSsl, input.Email.SmtpEnableSsl.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForApplicationAsync(EmailSettingNames.Smtp.UseDefaultCredentials, input.Email.SmtpUseDefaultCredentials.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
+
+            if (!input.General.UseRedisCacheByDefault)
+                await ClearAllSumitCache();
+
         }
         
 
@@ -137,6 +146,21 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
             var body = L("TestEmail_Body");
 
             await _emailSender.SendAsync(input.EmailAddress, subject, body);
+        }
+
+        /// <summary>
+        /// When we set UseRedisCache flag as flase then we are clearing all Sumit Caches
+        /// </summary>
+        /// <returns></returns>
+        private async Task ClearAllSumitCache()
+        {
+            await _cachingAppService.ClearCache(new IdInput<string>() {Id = CacheKeyStores.CacheAccountStore });
+            await _cachingAppService.ClearCache(new IdInput<string>() { Id = CacheKeyStores.CacheDivisionStore });
+            await _cachingAppService.ClearCache(new IdInput<string>() { Id = CacheKeyStores.CacheSubAccountRestrictionStore });
+            await _cachingAppService.ClearCache(new IdInput<string>() { Id = CacheKeyStores.CacheBankAccountStore });
+            await _cachingAppService.ClearCache(new IdInput<string>() { Id = CacheKeyStores.CacheEmployeeStore });
+            await _cachingAppService.ClearCache(new IdInput<string>() { Id = CacheKeyStores.CacheVendorStore });
+            await _cachingAppService.ClearCache(new IdInput<string>() { Id = CacheKeyStores.CacheSubAccountStore });
         }
     }
 }

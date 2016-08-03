@@ -16,7 +16,6 @@ using CAPS.CORPACCOUNTING.Timing;
 
 namespace CAPS.CORPACCOUNTING.Configuration.Tenants
 {
-    [AbpAuthorize(AppPermissions.Pages_Administration_Tenant_Settings)]
     public class TenantSettingsAppService : CORPACCOUNTINGAppServiceBase, ITenantSettingsAppService
     {
         private readonly IMultiTenancyConfig _multiTenancyConfig;
@@ -115,6 +114,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
             return settings;
         }
 
+        [AbpAuthorize(AppPermissions.Pages_Administration_Tenant_Settings)]
         public async Task UpdateAllSettings(TenantSettingsEditDto input)
         {
             //User management
@@ -277,6 +277,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
         /// Sumit Method to  Update AllSettings
         /// </summary>
         /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Administration_Tenant_Settings)]
         public async Task UpdateAllTenantSettings(TenantSettingsEditDto input)
         {
             //User management

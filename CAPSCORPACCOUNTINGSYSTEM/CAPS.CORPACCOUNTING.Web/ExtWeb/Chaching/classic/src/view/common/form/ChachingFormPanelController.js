@@ -56,6 +56,27 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             }
         }
     },
+    changeTitleFromViewModeToEditMode: function (view) {
+        //change the title of view
+        if (view.parentGridController) {
+            var parentView = view.parentGridController.getView(),
+                titleConfig = parentView.editWndTitleConfig,
+                popupWin = view.up('window');
+            if (popupWin && parentView && titleConfig) {
+                popupWin.setTitle(titleConfig.title);
+                if (view.showFormTitle && view.title) {
+                    view.down('toolbar').down('displayfield').setValue(titleConfig.title);
+                }
+            } else {
+                view.setTitle(titleConfig.title);
+                if (view.showFormTitle && view.title) {
+                    view.down('toolbar').down('displayfield').setValue(titleConfig.title);
+                }
+            }
+
+        }
+        //end of change title code
+    },
     onEditButtonClicked: function (editBtn) {
         var me = this,
             view = me.getView(),
@@ -63,6 +84,9 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
             form = view.getForm(),
             fields = form.getFields().items;
 
+        //change the title of view when moving from view to edit mode
+            me.changeTitleFromViewModeToEditMode(view);
+        //end of change title code
         Ext.each(fields, function (field) {
             if (field.xtype !== "hiddenfield" && !field.isFilterField) {
                 field.setDisabled(false);

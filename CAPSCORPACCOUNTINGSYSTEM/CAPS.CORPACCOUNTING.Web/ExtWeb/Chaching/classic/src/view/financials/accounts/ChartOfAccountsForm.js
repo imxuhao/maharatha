@@ -18,9 +18,9 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter:true,
-    titleConfig: { 
-        title: abp.localization.localize("CreatingNewCOA").initCap()
-    },
+    //titleConfig: { 
+    //    title: abp.localization.localize("CreatingNewCOA").initCap()
+    //},
     //bodyStyle: { 'background-color': '#F3F5F9' },   
     items: [{
         xtype: 'hiddenfield',

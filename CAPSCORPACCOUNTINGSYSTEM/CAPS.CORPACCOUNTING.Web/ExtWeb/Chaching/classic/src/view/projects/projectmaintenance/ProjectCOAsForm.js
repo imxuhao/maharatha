@@ -14,9 +14,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
-    titleConfig: {
-        title: abp.localization.localize("CreatingNewProjectCOA").initCap()
-    },
+    //titleConfig: {
+    //    title: abp.localization.localize("CreatingNewProjectCOA").initCap()
+    //},
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs'),
         create: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs.Create'),

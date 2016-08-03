@@ -19,9 +19,9 @@ Ext.define('Chaching.view.financials.accounts.AccountsForm', {
         height: '70%',
         width: '70%'
     },
-    titleConfig: {
-        title: abp.localization.localize("CreateNewFinancialAccount").initCap()
-    },
+    //titleConfig: {
+    //    title: abp.localization.localize("CreateNewFinancialAccount").initCap()
+    //},
     items: [{
         xtype: 'hiddenfield',
         name: 'accountId',

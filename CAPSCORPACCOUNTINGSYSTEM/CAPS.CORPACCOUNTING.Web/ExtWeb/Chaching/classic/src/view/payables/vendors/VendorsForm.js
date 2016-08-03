@@ -9,14 +9,14 @@
     controller: 'payables-vendors-vendorsform',
     name: 'Payables.Vendors',
     openInPopupWindow: false,
-    hideDefaultButtons: true,
+    hideDefaultButtons: false,
     autoScroll: true,
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
-    titleConfig: {
-        title: abp.localization.localize("CreatingNewVendors").initCap()
-    },
+    //titleConfig: {
+    //    title: abp.localization.localize("CreatingNewVendors").initCap()
+    //},
     items: {
         xtype: 'tabpanel',
         ui: 'formTabPanels',
@@ -462,35 +462,37 @@
                 }]
 
             }]
-        }],
-        dockedItems: [
-                {
-                    xtype: 'toolbar',
-                    dock: 'bottom',
-                    layout: {
-                        type: 'hbox',
-                        pack: 'center'
-                    },
-                    items: [
-                    {
-                        xtype: 'button',
-                        itemId: 'btnSaveSetup',
-                        ui: 'actionButton',
-                        text: app.localize('SaveVendor').toUpperCase(),
-                        iconCls: 'fa fa-save',
-                        listeners: {
-                            click: 'onSaveClicked'
-                        }
-                    }, {
-                        xtype: 'button',
-                        itemId: 'btnCancelSetup',
-                        ui: 'actionButton',
-                        text: app.localize('Cancel').toUpperCase(),
-                        iconCls: 'fa fa-close',
-                        listeners: {
-                            click: 'onCancelClicked'
-                        }
-                    }]
-                }]
+        }]
+
+        //,
+        //dockedItems: [
+        //        {
+        //            xtype: 'toolbar',
+        //            dock: 'bottom',
+        //            layout: {
+        //                type: 'hbox',
+        //                pack: 'center'
+        //            },
+        //            items: [
+        //            {
+        //                xtype: 'button',
+        //                itemId: 'btnSaveSetup',
+        //                ui: 'actionButton',
+        //                text: app.localize('SaveVendor').toUpperCase(),
+        //                iconCls: 'fa fa-save',
+        //                listeners: {
+        //                    click: 'onSaveClicked'
+        //                }
+        //            }, {
+        //                xtype: 'button',
+        //                itemId: 'btnCancelSetup',
+        //                ui: 'actionButton',
+        //                text: app.localize('Cancel').toUpperCase(),
+        //                iconCls: 'fa fa-close',
+        //                listeners: {
+        //                    click: 'onCancelClicked'
+        //                }
+        //            }]
+        //        }]
     }
 });

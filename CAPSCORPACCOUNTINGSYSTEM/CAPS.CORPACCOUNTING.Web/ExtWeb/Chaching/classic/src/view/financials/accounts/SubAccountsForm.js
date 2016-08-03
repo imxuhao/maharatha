@@ -16,9 +16,9 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsForm', {
     border: false,
     showFormTitle: true,
     displayDefaultButtonsCenter: true,
-    titleConfig: {
-        title: abp.localization.localize("CreateNewSubAccounts").initCap()
-    },
+    //titleConfig: {
+    //    title: abp.localization.localize("CreateNewSubAccounts").initCap()
+    //},
     items: [
         {
             xtype: 'hiddenfield',

@@ -19,9 +19,9 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
         height: '40%',
         width: '50%'
     },
-    titleConfig: {
-        title: abp.localization.localize("CreateNewDivision").initCap()
-    },
+    //titleConfig: {
+    //    title: abp.localization.localize("CreateNewDivision").initCap()
+    //},
     items: [{
         xtype: 'hiddenfield',
         name: 'jobId',

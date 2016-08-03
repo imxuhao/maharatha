@@ -23,7 +23,10 @@ Ext.define('Chaching.view.roles.RolesFormController', {
             form = view.getForm(),
             fields = form.getFields().items;
         //form.title = form.title.replace('View', 'Edit');
-
+       
+        //change the title of view when moving from view to edit mode
+        me.changeTitleFromViewModeToEditMode(view);
+        //end of change title code
         Ext.each(fields, function (field) {
             if (field.name !== 'isDefault')
             if (field.xtype !== "hiddenfield" && !field.isFilterField) {

@@ -20,9 +20,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
         height: '70%',
         width: '70%'
     },
-    titleConfig: {
-        title: abp.localization.localize("CreateNewLine").initCap()
-    },
+    //titleConfig: {
+    //    title: abp.localization.localize("CreateNewLine").initCap()
+    //},
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
         create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),

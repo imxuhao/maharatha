@@ -20,9 +20,9 @@
     displayDefaultButtonsCenter: true,
 
 
-    titleConfig: {
-        title: abp.localization.localize("CreatingNewCustomers").initCap()
-    },
+    //titleConfig: {
+    //    title: abp.localization.localize("CreatingNewCustomers").initCap()
+    //},
     items: [{
         xtype: 'tabpanel',
         ui: 'formTabPanels',

@@ -22,8 +22,6 @@
                 width: '100%',
                 height: 22,
                 text: app.localize('View'),
-                //iconCls: 'fa fa-sign-in',
-                //iconAlign: 'left',
                 widgetRec: widgetRec,
                 widgetCol: widgetCol,
                 currentView: view,
@@ -53,8 +51,6 @@
                 scale: 'small',
                 width: '100%',
                 text: app.localize('View'),
-                //iconCls: 'fa fa-sign-in',
-                //iconAlign: 'left',
                 widgetRec: widgetRec,
                 widgetCol: widgetCol,
                 currentView: view,
@@ -141,16 +137,12 @@
                 scale: 'small',
                 width: 20,
                 height : 20,
-                // width: '40%',
                 padding: '3px 7px 3px 7px;',
                 iconCls: 'fa fa-search',
                 iconAlign: 'left',
                 widgetRec: widgetRec,
                 widgetCol: widgetCol,
                 gridControl: view
-                //listeners: {
-                //    click: gridController.auditLogView
-                //},
             });
             if (Ext.get(id)) {
                 button.render(Ext.get(id));

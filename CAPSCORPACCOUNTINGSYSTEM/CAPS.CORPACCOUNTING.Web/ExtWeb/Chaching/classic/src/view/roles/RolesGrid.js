@@ -1,5 +1,6 @@
 
-Ext.define('Chaching.view.roles.RolesGrid', {
+Ext.define('Chaching.view.roles.RolesGrid',
+{
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
@@ -14,25 +15,26 @@ Ext.define('Chaching.view.roles.RolesGrid', {
     gridId: 6,
     forceFit: true,
     headerButtonsConfig: [
-    {
-        xtype: 'displayfield',
-        value: abp.localization.localize("Roles"),
-        ui: 'headerTitle'
-    }, {
-        xtype: 'displayfield',
-        value: abp.localization.localize("RolesHeaderInfo"),
-        ui: 'headerSubTitle'
-    }, '->', {
-        xtype: 'button',
-        scale: 'small',
-        ui: 'actionButton',
-        action: 'create',
-        text: abp.localization.localize("CreateNewRole").toUpperCase(),
-        tooltip: app.localize('CreateNewRole'),
-        checkPermission: true,
-        iconCls: 'fa fa-plus',
-        iconAlign: 'left'
-    }],
+        {
+            xtype: 'displayfield',
+            value: abp.localization.localize("Roles"),
+            ui: 'headerTitle'
+        }, {
+            xtype: 'displayfield',
+            value: abp.localization.localize("RolesHeaderInfo"),
+            ui: 'headerSubTitle'
+        }, '->', {
+            xtype: 'button',
+            scale: 'small',
+            ui: 'actionButton',
+            action: 'create',
+            text: abp.localization.localize("CreateNewRole").toUpperCase(),
+            tooltip: app.localize('CreateNewRole'),
+            checkPermission: true,
+            iconCls: 'fa fa-plus',
+            iconAlign: 'left'
+        }
+    ],
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
@@ -70,20 +72,20 @@ Ext.define('Chaching.view.roles.RolesGrid', {
             }
 
         },
-         {
-             xtype: 'gridcolumn',
-             text: app.localize('CreationTime'),
-             dataIndex: 'creationTime',
-             sortable: true,
-             groupable: true,
-             width: '46%',
-             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
-             filterField: {
-                 xtype: 'dateSearchField',
-                 dataIndex: 'creationTime',
-                 width: '100%'
-             }
-         }
+        {
+            xtype: 'gridcolumn',
+            text: app.localize('CreationTime'),
+            dataIndex: 'creationTime',
+            sortable: true,
+            groupable: true,
+            width: '46%',
+            renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+            filterField: {
+                xtype: 'dateSearchField',
+                dataIndex: 'creationTime',
+                width: '100%'
+            }
+        }
     ]
 });
 

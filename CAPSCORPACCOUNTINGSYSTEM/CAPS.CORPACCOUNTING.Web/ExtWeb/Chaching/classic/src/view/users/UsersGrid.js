@@ -1,5 +1,6 @@
 
-Ext.define('Chaching.view.users.UsersGrid', {
+Ext.define('Chaching.view.users.UsersGrid',
+{
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
@@ -20,37 +21,40 @@ Ext.define('Chaching.view.users.UsersGrid', {
     padding: 5,
     gridId: 7,
     headerButtonsConfig: [
-    {
-        xtype: 'displayfield',
-        value: abp.localization.localize("Users"),
-        ui: 'headerTitle'
-    }, {
-        xtype: 'displayfield',
-        value: abp.localization.localize("UsersHeaderInfo"),
-        ui: 'headerSubTitle'
-    }, '->', {
-        xtype: 'button',
-        scale: 'small',
-        ui: 'actionButton',
-        action: 'create',
-        text: abp.localization.localize("CreateNewUser").toUpperCase(),
-        tooltip: app.localize('CreateNewUser'),
-        checkPermission: true,
-        routeName: 'users.create',
-        iconCls: 'fa fa-plus',
-        iconAlign: 'left'
-    }],
-    actionColumnMenuItemsConfig: [{
-        text: app.localize('Permissions'),
-        itemId: 'permissions',
-        iconCls: 'fa fa-ticket',
-        clickActionName: 'permissionsClicked'
-    }, {
-        text: app.localize('LoginAsThisUser'),
-        itemId: 'loginAsThisUserActionMenu',
-        iconCls: 'fa fa-user',
-        clickActionName: 'loginAsThisUserClicked'
-    }],
+        {
+            xtype: 'displayfield',
+            value: abp.localization.localize("Users"),
+            ui: 'headerTitle'
+        }, {
+            xtype: 'displayfield',
+            value: abp.localization.localize("UsersHeaderInfo"),
+            ui: 'headerSubTitle'
+        }, '->', {
+            xtype: 'button',
+            scale: 'small',
+            ui: 'actionButton',
+            action: 'create',
+            text: abp.localization.localize("CreateNewUser").toUpperCase(),
+            tooltip: app.localize('CreateNewUser'),
+            checkPermission: true,
+            routeName: 'users.create',
+            iconCls: 'fa fa-plus',
+            iconAlign: 'left'
+        }
+    ],
+    actionColumnMenuItemsConfig: [
+        {
+            text: app.localize('Permissions'),
+            itemId: 'permissions',
+            iconCls: 'fa fa-ticket',
+            clickActionName: 'permissionsClicked'
+        }, {
+            text: app.localize('LoginAsThisUser'),
+            itemId: 'loginAsThisUserActionMenu',
+            iconCls: 'fa fa-user',
+            clickActionName: 'loginAsThisUserClicked'
+        }
+    ],
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
@@ -58,7 +62,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
-    scrollable : true,
+    scrollable: true,
     //forceFit: true,
     editWndTitleConfig: {
         title: app.localize('EditUser'),
@@ -110,8 +114,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
             editor: {
                 xtype: 'textfield'
             }
-        }
-        , {
+        }, {
             xtype: 'gridcolumn',
             text: app.localize('Surname'),
             dataIndex: 'surname',
@@ -127,40 +130,38 @@ Ext.define('Chaching.view.users.UsersGrid', {
                 xtype: 'textfield'
             }
         },
-    {
-        xtype: 'gridcolumn',
-        text: app.localize('Roles'),
-        dataIndex: 'roles',
-        sortable: true,
-        groupable: true,
-        width: '5%'
-        ,
-        renderer: function (val) {
-            var rolesList = '';
-            Ext.each(val, function (roles, index) {
-                rolesList = rolesList + roles.roleName + ', ';
-            });
-            return rolesList.replace(/,\s*$/, "");
-        }
-    }
-         , {
-             xtype: 'gridcolumn',
-             text: app.localize('EmailAddress'),
-             dataIndex: 'emailAddress',
-             sortable: true,
-             groupable: true,
-             flex: 1,
-             width: '20%',
-             filterField: {
-                 xtype: 'textfield',
-                 width: '100%',
-                 emptyText: 'Enter Email Address to search'
-             },
-             editor: {
-                 xtype: 'textfield'
-             }
-         }
-        ,
+        {
+            xtype: 'gridcolumn',
+            text: app.localize('Roles'),
+            dataIndex: 'roles',
+            sortable: true,
+            groupable: true,
+            width: '5%',
+            renderer: function(val) {
+                var rolesList = '';
+                Ext.each(val,
+                    function(roles, index) {
+                        rolesList = rolesList + roles.roleName + ', ';
+                    });
+                return rolesList.replace(/,\s*$/, "");
+            }
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('EmailAddress'),
+            dataIndex: 'emailAddress',
+            sortable: true,
+            groupable: true,
+            flex: 1,
+            width: '20%',
+            filterField: {
+                xtype: 'textfield',
+                width: '100%',
+                emptyText: 'Enter Email Address to search'
+            },
+            editor: {
+                xtype: 'textfield'
+            }
+        },
         {
             xtype: 'gridcolumn',
             text: app.localize('EmailConfirm'),
@@ -168,7 +169,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
             sortable: true,
             groupable: true,
             width: '8%',
-            renderer: function (val) {
+            renderer: function(val) {
                 if (val) return 'YES';
                 else return 'NO';
             },
@@ -181,24 +182,21 @@ Ext.define('Chaching.view.users.UsersGrid', {
                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
                 }
             }
-        }
-        ,
-         {
-             xtype: 'gridcolumn',
-             text: app.localize('LastLoginTime'),
-             dataIndex: 'lastLoginTime',
-             sortable: true,
-             groupable: true,
-             width: '10%',
-             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
-             filterField: {
-                 xtype: 'dateSearchField',
-                 dataIndex: 'lastLoginTime',
-                 width: '100%'
-             }
-         }
-
-        ,
+        },
+        {
+            xtype: 'gridcolumn',
+            text: app.localize('LastLoginTime'),
+            dataIndex: 'lastLoginTime',
+            sortable: true,
+            groupable: true,
+            width: '10%',
+            renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+            filterField: {
+                xtype: 'dateSearchField',
+                dataIndex: 'lastLoginTime',
+                width: '100%'
+            }
+        },
         {
             xtype: 'gridcolumn',
             text: app.localize('Active'),
@@ -206,7 +204,7 @@ Ext.define('Chaching.view.users.UsersGrid', {
             sortable: true,
             groupable: true,
             width: '5%',
-            renderer: function (val) {
+            renderer: function(val) {
                 if (val) return 'YES';
                 else return 'NO';
             },
@@ -218,27 +216,27 @@ Ext.define('Chaching.view.users.UsersGrid', {
                     fields: [{ name: 'text' }, { name: 'value' }],
                     data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
                 }
-            }, editor: {
+            },
+            editor: {
                 xtype: 'checkboxfield',
                 inputValue: true,
-                uncheckedValue: false//,
+                uncheckedValue: false //,
                 //name: 'isActive'
             }
+        },
+        {
+            xtype: 'gridcolumn',
+            text: app.localize('CreationTime'),
+            dataIndex: 'creationTime',
+            sortable: true,
+            groupable: true,
+            width: '10%',
+            renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
+            filterField: {
+                xtype: 'dateSearchField',
+                dataIndex: 'creationTime',
+                width: '100%'
+            }
         }
-         ,
-         {
-             xtype: 'gridcolumn',
-             text: app.localize('CreationTime'),
-             dataIndex: 'creationTime',
-             sortable: true,
-             groupable: true,
-             width: '10%',
-             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
-             filterField: {
-                 xtype: 'dateSearchField',
-                 dataIndex: 'creationTime',
-                 width: '100%'
-             }
-         }
     ]
 });

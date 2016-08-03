@@ -532,6 +532,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput.OrganizationUnitId">
             <summary>Gets or sets the OrganizationUnitId </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.GetAccountRestrictionInput.Filters">
+            <summary>Gets or sets the Filters </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.Dto.GetPurchaseOrderInput">
             <summary>
             InputDto for Getting PurchaseOrders with Details by VendorId or PurchaseOrderReferences
@@ -3400,6 +3403,24 @@
             Get TypeofObject Enum as List
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.ExpressionBuilder">
+            <summary>
+            http://www.codeproject.com/Tips/582450/Build-Where-Clause-Dynamically-in-Linq
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.ExpressionBuilder.GetExpression``1(System.Collections.Generic.IList{CAPS.CORPACCOUNTING.Helpers.Filters})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.ExpressionBuilder.Comparators">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.Helper.GetSortOrderAsString(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Helpers.Sort})">
             <summary>
@@ -11031,6 +11052,393 @@
             <summary>
             Close Purchase Orders by Purchase Orders List
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListInputUnit.AccountId">
+            <summary>Gets or sets the AccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListInputUnit.AccountNumber">
+            <summary>Gets or sets the AccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListInputUnit.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListInputUnit.UserId">
+            <summary>Gets or sets the UserId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit.BankAccountId">
+            <summary>Gets or sets the BankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit.BankAccountNumber">
+            <summary>Gets or sets the BankAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit.UserId">
+            <summary>Gets or sets the UserId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListUnitDto.BankAccountId">
+            <summary>Gets or sets the BankAccountId</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListUnitDto.AccountName">
+            <summary>Gets or sets the AccountName</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListUnitDto.BankAccountNumber">
+            <summary>Gets or sets the BankAccountNumber</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListUnitDto.BankName">
+            <summary>Gets or sets the BankName</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.Dto.CreditAccessListUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditAccessListUnitDto.AccountingDocumentId">
+            <summary>Gets or sets the AccountingDocumentId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditAccessListUnitDto.CardHolderName">
+            <summary>Gets or sets the CardHolderName</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditAccessListUnitDto.CardNumber">
+            <summary>Gets or sets the CardNumber</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditAccessListUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.Dto.CreditCardAccessListInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditCardAccessListInputUnit.AccountingDocumentId">
+            <summary>Gets or sets the AccountingDocumentId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditCardAccessListInputUnit.CardHolderName">
+            <summary>Gets or sets the CardHolderName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditCardAccessListInputUnit.CardNumber">
+            <summary>Gets or sets the CardNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditCardAccessListInputUnit.UserId">
+            <summary>Gets or sets the UserId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.CreditCardAccessListInputUnit.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit.ChartOfAccountId">
+            <summary>Gets or sets the ChartOfAccountId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit.UserId">
+            <summary>Gets or sets the UserId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListInputUnit.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListInputUnit.JobNumber">
+            <summary>Gets or sets the JobNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListInputUnit.Caption">
+            <summary>Gets or sets the Caption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListInputUnit.UserId">
+            <summary>Gets or sets the UserId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListInputUnit.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId field. </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListUnitDto.ProjectAccessId">
+            <summary>Gets or sets the ProjectAccessId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListUnitDto.JobId">
+            <summary>Gets or sets the JobId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListUnitDto.Caption">
+            <summary>Gets or sets the Caption</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListUnitDto.JobNumber">
+            <summary>Gets or sets the JobNumber</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.ProjectAccessListUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit.UserIdList">
+            <summary>Gets or sets the UserIdList field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit.AccountAccessList">
+            <summary>Get Sets the AccountAccessList field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit.BankAccountAccessList">
+            <summary>Get Sets the BankAccountAccessList field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit.CreditCardAccessList">
+            <summary>Get Sets the CreditCardAccessList field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit.ProjectAccessList">
+            <summary>Get Sets the ProjectAccessList field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListUnitDto.AccountId">
+            <summary>Gets or sets the AccountId</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListUnitDto.Caption">
+            <summary>Gets or sets the Caption</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListUnitDto.AccountNumber">
+            <summary>Gets or sets the AccountNumber</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.AccountAccessListUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the OrganizationUnitId </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.CreateorUpdateAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update AccountAccessList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.GetAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Accounts/Lines AccessList By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.GetAccountList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Account/Lines List which is not in AccountAccessList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.CreateorUpdateProjectAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Projects
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.CreateorUpdateDivisionAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Divisions
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.GetProjectAccessList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Project/Division AccessList By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.GetProjectList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Project/Division List which is not in ProjectAccessList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.CreateorUpdateCreditCardAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Credit Cards
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.GetCreditCardAccessList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Credit Card Access List By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.GetCreditCardList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Project/Division List which is not in ProjectAccessList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.CreateorUpdateBankAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Bank Accounts
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.GetBankAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Bank Accounts Access List By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.GetBankAccountList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Bank Accounts List which is not in BankAccountsAccessList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit,System.Int32},CAPS.CORPACCOUNTING.Helpers.CacheItems.IDivisionCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Organization.OrganizationExtended,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserOrganizationUnit,System.Int64},CAPS.CORPACCOUNTING.Organization.OrganizationExtendedUnitManager,CAPS.CORPACCOUNTING.Authorization.Users.UserManager,Abp.Domain.Repositories.IRepository{Abp.Organizations.OrganizationUnit,System.Int64},Abp.Organizations.OrganizationUnitManager)">
+            <summary>
+            
+            </summary>
+            <param name="accountUnitRepository"></param>
+            <param name="accountCache"></param>
+            <param name="customAppSession"></param>
+            <param name="jobUnitRepository"></param>
+            <param name="divisionCache"></param>
+            <param name="bankAccountUnitRepository"></param>
+            <param name="bankAccountCache"></param>
+            <param name="creditCardUnitRepository"></param>
+            <param name="organizationExtendedRepository"></param>
+            <param name="userOrganizationUnitRepository"></param>
+            <param name="organizationExtendedUnitManager"></param>
+            <param name="userManager"></param>
+            <param name="organizationUnitRepository"></param>
+            <param name="organizationUnitManager"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.CreateorUpdateAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Accounts
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.CreateorUpdateLineAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Lines
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.GetAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Accounts/Lines AccessList By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.GetAccountList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Accounts/Lines List which is not in AccountAccessList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.CreateorUpdateProjectAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Projects
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.CreateorUpdateDivisionAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Divisions
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.GetProjectAccessList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Project/Division AccessList By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.GetProjectList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Project/Division List which is not in ProjectAccessList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.CreateorUpdateCreditCardAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Credit Cards
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.GetCreditCardAccessList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Credit Card Access List By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.GetCreditCardList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get CreditCard List which is not in CreditCardAccessList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.CreateorUpdateBankAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Bank Accounts
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.GetBankAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Bank Accounts Access List By UserId
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.UserSecuritySettingsAppService.GetBankAccountList(CAPS.CORPACCOUNTING.Security.Dto.GetUserSecuritySettingsInputUnit)">
+            <summary>
+            Get Bank Accounts List which is not in BankAccountsAccessList
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
     </members>

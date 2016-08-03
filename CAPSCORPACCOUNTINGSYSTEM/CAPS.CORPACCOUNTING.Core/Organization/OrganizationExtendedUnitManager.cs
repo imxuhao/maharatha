@@ -3,6 +3,10 @@ using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.Zero;
 using Abp.Organizations;
+using System.Linq;
+using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.Authorization.Users;
+using Abp.Authorization.Users;
 
 namespace CAPS.CORPACCOUNTING.Organization
 {
@@ -10,10 +14,14 @@ namespace CAPS.CORPACCOUNTING.Organization
     {
 
         protected IRepository<OrganizationExtended, long> OrganizationExtendedUnitRepository { get; private set; }
-
-        public OrganizationExtendedUnitManager(IRepository<OrganizationExtended, long> organizationExtendedUnitRepository, IRepository<OrganizationUnit, long> organizationUnitRepository) : base(organizationUnitRepository)
+        protected IRepository<UserOrganizationUnit,long> UserOrganizationUnitRepository { get; set; }
+        public OrganizationExtendedUnitManager(IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
+            IRepository<OrganizationUnit, long> organizationUnitRepository,
+            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository 
+            ) : base(organizationUnitRepository)
         {
             OrganizationExtendedUnitRepository = organizationExtendedUnitRepository;
+            UserOrganizationUnitRepository = userOrganizationUnitRepository;
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
@@ -29,6 +37,15 @@ namespace CAPS.CORPACCOUNTING.Organization
         {
             await ValidateOrganizationUnitAsync(organizationExtendedUnit);
             await OrganizationExtendedUnitRepository.UpdateAsync(organizationExtendedUnit);
+        }
+
+        public  Task<List<OrganizationExtended>> GetExtendedOrganizationUnitsAsync(User user,EntityClassification entityClassificationId)
+        {
+            var query = from uou in UserOrganizationUnitRepository.GetAll()
+                        join ou in OrganizationExtendedUnitRepository.GetAll() on uou.OrganizationUnitId equals ou.Id
+                        where uou.UserId == user.Id && ou.EntityClassificationId== entityClassificationId
+                        select ou;
+            return Task.FromResult(query.ToList());
         }
     }
 }

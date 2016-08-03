@@ -3,7 +3,7 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Modiy_TenantEctended_Table : DbMigration
+    public partial class Modify_TenantExtended_Table : DbMigration
     {
         public override void Up()
         {

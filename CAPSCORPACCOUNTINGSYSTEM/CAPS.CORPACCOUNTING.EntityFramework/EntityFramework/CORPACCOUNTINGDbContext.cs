@@ -35,6 +35,8 @@ using System.Collections.Generic;
 using Abp.Configuration;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.CoreHelper;
+using Abp.Organizations;
+
 namespace CAPS.CORPACCOUNTING.EntityFramework
 {
 
@@ -623,6 +625,8 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         public DbSet<AuditEntry> AuditEntries { get; set; }
         public DbSet<AuditEntryProperty> AuditEntryProperties { get; set; }
+
+        public DbSet<ChargeEntryDocumentUnit> ChargeEntryDocumentUnit { get; set; }
 
 
 

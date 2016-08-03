@@ -5,6 +5,22 @@ using CAPS.CORPACCOUNTING.Masters;
 
 namespace CAPS.CORPACCOUNTING.Organization
 {
+    public enum EntityClassification
+    {
+        [Display(Name = "Project")]
+        Project = 1,
+        [Display(Name = "Account")]
+        Account = 2,
+        [Display(Name = "Bank Account")]
+        BankAccount = 3,
+        [Display(Name = "Credit Card")]
+        CreditCard = 4,
+        [Display(Name = "Line")]
+        Line = 5,
+        [Display(Name = "Division")]
+        Division = 6
+    }
+
     [Table("CAPS_OrganizationUnits")]
     public class OrganizationExtended : OrganizationUnit
     {
@@ -16,6 +32,9 @@ namespace CAPS.CORPACCOUNTING.Organization
         /// </summary>
         public virtual int? ConnectionStringId { get; set; }
 
+        public virtual EntityClassification? EntityClassificationId { get; set; }
+
+
         [ForeignKey("ConnectionStringId")]
         public ConnectionStringUnit ConnectionString { get; set; }
 
@@ -24,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.Organization
 
         }
 
-        public OrganizationExtended(int?  connectionstringid)
+        public OrganizationExtended(int? connectionstringid)
         {
             ConnectionStringId = connectionstringid;
             DisplayName = "Default";
@@ -36,6 +55,13 @@ namespace CAPS.CORPACCOUNTING.Organization
             ConnectionStringId = connectionStringid;
         }
 
-        
+        public OrganizationExtended(int? tenantid, string displayname, long? parentid = default(long?), long? objectid = null, EntityClassification? entityClassificationId = null) : base(tenantid, displayname, parentid)
+        {
+            EntityClassificationId = entityClassificationId;
+        }
+
+
+
+
     }
 }

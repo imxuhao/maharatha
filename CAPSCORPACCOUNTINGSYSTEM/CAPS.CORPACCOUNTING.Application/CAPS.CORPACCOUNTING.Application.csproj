@@ -311,6 +311,7 @@
     <Compile Include="Helper\DataTypes.cs" />
     <Compile Include="Helper\EnumHelper.cs" />
     <Compile Include="Helper\EnumList.cs" />
+    <Compile Include="Helper\ExpressionBuilder.cs" />
     <Compile Include="Helper\Filters.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Helper\ListInputDto.cs" />
@@ -547,6 +548,18 @@
     <Compile Include="PurchaseOrders\Dto\PurchaseOrderHistoryUnitDto.cs" />
     <Compile Include="PurchaseOrders\IPurchaseOrderEntryDocumentAppService.cs" />
     <Compile Include="PurchaseOrders\PurchaseOrderEntryDocumentAppService.cs" />
+    <Compile Include="Security\Dto\AccountAccessListInputUnit.cs" />
+    <Compile Include="Security\Dto\BankAccountAccessListInputUnit.cs" />
+    <Compile Include="Security\Dto\BankAccountAccessListUnitDto.cs" />
+    <Compile Include="Security\Dto\CreditAccessListUnitDto.cs" />
+    <Compile Include="Security\Dto\CreditCardAccessListInputUnit.cs" />
+    <Compile Include="Security\Dto\GetUserSecuritySettingsInputUnit.cs" />
+    <Compile Include="Security\Dto\ProjectAccessListInputUnit.cs" />
+    <Compile Include="Security\Dto\ProjectAccessListUnitDto.cs" />
+    <Compile Include="Security\Dto\UserSecuritySettingsInputUnit.cs" />
+    <Compile Include="Security\Dto\AccountAccessListUnitDto.cs" />
+    <Compile Include="Security\IUserSecuritySettingsAppService.cs" />
+    <Compile Include="Security\UserSecuritySettingsAppService.cs" />
     <Compile Include="Sessions\CustomAppSession.cs" />
     <Compile Include="Sessions\Dto\GetCurrentLoginInformationsOutput.cs" />
     <Compile Include="Sessions\Dto\TenantLoginInfoDto.cs" />

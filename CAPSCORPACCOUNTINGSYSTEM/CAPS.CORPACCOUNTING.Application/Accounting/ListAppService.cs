@@ -18,13 +18,15 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.PettyCash;
 using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.Sessions;
+using Abp.Organizations;
+using Abp.Runtime.Session;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
     /// <summary>
     /// 
     /// </summary>
-    public class ListAppService : CORPACCOUNTINGServiceBase, IListAppService
+    public class ListAppService : CORPACCOUNTINGAppServiceBase, IListAppService
     {
         private readonly IRepository<SubAccountUnit, long> _subAccountUnitRepository;
         private readonly IRepository<JobUnit> _jobUnitRepository;
@@ -520,6 +522,22 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             return EnumList.GetCheckTypeList();
         }
+
+       private List<OrganizationUnit> GetUserEntityList(string entityType)
+        {
+            var userId = AbpSession.UserId;
+            var entityList = new List<OrganizationUnit>();
+            switch (entityType)
+            {
+                case "Account":
+
+                    break;
+            }
+
+            return entityList;
+        }
+
+
 
     }
 

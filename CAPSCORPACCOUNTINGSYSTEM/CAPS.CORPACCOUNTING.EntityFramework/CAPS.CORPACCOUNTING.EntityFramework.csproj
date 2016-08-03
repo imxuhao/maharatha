@@ -1312,9 +1312,9 @@
     <Compile Include="Migrations\201608021124135_Modify_TenantExtended_Table.Designer.cs">
       <DependentUpon>201608021124135_Modify_TenantExtended_Table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201608021134296_Modify_TenantExtended_Table1.cs" />
-    <Compile Include="Migrations\201608021134296_Modify_TenantExtended_Table1.Designer.cs">
-      <DependentUpon>201608021134296_Modify_TenantExtended_Table1.cs</DependentUpon>
+    <Compile Include="Migrations\201608030813522_Modify_OrganizationUnit_Table.cs" />
+    <Compile Include="Migrations\201608030813522_Modify_OrganizationUnit_Table.Designer.cs">
+      <DependentUpon>201608030813522_Modify_OrganizationUnit_Table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
@@ -2222,8 +2222,8 @@
     <EmbeddedResource Include="Migrations\201608021124135_Modify_TenantExtended_Table.resx">
       <DependentUpon>201608021124135_Modify_TenantExtended_Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608021134296_Modify_TenantExtended_Table1.resx">
-      <DependentUpon>201608021134296_Modify_TenantExtended_Table1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608030813522_Modify_OrganizationUnit_Table.resx">
+      <DependentUpon>201608030813522_Modify_OrganizationUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

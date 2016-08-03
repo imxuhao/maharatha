@@ -7,13 +7,13 @@ namespace CAPS.CORPACCOUNTING.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Modify_TenantExtended_Table1 : IMigrationMetadata
+    public sealed partial class Modify_OrganizationUnit_Table : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Modify_TenantExtended_Table1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Modify_OrganizationUnit_Table));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608021134296_Modify_TenantExtended_Table1"; }
+            get { return "201608030813522_Modify_OrganizationUnit_Table"; }
         }
         
         string IMigrationMetadata.Source

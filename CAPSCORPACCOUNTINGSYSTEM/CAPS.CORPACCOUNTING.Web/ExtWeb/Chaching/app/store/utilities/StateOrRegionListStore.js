@@ -1,12 +1,14 @@
 ﻿Ext.define('Chaching.store.utilities.StateOrRegionListStore', {
     extend: 'Chaching.store.base.BaseStore',
-    fields: [{ name: 'name' }, { name: 'value' }, {
+    remoteSort: false,
+    remoteFilter : false,
+    fields: [{ name: 'regionId' }, { name: 'description' },{ name: 'stateCode' },{
         name: 'state', convert: function (value, record) {
-            return record.get('name');
+            return record.get('stateCode');
         }
     }, {
         name: 'stateId', convert: function (value, record) {
-            return record.get('value');
+            return record.get('regionId');
         }
     }],
     proxy: {

@@ -139,6 +139,10 @@
                                             queryMode: 'local',
                                             store: Ext.create('Chaching.store.utilities.CountryListStore')
                                             //,
+                                            //listeners: {
+                                            //    change : 'onCountryChange'
+                                            //}
+                                            //,
                                             //store: {
                                             //    fields: [{ name: 'name' }, { name: 'value' }, { name: 'country', mapping: 'value' }],
                                             //    data: []
@@ -160,40 +164,46 @@
                                             fieldLabel: app.localize('PostalCode').initCap(),
                                             width: '100%',
                                             ui: 'fieldLabelTop',
+                                            emptyText: app.localize('PostalCodeEnterText'),
                                             listeners: {
-                                                specialkey: 'onPostalCodeEnter',
-                                                change: 'onPostalCodeEnter'
+                                                //specialkey: 'onPostalCodeEnter',
+                                                change: 'onPostalCodeChange'
                                             }
                                         },
                                         {
-                                            xtype: 'combobox',
+                                            xtype: 'textfield',
                                             name: 'city',
                                             fieldLabel: app.localize('City').initCap(),
                                             width: '100%',
-                                            ui: 'fieldLabelTop',
-                                            displayField: 'name',
-                                            valueField: 'city',
-                                            emptyText: app.localize('SelectOption'),
-                                            queryMode: 'local',
-                                            store: {
-                                                fields: [{ name: 'name' }, { name: 'city' }],
-                                                data: []
-                                            }
+                                            ui: 'fieldLabelTop'
                                         },
+                                        //{
+                                        //    xtype: 'combobox',
+                                        //    name: 'city',
+                                        //    fieldLabel: app.localize('City').initCap(),
+                                        //    width: '100%',
+                                        //    ui: 'fieldLabelTop',
+                                        //    displayField: 'name',
+                                        //    valueField: 'city',
+                                        //    emptyText: app.localize('SelectOption'),
+                                        //    queryMode: 'local',
+                                        //    store: {
+                                        //        fields: [{ name: 'name' }, { name: 'city' }],
+                                        //        data: []
+                                        //    }
+                                        //},
                                         {
                                             xtype: 'combobox',
                                             name: 'state',
+                                            reference : 'stateCombo',
                                             fieldLabel: app.localize('CompanyState').initCap(),
                                             width: '100%',
                                             ui: 'fieldLabelTop',
-                                            displayField: 'name',
+                                            displayField: 'description',
                                             valueField: 'state',
                                             emptyText: app.localize('SelectOption'),
                                             queryMode: 'local',
-                                            store: {
-                                                fields: [{ name: 'name' }, { name: 'state' }],
-                                                data: []
-                                            }
+                                            store: Ext.create('Chaching.store.utilities.StateOrRegionListStore')
                                         },
                                         {
                                             xtype: 'fieldcontainer',

@@ -12,12 +12,15 @@
         setDefaultApTermsCombo = me.lookupReference('setDefaultAPTerms'),
         setDefaultArTermsCombo = me.lookupReference('setDefaultARTerms'),
         countryCombo = me.lookupReference('countryCombo'),
+        stateCombo = me.lookupReference('stateCombo'),
         timezoneStore = timezoneCombo.getStore();
         //load time zone combo
         timezoneStore.getProxy().setExtraParams({ defaultTimezoneScope: ChachingGlobals.settingsScope.tenant });
         timezoneStore.load();
         //load country
         countryCombo.getStore().load();
+        //load state
+        stateCombo.getStore().load();
         //load ap default terms
         setDefaultApTermsCombo.getStore().load();
         // load ar default terms
@@ -115,11 +118,11 @@
         var me = this,
            view = me.getView(),
            form = view.getForm(),
-           cityCombo = form.findField('city'),
+           cityField = form.findField('city'),
            stateCombo = form.findField('state'),
            countryCombo = form.findField('country');
-           cityCombo.reset();
-           stateCombo.reset();
+          // cityField.reset();
+          // stateCombo.reset();
           // countryCombo.reset();
            if (zip.trim().length > 2) {
                $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + zip).success(function (response) {
@@ -133,29 +136,35 @@
                            var types = component.types;
                            Ext.each(types, function (type) {
                                if (type == 'locality') {
-                                   city.push({ name: component.long_name, city: component.short_name });
+                                   cityField.setValue(component.long_name);
                                }
                                if (type == 'administrative_area_level_1') {
                                    state.push({ name: component.long_name, state: component.short_name });
                                }
-                               //if (type == 'country') {
-                               //    country.push({ name: component.long_name, value: component.short_name });
-                               //}
+                               if (type == 'country') {
+                                   country.push({ name: component.long_name, country: component.short_name });
+                               }
 
                            });
                        });
-                       if (cityCombo && city.length > 0) {
-                           cityCombo.getStore().loadData(city);
-                           cityCombo.select(cityCombo.getStore().first());
-                       }
                        if (stateCombo && state.length > 0) {
-                           stateCombo.getStore().loadData(state);
-                           stateCombo.select(stateCombo.getStore().first());
+                           var stateRecord = stateCombo.getStore().findRecord('state', state[0].state);
+                           if (stateRecord) {
+                               stateCombo.select(stateRecord);
+                           }
+                           else {
+                               stateCombo.reset();
+                           }
                        }
-                       //if (countryCombo && country.length > 0) {
-                       //    countryCombo.getStore().loadData(country);
-                       //    countryCombo.select(countryCombo.getStore().first());
-                       //}
+                       if (countryCombo && country.length > 0) {
+                           var countryRecord = countryCombo.getStore().findRecord('country', country[0].country);
+                           if (countryRecord) {
+                               countryCombo.select(countryRecord);
+                           }
+                           else {
+                               countryCombo.reset();
+                           }
+                       }
                    }
 
                });
@@ -163,12 +172,34 @@
         
     },
 
+
+    onPostalCodeChange: function (field, e) {
+        var me = this,
+          view = me.getView(),
+          form = view.getForm(),
+          //cityField = form.findField('city'),
+         // stateCombo = form.findField('state'),
+          countryCombo = form.findField('country');
+        //if (!field.isEditMode) {
+        //    var task = new Ext.util.DelayedTask(function () {
+        //        me.loadCityStateAndCountry(field.getValue());
+        //    });
+        //    task.delay(1000);
+        //}
+        if (!Ext.isEmpty(field.getRawValue()) && countryCombo.getValue() == undefined) {
+            abp.message.warn(app.localize('SelectCountry'));
+        }
+
+    },
+
     onPostalCodeEnter: function (field, e) {
         var me = this;
-        var task = new Ext.util.DelayedTask(function () {
-            me.loadCityStateAndCountry(field.getValue());
-        });
-        task.delay(500);
+        if (e.getKey() == e.ENTER) {
+            var task = new Ext.util.DelayedTask(function () {
+                me.loadCityStateAndCountry(field.getValue());
+            });
+            task.delay(500);
+        }
     },
 
     onCompanyLogoClick: function (btn) {

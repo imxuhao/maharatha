@@ -16,7 +16,7 @@ Ext.define('Chaching.store.editions.EditionsStore', {
         },
         api: {
             create: abp.appPath + 'api/services/app/edition/CreateOrUpdateEdition',
-            read: abp.appPath + 'api/services/app/edition/GetEditions',
+            read: abp.appPath + 'api/services/app/edition/GetAllEditions',
             update: abp.appPath + 'api/services/app/edition/CreateOrUpdateEdition',
             destroy: abp.appPath + 'api/services/app/edition/DeleteEdition'
         },

@@ -81,10 +81,10 @@ Ext.define('Chaching.view.editions.EditionsGrid',{
              width: '46%',
              renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
              filterField: {
-                 xtype: 'datefield',
-                 width: '100%',
-                 emptyText: 'Enter creation time to search'
-             }                      
+                 xtype: 'dateSearchField',
+                 dataIndex: 'creationTime',
+                 width: '100%'
+             }
           }        
     ]
     

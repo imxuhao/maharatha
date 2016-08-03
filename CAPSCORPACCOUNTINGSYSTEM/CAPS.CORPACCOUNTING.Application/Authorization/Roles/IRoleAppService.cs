@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Roles
 {
@@ -17,5 +18,12 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
         Task CreateOrUpdateRole(CreateOrUpdateRoleInput input);
 
         Task DeleteRole(EntityRequestInput input);
+
+        /// <summary>
+        /// Get the list of all Roles and also provided with Sorting,Paging and Searching functionality.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<ListResultOutput<RoleListDto>> GetAllRoles(SearchInputDto input);
     }
 }

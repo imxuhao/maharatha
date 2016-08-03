@@ -179,7 +179,7 @@ Ext.define('Chaching.view.users.UsersGrid',
                 displayField: 'text',
                 store: {
                     fields: [{ name: 'text' }, { name: 'value' }],
-                    data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
+                    data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                 }
             }
         },
@@ -214,7 +214,7 @@ Ext.define('Chaching.view.users.UsersGrid',
                 displayField: 'text',
                 store: {
                     fields: [{ name: 'text' }, { name: 'value' }],
-                    data: [{ text: 'YES', value: true }, { text: 'NO', value: false }]
+                    data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
                 }
             },
             editor: {

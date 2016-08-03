@@ -5,6 +5,7 @@ using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Users.Dto;
 using CAPS.CORPACCOUNTING.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
@@ -61,6 +62,13 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         Task<GetUserPermissionsForEditOutput> GetUserAllPermissionsForEdit(IdInput<long> input);
 
         Task UpdateUserPermissionsUnit(UserPermissionsInput input);
+
+        /// <summary>
+        /// Get the list of all Users and also provided with Sorting,Paging and Searching functionality.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<UserListDto>> GetUserUnits(SearchInputDto input);
 
     }
 }

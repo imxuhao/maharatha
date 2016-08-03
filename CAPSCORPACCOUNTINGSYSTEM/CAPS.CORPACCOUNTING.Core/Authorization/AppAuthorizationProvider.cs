@@ -55,13 +55,7 @@ namespace CAPS.CORPACCOUNTING.Authorization
             organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree, L("ManagingOrganizationTree"));
             organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageMembers, L("ManagingMembers"));
 
-            //var organizationUnitsClient = administration.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp, L("MenuCompanySetup"), multiTenancySides: MultiTenancySides.Tenant);
-            //organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
-            //organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
-            //organizationUnitsClient.CreateChildPermission(AppPermissions.Pages_Administration_CompanySetUp_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
-            //organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree, L("ManagingOrganizationTree"));
-            //organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageMembers, L("ManagingMembers"));
-
+           
             //TENANT-SPECIFIC PERMISSIONS
 
             pages.CreateChildPermission(AppPermissions.Pages_Tenant_Dashboard, L("Dashboard"), multiTenancySides: MultiTenancySides.Tenant);

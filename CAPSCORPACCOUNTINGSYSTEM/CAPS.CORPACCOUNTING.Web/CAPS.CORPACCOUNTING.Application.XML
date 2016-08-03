@@ -1709,6 +1709,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.IUserAppService.GetUserUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all Users and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.UserAppService.CreateUserUnitAsync(CAPS.CORPACCOUNTING.Authorization.Users.Dto.CreateOrUpdateUserInput)">
             <summary>
             This is Sumit Method to Create User
@@ -1750,15 +1757,35 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Users.UserAppService.GetUserUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Sumit Method to get UserUnits
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService">
             <summary>
             Application service that is used by 'role management' page.
             </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService.GetAllRoles(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all Roles and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Authorization.Roles.RoleAppService">
             <summary>
             Application service that is used by 'role management' page.
             </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Roles.RoleAppService.GetAllRoles(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Sumit Method to Get Roles
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Authorization.PermissionManagerExtensions.GetPermissionsFromNamesByValidating(Abp.Authorization.IPermissionManager,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
@@ -2688,6 +2715,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Configuration.Host.Dto.GeneralSettingsEditDto.UseRedisCacheByDefault">
             RedisCacheFlag By Default Apllication Uses Redis Cache if we don't want to Use RedisCache we can set this setting as false
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Configuration.Host.HostSettingsAppService.ClearAllSumitCache">
+            <summary>
+            When we set UseRedisCache flag as flase then we are clearing all Sumit Caches
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Configuration.Tenants.Dto.TenantSettingsEditDto.ValidateHostSettings">
             <summary>
             This validation is done for single-tenant applications.
@@ -2772,6 +2805,20 @@
         <member name="M:CAPS.CORPACCOUNTING.Auditing.IAuditLogAppService.GetAuditLogUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
             Get all AuditLogList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Editions.EditionAppService.GetAllEditions(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+             <summary>
+            Get the list of all Editions and also provided with Sorting,Paging and Searching functionality.
+             </summary>
+             <param name="input"></param>
+             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Editions.IEditionAppService.GetAllEditions(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all Editions and also provided with Sorting,Paging and Searching functionality.
             </summary>
             <param name="input"></param>
             <returns></returns>

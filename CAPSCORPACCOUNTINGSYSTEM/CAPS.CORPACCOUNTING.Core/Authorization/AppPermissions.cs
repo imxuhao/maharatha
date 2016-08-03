@@ -36,11 +36,7 @@
         public const string Pages_Administration_OrganizationUnits = "Pages.Administration.OrganizationUnits";
         public const string Pages_Administration_OrganizationUnits_ManageOrganizationTree = "Pages.Administration.OrganizationUnits.ManageOrganizationTree";
         public const string Pages_Administration_OrganizationUnits_ManageMembers = "Pages.Administration.OrganizationUnits.ManageMembers";
-
-        //public const string Pages_Administration_CompanySetUp = "Pages.Administration.CompanySetUp";
-        //public const string Pages_Administration_CompanySetUp_Create = "Pages.Administration.CompanySetUp.Create";
-        //public const string Pages_Administration_CompanySetUp_Edit = "Pages.Administration.CompanySetUp.Edit";
-        //public const string Pages_Administration_CompanySetUp_Delete = "Pages.Administration.CompanySetUp.Delete";
+       
 
         //TENANT-SPECIFIC PERMISSIONS
 

@@ -10,6 +10,10 @@ using Abp.Authorization;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Editions.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
+using System.Linq.Dynamic;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Editions
 {
@@ -128,6 +132,31 @@ namespace CAPS.CORPACCOUNTING.Editions
         private Task SetFeatureValues(Edition edition, List<NameValueDto> featureValues)
         {
             return _editionManager.SetFeatureValuesAsync(edition.Id, featureValues.Select(fv => new NameValue(fv.Name, fv.Value)).ToArray());
+        }
+
+        /// <summary>
+        ///Get the list of all Editions and also provided with Sorting,Paging and Searching functionality.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<ListResultOutput<EditionListDto>> GetAllEditions(SearchInputDto input)
+        {
+            var query = _editionManager.Editions;
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            var editions = await query
+               .OrderBy(Helper.GetSort("Name ASC", input.Sorting))
+               .PageBy(input)
+               .ToListAsync();
+
+            return new ListResultOutput<EditionListDto>(
+                editions.MapTo<List<EditionListDto>>()
+                );
         }
     }
 }

@@ -25,6 +25,8 @@ using CAPS.CORPACCOUNTING.Notifications;
 using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
 using CAPS.CORPACCOUNTING.MultiTenancy.Dto;
 using Abp.Domain.Repositories;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 
 
@@ -731,6 +733,37 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             await _userRoleRepository.InsertAsync(userrole);
             await _unitOfWorkManager.Current.SaveChangesAsync();
 
+        }
+
+        /// <summary>
+        /// Sumit Method to get UserUnits
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<PagedResultOutput<UserListDto>> GetUserUnits(SearchInputDto input)
+        {
+            var query = UserManager.Users
+                .Include(u => u.Roles);
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            var userCount = await query.CountAsync();
+            var users = await query
+                .OrderBy(Helper.GetSort("Name,Surname ASC", input.Sorting))
+                .PageBy(input)
+                .ToListAsync();
+
+            var userListDtos = users.MapTo<List<UserListDto>>();
+            await FillRoleNames(userListDtos);
+
+            return new PagedResultOutput<UserListDto>(
+                userCount,
+                userListDtos
+                );
         }
 
     }

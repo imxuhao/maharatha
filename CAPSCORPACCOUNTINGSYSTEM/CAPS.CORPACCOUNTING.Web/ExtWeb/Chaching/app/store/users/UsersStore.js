@@ -9,7 +9,7 @@ Ext.define('Chaching.store.users.UsersStore', {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
             create: abp.appPath + 'api/services/app/user/CreateOrUpdateUserUnit',
-            read: abp.appPath + 'api/services/app/user/GetUsers',
+            read: abp.appPath + 'api/services/app/user/GetUserUnits',
             update: abp.appPath + 'api/services/app/user/CreateOrUpdateUserUnit',
             destroy: abp.appPath + 'api/services/app/user/DeleteUser'
         }

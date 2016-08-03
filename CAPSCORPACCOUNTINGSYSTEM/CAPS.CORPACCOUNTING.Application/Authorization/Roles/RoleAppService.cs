@@ -8,6 +8,10 @@ using Abp.Authorization;
 using Abp.AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization.Dto;
 using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
+using CAPS.CORPACCOUNTING.GenericSearch.Dto;
+using CAPS.CORPACCOUNTING.Helpers;
+using System.Linq.Dynamic;
+using Abp.Linq.Extensions;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Roles
 {
@@ -132,6 +136,27 @@ namespace CAPS.CORPACCOUNTING.Authorization.Roles
             await CurrentUnitOfWork.SaveChangesAsync(); //It's done to get Id of the role.
             await UpdateGrantedPermissionsAsync(role, input.GrantedPermissionNames);
             return role.Id;
+        }
+
+        /// <summary>
+        /// Sumit Method to Get Roles
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ListResultOutput<RoleListDto>> GetAllRoles(SearchInputDto input)
+        {
+            var query = _roleManager.Roles;
+
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = Helper.CreateFilters(query, mapSearchFilters);
+            }
+            var roles = await query
+               .OrderBy(Helper.GetSort("Name ASC", input.Sorting))
+               .PageBy(input)
+               .ToListAsync();
+            return new ListResultOutput<RoleListDto>(roles.MapTo<List<RoleListDto>>());
         }
 
     }

@@ -9,7 +9,7 @@ Ext.define('Chaching.store.roles.RolesStore', {
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
             create: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
-            read: abp.appPath + 'api/services/app/role/GetRoles',
+            read: abp.appPath + 'api/services/app/role/GetAllRoles',
             update: abp.appPath + 'api/services/app/role/CreateOrUpdateRole',
             destroy: abp.appPath + 'api/services/app/role/DeleteRole'
         }

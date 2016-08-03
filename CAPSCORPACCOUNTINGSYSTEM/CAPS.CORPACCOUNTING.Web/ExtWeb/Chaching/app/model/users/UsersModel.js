@@ -4,7 +4,7 @@
 Ext.define('Chaching.model.users.UsersModel', {
     extend: 'Chaching.model.base.BaseModel',
     config: {
-        searchEntityName: 'User'
+        searchEntityName: ''
     },
     fields: [
         { name: 'id', type: 'int', isPrimaryKey: true, defaultValue: null, convert: nullHandler },

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
@@ -10,14 +8,12 @@ using Abp.Domain.Repositories;
 using Abp.AutoMapper;
 using AutoMapper;
 using System.Data.Entity;
-using Abp.Collections.Extensions;
 using Abp.Domain.Uow;
-using Abp.Runtime.Session;
 using CAPS.CORPACCOUNTING.Helpers;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
-    class UserViewSettingsUnitAppService : CORPACCOUNTINGServiceBase, IUserViewSettingsUnitAppService
+    public class UserViewSettingsUnitAppService : CORPACCOUNTINGAppServiceBase, IUserViewSettingsUnitAppService
     {
 
         private readonly UserViewSettingsUnitManager _userViewSettingsUnitManager;
@@ -48,20 +44,28 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<UserViewSettingsUnitDto> CreateUserViewSettingsUnit(CreateUserViewSettingsUnitInput input)
         {
-            if (input.IsDefault.Value)
+            var tenantId = AbpSession.TenantId;
+            using (_unitOfWorkManager.Current.SetTenantId(tenantId))
             {
-                var res = await _userViewSettingsUnitRepository.FirstOrDefaultAsync(p => p.IsDefault == true && p.ViewId == input.ViewId && p.UserId == input.UserId);
-                if (!ReferenceEquals(res, null))
+                if (input.IsDefault.Value)
                 {
-                    res.IsDefault = false;
-                    await _userViewSettingsUnitManager.UpdateAsync(res);
-                    await CurrentUnitOfWork.SaveChangesAsync();
+                    var res =
+                        await
+                            _userViewSettingsUnitRepository.FirstOrDefaultAsync(
+                                p => p.IsDefault == true && p.ViewId == input.ViewId && p.UserId == input.UserId);
+                    if (!ReferenceEquals(res, null))
+                    {
+                        res.IsDefault = false;
+                        await _userViewSettingsUnitManager.UpdateAsync(res);
+                        await CurrentUnitOfWork.SaveChangesAsync();
+                    }
                 }
+                var UserViewSettings = input.MapTo<UserViewSettingsUnit>();
+                UserViewSettings.TenantId = tenantId;
+                await _userViewSettingsUnitManager.CreateAsync(UserViewSettings);
+                await CurrentUnitOfWork.SaveChangesAsync();
+                return UserViewSettings.MapTo<UserViewSettingsUnitDto>();
             }
-            var UserViewSettings = input.MapTo<UserViewSettingsUnit>();
-            await _userViewSettingsUnitManager.CreateAsync(UserViewSettings);
-            await CurrentUnitOfWork.SaveChangesAsync();
-            return UserViewSettings.MapTo<UserViewSettingsUnitDto>();
         }
 
         /// <summary>
@@ -72,23 +76,30 @@ namespace CAPS.CORPACCOUNTING.Masters
         [UnitOfWork]
         public async Task<UserViewSettingsUnitDto> UpdateUserViewSettingsUnit(UpdateUserViewSettingsUnitInput input)
         {
-            var UserViewSettings = await _userViewSettingsUnitRepository.GetAsync(input.UserViewId);
-            if (!UserViewSettings.IsDefault.Value && input.IsDefault.Value)
+            var tenantId = AbpSession.TenantId;
+            using (_unitOfWorkManager.Current.SetTenantId(tenantId))
             {
-                var res = await _userViewSettingsUnitRepository.FirstOrDefaultAsync(p => p.IsDefault == true && p.ViewId == input.ViewId && p.UserId == input.UserId);
-                if (!ReferenceEquals(res, null))
+                var UserViewSettings = await _userViewSettingsUnitRepository.GetAsync(input.UserViewId);
+                if (!UserViewSettings.IsDefault.Value && input.IsDefault.Value)
                 {
-                    res.IsDefault = false;
-                    await _userViewSettingsUnitManager.UpdateAsync(res);
-                    await CurrentUnitOfWork.SaveChangesAsync();
+                    var res =
+                        await
+                            _userViewSettingsUnitRepository.FirstOrDefaultAsync(
+                                p => p.IsDefault == true && p.ViewId == input.ViewId && p.UserId == input.UserId);
+                    if (!ReferenceEquals(res, null))
+                    {
+                        res.IsDefault = false;
+                        await _userViewSettingsUnitManager.UpdateAsync(res);
+                        await CurrentUnitOfWork.SaveChangesAsync();
+                    }
                 }
+                Mapper.CreateMap<UpdateUserViewSettingsUnitInput, UserViewSettingsUnit>()
+                    .ForMember(u => u.Id, ap => ap.MapFrom(src => src.UserViewId));
+                Mapper.Map(input, UserViewSettings);
+                await _userViewSettingsUnitManager.UpdateAsync(UserViewSettings);
+                await CurrentUnitOfWork.SaveChangesAsync();
+                return UserViewSettings.MapTo<UserViewSettingsUnitDto>();
             }
-            Mapper.CreateMap<UpdateUserViewSettingsUnitInput, UserViewSettingsUnit>()
-                          .ForMember(u => u.Id, ap => ap.MapFrom(src => src.UserViewId));
-            Mapper.Map(input, UserViewSettings);
-            await _userViewSettingsUnitManager.UpdateAsync(UserViewSettings);
-            await CurrentUnitOfWork.SaveChangesAsync();
-            return UserViewSettings.MapTo<UserViewSettingsUnitDto>();
         }
 
         /// <summary>
@@ -98,7 +109,11 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task DeleteUserViewSettingsUnit(IdInput input)
         {
-            await _userViewSettingsUnitManager.DeleteAsync(input);
+            var tenantId = AbpSession.TenantId;
+            using (_unitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                await _userViewSettingsUnitManager.DeleteAsync(input);
+            }
         }
 
 
@@ -110,10 +125,14 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task<ListResultDto<UserViewSettingsUnitDto>> GetUserViewSettingsUnitsByUserId(SearchInputDto input)
         {
-           // _unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MustHaveTenant);
-            var userViewSettings = CreateUserViewSettingsQuery(input);
-            var results = await userViewSettings.ToListAsync();
-            return new ListResultDto<UserViewSettingsUnitDto>(results);
+            var tenantId = AbpSession.TenantId;
+            using (_unitOfWorkManager.Current.SetTenantId(tenantId))
+            {
+                // _unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MustHaveTenant);
+                var userViewSettings = CreateUserViewSettingsQuery(input);
+                var results = await userViewSettings.ToListAsync();
+                return new ListResultDto<UserViewSettingsUnitDto>(results);
+            }
         }
 
         private IQueryable<UserViewSettingsUnitDto> CreateUserViewSettingsQuery(SearchInputDto input)

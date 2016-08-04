@@ -79,14 +79,24 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
             xtype: 'textfield'
         }
     },
-     {
-         xtype: 'gridcolumn',
-         text: app.localize('DatabaseName'),
-         hideable: false,
-         flex: 1,
-         dataIndex: 'connectionStringName',
-         width: '15%'
-     },
+      {
+          xtype: 'gridcolumn',
+          text: app.localize('ServerName'),
+          dataIndex: 'serverName',
+          stateId: 'serverName',
+          sortable: false,
+          width: '20%',
+          groupable: true
+      },
+        {
+            xtype: 'gridcolumn',
+            text: app.localize('DatabaseName'),
+            dataIndex: 'DatabaseName',
+            stateId: 'databaseName',
+            sortable: false,
+            width: '10%',
+            groupable: true
+        },
     {
         xtype: 'gridcolumn',
         text: app.localize('DateModified'),

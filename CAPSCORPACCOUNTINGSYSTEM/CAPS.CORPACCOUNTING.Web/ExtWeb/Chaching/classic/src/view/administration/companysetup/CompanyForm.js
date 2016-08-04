@@ -65,7 +65,7 @@
                                         {
                                             xtype: 'textfield',
                                             name: 'companyName',
-                                            readOnly: true,
+                                            //readOnly: true,
                                             fieldLabel: app.localize('CompanyName').initCap(),
                                             width: '100%',
                                             ui: 'fieldLabelTop'

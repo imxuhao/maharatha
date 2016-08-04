@@ -68,42 +68,72 @@ Ext.define('Chaching.view.manageView.ManageViewListController', {
             activeUserViewId = targetGrid.activeUserViewId,
             myStore = selectionModel.getStore();
         var existingActiveRec = myStore.findRecord('userViewId', activeUserViewId);
-        Ext.Msg.confirm({
-            title: 'Apply View',
-            message: 'Do you really want to apply selected view setting?',
-            buttons: Ext.Msg.YESNO,
-            icon: Ext.Msg.QUESTION,
-            fn: function (btn) {
-                switch (btn) {
-                    case "yes":
-                        //set current view
-                        if (existingActiveRec) {
-                            existingActiveRec.set('isActive', false);
-                            existingActiveRec.commit();
-                        }
-                        record.set('isActive', true);
-                        record.commit();
-                        if (targetGrid) {
-                            var cols = targetGrid.getColumns();
-                            var settingsToApply = [];
-                            var rec = {
-                                gridId: record.get('viewId'),
-                                userViewId: record.get('userViewId'),
-                                viewSettingName: record.get('viewName'),
-                                viewSettings: record.get('viewSettings'),
-                                isDefault: record.get('isDefault')
-                            }
-                            settingsToApply.push(rec);
-                            targetGrid.activeUserViewId = record.get('userViewId');
-                            targetGrid.applyGridViewSetting(cols, true, settingsToApply);
-                        }
-                        Ext.destroy(ownerCt);
-                        break;
-                    default:
-                        selectionModel.deselectAll();
-                        break;
+        //Ext.Msg.confirm({
+        //    title: 'Apply View',
+        //    message: 'Do you really want to apply selected view setting?',
+        //    buttons: Ext.Msg.YESNO,
+        //    icon: Ext.Msg.QUESTION,
+        //    fn: function (btn) {
+        //        switch (btn) {
+        //            case "yes":
+        //                //set current view
+        //                if (existingActiveRec) {
+        //                    existingActiveRec.set('isActive', false);
+        //                    existingActiveRec.commit();
+        //                }
+        //                record.set('isActive', true);
+        //                record.commit();
+        //                if (targetGrid) {
+        //                    var cols = targetGrid.getColumns();
+        //                    var settingsToApply = [];
+        //                    var rec = {
+        //                        gridId: record.get('viewId'),
+        //                        userViewId: record.get('userViewId'),
+        //                        viewSettingName: record.get('viewName'),
+        //                        viewSettings: record.get('viewSettings'),
+        //                        isDefault: record.get('isDefault')
+        //                    }
+        //                    settingsToApply.push(rec);
+        //                    targetGrid.activeUserViewId = record.get('userViewId');
+        //                    targetGrid.applyGridViewSetting(cols, true, settingsToApply);
+        //                }
+        //                Ext.destroy(ownerCt);
+        //                break;
+        //            default:
+        //                selectionModel.deselectAll();
+        //                break;
 
+        //        }
+        //    }
+        //});
+
+        abp.message.confirm(app.localize('ApplyManageViewConfirm'), app.localize('ApplyManageView'), function (isConfirmed) {
+            if (isConfirmed) {
+                //set current view
+                if (existingActiveRec) {
+                    existingActiveRec.set('isActive', false);
+                    existingActiveRec.commit();
                 }
+                record.set('isActive', true);
+                record.commit();
+                if (targetGrid) {
+                    var cols = targetGrid.getColumns();
+                    var settingsToApply = [];
+                    var rec = {
+                        gridId: record.get('viewId'),
+                        userViewId: record.get('userViewId'),
+                        viewSettingName: record.get('viewName'),
+                        viewSettings: record.get('viewSettings'),
+                        isDefault: record.get('isDefault')
+                    }
+                    settingsToApply.push(rec);
+                    targetGrid.activeUserViewId = record.get('userViewId');
+                    targetGrid.applyGridViewSetting(cols, true, settingsToApply);
+                }
+                Ext.destroy(ownerCt);
+            } else {
+                selectionModel.deselectAll();
+                return false;
             }
         });
     }

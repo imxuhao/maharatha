@@ -187,7 +187,7 @@
         //    task.delay(1000);
         //}
         if (!Ext.isEmpty(field.getRawValue()) && countryCombo.getValue() == undefined) {
-            abp.message.warn(app.localize('SelectCountry'));
+           // abp.message.warn(app.localize('SelectCountry'));
         }
 
     },

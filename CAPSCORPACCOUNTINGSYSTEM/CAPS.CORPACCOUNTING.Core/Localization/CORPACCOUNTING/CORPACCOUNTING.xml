@@ -21,9 +21,9 @@
     <text name="DontYouHaveAnAccount" value="Don't you have an account?" />
     <text name="CreateAnAccount" value="Create account" />
     <text name="Pages" value="Pages" />
-    <text name="RoleName" value="Role name" />
-    <text name="EditRole" value="Edit role" />
-    <text name="CreateNewRole" value="Create new role" />
+    <text name="RoleName" value="Role Name" />
+    <text name="EditRole" value="Edit Role" />
+    <text name="CreateNewRole" value="Create New Role" />
     <text name="RoleProperties" value="Role properties" />
     <text name="Permissions" value="Permissions" />
     <text name="Save" value="Save" />
@@ -36,20 +36,20 @@
     <text name="AreYouSure" value="Are you sure?" />
     <text name="YesDelete" value="Yes, delete!" /><text name="DeletingUser" value="Deleting user" />
     <text name="UsersHeaderInfo" value="Manage users and permissions." />
-    <text name="CreateNewUser" value="Create new user" />
-    <text name="UserName" value="User name" />
+    <text name="CreateNewUser" value="Create New User" />
+    <text name="UserName" value="User Name" />
     <text name="Name" value="Name" />
     <text name="Surname" value="Surname" />
-    <text name="EmailAddress" value="Email address" />
-    <text name="LastLoginTime" value="Last login time" />
-    <text name="EditUser" value="Edit user" />
+    <text name="EmailAddress" value="Email Address" />
+    <text name="LastLoginTime" value="Last Login Time" />
+    <text name="EditUser" value="Edit User" />
     <text name="UserInformations" value="User informations" />
     <text name="PasswordRepeat" value="Password (repeat)" />
     <text name="SuccessfullyDeleted" value="Successfully deleted." />
     <text name="RoleDeleteWarningMessage" value="Role {0} will be deleted and unassigned from all assigned users." />
     <text name="UserDeleteWarningMessage" value="User {0} will be deleted." />
     <text name="Active" value="Active" />
-    <text name="EmailConfirm" value="Email confirm" />
+    <text name="EmailConfirm" value="Email Confirm" />
     <text name="Yes" value="Yes" />
     <text name="No" value="No" />
     <text name="MySettings" value="My settings" />
@@ -262,20 +262,20 @@
     <text name="Flag" value="Flag" />
     <text name="SetAsDefaultLanguage" value="Set as default language" />
     <text name="InvlalidLanguageCode" value="Invalid language code." />
-    <text name="EditLanguage" value="Edit language" />
-    <text name="ChangeTexts" value="Change texts" />
-    <text name="TargetValue" value="Target value" />
-    <text name="BaseValue" value="Base value" />
+    <text name="EditLanguage" value="Edit Language" />
+    <text name="ChangeTexts" value="Change Texts" />
+    <text name="TargetValue" value="Target Value" />
+    <text name="BaseValue" value="Base Value" />
     <text name="Key" value="Key" />
     <text name="SaveAndClose" value="Save &amp; Close" />
     <text name="SaveAndNext" value="Save &amp; Next" />
     <text name="EditText" value="Edit text" />
-    <text name="LanguageTexts" value="Language texts" />
+    <text name="LanguageTexts" value="Language Texts" />
     <text name="LanguageTextsHeaderInfo" value="Edit texts for languages." />
     <text name="EmptyOnes" value="Empty ones" />
     <text name="Source" value="Source" />
-    <text name="BaseLanguage" value="Base language" />
-    <text name="TargetLanguage" value="Target language" />
+    <text name="BaseLanguage" value="Base Language" />
+    <text name="TargetLanguage" value="Target Language" />
     <text name="Previous" value="Previous" />
     <text name="LanguageDeleteWarningMessage" value="Are you sure to delete the language {0}?" />
     <text name="CanNotEditOrDeleteDefaultLanguages" value="Can not edit or delete default languages. You can only edit or delete the languages you added. But you can change texts of all languages." />
@@ -1081,6 +1081,9 @@
 <text name="RolesModule" value="Roles" />
 <text name="ChartofAccountsModule" value="Chart of Accounts" />
 <text name="ProjectChartofAccountsModule" value="Project Chart of Accounts" />
+<text name="ApplyManageView" value="Apply View" />
+<text name="ApplyManageViewConfirm" value="Do you really want to apply selected view setting?" />
+<text name="ServerName" value="Server Name" />
     
   </texts>
 </localizationDictionary>

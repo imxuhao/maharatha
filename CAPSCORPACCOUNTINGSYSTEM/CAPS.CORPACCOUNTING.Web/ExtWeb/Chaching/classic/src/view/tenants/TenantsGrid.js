@@ -75,7 +75,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             dataIndex: 'tenancyName',
             stateId: 'tenancyName',
             sortable: true,
-            width: '30%',
+            width: '15%',
             groupable: true,
             renderer: Chaching.utilities.ChachingRenderers.renderTenant,
             filterField: {
@@ -99,13 +99,22 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
              sortable: true,
              width: '15%'
          },
+          {
+              xtype: 'gridcolumn',
+              text: app.localize('ServerName'),
+              dataIndex: 'serverName',
+              stateId: 'serverName',
+              sortable: false,
+              width: '20%',
+              groupable: true
+          },
         {
             xtype: 'gridcolumn',
             text: app.localize('DatabaseName'),
-            dataIndex: 'connectionName',
-            stateId: 'connectionName',
-            sortable: true,
-            width: '15%',
+            dataIndex: 'DatabaseName',
+            stateId: 'databaseName',
+            sortable: false,
+            width: '10%',
             groupable: true
         },
         {

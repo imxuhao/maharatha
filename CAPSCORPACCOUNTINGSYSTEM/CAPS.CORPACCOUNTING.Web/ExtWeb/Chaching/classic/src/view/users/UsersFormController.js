@@ -1,6 +1,34 @@
 ﻿Ext.define('Chaching.view.users.UsersFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.users-usersform',
+    onFormAfterRender:function(){
+        var me = this,
+            view = me.getView(),
+            coaCombo = me.lookupReference('coaCombo'),
+            selectedCoa = 0;
+        coaCombo.getStore().load({
+            callback: function (records, operation, success) {
+                if (success) {
+                    coaCombo.setValue(records[0].data.coaId);
+                    selectedCoa = records[0].data.coaId;
+                }
+            }
+        });
+        /// fill grid
+        var dragDropControl = view.down('chachingGridDragDrop'),
+            leftStore = dragDropControl.getLeftStore(),
+            rightStore = dragDropControl.getRightStore(),
+            values = view.getForm().getValues();
+            leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+            leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+            leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
+            leftStore.load();
+            rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+            rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+            rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
+            rightStore.load();
+            //dragDropControl.show();
+    },
     //reloadPermissionsTree: function (grid , record , tr , rowIndex , e , eOpts )  {
     //    debugger;
     //    var me = this,

@@ -497,6 +497,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             name: 'ActionColumn',
             hideable: false,
             menuDisabled: true,
+            resizable: false,
+            //maxWidth:100,
             renderer: function (value, cell) {
                 var id = Ext.id();
                 var widgetRec = cell.record;

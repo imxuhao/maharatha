@@ -43,6 +43,11 @@ Ext.define('Chaching.view.users.UsersGridController', {
             } else {
                 loginAsThisUserActionMenu.hide();
             }
+            var editButton = button.menu.down('menuitem#editActionMenu');
+            var viewButton = button.menu.down('menuitem#viewActionMenu');
+            if ((editButton && button.widgetRec) || (viewButton && button.widgetRec)) {
+                ChachingGlobals.SelectedUserId = button.widgetRec.data.id;
+            }
         }
         
     },

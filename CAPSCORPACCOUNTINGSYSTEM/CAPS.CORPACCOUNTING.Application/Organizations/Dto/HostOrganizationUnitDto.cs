@@ -1,10 +1,6 @@
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Organizations;
-using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
-using CAPS.CORPACCOUNTING.Masters.Dto;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Organizations.Dto
 {
@@ -19,10 +15,23 @@ namespace CAPS.CORPACCOUNTING.Organizations.Dto
 
         public int MemberCount { get; set; }
 
-        [Required(ErrorMessage = "Please select database.")]
         public int ConnectionStringId { get; set; }
 
+
+        /// <summary>
+        /// Gets or Sets ConnectionStringName of ConnectionString
+        /// </summary>
         public string ConnectionStringName { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ServerName of ConnectionString
+        /// </summary>
+        public string ServerName { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DatabaseName of ConnectionString
+        /// </summary>
+        public string DatabaseName { get; set; }
 
 
     }

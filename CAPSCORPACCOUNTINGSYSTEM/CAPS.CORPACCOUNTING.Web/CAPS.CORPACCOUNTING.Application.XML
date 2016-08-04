@@ -2700,6 +2700,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput.ConnectionString">
             <summary>
             Gets or Sets ConnectionString
+            The ConnectionString format shold be like "Server=XXX; Data Source=XXX; Initial Catalog=XXX; Persist Security Info=True;"OR
+            "Server=XXX; Data Source=XXX; Initial Catalog=XXX; Persist Security Info=False; User ID=xxx;Password=xxx ;"
+            
             </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Configuration.ConnectionString.IConnectionStringAppService">
@@ -9395,6 +9398,21 @@
         </member>
         <member name="F:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames.ApplicationZip">
             <summary>ZIP archive files; Registered[7]</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.HostOrganizationUnitDto.ConnectionStringName">
+            <summary>
+            Gets or Sets ConnectionStringName of ConnectionString
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.HostOrganizationUnitDto.ServerName">
+            <summary>
+            Gets or Sets ServerName of ConnectionString
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.HostOrganizationUnitDto.DatabaseName">
+            <summary>
+            Gets or Sets DatabaseName of ConnectionString
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Organizations.Dto.UpdateHostOrganizationUnitInput.DisplayName">
             <summary>Gets or sets the Organization Name field. </summary>

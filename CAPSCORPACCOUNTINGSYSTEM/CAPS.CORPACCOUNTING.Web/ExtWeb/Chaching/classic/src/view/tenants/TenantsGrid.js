@@ -111,7 +111,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         {
             xtype: 'gridcolumn',
             text: app.localize('DatabaseName'),
-            dataIndex: 'DatabaseName',
+            dataIndex: 'databaseName',
             stateId: 'databaseName',
             sortable: false,
             width: '10%',

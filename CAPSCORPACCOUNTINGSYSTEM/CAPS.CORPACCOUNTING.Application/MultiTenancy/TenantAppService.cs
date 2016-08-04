@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -22,11 +23,9 @@ using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Organization;
 using System.IO;
-using Abp.Authorization.Users;
 using Abp.Runtime.Session;
 using Abp.UI;
 using AutoMapper;
-using CAPS.CORPACCOUNTING.Configuration.Tenants;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.Storage;
 
@@ -101,7 +100,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             var query = from tenant in TenantManager.Tenants
                         join org in _organizationRepository.GetAll() on tenant.OrganizationUnitId equals org.Id
                         join connection in _connectionStringRepository.GetAll() on org.ConnectionStringId equals connection.Id
-                        select new { tenant, OrganizationName = org.DisplayName ,ConnectionName=connection.Name};
+                        select new { tenant, OrganizationName = org.DisplayName ,ConnectionName=connection.ConnectionString};
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -117,7 +116,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             {
                 var dto = item.tenant.MapTo<TenantListDto>();
                 dto.OrganizationName = item.OrganizationName;
-                dto.ConnectionName = item.ConnectionName;
+                var connectionString = new SqlConnectionStringBuilder(SimpleStringCipher.Instance.Decrypt(item.ConnectionName));
+                dto.ServerName = connectionString.DataSource;
+                dto.DatabaseName= connectionString.InitialCatalog;
                 return dto;
             }).ToList());
         }

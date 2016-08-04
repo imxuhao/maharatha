@@ -57,7 +57,7 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
     },
     createNewMode: 'popup',
     isSubMenuItemTab: false,
-
+    forceFit : true,
     columns: [{
         xtype: 'gridcolumn',
         text: app.localize('OrganizationId'),
@@ -85,16 +85,16 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
           dataIndex: 'serverName',
           stateId: 'serverName',
           sortable: false,
-          width: '20%',
+          width: '35%',
           groupable: true
       },
         {
             xtype: 'gridcolumn',
             text: app.localize('DatabaseName'),
-            dataIndex: 'DatabaseName',
+            dataIndex: 'databaseName',
             stateId: 'databaseName',
             sortable: false,
-            width: '10%',
+            width: '15%',
             groupable: true
         },
     {
@@ -103,7 +103,7 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
         dataIndex: 'lastModificationTime',
         sortable: true,
         groupable: true,
-        width: '10%',
+        width: '15%',
         renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer
     },
     {
@@ -112,7 +112,7 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
         dataIndex: 'creationTime',
         sortable: true,
         groupable: true,
-        width: '10%',
+        width: '15%',
         renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer
     }
     ]

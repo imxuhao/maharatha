@@ -19,7 +19,8 @@ namespace CAPS.CORPACCOUNTING.Organizations.Dto
 
         /// <summary>Gets or sets the ConnectionStringId Name field. </summary>
 
-        
+
+        [Required(ErrorMessage = "Please select database.")]
         public int? ConnectionStringId { get; set; }
     }
 }

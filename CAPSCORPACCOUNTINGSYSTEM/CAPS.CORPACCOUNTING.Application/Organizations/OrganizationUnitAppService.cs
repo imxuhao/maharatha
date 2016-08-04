@@ -14,11 +14,13 @@ using Abp.Domain.Uow;
 using CAPS.CORPACCOUNTING.Masters;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using CAPS.CORPACCOUNTING.Organization;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Linq.Dynamic;
+using Abp.Runtime.Security;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
@@ -83,9 +85,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
                         join constr in _connectionStringRepository.GetAll() on organization.ConnectionStringId equals constr.Id
                          into constring
                         from construnits in constring.DefaultIfEmpty()
-                        select new { organization, ConnectionStringName= construnits.Name };
-
-
+                        select new { organization, ConnectionStringName= construnits.Name,ConnectionString=construnits.ConnectionString };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -93,7 +93,6 @@ namespace CAPS.CORPACCOUNTING.Organizations
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
@@ -107,6 +106,9 @@ namespace CAPS.CORPACCOUNTING.Organizations
                 {
                     dto.ConnectionStringId = item.organization.ConnectionStringId.Value;
                     dto.ConnectionStringName = item.ConnectionStringName;
+                    var connectionString = new SqlConnectionStringBuilder(SimpleStringCipher.Instance.Decrypt(item.ConnectionString));
+                    dto.ServerName = connectionString.DataSource;
+                    dto.DatabaseName = connectionString.InitialCatalog;
                 }
                 return dto;
             }).ToList());

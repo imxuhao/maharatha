@@ -16,6 +16,9 @@ namespace CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto
 
         /// <summary>
         /// Gets or Sets ConnectionString
+        /// The ConnectionString format shold be like "Server=XXX; Data Source=XXX; Initial Catalog=XXX; Persist Security Info=True;"OR
+        /// "Server=XXX; Data Source=XXX; Initial Catalog=XXX; Persist Security Info=False; User ID=xxx;Password=xxx ;"
+        /// 
         /// </summary>
         [Required]
         public string ConnectionString { get; set; }

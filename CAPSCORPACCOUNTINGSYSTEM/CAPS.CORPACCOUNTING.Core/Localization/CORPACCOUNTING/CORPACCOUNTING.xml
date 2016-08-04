@@ -87,12 +87,12 @@
     <text name="EmailSmtp" value="Email (SMTP)" />
     <text name="DefaultFromAddress" value="Default from (sender) email address" />
     <text name="DefaultFromDisplayName" value="Default from (sender) display name" />
-    <text name="SmtpHost" value="SMTP host" />
-    <text name="SmtpPort" value="SMTP port" />
+    <text name="SmtpHost" value="SMTP Host" />
+    <text name="SmtpPort" value="SMTP Port" />
     <text name="UseDefaultCredentials" value="Use default credentials" />
     <text name="DomainName" value="Domain name" />
     <text name="UseSsl" value="Use SSL" />
-    <text name="ThisWebSiteRootAddress" value="Web site root address" />
+    <text name="ThisWebSiteRootAddress" value="Website root address" />
     <text name="EnableModificationsToDB" value="Enable modifications log"/>
     <text name="UseRedisCache" value="Use Redis cache"/>
     <text name="ThisWebSiteRootAddress_Hint" value="It will be used when building links to this web site. It's needed for some tasks like building password reset links. Ex: http://mydomain.com/" />
@@ -134,7 +134,7 @@
     <text name="ConfirmationMailSentPleaseClickLinkInTheEmail" value="A confirmation mail sent to {0}. Please click link in the email in order to confirm your mail address." />
     <text name="YourAccountIsWaitingToBeActivatedByAdmin" value="Your account is waiting to be activated by system admin." />
     <text name="NameSurname" value="Name surname" />
-    <text name="UserManagement" value="User management" />
+    <text name="UserManagement" value="User Management" />
     <text name="AllowUsersToRegisterThemselves" value="Allow users to register to the system." />
     <text name="AllowUsersToRegisterThemselves_Hint" value="If you disable this, users will only be added by admin using user management page." />
     <text name="NewRegisteredUsersIsActiveByDefault" value="New registered users are active by default." />
@@ -198,7 +198,7 @@
     <text name="Browser" value="Browser" />
     <text name="Xms" value="{0} ms" />
     <text name="Close" value="Close" />
-    <text name="Refresh" value="Refresh" />
+    <text name="Refresh" value="REFRESH" />
     <text name="ErrorState" value="Error state" />
     <text name="All" value="All" />
     <text name="HasError" value="Has error" />
@@ -350,7 +350,7 @@
     <text name="Caches">Caches</text>
     <text name="CacheSuccessfullyCleared">Cache successfully cleared.</text>
     <text name="AllCachesSuccessfullyCleared">All caches successfully cleared.</text>
-    <text name="ClearAll">Clear all</text>
+    <text name="ClearAll">CLEAR ALL</text>
     <text name="Clear">Clear</text>
     <text name="CachesHeaderInfo">You can clear caches in application on this page.</text>
     <text name="TestEmailSettingsHeader">Test Email Settings</text>
@@ -361,10 +361,10 @@
     <text name="TestEmailSentSuccessfully">Test e-mail sent successfully.</text>
     <text name="WebSiteLogs">Website Logs</text>
     <text name="WebSiteLogsHeaderInfo">You can see latest logs in this page or download all logs in a single zip file.</text>
-    <text name="DownloadAll">Download all</text>
-    <text name="TenantManagement">Tenant management</text>
-    <text name="AllowTenantsToRegisterThemselves" value="Allow tenants to register to the system." />
-    <text name="AllowTenantsToRegisterThemselves_Hint" value="If you disable this, tenants will only be added by admin using tenant management page." />
+    <text name="DownloadAll">DOWNLOAD ALL</text>
+    <text name="TenantManagement">Tenant Management</text>
+    <text name="AllowTenantsToRegisterThemselves" value="Allow Tenants to register to the system." />
+    <text name="AllowTenantsToRegisterThemselves_Hint" value="If you disable this, Tenants will only be added by Admin using Tenant Management page." />
     <text name="NewRegisteredTenantsIsActiveByDefault" value="New registered tenants are active by default." />
     <text name="NewRegisteredTenantsIsActiveByDefault_Hint" value="If you disable this, new tenants will not be active (and can not login) until admin manually activate the account." />
     <text name="TenantSignUp">Tenant SignUp</text>

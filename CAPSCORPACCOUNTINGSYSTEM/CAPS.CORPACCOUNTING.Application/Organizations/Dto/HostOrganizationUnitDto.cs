@@ -4,6 +4,7 @@ using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Configuration.Host.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CAPS.CORPACCOUNTING.Organizations.Dto
 {
@@ -18,6 +19,7 @@ namespace CAPS.CORPACCOUNTING.Organizations.Dto
 
         public int MemberCount { get; set; }
 
+        [Required(ErrorMessage = "Please select database.")]
         public int ConnectionStringId { get; set; }
 
         public string ConnectionStringName { get; set; }

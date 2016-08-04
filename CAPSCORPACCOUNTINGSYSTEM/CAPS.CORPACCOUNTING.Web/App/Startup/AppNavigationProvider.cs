@@ -43,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             L("Administration"), "icon-wrench"
             ).AddItem(new MenuItemDefinition(
             PageNames.App.Common.OrganizationUnits,
-            L("CompanyGroup"),
+            L("TenantGroups"),
             url: "organizationUnits",
             icon: "icon-layers",
             requiredPermissionName: AppPermissions.Pages_Administration_OrganizationUnits

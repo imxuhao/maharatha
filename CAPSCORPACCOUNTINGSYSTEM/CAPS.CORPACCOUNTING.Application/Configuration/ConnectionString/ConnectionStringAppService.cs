@@ -30,16 +30,16 @@ namespace CAPS.CORPACCOUNTING.Configuration.ConnectionString
         /// <returns></returns>
         public async Task CreateConnectionStringUnit(ConnectionStringInput input)
         {
-            StringBuilder connectionString = new StringBuilder();
+            //StringBuilder connectionString = new StringBuilder();
             var connectionStringUnit = input.MapTo<ConnectionStringUnit>();
-            connectionString = connectionString.Append("Server=" + input.ServerName);
-            if (!string.IsNullOrEmpty(input.InstanceName))
-                connectionString = connectionString.Append(@"\" + input.InstanceName);
-            connectionString = connectionString.Append("; Database=" + input.Database + ";");
-            connectionString = input.TrustedConnection ? connectionString.Append("Trusted_Connection=true") :
-                connectionString.Append("; UserId=" + input.Database + "; Password =" + input.Password +
-                                        "Trusted_Connection=false");
-            connectionStringUnit.ConnectionString = SimpleStringCipher.Instance.Encrypt(connectionString.ToString());
+            //connectionString = connectionString.Append("Server=" + input.ServerName);
+            //if (!string.IsNullOrEmpty(input.InstanceName))
+            //    connectionString = connectionString.Append(@"\" + input.InstanceName);
+            //connectionString = connectionString.Append("; Database=" + input.Database + ";");
+            //connectionString = input.TrustedConnection ? connectionString.Append("Trusted_Connection=true") :
+            //    connectionString.Append("; UserId=" + input.Database + "; Password =" + input.Password +
+            //                            "Trusted_Connection=false");
+            connectionStringUnit.ConnectionString = SimpleStringCipher.Instance.Encrypt(input.ConnectionString);
             await _connectionStringRepository.InsertAsync(connectionStringUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }

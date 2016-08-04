@@ -26,5 +26,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
         public long? OrganizationUnitId { get; set; }
 
         public string OrganizationName { get; set; }
+
+        public string ConnectionName { get; set; }
     }
 }

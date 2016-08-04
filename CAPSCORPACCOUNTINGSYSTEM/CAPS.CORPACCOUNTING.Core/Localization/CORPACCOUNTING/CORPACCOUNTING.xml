@@ -1072,6 +1072,7 @@
 <text name="TenantGroupMessage" value="Please select database or Tenant will be created in Host database." />
 <text name="PostalCodeEnterText" value="Please enter postal code to get city." />
 <text name="SelectCountry" value="Please select country." />
+ <text name="TenantGroups" value="Tenant Groups" />
     
   </texts>
 </localizationDictionary>

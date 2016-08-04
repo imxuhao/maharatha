@@ -11,6 +11,12 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy.Dto
     [AutoMapTo(typeof(TenantExtendedUnit))]
     public class TenantExtendedUnitInput : IInputDto
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        public string TenantName { get; set; }
+
         /// <summary>Gets or sets the TenantExtendedUnitId field. </summary>
         public int TenantExtendedId { get; set; }
 

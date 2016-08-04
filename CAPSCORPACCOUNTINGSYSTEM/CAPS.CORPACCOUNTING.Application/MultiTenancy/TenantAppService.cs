@@ -47,13 +47,14 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly TenantExtendedUnitManager _tenantExtendedManager;
         private readonly IBinaryObjectManager _binaryObjectManager;
         private readonly IRepository<BinaryObject,Guid> _binaryObjectRepository;
+        private readonly IRepository<ConnectionStringUnit> _connectionStringRepository;
 
 
         public TenantAppService(
             TenantManager tenantManager, 
             IRepository<OrganizationExtended, long> organizationRepository, IRepository<TenantExtendedUnit> tenantExtendedUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, IAppFolders appFolders, IRepository<AddressUnit, long> addressRepository, TenantExtendedUnitManager tenantExtendedManager,
-            IAddressUnitAppService addressAppService, IBinaryObjectManager binaryObjectManager, IRepository<BinaryObject, Guid> binaryObjectRepository)
+            IAddressUnitAppService addressAppService, IBinaryObjectManager binaryObjectManager, IRepository<BinaryObject, Guid> binaryObjectRepository, IRepository<ConnectionStringUnit> connectionStringRepository)
         {
             _tenantManager = tenantManager;
             _organizationRepository = organizationRepository;
@@ -65,6 +66,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _addressAppService = addressAppService;
             _binaryObjectManager = binaryObjectManager;
             _binaryObjectRepository = binaryObjectRepository;
+            _connectionStringRepository = connectionStringRepository;
         }
 
 
@@ -98,9 +100,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         {
             var query = from tenant in TenantManager.Tenants
                         join org in _organizationRepository.GetAll() on tenant.OrganizationUnitId equals org.Id
-                          into organization
-                        from organizations in organization.DefaultIfEmpty()
-                        select new { tenant, OrganizationName = organizations.DisplayName };
+                        join connection in _connectionStringRepository.GetAll() on org.ConnectionStringId equals connection.Id
+                        select new { tenant, OrganizationName = org.DisplayName ,ConnectionName=connection.Name};
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -115,7 +116,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             return new PagedResultOutput<TenantListDto>(tenantCount, tenants.Select(item =>
             {
                 var dto = item.tenant.MapTo<TenantListDto>();
-                dto.OrganizationName = item.OrganizationName ?? "Default";
+                dto.OrganizationName = item.OrganizationName;
+                dto.ConnectionName = item.ConnectionName;
                 return dto;
             }).ToList());
         }
@@ -224,9 +226,16 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         [AbpAuthorize(AppPermissions.Pages_Administration_Tenant_Settings)]
         public async Task<CompanyImageOutputDto> UpdateCompanyUnit(TenantExtendedUnitInput input)
         {
+           
             int tenantid = AbpSession.GetTenantId();
             byte[] byteArray = null;
             CompanyImageOutputDto companyLogo = new CompanyImageOutputDto();
+            using (_unitOfWorkManager.Current.SetTenantId(null))
+            {
+                var tenant = await TenantManager.GetByIdAsync(tenantid);
+                tenant.Name = input.TenantName;
+                CheckErrors(await TenantManager.UpdateAsync(tenant));
+            }
             using (_unitOfWorkManager.Current.SetTenantId(tenantid))
             {
                 if (input.TenantExtendedId > 0)
@@ -317,7 +326,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             using (_unitOfWorkManager.Current.SetTenantId(null))
             {
                 var currentTenant = await _tenantManager.Tenants.FirstOrDefaultAsync(p => p.Id == tenantid);
-                tenancyName = currentTenant.TenancyName;
+                tenancyName = currentTenant.Name;
             }
           
             using (_unitOfWorkManager.Current.SetTenantId(tenantid))

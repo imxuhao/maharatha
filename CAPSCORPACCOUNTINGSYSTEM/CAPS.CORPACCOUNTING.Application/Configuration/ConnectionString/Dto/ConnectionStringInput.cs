@@ -8,38 +8,44 @@ using Abp.Runtime.Validation;
 namespace CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto
 {
     [AutoMapTo(typeof(ConnectionStringUnit))]
-    public class ConnectionStringInput : IInputDto,ICustomValidate
+    public class ConnectionStringInput : IInputDto
     {
         [StringLength(ConnectionStringUnit.MaxNameLength)]
         [Required]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or Sets ConnectionString
+        /// </summary>
         [Required]
-        public string ServerName { get; set; }
-        public string InstanceName { get; set; }
-        [Required]
-        public string Database { get; set; }
-        [Required]
-        public bool TrustedConnection { get; set; }
+        public string ConnectionString { get; set; }
 
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        //[Required]
+        //public string ServerName { get; set; }
+        //public string InstanceName { get; set; }
+        //[Required]
+        //public string Database { get; set; }
+        //[Required]
+        //public bool TrustedConnection { get; set; }
 
-        public void AddValidationErrors(List<ValidationResult> results)
-        {
-            if (!TrustedConnection)
-            {
-                if (string.IsNullOrEmpty(UserName))
-                {
-                    results.Add(new ValidationResult("Please provide UserName!"));
-                }
-                if (string.IsNullOrEmpty(Password))
-                {
-                    results.Add(new ValidationResult("Please provide Password!"));
+        //public string UserName { get; set; }
+        //public string Password { get; set; }
 
-                }
-            }
+        //public void AddValidationErrors(List<ValidationResult> results)
+        //{
+        //    if (!TrustedConnection)
+        //    {
+        //        if (string.IsNullOrEmpty(UserName))
+        //        {
+        //            results.Add(new ValidationResult("Please provide UserName!"));
+        //        }
+        //        if (string.IsNullOrEmpty(Password))
+        //        {
+        //            results.Add(new ValidationResult("Please provide Password!"));
 
-        }
+        //        }
+        //    }
+
+        //}
     }
 }

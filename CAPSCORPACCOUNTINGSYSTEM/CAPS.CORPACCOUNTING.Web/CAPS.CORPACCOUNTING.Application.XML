@@ -2697,6 +2697,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Configuration.ConnectionString.Dto.ConnectionStringInput.ConnectionString">
+            <summary>
+            Gets or Sets ConnectionString
+            </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Configuration.ConnectionString.IConnectionStringAppService">
             <summary>
             ConnectionString Service
@@ -8989,6 +8994,11 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.Address">
             <summary>Gets or sets the Address of the Organization. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.TenantName">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.TenantExtendedUnitInput.TenantExtendedId">
             <summary>Gets or sets the TenantExtendedUnitId field. </summary>

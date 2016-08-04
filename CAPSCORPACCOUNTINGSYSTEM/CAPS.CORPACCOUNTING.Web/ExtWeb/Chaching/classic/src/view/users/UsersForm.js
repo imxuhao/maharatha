@@ -84,8 +84,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                     name: 'setRandomPassword',
                                     reference: 'isSetRandomPassword',
                                     labelAlign: 'right',
-                                    inputvalue: true,
-                                    checked: true,
+                                    inputValue: true,
+                                    uncheckedValue : false,
+                                    checked: false,
                                     boxLabelCls: 'checkboxLabel',
                                     listeners: {
                                         change: 'showRandomPassword'

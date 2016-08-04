@@ -2936,6 +2936,14 @@
 .x-button-cancelButton-small-cell > .x-grid-cell-inner >.x-btn-cancelButton-small {
     vertical-align: top;
 }
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/window/ChachingWindowPanel.scss:32 */
+.x-window-header-title-chachingWindow {
+    color: #484646;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+    line-height: 21px !important;
+}
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:201 */
 .x-form-text-field-body- {
     min-width: 170px;
@@ -3640,8 +3648,7 @@
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:47 */
 .x-btn-inner-countryMenu-small {
-    font-family: FontAwesome !important;
-    font-weight: 600 !important;
+    font: 700 13px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif, FontAwesome !important;
 }
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:318 */
 .x-menu-countryMenu {
@@ -3982,26 +3989,26 @@
 .x-ie8 .x-box-scroller-menu-countryMenu {
     background-color: white;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:58 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:57 */
 .x-menu-item-icon-countryMenu {
     height: 11px !important;
     top: 8px !important;
     margin-left: 5px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:63 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:62 */
 .x-menu-countryMenu {
     border-radius: 5px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:66 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:65 */
 .x-menu-item-text-countryMenu {
     font-weight: 400 !important;
     color: black !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:70 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:69 */
 .x-menu-item-countryMenu {
     padding-left: 5px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:73 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:72 */
 .x-menu-item-countryMenu.x-menu-item-active {
     background-color: lavender !important;
     color: black !important;
@@ -4343,15 +4350,15 @@
 .x-ie8 .x-box-scroller-menu-balck {
     background-color: #576976;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:84 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:83 */
 .x-menu-item-balck .x-menu-item-active {
     background-color: #555 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:87 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:86 */
 .x-menu-balck {
     border-radius: 5px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:90 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:89 */
 .dropdown-menu {
     max-width: 320px !important;
     width: 320px !important;
@@ -4359,23 +4366,23 @@
     border: 1px solid transparent !important;
     list-style-type: none !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:97 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:96 */
 .dropdown-menu:hover {
     background-color: #555 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:100 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:99 */
 .external notifications-header {
     background-color: #414f59 !important;
     text-align: left !important;
     min-height: 30px !important;
     padding: 8px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:107 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:106 */
 .x-menu-balck {
     color: #d4dadf !important;
     font-weight: 400 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:111 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:110 */
 .menuHeaderTextRight {
     text-align: right !important;
     font-weight: 700 !important;
@@ -4386,7 +4393,7 @@
     text-decoration: underline !important;
     background-color: black !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:121 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:120 */
 .x-view-item-focused {
     outline: none !important;
 }
@@ -4977,7 +4984,7 @@
 .x-button-badgeBtn-small-cell > .x-grid-cell-inner >.x-btn-badgeBtn-small {
     vertical-align: top;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:141 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:140 */
 .x-btn-icon-el-badgeBtn-small {
     height: 20px !important;
     background-color: #ed6b75 !important;
@@ -4985,11 +4992,11 @@
     width: 20px !important;
     margin-left: 0px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:149 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:148 */
 .x-btn-inner-badgeBtn-small {
     font-family: FontAwesome !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:152 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:151 */
 .badge {
     font-size: 11px !important;
     font-weight: 400 !important;
@@ -5586,7 +5593,7 @@
 .x-button-badgeBtnBack-small-cell > .x-grid-cell-inner >.x-btn-badgeBtnBack-small {
     vertical-align: top;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:177 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:176 */
 .x-btn-icon-el-badgeBtnBack-small {
     height: 45px !important;
     background-color: transparent !important;
@@ -5594,13 +5601,9 @@
     width: 45px !important;
     margin-left: 0px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:185 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:184 */
 .x-btn-inner-badgeBtnBack-small {
-    font-family: FontAwesome !important;
-}
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:188 */
-.x-btn-inner-badgeBtnBack-small {
-    font-weight: 600 !important;
+    font: 700 13px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif, FontAwesome !important;
 }
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/menu/Menu.scss:318 */
 .x-menu-accounts {
@@ -5939,31 +5942,31 @@
 .x-ie8 .x-box-scroller-menu-accounts {
     background-color: #576976;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:198 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:194 */
 .x-menu-item-icon-accounts {
     height: 11px !important;
     top: 6px !important;
     color: #d4dadf !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:203 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:199 */
 .x-menu-accounts {
     border-radius: 5px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:206 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:202 */
 .x-menu-item-text-accounts {
     font-weight: 400 !important;
     color: #d4dadf !important;
     font-size: 14px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:211 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:207 */
 .x-menu-item-accounts {
     padding-left: 10px !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:214 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:210 */
 .x-menu-item-accounts.x-menu-item-active {
     background-color: #555 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:217 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/header/ChachingHeader.scss:213 */
 .x-menu-item-text-accounts.x-menu-item-indent-no-separator {
     margin-left: 25px !important;
 }

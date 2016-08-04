@@ -489,7 +489,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         }
         var actionCol = {
             text: app.localize('Actions'),
-            width: 70,
+            width: '5%',
+            minWidth: 70,
+            maxWidth:70,
             hidden: false,
             sortable: false,
             name: 'ActionColumn',
@@ -527,10 +529,6 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                             if (grid.getController()) {
                                 button.on('click', grid.getController().doRowSpecificEditDelete, button, grid);
                             }
-                            ////old
-                            //if (grid) {
-                            //    button.on('click', grid.doRowSpecificEditDelete, button, grid);
-                            //}
                         }
                     }
                     if (Ext.get(id)) {

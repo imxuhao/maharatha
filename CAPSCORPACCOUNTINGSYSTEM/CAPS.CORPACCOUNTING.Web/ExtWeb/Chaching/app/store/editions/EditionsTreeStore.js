@@ -35,14 +35,21 @@
                     if (item.data.inputType.name === "CHECKBOX") {
                         root.appendChild({
                             displayName: item.data.displayName,
-                            expanded: true,
-                            checked: true
+                            inputType: item.data.inputType,
+                            defaultValue: item.data.defaultValue,
+                            name: item.data.name,
+                            description:item.data.description,
+                            expanded: true
                         });
                     }
 
                     else if (item.data.inputType.name === "SINGLE_LINE_STRING") {
                         root.appendChild({
                             displayName: item.data.displayName,
+                            inputType: item.data.inputType,
+                            defaultValue: item.data.defaultValue,
+                            name: item.data.name,
+                            description: item.data.description,
                             expanded: true
                         });
                     }
@@ -50,8 +57,11 @@
                     else {
                         root.appendChild({
                             displayName: item.data.displayName,
+                            inputType: item.data.inputType,
+                            defaultValue: item.data.defaultValue,
+                            name: item.data.name,
+                            description: item.data.description,
                             expanded: true
-                           
                         });
                     }
                 }
@@ -70,18 +80,23 @@
                 parentRoot = records[i];
             }
         }
-        if (parentRoot.data.inputType.name === "CHECKBOX") {
-            parentRoot.set('checked', true);
-        }
-        parentRoot.set('expanded', true);
-        parentRoot.insertChild(0,{
-            displayName: child.data.displayName,
-            expanded: true
-        });
+        if (parentRoot) {
+            parentRoot.set('expanded', true);
+            parentRoot.insertChild(0,
+            {
+                displayName: child.data.displayName,
+                defaultValue: child.data.defaultValue,
+                inputType: child.data.inputType,
+                name: child.data.name,
+                description: child.data.description,
+                expanded: true,
+                leaf: true
+            });
 
-        root.removeAll();
-        root.set('expanded', true);
-        root.appendChild(parentRoot);
+            root.removeAll();
+            root.set('expanded', true);
+            root.appendChild(parentRoot);
+        }
     }
 
 });

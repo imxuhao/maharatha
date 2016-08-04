@@ -45,8 +45,7 @@ $font-weight:400
     height:11px !important;
 }
 .x-btn-inner-countryMenu-small{
-    font-family:FontAwesome !important;
-    font-weight:600 !important;
+    font:700 13px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif, FontAwesome !important;
 }
 @include extjs-menu-ui(
 $ui:'countryMenu',
@@ -183,10 +182,7 @@ $font-weight:400
 }
 
 .x-btn-inner-badgeBtnBack-small{
-    font-family:FontAwesome !important;
-}
-.x-btn-inner-badgeBtnBack-small{
-    font-weight:600 !important;
+    font:700 13px/16px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif, FontAwesome !important;
 }
 
 @include extjs-menu-ui(

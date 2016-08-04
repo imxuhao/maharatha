@@ -75,62 +75,15 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             dataIndex: 'tenancyName',
             stateId: 'tenancyName',
             sortable: true,
-            width: '28%',
+            width: '50%',
             groupable: true,
             renderer: Chaching.utilities.ChachingRenderers.renderTenant,
-            // simplest filter configuration
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
                 emptyText: app.localize('TTenancyCodeName')
             }
-        }, {
-            xtype: 'gridcolumn',
-            text: app.localize('Name'),
-            dataIndex: 'name',
-            sortable: true,
-            groupable: true,
-            hideable: false,
-            hidden : true,
-            width: '30%'
-            // equivalent to filterField:true
-            // as textfield is created by default
-            ,
-            filterField: {
-                xtype: 'textfield',
-                width: '100%',
-                emptyText: app.localize('TName')
-            }
-            //,
-            //editor: {
-            //    xtype: 'textfield'
-            //}
         },
-        /*{//uncomment if required
-            xtype: 'gridcolumn',
-            text: app.localize('Edition'),
-            dataIndex: 'editionDisplayName',
-            sortable: true,
-            groupable: true,
-            width: '20%',
-            filterField: {
-                xtype: 'textfield',
-                width: '100%',
-                emptyText: app.localize('TEdition')
-            },
-            editor: {
-                xtype: 'combobox',
-                name:'editionDisplayName',
-                displayField: 'editionDisplayName',
-                valueField: 'editionId',
-                bind: {
-                    store: '{editionsForComboBox}'
-                },
-                listeners: {
-                    change:'onEditionChange'
-                }
-            }
-        },*/
         {
             xtype: 'gridcolumn',
             text: app.localize('Active'),
@@ -150,8 +103,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             },editor: {
                 xtype: 'checkboxfield',
                 inputValue: true,
-                uncheckedValue : false//,
-                //name: 'isActive'
+                uncheckedValue : false
             }
         },
          {

@@ -37,7 +37,7 @@
         
     },
     addViewUsersLinkComp: function (value, cell) {
-        var gridController = this.up().up().up().getController(),
+        var gridController = this.up().up().up().up().getController(),
             view = gridController.getView(),
             grid = this;
         var id = Ext.id();

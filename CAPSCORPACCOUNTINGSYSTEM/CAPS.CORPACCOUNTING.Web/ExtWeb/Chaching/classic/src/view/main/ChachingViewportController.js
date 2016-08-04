@@ -120,6 +120,16 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
             this.redirectTo(to);
         }
     },
+    onItemCollapse:function(tree,node,e) {
+        var me = this,
+            refs = me.getReferences(),
+            westPanel = refs.treelistContainer;
+        if (westPanel) {
+            Ext.Function.defer(function () {
+            westPanel.updateLayout();
+            }, 500);
+        }
+    },
     onMainViewRender: function () {
         if (!window.location.hash) {
             this.redirectTo("dashboard");

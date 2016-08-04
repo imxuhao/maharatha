@@ -20,6 +20,10 @@ using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Organizations;
 using Abp.Runtime.Session;
+using CAPS.CORPACCOUNTING.Organization;
+using CAPS.CORPACCOUNTING.Authorization.Users;
+using Abp.Authorization.Users;
+using System.Linq.Expressions;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
@@ -46,7 +50,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private readonly IBankAccountCache _bankAccountCache;
         private readonly IRepository<PurchaseOrderEntryDocumentUnit, long> _purchaseOrderEntryDocumentUnitRepository;
         private readonly IRepository<PurchaseOrderEntryDocumentDetailUnit, long> _purchaseOrderEntryDocumentDetailUnitRepository;
-
+        private readonly OrganizationExtendedUnitManager _organizationExtendedUnitManager;
+        private readonly IRepository<OrganizationExtended, long> _organizationExtendedUnitRepository;
+        private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitUnitRepository;
+        private readonly UserManager _userManager;
 
         /// <summary>
         /// 
@@ -78,7 +85,12 @@ namespace CAPS.CORPACCOUNTING.Accounting
             IRepository<VendorPaymentTermUnit> vendorPaymentTermUnitRepository,
             IBankAccountCache bankAccountCache,
             IRepository<PurchaseOrderEntryDocumentDetailUnit, long> purchaseOrderEntryDocumentDetailUnitRepository,
-            IRepository<PurchaseOrderEntryDocumentUnit, long> purchaseOrderEntryDocumentUnitRepository)
+            IRepository<PurchaseOrderEntryDocumentUnit, long> purchaseOrderEntryDocumentUnitRepository,
+            OrganizationExtendedUnitManager organizationExtendedUnitManager,
+            UserManager userManager,
+            IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
+            IRepository<UserOrganizationUnit, long> userOrganizationUnitUnitRepository
+            )
         {
             _subAccountUnitRepository = subAccountUnitRepository;
             _jobUnitRepository = jobUnitRepository;
@@ -98,6 +110,10 @@ namespace CAPS.CORPACCOUNTING.Accounting
             _bankAccountCache = bankAccountCache;
             _purchaseOrderEntryDocumentDetailUnitRepository = purchaseOrderEntryDocumentDetailUnitRepository;
             _purchaseOrderEntryDocumentUnitRepository = purchaseOrderEntryDocumentUnitRepository;
+            _organizationExtendedUnitManager = organizationExtendedUnitManager;
+            _userManager = userManager;
+            _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
+            _userOrganizationUnitUnitRepository = userOrganizationUnitUnitRepository;
         }
 
 
@@ -108,29 +124,49 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<DivisionCacheItem>> GetJobOrDivisionList(AutoSearchInput input)
         {
+            Func<DivisionCacheItem, bool> expDivisionCache = null;
             var cacheItem = await _divisionCache.GetDivisionCacheItemAsync(
                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            return cacheItem.ToList().Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed).
+
+            //appy User have restrictions
+            if (_customAppSession.HasGLRestrictions)
+            {
+                var strEntityClassification = string.Join(",", new string[] { EntityClassification.Division.ToDescription(), EntityClassification.Project.ToDescription() });
+                expDivisionCache = ExpressionBuilder.GetExpression<DivisionCacheItem>(await GetEntityAccessFilter(strEntityClassification)).Compile();
+            }
+
+            return cacheItem.ToList().WhereIf(!ReferenceEquals(expDivisionCache, null), expDivisionCache).Where(p => p.TypeOfJobStatusId != ProjectStatus.Closed).
                 WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
             p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
 
         /// <summary>
-        /// Get accounts based on Job chartofAccountId
+        /// Get accounts based on Job and chartofAccountId
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task<List<AccountCacheItem>> GetAccountsList(AutoSearchInput input)
         {
+
+           Func<AccountCacheItem,bool> expAccountCache = null;
+
             var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where(p => p.Id == input.JobId)
                                     select job.ChartOfAccountId).FirstOrDefault();
 
             var accountList = await _accountCache.GetAccountCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
 
+            //appy User have restrictions
+            if (_customAppSession.HasGLRestrictions)
+            {
+                var strEntityClassification = string.Join(",", new string[] { EntityClassification.Account.ToDescription(), EntityClassification.Line.ToDescription() });
+                expAccountCache = ExpressionBuilder.GetExpression<AccountCacheItem>(await GetEntityAccessFilter(strEntityClassification)).Compile();
+            }
+
             return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
-                p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.ChartOfAccountId == chartOfAccountId).ToList();
+            p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
+            || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.ChartOfAccountId == chartOfAccountId)
+            .WhereIf(!ReferenceEquals(expAccountCache,null),expAccountCache).ToList();
 
 
         }
@@ -523,18 +559,35 @@ namespace CAPS.CORPACCOUNTING.Accounting
             return EnumList.GetCheckTypeList();
         }
 
-       private List<OrganizationUnit> GetUserEntityList(string entityType)
+        /// <summary>
+        /// User Entity restriction list
+        /// </summary>
+        /// <param name="entityClassification"></param>
+        /// <returns></returns>
+        private async Task<List<Filters>> GetEntityAccessFilter(string entityClassification)
         {
+            var Filters = new List<Filters>();
             var userId = AbpSession.UserId;
-            var entityList = new List<OrganizationUnit>();
-            switch (entityType)
+            var userAccessList = await (from uou in _userOrganizationUnitUnitRepository.GetAll()
+                                        join ou in _organizationExtendedUnitRepository.GetAll() on uou.OrganizationUnitId equals ou.Id
+                                        where uou.UserId == userId && entityClassification.Contains(ou.EntityClassificationId.ToString())
+                                        select uou.OrganizationUnitId).ToListAsync();
+
+            var strOrgIds = string.Join(",", userAccessList.ToArray());
+
+            if (!string.IsNullOrEmpty(strOrgIds))
             {
-                case "Account":
-
-                    break;
+                var orgfilter = new Filters()
+                {
+                    Property = "OrganizationUnitId",
+                    Comparator = 6,//In Operator
+                    SearchTerm = strOrgIds,
+                    DataType = DataTypes.Text
+                };
+                Filters.Add(orgfilter);
             }
-
-            return entityList;
+            return Filters;
+               
         }
 
 

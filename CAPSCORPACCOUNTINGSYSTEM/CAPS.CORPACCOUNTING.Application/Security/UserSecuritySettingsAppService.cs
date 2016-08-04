@@ -52,7 +52,7 @@ namespace CAPS.CORPACCOUNTING.Security
         private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitRepository;
 
         private readonly OrganizationExtendedUnitManager _organizationExtendedUnitManager;
-
+     
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
 
         private readonly OrganizationUnitManager _organizationUnitManager;

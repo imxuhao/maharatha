@@ -39,10 +39,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         public int? LajitId { get; set; }
 
         /// <summary>Gets or sets the TypeOfCountryId field. </summary>
-        public virtual short TypeOfCountryId { get; set; }
-        [ForeignKey("TypeOfCountryId")]
-        public virtual TypeOfCountryUnit TypeOfCountryUnit { get; set; }
-
+        public virtual int? CountryID { get; set; }
+      
         /// <summary>Gets or sets the TypeOfValueAddedTaxId field. </summary>
         public virtual TypeOfValueAddedTax TypeOfValueAddedTaxId { get; set; }
 
@@ -55,9 +53,9 @@ namespace CAPS.CORPACCOUNTING.Masters
 
        
 
-        public ValueAddedTaxTypeUnit(short typeOfcountryId, TypeOfValueAddedTax typeOfvalueaddedtaxId, bool isactive)
+        public ValueAddedTaxTypeUnit( TypeOfValueAddedTax typeOfvalueaddedtaxId, bool isactive)
         {
-            TypeOfCountryId = typeOfcountryId;
+          
             TypeOfValueAddedTaxId = typeOfvalueaddedtaxId;
             IsActive = isactive;
         }

@@ -20,18 +20,14 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Tenants
 
         public void Create()
         {
-            //new DefaultEditionCreator(_context).Create();
-            //new DefaultLanguagesCreator(_context).Create();
-            //new DefaultSettingsCreator(_context).Create();
-
             new EnumGenerator(_context).Create();
             new DefaultGridListCreator(_context).Create();
-            new DefaultCurrencyCreator(_context, _tenantId).Create();
             new DefaultTypeOfAccountClassificationCreator(_context).Create();
-            new DefaultTypeOfAccountCreator(_context, _tenantId).Create();
+            new DefaultTypeOfAccountCreator(_context).Create();
             new DefaultTypeOfCountryCreator(_context).Create();
-            new DefaultRegionCreator(_context, _tenantId).Create();
-            new DefaultCountryCreator(_context, _tenantId).Create();
+            new DefaultCountryCreator(_context).Create();
+            new DefaultRegionCreator(_context).Create();
+            new DefaultCurrencyCreator(_context).Create();
             new DefaultValueAddedTaxTypeCreator(_context).Create();
             new DefaultValueAddedTaxRecoveryCreator(_context).Create();
             new DefaultSystemViewSettingsCreator(_context).Create();

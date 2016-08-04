@@ -420,8 +420,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             var accounts = await (from valuetaxrecovery in _valueAddedTaxRecoveryUnitRepository.GetAll()
                                   join taxtype in _valueAddedTaxTypeUnitRepository.GetAll() on valuetaxrecovery.ValueAddedTaxTypeId equals taxtype.Id
-                                  join typeofcountry in _typeOfCountryUnitRepository.GetAll() on taxtype.TypeOfCountryId equals typeofcountry.Id
-                                  join country in _countryUnitRepository.GetAll() on typeofcountry.Id equals country.TypeOfCountryId
+                                  //join typeofcountry in _typeOfCountryUnitRepository.GetAll() on taxtype.TypeOfCountryId equals typeofcountry.Id
+                                  join country in _countryUnitRepository.GetAll() on taxtype.CountryID equals country.Id
                                   select new { valuetaxrecovery }).ToListAsync();
             return accounts.Select(
                 result =>

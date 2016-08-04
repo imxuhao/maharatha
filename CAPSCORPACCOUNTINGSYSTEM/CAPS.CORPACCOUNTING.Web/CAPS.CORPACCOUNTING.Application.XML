@@ -1093,7 +1093,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Runtime.Caching.ICacheManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IVendorCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IDivisionCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PettyCash.PettyCashAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.SubAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.JobUnit},CAPS.CORPACCOUNTING.Sessions.CustomAppSession,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AccountUnit,System.Int64},Abp.Runtime.Caching.ICacheManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TaxCreditUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IVendorCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IDivisionCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.IAccountCache,CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PettyCash.PettyCashAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorPaymentTermUnit},CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentDetailUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.PurchaseOrders.PurchaseOrderEntryDocumentUnit,System.Int64},CAPS.CORPACCOUNTING.Organization.OrganizationExtendedUnitManager,CAPS.CORPACCOUNTING.Authorization.Users.UserManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Organization.OrganizationExtended,System.Int64},Abp.Domain.Repositories.IRepository{Abp.Authorization.Users.UserOrganizationUnit,System.Int64})">
             <summary>
             
             </summary>
@@ -1125,7 +1125,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetAccountsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
-            Get accounts based on Job chartofAccountId
+            Get accounts based on Job and chartofAccountId
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1253,6 +1253,13 @@
             <summary>
             Get CheckType List
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetEntityAccessFilter(System.String)">
+            <summary>
+            User Entity restriction list
+            </summary>
+            <param name="entityClassification"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">
@@ -11487,6 +11494,11 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Sessions.CustomAppSession.HasGLRestrictions">
+            <summary>
+            
+            </summary>
         </member>
     </members>
 </doc>

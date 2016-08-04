@@ -10,7 +10,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
     /// TypeOfAccount is the table name in lajit
     /// </summary>
     [Table("CAPS_TypeOfAccount")]
-    public class TypeOfAccountUnit : FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class TypeOfAccountUnit : FullAuditedEntity, IMayHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxDescLength = 100;
         public const int MaxCaptionLength = 20;
@@ -54,7 +54,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public virtual bool IsPaymentType { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
-        public virtual int TenantId { get; set; }
+        public virtual int? TenantId { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
@@ -69,14 +69,14 @@ namespace CAPS.CORPACCOUNTING.Accounting
 
 
       
-        public TypeOfAccountUnit(string description, string caption, short typeOfAccountClassificationId, bool isCurrencyCodeRequired, bool isPaymentType,int tenantId)
+        public TypeOfAccountUnit(string description, string caption, short typeOfAccountClassificationId, bool isCurrencyCodeRequired, bool isPaymentType)
         {
             Description = description;
             Caption = caption;
             TypeOfAccountClassificationId = typeOfAccountClassificationId;
             IsCurrencyCodeRequired = isCurrencyCodeRequired;
             IsPaymentType = isPaymentType;
-            TenantId = tenantId;
+            //TenantId = tenantId;
             CreationTime = System.DateTime.Now;
         }
 

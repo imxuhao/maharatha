@@ -10,7 +10,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     /// TypeOfCurrency is the table name in lajit
     /// </summary>
     [Table("CAPS_TypeOfCurrency")]
-    public class TypeOfCurrencyUnit : FullAuditedEntity<short>, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class TypeOfCurrencyUnit : FullAuditedEntity<short>, IMayHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxDescLength = 100;
         public const int MaxCodeLength = 20;
@@ -41,20 +41,23 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual string CurrencySymbol { get; set; }
 
         /// <summary>Gets or sets the TenantId field. </summary>
-        public int TenantId { get; set; }
+        public int? TenantId { get; set; }
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the TypeOfCountryId field. </summary>
+        public virtual int? CountryID { get; set; }
+      
 
         #endregion
 
         public TypeOfCurrencyUnit() { }
-        public TypeOfCurrencyUnit(string description, string caption, string isocurrencycode, string currencysymbol, int tenantid, long? organizationunitid) {
+        public TypeOfCurrencyUnit(string description, string caption, string isocurrencycode, string currencysymbol, long? organizationunitid) {
             Description = description;
             Caption = caption;
             ISOCurrencyCode = isocurrencycode;
             CurrencySymbol = currencysymbol;
-            TenantId = tenantid;
-            OrganizationUnitId = organizationunitid;
+          OrganizationUnitId = organizationunitid;
         }
 
     }

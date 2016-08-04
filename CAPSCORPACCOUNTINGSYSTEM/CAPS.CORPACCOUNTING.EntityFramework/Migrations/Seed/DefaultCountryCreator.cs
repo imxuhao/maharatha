@@ -12,25 +12,20 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
         private readonly CORPACCOUNTINGDbContext _context;
         private readonly int _tenantId;
 
-        public DefaultCountryCreator(CORPACCOUNTINGDbContext context, int tenantId)
+        public DefaultCountryCreator(CORPACCOUNTINGDbContext context)
         {
             _context = context;
-            _tenantId = tenantId;
-
             InitialCountryList = new List<CountryUnit>
             {
-                new CountryUnit(6,tenantId),
-                 new CountryUnit(8,tenantId),
-                  new CountryUnit(39,tenantId),
-                   new CountryUnit(169,tenantId),
-                    new CountryUnit(225,tenantId),
-                     new CountryUnit(99,tenantId),
-                      new CountryUnit(74,tenantId),
-                       new CountryUnit(81,tenantId),
-                        new CountryUnit(226,tenantId)
-
+            new  CountryUnit(description:"United States",twoLetterAbbreviation:"US",threeLetterAbbreviation:"USA",isoNumber:"840"),
+            new  CountryUnit(description:"United Kingdom",twoLetterAbbreviation:"GB",threeLetterAbbreviation:"GBR",isoNumber:"826"),
+            new  CountryUnit(description:"Canada",twoLetterAbbreviation:"CA",threeLetterAbbreviation:"CAN",isoNumber:"124"),
+            new  CountryUnit(description:"New Zealand",twoLetterAbbreviation:"NZ",threeLetterAbbreviation:"NZL",isoNumber:"554"),
+            new  CountryUnit(description:"Australia",twoLetterAbbreviation:"AU",threeLetterAbbreviation:"AUS",isoNumber:"036"),
+             new  CountryUnit(description:"Belize",twoLetterAbbreviation:"BZ",threeLetterAbbreviation:"BLZ",isoNumber:"084"),
             };
         }
+
 
 
         public void Create()
@@ -48,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         private void AddCountryListIfNotExists(CountryUnit countryList)
         {
-            if (_context.CountryUnit.Any(l => l.TenantId == countryList.TenantId && l.TypeOfCountryId == countryList.TypeOfCountryId))
+            if (_context.CountryUnit.Any(l => l.Description == countryList.Description))
             {
                 return;
             }

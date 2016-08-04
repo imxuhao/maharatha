@@ -1316,6 +1316,14 @@
     <Compile Include="Migrations\201608030813522_Modify_OrganizationUnit_Table.Designer.cs">
       <DependentUpon>201608030813522_Modify_OrganizationUnit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608031413232_Modify_Country_Region_TypeOfCurrency_ValueAddedTaxType_Tables.cs" />
+    <Compile Include="Migrations\201608031413232_Modify_Country_Region_TypeOfCurrency_ValueAddedTaxType_Tables.Designer.cs">
+      <DependentUpon>201608031413232_Modify_Country_Region_TypeOfCurrency_ValueAddedTaxType_Tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608040538326_Modify_TypeOfAccountUnit_Table.cs" />
+    <Compile Include="Migrations\201608040538326_Modify_TypeOfAccountUnit_Table.Designer.cs">
+      <DependentUpon>201608040538326_Modify_TypeOfAccountUnit_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
@@ -1333,8 +1341,6 @@
     <Compile Include="Migrations\Seed\DefaultValueAddedTaxRecoveryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultValueAddedTaxTypeCreator.cs" />
     <Compile Include="Migrations\Seed\EnumGenerator.cs" />
-    <Compile Include="Migrations\Seed\Host\DefaultConnectionStringCreator.cs" />
-    <Compile Include="Migrations\Seed\Host\DefaultOrganizationCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultEditionCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultLanguagesCreator.cs" />
     <Compile Include="Migrations\Seed\Host\DefaultSettingsCreator.cs" />
@@ -2224,6 +2230,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608030813522_Modify_OrganizationUnit_Table.resx">
       <DependentUpon>201608030813522_Modify_OrganizationUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608031413232_Modify_Country_Region_TypeOfCurrency_ValueAddedTaxType_Tables.resx">
+      <DependentUpon>201608031413232_Modify_Country_Region_TypeOfCurrency_ValueAddedTaxType_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608040538326_Modify_TypeOfAccountUnit_Table.resx">
+      <DependentUpon>201608040538326_Modify_TypeOfAccountUnit_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading;
 using Abp.Dependency;
+using System;
 
 namespace CAPS.CORPACCOUNTING.Sessions
 {
@@ -37,6 +38,22 @@ namespace CAPS.CORPACCOUNTING.Sessions
                 }
 
                 return tenantClaim.Value;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HasGLRestrictions
+        {
+            get
+            {
+                var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
+
+                return Convert.ToBoolean(tenantClaim.Value);
             }
         }
 

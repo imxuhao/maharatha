@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     ///  Region is the table name in Lajit
     /// </summary>
     [Table("CAPS_Region")]
-    public class RegionUnit: FullAuditedEntity, IMustHaveTenant, IMayHaveOrganizationUnit
+    public class RegionUnit: FullAuditedEntity, IMayHaveTenant, IMayHaveOrganizationUnit
     {
 
         private const int MaxDescriptionLength = 200;
@@ -37,28 +37,26 @@ namespace CAPS.CORPACCOUNTING.Masters
         public virtual string RegionAbbreviation { get; set; }
 
         /// <summary>Gets or sets the TypeOfCountryId field. </summary>
-        public virtual short? TypeOfCountryId { get; set; }
-        [ForeignKey("TypeOfCountryId")]
-        public virtual TypeOfCountryUnit TypeOfCountryUnit { get; set; }
+        public virtual int? CountryID { get; set; }
+        [ForeignKey("CountryID")]
+        public virtual CountryUnit CountryUnit { get; set; }
 
         /// <summary>Gets or sets the StateCode field. </summary>
         [MaxLength(MaxStateCodeLength)]
         public virtual string StateCode { get; set; }
         /// <summary>Gets or sets the TenantId field. </summary>
-        public virtual int TenantId { get; set; }
+        public virtual int? TenantId { get; set; }
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
 
         public RegionUnit()
         { }
 
-        public RegionUnit(string description,string regionAbbreviation,string stateCode,int tenantId)
+        public RegionUnit(string description,string regionAbbreviation,string stateCode)
         {
             Description = description;
             RegionAbbreviation = regionAbbreviation;
-            TypeOfCountryId = null;
             StateCode = StateCode;
-            TenantId = tenantId;
         }
     }
 }

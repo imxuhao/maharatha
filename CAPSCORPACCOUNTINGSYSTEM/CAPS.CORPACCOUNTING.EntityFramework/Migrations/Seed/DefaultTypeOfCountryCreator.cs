@@ -268,7 +268,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
         public void Create()
         {
-            CreateTypeOfCountryList();
+          CreateTypeOfCountryList();
         }
 
         private void CreateTypeOfCountryList()

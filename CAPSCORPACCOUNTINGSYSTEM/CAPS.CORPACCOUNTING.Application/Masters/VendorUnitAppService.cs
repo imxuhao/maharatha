@@ -495,9 +495,9 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<List<CountryListDto>> GetCountryList()
         {
             var countryList = await (from country in _countryRepository.GetAll()
-                                     join typeOfCountry in _typeOfCountryRepository.GetAll() on country.TypeOfCountryId equals typeOfCountry.Id
-                                     select new CountryListDto { Description = typeOfCountry.Description, CountryId = typeOfCountry.Id,
-                                         IsoCode = typeOfCountry.TwoLetterAbbreviation}).ToListAsync();
+                                     //join typeOfCountry in _typeOfCountryRepository.GetAll() on country.TypeOfCountryId equals typeOfCountry.Id
+                                     select new CountryListDto { Description = country.Description, CountryId = country.Id,
+                                         IsoCode = country.TwoLetterAbbreviation}).ToListAsync();
 
             return countryList;
         }

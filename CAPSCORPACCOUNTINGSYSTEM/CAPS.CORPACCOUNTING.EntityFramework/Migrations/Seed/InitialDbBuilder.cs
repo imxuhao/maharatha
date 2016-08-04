@@ -24,12 +24,12 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
 
             new EnumGenerator(_context).Create();
             new DefaultGridListCreator(_context).Create();
-            new DefaultCurrencyCreator(_context, 1).Create();
+            new DefaultCurrencyCreator(_context).Create();
             new DefaultTypeOfAccountClassificationCreator(_context).Create();
-            new DefaultTypeOfAccountCreator(_context, 1).Create();
+            new DefaultTypeOfAccountCreator(_context).Create();
             new DefaultTypeOfCountryCreator(_context).Create();
-            new DefaultRegionCreator(_context,1).Create();
-            new DefaultCountryCreator(_context, 1).Create();
+            new DefaultRegionCreator(_context).Create();
+            new DefaultCountryCreator(_context).Create();
             //new DefaultValueAddedTaxTypeCreator(_context).Create();
             //new DefaultValueAddedTaxRecoveryCreator(_context).Create();
             new DefaultSystemViewSettingsCreator(_context).Create();

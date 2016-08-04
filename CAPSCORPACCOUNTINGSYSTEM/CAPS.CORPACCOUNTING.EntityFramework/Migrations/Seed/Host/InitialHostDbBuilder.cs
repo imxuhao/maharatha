@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Host
            
             new DefaultTypeOfAccountClassificationCreator(_context).Create();
             new DefaultTypeOfAccountCreator(_context).Create();
-            new DefaultTypeOfCountryCreator(_context).Create();
+           // new DefaultTypeOfCountryCreator(_context).Create();
             new DefaultCountryCreator(_context).Create();
             new DefaultRegionCreator(_context).Create();
             new DefaultCurrencyCreator(_context).Create();

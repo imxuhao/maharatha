@@ -70,6 +70,7 @@ Ext.define('Chaching.view.editions.EditionsForm',
                             flex: 1
                         }, {
                             dataIndex: 'defaultValue',
+                            itemId:'featureValues',
                             width: 100,
                             text: 'Value',
                             renderer: function(value, cell, record, rowIdx, colIdx) {

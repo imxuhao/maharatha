@@ -17,7 +17,7 @@
        
         reader: {
             type: 'json',
-            rootProperty: 'result.features'
+            rootProperty: 'result'
         }
     },
     idPropertyField: 'id',
@@ -25,6 +25,32 @@
     listeners: {
         load: function (store, record, success) {
             var me = this;
+            var view = store.ownerTree.view,
+                poppedWindow = view.grid.ownerCt.ownerCt.ownerCt;
+            var formTitle = poppedWindow.el.component.title,
+                isEditMode = (formTitle === "Edit Edition" || formTitle === "View Edition");
+
+
+            if (isEditMode) {
+                for (var i = 0; i < record[0].data.featureValues.length; i++) {
+                    var featureValue = record[0].data.featureValues[i];
+                    for (var j = 0; j < record[0].data.features.length; j++) {
+                        var feature = record[0].data.features[j];
+                        if (feature.name == featureValue.name) {
+                            feature.defaultValue = featureValue.value;
+                        }
+                    }
+                }
+            }
+            var recordsList = [];
+            for (var j = 0; j < record[0].data.features.length; j++) {
+                var treeRecord = Ext.create('Chaching.model.editions.EditionsTreeModel');
+                Ext.apply(treeRecord.data, record[0].data.features[j]);
+                recordsList.push(treeRecord);
+            }
+            record = recordsList;
+            
+
             var length = record.length;
             var root = me.getRoot();
             root.removeAll();

@@ -2,23 +2,25 @@ Ext.define('Chaching.view.editions.EditionsFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.editions-editionsform',
 
-    onSaveClicked: function (btn, e) {
+   onSaveClicked: function (btn, e) {
         var me = this,
             view = this.getView().ownerCt,
         displayName = view.down('textfield').value;
         var grid = me.getView().parentGrid,
             gridStore = grid.getStore();
-        var editionId, widgetRec;
-            
-        var editionTitle = view.el.component.title;
+        var treepanel = me.getView().down('treepanel');
+        var featureGrid = treepanel.getColumns()[1];
+        var selectionModel = featureGrid.getView().getSelectionModel();
+        var featureStore = selectionModel.getStore(),
+              featureItems = featureStore.getDataSource().items;
 
-        if (editionTitle === "Edit edition" || editionTitle === "ViewEdition") {
+        var editionTitle = view.el.component.title;
+        if (editionTitle === "Edit Edition" || editionTitle === "View Edition") {
             var recordClicked = this.getView().getValues();
                 var edition = {
                     id: recordClicked.id,
                     displayName: displayName
                 };
-            
         }
         else {
 
@@ -27,23 +29,18 @@ Ext.define('Chaching.view.editions.EditionsFormController', {
                 displayName: displayName
             };
         }
-
-                var features = [
-                    //{
-                    //    name: a.down('treepanel').items.features,
-                    //    value: a.down('treepanel').items.features
-                    //},
+        var features = [
                       {
-                          name: "MyApplication.SampleBooleanFeature",
-                          value: false
+                          name: featureItems[0].data.name,
+                          value: featureItems[0].data.defaultValue
                       },
                       {
-                          name: "MyApplication.SampleSelectionFeature",
-                          value: "B"
+                          name: featureItems[1].data.name,
+                          value: featureItems[1].data.defaultValue
                       },
                       {
-                          name: "MyApplication.SampleNumericFeature",
-                         value: 10
+                          name: featureItems[2].data.name,
+                          value: featureItems[2].data.defaultValue
                       }
                 ];
                 var input = {
@@ -56,7 +53,7 @@ Ext.define('Chaching.view.editions.EditionsFormController', {
                     jsonData: Ext.encode(input),
 
                     success: function(){
-                        abp.notify.info(app.localize('Success'));
+                        abp.notify.success(app.localize('Success'));
                         me.doPostSaveOperations();
                         Ext.destroy(view);
                         
@@ -65,12 +62,14 @@ Ext.define('Chaching.view.editions.EditionsFormController', {
                         abp.notify.error(app.localize('Error'));
                     }
                 });
-    },
+   },
+
     doPostSaveOperations: function (records, operation, success) {
         var me = this,
             view = this.getView().ownerCt;
             var grid = me.getView().parentGrid,
             gridStore = grid.getStore();
             grid.getStore().load();
-}
+    }
+    
 });

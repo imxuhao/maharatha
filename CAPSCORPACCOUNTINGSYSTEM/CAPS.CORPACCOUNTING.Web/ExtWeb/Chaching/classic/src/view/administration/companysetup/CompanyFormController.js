@@ -214,7 +214,7 @@
         form = view.getForm(),
         record = Ext.create('Chaching.model.administration.organization.CompanyModel');
         record.set('tenantExtendedId', form.findField('tenantExtendedId').getValue());
-        // record.set('displayName', form.findField('displayName').getValue());
+        record.set('tenantName', form.findField('companyName').getValue());
         record.set('companyLogoId', form.findField('companyLogoId').getValue());
         record.set('federalTaxId', form.findField('federalTaxId').getValue());
         record.set('transmitterContactName', form.findField('transmitterContactName').getValue());

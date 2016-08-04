@@ -926,10 +926,10 @@
  <text name="CheckGroup" value="Check group" />
  <text name="MemoLine" value="Memoline" />
  <text name="PaymentMethods" value="Payment Methods" />
- <text name="CompanySetup" value="Company Setup" />
- <text name="CompanyPreferences" value="Company Preferences" />
+ <text name="CompanySetup" value="Tenant Setup" />
+ <text name="CompanyPreferences" value="Tenant Preferences" />
  <text name="CompanyMembers" value="Members" />
- <text name="CompanyInformation" value="Company Information" />
+ <text name="CompanyInformation" value="Tenant Information" />
  <text name="CompanyState" value="State" />
  <text name="Company1099And1096Form" value="For 1099 and 1096 forms" />
  <text name="TransmitterContactName" value="Transmitter Contact Name" />

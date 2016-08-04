@@ -89,14 +89,14 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             text: app.localize('TenantGroupName'),
             dataIndex: 'organizationName',
             stateId: 'organizationName',
-            sortable: true,
+            sortable: false,
             width: '15%'
         },
          {
              xtype: 'gridcolumn',
              text: app.localize('Edition'),
              dataIndex: 'editionDisplayName',
-             sortable: true,
+             sortable: false,
              width: '15%'
          },
           {

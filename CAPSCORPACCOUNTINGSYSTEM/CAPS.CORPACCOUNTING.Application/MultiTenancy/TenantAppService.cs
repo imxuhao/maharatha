@@ -230,13 +230,15 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
            
             int tenantid = AbpSession.GetTenantId();
             byte[] byteArray = null;
+            //using (_unitOfWorkManager.Current.SetTenantId(null))
+            //{
+            //    var tenant = await TenantManager.GetByIdAsync(tenantid);
+            //    tenant.Name = input.TenantName;
+            //    CheckErrors(await TenantManager.UpdateAsync(tenant));
+            //}
+
+
             CompanyImageOutputDto companyLogo = new CompanyImageOutputDto();
-            using (_unitOfWorkManager.Current.SetTenantId(null))
-            {
-                var tenant = await TenantManager.GetByIdAsync(tenantid);
-                tenant.Name = input.TenantName;
-                CheckErrors(await TenantManager.UpdateAsync(tenant));
-            }
             using (_unitOfWorkManager.Current.SetTenantId(tenantid))
             {
                 if (input.TenantExtendedId > 0)

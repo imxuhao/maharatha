@@ -65,8 +65,8 @@
                                         {
                                             xtype: 'textfield',
                                             name: 'companyName',
-                                            //readOnly: true,
-                                            fieldLabel: app.localize('CompanyName').initCap(),
+                                            readOnly: true,
+                                            fieldLabel: app.localize('TenantName'),
                                             width: '100%',
                                             ui: 'fieldLabelTop'
                                         },
@@ -164,7 +164,7 @@
                                             fieldLabel: app.localize('PostalCode').initCap(),
                                             width: '100%',
                                             ui: 'fieldLabelTop',
-                                            emptyText: app.localize('PostalCodeEnterText'),
+                                            //emptyText: app.localize('PostalCodeEnterText'),
                                             listeners: {
                                                 //specialkey: 'onPostalCodeEnter',
                                                 change: 'onPostalCodeChange'

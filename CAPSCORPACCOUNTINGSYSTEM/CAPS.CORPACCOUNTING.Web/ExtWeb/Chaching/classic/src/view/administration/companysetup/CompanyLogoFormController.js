@@ -30,7 +30,7 @@
     getCompanyLogo: function () {
         var me = this,
             main = null,
-            headerview = null,
+            headerView = null,
         view = me.getView(),
         data = me.dataObject;
         Ext.Ajax.request({
@@ -41,11 +41,8 @@
                 if (res.success) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
-                    if (Chaching.app)
-                        main = Chaching.app.getMainView();
-                    if (main)
-                        headerview = main.down('chachingheader');
-                    if (headerview) {
+                    headerView = Ext.ComponentQuery.query('chachingheader')[0];
+                    if (headerView) {
                        // var img = headerview.down('image[itemId=companyLogoImage]');
                         var parentView = me.parentController.getView();
                         me.parentController.companyLogo = me.dataObject;
@@ -89,7 +86,7 @@
                 url: abp.appPath + 'Profile/UploadCompanyLogo',
                 success: function (form, response) {
                     if (response.result) {
-                        form.findField('companyLogoField').value = "gjhsagjd"
+                        form.findField('companyLogoField').value = "gjhsagjd";
                         var data = response.result.result;
                         if (response.success) {
                             view.filePath = data.tempFilePath;

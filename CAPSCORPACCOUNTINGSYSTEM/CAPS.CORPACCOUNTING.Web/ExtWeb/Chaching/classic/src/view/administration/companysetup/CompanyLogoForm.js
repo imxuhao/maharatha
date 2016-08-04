@@ -4,7 +4,6 @@ Ext.define('Chaching.view.administration.companysetup.CompanyLogoForm', {
     requires: [
         'Chaching.view.administration.companysetup.CompanyLogoFormController'
     ],
-
     controller: 'companylogoform',
     name: 'CompanyLogo',
     openInPopupWindow: true,

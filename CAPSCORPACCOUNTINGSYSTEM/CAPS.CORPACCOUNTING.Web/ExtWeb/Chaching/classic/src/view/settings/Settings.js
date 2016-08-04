@@ -55,7 +55,7 @@
                             xtype: 'combobox',
                             itemId: 'timezone',
                             allowBlank: false,
-                            fieldLabel: app.localize('Timezone').initCap(),
+                            fieldLabel: app.localize('Timezone'),
                             valueField: 'value',
                             displayField: 'name',
                             queryMode: 'local',
@@ -178,7 +178,7 @@
                         {
                             xtype: 'combobox',
                             itemId: 'editions',
-                            fieldLabel: app.localize('Editions').initCap(),
+                            fieldLabel: app.localize('Editions'),
                             width: '80%',
                             ui: 'fieldLabelTop',
                             emptyText: app.localize('TEdition'),

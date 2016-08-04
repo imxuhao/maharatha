@@ -27,7 +27,7 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
             name: 'name',
             itemId : 'name',
             allowBlank: false,
-            fieldLabel: app.localize('Name').initCap(),
+            fieldLabel: app.localize('Name'),
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('Name')
@@ -36,7 +36,7 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
             xtype: 'textfield',
             name: 'surname',
             allowBlank: false,
-            fieldLabel: app.localize('Surname').initCap(),
+            fieldLabel: app.localize('Surname'),
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('Surname')
@@ -45,7 +45,7 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
              xtype: 'textfield',
              name: 'emailAddress',
              allowBlank: false,
-             fieldLabel: app.localize('EmailAddress').initCap(),
+             fieldLabel: app.localize('EmailAddress'),
              width: '100%',
              ui: 'fieldLabelTop',
              emptyText: app.localize('EmailAddress')
@@ -54,7 +54,7 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
              xtype: 'textfield',
              name: 'userName',
              allowBlank: false,
-             fieldLabel: app.localize('UserName').initCap(),
+             fieldLabel: app.localize('UserName'),
              width: '100%',
              ui: 'fieldLabelTop',
              reference: "userName",
@@ -68,14 +68,14 @@ Ext.define('Chaching.view.profile.settings.SettingsForm', {
                  hidden: '{!userName.readOnly}'
              },
              cls: 'helpText',
-             text: app.localize('CanNotChangeAdminUserName').initCap(),
+             text: app.localize('CanNotChangeAdminUserName'),
              width: '100%'
          },
          {
              xtype: 'combobox',
              name: 'timezone',
              allowBlank: false,
-             fieldLabel: app.localize('Timezone').initCap(),
+             fieldLabel: app.localize('Timezone'),
              valueField: 'value',
              displayField: 'name',
              queryMode : 'local',

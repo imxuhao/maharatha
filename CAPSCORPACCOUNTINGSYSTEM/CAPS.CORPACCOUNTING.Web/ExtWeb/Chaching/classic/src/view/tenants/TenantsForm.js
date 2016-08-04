@@ -25,7 +25,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
         xtype: 'tabpanel',
         ui: 'formTabPanels',
         items : [{
-            title: abp.localization.localize("GeneralInformation").initCap(),
+            title: abp.localization.localize("GeneralInformation"),
             padding: '0 0 0 10',
             scrollable: true,
             iconCls: 'fa fa-gear',
@@ -42,7 +42,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 xtype: 'combobox',
                 name: 'organizationUnitId',
                 itemId : 'organizationId',
-                fieldLabel: app.localize('Organization').initCap(),
+                fieldLabel: app.localize('TenantGroupName'),
                 width: '100%',
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('SelectOption'),
@@ -61,7 +61,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 name: 'tenancyName',
                 itemId: 'tenancyName',
                 allowBlank: false,
-                fieldLabel: app.localize('TenancyName').initCap(),
+                fieldLabel: app.localize('TenancyName'),
                 width: '100%',
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('TTenancyCodeName'),
@@ -73,7 +73,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 name: 'name',
                 hidden : true,
                 allowBlank: false,
-                fieldLabel: app.localize('Name').initCap(),
+                fieldLabel: app.localize('Name'),
                 width: '100%',
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('TName')
@@ -117,11 +117,15 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 labelAlign: 'right',
                 inputValue: true,
                 checked: true,
-                boxLabelCls: 'checkboxLabel'
+                boxLabelCls: 'checkboxLabel',
+                listeners: {
+                    change: 'showRandomPassword'
+                }
             }, {
                 xtype: 'textfield',
                 name: 'adminPassword',
-                fieldLabel: app.localize('AdminPassword').initCap(),
+                reference : 'adminPassword',
+                fieldLabel: app.localize('AdminPassword'),
                 width: '100%',
                 // allowBlank: false,
                 ui: 'fieldLabelTop',
@@ -133,8 +137,9 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             }, {
                 xtype: 'textfield',
                 name: 'adminPasswordRepeat',
+                reference: 'adminPasswordRepeat',
                 submitValue: false,
-                fieldLabel: app.localize('AdminPasswordRepeat').initCap(),
+                fieldLabel: app.localize('AdminPasswordRepeat'),
                 width: '100%',
                 // allowBlank: false,
                 ui: 'fieldLabelTop',
@@ -154,7 +159,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             }, {
                 xtype: 'combobox',
                 name: 'editionId',
-                fieldLabel: app.localize('Edition').initCap(),
+                fieldLabel: app.localize('Edition'),
                 width: '100%',
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('TEdition'),
@@ -202,12 +207,12 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
             scrollable: true,
             selType: 'checkboxmodel',
             columns: [
-               { text: 'Module Name', dataIndex: 'name', flex : 1 }
+               { text: 'Module Name', dataIndex: 'displayName', flex: 1 }
             ],
             dockedItems : [{
                 xtype : 'toolbar',
                 dock : 'top',
-                items : ['->', {
+                items : [ {
                     xtype: 'combobox',
                     itemId : 'tenantItemId',
                     valueField : 'tenantId',
@@ -215,8 +220,10 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                     fieldLabel: app.localize('OrganizationTenants'),
                     submitValue : false,
                     width: '100%',
+                    maxWidth : 300,
                     ui: 'fieldLabelTop',
                     queryMode: 'local',
+                    labelWidth : 60,
                     forceSelection : true,
                     emptyText: app.localize('SelectOrganizationTenant'),
                     store: Ext.create('Chaching.store.administration.organization.TenantListStore'),
@@ -227,7 +234,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 }]
             }],
             store: {
-                fields: ['name'],
+                fields: ['name','displayName'],
                 data : []
             }
         }]

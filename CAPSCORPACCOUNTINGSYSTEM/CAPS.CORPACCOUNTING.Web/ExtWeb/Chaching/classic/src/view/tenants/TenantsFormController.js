@@ -9,6 +9,13 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
             gridPanel.setHeight(newHeight - 100);
         }
     },
+    showRandomPassword: function () {
+        var me = this;
+        password = me.lookupReference('adminPassword');
+        passwordRepeat = me.lookupReference('adminPasswordRepeat');
+        password.reset();
+        passwordRepeat.reset();
+    },
     onOrganizationSelect: function (combo, record, eOpts) {
         var me = this,
             view = me.getView();
@@ -50,13 +57,13 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
             return;
         } else {
             var modules = [
-                   { name: 'Vendors' },
-                   { name: 'Users' },
-                   { name: 'Customers' },
-                   { name: 'Employees' },
-                   { name: 'Roles' },
-                   { name: 'ChartofAccounts' },
-                   { name: 'ProjectChartofAccounts' }
+                   { name: 'Vendors', displayName: app.localize('VendorsModule') },
+                   { name: 'Users', displayName: app.localize('UsersModule') },
+                   { name: 'Customers', displayName: app.localize('CustomersModule') },
+                   { name: 'Employees', displayName: app.localize('EmployeesModule') },
+                   { name: 'Roles', displayName: app.localize('RolesModule') },
+                   { name: 'ChartofAccounts', displayName: app.localize('ChartofAccountsModule') },
+                   { name: 'ProjectChartofAccounts', displayName: app.localize('ProjectChartofAccountsModule') }
             ];
             var moduleListGridStore = view.down('gridpanel[itemId=moduleListGridItemId]').getStore();
             moduleListGridStore.loadData(modules);

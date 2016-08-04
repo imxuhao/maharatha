@@ -56,14 +56,15 @@
             emptyText: app.localize('SelectDatabase'),
             queryMode: 'local',
             store: Ext.create('Chaching.store.administration.organization.ConnectionStringListStore')
-        },
-        {
-            xtype: 'label',
-            padding: '10 0 0 0',
-            style: { color: '#cacaca', fontSize: '15px' },
-            // cls: "grayLabelText",
-            //itemId: 'LinkCompanyMessageItemId',
-            text: abp.localization.localize("TenantGroupMessage")
         }
+        //,
+        //{
+        //    xtype: 'label',
+        //    padding: '10 0 0 0',
+        //    style: { color: '#cacaca', fontSize: '15px' },
+        //    // cls: "grayLabelText",
+        //    //itemId: 'LinkCompanyMessageItemId',
+        //    text: abp.localization.localize("TenantGroupMessage")
+        //}
     ]
 });

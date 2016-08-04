@@ -12,7 +12,7 @@
     <text name="TenantIsNotActive" value="Tenant {0} is not active." />
     <text name="UserIsNotActiveAndCanNotLogin" value="User {0} is not active and can not log in." />
     <text name="PleaseEnterLoginInformation" value="Please enter login information" />
-    <text name="TenancyName" value="Tenancy name" />
+    <text name="TenancyName" value="Tenancy Name" />
     <text name="UserNameOrEmail" value="User name or email" />
     <text name="Password" value="Password" />
     <text name="RememberMe" value="Remember me" />
@@ -59,25 +59,25 @@
     <text name="ResetSuccessfully" value="Reset successfully" />
     <text name="Tenants" value="Tenants" />
     <text name="TenantsHeaderInfo" value="Manage your tenants." />
-    <text name="CreateNewTenant" value="Create new tenant" />
-    <text name="TenancyCodeName" value="Tenancy code name" />
-    <text name="TenantName" value="Tenant name" />
+    <text name="CreateNewTenant" value="Create New Tenant" />
+    <text name="TenancyCodeName" value="Tenancy Code Name" />
+    <text name="TenantName" value="Tenant Name" />
     <text name="TenantDeleteWarningMessage" value="Tenant {0} will be deleted." />
     <text name="AdminEmailAddress" value="admin email" />
-    <text name="AdminPassword" value="admin password" />
-    <text name="AdminPasswordRepeat" value="admin password (repeat)" />
-    <text name="EditTenant" value="Edit tenant" />
+    <text name="AdminPassword" value="Admin Password" />
+    <text name="AdminPasswordRepeat" value="Admin Password (repeat)" />
+    <text name="EditTenant" value="Edit Tenant" />
     <text name="ChangingPermissions" value="Changing permissions" />
     <text name="EditingUser" value="Editing user" />
-    <text name="CreatingNewUser" value="Creating new user" />
+    <text name="CreatingNewUser" value="Creating New User" />
     <text name="Edit" value="Edit" />
     <text name="EditingTenant" value="Editing tenant" />
-    <text name="CreatingNewTenant" value="Creating new tenant" />
+    <text name="CreatingNewTenant" value="Creating New Tenant" />
     <text name="DeletingTenant" value="Deleting tenant" />
     <text name="EditingRole" value="Editing role" />
     <text name="CreatingNewRole" value="Creating new role" />
     <text name="DeletingRole" value="Deleting role" />
-    <text name="CreationTime" value="Creation time" />
+    <text name="CreationTime" value="Creation Time" />
     <text name="SearchWithThreeDot" value="Search..." />
     <text name="ResetSpecialPermissions" value="Reset special permissions" />
     <text name="SavingWithThreeDot" value="Saving..." />
@@ -118,11 +118,11 @@
     <text name="InvalidEmailConfirmationCode" value="Invalid email confirmation code" />
     <text name="InvalidEmailConfirmationCode_Detail" value="Please be sure you entered this page by clicking the link sent to your email. If this not solves the problem, you can re-try to request a new confirmation code." />
     <text name="YourEmailIsConfirmedMessage" value="Your email address is successfully confirmed." />
-    <text name="ShouldChangePasswordOnNextLogin" value="Should change password on next login." />
-    <text name="SetRandomPassword" value="Set random password." />
-    <text name="EmailActivation" value="Email activation" />
+    <text name="ShouldChangePasswordOnNextLogin" value="Should Change Password On Next Login." />
+    <text name="SetRandomPassword" value="Set Random Password." />
+    <text name="EmailActivation" value="Email Activation" />
     <text name="SendEmailActivationLink_Information" value="A link will be sent to your email to activate your email address. If you don't get an email within a few minutes, please re-try." />
-    <text name="SendActivationEmail" value="Send activation email." />
+    <text name="SendActivationEmail" value="Send Activation Email." />
     <text name="ChangePassword" value="Change password" />
     <text name="CurrentPassword" value="Current password" />
     <text name="NewPassword" value="New password" />
@@ -235,13 +235,13 @@
     <text name="Edition" value="Edition" />
     <text name="Editions" value="Editions" />
     <text name="EditionsHeaderInfo" value="Manage editions and features of the application" />
-    <text name="CreateNewEdition" value="Create new edition" />
-    <text name="EditEdition" value="Edit edition" />
+    <text name="CreateNewEdition" value="Create New Edition" />
+    <text name="EditEdition" value="Edit Edition" />
     <text name="EditionProperties" value="Edition properties" />
-    <text name="EditionName" value="Edition name" />
+    <text name="EditionName" value="Edition Name" />
     <text name="Features" value="Features" />
     <text name="EditionDeleteWarningMessage" value="{0} will be deleted and unassigned from all assigned tenants." />
-    <text name="CreatingNewEdition" value="Creating new edition" />
+    <text name="CreatingNewEdition" value="Creating New Edition" />
     <text name="EditingEdition" value="Editing edition" />
     <text name="DeletingEdition" value="Deleting edition" />
     <text name="ChangingFeatures" value="Changing features" />
@@ -251,9 +251,9 @@
     <text name="InvalidFeaturesWarning" value="One or more feature values are not valid!" />
     <text name="Languages" value="Languages" />
     <text name="LanguagesHeaderInfo" value="Manage user interface languages." />
-    <text name="CreateNewLanguage" value="Create new language" />
+    <text name="CreateNewLanguage" value="Create New Language" />
     <text name="Code" value="Code" />
-    <text name="CreatingNewLanguage" value="Creating new language" />
+    <text name="CreatingNewLanguage" value="Creating New Language" />
     <text name="EditingLanguage" value="Editing language" />
     <text name="DeletingLanguages" value="Deleting language" />
     <text name="ChangingTexts" value="Changing texts" />
@@ -282,8 +282,8 @@
     <text name="LookingForMpaVersion" value="Looking for Multi-Page Application Version?" />
     <text name="LookingForSpaVersion" value="Looking for Single-Page Application Version?" />
     <text name="ThisLanguageAlreadyExists" value="This language already exists!" />
-    <text name="OrganizationUnits" value="Organization units" />
-    <text name="OrganizationUnitsHeaderInfo" value="Use organization units to organize users and entities" />
+    <text name="OrganizationUnits" value="Tenant Groups" />
+    <text name="OrganizationUnitsHeaderInfo" value="Use tenant groups to organize users and entities" />
     <text name="OrganizationTree" value="Organization tree" />
     <text name="Members" value="Members" />
     <text name="SelectAnOrganizationUnitToSeeMembers" value="Select an organization unit to see members." />
@@ -1021,7 +1021,7 @@
 <text name="ViewOrganization" value="View Organization" />
 <text name="OrganizationId" value="Organization Id" />
 <text name="OrganizationName" value="Name" />
-<text name="ConnectionString" value="Connection String" />
+<text name="DatabaseName" value="Database Name" />
 <text name="SelectConnectionString" value="Select Connection String" />
 <text name="CopyFromTenants" value="Copy From Tenants" />
 <text name="MenuCompanySetup" value="Company Setup" />
@@ -1030,7 +1030,7 @@
 <text name="SelectTenantToCopyModules" value="Please select tenant to Copy Modules." />
 <text name="ModuleName" value="Module Name" />
 <text name="CompanyList" value="Company List" />
-<text name="SelectOrganization" value="Please select organization." />
+<text name="SelectOrganization" value="Please select tenant group." />
 <text name="OrigAmount" value="Orig amount" />
 <text name="DateNeeded" value="Date needed" />
 <text name="TimeNeeded" value="Time needed" />
@@ -1043,7 +1043,7 @@
 <text name="PaymentCheck" value="Payment check" />
 <text name="ChargeDate" value="Charge date" />
 <text name="DateClose" value="Date close" />
-<text name="TenantCreationWarningMessage" value="You can not change organization for this tenant in future. Do you want to save this tenant in organization?" />
+<text name="TenantCreationWarningMessage" value="You can not change tenant group for this tenant in future. Do you want to save this tenant in tenant group?" />
 <text name="DeleteWarningMessage" value="You want to delete." />
 <text name="TenantInformationMessage" value="Please select user to login as this tenant." />
 <text name="InformationMessage" value="Information" />
@@ -1065,14 +1065,22 @@
 
 <text name="SelectRoleName" value="Please select role name." />
 <text name="CompanyGroup" value="Company Groups" />
-<text name="CreateNewTenantGroup" value="Create new tenant group" />
-<text name="EditTenantGroup" value="Edit tenant group" />
-<text name="ViewTenantGroup" value="View tenant group" />
+<text name="CreateNewTenantGroup" value="Create New Tenant Group" />
+<text name="EditTenantGroup" value="Edit Tenant Group" />
+<text name="ViewTenantGroup" value="View Tenant Group" />
+<text name="TenantGroupName" value="Tenant Group" />
 <text name="SelectDatabase" value="Select database" />
 <text name="TenantGroupMessage" value="Please select database or Tenant will be created in Host database." />
 <text name="PostalCodeEnterText" value="Please enter postal code to get city." />
 <text name="SelectCountry" value="Please select country." />
  <text name="TenantGroups" value="Tenant Groups" />
+ <text name="VendorsModule" value="Vendors" />
+ <text name="UsersModule" value="Users" />
+ <text name="CustomersModule" value="Customers" />
+<text name="EmployeesModule" value="Employees" />
+<text name="RolesModule" value="Roles" />
+<text name="ChartofAccountsModule" value="Chart of Accounts" />
+<text name="ProjectChartofAccountsModule" value="Project Chart of Accounts" />
     
   </texts>
 </localizationDictionary>

@@ -81,7 +81,7 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
     },
      {
          xtype: 'gridcolumn',
-         text: app.localize('ConnectionString'),
+         text: app.localize('DatabaseName'),
          hideable: false,
          flex: 1,
          dataIndex: 'connectionStringName',

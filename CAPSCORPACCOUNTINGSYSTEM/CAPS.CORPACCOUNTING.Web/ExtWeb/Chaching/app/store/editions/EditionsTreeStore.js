@@ -25,13 +25,9 @@
     listeners: {
         load: function (store, record, success) {
             var me = this;
-            var view = store.ownerTree.view,
-                poppedWindow = view.grid.ownerCt.ownerCt.ownerCt;
-            var formTitle = poppedWindow.el.component.title,
-                isEditMode = (formTitle === "Edit Edition" || formTitle === "View Edition");
+            var recordExists = record[0].data.edition;
 
-
-            if (isEditMode) {
+            if (parseInt(recordExists.id) > 0) {
                 for (var i = 0; i < record[0].data.featureValues.length; i++) {
                     var featureValue = record[0].data.featureValues[i];
                     for (var j = 0; j < record[0].data.features.length; j++) {

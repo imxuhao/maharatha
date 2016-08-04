@@ -193,7 +193,7 @@
     <text name="Service" value="Service" />
     <text name="Action" value="Action" />
     <text name="Duration" value="Duration" />
-    <text name="IpAddress" value="IP address" />
+    <text name="IpAddress" value="IP Address" />
     <text name="Client" value="Client" />
     <text name="Browser" value="Browser" />
     <text name="Xms" value="{0} ms" />

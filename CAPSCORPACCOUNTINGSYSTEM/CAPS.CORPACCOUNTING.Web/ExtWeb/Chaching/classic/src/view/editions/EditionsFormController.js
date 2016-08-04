@@ -15,7 +15,8 @@ Ext.define('Chaching.view.editions.EditionsFormController', {
               featureItems = featureStore.getDataSource().items;
 
         var editionTitle = view.el.component.title;
-        if (editionTitle === "Edit Edition" || editionTitle === "View Edition") {
+        var recordClicked = this.getView().getValues();
+        if (parseInt(recordClicked.id) > 0) {
             var recordClicked = this.getView().getValues();
                 var edition = {
                     id: recordClicked.id,

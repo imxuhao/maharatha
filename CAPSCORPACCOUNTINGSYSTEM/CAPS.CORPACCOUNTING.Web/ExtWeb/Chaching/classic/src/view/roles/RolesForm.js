@@ -16,7 +16,7 @@ Ext.define('Chaching.view.roles.RolesForm',
         labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
-    defaultFocus: 'textfield#displayName',
+   
     listeners: {
         resize: 'onRolesFormResize'
     },

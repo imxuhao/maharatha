@@ -16,6 +16,7 @@
         edit: abp.auth.isGranted('Pages.Administration.Host.Settings'),
         destroy: abp.auth.isGranted('Pages.Administration.Host.Settings')
     },
+    defaultFocus: 'textfield#localAddress',
     items: [
         {
             xtype: 'tabpanel',
@@ -24,7 +25,7 @@
             store: 'settings.SettingsStore',
             items: [
                 {
-                    xtype: 'panel',
+                    xtype: 'container',
                     title: abp.localization.localize('General'),
                     itemId: 'generalView',
                     padding: '20 0 20 20',
@@ -38,6 +39,7 @@
                             itemId: 'localAddress',
                             fieldLabel: abp.localization.localize('ThisWebSiteRootAddress'),
                             width: '80%',
+                           
                             labelAlign: 'left',
                             labelWidth: 150,
                             ui: 'fieldLabelTop',

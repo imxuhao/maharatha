@@ -16,7 +16,7 @@
             success: function (result) {
                 var res = Ext.decode(result.responseText),
                          data = res.result;
-                var generalView = view.down('panel[itemId=generalView]');
+                var generalView = view.down('container[itemId=generalView]');
                 if (generalView) {
 
                     var localAddressTextfield = generalView.down('textfield[itemId=localAddress]');
@@ -244,7 +244,7 @@
             jsonData: Ext.encode(data),
 
             success: function () {
-                abp.notify.info(app.localize('SavedSuccessfully'));
+                abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
             },
 
             failure: function () {

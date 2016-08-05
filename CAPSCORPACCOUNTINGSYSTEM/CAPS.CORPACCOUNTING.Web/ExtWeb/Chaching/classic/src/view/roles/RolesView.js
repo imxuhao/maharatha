@@ -13,7 +13,7 @@ Ext.define('Chaching.view.roles.RolesView',{
     width: 550,
     layout: 'fit',
     title: app.localize("Editrole"),
-    defaultFocus: 'roleName',
+    defaultFocus: 'textfield#displayName',
     initComponent: function (config) {       
         var me = this,
             controller = me.getController();

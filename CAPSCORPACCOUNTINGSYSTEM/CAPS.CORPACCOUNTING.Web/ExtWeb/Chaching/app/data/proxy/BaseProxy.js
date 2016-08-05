@@ -77,7 +77,13 @@ Ext.define('Chaching.data.proxy.BaseProxy', {
         if (sorters) {
             for (var i = 0; i < sorters.length; i++) {
                 var sortObject = {
-                    Entity: entityName,
+                    // override to define the sort entity column wise(if you have two entity in grid like tenants screen we have organization and tenant table data)
+                    // define sorter in columnwise if needed like  sortable: true,
+                    //sorter: {
+                    //    property: 'organizationName',
+                    //    sortOnEntity: ''
+                    //},
+                    Entity: (sorters[i].sortOnEntity == undefined || sorters[i].sortOnEntity == null) ? entityName : sorters[i].sortOnEntity,
                     Property: sorters[i].getProperty(),
                     Order: sorters[i].getDirection()
                 };

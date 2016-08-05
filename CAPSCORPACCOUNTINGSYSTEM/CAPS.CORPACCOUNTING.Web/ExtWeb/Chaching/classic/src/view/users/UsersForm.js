@@ -72,7 +72,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 xtype: 'textfield',
                                                 name: 'name',
                                                 itemId: 'name',
-                                                labelWidth: 70,
+                                                labelWidth: 80,
                                                 fieldLabel: app.localize('Name'),
                                                 width: '100%',
                                                 ui: 'fieldLabelTop',
@@ -80,12 +80,11 @@ Ext.define('Chaching.view.users.UsersForm',
                                             },
                                             {
                                                 xtype: 'textfield',
-                                                name: 'surname',
-                                                labelWidth: 70,
-                                                fieldLabel: app.localize('Surname'),
+                                                name: 'emailAddress',
+                                                fieldLabel: app.localize('EmailAddress'),
                                                 width: '100%',
                                                 ui: 'fieldLabelTop',
-                                                emptyText: app.localize('USurname')
+                                                emptyText: app.localize('UEmailAddress')
                                             },
                                             {
                                                 xtype: 'checkbox',
@@ -96,6 +95,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 inputvalue: true,
                                                 uncheckedValue: false,
                                                 checked: false,
+                                                readOnly: true,
                                                 boxLabelCls: 'checkboxLabel',
                                                 listeners: {
                                                     change: 'showRandomPassword'
@@ -154,7 +154,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 labelAlign: 'right',
                                                 inputValue: true,
                                                 uncheckedValue: false,
-                                                checked: true,
+                                                checked: false,
+                                                readOnly: true,
                                                 boxLabelCls: 'checkboxLabel'
                                             }
                                         ]
@@ -167,11 +168,12 @@ Ext.define('Chaching.view.users.UsersForm',
                                         items: [
                                             {
                                                 xtype: 'textfield',
-                                                name: 'emailAddress',
-                                                fieldLabel: app.localize('EmailAddress'),
+                                                name: 'surname',
+                                                labelWidth: 80,
+                                                fieldLabel: app.localize('Surname'),
                                                 width: '100%',
                                                 ui: 'fieldLabelTop',
-                                                emptyText: app.localize('UEmailAddress')
+                                                emptyText: app.localize('USurname')
                                             },
                                             {
                                                 xtype: 'textfield',

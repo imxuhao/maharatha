@@ -38,8 +38,8 @@
     <text name="UsersHeaderInfo" value="Manage users and permissions." />
     <text name="CreateNewUser" value="Create New User" />
     <text name="UserName" value="User Name" />
-    <text name="Name" value="Name" />
-    <text name="Surname" value="Surname" />
+    <text name="Name" value="First Name" />
+    <text name="Surname" value="Last Name" />
     <text name="EmailAddress" value="Email Address" />
     <text name="LastLoginTime" value="Last Login Time" />
     <text name="EditUser" value="Edit User" />
@@ -394,10 +394,10 @@
     <text name="TEdition" value="Select edition" />
     <text name="TAdminEmailAddress" value="Enter admin email address" />
     <text name="MandatoryToolTipText" value="Please fill out this field." />
-    <text name="UName" value="Enter Name" />
-    <text name="USurname" value="Enter Surname" />
+    <text name="UName" value="Enter First Name" />
+    <text name="USurname" value="Enter Last Name" />
     <text name="UUserName" value="Enter User Name" />
-    <text name="UEmailAddress" value="Enter email address" />
+    <text name="UEmailAddress" value="Enter Email Address" />
     <text name="Create" value="Create" />
     <text name="Financials" value="Financials" />
     <text name="Accounts" value="Accounts" />

@@ -30,20 +30,15 @@ Ext.define('Chaching.view.editions.EditionsFormController', {
                 displayName: displayName
             };
         }
-        var features = [
-                      {
-                          name: featureItems[0].data.name,
-                          value: featureItems[0].data.defaultValue
-                      },
-                      {
-                          name: featureItems[1].data.name,
-                          value: featureItems[1].data.defaultValue
-                      },
-                      {
-                          name: featureItems[2].data.name,
-                          value: featureItems[2].data.defaultValue
-                      }
-                ];
+
+        var features = [];
+
+        for (var i = 0; i < featureItems.length; i++) {
+            features.push({
+                name: featureItems[i].data.name,
+                value: featureItems[i].data.defaultValue
+            });
+        }
                 var input = {
                     edition:edition,
                     featureValues: features

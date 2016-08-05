@@ -45,57 +45,50 @@
                 recordsList.push(treeRecord);
             }
             record = recordsList;
-            
-
             var length = record.length;
             var root = me.getRoot();
             root.removeAll();
             root.set('expanded', true);
+            var parents = [];
+            for (var i = 0; i < length; i++) {
+                var item = record[i];
+                if (item.data.parentName != null) {
+                    parents.push(this.buildParent(record, item, root));
+                }
+            }
+
+            uniqueParents = Ext.Array.unique(parents);
+
             for (var i = 0; i < length; i++) {
                 var item = record[i];
                 if (item.data.parentName == null) {
-                    if (item.data.inputType.name === "CHECKBOX") {
-                        root.appendChild({
-                            displayName: item.data.displayName,
-                            inputType: item.data.inputType,
-                            defaultValue: item.data.defaultValue,
-                            name: item.data.name,
-                            description:item.data.description,
-                            expanded: true
-                        });
+                    var isParent = false;
+                    for(var j = 0;j< uniqueParents.length;j++){
+                        if (uniqueParents[j].data.name === item.data.name) {
+                            isParent = true;
+                            break;
+                        }
+                            
                     }
-
-                    else if (item.data.inputType.name === "SINGLE_LINE_STRING") {
-                        root.appendChild({
-                            displayName: item.data.displayName,
-                            inputType: item.data.inputType,
-                            defaultValue: item.data.defaultValue,
-                            name: item.data.name,
-                            description: item.data.description,
-                            expanded: true
-                        });
-                    }
-
-                    else {
-                        root.appendChild({
-                            displayName: item.data.displayName,
-                            inputType: item.data.inputType,
-                            defaultValue: item.data.defaultValue,
-                            name: item.data.name,
-                            description: item.data.description,
-                            expanded: true
-                        });
-                    }
-                }
-                else {
-                    this.buildParent(record, item, root);
+                        if (isParent)
+                            root.appendChild(uniqueParents[j]);
+                        else {
+                            root.appendChild({
+                                displayName: item.data.displayName,
+                                defaultValue: item.data.defaultValue,
+                                inputType: item.data.inputType,
+                                name: item.data.name,
+                                description: item.data.description,
+                                expanded: true
+                            });
+                        }
                 }
             }
         }
         
     },
 
-    buildParent: function (records, child,root) {
+    buildParent: function (records, child, root) {
         var parentRoot;
         for (i = 0; i < records.length; i++) {
             if (records[i].data.name == child.get('parentName')) {
@@ -104,7 +97,7 @@
         }
         if (parentRoot) {
             parentRoot.set('expanded', true);
-            parentRoot.insertChild(0,
+            parentRoot.appendChild(
             {
                 displayName: child.data.displayName,
                 defaultValue: child.data.defaultValue,
@@ -114,11 +107,8 @@
                 expanded: true,
                 leaf: true
             });
-
-            root.removeAll();
-            root.set('expanded', true);
-            root.appendChild(parentRoot);
         }
+        return parentRoot;
     }
 
 });

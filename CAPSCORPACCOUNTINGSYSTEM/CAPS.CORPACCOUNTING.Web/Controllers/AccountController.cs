@@ -41,6 +41,7 @@ using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
 using System.Threading;
 using Abp.Domain.Repositories;
+using Abp.Web.Models;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
@@ -152,7 +153,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 {
                     loginResult.User.SetNewPasswordResetCode();
 
-                    return Json(new MvcAjaxResponse
+                    return Json(new AjaxResponse
                     {
                         TargetUrl = Url.Action(
                             "ResetPassword",
@@ -180,7 +181,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 returnUrl = returnUrl + returnUrlHash;
             }
 
-            return Json(new MvcAjaxResponse { TargetUrl = returnUrl });
+            return Json(new AjaxResponse { TargetUrl = returnUrl });
         }
 
 
@@ -558,7 +559,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
             await UnitOfWorkManager.Current.SaveChangesAsync();
 
-            return Json(new MvcAjaxResponse());
+            return Json(new AjaxResponse());
         }
 
         [UnitOfWork]
@@ -645,7 +646,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             user.SetNewEmailConfirmationCode();
             await _userEmailer.SendEmailActivationLinkAsync(user);
 
-            return Json(new MvcAjaxResponse());
+            return Json(new AjaxResponse());
         }
 
         [UnitOfWork]
@@ -1061,7 +1062,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
         public virtual JsonResult IsImpersonatedLogin()
         {
-            return Json(new MvcAjaxResponse { Result = AbpSession.ImpersonatorUserId.HasValue });
+            return Json(new AjaxResponse { Result = AbpSession.ImpersonatorUserId.HasValue });
         }
 
         public virtual async Task<JsonResult> BackToImpersonator()
@@ -1126,7 +1127,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Create target URL
             var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/ImpersonateSignIn?tokenId=" +
                             tokenId;
-            return Json(new MvcAjaxResponse { TargetUrl = targetUrl });
+            return Json(new AjaxResponse { TargetUrl = targetUrl });
         }
 
         private async Task<JsonResult> SaveImpersonationTokenAndGetTargetUrlForThisUser(int? tenantId, long userId,
@@ -1161,7 +1162,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Create target URL
             var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) + "Account/ImpersonateSignInUser?tokenId=" +
                             tokenId;
-            return Json((new MvcAjaxResponse { TargetUrl = targetUrl }), JsonRequestBehavior.AllowGet);
+            return Json((new AjaxResponse { TargetUrl = targetUrl }), JsonRequestBehavior.AllowGet);
             //return Json( targetUrl,JsonRequestBehavior.AllowGet);
         }
 
@@ -1255,7 +1256,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             //Create target URL
             var targetUrl = _webUrlService.GetSiteRootAddress(tenancyName) +
                             "Account/SwitchToLinkedAccountSignIn?tokenId=" + tokenId;
-            return Json(new MvcAjaxResponse { TargetUrl = targetUrl });
+            return Json(new AjaxResponse { TargetUrl = targetUrl });
         }
 
         #endregion
@@ -1324,7 +1325,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 authenticationManager.AuthenticationResponseGrant = new AuthenticationResponseGrant(new ClaimsPrincipal(identity), new AuthenticationProperties() { IsPersistent = false });
 
             }
-            return Json(new MvcAjaxResponse
+            return Json(new AjaxResponse
             {
 
             });

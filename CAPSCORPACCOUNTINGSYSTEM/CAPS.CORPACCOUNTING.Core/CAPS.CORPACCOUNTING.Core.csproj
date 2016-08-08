@@ -34,20 +34,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.10.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.0.10.1.2\lib\net452\Abp.dll</HintPath>
+    <Reference Include="Abp, Version=0.10.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.0.10.3.1\lib\net452\Abp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.AutoMapper, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.AutoMapper.0.10.1.0\lib\net452\Abp.AutoMapper.dll</HintPath>
+    <Reference Include="Abp.AutoMapper, Version=0.10.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.AutoMapper.0.10.3.1\lib\net452\Abp.AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Abp.EntityFramework, Version=0.8.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Abp.EntityFramework.0.8.3.0\lib\net452\Abp.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Abp.HangFire, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.HangFire.0.10.1.0\lib\net452\Abp.HangFire.dll</HintPath>
+    <Reference Include="Abp.HangFire, Version=0.10.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Abp.HangFire.0.10.3.1\lib\net452\Abp.HangFire.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Abp.Zero, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -90,8 +90,8 @@
       <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Hangfire.Core, Version=1.5.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.Core.1.5.9\lib\net45\Hangfire.Core.dll</HintPath>
+    <Reference Include="Hangfire.Core, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.6.0\lib\net45\Hangfire.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LinqKit">

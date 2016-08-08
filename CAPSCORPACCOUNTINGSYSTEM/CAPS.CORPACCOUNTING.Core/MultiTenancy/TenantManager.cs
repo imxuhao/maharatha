@@ -271,10 +271,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     newAdminId = adminUser.Id;
 
                 }
-                if (ReferenceEquals(connectionstringUnit,null))
-                    await CustomTenantSeeding(newTenantId);
-                if (sourcetenantId.HasValue)
-                    await CloneTenantData(newTenantId, sourcetenantId, entityList);
+                //if (ReferenceEquals(connectionstringUnit,null))
+                //    await CustomTenantSeeding(newTenantId);
+                //if (sourcetenantId.HasValue)
+                //    await CloneTenantData(newTenantId, sourcetenantId, entityList);
 
                 await uow.CompleteAsync();
             }

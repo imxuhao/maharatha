@@ -80,12 +80,12 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                 using (var bmpImage = new Bitmap(tempFilePath))
                 {
-                    return Json(new MvcAjaxResponse(new { fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
+                    return Json(new AjaxResponse(new { fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
                 }
             }
             catch (UserFriendlyException ex)
             {
-                return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
+                return Json(new AjaxResponse(new ErrorInfo(ex.Message)));
             }
         }
 
@@ -140,10 +140,10 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
            
             //return byteArray;
             var base64String = Convert.ToBase64String(byteArray);
-            return Json(new MvcAjaxResponse(new { image = base64String, success = true }), JsonRequestBehavior.AllowGet);
+            return Json(new AjaxResponse(new { image = base64String, success = true }), JsonRequestBehavior.AllowGet);
         } catch (UserFriendlyException ex)
             {
-                return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
+                return Json(new AjaxResponse(new ErrorInfo(ex.Message)));
             }
             //return Json((new { image = base64String, success = true }), JsonRequestBehavior.AllowGet);
         }
@@ -237,12 +237,12 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 user.ProfilePictureId = storedFile.Id;
 
                 //Return success
-                return Json(new MvcAjaxResponse());
+                return Json(new AjaxResponse());
             }
             catch (UserFriendlyException ex)
             {
                 //Return error message
-                return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
+                return Json(new AjaxResponse(new ErrorInfo(ex.Message)));
             }
         }
 
@@ -281,12 +281,12 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                 using (var bmpImage = new Bitmap(tempFilePath))
                 {
-                    return Json(new MvcAjaxResponse(new { fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
+                    return Json(new AjaxResponse(new { fileName = tempFileName, width = bmpImage.Width, height = bmpImage.Height }));
                 }
             }
             catch (UserFriendlyException ex)
             {
-                return Json(new MvcAjaxResponse(new ErrorInfo(ex.Message)));
+                return Json(new AjaxResponse(new ErrorInfo(ex.Message)));
             }
         }
 

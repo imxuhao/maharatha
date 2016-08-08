@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading;
 using Abp.Dependency;
 using System;
+using CAPS.CORPACCOUNTING.CoreHelper;
 
 namespace CAPS.CORPACCOUNTING.Sessions
 {
@@ -14,7 +15,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
             {
                 var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
-                var organizationClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "Application_UserOrgID");
+                var organizationClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.ApplicationUserOrgId);
                 if (string.IsNullOrEmpty(organizationClaim?.Value))
 
                 {
@@ -51,11 +52,69 @@ namespace CAPS.CORPACCOUNTING.Sessions
             {
                 var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.HasGLRestrictions);
+
+                return Convert.ToBoolean(tenantClaim.Value);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HasLineRestrictions
+        {
+            get
+            {
+                var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.HasLineRestrictions);
+
+                return Convert.ToBoolean(tenantClaim.Value);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HasProjectRestriction
+        {
+            get
+            {
+                var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+
                 var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
 
                 return Convert.ToBoolean(tenantClaim.Value);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HasDivisionRestriction
+        {
+            get
+            {
+                var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
+
+                return Convert.ToBoolean(tenantClaim.Value);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HasBankRestriction
+        {
+            get
+            {
+                var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
+
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
+
+                return Convert.ToBoolean(tenantClaim.Value);
+            }
+        }
     }
 }

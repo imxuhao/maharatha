@@ -223,6 +223,7 @@
     <Compile Include="Common\WorkFlowLogUnit.cs" />
     <Compile Include="Common\WorkFlowUnit.cs" />
     <Compile Include="Common\WorkSheet1099Unit.cs" />
+    <Compile Include="CoreHelper\ClaimKeys.cs" />
     <Compile Include="CoreHelper\CoreHelpers.cs" />
     <Compile Include="EFAuditLog\INeedModLog.cs" />
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />

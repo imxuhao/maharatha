@@ -18,12 +18,9 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.PettyCash;
 using CAPS.CORPACCOUNTING.PurchaseOrders;
 using CAPS.CORPACCOUNTING.Sessions;
-using Abp.Organizations;
-using Abp.Runtime.Session;
 using CAPS.CORPACCOUNTING.Organization;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using Abp.Authorization.Users;
-using System.Linq.Expressions;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {

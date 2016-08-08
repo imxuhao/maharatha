@@ -39,6 +39,7 @@
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/tenant/GetCompanySettingsForEdit',
             method: 'POST',
+            timeout: 120000,
             success: function (response) {
                 var result = Ext.decode(response.responseText);
                 if (result.success) {

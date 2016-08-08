@@ -8898,13 +8898,13 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetCountryList">
             <summary>
-            Get PaymentTerms
+            Get CountryList
             </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.VendorUnitAppService.GetRegionList">
             <summary>
-            Get PaymentTerms
+            Get RegionList
             </summary>
             <returns></returns>
         </member>
@@ -11524,6 +11524,26 @@
             <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Sessions.CustomAppSession.HasGLRestrictions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Sessions.CustomAppSession.HasLineRestrictions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Sessions.CustomAppSession.HasProjectRestriction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Sessions.CustomAppSession.HasDivisionRestriction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Sessions.CustomAppSession.HasBankRestriction">
             <summary>
             
             </summary>

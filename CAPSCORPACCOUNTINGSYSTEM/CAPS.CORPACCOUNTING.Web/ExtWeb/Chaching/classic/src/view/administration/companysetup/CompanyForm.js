@@ -65,7 +65,7 @@
                                         {
                                             xtype: 'textfield',
                                             name: 'companyName',
-                                            readOnly: true,
+                                            readOnly: false,
                                             fieldLabel: app.localize('TenantName'),
                                             width: '100%',
                                             ui: 'fieldLabelTop'

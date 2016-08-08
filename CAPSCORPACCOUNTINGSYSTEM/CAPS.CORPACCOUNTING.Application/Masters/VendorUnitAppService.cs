@@ -484,26 +484,32 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetPaymentTermsList()
         {
-            var Payterms = await _vendorPaytermRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
-            return Payterms;
+            var payterms = await _vendorPaytermRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return payterms;
         }
 
         /// <summary>
-        /// Get PaymentTerms
+        /// Get CountryList
         /// </summary>
         /// <returns></returns>
         public async Task<List<CountryListDto>> GetCountryList()
         {
-            var countryList = await (from country in _countryRepository.GetAll()
-                                     //join typeOfCountry in _typeOfCountryRepository.GetAll() on country.TypeOfCountryId equals typeOfCountry.Id
-                                     select new CountryListDto { Description = country.Description, CountryId = country.Id,
-                                         IsoCode = country.TwoLetterAbbreviation}).ToListAsync();
+            using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
+            {
+                var countryList = await (from country in _countryRepository.GetAll().Where(p => p.TenantId == null)
+                    select new CountryListDto
+                    {
+                        Description = country.Description,
+                        CountryId = country.Id,
+                        IsoCode = country.TwoLetterAbbreviation
+                    }).ToListAsync();
 
-            return countryList;
+                return countryList;
+            }
         }
 
         /// <summary>
-        /// Get PaymentTerms
+        /// Get RegionList
         /// </summary>
         /// <returns></returns>
         public async Task<List<RegionListDto>> GetRegionList()

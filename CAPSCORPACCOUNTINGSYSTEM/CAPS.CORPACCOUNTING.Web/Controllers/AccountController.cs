@@ -21,7 +21,6 @@ using Abp.Threading;
 using Abp.Timing;
 using Abp.UI;
 using Abp.Web.Mvc.Authorization;
-using Abp.Web.Mvc.Models;
 using Abp.Zero.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -41,11 +40,12 @@ using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
 using System.Threading;
 using Abp.Domain.Repositories;
+using CAPS.CORPACCOUNTING.CoreHelper;
 using Abp.Web.Models;
 using CAPS.CORPACCOUNTING.Helpers;
-using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
+using CAPS.CORPACCOUNTING.Organization;
 
 namespace CAPS.CORPACCOUNTING.Web.Controllers
 {
@@ -68,6 +68,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         private readonly IAccountCache _accountCache;
         private readonly IDivisionCache _projectCache;
         private readonly IBankAccountCache _bankCache;
+        private readonly IRepository<OrganizationExtended, long> _organizationUnitRepository;
+
 
 
         private IAuthenticationManager AuthenticationManager
@@ -88,9 +90,10 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             IWebUrlService webUrlService,
             AbpLoginResultTypeHelper abpLoginResultTypeHelper,
             IUserLinkManager userLinkManager,
-            INotificationSubscriptionManager notificationSubscriptionManager, 
-            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository, 
-            IAccountCache accountCache, IDivisionCache projectCache, IBankAccountCache bankCache)
+            INotificationSubscriptionManager notificationSubscriptionManager,
+            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
+            IAccountCache accountCache, IDivisionCache projectCache, IBankAccountCache bankCache,
+            IRepository<OrganizationExtended, long> organizationUnitRepository)
         {
             _userManager = userManager;
             _multiTenancyConfig = multiTenancyConfig;
@@ -109,6 +112,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             _accountCache = accountCache;
             _projectCache = projectCache;
             _bankCache = bankCache;
+            _organizationUnitRepository = organizationUnitRepository;
         }
 
         #region Login / Logout
@@ -197,8 +201,8 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             {
                 identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             }
-            //await AddSecurityFlagsToClaims(identity,user);
-            identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId)));
+           // await AddSecurityFlagsToClaims(identity,user);
+            identity.AddClaim(new Claim(ClaimKeys.ApplicationUserOrgId, Convert.ToString(user.DefaultOrganizationId)));
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = rememberMe }, identity);
         }
@@ -213,14 +217,22 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
         {
             using (_unitOfWorkManager.Current.SetTenantId(user.TenantId))
             {
-                
+
                 AutoSearchInput input = new AutoSearchInput();
-                
+
+
+                var typeOfEntityClassificationList = Enum.GetValues(typeof(EntityClassification)).Cast<EntityClassification>().Select(x => x)
+                .ToDictionary(u => u.ToDescription(), u => (int)u)
+                .Select(u => u.Key).ToArray();
+
+                var strTypeOfEntityClassification = string.Join(",", typeOfEntityClassificationList);
+
+
                 //Get Accounts from cache
                 var accountList = await _accountCache.GetAccountCacheItemAsync(
                     CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(user.TenantId), null),
                     input);
-              
+
                 //Get Projects from cache
                 var projectList = await _projectCache.GetDivisionCacheItemAsync(
                    CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(user.TenantId), null),
@@ -232,22 +244,31 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                    input);
 
                 //Get userOrganizations from database
-                var userorganizationList =
-                    await _userOrganizationUnitRepository.GetAllListAsync(p => p.UserId == user.Id);
+                var userorganizationList = await (from userorganization in _userOrganizationUnitRepository.GetAll().Where(p => p.UserId == user.Id)
+                                                  join organization in _organizationUnitRepository.GetAll()
+                                                  .Where(p => strTypeOfEntityClassification.Contains(p.EntityClassificationId.ToString()))
+                                                  on userorganization.OrganizationUnitId equals organization.Id
+                                                  select new
+                                                  {
+                                                      OrganizationUnitId = userorganization.OrganizationUnitId,
+                                                      EntityClassification = organization.EntityClassificationId
+                                                  }).ToListAsync();
+
+
 
                 //setting the security flag for AccountSecurity
                 //if the loggedin user is assigned any accountSecurity(CorporateCOA) this flag will be true
                 bool accountSecurityFlag =
                     (from account in accountList.ToList().Where(p => p.IsCorporate == true)
-                        join userorganization in userorganizationList on account.OrganizationUnitId equals
-                            userorganization.OrganizationUnitId
-                        select account).Any();
+                     join userorganization in userorganizationList.Where(p=>p.EntityClassification == EntityClassification.Account) on account.OrganizationUnitId equals
+                         userorganization.OrganizationUnitId
+                     select account).Any();
 
                 //setting the security flag for LineSecurity
                 //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
                 bool lineSecurityFlag =
                    (from account in projectList.ToList().Where(p => p.IsDivision == false)
-                    join userorganization in userorganizationList on account.OrganizationUnitId equals
+                    join userorganization in userorganizationList.Where(p => p.EntityClassification == EntityClassification.Line) on account.OrganizationUnitId equals
                          userorganization.OrganizationUnitId
                     select account).Any();
 
@@ -255,7 +276,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
                 bool projectSecurityFlag =
                   (from project in projectList.ToList().Where(p => p.IsDivision == false)
-                   join userorganization in userorganizationList on project.OrganizationUnitId equals
+                   join userorganization in userorganizationList.Where(p => p.EntityClassification == EntityClassification.Project) on project.OrganizationUnitId equals
                         userorganization.OrganizationUnitId
                    select project).Any();
 
@@ -263,7 +284,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
                 bool divisionSecurityFlag =
                   (from project in projectList.ToList().Where(p => p.IsDivision == true)
-                   join userorganization in userorganizationList on project.OrganizationUnitId equals
+                   join userorganization in userorganizationList.Where(p => p.EntityClassification == EntityClassification.Division) on project.OrganizationUnitId equals
                         userorganization.OrganizationUnitId
                    select project).Any();
 
@@ -271,7 +292,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
                 bool bankSecurityFlag =
                   (from bankAccount in bankList.ToList()
-                   join userorganization in userorganizationList on bankAccount.OrganizationUnitId equals
+                   join userorganization in userorganizationList.Where(p => p.EntityClassification == EntityClassification.BankAccount) on bankAccount.OrganizationUnitId equals
                         userorganization.OrganizationUnitId
                    select bankAccount).Any();
 
@@ -1288,9 +1309,9 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             var user = await _userManager.GetUserByIdAsync(userId);
             if (user.DefaultOrganizationId.HasValue)
             {
-                identity.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(user.DefaultOrganizationId.Value)));
+                identity.AddClaim(new Claim(ClaimKeys.ApplicationUserOrgId, Convert.ToString(user.DefaultOrganizationId.Value)));
             }
-           // await  AddSecurityFlagsToClaims(identity, user);
+             //await  AddSecurityFlagsToClaims(identity, user);
         }
 
 
@@ -1314,13 +1335,13 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             if (claimsPrincipal != null)
             {
                 var identity = claimsPrincipal.Identity as ClaimsIdentity;
-                var orgClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "Application_UserOrgID");
+                var orgClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.ApplicationUserOrgId);
                 if (orgClaim != null)
                 {
                     identity?.RemoveClaim(orgClaim);
                 }
 
-                identity?.AddClaim(new Claim("Application_UserOrgID", Convert.ToString(input.OrganizationUnitId)));
+                identity?.AddClaim(new Claim(ClaimKeys.ApplicationUserOrgId, Convert.ToString(input.OrganizationUnitId)));
                 var authenticationManager = System.Web.HttpContext.Current.GetOwinContext().Authentication;
                 authenticationManager.AuthenticationResponseGrant = new AuthenticationResponseGrant(new ClaimsPrincipal(identity), new AuthenticationProperties() { IsPersistent = false });
 

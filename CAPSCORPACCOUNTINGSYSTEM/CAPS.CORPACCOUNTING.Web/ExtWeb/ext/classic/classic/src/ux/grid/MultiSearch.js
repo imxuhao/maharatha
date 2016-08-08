@@ -922,8 +922,13 @@ Ext.define('Ext.saki.grid.MultiSearch', {
      */
     , setValues: function (values, preventFilter) {
         var me = this
-            , field
-        ;
+            , field;
+
+        var filterStore = me.getStore();
+        if (preventFilter && filterStore.remoteFilter === false && filterStore.isRangeFilters) {
+            preventFilter = false;
+        }
+
         if (values && Ext.isObject(values)) {
             me.clearValues(true);
             Ext.Object.each(values, function (key, value) {
@@ -934,7 +939,9 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                         field.suspendEvents();
                     }
                     field.setValue(value);
-                    field.resetOriginalValue();
+                    
+                    if (!filterStore.isRangeFilters)
+                        field.resetOriginalValue();
 
                     if (true === preventFilter) {
                         field.resumeEvents();
@@ -942,6 +949,7 @@ Ext.define('Ext.saki.grid.MultiSearch', {
                 }
             });
         }
+        filterStore.isRangeFilters = false;
     }
 
     /**

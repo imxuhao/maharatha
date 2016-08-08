@@ -190,6 +190,9 @@ border-width: 10px;
     cursor: pointer;
     vertical-align: bottom;
 }
+.rangeSelectorTriggerCls:before {
+    content: "\f074" !important;
+}
 /*Global radiobuttons look */
 .x-form-cb-checked .x-form-radio-default:before {
     content: "\f058" !important;

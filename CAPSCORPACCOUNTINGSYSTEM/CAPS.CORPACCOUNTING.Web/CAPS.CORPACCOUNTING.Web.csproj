@@ -3700,6 +3700,7 @@
     <Content Include="ExtWeb\Chaching\app\store\ARPaymentTermsListStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankSetupStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\banking\banksetup\BankCheckNumberStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\base\BaseTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\TransactionDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\customers\CustomersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\editions\EditionsTreeStore.js" />
@@ -3859,9 +3860,9 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodForm.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\import\ImportForm.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\import\ImportFormController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\import\ImportView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditWindow.js" />

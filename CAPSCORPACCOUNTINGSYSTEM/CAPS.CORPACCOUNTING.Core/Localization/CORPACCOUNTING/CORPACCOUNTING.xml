@@ -1100,5 +1100,10 @@
 <text name="ProjectSecurity" value="Project Security" />
 <text name="CreditCardCoa" value="Credit Card Security" />
 <text name="BankCoa" value="Bank Security" />
+    <text name="Range" value="Enter range" />
+    <text name="RangeMessage" value="Ex. 1001..1010;1000-01..1000-10" />
+    <text name="InvalidRange" value="Range entered is invalid. Please enter correct range." />
+    <text name="AppUpdate" value="Application Update"/>
+    <text name="AppUpdateMessage" value="This application has an update, reload?"/>
   </texts>
 </localizationDictionary>

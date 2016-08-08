@@ -714,7 +714,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 dataIndex: 'itemMemo',
                 name: 'itemMemo',
                 text: app.localize('ItemMemo').initCap(),
-                width: '10%',
+                flex:1,
+                minWidth: 100,
                 hideable: false,
                 filterField:Chaching.utilities.ChachingGlobals.getTextField(app.localize('ToolTipItemMemo')),
                 editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize('ToolTipItemMemo'))

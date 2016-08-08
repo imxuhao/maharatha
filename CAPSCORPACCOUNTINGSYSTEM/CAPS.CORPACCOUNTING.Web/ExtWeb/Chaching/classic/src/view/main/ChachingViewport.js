@@ -48,8 +48,8 @@ Ext.define('Chaching.view.main.ChachingViewport', {
             },
             bodyStyle: {
                 'background-color': '#F3F5F9',
-                //'padding':'5px'
-                'padding': '10px 20px 20px 20px'
+                'padding':'5px'
+                //'padding': '10px 20px 20px 20px'
             },
             border: false,
             scrollable: true,

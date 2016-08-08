@@ -50,6 +50,56 @@ Ext.define('Chaching.view.manageView.ManageViewListController', {
         }
         return false;
     },
+    doPostSaveOperations: function (records, operation, success) {
+        //update local collection of default views
+        var deferred = new Ext.Deferred();
+        var defaultViewSettingStore = Ext.create('Chaching.store.manageView.ManageViewStore');
+        var filters = [];
+        var filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: true,
+            comparator: 1,
+            dataType: 3,
+            property: 'isDefault',
+            value: true
+        });
+        filters.push(filter);
+        filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId,
+            comparator: 2,
+            dataType: 0,
+            property: 'userId',
+            value: Chaching.utilities.ChachingGlobals.loggedInUserInfo.userId
+        });
+        filters.push(filter);
+        defaultViewSettingStore.filter(filters);
+        defaultViewSettingStore.load({
+            callback: function(records, operation, success) {
+                if (success && records && records.length > 0) {
+                    var usersDefaultGridViewSettings = [];
+                    var rec;
+                    Ext.each(records,
+                        function(record) {
+                            if (record.get('isDefault')) {
+                                rec = {
+                                    gridId: record.get('viewId'),
+                                    userViewId: record.get('userViewId'),
+                                    viewSettingName: record.get('viewName'),
+                                    viewSettings: record.get('viewSettings'),
+                                    isDefault: record.get('isDefault')
+                                }
+                                usersDefaultGridViewSettings.push(rec);
+                            }
+                        });
+                    Chaching.utilities.ChachingGlobals.usersDefaultGridViewSettings = usersDefaultGridViewSettings;
+
+                }
+                deferred.resolve('{success:true}');
+            }
+        });
+        return deferred.promise;
+    },
     onBeforeRowCellClick: function (view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
         record.set('ColumnIndex', cellIndex);
     },

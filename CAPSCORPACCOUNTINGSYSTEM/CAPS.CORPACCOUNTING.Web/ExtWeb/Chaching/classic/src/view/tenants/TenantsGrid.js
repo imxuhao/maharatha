@@ -45,8 +45,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
         iconCls: 'fa fa-user',
         clickActionName: 'loginAsThisTenantClick',
         itemId: 'loginAsThisTenantActionMenu'
-    }
-    ],
+    }],
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
@@ -54,8 +53,10 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     editingMode: 'row',
     createNewMode:'popup',
     columnLines: true,
-    forceFit: true,
     multiColumnSort: true,
+    layout: {
+        type:'fit'
+    },
     editWndTitleConfig: {
         title: app.localize('EditTenant'),
         iconCls: 'fa fa-pencil'
@@ -73,7 +74,6 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             xtype: 'gridcolumn',
             text: app.localize('TenancyName'),
             dataIndex: 'tenancyName',
-            stateId: 'tenancyName',
             sortable: true,
             width: '15%',
             groupable: true,
@@ -88,7 +88,6 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             xtype: 'gridcolumn',
             text: app.localize('TenantGroupName'),
             dataIndex: 'organizationName',
-            stateId: 'organizationName',
             sortable: true,
             sorter: {
                 property : 'organizationName',
@@ -107,7 +106,6 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
               xtype: 'gridcolumn',
               text: app.localize('ServerName'),
               dataIndex: 'serverName',
-              stateId: 'serverName',
               sortable: false,
               width: '20%',
               groupable: true
@@ -116,7 +114,6 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             xtype: 'gridcolumn',
             text: app.localize('DatabaseName'),
             dataIndex: 'databaseName',
-            stateId: 'databaseName',
             sortable: false,
             width: '10%',
             groupable: true

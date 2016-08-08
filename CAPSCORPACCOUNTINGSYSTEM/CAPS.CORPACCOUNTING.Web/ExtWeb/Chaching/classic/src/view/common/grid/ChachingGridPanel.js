@@ -458,8 +458,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     var newInitialConfigs = [];
                     for (var j = 0; j < defaultSetting.length; j++) {
                         var configCol = defaultSetting[j];
-                        if (configCol && typeof(configCol.getInitialConfig) === 'function') {
-                            newInitialConfigs.push(configCol.initialConfig);
+                        if (configCol && typeof (configCol.getInitialConfig) === 'function') {
+                            var colCfg = configCol.initialConfig;
+                            if (colCfg.xtype === "actioncolumn") {
+                                colCfg.items = configCol.items;
+                            }
+                            newInitialConfigs.push(colCfg);
                         }
                     }
                     var newColumns = [];

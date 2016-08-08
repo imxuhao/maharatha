@@ -274,9 +274,10 @@ Ext.define('Chaching.Application', {
         return deferred.promise;
     },
     onAppUpdate: function() {
-        Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
-            function(choice) {
-                if (choice === 'yes') {
+        abp.message.confirm(app.localize('AppUpdate'),
+            app.localize('AppUpdateMessage'),
+            function(isConfirmed) {
+                if (isConfirmed) {
                     window.location.reload();
                 }
             }

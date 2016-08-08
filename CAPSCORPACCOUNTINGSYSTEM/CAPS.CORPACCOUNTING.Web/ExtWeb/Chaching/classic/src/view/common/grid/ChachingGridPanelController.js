@@ -59,8 +59,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         var me = this,
         view = me.getView(),
         importConfig = view.importConfig,
-        entityName = importConfig.entity;
-        importView = Ext.create('Chaching.view.import.ImportView');
+        entityName = importConfig.entity,
+        importView = Ext.create('Chaching.view.imports.ImportsView'),
         importFormController = importView.down('form').getController();
         importFormController.entityName = entityName;
         importFormController.parentController = me;

@@ -403,7 +403,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 dataIndex: 'caption',
                                                 sortable: true,
                                                 groupable: true,
-                                                width: '47%',
+                                                flex:1,
                                                 filterField: {
                                                     xtype: 'textfield',
                                                     width: '15%'
@@ -415,6 +415,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                         leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
                                         rightStore: 'Chaching.store.users.SecurityAccessStore',
                                         requireMultiSearch: true,
+                                        rangeSelectorConfig: {
+                                            entityName: '',
+                                            propertyName: 'accountNumber'
+                                        },
                                         selModelConfig: {
                                             selType: 'chachingCheckboxSelectionModel',
                                             injectCheckbox: "first",

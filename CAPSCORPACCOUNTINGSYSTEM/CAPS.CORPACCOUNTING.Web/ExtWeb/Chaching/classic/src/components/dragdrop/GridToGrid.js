@@ -106,7 +106,13 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
         * Possible values are lefttoright,righttoleft and both
         * Defuaults to 'false'      
         */
-        dragDropDirection:'both'
+        dragDropDirection: 'both',
+        /**
+        * @cfg {Object}
+        * Range selector config  
+        * Defaults to Null
+        */
+        rangeSelectorConfig:null
     },
     /**
     * @hide
@@ -246,6 +252,45 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
                 filterOnEnter: false
             });
         }
+        var rangeSelector = null;
+        if (me.getRangeSelectorConfig()) {
+            rangeSelector = {
+                xtype: 'toolbar',
+                dock: 'bottom',
+                ui: 'plain',
+                layout: {
+                    type:'hbox'
+                },
+                items:[
+                {
+                    xtype: 'textfield',
+                    ui: 'fieldLabelTop',
+                    width:'70%',
+                    fieldLabel: app.localize('Range').initCap(),
+                    emptyText: app.localize('RangeMessage'),
+                    maxLength: 200,
+                    selectOnFocus: true,
+                    itemId:'rangeBox',
+                    enforceMaxLength: true,
+                    regex: /^(([0-9-]+([;]{0,1}[0-9-]+)*)*|([0-9-]+([.]{2})+[0-9-]+([;]{0,1}[0-9-]+)*)*)$/,
+                    triggers: {
+                        rangeSelector: {
+                            cls: 'rangeSelectorTriggerCls',
+                            handler:me.onRangeActionClick
+                        }
+                    },
+                    listeners: {
+                        specialkey:me.onRangeActionEnter
+                    }
+                },'->', {
+                    xtype: 'button',
+                    ui: 'actionButton',
+                    text: app.localize('Reset').toUpperCase(),
+                    iconCls: 'fa fa-hourglass-start',
+                    handler:me.resetRangeFilters
+                }]
+            }
+        }
         me.items = [
             {
                 xtype: 'gridpanel',
@@ -261,6 +306,7 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
                 cls: 'chaching-grid',
                 ui: 'dragDropPanel',
                 border: false,
+                dockedItems: rangeSelector,
                 viewConfig: {
                     plugins: leftPlugins,
                     listeners: {
@@ -312,6 +358,7 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
                 cls: 'chaching-grid',
                 ui: 'dragDropPanel',
                 border: false,
+                dockedItems: rangeSelector,
                 viewConfig: {
                     plugins: rightPlugins,
                     listeners: {
@@ -388,5 +435,101 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
     getRightGrid: function () {
         var me = this;
         return me.down('gridpanel[itemId=rightGrid]');
+    },
+    onRangeActionClick: function(field, trigger, e) {
+        var me = this,
+           gridToGrid = me.up('chachingGridDragDrop');
+        if (field.getValue()&&field.isValid()) {
+            gridToGrid.onRangeAction(gridToGrid, field);
+        } else {
+            abp.notify.warn(app.localize('InvalidRange'));
+        }
+    },
+    onRangeActionEnter: function(field, e, eOpts) {
+        var me = this,
+            gridToGrid = me.up('chachingGridDragDrop');
+        if (e.getKey() === e.ENTER) {
+            e.stopEvent();
+            if (field.isValid() && field.getValue())
+                gridToGrid.onRangeAction(gridToGrid, field);
+            else abp.notify.warn(app.localize('InvalidRange'));
+        }
+    },
+    onRangeAction:function(me,field) {
+        var parentGrid = field.up('grid'),
+            parentGridStore = parentGrid.getStore(),
+            parentGridSelModel=parentGrid.getSelectionModel(),
+            rangeSelectorConfig = me.getRangeSelectorConfig();
+        if (parentGridStore) {
+            ///TODO: Create new multi range comparator on server filters.
+            parentGridStore.clearFilter(true);
+            parentGridSelModel.deselectAll();
+            var filters = [];
+            var filter = new Ext.util.Filter({
+                entity: rangeSelectorConfig.entityName,
+                searchTerm: field.getValue(),
+                comparator: 6,
+                dataType: 1,
+                operator:'in',
+                property: rangeSelectorConfig.propertyName,
+                value: field.getValue()
+            });
+            if (parentGridStore.remoteFilter) {
+                filters.push(filter);
+                parentGridStore.load({
+                    filters: filters,
+                    callback: function(records, operation, success) {
+                        if (success && records && records.length > 0) {
+                            parentGridSelModel.select(records);
+                        }
+                    }
+                });
+            } else {
+                var filterValue = me.getFilterRanges(field.getValue());
+                if (filterValue) {
+                    filter.searchTerm = filterValue;
+                    filter.setValue(filterValue);
+                    parentGridStore.isRangeFilters = true;
+                    parentGridStore.addFilter(filter, false);
+                }
+            }
+        }
+    },
+    resetRangeFilters:function(btn) {
+        var me = this,
+            parentGrid = me.up('grid'),
+            rangeInput=parentGrid.down('textfield[itemId=rangeBox]'),
+            parentGridStore = parentGrid.getStore();
+        parentGridStore.clearFilter();
+        parentGridStore.load({ sorting: null, filters: null });
+        rangeInput.reset();
+    },
+    getFilterRanges: function (stringValue) {
+        var outPut = [];
+        if (stringValue) {
+            var ranges = stringValue.split(';');
+            if (ranges && ranges.length > 0) {
+                for (var i = 0; i < ranges.length; i++) {
+                    var range = ranges[i].split('..');
+                    if (range&&range.length>0) {
+                        var startValue = parseInt(range[0]),
+                            endValue = parseInt(range[1]);
+                        outPut.push(startValue);
+                        if (endValue < startValue) {
+                            abp.notify.error(app.localize('InvalidRange'));
+                            return [];
+                        }
+                        if (startValue > 0 && endValue > 0) {
+                            while (startValue !== endValue) {
+                                startValue = parseInt(startValue + 1);
+                                outPut.push(startValue);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //outPut = outPut.replace(/,$/, "");
+        return outPut;
     }
 });

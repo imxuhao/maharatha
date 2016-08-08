@@ -239,9 +239,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             var importBtn = {
                 xtype: 'splitbutton',
                 ui: 'actionButton',
-                iconCls: 'fa fa-download',
+                iconCls: 'fa fa-archive',
                 iconAlign: 'left',
-                text: app.localize("Import").toUpperCase(),
+               // text: app.localize("Import").toUpperCase(),
                 tooltip: app.localize('Import'),
                 menu: new Ext.menu.Menu({
                     ui: 'accounts',

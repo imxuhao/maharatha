@@ -35,14 +35,16 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         entityName = importConfig.entity;
 
         Ext.Ajax.request({
-            url: abp.appPath + 'api/services/app/download/GetTemplateByEntity',
+            url: abp.appPath + 'api/services/app/templateExporter/GetTemplateByEntity',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            jsonData: Ext.encode({ 'entity': entityName }),
+            jsonData: Ext.encode({ 'entityName': entityName }),
             success: function (response, opts) {
                 var resObj = Ext.decode(response.responseText);
                 if (resObj.success) {
-                    abp.notify.success(app.localize('DownloadTemplateSuccessMessage'), app.localize('Success'));
+                    var file = resObj.result;
+                    location.href = abp.appPath + 'File/DownloadTempFile?fileType=' + file.fileType + '&fileToken=' + file.fileToken + '&fileName=' + file.fileName;
+                   
                 } else {
                     ChachingGlobals.showPageSpecificErrors(response);
                 }

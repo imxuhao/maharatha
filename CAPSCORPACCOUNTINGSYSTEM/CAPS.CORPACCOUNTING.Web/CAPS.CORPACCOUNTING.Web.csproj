@@ -3859,6 +3859,9 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\import\ImportForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\import\ImportFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\import\ImportView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditWindow.js" />

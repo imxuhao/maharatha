@@ -20,6 +20,50 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         //    }
         //}
     },
+    onExportToExcelClick: function (menu, item, e, eOpts) {
+        var me = this;
+    },
+
+    onExportToPDFClick: function (menu, item, e, eOpts) {
+        var me = this;
+    },
+
+    onDownloadTemplateClick: function (menu, item, e, eOpts) {
+        var me = this,
+        view = me.getView(),
+        importConfig = view.importConfig,
+        entityName = importConfig.entity;
+
+        Ext.Ajax.request({
+            url: abp.appPath + 'api/services/app/download/GetTemplateByEntity',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            jsonData: Ext.encode({ 'entity': entityName }),
+            success: function (response, opts) {
+                var resObj = Ext.decode(response.responseText);
+                if (resObj.success) {
+                    abp.notify.success(app.localize('DownloadTemplateSuccessMessage'), app.localize('Success'));
+                } else {
+                    ChachingGlobals.showPageSpecificErrors(response);
+                }
+            },
+            failure: function (response, opts) {
+                ChachingGlobals.showPageSpecificErrors(response);
+            }
+        });
+    },
+
+    onImportTemplateFileClick: function (menu, item, e, eOpts) {
+        var me = this,
+        view = me.getView(),
+        importConfig = view.importConfig,
+        entityName = importConfig.entity;
+        importView = Ext.create('Chaching.view.import.ImportView');
+        importFormController = importView.down('form').getController();
+        importFormController.entityName = entityName;
+        importFormController.parentController = me;
+    },
+
     onGridItemsPerPageChange: function (combo, record, eOpts) {
         var me = this,
          pagingtoolbar = combo.up('pagingtoolbar'),

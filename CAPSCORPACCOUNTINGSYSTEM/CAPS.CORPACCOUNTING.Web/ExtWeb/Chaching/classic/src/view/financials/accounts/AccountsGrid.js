@@ -31,6 +31,10 @@
           iconCls: 'fa fa-plus',
           iconAlign: 'left'
       }],
+    importConfig: {
+        entity : 'FinancialAccounts',
+        isRequireImport : true
+    },
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,

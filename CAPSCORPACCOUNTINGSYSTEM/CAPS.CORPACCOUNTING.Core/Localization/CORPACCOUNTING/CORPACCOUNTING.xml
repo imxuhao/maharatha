@@ -388,6 +388,14 @@
     <text name="ExportToPDF" value="Export to pdf" />
     <text name="ExportToCSV" value="Export to CSV" />
     <text name="ClearFilter" value="Clear Filter" />
+    <text name="Import" value="Import" />
+    <text name="Upload" value="Upload" />
+    <text name="SelectFile" value="Select File..." />
+    <text name="DownloadTemplate" value="Download Template" />
+    <text name="ImportTemplateFile" value="Import Template File" />
+    <text name="DownloadTemplateSuccessMessage" value="Download Template Successfully." />
+    <text name="Template_File_Info" value="You can only select .xls/.xlsx file." />
+    <text name="Template_FileType_Warn" value="You can only select .xls/.xlsx file. Please select another file." />
     <text name="QuickEdit" value="Quick Edit" />
     <text name="TTenancyCodeName" value="Enter tenant code name" />
     <text name="TName" value="Enter name" />

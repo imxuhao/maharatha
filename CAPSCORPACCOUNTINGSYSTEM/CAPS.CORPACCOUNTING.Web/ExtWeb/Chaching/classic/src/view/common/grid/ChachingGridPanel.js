@@ -85,6 +85,13 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     */
     requireExport: false,
     /**
+   * @cfg {object} importConfig
+   */
+    importConfig: {
+        entity: '',
+        isRequireImport : false
+    },
+    /**
     * @cfg {object} selModelConfig
     */
     selModelConfig: null,
@@ -221,12 +228,30 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 menu: new Ext.menu.Menu({
                     ui: 'accounts',
                     items: [
-                        { text: abp.localization.localize("ExportToExcel").toUpperCase(), iconCls: 'fa fa-file-excel-o', itemId: 'ExportExcel' },
-                        { text: abp.localization.localize("ExportToPDF").toUpperCase(), iconCls: 'fa fa-file-pdf-o', itemId: 'ExportPDF' }
+                        { text: abp.localization.localize("ExportToExcel").toUpperCase(), iconCls: 'fa fa-file-excel-o', itemId: 'ExportExcel', handler: 'onExportToExcelClick' },
+                        { text: abp.localization.localize("ExportToPDF").toUpperCase(), iconCls: 'fa fa-file-pdf-o', itemId: 'ExportPDF', handler: 'onExportToPDFClick' }
                     ]
                 })
             };
             headerTbButtons.push(exportBtn);
+        }
+        if (me.importConfig.isRequireImport) {
+            var importBtn = {
+                xtype: 'splitbutton',
+                ui: 'actionButton',
+                iconCls: 'fa fa-download',
+                iconAlign: 'left',
+                text: app.localize("Import").toUpperCase(),
+                tooltip: app.localize('Import'),
+                menu: new Ext.menu.Menu({
+                    ui: 'accounts',
+                    items: [
+                        { text: abp.localization.localize("DownloadTemplate").toUpperCase(), iconCls: 'fa fa-file-excel-o', itemId: 'downloadTemplate', handler : 'onDownloadTemplateClick' },
+                        { text: abp.localization.localize("ImportTemplateFile").toUpperCase(), iconCls: 'fa fa-file-archive-o', itemId: 'importTemplateFile', handler: 'onImportTemplateFileClick' }
+                    ]
+                })
+            };
+            headerTbButtons.push(importBtn);
         }
         //add clear filter button regardless of multisearch
         var clearFilterBtn = {

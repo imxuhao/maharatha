@@ -20,6 +20,8 @@ namespace CAPS.CORPACCOUNTING.Helpers
         typeof(string).GetMethod("StartsWith", new Type[] { typeof(string) });
         private static MethodInfo endsWithMethod =
         typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
+        private static MethodInfo stringRangeWithMethod =
+     typeof(string).GetMethod("CompareTo", new[] { typeof(string) });
 
 
         /// <summary>
@@ -68,74 +70,96 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
         private static Expression GetExpression<T>(ParameterExpression param, Filters filter)
         {
-
-            MemberExpression member = Expression.Property(param, filter.Property);
-            Expression constant = Expression.Convert(((ConstantExpression)GetFilterExpression(member, filter.SearchTerm)),member.Type);
-            Comparators value;
-            Expression searchExpression1 = null;
-            Expression searchExpression2 = null;
-
-            //IN Operator
-            if (filter.Comparator == 6)
+            try
             {
-                Expression combinedExpression = null;
 
-                foreach (string val in filter.SearchTerm.Split(','))
+
+                MemberExpression member = Expression.Property(param, filter.Property);
+                Expression constant = Expression.Convert(((ConstantExpression)GetFilterExpression(member, filter.SearchTerm)), member.Type);
+                Comparators value;
+                Expression searchExpression1 = null;
+                Expression searchExpression2 = null;
+
+                //IN Operator
+                if (filter.Comparator == 6)
                 {
-                    searchExpression1 = Expression.Equal(member, GetFilterExpression(member, val));
-                    if (!ReferenceEquals(searchExpression1, null) && !ReferenceEquals(searchExpression2, null))
+                    Expression combinedExpression = null;
+
+                    foreach (string val in filter.SearchTerm.Split(','))
                     {
-
-                        combinedExpression = Expression.OrElse(searchExpression2, searchExpression1);
-                        searchExpression1 = combinedExpression;
+                        searchExpression1 = Expression.Equal(member, GetFilterExpression(member, val));
+                        if (!ReferenceEquals(searchExpression1, null) && !ReferenceEquals(searchExpression2, null))
+                        {
+                            combinedExpression = Expression.OrElse(searchExpression2, searchExpression1);
+                            searchExpression1 = combinedExpression;
+                        }
+                        searchExpression2 = searchExpression1;
+                        if (filter.SearchTerm.Split(',').Length == 1)
+                            combinedExpression = searchExpression2;
                     }
-                    searchExpression2 = searchExpression1;
-                    if (filter.SearchTerm.Split(',').Length == 1)
-                        combinedExpression = searchExpression2;
+                    return combinedExpression;
                 }
-                return combinedExpression;
+                else
+                if (filter.DataType == DataTypes.Text && filter.Comparator == 0)
+                {
+                    value = Comparators.Contains;
+                }
+                else
+                if (filter.DataType == DataTypes.Bool)
+                {
+                    return Expression.Equal(member, Expression.Constant(Convert.ToBoolean(filter.SearchTerm)));
+                }
+                else
+                { value = EnumHelper.GetEnumValue<Comparators>(filter.Comparator); }
+
+
+
+                switch (value)
+                {
+                    case Comparators.Equal:
+                        return Expression.Equal(member, constant);
+
+                    case Comparators.Greater:
+                        return Expression.GreaterThan(member, constant);
+
+                    case Comparators.GreaterOrEqual:
+                        return Expression.GreaterThanOrEqual(member, constant);
+
+                    case Comparators.Less:
+                        return Expression.LessThan(member, constant);
+
+                    case Comparators.LessOrEqual:
+                        return Expression.LessThanOrEqual(member, constant);
+
+                    case Comparators.Contains:
+                        return Expression.Call(member, containsMethod, constant);
+
+                    case Comparators.StartsWith:
+                        return Expression.Call(member, startsWithMethod, constant);
+
+                    case Comparators.EndsWith:
+                        return Expression.Call(member, endsWithMethod, constant);
+                    case Comparators.InRange:
+                        {
+                            if (filter.DataType == DataTypes.Text)
+                            {
+                                searchExpression1 = Expression.GreaterThanOrEqual(Expression.Call(member, stringRangeWithMethod, constant), Expression.Constant(0, typeof(int)));
+                                searchExpression2 = Expression.LessThanOrEqual(Expression.Call(member, stringRangeWithMethod, GetFilterExpression(member, filter.SearchTerm2)), Expression.Constant(0, typeof(int)));
+                            }
+                            else
+                            {
+                                searchExpression1 = Expression.GreaterThanOrEqual(member, constant);
+                                searchExpression2 = Expression.LessThanOrEqual(member, GetFilterExpression(member, filter.SearchTerm2));
+                            }
+                            return Expression.AndAlso(searchExpression1, searchExpression2);
+                        }
+                }
             }
-            else
-            if (filter.DataType == DataTypes.Text && filter.Comparator == 0)
+            catch (Exception ex)
             {
-                value = Comparators.Contains;
+
+                throw ex;
             }
-            else
-            if (filter.DataType == DataTypes.Bool)
-            {
-                return Expression.Equal(member, Expression.Constant(Convert.ToBoolean(filter.SearchTerm)));
-            }
-            else
-            { value = EnumHelper.GetEnumValue<Comparators>(filter.Comparator); }
-
-
-            switch (value)
-            {
-                case Comparators.Equal:
-                    return Expression.Equal(member, constant);
-
-                case Comparators.Greater:
-                    return Expression.GreaterThan(member, constant);
-
-                case Comparators.GreaterOrEqual:
-                    return Expression.GreaterThanOrEqual(member, constant);
-
-                case Comparators.Less:
-                    return Expression.LessThan(member, constant);
-
-                case Comparators.LessOrEqual:
-                    return Expression.LessThanOrEqual(member, constant);
-
-                case Comparators.Contains:
-                    return Expression.Call(member, containsMethod, constant);
-
-                case Comparators.StartsWith:
-                    return Expression.Call(member, startsWithMethod, constant);
-
-                case Comparators.EndsWith:
-                    return Expression.Call(member, endsWithMethod, constant);
-            }
-
             return null;
         }
 
@@ -164,6 +188,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
                     break;
                 case "Int64":
                     constantExp = Expression.Constant(Convert.ToInt64(value), typeof(Int64));
+                    break;
+                case "String":
+                    constantExp = Expression.Constant(value, typeof(string));
                     break;
                 default:
                     constantExp = Expression.Constant(value);

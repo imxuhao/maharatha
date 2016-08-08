@@ -74,12 +74,84 @@ Ext.define('Chaching.view.users.UsersGridController', {
 
     doAfterCreateAction: function (createMode, formView, isEdit, record) {
         var me = this,
-         form = formView.getForm();
+            form = formView.getForm();
         //get company list tab
         var companyListTab = formView.down('*[itemId=companyListTab]');
         var rolesGrid = formView.down('gridpanel[itemId=rolesListGridItemId]');
         var tenantRolesGrid = formView.down('gridpanel[itemId=companyListGridItemId]');
+        // Start horizontal tab bar disable while create
+        var userSecuritySettings = formView.down('tabpanel[itemId=userSecuritySettingsItemId]');
+        if (abp.session.tenantId != null && isEdit) {
+            userSecuritySettings.setDisabled(false);
+            //Population of combo and grid
+            var me = this,
+            view = me.getView(),
+            coaCombo = formView.down('combobox[reference=coaCombo]'),
+            selectedCoa = 0;
+            coaCombo.getStore().load({
+                callback: function (records, operation, success) {
+                    if (success) {
+                        coaCombo.setValue(records[0].data.coaId);
+                        selectedCoa = records[0].data.coaId;
+                    }
+                }
+            });
+            /// fill grid
+            var dragDropControl = formView.down('chachingGridDragDrop'),
+                leftStore = dragDropControl.getLeftStore(),
+                rightStore = dragDropControl.getRightStore(),
+                values = formView.getForm().getValues();
+            leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+            leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+            leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
+            leftStore.load();
+            rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+            rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+            rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
+            rightStore.load();
+        }
+        else {
+            userSecuritySettings.setDisabled(true);
+            ChachingGlobals.SelectedUserId = 0;
+        }
+
+        //// Need to delete below line
+        //if (isEdit) {
+        //    userSecuritySettings.setDisabled(false);
+        //    //Population of combo and grid
+        //    var me = this,
+        //    view = me.getView(),
+        //    coaCombo = formView.down('combobox[reference=coaCombo]'),
+        //    selectedCoa = 0;
+        //    coaCombo.getStore().load({
+        //        callback: function (records, operation, success) {
+        //            if (success) {
+        //                coaCombo.setValue(records[0].data.coaId);
+        //                selectedCoa = records[0].data.coaId;
+        //            }
+        //        }
+        //    });
+        //    /// fill grid
+        //    var dragDropControl = formView.down('chachingGridDragDrop'),
+        //        leftStore = dragDropControl.getLeftStore(),
+        //        rightStore = dragDropControl.getRightStore(),
+        //        values = formView.getForm().getValues();
+        //    leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+        //    leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+        //    leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
+        //    leftStore.load();
+        //    rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+        //    rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+        //    rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
+        //    rightStore.load();
+            
+
+        //}
+        //// END
+
+
         if (formView && isEdit) {
+            // Edit user screen
             form.findField('userName').setReadOnly(true);
             form.findField('setRandomPassword').setValue(false);
             form.findField('sendActivationEmail').setValue(false);
@@ -155,6 +227,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
             });
 
         } else {
+            // create new user screen
             //load roles list
             var rolesStore = rolesGrid.getStore();
             rolesStore.load({
@@ -195,6 +268,8 @@ Ext.define('Chaching.view.users.UsersGridController', {
                 if (companyListTab) {
                     companyListTab.setDisabled(true);
                 }
+
+
             }
         }
        

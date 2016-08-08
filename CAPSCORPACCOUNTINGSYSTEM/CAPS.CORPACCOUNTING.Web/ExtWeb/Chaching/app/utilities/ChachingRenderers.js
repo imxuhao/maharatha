@@ -7,55 +7,25 @@
         if (val) return 'YES';
         else return 'NO';
     },
-    addViewUsersRole: function (value, cell) {
-        var gridController = this.up().up().up().up().getController(),
-            view = gridController.getView(),
-            grid = this;    
-        var id = Ext.id();
-        var widgetRec = cell.record;
-        var widgetCol = cell.column;
-        Ext.Function.defer(function () {
-            var button = Ext.create('Ext.button.Button', {
-                ui: 'actionMenuButton',
-                pressed : false,
-                scale: 'small',
-                width: '100%',
-                height: 22,
-                text: app.localize('View'),
-                widgetRec: widgetRec,
-                widgetCol: widgetCol,
-                currentView: view,
-                listeners: {
-                    click: gridController.reloadPermissionsTree
-                }
-            });
-            if (Ext.get(id)) {
-                button.render(Ext.get(id));
-            }
-        }, 1);
-        return '<div id="' + id + '"></div>';
-        
-    },
-    addViewUsersLinkComp: function (value, cell) {
-        var gridController = this.up().up().up().up().getController(),
-            view = gridController.getView(),
-            grid = this;
-        var id = Ext.id();
-        var widgetRec = cell.record;
-        var widgetCol = cell.column;
+    viewUsersRole: function (value, cell) {
+        var view = this.up('form'),
+            gridController = view.getController(),
+            id = Ext.id(),
+            widgetRec = cell.record,
+            widgetCol = cell.column;
         Ext.Function.defer(function () {
             var button = Ext.create('Ext.button.Button', {
                 ui: 'actionMenuButton',
                 pressed: false,
-                height: 22,
                 scale: 'small',
                 width: '100%',
+                height: 25,
                 text: app.localize('View'),
                 widgetRec: widgetRec,
                 widgetCol: widgetCol,
                 currentView: view,
                 listeners: {
-                    click: gridController.reloadPermissionsTreeLinkCompany
+                    click: (widgetCol.itemId === 'rolesViewButtonId') ? gridController.reloadPermissionsTree : gridController.reloadPermissionsTreeLinkCompany
                 }
             });
             if (Ext.get(id)) {

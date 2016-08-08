@@ -19,7 +19,7 @@
         userOrganizationId: null,
         gotoMyAccount: false
     },
-    SelectedUserId: 1,
+    SelectedUserId: 0,
     CorporateCoa: 2,
     ProjectCoa: 1,
     BankCoa: 3,

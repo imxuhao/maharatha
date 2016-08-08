@@ -72,7 +72,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 xtype: 'textfield',
                                                 name: 'name',
                                                 itemId: 'name',
-                                                labelWidth: 80,
+                                                tabIndex:1,
+                                                //labelWidth: 80,
                                                 fieldLabel: app.localize('Name'),
                                                 width: '100%',
                                                 ui: 'fieldLabelTop',
@@ -80,11 +81,12 @@ Ext.define('Chaching.view.users.UsersForm',
                                             },
                                             {
                                                 xtype: 'textfield',
-                                                name: 'emailAddress',
-                                                fieldLabel: app.localize('EmailAddress'),
+                                                name: 'userName',
+                                                tabIndex: 3,
+                                                fieldLabel: app.localize('UserName'),
                                                 width: '100%',
                                                 ui: 'fieldLabelTop',
-                                                emptyText: app.localize('UEmailAddress')
+                                                emptyText: app.localize('UUserName')
                                             },
                                             {
                                                 xtype: 'checkbox',
@@ -103,12 +105,14 @@ Ext.define('Chaching.view.users.UsersForm',
                                             },
                                             {
                                                 layout: 'column',
+                                                margin:'-10px 0 0 0',
                                                 items: [
                                                     {
                                                         columnWidth: .5,
                                                         xtype: 'textfield',
                                                         name: 'password',
                                                         labelWidth: 70,
+                                                        tabIndex: 5,
                                                         reference: 'password',
                                                         inputType: 'password',
                                                         fieldLabel: app.localize('Password'),
@@ -124,6 +128,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                         xtype: 'textfield',
                                                         padding: '0 0 0 20',
                                                         name: 'passwordRepeat',
+                                                        tabIndex: 6,
                                                         reference: 'passwordRepeat',
                                                         inputType: 'password',
                                                         fieldLabel: app.localize('PasswordRepeat'),
@@ -149,6 +154,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                             },
                                             {
                                                 xtype: 'checkbox',
+                                                padding:'10 0 0 0',
                                                 boxLabel: app.localize('ShouldChangePasswordOnNextLogin'),
                                                 name: 'shouldChangePasswordOnNextLogin',
                                                 labelAlign: 'right',
@@ -169,31 +175,35 @@ Ext.define('Chaching.view.users.UsersForm',
                                             {
                                                 xtype: 'textfield',
                                                 name: 'surname',
-                                                labelWidth: 80,
+                                                //labelWidth: 80,
+                                                tabIndex: 2,
                                                 fieldLabel: app.localize('Surname'),
                                                 width: '100%',
                                                 ui: 'fieldLabelTop',
                                                 emptyText: app.localize('USurname')
                                             },
-                                            {
-                                                xtype: 'textfield',
-                                                name: 'userName',
-                                                fieldLabel: app.localize('UserName'),
-                                                width: '100%',
-                                                ui: 'fieldLabelTop',
-                                                emptyText: app.localize('UUserName')
-                                            },
+                                             {
+                                                 xtype: 'textfield',
+                                                 name: 'emailAddress',
+                                                 tabIndex: 4,
+                                                 fieldLabel: app.localize('EmailAddress'),
+                                                 width: '100%',
+                                                 ui: 'fieldLabelTop',
+                                                 emptyText: app.localize('UEmailAddress')
+                                             },
                                             {
                                                 xtype: 'checkbox',
                                                 boxLabel: app.localize('SendActivationEmail'),
                                                 name: 'sendActivationEmail',
                                                 labelAlign: 'right',
+                                                tabIndex: 7,
                                                 inputValue: true,
                                                 checked: true,
                                                 boxLabelCls: 'checkboxLabel'
                                             }, {
                                                 xtype: 'checkbox',
                                                 boxLabel: app.localize('Active'),
+                                                tabIndex: 8,
                                                 name: 'isActive',
                                                 labelAlign: 'right',
                                                 inputValue: true,
@@ -223,9 +233,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                             { text: app.localize('RoleName'), dataIndex: 'displayName', flex: 1 },
                                             {
                                                 text: app.localize('View'),
+                                                itemId:'rolesViewButtonId',
                                                 align: 'center',
                                                 width: 80,
-                                                renderer: Chaching.utilities.ChachingRenderers.addViewUsersRole
+                                                renderer: Chaching.utilities.ChachingRenderers.viewUsersRole
                                             }
                                         ],
                                         store: Ext.create('Chaching.store.roles.RolesStore')
@@ -235,7 +246,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                         xtype: 'label',
                                         padding: '10 0 0 20',
                                         style: { color: '#cacaca', fontSize: '15px' },
-                                        itemId: 'RolesMessageItemId',
+                                        itemId: 'rolesMessageItemId',
                                         text: abp.localization.localize("RowClickMessage")
                                     },
                                     {
@@ -291,7 +302,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                             }, {
                                                 text: app.localize('View'),
                                                 width: '15%',
-                                                renderer: Chaching.utilities.ChachingRenderers.addViewUsersLinkComp
+                                                itemId: 'linkCompanyRolesViewButtonId',
+                                                renderer: Chaching.utilities.ChachingRenderers.viewUsersRole //addViewUsersLinkComp
                                             }
                                         ],
                                         store: Ext.create('Chaching.store.users.CompanyRoleStore'),
@@ -302,7 +314,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                         xtype: 'label',
                                         padding: '10 0 0 20',
                                         style: { color: '#cacaca', fontSize: '15px' },
-                                        itemId: 'LinkCompanyMessageItemId',
+                                        itemId: 'linkCompanyMessageItemId',
                                         text: abp.localization.localize("RowClickMessage")
                                     },
                                     {
@@ -338,12 +350,13 @@ Ext.define('Chaching.view.users.UsersForm',
                         xtype: 'tabpanel',
                         ui: 'formTabPanels',
                         title: abp.localization.localize("UserSecuritySettings"),
+                        itemId: 'userSecuritySettingsItemId',
                         items: [
                             {
                                 title: abp.localization.localize("CorporateCoa"),
                                 margin: '0 !important',
                                 scrollable: true,
-                                iconCls: 'fa fa-cogs',
+                                iconCls: 'fa fa-wrench',
                                 defaultFocus: 'combobox#coa',
                                 layout: 'column',
                                 items: [
@@ -352,10 +365,11 @@ Ext.define('Chaching.view.users.UsersForm',
                                         xtype: 'combobox',
                                         name: 'coa',
                                         reference: 'coaCombo',
-                                        padding: '0 0 0 15',
+                                        padding: '5 0 0 15',
                                         fieldLabel: app.localize('ChartOfAccount'),
-                                        labelWidth:100,
-                                        //width: '100%',
+                                        labelWidth:120,
+                                        maxWidth: 500,
+                                        //width: '50%',
                                         ui: 'fieldLabelTop',
                                         displayField: 'description',
                                         valueField: 'coaId',
@@ -366,6 +380,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                     {
                                         columnWidth: 1.0,
                                         xtype: 'chachingGridDragDrop',
+                                        itemId: 'corporateCOASecurityGridItemId',
+                                        padding: '5 0 0 0',
                                         leftTitle: '',
                                         rightTitle: '',
                                         hidden:false,
@@ -421,17 +437,90 @@ Ext.define('Chaching.view.users.UsersForm',
                             }, {
                                 title: abp.localization.localize("ProjectCoa"),
                                 padding: '0 10 0 10',
-                                iconCls: 'fa fa-cogs',
+                                iconCls: 'fa fa-unlock-alt',
                                 disabled: true,
                                 layout: 'column',
                                 height: '100%',
                                 items: [
-                                 
-                                ]
+                                 //{
+                                 //    columnWidth: 1.0,
+                                 //    xtype: 'combobox',
+                                 //    name: 'projectCoa',
+                                 //    reference: 'projectCoaCombo',
+                                 //    padding: '5 0 0 15',
+                                 //    fieldLabel: app.localize('ProjectChartOfAccount'),
+                                 //    labelWidth: 120,
+                                 //    maxWidth: 500,
+                                 //    //width: '50%',
+                                 //    ui: 'fieldLabelTop',
+                                 //    displayField: 'description',
+                                 //    valueField: 'coaId',
+                                 //    emptyText: app.localize('SelectOption'),
+                                 //    queryMode: 'local',
+                                 //    store: 'financials.accounts.ChartOfAccountStore'
+                                 //},
+                                 //   {
+                                 //       columnWidth: 1.0,
+                                 //       xtype: 'chachingGridDragDrop',
+                                 //       itemId: 'projectCOASecurityGridItemId',
+                                 //       padding: '5 0 0 0',
+                                 //       leftTitle: '',
+                                 //       rightTitle: '',
+                                 //       hidden: false,
+                                 //       columns: [
+                                 //           {
+                                 //               xtype: 'gridcolumn',
+                                 //               text: app.localize('AccountNumber'),
+                                 //               dataIndex: 'accountNumber',
+                                 //               sortable: true,
+                                 //               groupable: true,
+                                 //               width: '47%',
+                                 //               filterField: {
+                                 //                   xtype: 'textfield',
+                                 //                   width: '100%'
+                                 //               }
+                                 //           }, {
+                                 //               xtype: 'gridcolumn',
+                                 //               text: app.localize('AccountName'),
+                                 //               dataIndex: 'caption',
+                                 //               sortable: true,
+                                 //               groupable: true,
+                                 //               width: '47%',
+                                 //               filterField: {
+                                 //                   xtype: 'textfield',
+                                 //                   width: '15%'
+                                 //               }
+                                 //           }
+                                 //       ],
+                                 //       // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
+                                 //       loadStoreOnCreate: false,
+                                 //       leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
+                                 //       rightStore: 'Chaching.store.users.SecurityAccessStore',
+                                 //       requireMultiSearch: true,
+                                 //       selModelConfig: {
+                                 //           selType: 'chachingCheckboxSelectionModel',
+                                 //           injectCheckbox: "first",
+                                 //           headerWidth: '5%',
+                                 //           mode: 'MULTI',
+                                 //           showHeaderCheckbox: false
+                                 //       },
+                                 //       doSaveOperation: function (direction, records) {
+                                 //           var isActive = direction === "leftToRight" ? true : false,
+                                 //               wasActive = direction === "rightToLeft" ? true : false;
+                                 //           for (var i = 0; i < records.length; i++) {
+                                 //               var rec = records[i];
+                                 //               rec.set('isActive', isActive);
+                                 //               rec.set('wasActive', wasActive);
+                                 //           }
+                                 //       }
+                                 //   }
+
+
+                                ]   // End of item ProjectCoa
                             }, {
                                 title: abp.localization.localize("ProjectSecurity"),
                                 padding: '0 10 0 10',
-                                iconCls: 'fa fa-cogs',
+                                iconCls: 'fa fa-steam',
                                 disabled: true,
                                 layout: 'column',
                                 height: '100%',
@@ -441,7 +530,7 @@ Ext.define('Chaching.view.users.UsersForm',
                             }, {
                                 title: abp.localization.localize("CreditCardCoa"),
                                 padding: '0 10 0 10',
-                                iconCls: 'fa fa-cogs',
+                                iconCls: 'fa fa-credit-card',
                                 disabled: true,
                                 layout: 'column',
                                 height: '100%',
@@ -451,7 +540,7 @@ Ext.define('Chaching.view.users.UsersForm',
                             }, {
                                 title: abp.localization.localize("BankCoa"),
                                 padding: '0 10 0 10',
-                                iconCls: 'fa fa-cogs',
+                                iconCls: 'fa fa-bank',
                                 disabled: true,
                                 layout: 'column',
                                 height: '100%',

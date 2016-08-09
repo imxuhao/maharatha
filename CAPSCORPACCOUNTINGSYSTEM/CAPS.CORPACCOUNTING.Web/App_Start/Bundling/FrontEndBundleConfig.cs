@@ -37,7 +37,25 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
                         ScriptPaths.Abp_Moment
                     ).ForceOrdered()
                 );
+            //ABP Dependencies Libraries
 
+            bundles.Add(new ScriptBundle("~/Bundles/ABP/libs/Extjs").Include(
+                ScriptPaths.Json2,
+                ScriptPaths.JQuery,
+                ScriptPaths.SweetAlert,
+                ScriptPaths.Toastr,
+                ScriptPaths.MomentJs,
+                ScriptPaths.MomentTimezoneJs,
+                ScriptPaths.Abp,
+                ScriptPaths.Abp_JQuery,
+                ScriptPaths.Abp_Toastr,
+                ScriptPaths.Abp_BlockUi,
+                ScriptPaths.Abp_SpinJs,
+                ScriptPaths.Abp_SweetAlert,
+                ScriptPaths.Abp_Moment
+                ).ForceOrdered());
+            AddCommonCssForExtjs(bundles);
+           
             //METRONIC
 
             AddFrontendCssMetronic(bundles, false);
@@ -50,6 +68,8 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
                         "~/metronic/assets/frontend/layout/scripts/layout.js"
                     ).ForceOrdered()
                 );
+            //Minify Bundles regardless of web.config setting
+            BundleTable.EnableOptimizations = true;
         }
 
         private static void AddFrontendCssLibs(BundleCollection bundles, bool isRTL)
@@ -77,6 +97,19 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
                     .Include("~/metronic/assets/frontend/layout/css/themes/red" + (isRTL ? "-rtl" : "") + ".css", new CssRewriteUrlWithVirtualDirectoryTransform())
                     .ForceOrdered()
                 );
+        }
+
+        private static void AddCommonCssForExtjs(BundleCollection bundles)
+        {
+            //*****Important Note: When adding any image/external dependency in any of the css file make sure to add CssRewriteUrlWithVirtualDirectoryTransform() for given css path in below bundle.
+            bundles.Add(
+                new StyleBundle("~/Bundles/ABP/css/Extjs").Include(StylePaths.FamFamFlags, new CssRewriteUrlWithVirtualDirectoryTransform())
+                    .Include(StylePaths.LineIcons, new CssRewriteUrlWithVirtualDirectoryTransform())
+                    .Include(StylePaths.MultiSearch)
+                    .Include(StylePaths.ChachingGlobal)
+                    .Include(StylePaths.Sweet_Alert)
+                    .Include(StylePaths.ABPToast)
+                    .ForceOrdered());
         }
     }
 }

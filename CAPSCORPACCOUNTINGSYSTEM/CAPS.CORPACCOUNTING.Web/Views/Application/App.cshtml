@@ -22,19 +22,14 @@
     <meta content="CORPACCOUNTING" name="keywords">
     <meta content="CORPACCOUNTING" name="author">
 
-    @Scripts.Render("~/Bundles/Frontend/libs/js")
-    @Scripts.Render("~/Bundles/Frontend/metronic/js")
+    <link href="~/Content/themesChaching/InitialLoading.css" rel="stylesheet" />
+    @Styles.Render("~/Bundles/ABP/css/Extjs");
+    @Scripts.Render("~/Bundles/ABP/libs/Extjs")
     @Scripts.Render("~/Bundles/Common/js")
 
     <link rel="shortcut icon" href="~/favicon.ico">
-    <link href="~/Content/themesChaching/famfamfam-flags.css" rel="stylesheet" />
-    <link href="~/Content/themesChaching/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
-    <link href="~/Content/themesChaching/saki-themes/saki-grid-multisearch-5-all-debug.css" rel="stylesheet" />
-    <link href="~/Content/themesChaching/chachingGlobalcss.css" rel="stylesheet" />
-    <link href="~/libs/sweetalert/sweet-alert.css" rel="stylesheet" />
-    <link href="~/libs/toastr/toastr.min.css" rel="stylesheet" />
-
+   
     <script type="text/javascript">
         @* This is used to get the application's root path from javascript.
         It's useful if you're running application in a virtual directory under IIS. *@
@@ -45,7 +40,6 @@
     </script>
 
 
-    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
     <script src="~/api/AbpServiceProxies/GetAll?type=angular&v=@(Clock.Now.Ticks)"></script>
     <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>

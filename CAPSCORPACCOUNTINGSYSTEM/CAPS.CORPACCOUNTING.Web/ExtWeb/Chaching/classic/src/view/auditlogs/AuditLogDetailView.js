@@ -8,8 +8,8 @@ Ext.define('Chaching.view.auditlogs.AuditLogDetailView', {
     ],
 
     controller: 'auditlogdetailviewcontroller',
-    height: 600,
-    width: 550,
+    height: '98%',
+    width: '45%',
     layout: 'fit',
     title: app.localize("AuditLogDetail"),
     initComponent: function (config) {

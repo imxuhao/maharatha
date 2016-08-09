@@ -173,5 +173,28 @@ Ext.define('Chaching.components.plugins.RowEditing', {
             }
         }
         return false;
-    }
+    },
+    /**
+     * @private
+     */
+    initEditor: function () {
+        var rowEditorCfg = this.initEditorConfig();
+        rowEditorCfg.buttonUI = "actionButton";
+        return new Ext.grid.RowEditor(rowEditorCfg);
+    },
+    // @private
+    // remaps to the public API of Ext.grid.column.Column.getEditor
+    getColumnField: function (columnHeader, defaultField) {
+        var me = this,
+            field = columnHeader.field;
+
+        if (!(field && field.isFormField)) {
+            field = columnHeader.field = me.createColumnField(columnHeader, defaultField);
+        }
+
+        if (field && field.ui === 'default' && !field.hasOwnProperty('ui')) {
+            field.ui = me.defaultFieldUI;
+        }
+        return field;
+    },
 });

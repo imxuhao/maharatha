@@ -3471,12 +3471,13 @@
             http://www.codeproject.com/Tips/582450/Build-Where-Clause-Dynamically-in-Linq
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.ExpressionBuilder.GetExpression``1(System.Collections.Generic.IList{CAPS.CORPACCOUNTING.Helpers.Filters})">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.ExpressionBuilder.GetExpression``1(System.Collections.Generic.IList{CAPS.CORPACCOUNTING.Helpers.Filters},CAPS.CORPACCOUNTING.Helpers.SearchPattern)">
             <summary>
             
             </summary>
             <typeparam name="T"></typeparam>
             <param name="filters"></param>
+            <param name="searchPattern"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.ExpressionBuilder.Comparators">

@@ -8,8 +8,8 @@ Ext.define('Chaching.view.manageView.ManageViewView',{
     ],
 
     controller: 'manageview-manageviewview',
-    height: 500,
-    width: 750,
+    height: '70%',
+    width: '45%',
     layout: 'fit',
     title: app.localize("ManageUsersViewSetting"),
     iconCls: 'fa fa-gears',

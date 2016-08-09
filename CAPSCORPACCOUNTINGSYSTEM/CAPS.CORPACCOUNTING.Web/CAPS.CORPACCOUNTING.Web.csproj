@@ -760,9 +760,11 @@
     <Content Include="Content\images\capslogo.png" />
     <Content Include="Content\images\default-checked.gif" />
     <Content Include="Content\images\default-unchecked.gif" />
+    <Content Include="Content\sweetalert\sweet-alert.css" />
     <Content Include="Content\themesChaching\chachingGlobalcss.css" />
     <Content Include="Content\themesChaching\famfamfam-flags.css" />
     <Content Include="Content\RenderStyles.css" />
+    <Content Include="Content\themesChaching\InitialLoading.css" />
     <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.dev.svg" />
     <Content Include="Content\themesChaching\simple-line-icons\fonts\Simple-Line-Icons.svg" />
     <Content Include="Content\themesChaching\simple-line-icons\icons-lte-ie7.js" />
@@ -770,6 +772,7 @@
     <Content Include="Content\themesChaching\simple-line-icons\Readme.txt" />
     <Content Include="Content\themesChaching\simple-line-icons\simple-line-icons.css" />
     <Content Include="Content\themesChaching\simple-line-icons\simple-line-icons.min.css" />
+    <Content Include="Content\toastr\toastr.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="ExtWeb\.sencha\workspace\plugin.xml" />
     <Content Include="ExtWeb\build\development\Chaching\classic\resources\Chaching-all.css" />

@@ -19,5 +19,13 @@ namespace CAPS.CORPACCOUNTING.Web.Bundling
         public const string Bootstrap_Switch = "~/libs/bootstrap-switch/css/bootstrap-switch.min.css";
         public const string JQuery_jTable_Theme = "~/libs/jquery-jtable/themes/metro/blue/jtable.min.css";
         public const string JQuery_Jcrop = "~/libs/jcrop/css/jquery.Jcrop.min.css";
+
+        //Required for extjs application
+        public const string FamFamFlags = "~/Content/themesChaching/famfamfam-flags.css";
+        public const string LineIcons = "~/Content/themesChaching/simple-line-icons/simple-line-icons.min.css";
+        public const string MultiSearch = "~/Content/themesChaching/saki-themes/saki-grid-multisearch-5-all-debug.css";
+        public const string ChachingGlobal = "~/Content/themesChaching/chachingGlobalcss.css";
+        public const string Sweet_Alert = "~/Content/sweetalert/sweet-alert.css";
+        public const string ABPToast = "~/Content/toastr/toastr.css";
     }
 }

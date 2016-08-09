@@ -93,42 +93,27 @@ Ext.define('Chaching.view.users.UsersGridController', {
                     if (success && records.length>0) {
                         coaCombo.setValue(records[0].data.coaId);
                         selectedCoa = records[0].data.coaId;
+                        /// fill grid
+                        var corporateDragDropControl = formView.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
+                            leftStore = corporateDragDropControl.getLeftStore(),
+                            rightStore = corporateDragDropControl.getRightStore(),
+                            values = formView.getForm().getValues();
+                        leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+                        leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+                        leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
+                        leftStore.getProxy().api.read = abp.appPath + 'api/services/app/userSecuritySettings/GetAccountList';
+                        leftStore.load();
+                        rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+                        rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+                        rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
+                        rightStore.load();
                     }
                 }
             });
             // populate projectCoa combo
             projectCoaCombo = formView.down('combobox[reference=projectCoaCombo]');
             projectCoaCombo.getStore().load();
-            /// fill grid
-            var corporateDragDropControl = formView.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
-                projectCoaDragDropControl = formView.down('chachingGridDragDrop[itemId=projectCOASecurityGridItemId]'),
-                projectDragDropControl = formView.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]'),
-                leftStore = corporateDragDropControl.getLeftStore(),
-                rightStore = corporateDragDropControl.getRightStore(),
-                values = formView.getForm().getValues();
-            leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-            leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-            leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
-            leftStore.load();
-            rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-            rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-            rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
-            rightStore.load();
-            //grid project coa
-            //leftStore = projectCoaDragDropControl.getLeftStore();
-            //rightStore = projectCoaDragDropControl.getRightStore();
-            //leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-            //leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-            //leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.ProjectCoa);
-            //leftStore.load();
-            //rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-            //rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-            //rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.ProjectCoa);
-            //rightStore.load();
-            // grid project security
-
-
-
+            
         }
         else {
             userSecuritySettings.setDisabled(true);

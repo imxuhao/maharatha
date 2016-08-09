@@ -112,6 +112,28 @@
     doPreSaveOperation: function (record, values, idPropertyField) {
         var me = this,
              view = me.getView();
+        if (ChachingGlobals.SelectedUserId > 0) {
+            // Saving User Security Settings
+            var corporateDragDropControl = view.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
+                    projectCoaDragDropControl = view.down('chachingGridDragDrop[itemId=projectCOASecurityGridItemId]'),
+                    projectDragDropControl = view.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]'),
+                    corporateLeftStore = corporateDragDropControl.getLeftStore(),
+                    corporateRightStore = corporateDragDropControl.getRightStore();
+            var request = {
+                userIdList: [], accountAccessList: [], bankAccountAccessList: [], creditCardAccessList: [], projectAcessList: []
+            }
+            request.userIdList.push(ChachingGlobals.SelectedUserId);
+            if (corporateRightStore.getUpdatedRecords().length > 0) {
+                var result = corporateRightStore.getUpdatedRecords();
+                Ext.each(result, function (records) {
+                    request.accountAccessList.push({ accountId: records.get('accountId'), accountNumber: records.get('accountNumber'), userId: ChachingGlobals.SelectedUserId });
+                })
+                me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateAccountAccessList', request);
+            }
+            
+            // END User Security Settings
+        }
+        // Saving User create/edit information
         record.data.user = values;
         Ext.apply(record.data, values);
         //get roles information
@@ -200,6 +222,14 @@
             });
             return tenantListArray;
 
+    },
+    callAjaxService: function (url, request) {
+        Ext.Ajax.request({
+            url: abp.appPath + url,
+            jsonData: Ext.encode(request),
+            success: function (response) { },
+            failure: function (response, a, b) { }
+        });
     }
 
 });

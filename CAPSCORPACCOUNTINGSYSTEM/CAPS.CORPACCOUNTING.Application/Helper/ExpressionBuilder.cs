@@ -87,7 +87,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
                     foreach (string val in filter.SearchTerm.Split(','))
                     {
-                        searchExpression1 = Expression.Equal(member, GetFilterExpression(member, val));
+                        searchExpression1 = Expression.Equal(member, Expression.Convert((GetFilterExpression(member, val)), member.Type));
                         if (!ReferenceEquals(searchExpression1, null) && !ReferenceEquals(searchExpression2, null))
                         {
                             combinedExpression = Expression.OrElse(searchExpression2, searchExpression1);

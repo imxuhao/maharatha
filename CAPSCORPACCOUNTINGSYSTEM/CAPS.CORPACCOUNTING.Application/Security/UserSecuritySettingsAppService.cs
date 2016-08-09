@@ -261,7 +261,7 @@ namespace CAPS.CORPACCOUNTING.Security
             if (!ReferenceEquals(input.Filters, null))
             {
                 var filterCondition = ExpressionBuilder.GetExpression<AccountCacheItem>(input.Filters).Compile();
-                accountCacheItems = accountCache.ToList().Where(filterCondition).ToList();
+                accountCacheItems = accountCache.ToList().Where(u=>u.ChartOfAccountId==input.ChartOfAccountId).Where(filterCondition).ToList();
             }
 
             return accountCacheItems.Select(item =>
@@ -302,7 +302,7 @@ namespace CAPS.CORPACCOUNTING.Security
             }
             else
             {
-                accountCacheItems = accountCache.ToList().Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
+                accountCacheItems = accountCache.ToList().Where(u => u.ChartOfAccountId == input.ChartOfAccountId).Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
 
 

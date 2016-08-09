@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.Helpers
 {
-
+    public enum SearchPattern
+    {
+        Or,
+        And
+    }
     /// <summary>
     /// http://www.codeproject.com/Tips/582450/Build-Where-Clause-Dynamically-in-Linq
     /// </summary>
@@ -29,8 +33,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filters"></param>
+        /// <param name="searchPattern"></param>
         /// <returns></returns>
-        public static Expression<Func<T, bool>> GetExpression<T>(IList<Filters> filters)
+        public static Expression<Func<T, bool>> GetExpression<T>(IList<Filters> filters, SearchPattern searchPattern = SearchPattern.And)
         {
             if (filters.Count == 0)
                 return null;
@@ -41,7 +46,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
             if (filters.Count == 1)
                 exp = GetExpression<T>(param, filters[0]);
             else if (filters.Count == 2)
-                exp = GetExpression<T>(param, filters[0], filters[1]);
+                exp = GetExpression<T>(param, filters[0], filters[1],searchPattern);
             else
             {
                 while (filters.Count > 0)
@@ -50,16 +55,22 @@ namespace CAPS.CORPACCOUNTING.Helpers
                     var f2 = filters[1];
 
                     if (exp == null)
-                        exp = GetExpression<T>(param, filters[0], filters[1]);
+                        exp = GetExpression<T>(param, filters[0], filters[1], searchPattern);
                     else
-                        exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0], filters[1]));
+                        if (searchPattern == SearchPattern.Or)
+                        exp = Expression.OrElse(exp, GetExpression<T>(param, filters[0], filters[1], searchPattern));
+                    else
+                        exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0], filters[1], searchPattern));
 
                     filters.Remove(f1);
                     filters.Remove(f2);
 
                     if (filters.Count == 1)
                     {
-                        exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0]));
+                        if (searchPattern == SearchPattern.Or)
+                            exp = Expression.OrElse(exp, GetExpression<T>(param, filters[0]));
+                        else
+                            exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0]));
                         filters.RemoveAt(0);
                     }
                 }
@@ -166,12 +177,15 @@ namespace CAPS.CORPACCOUNTING.Helpers
         }
 
         private static BinaryExpression GetExpression<T>
-        (ParameterExpression param, Filters filter1, Filters filter2)
+        (ParameterExpression param, Filters filter1, Filters filter2, SearchPattern searchPattern = SearchPattern.And)
         {
             Expression bin1 = GetExpression<T>(param, filter1);
             Expression bin2 = GetExpression<T>(param, filter2);
+            if (searchPattern == SearchPattern.Or)
+                return Expression.OrElse(bin1, bin2);
+            else
+                return Expression.AndAlso(bin1, bin2);
 
-            return Expression.AndAlso(bin1, bin2);
         }
         private static Expression GetFilterExpression(MemberExpression property, string value)
         {

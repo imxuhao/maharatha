@@ -94,6 +94,9 @@ Ext.define('Chaching.view.users.UsersGridController', {
                     }
                 }
             });
+            //populate project coa combo
+            var projectCoaCombo = formView.down('combobox[reference=projectCoaCombo]');
+            projectCoaCombo.getStore().load();
             //load project security accesss
             me.loadProjectSecurity(formView);
             //load division security accesss

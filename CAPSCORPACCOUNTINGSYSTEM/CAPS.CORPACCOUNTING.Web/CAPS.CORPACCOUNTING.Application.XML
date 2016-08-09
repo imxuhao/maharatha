@@ -11312,7 +11312,14 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.CreateorUpdateAccountAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
             <summary>
-            Create or Update AccountAccessList
+            Create or Update Accounts
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Security.IUserSecuritySettingsAppService.CreateorUpdateLineAccessList(CAPS.CORPACCOUNTING.Security.Dto.UserSecuritySettingsInputUnit)">
+            <summary>
+            Create or Update Lines
             </summary>
             <param name="input"></param>
             <returns></returns>

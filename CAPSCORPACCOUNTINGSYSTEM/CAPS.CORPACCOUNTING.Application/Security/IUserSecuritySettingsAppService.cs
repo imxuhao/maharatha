@@ -14,12 +14,18 @@ namespace CAPS.CORPACCOUNTING.Security
 
         #region Account/Lines
         /// <summary>
-        /// Create or Update AccountAccessList
+        /// Create or Update Accounts
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task CreateorUpdateAccountAccessList(UserSecuritySettingsInputUnit input);
 
+        /// <summary>
+        /// Create or Update Lines
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task CreateorUpdateLineAccessList(UserSecuritySettingsInputUnit input);
         /// <summary>
         /// Get Accounts/Lines AccessList By UserId
         /// </summary>

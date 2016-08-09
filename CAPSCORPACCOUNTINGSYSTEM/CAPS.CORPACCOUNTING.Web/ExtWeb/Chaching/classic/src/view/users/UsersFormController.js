@@ -55,32 +55,6 @@
         rightStore.load();
     },
     onFormAfterRender:function(){
-        //var me = this,
-        //    view = me.getView(),
-        //    coaCombo = me.lookupReference('coaCombo'),
-        //    selectedCoa = 0;
-        //coaCombo.getStore().load({
-        //    callback: function (records, operation, success) {
-        //        if (success) {
-        //            coaCombo.setValue(records[0].data.coaId);
-        //            selectedCoa = records[0].data.coaId;
-        //        }
-        //    }
-        //});
-        ///// fill grid
-        //var dragDropControl = view.down('chachingGridDragDrop'),
-        //    leftStore = dragDropControl.getLeftStore(),
-        //    rightStore = dragDropControl.getRightStore(),
-        //    values = view.getForm().getValues();
-        //    leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-        //    leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-        //    leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
-        //    leftStore.load();
-        //    rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-        //    rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-        //    rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
-        //    rightStore.load();
-        //    //dragDropControl.show();
     },
     reloadPermissionsTree: function (btn, event, e) {
         var view = btn.currentView,
@@ -180,22 +154,60 @@
         if (ChachingGlobals.SelectedUserId > 0) {
             // Saving User Security Settings
             var corporateDragDropControl = view.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
-                    projectCoaDragDropControl = view.down('chachingGridDragDrop[itemId=projectCOASecurityGridItemId]'),
-                    projectDragDropControl = view.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]'),
-                    corporateLeftStore = corporateDragDropControl.getLeftStore(),
-                    corporateRightStore = corporateDragDropControl.getRightStore();
+                projectCoaDragDropControl = view.down('chachingGridDragDrop[itemId=projectCOASecurityGridItemId]'),
+                projectDragDropControl = view.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]'),
+                divisionDragDropControl = view.down('chachingGridDragDrop[itemId=divisionSecurityGridItemId]'),
+                creditCardDragDropControl = view.down('chachingGridDragDrop[itemId=creditCardSecurityGridItemId]'),
+                bankDragDropControl = view.down('chachingGridDragDrop[itemId=bankSecurityGridItemId]'),
+                corporateRightStore = corporateDragDropControl.getRightStore();
+                projectCoaRightStore = projectCoaDragDropControl.getRightStore();
+                projectRightStore = projectDragDropControl.getRightStore();
+                divisionRightStore = divisionDragDropControl.getRightStore();
+                creditCardRightStore = creditCardDragDropControl.getRightStore();
+                bankRightStore = bankDragDropControl.getRightStore();
+
             var request = {
                 userIdList: [], accountAccessList: [], bankAccountAccessList: [], creditCardAccessList: [], projectAcessList: []
             }
             request.userIdList.push(ChachingGlobals.SelectedUserId);
             if (corporateRightStore.getUpdatedRecords().length > 0) {
-                var result = corporateRightStore.getUpdatedRecords();
-                Ext.each(result, function (records) {
-                    request.accountAccessList.push({ accountId: records.get('accountId'), accountNumber: records.get('accountNumber'), userId: ChachingGlobals.SelectedUserId });
+                corporateRightStore.each(function (records, obj, count) {
+                    request.accountAccessList.push({ accountId: records.get('accountId'), accountNumber: records.get('accountNumber'), organizationUnitId: records.get('organizationUnitId') });
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateAccountAccessList', request);
             }
-            
+            if (projectCoaRightStore.getUpdatedRecords().length > 0) {
+                request.accountAccessList = [];
+                projectCoaRightStore.each(function (records, obj, count) {
+                    request.accountAccessList.push({ accountId: records.get('accountId'), accountNumber: records.get('accountNumber'), organizationUnitId: records.get('organizationUnitId') });
+                })
+                me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateLineAccessList', request);
+            }
+            if (projectRightStore.getUpdatedRecords().length > 0) {
+                projectRightStore.each(function (records, obj, count) {
+                    request.projectAcessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
+                })
+                me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateProjectAccessList', request);
+            }
+            if (divisionRightStore.getUpdatedRecords().length > 0) {
+                request.projectAcessList = [];
+                ExdivisionRightStoret.each(function (records, obj, count) {
+                    request.projectAcessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
+                })
+                me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateDivisionAccessList', request);
+            }
+            if (creditCardRightStore.getUpdatedRecords().length > 0) {
+                creditCardRightStore.each(function (records, obj, count) {
+                    request.creditCardAccessList.push({ accountingDocumentId: records.get('accountingDocumentId'), cardHolderName: records.get('cardHolderName'), cardNumber: records.get('cardNumber'), organizationUnitId: records.get('organizationUnitId') });
+                })
+                me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateCreditCardAccessList', request);
+            }
+            if (bankRightStore.getUpdatedRecords().length > 0) {
+                bankRightStore.each(function (records, obj, count) {
+                    request.bankAccountAccessList.push({ bankAccountId: records.get('bankAccountId'), bankAccountNumber: records.get('bankAccountNumber'), organizationUnitId: records.get('organizationUnitId') });
+                })
+                me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateBankAccountAccessList', request);
+            }
             // END User Security Settings
         }
         // Saving User create/edit information

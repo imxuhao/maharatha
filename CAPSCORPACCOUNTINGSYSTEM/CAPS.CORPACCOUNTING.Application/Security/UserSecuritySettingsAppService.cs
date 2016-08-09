@@ -291,9 +291,9 @@ namespace CAPS.CORPACCOUNTING.Security
 
             var user = await _userManager.GetUserByIdAsync(input.UserId);
             var organizationUnits = await _organizationExtendedUnitManager.GetExtendedOrganizationUnitsAsync(user, input.EntityClassificationId);
-
             var accountCache = await _accountCache.GetAccountCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheInput);
+
 
             if (!ReferenceEquals(input.Filters, null))
             {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using CAPS.CORPACCOUNTING.Authorization.Users;
 using Abp.Authorization.Users;
+using System.Data.Entity;
 
 namespace CAPS.CORPACCOUNTING.Organization
 {
@@ -39,13 +40,13 @@ namespace CAPS.CORPACCOUNTING.Organization
             await OrganizationExtendedUnitRepository.UpdateAsync(organizationExtendedUnit);
         }
 
-        public  Task<List<OrganizationExtended>> GetExtendedOrganizationUnitsAsync(User user,EntityClassification entityClassificationId)
+        public async Task<List<OrganizationExtended>> GetExtendedOrganizationUnitsAsync(User user,EntityClassification entityClassificationId)
         {
-            var query = from uou in UserOrganizationUnitRepository.GetAll()
+            var query =await (from uou in UserOrganizationUnitRepository.GetAll()
                         join ou in OrganizationExtendedUnitRepository.GetAll() on uou.OrganizationUnitId equals ou.Id
                         where uou.UserId == user.Id && ou.EntityClassificationId== entityClassificationId
-                        select ou;
-            return Task.FromResult(query.ToList());
+                        select ou).ToListAsync();
+            return query;
         }
     }
 }

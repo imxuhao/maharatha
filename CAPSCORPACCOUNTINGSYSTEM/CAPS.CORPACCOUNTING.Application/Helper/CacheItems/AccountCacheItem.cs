@@ -113,14 +113,16 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         private async Task<List<AccountCacheItem>> GetAccountsFromDb(AutoSearchInput input)
         {
-            var querry = from account in Repository.GetAll()
+            var query = from account in Repository.GetAll()
                          join coa in _coaRepository.GetAll() on account.ChartOfAccountId equals coa.Id
                          into coaunits
                          from coaunit in coaunits.DefaultIfEmpty()
                          select new { account, IsCorporate = coaunit.IsCorporate };
 
 
-            var result = await querry.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.account.OrganizationUnitId == input.OrganizationUnitId).ToListAsync();
+            var result = await query
+                //.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.account.OrganizationUnitId == input.OrganizationUnitId)
+                .ToListAsync();
             return result.Select(u => new AccountCacheItem
             {
                 AccountNumber = u.account.AccountNumber,

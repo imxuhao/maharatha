@@ -75,7 +75,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
 
                 MemberExpression member = Expression.Property(param, filter.Property);
-                Expression constant = Expression.Convert(((ConstantExpression)GetFilterExpression(member, filter.SearchTerm)), member.Type);
+                Expression constant = null;
+                if (filter.Comparator != 6)
+                     constant = Expression.Convert(((ConstantExpression)GetFilterExpression(member, filter.SearchTerm)), member.Type);
                 Comparators value;
                 Expression searchExpression1 = null;
                 Expression searchExpression2 = null;

@@ -28,7 +28,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
           scale: 'small',
           ui: 'actionButton',
           action: 'create',
-          text: abp.localization.localize("CreatingNewProjectCOA").toUpperCase(),
+          text: abp.localization.localize("ADD").toUpperCase(),
           tooltip: app.localize('CreatingNewProjectCOA'),
           checkPermission: true,
           iconCls: 'fa fa-plus',

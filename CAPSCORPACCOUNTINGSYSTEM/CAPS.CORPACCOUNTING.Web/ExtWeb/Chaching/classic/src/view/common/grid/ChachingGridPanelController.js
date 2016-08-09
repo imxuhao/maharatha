@@ -472,6 +472,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             tabPanel = view.up('tabpanel');
         if (!titleConfig) Ext.Error.raise('Please provide title configuration');
         me.doBeforeCreateAction(createMode);
+        Ext.suspendLayouts();
         if (createMode === "popup") {
             className = type + ".createView";
             formView = Ext.create({
@@ -504,6 +505,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         if (formView.isTransactionForm) {
             me.loadDetailsStore(record, formView);
         }
+        Ext.resumeLayouts(true);
         return formView;
 
     },

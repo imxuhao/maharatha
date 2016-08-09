@@ -58,6 +58,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             text: app.localize('Post'),
             xtype: 'checkcolumn',
             dataIndex: 'isPosted',
+            width:'5%',
             checked: true,
             listeners: {
                 checkchange: function(column, recordIndex, checked) {
@@ -74,7 +75,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             dataIndex: 'createdUser',
             sortable: true,
             groupable: true,
-            width: '15%',
+            width: '10%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
@@ -86,7 +87,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             dataIndex: 'vendorName',
             sortable: true,
             groupable: true,
-            width: '15%',
+            width: '10%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
@@ -101,7 +102,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             dataIndex: 'purchaseOrderReference',
             sortable: true,
             groupable: true,
-            width: '15%',
+            width: '6%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%'
@@ -112,7 +113,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             dataIndex: 'documentReference',
             sortable: true,
             groupable: true,
-            width: '15%',
+            width: '10%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%'
@@ -126,7 +127,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             dataIndex: 'transactionDate',
             sortable: true,
             groupable: true,
-            width: '15%',
+            width: '10%',
             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
             filterField: {
                 xtype: 'dateSearchField',
@@ -142,7 +143,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             dataIndex: 'controlTotal',
             sortable: true,
             groupable: true,
-            width: '15%',
+            width: '10%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%'
@@ -156,7 +157,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             dataIndex: 'datePosted',
             sortable: true,
             groupable: true,
-            width: '15%',
+            width: '12%',
             renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
             filterField: {
                 xtype: 'dateSearchField',
@@ -172,7 +173,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             dataIndex: 'description',
             sortable: true,
             groupable: true,
-            width: '15%',
+            width: '12%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%'
@@ -193,7 +194,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             sortable: true,
             groupable: true,
             hidden:true,
-            width: '10%',
+            width: '8%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
@@ -208,7 +209,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             sortable: true,
             groupable: true,
             hidden: true,
-            width: '10%',
+            width: '8%',
             filterField: {
                 xtype: 'dateSearchField',
                 width: '100%'
@@ -224,7 +225,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             sortable: true,
             groupable: true,
             hidden: true,
-            width: '10%',
+            width: '8%',
             filterField: {
                 xtype: 'textfield',
                 width: '100%'

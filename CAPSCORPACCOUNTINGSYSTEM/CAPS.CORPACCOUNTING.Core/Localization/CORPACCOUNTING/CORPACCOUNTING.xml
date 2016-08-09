@@ -410,10 +410,10 @@
     <text name="Financials" value="Financials" />
     <text name="Accounts" value="Accounts" />
     <text name="ChartOfAccount" value="Chart Of Account" />
-    <text name="CreatingNewCOA" value="Create Chart Of Account" />
-    <text name="EditingCOA" value="Editing Chart Of Account" />
-    <text name="DeletingCOA" value="Deleting Chart Of Account" />
-    <text name="EditCOA" value="Edit Chart Of Account" />
+    <text name="CreatingNewCOA" value="Create COA" />
+    <text name="EditingCOA" value="Editing COA" />
+    <text name="DeletingCOA" value="Deleting COA" />
+    <text name="EditCOA" value="Edit COA" />
     <text name="EditCustomer" value="Edit Customer" />
     <text name="ViewCustomer" value="View Customer" />
     <text name="CustomerName" value="Customer Name" />
@@ -503,10 +503,10 @@
     <text name="GroupCopyLabel" value="group Copy Label" />
     <text name="TypeofSubAccount" value="Type Of Sub Account" />
     <text name="Trans#" value="Trans #" />
-    <text name="CreateNewSubAccounts" value="Create New Sub Account" />
-    <text name="EditSubAccount" value="Edit Sub Account" />
+    <text name="CreateNewSubAccounts" value="Create Sub-Account" />
+    <text name="EditSubAccount" value="Edit Sub-Account" />
     <text name="MandatoryField" value="This is Mandatory Field" />
-    <text name="CreateNewDivision" value="CREATE NEW DIVISION" />
+    <text name="CreateNewDivision" value="Create Division" />
     <text name="EditDivision" value="Edit Division" />
     <text name="DivisionNumber" value="Division Number" />
     <text name="Currency" value="Currency" />
@@ -538,8 +538,8 @@
     <text name="CreateNewAccount" value="Create New Account" />
     <text name="EditAccount" value="Edit Account" />
     <text name="ProjectChartOfAccount" value="Project Chart Of Account" />
-    <text name="CreatingNewProjectCOA" value="Creating New ProjectCOA" />
-    <text name="EditProjectCOA" value="Edit ProjectCOA" />
+    <text name="CreatingNewProjectCOA" value="Create Project COA" />
+    <text name="EditProjectCOA" value="Edit Project COA" />
     <text name="Defaults" value="Defaults" />
     <text name="Lines" value="Lines" />
     <text name="CreateNewLine" value="Create New Line" />
@@ -548,7 +548,7 @@
     <text name="LineNumbers" value="Lines" />
     <text name="LineSearch" value="Enter Line to Search" />
     <text name="AddNew" value="Add" />
-    <text name="CreateNewProject" value="Create new project" />
+    <text name="CreateNewProject" value="Create project" />
     <text name="EditProject" value="Edit Project" />
     <text name="JobNumber" value="Job #" />
     <text name="JobDivisionNumber" value="Number" />
@@ -568,8 +568,8 @@
     <text name="ShootDate" value="Shoot date" />
     <text name="WrapUpInsurance" value="Wrap up insurance" />
     <text name="ToolTipStatus" value="Select status" />
-    <text name="CreatingNewVendors" value="Creating New Vendors" />
-    <text name="EditVendors" value="Edit Vendors" />
+    <text name="CreatingNewVendors" value="Create Vendor" />
+    <text name="EditVendors" value="Edit Vendor" />
     <text name="VendorName" value="Vendor Name" />
     <text name="Address" value="Address" />
     <text name="Telephone" value="Telephone" />
@@ -581,7 +581,7 @@
     <text name="EmailSearch" value="Email Search" />
     <text name="1099CodeSearch" value="1099 Code Search" />
     <text name="PaymentTermsSearch" value="Payment Terms Search" />
-    <text name="TotalOutstandingInvoices" value="Total Outstanding Invoices" />
+    <text name="TotalOutstandingInvoices" value="Total Out. Inv." />
     <text name="Contact" value="Contact" />
     <text name="Other" value="Other" />
     <text name="Company/LastName" value="Company/Last Name" />
@@ -691,9 +691,9 @@
     <text name="DateModified" value="Date Modified" />
     <text name="Zip" value="Zip" />
     <text name="ZipCode" value="Zip Code" />
-    <text name="PreviousYearPayments" value="Previous Year Payments" />
-    <text name="CurrentYearPayments" value="Current Year Payments" />
-    <text name="OpenPurchaseOrders" value="Open Purchase Orders" />
+    <text name="PreviousYearPayments" value="Prev. Year Pay." />
+    <text name="CurrentYearPayments" value="Current Year Pay." />
+    <text name="OpenPurchaseOrders" value="Open POs" />
     <text name="FederalTaxID" value="Federal Tax ID" />
     <text name="IndependentContractor" value="Independent Contractor" />
     <text name="BillingAccount" value="Billing Account" />
@@ -749,8 +749,8 @@
     <text name="SaveVendor" value="Save Vendor" />
     <text name="MultiplechartofAccounts" value="Cannot create multiple chartofAccounts" />
     <text name="JournalEntry" value="Journal Entry" />
-    <text name="CreateNewJournalEntry" value="Create New Journal Entry" />
-    <text name="EditJournalEntry" value="Edit Journal Entry" />
+    <text name="CreateNewJournalEntry" value="Create Journal" />
+    <text name="EditJournalEntry" value="Edit Journal" />
     <text name="Post" value="Post" />
     <text name="CreatedBy" value="Created By" />
     <text name="UserSearch" value="User Search" />
@@ -893,7 +893,7 @@
     <text name="ViewAccount" value="View Account" />
     <text name="ViewCOA" value="View COA" />
     <text name="ViewDivision" value="View Division" />
-    <text name="ViewSubAccount" value="View Sub Account" />
+    <text name="ViewSubAccount" value="View Sub-Account" />
     <text name="SubAccount" value="Sub Account" />
     <text name="ViewEdition" value="View Edition" />
     <text name="ViewBatch" value="View Batch" />

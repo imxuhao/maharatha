@@ -1,5 +1,6 @@
 
-Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
+Ext.define('Chaching.view.financials.journals.JournalEntryForm',
+{
     extend: 'Chaching.view.common.form.ChachingTransactionFormPanel',
     alias: ['widget.financials.journals.entry.create', 'widget.financials.journals.entry.edit'],
     requires: [
@@ -19,138 +20,126 @@ Ext.define('Chaching.view.financials.journals.JournalEntryForm', {
     autoScroll: false,
     border: false,
     frame: false,
-    items: [{
-        xtype: 'container',
-        flex: 1,
-        items: [{
-            xtype: 'fieldset',
-            title: app.localize('JournalDetails'),
-            layout: 'column',
-            ui: 'transparentFieldSet',
-            width: '100%',
-            collapsible: true,
-            listeners: {
-                beforecollapse: 'onHeaderCollapse',
-                beforeexpand:'onHeaderExpand'
+    items: [
+        {
+            xtype: 'hiddenfield',
+            name: 'accountingDocumentId',
+            value: 0
+        }, {
+            xtype: 'hiddenfield',
+            name: 'organizationUnitId',
+            value: null
+        }, {
+            xtype: 'container',
+            layout: {
+                type: 'column',
+                columns: 4
             },
-            items: [{
-                xtype: 'hiddenfield',
-                name: 'accountingDocumentId',
-                value: 0
-            }, {
-                xtype: 'hiddenfield',
-                name: 'organizationUnitId',
-                value: null
-            }, {
-                columnWidth: .33,
-                padding: '0 10 0 20',
-                defaults: {
-                    //labelAlign: 'top',
-                    ui: 'fieldLabelTop',
-                    width: '100%',
-                    blankText: app.localize('MandatoryToolTipText')
-                },
-                items: [{
-                    xtype: 'datefield',
-                    name: 'transactionDate',
-                    itemId: 'transactionDate',
-                    allowBlank: false,
-                    format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
-                    emptyText: app.localize('MandatoryField'),
-                    fieldLabel: app.localize('TransactionDate')
-                }, {
-                    xtype: 'textfield',
-                    name: 'description',
-                    itemId: 'description',
-                    allowBlank: false,
-                    fieldLabel: app.localize('Description'),
-                    emptyText: app.localize('MandatoryField')
-                }]
-            }, {
-                columnWidth: .33,
-                padding: '0 10 0 20',
-                defaults: {
-                    //labelAlign: 'top',
-                    width: '100%',
-                    ui: 'fieldLabelTop',
-                    blankText: app.localize('MandatoryToolTipText')
-                },
-                items: [{
-                    xtype: 'textfield',
-                    name: 'documentReference',
-                    itemId: 'documentReference',
-                    allowBlank: false,
-                    fieldLabel: app.localize('JournalNumber'),
-                    emptyText: app.localize('MandatoryField')
-                },{
-                    xtype: 'amountfield',
-                    name: 'controlTotal',
-                    itemId: 'controlTotal',
-                    fieldLabel: app.localize('ControlTotal'),
-                    disabled: true
-                }]
-            }, {
-                columnWidth: .33,
-                padding: '0 10 0 20',
-                defaults: {
-                    width: '100%',
-                    ui: 'fieldLabelTop',
-                    blankText: app.localize('MandatoryToolTipText')
-                },
-                items:[
+            items: [
                 {
-                    xtype: 'combobox',
-                    name: 'journalTypeId',
-                    fieldLabel: app.localize('JournalType'),
-                    itemId: 'journalTypeId',
-                    valueField: 'value',
-                    displayField:'name',
-                    store: {
-                        fields: [{ name: 'name' }, { name: 'value' }],
-                        data: [{ name: app.localize('Standard'), value: 1 },
-                            { name: app.localize('Intercompany'), value: 2 },
-                            { name: app.localize('Reversing'), value: 3 },
-                            { name: app.localize('Recurring'), value: 4 }
-                        ]
-                    }
+                    columnWidth: .25,
+                    padding: '10 5 0 10',
+                    defaults: {
+                        //labelAlign: 'top',
+                        ui: 'fieldLabelTop',
+                        width: '100%',
+                        blankText: app.localize('MandatoryToolTipText')
+                    },
+                    items: [{
+                        xtype: 'datefield',
+                        name: 'transactionDate',
+                        itemId: 'transactionDate',
+                        allowBlank: false,
+                        format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                        emptyText: app.localize('MandatoryField'),
+                        fieldLabel: app.localize('TransactionDate')
+                    }, {
+                        xtype: 'textfield',
+                        name: 'description',
+                        itemId: 'description',
+                        allowBlank: false,
+                        fieldLabel: app.localize('Description'),
+                        emptyText: app.localize('MandatoryField')
+                    }]
                 }, {
-                    xtype: 'fieldcontainer',
-                    layout: 'hbox',
-                    border: false,
-                    items: [{////TODO: Replace with combo once batch is ready
+                    columnWidth: .25,
+                    padding: '10 5 0 10',
+                    defaults: {
+                        //labelAlign: 'top',
+                        width: '100%',
+                        ui: 'fieldLabelTop',
+                        blankText: app.localize('MandatoryToolTipText')
+                    },
+                    items: [{
+                        xtype: 'textfield',
+                        name: 'documentReference',
+                        itemId: 'documentReference',
+                        allowBlank: false,
+                        fieldLabel: app.localize('JournalNumber'),
+                        emptyText: app.localize('MandatoryField')
+                    }, {
+                        xtype: 'amountfield',
+                        name: 'controlTotal',
+                        itemId: 'controlTotal',
+                        fieldLabel: app.localize('ControlTotal'),
+                        disabled: true
+                    }]
+                }, {
+                    columnWidth: .25,
+                    padding: '10 5 0 10',
+                    defaults: {
+                        width: '100%',
+                        ui: 'fieldLabelTop',
+                        blankText: app.localize('MandatoryToolTipText')
+                    },
+                    items:[
+                    {
+                        xtype: 'combobox',
+                        name: 'journalTypeId',
+                        fieldLabel: app.localize('JournalType'),
+                        itemId: 'journalTypeId',
+                        valueField: 'value',
+                        displayField:'name',
+                        store: {
+                            fields: [{ name: 'name' }, { name: 'value' }],
+                            data: [{ name: app.localize('Standard'), value: 1 },
+                                { name: app.localize('Intercompany'), value: 2 },
+                                { name: app.localize('Reversing'), value: 3 },
+                                { name: app.localize('Recurring'), value: 4 }
+                            ]
+                        }
+                    }, {////TODO: Replace with combo once batch is ready
                         xtype: 'textfield',
                         name: 'batchId',
                         itemId: 'batchId',
                         ui: 'fieldLabelTop',
-                        width:220,
                         fieldLabel: app.localize('Batch'),
                         emptyText: app.localize('SelectOption')
-                    }, {
-                        xtype: 'checkbox',
-                        name: 'is13Period',
-                        itemId: 'is13Period',
-                        boxLabel: app.localize('Is13Period'),
-                        boxLabelCls: 'checkboxLabel',
-                        //width: '50%',
-                        ui: 'default'
                     }]
-                }]
-            }]
-        }, {
-            xtype: 'fieldset',
-            title: app.localize('DistributionDetails'),
-            layout: 'column',
-            ui: 'transparentFieldSet',
-            collapsible: true,
-            isTransactionDetailContainer:true,//set true to autoheight details grid
-            items: [{
-                columnWidth: 1,
-                items: [{
-                    xtype: 'financials.journals.entry.transactionDetails',
-                    isTransactionDetailGrid:true
-                }]
-            }]
-        }]
-    }]
-
+                }, {
+                    columnWidth: .25,
+                    padding: '10 5 0 10',
+                    items: [
+                        {
+                            xtype: 'checkbox',
+                            name: 'is13Period',
+                            itemId: 'is13Period',
+                            boxLabel: app.localize('Is13Period'),
+                            boxLabelCls: 'checkboxLabel',
+                            ui: 'default'
+                        }
+                    ]
+                }, {
+                    columnWidth: 1,
+                    padding: '20 0 0 0',
+                    itemId: 'transactionDetails',
+                    items:[
+                    {
+                        xtype: 'financials.journals.entry.transactionDetails',
+                        isTransactionDetailGrid: true
+                    }]
+                }
+            ]
+        }
+    ]
 });

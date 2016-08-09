@@ -54,6 +54,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
              text: app.localize('Post'),
              xtype: 'checkcolumn',
              dataIndex: 'isPosted',
+             width: '6%',
              checked: true,
              listeners: {
                  checkchange: function (column, recordIndex, checked) {
@@ -71,7 +72,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
               dataIndex: 'createdUser',
               sortable: true,
               groupable: true,
-              width: '15%',
+              width: '10%',
               filterField: {
                   xtype: 'textfield',
                   width: '100%',
@@ -111,7 +112,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
               dataIndex: 'documentReference',
               sortable: true,
               groupable: true,
-              width: '15%',
+              width: '10%',
               filterField: {
                   xtype: 'textfield',
                   width: '100%',
@@ -124,7 +125,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
               dataIndex: 'transactionDate',
               sortable: true,
               groupable: true,
-              width: '15%',
+              width: '12%',
               renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
               filterField: {
                   xtype: 'dateSearchField',
@@ -157,7 +158,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
               dataIndex: 'controlTotal',
               sortable: true,
               groupable: true,
-              width: '15%',
+              width: '10%',
               filterField: {
                   xtype: 'textfield',
                   width: '100%',
@@ -169,7 +170,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
               dataIndex: 'batchName',
               sortable: true,
               groupable: true,
-              width: '10%'
+              width: '12%'
           },
           {
               xtype: 'gridcolumn',
@@ -177,7 +178,7 @@ Ext.define('Chaching.view.financials.journals.JournalEntryGrid', {
               dataIndex: 'accountingDocumentId',
               sortable: true,
               groupable: true,
-              width: '15%',
+              width: '10%',
               filterField: {
                   xtype: 'textfield',
                   width: '100%',

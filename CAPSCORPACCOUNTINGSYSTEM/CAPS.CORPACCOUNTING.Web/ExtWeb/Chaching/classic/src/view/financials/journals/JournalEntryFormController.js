@@ -5,6 +5,16 @@ Ext.define('Chaching.view.financials.journals.JournalEntryFormController', {
         record.set('typeOfAccountingDocumentId', 1);
         return record;
     },
+    onFormResize: function (formPanel, width, height, oldWidth, oldHeight, eOpts) {
+        if (formPanel) {
+            var transactionDetailContainer = formPanel.down('*[itemId=transactionDetails]');
+            if (transactionDetailContainer) {
+                var heightForDetailGrid = height - (100 + 80);
+                transactionDetailContainer.down('gridpanel').setHeight(heightForDetailGrid);
+            }
+            formPanel.updateLayout();
+        }
+    },
     onHeaderCollapse: function (fieldSet, eOpts) {
         var me = this,
             view = me.getView(),

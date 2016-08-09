@@ -100,7 +100,10 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
                     Ext.resumeLayouts(true);
                 }
             }
-
+            if (node.isLeaf()) {
+                var parentNode = node.parentNode;
+                if (parentNode) parentNode.expand();
+            }
             navigationList.setSelection(node);
 
             if (newView.isFocusable(true)) {

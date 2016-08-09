@@ -64,7 +64,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         dataIndex: 'lastName',
         sortable: true,
         groupable: true,
-        width: '15%',
+        width: '12%',
         filterField: {
             xtype: 'textfield',
             width: '100%',
@@ -81,7 +81,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         groupable: true,
         isAssociationField: true,
 
-        width: '15%',
+        width: '12%',
         filterField: {
             xtype: 'textfield',
             width: '100%',
@@ -117,7 +117,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         dataIndex: 'email',
         sortable: true,
         groupable: true,
-        width: '15%',
+        width: '12%',
         isAssociationField: true,
         renderer: Chaching.utilities.ChachingRenderers.renderEmail,
         filterField: {
@@ -160,7 +160,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         dataIndex: 'paymentTerms',
         sortable: true,
         groupable: true,
-        width: '15%',
+        width: '12%',
         filterField: {
             xtype: 'combobox',
             valueField: 'paymentTermsId',
@@ -183,7 +183,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
         xtype: 'gridcolumn',
         text: app.localize('TotalOutstandingInvoices'),
         dataIndex: 'TotalOutstandingInvoices',
-        width: '18%'
+        width: '10%'
     }
     ,
     {
@@ -199,7 +199,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
          xtype: 'gridcolumn',
          text: app.localize('City'),
          dataIndex: 'city',
-         width: '13%',
+         width: '10%',
          renderer: Chaching.utilities.ChachingRenderers.renderCity,
          hidden: true,
          isAssociationField: true,
@@ -216,7 +216,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
            xtype: 'gridcolumn',
            text: app.localize('State'),
            dataIndex: 'state',
-           width: '13%',
+           width: '10%',
            renderer: Chaching.utilities.ChachingRenderers.renderState,
            hidden: true,
            isAssociationField: true,
@@ -238,7 +238,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
              text: app.localize('Zip'),
              dataIndex: 'postalCode',
              renderer: Chaching.utilities.ChachingRenderers.renderPostalCode,
-             width: '13%',
+             width: '8%',
              hidden: true,
              isAssociationField: true,
              filterField: {
@@ -255,28 +255,28 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
          xtype: 'gridcolumn',
          text: app.localize('PreviousYearPayments'),
          dataIndex: 'PreviousYearPayments',
-         width: '18%',
+         width: '10%',
          hidden: true
      }
       , {
           xtype: 'gridcolumn',
           text: app.localize('CurrentYearPayments'),
           dataIndex: 'CurrentYearPayments',
-          width: '18%',
+          width: '10%',
           hidden: true
       }
       , {
           xtype: 'gridcolumn',
           text: app.localize('OpenPurchaseOrders'),
           dataIndex: 'OpenPurchaseOrders',
-          width: '18%',
+          width: '8%',
           hidden: true
       }
        , {
            xtype: 'gridcolumn',
            text: app.localize('SSN'),
            dataIndex: 'ssnTaxId',
-           width: '13%',
+           width: '10%',
            hidden: true,
            filterField: {
                xtype: 'textfield',
@@ -291,7 +291,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
           xtype: 'gridcolumn',
           text: app.localize('FederalTaxID'),
           dataIndex: 'fedralTaxId',
-          width: '13%',
+          width: '12%',
           hidden: true,
           filterField: {
               xtype: 'textfield',
@@ -306,7 +306,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
            xtype: 'gridcolumn',
            text: app.localize('Corporation'),
            dataIndex: 'typeofTax',
-           width: '13%',
+           width: '10%',
            hidden: true,
            filterField: {
                xtype: 'combobox',
@@ -333,7 +333,7 @@ Ext.define('Chaching.view.payables.vendors.VendorsGrid', {
              dataIndex: 'isIndependentContractor',
              sortable: true,
              groupable: true,
-             width: '18%',
+             width: '12%',
              hidden: true,
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {

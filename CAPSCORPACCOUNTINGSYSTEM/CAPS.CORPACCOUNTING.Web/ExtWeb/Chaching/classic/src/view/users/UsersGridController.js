@@ -90,16 +90,21 @@ Ext.define('Chaching.view.users.UsersGridController', {
             selectedCoa = 0;
             coaCombo.getStore().load({
                 callback: function (records, operation, success) {
-                    if (success) {
+                    if (success && records.length>0) {
                         coaCombo.setValue(records[0].data.coaId);
                         selectedCoa = records[0].data.coaId;
                     }
                 }
             });
+            // populate projectCoa combo
+            projectCoaCombo = formView.down('combobox[reference=projectCoaCombo]');
+            projectCoaCombo.getStore().load();
             /// fill grid
-            var dragDropControl = formView.down('chachingGridDragDrop'),
-                leftStore = dragDropControl.getLeftStore(),
-                rightStore = dragDropControl.getRightStore(),
+            var corporateDragDropControl = formView.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
+                projectCoaDragDropControl = formView.down('chachingGridDragDrop[itemId=projectCOASecurityGridItemId]'),
+                projectDragDropControl = formView.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]'),
+                leftStore = corporateDragDropControl.getLeftStore(),
+                rightStore = corporateDragDropControl.getRightStore(),
                 values = formView.getForm().getValues();
             leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
             leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
@@ -109,47 +114,27 @@ Ext.define('Chaching.view.users.UsersGridController', {
             rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
             rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
             rightStore.load();
+            //grid project coa
+            //leftStore = projectCoaDragDropControl.getLeftStore();
+            //rightStore = projectCoaDragDropControl.getRightStore();
+            //leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+            //leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+            //leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.ProjectCoa);
+            //leftStore.load();
+            //rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
+            //rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
+            //rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.ProjectCoa);
+            //rightStore.load();
+            // grid project security
+
+
+
         }
         else {
             userSecuritySettings.setDisabled(true);
             ChachingGlobals.SelectedUserId = 0;
         }
-
-        //// Need to delete below line
-        //if (isEdit) {
-        //    userSecuritySettings.setDisabled(false);
-        //    //Population of combo and grid
-        //    var me = this,
-        //    view = me.getView(),
-        //    coaCombo = formView.down('combobox[reference=coaCombo]'),
-        //    selectedCoa = 0;
-        //    coaCombo.getStore().load({
-        //        callback: function (records, operation, success) {
-        //            if (success) {
-        //                coaCombo.setValue(records[0].data.coaId);
-        //                selectedCoa = records[0].data.coaId;
-        //            }
-        //        }
-        //    });
-        //    /// fill grid
-        //    var dragDropControl = formView.down('chachingGridDragDrop'),
-        //        leftStore = dragDropControl.getLeftStore(),
-        //        rightStore = dragDropControl.getRightStore(),
-        //        values = formView.getForm().getValues();
-        //    leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-        //    leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-        //    leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
-        //    leftStore.load();
-        //    rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-        //    rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-        //    rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
-        //    rightStore.load();
-            
-
-        //}
-        //// END
-
-
+        
         if (formView && isEdit) {
             // Edit user screen
             form.findField('userName').setReadOnly(true);

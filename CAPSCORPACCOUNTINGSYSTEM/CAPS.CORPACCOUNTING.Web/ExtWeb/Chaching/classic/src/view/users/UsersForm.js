@@ -442,95 +442,147 @@ Ext.define('Chaching.view.users.UsersForm',
                                 title: abp.localization.localize("ProjectCoa"),
                                 padding: '0 10 0 10',
                                 iconCls: 'fa fa-unlock-alt',
-                                disabled: true,
                                 layout: 'column',
                                 height: '100%',
                                 items: [
-                                 //{
-                                 //    columnWidth: 1.0,
-                                 //    xtype: 'combobox',
-                                 //    name: 'projectCoa',
-                                 //    reference: 'projectCoaCombo',
-                                 //    padding: '5 0 0 15',
-                                 //    fieldLabel: app.localize('ProjectChartOfAccount'),
-                                 //    labelWidth: 120,
-                                 //    maxWidth: 500,
-                                 //    //width: '50%',
-                                 //    ui: 'fieldLabelTop',
-                                 //    displayField: 'description',
-                                 //    valueField: 'coaId',
-                                 //    emptyText: app.localize('SelectOption'),
-                                 //    queryMode: 'local',
-                                 //    store: 'financials.accounts.ChartOfAccountStore'
-                                 //},
-                                 //   {
-                                 //       columnWidth: 1.0,
-                                 //       xtype: 'chachingGridDragDrop',
-                                 //       itemId: 'projectCOASecurityGridItemId',
-                                 //       padding: '5 0 0 0',
-                                 //       leftTitle: '',
-                                 //       rightTitle: '',
-                                 //       hidden: false,
-                                 //       columns: [
-                                 //           {
-                                 //               xtype: 'gridcolumn',
-                                 //               text: app.localize('AccountNumber'),
-                                 //               dataIndex: 'accountNumber',
-                                 //               sortable: true,
-                                 //               groupable: true,
-                                 //               width: '47%',
-                                 //               filterField: {
-                                 //                   xtype: 'textfield',
-                                 //                   width: '100%'
-                                 //               }
-                                 //           }, {
-                                 //               xtype: 'gridcolumn',
-                                 //               text: app.localize('AccountName'),
-                                 //               dataIndex: 'caption',
-                                 //               sortable: true,
-                                 //               groupable: true,
-                                 //               width: '47%',
-                                 //               filterField: {
-                                 //                   xtype: 'textfield',
-                                 //                   width: '15%'
-                                 //               }
-                                 //           }
-                                 //       ],
-                                 //       // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
-                                 //       loadStoreOnCreate: false,
-                                 //       leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
-                                 //       rightStore: 'Chaching.store.users.SecurityAccessStore',
-                                 //       requireMultiSearch: true,
-                                 //       selModelConfig: {
-                                 //           selType: 'chachingCheckboxSelectionModel',
-                                 //           injectCheckbox: "first",
-                                 //           headerWidth: '5%',
-                                 //           mode: 'MULTI',
-                                 //           showHeaderCheckbox: false
-                                 //       },
-                                 //       doSaveOperation: function (direction, records) {
-                                 //           var isActive = direction === "leftToRight" ? true : false,
-                                 //               wasActive = direction === "rightToLeft" ? true : false;
-                                 //           for (var i = 0; i < records.length; i++) {
-                                 //               var rec = records[i];
-                                 //               rec.set('isActive', isActive);
-                                 //               rec.set('wasActive', wasActive);
-                                 //           }
-                                 //       }
-                                 //   }
-
+                                 {
+                                     columnWidth: 1.0,
+                                     xtype: 'combobox',
+                                     name: 'projectCoa',
+                                     reference: 'projectCoaCombo',
+                                     padding: '5 0 0 15',
+                                     fieldLabel: app.localize('ProjectChartOfAccount'),
+                                     labelWidth: 150,
+                                     maxWidth: 500,
+                                     //width: '50%',
+                                     ui: 'fieldLabelTop',
+                                     displayField: 'description',
+                                     valueField: 'coaId',
+                                     emptyText: app.localize('SelectOption'),
+                                     queryMode: 'local',
+                                     store: 'projects.projectmaintenance.ProjectCoaStore'
+                                 },
+                                    {
+                                        columnWidth: 1.0,
+                                        xtype: 'chachingGridDragDrop',
+                                        itemId: 'projectCOASecurityGridItemId',
+                                        padding: '5 0 0 0',
+                                        leftTitle: '',
+                                        rightTitle: '',
+                                        hidden: true,
+                                        columns: [
+                                            {
+                                                xtype: 'gridcolumn',
+                                                text: app.localize('AccountNumber'),
+                                                dataIndex: 'accountNumber',
+                                                sortable: true,
+                                                groupable: true,
+                                                width: '47%',
+                                                filterField: {
+                                                    xtype: 'textfield',
+                                                    width: '100%'
+                                                }
+                                            }, {
+                                                xtype: 'gridcolumn',
+                                                text: app.localize('AccountName'),
+                                                dataIndex: 'caption',
+                                                sortable: true,
+                                                groupable: true,
+                                                width: '47%',
+                                                filterField: {
+                                                    xtype: 'textfield',
+                                                    width: '15%'
+                                                }
+                                            }
+                                        ],
+                                        // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
+                                        loadStoreOnCreate: false,
+                                        leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
+                                        rightStore: 'Chaching.store.users.SecurityAccessStore',
+                                        requireMultiSearch: true,
+                                        selModelConfig: {
+                                            selType: 'chachingCheckboxSelectionModel',
+                                            injectCheckbox: "first",
+                                            headerWidth: '5%',
+                                            mode: 'MULTI',
+                                            showHeaderCheckbox: false
+                                        },
+                                        doSaveOperation: function (direction, records) {
+                                            var isActive = direction === "leftToRight" ? true : false,
+                                                wasActive = direction === "rightToLeft" ? true : false;
+                                            for (var i = 0; i < records.length; i++) {
+                                                var rec = records[i];
+                                                rec.set('isActive', isActive);
+                                                rec.set('wasActive', wasActive);
+                                            }
+                                        }
+                                    }
 
                                 ]   // End of item ProjectCoa
                             }, {
                                 title: abp.localization.localize("ProjectSecurity"),
                                 padding: '0 10 0 10',
                                 iconCls: 'fa fa-steam',
-                                disabled: true,
                                 layout: 'column',
                                 height: '100%',
                                 items: [
-                                
-                                ]
+                                    {
+                                        columnWidth: 1.0,
+                                        xtype: 'chachingGridDragDrop',
+                                        itemId: 'projectSecurityGridItemId',
+                                        padding: '5 0 0 0',
+                                        leftTitle: '',
+                                        rightTitle: '',
+                                        disabled: true,
+                                        columns: [
+                                            {
+                                                xtype: 'gridcolumn',
+                                                text: app.localize('AccountNumber'),
+                                                dataIndex: 'accountNumber',
+                                                sortable: true,
+                                                groupable: true,
+                                                width: '47%',
+                                                filterField: {
+                                                    xtype: 'textfield',
+                                                    width: '100%'
+                                                }
+                                            }, {
+                                                xtype: 'gridcolumn',
+                                                text: app.localize('AccountName'),
+                                                dataIndex: 'caption',
+                                                sortable: true,
+                                                groupable: true,
+                                                width: '47%',
+                                                filterField: {
+                                                    xtype: 'textfield',
+                                                    width: '15%'
+                                                }
+                                            }
+                                        ],
+                                        // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
+                                        loadStoreOnCreate: false,
+                                        leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
+                                        rightStore: 'Chaching.store.users.SecurityAccessStore',
+                                        requireMultiSearch: true,
+                                        selModelConfig: {
+                                            selType: 'chachingCheckboxSelectionModel',
+                                            injectCheckbox: "first",
+                                            headerWidth: '5%',
+                                            mode: 'MULTI',
+                                            showHeaderCheckbox: false
+                                        },
+                                        doSaveOperation: function (direction, records) {
+                                            var isActive = direction === "leftToRight" ? true : false,
+                                                wasActive = direction === "rightToLeft" ? true : false;
+                                            for (var i = 0; i < records.length; i++) {
+                                                var rec = records[i];
+                                                rec.set('isActive', isActive);
+                                                rec.set('wasActive', wasActive);
+                                            }
+                                        }
+                                    }
+
+                                ]   // End of Project Security
                             }, {
                                 title: abp.localization.localize("CreditCardCoa"),
                                 padding: '0 10 0 10',

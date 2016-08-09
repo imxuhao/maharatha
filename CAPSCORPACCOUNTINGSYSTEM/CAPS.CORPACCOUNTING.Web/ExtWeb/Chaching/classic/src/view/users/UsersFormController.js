@@ -66,12 +66,15 @@
     },
     onUserFormResize: function (form, newWidth, newHeight, oldWidth, oldHeight) {
         var me = this,
-           view = me.getView();
-        var treePanel = view.down('treepanel[itemId=permissionsListItemId]');
-        var rolesListGrid = view.down('grid[itemId=rolesListGridItemId]');
-        var companyListGrid = view.down('grid[itemId=companyListGridItemId]');
-        var treePanelLinkCompany = view.down('treepanel[itemId=permissionsCompanyListItemId]');
-        var corporateCOASecurityGrid = view.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]');
+            view = me.getView(),
+            treePanel = view.down('treepanel[itemId=permissionsListItemId]'),
+            rolesListGrid = view.down('grid[itemId=rolesListGridItemId]'),
+            companyListGrid = view.down('grid[itemId=companyListGridItemId]'),
+            treePanelLinkCompany = view.down('treepanel[itemId=permissionsCompanyListItemId]'),
+            corporateCOASecurityGrid = view.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
+            projectCoaDragDropControl = view.down('chachingGridDragDrop[itemId=projectCOASecurityGridItemId]'),
+            projectDragDropControl = view.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]');
+                
         if (treePanel) {
             treePanel.setHeight(newHeight - 100);
         }
@@ -87,7 +90,13 @@
         if (corporateCOASecurityGrid) {
             corporateCOASecurityGrid.setHeight(newHeight - 130);
         }
-
+        if (projectCoaDragDropControl) {
+            projectCoaDragDropControl.setHeight(newHeight - 130);
+        }
+        if (projectDragDropControl) {
+            projectDragDropControl.setHeight(newHeight - 130);
+        }
+        
     },
     loadCompanyRoles: function (view, record, item, index, e, eOpts) {
         var me = this,

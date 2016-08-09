@@ -353,7 +353,7 @@ Ext.define('Chaching.view.users.UsersForm',
                         itemId: 'userSecuritySettingsItemId',
                         items: [
                             {
-                                title: abp.localization.localize("CorporateCoa"),
+                                title: abp.localization.localize("CorporateCoaSecurity"),
                                 margin: '0 !important',
                                 scrollable: true,
                                 iconCls: 'fa fa-wrench',
@@ -375,7 +375,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                         valueField: 'coaId',
                                         emptyText: app.localize('SelectOption'),
                                         queryMode: 'local',
-                                        store: 'financials.accounts.ChartOfAccountStore'
+                                        store: Ext.create('Chaching.store.financials.accounts.ChartOfAccountStore'),
+                                        listeners: {
+                                            change: 'onCorporateCoaSelect'
+                                        }
                                     },
                                     {
                                         columnWidth: 1.0,
@@ -412,8 +415,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                         ],
                                         // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
                                         loadStoreOnCreate: false,
-                                        leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
-                                        rightStore: 'Chaching.store.users.SecurityAccessStore',
+                                        leftStore: 'Chaching.store.users.AccountSecurityLeftStore',
+                                        rightStore: 'Chaching.store.users.AccountSecurityRightStore',
                                         requireMultiSearch: true,
                                         rangeSelectorConfig: {
                                             entityName: '',
@@ -438,8 +441,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                     }
                                     
                                 ]
-                            }, {
-                                title: abp.localization.localize("ProjectCoa"),
+                            },
+                            {
+                                title: abp.localization.localize("ProjectCoaSecurity"),
                                 padding: '0 10 0 10',
                                 iconCls: 'fa fa-unlock-alt',
                                 layout: 'column',
@@ -452,7 +456,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                      reference: 'projectCoaCombo',
                                      padding: '5 0 0 15',
                                      fieldLabel: app.localize('ProjectChartOfAccount'),
-                                     labelWidth: 150,
+                                     labelWidth: 180,
                                      maxWidth: 500,
                                      //width: '50%',
                                      ui: 'fieldLabelTop',
@@ -460,7 +464,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                      valueField: 'coaId',
                                      emptyText: app.localize('SelectOption'),
                                      queryMode: 'local',
-                                     store: 'projects.projectmaintenance.ProjectCoaStore'
+                                     store: Ext.create('Chaching.store.projects.projectmaintenance.ProjectCoaStore'),
+                                     listeners: {
+                                         change: 'onProjectCoaSelect'
+                                     }
                                  },
                                     {
                                         columnWidth: 1.0,
@@ -469,7 +476,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                         padding: '5 0 0 0',
                                         leftTitle: '',
                                         rightTitle: '',
-                                        hidden: true,
+                                       // hidden: true,
                                         columns: [
                                             {
                                                 xtype: 'gridcolumn',
@@ -497,8 +504,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                         ],
                                         // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
                                         loadStoreOnCreate: false,
-                                        leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
-                                        rightStore: 'Chaching.store.users.SecurityAccessStore',
+                                        leftStore: 'Chaching.store.users.AccountSecurityLeftStore',
+                                        rightStore: 'Chaching.store.users.AccountSecurityRightStore',
                                         requireMultiSearch: true,
                                         selModelConfig: {
                                             selType: 'chachingCheckboxSelectionModel',
@@ -519,7 +526,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                     }
 
                                 ]   // End of item ProjectCoa
-                            }, {
+                            },
+                            {
                                 title: abp.localization.localize("ProjectSecurity"),
                                 padding: '0 10 0 10',
                                 iconCls: 'fa fa-steam',
@@ -533,12 +541,11 @@ Ext.define('Chaching.view.users.UsersForm',
                                         padding: '5 0 0 0',
                                         leftTitle: '',
                                         rightTitle: '',
-                                        disabled: true,
                                         columns: [
                                             {
                                                 xtype: 'gridcolumn',
-                                                text: app.localize('AccountNumber'),
-                                                dataIndex: 'accountNumber',
+                                                text: app.localize('ProjectNumber'),
+                                                dataIndex: 'jobNumber',
                                                 sortable: true,
                                                 groupable: true,
                                                 width: '47%',
@@ -548,7 +555,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 }
                                             }, {
                                                 xtype: 'gridcolumn',
-                                                text: app.localize('AccountName'),
+                                                text: app.localize('ProjectName'),
                                                 dataIndex: 'caption',
                                                 sortable: true,
                                                 groupable: true,
@@ -561,8 +568,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                         ],
                                         // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
                                         loadStoreOnCreate: false,
-                                        leftStore: 'Chaching.store.financials.accounts.AccountRestrictionLeftStore',
-                                        rightStore: 'Chaching.store.users.SecurityAccessStore',
+                                        leftStore: 'Chaching.store.users.ProjectSecurityLeftStore',
+                                        rightStore: 'Chaching.store.users.ProjectSecurityRightStore',
                                         requireMultiSearch: true,
                                         selModelConfig: {
                                             selType: 'chachingCheckboxSelectionModel',
@@ -583,42 +590,200 @@ Ext.define('Chaching.view.users.UsersForm',
                                     }
 
                                 ]   // End of Project Security
-                            }, {
-                                title: abp.localization.localize("CreditCardCoa"),
-                                padding: '0 10 0 10',
-                                iconCls: 'fa fa-credit-card',
-                                disabled: true,
-                                layout: 'column',
-                                height: '100%',
-                                items: [
+                            },
+                             {
+                                 title: abp.localization.localize("DivisionSecurity"),
+                                 padding: '0 10 0 10',
+                                 iconCls: 'fa fa-steam',
+                                 layout: 'column',
+                                 height: '100%',
+                                 items: [
+                                     {
+                                         columnWidth: 1.0,
+                                         xtype: 'chachingGridDragDrop',
+                                         itemId: 'divisionSecurityGridItemId',
+                                         padding: '5 0 0 0',
+                                         leftTitle: '',
+                                         rightTitle: '',
+                                         columns: [
+                                             {
+                                                 xtype: 'gridcolumn',
+                                                 text: app.localize('JobNumber'),
+                                                 dataIndex: 'jobNumber',
+                                                 sortable: true,
+                                                 groupable: true,
+                                                 width: '47%',
+                                                 filterField: {
+                                                     xtype: 'textfield',
+                                                     width: '100%'
+                                                 }
+                                             }, {
+                                                 xtype: 'gridcolumn',
+                                                 text: app.localize('JobName'),
+                                                 dataIndex: 'caption',
+                                                 sortable: true,
+                                                 groupable: true,
+                                                 width: '47%',
+                                                 filterField: {
+                                                     xtype: 'textfield',
+                                                     width: '15%'
+                                                 }
+                                             }
+                                         ],
+                                         // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
+                                         loadStoreOnCreate: false,
+                                         leftStore: 'Chaching.store.users.ProjectSecurityLeftStore',
+                                         rightStore: 'Chaching.store.users.ProjectSecurityRightStore',
+                                         requireMultiSearch: true,
+                                         selModelConfig: {
+                                             selType: 'chachingCheckboxSelectionModel',
+                                             injectCheckbox: "first",
+                                             headerWidth: '5%',
+                                             mode: 'MULTI',
+                                             showHeaderCheckbox: false
+                                         },
+                                         doSaveOperation: function (direction, records) {
+                                             var isActive = direction === "leftToRight" ? true : false,
+                                                 wasActive = direction === "rightToLeft" ? true : false;
+                                             for (var i = 0; i < records.length; i++) {
+                                                 var rec = records[i];
+                                                 rec.set('isActive', isActive);
+                                                 rec.set('wasActive', wasActive);
+                                             }
+                                         }
+                                     }
 
-                                ]
-                            }, {
-                                title: abp.localization.localize("BankCoa"),
-                                padding: '0 10 0 10',
-                                iconCls: 'fa fa-bank',
-                                disabled: true,
-                                layout: 'column',
-                                height: '100%',
-                                items: [
+                                 ]   // End of Project Security
+                             },
+                             {
+                                 title: abp.localization.localize("CreditCardSecurity"),
+                                 padding: '0 10 0 10',
+                                 iconCls: 'fa fa-credit-card',
+                                 layout: 'column',
+                                 height: '100%',
+                                 items: [
+                                     {
+                                         columnWidth: 1.0,
+                                         xtype: 'chachingGridDragDrop',
+                                         itemId: 'creditCardSecurityGridItemId',
+                                         padding: '5 0 0 0',
+                                         leftTitle: '',
+                                         rightTitle: '',
+                                         columns: [
+                                             {
+                                                 xtype: 'gridcolumn',
+                                                 text: app.localize('CardHolderName'),
+                                                 dataIndex: 'cardHolderName',
+                                                 sortable: true,
+                                                 groupable: true,
+                                                 width: '47%',
+                                                 filterField: {
+                                                     xtype: 'textfield',
+                                                     width: '100%'
+                                                 }
+                                             }, {
+                                                 xtype: 'gridcolumn',
+                                                 text: app.localize('CardNumber'),
+                                                 dataIndex: 'cardNumber',
+                                                 sortable: true,
+                                                 groupable: true,
+                                                 width: '47%',
+                                                 filterField: {
+                                                     xtype: 'textfield',
+                                                     width: '15%'
+                                                 }
+                                             }
+                                         ],
+                                         // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
+                                         loadStoreOnCreate: false,
+                                         leftStore: 'Chaching.store.users.CreditCardSecurityLeftStore',
+                                         rightStore: 'Chaching.store.users.CreditCardSecurityRightStore',
+                                         requireMultiSearch: true,
+                                         selModelConfig: {
+                                             selType: 'chachingCheckboxSelectionModel',
+                                             injectCheckbox: "first",
+                                             headerWidth: '5%',
+                                             mode: 'MULTI',
+                                             showHeaderCheckbox: false
+                                         },
+                                         doSaveOperation: function (direction, records) {
+                                             var isActive = direction === "leftToRight" ? true : false,
+                                                 wasActive = direction === "rightToLeft" ? true : false;
+                                             for (var i = 0; i < records.length; i++) {
+                                                 var rec = records[i];
+                                                 rec.set('isActive', isActive);
+                                                 rec.set('wasActive', wasActive);
+                                             }
+                                         }
+                                     }
 
-                                ]
-                            }
+                                 ]   // End of Project Security
+                             },
+                              {
+                                  title: abp.localization.localize("BankSecurity"),
+                                  padding: '0 10 0 10',
+                                  iconCls: 'fa fa-bank',
+                                  layout: 'column',
+                                  height: '100%',
+                                  items: [
+                                      {
+                                          columnWidth: 1.0,
+                                          xtype: 'chachingGridDragDrop',
+                                          itemId: 'bankSecurityGridItemId',
+                                          padding: '5 0 0 0',
+                                          leftTitle: '',
+                                          rightTitle: '',
+                                          columns: [
+                                              {
+                                                  xtype: 'gridcolumn',
+                                                  text: app.localize('AccountName'),
+                                                  dataIndex: 'accountName',
+                                                  sortable: true,
+                                                  groupable: true,
+                                                  width: '47%',
+                                                  filterField: {
+                                                      xtype: 'textfield',
+                                                      width: '100%'
+                                                  }
+                                              }, {
+                                                  xtype: 'gridcolumn',
+                                                  text: app.localize('BankName'),
+                                                  dataIndex: 'bankName',
+                                                  sortable: true,
+                                                  groupable: true,
+                                                  width: '47%',
+                                                  filterField: {
+                                                      xtype: 'textfield',
+                                                      width: '15%'
+                                                  }
+                                              }
+                                          ],
+                                          // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
+                                          loadStoreOnCreate: false,
+                                          leftStore: 'Chaching.store.users.BankSecurityLeftStore',
+                                          rightStore: 'Chaching.store.users.BankSecurityRightStore',
+                                          requireMultiSearch: true,
+                                          selModelConfig: {
+                                              selType: 'chachingCheckboxSelectionModel',
+                                              injectCheckbox: "first",
+                                              headerWidth: '5%',
+                                              mode: 'MULTI',
+                                              showHeaderCheckbox: false
+                                          },
+                                          doSaveOperation: function (direction, records) {
+                                              var isActive = direction === "leftToRight" ? true : false,
+                                                  wasActive = direction === "rightToLeft" ? true : false;
+                                              for (var i = 0; i < records.length; i++) {
+                                                  var rec = records[i];
+                                                  rec.set('isActive', isActive);
+                                                  rec.set('wasActive', wasActive);
+                                              }
+                                          }
+                                      }
+
+                                  ]   // End of BankSecurity
+                              }
                         ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     }
 
             ]

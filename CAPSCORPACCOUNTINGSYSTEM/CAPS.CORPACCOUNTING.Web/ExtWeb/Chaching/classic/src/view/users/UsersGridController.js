@@ -86,34 +86,22 @@ Ext.define('Chaching.view.users.UsersGridController', {
             //Population of combo and grid
             var me = this,
             view = me.getView(),
-            coaCombo = formView.down('combobox[reference=coaCombo]'),
-            selectedCoa = 0;
+            coaCombo = formView.down('combobox[reference=coaCombo]');
             coaCombo.getStore().load({
                 callback: function (records, operation, success) {
-                    if (success && records.length>0) {
+                    if (success && records.length > 0) {
                         coaCombo.setValue(records[0].data.coaId);
-                        selectedCoa = records[0].data.coaId;
-                        /// fill grid
-                        var corporateDragDropControl = formView.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
-                            leftStore = corporateDragDropControl.getLeftStore(),
-                            rightStore = corporateDragDropControl.getRightStore(),
-                            values = formView.getForm().getValues();
-                        leftStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-                        leftStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-                        leftStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
-                        leftStore.getProxy().api.read = abp.appPath + 'api/services/app/userSecuritySettings/GetAccountList';
-                        leftStore.load();
-                        rightStore.getProxy().setExtraParam('chartOfAccountId', selectedCoa);
-                        rightStore.getProxy().setExtraParam('userId', ChachingGlobals.SelectedUserId);
-                        rightStore.getProxy().setExtraParam('entityClassificationId', ChachingGlobals.CorporateCoa);
-                        rightStore.load();
                     }
                 }
             });
-            // populate projectCoa combo
-            projectCoaCombo = formView.down('combobox[reference=projectCoaCombo]');
-            projectCoaCombo.getStore().load();
-            
+            //load project security accesss
+            me.loadProjectSecurity(formView);
+            //load division security accesss
+            me.loadDivisionSecurity(formView);
+            // load credit card security access
+            me.loadCreditCardSecurity(formView);
+            // load bank security access
+            me.loadBankSecurity(formView);
         }
         else {
             userSecuritySettings.setDisabled(true);
@@ -243,6 +231,85 @@ Ext.define('Chaching.view.users.UsersGridController', {
             }
         }
        
+    },
+   
+    loadProjectSecurity: function (formView) {
+        var projectSecurityControl = formView.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]'),
+        leftStore = projectSecurityControl.getLeftStore(),
+        rightStore = projectSecurityControl.getRightStore();
+        leftStore.getProxy().setExtraParams({
+            //'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.Project
+        });
+        leftStore.load();
+        rightStore.getProxy().setExtraParams({
+           // 'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.Project
+        });
+        rightStore.load();
+    },
+    loadDivisionSecurity: function (formView) {
+        var divisionSecurityControl = formView.down('chachingGridDragDrop[itemId=divisionSecurityGridItemId]'),
+        leftStore = divisionSecurityControl.getLeftStore(),
+        rightStore = divisionSecurityControl.getRightStore(),
+        filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: 'true',
+            comparator: 0,
+            dataType: 3,
+            property: 'IsDivision'
+        });
+        leftStore.filter(filter);
+        leftStore.getProxy().setExtraParams({
+            //'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.Division
+        });
+        leftStore.load();
+        rightStore.filter(filter);
+        rightStore.getProxy().setExtraParams({
+            // 'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.Project
+        });
+        rightStore.load();
+    },
+
+    loadCreditCardSecurity: function (formView) {
+        var creditCardSecurityControl = formView.down('chachingGridDragDrop[itemId=creditCardSecurityGridItemId]'),
+        leftStore = creditCardSecurityControl.getLeftStore(),
+        rightStore = creditCardSecurityControl.getRightStore();
+        leftStore.getProxy().setExtraParams({
+            //'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.CreditCard
+        });
+        leftStore.load();
+        rightStore.getProxy().setExtraParams({
+            // 'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.CreditCard
+        });
+        rightStore.load();
+    },
+    loadBankSecurity: function (formView) {
+        var bankSecurityControl = formView.down('chachingGridDragDrop[itemId=bankSecurityGridItemId]'),
+        leftStore = bankSecurityControl.getLeftStore(),
+        rightStore = bankSecurityControl.getRightStore();
+        leftStore.getProxy().setExtraParams({
+            //'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.BankAccount
+        });
+        leftStore.load();
+        rightStore.getProxy().setExtraParams({
+            // 'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.BankAccount
+        });
+        rightStore.load();
     },
     onEditComplete: function (editor, e) {
         var me = this,

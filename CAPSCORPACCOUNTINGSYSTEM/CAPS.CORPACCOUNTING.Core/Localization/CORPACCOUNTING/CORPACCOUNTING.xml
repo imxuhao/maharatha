@@ -537,7 +537,7 @@
     <text name="AccountNumber" value="Account Number" />
     <text name="CreateNewAccount" value="Create New Account" />
     <text name="EditAccount" value="Edit Account" />
-    <text name="ProjectChartOfAccount" value="Project ChartOfAccount" />
+    <text name="ProjectChartOfAccount" value="Project Chart Of Account" />
     <text name="CreatingNewProjectCOA" value="Creating New ProjectCOA" />
     <text name="EditProjectCOA" value="Edit ProjectCOA" />
     <text name="Defaults" value="Defaults" />
@@ -553,7 +553,7 @@
     <text name="JobNumber" value="Job #" />
     <text name="JobDivisionNumber" value="Number" />
     <text name="ToolTipJobNumber" value="Enter Job #" />
-    <text name="ProjectName" value="Project name" />
+    <text name="ProjectName" value="Project Name" />
     <text name="ToolTipProjectName" value="Enter project name" />
     <text name="DetailReport" value="Detail report" />
     <text name="ProductName" value="Product name" />
@@ -608,7 +608,7 @@
     <text name="CreatingNewAddress" value="Create new Address" />
     <text name="DefaultRollupJob" value="Default Roll Up Job" />
     <text name="DefaultRollupAccount" value="Default Roll Up Account" />
-    <text name="JobName" value="Job name" />
+    <text name="JobName" value="Job Name" />
     <text name="ToolTipJobName" value="Enter job name" />
     <text name="SelectOption" value="--- Select ---" />
     <text name="Setup" value="Setup" />
@@ -856,10 +856,10 @@
     <text name="CreateBank" value="Create bank" />
     <text name="EditBank" value="Edit bank" />
     <text name="SaveBank" value="Save bank" />
-    <text name="BankName" value="Bank name" />
+    <text name="BankName" value="Bank Name" />
     <text name="ToolTipBankName" value="Enter bank name" />
     <text name="ToolTipAccountNumber" value="Enter account number" />
-    <text name="AccountName" value="Account name" />
+    <text name="AccountName" value="Account Name" />
     <text name="ToolTipAccountName" value="Enter account name" />
     <text name="AccountType" value="Account type" />
     <text name="ClosedAccount" value="Closed" />
@@ -1095,15 +1095,19 @@
     
   
 <text name="UserSecuritySettings" value="User security settings" />
-<text name="CorporateCoa" value="Corporate COA Security" />
-<text name="ProjectCoa" value="Project COA Security" />
+<text name="CorporateCoaSecurity" value="Corporate COA Security" />
+<text name="ProjectCoaSecurity" value="Project COA Security" />
 <text name="ProjectSecurity" value="Project Security" />
-<text name="CreditCardCoa" value="Credit Card Security" />
-<text name="BankCoa" value="Bank Security" />
+<text name="CreditCardSecurity" value="Credit Card Security" />
+<text name="BankSecurity" value="Bank Security" />
     <text name="Range" value="Enter range" />
     <text name="RangeMessage" value="Ex. 1001..1010;1000-01..1000-10" />
     <text name="InvalidRange" value="Range entered is invalid. Please enter correct range." />
     <text name="AppUpdate" value="Application Update"/>
     <text name="AppUpdateMessage" value="This application has an update, reload?"/>
+    <text name="ProjectNumber" value="Project Number"/>
+    <text name="CardHolderName" value="Card Holder Name"/>
+    <text name="CardNumber" value="Card Number"/>
+    <text name="DivisionSecurity" value="Division Security"/>
   </texts>
 </localizationDictionary>

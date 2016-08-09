@@ -19,13 +19,15 @@
         userOrganizationId: null,
         gotoMyAccount: false
     },
+    entityClassification : {
+        Account: 2, // corporate coa security
+        Project: 1, // project security
+        BankAccount: 3, // bank security
+        CreditCard: 4, // credit card security
+        Line: 5, // project coa security
+        Division: 6
+    },
     SelectedUserId: 0,
-    CorporateCoa: 2,
-    ProjectCoa: 1,
-    BankCoa: 3,
-    CreditCardCoa: 4,
-    LineCoa: 5,
-    DivisionCoa: 6,
     defaultCompanyLogoImage: abp.appPath + 'Content/images/capslogo.png',
     defaultProfilePictureImage: abp.appPath + 'Common/Images/default-profile-picture.png',
     defaultGridPageSize : 10,

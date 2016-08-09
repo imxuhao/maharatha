@@ -1,6 +1,59 @@
 ﻿Ext.define('Chaching.view.users.UsersFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.users-usersform',
+    onProjectCoaSelect: function (combo, newValue, oldValue) {
+        var me = this;
+        if (combo.getValue() != undefined) {
+            me.getLinesByProjectCoa(combo.getValue());
+        }
+        
+    },
+    getLinesByProjectCoa: function (chartOfAccountId) {
+        var me = this,
+            view = me.getView(),
+        projectCoaDragDropControl = view.down('chachingGridDragDrop[itemId=projectCOASecurityGridItemId]'),
+        leftStore = projectCoaDragDropControl.getLeftStore(),
+        rightStore = projectCoaDragDropControl.getRightStore();
+        leftStore.getProxy().setExtraParams({
+            'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.Line
+        });
+        leftStore.load();
+        rightStore.getProxy().setExtraParams({
+            'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.Line
+        });
+        rightStore.load();
+    },
+    onCorporateCoaSelect: function (combo, newValue, oldValue) {
+        var me = this;
+        if (combo.getValue() != undefined) {
+            //load corporate chart of accounts security accesss
+            me.loadCorporateAccountsByCoaId(combo.getValue());
+        }
+
+    },
+    loadCorporateAccountsByCoaId: function (chartOfAccountId) {
+        var me = this,
+         view = me.getView(),
+         corporateCoaControl = view.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
+       leftStore = corporateCoaControl.getLeftStore(),
+       rightStore = corporateCoaControl.getRightStore();
+        leftStore.getProxy().setExtraParams({
+            'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.Account
+        });
+        leftStore.load();
+        rightStore.getProxy().setExtraParams({
+            'chartOfAccountId': chartOfAccountId,
+            'userId': ChachingGlobals.SelectedUserId,
+            'entityClassificationId': ChachingGlobals.entityClassification.Account
+        });
+        rightStore.load();
+    },
     onFormAfterRender:function(){
         //var me = this,
         //    view = me.getView(),
@@ -73,7 +126,10 @@
             treePanelLinkCompany = view.down('treepanel[itemId=permissionsCompanyListItemId]'),
             corporateCOASecurityGrid = view.down('chachingGridDragDrop[itemId=corporateCOASecurityGridItemId]'),
             projectCoaDragDropControl = view.down('chachingGridDragDrop[itemId=projectCOASecurityGridItemId]'),
-            projectDragDropControl = view.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]');
+            projectDragDropControl = view.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]'),
+            divisionDragDropControl = view.down('chachingGridDragDrop[itemId=divisionSecurityGridItemId]'),
+            creditCardDragDropControl = view.down('chachingGridDragDrop[itemId=creditCardSecurityGridItemId]'),
+            bankDragDropControl = view.down('chachingGridDragDrop[itemId=bankSecurityGridItemId]');
                 
         if (treePanel) {
             treePanel.setHeight(newHeight - 100);
@@ -95,6 +151,15 @@
         }
         if (projectDragDropControl) {
             projectDragDropControl.setHeight(newHeight - 130);
+        }
+        if (creditCardDragDropControl) {
+            creditCardDragDropControl.setHeight(newHeight - 130);
+        }
+        if (bankDragDropControl) {
+            bankDragDropControl.setHeight(newHeight - 130);
+        }
+        if (divisionDragDropControl) {
+            divisionDragDropControl.setHeight(newHeight - 130);
         }
         
     },

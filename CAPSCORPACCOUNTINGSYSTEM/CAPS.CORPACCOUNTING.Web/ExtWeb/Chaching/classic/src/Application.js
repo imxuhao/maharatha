@@ -109,7 +109,15 @@ Ext.define('Chaching.Application', {
         'users.PermissionsTreeStore',
         'Chaching.store.ARPaymentTermsListStore',
         'Chaching.store.APPaymentTermsListStore',
-        'editions.EditionsTreeStore'
+        'editions.EditionsTreeStore',
+        'users.ProjectSecurityLeftStore',
+        'users.ProjectSecurityRightStore',
+        'users.BankSecurityRightStore',
+        'users.BankSecurityLeftStore',
+        'users.CreditCardSecurityRightStore',
+        'users.CreditCardSecurityLeftStore',
+        'users.AccountSecurityRightStore',
+        'users.AccountSecurityLeftStore'
     ],
     //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

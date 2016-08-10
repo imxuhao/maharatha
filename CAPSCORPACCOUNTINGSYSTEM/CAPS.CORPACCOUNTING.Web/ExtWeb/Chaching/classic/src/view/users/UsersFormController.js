@@ -124,16 +124,16 @@
             projectCoaDragDropControl.setHeight(newHeight - 130);
         }
         if (projectDragDropControl) {
-            projectDragDropControl.setHeight(newHeight - 130);
+            projectDragDropControl.setHeight(newHeight - 100);
         }
         if (creditCardDragDropControl) {
-            creditCardDragDropControl.setHeight(newHeight - 130);
+            creditCardDragDropControl.setHeight(newHeight - 100);
         }
         if (bankDragDropControl) {
-            bankDragDropControl.setHeight(newHeight - 130);
+            bankDragDropControl.setHeight(newHeight - 100);
         }
         if (divisionDragDropControl) {
-            divisionDragDropControl.setHeight(newHeight - 130);
+            divisionDragDropControl.setHeight(newHeight - 100);
         }
         
     },

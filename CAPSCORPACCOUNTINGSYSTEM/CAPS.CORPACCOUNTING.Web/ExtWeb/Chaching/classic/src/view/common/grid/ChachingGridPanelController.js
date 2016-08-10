@@ -32,19 +32,29 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         var me = this,
         view = me.getView(),
         importConfig = view.importConfig,
-        entityName = importConfig.entity;
+        entityName = importConfig.entity,
+        requestParamsObj = null;
+        if (entityName === "FinancialAccounts") {
+            requestParamsObj = {
+                'entityName': entityName,
+                'coaId' : view.coaId
+            };
+        } else {
+            requestParamsObj = {
+                'entityName': entityName
+            };
+        }
 
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/templateExporter/GetTemplateByEntity',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            jsonData: Ext.encode({ 'entityName': entityName }),
+            jsonData: Ext.encode(requestParamsObj),
             success: function (response, opts) {
                 var resObj = Ext.decode(response.responseText);
                 if (resObj.success) {
                     var file = resObj.result;
                     location.href = abp.appPath + 'File/DownloadTempFile?fileType=' + file.fileType + '&fileToken=' + file.fileToken + '&fileName=' + file.fileName;
-                   
                 } else {
                     ChachingGlobals.showPageSpecificErrors(response);
                 }

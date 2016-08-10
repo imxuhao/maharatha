@@ -507,6 +507,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                         leftStore: 'Chaching.store.users.AccountSecurityLeftStore',
                                         rightStore: 'Chaching.store.users.AccountSecurityRightStore',
                                         requireMultiSearch: true,
+                                        rangeSelectorConfig: {
+                                            entityName: '',
+                                            propertyName: 'accountNumber'
+                                        },
                                         selModelConfig: {
                                             selType: 'chachingCheckboxSelectionModel',
                                             injectCheckbox: "first",
@@ -571,6 +575,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                         leftStore: 'Chaching.store.users.ProjectSecurityLeftStore',
                                         rightStore: 'Chaching.store.users.ProjectSecurityRightStore',
                                         requireMultiSearch: true,
+                                        rangeSelectorConfig: {
+                                            entityName: '',
+                                            propertyName: 'jobNumber'
+                                        },
                                         selModelConfig: {
                                             selType: 'chachingCheckboxSelectionModel',
                                             injectCheckbox: "first",
@@ -608,7 +616,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                          columns: [
                                              {
                                                  xtype: 'gridcolumn',
-                                                 text: app.localize('JobNumber'),
+                                                 text: app.localize('DivisionNumber'),
                                                  dataIndex: 'jobNumber',
                                                  sortable: true,
                                                  groupable: true,
@@ -619,7 +627,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                  }
                                              }, {
                                                  xtype: 'gridcolumn',
-                                                 text: app.localize('JobName'),
+                                                 text: app.localize('DivisionName'),
                                                  dataIndex: 'caption',
                                                  sortable: true,
                                                  groupable: true,
@@ -635,6 +643,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                          leftStore: 'Chaching.store.users.ProjectSecurityLeftStore',
                                          rightStore: 'Chaching.store.users.ProjectSecurityRightStore',
                                          requireMultiSearch: true,
+                                         rangeSelectorConfig: {
+                                             entityName: '',
+                                             propertyName: 'jobNumber'
+                                         },
                                          selModelConfig: {
                                              selType: 'chachingCheckboxSelectionModel',
                                              injectCheckbox: "first",
@@ -670,6 +682,18 @@ Ext.define('Chaching.view.users.UsersForm',
                                          leftTitle: '',
                                          rightTitle: '',
                                          columns: [
+                                              {
+                                                  xtype: 'gridcolumn',
+                                                  text: app.localize('CardNumber'),
+                                                  dataIndex: 'cardNumber',
+                                                  sortable: true,
+                                                  groupable: true,
+                                                  width: '47%',
+                                                  filterField: {
+                                                      xtype: 'textfield',
+                                                      width: '100%'
+                                                  }
+                                              },
                                              {
                                                  xtype: 'gridcolumn',
                                                  text: app.localize('CardHolderName'),
@@ -678,20 +702,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                                  groupable: true,
                                                  width: '47%',
                                                  filterField: {
-                                                     xtype: 'textfield',
-                                                     width: '100%'
-                                                 }
-                                             }, {
-                                                 xtype: 'gridcolumn',
-                                                 text: app.localize('CardNumber'),
-                                                 dataIndex: 'cardNumber',
-                                                 sortable: true,
-                                                 groupable: true,
-                                                 width: '47%',
-                                                 filterField: {
-                                                     xtype: 'textfield',
-                                                     width: '15%'
-                                                 }
+                                                    xtype: 'textfield',
+                                                    width: '15%'
+                                                }
                                              }
                                          ],
                                          // store: 'Chaching.store.financials.accounts.ChartOfAccountStore',
@@ -699,6 +712,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                          leftStore: 'Chaching.store.users.CreditCardSecurityLeftStore',
                                          rightStore: 'Chaching.store.users.CreditCardSecurityRightStore',
                                          requireMultiSearch: true,
+                                         rangeSelectorConfig: {
+                                             entityName: '',
+                                             propertyName: 'cardNumber'
+                                         },
                                          selModelConfig: {
                                              selType: 'chachingCheckboxSelectionModel',
                                              injectCheckbox: "first",
@@ -763,6 +780,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                           leftStore: 'Chaching.store.users.BankSecurityLeftStore',
                                           rightStore: 'Chaching.store.users.BankSecurityRightStore',
                                           requireMultiSearch: true,
+                                          rangeSelectorConfig: {
+                                              entityName: '',
+                                              propertyName: 'accountName'
+                                          },
                                           selModelConfig: {
                                               selType: 'chachingCheckboxSelectionModel',
                                               injectCheckbox: "first",

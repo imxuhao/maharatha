@@ -1111,5 +1111,7 @@
     <text name="CardHolderName" value="Card Holder Name"/>
     <text name="CardNumber" value="Card Number"/>
     <text name="DivisionSecurity" value="Division Security"/>
+    <text name="DivisionName" value="Division Name" />
+
   </texts>
 </localizationDictionary>

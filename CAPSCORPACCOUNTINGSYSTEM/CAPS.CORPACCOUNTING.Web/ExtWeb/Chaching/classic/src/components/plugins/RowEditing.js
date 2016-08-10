@@ -196,5 +196,5 @@ Ext.define('Chaching.components.plugins.RowEditing', {
             field.ui = me.defaultFieldUI;
         }
         return field;
-    },
+    }
 });

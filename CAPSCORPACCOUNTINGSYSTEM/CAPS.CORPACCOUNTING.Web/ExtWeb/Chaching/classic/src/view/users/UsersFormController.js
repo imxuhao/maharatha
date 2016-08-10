@@ -184,6 +184,7 @@
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateLineAccessList', request);
             }
             if (projectRightStore.getUpdatedRecords().length > 0) {
+                request.projectAcessList = [];
                 projectRightStore.each(function (records, obj, count) {
                     request.projectAcessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
                 })
@@ -191,7 +192,7 @@
             }
             if (divisionRightStore.getUpdatedRecords().length > 0) {
                 request.projectAcessList = [];
-                ExdivisionRightStoret.each(function (records, obj, count) {
+                divisionRightStore.each(function (records, obj, count) {
                     request.projectAcessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateDivisionAccessList', request);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CAPS.CORPACCOUNTING.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,11 +9,11 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
 {
     public static class SearchExtensions
     {
-        public static IQueryable<T> ApplySearchCriterias<T>(this IQueryable<T> query, IEnumerable<AbstractSearch> searchCriterias)
+        public static IQueryable<T> ApplySearchCriterias<T>(this IQueryable<T> query, IEnumerable<AbstractSearch> searchCriterias, SearchPattern searchPattern = SearchPattern.And)
         {
             foreach (var criteria in searchCriterias)
             {
-                query= criteria.ApplyToQuery(query);
+                query= criteria.ApplyToQuery(query,searchPattern);
             }
 
             //var result = query.ToArray();

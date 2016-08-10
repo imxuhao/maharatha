@@ -48,6 +48,8 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
 
         [Display(Name = "==")]
         Equals=2,
+        [Display(Name = "Range")]
+        InRange=5,
 
         [Display(Name = "In")]
         In=6

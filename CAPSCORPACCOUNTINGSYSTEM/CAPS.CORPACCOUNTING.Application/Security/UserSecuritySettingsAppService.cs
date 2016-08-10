@@ -261,8 +261,18 @@ namespace CAPS.CORPACCOUNTING.Security
 
             if (!ReferenceEquals(input.Filters, null))
             {
+                Func<AccountCacheItem, bool> multiRangeExp = null;
+                var multiRangeFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRangeFilters.Count != 0)
+                {
+                    multiRangeExp = ExpressionBuilder.GetExpression<AccountCacheItem>(Helper.GetMultiRangeFilters(multiRangeFilters), SearchPattern.Or).Compile();
+                    input.Filters.RemoveAll(u => u.IsMultiRange == true);
+                }
+
                 var filterCondition = ExpressionBuilder.GetExpression<AccountCacheItem>(input.Filters).Compile();
-                accountCacheItems = accountCache.ToList().Where(u => u.ChartOfAccountId == input.ChartOfAccountId).Where(filterCondition).ToList();
+                accountCacheItems = accountCache.ToList().Where(u => u.ChartOfAccountId == input.ChartOfAccountId)
+                    .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
+                    .Where(filterCondition).ToList();
             }
 
             return accountCacheItems.Select(item =>
@@ -300,16 +310,16 @@ namespace CAPS.CORPACCOUNTING.Security
             {
                 Func<AccountCacheItem, bool> multiRangeExp = null;
                 Func<AccountCacheItem, bool> filterCondition = null;
-                var multiRageFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
-                if (multiRageFilters.Count!=0)
+                var multiRangeFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRangeFilters.Count != 0)
                 {
-                    multiRangeExp = ExpressionBuilder.GetExpression<AccountCacheItem>(Helper.GetMultiRangeFilters(multiRageFilters), SearchPattern.Or).Compile();
+                    multiRangeExp = ExpressionBuilder.GetExpression<AccountCacheItem>(Helper.GetMultiRangeFilters(multiRangeFilters), SearchPattern.Or).Compile();
                     input.Filters.RemoveAll(u => u.IsMultiRange == true);
                 }
                 var otherFilters = input.Filters.Where(u => u.IsMultiRange == false).ToList();
-                if (otherFilters.Count!=0)
+                if (otherFilters.Count != 0)
                     filterCondition = ExpressionBuilder.GetExpression<AccountCacheItem>(otherFilters).Compile();
-                accountCacheItems = accountCache.ToList().WhereIf(multiRageFilters.Count != 0, multiRangeExp)
+                accountCacheItems = accountCache.ToList().WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
                     .WhereIf(otherFilters.Count != 0, filterCondition)
                     .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
@@ -485,8 +495,18 @@ namespace CAPS.CORPACCOUNTING.Security
 
             if (!ReferenceEquals(input.Filters, null))
             {
+                Func<DivisionCacheItem, bool> multiRangeExp = null;
+                var multiRangeFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRangeFilters.Count != 0)
+                {
+                    multiRangeExp = ExpressionBuilder.GetExpression<DivisionCacheItem>(Helper.GetMultiRangeFilters(multiRangeFilters), SearchPattern.Or).Compile();
+                    input.Filters.RemoveAll(u => u.IsMultiRange == true);
+                }
+
                 var filterCondition = ExpressionBuilder.GetExpression<DivisionCacheItem>(input.Filters).Compile();
-                divisionCacheItems = divisionCache.ToList().Where(filterCondition).ToList();
+                divisionCacheItems = divisionCache.ToList()
+                     .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
+                    .Where(filterCondition).ToList();
             }
 
             return divisionCacheItems.Select(item =>
@@ -518,14 +538,33 @@ namespace CAPS.CORPACCOUNTING.Security
             var divisionCache = await _divisionCache.GetDivisionCacheItemAsync(
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheInput);
 
+
             if (!ReferenceEquals(input.Filters, null))
             {
-                var filterCondition = ExpressionBuilder.GetExpression<DivisionCacheItem>(input.Filters).Compile();
-                divisionCacheItems = divisionCache.ToList().Where(filterCondition).Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
+
+
+                Func<DivisionCacheItem, bool> multiRangeExp = null;
+                Func<DivisionCacheItem, bool> filterCondition = null;
+                var multiRangeFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRangeFilters.Count != 0)
+                {
+                    multiRangeExp = ExpressionBuilder.GetExpression<DivisionCacheItem>(Helper.GetMultiRangeFilters(multiRangeFilters), SearchPattern.Or).Compile();
+                    input.Filters.RemoveAll(u => u.IsMultiRange == true);
+                }
+                var otherFilters = input.Filters.Where(u => u.IsMultiRange == false).ToList();
+                if (otherFilters.Count != 0)
+                    filterCondition = ExpressionBuilder.GetExpression<DivisionCacheItem>(otherFilters).Compile();
+
+
+                divisionCacheItems = divisionCache.ToList()
+                    .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
+                    .WhereIf(otherFilters.Count != 0, filterCondition).
+                    Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
             else
             {
-                divisionCacheItems = divisionCache.ToList().Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
+                divisionCacheItems = divisionCache.ToList()
+                    .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
 
 
@@ -627,6 +666,28 @@ namespace CAPS.CORPACCOUNTING.Security
                         join bankAccount in _bankAccountUnitRepository.GetAll().Where(u => strTypeOfbankAC.Contains(u.TypeOfBankAccountId.ToString())) on creditCard.BankAccountId equals bankAccount.Id
                         select new { CardHolderName = bankAccount.Description, CardNumber = bankAccount.BankAccountNumber, OrganizationUnitId = creditCard.OrganizationUnitId, AccountingDocumentId = creditCard.Id };
 
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                var multiRageFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRageFilters.Count != 0)
+                {
+                    SearchTypes mapSearchFilters = Helper.MappingFilters(Helper.GetMultiRangeFilters(multiRageFilters));
+                    if (!ReferenceEquals(mapSearchFilters, null))
+                        query = Helper.CreateFilters(query, mapSearchFilters);
+
+                    input.Filters.RemoveAll(u => u.IsMultiRange == true);
+                }
+                var otherFilters = input.Filters.Where(u => u.IsMultiRange == false).ToList();
+                if (otherFilters.Count != 0)
+                {
+                    SearchTypes mapSearchFilters = Helper.MappingFilters(otherFilters);
+                    if (!ReferenceEquals(mapSearchFilters, null))
+                        query = Helper.CreateFilters(query, mapSearchFilters);
+                }
+
+            }
+
+
             var creditCardAccessList = await query.ToListAsync();
 
             return creditCardAccessList.Select(item =>
@@ -661,9 +722,39 @@ namespace CAPS.CORPACCOUNTING.Security
 
             var query = from creditCard in _creditCardUnitRepository.GetAll().Where(u => !strOrgIds.Contains(u.OrganizationUnitId.Value.ToString()))
                         join bankAccount in _bankAccountUnitRepository.GetAll().Where(u => strTypeOfbankAC.Contains(u.TypeOfBankAccountId.ToString())) on creditCard.BankAccountId equals bankAccount.Id
-                        select new { CardHolderName = bankAccount.Description, CardNumber = bankAccount.BankAccountNumber, OrganizationUnitId = creditCard.OrganizationUnitId, AccountingDocumentId = creditCard.Id };
+                        select new
+                        {
+                            CardHolderName = bankAccount.Description,
+                            CardNumber = bankAccount.BankAccountNumber,
+                            OrganizationUnitId = creditCard.OrganizationUnitId,
+                            AccountingDocumentId = creditCard.Id
+                        };
 
-            var creditCardAccessList = await query.ToListAsync();//.Where(p => p.creditCardAccess.UserId == input.UserId && p.creditCardAccess.IsActive == true).ToListAsync();
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                var multiRageFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRageFilters.Count != 0)
+                {
+                    SearchTypes mapSearchFilters = Helper.MappingFilters(Helper.GetMultiRangeFilters(multiRageFilters));
+                    if (!ReferenceEquals(mapSearchFilters, null))
+                        query = Helper.CreateFilters(query, mapSearchFilters);
+
+                    input.Filters.RemoveAll(u => u.IsMultiRange == true);
+                }
+                var otherFilters = input.Filters.Where(u => u.IsMultiRange == false).ToList();
+                if (otherFilters.Count != 0)
+                {
+                    SearchTypes mapSearchFilters = Helper.MappingFilters(otherFilters);
+                    if (!ReferenceEquals(mapSearchFilters, null))
+                        query = Helper.CreateFilters(query, mapSearchFilters);
+                }
+
+            }
+
+
+
+
+            var creditCardAccessList = await query.ToListAsync();
 
             return creditCardAccessList.Select(item =>
             {
@@ -773,8 +864,19 @@ namespace CAPS.CORPACCOUNTING.Security
 
             if (!ReferenceEquals(input.Filters, null))
             {
+
+                Func<BankAccountCacheItem, bool> multiRangeExp = null;
+                var multiRangeFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRangeFilters.Count != 0)
+                {
+                    multiRangeExp = ExpressionBuilder.GetExpression<BankAccountCacheItem>(Helper.GetMultiRangeFilters(multiRangeFilters), SearchPattern.Or).Compile();
+                    input.Filters.RemoveAll(u => u.IsMultiRange == true);
+                }
+
                 var filterCondition = ExpressionBuilder.GetExpression<BankAccountCacheItem>(input.Filters).Compile();
-                bankAccountCacheItems = bankAccountCache.ToList().Where(filterCondition).ToList();
+                bankAccountCacheItems = bankAccountCache.ToList()
+                     .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
+                    .Where(filterCondition).ToList();
             }
 
             return bankAccountCacheItems.Select(item =>
@@ -809,12 +911,28 @@ namespace CAPS.CORPACCOUNTING.Security
 
             if (!ReferenceEquals(input.Filters, null))
             {
-                var filterCondition = ExpressionBuilder.GetExpression<BankAccountCacheItem>(input.Filters).Compile();
-                bankAccountCacheItems = bankAccountCache.ToList().Where(filterCondition).Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
+
+                Func<BankAccountCacheItem, bool> multiRangeExp = null;
+                Func<BankAccountCacheItem, bool> filterCondition = null;
+                var multiRangeFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRangeFilters.Count != 0)
+                {
+                    multiRangeExp = ExpressionBuilder.GetExpression<BankAccountCacheItem>(Helper.GetMultiRangeFilters(multiRangeFilters), SearchPattern.Or).Compile();
+                    input.Filters.RemoveAll(u => u.IsMultiRange == true);
+                }
+                var otherFilters = input.Filters.Where(u => u.IsMultiRange == false).ToList();
+                if (otherFilters.Count != 0)
+                    filterCondition = ExpressionBuilder.GetExpression<BankAccountCacheItem>(otherFilters).Compile();
+
+                bankAccountCacheItems = bankAccountCache.ToList()
+                    .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
+                    .WhereIf(otherFilters.Count != 0, filterCondition)
+                    .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
             else
             {
-                bankAccountCacheItems = bankAccountCache.ToList().Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
+                bankAccountCacheItems = bankAccountCache.ToList()
+                    .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
 
 

@@ -153,32 +153,33 @@ namespace CAPS.CORPACCOUNTING.Helpers
         /// <typeparam name="T"></typeparam>
         /// <param name="query"></param>
         /// <param name="searchTypes"></param>
+        /// <param name="searchPattern"></param>
         /// <returns></returns>
-        public static IQueryable<T> CreateFilters<T>(this IQueryable<T> query, SearchTypes searchTypes)
+        public static IQueryable<T> CreateFilters<T>(this IQueryable<T> query, SearchTypes searchTypes, SearchPattern searchPattern = SearchPattern.And)
         {
             //string Search
             if (!ReferenceEquals(searchTypes.TextSearch, null))
-                query = query.ApplySearchCriterias(searchTypes.TextSearch);
+                query = query.ApplySearchCriterias(searchTypes.TextSearch, searchPattern);
 
             //Numeric Search
             if (!ReferenceEquals(searchTypes.NumericSearch, null))
-                query = query.ApplySearchCriterias(searchTypes.NumericSearch);
+                query = query.ApplySearchCriterias(searchTypes.NumericSearch, searchPattern);
 
             //date Search
             if (!ReferenceEquals(searchTypes.DateSearch, null))
-                query = query.ApplySearchCriterias(searchTypes.DateSearch);
+                query = query.ApplySearchCriterias(searchTypes.DateSearch, searchPattern);
 
             //Boolean Search
             if (!ReferenceEquals(searchTypes.BooleanSearch, null))
-                query = query.ApplySearchCriterias(searchTypes.BooleanSearch);
+                query = query.ApplySearchCriterias(searchTypes.BooleanSearch, searchPattern);
 
             //Decimal Search
             if (!ReferenceEquals(searchTypes.DecimalSearch, null))
-                query = query.ApplySearchCriterias(searchTypes.DecimalSearch);
+                query = query.ApplySearchCriterias(searchTypes.DecimalSearch, searchPattern);
 
             //Enum Search Search
             if (!ReferenceEquals(searchTypes.EnumSearch, null))
-                query = query.ApplySearchCriterias(searchTypes.EnumSearch);
+                query = query.ApplySearchCriterias(searchTypes.EnumSearch, searchPattern);
 
             return query;
         }
@@ -270,8 +271,12 @@ namespace CAPS.CORPACCOUNTING.Helpers
             }
         }
 
-
-        public static IList<Filters> GetMultiRangeFilters(IList<Filters> filters)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filters"></param>
+        /// <returns></returns>
+        public static List<Filters> GetMultiRangeFilters(List<Filters> filters)
         {
             for (int i = 0; i < filters.Count; i++)
             {
@@ -288,7 +293,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
                         newFilter.DataType = filters[i].DataType;
                         newFilter.Property = filters[i].Property;
                         newFilter.SearchTerm = newFiltersRange[0];
-                        newFilter.SearchTerm2 = newFiltersRange.Count()>1? newFiltersRange[1] : newFiltersRange[0];
+                        newFilter.SearchTerm2 = newFiltersRange.Count() > 1 ? newFiltersRange[1] : newFiltersRange[0];
                         newFilters.Add(newFilter);
                     }
                 }

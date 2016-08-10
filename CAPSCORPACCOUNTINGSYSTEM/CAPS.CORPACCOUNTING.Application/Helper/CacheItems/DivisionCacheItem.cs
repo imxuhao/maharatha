@@ -74,7 +74,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         private async Task<List<DivisionCacheItem>> GetDivisionsFromDb(AutoSearchInput input)
         {
             var divisions = await Repository.GetAll()
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+                //.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .Select(u => new DivisionCacheItem
                  {
                      JobNumber = u.JobNumber,

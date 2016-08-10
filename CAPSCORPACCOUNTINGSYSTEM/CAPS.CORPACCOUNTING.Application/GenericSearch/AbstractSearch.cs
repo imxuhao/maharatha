@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CAPS.CORPACCOUNTING.Helpers;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -44,7 +45,7 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
             }
         }
 
-        internal IQueryable<T> ApplyToQuery<T>(IQueryable<T> query)
+        internal IQueryable<T> ApplyToQuery<T>(IQueryable<T> query, SearchPattern searchPattern = SearchPattern.And)
         {
             var arg = Expression.Parameter(typeof(T), "p");
             var property = this.GetPropertyAccess(arg);
@@ -87,7 +88,7 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
             return property;
         }
 
-        private Expression<Func<T, bool>> CreatePredicateWithNullCheck<T>(Expression searchExpression, ParameterExpression arg, MemberExpression targetProperty)
+        private Expression<Func<T, bool>> CreatePredicateWithNullCheck<T>(Expression searchExpression, ParameterExpression arg, MemberExpression targetProperty, SearchPattern searchPattern = SearchPattern.And)
         {
             string[] parts = this.Property.Split('.');
 
@@ -102,7 +103,9 @@ namespace CAPS.CORPACCOUNTING.GenericSearch
                     property = Expression.Property(property, parts[i]);
                     Expression innerNullCheckExpression = Expression.NotEqual(property, Expression.Constant(null));
 
-                    nullCheckExpression = Expression.AndAlso(nullCheckExpression, innerNullCheckExpression);
+
+                    nullCheckExpression = searchPattern == SearchPattern.And ? Expression.AndAlso(nullCheckExpression, innerNullCheckExpression)
+                        : Expression.Or(nullCheckExpression, innerNullCheckExpression);
                 }
             }
 

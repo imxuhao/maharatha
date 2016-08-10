@@ -208,6 +208,9 @@ namespace CAPS.CORPACCOUNTING.Helpers
                 case "String":
                     constantExp = Expression.Constant(value, typeof(string));
                     break;
+                case "Boolean":
+                    constantExp = Expression.Constant(Convert.ToBoolean(value), typeof(bool));
+                    break;
                 default:
                     constantExp = Expression.Constant(value);
                     break;

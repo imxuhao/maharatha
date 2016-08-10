@@ -112,7 +112,19 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
         * Range selector config  
         * Defaults to Null
         */
-        rangeSelectorConfig:null
+        rangeSelectorConfig: null,
+        /**
+        * @cfg {Object}
+        * IsSearchRequiredFilters config  
+        * Defaults to false
+        */
+        isSearchRequiredFilters: false,
+        /**
+        * @cfg {Object}
+        * IsSearchRequiredFilters config  
+        * filtersConfig to null
+        */
+        filtersConfig: null
     },
     /**
     * @hide
@@ -504,7 +516,16 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
             rangeInput=parentGrid.down('textfield[itemId=rangeBox]'),
             parentGridStore = parentGrid.getStore();
         parentGridStore.clearFilter();
-        parentGridStore.load({ sorting: null, filters: null });
+        var dragDropControl = parentGrid.up('chachingGridDragDrop'),
+            filters = [];
+        if (dragDropControl.filtersConfig) {
+            filters.push(dragDropControl.filtersConfig);
+            parentGridStore.getProxy().setExtraParam('filters', filters);
+            parentGridStore.load({ sorting: null });
+        }
+        else {
+            parentGridStore.load({ sorting: null, filters: null });
+        }
         rangeInput.reset();
     },
     getFilterRanges: function (stringValue) {

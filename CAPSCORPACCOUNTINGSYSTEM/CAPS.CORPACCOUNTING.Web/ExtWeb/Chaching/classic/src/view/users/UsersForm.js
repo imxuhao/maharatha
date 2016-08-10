@@ -574,6 +574,13 @@ Ext.define('Chaching.view.users.UsersForm',
                                         loadStoreOnCreate: false,
                                         leftStore: 'Chaching.store.users.ProjectSecurityLeftStore',
                                         rightStore: 'Chaching.store.users.ProjectSecurityRightStore',
+                                        filtersConfig:{
+                                            entity: '',
+                                            searchTerm: 'false',
+                                            comparator: 0,
+                                            dataType: 3,
+                                            property: 'IsDivision'
+                                        },
                                         requireMultiSearch: true,
                                         rangeSelectorConfig: {
                                             entityName: '',
@@ -642,6 +649,13 @@ Ext.define('Chaching.view.users.UsersForm',
                                          loadStoreOnCreate: false,
                                          leftStore: 'Chaching.store.users.ProjectSecurityLeftStore',
                                          rightStore: 'Chaching.store.users.ProjectSecurityRightStore',
+                                         filtersConfig: {
+                                             entity: '',
+                                             searchTerm: 'true',
+                                             comparator: 0,
+                                             dataType: 3,
+                                             property: 'IsDivision'
+                                         },
                                          requireMultiSearch: true,
                                          rangeSelectorConfig: {
                                              entityName: '',

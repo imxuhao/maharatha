@@ -100,6 +100,7 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
                     Ext.resumeLayouts(true);
                 }
             }
+            if (node)
             if (node.isLeaf()) {
                 var parentNode = node.parentNode;
                 if (parentNode) parentNode.expand();

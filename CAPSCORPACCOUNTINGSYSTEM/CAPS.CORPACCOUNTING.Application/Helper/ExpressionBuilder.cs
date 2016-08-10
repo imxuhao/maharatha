@@ -58,7 +58,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
                         exp = GetExpression<T>(param, filters[0], filters[1], searchPattern);
                     else
                         if (searchPattern == SearchPattern.Or)
-                        exp = Expression.OrElse(exp, GetExpression<T>(param, filters[0], filters[1], searchPattern));
+                        exp = Expression.Or(exp, GetExpression<T>(param, filters[0], filters[1], searchPattern));
                     else
                         exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0], filters[1], searchPattern));
 
@@ -68,7 +68,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
                     if (filters.Count == 1)
                     {
                         if (searchPattern == SearchPattern.Or)
-                            exp = Expression.OrElse(exp, GetExpression<T>(param, filters[0]));
+                            exp = Expression.Or(exp, GetExpression<T>(param, filters[0]));
                         else
                             exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0]));
                         filters.RemoveAt(0);
@@ -182,7 +182,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
             Expression bin1 = GetExpression<T>(param, filter1);
             Expression bin2 = GetExpression<T>(param, filter2);
             if (searchPattern == SearchPattern.Or)
-                return Expression.OrElse(bin1, bin2);
+                return Expression.Or(bin1, bin2);
             else
                 return Expression.AndAlso(bin1, bin2);
 

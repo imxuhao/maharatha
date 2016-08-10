@@ -287,6 +287,14 @@
     <Compile Include="Authorization\Users\Dto\UserEditDto.cs" />
     <Compile Include="Authorization\Users\Dto\UserRoleDto.cs" />
     <Compile Include="CustomDtoMapper.cs" />
+    <Compile Include="ExcelTemplates\AccountsTemplate.cs" />
+    <Compile Include="ExcelTemplates\Dto\TemplateInputUnit.cs" />
+    <Compile Include="ExcelTemplates\ExcelHelper.cs" />
+    <Compile Include="ExcelTemplates\ExcelTemplate.cs" />
+    <Compile Include="ExcelTemplates\ITemplate.cs" />
+    <Compile Include="ExcelTemplates\ITemplateExporterAppService.cs" />
+    <Compile Include="ExcelTemplates\JobsTemplate.cs" />
+    <Compile Include="ExcelTemplates\TemplateExporterAppService.cs" />
     <Compile Include="Financials\Preferences\Dto\GetFiscalPeriodDto.cs" />
     <Compile Include="GenericSearch\AbstractSearch.cs" />
     <Compile Include="GenericSearch\DecimalSearch.cs" />
@@ -480,6 +488,7 @@
     <Compile Include="Masters\UserViewSettingsUnitAppService.cs" />
     <Compile Include="Masters\VendorUnitAppService.cs" />
     <Compile Include="Masters\VendorPaymentTermUnitAppService.cs" />
+    <Compile Include="MultiTenancy\TenantCloneAppService.cs" />
     <Compile Include="MultiTenancy\Dto\ComapnyPreferenceDto.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInputUnit.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />

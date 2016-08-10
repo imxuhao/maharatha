@@ -10,5 +10,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
         public string SearchTerm2 { get; set; }
 
         public DataTypes DataType { get; set; }
+
+        public bool IsMultiRange { get; set; } = false;
     }
 }

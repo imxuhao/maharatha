@@ -269,5 +269,34 @@ namespace CAPS.CORPACCOUNTING.Helpers
                 }
             }
         }
+
+
+        public static IList<Filters> GetMultiRangeFilters(IList<Filters> filters)
+        {
+            for (int i = 0; i < filters.Count; i++)
+            {
+                var splittedFilters = filters[i].SearchTerm.Split(';');
+                var newFilters = new List<Filters>();
+                if (splittedFilters.Count() > 0)
+                {
+                    var filterRanges = splittedFilters;
+                    for (int j = 0; j < filterRanges.Count(); j++)
+                    {
+                        var newFiltersRange = filterRanges[j].Split(new string[] { ".." }, StringSplitOptions.None);
+                        var newFilter = new Filters();
+                        newFilter.Comparator = filters[i].Comparator;
+                        newFilter.DataType = filters[i].DataType;
+                        newFilter.Property = filters[i].Property;
+                        newFilter.SearchTerm = newFiltersRange[0];
+                        newFilter.SearchTerm2 = newFiltersRange.Count()>1? newFiltersRange[1] : newFiltersRange[0];
+                        newFilters.Add(newFilter);
+                    }
+                }
+                return newFilters;
+            }
+            return filters;
+
+        }
+
     }
 }

@@ -1100,6 +1100,8 @@
 <text name="ProjectSecurity" value="Project Security" />
 <text name="CreditCardSecurity" value="Credit Card Security" />
 <text name="BankSecurity" value="Bank Security" />
+    <text name="RollUpDivision" value="RollUp Division" />
+    
     <text name="Range" value="Enter range" />
     <text name="RangeMessage" value="Ex. 1001..1010;1000-01..1000-10" />
     <text name="InvalidRange" value="Range entered is invalid. Please enter correct range." />

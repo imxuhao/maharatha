@@ -1,5 +1,6 @@
 ﻿using Abp.Authorization;
 using Abp.Authorization.Users;
+using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Organizations;
 using CAPS.CORPACCOUNTING.Authorization;
@@ -22,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace CAPS.CORPACCOUNTING.Security
 {
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -52,7 +53,7 @@ namespace CAPS.CORPACCOUNTING.Security
         private readonly IRepository<UserOrganizationUnit, long> _userOrganizationUnitRepository;
 
         private readonly OrganizationExtendedUnitManager _organizationExtendedUnitManager;
-     
+
         private readonly IRepository<OrganizationUnit, long> _organizationUnitRepository;
 
         private readonly OrganizationUnitManager _organizationUnitManager;
@@ -75,23 +76,23 @@ namespace CAPS.CORPACCOUNTING.Security
         /// <param name="userManager"></param>
         /// <param name="organizationUnitRepository"></param>
         /// <param name="organizationUnitManager"></param>
-            public UserSecuritySettingsAppService(
-            IRepository<AccountUnit, long> accountUnitRepository,
-            IAccountCache accountCache,
-            CustomAppSession customAppSession,
-            IRepository<JobUnit, int> jobUnitRepository,
-            IDivisionCache divisionCache,
-            IRepository<BankAccountUnit, long> bankAccountUnitRepository,
-            IBankAccountCache bankAccountCache,
-            IRepository<ChargeEntryDocumentUnit, long> creditCardUnitRepository,
-            IRepository<OrganizationExtended, long> organizationExtendedRepository,
-            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
-            OrganizationExtendedUnitManager organizationExtendedUnitManager,
-            UserManager userManager,
-            IRepository<OrganizationUnit, long> organizationUnitRepository,
-            OrganizationUnitManager organizationUnitManager
-            )
-            {
+        public UserSecuritySettingsAppService(
+        IRepository<AccountUnit, long> accountUnitRepository,
+        IAccountCache accountCache,
+        CustomAppSession customAppSession,
+        IRepository<JobUnit, int> jobUnitRepository,
+        IDivisionCache divisionCache,
+        IRepository<BankAccountUnit, long> bankAccountUnitRepository,
+        IBankAccountCache bankAccountCache,
+        IRepository<ChargeEntryDocumentUnit, long> creditCardUnitRepository,
+        IRepository<OrganizationExtended, long> organizationExtendedRepository,
+        IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
+        OrganizationExtendedUnitManager organizationExtendedUnitManager,
+        UserManager userManager,
+        IRepository<OrganizationUnit, long> organizationUnitRepository,
+        OrganizationUnitManager organizationUnitManager
+        )
+        {
             _accountUnitRepository = accountUnitRepository;
             _accountCache = accountCache;
             _customAppSession = customAppSession;
@@ -106,7 +107,7 @@ namespace CAPS.CORPACCOUNTING.Security
             _organizationUnitRepository = organizationUnitRepository;
             _userManager = userManager;
             _organizationUnitManager = organizationUnitManager;
-            }
+        }
 
 
         #region Account/Lines Access List
@@ -261,7 +262,7 @@ namespace CAPS.CORPACCOUNTING.Security
             if (!ReferenceEquals(input.Filters, null))
             {
                 var filterCondition = ExpressionBuilder.GetExpression<AccountCacheItem>(input.Filters).Compile();
-                accountCacheItems = accountCache.ToList().Where(u=>u.ChartOfAccountId==input.ChartOfAccountId).Where(filterCondition).ToList();
+                accountCacheItems = accountCache.ToList().Where(u => u.ChartOfAccountId == input.ChartOfAccountId).Where(filterCondition).ToList();
             }
 
             return accountCacheItems.Select(item =>
@@ -297,12 +298,25 @@ namespace CAPS.CORPACCOUNTING.Security
 
             if (!ReferenceEquals(input.Filters, null))
             {
-                var filterCondition = ExpressionBuilder.GetExpression<AccountCacheItem>(input.Filters).Compile();
-                accountCacheItems = accountCache.ToList().Where(filterCondition).Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
+                Func<AccountCacheItem, bool> multiRangeExp = null;
+                Func<AccountCacheItem, bool> filterCondition = null;
+                var multiRageFilters = input.Filters.Where(u => u.IsMultiRange == true).ToList();
+                if (multiRageFilters.Count!=0)
+                {
+                    multiRangeExp = ExpressionBuilder.GetExpression<AccountCacheItem>(Helper.GetMultiRangeFilters(multiRageFilters), SearchPattern.Or).Compile();
+                    input.Filters.RemoveAll(u => u.IsMultiRange == true);
+                }
+                var otherFilters = input.Filters.Where(u => u.IsMultiRange == false).ToList();
+                if (otherFilters.Count!=0)
+                    filterCondition = ExpressionBuilder.GetExpression<AccountCacheItem>(otherFilters).Compile();
+                accountCacheItems = accountCache.ToList().WhereIf(multiRageFilters.Count != 0, multiRangeExp)
+                    .WhereIf(otherFilters.Count != 0, filterCondition)
+                    .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
             else
             {
-                accountCacheItems = accountCache.ToList().Where(u => u.ChartOfAccountId == input.ChartOfAccountId).Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
+                accountCacheItems = accountCache.ToList().Where(u => u.ChartOfAccountId == input.ChartOfAccountId)
+                    .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
 
 

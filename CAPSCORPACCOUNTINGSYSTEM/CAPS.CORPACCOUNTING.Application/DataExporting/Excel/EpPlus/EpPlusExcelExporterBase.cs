@@ -6,6 +6,8 @@ using Abp.Dependency;
 using CAPS.CORPACCOUNTING.Dto;
 using CAPS.CORPACCOUNTING.Net.MimeTypes;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System.Drawing;
 
 namespace CAPS.CORPACCOUNTING.DataExporting.Excel.EpPlus
 {
@@ -43,6 +45,13 @@ namespace CAPS.CORPACCOUNTING.DataExporting.Excel.EpPlus
         {
             sheet.Cells[1, columnIndex].Value = headerText;
             sheet.Cells[1, columnIndex].Style.Font.Bold = true;
+            sheet.Cells[1, columnIndex].Style.Font.Color.SetColor(Color.White);
+            sheet.Cells[1, columnIndex].Style.WrapText = false;
+            sheet.Cells[1, columnIndex].AutoFitColumns();
+            sheet.Cells[1, columnIndex].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            sheet.Cells[1, columnIndex].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            sheet.Cells[1, columnIndex].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            sheet.Cells[1, columnIndex].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(127, 176, 218));
         }
 
         protected void AddObjects<T>(ExcelWorksheet sheet, int startRowIndex, IList<T> items, params Func<T, object>[] propertySelectors)

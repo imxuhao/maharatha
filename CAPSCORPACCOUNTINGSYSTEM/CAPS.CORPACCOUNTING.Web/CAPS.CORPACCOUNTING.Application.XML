@@ -2838,6 +2838,105 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate.#ctor(CAPS.CORPACCOUNTING.Accounting.ListAppService,CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService)">
+            <summary>
+            
+            </summary>
+            <param name="listAppService"></param>
+            <param name="accountUnitAppService"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate.DownLoadTemplate">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Dto.TemplateInputUnit.entityName">
+            <summary>Gets or sets the entityName field. </summary>  
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper">
+            <summary>
+            
+            </summary>
+            
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.CreateTemplate(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetExcelSheetDropDownList(OfficeOpenXml.ExcelWorksheet,System.String,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto})">
+            <summary>
+            
+            </summary>
+            <param name="sheet"></param>
+            <param name="cell"></param>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddTemplateObjects(OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.CellEditable(OfficeOpenXml.ExcelRange)">
+            <summary>
+            
+            </summary>
+            <param name="cell"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetBooleanList">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelTemplate.DownLoadAccountTemplate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ITemplateExporterAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate.#ctor(CAPS.CORPACCOUNTING.Accounting.ListAppService,CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService,CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService)">
+            <summary>
+            
+            </summary>
+            <param name="timeZoneConverter"></param>
+            <param name="abpSession"></param>
+            <param name="listAppService"></param>
+            <param name="accountUnitAppService"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate.DownLoadTemplate">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.TemplateExporterAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.TemplateExporterAppService.#ctor(CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate,CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate)">
+            <param name="accountsTemplate"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.TemplateExporterAppService.GetTemplateByEntity(CAPS.CORPACCOUNTING.ExcelTemplates.Dto.TemplateInputUnit)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Financials.Preferences.Dto.FiscalPeriodUnitDto.FiscalPeriodId">
             <summary>Gets or sets the FiscalPeriodId field. </summary>
         </member>
@@ -8963,6 +9062,42 @@
             Getting the VendorPaymentTerm by Id
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantCloneAppService.#ctor(Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.TypeOfAccountUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Roles.Role},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.EmployeeUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.ConnectionStringUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Organization.OrganizationExtended,System.Int64})">
+            <summary>
+            
+            </summary>
+            <param name="unitOfWorkManager"></param>
+            <param name="typeOfCurrencyUnit"></param>
+            <param name="typeOfAccountUnit"></param>
+            <param name="regionUnit"></param>
+            <param name="countryUnit"></param>
+            <param name="vendorUnit"></param>
+            <param name="userUnit"></param>
+            <param name="roleUnit"></param>
+            <param name="coaUnit"></param>
+            <param name="employeeUnit"></param>
+            <param name="customerUnit"></param>
+            <param name="connectionStringRepository"></param>
+            <param name="organizationRepository"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantCloneAppService.CloneTenantData(System.Int32,System.Nullable{System.Int32},System.Collections.Generic.List{System.String})">
+            <summary>
+            Sumit Method to add Users when map the user to Tenant
+            Adding the newly created User in some other Tenanats of the same Organization
+            </summary>
+            <param name="newTenantId"></param>
+            <param name="sourceTenantId"></param>
+            <param name="entityList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantCloneAppService.CustomTenantSeeding(System.Int32)">
+            <summary>
+            Chaching Method
+            Tenant based seeding
+            </summary>
+            <param name="newTenantId"></param>
             <returns></returns>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TenantExtendedId">

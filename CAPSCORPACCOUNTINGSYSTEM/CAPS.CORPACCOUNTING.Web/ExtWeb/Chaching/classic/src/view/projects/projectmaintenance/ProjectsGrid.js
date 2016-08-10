@@ -42,6 +42,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
           routeName: 'project.projectmaintenance.projects.create',
           iconAlign: 'left'
       }],
+    importConfig: {
+        entity: 'Projects',
+        isRequireImport: true
+    },
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,

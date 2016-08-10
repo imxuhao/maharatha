@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using OfficeOpenXml.DataValidation.Contracts;
 using System.Threading.Tasks;
 using System;
+using System.Data;
 using Abp.Collections.Extensions;
 using Abp.Application.Services.Dto;
 using OfficeOpenXml.DataValidation;
@@ -220,6 +221,56 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         private static string GetDropDownListFormula(string cellColumn, int lstFromRange, int lstEndRange)
         {
             return cellColumn + lstFromRange + ":" + cellColumn + lstEndRange;
+        }
+
+        /// <summary>
+        /// Converting Excel file to DataTable
+        /// </summary>
+        /// <param name="excelPackage"></param>
+        /// <param name="entityName"></param>
+        /// <returns></returns>
+        public static DataTable ConvertExcelToDataTable(ExcelPackage excelPackage, string entityName)
+        {
+            DataTable table = new DataTable(entityName);
+            ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[1];
+
+
+            // Create DataTable columns based on values in first row.
+            foreach (var firstRowCell in worksheet.Cells[1, 1, 1, worksheet.Dimension.End.Column])
+            {
+                table.Columns.Add(firstRowCell.Text);
+            }
+            table.Columns.Add("No");
+
+            // Start reading in second row, (the row after the header).
+            for (var rowNum = 2; rowNum <= worksheet.Dimension.End.Row; rowNum++)
+            {
+                bool isEmtpyRow = false;
+                var wsRow = worksheet.Cells[rowNum, 1, rowNum, worksheet.Dimension.End.Column];
+                var row = table.NewRow();
+                row["No"] = rowNum - 1;
+                foreach (var cell in wsRow)
+                {
+                    try
+                    {
+                        if (cell.Text.Trim().Length > 0)
+                        {
+                            isEmtpyRow = true;
+                            row[cell.Start.Column - 1] = cell.Text;
+                        }
+                    }
+                    catch
+                    {
+                        // The cell.Text reference above is apt to throw a null reference exception depending on how the data
+                        // is stored in the Excel doc. We want to just call this a null value and move on.
+                        row[cell.Start.Column - 1] = null;
+                    }
+                }
+                if (isEmtpyRow)
+                    table.Rows.Add(row);
+            }
+
+            return table;
         }
     }
 }

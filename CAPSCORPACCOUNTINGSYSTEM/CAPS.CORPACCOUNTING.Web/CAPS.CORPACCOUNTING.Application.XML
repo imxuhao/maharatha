@@ -2843,21 +2843,25 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate.#ctor(CAPS.CORPACCOUNTING.Accounting.ListAppService,CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate.#ctor(CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService)">
             <summary>
             
             </summary>
-            <param name="listAppService"></param>
             <param name="accountUnitAppService"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate.DownLoadTemplate">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate.DownLoadTemplate(System.Int32)">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Dto.TemplateInputUnit.entityName">
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Dto.TemplateInputUnit.EntityName">
             <summary>Gets or sets the entityName field. </summary>  
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Dto.TemplateInputUnit.CoaId">
+            <summary>Gets or sets the CoaId field. 
+            this parameter is required for downloading Accounts and Line Templates
+            </summary>  
         </member>
         <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper">
             <summary>
@@ -2897,26 +2901,33 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelTemplate.DownLoadAccountTemplate">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.ConvertExcelToDataTable(OfficeOpenXml.ExcelPackage,System.String)">
             <summary>
-            
+            Converting Excel file to DataTable
             </summary>
+            <param name="excelPackage"></param>
+            <param name="entityName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ITemplate.DownLoadTemplate(System.Int32)">
+            <summary>
+            Download Template
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ITemplateExporterAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate.#ctor(CAPS.CORPACCOUNTING.Accounting.ListAppService,CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService,CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate.#ctor(CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService,CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService)">
             <summary>
             
             </summary>
-            <param name="timeZoneConverter"></param>
-            <param name="abpSession"></param>
-            <param name="listAppService"></param>
+            <param name="jobUnitAppService"></param>
             <param name="accountUnitAppService"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate.DownLoadTemplate">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate.DownLoadTemplate(System.Int32)">
             <summary>
             
             </summary>
@@ -11662,6 +11673,24 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Uploads.UploadAppService.UploadExcelData(System.Data.DataTable,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Uploading Excel data to SumitSystem
+            </summary>
+            <param name="dataTable"></param>
+            <param name="entityName"></param>
+            <param name="coaId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Uploads.IUploadAppService.UploadExcelData(System.Data.DataTable,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Uploading Excel data to SumitSystem
+            </summary>
+            <param name="dataTable"></param>
+            <param name="entityName"></param>
+            <param name="coaId"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -7,42 +7,42 @@ using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Accounts;
 using System.Threading.Tasks;
+using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
     /// <summary>
     /// 
     /// </summary>
-    public class AccountsTemplate : EpPlusExcelExporterBase, ITemplate
-    {
-        private readonly ListAppService _listAppService;
-        private readonly IAccountUnitAppService _AccountUnitAppService;
+    public class AccountsTemplate : EpPlusExcelExporterBase, ITemplate{
+        
+        private readonly IAccountUnitAppService _accountUnitAppService;
         private readonly int startRowIndex = 2;
         private readonly int endRowIndex = 3000;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="listAppService"></param>
         /// <param name="accountUnitAppService"></param>
         public AccountsTemplate(
-             ListAppService listAppService,
              AccountUnitAppService accountUnitAppService)
         {
-            _listAppService = listAppService;
-            _AccountUnitAppService = accountUnitAppService;
+           
+            _accountUnitAppService = accountUnitAppService;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<FileDto> DownLoadTemplate()
+        public async Task<FileDto> DownLoadTemplate(int coaId)
         {
 
-            var classificationlist = await _AccountUnitAppService.GetTypeOfAccountList();
-            var currencylist = await _AccountUnitAppService.GetTypeOfCurrencyList();
+            var classificationlist = await _accountUnitAppService.GetTypeOfAccountList();
+            var currencylist = await _accountUnitAppService.GetTypeOfCurrencyList();
             var consolidationList = EnumList.GetTypeofConsolidationList();
+            var typeOfCurrencyRateList = await _accountUnitAppService.GetTypeOfCurrencyRateList();
+            var linkedAccountList = await _accountUnitAppService.GetLinkAccountListByCoaId(new AutoSearchInput() { Id = coaId });
             return CreateExcelPackage(
                 "AccountTemplate.xlsx",
                 excelPackage =>
@@ -72,9 +72,9 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                             new ExcelFields(L("Classification"),type:"dropdown",list:classificationlist),
                             new ExcelFields(L("Consolidation"),type:"dropdown",list:consolidationList),
                             new ExcelFields(L("Currency"),type:"dropdown",list:currencylist),
-                            new ExcelFields(L("NewAccount"),iseditable:true),
+                            new ExcelFields(L("NewAccount"),iseditable:true,list:linkedAccountList),
                             new ExcelFields(L("Multi-CurrencyReval"),type:"dropdown",list:ExcelHelper.GetBooleanList()),
-                            new ExcelFields(L("RateTypeOverride"),type:"dropdown",list:ExcelHelper.GetBooleanList()),
+                            new ExcelFields(L("RateTypeOverride"),type:"dropdown",list:typeOfCurrencyRateList),
                             new ExcelFields(L("EliminationAccount"),type:"dropdown",list:ExcelHelper.GetBooleanList()),
                             new ExcelFields(L("RollUpAccount"),type:"dropdown",list:ExcelHelper.GetBooleanList()),
                             new ExcelFields(L("JournalsAllowed"),type:"dropdown",list:ExcelHelper.GetBooleanList())

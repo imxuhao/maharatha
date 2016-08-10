@@ -290,7 +290,6 @@
     <Compile Include="ExcelTemplates\AccountsTemplate.cs" />
     <Compile Include="ExcelTemplates\Dto\TemplateInputUnit.cs" />
     <Compile Include="ExcelTemplates\ExcelHelper.cs" />
-    <Compile Include="ExcelTemplates\ExcelTemplate.cs" />
     <Compile Include="ExcelTemplates\ITemplate.cs" />
     <Compile Include="ExcelTemplates\ITemplateExporterAppService.cs" />
     <Compile Include="ExcelTemplates\JobsTemplate.cs" />
@@ -581,6 +580,8 @@
     <Compile Include="Timing\Dto\GetTimezonesInput.cs" />
     <Compile Include="Timing\ITimingAppService.cs" />
     <Compile Include="Timing\TimingAppService.cs" />
+    <Compile Include="Uploads\UploadAppService.cs" />
+    <Compile Include="Uploads\IUploadAppService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

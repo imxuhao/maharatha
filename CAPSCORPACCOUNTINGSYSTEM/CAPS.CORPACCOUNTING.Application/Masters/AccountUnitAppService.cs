@@ -13,6 +13,7 @@ using Abp.Linq.Extensions;
 using System.Linq.Dynamic;
 using CAPS.CORPACCOUNTING.Helpers;
 using System.Collections.Generic;
+using System.Data;
 using Abp.Authorization;
 using Abp.Collections.Extensions;
 using CAPS.CORPACCOUNTING.Accounting;
@@ -233,9 +234,15 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetTypeOfCurrencyList()
         {
-
-            var typeOfCurrency = await _typeOfCurrencyRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
-            return typeOfCurrency;
+            using (_unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MayHaveTenant))
+            {
+                var typeOfCurrency =
+                    await
+                        _typeOfCurrencyRepository.GetAll()
+                            .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
+                            .ToListAsync();
+                return typeOfCurrency;
+            }
         }
 
         /// <summary>
@@ -244,8 +251,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetTypeOfAccountList()
         {
-            var typeOfAccounts = await _typeOfAccountRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
-            return typeOfAccounts;
+            using (_unitOfWorkManager.Current.DisableFilter(AbpDataFilters.MayHaveTenant))
+            {
+                var typeOfAccounts = await _typeOfAccountRepository.GetAll()
+                            .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
+                            .ToListAsync();
+                return typeOfAccounts;
+            }
         }
 
         /// <summary>
@@ -254,8 +266,12 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetTypeOfCurrencyRateList()
         {
-            var typeOfCurrencyRates = await _typeOfCurrencyRateRepository.GetAll().Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+
+            var typeOfCurrencyRates = await _typeOfCurrencyRateRepository.GetAll()
+                        .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() })
+                        .ToListAsync();
             return typeOfCurrencyRates;
+
         }
         /// <summary>
         /// Get LinkAccount List By CoaId
@@ -303,5 +319,66 @@ namespace CAPS.CORPACCOUNTING.Accounts
             return result;
         }
 
+        public async Task ImportAccounts(DataTable accountTable, int coaId)
+        {
+            CreateAccountUnitInput input = null;
+            var classificationlist = await GetTypeOfAccountList();
+            var currencylist = await GetTypeOfCurrencyList();
+            var consolidationList = EnumList.GetTypeofConsolidationList();
+            var typeOfCurrencyRateList = await GetTypeOfCurrencyRateList();
+            var linkedAccountList = await GetLinkAccountListByCoaId(new AutoSearchInput() { Id = coaId });
+
+            foreach (DataRow datarow in accountTable.Rows)
+            {
+                int? typeofaccount = null;
+                short? currencyId = null;
+                TypeofConsolidation? consolidationId = null;
+                short? typeOfCurrencyRateId = null;
+                int? linkedAccountId = null;
+                var classification = classificationlist.FirstOrDefault(p => p.Name == datarow[L("Classification")].ToString());
+                if (classification != null)
+                {
+                    typeofaccount = Convert.ToInt32(classification.Value);
+                }
+                var currency = currencylist.FirstOrDefault(p => p.Name == datarow[L("Currency")].ToString());
+                if (currency != null)
+                {
+                    currencyId = Convert.ToInt16(currency.Value);
+                }
+                var consolidation = consolidationList.FirstOrDefault(p => p.Name == datarow[L("Consolidation")].ToString());
+                if (consolidation != null)
+                {
+                    consolidationId = (TypeofConsolidation)Convert.ToInt32(consolidation.Value);
+                }
+                var typeOfCurrencyRate = typeOfCurrencyRateList.FirstOrDefault(p => p.Name == datarow[L("RateTypeOverride")].ToString());
+                if (typeOfCurrencyRate != null)
+                {
+                    typeOfCurrencyRateId = Convert.ToInt16(typeOfCurrencyRate.Value);
+                }
+                var linkedAccount = linkedAccountList.FirstOrDefault(p => p.Name == datarow[L("NewAccount")].ToString());
+                if (linkedAccount != null)
+                {
+                    linkedAccountId = Convert.ToInt32(linkedAccount.Value);
+                }
+
+                input = new CreateAccountUnitInput
+                {
+                    AccountNumber = datarow[L("AccountNumber")].ToString(),
+                    Caption = datarow[L("Description")].ToString(),
+                    TypeOfAccountId = typeofaccount,
+                    TypeOfCurrencyId = currencyId,
+                    TypeofConsolidationId = consolidationId,
+                    LinkAccountId = linkedAccountId,
+                    TypeOfCurrencyRateId = typeOfCurrencyRateId,
+                    IsAccountRevalued = Convert.ToBoolean(Convert.ToInt16(datarow[L("Multi-CurrencyReval")])),
+                    IsElimination = Convert.ToBoolean(Convert.ToInt16(datarow[L("EliminationAccount")])),
+                    IsRollupAccount = Convert.ToBoolean(Convert.ToInt16(datarow[L("RollUpAccount")])),
+                    IsEnterable = Convert.ToBoolean(Convert.ToInt16(datarow[L("JournalsAllowed")])),
+                    ChartOfAccountId = coaId
+                };
+
+                await CreateAccountUnit(input);
+            }
+        }
     }
 }

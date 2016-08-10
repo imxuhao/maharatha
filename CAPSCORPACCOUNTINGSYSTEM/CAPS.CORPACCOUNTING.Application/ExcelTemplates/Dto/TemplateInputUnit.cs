@@ -10,6 +10,11 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates.Dto
     {
 
         /// <summary>Gets or sets the entityName field. </summary>  
-        public string entityName { get; set; }
+        public string EntityName { get; set; }
+
+        /// <summary>Gets or sets the CoaId field. 
+        /// this parameter is required for downloading Accounts and Line Templates
+        /// </summary>  
+        public int? CoaId { get; set; }
     }
 }

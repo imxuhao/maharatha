@@ -16,45 +16,38 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
     public class JobsTemplate : EpPlusExcelExporterBase, ITemplate
     {
-        private readonly ListAppService _listAppService;
-        private readonly IAccountUnitAppService _AccountUnitAppService;
+
         private readonly IJobUnitAppService _jobUnitAppService;
+        private readonly IAccountUnitAppService _accountUnitAppService;
 
         private readonly int startRowIndex = 2;
         private readonly int endRowIndex = 3000;
 
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="timeZoneConverter"></param>
-        /// <param name="abpSession"></param>
-        /// <param name="listAppService"></param>
+        /// <param name="jobUnitAppService"></param>
         /// <param name="accountUnitAppService"></param>
-        public JobsTemplate(
-             ListAppService listAppService,
-             AccountUnitAppService accountUnitAppService,
-              IJobUnitAppService jobUnitAppService
-
-
-              )
+        public JobsTemplate(IJobUnitAppService jobUnitAppService, IAccountUnitAppService accountUnitAppService)
         {
-            _listAppService = listAppService;
-            _AccountUnitAppService = accountUnitAppService;
             _jobUnitAppService = jobUnitAppService;
-
+            _accountUnitAppService = accountUnitAppService;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<FileDto> DownLoadTemplate()
+        public async Task<FileDto> DownLoadTemplate(int coaId)
         {
 
             var projectTypelist = EnumList.GetProjectTypeList();
             var statuslist = EnumList.GetProjectStatusList();
-            var currencylist = await _AccountUnitAppService.GetTypeOfCurrencyList();
+            var currencylist = await _accountUnitAppService.GetTypeOfCurrencyList();
             var consolidationList = EnumList.GetTypeofConsolidationList();
+
+
             var rollupAccountList = (await _jobUnitAppService.GetRollupAccountList(new AutoSearchInput() { Value = false })).ConvertAll(u => new NameValueDto()
             {
                 Value = u.AccountId.ToString(),
@@ -72,7 +65,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             {
                 Value = u.Value,
                 Name = u.Name
-            }); 
+            });
 
             return CreateExcelPackage(
                 "JobTemplate.xlsx",

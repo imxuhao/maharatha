@@ -61,7 +61,8 @@ Ext.define('Chaching.data.proxy.BaseProxy', {
                     SearchTerm: filters[i].searchTerm,
                     SearchTerm2: filters[i].searchTerm2,
                     Comparator: filters[i].comparator,
-                    DataType: filters[i].dataType
+                    DataType: filters[i].dataType,
+                    IsMultiRange: filters[i].isMultiRange
                 };
                 filterArray.push(filterObject);
             }

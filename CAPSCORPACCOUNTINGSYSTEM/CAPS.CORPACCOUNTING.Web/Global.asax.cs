@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Web;
 using Abp.Dependency;
 using Abp.Reflection;
 using Abp.Timing;
 using Abp.Web;
 using Castle.Facilities.Logging;
+using OfficeOpenXml.Packaging.Ionic.Zlib;
 
 namespace CAPS.CORPACCOUNTING.Web
 {
@@ -26,6 +28,14 @@ namespace CAPS.CORPACCOUNTING.Web
             
             base.Application_Start(sender, e);
             
+        }
+        protected override void Application_BeginRequest(object src, EventArgs e)
+        {
+            //Enabling gzip compression and adding response header to server gzipped files.
+            HttpContext context = HttpContext.Current;
+            context.Response.Filter = new GZipStream(context.Response.Filter, CompressionMode.Compress);
+            HttpContext.Current.Response.AppendHeader("Content-encoding", "gzip");
+            HttpContext.Current.Response.Cache.VaryByHeaders["Accept-encoding"] = true;
         }
     }
 }

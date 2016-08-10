@@ -257,7 +257,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             widgetRec = parentMenu.widgetRecord,
             widgetCol = parentMenu.widgetColumn,
             grid = widgetCol.up('grid'),
-            controller = grid.getController,
+            controller = grid.getController(),
             gridStore = grid.getStore();
         if (grid && grid.isInViewMode) return;
         abp.message.confirm(
@@ -283,6 +283,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                                callback: function (batch, opts) {
                                    abp.notify.success(app.localize('SuccessfullyDeleted'), app.localize('Success'));
                                    gridStore.reload();
+                                   controller.doAfterDeleteAction(widgetRec);
                                }
                            });
 
@@ -290,6 +291,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                    }
                }
            );
+    },
+    doAfterDeleteAction: function (record) {
+        //DO module specific tasks.
     },
     onEditComplete: function (editor, e) {
         var me = this,

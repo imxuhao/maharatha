@@ -568,6 +568,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                 }, 1);
                 return '<div id="' + id + '"></div>';
 
+            },
+            editor: {
+                xtype:'label'
             }
         }
 

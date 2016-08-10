@@ -976,6 +976,10 @@
     margin: 0px !important;
     border-top: 0px !important;
 }
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/tab/ChachingTabPanel.scss:54 */
+.x-box-scroller-tab-bar-formTabPanels {
+    color: #2d2a2a !important;
+}
 /* http://localhost:1841/ext/classic/theme-neutral/sass/src/form/field/Text.scss:201 */
 .x-form-text-field-body-fieldLabelTop {
     min-width: 170px;

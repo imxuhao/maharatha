@@ -82,7 +82,7 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
              groupable: true,
              sorter: {
                  property: 'userName',
-                 sortOnEntity: ''
+                 sortOnEntity: 'User'
              },
              width: '10%',
              filterField: {

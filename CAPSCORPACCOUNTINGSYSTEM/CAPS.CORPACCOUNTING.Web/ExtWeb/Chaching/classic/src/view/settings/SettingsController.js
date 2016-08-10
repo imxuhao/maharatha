@@ -238,16 +238,22 @@
                 isEmailConfirmationRequiredForLogin: umIsEmailConfirmationRequiredForLogin
             }
         };
-
+        var myMask = new Ext.LoadMask({
+            msg: 'Please wait...',
+            target: view
+        });
+        myMask.show();
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/hostSettings/UpdateAllSettings',
             jsonData: Ext.encode(data),
 
             success: function () {
+                myMask.hide();
                 abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
             },
 
             failure: function () {
+                myMask.hide();
                 abp.notify.error(app.localize('Error'));
             }
         });

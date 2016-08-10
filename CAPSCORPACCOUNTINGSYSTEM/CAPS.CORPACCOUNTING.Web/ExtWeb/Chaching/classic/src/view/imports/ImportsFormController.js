@@ -39,12 +39,22 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
                     if (response.result) {
                         var data = response.result.result;
                         if (response.success) {
-                            debugger;
+                            var wnd = view.up('window');
+                            if (wnd) {
+                                Ext.destroy(wnd);
+                            } else {
+                                Ext.destroy(view);
+                            }
+                            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                            var parentGrid = me.parentController.getView();
+                            var gridStore = parentGrid.getStore();
+                            gridStore.loadPage(1);
+                        } else {
+                            ChachingGlobals.showPageSpecificErrors(response);
                         }
                     }
                 },
                 failure: function (fp, action) {
-                    debugger;
                     abp.message.error(app.localize('Failed').initCap(), app.localize('Error'));
                 }
             });

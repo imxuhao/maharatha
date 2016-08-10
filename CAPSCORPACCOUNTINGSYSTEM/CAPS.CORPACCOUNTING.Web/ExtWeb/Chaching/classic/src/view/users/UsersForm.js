@@ -406,7 +406,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 dataIndex: 'caption',
                                                 sortable: true,
                                                 groupable: true,
-                                                flex:1,
+                                                width: '47%',
                                                 filterField: {
                                                     xtype: 'textfield',
                                                     width: '15%'

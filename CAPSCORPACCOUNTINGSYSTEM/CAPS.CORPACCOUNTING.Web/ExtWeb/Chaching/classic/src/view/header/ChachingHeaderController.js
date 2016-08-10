@@ -580,6 +580,11 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                                                 (abp.appPath + 'Profile/GetProfilePicture?v=' + ticks) : ChachingGlobals.defaultProfilePictureImage));
                     record.commit();
             });
+
+            if (listStore.getCount() == 0) {
+                loginAttemptView.setHeight(300);
+                loginAttemptView.setWidth(400);
+            }
         });
         loginAttemptView.show();
     }

@@ -52,7 +52,7 @@
     <text name="EmailConfirm" value="Email Confirm" />
     <text name="Yes" value="Yes" />
     <text name="No" value="No" />
-    <text name="MySettings" value="My settings" />
+    <text name="MySettings" value="My Settings" />
     <text name="Logout" value="Logout" />
     <text name="Reset" value="Reset" />
     <text name="ResetPermissionsTooltip" value="This button immediately resets user specific permission settings and saves changes. The user will only have permissions from assigned roles." />
@@ -123,10 +123,10 @@
     <text name="EmailActivation" value="Email Activation" />
     <text name="SendEmailActivationLink_Information" value="A link will be sent to your email to activate your email address. If you don't get an email within a few minutes, please re-try." />
     <text name="SendActivationEmail" value="Send Activation Email." />
-    <text name="ChangePassword" value="Change password" />
-    <text name="CurrentPassword" value="Current password" />
-    <text name="NewPassword" value="New password" />
-    <text name="NewPasswordRepeat" value="New password (repeat)" />
+    <text name="ChangePassword" value="Change Password" />
+    <text name="CurrentPassword" value="Current Password" />
+    <text name="NewPassword" value="New Password" />
+    <text name="NewPasswordRepeat" value="New Password (repeat)" />
     <text name="YourPasswordHasChangedSuccessfully" value="Your password has changed successfully." />
     <text name="SelfUserRegistrationIsDisabledMessage" value="You can not register to the system!" />
     <text name="SelfUserRegistrationIsDisabledMessage_Detail" value="Self user registration is disabled. Please contact to the system administrator to register." />
@@ -146,7 +146,7 @@
     <text name="{0}UserCannotBeDeleted" value="{0} user can not be deleted." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
     <text name="ExportToExcel" value="Export to excel" />
-    <text name="ChangeProfilePicture" value="Change profile picture" />
+    <text name="ChangeProfilePicture" value="Change Profile Picture" />
     <text name="TenantName_Regex_Description" value="Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore." />
     <text name="ProfilePicture_Change_Info" value="You can select a JPG/JPEG/PNG file with a maximum 1MB size." />
     <text name="ProfilePicture_Change_Error" value="Your profile picture could not be changed." />
@@ -309,7 +309,7 @@
     <text name="ManagingOrganizationTree" value="Managing organization tree" />
     <text name="LoginForUsers" value="Login for users" />
     <text name="LoginAsThisUser" value="Login as this user" />
-    <text name="BackToMyAccount" value="Back to my account" />
+    <text name="BackToMyAccount" value="Back to My Account" />
     <text name="LoginForTenants" value="Login for tenants" />
     <text name="LoginAsThisTenant" value="Login as this tenant" />
     <text name="AuditLogImpersonatedOperationInfo" value="Note: This operation is performed by another user on behalf of this user." />
@@ -323,9 +323,9 @@
     <text name="NotImpersonatedLoginErrorMessage" value="This is not an impersonated login!" />
     <text name="YouCannotLinkToSameAccount">You can not link to same account!</text>
     <text name="ChangePasswordBeforeLinkToAnAccount">You must change your password before linking this account!</text>
-    <text name="LinkedAccounts">Linked accounts</text>
-    <text name="ManageAccounts">Manage accounts</text>
-    <text name="LinkNewAccount">Link new account</text>
+    <text name="LinkedAccounts">Linked Accounts</text>
+    <text name="ManageAccounts">Manage Accounts</text>
+    <text name="LinkNewAccount">Link New Account</text>
     <text name="SuccessfullyUnlinked">Successfully unlinked</text>
     <text name="LinkedUserDeleteWarningMessage">Link to user {0} will be deleted.</text>
     <text name="SwitchToLinkedAccountTokenErrorMessage" value="Impersonation token is invalid or expired!" />
@@ -370,9 +370,10 @@
     <text name="TenantSignUp">Tenant SignUp</text>
     <text name="NewTenantRegisteredNotificationDefinition" value="On a new tenant registered to the application." />
     <text name="NewTenantRegisteredNotificationMessage" value="A new tenant registered to the application. Tenancy name: {tenancyName}." />
-    <text name="LoginAttempts">Login attempts</text>
+    <text name="LoginAttempts">Login Attempts</text>
     <text name="Failed">Failed</text>
-    <text name="NewTenant">New tenant</text>
+
+    <text name="NewTenant">New Tenant</text>
     <text name="ResizedProfilePicture_Warn_SizeLimit" value="Resized picture size must be smalled than 100KB. Please resize down and try again." />
     <text name="RegisterFormUserNameInvalidMessage">Please do not enter an email address for username.</text>
     <text name="UseHostDatabase" value="Use host database" />
@@ -1003,8 +1004,8 @@
     <text name="BankSecurityTab" value="Bank (Financial Institution) Security" />
     <text name="UserPassword" value="Password" />
     <text name="CompanyUserInformation" value="User Information" />
-    <text name="SaveCompanySetup" value="Save Company Setup" />
-    <text name="SaveCompanyPreferences" value="Save Company Preferences" />
+    <text name="SaveCompanySetup" value="Save Tenant Setup" />
+    <text name="SaveCompanyPreferences" value="Save Tenant Preferences" />
   <text name="CreditMemo" value="Credit Memo" />
   <text name="QuickPay" value="Quick Pay" />
   <text name="CheckDate" value="Check date" />
@@ -1111,6 +1112,9 @@
     <text name="CardHolderName" value="Card Holder Name"/>
     <text name="CardNumber" value="Card Number"/>
     <text name="DivisionSecurity" value="Division Security"/>
+    <text name="LinkedAccountsHeader"  value="Linked Accounts"/>
+    <text name="LoginAttemptsTitle" value="Login Attempts"/> 
+    <text name="NoLoginAttemptsText" value="No login attempts yet"/>
     <text name="DivisionName" value="Division Name" />
 
   </texts>

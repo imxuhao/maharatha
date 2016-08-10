@@ -20,8 +20,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsForm', {
         bodyStyle: { 'background-color': 'trasparent' }//,
         //labelAlign: 'top'
     },
-    defaultFocus: 'textfield#usernameOrEmailAddress',
- 
+    defaultFocus: 'textfield#tenancyName',
     items: [{
         xtype: 'hiddenfield',
         name: 'id',
@@ -30,6 +29,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsForm', {
         xtype: 'textfield',
         name: 'tenancyName',
         itemId: 'tenancyName',
+        tabIndex : 1,
         allowBlank:true,
         fieldLabel: app.localize('TenancyName').initCap(),
         width: '100%',
@@ -39,6 +39,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsForm', {
         xtype: 'textfield',
         name: 'usernameOrEmailAddress',
         allowBlank: false,
+        tabIndex: 2,
         fieldLabel: app.localize('UserName').initCap(),
         width: '100%',
         ui: 'fieldLabelTop',
@@ -48,6 +49,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsForm', {
         xtype: 'textfield',
         name: 'password',
         allowBlank: false,
+        tabIndex: 3,
         inputType: 'password',
         fieldLabel: app.localize('Password').initCap(),
         width: '100%',

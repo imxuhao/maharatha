@@ -11,7 +11,8 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsView', {
     height: '90%', //600,
     width: '60%',//750,
     layout: 'fit',
-    title: app.localize("LinkedAccounts"),   
+    title: app.localize("LinkedAccountsHeader"),
+    defaultFocus: 'textfield#tenancyName',
     initComponent: function (config) {
         var me = this,
             controller = me.getController();
@@ -21,7 +22,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsView', {
             name: 'LinkedAccounts'
         });
         me.items = [form];
-        me.buttons = [
+        me.bbar = ['->',
             {
                 xtype: 'button',
                 scale: 'small',

@@ -8,10 +8,12 @@ Ext.define('Chaching.view.profile.loginAttempts.LoginAttemptView',{
     ],
 
     controller: 'profile-loginattempts-loginattemptview',
-    height: 600,
-    width: 600,
+    //height: 600,
+    //width: 600,
+    height: '90%',
+    width: '45%',
     layout: 'fit',
-    title: app.localize("LoginAttempts"),
+    title: app.localize("LoginAttemptsTitle"),
     initComponent: function (config) {
         var me = this,
             controller = me.getController();
@@ -21,7 +23,7 @@ Ext.define('Chaching.view.profile.loginAttempts.LoginAttemptView',{
             name: 'LoginAttempts'
         });
         me.items = [form];
-        me.buttons = [
+        me.bbar = ['->',
         {
             xtype: 'button',
             scale: 'small',

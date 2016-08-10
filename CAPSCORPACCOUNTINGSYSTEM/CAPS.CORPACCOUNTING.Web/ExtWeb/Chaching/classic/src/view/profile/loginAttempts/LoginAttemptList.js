@@ -8,7 +8,8 @@ Ext.define('Chaching.view.profile.loginAttempts.LoginAttemptList', {
 
     controller: 'profile-loginattempts-loginattemptlist',
     store: 'profile.loginAttempts.LoginAttemptStore',
-    scrollable:true,
+    scrollable: true,
+    emptyText: '<div class="emptyTextClass">' + app.localize('NoLoginAttemptsText') + '</div>',
     tpl: [
         '<tpl for=".">',
         '<div class="col-xs-12">',

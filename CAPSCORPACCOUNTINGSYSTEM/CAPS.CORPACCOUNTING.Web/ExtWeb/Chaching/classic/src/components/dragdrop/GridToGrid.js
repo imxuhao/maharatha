@@ -497,6 +497,11 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
                         if (success && records && records.length > 0) {
                             parentGridSelModel.select(records);
                         }
+                        else {
+                            if (operation.exception) {
+                                abp.notify.warn(operation.error.statusText);
+                            }
+                        }
                     }
                 });
             } else {

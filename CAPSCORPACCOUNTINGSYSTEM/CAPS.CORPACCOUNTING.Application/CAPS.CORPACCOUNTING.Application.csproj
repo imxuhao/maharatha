@@ -488,7 +488,6 @@
     <Compile Include="Masters\UserViewSettingsUnitAppService.cs" />
     <Compile Include="Masters\VendorUnitAppService.cs" />
     <Compile Include="Masters\VendorPaymentTermUnitAppService.cs" />
-    <Compile Include="MultiTenancy\TenantCloneAppService.cs" />
     <Compile Include="MultiTenancy\Dto\ComapnyPreferenceDto.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInputUnit.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />

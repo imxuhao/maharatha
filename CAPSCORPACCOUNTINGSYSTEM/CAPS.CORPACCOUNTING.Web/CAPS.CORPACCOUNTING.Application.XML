@@ -9064,42 +9064,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantCloneAppService.#ctor(Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.TypeOfAccountUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.RegionUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CountryUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Users.User,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Authorization.Roles.Role},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.EmployeeUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.ConnectionStringUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Organization.OrganizationExtended,System.Int64})">
-            <summary>
-            
-            </summary>
-            <param name="unitOfWorkManager"></param>
-            <param name="typeOfCurrencyUnit"></param>
-            <param name="typeOfAccountUnit"></param>
-            <param name="regionUnit"></param>
-            <param name="countryUnit"></param>
-            <param name="vendorUnit"></param>
-            <param name="userUnit"></param>
-            <param name="roleUnit"></param>
-            <param name="coaUnit"></param>
-            <param name="employeeUnit"></param>
-            <param name="customerUnit"></param>
-            <param name="connectionStringRepository"></param>
-            <param name="organizationRepository"></param>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantCloneAppService.CloneTenantData(System.Int32,System.Nullable{System.Int32},System.Collections.Generic.List{System.String})">
-            <summary>
-            Sumit Method to add Users when map the user to Tenant
-            Adding the newly created User in some other Tenanats of the same Organization
-            </summary>
-            <param name="newTenantId"></param>
-            <param name="sourceTenantId"></param>
-            <param name="entityList"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantCloneAppService.CustomTenantSeeding(System.Int32)">
-            <summary>
-            Chaching Method
-            Tenant based seeding
-            </summary>
-            <param name="newTenantId"></param>
-            <returns></returns>
-        </member>
         <member name="P:CAPS.CORPACCOUNTING.MultiTenancy.Dto.ComapnyPreferenceDto.TenantExtendedId">
             <summary>Gets or sets the TenantExtendedId field. </summary>
         </member>

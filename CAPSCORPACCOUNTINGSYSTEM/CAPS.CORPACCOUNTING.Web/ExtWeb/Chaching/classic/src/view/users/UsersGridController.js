@@ -239,7 +239,15 @@ Ext.define('Chaching.view.users.UsersGridController', {
     loadProjectSecurity: function (formView) {
         var projectSecurityControl = formView.down('chachingGridDragDrop[itemId=projectSecurityGridItemId]'),
         leftStore = projectSecurityControl.getLeftStore(),
-        rightStore = projectSecurityControl.getRightStore();
+        rightStore = projectSecurityControl.getRightStore(),
+        filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: 'false',
+            comparator: 0,
+            dataType: 3,
+            property: 'IsDivision'
+        });
+        leftStore.filter(filter);
         leftStore.getProxy().setExtraParams({
             //'chartOfAccountId': chartOfAccountId,
             'userId': ChachingGlobals.SelectedUserId,
@@ -266,16 +274,14 @@ Ext.define('Chaching.view.users.UsersGridController', {
         });
         leftStore.filter(filter);
         leftStore.getProxy().setExtraParams({
-            //'chartOfAccountId': chartOfAccountId,
             'userId': ChachingGlobals.SelectedUserId,
             'entityClassificationId': ChachingGlobals.entityClassification.Division
         });
         leftStore.load();
         rightStore.filter(filter);
         rightStore.getProxy().setExtraParams({
-            // 'chartOfAccountId': chartOfAccountId,
             'userId': ChachingGlobals.SelectedUserId,
-            'entityClassificationId': ChachingGlobals.entityClassification.Project
+            'entityClassificationId': ChachingGlobals.entityClassification.Division
         });
         rightStore.load();
     },
@@ -285,13 +291,11 @@ Ext.define('Chaching.view.users.UsersGridController', {
         leftStore = creditCardSecurityControl.getLeftStore(),
         rightStore = creditCardSecurityControl.getRightStore();
         leftStore.getProxy().setExtraParams({
-            //'chartOfAccountId': chartOfAccountId,
             'userId': ChachingGlobals.SelectedUserId,
             'entityClassificationId': ChachingGlobals.entityClassification.CreditCard
         });
         leftStore.load();
         rightStore.getProxy().setExtraParams({
-            // 'chartOfAccountId': chartOfAccountId,
             'userId': ChachingGlobals.SelectedUserId,
             'entityClassificationId': ChachingGlobals.entityClassification.CreditCard
         });

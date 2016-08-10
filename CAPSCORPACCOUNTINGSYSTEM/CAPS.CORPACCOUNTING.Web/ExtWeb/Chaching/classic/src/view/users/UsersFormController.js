@@ -167,7 +167,7 @@
                 bankRightStore = bankDragDropControl.getRightStore();
 
             var request = {
-                userIdList: [], accountAccessList: [], bankAccountAccessList: [], creditCardAccessList: [], projectAcessList: []
+                userIdList: [], accountAccessList: [], bankAccountAccessList: [], creditCardAccessList: [], projectAccessList: []
             }
             request.userIdList.push(ChachingGlobals.SelectedUserId);
             if (corporateRightStore.getUpdatedRecords().length > 0) {
@@ -184,16 +184,16 @@
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateLineAccessList', request);
             }
             if (projectRightStore.getUpdatedRecords().length > 0) {
-                request.projectAcessList = [];
+                request.projectAccessList = [];
                 projectRightStore.each(function (records, obj, count) {
-                    request.projectAcessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
+                    request.projectAccessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateProjectAccessList', request);
             }
             if (divisionRightStore.getUpdatedRecords().length > 0) {
-                request.projectAcessList = [];
+                request.projectAccessList = [];
                 divisionRightStore.each(function (records, obj, count) {
-                    request.projectAcessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
+                    request.projectAccessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateDivisionAccessList', request);
             }

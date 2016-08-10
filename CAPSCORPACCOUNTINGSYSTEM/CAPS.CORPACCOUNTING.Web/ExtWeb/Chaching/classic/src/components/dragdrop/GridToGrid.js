@@ -468,9 +468,12 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
             var filter = new Ext.util.Filter({
                 entity: rangeSelectorConfig.entityName,
                 searchTerm: field.getValue(),
-                comparator: 6,
+                //comparator: 6,
+                //dataType: 1,
+                //operator: 'in',
+                comparator: 5,
                 dataType: 1,
-                operator:'in',
+                isMultiRange: true,
                 property: rangeSelectorConfig.propertyName,
                 value: field.getValue()
             });

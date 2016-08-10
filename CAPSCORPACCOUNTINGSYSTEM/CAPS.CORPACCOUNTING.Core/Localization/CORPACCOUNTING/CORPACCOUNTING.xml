@@ -187,7 +187,7 @@
     <text name="LdapSettings" value="LDAP Settings" />
     <text name="EnableLdapAuthentication" value="Enable LDAP Authentication." />
     <text name="OtherSettings" value="Other Settings" />
-    <text name="AuditLogs" value="Audit logs" />
+    <text name="AuditLogs" value="Audit Logs" />
     <text name="Success" value="Success" />
     <text name="Time" value="Time" />
     <text name="Service" value="Service" />
@@ -204,7 +204,7 @@
     <text name="HasError" value="Has error" />
     <text name="ShowAdvancedFilters" value="Show advanced filters" />
     <text name="HideAdvancedFilters" value="Hide advanced filters" />
-    <text name="AuditLogDetail" value="Audit log detail" />
+    <text name="AuditLogDetail" value="Audit Log Detail" />
     <text name="Parameters" value="Parameters" />
     <text name="DateRange" value="Date range" />
     <text name="ActionInformations" value="Action informations" />

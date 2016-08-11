@@ -2901,6 +2901,44 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddListDataIntoWorkSheet(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sheet"></param>
+            <param name="list"></param>
+            <param name="listName"></param>
+            <param name="cellColumn"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddListDataIntoWorkSheet(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="sheet"></param>
+            <param name="list"></param>
+            <param name="listName"></param>
+            <param name="columnNumber"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(OfficeOpenXml.ExcelWorksheet,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="sheet"></param>
+            <param name="excelFormula"></param>
+            <param name="startRowIndex"></param>
+            <param name="endRowIndex"></param>
+            <param name="excelColumn"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetDropDownListFormula(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            =Sheet2!$A$1:$A$4
+            </summary>
+            <param name="cellColumn"></param>
+            <param name="lstFromRange"></param>
+            <param name="lstEndRange"></param>
+            <param name="sheetName"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.ConvertExcelToDataTable(OfficeOpenXml.ExcelPackage,System.String)">
             <summary>
             Converting Excel file to DataTable
@@ -3244,6 +3282,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCacheItem.TypeOfBankAccountId">
+            <summary>Gets or sets the TypeOfBankAccountId field. </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache">
             <summary>
@@ -11282,6 +11323,12 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit.BankAccountNumber">
             <summary>Gets or sets the BankAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit.AccountName">
+            <summary>Gets or sets the AccountName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit.BankName">
+            <summary>Gets or sets the BankName field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Security.Dto.BankAccountAccessListInputUnit.UserId">
             <summary>Gets or sets the UserId field. </summary>

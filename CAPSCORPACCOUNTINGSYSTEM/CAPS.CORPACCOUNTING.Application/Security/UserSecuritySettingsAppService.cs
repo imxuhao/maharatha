@@ -148,6 +148,7 @@ namespace CAPS.CORPACCOUNTING.Security
                             var accountDetails = await _accountUnitRepository.FirstOrDefaultAsync(u => u.Id == account.AccountId);
                             accountDetails.OrganizationUnitId = orgId;
                             await _accountUnitRepository.UpdateAsync(accountDetails);
+                            await CurrentUnitOfWork.SaveChangesAsync();
                         }
                     }
 
@@ -206,6 +207,7 @@ namespace CAPS.CORPACCOUNTING.Security
                             var accountDetails = await _accountUnitRepository.FirstOrDefaultAsync(u => u.Id == account.AccountId);
                             accountDetails.OrganizationUnitId = orgId;
                             await _accountUnitRepository.UpdateAsync(accountDetails);
+                            await CurrentUnitOfWork.SaveChangesAsync();
                         }
                     }
 
@@ -319,7 +321,9 @@ namespace CAPS.CORPACCOUNTING.Security
                 var otherFilters = input.Filters.Where(u => u.IsMultiRange == false).ToList();
                 if (otherFilters.Count != 0)
                     filterCondition = ExpressionBuilder.GetExpression<AccountCacheItem>(otherFilters).Compile();
-                accountCacheItems = accountCache.ToList().WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
+                accountCacheItems = accountCache.ToList()
+                    .Where(u => u.ChartOfAccountId == input.ChartOfAccountId)
+                    .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
                     .WhereIf(otherFilters.Count != 0, filterCondition)
                     .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();
             }
@@ -382,6 +386,7 @@ namespace CAPS.CORPACCOUNTING.Security
                             var projectDetails = await _jobUnitRepository.FirstOrDefaultAsync(u => u.Id == project.JobId);
                             projectDetails.OrganizationUnitId = orgId;
                             await _jobUnitRepository.UpdateAsync(projectDetails);
+                            await CurrentUnitOfWork.SaveChangesAsync();
                         }
                     }
 
@@ -440,6 +445,7 @@ namespace CAPS.CORPACCOUNTING.Security
                             var projectDetails = await _jobUnitRepository.FirstOrDefaultAsync(u => u.Id == project.JobId);
                             projectDetails.OrganizationUnitId = orgId;
                             await _jobUnitRepository.UpdateAsync(projectDetails);
+                            await CurrentUnitOfWork.SaveChangesAsync();
                         }
                     }
 
@@ -621,6 +627,7 @@ namespace CAPS.CORPACCOUNTING.Security
                             var creditCardDetails = await _creditCardUnitRepository.FirstOrDefaultAsync(u => u.Id == creditCard.AccountingDocumentId);
                             creditCardDetails.OrganizationUnitId = orgId;
                             await _creditCardUnitRepository.UpdateAsync(creditCardDetails);
+                            await CurrentUnitOfWork.SaveChangesAsync();
                         }
                     }
 
@@ -657,7 +664,7 @@ namespace CAPS.CORPACCOUNTING.Security
             var strOrgIds = string.Join(",", organizationUnitIds.ToArray());
 
             var typeOfbankList = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
-                      .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 61 && u.Value <= 69)
+                      .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 13 && u.Value <= 18)
                       .Select(u => u.Key).ToArray();
 
             var strTypeOfbankAC = string.Join(",", typeOfbankList);
@@ -673,7 +680,7 @@ namespace CAPS.CORPACCOUNTING.Security
                 {
                     SearchTypes mapSearchFilters = Helper.MappingFilters(Helper.GetMultiRangeFilters(multiRageFilters));
                     if (!ReferenceEquals(mapSearchFilters, null))
-                        query = Helper.CreateFilters(query, mapSearchFilters);
+                        query = Helper.CreateFilters(query, mapSearchFilters,SearchPattern.Or);
 
                     input.Filters.RemoveAll(u => u.IsMultiRange == true);
                 }
@@ -715,7 +722,7 @@ namespace CAPS.CORPACCOUNTING.Security
             var organizationUnitIds = organizationUnits.Select(ou => ou.Id);
             var strOrgIds = string.Join(",", organizationUnitIds.ToArray());
             var values = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
-                           .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 61 && u.Value <= 69)
+                           .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 13 && u.Value <= 18)
                            .Select(u => u.Key).ToArray();
 
             var strTypeOfbankAC = string.Join(",", values);
@@ -737,7 +744,7 @@ namespace CAPS.CORPACCOUNTING.Security
                 {
                     SearchTypes mapSearchFilters = Helper.MappingFilters(Helper.GetMultiRangeFilters(multiRageFilters));
                     if (!ReferenceEquals(mapSearchFilters, null))
-                        query = Helper.CreateFilters(query, mapSearchFilters);
+                        query = Helper.CreateFilters(query, mapSearchFilters,SearchPattern.Or);
 
                     input.Filters.RemoveAll(u => u.IsMultiRange == true);
                 }
@@ -802,13 +809,14 @@ namespace CAPS.CORPACCOUNTING.Security
                         }
                         else
                         {
-                            var orgUnit = new OrganizationExtended(tenantId, bankAccount.BankAccountNumber, entityClassificationId: EntityClassification.BankAccount);
+                            var orgUnit = new OrganizationExtended(tenantId, bankAccount.BankName, entityClassificationId: EntityClassification.BankAccount);
                             orgUnit.Code = await _organizationUnitManager.GetNextChildCodeAsync(null);
                             var orgId = await _organizationUnitRepository.InsertAndGetIdAsync(orgUnit);
                             await _userOrganizationUnitRepository.InsertAsync(new UserOrganizationUnit(tenantId, userId, orgId));
                             var bankAccountDetails = await _bankAccountUnitRepository.FirstOrDefaultAsync(u => u.Id == bankAccount.BankAccountId);
                             bankAccountDetails.OrganizationUnitId = orgId;
                             await _bankAccountUnitRepository.UpdateAsync(bankAccountDetails);
+                            await CurrentUnitOfWork.SaveChangesAsync();
                         }
                     }
 
@@ -847,6 +855,13 @@ namespace CAPS.CORPACCOUNTING.Security
             var organizationUnitIds = organizationUnits.Select(ou => ou.Id);
             var strOrgIds = string.Join(",", organizationUnitIds.ToArray());
 
+
+            var values = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
+                     .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 1 && u.Value <= 10)
+                     .Select(u => u.Key).ToArray();
+
+            var strTypeOfbankAC = string.Join(",", values);
+
             if (!string.IsNullOrEmpty(strOrgIds))
             {
                 if (ReferenceEquals(input.Filters, null))
@@ -875,6 +890,7 @@ namespace CAPS.CORPACCOUNTING.Security
 
                 var filterCondition = ExpressionBuilder.GetExpression<BankAccountCacheItem>(input.Filters).Compile();
                 bankAccountCacheItems = bankAccountCache.ToList()
+                    .Where(u => strTypeOfbankAC.Contains(u.TypeOfBankAccountId.ToString()))
                      .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
                     .Where(filterCondition).ToList();
             }
@@ -903,6 +919,12 @@ namespace CAPS.CORPACCOUNTING.Security
             List<BankAccountCacheItem> bankAccountCacheItems = new List<BankAccountCacheItem>();
             AutoSearchInput cacheInput = new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId };
 
+            var values = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
+                         .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 1 && u.Value <= 10)
+                         .Select(u => u.Key).ToArray();
+
+            var strTypeOfbankAC = string.Join(",", values);
+
             var user = await _userManager.GetUserByIdAsync(input.UserId);
             var organizationUnits = await _organizationExtendedUnitManager.GetExtendedOrganizationUnitsAsync(user, input.EntityClassificationId);
 
@@ -924,7 +946,7 @@ namespace CAPS.CORPACCOUNTING.Security
                 if (otherFilters.Count != 0)
                     filterCondition = ExpressionBuilder.GetExpression<BankAccountCacheItem>(otherFilters).Compile();
 
-                bankAccountCacheItems = bankAccountCache.ToList()
+                bankAccountCacheItems = bankAccountCache.ToList().Where(u => strTypeOfbankAC.Contains(u.TypeOfBankAccountId.ToString()))
                     .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
                     .WhereIf(otherFilters.Count != 0, filterCondition)
                     .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();

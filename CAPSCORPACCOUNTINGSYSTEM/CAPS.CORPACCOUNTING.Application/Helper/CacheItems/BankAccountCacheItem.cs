@@ -37,6 +37,10 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+
+        /// <summary>Gets or sets the TypeOfBankAccountId field. </summary>
+        public TypeOfBankAccount TypeOfBankAccountId { get; set; }
     }
     /// <summary>
     /// BankAccount CacheInterface
@@ -109,14 +113,16 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         private async Task<List<BankAccountCacheItem>> GetBankAccountsFromDb(AutoSearchInput input)
         {
             var bankAccounts = await Repository.GetAll()
-                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+                 //.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                   .Select(u => new BankAccountCacheItem
                   {
                       Description = u.Description,
                       BankAccountId = u.Id,
                       BankAccountNumber = u.BankAccountNumber,
                       BankAccountName = u.BankAccountName,
-                      OrganizationUnitId = u.OrganizationUnitId
+                      OrganizationUnitId = u.OrganizationUnitId,
+                      TypeOfBankAccountId=u.TypeOfBankAccountId
+
                   }).ToListAsync();
             return bankAccounts;
 

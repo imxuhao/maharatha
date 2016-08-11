@@ -21,6 +21,13 @@ namespace CAPS.CORPACCOUNTING.Security.Dto
         /// <summary>Gets or sets the BankAccountNumber field. </summary>
         public string BankAccountNumber { get; set; }
 
+        /// <summary>Gets or sets the AccountName field. </summary>
+        public string AccountName { get; set; }
+
+
+        /// <summary>Gets or sets the BankName field. </summary>
+        public string BankName { get; set; }
+
         /// <summary>Gets or sets the UserId field. </summary>
         public long UserId { get; set; }
 

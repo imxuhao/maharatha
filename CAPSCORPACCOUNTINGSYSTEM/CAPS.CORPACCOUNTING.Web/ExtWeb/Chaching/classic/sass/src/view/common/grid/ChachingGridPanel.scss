@@ -307,3 +307,15 @@ $border-color-focus:#1f78b5
     border-color:#7fb0da !important;
     color: white !important;
 }
+
+@include extjs-panel-ui(
+$ui:'summaryPanel',
+$ui-border-color:#025b80,
+$ui-padding:5px,
+$ui-header-font-size:12px,
+$ui-header-font-weight:600,
+$ui-header-line-height:15px,
+$ui-header-border-color:#025b80,
+$ui-header-background-color:#025b80,
+$ui-header-padding:10px
+);

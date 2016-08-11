@@ -408,4 +408,9 @@ h1, h2, h3, h4, h5, h6 {
     top: 50%;
     transform: translateY(-50%);
 }
-
+.x-tool-img {
+    color: #fff !important;
+}
+.x-fieldset-header-tool-transparentFieldSet > .x-tool-toggle {
+    color: #919191 !important;
+}

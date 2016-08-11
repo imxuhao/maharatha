@@ -1,4 +1,5 @@
 ﻿Ext.define('Chaching.utilities.ChachingRenderers', {
+    alternateClassName: ['ChachingRenderers'],
     singleton: true,
     dateSearchFieldRenderer: function (value) {
         return Ext.Date.format(value, 'm/d/Y');

@@ -19,7 +19,153 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
     autoScroll: false,
     border: false,
     frame: false,
-    rbar: [{ xtype: 'panel', layout: { type: 'vbox', pack: 'center' }, title: app.localize('VendorSnapshot'), collapsed: true, collapsible: true, collapseDirection: 'right', headerPosition: 'top', flex: 1, width: 250 }],
+    rbar: [
+    {
+        xtype: 'panel',
+        ui: 'summaryPanel',
+        layout: { type: 'vbox'},
+        title: app.localize('VendorSnapshot'),
+        collapsed: true,
+        collapsible: true,
+        collapseDirection: 'right',
+        headerPosition: 'top',
+        flex: 1,
+        width: 350,
+        border: true,
+        items:[
+        {
+            xtype: 'gridpanel',
+            title: app.localize('RecentPayables'),
+            width: '100%',
+            ui: 'summaryPanel',
+            cls: 'chaching-transactiongrid',
+            flex: 1,
+            padding:'5 0 0 0',
+            store: {
+                ///TODO:Replace with live data
+                fields: [{ name: 'referenceNumber' }, { name: 'transactionDate' }, { name: 'amount' }],
+                data: [
+                    { referenceNumber: '123', transactionDate: '08-01-2016', amount: '100' },
+                    { referenceNumber: '456', transactionDate: '08-01-2016', amount: '102' },
+                    { referenceNumber: '789', transactionDate: '08-01-2016', amount: '1000' },
+                    { referenceNumber: '101', transactionDate: '08-01-2016', amount: '2054' },
+                    { referenceNumber: '102', transactionDate: '08-01-2016', amount: '4520' }
+                ]
+            },
+            columns:[
+            {
+                xtype: 'gridcolumn',
+                text: app.localize('Invoice#'),
+                dataIndex: 'referenceNumber',
+                width:'24%'
+            }, {
+                xtype: 'gridcolumn',
+                text: app.localize('TransDate'),
+                dataIndex: 'transactionDate',
+                renderer:ChachingRenderers.renderDateOnly,
+                width: '35%'
+            }, {
+                xtype: 'gridcolumn',
+                text: app.localize('Amount'),
+                dataIndex: 'amount',
+                width: '40%'
+            }]
+        }, {
+            xtype: 'gridpanel',
+            title: app.localize('Payments'),
+            width: '100%',
+            ui: 'summaryPanel',
+            cls: 'chaching-transactiongrid',
+            flex: 1,
+            padding: '0 0 0 0',
+            store: {
+                fields: [{ name: 'checkNumber' }, { name: 'checkDate' }, { name: 'isPaid' }, { name: 'amount' }],
+                data: [
+                    { checkNumber: '123', checkDate: '08-01-2016', amount: '100',isPaid:false },
+                    { checkNumber: '456', checkDate: '08-01-2016', amount: '102', isPaid: false },
+                    { checkNumber: '789', checkDate: '08-01-2016', amount: '1000', isPaid: true },
+                    { checkNumber: '101', checkDate: '08-01-2016', amount: '2054', isPaid: false },
+                    { checkNumber: '102', checkDate: '08-01-2016', amount: '4520', isPaid: true }
+                ]
+            },
+            columns: [
+            {
+                xtype: 'gridcolumn',
+                text: app.localize('Check#'),
+                dataIndex: 'checkNumber',
+                width: '25%'
+            }, {
+                xtype: 'gridcolumn',
+                text: app.localize('CheckDate'),
+                renderer: ChachingRenderers.renderDateOnly,
+                dataIndex: 'checkDate',
+                width: '30%'
+            }, {
+                xtype: 'gridcolumn',
+                text: app.localize('IsPaid'),
+                renderer: ChachingRenderers.rightWrongMarkRenderer,
+                dataIndex: 'isPaid',
+                width:'19%'
+            }, {
+                xtype: 'gridcolumn',
+                text: app.localize('Amount'),
+                dataIndex: 'amount',
+                width: '25%'
+            }]
+        }, {
+            xtype: 'gridpanel',
+            title: app.localize('RecentPO'),
+            width: '100%',
+            itemId:'recentPos',
+            ui: 'summaryPanel',
+            cls: 'chaching-transactiongrid',
+            flex: 1,
+            padding: '0 0 0 0',
+            tools: [
+            {
+                type: 'save',
+                tooltip: app.localize('ProcessSelected'),
+                handler:'onProcessPoClicked'
+            }],
+            store: {
+                fields: [{ name: 'referenceNumber' }, { name: 'description' }, { name: 'transactionDate' }, { name: 'remainingAmount' }, { name: 'process' }],
+                data: [
+                   { referenceNumber: '123', transactionDate: '08-01-2016', remainingAmount: '100', description:'ABC' },
+                   { referenceNumber: '456', transactionDate: '08-01-2016', remainingAmount: '102', description: 'ABC' },
+                   { referenceNumber: '789', transactionDate: '08-01-2016', remainingAmount: '1000', description: 'ABC' },
+                   { referenceNumber: '101', transactionDate: '08-01-2016', remainingAmount: '2054', description: 'ABC' },
+                   { referenceNumber: '102', transactionDate: '08-01-2016', remainingAmount: '4520', description: 'ABC' }
+                ]
+            },
+            columns: [
+            {
+                xtype: 'gridcolumn',
+                text: app.localize('PO#'),
+                dataIndex: 'referenceNumber',
+                width: '14%'
+            }, {
+                xtype: 'gridcolumn',
+                text: app.localize('Desciption'),
+                dataIndex: 'description',
+                width: '26%'
+            }, {
+                xtype: 'gridcolumn',
+                text: app.localize('TransDate'),
+                dataIndex: 'transactionDate',
+                renderer: ChachingRenderers.renderDateOnly,
+                width: '26%'
+            },  {
+                xtype: 'gridcolumn',
+                text: app.localize('RemainingAmount'),
+                dataIndex: 'remainingAmount',
+                width: '25%'
+            }, {
+                xtype: 'checkcolumn',
+                dataIndex: 'process',
+                width: '8%'
+            }]
+        }]
+    }],
     initComponent: function () {
         var me = this;
         me.tbar=[

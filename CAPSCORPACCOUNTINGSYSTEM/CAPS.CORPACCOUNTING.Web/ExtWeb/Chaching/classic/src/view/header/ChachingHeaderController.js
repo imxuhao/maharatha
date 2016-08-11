@@ -406,7 +406,6 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             },
             failure: function (response, opts) {
                 var res = Ext.decode(response.responseText);
-                exceptionMessage
                 if (!Ext.isEmpty(res.exceptionMessage)) {
                     abp.message.error(res.exceptionMessage);
                 } else {

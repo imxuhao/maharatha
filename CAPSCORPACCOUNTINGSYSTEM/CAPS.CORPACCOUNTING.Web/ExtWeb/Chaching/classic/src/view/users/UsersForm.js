@@ -609,7 +609,7 @@ Ext.define('Chaching.view.users.UsersForm',
                              {
                                  title: abp.localization.localize("DivisionSecurity"),
                                 // padding: '0 10 0 10',
-                                 iconCls: 'fa fa-steam',
+                                 iconCls: 'fa fa-transgender-alt',
                                  layout: 'column',
                                  height: '100%',
                                  items: [
@@ -726,10 +726,6 @@ Ext.define('Chaching.view.users.UsersForm',
                                          leftStore: 'Chaching.store.users.CreditCardSecurityLeftStore',
                                          rightStore: 'Chaching.store.users.CreditCardSecurityRightStore',
                                          requireMultiSearch: true,
-                                         rangeSelectorConfig: {
-                                             entityName: '',
-                                             propertyName: 'cardNumber'
-                                         },
                                          selModelConfig: {
                                              selType: 'chachingCheckboxSelectionModel',
                                              injectCheckbox: "first",
@@ -794,10 +790,6 @@ Ext.define('Chaching.view.users.UsersForm',
                                           leftStore: 'Chaching.store.users.BankSecurityLeftStore',
                                           rightStore: 'Chaching.store.users.BankSecurityRightStore',
                                           requireMultiSearch: true,
-                                          rangeSelectorConfig: {
-                                              entityName: '',
-                                              propertyName: 'accountName'
-                                          },
                                           selModelConfig: {
                                               selType: 'chachingCheckboxSelectionModel',
                                               injectCheckbox: "first",

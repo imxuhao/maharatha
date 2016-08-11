@@ -510,7 +510,13 @@ Ext.define('Chaching.components.dragdrop.GridToGrid', {
                     filter.searchTerm = filterValue;
                     filter.setValue(filterValue);
                     parentGridStore.isRangeFilters = true;
-                    parentGridStore.addFilter(filter, false);
+                    //parentGridStore.addFilter(filter, false);
+                    parentGridStore.filterBy(function (record, id) {
+                        var val = Ext.Array.contains(filterValue, parseInt(record.get(filter.getProperty())));
+                        //parentGridSelModel.select(record);
+                        return val;
+                    }, this);
+                    
                 }
             }
         }

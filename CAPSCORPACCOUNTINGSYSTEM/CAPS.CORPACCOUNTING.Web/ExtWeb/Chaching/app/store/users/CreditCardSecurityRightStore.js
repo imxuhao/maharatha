@@ -4,6 +4,7 @@
 Ext.define('Chaching.store.users.CreditCardSecurityRightStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.users.CreditCardSecurityModel',
+    remoteFilter: false,
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

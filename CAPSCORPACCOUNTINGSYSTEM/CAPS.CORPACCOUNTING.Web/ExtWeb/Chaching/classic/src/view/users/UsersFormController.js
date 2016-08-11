@@ -170,12 +170,14 @@
                 userIdList: [], accountAccessList: [], bankAccountAccessList: [], creditCardAccessList: [], projectAccessList: []
             }
             request.userIdList.push(ChachingGlobals.SelectedUserId);
+            corporateRightStore.clearFilter();
             if (corporateRightStore.getUpdatedRecords().length > 0 || corporateRightStore.getRemovedRecords().length > 0) {
                 corporateRightStore.each(function (records, obj, count) {
                     request.accountAccessList.push({ accountId: records.get('accountId'), accountNumber: records.get('accountNumber'), organizationUnitId: records.get('organizationUnitId') });
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateAccountAccessList', request);
             }
+            projectCoaRightStore.clearFilter();
             if (projectCoaRightStore.getUpdatedRecords().length > 0 || projectCoaRightStore.getRemovedRecords().length > 0) {
                 request.accountAccessList = [];
                 projectCoaRightStore.each(function (records, obj, count) {
@@ -183,6 +185,7 @@
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateLineAccessList', request);
             }
+            projectRightStore.clearFilter();
             if (projectRightStore.getUpdatedRecords().length > 0 || projectRightStore.getRemovedRecords().length > 0) {
                 request.projectAccessList = [];
                 projectRightStore.each(function (records, obj, count) {
@@ -190,6 +193,7 @@
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateProjectAccessList', request);
             }
+            divisionRightStore.clearFilter();
             if (divisionRightStore.getUpdatedRecords().length > 0 || divisionRightStore.getRemovedRecords().length > 0) {
                 request.projectAccessList = [];
                 divisionRightStore.each(function (records, obj, count) {
@@ -197,12 +201,14 @@
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateDivisionAccessList', request);
             }
+            creditCardRightStore.clearFilter();
             if (creditCardRightStore.getUpdatedRecords().length > 0 || creditCardRightStore.getRemovedRecords().length > 0) {
                 creditCardRightStore.each(function (records, obj, count) {
                     request.creditCardAccessList.push({ accountingDocumentId: records.get('accountingDocumentId'), cardHolderName: records.get('cardHolderName'), cardNumber: records.get('cardNumber'), organizationUnitId: records.get('organizationUnitId') });
                 })
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateCreditCardAccessList', request);
             }
+            bankRightStore.clearFilter();
             if (bankRightStore.getUpdatedRecords().length > 0 || bankRightStore.getRemovedRecords().length > 0) {
                 bankRightStore.each(function (records, obj, count) {
                     request.bankAccountAccessList.push({ bankAccountId: records.get('bankAccountId'), bankName: records.get('bankName'), organizationUnitId: records.get('organizationUnitId') });

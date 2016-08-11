@@ -4,6 +4,7 @@
 Ext.define('Chaching.store.users.ProjectSecurityRightStore', {
     extend: 'Chaching.store.base.BaseStore',
     model: 'Chaching.model.users.ProjectSecurityModel',
+    remoteFilter: false,
     proxy: {
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

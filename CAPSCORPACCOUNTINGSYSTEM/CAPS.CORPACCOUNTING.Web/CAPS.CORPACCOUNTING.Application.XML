@@ -2863,6 +2863,11 @@
             this parameter is required for downloading Accounts and Line Templates
             </summary>  
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper">
             <summary>
             
@@ -2886,24 +2891,18 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddTemplateObjects(OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields[])">
             <summary>
-            
+            Fill Dropdown List to Cells in ExcelSheet
             </summary>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.CellEditable(OfficeOpenXml.ExcelRange)">
-            <summary>
-            
-            </summary>
-            <param name="cell"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetBooleanList">
             <summary>
-            
+            Get Boolean values as List
             </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddListDataIntoWorkSheet(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.String,System.String)">
             <summary>
-            
+            List Data is Added to Excel Sheet
             </summary>
             <param name="sheet"></param>
             <param name="list"></param>
@@ -2912,7 +2911,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddListDataIntoWorkSheet(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.String,System.Int32)">
             <summary>
-            
+             List Data is Added to Excel Sheet
             </summary>
             <param name="sheet"></param>
             <param name="list"></param>
@@ -2932,6 +2931,7 @@
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetDropDownListFormula(System.String,System.String,System.Int32,System.Int32)">
             <summary>
             =Sheet2!$A$1:$A$4
+            Refer other sheet data as Dropdown list values in Cells
             </summary>
             <param name="cellColumn"></param>
             <param name="lstFromRange"></param>

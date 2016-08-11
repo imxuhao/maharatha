@@ -34,7 +34,8 @@
     <text name="Delete" value="Delete" />
     <text name="SavedSuccessfully" value="Saved successfully." />
     <text name="AreYouSure" value="Are you sure?" />
-    <text name="YesDelete" value="Yes, delete!" /><text name="DeletingUser" value="Deleting user" />
+    <text name="YesDelete" value="Yes, delete!" />
+    <text name="DeletingUser" value="Deleting user" />
     <text name="UsersHeaderInfo" value="Manage users and permissions." />
     <text name="CreateNewUser" value="Create New User" />
     <text name="UserName" value="User Name" />
@@ -920,37 +921,37 @@
     <text name="DetailGridValidation" value="Invalid Distribution Data" />
     <text name="Confirm" value="Confirm?" />
     <text name="ConfirmMessage" value="Are you sure? ,you want to delete this " />
-   <text name="EditInvoice" value="Edit Invoice" />
-    
- <text name="Warning" value="Warning" />
- <text name="SwitchOrganizationMsg" value="Are you sure? ,you want to switch to another organization" />
- <text name="FiscalYearCloseMsg" value="You are about to Close this fiscal year, no transactions will post to closed year" />
- <text name="CreateNewInvoice" value="Create Invoice" />
- <text name="ViewInvoice" value="View Invoice" />
- <text name="PO#" value="PO#" />
- <text name="Invoice#" value="Invoice#" />
- <text name="InvoiceDate" value="Invoice date" />
- <text name="InvoiceTotal" value="Invoice total" />
- <text name="DueDate" value="Due date" />
- <text name="CheckGroup" value="Check group" />
- <text name="MemoLine" value="Memoline" />
- <text name="PaymentMethods" value="Payment Methods" />
- <text name="CompanySetup" value="Tenant Setup" />
- <text name="CompanyPreferences" value="Tenant Preferences" />
- <text name="CompanyMembers" value="Members" />
- <text name="CompanyInformation" value="Tenant Information" />
- <text name="CompanyState" value="State" />
- <text name="Company1099And1096Form" value="For 1099 and 1096 forms" />
- <text name="TransmitterContactName" value="Transmitter Contact Name" />
- <text name="TransmitterEmailAddress" value="Transmitter Email Address" />
- <text name="TransmitterCode" value="Transmitter Code" />
- <text name="TransmitterControlCode" value="Transmitter Control Code" />
-    
+    <text name="EditInvoice" value="Edit Invoice" />
+
+    <text name="Warning" value="Warning" />
+    <text name="SwitchOrganizationMsg" value="Are you sure? ,you want to switch to another organization" />
+    <text name="FiscalYearCloseMsg" value="You are about to Close this fiscal year, no transactions will post to closed year" />
+    <text name="CreateNewInvoice" value="Create Invoice" />
+    <text name="ViewInvoice" value="View Invoice" />
+    <text name="PO#" value="PO#" />
+    <text name="Invoice#" value="Invoice#" />
+    <text name="InvoiceDate" value="Invoice date" />
+    <text name="InvoiceTotal" value="Invoice total" />
+    <text name="DueDate" value="Due date" />
+    <text name="CheckGroup" value="Check group" />
+    <text name="MemoLine" value="Memoline" />
+    <text name="PaymentMethods" value="Payment Methods" />
+    <text name="CompanySetup" value="Tenant Setup" />
+    <text name="CompanyPreferences" value="Tenant Preferences" />
+    <text name="CompanyMembers" value="Members" />
+    <text name="CompanyInformation" value="Tenant Information" />
+    <text name="CompanyState" value="State" />
+    <text name="Company1099And1096Form" value="For 1099 and 1096 forms" />
+    <text name="TransmitterContactName" value="Transmitter Contact Name" />
+    <text name="TransmitterEmailAddress" value="Transmitter Email Address" />
+    <text name="TransmitterCode" value="Transmitter Code" />
+    <text name="TransmitterControlCode" value="Transmitter Control Code" />
+
     <text name="CompanyTransmitterContactName" value="Trans Contact Name" />
     <text name="CompanyTransmitterEmailAddress" value="Trans Email" />
     <text name="CompanyTransmitterCode" value="Trans Code" />
     <text name="CompanyTransmitterControlCode" value="Trans Control Code" />
-    
+
     <text name="AllowDuplicateAPInvoices" value="Allow Duplicate AP invoice #s" />
     <text name="AllowDuplicateARInvoices" value="Allow Duplicate AR invoice #s" />
     <text name="SetDefaultAPTerms" value="Set Default AP Terms" />
@@ -1006,103 +1007,103 @@
     <text name="CompanyUserInformation" value="User Information" />
     <text name="SaveCompanySetup" value="Save Tenant Setup" />
     <text name="SaveCompanyPreferences" value="Save Tenant Preferences" />
-  <text name="CreditMemo" value="Credit Memo" />
-  <text name="QuickPay" value="Quick Pay" />
-  <text name="CheckDate" value="Check date" />
-  <text name="PayType" value="Pay type" />
-  <text name="PrintPDF" value="Print PDF" />
-  <text name="PrintWord" value="Print Word" />
-  <text name="Invoice" value="Invoice" />
-  <text name="VendorSnapshot" value="Vendor Snapshot" />
-  <text name="EditPO" value="Edit PO" />
-  <text name="CreatePO" value="Create PO" />
-<text name="ViewPO" value="View PO" />
-<text name="TransDate" value="Trans date" />
-<text name="TotalOrder" value="Total order" />
-<text name="RemainingBalance" value="Rem. Balance" />
-<text name="PendingTrans" value="Pending Trans" />
-<text name="PurchaseOrder" value="Purchase Orders" />
-<text name="Print" value="Print" />
-<text name="ApprovedBy" value="Approved By" />
-<text name="CreateNewOrganization" value="Create New Organization" />
-<text name="Organization" value="Organization" />
-<text name="EditOrganization" value="Edit Organization" />
-<text name="ViewOrganization" value="View Organization" />
-<text name="OrganizationId" value="Organization Id" />
-<text name="OrganizationName" value="Name" />
-<text name="DatabaseName" value="Database Name" />
-<text name="SelectConnectionString" value="Select Connection String" />
-<text name="CopyFromTenants" value="Copy From Tenants" />
-<text name="MenuCompanySetup" value="Company Setup" />
-<text name="OrganizationTenants" value="Tenant" />
-<text name="SelectOrganizationTenant" value="--Select Tenant--" />
-<text name="SelectTenantToCopyModules" value="Please select tenant to Copy Modules." />
-<text name="ModuleName" value="Module Name" />
-<text name="CompanyList" value="Company List" />
-<text name="SelectOrganization" value="Please select tenant group." />
-<text name="OrigAmount" value="Orig amount" />
-<text name="DateNeeded" value="Date needed" />
-<text name="TimeNeeded" value="Time needed" />
-<text name="CardInfo" value="Card info" />
-<text name="WillBill" value="Will Bill" />
-<text name="CrDrCard" value="Credit/Debit Card" />
-<text name="DetailHistory" value="Detail history" />
-<text name="CheckType" value="Check type" />
-<text name="DepositCheck" value="Deposit check" />
-<text name="PaymentCheck" value="Payment check" />
-<text name="ChargeDate" value="Charge date" />
-<text name="DateClose" value="Date close" />
-<text name="TenantCreationWarningMessage" value="You can not change tenant group for this tenant in future. Do you want to save this tenant in tenant group?" />
-<text name="DeleteWarningMessage" value="You want to delete." />
-<text name="TenantInformationMessage" value="Please select user to login as this tenant." />
-<text name="InformationMessage" value="Information" />
-<text name="LinkCompany" value="Link Company" />
-<text name="LinkCompanyRoles" value="Roles with company" />
-<text name="RowClickMessage" value="Please click on the View button to see the granted permissions of the selected Role!" />
-<text name="GridItemsPerPage" value="Items per page" />
-<text name="ShowAuditLogDetailView_Tooltip" value="Show Audit Log Detail View" />
-<text name="Status" value="Status" />
-<text name="ViewPermissions" value="View Permissions" />
-<text name="View" value="View" />
-<text name="SuccessMessage" value="Operation completed successfully." />
-<text name="UnlinkUser_Tooltip" value="unlink User" />   
-    
-<text name="PermissionsSaveMessage" value=" Changes were made to this user's Role. Name the new Role to create and Press Save or Cancel to assign selected permissions for this User." />
-<text name="Skip" value="Skip" />  
-<text name="YouDontHaveSufficientPermission" value="You don't have sufficient permission to perform this operation. Please contact administrator." />
-<text name="SelectUserProfilePicture" value="Select Profile Picture before saving." />
+    <text name="CreditMemo" value="Credit Memo" />
+    <text name="QuickPay" value="Quick Pay" />
+    <text name="CheckDate" value="Check date" />
+    <text name="PayType" value="Pay type" />
+    <text name="PrintPDF" value="Print PDF" />
+    <text name="PrintWord" value="Print Word" />
+    <text name="Invoice" value="Invoice" />
+    <text name="VendorSnapshot" value="Vendor Snapshot" />
+    <text name="EditPO" value="Edit PO" />
+    <text name="CreatePO" value="Create PO" />
+    <text name="ViewPO" value="View PO" />
+    <text name="TransDate" value="Trans date" />
+    <text name="TotalOrder" value="Total order" />
+    <text name="RemainingBalance" value="Rem. Balance" />
+    <text name="PendingTrans" value="Pending Trans" />
+    <text name="PurchaseOrder" value="Purchase Orders" />
+    <text name="Print" value="Print" />
+    <text name="ApprovedBy" value="Approved By" />
+    <text name="CreateNewOrganization" value="Create New Organization" />
+    <text name="Organization" value="Organization" />
+    <text name="EditOrganization" value="Edit Organization" />
+    <text name="ViewOrganization" value="View Organization" />
+    <text name="OrganizationId" value="Organization Id" />
+    <text name="OrganizationName" value="Name" />
+    <text name="DatabaseName" value="Database Name" />
+    <text name="SelectConnectionString" value="Select Connection String" />
+    <text name="CopyFromTenants" value="Copy From Tenants" />
+    <text name="MenuCompanySetup" value="Company Setup" />
+    <text name="OrganizationTenants" value="Tenant" />
+    <text name="SelectOrganizationTenant" value="--Select Tenant--" />
+    <text name="SelectTenantToCopyModules" value="Please select tenant to Copy Modules." />
+    <text name="ModuleName" value="Module Name" />
+    <text name="CompanyList" value="Company List" />
+    <text name="SelectOrganization" value="Please select tenant group." />
+    <text name="OrigAmount" value="Orig amount" />
+    <text name="DateNeeded" value="Date needed" />
+    <text name="TimeNeeded" value="Time needed" />
+    <text name="CardInfo" value="Card info" />
+    <text name="WillBill" value="Will Bill" />
+    <text name="CrDrCard" value="Credit/Debit Card" />
+    <text name="DetailHistory" value="Detail history" />
+    <text name="CheckType" value="Check type" />
+    <text name="DepositCheck" value="Deposit check" />
+    <text name="PaymentCheck" value="Payment check" />
+    <text name="ChargeDate" value="Charge date" />
+    <text name="DateClose" value="Date close" />
+    <text name="TenantCreationWarningMessage" value="You can not change tenant group for this tenant in future. Do you want to save this tenant in tenant group?" />
+    <text name="DeleteWarningMessage" value="You want to delete." />
+    <text name="TenantInformationMessage" value="Please select user to login as this tenant." />
+    <text name="InformationMessage" value="Information" />
+    <text name="LinkCompany" value="Link Company" />
+    <text name="LinkCompanyRoles" value="Roles with company" />
+    <text name="RowClickMessage" value="Please click on the View button to see the granted permissions of the selected Role!" />
+    <text name="GridItemsPerPage" value="Items per page" />
+    <text name="ShowAuditLogDetailView_Tooltip" value="Show Audit Log Detail View" />
+    <text name="Status" value="Status" />
+    <text name="ViewPermissions" value="View Permissions" />
+    <text name="View" value="View" />
+    <text name="SuccessMessage" value="Operation completed successfully." />
+    <text name="UnlinkUser_Tooltip" value="unlink User" />
 
-<text name="SelectRoleName" value="Please select role name." />
-<text name="CompanyGroup" value="Company Groups" />
-<text name="CreateNewTenantGroup" value="Create New Tenant Group" />
-<text name="EditTenantGroup" value="Edit Tenant Group" />
-<text name="ViewTenantGroup" value="View Tenant Group" />
-<text name="TenantGroupName" value="Tenant Group" />
-<text name="SelectDatabase" value="Select database" />
-<text name="TenantGroupMessage" value="Please select database or Tenant will be created in Host database." />
-<text name="PostalCodeEnterText" value="Please enter postal code to get city." />
-<text name="SelectCountry" value="Please select country." />
- <text name="TenantGroups" value="Tenant Groups" />
- <text name="VendorsModule" value="Vendors" />
- <text name="UsersModule" value="Users" />
- <text name="CustomersModule" value="Customers" />
-<text name="EmployeesModule" value="Employees" />
-<text name="RolesModule" value="Roles" />
-<text name="ChartofAccountsModule" value="Chart of Accounts" />
-<text name="ProjectChartofAccountsModule" value="Project Chart of Accounts" />
-<text name="ApplyManageView" value="Apply View" />
-<text name="ApplyManageViewConfirm" value="Do you really want to apply selected view setting?" />
-<text name="ServerName" value="Server Name" />
-    
-  
-<text name="UserSecuritySettings" value="User security settings" />
-<text name="CorporateCoaSecurity" value="Corporate COA Security" />
-<text name="ProjectCoaSecurity" value="Project COA Security" />
-<text name="ProjectSecurity" value="Project Security" />
-<text name="CreditCardSecurity" value="Credit Card Security" />
-<text name="BankSecurity" value="Bank Security" />
+    <text name="PermissionsSaveMessage" value=" Changes were made to this user's Role. Name the new Role to create and Press Save or Cancel to assign selected permissions for this User." />
+    <text name="Skip" value="Skip" />
+    <text name="YouDontHaveSufficientPermission" value="You don't have sufficient permission to perform this operation. Please contact administrator." />
+    <text name="SelectUserProfilePicture" value="Select Profile Picture before saving." />
+
+    <text name="SelectRoleName" value="Please select role name." />
+    <text name="CompanyGroup" value="Company Groups" />
+    <text name="CreateNewTenantGroup" value="Create New Tenant Group" />
+    <text name="EditTenantGroup" value="Edit Tenant Group" />
+    <text name="ViewTenantGroup" value="View Tenant Group" />
+    <text name="TenantGroupName" value="Tenant Group" />
+    <text name="SelectDatabase" value="Select database" />
+    <text name="TenantGroupMessage" value="Please select database or Tenant will be created in Host database." />
+    <text name="PostalCodeEnterText" value="Please enter postal code to get city." />
+    <text name="SelectCountry" value="Please select country." />
+    <text name="TenantGroups" value="Tenant Groups" />
+    <text name="VendorsModule" value="Vendors" />
+    <text name="UsersModule" value="Users" />
+    <text name="CustomersModule" value="Customers" />
+    <text name="EmployeesModule" value="Employees" />
+    <text name="RolesModule" value="Roles" />
+    <text name="ChartofAccountsModule" value="Chart of Accounts" />
+    <text name="ProjectChartofAccountsModule" value="Project Chart of Accounts" />
+    <text name="ApplyManageView" value="Apply View" />
+    <text name="ApplyManageViewConfirm" value="Do you really want to apply selected view setting?" />
+    <text name="ServerName" value="Server Name" />
+
+
+    <text name="UserSecuritySettings" value="User security settings" />
+    <text name="CorporateCoaSecurity" value="Corporate COA Security" />
+    <text name="ProjectCoaSecurity" value="Project COA Security" />
+    <text name="ProjectSecurity" value="Project Security" />
+    <text name="CreditCardSecurity" value="Credit Card Security" />
+    <text name="BankSecurity" value="Bank Security" />
     <text name="RollUpDivision" value="RollUp Division" />
-    
+
     <text name="Range" value="Enter range" />
     <text name="RangeMessage" value="Ex. 1001..1010;1000-01..1000-10" />
     <text name="InvalidRange" value="Range entered is invalid. Please enter correct range." />
@@ -1113,9 +1114,11 @@
     <text name="CardNumber" value="Card Number"/>
     <text name="DivisionSecurity" value="Division Security"/>
     <text name="LinkedAccountsHeader"  value="Linked Accounts"/>
-    <text name="LoginAttemptsTitle" value="Login Attempts"/> 
+    <text name="LoginAttemptsTitle" value="Login Attempts"/>
     <text name="NoLoginAttemptsText" value="No login attempts yet"/>
     <text name="DivisionName" value="Division Name" />
+    <text name="DropDownListInformation" value="DropDown List Information" />
+    <text name="Flags" value="Flags" />
 
   </texts>
 </localizationDictionary>

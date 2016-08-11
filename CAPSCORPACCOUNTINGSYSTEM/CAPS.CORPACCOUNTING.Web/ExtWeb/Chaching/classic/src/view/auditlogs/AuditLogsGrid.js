@@ -179,9 +179,10 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
                  emptyText: 'Enter Browser to search'
              }
          }
-    ],
-    listeners: {
-        cellclick : 'auditLogCellClick'
-    }
+    ]
+    //,
+    //listeners: {
+    //    cellclick : 'auditLogCellClick'
+    //}
 });
 

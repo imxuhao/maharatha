@@ -22,10 +22,11 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGridController', {
         var rec = grid.getStore().getAt(rowIndex);
         var detailView = Ext.create('Chaching.view.auditlogs.AuditLogDetailView', { autoShow: true });
         detailView.down('dataview').getStore().add(rec);
-    },
-    auditLogCellClick:function(grid, cell, colIndex, record) {
-        var detailView = Ext.create('Chaching.view.auditlogs.AuditLogDetailView', { autoShow: true });
-        detailView.down('dataview').getStore().add(record);
     }
+    //,
+    //auditLogCellClick:function(grid, cell, colIndex, record) {
+    //    var detailView = Ext.create('Chaching.view.auditlogs.AuditLogDetailView', { autoShow: true });
+    //    detailView.down('dataview').getStore().add(record);
+    //}
     
 });

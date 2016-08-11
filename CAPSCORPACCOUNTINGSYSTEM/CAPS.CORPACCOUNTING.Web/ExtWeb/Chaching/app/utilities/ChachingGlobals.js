@@ -19,6 +19,7 @@
         userOrganizationId: null,
         gotoMyAccount: false
     },
+    userLinkedAccounts:null,
     entityClassification : {
         Account: 2, // corporate coa security
         Project: 1, // project security

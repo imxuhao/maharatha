@@ -293,144 +293,39 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
         var contextMenu = btn.contextMenu;
         var position = btn.getPosition();
 
-        //var notificationBtn = view.down('button[itemId=NotificationBtn]');
-        //if (notificationBtn) {
-        //    me.hideContextMenu(notificationBtn);
-        //}
-        //var localizationBtn = view.down('button[itemId=LocalizationBtn]');
-        //if (localizationBtn) {
-        //    me.hideContextMenu(localizationBtn);
-        //}
         if (contextMenu) {
             contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         } else {
-            //var items = [
-            //    {
-            //        text: abp.localization.localize("BackToMyAccount"),
-            //        hidden: !btn.gotoMyAccount,
-            //        name: 'BackToAccount',
-            //        iconCls: 'icon-action-undo',
-            //        listeners: {
-            //            click: me.backToMyAccountClick
-            //        }
-            //    },
-            //    {
-            //        text: abp.localization.localize("LinkedAccounts"),
-            //        iconCls: 'icon-link',
-            //        listeners: {
-            //            click: me.getRecentlyUsedLinkedUsers
-            //        }
-            //        //menu: {
-            //        //    ui: 'accounts',
-            //        //    width: 170,
-            //        //    items: [
-            //        //        {
-            //        //            text: abp.localization.localize("ManageAccounts"),
-            //        //            iconCls: 'icon-settings',
-            //        //            name: 'ManageAccount',                              
-            //        //            listeners: {
-            //        //                click: me.manageActionClicked
-            //        //            }
-            //        //        }
-            //        //    ]
-            //        //}
-            //    }, {
-            //        text: abp.localization.localize("LoginAttempts"),
-            //        iconCls: 'icon-shield',
-            //        name: 'LoginAttempts',
-            //        leaf: true,
-            //        listeners: {
-            //            click: me.loginAttemptsClicked
-            //        }
-            //    }, {
-            //        text: abp.localization.localize("ChangePassword"),
-            //        iconCls: 'icon-key',
-            //        name: 'ChangePassword',
-            //        listeners: {
-            //            click: me.changePasswordClick
-            //        }
-            //    }, {
-            //        text: abp.localization.localize("ChangeProfilePicture"),
-            //        iconCls: 'icon-user',
-            //        name: 'ChangeProfilePicture',
-            //        listeners: {
-            //            click: me.changeProfilePicture
-            //        }
-            //    }, {
-            //        text: abp.localization.localize("MySettings"),
-            //        iconCls: 'icon-settings',
-            //        name: 'MySettings',
-            //        listeners: {
-            //            click: me.mySettings
-            //        }
-            //    }, '-',
-            //    {
-            //        text: abp.localization.localize("Logout"),
-            //        iconCls: 'icon-logout',
-            //        name: 'Logout',
-            //        listeners: {
-            //            click: me.logoutClick
-            //        }
-            //    }
-            //];
-            //if (btn.gotoMyAccount) {
-            //    items.splice(1, 0, "-");
-            //}
-            //contextMenu = Ext.create({
-            //    xtype: 'menu',
-            //    ui: 'accounts',
-            //    width: 200,
-            //    items: items,
-            //    ownerElement: btn//,
-            //    //listeners: {
-            //    //    click: me.onLocalizationItemClick
-            //    //}
-            //});
-            //btn.contextMenu = contextMenu;
-            //contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
-
             me.getRecentlyUsedLinkedUsers(btn, contextMenu, position);
         }
     },
     getRecentlyUsedLinkedUsers: function (btn, contextMenu, position) {
         var headerView = Ext.ComponentQuery.query('chachingheader')[0];
         var me = headerView != undefined ? headerView.getController() : null;
-        Ext.Ajax.request({
-            url: abp.appPath + 'api/services/app/userLink/GetRecentlyUsedLinkedUsers',
-            method : 'POST',
-            success: function (response, opts) {
-                var res = Ext.decode(response.responseText);
-                if (res.success && me) {
-                    me.loadLinkedUsersInMenu(me, btn, contextMenu, position, res.result.items);
-                }
-            },
-            failure: function (response, opts) {
-                var res = Ext.decode(response.responseText);
-                if (!Ext.isEmpty(res.exceptionMessage)) {
-                    abp.message.error(res.exceptionMessage);
-                } else {
-                    abp.message.error(res.error.message);
-                }
-                console.log(response);
-            }
-        });
+        if (ChachingGlobals.userLinkedAccounts) {
+            me.loadLinkedUsersInMenu(me, btn, contextMenu, position,ChachingGlobals.userLinkedAccounts);
+        }
     },
 
     loadLinkedUsersInMenu: function (headerController, btn, contextMenu, position, linkedUsers) {
         var me = headerController;
         var submenuItems = [];
-        Ext.each(linkedUsers, function (linkedUser) {
-            submenuItems.push({
-                text : me.getShownLinkedUserName(linkedUser),
-                listeners: {
-                    click: function() {
-                        me.switchToUser(linkedUser);
+        Ext.each(linkedUsers,
+            function(linkedUser) {
+                var userName = me.getShownLinkedUserName(linkedUser);
+                submenuItems.push({
+                    text: userName,
+                    name: userName,
+                    isLinkedItem:true,
+                    listeners: {
+                        click: function() {
+                            me.switchToUser(linkedUser);
+                        }
                     }
-                }
+                });
             });
-        });
 
-        if(submenuItems.length > 0) {
+        if (submenuItems.length > 0) {
             submenuItems.push('-');
         }
         submenuItems.push({
@@ -441,13 +336,6 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                 click: me.manageActionClicked
             }
         });
-
-        //menu.setMenu(Ext.create('Ext.menu.Menu',{
-        //    ui: 'accounts',
-        //    width: 170,
-        //    items: submenuItems
-        //}));
-
         var menuItems = [
                {
                    text: abp.localization.localize("BackToMyAccount"),
@@ -461,9 +349,11 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                {
                    text: abp.localization.localize("LinkedAccounts"),
                    iconCls: 'icon-link',
-                   //listeners: {
-                   //    click: me.getRecentlyUsedLinkedUsers
-                   //},
+                   listeners: {
+                       focusenter: function(menu, item, e, eOpts) {
+                           me.verifyLinkedAccounts(me, menu, item, e);
+                       }
+                   },
                    menu: {
                        ui: 'accounts',
                        width: 170,
@@ -516,14 +406,88 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
             ui: 'accounts',
             width: 200,
             items: menuItems,
-            ownerElement: btn//,
-            //listeners: {
-            //    click: me.onLocalizationItemClick
-            //}
+            ownerElement: btn
         });
         btn.contextMenu = contextMenu;
         contextMenu.showAt(position[0] - 50, position[1] + btn.gotoMyAccount ? 60 : 30, true);
         
+    },
+    verifyLinkedAccounts: function(me, menu, item, e) {
+        //show only active linked accounts
+        if (me && menu) {
+            var existingItems = menu.getMenu().items.items;
+            if (existingItems && existingItems.length > 2) {
+                for (var i = 0; i < existingItems.length; i++) {
+                    var itemExist = existingItems[i];
+                    if (itemExist.isLinkedItem) {
+                        var hidden = me.checkSateOfItem(me, itemExist);
+                        if (hidden) itemExist.hide();
+                        else if (!hidden && itemExist.hidden) itemExist.show();
+                    }
+                }
+            } else if (existingItems) {
+                me.crossVerifyLinkedAccounts(me, menu, existingItems);
+            }
+        }
+    },
+    crossVerifyLinkedAccounts:function(me, menu, existingItems) {
+        var linkedAccounts = ChachingGlobals.userLinkedAccounts,
+            length = linkedAccounts.length;
+        if (length>0) {
+            for (var i = 0; i < length; i++) {
+                var linkAccount = linkedAccounts[i],
+                    name = me.getShownLinkedUserName(linkAccount),
+                    exists = me.checkExistance(name, existingItems);
+                if (!exists) {
+                    if (i === 0) {
+                        var seperator = Ext.create('Ext.menu.Separator',
+                        {
+                            plain: true
+                        });
+                        menu.getMenu().insert(0, seperator);
+                    }
+                    var newItem = Ext.create('Ext.menu.Item',
+                    {
+                        text: name,
+                        name: name,
+                        isLinkedItem: true,
+                        listeners: {
+                            click: function () {
+                                me.switchToUser(linkAccount);
+                            }
+                        }
+                    });
+                    menu.getMenu().insert(0, newItem);
+                }
+            }
+        }
+    },
+    checkExistance:function(name, existingItems) {
+        var existingLength = existingItems.length,
+            exists = false;
+        for (var j = 0; j < existingLength; j++) {
+            var item = existingItems[j];
+            if (item.name===name) {
+                exists = true;
+                item.show(true);
+                break;
+            }
+        }
+        return exists;
+    },
+    checkSateOfItem: function (me,item) {
+        var hidden = true,
+            linkedAccounts = ChachingGlobals.userLinkedAccounts,
+            length = linkedAccounts.length;
+        for (var i = 0; i < length; i++) {
+            var linked = linkedAccounts[i],
+                name = me.getShownLinkedUserName(linked);
+            if (item.name===name) {
+                hidden = false;
+                break;
+            }
+        }
+        return hidden;
     },
     switchToUser : function(linkedUser) {
         var model = new Object();

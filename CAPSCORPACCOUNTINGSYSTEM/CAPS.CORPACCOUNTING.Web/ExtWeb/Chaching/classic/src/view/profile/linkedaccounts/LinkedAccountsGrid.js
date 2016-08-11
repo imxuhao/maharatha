@@ -8,10 +8,10 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
 
     controller: 'linkedaccounts-linkedaccountsgrid',
     modulePermissions: {
-        read: true, //abp.auth.isGranted(''),
-        create: true,//abp.auth.isGranted(''),
-        edit: true, //abp.auth.isGranted(''),
-        destroy: true //abp.auth.isGranted('')
+        read: true,
+        create: true,
+        edit: true,
+        destroy: true
     },
     xtype: 'manageaccounts',
     headerButtonsConfig: [
@@ -49,7 +49,6 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
             width: '19%',
             align: 'center',
             hideable : false,
-            //maxWidth: 100,
             text: app.localize('Actions'),        
             renderer: Chaching.utilities.ChachingRenderers.loginaccount
         }, {
@@ -60,13 +59,11 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
              sortable: true,
              groupable: false,
              width: '60%'
-             //flex : 1      
          },
          {
              xtype: 'actioncolumn',       
              text: app.localize('Delete'),
              width: '19%',
-             //width: 70,
              align: 'center',
              hideable: false,
              items: [{
@@ -74,12 +71,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
                  tooltip: app.localize('UnlinkUser_Tooltip'),
                  handler: 'unlinkUser'
              }]
-             
-            // maxWidth: 50,
-             //renderer: Chaching.utilities.ChachingRenderers.unlinkedaccount
             
          }
-
-
     ]
 });

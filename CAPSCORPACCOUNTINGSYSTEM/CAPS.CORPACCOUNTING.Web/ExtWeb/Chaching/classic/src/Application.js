@@ -181,8 +181,29 @@ Ext.define('Chaching.Application', {
                 }
             });
         }
-       
-       
+        me.loadRecentlyLinkedAccounts();
+
+    },
+    loadRecentlyLinkedAccounts:function() {
+        Ext.Ajax.request({
+            url: abp.appPath + 'api/services/app/userLink/GetRecentlyUsedLinkedUsers',
+            method: 'POST',
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    ChachingGlobals.userLinkedAccounts = res.result.items;
+                }
+            },
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (!Ext.isEmpty(res.exceptionMessage)) {
+                    abp.message.error(res.exceptionMessage);
+                } else {
+                    abp.message.error(res.error.message);
+                }
+                console.log(response);
+            }
+        });
     },
     loadInitialSetup: function () {
         var me = this;

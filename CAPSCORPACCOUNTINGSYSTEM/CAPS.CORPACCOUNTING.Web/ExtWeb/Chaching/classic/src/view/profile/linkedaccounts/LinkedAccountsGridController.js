@@ -1,34 +1,6 @@
 Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
     alias: 'controller.linkedaccounts-linkedaccountsgrid',
-
-    //unlinkUser: function (editor, e, rowIndex) {
-    //    var me = this,
-    //        controller = me.controller,
-    //        view = me.gridControl;
-
-    //    var rec = me.widgetRec;      
-    //        if (rec.id > 0) {                    
-    //           var input = new Object();               
-    //           input.UserId = rec.get('id');
-    //           input.tenantId = rec.get('tenantId');
-
-    //            Ext.Ajax.request({
-    //                url: abp.appPath + 'api/services/app/userLink/unlinkUser',
-    //                jsonData: Ext.encode(input),
-    //                success: function (response) {
-    //                    view.getStore().reload();
-    //                },
-    //                failure: function (response, opts) {
-    //                    var res = Ext.decode(response.responseText);
-    //                    Ext.toast(res.exceptionMessage);
-    //                    console.log(response);
-    //                }
-
-    //            });
-    //        }          
-    //},
-
     unlinkUser: function (grid, rowIndex, colIndex) {
         var me = this,
          rec = grid.getStore().getAt(rowIndex);
@@ -50,6 +22,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', 
                                   grid.getStore().reload();
                                   //reload profile account menu
                                   me.reloadProfileAccountMenu();
+                                  me.reloadLinkedAccounts();
                               } else {
                                   abp.message.error(result.error.message);
                               }
@@ -76,6 +49,27 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGridController', 
             }
            
         }
+    },
+    reloadLinkedAccounts:function() {
+        Ext.Ajax.request({
+            url: abp.appPath + 'api/services/app/userLink/GetRecentlyUsedLinkedUsers',
+            method: 'POST',
+            success: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (res.success) {
+                    ChachingGlobals.userLinkedAccounts = res.result.items;
+                }
+            },
+            failure: function (response, opts) {
+                var res = Ext.decode(response.responseText);
+                if (!Ext.isEmpty(res.exceptionMessage)) {
+                    abp.message.error(res.exceptionMessage);
+                } else {
+                    abp.message.error(res.error.message);
+                }
+                console.log(response);
+            }
+        });
     },
 
     login: function (editor, e, rowIndex) {

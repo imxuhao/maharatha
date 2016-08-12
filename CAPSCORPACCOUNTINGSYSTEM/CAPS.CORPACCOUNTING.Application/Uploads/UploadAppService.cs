@@ -1,6 +1,8 @@
 ﻿using System.Data;
 using System.Threading.Tasks;
 using CAPS.CORPACCOUNTING.Accounts;
+using CAPS.CORPACCOUNTING.Uploads.Dto;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Uploads
 {
@@ -21,15 +23,17 @@ namespace CAPS.CORPACCOUNTING.Uploads
         /// <param name="entityName"></param>
         /// <param name="coaId"></param>
         /// <returns></returns>
-        public async Task UploadExcelData(DataTable dataTable, string entityName, int? coaId)
+        public async Task<List<UploadErrorMessagesOutputDto>> UploadExcelData(DataTable dataTable, string entityName, int? coaId)
         {
+            List<UploadErrorMessagesOutputDto> errorMessageList=null;
             switch (entityName)
             {
                 case "FinancialAccounts":
-                    await _accountUnitAppService.ImportAccounts(dataTable, coaId.Value);
+                    errorMessageList= await _accountUnitAppService.ImportAccounts(dataTable, coaId.Value);
                     break;
 
             }
+            return errorMessageList;
 
         }
     }

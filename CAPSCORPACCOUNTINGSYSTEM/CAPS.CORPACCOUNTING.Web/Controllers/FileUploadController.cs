@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Abp.Web.Mvc.Authorization;
 using OfficeOpenXml;
 using CAPS.CORPACCOUNTING.ExcelTemplates;
 using CAPS.CORPACCOUNTING.Uploads;
+using CAPS.CORPACCOUNTING.Uploads.Dto;
 
 namespace CAPS.CORPACCOUNTING.Web.Controllers
 {
@@ -48,9 +50,10 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                 // Uploap the worksheet data to a DataTable.
                 DataTable worksheetData = ExcelHelper.ConvertExcelToDataTable(package, entityName);
-                await _uploadAppService.UploadExcelData(worksheetData, entityName, coaId);
+                List<UploadErrorMessagesOutputDto> errorMessageList= await _uploadAppService.UploadExcelData(worksheetData, entityName, coaId);
+               
 
-                return Json(new AjaxResponse(new { success = true }));
+                return Json(new AjaxResponse(new { success = errorMessageList.Count==0, errorMessageList }));
 
             }
             catch (UserFriendlyException ex)

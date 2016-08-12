@@ -21,6 +21,8 @@ using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
+using CAPS.CORPACCOUNTING.Uploads.Dto;
+using OfficeOpenXml.Drawing;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -319,15 +321,16 @@ namespace CAPS.CORPACCOUNTING.Accounts
             return result;
         }
 
-        public async Task ImportAccounts(DataTable accountTable, int coaId)
+        public async Task<List<UploadErrorMessagesOutputDto>> ImportAccounts(DataTable accountTable, int coaId)
         {
-            CreateAccountUnitInput input = null;
             var classificationlist = await GetTypeOfAccountList();
             var currencylist = await GetTypeOfCurrencyList();
             var consolidationList = EnumList.GetTypeofConsolidationList();
             var typeOfCurrencyRateList = await GetTypeOfCurrencyRateList();
             var linkedAccountList = await GetLinkAccountListByCoaId(new AutoSearchInput() { Id = coaId });
-
+            List<UploadErrorMessagesOutputDto> uploadErrorMessagesList = new List<UploadErrorMessagesOutputDto>();
+            List<CreateAccountUnitInput> createAccountList = new List<CreateAccountUnitInput>();
+            Dictionary<int, CreateAccountUnitInput> accountsList = new Dictionary<int, CreateAccountUnitInput>();
             foreach (DataRow datarow in accountTable.Rows)
             {
                 int? typeofaccount = null;
@@ -360,8 +363,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 {
                     linkedAccountId = Convert.ToInt32(linkedAccount.Value);
                 }
-
-                input = new CreateAccountUnitInput
+                var input = new CreateAccountUnitInput
                 {
                     AccountNumber = datarow[L("AccountNumber")].ToString(),
                     Caption = datarow[L("Description")].ToString(),
@@ -370,15 +372,84 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     TypeofConsolidationId = consolidationId,
                     LinkAccountId = linkedAccountId,
                     TypeOfCurrencyRateId = typeOfCurrencyRateId,
-                    IsAccountRevalued = Convert.ToBoolean(Convert.ToInt16(datarow[L("Multi-CurrencyReval")])),
-                    IsElimination = Convert.ToBoolean(Convert.ToInt16(datarow[L("EliminationAccount")])),
-                    IsRollupAccount = Convert.ToBoolean(Convert.ToInt16(datarow[L("RollUpAccount")])),
-                    IsEnterable = Convert.ToBoolean(Convert.ToInt16(datarow[L("JournalsAllowed")])),
+                    IsAccountRevalued = Convert.ToBoolean(Convert.ToInt16(datarow[L("Multi-CurrencyReval").ToUpper()])),
+                    IsElimination = Convert.ToBoolean(Convert.ToInt16(datarow[L("EliminationAccount").ToUpper()])),
+                    IsRollupAccount = Convert.ToBoolean(Convert.ToInt16(datarow[L("RollUpAccount").ToUpper()])),
+                    IsEnterable = Convert.ToBoolean(Convert.ToInt16(datarow[L("JournalsAllowed").ToUpper()])),
                     ChartOfAccountId = coaId
                 };
-
-                await CreateAccountUnit(input);
+                UploadErrorMessagesOutputDto errorMessageDto = ValidateUploadedData(input, Convert.ToInt32(datarow["No"]));
+                if (!ReferenceEquals(errorMessageDto, null))
+                    uploadErrorMessagesList.Add(errorMessageDto);
+                createAccountList.Add(input);
+                accountsList.Add(Convert.ToInt32(datarow["No"]), input);
+                //await CreateAccountUnit(input);
             }
+            await ValidateDuplicateRecords(accountsList, uploadErrorMessagesList);
+            if (uploadErrorMessagesList.Count < 1)
+                await InsertUploadedAccounts(createAccountList);
+            return uploadErrorMessagesList;
+        }
+
+        private async Task InsertUploadedAccounts(List<CreateAccountUnitInput> accountList)
+        {
+            foreach (var accountUnit in accountList)
+            {
+                await CreateAccountUnit(accountUnit);
+            }
+
+        }
+
+        private async Task ValidateDuplicateRecords(Dictionary<int, CreateAccountUnitInput> accountsList, List<UploadErrorMessagesOutputDto> uploadErrorMessagesList)
+        {
+            UploadErrorMessagesOutputDto uploadErrorMessages;
+            var accounts = accountsList.ToList().Select(p => p.Value).ToList();
+            var accountNumberList = string.Join(",", accounts.Select(p => p.AccountNumber).ToArray());
+            var descriptionList = string.Join(",", accounts.Select(p => p.Description).ToArray());
+            var duplicateAccountList = await _accountUnitRepository.GetAll().Where(p => accountNumberList.Contains(p.AccountNumber.ToString())).ToListAsync();
+            var duplicateDescAccountList = await _accountUnitRepository.GetAll().Where(p => descriptionList.Contains(p.Description.ToString())).ToListAsync();
+            var duplicateAccounts = from p in duplicateAccountList
+                                    join q in accountsList on p.AccountNumber equals q.Value.AccountNumber
+                                    select q;
+            var duplicateDocAccounts = from p in duplicateDescAccountList
+                                       join q in accountsList on p.Description equals q.Value.Description
+                                    select q;
+
+
+            foreach (var account in duplicateAccounts)
+            {
+                uploadErrorMessages = new UploadErrorMessagesOutputDto()
+                {
+                    ErrorMessage = account.Value.AccountNumber + " Duplicate Account",
+                    RowNumber = account.Key
+                };
+                uploadErrorMessagesList.Add(uploadErrorMessages);
+            }
+            foreach (var account in duplicateDocAccounts)
+            {
+                uploadErrorMessages = new UploadErrorMessagesOutputDto()
+                {
+                    ErrorMessage = account.Value.Description + " Duplicate Description",
+                    RowNumber = account.Key
+                };
+                uploadErrorMessagesList.Add(uploadErrorMessages);
+            }
+        }
+
+
+        private UploadErrorMessagesOutputDto ValidateUploadedData(CreateAccountUnitInput input, int rowNumber)
+        {
+            UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = rowNumber };
+            DataValidator.CheckLength(input.AccountNumber.Length, AccountUnit.MaxCodeLength, "AccountNumber", uploadErrorMessages);
+            DataValidator.CheckLength(input.Caption.Length, AccountUnit.MaxDesc, "Description", uploadErrorMessages);
+            DataValidator.RequiredValidataion(input.AccountNumber, "AccountNumber", uploadErrorMessages);
+            DataValidator.RequiredValidataion(input.Caption, "Description", uploadErrorMessages);
+            if (string.IsNullOrEmpty(uploadErrorMessages.ErrorMessage))
+                uploadErrorMessages = null;
+            else
+                uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage.TrimStart(',');
+            return uploadErrorMessages;
+
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Application.Services;
+using CAPS.CORPACCOUNTING.Uploads.Dto;
 
 namespace CAPS.CORPACCOUNTING.Uploads
 {
@@ -17,6 +18,6 @@ namespace CAPS.CORPACCOUNTING.Uploads
         /// <param name="entityName"></param>
         /// <param name="coaId"></param>
         /// <returns></returns>
-        Task UploadExcelData(DataTable dataTable, string entityName, int? coaId);
+        Task<List<UploadErrorMessagesOutputDto>> UploadExcelData(DataTable dataTable, string entityName, int? coaId);
     }
 }

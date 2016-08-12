@@ -85,7 +85,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
                         join constr in _connectionStringRepository.GetAll() on organization.ConnectionStringId equals constr.Id
                          into constring
                         from construnits in constring.DefaultIfEmpty()
-                        select new { organization, ConnectionStringName= construnits.Name,ConnectionString=construnits.ConnectionString };
+                        select new { organization, ConnectionStringName = construnits.Name, ConnectionString = construnits.ConnectionString };
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -156,14 +156,14 @@ namespace CAPS.CORPACCOUNTING.Organizations
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task CreateHostOrganizationUnit(CreateHostOrganizationUnitInput input)
         {
-          
-            var organizationUnit = new OrganizationExtended(tenantid: AbpSession.TenantId, displayname:input.DisplayName,parentid: input.ParentId,connectionStringid:input.ConnectionStringId);
+
+            var organizationUnit = new OrganizationExtended(tenantid: AbpSession.TenantId, displayname: input.DisplayName, parentid: input.ParentId, connectionStringid: input.ConnectionStringId);
 
             await _organizationExtendedUnitManager.CreateAsync(organizationUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
 
-     
+
         /// <summary>
         /// Sumit Method
         /// Update Host Organization (CompanyGroup)
@@ -171,14 +171,14 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <param name="input"></param>
         /// <returns></returns>
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
-        public async Task  UpdateHostOrganizationUnit(UpdateHostOrganizationUnitInput input)
+        public async Task UpdateHostOrganizationUnit(UpdateHostOrganizationUnitInput input)
         {
             var organizationUnit = await _organizationExtendedUnitRepository.GetAsync(input.Id);
             organizationUnit.DisplayName = input.DisplayName;
             await _organizationExtendedUnitManager.UpdateAsync(organizationUnit);
         }
 
-        
+
 
         public async Task<PagedResultOutput<OrganizationUnitUserListDto>> GetOrganizationUnitUsers(GetOrganizationUnitUsersInput input)
         {
@@ -214,18 +214,12 @@ namespace CAPS.CORPACCOUNTING.Organizations
         }
         public async Task DeleteOrganizationUnit(IdInput<long> input)
         {
-            if (input.Id != 1)
-            {
-                await _organizationExtendedUnitManager.DeleteAsync(input.Id);
-            }
+            await _organizationExtendedUnitManager.DeleteAsync(input.Id);
         }
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task DeleteHostOrganizationUnit(IdInput<long> input)
         {
-            if (input.Id != 1)
-            {
-                await _organizationExtendedUnitManager.DeleteAsync(input.Id);
-            }
+            await _organizationExtendedUnitManager.DeleteAsync(input.Id);
         }
 
         [UnitOfWork]
@@ -298,8 +292,8 @@ namespace CAPS.CORPACCOUNTING.Organizations
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetHostOrganizationsList()
         {
-            var organizations= await (from organization in _organizationExtendedUnitRepository.GetAll()
-            select new NameValueDto { Name = organization.DisplayName, Value = organization.Id.ToString() }).ToListAsync();
+            var organizations = await (from organization in _organizationExtendedUnitRepository.GetAll()
+                                       select new NameValueDto { Name = organization.DisplayName, Value = organization.Id.ToString() }).ToListAsync();
             return organizations;
         }
 

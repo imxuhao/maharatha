@@ -318,7 +318,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                 bool isEmtpyRow = false;
                 var wsRow = worksheet.Cells[rowNum, 1, rowNum, worksheet.Dimension.End.Column];
                 var row = table.NewRow();
-                row["No"] = rowNum - 1;
+                row["No"] = rowNum;
                 foreach (var cell in wsRow)
                 {
                     try

@@ -1119,6 +1119,13 @@
     <text name="DivisionName" value="Division Name" />
     <text name="DropDownListInformation" value="DropDown List Information" />
     <text name="Flags" value="Flags" />
+    <text name="MaxLength" value="Max Length" />
+    <text name="AllowMaxLength" value="Allow Max Length is {length}  {type} only" />
+    <text name="AllowNumbers" value="Allow Numbers Only" />
+    <text name="RequiredField" value="Field is Required" />
+    <text name="ValidationMessage" value="Validation Error" />
+    <text name="AccountsTemplate" value="Accounts Template" />
+    <text name="JobTemplate" value="Job Template" />
 
     <text name="RecentPayables" value="Recent Payables" />
     <text name="Payments" value="Payments" />

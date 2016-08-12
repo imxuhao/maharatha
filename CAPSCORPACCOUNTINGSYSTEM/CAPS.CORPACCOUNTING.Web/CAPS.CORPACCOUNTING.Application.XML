@@ -2868,6 +2868,11 @@
             
             </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper">
             <summary>
             
@@ -2928,6 +2933,16 @@
             <param name="endRowIndex"></param>
             <param name="excelColumn"></param>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddMaxLengthValidationtoSheet(OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="sheet"></param>
+            <param name="excelProperties"></param>
+            <param name="startRowIndex"></param>
+            <param name="endRowIndex"></param>
+            <param name="excelColumn"></param>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetDropDownListFormula(System.String,System.String,System.Int32,System.Int32)">
             <summary>
             =Sheet2!$A$1:$A$4
@@ -2937,6 +2952,45 @@
             <param name="lstFromRange"></param>
             <param name="lstEndRange"></param>
             <param name="sheetName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetMaxLengthFormula(System.String,System.Int32)">
+            <summary>
+            LEN(A2)>5
+            </summary>
+            <param name="cellColumn"></param>
+            <param name="maxLength"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetAllowNumberFormula(System.String,System.Boolean)">
+            <summary>
+            ISNUMBER(C8)
+            </summary>
+            <param name="cellColumn"></param>
+             <param name="isNumaric"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetRequiredFieldFormula(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="cellColumns"></param>
+            <param name="requiredCellColumn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetMultiValidationString(System.Collections.Generic.List{System.String})">
+            <summary>
+            
+            </summary>
+            <param name="validationList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.ApplyPlaceHolderValues(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            
+            </summary>
+            <param name="valueList"></param>
+            <param name="message"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.ConvertExcelToDataTable(OfficeOpenXml.ExcelPackage,System.String)">

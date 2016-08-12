@@ -7,6 +7,7 @@ using OfficeOpenXml.DataValidation.Contracts;
 using System.Data;
 using Abp.Application.Services.Dto;
 using OfficeOpenXml.DataValidation;
+using System.Text;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
@@ -38,12 +39,24 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ExcelProperites
+    {
+        public bool ShowErrorMessage { get; set; }
+        public string ErrorTitle { get; set; }
+        public ExcelDataValidationWarningStyle ErrorStyle { get; set; }
+        public string Error { get; set; }
+        public string ExcelFormula { get; set; }
+
+    }
+
 
     /// <summary>
     /// 
     /// </summary>
     /// 
-
     public static class ExcelHelper
     {
         const string listDataExcelSheet = "DropDownListInformation";
@@ -161,9 +174,8 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         {
             return (new List<NameValueDto>()
             {
-                new NameValueDto(name:"true",value:"1"),
-                 new NameValueDto(name:"false",value:"0"),
-
+                new NameValueDto(name:"TRUE",value:"1"),
+                 new NameValueDto(name:"FALSE",value:"0"),
             });
         }
 
@@ -235,6 +247,29 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             validation.ErrorTitle = "An invalid value was entered";
             validation.Error = "Select a value from the list";
             validation.Formula.ExcelFormula = excelFormula;
+            //validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
+            //validation.ErrorStyle = excelProperties.ErrorStyle;
+            //validation.ErrorTitle = excelProperties.ErrorTitle;
+            //validation.Error = excelProperties.Error;
+            //validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="excelProperties"></param>
+        /// <param name="startRowIndex"></param>
+        /// <param name="endRowIndex"></param>
+        /// <param name="excelColumn"></param>
+        public static void AddMaxLengthValidationtoSheet(ExcelWorksheet sheet, ExcelProperites excelProperties, int startRowIndex, int endRowIndex, int excelColumn)
+        {
+            var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddCustomDataValidation();
+            validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
+            validation.ErrorStyle = excelProperties.ErrorStyle;
+            validation.ErrorTitle = excelProperties.ErrorTitle;
+            validation.Error = excelProperties.Error;
+            validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
         }
 
 
@@ -290,9 +325,80 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <returns></returns>
         public static string GetDropDownListFormula(string sheetName, string cellColumn, int lstFromRange, int lstEndRange)
         {
-            return "'"+sheetName+"'" + "!" + "$" + cellColumn + "$" + lstFromRange + ":" + "$" + cellColumn + "$" + lstEndRange;
+            return "'" + sheetName + "'" + "!" + "$" + cellColumn + "$" + lstFromRange + ":" + "$" + cellColumn + "$" + lstEndRange;
         }
 
+        /// <summary>
+        /// LEN(A2)>5
+        /// </summary>
+        /// <param name="cellColumn"></param>
+        /// <param name="maxLength"></param>
+        /// <returns></returns>
+        public static string GetMaxLengthFormula(string cellColumn, int maxLength)
+        {
+            return "LEN(" + cellColumn + ")<" + (maxLength + 1);
+        }
+        /// <summary>
+        /// ISNUMBER(C8)
+        /// </summary>
+        /// <param name="cellColumn"></param>
+        ///  <param name="isNumaric"></param>
+        /// <returns></returns>
+        public static string GetAllowNumberFormula(string cellColumn,bool isNumaric)
+        {
+            if(isNumaric)
+            return "ISNUMBER(" + cellColumn + ")";
+            return "";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cellColumns"></param>
+        /// <param name="requiredCellColumn"></param>
+        /// <returns></returns>
+        public static string GetRequiredFieldFormula(List<string> cellColumns,string requiredCellColumn)
+        {
+            StringBuilder strBuild = new StringBuilder();
+            strBuild.Append("OR(");
+            foreach (var item in cellColumns)
+            {
+                if(item!=requiredCellColumn)
+                strBuild.Append("LEN(" + item +"2"+ ")>" + 0 + ",");
+            }
+            return strBuild.ToString().TrimEnd(',') + ")";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="validationList"></param>
+        /// <returns></returns>
+        public static string GetMultiValidationString(List<string> validationList)
+        {
+            StringBuilder strBuild =new StringBuilder();
+            strBuild.Append("AND(");
+            foreach (var item in validationList)
+            {
+                strBuild.Append(item+",");
+            }
+            return strBuild.ToString().TrimEnd(',')+")";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valueList"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static string ApplyPlaceHolderValues(string message,Dictionary<string, string> valueList)
+        {
+            foreach (var item in valueList)
+            {
+                message= message.Replace(item.Key,item.Value);
+            }
+            return message;
+        }
         /// <summary>
         /// Converting Excel file to DataTable
         /// </summary>

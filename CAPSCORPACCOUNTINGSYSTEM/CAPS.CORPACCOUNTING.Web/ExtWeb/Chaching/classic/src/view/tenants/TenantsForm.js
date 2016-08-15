@@ -77,30 +77,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 width: '100%',
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('TName')
-            }
-            ,
-
-            //{
-            //    xtype: 'checkbox',
-            //    boxLabel: app.localize('UseHostDatabase'),
-            //    name: 'isUseHostDatabase',
-            //    reference: 'isUseHostDatabase',
-            //    labelAlign: 'right',
-            //    inputValue: true,
-            //    checked: true,
-            //    boxLabelCls: 'checkboxLabel'
-            //}, {
-            //    xtype: 'textfield',
-            //    name: 'connectionString',
-            //    fieldLabel: app.localize('ConnectionString').initCap(),
-            //    width: '100%',
-            //    ui: 'fieldLabelTop',
-            //    bind: {
-            //        hidden: '{isUseHostDatabase.checked}'
-            //    },
-            //    emptyText: app.localize('DatabaseConnectionString')
-            //},
-
+            },
             {
                 xtype: 'textfield',
                 name: 'adminEmailAddress',
@@ -154,7 +131,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 */
                 validator: function (value) {
                     var password1 = this.previousSibling('[name=adminPassword]');
-                    return (value === password1.getValue()) ? true : 'Passwords do not match.'
+                    return (value === password1.getValue()) ? true : 'Passwords do not match.';
                 }
             }, {
                 xtype: 'combobox',

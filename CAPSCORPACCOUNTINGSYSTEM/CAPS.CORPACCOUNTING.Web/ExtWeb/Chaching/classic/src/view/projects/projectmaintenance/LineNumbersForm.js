@@ -2,11 +2,11 @@
 Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['widget.projects.projectmaintenance.linenumbers.create', 'widget.projects.projectmaintenance.linenumbers.edit'],
-    requires: [
-        'Chaching.view.projects.projectmaintenance.LineNumbersFormController'       
-    ],
+    //requires: [
+    //    'Chaching.view.projects.projectmaintenance.LineNumbersFormController'       
+    //],
 
-    controller: 'projects-projectmaintenance-linenumbersform',   
+    //controller: 'projects-projectmaintenance-linenumbersform',   
 
     name: 'accounts',
     openInPopupWindow: false,
@@ -20,9 +20,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
         height: '70%',
         width: '70%'
     },
-    //titleConfig: {
-    //    title: abp.localization.localize("CreateNewLine").initCap()
-    //},
     modulePermissions: {
         read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
         create: abp.auth.isGranted('Pages.Financials.Accounts.Accounts.Create'),
@@ -149,7 +146,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersForm',{
             displayField: 'jobNumber',
             queryMode: 'remote',
             minChars: 2,
-            useDisplayFieldToSearch: true,
             modulePermissions: {
                 read: abp.auth.isGranted('Pages.Financials.Accounts.Divisions'),
                 create: abp.auth.isGranted('Pages.Financials.Accounts.Divisions.Create'),

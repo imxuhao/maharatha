@@ -16,13 +16,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
                 var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
                 var organizationClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.ApplicationUserOrgId);
-                if (string.IsNullOrEmpty(organizationClaim?.Value))
-
-                {
-                    return null;
-                }
-
-                return organizationClaim.Value;
+                return string.IsNullOrEmpty(organizationClaim?.Value) ? null : organizationClaim.Value;
             }
         }
       
@@ -33,12 +27,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
                 var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
                 var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "http://www.aspnetboilerplate.com/identity/claims/tenantId");
-                if (string.IsNullOrEmpty(tenantClaim?.Value))
-                {
-                    return null;
-                }
-
-                return tenantClaim.Value;
+                return string.IsNullOrEmpty(tenantClaim?.Value) ? null : tenantClaim.Value;
             }
         }
 
@@ -54,7 +43,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
 
                 var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.HasGLRestrictions);
 
-                return Convert.ToBoolean(tenantClaim.Value);
+                return tenantClaim != null && Convert.ToBoolean(tenantClaim.Value);
             }
         }
 
@@ -69,7 +58,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
 
                 var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.HasLineRestrictions);
 
-                return Convert.ToBoolean(tenantClaim.Value);
+                return tenantClaim != null && Convert.ToBoolean(tenantClaim.Value);
             }
         }
 
@@ -84,7 +73,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
 
                 var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
 
-                return Convert.ToBoolean(tenantClaim.Value);
+                return tenantClaim != null && Convert.ToBoolean(tenantClaim.Value);
             }
         }
 
@@ -99,7 +88,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
 
                 var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
 
-                return Convert.ToBoolean(tenantClaim.Value);
+                return tenantClaim != null && Convert.ToBoolean(tenantClaim.Value);
             }
         }
         /// <summary>
@@ -113,7 +102,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
 
                 var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
 
-                return Convert.ToBoolean(tenantClaim.Value);
+                return tenantClaim != null && Convert.ToBoolean(tenantClaim.Value);
             }
         }
     }

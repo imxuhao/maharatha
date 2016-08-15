@@ -79,9 +79,9 @@
     onCancelClicked: function () {
         var me = this,
             view = me.getView(),
-            roleTextfield = view.down('textfield[itemId=newRole]');
+            roleTextfield = view.down('textfield[itemId=newRole]'),
             parentWindow = me.ParentWindowObj,
-            parentView = parentWindow.getView();
+            parentView = parentWindow.getView(),
             treePanel = parentView.down('treepanel[itemId=usersPermissionsItemId]');
             if (treePanel) {
                 var treeStore = treePanel.getStore();

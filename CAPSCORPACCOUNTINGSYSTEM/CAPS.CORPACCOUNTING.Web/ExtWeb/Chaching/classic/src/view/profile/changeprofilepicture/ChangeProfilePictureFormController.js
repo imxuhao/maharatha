@@ -2,8 +2,8 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.profile-changeprofilepicture-changeprofilepictureform',
     onSaveClicked: function (btn) {
-        var me = this;
-        view = me.getView();
+        var me = this,
+        view = me.getView(),
         data = view.dataobject;
         if (Ext.isEmpty(view.getForm().findField('changeProfilePicture').getValue())) {
             abp.message.error(app.localize('SelectUserProfilePicture'), app.localize('Error'));
@@ -61,9 +61,9 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
     },
 
     filechange: function (file,e,value) {             
-        var me = this;
+        var me = this,
         view = me.getView();
-        if (file.value == "")
+        if (file.value === "")
         {
             return;
         }
@@ -81,7 +81,7 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
             url: abp.appPath + 'Profile/UploadProfilePicture',
             success: function (form, response) {
                 if (response.result) {
-                    form.findField('changeProfilePicture').value = "gjhsagjd"
+                    form.findField('changeProfilePicture').value = "gjhsagjd";
                     var data = response.result.result;
                     if (response.success) {
                         view.filePath = data.tempFilePath;

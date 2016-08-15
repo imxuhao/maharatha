@@ -3,11 +3,11 @@ Ext.define('Chaching.view.profile.settings.SettingsView',{
     extend: 'Chaching.view.common.window.ChachingWindowPanel',
 
     requires: [
-        'Chaching.view.profile.settings.SettingsViewController',
+        //'Chaching.view.profile.settings.SettingsViewController',
         'Chaching.view.profile.settings.SettingsForm'
     ],
 
-    controller: 'profile-settings-settingsview',
+    //controller: 'profile-settings-settingsview',
     height: 450,
     width: 450,
     layout: 'fit',

@@ -19,7 +19,7 @@
     onPermissionsSaveClicked: function (btn) {
         var me = this,
              view = me.getView(),
-             values = view.getValues();
+             values = view.getValues(),
         treePanel = view.down('treepanel[itemId=usersPermissionsItemId]'),
         treeStore = treePanel.getStore(),
         grantedPermissionNames = [];
@@ -30,7 +30,7 @@
         var selectedPermissionsCount = treePanel.getChecked();
         var originalNodeCount = treeStore.selectedNodeCount;
 
-        if (originalNodeCount != selectedPermissionsCount.length) {
+        if (originalNodeCount !== selectedPermissionsCount.length) {
             myMask.show();
             // Open popup message to create new Role
             var permissionWindow = Ext.create('Chaching.view.users.PermissionsSaveView', {

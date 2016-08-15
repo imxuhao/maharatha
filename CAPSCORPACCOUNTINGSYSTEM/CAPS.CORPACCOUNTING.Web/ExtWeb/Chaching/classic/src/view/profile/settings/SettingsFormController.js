@@ -17,31 +17,29 @@ Ext.define('Chaching.view.profile.settings.SettingsFormController', {
         } else {
             input.timezone = me.initialTimezone;
         }
-            
+
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/profile/UpdateCurrentUserProfile',
             jsonData: Ext.encode(input),
-            success: function (response, opts) {
+            success: function(response, opts) {
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
                     var wnd = view.up('window');
                     Ext.destroy(wnd);
                     abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
                     if (abp.clock.provider.supportsMultipleTimezone && me.initialTimezone !== input.timezone) {
-                        abp.message.info(app.localize('TimeZoneSettingChangedRefreshPageNotification')).done(function () {
-                            window.location.reload();
-                        });
+                        abp.message.info(app.localize('TimeZoneSettingChangedRefreshPageNotification'))
+                            .done(function() {
+                                window.location.reload();
+                            });
                     }
                 }
             },
-            failure: function (response, opts) {
+            failure: function(response, opts) {
                 //function to show error details (Chaching.utilities.ChachingGlobals)
                 ChachingGlobals.showPageSpecificErrors(response);
             }
-
-
-
-        })
+        });
     }
     
 });

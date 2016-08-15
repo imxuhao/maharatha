@@ -54,8 +54,6 @@
         });
         rightStore.load();
     },
-    onFormAfterRender:function(){
-    },
     reloadPermissionsTree: function (btn, event, e) {
         var view = btn.currentView,
             currentController = view.getController(),
@@ -159,11 +157,11 @@
                 divisionDragDropControl = view.down('chachingGridDragDrop[itemId=divisionSecurityGridItemId]'),
                 creditCardDragDropControl = view.down('chachingGridDragDrop[itemId=creditCardSecurityGridItemId]'),
                 bankDragDropControl = view.down('chachingGridDragDrop[itemId=bankSecurityGridItemId]'),
-                corporateRightStore = corporateDragDropControl.getRightStore();
-                projectCoaRightStore = projectCoaDragDropControl.getRightStore();
-                projectRightStore = projectDragDropControl.getRightStore();
-                divisionRightStore = divisionDragDropControl.getRightStore();
-                creditCardRightStore = creditCardDragDropControl.getRightStore();
+                corporateRightStore = corporateDragDropControl.getRightStore(),
+                projectCoaRightStore = projectCoaDragDropControl.getRightStore(),
+                projectRightStore = projectDragDropControl.getRightStore(),
+                divisionRightStore = divisionDragDropControl.getRightStore(),
+                creditCardRightStore = creditCardDragDropControl.getRightStore(),
                 bankRightStore = bankDragDropControl.getRightStore();
 
             var request = {
@@ -172,47 +170,74 @@
             request.userIdList.push(ChachingGlobals.SelectedUserId);
             corporateRightStore.clearFilter();
             if (corporateRightStore.getUpdatedRecords().length > 0 || corporateRightStore.getRemovedRecords().length > 0) {
-                corporateRightStore.each(function (records, obj, count) {
-                    request.accountAccessList.push({ accountId: records.get('accountId'), accountNumber: records.get('accountNumber'), organizationUnitId: records.get('organizationUnitId') });
-                })
+                corporateRightStore.each(function(records, obj, count) {
+                    request.accountAccessList.push({
+                        accountId: records.get('accountId'),
+                        accountNumber: records.get('accountNumber'),
+                        organizationUnitId: records.get('organizationUnitId')
+                    });
+                });
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateAccountAccessList', request);
             }
             projectCoaRightStore.clearFilter();
             if (projectCoaRightStore.getUpdatedRecords().length > 0 || projectCoaRightStore.getRemovedRecords().length > 0) {
                 request.accountAccessList = [];
-                projectCoaRightStore.each(function (records, obj, count) {
-                    request.accountAccessList.push({ accountId: records.get('accountId'), accountNumber: records.get('accountNumber'), organizationUnitId: records.get('organizationUnitId') });
-                })
+                projectCoaRightStore.each(function(records, obj, count) {
+                    request.accountAccessList.push({
+                        accountId: records.get('accountId'),
+                        accountNumber: records.get('accountNumber'),
+                        organizationUnitId: records.get('organizationUnitId')
+                    });
+                });
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateLineAccessList', request);
             }
             projectRightStore.clearFilter();
             if (projectRightStore.getUpdatedRecords().length > 0 || projectRightStore.getRemovedRecords().length > 0) {
                 request.projectAccessList = [];
-                projectRightStore.each(function (records, obj, count) {
-                    request.projectAccessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
-                })
+                projectRightStore.each(function(records, obj, count) {
+                    request.projectAccessList.push({
+                        jobId: records.get('jobId'),
+                        jobNumber: records.get('jobNumber'),
+                        caption: records.get('jobNumber'),
+                        organizationUnitId: records.get('organizationUnitId')
+                    });
+                });
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateProjectAccessList', request);
             }
             divisionRightStore.clearFilter();
             if (divisionRightStore.getUpdatedRecords().length > 0 || divisionRightStore.getRemovedRecords().length > 0) {
                 request.projectAccessList = [];
-                divisionRightStore.each(function (records, obj, count) {
-                    request.projectAccessList.push({ jobId: records.get('jobId'), jobNumber: records.get('jobNumber'), caption: records.get('jobNumber'), organizationUnitId: records.get('organizationUnitId') });
-                })
+                divisionRightStore.each(function(records, obj, count) {
+                    request.projectAccessList.push({
+                        jobId: records.get('jobId'),
+                        jobNumber: records.get('jobNumber'),
+                        caption: records.get('jobNumber'),
+                        organizationUnitId: records.get('organizationUnitId')
+                    });
+                });
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateDivisionAccessList', request);
             }
             creditCardRightStore.clearFilter();
             if (creditCardRightStore.getUpdatedRecords().length > 0 || creditCardRightStore.getRemovedRecords().length > 0) {
-                creditCardRightStore.each(function (records, obj, count) {
-                    request.creditCardAccessList.push({ accountingDocumentId: records.get('accountingDocumentId'), cardHolderName: records.get('cardHolderName'), cardNumber: records.get('cardNumber'), organizationUnitId: records.get('organizationUnitId') });
-                })
+                creditCardRightStore.each(function(records, obj, count) {
+                    request.creditCardAccessList.push({
+                        accountingDocumentId: records.get('accountingDocumentId'),
+                        cardHolderName: records.get('cardHolderName'),
+                        cardNumber: records.get('cardNumber'),
+                        organizationUnitId: records.get('organizationUnitId')
+                    });
+                });
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateCreditCardAccessList', request);
             }
             bankRightStore.clearFilter();
             if (bankRightStore.getUpdatedRecords().length > 0 || bankRightStore.getRemovedRecords().length > 0) {
-                bankRightStore.each(function (records, obj, count) {
-                    request.bankAccountAccessList.push({ bankAccountId: records.get('bankAccountId'), bankName: records.get('bankName'), organizationUnitId: records.get('organizationUnitId') });
-                })
+                bankRightStore.each(function(records, obj, count) {
+                    request.bankAccountAccessList.push({
+                        bankAccountId: records.get('bankAccountId'),
+                        bankName: records.get('bankName'),
+                        organizationUnitId: records.get('organizationUnitId')
+                    });
+                });
                 me.callAjaxService('api/services/app/userSecuritySettings/CreateorUpdateBankAccountAccessList', request);
             }
             // END User Security Settings
@@ -266,8 +291,8 @@
         return false;
     },
     showRandomPassword: function () {
-        var me = this;
-        password = me.lookupReference('password');
+        var me = this,
+        password = me.lookupReference('password'),
         passwordRepeat = me.lookupReference('passwordRepeat');
         password.reset();
         passwordRepeat.reset();
@@ -285,7 +310,7 @@
                 tempList.push({ tenantId: rec.get('tenantId'), tenantName: rec.get('tenantName'), roleIds: roleId, roleNames: roleName });
                 if (tenantListArray.length > 0) {
                     for (var i = 0; i < tenantListArray.length; i++) {
-                        if (tempList[0].tenantId == tenantListArray[i].tenantId) {
+                        if (tempList[0].tenantId === tenantListArray[i].tenantId) {
                             tenantListArray[i].roleIds.push(tempList[0].roleIds[0]);
                             tenantListArray[i].roleNames.push(tempList[0].roleNames[0]);
                             isNewItem = false;

@@ -44,20 +44,5 @@ Ext.define('Chaching.view.users.PermissionsSaveForm', {
         listeners: {
             click: 'onPermissionsWithRoleSave'
         }
-    }
-    //,{
-    //    xtype: 'button',
-    //    scale: 'small',
-    //    //iconCls: 'fa fa-close',
-    //    iconAlign: 'left',
-    //    text: app.localize('Skip').toUpperCase(),
-    //    ui: 'actionButton',
-    //    name: 'Cancel',
-    //    itemId: 'BtnCancel',
-    //    reference: 'BtnCancel',
-    //    listeners: {
-    //        click: 'onCancelClicked'
-    //    }
-    //}
-    ]
+    }]
 });

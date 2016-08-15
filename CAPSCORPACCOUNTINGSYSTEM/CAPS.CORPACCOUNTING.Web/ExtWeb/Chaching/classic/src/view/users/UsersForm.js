@@ -31,8 +31,7 @@ Ext.define('Chaching.view.users.UsersForm',
         width: '90%'
     },
     listeners: {
-        resize: 'onUserFormResize',
-        afterrender: 'onFormAfterRender'
+        resize: 'onUserFormResize'
     },
     items: [
         {
@@ -147,7 +146,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                             var password1 = this.previousSibling('[name=password]');
                                                             return (value === password1.getValue())
                                                                 ? true
-                                                                : 'Passwords do not match.'
+                                                                : 'Passwords do not match.';
                                                         }
                                                     }
                                                 ]

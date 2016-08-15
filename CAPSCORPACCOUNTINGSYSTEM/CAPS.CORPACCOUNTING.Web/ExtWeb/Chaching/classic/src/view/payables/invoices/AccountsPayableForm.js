@@ -19,19 +19,23 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
     autoScroll: false,
     border: false,
     frame: false,
-    rbar: [
+    bbar: [
     {
         xtype: 'panel',
         ui: 'summaryPanel',
-        layout: { type: 'vbox'},
+        itemId:'summaryPanel',
+        layout: { type: 'hbox'},
         title: app.localize('VendorSnapshot'),
         collapsed: true,
         collapsible: true,
-        collapseDirection: 'right',
+        collapseMode:'header',
+        collapseDirection: 'bottom',//right
         headerPosition: 'top',
-        flex: 1,
-        width: 350,
+        //flex: 1,
+        width: '100%',
         border: true,
+        autoScroll: true,
+        titleCollapse:true,
         items:[
         {
             xtype: 'gridpanel',
@@ -40,7 +44,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
             ui: 'summaryPanel',
             cls: 'chaching-transactiongrid',
             flex: 1,
-            padding:'5 0 0 0',
+            padding:'5 5 0 0',
             store: {
                 ///TODO:Replace with live data
                 fields: [{ name: 'referenceNumber' }, { name: 'transactionDate' }, { name: 'amount' }],
@@ -77,7 +81,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
             ui: 'summaryPanel',
             cls: 'chaching-transactiongrid',
             flex: 1,
-            padding: '0 0 0 0',
+            padding: '5 5 0 0',
             store: {
                 fields: [{ name: 'checkNumber' }, { name: 'checkDate' }, { name: 'isPaid' }, { name: 'amount' }],
                 data: [
@@ -120,28 +124,36 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
             ui: 'summaryPanel',
             cls: 'chaching-transactiongrid',
             flex: 1,
-            padding: '0 0 0 0',
+            padding: '5 0 0 0',
+            viewConfig: {
+                plugins: {
+                    ddGroup: 'grid-to-form',
+                    ptype: 'gridviewdragdrop',
+                    enableDrop: false
+                }
+            },
             tools: [
             {
                 type: 'save',
                 tooltip: app.localize('ProcessSelected'),
                 handler:'onProcessPoClicked'
             }],
-            store: {
-                fields: [{ name: 'referenceNumber' }, { name: 'description' }, { name: 'transactionDate' }, { name: 'remainingAmount' }, { name: 'process' }],
+            store:new Chaching.store.purchaseorders.entry.PurchaseOrderStore(),
+            /*store: {
+                fields: [{ name: 'purchaseOrderReference' }, { name: 'description' }, { name: 'transactionDate' }, { name: 'remainingAmount' }, { name: 'process' }, { name: 'controlTotal', mapping: 'remainingAmount' }],
                 data: [
-                   { referenceNumber: '123', transactionDate: '08-01-2016', remainingAmount: '100', description:'ABC' },
-                   { referenceNumber: '456', transactionDate: '08-01-2016', remainingAmount: '102', description: 'ABC' },
-                   { referenceNumber: '789', transactionDate: '08-01-2016', remainingAmount: '1000', description: 'ABC' },
-                   { referenceNumber: '101', transactionDate: '08-01-2016', remainingAmount: '2054', description: 'ABC' },
-                   { referenceNumber: '102', transactionDate: '08-01-2016', remainingAmount: '4520', description: 'ABC' }
+                   { purchaseOrderReference: '123', transactionDate: '08-01-2016', remainingAmount: '100', description: 'ABC' },
+                   { purchaseOrderReference: '456', transactionDate: '08-01-2016', remainingAmount: '102', description: 'ABC' },
+                   { purchaseOrderReference: '789', transactionDate: '08-01-2016', remainingAmount: '1000', description: 'ABC' },
+                   { purchaseOrderReference: '101', transactionDate: '08-01-2016', remainingAmount: '2054', description: 'ABC' },
+                   { purchaseOrderReference: '102', transactionDate: '08-01-2016', remainingAmount: '4520', description: 'ABC' }
                 ]
-            },
+            },*/
             columns: [
             {
                 xtype: 'gridcolumn',
                 text: app.localize('PO#'),
-                dataIndex: 'referenceNumber',
+                dataIndex: 'purchaseOrderReference',
                 width: '14%'
             }, {
                 xtype: 'gridcolumn',
@@ -166,6 +178,39 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
             }]
         }]
     }],
+    onBoxReady: function () {
+        this.callParent(arguments);
+        var form = this,
+            body = form.body;
+
+        this.formPanelDropTarget = new Ext.dd.DropTarget(body, {
+            ddGroup: 'grid-to-form',
+            notifyEnter: function (ddSource, e, data) {
+                //Add some flare to invite drop.
+                body.stopAnimation();
+                body.highlight();
+            },
+            notifyDrop: function (ddSource, e, data) {
+                // Reference the record (single selection) for readability
+                var selectedRecord = ddSource.dragData.records[0];
+
+                // Load the record into the form
+                form.getForm().loadRecord(selectedRecord);
+
+                // Delete record from the source store.  not really required.
+                //ddSource.view.store.remove(selectedRecord);
+                return true;
+            }
+        });
+    },
+    beforeDestroy: function(){
+        var target = this.formPanelDropTarget;
+        if (target) {
+            target.unreg();
+            this.formPanelDropTarget = null;
+        }
+        this.callParent();
+    },
     initComponent: function () {
         var me = this;
         me.tbar=[
@@ -290,7 +335,10 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
                                 primaryEntityCrudApi: null,
                                 createEditEntityType: 'payables.vendors',
                                 createEditEntityGridController: 'payables-vendors-vendorsgrid',
-                                entityType: 'Vendor'
+                                entityType: 'Vendor',
+                                listeners: {
+                                    change:'onVendorChange'
+                                }
                             }, {
                                 xtype: 'textfield',
                                 name: 'description',

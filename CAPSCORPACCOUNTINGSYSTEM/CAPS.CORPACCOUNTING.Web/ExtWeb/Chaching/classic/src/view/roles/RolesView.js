@@ -3,12 +3,10 @@ Ext.define('Chaching.view.roles.RolesView',{
     extend: 'Chaching.view.common.window.ChachingWindowPanel',
     alias: ['widget.roles.createView', 'widget.roles.editView'],
     requires: [
-        'Chaching.view.roles.RolesViewController',       
+        //'Chaching.view.roles.RolesViewController',       
         'Chaching.view.roles.RolesForm'
     ],
-    controller: 'roles-rolesview',    
-    //height: 'setComponentHeight',
-    //cls: "expand-panel",
+    //controller: 'roles-rolesview',    
     height: '70%',
     width: '30%',
     layout: 'fit',

@@ -2,10 +2,10 @@
 Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias:['widget.projects.projectmaintenance.projectcoas.create', 'widget.projects.projectmaintenance.projectcoas.edit'],
-    requires: [
-        'Chaching.view.projects.projectmaintenance.ProjectCOAsFormController'        
-    ],
-    controller: 'projects-projectmaintenance-projectcoasform',
+    //requires: [
+    //    'Chaching.view.projects.projectmaintenance.ProjectCOAsFormController'        
+    //],
+    //controller: 'projects-projectmaintenance-projectcoasform',
     name: 'projectcoa',
     openInPopupWindow: false,
     hideDefaultButtons: false,
@@ -82,18 +82,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             blankText: app.localize('MandatoryToolTipText')
         },
         items: [{
-            //xtype: 'combobox',
-            //name: 'rollupDivisionId',
-            //fieldLabel: app.localize('DefaultRollupJob').initCap(),
-            //width: '100%',
-            //ui: 'fieldLabelTop',
-            //emptyText: app.localize('DefaultRollupJob'),
-            //displayField: 'rollupDivision',
-            //valueField: 'rollupDivisionId',
-            //bind: {
-            //    store: '{rollupDivisionList}'
-            //}
-
             xtype: 'chachingcombobox',
             name: 'rollupDivisionId',
             fieldLabel: app.localize('DefaultRollupJob').initCap(),
@@ -142,19 +130,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             }
 
         }, {
-
-            //xtype: 'combobox',
-            //name: 'rollupAccountId',
-            //fieldLabel: app.localize('DefaultRollupAccount').initCap(),
-            //width: '100%',
-            //ui: 'fieldLabelTop',
-            //emptyText: app.localize('DefaultRollupAccount'),
-            //displayField: 'name',
-            //valueField: 'value',
-            //bind: {
-            //    store: '{genericRollupAccountList}'
-            //}
-
             xtype: 'chachingcombobox',
             store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
             fieldLabel: app.localize('DefaultRollupAccount'),

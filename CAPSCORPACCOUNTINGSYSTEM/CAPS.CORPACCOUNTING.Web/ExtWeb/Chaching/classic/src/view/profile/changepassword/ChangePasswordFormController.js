@@ -26,7 +26,7 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordFormController', 
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/profile/ChangePassword',
             jsonData: Ext.encode(input),
-            success: function (response, opts) {
+            success: function(response, opts) {
                 var res = Ext.decode(response.responseText);
                 if (res.success) {
                     var wnd = view.up('window');
@@ -34,11 +34,11 @@ Ext.define('Chaching.view.profile.changepassword.ChangePasswordFormController', 
                     abp.notify.success(app.localize('YourPasswordHasChangedSuccessfully'), app.localize('Success'));
                 }
             },
-            failure: function (response, opts) {
+            failure: function(response, opts) {
                 //function to show error details (Chaching.utilities.ChachingGlobals)
                 ChachingGlobals.showPageSpecificErrors(response);
             }
-        })
+        });
     }
 
 });

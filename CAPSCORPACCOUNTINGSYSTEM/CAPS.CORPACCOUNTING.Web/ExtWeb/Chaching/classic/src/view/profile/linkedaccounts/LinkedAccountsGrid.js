@@ -32,7 +32,7 @@ Ext.define('Chaching.view.profile.linkedaccounts.LinkedAccountsGrid', {
     gridId:8,
     requireMultiSearch: false,
     requireMultisort: false,
-    isEditable: true,
+    isEditable: false,
     editingMode: 'row',
     createNewMode: 'popup',
     columnLines: true,

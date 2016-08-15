@@ -132,20 +132,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         fieldLabel: app.localize('BudgetFormat') ,
                                         emptyText: app.localize('MandatoryField')
                                     }, {
-                                        //xtype: 'combobox',
-                                        //name: 'rollupAccountId',
-                                        //itemId: 'rollupAccountId',
-                                        //queryMode: 'remote',
-                                        //bind: {
-                                        //    store: '{genericRollupAccountList}'
-                                        //},
-                                        //valueField: 'value',
-                                        //displayField: 'name',
-                                        //width: '100%',
-                                        //ui: 'fieldLabelTop',
-                                        //fieldLabel: app.localize('RollupAccount'),
-                                        //emptyText: app.localize('SelectOption')
-
                                         xtype: 'chachingcombobox',
                                         store: new Chaching.store.utilities.autofill.RollupAccountListStore(),
                                         fieldLabel: app.localize('RollUpAccount'),
@@ -176,18 +162,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
 
 
                                     }, {
-                                        //xtype: 'combobox',
-                                        //name: 'rollupJobId',
-                                        //itemId: 'rollupJobId',
-                                        //queryMode: 'local',
-                                        //store: 'financials.accounts.DivisionsStore',
-                                        //valueField: 'jobId',
-                                        //displayField: 'caption',
-                                        //width: '100%',
-                                        //ui: 'fieldLabelTop',
-                                        //fieldLabel: app.localize('RollupDivision'),
-                                        //emptyText: app.localize('SelectOption')
-
                                         xtype: 'chachingcombobox',
                                         store: new Chaching.store.utilities.autofill.DivisionListStore(),
                                         fieldLabel: app.localize('RollUpDivision'),
@@ -215,7 +189,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         createEditEntityType: 'financials.accounts.divisions',
                                         createEditEntityGridController: 'financials-accounts-divisionsgrid',
                                         entityType: 'Division',
-                                        useDisplayFieldToSearch: true,
                                         identificationKey: 'isDivision'
 
                                     }]
@@ -429,12 +402,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             ui: 'fieldLabelTop',
                             width: '100%',
                             name: 'agencyId',
-                            //itemId: 'agencyId',
                             valueField: 'customerId',
                             displayField: 'customerNumber',
                             queryMode: 'remote',
                             minChars: 2,
-                           // useDisplayFieldToSearch: true,
                             modulePermissions: {
                                 read: abp.auth.isGranted('Pages.Receivables.Customers'),
                                 create: abp.auth.isGranted('Pages.Receivables.Customers.Create'),
@@ -470,7 +441,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             displayField: 'customerNumber',
                             queryMode: 'remote',
                             minChars: 2,
-                            // useDisplayFieldToSearch: true,
                             modulePermissions: {
                                 read: abp.auth.isGranted('Pages.Receivables.Customers'),
                                 create: abp.auth.isGranted('Pages.Receivables.Customers.Create'),
@@ -515,7 +485,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 name: 'agencyAddress',
                                 itemId: 'agencyAddress',
                                 resizable: false,
-                              //  height:134,
                                 fieldLabel: app.localize('Address'),
                                 emptyText: app.localize('ToolTipAgencyAddress')
                             }, {

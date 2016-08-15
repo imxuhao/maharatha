@@ -2,11 +2,11 @@
 Ext.define('Chaching.view.profile.loginAttempts.LoginAttemptList', {
     extend: 'Ext.view.View',
 
-    requires: [
-        'Chaching.view.profile.loginAttempts.LoginAttemptListController'
-    ],
+    //requires: [
+    //    'Chaching.view.profile.loginAttempts.LoginAttemptListController'
+    //],
 
-    controller: 'profile-loginattempts-loginattemptlist',
+    //controller: 'profile-loginattempts-loginattemptlist',
     store: 'profile.loginAttempts.LoginAttemptStore',
     scrollable: true,
     emptyText: '<div class="emptyTextClass">' + app.localize('NoLoginAttemptsText') + '</div>',

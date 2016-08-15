@@ -218,16 +218,12 @@
                                 }]
                             }]
             }, {
-               // columnWidth: 1,
-                padding: '20 10 0 20',
+                //padding: '20 10 0 20',
                 items: [{
                     xtype: 'banking.banksetup.checknumbergrid',
                     itemId: 'checkNumberGrid',
-                    anchor: '100% 80%',
+                    width:'100%',
                     autoScroll: true
-                    //,
-                    //layout: 'fit',
-                    //width: '100%'
                 }]
             }]
         },

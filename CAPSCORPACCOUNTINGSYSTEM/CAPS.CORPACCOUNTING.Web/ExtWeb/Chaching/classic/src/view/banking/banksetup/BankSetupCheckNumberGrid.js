@@ -39,6 +39,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupCheckNumberGrid', {
     isSubMenuItemTab: false,
     showPagingToolbar: false,
     autoScroll: true,
+    layout:'fit',
     columns: [{
         text: 'Bank Account Id',
         dataIndex: 'bankAccountId',
@@ -59,7 +60,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupCheckNumberGrid', {
         dataIndex: 'startingPaymentNumber',
         sortable: false,
         groupable: false,
-        width: '15%',
+        width: '44%',
         editor: {
             xtype: 'textfield',
             allowBlank : false
@@ -69,7 +70,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupCheckNumberGrid', {
         dataIndex: 'endingPaymentNumber',
         sortable: false,
         groupable: false,
-        width: '15%',
+        width: '44%',
         editor: {
             xtype: 'textfield',
             allowBlank : false

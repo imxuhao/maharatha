@@ -6,7 +6,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableFormController',
         if (formPanel) {
             var transactionDetailContainer = formPanel.down('*[itemId=transactionDetails]');
             if (transactionDetailContainer) {
-                var heightForDetailGrid = height - (170 + 80);
+                var heightForDetailGrid = height - (170 + 130);
                 transactionDetailContainer.down('gridpanel').setHeight(heightForDetailGrid);
             }
             formPanel.updateLayout();
@@ -129,6 +129,25 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableFormController',
                     }
                 });
         }
-    }
+    },
+    onVendorChange:function(field, newValue, oldValue, e) {
+        var me = this,
+            view = me.getView(),
+            recentPoGrid = view.down('gridpanel[itemId=recentPos]'),
+            recentPoStore = recentPoGrid.getStore();
 
+        recentPoStore.clearFilter();
+        var filters = [];
+        var filter = new Ext.util.Filter({
+            entity: '',
+            searchTerm: newValue,
+            comparator: 2,
+            dataType: 0,
+            property: 'vendorId',
+            value: newValue
+        });
+        filters.push(filter);
+        recentPoStore.filter(filters);
+        recentPoStore.load();
+    }
 });

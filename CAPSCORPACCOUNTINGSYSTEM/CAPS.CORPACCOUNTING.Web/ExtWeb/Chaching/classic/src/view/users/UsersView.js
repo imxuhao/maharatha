@@ -3,11 +3,11 @@ Ext.define('Chaching.view.users.UsersView', {
     extend: 'Chaching.view.common.window.ChachingWindowPanel',
     alias: ['widget.users.createView', 'widget.users.editView'],
     requires: [
-        'Chaching.view.users.UsersViewController',
+        //'Chaching.view.users.UsersViewController',
         'Chaching.view.users.UsersForm'
     ],
 
-    controller: 'users-usersview',
+    //controller: 'users-usersview',
     height: 600,
     width: 600,
     layout: 'fit',

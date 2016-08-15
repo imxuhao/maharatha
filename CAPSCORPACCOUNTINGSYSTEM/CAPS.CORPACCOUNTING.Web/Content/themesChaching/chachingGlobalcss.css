@@ -414,3 +414,8 @@ h1, h2, h3, h4, h5, h6 {
 .x-fieldset-header-tool-transparentFieldSet > .x-tool-toggle {
     color: #919191 !important;
 }
+
+/*Date field trigger*/
+.x-form-field-date .x-form-date-trigger:before {
+    content: "\f274" !important;
+}

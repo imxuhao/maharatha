@@ -3,10 +3,10 @@ Ext.define('Chaching.view.users.PermissionsSaveView', {
     extend: 'Chaching.view.common.window.ChachingWindowPanel',
     alias: ['widget.users.userpermissionssaveview'],
     requires: [
-        'Chaching.view.users.PermissionsSaveViewController',
+        //'Chaching.view.users.PermissionsSaveViewController',
         'Chaching.view.users.PermissionsSaveForm'
     ],
-    controller: 'users-permissionssaveview',
+    //controller: 'users-permissionssaveview',
     //height: 200,
     //width: 250,
     height: '45%',

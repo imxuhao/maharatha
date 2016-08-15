@@ -19,7 +19,7 @@
                 var generalView = view.down('container[itemId=generalView]');
                 if (generalView) {
 
-                    var localAddressTextfield = generalView.down('textfield[itemId=localAddress]');
+                    var localAddressTextfield = generalView.down('textfield[itemId=localAddress]'),
                     localAddressValue = data.general.webSiteRootAddress;
                     localAddressTextfield.setBind(
                         {
@@ -143,8 +143,7 @@
             view = me.getView(),
             isAllowTenantsToRegisterToSystem = view.down('checkbox[itemId=allowTenantsToRegisterToSystem]');
            
-            var allowTenantsToRegisterToSystem = me.lookupReference('allowTenantsToRegisterToSystem'),
-                newRegisteredTenantCheckBox = me.lookupReference('newRegisterTenantsAreActiveByDefault'),
+            var newRegisteredTenantCheckBox = me.lookupReference('newRegisterTenantsAreActiveByDefault'),
                 newRegisteredTenantHintLabel = me.lookupReference('newRegisteredTenantHint'),
                 useCaptchaOnRegistrationCheckBox = me.lookupReference('useCaptchaOnRegistration');
 

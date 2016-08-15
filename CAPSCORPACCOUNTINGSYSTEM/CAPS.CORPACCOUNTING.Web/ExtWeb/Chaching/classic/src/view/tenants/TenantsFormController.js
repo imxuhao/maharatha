@@ -10,8 +10,8 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
         }
     },
     showRandomPassword: function () {
-        var me = this;
-        password = me.lookupReference('adminPassword');
+        var me = this,
+        password = me.lookupReference('adminPassword'),
         passwordRepeat = me.lookupReference('adminPasswordRepeat');
         password.reset();
         passwordRepeat.reset();

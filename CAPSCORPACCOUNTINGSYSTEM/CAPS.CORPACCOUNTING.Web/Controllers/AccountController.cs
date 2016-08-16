@@ -201,7 +201,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             {
                 identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             }
-           // await AddSecurityFlagsToClaims(identity,user);
+            await AddSecurityFlagsToClaims(identity,user);
             identity.AddClaim(new Claim(ClaimKeys.ApplicationUserOrgId, Convert.ToString(user.DefaultOrganizationId)));
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = rememberMe }, identity);
@@ -1311,7 +1311,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
             {
                 identity.AddClaim(new Claim(ClaimKeys.ApplicationUserOrgId, Convert.ToString(user.DefaultOrganizationId.Value)));
             }
-             //await  AddSecurityFlagsToClaims(identity, user);
+             await  AddSecurityFlagsToClaims(identity, user);
         }
 
 

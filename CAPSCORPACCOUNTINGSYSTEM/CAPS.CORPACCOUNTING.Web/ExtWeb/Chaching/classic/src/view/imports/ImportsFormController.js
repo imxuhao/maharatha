@@ -38,24 +38,38 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
                 success: function (fp, response) {
                     if (response.result) {
                         var data = response.result.result;
-                        if (response.success) {
+                        if (data.success) {
+                            if (response.success) {
+                                var wnd = view.up('window');
+                                if (wnd) {
+                                    Ext.destroy(wnd);
+                                } else {
+                                    Ext.destroy(view);
+                                }
+                                abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                                var parentGrid = me.parentController.getView();
+                                var gridStore = parentGrid.getStore();
+                                gridStore.loadPage(1);
+                            } else {
+                                ChachingGlobals.showPageSpecificErrors(response);
+                            }
+                        }
+                        else {
                             var wnd = view.up('window');
                             if (wnd) {
                                 Ext.destroy(wnd);
                             } else {
                                 Ext.destroy(view);
                             }
-                            abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
-                            var parentGrid = me.parentController.getView();
-                            var gridStore = parentGrid.getStore();
-                            gridStore.loadPage(1);
-                        } else {
-                            ChachingGlobals.showPageSpecificErrors(response);
+                            var win = Ext.create('Chaching.view.imports.ImportsErrorView');
+                            var winController = win.getController();
+                            winController.ErrorList = data.errorMessageList;
+                            win.show();
                         }
                     }
                 },
                 failure: function (fp, action) {
-                    abp.message.error(app.localize('Failed').initCap(), app.localize('Error'));
+                    abp.message.error(app.localize('Failed'), app.localize('Error'));
                 }
             });
         }

@@ -3659,6 +3659,7 @@
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalEntryDetail.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\fiscalperiod\FiscalPeriodModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\imports\ErrorModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobLocationsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobCommercialsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageMainModel.js" />
@@ -3720,6 +3721,7 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\fiscalperiod\FiscalPeriodStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\imports\ErrorStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\ItemsPerPageStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\maintenance\CacheStore.js" />
@@ -3873,6 +3875,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsView.js" />

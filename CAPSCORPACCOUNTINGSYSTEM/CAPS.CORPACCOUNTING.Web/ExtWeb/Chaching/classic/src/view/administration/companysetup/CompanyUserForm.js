@@ -25,7 +25,7 @@
     showFormTitle: false,
     displayDefaultButtonsCenter: true,
     titleConfig: {
-        title: abp.localization.localize("UserSettings").initCap()
+        title: abp.localization.localize("UserSettings")
     },
     layout: 'fit',
     items: [{
@@ -35,7 +35,7 @@
         tabPosition: 'left',
         tabRotation: 2,
         items: [{
-            title: abp.localization.localize("UserDetailsTab").initCap(),
+            title: abp.localization.localize("UserDetailsTab"),
             iconCls: 'fa fa-gear',
             items: [{
                 xtype: 'fieldset',
@@ -140,33 +140,33 @@
           ,
            {
                xtype: 'container',
-               title: abp.localization.localize("CorporateCOASecurityTab").initCap(),
+               title: abp.localization.localize("CorporateCOASecurityTab"),
                items: [{
                    html: 'CorporateCOASecurityTab'
                }]
            },
            {
                xtype: 'container',
-               title: abp.localization.localize("ProjectCOASecurityTab").initCap(),
+               title: abp.localization.localize("ProjectCOASecurityTab"),
                items: [{
                    html: 'ProjectCOASecurityTab'
                }]
            }, {
                xtype: 'container',
-               title: abp.localization.localize("ProjectSecurityTab").initCap(),
+               title: abp.localization.localize("ProjectSecurityTab"),
                items: [{
                    html: 'ProjectSecurityTab'
                }]
            }, {
                xtype: 'container',
-               title: abp.localization.localize("CreditCardSecurityTab").initCap(),
+               title: abp.localization.localize("CreditCardSecurityTab"),
                items: [{
                    html: 'CreditCardSecurityTab'
                }]
            },
            {
                xtype: 'container',
-               title: abp.localization.localize("BankSecurityTab").initCap(),
+               title: abp.localization.localize("BankSecurityTab"),
                items: [{
                    html: 'BankSecurityTab'
                }]

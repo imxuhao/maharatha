@@ -7,8 +7,6 @@ using Abp.Dependency;
 using Abp.Domain.Entities.Caching;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Caching;
-using CAPS.CORPACCOUNTING.Masters.Dto;
-using Abp.Linq.Extensions;
 using System.Data.Entity;
 using Abp.Configuration;
 using Abp.Events.Bus.Entities;
@@ -47,9 +45,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// Get SubAccounts by key
         /// </summary>
         /// <param name="accountkey"></param>
-        /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<SubAccountCacheItem>> GetSubAccountCacheItemAsync(string accountkey, AutoSearchInput input);
+        Task<List<SubAccountCacheItem>> GetSubAccountCacheItemAsync(string accountkey);
 
     }
 
@@ -94,18 +91,16 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         public override void HandleEvent(EntityChangedEventData<SubAccountUnit> eventData)
         {
-            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
+            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId)));
         }
 
         /// <summary>
         /// Get SubAccounts from Database
         /// </summary>
-        /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<List<SubAccountCacheItem>> GetSubAccountsFromDb(AutoSearchInput input)
+        private async Task<List<SubAccountCacheItem>> GetSubAccountsFromDb()
         {
             var subaccounts = await Repository.GetAll()
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .Select(u => new SubAccountCacheItem
                  {
                      Description = u.Description,
@@ -121,30 +116,26 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// Get SubAccounts
         /// </summary>
         /// <param name="subaccountkey"></param>
-        /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<SubAccountCacheItem>> GetSubAccountCacheItemAsync(string subaccountkey, AutoSearchInput input)
+        public async Task<List<SubAccountCacheItem>> GetSubAccountCacheItemAsync(string subaccountkey)
         {
             if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
             {
-                var subAccountCacheItem =
-             await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).GetAsync(subaccountkey, async () =>
-            {
-                var newCacheItem = new CacheItem(subaccountkey);
-                var subaccountList = await GetSubAccountsFromDb(input);
-                foreach (var subaccount in subaccountList)
-                {
-                    newCacheItem.SubAccountCacheItemList.Add(subaccount);
-                }
-                return newCacheItem;
-            }); return subAccountCacheItem.SubAccountCacheItemList.ToList();
+                var subAccountCacheItem = await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountStore).
+                    GetAsync(subaccountkey, async () =>
+                    {
+                        var newCacheItem = new CacheItem(subaccountkey);
+                        var subaccountList = await GetSubAccountsFromDb();
+                        foreach (var subaccount in subaccountList)
+                        {
+                            newCacheItem.SubAccountCacheItemList.Add(subaccount);
+                        }
+                        return newCacheItem;
+                    });
+                return subAccountCacheItem.SubAccountCacheItemList.ToList();
             }
-            else
-            {
-                return await GetSubAccountsFromDb(input);
-            }
+            return await GetSubAccountsFromDb();
         }
-
     }
 }
 

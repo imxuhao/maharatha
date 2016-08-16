@@ -344,7 +344,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<List<DivisionCacheItem>> GetDivisionList(AutoSearchInput input)
         {
             var cacheItem = await _divisioncache.GetDivisionCacheItemAsync(
-                CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId)));
             return cacheItem.ToList().Where(p => p.IsDivision == true)
                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.JobNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) ||
             p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
@@ -391,7 +391,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<List<AccountCacheItem>> GetRollupAccountList(AutoSearchInput input)
         {
             var accountList = await _accountcache.GetAccountCacheItemAsync(
-                CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
@@ -460,7 +460,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<List<CustomerCacheItem>> GetCustomersList(AutoSearchInput input)
         {
             var customerList = await _customercache.GetCustomersCacheItemAsync(
-                CacheKeyStores.CalculateCacheKey(CacheKeyStores.CustomerKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.CustomerKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             return customerList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.LastName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.FirstName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
@@ -579,7 +579,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
-                    ErrorMessage = "Duplicate Job#:" + duplicateAccountnumbers
+                    ErrorMessage = L("DuplicateJobNumbers") + duplicateAccountnumbers
                 };
                 uploadErrorMessagesList.Add(uploadErrorMessages);
             }
@@ -592,7 +592,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
-                    ErrorMessage = "Duplicate JobName:" + duplicateAccountdescriptions
+                    ErrorMessage = L("DuplicateJobNames") + duplicateAccountdescriptions
                 };
                 uploadErrorMessagesList.Add(uploadErrorMessages);
             }
@@ -630,8 +630,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             foreach (var job in duplicatejobs)
             {
                 var error = new StringBuilder();
-                error = error?.Append(!string.IsNullOrEmpty(job.JobNumber) ? job.JobNumber + " Duplicate JobNumber," : "");
-                error = error?.Append(!string.IsNullOrEmpty(job.JobName) ? job.JobName + " Duplicate JobName." : "");
+                error = error?.Append(!string.IsNullOrEmpty(job.JobNumber) ? job.JobNumber + L("DuplicateJobNumber") : "");
+                error = error?.Append(!string.IsNullOrEmpty(job.JobName) ? job.JobName + L("DuplicateJobName") : "");
                 var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
                     ErrorMessage = error.ToString().TrimEnd(','),

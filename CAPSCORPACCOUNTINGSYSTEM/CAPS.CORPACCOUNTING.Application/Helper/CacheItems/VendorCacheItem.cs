@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.AutoMapper;
-using Abp.Collections.Extensions;
 using Abp.Dependency;
 using Abp.Domain.Entities.Caching;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Caching;
 using CAPS.CORPACCOUNTING.Masters;
-using CAPS.CORPACCOUNTING.Masters.Dto;
-using Abp.Linq.Extensions;
 using System.Data.Entity;
+using Abp.Configuration;
 using Abp.Events.Bus.Entities;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Sessions;
@@ -46,7 +44,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
     public interface IVendorCache : IEntityCache<VendorCacheItem>
     {
-        Task<List<VendorCacheItem>> GetVendorsCacheItemAsync(string vendorkey, AutoSearchInput input, TypeofVendor? vendorType = null);
+        Task<List<VendorCacheItem>> GetVendorsCacheItemAsync(string vendorkey);
 
     }
 
@@ -54,53 +52,53 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
     {
 
         private readonly CustomAppSession _customAppSession;
-        public VendorCache(ICacheManager cacheManager, IRepository<VendorUnit> repository, CustomAppSession customAppSession)
+        private readonly ISettingManager _settingManager;
+        public VendorCache(ICacheManager cacheManager, IRepository<VendorUnit> repository, CustomAppSession customAppSession, ISettingManager settingManager)
             : base(cacheManager, repository)
         {
-
             _customAppSession = customAppSession;
+            _settingManager = settingManager;
         }
+
         public override void HandleEvent(EntityChangedEventData<VendorUnit> eventData)
         {
-            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
+            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId)));
         }
 
-        private async Task<List<VendorCacheItem>> GetVendorsFromDb(AutoSearchInput input, TypeofVendor? vendorType = null)
+        private async Task<List<VendorCacheItem>> GetVendorsFromDb()
         {
-
             var query = from vendors in Repository.GetAll()
                         select new { vendors };
 
-            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.vendors.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new VendorCacheItem
-                            {
-                                VendorId = u.vendors.Id,
-                                LastName = u.vendors.LastName,
-                                FirstName = u.vendors.FirstName,
-                                VendorNumber = u.vendors.VendorNumber,
-                                VendorAccountInfo = u.vendors.VendorAccountInfo
-                            }).ToListAsync();
-
-
-
+            return await query.Select(u => new VendorCacheItem
+            {
+                VendorId = u.vendors.Id,
+                LastName = u.vendors.LastName,
+                FirstName = u.vendors.FirstName,
+                VendorNumber = u.vendors.VendorNumber,
+                VendorAccountInfo = u.vendors.VendorAccountInfo
+            }).ToListAsync();
         }
 
-        public async Task<List<VendorCacheItem>> GetVendorsCacheItemAsync(string vendorkey, AutoSearchInput input, TypeofVendor? vendorType = null)
+        public async Task<List<VendorCacheItem>> GetVendorsCacheItemAsync(string vendorkey)
         {
-
-            var cacheItem =
+            if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
+            {
+                var cacheItem =
                 await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheVendorStore)
                         .GetAsync(vendorkey, async () =>
                         {
                             var newCacheItem = new CacheItem(vendorkey);
-                            var vendorList = await GetVendorsFromDb(input);
+                            var vendorList = await GetVendorsFromDb();
                             foreach (var vendors in vendorList)
                             {
                                 newCacheItem.VendorCacheItemList.Add(vendors);
                             }
                             return newCacheItem;
                         });
-            return cacheItem.VendorCacheItemList.ToList();
+                return cacheItem.VendorCacheItemList.ToList();
+            }
+            return await GetVendorsFromDb();
         }
 
     }

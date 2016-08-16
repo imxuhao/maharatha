@@ -34,7 +34,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
         /// <summary>
         /// Gets or Sets Employee List
         /// </summary>
-        public HashSet<EmployeeUnitDto> EmployeeItemList { get; set; }
+        public HashSet<EmployeeCacheItem> EmployeeItemList { get; set; }
 
         public static TimeSpan CacheExpireTime { get; private set; }
         static CacheItem()
@@ -51,7 +51,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
             switch (key.Substring(index + 1))
             {
                 case CacheKeyStores.EmployeeKey:
-                    EmployeeItemList = new HashSet<EmployeeUnitDto>();
+                    EmployeeItemList = new HashSet<EmployeeCacheItem>();
                     break;
                 case CacheKeyStores.VendorKey:
                     VendorCacheItemList = new HashSet<VendorCacheItem>();

@@ -529,7 +529,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
 
             var accountList = await _accountCache.GetAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())

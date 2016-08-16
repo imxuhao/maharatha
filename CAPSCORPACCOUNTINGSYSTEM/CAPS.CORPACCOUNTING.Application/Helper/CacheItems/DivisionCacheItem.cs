@@ -7,7 +7,6 @@ using Abp.Dependency;
 using Abp.Domain.Entities.Caching;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Caching;
-using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Data.Entity;
 using Abp.Configuration;
 using Abp.Events.Bus.Entities;
@@ -46,7 +45,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
     {
         //Task<List<DivisionCacheItem>> GetDivisionList(AutoSearchInput input);
 
-        Task<List<DivisionCacheItem>> GetDivisionCacheItemAsync(string divisionkey, AutoSearchInput input);
+        Task<List<DivisionCacheItem>> GetDivisionCacheItemAsync(string divisionkey);
 
     }
 
@@ -65,13 +64,12 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         public override void HandleEvent(EntityChangedEventData<JobUnit> eventData)
         {
-            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
+            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId)));
         }
 
-        private async Task<List<DivisionCacheItem>> GetDivisionsFromDb(AutoSearchInput input)
+        private async Task<List<DivisionCacheItem>> GetDivisionsFromDb()
         {
             var divisions = await Repository.GetAll()
-                //.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .Select(u => new DivisionCacheItem
                  {
                      JobNumber = u.JobNumber,
@@ -84,9 +82,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
             return divisions;
         }
 
-        public async Task<List<DivisionCacheItem>> GetDivisionCacheItemAsync(string divisionkey, AutoSearchInput input)
+        public async Task<List<DivisionCacheItem>> GetDivisionCacheItemAsync(string divisionkey)
         {
-
             if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
             {
                 var cacheDivisionList =
@@ -95,7 +92,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                             .GetAsync(divisionkey, async () =>
                             {
                                 var newCacheItem = new CacheItem(divisionkey);
-                                var divList = await GetDivisionsFromDb(input);
+                                var divList = await GetDivisionsFromDb();
                                 foreach (var div in divList)
                                 {
                                     newCacheItem.DivisionCacheItemList.Add(div);
@@ -104,12 +101,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                             });
                 return cacheDivisionList.DivisionCacheItemList.ToList();
             }
-            else
-            {
-                return await GetDivisionsFromDb(input);
-            }
+            return await GetDivisionsFromDb();
         }
-
     }
 }
 

@@ -8,8 +8,6 @@ using Abp.Domain.Entities.Caching;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Caching;
 using CAPS.CORPACCOUNTING.Masters;
-using CAPS.CORPACCOUNTING.Masters.Dto;
-using Abp.Linq.Extensions;
 using System.Data.Entity;
 using Abp.Configuration;
 using Abp.Events.Bus.Entities;
@@ -46,9 +44,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// Get Customers
         /// </summary>
         /// <param name="customerkey"></param>
-        /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<CustomerCacheItem>> GetCustomersCacheItemAsync(string customerkey, AutoSearchInput input);
+        Task<List<CustomerCacheItem>> GetCustomersCacheItemAsync(string customerkey);
 
     }
 
@@ -69,28 +66,27 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         public override void HandleEvent(EntityChangedEventData<CustomerUnit> eventData)
         {
-            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheCustomerStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.CustomerKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
+            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheCustomerStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.CustomerKey, Convert.ToInt32(_customAppSession.TenantId)));
         }
 
-        private async Task<List<CustomerCacheItem>> GetCustomersFromDb(AutoSearchInput input)
+        private async Task<List<CustomerCacheItem>> GetCustomersFromDb()
         {
 
             var query = from customers in Repository.GetAll()
-                        select  customers;
+                        select customers;
 
-            return await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId.Value)
-                            .Select(u => new CustomerCacheItem
-                            {
-                                CustomerId = u.Id,
-                                LastName = u.LastName,
-                                FirstName = u.FirstName,
-                                CustomerNumber = u.CustomerNumber,
-                                CustomerPayTermsId=u.CustomerPayTermsId
-                            }).ToListAsync();
+            return await query.Select(u => new CustomerCacheItem
+            {
+                CustomerId = u.Id,
+                LastName = u.LastName,
+                FirstName = u.FirstName,
+                CustomerNumber = u.CustomerNumber,
+                CustomerPayTermsId = u.CustomerPayTermsId
+            }).ToListAsync();
 
         }
 
-        public async Task<List<CustomerCacheItem>> GetCustomersCacheItemAsync(string customerkey, AutoSearchInput input)
+        public async Task<List<CustomerCacheItem>> GetCustomersCacheItemAsync(string customerkey)
         {
             if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
             {
@@ -99,7 +95,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                         .GetAsync(customerkey, async () =>
                         {
                             var newCacheItem = new CacheItem(customerkey);
-                            var customerList = await GetCustomersFromDb(input);
+                            var customerList = await GetCustomersFromDb();
                             foreach (var customers in customerList)
                             {
                                 newCacheItem.CustomerCacheItemList.Add(customers);
@@ -108,11 +104,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                         });
                 return cacheItem.CustomerCacheItemList.ToList();
             }
-            else
-            {
-                return await GetCustomersFromDb(input);
-            }
+            return await GetCustomersFromDb();
         }
-
     }
 }

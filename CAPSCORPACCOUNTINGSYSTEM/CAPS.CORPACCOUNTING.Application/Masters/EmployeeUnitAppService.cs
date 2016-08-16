@@ -16,6 +16,8 @@ using Abp.Collections.Extensions;
 using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using Abp.Runtime.Caching;
+using CAPS.CORPACCOUNTING.Configuration;
+using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 
 namespace CAPS.CORPACCOUNTING.Masters
@@ -30,12 +32,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<AddressUnit, long> _addressUnitRepository;
         private readonly ICacheManager _cacheManager;
         private readonly CustomAppSession _customAppSession;
+        private readonly IEmployeeCache _empCache;
 
         public EmployeeUnitAppService(EmployeeUnitManager employeeUnitManager,
             IRepository<EmployeeUnit> employeeUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, IAddressUnitAppService addressAppService,
             IRepository<AddressUnit, long> addressRepository,
-            CustomAppSession customAppSession, ICacheManager cacheManager)
+            CustomAppSession customAppSession, ICacheManager cacheManager, IEmployeeCache empCache)
         {
             _employeeUnitManager = employeeUnitManager;
             _employeeUnitRepository = employeeUnitRepository;
@@ -44,6 +47,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             _addressUnitRepository = addressRepository;
             _customAppSession = customAppSession;
             _cacheManager = cacheManager;
+            _empCache = empCache;
         }
         /// <summary>
         /// Delete the Employee abd EmployeeAddresses
@@ -254,53 +258,18 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task<List<NameValueDto>> GetEmployeeList(AutoSearchInput input)
         {
-            var cacheItem = await GetEmployeeCacheItemAsync(
-              CacheKeyStores.CalculateCacheKey(CacheKeyStores.EmployeeKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
-            var res= cacheItem.EmployeeItemList.ToList()
-                    .WhereIf(input.Property == "isDirector", p => p.IsDirector == true)
-                    .WhereIf(input.Property == "isProducer", p => p.IsProducer == true)
-                    .WhereIf(input.Property == "isDirPhoto", p => p.IsArtDirector == true)
-                    .WhereIf(input.Property == "isArtDirector", p => p.IsArtDirector == true)
-                    .WhereIf(input.Property == "isSetDesigner", p => p.IsSetDesigner == true)
+            var cacheItem = await _empCache.GetEmployeeCacheItemAsync(
+              CacheKeyStores.CalculateCacheKey(CacheKeyStores.EmployeeKey, Convert.ToInt32(_customAppSession.TenantId)));
+            var res= cacheItem.ToList()
+                    .WhereIf(input.Property == "isDirector", p => p.IsDirector)
+                    .WhereIf(input.Property == "isProducer", p => p.IsProducer )
+                    .WhereIf(input.Property == "isDirPhoto", p => p.IsArtDirector)
+                    .WhereIf(input.Property == "isArtDirector", p => p.IsArtDirector)
+                    .WhereIf(input.Property == "isSetDesigner", p => p.IsSetDesigner)
                     .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.ToUpper().Contains(input.Query.ToUpper()) || p.FirstName.ToUpper().Contains(input.Query.ToUpper()))
                     .Select(u => new NameValueDto { Name = u.FirstName+" "+ u.LastName, Value = u.EmployeeId.ToString() }).ToList();
             return res;
         }
-        /// <summary>
-        /// Get SubAccounts From DataBase
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        private async Task<List<EmployeeUnitDto>> GetEmployeesFromDb(AutoSearchInput input)
-        {
-            var query = from employees in _employeeUnitRepository.GetAll()
-                        select new { employees };
-            var results = await query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.employees.OrganizationUnitId == input.OrganizationUnitId.Value).ToListAsync();
-            return results.Select(
-                              result =>
-                              {
-                                  var dto = result.employees.MapTo<EmployeeUnitDto>();
-                                  dto.EmployeeId = result.employees.Id;
-                                  return dto;
-                              }).ToList();
-
-        }
-
-        private async Task<CacheItem> GetEmployeeCacheItemAsync(string employee, AutoSearchInput input)
-        {
-            return await _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheEmployeeStore).GetAsync(employee, async () =>
-            {
-                var newCacheItem = new CacheItem(employee);
-                var employeeList = await GetEmployeesFromDb(input);
-
-                foreach (var emp in employeeList)
-                {
-                    newCacheItem.EmployeeItemList.Add(emp);
-                }
-                return newCacheItem;
-            });
-        }
-
     }
 }
 

@@ -8,7 +8,6 @@ using Abp.Domain.Entities.Caching;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Caching;
 using CAPS.CORPACCOUNTING.Masters.Dto;
-using Abp.Linq.Extensions;
 using System.Data.Entity;
 using Abp.Configuration;
 using Abp.Events.Bus.Entities;
@@ -52,9 +51,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// Get BankAccounts
         /// </summary>
         /// <param name="bankAccountkey"></param>
-        /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<BankAccountCacheItem>> GetBankAccountCacheItemAsync(string bankAccountkey, AutoSearchInput input);
+        Task<List<BankAccountCacheItem>> GetBankAccountCacheItemAsync(string bankAccountkey);
 
     }
     /// <summary>
@@ -95,7 +93,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <param name="eventData"></param>
         public override void HandleEvent(EntityChangedEventData<BankAccountUnit> eventData)
         {
-            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheBankAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
+            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheBankAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId)));
         }
         public BankAccountCacheItem Get(int id)
         {
@@ -109,13 +107,11 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <summary>
         /// Get BankAccounts from Database
         /// </summary>
-        /// <param name="input"></param>
         /// <returns></returns>
 
-        private async Task<List<BankAccountCacheItem>> GetBankAccountsFromDb(AutoSearchInput input)
+        private async Task<List<BankAccountCacheItem>> GetBankAccountsFromDb()
         {
             var bankAccounts = await Repository.GetAll()
-                  //.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                   .Select(u => new BankAccountCacheItem
                   {
                       Description = u.Description,
@@ -134,9 +130,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// Get BankAccounts
         /// </summary>
         /// <param name="bankaccountkey"></param>
-        /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<BankAccountCacheItem>> GetBankAccountCacheItemAsync(string bankaccountkey, AutoSearchInput input)
+        public async Task<List<BankAccountCacheItem>> GetBankAccountCacheItemAsync(string bankaccountkey)
         {
             if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
             {
@@ -144,7 +139,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                 var cacheBankAccountList = await CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheBankAccountStore).GetAsync(bankaccountkey, async () =>
                  {
                      var newCacheItem = new CacheItem(bankaccountkey);
-                     var bankAccountList = await GetBankAccountsFromDb(input);
+                     var bankAccountList = await GetBankAccountsFromDb();
                      foreach (var bankaccount in bankAccountList)
                      {
                          newCacheItem.BankAccountCacheItemList.Add(bankaccount);
@@ -153,10 +148,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                  });
                 return cacheBankAccountList.BankAccountCacheItemList.ToList();
             }
-            else
-            {
-                return await GetBankAccountsFromDb(input);
-            }
+            return await GetBankAccountsFromDb();
         }
     }
 }

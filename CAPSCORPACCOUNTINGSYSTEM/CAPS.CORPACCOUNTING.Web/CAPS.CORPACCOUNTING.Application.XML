@@ -3392,12 +3392,11 @@
             BankAccount CacheInterface
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache.GetBankAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.IBankAccountCache.GetBankAccountCacheItemAsync(System.String)">
             <summary>
             Get BankAccounts
             </summary>
             <param name="bankAccountkey"></param>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache">
@@ -3411,19 +3410,17 @@
             </summary>
             <param name="eventData"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache.GetBankAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache.GetBankAccountsFromDb">
             <summary>
             Get BankAccounts from Database
             </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache.GetBankAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.BankAccountCache.GetBankAccountCacheItemAsync(System.String)">
             <summary>
             Get BankAccounts
             </summary>
             <param name="bankaccountkey"></param>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem">
@@ -3458,20 +3455,44 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCacheItem.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountsFromDb">
             <summary>
             Get Accounts from Database
             </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.AccountCache.GetAccountCacheItemAsync(System.String)">
             <summary>
             Get Accounts
             </summary>
             <param name="accountkey"></param>
-            <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.EmployeeCacheItem">
+            <summary>
+            Employee Cache Items
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.EmployeeCacheItem.EmployeeId">
+            <summary> Gets or sets EmployeeId </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.EmployeeCacheItem.LastName">
+            <summary> Gets or sets LastName </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.EmployeeCacheItem.FirstName">
+            <summary> Gets or sets FirstName </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.EmployeeCacheItem.IsProducer">
+            <summary> Gets or sets IsProducer </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.EmployeeCacheItem.IsDirector">
+            <summary> Gets or sets IsDirector </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.EmployeeCacheItem.IsSetDesigner">
+            <summary> Gets or sets IsSetDesigner </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.EmployeeCacheItem.IsArtDirector">
+            <summary> Gets or sets IsArtDirector </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCacheItem">
             <summary>
@@ -3487,12 +3508,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCacheItem.IsActive">
             <summary> Gets or sets IsActive </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(System.String)">
             <summary>
             Get SubAccounts by key
             </summary>
             <param name="accountkey"></param>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache">
@@ -3500,19 +3520,17 @@
             Implementing Cache for SubAccountRestriction.
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache.GetSubAccountRestrictionsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache.GetSubAccountRestrictionsFromDb">
             <summary>
             Get SubAccounts from Database
             </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(System.String)">
             <summary>
             Get SubAccounts
             </summary>
             <param name="subaccountkey"></param>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCacheItem">
@@ -3535,27 +3553,24 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCacheItem.SearchNo">
             <summary> Gets or sets SearchNo </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache.GetSubAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ISubAccountCache.GetSubAccountCacheItemAsync(System.String)">
             <summary>
             Get SubAccounts by key
             </summary>
             <param name="accountkey"></param>
-            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCache.GetSubAccountsFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCache.GetSubAccountsFromDb">
             <summary>
             Get SubAccounts from Database
             </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCache.GetSubAccountCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.SubAccountCache.GetSubAccountCacheItemAsync(System.String)">
             <summary>
             Get SubAccounts
             </summary>
             <param name="subaccountkey"></param>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.DivisionCacheItem">
@@ -3601,12 +3616,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCacheItem.CustomerPayTermsId">
             <summary> Gets or sets CustomerPayTermsId </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ICustomerCache.GetCustomersCacheItemAsync(System.String,CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.CacheItems.ICustomerCache.GetCustomersCacheItemAsync(System.String)">
             <summary>
             Get Customers
             </summary>
             <param name="customerkey"></param>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.CacheItems.CustomerCache">
@@ -6198,7 +6212,7 @@
             <param name="coaId"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CheckDuplicatesinExcel(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto})">
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CheckDuplicatesinExcel(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto},System.Data.DataTable)">
             <summary>
             Validating Excel Duplicates
             </summary>
@@ -8282,13 +8296,6 @@
         <member name="M:CAPS.CORPACCOUNTING.Masters.EmployeeUnitAppService.GetEmployeeUnitsById(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Get the EmployeeDeatails by EmployeeId
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.EmployeeUnitAppService.GetEmployeesFromDb(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get SubAccounts From DataBase
             </summary>
             <param name="input"></param>
             <returns></returns>

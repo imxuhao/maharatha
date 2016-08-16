@@ -230,18 +230,15 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                 //Get Accounts from cache
                 var accountList = await _accountCache.GetAccountCacheItemAsync(
-                    CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(user.TenantId), null),
-                    input);
+                    CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(user.TenantId)));
 
                 //Get Projects from cache
                 var projectList = await _projectCache.GetDivisionCacheItemAsync(
-                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(user.TenantId), null),
-                   input);
+                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(user.TenantId)));
 
                 //Get Projects from cache
                 var bankList = await _bankCache.GetBankAccountCacheItemAsync(
-                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(user.TenantId), null),
-                   input);
+                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(user.TenantId)));
 
                 //Get userOrganizations from database
                 var userorganizationList = await (from userorganization in _userOrganizationUnitRepository.GetAll().Where(p => p.UserId == user.Id)
@@ -297,11 +294,11 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                    select bankAccount).Any();
 
                 //adding Security flags to claims
-                identity.AddClaim(new Claim("HasGLRestrictions", Convert.ToString(accountSecurityFlag)));
-                identity.AddClaim(new Claim("HasLineRestrictions", Convert.ToString(lineSecurityFlag)));
-                identity.AddClaim(new Claim("HasProjectRestriction", Convert.ToString(projectSecurityFlag)));
-                identity.AddClaim(new Claim("HasDivisionRestriction", Convert.ToString(divisionSecurityFlag)));
-                identity.AddClaim(new Claim("HasBankRestriction", Convert.ToString(bankSecurityFlag)));
+                identity.AddClaim(new Claim(ClaimKeys.HasGLRestrictions, Convert.ToString(accountSecurityFlag)));
+                identity.AddClaim(new Claim(ClaimKeys.HasLineRestrictions, Convert.ToString(lineSecurityFlag)));
+                identity.AddClaim(new Claim(ClaimKeys.HasProjectRestriction, Convert.ToString(projectSecurityFlag)));
+                identity.AddClaim(new Claim(ClaimKeys.HasDivisionRestriction, Convert.ToString(divisionSecurityFlag)));
+                identity.AddClaim(new Claim(ClaimKeys.HasBankRestriction, Convert.ToString(bankSecurityFlag)));
             }
 
         }

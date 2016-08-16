@@ -57,7 +57,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
     public interface IAccountCache : IEntityCache<AccountCacheItem>
     {
-        Task<List<AccountCacheItem>> GetAccountCacheItemAsync(string accountkey, AutoSearchInput input);
+        Task<List<AccountCacheItem>> GetAccountCacheItemAsync(string accountkey);
 
     }
 
@@ -94,7 +94,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         }
         public override void HandleEvent(EntityChangedEventData<AccountUnit> eventData)
         {
-            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
+            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
         }
         public AccountCacheItem Get(int id)
         {
@@ -108,10 +108,9 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// <summary>
         /// Get Accounts from Database
         /// </summary>
-        /// <param name="input"></param>
         /// <returns></returns>
 
-        private async Task<List<AccountCacheItem>> GetAccountsFromDb(AutoSearchInput input)
+        private async Task<List<AccountCacheItem>> GetAccountsFromDb()
         {
             var query = from account in Repository.GetAll()
                          join coa in _coaRepository.GetAll() on account.ChartOfAccountId equals coa.Id
@@ -141,9 +140,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// Get Accounts
         /// </summary>
         /// <param name="accountkey"></param>
-        /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<AccountCacheItem>> GetAccountCacheItemAsync(string accountkey, AutoSearchInput input)
+        public async Task<List<AccountCacheItem>> GetAccountCacheItemAsync(string accountkey)
         {
             if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
             {
@@ -153,7 +151,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                             .GetAsync(accountkey, async () =>
                             {
                                 var newCacheItem = new CacheItem(accountkey);
-                                var accountList = await GetAccountsFromDb(input);
+                                var accountList = await GetAccountsFromDb();
                                 foreach (var account in accountList)
                                 {
                                     newCacheItem.AccountCacheItemList.Add(account);
@@ -162,10 +160,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                             });
                 return cacheAccountList.AccountCacheItemList.ToList();
             }
-            else
-            {
-                return await GetAccountsFromDb(input);
-            }
+            return await GetAccountsFromDb();
         }
     }
 }

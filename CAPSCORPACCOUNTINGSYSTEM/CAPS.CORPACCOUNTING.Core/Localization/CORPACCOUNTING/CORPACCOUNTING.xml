@@ -1147,6 +1147,15 @@
     <text name="DuplicateDescription" value="Duplicate Description."/>
     <text name="DuplicateAccountNumbers" value="Duplicate AccountNumbers:"/>
     <text name="DuplicateDescriptions" value="Duplicate Descriptions:"/>
+     <text name="DuplicateJobNumbers" value="Duplicate JobNumbers:"/>
+    <text name="DuplicateJobNames" value="Duplicate JobNames:"/>
+     <text name="DuplicateJobNumber" value=" Duplicate JobNumber,"/>
+      <text name="DuplicateJobName" value=" Duplicate JobName." />
+    
+    
+    
+    
+    
     
   
 

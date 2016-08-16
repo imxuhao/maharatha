@@ -245,12 +245,11 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         public async Task<List<SubAccountRestrictionUnitDto>> GetAccountList(GetAccountRestrictionInput input)
         {
-            AutoSearchInput cacheinput = new AutoSearchInput() {OrganizationUnitId = input.OrganizationUnitId};
             var cacheItem = await _accountCache.GetAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheinput);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             var subaccountRestrictioncacheItem = await _subAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(
-                CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheinput);
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId)));
             List<SubAccountRestrictionCacheItem> subaccountRestrictions=new List<SubAccountRestrictionCacheItem>();
 
             if (!ReferenceEquals(subaccountRestrictioncacheItem,null))

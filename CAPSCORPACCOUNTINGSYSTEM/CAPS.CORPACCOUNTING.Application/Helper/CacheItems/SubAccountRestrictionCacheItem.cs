@@ -7,8 +7,6 @@ using Abp.Dependency;
 using Abp.Domain.Entities.Caching;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Caching;
-using CAPS.CORPACCOUNTING.Masters.Dto;
-using Abp.Linq.Extensions;
 using System.Data.Entity;
 using Abp.Configuration;
 using Abp.Events.Bus.Entities;
@@ -44,9 +42,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// Get SubAccounts by key
         /// </summary>
         /// <param name="accountkey"></param>
-        /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<SubAccountRestrictionCacheItem>> GetSubAccountRestrictionCacheItemAsync(string accountkey, AutoSearchInput input);
+        Task<List<SubAccountRestrictionCacheItem>> GetSubAccountRestrictionCacheItemAsync(string accountkey);
 
     }
     /// <summary>
@@ -93,18 +90,16 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
 
         public override void HandleEvent(EntityChangedEventData<SubAccountRestrictionUnit> eventData)
         {
-            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountRestrictionStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), eventData.Entity.OrganizationUnitId));
+            CacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheSubAccountRestrictionStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId)));
         }
 
         /// <summary>
         /// Get SubAccounts from Database
         /// </summary>
-        /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<List<SubAccountRestrictionCacheItem>> GetSubAccountRestrictionsFromDb(AutoSearchInput input)
+        private async Task<List<SubAccountRestrictionCacheItem>> GetSubAccountRestrictionsFromDb()
         {
             var subaccountRestrictions = await Repository.GetAll()
-                .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .Select(u => new SubAccountRestrictionCacheItem { AccountId = u.AccountId, SubAccountId = u.SubAccountId, IsActive = u.IsActive, SubAccountRestrictionId = u.Id }).ToListAsync();
             return subaccountRestrictions;
         }
@@ -113,10 +108,9 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
         /// Get SubAccounts
         /// </summary>
         /// <param name="subaccountkey"></param>
-        /// <param name="input"></param>
         /// <returns></returns>
         public async Task<List<SubAccountRestrictionCacheItem>> GetSubAccountRestrictionCacheItemAsync(
-            string subaccountkey, AutoSearchInput input)
+            string subaccountkey)
         {
             if (await _settingManager.GetSettingValueAsync<bool>(AppSettings.General.UseRedisCacheByDefault))
             {
@@ -126,7 +120,7 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                             .GetAsync(subaccountkey, async () =>
                             {
                                 var newCacheItem = new CacheItem(subaccountkey);
-                                var subaccountRestrictionsList = await GetSubAccountRestrictionsFromDb(input);
+                                var subaccountRestrictionsList = await GetSubAccountRestrictionsFromDb();
                                 foreach (var subaccountRestrictions in subaccountRestrictionsList)
                                 {
                                     newCacheItem.SubAccountRestrictionCacheItemList.Add(subaccountRestrictions);
@@ -135,13 +129,8 @@ namespace CAPS.CORPACCOUNTING.Helpers.CacheItems
                             });
                 return cacheSubaccountRestrictionList.SubAccountRestrictionCacheItemList.ToList();
             }
-            else
-            {
-                return await GetSubAccountRestrictionsFromDb(input);
-            }
+            return await GetSubAccountRestrictionsFromDb();
         }
-
-
     }
 }
 

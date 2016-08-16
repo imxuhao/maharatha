@@ -123,7 +123,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         {
             Func<DivisionCacheItem, bool> expDivisionCache = null;
             var cacheItem = await _divisionCache.GetDivisionCacheItemAsync(
-                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             //appy User have restrictions
             if (_customAppSession.HasProjectRestriction || _customAppSession.HasDivisionRestriction)
@@ -151,7 +151,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                                     select job.ChartOfAccountId).FirstOrDefault();
 
             var accountList = await _accountCache.GetAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             //appy User have restrictions
             if (_customAppSession.HasGLRestrictions || _customAppSession.HasLineRestrictions)
@@ -176,9 +176,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<SubAccountCacheItem>> GetSubAccountList(AutoSearchInput input)
         {
             var cacheItem = await _subAccountCache.GetSubAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId)));
             var subaccountRestrictioncacheItem = await _subAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(
-                CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId)));
             if (input.AccountId == 0 || subaccountRestrictioncacheItem.Count == 0)
             {
                 return
@@ -212,7 +212,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<VendorCacheItem>> GetVendorList(AutoSearchInput input)
         {
 
-            var vendorCacheItemList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            var vendorCacheItemList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId)));
             return vendorCacheItemList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.FirstName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.VendorAccountInfo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
@@ -302,7 +302,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private async Task<List<NameValueDto>> GetJobOrDivisionListByNames(NameValueInputList input)
         {
             var jobOrDivisionList = await _divisionCache.GetDivisionCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             var result = (from jobNames in input.NameValueList
                           join jobOrdivision in jobOrDivisionList.ToList() on jobNames.Name equals jobOrdivision.JobNumber
@@ -322,7 +322,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private async Task<List<NameValueDto>> GetAccountsListByNames(NameValueInputList input)
         {
             var accountList = await _accountCache.GetAccountCacheItemAsync(
-               CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
+               CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             var result = (from accNames in input.NameValueList
                           join account in accountList.ToList() on accNames.Name equals account.AccountNumber
@@ -342,9 +342,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
         private async Task<List<NameValueDto>> GetSubAccountsListByNames(NameValueInputList input)
         {
             var cacheItem = await _subAccountCache.GetSubAccountCacheItemAsync(
-                      CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
+                      CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountKey, Convert.ToInt32(_customAppSession.TenantId)));
             var subAccountRestrictioncacheItem = await _subAccountRestrictionCache.GetSubAccountRestrictionCacheItemAsync(
-                CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.SubAccountRestrictionKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             var subAccountRestrictionList = from subaccount in cacheItem.ToList()
                                             join subAccountRestriction in subAccountRestrictioncacheItem
@@ -370,7 +370,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         /// <returns></returns>
         private async Task<List<NameValueDto>> GetVendorsListByNames(NameValueInputList input)
         {
-            var vendorsList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId });
+            var vendorsList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, Convert.ToInt32(_customAppSession.TenantId)));
             var strVendorNames = input.NameValueList.Select(u => u.Name).ToArray();
 
             var vendorFirstNameList = vendorsList.ToList().Where(u => strVendorNames.Contains(u.FirstName))
@@ -507,7 +507,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<BankAccountCacheItem>> GetBankAccountList(AutoSearchInput input)
         {
 
-            var bankCacheItemList = await _bankAccountCache.GetBankAccountCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+            var bankCacheItemList = await _bankAccountCache.GetBankAccountCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId)));
             return bankCacheItemList.WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.BankAccountName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.BankAccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();

@@ -37,10 +37,15 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
 
 
-        public static string CalculateCacheKey(string sourceName, int tenantId, long? OrganizationUnitId)
+        //public static string CalculateCacheKey(string sourceName, int tenantId, long? OrganizationUnitId)
+        //{
+        //    OrganizationUnitId = ReferenceEquals(OrganizationUnitId, null) ? 0 : OrganizationUnitId;
+        //    return (tenantId + "#" + OrganizationUnitId + "#" + sourceName);
+        //}
+        public static string CalculateCacheKey(string sourceName, int tenantId)
         {
-            OrganizationUnitId = ReferenceEquals(OrganizationUnitId, null) ? 0 : OrganizationUnitId;
-            return (tenantId + "#" + OrganizationUnitId + "#" + sourceName);
+          
+            return (tenantId + "#" +sourceName);
         }
     }
 }

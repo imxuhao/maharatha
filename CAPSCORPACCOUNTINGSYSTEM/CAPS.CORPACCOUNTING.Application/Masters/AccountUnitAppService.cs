@@ -23,8 +23,6 @@ using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Uploads.Dto;
-using OfficeOpenXml.Drawing;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -302,7 +300,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
         public async Task<List<AccountCacheItem>> GetRollupAccountsList(AutoSearchInput input)
         {
             var accountList = await _accountcache.GetAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
@@ -391,9 +389,8 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     uploadErrorMessagesList.Add(errorMessageDto);
                 createAccountList.Add(input);
                 accountsList.Add(Convert.ToInt32(datarow["No"]), input);
-                //await CreateAccountUnit(input);
             }
-            await CheckDuplicatesinExcel(createAccountList, uploadErrorMessagesList);
+            await CheckDuplicatesinExcel(createAccountList, uploadErrorMessagesList, accountTable);
             if (uploadErrorMessagesList.Count > 1)
                 return uploadErrorMessagesList;
             await ValidateDuplicateRecords(accountsList, uploadErrorMessagesList);
@@ -407,8 +404,9 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <param name="accountsList"></param>
         /// <param name="uploadErrorMessagesList"></param>
         /// <returns></returns>
-        private async Task CheckDuplicatesinExcel(List<CreateAccountUnitInput> accountsList, List<UploadErrorMessagesOutputDto> uploadErrorMessagesList)
+        private async Task CheckDuplicatesinExcel(List<CreateAccountUnitInput> accountsList, List<UploadErrorMessagesOutputDto> uploadErrorMessagesList, DataTable accountTable)
         {
+
             UploadErrorMessagesOutputDto uploadErrorMessages;
             var duplicateaccountNumberList = (from p in accountsList
                                               group p by p.AccountNumber into g
@@ -419,7 +417,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             {
                 uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
-                    ErrorMessage = L("DuplicateAccountNumbers") + duplicateAccountnumbers 
+                    ErrorMessage = L("DuplicateAccountNumbers") + duplicateAccountnumbers
                 };
                 uploadErrorMessagesList.Add(uploadErrorMessages);
             }
@@ -453,13 +451,15 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         private async Task ValidateDuplicateRecords(Dictionary<int, CreateAccountUnitInput> accountsList, List<UploadErrorMessagesOutputDto> uploadErrorMessagesList)
         {
-            UploadErrorMessagesOutputDto uploadErrorMessages;
             var accounts = accountsList.ToList().Select(p => p.Value).ToList();
             var accountNumberList = string.Join(",", accounts.Select(p => p.AccountNumber).ToArray());
             var descriptionList = string.Join(",", accounts.Select(p => p.Caption).ToArray());
 
-            var duplicateAccountList = await _accountUnitRepository.GetAll().Where(p => accountNumberList.Contains(p.AccountNumber)
-             || descriptionList.Contains(p.Caption)).ToListAsync();
+            var duplicateAccountItems = await _accountcache.GetAccountCacheItemAsync(
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
+
+            var duplicateAccountList = duplicateAccountItems.Where(p => accountNumberList.Contains(p.AccountNumber)
+               || descriptionList.Contains(p.Caption)).ToList();
 
             if (duplicateAccountList.Count == 0)
                 return;
@@ -470,7 +470,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             var duplicateAccounts2 = (from p in accountsList
                                       join p2 in duplicateAccountList on p.Value.AccountNumber equals p2.AccountNumber
                                       select new { Caption = p.Value.Caption, AccountNumber = p.Value.AccountNumber, RowNumber = p.Key }).ToList();
-           
+
 
             var duplicateAccounts = duplicateAccounts1.Union(duplicateAccounts2).ToList();
 
@@ -479,7 +479,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 var error = new StringBuilder();
                 error = error?.Append(!string.IsNullOrEmpty(account.AccountNumber) ? account.AccountNumber + L("DuplicateAccountNumber") : "");
                 error = error?.Append(!string.IsNullOrEmpty(account.Caption) ? account.Caption + L("DuplicateDescription") : "");
-                uploadErrorMessages = new UploadErrorMessagesOutputDto()
+                var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
                     ErrorMessage = error.ToString().TrimEnd(','),
                     RowNumber = account.RowNumber

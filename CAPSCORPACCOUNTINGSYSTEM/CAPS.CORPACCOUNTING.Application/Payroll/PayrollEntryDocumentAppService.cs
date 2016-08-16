@@ -254,8 +254,8 @@ namespace CAPS.CORPACCOUNTING.Payroll
         public async Task<List<VendorCacheItem>> GetPayRollVendorList(AutoSearchInput input)
         {
             var vendorCacheItemList = await _vendorCache.GetVendorsCacheItemAsync(CacheKeyStores.CalculateCacheKey(CacheKeyStores.VendorKey, 
-                Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input, TypeofVendor.PayrollCompany);
-            return vendorCacheItemList.ToList()
+                Convert.ToInt32(_customAppSession.TenantId)));
+            return vendorCacheItemList.ToList().Where(p=>p.TypeofVendorId == TypeofVendor.PayrollCompany)
                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.FirstName.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.VendorAccountInfo.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())

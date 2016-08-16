@@ -236,10 +236,9 @@ namespace CAPS.CORPACCOUNTING.Security
         public async Task<List<AccountAccessListUnitDto>> GetAccountAccessList(GetUserSecuritySettingsInputUnit input)
         {
             List<AccountCacheItem> accountCacheItems = new List<AccountCacheItem>();
-
-            AutoSearchInput cacheInput = new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId };
+           
             var accountCache = await _accountCache.GetAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheInput);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             var user = await _userManager.GetUserByIdAsync(input.UserId);
             var organizationUnits = await _organizationExtendedUnitManager.GetExtendedOrganizationUnitsAsync(user, input.EntityClassificationId);
@@ -305,7 +304,7 @@ namespace CAPS.CORPACCOUNTING.Security
             var user = await _userManager.GetUserByIdAsync(input.UserId);
             var organizationUnits = await _organizationExtendedUnitManager.GetExtendedOrganizationUnitsAsync(user, input.EntityClassificationId);
             var accountCache = await _accountCache.GetAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheInput);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
 
             if (!ReferenceEquals(input.Filters, null))
@@ -477,7 +476,7 @@ namespace CAPS.CORPACCOUNTING.Security
 
             AutoSearchInput cacheInput = new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId };
             var divisionCache = await _divisionCache.GetDivisionCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheInput);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             var user = await _userManager.GetUserByIdAsync(input.UserId);
             var organizationUnits = await _organizationExtendedUnitManager.GetExtendedOrganizationUnitsAsync(user, input.EntityClassificationId);
@@ -536,13 +535,12 @@ namespace CAPS.CORPACCOUNTING.Security
         public async Task<List<ProjectAccessListUnitDto>> GetProjectList(GetUserSecuritySettingsInputUnit input)
         {
             List<DivisionCacheItem> divisionCacheItems = new List<DivisionCacheItem>();
-            AutoSearchInput cacheInput = new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId };
 
             var user = await _userManager.GetUserByIdAsync(input.UserId);
             var organizationUnits = await _organizationExtendedUnitManager.GetExtendedOrganizationUnitsAsync(user, input.EntityClassificationId);
 
             var divisionCache = await _divisionCache.GetDivisionCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheInput);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId)));
 
 
             if (!ReferenceEquals(input.Filters, null))
@@ -848,7 +846,7 @@ namespace CAPS.CORPACCOUNTING.Security
 
             AutoSearchInput cacheInput = new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId };
             var bankAccountCache = await _bankAccountCache.GetBankAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheInput);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             var user = await _userManager.GetUserByIdAsync(input.UserId);
             var organizationUnits = await _organizationExtendedUnitManager.GetExtendedOrganizationUnitsAsync(user, input.EntityClassificationId);
@@ -897,12 +895,14 @@ namespace CAPS.CORPACCOUNTING.Security
 
             return bankAccountCacheItems.Select(item =>
             {
-                var dto = new BankAccountAccessListUnitDto();
-                dto.BankAccountNumber = item.BankAccountNumber;
-                dto.BankName = item.Description;
-                dto.AccountName = item.BankAccountName;
-                dto.OrganizationUnitId = item.OrganizationUnitId;
-                dto.BankAccountId = item.BankAccountId;
+                var dto = new BankAccountAccessListUnitDto
+                {
+                    BankAccountNumber = item.BankAccountNumber,
+                    BankName = item.Description,
+                    AccountName = item.BankAccountName,
+                    OrganizationUnitId = item.OrganizationUnitId,
+                    BankAccountId = item.BankAccountId
+                };
                 return dto;
             }).ToList();
 
@@ -916,20 +916,20 @@ namespace CAPS.CORPACCOUNTING.Security
         /// <returns></returns>
         public async Task<List<BankAccountAccessListUnitDto>> GetBankAccountList(GetUserSecuritySettingsInputUnit input)
         {
-            List<BankAccountCacheItem> bankAccountCacheItems = new List<BankAccountCacheItem>();
+            List<BankAccountCacheItem> bankAccountCacheItems;
             AutoSearchInput cacheInput = new AutoSearchInput() { OrganizationUnitId = input.OrganizationUnitId };
 
             var values = Enum.GetValues(typeof(TypeOfBankAccount)).Cast<TypeOfBankAccount>().Select(x => x)
                          .ToDictionary(u => u.ToDescription(), u => (int)u).Where(u => u.Value >= 1 && u.Value <= 10)
                          .Select(u => u.Key).ToArray();
 
-            var strTypeOfbankAC = string.Join(",", values);
+            var strTypeOfbankAccount = string.Join(",", values);
 
             var user = await _userManager.GetUserByIdAsync(input.UserId);
             var organizationUnits = await _organizationExtendedUnitManager.GetExtendedOrganizationUnitsAsync(user, input.EntityClassificationId);
 
             var bankAccountCache = await _bankAccountCache.GetBankAccountCacheItemAsync(
-                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), cacheInput);
+                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.BankAccountKey, Convert.ToInt32(_customAppSession.TenantId)));
 
             if (!ReferenceEquals(input.Filters, null))
             {
@@ -946,7 +946,7 @@ namespace CAPS.CORPACCOUNTING.Security
                 if (otherFilters.Count != 0)
                     filterCondition = ExpressionBuilder.GetExpression<BankAccountCacheItem>(otherFilters).Compile();
 
-                bankAccountCacheItems = bankAccountCache.ToList().Where(u => strTypeOfbankAC.Contains(u.TypeOfBankAccountId.ToString()))
+                bankAccountCacheItems = bankAccountCache.ToList().Where(u => strTypeOfbankAccount.Contains(u.TypeOfBankAccountId.ToString()))
                     .WhereIf(multiRangeFilters.Count != 0, multiRangeExp)
                     .WhereIf(otherFilters.Count != 0, filterCondition)
                     .Where(p => !organizationUnits.Any(p2 => p2.Id == p.OrganizationUnitId)).ToList();

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CAPS.CORPACCOUNTING.Accounts;
 using CAPS.CORPACCOUNTING.Uploads.Dto;
 using System.Collections.Generic;
+using CAPS.CORPACCOUNTING.JobCosting;
 
 namespace CAPS.CORPACCOUNTING.Uploads
 {
@@ -10,10 +11,13 @@ namespace CAPS.CORPACCOUNTING.Uploads
     {
 
         private readonly AccountUnitAppService _accountUnitAppService;
+        private readonly JobUnitAppService _jobUnitAppService;
 
-        public UploadAppService(AccountUnitAppService accountUnitAppService)
+
+        public UploadAppService(AccountUnitAppService accountUnitAppService, JobUnitAppService jobUnitAppService)
         {
             _accountUnitAppService = accountUnitAppService;
+            _jobUnitAppService = jobUnitAppService;
         }
 
         /// <summary>
@@ -30,6 +34,9 @@ namespace CAPS.CORPACCOUNTING.Uploads
             {
                 case "FinancialAccounts":
                     errorMessageList= await _accountUnitAppService.ImportAccounts(dataTable, coaId.Value);
+                    break;
+                case "Projects":
+                    errorMessageList = await _jobUnitAppService.ImportJobs(dataTable);
                     break;
 
             }

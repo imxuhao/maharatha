@@ -23,6 +23,10 @@ using Abp.Runtime.Caching;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
+using CAPS.CORPACCOUNTING.Uploads.Dto;
+using System.Data;
+using System.Text;
+using CAPS.CORPACCOUNTING.Accounts;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -56,6 +60,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly DivisionCache _divisioncache;
         private readonly AccountCache _accountcache;
         private readonly CustomerCache _customercache;
+        private readonly AccountUnitAppService _accountUnitAppService;
 
         public JobUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository, IRepository<JobCommercialUnit> jobDetailUnitRepository,
             IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CustomerUnit> customerUnitRepository, IJobCommercialAppService jobCommercialAppService,
@@ -64,7 +69,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         IRepository<ValueAddedTaxTypeUnit> valueAddedTaxTypeUnitRepository, IRepository<TypeOfCountryUnit, short> typeOfCountryUnitRepository,
         IRepository<CountryUnit> countryUnitRepository, IJobAccountUnitAppService jobAccountUnitAppService, IRepository<TaxCreditUnit> taxCreditUnitRepository,
              IRepository<JobPORangeAllocationUnit> jobPORangeAllocationUnitRepository, ICacheManager cacheManager, CustomAppSession customAppSession,
-             IUnitOfWorkManager unitOfWorkManager, IRepository<JobLocationUnit> jobLocationRepository, DivisionCache divisioncache, AccountCache accountcache, CustomerCache customercache)
+             IUnitOfWorkManager unitOfWorkManager, IRepository<JobLocationUnit> jobLocationRepository, DivisionCache divisioncache, AccountCache accountcache, CustomerCache customercache, AccountUnitAppService accountUnitAppService)
         {
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
@@ -90,6 +95,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             _divisioncache = divisioncache;
             _accountcache = accountcache;
             _customercache = customercache;
+            _accountUnitAppService = accountUnitAppService;
         }
         /// <summary>
         /// To create the Job.
@@ -462,7 +468,198 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         }
 
 
-        
+
+        public async Task<List<UploadErrorMessagesOutputDto>> ImportJobs(DataTable jobsTable)
+        {
+            var projectTypelist = EnumList.GetProjectTypeList();
+            var statuslist = EnumList.GetProjectStatusList();
+            var currencylist = await _accountUnitAppService.GetTypeOfCurrencyList();
+           
+            var rollupAccountList = (await GetRollupAccountList(new AutoSearchInput() { Value = false })).ConvertAll(u => new NameValueDto()
+            {
+                Value = u.AccountId.ToString(),
+                Name = u.AccountNumber
+            });
+
+            var rollupDivisionList = (await GetRollupAccountList(new AutoSearchInput() { Value = true })).ConvertAll(u => new NameValueDto()
+            {
+                Value = u.AccountId.ToString(),
+                Name = u.AccountNumber
+            });
+
+            var budgetformatList = await (GetProjectCoaList(new AutoSearchInput() { }));
+            var taxCreditList = (await GetTaxCreditList(new AutoSearchInput() { })).ConvertAll(u => new NameValueDto()
+            {
+                Value = u.Value,
+                Name = u.Name
+            });
+            List<UploadErrorMessagesOutputDto> uploadErrorMessagesList = new List<UploadErrorMessagesOutputDto>();
+            List<CreateJobUnitInput> createJobList = new List<CreateJobUnitInput>();
+            Dictionary<int, CreateJobUnitInput> jobsList = new Dictionary<int, CreateJobUnitInput>();
+            foreach (DataRow datarow in jobsTable.Rows)
+            {
+                
+                short? currencyId = null;
+                TypeofProject? typeofProjectId = null;
+                ProjectStatus? projectStatusId = null;
+                int budgetFormatId=0 ;
+                long? rollupAccountId = null;
+                int? rollupdivisionId = null;
+                int? taxCreditId = null;
+                var projectType = projectTypelist.FirstOrDefault(p => p.Name == datarow[L("ProjectType")].ToString());
+                if (projectType != null)
+                {
+                    typeofProjectId = (TypeofProject)Convert.ToInt32(projectType.Value);
+                }
+                var status = statuslist.FirstOrDefault(p => p.Name == datarow[L("Status")].ToString());
+                if (status != null)
+                {
+                    projectStatusId = (ProjectStatus)Convert.ToInt32(status.Value);
+                }
+                var currency = currencylist.FirstOrDefault(p => p.Name == datarow[L("Currency")].ToString());
+                if (currency != null)
+                {
+                    currencyId = Convert.ToInt16(currency.Value);
+                }
+                var rollupAccount = rollupAccountList.FirstOrDefault(p => p.Name == datarow[L("RollUpAccount")].ToString());
+                if (rollupAccount != null)
+                {
+                    rollupAccountId = Convert.ToInt32(rollupAccount.Value);
+                }
+                var rollupDivision = rollupDivisionList.FirstOrDefault(p => p.Name == datarow[L("RollUpDivision")].ToString());
+                if (rollupDivision != null)
+                {
+                    rollupdivisionId = Convert.ToInt32(rollupDivision.Value);
+                }
+                var budgetFormat = budgetformatList.FirstOrDefault(p => p.Name == datarow[L("BudgetFormat")].ToString());
+                if (budgetFormat != null)
+                {
+                    budgetFormatId = Convert.ToInt32(budgetFormat.Value);
+                }
+                var taxCredit = taxCreditList.FirstOrDefault(p => p.Name == datarow[L("TaxCredit")].ToString());
+                if (taxCredit != null)
+                {
+                    taxCreditId = Convert.ToInt32(taxCredit.Value);
+                }
+                var input = new CreateJobUnitInput()
+                {
+                    JobNumber = datarow[L("JobNumber")].ToString(),
+                    Caption = datarow[L("JobName")].ToString(),
+                    TypeofProjectId = typeofProjectId,
+                    TypeOfJobStatusId = projectStatusId,
+                    TypeOfCurrencyId = currencyId,
+                    RollupAccountId = rollupAccountId,
+                    RollupJobId = rollupdivisionId,
+                    TaxCreditId = taxCreditId,
+                    ChartOfAccountId = budgetFormatId,
+                    IsDivision = false
+                };
+                UploadErrorMessagesOutputDto errorMessageDto = ValidateUploadedData(input, Convert.ToInt32(datarow["No"]), budgetFormatId);
+                if (!ReferenceEquals(errorMessageDto, null))
+                    uploadErrorMessagesList.Add(errorMessageDto);
+                createJobList.Add(input);
+                jobsList.Add(Convert.ToInt32(datarow["No"]), input);
+            }
+            await CheckDuplicatesinExcel(createJobList, uploadErrorMessagesList);
+            await ValidateDuplicateRecords(jobsList, uploadErrorMessagesList);
+            if (uploadErrorMessagesList.Count < 1)
+                await InsertUploadedJobs(createJobList);
+            return uploadErrorMessagesList;
+        }
+
+        private async Task CheckDuplicatesinExcel(List<CreateJobUnitInput> accountsList, List<UploadErrorMessagesOutputDto> uploadErrorMessagesList)
+        {
+            UploadErrorMessagesOutputDto uploadErrorMessages;
+            var duplicateaccountNumberList = (from p in accountsList
+                                              group p by p.JobNumber into g
+                                              where g.Count() > 1
+                                              select new { g.Key }).ToList();
+            var duplicateAccountnumbers = string.Join(",", duplicateaccountNumberList.Select(p => p.Key).ToArray());
+            if (duplicateaccountNumberList.Count > 0)
+            {
+                uploadErrorMessages = new UploadErrorMessagesOutputDto()
+                {
+                    ErrorMessage = "Duplicate Job#:" + duplicateAccountnumbers
+                };
+                uploadErrorMessagesList.Add(uploadErrorMessages);
+            }
+            var duplicateDescriptionList = (from p in accountsList
+                                            group p by p.Caption into g
+                                            where g.Count() > 1
+                                            select new { g.Key }).ToList();
+            var duplicateAccountdescriptions = string.Join(",", duplicateDescriptionList.Select(p => p.Key).ToArray());
+            if (duplicateDescriptionList.Count > 0)
+            {
+                uploadErrorMessages = new UploadErrorMessagesOutputDto()
+                {
+                    ErrorMessage = "Duplicate JobName:" + duplicateAccountdescriptions
+                };
+                uploadErrorMessagesList.Add(uploadErrorMessages);
+            }
+        }
+        private async Task InsertUploadedJobs(List<CreateJobUnitInput> jobList)
+        {
+            foreach (var job in jobList)
+            {
+                await CreateJobUnit(job);
+            }
+        }
+
+        private async Task ValidateDuplicateRecords(Dictionary<int, CreateJobUnitInput> accountsList, List<UploadErrorMessagesOutputDto> uploadErrorMessagesList)
+        {
+            var jobs = accountsList.ToList().Select(p => p.Value).ToList();
+            var jobNumberList = string.Join(",", jobs.Select(p => p.JobNumber).ToArray());
+            var jobNameList = string.Join(",", jobs.Select(p => p.Caption).ToArray());
+
+            var duplicatejobList = await _jobUnitRepository.GetAll().Where(p => jobNumberList.Contains(p.JobNumber)
+             || jobNameList.Contains(p.Caption)).ToListAsync();
+
+            if (duplicatejobList.Count == 0)
+                return;
+
+            var duplicatejob1 = (from p in accountsList
+                                      join p2 in duplicatejobList on p.Value.Caption equals p2.Caption
+                                      select new { JobName = p.Value.Caption, JobNumber = p.Value.JobNumber, RowNumber = p.Key }).ToList();
+            var duplicatejob2 = (from p in accountsList
+                                      join p2 in duplicatejobList on p.Value.JobNumber equals p2.JobNumber
+                                      select new { JobName = p.Value.Caption, JobNumber = p.Value.JobNumber, RowNumber = p.Key }).ToList();
+
+
+            var duplicatejobs = duplicatejob1.Union(duplicatejob2).ToList();
+
+            foreach (var job in duplicatejobs)
+            {
+                var error = new StringBuilder();
+                error = error?.Append(!string.IsNullOrEmpty(job.JobNumber) ? job.JobNumber + " Duplicate JobNumber," : "");
+                error = error?.Append(!string.IsNullOrEmpty(job.JobName) ? job.JobName + " Duplicate JobName." : "");
+                var uploadErrorMessages = new UploadErrorMessagesOutputDto()
+                {
+                    ErrorMessage = error.ToString().TrimEnd(','),
+                    RowNumber = job.RowNumber
+                };
+                uploadErrorMessagesList.Add(uploadErrorMessages);
+            }
+        }
+
+
+        private UploadErrorMessagesOutputDto ValidateUploadedData(CreateJobUnitInput input, int rowNumber,int budgetFormatId)
+        {
+            UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = rowNumber };
+            DataValidator.CheckLength(input.JobNumber.Length, JobUnit.MaxJobNumberLength, L("JobNumber"), uploadErrorMessages);
+            DataValidator.CheckLength(input.Caption.Length, JobUnit.MaxJobNumberLength, L("JobName"), uploadErrorMessages);
+            DataValidator.RequiredValidataion(input.JobNumber, L("JobNumber"), uploadErrorMessages);
+            DataValidator.RequiredValidataion(input.Caption, L("JobName"), uploadErrorMessages);
+            DataValidator.RequiredValidataion(budgetFormatId, L("BudgetFormat"), uploadErrorMessages);
+            if (string.IsNullOrEmpty(uploadErrorMessages.ErrorMessage))
+                uploadErrorMessages = null;
+            else
+                uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage.TrimStart(',');
+            return uploadErrorMessages;
+
+        }
+
+
+
 
     }
 }

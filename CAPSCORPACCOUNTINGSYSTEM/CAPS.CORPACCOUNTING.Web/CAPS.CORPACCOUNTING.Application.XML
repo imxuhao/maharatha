@@ -3758,6 +3758,13 @@
             <param name="filters"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.Helper.ConvertToBoolean(System.String)">
+            <summary>
+            Converting string to bool
+            </summary>
+            <param name="flag"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Helpers.Sort">
             <summary>
             
@@ -6134,6 +6141,38 @@
             Get Account by Id
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ImportAccounts(System.Data.DataTable,System.Int32)">
+            <summary>
+            Importing the Accounts From Excel
+            </summary>
+            <param name="accountTable"></param>
+            <param name="coaId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CheckDuplicatesinExcel(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto})">
+            <summary>
+            Validating Excel Duplicates
+            </summary>
+            <param name="accountsList"></param>
+            <param name="uploadErrorMessagesList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ValidateDuplicateRecords(System.Collections.Generic.Dictionary{System.Int32,CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto})">
+            <summary>
+            Validating Duplicate records of uploaded data
+            </summary>
+            <param name="accountsList"></param>
+            <param name="uploadErrorMessagesList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ValidateUploadedData(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput,System.Int32)">
+            <summary>
+            Validating Required and Length of uploaded Data
+            </summary>
+            <param name="input"></param>
+            <param name="rowNumber"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">

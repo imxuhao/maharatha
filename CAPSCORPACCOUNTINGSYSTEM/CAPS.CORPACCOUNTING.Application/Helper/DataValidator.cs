@@ -1,4 +1,6 @@
-﻿using CAPS.CORPACCOUNTING.Uploads.Dto;
+﻿using System;
+using System.Reflection;
+using CAPS.CORPACCOUNTING.Uploads.Dto;
 
 namespace CAPS.CORPACCOUNTING.Helpers
 {
@@ -16,11 +18,25 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
         }
 
-        public static void RequiredValidataion(string property, string columnName,UploadErrorMessagesOutputDto uploadErrorMessages)
+        public static void RequiredValidataion<T>(T property, string columnName, UploadErrorMessagesOutputDto uploadErrorMessages)
         {
-            if (string.IsNullOrEmpty(property))
+            Type t = property.GetType();
+            switch (t.Name)
             {
-                uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage + ", " + columnName + " is Required";
+                case "Int32":
+                case "Int64":
+                case "Int16":
+                    if (Convert.ToInt16(property)==0)
+                    {
+                        uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage + ", " + columnName + " is Required";
+                    }
+                    break;
+                case "String":
+                    if (string.IsNullOrEmpty(property.ToString()))
+                    {
+                        uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage + ", " + columnName + " is Required";
+                    }
+                    break;
             }
         }
 

@@ -1137,5 +1137,12 @@
     <text name="ProcessPos" value="Are you sure? Do you really want to process selected PO(s)"/>
 <text name="ProcessSelected" value="Process selected"/>
     <text name="POProcessedSuccessfully" value="Selected PO(s) been processed successfully."/>
+    <text name="DuplicateAccountNumber" value="Duplicate AccountNumber,"/>
+    <text name="DuplicateDescription" value="Duplicate Description."/>
+    <text name="DuplicateAccountNumbers" value="Duplicate AccountNumbers:"/>
+    <text name="DuplicateDescriptions" value="Duplicate Descriptions:"/>
+    
+  
+
   </texts>
 </localizationDictionary>

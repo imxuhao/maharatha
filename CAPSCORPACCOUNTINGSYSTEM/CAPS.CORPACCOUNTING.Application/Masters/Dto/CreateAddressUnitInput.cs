@@ -58,7 +58,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the Email field. </summary>
         [StringLength(AddressUnit.MaxStringNameLength)]
-        [EmailAddress]
+        //[RegularExpression(@"(^$|^.*@.*\..*$)",ErrorMessage = "Invalid Email Address.")]
+        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z")]
         public string Email { get; set; }
 
         /// <summary>Gets or sets the Phone1 field. </summary>

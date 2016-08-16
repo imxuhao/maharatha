@@ -1326,6 +1326,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
+    <Compile Include="Migrations\Seed\DefaultSecurityGroupCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultTypeofUploadFileCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultCountryCreator.cs" />
     <Compile Include="Migrations\Seed\DefaultCurrencyCreator.cs" />

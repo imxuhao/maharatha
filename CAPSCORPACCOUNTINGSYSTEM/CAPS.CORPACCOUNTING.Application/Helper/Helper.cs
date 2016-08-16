@@ -303,5 +303,15 @@ namespace CAPS.CORPACCOUNTING.Helpers
 
         }
 
+        /// <summary>
+        /// Converting string to bool
+        /// </summary>
+        /// <param name="flag"></param>
+        /// <returns></returns>
+        public static bool ConvertToBoolean(string flag)
+        {
+            return flag.ToUpper() == "TRUE";
+
+        }
     }
 }

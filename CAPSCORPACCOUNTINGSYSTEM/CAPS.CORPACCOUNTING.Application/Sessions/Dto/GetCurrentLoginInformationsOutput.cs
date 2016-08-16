@@ -8,6 +8,6 @@ namespace CAPS.CORPACCOUNTING.Sessions.Dto
 
         public TenantLoginInfoDto Tenant { get; set; }
 
-        public long UserOrganizationId { get; set; }
+        public long? UserOrganizationId { get; set; }
     }
 }

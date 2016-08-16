@@ -1151,13 +1151,8 @@
     <text name="DuplicateJobNames" value="Duplicate JobNames:"/>
      <text name="DuplicateJobNumber" value=" Duplicate JobNumber,"/>
       <text name="DuplicateJobName" value=" Duplicate JobName." />
-    
-    
-    
-    
-    
-    
-  
-
+    <text name="EditAddress" value="Edit address"/>
+    <text name="CreateAddress" value="Create address"/>
+    <text name="ViewAddress" value="View address"/>
   </texts>
 </localizationDictionary>

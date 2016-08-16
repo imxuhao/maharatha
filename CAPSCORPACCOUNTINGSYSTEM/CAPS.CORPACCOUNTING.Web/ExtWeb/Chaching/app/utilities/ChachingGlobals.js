@@ -29,7 +29,7 @@
         Division: 6
     },
     SelectedUserId: 0,
-    defaultCompanyLogoImage: abp.appPath + 'Content/images/capslogo.png',
+    defaultCompanyLogoImage: abp.appPath + 'Common/Images/app-logo-on-light.png',
     defaultProfilePictureImage: abp.appPath + 'Common/Images/default-profile-picture.png',
     defaultGridPageSize : 10,
     defaultDateFormat: 'MM/DD/YYYY',

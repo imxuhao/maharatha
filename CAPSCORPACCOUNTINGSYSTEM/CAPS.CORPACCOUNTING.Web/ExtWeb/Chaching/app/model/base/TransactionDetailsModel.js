@@ -91,6 +91,8 @@ Ext.define('Chaching.model.base.TransactionDetailsModel', {
         { name: 'typeOfTransaction', type: 'string', defaultValue: 'APInvoice' },
          { name: 'typeOfAmountId', type: 'int', defaultValue: 1 },
         { name: 'typeOfAmount', type: 'string', defaultValue: 'StandardEntry' },
-        { name: 'SplitGroupCls', type: 'string' }//Temporary field for row coloring
+        { name: 'SplitGroupCls', type: 'string' },//Temporary field for row coloring.
+        { name: 'OriginalImportedAmount', type: 'float' },//Temporary field for amount calculation.
+        {name:'LocalSplitGroup',ytpe:'string'}//temporary field to identify un-saved split groups
     ]
 });

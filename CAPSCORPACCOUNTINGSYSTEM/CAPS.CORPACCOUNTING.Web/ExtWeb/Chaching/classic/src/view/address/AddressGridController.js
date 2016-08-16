@@ -1,6 +1,6 @@
 ﻿Ext.define('Chaching.view.address.AddressGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
-    alias: 'controller.address-addressgrid'
+    alias: 'controller.address-addressgrid',
     //doBeforeInlineAddUpdate: function (record) {
     //    var me = this,
     //        view = me.getView(),
@@ -49,4 +49,20 @@
     //    }
     //    return false;
     //}
+
+    doAfterCreateAction: function(createMode, formPanel, isEdit, record) {
+        var me = this,
+            view = me.getView(),
+            form = formPanel.down('form').getForm();
+
+        var addressType = form.findField('addressTypeId').getStore();
+        addressType.load();
+
+        var country = form.findField('country').getStore();
+        country.load();
+
+        var state = form.findField('state').getStore();
+        state.load();
+
+    }
 });

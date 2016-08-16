@@ -119,7 +119,8 @@
                                 }]
                             }, {
                                 columnWidth: 1,
-                                padding: '20 10 0 20',
+                                //padding: '20 10 0 20',
+                                layout:'fit',
                                 defaults: {
                                     labelAlign: 'top',
                                     blankText: app.localize('MandatoryToolTipText')

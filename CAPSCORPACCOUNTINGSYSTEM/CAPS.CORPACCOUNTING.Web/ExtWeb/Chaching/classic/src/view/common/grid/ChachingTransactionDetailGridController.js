@@ -145,6 +145,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
                     }
                 }
                 parentRecord.set('SplitGroupCls', lastUsedSplitGroupCls);
+                parentRecord.set('OriginalImportedAmount', parentRecord.get('amount'));
+                var localSplitGroup = me.numToChar(parentRecord.internalId);
                 Ext.suspendLayouts();
                 for (var i = 1; i < multiplyOf; i++) {
                     var rec = Ext.create(className);
@@ -158,7 +160,15 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
                     rec.set('creationTime', null);
                     rec.set('lastModificationTime', null);
                     rec.set('parentRec', parentRecord);
+                    rec.set('LocalSplitGroup', parentRecord.internalId + '-' + localSplitGroup);
                     gridStore.insert(parentIndex + 1, rec);
+                }
+                if (editor && editor.editingPlugin) {
+                    var cellEditing = editor.editingPlugin;
+                    cellEditing.completeEdit();
+                    parentRecord.set('SplitGroupCls', lastUsedSplitGroupCls);
+                    parentRecord.set('isAccountingItemSplit', true);
+                    parentRecord.set('LocalSplitGroup', parentRecord.internalId + '-' + localSplitGroup);
                 }
                 Ext.resumeLayouts();
                 //parentRecord.set('amount', (firstValue + +decimalAmount).toFixed(2));
@@ -169,6 +179,24 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
             else if (selectedRecords && selectedRecords.length > 1)
                 abp.notify.info(app.localize('SingleSplit'), app.localize('ValidationFailed'));
         }
+    },
+    numToChar: function (number) {
+        var numeric = (number - 1) % 26;
+        var letter = this.chr(65 + numeric);
+        var number2 = parseInt((number - 1) / 26);
+        if (number2 > 0) {
+            return this.numToChar(number2) + letter;
+        } else {
+            return letter;
+        }
+    },
+
+    chr: function (codePt) {
+        if (codePt > 0xFFFF) {
+            codePt -= 0x10000;
+            return String.fromCharCode(0xD800 + (codePt >> 10), 0xDC00 + (codePt & 0x3FF));
+        }
+        return String.fromCharCode(codePt);
     },
     onDetailsAmountChange: function(field, newValue, oldValue, eOpts) {
         var value = 0,
@@ -198,9 +226,32 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
     },
     onDetailsAmountFocus:function(field, e, eOpts) {
         if (field.getValue() === 0) {
-            field.value = 0;
-            field.setRawValue(null);
-            return;
+            var editor = field.up();
+            if (editor) {
+                var context = editor.context,
+                    record = context.record,
+                    detailStore = this.getView().getStore(),
+                    origImportedAmount = record.get('OriginalImportedAmount'),
+                    calculatedAmount = 0,
+                    amountRemains = 0;
+                if (record && record.get('isAccountingItemSplit')) {
+                    var groupRecords = detailStore.queryRecords('LocalSplitGroup',
+                            record.get('LocalSplitGroup'));
+                    if (groupRecords && groupRecords.length > 0) {
+                        for (var i = 0; i < groupRecords.length; i++) {
+                            var loopRec = groupRecords[i];
+                            if (record
+                                .internalId !==
+                                loopRec.internalId) calculatedAmount += parseFloat(loopRec.get('amount'));
+                        }
+                        amountRemains = parseFloat(origImportedAmount - calculatedAmount).toFixed(2);
+                        if (amountRemains >=0) {
+                            field.setValue(amountRemains);
+                            record.set('amount', amountRemains);
+                        }
+                    }
+                }
+            }
         }
     },
     beforeAccountQuery: function (queryPlan, eOpts) {

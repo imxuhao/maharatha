@@ -85,6 +85,8 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGridContro
                     }
                 }
                 parentRecord.set('SplitGroupCls', lastUsedSplitGroupCls);
+                parentRecord.set('OriginalImportedAmount', parentRecord.get('amount'));
+                var localSplitGroup = me.numToChar(parentRecord.internalId);
                 Ext.suspendLayouts();
                 for (var i = 1; i < multiplyOf; i++) {
                     var rec = Ext.create(className);
@@ -100,7 +102,15 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGridContro
                     rec.set('creationTime', null);
                     rec.set('lastModificationTime', null);
                     rec.set('parentRec', parentRecord);
+                    rec.set('LocalSplitGroup', parentRecord.internalId + '-' + localSplitGroup);
                     gridStore.insert(parentIndex + 1, rec);
+                }
+                if (editor && editor.editingPlugin) {
+                    var cellEditing = editor.editingPlugin;
+                    cellEditing.completeEdit();
+                    parentRecord.set('SplitGroupCls', lastUsedSplitGroupCls);
+                    parentRecord.set('isAccountingItemSplit', true);
+                    parentRecord.set('LocalSplitGroup', parentRecord.internalId + '-' + localSplitGroup);
                 }
                 Ext.resumeLayouts();
                 //parentRecord.set('amount', (firstValue + +decimalAmount).toFixed(2));
@@ -111,7 +121,6 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGridContro
             else if (selectedRecords && selectedRecords.length > 1)
                 abp.notify.info(app.localize('SingleSplit'), app.localize('ValidationFailed'));
         }
-        view.getView().refresh();
     },
     beforeAccountQuery: function (queryPlan, eOpts) {
         var me = this,

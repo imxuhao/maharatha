@@ -3822,8 +3822,12 @@
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingReplicator.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSelectionModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\components\selection\ChachingSpreadsheetModel.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressView.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\address\AddressViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\companysetup\CompanyLogoForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\companysetup\CompanyLogoFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\administration\companysetup\CompanyLogoView.js" />

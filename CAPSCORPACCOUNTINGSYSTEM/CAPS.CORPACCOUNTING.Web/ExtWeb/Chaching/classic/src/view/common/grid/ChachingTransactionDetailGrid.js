@@ -363,16 +363,17 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 text: app.localize('Amount').initCap(),
                 renderer: Chaching.utilities.ChachingRenderers.amountsRenderer,
                 summaryRenderer: Chaching.utilities.ChachingRenderers.amountSummaryRenderer,
-                isMandatory:true,
+                isMandatory: true,
                 filterField: {
                     xtype: 'numberfield',
                     hideTrigger: true,
                     emptyText: app.localize('ToolTipAmount')
                 },editor: {
                     xtype: 'numberfield',
+                    selectOnFocus: true,
                     hideTrigger:true,
                     listeners: {
-                        change: 'onDetailsAmountChange',
+                        //change: 'onDetailsAmountChange',
                         focus: 'onDetailsAmountFocus',
                         scope:'controller'
                     }

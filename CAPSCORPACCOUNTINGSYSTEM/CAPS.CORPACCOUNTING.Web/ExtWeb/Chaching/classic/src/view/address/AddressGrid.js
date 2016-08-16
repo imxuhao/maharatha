@@ -35,16 +35,29 @@
     requireMultisort: false,
     isEditable: true,
     editingMode: 'cell',
-    createNewMode: 'inline',
+    createNewMode: 'popup',
     columnLines: true,
     multiColumnSort: false,
     manageViewSetting: false,
     showPagingToolbar: false,
     hideClearFilter: true,
+    editWndTitleConfig: {
+        title: app.localize('EditAddress'),
+        iconCls: 'fa fa-pencil'
+    },
+    createWndTitleConfig: {
+        title: app.localize('CreateAddress'),
+        iconCls: 'fa fa-plus'
+    },
+    viewWndTitleConfig: {
+        title: app.localize('ViewAddress'),
+        iconCls: 'fa fa-th'
+    },
     columns: [
     {
         text: app.localize('Primary'),
         xtype: 'checkcolumn', dataIndex: 'isPrimary',
+        width:'6%',
         listeners: {
             checkchange: function (column, recordIndex, checked) {
                 var store = this.up('grid').getStore();
@@ -63,7 +76,7 @@
          dataIndex: 'addressType',
          sortable: true,
          groupable: true,
-         width: '15%',
+         width: '6%',
          editor: {
              xtype: 'combobox',
              valueField: 'addressTypeId',
@@ -79,7 +92,7 @@
              sortable: false,
              groupable: false,
              //flex:1,
-             width: '10%',
+             width: '8%',
              editor: {
                  xtype: 'textfield',
                  name: 'line1'
@@ -92,7 +105,7 @@
               sortable: false,
               groupable: false,
               //flex:1,
-              width: '13%',
+              width: '8%',
               editor: {
                   xtype: 'textfield',
                   name: 'line2'
@@ -106,7 +119,7 @@
               sortable: false,
               groupable: false,
               //flex:1,
-              width: '13%',
+              width: '8%',
               editor: {
                   xtype: 'textfield',
                   name: 'line3'
@@ -119,7 +132,7 @@
                sortable: false,
                groupable: false,
                //flex:1,
-               width: '13%',
+               width: '8%',
                editor: {
                    xtype: 'textfield',
                    name: 'line3'
@@ -132,7 +145,7 @@
               sortable: false,
               groupable: false,
               //flex:1,
-              width: '10%',
+              width: '8%',
               editor: {
                   xtype: 'textfield',
                   name: 'postalCode'
@@ -146,7 +159,7 @@
               sortable: false,
               groupable: false,
               //flex:1,
-              width: '10%',
+              width: '5%',
               editor: {
                   xtype: 'textfield',
                   name: 'city'
@@ -157,7 +170,7 @@
               dataIndex: 'state',
               sortable: true,
               groupable: true,
-              width: '12%',
+              width: '10%',
               editor: {
                   xtype: 'combobox',
                   valueField: 'stateId',
@@ -174,7 +187,7 @@
                sortable: false,
                groupable: false,
                //flex:1,
-               width: '10%',
+               width: '8%',
                editor: {
                    xtype: 'textfield',
                    name: 'phone1'

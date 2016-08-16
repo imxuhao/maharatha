@@ -31,7 +31,7 @@
                 Ext.Array.each(selectedPermissions, function (rec) {
                     grantedPermissionNames.push(rec.get('name'));
                 });
-                //var treeStore = treePanel.getStore();
+                var treeStore = treePanel.getStore();
                 //treeStore.removeAll();
                 //var userId = treeStore.getProxy().extraParams.id;
                 //treeStore.getProxy().setExtraParam('userId', userId);

@@ -158,8 +158,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 labelAlign: 'right',
                                                 inputValue: true,
                                                 uncheckedValue: false,
-                                                checked: false,
-                                                readOnly: true,
+                                                checked: true,
                                                 boxLabelCls: 'checkboxLabel'
                                             }
                                         ]

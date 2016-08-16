@@ -267,7 +267,7 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
                 //setting the security flag for LineSecurity
                 //if the loggedin user is assigned any LineSecurity(ProjectCoa) this flag will be true
                 bool lineSecurityFlag =
-                   (from account in projectList.ToList().Where(p => p.IsDivision == false)
+                   (from account in accountList.ToList().Where(p => p.IsCorporate == false)
                     join userorganization in userorganizationList.Where(p => p.EntityClassification == EntityClassification.Line) on account.OrganizationUnitId equals
                          userorganization.OrganizationUnitId
                     select account).Any();

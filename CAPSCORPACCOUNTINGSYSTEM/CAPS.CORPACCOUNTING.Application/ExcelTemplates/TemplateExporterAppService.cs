@@ -16,17 +16,33 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
     public class TemplateExporterAppService : CORPACCOUNTINGServiceBase, ITemplateExporterAppService
     {
 
-        private readonly ITemplate _accountsTemplate;
-        private readonly JobsTemplate _jobsTemplate;
-        
+        private readonly AccountsTemplate _accountsTemplate;
+        private readonly ProjectsTemplate _projectsTemplate;
+        private readonly LinesTemplate _linesTemplate;
+        private readonly DivisionTemplate _divisionsTemplate;
 
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="accountsTemplate"></param>
-        public TemplateExporterAppService(AccountsTemplate accountsTemplate, JobsTemplate jobsTemplate)
+        /// <param name="projectsTemplate"></param>
+        /// <param name="divisionsTemplate"></param>
+        /// <param name="linesTemplate"></param>
+        public TemplateExporterAppService(AccountsTemplate accountsTemplate,
+            ProjectsTemplate projectsTemplate,
+              DivisionTemplate divisionsTemplate,
+                LinesTemplate linesTemplate
+
+
+            )
         {
             _accountsTemplate = accountsTemplate;
-            _jobsTemplate = jobsTemplate;
-           
+            _projectsTemplate = projectsTemplate;
+            _divisionsTemplate = divisionsTemplate;
+            _linesTemplate = linesTemplate;
+
         }
         /// <summary>
         /// 
@@ -42,7 +58,13 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                     fileDto = await _accountsTemplate.DownLoadTemplate(input.CoaId.Value);
                     break;
                 case "Projects":
-                    fileDto = await _jobsTemplate.DownLoadTemplate(0);
+                    fileDto = await _projectsTemplate.DownLoadTemplate(0);
+                    break;
+                case "Divisions":
+                    fileDto = await _divisionsTemplate.DownLoadTemplate(0);
+                    break;
+                case "Lines":
+                    fileDto = await _linesTemplate.DownLoadTemplate(0);
                     break;
             }
 

@@ -1125,7 +1125,12 @@
     <text name="RequiredField" value="Field is Required" />
     <text name="ValidationMessage" value="Validation Error" />
     <text name="AccountsTemplate" value="Accounts Template" />
+    <text name="LinesTemplate" value="Lines Template" />
+    <text name="AllowDuplicateVaues" value="It should not allow duplicate values" />
+    <text name="ExcelDropDownListErrorMsg" value="Select a value from the list" />
     <text name="JobTemplate" value="Job Template" />
+    <text name="ProjectTemplate" value="Project Template" />
+    <text name="DivisionTemplate" value="Division Template" />
 
     <text name="RecentPayables" value="Recent Payables" />
     <text name="Payments" value="Payments" />
@@ -1135,7 +1140,7 @@
     <text name="Desciption" value="Desciption" />
     <text name="RemainingAmount" value="Rem Amt" />
     <text name="ProcessPos" value="Are you sure? Do you really want to process selected PO(s)"/>
-<text name="ProcessSelected" value="Process selected"/>
+    <text name="ProcessSelected" value="Process selected"/>
     <text name="POProcessedSuccessfully" value="Selected PO(s) been processed successfully."/>
     <text name="Rownumber" value="Row Number"/>
     <text name="DuplicateAccountNumber" value="Duplicate AccountNumber,"/>

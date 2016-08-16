@@ -126,7 +126,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                   CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
 
             //appy User have restrictions
-            if (_customAppSession.HasGLRestrictions)
+            if (_customAppSession.HasProjectRestriction || _customAppSession.HasDivisionRestriction)
             {
                 var strEntityClassification = string.Join(",", new string[] { EntityClassification.Division.ToDescription(), EntityClassification.Project.ToDescription() });
                 expDivisionCache = ExpressionBuilder.GetExpression<DivisionCacheItem>(await GetEntityAccessFilter(strEntityClassification)).Compile();
@@ -154,7 +154,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
                  CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId), input.OrganizationUnitId), input);
 
             //appy User have restrictions
-            if (_customAppSession.HasGLRestrictions)
+            if (_customAppSession.HasGLRestrictions || _customAppSession.HasLineRestrictions)
             {
                 var strEntityClassification = string.Join(",", new string[] { EntityClassification.Account.ToDescription(), EntityClassification.Line.ToDescription() });
                 expAccountCache = ExpressionBuilder.GetExpression<AccountCacheItem>(await GetEntityAccessFilter(strEntityClassification)).Compile();

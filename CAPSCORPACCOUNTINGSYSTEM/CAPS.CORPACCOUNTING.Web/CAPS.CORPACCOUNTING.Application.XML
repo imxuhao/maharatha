@@ -2855,6 +2855,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.DivisionTemplate.#ctor(CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService,CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService)">
+            <summary>
+            
+            </summary>
+            <param name="jobUnitAppService"></param>
+            <param name="accountUnitAppService"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.DivisionTemplate.DownLoadTemplate(System.Int32)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Dto.TemplateInputUnit.EntityName">
             <summary>Gets or sets the entityName field. </summary>  
         </member>
@@ -2923,7 +2936,7 @@
             <param name="listName"></param>
             <param name="columnNumber"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(OfficeOpenXml.ExcelWorksheet,System.String,System.Int32,System.Int32,System.Int32)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.String,System.Int32,System.Int32,System.Int32)">
             <summary>
             
             </summary>
@@ -2932,8 +2945,9 @@
             <param name="startRowIndex"></param>
             <param name="endRowIndex"></param>
             <param name="excelColumn"></param>
+             <param name="excelProperties"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddMaxLengthValidationtoSheet(OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.Int32,System.Int32,System.Int32)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.Int32,System.Int32,System.Int32)">
             <summary>
             
             </summary>
@@ -2985,6 +2999,16 @@
             <param name="validationList"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetDuplicateCellFormula(System.String,System.Int32,System.Int32)">
+            <summary>
+            =COUNTIF($A$2:$A$20,A2)
+            Refer other sheet data as Dropdown list values in Cells
+            </summary>
+            <param name="cellColumn"></param>
+            <param name="lstFromRange"></param>
+            <param name="lstEndRange"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.ApplyPlaceHolderValues(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             
@@ -3012,14 +3036,31 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate.#ctor(CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService,CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.LinesTemplate.#ctor(CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService,CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService)">
+            <summary>
+            
+            </summary>
+            <param name="accountUnitAppService"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.LinesTemplate.DownLoadTemplate(System.Int32)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ProjectsTemplate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ProjectsTemplate.#ctor(CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService,CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService)">
             <summary>
             
             </summary>
             <param name="jobUnitAppService"></param>
             <param name="accountUnitAppService"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate.DownLoadTemplate(System.Int32)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ProjectsTemplate.DownLoadTemplate(System.Int32)">
             <summary>
             
             </summary>
@@ -3030,8 +3071,14 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.TemplateExporterAppService.#ctor(CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate,CAPS.CORPACCOUNTING.ExcelTemplates.JobsTemplate)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.TemplateExporterAppService.#ctor(CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate,CAPS.CORPACCOUNTING.ExcelTemplates.ProjectsTemplate,CAPS.CORPACCOUNTING.ExcelTemplates.DivisionTemplate,CAPS.CORPACCOUNTING.ExcelTemplates.LinesTemplate)">
+            <summary>
+            
+            </summary>
             <param name="accountsTemplate"></param>
+            <param name="projectsTemplate"></param>
+            <param name="divisionsTemplate"></param>
+            <param name="linesTemplate"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.TemplateExporterAppService.GetTemplateByEntity(CAPS.CORPACCOUNTING.ExcelTemplates.Dto.TemplateInputUnit)">
             <summary>

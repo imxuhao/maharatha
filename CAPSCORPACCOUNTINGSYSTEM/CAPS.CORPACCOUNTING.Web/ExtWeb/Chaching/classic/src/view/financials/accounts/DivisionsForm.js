@@ -71,7 +71,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
                      name: 'caption',
                      itemId: 'caption',
                      allowBlank: false,
-                     fieldLabel: app.localize('description').initCap(),
+                     fieldLabel: app.localize('Description').initCap(),
                      width: '100%',
                      ui: 'fieldLabelTop',
                      emptyText: app.localize('MandatoryField')

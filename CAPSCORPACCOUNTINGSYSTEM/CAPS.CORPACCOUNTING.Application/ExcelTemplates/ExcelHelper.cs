@@ -231,6 +231,31 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             //validation.Formula.ExcelFormula = "B2:B4";
         }
 
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="sheet"></param>
+        ///// <param name="excelFormula"></param>
+        ///// <param name="startRowIndex"></param>
+        ///// <param name="endRowIndex"></param>
+        ///// <param name="excelColumn"></param>
+        //public static void AddDropDownValidationToSheet(ExcelWorksheet sheet, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn)
+        //{
+        //    var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddListDataValidation();
+        //    validation.ShowErrorMessage = true;
+        //    validation.ErrorStyle = ExcelDataValidationWarningStyle.warning;
+        //    validation.ErrorTitle = "An invalid value was entered";
+        //    validation.Error = "Select a value from the list";
+        //    validation.Formula.ExcelFormula = excelFormula;
+        //    //validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
+        //    //validation.ErrorStyle = excelProperties.ErrorStyle;
+        //    //validation.ErrorTitle = excelProperties.ErrorTitle;
+        //    //validation.Error = excelProperties.Error;
+        //    //validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
+        //}
+
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -239,13 +264,14 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="startRowIndex"></param>
         /// <param name="endRowIndex"></param>
         /// <param name="excelColumn"></param>
-        public static void AddDropDownValidationToSheet(ExcelWorksheet sheet, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn)
+        ///  <param name="excelProperties"></param>
+        public static void AddDropDownValidationToSheet(ExcelWorksheet sheet, ExcelProperites excelProperties, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn)
         {
             var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddListDataValidation();
-            validation.ShowErrorMessage = true;
-            validation.ErrorStyle = ExcelDataValidationWarningStyle.warning;
-            validation.ErrorTitle = "An invalid value was entered";
-            validation.Error = "Select a value from the list";
+            validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
+            validation.ErrorStyle = excelProperties.ErrorStyle;
+            validation.ErrorTitle = excelProperties.ErrorTitle;
+            validation.Error = excelProperties.Error;
             validation.Formula.ExcelFormula = excelFormula;
             //validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
             //validation.ErrorStyle = excelProperties.ErrorStyle;
@@ -262,7 +288,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="startRowIndex"></param>
         /// <param name="endRowIndex"></param>
         /// <param name="excelColumn"></param>
-        public static void AddMaxLengthValidationtoSheet(ExcelWorksheet sheet, ExcelProperites excelProperties, int startRowIndex, int endRowIndex, int excelColumn)
+        public static void AddValidationtoSheet(ExcelWorksheet sheet, ExcelProperites excelProperties, int startRowIndex, int endRowIndex, int excelColumn)
         {
             var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddCustomDataValidation();
             validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
@@ -272,47 +298,6 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
         }
 
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public static void AddTemplateObjects(ExcelPackage excelPackage,ExcelWorksheet sheet, int startRowIndex, int endRowIndex, params ExcelFields[] propertySelectors)
-        //{
-        //    var listDataSheet = excelPackage.Workbook.Worksheets.Add(listDataExcelSheet);
-        //    for (int j = 0; j <= propertySelectors.Length - 1; j++)
-        //    {
-        //        var columnName = propertySelectors[j].ColumnName;
-        //        if (propertySelectors[j].Type == "dropdown")
-        //        {
-        //            if (propertySelectors[j].List.Count > 0)
-        //            {
-        //                AddListDataIntoWorkSheet(listDataSheet, propertySelectors[j].List, columnName, j + 1);
-        //                var excelFormula = GetDropDownListFormula(listDataExcelSheet, "A", 2, propertySelectors[j].List.Count + 2);
-
-
-        //                var validation = sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].DataValidation.AddListDataValidation();
-        //                validation.ShowErrorMessage = true;
-        //                validation.ErrorStyle = ExcelDataValidationWarningStyle.warning;
-        //                validation.ErrorTitle = "An invalid value was entered";
-        //                validation.Error = "Select a value from the list";
-        //                validation.Formula.ExcelFormula = excelFormula;
-        //            }
-
-        //        }
-        //        else if (!propertySelectors[j].IsEditable)
-        //        {
-        //            sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].Style.Locked = true;
-        //            sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
-        //            sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].Style.Fill.BackgroundColor.SetColor(Color.LightGray);
-        //        }
-        //        else
-        //        {
-        //            sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].Value = "";
-        //        }
-        //    }
-
-
-        //}
 
         /// <summary>
         /// =Sheet2!$A$1:$A$4
@@ -380,9 +365,24 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             strBuild.Append("AND(");
             foreach (var item in validationList)
             {
+                if(!string.IsNullOrEmpty(item))
                 strBuild.Append(item+",");
             }
             return strBuild.ToString().TrimEnd(',')+")";
+        }
+
+
+        /// <summary>
+        /// =COUNTIF($A$2:$A$20,A2)
+        /// Refer other sheet data as Dropdown list values in Cells
+        /// </summary>
+        /// <param name="cellColumn"></param>
+        /// <param name="lstFromRange"></param>
+        /// <param name="lstEndRange"></param>
+        /// <returns></returns>
+        public static string GetDuplicateCellFormula(string cellColumn, int lstFromRange, int lstEndRange)
+        {
+            return "COUNTIF(" + "$" + cellColumn + "$" + lstFromRange + ":" + "$" + cellColumn + "$" + lstEndRange+","+cellColumn+ lstFromRange+")=1";
         }
 
         /// <summary>

@@ -31,7 +31,10 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
           checkPermission: true,
           iconCls: 'fa fa-plus',
           iconAlign: 'left'
-      }],
+      }], importConfig: {
+          entity: 'Divisions',
+          isRequireImport: true
+      },
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,

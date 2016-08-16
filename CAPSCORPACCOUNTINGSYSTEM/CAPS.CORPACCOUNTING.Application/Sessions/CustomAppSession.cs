@@ -71,7 +71,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
             {
                 var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
-                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.HasProjectRestriction);
 
                 return tenantClaim != null && Convert.ToBoolean(tenantClaim.Value);
             }
@@ -86,7 +86,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
             {
                 var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
-                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == ClaimKeys.HasDivisionRestriction);
 
                 return tenantClaim != null && Convert.ToBoolean(tenantClaim.Value);
             }
@@ -100,7 +100,7 @@ namespace CAPS.CORPACCOUNTING.Sessions
             {
                 var claimsPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
 
-                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type == "HasGLRestrictions");
+                var tenantClaim = claimsPrincipal?.Claims.FirstOrDefault(c => c.Type ==ClaimKeys.HasBankRestriction);
 
                 return tenantClaim != null && Convert.ToBoolean(tenantClaim.Value);
             }

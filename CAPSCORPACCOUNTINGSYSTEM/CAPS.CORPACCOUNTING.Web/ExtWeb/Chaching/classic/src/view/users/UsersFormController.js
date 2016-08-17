@@ -6,7 +6,7 @@
         if (combo.getValue() != undefined) {
             me.getLinesByProjectCoa(combo.getValue());
         }
-        
+
     },
     getLinesByProjectCoa: function (chartOfAccountId) {
         var me = this,
@@ -77,14 +77,13 @@
             treePanel.setHidden(false);
             var treeStore = treePanel.getStore();
             var proxy = treeStore.getProxy();
-            proxy.api.read = abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole';
             if (treePanel.itemId === 'permissionsListItemId') {
                 treeStore.getProxy().setExtraParam('tenantId', abp.session.tenantId);
-                treeStore.getProxy().setExtraParam('roleId', record.get('id'));
+                treeStore.getProxy().setExtraParam('id', record.get('id'));
             }
             else {
                 treeStore.getProxy().setExtraParam('tenantId', record.get('tenantId'));
-                treeStore.getProxy().setExtraParam('roleId', record.get('roleId'));
+                treeStore.getProxy().setExtraParam('id', record.get('roleId'));
             }
             treeStore.reload();
         }
@@ -102,7 +101,7 @@
             divisionDragDropControl = view.down('chachingGridDragDrop[itemId=divisionSecurityGridItemId]'),
             creditCardDragDropControl = view.down('chachingGridDragDrop[itemId=creditCardSecurityGridItemId]'),
             bankDragDropControl = view.down('chachingGridDragDrop[itemId=bankSecurityGridItemId]');
-                
+
         if (treePanel) {
             treePanel.setHeight(newHeight - 100);
         }
@@ -133,7 +132,7 @@
         if (divisionDragDropControl) {
             divisionDragDropControl.setHeight(newHeight - 100);
         }
-        
+
     },
     loadCompanyRoles: function (view, record, item, index, e, eOpts) {
         var me = this,
@@ -170,7 +169,7 @@
             request.userIdList.push(ChachingGlobals.SelectedUserId);
             corporateRightStore.clearFilter();
             if (corporateRightStore.getUpdatedRecords().length > 0 || corporateRightStore.getRemovedRecords().length > 0) {
-                corporateRightStore.each(function(records, obj, count) {
+                corporateRightStore.each(function (records, obj, count) {
                     request.accountAccessList.push({
                         accountId: records.get('accountId'),
                         accountNumber: records.get('accountNumber'),
@@ -182,7 +181,7 @@
             projectCoaRightStore.clearFilter();
             if (projectCoaRightStore.getUpdatedRecords().length > 0 || projectCoaRightStore.getRemovedRecords().length > 0) {
                 request.accountAccessList = [];
-                projectCoaRightStore.each(function(records, obj, count) {
+                projectCoaRightStore.each(function (records, obj, count) {
                     request.accountAccessList.push({
                         accountId: records.get('accountId'),
                         accountNumber: records.get('accountNumber'),
@@ -194,7 +193,7 @@
             projectRightStore.clearFilter();
             if (projectRightStore.getUpdatedRecords().length > 0 || projectRightStore.getRemovedRecords().length > 0) {
                 request.projectAccessList = [];
-                projectRightStore.each(function(records, obj, count) {
+                projectRightStore.each(function (records, obj, count) {
                     request.projectAccessList.push({
                         jobId: records.get('jobId'),
                         jobNumber: records.get('jobNumber'),
@@ -207,7 +206,7 @@
             divisionRightStore.clearFilter();
             if (divisionRightStore.getUpdatedRecords().length > 0 || divisionRightStore.getRemovedRecords().length > 0) {
                 request.projectAccessList = [];
-                divisionRightStore.each(function(records, obj, count) {
+                divisionRightStore.each(function (records, obj, count) {
                     request.projectAccessList.push({
                         jobId: records.get('jobId'),
                         jobNumber: records.get('jobNumber'),
@@ -219,7 +218,7 @@
             }
             creditCardRightStore.clearFilter();
             if (creditCardRightStore.getUpdatedRecords().length > 0 || creditCardRightStore.getRemovedRecords().length > 0) {
-                creditCardRightStore.each(function(records, obj, count) {
+                creditCardRightStore.each(function (records, obj, count) {
                     request.creditCardAccessList.push({
                         accountingDocumentId: records.get('accountingDocumentId'),
                         cardHolderName: records.get('cardHolderName'),
@@ -231,7 +230,7 @@
             }
             bankRightStore.clearFilter();
             if (bankRightStore.getUpdatedRecords().length > 0 || bankRightStore.getRemovedRecords().length > 0) {
-                bankRightStore.each(function(records, obj, count) {
+                bankRightStore.each(function (records, obj, count) {
                     request.bankAccountAccessList.push({
                         bankAccountId: records.get('bankAccountId'),
                         bankName: records.get('bankName'),
@@ -255,8 +254,8 @@
             rolesListArray.push(rec.get('name'));
         });
         record.data.assignedRoleNames = rolesListArray;
-       
-        var tenantListArray=[],
+
+        var tenantListArray = [],
             CompanyRolesArray = [],
             gridPanel = view.down('gridpanel[itemId=companyListGridItemId]'),
             gridStore = gridPanel.getStore(),
@@ -275,7 +274,7 @@
             }
 
         });
-            
+
         record.data.tenantList = (tenantListArray.length > 0 ? CompanyRolesArray.concat(tenantListArray) : CompanyRolesArray);
 
         return record;
@@ -297,39 +296,39 @@
         password.reset();
         passwordRepeat.reset();
     },
-    getCompanyRoles: function(companyListRecords){
+    getCompanyRoles: function (companyListRecords) {
         var tenantListArray = [],
             tempList = [],
             roleId = [],
             roleName = [];
 
-            var isNewItem = false;
-            Ext.each(companyListRecords, function (rec) {
-                roleId.push(rec.get('roleId'));
-                roleName.push(rec.get('roleName'));
-                tempList.push({ tenantId: rec.get('tenantId'), tenantName: rec.get('tenantName'), roleIds: roleId, roleNames: roleName });
-                if (tenantListArray.length > 0) {
-                    for (var i = 0; i < tenantListArray.length; i++) {
-                        if (tempList[0].tenantId === tenantListArray[i].tenantId) {
-                            tenantListArray[i].roleIds.push(tempList[0].roleIds[0]);
-                            tenantListArray[i].roleNames.push(tempList[0].roleNames[0]);
-                            isNewItem = false;
-                            break;
-                        }
-                        else {
-                            isNewItem = true;
-                        }
+        var isNewItem = false;
+        Ext.each(companyListRecords, function (rec) {
+            roleId.push(rec.get('roleId'));
+            roleName.push(rec.get('roleName'));
+            tempList.push({ tenantId: rec.get('tenantId'), tenantName: rec.get('tenantName'), roleIds: roleId, roleNames: roleName });
+            if (tenantListArray.length > 0) {
+                for (var i = 0; i < tenantListArray.length; i++) {
+                    if (tempList[0].tenantId === tenantListArray[i].tenantId) {
+                        tenantListArray[i].roleIds.push(tempList[0].roleIds[0]);
+                        tenantListArray[i].roleNames.push(tempList[0].roleNames[0]);
+                        isNewItem = false;
+                        break;
+                    }
+                    else {
+                        isNewItem = true;
                     }
                 }
-                else {
-                    tenantListArray = tempList;
-                }
-                if (isNewItem) {
-                    tenantListArray.push({ tenantId: tempList[0].tenantId, tenantName: tempList[0].tenantName, roleIds: tempList[0].roleIds, roleNames: tempList[0].roleNames });
-                }
-                tempList = []; roleId = []; roleName = [];
-            });
-            return tenantListArray;
+            }
+            else {
+                tenantListArray = tempList;
+            }
+            if (isNewItem) {
+                tenantListArray.push({ tenantId: tempList[0].tenantId, tenantName: tempList[0].tenantName, roleIds: tempList[0].roleIds, roleNames: tempList[0].roleNames });
+            }
+            tempList = []; roleId = []; roleName = [];
+        });
+        return tenantListArray;
 
     },
     callAjaxService: function (url, request) {
@@ -339,6 +338,9 @@
             success: function (response) { },
             failure: function (response, a, b) { }
         });
+    },
+    disableCheckBox: function (node, checked, e, eOpts) {
+        return false;
     }
-
+    
 });

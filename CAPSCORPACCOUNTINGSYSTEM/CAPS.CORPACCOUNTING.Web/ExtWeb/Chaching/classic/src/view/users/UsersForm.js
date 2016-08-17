@@ -288,7 +288,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 dataIndex: 'displayName',
                                                 flex: 1
                                             }
-                                        ]
+                                        ],
+                                        listeners: {
+                                            'beforecheckchange': 'disableCheckBox'
+                                        }
                                     }
                                 ]
                             }, {
@@ -356,7 +359,7 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 dataIndex: 'displayName',
                                                 flex: 1
                                             }
-                                        ]
+                                        ]                                        
                                     }
                                 ]
                             }

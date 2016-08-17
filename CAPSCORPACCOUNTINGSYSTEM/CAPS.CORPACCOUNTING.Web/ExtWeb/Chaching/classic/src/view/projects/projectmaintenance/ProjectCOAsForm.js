@@ -39,6 +39,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             xtype: 'textfield',
             name: 'caption',
             itemId: 'caption',
+            tabIndex: 1,
             allowBlank: false,
             fieldLabel: app.localize('Caption').initCap(),
             width: '100%',
@@ -49,6 +50,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             name: 'description',
             itemId: 'description',
             allowBlank: false,
+            tabIndex: 3,
             fieldLabel: app.localize('description').initCap() ,
             width: '100%',
             ui: 'fieldLabelTop',
@@ -59,6 +61,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             name: 'isApproved',
             labelAlign: 'right',
             inputValue: true,
+            tabIndex: 5,
             checked: true,
             boxLabelCls: 'checkboxLabel',
             hidden: false
@@ -68,6 +71,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             name: 'isPrivate',
             labelAlign: 'right',
             inputValue: true,
+            tabIndex: 6,
             checked: true,
             boxLabelCls: 'checkboxLabel',
             hidden: false
@@ -88,6 +92,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             store: new Chaching.store.utilities.autofill.JobDivisionStore(),
             ui: 'fieldLabelTop',
             width: '100%',
+            tabIndex: 2,
             valueField: 'jobId',
             displayField: 'jobNumber',
             queryMode: 'remote',
@@ -138,6 +143,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             name: 'rollupAccountId',
             valueField: 'accountId',
             displayField: 'accountNumber',
+            tabIndex: 4,
             queryMode: 'remote',
             minChars: 2,
             useDisplayFieldToSearch: true,
@@ -173,6 +179,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsForm',{
             name: 'isNumeric',
             labelAlign: 'right',
             inputValue: true,
+            tabIndex: 7,
             checked: true,
             boxLabelCls: 'checkboxLabel'
         }]

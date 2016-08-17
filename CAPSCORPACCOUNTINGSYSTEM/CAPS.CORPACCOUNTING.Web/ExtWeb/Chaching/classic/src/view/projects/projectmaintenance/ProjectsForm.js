@@ -38,6 +38,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
     titleConfig: {
         title: abp.localization.localize("CreateNewProject").initCap()
     },
+    defaultFocus: 'textfield#jobNumber',
     popupWndSize: {
         height:'90%',
         width:'90%'

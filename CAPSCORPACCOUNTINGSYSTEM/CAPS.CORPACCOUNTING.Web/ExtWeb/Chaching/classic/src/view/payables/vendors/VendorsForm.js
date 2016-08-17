@@ -48,6 +48,7 @@
                         itemId: 'lastName',
                         allowBlank: false,
                         fieldLabel: app.localize('CompanyName').initCap(),
+                        tabIndex: 1,
                         width: '100%',
                         ui: 'fieldLabelTop',
                         emptyText: app.localize('MandatoryField')
@@ -57,6 +58,7 @@
                              name: 'vendorNumber',
                              itemId: 'vendorNumber',
                              fieldLabel: app.localize('VendorNumber').initCap(),
+                             tabIndex: 4,
                              width: '100%',
                              ui: 'fieldLabelTop'
                          }
@@ -75,11 +77,13 @@
                         itemId: 'firstName',
                         fieldLabel: app.localize('PayToName').initCap(),
                         width: '100%',
+                        tabIndex: 2,
                         ui: 'fieldLabelTop'
                     }, {
                         xtype: 'textfield',
                         name: 'billingAccount',
                         itemId: 'billingAccount',
+                        tabIndex: 5,
                         fieldLabel: app.localize('BillingAccount').initCap(),
                         width: '100%',
                         ui: 'fieldLabelTop'
@@ -99,6 +103,7 @@
                                     labelWidth : 70,
                                     width: '100%',
                                     ui: 'fieldLabelTop',
+                                    tabIndex: 3,
                                     displayField: 'typeofvendor',
                                     valueField: 'typeofvendorId',
                                     emptyText: app.localize('SelectOption'),
@@ -111,6 +116,7 @@
                                     name: 'isActive',
                                     itemId: 'isActive',
                                     labelAlign: 'right',
+                                    tabIndex: 6,
                                     inputValue: true,
                                     checked: true,
                                     ui: 'default',
@@ -155,6 +161,7 @@
                                                     ui: 'fieldLabelTop',
                                                     displayField: 'typeofTax',
                                                     valueField: 'typeofTaxId',
+                                                    tabIndex: 7,
                                                     emptyText: app.localize('SelectOption'),
                                                     queryMode : 'local',
                                                     bind: {
@@ -165,6 +172,7 @@
                                                     name: 'dbaName',
                                                     itemId: 'dbaName',
                                                     fieldLabel: app.localize('LegalName').initCap(),
+                                                    tabIndex: 10,
                                                     width: '100%',
                                                     ui: 'fieldLabelTop'
                                                 }]
@@ -184,6 +192,7 @@
                                itemId: 'ssnTaxId',
                                fieldLabel: app.localize('SSN/TaxID'),
                                width: '100%',
+                               tabIndex: 8,
                                ui: 'fieldLabelTop'
                            }, {
                                xtype: 'combobox',
@@ -193,6 +202,7 @@
                                ui: 'fieldLabelTop',
                                displayField: 'typeof1099Box',
                                valueField: 'typeof1099BoxId',
+                               tabIndex: 11,
                                emptyText: app.localize('SelectOption'),
                                queryMode : 'local',
                                bind: {
@@ -213,6 +223,7 @@
                            name: 'fedralTaxId',
                            itemId: 'fedralTaxId',
                            fieldLabel: app.localize('FedTaxID'),
+                           tabIndex: 9,
                            width: '100%',
                            ui: 'fieldLabelTop'
                        }, {
@@ -221,6 +232,7 @@
                            name: 'isw9OnFile',
                            labelAlign: 'right',
                            inputValue: true,
+                           tabIndex: 12,
                            checked: false,
                            boxLabelCls: 'checkboxLabel'
                        }]
@@ -255,6 +267,7 @@
                   ui: 'fieldLabelTop',
                   displayField: 'paymentTerms',
                   valueField: 'paymentTermsId',
+                  tabIndex: 1,
                   emptyText: app.localize('SelectOption'),
                   bind: {
                       store: '{paymentTermsList}'
@@ -282,6 +295,7 @@
                   displayField: 'accountNumber',
                   queryMode: 'remote',
                   minChars: 2,
+                  tabIndex: 4,
                   useDisplayFieldToSearch: true,
                   modulePermissions: {
                       read: abp.auth.isGranted('Pages.Financials.Accounts.Accounts'),
@@ -330,6 +344,7 @@
                     },
                     valueField: 'value',
                     displayField: 'name',
+                    tabIndex: 2,
                     fieldLabel: app.localize('TaxCredit').initCap(),
                     width: '100%',
                     ui: 'fieldLabelTop',
@@ -358,6 +373,7 @@
                   displayField: 'accountNumber',
                   queryMode: 'remote',
                   minChars: 2,
+                  tabIndex: 5,
                   useDisplayFieldToSearch: true,
                   modulePermissions: {
                       read: abp.auth.isGranted('Pages.Projects.ProjectMaintenance.ProjectCOAs'),
@@ -410,6 +426,7 @@
                           valueField: 'jobId',
                           displayField: 'jobNumber',
                           queryMode: 'remote',
+                          tabIndex: 3,
                           minChars: 2,
                           useDisplayFieldToSearch: true,
                           modulePermissions: {

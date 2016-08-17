@@ -10,6 +10,7 @@ Ext.define('Chaching.view.imports.ImportsView',{
     width: 400,
     layout: 'fit',
     title: app.localize("ImportTemplateFile"),
+    iconCls: 'fa fa-file-archive-o',
     autoShow: true,
     initComponent: function (config) {
         var me = this;

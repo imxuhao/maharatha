@@ -25,10 +25,13 @@ Ext.define('Chaching.view.imports.ImportsForm',{
             anchor: '100%',
             width: '100%',
             allowBlank: false,
-            buttonText: app.localize('SelectFile').toUpperCase(),
-            listeners: {
-                change: 'onFileChange'
-            }
+            //regex: /([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/i,
+            regex: /(.)+((\.xls)|(\.xlsx)|(\.csv)(\w)?)$/i,
+            regexText: 'Only excel files are accepted',
+            buttonText: app.localize('SelectFile').toUpperCase()
+            //listeners: {
+            //    change: 'onFileChange'
+            //}
 
         },
         {

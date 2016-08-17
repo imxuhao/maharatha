@@ -5,16 +5,14 @@ Ext.define('Chaching.view.imports.ImportsErrorView', {
         'Chaching.view.imports.ImportsErrorForm'
     ],
     controller: 'window-importsView',
-    height: 600,
-    width: 600,
+    height: '90%',
+    width: '70%',
     layout: 'fit',
     title: app.localize("Error"),
+    iconCls: 'fa fa-bug',
     initComponent: function (config) {
         var me = this;
-        var form = Ext.create('Chaching.view.imports.ImportsErrorForm', {
-            height: '100%',
-            width: '100%'
-        });
+        var form = Ext.create('Chaching.view.imports.ImportsErrorForm');
         me.items = [form];
         me.callParent(arguments);
     },

@@ -235,6 +235,24 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 width: 80,
                                                 renderer: Chaching.utilities.ChachingRenderers.viewUsersRole
                                             }
+                                            //{
+                                            //    text: app.localize('View'),
+                                            //    itemId: 'rolesViewButtonId',
+                                            //    align: 'center',
+                                            //    xtype: 'actioncolumn',
+                                            //    width: 80,
+                                            //    items: [
+                                            //        {
+                                            //            xtype: 'button',
+                                            //            text: app.localize('View'),
+                                            //            scale: 'small',
+                                            //            handler: function (a,b,c) {
+                                            //                debugger;
+                                            //                alert("Hello World!");
+                                            //            }
+                                            //        }
+                                            //    ]
+                                            //}
                                         ],
                                         store: Ext.create('Chaching.store.roles.RolesStore')
                                     },
@@ -254,7 +272,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                         xtype: 'treepanel',
                                         name: 'permissions',
                                         itemId: 'permissionsListItemId',
-                                        store: Ext.create('Chaching.store.roles.RolesTreeViewStore'),
+                                        //tore: Ext.create('Chaching.store.roles.RolesTreeViewStore'),
+                                        store: Ext.create('Chaching.store.roles.RolesTreeStore'),
                                         rootVisible: false,
                                         width: '100%',
                                         height: '100%',

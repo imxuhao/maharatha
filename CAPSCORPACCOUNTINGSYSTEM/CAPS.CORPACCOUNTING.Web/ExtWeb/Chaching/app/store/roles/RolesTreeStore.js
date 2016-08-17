@@ -63,7 +63,6 @@ Ext.define('Chaching.store.roles.RolesTreeStore', {
             }
             if (!root.data.children) root.data.children = [];
             root.appendChild(pages);
-          
         }
     },
     buildChilds: function (parent, records) {

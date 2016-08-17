@@ -6,7 +6,7 @@
     name: 'importsErrorForm',
     openInPopupWindow: true,
     hideDefaultButtons: true,
-    layout: 'vbox',
+    layout: 'fit',
     defaults: {
         bodyStyle: { 'background-color': 'transparent' },
         labelAlign: 'top'
@@ -20,12 +20,10 @@
         width: '90%'
     },
     items: [{
-        xtype: 'panel',
-        itemId: 'errorPanelItemId',
+        xtype: 'imports',
+        itemId: 'errorgridPanelItemId',
         padding: '0 10 0 10',
-        width: '100%',
-        //height:'50px',
-        items:[]
+        width: '100%'
     }],
     bbar: ['->', {
         xtype: 'button',

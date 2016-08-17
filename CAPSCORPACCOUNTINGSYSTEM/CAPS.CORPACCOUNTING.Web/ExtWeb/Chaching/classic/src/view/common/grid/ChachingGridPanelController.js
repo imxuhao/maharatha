@@ -567,11 +567,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
     },
     onManageViewClicked:function() {
         var me = this,
-            view = me.getView();
-
+            view = me.getView(),
+            wind = view.up('window');
         var manageView = Ext.create('Chaching.view.manageView.ManageViewView', {
             parentGrid: view,
-            title: app.localize("ManageUsersViewSetting") + ': ' + view.getTitle()
+            title: app.localize("ManageUsersViewSetting") + ': ' + (view.getTitle() ? view.getTitle() : wind.getTitle())
         });
         manageView.show();
     }

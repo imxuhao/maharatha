@@ -3885,6 +3885,7 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditFormController.js" />

@@ -392,12 +392,12 @@
     <text name="ClearFilter" value="Clear Filter" />
     <text name="Import" value="Import" />
     <text name="Upload" value="Upload" />
-    <text name="SelectFile" value="Select File..." />
+    <text name="SelectFile" value="Select File ..." />
     <text name="DownloadTemplate" value="Download Template" />
     <text name="ImportTemplateFile" value="Import Template File" />
     <text name="DownloadTemplateSuccessMessage" value="Download Template Successfully." />
-    <text name="Template_File_Info" value="You can only select .xls/.xlsx file." />
-    <text name="Template_FileType_Warn" value="You can only select .xls/.xlsx file. Please select another file." />
+    <text name="Template_File_Info" value="You can select only .xls/.xlsx file." />
+    <text name="Template_FileType_Warn" value="You can select only .xls/.xlsx file. Please select another file." />
     <text name="QuickEdit" value="Quick Edit" />
     <text name="TTenancyCodeName" value="Enter tenant code name" />
     <text name="TName" value="Enter name" />
@@ -1142,7 +1142,7 @@
     <text name="ProcessPos" value="Are you sure? Do you really want to process selected PO(s)"/>
     <text name="ProcessSelected" value="Process selected"/>
     <text name="POProcessedSuccessfully" value="Selected PO(s) been processed successfully."/>
-    <text name="Rownumber" value="Row Number"/>
+    <text name="Rownumber" value="Row #"/>
     <text name="DuplicateAccountNumber" value="Duplicate AccountNumber,"/>
     <text name="DuplicateDescription" value="Duplicate Description."/>
     <text name="DuplicateAccountNumbers" value="Duplicate AccountNumbers:"/>
@@ -1154,5 +1154,6 @@
     <text name="EditAddress" value="Edit address"/>
     <text name="CreateAddress" value="Create address"/>
     <text name="ViewAddress" value="View address"/>
+    <text name="ErrorDetail" value="Error Detail"/>
   </texts>
 </localizationDictionary>

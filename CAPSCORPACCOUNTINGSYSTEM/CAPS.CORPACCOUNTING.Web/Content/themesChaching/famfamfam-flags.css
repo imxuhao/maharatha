@@ -67,11 +67,17 @@
 }
 .famfamfam-flag-it {
      line-height: 11px;
-    /* vertical-align: text-top; */
     background-image: url("../flags/famfamfam-flags.png");
     background-repeat: no-repeat;
      background-position: -96px -144px !important; 
      width: 16px; height: 11px;
+}
+.famfamfam-flag-us {
+    line-height: 11px;
+    background-image: url("../flags/famfamfam-flags.png");
+    background-repeat: no-repeat;
+    background-position: -16px -44px !important;
+    width: 16px; height: 11px;
 }
 .ux-icon-combo-item {
     background-repeat: no-repeat !important;
@@ -101,7 +107,7 @@
 .famfamfam-flag-va { background-position: -48px -22px !important; width: 16px; height: 11px; }
 .famfamfam-flag-uz { background-position: -48px -33px !important; width: 16px; height: 11px; }
 .famfamfam-flag-uy { background-position: 0px -44px !important; width: 16px; height: 11px; }
-.famfamfam-flag-us { background-position: -16px -44px !important; width: 16px; height: 11px; }
+/*.famfamfam-flag-us { background-position: -16px -44px !important; width: 16px; height: 11px; }*/
 .famfamfam-flag-um { background-position: -16px -44px !important; width: 16px; height: 11px; }
 .famfamfam-flag-ug { background-position: -32px -44px !important; width: 16px; height: 11px; }
 .famfamfam-flag-ua { background-position: -48px -44px !important; width: 16px; height: 11px; }

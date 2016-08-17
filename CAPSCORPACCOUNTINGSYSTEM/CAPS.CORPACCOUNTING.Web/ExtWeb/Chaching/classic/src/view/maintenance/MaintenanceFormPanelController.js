@@ -28,6 +28,7 @@
 
     loadWebLogStore: function (webLogStore, view) {
         webLogStore.load(function (records, operation, success) {
+            records.reverse();
             Ext.each(records,
                 function (record) {
                     record.data = '<span class="log-line">' +

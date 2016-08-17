@@ -5306,6 +5306,47 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.ImportLines(System.Data.DataTable,System.Int32)">
+            <summary>
+            Importing the Lines From Excel
+            </summary>
+            <param name="linesTable"></param>
+            <param name="coaId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.CheckDuplicatesinExcel(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto},System.Data.DataTable)">
+            <summary>
+            Validating Excel Duplicates
+            </summary>
+            <param name="uploadErrorMessagesList"></param>
+            <param name="linesTable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.ValidateDuplicateRecords(System.Collections.Generic.Dictionary{System.Int32,CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto})">
+            <summary>
+            Validating Duplicate records of uploaded data
+            </summary>
+            <param name="linesTList"></param>
+            <param name="uploadErrorMessagesList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.ValidateUploadedData(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput,System.Int32,System.Boolean)">
+            <summary>
+            Validating Required and Length of uploaded Data
+            </summary>
+            <param name="input"></param>
+            <param name="rowNumber"></param>
+             /// <param name="isNumeric"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.NumericValidation(System.String,CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto,System.Boolean)">
+            <summary>
+            Validating LineNumber as Numeric 
+            </summary>
+            <param name="lineNumber"></param>
+            <param name="uploadErrorMessages"></param>
+            <param name="isNumeric"></param>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnitAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnit},CAPS.CORPACCOUNTING.JobCosting.ARBillingTypeUnitManager)">
             
         </member>
@@ -6212,12 +6253,12 @@
             <param name="coaId"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CheckDuplicatesinExcel(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto},System.Data.DataTable)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CheckDuplicatesinExcel(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto},System.Data.DataTable)">
             <summary>
             Validating Excel Duplicates
             </summary>
-            <param name="accountsList"></param>
             <param name="uploadErrorMessagesList"></param>
+            <param name="accountTable"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ValidateDuplicateRecords(System.Collections.Generic.Dictionary{System.Int32,CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto})">
@@ -6228,13 +6269,22 @@
             <param name="uploadErrorMessagesList"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ValidateUploadedData(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput,System.Int32)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ValidateUploadedData(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput,System.Int32,System.Boolean)">
             <summary>
-            Validating Required and Length of uploaded Data
+             Validating Required and Length of uploaded Data
             </summary>
             <param name="input"></param>
             <param name="rowNumber"></param>
+            <param name="isNumeric"></param>
             <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.NumericValidation(System.String,CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto,System.Boolean)">
+            <summary>
+            Validating AccountNumber as Numeric 
+            </summary>
+            <param name="accountNumber"></param>
+            <param name="uploadErrorMessages"></param>
+            <param name="isNumeric"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>

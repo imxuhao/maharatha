@@ -12,12 +12,15 @@ namespace CAPS.CORPACCOUNTING.Uploads
 
         private readonly AccountUnitAppService _accountUnitAppService;
         private readonly JobUnitAppService _jobUnitAppService;
+        private readonly LinesUnitAppService _linesUnitAppService;
 
 
-        public UploadAppService(AccountUnitAppService accountUnitAppService, JobUnitAppService jobUnitAppService)
+        public UploadAppService(AccountUnitAppService accountUnitAppService, JobUnitAppService jobUnitAppService,
+            LinesUnitAppService linesUnitAppService)
         {
             _accountUnitAppService = accountUnitAppService;
             _jobUnitAppService = jobUnitAppService;
+            _linesUnitAppService = linesUnitAppService;
         }
 
         /// <summary>
@@ -37,6 +40,9 @@ namespace CAPS.CORPACCOUNTING.Uploads
                     break;
                 case "Projects":
                     errorMessageList = await _jobUnitAppService.ImportJobs(dataTable);
+                    break;
+                case "Lines":
+                    errorMessageList = await _linesUnitAppService.ImportLines(dataTable,coaId.Value);
                     break;
 
             }

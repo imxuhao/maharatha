@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Authorization.Users;
 using Abp.Extensions;
 using Abp.Organizations;
+using CAPS.CORPACCOUNTING.Authorization.Roles;
 using Microsoft.AspNet.Identity;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
@@ -37,8 +38,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                    {
                        TenantId = tenantId,
                        UserName = AdminUserName,
-                       Name = AdminUserName,
-                       Surname = AdminUserName,
+                       Name = StaticUsers.Name,
+                       Surname = StaticUsers.Surname,
                        EmailAddress = emailAddress,
                        Password = new PasswordHasher().HashPassword(password)
                    };

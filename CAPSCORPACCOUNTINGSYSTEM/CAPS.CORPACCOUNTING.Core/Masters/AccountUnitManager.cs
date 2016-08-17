@@ -12,14 +12,16 @@ namespace CAPS.CORPACCOUNTING.Masters
 {
     public class AccountUnitManager : DomainService
     {
-        public AccountUnitManager(IRepository<AccountUnit, long> accountunitrepository)
+        public AccountUnitManager(IRepository<AccountUnit, long> accountunitrepository, IRepository<CoaUnit> coaUnitRepository)
         {
             AccountUnitRepository = accountunitrepository;
+            CoaUnitRepository = coaUnitRepository;
 
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
         protected IRepository<AccountUnit, long> AccountUnitRepository { get; }
+        protected IRepository<CoaUnit> CoaUnitRepository { get;  }
 
         [UnitOfWork]
         public virtual async Task<long> CreateAsync(AccountUnit accountUnit)
@@ -116,6 +118,14 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         protected virtual async Task ValidateAccountUnitAsync(AccountUnit accountUnit)
         {
+            var coaUnit =await CoaUnitRepository.FirstOrDefaultAsync(p => p.Id == accountUnit.ChartOfAccountId);
+            long accountNumber;
+            //Validating Numeric AccountNumbers
+            //In Coa IsNumberic is true, AccountNumber shold be Numeric
+            if (coaUnit.IsNumeric && !long.TryParse(accountUnit.AccountNumber,out accountNumber))
+                throw new UserFriendlyException(L("Account Number shold be numeric.", accountUnit.Caption));
+
+
             // Validating duplicate account number and description of account with the same COAId and decription
             var siblings = (await FindChildrenAsync(accountUnit.ParentId))
                 .Where(ou => ou.Id != accountUnit.Id && ou.ChartOfAccountId == accountUnit.ChartOfAccountId)

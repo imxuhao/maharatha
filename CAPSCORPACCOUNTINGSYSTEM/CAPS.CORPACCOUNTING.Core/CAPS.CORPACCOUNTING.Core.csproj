@@ -168,6 +168,7 @@
     <Compile Include="AccountReceivable\ReceiptHistoryUnit.cs" />
     <Compile Include="AccountReceivable\TypeOfArInvoiceBuildUnit.cs" />
     <Compile Include="AppFolders.cs" />
+    <Compile Include="Authorization\Users\StaticUsers.cs" />
     <Compile Include="BackgroundJobs\HangfireRecurringJobManager.cs" />
     <Compile Include="BackgroundJobs\IRecurringJobManager.cs" />
     <Compile Include="Banking\BankAccountPaymentRangeUnitManager.cs" />

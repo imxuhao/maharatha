@@ -21,7 +21,7 @@
         title: abp.localization.localize("CreateNewCompanySetup").initCap()
     },
     layout: 'fit',
-    defaultFocus: 'textfield#phone1',
+    defaultFocus: 'textfield#companyName',
     items: [
         {
             xtype: 'tabpanel',
@@ -65,6 +65,7 @@
                                         {
                                             xtype: 'textfield',
                                             name: 'companyName',
+                                            itemId: 'companyName',
                                             readOnly: false,
                                             fieldLabel: app.localize('TenantName'),
                                             width: '100%',

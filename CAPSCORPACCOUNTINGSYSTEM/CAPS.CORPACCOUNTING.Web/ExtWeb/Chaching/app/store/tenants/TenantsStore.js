@@ -4,7 +4,8 @@
 Ext.define('Chaching.store.tenants.TenantsStore', {
     extend: 'Ext.data.Store',
     remoteSort: true,
-    remoteFilter : true,
+    remoteFilter: true,
+    pageSize: 10, // items per page
     model: 'Chaching.model.tenants.TenantsModel',
     config : {
         searchEntityName : 'Tenant'

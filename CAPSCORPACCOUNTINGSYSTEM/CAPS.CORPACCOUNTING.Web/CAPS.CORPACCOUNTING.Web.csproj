@@ -3659,7 +3659,7 @@
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalEntryDetail.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\journals\JournalModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\fiscalperiod\FiscalPeriodModel.js" />
-    <Content Include="ExtWeb\Chaching\app\model\imports\ErrorModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\imports\ImportsErrorModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobLocationsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\Jobcasting\JobCommercialsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\languages\LanguageMainModel.js" />

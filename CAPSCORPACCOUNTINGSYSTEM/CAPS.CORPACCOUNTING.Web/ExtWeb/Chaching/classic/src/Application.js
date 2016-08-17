@@ -117,7 +117,8 @@ Ext.define('Chaching.Application', {
         'users.CreditCardSecurityRightStore',
         'users.CreditCardSecurityLeftStore',
         'users.AccountSecurityRightStore',
-        'users.AccountSecurityLeftStore'
+        'users.AccountSecurityLeftStore',
+        'Chaching.store.imports.ErrorStore'
     ],
     //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

@@ -24,7 +24,7 @@ Ext.define('Chaching.view.header.ChachingHeaderController', {
                 var item = locale[i];
                 if (item.name === currentCulture.name) {
                     btn.text = currentCulture.displayName + ' &#xf107;';
-                    btn.iconCls = item.icon;
+                    btn.iconCls = 'famfamfam-flag ' + item.icon;
                     break;
                 }
             }

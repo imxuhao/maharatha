@@ -166,7 +166,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
     initComponent: function () {
         //create buttons
         var me = this,
-            controller = me.getController,
+            controller = me.getController(),
             buttons = [];
         if (me.showFormTitle&&me.titleConfig) {
             var dockedItems = [
@@ -258,6 +258,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanel',{
             me.defaultButton = 'BtnSave';
         }
         me.callParent(arguments);
+        me.on('resize', controller.onFormPanelResize);
         var formDockedItems = me.getDockedItems();
         if (formDockedItems&&formDockedItems.length>0) {
             var actionToolBar=undefined;

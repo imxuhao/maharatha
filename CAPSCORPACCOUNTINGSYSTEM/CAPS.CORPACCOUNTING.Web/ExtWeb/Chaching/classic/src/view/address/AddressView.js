@@ -10,8 +10,8 @@ Ext.define('Chaching.view.address.AddressView',{
         'Chaching.view.address.AddressViewController',
         'Chaching.view.address.AddressForm'
     ],
-    height: '39%',
-    width: '45%',
+    height: '60%',
+    width: '55%',
     layout: 'fit',
     controller: 'address-addressview',
     initComponent: function (config) {

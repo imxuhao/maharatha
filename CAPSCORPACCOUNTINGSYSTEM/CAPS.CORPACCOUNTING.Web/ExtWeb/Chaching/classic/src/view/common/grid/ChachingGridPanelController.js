@@ -275,22 +275,48 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                                    }
                                });
                            }
-                          // gridStore.setAutoSync(true);
+                           var operation = Ext.data.Operation({
+                               params: { id: widgetRec.get('id') },
+                               controller: me,
+                               action: 'destroy',
+                               records: [widgetRec],
+                               callback: me.onDeleteOperationCompleteCallBack
+                           });
+                           gridStore.erase(operation);
                            gridStore.remove(widgetRec);
-                          // gridStore.setAutoSync(false);
-
-                           gridStore.sync({
+                           //Sync consider CRUD and store must need four of the urls
+                           /*gridStore.sync({
                                callback: function (batch, opts) {
                                    abp.notify.success(app.localize('SuccessfullyDeleted'), app.localize('Success'));
                                    gridStore.reload();
                                    controller.doAfterDeleteAction(widgetRec);
                                }
-                           });
+                           });*/
 
                        }
                    }
                }
            );
+    },
+    onDeleteOperationCompleteCallBack: function (records, operation, success) {
+        if (success) {
+            abp.notify.success('Operation completed successfully.', 'Success');
+        } else {
+            var response = Ext.decode(operation.getResponse().responseText);
+            var message = '',
+                title = 'Error';
+            if (response && response.error) {
+                if (response.error.message && response.error.details) {
+                    title = response.error.message;
+                    message = response.error.details;
+                    abp.message.warn(message, title);
+                    return;
+                }
+                title = response.error.message;
+                message = response.error.details ? response.error.details : title;
+            }
+            abp.message.warn(message, title);
+        }
     },
     doAfterDeleteAction: function (record) {
         //DO module specific tasks.

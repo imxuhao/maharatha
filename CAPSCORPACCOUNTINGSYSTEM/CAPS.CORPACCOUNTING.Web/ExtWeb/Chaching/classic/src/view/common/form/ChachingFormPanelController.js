@@ -205,6 +205,9 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelController', {
         var deferred = new Ext.Deferred();
         deferred.resolve('{success:true}');        
         return deferred.promise;       
+    },
+    onFormPanelResize: function (formPanel, width, height, oldWidth, oldHeight, eOpts) {
+        formPanel.updateLayout();
     }
     
 });

@@ -1033,13 +1033,6 @@
              </summary>
              <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetLocationsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get Locations List
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
             <summary>
             Create the SubAccount.
@@ -1267,13 +1260,6 @@
             User Entity restriction list
             </summary>
             <param name="entityClassification"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetLocationsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get LocationsList
-            </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">

@@ -168,6 +168,7 @@ Ext.define('Chaching.components.plugins.CellEditing', {
             //set value and rawValue for comboboxes
             if (editor.field) {
                 var editorType = editor.field.xtype;
+                if (editorType === "label") return false;
                 if (editorType === "combo" || editorType === "combobox" || editorType === "chachingcombobox" || editorType === "chachingcombo") {
                     var editorStore = editor.field.getStore();
                     if (editor.field.extraParams) {

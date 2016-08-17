@@ -23,7 +23,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable.Dto
 
 
         ///<summary>Get Sets the CustomerName field.</summary>
-        public int CustomerName { get; set; }
+        public string CustomerName { get; set; }
 
         ///<summary>Get Sets the ArytdInvoiceId field.</summary>
         public  int? ArytdInvoiceId { get; set; }
@@ -84,6 +84,10 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable.Dto
 
         ///<summary>Get Sets the jobName field.</summary>
         public string JobName { get; set; }
+
+
+        ///<summary>Get Sets the AccountNumber field.</summary>
+        public string AccountNumber { get; set; }
 
     }
 }

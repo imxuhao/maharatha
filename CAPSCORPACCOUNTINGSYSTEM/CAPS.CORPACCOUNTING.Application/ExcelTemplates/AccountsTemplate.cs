@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using OfficeOpenXml.DataValidation;
 using System.Collections.Generic;
+using Abp.Domain.Repositories;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
@@ -17,6 +18,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
     {
 
         private readonly IAccountUnitAppService _accountUnitAppService;
+        private readonly IRepository<CoaUnit, int> _coaUnitRepository;
         private readonly int startRowIndex = 2;
         private readonly int endRowIndex = 3000;
 
@@ -25,10 +27,12 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// </summary>
         /// <param name="accountUnitAppService"></param>
         public AccountsTemplate(
-             AccountUnitAppService accountUnitAppService)
+             AccountUnitAppService accountUnitAppService,
+             IRepository<CoaUnit, int> coaUnitRepository
+             )
         {
-
             _accountUnitAppService = accountUnitAppService;
+            _coaUnitRepository = coaUnitRepository;
         }
 
         /// <summary>
@@ -44,7 +48,8 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             var typeOfCurrencyRateList = await _accountUnitAppService.GetTypeOfCurrencyRateList();
             var linkedAccountList = await _accountUnitAppService.GetLinkAccountListByCoaId(new AutoSearchInput() { Id = coaId });
             var booleanList = ExcelHelper.GetBooleanList();
-            var accountNumberIsNumeric = false;
+            var accountNumberIsNumeric = (await _coaUnitRepository.GetAsync(coaId)).IsNumeric;
+
             return CreateExcelPackage(
                 "AccountTemplate.xlsx",
                 excelPackage =>
@@ -89,7 +94,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                                     }
                                        ),
                             ShowErrorMessage = true,
-                            Error = ExcelHelper.ApplyPlaceHolderValues((accountNumberIsNumeric ? L("AllowNumbers") + ", " : "") + L("AllowDuplicateVaues")+", "
+                            Error = ExcelHelper.ApplyPlaceHolderValues((accountNumberIsNumeric ? L("AllowNumbers") + ", " : "") + L("AllowDuplicateVaues") + ", "
                             + L("AllowMaxLength"), new Dictionary<string, string>() { { "{length}", AccountUnit.MaxAccountSize.ToString() },
                             { "{type}", "Charcters" }}),
                             ErrorTitle = L("ValidationMessage"),
@@ -102,7 +107,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                       {
                           ExcelFormula = ExcelHelper.GetMultiValidationString(
                               new List<string>() {
-                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxAccountSize) }),
+                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxDisplayNameLength) }),
                           ShowErrorMessage = true,
                           Error = ExcelHelper.ApplyPlaceHolderValues(L("AllowMaxLength"), new Dictionary<string, string>() { { "{length}", AccountUnit.MaxDisplayNameLength.ToString() },
                             { "{type}", "Charcters" }}),

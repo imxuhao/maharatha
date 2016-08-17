@@ -53,5 +53,23 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetCustomerList(AutoSearchInput input);
+
+        /// <summary>
+        /// Get Payment Method List
+        /// </summary>
+        /// <returns></returns>
+        List<NameValueDto> GetTypeofPaymentMethodList();
+
+        /// <summary>
+        /// Get Customer Payment Terms
+        /// </summary>
+        /// <returns></returns>
+          Task<List<NameValueDto>> GetCustomerPaymentTermsList(AutoSearchInput input);
+
+        /// <summary>
+        /// Get SalesRep as list
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetSalesRepList(AutoSearchInput input);
     }
 }

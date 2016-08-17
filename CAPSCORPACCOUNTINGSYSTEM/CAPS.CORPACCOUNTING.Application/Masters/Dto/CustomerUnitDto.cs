@@ -54,5 +54,8 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the SalesRepName field. </summary>
         public string SalesRepName { get; set; }
 
+        /// <summary>Gets or sets the TotalOutstandingBalance field. </summary>
+        public decimal? TotalOutstandingBalance { get; set; }
+
     }
 }

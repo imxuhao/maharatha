@@ -49,20 +49,14 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<ArInvoiceEntryDocumentUnitDto>> GetArInvoiceEntryDocumentUnits(SearchInputDto input);
-
-
-
-
-
+        
         /// <summary>
         ///Get ArInvoice Details by AccountingDocumentId List.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PagedResultOutput<ArInvoiceEntryDetailUnitDto>> GetArInvoiceByAccountingDocumentId(GetTransactionList input);
-
-
-
+        
         /// <summary>
         /// Get GetArBillingTypeList
         /// </summary>
@@ -70,23 +64,11 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// <returns></returns>
         Task<List<NameValueDto>> GetBillingTypeList(AutoSearchInput input);
 
-
-
         /// <summary>
         /// Get CustomerPaymentTermsList
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetCustomerPaymentTermsList(AutoSearchInput input);
-
-
-
-        /// <summary>
-        /// Get LocationsList
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<List<NameValueDto>> GetLocationsList(AutoSearchInput input);
-
     }
 }

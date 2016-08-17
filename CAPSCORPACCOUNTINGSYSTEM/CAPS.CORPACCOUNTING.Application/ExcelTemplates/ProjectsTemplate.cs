@@ -109,7 +109,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                         {
                             ExcelFormula = ExcelHelper.GetMultiValidationString(
                                 new List<string>() {
-                                    ExcelHelper.GetMaxLengthFormula("A2", AccountUnit.MaxAccountSize),
+                                    ExcelHelper.GetMaxLengthFormula("A2", JobUnit.MaxJobNumberLength),
                                     ExcelHelper.GetAllowNumberFormula("A2",jobNumberIsNumeric) ,
                                      ExcelHelper.GetDuplicateCellFormula("A",startRowIndex,endRowIndex)
                                     }
@@ -128,7 +128,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                       {
                           ExcelFormula = ExcelHelper.GetMultiValidationString(
                               new List<string>() {
-                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxAccountSize),
+                                    ExcelHelper.GetMaxLengthFormula("B2", JobUnit.MaxCaptionLength),
                                ExcelHelper.GetDuplicateCellFormula("B",startRowIndex,endRowIndex)}),
                           ShowErrorMessage = true,
                           Error = ExcelHelper.ApplyPlaceHolderValues(L("AllowDuplicateVaues") + ", "+L("AllowMaxLength"), new Dictionary<string, string>() { { "{length}", JobUnit.MaxCaptionLength.ToString() },

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using OfficeOpenXml.DataValidation;
 using CAPS.CORPACCOUNTING.JobCosting;
 using Abp.Application.Services.Dto;
+using Abp.Domain.Repositories;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
@@ -19,18 +20,23 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         private readonly IJobUnitAppService _jobUnitAppService;
         private readonly int startRowIndex = 2;
         private readonly int endRowIndex = 3000;
-
+        private readonly IRepository<CoaUnit, int> _coaUnitRepository;
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="accountUnitAppService"></param>
+        /// <param name="jobUnitAppService"></param>
+        /// <param name="coaUnitRepository"></param>
         public LinesTemplate(
              AccountUnitAppService accountUnitAppService,
-             IJobUnitAppService jobUnitAppService
+             IJobUnitAppService jobUnitAppService,
+               IRepository<CoaUnit, int> coaUnitRepository
              )
         {
             _accountUnitAppService = accountUnitAppService;
             _jobUnitAppService = jobUnitAppService;
+            _coaUnitRepository = coaUnitRepository;
         }
 
         /// <summary>
@@ -54,9 +60,9 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                 Name = u.AccountNumber
             });
             var booleanList = ExcelHelper.GetBooleanList();
+            var accountNumberIsNumeric = (await _coaUnitRepository.GetAsync(coaId)).IsNumeric;
 
-
-            var accountNumberIsNumeric = false;
+         
             return CreateExcelPackage(
                 "LinesTemplate.xlsx",
                 excelPackage =>
@@ -112,7 +118,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                       {
                           ExcelFormula = ExcelHelper.GetMultiValidationString(
                               new List<string>() {
-                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxAccountSize) }),
+                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxDisplayNameLength) }),
                           ShowErrorMessage = true,
                           Error = ExcelHelper.ApplyPlaceHolderValues(L("AllowMaxLength"), new Dictionary<string, string>() { { "{length}", AccountUnit.MaxDisplayNameLength.ToString() },
                             { "{type}", "Charcters" }}),

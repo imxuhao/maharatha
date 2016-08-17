@@ -30,6 +30,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Host
             new DefaultValueAddedTaxRecoveryCreator(_context).Create();
             new DefaultSystemViewSettingsCreator(_context).Create();
             new DefaultTypeofUploadFileCreator(_context).Create();
+            new DefaultTypeOfCurrencyRateCreator(_context).Create();
             _context.SaveChanges();
         }
     }

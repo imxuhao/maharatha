@@ -33,6 +33,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Tenants
             new DefaultSystemViewSettingsCreator(_context).Create();
             new DefaultTypeofUploadFileCreator(_context).Create();
             new DefaultSecurityGroupCreator(_context, _tenantId).Create();
+            new DefaultTypeOfCurrencyRateCreator(_context).Create();
             _context.SaveChanges();
 
 

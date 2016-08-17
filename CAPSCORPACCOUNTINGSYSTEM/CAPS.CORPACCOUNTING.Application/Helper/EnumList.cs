@@ -184,5 +184,6 @@ namespace CAPS.CORPACCOUNTING.Helpers
                              select new NameValueDto { Value = ((int)n).ToString(), Name = EnumHelper.ToDisplayName(n) }).ToList();
             return listEnums;
         }
+
     }
 }

@@ -100,5 +100,6 @@ namespace CAPS.CORPACCOUNTING.Accounting
        /// </summary>
        /// <returns></returns>
        Task<List<PurchaseOrderEntyDocumnetwithDetailOutputDto>> GetPurchaseOrderList(GetPurchaseOrderInput input);
+
     }
 }

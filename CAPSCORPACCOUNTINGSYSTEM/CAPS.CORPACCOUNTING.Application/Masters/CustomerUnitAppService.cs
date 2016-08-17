@@ -29,11 +29,25 @@ namespace CAPS.CORPACCOUNTING.Masters
         private readonly IRepository<CustomerPaymentTermUnit> _customerPaymentTermRepository;
         private readonly IRepository<SalesRepUnit> _salesRepRepository;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerUnitManager"></param>
+        /// <param name="customerUnitRepository"></param>
+        /// <param name="unitOfWorkManager"></param>
+        /// <param name="addressUnitAppService"></param>
+        /// <param name="addressAppService"></param>
+        /// <param name="addressRepository"></param>
+        /// <param name="customerPaymentTermRepository"></param>
+        /// <param name="salesRepRepository"></param>
         public CustomerUnitAppService(CustomerUnitManager customerUnitManager,
             IRepository<CustomerUnit> customerUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager, AddressUnitAppService addressUnitAppService,
-            IAddressUnitAppService addressAppService, IRepository<AddressUnit, long> addressRepository,
-            IRepository<CustomerPaymentTermUnit> customerPaymentTermRepository, IRepository<SalesRepUnit> salesRepRepository)
+            IUnitOfWorkManager unitOfWorkManager,
+            AddressUnitAppService addressUnitAppService,
+            IAddressUnitAppService addressAppService,
+            IRepository<AddressUnit, long> addressRepository,
+            IRepository<CustomerPaymentTermUnit> customerPaymentTermRepository,
+            IRepository<SalesRepUnit> salesRepRepository)
         {
             _customerUnitManager = customerUnitManager;
             _customerUnitRepository = customerUnitRepository;
@@ -80,6 +94,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             customerUnitDto.CustomerId = customerUnit.Id;
             return customerUnitDto;
         }
+
         /// <summary>
         /// Delete the Customer and CustomerAddresses
         /// </summary>
@@ -102,7 +117,6 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        
         public async Task<PagedResultOutput<CustomerUnitDto>> GetCustomerUnits(SearchInputDto input)
         {
             var query = CreateCustomerQuery(input);
@@ -182,7 +196,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         public async Task<CustomerUnitDto> UpdateCustomerUnit(UpdateCustomerUnitInput input)
         {
             var customerUnit = await _customerUnitRepository.GetAsync(input.CustomerId);
-           
+
             // update address Information
             if (!ReferenceEquals(input.Addresses, null))
             {
@@ -261,13 +275,53 @@ namespace CAPS.CORPACCOUNTING.Masters
             return result;
         }
 
+        /// <summary>
+        /// Customer as List
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<List<NameValueDto>> GetCustomerList(AutoSearchInput input)
         {
-            var divisions = await _customerUnitRepository.GetAll()
+            var customerList = await _customerUnitRepository.GetAll()
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.Contains(input.Query))
                  .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
-            return divisions;
+            return customerList;
+        }
+
+        /// <summary>
+        /// Get Payment Method List
+        /// </summary>
+        /// <returns></returns>
+        public List<NameValueDto> GetTypeofPaymentMethodList()
+        {
+            return EnumList.GetTypeofPaymentMethodList();
+        }
+
+        /// <summary>
+        /// Get Customer Payment Terms
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetCustomerPaymentTermsList(AutoSearchInput input)
+        {
+            var customerPaymentTermList = await _customerPaymentTermRepository.GetAll()
+          .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
+          .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+          .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
+            return customerPaymentTermList;
+        }
+
+        /// <summary>
+        /// Get SalesRep as list
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetSalesRepList(AutoSearchInput input)
+        {
+            var salesRepList = await _salesRepRepository.GetAll()
+          .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.LastName.Contains(input.Query))
+          .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+          .Select(u => new NameValueDto { Name = u.LastName, Value = u.Id.ToString() }).ToListAsync();
+            return salesRepList;
         }
     }
 }

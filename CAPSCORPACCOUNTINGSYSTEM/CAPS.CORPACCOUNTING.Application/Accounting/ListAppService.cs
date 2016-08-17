@@ -145,7 +145,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
         public async Task<List<AccountCacheItem>> GetAccountsList(AutoSearchInput input)
         {
 
-           Func<AccountCacheItem,bool> expAccountCache = null;
+            Func<AccountCacheItem, bool> expAccountCache = null;
 
             var chartOfAccountId = (from job in _jobUnitRepository.GetAll().Where(p => p.Id == input.JobId)
                                     select job.ChartOfAccountId).FirstOrDefault();
@@ -163,7 +163,7 @@ namespace CAPS.CORPACCOUNTING.Accounting
             return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
             p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
             || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.ChartOfAccountId == chartOfAccountId)
-            .WhereIf(!ReferenceEquals(expAccountCache,null),expAccountCache).ToList();
+            .WhereIf(!ReferenceEquals(expAccountCache, null), expAccountCache).ToList();
 
 
         }
@@ -584,13 +584,9 @@ namespace CAPS.CORPACCOUNTING.Accounting
                 Filters.Add(orgfilter);
             }
             return Filters;
-               
+
         }
 
-
-
     }
-
-
 }
 

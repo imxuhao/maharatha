@@ -273,11 +273,6 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             validation.ErrorTitle = excelProperties.ErrorTitle;
             validation.Error = excelProperties.Error;
             validation.Formula.ExcelFormula = excelFormula;
-            //validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
-            //validation.ErrorStyle = excelProperties.ErrorStyle;
-            //validation.ErrorTitle = excelProperties.ErrorTitle;
-            //validation.Error = excelProperties.Error;
-            //validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
         }
 
         /// <summary>

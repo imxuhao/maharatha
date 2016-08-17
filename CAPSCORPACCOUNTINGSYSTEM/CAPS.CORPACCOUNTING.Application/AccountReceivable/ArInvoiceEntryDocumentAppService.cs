@@ -73,7 +73,7 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
             IRepository<TypeOfCurrencyUnit, short> currencyUnitRepository,
             IRepository<CustomerPaymentTermUnit> customerPaymentTermRepository,
             IRepository<SalesRepUnit> salesRepUnitTermRepository,
-            IRepository<LocationSetUnit> locationSetUnitRepository, 
+            IRepository<LocationSetUnit> locationSetUnitRepository,
             IRepository<ARBillingTypeUnit> aRBillingTypeUnitRepository)
         {
             _arInvoiceEntryDocumentUnitManager = arInvoiceEntryDocumentUnitManager;
@@ -217,26 +217,24 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
                         join salesRep in _salesRepUnitRepository.GetAll() on invoices.SalesRepId equals salesRep.Id into
                          salesReps
                         from salesRep in salesReps.DefaultIfEmpty()
-                        join invoiceDetail in _arInvoiceEntryDocumentDetailUnitRepository.GetAll() on invoices.Id equals invoiceDetail.AccountingDocumentId
-                            into invoiceDetails
-                        from invoiceDetail in invoiceDetails.DefaultIfEmpty()
-                        join job in _jobUnitRepository.GetAll() on invoiceDetail.JobId equals job.Id into jobs
-                        from job in jobs.DefaultIfEmpty()
-                        join account in _accountUnitRepository.GetAll() on invoiceDetail.AccountId equals account.Id into account
-                        from accounts in account.DefaultIfEmpty()
+
                         select new
                         {
                             invoices,
-                            JobNumber = job.JobNumber,
-                            JobName = job.Caption,
                             TypeOfCurrency = currency.Description,
                             SalesRepName = salesRep.LastName,
                             ArPaymentTerm = paymentTerm.Description,
+                            CustomerName = customer.LastName
                         };
 
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null),
-                p => p.invoices.OrganizationUnitId == input.OrganizationUnitId)
-                .Where(u =>
+            if (!ReferenceEquals(input.Filters, null))
+            {
+                SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
+                if (!ReferenceEquals(mapSearchFilters, null))
+                    query = query.CreateFilters(mapSearchFilters);
+            }
+
+            query = query.Where(u =>
                         u.invoices.TypeOfAccountingDocumentId == TypeOfAccountingDocument.AccountsReceivable &&
                         u.invoices.IsPosted == unPosted);
 
@@ -249,18 +247,49 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
                 .PageBy(input)
                 .ToListAsync();
 
+            var arIdList = string.Join(",", results.Select(x => x.invoices.Id).ToArray());
 
-            return new PagedResultOutput<ArInvoiceEntryDocumentUnitDto>(resultCount, results.Select(item =>
-            {
-                var dto = item.invoices.MapTo<ArInvoiceEntryDocumentUnitDto>();
-                dto.JobNumber = item.JobNumber;
-                dto.JobName = item.JobName;
-                dto.TypeOfCurrency = item.TypeOfCurrency;
-                dto.SalesRepName = item.SalesRepName;
-                dto.ArPaymentTerm = item.ArPaymentTerm;
-                dto.AccountingDocumentId = item.invoices.Id;
-                return dto;
-            }).ToList());
+            var arDetailsList = from arDetail in _arInvoiceEntryDocumentDetailUnitRepository.GetAll()
+                                join account in _accountUnitRepository.GetAll() on arDetail.AccountId equals account.Id
+                                join job in _jobUnitRepository.GetAll() on arDetail.JobId equals job.Id
+                                select new
+                                {
+                                    AccountingDocumentId = arDetail.AccountingDocumentId,
+                                    Account = account.AccountNumber,
+                                    Job = job.JobNumber,
+                                    JobName = job.Caption,
+                                    Amount = arDetail.Amount
+                                };
+
+            var arDetails = await arDetailsList.Where(u => arIdList.Contains(u.AccountingDocumentId.ToString())).ToListAsync();
+
+            var arDetailGroup = (arDetails.GroupBy(i => i.AccountingDocumentId)
+                .Select(g => new
+                {
+                    g.Key,
+                    Jobs = string.Join(",", g.Select(u => u.Job)),
+                    JobName = string.Join(",", g.Select(u => u.JobName)),
+                    Account = string.Join(",", g.Select(u => u.Account)),
+                    Amount = g.Sum(u => u.Amount)
+                })).ToList();
+
+            var arList = from ar in results
+                         join details in arDetailGroup on ar.invoices.Id equals details.Key
+                         select new { arData = ar, arDetailGroup = details };
+
+            return new PagedResultOutput<ArInvoiceEntryDocumentUnitDto>(resultCount, arList.Select(item =>
+  {
+      var dto = item.arData.invoices.MapTo<ArInvoiceEntryDocumentUnitDto>();
+      dto.JobNumber = item.arDetailGroup.Jobs;
+      dto.JobName = item.arDetailGroup.JobName;
+      dto.AccountNumber = item.arDetailGroup.Account;
+      dto.TypeOfCurrency = item.arData.TypeOfCurrency;
+      dto.SalesRepName = item.arData.SalesRepName;
+      dto.ArPaymentTerm = item.arData.ArPaymentTerm;
+      dto.AccountingDocumentId = item.arData.invoices.Id;
+      dto.CustomerName = item.arData.CustomerName;
+      return dto;
+  }).ToList());
         }
 
         /// <summary>
@@ -274,24 +303,23 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
                         join job in _jobUnitRepository.GetAll() on invoices.JobId equals job.Id
                         into jobunit
                         from jobs in jobunit.DefaultIfEmpty()
-                            //join line in _accountUnitRepository.GetAll() on invoices.AccountId equals line.Id
-                            //into account
-                            //from lines in account.DefaultIfEmpty()
+                        join line in _accountUnitRepository.GetAll() on invoices.AccountId equals line.Id
+                        into account
+                        from lines in account.DefaultIfEmpty()
                         join subAccount1 in _subAccountUnitRepository.GetAll() on invoices.SubAccountId1 equals subAccount1.Id
                             into subAccount1
                         from subAccounts1 in subAccount1.DefaultIfEmpty()
-                            //join subAccount2 in _locationSetUnitRepository.GetAll() on invoices. equals subAccount2.Id
-                            //into subAccountunit2
-                            //from subAccounts2 in subAccountunit2.DefaultIfEmpty()
+                        join subAccount4 in _subAccountUnitRepository.GetAll() on invoices.SubAccountId4 equals subAccount4.Id
+                       into subAccountunit4
+                        from subAccounts4 in subAccountunit4.DefaultIfEmpty()
 
                         select new
                         {
                             InvoiceDetails = invoices,
-                            JobDesc = jobs.JobNumber,
-                            //accountDesc = lines.AccountNumber,
+                            JobNumber = jobs.JobNumber,
+                            accountNumber = lines.AccountNumber,
                             subAccount1 = subAccounts1.Description,
-                            //subAccount2 = subAccounts2.Description
-
+                            subAccount4 = subAccounts4.Description
                         };
 
             query = query.Where(p => p.InvoiceDetails.AccountingDocumentId.Value == input.AccountingDocumentId);
@@ -301,15 +329,14 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
             {
                 var dto = item.InvoiceDetails.MapTo<ArInvoiceEntryDetailUnitDto>();
                 dto.SubAccountNumber1 = item.subAccount1;
-                //dto.SubAccountNumber2 = item.subAccount2;
-                //dto.SubAccountNumber3 = item.subAccount3;
-
+                dto.SubAccountNumber4 = item.subAccount4;
+                dto.JobNumber = item.JobNumber;
+                dto.AccountNumber = item.accountNumber;
                 dto.AccountingDocumentId = item.InvoiceDetails.Id;
                 return dto;
             }).ToList());
         }
-
-
+        
         /// <summary>
         /// Get GetArBillingTypeList
         /// </summary>
@@ -318,13 +345,11 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         public async Task<List<NameValueDto>> GetBillingTypeList(AutoSearchInput input)
         {
             var billingTypeList = await _aRBillingTypeUnitRepository.GetAll()
-                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return billingTypeList;
         }
-
-
+        
         /// <summary>
         /// Get CustomerPaymentTermsList
         /// </summary>
@@ -332,32 +357,10 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// <returns></returns>
         public async Task<List<NameValueDto>> GetCustomerPaymentTermsList(AutoSearchInput input)
         {
-            var paymenttermsList = await _customerPaymentTermUnitRepository.GetAll()
-                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
+            var paymentTermsList = await _customerPaymentTermUnitRepository.GetAll()
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
-            return paymenttermsList;
+            return paymentTermsList;
         }
-
-
-
-        /// <summary>
-        /// Get LocationsList
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<List<NameValueDto>> GetLocationsList(AutoSearchInput input)
-        {
-            var locationList = await _locationSetUnitRepository.GetAll()
-                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
-                 .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query))
-                 .Where(u=>u.TypeOfLocationSetId==LocationSets.Location)
-                 .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
-            return locationList;
-        }
-
-
-
-
     }
 }

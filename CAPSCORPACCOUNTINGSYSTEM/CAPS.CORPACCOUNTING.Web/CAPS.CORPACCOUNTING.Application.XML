@@ -1033,6 +1033,13 @@
              </summary>
              <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetLocationsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Locations List
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.ISubAccountUnitAppService.CreateSubAccountUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateSubAccountUnitInput)">
             <summary>
             Create the SubAccount.
@@ -1262,6 +1269,13 @@
             <param name="entityClassification"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ListAppService.GetLocationsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get LocationsList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.SubAccountUnitAppService">
             <summary>
             SubAccount AppService
@@ -1406,13 +1420,6 @@
         <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.GetCustomerPaymentTermsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get CustomerPaymentTermsList
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.GetLocationsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get LocationsList
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1587,6 +1594,9 @@
         <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.JobName">
             <summary>Get Sets the jobName field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.AccountNumber">
+            <summary>Get Sets the AccountNumber field.</summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService">
             <summary>
             
@@ -1644,13 +1654,6 @@
         <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.GetCustomerPaymentTermsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get CustomerPaymentTermsList
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.GetLocationsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
-            <summary>
-            Get LocationsList
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -2843,7 +2846,7 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate.#ctor(CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.AccountsTemplate.#ctor(CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit,System.Int32})">
             <summary>
             
             </summary>
@@ -3036,11 +3039,13 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.LinesTemplate.#ctor(CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService,CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.LinesTemplate.#ctor(CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService,CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CoaUnit,System.Int32})">
             <summary>
             
             </summary>
             <param name="accountUnitAppService"></param>
+            <param name="jobUnitAppService"></param>
+            <param name="coaUnitRepository"></param>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.LinesTemplate.DownLoadTemplate(System.Int32)">
             <summary>
@@ -7618,6 +7623,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.SalesRepName">
             <summary>Gets or sets the SalesRepName field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerUnitDto.TotalOutstandingBalance">
+            <summary>Gets or sets the TotalOutstandingBalance field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AccountUnitDto.ParentId">
             <summary>Gets or sets the ParentId field. </summary>
         </member>
@@ -8444,6 +8452,37 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.GetTypeofPaymentMethodList">
+            <summary>
+            Get Payment Method List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.GetCustomerPaymentTermsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Customer Payment Terms
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ICustomerUnitAppService.GetSalesRepList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SalesRep as list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerUnitAppService.#ctor(CAPS.CORPACCOUNTING.Masters.CustomerUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerUnit},Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.AddressUnitAppService,CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.AddressUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.CustomerPaymentTermUnit},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.SalesRepUnit})">
+            <summary>
+            
+            </summary>
+            <param name="customerUnitManager"></param>
+            <param name="customerUnitRepository"></param>
+            <param name="unitOfWorkManager"></param>
+            <param name="addressUnitAppService"></param>
+            <param name="addressAppService"></param>
+            <param name="addressRepository"></param>
+            <param name="customerPaymentTermRepository"></param>
+            <param name="salesRepRepository"></param>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerUnitAppService.CreateCustomerUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateCustomerUnitInput)">
             <summary>
             Creating the Customer
@@ -8484,6 +8523,31 @@
             To get the CustomerDetails with Addresses by CustomerId
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerUnitAppService.GetCustomerList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Customer as List
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerUnitAppService.GetTypeofPaymentMethodList">
+            <summary>
+            Get Payment Method List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerUnitAppService.GetCustomerPaymentTermsList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get Customer Payment Terms
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.CustomerUnitAppService.GetSalesRepList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get SalesRep as list
+            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService">

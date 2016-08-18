@@ -16,7 +16,6 @@ Ext.define('Chaching.view.roles.RolesGridController', {
             if (record.data.displayName.toLowerCase() == 'admin') {
                 if (form.down('checkbox')) {
                     var chkbox = form.down('checkbox[name=isDefault]');
-                    record.data.isDefault = false;
                     chkbox.checked = false;
                     chkbox.setDisabled(true);
                 }

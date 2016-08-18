@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using CAPS.CORPACCOUNTING.Uploads.Dto;
 
 namespace CAPS.CORPACCOUNTING.Helpers
@@ -13,7 +12,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
         {
             if (propertyLength > maxLength)
             {
-                uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage + " ," + columnName + "Length should be less than "+ maxLength;
+                uploadErrorMessages.ErrorMessage =  uploadErrorMessages.ErrorMessage + " ," + columnName + "Length should be less than "+ maxLength;
             }
 
         }
@@ -28,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
                 case "Int16":
                     if (Convert.ToInt16(property)==0)
                     {
-                        uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage + ", " + columnName + " is Required";
+                        uploadErrorMessages.ErrorMessage =  uploadErrorMessages.ErrorMessage + ", " + columnName + " is Required";
                     }
                     break;
                 case "String":
@@ -38,6 +37,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
                     }
                     break;
             }
+            
         }
 
     }

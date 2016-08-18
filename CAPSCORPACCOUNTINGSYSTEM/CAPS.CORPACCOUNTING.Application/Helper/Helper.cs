@@ -310,8 +310,10 @@ namespace CAPS.CORPACCOUNTING.Helpers
         /// <returns></returns>
         public static bool ConvertToBoolean(string flag)
         {
-            return flag.ToUpper() == "TRUE";
+            return flag.ToUpper() == "TRUE" || flag=="1";
 
         }
+
+       
     }
 }

@@ -120,8 +120,10 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
         public short? TypeOfCurrencyRateId { get; set; }
 
-        
-
+        /// <summary>
+        /// This field we are using in Import case
+        /// </summary>
+        public int No { get; set; }
 
     }
 }

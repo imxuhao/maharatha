@@ -60,7 +60,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                 Name = u.AccountNumber
             });
             var booleanList = ExcelHelper.GetBooleanList();
-            var accountNumberIsNumeric = (await _coaUnitRepository.GetAsync(coaId)).IsNumeric;
+            var accountNumberIsNumeric = (await _coaUnitRepository.FirstOrDefaultAsync(coaId)).IsNumeric;
 
          
             return CreateExcelPackage(
@@ -118,9 +118,12 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                       {
                           ExcelFormula = ExcelHelper.GetMultiValidationString(
                               new List<string>() {
-                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxDisplayNameLength) }),
+                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxDisplayNameLength),
+                                    ExcelHelper.GetDuplicateCellFormula("B",startRowIndex,endRowIndex)
+
+                              }),
                           ShowErrorMessage = true,
-                          Error = ExcelHelper.ApplyPlaceHolderValues(L("AllowMaxLength"), new Dictionary<string, string>() { { "{length}", AccountUnit.MaxDisplayNameLength.ToString() },
+                          Error = ExcelHelper.ApplyPlaceHolderValues(L("AllowDuplicateVaues") + ", "+L("AllowMaxLength"), new Dictionary<string, string>() { { "{length}", AccountUnit.MaxDisplayNameLength.ToString() },
                             { "{type}", "Charcters" }}),
                           ErrorTitle = L("ValidationMessage"),
                           ErrorStyle = ExcelDataValidationWarningStyle.stop

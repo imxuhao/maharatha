@@ -1143,20 +1143,27 @@
     <text name="ProcessSelected" value="Process selected"/>
     <text name="POProcessedSuccessfully" value="Selected PO(s) been processed successfully."/>
     <text name="Rownumber" value="Row #"/>
-    <text name="DuplicateAccountNumber" value=" Duplicate AccountNumber,"/>
-    <text name="DuplicateDescription" value=" Duplicate Description."/>
+    <text name="DuplicateAccountNumber" value=" Duplicate Account # - "/>
+    <text name="DuplicateDescription" value=",Duplicate Description - "/>
+    <text name="StartBold" value="&lt;B&gt;"/>
+    <text name="EndBold" value="&lt;/B&gt;"/>
+    
     <text name="DuplicateAccountNumbers" value="Duplicate AccountNumbers:"/>
-    <text name="DuplicateDescriptions" value="Duplicate Descriptions:"/>
      <text name="DuplicateJobNumbers" value="Duplicate JobNumbers:"/>
     <text name="DuplicateJobNames" value="Duplicate JobNames:"/>
      <text name="DuplicateJobNumber" value=" Duplicate JobNumber,"/>
       <text name="DuplicateJobName" value=" Duplicate JobName." />
     <text name="ShouldbeNumberic" value=" should be Numeric," />
-    <text name="DuplicateCaption" value=" Duplicate Caption."/>
-    <text name="DuplicateLineNumber" value=" Duplicate LineNumber,"/>
+    <text name="DuplicateCaption" value=" Duplicate Caption - "/>
+    <text name="DuplicateLineNumber" value=" Duplicate Line # - "/>
     <text name="EditAddress" value="Edit address"/>
     <text name="CreateAddress" value="Create address"/>
     <text name="ViewAddress" value="View address"/>
     <text name="ErrorDetail" value="Error Detail"/>
+ <text name="InExcel" value=" in Excel"/>
+     <text name="InDb" value=" in Db"/>
+    
+   
+
   </texts>
 </localizationDictionary>

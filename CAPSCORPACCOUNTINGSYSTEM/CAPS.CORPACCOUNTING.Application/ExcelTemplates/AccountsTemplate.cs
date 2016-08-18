@@ -62,7 +62,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, currencylist, L("Currency"), "B");
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, consolidationList, L("Consolidation"), "C");
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, typeOfCurrencyRateList, L("RateTypeOverride"), "D");
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, linkedAccountList, L("NewAccount"), "E");
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, linkedAccountList, L("IsAccountRevalued"), "E");
                     ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, L("Flags"), "F");
 
                     //Create Header Row
@@ -107,9 +107,11 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                       {
                           ExcelFormula = ExcelHelper.GetMultiValidationString(
                               new List<string>() {
-                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxDisplayNameLength) }),
+                                    ExcelHelper.GetMaxLengthFormula("B2", AccountUnit.MaxDisplayNameLength),
+                                ExcelHelper.GetDuplicateCellFormula("B",startRowIndex,endRowIndex)}),
                           ShowErrorMessage = true,
-                          Error = ExcelHelper.ApplyPlaceHolderValues(L("AllowMaxLength"), new Dictionary<string, string>() { { "{length}", AccountUnit.MaxDisplayNameLength.ToString() },
+                          Error = ExcelHelper.ApplyPlaceHolderValues(L("AllowDuplicateVaues") + ", "+
+                          L("AllowMaxLength"), new Dictionary<string, string>() { { "{length}", AccountUnit.MaxDisplayNameLength.ToString() },
                             { "{type}", "Charcters" }}),
                           ErrorTitle = L("ValidationMessage"),
                           ErrorStyle = ExcelDataValidationWarningStyle.stop

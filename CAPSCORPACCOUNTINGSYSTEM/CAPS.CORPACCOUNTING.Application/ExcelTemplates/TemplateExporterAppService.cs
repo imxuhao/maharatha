@@ -64,7 +64,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                     fileDto = await _divisionsTemplate.DownLoadTemplate(0);
                     break;
                 case "Lines":
-                    fileDto = await _linesTemplate.DownLoadTemplate(0);
+                    fileDto = await _linesTemplate.DownLoadTemplate(input.CoaId.Value);
                     break;
             }
 

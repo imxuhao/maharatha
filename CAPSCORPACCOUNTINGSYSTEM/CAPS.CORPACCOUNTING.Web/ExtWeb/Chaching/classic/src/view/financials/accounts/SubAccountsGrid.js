@@ -40,6 +40,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
     requireMultisort: true,
     isEditable: true,
     editingMode: 'row',
+    forceFit: true,
     columnLines: true,
     multiColumnSort: true,
     editWndTitleConfig: {
@@ -64,7 +65,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              dataIndex: 'subAccountNumber',
              sortable: true,
              groupable: true,
-             width: '15%',
+             flex: 1,
+             //width: '15%',
 
              filterField: {
                  xtype: 'textfield',
@@ -78,7 +80,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              dataIndex: 'description',
              sortable: true,
              groupable: true,
-             width: '15%',
+             flex: 1,
+             //width: '15%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -93,7 +96,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
               dataIndex: 'typeofSubAccount',
               sortable: true,
               groupable: true,
-              width: '13%',
+              flex: 1,
+              //width: '13%',
               filterField: {
                   xtype: 'combobox',
                   valueField: 'typeofSubAccountId',
@@ -117,7 +121,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              dataIndex: 'isActive',
              sortable: true,
              groupable: true,
-             width: '11%',
+             flex: 1,
+             //width: '11%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -138,7 +143,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              dataIndex: 'isCorporateSubAccount',
              sortable: true,
              groupable: true,
-             width: '14%',
+             flex: 1,
+             //width: '14%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -159,7 +165,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              dataIndex: 'isProjectSubAccount',
              sortable: true,
              groupable: true,
-             width: '15%',
+             flex: 1,
+             //width: '15%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -180,7 +187,8 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              dataIndex: 'isAccountSpecific',
              sortable: true,
              groupable: true,
-             width: '12%',
+             flex: 1,
+             //width: '12%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',

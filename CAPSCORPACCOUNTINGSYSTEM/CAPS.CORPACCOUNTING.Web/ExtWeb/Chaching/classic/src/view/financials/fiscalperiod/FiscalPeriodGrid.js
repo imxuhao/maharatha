@@ -63,6 +63,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
         iconCls: 'fa fa-th'
     },
     createNewMode: 'tab',
+    forceFit: true,
     isSubMenuItemTab: true,
     //listeners: {
     //    cellclick: 'onProjectsCellClick'
@@ -74,7 +75,8 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
              dataIndex: 'yearStartDate',
              sortable: true,
              groupable: true,
-             width: '15%',
+             flex:1,
+             //width: '15%',
              renderer : Chaching.utilities.ChachingRenderers.renderDateOnly,
             // renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              filterField: {
@@ -91,7 +93,8 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
              dataIndex: 'yearEndDate',
              sortable: true,
              groupable: true,
-             width: '15%',
+             flex:1,
+             //width: '15%',
              renderer: Chaching.utilities.ChachingRenderers.renderDateOnly,
              filterField: {
                  xtype: 'datefield',
@@ -109,8 +112,8 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
              groupable: false,
              flex: 1,
              align : 'left',
-             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-             width: '13%'
+             renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer//,
+             //width: '13%'
          }
 
     ]

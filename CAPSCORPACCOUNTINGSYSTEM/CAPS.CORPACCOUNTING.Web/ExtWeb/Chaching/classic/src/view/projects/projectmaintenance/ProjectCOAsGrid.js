@@ -35,6 +35,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
           routeName: 'coa.create',
           iconAlign: 'left'
       }],
+    forceFit: true,
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
@@ -66,7 +67,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
              dataIndex: 'caption',
              sortable: true,
              groupable: true,
-             width: '54%',
+             flex: 1,
+             //width: '54%',
              renderer: Chaching.utilities.ChachingRenderers.rendererHyperLink,
              filterField: {
                  xtype: 'textfield',
@@ -81,7 +83,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
               text: app.localize('Defaults'),
               sortable: true,
               groupable: true,
-              width: '39%',
+              flex: 1,
+              //width: '39%',
               hidden: false            
           }
         ]

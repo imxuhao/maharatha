@@ -39,7 +39,7 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         public async Task DeleteAddressUnit(DeleteAddressUnitInput input)
         {
-            await _addressUnitRepository.DeleteAsync(p => p.ObjectId == input.ObjectId && p.TypeofObjectId == input.TypeofObjectId);
+            await _addressUnitRepository.DeleteAsync(p => p.Id == input.Id);
         }
 
         public async Task<ListResultOutput<AddressUnitDto>> GetAddressUnits(GetAddressUnitInput input)

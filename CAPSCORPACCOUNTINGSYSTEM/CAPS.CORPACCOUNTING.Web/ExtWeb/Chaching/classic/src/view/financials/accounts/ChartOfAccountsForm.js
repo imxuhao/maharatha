@@ -40,7 +40,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             itemId: 'caption',              
             allowBlank: false,
             tabIndex: 1,
-            fieldLabel: app.localize('Caption').initCap() ,
+            fieldLabel: app.localize('Caption') ,
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: app.localize('MandatoryField')
@@ -49,11 +49,11 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             name: 'description',
             itemId: 'description',
             tabIndex: 3,
-            allowBlank: false,
-            fieldLabel: app.localize('description').initCap() ,
+            //allowBlank: false,
+            fieldLabel: app.localize('description') ,
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('MandatoryField')
+            emptyText: '' //app.localize('MandatoryField')
         }, {
             xtype: 'checkbox',
             boxLabel: app.localize('IsApproved'),

@@ -1,5 +1,5 @@
 Ext.define('Chaching.view.languages.LanguagesTextFormController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.languages-languagestextform',
     getLanguageTextsonChange: function (form) {
         var form = form.up('form');

@@ -61,7 +61,7 @@ Ext.define('Chaching.view.header.ChachingHeader', {
             xtype: 'button',
             scale: 'small',
             width: 120,
-            iconCls: 'famfamfam-flag famfamfam-flag-gb',
+            iconCls: 'famfamfam-flag famfamfam-flag-us',
             iconAlign: 'left',
             text: 'English', 
             textAlign:'right',

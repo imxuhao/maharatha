@@ -245,7 +245,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
                                 loopRec.internalId) calculatedAmount += parseFloat(loopRec.get('amount'));
                         }
                         amountRemains = parseFloat(origImportedAmount - calculatedAmount).toFixed(2);
-                        if (amountRemains >=0) {
+                        if (amountRemains) {
                             field.setValue(amountRemains);
                             record.set('amount', amountRemains);
                         }
@@ -327,7 +327,12 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         if (!moduleSpecificChecks) {
             return false;
         }
-        //if (context.field === 'isAccountingItemSplit' && context.record.get('isAccountingItemSplit')) return false;
+        if (context.field === "amount" && context.record.get('isAccountingItemSplit')) {
+            var validateSplitAmount = me.validateSplitAmount(editor, context);
+            if (!validateSplitAmount) {
+                return false;
+            }
+        }
         var cell = view.getView().getCell(context.record, context.column);
         if (cell) {
             cell.removeCls("x-invalid-cell-value");
@@ -338,6 +343,34 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
     },
     doModuleSpecificBeforeEdit:function(editor, context, eOpts) {
         return true;
+    },
+    validateSplitAmount:function(editor, context) {
+        var isValid = true;
+        if (editor&&context) {
+            var record = context.record,
+                 detailStore = this.getView().getStore(),
+                    origImportedAmount = record.get('OriginalImportedAmount'),
+                    calculatedAmount = 0,
+                    amountRemains = 0;
+            if (record && record.get('isAccountingItemSplit')) {
+                var groupRecords = detailStore.queryRecords('LocalSplitGroup',
+                        record.get('LocalSplitGroup'));
+                if (groupRecords && groupRecords.length > 0) {
+                    for (var i = 0; i < groupRecords.length; i++) {
+                        var loopRec = groupRecords[i];
+                        if (record
+                            .internalId !==
+                            loopRec.internalId) calculatedAmount += parseFloat(loopRec.get('amount'));
+                    }
+                    amountRemains = parseFloat(origImportedAmount - calculatedAmount).toFixed(2);
+                    if (!amountRemains || amountRemains === "0" || amountRemains === "0.00") {
+                        abp.notify.warn(app.localize('SplitGroupTotalExceed'), app.localize('ValidationFailed'));
+                        isValid = false;
+                    }
+                }
+            }
+        }
+        return isValid;
     }
 
 });

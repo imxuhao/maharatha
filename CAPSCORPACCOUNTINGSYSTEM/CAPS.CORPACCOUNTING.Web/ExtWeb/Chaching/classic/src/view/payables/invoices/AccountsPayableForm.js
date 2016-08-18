@@ -30,6 +30,7 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableForm',{
         collapsible: true,
         collapseMode:'header',
         collapseDirection: 'bottom',//right
+        animCollapse:0,
         headerPosition: 'top',
         //flex: 1,
         width: '100%',

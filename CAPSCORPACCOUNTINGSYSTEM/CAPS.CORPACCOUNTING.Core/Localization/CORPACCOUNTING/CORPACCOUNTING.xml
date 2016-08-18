@@ -1160,13 +1160,11 @@
     <text name="CreateAddress" value="Create address"/>
     <text name="ViewAddress" value="View address"/>
     <text name="ErrorDetail" value="Error Detail"/>
- <text name="InExcel" value=" in Excel"/>
-     <text name="InDb" value=" in Db"/>
+    <text name="InExcel" value=" in Excel"/>
+    <text name="InDb" value=" in Db"/>
     <text name="StartColor" value="&lt;font color='#FF0000'&gt;"/>
     <text name="EndColor" value="&lt;/font&gt;"/>
-
     <text name="CreditInformation" value="Credit Information" />
-   
-
+    <text name="SplitGroupTotalExceed" value="There is no amount remain to assign for this row in this split group"/>
   </texts>
 </localizationDictionary>

@@ -241,8 +241,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     into g
                  select new UploadErrorMessagesOutputDto
                  {
-                     RowNumber = g.Key,
-                     ErrorMessage = (L("StartBold") + (string.Join(",", g.Select(kvp => kvp.ErrorMessage))).TrimStart(',') + L("StartBold"))
+                     RowNumber = L("StartBold") + L("StartColor") + g.Key + L("EndColor") + L("EndBold"),
+                     ErrorMessage = string.Join(",", g.Select(kvp => kvp.ErrorMessage)).TrimStart(',')
                  }).OrderBy(p => p.RowNumber).ToList();
 
 
@@ -388,9 +388,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 StringBuilder stringBuilder = new StringBuilder();
                 if (!string.IsNullOrEmpty(account.AccountNumber))
-                    stringBuilder.Append(L("DuplicateLineNumber") + account.AccountNumber + L("InDb"));
+                    stringBuilder.Append(L("DuplicateLineNumber") + L("StartBold")+ account.AccountNumber+ L("EndBold") + L("InDb"));
                 if (!string.IsNullOrEmpty(account.Caption))
-                    stringBuilder.Append(L("DuplicateCaption") + account.Caption + L("InDb"));
+                    stringBuilder.Append(L("DuplicateCaption") + L("StartBold") + account.Caption + L("EndBold") + L("InDb"));
                 var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
                     ErrorMessage = stringBuilder.ToString().TrimEnd(',').TrimStart(','),

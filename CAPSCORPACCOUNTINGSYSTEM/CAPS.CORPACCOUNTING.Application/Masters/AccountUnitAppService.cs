@@ -385,8 +385,8 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     into g
                  select new UploadErrorMessagesOutputDto
                  {
-                     RowNumber = g.Key,
-                     ErrorMessage = (L("StartBold") + (string.Join(",", g.Select(kvp => kvp.ErrorMessage))).TrimStart(',') + L("StartBold"))
+                     RowNumber = L("StartBold") + L("StartColor") + g.Key+L("EndColor")+ L("EndBold"),
+                     ErrorMessage =  string.Join(",", g.Select(kvp => kvp.ErrorMessage)).TrimStart(',') 
                  }).OrderBy(p => p.RowNumber).ToList();
 
 
@@ -448,15 +448,15 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     {
                         StringBuilder stringBuilder = new StringBuilder();
                         if (!string.IsNullOrEmpty(duplicateAccounts.AccountNumber))
-                            stringBuilder.Append(L("DuplicateAccountNumber") + duplicateAccounts.AccountNumber +
+                            stringBuilder.Append(L("DuplicateAccountNumber") + L("StartBold")+ duplicateAccounts.AccountNumber + L("EndBold") +
                                                  L("InExcel"));
                         if (!string.IsNullOrEmpty(duplicateAccounts.Description))
-                            stringBuilder.Append(L("DuplicateDescription") + duplicateAccounts.Description +
+                            stringBuilder.Append(L("DuplicateDescription") + L("StartBold")+ duplicateAccounts.Description + L("EndBold") +
                                                  L("InExcel"));
 
                         var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                         {
-                            RowNumber = Convert.ToInt32(duplicateAccounts.No),
+                            RowNumber = Convert.ToString(duplicateAccounts.No),
                             ErrorMessage = stringBuilder.ToString().TrimStart(',')
                         };
                         uploadErrorMessagesList.Add(uploadErrorMessages);
@@ -533,13 +533,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 {
                     StringBuilder stringBuilder = new StringBuilder();
                     if (!string.IsNullOrEmpty(account.AccountNumber))
-                        stringBuilder.Append(L("DuplicateAccountNumber") + account.AccountNumber + L("InDb"));
+                        stringBuilder.Append(L("DuplicateAccountNumber") + L("StartBold")+account.AccountNumber+ L("EndBold") + L("InDb"));
                     if (!string.IsNullOrEmpty(account.Caption))
-                        stringBuilder.Append(L("DuplicateDescription") + account.Caption + L("InDb"));
+                        stringBuilder.Append(L("DuplicateDescription") + L("StartBold")+account.Caption + L("EndBold") + L("InDb"));
                     var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                     {
                         ErrorMessage = stringBuilder.ToString().TrimEnd(',').TrimStart(','),
-                        RowNumber = account.RowNumber
+                        RowNumber = account.RowNumber.ToString()
                     };
                     uploadErrorMessagesList.Add(uploadErrorMessages);
                 }
@@ -561,7 +561,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
 
                 UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto
                 {
-                    RowNumber = input.No
+                    RowNumber = input.No.ToString()
                 };
                 DataValidator.CheckLength(input.AccountNumber.Length, AccountUnit.MaxCodeLength, L("AccountNumber"),
                     uploadErrorMessages);

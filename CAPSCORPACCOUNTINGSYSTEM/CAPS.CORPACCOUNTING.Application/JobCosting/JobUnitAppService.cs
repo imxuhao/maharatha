@@ -635,7 +635,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
                     ErrorMessage = error.ToString().TrimEnd(','),
-                    RowNumber = job.RowNumber
+                    RowNumber = job.RowNumber.ToString()
                 };
                 uploadErrorMessagesList.Add(uploadErrorMessages);
             }
@@ -644,7 +644,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         private UploadErrorMessagesOutputDto ValidateUploadedData(CreateJobUnitInput input, int rowNumber,int budgetFormatId)
         {
-            UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = rowNumber };
+            UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = rowNumber.ToString() };
             DataValidator.CheckLength(input.JobNumber.Length, JobUnit.MaxJobNumberLength, L("JobNumber"), uploadErrorMessages);
             DataValidator.CheckLength(input.Caption.Length, JobUnit.MaxJobNumberLength, L("JobName"), uploadErrorMessages);
             DataValidator.RequiredValidataion(input.JobNumber, L("JobNumber"), uploadErrorMessages);

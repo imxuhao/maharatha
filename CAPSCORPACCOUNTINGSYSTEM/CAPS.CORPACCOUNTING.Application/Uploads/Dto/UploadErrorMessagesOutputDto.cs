@@ -8,7 +8,7 @@ namespace CAPS.CORPACCOUNTING.Uploads.Dto
 {
     public class UploadErrorMessagesOutputDto
     {
-        public int RowNumber { get; set; }
+        public string RowNumber { get; set; }
 
         public string ErrorMessage { get; set; }
     }

@@ -309,7 +309,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
                         var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                         {
-                            RowNumber = Convert.ToInt32(duplicateAccounts.No),
+                            RowNumber = Convert.ToString(duplicateAccounts.No),
                             ErrorMessage = stringBuilder.ToString().TrimStart(',')
                         };
                         uploadErrorMessagesList.Add(uploadErrorMessages);
@@ -394,7 +394,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
                     ErrorMessage = stringBuilder.ToString().TrimEnd(',').TrimStart(','),
-                    RowNumber = account.RowNumber
+                    RowNumber = account.RowNumber.ToString()
                 };
                 uploadErrorMessagesList.Add(uploadErrorMessages);
             }
@@ -412,7 +412,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             foreach (var input in inputUnits)
             {
-                var uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = input.No };
+                var uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = input.No.ToString() };
                 DataValidator.CheckLength(input.AccountNumber.Length, AccountUnit.MaxCodeLength, L("LineNumber"), uploadErrorMessages);
                 NumericValidation(input.AccountNumber, uploadErrorMessages, isNumeric);
                 DataValidator.CheckLength(input.Caption.Length, AccountUnit.MaxDesc, L("Caption"), uploadErrorMessages);

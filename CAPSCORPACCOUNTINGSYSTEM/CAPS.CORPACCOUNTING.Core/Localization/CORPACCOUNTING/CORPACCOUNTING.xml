@@ -1162,6 +1162,9 @@
     <text name="ErrorDetail" value="Error Detail"/>
  <text name="InExcel" value=" in Excel"/>
      <text name="InDb" value=" in Db"/>
+    <text name="StartColor" value="&lt;font color='#FF0000'&gt;"/>
+    <text name="EndColor" value="&lt;/font&gt;"/>
+
     <text name="CreditInformation" value="Credit Information" />
    
 

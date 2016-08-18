@@ -415,7 +415,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                     {
                                         foreach (var user in userList)
                                         {
-                                            if (user.Name != "admin")
+                                            if (user.Name != StaticUsers.UserName)
                                             {
                                                 user.MapTo(userUnit);
                                                 userUnit.TenantId = newTenantId;
@@ -451,7 +451,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
                                         foreach (var role in rollList)
                                         {
-                                            if (role.Name != "Admin" && role.Name != "User")
+                                            if (role.Name != StaticRoleNames.Tenants.Admin && role.Name != StaticRoleNames.Tenants.User)
                                             {
                                                 
                                                 role.MapTo(roleUnit);

@@ -37,9 +37,9 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             return new User
                    {
                        TenantId = tenantId,
-                       UserName = AdminUserName,
+                       UserName = StaticUsers.UserName,
                        Name = StaticUsers.Name,
-                       Surname = StaticUsers.Surname,
+                       Surname = StaticUsers.SurName,
                        EmailAddress = emailAddress,
                        Password = new PasswordHasher().HashPassword(password)
                    };

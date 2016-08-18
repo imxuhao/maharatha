@@ -9,7 +9,7 @@
 
         public static class Tenants
         {
-            public const string Admin = "Admin";
+            public const string Admin = "AppSupport";
 
             public const string User = "User";
         }

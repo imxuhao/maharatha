@@ -45,8 +45,8 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Host
                     {
                         TenantId = null,
                         UserName = User.AdminUserName,
-                        Name = StaticUsers.Name,
-                        Surname = StaticUsers.Surname,
+                        Name = "admin",
+                        Surname = "admin",
                         EmailAddress = "admin@aspnetzero.com",
                         IsEmailConfirmed = true,
                         ShouldChangePasswordOnNextLogin = true,

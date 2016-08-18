@@ -28,15 +28,16 @@
         ui: 'formTabPanels',
         items: [
         {
-            title: abp.localization.localize("General").initCap(),
+            title: abp.localization.localize("ContactInformation"),
             iconCls: 'fa fa-gear',
+            layout: 'column',
             items: [{
-                xtype: 'fieldset',
-                ui: 'transparentFieldSet',
-                title: abp.localization.localize("GeneralInformation").initCap(),
-                collapsible: true,
-                layout: 'column',
-                items: [{
+                //xtype: 'fieldset',
+                //ui: 'transparentFieldSet',
+                //title: abp.localization.localize("GeneralInformation"),
+                //collapsible: true,
+                //layout: 'column',
+                //items: [{
                     columnWidth: .5,
                     padding: '20 10 0 20',
                     defaults: {
@@ -53,7 +54,7 @@
                         name: 'lastName',
                         itemId: 'lastName',
                         allowBlank: false,
-                        fieldLabel: app.localize('CompanyLastName').initCap(),
+                        fieldLabel: app.localize('AgencyCompanyName'),
                         width: '100%',
                         ui: 'fieldLabelTop',
                         emptyText: app.localize('MandatoryField')
@@ -62,7 +63,7 @@
                              xtype: 'textfield',
                              name: 'customerNumber',
                              itemId: 'customerNumber',
-                             fieldLabel: app.localize('CustomerNumber').initCap(),
+                             fieldLabel: app.localize('CustomerNumber'),
                              width: '100%',
                              ui: 'fieldLabelTop'
                          }
@@ -144,25 +145,24 @@
                             width: '100%'
                         }]
                     }]
-            }
-            ]
+            //}]
         },
         {
-            title: abp.localization.localize("Other").initCap(),
+            title: abp.localization.localize("CreditInformation"),
             iconCls: 'fa fa-gear',
+            layout: 'column',
             items: [
               {
-                  xtype: 'fieldset',
-                  collapsible: true,
-                  title: abp.localization.localize("PaymentInformation").initCap(),
-                  ui: 'transparentFieldSet',
-                  layout: 'column',
-                  items: [
-        {
-            columnWidth: .5,
-            padding: '20 10 0 20',
-            defaults: {
-                labelWidth: 120
+                  //xtype: 'fieldset',
+                  //collapsible: true,
+                  //title: abp.localization.localize("PaymentInformation"),
+                  //ui: 'transparentFieldSet',
+                  //layout: 'column',
+                  //items: [{
+                    columnWidth: .5,
+                    padding: '20 10 0 20',
+                    defaults: {
+                    labelWidth: 120
                 //labelAlign: 'top',
                 //blankText: app.localize('MandatoryToolTipText')
             },
@@ -222,11 +222,8 @@
                   emptyText: app.localize('SelectOption')
 
               }]
-                  }
-
-                  ]
+                  //}]
               }]
-
 
         }]
 

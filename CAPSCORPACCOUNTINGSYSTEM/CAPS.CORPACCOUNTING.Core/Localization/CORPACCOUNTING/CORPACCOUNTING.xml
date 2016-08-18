@@ -682,7 +682,7 @@
     <text name="Address3" value="Address3" />
     <text name="Address4" value="Address4" />
     <text name="CompanyName" value="Company Name" />
-    <text name="CompanyLastName" value="Company/Last Name" />
+    <text name="AgencyCompanyName" value="Agency/Company Name" />
     <text name="BillingAccount#" value="Billing Account #" />
     <text name="TaxInformation" value="Tax Information" />
     <text name="TaxCredit" value="Tax Credit" />
@@ -1162,7 +1162,7 @@
     <text name="ErrorDetail" value="Error Detail"/>
  <text name="InExcel" value=" in Excel"/>
      <text name="InDb" value=" in Db"/>
-    
+    <text name="CreditInformation" value="Credit Information" />
    
 
   </texts>

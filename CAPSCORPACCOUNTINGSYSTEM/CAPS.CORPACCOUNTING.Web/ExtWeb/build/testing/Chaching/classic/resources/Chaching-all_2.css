@@ -9911,19 +9911,82 @@ body.x-ios.x-webview.x-portrait {
     background-color: #3598dc !important;
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:173 */
+.chaching-grid .x-column-header-inner .x-column-header-trigger {
+    /*Always visible column trigger*/
+    width: 24px;
+    display: block;
+    background-color: #3598dc;
+    font: 16px/1 FontAwesome;
+    color: #fff;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:180 */
+.chaching-grid .x-column-header-trigger {
+    border-left: 1px solid #3598dc !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:183 */
+.chaching-grid .x-column-header-inner .x-column-header-trigger:before {
+    display: block;
+    content: "\f0d7";
+    top: 50%;
+    margin-top: -8px;
+    text-align: center;
+    position: relative;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:192 */
+.chaching-grid .x-column-header-over .x-column-header-trigger {
+    background-color: #eaeff4;
+    color: #919191;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:197 */
+.chaching-grid .x-column-header-open .x-column-header-trigger {
+    background-color: #dee3e8;
+    color: #919191;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:202 */
 .chaching-transactiongrid .x-column-header {
     background-color: #dfe8f6 !important;
     font: 700 11px/19px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
     cursor: pointer !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:178 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:207 */
 .chaching-transactiongrid .x-column-header-last {
     background-color: #dfe8f6 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:181 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:210 */
 .chaching-transactiongrid .x-grid-header-ct {
     border-radius: 5px 5px 0 0 !important;
     background-color: #dfe8f6 !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:214 */
+.chaching-transactiongrid .x-column-header-inner .x-column-header-trigger {
+    width: 24px;
+    display: block;
+    background-color: #dfe8f6;
+    font: 16px/1 FontAwesome;
+    color: black;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:221 */
+.chaching-transactiongrid .x-column-header-trigger {
+    border-left: 1px solid #dfe8f6 !important;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:224 */
+.chaching-transactiongrid .x-column-header-inner .x-column-header-trigger:before {
+    display: block;
+    content: "\f0d7";
+    top: 50%;
+    margin-top: -8px;
+    text-align: center;
+    position: relative;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:232 */
+.chaching-transactiongrid .x-column-header-over .x-column-header-trigger {
+    background-color: #eaeff4;
+    color: #919191;
+}
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:236 */
+.chaching-transactiongrid .x-column-header-open .x-column-header-trigger {
+    background-color: #dee3e8;
+    color: #919191;
 }
 /* http://localhost:1841/ext/classic/theme-base/sass/etc/mixins/frame.scss:187 */
 .x-btn-clearFilter-small {
@@ -10494,7 +10557,7 @@ body.x-ios.x-webview.x-portrait {
 .x-button-clearFilter-small-cell > .x-grid-cell-inner >.x-btn-clearFilter-small {
     vertical-align: top;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:199 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:254 */
 .x-btn-icon-el-clearFilter-small {
     font-weight: 700 !important;
     font-size: 20px !important;
@@ -12031,17 +12094,17 @@ body.x-ios.x-webview.x-portrait {
     padding-top: 0px;
     padding-bottom: 0px;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:223 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:278 */
 .x-form-trigger-wrap-columnFilterField {
     border-right-color: transparent !important;
     border-right-width: 0px !important;
     border-right-style: none !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:228 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:283 */
 .x-form-text-columnFilterField {
     font-style: italic !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:231 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:286 */
 .x-form-text-field-body-columnFilterField {
     margin-right: 3px !important;
 }
@@ -12231,7 +12294,7 @@ body.x-ios.x-webview.x-portrait {
     display: none;
     content: "x-slicer:" !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:243 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:298 */
 .x-toolbar-combogridtoolbar {
     padding: 5px;
     border-radius: 0 0 5px 5px;
@@ -12825,59 +12888,59 @@ body.x-ios.x-webview.x-portrait {
 .x-button-combogridactionButton-small-cell > .x-grid-cell-inner >.x-btn-combogridactionButton-small {
     vertical-align: top;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:262 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:317 */
 .x-btn-combogridactionButton-small {
     padding: 0 !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:266 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:321 */
 .chaching-combogrid .x-column-header {
     background-color: #3598dc !important;
     color: white !important;
     font: 600 11px/19px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
     cursor: pointer !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:272 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:327 */
 .chaching-combogrid .x-column-header-over {
     color: black !important;
     background-color: #3598dc !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:276 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:331 */
 .chaching-combogrid .x-column-header-last {
     background-color: #3598dc !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:279 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:334 */
 .chaching-combogrid .x-grid-header-ct {
     border-radius: 5px 5px 0 0 !important;
     background-color: #3598dc !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:283 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:338 */
 .chaching-combogrid .x-grid-item-over {
     background-color: #7fb0da !important;
     border-color: #7fb0da !important;
     color: white !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:288 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:343 */
 .chaching-combogrid .x-grid-with-row-lines .x-grid-item .x-grid-item-selected {
     background-color: #7fb0da !important;
     border-color: #7fb0da !important;
     color: white !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:293 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:348 */
 .chaching-combogrid .x-grid-with-col-lines .x-grid-item-selected .x-grid-cell {
     background-color: #7fb0da !important;
     border-color: #7fb0da !important;
     color: white !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:298 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:353 */
 .chaching-combogrid .x-grid-item-focused {
     color: white !important;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:301 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:356 */
 .chaching-combogrid .x-grid-item {
     font-weight: 600 !important;
     font: 600 11px/18px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
 }
-/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:305 */
+/* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:360 */
 .chaching-combogrid .x-grid-item-selected {
     background-color: #7fb0da !important;
     border-color: #7fb0da !important;
@@ -15676,50 +15739,4 @@ body.x-ios.x-webview.x-portrait {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:1886 */
-.x-tab-submenuTabs-bottom {
-    margin: 0 4px 0 0;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:1890 */
-.x-tab-submenuTabs-bottom.x-rtl {
-    margin: 0 0 0 4px;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:1895 */
-.x-tab-submenuTabs-bottom.x-tab-rotate-left {
-    margin: 0 0 0 4px;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:1899 */
-.x-tab-submenuTabs-bottom.x-tab-rotate-left.x-rtl {
-    margin: 0 4px 0 0;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:1917 */
-.x-tab-submenuTabs-bottom.x-tab-focus {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:1946 */
-.x-tab-submenuTabs-bottom.x-tab-focus.x-tab-over {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:1975 */
-.x-tab-submenuTabs-bottom.x-tab-focus.x-tab-active {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2001 */
-.x-tab-submenuTabs-left {
-    margin: 0 0 4px 0;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2005 */
-.x-tab-submenuTabs-left.x-rtl {
-    margin: 0 0 4px 0;
-}
-/* http://localhost:1841/ext/classic/theme-neutral/sass/src/tab/Tab.scss:2010 */
-.x-tab-submenuTabs-left.x-tab-rotate-right {
-    margin: 4px 0 0 0;
 }

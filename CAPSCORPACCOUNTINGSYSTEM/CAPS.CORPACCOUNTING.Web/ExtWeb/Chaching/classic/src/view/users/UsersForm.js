@@ -307,7 +307,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                         xtype: 'grid',
                                         cls: 'chaching-grid',
                                         itemId: 'companyListGridItemId',
-                                        scrollable: true,
+                                        forceFit: true,
+                                        scrollable: false,
                                         height: '100%',
                                         selModel: {
                                             selType: 'checkboxmodel'
@@ -316,10 +317,12 @@ Ext.define('Chaching.view.users.UsersForm',
                                             {
                                                 text: abp.localization.localize("LinkCompanyRoles"),
                                                 dataIndex: 'roleDisplayName',
-                                                width: '80%'
+                                                //width: '80%'
+                                                flex:1
                                             }, {
                                                 text: app.localize('View'),
-                                                width: '15%',
+                                                //width: '15%',
+                                                flex:1,
                                                 itemId: 'linkCompanyRolesViewButtonId',
                                                 renderer: Chaching.utilities.ChachingRenderers.viewUsersRole //addViewUsersLinkComp
                                             }

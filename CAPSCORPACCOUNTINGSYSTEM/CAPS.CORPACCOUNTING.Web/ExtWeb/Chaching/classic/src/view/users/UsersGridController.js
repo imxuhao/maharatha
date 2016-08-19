@@ -194,14 +194,20 @@ Ext.define('Chaching.view.users.UsersGridController', {
             rolesStore.load({
                 callback: function (response, records, success) {
                     if (success) {
+                        var rolesSelectionModel = rolesGrid.getSelectionModel();
+                        var defaultRoles = [];
                         Ext.each(response, function (rec) {
-                            //var isDefault = rec.get('isDefault');
+                            var isDefault = rec.get('isDefault');
                             //var isStatic = rec.get('isStatic');
 
                             var roleModel = Ext.create('Chaching.model.roles.RolesModel');
+                            
                             roleModel.set('id', rec.get('id'));
                             roleModel.set('name', rec.get('name'));
                             roleModel.set('displayName', rec.get('displayName'));
+                            if (isDefault) {
+                                defaultRoles.push(rec);
+                            }
                             roleModel.commit();
                             //if (isDefault) {
                             //   // rolesGrid.getSelectionModel().select(roleModel, true);
@@ -209,6 +215,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
                             //}
 
                         });
+                        rolesSelectionModel.select(defaultRoles);
                     }
                 }
             });

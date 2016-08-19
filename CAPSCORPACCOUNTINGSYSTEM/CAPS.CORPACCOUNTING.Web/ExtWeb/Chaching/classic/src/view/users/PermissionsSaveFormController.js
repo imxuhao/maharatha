@@ -1,5 +1,5 @@
 ﻿Ext.define('Chaching.view.users.PermissionsSaveFormController', {
-    extend: 'Chaching.view.common.window.ChachingWindowPanelController',
+    extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.users-permissionssaveform',
     ParentWindowObj: null,
     onPermissionsSaveFormResize: function () {

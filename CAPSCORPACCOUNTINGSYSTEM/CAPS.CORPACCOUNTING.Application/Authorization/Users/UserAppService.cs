@@ -572,16 +572,30 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         {
             using (_unitOfWorkManager.Current.SetTenantId(input.TenantId))
             {
+                var permissions = PermissionManager.GetAllPermissions();
                 var grantedPermissions = new Permission[0];
+                RoleEditDto roleEditDto;
+
                 var role = await _roleManager.GetRoleByIdAsync(input.RoleId);
                 grantedPermissions = (await _roleManager.GetGrantedPermissionsAsync(role)).ToArray();
+                roleEditDto = role.MapTo<RoleEditDto>();
 
-                var grantedpermissionList = grantedPermissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName)
-                    .Select(c => { c.IsPermissionGranted = true; return c; }).ToList();
+                var permissionList = permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList();
+                if (grantedPermissions.Length > 0)
+                {
+                    foreach (var grantedPermission in grantedPermissions)
+                    {
+                        permissionList.Where(w => w.Name == grantedPermission.Name)
+                        .ToList()
+                        .ForEach(s => s.IsPermissionGranted = true);
+                    }
+                }
 
                 return new GetRoleForEditOutput
                 {
-                    Permissions = grantedpermissionList
+                    Role = roleEditDto,
+                    Permissions = permissionList,//permissions.MapTo<List<FlatPermissionDto>>().OrderBy(p => p.DisplayName).ToList(),
+                    GrantedPermissionNames = grantedPermissions.Select(p => p.Name).ToList()
                 };
             }
         }

@@ -12,7 +12,7 @@
         type: 'chachingProxy',
         actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
         api: {
-            read: abp.appPath + 'api/services/app/role/GetRoleForEdit'
+            read: abp.appPath + 'api/services/app/user/GetPermissionsForSelectedRole'
         },
         reader: {
             type: 'json',
@@ -33,8 +33,12 @@
                 children: [],
                 leaf: false
             });
-            var length = records.length,
-                parents = [];
+
+            var length = 0;
+            if (records) {
+                length = records.length;
+            }
+            var parents = [];
             for (var i = 0; i < length; i++) {
                 var item = records[i];
                 if (item.get('name') === "Pages" && item.get('parentId') === "root") {

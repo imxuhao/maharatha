@@ -325,8 +325,8 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 flex:1
                                             }, {
                                                 text: app.localize('View'),
-                                                //width: '15%',
-                                                flex:1,
+                                                width: 80,
+                                                align: 'center',
                                                 itemId: 'linkCompanyRolesViewButtonId',
                                                 renderer: Chaching.utilities.ChachingRenderers.viewUsersRole //addViewUsersLinkComp
                                             }
@@ -365,7 +365,10 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 dataIndex: 'displayName',
                                                 flex: 1
                                             }
-                                        ]                                        
+                                        ],
+                                        listeners: {
+                                            'beforecheckchange': 'disableCheckBox'
+                                        }
                                     }
                                 ]
                             }

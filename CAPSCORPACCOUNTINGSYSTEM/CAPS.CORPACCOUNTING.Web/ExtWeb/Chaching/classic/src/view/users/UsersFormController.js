@@ -65,10 +65,11 @@
     reloadPermissionsTreeLinkCompany: function (btn, event, e) {
         var me = this,
             view = btn.currentView,
+            controller = view.getController(),
             record = btn.widgetRec;
         var treePanel = view.down('treepanel[itemId=permissionsCompanyListItemId]');
         var linkCompanyMessageLabel = view.down('label[itemId=linkCompanyMessageItemId]');
-        me.populateTreePanel(treePanel, linkCompanyMessageLabel, record);
+        controller.populateTreePanel(treePanel, linkCompanyMessageLabel, record);
     },
     populateTreePanel: function (treePanel, messageLabel, record) {
         if (treePanel) {
@@ -79,11 +80,11 @@
             var proxy = treeStore.getProxy();
             if (treePanel.itemId === 'permissionsListItemId') {
                 treeStore.getProxy().setExtraParam('tenantId', abp.session.tenantId);
-                treeStore.getProxy().setExtraParam('id', record.get('id'));
+                treeStore.getProxy().setExtraParam('roleId', record.get('id'));
             }
             else {
                 treeStore.getProxy().setExtraParam('tenantId', record.get('tenantId'));
-                treeStore.getProxy().setExtraParam('id', record.get('roleId'));
+                treeStore.getProxy().setExtraParam('roleId', record.get('roleId'));
             }
             treeStore.reload();
         }

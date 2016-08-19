@@ -179,6 +179,8 @@
     <Compile Include="AccountReceivable\Dto\ArInvoiceEntryDocumentInputUnit.cs" />
     <Compile Include="AccountReceivable\Dto\ArInvoiceEntryDocumentUnitDto.cs" />
     <Compile Include="AccountReceivable\IArInvoiceEntryDocumentAppService.cs" />
+    <Compile Include="AccountReceivable\IInvoiceBuilderAppService.cs" />
+    <Compile Include="AccountReceivable\InvoiceBuilderAppService.cs" />
     <Compile Include="Authorization\AbpLoginResultTypeHelper.cs" />
     <Compile Include="Authorization\Custom\CustomImplementation.cs" />
     <Compile Include="Authorization\Users\Dto\TenanltListWithRolesInput.cs" />
@@ -411,6 +413,7 @@
     <Compile Include="Masters\CoaUnitAppService.cs" />
     <Compile Include="Masters\Dto\AutoFillDto.cs" />
     <Compile Include="Masters\Dto\CountryListDto.cs" />
+    <Compile Include="Masters\Dto\CreateTerritoriesUnitInput.cs" />
     <Compile Include="Masters\Dto\IdInputExtensionDto.cs" />
     <Compile Include="Masters\Dto\CreateTaxCreditUnitInput.cs" />
     <Compile Include="Masters\Dto\AutoSearchInput.cs" />
@@ -422,6 +425,7 @@
     <Compile Include="Masters\Dto\NameValueInputList.cs" />
     <Compile Include="Masters\Dto\RegionListDto.cs" />
     <Compile Include="Masters\Dto\TaxCreditUnitDto.cs" />
+    <Compile Include="Masters\Dto\TerritoriesUnitDto.cs" />
     <Compile Include="Masters\Dto\UpdateLocationSetUnitInput.cs" />
     <Compile Include="Masters\Dto\CreateLocationSetUnitInput.cs" />
     <Compile Include="Masters\Dto\AddressUnitDto.cs" />
@@ -434,6 +438,7 @@
     <Compile Include="Masters\Dto\GetCoaInput.cs" />
     <Compile Include="Masters\Dto\GetSalesRepInput.cs" />
     <Compile Include="Masters\Dto\UpdateTaxCreditUnitInput.cs" />
+    <Compile Include="Masters\Dto\UpdateTerritoriesUnitInput.cs" />
     <Compile Include="Masters\Dto\UpdateUserViewSettingsUnitInput.cs" />
     <Compile Include="Masters\Dto\UpdateVendorAliasUnitInput.cs" />
     <Compile Include="Masters\Dto\UserViewSettingsUnitDto.cs" />
@@ -462,6 +467,7 @@
     <Compile Include="Masters\IAddressUnitAppService.cs" />
     <Compile Include="Masters\ILocationSetUnitAppService.cs" />
     <Compile Include="Masters\ITaxCreditUnitAppService.cs" />
+    <Compile Include="Masters\ITerritoriesUnitAppService.cs" />
     <Compile Include="Masters\IUserViewSettingsUnitAppService.cs" />
     <Compile Include="Masters\IVendorUnitAppService.cs" />
     <Compile Include="Masters\LocationSetUnitAppService.cs" />
@@ -488,6 +494,7 @@
     <Compile Include="Masters\IVendorPaymentTermUnitAppService.cs" />
     <Compile Include="Masters\CustomerPaymentTermUnitAppService.cs" />
     <Compile Include="Masters\TaxCreditUnitAppService.cs" />
+    <Compile Include="Masters\TerritoriesUnitAppService.cs" />
     <Compile Include="Masters\UserViewSettingsUnitAppService.cs" />
     <Compile Include="Masters\VendorUnitAppService.cs" />
     <Compile Include="Masters\VendorPaymentTermUnitAppService.cs" />

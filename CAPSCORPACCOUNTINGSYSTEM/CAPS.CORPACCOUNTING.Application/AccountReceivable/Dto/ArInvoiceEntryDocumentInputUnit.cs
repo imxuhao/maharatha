@@ -66,6 +66,8 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable.Dto
         ///<summary>Get Sets the BatchId field.</summary>
         public  string PurchaseOrderReference { get; set; }
 
+        ///<summary>Get Sets the IsStartUp field.</summary>
+        public bool IsStartUp { get; set; }
 
         ///<summary>Get Sets the InvoiceEntryDocumentDetailList field.</summary>
         public List<ArInvoiceEntryDetailInputUnit> InvoiceEntryDocumentDetailList { get; set; }

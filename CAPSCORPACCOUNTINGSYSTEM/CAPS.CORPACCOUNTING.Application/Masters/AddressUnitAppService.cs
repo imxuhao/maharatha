@@ -8,6 +8,7 @@ using System.Linq;
 using System.Data.Entity;
 using Abp.Authorization;
 using CAPS.CORPACCOUNTING.Helpers;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -16,16 +17,26 @@ namespace CAPS.CORPACCOUNTING.Masters
     {
         private readonly AddressUnitManager _addressUnitManager;
         private readonly IRepository<AddressUnit, long> _addressUnitRepository;
+        private readonly IRepository<TerritoriesUnit, int> _territoriesUnitRepository;
         private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-        public AddressUnitAppService(AddressUnitManager addressUnitManager, IRepository<AddressUnit, long> addressUnitRepository,
-            IUnitOfWorkManager unitOfWorkManager)
+        public AddressUnitAppService(AddressUnitManager addressUnitManager, 
+            IRepository<AddressUnit, long> addressUnitRepository,
+            IUnitOfWorkManager unitOfWorkManager,
+            IRepository<TerritoriesUnit, int> territoriesUnitRepository)
         {
             _addressUnitManager = addressUnitManager;
             _addressUnitRepository = addressUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
+            _territoriesUnitRepository = territoriesUnitRepository;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [UnitOfWork]
         public async Task<AddressUnitDto> CreateAddressUnit(CreateAddressUnitInput input)
         {
@@ -37,17 +48,27 @@ namespace CAPS.CORPACCOUNTING.Masters
             return addr;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task DeleteAddressUnit(DeleteAddressUnitInput input)
         {
             await _addressUnitRepository.DeleteAsync(p => p.Id == input.Id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<ListResultOutput<AddressUnitDto>> GetAddressUnits(GetAddressUnitInput input)
         {
-            var query = _addressUnitRepository.GetAll()
-                    .Where(au => au.TypeofObjectId == input.TypeofObjectId && au.ObjectId == input.ObjectId
-                    && (input.OrganizationUnitId == null || au.OrganizationUnitId == input.OrganizationUnitId))
-                    .Select(au => new { au });
+            var query =from address in _addressUnitRepository.GetAll().Where(au => au.TypeofObjectId == input.TypeofObjectId && au.ObjectId == input.ObjectId)
+                       join territorie in _territoriesUnitRepository.GetAll() on address.TerritorieId equals territorie.Id into addr
+                       from addresss in addr.DefaultIfEmpty()
+                       select new { au=address,territorie= addresss.Description };
             var items = await query.ToListAsync();
 
             return new ListResultOutput<AddressUnitDto>(
@@ -57,10 +78,16 @@ namespace CAPS.CORPACCOUNTING.Masters
                     dto.AddressId = item.au.Id;
                     dto.AddressType = item.au.AddressTypeId.ToDisplayName();
                     dto.TypeofObject = item.au.TypeofObjectId.ToDisplayName();
+                    dto.TerritorieName = item.territorie;
                     return dto;
                 }).ToList());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<AddressUnitDto> UpdateAddressUnit(UpdateAddressUnitInput input)
         {
 
@@ -103,5 +130,24 @@ namespace CAPS.CORPACCOUNTING.Masters
             return addressUnit.MapTo<AddressUnitDto>();
         }
 
+
+
+        /// <summary>
+        /// Get TerritoriesList
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<NameValueDto>> GetTerritoriesList()
+        {
+            using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
+            {
+                var territoriesList = await _territoriesUnitRepository.GetAll().Select(u => new NameValueDto
+                {
+                    Name = u.Description,
+                    Value = u.Id.ToString(),
+
+                }).ToListAsync();
+                return territoriesList;
+            }
+        }
     }
 }

@@ -80,5 +80,11 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the TerritorieId field. </summary>
+        public int? TerritorieId { get; set; }
+
+        /// <summary>Gets or sets the TerritorieName field. </summary>
+        public string TerritorieName { get; set; }
     }
 }

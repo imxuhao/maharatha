@@ -9,7 +9,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
     {
         /// <summary>Gets or sets the ObjectId field. </summary>
         public long ObjectId { get; set; }
-      
+
         /// <summary>Gets or sets the TypeofObjectId field. </summary>
         public TypeofObject TypeofObjectId { get; set; }
 
@@ -84,9 +84,12 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         public string Website { get; set; }
 
         /// <summary>Gets or sets the IsPrimary field. </summary>
-        public bool IsPrimary { get; set; }       
+        public bool IsPrimary { get; set; }
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the TerritorieId field. </summary>
+        public int? TerritorieId { get; set; }
     }
 }

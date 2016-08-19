@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using CAPS.CORPACCOUNTING.Masters.Dto;
+using System.Collections.Generic;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -38,6 +39,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         Task DeleteAddressUnit(DeleteAddressUnitInput input);
 
-        
+        /// <summary>
+        /// Get TerritoriesList
+        /// </summary>
+        /// <returns></returns>
+          Task<List<NameValueDto>> GetTerritoriesList();
+
+
+
     }
 }

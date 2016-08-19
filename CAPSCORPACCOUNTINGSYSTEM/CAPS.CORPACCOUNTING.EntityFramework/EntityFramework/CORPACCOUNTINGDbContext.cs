@@ -628,7 +628,8 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
 
         public DbSet<ChargeEntryDocumentUnit> ChargeEntryDocumentUnit { get; set; }
 
-
+        public DbSet<TerritoriesUnit> TerritoriesUnit { get; set; }
+        
 
         #region Modification Log
 

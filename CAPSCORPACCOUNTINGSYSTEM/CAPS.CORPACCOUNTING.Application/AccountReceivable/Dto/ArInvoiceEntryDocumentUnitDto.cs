@@ -85,6 +85,8 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable.Dto
         ///<summary>Get Sets the jobName field.</summary>
         public string JobName { get; set; }
 
+        ///<summary>Get Sets the IsStartUp field.</summary>
+        public bool IsStartUp { get; set; }
 
         ///<summary>Get Sets the AccountNumber field.</summary>
         public string AccountNumber { get; set; }

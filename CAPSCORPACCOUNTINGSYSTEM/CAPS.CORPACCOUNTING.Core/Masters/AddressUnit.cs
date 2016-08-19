@@ -214,6 +214,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         public int TenantId { get; set; }
         /// <summary>Gets or sets the CompanyId field. </summary>
         public long? OrganizationUnitId { get; set; }
+
+        /// <summary>Gets or sets the TerritorieId field. </summary>
+        public virtual int? TerritorieId { get; set; }
+
+        [ForeignKey("TerritorieId")]
+        public virtual TerritoriesUnit TerritoriesUnit { get; set; }
         #endregion
     }
 }

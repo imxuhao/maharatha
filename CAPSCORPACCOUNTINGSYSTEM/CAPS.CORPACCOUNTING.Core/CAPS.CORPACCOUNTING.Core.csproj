@@ -240,6 +240,8 @@
     <Compile Include="Masters\CountryUnit.cs" />
     <Compile Include="Masters\TaxCreditUnit.cs" />
     <Compile Include="Masters\TaxCreditUnitManager.cs" />
+    <Compile Include="Masters\TerritoriesUnit.cs" />
+    <Compile Include="Masters\TerritoriesUnitManager.cs" />
     <Compile Include="Masters\TypeOfCurrencyUnit.cs" />
     <Compile Include="Masters\SystemViewSettingsUnit.cs" />
     <Compile Include="Masters\VendorAliasUnit.cs" />

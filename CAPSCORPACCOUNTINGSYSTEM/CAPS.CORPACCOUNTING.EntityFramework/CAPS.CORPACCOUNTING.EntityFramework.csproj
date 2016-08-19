@@ -1324,6 +1324,10 @@
     <Compile Include="Migrations\201608040538326_Modify_TypeOfAccountUnit_Table.Designer.cs">
       <DependentUpon>201608040538326_Modify_TypeOfAccountUnit_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.cs" />
+    <Compile Include="Migrations\201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.Designer.cs">
+      <DependentUpon>201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultSecurityGroupCreator.cs" />
@@ -2237,6 +2241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608040538326_Modify_TypeOfAccountUnit_Table.resx">
       <DependentUpon>201608040538326_Modify_TypeOfAccountUnit_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.resx">
+      <DependentUpon>201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

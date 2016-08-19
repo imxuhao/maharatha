@@ -943,6 +943,11 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionInputUnit.CronExpression">
             <summary>Get Sets the CronExpression field.</summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.IListAppService">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounting.IListAppService.GetJobOrDivisionList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
             <summary>
             Get Jobs or Divisions List based on OrganizationUnitId
@@ -1500,6 +1505,9 @@
         <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.PurchaseOrderReference">
             <summary>Get Sets the BatchId field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.IsStartUp">
+            <summary>Get Sets the IsStartUp field.</summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentInputUnit.InvoiceEntryDocumentDetailList">
             <summary>Get Sets the InvoiceEntryDocumentDetailList field.</summary>
         </member>
@@ -1580,6 +1588,9 @@
         <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.JobName">
             <summary>Get Sets the jobName field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.IsStartUp">
+            <summary>Get Sets the IsStartUp field.</summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDocumentUnitDto.AccountNumber">
             <summary>Get Sets the AccountNumber field.</summary>
         </member>
@@ -1643,6 +1654,16 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.IInvoiceBuilderAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.InvoiceBuilderAppService">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Authorization.Custom.UserAppService">
             <summary>
@@ -6340,6 +6361,12 @@
             Gets or Sets TwoLetterAbbreviation
             </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTerritoriesUnitInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTerritoriesUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateTaxCreditUnitInput.Number">
             <summary>Gets or sets the Number field. </summary>
         </member>
@@ -6445,6 +6472,15 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TaxCreditUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TerritoriesUnitDto.TerritorieId">
+            <summary>Gets or sets the TerritorieId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TerritoriesUnitDto.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.TerritoriesUnitDto.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateLocationSetUnitInput.LocationSetId">
             <summary>>Gets or sets the LocationSetId field.</summary>    
         </member>
@@ -6547,6 +6583,12 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.TerritorieId">
+            <summary>Gets or sets the TerritorieId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.AddressUnitDto.TerritorieName">
+            <summary>Gets or sets the TerritorieName field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CustomerAndAddressDto.Customer">
             <summary>Gets or sets the CustomerUnit. </summary>
         </member>
@@ -6564,6 +6606,11 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput.TypeofObjectId">
             <summary>Gets or sets the TypeofObjectId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput.Id">
+            <summary>
+            AddressId to be deleted from address table.
+            </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.EmployeeAndAddressDto.Employee">
             <summary>
@@ -6624,6 +6671,15 @@
             <summary>Gets or sets the IsDefault field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTaxCreditUnitInput.OrganizationUnitId">
+            <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTerritoriesUnitInput.TerritorieId">
+            <summary>Gets or sets the TerritorieId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTerritoriesUnitInput.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateTerritoriesUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateUserViewSettingsUnitInput.UserViewId">
@@ -7247,6 +7303,9 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput.TerritorieId">
+            <summary>Gets or sets the TerritorieId field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput.AddressId">
             <summary>Gets or sets the AddressId field. </summary>
         </member>
@@ -7312,6 +7371,9 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput.TerritorieId">
+            <summary>Gets or sets the TerritorieId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateEmployeeUnitInput.LastName">
             <summary>Gets or sets the LastName field. </summary>
@@ -8307,6 +8369,40 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.VendorPaymentTermUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.AddressUnitAppService.CreateAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateAddressUnitInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.AddressUnitAppService.DeleteAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.DeleteAddressUnitInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.AddressUnitAppService.GetAddressUnits(CAPS.CORPACCOUNTING.Masters.Dto.GetAddressUnitInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.AddressUnitAppService.UpdateAddressUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateAddressUnitInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.AddressUnitAppService.GetTerritoriesList">
+            <summary>
+            Get TerritoriesList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.EmployeeUnitAppService.DeleteEmployeeUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Delete the Employee abd EmployeeAddresses
@@ -8574,6 +8670,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAddressUnitAppService.GetTerritoriesList">
+            <summary>
+            Get TerritoriesList
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ILocationSetUnitAppService">
             <summary>
             This service will provide all CRUD operations on LocationSet.
@@ -8636,6 +8738,39 @@
         <member name="M:CAPS.CORPACCOUNTING.Masters.ITaxCreditUnitAppService.DeleteTaxCreditUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Delete the TaxCredit based on TaxCreditId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.ITerritoriesUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ITerritoriesUnitAppService.CreateTerritoriesUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateTerritoriesUnitInput)">
+            <summary>
+             Create the Territories.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ITerritoriesUnitAppService.GetTerritoriesUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+             Get the list of all Territories.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ITerritoriesUnitAppService.UpdateTerritoriesUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateTerritoriesUnitInput)">
+            <summary>
+            Update the TerritoriesUnit based on TerritorieId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.ITerritoriesUnitAppService.DeleteTerritoriesUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+             Delete the Territories based on TerritorieId.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -9169,6 +9304,47 @@
         <member name="M:CAPS.CORPACCOUNTING.Masters.TaxCreditUnitAppService.DeleteTaxCreditUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
              Delete the TaxCredit based on TaxCreditId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Masters.TerritoriesUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TerritoriesUnitAppService.#ctor(Abp.Domain.Uow.IUnitOfWorkManager,CAPS.CORPACCOUNTING.Masters.TerritoriesUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TerritoriesUnit})">
+            <summary>
+            
+            </summary>
+            <param name="unitOfWorkManager"></param>
+            <param name="territoriesUnitManager"></param>
+            <param name="territoriesUnitRepository"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TerritoriesUnitAppService.CreateTerritoriesUnit(CAPS.CORPACCOUNTING.Masters.Dto.CreateTerritoriesUnitInput)">
+            <summary>
+            Create the TerritoriesUnit.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TerritoriesUnitAppService.UpdateTerritoriesUnit(CAPS.CORPACCOUNTING.Masters.Dto.UpdateTerritoriesUnitInput)">
+            <summary>
+            Update the TerritoriesUnit based on TerritorieId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TerritoriesUnitAppService.GetTerritoriesUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+             Get the list of all Territories.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.TerritoriesUnitAppService.DeleteTerritoriesUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+             Delete the Territories based on TerritorieId.
             </summary>
             <param name="input"></param>
             <returns></returns>

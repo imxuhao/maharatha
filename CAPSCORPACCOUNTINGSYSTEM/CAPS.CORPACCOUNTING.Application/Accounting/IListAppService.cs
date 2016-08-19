@@ -8,6 +8,10 @@ using CAPS.CORPACCOUNTING.Accounting.Dto;
 
 namespace CAPS.CORPACCOUNTING.Accounting
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
    public interface IListAppService : IApplicationService
     {
 

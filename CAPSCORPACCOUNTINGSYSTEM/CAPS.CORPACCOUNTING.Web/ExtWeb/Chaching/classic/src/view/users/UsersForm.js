@@ -332,7 +332,17 @@ Ext.define('Chaching.view.users.UsersForm',
                                             }
                                         ],
                                         store: Ext.create('Chaching.store.users.CompanyRoleStore'),
-                                        features: [{ ftype: 'grouping' }]
+                                        features: [
+                                            {
+                                                ftype: 'grouping',
+                                                groupHeaderTpl: Ext.create('Ext.XTemplate',
+                                                '<div style="font-weight: 600">',
+                                                    app.localize('LinkCompanyGropingHeaderTitle'),
+                                                    ' {name}',
+                                                '</div>'
+                                            )
+                                            }
+                                        ]
                                     },
                                     {
                                         columnWidth: .51,
@@ -453,9 +463,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                         selModelConfig: {
                                             selType: 'chachingCheckboxSelectionModel',
                                             injectCheckbox: "first",
-                                            headerWidth: '5%',
+                                            headerWidth: '7%',
                                             mode: 'MULTI',
-                                            showHeaderCheckbox: false
+                                            showHeaderCheckbox: true
                                         },
                                         doSaveOperation: function (direction, records) {
                                             var isActive = direction === "leftToRight" ? true : false,
@@ -542,9 +552,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                         selModelConfig: {
                                             selType: 'chachingCheckboxSelectionModel',
                                             injectCheckbox: "first",
-                                            headerWidth: '5%',
+                                            headerWidth: '7%',
                                             mode: 'MULTI',
-                                            showHeaderCheckbox: false
+                                            showHeaderCheckbox: true
                                         },
                                         doSaveOperation: function (direction, records) {
                                             var isActive = direction === "leftToRight" ? true : false,
@@ -617,9 +627,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                         selModelConfig: {
                                             selType: 'chachingCheckboxSelectionModel',
                                             injectCheckbox: "first",
-                                            headerWidth: '5%',
+                                            headerWidth: '7%',
                                             mode: 'MULTI',
-                                            showHeaderCheckbox: false
+                                            showHeaderCheckbox: true
                                         },
                                         doSaveOperation: function (direction, records) {
                                             var isActive = direction === "leftToRight" ? true : false,
@@ -692,9 +702,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                          selModelConfig: {
                                              selType: 'chachingCheckboxSelectionModel',
                                              injectCheckbox: "first",
-                                             headerWidth: '5%',
+                                             headerWidth: '7%',
                                              mode: 'MULTI',
-                                             showHeaderCheckbox: false
+                                             showHeaderCheckbox: true
                                          },
                                          doSaveOperation: function (direction, records) {
                                              var isActive = direction === "leftToRight" ? true : false,
@@ -757,9 +767,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                          selModelConfig: {
                                              selType: 'chachingCheckboxSelectionModel',
                                              injectCheckbox: "first",
-                                             headerWidth: '5%',
+                                             headerWidth: '7%',
                                              mode: 'MULTI',
-                                             showHeaderCheckbox: false
+                                             showHeaderCheckbox: true
                                          },
                                          doSaveOperation: function (direction, records) {
                                              var isActive = direction === "leftToRight" ? true : false,
@@ -821,9 +831,9 @@ Ext.define('Chaching.view.users.UsersForm',
                                           selModelConfig: {
                                               selType: 'chachingCheckboxSelectionModel',
                                               injectCheckbox: "first",
-                                              headerWidth: '5%',
+                                              headerWidth: '7%',
                                               mode: 'MULTI',
-                                              showHeaderCheckbox: false
+                                              showHeaderCheckbox: true
                                           },
                                           doSaveOperation: function (direction, records) {
                                               var isActive = direction === "leftToRight" ? true : false,

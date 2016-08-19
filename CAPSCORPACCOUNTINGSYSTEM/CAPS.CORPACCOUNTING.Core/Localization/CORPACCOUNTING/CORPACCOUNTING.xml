@@ -1059,6 +1059,7 @@
     <text name="InformationMessage" value="Information" />
     <text name="LinkCompany" value="Link Company" />
     <text name="LinkCompanyRoles" value="Roles with company" />
+    <text name="LinkCompanyGropingHeaderTitle" value="Tenant Name:"/>
     <text name="RowClickMessage" value="Please click on the View button to see the granted permissions of the selected Role!" />
     <text name="GridItemsPerPage" value="Items per page" />
     <text name="ShowAuditLogDetailView_Tooltip" value="Show Audit Log Detail View" />

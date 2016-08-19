@@ -8,7 +8,6 @@ Ext.require(
 Ext.ariaWarn = Ext.emptyFn;
 Ext.define('Chaching.Application', {
     extend: 'Ext.app.Application',
-
     name: 'Chaching',
     requires: [
         'Chaching.utilities.ChachingGlobals',
@@ -304,14 +303,14 @@ Ext.define('Chaching.Application', {
         return deferred.promise;
     },
     onAppUpdate: function() {
-        abp.message.confirm(app.localize('AppUpdate'),
-            app.localize('AppUpdateMessage'),
-            function(isConfirmed) {
-                if (isConfirmed) {
-                    window.location.reload();
-                }
-            }
-        );
+        //abp.message.confirm(app.localize('AppUpdate'),
+        //    app.localize('AppUpdateMessage'),
+        //    function(isConfirmed) {
+        //        if (isConfirmed) {
+        //            window.location.reload();
+        //        }
+        //    }
+        //);
     }
 });
 var nullHandler = function (val) {

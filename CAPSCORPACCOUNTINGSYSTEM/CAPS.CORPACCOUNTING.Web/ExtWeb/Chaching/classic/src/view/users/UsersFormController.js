@@ -242,6 +242,9 @@
             // END User Security Settings
         }
         // Saving User create/edit information
+        if (values.userName == "") {
+            values.userName = values.emailAddress;
+        }
         record.data.user = values;
         Ext.apply(record.data, values);
         //get roles information

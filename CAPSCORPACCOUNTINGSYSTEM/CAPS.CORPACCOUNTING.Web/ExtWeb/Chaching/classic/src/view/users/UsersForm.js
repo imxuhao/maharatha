@@ -84,8 +84,21 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 tabIndex: 3,
                                                 fieldLabel: app.localize('UserName'),
                                                 width: '100%',
+                                                hidden: true,
+                                                allowBlank: true,
                                                 ui: 'fieldLabelTop',
                                                 emptyText: app.localize('UUserName')
+                                            },
+
+                                            {
+                                                xtype: 'textfield',
+                                                name: 'emailAddress',
+                                                tabIndex: 4,
+                                                fieldLabel: app.localize('EmailAddress'),
+                                                allowBlank: false,
+                                                width: '100%',
+                                                ui: 'fieldLabelTop',
+                                                emptyText: app.localize('MandatoryField')
                                             },
                                             {
                                                 xtype: 'checkbox',
@@ -179,15 +192,6 @@ Ext.define('Chaching.view.users.UsersForm',
                                                 ui: 'fieldLabelTop',
                                                 emptyText: app.localize('USurname')
                                             },
-                                             {
-                                                 xtype: 'textfield',
-                                                 name: 'emailAddress',
-                                                 tabIndex: 4,
-                                                 fieldLabel: app.localize('EmailAddress'),
-                                                 width: '100%',
-                                                 ui: 'fieldLabelTop',
-                                                 emptyText: app.localize('UEmailAddress')
-                                             },
                                             {
                                                 xtype: 'checkbox',
                                                 boxLabel: app.localize('SendActivationEmail'),

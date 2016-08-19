@@ -21,7 +21,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Dto
         [StringLength(User.MaxSurnameLength)]
         public string Surname { get; set; }
 
-        [Required]
+        
         [StringLength(AbpUserBase.MaxUserNameLength)]
         public string UserName { get; set; }
 

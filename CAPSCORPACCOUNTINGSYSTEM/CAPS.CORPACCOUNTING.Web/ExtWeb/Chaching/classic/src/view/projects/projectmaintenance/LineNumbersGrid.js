@@ -35,7 +35,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
       }],
     importConfig: {
         entity: 'Lines',
-        isRequireImport: true
+        isRequireImport: false
     },
     requireExport: true,
     requireMultiSearch: true,

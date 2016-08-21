@@ -84,6 +84,8 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 fieldLabel: app.localize('AdminEmailAddress').initCap(),
                 width: '100%',
                 allowBlank: false,
+                disabled: true,
+                hidden: true,
                 ui: 'fieldLabelTop',
                 emptyText: app.localize('TAdminEmailAddress')
             }, {
@@ -160,7 +162,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 name: 'sendActivationEmail',
                 labelAlign: 'right',
                 inputValue: true,
-                checked: true,
+                disabled: true,
                 boxLabelCls: 'checkboxLabel'
             }, {
                 xtype: 'checkbox',

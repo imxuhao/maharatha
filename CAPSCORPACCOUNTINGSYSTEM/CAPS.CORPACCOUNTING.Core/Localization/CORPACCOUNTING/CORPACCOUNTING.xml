@@ -124,6 +124,7 @@
     <text name="EmailActivation" value="Email Activation" />
     <text name="SendEmailActivationLink_Information" value="A link will be sent to your email to activate your email address. If you don't get an email within a few minutes, please re-try." />
     <text name="SendActivationEmail" value="Send Activation Email." />
+    <text name="SendActivationEmailDefaultValue" value="support_sumit@capspayroll.com" />
     <text name="ChangePassword" value="Change Password" />
     <text name="CurrentPassword" value="Current Password" />
     <text name="NewPassword" value="New Password" />

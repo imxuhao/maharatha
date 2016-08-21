@@ -151,6 +151,7 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
         var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
         record.set('organizationUnitId', values.organizationUnitId);
         record.set('sourceTenantId', tenantListCombo.getValue());
+        record.set('adminEmailAddress', app.localize('SendActivationEmailDefaultValue'));
         if (selectedRecords && selectedRecords.length > 0) {
             var moduleListArray = [];
             Ext.each(selectedRecords, function (rec) {

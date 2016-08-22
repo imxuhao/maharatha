@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using CAPS.CORPACCOUNTING.Uploads.Dto;
@@ -18,6 +14,6 @@ namespace CAPS.CORPACCOUNTING.Uploads
         /// <param name="entityName"></param>
         /// <param name="coaId"></param>
         /// <returns></returns>
-        Task<List<UploadErrorMessagesOutputDto>> UploadExcelData(DataTable dataTable, string entityName, int? coaId);
+        Task<ErrorMessageswithAccountDto> UploadExcelData(DataTable dataTable, string entityName, int? coaId);
     }
 }

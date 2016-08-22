@@ -30,23 +30,23 @@ namespace CAPS.CORPACCOUNTING.Uploads
         /// <param name="entityName"></param>
         /// <param name="coaId"></param>
         /// <returns></returns>
-        public async Task<List<UploadErrorMessagesOutputDto>> UploadExcelData(DataTable dataTable, string entityName, int? coaId)
+        public async Task<ErrorMessageswithAccountDto> UploadExcelData(DataTable dataTable, string entityName, int? coaId)
         {
-            List<UploadErrorMessagesOutputDto> errorMessageList=null;
+            ErrorMessageswithAccountDto errorMEssageswithAccount=null;
             switch (entityName)
             {
                 case "FinancialAccounts":
-                    errorMessageList= await _accountUnitAppService.ImportAccounts(dataTable, coaId.Value);
+                    errorMEssageswithAccount = await _accountUnitAppService.ImportAccounts(dataTable, coaId.Value);
                     break;
-                case "Projects":
-                    errorMessageList = await _jobUnitAppService.ImportJobs(dataTable);
-                    break;
+                //case "Projects":
+                //    errorMessageList = await _jobUnitAppService.ImportJobs(dataTable);
+                //    break;
                 case "Lines":
-                    errorMessageList = await _linesUnitAppService.ImportLines(dataTable,coaId.Value);
+                    errorMEssageswithAccount = await _linesUnitAppService.ImportLines(dataTable, coaId.Value);
                     break;
 
             }
-            return errorMessageList;
+            return errorMEssageswithAccount;
 
         }
     }

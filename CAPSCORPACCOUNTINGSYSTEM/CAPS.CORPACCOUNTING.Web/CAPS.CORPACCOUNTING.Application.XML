@@ -5326,6 +5326,13 @@
             <param name="coaId"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.BulkLineUploads(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
+            <summary>
+            BulkAccount Import
+            </summary>
+            <param name="accountList"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.CheckDuplicatesinExcel(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput})">
             <summary>
             Validating Excel Duplicates
@@ -5351,7 +5358,7 @@
             <param name="uploadErrorMessageList"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.NumericValidation(System.String,CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto,System.Boolean)">
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.LinesUnitAppService.NumericValidation(System.String,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.Boolean)">
             <summary>
             Validating LineNumber as Numeric 
             </summary>
@@ -6265,6 +6272,13 @@
             <param name="coaId"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.BulkAccountUploads(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
+            <summary>
+            BulkAccount Import
+            </summary>
+            <param name="accountList"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.CheckDuplicatesinExcel(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto},System.Collections.Generic.List{CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput})">
             <summary>
             Validating Excel Duplicates
@@ -6290,7 +6304,7 @@
             <param name="uploadErrorMessageList"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.NumericValidation(System.String,CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto,System.Boolean)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.NumericValidation(System.String,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.Boolean)">
             <summary>
             Validating AccountNumber as Numeric 
             </summary>
@@ -8208,7 +8222,7 @@
         <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.TypeOfCurrencyRateId">
             <summary>Gets or sets the TypeOfCurrencyRateId field. </summary>
         </member>
-        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.No">
+        <member name="P:CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput.ExcelRowNumber">
             <summary>
             This field we are using in Import case
             </summary>
@@ -9068,6 +9082,13 @@
             Get Account by Id
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.BulkAccountUploads(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
+            <summary>
+            BulkAccounts Upload
+            </summary>
+            <param name="accountList"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService">
@@ -12152,6 +12173,36 @@
         <member name="P:CAPS.CORPACCOUNTING.Sessions.CustomAppSession.HasBankRestriction">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Uploads.Dto.ErrorMessageswithAccountDto">
+            <summary>
+            Output Dto for BulkAccountsImport
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Uploads.Dto.ErrorMessageswithAccountDto.ErrorMessagesList">
+            <summary>
+            Gets or Sets ErrorMessagesList
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Uploads.Dto.ErrorMessageswithAccountDto.AccountsList">
+            <summary>
+            Gets or Sets AccountsList
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Uploads.Dto.ErrorMessageswithAccountDto.IsAnyRecordSaved">
+            <summary>
+            Gets or Sets IsAnyRecordSaved
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto.RowNumber">
+            <summary>
+            Gets or Sets RowNumber
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Uploads.Dto.UploadErrorMessagesOutputDto.ErrorMessage">
+            <summary>
+            Gets or Sets ErrorMessage
             </summary>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Uploads.UploadAppService.UploadExcelData(System.Data.DataTable,System.String,System.Nullable{System.Int32})">

@@ -413,6 +413,7 @@
     <Compile Include="Masters\CoaUnitAppService.cs" />
     <Compile Include="Masters\Dto\AutoFillDto.cs" />
     <Compile Include="Masters\Dto\CountryListDto.cs" />
+    <Compile Include="Masters\Dto\CreateAccountListInput.cs" />
     <Compile Include="Masters\Dto\CreateTerritoriesUnitInput.cs" />
     <Compile Include="Masters\Dto\IdInputExtensionDto.cs" />
     <Compile Include="Masters\Dto\CreateTaxCreditUnitInput.cs" />
@@ -591,6 +592,7 @@
     <Compile Include="Timing\Dto\GetTimezonesInput.cs" />
     <Compile Include="Timing\ITimingAppService.cs" />
     <Compile Include="Timing\TimingAppService.cs" />
+    <Compile Include="Uploads\Dto\ErrorMessageswithAccountDto.cs" />
     <Compile Include="Uploads\Dto\UploadErrorMessagesOutputDto.cs" />
     <Compile Include="Uploads\UploadAppService.cs" />
     <Compile Include="Uploads\IUploadAppService.cs" />

@@ -579,7 +579,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
-                    ErrorMessage = L("DuplicateJobNumbers") + duplicateAccountnumbers
+                   // ErrorMessage = L("DuplicateJobNumbers") + duplicateAccountnumbers
                 };
                 uploadErrorMessagesList.Add(uploadErrorMessages);
             }
@@ -592,7 +592,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             {
                 uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
-                    ErrorMessage = L("DuplicateJobNames") + duplicateAccountdescriptions
+                   // ErrorMessage = L("DuplicateJobNames") + duplicateAccountdescriptions
                 };
                 uploadErrorMessagesList.Add(uploadErrorMessages);
             }
@@ -634,8 +634,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 error = error?.Append(!string.IsNullOrEmpty(job.JobName) ? job.JobName + L("DuplicateJobName") : "");
                 var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                 {
-                    ErrorMessage = error.ToString().TrimEnd(','),
-                    RowNumber = job.RowNumber.ToString()
+                    //ErrorMessage = error.ToString().TrimEnd(','),
+                    RowNumber = job.RowNumber
                 };
                 uploadErrorMessagesList.Add(uploadErrorMessages);
             }
@@ -644,16 +644,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         private UploadErrorMessagesOutputDto ValidateUploadedData(CreateJobUnitInput input, int rowNumber,int budgetFormatId)
         {
-            UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = rowNumber.ToString() };
-            DataValidator.CheckLength(input.JobNumber.Length, JobUnit.MaxJobNumberLength, L("JobNumber"), uploadErrorMessages);
-            DataValidator.CheckLength(input.Caption.Length, JobUnit.MaxJobNumberLength, L("JobName"), uploadErrorMessages);
-            DataValidator.RequiredValidataion(input.JobNumber, L("JobNumber"), uploadErrorMessages);
-            DataValidator.RequiredValidataion(input.Caption, L("JobName"), uploadErrorMessages);
-            DataValidator.RequiredValidataion(budgetFormatId, L("BudgetFormat"), uploadErrorMessages);
-            if (string.IsNullOrEmpty(uploadErrorMessages.ErrorMessage))
-                uploadErrorMessages = null;
-            else
-                uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage.TrimStart(',');
+            UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = rowNumber };
+            ////DataValidator.CheckLength(input.JobNumber.Length, JobUnit.MaxJobNumberLength, L("JobNumber"), uploadErrorMessages);
+            ////DataValidator.CheckLength(input.Caption.Length, JobUnit.MaxJobNumberLength, L("JobName"), uploadErrorMessages);
+            ////DataValidator.RequiredValidataion(input.JobNumber, L("JobNumber"), uploadErrorMessages);
+            ////DataValidator.RequiredValidataion(input.Caption, L("JobName"), uploadErrorMessages);
+            ////DataValidator.RequiredValidataion(budgetFormatId, L("BudgetFormat"), uploadErrorMessages);
+            //if (string.IsNullOrEmpty(uploadErrorMessages.ErrorMessage))
+            //    uploadErrorMessages = null;
+            //else
+            //    uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage.TrimStart(',');
             return uploadErrorMessages;
 
         }

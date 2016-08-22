@@ -50,10 +50,10 @@ namespace CAPS.CORPACCOUNTING.Web.Controllers
 
                 // Uploap the worksheet data to a DataTable.
                 DataTable worksheetData = ExcelHelper.ConvertExcelToDataTable(package, entityName);
-                List<UploadErrorMessagesOutputDto> errorMessageList= await _uploadAppService.UploadExcelData(worksheetData, entityName, coaId);
+                ErrorMessageswithAccountDto errorMessageList = await _uploadAppService.UploadExcelData(worksheetData, entityName, coaId);
                
 
-                return Json(new AjaxResponse(new { success = errorMessageList.Count==0, errorMessageList }));
+                return Json(new AjaxResponse(new { success = errorMessageList==null, errorMessageList }));
 
             }
             catch (UserFriendlyException ex)

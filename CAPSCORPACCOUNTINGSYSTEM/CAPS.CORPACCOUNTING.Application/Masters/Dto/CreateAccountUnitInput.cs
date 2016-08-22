@@ -123,7 +123,7 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>
         /// This field we are using in Import case
         /// </summary>
-        public int No { get; set; }
+        public int ExcelRowNumber { get; set; }
 
     }
 }

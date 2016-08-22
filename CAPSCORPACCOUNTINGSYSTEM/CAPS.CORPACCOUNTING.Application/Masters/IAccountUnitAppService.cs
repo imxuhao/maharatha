@@ -6,6 +6,7 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 using System.Collections.Generic;
 using Castle.Core;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
+using CAPS.CORPACCOUNTING.Uploads.Dto;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
@@ -93,6 +94,13 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="input"></param>
         /// <returns></returns>
         Task<AccountUnitDto> GetAccountById(IdInput<long> input);
+
+        /// <summary>
+        /// BulkAccounts Upload
+        /// </summary>
+        /// <param name="accountList"></param>
+        /// <returns></returns>
+        Task<ErrorMessageswithAccountDto> BulkAccountUploads(CreateAccountListInput accountList);
     }
     
 }

@@ -23,6 +23,8 @@ using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 using CAPS.CORPACCOUNTING.Uploads.Dto;
+using Castle.Core.Logging;
+using System.Diagnostics;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -38,7 +40,6 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSession;
         private readonly AccountCache _accountcache;
-
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
@@ -327,15 +328,13 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <param name="accountTable"></param>
         /// <param name="coaId"></param>
         /// <returns></returns>
-        public async Task<List<UploadErrorMessagesOutputDto>> ImportAccounts(DataTable accountTable, int coaId)
+        public async Task<ErrorMessageswithAccountDto> ImportAccounts(DataTable accountTable, int coaId)
         {
             var classificationlist = await GetTypeOfAccountList();
             var currencylist = await GetTypeOfCurrencyList();
             var consolidationList = EnumList.GetTypeofConsolidationList();
             var typeOfCurrencyRateList = await GetTypeOfCurrencyRateList();
             var linkedAccountList = await GetLinkAccountListByCoaId(new AutoSearchInput() { Id = coaId });
-            var uploadErrorMessagesList = new List<UploadErrorMessagesOutputDto>();
-            var coa = _coaRepository.FirstOrDefault(p => p.Id == coaId);
 
             var accountsList = (from tbl in accountTable.AsEnumerable()
                                 join classification in classificationlist on tbl.Field<string>(L("Classification")) equals classification.Name
@@ -357,7 +356,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                                 from linkedAccountunit in linkedAccounts.DefaultIfEmpty()
                                 select new CreateAccountUnitInput
                                 {
-                                    No = Convert.ToInt32(tbl.Field<string>(L("No"))),
+                                    ExcelRowNumber = Convert.ToInt32(tbl.Field<string>(L("No"))),
                                     Caption = string.IsNullOrEmpty(tbl.Field<string>(L("Description"))) ? string.Empty : tbl.Field<string>(L("Description")),
                                     TypeOfCurrencyId = ReferenceEquals(currencyunit, null) ? (short?)null : Convert.ToInt16(currencyunit.Value),
                                     TypeofConsolidationId = ReferenceEquals(consolidationunit, null) ? (TypeofConsolidation?)null : (TypeofConsolidation)Convert.ToInt32(consolidationunit.Value),
@@ -371,29 +370,63 @@ namespace CAPS.CORPACCOUNTING.Accounts
                                     IsElimination = !string.IsNullOrEmpty(tbl.Field<string>(L("EliminationAccount"))) && Helper.ConvertToBoolean(tbl.Field<string>(L("EliminationAccount"))),
                                     IsRollupAccount = !string.IsNullOrEmpty(tbl.Field<string>(L("RollUpAccount"))) && Helper.ConvertToBoolean(tbl.Field<string>(L("RollUpAccount")))
                                 }).ToList();
-            //Checking duplicate Values in Excel
-            CheckDuplicatesinExcel(uploadErrorMessagesList,  accountsList);
-            
-            //Check RequiredField and MAxLenght Validations
-            ValidateUploadedData(accountsList, coa.IsNumeric, uploadErrorMessagesList);
-            
-            //Checking Duplicate AccountNumbers,Descriptions from Db
-            await ValidateDuplicateRecords(accountsList, uploadErrorMessagesList);
-            var errorList =
-                (from i in uploadErrorMessagesList
-                 group i by i.RowNumber
-                    into g
-                 select new UploadErrorMessagesOutputDto
-                 {
-                     RowNumber = L("StartBold") + L("StartColor") + g.Key+L("EndColor")+ L("EndBold"),
-                     ErrorMessage =  string.Join(",", g.Select(kvp => kvp.ErrorMessage)).TrimStart(',') 
-                 }).OrderBy(p => p.RowNumber).ToList();
 
-
-            if (errorList.Count < 1)
-                await InsertUploadedAccounts(accountsList);
-            return errorList;
+            return await BulkAccountUploads(new CreateAccountListInput { AccountList = accountsList });
         }
+
+
+        /// <summary>
+        /// BulkAccount Import
+        /// </summary>
+        /// <param name="accountList"></param>
+        /// <returns></returns>
+        public async Task<ErrorMessageswithAccountDto> BulkAccountUploads(CreateAccountListInput accountList)
+        {
+            var validAccounts = new List<CreateAccountUnitInput>();
+            var errorAccounts = new List<CreateAccountUnitInput>();
+            var errorDto = new ErrorMessageswithAccountDto();
+          
+            if (accountList.AccountList.Count>0)
+            {
+                int coaId = accountList.AccountList[0].ChartOfAccountId;
+                var coa = _coaRepository.FirstOrDefault(p => p.Id == coaId);
+                var uploadErrorMessagesList = new List<UploadErrorMessagesOutputDto>();
+              
+                //Checking duplicate Values in Excel
+                CheckDuplicatesinExcel(uploadErrorMessagesList, accountList.AccountList);
+               
+                //Check RequiredField and MAxLenght Validations
+                ValidateUploadedData(accountList.AccountList, coa.IsNumeric, uploadErrorMessagesList);
+               
+                //Checking Duplicate AccountNumbers,Descriptions from Db
+                await ValidateDuplicateRecords(accountList.AccountList, uploadErrorMessagesList);
+
+
+                var accountwithErrorList = (from account in accountList.AccountList
+                                            join error in uploadErrorMessagesList.OrderBy(p => p.RowNumber) on account.ExcelRowNumber equals error.RowNumber
+                                                into errorunits
+                                            from errorunit in errorunits.DefaultIfEmpty()
+                                            select new { account, errorunit }).ToList();
+                foreach (var account in accountwithErrorList)
+                {
+                    if (ReferenceEquals(account.errorunit, null))
+                    {
+                        errorDto.IsAnyRecordSaved = true;
+                        validAccounts.Add(account.account);
+                    }
+                    else
+                        errorAccounts.Add(account.account);
+                }
+
+                if (validAccounts.Count > 0)
+                    await InsertUploadedAccounts(validAccounts);
+                errorDto.ErrorMessagesList = uploadErrorMessagesList;
+                errorDto.AccountsList = errorAccounts;
+            }
+            return errorDto;
+        }
+
+
 
         /// <summary>
         /// Validating Excel Duplicates
@@ -401,11 +434,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <param name="uploadErrorMessagesList"></param>
         /// <param name="accountsList"></param>
         /// <returns></returns>
-        private void CheckDuplicatesinExcel(List<UploadErrorMessagesOutputDto> uploadErrorMessagesList,List<CreateAccountUnitInput> accountsList)
+        private void CheckDuplicatesinExcel(List<UploadErrorMessagesOutputDto> uploadErrorMessagesList, List<CreateAccountUnitInput> accountsList)
         {
-           
+
             var duplicateAccountDescriptions = accountsList
-                .GroupBy(dr => dr.Description)
+                .GroupBy(dr => dr.Caption)
                 .Where(g => g.Count() > 1)
                 .Select(g => new
                 {
@@ -419,18 +452,18 @@ namespace CAPS.CORPACCOUNTING.Accounts
               {
                   AccountNumber = g.Key
               }).ToList();
-            if (duplicateAccountAccountNumbers.Count > 0 && duplicateAccountAccountNumbers.Count > 0)
+            if (duplicateAccountAccountNumbers.Count > 0 || duplicateAccountDescriptions.Count > 0)
             {
 
                 var duliplcateAccDescList = (from accdesc in duplicateAccountDescriptions
-                                           join account in accountsList on accdesc.Description equals account.Caption
-                                           select new
-                                           {
-                                               AccountNumber = string.Empty,
-                                               Description = accdesc.Description,
-                                               No = account.No
+                                             join account in accountsList on accdesc.Description equals account.Caption
+                                             select new
+                                             {
+                                                 AccountNumber = string.Empty,
+                                                 Description = accdesc.Description,
+                                                 ExcelRowNumber = account.ExcelRowNumber
 
-                                           }).ToList();
+                                             }).ToList();
 
                 var duliplcateAccNumList = (from accaccnum in duplicateAccountAccountNumbers
                                             join account in accountsList on accaccnum.AccountNumber equals account.AccountNumber
@@ -438,28 +471,40 @@ namespace CAPS.CORPACCOUNTING.Accounts
                                             {
                                                 AccountNumber = accaccnum.AccountNumber,
                                                 Description = string.Empty,
-                                                No = account.No
+                                                ExcelRowNumber = account.ExcelRowNumber
                                             }).ToList();
                 var duplicates = duliplcateAccDescList.Union(duliplcateAccNumList).ToList();
-
                 if (duplicates.Count > 0)
                 {
+                    //Dictionary<string, string> errorAccNum = new Dictionary<string, string>();
                     foreach (var duplicateAccounts in duplicates)
                     {
-                        StringBuilder stringBuilder = new StringBuilder();
+                        var errorMegageList = new List<NameValueDto>();
+                        
                         if (!string.IsNullOrEmpty(duplicateAccounts.AccountNumber))
-                            stringBuilder.Append(L("DuplicateAccountNumber") + L("StartBold")+ duplicateAccounts.AccountNumber + L("EndBold") +
-                                                 L("InExcel"));
+                        {
+                            errorMegageList.Add(new NameValueDto
+                            {
+                                Name = L("AccountNumber"),
+                                Value = L("DuplicateAccountNumber") + duplicateAccounts.AccountNumber + L("InExcel")
+                            });
+                        }
                         if (!string.IsNullOrEmpty(duplicateAccounts.Description))
-                            stringBuilder.Append(L("DuplicateDescription") + L("StartBold")+ duplicateAccounts.Description + L("EndBold") +
-                                                 L("InExcel"));
+                        {
+                            errorMegageList.Add(new NameValueDto
+                            {
+                                Name = L("Description"),
+                                Value = L("DuplicateDescription") + duplicateAccounts.Description + L("InExcel")
+                            });
+                        }
 
                         var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                         {
-                            RowNumber = Convert.ToString(duplicateAccounts.No),
-                            ErrorMessage = stringBuilder.ToString().TrimStart(',')
+                            RowNumber = duplicateAccounts.ExcelRowNumber,
+                            ErrorMessage = errorMegageList
                         };
-                        uploadErrorMessagesList.Add(uploadErrorMessages);
+                        if (uploadErrorMessages.ErrorMessage.Count > 0)
+                            uploadErrorMessagesList.Add(uploadErrorMessages);
                     }
                 }
             }
@@ -470,6 +515,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             {
                 await CreateAccountUnit(accountUnit);
             }
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
 
         /// <summary>
@@ -491,7 +537,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             //constructing filter for AccountNumbers
             if (!string.IsNullOrEmpty(accountNumberList))
             {
-                var accfilter = new Filters()
+                var accfilter = new Filters
                 {
                     Property = "AccountNumber",
                     Comparator = 6,//In Operator
@@ -504,7 +550,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             //constructing filter for Description
             if (!string.IsNullOrEmpty(descriptionList))
             {
-                var accdescfilter = new Filters()
+                var accdescfilter = new Filters
                 {
                     Property = "Caption",
                     Comparator = 6, //In Operator
@@ -515,33 +561,51 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 filters.Add(accdescfilter);
             }
             var filterCondition = ExpressionBuilder.GetExpression<AccountCacheItem>(filters, SearchPattern.Or).Compile();
-            
+
             //apply filetr In for AccountNumber and Description.
             var duplicateAccountList = duplicateAccountItems.Where(filterCondition).ToList();
 
-            var duplicateAccounts1 = (from p in accountsList
+            var duplicateAccountNumbers = (from p in accountsList
                                       join p2 in duplicateAccountList on p.Caption equals p2.Caption
-                                      select new { Caption = p.Caption, AccountNumber = string.Empty, RowNumber = p.No }).ToList();
-            var duplicateAccounts2 = (from p in accountsList
+                                      select new { Caption = p.Caption, AccountNumber = string.Empty, RowNumber = p.ExcelRowNumber }).ToList();
+            var duplicateAccountDescs = (from p in accountsList
                                       join p2 in duplicateAccountList on p.AccountNumber equals p2.AccountNumber
-                                      select new { Caption = string.Empty, AccountNumber = p.AccountNumber, RowNumber = p.No }).ToList();
+                                      select new { Caption = string.Empty, AccountNumber = p.AccountNumber, RowNumber = p.ExcelRowNumber }).ToList();
 
-            var duplicateAccounts = duplicateAccounts1.Union(duplicateAccounts2).ToList();
+            var duplicateAccounts = duplicateAccountNumbers.Union(duplicateAccountDescs).ToList();
             if (duplicateAccounts.Count > 0)
             {
                 foreach (var account in duplicateAccounts)
                 {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    if (!string.IsNullOrEmpty(account.AccountNumber))
-                        stringBuilder.Append(L("DuplicateAccountNumber") + L("StartBold")+account.AccountNumber+ L("EndBold") + L("InDb"));
-                    if (!string.IsNullOrEmpty(account.Caption))
-                        stringBuilder.Append(L("DuplicateDescription") + L("StartBold")+account.Caption + L("EndBold") + L("InDb"));
+                    bool isReecordExist = uploadErrorMessagesList.Any(p => p.RowNumber == account.RowNumber);
                     var uploadErrorMessages = new UploadErrorMessagesOutputDto()
                     {
-                        ErrorMessage = stringBuilder.ToString().TrimEnd(',').TrimStart(','),
-                        RowNumber = account.RowNumber.ToString()
+                        RowNumber = account.RowNumber,
+                        ErrorMessage = new List<NameValueDto>()
                     };
-                    uploadErrorMessagesList.Add(uploadErrorMessages);
+                    if (!string.IsNullOrEmpty(account.AccountNumber))
+                    {
+                        uploadErrorMessages.ErrorMessage.Add(new NameValueDto
+                        {
+                            Name = L("AccountNumber"),
+                            Value = L("DuplicateAccountNumber") + account.AccountNumber + L("InDb")
+                        });
+                    }
+                    if (!string.IsNullOrEmpty(account.Caption))
+                    {
+                        uploadErrorMessages.ErrorMessage.Add(new NameValueDto
+                        {
+                            Name = L("Description"),
+                            Value = L("DuplicateDescription") + account.Caption + L("InDb")
+                        });
+                    }
+                    if (!isReecordExist)
+                        uploadErrorMessagesList.Add(uploadErrorMessages);
+                    else
+                    {
+                        uploadErrorMessagesList.Find(p => p.RowNumber == account.RowNumber)
+                            .ErrorMessage.Concat(uploadErrorMessages.ErrorMessage);
+                    }
                 }
             }
         }
@@ -556,24 +620,36 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <returns></returns>
         private void ValidateUploadedData(List<CreateAccountUnitInput> inputUnits, bool isNumeric, List<UploadErrorMessagesOutputDto> uploadErrorMessageList)
         {
+
             foreach (var input in inputUnits)
             {
-
-                UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto
-                {
-                    RowNumber = input.No.ToString()
-                };
+                var errorMegageList = new List<NameValueDto>();
+                var duplicaterecord = uploadErrorMessageList.FirstOrDefault(p => p.RowNumber == input.ExcelRowNumber);
+                
                 DataValidator.CheckLength(input.AccountNumber.Length, AccountUnit.MaxCodeLength, L("AccountNumber"),
-                    uploadErrorMessages);
-                NumericValidation(input.AccountNumber, uploadErrorMessages, isNumeric);
+                    errorMegageList);
+                NumericValidation(input.AccountNumber, errorMegageList, isNumeric);
                 DataValidator.CheckLength(input.Caption.Length, AccountUnit.MaxDesc, L("Description"),
-                    uploadErrorMessages);
-                DataValidator.RequiredValidataion(input.AccountNumber, L("AccountNumber"), uploadErrorMessages);
-                DataValidator.RequiredValidataion(input.Caption, L("Description"), uploadErrorMessages);
-                if (!string.IsNullOrEmpty(uploadErrorMessages.ErrorMessage))
+                    errorMegageList);
+                DataValidator.RequiredValidataion(input.AccountNumber, L("AccountNumber"), errorMegageList);
+                DataValidator.RequiredValidataion(input.Caption, L("Description"), errorMegageList);
+                if (errorMegageList.Count > 0)
                 {
-                    uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage.TrimStart(',').TrimStart(',');
-                    uploadErrorMessageList.Add(uploadErrorMessages);
+                    if (ReferenceEquals(duplicaterecord, null))
+                    {
+                        UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto
+                        {
+                            RowNumber = input.ExcelRowNumber,
+                            ErrorMessage = errorMegageList
+                        };
+
+                        uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage;
+                        uploadErrorMessageList.Add(uploadErrorMessages);
+                    }
+                    else
+                    {
+                        uploadErrorMessageList.Find(p => p.RowNumber == input.ExcelRowNumber).ErrorMessage.Concat(errorMegageList);
+                    }
                 }
             }
         }
@@ -584,13 +660,16 @@ namespace CAPS.CORPACCOUNTING.Accounts
         /// <param name="accountNumber"></param>
         /// <param name="uploadErrorMessages"></param>
         /// <param name="isNumeric"></param>
-        private void NumericValidation(string accountNumber, UploadErrorMessagesOutputDto uploadErrorMessages, bool isNumeric)
+        private void NumericValidation(string accountNumber, List<NameValueDto> uploadErrorMessages, bool isNumeric)
         {
             long accountNum;
             //In Coa IsNumberic is true, AccountNumber shold be Numeric
             if (!string.IsNullOrEmpty(accountNumber) && isNumeric && !long.TryParse(accountNumber, out accountNum))
-                uploadErrorMessages.ErrorMessage = uploadErrorMessages.ErrorMessage + " " + accountNumber +
-                                                   L("ShouldbeNumberic").TrimStart(',').TrimEnd(',');
+                uploadErrorMessages.Add(new NameValueDto
+                {
+                    Name = L("AccountNumber"),
+                    Value = accountNumber + L("ShouldbeNumberic")
+                });
         }
     }
 }

@@ -22,11 +22,11 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
             form = view.getForm(),
             requestParamsObj = null;
 
-        //var uploadMask = new Ext.LoadMask({
-        //    msg: 'Please wait...',
-        //    target: view.up('window')
-        //});
-        //uploadMask.show();
+        var uploadMask = new Ext.LoadMask({
+            msg: 'Please wait...',
+            target: view.up('window')
+        });
+        uploadMask.show();
         
         if (me.entityName === "FinancialAccounts" || me.entityName === "Lines") {
             requestParamsObj = {
@@ -42,9 +42,9 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
             form.submit({
                 url: abp.appPath + 'FileUpload/UploadExcelFile',
                 params: requestParamsObj,
-                waitMsg: 'Importing your template...',
+                //waitMsg: 'Importing your template...',
                 success: function (fp, response) {
-                    //uploadMask.hide();
+                    uploadMask.hide();
                     if (response.result) {
                         var data = response.result.result;
                         if (data.success) {
@@ -78,7 +78,7 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
                     }
                 },
                 failure: function (fp, action) {
-                    //uploadMask.hide();
+                    uploadMask.hide();
                     abp.message.error(app.localize('Failed'), app.localize('Error'));
                 }
             });

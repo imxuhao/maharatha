@@ -6,7 +6,7 @@ Ext.define('Chaching.view.imports.ImportsErrorView', {
     ],
     controller: 'window-importsView',
     height: '90%',
-    width: '70%',
+    width: '80%',
     layout: 'fit',
     title: app.localize("Error"),
     iconCls: 'fa fa-bug',

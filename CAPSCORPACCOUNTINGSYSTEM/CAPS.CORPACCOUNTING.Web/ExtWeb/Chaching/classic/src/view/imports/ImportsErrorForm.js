@@ -20,19 +20,42 @@
         width: '90%'
     },
     items: [{
-        xtype: 'imports',
+        xtype: 'financials.accounts.accounts', //imports',
         itemId: 'errorgridPanelItemId',
         padding: '0 10 0 10',
-        width: '100%'
+        width: '100%',
+        headerButtonsConfig: [
+        {
+            xtype: 'displayfield',
+            value: abp.localization.localize("FinancialAccounts"),
+            ui: 'headerTitle'
+        }, '->'],
+        importConfig: {
+            entity: 'FinancialAccounts',
+            isRequireImport: false
+        },
+        editingMode: 'cell',
+        selModelConfig: 'cellmodel',
+        requireActionColumn: false,
+        scrollable: true,
+        showPagingToolbar: false
     }],
     bbar: ['->', {
         xtype: 'button',
         scale: 'small',
         iconAlign: 'left',
-        text: app.localize('Close').toUpperCase(),
+        text: app.localize('Save').toUpperCase(),
         ui: 'actionButton',
         name: 'Ok',
-        handler:'onBtnClick'
+        handler:'onSaveBtnClick'
+    },{
+        xtype: 'button',
+        scale: 'small',
+        iconAlign: 'left',
+        text: app.localize('Cancel').toUpperCase(),
+        ui: 'actionButton',
+        name: 'Ok',
+        handler:'onCancelBtnClick'
     }
     ]
 });

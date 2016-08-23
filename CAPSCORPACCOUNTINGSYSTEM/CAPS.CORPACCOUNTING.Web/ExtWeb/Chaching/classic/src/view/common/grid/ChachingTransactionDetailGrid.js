@@ -192,7 +192,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             checkboxSelect: false,
             pruneRemoved: false,
             rowNumbererHeaderWidth:55,
-            extensible: 'y',
+            extensible: 'y'
             //listeners: {
             //    focuschange:'onRowSelectionChange'
             //}

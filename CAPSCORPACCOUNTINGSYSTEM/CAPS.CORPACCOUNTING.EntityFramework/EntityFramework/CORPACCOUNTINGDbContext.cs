@@ -648,6 +648,7 @@ namespace CAPS.CORPACCOUNTING.EntityFramework
             {
                 audit.Configuration.AutoSavePreAction(this, audit);
                 base.SaveChanges();
+                
             }
 
             return rowAffecteds;

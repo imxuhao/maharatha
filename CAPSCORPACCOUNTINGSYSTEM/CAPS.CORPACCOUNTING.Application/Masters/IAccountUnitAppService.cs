@@ -101,6 +101,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <param name="accountList"></param>
         /// <returns></returns>
         Task<List<AccountUnitDto>> BulkAccountUploads(CreateAccountListInput accountList);
+
+        Task<List<AccountUnitDto>> BulkAccountInsert(List<CreateAccountUnitInput> listAccountUnitDtos);
     }
     
 }

@@ -238,6 +238,7 @@
     <Compile Include="Localization\CustomLanguageTextsUnitManager.cs" />
     <Compile Include="Masters\ConnectionStringUnit.cs" />
     <Compile Include="Masters\CountryUnit.cs" />
+    <Compile Include="Masters\CustomRepository\ICustomAccountRepository.cs" />
     <Compile Include="Masters\TaxCreditUnit.cs" />
     <Compile Include="Masters\TaxCreditUnitManager.cs" />
     <Compile Include="Masters\TerritoriesUnit.cs" />
@@ -468,6 +469,7 @@
     <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-de.xml" />
     <EmbeddedResource Include="Localization\CORPACCOUNTING\CORPACCOUNTING-pt-BR.xml" />
     <Content Include="Localization\CORPACCOUNTING\CORPACCOUNTING-it.xml" />
+    <Content Include="Localization\CORPACCOUNTING\CORPACCOUNTING-ru.xml" />
     <Content Include="Localization\CORPACCOUNTING\READ_ME.txt" />
     <EmbeddedResource Include="Emailing\EmailTemplates\default.html" />
   </ItemGroup>

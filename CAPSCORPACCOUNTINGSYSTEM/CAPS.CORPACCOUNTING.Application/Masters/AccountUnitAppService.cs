@@ -20,7 +20,9 @@ using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
+using CAPS.CORPACCOUNTING.Masters.CustomRepository;
 using CAPS.CORPACCOUNTING.Sessions;
+using Hangfire;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -36,10 +38,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSession;
         private readonly AccountCache _accountcache;
+        private readonly ICustomAccountRepository _customAccountRepository;
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
-            IRepository<CoaUnit, int> coaRepository, AccountCache accountcache, CustomAppSession customAppSession)
+            IRepository<CoaUnit, int> coaRepository, AccountCache accountcache, CustomAppSession customAppSession, ICustomAccountRepository customAccountRepository)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
@@ -51,6 +54,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _coaRepository = coaRepository;
             _accountcache = accountcache;
             _customAppSession = customAppSession;
+            _customAccountRepository = customAccountRepository;
         }
 
         /// <summary>
@@ -368,6 +372,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
                                 }).ToList();
 
             return await BulkAccountUploads(new CreateAccountListInput { AccountList = accountsList });
+            
         }
 
 
@@ -403,6 +408,30 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 }
            }
             return accountUnitList;
+
+        }
+
+        public async Task<List<AccountUnitDto>> BulkAccountInsert(List<CreateAccountUnitInput> listAccountUnitDtos )
+        {
+            List<AccountUnit> accountList = new List<AccountUnit>();
+
+            List<AccountUnitDto> erroredAccountList = new List<AccountUnitDto>();
+            // Do your validation here and if validation is not successful remove the item from the List and put it into and another list
+            foreach (var accountUnitDto in listAccountUnitDtos)
+            {
+                await _accountUnitManager.ValidateAccountUnitAsync(accountUnitDto.MapTo<AccountUnit>());
+                
+            }
+            
+            if (listAccountUnitDtos.Any())
+            {
+                
+                accountList.AddRange(listAccountUnitDtos.Select(accountunitDto => accountunitDto.MapTo<AccountUnit>()));
+            }
+            
+            await _customAccountRepository.BulkInsertAccountUnits(accountList: accountList);
+
+            return erroredAccountList;
 
         }
 

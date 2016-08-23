@@ -7,17 +7,20 @@ using Abp.Domain.Services;
 using Abp.Domain.Uow;
 using Abp.UI;
 using Abp.Zero;
+using CAPS.CORPACCOUNTING.Masters.CustomRepository;
 
 namespace CAPS.CORPACCOUNTING.Masters
 {
     public class AccountUnitManager : DomainService
     {
+        private readonly ICustomAccountRepository _customAccountRepository;
         public string ErrorMessage = string.Empty;
         public bool IsRecordfromExcel = false;
 
 
-        public AccountUnitManager(IRepository<AccountUnit, long> accountunitrepository, IRepository<CoaUnit> coaUnitRepository)
+        public AccountUnitManager(IRepository<AccountUnit, long> accountunitrepository, IRepository<CoaUnit> coaUnitRepository, ICustomAccountRepository customAccountRepository)
         {
+            _customAccountRepository = customAccountRepository;
             AccountUnitRepository = accountunitrepository;
             CoaUnitRepository = coaUnitRepository;
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
@@ -130,7 +133,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             return await AccountUnitRepository.GetAllListAsync(ou => ou.ParentId == parentId);
         }
 
-        protected virtual async Task ValidateAccountUnitAsync(AccountUnit accountUnit)
+        public virtual async Task ValidateAccountUnitAsync(AccountUnit accountUnit)
         {
             var coaUnit = await CoaUnitRepository.FirstOrDefaultAsync(p => p.Id == accountUnit.ChartOfAccountId);
             long accountNumber;
@@ -179,7 +182,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             #endregion
         }
 
+      
 
-        
     }
 }

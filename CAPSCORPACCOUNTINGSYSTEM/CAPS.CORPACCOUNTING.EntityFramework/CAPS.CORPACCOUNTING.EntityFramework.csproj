@@ -140,6 +140,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Z.EntityFramework.Extensions, Version=3.10.1.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Extensions.3.10.1\lib\net45\Z.EntityFramework.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Z.EntityFramework.Plus.Audit.EF6, Version=1.2.0.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
       <HintPath>..\packages\Z.EntityFramework.Plus.Audit.EF6.1.2.0\lib\net45\Z.EntityFramework.Plus.Audit.EF6.dll</HintPath>
       <Private>True</Private>
@@ -150,6 +154,7 @@
     <Compile Include="EntityFramework\ConnectionStringHelper.cs" />
     <Compile Include="EntityFramework\CORPACCOUNTINGDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\CORPACCOUNTINGRepositoryBase.cs" />
+    <Compile Include="EntityFramework\Repositories\CustomAccountRepository.cs" />
     <Compile Include="MigrationExtensions.cs" />
     <Compile Include="Migrations\201501041229232_InitialCreate.cs" />
     <Compile Include="Migrations\201501041229232_InitialCreate.Designer.cs">
@@ -2247,6 +2252,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CAPS.CORPACCOUNTING.Application\CAPS.CORPACCOUNTING.Application.csproj">
+      <Project>{EDF5D964-4C0F-4F19-B674-58A38A5E5401}</Project>
+      <Name>CAPS.CORPACCOUNTING.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CAPS.CORPACCOUNTING.Core\CAPS.CORPACCOUNTING.Core.csproj">
       <Project>{17298EA0-AF73-4F30-B6F1-2066100D7D74}</Project>
       <Name>CAPS.CORPACCOUNTING.Core</Name>

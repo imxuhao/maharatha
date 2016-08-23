@@ -43,6 +43,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         Task<PagedResultOutput<AccountUnitDto>> GetLinesByCoaId(GetAccountInput input);
 
+        /// <summary>
+        /// Inserting Bulk of Lines
+        /// </summary>
+        /// <param name="accountList"></param>
+        /// <returns></returns>
+        Task<List<AccountUnitDto>> BulkLineUploads(CreateAccountListInput accountList);
+
 
     }
 }

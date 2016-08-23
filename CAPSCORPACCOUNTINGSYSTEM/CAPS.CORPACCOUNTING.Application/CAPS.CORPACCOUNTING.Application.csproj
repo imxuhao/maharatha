@@ -336,6 +336,7 @@
     <Compile Include="Interceptors\MeasureDurationInterceptorRegistrar.cs" />
     <Compile Include="Interceptors\MeasureDurationWithPostAsyncActionInterceptor.cs" />
     <Compile Include="IO\AppFileHelper.cs" />
+    <Compile Include="JobCosting\Dto\CreateJobListInput.cs" />
     <Compile Include="JobCosting\Dto\CreateJobPORangeAllocationInput.cs" />
     <Compile Include="JobCosting\Dto\GetJobAccountInputDto.cs" />
     <Compile Include="JobCosting\Dto\JobPORangeAllocationUnitDto.cs" />

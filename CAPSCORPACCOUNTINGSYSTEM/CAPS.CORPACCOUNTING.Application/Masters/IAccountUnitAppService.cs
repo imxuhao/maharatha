@@ -100,7 +100,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// </summary>
         /// <param name="accountList"></param>
         /// <returns></returns>
-        Task<ErrorMessageswithAccountDto> BulkAccountUploads(CreateAccountListInput accountList);
+        Task<List<AccountUnitDto>> BulkAccountUploads(CreateAccountListInput accountList);
     }
     
 }

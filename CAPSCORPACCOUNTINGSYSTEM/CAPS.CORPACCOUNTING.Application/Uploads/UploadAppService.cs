@@ -36,13 +36,13 @@ namespace CAPS.CORPACCOUNTING.Uploads
             switch (entityName)
             {
                 case "FinancialAccounts":
-                    errorMEssageswithAccount = await _accountUnitAppService.ImportAccounts(dataTable, coaId.Value);
+                     await _accountUnitAppService.ImportAccounts(dataTable, coaId.Value);
                     break;
                 //case "Projects":
                 //    errorMessageList = await _jobUnitAppService.ImportJobs(dataTable);
                 //    break;
                 case "Lines":
-                    errorMEssageswithAccount = await _linesUnitAppService.ImportLines(dataTable, coaId.Value);
+                     await _linesUnitAppService.ImportLines(dataTable, coaId.Value);
                     break;
 
             }

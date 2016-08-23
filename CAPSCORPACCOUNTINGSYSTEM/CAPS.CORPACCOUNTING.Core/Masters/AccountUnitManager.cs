@@ -12,23 +12,37 @@ namespace CAPS.CORPACCOUNTING.Masters
 {
     public class AccountUnitManager : DomainService
     {
+        public string ErrorMessage = string.Empty;
+        public bool IsRecordfromExcel = false;
+
+
         public AccountUnitManager(IRepository<AccountUnit, long> accountunitrepository, IRepository<CoaUnit> coaUnitRepository)
         {
             AccountUnitRepository = accountunitrepository;
             CoaUnitRepository = coaUnitRepository;
-
             LocalizationSourceName = AbpZeroConsts.LocalizationSourceName;
         }
 
         protected IRepository<AccountUnit, long> AccountUnitRepository { get; }
-        protected IRepository<CoaUnit> CoaUnitRepository { get;  }
+        protected IRepository<CoaUnit> CoaUnitRepository { get; }
 
         [UnitOfWork]
         public virtual async Task<long> CreateAsync(AccountUnit accountUnit)
         {
             accountUnit.Code = await GetNextChildCodeAsync(accountUnit.ParentId, accountUnit.ChartOfAccountId);
             await ValidateAccountUnitAsync(accountUnit);
-           return await AccountUnitRepository.InsertAndGetIdAsync(accountUnit);
+            return await AccountUnitRepository.InsertAndGetIdAsync(accountUnit);
+        }
+
+
+        public virtual async Task<string> CreateAccountListAsync(AccountUnit accountUnit)
+        {
+            ErrorMessage = string.Empty;
+            accountUnit.Code = await GetNextChildCodeAsync(accountUnit.ParentId, accountUnit.ChartOfAccountId);
+            await ValidateAccountUnitAsync(accountUnit);
+            if (ErrorMessage.Length <= 0)
+                await AccountUnitRepository.InsertAsync(accountUnit);
+            return ErrorMessage.TrimEnd(',').TrimStart(',');
         }
 
         public virtual async Task UpdateAsync(AccountUnit accountUnit)
@@ -118,12 +132,16 @@ namespace CAPS.CORPACCOUNTING.Masters
 
         protected virtual async Task ValidateAccountUnitAsync(AccountUnit accountUnit)
         {
-            var coaUnit =await CoaUnitRepository.FirstOrDefaultAsync(p => p.Id == accountUnit.ChartOfAccountId);
+            var coaUnit = await CoaUnitRepository.FirstOrDefaultAsync(p => p.Id == accountUnit.ChartOfAccountId);
             long accountNumber;
             //Validating Numeric AccountNumbers
             //In Coa IsNumberic is true, AccountNumber shold be Numeric
-            if (coaUnit.IsNumeric && !long.TryParse(accountUnit.AccountNumber,out accountNumber))
-                throw new UserFriendlyException(L("Account Number shold be numeric.", accountUnit.Caption));
+            if (coaUnit.IsNumeric && !long.TryParse(accountUnit.AccountNumber, out accountNumber))
+            {
+                if (!IsRecordfromExcel)
+                    throw new UserFriendlyException(L("Account Number should be numeric.", accountUnit.Caption));
+                ErrorMessage = "Account Number should be numeric." + accountUnit.AccountNumber;
+            }
 
 
             // Validating duplicate account number and description of account with the same COAId and decription
@@ -133,12 +151,16 @@ namespace CAPS.CORPACCOUNTING.Masters
 
             if (siblings.Any(ou => ou.Caption == accountUnit.Caption))
             {
-                throw new UserFriendlyException(L("Duplicate Account Description", accountUnit.Caption));
+                if (!IsRecordfromExcel)
+                    throw new UserFriendlyException(L("Duplicate Account Description", accountUnit.Caption));
+                ErrorMessage = ErrorMessage + "," + "Duplicate Account Description" + accountUnit.Caption;
             }
 
             if (siblings.Any(ou => ou.AccountNumber == accountUnit.AccountNumber))
             {
-                throw new UserFriendlyException(L("Duplicate Account Number", accountUnit.Caption));
+                if (!IsRecordfromExcel)
+                    throw new UserFriendlyException(L("Duplicate Account Number", accountUnit.Caption));
+                ErrorMessage = ErrorMessage + "," +"Duplicate Account Number" + accountUnit.AccountNumber;
             }
 
             #region Validating if Parent and Child have the same COAID
@@ -149,11 +171,15 @@ namespace CAPS.CORPACCOUNTING.Masters
                     await AccountUnitRepository.GetAsync(Convert.ToInt64(accountUnit.ParentId));
                 if (parentaccountUnit.ChartOfAccountId != accountUnit.ChartOfAccountId)
                 {
-                    throw new UserFriendlyException(L("Invalid Chart of Account", accountUnit.Caption));
+                    if (!IsRecordfromExcel)
+                        throw new UserFriendlyException(L("Invalid Chart of Account", accountUnit.Caption));
+                    ErrorMessage = ErrorMessage + "," + "Invalid Chart of Account";
                 }
             }
-
             #endregion
         }
+
+
+        
     }
 }

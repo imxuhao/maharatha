@@ -88,7 +88,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or sets the TaxCreditId field. </summary>
         public int? TaxCreditId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the ErrorMessage. 
+        /// This property will be used in BulkInsertion
+        /// </summary>
+        public string ErrorMessage { get; set; }
 
     }
 }

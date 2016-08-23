@@ -1169,6 +1169,11 @@
     <text name="CreditInformation" value="Credit Information" />
     <text name="SplitGroupTotalExceed" value="Operation cannot be completed due to amount is exceeding total amount."/>
     <text name="RevertSplit" value="Do you really want to revert this split?"/>
+    <text name="Numbersholdbenumeric" value="Number shold be numeric"/>
+    <text name="DuplicateDesc" value="Duplicate Description"/>
+    <text name="DuplicateNumber" value="Duplicate Number"/>
+    <text name="InvalidChartofAccount" value="Invalid ChartofAccount"/>
+
     <text name="RollupDivisionNumber" value="RollUp Division Number"/>
     <text name="RollupDivisionDescription" value="RollUp Division Description"/>
     <text name="RollUpAccountNumber" value="RollUp Account Number"/>
@@ -1185,5 +1190,6 @@
     <text name="BudgetFormatValue" value="Budget Format Value"/>
     <text name="TaxCreditValue" value="Tax Credit Value"/>
     <text name="StatusValue" value="Status Value"/>
+
   </texts>
 </localizationDictionary>

@@ -139,6 +139,9 @@ namespace CAPS.CORPACCOUNTING.Masters.Dto
         /// <summary>Gets or sets the RollUpDivision field. </summary>
         public string RollUpDivision { get; set; }
 
-        
+        /// <summary>Gets or sets the ErrorMessage field. </summary>
+        public string ErrorMessage { get; set; }
+
+
     }
 }

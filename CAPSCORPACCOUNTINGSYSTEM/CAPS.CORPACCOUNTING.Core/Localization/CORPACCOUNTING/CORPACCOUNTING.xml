@@ -1149,12 +1149,12 @@
     <text name="DuplicateDescription" value=",Duplicate Description - "/>
     <text name="StartBold" value="&lt;B&gt;"/>
     <text name="EndBold" value="&lt;/B&gt;"/>
-    
+
     <text name="DuplicateAccountNumbers" value="Duplicate AccountNumbers:"/>
-     <text name="DuplicateJobNumbers" value="Duplicate JobNumbers:"/>
+    <text name="DuplicateJobNumbers" value="Duplicate JobNumbers:"/>
     <text name="DuplicateJobNames" value="Duplicate JobNames:"/>
-     <text name="DuplicateJobNumber" value=" Duplicate JobNumber,"/>
-      <text name="DuplicateJobName" value=" Duplicate JobName." />
+    <text name="DuplicateJobNumber" value=" Duplicate JobNumber,"/>
+    <text name="DuplicateJobName" value=" Duplicate JobName." />
     <text name="ShouldbeNumberic" value=" should be Numeric," />
     <text name="DuplicateCaption" value=" Duplicate Caption - "/>
     <text name="DuplicateLineNumber" value=" Duplicate Line # - "/>
@@ -1169,5 +1169,21 @@
     <text name="CreditInformation" value="Credit Information" />
     <text name="SplitGroupTotalExceed" value="Operation cannot be completed due to amount is exceeding total amount."/>
     <text name="RevertSplit" value="Do you really want to revert this split?"/>
+    <text name="RollupDivisionNumber" value="RollUp Division Number"/>
+    <text name="RollupDivisionDescription" value="RollUp Division Description"/>
+    <text name="RollUpAccountNumber" value="RollUp Account Number"/>
+    <text name="RollupAccountDescription" value="RollUp Account Description"/>
+    <text name="ClassificationValue" value="Classification Value"/>
+    <text name="ConsolidationValue" value="Consolidation Value"/>
+    <text name="NewAccountValue" value="New Account Value"/>
+    <text name="RateTypeOverrideValue" value="Rate Type Override Value"/>
+    <text name="CurrencyValue" value="Currency Value"/>
+    <text name="RollUpDivisionValue" value="RollUp Division Value"/>
+    <text name="RollUpAccountValue" value="RollUp Account Value"/>
+    <text name="FlagsValue" value="Flags Value"/>
+    <text name="ProjectTypeValue" value="Project Type Value"/>
+    <text name="BudgetFormatValue" value="Budget Format Value"/>
+    <text name="TaxCreditValue" value="Tax Credit Value"/>
+    <text name="StatusValue" value="Status Value"/>
   </texts>
 </localizationDictionary>

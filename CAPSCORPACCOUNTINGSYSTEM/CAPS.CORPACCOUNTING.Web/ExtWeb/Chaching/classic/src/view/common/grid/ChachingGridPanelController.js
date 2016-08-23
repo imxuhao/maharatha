@@ -34,7 +34,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         importConfig = view.importConfig,
         entityName = importConfig.entity,
         requestParamsObj = null;
-        if (entityName === "FinancialAccounts") {
+        if (entityName === "FinancialAccounts" || entityName === "Lines") {
             requestParamsObj = {
                 'entityName': entityName,
                 'coaId' : view.coaId

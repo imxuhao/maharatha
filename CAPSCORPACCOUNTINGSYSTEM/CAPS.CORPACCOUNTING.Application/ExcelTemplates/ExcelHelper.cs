@@ -8,6 +8,7 @@ using System.Data;
 using Abp.Application.Services.Dto;
 using OfficeOpenXml.DataValidation;
 using System.Text;
+using Abp.Collections.Extensions;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
@@ -62,8 +63,6 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         const string listDataExcelSheet = "DropDownListInformation";
         const string strOutPutDir = @"C:\EPPlus\Excel";
         const string strPassword = @"Sumit";
-
-
 
         /// <summary>
         /// 
@@ -200,6 +199,32 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             }
         }
 
+
+        /// <summary>
+        /// List Data is Added to Excel Sheet
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="list"></param>
+        /// <param name="listName"></param>
+        /// <param name="cellList"></param>
+        public static void AddListDataIntoWorkSheet(ExcelWorksheet sheet, List<NameValueDto> list, KeyValuePair<string, string> listName, KeyValuePair<string, string> cellList)
+        {
+            int j = 2;
+            sheet.Cells[cellList.Key + "1"].Style.Font.Bold = true;
+            sheet.Cells[cellList.Key + "1"].Value = listName.Key;
+
+            sheet.Cells[cellList.Value + "1"].Style.Font.Bold = true;
+            sheet.Cells[cellList.Value + "1"].Value = listName.Value;
+            if (list.Count > 0)
+            {
+                for (int i = 0; i <= list.Count - 1; i++)
+                {
+                    sheet.Cells[cellList.Key + (j + i)].Value = list[i].Name;
+                    sheet.Cells[cellList.Value + (j + i)].Value = list[i].Value;
+                }
+            }
+        }
+
         /// <summary>
         ///  List Data is Added to Excel Sheet
         /// </summary>
@@ -275,6 +300,27 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             validation.Formula.ExcelFormula = excelFormula;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="excelFormula"></param>
+        /// <param name="startRowIndex"></param>
+        /// <param name="endRowIndex"></param>
+        /// <param name="excelColumn"></param>
+        ///  <param name="excelProperties"></param>
+        ///  <param name="columnName"></param>
+        public static void AddDropDownValidationToSheet(string columnName, ExcelWorksheet sheet, ExcelProperites excelProperties, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn)
+        {
+            var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddListDataValidation();
+            validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
+            validation.ErrorStyle = excelProperties.ErrorStyle;
+            validation.ErrorTitle = excelProperties.ErrorTitle;
+            validation.Error = excelProperties.Error;
+            validation.Formula.ExcelFormula = excelFormula;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -293,6 +339,39 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="excelProperties"></param>
+        /// <param name="startRowIndex"></param>
+        /// <param name="endRowIndex"></param>
+        /// <param name="excelColumn"></param>
+        /// <param name="columnName"></param>
+        public static void AddValidationtoSheet(string columnName, ExcelWorksheet sheet, ExcelProperites excelProperties, int startRowIndex, int endRowIndex, int excelColumn)
+        {
+            var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddCustomDataValidation();
+            validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
+            validation.ErrorStyle = excelProperties.ErrorStyle;
+            validation.ErrorTitle = excelProperties.ErrorTitle;
+            validation.Error = excelProperties.Error;
+            validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <param name="sheet"></param>
+        /// <param name="excelFormula"></param>
+        /// <param name="startRowIndex"></param>
+        /// <param name="endRowIndex"></param>
+        /// <param name="excelColumn"></param>
+        public static void AddFormulaToSheet(string columnName, ExcelWorksheet sheet, string excelFormula, int startRowIndex, int endRowIndex, bool hideColumn, int excelColumn)
+        {
+            sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].Formula = excelFormula;
+            sheet.Column(excelColumn).Hidden = hideColumn;
+        }
 
         /// <summary>
         /// =Sheet2!$A$1:$A$4
@@ -324,11 +403,25 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="cellColumn"></param>
         ///  <param name="isNumaric"></param>
         /// <returns></returns>
-        public static string GetAllowNumberFormula(string cellColumn,bool isNumaric)
+        public static string GetAllowNumberFormula(string cellColumn, bool isNumaric)
         {
-            if(isNumaric)
-            return "ISNUMBER(" + cellColumn + ")";
+            if (isNumaric)
+                return "ISNUMBER(" + cellColumn + ")";
             return "";
+        }
+
+        /// <summary>
+        ///  =VLOOKUP(C11,'DropDown List Information'!$A$2:$B$70,2,FALSE)
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <param name="cellColumn"></param>
+        /// <param name="lstFromRange"></param>
+        /// <param name="lstEndRange"></param>
+        ///  <param name="dropDownCellColumn"></param>
+        /// <returns></returns>
+        public static string GetVLOOKUPFormula(string sheetName, string cellColumn, string[] dropDownCellColumns, int lstFromRange, int lstEndRange)
+        {
+            return "VLOOKUP(" + cellColumn + ",'" + sheetName + "'" + "!" + "$" + dropDownCellColumns[0] + "$" + lstFromRange + ":" + "$" + dropDownCellColumns[1] + "$" + lstEndRange + ",2,FALSE)";
         }
 
         /// <summary>
@@ -337,14 +430,14 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="cellColumns"></param>
         /// <param name="requiredCellColumn"></param>
         /// <returns></returns>
-        public static string GetRequiredFieldFormula(List<string> cellColumns,string requiredCellColumn)
+        public static string GetRequiredFieldFormula(List<string> cellColumns, string requiredCellColumn)
         {
             StringBuilder strBuild = new StringBuilder();
             strBuild.Append("OR(");
             foreach (var item in cellColumns)
             {
-                if(item!=requiredCellColumn)
-                strBuild.Append("LEN(" + item +"2"+ ")>" + 0 + ",");
+                if (item != requiredCellColumn)
+                    strBuild.Append("LEN(" + item + "2" + ")>" + 0 + ",");
             }
             return strBuild.ToString().TrimEnd(',') + ")";
         }
@@ -356,14 +449,14 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <returns></returns>
         public static string GetMultiValidationString(List<string> validationList)
         {
-            StringBuilder strBuild =new StringBuilder();
+            StringBuilder strBuild = new StringBuilder();
             strBuild.Append("AND(");
             foreach (var item in validationList)
             {
-                if(!string.IsNullOrEmpty(item))
-                strBuild.Append(item+",");
+                if (!string.IsNullOrEmpty(item))
+                    strBuild.Append(item + ",");
             }
-            return strBuild.ToString().TrimEnd(',')+")";
+            return strBuild.ToString().TrimEnd(',') + ")";
         }
 
 
@@ -377,7 +470,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <returns></returns>
         public static string GetDuplicateCellFormula(string cellColumn, int lstFromRange, int lstEndRange)
         {
-            return "COUNTIF(" + "$" + cellColumn + "$" + lstFromRange + ":" + "$" + cellColumn + "$" + lstEndRange+","+cellColumn+ lstFromRange+")=1";
+            return "COUNTIF(" + "$" + cellColumn + "$" + lstFromRange + ":" + "$" + cellColumn + "$" + lstEndRange + "," + cellColumn + lstFromRange + ")=1";
         }
 
         /// <summary>
@@ -386,13 +479,26 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="valueList"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static string ApplyPlaceHolderValues(string message,Dictionary<string, string> valueList)
+        public static string ApplyPlaceHolderValues(string message, Dictionary<string, string> valueList)
         {
             foreach (var item in valueList)
             {
-                message= message.Replace(item.Key,item.Value);
+                message = message.Replace(item.Key, item.Value);
             }
             return message;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <param name="excelFromula"></param>
+        /// <returns></returns>
+        public static ExcelProperites SetExcelFromula(ExcelProperites properties, string excelFromula)
+        {
+            properties.ExcelFormula = excelFromula;
+            return properties;
+
         }
         /// <summary>
         /// Converting Excel file to DataTable

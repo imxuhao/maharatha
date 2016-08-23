@@ -9,15 +9,15 @@
             grid = formView.down('gridpanel[itemId=errorgridPanelItemId]');
         if (grid) {
             var gridStore = grid.getStore();
-            gridStore.loadData(me.ErrorList.AccountsList);
+            gridStore.loadData(me.ErrorList.accountsList);
             var gridView = grid.getView(), cell = 0;
-            for (var c = 0; c < me.ErrorList.UploadErrorMessagesList.length; c++) {
+            for (var c = 0; c < me.ErrorList.errorMessagesList.length; c++) {
                 var row = '', colndex='';
                 row = gridStore.getAt(c);
-                for (var ct = 0; ct < me.ErrorList.UploadErrorMessagesList[c].ErrorMessageList.length; ct++) {
-                    colndex = me.getColumnIndex(grid.columns, me.ErrorList.UploadErrorMessagesList[c].columnName);
+                for (var ct = 0; ct < me.ErrorList.errorMessagesList[c].errorMessage.length; ct++) {
+                    colndex = me.getColumnIndex(grid.columns, me.ErrorList.errorMessagesList[c].errorMessage[ct].name);
                     cell = gridView.getCell(row, colndex);
-                    me.applyCssOnInvalidCells(cell, me.ErrorList.UploadErrorMessagesList[c].errorMessage);
+                    me.applyCssOnInvalidCells(cell, me.ErrorList.errorMessagesList[c].errorMessage[ct].value);
                 }
             }
         }
@@ -33,7 +33,7 @@
         invalidCell.set({ 'data-errorqtip': ' ' + error });
     },
     getColumnIndex: function (gridColumns, columnName) {
-        var gridDataIndices = Ext.Array.pluck(gridColumns, 'dataIndex');
+        var gridDataIndices = Ext.Array.pluck(gridColumns, 'text');
         return Ext.Array.indexOf(gridDataIndices, columnName);
     }
 

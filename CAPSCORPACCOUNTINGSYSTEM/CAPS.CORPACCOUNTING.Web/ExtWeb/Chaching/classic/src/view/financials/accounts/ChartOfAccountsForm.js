@@ -50,7 +50,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsForm', {
             itemId: 'description',
             tabIndex: 3,
             //allowBlank: false,
-            fieldLabel: app.localize('description') ,
+            fieldLabel: app.localize('Description'),
             width: '100%',
             ui: 'fieldLabelTop',
             emptyText: '' //app.localize('MandatoryField')

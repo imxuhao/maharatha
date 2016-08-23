@@ -1091,8 +1091,13 @@ Ext.define('Chaching.components.form.field.ComboBox', {
             me.store.on('load', function (storeObj) {
                 if (storeObj && storeObj.pickerField) {
                     //refresh to autoHeight based on records available in store
-                    storeObj.pickerField.refresh(1);
-                    storeObj.pickerField.updateLayout();
+                    try {
+                        storeObj.pickerField.refresh(1);
+                        storeObj.pickerField.updateLayout();
+                    } catch (e) {
+                        console.log(e);
+                    }
+                   
                 }
             });
         }

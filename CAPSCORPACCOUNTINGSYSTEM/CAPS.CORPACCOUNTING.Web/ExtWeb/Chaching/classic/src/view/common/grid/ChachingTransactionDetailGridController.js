@@ -79,6 +79,127 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         gridStore.getSorters().clear();
         gridStore.reload();
     },
+    onSplitCheckChange: function (checkCol, rowIdx, checked, record, eOpts) {
+        var me = this,
+            view = me.getView(),
+            detailStore = view.getStore(),
+            accountingItemId = record.get('accountingItemId'),
+            localSplitGroup = accountingItemId + '-' + me.numToChar(accountingItemId),
+            editingPlugin = view.getPlugin('editingPlugin');
+           
+        if (editingPlugin) {
+            editingPlugin.completeEdit();
+        }
+        if (!checked) {
+            abp.message.confirm(
+                app.localize('RevertSplit'),
+                function(isConfirmed) {
+                    if (isConfirmed) {
+                        var splitGroup = detailStore.queryRecords('LocalSplitGroup', localSplitGroup),
+                            originalAmount = record.get('amount'),
+                            deleteFromServer = false;
+
+                        if (splitGroup && splitGroup.length === 0) {
+                            splitGroup = detailStore.queryRecords('splitAccountingItemId', accountingItemId);
+                            deleteFromServer = true;
+                        }
+                        if (splitGroup && splitGroup.length > 0) {
+                            for (var i = 0; i < splitGroup.length; i++) {
+                                var loopRec = splitGroup[i];
+                                originalAmount += parseFloat(loopRec.get('amount'));
+                                if (record.internalId !== loopRec.internalId) {
+                                    if (!deleteFromServer)
+                                        detailStore.remove(loopRec);
+                                    else {
+                                        var recIdx = detailStore.indexOf(loopRec);
+                                        me.onDeleteClicked(view, recIdx);
+                                    }
+                                }
+                            }
+                        }
+                        record.set('amount', originalAmount);
+                        record.set('SplitGroupCls', null);
+                    } else record.set('isAccountingItemSplit', true);
+                }
+            );
+        } else {
+            var lastUsedSplitGroupCls = view.lastUsedSplitGroupCls,
+                   splitGroupsCls = Chaching.utilities.ChachingGlobals.splitGroupCls;
+
+            if (!lastUsedSplitGroupCls) {
+                lastUsedSplitGroupCls = splitGroupsCls[0];
+                view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+            } else {
+                var indexOfLastGroupCls = splitGroupsCls.indexOf(lastUsedSplitGroupCls);
+                if (indexOfLastGroupCls + 1 < splitGroupsCls.length) {
+                    lastUsedSplitGroupCls = splitGroupsCls[indexOfLastGroupCls + 1];
+                    view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                } else {
+                    lastUsedSplitGroupCls = splitGroupsCls[0];
+                    view.lastUsedSplitGroupCls = lastUsedSplitGroupCls;
+                }
+            }
+            record.set('SplitGroupCls', lastUsedSplitGroupCls);
+        }
+    },
+    onSplitBeforeCheckChange: function(checkCol, rowIdx, checked, record, eOpts) {
+        if (record.get('accountingItemId') > 0) return true;
+        else return false;
+    },
+    onDetailGridValidateEdit:function(editor, context, eOpts) {
+        var me = this,
+           view = me.getView(),
+           record = context.record;
+        if (record && record.get('isAccountingItemSplit') && !record.get('AllowEditComplete')) {
+            return false;
+        }
+        return true;
+    },
+    onDetailGridEditCompleted: function (editor, context, eOpts) {
+        var me = this,
+            view = me.getView(),
+            record = context.record,
+            oldValue = context.originalValue,
+            newValue = context.value,
+            gridStore = view.getStore(),
+            parentRec = record.get('parentRec');
+        var modelClass = gridStore.getModel(),
+            className = modelClass.$className;
+       
+        if (context
+            .field ===
+            "amount" &&
+            record.get('isAccountingItemSplit') &&
+            oldValue !== newValue &&
+            newValue !== 0) {
+            var validateSplitAmount = me.validateSplitAmount(editor, context);
+            if (!parentRec && record.get('splitAccountingItemId') > 0) {
+                parentRec = gridStore.findRecord('accountingItemId', record.get('splitAccountingItemId'));
+            }
+            if (validateSplitAmount) {
+                var rec = Ext.create(className);
+                Ext.apply(rec.data, record.data);
+                if (parentRec) {
+                    rec.set('splitAccountingItemId', parentRec.get('accountingItemId'));
+                    rec.set('parentRec', parentRec);
+                } else {
+                    rec.set('splitAccountingItemId', record.get('accountingItemId'));
+                    rec.set('parentRec', record);
+                }
+                rec.set('creditAccountingItemId', 0);
+                rec.set('debitAccountingItemId', null);
+                rec.set('accountingItemId', 0);
+                rec.set('isAccountingItemSplit', true);
+                rec.set('amount', validateSplitAmount);
+                rec.set('creatorUserId', null);
+                rec.set('lastModifierUserId', null);
+                rec.set('creationTime', null);
+                rec.set('lastModificationTime', null);
+
+                gridStore.insert(context.rowIdx + 1, rec);
+            } else return false;
+        }
+    },
     onSplitClicked: function (field) {
         var me = this,
            view = me.getView(),
@@ -151,7 +272,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
                 for (var i = 1; i < multiplyOf; i++) {
                     var rec = Ext.create(className);
                     Ext.apply(rec.data, parentRecord.data);
-                    rec.set('SplitAccountingItemId', parentRecord.get('accountingItemId'));
+                    rec.set('splitAccountingItemId', parentRecord.get('accountingItemId'));
                     rec.set('accountingItemId', 0);
                     rec.set('isAccountingItemSplit', true);
                     rec.set('amount', 0);
@@ -198,29 +319,20 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         }
         return String.fromCharCode(codePt);
     },
-    onDetailsAmountChange: function(field, newValue, oldValue, eOpts) {
-        var value = 0,
-            plusMinus = "minus";
-        if (!oldValue)value = newValue;
-        else if (newValue > oldValue) {
-            value = newValue - oldValue;
-            plusMinus = "minus";
-        }
-        else if (newValue < oldValue) {
-            value = oldValue - newValue;
-            plusMinus = "plus";
-        }
+    onDetailsAmountChange: function (field, newValue, oldValue, eOpts) {
+        var me = this;
         var editor = field.up();
         if (editor) {
             var context = editor.context,
                 record = context.record,
                 detailStore = this.getView().getStore();
-            if (record && record.get('isAccountingItemSplit')) {
-                var parentRec = record.get('parentRec');
-                if (!parentRec && record.get('splitAccountingItemId')) parentRec = detailStore.findRecord('accountingItemId', record.get('splitAccountingItemId'));
-                if (parentRec) {
-                    plusMinus === "minus" ? parentRec.set('amount', parseInt(Math.abs(parentRec.get('amount')) - value)) : parentRec.set('amount', parseInt(Math.abs(parentRec.get('amount')) + value));
-                }
+            if (record && record.get('isAccountingItemSplit') && newValue) {
+                var isValidAmt = me.validateSplitAmount(editor, editor.context, newValue);
+                if (!isValidAmt) {
+                    record.set('AllowEditComplete', false);
+                    field.markInvalid(app.localize('SplitGroupTotalExceed'));
+                    abp.message.error(app.localize('SplitGroupTotalExceed'), app.localize('Error'));
+                } else record.set('AllowEditComplete', true);
             }
         }
     },
@@ -320,20 +432,26 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
     },
     emptyFunction:function(){},
     onBeforeGridEdit: function (editor, context, eOpts) {
-        var me = this, view = me.getView();
+        var me = this, view = me.getView(),record=context.record;
 
         if (view.isInViewMode) return false;
         var moduleSpecificChecks = me.doModuleSpecificBeforeEdit(editor, context, eOpts);
         if (!moduleSpecificChecks) {
             return false;
         }
-        if (context.field === "amount" && context.record.get('isAccountingItemSplit')) {
-            var validateSplitAmount = me.validateSplitAmount(editor, context);
-            if (!validateSplitAmount) {
-                return false;
+        if (context.field === "amount" && record.get('isAccountingItemSplit') && !record.get('LocalSplitGroup')) {
+            var accountingItemId = record.get('accountingItemId'),
+                splitAccountingItemId = record.get('splitAccountingItemId'),
+                localSplitGroup;
+            if (splitAccountingItemId>0) {
+                localSplitGroup = me.numToChar(splitAccountingItemId);
+                accountingItemId = splitAccountingItemId;
+            } else {
+                localSplitGroup = me.numToChar(accountingItemId);
             }
+            record.set('LocalSplitGroup', accountingItemId + '-' + localSplitGroup);
         }
-        var cell = view.getView().getCell(context.record, context.column);
+        var cell = view.getView().getCell(record, context.column);
         if (cell) {
             cell.removeCls("x-invalid-cell-value");
             cell.removeCls("x-mandatory-cell-value");
@@ -344,29 +462,45 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
     doModuleSpecificBeforeEdit:function(editor, context, eOpts) {
         return true;
     },
-    validateSplitAmount:function(editor, context) {
-        var isValid = true;
+    validateSplitAmount:function(editor, context,newAmount) {
+        var isValid = true,
+            me = this;
         if (editor&&context) {
             var record = context.record,
                  detailStore = this.getView().getStore(),
-                    origImportedAmount = record.get('OriginalImportedAmount'),
+                    origImportedAmount = record.get('accountingItemOrigAmount'),
+                    localSplitGroup=record.get('LocalSplitGroup'),
                     calculatedAmount = 0,
                     amountRemains = 0;
             if (record && record.get('isAccountingItemSplit')) {
                 var groupRecords = detailStore.queryRecords('LocalSplitGroup',
-                        record.get('LocalSplitGroup'));
+                    localSplitGroup);
                 if (groupRecords && groupRecords.length > 0) {
                     for (var i = 0; i < groupRecords.length; i++) {
                         var loopRec = groupRecords[i];
                         if (record
-                            .internalId !==
-                            loopRec.internalId) calculatedAmount += parseFloat(loopRec.get('amount'));
+                            .internalId ===
+                            loopRec.internalId &&
+                            newAmount)
+                            calculatedAmount += parseFloat(newAmount);
+                        else
+                            calculatedAmount += parseFloat(loopRec.get('amount'));
                     }
+                    if (calculatedAmount > origImportedAmount && newAmount) {
+                        return false;
+                    }
+
                     amountRemains = parseFloat(origImportedAmount - calculatedAmount).toFixed(2);
-                    if (!amountRemains || amountRemains === "0" || amountRemains === "0.00") {
-                        abp.notify.warn(app.localize('SplitGroupTotalExceed'), app.localize('ValidationFailed'));
+                    if ((!amountRemains || amountRemains === "0" || amountRemains === "0.00")&&!newAmount) {
                         isValid = false;
-                    }
+                        //remove orphan records which has zero total
+                        for (var j = 0; j < groupRecords.length; j++) {
+                            var recordToRemove = groupRecords[j];
+                            if (recordToRemove.get('amount') === 0) {
+                                detailStore.remove(recordToRemove);
+                            }
+                        }
+                    } else return amountRemains;
                 }
             }
         }

@@ -1167,6 +1167,7 @@
     <text name="StartColor" value="&lt;font color='#FF0000'&gt;"/>
     <text name="EndColor" value="&lt;/font&gt;"/>
     <text name="CreditInformation" value="Credit Information" />
-    <text name="SplitGroupTotalExceed" value="There is no amount remain to assign for this row in this split group"/>
+    <text name="SplitGroupTotalExceed" value="Operation cannot be completed due to amount is exceeding total amount."/>
+    <text name="RevertSplit" value="Do you really want to revert this split?"/>
   </texts>
 </localizationDictionary>

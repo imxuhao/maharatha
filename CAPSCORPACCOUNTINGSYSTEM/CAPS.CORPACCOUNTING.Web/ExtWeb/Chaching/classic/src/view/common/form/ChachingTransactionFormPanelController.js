@@ -312,6 +312,7 @@ Ext.define('Chaching.view.common.form.ChachingTransactionFormPanelController', {
                 var rec = modifiedRecords[i];
                 if (rec.dirty) {
                     if (rec.get('accountingDocumentId') === 0 || !rec.get('accountingDocumentId')) rec.set('accountingDocumentId', transactionId);
+                    rec.set('parentRec', null);
                     records.push(rec);
                     data.push(rec.data);
                 }

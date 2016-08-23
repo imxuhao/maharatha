@@ -369,6 +369,21 @@
     },
     summaryTotalTextRenderer:function(value, summaryData, dataIndex) {
         return '<b>TOTAL</b>';
+    },
+    splitColumnRenderer: function (value, cellValues, record, rowIndex, colIndex, store, view) {
+        var cssPrefix = Ext.baseCSSPrefix,
+            cls = cssPrefix + 'grid-checkcolumn';
+
+        if (this.disabled) {
+            cellValues.tdCls += ' ' + this.disabledCls;
+        }
+        if (value) {
+            cls += ' ' + cssPrefix + 'grid-checkcolumn-checked';
+        }
+        var splitAccountingItemId = record.get('splitAccountingItemId'),
+            isSplited = record.get('isAccountingItemSplit');
+        if ((splitAccountingItemId > 0 && isSplited) || record.get('accountingItemId') === 0) return null;
+        return '<div class="' + cls + '" role="button" tabIndex="0"></div>';
     }
 
 });

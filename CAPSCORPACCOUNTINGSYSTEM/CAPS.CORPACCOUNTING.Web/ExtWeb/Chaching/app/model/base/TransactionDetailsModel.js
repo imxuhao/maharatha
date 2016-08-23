@@ -92,7 +92,8 @@ Ext.define('Chaching.model.base.TransactionDetailsModel', {
          { name: 'typeOfAmountId', type: 'int', defaultValue: 1 },
         { name: 'typeOfAmount', type: 'string', defaultValue: 'StandardEntry' },
         { name: 'SplitGroupCls', type: 'string' },//Temporary field for row coloring.
-        { name: 'OriginalImportedAmount', type: 'float' },//Temporary field for amount calculation.
-        {name:'LocalSplitGroup',ytpe:'string'}//temporary field to identify un-saved split groups
+        { name: 'OriginalImportedAmount', type: 'float', mapping: 'accountingItemOrigAmount' },//Temporary field for amount calculation.
+        { name: 'LocalSplitGroup', type: 'string' },//temporary field to identify un-saved split groups
+        { name: 'AllowEditComplete', type: 'boolean', defaultValue: true }//temporary field to identify exceending row amount
     ]
 });

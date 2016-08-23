@@ -138,7 +138,11 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
         var modulePermissions = me.getModulePermissions();
         if (columns) {
             if (modulePermissions.edit) {
-                columns.push(me.getSplitColumn());
+                var splitCol = me.getSplitColumn(),
+                    columnOrder = me.getColumnOrder(),
+                    amountIdx = columnOrder.indexOf('amount');
+                //columns.push(me.getSplitColumn());
+                Ext.Array.insert(columns, 0, [splitCol]);
             }
             if (modulePermissions.destroy) {
                 columns.push(me.getDeleteActionColumn());
@@ -188,7 +192,10 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             checkboxSelect: false,
             pruneRemoved: false,
             rowNumbererHeaderWidth:55,
-            extensible: 'y'
+            extensible: 'y',
+            //listeners: {
+            //    focuschange:'onRowSelectionChange'
+            //}
         };
        
         if (modulePermissions.edit || modulePermissions.create) {
@@ -204,7 +211,9 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 pluginId: 'editingPlugin',
                 clicksToEdit: 2,
                 listeners: {
-                    beforeedit: 'onBeforeGridEdit'
+                    beforeedit: 'onBeforeGridEdit',
+                    validateedit:'onDetailGridValidateEdit',
+                    edit:'onDetailGridEditCompleted'
                 }
             }
             plugins.push(editingModel);
@@ -258,7 +267,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             };
             buttons.push(addNew);
 
-            var splitBtn = {
+            /*var splitBtn = {
                 xtype: 'button',
                 scale: 'small',
                 name: 'SplitRecord',
@@ -270,7 +279,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     click: 'onSplitClicked'
                 }
             };
-            buttons.push(splitBtn);
+            buttons.push(splitBtn);*/
         }
         var refreshBtn = {
             xtype: 'button',
@@ -307,7 +316,7 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
     },
     getSplitColumn: function () {
         return{
-            xtype: 'gridcolumn',
+            xtype: 'checkcolumn',
             name: 'isAccountingItemSplit',
             dataIndex: 'isAccountingItemSplit',
             text: app.localize('Split'),
@@ -318,17 +327,11 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
             sortable: false,
             groupable: false,
             menuDisabled: true,
-            renderer: Chaching.utilities.ChachingRenderers.splitColumnMarkRenderer,
-            editor: {
-                xtype: 'numberfield',
-                hideTrigger:true,
-                lazyRender: true,
-                minValue: 1,
-                maxValue:100,
-                listeners: {
-                    specialkey: 'onSplitClicked'
-                }
-            }
+            listeners: {
+                beforecheckchange: 'onSplitBeforeCheckChange',
+                checkchange: 'onSplitCheckChange'
+            },
+            renderer: Chaching.utilities.ChachingRenderers.splitColumnRenderer
         }
     },
     getColumnsForGrid:function() {
@@ -373,8 +376,8 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                     selectOnFocus: true,
                     hideTrigger:true,
                     listeners: {
-                        //change: 'onDetailsAmountChange',
-                        focus: 'onDetailsAmountFocus',
+                        change: 'onDetailsAmountChange',
+                        //focus: 'onDetailsAmountFocus',
                         scope:'controller'
                     }
                 }
@@ -809,19 +812,19 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGrid',{
                 filterField: Chaching.utilities.ChachingGlobals.getTextField(app.localize('ToolTipInvoiceRef')),
                 editor: Chaching.utilities.ChachingGlobals.getTextField(app.localize('ToolTipInvoiceRef'))
             }, {
-                xtype: 'gridcolumn',
+                xtype: 'checkcolumn',
                 dataIndex: 'isAsset',
                 name: 'isAsset',
                 text: app.localize('IsAsset').initCap(),
                 sortable: false,
                 groupable: false,
-                renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
-                width: '7%',
-                editor: {
-                    xtype: 'checkboxfield',
-                    inputValue: 'true',
-                    uncheckedValue: 'false'
-                }
+                //renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
+                width: '7%'
+                //editor: {
+                //    xtype: 'checkboxfield',
+                //    inputValue: 'true',
+                //    uncheckedValue: 'false'
+                //}
             }, {
                 xtype: 'gridcolumn',
                 dataIndex: 'taxRebateNumber',

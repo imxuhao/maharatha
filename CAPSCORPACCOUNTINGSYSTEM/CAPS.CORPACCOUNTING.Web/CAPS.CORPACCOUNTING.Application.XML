@@ -3746,6 +3746,15 @@
             Validating Uploaded Data
             </summary>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.Helpers.DataValidator.RequiredValidataion``1(``0,System.String)">
+            <summary>
+            Required field validation
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="property"></param>
+            <param name="columnName"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Helpers.EnumHelper.GetEnumValue``1(System.Int32)">
             
              Method to get enumeration value from int value.

@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace CAPS.CORPACCOUNTING.Helpers
 {
     /// <summary>
@@ -15,6 +16,13 @@ namespace CAPS.CORPACCOUNTING.Helpers
             return string.Empty;
         }
 
+        /// <summary>
+        /// Required field validation
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="property"></param>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
         public static string RequiredValidataion<T>(T property, string columnName)
         {
             Type t = property.GetType();

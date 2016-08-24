@@ -14,8 +14,10 @@ using System.Linq.Dynamic;
 using CAPS.CORPACCOUNTING.Helpers;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 using Abp.Authorization;
 using Abp.Collections.Extensions;
+using Abp.Runtime.Session;
 using CAPS.CORPACCOUNTING.Accounting;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Common;
@@ -371,8 +373,8 @@ namespace CAPS.CORPACCOUNTING.Accounts
                                     IsRollupAccount = !string.IsNullOrEmpty(tbl.Field<string>(L("RollUpAccount"))) && Helper.ConvertToBoolean(tbl.Field<string>(L("RollUpAccount")))
                                 }).ToList();
 
-            return await BulkAccountUploads(new CreateAccountListInput { AccountList = accountsList });
-            
+            return await BulkAccountInsert(new CreateAccountListInput {AccountList = accountsList});
+
         }
 
 
@@ -393,54 +395,71 @@ namespace CAPS.CORPACCOUNTING.Accounts
                     accountUnit.ParentId = account.ParentId != 0 ? account.ParentId : null;
 
                     ////Check RequiredField and MAxLenght Validations
-                    string validationerroeMsg=ValidateUploadedData(account);
+                    string validationerroeMsg = ValidateUploadedData(account);
                     if (validationerroeMsg.Length <= 0)
                     {
                         _accountUnitManager.IsRecordfromExcel = true;
-                            erroeMsg = await _accountUnitManager.CreateAccountListAsync(accountUnit);
+                        erroeMsg = await _accountUnitManager.CreateAccountListAsync(accountUnit);
                     }
-                    if (erroeMsg.Length > 0 || validationerroeMsg.Length>0)
+                    if (erroeMsg.Length > 0 || validationerroeMsg.Length > 0)
                     {
                         var accountUnitDto = accountUnit.MapTo<AccountUnitDto>();
-                        accountUnitDto.ErrorMessage = (erroeMsg + ","+ validationerroeMsg).TrimStart(',').TrimEnd(',');
+                        accountUnitDto.ErrorMessage = (erroeMsg + "," + validationerroeMsg).TrimStart(',').TrimEnd(',');
                         accountUnitList.Add(accountUnitDto);
                     }
                 }
-           }
+            }
             return accountUnitList;
 
         }
 
-        public async Task<List<AccountUnitDto>> BulkAccountInsert(List<CreateAccountUnitInput> listAccountUnitDtos )
+        public async Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos)
         {
             List<AccountUnit> accountList = new List<AccountUnit>();
+            _accountUnitManager.IsRecordfromExcel = true;
 
             List<AccountUnitDto> erroredAccountList = new List<AccountUnitDto>();
             // Do your validation here and if validation is not successful remove the item from the List and put it into and another list
-            foreach (var accountUnitDto in listAccountUnitDtos)
+            foreach (var accountUnitDto in listAccountUnitDtos.AccountList)
             {
+                //setting errormessage as Empty
+                _accountUnitManager.ErrorMessage = string.Empty;
+
+                ////Check RequiredField Validations for AccountNumber and Description
+                string validationerrorMsg = ValidateUploadedData(accountUnitDto);
+
                 await _accountUnitManager.ValidateAccountUnitAsync(accountUnitDto.MapTo<AccountUnit>());
-                
-            }
-            
-            if (listAccountUnitDtos.Any())
-            {
-                
-                accountList.AddRange(listAccountUnitDtos.Select(accountunitDto => accountunitDto.MapTo<AccountUnit>()));
-            }
-            
-            await _customAccountRepository.BulkInsertAccountUnits(accountList: accountList);
 
+                if (_accountUnitManager.ErrorMessage.Length > 0 || validationerrorMsg.Length > 0)
+                {
+                    var accountunitdto = accountUnitDto.MapTo<AccountUnit>().MapTo<AccountUnitDto>();
+                    accountunitdto.ErrorMessage = (_accountUnitManager.ErrorMessage + "," + validationerrorMsg).TrimStart(',').TrimEnd(',');
+                    erroredAccountList.Add(accountunitdto);
+                }
+                else
+                {
+                    accountUnitDto.ParentId = accountUnitDto.ParentId != 0 ? accountUnitDto.ParentId : null;
+                    var account = accountUnitDto.MapTo<AccountUnit>();
+                    account.TenantId = AbpSession.GetTenantId();
+                    account.CreatorUserId = AbpSession.GetUserId();
+                    account.Code = await _accountUnitManager.GetNextChildCodeAsync(accountUnitDto.ParentId, accountUnitDto.ChartOfAccountId);
+                    accountList.Add(account);
+                }
+            }
+            if (accountList.Count > 0)
+                await _customAccountRepository.BulkInsertAccountUnits(accountList: accountList);
             return erroredAccountList;
-
         }
 
         private string ValidateUploadedData(CreateAccountUnitInput acccountUnit)
         {
-            string error = string.Empty;
-            error= DataValidator.RequiredValidataion(acccountUnit.AccountNumber, L("AccountNumber"));
-            error= error+","+ DataValidator.RequiredValidataion(acccountUnit.Caption, L("Description"));
-            return error.TrimStart(',');
+            StringBuilder error = new StringBuilder();
+            error.Append(DataValidator.RequiredValidataion(acccountUnit.AccountNumber, L("AccountNumber")));
+            error.Append("," + DataValidator.RequiredValidataion(acccountUnit.Caption, L("Description")));
+            return error.ToString().TrimStart(',');
         }
+
+
+
     }
 }

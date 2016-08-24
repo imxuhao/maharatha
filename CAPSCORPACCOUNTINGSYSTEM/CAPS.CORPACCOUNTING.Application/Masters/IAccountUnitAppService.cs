@@ -102,7 +102,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         Task<List<AccountUnitDto>> BulkAccountUploads(CreateAccountListInput accountList);
 
-        Task<List<AccountUnitDto>> BulkAccountInsert(List<CreateAccountUnitInput> listAccountUnitDtos);
+        Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos);
     }
     
 }

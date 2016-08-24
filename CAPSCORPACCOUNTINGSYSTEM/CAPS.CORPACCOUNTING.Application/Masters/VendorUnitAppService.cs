@@ -116,7 +116,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                         address.Line4 != null || address.Line4 != null ||
                         address.State != null || address.Country != null ||
                         address.Email != null || address.Phone1 != null ||
-                        address.ContactNumber!=null)
+                        address.ContactNumber != null)
                     {
                         address.TypeofObjectId = TypeofObject.Vendor;
                         address.ObjectId = vendorUnit.Id;
@@ -158,7 +158,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             #endregion
 
 
-          var  VendorUnitDto= vendorUnit.MapTo<VendorUnitDto>();
+            var VendorUnitDto = vendorUnit.MapTo<VendorUnitDto>();
             VendorUnitDto.VendorId = vendorUnit.Id;
             return VendorUnitDto;
 
@@ -274,7 +274,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                             Vendor = vendor,
                             Address = rt,
                             PaymentTerms = pt.Description,
-                           // VendorAlias = vendor.VendorAlias
+                            // VendorAlias = vendor.VendorAlias
                         };
 
             if (!ReferenceEquals(input.Filters, null))
@@ -494,18 +494,14 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<List<CountryListDto>> GetCountryList()
         {
-            using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
-            {
-                var countryList = await (from country in _countryRepository.GetAll().Where(p => p.TenantId == null)
-                    select new CountryListDto
-                    {
-                        Description = country.Description,
-                        CountryId = country.Id,
-                        IsoCode = country.TwoLetterAbbreviation
-                    }).ToListAsync();
-
-                return countryList;
-            }
+            var countryList = await (from country in _countryRepository.GetAll()
+                                     select new CountryListDto
+                                     {
+                                         Description = country.Description,
+                                         CountryId = country.Id,
+                                         IsoCode = country.TwoLetterAbbreviation
+                                     }).ToListAsync();
+            return countryList;
         }
 
         /// <summary>
@@ -514,8 +510,12 @@ namespace CAPS.CORPACCOUNTING.Masters
         /// <returns></returns>
         public async Task<List<RegionListDto>> GetRegionList()
         {
-            var regionList = await _regionRepository.GetAll().Select(u => new RegionListDto { Description = u.Description + " (" + u.RegionAbbreviation + ")",
-                RegionId = u.Id,StateCode = u.RegionAbbreviation}).ToListAsync();
+            var regionList = await _regionRepository.GetAll().Select(u => new RegionListDto
+            {
+                Description = u.Description + " (" + u.RegionAbbreviation + ")",
+                RegionId = u.Id,
+                StateCode = u.RegionAbbreviation
+            }).ToListAsync();
             return regionList;
         }
 
@@ -545,7 +545,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             var query = _vendorAliasUnitRepository.GetAll()
                     .Where(au => au.VendorId == input.VendorId);
-                
+
             var items = await query.ToListAsync();
 
             return new ListResultOutput<VendorAliasUnitDto>(
@@ -557,7 +557,7 @@ namespace CAPS.CORPACCOUNTING.Masters
                 }).ToList());
         }
 
-        
+
         /// <summary>
         /// delete vendoralias
         /// </summary>
@@ -567,7 +567,7 @@ namespace CAPS.CORPACCOUNTING.Masters
         {
             await _vendorAliasUnitManager.DeleteAsync(input.Id);
         }
-       
+
     }
 
 }

@@ -71,10 +71,12 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
         file.setRawValue(newvalue);
         if (file.value && !/^.*\.(Png|gif|jpg|jpeg|jfif|tiff|bmp)$/i.test(file.value)) {
             abp.message.error(app.localize('ProfilePicture_Warn_FileType').initCap(), app.localize('Error'));
+            file.setRawValue("");            
             return;
         };
         if (file.fileInputEl && file.fileInputEl.dom && file.fileInputEl.dom.files && file.fileInputEl.dom.files[0].size > 2097152) {
             abp.message.error(app.localize('ProfilePicture_Warn_SizeLimit').initCap(), app.localize('Error'));
+            file.setRawValue("");
             return;
         }       
         view.submit({

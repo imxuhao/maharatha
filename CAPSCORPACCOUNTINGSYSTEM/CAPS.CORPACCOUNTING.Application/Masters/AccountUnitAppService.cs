@@ -378,40 +378,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
         }
 
 
-        /// <summary>
-        /// BulkAccount Import
-        /// </summary>
-        /// <param name="accountList"></param>
-        /// <returns></returns>
-        public async Task<List<AccountUnitDto>> BulkAccountUploads(CreateAccountListInput accountList)
-        {
-            List<AccountUnitDto> accountUnitList = new List<AccountUnitDto>();
-            if (accountList.AccountList.Count > 0)
-            {
-                foreach (var account in accountList.AccountList)
-                {
-                    string erroeMsg = string.Empty;
-                    var accountUnit = account.MapTo<AccountUnit>();
-                    accountUnit.ParentId = account.ParentId != 0 ? account.ParentId : null;
-
-                    ////Check RequiredField and MAxLenght Validations
-                    string validationerroeMsg = ValidateUploadedData(account);
-                    if (validationerroeMsg.Length <= 0)
-                    {
-                        _accountUnitManager.IsRecordfromExcel = true;
-                        erroeMsg = await _accountUnitManager.CreateAccountListAsync(accountUnit);
-                    }
-                    if (erroeMsg.Length > 0 || validationerroeMsg.Length > 0)
-                    {
-                        var accountUnitDto = accountUnit.MapTo<AccountUnitDto>();
-                        accountUnitDto.ErrorMessage = (erroeMsg + "," + validationerroeMsg).TrimStart(',').TrimEnd(',');
-                        accountUnitList.Add(accountUnitDto);
-                    }
-                }
-            }
-            return accountUnitList;
-
-        }
+       
 
         public async Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos)
         {
@@ -425,15 +392,12 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 //setting errormessage as Empty
                 _accountUnitManager.ErrorMessage = string.Empty;
 
-                ////Check RequiredField Validations for AccountNumber and Description
-                string validationerrorMsg = ValidateUploadedData(accountUnitDto);
-
                 await _accountUnitManager.ValidateAccountUnitAsync(accountUnitDto.MapTo<AccountUnit>());
 
-                if (!string.IsNullOrEmpty(_accountUnitManager.ErrorMessage)|| !string.IsNullOrEmpty(validationerrorMsg))
+                if (!string.IsNullOrEmpty(_accountUnitManager.ErrorMessage))
                 {
                     var accountunitdto = accountUnitDto.MapTo<AccountUnit>().MapTo<AccountUnitDto>();
-                    accountunitdto.ErrorMessage = (_accountUnitManager.ErrorMessage + "," + validationerrorMsg).TrimStart(',').TrimEnd(',');
+                    accountunitdto.ErrorMessage = _accountUnitManager.ErrorMessage .TrimStart(',').TrimEnd(',');
                     erroredAccountList.Add(accountunitdto);
                 }
                 else
@@ -450,16 +414,6 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 await _customAccountRepository.BulkInsertAccountUnits(accountList: accountList);
             return erroredAccountList;
         }
-
-        private string ValidateUploadedData(CreateAccountUnitInput acccountUnit)
-        {
-            StringBuilder error = new StringBuilder();
-            error.Append(DataValidator.RequiredValidataion(acccountUnit.AccountNumber, L("AccountNumber")));
-            error.Append("," + DataValidator.RequiredValidataion(acccountUnit.Caption, L("Description")));
-            return error.ToString().TrimStart(',');
-        }
-
-
 
     }
 }

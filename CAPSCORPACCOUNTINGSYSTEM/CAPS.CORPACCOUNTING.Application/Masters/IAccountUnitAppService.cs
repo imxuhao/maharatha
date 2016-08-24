@@ -96,12 +96,10 @@ namespace CAPS.CORPACCOUNTING.Masters
         Task<AccountUnitDto> GetAccountById(IdInput<long> input);
 
         /// <summary>
-        /// BulkAccounts Upload
+        /// BulkInsert of Accounts
         /// </summary>
-        /// <param name="accountList"></param>
+        /// <param name="listAccountUnitDtos"></param>
         /// <returns></returns>
-        Task<List<AccountUnitDto>> BulkAccountUploads(CreateAccountListInput accountList);
-
         Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos);
     }
     

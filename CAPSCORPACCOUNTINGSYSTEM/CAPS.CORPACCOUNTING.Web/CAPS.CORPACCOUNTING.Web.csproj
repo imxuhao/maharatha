@@ -3682,6 +3682,8 @@
     <Content Include="ExtWeb\Chaching\app\model\purchaseorders\entry\PurchaseOrderDetailModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\purchaseorders\entry\PurchaseOrderModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\receivables\customers\CustomersModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\receivables\invoices\AccountsReceivableDetailsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\receivables\invoices\AccountsReceivableModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RoleEditModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolePermissionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\roles\RolesModel.js" />
@@ -3747,6 +3749,8 @@
     <Content Include="ExtWeb\Chaching\app\store\purchaseorders\entry\PurchaseOrderDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\purchaseorders\entry\PurchaseOrderStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\receivables\customers\CustomersStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\receivables\invoices\AccountsReceivableDetailsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\receivables\invoices\AccountsReceivableStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\roles\RolesTreeViewStore.js" />
@@ -4021,6 +4025,13 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomerFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomersGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\receivables\customers\CustomersGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableDetailGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableDetailGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\invoices\AccountsReceivableGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\receivables\ReceivableInvoiceTabPanel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\roles\RolesGrid.js" />

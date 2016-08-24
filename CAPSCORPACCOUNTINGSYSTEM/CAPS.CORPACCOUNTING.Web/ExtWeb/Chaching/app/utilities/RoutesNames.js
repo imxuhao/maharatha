@@ -16,15 +16,16 @@
         'auditlogs',
         'financials.accounts',
         'projects.projectmaintenance',
-         'payables.vendors',
-         'financials.journals',
-         'payables.invoices',
-         'batchposting.batches',
-         'banking.banksetup',
-         'financials.fiscalperiod',
-         'receivables.customers',
-         'purchaseorders.entry',
-         'host.maintenance',
-         'host.settings'
+        'payables.vendors',
+        'financials.journals',
+        'payables.invoices',
+        'receivables.invoices',
+        'batchposting.batches',
+        'banking.banksetup',
+        'financials.fiscalperiod',
+        'receivables.customers',
+        'purchaseorders.entry',
+        'host.maintenance',
+        'host.settings'
     ]
 });

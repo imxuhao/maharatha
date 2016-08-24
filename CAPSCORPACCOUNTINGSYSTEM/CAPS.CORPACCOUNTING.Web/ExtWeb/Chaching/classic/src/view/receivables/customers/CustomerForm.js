@@ -72,7 +72,7 @@
                                     xtype: 'textfield',
                                     name: 'firstName',
                                     itemId: 'firstName',
-                                    fieldLabel: app.localize('FirstName').initCap(),
+                                    fieldLabel: app.localize('FirstName'),
                                     width: '100%',
                                     ui: 'fieldLabelTop'
                                 },
@@ -123,14 +123,14 @@
                                     xtype: 'textfield',
                                     name: 'creditLimit',
                                     itemId: 'creditLimit',
-                                    fieldLabel: app.localize('CreditLimit').initCap(),
+                                    fieldLabel: app.localize('CreditLimit'),
                                     width: '100%',
                                     ui: 'fieldLabelTop'
                                 },
                                 {
                                     xtype: 'combobox',
                                     name: 'customerPayTermsId',
-                                    fieldLabel: app.localize('PaymentTerms').initCap(),
+                                    fieldLabel: app.localize('PaymentTerms'),
                                     width: '100%',
                                     ui: 'fieldLabelTop',
                                     displayField: 'paymentTerms',
@@ -150,7 +150,7 @@
                                 {
                                     xtype: 'combobox',
                                     name: 'typeofPaymentMethodId',
-                                    fieldLabel: app.localize('PaymentMethods').initCap(),
+                                    fieldLabel: app.localize('PaymentMethods'),
                                     width: '100%',
                                     ui: 'fieldLabelTop',
                                     displayField: 'typeofPaymentMethod',
@@ -164,7 +164,7 @@
                                 {
                                     xtype: 'combobox',
                                     name: 'salesRepId',
-                                    fieldLabel: app.localize('SalesRep').initCap(),
+                                    fieldLabel: app.localize('SalesRep'),
                                     width: '100%',
                                     ui: 'fieldLabelTop',
                                     displayField: 'salesRepName',

@@ -930,7 +930,7 @@
     <text name="CreateNewInvoice" value="Create Invoice" />
     <text name="ViewInvoice" value="View Invoice" />
     <text name="PO#" value="PO#" />
-    <text name="Invoice#" value="Invoice#" />
+    <text name="Invoice#" value="Invoice #" />
     <text name="InvoiceDate" value="Invoice date" />
     <text name="InvoiceTotal" value="Invoice total" />
     <text name="DueDate" value="Due date" />
@@ -1193,6 +1193,13 @@
     <text name="DeleteTenantGroupValidationMessage" value="You can not delete Tenant Groups because some Tenants are belongs to this group."/>
     <text name="DeleteTenantValidationMessage" value="Some transactions are belongs to this Tenant. So you can not delete this Tenant."/>
 
+    <text name="TotalOutstandingBalance" value="Total Outstanding Balance"/>
+    <text name="AccountsReceivable" value="Accounts Receivable"/>
+    <text name="Job#/Division" value="Job #/Division" />
+    <text name="CustomerSnapshot" value="Customer Snapshot" />
+    <text name="Agency/Customer" value="Agency/Customer" />
+    <text name="AgencyPO#" value="Agency PO #" />
+    
     
 
   </texts>

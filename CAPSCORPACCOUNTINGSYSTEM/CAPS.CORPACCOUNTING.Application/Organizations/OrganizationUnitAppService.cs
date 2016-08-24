@@ -21,10 +21,12 @@ using CAPS.CORPACCOUNTING.Helpers;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using System.Linq.Dynamic;
 using Abp.Runtime.Security;
+using Abp.UI;
+using CAPS.CORPACCOUNTING.MultiTenancy;
 
 namespace CAPS.CORPACCOUNTING.Organizations
 {
-    [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits)]
+
     public class OrganizationUnitAppService : CORPACCOUNTINGAppServiceBase, IOrganizationUnitAppService
     {
         private readonly OrganizationExtendedUnitManager _organizationExtendedUnitManager;
@@ -35,6 +37,7 @@ namespace CAPS.CORPACCOUNTING.Organizations
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly CustomAppSession _customAppSession;
         private readonly IRepository<ConnectionStringUnit> _connectionStringRepository;
+        private readonly IRepository<Tenant> _tenantRepository;
         public OrganizationUnitAppService(
             OrganizationExtendedUnitManager organizationExtendedUnitManager,
             IRepository<OrganizationUnit, long> organizationUnitRepository,
@@ -43,13 +46,14 @@ namespace CAPS.CORPACCOUNTING.Organizations
             CustomAppSession customAppSession,
             IRepository<OrganizationExtended, long> organizationExtendedUnitRepository,
           IRepository<ConnectionStringUnit> connectionStringRepository,
-           OrganizationUnitManager organizationUnitManager)
+           OrganizationUnitManager organizationUnitManager, IRepository<Tenant> tenantRepository)
         {
             _organizationExtendedUnitManager = organizationExtendedUnitManager;
             _organizationUnitRepository = organizationUnitRepository;
             _userOrganizationUnitRepository = userOrganizationUnitRepository;
             _connectionStringRepository = connectionStringRepository;
             _organizationUnitManager = organizationUnitManager;
+            _tenantRepository = tenantRepository;
             _organizationExtendedUnitRepository = organizationExtendedUnitRepository;
             _unitOfWorkManager = unitOfWorkManager;
             _customAppSession = customAppSession;
@@ -219,6 +223,10 @@ namespace CAPS.CORPACCOUNTING.Organizations
         [AbpAuthorize(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree)]
         public async Task DeleteHostOrganizationUnit(IdInput<long> input)
         {
+            if (_tenantRepository.GetAll().Any(p => p.OrganizationUnitId == input.Id))
+            {
+                throw new UserFriendlyException(L("DeleteTenantGroupValidationMessage"));
+            }
             await _organizationExtendedUnitManager.DeleteAsync(input.Id);
         }
 

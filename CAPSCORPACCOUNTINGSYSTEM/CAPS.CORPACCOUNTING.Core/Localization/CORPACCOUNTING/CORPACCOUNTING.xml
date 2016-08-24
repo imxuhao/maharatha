@@ -1190,6 +1190,10 @@
     <text name="BudgetFormatValue" value="Budget Format Value"/>
     <text name="TaxCreditValue" value="Tax Credit Value"/>
     <text name="StatusValue" value="Status Value"/>
+    <text name="DeleteTenantGroupValidationMessage" value="You can not delete Tenant Groups because some Tenants are belongs to this group."/>
+    <text name="DeleteTenantValidationMessage" value="Some transactions are belongs to this Tenant. So you can not delete this Tenant."/>
+
+    
 
   </texts>
 </localizationDictionary>

@@ -9761,6 +9761,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.MultiTenancy.TenantAppService.ValidateTenant(System.Int32)">
+            <summary>
+            validating the tenant for Delete.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Net.MimeTypes.MimeTypeNames">
             <summary>
             Common mime types. 

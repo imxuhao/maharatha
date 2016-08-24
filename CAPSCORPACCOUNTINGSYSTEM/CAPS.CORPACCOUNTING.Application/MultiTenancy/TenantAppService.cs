@@ -26,14 +26,13 @@ using System.IO;
 using Abp.Runtime.Session;
 using Abp.UI;
 using AutoMapper;
+using CAPS.CORPACCOUNTING.Authorization.Roles;
+using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 using CAPS.CORPACCOUNTING.Storage;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
-
-
-    // [AbpAuthorize(AppPermissions.Pages_Tenants)]
     public class TenantAppService : CORPACCOUNTINGAppServiceBase, ITenantAppService
     {
         private readonly TenantManager _tenantManager;
@@ -47,13 +46,21 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly IBinaryObjectManager _binaryObjectManager;
         private readonly IRepository<BinaryObject,Guid> _binaryObjectRepository;
         private readonly IRepository<ConnectionStringUnit> _connectionStringRepository;
+        private readonly IRepository<VendorUnit> _vendorUnitRepository;
+        private readonly IRepository<User,long> _userUnitRepository;
+        private readonly IRepository<Role> _roleUnitRepository;
+        private readonly IRepository<CustomerUnit> _customerUnitRepository;
+        private readonly IRepository<EmployeeUnit> _employeeUnitRepository;
+        private readonly IRepository<CoaUnit> _coaUnitRepository;
 
 
         public TenantAppService(
             TenantManager tenantManager, 
             IRepository<OrganizationExtended, long> organizationRepository, IRepository<TenantExtendedUnit> tenantExtendedUnitRepository,
             IUnitOfWorkManager unitOfWorkManager, IAppFolders appFolders, IRepository<AddressUnit, long> addressRepository, TenantExtendedUnitManager tenantExtendedManager,
-            IAddressUnitAppService addressAppService, IBinaryObjectManager binaryObjectManager, IRepository<BinaryObject, Guid> binaryObjectRepository, IRepository<ConnectionStringUnit> connectionStringRepository)
+            IAddressUnitAppService addressAppService, IBinaryObjectManager binaryObjectManager, IRepository<BinaryObject, Guid> binaryObjectRepository, IRepository<ConnectionStringUnit> connectionStringRepository,
+            IRepository<VendorUnit> vendorUnitRepository, IRepository<User, long> userUnitRepository, IRepository<Role> roleUnitRepository, IRepository<CustomerUnit> customerUnitRepository, 
+            IRepository<EmployeeUnit> employeeUnitRepository, IRepository<CoaUnit> coaUnitRepository)
         {
             _tenantManager = tenantManager;
             _organizationRepository = organizationRepository;
@@ -66,6 +73,12 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _binaryObjectManager = binaryObjectManager;
             _binaryObjectRepository = binaryObjectRepository;
             _connectionStringRepository = connectionStringRepository;
+            _vendorUnitRepository = vendorUnitRepository;
+            _userUnitRepository = userUnitRepository;
+            _roleUnitRepository = roleUnitRepository;
+            _customerUnitRepository = customerUnitRepository;
+            _employeeUnitRepository = employeeUnitRepository;
+            _coaUnitRepository = coaUnitRepository;
         }
 
 
@@ -180,8 +193,17 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         [AbpAuthorize(AppPermissions.Pages_Tenants_Delete)]
         public async Task DeleteTenant(EntityRequestInput input)
         {
-            var tenant = await TenantManager.GetByIdAsync(input.Id);
-            CheckErrors(await TenantManager.DeleteAsync(tenant));
+            if (await ValidateTenant(input.Id))
+            {
+                var tenant = await TenantManager.GetByIdAsync(input.Id);
+                CheckErrors(await TenantManager.DeleteAsync(tenant));
+            }
+            else
+            {
+                throw new UserFriendlyException(L("DeleteTenantValidationMessage"));
+
+            }
+            
         }
 
         [AbpAuthorize(AppPermissions.Pages_Tenants_ChangeFeatures)]
@@ -262,11 +284,11 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                         }
                         else
                         {
-                            if (input.Address.Line1 != null || input.Address.Line2 != null ||
-                                input.Address.Line3 != null || input.Address.Line4 != null ||
-                                input.Address.State != null || input.Address.Country != null ||
-                                input.Address.Email != null || input.Address.Phone1 != null ||
-                                input.Address.Website != null)
+                            if (!string.IsNullOrEmpty(input.Address.Line1) || !string.IsNullOrEmpty(input.Address.Line2 )||
+                                !string.IsNullOrEmpty(input.Address.Line3) || !string.IsNullOrEmpty(input.Address.Line4 )||
+                                !string.IsNullOrEmpty(input.Address.State) || !string.IsNullOrEmpty(input.Address.Country) ||
+                                !string.IsNullOrEmpty(input.Address.Email) || !string.IsNullOrEmpty(input.Address.Phone1 )||
+                                !string.IsNullOrEmpty(input.Address.Website))
                             {
                                 input.Address.TypeofObjectId = TypeofObject.Org;
                                 input.Address.ObjectId = input.TenantExtendedId;
@@ -290,11 +312,11 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     if (!ReferenceEquals(input.Address, null))
                     {
 
-                        if (input.Address.Line1 != null || input.Address.Line2 != null ||
-                            input.Address.Line3 != null || input.Address.Line4 != null ||
-                            input.Address.State != null || input.Address.Country != null ||
-                            input.Address.Email != null || input.Address.Phone1 != null ||
-                            input.Address.ContactNumber != null)
+                        if (!string.IsNullOrEmpty(input.Address.Line1) || !string.IsNullOrEmpty(input.Address.Line2) ||
+                         !string.IsNullOrEmpty(input.Address.Line4) || !string.IsNullOrEmpty(input.Address.Line4) ||
+                         !string.IsNullOrEmpty(input.Address.State) || !string.IsNullOrEmpty(input.Address.Country) ||
+                         !string.IsNullOrEmpty(input.Address.Email) || !string.IsNullOrEmpty(input.Address.Phone1) ||
+                         !string.IsNullOrEmpty(input.Address.ContactNumber))
                         {
                             input.Address.TypeofObjectId = TypeofObject.Org;
                             input.Address.ObjectId = id;
@@ -430,6 +452,26 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             input.ConnectionString = tenant.ConnectionString;
             input.MapTo(tenant);
             CheckErrors(await TenantManager.UpdateAsync(tenant));
+        }
+
+        /// <summary>
+        /// validating the tenant for Delete.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private async Task<bool> ValidateTenant(int id)
+        {
+            using (_unitOfWorkManager.Current.SetTenantId(id))
+            {
+                if (await _vendorUnitRepository.GetAll().AnyAsync() || await _userUnitRepository.GetAll().AnyAsync(p => p.UserName != User.AdminUserName)
+               || await _roleUnitRepository.GetAll().AnyAsync(p => p.Name != StaticRoleNames.Tenants.Admin || p.Name != StaticRoleNames.Tenants.User)
+               || await _coaUnitRepository.GetAll().AnyAsync() || await _customerUnitRepository.GetAll().AnyAsync() 
+               || await _employeeUnitRepository.GetAll().AnyAsync())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
     }

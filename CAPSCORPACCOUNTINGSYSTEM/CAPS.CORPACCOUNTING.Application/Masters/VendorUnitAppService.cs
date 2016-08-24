@@ -112,11 +112,11 @@ namespace CAPS.CORPACCOUNTING.Masters
             {
                 foreach (var address in input.Addresses)
                 {
-                    if (address.Line1 != null || address.Line2 != null ||
-                        address.Line4 != null || address.Line4 != null ||
-                        address.State != null || address.Country != null ||
-                        address.Email != null || address.Phone1 != null ||
-                        address.ContactNumber != null)
+                    if (!string.IsNullOrEmpty(address.Line1)  || !string.IsNullOrEmpty(address.Line2 )||
+                        !string.IsNullOrEmpty(address.Line4 ) || !string.IsNullOrEmpty(address.Line4 )||
+                        !string.IsNullOrEmpty(address.State ) || !string.IsNullOrEmpty(address.Country) ||
+                        !string.IsNullOrEmpty(address.Email ) || !string.IsNullOrEmpty(address.Phone1 )||
+                        !string.IsNullOrEmpty(address.ContactNumber))
                     {
                         address.TypeofObjectId = TypeofObject.Vendor;
                         address.ObjectId = vendorUnit.Id;
@@ -308,10 +308,11 @@ namespace CAPS.CORPACCOUNTING.Masters
                         await _addressAppService.UpdateAddressUnit(address);
                     else
                     {
-                        if (address.Line1 != null || address.Line2 != null ||
-                            address.Line4 != null || address.Line4 != null ||
-                            address.State != null || address.Country != null ||
-                            address.Email != null || address.Phone1 != null || address.Website != null)
+                        if (!string.IsNullOrEmpty(address.Line1) || !string.IsNullOrEmpty(address.Line2) ||
+                        !string.IsNullOrEmpty(address.Line4) || !string.IsNullOrEmpty(address.Line4) ||
+                        !string.IsNullOrEmpty(address.State) || !string.IsNullOrEmpty(address.Country) ||
+                        !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
+                        !string.IsNullOrEmpty(address.ContactNumber))
                         {
                             address.TypeofObjectId = TypeofObject.Vendor;
                             address.ObjectId = input.VendorId;

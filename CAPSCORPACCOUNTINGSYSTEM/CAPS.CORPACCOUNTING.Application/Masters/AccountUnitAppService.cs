@@ -430,7 +430,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
 
                 await _accountUnitManager.ValidateAccountUnitAsync(accountUnitDto.MapTo<AccountUnit>());
 
-                if (_accountUnitManager.ErrorMessage.Length > 0 || validationerrorMsg.Length > 0)
+                if (!string.IsNullOrEmpty(_accountUnitManager.ErrorMessage)|| !string.IsNullOrEmpty(validationerrorMsg))
                 {
                     var accountunitdto = accountUnitDto.MapTo<AccountUnit>().MapTo<AccountUnitDto>();
                     accountunitdto.ErrorMessage = (_accountUnitManager.ErrorMessage + "," + validationerrorMsg).TrimStart(',').TrimEnd(',');

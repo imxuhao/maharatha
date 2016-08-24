@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Abp.Authorization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,8 +16,6 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using System.Collections.ObjectModel;
-using Abp.Collections.Extensions;
-using Abp.UI;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
@@ -90,9 +87,11 @@ namespace CAPS.CORPACCOUNTING.Banking
             {
                 foreach (var address in input.Addresses)
                 {
-                    if (address.Line1 != null || address.Line2 != null || address.Line4 != null ||
-                        address.Line4 != null || address.State != null ||
-                        address.Country != null || address.Email != null || address.Phone1 != null || address.Website != null)
+                    if (!string.IsNullOrEmpty(address.Line1) || !string.IsNullOrEmpty(address.Line2) ||
+                          !string.IsNullOrEmpty(address.Line4) || !string.IsNullOrEmpty(address.Line4) ||
+                          !string.IsNullOrEmpty(address.State) || !string.IsNullOrEmpty(address.Country) ||
+                          !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
+                          !string.IsNullOrEmpty(address.Website))
                     {
                         address.ObjectId = id;
                         address.TypeofObjectId = TypeofObject.Bank;
@@ -139,10 +138,11 @@ namespace CAPS.CORPACCOUNTING.Banking
                         await _addressAppService.UpdateAddressUnit(address);
                     else
                     {
-                        if (address.Line1 != null || address.Line2 != null ||
-                            address.Line4 != null || address.Line4 != null ||
-                            address.State != null || address.Country != null ||
-                            address.Email != null || address.Phone1 != null || address.Website != null)
+                        if (!string.IsNullOrEmpty(address.Line1) || !string.IsNullOrEmpty(address.Line2) ||
+                         !string.IsNullOrEmpty(address.Line4) || !string.IsNullOrEmpty(address.Line4) ||
+                         !string.IsNullOrEmpty(address.State) || !string.IsNullOrEmpty(address.Country) ||
+                         !string.IsNullOrEmpty(address.Email) || !string.IsNullOrEmpty(address.Phone1) ||
+                         !string.IsNullOrEmpty(address.Website))
                         {
                             address.TypeofObjectId = TypeofObject.Bank;
                             address.ObjectId = input.BankAccountId;

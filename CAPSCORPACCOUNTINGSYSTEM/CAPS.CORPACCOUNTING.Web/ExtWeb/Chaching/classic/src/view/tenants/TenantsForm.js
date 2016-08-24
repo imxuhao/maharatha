@@ -96,6 +96,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 labelAlign: 'right',
                 inputValue: true,
                 checked: true,
+                hidden: true,
                 boxLabelCls: 'checkboxLabel',
                 listeners: {
                     change: 'showRandomPassword'
@@ -154,7 +155,8 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 name: 'shouldChangePasswordOnNextLogin',
                 labelAlign: 'right',
                 inputValue: true,
-                checked: true,
+                checked: false,
+                hidden: true,
                 boxLabelCls: 'checkboxLabel'
             }, {
                 xtype: 'checkbox',

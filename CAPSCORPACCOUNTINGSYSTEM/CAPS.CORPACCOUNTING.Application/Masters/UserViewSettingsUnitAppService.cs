@@ -47,7 +47,7 @@ namespace CAPS.CORPACCOUNTING.Masters
             var tenantId = AbpSession.TenantId;
             using (_unitOfWorkManager.Current.SetTenantId(tenantId))
             {
-                if (input.IsDefault.Value)
+                if (input.IsDefault.HasValue && input.IsDefault.Value)
                 {
                     var res =
                         await

@@ -162,7 +162,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                     }
                 }
             }
-           
+
             await CurrentUnitOfWork.SaveChangesAsync();
         }
 
@@ -179,7 +179,7 @@ namespace CAPS.CORPACCOUNTING.Payables
 
             foreach (var invoiceDetail in invoiceDetailsList)
             {
-                if (invoiceDetail.PoAccountingItemId.Value > 0)
+                if (invoiceDetail.PoAccountingItemId.HasValue && invoiceDetail.PoAccountingItemId.Value > 0)
                 {
                     await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(invoiceDetail, null);
                 }
@@ -241,7 +241,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                 if (!ReferenceEquals(mapSearchFilters, null))
                     query = query.CreateFilters(mapSearchFilters);
             }
-            query = query.Where(p => p.Invoices.OrganizationUnitId == input.OrganizationUnitId)
+            query = query//.Where(p => p.Invoices.OrganizationUnitId == input.OrganizationUnitId)
                 .Where(u => u.Invoices.TypeOfAccountingDocumentId == TypeOfAccountingDocument.AccountsPayable &&
                        u.Invoices.IsPosted == unPosted);
 
@@ -300,7 +300,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                         select new
                         {
                             InvoiceDetails = invoices,
-                            JobDesc = jobs.JobNumber,
+                            JobNumber = jobs.JobNumber,
                             accountDesc = lines.AccountNumber,
                             subAccount1 = subAccounts1.Description,
                             subAccount2 = subAccounts2.Description,
@@ -315,11 +315,13 @@ namespace CAPS.CORPACCOUNTING.Payables
             {
                 var dto = item.InvoiceDetails.MapTo<InvoiceEntryDocumentDetailUnitDto>();
                 dto.AccountNumber = item.accountDesc;
+                dto.JobNumber = item.JobNumber;
                 dto.SubAccountNumber1 = item.subAccount1;
                 dto.SubAccountNumber2 = item.subAccount2;
                 dto.SubAccountNumber3 = item.subAccount3;
                 dto.TaxRebateNumber = item.taxCredit;
                 dto.AccountingItemId = item.InvoiceDetails.Id;
+                dto.TypeOf1099T4= item.InvoiceDetails.TypeOf1099T4Id != null ? item.InvoiceDetails.TypeOf1099T4Id.ToDisplayName() : "";
                 dto.ActualAmount = item.InvoiceDetails.Amount.Value;// this is to maintainning the actual Amount on calculation
                 return dto;
             }).ToList());
@@ -338,7 +340,7 @@ namespace CAPS.CORPACCOUNTING.Payables
             var invoiceEntryDocumentDetailUnit = input.MapTo<InvoiceEntryDocumentDetailUnit>();
             await _invoiceEntryDocumentDetailUnitManager.CreateAsync(invoiceEntryDocumentDetailUnit);
 
-            if (input.PoAccountingItemId.Value > 0)
+            if (input.PoAccountingItemId.HasValue && input.PoAccountingItemId.Value > 0)
             {
                 await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(null, invoiceEntryDocumentDetailUnit);
             }
@@ -353,7 +355,7 @@ namespace CAPS.CORPACCOUNTING.Payables
         {
             var invoiceEntryDocumentDetailUnit = await _invoiceEntryDocumentDetailUnitRepository.GetAsync(invoiceEntryDocumentDetail.AccountingItemId);
 
-            if (invoiceEntryDocumentDetail.PoAccountingItemId.Value > 0)
+            if (invoiceEntryDocumentDetail.PoAccountingItemId.HasValue && invoiceEntryDocumentDetail.PoAccountingItemId.Value > 0)
             {
                 var newInvoiceDetails = new InvoiceEntryDocumentDetailUnit();
                 Mapper.CreateMap<InvoiceEntryDocumentDetailUnit, InvoiceEntryDocumentDetailUnit>();
@@ -362,7 +364,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                 await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(invoiceEntryDocumentDetailUnit, newInvoiceDetails);
             }
             Mapper.Map(invoiceEntryDocumentDetail, invoiceEntryDocumentDetailUnit);
-           
+
             await _invoiceEntryDocumentDetailUnitManager.UpdateAsync(invoiceEntryDocumentDetailUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
         }
@@ -378,8 +380,8 @@ namespace CAPS.CORPACCOUNTING.Payables
         {
             var invoiceDetail = await _invoiceEntryDocumentDetailUnitRepository.GetAsync(input.Id);
 
-            if(invoiceDetail.PoAccountingItemId.Value>0)
-            await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(invoiceDetail, null);
+            if (invoiceDetail.PoAccountingItemId.HasValue && invoiceDetail.PoAccountingItemId.Value > 0)
+                await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(invoiceDetail, null);
 
             await _invoiceEntryDocumentDetailUnitManager.DeleteAsync(input);
             await CurrentUnitOfWork.SaveChangesAsync();

@@ -4032,6 +4032,12 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobAccountUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobAccountUnitInput.RollupAccountDescription">
+            <summary>Gets or sets the RollupAccountDescription field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobAccountUnitInput.RollupJobDescription">
+            <summary>Gets or sets the RollupJobDescription field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobBudgetUnitInput.JobId">
             <summary>Gets or sets the JobId field. </summary>
         </member>
@@ -4070,6 +4076,18 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto.AccountNumber">
             <summary>Gets or sets the AccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto.RollupAccountNumber">
+            <summary>Gets or sets the RollupAccountNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto.RollupAccountDescription">
+            <summary>Gets or sets the RollupAccountDescription field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto.RollupJobNumber">
+            <summary>Gets or sets the RollupDivisionNumber field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobAccountUnitDto.RollupJobDescription">
+            <summary>Gets or sets the RollupDivisionDescription field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobBudgetUnitDto.JobBudgetId">
             <summary>Gets or sets the JobBudgetId field. </summary>
@@ -4133,6 +4151,12 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput.RollupAccountDescription">
+            <summary>Gets or sets the RollupAccountDescription field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobAccountUnitInput.RollupJobDescription">
+            <summary>Gets or sets the RollupJobDescription field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.UpdateJobBudgetUnitInput.JobBudgetId">
             <summary>Gets or sets the JobBudgetId field. </summary>

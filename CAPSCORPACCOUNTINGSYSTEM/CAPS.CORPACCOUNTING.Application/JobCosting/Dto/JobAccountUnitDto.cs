@@ -29,5 +29,19 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or sets the AccountNumber field. </summary>
         public string AccountNumber { get; set; }
+
+        /// <summary>Gets or sets the RollupAccountNumber field. </summary>
+        public string RollupAccountNumber { get; set; }
+
+        /// <summary>Gets or sets the RollupAccountDescription field. </summary>
+        public string RollupAccountDescription { get; set; }
+
+        /// <summary>Gets or sets the RollupDivisionNumber field. </summary>
+        public string RollupJobNumber { get; set; }
+
+        /// <summary>Gets or sets the RollupDivisionDescription field. </summary>
+        public string RollupJobDescription { get; set; }
+
+
     }
 }

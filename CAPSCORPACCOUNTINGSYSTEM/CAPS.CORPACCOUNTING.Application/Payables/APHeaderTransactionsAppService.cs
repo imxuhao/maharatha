@@ -319,7 +319,7 @@ namespace CAPS.CORPACCOUNTING.Payables
                 dto.SubAccountNumber2 = item.subAccount2;
                 dto.SubAccountNumber3 = item.subAccount3;
                 dto.TaxRebateNumber = item.taxCredit;
-                dto.AccountingDocumentId = item.InvoiceDetails.Id;
+                dto.AccountingItemId = item.InvoiceDetails.Id;
                 dto.ActualAmount = item.InvoiceDetails.Amount.Value;// this is to maintainning the actual Amount on calculation
                 return dto;
             }).ToList());

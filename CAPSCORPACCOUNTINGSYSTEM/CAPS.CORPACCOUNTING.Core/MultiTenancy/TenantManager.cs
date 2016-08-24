@@ -169,8 +169,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     newTenantId = tenant.Id;
                     newAdminId = adminUser.Id;
                 }
-                if (string.IsNullOrEmpty(connectionString))
-                    await CustomTenantSeeding(newTenantId);
 
                 await uow.CompleteAsync();
             }
@@ -290,62 +288,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         protected virtual void CheckErrors(IdentityResult identityResult)
         {
             identityResult.CheckErrors(LocalizationManager);
-        }
-        /// <summary>
-        /// Chaching Method
-        /// Tenant based seeding
-        /// </summary>
-        /// <param name="newTenantId"></param>
-        /// <returns></returns>
-        public async Task CustomTenantSeeding(int newTenantId)
-        {
-            //Currency Seeding
-            if (await _typeOfCurrencyUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
-            {
-                var currencyList = await _typeOfCurrencyUnit.GetAll().Where(u => u.TenantId == 1).ToListAsync();
-
-                currencyList.ForEach(u => u.TenantId = newTenantId);
-                foreach (var currency in currencyList)
-                {
-                    await _typeOfCurrencyUnit.InsertAsync(currency);
-                }
-            }
-
-            //Account Seeding
-            if (await _typeOfAccountUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
-            {
-                var typeOfAccountList = await _typeOfAccountUnit.GetAll().Where(u => u.TenantId == 1).ToListAsync();
-
-                typeOfAccountList.ForEach(u => u.TenantId = newTenantId);
-                foreach (var typeOfAccount in typeOfAccountList)
-                {
-                    await _typeOfAccountUnit.InsertAsync(typeOfAccount);
-                }
-            }
-
-            //Region Seeding
-            if (await _regionUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
-            {
-                var regionList = await _regionUnit.GetAll().Where(u => u.TenantId == 1).ToListAsync();
-
-                regionList.ForEach(u => u.TenantId = newTenantId);
-                foreach (var region in regionList)
-                {
-                    await _regionUnit.InsertAsync(region);
-                }
-            }
-
-            //Country Seeding
-            if (await _countryUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
-            {
-                var countryList = await _countryUnit.GetAll().Where(u => u.TenantId == 1).ToListAsync();
-
-                countryList.ForEach(u => u.TenantId = newTenantId);
-                foreach (var country in countryList)
-                {
-                    await _countryUnit.InsertAsync(country);
-                }
-            }
         }
 
 

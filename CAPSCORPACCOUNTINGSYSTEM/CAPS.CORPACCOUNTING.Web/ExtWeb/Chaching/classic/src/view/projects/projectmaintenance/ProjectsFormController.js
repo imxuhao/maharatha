@@ -63,7 +63,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsFormController', {
                     jobAccountId: rec.get('jobAccountId'),
                     jobId: rec.get('jobId'),
                     rollupAccountId: rec.get('rollupAccountId'),
-                    rollupJobId: rec.get('rollupJobId')
+                    rollupJobId: rec.get('rollupJobId'),
+                    rollupAccountDescription: rec.get('rollupAccountDescription'),
+                    rollupJobDescription:rec.get('rollupJobDescription')
                 };
                 modifiedJobAccounts.push(record);
             });

@@ -127,24 +127,32 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 IsApproved = input.IsApproved,
                 IsActive = input.IsActive,
                 IsICTDivision = input.IsICTDivision,
-                OrganizationUnitId = input.OrganizationUnitId,
                 TypeofProjectId = input.TypeofProjectId,
                 TaxRecoveryId = input.TaxRecoveryId
             };
             IdOutputDto<int> response = await _jobCommercialAppService.CreateJobDetailUnit(jobcommercialunit);
-            
+
 
 
             //Get the accounts of appropriate coa and constructing CreateJobAccountUnitInput
             List<CreateJobAccountUnitInput> jobAccounts = await (from account in _accountUnitRepository.GetAll()
+                                                                 join rollUpAccount in _accountUnitRepository.GetAll() on account.RollupAccountId equals rollUpAccount.Id into rollUpAccount
+                                                                 from rollUpAccounts in rollUpAccount.DefaultIfEmpty()
+                                                                 join rollUpDivision in _jobUnitRepository.GetAll().Where(u => u.IsDivision == true) on account.RollupJobId equals rollUpDivision.Id into rollUpDivision
+                                                                 from rollUpDivisions in rollUpDivision.DefaultIfEmpty()
                                                                  where account.ChartOfAccountId == input.ChartOfAccountId
                                                                  select new CreateJobAccountUnitInput
                                                                  {
                                                                      JobId = response.JobId,
                                                                      AccountId = account.Id,
-                                                                     OrganizationUnitId = input.OrganizationUnitId,
-                                                                     Description = account.Caption
+                                                                     RollupAccountId=account.RollupAccountId,
+                                                                     RollupJobId=account.RollupJobId,
+                                                                     Description = account.Caption,
+                                                                     RollupAccountDescription=rollUpAccounts.Caption,
+                                                                     RollupJobDescription=rollUpDivisions.Caption
                                                                  }).ToListAsync();
+
+
             #region Inserting JobId,AccountId,Description in JobAccount Table
             //bulk insert
             foreach (var jobAccount in jobAccounts)
@@ -189,7 +197,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobUnit.IsApproved = input.IsApproved;
             jobUnit.IsActive = input.IsActive;
             jobUnit.IsICTDivision = input.IsICTDivision;
-            jobUnit.OrganizationUnitId = input.OrganizationUnitId;
             jobUnit.TypeofProjectId = input.TypeofProjectId;
             jobUnit.TaxRecoveryId = input.TaxRecoveryId;
             jobUnit.ChartOfAccountId = input.ChartOfAccountId;
@@ -198,18 +205,25 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
 
             await _jobUnitManager.UpdateAsync(jobUnit);
-          
+
 
             //disable the SoftDelete Filter
             #region Adding the new lines to jobAccount
             using (UnitOfWorkManager.Current.DisableFilter(AbpDataFilters.SoftDelete))
             {
                 //get all jobaccounts and Lines 
-                var jobaccountsList = (from lines in _accountUnitRepository.GetAll().Where(p => p.ChartOfAccountId == input.ChartOfAccountId
-                                    && p.OrganizationUnitId == input.OrganizationUnitId)
+                var jobaccountsList = (from lines in _accountUnitRepository.GetAll().Where(p => p.ChartOfAccountId == input.ChartOfAccountId)
                                        join jobacc in _jobAccountUnitRepository.GetAll() on lines.Id equals jobacc.AccountId into jobaccount
                                        from jobaccounts in jobaccount.DefaultIfEmpty()
-                                       select new { lines, jobaccounts }).ToList();
+                                       join rollUpAccount in _accountUnitRepository.GetAll() on lines.RollupAccountId equals rollUpAccount.Id into rollUpAccount
+                                       from rollUpAccounts in rollUpAccount.DefaultIfEmpty()
+                                       join rollUpDivision in _jobUnitRepository.GetAll().Where(u => u.IsDivision == true) on lines.RollupJobId equals rollUpDivision.Id into rollUpDivision
+                                       from rollUpDivisions in rollUpDivision.DefaultIfEmpty()
+                                       select new { lines,
+                                           jobaccounts,
+                                           rollUpAccountDescription = rollUpAccounts.Caption,
+                                           rollUpDivisionDescription = rollUpDivisions.Caption
+                                       }).ToList();
                 //bulkinsertion
                 foreach (var jobaccount in jobaccountsList)
                 {
@@ -219,8 +233,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                         {
                             JobId = input.JobId,
                             AccountId = jobaccount.lines.Id,
-                            OrganizationUnitId = input.OrganizationUnitId,
-                            Description = jobaccount.lines.Caption
+                            RollupAccountId = input.RollupAccountId,
+                            RollupJobId = input.RollupJobId,
+                            Description = jobaccount.lines.Caption,
+                            RollupJobDescription = jobaccount.rollUpDivisionDescription,
+                            RollupAccountDescription = jobaccount.rollUpAccountDescription,
                         };
 
                         await _jobAccountUnitAppService.CreateJobAccountUnit(jobAccount);
@@ -285,8 +302,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
                 query = Helper.CreateFilters(query, mapSearchFilters);
             }
-            query = query.WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), item => item.Job.OrganizationUnitId == input.OrganizationUnitId)
-                     .Where(item => item.Job.IsDivision == false);
+            query = query.Where(item => item.Job.IsDivision == false);
             var resultCount = await query.CountAsync();
             var results = await query
                 .AsNoTracking()
@@ -353,7 +369,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<List<NameValueDto>> GetProjectCoaList(AutoSearchInput input)
         {
             var divisions = await _coaUnitRepository.GetAll().Where(p => p.IsCorporate == false)
-               .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Caption.Contains(input.Query))
                .Select(u => new NameValueDto { Name = u.Caption, Value = u.Id.ToString() }).ToListAsync();
             return divisions;
@@ -395,9 +410,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
             return accountList.ToList().WhereIf(!string.IsNullOrEmpty(input.Query),
                 p => p.Caption.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper()) || p.AccountNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())
-                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.IsCorporate == true && p.IsRollupAccount==true).ToList();
+                || p.Description.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).Where(p => p.IsCorporate == true && p.IsRollupAccount == true).ToList();
         }
-      
+
         /// <summary>
         /// Get JobAccounts by CoaId and JobId
         /// </summary>
@@ -406,14 +421,26 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         {
             var accounts = await (from jobaccount in _jobAccountUnitRepository.GetAll()
                                   join account in _accountUnitRepository.GetAll() on jobaccount.AccountId equals account.Id
+                                  join rollUpAccount in _accountUnitRepository.GetAll() on jobaccount.RollupAccountId equals rollUpAccount.Id into rollUpAccount
+                                  from rollUpAccounts in rollUpAccount.DefaultIfEmpty()
+                                  join rollUpDivision in _jobUnitRepository.GetAll().Where(u => u.IsDivision == true) on jobaccount.RollupJobId equals rollUpDivision.Id into rollUpDivision
+                                  from rollUpDivisions in rollUpDivision.DefaultIfEmpty()
                                   where jobaccount.JobId == input.JobId && account.ChartOfAccountId == input.ChartofAccountId
-                                  select new { jobaccount, account }).ToListAsync();
+                                  select new
+                                  {
+                                      jobaccount,
+                                      accountNumber = account.AccountNumber,
+                                      rollUpAccountNumber = rollUpAccounts.AccountNumber,
+                                      rollUpDivisionNumber=rollUpDivisions.JobNumber
+                                  }).ToListAsync();
             return accounts.Select(
                 result =>
                 {
                     var dto = result.jobaccount.MapTo<JobAccountUnitDto>();
                     dto.JobAccountId = result.jobaccount.Id;
-                    dto.AccountNumber = result.account.AccountNumber;
+                    dto.AccountNumber = result.accountNumber;
+                    dto.RollupAccountNumber = result.rollUpAccountNumber;
+                    dto.RollupJobNumber = result.rollUpDivisionNumber;
                     return dto;
                 }).ToList();
 
@@ -446,7 +473,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<List<AutoFillDto>> GetTaxCreditList(AutoSearchInput input)
         {
             var taxCreditList = await _taxCreditUnitRepository.GetAll()
-                 .WhereIf(!ReferenceEquals(input.OrganizationUnitId, null), p => p.OrganizationUnitId == input.OrganizationUnitId)
                  .WhereIf(!string.IsNullOrEmpty(input.Query), p => p.Description.Contains(input.Query) || p.Number.Contains(input.Query))
                  .Select(u => new AutoFillDto { Name = u.Description, Value = u.Id.ToString(), Column1 = u.Number }).ToListAsync();
             return taxCreditList;
@@ -474,7 +500,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             var projectTypelist = EnumList.GetProjectTypeList();
             var statuslist = EnumList.GetProjectStatusList();
             var currencylist = await _accountUnitAppService.GetTypeOfCurrencyList();
-           
+
             var rollupAccountList = (await GetRollupAccountList(new AutoSearchInput() { Value = false })).ConvertAll(u => new NameValueDto()
             {
                 Value = u.AccountId.ToString(),
@@ -498,11 +524,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             Dictionary<int, CreateJobUnitInput> jobsList = new Dictionary<int, CreateJobUnitInput>();
             foreach (DataRow datarow in jobsTable.Rows)
             {
-                
+
                 short? currencyId = null;
                 TypeofProject? typeofProjectId = null;
                 ProjectStatus? projectStatusId = null;
-                int budgetFormatId=0 ;
+                int budgetFormatId = 0;
                 long? rollupAccountId = null;
                 int? rollupdivisionId = null;
                 int? taxCreditId = null;
@@ -618,11 +644,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 return;
 
             var duplicatejob1 = (from p in accountsList
-                                      join p2 in duplicatejobList on p.Value.Caption equals p2.Caption
-                                      select new { JobName = p.Value.Caption, JobNumber = p.Value.JobNumber, RowNumber = p.Key }).ToList();
+                                 join p2 in duplicatejobList on p.Value.Caption equals p2.Caption
+                                 select new { JobName = p.Value.Caption, JobNumber = p.Value.JobNumber, RowNumber = p.Key }).ToList();
             var duplicatejob2 = (from p in accountsList
-                                      join p2 in duplicatejobList on p.Value.JobNumber equals p2.JobNumber
-                                      select new { JobName = p.Value.Caption, JobNumber = p.Value.JobNumber, RowNumber = p.Key }).ToList();
+                                 join p2 in duplicatejobList on p.Value.JobNumber equals p2.JobNumber
+                                 select new { JobName = p.Value.Caption, JobNumber = p.Value.JobNumber, RowNumber = p.Key }).ToList();
 
 
             var duplicatejobs = duplicatejob1.Union(duplicatejob2).ToList();
@@ -642,7 +668,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         }
 
 
-        private UploadErrorMessagesOutputDto ValidateUploadedData(CreateJobUnitInput input, int rowNumber,int budgetFormatId)
+        private UploadErrorMessagesOutputDto ValidateUploadedData(CreateJobUnitInput input, int rowNumber, int budgetFormatId)
         {
             UploadErrorMessagesOutputDto uploadErrorMessages = new UploadErrorMessagesOutputDto { RowNumber = rowNumber };
             ////DataValidator.CheckLength(input.JobNumber.Length, JobUnit.MaxJobNumberLength, L("JobNumber"), uploadErrorMessages);

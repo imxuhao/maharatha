@@ -25,7 +25,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<JobAccountUnitDto> CreateJobAccountUnit(CreateJobAccountUnitInput input)
         {
             var jobAccountUnit = new JobAccountUnit(jobid: input.JobId, accountid: input.AccountId, description: input.Description, rollupaccountId: input.RollupAccountId,
-                rollupjobid: input.RollupJobId, organizationunitid: input.OrganizationUnitId);
+                rollupjobid: input.RollupJobId, organizationunitid: input.OrganizationUnitId,rollupaccountdescription:input.RollupAccountDescription,rollupjobdescription:input.RollupJobDescription);
             await _jobAccountUnitManager.CreateAsync(jobAccountUnit);
             await CurrentUnitOfWork.SaveChangesAsync();
             return jobAccountUnit.MapTo<JobAccountUnitDto>();
@@ -61,6 +61,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             jobAccountUnit.RollupJobId = input.RollupJobId;
             jobAccountUnit.RollupAccountId = input.RollupAccountId;
             jobAccountUnit.Description = input.Description;
+            jobAccountUnit.RollupJobDescription = input.RollupJobDescription;
+            jobAccountUnit.RollupAccountDescription = input.RollupAccountDescription;
             #endregion
             await _jobAccountUnitManager.UpdateAsync(jobAccountUnit);
 

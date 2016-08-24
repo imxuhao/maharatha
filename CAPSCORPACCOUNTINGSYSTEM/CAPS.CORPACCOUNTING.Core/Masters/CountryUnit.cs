@@ -15,7 +15,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     ///  TypeOfCountry is the table name in Lajit
     /// </summary>
     [Table("CAPS_Country")]
-    public class CountryUnit:Entity, IMayHaveTenant, IMayHaveOrganizationUnit
+    public class CountryUnit:Entity,IMayHaveOrganizationUnit
     {
 
         private const int MaxDescriptionLength = 100;
@@ -61,8 +61,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         //[ForeignKey("TypeOfCountryId")]
         //public virtual TypeOfCountryUnit TypeOfCountryUnit { get; set; }
 
-        /// <summary>Gets or sets the TenantId field. </summary>
-        public int? TenantId { get; set; }
+        ///// <summary>Gets or sets the TenantId field. </summary>
+        //public int? TenantId { get; set; }
 
 
         /// <summary>Gets or sets the CompanyId field. </summary>

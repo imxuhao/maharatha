@@ -15,6 +15,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     public class JobAccountUnit : FullAuditedEntity<long>, IMustHaveTenant, IMayHaveOrganizationUnit
     {
         public const int MaxDescriptionLength = 200;
+        public const int MaxRollUpAcccountDescriptionLength = 400;
+        public const int MaxRollUpJobDescriptionLength = 200;
 
         #region Declaration of Properties
         /// <summary>Overriding the Id column with JobAccountId</summary>
@@ -62,13 +64,25 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         /// <summary>Gets or sets the TenantId field. </summary>
         public int TenantId { get; set; }
+
+        /// <summary>Gets or sets the RollupAccountDescription field. </summary>
+        [MaxLength(MaxRollUpAcccountDescriptionLength)]
+        public virtual string RollupAccountDescription { get; set; }
+
+        /// <summary>Gets or sets the RollupJobDescription field. </summary>
+        [MaxLength(MaxRollUpJobDescriptionLength)]
+        public virtual string RollupJobDescription { get; set; }
+
+
         #endregion
+
+
 
         public JobAccountUnit()
         {
             
         }
-        public JobAccountUnit(int jobid, long accountid, string description, int? rollupjobid, long? rollupaccountId, long? organizationunitid)
+        public JobAccountUnit(int jobid, long accountid, string description, int? rollupjobid, long? rollupaccountId, long? organizationunitid, string rollupaccountdescription, string rollupjobdescription)
         {
             JobId = jobid;
             AccountId = accountid;
@@ -76,6 +90,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             RollupJobId = rollupjobid;
             RollupAccountId = rollupaccountId;
             OrganizationUnitId = organizationunitid;
+            RollupAccountDescription = rollupaccountdescription;
+            RollupJobDescription = rollupjobdescription;
         }
 
     }

@@ -8,7 +8,7 @@
  * UI design for project/job
  * @alias widget.projects.projectmaintenance.projects.create, widget.projects.projectmaintenance.projects.edit
  */
-Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
+Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm', {
     extend: 'Chaching.view.common.form.ChachingFormPanel',
     alias: ['widget.projects.projectmaintenance.projects.create', 'widget.projects.projectmaintenance.projects.edit'],
     requires: [
@@ -40,26 +40,26 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
     },
     defaultFocus: 'textfield#jobNumber',
     popupWndSize: {
-        height:'90%',
-        width:'90%'
+        height: '90%',
+        width: '90%'
     },
-    items:[
+    items: [
     {
         xtype: 'tabpanel',
-        ui:'formTabPanels',
-        items:[
+        ui: 'formTabPanels',
+        items: [
             {
-////start of setup card
+                ////start of setup card
                 title: app.localize('Setup'),
                 iconCls: 'fa fa-gear',
-                itemId:'ProjectSetupTab',
+                itemId: 'ProjectSetupTab',
                 items: [
                     {
                         xtype: 'fieldset',
                         title: app.localize('ProjectSetup'),
                         layout: 'column',
                         ui: 'transparentFieldSet',
-                        collapsible:true,
+                        collapsible: true,
                         items: [
                             {
                                 xtype: 'hiddenfield',
@@ -73,7 +73,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 columnWidth: .33,
                                 padding: '0 10 0 20',
                                 defaults: {
-                                   // labelAlign: 'top',
+                                    // labelAlign: 'top',
                                     blankText: app.localize('MandatoryToolTipText')
                                 },
                                 items: [
@@ -101,12 +101,12 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         itemId: 'typeofProjectId',
                                         allowBlank: false,
                                         queryMode: 'local',
-                                        store:'utilities.ProjectTypeStore',
+                                        store: 'utilities.ProjectTypeStore',
                                         valueField: 'typeofProjectId',
                                         displayField: 'typeofProjectName',
                                         width: '100%',
                                         ui: 'fieldLabelTop',
-                                        fieldLabel: app.localize('ProjectType') ,
+                                        fieldLabel: app.localize('ProjectType'),
                                         emptyText: app.localize('MandatoryField')
                                     }
                                 ]
@@ -115,7 +115,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 padding: '0 10 0 20',
                                 defaults: {
                                     //labelAlign: 'top',
-                                    labelWidth : 120,
+                                    labelWidth: 120,
                                     blankText: app.localize('MandatoryToolTipText')
                                 },
                                 items: [
@@ -130,7 +130,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         width: '100%',
                                         ui: 'fieldLabelTop',
                                         allowBlank: false,
-                                        fieldLabel: app.localize('BudgetFormat') ,
+                                        fieldLabel: app.localize('BudgetFormat'),
                                         emptyText: app.localize('MandatoryField')
                                     }, {
                                         xtype: 'chachingcombobox',
@@ -197,7 +197,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 columnWidth: .33,
                                 padding: '0 10 0 20',
                                 defaults: {
-                                   // labelAlign: 'top',
+                                    // labelAlign: 'top',
                                     blankText: app.localize('MandatoryToolTipText')
                                 },
                                 items: [
@@ -236,7 +236,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                         name: 'typeOfJobStatusId',
                                         itemId: 'typeOfJobStatusId',
                                         queryMode: 'local',
-                                        store:'utilities.ProjectStatusStore',
+                                        store: 'utilities.ProjectStatusStore',
                                         valueField: 'typeOfJobStatusId',
                                         displayField: 'jobStatusName',
                                         width: '100%',
@@ -249,15 +249,15 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         ]
                     }
                 ],
-                dockedItems:[
+                dockedItems: [
                 {
                     xtype: 'toolbar',
                     dock: 'bottom',
                     layout: {
                         type: 'hbox',
-                        pack:'center'
+                        pack: 'center'
                     },
-                    items:[
+                    items: [
                     {
                         xtype: 'button',
                         itemId: 'btnSaveSetup',
@@ -265,7 +265,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         ui: 'actionButton',
                         text: app.localize('SaveProject').toUpperCase(),
                         iconCls: 'fa fa-save',
-                        actionButton:true,
+                        actionButton: true,
                         listeners: {
                             click: 'onSaveClicked'
                         }
@@ -303,31 +303,31 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                 title: app.localize('ProjectDetails').initCap(),
                 autoScroll: true,
                 itemId: 'ProjectDetailsTab',
-                disabled:true,
+                disabled: true,
                 iconCls: 'fa fa-gears',
-                items:[
+                items: [
                 {
                     xtype: 'fieldset',
-                    ui:'transparentFieldSet',
+                    ui: 'transparentFieldSet',
                     layout: 'column',
                     title: app.localize('BiddingInfo'),
-                    collapsible :true,
-                    items:[
+                    collapsible: true,
+                    items: [
                     {
                         columnWidth: .33,
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop'//,
-                           // labelAlign: 'top'
+                            // labelAlign: 'top'
                         },
-                        items:[
+                        items: [
                         {
                             xtype: 'datefield',
                             name: 'bidDate',
                             itemId: 'bidDate',
-                            labelWidth : 80,
-                            format:Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
+                            labelWidth: 80,
+                            format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                             emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
                             fieldLabel: app.localize('BidDate')
                         }]
@@ -354,7 +354,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         columnWidth: .33,
                         padding: '0 10 0 20',
                         defaults: {
-                           // labelAlign: 'top',
+                            // labelAlign: 'top',
                             blankText: app.localize('MandatoryToolTipText')
                         },
                         items: [
@@ -364,7 +364,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             itemId: 'productOwner',
                             labelWidth: 80,
                             ui: 'fieldLabelTop',
-                            width:'100%',
+                            width: '100%',
                             fieldLabel: app.localize('Bidder'),
                             emptyText: app.localize('ToolTipBidder')
                         }, {
@@ -378,24 +378,24 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             boxLabel: app.localize('OtBasedOn')
                         }]
                     }]
-                  
+
                 }, {
                     xtype: 'fieldset',
                     title: app.localize('AgencyInfo'),
                     ui: 'transparentFieldSet',
                     layout: 'column',
                     collapsible: true,
-                    items:[
+                    items: [
                     {
                         columnWidth: .33,
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
-                            labelWidth : 150,
+                            labelWidth: 150,
                             ui: 'fieldLabelTop'//,
-                           // labelAlign: 'top'
+                            // labelAlign: 'top'
                         },
-                        items:[
+                        items: [
                         {
                             xtype: 'chachingcombobox',
                             store: new Chaching.store.utilities.autofill.CustomerListStore(),
@@ -422,7 +422,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             createEditEntityType: 'receivables.customers',
                             createEditEntityGridController: 'receivables-customers-customersgrid',
                             entityType: 'Customer'
-                            
+
                         }, {
                             xtype: 'textfield',
                             name: 'productName',
@@ -470,9 +470,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
-                            labelWidth : 120,
+                            labelWidth: 120,
                             ui: 'fieldLabelTop'//,
-                           // labelAlign: 'top'
+                            // labelAlign: 'top'
                         },
                         items: [
                             {
@@ -502,7 +502,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop',
-                            labelWidth : 170
+                            labelWidth: 170
                             //labelAlign: 'top'
                         },
                         items: [{
@@ -523,7 +523,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             padding: '23 10 0 0',
                             fieldLabel: app.localize('AgencyJobNumber'),
                             emptyText: app.localize('ToolTipAgencyJobNumber')
-                        },{///TODO: to be added
+                        }, {///TODO: to be added
                             xtype: 'datefield',
                             name: 'contractDate',
                             itemId: 'contractDate',
@@ -541,7 +541,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             boxLabel: app.localize('WrapUpInsurance')
                         }]
                     }]
-                    
+
                 }, {
                     xtype: 'fieldset',
                     title: app.localize('AgencyContractInfo'),
@@ -556,7 +556,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                                 width: '100%',
                                 ui: 'fieldLabelTop',
                                 //labelAlign: 'top',
-                                labelWidth : 150,
+                                labelWidth: 150,
                                 xtype: 'numberfield',
                                 hideTrigger: true,
                                 minValue: 0,
@@ -580,7 +580,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             defaults: {
                                 width: '100%',
                                 ui: 'fieldLabelTop'//,
-                               // labelAlign: 'top'
+                                // labelAlign: 'top'
                             },
                             items: [
                                 {///TODO: Rplace with combo once terms section is completed on contracts tab
@@ -640,17 +640,17 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                     ui: 'transparentFieldSet',
                     layout: 'column',
                     collapsible: true,
-                    items:[
+                    items: [
                     {
                         columnWidth: .33,
                         padding: '0 10 0 20',
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop',
-                            labelWidth : 180
+                            labelWidth: 180
                             //labelAlign: 'top'
                         },
-                        items:[
+                        items: [
                         {
                             xtype: 'combobox',
                             name: 'directorEmployeeId',
@@ -658,13 +658,13 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             store: new Chaching.store.utilities.EmployeeListStore(),
                             valueField: 'employeeId',
                             displayField: 'employeeName',
-                            queryMode:'remote',
+                            queryMode: 'remote',
                             fieldLabel: app.localize('Director'),
                             listConfig: {
                                 getInnerTpl: Chaching.utilities.ChachingRenderers.renderEmployeeInnerTpl
                             },
                             displayTpl: Chaching.utilities.ChachingRenderers.renderEmployeeDispalyTpl(),
-                            emptyText:app.localize('SelectOption')
+                            emptyText: app.localize('SelectOption')
                         }, {
                             xtype: 'combobox',
                             name: 'executiveProducerId',
@@ -698,7 +698,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             anyMatch: true,
                             fieldLabel: app.localize('DirOfPhotography'),
                             emptyText: app.localize('SelectOption')
-                        },{///TODO: to be added
+                        }, {///TODO: to be added
                             xtype: 'datefield',
                             name: 'deliveryDate',
                             itemId: 'deliveryDate',
@@ -712,7 +712,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop',
-                            labelWidth : 150
+                            labelWidth: 150
                             //labelAlign: 'top'
                         },
                         items: [
@@ -754,10 +754,10 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         defaults: {
                             width: '100%',
                             ui: 'fieldLabelTop',
-                            labelWidth : 150
-                           // labelAlign: 'top'
+                            labelWidth: 150
+                            // labelAlign: 'top'
                         },
-                        items:[
+                        items: [
                        {
                            xtype: 'textfield',
                            name: 'commercialTitle3',
@@ -790,20 +790,20 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             width: '100%',
                             ui: 'dragDropPanel'
                         },
-                        items:[
+                        items: [
                         {
                             xtype: 'projects.projectmaintenance.projectLocations',
                             itemId: 'jobLocationsGridPanel'
                         }]
                     }]
-                    
+
                 }, {
                     xtype: 'fieldset',
                     title: app.localize('OtherInfo'),
                     ui: 'transparentFieldSet',
                     layout: 'column',
                     collapsible: true,
-                    items:[
+                    items: [
                     {
                         columnWidth: .33,
                         padding: '0 10 0 20',
@@ -812,13 +812,13 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             ui: 'fieldLabelTop'//,
                             //labelAlign: 'top'
                         },
-                        items:[
+                        items: [
                         {
                             xtype: 'textfield',
                             name: 'salesRepId',
                             itemId: 'salesRepId',
                             fieldLabel: app.localize('SalesRep'),
-                            emptyText:app.localize('SelectOption')
+                            emptyText: app.localize('SelectOption')
                         }]
                     }, {
                         columnWidth: .66,
@@ -828,7 +828,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                             ui: 'fieldLabelTop',
                             labelAlign: 'top'
                         },
-                        items:[
+                        items: [
                         {
                             xtype: 'projects.projectmaintenance.porangeallocation',
                             itemId: 'jobPurchaseOrderAllocation'
@@ -841,16 +841,16 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                     dock: 'bottom',
                     layout: {
                         type: 'hbox',
-                        pack:'center'
+                        pack: 'center'
                     },
-                    items:[
+                    items: [
                     {
                         xtype: 'button',
                         itemId: 'btnSaveProjectDetails',
                         ui: 'actionButton',
                         text: app.localize('SaveProjectDetails').toUpperCase(),
                         iconCls: 'fa fa-save',
-                        name:'SaveDetails',
+                        name: 'SaveDetails',
                         actionButton: true,
                         listeners: {
                             click: 'onProjectDetailsSave'
@@ -874,7 +874,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         xtype: 'button',
                         itemId: 'btnCancelProjectDetails',
                         ui: 'actionButton',
-                        name:'Cancel',
+                        name: 'Cancel',
                         text: app.localize('Cancel').toUpperCase(),
                         iconCls: 'fa fa-close',
                         actionButton: true,
@@ -889,9 +889,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                 iconCls: 'fa fa-list-ol',
                 disabled: true,
                 itemId: 'LineNumbersTab',
-                items:[
+                items: [
                 {
-                    
+
                     xtype: 'projects.projectmaintenance.linenumbers',
                     store: 'projects.projectmaintenance.JobAccountsStore',
                     headerButtonsConfig: null,
@@ -902,6 +902,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                     createNewMode: 'inline',
                     isSubMenuItemTab: false,
                     showPagingToolbar: false,
+                    importConfig: { isRequireImport: false },
                     itemId: 'jobAccountsGridPanel',
                     modulePermissions: {
                         read: true,
@@ -909,32 +910,69 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
                         edit: true,
                         destroy: false
                     },
-                    columns:[
+                    columns: [
                     {
                         xtype: 'gridcolumn',
                         text: app.localize('LineNumber'),
                         dataIndex: 'accountNumber',
                         sortable: true,
                         groupable: true,
-                        width: '20%'
+                        width: '10%'
                     }, {
                         xtype: 'gridcolumn',
                         text: app.localize('Description'),
                         dataIndex: 'description',
                         sortable: true,
                         groupable: true,
-                        width: '70%',
+                        width: '15%',
                         editor: {
                             xtype: 'textfield'
                         }
-                    }]
+                    }, {
+                        xtype: 'gridcolumn',
+                        text: app.localize('RollupDivisionNumber'),
+                        dataIndex: 'rollupJobNumber',
+                        sortable: true,
+                        groupable: true,
+                        width: '15%'
+                    }
+                    , {
+                        xtype: 'gridcolumn',
+                        text: app.localize('RollupDivisionDescription'),
+                        dataIndex: 'rollupJobDescription',
+                        sortable: true,
+                        groupable: true,
+                        width: '18%',
+                        editor: {
+                            xtype: 'textfield'
+                        }
+                    }, {
+                        xtype: 'gridcolumn',
+                        text: app.localize('RollUpAccountNumber'),
+                        dataIndex: 'rollupAccountNumber',
+                        sortable: true,
+                        groupable: true,
+                        width: '15%'
+                    }, {
+                        xtype: 'gridcolumn',
+                        text: app.localize('RollupAccountDescription'),
+                        dataIndex: 'rollupAccountDescription',
+                        sortable: true,
+                        groupable: true,
+                        width: '18%',
+                        editor: {
+                            xtype: 'textfield'
+                        }
+                    }
+
+                    ]
                 }]
             },//end of Line numbers card
             {///// Start of cost manager card
                 title: app.localize('CostManager').initCap(),
                 iconCls: 'fa fa-bar-chart',
                 disabled: true,
-                itemId:'CostManagerTab'
+                itemId: 'CostManagerTab'
             },//end of cost manager card
             {///// Start of Petty Cash Accounts card
                 title: app.localize('PcAccount').initCap(),
@@ -950,6 +988,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsForm',{
             }//end of Po Log card
         ]
     }]
-    
+
 });
 

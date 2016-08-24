@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.Masters
     ///  Region is the table name in Lajit
     /// </summary>
     [Table("CAPS_Region")]
-    public class RegionUnit: FullAuditedEntity, IMayHaveTenant, IMayHaveOrganizationUnit
+    public class RegionUnit: FullAuditedEntity, IMayHaveOrganizationUnit
     {
 
         private const int MaxDescriptionLength = 200;
@@ -45,8 +45,8 @@ namespace CAPS.CORPACCOUNTING.Masters
         [MaxLength(MaxStateCodeLength)]
         public virtual string StateCode { get; set; }
         /// <summary>Gets or sets the TenantId field. </summary>
-        public virtual int? TenantId { get; set; }
-        /// <summary>Gets or sets the CompanyId field. </summary>
+        //public virtual int? TenantId { get; set; }
+        ///// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
 
         public RegionUnit()

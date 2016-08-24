@@ -1333,6 +1333,14 @@
     <Compile Include="Migrations\201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.Designer.cs">
       <DependentUpon>201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608190935348_Modify_JobAccount_Table.cs" />
+    <Compile Include="Migrations\201608190935348_Modify_JobAccount_Table.Designer.cs">
+      <DependentUpon>201608190935348_Modify_JobAccount_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.cs" />
+    <Compile Include="Migrations\201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.Designer.cs">
+      <DependentUpon>201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="CORPACCOUNTINGDataModule.cs" />
     <Compile Include="Migrations\Seed\DefaultSecurityGroupCreator.cs" />
@@ -2249,6 +2257,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.resx">
       <DependentUpon>201608180632010_Add_Territories_Table_Modify_Address_ARInvoiceEntryDocument_Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608190935348_Modify_JobAccount_Table.resx">
+      <DependentUpon>201608190935348_Modify_JobAccount_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.resx">
+      <DependentUpon>201608231232113_Remove_TenantIds_In_Country_TypeOfCurrency_Region_TypeOfAccount_Tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

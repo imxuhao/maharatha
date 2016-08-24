@@ -23,6 +23,10 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureForm'
         labelAlign: 'top',
         blankText: app.localize('MandatoryToolTipText')
     },
+
+    listeners:{
+        'afterrender': 'disableSaveButton'
+    },
     //  defaultFocus: 'textfield#tenancyName',
 
     items: [       

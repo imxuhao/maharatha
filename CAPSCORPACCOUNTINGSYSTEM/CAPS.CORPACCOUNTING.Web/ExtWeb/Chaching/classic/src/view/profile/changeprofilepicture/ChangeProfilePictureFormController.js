@@ -7,6 +7,8 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
         data = view.dataobject;
         if (Ext.isEmpty(view.getForm().findField('changeProfilePicture').getValue())) {
             abp.message.error(app.localize('SelectUserProfilePicture'), app.localize('Error'));
+            saveButton = view.down('button[itemId=BtnSave]');
+            saveButton.setDisabled(true);
             return;
         }
         Ext.Ajax.request({
@@ -71,12 +73,16 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
         file.setRawValue(newvalue);
         if (file.value && !/^.*\.(Png|gif|jpg|jpeg|jfif|tiff|bmp)$/i.test(file.value)) {
             abp.message.error(app.localize('ProfilePicture_Warn_FileType'), app.localize('Error'));
-            file.setRawValue("");            
+            file.setRawValue("");
+            saveButton = view.down('button[itemId=BtnSave]');
+            saveButton.setDisabled(true);
             return;
         };
         if (file.fileInputEl && file.fileInputEl.dom && file.fileInputEl.dom.files && file.fileInputEl.dom.files[0].size > 2097152) {
             abp.message.error(app.localize('ProfilePicture_Warn_SizeLimit'), app.localize('Error'));
             file.setRawValue("");
+            saveButton = view.down('button[itemId=BtnSave]');
+            saveButton.setDisabled(true);
             return;
         }       
         view.submit({
@@ -84,6 +90,9 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
             success: function (form, response) {
                 if (response.result) {
                     form.findField('changeProfilePicture').value = "gjhsagjd";
+                    var win = form.owner,
+                        saveButton = win.down('button[itemId=BtnSave]');
+                        saveButton.enable(true);
                     var data = response.result.result;
                     if (response.success) {
                         view.filePath = data.tempFilePath;
@@ -97,6 +106,13 @@ Ext.define('Chaching.view.profile.changeprofilepicture.ChangeProfilePictureFormC
             }
         });
 
+    },
+
+    disableSaveButton: function (a,b,c) {
+        var me = this,
+        view = me.getView(),
+        saveButton = view.down('button[itemId=BtnSave]');
+        saveButton.setDisabled(true);
     }
 
 });

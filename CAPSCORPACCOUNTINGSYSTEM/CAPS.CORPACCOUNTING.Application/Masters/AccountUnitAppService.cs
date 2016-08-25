@@ -24,7 +24,9 @@ using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters.CustomRepository;
 using CAPS.CORPACCOUNTING.Sessions;
+using CAPS.CORPACCOUNTING.Uploads.Dto;
 using Hangfire;
+using Abp.Runtime.Caching;
 
 namespace CAPS.CORPACCOUNTING.Accounts
 {
@@ -41,10 +43,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
         private readonly CustomAppSession _customAppSession;
         private readonly AccountCache _accountcache;
         private readonly ICustomAccountRepository _customAccountRepository;
+        private readonly ICacheManager _cacheManager;
         public AccountUnitAppService(AccountUnitManager accountUnitManager, IRepository<AccountUnit, long> accountUnitRepository,
             UserManager userManager, IUnitOfWorkManager unitOfWorkManager, IRepository<TypeOfAccountUnit, int> typeOfAccountRepository,
             IRepository<TypeOfCurrencyRateUnit, short> typeOfCurrencyRateRepository, IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyRepository,
-            IRepository<CoaUnit, int> coaRepository, AccountCache accountcache, CustomAppSession customAppSession, ICustomAccountRepository customAccountRepository)
+            IRepository<CoaUnit, int> coaRepository, AccountCache accountcache, CustomAppSession customAppSession, ICustomAccountRepository customAccountRepository, ICacheManager cacheManager)
         {
             _accountUnitManager = accountUnitManager;
             _accountUnitRepository = accountUnitRepository;
@@ -57,6 +60,7 @@ namespace CAPS.CORPACCOUNTING.Accounts
             _accountcache = accountcache;
             _customAppSession = customAppSession;
             _customAccountRepository = customAccountRepository;
+            _cacheManager = cacheManager;
         }
 
         /// <summary>
@@ -373,47 +377,86 @@ namespace CAPS.CORPACCOUNTING.Accounts
                                     IsRollupAccount = !string.IsNullOrEmpty(tbl.Field<string>(L("RollUpAccount"))) && Helper.ConvertToBoolean(tbl.Field<string>(L("RollUpAccount")))
                                 }).ToList();
 
-            return await BulkAccountInsert(new CreateAccountListInput {AccountList = accountsList});
-
+            return await BulkAccountInsert(new CreateAccountListInput { AccountList = accountsList });
         }
 
 
-       
+
 
         public async Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos)
         {
             List<AccountUnit> accountList = new List<AccountUnit>();
-            _accountUnitManager.IsRecordfromExcel = true;
-
-            List<AccountUnitDto> erroredAccountList = new List<AccountUnitDto>();
-            // Do your validation here and if validation is not successful remove the item from the List and put it into and another list
-            foreach (var accountUnitDto in listAccountUnitDtos.AccountList)
+            var erroredAccountList = await ValidateDuplicateRecords(listAccountUnitDtos.AccountList);
+            var accounts = listAccountUnitDtos.AccountList.Where(p => erroredAccountList.All(p2 => p2.AccountNumber != p.AccountNumber)).ToList();
+            foreach (var accountUnit in accounts)
             {
-                //setting errormessage as Empty
-                _accountUnitManager.ErrorMessage = string.Empty;
-
-                await _accountUnitManager.ValidateAccountUnitAsync(accountUnitDto.MapTo<AccountUnit>());
-
-                if (!string.IsNullOrEmpty(_accountUnitManager.ErrorMessage))
-                {
-                    var accountunitdto = accountUnitDto.MapTo<AccountUnit>().MapTo<AccountUnitDto>();
-                    accountunitdto.ErrorMessage = _accountUnitManager.ErrorMessage .TrimStart(',').TrimEnd(',');
-                    erroredAccountList.Add(accountunitdto);
-                }
-                else
-                {
-                    accountUnitDto.ParentId = accountUnitDto.ParentId != 0 ? accountUnitDto.ParentId : null;
-                    var account = accountUnitDto.MapTo<AccountUnit>();
-                    account.TenantId = AbpSession.GetTenantId();
-                    account.CreatorUserId = AbpSession.GetUserId();
-                    account.Code = await _accountUnitManager.GetNextChildCodeAsync(accountUnitDto.ParentId, accountUnitDto.ChartOfAccountId);
-                    accountList.Add(account);
-                }
+                accountUnit.ParentId = accountUnit.ParentId != 0 ? accountUnit.ParentId : null;
+                var account = accountUnit.MapTo<AccountUnit>();
+                account.TenantId = AbpSession.GetTenantId();
+                account.CreatorUserId = AbpSession.GetUserId();
+                account.Code = await _accountUnitManager.GetNextChildCodeAsync(parentId: accountUnit.ParentId, coaId: accountUnit.ChartOfAccountId);
+                accountList.Add(account);
             }
             if (accountList.Count > 0)
+            {
                 await _customAccountRepository.BulkInsertAccountUnits(accountList: accountList);
+                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(AbpSession.GetTenantId())));
+            }
             return erroredAccountList;
         }
 
+        /// <summary>
+        /// Checking DuplicateRecords
+        /// </summary>
+        /// <param name="accountsList"></param>
+        /// <returns></returns>
+        private async Task<List<AccountUnitDto>> ValidateDuplicateRecords(List<CreateAccountUnitInput> accountsList)
+        {
+            var accountunitDtoList = new List<AccountUnitDto>();
+            var accountNumberList = string.Join(",", accountsList.Select(p => p.AccountNumber).ToArray());
+            var descriptionList = string.Join(",", accountsList.Select(p => p.Caption).ToArray());
+
+            var duplicateAccountItems = await _accountcache.GetAccountCacheItemAsync(
+                CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
+            var duplicateAccountList =
+                duplicateAccountItems.Where(
+                    p => accountNumberList.Contains(p.AccountNumber) || descriptionList.Contains(p.Caption)).ToList();
+
+            var duplicateAccountCaptionList = (from p in accountsList
+                                               join p2 in duplicateAccountList on p.Caption equals p2.Caption
+                                               select new { Caption = p.Caption, AccountNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateDescription") + p.Caption }).ToList();
+            var duplicateAccountsAccountNumberList = (from p in accountsList
+                                                      join p2 in duplicateAccountList on p.AccountNumber equals p2.AccountNumber
+                                                      select new { Caption = string.Empty, AccountNumber = p.AccountNumber, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateAccountNumber") + p.AccountNumber }).ToList();
+
+            var accountUnits = (from account in accountsList
+                                join duplicatecaption in duplicateAccountCaptionList
+                                on account.ExcelRowNumber equals duplicatecaption.RowNumber
+                                                      into duplicatecaptionaccount
+                                from duplicatecaptionaccountunit in duplicatecaptionaccount.DefaultIfEmpty()
+                                join duplicatenum in duplicateAccountsAccountNumberList
+                               on account.ExcelRowNumber equals duplicatenum.RowNumber
+                                                     into duplicateaccountnumber
+                                from duplicateaccountnumberunit in duplicateaccountnumber.DefaultIfEmpty()
+                                select new
+                                {
+                                    account,
+                                    ErrorMesage =
+                                    (!ReferenceEquals(duplicateaccountnumberunit, null) ? duplicateaccountnumberunit.ErrorMesage : "") +
+                                    (!ReferenceEquals(duplicatecaptionaccountunit, null) ? duplicatecaptionaccountunit.ErrorMesage : "")
+
+                                }).ToList();
+
+            var errorAccounts = accountUnits.Where(u => u.ErrorMesage.Trim().Length > 0).ToList();
+
+
+            foreach (var account in errorAccounts)
+            {
+                var accountdto = account.account.MapTo<AccountUnit>().MapTo<AccountUnitDto>();
+                accountdto.ErrorMessage = account.ErrorMesage.TrimEnd(',').TrimStart(',');
+                accountunitDtoList.Add(accountdto);
+            }
+            return accountunitDtoList;
+        }
     }
 }

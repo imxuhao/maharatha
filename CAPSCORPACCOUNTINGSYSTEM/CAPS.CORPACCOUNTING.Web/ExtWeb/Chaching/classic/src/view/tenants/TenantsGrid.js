@@ -52,7 +52,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
     isEditable:true,
     editingMode: 'row',
     createNewMode: 'popup',
-    forceFit: true,
+    //forceFit: true,
     columnLines: true,
     multiColumnSort: true,
     layout: {

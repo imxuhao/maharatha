@@ -57,21 +57,23 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
     },
     createNewMode: 'popup',
     isSubMenuItemTab: false,
-    forceFit : true,
+    //forceFit : true,
     columns: [{
         xtype: 'gridcolumn',
         text: app.localize('OrganizationId'),
         hidden: true,
         hideable: false,
         dataIndex: 'id',
-        width: '15%'
+        //width: '15%'
+        flex: 1
     },
     {
         xtype: 'gridcolumn',
         text: app.localize('OrganizationName'),
         hideable: false,
         dataIndex: 'displayName',
-        width: '15%',
+        //width: '15%',
+        flex: 1,
         filterField: {
             xtype: 'textfield',
             width: '100%'
@@ -85,7 +87,8 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
           dataIndex: 'serverName',
           stateId: 'serverName',
           sortable: false,
-          width: '35%',
+          //width: '35%',
+          flex: 1,
           groupable: true
       },
         {
@@ -94,7 +97,8 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
             dataIndex: 'databaseName',
             stateId: 'databaseName',
             sortable: false,
-            width: '15%',
+            //width: '15%',
+            flex: 1,
             groupable: true
         },
     {
@@ -103,7 +107,8 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
         dataIndex: 'lastModificationTime',
         sortable: true,
         groupable: true,
-        width: '15%',
+        //width: '15%',
+        flex: 1,
         renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer
     },
     {
@@ -112,7 +117,8 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
         dataIndex: 'creationTime',
         sortable: true,
         groupable: true,
-        width: '15%',
+        //width: '15%',
+        flex: 1,
         renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer
     }
     ]

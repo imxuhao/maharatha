@@ -63,7 +63,7 @@ Ext.define('Chaching.view.financials.fiscalperiod.FiscalPeriodGrid', {
         iconCls: 'fa fa-th'
     },
     createNewMode: 'tab',
-    forceFit: true,
+    //forceFit: true,
     isSubMenuItemTab: true,
     //listeners: {
     //    cellclick: 'onProjectsCellClick'

@@ -35,7 +35,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectCOAsGrid',{
           routeName: 'coa.create',
           iconAlign: 'left'
       }],
-    forceFit: true,
+    //forceFit: true,
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,

@@ -57,7 +57,7 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
     columnLines: true,
     columndata:null,
     multiColumnSort: true,
-    forceFit:true,
+    //forceFit:true,
     editWndTitleConfig: {
         title: app.localize('EditLanguage'),
         iconCls: 'fa fa-pencil'
@@ -76,7 +76,8 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
             text: app.localize('Name'),
             dataIndex: 'displayName',           
             sortable: true,
-            width: '32%',
+            //width: '32%',
+            flex: 1,
             groupable: true,
             renderer: Chaching.utilities.ChachingRenderers.languageIconRenderer
         }, {
@@ -85,7 +86,8 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
             dataIndex: 'name',
             sortable: true,
             groupable: true,
-            width: '30%'
+            //width: '30%'
+            flex: 1
         },
         {
             xtype: 'gridcolumn',
@@ -94,7 +96,8 @@ Ext.define('Chaching.view.languages.LanguagesGrid',{
             dataIndex: 'creationTime',
             sortable: true,
             groupable: true,
-            width: '30%',
+            //width: '30%',
+            flex: 1,
             renderer: Chaching.utilities.ChachingRenderers.renderDateOnly
         }
     ]

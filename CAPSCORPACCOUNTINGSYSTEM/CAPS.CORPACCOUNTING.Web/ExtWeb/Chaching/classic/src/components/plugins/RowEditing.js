@@ -118,12 +118,23 @@ Ext.define('Chaching.components.plugins.RowEditing', {
                         var field = formFields.items[i];
                         if (field.xtype === "combo" || field.xtype === "combobox" || field.xtype === "chachingcombobox" || field.xtype === "chachingcombo") {
                             var editorStore = field.getStore();
+                            if (editorStore.storeId === "ext-empty-store" && field.isViewmodelStore) {
+                                var bindName = field.getBind().store.stub.name,
+                                    viewModel = me.grid.getViewModel();
+                                editorStore = viewModel.getStore(bindName);
+                                field.setStore(editorStore);
+                            }
                             if (editorStore && !editorStore.isDataLoaded) {
                                 editorStore.field = field;
                                 editorStore.load({
                                     callback: function (records, operation, success) {
-                                        this.field.setValue(record.get(this.field.valueField));
-                                        this.field.setRawValue(record.get(this.field.displayField));
+                                        try {
+                                            var storeCombo = this.field;
+                                            storeCombo.setValue(record.get(storeCombo.valueField));
+                                            storeCombo.setRawValue(record.get(storeCombo.displayField));
+                                        } catch (e) {
+                                            console.log(e);
+                                        }
                                     }
                                 });
                                 editorStore.isDataLoaded = true;

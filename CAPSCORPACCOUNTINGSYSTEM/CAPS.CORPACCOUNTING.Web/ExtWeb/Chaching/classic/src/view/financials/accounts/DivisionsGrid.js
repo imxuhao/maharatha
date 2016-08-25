@@ -39,6 +39,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
     requireMultiSearch: true,
     requireMultisort: true,
     isEditable: true,
+    forceFit:true,
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
@@ -63,7 +64,8 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
              dataIndex: 'caption',
              sortable: true,
              groupable: true,
-             width: '80%',
+             flex: 1,
+             //width: '80%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -77,7 +79,8 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
              dataIndex: 'isActive',             
              sortable: true,
              groupable: true,
-             width: '10%',
+             flex: 1,
+             //width: '10%',
              hidden: false,
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {

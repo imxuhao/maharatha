@@ -29,21 +29,31 @@ Ext.define('Chaching.view.common.grid.ChachingTransactionDetailGridController', 
         if (record) {
             var accountingItemId = record.get('accountingItemId');
             if (accountingItemId > 0 && me.allowDetailRowDelete(record)) {
-                record.set('id', accountingItemId);
-                var operation = Ext.data.Operation({
-                    params: {id:accountingItemId},
-                    controller: me,
-                    action: 'destroy',
-                    records: [record],
-                    callback: me.onDetailDeleteOperationCompleteCallBack
-                });
-                detailStore.erase(operation);
+                abp.message.confirm(
+               app.localize('DeleteWarningMessage'),
+               function (isConfirmed) {
+                   if (isConfirmed) {
+                       record.set('id', accountingItemId);
+                       var operation = Ext.data.Operation({
+                           params: { id: accountingItemId },
+                           controller: me,
+                           action: 'destroy',
+                           records: [record],
+                           callback: me.onDetailDeleteOperationCompleteCallBack
+                       });
+                       detailStore.erase(operation);
+                   }
+               });
+               
             }
-            detailStore.remove(record);
         }
     },
-    onDetailDeleteOperationCompleteCallBack:function(records, operation, success) {
+    onDetailDeleteOperationCompleteCallBack: function (records, operation, success) {
+        var controller = operation.controller,
+            view = controller.getView(),
+            detailStore = view.getStore();
         if (success) {
+            detailStore.remove(records[0]);
             abp.notify.success('Operation completed successfully.', 'Success');
         } else {
             var response = Ext.decode(operation.getResponse().responseText);

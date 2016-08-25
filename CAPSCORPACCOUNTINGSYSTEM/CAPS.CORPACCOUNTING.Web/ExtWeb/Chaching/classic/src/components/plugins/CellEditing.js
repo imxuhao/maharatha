@@ -180,6 +180,12 @@ Ext.define('Chaching.components.plugins.CellEditing', {
                             storeProxy.setExtraParam(param.paramName, record.get(param.paramName));
                         }
                     }
+                    if (editorStore.storeId === "ext-empty-store" && editor.field.isViewmodelStore) {
+                        var bindName = editor.field.getBind().store.stub.name,
+                                   viewModel = me.grid.getViewModel();
+                        editorStore = viewModel.getStore(bindName);
+                        editor.field.setStore(editorStore);
+                    }
                     if (editorStore && !editorStore.isDataLoaded) {
                         editorStore.load({
                             callback: function(records, operation, success) {

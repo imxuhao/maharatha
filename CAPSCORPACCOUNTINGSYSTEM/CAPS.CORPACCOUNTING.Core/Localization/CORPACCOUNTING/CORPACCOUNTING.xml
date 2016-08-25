@@ -1056,7 +1056,7 @@
     <text name="ChargeDate" value="Charge date" />
     <text name="DateClose" value="Date close" />
     <text name="TenantCreationWarningMessage" value="You can not change tenant group for this tenant in future. Do you want to save this tenant in tenant group?" />
-    <text name="DeleteWarningMessage" value="You want to delete." />
+    <text name="DeleteWarningMessage" value="Do you really want to delete this record?." />
     <text name="TenantInformationMessage" value="Please select user to login as this tenant." />
     <text name="InformationMessage" value="Information" />
     <text name="LinkCompany" value="Link Company" />
@@ -1206,6 +1206,6 @@
     <text name="InvalidDataUploaded" value="Please upload valid file. For error details please see message column." />
     
     <text name="UploadFailedMessage" value="Uploaded data contains some invalid records. Please correct the data in those records and re-try to upload."/>
-
+    <text name="DragDropEmptyMessage" value="You can simply Drag &amp; Drop multiple .xls or .xlsx file(s) here from your computer to import."/>
   </texts>
 </localizationDictionary>

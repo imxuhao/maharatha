@@ -22,5 +22,17 @@ Ext.define('Chaching.view.imports.ImportsView',{
         me.items = [form];
 
         me.callParent(arguments);
+    },
+    listeners: {
+        resize:function(wnd, width, height,oldHeight,newHeight) {
+            var form = wnd.down('form'),
+                grid = form.down('gridpanel');
+
+            if (grid) {
+                grid.setHeight(form.getHeight() - 120);
+                form.updateLayout();
+            }
+
+        }
     }
 });

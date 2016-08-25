@@ -32,7 +32,7 @@
           iconAlign: 'left'
       }],
     importConfig: {
-        entity : 'FinancialAccounts',
+        entity: app.localize('FinancialAccounts'),
         isRequireImport: true,
         importStoreClass: 'imports.AccountsImportStore',
         targetGrid: null,
@@ -45,6 +45,7 @@
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
+    forceFit:true,
     editWndTitleConfig: {
         title: app.localize('EditAccount'),
         iconCls: 'fa fa-pencil'
@@ -66,7 +67,8 @@
              dataIndex: 'accountNumber',
              sortable: true,
              groupable: true,
-             width: '10%',
+             //width: '10%',
+             flex:1,
              filterField: {
                  xtype: 'textfield',
                  width: '15%',
@@ -80,7 +82,8 @@
              dataIndex: 'caption',
              sortable: true,
              groupable: true,
-             width: '10%',
+             //width: '10%',
+             flex: 1,
              filterField: {
                  xtype: 'textfield',
                  width: '100%',
@@ -95,7 +98,8 @@
              itemId: 'typeOfAccountId',
              sortable: true,
              groupable: true,
-             width: '8%',
+             //width: '8%',
+             flex: 1,
              filterField: {
                  xtype: 'combobox',
                  queryMode : 'local',
@@ -133,7 +137,8 @@
              dataIndex: 'typeofConsolidation',
              sortable: true,
              groupable: true,
-             width: '10%',
+             //width: '10%',
+             flex: 1,
              filterField: {
                  xtype: 'combobox',
                  valueField: 'typeofConsolidationId',
@@ -147,6 +152,17 @@
                  bind: {
                      store: '{typeofConsolidationList}'
                  }
+             },editor: {
+                 xtype: 'combobox',
+                 valueField: 'typeofConsolidationId',
+                 displayField: 'typeofConsolidation',
+                 queryMode: 'local',
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
+                 forceSelection: true,
+                 bind: {
+                     store: '{typeofConsolidationList}'
+                 }
              }
          },
          {
@@ -155,7 +171,8 @@
              dataIndex: 'isEnterable',
              sortable: true,
              groupable: true,
-             width: '8%',
+             //width: '8%',
+             flex: 1,
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -178,7 +195,8 @@
              dataIndex: 'isRollupAccount',
              sortable: true,
              groupable: true,
-             width: '8%',
+             flex: 1,
+             //width: '8%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -201,7 +219,8 @@
              dataIndex: 'isElimination',
              sortable: true,
              groupable: true,
-             width: '8%',
+             flex: 1,
+             //width: '8%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -224,7 +243,8 @@
              itemId: 'typeOfCurrencyId',
              sortable: true,
              groupable: true,
-             width: '8%',
+             flex: 1,
+             //width: '8%',
              filterField: {
                  xtype: 'combobox',
                  valueField: 'typeOfCurrencyId',
@@ -237,6 +257,17 @@
                  bind: {
                      store: '{typeOfCurrencyList}'
                  }
+             },editor: {
+                 xtype: 'combobox',
+                 valueField: 'typeOfCurrencyId',
+                 displayField: 'typeOfCurrency',
+                 queryMode: 'local',
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
+                 forceSelection: true,
+                 bind: {
+                     store: '{typeOfCurrencyList}'
+                 }
              }
          }
           , {
@@ -245,11 +276,27 @@
               dataIndex: 'typeOfCurrencyRate',
               sortable: true,
               groupable: true,
-              width: '8%',
+              flex: 1,
+              //width: '8%',
               filterField: {
                   xtype: 'combobox',
                   valueField: 'typeOfCurrencyRateId',
                   displayField: 'typeOfCurrencyRate',
+                  loadStoreOnCreate: true,
+                  isViewmodelStore: true,
+                  forceSelection: true,
+                  searchProperty: 'typeOfCurrencyRateId',
+                  bind: {
+                      store: '{typeOfCurrencyRateList}'
+                  }
+              },editor: {
+                  xtype: 'combobox',
+                  valueField: 'typeOfCurrencyRateId',
+                  displayField: 'typeOfCurrencyRate',
+                  loadStoreOnCreate: true,
+                  isViewmodelStore: true,
+                  forceSelection: true,
+                  searchProperty: 'typeOfCurrencyRateId',
                   bind: {
                       store: '{typeOfCurrencyRateList}'
                   }
@@ -262,7 +309,8 @@
              dataIndex: 'isAccountRevalued',
              sortable: true,
              groupable: true,
-             width: '8%',
+             flex: 1,
+             //width: '8%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -283,13 +331,14 @@
              dataIndex: 'linkAccount',
              sortable: true,
              groupable: true,
-           
-             width: '8%',
+             flex: 1,
+             //width: '8%',
              filterField: {
                  xtype: 'combobox',
                  itemId: 'linkAccountId',
                  valueField: 'linkAccountId',
                  displayField: 'linkAccount',
+                 isViewmodelStore: true,
                  typeAhead: true,
                  queryMode: 'remote',
                  forceSelection: true,
@@ -313,6 +362,7 @@
                  itemId: 'linkAccountId',
                  valueField: 'linkAccountId',
                  displayField: 'linkAccount',
+                 isViewmodelStore: true,
                  queryMode: 'remote',
                  forceSelection: true,
                  bind: {

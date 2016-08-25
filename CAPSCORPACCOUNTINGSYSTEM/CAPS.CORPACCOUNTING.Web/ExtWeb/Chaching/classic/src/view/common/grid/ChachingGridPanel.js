@@ -247,7 +247,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             var importBtn = {
                 xtype: 'splitbutton',
                 ui: 'actionButton',
-                iconCls: 'fa fa-archive',
+                iconCls: 'fa fa-upload',
                 iconAlign: 'left',
                // text: app.localize("Import").toUpperCase(),
                 tooltip: app.localize('Import'),
@@ -708,14 +708,45 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             xtype: 'gridcolumn',
             text: app.localize('Message'),
             dataIndex: 'errorMessage',
+            hideable: false,
+            movable: false,
+            sortable: false,
+            groupable: false,
+            menuDisabled: true,
             renderer: Chaching.utilities.ChachingRenderers.errorMessageColumnRenderer,
             flex: 1
         };
+        var rowNumbererColumn = {
+            xtype: 'rownumberer',
+            name: 'RowNumber',
+            maxWidth: 100,
+            minWidth: 30
+        };
+        newColumns.push(rowNumbererColumn);
         newColumns.push(errorMessageColumn);
 
+        var deleteColumn= {
+            xtype: 'actioncolumn',
+            name: 'Delete',
+            dataIndex: 'Delete',
+            scale: 'small',
+            iconCls: 'deleteCls',
+            tooltip: app.localize('Delete'),
+            flex: 1,
+            maxWidth:30,
+            minWidth:30,
+            hideable: false,
+            movable: false,
+            resizable: false,
+            sortable: false,
+            groupable: false,
+            menuDisabled: true,
+            handler: 'onImportedDeleteClicked'
+        }
         for (var i = 0; i < columns.length; i++) {
             newColumns.push(columns[i]);
         }
+        newColumns.push(deleteColumn);
         return newColumns;
     }
 

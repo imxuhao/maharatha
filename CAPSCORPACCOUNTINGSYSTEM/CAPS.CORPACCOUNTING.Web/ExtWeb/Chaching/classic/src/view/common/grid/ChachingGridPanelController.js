@@ -64,13 +64,30 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             }
         });
     },
-
+    onImportedDeleteClicked: function(grid, rowIndex, colIndex) {
+        var me = this,
+            view = me.getView(),
+            detailStore = view.getStore();
+        var record = detailStore.getAt(rowIndex);
+        if (record) {
+            abp.message.confirm(
+                app.localize('DeleteWarningMessage'),
+                function(isConfirmed) {
+                    if (isConfirmed) {
+                        detailStore.remove(record);
+                    }
+                });
+        }
+    },
     onImportTemplateFileClick: function (menu, item, e, eOpts) {
         var me = this,
-        view = me.getView(),
-        importConfig = view.importConfig,
-        importView = Ext.create('Chaching.view.imports.ImportsView'),
-        importFormController = importView.down('form').getController();
+            view = me.getView(),
+            importConfig = view.importConfig,
+            importView = Ext.create('Chaching.view.imports.ImportsView',
+            {
+                title: app.localize('Import')+' '+importConfig.entity
+            });
+        var importFormController = importView.down('form').getController();
         if (!importConfig.targetGrid)
             importConfig.targetGrid = view.xtype;
         importFormController.importConfig = importConfig;
@@ -96,8 +113,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 isImportDataGrid:true,
                 editingMode: 'cell',
                 showPagingToolbar:false,
-                height: form.getHeight() - 125,
-                emptyText: 'Drag & Drop your .xls or .xlsx files here.',
+                height: form.getHeight() - 120,
+                emptyText: app.localize('DragDropEmptyMessage'),
                 viewConfig: {
                     deferEmptyText:false
                 },
@@ -110,6 +127,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             });
             if (placeHolder) {
                 placeHolder.add(targetGrid);
+                form.updateLayout();
             }
         }
     },
@@ -339,7 +357,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
            );
     },
     onDeleteOperationCompleteCallBack: function (records, operation, success) {
+        var controller = operation.controller,
+           view = controller.getView(),
+           detailStore = view.getStore();
         if (success) {
+            detailStore.remove(records[0]);
             abp.notify.success('Operation completed successfully.', 'Success');
         } else {
             var response = Ext.decode(operation.getResponse().responseText);

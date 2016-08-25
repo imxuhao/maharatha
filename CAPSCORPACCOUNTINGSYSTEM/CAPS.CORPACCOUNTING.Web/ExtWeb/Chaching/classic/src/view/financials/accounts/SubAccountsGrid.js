@@ -40,7 +40,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
     requireMultisort: true,
     isEditable: true,
     editingMode: 'row',
-    //forceFit: true,
+    forceFit: true,
     columnLines: true,
     multiColumnSort: true,
     editWndTitleConfig: {

@@ -26,10 +26,17 @@ namespace CAPS.CORPACCOUNTING
 
         private static void CreateMappingsInternal()
         {
-            Mapper.CreateMap<User, UserEditDto>()
-                .ForMember(dto => dto.Password, options => options.Ignore())
+            //Mapper.Configuration.
+            //Mapper.CreateMap<User, UserEditDto>()
+            //    .ForMember(dto => dto.Password, options => options.Ignore())
+            //    .ReverseMap()
+            //    .ForMember(user => user.Password, options => options.Ignore());
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<User, UserEditDto>().ForMember(dto => dto.Password, options => options.Ignore())
                 .ReverseMap()
-                .ForMember(user => user.Password, options => options.Ignore());
+                .ForMember(user => user.Password, options => options.Ignore()); ;
+            });
         }
     }
 }

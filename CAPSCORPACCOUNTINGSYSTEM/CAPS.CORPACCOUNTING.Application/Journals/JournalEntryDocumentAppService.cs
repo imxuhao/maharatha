@@ -411,7 +411,7 @@ namespace CAPS.CORPACCOUNTING.Journals
             {
                 JournalCreditEntryDetailUnitDto journalDetail = new JournalCreditEntryDetailUnitDto();
 
-                Mapper.CreateMap<JournalCreditEntryDetailUnitDto, JournalCreditEntryDetailUnitDto>();
+                //Mapper.CreateMap<JournalCreditEntryDetailUnitDto, JournalCreditEntryDetailUnitDto>();
                 Mapper.Map(journalEntryDocDetailList[i], journalDetail);
 
                 switch (Math.Sign(journalEntryDocDetailList[i].Amount.Value))

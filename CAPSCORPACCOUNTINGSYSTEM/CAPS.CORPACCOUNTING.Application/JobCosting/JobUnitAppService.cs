@@ -328,8 +328,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             if (input.Value)
             {
                 var jobitem = await _jobUnitRepository.GetAsync(input.Id);
-                Mapper.CreateMap<JobUnit, JobCommercialUnitDto>()
-                    .ForMember(u => u.JobId, ap => ap.MapFrom(src => src.Id));
+                //Mapper.CreateMap<JobUnit, JobCommercialUnitDto>()
+                //    .ForMember(u => u.JobId, ap => ap.MapFrom(src => src.Id));
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<JobUnit, JobCommercialUnitDto>().ForMember(u => u.JobId, ap => ap.MapFrom(src => src.Id));
+                });
 
                 JobCommercialUnitDto result = new JobCommercialUnitDto();
                 Mapper.Map(jobitem, result);

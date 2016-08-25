@@ -6,6 +6,7 @@ using Abp.Domain.Uow;
 using Abp.AutoMapper;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
+using AutoMapper;
 using CAPS.CORPACCOUNTING.Masters.Dto;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
@@ -166,7 +167,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     }
                     else
                     {
-                        AutoMapper.Mapper.CreateMap<UpdateJobLocationInput, CreateJobLocationInput>();
+                       // AutoMapper.Mapper.CreateMap<UpdateJobLocationInput, CreateJobLocationInput>();
+                        var config = new MapperConfiguration(cfg => {
+                            cfg.CreateMap<UpdateJobLocationInput, CreateJobLocationInput>();
+                        });
                         await _jobLocationAppService.CreateJobLocationUnit(AutoMapper.Mapper.Map<UpdateJobLocationInput, CreateJobLocationInput>(location));
                         await CurrentUnitOfWork.SaveChangesAsync();
                     }
@@ -185,7 +189,10 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                     }
                     else
                     {
-                        AutoMapper.Mapper.CreateMap<UpdateJobPORangeAllocationInput, CreateJobPORangeAllocationInput>();
+                       // AutoMapper.Mapper.CreateMap<UpdateJobPORangeAllocationInput, CreateJobPORangeAllocationInput>();
+                        //var config = new MapperConfiguration(cfg => {
+                        //    cfg.CreateMap<UpdateJobPORangeAllocationInput, CreateJobPORangeAllocationInput>();
+                        //});
                         await _poRangeAllocationAppService.CreateJobPORangeAllocationUnit(AutoMapper.Mapper.Map<UpdateJobPORangeAllocationInput, CreateJobPORangeAllocationInput>(poallocations));
                         await CurrentUnitOfWork.SaveChangesAsync();
                     }

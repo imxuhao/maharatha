@@ -17,6 +17,8 @@ using CAPS.CORPACCOUNTING.BackgroundJobs;
 using CAPS.CORPACCOUNTING.Configuration;
 using CAPS.CORPACCOUNTING.Debugging;
 using CAPS.CORPACCOUNTING.Features;
+using CAPS.CORPACCOUNTING.Journals;
+using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Notifications;
 
@@ -33,9 +35,9 @@ namespace CAPS.CORPACCOUNTING
             Configuration.Auditing.IsEnabledForAnonymousUsers = true;
 
             //Declare entity types
-            Configuration.Modules.Zero().EntityTypes.Tenant = typeof (Tenant);
-            Configuration.Modules.Zero().EntityTypes.Role = typeof (Role);
-            Configuration.Modules.Zero().EntityTypes.User = typeof (User);
+            Configuration.Modules.Zero().EntityTypes.Tenant = typeof(Tenant);
+            Configuration.Modules.Zero().EntityTypes.Role = typeof(Role);
+            Configuration.Modules.Zero().EntityTypes.User = typeof(User);
 
             //Add/remove localization sources
             Configuration.Localization.Sources.Add(
@@ -62,6 +64,19 @@ namespace CAPS.CORPACCOUNTING
 
             //Enable LDAP authentication (It can be enabled only if MultiTenancy is disabled!)
             //Configuration.Modules.ZeroLdap().Enable(typeof(AppLdapAuthenticationSource));
+
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(cfg =>
+            {
+                //Add mappings. Example:
+                //configuration.CreateMap<MySourceClass, MyDestClass>();
+                cfg.CreateMap<CoaUnit, CoaUnit>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<EmployeeUnit, EmployeeUnit>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<CustomerUnit, CustomerUnit>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<Role, Role>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<VendorUnit, VendorUnit>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<JournalEntryDocumentUnit, JournalEntryDocumentUnit>().ForMember(dto => dto.Id, options => options.Ignore());
+                cfg.CreateMissingTypeMaps =true;
+            });
 
             //Configure roles
             AppRoleConfig.Configure(Configuration.Modules.Zero().RoleManagement);

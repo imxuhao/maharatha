@@ -53,8 +53,11 @@ namespace CAPS.CORPACCOUNTING.Banking.Dto
         public async Task UpdateBatchUnit(UpdateBatchUnitInput input)
         {
             var batchUnit = await _batchUnitRepository.GetAsync(input.BatchId);
-            Mapper.CreateMap<UpdateBatchUnitInput, BatchUnit>()
-                          .ForMember(u => u.Id, ap => ap.MapFrom(src => src.BatchId));
+            //Mapper.CreateMap<UpdateBatchUnitInput, BatchUnit>()
+            //              .ForMember(u => u.Id, ap => ap.MapFrom(src => src.BatchId));
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UpdateBatchUnitInput, BatchUnit>();
+            });
             Mapper.Map(input, batchUnit);
             await _batchUnitManager.UpdateAsync(batchUnit);
             await CurrentUnitOfWork.SaveChangesAsync();

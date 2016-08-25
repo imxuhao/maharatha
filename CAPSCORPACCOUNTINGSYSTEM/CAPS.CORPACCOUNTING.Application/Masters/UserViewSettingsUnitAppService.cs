@@ -93,8 +93,11 @@ namespace CAPS.CORPACCOUNTING.Masters
                         await CurrentUnitOfWork.SaveChangesAsync();
                     }
                 }
-                Mapper.CreateMap<UpdateUserViewSettingsUnitInput, UserViewSettingsUnit>()
-                    .ForMember(u => u.Id, ap => ap.MapFrom(src => src.UserViewId));
+                //Mapper.CreateMap<UpdateUserViewSettingsUnitInput, UserViewSettingsUnit>()
+                //    .ForMember(u => u.Id, ap => ap.MapFrom(src => src.UserViewId));
+                //var config = new MapperConfiguration(cfg => {
+                //    cfg.CreateMap<UpdateUserViewSettingsUnitInput, UserViewSettingsUnit>().ForMember(u => u.Id, ap => ap.MapFrom(src => src.UserViewId));
+                //});
                 Mapper.Map(input, UserViewSettings);
                 await _userViewSettingsUnitManager.UpdateAsync(UserViewSettings);
                 await CurrentUnitOfWork.SaveChangesAsync();

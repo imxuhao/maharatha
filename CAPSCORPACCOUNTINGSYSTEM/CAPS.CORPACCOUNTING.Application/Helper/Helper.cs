@@ -60,7 +60,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
         /// <returns></returns>
         public static SearchTypes MappingFilters(List<Filters> Filters)
         {
-            SearchTypes search = new SearchTypes();
+            var search = new SearchTypes();
             List<TextSearch> textSearch = null;
             List<NumericSearch> numericSearch = null;
             List<DateSearch> dateSearch = null;
@@ -69,62 +69,111 @@ namespace CAPS.CORPACCOUNTING.Helpers
             List<EnumSearch> enumSearch = null;
             foreach (var item in Filters)
             {
+                MapperConfiguration config;
                 switch (item.DataType)
                 {
                     case DataTypes.Text:
                         if (ReferenceEquals(textSearch, null))
                             textSearch = new List<TextSearch>();
-                        Mapper.CreateMap<Filters, TextSearch>()
-                        .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
-                        .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property));
+                        //Mapper.CreateMap<Filters, TextSearch>()
+                        //.ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
+                        //.ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property));
+                        //config = new MapperConfiguration(cfg =>
+                        //{
+                        //    cfg.CreateMap<Filters, TextSearch>().ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
+                        //        .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property));
+                        //});
                         textSearch.Add(item.MapTo(new TextSearch()));
+
                         break;
                     case DataTypes.Numeric:
                         if (ReferenceEquals(numericSearch, null))
                             numericSearch = new List<NumericSearch>();
-                        Mapper.CreateMap<Filters, NumericSearch>()
-                            .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
-                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
-                            .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : "")))
-                            .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
+                        //Mapper.CreateMap<Filters, NumericSearch>()
+                        //    .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
+                        //    .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        //    .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : "")))
+                        //    .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
+                        //config = new MapperConfiguration(cfg =>
+                        //{
+                        //    cfg.CreateMap<Filters, NumericSearch>().ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
+                        //    .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        //    .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : "")))
+                        //    .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
+
+                        //});
                         numericSearch.Add(item.MapTo(new NumericSearch()));
+
                         break;
                     case DataTypes.Date:
                         if (ReferenceEquals(dateSearch, null))
                             dateSearch = new List<DateSearch>();
-                        Mapper.CreateMap<Filters, DateSearch>()
-                           .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
-                           .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
-                           .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
-                           .ForMember(u => u.SearchTerm2, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm2) ? src.SearchTerm2 : null)));
+                        //Mapper.CreateMap<Filters, DateSearch>()
+                        //   .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
+                        //   .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        //   .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
+                        //   .ForMember(u => u.SearchTerm2, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm2) ? src.SearchTerm2 : null)));
+
+                        //config = new MapperConfiguration(cfg =>
+                        //{
+                        //    cfg.CreateMap<Filters, DateSearch>()
+                        //    .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
+                        //   .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        //   .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
+                        //   .ForMember(u => u.SearchTerm2, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm2) ? src.SearchTerm2 : null)));
+                        //});
                         dateSearch.Add(item.MapTo(new DateSearch()));
+
                         break;
                     case DataTypes.Bool:
                         if (ReferenceEquals(booleanSearch, null))
                             booleanSearch = new List<BooleanSearch>();
-                        Mapper.CreateMap<Filters, BooleanSearch>()
-                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
-                         .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)));
+                        //Mapper.CreateMap<Filters, BooleanSearch>()
+                        //    .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        // .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)));
+                        //config = new MapperConfiguration(cfg =>
+                        //{
+                        //    cfg.CreateMap<Filters, BooleanSearch>()
+                        //    .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        // .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)));
+                        //});
                         booleanSearch.Add(item.MapTo(new BooleanSearch()));
                         break;
                     case DataTypes.Decimal:
                         if (ReferenceEquals(decimalSearch, null))
                             decimalSearch = new List<DecimalSearch>();
-                        Mapper.CreateMap<Filters, DecimalSearch>()
-                            .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
-                            .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
-                            .ForMember(u => u.SearchTerm2, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm2) ? src.SearchTerm2 : null)))
-                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
-                            .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : "")))
-                            .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
+                        //Mapper.CreateMap<Filters, DecimalSearch>()
+                        //    .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
+                        //    .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
+                        //    .ForMember(u => u.SearchTerm2, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm2) ? src.SearchTerm2 : null)))
+                        //    .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        //    .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : "")))
+                        //    .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
+
+                        //config = new MapperConfiguration(cfg =>
+                        //{
+                        //    cfg.CreateMap<Filters, DecimalSearch>()
+                        //    .ForMember(u => u.Comparator, ap => ap.MapFrom(src => src.Comparator))
+                        //    .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)))
+                        //    .ForMember(u => u.SearchTerm2, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm2) ? src.SearchTerm2 : null)))
+                        //    .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        //    .ForMember(u => u.SearchTerms, ap => ap.MapFrom(src => ((src.Comparator == 6) ? src.SearchTerm : "")))
+                        //    .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => ((src.Comparator == 6) ? null : src.SearchTerm)));
+                        //});
                         decimalSearch.Add(item.MapTo(new DecimalSearch()));
                         break;
                     case DataTypes.Enum:
                         if (ReferenceEquals(enumSearch, null))
                             enumSearch = new List<EnumSearch>();
-                        Mapper.CreateMap<Filters, EnumSearch>()
-                            .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
-                            .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)));
+                        //Mapper.CreateMap<Filters, EnumSearch>()
+                        //    .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        //    .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)));
+                        //config = new MapperConfiguration(cfg =>
+                        //{
+                        //    cfg.CreateMap<Filters, EnumSearch>()
+                        //     .ForMember(u => u.Property, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.Entity) ? (src.Entity + ".") : "") + src.Property))
+                        //    .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)));
+                        //});
                         enumSearch.Add(item.MapTo(new EnumSearch()));
                         break;
                     default:
@@ -184,11 +233,11 @@ namespace CAPS.CORPACCOUNTING.Helpers
             return query;
         }
 
-        public static DateTime GetClientDate(string date, object ClientTimeZoneoffset)
+        public static DateTime GetClientDate(string date, object clientTimeZoneoffset)
         {
-            if (ClientTimeZoneoffset != null)
+            if (clientTimeZoneoffset != null)
             {
-                string Temp = ClientTimeZoneoffset.ToString().Trim();
+                string Temp = clientTimeZoneoffset.ToString().Trim();
                 if (!Temp.Contains("+") && !Temp.Contains("-"))
                 {
                     Temp = Temp.Insert(0, "+");
@@ -282,7 +331,7 @@ namespace CAPS.CORPACCOUNTING.Helpers
             {
                 var splittedFilters = filters[i].SearchTerm.Split(';');
                 var newFilters = new List<Filters>();
-                if (splittedFilters.Count() > 0)
+                if (splittedFilters.Any())
                 {
                     var filterRanges = splittedFilters;
                     for (int j = 0; j < filterRanges.Count(); j++)
@@ -310,10 +359,10 @@ namespace CAPS.CORPACCOUNTING.Helpers
         /// <returns></returns>
         public static bool ConvertToBoolean(string flag)
         {
-            return flag.ToUpper() == "TRUE" || flag=="1";
+            return flag.ToUpper() == "TRUE" || flag == "1";
 
         }
 
-       
+
     }
 }

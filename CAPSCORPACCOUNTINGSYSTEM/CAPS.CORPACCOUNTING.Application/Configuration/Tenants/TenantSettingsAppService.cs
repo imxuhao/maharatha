@@ -49,7 +49,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
                 }
             };
 
-            if (!_multiTenancyConfig.IsEnabled || Clock.SupportsMultipleTimezone())
+            if (!_multiTenancyConfig.IsEnabled || Clock.SupportsMultipleTimezone)
             {
                 //General
                 settings.General = new GeneralSettingsEditDto();
@@ -58,7 +58,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
                     settings.General.WebSiteRootAddress = await SettingManager.GetSettingValueAsync(AppSettings.General.WebSiteRootAddress);
                 }
 
-                if (Clock.SupportsMultipleTimezone())
+                if (Clock.SupportsMultipleTimezone)
                 {
                     var timezone = await SettingManager.GetSettingValueForTenantAsync(TimingSettingNames.TimeZone, AbpSession.GetTenantId());
 
@@ -123,7 +123,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
             await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin, input.UserManagement.IsEmailConfirmationRequiredForLogin.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), AppSettings.UserManagement.UseCaptchaOnRegistration, input.UserManagement.UseCaptchaOnRegistration.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             
-            if (Clock.SupportsMultipleTimezone())
+            if (Clock.SupportsMultipleTimezone)
             {
                 if (input.General.Timezone.IsNullOrEmpty())
                 {
@@ -208,7 +208,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
             };
 
 
-            if (!_multiTenancyConfig.IsEnabled || Clock.SupportsMultipleTimezone())
+            if (!_multiTenancyConfig.IsEnabled || Clock.SupportsMultipleTimezone)
             {
                 //General
                 settings.General = new GeneralSettingsEditDto();
@@ -217,7 +217,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
                     settings.General.WebSiteRootAddress = await SettingManager.GetSettingValueAsync(AppSettings.General.WebSiteRootAddress);
                 }
 
-                if (Clock.SupportsMultipleTimezone())
+                if (Clock.SupportsMultipleTimezone)
                 {
                     var timezone = await SettingManager.GetSettingValueForTenantAsync(TimingSettingNames.TimeZone, AbpSession.GetTenantId());
 
@@ -305,7 +305,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Tenants
             await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), AppSettings.UserManagement.POAutoNumberingforProjects, input.CompanySettings.POAutoNumberingforProjects.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
             await SettingManager.ChangeSettingForTenantAsync(AbpSession.GetTenantId(), AppSettings.UserManagement.POAutoNumberingforDivisions, input.CompanySettings.POAutoNumberingforDivisions.ToString(CultureInfo.InvariantCulture).ToLower(CultureInfo.InvariantCulture));
 
-            if (Clock.SupportsMultipleTimezone())
+            if (Clock.SupportsMultipleTimezone)
             {
                 if (input.General.Timezone.IsNullOrEmpty())
                 {

@@ -5,6 +5,7 @@ using CAPS.CORPACCOUNTING.JobCosting.Dto;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.AutoMapper;
+using AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -60,7 +61,13 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public async Task<ARBillingTypeDto> UpdateARBillingTypeUnit(UpdateARBillingTypeUnitInput input)
         {
             var arBillingTypeUnit = await _arBillingTypeUnitUnitRepository.GetAsync(input.ARBillingTypeId);
-            AutoMapper.Mapper.CreateMap<UpdateARBillingTypeUnitInput, ARBillingTypeUnit>().ForMember(u => u.Id, ap => ap.MapFrom(src => src.ARBillingTypeId));
+            //AutoMapper.Mapper.CreateMap<UpdateARBillingTypeUnitInput, ARBillingTypeUnit>().ForMember(u => u.Id, ap => ap.MapFrom(src => src.ARBillingTypeId));
+            //Mapper.Initialize(cfg => {
+            //    cfg.CreateMap<UpdateARBillingTypeUnitInput, ARBillingTypeUnit>();
+            //});
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UpdateARBillingTypeUnitInput, ARBillingTypeUnit>();
+            });
             AutoMapper.Mapper.Map(input, arBillingTypeUnit);
             await _arBillingTypeUnitManager.UpdateAsync(arBillingTypeUnit);
             await CurrentUnitOfWork.SaveChangesAsync();

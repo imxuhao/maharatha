@@ -30,7 +30,7 @@
 
         <div id="SettingsTabPanel" class="tabbable-line">
             <ul class="nav nav-tabs ">
-                @if (!ViewBag.IsMultiTenancyEnabled || Clock.SupportsMultipleTimezone())
+                @if (!ViewBag.IsMultiTenancyEnabled || Clock.SupportsMultipleTimezone)
                 {
                     <li class="active">
                         <a href="#SettingsGeneralTab" data-toggle="tab" aria-expanded="true">
@@ -39,7 +39,7 @@
                     </li>
                 }
 
-                <li class="@((ViewBag.IsMultiTenancyEnabled && !Clock.SupportsMultipleTimezone()) ? "active" : "")">
+                <li class="@((ViewBag.IsMultiTenancyEnabled && !Clock.SupportsMultipleTimezone) ? "active" : "")">
                     <a href="#SettingsUserManagementTab" data-toggle="tab" aria-expanded="false">
                         @L("UserManagement")
                     </a>
@@ -57,7 +57,7 @@
 
             <div class="tab-content">
 
-                @if (!ViewBag.IsMultiTenancyEnabled || Clock.SupportsMultipleTimezone())
+                @if (!ViewBag.IsMultiTenancyEnabled || Clock.SupportsMultipleTimezone)
                 {
                     <div class="tab-pane active" id="SettingsGeneralTab">
                         <form id="GeneralSettingsForm">
@@ -70,7 +70,7 @@
                                 </div>
                             }
 
-                            @if (Clock.SupportsMultipleTimezone())
+                            @if (Clock.SupportsMultipleTimezone)
                             {
                                 <div class="form-group form-md-line-input form-md-floating-label no-hint">
                                     @Html.DropDownList("Timezone", Model.TimezoneItems.Select(i => i.ToSelectListItem()), new { @class = "form-control edited" })
@@ -85,7 +85,7 @@
                     </div>
                 }
 
-                <div class="tab-pane @((ViewBag.IsMultiTenancyEnabled && !Clock.SupportsMultipleTimezone()) ? "active" : "")" id="SettingsUserManagementTab">
+                <div class="tab-pane @((ViewBag.IsMultiTenancyEnabled && !Clock.SupportsMultipleTimezone) ? "active" : "")" id="SettingsUserManagementTab">
 
                     <form id="FormBasedRegistrationSettingsForm">
                         <h4>@L("FormBasedRegistration")</h4>

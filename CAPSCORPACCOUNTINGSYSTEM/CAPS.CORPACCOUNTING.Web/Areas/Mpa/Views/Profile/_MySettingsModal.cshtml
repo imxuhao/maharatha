@@ -30,7 +30,7 @@
                 <span class="help-block">@L("CanNotChangeAdminUserName")</span>
             }
         </div>
-        @if (Clock.SupportsMultipleTimezone())
+        @if (Clock.SupportsMultipleTimezone)
             {
             <div class="form-group form-md-line-input form-md-floating-label no-hint">
                 @Html.DropDownList("Timezone", Model.TimezoneItems.Select(i => i.ToSelectListItem()), new { @class = "form-control edited" })

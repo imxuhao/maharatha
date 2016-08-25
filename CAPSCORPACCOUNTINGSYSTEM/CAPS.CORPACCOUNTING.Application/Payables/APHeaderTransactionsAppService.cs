@@ -358,7 +358,10 @@ namespace CAPS.CORPACCOUNTING.Payables
             if (invoiceEntryDocumentDetail.PoAccountingItemId.HasValue && invoiceEntryDocumentDetail.PoAccountingItemId.Value > 0)
             {
                 var newInvoiceDetails = new InvoiceEntryDocumentDetailUnit();
-                Mapper.CreateMap<InvoiceEntryDocumentDetailUnit, InvoiceEntryDocumentDetailUnit>();
+                // Mapper.CreateMap<InvoiceEntryDocumentDetailUnit, InvoiceEntryDocumentDetailUnit>();
+                //var config = new MapperConfiguration(cfg => {
+                //    cfg.CreateMap<InvoiceEntryDocumentDetailUnit, InvoiceEntryDocumentDetailUnit>();
+                //});
                 invoiceEntryDocumentDetail.MapTo(newInvoiceDetails);
                 newInvoiceDetails.Id = invoiceEntryDocumentDetail.AccountingItemId;
                 await _purchaseOrderEntryDocumentAppService.PoProcessingByPayType(invoiceEntryDocumentDetailUnit, newInvoiceDetails);

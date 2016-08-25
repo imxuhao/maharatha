@@ -44,8 +44,11 @@ namespace CAPS.CORPACCOUNTING.Journals
                 JournalEntryDocumentUnit recurJournalDocument = new JournalEntryDocumentUnit();
                 var journalDocumentunit = _journalEntryDocumentUnitRepository.Get(journalId);
 
-                Mapper.CreateMap<JournalEntryDocumentUnit, JournalEntryDocumentUnit>()
-                    .ForMember(dto => dto.Id, options => options.Ignore());
+                //Mapper.CreateMap<JournalEntryDocumentUnit, JournalEntryDocumentUnit>()
+                //    .ForMember(dto => dto.Id, options => options.Ignore());
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<JournalEntryDocumentUnit, JournalEntryDocumentUnit>().ForMember(dto => dto.Id, options => options.Ignore());
+                });
                 Mapper.Map(journalDocumentunit, recurJournalDocument);
 
                 // Adding the Parent Reference

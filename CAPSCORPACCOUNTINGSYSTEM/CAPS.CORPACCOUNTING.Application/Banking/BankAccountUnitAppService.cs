@@ -146,7 +146,7 @@ namespace CAPS.CORPACCOUNTING.Banking
                         {
                             address.TypeofObjectId = TypeofObject.Bank;
                             address.ObjectId = input.BankAccountId;
-                            AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            //AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
                             await
                                 _addressAppService.CreateAddressUnit(
                                     AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));

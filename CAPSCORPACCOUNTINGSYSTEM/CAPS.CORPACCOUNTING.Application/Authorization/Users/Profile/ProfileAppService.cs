@@ -37,7 +37,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
             var user = await GetCurrentUserAsync();
             var userProfileEditDto = user.MapTo<CurrentUserProfileEditDto>();
 
-            if (Clock.SupportsMultipleTimezone())
+            if (Clock.SupportsMultipleTimezone)
             {
                 userProfileEditDto.Timezone = await SettingManager.GetSettingValueAsync(TimingSettingNames.TimeZone);
 
@@ -57,7 +57,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users.Profile
             input.MapTo(user);
             CheckErrors(await UserManager.UpdateAsync(user));
 
-            if(Clock.SupportsMultipleTimezone())
+            if(Clock.SupportsMultipleTimezone)
             {
                 if (input.Timezone.IsNullOrEmpty())
                 {

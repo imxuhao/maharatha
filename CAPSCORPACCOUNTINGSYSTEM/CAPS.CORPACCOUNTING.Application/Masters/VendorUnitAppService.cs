@@ -20,6 +20,7 @@ using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Runtime.Caching;
+using AutoMapper;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 
 namespace CAPS.CORPACCOUNTING.Masters
@@ -316,7 +317,10 @@ namespace CAPS.CORPACCOUNTING.Masters
                         {
                             address.TypeofObjectId = TypeofObject.Vendor;
                             address.ObjectId = input.VendorId;
-                            AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            //AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            //var config = new MapperConfiguration(cfg => {
+                            //    cfg.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            //});
                             await
                                 _addressAppService.CreateAddressUnit(
                                     AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));

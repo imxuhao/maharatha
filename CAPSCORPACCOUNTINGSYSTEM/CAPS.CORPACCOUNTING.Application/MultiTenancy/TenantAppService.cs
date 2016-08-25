@@ -292,7 +292,11 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                             {
                                 input.Address.TypeofObjectId = TypeofObject.Org;
                                 input.Address.ObjectId = input.TenantExtendedId;
-                                AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                               // AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                                //var config = new MapperConfiguration(cfg => {
+                                //    cfg.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                                //});
+
                                 var addr = await _addressAppService.CreateAddressUnit(
                                          AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(input.Address));
                                 companyLogo.AddressId = addr.AddressId;
@@ -320,7 +324,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                         {
                             input.Address.TypeofObjectId = TypeofObject.Org;
                             input.Address.ObjectId = id;
-                            AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            // AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            var config = new MapperConfiguration(cfg => {
+                                cfg.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            });
                             var addr = await _addressAppService.CreateAddressUnit(
                                     AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(input.Address));
                             companyLogo.AddressId = addr.AddressId;

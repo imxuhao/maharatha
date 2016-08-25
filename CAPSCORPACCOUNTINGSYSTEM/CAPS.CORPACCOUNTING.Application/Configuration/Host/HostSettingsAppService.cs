@@ -97,7 +97,7 @@ namespace CAPS.CORPACCOUNTING.Configuration.Host
             //RedisCacheFlag By Default Apllication Uses Redis Cache if we don't want to Use RedisCache we can set this setting as false
             await SettingManager.ChangeSettingForApplicationAsync(AppSettings.General.UseRedisCacheByDefault, input.General.UseRedisCacheByDefault.ToString());
 
-            if (Clock.SupportsMultipleTimezone())
+            if (Clock.SupportsMultipleTimezone)
             {
                 if (input.General.Timezone.IsNullOrEmpty())
                 {

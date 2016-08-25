@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq.Dynamic;
 using Abp.Linq.Extensions;
 using Abp.Authorization;
+using AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
 using CAPS.CORPACCOUNTING.GenericSearch.Dto;
 using CAPS.CORPACCOUNTING.Helpers;
@@ -214,7 +215,10 @@ namespace CAPS.CORPACCOUNTING.Masters
                         {
                             address.TypeofObjectId = TypeofObject.Customer;
                             address.ObjectId = input.CustomerId;
-                            AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            //AutoMapper.Mapper.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            //var config = new MapperConfiguration(cfg => {
+                            //    cfg.CreateMap<UpdateAddressUnitInput, CreateAddressUnitInput>();
+                            //});
                             await
                                 _addressAppService.CreateAddressUnit(
                                     AutoMapper.Mapper.Map<UpdateAddressUnitInput, CreateAddressUnitInput>(address));

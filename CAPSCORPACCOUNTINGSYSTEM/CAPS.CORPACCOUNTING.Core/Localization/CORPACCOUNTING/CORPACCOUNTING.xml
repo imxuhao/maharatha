@@ -399,6 +399,7 @@
     <text name="DownloadTemplateSuccessMessage" value="Download Template Successfully." />
     <text name="Template_File_Info" value="You can select only .xls/.xlsx file." />
     <text name="Template_FileType_Warn" value="You can select only .xls/.xlsx file. Please select another file." />
+    <text name="InvalidFileName" value="{0} is an invalid file selected."/>
     <text name="QuickEdit" value="Quick Edit" />
     <text name="TTenancyCodeName" value="Enter tenant code name" />
     <text name="TName" value="Enter name" />
@@ -1199,8 +1200,12 @@
     <text name="CustomerSnapshot" value="Customer Snapshot" />
     <text name="Agency/Customer" value="Agency/Customer" />
     <text name="AgencyPO#" value="Agency PO #" />
+    <text name="FileNotImported" value="Please import the file or drag and drop the file on below grid." />
+    <text name="MandatoryCellValue" value="{0} is required." />
+    <text name="DuplicateRecord" value="This is duplicate record." />
+    <text name="InvalidDataUploaded" value="Please upload valid file. For error details please see message column." />
     
-    
+    <text name="UploadFailedMessage" value="Uploaded data contains some invalid records. Please correct the data in those records and re-try to upload."/>
 
   </texts>
 </localizationDictionary>

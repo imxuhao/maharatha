@@ -6348,11 +6348,11 @@
             <param name="coaId"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.BulkAccountUploads(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Accounts.AccountUnitAppService.ValidateDuplicateRecords(System.Collections.Generic.List{CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountUnitInput})">
             <summary>
-            BulkAccount Import
+            Checking DuplicateRecords
             </summary>
-            <param name="accountList"></param>
+            <param name="accountsList"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Masters.CoaUnitAppService.GetCoaUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
@@ -9130,11 +9130,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.BulkAccountUploads(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
+        <member name="M:CAPS.CORPACCOUNTING.Masters.IAccountUnitAppService.BulkAccountInsert(CAPS.CORPACCOUNTING.Masters.Dto.CreateAccountListInput)">
             <summary>
-            BulkAccounts Upload
+            BulkInsert of Accounts
             </summary>
-            <param name="accountList"></param>
+            <param name="listAccountUnitDtos"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Masters.ICoaUnitAppService">

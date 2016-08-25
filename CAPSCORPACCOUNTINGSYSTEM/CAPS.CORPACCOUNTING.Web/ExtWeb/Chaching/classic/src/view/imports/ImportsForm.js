@@ -22,22 +22,18 @@ Ext.define('Chaching.view.imports.ImportsForm',{
             xtype: 'filefield',
             name: 'importFileField',
             clearOnSubmit: false,
-            anchor: '100%',
             width: '100%',
             allowBlank: false,
-            //regex: /([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/i,
             regex: /(.)+((\.xls)|(\.xlsx)|(\.csv)(\w)?)$/i,
             regexText: 'Only excel files are accepted',
-            buttonText: app.localize('SelectFile').toUpperCase()
-            //listeners: {
-            //    change: 'onFileChange'
-            //}
-
-        },
-        {
-            xtype: 'label',
-            cls: 'helpText',
-            text: app.localize('Template_File_Info'),
+            buttonText: app.localize('SelectFile').toUpperCase(),
+            emptyText: app.localize('Template_File_Info'),
+            listeners: {
+                change: 'onFileChange'
+            }
+        },{
+            xtype: 'panel',
+            itemId:'placeHolderPanel',
             width: '100%'
         }
     ],
@@ -49,7 +45,6 @@ Ext.define('Chaching.view.imports.ImportsForm',{
             iconAlign: 'left',
             ui: 'actionButton',
             itemId: 'uploadBtn',
-            formBind: true,
             handler: 'uploadTemplateFile'
         },
         {

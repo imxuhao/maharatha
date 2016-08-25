@@ -1,0 +1,23 @@
+{
+  "data": {
+    "created": "2016-08-23T20:04:18Z",
+    "email": "2Gears@localhost",
+    "expires": "2021-08-24T00:00:00Z",
+    "name": "2Gears",
+    "uuid": "760c3cdd-fbf0-4eda-8fe4-a572fe93d7be"
+  },
+  "publicKey": {
+    "algorithm": "RSA",
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtOWFO5hQ6bcfO0565sAOavy8z+JW78NkfyQku1NRp1RWFi10Y+3isaTVufCDlCIuC3TwWDd4m7DL40uPdBL06eJxbwBJYLVVavXjGYT7oP6Nl1u1YJIeQ0LY9HEIkJkXhziriaYChfMdVaG3u8QcbdCT4WT/i72TV0tg0CP4ibcD3IN4xx2BFi2cXVNQi+rb7EsIkLEnRr+VHdXFd4+OTzbb/g6MNYgAlKH2rYcqeEarP7MvPWHfAti+kZGtBGAlK22Q2P2qpzFphaF+gnvmCczo1VpqT/Nht33DjdFXvFmyouGfbFjJ8ADF1Ailo9i6BL8LJ/WH5eC+pD2qOGPEbQIDAQAB"
+  },
+  "signatures": [
+    {
+      "name": "2Gears",
+      "uuid": "760c3cdd-fbf0-4eda-8fe4-a572fe93d7be",
+      "created": "2016-08-23T20:04:20Z",
+      "algorithm": "SHA1withRSA",
+      "nonce": "3bOtL/w/ngg\u003d",
+      "signature": "UHCOOW9zdb8lLAN5izmxEFdt3fI2zqECE4Fz9I9/x4UpcONKoe/Vd3nCM/A37EfxRzx2DMrFlxkmL5Iwb890Lp7Lwb8/Zk9tuq4hfDhyMrmFgbIoialPWU8sZOW2hoyG1HKwNxKE6el3fi7zV9OZMpQmIQgR6OxhvK/3kzOG35daxRJ0zRqSRu059366aATVqxt2PB7OIs4KcBbqOQfvx/FHa8HGQ/X3mCW4XOiNRpvLR00QiRhF3F0cTC0/DiMqZF7Ms2lZ5b4/8/tG9LyR1w6PmM/d2MvqY3lYfmK3yddASRvqMatt9HbxXeJyr1cTJnp+h6fylBYFe0rWi4JOTw\u003d\u003d"
+    }
+  ]
+}

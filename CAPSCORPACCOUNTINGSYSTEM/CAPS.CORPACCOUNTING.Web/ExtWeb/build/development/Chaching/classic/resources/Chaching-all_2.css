@@ -9881,7 +9881,7 @@ body.x-ios.x-webview.x-portrait {
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:146 */
 .chaching-grid .x-grid-item-alt .x-grid-cell {
-    background-color: whitesmoke !important;
+    background-color: whitesmoke;
     color: black !important;
 }
 /* http://localhost:1841/Chaching/classic/sass/src/view/common/grid/ChachingGridPanel.scss:150 */

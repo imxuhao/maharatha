@@ -15,6 +15,7 @@ Ext.define('Chaching.Application', {
         'Ext.saki.grid.MultiSearch',
         'Ext.ux.grid.MultiSort',
         'Ext.saki.form.field.Icon',
+        'Gearbox.*',
         'Chaching.*'
     ],
     stores: [
@@ -118,7 +119,8 @@ Ext.define('Chaching.Application', {
         'users.AccountSecurityRightStore',
         'users.AccountSecurityLeftStore',
         'Chaching.store.imports.ErrorStore',
-        'receivables.invoices.AccountsReceivableStore'
+        'receivables.invoices.AccountsReceivableStore',
+        'imports.AccountsImportStore'
     ],
     //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

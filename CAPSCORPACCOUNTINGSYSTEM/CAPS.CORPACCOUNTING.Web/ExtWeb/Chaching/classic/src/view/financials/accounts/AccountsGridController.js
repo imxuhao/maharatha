@@ -47,5 +47,15 @@
         var linkAccountStore = viewModel.getStore('linkAccountListByCoaId');
         linkAccountStore.getProxy().setExtraParam('id', coaId);
         linkAccountStore.load();
-    }
+    },
+    doBeforeDataImportSaveOperation: function (data) {
+        var me = this,
+            view = me.getView(),
+            myStore = view.getStore(),
+            extraParam = myStore.getProxy().extraParams;
+        for (var i = 0; i < data.length; i++) {
+            data[i].chartOfAccountId = extraParam.coaId;
+        }
+        return data;
+    },
 });

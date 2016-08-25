@@ -69,13 +69,53 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         var me = this,
         view = me.getView(),
         importConfig = view.importConfig,
-        entityName = importConfig.entity,
         importView = Ext.create('Chaching.view.imports.ImportsView'),
         importFormController = importView.down('form').getController();
-        importFormController.entityName = entityName;
+        if (!importConfig.targetGrid)
+            importConfig.targetGrid = view.xtype;
+        importFormController.importConfig = importConfig;
         importFormController.parentController = me;
+        me.insertImportGrid(importConfig, importView);
     },
-
+    insertImportGrid:function(importConfig, importView) {
+        if (importConfig && importView) {
+            var form = importView.down('form'),
+                placeHolder = form.down('panel[itemId=placeHolderPanel]');
+            var targetGrid = Ext.widget({
+                xtype: importConfig.targetGrid,
+                store: Ext.create('Chaching.store.' + importConfig.importStoreClass),
+                requireActionColumn: false,
+                requireMultiSearch: false,
+                requireMultisort: false,
+                requireGrouping: false,
+                headerButtonsConfig: null,
+                requireExport: false,
+                importConfig: {
+                    isRequireImport:false
+                },
+                isImportDataGrid:true,
+                editingMode: 'cell',
+                showPagingToolbar:false,
+                height: form.getHeight() - 125,
+                emptyText: 'Drag & Drop your .xls or .xlsx files here.',
+                viewConfig: {
+                    deferEmptyText:false
+                },
+                listeners: {
+                    afterrender:function(grid) {
+                        var gridStore = grid.getStore();
+                        gridStore.bindDrop(grid);
+                    }
+                }
+            });
+            if (placeHolder) {
+                placeHolder.add(targetGrid);
+            }
+        }
+    },
+    doBeforeDataImportSaveOperation:function(data) {
+        return true;
+    },
     onGridItemsPerPageChange: function (combo, record, eOpts) {
         var me = this,
          pagingtoolbar = combo.up('pagingtoolbar'),

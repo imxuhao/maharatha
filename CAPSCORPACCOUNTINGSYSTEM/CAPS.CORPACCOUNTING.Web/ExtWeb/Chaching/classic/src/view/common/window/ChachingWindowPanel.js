@@ -27,14 +27,20 @@ Ext.define('Chaching.view.common.window.ChachingWindowPanel',{
     name: null,
     border: false,
     frame: false,
+    hideOnMaskTap:true,
     initComponent: function () {
         var me = this,
             controller = me.getController();
         me.callParent(arguments);
-        me.mon(Ext.getBody(), 'click', function (el, e) {
-            me.close(me.closeAction);
-        }, me, { delegate: '.x-mask' });
-
+        if (me.hideOnMaskTap) {
+            me.mon(Ext.getBody(),
+                'click',
+                function(el, e) {
+                    me.close(me.closeAction);
+                },
+                me,
+                { delegate: '.x-mask' });
+        }
         me.on('resize', controller.onWindowViewResize, me);
     }
 });

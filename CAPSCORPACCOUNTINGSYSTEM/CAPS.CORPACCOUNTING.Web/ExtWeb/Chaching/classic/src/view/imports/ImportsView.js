@@ -6,12 +6,13 @@ Ext.define('Chaching.view.imports.ImportsView',{
         'Chaching.view.imports.ImportsForm'
     ],
 
-    height: 250,
-    width: 400,
+    height: '95%',
+    width: '98%',
     layout: 'fit',
     title: app.localize("ImportTemplateFile"),
     iconCls: 'fa fa-file-archive-o',
     autoShow: true,
+    hideOnMaskTap:false,
     initComponent: function (config) {
         var me = this;
         var form = Ext.create('Chaching.view.imports.ImportsForm', {

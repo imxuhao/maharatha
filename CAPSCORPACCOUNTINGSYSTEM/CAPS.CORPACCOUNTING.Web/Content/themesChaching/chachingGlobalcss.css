@@ -419,3 +419,9 @@ h1, h2, h3, h4, h5, h6 {
 .x-form-field-date .x-form-date-trigger:before {
     content: "\f274" !important;
 }
+
+.errorMessageColumn {
+    background-color: #ec8686 !important;
+    color: black;
+    font-weight: 600;
+}

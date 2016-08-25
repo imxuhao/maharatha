@@ -89,7 +89,10 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
    */
     importConfig: {
         entity: '',
-        isRequireImport : false
+        isRequireImport: false,
+        importStoreClass: null,
+        targetGrid: null,
+        targetUrl: null
     },
     /**
     * @cfg {object} selModelConfig
@@ -179,7 +182,12 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
   * @cfg {boolean} isInViewMode
   * Set to true if need in view mode.
   */
-    isInViewMode:false,
+    isInViewMode: false,
+    /**
+ * @cfg {boolean} isInViewMode
+ * Set to true if need in view mode.
+ */
+    isImportDataGrid: false,
     initComponent: function () {
         var me = this,
             controller = me.getController(),
@@ -247,7 +255,13 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
                     ui: 'accounts',
                     items: [
                         { text: abp.localization.localize("DownloadTemplate").toUpperCase(), iconCls: 'fa fa-file-excel-o', itemId: 'downloadTemplate', handler : 'onDownloadTemplateClick' },
-                        { text: abp.localization.localize("ImportTemplateFile").toUpperCase(), iconCls: 'fa fa-file-archive-o', itemId: 'importTemplateFile', handler: 'onImportTemplateFileClick' }
+                        {
+                            text: abp.localization.localize("ImportTemplateFile").toUpperCase(),
+                            iconCls: 'fa fa-file-archive-o',
+                            itemId: 'importTemplateFile',
+                            handler: 'onImportTemplateFileClick',
+                            hidden: !me.modulePermissions.create
+                        }
                     ]
                 })
             };
@@ -385,7 +399,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             dockedItems.push(pagingToolBar);
         }
         
-        me.columns = me.applyGridViewSetting(gridColumns);
+        if (!me.isImportDataGrid)
+            me.columns = me.applyGridViewSetting(gridColumns);
+        else {
+            me.columns = me.getColumnsForImportDataGrid(gridColumns);
+        }
         //add editing plugin
         if (me.isEditable && (me.modulePermissions.edit)) {
             var editingModel;
@@ -683,6 +701,22 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
             defaultMenuItems.push(deleteMenuItem);
         }
         return defaultMenuItems;
+    },
+    getColumnsForImportDataGrid:function(columns) {
+        var newColumns = [];
+        var errorMessageColumn = {
+            xtype: 'gridcolumn',
+            text: app.localize('Message'),
+            dataIndex: 'errorMessage',
+            renderer: Chaching.utilities.ChachingRenderers.errorMessageColumnRenderer,
+            flex: 1
+        };
+        newColumns.push(errorMessageColumn);
+
+        for (var i = 0; i < columns.length; i++) {
+            newColumns.push(columns[i]);
+        }
+        return newColumns;
     }
 
 

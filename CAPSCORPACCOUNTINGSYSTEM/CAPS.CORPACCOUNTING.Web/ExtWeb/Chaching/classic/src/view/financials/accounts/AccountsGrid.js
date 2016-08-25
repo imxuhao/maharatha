@@ -33,7 +33,10 @@
       }],
     importConfig: {
         entity : 'FinancialAccounts',
-        isRequireImport : true
+        isRequireImport: true,
+        importStoreClass: 'imports.AccountsImportStore',
+        targetGrid: null,
+        targetUrl: abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert'
     },
     requireExport: true,
     requireMultiSearch: true,
@@ -104,6 +107,20 @@
                  displayField: 'typeOfAccount',
                  listConfig: {
                      minWidth:300
+                 },
+                 bind: {
+                     store: '{typeOfAccountList}'
+                 }
+             },editor: {
+                 xtype: 'combobox',
+                 queryMode: 'local',
+                 loadStoreOnCreate: true,
+                 isViewmodelStore: true,
+                 forceSelection: true,
+                 valueField: 'typeOfAccountId',
+                 displayField: 'typeOfAccount',
+                 listConfig: {
+                     minWidth: 300
                  },
                  bind: {
                      store: '{typeOfAccountList}'

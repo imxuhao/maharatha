@@ -1,0 +1,44 @@
+{
+  "name": "gearbox-import-export",
+  "namespace": "Gearbox",
+  "format": "1",
+  "version": "3.0.4",
+  "compatVersion": "3.0.0",
+  "creator": "2Gears",
+  "summary": "File import and export functionality for stores.",
+  "detailedDescription": "",
+  "type": "code",
+  "signatures": [
+    {
+      "name": "2Gears",
+      "uuid": "760c3cdd-fbf0-4eda-8fe4-a572fe93d7be",
+      "created": "2016-08-23T20:04:28Z",
+      "algorithm": "SHA1withRSA",
+      "nonce": "08KED+Wz8gs\u003d",
+      "signature": "ieKIEw4gjiU0HlIZfMCBwOQnGjBkTFsAHQiU4xpO0wFlEw5roitQw8r+CQRtyhnIYw/j5FsusKKyM59YzTch4WvOFlzZnTuFExaWZTU8qteqsFgSUnVxt+b+SjAtnYAclEUEX+k6cbRn8wrteHZ1mtD/7gySx3v4npqxXKnhZ/u3DJ9TGvEdnQzY23TXvNY4MJY04nL64Go8bXoTuGkXf1dr/5mcMc3EIa+3srWSXiQULBniNzizL3l95H8STPgXDd7e2IlcGPezheTHhZ3ocyscL8afVK/gi+u5/s8PkS8jgJrElCuCzY08kV97nV3m/xKNqVE+9nVMbvkEWUc/Mw\u003d\u003d"
+    }
+  ],
+  "js": [
+    {
+      "path": "lib/comma-separated-values/csv.min.js"
+    },
+    {
+      "path": "lib/filesaver/FileSaver.min.js"
+    },
+    {
+      "path": "lib/fuzzyset.js/lib/fuzzyset.js"
+    },
+    {
+      "path": "lib/js-xls/dist/xls.min.js"
+    },
+    {
+      "path": "lib/js-xlsx/dist/xlsx.full.min.js"
+    }
+  ],
+  "toolkit": "classic",
+  "output": "${package.dir}/build",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@atlassian.appointsolutions.com:7999/gb/gearbox-import-export.git"
+  }
+}

@@ -54,10 +54,11 @@
      *          "charts"
      *      ]
      */
-    "requires": [
-      "font-awesome",
-      "ux"
-    ],
+  "requires": [
+    "font-awesome",
+    "ux",
+    "gearbox-import-export"
+  ],
 
     /**
      * Fashion build configuration properties.

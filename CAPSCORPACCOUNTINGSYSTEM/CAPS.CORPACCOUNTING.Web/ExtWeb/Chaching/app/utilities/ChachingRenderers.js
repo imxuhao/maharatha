@@ -384,6 +384,12 @@
             isSplited = record.get('isAccountingItemSplit');
         if ((splitAccountingItemId > 0 && isSplited) || record.get('accountingItemId') === 0) return null;
         return '<div class="' + cls + '" role="button" tabIndex="0"></div>';
+    },
+    errorMessageColumnRenderer:function(value, cellValues, record, rowIndex, colIndex, store, view) {
+        if (value) {
+            cellValues.tdCls += ' errorMessageColumn';
+        }
+        return value;
     }
 
 });

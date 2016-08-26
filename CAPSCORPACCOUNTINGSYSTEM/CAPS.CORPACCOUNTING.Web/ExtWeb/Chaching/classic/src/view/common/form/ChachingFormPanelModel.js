@@ -433,7 +433,7 @@ Ext.define('Chaching.view.common.form.ChachingFormPanelModel', {
             }
         },
         getTaxCreditList: {
-            fields: [{ name: 'name' }, { name: 'value' }],
+            fields: [{ name: 'name' }, { name: 'value' }, { name: 'taxCreditId', mapping: 'value' }],
             xtype: 'ajax',
             proxy: {
                 actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },

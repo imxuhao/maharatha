@@ -14,7 +14,7 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
     {
         name: 'caption',
         type: 'string',
-        mapping: { source: 'Description' },
+        mapping: { source: 'Caption' },
         mandatory: true,
         duplicate: true
     },
@@ -26,16 +26,19 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
     {
         name: 'typeOfAccountId',
         type: 'int',
+        defaultValue: null,
         mapping: { source: 'Classification Value' }
     },
     {
         name: 'typeofConsolidation',
         type: 'string',
+        defaultValue: null,
         mapping: { source: 'Consolidation' }
     },
     {
         name: 'typeofConsolidationId',
         type: 'int',
+        defaultValue: null,
         mapping: { source: 'Consolidation Value' }
     },
     {
@@ -51,6 +54,7 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
     {
         name: 'typeOfCurrencyId',
         type: 'int',
+        defaultValue: null,
         mapping: { source: 'Currency Value' }
     }, 
     {
@@ -59,19 +63,21 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
         mapping: { source: 'RollUp Account' }
     },
     {
-        name: 'accountId',
+        name: 'rollupAccountId',
         type: 'int',
+        defaultValue: null,
         mapping: { source: 'RollUp Account Value' }
     },
     {
         name: 'rollUpDivision',
         type: 'string',
-        mapping: { source: 'RollUp Division Value' }
+        mapping: { source: 'RollUp Division' }
     },
     {
         name: 'rollupJobId',
         type: 'int',
-        mapping: { source: 'RollUp Job Value' }
+        defaultValue: null,
+        mapping: { source: 'RollUp Division Value' }
     },
     {
         name: 'errorMessage',

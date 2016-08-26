@@ -20,6 +20,7 @@ Ext.define('Chaching.model.financials.accounts.ChartOfAccountsModel', {
             { name: 'linkChartOfAccountName', type: 'string' },
             { name: 'standardGroupTotal', type: 'string' },
             { name: 'rollupAccountId', type: 'int', defaultValue: null, convert: nullHandler },
-            { name: 'rollupDivisionId', type: 'int', defaultValue: null, convert: nullHandler }
+            { name: 'rollupDivisionId', type: 'int', defaultValue: null, convert: nullHandler },
+        { name: 'chartOfAccountId', type: 'int', mapping: 'coaId' }, { name: 'budgetFormatCaption',type:'string',mapping:'caption' }
     ]
 });

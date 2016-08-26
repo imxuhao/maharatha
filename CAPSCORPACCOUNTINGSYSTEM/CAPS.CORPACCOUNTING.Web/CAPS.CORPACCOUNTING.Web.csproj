@@ -3737,6 +3737,7 @@
     <Content Include="ExtWeb\Chaching\app\store\imports\DivisionsImportStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\imports\ErrorStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\imports\LinesImportStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\imports\ProjectsImportStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\ItemsPerPageStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguagesDataStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\maintenance\CacheStore.js" />
@@ -3896,6 +3897,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\entities\ProjectImportsGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\imports\entities\ProjectImportsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorView.js" />

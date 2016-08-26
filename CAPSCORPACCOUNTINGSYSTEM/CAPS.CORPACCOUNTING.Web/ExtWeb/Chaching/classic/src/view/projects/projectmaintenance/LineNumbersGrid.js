@@ -38,7 +38,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
         isRequireImport: true,
         importStoreClass: 'imports.LinesImportStore',
         targetGrid: null,
-        targetUrl: abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert'
+        targetUrl: null,//abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert'
+        bulkListInputName: null
     },
     requireExport: true,
     requireMultiSearch: true,
@@ -47,6 +48,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
+    forceFit:true,
     editWndTitleConfig: {
         title: app.localize('EditLine'),
         iconCls: 'fa fa-pencil'
@@ -68,7 +70,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
             dataIndex: 'accountNumber',
             sortable: true,
             groupable: true,
-            width: '10%',
+            flex:1,
+            //width: '10%',
             filterField: {
                 xtype: 'textfield',
                 width: '15%',
@@ -82,7 +85,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
             dataIndex: 'caption',
             sortable: true,
             groupable: true,
-            width: '15%',
+            //width: '15%',
+            flex: 1,
             filterField: {
                 xtype: 'textfield',
                 width: '100%',
@@ -97,7 +101,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
             sortable: true,
             groupable: true,
             itemId: 'typeOfAccountId',
-            width: '15%',
+            //width: '15%',
+            flex: 1,
             filterField: {
                 xtype: 'combobox',
                 valueField: 'typeOfAccountId',
@@ -117,7 +122,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
             dataIndex: 'typeofConsolidation',
             sortable: true,
             groupable: true,
-            width: '15%',
+            flex: 1,
+            //width: '15%',
             filterField: {
                 xtype: 'combobox',
                 valueField: 'typeofConsolidationId',
@@ -139,7 +145,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              dataIndex: 'isEnterable',
              sortable: true,
              groupable: true,
-             width: '10%',
+             flex: 1,
+             //width: '10%',
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
@@ -162,7 +169,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              dataIndex: 'rollUpAccountCaption',
              sortable: true,
              groupable: true,
-             width: '15%',
+             flex: 1,
+             //width: '15%',
              itemId: 'rollupAccountId',            
              filterField: {
                  xtype: 'chachingcombobox',
@@ -197,7 +205,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              itemId: 'rollupJobId',
              sortable: true,
              groupable: true,
-             width: '10%',
+             flex: 1,
+             //width: '10%',
              filterField: {
                  xtype: 'chachingcombobox',
                  store: new Chaching.store.utilities.autofill.DivisionListStore(),
@@ -233,7 +242,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              dataIndex: 'typeOfCurrency',
              sortable: true,
              groupable: true,
-             width: '10%',
+             flex: 1,
+            //width: '10%',
              itemId: 'typeOfCurrencyId',
              filterField: {
                  xtype: 'combobox',

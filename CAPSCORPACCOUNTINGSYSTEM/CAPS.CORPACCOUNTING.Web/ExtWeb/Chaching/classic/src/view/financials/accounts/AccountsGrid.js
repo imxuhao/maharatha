@@ -36,7 +36,8 @@
         isRequireImport: true,
         importStoreClass: 'imports.AccountsImportStore',
         targetGrid: null,
-        targetUrl: abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert'
+        targetUrl: abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert',
+        bulkListInputName: 'accountList'//server inputDto variable name
     },
     requireExport: true,
     requireMultiSearch: true,

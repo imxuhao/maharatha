@@ -46,8 +46,9 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
         entity: app.localize('Projects'),
         isRequireImport: true,
         importStoreClass: 'imports.ProjectsImportStore',
-        targetGrid: null,
-        targetUrl: abp.appPath + 'api/services/app/jobCommercial/BulkJobInsert'
+        targetGrid: 'imports.entities.projectsImports',
+        targetUrl: null,//abp.appPath + 'api/services/app/jobCommercial/BulkJobInsert'
+        bulkListInputName: null
     },
     requireExport: true,
     requireMultiSearch: true,

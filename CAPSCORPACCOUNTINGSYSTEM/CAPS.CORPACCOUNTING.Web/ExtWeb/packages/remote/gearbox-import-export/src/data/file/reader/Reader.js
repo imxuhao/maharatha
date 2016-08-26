@@ -253,9 +253,9 @@ Ext.define('Gearbox.data.file.reader.Reader', {
 			var fieldMapping;
 
 			// 2.1
-			if (item !== null && typeof item === 'object' && item.value) {
+			if (item !== null && typeof item === 'object' && (item.value || item.source)) {
 				fieldMapping = item;
-			}
+			} 
 			else {
 				// 2.2
 				var mappingSource;
@@ -265,7 +265,7 @@ Ext.define('Gearbox.data.file.reader.Reader', {
 				else if (item !== null && typeof item === 'object' && item.source) {
 					mappingSource = item.source;
 				}
-			    
+
 			    var displayName = dataIndex;//Gearbox.l10n('node', model.entityName, 'field', dataIndex);
 
 				// 2.3

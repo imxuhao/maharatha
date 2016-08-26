@@ -427,9 +427,9 @@
     <text name="ConvertToNewCOA" value="Convert To New COA" />
     <text name="StdGroupTotal" value="Std Group Total" />
     <text name="IsCorporate" value="Corporate" />
-    <text name="IsNumeric" value="IsNumeric" />
-    <text name="IsPrivate" value="IsPrivate" />
-    <text name="IsApproved" value="IsApproved" />
+    <text name="IsNumeric" value="Numeric" />
+    <text name="IsPrivate" value="Private" />
+    <text name="IsApproved" value="Approved" />
     <text name="Description" value="Description" />
     <text name="Caption" value="Caption" />
     <text name="ManageUsersViewSetting" value="Manage views" />

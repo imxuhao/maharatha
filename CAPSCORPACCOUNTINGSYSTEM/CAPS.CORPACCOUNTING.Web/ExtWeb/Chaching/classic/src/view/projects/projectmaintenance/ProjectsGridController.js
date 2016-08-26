@@ -158,15 +158,5 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGridController', {
             });
         }
         return deferred.promise;
-    },
-    doBeforeDataImportSaveOperation: function (data) {
-        var me = this,
-            view = me.getView(),
-            myStore = view.getStore();
-        //   extraParam = myStore.getProxy().extraParams;
-        //for (var i = 0; i < data.length; i++) {
-        //    data[i].chartOfAccountId = extraParam.coaId;
-        //}
-        return data;
     }
 });

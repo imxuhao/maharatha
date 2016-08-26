@@ -92,7 +92,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
         isRequireImport: false,
         importStoreClass: null,
         targetGrid: null,
-        targetUrl: null
+        targetUrl: null,
+        bulkListInputName: null
     },
     /**
     * @cfg {object} selModelConfig

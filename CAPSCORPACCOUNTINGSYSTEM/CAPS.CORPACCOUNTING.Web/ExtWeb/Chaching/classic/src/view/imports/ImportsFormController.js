@@ -28,13 +28,19 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
     uploadTemplateFile: function () {
         var me = this,
             view = me.getView(),
-            wnd=view.up('window'),
+            wnd = view.up('window'),
             form = view.getForm(),
             requestParamsObj = null,
             importGrid = view.down('gridpanel'),
             importStore = importGrid.getStore(),
             importConfig = me.importConfig,
-            parentGridController = me.parentController;
+            parentGridController = me.parentController,
+            bulkListInputName = importConfig.bulkListInputName;
+
+        if (!importConfig.targetUrl) {
+            abp.notify.info('Import functionality is not available yet.');
+            return;
+        }
 
         var uploadMask = new Ext.LoadMask({
             msg: 'Please wait...',
@@ -45,7 +51,8 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
         var records = me.validateImport(importGrid, importStore, uploadMask);
         if (records && records.length > 0) {
             if (parentGridController && parentGridController.doBeforeDataImportSaveOperation(records)) {
-                var params = { accountList: records };
+                var params = {};
+                params[bulkListInputName] = records;
                 Ext.Ajax.request({
                     url: importConfig.targetUrl,
                     timeout: 60000000,

@@ -24,7 +24,8 @@ Ext.define('Chaching.model.financials.accounts.DivisionsModel', {
             { name: 'typeOfCurrencyId', type: 'int', hidden: true, defaultValue: null, convert: nullHandler },
            { name: 'typeOfCurrency', type: 'string', headerText: 'Currency', defaultValue: null, convert: nullHandler },
            { name: 'number', type: 'string', headerText: 'Number', defaultValue: null, convert: nullHandler },
-            { name: 'isActive', type: 'boolean',hidden: true}
+            { name: 'isActive', type: 'boolean', hidden: true },
+            {name:'divisionJobNumber',type:'string',mapping:'caption'}
           
     ]
 });

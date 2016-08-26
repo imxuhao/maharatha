@@ -84,18 +84,23 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         var me = this,
             view = me.getView(),
             importConfig = view.importConfig,
+            updateController=false,
             importView = Ext.create('Chaching.view.imports.ImportsView',
             {
                 title: app.localize('Import')+' '+importConfig.entity
             });
         var importFormController = importView.down('form').getController();
-        if (!importConfig.targetGrid)
+        if (!importConfig.targetGrid) {
             importConfig.targetGrid = view.xtype;
+        } else {
+            updateController = true;
+        }
         importFormController.importConfig = importConfig;
         importFormController.parentController = me;
-        me.insertImportGrid(importConfig, importView);
+        me.insertImportGrid(importConfig, importView, updateController, importFormController);
     },
-    insertImportGrid:function(importConfig, importView) {
+    insertImportGrid: function (importConfig, importView, updateController, importFormController) {
+        var me = this;
         if (importConfig && importView) {
             var form = importView.down('form'),
                 placeHolder = form.down('panel[itemId=placeHolderPanel]');
@@ -126,6 +131,8 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                     }
                 }
             });
+            if (updateController)
+                importFormController.parentController = targetGrid.getController();
             if (placeHolder) {
                 placeHolder.add(targetGrid);
                 form.updateLayout();

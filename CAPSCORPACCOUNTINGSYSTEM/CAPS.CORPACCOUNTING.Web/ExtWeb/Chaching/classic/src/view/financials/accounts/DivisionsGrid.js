@@ -37,7 +37,8 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
           isRequireImport: true,
           importStoreClass: 'imports.DivisionsImportStore',
           targetGrid: null,
-          targetUrl: abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert'
+          targetUrl: abp.appPath + 'api/services/app/divisionUnit/BulkDivisionInsert',
+          bulkListInputName: 'divisionList'
       },
     requireExport: true,
     requireMultiSearch: true,
@@ -64,8 +65,8 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
     columns: [
         {
             xtype: 'gridcolumn',
-            name: 'number',
-            dataIndex: 'number',
+            name: 'jobNumber',
+            dataIndex: 'jobNumber',
             sortable: true,
             groupable: true,
             flex: 1,

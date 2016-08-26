@@ -1187,6 +1187,7 @@
     <text name="CurrencyValue" value="Currency Value"/>
     <text name="RollUpDivisionValue" value="RollUp Division Value"/>
     <text name="RollUpAccountValue" value="RollUp Account Value"/>
+    <text name="RollUpJobValue" value="RollUp Job Value"/>
     <text name="FlagsValue" value="Flags Value"/>
     <text name="ProjectTypeValue" value="Project Type Value"/>
     <text name="BudgetFormatValue" value="Budget Format Value"/>

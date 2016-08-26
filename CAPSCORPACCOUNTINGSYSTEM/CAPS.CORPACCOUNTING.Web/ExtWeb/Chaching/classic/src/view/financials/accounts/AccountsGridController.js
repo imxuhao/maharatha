@@ -57,5 +57,5 @@
             data[i].chartOfAccountId = extraParam.coaId;
         }
         return data;
-    },
+    }
 });

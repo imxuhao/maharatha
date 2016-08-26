@@ -12,7 +12,8 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
         }
         var newvalue = file.value.replace(/^c:\\fakepath\\/i, '');
         file.setRawValue(newvalue);
-        var regExpress = new RegExp('([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$');
+        //var regExpress = new RegExp('([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$');
+        var regExpress = new RegExp('(\.\)+(.xls|.xlsx)$');
         regExpress.test(file.value);
         if (file.value && !(regExpress.test(file.value))) {
             abp.message.error(app.localize('Template_FileType_Warn').initCap(), app.localize('Error'));

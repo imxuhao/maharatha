@@ -3734,6 +3734,7 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\journals\JournalStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\fiscalperiod\FiscalPeriodStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\imports\AccountsImportStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\imports\DivisionsImportStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\imports\ErrorStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\imports\LinesImportStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\ItemsPerPageStore.js" />

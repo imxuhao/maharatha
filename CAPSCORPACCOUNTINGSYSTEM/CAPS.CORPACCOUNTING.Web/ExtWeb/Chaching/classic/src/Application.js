@@ -121,8 +121,8 @@ Ext.define('Chaching.Application', {
         'Chaching.store.imports.ErrorStore',
         'receivables.invoices.AccountsReceivableStore',
         'imports.AccountsImportStore',
-        'imports.LinesImportStore'//,
-        //'imports.DivisionsImportStore'
+        'imports.LinesImportStore',
+        'imports.DivisionsImportStore'
     ],
     //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

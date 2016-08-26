@@ -31,9 +31,13 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
           checkPermission: true,
           iconCls: 'fa fa-plus',
           iconAlign: 'left'
-      }], importConfig: {
-          entity: 'Divisions',
-          isRequireImport: true
+      }],
+    importConfig: {
+          entity: app.localize('Divisions'),
+          isRequireImport: true,
+          importStoreClass: 'imports.DivisionsImportStore',
+          targetGrid: null,
+          targetUrl: abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert'
       },
     requireExport: true,
     requireMultiSearch: true,
@@ -58,7 +62,22 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
     createNewMode: 'tab',
     isSubMenuItemTab: true,
     columns: [
-         {
+        {
+            xtype: 'gridcolumn',
+            name: 'number',
+            dataIndex: 'number',
+            sortable: true,
+            groupable: true,
+            flex: 1,
+            allowBlank: false,
+            text: app.localize('Number'),
+            filterField: {
+                xtype: 'textfield',
+                width: '100%'
+            }, editor: {
+                xtype: 'textfield'
+            }
+        }, {
              xtype: 'gridcolumn',
              text: app.localize('Description'),
              dataIndex: 'caption',
@@ -73,7 +92,40 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
              }, editor: {
                  xtype: 'textfield'
              }
-         }, {
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('Currency'),
+            dataIndex: 'typeOfCurrency',
+            itemId: 'typeOfCurrencyId',
+            sortable: true,
+            groupable: true,
+            flex: 1,
+            //width: '8%',
+            filterField: {
+                xtype: 'combobox',
+                valueField: 'typeOfCurrencyId',
+                displayField: 'typeOfCurrency',
+                queryMode: 'local',
+                loadStoreOnCreate: true,
+                isViewmodelStore: true,
+                forceSelection: true,
+                searchProperty: 'typeOfCurrencyId',
+                bind: {
+                    store: '{typeOfCurrencyList}'
+                }
+            }, editor: {
+                xtype: 'combobox',
+                valueField: 'typeOfCurrencyId',
+                displayField: 'typeOfCurrency',
+                queryMode: 'local',
+                loadStoreOnCreate: true,
+                isViewmodelStore: true,
+                forceSelection: true,
+                bind: {
+                    store: '{typeOfCurrencyList}'
+                }
+            }
+        }, {
              xtype: 'gridcolumn',
              text: app.localize('Active'),
              dataIndex: 'isActive',             

@@ -22,7 +22,8 @@ Ext.define('Chaching.model.financials.accounts.DivisionsModel', {
             { name: 'isDivision', type: 'boolean', headerText: 'Division', hidden: false, width: '11%', minWidth: 70 },
           
             { name: 'typeOfCurrencyId', type: 'int', hidden: true, defaultValue: null, convert: nullHandler },
-           
+           { name: 'typeOfCurrency', type: 'string', headerText: 'Currency', defaultValue: null, convert: nullHandler },
+           { name: 'number', type: 'string', headerText: 'Number', defaultValue: null, convert: nullHandler },
             { name: 'isActive', type: 'boolean',hidden: true}
           
     ]

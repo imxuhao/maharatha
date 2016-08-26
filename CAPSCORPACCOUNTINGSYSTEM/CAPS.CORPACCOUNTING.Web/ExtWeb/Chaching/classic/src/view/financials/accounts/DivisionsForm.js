@@ -26,6 +26,10 @@ Ext.define('Chaching.view.financials.accounts.DivisionsForm', {
         xtype: 'hiddenfield',
         name: 'jobId',
         value: 0
+    },{
+        xtype: 'hiddenfield',
+        name: 'chartOfAccountId',
+        value: 0
     }, {
         columnWidth: .5,
         padding: '20 10 0 20',     

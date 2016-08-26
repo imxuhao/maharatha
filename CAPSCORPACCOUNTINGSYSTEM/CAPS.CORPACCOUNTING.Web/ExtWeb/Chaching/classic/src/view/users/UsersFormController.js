@@ -242,10 +242,8 @@
             }
             // END User Security Settings
         }
-        // Saving User create/edit information
-        if (values.userName == "") {
-            values.userName = values.emailAddress;
-        }
+        // Saving User create/edit information // Setting userName from emailAddress without checking any condition
+        values.userName = values.emailAddress;
         record.data.user = values;
         Ext.apply(record.data, values);
         //get roles information

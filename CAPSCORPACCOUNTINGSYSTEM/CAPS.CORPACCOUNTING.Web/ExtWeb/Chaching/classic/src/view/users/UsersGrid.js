@@ -96,7 +96,7 @@ Ext.define('Chaching.view.users.UsersGrid',
                 emptyText: 'Enter User Name to search'
             }
 
-        }, {
+        },{
             xtype: 'gridcolumn',
             text: app.localize('Name'),
             dataIndex: 'name',
@@ -157,9 +157,6 @@ Ext.define('Chaching.view.users.UsersGrid',
                 xtype: 'textfield',
                 width: '100%',
                 emptyText: 'Enter Email Address to search'
-            },
-            editor: {
-                xtype: 'textfield'
             }
         },
         {

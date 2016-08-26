@@ -50,8 +50,11 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
     },
     onTenantSelect: function (selModel, selected, eOpts) {
         var me = this,
-           view = me.getView();
-        var tenantListCombo = view.down('combobox[itemId=tenantItemId]');
+           view = me.getView(),
+           grid = view.down('gridpanel[itemId=moduleListGridItemId]'),
+           tenantListCombo = view.down('combobox[itemId=tenantItemId]'),
+           moduleListGridStore = grid.getStore();
+
         if (tenantListCombo.getValue() == undefined) {
             abp.message.info(app.localize('SelectTenantToCopyModules'));
             return;
@@ -65,9 +68,7 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
                    { name: 'ChartofAccounts', displayName: app.localize('ChartofAccountsModule') },
                    { name: 'ProjectChartofAccounts', displayName: app.localize('ProjectChartofAccountsModule') }
             ];
-            var moduleListGridStore = view.down('gridpanel[itemId=moduleListGridItemId]').getStore();
             moduleListGridStore.loadData(modules);
-            
         }
     },
 
@@ -76,9 +77,16 @@ Ext.define('Chaching.view.tenants.TenantsFormController', {
             view = me.getView(),
             parentGrid = view.parentGrid,
             values = view.getValues(),
-            organizationCombo = view.down('combobox[itemId=organizationId]');
+            organizationCombo = view.down('combobox[itemId=organizationId]'),
+            tenancyNameTextfield = view.down('textfield[itemId=tenancyName]');
+
         if (organizationCombo && organizationCombo.getValue() == null) {
             abp.message.error(app.localize('SelectOrganization'));
+            return;
+        }
+        if (tenancyNameTextfield && tenancyNameTextfield.getValue().trim() == '') {
+            abp.message.error(app.localize('SelectTenancyName'));
+            tenancyNameTextfield.focus(100);
             return;
         }
         if (parentGrid) {

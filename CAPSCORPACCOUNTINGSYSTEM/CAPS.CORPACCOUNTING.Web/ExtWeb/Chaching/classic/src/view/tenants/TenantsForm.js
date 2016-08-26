@@ -64,7 +64,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 fieldLabel: app.localize('TenancyName'),
                 width: '100%',
                 ui: 'fieldLabelTop',
-                emptyText: app.localize('TTenancyCodeName'),
+                emptyText: app.localize('MandatoryField'),
                 listeners: {
                     change : 'onTenancyNameEnter'
                 }

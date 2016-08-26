@@ -40,10 +40,13 @@
             name: 'displayName',
             itemId : 'organizationName',
             allowBlank: false,
-            fieldLabel: app.localize('OrganizationName').initCap(),
+            fieldLabel: app.localize('OrganizationName'),
             width: '100%',
             ui: 'fieldLabelTop',
-            emptyText: app.localize('MandatoryField')
+            emptyText: app.localize('MandatoryField'),
+            listeners: {
+                change: 'OnOrganizationNameChange'
+            }
         },
         {
             xtype: 'combobox',
@@ -55,6 +58,7 @@
             valueField: 'value',
             emptyText: app.localize('SelectDatabase'),
             queryMode: 'local',
+            forceSelection: true,
             store: Ext.create('Chaching.store.administration.organization.ConnectionStringListStore')
         }
         //,

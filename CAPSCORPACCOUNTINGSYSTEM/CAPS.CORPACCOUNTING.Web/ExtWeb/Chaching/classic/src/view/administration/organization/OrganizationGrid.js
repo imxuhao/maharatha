@@ -78,7 +78,10 @@ Ext.define('Chaching.view.administration.organization.OrganizationGrid', {
             xtype: 'textfield',
             width: '100%'
         }, editor: {
-            xtype: 'textfield'
+            xtype: 'textfield',
+            listeners: {
+                change: 'OnOrganizationNameChange'
+            }
         }
     },
       {

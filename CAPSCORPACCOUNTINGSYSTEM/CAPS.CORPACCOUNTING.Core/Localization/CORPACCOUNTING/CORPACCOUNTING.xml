@@ -1043,6 +1043,7 @@
     <text name="ModuleName" value="Module Name" />
     <text name="CompanyList" value="Company List" />
     <text name="SelectOrganization" value="Please select tenant group." />
+    <text name="SelectTenancyName" value="Please select tenancy name." />
     <text name="OrigAmount" value="Orig amount" />
     <text name="DateNeeded" value="Date needed" />
     <text name="TimeNeeded" value="Time needed" />

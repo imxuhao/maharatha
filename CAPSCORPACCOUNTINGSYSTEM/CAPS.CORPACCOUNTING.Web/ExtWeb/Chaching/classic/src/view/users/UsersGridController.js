@@ -113,10 +113,14 @@ Ext.define('Chaching.view.users.UsersGridController', {
         
         if (formView && isEdit) {
             // Edit user screen
-            form.findField('userName').setReadOnly(true);
-            form.findField('setRandomPassword').setValue(false);
-            form.findField('sendActivationEmail').setValue(false);
-            
+            //form.findField('userName').setReadOnly(true);
+            //form.findField('setRandomPassword').setValue(false);
+            //form.findField('sendActivationEmail').setValue(false);
+            form.findField('setRandomPassword').setHidden(true);
+            form.findField('sendActivationEmail').setHidden(true);
+            form.findField('shouldChangePasswordOnNextLogin').setHidden(true);
+            // disable email address in User Edit
+            form.findField('emailAddress').setReadOnly(true);
             //disable tabs
             if (companyListTab) {
                 if (abp.session.tenantId != null) {
@@ -236,8 +240,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
                 if (companyListTab) {
                     companyListTab.setDisabled(true);
                 }
-
-
+                
             }
         }
        

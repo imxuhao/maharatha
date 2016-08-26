@@ -19,5 +19,8 @@
                 connectionStore.load();
             }
         }
+    },
+    OnOrganizationNameChange: function (field, newValue, oldValue, eOpts) {
+        field.setValue(newValue.toUpperCase());
     }
 });

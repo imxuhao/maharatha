@@ -1,14 +1,11 @@
 ﻿using System.IO;
 using OfficeOpenXml;
-using System.Drawing;
-using OfficeOpenXml.Style;
 using System.Collections.Generic;
 using OfficeOpenXml.DataValidation.Contracts;
 using System.Data;
 using Abp.Application.Services.Dto;
 using OfficeOpenXml.DataValidation;
 using System.Text;
-using Abp.Collections.Extensions;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
@@ -17,12 +14,29 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
     /// </summary>
     public class ExcelFields
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string FieldValue { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string ColumnName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Type { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsEditable { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<NameValueDto> List { get; set; }
 
 
@@ -43,12 +57,31 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
     /// <summary>
     /// 
     /// </summary>
-    public class ExcelProperites
+    public class Excelproperties
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public bool ShowErrorMessage { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string ErrorTitle { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ExcelDataValidationWarningStyle ErrorStyle { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Error { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string ExcelFormula { get; set; }
 
     }
@@ -61,109 +94,8 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
     public static class ExcelHelper
     {
         const string listDataExcelSheet = "DropDownListInformation";
-        const string strOutPutDir = @"C:\EPPlus\Excel";
         const string strPassword = @"Sumit";
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static ExcelPackage CreateTemplate(string fileName, string workSheetName)
-        {
-            string strDate = System.DateTime.Now.ToString();
-            // change this line to contain the path to the output folder
-            DirectoryInfo outputDir = new DirectoryInfo(strOutPutDir);
-            if (!outputDir.Exists)
-                Directory.CreateDirectory(strOutPutDir);
-
-            //create the  FileInfo object
-            FileInfo templateFile = new FileInfo(outputDir.FullName + @"\" + fileName + "_" + strDate + ".xlsx");
-            if (templateFile.Exists)
-            {
-                templateFile.Delete();
-                templateFile = new FileInfo(outputDir.FullName + @"\" + fileName + "_" + strDate + ".xlsx");
-            }
-
-
-            //Create the template...
-            ExcelPackage package = new ExcelPackage(templateFile);
-
-            //Lock the workbook totally
-            var workbook = package.Workbook;
-            //workbook.Protection.LockWindows = true;
-            //workbook.Protection.LockStructure = true;
-            workbook.View.SetWindowSize(150, 525, 14500, 6000);
-            workbook.View.ShowHorizontalScrollBar = false;
-            workbook.View.ShowVerticalScrollBar = false;
-            workbook.View.ShowSheetTabs = false;
-
-            //Set a password for the workbookprotection
-            workbook.Protection.SetPassword(strPassword);
-
-            //Encrypt with no password
-            package.Encryption.IsEncrypted = true;
-
-            var sheet = package.Workbook.Worksheets.Add(workSheetName);
-            return package;
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sheet"></param>
-        /// <param name="cell"></param>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        public static IExcelDataValidationList GetExcelSheetDropDownList(ExcelWorksheet sheet, string cell, List<NameValueDto> list)
-        {
-            var excelList = sheet.Cells[cell].DataValidation.AddListDataValidation();
-            foreach (var value in list)
-            {
-                excelList.Formula.Values.Add(value.Value);
-            }
-            excelList.ShowErrorMessage = true;
-            return excelList;
-        }
-
-        /// <summary>
-        /// Fill Dropdown List to Cells in ExcelSheet
-        /// </summary>
-        public static void AddTemplateObjects(ExcelWorksheet sheet, int startRowIndex, int endRowIndex, params ExcelFields[] propertySelectors)
-        {
-
-            for (int j = 0; j <= propertySelectors.Length - 1; j++)
-            {
-                var columnName = propertySelectors[j].ColumnName;
-                if (propertySelectors[j].Type == "dropdown")
-                {
-                    if (propertySelectors[j].List.Count > 0)
-                    {
-                        var excelList = sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].DataValidation.AddListDataValidation();
-
-                        foreach (var value in propertySelectors[j].List)
-                        {
-                            excelList.Formula.Values.Add(value.Name);
-                        }
-                        excelList.ShowErrorMessage = true;
-                    }
-
-                }
-                else if (!propertySelectors[j].IsEditable)
-                {
-                    sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].Style.Locked = true;
-                    sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].Style.Fill.BackgroundColor.SetColor(Color.LightGray);
-                }
-                else
-                {
-                    sheet.Cells[startRowIndex, j + 1, endRowIndex, j + 1].Value = "";
-                }
-            }
-
-
-        }
-
+       
 
         /// <summary>
         /// Get Boolean values as List
@@ -179,29 +111,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         }
 
         /// <summary>
-        /// List Data is Added to Excel Sheet
-        /// </summary>
-        /// <param name="sheet"></param>
-        /// <param name="list"></param>
-        /// <param name="listName"></param>
-        /// <param name="cellColumn"></param>
-        public static void AddListDataIntoWorkSheet(ExcelWorksheet sheet, List<NameValueDto> list, string listName, string cellColumn)
-        {
-            int j = 2;
-            sheet.Cells[cellColumn + "1"].Style.Font.Bold = true;
-            sheet.Cells[cellColumn + "1"].Value = listName;
-            if (list.Count > 0)
-            {
-                for (int i = 0; i <= list.Count - 1; i++)
-                {
-                    sheet.Cells[cellColumn + (j + i)].Value = list[i].Name;
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// List Data is Added to Excel Sheet
+        /// List Data is Added into Data Excel Sheet
         /// </summary>
         /// <param name="sheet"></param>
         /// <param name="list"></param>
@@ -224,85 +134,10 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                 }
             }
         }
+       
 
         /// <summary>
-        ///  List Data is Added to Excel Sheet
-        /// </summary>
-        /// <param name="sheet"></param>
-        /// <param name="list"></param>
-        /// <param name="listName"></param>
-        /// <param name="columnNumber"></param>
-        public static void AddListDataIntoWorkSheet(ExcelWorksheet sheet, List<NameValueDto> list, string listName, int columnNumber)
-        {
-            int j = 2;
-
-            sheet.Cells[1, columnNumber].Style.Font.Bold = true;
-            sheet.Cells[1, columnNumber].Value = listName;
-
-            for (int i = 0; i <= list.Count - 1; i++)
-            {
-                sheet.Cells[(j + i), columnNumber].Value = list[i].Name;
-            }
-
-
-            //// add a validation and set values
-            //var validation = sheet.DataValidations.AddListValidation("A1");
-            //// Alternatively:
-            //// var validation = sheet.Cells["A1"].DataValidation.AddListDataValidation();
-            //validation.ShowErrorMessage = true;
-            //validation.ErrorStyle = ExcelDataValidationWarningStyle.warning;
-            //validation.ErrorTitle = "An invalid value was entered";
-            //validation.Error = "Select a value from the list";
-            //validation.Formula.ExcelFormula = "B2:B4";
-        }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="sheet"></param>
-        ///// <param name="excelFormula"></param>
-        ///// <param name="startRowIndex"></param>
-        ///// <param name="endRowIndex"></param>
-        ///// <param name="excelColumn"></param>
-        //public static void AddDropDownValidationToSheet(ExcelWorksheet sheet, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn)
-        //{
-        //    var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddListDataValidation();
-        //    validation.ShowErrorMessage = true;
-        //    validation.ErrorStyle = ExcelDataValidationWarningStyle.warning;
-        //    validation.ErrorTitle = "An invalid value was entered";
-        //    validation.Error = "Select a value from the list";
-        //    validation.Formula.ExcelFormula = excelFormula;
-        //    //validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
-        //    //validation.ErrorStyle = excelProperties.ErrorStyle;
-        //    //validation.ErrorTitle = excelProperties.ErrorTitle;
-        //    //validation.Error = excelProperties.Error;
-        //    //validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
-        //}
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sheet"></param>
-        /// <param name="excelFormula"></param>
-        /// <param name="startRowIndex"></param>
-        /// <param name="endRowIndex"></param>
-        /// <param name="excelColumn"></param>
-        ///  <param name="excelProperties"></param>
-        public static void AddDropDownValidationToSheet(ExcelWorksheet sheet, ExcelProperites excelProperties, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn)
-        {
-            var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddListDataValidation();
-            validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
-            validation.ErrorStyle = excelProperties.ErrorStyle;
-            validation.ErrorTitle = excelProperties.ErrorTitle;
-            validation.Error = excelProperties.Error;
-            validation.Formula.ExcelFormula = excelFormula;
-        }
-
-
-        /// <summary>
-        /// 
+        /// Add DropDownList into Data Sheet.
         /// </summary>
         /// <param name="sheet"></param>
         /// <param name="excelFormula"></param>
@@ -311,7 +146,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="excelColumn"></param>
         ///  <param name="excelProperties"></param>
         ///  <param name="columnName"></param>
-        public static void AddDropDownValidationToSheet(string columnName, ExcelWorksheet sheet, ExcelProperites excelProperties, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn)
+        public static void AddDropDownValidationToSheet(string columnName, ExcelWorksheet sheet, Excelproperties excelProperties, string excelFormula, int startRowIndex, int endRowIndex, int excelColumn)
         {
             var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddListDataValidation();
             validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
@@ -320,27 +155,9 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             validation.Error = excelProperties.Error;
             validation.Formula.ExcelFormula = excelFormula;
         }
-
+               
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sheet"></param>
-        /// <param name="excelProperties"></param>
-        /// <param name="startRowIndex"></param>
-        /// <param name="endRowIndex"></param>
-        /// <param name="excelColumn"></param>
-        public static void AddValidationtoSheet(ExcelWorksheet sheet, ExcelProperites excelProperties, int startRowIndex, int endRowIndex, int excelColumn)
-        {
-            var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddCustomDataValidation();
-            validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
-            validation.ErrorStyle = excelProperties.ErrorStyle;
-            validation.ErrorTitle = excelProperties.ErrorTitle;
-            validation.Error = excelProperties.Error;
-            validation.Formula.ExcelFormula = excelProperties.ExcelFormula;
-        }
-
-        /// <summary>
-        /// 
+        /// add validation to DataSheet
         /// </summary>
         /// <param name="sheet"></param>
         /// <param name="excelProperties"></param>
@@ -348,9 +165,10 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="endRowIndex"></param>
         /// <param name="excelColumn"></param>
         /// <param name="columnName"></param>
-        public static void AddValidationtoSheet(string columnName, ExcelWorksheet sheet, ExcelProperites excelProperties, int startRowIndex, int endRowIndex, int excelColumn)
+        public static void AddValidationtoSheet(string columnName, ExcelWorksheet sheet, Excelproperties excelProperties, int startRowIndex, int endRowIndex, int excelColumn)
         {
             var validation = sheet.Cells[startRowIndex, excelColumn, endRowIndex, excelColumn].DataValidation.AddCustomDataValidation();
+            
             validation.ShowErrorMessage = excelProperties.ShowErrorMessage;
             validation.ErrorStyle = excelProperties.ErrorStyle;
             validation.ErrorTitle = excelProperties.ErrorTitle;
@@ -359,7 +177,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         }
 
         /// <summary>
-        /// 
+        /// add excel formula to Data Sheet
         /// </summary>
         /// <param name="columnName"></param>
         /// <param name="sheet"></param>
@@ -417,7 +235,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <param name="cellColumn"></param>
         /// <param name="lstFromRange"></param>
         /// <param name="lstEndRange"></param>
-        ///  <param name="dropDownCellColumn"></param>
+        ///  <param name="dropDownCellColumns"></param>
         /// <returns></returns>
         public static string GetVLOOKUPFormula(string sheetName, string cellColumn, string[] dropDownCellColumns, int lstFromRange, int lstEndRange)
         {
@@ -443,7 +261,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         }
 
         /// <summary>
-        /// 
+        /// get multi validation formula as string
         /// </summary>
         /// <param name="validationList"></param>
         /// <returns></returns>
@@ -489,12 +307,12 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         }
 
         /// <summary>
-        /// 
+        /// set formula to Excel Properties
         /// </summary>
         /// <param name="properties"></param>
         /// <param name="excelFromula"></param>
         /// <returns></returns>
-        public static ExcelProperites SetExcelFromula(ExcelProperites properties, string excelFromula)
+        public static Excelproperties SetExcelFromula(Excelproperties properties, string excelFromula)
         {
             properties.ExcelFormula = excelFromula;
             return properties;

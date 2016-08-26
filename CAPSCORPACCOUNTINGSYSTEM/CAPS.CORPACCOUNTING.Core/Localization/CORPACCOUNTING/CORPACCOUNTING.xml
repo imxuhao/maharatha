@@ -1180,19 +1180,18 @@
     <text name="RollupDivisionDescription" value="RollUp Division Description"/>
     <text name="RollUpAccountNumber" value="RollUp Account Number"/>
     <text name="RollupAccountDescription" value="RollUp Account Description"/>
-    <text name="ClassificationValue" value="Classification Value"/>
-    <text name="ConsolidationValue" value="Consolidation Value"/>
-    <text name="NewAccountValue" value="New Account Value"/>
-    <text name="RateTypeOverrideValue" value="Rate Type Override Value"/>
-    <text name="CurrencyValue" value="Currency Value"/>
-    <text name="RollUpDivisionValue" value="RollUp Division Value"/>
-    <text name="RollUpAccountValue" value="RollUp Account Value"/>
-    <text name="RollUpJobValue" value="RollUp Job Value"/>
-    <text name="FlagsValue" value="Flags Value"/>
-    <text name="ProjectTypeValue" value="Project Type Value"/>
-    <text name="BudgetFormatValue" value="Budget Format Value"/>
-    <text name="TaxCreditValue" value="Tax Credit Value"/>
-    <text name="StatusValue" value="Status Value"/>
+    <text name="ClassificationValue" value="Classification_Value"/>
+    <text name="ConsolidationValue" value="Consolidation_Value"/>
+    <text name="NewAccountValue" value="New Account_Value"/>
+    <text name="RateTypeOverrideValue" value="Rate_Type_Override_Value"/>
+    <text name="CurrencyValue" value="Currency_Value"/>
+    <text name="RollUpDivisionValue" value="RollUp_Division_Value"/>
+    <text name="RollUpAccountValue" value="RollUp_Account_Value"/>
+    <text name="FlagsValue" value="Flags_Value"/>
+    <text name="ProjectTypeValue" value="Project_Type_Value"/>
+    <text name="BudgetFormatValue" value="Budget_Format_Value"/>
+    <text name="TaxCreditValue" value="Tax_Credit_Value"/>
+    <text name="StatusValue" value="Status_Value"/>
     <text name="DeleteTenantGroupValidationMessage" value="You can not delete Tenant Groups because some Tenants are belongs to this group."/>
     <text name="DeleteTenantValidationMessage" value="Some transactions are belongs to this Tenant. So you can not delete this Tenant."/>
 
@@ -1206,8 +1205,35 @@
     <text name="MandatoryCellValue" value="{0} is required." />
     <text name="DuplicateRecord" value="This is duplicate record." />
     <text name="InvalidDataUploaded" value="Please upload valid file. For error details please see message column." />
-    
+
     <text name="UploadFailedMessage" value="Uploaded data contains some invalid records. Please correct the data in those records and re-try to upload."/>
     <text name="DragDropEmptyMessage" value="You can simply Drag &amp; Drop multiple .xls or .xlsx file(s) here from your computer to import."/>
+
+    <text name="ClassificationNames" value="Classification_Names" />
+    <text name="CurrencyNames" value="Currency_Names" />
+    <text name="ConsolidationNames" value="Consolidation_Names" />
+    <text name="RateTypeOverrideNames" value="Rate_Type_Override_Names" />
+    <text name="NewAccountNames" value="New_Account_Names" />
+    <text name="FlagsNames" value="Flags_Names" />
+    <text name="RollUpDivisionNames" value="RollUp_Division_Names" />
+    <text name="RollUpAccountNames" value="RollUp_Account_Names" />
+    <text name="ProjectTypeNames" value="Project_Type_Names" />
+    <text name="StatusNames" value="Status_Names" />
+    <text name="BudgetFormatNames" value="Budget_Format_Names" />
+    <text name="TaxCreditNames" value="Tax_Credit_Names" />
+
+    <text name="ClassificationIds" value="Classification_Ids" />
+    <text name="CurrencyIds" value="Currency_Ids" />
+    <text name="ConsolidationIds" value="Consolidation_Ids" />
+    <text name="RateTypeOverrideIds" value="Rate_Type_Override_Ids" />
+    <text name="NewAccountIds" value="New_Account_Ids" />
+    <text name="FlagsIds" value="Flags_Ids" />
+     <text name="RollUpDivisionIds" value="RollUp_Division_Ids" />
+      <text name="RollUpAccountIds" value="RollUp_Account_Ids" />
+
+    <text name="ProjectTypeIds" value="Project_Type_Ids" />
+    <text name="StatusIds" value="Status_Ids" />
+    <text name="BudgetFormatIds" value="Budget_Format_Ids" />
+    <text name="TaxCreditIds" value="Tax_Credit_Ids" />
   </texts>
 </localizationDictionary>

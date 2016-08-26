@@ -8,6 +8,7 @@ using CAPS.CORPACCOUNTING.Masters.Dto;
 using OfficeOpenXml.DataValidation;
 using System.Collections.Generic;
 using Abp.Domain.Repositories;
+using OfficeOpenXml;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
@@ -20,7 +21,8 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         private readonly IAccountUnitAppService _accountUnitAppService;
         private readonly IRepository<CoaUnit, int> _coaUnitRepository;
         private readonly int startRowIndex = 2;
-        private readonly int endRowIndex = 3000;
+        private readonly int endRowIndex =50000;
+        //private readonly int endRowIndex = ExcelPackage.MaxRows;
 
         /// <summary>
         /// 
@@ -42,6 +44,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         /// <returns></returns>
         public async Task<FileDto> DownLoadTemplate(int coaId)
         {
+            //endRowIndex = ExcelPackage.MaxRows;
             //Get all List Information
             var classificationlist = await _accountUnitAppService.GetTypeOfAccountList();
             var currencylist = await _accountUnitAppService.GetTypeOfCurrencyList();
@@ -52,7 +55,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             var accountNumberIsNumeric = (await _coaUnitRepository.GetAsync(coaId)).IsNumeric;
 
             return CreateExcelPackage(
-                "AccountTemplate.xlsx",
+                "AccountTemplate_"+System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx",
                 excelPackage =>
                 {
                     var sheet = excelPackage.Workbook.Worksheets.Add(L("AccountsTemplate"));
@@ -60,12 +63,12 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                     listDataSheet.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
 
 
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, classificationlist, new KeyValuePair<string, string>(L("Classification"), L("ClassificationValue")), new KeyValuePair<string, string>("A", "B"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, currencylist, new KeyValuePair<string, string>(L("Currency"), L("CurrencyValue")), new KeyValuePair<string, string>("C", "D"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, consolidationList, new KeyValuePair<string, string>(L("Consolidation"), L("ConsolidationValue")), new KeyValuePair<string, string>("E", "F"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, typeOfCurrencyRateList, new KeyValuePair<string, string>(L("RateTypeOverride"), L("RateTypeOverrideValue")), new KeyValuePair<string, string>("G", "H"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, linkedAccountList, new KeyValuePair<string, string>(L("NewAccount"), L("NewAccountValue")), new KeyValuePair<string, string>("I", "J"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, new KeyValuePair<string, string>(L("Flags"), L("FlagsValue")), new KeyValuePair<string, string>("K", "L"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, classificationlist, new KeyValuePair<string, string>(L("ClassificationNames"), L("ClassificationIds")), new KeyValuePair<string, string>("A", "B"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, currencylist, new KeyValuePair<string, string>(L("CurrencyNames"), L("CurrencyIds")), new KeyValuePair<string, string>("C", "D"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, consolidationList, new KeyValuePair<string, string>(L("ConsolidationNames"), L("ConsolidationIds")), new KeyValuePair<string, string>("E", "F"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, typeOfCurrencyRateList, new KeyValuePair<string, string>(L("RateTypeOverrideNames"), L("RateTypeOverrideIds")), new KeyValuePair<string, string>("G", "H"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, linkedAccountList, new KeyValuePair<string, string>(L("NewAccountNames"), L("NewAccountIds")), new KeyValuePair<string, string>("I", "J"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, new KeyValuePair<string, string>(L("FlagsNames"), L("FlagsIds")), new KeyValuePair<string, string>("K", "L"));
 
 
                     //Create Header Row
@@ -92,7 +95,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
 
                     //reference list columns to Excel Sheet
                     ExcelHelper.AddValidationtoSheet(L("AccountNumber"), sheet,
-                        new ExcelProperites
+                        new Excelproperties
                         {
                             ExcelFormula = ExcelHelper.GetMultiValidationString(
                                 new List<string>() {
@@ -111,7 +114,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                             , startRowIndex, endRowIndex, 1);
 
                     ExcelHelper.AddValidationtoSheet(L("Description"), sheet,
-                      new ExcelProperites
+                      new Excelproperties
                       {
                           ExcelFormula = ExcelHelper.GetMultiValidationString(
                               new List<string>() {
@@ -126,7 +129,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                       }
                       , startRowIndex, endRowIndex, 2);
 
-                    var excelDdlErrorMsgSettings = new ExcelProperites
+                    var excelDdlErrorMsgSettings = new Excelproperties
                     {
                         ShowErrorMessage = true,
                         Error = L("AllowMaxLength"),
@@ -134,7 +137,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                         ErrorStyle = ExcelDataValidationWarningStyle.stop
                     };
 
-                    var vLookUpFormulaSettings = new ExcelProperites
+                    var vLookUpFormulaSettings = new Excelproperties
                     {
                         ShowErrorMessage = false,
                         Error = "",

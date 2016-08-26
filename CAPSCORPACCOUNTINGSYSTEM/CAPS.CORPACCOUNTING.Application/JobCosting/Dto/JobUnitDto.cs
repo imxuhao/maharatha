@@ -31,6 +31,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
         public int? TypeOfCurrencyId { get; set; }
 
+        /// <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        public string TypeOfCurrency { get; set; }
+
         /// <summary>Gets or sets the RollupJobId field. </summary>
         public int? RollupJobId { get; set; }
 

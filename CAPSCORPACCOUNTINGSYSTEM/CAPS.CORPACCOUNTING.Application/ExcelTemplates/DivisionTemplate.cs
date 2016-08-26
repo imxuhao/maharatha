@@ -22,7 +22,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         private readonly IAccountUnitAppService _accountUnitAppService;
 
         private readonly int startRowIndex = 2;
-        private readonly int endRowIndex = 3000;
+        private readonly int endRowIndex = 50000;
 
 
         /// <summary>
@@ -47,15 +47,15 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
             var booleanList = ExcelHelper.GetBooleanList();
 
             return CreateExcelPackage(
-                "DivisionTemplate.xlsx",
+                "DivisionTemplate_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx",
                 excelPackage =>
                 {
                     var sheet = excelPackage.Workbook.Worksheets.Add(L("DivisionTemplate"));
                     var listDataSheet = excelPackage.Workbook.Worksheets.Add(L("DropDownListInformation"));
                     listDataSheet.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
 
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, currencylist, new KeyValuePair<string, string>(L("Currency"), L("CurrencyValue")), new KeyValuePair<string, string>("C", "D"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, new KeyValuePair<string, string>(L("Flags"), L("FlagsValue")), new KeyValuePair<string, string>("E", "F"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, currencylist, new KeyValuePair<string, string>(L("CurrencyNames"), L("CurrencyIds")), new KeyValuePair<string, string>("C", "D"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, new KeyValuePair<string, string>(L("FlagsNames"), L("FlagsIds")), new KeyValuePair<string, string>("E", "F"));
 
                     AddHeader(
                         sheet,
@@ -69,7 +69,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
 
                     //reference list columns to Excel Sheet
                     ExcelHelper.AddValidationtoSheet(L("Number"),sheet,
-                        new ExcelProperites
+                        new Excelproperties
                         {
                             ExcelFormula = ExcelHelper.GetMultiValidationString(
                                 new List<string>() {
@@ -88,7 +88,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                             , startRowIndex, endRowIndex, 1);
 
                     ExcelHelper.AddValidationtoSheet(L("Description"), sheet,
-                      new ExcelProperites
+                      new Excelproperties
                       {
                           ExcelFormula = ExcelHelper.GetMultiValidationString(
                               new List<string>() {
@@ -102,7 +102,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                       }
                       , startRowIndex, endRowIndex, 2);
 
-                    var excelDdlErrorMsgSettings = new ExcelProperites
+                    var excelDdlErrorMsgSettings = new Excelproperties
                     {
                         ShowErrorMessage = true,
                         Error = L("AllowMaxLength"),

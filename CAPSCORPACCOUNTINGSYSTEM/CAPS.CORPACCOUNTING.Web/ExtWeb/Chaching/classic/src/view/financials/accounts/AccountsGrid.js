@@ -32,7 +32,7 @@
           iconAlign: 'left'
       }],
     importConfig: {
-        entity: app.localize('FinancialAccounts'),
+        entity: 'FinancialAccounts',
         isRequireImport: true,
         importStoreClass: 'imports.AccountsImportStore',
         targetGrid: null,

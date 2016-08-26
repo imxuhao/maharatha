@@ -25,12 +25,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         private readonly JobUnitManager _jobUnitManager;
         private readonly IRepository<JobUnit> _jobUnitRepository;
         private readonly IRepository<CoaUnit> _coaUnitRepository;
+        private readonly IRepository<TypeOfCurrencyUnit,short> _typeOfCurrencyUnitRepository;
         public DivisionUnitAppService(JobUnitManager jobUnitManager, IRepository<JobUnit> jobUnitRepository,
-            IRepository<CoaUnit> coaUnitRepository)
+            IRepository<CoaUnit> coaUnitRepository,
+            IRepository<TypeOfCurrencyUnit, short> typeOfCurrencyUnitRepository
+            )
         {   
             _jobUnitManager = jobUnitManager;
             _jobUnitRepository = jobUnitRepository;
             _coaUnitRepository = coaUnitRepository;
+            _typeOfCurrencyUnitRepository=typeOfCurrencyUnitRepository;
         }
         /// <summary>
         /// To create the Division
@@ -107,8 +111,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         [AbpAuthorize(AppPermissions.Pages_Financials_Accounts_Divisions)]
         public async Task<PagedResultOutput<JobUnitDto>> GetDivisionUnits(SearchInputDto input)
         {
-            var query = from job in _jobUnitRepository.GetAll()                       
-                        select new { Job = job };
+            var query = from job in _jobUnitRepository.GetAll()        
+                        join   currency in _typeOfCurrencyUnitRepository.GetAll() on job.TypeOfCurrencyId equals currency.Id
+                        into currency
+                        from currencyData in currency.DefaultIfEmpty()
+                        select new { Job = job,currency= currencyData.Description };
             if (!ReferenceEquals(input.Filters, null))
             {
                 SearchTypes mapSearchFilters = Helper.MappingFilters(input.Filters);
@@ -128,7 +135,8 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             return new PagedResultOutput<JobUnitDto>(resultCount, results.Select(item =>
             {
                 var dto = item.Job.MapTo<JobUnitDto>();
-                dto.JobId = item.Job.Id;               
+                dto.JobId = item.Job.Id;
+                dto.TypeOfCurrency = item.currency;
                 return dto;
             }).ToList());
         }

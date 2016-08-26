@@ -10,6 +10,7 @@ using OfficeOpenXml.DataValidation;
 using CAPS.CORPACCOUNTING.JobCosting;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
+using OfficeOpenXml;
 
 namespace CAPS.CORPACCOUNTING.ExcelTemplates
 {
@@ -19,7 +20,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
         private readonly IAccountUnitAppService _accountUnitAppService;
         private readonly IJobUnitAppService _jobUnitAppService;
         private readonly int startRowIndex = 2;
-        private readonly int endRowIndex = 3000;
+        private readonly int endRowIndex = 50000;
         private readonly IRepository<CoaUnit, int> _coaUnitRepository;
 
         /// <summary>
@@ -64,19 +65,19 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
 
 
             return CreateExcelPackage(
-                "LinesTemplate.xlsx",
+                "LinesTemplate_" + System.DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx",
                 excelPackage =>
                 {
                     var sheet = excelPackage.Workbook.Worksheets.Add(L("LinesTemplate"));
                     var listDataSheet = excelPackage.Workbook.Worksheets.Add(L("DropDownListInformation"));
                     listDataSheet.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
 
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, classificationlist, new KeyValuePair<string, string>(L("Classification"), L("ClassificationValue")), new KeyValuePair<string, string>("A", "B"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, currencylist, new KeyValuePair<string, string>(L("Currency"), L("CurrencyValue")), new KeyValuePair<string, string>("C", "D"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, consolidationList, new KeyValuePair<string, string>(L("Consolidation"), L("ConsolidationValue")), new KeyValuePair<string, string>("E", "F"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, divisionList, new KeyValuePair<string, string>(L("RollUpDivision"), L("RollUpDivisionValue")), new KeyValuePair<string, string>("G", "H"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, rollUpAccountList, new KeyValuePair<string, string>(L("RollUpAccount"), L("RollUpAccountValue")), new KeyValuePair<string, string>("I", "J"));
-                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, new KeyValuePair<string, string>(L("Flags"), L("FlagsValue")), new KeyValuePair<string, string>("K", "L"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, classificationlist, new KeyValuePair<string, string>(L("ClassificationNames"), L("ClassificationIds")), new KeyValuePair<string, string>("A", "B"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, currencylist, new KeyValuePair<string, string>(L("CurrencyNames"), L("CurrencyIds")), new KeyValuePair<string, string>("C", "D"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, consolidationList, new KeyValuePair<string, string>(L("ConsolidationNames"), L("ConsolidationIds")), new KeyValuePair<string, string>("E", "F"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, divisionList, new KeyValuePair<string, string>(L("RollUpDivisionNames"), L("RollUpDivisionIds")), new KeyValuePair<string, string>("G", "H"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, rollUpAccountList, new KeyValuePair<string, string>(L("RollUpAccountNames"), L("RollUpAccountIds")), new KeyValuePair<string, string>("I", "J"));
+                    ExcelHelper.AddListDataIntoWorkSheet(listDataSheet, booleanList, new KeyValuePair<string, string>(L("FlagsNames"), L("FlagsIds")), new KeyValuePair<string, string>("K", "L"));
 
                     //Create Header Row
                     AddHeader(
@@ -99,7 +100,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
 
                     //reference list columns to Excel Sheet
                     ExcelHelper.AddValidationtoSheet(L("LineNumber"), sheet,
-                        new ExcelProperites
+                        new Excelproperties
                         {
                             ExcelFormula = ExcelHelper.GetMultiValidationString(
                                 new List<string>() {
@@ -118,7 +119,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                             , startRowIndex, endRowIndex, 1);
 
                     ExcelHelper.AddValidationtoSheet(L("Caption"), sheet,
-                      new ExcelProperites
+                      new Excelproperties
                       {
                           ExcelFormula = ExcelHelper.GetMultiValidationString(
                               new List<string>() {
@@ -134,7 +135,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                       , startRowIndex, endRowIndex, 2);
 
 
-                    var excelDdlErrorMsgSettings = new ExcelProperites
+                    var excelDdlErrorMsgSettings = new Excelproperties
                     {
                         ShowErrorMessage = true,
                         Error = L("AllowMaxLength"),
@@ -168,7 +169,7 @@ namespace CAPS.CORPACCOUNTING.ExcelTemplates
                          ExcelHelper.GetVLOOKUPFormula(L("DropDownListInformation"), "K2", new string[] { "C", "D" }, 2, currencylist.Count + 1), startRowIndex, endRowIndex, true, 12);
 
 
-                    ExcelHelper.AddDropDownValidationToSheet(sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "K", 2, booleanList.Count + 1), startRowIndex, endRowIndex, 13);
+                    ExcelHelper.AddDropDownValidationToSheet(L("JournalsAllowed"),sheet, excelDdlErrorMsgSettings, ExcelHelper.GetDropDownListFormula(L("DropDownListInformation"), "K", 2, booleanList.Count + 1), startRowIndex, endRowIndex, 13);
 
                 });
         }

@@ -49,6 +49,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             url: abp.appPath + 'api/services/app/templateExporter/GetTemplateByEntity',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            timeout: 120000,
             jsonData: Ext.encode(requestParamsObj),
             success: function (response, opts) {
                 var resObj = Ext.decode(response.responseText);

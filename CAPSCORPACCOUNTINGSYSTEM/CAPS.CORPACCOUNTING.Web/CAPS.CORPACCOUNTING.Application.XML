@@ -2834,6 +2834,238 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentDetailUnit,System.Int64})">
+            <summary>
+            
+            </summary>
+            <param name="chargeentrydocumentunitrepository"></param>
+            <param name="chargeentrydocumentdetailunitrepository"></param>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.PurchaseOrderItemId">
+            <summary>Gets or sets the PurchaseOrderItemId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.PoHistoryItemId">
+            <summary>Gets or sets the POHistoryItemID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.VendorId">
+            <summary>Gets or sets the VendorID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.IsPrePaid">
+            <summary>Gets or sets the IsPrePaid field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.BankAccountId">
+            <summary>Gets or sets the BankAccountID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.TypeOfChargeId">
+            <summary>Gets or sets the TypeOfChargeID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.ChargeReferenceNumber">
+            <summary>Gets or sets the ChargeReferenceNumber field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.ChargeDate">
+            <summary>Gets or sets the ChargeDate field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.ChargeSicCode">
+            <summary>Gets or sets the ChargeSICCode field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.ChargeSeNumber">
+            <summary>Gets or sets the ChargeSENumber field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.ChargeOtherInfo">
+            <summary>Gets or sets the ChargeOtherInfo field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.ChargeOriginalAmount">
+            <summary>Gets or sets the ChargeOriginalAmount field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.ChargeRetiredAmount">
+            <summary>Gets or sets the ChargeRetiredAmount field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit.IsChargeDisputed">
+            <summary>Gets or sets the CustomerID field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.PurchaseOrderItemId">
+            <summary>Gets or sets the PurchaseOrderItemId field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.PoHistoryItemId">
+            <summary>Gets or sets the POHistoryItemID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.VendorId">
+            <summary>Gets or sets the VendorID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.IsPrePaid">
+            <summary>Gets or sets the IsPrePaid field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.BankAccountId">
+            <summary>Gets or sets the BankAccountID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.BankAccount">
+            <summary>Gets or sets the BankAccount field. </summary> 
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.TypeOfChargeId">
+            <summary>Gets or sets the TypeOfChargeID field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.TypeOfCharge">
+            <summary>Gets or sets the TypeOfCharge field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.ChargeReferenceNumber">
+            <summary>Gets or sets the ChargeReferenceNumber field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.ChargeDate">
+            <summary>Gets or sets the ChargeDate field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.ChargeSicCode">
+            <summary>Gets or sets the ChargeSICCode field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.ChargeSeNumber">
+            <summary>Gets or sets the ChargeSENumber field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.ChargeOtherInfo">
+            <summary>Gets or sets the ChargeOtherInfo field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.ChargeOriginalAmount">
+            <summary>Gets or sets the ChargeOriginalAmount field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.ChargeRetiredAmount">
+            <summary>Gets or sets the ChargeRetiredAmount field. </summary>   
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailUnitDto.IsChargeDisputed">
+            <summary>Gets or sets the CustomerID field. </summary>   
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.BatchId">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.VendorId">
+            <summary>Get Sets the VendorId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.TypeOfInvoiceId">
+            <summary>Get Sets the TypeOfInvoiceId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.BankAccountId">
+            <summary>Get Sets the BankAccountId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.IsEnterable">
+            <summary>Get Sets the IsEnterable field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.ApInvoiceAccountingDocId">
+            <summary>Get Sets the ApInvoiceAccountingDocId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.UploadDocumentLogId">
+            <summary>Get Sets the UploadDocumentLogId field.</summary>}
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.IsApInvoiceGenSelected">
+            <summary>Get Sets the IsApInvoiceGenSelected field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit.CreditCardEntryDetailList">
+            <summary>Gets or sets CreditCardEntryDetailList field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.BatchId">
+            <summary>Get Sets the BatchId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.BatchName">
+            <summary>Get Sets the BatchName field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.VendorId">
+            <summary>Get Sets the VendorId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.VendorName">
+            <summary>Get Sets the VendorName field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.TypeOfInvoiceId">
+            <summary>Get Sets the TypeOfInvoiceId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.BankAccountId">
+            <summary>Get Sets the BankAccountId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.BankAccount">
+            <summary>Get Sets the BankAccount field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.IsEnterable">
+            <summary>Get Sets the IsEnterable field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.ApInvoiceAccountingDocId">
+            <summary>Get Sets the ApInvoiceAccountingDocId field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.UploadDocumentLogId">
+            <summary>Get Sets the UploadDocumentLogId field.</summary>}
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.UploadDocumentLog">
+            <summary>Get Sets the UploadDocumentLog field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.IsApInvoiceGenSelected">
+            <summary>Get Sets the IsApInvoiceGenSelected field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.CreateCreditCardEntryDocumentUnit(CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit)">
+            <summary>
+            Create CreditCard Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.UpdateCreditCardEntryDocumentUnit(CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit)">
+            <summary>
+            Update CreditCard Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.DeleteCreditCardEntryDocumentUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete CreditCard Entry Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.DeleteCreditCardDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+            <summary>
+            Delete CreditCard Detail Document.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.GetCreditCardEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get CreditCard Entry Document List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.GetCreditCardDetailsByDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            Get CreditCard Details by AccountingDocumentId List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.Editions.EditionAppService.GetAllEditions(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
              <summary>
             Get the list of all Editions and also provided with Sorting,Paging and Searching functionality.
@@ -2892,7 +3124,57 @@
             
             </summary>
         </member>
-        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites">
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields.FieldValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields.ColumnName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields.IsEditable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields.List">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties.ShowErrorMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties.ErrorTitle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties.ErrorStyle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties.Error">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties.ExcelFormula">
             <summary>
             
             </summary>
@@ -2903,73 +3185,24 @@
             </summary>
             
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.CreateTemplate(System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetExcelSheetDropDownList(OfficeOpenXml.ExcelWorksheet,System.String,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto})">
-            <summary>
-            
-            </summary>
-            <param name="sheet"></param>
-            <param name="cell"></param>
-            <param name="list"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddTemplateObjects(OfficeOpenXml.ExcelWorksheet,System.Int32,System.Int32,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelFields[])">
-            <summary>
-            Fill Dropdown List to Cells in ExcelSheet
-            </summary>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetBooleanList">
             <summary>
             Get Boolean values as List
             </summary>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddListDataIntoWorkSheet(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.String,System.String)">
-            <summary>
-            List Data is Added to Excel Sheet
-            </summary>
-            <param name="sheet"></param>
-            <param name="list"></param>
-            <param name="listName"></param>
-            <param name="cellColumn"></param>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddListDataIntoWorkSheet(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.Collections.Generic.KeyValuePair{System.String,System.String},System.Collections.Generic.KeyValuePair{System.String,System.String})">
             <summary>
-            List Data is Added to Excel Sheet
+            List Data is Added into Data Excel Sheet
             </summary>
             <param name="sheet"></param>
             <param name="list"></param>
             <param name="listName"></param>
             <param name="cellList"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddListDataIntoWorkSheet(OfficeOpenXml.ExcelWorksheet,System.Collections.Generic.List{Abp.Application.Services.Dto.NameValueDto},System.String,System.Int32)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.String,System.Int32,System.Int32,System.Int32)">
             <summary>
-             List Data is Added to Excel Sheet
-            </summary>
-            <param name="sheet"></param>
-            <param name="list"></param>
-            <param name="listName"></param>
-            <param name="columnNumber"></param>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.String,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="sheet"></param>
-            <param name="excelFormula"></param>
-            <param name="startRowIndex"></param>
-            <param name="endRowIndex"></param>
-            <param name="excelColumn"></param>
-             <param name="excelProperties"></param>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.String,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            
+            Add DropDownList into Data Sheet.
             </summary>
             <param name="sheet"></param>
             <param name="excelFormula"></param>
@@ -2979,19 +3212,9 @@
              <param name="excelProperties"></param>
              <param name="columnName"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.Int32,System.Int32,System.Int32)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.Int32,System.Int32,System.Int32)">
             <summary>
-            
-            </summary>
-            <param name="sheet"></param>
-            <param name="excelProperties"></param>
-            <param name="startRowIndex"></param>
-            <param name="endRowIndex"></param>
-            <param name="excelColumn"></param>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            
+            add validation to DataSheet
             </summary>
             <param name="sheet"></param>
             <param name="excelProperties"></param>
@@ -3002,7 +3225,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddFormulaToSheet(System.String,OfficeOpenXml.ExcelWorksheet,System.String,System.Int32,System.Int32,System.Boolean,System.Int32)">
             <summary>
-            
+            add excel formula to Data Sheet
             </summary>
             <param name="columnName"></param>
             <param name="sheet"></param>
@@ -3046,7 +3269,7 @@
             <param name="cellColumn"></param>
             <param name="lstFromRange"></param>
             <param name="lstEndRange"></param>
-             <param name="dropDownCellColumn"></param>
+             <param name="dropDownCellColumns"></param>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetRequiredFieldFormula(System.Collections.Generic.List{System.String},System.String)">
@@ -3059,7 +3282,7 @@
         </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.GetMultiValidationString(System.Collections.Generic.List{System.String})">
             <summary>
-            
+            get multi validation formula as string
             </summary>
             <param name="validationList"></param>
             <returns></returns>
@@ -3082,9 +3305,9 @@
             <param name="message"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.SetExcelFromula(CAPS.CORPACCOUNTING.ExcelTemplates.ExcelProperites,System.String)">
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.SetExcelFromula(CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.String)">
             <summary>
-            
+            set formula to Excel Properties
             </summary>
             <param name="properties"></param>
             <param name="excelFromula"></param>
@@ -4976,6 +5199,9 @@
             <summary>Gets or sets the RollupAccountId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TypeOfCurrencyId">
+            <summary>Gets or sets the TypeOfCurrencyId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.TypeOfCurrency">
             <summary>Gets or sets the TypeOfCurrencyId field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.JobUnitDto.RollupJobId">

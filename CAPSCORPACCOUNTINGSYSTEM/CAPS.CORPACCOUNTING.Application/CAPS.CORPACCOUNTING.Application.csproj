@@ -249,6 +249,13 @@
     <Compile Include="Common\Dto\FindUsersInput.cs" />
     <Compile Include="Common\ICommonLookupAppService.cs" />
     <Compile Include="Configuration\Tenants\Dto\LdapSettingsEditDto.cs" />
+    <Compile Include="CreditCard\CreditCardEntryDocumentAppService.cs" />
+    <Compile Include="CreditCard\Dto\CreditCardEntryDetailInputUnit.cs" />
+    <Compile Include="CreditCard\Dto\CreditCardEntryDetailUnitDto.cs" />
+    <Compile Include="CreditCard\Dto\CreditCardEntryDocumentInputUnit.cs" />
+    <Compile Include="CreditCard\Dto\CreditCardEntryDocumentUnitDto.cs" />
+    <Compile Include="CreditCard\ICreditCardEntryDocumentAppService.cs" />
+    <Compile Include="CustomDtoMapper.cs" />
     <Compile Include="DataExporting\Excel\EpPlus\EpPlusExcelExporterBase.cs" />
     <Compile Include="Dto\PagedAndFilteredInputDto.cs" />
     <Compile Include="Dto\PagedInputDto.cs" />
@@ -288,7 +295,6 @@
     <Compile Include="Authorization\Users\Dto\UserListDto.cs" />
     <Compile Include="Authorization\Users\Dto\UserEditDto.cs" />
     <Compile Include="Authorization\Users\Dto\UserRoleDto.cs" />
-    <Compile Include="CustomDtoMapper.cs" />
     <Compile Include="ExcelTemplates\AccountsTemplate.cs" />
     <Compile Include="ExcelTemplates\DivisionTemplate.cs" />
     <Compile Include="ExcelTemplates\Dto\TemplateInputUnit.cs" />

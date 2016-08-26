@@ -43,8 +43,11 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
           iconAlign: 'left'
       }],
     importConfig: {
-        entity: 'Projects',
-        isRequireImport: true
+        entity: app.localize('Projects'),
+        isRequireImport: true,
+        importStoreClass: 'imports.ProjectsImportStore',
+        targetGrid: null,
+        targetUrl: abp.appPath + 'api/services/app/jobCommercial/BulkJobInsert'
     },
     requireExport: true,
     requireMultiSearch: true,
@@ -54,15 +57,15 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
     columnLines: true,
     multiColumnSort: true,
     editWndTitleConfig: {
-        title: app.localize('EditProject').initCap(),
+        title: app.localize('EditProject'),
         iconCls: 'fa fa-pencil'
     },
     createWndTitleConfig: {
-        title: app.localize('CreateNewProject').initCap(),
+        title: app.localize('CreateNewProject'),
         iconCls: 'fa fa-plus'
     },
     viewWndTitleConfig: {
-        title: app.localize('ViewProject').initCap(),
+        title: app.localize('ViewProject'),
         iconCls: 'fa fa-th'
     },
     createNewMode: 'tab',
@@ -86,7 +89,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('JobName').initCap(),
+             text: app.localize('JobName'),
              dataIndex: 'caption',
              sortable: true,
              groupable: true,
@@ -102,7 +105,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          },{
              xtype: 'gridcolumn',
-             text: app.localize('DetailReport').initCap(),
+             text: app.localize('DetailReport'),
              dataIndex: 'detailTransactions',//TODO: render hyperlink based on transactions count
              sortable: false,
              groupable: false,
@@ -110,7 +113,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              width: '13%'
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('ProductName').initCap(),
+             text: app.localize('ProductName'),
              dataIndex: 'productName',
              sortable: true,
              groupable: true,
@@ -172,7 +175,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('POLog').initCap(),
+             text: app.localize('POLog'),
              dataIndex: 'poLogCount',//TODO: render hyperlink based on po log count
              sortable: false,
              groupable: false,
@@ -180,7 +183,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              width: '15%'
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('ProjectType').initCap(),
+             text: app.localize('ProjectType'),
              dataIndex: 'typeofProjectName',
              sortable: true,
              groupable: true,
@@ -200,7 +203,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('ShootDate').initCap(),
+             text: app.localize('ShootDate'),
              dataIndex: 'shootingDate',
              sortable: true,
              groupable: true,
@@ -216,7 +219,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {///TODO : field to be added
              xtype: 'gridcolumn',
-             text: app.localize('ShootLocations').initCap(),
+             text: app.localize('ShootLocations'),
              dataIndex: 'shootLocations',
              sortable: true,
              groupable: true,
@@ -228,7 +231,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('WrapUpInsurance').initCap(),
+             text: app.localize('WrapUpInsurance'),
              dataIndex: 'isWrapUpInsurance',
              sortable: false,
              groupable: false,
@@ -262,7 +265,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
          ////TODO : dummy columns for default manage view
          {
              xtype: 'gridcolumn',
-             text: app.localize('TotalCost').initCap(),
+             text: app.localize('TotalCost'),
              dataIndex: 'totalCost',
              sortable: true,
              groupable: true,
@@ -275,7 +278,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          },{
              xtype: 'gridcolumn',
-             text: app.localize('BidContract').initCap(),
+             text: app.localize('BidContract'),
              dataIndex: 'bidContractTotal',
              sortable: true,
              groupable: true,
@@ -288,7 +291,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('ProducersActual').initCap(),
+             text: app.localize('ProducersActual'),
              dataIndex: 'producersActual',
              sortable: true,
              groupable: true,
@@ -301,7 +304,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('BilledAmount').initCap(),
+             text: app.localize('BilledAmount'),
              dataIndex: 'billedAmount',
              sortable: true,
              groupable: true,
@@ -314,7 +317,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('RecievedAmount').initCap(),
+             text: app.localize('RecievedAmount'),
              dataIndex: 'recievedAmount',
              sortable: true,
              groupable: true,
@@ -340,7 +343,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('AgencyProducer').initCap(),
+             text: app.localize('AgencyProducer'),
              dataIndex: 'agencyProducer',
              sortable: true,
              groupable: true,

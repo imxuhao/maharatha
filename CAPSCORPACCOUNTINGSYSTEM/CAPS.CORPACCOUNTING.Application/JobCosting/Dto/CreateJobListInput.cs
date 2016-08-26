@@ -4,6 +4,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
     public class CreateJobListInput
     {
-        public List<CreateJobUnitInput> JobList { get; set; }
+        public List<CreateJobCommercialInput> JobList { get; set; }
     }
 }

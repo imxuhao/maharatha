@@ -238,6 +238,7 @@
     <Compile Include="Localization\CustomLanguageTextsUnitManager.cs" />
     <Compile Include="Masters\ConnectionStringUnit.cs" />
     <Compile Include="Masters\CountryUnit.cs" />
+    <Compile Include="Masters\CustomRepository\ICustomJobAccountRepository.cs" />
     <Compile Include="Masters\CustomRepository\ICustomAccountRepository.cs" />
     <Compile Include="Masters\TaxCreditUnit.cs" />
     <Compile Include="Masters\TaxCreditUnitManager.cs" />

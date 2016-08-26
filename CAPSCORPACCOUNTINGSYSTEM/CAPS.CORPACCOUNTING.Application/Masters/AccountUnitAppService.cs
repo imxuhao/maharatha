@@ -386,16 +386,20 @@ namespace CAPS.CORPACCOUNTING.Accounts
         public async Task<List<AccountUnitDto>> BulkAccountInsert(CreateAccountListInput listAccountUnitDtos)
         {
             List<AccountUnit> accountList = new List<AccountUnit>();
-            var erroredAccountList = await ValidateDuplicateRecords(listAccountUnitDtos.AccountList);
+           var createAccountList = listAccountUnitDtos.AccountList.Select((item, index) => { item.ExcelRowNumber = index; return item; }).ToList();
+           
+            var erroredAccountList = await ValidateDuplicateRecords(createAccountList);
             var accounts = listAccountUnitDtos.AccountList.Where(p => erroredAccountList.All(p2 => p2.AccountNumber != p.AccountNumber)).ToList();
+            int  accountCode = Convert.ToInt32(await _accountUnitManager.GetNextChildCodeAsync(parentId: null, coaId: listAccountUnitDtos.AccountList[0].ChartOfAccountId));
             foreach (var accountUnit in accounts)
             {
                 accountUnit.ParentId = accountUnit.ParentId != 0 ? accountUnit.ParentId : null;
                 var account = accountUnit.MapTo<AccountUnit>();
                 account.TenantId = AbpSession.GetTenantId();
                 account.CreatorUserId = AbpSession.GetUserId();
-                account.Code = await _accountUnitManager.GetNextChildCodeAsync(parentId: accountUnit.ParentId, coaId: accountUnit.ChartOfAccountId);
+                account.Code = AccountUnit.CreateCode(accountCode);
                 accountList.Add(account);
+                accountCode++;
             }
             if (accountList.Count > 0)
             {
@@ -416,8 +420,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
             var accountNumberList = string.Join(",", accountsList.Select(p => p.AccountNumber).ToArray());
             var descriptionList = string.Join(",", accountsList.Select(p => p.Caption).ToArray());
 
-            var duplicateAccountItems = await _accountcache.GetAccountCacheItemAsync(
+            var duplicateAccounts = await _accountcache.GetAccountCacheItemAsync(
                 CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(_customAppSession.TenantId)));
+            var duplicateAccountItems =
+                duplicateAccounts.Where(p => p.ChartOfAccountId == accountsList[0].ChartOfAccountId).ToList();
+
             var duplicateAccountList =
                 duplicateAccountItems.Where(
                     p => accountNumberList.Contains(p.AccountNumber) || descriptionList.Contains(p.Caption)).ToList();

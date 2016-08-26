@@ -154,6 +154,7 @@
     <Compile Include="EntityFramework\ConnectionStringHelper.cs" />
     <Compile Include="EntityFramework\CORPACCOUNTINGDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\CORPACCOUNTINGRepositoryBase.cs" />
+    <Compile Include="EntityFramework\Repositories\CustomJobAccountRepository.cs" />
     <Compile Include="EntityFramework\Repositories\CustomAccountRepository.cs" />
     <Compile Include="MigrationExtensions.cs" />
     <Compile Include="Migrations\201501041229232_InitialCreate.cs" />

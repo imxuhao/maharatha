@@ -5099,6 +5099,11 @@
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.LocationNames">
             <summary>Gets or Sets LocationNames Field.  </summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput.ExcelRowNumber">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.JobCosting.Dto.GetRollupCenterInput.OrganizationUnitId">
             <summary> Gets or Sets the CompanyId to Search the RollupCenters based on  CompanyId </summary>
         </member>
@@ -6000,6 +6005,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.IJobUnitAppService.BulkJobInsert(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobListInput)">
+            <summary>
+            BulkInsert of Jobs
+            </summary>
+            <param name="listJobUnitDtos"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.JobCosting.JobCommercialAppService">
             <summary>
             
@@ -6141,6 +6153,28 @@
             Get Customers
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.BulkJobInsert(CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobListInput)">
+            <summary>
+            BulkInsert of Jobs
+            </summary>
+            <param name="listJobUnitDtos"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.InsertJobAccounts(System.Int32,System.Int32)">
+            <summary>
+            BulkInsert JobAccount
+            </summary>
+            <param name="coaId"></param>
+            <param name="jobId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.JobCosting.JobUnitAppService.ValidateDuplicateRecords(System.Collections.Generic.List{CAPS.CORPACCOUNTING.JobCosting.Dto.CreateJobCommercialInput})">
+            <summary>
+            Checking DuplicateRecords
+            </summary>
+            <param name="jobsList"></param>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Journals.Dto.JournalCreditEntryDetailUnitDto">

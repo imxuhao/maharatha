@@ -27,7 +27,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         public bool IsCorporateDefault { get; set; }
 
         /// <summary>Gets or sets the ChartOfAccountId field. </summary>  
-        public int ChartOfAccountId { get; set; }       
+        public int? ChartOfAccountId { get; set; }       
 
         /// <summary>Gets or sets the RollupAccountId field. </summary>
         public long? RollupAccountId { get; set; }        

@@ -115,5 +115,12 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<CustomerCacheItem>> GetCustomersList(AutoSearchInput input);
+
+        /// <summary>
+        /// BulkInsert of Jobs
+        /// </summary>
+        /// <param name="listJobUnitDtos"></param>
+        /// <returns></returns>
+        Task<List<JobCommercialUnitDto>> BulkJobInsert(CreateJobListInput listJobUnitDtos);
     }
 }

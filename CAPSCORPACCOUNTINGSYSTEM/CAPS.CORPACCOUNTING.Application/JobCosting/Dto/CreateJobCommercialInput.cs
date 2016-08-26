@@ -262,5 +262,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 
         /// <summary>Gets or Sets LocationNames Field.  </summary>
         public string LocationNames { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ExcelRowNumber { get; set; }
     }
 }

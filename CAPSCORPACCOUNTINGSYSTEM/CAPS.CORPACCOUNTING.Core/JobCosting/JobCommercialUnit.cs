@@ -8,7 +8,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 {
     //// <summary>
     ///  Lajit JobCommercial Table Renamed as  CAPS_JobDetail
-    /// </summary>
+    //// </summary>
     [Table("CAPS_JobCommercial")]
     public class JobCommercialUnit : JobUnit
     {

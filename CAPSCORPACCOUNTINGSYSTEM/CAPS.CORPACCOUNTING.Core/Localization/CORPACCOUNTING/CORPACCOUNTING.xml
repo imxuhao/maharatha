@@ -1235,5 +1235,8 @@
     <text name="StatusIds" value="Status_Ids" />
     <text name="BudgetFormatIds" value="Budget_Format_Ids" />
     <text name="TaxCreditIds" value="Tax_Credit_Ids" />
+     <text name="BudgetFormatRequired" value=",Budget Format is Required" />
+  
+
   </texts>
 </localizationDictionary>

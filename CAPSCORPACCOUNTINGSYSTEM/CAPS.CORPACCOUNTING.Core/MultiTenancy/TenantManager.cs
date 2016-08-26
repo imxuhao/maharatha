@@ -192,22 +192,32 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         {
             int newTenantId;
             long newAdminId;
+            string strConnectionstring;
+            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+
+                var connectionstringUnit =
+                    await (from org in _organizationRepository.GetAll()
+                        join constr in _connectionStringRepository.GetAll() on org.ConnectionStringId equals
+                            constr.Id
+                        where org.Id == organizationId
+                        select constr).FirstOrDefaultAsync();
+
+                strConnectionstring = connectionstringUnit.ConnectionString;
+                await uow.CompleteAsync();
+            }
 
             using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
 
-                var connectionstringUnit = await (from org in _organizationRepository.GetAll()
-                                                  join constr in _connectionStringRepository.GetAll() on org.ConnectionStringId equals
-                                                      constr.Id
-                                                  where org.Id == organizationId
-                                                  select constr).FirstOrDefaultAsync();
+
 
                 //Create tenant
                 var tenant = new Tenant(tenancyName, name)
                 {
                     IsActive = isActive,
                     EditionId = editionId,
-                    ConnectionString = ReferenceEquals(connectionstringUnit, null) ? null : connectionstringUnit.ConnectionString,
+                    ConnectionString = strConnectionstring,
                     OrganizationUnitId = organizationId
                 };
 
@@ -271,8 +281,17 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                     await CloneTenantData(newTenantId, sourcetenantId, entityList);
                 await uow.CompleteAsync();
             }
-
             //Used a second UOW since UOW above sets some permissions and _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync needs these permissions to be saved.
+            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                if (sourcetenantId.HasValue)
+                {
+                    await CloneTenantData(newTenantId, sourcetenantId, entityList);
+                    await uow.CompleteAsync();
+                }
+
+            }
+            //Used a thir UOW since UOW above clone the data
             using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
@@ -529,7 +548,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                     if (!ReferenceEquals(entityList, null))
                                     {
                                         //Mapper.CreateMap<CustomerUnit, CustomerUnit>().ForMember(u => u.Id, ap => ap.Ignore());
-                                        var config = new MapperConfiguration(cfg => {
+                                        var config = new MapperConfiguration(cfg =>
+                                        {
                                             cfg.CreateMap<CustomerUnit, CustomerUnit>().ForMember(u => u.Id, ap => ap.Ignore());
                                         });
                                         var customerUnit = new CustomerUnit();

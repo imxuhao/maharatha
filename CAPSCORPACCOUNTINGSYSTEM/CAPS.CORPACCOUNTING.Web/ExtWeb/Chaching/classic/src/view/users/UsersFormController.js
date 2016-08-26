@@ -246,6 +246,9 @@
         values.userName = values.emailAddress;
         record.data.user = values;
         Ext.apply(record.data, values);
+        if (record.data.tenantId == 0) {
+            record.data.tenantId = null;
+        }
         //get roles information
         var rolesListRecords = view.down('gridpanel[itemId=rolesListGridItemId]').getSelection();
         //get company information

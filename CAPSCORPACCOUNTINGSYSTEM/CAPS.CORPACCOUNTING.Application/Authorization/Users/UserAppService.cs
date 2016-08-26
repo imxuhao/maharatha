@@ -404,7 +404,8 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 await _userEmailer.SendEmailActivationLinkAsync(user, input.User.Password);
             }
             if (!ReferenceEquals(input.TenantList, null))
-                await CreateUserforLinkedTenantAsync(input);
+                if (input.TenantList.Count > 0)
+                    await CreateUserforLinkedTenantAsync(input);
         }
 
         private async Task FillRoleNames(List<UserListDto> userListDtos)
@@ -496,26 +497,26 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 User user;
                 using (_unitOfWorkManager.Current.SetTenantId(tenant.TenantId))
                 {
-                    
-                        user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
-                        user.TenantId = tenant.TenantId;
 
-                        //Set password
-                        if (!input.User.Password.IsNullOrEmpty())
-                        {
-                            CheckErrors(await UserManager.PasswordValidator.ValidateAsync(input.User.Password));
-                        }
-                        else
-                        {
-                            input.User.Password = User.CreateRandomPassword();
-                        }
+                    user = input.User.MapTo<User>(); //Passwords is not mapped (see mapping configuration)
+                    user.TenantId = tenant.TenantId;
 
-                        user.Password = new PasswordHasher().HashPassword(input.User.Password);
-                        user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
+                    //Set password
+                    if (!input.User.Password.IsNullOrEmpty())
+                    {
+                        CheckErrors(await UserManager.PasswordValidator.ValidateAsync(input.User.Password));
+                    }
+                    else
+                    {
+                        input.User.Password = User.CreateRandomPassword();
+                    }
 
-                        //Checking the User exist 
-                        var userUnit =
-                            await _userUnitRepository.FirstOrDefaultAsync(p => p.UserName == user.UserName);
+                    user.Password = new PasswordHasher().HashPassword(input.User.Password);
+                    user.ShouldChangePasswordOnNextLogin = input.User.ShouldChangePasswordOnNextLogin;
+
+                    //Checking the User exist 
+                    var userUnit =
+                        await _userUnitRepository.FirstOrDefaultAsync(p => p.UserName == user.UserName);
                     if (!tenant.IsEmptyRoles)
                     {
                         if (ReferenceEquals(userUnit, null))

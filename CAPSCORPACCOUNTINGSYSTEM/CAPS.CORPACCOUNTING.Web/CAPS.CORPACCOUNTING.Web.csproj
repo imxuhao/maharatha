@@ -2433,6 +2433,11 @@
     <Content Include="ExtWeb\build\production\Chaching\classic\resources\ux\images\statusbar\exclamation.gif" />
     <Content Include="ExtWeb\build\production\Chaching\classic\resources\ux\images\statusbar\loading.gif" />
     <Content Include="ExtWeb\build\production\Chaching\classic\resources\ux\images\tabscrollermenu\menu.gif" />
+    <Content Include="ExtWeb\build\production\Chaching\lib\comma-separated-values\csv.min.js" />
+    <Content Include="ExtWeb\build\production\Chaching\lib\filesaver\FileSaver.min.js" />
+    <Content Include="ExtWeb\build\production\Chaching\lib\fuzzyset.js\lib\fuzzyset.js" />
+    <Content Include="ExtWeb\build\production\Chaching\lib\js-xlsx\dist\xlsx.full.min.js" />
+    <Content Include="ExtWeb\build\production\Chaching\lib\js-xls\dist\xls.min.js" />
     <Content Include="ExtWeb\build\production\Chaching\microloader.js" />
     <Content Include="ExtWeb\build\production\Chaching\modern\app.js" />
     <Content Include="ExtWeb\build\production\Chaching\modern\resources\Chaching-all.css" />
@@ -3253,6 +3258,11 @@
     <Content Include="ExtWeb\build\testing\Chaching\classic\resources\ux\images\statusbar\loading.gif" />
     <Content Include="ExtWeb\build\testing\Chaching\classic\resources\ux\images\tabscrollermenu\menu.gif" />
     <Content Include="ExtWeb\build\testing\Chaching\index.html" />
+    <Content Include="ExtWeb\build\testing\Chaching\lib\comma-separated-values\csv.min.js" />
+    <Content Include="ExtWeb\build\testing\Chaching\lib\filesaver\FileSaver.min.js" />
+    <Content Include="ExtWeb\build\testing\Chaching\lib\fuzzyset.js\lib\fuzzyset.js" />
+    <Content Include="ExtWeb\build\testing\Chaching\lib\js-xlsx\dist\xlsx.full.min.js" />
+    <Content Include="ExtWeb\build\testing\Chaching\lib\js-xls\dist\xls.min.js" />
     <Content Include="ExtWeb\build\testing\Chaching\microloader.js" />
     <Content Include="ExtWeb\build\testing\Chaching\modern\app.js" />
     <Content Include="ExtWeb\build\testing\Chaching\modern\resources\Chaching-all.css" />
@@ -21441,6 +21451,7 @@
     <Content Include="ExtWeb\packages\remote\gearbox-import-export\INSTALL.md" />
     <Content Include="ExtWeb\packages\remote\gearbox-import-export\package.json" />
     <Content Include="ExtWeb\packages\remote\gearbox-import-export\README.md" />
+    <Content Include="ExtWeb\build\development\Chaching\classic\resources\gearbox-data-file\Readme.md" />
     <None Include="Properties\PublishProfiles\DevServerRelease.pubxml" />
     <None Include="Properties\PublishProfiles\File.pubxml" />
     <Content Include="Scripts\angular-parse-ext.min.js.map" />

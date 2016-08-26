@@ -24,7 +24,7 @@ using AutoMapper;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Sessions;
 using Abp.Runtime.Session;
-using CAPS.CORPACCOUNTING.Masters.CustomRepository;
+using CAPS.CORPACCOUNTING.JobCosting.CustomRepository;
 
 namespace CAPS.CORPACCOUNTING.JobCosting
 {
@@ -467,10 +467,6 @@ namespace CAPS.CORPACCOUNTING.JobCosting
                 || p.CustomerNumber.EmptyIfNull().ToUpper().Contains(input.Query.ToUpper())).ToList();
         }
 
-
-
-
-
         /// <summary>
         /// BulkInsert of Jobs
         /// </summary>
@@ -485,8 +481,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             foreach (var jobUnit in jobs)
             {
                 var job = jobUnit.MapTo<JobCommercialUnit>();
-                job.TenantId = AbpSession.GetTenantId();
-                job.CreatorUserId = AbpSession.GetUserId();
+                job.IsDivision = false;
                 await InsertJobAccounts(job.ChartOfAccountId, await _jobDetailUnitRepository.InsertAndGetIdAsync(job));
             }
             return errorjobList;

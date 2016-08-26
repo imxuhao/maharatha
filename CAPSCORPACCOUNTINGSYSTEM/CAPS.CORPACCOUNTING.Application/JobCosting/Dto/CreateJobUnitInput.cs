@@ -1,6 +1,7 @@
 ﻿using System;
 using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
+using Abp.AutoMapper;
 
 namespace CAPS.CORPACCOUNTING.JobCosting.Dto
 {
@@ -8,6 +9,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
     /// /// <summary>
     /// InputDto for CreateAccount
     /// </summary>
+    [AutoMapTo(typeof(JobUnit))]
     public class CreateJobUnitInput : IInputDto
     {
         /// <summary>Gets or sets the JobNumber field. </summary>
@@ -75,6 +77,9 @@ namespace CAPS.CORPACCOUNTING.JobCosting.Dto
         /// <summary>Gets or sets the TaxCreditId field. </summary>
         public int? TaxCreditId { get; set; }
 
-
+        /// <summary>
+        ///Gets or sets the  ExcelRowNumber
+        /// </summary>
+        public int ExcelRowNumber { get; set; }
     }
 }

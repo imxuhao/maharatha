@@ -41,7 +41,11 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         /// <returns></returns>
         Task<PagedResultOutput<JobUnitDto>> GetDivisionUnits(SearchInputDto input);
 
-        
-
+        /// <summary>
+        /// BulkInsert of Division
+        /// </summary>
+        /// <param name="listDivisionUnitDtos"></param>
+        /// <returns></returns>
+        Task<List<JobUnitDto>> BulkDivisionInsert(CreateDivisionListInput listDivisionUnitDtos);
     }
 }

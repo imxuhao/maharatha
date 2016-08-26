@@ -230,6 +230,7 @@
     <Compile Include="JobCosting\ARBillingTypeUnitManager.cs" />
     <Compile Include="Financials\Preferences\FiscalPeriodUnitManager.cs" />
     <Compile Include="Financials\Preferences\FiscalYearUnitManager.cs" />
+    <Compile Include="JobCosting\CustomRepository\ICustomDivisionRepository.cs" />
     <Compile Include="JobCosting\JobLocationUnitManager.cs" />
     <Compile Include="JobCosting\JobPORangeAllocationUnit.cs" />
     <Compile Include="JobCosting\JobPORangeAllocationUnitManager.cs" />
@@ -238,7 +239,7 @@
     <Compile Include="Localization\CustomLanguageTextsUnitManager.cs" />
     <Compile Include="Masters\ConnectionStringUnit.cs" />
     <Compile Include="Masters\CountryUnit.cs" />
-    <Compile Include="Masters\CustomRepository\ICustomJobAccountRepository.cs" />
+    <Compile Include="JobCosting\CustomRepository\ICustomJobAccountRepository.cs" />
     <Compile Include="Masters\CustomRepository\ICustomAccountRepository.cs" />
     <Compile Include="Masters\TaxCreditUnit.cs" />
     <Compile Include="Masters\TaxCreditUnitManager.cs" />

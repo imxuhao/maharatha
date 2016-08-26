@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using Abp.EntityFramework;
 using CAPS.CORPACCOUNTING.JobCosting;
-using CAPS.CORPACCOUNTING.Masters;
-using CAPS.CORPACCOUNTING.Masters.CustomRepository;
+using CAPS.CORPACCOUNTING.JobCosting.CustomRepository;
 
 namespace CAPS.CORPACCOUNTING.EntityFramework.Repositories
 {

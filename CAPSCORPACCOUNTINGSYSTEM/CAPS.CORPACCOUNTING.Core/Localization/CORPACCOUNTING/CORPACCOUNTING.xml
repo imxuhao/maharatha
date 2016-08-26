@@ -1236,6 +1236,11 @@
     <text name="BudgetFormatIds" value="Budget_Format_Ids" />
     <text name="TaxCreditIds" value="Tax_Credit_Ids" />
      <text name="BudgetFormatRequired" value=",Budget Format is Required" />
+      <text name="DuplicatedivisionName" value="Division Name is Required" />
+        <text name="DuplicatedivisionNumber" value=",Division Number is Required" />
+    
+    
+    
   
 
   </texts>

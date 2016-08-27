@@ -64,9 +64,9 @@ Ext.define('Gearbox.data.file.reader.Xls', {
 				wb.Sheets[sheetName]
 			);
 
-			if (roa.length > 0) {
-				records = records.concat(roa);
-			}
+		    if (roa.length > 0 && sheetName !== "DropDown List Information") {
+		        records = records.concat(roa);
+		    }
 		});
 
 		return this.callParent([records]);

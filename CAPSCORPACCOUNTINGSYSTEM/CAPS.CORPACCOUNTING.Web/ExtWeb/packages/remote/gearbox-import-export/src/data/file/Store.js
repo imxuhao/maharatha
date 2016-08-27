@@ -253,7 +253,7 @@ Ext.define('Gearbox.data.file.Store', {
 	 */
 	onDrop: function(target, files) {
 	    if (files) {
-	        var regExpress = new RegExp('([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$'),
+	        var regExpress = new RegExp('(\.\)+(.xls|.xlsx)$'),
 	            invalidCount = 0;
 	        
 	        for (var i = 0; i < files.length; i++) {

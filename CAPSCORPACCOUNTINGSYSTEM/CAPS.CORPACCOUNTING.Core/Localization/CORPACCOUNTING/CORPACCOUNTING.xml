@@ -1155,8 +1155,8 @@
     <text name="DuplicateAccountNumbers" value="Duplicate AccountNumbers:"/>
     <text name="DuplicateJobNumbers" value="Duplicate JobNumbers:"/>
     <text name="DuplicateJobNames" value="Duplicate JobNames:"/>
-    <text name="DuplicateJobNumber" value=" Duplicate JobNumber,"/>
-    <text name="DuplicateJobName" value=" Duplicate JobName." />
+    <text name="DuplicateJobNumber" value=" ,Duplicate JobNumber -"/>
+    <text name="DuplicateJobName" value=" Duplicate JobName-" />
     <text name="ShouldbeNumberic" value=" should be Numeric," />
     <text name="DuplicateCaption" value=" Duplicate Caption - "/>
     <text name="DuplicateLineNumber" value=" Duplicate Line # - "/>
@@ -1236,8 +1236,8 @@
     <text name="BudgetFormatIds" value="Budget_Format_Ids" />
     <text name="TaxCreditIds" value="Tax_Credit_Ids" />
      <text name="BudgetFormatRequired" value=",Budget Format is Required" />
-      <text name="DuplicatedivisionName" value="Division Name is Required" />
-        <text name="DuplicatedivisionNumber" value=",Division Number is Required" />
+      <text name="DuplicatedivisionName" value=",Duplicate Division Name -" />
+        <text name="DuplicatedivisionNumber" value="Duplicate Division Number -" />
     
     
     

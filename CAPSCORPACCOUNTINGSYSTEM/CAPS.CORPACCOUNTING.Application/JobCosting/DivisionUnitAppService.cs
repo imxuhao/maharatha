@@ -178,7 +178,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
             if (divisionList.Count > 0)
             {
                 await _customDivisionRepository.BulkInsertDivisionUnits(divisionList: divisionList);
-                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheAccountStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.AccountKey, Convert.ToInt32(AbpSession.GetTenantId())));
+                _cacheManager.GetCacheItem(CacheStoreName: CacheKeyStores.CacheDivisionStore).Remove(CacheKeyStores.CalculateCacheKey(CacheKeyStores.DivisionKey, Convert.ToInt32(AbpSession.GetTenantId())));
             }
             return errorjobList;
         }

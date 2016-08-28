@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using CAPS.CORPACCOUNTING.Chat;
 
 namespace CAPS.CORPACCOUNTING.Authorization.Users
 {
@@ -18,5 +19,14 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
         /// </summary>
         /// <param name="user">User</param>
         Task SendPasswordResetLinkAsync(User user);
+
+        /// <summary>
+        /// Sends an email for unread chat message to user's email.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="senderUsername"></param>
+        /// <param name="senderTenancyName"></param>
+        /// <param name="chatMessage"></param>
+        void TryToSendChatMessageMail(User user, string senderUsername, string senderTenancyName, ChatMessage chatMessage);
     }
 }

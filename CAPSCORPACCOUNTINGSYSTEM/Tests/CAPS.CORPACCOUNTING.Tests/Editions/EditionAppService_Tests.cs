@@ -34,10 +34,10 @@ namespace CAPS.CORPACCOUNTING.Tests.Editions
             var output = await _editionAppService.GetEditionForEdit(new NullableIdInput(null));
 
             //Changing a sample feature value
-            var sampleFeature = output.FeatureValues.FirstOrDefault(f => f.Name == AppFeatures.SampleBooleanFeature);
-            if (sampleFeature != null)
+            var chatFeature = output.FeatureValues.FirstOrDefault(f => f.Name == AppFeatures.ChatFeature);
+            if (chatFeature != null)
             {
-                sampleFeature.Value = sampleFeature.Value = "true";
+                chatFeature.Value = chatFeature.Value = "true";
             }
 
             await _editionAppService.CreateOrUpdateEdition(
@@ -55,9 +55,9 @@ namespace CAPS.CORPACCOUNTING.Tests.Editions
                 var premiumEditon = await context.Editions.FirstOrDefaultAsync(e => e.DisplayName == "Premium Edition");
                 premiumEditon.ShouldNotBeNull();
 
-                if (sampleFeature != null)
+                if (chatFeature != null)
                 {
-                    var sampleFeatureValue = context.EditionFeatureSettings.FirstOrDefault(s => s.EditionId == premiumEditon.Id && s.Name == AppFeatures.SampleBooleanFeature);
+                    var sampleFeatureValue = context.EditionFeatureSettings.FirstOrDefault(s => s.EditionId == premiumEditon.Id && s.Name == AppFeatures.ChatFeature);
                     sampleFeatureValue.ShouldNotBe(null);
                     sampleFeatureValue.Value.ShouldBe("true");
                 }
@@ -73,10 +73,10 @@ namespace CAPS.CORPACCOUNTING.Tests.Editions
             var output = await _editionAppService.GetEditionForEdit(new NullableIdInput(defaultEdition.Id));
 
             //Changing a sample feature value
-            var sampleFeature = output.FeatureValues.FirstOrDefault(f => f.Name == AppFeatures.SampleBooleanFeature);
-            if (sampleFeature != null)
+            var chatFeature = output.FeatureValues.FirstOrDefault(f => f.Name == AppFeatures.ChatFeature);
+            if (chatFeature != null)
             {
-                sampleFeature.Value = sampleFeature.Value = "true";
+                chatFeature.Value = chatFeature.Value = "true";
             }
 
             await _editionAppService.CreateOrUpdateEdition(

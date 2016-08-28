@@ -1243,6 +1243,10 @@
     <Compile Include="Migrations\201606091827407_AddAuditLog.Designer.cs">
       <DependentUpon>201606091827407_AddAuditLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606150821191_Added_Chat_And_Friendship_Entities.cs" />
+    <Compile Include="Migrations\201606150821191_Added_Chat_And_Friendship_Entities.Designer.cs">
+      <DependentUpon>201606150821191_Added_Chat_And_Friendship_Entities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201606160525387_Add_SubAccountRestriction_Table.cs" />
     <Compile Include="Migrations\201606160525387_Add_SubAccountRestriction_Table.Designer.cs">
       <DependentUpon>201606160525387_Add_SubAccountRestriction_Table.cs</DependentUpon>
@@ -1251,13 +1255,29 @@
     <Compile Include="Migrations\201606160550196_Modify_ArInvoiceEntryDocument_Table.Designer.cs">
       <DependentUpon>201606160550196_Modify_ArInvoiceEntryDocument_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606161233356_Make_FriendShip_And_Chat_TenantId_Nullable.cs" />
+    <Compile Include="Migrations\201606161233356_Make_FriendShip_And_Chat_TenantId_Nullable.Designer.cs">
+      <DependentUpon>201606161233356_Make_FriendShip_And_Chat_TenantId_Nullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.cs" />
     <Compile Include="Migrations\201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.Designer.cs">
       <DependentUpon>201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606220958138_Add_FriendUserName_To_Friendship_Table.cs" />
+    <Compile Include="Migrations\201606220958138_Add_FriendUserName_To_Friendship_Table.Designer.cs">
+      <DependentUpon>201606220958138_Add_FriendUserName_To_Friendship_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.cs" />
     <Compile Include="Migrations\201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.Designer.cs">
       <DependentUpon>201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606231022491_Add_TenancyName_And_ProfilePictureId_To_AppFriendships_Table.cs" />
+    <Compile Include="Migrations\201606231022491_Add_TenancyName_And_ProfilePictureId_To_AppFriendships_Table.Designer.cs">
+      <DependentUpon>201606231022491_Add_TenancyName_And_ProfilePictureId_To_AppFriendships_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606240745029_Add_MayHaveTenant_Annotation_To_ChatMessage_And_Friendship.cs" />
+    <Compile Include="Migrations\201606240745029_Add_MayHaveTenant_Annotation_To_ChatMessage_And_Friendship.Designer.cs">
+      <DependentUpon>201606240745029_Add_MayHaveTenant_Annotation_To_ChatMessage_And_Friendship.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201606270829177_Modify_Settings_Table.cs" />
     <Compile Include="Migrations\201606270829177_Modify_Settings_Table.Designer.cs">
@@ -1310,6 +1330,10 @@
     <Compile Include="Migrations\201607201716181_Add_TenantExtended_table.cs" />
     <Compile Include="Migrations\201607201716181_Add_TenantExtended_table.Designer.cs">
       <DependentUpon>201607201716181_Add_TenantExtended_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607211123175_Added_Validation_To_Chat_Entities.cs" />
+    <Compile Include="Migrations\201607211123175_Added_Validation_To_Chat_Entities.Designer.cs">
+      <DependentUpon>201607211123175_Added_Validation_To_Chat_Entities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201607220904189_Modify_AccountingItemUnit_Table.cs" />
     <Compile Include="Migrations\201607220904189_Modify_AccountingItemUnit_Table.Designer.cs">
@@ -2191,17 +2215,32 @@
     <EmbeddedResource Include="Migrations\201606091827407_AddAuditLog.resx">
       <DependentUpon>201606091827407_AddAuditLog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606150821191_Added_Chat_And_Friendship_Entities.resx">
+      <DependentUpon>201606150821191_Added_Chat_And_Friendship_Entities.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606160525387_Add_SubAccountRestriction_Table.resx">
       <DependentUpon>201606160525387_Add_SubAccountRestriction_Table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606160550196_Modify_ArInvoiceEntryDocument_Table.resx">
       <DependentUpon>201606160550196_Modify_ArInvoiceEntryDocument_Table.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606161233356_Make_FriendShip_And_Chat_TenantId_Nullable.resx">
+      <DependentUpon>201606161233356_Make_FriendShip_And_Chat_TenantId_Nullable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.resx">
       <DependentUpon>201606171218151_Modify_PayrollEntry_PurchaseOrderEntry_Tables.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606220958138_Add_FriendUserName_To_Friendship_Table.resx">
+      <DependentUpon>201606220958138_Add_FriendUserName_To_Friendship_Table.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.resx">
       <DependentUpon>201606230648521_Modify_JournalEntryDocumentDetail_Table_AccountingItem_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606231022491_Add_TenancyName_And_ProfilePictureId_To_AppFriendships_Table.resx">
+      <DependentUpon>201606231022491_Add_TenancyName_And_ProfilePictureId_To_AppFriendships_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606240745029_Add_MayHaveTenant_Annotation_To_ChatMessage_And_Friendship.resx">
+      <DependentUpon>201606240745029_Add_MayHaveTenant_Annotation_To_ChatMessage_And_Friendship.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606270829177_Modify_Settings_Table.resx">
       <DependentUpon>201606270829177_Modify_Settings_Table.cs</DependentUpon>
@@ -2241,6 +2280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607201716181_Add_TenantExtended_table.resx">
       <DependentUpon>201607201716181_Add_TenantExtended_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607211123175_Added_Validation_To_Chat_Entities.resx">
+      <DependentUpon>201607211123175_Added_Validation_To_Chat_Entities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607220904189_Modify_AccountingItemUnit_Table.resx">
       <DependentUpon>201607220904189_Modify_AccountingItemUnit_Table.cs</DependentUpon>

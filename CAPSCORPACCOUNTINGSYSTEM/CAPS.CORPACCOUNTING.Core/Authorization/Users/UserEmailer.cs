@@ -7,6 +7,7 @@ using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Net.Mail;
 using Abp.Runtime.Security;
+using CAPS.CORPACCOUNTING.Chat;
 using CAPS.CORPACCOUNTING.Emailing;
 using CAPS.CORPACCOUNTING.MultiTenancy;
 using CAPS.CORPACCOUNTING.Web;
@@ -127,6 +128,30 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             emailTemplate.Replace("{EMAIL_BODY}", mailMessage.ToString());
 
             await _emailSender.SendAsync(user.EmailAddress, L("PasswordResetEmail_Subject"), emailTemplate.ToString());
+        }
+
+        public void TryToSendChatMessageMail(User user, string senderUsername, string senderTenancyName, ChatMessage chatMessage)
+        {
+            try
+            {
+                var emailTemplate = new StringBuilder(_emailTemplateProvider.GetDefaultTemplate());
+                emailTemplate.Replace("{EMAIL_TITLE}", L("NewChatMessageEmail_Title"));
+                emailTemplate.Replace("{EMAIL_SUB_TITLE}", L("NewChatMessageEmail_SubTitle"));
+
+                var mailMessage = new StringBuilder();
+                mailMessage.AppendLine("<b>" + L("Sender") + "</b>: " + senderTenancyName + "/" + senderUsername + "<br />");
+                mailMessage.AppendLine("<b>" + L("Time") + "</b>: " + chatMessage.CreationTime.ToString("yyyy-MM-dd HH:mm:ss") + "<br />");
+                mailMessage.AppendLine("<b>" + L("Message") + "</b>: " + chatMessage.Message + "<br />");
+                mailMessage.AppendLine("<br />");
+
+                emailTemplate.Replace("{EMAIL_BODY}", mailMessage.ToString());
+
+                _emailSender.Send(user.EmailAddress, L("NewChatMessageEmail_Subject"), emailTemplate.ToString());
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception.Message, exception);
+            }
         }
 
         private string GetTenancyNameOrNull(int? tenantId)

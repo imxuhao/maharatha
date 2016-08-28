@@ -11,7 +11,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         /// Gets current tenant id.
         /// Use <see cref="IAbpSession.TenantId"/> wherever possible (if user logged in).
         /// This method tries to get current tenant id even if current user did not log in.
-        /// </summary>
+        /// </summary>`
         /// <param name="useSession">Set false to skip session usage</param>
         int? GetCurrentTenantIdOrNull(bool useSession = true);
     }

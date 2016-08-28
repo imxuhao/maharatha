@@ -24,8 +24,7 @@ Ext.define('Chaching.store.imports.AccountsImportStore', {
         name: 'typeOfAccountId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Classification Value' },
-        mandatory: true
+        mapping: { source: 'Classification Value' }
     }, {
         name: 'typeofConsolidation',
         type: 'string',
@@ -46,14 +45,12 @@ Ext.define('Chaching.store.imports.AccountsImportStore', {
     }, {
         name: 'typeOfCurrency',
         type: 'string',
-        mapping: { source: 'Currency' },
-        mandatory: true
+        mapping: { source: 'Currency' }
     }, {
         name: 'typeOfCurrencyId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Currency Value' },
-        mandatory: true
+        mapping: { source: 'Currency Value' }
     }, {
         name: 'isElimination',
         type: 'boolean',

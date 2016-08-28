@@ -47,52 +47,56 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
             target: wnd
         });
         uploadMask.show();
-        wnd.suspendEvent();
-        var records = me.validateImport(importGrid, importStore, uploadMask);
-        if (records && records.length > 0) {
-            if (parentGridController && parentGridController.doBeforeDataImportSaveOperation(records)) {
-                var params = {};
-                params[bulkListInputName] = records;
-                Ext.Ajax.request({
-                    url: importConfig.targetUrl,
-                    timeout: 60000000,
-                    jsonData: Ext.encode(params),
-                    success: function(response, opts) {
-                        var result = Ext.decode(response.responseText);
-                        if (result && result.success) {
-                            var invalidRecs = result.result;
-                            if (invalidRecs && invalidRecs.length > 0) {
-                                importStore.loadData(invalidRecs);
-                                abp.notify.error(app.localize('UploadFailedMessage'), app.localize('Error'));
-                            } else {
-                                abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
-                                var parentGrid = parentGridController.getView();
-                                var gridStore = parentGrid.getStore();
-                                gridStore.loadPage(1);
-                                var wnd = view.up('window');
-                                if (wnd) {
-                                    Ext.destroy(wnd);
+        //wnd.suspendEvent();
+        Ext.defer(function() {
+                var records = me.validateImport(importGrid, importStore, uploadMask);
+                if (records && records.length > 0) {
+                    if (parentGridController && parentGridController.doBeforeDataImportSaveOperation(records)) {
+                        var params = {};
+                        params[bulkListInputName] = records;
+                        Ext.Ajax.request({
+                            url: importConfig.targetUrl,
+                            timeout: 60000000,
+                            jsonData: Ext.encode(params),
+                            success: function(response, opts) {
+                                var result = Ext.decode(response.responseText);
+                                if (result && result.success) {
+                                    var invalidRecs = result.result;
+                                    if (invalidRecs && invalidRecs.length > 0) {
+                                        importStore.loadData(invalidRecs);
+                                        abp.notify.error(app.localize('UploadFailedMessage'), app.localize('Error'));
+                                    } else {
+                                        abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
+                                        var parentGrid = parentGridController.getView();
+                                        var gridStore = parentGrid.getStore();
+                                        gridStore.loadPage(1);
+                                        var wnd = view.up('window');
+                                        if (wnd) {
+                                            Ext.destroy(wnd);
+                                        } else {
+                                            Ext.destroy(view);
+                                        }
+                                    }
                                 } else {
-                                    Ext.destroy(view);
+                                    ChachingGlobals.showPageSpecificErrors(response);
                                 }
+                                uploadMask.hide(true);
+                            },
+                            failure: function(response, eOpts) {
+                                uploadMask.hide();
+                                abp.message.error(app.localize('Failed'), app.localize('Error'));
                             }
-                        } else {
-                            ChachingGlobals.showPageSpecificErrors(response);
-                        }
+                        });
+                    } else {
                         uploadMask.hide(true);
-                    },
-                    failure: function(response, eOpts) {
-                        uploadMask.hide();
-                        abp.message.error(app.localize('Failed'), app.localize('Error'));
                     }
-                });
-            } else {
-                uploadMask.hide(true);
-            }
-        } else {
-            uploadMask.hide(true);
-        }
-        wnd.resumeEvent();
+                } else {
+                    uploadMask.hide(true);
+                }
+            },
+            100);
+
+        //wnd.resumeEvent();
     },
     validateImport: function (importGrid, importStore, uploadMask) {
         var isValid = true,

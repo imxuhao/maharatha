@@ -21,6 +21,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Host
                 new ApplicationLanguage(null, "it", "Italiano", "famfamfam-flag-it"),
                 new ApplicationLanguage(null, "pt-BR", "Portuguese", "famfamfam-flag-br"),
                 new ApplicationLanguage(null, "tr", "Türkçe", "famfamfam-flag-tr"),
+                new ApplicationLanguage(null, "ru", "Русский", "famfamfam-flag-ru"),
                 new ApplicationLanguage(null, "zh-CN", "简体中文", "famfamfam-flag-cn")
             };
         }

@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -198,10 +201,10 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
                 var connectionstringUnit =
                     await (from org in _organizationRepository.GetAll()
-                        join constr in _connectionStringRepository.GetAll() on org.ConnectionStringId equals
-                            constr.Id
-                        where org.Id == organizationId
-                        select constr).FirstOrDefaultAsync();
+                           join constr in _connectionStringRepository.GetAll() on org.ConnectionStringId equals
+                               constr.Id
+                           where org.Id == organizationId
+                           select constr).FirstOrDefaultAsync();
 
                 strConnectionstring = connectionstringUnit.ConnectionString;
                 await uow.CompleteAsync();
@@ -278,19 +281,22 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
                 }
                 if (sourcetenantId.HasValue)
+                {
                     await CloneTenantData(newTenantId, sourcetenantId, entityList);
+                    await _unitOfWorkManager.Current.SaveChangesAsync();
+                }
                 await uow.CompleteAsync();
             }
             //Used a second UOW since UOW above sets some permissions and _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync needs these permissions to be saved.
-            using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
-            {
-                if (sourcetenantId.HasValue)
-                {
-                    await CloneTenantData(newTenantId, sourcetenantId, entityList);
-                    await uow.CompleteAsync();
-                }
+            //using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            //{
+            //    if (sourcetenantId.HasValue)
+            //    {
+            //        await CloneTenantData(newTenantId, sourcetenantId, entityList);
+            //        await uow.CompleteAsync();
+            //    }
 
-            }
+            //}
             //Used a thir UOW since UOW above clone the data
             using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
@@ -341,9 +347,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 //Inserting Vendor Data in DestinationTenant
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
-
-                                    //Mapper.CreateMap<VendorUnit, VendorUnit>()
-                                    //    .ForMember(u => u.Id, ap => ap.Ignore());
                                     var vendorUnit = new VendorUnit();
                                     if (!ReferenceEquals(entityList, null))
                                     {
@@ -353,6 +356,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                             vendorUnit.TenantId = newTenantId;
                                             vendorUnit.CreatorUserId = null;
                                             vendorUnit.CreatorUserId = null;
+                                            vendorUnit.LastModifierUserId = null;
                                             await _vendorUnit.InsertAsync(vendorUnit);
                                         }
                                     }
@@ -371,18 +375,13 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
-                                    //Mapper.CreateMap<User, User>()
-                                    //  .ForMember(u => u.Id, ap => ap.Ignore());
-                                    //var config = new MapperConfiguration(cfg =>
-                                    //{
-                                    //    cfg.CreateMap<User, User>();
-                                    //});
+
                                     var userUnit = new User();
                                     if (!ReferenceEquals(entityList, null))
                                     {
                                         foreach (var user in userList)
                                         {
-                                            if (user.Name != StaticUsers.UserName)
+                                            if (user.Name != StaticUsers.Name)
                                             {
                                                 user.MapTo(userUnit);
                                                 userUnit.TenantId = newTenantId;
@@ -412,12 +411,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-                                        //      Mapper.CreateMap<Role, Role>()
-                                        //.ForMember(u => u.Id, ap => ap.Ignore());
-                                        //var config = new MapperConfiguration(cfg =>
-                                        //{
-                                        //    cfg.CreateMap<Role, Role>().ForMember(u => u.Id, ap => ap.Ignore());
-                                        //});
                                         var roleUnit = new Role();
 
                                         foreach (var role in rollList)
@@ -427,6 +420,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
 
                                                 role.MapTo(roleUnit);
                                                 roleUnit.TenantId = newTenantId;
+                                                roleUnit.Permissions = role.Permissions;
                                                 roleUnit.CreatorUser = null;
                                                 roleUnit.CreatorUserId = null;
                                                 roleUnit.LastModifierUserId = null;
@@ -452,11 +446,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-                                        //Mapper.CreateMap<CoaUnit, CoaUnit>().ForMember(u => u.Id, ap => ap.Ignore());
-                                        //var config = new MapperConfiguration(cfg =>
-                                        //{
-                                        //    cfg.CreateMap<CoaUnit, CoaUnit>().ForMember(u => u.Id, ap => ap.Ignore());
-                                        //});
                                         var coaUnit = new CoaUnit();
                                         foreach (var coa in coaList)
                                         {
@@ -464,6 +453,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                             coa.MapTo(coaUnit);
                                             coa.TenantId = newTenantId;
                                             coa.CreatorUserId = null;
+                                            coa.LastModifierUserId = null;
                                             await _coaUnit.InsertAsync(coaUnit);
                                         }
                                     }
@@ -514,10 +504,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                     {
-                                        //Mapper.CreateMap<EmployeeUnit, EmployeeUnit>().ForMember(u => u.Id, ap => ap.Ignore());
-                                        //var config = new MapperConfiguration(cfg => {
-                                        //    cfg.CreateMap<EmployeeUnit, EmployeeUnit>().ForMember(u => u.Id, ap => ap.Ignore());
-                                        //});
                                         var employeeUnit = new EmployeeUnit();
                                         if (!ReferenceEquals(entityList, null))
                                         {
@@ -526,6 +512,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                                 emp.MapTo(employeeUnit);
                                                 employeeUnit.TenantId = newTenantId;
                                                 employeeUnit.CreatorUserId = null;
+                                                employeeUnit.LastModifierUserId = null;
                                                 await _employeeUnit.InsertAsync(employeeUnit);
                                             }
                                         }
@@ -547,17 +534,13 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-                                        //Mapper.CreateMap<CustomerUnit, CustomerUnit>().ForMember(u => u.Id, ap => ap.Ignore());
-                                        var config = new MapperConfiguration(cfg =>
-                                        {
-                                            cfg.CreateMap<CustomerUnit, CustomerUnit>().ForMember(u => u.Id, ap => ap.Ignore());
-                                        });
                                         var customerUnit = new CustomerUnit();
                                         foreach (var customer in customerList)
                                         {
                                             customer.MapTo(customerUnit);
                                             customerUnit.TenantId = newTenantId;
                                             customerUnit.CreatorUserId = null;
+                                            customerUnit.LastModifierUserId = null;
                                             await _customerUnit.InsertAsync(customerUnit);
                                         }
                                     }

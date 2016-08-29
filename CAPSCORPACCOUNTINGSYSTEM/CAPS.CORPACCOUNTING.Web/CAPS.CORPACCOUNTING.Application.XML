@@ -1665,6 +1665,32 @@
             
             </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser">
+            <summary>
+            A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Auditing.AuditLogAppService.GetAuditLogUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Sumit Method to get AuditLogs
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Auditing.AuditLogAppService.CreateAuditLogAndUsersQueryUnit(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            sumit Method to create AuditLogQuerry
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Auditing.IAuditLogAppService.GetAuditLogUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get all AuditLogList
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Authorization.Custom.UserAppService">
             <summary>
             Partial class for UserAppService
@@ -1675,6 +1701,35 @@
             CreateOrUpdateUserUnit from User Permissions
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Permissions.PermissionManagerExtensions.GetPermissionsFromNamesByValidating(Abp.Authorization.IPermissionManager,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets all permissions by names.
+            Throws <see cref="T:Abp.Runtime.Validation.AbpValidationException"/> if can not find any of the permission names.
+            </summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService">
+            <summary>
+            Application service that is used by 'role management' page.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService.GetAllRoles(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all Roles and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Authorization.Roles.RoleAppService">
+            <summary>
+            Application service that is used by 'role management' page.
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Authorization.Roles.RoleAppService.GetAllRoles(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Sumit Method to Get Roles
+            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Authorization.Users.Dto.UserPermissionsInput">
@@ -1779,29 +1834,6 @@
             Sumit Method to get UserUnits
             </summary>
             <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService">
-            <summary>
-            Application service that is used by 'role management' page.
-            </summary>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Authorization.Roles.IRoleAppService.GetAllRoles(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Get the list of all Roles and also provided with Sorting,Paging and Searching functionality.
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:CAPS.CORPACCOUNTING.Authorization.Roles.RoleAppService">
-            <summary>
-            Application service that is used by 'role management' page.
-            </summary>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Authorization.Roles.RoleAppService.GetAllRoles(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Sumit Method to Get Roles
-            </summary>
             <returns></returns>
         </member>
         <member name="M:CAPS.CORPACCOUNTING.Authorization.PermissionManagerExtensions.GetPermissionsFromNamesByValidating(Abp.Authorization.IPermissionManager,System.Collections.Generic.IEnumerable{System.String})">
@@ -2807,32 +2839,6 @@
             <summary>
             Maximum allowed page size for paged requests.
             </summary>
-        </member>
-        <member name="T:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser">
-            <summary>
-            A helper class to store an <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.AuditLog"/> and a <see cref="P:CAPS.CORPACCOUNTING.Auditing.AuditLogAndUser.User"/> object.
-            </summary>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Auditing.AuditLogAppService.GetAuditLogUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Sumit Method to get AuditLogs
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Auditing.AuditLogAppService.CreateAuditLogAndUsersQueryUnit(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            sumit Method to create AuditLogQuerry
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.Auditing.IAuditLogAppService.GetAuditLogUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
-            <summary>
-            Get all AuditLogList
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService">
             <summary>

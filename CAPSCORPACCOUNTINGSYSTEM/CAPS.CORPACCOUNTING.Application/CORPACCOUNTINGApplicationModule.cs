@@ -3,6 +3,8 @@ using Abp.AutoMapper;
 using Abp.Modules;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.Authorization;
+using CAPS.CORPACCOUNTING.Authorization.Roles;
+using CAPS.CORPACCOUNTING.Authorization.Users;
 using CAPS.CORPACCOUNTING.Banking;
 using CAPS.CORPACCOUNTING.Banking.Dto;
 using CAPS.CORPACCOUNTING.GenericSearch;
@@ -30,7 +32,8 @@ namespace CAPS.CORPACCOUNTING
             //Adding an interceptor to measure the time taken for each method to execute in Applition
             MeasureDurationInterceptorRegistrar.Initialize(IocManager.IocContainer.Kernel);
 
-            Configuration.Modules.AbpAutoMapper().Configurators.Add(cfg => {
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(cfg =>
+            {
                 //Add mappings. Example:
                 //configuration.CreateMap<MySourceClass, MyDestClass>();
                 cfg.CreateMap<Filters, TextSearch>()
@@ -45,7 +48,7 @@ namespace CAPS.CORPACCOUNTING
 
                 cfg.CreateMap<JournalCreditEntryDetailUnitDto, JournalCreditEntryDetailUnitDto>();
 
-                cfg.CreateMap<JobUnit, JobCommercialUnitDto>().ForMember(u => u.JobId, ap => ap.MapFrom(src => src.Id));
+                // cfg.CreateMap<JobCommercialUnit, JobCommercialUnitDto>().ForMember(u => u.JobId, ap => ap.MapFrom(src => src.Id));
 
                 cfg.CreateMap<UpdateJobPORangeAllocationInput, CreateJobPORangeAllocationInput>();
 
@@ -82,9 +85,22 @@ namespace CAPS.CORPACCOUNTING
                            .ForMember(u => u.SearchTerm, ap => ap.MapFrom(src => (!string.IsNullOrEmpty(src.SearchTerm) ? src.SearchTerm : null)));
 
                 cfg.CreateMap<UpdateBatchUnitInput, BatchUnit>();
+
+                cfg.CreateMap<Role, Role>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<VendorUnit, VendorUnit>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<User, User>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<CoaUnit, CoaUnit>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<EmployeeUnit, EmployeeUnit>().ForMember(u => u.Id, ap => ap.Ignore());
+                cfg.CreateMap<CustomerUnit, CustomerUnit>().ForMember(u => u.Id, ap => ap.Ignore());
+
+
+                cfg.CreateMap<VendorUnit, VendorUnitDto>().ForMember(u => u.VendorId, ap => ap.Ignore());
+
+                //    .ForMember(u => u.Id, ap => ap.Ignore())
+                //.ForMember(u => u.Id, ap => ap.Ignore());
             });
         }
-   
+
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());

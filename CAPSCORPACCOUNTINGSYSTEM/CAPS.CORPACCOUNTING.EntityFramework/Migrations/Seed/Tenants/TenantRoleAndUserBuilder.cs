@@ -71,7 +71,7 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed.Tenants
 
             //admin user
 
-            var adminUser = _context.Users.FirstOrDefault(u => u.TenantId == _tenantId && u.UserName == User.AdminUserName);
+            var adminUser = _context.Users.FirstOrDefault(u => u.TenantId == _tenantId && u.UserName == StaticUsers.UserName);
             if (adminUser == null)
             {
                 adminUser = User.CreateTenantAdminUser(_tenantId, "admin@defaulttenant.com", "123qwe");

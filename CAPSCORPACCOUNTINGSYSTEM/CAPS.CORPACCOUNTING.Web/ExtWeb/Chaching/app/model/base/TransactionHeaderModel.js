@@ -57,6 +57,7 @@ Ext.define('Chaching.model.base.TransactionHeaderModel', {
         { name: 'typeOfInactiveStatus', type: 'string' },
         { name: 'ictCompany', type: 'string' },
         { name: 'ictAccountingDocument', type: 'string' },
-        { name: 'typeOfCurrencyRate', type: 'string' }
+        { name: 'typeOfCurrencyRate', type: 'string' },
+        { name: 'lastName', type: 'string' }
     ]
 });

@@ -3686,6 +3686,7 @@
     <Content Include="ExtWeb\Chaching\app\model\payables\invoices\AccountsPayableModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorAliasModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\payables\vendors\VendorsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\pettycash\entry\PettyCashModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\profile\loginAttempts\LoginAttemptModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\JobAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\projects\projectmaintenance\PoRangeAllocationModel.js" />
@@ -3749,6 +3750,7 @@
     <Content Include="ExtWeb\Chaching\app\store\payables\invoices\AccountsPayableStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsAliasStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\payables\vendors\VendorsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\pettycash\entry\PettyCashStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\profile\linkedaccounts\LinkedAccountsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\languages\LanguageTextsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\auditlogs\AuditLogsStore.js" />
@@ -3900,13 +3902,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\entities\ProjectImportsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\entities\ProjectImportsGridController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorForm.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorFormController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorView.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsErrorViewController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsFormController.js" />
-    <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\imports\ImportsView.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\languages\LanguagesEditFormController.js" />
@@ -3958,6 +3955,10 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\payables\vendors\VendorsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\pettycash\entry\PettyCashForm.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\pettycash\entry\PettyCashFormController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\pettycash\entry\PettyCashGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\pettycash\entry\PettyCashGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changepassword\ChangePasswordForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changepassword\ChangePasswordFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\profile\changepassword\ChangePasswordView.js" />

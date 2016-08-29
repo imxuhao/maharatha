@@ -556,6 +556,18 @@
         "modelNamespace": "Chaching.model",
         "name": "purchaseorders.entry.PurchaseOrderDetailModel"
       }
+    },
+    "app/model/pettycash/entry/PettyCashModel.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "Chaching",
+        "baseClass": "Ext.data.Model",
+        "fields": "fields:auto:null",
+        "modelFileName": "pettycash/entry/PettyCashModel",
+        "modelNamespace": "Chaching.model",
+        "name": "pettycash.entry.PettyCashModel"
+      }
     }
   }
 }

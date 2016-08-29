@@ -1238,6 +1238,14 @@
      <text name="BudgetFormatRequired" value=",Budget Format is Required" />
       <text name="DuplicatedivisionName" value=",Duplicate Division Name -" />
         <text name="DuplicatedivisionNumber" value="Duplicate Division Number -" />
+    <text name="EditPettyCash" value="Edit PC" />
+    <text name="CreatePettyCash" value="Create PC" />
+    <text name="ViewPettyCash" value="View PC" />
+    <text name="Envelope#" value="Envelope #" />
+    <text name="EnvelopeDate" value="Envelope date" />
+    <text name="EnvelopeTotal" value="Envelope total" />
+    <text name="AdvanceAmount" value="Advance amount" />
+    
     
     
     

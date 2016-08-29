@@ -390,6 +390,15 @@
             cellValues.tdCls += ' errorMessageColumn';
         }
         return value;
+    },
+    attachmentsRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+        var itemRendered = this.items[0];
+        if (value) {
+            itemRendered.iconCls = 'btn-attach';
+        } else {
+            itemRendered.iconCls = '';
+        }
+        return '';
     }
 
 });

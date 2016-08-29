@@ -269,7 +269,7 @@ Ext.define('Chaching.view.financials.journals.JournalTransactionDetailGrid',{
             displayField: 'vendorName',
             queryMode: 'remote',
             minChars: 2,
-            useDisplayFieldToSearch: true,
+            searchProperty: 'vendorId',
             modulePermissions: {
                 read: abp.auth.isGranted('Pages.Payables.Vendors'),
                 create: abp.auth.isGranted('Pages.Payables.Vendors.Create'),

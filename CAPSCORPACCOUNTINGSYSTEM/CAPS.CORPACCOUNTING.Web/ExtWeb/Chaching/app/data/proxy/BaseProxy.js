@@ -145,9 +145,12 @@ Ext.define('Chaching.data.proxy.BaseProxy', {
                 // responseText was returned, decode it
                 try {
                     var responseObj = Ext.decode(request.responseText, true);
-                    abp.notify.error(responseObj.error.message, app.localize('Error'));
+                    var message = responseObj.message;
+                    if (!message) message = responseObj.error.message;
+                    if (!message) message=responseObj.exceptionMessage;
+                    abp.message.error(message, app.localize('Error'));
                 } catch (e) {
-                    abp.message.warn('Unknown error: The server did not send any information about the error.', 'Error');
+                    abp.message.error('Unknown error: The server did not send any information about the error.', 'Error');
                     //Ext.Msg.alert('Error', 'Unknown error: The server did not send any information about the error.');
                 }
 

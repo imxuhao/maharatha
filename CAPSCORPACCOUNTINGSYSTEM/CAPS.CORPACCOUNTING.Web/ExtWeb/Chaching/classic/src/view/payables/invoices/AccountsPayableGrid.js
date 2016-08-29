@@ -89,12 +89,52 @@ Ext.define('Chaching.view.payables.invoices.AccountsPayableGrid', {
             groupable: true,
             width: '10%',
             filterField: {
-                xtype: 'textfield',
-                width: '100%',
-                entityName: ""
+                xtype: 'chachingcombobox',
+                store: new Chaching.store.utilities.autofill.VendorsStore(),
+                valueField: 'vendorId',
+                displayField: 'vendorName',
+                searchProperty: 'vendorId',
+                queryMode: 'remote',
+                minChars: 2,
+                modulePermissions: {
+                    read: abp.auth.isGranted('Pages.Payables.Vendors'),
+                    create: abp.auth.isGranted('Pages.Payables.Vendors.Create'),
+                    edit: abp.auth.isGranted('Pages.Payables.Vendors.Edit'),
+                    destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete')
+                },
+                primaryEntityCrudApi: {
+                    read: abp.appPath + 'api/services/app/list/GetVendorList',
+                    create: abp.appPath + 'api/services/app/vendorUnit/CreateVendorUnit',
+                    update: abp.appPath + 'api/services/app/vendorUnit/UpdateVendorUnit',
+                    destroy: abp.appPath + 'api/services/app/vendorUnit/DeleteVendorUnit'
+                },
+                createEditEntityType: 'payables.vendors',
+                createEditEntityGridController: 'payables-vendors-vendorsgrid',
+                entityType: 'Vendor',
+                isTwoEntityPicker: false
             },editor: {
-                xtype: 'textfield',
-                width: '100%'
+                xtype: 'chachingcombobox',
+                store: new Chaching.store.utilities.autofill.VendorsStore(),
+                valueField: 'vendorId',
+                displayField: 'vendorName',
+                queryMode: 'remote',
+                minChars: 2,
+                modulePermissions: {
+                    read: abp.auth.isGranted('Pages.Payables.Vendors'),
+                    create: abp.auth.isGranted('Pages.Payables.Vendors.Create'),
+                    edit: abp.auth.isGranted('Pages.Payables.Vendors.Edit'),
+                    destroy: abp.auth.isGranted('Pages.Payables.Vendors.Delete')
+                },
+                primaryEntityCrudApi: {
+                    read: abp.appPath + 'api/services/app/list/GetVendorList',
+                    create: abp.appPath + 'api/services/app/vendorUnit/CreateVendorUnit',
+                    update: abp.appPath + 'api/services/app/vendorUnit/UpdateVendorUnit',
+                    destroy: abp.appPath + 'api/services/app/vendorUnit/DeleteVendorUnit'
+                },
+                createEditEntityType: 'payables.vendors',
+                createEditEntityGridController: 'payables-vendors-vendorsgrid',
+                entityType: 'Vendor',
+                isTwoEntityPicker: false
             }
         }, {
             xtype: 'gridcolumn',

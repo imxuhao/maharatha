@@ -26,6 +26,7 @@
         'receivables.customers',
         'purchaseorders.entry',
         'host.maintenance',
-        'host.settings'
+        'host.settings',
+        'pettycash.entry'
     ]
 });

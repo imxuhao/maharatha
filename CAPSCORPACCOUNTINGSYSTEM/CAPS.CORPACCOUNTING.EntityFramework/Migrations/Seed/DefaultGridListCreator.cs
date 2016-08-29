@@ -43,7 +43,8 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 new GridListUnit(gridid:26,name:"Purchase Orders",description:@"Chaching\classic\src\view\purchaseorders\entry\PurchaseOrderGrid",isactive:true),
                 new GridListUnit(gridid:27,name:"Company Setup",description:@"Chaching\classic\src\view\administration\organization\CompanySetupGrid",isactive:true),
                 new GridListUnit(gridid:28,name:"Imports Error",description:@"Chaching\classic\src\view\imports\ImportsGrid",isactive:true),
-                new GridListUnit(gridid:29,name:"Accounts Receivable",description:@"Chaching\classic\src\view\receivables\invoices\AccountsReceivableGrid",isactive:true)
+                new GridListUnit(gridid:29,name:"Accounts Receivable",description:@"Chaching\classic\src\view\receivables\invoices\AccountsReceivableGrid",isactive:true),
+                 new GridListUnit(gridid:30,name:"Petty Cash Entry",description:@"Chaching\classic\src\view\pettycash\entry\PettyCashGrid",isactive:true)
             };
         }
 

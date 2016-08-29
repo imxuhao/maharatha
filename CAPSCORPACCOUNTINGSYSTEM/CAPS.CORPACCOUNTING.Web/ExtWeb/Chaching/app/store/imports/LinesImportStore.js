@@ -27,7 +27,7 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
         name: 'typeOfAccountId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Classification Value' }
+        mapping: { source: 'Classification_Value' }
     },
     {
         name: 'typeofConsolidation',
@@ -39,7 +39,7 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
         name: 'typeofConsolidationId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Consolidation Value' }
+        mapping: { source: 'Consolidation_Value' }
     },
     {
         name: 'isEnterable',
@@ -55,8 +55,8 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
         name: 'typeOfCurrencyId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Currency Value' }
-    }, 
+        mapping: { source: 'Currency_Value' }
+    },
     {
         name: 'rollUpAccountCaption',
         type: 'string',
@@ -66,7 +66,7 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
         name: 'rollupAccountId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'RollUp Account Value' }
+        mapping: { source: 'RollUp_Account_Value' }
     },
     {
         name: 'rollUpDivision',
@@ -77,7 +77,7 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
         name: 'rollupJobId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'RollUp Division Value' }
+        mapping: { source: 'RollUp_Division_Value' }
     },
     {
         name: 'errorMessage',

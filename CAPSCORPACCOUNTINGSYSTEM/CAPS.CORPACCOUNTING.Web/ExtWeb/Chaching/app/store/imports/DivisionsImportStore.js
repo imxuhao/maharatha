@@ -27,7 +27,7 @@ Ext.define('Chaching.store.imports.DivisionsImportStore', {
         name: 'typeOfCurrencyId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Currency Value' }
+        mapping: { source: 'Currency_Value' }
     },
     {
         name: 'isActive',

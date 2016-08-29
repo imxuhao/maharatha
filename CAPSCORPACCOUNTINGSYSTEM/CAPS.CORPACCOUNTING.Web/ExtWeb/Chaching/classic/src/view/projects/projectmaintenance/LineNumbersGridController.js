@@ -48,9 +48,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGridController'
             extraParam = myStore.getProxy().extraParams;
         for (var i = 0; i < data.length; i++) {
             data[i].chartOfAccountId = extraParam.coaId;
-            if (data[i].typeofConsolidationId == 0) {
-                data[i].typeofConsolidationId = null;
-            }
         }
         return data;
     }

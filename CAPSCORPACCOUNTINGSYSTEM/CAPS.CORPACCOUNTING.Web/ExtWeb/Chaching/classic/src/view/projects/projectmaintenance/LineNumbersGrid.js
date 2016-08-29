@@ -38,8 +38,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
         isRequireImport: true,
         importStoreClass: 'imports.LinesImportStore',
         targetGrid: null,
-        targetUrl: null,//abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert'
-        bulkListInputName: null
+        targetUrl: abp.appPath + 'api/services/app/accountUnit/BulkAccountInsert',
+        bulkListInputName: 'accountList'
     },
     requireExport: true,
     requireMultiSearch: true,

@@ -349,7 +349,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                                callback: me.onDeleteOperationCompleteCallBack
                            });
                            gridStore.erase(operation);
-                           gridStore.remove(widgetRec);
+                           //gridStore.remove(widgetRec);
                            //Sync consider CRUD and store must need four of the urls
                            /*gridStore.sync({
                                callback: function (batch, opts) {
@@ -372,14 +372,24 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             detailStore.remove(records[0]);
             abp.notify.success('Operation completed successfully.', 'Success');
         } else {
-            var response = Ext.decode(operation.getResponse().responseText);
+            var response ='';
+            if (operation.getResponse()) {
+                response = Ext.decode(operation.getResponse().responseText);
+            }
+            else if (operation.error) {
+                response = Ext.decode(operation.error.response.responseText);
+            }
             var message = '',
                 title = 'Error';
             if (response && response.error) {
                 if (response.error.message && response.error.details) {
                     title = response.error.message;
                     message = response.error.details;
-                    abp.message.warn(message, title);
+                    //abp.message.warn(message, title);
+                    return;
+                }
+                else if (response.error.message && response.error.details == null) {
+                    message = response.error.message;
                     return;
                 }
                 title = response.error.message;

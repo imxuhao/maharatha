@@ -48,7 +48,7 @@ namespace CAPS.CORPACCOUNTING
 
                 cfg.CreateMap<JournalCreditEntryDetailUnitDto, JournalCreditEntryDetailUnitDto>();
 
-                // cfg.CreateMap<JobCommercialUnit, JobCommercialUnitDto>().ForMember(u => u.JobId, ap => ap.MapFrom(src => src.Id));
+                cfg.CreateMap<JobCommercialUnit, JobCommercialUnitDto>().ForMember(u => u.JobId, ap => ap.MapFrom(src => src.Id));
 
                 cfg.CreateMap<UpdateJobPORangeAllocationInput, CreateJobPORangeAllocationInput>();
 
@@ -86,6 +86,8 @@ namespace CAPS.CORPACCOUNTING
 
                 cfg.CreateMap<UpdateBatchUnitInput, BatchUnit>();
 
+                #region Copying Data from one tenant to another tenant we need to Ignore Id(PrimaryKey)
+
                 cfg.CreateMap<Role, Role>().ForMember(u => u.Id, ap => ap.Ignore());
                 cfg.CreateMap<VendorUnit, VendorUnit>().ForMember(u => u.Id, ap => ap.Ignore());
                 cfg.CreateMap<User, User>().ForMember(u => u.Id, ap => ap.Ignore());
@@ -93,8 +95,7 @@ namespace CAPS.CORPACCOUNTING
                 cfg.CreateMap<EmployeeUnit, EmployeeUnit>().ForMember(u => u.Id, ap => ap.Ignore());
                 cfg.CreateMap<CustomerUnit, CustomerUnit>().ForMember(u => u.Id, ap => ap.Ignore());
 
-
-                cfg.CreateMap<VendorUnit, VendorUnitDto>().ForMember(u => u.VendorId, ap => ap.Ignore());
+                #endregion
 
                 //    .ForMember(u => u.Id, ap => ap.Ignore())
                 //.ForMember(u => u.Id, ap => ap.Ignore());

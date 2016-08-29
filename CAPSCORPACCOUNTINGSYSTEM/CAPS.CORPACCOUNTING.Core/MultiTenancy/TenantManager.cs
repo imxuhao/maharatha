@@ -288,16 +288,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 await uow.CompleteAsync();
             }
             //Used a second UOW since UOW above sets some permissions and _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync needs these permissions to be saved.
-            //using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
-            //{
-            //    if (sourcetenantId.HasValue)
-            //    {
-            //        await CloneTenantData(newTenantId, sourcetenantId, entityList);
-            //        await uow.CompleteAsync();
-            //    }
-
-            //}
-            //Used a thir UOW since UOW above clone the data
             using (var uow = _unitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))

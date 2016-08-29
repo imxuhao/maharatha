@@ -223,7 +223,9 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                 {
                     await CreateUserUnitAsync(input);
                 }
+
                 await uow.CompleteAsync();
+
             }
 
             using (var uow = UnitOfWorkManager.Begin())
@@ -383,10 +385,14 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
             Debug.Assert(input.User.Id != null, "input.User.Id should be set.");
 
             var user = await UserManager.FindByIdAsync(input.User.Id.Value);
+            string password = user.Password;
             sourceuser = user;
 
             //Update user properties
             input.User.MapTo(user); //Passwords is not mapped (see mapping configuration)
+
+            //Manually setting the Password which is comming from database
+            user.Password = password;
 
             if (!input.User.Password.IsNullOrEmpty())
             {
@@ -480,6 +486,7 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                                           TenantId = tenant.TenantId,
                                           RoleId = role.Id,
                                           TenantName = tenant.TenantName,
+                                          RoleName = role.Name,
                                           RoleDisplayName = role.DisplayName
                                       }).ToList();
             return roleWithTenant;
@@ -548,11 +555,13 @@ namespace CAPS.CORPACCOUNTING.Authorization.Users
                         }
                         else
                         {
+
                             //Update roles
                             CheckErrors(await UserManager.SetRoles(userUnit, tenant.RoleNames));
 
                             userList.Add(userUnit);
                             await CurrentUnitOfWork.SaveChangesAsync();
+
                         }
                     }
                     else

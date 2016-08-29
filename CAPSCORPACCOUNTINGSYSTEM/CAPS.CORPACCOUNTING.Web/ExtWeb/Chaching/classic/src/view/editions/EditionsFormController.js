@@ -60,6 +60,10 @@ Ext.define('Chaching.view.editions.EditionsFormController', {
 
             Ext.destroy(view);
             grid.getStore().load();
+    },
+
+    onEditionsNameEnter: function (field, newValue, oldValue, eOpts) {
+        field.setValue(newValue.toUpperCase());
     }
     
 });

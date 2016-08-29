@@ -42,7 +42,7 @@
     <text name="Name" value="First Name" />
     <text name="Surname" value="Last Name" />
     <text name="EmailAddress" value="Email Address" />
-    <text name="LastLoginTime" value="Last Login Time" />
+    <text name="LastLoginTime" value="Last Login Date" />
     <text name="EditUser" value="Edit User" />
     <text name="UserInformations" value="User informations" />
     <text name="PasswordRepeat" value="Password (repeat)" />
@@ -1056,7 +1056,7 @@
     <text name="PaymentCheck" value="Payment check" />
     <text name="ChargeDate" value="Charge date" />
     <text name="DateClose" value="Date close" />
-    <text name="TenantCreationWarningMessage" value="You can not change tenant group for this tenant in future. Do you want to save this tenant in tenant group?" />
+    <text name="TenantCreationWarningMessage" value="You cannot change tenant group for this tenant in future. Do you want to save this tenant in tenant group?" />
     <text name="DeleteWarningMessage" value="Do you really want to delete this record?." />
     <text name="TenantInformationMessage" value="Please select user to login as this tenant." />
     <text name="InformationMessage" value="Information" />

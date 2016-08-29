@@ -42,7 +42,10 @@ Ext.define('Chaching.view.editions.EditionsForm',
                             fieldLabel: app.localize('Name'),
                             width: '100%',
                             ui: 'fieldLabelTop',
-                            emptyText: app.localize('Edition Name')
+                            emptyText: app.localize('Edition Name'),
+                            listeners: {
+                                change: 'onEditionsNameEnter'
+                            }
                         }
                     ]
                 },

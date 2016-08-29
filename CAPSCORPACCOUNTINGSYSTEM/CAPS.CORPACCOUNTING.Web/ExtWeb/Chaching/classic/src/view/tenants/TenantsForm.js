@@ -50,7 +50,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 displayField: 'name',
                 valueField: 'value',
                 allowBlank: false,
-               // forceSelection : true,
+                forceSelection : true,
                 store: Ext.create('Chaching.store.administration.organization.OrganizationListStore'),
                 listeners: {
                     select : 'onOrganizationSelect'
@@ -145,6 +145,7 @@ Ext.define('Chaching.view.tenants.TenantsForm',{
                 emptyText: app.localize('TEdition'),
                 displayField: 'editionDisplayName',
                 valueField: 'editionId',
+                forceSelection: true,
                 queryMode : 'local',
                 bind: {
                     store: '{editionsForComboBox}'

@@ -44,7 +44,11 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 'entityName': entityName
             };
         }
-
+        var downloadMask = new Ext.LoadMask({
+            msg: 'Please wait...',
+            target: view
+        });
+        downloadMask.show();
         Ext.Ajax.request({
             url: abp.appPath + 'api/services/app/templateExporter/GetTemplateByEntity',
             method: 'POST',
@@ -52,6 +56,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             timeout: 120000,
             jsonData: Ext.encode(requestParamsObj),
             success: function (response, opts) {
+                downloadMask.hide();
                 var resObj = Ext.decode(response.responseText);
                 if (resObj.success) {
                     var file = resObj.result;
@@ -61,6 +66,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
                 }
             },
             failure: function (response, opts) {
+                downloadMask.hide();
                 ChachingGlobals.showPageSpecificErrors(response);
             }
         });
@@ -97,6 +103,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
         }
         importFormController.importConfig = importConfig;
         importFormController.parentController = me;
+        importFormController.parentViewObj = me.getView(); // this config is used to pass any params from parentView to popup view(for example coaId in financial accounts duringImportData)
         me.insertImportGrid(importConfig, importView, updateController, importFormController);
     },
     insertImportGrid: function (importConfig, importView, updateController, importFormController) {
@@ -139,7 +146,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             }
         }
     },
-    doBeforeDataImportSaveOperation:function(data) {
+    doBeforeDataImportSaveOperation:function(data, parentViewObj) {
         return true;
     },
     onGridItemsPerPageChange: function (combo, record, eOpts) {

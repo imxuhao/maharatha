@@ -25,6 +25,18 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGridController', {
                     //titleConfig: titleConfig,
                     //isEdit: isEdit
                 });
+                //var accountsGrid = Ext.create('Chaching.view.financials.accounts.AccountsGrid', {
+                //   // xtype: 'financials.accounts.accounts',
+                //    hideMode: 'offsets',
+                //    closable: true,
+                //    title: abp.localization.localize("FinancialAccounts"),
+                //    routId: 'financials.accounts.accounts',
+                //    coaId: record.get('coaId'),
+                //    linkChartOfAccountID: record.get('linkChartOfAccountID'),
+                //    iconCls: 'fa fa-book'
+                //    //titleConfig: titleConfig,
+                //    //isEdit: isEdit
+                //});
                 var gridStore = accountsGrid.getStore(),
                     storeProxy = gridStore.getProxy();
                 storeProxy.setExtraParam('coaId', record.get('coaId'));

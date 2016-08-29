@@ -48,13 +48,10 @@
         linkAccountStore.getProxy().setExtraParam('id', coaId);
         linkAccountStore.load();
     },
-    doBeforeDataImportSaveOperation: function (data) {
-        var me = this,
-            view = me.getView(),
-            myStore = view.getStore(),
-            extraParam = myStore.getProxy().extraParams;
+    doBeforeDataImportSaveOperation: function (data, parentViewObj) {
+        var coaId = parentViewObj.coaId;
         for (var i = 0; i < data.length; i++) {
-            data[i].chartOfAccountId = extraParam.coaId;
+            data[i].chartOfAccountId = coaId;
         }
         return data;
     }

@@ -1,6 +1,7 @@
 Ext.define('Chaching.view.imports.ImportsFormController', {
     extend: 'Chaching.view.common.form.ChachingFormPanelController',
     alias: 'controller.imports-importsform',
+    parentViewObj : null,
     parentController: null,
     entityName: null,
     onFileChange: function (file, e) {
@@ -51,7 +52,7 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
         Ext.defer(function() {
                 var records = me.validateImport(importGrid, importStore, uploadMask);
                 if (records && records.length > 0) {
-                    if (parentGridController && parentGridController.doBeforeDataImportSaveOperation(records)) {
+                    if (parentGridController && parentGridController.doBeforeDataImportSaveOperation(records, me.parentViewObj)) {
                         var params = {};
                         params[bulkListInputName] = records;
                         Ext.Ajax.request({
@@ -67,7 +68,7 @@ Ext.define('Chaching.view.imports.ImportsFormController', {
                                         abp.notify.error(app.localize('UploadFailedMessage'), app.localize('Error'));
                                     } else {
                                         abp.notify.success(app.localize('SuccessMessage'), app.localize('Success'));
-                                        var parentGrid = parentGridController.getView();
+                                        var parentGrid = me.parentViewObj;//parentGridController.getView();
                                         var gridStore = parentGrid.getStore();
                                         gridStore.loadPage(1);
                                         var wnd = view.up('window');

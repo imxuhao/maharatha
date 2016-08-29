@@ -75,9 +75,9 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
                     //Ext.toast('Requested resource by you is restricted due to security reason. Please contact support or clear #' + hashTag + ' from your browser url');
                     return;
                 }
-                if (typeof(newView.getStore) === 'function') {
+                if (typeof (newView.getStore) === 'function') {
                     var gridStore = newView.getStore();
-                    if (gridStore)gridStore.load();
+                    if (gridStore) gridStore.load();
                 }
                 newView.on('beforedestroy', me.onTabClose, newView, me);
             }
@@ -91,6 +91,10 @@ Ext.define('Chaching.view.main.ChachingViewportController', {
                         mainLayout.setActiveItem(existingItem);
                     }
                     newView = existingItem;
+                    if (typeof (newView.getStore) === 'function') {
+                        var gridStore = newView.getStore();
+                        if (gridStore) gridStore.reload();
+                    }
                 }
                 else {
                     // newView is set (did not exist already), so add it and make it the

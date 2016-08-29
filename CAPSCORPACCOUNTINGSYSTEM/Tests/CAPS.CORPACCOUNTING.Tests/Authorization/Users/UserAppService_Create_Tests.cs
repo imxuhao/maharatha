@@ -96,7 +96,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Users
                     foreach (var roleName in roleNames)
                     {
                         var roleId = (await GetRoleAsync(roleName)).Id;
-                        createdUser.Roles.Any(ur => ur.RoleId == roleId).ShouldBe(true);
+                        createdUser.Roles.Any(ur => ur.RoleId == roleId && ur.TenantId == tenantId).ShouldBe(true);
                     }
                 }
             });

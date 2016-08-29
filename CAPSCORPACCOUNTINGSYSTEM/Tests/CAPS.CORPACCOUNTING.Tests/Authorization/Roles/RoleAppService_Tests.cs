@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CAPS.CORPACCOUNTING.Authorization.Roles;
+using CAPS.CORPACCOUNTING.Authorization.Roles.Dto;
 using Shouldly;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Roles
             LoginAsHostAdmin();
 
             //Act
-            var output = await _roleAppService.GetRoles();
+            var output = await _roleAppService.GetRoles(new GetRolesInput());
 
             //Assert
             output.Items.Count.ShouldBe(1);
@@ -30,7 +31,7 @@ namespace CAPS.CORPACCOUNTING.Tests.Authorization.Roles
         public async Task Should_Get_Roles_For_Tenant()
         {
             //Act
-            var output = await _roleAppService.GetRoles();
+            var output = await _roleAppService.GetRoles(new GetRolesInput());
 
             //Assert
             output.Items.Count.ShouldBe(2);

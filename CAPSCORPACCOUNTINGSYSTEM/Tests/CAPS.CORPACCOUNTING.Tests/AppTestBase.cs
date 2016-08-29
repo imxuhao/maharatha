@@ -5,10 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Abp;
-using Abp.Collections;
 using Abp.Configuration.Startup;
 using Abp.Domain.Uow;
-using Abp.Modules;
 using Abp.Runtime.Session;
 using Abp.TestBase;
 using Castle.MicroKernel.Registration;
@@ -112,14 +110,6 @@ namespace CAPS.CORPACCOUNTING.Tests
                     .LifestyleTransient()
                 );
         }
-
-        //protected override void AddModules(ITypeList<AbpModule> modules)
-        //{
-        //    base.AddModules(modules);
-
-        //    //Adding testing modules. Depended modules of these modules are automatically added.
-        //    modules.Add<CORPACCOUNTINGTestModule>();
-        //}
 
         #region UsingDbContext
 

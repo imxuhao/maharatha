@@ -186,6 +186,7 @@
     <Compile Include="Authorization\AbpLoginResultTypeHelper.cs" />
     <Compile Include="Authorization\Custom\CustomImplementation.cs" />
     <Compile Include="Authorization\Permissions\Dto\FlatPermissionDto.cs" />
+    <Compile Include="Authorization\Permissions\Dto\FlatPermissionWithLevelDto.cs" />
     <Compile Include="Authorization\Permissions\IPermissionAppService.cs" />
     <Compile Include="Authorization\Permissions\PermissionAppService.cs" />
     <Compile Include="Authorization\Permissions\PermissionManagerExtensions.cs" />

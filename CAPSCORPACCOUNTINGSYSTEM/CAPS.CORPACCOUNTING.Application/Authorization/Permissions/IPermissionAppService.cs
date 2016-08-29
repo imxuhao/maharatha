@@ -6,6 +6,6 @@ namespace CAPS.CORPACCOUNTING.Authorization.Permissions
 {
     public interface IPermissionAppService : IApplicationService
     {
-        ListResultOutput<FlatPermissionDto> GetAllPermissions();
+        ListResultOutput<FlatPermissionWithLevelDto> GetAllPermissions();
     }
 }

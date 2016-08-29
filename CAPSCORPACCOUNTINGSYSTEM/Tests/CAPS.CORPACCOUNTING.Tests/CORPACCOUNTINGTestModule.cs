@@ -1,6 +1,7 @@
 ﻿using System;
 using Abp.Modules;
 using Abp.MultiTenancy;
+using Abp.TestBase;
 using Abp.Zero.Configuration;
 using Castle.MicroKernel.Registration;
 using NSubstitute;
@@ -9,23 +10,28 @@ namespace CAPS.CORPACCOUNTING.Tests
 {
     [DependsOn(
         typeof(CORPACCOUNTINGApplicationModule),
-        typeof(CORPACCOUNTINGDataModule))]
+        typeof(CORPACCOUNTINGDataModule),
+        typeof(AbpTestBaseModule))]
     public class CORPACCOUNTINGTestModule : AbpModule
     {
         public override void PreInitialize()
         {
-            Configuration.UnitOfWork.Timeout = TimeSpan.FromMinutes(1);
+            Configuration.UnitOfWork.Timeout = TimeSpan.FromMinutes(30);
 
             //Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
-            //Registering fake services
+            RegisterFakeService<IAbpZeroDbMigrator>();
+        }
 
+        private void RegisterFakeService<TService>() 
+            where TService : class
+        {
             IocManager.IocContainer.Register(
-                Component.For<IAbpZeroDbMigrator>()
-                    .UsingFactoryMethod(() => Substitute.For<IAbpZeroDbMigrator>())
+                Component.For<TService>()
+                    .UsingFactoryMethod(() => Substitute.For<TService>())
                     .LifestyleSingleton()
-                );
+            );
         }
     }
 }

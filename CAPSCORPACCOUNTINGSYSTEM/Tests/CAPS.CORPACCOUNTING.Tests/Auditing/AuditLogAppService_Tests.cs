@@ -81,7 +81,8 @@ namespace CAPS.CORPACCOUNTING.Tests.Auditing
             output.Items[0].UserName.ShouldBe(null);
 
             output.Items[1].ServiceName.ShouldBe("ServiceName-Test-1");
-            output.Items[1].UserName.ShouldBe(User.AdminUserName, Case.Insensitive);
+            
+            output.Items[1].UserName.ShouldBe(User.AdminUserName, StringCompareShould.IgnoreCase);
         }
     }
 }

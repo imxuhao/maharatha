@@ -24,7 +24,7 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
         name: 'typeofProjectId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Project Type Value' },
+        mapping: { source: 'Project_Type_Value' },
         mandatory: true
     }, {
         name: 'budgetFormatCaption',
@@ -35,7 +35,7 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
         name: 'chartOfAccountId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Budget Format Value' },
+        mapping: { source: 'Budget_Format_Value' },
         mandatory: true
     }, {
         name: 'accountNumber',//this is rollupaccount
@@ -45,7 +45,7 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
         name: 'accountId',//this is rollupaccountId
         type: 'int',
         defaultValue: null,
-        mapping:{source:'RollUp Account Value'}
+        mapping: { source: 'RollUp_Account_Value' }
     }, {
         name: 'divisionJobNumber',
         type: 'string',
@@ -54,7 +54,7 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
         name: 'rollupJobId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'RollUp Division Value' }
+        mapping: { source: 'RollUp_Division_Value' }
     }, {
         name: 'name',//this is tax credit
         type: 'string',
@@ -63,7 +63,7 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
         name: 'taxCreditId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Tax Credit Value' }
+        mapping: { source: 'Tax_Credit_Value' }
     }, {
         name: 'jobStatusName',
         type: 'string',
@@ -72,7 +72,7 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
         name: 'typeOfJobStatusId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Status Value' }
+        mapping: { source: 'Status_Value' }
     }, {
         name: 'typeOfCurrency',
         type: 'string',
@@ -81,7 +81,7 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
     }, {
         name: 'typeOfCurrencyId',
         type: 'int',
-        mapping: { source: 'Currency Value' },
+        mapping: { source: 'Currency_Value' },
         defaultValue:null,
         mandatory: true
     }, {

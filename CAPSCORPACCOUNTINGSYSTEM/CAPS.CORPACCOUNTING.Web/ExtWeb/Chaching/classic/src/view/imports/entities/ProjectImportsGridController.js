@@ -5,7 +5,7 @@ Ext.define('Chaching.view.imports.entities.ProjectImportsGridController', {
         for (var i = 0; i < data.length; i++) {
             data[i].rollupAccountId = data[i].accountId;
         }
-        return false;
+        return data;
     }
     
 });

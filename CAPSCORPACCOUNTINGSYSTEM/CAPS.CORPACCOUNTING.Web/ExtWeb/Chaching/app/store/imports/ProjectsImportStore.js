@@ -18,14 +18,12 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
     }, {
         name: 'typeofProjectName',
         type: 'string',
-        mapping: { source: 'Project type' },
-        mandatory: true
+        mapping: { source: 'Project type' }
     }, {
         name: 'typeofProjectId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Project_Type_Value' },
-        mandatory: true
+        mapping: { source: 'Project_Type_Value' }
     }, {
         name: 'budgetFormatCaption',
         type: 'string',
@@ -76,14 +74,12 @@ Ext.define('Chaching.store.imports.ProjectsImportStore', {
     }, {
         name: 'typeOfCurrency',
         type: 'string',
-        mapping: { source: 'Currency' },
-        mandatory: true
+        mapping: { source: 'Currency' }
     }, {
         name: 'typeOfCurrencyId',
         type: 'int',
         mapping: { source: 'Currency_Value' },
-        defaultValue:null,
-        mandatory: true
+        defaultValue:null
     }, {
         name: 'errorMessage',
         type: 'string'

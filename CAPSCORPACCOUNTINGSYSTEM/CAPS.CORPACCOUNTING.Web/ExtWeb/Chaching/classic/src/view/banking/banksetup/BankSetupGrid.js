@@ -215,6 +215,7 @@ Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
              width: '10%',
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {

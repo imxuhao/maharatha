@@ -177,6 +177,7 @@
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -201,6 +202,7 @@
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -225,6 +227,7 @@
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -315,6 +318,7 @@
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {

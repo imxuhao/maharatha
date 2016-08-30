@@ -138,6 +138,7 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {

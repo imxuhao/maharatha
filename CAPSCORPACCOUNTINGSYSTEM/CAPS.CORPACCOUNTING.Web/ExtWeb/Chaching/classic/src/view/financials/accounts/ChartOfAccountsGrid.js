@@ -101,6 +101,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -120,6 +121,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -139,6 +141,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -160,6 +163,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -180,6 +184,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
             flex: 1,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  width: '100%',
                  displayField: 'linkChartOfAccount',
                  valueField: 'linkChartOfAccountID',
@@ -208,6 +213,7 @@ Ext.define('Chaching.view.financials.accounts.ChartOfAccountsGrid', {
                  displayField: 'standardGroupTotal',
                  valueField: 'standardGroupTotalId',
                  searchProperty: 'standardGroupTotalId',
+                 forceSelection: true,
                  queryMode:'local',
                  isEnum: true,
                  isViewmodelStore: true,

@@ -150,6 +150,7 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {

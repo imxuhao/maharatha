@@ -21,6 +21,7 @@ Ext.define('Chaching.components.filter.DateSearchField', {
     uses: ['Ext.picker.Date', 'Ext.menu.DatePicker'],
     displayField: 'FilterValue',
     valueField: 'FilterValue',
+    //editable: false,
     listConfig: {
         minWidth: 300
         ,width:350
@@ -135,7 +136,7 @@ Ext.define('Chaching.components.filter.DateSearchField', {
     /**
 * Event listener OnBeforeSelect. Fires before record is being selected.
 */
-    onBeforeSelect:function(selectionModel, record, index, eOpts) {
+    onBeforeSelect: function (selectionModel, record, index, eOpts) {
         var allowSelect = false;
         //allow selection only when checkbox is clicked and filter fields has values
         if ((record.get('After') || record.get('Before') || record.get('On')) && record.get('ColumnIndex') === 0) {
@@ -207,6 +208,6 @@ Ext.define('Chaching.components.filter.DateSearchField', {
             if (picker.isFloating()) {
                 me.doAlign();
             }
-        }
+        } 
     }
 });

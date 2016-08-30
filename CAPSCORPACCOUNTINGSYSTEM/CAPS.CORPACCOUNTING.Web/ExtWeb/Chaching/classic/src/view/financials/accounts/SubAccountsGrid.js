@@ -125,6 +125,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -147,6 +148,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -169,6 +171,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {
@@ -191,6 +194,7 @@ Ext.define('Chaching.view.financials.accounts.SubAccountsGrid', {
              renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
              filterField: {
                  xtype: 'combobox',
+                 forceSelection: true,
                  valueField: 'value',
                  displayField: 'text',
                  store: {

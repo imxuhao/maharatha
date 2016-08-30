@@ -135,6 +135,7 @@ Ext.define('Chaching.view.tenants.TenantsGrid', {
             renderer: Chaching.utilities.ChachingRenderers.statusRenderer,
             filterField: {
                 xtype: 'combobox',
+                forceSelection: true,
                 valueField: 'value',
                 displayField:'text',
                 store: {

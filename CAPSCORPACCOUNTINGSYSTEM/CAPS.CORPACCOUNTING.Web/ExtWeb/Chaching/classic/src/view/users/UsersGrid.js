@@ -172,6 +172,7 @@ Ext.define('Chaching.view.users.UsersGrid',
             },
             filterField: {
                 xtype: 'combobox',
+                forceSelection: true,
                 valueField: 'value',
                 displayField: 'text',
                 store: {
@@ -207,6 +208,7 @@ Ext.define('Chaching.view.users.UsersGrid',
             },
             filterField: {
                 xtype: 'combobox',
+                forceSelection: true,
                 valueField: 'value',
                 displayField: 'text',
                 store: {

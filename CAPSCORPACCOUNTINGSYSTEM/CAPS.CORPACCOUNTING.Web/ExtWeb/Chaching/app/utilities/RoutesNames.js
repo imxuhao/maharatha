@@ -27,6 +27,7 @@
         'purchaseorders.entry',
         'host.maintenance',
         'host.settings',
-        'pettycash.entry'
+        'pettycash.entry',
+        'creditcard.entry'
     ]
 });

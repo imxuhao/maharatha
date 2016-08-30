@@ -4,9 +4,9 @@
  * Date: 26/05/2016
  */
 /**
- * @class Chaching.view.banking.BankSetupGrid
- * UI design for preference.
- * @alias widget.financialsbanking.banksetup
+ * @class Chaching.view.banking.banksetup.BankSetupGrid
+ * UI design for Banking->Banksetup.
+ * @alias widget.banking.banksetup
  */
 Ext.define('Chaching.view.banking.banksetup.BankSetupGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',

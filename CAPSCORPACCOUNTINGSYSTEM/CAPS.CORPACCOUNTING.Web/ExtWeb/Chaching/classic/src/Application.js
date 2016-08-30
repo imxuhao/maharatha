@@ -124,7 +124,8 @@ Ext.define('Chaching.Application', {
         'imports.LinesImportStore',
         'imports.DivisionsImportStore',
         'imports.ProjectsImportStore',
-        'pettycash.entry.PettyCashStore'
+        'pettycash.entry.PettyCashStore',
+        'creditcard.entry.OpenStatementStore'
     ],
     //mainView: 'Chaching.view.main.ChachingViewport',
     launch: function () {

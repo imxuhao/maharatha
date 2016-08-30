@@ -30,6 +30,6 @@ Ext.define('Chaching.model.pettycash.entry.PettyCashModel', {
        //{ name: 'adjustInvoice', type: 'string' },
         { name: 'reimbursementAmount', type: 'string' },
         { name: 'advanceAmount', type: 'float' },
-        { name: 'typeOfPaymentMethodId',type:'int',defaultValue:null,convert:nullHandler },
+        { name: 'typeOfPaymentMethodId',type:'int',defaultValue:null,convert:nullHandler }
     ]
 });

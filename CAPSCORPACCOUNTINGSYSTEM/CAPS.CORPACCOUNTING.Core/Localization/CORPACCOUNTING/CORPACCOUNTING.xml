@@ -1246,6 +1246,17 @@
     <text name="EnvelopeTotal" value="Envelope total" />
     <text name="AdvanceAmount" value="Advance amount" />
     
+    <text name="CreditCardOpenStatement" value="Open Statements" />
+    <text name="SyncCreditCardTrans" value="Sync" />
+    <text name="UploadCreditCardTrans" value="Upload" />
+    <text name="CreditCardCompany" value="Credit Card Company" />
+    <text name="CreditCardStatementDate" value="Statement Date" />
+    <text name="CreditCardStatementBalance" value="Statement Balance" />
+    <text name="CreditCardStatus" value="Status" />
+    <text name="EditCCStatement" value="Edit CC Statement" />
+    <text name="CreateCCStatement" value="Create CC Statement" />
+    <text name="ViewCCStatement" value="View CC Statement" />
+    
     
     
     

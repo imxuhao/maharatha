@@ -26,6 +26,9 @@ using CAPS.CORPACCOUNTING.Masters;
 using CAPS.CORPACCOUNTING.Notifications;
 using AutoMapper;
 using CAPS.CORPACCOUNTING.Organization;
+using Abp.Application.Services;
+using Abp.Authorization;
+using Abp.Authorization.Roles;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
@@ -55,8 +58,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly IRepository<CustomerUnit> _customerUnit;
         private readonly IRepository<ConnectionStringUnit> _connectionStringRepository;
         private readonly IRepository<OrganizationExtended, long> _organizationRepository;
-
-
+        private readonly IPermissionManager _permissionManager;
 
 
         public TenantManager(
@@ -76,7 +78,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         IRepository<TypeOfAccountUnit> typeOfAccountUnit,
         IRepository<RegionUnit> regionUnit,
         IRepository<CountryUnit> countryUnit, IRepository<VendorUnit> vendorUnit, IRepository<User, long> userUnit, IRepository<Role> roleUnit,
-        IRepository<CoaUnit> coaUnit, IRepository<EmployeeUnit> employeeUnit, IRepository<CustomerUnit> customerUnit, IRepository<ConnectionStringUnit> connectionStringRepository, IRepository<OrganizationExtended, long> organizationRepository) :
+        IRepository<CoaUnit> coaUnit, IRepository<EmployeeUnit> employeeUnit, IRepository<CustomerUnit> customerUnit, IRepository<ConnectionStringUnit> connectionStringRepository, IRepository<OrganizationExtended, long> organizationRepository, IPermissionManager permissionManager) :
         base(tenantRepository, tenantFeatureRepository, editionManager, featureValueStore)
         {
             _unitOfWorkManager = unitOfWorkManager;
@@ -99,6 +101,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _customerUnit = customerUnit;
             _connectionStringRepository = connectionStringRepository;
             _organizationRepository = organizationRepository;
+            _permissionManager = permissionManager;
         }
 
 
@@ -360,41 +363,49 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (await _userUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
-                                        userList = await _userUnit.GetAll().Where(u => u.TenantId == sourceTenantId).ToListAsync();
+                                        //getting the userd except default user(AppSupport)
+                                        userList = await _userUnit.GetAll().Where(u => u.TenantId == sourceTenantId
+                                        && u.UserName != StaticUsers.UserName).ToListAsync();
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
-
                                     var userUnit = new User();
                                     if (!ReferenceEquals(entityList, null))
                                     {
                                         foreach (var user in userList)
                                         {
-                                            if (user.Name != StaticUsers.Name)
-                                            {
-                                                user.MapTo(userUnit);
-                                                userUnit.TenantId = newTenantId;
-                                                userUnit.CreatorUser = null;
-                                                userUnit.CreatorUserId = null;
-                                                userUnit.LastModifierUser = null;
-                                                userUnit.LastModifierUserId = null;
-                                                await _userUnit.InsertAsync(userUnit);
-                                            }
+                                            user.MapTo(userUnit);
+                                            userUnit.TenantId = newTenantId;
+                                            userUnit.CreatorUser = null;
+                                            userUnit.CreatorUserId = null;
+                                            userUnit.LastModifierUser = null;
+                                            userUnit.LastModifierUserId = null;
+                                            await _userUnit.InsertAsync(userUnit);
                                         }
                                     }
                                 }
-
                                 break;
                             }
                         case "Roles":
                             {
-                                List<Role> rollList = null;
+                                var rolePermissionList = new Dictionary<Role, IReadOnlyList<Permission>>();
                                 using (_unitOfWorkManager.Current.SetTenantId(sourceTenantId))
                                 {
                                     if (await _roleUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
-                                        rollList = await _roleUnit.GetAll().Where(u => u.TenantId == sourceTenantId).ToListAsync();
+                                        //getting the roles except DefaultRoles(User,AppSupport)
+                                        var rollList = await _roleUnit.GetAll().Where(u => u.TenantId == sourceTenantId
+                                        && u.Name != StaticRoleNames.Tenants.Admin &&
+                                                u.Name != StaticRoleNames.Tenants.User).ToListAsync();
+
+                                        foreach (var role in rollList)
+                                        {
+                                            //getting permissions for the Role
+                                            var grantedPermissionlist =
+                                                (await _roleManager.GetGrantedPermissionsAsync(role)).ToArray();
+                                            rolePermissionList.Add(role, grantedPermissionlist);
+                                        }
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
@@ -403,20 +414,16 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                     {
                                         var roleUnit = new Role();
 
-                                        foreach (var role in rollList)
+                                        foreach (var role in rolePermissionList)
                                         {
-                                            if (role.Name != StaticRoleNames.Tenants.Admin && role.Name != StaticRoleNames.Tenants.User)
-                                            {
-
-                                                role.MapTo(roleUnit);
-                                                roleUnit.TenantId = newTenantId;
-                                                roleUnit.Permissions = role.Permissions;
-                                                roleUnit.CreatorUser = null;
-                                                roleUnit.CreatorUserId = null;
-                                                roleUnit.LastModifierUserId = null;
-                                                roleUnit.LastModifierUser = null;
-                                                await _roleUnit.InsertAsync(roleUnit);
-                                            }
+                                            role.Key.MapTo(roleUnit);
+                                            roleUnit.TenantId = newTenantId;
+                                            roleUnit.CreatorUser = null;
+                                            roleUnit.CreatorUserId = null;
+                                            roleUnit.LastModifierUserId = null;
+                                            roleUnit.LastModifierUser = null;
+                                            await _roleUnit.InsertAsync(roleUnit);
+                                            await _roleManager.SetGrantedPermissionsAsync(roleUnit, role.Value);
                                         }
                                     }
                                 }
@@ -429,6 +436,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (await _coaUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
+                                        //getting the coaList
                                         coaList = await _coaUnit.GetAll().Where(u => u.TenantId == sourceTenantId && u.IsCorporate).ToListAsync();
                                     }
                                 }
@@ -439,7 +447,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         var coaUnit = new CoaUnit();
                                         foreach (var coa in coaList)
                                         {
-
                                             coa.MapTo(coaUnit);
                                             coa.TenantId = newTenantId;
                                             coa.CreatorUserId = null;
@@ -465,8 +472,6 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-
-
                                         var coaUnit = new CoaUnit();
                                         foreach (var coa in coaList)
                                         {

@@ -33,7 +33,8 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
           iconAlign: 'left'
       }],
     importConfig: {
-          entity: app.localize('Divisions'),
+          title : app.localize('Divisions'),
+          entity: 'Divisions',
           isRequireImport: true,
           importStoreClass: 'imports.DivisionsImportStore',
           targetGrid: null,

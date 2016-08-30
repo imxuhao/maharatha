@@ -34,7 +34,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
           iconAlign: 'left'
       }],
     importConfig: {
-        entity: app.localize('Lines'),
+        title: app.localize('Lines'),
+        entity: 'Lines',
         isRequireImport: true,
         importStoreClass: 'imports.LinesImportStore',
         targetGrid: null,

@@ -32,6 +32,7 @@
           iconAlign: 'left'
       }],
     importConfig: {
+        title: app.localize('FinancialAccounts'),
         entity: 'FinancialAccounts',
         isRequireImport: true,
         importStoreClass: 'imports.AccountsImportStore',

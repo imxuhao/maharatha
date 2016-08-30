@@ -88,6 +88,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
    * @cfg {object} importConfig
    */
     importConfig: {
+        title : '',
         entity: '',
         isRequireImport: false,
         importStoreClass: null,

@@ -93,7 +93,7 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelController', {
             updateController=false,
             importView = Ext.create('Chaching.view.imports.ImportsView',
             {
-                title: app.localize('Import')+' '+importConfig.entity
+                title: app.localize('Import')+' '+ importConfig.title
             });
         var importFormController = importView.down('form').getController();
         if (!importConfig.targetGrid) {

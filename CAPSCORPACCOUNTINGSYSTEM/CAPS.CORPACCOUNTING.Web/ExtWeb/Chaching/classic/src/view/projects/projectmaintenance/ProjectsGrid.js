@@ -43,7 +43,8 @@ Ext.define('Chaching.view.projects.projectmaintenance.ProjectsGrid',{
           iconAlign: 'left'
       }],
     importConfig: {
-        entity: app.localize('Projects'),
+        title: app.localize('Projects'),
+        entity: 'Projects',
         isRequireImport: true,
         importStoreClass: 'imports.ProjectsImportStore',
         targetGrid: 'imports.entities.projectsImports',

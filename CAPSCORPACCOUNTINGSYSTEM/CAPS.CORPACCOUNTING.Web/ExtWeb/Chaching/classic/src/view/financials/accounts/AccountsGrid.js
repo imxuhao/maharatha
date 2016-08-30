@@ -47,7 +47,6 @@
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
-    forceFit:true,
     editWndTitleConfig: {
         title: app.localize('EditAccount'),
         iconCls: 'fa fa-pencil'

@@ -45,7 +45,6 @@ Ext.define('Chaching.view.financials.accounts.DivisionsGrid', {
     requireMultiSearch: true,
     requireMultisort: true,
     isEditable: true,
-    forceFit:true,
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,

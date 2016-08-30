@@ -49,7 +49,6 @@ Ext.define('Chaching.view.projects.projectmaintenance.LineNumbersGrid',{
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,
-    forceFit:true,
     editWndTitleConfig: {
         title: app.localize('EditLine'),
         iconCls: 'fa fa-pencil'

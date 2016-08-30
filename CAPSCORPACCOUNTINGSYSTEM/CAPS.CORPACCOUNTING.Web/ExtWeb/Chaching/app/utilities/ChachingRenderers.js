@@ -4,6 +4,13 @@
     dateSearchFieldRenderer: function (value) {
         return Ext.Date.format(value, 'm/d/Y');
     },
+    rendererDateHyperLink: function (val, meta, record, rowIndex, colIndex, store, view) {
+        if (val) {
+            var a = '<a style="padding-left:2px;text-decoration:underline !important;cursor:pointer;">' + Ext.Date.format(val, 'm/d/Y') + '</a>';
+            return a;
+        }
+        return val;
+    },
     statusRenderer: function (val) {
         if (val) return 'YES';
         else return 'NO';

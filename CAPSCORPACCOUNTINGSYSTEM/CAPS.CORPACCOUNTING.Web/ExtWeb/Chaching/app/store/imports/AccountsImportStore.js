@@ -6,69 +6,69 @@ Ext.define('Chaching.store.imports.AccountsImportStore', {
     fields: [{
         name: 'accountNumber',
         type: 'string',
-        mapping: { source: 'Account Number' },
+        mapping: { source: app.localize("AccountNumber") },
         mandatory: true,
         duplicate:true
     }, {
         name: 'caption',
         type: 'string',
-        mapping: { source: 'Description' },
+        mapping: { source: app.localize("Description") },
         mandatory: true,
         duplicate: true
     }, {
         name: 'typeOfAccount',
         type: 'string',
-        mapping: { source: 'Classification' },
+        mapping: { source: app.localize("Classification") },
         mandatory: true
     }, {
         name: 'typeOfAccountId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Classification_Value' }
+        mapping: { source: app.localize("ClassificationValue") }
     }, {
         name: 'typeofConsolidation',
         type: 'string',
-        mapping: { source: 'Consolidation' }
+        mapping: { source: app.localize("Consolidation") }
     }, {
         name: 'typeofConsolidationId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Consolidation_Value' }
+        mapping: { source: app.localize("ConsolidationValue") }
     },  {
         name: 'isEnterable',
         type: 'boolean',
-        mapping: { source: 'Journals Allowed' }
+        mapping: { source: app.localize("JournalsAllowed") }
     }, {
         name: 'isRollupAccount',
         type: 'boolean',
-        mapping: { source: 'RollUp Account' }
+        mapping: { source: app.localize("RollUpAccount") }
     }, {
         name: 'typeOfCurrency',
         type: 'string',
-        mapping: { source: 'Currency' }
+        mapping: { source: app.localize("Currency") }
     }, {
         name: 'typeOfCurrencyId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Currency_Value' }
+        mapping: { source: app.localize("CurrencyValue") }
     }, {
         name: 'isElimination',
         type: 'boolean',
-        mapping: { source: 'Elimination Account' }
+        mapping: { source: app.localize("EliminationAccount") }
     }, {
         name: 'isAccountRevalued',
         type: 'boolean',
-        mapping: { source: 'Multi-Currency Revaluation' }
+        mapping: { source: app.localize("Multi-CurrencyReval") }
     },
     {
         name: 'typeOfCurrencyRate',
         type: 'string',
-        mapping: { source: 'Rate Type Override' }
+        mapping: { source: app.localize("RateTypeOverride") }
     }, {
         name: 'typeOfCurrencyRateId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Rate_Type_Override_Value' }
+        mapping: { source: app.localize("RateTypeOverrideValue") }
     },
     {
         name: 'errorMessage',

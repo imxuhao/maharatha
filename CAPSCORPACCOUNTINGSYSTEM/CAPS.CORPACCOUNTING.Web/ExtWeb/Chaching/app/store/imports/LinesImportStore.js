@@ -7,77 +7,77 @@ Ext.define('Chaching.store.imports.LinesImportStore', {
     {
         name: 'accountNumber',
         type: 'string',
-        mapping: { source: 'Line#' },
+        mapping: { source: app.localize("LineNumber") },
         mandatory: true,
         duplicate: true
     },
     {
         name: 'caption',
         type: 'string',
-        mapping: { source: 'Caption' },
+        mapping: { source: app.localize("Caption") },
         mandatory: true,
         duplicate: true
     },
     {
         name: 'typeOfAccount',
         type: 'string',
-        mapping: { source: 'Classification' }
+        mapping: { source: app.localize("Classification") }
     },
     {
         name: 'typeOfAccountId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Classification_Value' }
+        mapping: { source: app.localize("ClassificationValue") }
     },
     {
         name: 'typeofConsolidation',
         type: 'string',
         defaultValue: null,
-        mapping: { source: 'Consolidation' }
+        mapping: { source: app.localize("Consolidation") }
     },
     {
         name: 'typeofConsolidationId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Consolidation_Value' }
+        mapping: { source: app.localize("ConsolidationValue") }
     },
     {
         name: 'isEnterable',
         type: 'boolean',
-        mapping: { source: 'Journals Allowed' }
+        mapping: { source: app.localize("JournalsAllowed") }
     },
     {
         name: 'typeOfCurrency',
         type: 'string',
-        mapping: { source: 'Currency' }
+        mapping: { source: app.localize("Currency") }
     },
     {
         name: 'typeOfCurrencyId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Currency_Value' }
+        mapping: { source: app.localize("CurrencyValue") }
     },
     {
         name: 'rollUpAccountCaption',
         type: 'string',
-        mapping: { source: 'RollUp Account' }
+        mapping: { source: app.localize("RollUpAccount") }
     },
     {
         name: 'rollupAccountId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'RollUp_Account_Value' }
+        mapping: { source: app.localize("RollUpAccountValue") }
     },
     {
         name: 'rollUpDivision',
         type: 'string',
-        mapping: { source: 'RollUp Division' }
+        mapping: { source: app.localize("RollUpDivision") }
     },
     {
         name: 'rollupJobId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'RollUp_Division_Value' }
+        mapping: { source: app.localize("RollUpDivisionValue") }
     },
     {
         name: 'errorMessage',

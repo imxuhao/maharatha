@@ -16,23 +16,23 @@ Ext.define('Chaching.store.imports.DivisionsImportStore', {
         type: 'string',
         mandatory: true,
         duplicate: true,
-        mapping: { source: 'Description' }
+        mapping: { source: app.localize("Description") }
     },
     {
         name: 'typeOfCurrency',
         type: 'string',
-        mapping:{source:'Currency'}
+        mapping: { source: app.localize("Currency") }
     },
     {
         name: 'typeOfCurrencyId',
         type: 'int',
         defaultValue: null,
-        mapping: { source: 'Currency_Value' }
+        mapping: { source: app.localize("CurrencyValue") }
     },
     {
         name: 'isActive',
         type: 'boolean',
-        mapping: { source: 'Active' }
+        mapping: { source: app.localize("Active") }
     }, 
     {
         name: 'errorMessage',

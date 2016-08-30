@@ -1247,6 +1247,7 @@
     <text name="AdvanceAmount" value="Advance amount" />
     
     <text name="CreditCardOpenStatement" value="Open Statements" />
+    <text name="CreditCardStatement" value="CC Statements" />
     <text name="SyncCreditCardTrans" value="Sync" />
     <text name="UploadCreditCardTrans" value="Upload" />
     <text name="CreditCardCompany" value="Credit Card Company" />
@@ -1256,6 +1257,11 @@
     <text name="EditCCStatement" value="Edit CC Statement" />
     <text name="CreateCCStatement" value="Create CC Statement" />
     <text name="ViewCCStatement" value="View CC Statement" />
+    <text name="CreateCreditCardInvoice" value="Create Credit Card Invoice" />
+    <text name="CreditCardHolder" value="Card Holder" />
+    <text name="CreditCardApGenerated" value="A/P Generated" />
+    <text name="CreditCardBuildAp" value="Build A/P" />
+    <text name="CreditCardTotal" value="Credit Card Total" />
     
     
     

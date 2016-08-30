@@ -8,31 +8,27 @@
  * ViewController class for Credit card open statements.
  * @alias controller.creditcard-entry-openstatementgrid
  */
-Ext.define('Chaching.view.creditcard.entry.OpenStatementGridController', {
+Ext.define('Chaching.view.creditcard.entry.StatementGridController', {
     extend: 'Chaching.view.common.grid.ChachingGridPanelController',
-    alias: 'controller.creditcard-entry-openstatementgrid',
+    alias: 'controller.creditcard-entry-statementgrid',
     doAfterCreateAction: function (createNewMode, formPanel, isEdit, record) {
     },
-    getNewTransactionsFromCCAccount: function (menu, item, e, eOpts) {
-
-    },
-    uploadCreditCardTransClick: function (menu, item, e, eOpts) {
-
-    },
-    onStatementDateClick: function (tableView, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+    onInvoiceNumberClick: function (tableView, td, cellIndex, record, tr, rowIndex, e, eOpts) {
         var me = this,
            view = me.getView(),
            fieldName = view.getColumns()[cellIndex].dataIndex,
            tabPanel = view.up('tabpanel');
         if (e && e.target && tabPanel) {
             var horizontalTabPanel = tabPanel;//tabPanel.up('tabpanel');
-            if (horizontalTabPanel && fieldName === 'statementDate') {
+            if (horizontalTabPanel && fieldName === 'invoiceNumber') {
                 var unpostedStatementGrid = Ext.create({
-                    xtype: 'creditcard.entry.statementgrid',
+                    xtype: 'projects.projectmaintenance.linenumbers',
                     hideMode: 'offsets',
                     closable: true,
-                    title: abp.localization.localize("CreditCardStatement"),
-                    routId: 'creditcard.entry.statementgrid'
+                    title: abp.localization.localize("LineNumbers"),
+                    routId: 'projects.projectmaintenance.linenumbers',
+                    coaId: record.get('coaId')
+
                 });
                 var gridStore = unpostedStatementGrid.getStore(),
                     storeProxy = gridStore.getProxy();

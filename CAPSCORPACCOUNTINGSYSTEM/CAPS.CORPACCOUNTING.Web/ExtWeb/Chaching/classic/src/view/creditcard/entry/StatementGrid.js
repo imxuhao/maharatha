@@ -4,19 +4,19 @@
  * Date: 30/08/2016
  */
 /**
- * @class Chaching.view.creditcard.entry.OpenStatementGrid
+ * @class Chaching.view.creditcard.entry.StatementGrid
  * UI design for Credit Card->OpenStatements.
  * @alias widget.creditcard.entry
  */
-Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
+Ext.define('Chaching.view.creditcard.entry.StatementGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.creditcard.entry.OpenStatementGridController'
+        'Chaching.view.creditcard.entry.StatementGridController'
     ],
-    xtype: 'creditcard.entry',
+    xtype: 'creditcard.entry.statementgrid',
     name: 'CreditCard.Entry',
-    controller: 'creditcard-entry-openstatementgrid',
+    controller: 'creditcard-entry-statementgrid',
     modulePermissions: {
         read: abp.auth.isGranted('Pages.CreditCard.Entry'),
         create: true,//abp.auth.isGranted('Pages.CreditCard.Entry.Create'),
@@ -24,38 +24,25 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
         destroy: abp.auth.isGranted('Pages.CreditCard.Entry.Delete')
     },
     padding: 5,
-    gridId: 31,
-    store: 'creditcard.entry.OpenStatementStore',
+    gridId: 32,
+    store: 'creditcard.entry.StatementDetailStore',
     headerButtonsConfig: [
       {
           xtype: 'displayfield',
-          value: abp.localization.localize("CreditCardOpenStatement"),
+          value: abp.localization.localize("CreditCardStatement"),
           ui: 'headerTitle'
       }, '->',
       {
-        xtype: 'splitbutton',
-        ui: 'actionButton',
-        iconCls: 'fa fa-credit-card',
-        iconAlign: 'left',
-        tooltip: app.localize('CreditCard'),
-        menu: new Ext.menu.Menu({
-            ui: 'accounts',
-            items: [
-                {
-                    text: app.localize("SyncCreditCardTrans").toUpperCase(),
-                    iconCls: 'fa fa-refresh',
-                    itemId: 'syncCreditCardTrans',
-                    handler: 'getNewTransactionsFromCCAccount'
-                },
-                {
-                    text: app.localize("UploadCreditCardTrans").toUpperCase(),
-                    iconCls: 'fa fa-file-archive-o',
-                    itemId: 'uploadCreditCardTrans',
-                    handler: 'uploadCreditCardTransClick'
-                }
-            ]
-        })
-
+          xtype: 'button',
+          scale: 'small',
+          ui: 'actionButton',
+          action: 'create',
+          text: abp.localization.localize("Add").toUpperCase(),
+          tooltip: app.localize('CreateCreditCardInvoice'),
+          checkPermission: true,
+          iconCls: 'fa fa-plus',
+          routeName: 'banking.banksetup.create',
+          iconAlign: 'left'
       }],
     requireExport: true,
     requireMultiSearch: true,
@@ -78,17 +65,17 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
     },
     createNewMode: 'tab',
     isSubMenuItemTab: true,
-    listeners : {
-        cellclick : 'onStatementDateClick'
+    listeners: {
+        cellclick: 'onInvoiceNumberClick'
     },
     columns: [
          {
              xtype: 'gridcolumn',
-             text: app.localize('CreditCardCompany'),
-             dataIndex: 'creditCardCompany',
+             text: app.localize('CreditCardHolder'),
+             dataIndex: 'cardHolder',
              sortable: true,
              groupable: true,
-             width: '45%',
+             width: '15%',
              filterField: {
                  xtype: 'textfield',
                  width: '100%'
@@ -98,24 +85,36 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('CreditCardStatementDate'),
-             dataIndex: 'statementDate',
+             text: app.localize('Invoice#'),
+             dataIndex: 'invoiceNumber',
              sortable: true,
              groupable: false,
              width: '15%',
-             renderer: ChachingRenderers.rendererDateHyperLink,
+             renderer: ChachingRenderers.rendererHyperLink,
              filterField: {
-                xtype: 'dateSearchField',
-                width: '100%',
-                dataIndex: 'statementDate'
-            }, editor: {
-                xtype: 'datefield',
-                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat
-            }
+                 xtype: 'textfield',
+                 width: '100%'
+             }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('CreditCardStatementBalance'),
-             dataIndex: 'statementBalance',
+             text: app.localize('PostingDate'),
+             dataIndex: 'postingDate',
+             sortable: true,
+             groupable: false,
+             width: '10%',
+             renderer: ChachingRenderers.dateSearchFieldRenderer,
+             filterField: {
+                 xtype: 'dateSearchField',
+                 width: '100%',
+                 dataIndex: 'postingDate'
+             }, editor: {
+                 xtype: 'datefield',
+                 format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat
+             }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('CreditCardTotal'),
+             dataIndex: 'creditCardTotal',
              sortable: true,
              groupable: false,
              width: '15%',
@@ -133,18 +132,18 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
              }
          }, {
              xtype: 'gridcolumn',
-             text: app.localize('CreditCardStatus'),
-             dataIndex: 'status',
+             text: app.localize('CreditCardApGenerated'),
+             dataIndex: 'apGenerated',
              sortable: false,
              groupable: false,
-             width: '15%',
+             width: '10%',
              filterField: {
                  xtype: 'combobox',
                  valueField: 'value',
                  displayField: 'text',
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'Current', value: 'Current' }, { text: 'Previous', value: 'Previous' }]
+                     data: [{ text: 'Yes', value: 'true' }, { text: 'No', value: 'false' }]
                  }
              },
              editor: {
@@ -154,9 +153,28 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
                  emptyText: app.localize('SelectOption'),
                  store: {
                      fields: [{ name: 'text' }, { name: 'value' }],
-                     data: [{ text: 'Current', value: 'Current' }, { text: 'Previous', value: 'Previous' }]
+                     data: [{ text: 'Yes', value: 'true' }, { text: 'No', value: 'false' }]
                  }
              }
-         }
+         }, {
+             xtype: 'gridcolumn',
+             text: app.localize('CreditCardBuildAp'),
+             dataIndex: 'buildAp',
+             sortable: true,
+             groupable: false,
+             width: '10%'
+         },
+          {
+              xtype: 'gridcolumn',
+              text: app.localize('Trans#'),
+              dataIndex: 'transactionNumber',
+              sortable: true,
+              groupable: false,
+              width: '15%',
+              filterField: {
+                  xtype: 'textfield',
+                  width: '100%'
+              }
+          }
     ]
 });

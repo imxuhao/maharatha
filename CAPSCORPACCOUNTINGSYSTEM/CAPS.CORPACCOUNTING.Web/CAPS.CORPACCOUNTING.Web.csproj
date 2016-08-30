@@ -3659,6 +3659,7 @@
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionDetailsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\base\TransactionHeaderModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\creditcard\entry\OpenStatementModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\creditcard\entry\StatementDetailModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\customers\CustomersModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\editions\EditionsTreeModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\employee\EmployeeModel.js" />
@@ -3725,6 +3726,7 @@
     <Content Include="ExtWeb\Chaching\app\store\base\BaseTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\base\TransactionDetailsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\creditcard\entry\OpenStatementStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\creditcard\entry\StatementDetailStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\customers\CustomersStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\editions\EditionsTreeStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountRestrictionRightStore.js" />
@@ -3884,6 +3886,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\common\grid\ChachingTransactionDetailGridModel.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\OpenStatementGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\OpenStatementGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\StatementGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\creditcard\entry\StatementGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsForm.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGrid.js" />

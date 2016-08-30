@@ -11,6 +11,6 @@ Ext.define('Chaching.model.creditcard.entry.OpenStatementModel', {
         { name: 'creditCardCompany', type: 'string' },
         { name: 'statementDate', type: 'date', dateFormat: 'c' },
         { name: 'statementBalance', type: 'float', defaultValue: null, convert: nullHandler },
-        { name: 'status', type: 'string'}
+        { name: 'status', type: 'string' }
     ]
 });

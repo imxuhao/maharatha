@@ -21,10 +21,11 @@ Ext.define('Chaching.components.filter.DateSearchField', {
     uses: ['Ext.picker.Date', 'Ext.menu.DatePicker'],
     displayField: 'FilterValue',
     valueField: 'FilterValue',
-    //editable: false,
+    forceSelection:true,
+    editable: false,
     listConfig: {
-        minWidth: 300
-        ,width:350
+        minWidth: 400
+        ,width:400
     },
     initComponent: function () {
         var me = this;
@@ -34,7 +35,7 @@ Ext.define('Chaching.components.filter.DateSearchField', {
                 name: 'After', type: 'date'
             }, {
                 name: 'On', type: 'date'
-            }, { name: 'FilterValue', type: 'string' }, { name: 'ColumnIndex', type: 'int' }]
+            }, { name: 'FilterValue', type: 'string' }, { name: 'ColumnIndex', type: 'int' },{name:'Apply'}]
         });
         gridStore.add({ Before: '', After: '', On: '', FilterValue: '' });
         me.store = gridStore;
@@ -58,20 +59,14 @@ Ext.define('Chaching.components.filter.DateSearchField', {
 	            floating: true,
 	            multiSelect: true,
 	            cls: 'chaching-grid',
-	            selModel: {
-	                selType: 'checkboxmodel',
-	                showHeaderCheckbox:false,
-                    listeners: {
-                        beforeselect: me.onBeforeSelect,
-                        select: me.onRecordSelect,
-                        deselect:me.onRecordDeselect
-                    }
-	            },
                 plugins:[
                 {
                     ptype: 'cellediting',
                     pluginId: 'editingPluginSearch',
-                    clicksToEdit: 1
+                    clicksToEdit: 1,
+                    listeners: {
+                        beforeedit: me.onBeforeEdit
+                    }
                 }],
 	            viewConfig: {
 	                stripeRows: true
@@ -86,111 +81,158 @@ Ext.define('Chaching.components.filter.DateSearchField', {
         me.picker = picker;
         return picker;
     },
+    onBeforeEdit: function(editor, context, eOpts) {
+        var me = this,
+            record = context.record,
+            field = context.field,
+            apponentsValue;
+        if (record&&field) {
+            if (field === "After" || field === "Before") {
+                apponentsValue = record.get('On');
+                if (apponentsValue) return false;
+            }else if (field==="On") {
+                apponentsValue = record.get("After") || record.get('Before');
+                if (apponentsValue) return false;
+            }
+        }
+        return true;
+    },
     /**
    * Event listener onBeforeRowCellClick.  Fires before row cell click.
    */
     onBeforeRowCellClick: function (view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
         record.set('ColumnIndex', cellIndex);
     },
-    /**
-  * Event listener onRecordDeselect. Fires on record is being deselected.
-  */
-    onRecordDeselect: function (selectionModel, record, index, eOpts) {
-        var me = this,
-           ownerCt = me.view.ownerCt;
-        record.set('Before', '');
-        record.set('After', '');
-        record.set('On', '');
-        record.set('FilterValue', '');
-        ownerCt.ownerCmp.setValue(null);
-        ownerCt.ownerCmp.collapse();
-    },
-    /**
-* Event listener onRecordSelect. Fires on record is selected.
-*/
-    onRecordSelect: function (selectionModel, record, index, eOpts) {
-        var me = this,
-            ownerCt = me.view.ownerCt;
-        //build expected filter
-        var filterValue = undefined;
-        var after = Ext.Date.format(record.get('After'), 'm/d/Y'),
-            before = Ext.Date.format(record.get('Before'), 'm/d/Y'),
-            on = Ext.Date.format(record.get('On'), 'm/d/Y');
-        if (after && before) {
-            filterValue = 'range ' + after + ',' + before;
-        }
-        else if (after) {
-            filterValue = '>=' + after;
-        } else if (before) {
-            filterValue = '<=' + before;
-        }else if (on) {
-            filterValue = '=' + on;
-        }
-
-        if (filterValue) {
-            record.set('FilterValue', filterValue);
-            ownerCt.ownerCmp.setValue(filterValue);
+   
+    clearSearchFilters: function (grid, rowIndex, colIndex, evt, e, record) {
+        if (record) {
+            var me = grid,
+               ownerCt = me.ownerCt;
+            record.set('Before', '');
+            record.set('After', '');
+            record.set('On', '');
+            record.set('FilterValue', '');
+            ownerCt.ownerCmp.setValue(null);
             ownerCt.ownerCmp.collapse();
         }
     },
-    /**
-* Event listener OnBeforeSelect. Fires before record is being selected.
-*/
-    onBeforeSelect: function (selectionModel, record, index, eOpts) {
-        var allowSelect = false;
-        //allow selection only when checkbox is clicked and filter fields has values
-        if ((record.get('After') || record.get('Before') || record.get('On')) && record.get('ColumnIndex') === 0) {
-            allowSelect = true;
-        }
-        return allowSelect;
+    setFilters: function (grid, rowIndex, colIndex,evt,e,record) {
+        if (record && (record.get('After') || record.get('Before') || record.get('On'))) {
+            var me = grid,
+                ownerCt = me.ownerCt;
+            //build expected filter
+            var filterValue = undefined;
+            var after = Ext.Date.format(record.get('After'), 'm/d/Y'),
+                before = Ext.Date.format(record.get('Before'), 'm/d/Y'),
+                on = Ext.Date.format(record.get('On'), 'm/d/Y');
+            if (after && before) {
+                filterValue = 'range ' + after + ',' + before;
+            }
+            else if (after) {
+                filterValue = '>=' + after;
+            } else if (before) {
+                filterValue = '<=' + before;
+            } else if (on) {
+                filterValue = '=' + on;
+            }
 
+            if (filterValue) {
+                record.set('FilterValue', filterValue);
+                ownerCt.ownerCmp.setValue(filterValue);
+                ownerCt.ownerCmp.collapse();
+            }
+        }
     },
     /**
 * Get's the columns for gridPicker.
 */
-    getColumns:function() {
+    getColumns: function () {
+        var me = this;
         var columns = [
             {
+                xtype: 'actioncolumn',
+                dataIndex: 'Apply',
+                flex: 1,
+                maxWidth: 50,
+                minWidth: 50,
+                menuDisabled: true,
+                sortable: false,
+                //text: app.localize('Apply'),
+                align: 'center',
+                items: [{
+                    iconCls: 'btn-applyFiltersDateSearch',
+                    tooltip:app.localize('ApplyFilter'),
+                    handler: me.setFilters
+                }, {
+                    iconCls: 'deleteCls',
+                    tooltip: app.localize('ClearFilter'),
+                    handler:me.clearSearchFilters
+                }]
+            },{
                 xtype: 'gridcolumn',
                 text: 'After',
                 dataIndex: 'After',
-                width: '30%',
+                flex: 1,
                 menuDisabled: true,
                 sortable:false,
                 renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
                 editor: {
                     xtype: 'datefield',
-                    format:'m/d/Y'
+                    enableKeyEvents:true,
+                    listeners: {
+                        keypress: me.onDateKeyPress,
+                        specialkey: me.onDateKeyPress
+                    }
                 }
             },
             {
                 xtype: 'gridcolumn',
                 text: 'Before',
                 dataIndex: 'Before',
-                width: '30%',
+                flex: 1,
                 menuDisabled: true,
                 sortable: false,
                 renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
                 editor: {
                     xtype: 'datefield',
-                    format: 'm/d/Y'
+                    enableKeyEvents: true,
+                    listeners: {
+                        keypress: me.onDateKeyPress,
+                        specialkey: me.onDateKeyPress
+                    }
                 }
             },
             {
                 xtype: 'gridcolumn',
                 text: 'On',
                 dataIndex: 'On',
-                width: '30%',
+                flex: 1,
                 menuDisabled: true,
                 sortable: false,
                 renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
                 editor: {
                     xtype: 'datefield',
-                    format: 'm/d/Y'
+                    enableKeyEvents: true,
+                    listeners: {
+                        keypress: me.onDateKeyPress,
+                        specialkey: me.onDateKeyPress
+                    }
                 }
             }
         ];
         return columns;
+    },
+    onDateKeyPress: function (field, e, eOpts) {
+        var value = field.getRawValue(),
+            editor = field.up();
+        if (editor) {
+            var context = editor.context,
+                record = context.record;
+            if (context && record) {
+                if (Ext.isDate(value)) record.set(field.name,value);
+                else record.set(field.name,null);
+            }
+        }
     },
     /**
 * Aligns the picker below dropdown input field as well adjust's height and width for list.

@@ -435,3 +435,9 @@ h1, h2, h3, h4, h5, h6 {
     font: 18px/1 FontAwesome;
     color: #0754e6;
 }
+
+.btn-applyFiltersDateSearch:before {
+    content: "\f058";
+    font: 18px/1 FontAwesome;
+    color: #0754e6;
+}

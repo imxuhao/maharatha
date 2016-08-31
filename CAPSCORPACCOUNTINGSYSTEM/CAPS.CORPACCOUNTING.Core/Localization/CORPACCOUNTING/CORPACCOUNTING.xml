@@ -1287,6 +1287,7 @@
     <text name="APCodingSubAccount10" value="AP Code Sub Acc-10" />
     <text name="Classifications" value="Classifications" />
     <text name="CreditCardCompanies" value="Credit Card Companies" />
+    <text name="ApplyFilter" value="Apply Filter" />
     
   </texts>
 </localizationDictionary>

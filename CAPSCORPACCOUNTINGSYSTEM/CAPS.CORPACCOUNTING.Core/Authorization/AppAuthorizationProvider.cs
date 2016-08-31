@@ -55,7 +55,7 @@ namespace CAPS.CORPACCOUNTING.Authorization
             organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageOrganizationTree, L("ManagingOrganizationTree"));
             organizationUnits.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits_ManageMembers, L("ManagingMembers"));
 
-           
+
             //TENANT-SPECIFIC PERMISSIONS
 
             pages.CreateChildPermission(AppPermissions.Pages_Tenant_Dashboard, L("Dashboard"), multiTenancySides: MultiTenancySides.Tenant);
@@ -110,6 +110,13 @@ namespace CAPS.CORPACCOUNTING.Authorization
             divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
             divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
             divisions.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_Divisions_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
+
+
+            //PERMISSIONS FOR TYPEOFCLASSIFICATION
+            var Typeofclassification = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification, L("TypeofClassification"), multiTenancySides: MultiTenancySides.Tenant);
+            Typeofclassification.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            Typeofclassification.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            Typeofclassification.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
             var journals = financials.CreateChildPermission(AppPermissions.Pages_Financials_Journals, L("Journals"), multiTenancySides: MultiTenancySides.Tenant);
             var entry = journals.CreateChildPermission(AppPermissions.Pages_Financials_Journals_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
@@ -241,8 +248,12 @@ namespace CAPS.CORPACCOUNTING.Authorization
 
             #region Petty Cash Tab
             var pettyCash = pages.CreateChildPermission(AppPermissions.Pages_PettyCash, L("PettyCash"), multiTenancySides: MultiTenancySides.Tenant);
-            var pCVendors = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_PCVendors, L("PCVendors"), multiTenancySides: MultiTenancySides.Tenant);
             var pettyCashEntry = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
+            pettyCashEntry.CreateChildPermission(AppPermissions.Pages_PettyCash_Entry_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            pettyCashEntry.CreateChildPermission(AppPermissions.Pages_PettyCash_Entry_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            pettyCashEntry.CreateChildPermission(AppPermissions.Pages_PettyCash_Entry_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
+
+            var pCVendors = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_PCVendors, L("PCVendors"), multiTenancySides: MultiTenancySides.Tenant);
             var pettyCashInquiry = pettyCash.CreateChildPermission(AppPermissions.Pages_PettyCash_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
@@ -256,6 +267,11 @@ namespace CAPS.CORPACCOUNTING.Authorization
             #region Payroll Tab
             var payroll = pages.CreateChildPermission(AppPermissions.Pages_Payroll, L("Payroll"), multiTenancySides: MultiTenancySides.Tenant);
             var payrollEntry = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Entry, L("Entry"), multiTenancySides: MultiTenancySides.Tenant);
+            payrollEntry.CreateChildPermission(AppPermissions.Pages_Payroll_Entry_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
+            payrollEntry.CreateChildPermission(AppPermissions.Pages_Payroll_Entry_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
+            payrollEntry.CreateChildPermission(AppPermissions.Pages_Payroll_Entry_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
+
+
             var payrollInquiry = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Inquiry, L("Inquiry"), multiTenancySides: MultiTenancySides.Tenant);
             var payrollPreferences = payroll.CreateChildPermission(AppPermissions.Pages_Payroll_Preferences, L("Preferences"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
@@ -295,6 +311,10 @@ namespace CAPS.CORPACCOUNTING.Authorization
             bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
             bankSetup.CreateChildPermission(AppPermissions.Pages_Banking_BankSetup_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);
 
+            #endregion
+
+            #region Imports
+            var Imports = pages.CreateChildPermission(AppPermissions.Pages_Imports, L("Import"), multiTenancySides: MultiTenancySides.Tenant);
             #endregion
 
 

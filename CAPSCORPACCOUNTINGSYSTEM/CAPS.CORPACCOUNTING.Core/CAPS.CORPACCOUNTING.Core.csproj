@@ -173,6 +173,8 @@
     <Compile Include="Banking\BankRecAdjustmentUnit.cs" />
     <Compile Include="Banking\BankRecClearedUnit.cs" />
     <Compile Include="Banking\BatchUnitManager.cs" />
+    <Compile Include="ChargeEntry\ChargeEntryDocumentDetailUnitManager.cs" />
+    <Compile Include="ChargeEntry\ChargeEntryDocumentUnitManager.cs" />
     <Compile Include="Chat\ChatFeatureChecker.cs" />
     <Compile Include="Chat\ChatMessage.cs" />
     <Compile Include="Chat\ChatMessageManager.cs" />

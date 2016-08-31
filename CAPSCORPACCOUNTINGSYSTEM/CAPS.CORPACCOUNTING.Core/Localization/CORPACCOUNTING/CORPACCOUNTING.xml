@@ -190,7 +190,7 @@
     <text name="EnableLdapAuthentication" value="Enable LDAP Authentication." />
     <text name="OtherSettings" value="Other Settings" />
     <text name="AuditLogs" value="Audit Logs" />
-    <text name="ClearFilterBtn" value="CLEAR FILTER"/> 
+    <text name="ClearFilterBtn" value="CLEAR FILTER"/>
     <text name="Success" value="Success" />
     <text name="Time" value="Time" />
     <text name="Service" value="Service" />
@@ -1229,16 +1229,16 @@
     <text name="RateTypeOverrideIds" value="Rate_Type_Override_Ids" />
     <text name="NewAccountIds" value="New_Account_Ids" />
     <text name="FlagsIds" value="Flags_Ids" />
-     <text name="RollUpDivisionIds" value="RollUp_Division_Ids" />
-      <text name="RollUpAccountIds" value="RollUp_Account_Ids" />
+    <text name="RollUpDivisionIds" value="RollUp_Division_Ids" />
+    <text name="RollUpAccountIds" value="RollUp_Account_Ids" />
 
     <text name="ProjectTypeIds" value="Project_Type_Ids" />
     <text name="StatusIds" value="Status_Ids" />
     <text name="BudgetFormatIds" value="Budget_Format_Ids" />
     <text name="TaxCreditIds" value="Tax_Credit_Ids" />
-     <text name="BudgetFormatRequired" value=",Budget Format is Required" />
-      <text name="DuplicatedivisionName" value=",Duplicate Division Name -" />
-        <text name="DuplicatedivisionNumber" value="Duplicate Division Number -" />
+    <text name="BudgetFormatRequired" value=",Budget Format is Required" />
+    <text name="DuplicatedivisionName" value=",Duplicate Division Name -" />
+    <text name="DuplicatedivisionNumber" value="Duplicate Division Number -" />
     <text name="EditPettyCash" value="Edit PC" />
     <text name="CreatePettyCash" value="Create PC" />
     <text name="ViewPettyCash" value="View PC" />
@@ -1246,7 +1246,7 @@
     <text name="EnvelopeDate" value="Envelope date" />
     <text name="EnvelopeTotal" value="Envelope total" />
     <text name="AdvanceAmount" value="Adv. Amount" />
-    
+
     <text name="CreditCardOpenStatement" value="Open Statements" />
     <text name="CreditCardStatement" value="CC Statements" />
     <text name="SyncCreditCardTrans" value="Sync" />
@@ -1263,11 +1263,6 @@
     <text name="CreditCardApGenerated" value="A/P Generated" />
     <text name="CreditCardBuildAp" value="Build A/P" />
     <text name="CreditCardTotal" value="Credit Card Total" />
-    
-    
-    
-    
-  
-
+    <text name="Classifications" value="Classifications" />
   </texts>
 </localizationDictionary>

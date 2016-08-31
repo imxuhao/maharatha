@@ -14,7 +14,7 @@ namespace CAPS.CORPACCOUNTING.CreditCard.Dto
     /// 
     /// </summary>
     [AutoMapTo(typeof(ChargeEntryDocumentUnit))]
-    public class CreditCardEntryDocumentInputUnit
+    public class CreditCardEntryDocumentInputUnit: AccountingHeaderTransactionInputUnit
     {
         ///<summary>Get Sets the BatchId field.</summary>
         public virtual int? BatchId { get; set; }

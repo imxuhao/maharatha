@@ -55,5 +55,12 @@ namespace CAPS.CORPACCOUNTING.CreditCard.Dto
 
         ///<summary>Get Sets the IsApInvoiceGenSelected field.</summary>
         public  bool? IsApInvoiceGenSelected { get; set; }
+
+        ///<summary>Get Sets the BuildAP field.</summary>
+        public string BuildAP { get; set; }
+
+        ///<summary>Get Sets the APGenerated field.</summary>
+        public string APGenerated { get; set; }
+        
     }
 }

@@ -2845,12 +2845,73 @@
             
             </summary>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentDetailUnit,System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.#ctor(Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentDetailUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Banking.BankAccountUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentUnit,System.Int64},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.TypeOfCurrencyUnit,System.Int16},Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Masters.VendorUnit,System.Int32},CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentUnitManager,CAPS.CORPACCOUNTING.ChargeEntry.ChargeEntryDocumentDetailUnitManager)">
             <summary>
             
             </summary>
-            <param name="chargeentrydocumentunitrepository"></param>
-            <param name="chargeentrydocumentdetailunitrepository"></param>
+            <param name="creditcarddetailunitrepository"></param>
+            <param name="bankaccountunitrepository"></param>
+            <param name="creditcardunitrepository"></param>
+            <param name="typeofcurrencyunitrepository"></param>
+            <param name="vendorunitrepository"></param>
+            <param name="chargeentrydocumentunitmanager"></param>
+            <param name="chargeentrydocumentdetailunitmanager"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.CreateCreditCardEntryDocumentUnit(CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.UpdateCreditCardEntryDocumentUnit(CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentInputUnit)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.DeleteCreditCardDetailUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.DeleteCreditCardEntryDocumentUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.GetCreditCardDetailsByDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.GetCreditCardDetailStatementsUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.GetCreditCardStatementsUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            get CreditCard statements group by 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.CreditCardEntryDocumentAppService.GetCreditCardHistory(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDetailInputUnit">
             <summary>
@@ -3025,6 +3086,27 @@
         <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.IsApInvoiceGenSelected">
             <summary>Get Sets the IsApInvoiceGenSelected field.</summary>
         </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.BuildAP">
+            <summary>Get Sets the BuildAP field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardEntryDocumentUnitDto.APGenerated">
+            <summary>Get Sets the APGenerated field.</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardStatementDto.DocumentDate">
+            <summary>Get Sets the DocumentDate field.</summary>        
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardStatementDto.TransactionDate">
+            <summary>Get Sets the TransactionDate field.</summary>      
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardStatementDto.ControllingBankAccountId">
+            <summary>Gets or sets the ControllingBankAccountId field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardStatementDto.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.CreditCard.Dto.CreditCardStatementDto.ControlTotal">
+            <summary>Get Sets the ControlTotal field.</summary>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService">
             <summary>
             
@@ -3051,16 +3133,16 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.DeleteCreditCardDetailUnit(Abp.Application.Services.Dto.IdInput{System.Int64})">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.DeleteCreditCardDetailUnit(Abp.Application.Services.Dto.IdInput)">
             <summary>
             Delete CreditCard Detail Document.
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.GetCreditCardEntryDocumentUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.GetCreditCardStatementsUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
             <summary>
-            Get CreditCard Entry Document List.
+            Get CreditCard Entry Statements List.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3068,6 +3150,13 @@
         <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.GetCreditCardDetailsByDocumentId(CAPS.CORPACCOUNTING.Journals.Dto.GetTransactionList)">
             <summary>
             Get CreditCard Details by AccountingDocumentId List.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.CreditCard.ICreditCardEntryDocumentAppService.GetCreditCardHistory(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get CreditCard History.
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -3218,7 +3307,30 @@
              <param name="excelProperties"></param>
              <param name="columnName"></param>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.String,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Add DropDownList into Data Sheet.
+            </summary>
+            <param name="sheet"></param>
+            <param name="excelFormula"></param>
+            <param name="startRowIndex"></param>
+            <param name="endRowIndex"></param>
+            <param name="excelColumn"></param>
+             <param name="excelProperties"></param>
+             <param name="columnName"></param>
+        </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            add validation to DataSheet
+            </summary>
+            <param name="sheet"></param>
+            <param name="excelProperties"></param>
+            <param name="startRowIndex"></param>
+            <param name="endRowIndex"></param>
+            <param name="excelColumn"></param>
+            <param name="columnName"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             add validation to DataSheet
             </summary>

@@ -93,6 +93,13 @@
         public const string Pages_Financials_Accounts_Divisions_Edit = "Pages.Financials.Accounts.Divisions.Edit";
         public const string Pages_Financials_Accounts_Divisions_Delete = "Pages.Financials.Accounts.Divisions.Delete";
 
+        // PERMISSIONS FOR TYPEOFCLASSIFICATION
+
+        public const string Pages_Financials_Accounts_TypeofClassification = "Pages.Financials.Accounts.TypeofClassification";
+        public const string Pages_Financials_Accounts_TypeofClassification_Create = "Pages.Financials.Accounts.TypeofClassification.Create";
+        public const string Pages_Financials_Accounts_TypeofClassification_Edit = "Pages.Financials.Accounts.TypeofClassification.Edit";
+        public const string Pages_Financials_Accounts_TypeofClassification_Delete = "Pages.Financials.Accounts.TypeofClassification.Delete";
+
         // PERMISSIONS FOR JOURNALS ENTRY
         public const string Pages_Financials_Journals = "Pages.Financials.Journals";
         public const string Pages_Financials_Journals_Entry = "Pages.Financials.Journals.Entry";
@@ -257,6 +264,10 @@
         public const string Pages_PettyCash = "Pages.PettyCash";
         public const string Pages_PettyCash_PCVendors = "Pages.PettyCash.PCVendors";
         public const string Pages_PettyCash_Entry = "Pages.PettyCash.Entry";
+        public const string Pages_PettyCash_Entry_Create = "Pages.PettyCash.Entry.Create";
+        public const string Pages_PettyCash_Entry_Edit = "Pages.PettyCash.Entry.Edit";
+        public const string Pages_PettyCash_Entry_Delete = "Pages.PettyCash.Entry.Delete";
+
         public const string Pages_PettyCash_PCVendors_History = "Pages.PettyCash.PCVendors.History";
         public const string Pages_PettyCash_Inquiry = "Pages.PettyCash.Inquiry";
         public const string Pages_PettyCash_Inquiry_PCAccountSummary = "Pages.PettyCash.Inquiry.PCAccountSummary";
@@ -266,11 +277,16 @@
         #region Credit Card Tab
         public const string Pages_CreditCard = "Pages.CreditCard";
         public const string Pages_CreditCard_Entry = "Pages.CreditCard.Entry";
+      
+
+
         public const string Pages_CreditCard_Inquiry = "Pages.CreditCard.Inquiry";
-        public const string Pages_CreditCard_Inquiry_CreditCardHistory = "Pages.CreditCard.Inquiry.CreditCardHistory";
+        public const string Pages_CreditCard_Entry_CreditCardHistory = "Pages.CreditCard.Entry.CreditCardHistory";
+        public const string Pages_CreditCard_Entry_CreditCardCompanies = "Pages.CreditCard.Entry.CreditCardCompanies";
+        public const string Pages_CreditCard_Entry_OpenStatements = "Pages.CreditCard.Entry.OpenStatements";
         public const string Pages_CreditCard_Inquiry_CreditCardUploadInfo = "Pages.CreditCard.Inquiry.CreditCardUploadInfo";
         public const string Pages_CreditCard_Preferences = "Pages.CreditCard.Preferences";
-        public const string Pages_CreditCard_Preferences_CreditCardCompanies = "Pages.CreditCard.Preferences.CreditCardCompanies";
+    
         #endregion
 
         #region Payroll Tab
@@ -336,6 +352,15 @@
         public const string Pages_Banking_BankSetup_Delete = "Pages.Banking.BankSetup.Delete";
 
 
+        #endregion
+
+
+        #region Imports
+        public const string Pages_Imports = "Pages.Imports";
+        //public const string Pages_Uploads_Accounts = "Pages.Uploads.Accounts";
+        //public const string Pages_Uploads_Lines = "Pages.Uploads.Lines";
+        //public const string Pages_Uploads_Jobs = "Pages.Uploads.Jobs";
+        //public const string Pages_Uploads_Divisions = "Pages.Uploads.Divisions";
         #endregion
 
     }

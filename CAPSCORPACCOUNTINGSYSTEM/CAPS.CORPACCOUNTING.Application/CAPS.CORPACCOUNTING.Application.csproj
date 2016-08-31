@@ -272,6 +272,7 @@
     <Compile Include="CreditCard\Dto\CreditCardEntryDetailUnitDto.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDocumentInputUnit.cs" />
     <Compile Include="CreditCard\Dto\CreditCardEntryDocumentUnitDto.cs" />
+    <Compile Include="CreditCard\Dto\CreditCardStatementDto.cs" />
     <Compile Include="CreditCard\ICreditCardEntryDocumentAppService.cs" />
     <Compile Include="CustomDtoMapper.cs" />
     <Compile Include="DataExporting\Excel\EpPlus\EpPlusExcelExporterBase.cs" />

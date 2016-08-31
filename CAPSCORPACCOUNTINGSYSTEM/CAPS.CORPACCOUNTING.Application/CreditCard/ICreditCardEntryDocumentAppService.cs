@@ -43,14 +43,14 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task DeleteCreditCardDetailUnit(IdInput<long> input);
+        Task DeleteCreditCardDetailUnit(IdInput input);
 
         /// <summary>
-        /// Get CreditCard Entry Document List.
+        /// Get CreditCard Entry Statements List.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<PagedResultOutput<CreditCardEntryDocumentUnitDto>> GetCreditCardEntryDocumentUnits(SearchInputDto input);
+        Task<PagedResultOutput<CreditCardStatementDto>> GetCreditCardStatementsUnits(SearchInputDto input);
 
 
         /// <summary>
@@ -60,6 +60,15 @@ namespace CAPS.CORPACCOUNTING.CreditCard
         /// <returns></returns>
 
         Task<PagedResultOutput<CreditCardEntryDocumentUnitDto>> GetCreditCardDetailsByDocumentId(GetTransactionList input);
+
+        /// <summary>
+        /// Get CreditCard History.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PagedResultOutput<CreditCardEntryDocumentUnitDto>> GetCreditCardHistory(SearchInputDto input);
+
+
 
     }
 }

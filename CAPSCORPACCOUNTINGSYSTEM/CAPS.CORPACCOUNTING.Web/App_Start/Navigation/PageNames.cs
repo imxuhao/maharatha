@@ -37,6 +37,7 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string FinancialsAccountsCoas = "Financials.Accounts.ChartOfAccounts";
                 public const string FinancialsAccountsSubAccounts = "Financials.Accounts.SubAccounts";
                 public const string FinancialsAccountsDivisions = "Financials.Accounts.Divisions";
+                public const string FinancialsAccountsTypeofClassification = "Financials.Accounts.TypeofClassification";
 
                 public const string FinancialsJournals = "Financials.Journals";
                 public const string FinancialsJournalsEntry = "Financials.Journals.Entry";
@@ -149,10 +150,14 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string CreditCard = "CreditCard";
                 public const string CreditCardEntry = "CreditCard.Entry";
                 public const string CreditCardInquiry = "CreditCard.Inquiry";
-                public const string CreditCardInquiryCreditCardHistory = "CreditCard.Inquiry.CreditCardHistory";
+                public const string CreditCardEntryCreditCardHistory = "CreditCard.Entry.CreditCardHistory";
+                public const string CreditCardEntryOpenStatements = "CreditCard.Entry.OpenStatements";
+                public const string CreditCardEntryCreditCardCompanies = "CreditCard.Entry.CreditCardCompanies";
+
                 public const string CreditCardInquiryCreditCardUploadInfo = "CreditCard.Inquiry.CreditCardUploadInfo";
                 public const string CreditCardPreferences = "CreditCard.Preferences";
-                public const string CreditCardPreferencesCreditCardCompanies = "CreditCard.Preferences.CreditCardCompanies";
+             
+               
 
                 #endregion
 
@@ -196,6 +201,9 @@ namespace CAPS.CORPACCOUNTING.Web.Navigation
                 public const string AdministrationOrganizationUnitsMembers = "Administration.OrganizationUnits.Members";
 
 
+                #endregion
+
+                #region Uploads
                 #endregion
 
             }

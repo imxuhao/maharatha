@@ -13,18 +13,16 @@ namespace CAPS.CORPACCOUNTING.JobCosting
     /// </summary>
     public enum TypeofTransaction
     {
-        [Display(Name = "AP Invoice")]
-        APInvoice = 1,
-        [Display(Name = "Manual Check")]
-        ManualCheck = 2,
-        [Display(Name = "Purchase Order")]
-        PurchaseOrder = 3,
-        [Display(Name = "Existed PO")]
-        ExistedPO = 4,
-        [Display(Name = "Existed AP")]
-        ExistedAP = 5,
-        [Display(Name = "CreditCard PO")]
-        CreditCardPO = 6,
+        [Display(Name = "Entered")]
+        Entered = 1,
+        [Display(Name = "Generated")]
+        Generated = 2,
+        [Display(Name = "Changed")]
+        Changed = 3,
+        [Display(Name = "Uploaded")]
+        Uploaded = 4,
+        [Display(Name = "Converted")]
+        Converted = 5
     }
 
     /// <summary>
@@ -49,7 +47,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual int? LajitId { get; set; }
 
         /// <summary>Gets or sets the JobBudgetId field. </summary>
-        [Range(0,Int32.MaxValue)]
+        [Range(0, Int32.MaxValue)]
         public virtual int JobBudgetId { get; set; }
 
         [ForeignKey("JobBudgetId")]
@@ -59,7 +57,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
         public virtual long? AccountId { get; set; }
 
         [ForeignKey("AccountId")]
-        public virtual AccountUnit Account{ get; set; }
+        public virtual AccountUnit Account { get; set; }
 
         /// <summary>Gets or sets the AccountId field. </summary>
         public virtual int? VendorId { get; set; }
@@ -124,7 +122,7 @@ namespace CAPS.CORPACCOUNTING.JobCosting
 
         /// <summary>Gets or sets the CompanyId field. </summary>
         public virtual long? OrganizationUnitId { get; set; }
-        
+
         #endregion
 
         public JobPurchaseOrderLogUnit()

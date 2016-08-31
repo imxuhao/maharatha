@@ -397,7 +397,7 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                 url: "banking.banksetup",
                 icon: "icon-briefcase",
                 requiredPermissionName: AppPermissions.Pages_Banking_BankSetup));
-           
+
         }
 
         public List<MenuItemDefinition> MenuItemsList(string ParentTab, string ChildTab)
@@ -480,7 +480,13 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                             L("Divisions"),
                             url: "financials.accounts.divisions",
                             icon: "icon-briefcase",
-                            requiredPermissionName: AppPermissions.Pages_Financials_Accounts_Divisions)
+                            requiredPermissionName: AppPermissions.Pages_Financials_Accounts_Divisions),
+                          new MenuItemDefinition(
+                            PageNames.App.Organization.FinancialsAccountsTypeofClassification,
+                            L("Classifications"),
+                            url: "financials.accounts.Classifications",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_Financials_Accounts_TypeofClassification)
                     };
                     }
                     break;
@@ -846,18 +852,34 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
             {
                 case "Entry":
                     {
+                        itemList = new List<MenuItemDefinition>
+                    {
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.CreditCardEntryOpenStatements,
+                            L("CreditCardOpenStatement"),
+                            url: "creditcard.Entry.ccOpenStatements",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_CreditCard_Entry_OpenStatements),
+                        new MenuItemDefinition(
+                            PageNames.App.Organization.CreditCardEntryCreditCardHistory,
+                            L("CreditCardHistory"),
+                            url: "creditcard.Entry.ccdhistory",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_CreditCard_Entry_CreditCardHistory),
+                         new MenuItemDefinition(
+                            PageNames.App.Organization.CreditCardEntryCreditCardCompanies,
+                            L("CreditCardCompanies"),
+                            url: "creditcard.Entry.ccdcompanies",
+                            icon: "icon-briefcase",
+                            requiredPermissionName: AppPermissions.Pages_CreditCard_Entry_CreditCardCompanies)
+
+                    };
                     }
                     break;
                 case "Inquiry":
                     {
                         itemList = new List<MenuItemDefinition>
                     {
-                        new MenuItemDefinition(
-                            PageNames.App.Organization.CreditCardInquiryCreditCardHistory,
-                            L("CreditCardHistory"),
-                            url: "creditcard.inquiry.ccdhistory",
-                            icon: "icon-briefcase",
-                            requiredPermissionName: AppPermissions.Pages_CreditCard_Inquiry_CreditCardHistory),
                         new MenuItemDefinition(
                             PageNames.App.Organization.CreditCardInquiryCreditCardUploadInfo,
                             L("CreditCardUploadInformation"),
@@ -870,14 +892,9 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                 case "Preferences":
                     {
                         itemList = new List<MenuItemDefinition>
-                    {
-                        new MenuItemDefinition(
-                            PageNames.App.Organization.CreditCardPreferencesCreditCardCompanies,
-                            L("CreditCardCompanies"),
-                            url: "creditcard.preferences.ccdcompanies",
-                            icon: "icon-briefcase",
-                            requiredPermissionName: AppPermissions.Pages_CreditCard_Preferences_CreditCardCompanies)
-                    };
+                        {
+
+                        };
                     }
                     break;
             }

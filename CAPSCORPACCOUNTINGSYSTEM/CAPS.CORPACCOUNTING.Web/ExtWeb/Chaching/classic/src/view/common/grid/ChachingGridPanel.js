@@ -63,6 +63,9 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanel', {
     viewModel: {
         type: 'common-grid-chachinggridpanel'
     },
+    viewConfig: {
+        emptyText: '<div class="emptyTextClass">' + app.localize('NoRecordsToDiplay') + '</div>',
+    },
     /**
     * @cfg {boolean} requireMultiSearch
     */

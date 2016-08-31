@@ -392,6 +392,7 @@
     <text name="ExportToPDF" value="Export to pdf" />
     <text name="ExportToCSV" value="Export to CSV" />
     <text name="ClearFilter" value="Clear Filter" />
+    <text name="NoRecordsToDiplay" value="No records to display" />
     <text name="Import" value="Import" />
     <text name="Upload" value="Upload" />
     <text name="SelectFile" value="Select File ..." />

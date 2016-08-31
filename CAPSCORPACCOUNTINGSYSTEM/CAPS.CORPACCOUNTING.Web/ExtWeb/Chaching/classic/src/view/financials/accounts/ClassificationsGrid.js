@@ -51,16 +51,6 @@
     columns: [
         {
             xtype: 'gridcolumn',
-            name: 'classificationId',
-            dataIndex: 'classificationId',
-            sortable: true,
-            groupable: true,
-            flex: 1,
-            allowBlank: false,
-            hidden:true,
-            text: app.localize('ClassificationId')
-        }, {
-            xtype: 'gridcolumn',
             name: 'description',
             dataIndex: 'description',
             sortable: true,
@@ -73,7 +63,7 @@
                 width: '100%'
             }, editor: {
                 xtype: 'textfield'
-            }
+            } 
         }, {
             xtype: 'gridcolumn',
             name: 'caption',
@@ -81,7 +71,6 @@
             sortable: true,
             groupable: true,
             flex: 1,
-            allowBlank: false,
             text: app.localize('Caption'),
             filterField: {
                 xtype: 'textfield',
@@ -89,6 +78,105 @@
             }, editor: {
                 xtype: 'textfield'
             }
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('AccountClassificationDescription'),
+            dataIndex: 'typeOfAccountClassificationDesc',
+            itemId: 'typeOfAccountClassificationId',
+            sortable: true,
+            groupable: true,
+            flex: 1,
+            filterField: {
+                xtype: 'combobox',
+                valueField: 'typeOfAccountClassificationId',
+                displayField: 'typeOfAccountClassificationDesc',
+                queryMode: 'local',
+                loadStoreOnCreate: true,
+                isViewmodelStore: true,
+                forceSelection: true,
+                searchProperty: 'typeOfAccountClassificationId',
+                bind: {
+                    store: '{getAccountClassificationDescription}'
+                }
+            }, editor: {
+                xtype: 'combobox',
+                valueField: 'typeOfAccountClassificationId',
+                displayField: 'typeOfAccountClassificationDesc',
+                queryMode: 'local',
+                loadStoreOnCreate: true,
+                isViewmodelStore: true,
+                forceSelection: true,
+                bind: {
+                    store: '{getAccountClassificationDescription}'
+                }
+            }
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('IsCurrencyCodeRequired'),
+            dataIndex: 'isCurrencyCodeRequired',
+            sortable: true,
+            groupable: true,
+            width: '8%',
+            renderer: function (val) {
+                if (val) return 'YES';
+                else return 'NO';
+            },
+            filterField: {
+                xtype: 'combobox',
+                forceSelection: true,
+                valueField: 'value',
+                displayField: 'text',
+                store: {
+                    fields: [{ name: 'text' }, { name: 'value' }],
+                    data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                }
+            }, editor: {
+                xtype: 'checkboxfield',
+                inputValue: true,
+                uncheckedValue: false
+            }
+        }, {
+            xtype: 'gridcolumn',
+            text: app.localize('IsPaymentType'),
+            dataIndex: 'isPaymentType',
+            sortable: true,
+            groupable: true,
+            width: '8%',
+            renderer: function (val) {
+                if (val) return 'YES';
+                else return 'NO';
+            },
+            filterField: {
+                xtype: 'combobox',
+                forceSelection: true,
+                valueField: 'value',
+                displayField: 'text',
+                store: {
+                    fields: [{ name: 'text' }, { name: 'value' }],
+                    data: [{ text: 'YES', value: 'true' }, { text: 'NO', value: 'false' }]
+                }
+            }, editor: {
+                xtype: 'checkboxfield',
+                inputValue: true,
+                uncheckedValue: false
+            }
+        },
+
+        {
+            xtype: 'gridcolumn',
+            name: 'notes',
+            dataIndex: 'notes',
+            sortable: true,
+            groupable: true,
+            flex: 1,
+            text: app.localize('Notes'),
+            filterField: {
+                xtype: 'textfield',
+                width: '100%'
+            }, editor: {
+                xtype: 'textfield'
+            }
         }
+
     ]
 });

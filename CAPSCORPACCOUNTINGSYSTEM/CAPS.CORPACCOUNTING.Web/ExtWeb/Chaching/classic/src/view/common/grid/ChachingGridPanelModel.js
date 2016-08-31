@@ -490,6 +490,30 @@ Ext.define('Chaching.view.common.grid.ChachingGridPanelModel', {
                     rootProperty: 'result'
                 }
             }
+        },
+        getAccountClassificationDescription: {
+            fields: [{ name: 'name' }, { name: 'value' }, {
+
+                name: 'typeOfAccountClassificationDesc', convert: function (value, record) {
+                    return record.get('name');
+                }
+            }, {
+                name: 'typeOfAccountClassificationId', convert: function (value, record) {
+                    return record.get('value');
+                }
+            }],
+            xtype: 'ajax',
+            remoteSort: false,
+            remoteFilter: false,
+            proxy: {
+                actionMethods: { create: 'POST', read: 'POST', update: 'POST', destroy: 'POST' },
+                type: 'chachingProxy',
+                url: abp.appPath + 'api/services/app/classificationUnit/GetTypeOfAccountClassificationList',
+                reader: {
+                    type: 'json',
+                    rootProperty: 'result'
+                }
+            }
         }
     }
 });

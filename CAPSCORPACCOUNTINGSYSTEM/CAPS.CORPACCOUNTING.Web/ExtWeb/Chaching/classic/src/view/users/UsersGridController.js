@@ -359,7 +359,7 @@ Ext.define('Chaching.view.users.UsersGridController', {
                 //input.sendActivationEmail = e.record.data.isEmailConfirmed;
 
                 Ext.Ajax.request({
-                    url: abp.appPath + 'api/services/app/user/CreateOrUpdateUser',
+                    url: abp.appPath + 'api/services/app/user/CreateOrUpdateUserUnit',
                     jsonData: Ext.encode(input),
                     method: 'POST',
                     headers: {

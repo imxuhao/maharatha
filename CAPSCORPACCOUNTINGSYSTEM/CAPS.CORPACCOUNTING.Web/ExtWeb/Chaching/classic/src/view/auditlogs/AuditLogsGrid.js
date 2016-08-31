@@ -17,7 +17,20 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGrid', {
           xtype: 'displayfield',
           value: abp.localization.localize("AuditLogs"),
           ui: 'headerTitle'
-      }, '->', {
+      }, '->',
+      {
+          xtype: 'button',
+          scale: 'small',
+          ui: 'actionButton',
+          text: abp.localization.localize("ClearFilterBtn").toUpperCase(),
+          tooltip: app.localize('ClearFilter'),
+          iconCls: 'fa fa-filter',
+          iconAlign: 'left',
+          listeners: {
+              click : 'onClearFilterClick'
+          }
+      },
+      {
           xtype: 'button',
           scale: 'small',
           ui: 'actionButton',

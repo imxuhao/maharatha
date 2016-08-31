@@ -190,6 +190,7 @@
     <text name="EnableLdapAuthentication" value="Enable LDAP Authentication." />
     <text name="OtherSettings" value="Other Settings" />
     <text name="AuditLogs" value="Audit Logs" />
+    <text name="ClearFilterBtn" value="CLEAR FILTER"/> 
     <text name="Success" value="Success" />
     <text name="Time" value="Time" />
     <text name="Service" value="Service" />

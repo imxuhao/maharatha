@@ -22,6 +22,11 @@ Ext.define('Chaching.view.auditlogs.AuditLogsGridController', {
         var rec = grid.getStore().getAt(rowIndex);
         var detailView = Ext.create('Chaching.view.auditlogs.AuditLogDetailView', { autoShow: true });
         detailView.down('dataview').getStore().add(rec);
+    },
+
+    onClearFilterClick: function (btn) {
+        var me = this;
+            me.clearGridFilters(btn);
     }
     //,
     //auditLogCellClick:function(grid, cell, colIndex, record) {

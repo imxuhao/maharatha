@@ -12,7 +12,8 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
     extend: 'Chaching.view.common.grid.ChachingGridPanel',
 
     requires: [
-        'Chaching.view.creditcard.entry.OpenStatementGridController'
+        'Chaching.view.creditcard.entry.OpenStatementGridController',
+        'Ext.menu.Menu'
     ],
     xtype: 'creditcard.entry',
     name: 'CreditCard.Entry',
@@ -20,7 +21,7 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
     modulePermissions: {
         read: abp.auth.isGranted('Pages.CreditCard.Entry'),
         create: true,//abp.auth.isGranted('Pages.CreditCard.Entry.Create'),
-        edit: true,//abp.auth.isGranted('Pages.CreditCard.Entry.Edit'),
+        edit: false,//abp.auth.isGranted('Pages.CreditCard.Entry.Edit'),
         destroy: abp.auth.isGranted('Pages.CreditCard.Entry.Delete')
     },
     padding: 5,
@@ -60,7 +61,7 @@ Ext.define('Chaching.view.creditcard.entry.OpenStatementGrid', {
     requireExport: true,
     requireMultiSearch: true,
     requireMultisort: true,
-    isEditable: true,
+    isEditable: false,
     editingMode: 'row',
     columnLines: true,
     multiColumnSort: true,

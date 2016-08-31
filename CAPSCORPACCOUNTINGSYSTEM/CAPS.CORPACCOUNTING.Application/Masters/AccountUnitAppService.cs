@@ -14,7 +14,6 @@ using System.Linq.Dynamic;
 using CAPS.CORPACCOUNTING.Helpers;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Runtime.Session;
@@ -24,8 +23,6 @@ using CAPS.CORPACCOUNTING.Common;
 using CAPS.CORPACCOUNTING.Helpers.CacheItems;
 using CAPS.CORPACCOUNTING.Masters.CustomRepository;
 using CAPS.CORPACCOUNTING.Sessions;
-using CAPS.CORPACCOUNTING.Uploads.Dto;
-using Hangfire;
 using Abp.Runtime.Caching;
 
 namespace CAPS.CORPACCOUNTING.Accounts
@@ -429,9 +426,11 @@ namespace CAPS.CORPACCOUNTING.Accounts
                 duplicateAccountItems.Where(
                     p => accountNumberList.Contains(p.AccountNumber) || descriptionList.Contains(p.Caption)).ToList();
 
+            //duplicateAccountCaptions of AccountsList
             var duplicateAccountCaptionList = (from p in accountsList
                                                join p2 in duplicateAccountList on p.Caption equals p2.Caption
                                                select new { Caption = p.Caption, AccountNumber = string.Empty, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateDescription") + p.Caption }).ToList();
+            //duplicateAccountNumbers of AccountsList
             var duplicateAccountsAccountNumberList = (from p in accountsList
                                                       join p2 in duplicateAccountList on p.AccountNumber equals p2.AccountNumber
                                                       select new { Caption = string.Empty, AccountNumber = p.AccountNumber, RowNumber = p.ExcelRowNumber, ErrorMesage = L("DuplicateAccountNumber") + p.AccountNumber }).ToList();

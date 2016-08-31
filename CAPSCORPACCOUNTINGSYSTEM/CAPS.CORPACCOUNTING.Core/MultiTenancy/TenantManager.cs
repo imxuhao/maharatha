@@ -29,6 +29,8 @@ using CAPS.CORPACCOUNTING.Organization;
 using Abp.Application.Services;
 using Abp.Authorization;
 using Abp.Authorization.Roles;
+using Abp.Authorization.Users;
+using LinqKit;
 
 namespace CAPS.CORPACCOUNTING.MultiTenancy
 {
@@ -59,6 +61,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         private readonly IRepository<ConnectionStringUnit> _connectionStringRepository;
         private readonly IRepository<OrganizationExtended, long> _organizationRepository;
         private readonly IPermissionManager _permissionManager;
+        private readonly IRepository<RolePermissionSetting, long> _rolePermissionSettingRepository;
+        private readonly IRepository<UserRole, long> _userRolRepository;
 
 
         public TenantManager(
@@ -78,7 +82,7 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         IRepository<TypeOfAccountUnit> typeOfAccountUnit,
         IRepository<RegionUnit> regionUnit,
         IRepository<CountryUnit> countryUnit, IRepository<VendorUnit> vendorUnit, IRepository<User, long> userUnit, IRepository<Role> roleUnit,
-        IRepository<CoaUnit> coaUnit, IRepository<EmployeeUnit> employeeUnit, IRepository<CustomerUnit> customerUnit, IRepository<ConnectionStringUnit> connectionStringRepository, IRepository<OrganizationExtended, long> organizationRepository, IPermissionManager permissionManager) :
+        IRepository<CoaUnit> coaUnit, IRepository<EmployeeUnit> employeeUnit, IRepository<CustomerUnit> customerUnit, IRepository<ConnectionStringUnit> connectionStringRepository, IRepository<OrganizationExtended, long> organizationRepository, IPermissionManager permissionManager, IRepository<RolePermissionSetting, long> rolePermissionSettingRepository, IRepository<UserRole, long> userRolRepository) :
         base(tenantRepository, tenantFeatureRepository, editionManager, featureValueStore)
         {
             _unitOfWorkManager = unitOfWorkManager;
@@ -102,6 +106,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
             _connectionStringRepository = connectionStringRepository;
             _organizationRepository = organizationRepository;
             _permissionManager = permissionManager;
+            _rolePermissionSettingRepository = rolePermissionSettingRepository;
+            _userRolRepository = userRolRepository;
         }
 
 
@@ -322,7 +328,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
         {
             if (!ReferenceEquals(entityList, null))
             {
-                foreach (string entityName in entityList)
+                bool isRoleselected = false;
+                List<Role> roles = null;
+                foreach (string entityName in entityList.OrderBy(p => p))
                 {
                     switch (entityName)
                     {
@@ -340,11 +348,11 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 //Inserting Vendor Data in DestinationTenant
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
-                                    var vendorUnit = new VendorUnit();
                                     if (!ReferenceEquals(entityList, null))
                                     {
                                         foreach (var vendor in vendorList)
                                         {
+                                            var vendorUnit = new VendorUnit();
                                             vendor.MapTo(vendorUnit);
                                             vendorUnit.TenantId = newTenantId;
                                             vendorUnit.CreatorUserId = null;
@@ -358,30 +366,64 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                             }
                         case "Users":
                             {
-                                List<User> userList = null;
+                                var userRoleList = new Dictionary<User, List<Role>>();
+                                Dictionary<Role, IReadOnlyList<Permission>> rolePermissionList = new Dictionary<Role, IReadOnlyList<Permission>>();
                                 using (_unitOfWorkManager.Current.SetTenantId(sourceTenantId))
                                 {
                                     if (await _userUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
                                     {
                                         //getting the userd except default user(AppSupport)
-                                        userList = await _userUnit.GetAll().Where(u => u.TenantId == sourceTenantId
-                                        && u.UserName != StaticUsers.UserName).ToListAsync();
+                                        var userList = await _userManager.Users.Include(p => p.Roles)
+                                            .Where(u => u.TenantId == sourceTenantId && u.UserName != StaticUsers.UserName).ToListAsync();
+                                        //getting all Rles
+                                        var allRoleList = await _roleUnit.GetAll().ToListAsync();
+                                        foreach (var user in userList)
+                                        {
+                                            var roleNumbers = string.Join(",", user.Roles.Select(p => p.RoleId).ToArray());
+                                            var rolelist = allRoleList
+                                                .Where(p => roleNumbers.Contains(p.Id.ToString())).ToList();
+                                            userRoleList.Add(user, rolelist);
+                                            var rolepermission = await GetRoleswithPermissions(rolelist);
+                                            if (!rolePermissionList.ContainsKey(rolepermission.FirstOrDefault().Key))
+                                                rolePermissionList.Add(rolepermission.FirstOrDefault().Key, rolepermission.FirstOrDefault().Value);
+                                        }
+
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
-                                    var userUnit = new User();
                                     if (!ReferenceEquals(entityList, null))
                                     {
-                                        foreach (var user in userList)
+                                        List<Role> newRoles = null;
+                                        if (!isRoleselected)
+                                            newRoles = await InsertRoles(rolePermissionList, newTenantId);
+                                        else
+                                            newRoles = roles;
+
+                                        foreach (var user in userRoleList)
                                         {
-                                            user.MapTo(userUnit);
+                                            var userUnit = new User();
+                                            user.Key.MapTo(userUnit);
                                             userUnit.TenantId = newTenantId;
                                             userUnit.CreatorUser = null;
                                             userUnit.CreatorUserId = null;
                                             userUnit.LastModifierUser = null;
                                             userUnit.LastModifierUserId = null;
-                                            await _userUnit.InsertAsync(userUnit);
+                                            var userroles = (from p in user.Value
+                                                             join newrole in newRoles
+                                                                 on p.Name equals newrole.Name
+                                                             select newrole).ToList();
+                                            userUnit.Roles = null;
+                                            long userId = await _userUnit.InsertAndGetIdAsync(userUnit);
+                                            foreach (var userRole in userroles)
+                                            {
+                                                await _userRolRepository.InsertAsync(new UserRole
+                                                {
+                                                    RoleId = userRole.Id,
+                                                    UserId = userId,
+                                                    TenantId = newTenantId
+                                                });
+                                            }
                                         }
                                     }
                                 }
@@ -389,7 +431,8 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                             }
                         case "Roles":
                             {
-                                var rolePermissionList = new Dictionary<Role, IReadOnlyList<Permission>>();
+                                isRoleselected = true;
+                                Dictionary<Role, IReadOnlyList<Permission>> rolePermissionList = new Dictionary<Role, IReadOnlyList<Permission>>();
                                 using (_unitOfWorkManager.Current.SetTenantId(sourceTenantId))
                                 {
                                     if (await _roleUnit.CountAsync(u => u.TenantId == newTenantId) == 0)
@@ -399,32 +442,14 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                         && u.Name != StaticRoleNames.Tenants.Admin &&
                                                 u.Name != StaticRoleNames.Tenants.User).ToListAsync();
 
-                                        foreach (var role in rollList)
-                                        {
-                                            //getting permissions for the Role
-                                            var grantedPermissionlist =
-                                                (await _roleManager.GetGrantedPermissionsAsync(role)).ToArray();
-                                            rolePermissionList.Add(role, grantedPermissionlist);
-                                        }
+                                        rolePermissionList = await GetRoleswithPermissions(rollList);
                                     }
                                 }
                                 using (_unitOfWorkManager.Current.SetTenantId(newTenantId))
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-                                        var roleUnit = new Role();
-
-                                        foreach (var role in rolePermissionList)
-                                        {
-                                            role.Key.MapTo(roleUnit);
-                                            roleUnit.TenantId = newTenantId;
-                                            roleUnit.CreatorUser = null;
-                                            roleUnit.CreatorUserId = null;
-                                            roleUnit.LastModifierUserId = null;
-                                            roleUnit.LastModifierUser = null;
-                                            await _roleUnit.InsertAsync(roleUnit);
-                                            await _roleManager.SetGrantedPermissionsAsync(roleUnit, role.Value);
-                                        }
+                                        roles = await InsertRoles(rolePermissionList, newTenantId);
                                     }
                                 }
                                 break;
@@ -444,9 +469,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-                                        var coaUnit = new CoaUnit();
                                         foreach (var coa in coaList)
                                         {
+                                            var coaUnit = new CoaUnit();
                                             coa.MapTo(coaUnit);
                                             coa.TenantId = newTenantId;
                                             coa.CreatorUserId = null;
@@ -472,9 +497,9 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                                 {
                                     if (!ReferenceEquals(entityList, null))
                                     {
-                                        var coaUnit = new CoaUnit();
                                         foreach (var coa in coaList)
                                         {
+                                            var coaUnit = new CoaUnit();
                                             coa.MapTo(coaUnit);
                                             coaUnit.TenantId = newTenantId;
                                             coaUnit.CreatorUserId = null;
@@ -547,5 +572,68 @@ namespace CAPS.CORPACCOUNTING.MultiTenancy
                 }
             }
         }
+        /// <summary>
+        /// Inserting RolePermissions
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <param name="permissionlist"></param>
+        /// <param name="tenantId"></param>
+        /// <returns></returns>
+        private async Task InsertPermission(int roleId, IReadOnlyList<Permission> permissionlist, int tenantId)
+        {
+            foreach (var permission in permissionlist)
+            {
+                await _rolePermissionSettingRepository.InsertAsync(new RolePermissionSetting
+                {
+                    RoleId = roleId,
+                    Name = permission.Name,
+                    IsGranted = permission.IsGrantedByDefault,
+                    TenantId = tenantId
+                });
+            }
+
+        }
+
+        private async Task<Dictionary<Role, IReadOnlyList<Permission>>> GetRoleswithPermissions(List<Role> rollList)
+        {
+            var rolePermissionList = new Dictionary<Role, IReadOnlyList<Permission>>();
+            var allPermissions = await _rolePermissionSettingRepository.GetAll().ToListAsync();
+            foreach (var role in rollList)
+            {
+                var grantedPermision = allPermissions.Where(p => p.RoleId == role.Id).Select(p =>
+                new Permission(p.Name, isGrantedByDefault: p.IsGranted)).ToList();
+                rolePermissionList.Add(role, grantedPermision);
+            }
+            return rolePermissionList;
+        }
+
+        /// <summary>
+        /// Inserting Roles
+        /// </summary>
+        /// <param name="rolePermissionList"></param>
+        /// <param name="newTenantId"></param>
+        /// <returns></returns>
+        private async Task<List<Role>> InsertRoles(Dictionary<Role, IReadOnlyList<Permission>> rolePermissionList, int newTenantId)
+        {
+            List<Role> roles = new List<Role>();
+            foreach (var role in rolePermissionList)
+            {
+                var roleUnit = new Role();
+                role.Key.MapTo(roleUnit);
+                roleUnit.TenantId = newTenantId;
+                roleUnit.CreatorUser = null;
+                roleUnit.CreatorUserId = null;
+                roleUnit.LastModifierUserId = null;
+                roleUnit.LastModifierUser = null;
+                roleUnit.Permissions = null;
+                int roleId = await _roleUnit.InsertAndGetIdAsync(roleUnit);
+                roleUnit.Id = roleId;
+                roles.Add(roleUnit);
+                await InsertPermission(roleUnit.Id, role.Value, newTenantId);
+            }
+            return roles;
+
+        }
+
     }
 }

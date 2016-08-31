@@ -46,7 +46,8 @@ namespace CAPS.CORPACCOUNTING.Migrations.Seed
                 new GridListUnit(gridid:29,name:"Accounts Receivable",description:@"Chaching\classic\src\view\receivables\invoices\AccountsReceivableGrid",isactive:true),
                 new GridListUnit(gridid:30,name:"Petty Cash Entry",description:@"Chaching\classic\src\view\pettycash\entry\PettyCashGrid",isactive:true),
                 new GridListUnit(gridid:31,name:"Credit Card Entry",description:@"Chaching\classic\src\view\creditcard\entry\OpenStatementGrid",isactive:true),
-                new GridListUnit(gridid:32,name:"Credit Card Statements",description:@"Chaching\classic\src\view\creditcard\entry\StatementGrid",isactive:true)
+                new GridListUnit(gridid:32,name:"Credit Card Statements",description:@"Chaching\classic\src\view\creditcard\entry\StatementGrid",isactive:true),
+                new GridListUnit(gridid:33,name:"Classification",description:@"Chaching\classic\src\view\financials\accounts\ClassificationsGrid",isactive:true)
             };
         }
 

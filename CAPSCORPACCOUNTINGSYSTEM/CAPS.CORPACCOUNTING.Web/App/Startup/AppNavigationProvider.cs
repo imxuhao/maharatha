@@ -484,7 +484,7 @@ namespace CAPS.CORPACCOUNTING.Web.App.Startup
                           new MenuItemDefinition(
                             PageNames.App.Organization.FinancialsAccountsTypeofClassification,
                             L("Classifications"),
-                            url: "financials.accounts.Classifications",
+                            url: "financials.accounts.classifications",
                             icon: "icon-briefcase",
                             requiredPermissionName: AppPermissions.Pages_Financials_Accounts_TypeofClassification)
                     };

@@ -113,7 +113,7 @@ namespace CAPS.CORPACCOUNTING.Authorization
 
 
             //PERMISSIONS FOR TYPEOFCLASSIFICATION
-            var Typeofclassification = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification, L("TypeofClassification"), multiTenancySides: MultiTenancySides.Tenant);
+            var Typeofclassification = accounts.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification, L("Classifications"), multiTenancySides: MultiTenancySides.Tenant);
             Typeofclassification.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification_Create, L("Create"), multiTenancySides: MultiTenancySides.Tenant);
             Typeofclassification.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification_Edit, L("Edit"), multiTenancySides: MultiTenancySides.Tenant);
             Typeofclassification.CreateChildPermission(AppPermissions.Pages_Financials_Accounts_TypeofClassification_Delete, L("Delete"), multiTenancySides: MultiTenancySides.Tenant);

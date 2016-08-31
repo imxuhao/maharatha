@@ -36,7 +36,7 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashForm',{
                     { boxLabel: app.localize('Commercial'), name: 'typeOfInvoiceId', inputValue: '1', checked: true },
                     { boxLabel: app.localize('Project'), name: 'typeOfInvoiceId', inputValue: '2', padding: '0 0 0 20' },
                     { boxLabel: app.localize('Office'), name: 'typeOfInvoiceId', inputValue: '3', padding: '0 0 0 20' }
-                ],
+                ]
                 //listeners: {
                 //    change: 'onInvoiceTypeChange'
                 //}
@@ -121,7 +121,7 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashForm',{
                     primaryEntityCrudApi: null,
                     createEditEntityType: 'payables.vendors',
                     createEditEntityGridController: 'payables-vendors-vendorsgrid',
-                    entityType: 'Vendor',
+                    entityType: 'Vendor'
                     //listeners: {
                     //    change: 'onVendorChange'
                     //}
@@ -273,7 +273,7 @@ Ext.define('Chaching.view.pettycash.entry.PettyCashForm',{
                         primaryEntityCrudApi: null,
                         createEditEntityType: 'payables.vendors',
                         createEditEntityGridController: 'payables-vendors-vendorsgrid',
-                        entityType: 'Vendor',
+                        entityType: 'Vendor'
                         //listeners: {
                         //    change: 'onVendorChange'
                         //}

@@ -27,7 +27,7 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
         ui: 'summaryPanel',
         itemId: 'summaryPanel',
         layout: { type: 'hbox' },
-        title: app.localize('CustomerSnapshot'),
+        title: app.localize('InvoiceBuilder'),
         collapsed: true,
         collapsible: true,
         collapseMode: 'header',
@@ -281,18 +281,18 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                 },
                 items: [
                     {
-                        columnWidth: .25,
+                        columnWidth: .33,
                         padding: '0 5 0 10',
                         defaults: {
                             ui: 'fieldLabelTop',
                             width: '100%',
-                            labelWidth: 90
+                            labelWidth: 125
                         },
                         items: [
                             {
                                 xtype: 'textfield',
-                                name: 'purchaseOrderReference',
-                                itemId: 'purchaseOrderReference',
+                                name: 'receivableOrderReference',
+                                itemId: 'receivableOrderReference',
                                 ui: 'fieldLabelTop',
                                 width: '100%',
                                 fieldLabel: app.localize('AgencyPO#'),
@@ -350,20 +350,30 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                                 emptyText: app.localize('MandatoryField')
                             }, {
                                 xtype: 'amountfield',
-                                name: 'controlTotal',
-                                itemId: 'controlTotal',
-                                fieldLabel: app.localize('InvoiceTotal'),
-                                allowBlank: false,
-                                emptyText: app.localize('MandatoryField')
+                                name: 'invoiceAmount',
+                                itemId: 'invoiceAmount',
+                                fieldLabel: app.localize('InvoiceAmount')
+                            }, {
+                                xtype: 'combobox',
+                                name: 'paymentTerms',
+                                itemId: 'paymentTerms',
+                                emptyText: app.localize('SelectOption'),
+                                width: '100%',
+                                ui: 'fieldLabelTop',
+                                displayField: 'description',
+                                valueField: 'customerPaymentTermId',
+                                queryMode: 'local',
+                                fieldLabel: app.localize('PaymentTerms'),
+                                store: Ext.create('Chaching.store.ARPaymentTermsListStore')
                             }
                         ]
                     }, {
-                        columnWidth: .25,
+                        columnWidth: .34,
                         padding: '0 5 0 10',
                         defaults: {
                             ui: 'fieldLabelTop',
                             width: '100%',
-                            labelWidth: 90
+                            labelWidth: 140
                         },
                         items: [
                             {
@@ -380,7 +390,8 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                                 allowBlank: false,
                                 format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                                 emptyText: app.localize('MandatoryField'),
-                                fieldLabel: app.localize('InvoiceDate')
+                                fieldLabel: app.localize('InvoiceDate'),
+                                value: new Date()
                             }, {
                                 xtype: 'datefield',
                                 name: 'datePosted',
@@ -396,16 +407,23 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                                 allowBlank: true,
                                 format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
                                 emptyText: Chaching.utilities.ChachingGlobals.defaultDateFormat,
-                                fieldLabel: app.localize('DueDate')
+                                fieldLabel: app.localize('EmailReminderDate')
+                            }, {
+                                xtype: 'textfield',
+                                name: 'adjustInvoice',
+                                itemId: 'adjustInvoice',
+                                allowBlank: true,
+                                hidden: true,
+                                fieldLabel: app.localize('AdjustInvoice')
                             }
                         ]
                     }, {
-                        columnWidth: .25,
+                        columnWidth: .33,
                         padding: '0 5 0 10',
                         defaults: {
                             ui: 'fieldLabelTop',
                             width: '100%',
-                            labelWidth: 90
+                            labelWidth: 130
                         },
                         items: [
                             {
@@ -437,102 +455,25 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableForm', {
                                 displayField: 'typeOfCheckGroup',
                                 width: '100%',
                                 ui: 'fieldLabelTop',
-                                fieldLabel: app.localize('CheckGroup'),
-                                emptyText: app.localize('SelectOption')
-                            }, {
-                                ////TODO: Replace with combo once batch is ready
-                                xtype: 'textfield',
-                                name: 'batchId',
-                                itemId: 'batchId',
-                                ui: 'fieldLabelTop',
-                                fieldLabel: app.localize('Batch'),
+                                fieldLabel: app.localize('SalesRep'),
                                 emptyText: app.localize('SelectOption')
                             }, {
                                 xtype: 'textfield',
                                 name: 'memoLine',
                                 itemId: 'memoLine',
                                 allowBlank: true,
-                                fieldLabel: app.localize('MemoLine')
+                                fieldLabel: app.localize('SpecialInstructions')
+                            }, {
+                                xtype: 'checkbox',
+                                ui: 'default',
+                                labelAlign: 'right',
+                                inputValue: false,
+                                uncheckedValue: false,
+                                boxLabelCls: 'checkboxLabel',
+                                name: 'startup',
+                                boxLabel: app.localize('Startup')
                             }
-                        ]
-                    }, {
-                        columnWidth: .25,
-                        padding: '0 5 0 10',
-                        itemId: 'quickPaySection',
-                        defaults: {
-                            ui: 'fieldLabelTop',
-                            width: '100%',
-                            labelWidth: 80,
-                            listeners: {
-                                change: 'onQuickPayFieldChanged'
-                            }
-                        },
-                        items: [
-                            {
-                                xtype: 'textfield',
-                                name: 'adjustInvoice',
-                                itemId: 'adjustInvoice',
-                                allowBlank: true,
-                                hidden: true,
-                                fieldLabel: app.localize('AdjustInvoice')
-                            }, {
-                                xtype: 'chachingcombobox',
-                                store: new Chaching.store.utilities.autofill.BankAccountListStore(),
-                                fieldLabel: app.localize('Bank'),
-                                ui: 'fieldLabelTop',
-                                width: '100%',
-                                name: 'bankAccountId',
-                                valueField: 'bankAccountId',
-                                displayField: 'description',
-                                queryMode: 'remote',
-                                minChars: 2,
-                                hidden: true,
-                                modulePermissions: {
-                                    read: abp.auth.isGranted('Pages.Banking.BankSetup'),
-                                    create: abp.auth.isGranted('Pages.Banking.BankSetup.Create'),
-                                    edit: abp.auth.isGranted('Pages.Banking.BankSetup.Edit'),
-                                    destroy: abp.auth.isGranted('Pages.Banking.BankSetup.Delete')
-                                },
-                                primaryEntityCrudApi: null,
-                                createEditEntityType: 'banking.banksetup',
-                                createEditEntityGridController: 'banking.banksetupgrid',
-                                entityType: 'Bank'
-                            }, {
-                                xtype: 'datefield',
-                                name: 'paymentDate',
-                                itemId: 'paymentDate',
-                                format: Chaching.utilities.ChachingGlobals.defaultExtDateFieldFormat,
-                                emptyText: app.localize('MandatoryField'),
-                                hidden: true,
-                                fieldLabel: app.localize('CheckDate')
-                            }, {
-                                ////TODO: Replace with combo once payType is clarified
-                                xtype: 'textfield',
-                                name: 'payType',
-                                itemId: 'payType',
-                                ui: 'fieldLabelTop',
-                                fieldLabel: app.localize('PayType'),
-                                emptyText: app.localize('SelectOption'),
-                                hidden: true
-                            }, {
-                                xtype: 'textfield',
-                                name: 'paymentNumber',
-                                itemId: 'paymentNumber',
-                                ui: 'fieldLabelTop',
-                                fieldLabel: app.localize('Check#'),
-                                emptyText: app.localize('MandatoryField'),
-                                hidden: true,
-                                triggers: {
-                                    printCheck: {
-                                        cls: 'printTriggerClsInactive',
-                                        handler: function (tri) {
-                                            if (tri.allowAction) {
-                                                abp.notify.success('Check Printing Comming Sooooooon...');
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+
                         ]
                     }, {
                         columnWidth: 1,

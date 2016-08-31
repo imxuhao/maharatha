@@ -1595,6 +1595,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.ArInvoiceEntryDocumentAppService.GetSalesRepList">
+            <summary>
+            Get Sales Rep code
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.Dto.ArInvoiceEntryDetailInputUnit">
             <summary>
             
@@ -1833,6 +1839,12 @@
             Get CustomerPaymentTermsList
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.AccountReceivable.IArInvoiceEntryDocumentAppService.GetSalesRepList">
+            <summary>
+            Get Sales Rep List
+            </summary>
             <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.AccountReceivable.IInvoiceBuilderAppService">
@@ -3487,30 +3499,7 @@
              <param name="excelProperties"></param>
              <param name="columnName"></param>
         </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddDropDownValidationToSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.String,System.Int32,System.Int32,System.Int32,System.String)">
-            <summary>
-            Add DropDownList into Data Sheet.
-            </summary>
-            <param name="sheet"></param>
-            <param name="excelFormula"></param>
-            <param name="startRowIndex"></param>
-            <param name="endRowIndex"></param>
-            <param name="excelColumn"></param>
-             <param name="excelProperties"></param>
-             <param name="columnName"></param>
-        </member>
         <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            add validation to DataSheet
-            </summary>
-            <param name="sheet"></param>
-            <param name="excelProperties"></param>
-            <param name="startRowIndex"></param>
-            <param name="endRowIndex"></param>
-            <param name="excelColumn"></param>
-            <param name="columnName"></param>
-        </member>
-        <member name="M:CAPS.CORPACCOUNTING.ExcelTemplates.ExcelHelper.AddValidationtoSheet(System.String,OfficeOpenXml.ExcelWorksheet,CAPS.CORPACCOUNTING.ExcelTemplates.Excelproperties,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             add validation to DataSheet
             </summary>

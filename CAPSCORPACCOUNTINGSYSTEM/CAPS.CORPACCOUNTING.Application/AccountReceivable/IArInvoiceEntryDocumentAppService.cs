@@ -70,5 +70,13 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<NameValueDto>> GetCustomerPaymentTermsList(AutoSearchInput input);
+
+        /// <summary>
+        /// Get Sales Rep List
+        /// </summary>
+        /// <returns></returns>
+        Task<List<NameValueDto>> GetSalesRepList();
+
+
     }
 }

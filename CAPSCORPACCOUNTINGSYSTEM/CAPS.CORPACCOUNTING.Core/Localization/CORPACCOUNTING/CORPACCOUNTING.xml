@@ -1247,7 +1247,13 @@
     <text name="EnvelopeDate" value="Envelope date" />
     <text name="EnvelopeTotal" value="Envelope total" />
     <text name="AdvanceAmount" value="Adv. Amount" />
-
+    <text name="SpecialInstructions" value="Special Instructions" />
+    <text name="Startup" value="Startup" />
+    <text name="EmailReminderDate" value="Email Reminder Date" />
+    <text name="InvoiceAmount" value="Invoice Amount" />
+    <text name="AdjustInvoice" value="Adjust Invoice" />
+    <text name="InvoiceBuilder" value="Invoice Builder" />
+    
     <text name="CreditCardOpenStatement" value="Open Statements" />
     <text name="CreditCardStatement" value="CC Statements" />
     <text name="SyncCreditCardTrans" value="Sync" />

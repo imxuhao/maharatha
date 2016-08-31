@@ -3666,6 +3666,7 @@
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountRestrictionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\AccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\ChartOfAccountsModel.js" />
+    <Content Include="ExtWeb\Chaching\app\model\financials\accounts\ClassificationsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\DivisionsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\accounts\SubAccountsModel.js" />
     <Content Include="ExtWeb\Chaching\app\model\financials\fiscalperiod\FiscalYearModel.js" />
@@ -3732,6 +3733,7 @@
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountRestrictionRightStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountRestrictionLeftStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\AccountsStore.js" />
+    <Content Include="ExtWeb\Chaching\app\store\financials\accounts\ClassificationsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\RollupAccountStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\DivisionsStore.js" />
     <Content Include="ExtWeb\Chaching\app\store\financials\accounts\SubAccountsStore.js" />
@@ -3892,6 +3894,8 @@
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsFormController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\AccountsGridController.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\ClassificationsGrid.js" />
+    <Content Include="ExtWeb\Chaching\classic\src\view\financials\accounts\ClassificationsGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodChildGrid.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\fiscalperiod\FiscalPeriodChildGridController.js" />
     <Content Include="ExtWeb\Chaching\classic\src\view\financials\JournalsTabPanel.js" />

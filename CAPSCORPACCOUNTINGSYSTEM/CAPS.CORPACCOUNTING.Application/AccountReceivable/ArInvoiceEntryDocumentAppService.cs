@@ -362,5 +362,24 @@ namespace CAPS.CORPACCOUNTING.AccountReceivable
                  .Select(u => new NameValueDto { Name = u.Description, Value = u.Id.ToString() }).ToListAsync();
             return paymentTermsList;
         }
+
+        /// <summary>
+        /// Get Sales Rep code
+        /// </summary>
+        /// <returns></returns>
+        [AbpAuthorize(AppPermissions.Pages_Receivables_Invoices_Entry)]
+        public async Task<List<NameValueDto>> GetSalesRepList()
+        {
+            var salesRep = await _salesRepUnitRepository.GetAll()
+                .Select(u => new NameValueDto
+                {
+                    Name = u.FirstName + " " + u.LastName
+                    ,
+                    Value = u.Id.ToString()
+                })
+                .ToListAsync();
+
+            return salesRep;
+        }
     }
 }

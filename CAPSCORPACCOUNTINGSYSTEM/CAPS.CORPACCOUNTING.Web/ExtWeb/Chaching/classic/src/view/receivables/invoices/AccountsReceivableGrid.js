@@ -180,7 +180,6 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableGrid', {
             dataIndex: 'typeOfCurrency',
             sortable: true,
             groupable: true,
-            hidden: true,
             width: '8%',
             filterField: {
                 xtype: 'textfield',

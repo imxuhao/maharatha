@@ -14,5 +14,31 @@ Ext.define('Chaching.view.receivables.invoices.AccountsReceivableFormController'
             //}
             //formPanel.updateLayout();
         }
+    },
+    onInvoiceTypeChange: function (field, newValue, oldValue) {
+        var me = this,
+            view = me.getView(),
+            form = view.getForm(),
+            adjustInvoice = view.down('*[itemId=adjustInvoice]');
+        if (newValue) {
+            switch (newValue.typeOfInvoiceId) {
+                case '1':
+                    adjustInvoice.setHidden(true);
+                    break;
+                case '2':
+                    adjustInvoice.setHidden(false);
+                    break;
+            }
+        }
+        
+        //Ext.Ajax.request({
+        //    url: abp.appPath + 'api/services/app/arInvoiceEntryDocument/GetSalesRepList',
+        //    jsonData: Ext.encode(''),
+        //    success: function (response, a, b) { debugger;},
+        //    failure: function (response, a, b) { debugger}
+        //});
+
+
+
     }
 });

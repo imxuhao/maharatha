@@ -245,6 +245,9 @@
         // Saving User create/edit information // Setting userName from emailAddress without checking any condition
         values.userName = values.emailAddress;
         record.data.user = values;
+        if (values.id > 0) {
+            record.data.user.sendActivationEmail = false;
+        }
         Ext.apply(record.data, values);
         if (record.data.tenantId == 0) {
             record.data.tenantId = null;

@@ -152,6 +152,7 @@
     <Compile Include="Accounting\SubAccountUnit.cs" />
     <Compile Include="Accounting\TypeOfAccountClassificationUnit.cs" />
     <Compile Include="Accounting\TypeOfAccountUnit.cs" />
+    <Compile Include="Accounting\TypeOfAccountUnitManager.cs" />
     <Compile Include="Accounting\UploadDocumentLogUnit.cs" />
     <Compile Include="AccountReceivable\ArInvoiceBuildUnit.cs" />
     <Compile Include="AccountReceivable\ArInvoiceEntryDocumentDetailUnit.cs" />

@@ -612,6 +612,59 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.SubAccountRestrictionUnitInput.OrganizationUnitId">
             <summary>Gets or sets the OrganizationUnitId </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit.Caption">
+            <summary>Gets or sets the Caption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit.DisplaySequence">
+            <summary>Gets or sets the DisplaySequence field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit.Notes">
+            <summary>Gets or sets the Notes field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit.TypeOfAccountClassificationId">
+            <summary>Gets or sets the TypeOfAccountClassificationID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit.IsCurrencyCodeRequired">
+            <summary>Gets or sets the IsCurrencyCodeRequired field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit.IsPaymentType">
+            <summary>Gets or sets the IsPaymentType field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.TypeOfAccountId">
+            <summary>Gets or sets the TypeOfAccountID field</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.Caption">
+            <summary>Gets or sets the Caption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.DisplaySequence">
+            <summary>Gets or sets the DisplaySequence field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.Notes">
+            <summary>Gets or sets the Notes field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.TypeOfAccountClassificationId">
+            <summary>Gets or sets the TypeOfAccountClassificationID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.TypeOfAccountClassificationDesc">
+            <summary>Gets or sets the TypeOfAccountClassificationName field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.IsCurrencyCodeRequired">
+            <summary>Gets or sets the IsCurrencyCodeRequired field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.TypeOfAccountUnitDto.IsPaymentType">
+            <summary>Gets or sets the IsPaymentType field. </summary>
+        </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateSubAccountUnitInput.SubAccountId">
             <summary>Gets or sets the SubAccountId field. </summary>
         </member>
@@ -679,6 +732,30 @@
              <summary>
             Gets or sets the  AccountRestrictionList
              </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit.TypeOfAccountId">
+            <summary>Gets or sets the TypeOfAccountID field</summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit.Description">
+            <summary>Gets or sets the Description field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit.Caption">
+            <summary>Gets or sets the Caption field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit.DisplaySequence">
+            <summary>Gets or sets the DisplaySequence field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit.Notes">
+            <summary>Gets or sets the Notes field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit.TypeOfAccountClassificationId">
+            <summary>Gets or sets the TypeOfAccountClassificationID field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit.IsCurrencyCodeRequired">
+            <summary>Gets or sets the IsCurrencyCodeRequired field. </summary>
+        </member>
+        <member name="P:CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit.IsPaymentType">
+            <summary>Gets or sets the IsPaymentType field. </summary>
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto.AccountingDocumentId">
             <summary>Gets or sets the AHTID field.</summary>
@@ -827,6 +904,63 @@
         <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionUnitDto.OrganizationUnitId">
             <summary>Gets or sets the CompanyId field. </summary>
         </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.ClassificationUnitAppService">
+            <summary>
+            Classification Application Service
+            </summary>
+            
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ClassificationUnitAppService.#ctor(CAPS.CORPACCOUNTING.Accounting.TypeOfAccountUnitManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.TypeOfAccountUnit,System.Int32},Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{CAPS.CORPACCOUNTING.Accounting.TypeOfAccountClassificationUnit,System.Int16},CAPS.CORPACCOUNTING.Sessions.CustomAppSession)">
+            <summary>
+            
+            </summary>
+            <param name="typeofaccountunitmanager"></param>
+            <param name="typeofaccountunitrepository"></param>
+            <param name="unitOfWorkManager"></param>
+            <param name="typeOfAccountClassificationUnitRepository"></param>
+            <param name="customAppSession"></param>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ClassificationUnitAppService.CreateClassificationUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit)">
+            <summary>
+            Create the Classification.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ClassificationUnitAppService.UpdateClassificationUnit(CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit)">
+            <summary>
+            Update the Classification based on TypeOfAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ClassificationUnitAppService.DeleteClassificationUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the Classification based on TypeOfAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ClassificationUnitAppService.GetClassificationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all Classification and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ClassificationUnitAppService.GetClassificationUnitById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get the Classification based on TypeOfAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.ClassificationUnitAppService.GetTypeOfAccountClassificationList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get TypeOfAccountClassification List
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionInputUnit">
             <summary>
             Updates UpdateAccountingHeaderTransactionInputUnit
@@ -942,6 +1076,52 @@
         </member>
         <member name="P:CAPS.CORPACCOUNTING.Accounting.AccountingHeaderTransactionInputUnit.CronExpression">
             <summary>Get Sets the CronExpression field.</summary>
+        </member>
+        <member name="T:CAPS.CORPACCOUNTING.Accounting.IClassificationUnitAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IClassificationUnitAppService.CreateClassificationUnit(CAPS.CORPACCOUNTING.Accounting.Dto.CreateTypeOfAccountInputUnit)">
+            <summary>
+            Create the Classification.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IClassificationUnitAppService.UpdateClassificationUnit(CAPS.CORPACCOUNTING.Accounting.Dto.UpdateTypeOfAccountInputUnit)">
+            <summary>
+            Update the Classification based on TypeOfAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IClassificationUnitAppService.DeleteClassificationUnit(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Delete the Classification based on TypeOfAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IClassificationUnitAppService.GetClassificationUnits(CAPS.CORPACCOUNTING.GenericSearch.Dto.SearchInputDto)">
+            <summary>
+            Get the list of all Classification and also provided with Sorting,Paging and Searching functionality.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IClassificationUnitAppService.GetClassificationUnitById(Abp.Application.Services.Dto.IdInput)">
+            <summary>
+            Get the Classification based on TypeOfAccountId.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CAPS.CORPACCOUNTING.Accounting.IClassificationUnitAppService.GetTypeOfAccountClassificationList(CAPS.CORPACCOUNTING.Masters.Dto.AutoSearchInput)">
+            <summary>
+            Get TypeOfAccountClassification List
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CAPS.CORPACCOUNTING.Accounting.IListAppService">
             <summary>

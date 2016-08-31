@@ -159,6 +159,7 @@
     <Compile Include="Accounting\Dto\AccountingItemUnitDto.cs" />
     <Compile Include="Accounting\Dto\AccountingHeaderTransactionUnitDto.cs" />
     <Compile Include="Accounting\Dto\AccountingItemInputUnit.cs" />
+    <Compile Include="Accounting\ClassificationUnitAppService.cs" />
     <Compile Include="Accounting\Dto\CreateSubAccountUnitInput.cs" />
     <Compile Include="Accounting\Dto\GetAccountRestrictionInput.cs" />
     <Compile Include="Accounting\Dto\GetPurchaseOrderInput.cs" />
@@ -167,7 +168,11 @@
     <Compile Include="Accounting\Dto\SubAccountRestrictionUnitInput.cs" />
     <Compile Include="Accounting\Dto\SubAccountUnitDto.cs" />
     <Compile Include="Accounting\Dto\AccountingHeaderTransactionInputUnit.cs" />
+    <Compile Include="Accounting\Dto\CreateTypeOfAccountInputUnit.cs" />
+    <Compile Include="Accounting\Dto\TypeOfAccountUnitDto.cs" />
     <Compile Include="Accounting\Dto\UpdateSubAccountUnitInput.cs" />
+    <Compile Include="Accounting\Dto\UpdateTypeOfAccountInputUnit.cs" />
+    <Compile Include="Accounting\IClassificationUnitAppService.cs" />
     <Compile Include="Accounting\IListAppService.cs" />
     <Compile Include="Accounting\ISubAccountUnitAppService.cs" />
     <Compile Include="Accounting\ListAppService.cs" />

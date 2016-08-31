@@ -65,7 +65,9 @@
              sortable: false,
              groupable: false,
              hideable: false,
-             width: '13%',
+             flex: 1,
+             maxWidth:100,
+             //width: '13%',
              xtype: 'checkcolumn'
 
          },
@@ -75,7 +77,7 @@
               xtype: 'gridcolumn',
               sortable: false,
               groupable: false,
-              width: '13%',
+              flex: 1,
               editor: {
                   xtype: 'textfield',
                   name: 'description'
@@ -91,7 +93,7 @@
               xtype: 'gridcolumn',
               sortable: false,
               groupable: false,
-              width: '13%',
+              flex: 1,
               renderer: Chaching.utilities.ChachingRenderers.dateSearchFieldRenderer,
               filterField: {
                   xtype: 'dateSearchField',
@@ -109,7 +111,7 @@
               xtype: 'gridcolumn',
               sortable: false,
               groupable: false,
-              width: '13%',
+              flex: 1,
               editor: {
                   xtype: 'textfield',
                   name: 'controlTotal'
@@ -126,7 +128,7 @@
               xtype: 'gridcolumn',
               sortable: false,
               groupable: false,
-              width: '13%'
+              flex: 1
           } , {
               xtype: 'gridcolumn',
               text: app.localize('Module'),
@@ -134,7 +136,7 @@
               sortable: true,
               groupable: false,
               hidden:false,
-              width: '18%',
+              flex: 1,
               filterField: {
                   xtype: 'tagfield',
                   valueField: 'typeOfBatchId',
@@ -163,7 +165,8 @@
                dataIndex: 'isRetained',
                sortable: true,
                groupable: true,
-               width: '18%',
+               flex: 1,
+              maxWidth:'5%',
                renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
                filterField: {
                    xtype: 'combobox',
@@ -181,7 +184,8 @@
                dataIndex: 'postingStatus',
                sortable: true,
                groupable: true,
-               width: '18%',
+               flex: 1,
+               maxWidth: '5%',
                renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
                filterField: {
                    xtype: 'combobox',
@@ -200,7 +204,7 @@
               dataIndex: 'createdUser',
               sortable: true,
               groupable: true,
-              width: '15%',
+              flex: 1,
               hidden: true,
               filterField: {
                   xtype: 'textfield',
@@ -214,7 +218,8 @@
               dataIndex: 'isUniversal',
               sortable: true,
               groupable: true,
-              width: '18%',
+              flex: 1,
+              maxWidth: '5%',
               hidden: true,
               renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
               filterField: {
@@ -233,7 +238,8 @@
               dataIndex: 'isBatchFinalized',
               sortable: true,
               groupable: true,
-              width: '18%',
+              flex: 1,
+              maxWidth: '5%',
               renderer: Chaching.utilities.ChachingRenderers.rightWrongMarkRenderer,
               filterField: {
                   xtype: 'combobox',
